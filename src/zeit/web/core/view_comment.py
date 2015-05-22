@@ -30,8 +30,6 @@ class PostComment(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
                 explanation='Please log in in order to comment')
-        self.pid = None
-        self.action = None
         self.new_cid = None
         self.request_method = 'POST'
         self.path = request.params.get('path') or path
@@ -51,9 +49,13 @@ class PostComment(zeit.web.core.view.Base):
         uid = user['uid']
         # use submitted values for POSTs, not GET values from request url
         params = (request.GET, request.POST)[self.request_method == 'POST']
-        pid = params.get('pid')
         comment = params.get('comment')
         action = params.get('action')
+
+        try:
+            pid = int(params.get('pid'))
+        except (TypeError, ValueError):
+            pid = None
 
         if not request.method == self.request_method:
             raise pyramid.httpexceptions.HTTPMethodNotAllowed(
@@ -95,6 +97,7 @@ class PostComment(zeit.web.core.view.Base):
 
         method = 'post'
         data = {'uid': uid}
+        recommendations = None
         if action == 'comment' and self.path:
             data['nid'] = nid
             data['subject'] = '[empty]'
@@ -107,6 +110,14 @@ class PostComment(zeit.web.core.view.Base):
             data['method'] = 'flag.flagnote'
             data['flag_name'] = 'kommentar_bedenklich'
         elif action == 'recommend' and pid:
+            fans = self._get_recommendations(unique_id, pid)
+            if uid in fans:
+                data['action'] = 'unflag'
+                fans.remove(uid)
+            else:
+                data['action'] = 'flag'
+                fans.append(uid)
+            recommendations = len(fans)
             method = 'get'
             data['content_id'] = pid
             data['method'] = 'flag.flag'
@@ -143,6 +154,7 @@ class PostComment(zeit.web.core.view.Base):
                 'response': {
                     'content': content,
                     'error': error,
+                    'recommendations': recommendations,
                     'new_cid': self.new_cid}
             }
 
@@ -165,8 +177,18 @@ class PostComment(zeit.web.core.view.Base):
         return '{}/{}/{}'.format(
             self.community_host, endpoint, path).strip('/')
 
+    def _get_recommendations(self, unique_id, pid):
+        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
+
+        if comment_thread and comment_thread['index'][pid]:
+            comment = comment_thread['index'][pid]
+            if len(comment['fans']):
+                return comment['fans'].split(',')
+
+        return []
+
     def _nid_by_comment_thread(self, unique_id):
-        comment_thread = zeit.web.core.comments.get_thread(unique_id)
+        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
         if comment_thread:
             return comment_thread.get('nid')
@@ -216,8 +238,7 @@ class PostComment(zeit.web.core.view.Base):
         # only the thread of the current app server gets invalidated here
         invalidate_comment_thread(unique_id)
 
-        return zeit.web.core.comments.get_thread(
-            unique_id, destination=self.request.url)
+        return zeit.web.core.comments.get_cacheable_thread(unique_id)
 
 
 @pyramid.view.view_config(route_name='post_test_comments',

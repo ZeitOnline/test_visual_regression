@@ -4,9 +4,13 @@ Change log for zeit.web
 1.24 (unreleased)
 -----------------
 
+- ZON-1713: Enable unflagging recommended comments
+
 - ZON-1732: Add banner code mapping rules and table
 
 - ZON-1569: Upgrade author column images to image groups
+
+- Remove ESI parser javascript library
 
 
 1.23.1 (2015-05-20)

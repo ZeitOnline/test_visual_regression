@@ -255,6 +255,11 @@ def _create_poster(monkeypatch):
         return None
     monkeypatch.setattr(requests, 'post', post)
 
+    def fans(me, uid, pid):
+        return []
+    monkeypatch.setattr(
+        zeit.web.core.view_comment.PostComment, '_get_recommendations', fans)
+
     def nid(me, uid):
         return 1
     monkeypatch.setattr(
@@ -359,7 +364,7 @@ endpoint_report = (
     {'cookies': {},
      'data': {
      'note': 'my comment',
-     'content_id': '1',
+     'content_id': 1,
      'method': 'flag.flagnote',
      'flag_name': 'kommentar_bedenklich',
      'uid': '123', }})
@@ -368,7 +373,8 @@ endpoint_recommend = (
     ('http://foo/services/json?callback=zeit',),
     {'cookies': {},
      'data': {
-     'content_id': '1',
+     'content_id': 1,
+     'action': 'flag',
      'method': 'flag.flag',
      'flag_name': 'leser_empfehlung',
      'uid': '123', }})
@@ -376,7 +382,7 @@ endpoint_recommend = (
 
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', 'my comment', None, 'comment', endpoint_agatho)])
-def test_post_comments_should_post_with_correct_arguments(
+def test_post_comment_should_post_with_correct_arguments(
         monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
@@ -402,7 +408,7 @@ def test_post_comments_should_post_with_correct_arguments(
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', None, '1', 'recommend', endpoint_recommend),
     ('my/path', 'my comment', '1', 'report', endpoint_report)])
-def test_post_comments_should_get_with_correct_arguments(
+def test_post_comment_should_get_with_correct_arguments(
         monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
