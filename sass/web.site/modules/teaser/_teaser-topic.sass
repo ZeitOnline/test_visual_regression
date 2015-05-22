@@ -1,5 +1,6 @@
 .cp-region.cp-region--topic
 	padding: 0
+	position: relative
 
 .cp-area.cp-area--topic
 	padding: 0
@@ -66,7 +67,6 @@
 			position: absolute
 			right: 0
 			top: 0
-			z-index: 1
 			+background(rgba(0, 0, 0, 0.5))
 			+respond-min($break-tablet-min)
 				+background(rgba(0, 0, 0, 0.5))
@@ -104,28 +104,22 @@
 	&__title:hover
 		color: $white
 
-.teaser-topic-list
+.teaser-topic-item
 	display: none
 	+respond-min($break-tablet-min)
 		display: block
-		top: 45px
-		width: 45%
-	+respond-min($break-desktop-min)
-		top: 65px
-		width: 40%
 	&:after
 		content: ""
 		display: block
 		width: 15%
 		height: 0px
-		border-bottom: 1px solid $zon_light_grey
+		border-bottom: 1px solid $zon_mid_grey
 		margin-bottom: $petite
-		padding-bottom: $petite
 	&:last-child:after
 		border: none
 	&__kicker
 		@extend %teaser-kicker
-		color: $zon_light_grey
+		color: $zon_mid_grey
 		font-size: $font-s
 		font-weight: normal
 		letter-spacing: 0.1em
@@ -134,7 +128,7 @@
 		+respond-min($break-tablet-min)
 			font-size: $font-xs
 		+respond-min($break-desktop-min)
-			font-size: $font-s
+			font-size: $font-xxs
 	&__title
 		@extend %teaser-title
 		color: $white
@@ -143,6 +137,15 @@
 		+respond-min($break-tablet-min)
 			font-size: $font-m
 		+respond-min($break-desktop-min)
-			font-size: $font-ml
+			font-size: $font-xs
 	&__title:hover
 		color: $white
+
+.teaser-topic-list
+	padding: 0
+	padding-left: $cp-padding
+	padding-right: remify(20px)
+	position: absolute
+	right: 0
+	top: remify(36px)
+	width: 33.33%

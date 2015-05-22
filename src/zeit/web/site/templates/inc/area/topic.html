@@ -9,6 +9,7 @@
     {% include
         ["zeit.web.site:templates/inc/teaser/zon-topic-main.tpl",
          "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing %}
+    <div class="teaser-topic-list">
     {% for module in area.values()[1:] -%}
         {% set teaser = module | first_child %}
         {% include
@@ -16,5 +17,6 @@
              "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing %}
         {% block after_module_include scoped %}{% endblock %}
     {% endfor %}
+    </div>
     {% block after_module_list %}{% endblock %}
 </div>
