@@ -288,8 +288,9 @@ def closest_substitute_image(image_group,
                              image_pattern,
                              force_orientation=False):
     """Returns the image from an image group, that most closely matches the
-    target image pattern. Larger resolutions are always favored over smaller
-    ones and the image orientation matching may be enforced.
+    target image pattern (while ignoring the master image). Larger resolutions
+    are always favored over smaller ones and the image orientation matching may
+    be enforced.
 
     Usage as jinja filter:
 
@@ -303,9 +304,11 @@ def closest_substitute_image(image_group,
     :returns: Unique ID of most suitable substitute image.
     """
 
+    # make sure it's an Image Group
     if not zeit.content.image.interfaces.IImageGroup.providedBy(image_group):
         return
     elif image_pattern in image_group:
+        # return happily if image_pattern is present
         return image_group.get(image_pattern)
 
     # Determine the image scale correlating to the provided pattern.
@@ -322,7 +325,9 @@ def closest_substitute_image(image_group,
     candidates = [(image_pattern, scale)]
     for name, img in image_group.items():
         size = img.getImageSize()
-        if not force_orientation or orientation(*size) == orientation(*scale):
+        if image_group.master_image != name and (
+                not force_orientation or
+                orientation(*size) == orientation(*scale)):
             candidates.append((name, size))
 
     if len(candidates) == 1:

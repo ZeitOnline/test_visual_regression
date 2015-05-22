@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - Remove ESI parser javascript library
 
+- ZON-1345: Article body: display images w/ layout 'small' correctly
+
 
 1.23.1 (2015-05-20)
 -------------------
