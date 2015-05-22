@@ -1,2 +1,5 @@
 <p>Servicebox hier…</p>
-{# module.service_items | obj_debug #}
+
+{% for service in module.service_items %}
+    <p>{{ service.title }}</p>
+{% endfor %}

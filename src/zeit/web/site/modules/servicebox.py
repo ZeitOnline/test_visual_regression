@@ -1,5 +1,7 @@
 import logging
 
+import zope.interface
+import zope.schema
 import zope.security.proxy
 
 import zeit.cms.content.sources
@@ -27,6 +29,7 @@ class Service(object):
 class ServiceSource(zeit.cms.content.sources.SimpleContextualXMLSource):
 
     config_url = 'servicebox-source'
+    product_configuration = 'zeit.web'
 
     def getValues(self, context):
         tree = self._get_tree()
@@ -45,8 +48,8 @@ class ServiceSource(zeit.cms.content.sources.SimpleContextualXMLSource):
 @zeit.web.register_module('servicebox')
 class Servicebox(zeit.web.core.block.Module):
 
-    service_source = ServiceSource()
+    services = ServiceSource()
 
     @zeit.web.reify
     def service_items(self):
-        self.service_source
+        return list(self.services(self))
