@@ -289,7 +289,8 @@ def closest_substitute_image(image_group,
                              force_orientation=False):
     """Returns the image from an image group, that most closely matches the
     target image pattern (while ignoring the master image). Larger resolutions
-    are always favored over smaller ones and the image orientation matching may be enforced.
+    are always favored over smaller ones and the image orientation matching may
+    be enforced.
 
     Usage as jinja filter:
 
@@ -325,8 +326,8 @@ def closest_substitute_image(image_group,
     for name, img in image_group.items():
         size = img.getImageSize()
         if image_group.master_image != name and (
-                not force_orientation
-                or orientation(*size) == orientation(*scale)):
+                not force_orientation or
+                orientation(*size) == orientation(*scale)):
             candidates.append((name, size))
 
     if len(candidates) == 1:
