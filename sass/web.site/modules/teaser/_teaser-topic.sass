@@ -50,11 +50,13 @@
 	&__media
 		float: left
 		margin: 0
+		overflow: hidden
 		width: 100%
 		z-index: 1
 	&__media-container
 		background-color: $black
 		position: relative
+		min-height: 210px
 		&:after
 			bottom: 0
 			content: ''
@@ -68,6 +70,15 @@
 			+background(rgba(0, 0, 0, 0.5))
 			+respond-min($break-tablet-min)
 				+background(rgba(0, 0, 0, 0.5))
+	&__media-item
+		height: auto
+		left: -35%
+		max-width: none
+		position: absolute
+		width: 165vw
+		+respond-min($break-tablet-min)
+			max-width: 100%
+			position: static
 	&__readmore
 		background-color: rgba(0, 0, 0, 0.5)
 		border-radius: 5px
