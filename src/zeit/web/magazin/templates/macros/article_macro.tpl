@@ -57,12 +57,9 @@
 
 {% macro liveblog(obj) -%}
     {% if obj.blog_id -%}
-        <div class="wrapper__esi-content is-constrained is-centered">
+        <div class="is-constrained is-centered">
             {# TODO: We should mock the liveblog backend for local testing. #}
-            <esi:include src="http://www.zeit.de/liveblog-backend/{{ obj.blog_id }}.html" onerror="continue"></esi:include>
-            <esi:remove>
-                <div data-type="esi-content"></div>
-            </esi:remove>
+            <esi:include src="http://www.zeit.de/liveblog-backend/{{ obj.blog_id }}.html" onerror="continue" />
         </div>
     {%- endif %}
 {%- endmacro %}

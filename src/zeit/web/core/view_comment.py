@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
-import lxml
-import zope.component
-import pyramid.httpexceptions
-import requests
-import zeit.web.core
-import zeit.web.core.view
-import zeit.web.core.comments
-import zeit.web.core.template
-import pyramid.view
-import urlparse
 import json
+import urlparse
 import logging
-import urllib
+
+import beaker.cache
+import lxml
+import pyramid.httpexceptions
+import pyramid.view
+import requests
+import zope.component
 
 import zeit.cms.interfaces
+
+import zeit.web.core
+import zeit.web.core.comments
+import zeit.web.core.template
+import zeit.web.core.view
+
 
 log = logging.getLogger(__name__)
 
@@ -30,8 +33,6 @@ class PostComment(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
                 explanation='Please log in in order to comment')
-        self.pid = None
-        self.action = None
         self.new_cid = None
         self.request_method = 'POST'
         self.path = request.params.get('path') or path
@@ -51,9 +52,13 @@ class PostComment(zeit.web.core.view.Base):
         uid = user['uid']
         # use submitted values for POSTs, not GET values from request url
         params = (request.GET, request.POST)[self.request_method == 'POST']
-        pid = params.get('pid')
         comment = params.get('comment')
         action = params.get('action')
+
+        try:
+            pid = int(params.get('pid'))
+        except (TypeError, ValueError):
+            pid = None
 
         if not request.method == self.request_method:
             raise pyramid.httpexceptions.HTTPMethodNotAllowed(
@@ -95,6 +100,7 @@ class PostComment(zeit.web.core.view.Base):
 
         method = 'post'
         data = {'uid': uid}
+        recommendations = None
         if action == 'comment' and self.path:
             data['nid'] = nid
             data['subject'] = '[empty]'
@@ -107,6 +113,14 @@ class PostComment(zeit.web.core.view.Base):
             data['method'] = 'flag.flagnote'
             data['flag_name'] = 'kommentar_bedenklich'
         elif action == 'recommend' and pid:
+            fans = self._get_recommendations(unique_id, pid)
+            if uid in fans:
+                data['action'] = 'unflag'
+                fans.remove(uid)
+            else:
+                data['action'] = 'flag'
+                fans.append(uid)
+            recommendations = len(fans)
             method = 'get'
             data['content_id'] = pid
             data['method'] = 'flag.flag'
@@ -123,7 +137,7 @@ class PostComment(zeit.web.core.view.Base):
             self.status.append('Action {} was performed for {}'
                                ' (with pid {})'.format(method, unique_id, pid))
 
-            self._invalidate_app_servers(unique_id)
+            invalidate_comment_thread(unique_id)
 
             content = None
             error = None
@@ -143,6 +157,7 @@ class PostComment(zeit.web.core.view.Base):
                 'response': {
                     'content': content,
                     'error': error,
+                    'recommendations': recommendations,
                     'new_cid': self.new_cid}
             }
 
@@ -155,27 +170,6 @@ class PostComment(zeit.web.core.view.Base):
                                 response.status_code,
                                 unique_id))
 
-    def _invalidate_app_servers(self, unique_id):
-        # We can save ourself a request, if we don't invalidate the current
-        # app via http.
-        invalidate_comment_thread(unique_id)
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        servers = conf.get('app_servers', None)
-        if not servers:
-            return
-
-        for server in servers:
-            url = '{}/json/invalidate?unique_id={}'.format(
-                server,
-                unique_id)
-
-            try:
-                requests.get(url)
-            except:
-                log.warning('{} could not be invalidated on {}'.format(
-                    unique_id,
-                    server))
-
     def _action_url(self, action, path):
         endpoint = 'services/json?callback=zeit' if (
             action in ['recommend', 'report']) else 'agatho/thread'
@@ -186,8 +180,18 @@ class PostComment(zeit.web.core.view.Base):
         return '{}/{}/{}'.format(
             self.community_host, endpoint, path).strip('/')
 
+    def _get_recommendations(self, unique_id, pid):
+        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
+
+        if comment_thread and comment_thread['index'][pid]:
+            comment = comment_thread['index'][pid]
+            if len(comment['fans']):
+                return comment['fans'].split(',')
+
+        return []
+
     def _nid_by_comment_thread(self, unique_id):
-        comment_thread = zeit.web.core.comments.get_thread(unique_id)
+        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
         if comment_thread:
             return comment_thread.get('nid')
@@ -237,8 +241,7 @@ class PostComment(zeit.web.core.view.Base):
         # only the thread of the current app server gets invalidated here
         invalidate_comment_thread(unique_id)
 
-        return zeit.web.core.comments.get_thread(
-            unique_id, destination=self.request.url)
+        return zeit.web.core.comments.get_cacheable_thread(unique_id)
 
 
 @pyramid.view.view_config(route_name='post_test_comments',
@@ -290,33 +293,9 @@ class RecommendCommentResource(PostCommentResource):
         self.request_method = 'GET'
 
 
-@pyramid.view.view_config(
-    route_name='json_invalidate',
-    renderer='json')
-def invalidate(request):
-    if request.host_port == 80:
-        raise pyramid.httpexceptions.HTTPNotFound()
-
-    unique_id = request.params.get('unique_id', None)
-    if not unique_id:
-        raise pyramid.httpexceptions.HTTPInternalServerError(
-            title='No unique_id given')
-
-    url = urlparse.urlparse(unique_id)
-    if not url.scheme:
-        raise pyramid.httpexceptions.HTTPInternalServerError(
-            title='unique_id is not a valid url')
-
-    try:
-        zeit.cms.interfaces.ICMSContent(unique_id)
-    except TypeError:
-        raise pyramid.httpexceptions.HTTPInternalServerError(
-            title='unique_id does not exist')
-
-    invalidate_comment_thread(unique_id)
-    return {'msg': '{} was invalidated'.format(unique_id)}
-
-
 def invalidate_comment_thread(unique_id):
-    cache_maker = zeit.web.core.comments.cache_maker
-    cache_maker._cache['comment_thread'].invalidate((unique_id,))
+    beaker.cache.region_invalidate(
+        zeit.web.core.comments.get_cacheable_thread,
+        None,
+        'comment_thread',
+        unique_id)

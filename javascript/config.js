@@ -11,7 +11,6 @@ require.config({
         'jquery': 'vendor/jquery',
         'sjcl': 'libs/sjcl', // @Todo: would love to use bower's sjcl, but there is a bug in the current version
         'bxSlider': 'vendor/jquery.bxslider',
-        'esiparser': 'libs/esiparser',
         'freewall': 'vendor/freewall',
         'jquery.clarify': 'web.core/plugins/jquery.clarify',
         'jquery.debounce': 'web.core/plugins/jquery.debounce',
@@ -28,7 +27,6 @@ require.config({
         'web.core/plugins/jquery.referrerCount': [ 'jquery' ],
         'web.magazin/plugins/jquery.animatescroll': [ 'jquery' ],
         'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],
-        'web.magazin/plugins/jquery.parseesi': [ 'jquery', 'esiparser' ],
         'web.magazin/plugins/jquery.switchvideo': [ 'jquery' ],
         'web.site/plugins/jquery.adaptnav': [ 'jquery' ],
         'web.site/plugins/jquery.extendfooter': [ 'jquery' ],

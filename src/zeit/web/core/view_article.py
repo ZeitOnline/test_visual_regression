@@ -174,21 +174,21 @@ class Article(zeit.web.core.view.Content):
                     'name': getattr(author.target, 'display_name', None),
                     'href': getattr(author.target, 'uniqueId', None),
                     'image_group': getattr(author.target, 'image_group', None),
-                    'prefix': '', 'suffix': '', 'location': ''}
+                    'prefix': u'', 'suffix': u'', 'location': u''}
                 # add location
                 if location and not self.is_longform:
-                    author['location'] = ', {}'.format(location)
+                    author['location'] = u', {}'.format(location)
                 # add prefix
                 if index == 0:
                     if self.is_longform:
                         author['prefix'] = u'\u2014 von'
                     else:
-                        author['prefix'] = ' von'
+                        author['prefix'] = u' von'
                 # add suffix
                 if index == len(author_ref) - 2:
-                    author['suffix'] = ' und'
+                    author['suffix'] = u' und'
                 elif index < len(author_ref) - 1:
-                    author['suffix'] = ', '
+                    author['suffix'] = u', '
                 author_list.append(author)
             return author_list
         except (IndexError, OSError):
@@ -197,7 +197,7 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def authors_list(self):
         if self.authors:
-            return ';'.join([rt['name'] for rt in self.authors])
+            return u';'.join([rt['name'] for rt in self.authors])
 
     @zeit.web.reify
     def genre(self):

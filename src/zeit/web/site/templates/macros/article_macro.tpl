@@ -9,13 +9,13 @@
             {%- elif obj.layout == 'large' -%}
                 article__item article__item--wide
             {%- elif obj.layout == 'small' -%}
-                article__item
+                article__item article__item--marginalia
             {%- endif -%}
             ">
             <div class="scaled-image">
-                {{ insert_responsive_image(obj, None, 'article') }}
+                {{ lama_core.insert_responsive_image(obj, None, 'article') }}
             </div>
-            <figcaption class="figure__caption">
+            <figcaption class="figure__caption {% if obj.layout == 'small' %}figure__caption--marginalia{%- endif -%}">
                 {% if loop -%}
                 <span class="figure__index">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
@@ -35,36 +35,6 @@
         </figure>
     {%- endif %}
 {%- endmacro %}
-
-{% macro insert_responsive_image(image, image_class, page_type) %}
-
-    {% set alt = ''%}
-    {% set title = ''%}
-
-    {% if image.alt %}
-        {% set alt = image.alt %}
-        {% set title = image.title %}
-    {% elif image.attr_alt %}
-        {% set alt = image.attr_alt %}
-        {% set title = image.attr_title %}
-    {% endif %}
-
-    {% if image %}
-        <!--[if gt IE 8]><!-->
-            <noscript data-src="{{image | default_image_url}}">
-        <!--<![endif]-->
-        {% if page_type == 'article' and image.href %}
-            <a href="{{image.href}}">
-        {% endif %}
-                <img alt="{{alt}}" {% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
-        {% if page_type == 'article' and image.href %}
-            </a>
-        {% endif %}
-        <!--[if gt IE 8]><!-->
-            </noscript>
-        <!--<![endif]-->
-    {% endif %}
-{% endmacro %}
 
 {% macro intertitle(intertitle) -%}
     <h2 class="article__subheading article__item">
@@ -126,7 +96,7 @@
            }
   #}
     {% if obj.name -%}
-        <figure class="portraitbox">
+        <figure class="portraitbox article__item article__item--marginalia">
             <div class="portraitbox__heading">
                 {{ obj.name }}
             </div>
@@ -145,18 +115,18 @@
         <div class="infobox__content">
             {% for title, text in obj.contents %}
                 <section class="infobox-tab" id="{{ id }}-{{ loop.index }}">
-                    <h3 
-                        data-role="tab" 
-                        data-aria-controls="{{ id }}-{{ loop.index }}-article" 
+                    <h3
+                        data-role="tab"
+                        data-aria-controls="{{ id }}-{{ loop.index }}-article"
                         class="infobox-tab__title"
                         data-index="{{ loop.index }}"
                         tabindex="0">
                         <a tabindex="-1" class="infobox-tab__link" href="#{{ id }}-{{ loop.index }}">{{ title }}</a>
                     </h3>
-                    <article 
-                        role="tabpanel" 
-                        aria-labelledby="{{ id }}-{{ loop.index }}-tab" 
-                        class="infobox-tab__content" 
+                    <article
+                        role="tabpanel"
+                        aria-labelledby="{{ id }}-{{ loop.index }}-tab"
+                        class="infobox-tab__content"
                         id="{{ id }}-{{ loop.index }}-article">
                         {% for item in text %}
                             {{ (item | block_type or "no_block") | macro(item) }}

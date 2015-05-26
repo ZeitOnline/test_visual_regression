@@ -45,13 +45,11 @@ require([
     'web.core/plugins/jquery.referrerCount',
     'web.magazin/plugins/jquery.switchvideo',
     'web.magazin/plugins/jquery.backgroundvideo',
-    'web.magazin/plugins/jquery.animatescroll',
-    'web.magazin/plugins/jquery.parseesi'
+    'web.magazin/plugins/jquery.animatescroll'
 ], function() {
     $( window ).referrerCount();
     $( '.inline-gallery' ).inlinegallery();
     $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();
     $( 'main' ).animateScroll({ selector: '.js-scroll' });
-    $( 'div[data-type = "esi-content"]' ).parseEsi();
 });
