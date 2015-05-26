@@ -4,13 +4,8 @@ $article-content-max-width: 660px
 .copy, %copy
   p, ul, ol
     +body-type-zoom
-    margin-bottom: $fine
-    margin-left: auto
-    margin-top: 0
-    margin-right: auto
-    max-width: 36.6em
-    +respond-min($break-3)
-      max-width: 33em
+    margin: 0 auto $fine
+    max-width: remify($article-content-max-width)
 
   h1, h2, h3, h4, h5, h6
     margin-bottom: $thin
@@ -26,7 +21,7 @@ $article-content-max-width: 660px
     &.quote
       +respond-min($break-1)
         float: left
-        +max-width-rem(208px)
+        max-width: remify(208px)
         margin: $medium $medium $medium auto
 
 .dancing_fonts, %dancing_fonts
@@ -62,7 +57,7 @@ figure
 .figure-horizontal, .figure-horizontal--right
   +pie-clearfix
   .figure__media, img
-    +max-width-rem($article-content-max-width)
+    max-width: remify($article-content-max-width)
     width: 100%
     display: block
     +respond-min($break-1)
@@ -102,7 +97,7 @@ figure
     display: block
     width: 100%
   .figure__caption, figcaption
-    +max-width-rem($article-content-max-width)
+    max-width: remify($article-content-max-width)
     margin-left: auto
     margin-right: auto
     +respond-min($break-3)
