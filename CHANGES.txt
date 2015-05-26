@@ -28,6 +28,9 @@ Change log for zeit.web
 
 - Remove ESI parser javascript library
 
+- Hotfix: Repair printbox
+
+
 
 1.23.1 (2015-05-20)
 -------------------
