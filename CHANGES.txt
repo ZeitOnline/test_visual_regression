@@ -1,7 +1,15 @@
 Change log for zeit.web
 =======================
 
-1.24 (unreleased)
+1.25 (unreleased)
+-----------------
+
+- ZON-1749: Add dynamic centerpage collection test folder
+
+- ZON-1432: Add Servicebox as CP-Extra
+
+
+1.24 (2015-05-26)
 -----------------
 
 - ZON-1713: Enable unflagging recommended comments
@@ -22,7 +30,7 @@ Change log for zeit.web
 
 - Remove ESI parser javascript library
 
-- ZON-1432: Add Servicebox as CP-Extra
+- Hotfix: Repair printbox
 
 
 1.23.1 (2015-05-20)

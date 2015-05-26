@@ -253,6 +253,7 @@ class LegacyCenterpage(Centerpage):
                 # Rewrite content with digital ad box
                 box = zeit.cms.interfaces.ICMSContent(
                     'http://xml.zeit.de/angebote/angebotsbox')
+                module = LegacyModule([box], layout='printbox')
                 module.has_digital_ad = True
             except TypeError:
                 pass
