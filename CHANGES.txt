@@ -4,7 +4,7 @@ Change log for zeit.web
 1.25 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1749: Add dynamic centerpage collection test folder
 
 
 1.24 (2015-05-26)
