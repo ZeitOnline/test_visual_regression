@@ -146,7 +146,6 @@ class Application(object):
         log.debug('Configuring Pyramid')
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_comment_count', '/json/comment_count')
-        config.add_route('json_invalidate', '/json/invalidate')
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
         config.add_route('beta_toggle', '/beta')
@@ -190,6 +189,8 @@ class Application(object):
 
         config.include('pyramid_beaker')
 
+        pyramid_beaker.set_cache_regions_from_settings(self.settings)
+
         session_factory = pyramid_beaker.session_factory_from_settings(
             self.settings)
         config.set_session_factory(session_factory)
@@ -231,7 +232,7 @@ class Application(object):
             zeit.web.core.jinja.ProfilerExtension)
 
         self.config.commit()
-        env = self.config.get_jinja2_environment()
+        self.jinja_env = env = self.config.get_jinja2_environment()
         env.trim_blocks = True
 
         default_loader = env.loader
@@ -255,8 +256,6 @@ class Application(object):
 
         # TODO: We would want to make contextfilters venusian-discoverable too.
         env.filters['macro'] = zeit.web.core.template.call_macro_by_name
-
-        return env
 
     def configure_zca(self):
         """Sets up zope.component registrations by reading our

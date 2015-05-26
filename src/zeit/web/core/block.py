@@ -172,6 +172,7 @@ class Image(BaseImage):
 
         # XXX: This is a rather unelegant and inflexible!
         #      But it gets images rolling in beta articles - so wth.
+        #      … and 99% of images in articles are 'large'
         target = model_block.references.target
         if zeit.content.image.interfaces.IImageGroup.providedBy(target):
             target = zeit.web.core.template.closest_substitute_image(
@@ -226,6 +227,7 @@ class Intertitle(object):
 class Raw(object):
 
     def __init__(self, model_block):
+        self.alldevices = 'alldevices' in model_block.xml.keys()
         self.xml = _raw_html(model_block.xml)
 
 
