@@ -227,6 +227,7 @@ class Intertitle(object):
 class Raw(object):
 
     def __init__(self, model_block):
+        self.alldevices = 'alldevices' in model_block.xml.keys()
         self.xml = _raw_html(model_block.xml)
 
 
