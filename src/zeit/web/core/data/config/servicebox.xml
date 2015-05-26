@@ -16,8 +16,8 @@
   <service href="http://automarkt.zeit.de/" id="automarkt">Automarkt</service>
   <service href="http://jobs.zeit.de/" id="jobsuche">Jobsuche</service>
   <service href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="partnersuche">Partnersuche</service>
-  <service href="http://zeit.immowelt.de/" rel="nofollow">Immobiliensuche</service>
-  <service href="http://www.bellevue-ferienhaus.de/zeit/" rel="nofollow">Ferienhäuser</service>
+  <service href="http://zeit.immowelt.de/" rel="nofollow" id="immobiliensuche">Immobiliensuche</service>
+  <service href="http://www.bellevue-ferienhaus.de/zeit/" rel="nofollow" id="ferienhaeuser">Ferienhäuser</service>
   <!-- 4. Spalte (von 4) -->
   <service href=" http://www.zeit.de/angebote/experteer/index?affiliate=affiliate_2012_97" id="headhunter">Headhunter</service>
   <service href="http://services.zeit.de/toptarif/vergleichsrechner.php" id="tarifvergleiche">Tarifvergleiche</service>
