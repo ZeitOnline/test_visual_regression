@@ -24,6 +24,21 @@ def test_inline_html_should_return_none_on_non_xml_input():
     assert zeit.web.core.block._inline_html(None) is None
 
 
+def test_inline_html_should_consider_additional_elements():
+    ul = ('<ul>'
+          '<li>The path of the <b>righteous</b> man</li>'
+          '<li>is beset <a href="#in">on all sides</a> by the iniquities</li>'
+          '<li>of the selfish and the tyranny of <i>evil men</i>.</li>'
+          '</ul>')
+    add = ['li', 'b', 'i']
+    xml = lxml.etree.fromstring(ul)
+    out = ('<li>The path of the <b>righteous</b> man</li>'
+           '<li>is beset <a href="#in">on all sides</a> by the iniquities</li>'
+           '<li>of the selfish and the tyranny of <i>evil men</i>.</li>')
+
+    assert out == str(zeit.web.core.block._inline_html(xml, add)).strip()
+
+
 def test_video_block_should_be_fault_tolerant_if_video_is_none():
     model_block = mock.Mock()
     model_block.video = None
