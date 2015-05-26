@@ -33,12 +33,17 @@ import zeit.web.core.view
 
 settings = {
     'pyramid.reload_templates': 'false',
-
     'pyramid.debug_authorization': 'false',
     'pyramid.debug_notfound': 'false',
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
-
+    'cache.type': 'memory',
+    'cache.lock_file': '/tmp/test_lock',
+    'cache.regions': 'default_term, second, short_term, long_term',
+    'cache.second.expire': '1',
+    'cache.short_term.expire': '60',
+    'cache.default_term.expire': '300',
+    'cache.long_term.expire': '3600',
     'scripts_url': '/js/static',
     'caching_time_content': '5',
     'caching_time_article': '10',
@@ -162,12 +167,9 @@ def app_settings():
         lambda *_: None, settings.iteritems())
 
 
-@pytest.fixture(scope='module')
-def jinja2_env():
-    app = zeit.web.core.application.Application()
-    app.settings = settings.copy()
-    app.configure_pyramid()
-    return app.configure_jinja()
+@pytest.fixture
+def jinja2_env(application):
+    return application.zeit_app.jinja_env
 
 
 class ZODBLayer(plone.testing.zodb.EmptyZODB):
@@ -258,6 +260,7 @@ def debug_application(request):
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     app_settings = settings.copy()
     app_settings['debug.show_exceptions'] = ''
+    app_settings['debug.propagate_jinja_errors'] = ''
     return repoze.bitblt.processor.ImageTransformationMiddleware(
         zeit.web.core.application.Application()({}, **app_settings),
         secret='time'
