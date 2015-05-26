@@ -1,13 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.25 (unreleased)
------------------
-
-- Nothing changed yet.
-
-
-1.24 (2015-05-26)
+1.24 (unreleased)
 -----------------
 
 - ZON-1713: Enable unflagging recommended comments
