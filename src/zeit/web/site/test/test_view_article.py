@@ -342,3 +342,15 @@ def test_adcontroller_values_return_values_on_article(application):
         ('tma', '')]
     view = view = zeit.web.site.view_article.Article(content, mock.Mock())
     assert adcv == view.adcontroller_values
+
+
+def test_article_view_renders_alldevices_raw_box(
+        testbrowser, testserver):
+    browser = testbrowser('{}/zeit-online/article/02'.format(testserver.url))
+    assert 'fVwQok9xnLGOA' in browser.contents
+
+
+def test_article_skips_raw_box_not_suitable_for_alldevices(
+        testbrowser, testserver):
+    browser = testbrowser('{}/zeit-online/article/02'.format(testserver.url))
+    assert 'cYhaIIyjjxg1W' not in browser.contents
