@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-
-from BeautifulSoup import BeautifulSoup
-import babel.dates
 import collections
 import datetime
 import logging
-import lxml.etree
 import math
+
+from BeautifulSoup import BeautifulSoup
+import babel.dates
+import beaker.cache
+import lxml.etree
 import requests
 import requests.exceptions
 import zope.component
-import beaker.cache
 
 import zeit.cms.interfaces
 

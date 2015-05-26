@@ -237,7 +237,7 @@ class Application(object):
             zeit.web.core.jinja.ProfilerExtension)
 
         self.config.commit()
-        env = self.config.get_jinja2_environment()
+        self.jinja_env = env = self.config.get_jinja2_environment()
         env.trim_blocks = True
 
         default_loader = env.loader
@@ -261,8 +261,6 @@ class Application(object):
 
         # TODO: We would want to make contextfilters venusian-discoverable too.
         env.filters['macro'] = zeit.web.core.template.call_macro_by_name
-
-        return env
 
     def configure_zca(self):
         """Sets up zope.component registrations by reading our

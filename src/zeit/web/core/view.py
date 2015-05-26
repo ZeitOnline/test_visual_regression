@@ -8,7 +8,6 @@ import re
 import babel.dates
 import pyramid.response
 import pyramid.view
-import requests
 import werkzeug.http
 
 import zeit.cms.workflow.interfaces
@@ -533,15 +532,10 @@ def health_check(request):
 
 class service_unavailable(object):  # NOQA
     def __init__(self, context, request):
-        log.exception('{} at {}'.format(repr(context), request.path))
+        log.error('{} at {}'.format(repr(context), request.path))
 
     def __call__(self):
         body = 'Status 503: Dokument zurzeit nicht verfügbar.'
-        try:
-            body = requests.get('http://phpscripts.zeit.de/503.html',
-                                timeout=4.0).text
-        except requests.exceptions.RequestException:
-            pass
         return pyramid.response.Response(body, 503)
 
 

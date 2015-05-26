@@ -15,10 +15,20 @@
 			img
 				width: 100%
 
+		&--marginalia
+			clear: both
+			margin: remify(40px) auto
+			width: 90%
+
 		+respond-min($break-tablet-min)
 			max-width: remify(660px)
 			margin-left: auto
 			margin-right: auto
+
+			&--marginalia
+				float: left
+				margin: remify(14px 25px 14px 0)
+				width: remify(205px)
 
 		+respond-min($break-desktop-min)
 			&--wide
@@ -27,6 +37,11 @@
 
 			&--full
 				max-width: none
+
+			&--marginalia
+				margin: remify(16px 25px 16px 60px)
+				width: remify(220px)
+
 
 .article__subheading,
 .article-page__page-teaser
@@ -55,19 +70,27 @@
 .byline__author
 	font-weight: bold
 
-.figure__caption
-	font-family: $font-franziska
-	font-size: remify(15px)
-	font-style: italic
-	line-height: 1.5
-	margin: $thin $page-padding 0 $page-padding
-	color: $zon_dark_grey
-	+respond-min($break-desktop-min)
-		margin: $thin remify(80px) 0 remify(80px)
-		font-size: remify(16px)
 
-.figure__copyright
-	color: $zon_grey
-	a
-		// normal, hover, active, visited, focus
-		+link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)
+.figure
+
+	&__caption
+		font-family: $font-franziska
+		font-size: remify(15px)
+		font-style: italic
+		line-height: 1.5
+		margin: $thin $page-padding 0 $page-padding
+		color: $zon_dark_grey
+		&--marginalia
+			margin: remify(12px 0 0 0)
+		+respond-min($break-desktop-min)
+			margin: $thin remify(80px) 0 remify(80px)
+			font-size: remify(16px)
+			&--marginalia
+				margin: remify(12px 0 0 0)
+
+
+	&__copyright
+		color: $zon_grey
+		a
+			// normal, hover, active, visited, focus
+			+link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)
