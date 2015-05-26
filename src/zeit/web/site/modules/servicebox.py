@@ -53,4 +53,4 @@ class Servicebox(zeit.web.core.block.Module):
     @zeit.web.reify
     def service_items(self):
         items = list(self.services(self))
-        return list(items[x:x+5] for x in xrange(0, len(items), 5))
+        return list(items[x:x + 5] for x in xrange(0, len(items), 5))
