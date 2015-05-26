@@ -393,6 +393,13 @@
                 <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="id-913cb698-41ee-479b-997c-86232fd3c3d3"/>
             </region>
         </cluster>
+        <cluster visible="True" area="gnnpf" title="Servicebox">
+            <region visible="True" area="grrrmmmpf" kind="solo" title="Servicebox">
+                <container cp:__name__="huwaaaaa" cp:type="cpextra" module="servicebox" visible="True">
+                    <cp_extra for="zeit.content.cp.interfaces.IArea" id="servicebox" />
+                </container>
+            </region>
+        </cluster>
     </body>
     <feed/>
     <teaser>
