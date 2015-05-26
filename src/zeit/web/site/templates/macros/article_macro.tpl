@@ -146,3 +146,7 @@
     </aside>
 {%- endif %}
 {%- endmacro %}
+
+{% macro use_svg_icon(name, class=None) -%}
+    {{ lama_core.use_svg_icon(name, class) }}
+{%- endmacro %}
