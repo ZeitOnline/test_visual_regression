@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - Remove ESI parser javascript library
 
+- ZON-1432: Add Servicebox as CP-Extra
+
 
 1.23.1 (2015-05-20)
 -------------------
