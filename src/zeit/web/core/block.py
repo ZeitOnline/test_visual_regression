@@ -72,9 +72,9 @@ class Paragraph(object):
 class UnorderedList(Paragraph):
 
     def __init__(self, model_block):
-        self.html = ''.join(
-            lxml.etree.tostring(item)
-            for item in model_block.xml.li)
+        # Vivi does not allow nested lists, so we don't care about that for now
+        additional_elements = ['li']
+        self.html = _inline_html(model_block.xml, additional_elements)
 
 
 @grokcore.component.implementer(IFrontendBlock)
@@ -427,8 +427,11 @@ def _raw_html(xml):
     return transform(xml)
 
 
-def _inline_html(xml):
+def _inline_html(xml, elements=None):
     allowed_elements = 'a|span|strong|img|em|sup|sub|caption|br'
+    if elements:
+        elements.append(allowed_elements)
+        allowed_elements = '|'.join(elements)
     filter_xslt = lxml.etree.XML("""
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
