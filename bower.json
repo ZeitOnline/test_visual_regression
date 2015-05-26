@@ -10,7 +10,8 @@
     "normalize.css": "3.0.3",
     "requirejs": "2.1.17",
     "sjcl": "1.0.2",
-    "jquery.inview": "1.0.0"
+    "jquery.inview": "1.0.0",
+    "svg4everybody": "1.0.0"
   },
   "exportsOverride": {
     "bx-slider.js": {
