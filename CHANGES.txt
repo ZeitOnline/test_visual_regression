@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-1.24 (unreleased)
+1.25 (unreleased)
+-----------------
+
+- ZON-1749: Add dynamic centerpage collection test folder
+
+
+1.24 (2015-05-26)
 -----------------
 
 - ZON-1713: Enable unflagging recommended comments
@@ -10,6 +16,10 @@ Change log for zeit.web
 
 - ZON-1569: Upgrade author column images to image groups
 
+- ZON-1532: Render raw elements enabled for all devices
+
+- Remove ESI parser javascript library
+
 - ZON-1253: Safeguard jinja tests, modifiers and globals
 
 - ZON-1345: Article body: display images w/ layout 'small' correctly
@@ -17,6 +27,9 @@ Change log for zeit.web
 - ZON-1744: Enable friedbert to memcache comment threads
 
 - Remove ESI parser javascript library
+
+- Hotfix: Repair printbox
+
 
 
 1.23.1 (2015-05-20)
