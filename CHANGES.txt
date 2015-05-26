@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1749: Add dynamic centerpage collection test folder
 
+- Add ordered and unordered list elements
+
 
 1.24 (2015-05-26)
 -----------------
