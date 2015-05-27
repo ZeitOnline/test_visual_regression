@@ -41,12 +41,12 @@
 			padding-right: remify(42px)
 	&__introduction
 		color: $white
-		font-size: $font-s
+		font-size: $font-s--rem
 		letter-spacing: $zon-letter-spacing-l
 		text-transform: uppercase
 		-webkit-font-smoothing: antialiased
 		+respond-min($break-tablet-min)
-			font-size: $font-ml
+			font-size: $font-ml--rem
 			text-transform: none
 		+respond-min($break-desktop-min)
 			font-size: remify(19px)
@@ -87,7 +87,7 @@
 		border: 2px solid $charcoal
 		color: $white
 		font-family: TabletGothic
-		font-size: $font-ss
+		font-size: $font-ss--rem
 		font-weight: bold
 		letter-spacing: $zon-letter-spacing-l
 		padding: remify(12px 25px)
@@ -98,12 +98,12 @@
 	&__title
 		@extend %teaser-title
 		color: $white
-		font-size: $font-l
+		font-size: $font-l--rem
 		line-height: 1.12em
 		+respond-min($break-tablet-min)
-			font-size: $font-xxl
+			font-size: $font-xxl--rem
 		+respond-min($break-desktop-min)
-			font-size: $font-xxxl
+			font-size: $font-xxxl--rem
 			line-height: 1.28em
 	&__title:hover
 		color: $white
@@ -124,7 +124,7 @@
 	&__kicker
 		@extend %teaser-kicker
 		color: $zon_light_grey
-		font-size: $font-s
+		font-size: $font-s--rem
 		font-weight: normal
 		letter-spacing: 0.1em
 		margin-bottom: $thin
