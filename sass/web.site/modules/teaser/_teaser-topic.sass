@@ -20,7 +20,7 @@
 			margin-top: remify(10px)
 		+respond-min($break-desktop-min)
 			margin-bottom: remify(45px)
-			margin-top: remify(14px)
+			margin-top: remify(15px)
 	&__inner-helper
 		left: 0
 		padding: 0
@@ -30,15 +30,14 @@
 		width: 100%
 		z-index: 1
 		+respond-min($break-tablet-min)
-			width: 66%
-			text-align: left
-			padding-left: remify(54px)
-			padding-right: remify(24px)
-		+respond-min($break-desktop-min)
-			width: 66%
-			top: remify(34px)
 			padding-left: remify(70px)
+			padding-right: remify(24px)
+			text-align: left
+			top: remify(35px)
+			width: 58%
+		+respond-min($break-desktop-min)
 			padding-right: remify(42px)
+			width: 66.66%
 	&__introduction
 		color: $white
 		font-size: $font-s--rem
@@ -46,10 +45,9 @@
 		text-transform: uppercase
 		-webkit-font-smoothing: antialiased
 		+respond-min($break-tablet-min)
-			font-size: $font-ml--rem
-			text-transform: none
+			font-size: $font-m--rem
 		+respond-min($break-desktop-min)
-			font-size: remify(19px)
+			font-size: $font-m--rem
 	&__media
 		float: left
 		margin: 0
@@ -84,24 +82,22 @@
 	&__readmore
 		background-color: rgba(0, 0, 0, 0.5)
 		border-radius: 5px
-		border: 2px solid $charcoal
+		border: 2px solid $zon_mid_grey
 		color: $white
 		font-family: TabletGothic
 		font-size: $font-ss--rem
 		font-weight: bold
 		letter-spacing: $zon-letter-spacing-l
-		padding: remify(12px 25px)
+		padding: remify(11px 41px)
 		text-transform: uppercase
 		-webkit-font-smoothing: antialiased
-		+respond-min($break-desktop-min)
-			padding: remify(11px 41px)
 	&__title
 		@extend %teaser-title
 		color: $white
 		font-size: $font-l--rem
 		line-height: 1.12em
 		+respond-min($break-tablet-min)
-			font-size: $font-xxl--rem
+			font-size: remify(26px)
 		+respond-min($break-desktop-min)
 			font-size: $font-xxxl--rem
 			line-height: 1.28em
@@ -117,42 +113,49 @@
 		display: block
 		width: 15%
 		height: 0px
-		border-bottom: 1px solid $zon_mid_grey
 		margin-bottom: $petite
+		+respond-min($break-desktop-min)
+			border-bottom: 1px solid $zon_mid_grey
+	&:first-child:after
+		+respond-min($break-tablet-min)
+			border-bottom: 1px solid $zon_mid_grey
 	&:last-child:after
 		border: none
 	&__kicker
 		@extend %teaser-kicker
-		color: $zon_light_grey
+		color: $zon_mid_grey
 		font-size: $font-s--rem
 		font-weight: normal
 		letter-spacing: 0.1em
 		margin-bottom: $thin
 		text-transform: uppercase
 		+respond-min($break-tablet-min)
-			font-size: $font-xs--rem
-		+respond-min($break-desktop-min)
-			font-size: $font-s--rem
+			font-size: $font-mm--rem
 	&__title
 		@extend %teaser-title
 		color: $white
 		line-height: 1.12em
 		letter-spacing: $zon-letter-spacing-m
 		+respond-min($break-tablet-min)
-			font-size: $font-mm--rem
-		+respond-min($break-desktop-min)
-			font-size: $font-ml--rem
+			font-size: $font-l--rem
 	&__title:hover
 		color: $white
 
+.teaser-topic-item:last-of-type
+	+respond-min($break-tablet-min)
+		display: none
+	+respond-min($break-desktop-min)
+		display: block
+
 .teaser-topic-list
 	+respond-min($break-tablet-min)
-		padding: 0
 		padding-left: $cp-padding
 		padding-right: remify(20px)
+		padding: 0
 		position: absolute
 		right: 0
 		top: remify(27px)
-		width: 33.33%
-	+respond-min($break-desktop-min)
+		width: 42%
+	+respond-min($break-tablet-min)
 		top: remify(36px)
+		width: 33.33%
