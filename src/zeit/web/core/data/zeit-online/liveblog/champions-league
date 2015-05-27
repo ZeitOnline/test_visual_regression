@@ -61,7 +61,7 @@
       <tag uuid="c454966c-8bf1-41de-96e6-9a49dfa52ab7" url_value="" type="Organization">FC Bayern München</tag>
       <tag type="Organization" score="5" uuid="71def803-0c8b-4c36-8f7b-085137a2a187" url_value="fc-barcelona">FC Barcelona</tag>
     </rankedTags>
-    <image base-id="http://xml.zeit.de/zeit-online/live-blog/champions-league-bilder/messi/" type="jpg" title="Messi" alt="Messi" align="left" publication-date="" expires="">
+    <image base-id="http://xml.zeit.de/zeit-online/liveblog/champions-league-bilder/messi/" type="jpg" title="Messi" alt="Messi" align="left" publication-date="" expires="">
       <bu>Lionel Messi feiert sein Tor gegen die Bayern. </bu>
       <copyright>© Reuters / Albert Gea</copyright>
     </image>
@@ -132,7 +132,7 @@
     <title>Und dann kam Messi</title>
     <subtitle>Barcelona war viel stärker als Bayern, doch lange hielt Neuer das 0:0. Wäre da nicht Messi gewesen. Was für ein Stürmer! Das Spiel zum Nachlesen im Live-Blog</subtitle>
     <division type="page">
-      <image base-id="http://xml.zeit.de/zeit-online/live-blog/champions-league-bilder/messi/" type="jpg" title="Messi" alt="Messi" align="left" publication-date="" expires="" layout="large" is_empty="False">
+      <image src="http://xml.zeit.de/zeit-online/liveblog/champions-league-bilder/messi/messi-540x304.jpg" type="jpg" title="Messi" alt="Messi" align="left" publication-date="" expires="" layout="large" is_empty="False">
         <bu>Lionel Messi feiert sein Tor gegen die Bayern. </bu>
         <copyright>© Reuters / Albert Gea</copyright>
       </image>
