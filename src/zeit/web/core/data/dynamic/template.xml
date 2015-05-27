@@ -20,8 +20,6 @@
         <container cp:__name__="id-097121c4-56ca-4171-950d-54989b5ed453" cp:type="auto-teaser" module="zon-small" visible="True"/>
         <raw_query>published:&quot;published&quot; AND keywords:&quot;{{url_value}}&quot;</raw_query>
       </region>
-      <region area="informatives"/>
     </cluster>
-    <cluster area="teaser-mosaic" kind="solo" visible="True"/>
   </body>
 </centerpage>
