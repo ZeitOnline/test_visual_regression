@@ -22,6 +22,7 @@ import zeit.content.cp.layout
 import zeit.web
 import zeit.web.core.comments
 import zeit.web.core.interfaces
+import zeit.web.core.utils
 
 log = logging.getLogger(__name__)
 
@@ -64,45 +65,6 @@ def format_date(obj, type='short'):
 
 
 @zeit.web.register_filter
-def format_date_ago(dt, precision=2, past_tense='vor {}',
-                    future_tense='in {}'):
-    # customization of https://bitbucket.org/russellballestrini/ago :)
-    delta = dt
-    if not isinstance(dt, datetime.timedelta):
-        delta = datetime.datetime.now() - dt
-
-    the_tense = past_tense
-    if delta < datetime.timedelta(0):
-        the_tense = future_tense
-
-    delta = abs(delta)
-    d = {
-        'Jahr': int(delta.days / 365),
-        'Tag': int(delta.days % 365),
-        'Stunde': int(delta.seconds / 3600),
-        'Minute': int(delta.seconds / 60) % 60,
-        'Sekunde': delta.seconds % 60
-    }
-    hlist = []
-    count = 0
-    units = ('Jahr', 'Tag', 'Stunde', 'Minute', 'Sekunde')
-    units_plural = {'Jahr': 'Jahren', 'Tag': 'Tagen', 'Stunde':
-                    'Stunden', 'Minute': 'Minuten', 'Sekunde': 'Sekunden'}
-    for unit in units:
-        unit_displayed = unit
-        if count >= precision:
-            break  # met precision
-        if d[unit] == 0:
-            continue  # skip 0's
-        if d[unit] != 1:
-            unit_displayed = units_plural[unit]
-        hlist.append('%s %s' % (d[unit], unit_displayed))
-        count += 1
-    human_delta = ', '.join(hlist)
-    return the_tense.format(human_delta)
-
-
-@zeit.web.register_filter
 def obj_debug(value):
     try:
         res = []
@@ -141,28 +103,6 @@ def hide_none(string):
 
 
 @zeit.web.register_filter
-def area_width(width):
-    return {'1/1': None, '3/4': 'threequarters', '2/3': 'twothirds',
-            '1/2': 'onehalf', '1/3': 'onethird', '1/4': 'onequarter'}.get(
-                width, None)
-
-
-@zeit.web.register_filter
-def get_teaser_layout(teaser, layout, default=None):
-    if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
-        raise TypeError('Broken ref at {}'.format(teaser.uniqueId))
-    elif getattr(teaser, 'serie', None):
-        layout = 'zon-series'
-        if teaser.serie.column and get_column_image(teaser):
-            layout = 'zon-column'
-    elif getattr(teaser, 'blog', None):
-        layout = 'zon-blog'
-
-    return zope.component.getUtility(
-        zeit.web.core.interfaces.ITeaserMapping).get(layout, default or layout)
-
-
-@zeit.web.register_filter
 def get_layout(block, request=None):
     # Calculating the layout of a cp block can be slightly more expensive in
     # zeit.web, since we do lookups in some vocabularies, to change the layout,
@@ -175,7 +115,7 @@ def get_layout(block, request=None):
     try:
         key = request and hash(block)
     except (NotImplementedError, TypeError), e:
-        log.debug('Cannot hash and cache cp module layout: {}'.format(e))
+        log.debug('Cannot cache {} layout: {}'.format(block, e))
         key = None
 
     if key:
@@ -185,13 +125,35 @@ def get_layout(block, request=None):
             return layout
 
     try:
-        if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
-            layout = block.cpextra
+        layout_id = block.layout.id
+    except (AttributeError, TypeError):
+        layout_id = 'hide'
+
+    try:
+        teaser = list(block)[0]
+    except (IndexError, TypeError):
+        if not zeit.content.cp.interfaces.ITeaserBlock.providedBy(block):
+            layout = layout_id
         else:
-            layout = get_teaser_layout(list(block)[0], block.layout.id)
-    except (AttributeError, IndexError, TypeError), e:
-        log.debug('Cannot produce a cp module layout: {}'.format(e))
-        return 'hide'
+            layout = 'hide'
+    else:
+        if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
+            log.debug('Broken ref at {}'.format(teaser.uniqueId))
+            layout = 'hide'
+        elif False:
+            # XXX What about placeholder containers?
+            layout = 'hide'
+        elif getattr(teaser, 'serie', None):
+            layout = 'zon-series'
+            if teaser.serie.column and get_column_image(teaser):
+                layout = 'zon-column'
+        elif getattr(teaser, 'blog', None):
+            layout = 'zon-blog'
+        else:
+            layout = layout_id
+
+    layout = zope.component.getUtility(
+        zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
 
     if key:
         request.teaser_layout[key] = layout
@@ -265,6 +227,7 @@ scales = {
     'zon-printbox': (320, 234),
     'zon-printbox-wide': (320, 148),
     'zon-topic': (980, 418),
+    'zon-column': (300, 400),
     'brightcove-still': (580, 326),
     'brightcove-thumbnail': (120, 67),
     'spektrum': (220, 124)
@@ -319,8 +282,9 @@ def closest_substitute_image(image_group,
                              image_pattern,
                              force_orientation=False):
     """Returns the image from an image group, that most closely matches the
-    target image pattern. Larger resolutions are always favored over smaller
-    ones and the image orientation matching may be enforced.
+    target image pattern (while ignoring the master image). Larger resolutions
+    are always favored over smaller ones and the image orientation matching may
+    be enforced.
 
     Usage as jinja filter:
 
@@ -334,9 +298,11 @@ def closest_substitute_image(image_group,
     :returns: Unique ID of most suitable substitute image.
     """
 
+    # make sure it's an Image Group
     if not zeit.content.image.interfaces.IImageGroup.providedBy(image_group):
         return
     elif image_pattern in image_group:
+        # return happily if image_pattern is present
         return image_group.get(image_pattern)
 
     # Determine the image scale correlating to the provided pattern.
@@ -353,7 +319,9 @@ def closest_substitute_image(image_group,
     candidates = [(image_pattern, scale)]
     for name, img in image_group.items():
         size = img.getImageSize()
-        if not force_orientation or orientation(*size) == orientation(*scale):
+        if image_group.master_image != name and (
+                not force_orientation or
+                orientation(*size) == orientation(*scale)):
             candidates.append((name, size))
 
     if len(candidates) == 1:
@@ -400,17 +368,6 @@ def topic_links(centerpage):
 @jinja2.contextfilter
 def call_macro_by_name(context, macro_name, *args, **kwargs):
     return context.vars[macro_name](*args, **kwargs)
-
-
-@zeit.web.register_filter
-def get_results(area):
-    """Fill an autmatic area with results from a search-form query."""
-    # TODO: Make this filter utilize ZCA.
-    return zeit.web.site.search.ResultsArea(area)
-    try:
-        return zeit.web.site.search.IResultsArea(area)
-    except TypeError:
-        return area
 
 
 @zeit.web.register_global
@@ -471,10 +428,11 @@ def _existing_image(asset_id, base_name, patterns, ext, filenames):
 @zeit.web.register_global
 def get_column_image(teaser):
     try:
-        return zeit.web.core.interfaces.ITeaserImage(
-            teaser.authorships[0].target.column_teaser_image)
+        image_group = teaser.authorships[0].target.image_group
+        image = closest_substitute_image(image_group, 'zon-column')
+        return zeit.web.core.interfaces.ITeaserImage(image)
     except (AttributeError, IndexError, TypeError):
-        log.warn('Teaser {} has no authorships'.format(getattr(
+        log.debug('Author of {} has no column image.'.format(getattr(
             teaser, 'uniqueId', 'unknown')))
 
 
@@ -575,16 +533,15 @@ def get_image_group(asset):
 
 
 @zeit.web.register_filter
-def get_module(block):
-    if not zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
-        return
-    try:
-        module = zope.component.getAdapter(
-            block, zeit.edit.interfaces.IBlock, block.cpextra)
-    except (zope.component.interfaces.ComponentLookupError, TypeError):
-        return
-    if block.visible:
-        return module
+def get_module(module, name=None):
+    return zeit.web.core.utils.get_named_adapter(
+        module, zeit.edit.interfaces.IBlock, 'cpextra')
+
+
+@zeit.web.register_filter
+def get_area(area, name=None):
+    return zeit.web.core.utils.get_named_adapter(
+        area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
 
 
 @zeit.web.register_filter
@@ -672,9 +629,32 @@ def calculate_pagination(current_page, total_pages, slots=7):
 def append_get_params(request, **kw):
     # Append GET parameters that are not reset
     # by setting the param value to None explicitly.
-    req_params = [i for i in request.GET.items() if i[0] not in kw.keys()]
-    params = req_params + [i for i in kw.items() if i[1] is not None]
+    def encode(value):
+        return unicode(value).encode('utf-8')
+
+    params = [(encode(k), encode(v)) for k, v in itertools.chain(
+              (i for i in request.GET.iteritems() if i[0] not in kw),
+              (i for i in kw.iteritems() if i[1] is not None))]
 
     if params == []:
         return request.path_url
     return '?'.join([request.path_url, urllib.urlencode(params)])
+
+
+@zeit.web.register_filter
+def remove_get_params(url, *args):
+    # ToDo: This should be used in templates,
+    # if append_get_params gets refactored.
+    # It'd be more useful to use these functions on URL and not request level
+    # This way we could say sth. like
+    # `request | make_url() |
+    #  append_get_param(foo='ba', ba='batz') | remove_get_param('foobar')`
+    # and vice versa.
+
+    scheme, netloc, path, query, frag = urlparse.urlsplit(url)
+    query_p = urlparse.parse_qs(query)
+    for arg in args:
+        query_p.pop(arg, None)
+
+    return '{}://{}{}?{}'.format(
+        scheme, netloc, path, urllib.urlencode(query_p, doseq=True))

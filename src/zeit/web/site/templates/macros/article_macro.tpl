@@ -9,13 +9,13 @@
             {%- elif obj.layout == 'large' -%}
                 article__item article__item--wide
             {%- elif obj.layout == 'small' -%}
-                article__item
+                article__item article__item--marginalia
             {%- endif -%}
             ">
             <div class="scaled-image">
-                {{ insert_responsive_image(obj, None, 'article') }}
+                {{ lama_core.insert_responsive_image(obj, None, 'article') }}
             </div>
-            <figcaption class="figure__caption">
+            <figcaption class="figure__caption {% if obj.layout == 'small' %}figure__caption--marginalia{%- endif -%}">
                 {% if loop -%}
                 <span class="figure__index">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
@@ -35,36 +35,6 @@
         </figure>
     {%- endif %}
 {%- endmacro %}
-
-{% macro insert_responsive_image(image, image_class, page_type) %}
-
-    {% set alt = ''%}
-    {% set title = ''%}
-
-    {% if image.alt %}
-        {% set alt = image.alt %}
-        {% set title = image.title %}
-    {% elif image.attr_alt %}
-        {% set alt = image.attr_alt %}
-        {% set title = image.attr_title %}
-    {% endif %}
-
-    {% if image %}
-        <!--[if gt IE 8]><!-->
-            <noscript data-src="{{image | default_image_url}}">
-        <!--<![endif]-->
-        {% if page_type == 'article' and image.href %}
-            <a href="{{image.href}}">
-        {% endif %}
-                <img alt="{{alt}}" {% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
-        {% if page_type == 'article' and image.href %}
-            </a>
-        {% endif %}
-        <!--[if gt IE 8]><!-->
-            </noscript>
-        <!--<![endif]-->
-    {% endif %}
-{% endmacro %}
 
 {% macro intertitle(intertitle) -%}
     <h2 class="article__subheading article__item">
@@ -104,7 +74,7 @@
            }
   #}
     {% if obj.name -%}
-        <figure class="portraitbox">
+        <figure class="portraitbox article__item article__item--marginalia">
             <div class="portraitbox__heading">
                 {{ obj.name }}
             </div>
@@ -117,41 +87,44 @@
 
 {% macro infobox(obj) %}
 {% if obj.contents -%}
-    {% set id = obj.title|attr_safe %}
-    <aside class="infobox" id="{{ id }}">
-        <div class="infobox__navigation" role="tablist">
-        {% for title, text in obj.contents %}
-            <div class="infobox__navtitle">
-                <label
-                    id="{{ id }}-{{ loop.index }}-tablabel"
-                    for="{{ id }}-{{ loop.index }}-radio"
-                    class="infobox__navlabel {%- if loop.first %} infobox__navlabel--checked{% endif -%}"
-                    role="tab"
-                    aria-selected="{%- if loop.first %}true{%- else -%}false{% endif -%}"
-                >{{ title }}</label>
-            </div>
-        {% endfor %}
-        </div>
+    {% set id = obj.title | attr_safe %}
+    <aside class="infobox js-infobox" id="{{ id }}" role="application">
+        <div class="infobox__navigation" id="{{ id }}--navigation" role="tablist"></div>
         <div class="infobox__content">
-        {% for title, text in obj.contents %}
-            <section class="infobox__tab">
-                <input class="infobox__checkbox" id="{{ id }}-{{ loop.index }}-check" type="checkbox" />
-                <input class="infobox__radio" name="{{ id }}-radio" id="{{ id }}-{{ loop.index }}-radio" type="radio" {%- if loop.first -%}checked="checked"{%- endif -%}/>
-                <div class="infobox__title">
-                    <label id="{{ id }}-{{ loop.index }}-label" for="{{ id }}-{{ loop.index }}-check" class="infobox__label" role="tab">{{ title }}</label>
-                </div>
-                <article
-                    id="{{ id }}-{{ loop.index }}-panel"
-                    class="infobox__inner"
-                    role="tabpanel"
-                    aria-hidden="true">
-                {% for item in text %}
-                    {{ (item|block_type or "no_block")|macro(item) }}
-                {% endfor %}
-                </article>
-            </section>
-        {% endfor %}
+            {% for title, text in obj.contents %}
+                <section class="infobox-tab" id="{{ id }}-{{ loop.index }}">
+                    <h3
+                        data-role="tab"
+                        data-aria-controls="{{ id }}-{{ loop.index }}-article"
+                        class="infobox-tab__title"
+                        data-index="{{ loop.index }}"
+                        tabindex="0">
+                        <a tabindex="-1" class="infobox-tab__link" href="#{{ id }}-{{ loop.index }}">{{ title }}</a>
+                    </h3>
+                    <article
+                        role="tabpanel"
+                        aria-labelledby="{{ id }}-{{ loop.index }}-tab"
+                        class="infobox-tab__content"
+                        id="{{ id }}-{{ loop.index }}-article">
+                        {% for item in text %}
+                            {{ (item | block_type or "no_block") | macro(item) }}
+                        {% endfor %}
+                    </article>
+                </section>
+            {% endfor %}
         </div>
     </aside>
 {%- endif %}
-{% endmacro %}
+{%- endmacro %}
+
+
+{% macro use_svg_icon(name, class=None) -%}
+    {{ lama_core.use_svg_icon(name, class) }}
+{%- endmacro %}
+
+
+{% macro raw(obj) -%}
+    {% if obj.alldevices %}
+    <div class="raw">{{ obj.xml | safe }}</div>
+    {% endif %}
+{%- endmacro %}

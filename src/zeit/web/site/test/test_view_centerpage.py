@@ -65,7 +65,7 @@ def test_area_major_should_correctly_process_teasers(application):
     request = mock.Mock()
     cp = zeit.web.site.view_centerpage.LegacyCenterpage(context, request)
 
-    assert len(cp.area_major) == 2
+    assert len(cp.area_major) == 4
     assert cp.area_major.values()[0].layout.id == 'zon-large'
     assert cp.area_major.values()[1].layout.id == 'zon-small'
     assert list(cp.area_major.values()[0])[0] == 'article'
@@ -593,10 +593,10 @@ def test_video_stage_video_should_play(selenium_driver, testserver):
         assert False, 'Video not visible with 10 seconds'
 
 
-def test_module_printbox_should_contain_teaser_image(testserver):
+def test_module_printbox_should_contain_teaser_image(application):
     mycp = mock.Mock()
     view = zeit.web.site.view_centerpage.LegacyCenterpage(mycp, mock.Mock())
-    image = view.module_printbox[0].image
+    image = view.module_printbox.image
     assert isinstance(image, zeit.content.image.image.RepositoryImage)
 
 
@@ -709,10 +709,10 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
         assert teaser.size.get('width') == main_width
     elif screen_size[0] == 768:
         assert teaser.size.get('width') == (int(
-            round((main_width - gutter_width) / 3) - gutter_width))
+            round((main_width - gutter_width) / 3.0) - gutter_width))
     elif screen_size[0] == 980:
         assert teaser.size.get('width') == (int(
-            round((main_width - gutter_width) / 3) - gutter_width))
+            round((main_width - gutter_width) / 3.0) - gutter_width))
 
 
 def test_adcontroller_values_return_values_on_hp(application):
@@ -783,3 +783,20 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     browser = testbrowser("{}?p=2".format(url))
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
+
+
+def test_servicebox_present_in_wide_breakpoints(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/index' % testserver.url)
+    servicebox = driver.find_element_by_id('servicebox')
+
+    if screen_size[0] == 320:
+        assert servicebox.is_displayed() is False, 'Servicebox displayed'
+    if screen_size[0] == 520:
+        assert servicebox.is_displayed() is False, 'Servicebox displayed'
+    if screen_size[0] == 768:
+        assert servicebox.is_displayed() is True, 'Servicebox not displayed'
+    if screen_size[0] == 980:
+        assert servicebox.is_displayed() is True, 'Servicebox not displayed'

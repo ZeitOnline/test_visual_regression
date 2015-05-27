@@ -5,10 +5,12 @@ import pyramid.httpexceptions
 import mock
 import pytest
 import zeit.web.core.view_comment
+import itertools
 from mock import patch
 import zope
 import requests
 import operator
+import beaker
 
 
 def test_comment_count_should_handle_missing_uid_param(comment_counter):
@@ -140,20 +142,26 @@ def test_thread_should_have_valid_page_information(application, testserver):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id)
-    assert thread['page'] is None
-    assert thread['page_total'] == 5
+    assert thread['pages']['current'] is None
+    assert thread['pages']['total'] == 5
 
-    unique_id = ('http://xml.zeit.de/politik/deutschland/'
-                 '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id, page=2)
-    assert thread['page'] == 2
+    assert thread['pages']['current'] == 2
     assert len(thread['comments']) == 10
 
-    unique_id = ('http://xml.zeit.de/politik/deutschland/'
-                 '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id, page=6)
-    assert thread['comments'] == []
-    assert thread['page'] == '6 (invalid)'
+    assert thread['pages']['current'] == 1
+    assert len(thread['comments']) == 10
+
+    thread = zeit.web.core.comments.get_thread(unique_id, cid=2969196)
+    assert thread['pages']['current'] == 5
+
+    thread = zeit.web.core.comments.get_thread(unique_id, page=3, cid=2969196)
+    assert thread['pages']['current'] == 5
+
+    thread = zeit.web.core.comments.get_thread(unique_id, sort='desc',
+                                               cid=2969196)
+    assert thread['pages']['current'] == 1
 
 
 def test_dict_with_article_paths_and_comment_counts_should_be_created(
@@ -212,7 +220,14 @@ def test_comment_tree_should_be_flattened_on_level_two():
         cid=6)
 
     comments = [cid_1, cid_2, cid_3, cid_4, cid_5, cid_6]
+
     sorted_comments = zeit.web.core.comments._sort_comments(comments)[0]
+
+    # flatten list here to test, if the structure will be valid
+    # The flattening now actually happens in z.w.c.comments.get_thread
+    sorted_comments = list(itertools.chain(
+        *[[li[0]] + li[1] for li in sorted_comments.values()]))
+
     readable_comments = [
         (comment['cid'], comment['shown_num']) for comment in sorted_comments]
     assert readable_comments == (
@@ -240,10 +255,23 @@ def _create_poster(monkeypatch):
         return None
     monkeypatch.setattr(requests, 'post', post)
 
+    def fans(me, uid, pid):
+        return []
+    monkeypatch.setattr(
+        zeit.web.core.view_comment.PostComment, '_get_recommendations', fans)
+
     def nid(me, uid):
         return 1
     monkeypatch.setattr(
         zeit.web.core.view_comment.PostComment, '_nid_by_comment_thread', nid)
+
+    def cache_mock(arg1, arg2, arg3):
+        def wrap(f):
+            def wrapped_f(*args):
+                f(*args)
+            return wrapped_f
+        return wrap
+    monkeypatch.setattr(beaker.cache, 'cache_region', cache_mock)
 
     return zeit.web.core.view_comment.PostComment(context, request)
 
@@ -336,7 +364,7 @@ endpoint_report = (
     {'cookies': {},
      'data': {
      'note': 'my comment',
-     'content_id': '1',
+     'content_id': 1,
      'method': 'flag.flagnote',
      'flag_name': 'kommentar_bedenklich',
      'uid': '123', }})
@@ -345,7 +373,8 @@ endpoint_recommend = (
     ('http://foo/services/json?callback=zeit',),
     {'cookies': {},
      'data': {
-     'content_id': '1',
+     'content_id': 1,
+     'action': 'flag',
      'method': 'flag.flag',
      'flag_name': 'leser_empfehlung',
      'uid': '123', }})
@@ -353,7 +382,7 @@ endpoint_recommend = (
 
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', 'my comment', None, 'comment', endpoint_agatho)])
-def test_post_comments_should_post_with_correct_arguments(
+def test_post_comment_should_post_with_correct_arguments(
         monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
@@ -379,7 +408,7 @@ def test_post_comments_should_post_with_correct_arguments(
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', None, '1', 'recommend', endpoint_recommend),
     ('my/path', 'my comment', '1', 'report', endpoint_report)])
-def test_post_comments_should_get_with_correct_arguments(
+def test_post_comment_should_get_with_correct_arguments(
         monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
@@ -403,6 +432,29 @@ def test_post_comments_should_get_with_correct_arguments(
     assert result[0] == mock_method.call_args_list[0][0]
 
 
+@pytest.mark.parametrize("path, comment, pid, action, result", [
+    ('my/path', 'my comment', None, 'comment', endpoint_agatho)])
+def test_invalidation_should_be_called_on_successful_post(
+        monkeypatch, path, comment, pid, result, action):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "POST"
+    poster.request.params['comment'] = comment
+    poster.path = path
+    poster.request.params['action'] = action
+    poster.request.params['pid'] = pid
+    with patch.object(requests, 'post') as mock_method:
+        response = mock.Mock()
+        response.status_code = 200
+        response.headers = {}
+        response.content = ''
+        mock_method.return_value = response
+        with patch.object(
+                zeit.web.core.view_comment, 'invalidate_comment_thread') as iv:
+            poster.post_comment()
+
+    assert iv.call_args[0][0] == 'http://xml.zeit.de/my/path'
+
+
 @pytest.mark.parametrize("action, path, service", [
     ('comment', 'my/article', 'http://foo/agatho/thread/my/article'),
     ('report', 'my/article', 'http://foo/services/json?callback=zeit')])
@@ -410,75 +462,3 @@ def test_action_url_should_be_created_correctly(
         monkeypatch, action, path, service):
     poster = _create_poster(monkeypatch)
     assert poster._action_url(action, path) == service
-
-
-def test_invalidation_view_should_work_correctly(
-        testserver, monkeypatch):
-    def invalidate(arg):
-        return {'community_host': 'http://foo'}
-
-    monkeypatch.setattr(
-        zeit.web.core.view_comment, 'invalidate_comment_thread', invalidate)
-    unique_id = 'http://xml.zeit.de/zeit-online/article/01'
-
-    response = requests.get(
-        '%s/json/invalidate?unique_id=%s' % (testserver.url, unique_id))
-
-    assert response.json()['msg'] == (
-        u'http://xml.zeit.de/zeit-online/article/01 was invalidated')
-
-    unique_id = '/xml.zeit.de/zeit-online/article/01'
-    response = requests.get(
-        '%s/json/invalidate?unique_id=%s' % (testserver.url, unique_id))
-
-    assert response.status_code == 500
-
-    unique_id = 'http://hrgs.de/article/01'
-    response = requests.get(
-        '%s/json/invalidate?unique_id=%s' % (testserver.url, unique_id))
-    assert response.status_code == 500
-
-    response = requests.get('%s/json/invalidate' % testserver.url)
-    assert response.status_code == 500
-
-
-def test_invalidate_view_should_respond_with_404_when_called_by_a_proxy():
-    request = pyramid.testing.DummyRequest()
-    setattr(request, 'host_port', 80)
-    with pytest.raises(pyramid.httpexceptions.HTTPNotFound):
-        zeit.web.core.view_comment.invalidate(request)
-
-
-def test_lru_cache_should_be_invalidated_by_unique_id(testserver):
-    cache_maker = zeit.web.core.comments.cache_maker
-    cache_maker._cache['comment_thread'].data = {}
-    requests.get('%s/zeit-online/article/01' % testserver.url)
-    assert cache_maker._cache['comment_thread'].data.keys()[0] == (
-        ('http://xml.zeit.de/zeit-online/article/01',))
-
-    zeit.web.core.view_comment.invalidate_comment_thread(
-        'http://xml.zeit.de/zeit-online/article/01')
-    assert cache_maker._cache['comment_thread'].data == {}
-
-
-def test_all_app_servers_should_be_invalidated(monkeypatch):
-
-    def invalidate(args):
-        return
-
-    monkeypatch.setattr(
-        zeit.web.core.view_comment, 'invalidate_comment_thread', invalidate)
-
-    with patch.object(requests, 'get') as mock_method:
-        response = mock.Mock()
-        response.status_code = 200
-        response.headers = {}
-        response.content = ''
-        mock_method.return_value = response
-        poster = _create_poster(monkeypatch)
-        poster._invalidate_app_servers('http://unique_id')
-
-    assert mock_method.call_count == 2
-    assert mock_method.call_args_list == [
-        (('http://foo/json/invalidate?unique_id=http://unique_id',), {}),
-        (('http://baa/json/invalidate?unique_id=http://unique_id',), {})]

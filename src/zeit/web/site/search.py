@@ -2,17 +2,16 @@ import collections
 import logging
 import math
 
-import grokcore.component
 import zope.component
 import zope.schema
 
+from zeit.solr import query as lq
 import zeit.cms.content.property
 import zeit.content.cp.automatic
 import zeit.content.cp.interfaces
 import zeit.find.daterange
 import zeit.find.search
 import zeit.solr.interfaces
-from zeit.solr import query as lq
 
 import zeit.web
 import zeit.web.core.block
@@ -176,9 +175,11 @@ class IResultsArea(zeit.content.cp.interfaces.IArea):
         title=u'Search result page', default=None, required=False)
 
 
-@grokcore.component.implementer(IResultsArea)
-@grokcore.component.adapter(zeit.content.cp.interfaces.IArea)
+@zeit.web.register_area('ranking')
 class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
+
+    zope.interface.implements(IResultsArea,
+                              zeit.content.cp.interfaces.IRenderedArea)
 
     sort_order = zeit.cms.content.property.ObjectPathProperty(
         '.sort_order', IResultsArea['sort_order'])
@@ -249,13 +250,6 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
     @zeit.web.reify
     def current_page(self):
         return self.page
-
-    @zeit.web.reify
-    def next_page(self):
-        if self.current_page == self.total_pages:
-            return
-        else:
-            return min(self.total_pages, self.current_page + 1)
 
     @zeit.web.reify
     def pagination(self):

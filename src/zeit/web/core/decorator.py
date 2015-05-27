@@ -1,4 +1,7 @@
+import logging
+import traceback
 import sys
+import types
 
 import pyramid
 import pyramid.decorator
@@ -8,10 +11,46 @@ import zope.component
 import zeit.content.cp.interfaces
 import zeit.edit.interfaces
 
+from zeit.web.core.interfaces import ISettings
 import zeit.web.core.interfaces
+import zeit.web.core.jinja
 
 
-def JinjaEnvRegistrator(env_attr):
+__all__ = [
+    'register_copyrights', 'register_area', 'register_filter',
+    'register_global', 'register_module', 'register_test', 'reify'
+]
+
+log = logging.getLogger(__name__)
+
+
+def safeguard(*args, **kw):
+    """Try to execute jinja environment modifier code and intercept potential
+    exceptions. If execution is intercept, return a jinja.Undefined object.
+
+    :internal:
+    """
+    try:
+        return globals()['func'](*args, **kw)
+    except BaseException:
+        logger(*sys.exc_info())
+        return globals()['undefined']()
+
+
+def logger(exc, val, tb):
+    """Log an exception that occoured during a jinja env modifier to
+    the error level of this module's logger. Strips off the uppermost
+    entry of the traceback.
+
+    :internal:
+    """
+    log.error(u''.join(
+        ['Traceback (most recent call last):\n'] +
+        traceback.format_list(traceback.extract_tb(tb)[1:]) +
+        [exc.__name__, ': ', unicode(val)]))
+
+
+def JinjaEnvRegistrator(env_attr, category='jinja'):  # NOQA
     """Factory function that returns a decorator configured to register a given
     environment attribute to the jinja context.
 
@@ -20,24 +59,44 @@ def JinjaEnvRegistrator(env_attr):
     :rtype: types.FunctionType
     """
     def registrator(func):
-        """This decorator is non-destructive, meaning it does not replace the
-        decorated function with a wrapped one. Instead, a callback is attached
-        to the venusian scanner that is triggered at application startup.
+        """This decorator recronstructs the decorated function and injects
+        the safeguarded codeblock into the dynamically created counterpart.
 
         :internal:
         """
         def callback(scanner, name, obj):
-            """Venusian callback that registers the decorated function under
-            its `func_name` to the jinja `env_attr` passed to the registrator
-            factory.
+            """Venusian callback that registers the decorated function.
 
             :internal:
             """
+            if not zope.component.getUtility(
+                    ISettings).get('debug.propagate_jinja_errors', False):
+
+                fn = types.FunctionType(
+                    safeguard.func_code, obj.func_globals.copy(),
+                    obj.func_name, obj.func_defaults, obj.func_closure)
+
+                fn.func_globals.update({
+                    'func': obj, 'logger': logger, 'sys': sys,
+                    'undefined': zeit.web.core.jinja.Undefined})
+
+                fn.__doc__ = obj.__doc__
+
+                setattr(sys.modules[obj.__module__], obj.func_name, fn)
+                obj = fn
+
             if hasattr(scanner, 'env') and env_attr in scanner.env.__dict__:
                 scanner.env.__dict__[env_attr][name] = obj
-        venusian.attach(func, callback, category='jinja')
+
+        venusian.attach(func, callback, category=category)
         return func
+
     return registrator
+
+
+register_filter = JinjaEnvRegistrator('filters')
+register_global = JinjaEnvRegistrator('globals')
+register_test = JinjaEnvRegistrator('tests')
 
 
 def register_copyrights(func):
@@ -58,7 +117,7 @@ class NestedAttributeError(StandardError):
     pass
 
 
-class reify(pyramid.decorator.reify):
+class reify(pyramid.decorator.reify):  # NOQA
     """Subclass of `pyramid.decorator.reify` that fixes misleading tracebacks
     caused by AttributeErrors nested inside the property code."""
 
@@ -81,7 +140,7 @@ def register_module(name):
     First, implement your module class in python
 
     @zeit.web.register_module('ice-cream-truck')
-    class IceCreamTruck(object):
+    class IceCreamTruck(zeit.web.core.block.Module):
         @zeit.web.reify
         def flavours(self):
             return ('chocolate', 'vanilla', 'cherry')
@@ -92,7 +151,7 @@ def register_module(name):
         Sell some ice cream on your centerpage!
     </cpextra>
 
-    Create a template in site/templates/inc/modules/ice-cream-truck.tpl
+    Create a template in site/templates/inc/module/ice-cream-truck.tpl
 
     {% for f in module.flavours %}
         <img src="//images.zeit.de/ice-cream-assets/{{ f }}.jpg"/>
@@ -105,5 +164,18 @@ def register_module(name):
         gsm = zope.component.getGlobalSiteManager()
         gsm.registerAdapter(cls, (zeit.content.cp.interfaces.ICPExtraBlock,),
                             zeit.edit.interfaces.IBlock, name)
+        return cls
+    return registrator
+
+
+def register_area(name):
+    """Register an area renderer implementation for a RAM-style area using the
+    area kind descriptor as an adapter identifier.
+    """
+
+    def registrator(cls):
+        gsm = zope.component.getGlobalSiteManager()
+        gsm.registerAdapter(cls, (zeit.content.cp.interfaces.IArea,),
+                            zeit.content.cp.interfaces.IRenderedArea, name)
         return cls
     return registrator

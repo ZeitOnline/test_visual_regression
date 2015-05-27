@@ -1,4 +1,4 @@
-{% set area = area | get_results %}
+{% set area = area | get_area %}
 
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 
@@ -18,20 +18,22 @@
 
 {% block after_module_list %}
 {% if area.pagination %}
-<div class="center-pager" id="center-pager">
-    {% if area.next_page %}
-    <a class="center-pager__next" href="{{ view.request | append_get_params(p=area.next_page) }}">Nächste Seite</a>
+<div class="pager">
+    {% if area.current_page == area.total_pages %}
+    <a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(p=area.current_page-1) }}">Vorherige Seite</a>
+    {% else %}
+    <a class="pager__button pager__button--next" href="{{ view.request | append_get_params(p=area.current_page+1) }}">Nächste Seite</a>
     {% endif %}
-    <ul class="center-pager__pages">
+    <ul class="pager__pages">
         {% for num in area.pagination %}
-        <li class="center-pager__page {% if num == area.current_page %} center-pager__page--current {% endif %}">
-            {% if num == area.current_page %}
-                {{ num }}
-            {% elif num %}
-                <a class="center-pager__link" href="{{ view.request | append_get_params(p=num) }}">{{ num }}</a>
-            {% else %}
+        <li class="pager__page{% if num == area.current_page %} pager__page--current{% endif %}">
+            {%- if num == area.current_page -%}
+                <span>{{ num }}</span>
+            {%- elif num -%}
+                <a href="{{ view.request | append_get_params(p=num) }}">{{ num }}</a>
+            {%- else -%}
                 <span>…</span>
-            {% endif %}
+            {%- endif -%}
         </li>
         {% endfor %}
     </ul>

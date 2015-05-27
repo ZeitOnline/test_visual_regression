@@ -87,6 +87,10 @@ class Application(object):
             self.settings.get('vivi_zeit.web_iqd-mobile-ids', ''))
         zeit.web.core.banner.iqd_mobile_ids = (
             zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
+        banner_id_mappings = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.web_banner-id-mappings', ''))
+        zeit.web.core.banner.banner_id_mappings = (
+            zeit.web.core.banner.make_banner_id_mappings(banner_id_mappings))
 
     def configure_series(self):
         series_source = maybe_convert_egg_url(
@@ -147,7 +151,6 @@ class Application(object):
         log.debug('Configuring Pyramid')
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_comment_count', '/json/comment_count')
-        config.add_route('json_invalidate', '/json/invalidate')
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
         config.add_route('beta_toggle', '/beta')
@@ -191,6 +194,8 @@ class Application(object):
 
         config.include('pyramid_beaker')
 
+        pyramid_beaker.set_cache_regions_from_settings(self.settings)
+
         session_factory = pyramid_beaker.session_factory_from_settings(
             self.settings)
         config.set_session_factory(session_factory)
@@ -231,9 +236,8 @@ class Application(object):
         self.config.add_jinja2_extension(
             zeit.web.core.jinja.ProfilerExtension)
 
-        env = self.config.registry.getUtility(
-            pyramid_jinja2.IJinja2Environment)
-
+        self.config.commit()
+        self.jinja_env = env = self.config.get_jinja2_environment()
         env.trim_blocks = True
 
         default_loader = env.loader
@@ -257,8 +261,6 @@ class Application(object):
 
         # TODO: We would want to make contextfilters venusian-discoverable too.
         env.filters['macro'] = zeit.web.core.template.call_macro_by_name
-
-        return env
 
     def configure_zca(self):
         """Sets up zope.component registrations by reading our
@@ -480,10 +482,10 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
     def _handle_centerpage(self, context, request):
         if urlparse.urlparse(context.uniqueId).path.startswith('/suche/index'):
             form = find_block(context, module='search-form')
-            area = find_block(context, attrib='area', module='ranking')
+            area = find_block(context, attrib='area', kind='ranking')
             if form and area:
                 form = zeit.web.core.template.get_module(form)
-                area = zeit.web.site.search.ResultsArea(area)
+                area = zeit.web.core.template.get_area(area)
 
                 form['q'] = ' '.join(request.GET.getall('q'))
                 form['type'] = ' '.join(request.GET.getall('type'))

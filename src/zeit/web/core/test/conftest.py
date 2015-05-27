@@ -33,12 +33,17 @@ import zeit.web.core.view
 
 settings = {
     'pyramid.reload_templates': 'false',
-
     'pyramid.debug_authorization': 'false',
     'pyramid.debug_notfound': 'false',
     'pyramid.debug_routematch': 'false',
     'pyramid.debug_templates': 'false',
-
+    'cache.type': 'memory',
+    'cache.lock_file': '/tmp/test_lock',
+    'cache.regions': 'default_term, second, short_term, long_term',
+    'cache.second.expire': '1',
+    'cache.short_term.expire': '60',
+    'cache.default_term.expire': '300',
+    'cache.long_term.expire': '3600',
     'scripts_url': '/js/static',
     'caching_time_content': '5',
     'caching_time_article': '10',
@@ -47,7 +52,7 @@ settings = {
     'caching_time_image': '30',
     'caching_time_videostill': '35',
     'caching_time_external': '15',
-    'community_host': 'http://localhost:6551/',
+    'community_host': 'http://localhost:6551',
     'community_static_host': 'http://static_community/foo',
     'agatho_host': 'http://localhost:6552/comments',
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
@@ -105,6 +110,8 @@ settings = {
         'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
     'vivi_zeit.web_banner-source': (
         'egg://zeit.web.core/data/config/banner.xml'),
+    'vivi_zeit.web_banner-id-mappings': (
+        'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
     'vivi_zeit.web_navigation': (
         'egg://zeit.web.core/data/config/navigation.xml'),
     'vivi_zeit.web_navigation-services': (
@@ -115,6 +122,8 @@ settings = {
         'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
     'vivi_zeit.web_navigation-footer-links': (
         'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
+    'vivi_zeit.web_servicebox-source': (
+        'egg://zeit.web.core/data/config/servicebox.xml'),
     'vivi_zeit.content.gallery_gallery-types-url': (
         'egg://zeit.web.core/data/config/gallery-types.xml'),
     'vivi_zeit.web_series-source': (
@@ -160,12 +169,9 @@ def app_settings():
         lambda *_: None, settings.iteritems())
 
 
-@pytest.fixture(scope='module')
-def jinja2_env():
-    app = zeit.web.core.application.Application()
-    app.settings = settings.copy()
-    app.configure_pyramid()
-    return app.configure_jinja()
+@pytest.fixture
+def jinja2_env(application):
+    return application.zeit_app.jinja_env
 
 
 class ZODBLayer(plone.testing.zodb.EmptyZODB):
@@ -256,6 +262,7 @@ def debug_application(request):
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     app_settings = settings.copy()
     app_settings['debug.show_exceptions'] = ''
+    app_settings['debug.propagate_jinja_errors'] = ''
     return repoze.bitblt.processor.ImageTransformationMiddleware(
         zeit.web.core.application.Application()({}, **app_settings),
         secret='time'
@@ -378,14 +385,14 @@ def appbrowser(application):
 def image_group_factory():
     class MockImageGroup(dict):
         zope.interface.implements(zeit.content.image.interfaces.IImageGroup)
-        masterimage = None
+        master_image = None
 
     class MockRepositoryImage(object):
 
         def __init__(self, size, name):
             self._size = size
             self.uniqueId = name
-            self.masterimage = None
+            self.master_image = None
 
         def getImageSize(self):  # NOQA
             return self._size

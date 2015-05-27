@@ -598,8 +598,7 @@ def test_article02_uses_esi(selenium_driver, testserver):
 
 def test_article02_should_have_esi_include(testbrowser, testserver):
     browser = testbrowser('%s/artikel/02' % testserver.url)
-    element = browser.cssselect('.wrapper__esi-content')[0]
-    assert element.getchildren()[0].tag == 'include'
+    assert len(browser.cssselect('include')) == 1
 
 
 def test_article_has_linked_copyright(testserver, testbrowser):
@@ -676,3 +675,71 @@ def test_advertorial_article_shows_advertorial_marker(testserver, testbrowser):
         '.advertorial-navigation-title')[0].text == 'Anzeige'
     browser = testbrowser('%s/artikel/01' % testserver.url)
     assert not browser.cssselect('.advertorial-navigation-title')
+
+
+def test_articles_should_have_exact_one_h1(testserver, testbrowser):
+    browser = testbrowser('%s/artikel/01' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/02' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/03' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/04' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/05' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/07' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/08' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/09' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/10' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/header1' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/header2' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/header3' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/header4' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/header5' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+    browser = testbrowser('%s/artikel/header6' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1
+
+
+def test_longform_should_have_exact_one_h1(testserver, testbrowser):
+    browser = testbrowser('%s/artikel/06' % testserver.url)
+    h1s = browser.cssselect('h1')
+    assert len(h1s) == 1

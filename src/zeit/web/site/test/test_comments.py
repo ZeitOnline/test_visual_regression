@@ -1,12 +1,16 @@
+# -*- coding: utf-8 -*-
 import datetime
+import zope.component
 
+import zeit.web.core.interfaces
 import zeit.web.core.template
 
 
-def test_comment_section_should_be_preliminarily_limited_to_20_entries(
-        testbrowser, testserver):
+def test_comment_section_should_be_limited(testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
-    assert len(browser.cssselect('article.comment')) == 20
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    page_size = int(conf.get('comment_page_size', '10'))
+    assert len(browser.cssselect('article.comment')) == page_size
 
 
 def test_comments_should_contain_basic_meta_data(
@@ -32,23 +36,40 @@ def test_comments_get_thread_should_respect_top_level_sort_order(
     thread_most_recent = zeit.web.core.comments.get_thread(
         unique_id, dummy_request, sort='desc')
 
-    assert (thread_chronological['comments'][0]['timestamp'] <
-            thread_chronological['comments'][1]['timestamp'],
+    assert (thread_chronological['comments'][0]['created'] <
+            thread_chronological['comments'][1]['created'],
             'Comments are not chronological.')
 
-    assert (thread_most_recent['comments'][0]['timestamp'] >
-            thread_most_recent['comments'][1]['timestamp'],
+    assert (thread_most_recent['comments'][0]['created'] >
+            thread_most_recent['comments'][1]['created'],
             'Comments are not sorted most recent first.')
 
 
-def test_comment_form_should_be_rendered(
-        testbrowser, testserver):
+def test_comment_form_should_be_rendered(testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/article/01?form=comment' %
                           testserver.url)
     assert len(browser.cssselect('#comment-form')) == 1
 
 
-def test_comment_form_should_be_rendered_through_esi(
-        testbrowser, testserver):
+def test_comment_form_should_be_rendered_through_esi(testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
     assert len(browser.cssselect('include')) == 1
+
+
+def test_comment_pagination_should_work(testbrowser, testserver):
+    browser = testbrowser('%s/zeit-online/article/01?page=2' % testserver.url)
+    section = browser.document.get_element_by_id('comments')
+    pages = section.find_class('pager__page')
+    assert len(pages) == 5
+    assert '--current' in (pages[1].get('class'))
+
+
+def test_comment_sorting_should_work(testbrowser, testserver):
+    browser = testbrowser('%s/zeit-online/article/01?sort=desc' %
+                          testserver.url)
+    comments_body = browser.document.get_element_by_id('js-comments-body')
+    comments = comments_body.cssselect('article')
+    link = browser.cssselect('.comment-section__link-sorting')
+    assert comments[0].get('id') == 'cid-2969196'
+    assert link[0].text_content().strip() == 'Neueste zuerst'
+    assert '/zeit-online/article/01#comments' in link[0].get('href')

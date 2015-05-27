@@ -23,6 +23,13 @@
 			font-size: remify(20px)
 			display: inline
 			margin-bottom: 0
+			text-align: left
+		small
+			color: $zon_mid_grey
+			display: block
+			font-size: remify(12px)
+			font-weight: normal
+			letter-spacing: $zon-letter-spacing-m
 	&__button
 		white-space: nowrap
 		&:after
@@ -52,10 +59,7 @@
 		height: em(14px) // em intended
 
 	&__form
-		margin-left: auto
-		margin-right: auto
-		max-width: remify(700px)
-		padding: 0 $page-padding
+		border-top: 1px solid $zon_lighter_grey
 
 		.comment-form__cancel--hidden
 			display: none

@@ -14,6 +14,7 @@ import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
+import zeit.edit.interfaces
 import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 
@@ -171,6 +172,7 @@ class Image(BaseImage):
 
         # XXX: This is a rather unelegant and inflexible!
         #      But it gets images rolling in beta articles - so wth.
+        #      … and 99% of images in articles are 'large'
         target = model_block.references.target
         if zeit.content.image.interfaces.IImageGroup.providedBy(target):
             target = zeit.web.core.template.closest_substitute_image(
@@ -225,6 +227,7 @@ class Intertitle(object):
 class Raw(object):
 
     def __init__(self, model_block):
+        self.alldevices = 'alldevices' in model_block.xml.keys()
         self.xml = _raw_html(model_block.xml)
 
 
@@ -561,16 +564,22 @@ class BreakingNews(object):
 class Module(object):
     """Base class for RAM-style modules to be used in cp2015 centerpages."""
 
+    zope.interface.implements(zeit.edit.interfaces.IBlock)
+
     def __init__(self, context):
         self.context = context
+        self.layout = getattr(context, 'cpextra', None)
 
     def __hash__(self):
         return self.context.xml.attrib.get(
             '{http://namespaces.zeit.de/CMS/cp}__name__',
-            super(Module, self).__hash__())
+            super(Module, self)).__hash__()
 
-    def __eq__(self, other):
-        return hash(self) == hash(other)
+    @property
+    def layout(self):
+        return getattr(self, '_layout', None)
 
-    def __ne__(self, other):
-        return not self.__eq__(other)
+    @layout.setter
+    def layout(self, value):
+        self._layout = zeit.content.cp.layout.BlockLayout(
+            value, value, areas=[], image_pattern=value)

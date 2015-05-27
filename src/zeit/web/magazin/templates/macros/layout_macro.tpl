@@ -1,3 +1,5 @@
+{% extends 'zeit.web.core:templates/macros/layout_macro.tpl' %}
+
 {% macro breadcrumbs(crumbs) -%}
     <div class="breadcrumbs">
         <div class="breadcrumbs__list is-constrained is-centered">
@@ -40,15 +42,16 @@
     {% endif -%}
 {%- endmacro %}
 
-{% macro main_nav(is_full_width, request, is_advertorial=False) -%}
+{% macro main_nav(is_full_width, request, is_advertorial=False, is_main_h1=True) -%}
+    {% set title_tag = 'h1' if is_main_h1 else 'div' %}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
             <a href="http://{{ request.host }}/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
-                <h1 class="main-nav__logo__wrap">
+                <{{ title_tag }} class="main-nav__logo__wrap">
                     <span class="main-nav__logo__img icon-logo-zmo-large" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
                     <span class="main-nav__logo__img icon-logo-zmo-small"></span>
-                </h1>
+                </{{ title_tag }}>
             </a>
             <div class="main-nav__menu">
                 {% if is_advertorial %}
@@ -165,33 +168,3 @@
         <div style="clear:both"></div>
     </div>
 {%- endmacro %}
-
-{% macro insert_responsive_image(image, image_class, page_type) %}
-
-    {% set alt = ''%}
-    {% set title = ''%}
-
-    {% if image.alt %}
-        {% set alt = image.alt %}
-        {% set title = image.title %}
-    {% elif image.attr_alt %}
-        {% set alt = image.attr_alt %}
-        {% set title = image.attr_title %}
-    {% endif %}
-
-    {% if image %}
-        <!--[if gt IE 8]><!-->
-            <noscript data-src="{{image | default_image_url}}">
-        <!--<![endif]-->
-        {% if page_type == 'article' and image.href %}
-            <a href="{{image.href}}">
-        {% endif %}
-                <img alt="{{alt}}" {% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
-        {% if page_type == 'article' and image.href %}
-            </a>
-        {% endif %}
-        <!--[if gt IE 8]><!-->
-            </noscript>
-        <!--<![endif]-->
-    {% endif %}
-{% endmacro %}

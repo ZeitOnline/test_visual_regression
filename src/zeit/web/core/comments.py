@@ -1,23 +1,24 @@
 # -*- coding: utf-8 -*-
-
-from BeautifulSoup import BeautifulSoup
 import collections
 import datetime
+import logging
+import math
+
+from BeautifulSoup import BeautifulSoup
+import babel.dates
+import beaker.cache
 import lxml.etree
-import repoze.lru
 import requests
 import requests.exceptions
 import zope.component
-import itertools
-import logging
 
 import zeit.cms.interfaces
 
-from zeit.web.core.utils import to_int
 import zeit.web.core.interfaces
+import zeit.web.core.template
+import zeit.web.core.utils
 
 
-cache_maker = repoze.lru.CacheMaker()
 log = logging.getLogger(__name__)
 
 
@@ -94,16 +95,34 @@ def comment_to_dict(comment):
     else:
         in_reply = None
 
-    dts = ('date/year/text()', 'date/month/text()', 'date/day/text()',
-           'date/hour/text()', 'date/minute/text()')
+    tz = babel.dates.get_timezone('Europe/Berlin')
+    created = comment.xpath('created/text()')
 
-    # TODO: Catch name, timestamp and cid unavailabilty in element tree.
+    if created:
+        created = datetime.datetime.fromtimestamp(float(created[0]), tz)
+    else:
+        # legacy code to mimic new "created" timestamp in agatho thread
+        # obsolete since https://github.com/ZeitOnline/community/pull/166
+        dts = ('date/year/text()', 'date/month/text()', 'date/day/text()',
+               'date/hour/text()', 'date/minute/text()')
+        utc = babel.dates.get_timezone('UTC')
+        created = datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)
+                                    ).replace(tzinfo=utc).astimezone(tz)
+        changed = comment.xpath('changed/text()')
+
+        if changed:
+            changed = datetime.datetime.fromtimestamp(float(changed[0]), tz)
+
+            if created.replace(second=59) > changed:
+                created = created.replace(second=changed.second)
+
+    # TODO: Catch name and cid unavailabilty in element tree.
     return dict(
         in_reply=in_reply,
         img_url=picture_url,
         userprofile_url=profile_url,
         name=comment.xpath('author/name/text()')[0],
-        timestamp=datetime.datetime(*(int(comment.xpath(d)[0]) for d in dts)),
+        created=created,
         text=content,
         role=', '.join(roles),
         fans=','.join(fans),
@@ -134,34 +153,86 @@ def request_thread(path):
         return
 
 
-def get_thread(unique_id, destination=None, sort='asc', page=None):
+def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
+    """Return a dict representation of the comment thread of the given
+    article.
+
+    :param destination: URL of the redirect destination
+    :param sort: Sort order of comments, desc or asc
+    :param page: Pagination value
+    :param cid: Comment ID to calculate appropriate pagination
+    :rtype: dict or None
+    """
     thread = get_cacheable_thread(unique_id)
     if thread is None:
         return
 
     # We do not want to touch the references of the cached thread
     thread = thread.copy()
-    thread['comments'] = list(thread['comments'])
+    sorted_tree = thread['sorted_tree'].values()
+    del thread['sorted_tree']
 
-    if not(thread['sort'] == sort):
-        thread['comments'] = _reverse_comments(thread['comments'])
-        thread['sort'] = sort
+    if (sort != 'asc'):
+        sorted_tree = reversed(sorted_tree)
+        thread['sort'] = 'desc'
+
+    comments = []
+    positional_index = {}
+    for main_comment in sorted_tree:
+        positional_index[main_comment[0]['cid']] = len(comments)
+        comments.append(main_comment[0])
+        for sub_comment in main_comment[1]:
+            positional_index[sub_comment['cid']] = len(comments)
+            comments.append(sub_comment)
+
+    thread['comments'] = comments
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
 
-    thread['page'] = page
-    c_len = len(thread['comments'])
-    total = c_len // page_size
-    thread['page_total'] = total if c_len % page_size == 0 else total + 1
+    comment_count = len(thread['comments'])
+    pages = int(math.ceil(float(comment_count) / float(page_size)))
+
+    # sanitize page value
+    if page:
+        try:
+            page = int(page)
+        except ValueError:
+            page = 1
+
+        if page < 1 or page > pages:
+            page = 1
+
+    # find page by cid
+    if cid:
+        try:
+            pos = positional_index[int(cid)] + 1
+            page = int(math.ceil(float(pos) / float(page_size)))
+        except (KeyError, ValueError):
+            pass
+
+    thread['headline'] = '{} {}'.format(
+        comment_count, 'Kommentar' if comment_count == 1 else 'Kommentare')
+    thread['pages'] = {
+        'current': page,
+        'total': pages,
+        'pager': zeit.web.core.template.calculate_pagination(page, pages)
+    }
 
     if page:
-        if page <= thread['page_total']:
-            thread['comments'] = (
-                thread['comments'][(page - 1) * page_size: page * page_size])
-        else:
-            thread['comments'] = []
-            thread['page'] = '{} (invalid)'.format(page)
+        thread['comments'] = (
+            thread['comments'][(page - 1) * page_size: page * page_size])
+
+        if thread['pages']['pager']:
+            first = ((page - 1) * page_size) + 1
+            last = min(comment_count, ((page - 1) * page_size) + page_size)
+
+            if first == last:
+                thread['pages']['title'] = u'Kommentar {} von {}'.format(
+                    first, comment_count)
+            else:
+                thread['pages']['title'] = u'Kommentar {} – {} von {}'.format(
+                    first, last, comment_count)
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
@@ -173,16 +244,8 @@ def get_thread(unique_id, destination=None, sort='asc', page=None):
     return thread
 
 
-@cache_maker.expiring_lrucache(
-    maxsize=1000, timeout=3600, name='comment_thread')
+@beaker.cache.cache_region('long_term', 'comment_thread')
 def get_cacheable_thread(unique_id):
-    """Return a dict representation of the comment thread of the given
-    article.
-
-    :param destination: URL of the redirect destination
-    :param sort: Sort order of comments, desc or asc
-    :rtype: dict or None
-    """
 
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
     thread = request_thread(path)
@@ -203,13 +266,13 @@ def get_cacheable_thread(unique_id):
         return
 
     comment_list = list(comment_to_dict(c) for c in comment_list)
-    comments, index = _sort_comments(comment_list)
+    sorted_tree, index = _sort_comments(comment_list)
 
     try:
         return dict(
-            comments=comments,
+            sorted_tree=sorted_tree,
             index=index,
-            comment_count=to_int(comment_count),
+            comment_count=zeit.web.core.utils.to_int(comment_count),
             sort='asc',
             nid=comment_nid)
     except (IndexError, AttributeError):
@@ -242,30 +305,7 @@ def _sort_comments(comments):
                 log.error("The comment with the cid {} is a reply, but"
                           "no ancestor could be found".format(comment['cid']))
         comment_index[comment['cid']] = comment
-    return (
-        list(itertools.chain(
-            *[[li[0]] + li[1] for li in comments_sorted.values()])),
-        comment_index)
-
-
-def _reverse_comments(comments):
-
-    comment_replies = []
-    comments_reversed = []
-
-    while comments:
-        comment = comments.pop()
-
-        if comment['in_reply']:
-            comment_replies.insert(0, comment)
-        else:
-            comments_reversed.append(comment)
-
-            if len(comment_replies):
-                comments_reversed.extend(comment_replies)
-                comment_replies = []
-
-    return comments_reversed
+    return (comments_sorted, comment_index)
 
 
 def request_counts(*unique_ids):

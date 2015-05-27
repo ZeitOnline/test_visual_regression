@@ -161,3 +161,41 @@
     <div id="iq-artikelanker"></div>
     {% endif -%}
 {%- endmacro %}
+
+
+{% macro use_svg_icon(name, class=None) -%}
+    <svg{% if class %} class="{{ class }}"{% endif %} role="img" aria-labelledby="title">
+        <use xlink:href="{{ request.asset_url('css/web.site/icons.svg') }}#svg-{{ name }}"></use>
+    </svg>
+{%- endmacro %}
+
+
+{% macro insert_responsive_image(image, image_class, page_type) %}
+
+    {% set alt = ''%}
+    {% set title = ''%}
+
+    {% if image.alt %}
+        {% set alt = image.alt %}
+        {% set title = image.title %}
+    {% elif image.attr_alt %}
+        {% set alt = image.attr_alt %}
+        {% set title = image.attr_title %}
+    {% endif %}
+
+    {% if image %}
+        <!--[if gt IE 8]><!-->
+            <noscript data-src="{{image | default_image_url}}">
+        <!--<![endif]-->
+        {% if page_type == 'article' and image.href %}
+            <a href="{{image.href}}">
+        {% endif %}
+                <img alt="{{alt}}" {% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
+        {% if page_type == 'article' and image.href %}
+            </a>
+        {% endif %}
+        <!--[if gt IE 8]><!-->
+            </noscript>
+        <!--<![endif]-->
+    {% endif %}
+{% endmacro %}

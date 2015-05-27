@@ -1,18 +1,15 @@
-.pagination
+.article-pagination
 	font-size: remify(14px)
 	margin-top: remify(50px)
 	margin-bottom: remify(20px)
 	a
 		// normal, hover, active, visited, focus
 		+link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)
-	&__a11y-title
-		+visuallyhidden
 	&__button
 		+zon-button-inky
 		font-weight: normal
 		letter-spacing: 0.1em
 		line-height: remify(18px)
-		margin: 0
 		&--previous
 			&:before
 				content: "\27E8" // \27E9 \2329 \3008
@@ -26,7 +23,7 @@
 		letter-spacing: $zon-letter-spacing-s
 		margin-left: 1em
 
-.pager
+.article-pager
 	letter-spacing: $zon-letter-spacing-m
 	margin: 2em 0 0
 	padding: 0
@@ -35,10 +32,10 @@
 		font-weight: bold
 	&__number
 		display: none
+		color: $zon_grey
 		&:after
-			color: $zon_grey
 			content: "/"
-		a
+		a, span
 			padding: 0 1em
 			display: inline-block
 		&--current
@@ -49,14 +46,53 @@
 	&__all
 		display: inline-block
 
+
+.pager
+	margin: remify(16px 0 32px)
+	&__button
+		+zon-button-inky
+		font-weight: normal
+		letter-spacing: 0.1em
+		line-height: remify(18px)
+		margin: remify(20px 14px 0 0)
+		&--previous
+			&:before
+				content: "\27E8" // \27E9 \2329 \3008
+				padding-right: .5em
+		&--next
+			&:after
+				content: "\27E9" // \27E9 \232A \3009
+				padding-left: .5em
+	&__pages
+		+inline-block
+		font-size: remify(14px)
+		letter-spacing: $zon-letter-spacing-m
+		line-height: 2
+		margin: remify(20px) 0 0 0
+		padding: 0
+	&__page
+		+inline-block
+		color: $zon_light_grey
+		&:before
+			content: "/"
+		&:first-child:before
+			content: none
+		&--current
+			span
+				color: $zon-charcoal
+				font-weight: bold
+		a, span
+			+inline-block
+			padding: 0 .7em
+
 +respond-min($break-tablet-min)
-	.pagination
+	.article-pagination
 		&__button
 			&--previous
 				display: none
 		&__nexttitle
 			display: inline
-	.pager
+	.article-pager
 		line-height: 2
 		margin-top: 7em
 		&__label,
@@ -70,38 +106,7 @@
 			display: inline-block // needed for text-transform to work
 			&:first-letter
 				text-transform: uppercase
-
-
-/* for centerpages */
-.center-pager
-	margin: remify(40px 0)
-	&__next
-		+zon-button-inky
-		font-weight: normal
-		letter-spacing: 0.1em
-		line-height: remify(18px)
-		margin: 0
-		&:after
-			content: "\27E9" // \27E9 \232A \3009
-			padding-left: .5em
-	&__pages
-		+inline-block(baseline)
-		padding-left: remify(18px)
-	&__page
-		+inline-block
-		color: $zon_dark_grey
-		font-size: remify(14px)
-		&:before
-			+inline-block(baseline)
-			content: " / "
-			color: $zon_light_grey
-			font-weight: normal
-			margin: remify(0 14px)
-		&:first-child:before
-			content: ""
-			display: none
-		&--current
-			color: $zon-charcoal
-			font-weight: bold
-		&--ellipsis
-			color: $zon_light_grey
+	.pager
+		&__page
+			a, span
+				padding: 0 1.2em

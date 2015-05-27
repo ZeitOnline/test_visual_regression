@@ -57,12 +57,9 @@
 
 {% macro liveblog(obj) -%}
     {% if obj.blog_id -%}
-        <div class="wrapper__esi-content is-constrained is-centered">
+        <div class="is-constrained is-centered">
             {# TODO: We should mock the liveblog backend for local testing. #}
-            <esi:include src="http://www.zeit.de/liveblog-backend/{{ obj.blog_id }}.html" onerror="continue"></esi:include>
-            <esi:remove>
-                <div data-type="esi-content"></div>
-            </esi:remove>
+            <esi:include src="http://www.zeit.de/liveblog-backend/{{ obj.blog_id }}.html" onerror="continue" />
         </div>
     {%- endif %}
 {%- endmacro %}
@@ -216,7 +213,7 @@
                 {% if loop -%}
                 <span class="figure__index">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
-                <span class="figure__text">{{ obj.caption | safe | hide_none }}</span>
+                <span class="figure__text">{{ obj.caption | hide_none | safe }}</span>
                 {% if obj.copyright|count and obj.copyright[0][0] != '©' %}
                 <span class="figure__copyright">
                     {%- if obj.copyright[0][1] -%}
@@ -236,7 +233,7 @@
 {% macro headerimage(obj) -%}
     <div class="scaled-image is-pixelperfect article__head-image">
         {{ lama.insert_responsive_image(obj) }}
-    </div>{{ obj.caption | safe | hide_none }}{{ obj.copyright }}
+    </div>{{ obj.caption | hide_none | safe }}{{ obj.copyright }}
 {%- endmacro %}
 
 {% macro video(obj) -%}
@@ -289,7 +286,7 @@
             {% endif -%}
             <div class="comment__head__meta">
                 <a class="comment__head__meta__name" href="{{ comment.userprofile_url }}">{{ comment.name|e }}</a>
-                <a href="#cid-{{ comment.cid }}" class="comment__head__meta__date{% if not comment.is_promoted %} js-scroll{% endif %}">{{ comment.timestamp | format_date_ago() }}</a>
+                <a href="#cid-{{ comment.cid }}" class="comment__head__meta__date{% if not comment.is_promoted %} js-scroll{% endif %}">{{ comment.created | format_comment_date }}</a>
                 {% if comment.role -%}
                 <div class="comment__head__meta__label">{{ comment.role }}</div>
                 {% endif -%}
@@ -318,15 +315,15 @@
             </div>
             {%- endif %}
             <div class="article__sharing__services blind">
-                <a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url|e }}" target="_blank" class="article__sharing__item">
+                <a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.int.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_int&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-facebook"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.facebook) }}</span>
                 </a>
-                <a href="http://twitter.com/home?status={{ view.content_url|e }}" target="_blank" class="article__sharing__item">
+                <a href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&via=zeitonline&url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.twitter.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=twitter_zonaudev_int&utm_campaign=twitter_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-twitter"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.twitter) }}</span>
                 </a>
-                <a href="https://plus.google.com/share?url={{ view.content_url|e }}" target="_blank" class="article__sharing__item">
+                <a href="https://plus.google.com/share?url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.gplus.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=gplus_zonaudev_int&utm_campaign=gplus_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
                     <span class="article__sharing__services__icon icon-sharebox-google"></span>
                     <span class="article__sharing__services__text">{{ ' '.join(obj.linkreach.googleplus) }}</span>
                </a>
