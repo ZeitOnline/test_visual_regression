@@ -255,6 +255,8 @@ class ContentTooShort(Exception):
 class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
                       zeit.web.core.utils.nsdict):
 
+    master_image = None
+
     def __init__(self, video):
         super(VideoImageGroup, self).__init__()
         self.uniqueId = '{}/imagegroup/'.format(video.uniqueId)
@@ -298,6 +300,9 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
             image.alt = (video.title or '').strip('\n')
             image.uniqueId = '{}{}'.format(self.uniqueId, file_name)
             self[file_name] = image
+
+    def __repr__(self):
+        return object.__repr__(self)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
