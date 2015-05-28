@@ -41,6 +41,34 @@
         areas="solo duo major minor ranking parquet"
         />
 
+    <layout
+        id="zon-short"
+        title="Kurzteaser (für News)"
+        image_positions="true"
+        areas="news"
+        />
+
+    <layout
+        id="zon-column"
+        title="Kolumnenteaser"
+        image_positions="true"
+        areas="major minor"
+        />
+
+    <layout
+        id="zon-blog"
+        title="Blogteaser"
+        image_positions="true"
+        areas="major minor"
+        />
+
+    <layout
+        id="zon-series"
+        title="Serienteaser"
+        image_positions="true"
+        areas="major minor"
+        />
+
     <!-- Legacy teaser formats -->
     <layout
         id="leader"

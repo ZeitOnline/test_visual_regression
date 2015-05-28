@@ -23,4 +23,7 @@
     <region kind="solo" title="Ranking">
         <area kind="ranking"/>
     </region>
+    <region kind="solo" title="News">
+        <area kind="news"/>
+    </region>
 </regions>
