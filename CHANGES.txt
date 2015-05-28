@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - ZON-1744: Enable friedbert to memcache comment threads
 
+- ZON-1566: Implement video solo page view and basic template
+
 - Remove ESI parser javascript library
 
 - Hotfix: Repair printbox
