@@ -139,6 +139,12 @@
 {%- endif %}
 {%- endmacro %}
 
+
+{% macro use_svg_icon(name, class=None) -%}
+    {{ lama_core.use_svg_icon(name, class) }}
+{%- endmacro %}
+
+
 {% macro raw(obj) -%}
     {% if obj.alldevices %}
     <div class="raw">{{ obj.xml | safe }}</div>
