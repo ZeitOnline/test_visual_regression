@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.web',
     url='https://github.com/ZeitOnline/zeit.web',
-    version='1.24.dev0',
+    version='1.25.dev0',
     author=(
         'Thomas Baumann, Nico Brünjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -45,7 +45,7 @@ setup(
         'wsgiproxy',
         'zeit.brightcove',
         'zeit.cms',
-        'zeit.connector',
+        'zeit.connector >= 2.6.2',
         'zeit.content.article',
         'zeit.content.author >= 2.3.0',
         'zeit.content.cp >= 3.0.0b14',

@@ -1,0 +1,11 @@
+<weighted-tags xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <tag freq="422" lexical_value="Diät" type="free" url_value="diaet">Diät</tag>
+    <tag freq="61" lexical_value="Auster, Paul" type="Person" url_value="paul-auster">Paul Auster</tag>
+    <tag freq="25" lexical_value="Ausdauersport" type="free" url_value="ausdauersport">Ausdauersport</tag>
+    <tag freq="77" lexical_value="Bayerische Landesbank" type="Organization" url_value="bayerische-landesbank">Bayerische Landesbank</tag>
+    <tag freq="207" lexical_value="Jugendkriminalität" type="free" url_value="jugendkriminalitaet">Jugendkriminalität</tag>
+    <tag freq="7" lexical_value="Tawil, Adel" type="Person" url_value="adel-tawil">Adel Tawil</tag>
+    <tag freq="92" lexical_value="Umbrien" type="Location" url_value="umbrien">Umbrien</tag>
+    <tag freq="19509" lexical_value="Ukraine" type="Location" url_value="ukraine">Ukraine</tag>
+    <tag freq="10717" lexical_value="Merkel, Angela" type="Person" url_value="angela-merkel">Angela Merkel</tag>
+</weighted-tags>
