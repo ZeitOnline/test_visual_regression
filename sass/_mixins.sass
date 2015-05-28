@@ -258,8 +258,8 @@
 =zon-button-inky
 	+zon-button($zon_dark_grey, $zon_charcoal, $zon_dark_grey, $zon_charcoal, $white, $white, $white, $margin: 0, $padding: remify(5px) 1em remify(4px))
 
-=zon-button-dark
-	+zon-button(rgba(0,0,0, 0.2), rgba(0,0,0, 0.5), $zon_mid_grey, $zon-alto, $zon_lighter_grey, $white, $zon-alto)
+=zon-button-dark($background-color: rgba(0,0,0, 0.2), $hover-background-color: rgba(0,0,0, 0.5), $border-color: $zon_mid_grey, $hover-border-color: $zon-alto, $color: $zon_lighter_grey, $hover-color: $white, $visited-color: $zon-alto, $font-size: remify(13px), $margin: remify(14px 6px), $padding: remify(10px 18px))
+	+zon-button($background-color, $hover-background-color, $border-color, $hover-border-color, $color, $hover-color, $visited-color, $font-size, $margin, $padding)
 
 =zon-button-light
 	+zon-button(rgba(255,255,255, 0.5), rgba(255,255,255, 0.8), $zon_light_grey, $zon_mid_grey, $zon-charcoal, $black, $zon-charcoal, $margin: 0)
