@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1432: Add Servicebox as CP-Extra
 
+- ZON-1692: Implement topic teaser (Dossier-Teaser)
+
 
 1.24 (2015-05-26)
 -----------------
