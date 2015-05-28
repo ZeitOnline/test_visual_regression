@@ -2,7 +2,6 @@
 import logging
 import os.path
 
-import PIL
 import grokcore.component
 import lxml.etree
 import lxml.html
@@ -141,8 +140,17 @@ class BaseImage(object):
 
     @property
     def ratio(self):
-        width, height = PIL.Image.open(self.image.open()).size
-        return float(width) / float(height)
+        try:
+            width, height = self.image.getImageSize()
+            return float(width) / float(height)
+        except (TypeError, ZeroDivisionError):
+            return
+
+    def getImageSize(self):  # NOQA
+        try:
+            return self.image.getImageSize()
+        except AttributeError:
+            return
 
 
 @grokcore.component.implementer(IFrontendBlock)
@@ -257,16 +265,11 @@ class BaseVideo(object):
 
     @property
     def highest_rendition(self):
-        try:
-            highest_rendition = self.renditions[0]
-            for rendition in self.renditions:
-                if highest_rendition.frame_width < rendition.frame_width:
-                    highest_rendition = rendition
-            return highest_rendition.url
-        except AttributeError:
-            logging.exception('No renditions set')
-        except TypeError:
-            logging.exception('Renditions are propably empty')
+        if self.renditions:
+            high = sorted(self.renditions, key=lambda r: r.frame_width).pop()
+            return getattr(high, 'url', '')
+        else:
+            logging.exception('No video renditions set.')
 
 
 @grokcore.component.implementer(IFrontendBlock)
