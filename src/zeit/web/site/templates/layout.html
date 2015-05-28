@@ -15,6 +15,7 @@
     {% endif -%}
     <meta name="robots" content="{{ view.meta_robots }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" id="viewport-meta">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="apple-itunes-app" content="app-id=448633376">
     <meta name="author" content="ZEIT ONLINE GmbH, Hamburg, Germany">
     <meta name="application-name" content="ZEIT ONLINE">
@@ -52,6 +53,8 @@
 
     {# Modernizr -#}
     <script src="{{ request.asset_url('js/libs/modernizr-custom.js') }}"></script>
+    {# SVG4everybody TODO: replace Grunticon completely, check IE8 Fallback -#}
+    <script src="{{ request.asset_url('js/vendor/svg4everybody.min.js') }}"></script>
     {# Grunticon SVG -#}
     <script>
         {%- include "zeit.web.static:css/icons/grunticon.loader.js" ignore missing -%}
