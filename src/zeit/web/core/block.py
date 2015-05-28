@@ -68,7 +68,8 @@ class Paragraph(object):
 
 
 @grokcore.component.implementer(IFrontendBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IUnorderedList)
+@grokcore.component.adapter(
+    zeit.content.article.edit.interfaces.IUnorderedList)
 class UnorderedList(Paragraph):
 
     def __init__(self, model_block):
