@@ -224,7 +224,7 @@ class Article(zeit.web.core.view.Content):
             self.context, ('940x400', 'zmo-nextread')[int(is_zmo)])
         if not nextread.teasers:
             return
-        if nextread.layout != 'minimal':
+        if nextread.layout.id != 'minimal':
             for i in zeit.web.core.interfaces.ITeaserSequence(nextread):
                 i.image and self._copyrights.setdefault(
                     i.image.image_group, i.image)
