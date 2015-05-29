@@ -1,20 +1,29 @@
 <div class="{{ 'cp-area' | with_mods(area.kind) }}">
+<div class="newsticker">
     {% block before_module_list %}
-    
-Schlagzeilen
+        <div class="newsticker__head" id="newsticker">
+            <span class="newsticker__title">{{ area.title }}</span>
+            <a class="newsticker__link" href="foo">Alle Schlagzeilen</a>
+        </div>
     {% endblock %}
-    {% for module in area.values() | map('get_module') -%}
-        {% set teaser = module | first_child %}
-        {% set layout = module | get_layout %}
-        {% set module_loop = loop %}
-        {% block before_module_include scoped %}{% endblock %}
-        {% include
-            ["zeit.web.site:templates/inc/module/{0}_{1}.html".format(layout, area.kind),
-             "zeit.web.site:templates/inc/teaser/{0}_{1}.tpl".format(layout, area.kind),
-             "zeit.web.site:templates/inc/module/{}.html".format(layout),
-             "zeit.web.site:templates/inc/teaser/{}.tpl".format(layout),
-             "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing %}
-        {% block after_module_include scoped %}{% endblock %}
+    {% for column in area.values() | map('get_module') | slice(2) -%}
+        <div class="newsticker__column newsticker__column-{{ loop.index }}">
+        {% for module in column %} 
+            <article class="newsteaser">
+                <time class="newsteaser__time">11:00</time>
+                <div class="newsteaser__text">
+                    <a class="newsteaser__combined-link" title="Big Data - Schwanger ohne digitale Spuren" href="http://localhost:9090/artikel/autorenbox">
+                        <span class="newsteaser__kicker">Big Data</span>
+                        <span class="newsteaser__title">Schwanger ohne digitale
+                        Spuren. Hier noch etwas mehr Text, damit es zwei Zeilen
+                        werden</span>
+                    </a>
+                    <span class="newsteaser__product">ZEDE</span>
+                </div>
+            </article>
+        {% endfor %}
+        </div>
     {% endfor %}
     {% block after_module_list %}{% endblock %}
+</div>
 </div>

@@ -3,10 +3,10 @@
 
 {% block layout %}teaser-short{% endblock %}
 {% block teaser_time %}
-   XXXXXXTIME XXXX {{ cp.include_teaser_datetime(teaser, self.layout()) }}
+   {{ cp.include_teaser_time(teaser, self.layout()) }}
 {% endblock %}
 {% block teaser_product %}
-   ZEI
+   <span class="teaser-short__product">{{ teaser.product.id }}</span>
 {% endblock teaser_product %}
 
 {% block teaser_media_position_before_title %}

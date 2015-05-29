@@ -14,9 +14,6 @@
         <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
             {% block teaser_link %}
             <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | translate_url }}">
-                {% block teaser_time %}
-                   {# Use this for short teaser #}
-                {% endblock %}
                 {% block teaser_kicker %}
                 <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
                 {% endblock %}
