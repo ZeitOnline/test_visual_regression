@@ -2,18 +2,28 @@
 
 {%- set module = view.nextread -%}
 {% if module is iterable -%}
-<section class="nextread" id="nextread">
     {% for teaser in module %}
     {% set image = get_teaser_image(module, teaser) %}
-    <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | translate_url }}">
-        <div>{{ module.lead }}</div>
-        {% include "zeit.web.site:templates/inc/teaser_asset/"+
-            teaser | auto_select_asset | block_type +
-            "_zon-fullwidth.tpl" ignore missing with context %}
-        <div>{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</div>
-        <div>{{ teaser.teaserTitle or teaser.title | hide_none }}</div>
-        <div class="nextread__metadata">{{ cp.include_teaser_datetime(teaser, 'nextread') }}</div>
+    {% set has_default_image = get_default_image_id() in image.uniqueId %}
+<section class="nextread {% if has_default_image %}nextread--without-image{% endif %}" id="nextread">
+    <a class="nextread__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | translate_url }}">
+        <div class="nextread__lead {% if has_default_image %}nextread__lead--without-image{% endif %}">{{ module.lead }}</div>
+        {% if image %}
+            {%- if not has_default_image -%}
+                {% set module_layout = 'nextread' %}
+                {% include "zeit.web.site:templates/inc/teaser_asset/"+
+                    teaser | auto_select_asset | block_type +
+                    "_zon-nextread.tpl" ignore missing with context %}
+            {%- endif -%}
+        {%- endif -%}
+        <div class="nextread__helper {% if has_default_image %}nextread__helper--without-image{% endif %}">
+            <div class="nextread__inner-helper {% if has_default_image %}nextread__inner-helper--without-image{% endif %}">
+                <div class="nextread__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</div>
+                <div class="nextread__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</div>
+                <div class="nextread__metadata">{{ cp.include_teaser_datetime(teaser, 'nextread') }}</div>
+            </div>
+        </div>
     </a>
-    {% endfor %}
 </section>
+    {% endfor %}
 {% endif %}
