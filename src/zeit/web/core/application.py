@@ -22,6 +22,12 @@ import zope.configuration.xmlconfig
 import zope.interface
 import zope.interface.declarations
 
+from zeit.content.article.interfaces import IArticle
+from zeit.content.cp.interfaces import ICenterPage
+from zeit.content.dynamicfolder.interfaces import IRepositoryDynamicFolder
+from zeit.content.gallery.interfaces import IGallery
+from zeit.content.gallery.interfaces import IGalleryMetadata
+from zeit.magazin.interfaces import IArticleTemplateSettings
 import zeit.connector
 import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
@@ -34,7 +40,7 @@ from zeit.web.core.article import IFeatureLongform
 from zeit.web.core.article import ILongformArticle
 from zeit.web.core.article import IPhotoclusterArticle
 from zeit.web.core.article import IShortformArticle
-from zeit.web.core.gallery import IGallery
+from zeit.web.core.gallery import IGallery as IWebGallery
 from zeit.web.core.gallery import IProductGallery
 import zeit.web.core
 import zeit.web.core.banner
@@ -437,27 +443,29 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             # When zeit.content.cp is in production for everybody,
             # we can remove this. (RD)
             try:
-                if (zeit.content.cp.interfaces.ICenterPage.providedBy(
-                        context)):
-                    tdict['context'] = context = context.__parent__[(
-                        '{}.cp2015'.format(context.__name__))]
+                if ICenterPage.providedBy(context):
+                    tdict['context'] = context = context.__parent__[
+                        '{}.cp2015'.format(context.__name__)]
             except (KeyError, TypeError):
                 pass
 
-            if zeit.content.article.interfaces.IArticle.providedBy(context):
+            if IArticle.providedBy(context):
                 self._handle_article(context, request)
-            elif zeit.content.cp.interfaces.ICenterPage.providedBy(context):
+            if ICenterPage.providedBy(context):
                 self._handle_centerpage(context, request)
-            elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
+            if IGallery.providedBy(context):
                 self._handle_gallery(context, request)
+            if IRepositoryDynamicFolder.providedBy(context):
+                tdict['traversed'] += (tdict['view_name'],)
+                tdict['context'] = context = context[tdict['view_name']]
+                tdict['view_name'] = ''
             return self._change_viewname(tdict)
         except OSError as e:
             if e.errno == 2:
                 raise pyramid.httpexceptions.HTTPNotFound()
 
     def _handle_article(self, context, request):
-        template = zeit.magazin.interfaces.IArticleTemplateSettings(
-            context).template
+        template = IArticleTemplateSettings(context).template
         # ToDo: Remove when Longform will be generally used on
         # www.zeit.de. By then do not forget to remove marker
         # interfaces from uniqueID http://xml.zeit.de/feature (RD)
@@ -473,11 +481,10 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             zope.interface.alsoProvides(context, IPhotoclusterArticle)
 
     def _handle_gallery(self, context, request):
-        meta = zeit.content.gallery.interfaces.IGalleryMetadata(context)
-        if meta.type == 'zmo-product':
+        if IGalleryMetadata(context).type == 'zmo-product':
             zope.interface.alsoProvides(context, IProductGallery)
         else:
-            zope.interface.alsoProvides(context, IGallery)
+            zope.interface.alsoProvides(context, IWebGallery)
 
     def _handle_centerpage(self, context, request):
         if urlparse.urlparse(context.uniqueId).path.startswith('/suche/index'):
