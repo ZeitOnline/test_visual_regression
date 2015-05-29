@@ -11,6 +11,12 @@ Change log for zeit.web
 - Add ordered and unordered list elements
 
 
+1.24.1 (2015-05-29)
+-------------------
+
+- HOTFIX: Skip over missing parquet block layouts
+
+
 1.24 (2015-05-26)
 -----------------
 
