@@ -505,7 +505,7 @@ class NextreadTeaserBlock(object):
             zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout)
         self.image_pattern = image_pattern
         # TODO: Nextread lead should be configurable with ZMO-185.
-        self.lead = 'Lesen Sie jetzt:'
+        self.lead = 'Lesen Sie jetzt'
         self.multitude = 'multi' if len(self) - 1 else 'single'
 
     @property
