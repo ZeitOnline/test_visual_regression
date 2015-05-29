@@ -354,3 +354,30 @@ def test_article_skips_raw_box_not_suitable_for_alldevices(
         testbrowser, testserver):
     browser = testbrowser('{}/zeit-online/article/02'.format(testserver.url))
     assert 'cYhaIIyjjxg1W' not in browser.contents
+
+
+def test_nextread_is_placed_on_article_02(testserver, testbrowser):
+    select = testbrowser('{}/zeit-online/article/02'.format(
+        testserver.url)).cssselect
+    assert len(select('div#nextread')) == 1
+
+
+def test_nextread_is_responsive(selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/article/02' % testserver.url)
+    nextread = driver.find_element_by_id('nextread')
+
+    assert nextread.is_displayed(), 'Nextread missing'
+
+    if screen_size[0] == 320:
+        assert nextread.size.get('height') > 137
+
+    if screen_size[0] == 520:
+        assert nextread.size.get('height') > 220
+
+    if screen_size[0] == 768:
+        assert nextread.size.get('height') < 350
+
+    if screen_size[0] == 980:
+        assert nextread.size.get('height') < 450
