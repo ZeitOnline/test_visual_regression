@@ -135,7 +135,7 @@
     <title>Tschüss, Sofi, war schön mit Dir!</title>
     <subtitle>Und da ist sie schon wieder weg, die Sonnenfinsternis. Aber macht ja nichts. Wir haben das Beste hier gesammelt. Der Blick ins Live-Blog lohnt sich noch, versprochen.</subtitle>
     <division type="page">
-      <image src="http://xml.zeit.de/zeit-online/liveblog/sonnenfinsternis-bilder/sonnenfinsternis-5/sonnenfinsternis-5-540x304.jpg" type="jpg" title="Sonnenfinsternis" alt="Sonnenfinsternis" align="left" publication-date="" expires="2015-06-20T09:21:29+00:00" layout="large" is_empty="False">
+      <image base-id="http://xml.zeit.de/zeit-online/liveblog/sonnenfinsternis-bilder/sonnenfinsternis-5/" type="jpg" title="Sonnenfinsternis" alt="Sonnenfinsternis" align="left" publication-date="" expires="2015-06-20T09:21:29+00:00" layout="large" is_empty="False">
         <bu>Die Sonnenfinsternis in Liverpool
 </bu>
         <copyright>© Peter Byrne/dpa</copyright>
