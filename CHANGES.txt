@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - Add ordered and unordered list elements
 
+- ZON-1597: Add focussed nextread
+
 
 1.24.1 (2015-05-29)
 -------------------
