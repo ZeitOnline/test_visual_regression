@@ -557,17 +557,17 @@ def get_google_tag_manager_host():
 
 
 @zeit.web.register_global
-def list(iterable):
+def to_list(iterable):
     return types.ListType(iterable)
 
 
 @zeit.web.register_global
-def tuple(iterable):
+def to_tuple(iterable):
     return types.TupleType(iterable)
 
 
 @zeit.web.register_global
-def dict(mapping):
+def to_dict(mapping):
     return types.DictType(mapping)
 
 
