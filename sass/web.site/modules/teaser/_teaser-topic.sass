@@ -4,6 +4,7 @@
 
 .teaser-topic-main
 	@extend %teaser
+	+font-smoothing
 	margin: $petite 0
 	padding: 0
 	position: relative
@@ -20,7 +21,6 @@
 			margin-top: remify(15px)
 	&__inner-helper
 		left: 0
-		padding: 0
 		position: absolute
 		text-align: center
 		top: 50%
@@ -42,7 +42,6 @@
 		font-size: $font-s--rem
 		letter-spacing: $zon-letter-spacing-l
 		text-transform: uppercase
-		-webkit-font-smoothing: antialiased
 		+respond-min($break-tablet-min)
 			font-size: $font-m--rem
 		+respond-min($break-desktop-min)
@@ -79,17 +78,8 @@
 			max-width: 100%
 			position: static
 	&__readmore
-		background-color: rgba(0, 0, 0, 0.5)
-		border-radius: 5px
-		border: 2px solid $zon_mid_grey
-		color: $white
-		font-family: TabletGothic
-		font-size: $font-ss--rem
-		font-weight: bold
-		letter-spacing: $zon-letter-spacing-l
-		padding: remify(11px 41px)
-		text-transform: uppercase
-		-webkit-font-smoothing: antialiased
+		+zon-button-dark($margin: 0, $padding: remify(10px 42px))
+
 	&__title
 		@extend %teaser-title
 		color: $white
@@ -100,8 +90,8 @@
 		+respond-min($break-desktop-min)
 			font-size: $font-xxxl--rem
 			line-height: 1.28em
-	&__title:hover
-		color: $white
+		&:hover
+			color: $white
 
 .teaser-topic-item
 	display: none
@@ -132,13 +122,14 @@
 			font-size: $font-mm--rem
 	&__title
 		@extend %teaser-title
+		+font-smoothing
 		color: $white
 		line-height: 1.12em
 		letter-spacing: $zon-letter-spacing-m
 		+respond-min($break-tablet-min)
 			font-size: $font-l--rem
-	&__title:hover
-		color: $white
+		&:hover
+			color: $white
 
 .teaser-topic-item:last-of-type
 	+respond-min($break-tablet-min)

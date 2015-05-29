@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1692: Implement topic teaser (Dossier-Teaser)
 
+- Add ordered and unordered list elements
+
 
 1.24 (2015-05-26)
 -----------------
@@ -21,8 +23,6 @@ Change log for zeit.web
 - ZON-1569: Upgrade author column images to image groups
 
 - ZON-1532: Render raw elements enabled for all devices
-
-- Remove ESI parser javascript library
 
 - ZON-1253: Safeguard jinja tests, modifiers and globals
 
