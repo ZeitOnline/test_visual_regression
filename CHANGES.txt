@@ -4,7 +4,21 @@ Change log for zeit.web
 1.25 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1749: Add dynamic centerpage collection test folder
+
+- ZON-1432: Add Servicebox as CP-Extra
+
+- ZON-1692: Implement topic teaser (Dossier-Teaser)
+
+- Add ordered and unordered list elements
+
+- ZON-1597: Add focussed nextread
+
+
+1.24.1 (2015-05-29)
+-------------------
+
+- HOTFIX: Skip over missing parquet block layouts
 
 
 1.24 (2015-05-26)
@@ -18,8 +32,6 @@ Change log for zeit.web
 
 - ZON-1532: Render raw elements enabled for all devices
 
-- Remove ESI parser javascript library
-
 - ZON-1253: Safeguard jinja tests, modifiers and globals
 
 - ZON-1345: Article body: display images w/ layout 'small' correctly
@@ -29,7 +41,6 @@ Change log for zeit.web
 - Remove ESI parser javascript library
 
 - Hotfix: Repair printbox
-
 
 
 1.23.1 (2015-05-20)

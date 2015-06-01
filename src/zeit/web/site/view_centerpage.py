@@ -303,7 +303,7 @@ class LegacyCenterpage(Centerpage):
                             (area, block),
                             zeit.content.cp.interfaces.IRenderedArea)
                     except (zope.component.interfaces.ComponentLookupError,
-                            TypeError):
+                            AttributeError, TypeError):
                         continue
                 regions.append(LegacyRegion([legacy], kind='parquet'))
 

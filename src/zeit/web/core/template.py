@@ -4,9 +4,9 @@ import logging
 import mimetypes
 import re
 import time
+import types
 import urllib
 import urlparse
-
 import jinja2
 import babel.dates
 import pyramid.threadlocal
@@ -240,6 +240,7 @@ scales = {
     'zon-article-large': (820, 462),
     'zon-printbox': (320, 234),
     'zon-printbox-wide': (320, 148),
+    'zon-topic': (980, 418),
     'zon-column': (300, 400),
     'brightcove-still': (580, 326),
     'brightcove-thumbnail': (120, 67),
@@ -514,6 +515,12 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
 
 
 @zeit.web.register_global
+def get_default_image_id():
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return conf.get('default_teaser_images')
+
+
+@zeit.web.register_global
 def create_image_url(teaser_block, image):
     image_pattern = teaser_block.layout.image_pattern
     image_url = default_image_url(
@@ -567,6 +574,21 @@ def attr_safe(text):
 def get_google_tag_manager_host():
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get('google_tag_manager_host')
+
+
+@zeit.web.register_global
+def to_list(iterable):
+    return types.ListType(iterable)
+
+
+@zeit.web.register_global
+def to_tuple(iterable):
+    return types.TupleType(iterable)
+
+
+@zeit.web.register_global
+def to_dict(mapping):
+    return types.DictType(mapping)
 
 
 @zeit.web.register_global

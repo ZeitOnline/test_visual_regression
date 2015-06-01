@@ -783,3 +783,20 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     browser = testbrowser("{}?p=2".format(url))
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
+
+
+def test_servicebox_present_in_wide_breakpoints(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/index' % testserver.url)
+    servicebox = driver.find_element_by_id('servicebox')
+
+    if screen_size[0] == 320:
+        assert servicebox.is_displayed() is False, 'Servicebox displayed'
+    if screen_size[0] == 520:
+        assert servicebox.is_displayed() is False, 'Servicebox displayed'
+    if screen_size[0] == 768:
+        assert servicebox.is_displayed() is True, 'Servicebox not displayed'
+    if screen_size[0] == 980:
+        assert servicebox.is_displayed() is True, 'Servicebox not displayed'

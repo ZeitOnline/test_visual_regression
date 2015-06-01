@@ -42,7 +42,7 @@
     </h2>
 {%- endmacro %}
 
-{% macro paragraph(html, class) -%}
+{% macro paragraph(html) -%}
   {#
     html = (u'Sieben Begriffe für ein und denselben <i>Gegenstand</i> – das ist '
             u'deutsches Kulturgut. <b>Dialekte</b> gehören schon immer zu diesem '
@@ -50,8 +50,30 @@
             u'Teilung hat zur <a href="#">sprachlichen Vielfalt</a> beigetragen.')
   #}
     <p class="paragraph article__item">
-        {{ html|safe }}
+        {{ html | safe }}
     </p>
+{%- endmacro %}
+
+{% macro unorderedlist(html) -%}
+  {#
+    html = (u'<li>And I will <i>strike down</i> upon thee with <em>great vengeance</em></li>'
+            u'<li>and <b>furious anger</b> those who <strong>would</strong> attempt</li>'
+            u'<li>to poison and destroy <a href="#">My brothers</a>.</li>')
+  #}
+    <ul class="list article__item">
+        {{ html | safe }}
+    </ul>
+{%- endmacro %}
+
+{% macro orderedlist(html) -%}
+  {#
+    html = (u'<li>And I will <i>strike down</i> upon thee with <em>great vengeance</em></li>'
+            u'<li>and <b>furious anger</b> those who <strong>would</strong> attempt</li>'
+            u'<li>to poison and destroy <a href="#">My brothers</a>.</li>')
+  #}
+    <ol class="list article__item">
+        {{ html | safe }}
+    </ol>
 {%- endmacro %}
 
 {% macro place(item) -%}
@@ -116,6 +138,12 @@
     </aside>
 {%- endif %}
 {%- endmacro %}
+
+
+{% macro use_svg_icon(name, class=None) -%}
+    {{ lama_core.use_svg_icon(name, class) }}
+{%- endmacro %}
+
 
 {% macro raw(obj) -%}
     {% if obj.alldevices %}

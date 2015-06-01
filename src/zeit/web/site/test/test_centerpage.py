@@ -3,6 +3,7 @@
 import datetime
 
 import pytest
+import pysolr
 import mock
 
 import zeit.cms.interfaces
@@ -164,3 +165,16 @@ def test_centerpage_should_gracefully_skip_all_broken_references(
     assert not browser.cssselect('.teaser-collection .teasers *')
     assert not browser.cssselect('.main__parquet .parquet *')
     assert not browser.cssselect('.main__snapshot *')
+
+
+def test_dynamic_centerpage_collection_should_output_teasers(
+        monkeypatch, application):
+    def search(self, q, **kw):
+        return pysolr.Results(
+            [{'uniqueId': 'http://xml.zeit.de/artikel/0%s' % i}
+                for i in range(1, 9)], 8)
+
+    monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    assert len(view.regions[0].values()[0]) == 8

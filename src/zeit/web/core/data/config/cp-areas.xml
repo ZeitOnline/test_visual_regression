@@ -8,4 +8,5 @@
     <area kind="parquet">parquet</area>
     <area kind="ranking">ranking</area>
     <area kind="news">news</area>
+    <area kind="topic">topic</area>
 </areas>

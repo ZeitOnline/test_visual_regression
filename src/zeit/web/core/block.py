@@ -68,6 +68,23 @@ class Paragraph(object):
 
 
 @grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(
+    zeit.content.article.edit.interfaces.IUnorderedList)
+class UnorderedList(Paragraph):
+
+    def __init__(self, model_block):
+        # Vivi does not allow nested lists, so we don't care about that for now
+        additional_elements = ['li']
+        self.html = _inline_html(model_block.xml, additional_elements)
+
+
+@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IOrderedList)
+class OrderedList(UnorderedList):
+    pass
+
+
+@grokcore.component.implementer(IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPortraitbox)
 class Portraitbox(object):
 
@@ -412,8 +429,11 @@ def _raw_html(xml):
     return transform(xml)
 
 
-def _inline_html(xml):
+def _inline_html(xml, elements=None):
     allowed_elements = 'a|span|strong|img|em|sup|sub|caption|br'
+    if elements:
+        elements.append(allowed_elements)
+        allowed_elements = '|'.join(elements)
     filter_xslt = lxml.etree.XML("""
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -490,39 +510,29 @@ def _inline_html(xml):
         return
 
 
-class NextreadLayout(object):
-
-    """Implementation to match layout sources from centerpages."""
-
-    def __init__(self, **kwargs):
-        self.id = kwargs.get('id')
-        self.image_pattern = 'zmo-nextread'
-
-    def __eq__(self, value):
-        return self.id == value
-
-    def __ne__(self, value):
-        return self.id != value
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.INextreadTeaserBlock)
-@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 class NextreadTeaserBlock(object):
-
     """Teaser block for nextread teasers in articles."""
 
-    def __init__(self, context):
+    zope.interface.implements(zeit.web.core.interfaces.INextreadTeaserBlock)
+
+    def __init__(self, context, image_pattern='default'):
         self.teasers = zeit.magazin.interfaces.INextRead(
             context).nextread
 
         # Select layout id from a list of possible values, default to 'base'.
-        layout_id = (
+        self.layout_id = (
             lambda l: l if l in ('base', 'minimal', 'maximal') else 'base')(
             zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout)
-        self.layout = NextreadLayout(id=layout_id)
+        self.image_pattern = image_pattern
         # TODO: Nextread lead should be configurable with ZMO-185.
-        self.lead = 'Lesen Sie jetzt:'
+        self.lead = 'Lesen Sie jetzt'
         self.multitude = 'multi' if len(self) - 1 else 'single'
+
+    @property
+    def layout(self):
+        return zeit.content.cp.layout.BlockLayout(
+            self.layout_id, self.layout_id, areas=[],
+            image_pattern=self.image_pattern)
 
     def __iter__(self):
         return iter(self.teasers)
