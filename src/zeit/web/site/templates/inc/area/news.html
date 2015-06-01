@@ -13,10 +13,9 @@
         </div>
     {% endblock %}
     {% for column in area.values() | map('get_module') | slice(2) -%}
-        <div class="newsticker__column newsticker__column-{{ loop.index }}">
+        <div class="newsticker__column newsticker__column--{{ loop.index }}">
         {% for module in column %} 
             {% set teaser = module | first_child %}
-        
             <article class="newsteaser">
                 <time class="newsteaser__time">{{
                     include_teaser_time(module) }}</time>

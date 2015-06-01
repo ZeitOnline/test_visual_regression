@@ -19,9 +19,10 @@
 			content: ' \203A' // › = Single right-pointing angle quotation mark
 	&__column
 		+respond-min($break-tablet-min)
-		+inline-block(top)
-		width: 48%
-		&:first-child
+			+inline-block(top)
+			width: 48%
+	&__column--1
+		+respond-min($break-tablet-min)
 			padding-right: remify(15px)
 
 .newsteaser
