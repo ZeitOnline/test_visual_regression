@@ -459,6 +459,9 @@ class Content(Base):
 
     @zeit.web.reify
     def comments(self):
+        if not self.show_commentthread:
+            return
+
         sort = self.request.params.get('sort', 'asc')
         page = self.request.params.get('page', 1)
         cid = self.request.params.get('cid', None)
@@ -523,6 +526,14 @@ class Content(Base):
                         self.date_print_published,
                         "d. MMMM yyyy", locale="de_De")
                 return base64.b64encode(label.encode('latin-1'))
+
+    @zeit.web.reify
+    def comments_allowed(self):
+        return self.context.commentsAllowed
+
+    @zeit.web.reify
+    def show_commentthread(self):
+        return self.context.commentSectionEnable
 
 
 @pyramid.view.view_config(route_name='health_check')

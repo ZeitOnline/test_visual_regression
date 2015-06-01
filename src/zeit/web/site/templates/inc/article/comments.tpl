@@ -1,5 +1,6 @@
 {% import "zeit.web.site:templates/macros/article_macro.tpl" as blocks with context %}
 
+{% if view.comments_allowed %}
 <section class="comment-section" id="comments">
 	<div class="comment-section__head comment-section__item">
 	{% if view.comments and view.comments.comment_count %}
@@ -20,7 +21,7 @@
 	{% endif %}
 	</div>
 
-{% if view.comments %}
+	{% if view.comments %}
 	<div class="comment-section__preferences">
 		<div class="comment-section__item">
 			{# funky future feature?
@@ -44,7 +45,7 @@
 	</div>
 
 	<div id="js-comments-body">
-	{% for comment in view.comments.comments %}
+		{% for comment in view.comments.comments %}
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}
@@ -90,17 +91,18 @@
 				</div>
 			</div>
 		</article>
-	{% endfor %}
+		{% endfor %}
 	</div>
 
     {% include "zeit.web.site:templates/inc/comments/pagination.tpl" %}
 
-{% endif %}
+	{% endif %}
 
-{% if view.request.GET['action'] == 'report' %}
+	{% if view.request.GET['action'] == 'report' %}
 	<esi:include src="{{ view.content_url }}?form=report&amp;pid={{ view.request.GET['pid'] }}" />
-{% else %}
+	{% else %}
 	<esi:include src="{{ view.content_url }}?form=comment&amp;pid={{ view.request.GET['pid'] }}" />
+	{% endif %}
 {% endif %}
 
 	<script type="text/template" id="js-report-success-template">
