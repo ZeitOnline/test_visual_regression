@@ -529,7 +529,7 @@ class Content(Base):
 
     @zeit.web.reify
     def comments_allowed(self):
-        return self.context.commentsAllowed
+        return self.context.commentsAllowed and self.show_commentthread
 
     @zeit.web.reify
     def show_commentthread(self):
