@@ -1,9 +1,3 @@
-{% macro include_teaser_time(teaser, layout_id='', modifier='') -%}
-    <time class="{{ layout_id }}__datetime {{modifier}}"
-    datetime="{{ teaser | mod_date | format_date('iso8601') }}">{{ teaser |
-    mod_date | format_date('time_only') | truncate(5, True, '') | hide_none }}</time>
-{%- endmacro %}
-
 <div class="{{ 'cp-area' | with_mods(area.kind) }}">
 <div class="newsticker">
     {% block before_module_list %}
@@ -17,8 +11,9 @@
         {% for module in column %} 
             {% set teaser = module | first_child %}
             <article class="newsteaser">
-                <time class="newsteaser__time">{{
-                    include_teaser_time(module) }}</time>
+                <time class="newsteaser__time">
+                    {{ teaser | mod_date | format_date('time_only') | truncate(5, True, '') | hide_none }}
+</time>
                 <div class="newsteaser__text">
                     <a class="newsteaser__combined-link" title="{{
                         teaser.teaserSupertitle or teaser.supertitle |
