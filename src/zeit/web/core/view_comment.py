@@ -191,6 +191,8 @@ class PostComment(zeit.web.core.view.Base):
         return []
 
     def _nid_by_comment_thread(self, unique_id):
+        # Needed to prevent 'UnboundLocalError' in 'if not nid'
+        nid = None
         comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
         if comment_thread:
