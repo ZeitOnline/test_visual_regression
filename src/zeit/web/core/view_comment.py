@@ -258,7 +258,12 @@ class PostCommentAdmin(PostComment):
 
 @pyramid.view.view_defaults(renderer='json', request_method='POST')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
+                          name='komplettansicht')
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
+                          name='seite')
 @pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
 class PostCommentResource(PostComment):
     def __init__(self, context, request):
         super(PostCommentResource, self).__init__(context, request)
@@ -286,7 +291,12 @@ class PostCommentResource(PostComment):
     request_param='action=recommend',
     request_method='GET')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
+                          name='komplettansicht')
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
+                          name='seite')
 @pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
 class RecommendCommentResource(PostCommentResource):
     def __init__(self, context, request):
         super(RecommendCommentResource, self).__init__(context, request)

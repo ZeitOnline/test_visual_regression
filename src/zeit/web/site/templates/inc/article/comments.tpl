@@ -98,9 +98,9 @@
 {% endif %}
 
 {% if view.request.GET['action'] == 'report' %}
-	<esi:include src="{{ view.content_url }}?form=report&amp;pid={{ view.request.GET['pid'] }}" />
+	<esi:include src="{{ view.content_url }}/report-form?pid={{ view.request.GET['pid'] }}" />
 {% else %}
-	<esi:include src="{{ view.content_url }}?form=comment&amp;pid={{ view.request.GET['pid'] }}" />
+	<esi:include src="{{ view.content_url }}/comment-form?pid={{ view.request.GET['pid'] }}" />
 {% endif %}
 
 	<script type="text/template" id="js-report-success-template">
