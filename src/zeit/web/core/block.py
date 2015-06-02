@@ -510,39 +510,29 @@ def _inline_html(xml, elements=None):
         return
 
 
-class NextreadLayout(object):
-
-    """Implementation to match layout sources from centerpages."""
-
-    def __init__(self, **kwargs):
-        self.id = kwargs.get('id')
-        self.image_pattern = 'zmo-nextread'
-
-    def __eq__(self, value):
-        return self.id == value
-
-    def __ne__(self, value):
-        return self.id != value
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.INextreadTeaserBlock)
-@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 class NextreadTeaserBlock(object):
-
     """Teaser block for nextread teasers in articles."""
 
-    def __init__(self, context):
+    zope.interface.implements(zeit.web.core.interfaces.INextreadTeaserBlock)
+
+    def __init__(self, context, image_pattern='default'):
         self.teasers = zeit.magazin.interfaces.INextRead(
             context).nextread
 
         # Select layout id from a list of possible values, default to 'base'.
-        layout_id = (
+        self.layout_id = (
             lambda l: l if l in ('base', 'minimal', 'maximal') else 'base')(
             zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout)
-        self.layout = NextreadLayout(id=layout_id)
+        self.image_pattern = image_pattern
         # TODO: Nextread lead should be configurable with ZMO-185.
-        self.lead = 'Lesen Sie jetzt:'
+        self.lead = 'Lesen Sie jetzt'
         self.multitude = 'multi' if len(self) - 1 else 'single'
+
+    @property
+    def layout(self):
+        return zeit.content.cp.layout.BlockLayout(
+            self.layout_id, self.layout_id, areas=[],
+            image_pattern=self.image_pattern)
 
     def __iter__(self):
         return iter(self.teasers)

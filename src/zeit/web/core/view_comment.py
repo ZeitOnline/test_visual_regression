@@ -191,6 +191,7 @@ class PostComment(zeit.web.core.view.Base):
         return []
 
     def _nid_by_comment_thread(self, unique_id):
+        nid = None
         comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
         if comment_thread:
@@ -258,6 +259,10 @@ class PostCommentAdmin(PostComment):
 
 @pyramid.view.view_defaults(renderer='json', request_method='POST')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
+                          name='komplettansicht')
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
+                          name='seite')
 @pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
 class PostCommentResource(PostComment):
@@ -287,6 +292,10 @@ class PostCommentResource(PostComment):
     request_param='action=recommend',
     request_method='GET')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
+                          name='komplettansicht')
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
+                          name='seite')
 @pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
 class RecommendCommentResource(PostCommentResource):

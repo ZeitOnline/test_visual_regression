@@ -10,7 +10,13 @@ Change log for zeit.web
 
 - ZON-1432: Add Servicebox as CP-Extra
 
+- ZON-1692: Implement topic teaser (Dossier-Teaser)
+
 - Add ordered and unordered list elements
+
+- ZON-1597: Add focussed nextread
+
+- Fix view config for comment postings
 
 
 1.24.1 (2015-05-29)
