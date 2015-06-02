@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-1597: Add focussed nextread
 
+- ZON-1492: Add newsticker box
+
 
 1.24.1 (2015-05-29)
 -------------------
