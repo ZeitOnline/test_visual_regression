@@ -9,7 +9,10 @@ require.config({
     // e.g. if you'll require jQuery later, you can refer to it as 'jquery'
     paths: {
         'jquery': 'vendor/jquery',
-        'sjcl': 'libs/sjcl', // @Todo: would love to use bower's sjcl, but there is a bug in the current version
+        // to build current sjcl.js, in bower_components/sjcl do
+        // $ ./configure --without-all --with-sha1 --with-codecHex --compress=none
+        // $ make sjcl.js tidy
+        'sjcl': 'libs/sjcl',
         'bxSlider': 'vendor/jquery.bxslider',
         'freewall': 'vendor/freewall',
         'jquery.clarify': 'web.core/plugins/jquery.clarify',
@@ -38,9 +41,6 @@ require.config({
         'web.site/plugins/jquery.togglesearch': [ 'jquery' ],
         'web.site/plugins/jquery.infobox': [ 'jquery' ],
         'web.site/plugins/jquery.searchTools': [ 'jquery' ],
-        'sjcl': {
-            exports: 'sjcl'
-        },
         'freewall': {
             deps: [ 'jquery' ],
             exports: 'freewall'
