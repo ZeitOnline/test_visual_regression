@@ -133,7 +133,6 @@ def get_layout(block, request=None):
                 "/layouts/layout[@id='{}']/@areas".format(
                     layout_id))[0].split(" ")
 
-
     try:
         layout_id = block.layout.id
     except (AttributeError, TypeError):

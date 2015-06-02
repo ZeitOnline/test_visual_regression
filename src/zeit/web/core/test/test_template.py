@@ -358,6 +358,7 @@ def test_teaser_layout_for_columns_should_be_adjusted_accordingly(application):
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-column'
 
+
 def test_columns_layout_should_only_be_set_for_allowed_areas(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/kolumne')

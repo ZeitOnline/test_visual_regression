@@ -686,7 +686,6 @@ def test_centerpage_should_have_header_tags(testbrowser, testserver):
     assert html('.header__tags__link')[0].text == 'Islamischer Staat'
 
 
-
 def test_new_centerpage_renders(testserver):
     resp = requests.get('%s/index' % testserver.url)
     assert resp.ok
@@ -784,6 +783,7 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     browser = testbrowser("{}?p=2".format(url))
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
+
 
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
     url = '{}/index'.format(testserver.url)
