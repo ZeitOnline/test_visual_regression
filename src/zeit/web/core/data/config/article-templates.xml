@@ -1,7 +1,7 @@
 <templates>
   <template name="article">
     <title>Artikel</title>
-    <header name="inside">
+    <header name="default">
       <title>Standardartikel</title>
     </header>
     <header name="text-only">
@@ -13,23 +13,41 @@
     <header name="mode">
       <title>Artikel Mode / Hochformat</title>
     </header>
+    <header name="briefmarke">
+      <title>Bild oben rechts</title>
+    </header>
+    <header name="traum">
+      <title>Ich habe einen Traum</title>
+    </header>
   </template>
-  
   <template name="longform">
     <title>Longform</title>
   </template>
-  
   <template name="short">
     <title>Kurzformat</title>
   </template>
-  
   <template name="column">
     <title>Kolumne</title>
-    <header name="briefmarke">
-      <title>Standard</title>
+  </template>
+  <template name="liveblog">
+    <title>Live-Blog</title>
+  </template>
+  <template name="photocluster">
+    <title>Photo-Cluster</title>
+    <header name="default">
+      <title>Standardartikel</title>
     </header>
-    <header name="martenstein">
-      <title>Martenstein</title>
+    <header name="text-only">
+      <title>Artikel ohne Bild</title>
+    </header>
+    <header name="leinwand">
+      <title>Artikel mit großem Bild</title>
+    </header>
+    <header name="mode">
+      <title>Artikel Mode / Hochformat</title>
+    </header>
+    <header name="briefmarke">
+      <title>Bild oben rechts</title>
     </header>
     <header name="traum">
       <title>Ich habe einen Traum</title>

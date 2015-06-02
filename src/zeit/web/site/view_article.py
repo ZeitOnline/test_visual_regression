@@ -71,3 +71,9 @@ def is_column_article(context, request):
              renderer='templates/column.html')
 class ColumnArticle(Article):
     pass
+
+
+@view_config(context=zeit.web.core.article.ILiveblogArticle,
+             renderer='templates/liveblog.html')
+class LiveblogArticle(Article):
+    pass

@@ -4,7 +4,6 @@ import logging
 import re
 
 import pyramid.httpexceptions
-import zope.component
 
 from zeit.content.author.interfaces import IAuthorReference
 from zeit.magazin.interfaces import IArticleTemplateSettings

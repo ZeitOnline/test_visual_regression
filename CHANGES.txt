@@ -4,6 +4,8 @@ Change log for zeit.web
 1.25 (unreleased)
 -----------------
 
+- ZON-1582: Enable liveblogs
+
 - ZON-1749: Add dynamic centerpage collection test folder
 
 - ZON-1432: Add Servicebox as CP-Extra

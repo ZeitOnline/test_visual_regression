@@ -1,0 +1,70 @@
+$live-blog-indicator-diameter: 10px
+
++keyframes(live-blog-indicator-animation)
+    0%
+        +opacity(1)
+    80%
+        +opacity(1)
+    90%
+        +opacity(0)
+
+
+.liveblog-status
+    background-color: $cararra
+    +clearfix
+
+    &__label
+        background-color: $zon-red
+        color: $white
+        float: left
+        font-size: em(13px)
+        font-weight: bold
+        letter-spacing: $zon-letter-spacing-m
+        text-transform: uppercase
+        &:before
+            +animation(live-blog-indicator-animation 2s infinite)
+            +transition(background-color 250ms ease-in-out)
+            background-color: $white
+            border-radius: 50%
+            content: ""
+            display: inline-block
+            height: $live-blog-indicator-diameter
+            margin-right: 5px
+            width: $live-blog-indicator-diameter
+
+    &--closed &__label
+        background-color: $trout
+        &:before
+            +animation(none)
+
+    &__label,
+    &__meta
+        padding: remify(15px) $page-padding
+
+    &__meta
+        color: $zon_grey
+        float: right
+        font-size: em(14px)
+        letter-spacing: $zon-letter-spacing-s
+        text-align: right
+
+    &__meta-date,
+    &__meta-divider
+        display: none
+
+    +respond-min($break-phablet-min)
+        &__label,
+        &__meta
+            padding: remify(15px 28px)
+
+        &__meta
+            text-align: inherit
+
+        &__meta-date,
+        &__meta-divider
+            display: inline
+
+        &__meta-divider
+            &:before
+                content: "—"
+                margin: 0 5px
