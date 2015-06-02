@@ -134,8 +134,8 @@ def get_layout(block, request=None):
             return
 
         return block.__parent__.kind in source_xml.xpath(
-                "/layouts/layout[@id='{}']/@areas".format(
-                    layout_id))[0].split(" ")
+            '/layouts/layout[@id="{}"]/@areas'.format(
+                layout_id))[0].split(' ')
 
     try:
         layout_id = block.layout.id
