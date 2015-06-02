@@ -107,7 +107,6 @@
 	{% else %}
 	<esi:include src="{{ view.content_url }}?form=comment&amp;pid={{ view.request.GET['pid'] }}" />
 	{% endif %}
-{% endif %}
 
 	<script type="text/template" id="js-report-success-template">
 		<div class="comment-form__response--success">
@@ -116,3 +115,4 @@
 	</script>
 
 </section>
+{% endif %}
