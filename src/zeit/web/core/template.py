@@ -129,6 +129,10 @@ def get_layout(block, request=None):
     source_xml = source._get_tree()
 
     def allowed(layout_id):
+
+        if getattr(block, '__parent__', None):
+            return
+
         return block.__parent__.kind in source_xml.xpath(
                 "/layouts/layout[@id='{}']/@areas".format(
                     layout_id))[0].split(" ")
