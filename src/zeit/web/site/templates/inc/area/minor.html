@@ -2,8 +2,16 @@
 
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 
-{% block after_module_include %}
-    {% if module_loop.index == 1 %}
+{% block before_module_include %}
+    {% if module_loop.index == 1 and view.has_solo_leader %}
         {{ lama.adplace(view.banner(7), view) }}
     {% endif %}
 {% endblock %}
+
+{% block after_module_include %}
+    {% if module_loop.index == 1 and not(view.has_solo_leader) %}
+        {{ lama.adplace(view.banner(7), view) }}
+    {% endif %}
+{% endblock %}
+
+
