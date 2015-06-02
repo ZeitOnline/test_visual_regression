@@ -108,8 +108,6 @@
 		<esi:include src="{{ view.content_url }}/comment-form?pid={{ view.request.GET.pid }}" />
 	{% endif %}
 
-{% endif %}
-
 	<script type="text/template" id="js-report-success-template">
 		<div class="comment-form__response--success">
 			Danke! Ihre Meldung wird an die Redaktion weitergeleitet.
@@ -117,3 +115,4 @@
 	</script>
 
 </section>
+{% endif %}
