@@ -43,9 +43,9 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
 
-@view_config(request_param='form=comment',
+@view_config(name='comment-form',
              renderer='templates/inc/comments/comment-form.html')
-@view_config(request_param='form=report',
+@view_config(name='report-form',
              renderer='templates/inc/comments/report-form.html')
 class CommentForm(Article):
     pass
@@ -70,4 +70,10 @@ def is_column_article(context, request):
                                 is_column_article),
              renderer='templates/column.html')
 class ColumnArticle(Article):
+    pass
+
+
+@view_config(context=zeit.web.core.article.ILiveblogArticle,
+             renderer='templates/liveblog.html')
+class LiveblogArticle(Article):
     pass

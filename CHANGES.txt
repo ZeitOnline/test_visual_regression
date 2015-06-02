@@ -4,17 +4,23 @@ Change log for zeit.web
 1.25 (unreleased)
 -----------------
 
+- ZON-1582: Enable liveblogs
+
 - ZON-1749: Add dynamic centerpage collection test folder
 
 - ZON-1432: Add Servicebox as CP-Extra
 
 - ZON-1692: Implement topic teaser (Dossier-Teaser)
 
-- Add ordered and unordered list elements
-
 - ZON-1597: Add focussed nextread
 
 - ZON-1492: Add newsticker box
+
+- FIX: Consider disabled comment section
+
+- Fix view config for comment postings
+
+- Add ordered and unordered list elements
 
 
 1.24.1 (2015-05-29)

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/autoren/S/Alina_Schadwinkel/index</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">notnecessary</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">author</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-05-15T14:24:12.138759+00:00</attribute>
+  <attribute ns="http://webdav.org/cadaver/custom-properties/" name="type">author</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-05-15T14:23:12.164415+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="last_count">2010-08-17</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">notnecessary</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-05-15T14:23:23.377940+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="total_hits">342</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">notnecessary</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2009-11-23T13:07:37.041148+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Author" module="zeit.content.author.author"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">system.hp-assistent</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:42b15fd6-b476-46f7-a92a-4e0b6146ceb3}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="first_count">2009-12-08</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">notnecessary</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2015-05-15T14:23:12Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">312</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Fri, 15 May 2015 14:23:12 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"1062a15-138-5161f958a77a6"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>

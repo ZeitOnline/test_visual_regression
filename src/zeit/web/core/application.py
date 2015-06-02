@@ -29,17 +29,12 @@ import zeit.find.search
 import zeit.magazin.interfaces
 import zeit.solr.interfaces
 
-from zeit.web.core.article import IColumnArticle
-from zeit.web.core.article import IFeatureLongform
-from zeit.web.core.article import ILongformArticle
-from zeit.web.core.article import IPhotoclusterArticle
-from zeit.web.core.article import IShortformArticle
-from zeit.web.core.gallery import IGallery
-from zeit.web.core.gallery import IProductGallery
 import zeit.web.core
+import zeit.web.core.article
 import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.centerpage
+import zeit.web.core.gallery
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
@@ -462,22 +457,32 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
         # www.zeit.de. By then do not forget to remove marker
         # interfaces from uniqueID http://xml.zeit.de/feature (RD)
         if urlparse.urlparse(context.uniqueId).path.startswith('/feature/'):
-            zope.interface.alsoProvides(context, IFeatureLongform)
+            zope.interface.alsoProvides(
+                context, zeit.web.core.article.IFeatureLongform)
         elif template == 'longform':
-            zope.interface.alsoProvides(context, ILongformArticle)
+            zope.interface.alsoProvides(
+                context, zeit.web.core.article.ILongformArticle)
         elif template == 'short':
-            zope.interface.alsoProvides(context, IShortformArticle)
+            zope.interface.alsoProvides(
+                context, zeit.web.core.article.IShortformArticle)
         elif template == 'column':
-            zope.interface.alsoProvides(context, IColumnArticle)
+            zope.interface.alsoProvides(
+                context, zeit.web.core.article.IColumnArticle)
+        elif template == 'liveblog':
+            zope.interface.alsoProvides(
+                context, zeit.web.core.article.ILiveblogArticle)
         elif template == 'photocluster':
-            zope.interface.alsoProvides(context, IPhotoclusterArticle)
+            zope.interface.alsoProvides(
+                context, zeit.web.core.article.IPhotoclusterArticle)
 
     def _handle_gallery(self, context, request):
         meta = zeit.content.gallery.interfaces.IGalleryMetadata(context)
         if meta.type == 'zmo-product':
-            zope.interface.alsoProvides(context, IProductGallery)
+            zope.interface.alsoProvides(
+                context, zeit.web.core.gallery.IProductGallery)
         else:
-            zope.interface.alsoProvides(context, IGallery)
+            zope.interface.alsoProvides(
+                context, zeit.web.core.gallery.IGallery)
 
     def _handle_centerpage(self, context, request):
         if urlparse.urlparse(context.uniqueId).path.startswith('/suche/index'):
