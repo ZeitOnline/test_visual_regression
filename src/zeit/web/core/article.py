@@ -146,6 +146,10 @@ class IColumnArticle(zeit.content.article.interfaces.IArticle):
     pass
 
 
+class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
+    pass
+
+
 class IPhotoclusterArticle(zeit.content.article.interfaces.IArticle):
     pass
 

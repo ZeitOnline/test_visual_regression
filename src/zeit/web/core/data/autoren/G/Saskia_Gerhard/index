@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<author xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <firstname>Saskia</firstname>
+  <lastname>Gerhard</lastname>
+  <status>Online</status>
+  <external>false</external>
+  <display_name>Saskia Gerhard</display_name>
+  <vgwortid>1402069</vgwortid>
+  <communityprofile>http://community.zeit.de/user/saskia-gerhard</communityprofile>
+</author>

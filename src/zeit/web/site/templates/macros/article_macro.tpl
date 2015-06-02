@@ -42,6 +42,14 @@
     </h2>
 {%- endmacro %}
 
+{% macro liveblog(liveblog) -%}
+    {% if liveblog.blog_id -%}
+    <div class="article__item">
+        <esi:include src="http://www.zeit.de/liveblog-backend/{{ liveblog.blog_id }}.html" onerror="continue" />
+    </div>
+    {%- endif %}
+{%- endmacro %}
+
 {% macro paragraph(html) -%}
   {#
     html = (u'Sieben Begriffe für ein und denselben <i>Gegenstand</i> – das ist '

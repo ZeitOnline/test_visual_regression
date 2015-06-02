@@ -114,6 +114,7 @@
             {% block breaking_news %}
                 {%- include "zeit.web.site:templates/inc/breaking_news.tpl" ignore missing -%}
             {% endblock breaking_news %}
+            {% block liveblog_status %}{% endblock %}
             {% endprofile %}
             {% block adplace_billboard %}
                 {{ lama_core.adplace(view.banner(3), view) }}
