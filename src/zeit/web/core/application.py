@@ -37,6 +37,7 @@ import zeit.solr.interfaces
 
 from zeit.web.core.article import IColumnArticle
 from zeit.web.core.article import IFeatureLongform
+from zeit.web.core.article import ILiveblogArticle
 from zeit.web.core.article import ILongformArticle
 from zeit.web.core.article import IPhotoclusterArticle
 from zeit.web.core.article import IShortformArticle
@@ -477,6 +478,8 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             zope.interface.alsoProvides(context, IShortformArticle)
         elif template == 'column':
             zope.interface.alsoProvides(context, IColumnArticle)
+        elif template == 'liveblog':
+            zope.interface.alsoProvides(context, ILiveblogArticle)
         elif template == 'photocluster':
             zope.interface.alsoProvides(context, IPhotoclusterArticle)
 

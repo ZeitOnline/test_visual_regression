@@ -216,12 +216,14 @@ class Article(zeit.web.core.view.Content):
     def location(self):
         return  # XXX not implemented in zeit.content.article yet
 
-    @property
+    @zeit.web.reify
     def nextread(self):
-        nextread = zeit.web.core.interfaces.INextreadTeaserBlock(self.context)
+        is_zmo = zeit.magazin.interfaces.IZMOContent.providedBy(self.context)
+        nextread = zeit.web.core.block.NextreadTeaserBlock(
+            self.context, ('940x400', 'zmo-nextread')[int(is_zmo)])
         if not nextread.teasers:
             return
-        if nextread.layout != 'minimal':
+        if nextread.layout.id != 'minimal':
             for i in zeit.web.core.interfaces.ITeaserSequence(nextread):
                 i.image and self._copyrights.setdefault(
                     i.image.image_group, i.image)

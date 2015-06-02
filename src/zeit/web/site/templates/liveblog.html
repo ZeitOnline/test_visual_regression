@@ -1,0 +1,23 @@
+{% extends "zeit.web.site:templates/article.html" %}
+
+{% block liveblog_status %}
+	{%- include "zeit.web.site:templates/inc/liveblog/status.tpl" -%}
+{% endblock %}
+
+{% block article_heading %}
+	<div class="article__item">
+		<div class="article-heading article-heading--liveblog">
+			<div class="article-heading__image">
+				{%- include "zeit.web.site:templates/inc/liveblog/header-image.tpl" -%}
+			</div>
+			<h1 class="article-heading__headline" itemprop="headline">
+				<span class="article-heading__kicker">
+					{{- view.supertitle | hide_none -}}
+				</span>{%- if view.title -%}<span class="article-heading__colon">: </span>{%- endif -%}
+				<span class="article-heading__title">
+					{{- view.title | hide_none -}}
+				</span>
+			</h1>
+		</div>
+	</div>
+{% endblock article_heading %}

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<author xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <firstname py:pytype="str">Oliver</firstname>
+  <lastname py:pytype="str">Fritsch</lastname>
+  <email py:pytype="str">oliver.fritsch@zeit.de</email>
+  <vgwortid py:pytype="int">2212513</vgwortid>
+  <vgwortcode py:pytype="str">2212513</vgwortcode>
+  <status py:pytype="str">Online</status>
+  <display_name>Oliver Fritsch</display_name>
+</author>
