@@ -1,5 +1,6 @@
 {% import "zeit.web.site:templates/macros/article_macro.tpl" as blocks with context %}
 
+{% if view.comments_allowed or view.comments %}
 <section class="comment-section" id="comments">
 	<div class="comment-section__head comment-section__item">
 	{% if view.comments and view.comments.comment_count %}
@@ -9,9 +10,11 @@
 			<small>{{ view.comments.pages.title }}</small>
 			{% endif %}
 		</span>
+		{% if view.comments_allowed %}
 		<a href="#comment-form" class="comment-section__button button">
 			Kommentieren
 		</a>
+		{% endif %}
 	{% else %}
 		<span class="comment-section__headline">
 			<span class="nowrap">Noch keine Kommentare.</span>
@@ -20,7 +23,7 @@
 	{% endif %}
 	</div>
 
-{% if view.comments %}
+	{% if view.comments %}
 	<div class="comment-section__preferences">
 		<div class="comment-section__item">
 			{# funky future feature?
@@ -44,7 +47,7 @@
 	</div>
 
 	<div id="js-comments-body">
-	{% for comment in view.comments.comments %}
+		{% for comment in view.comments.comments %}
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}
@@ -75,10 +78,12 @@
 					{{ comment.text | safe }}
 				</div>
 				<div class="comment__reactions">
+					{% if view.comments_allowed -%}
 					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='comment', pid=comment.cid) }}#comment-form" title="Antworten">
 						{{ blocks.use_svg_icon('comment-reply', 'comment__icon comment__icon-reply') }}
 						<span class="comment__action">Antworten</span>
 					</a>
+					{% endif -%}
 					<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='report', pid=comment.cid) }}#report-comment-form" title="Melden">
 						{{ blocks.use_svg_icon('comment-report', 'comment__icon comment__icon-report') }}
 						<span class="comment__action">Melden</span>
@@ -90,17 +95,19 @@
 				</div>
 			</div>
 		</article>
-	{% endfor %}
+		{% endfor %}
 	</div>
 
-    {% include "zeit.web.site:templates/inc/comments/pagination.tpl" %}
+	{% include "zeit.web.site:templates/inc/comments/pagination.tpl" %}
 
-{% endif %}
+	{% endif %}
 
-{% if view.request.GET['action'] == 'report' %}
-	<esi:include src="{{ view.content_url }}/report-form?pid={{ view.request.GET['pid'] }}" />
-{% else %}
-	<esi:include src="{{ view.content_url }}/comment-form?pid={{ view.request.GET['pid'] }}" />
+	{% if view.request.GET.action == 'report' %}
+		<esi:include src="{{ view.content_url }}/report-form?pid={{ view.request.GET.pid }}" />
+	{% else %}
+		<esi:include src="{{ view.content_url }}/comment-form?pid={{ view.request.GET.pid }}" />
+	{% endif %}
+
 {% endif %}
 
 	<script type="text/template" id="js-report-success-template">

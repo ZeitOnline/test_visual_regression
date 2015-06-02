@@ -12,11 +12,13 @@ Change log for zeit.web
 
 - ZON-1692: Implement topic teaser (Dossier-Teaser)
 
-- Add ordered and unordered list elements
-
 - ZON-1597: Add focussed nextread
 
+- FIX: Consider disabled comment section
+
 - Fix view config for comment postings
+
+- Add ordered and unordered list elements
 
 
 1.24.1 (2015-05-29)
