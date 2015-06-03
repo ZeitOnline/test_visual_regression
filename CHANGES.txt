@@ -16,7 +16,7 @@ Change log for zeit.web
 
 - FIX: Consider disabled comment section
 
-- Fix view config for comment postings
+- FIX: Repair view config for comment postings
 
 - Add ordered and unordered list elements
 
