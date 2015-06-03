@@ -25,24 +25,24 @@ require([
     comments.init();
 });
 
-// add required jQuery-Plugins that are writte with AMD header here
-// make a shim of them first
-// plugins that require plugins need to make this requirement in the shim-section of config
+// add required jQuery plugins
+// require jQuery first, so we don't have to shim simple plugins
+// plugins that require other plugins or libraries must use the shim config
 require([
+    'jquery',
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.adaptnav',
     'web.site/plugins/jquery.up2dateSignals',
-    'web.site/plugins/jquery.scrollup',
     'web.site/plugins/jquery.extendfooter',
     'web.site/plugins/jquery.snapshot',
     'web.site/plugins/jquery.toggleBeta',
     'web.site/plugins/jquery.selectNav',
     'web.site/plugins/jquery.infobox',
     'web.site/plugins/jquery.searchTools'
-], function() {
+], function( $ ) {
     $( window ).referrerCount();
     $( '.main_nav__search' ).toggleSearch();
     $( '.logo_bar__menue' ).toggleNavi();
@@ -55,6 +55,4 @@ require([
     $( '#series_select' ).selectNav();
     $( '.js-infobox' ).infobox();
     $( '.search-form' ).searchTools();
-    // comment out till we decide if it should be used and how (as)
-    // $( '.footer-links__button' ).scrollUp();
 });
