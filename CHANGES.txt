@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - HOTFIX: Add modernizr test for CSS 3D Transforms
 
+- ZON-1755: Refactor traversal, allow parallel folder discovery
+
 
 1.25 (2015-06-03)
 -----------------
