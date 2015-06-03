@@ -4,9 +4,27 @@ Change log for zeit.web
 1.25 (unreleased)
 -----------------
 
+- ZON-1582: Enable liveblogs
+
 - ZON-1749: Add dynamic centerpage collection test folder
 
 - ZON-1432: Add Servicebox as CP-Extra
+
+- ZON-1692: Implement topic teaser (Dossier-Teaser)
+
+- ZON-1597: Add focussed nextread
+
+- FIX: Consider disabled comment section
+
+- Fix view config for comment postings
+
+- Add ordered and unordered list elements
+
+
+1.24.1 (2015-05-29)
+-------------------
+
+- HOTFIX: Skip over missing parquet block layouts
 
 
 1.24 (2015-05-26)
@@ -19,8 +37,6 @@ Change log for zeit.web
 - ZON-1569: Upgrade author column images to image groups
 
 - ZON-1532: Render raw elements enabled for all devices
-
-- Remove ESI parser javascript library
 
 - ZON-1253: Safeguard jinja tests, modifiers and globals
 
