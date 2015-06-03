@@ -49,9 +49,9 @@ def _inject_banner_code(
     possible_pages = [i for i in xrange(1, len(pages) + 1)]
     banner_conf = {
         'zon': {
-            'tiles': [7], # banner tiles in articles
-            'ad_paras': [2], # paragraph(s) to insert ad after
-            'content_ad_para': [4] # paragraph/s to insert content ad after
+            'tiles': [7],  # banner tiles in articles
+            'ad_paras': [2],  # paragraph(s) to insert ad after
+            'content_ad_para': [4]  # paragraph/s to insert content ad after
         },
         'zmo': {
             'tiles': [7, 8],
