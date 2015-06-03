@@ -4,7 +4,11 @@ Change log for zeit.web
 1.26 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1566: Implement video solo page view and basic template
+
+- FIX: Update and maintain javascript vendor scripts
+
+- HOTFIX: Add modernizr test for CSS 3D Transforms
 
 
 1.25 (2015-06-03)
@@ -49,8 +53,6 @@ Change log for zeit.web
 - ZON-1345: Article body: display images w/ layout 'small' correctly
 
 - ZON-1744: Enable friedbert to memcache comment threads
-
-- ZON-1566: Implement video solo page view and basic template
 
 - Remove ESI parser javascript library
 
