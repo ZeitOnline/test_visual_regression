@@ -4,7 +4,7 @@ Change log for zeit.web
 1.26 (unreleased)
 -----------------
 
-- ZON-1755: Reorganize traversal anomalies into adapters
+- ZON-1755: Refactor traversal, allow parallel folder discovery
 
 
 1.25 (2015-06-03)
