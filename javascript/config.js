@@ -9,7 +9,10 @@ require.config({
     // e.g. if you'll require jQuery later, you can refer to it as 'jquery'
     paths: {
         'jquery': 'vendor/jquery',
-        'sjcl': 'libs/sjcl', // @Todo: would love to use bower's sjcl, but there is a bug in the current version
+        // to build current sjcl.js, in bower_components/sjcl do
+        // $ ./configure --without-all --with-sha1 --with-codecHex --compress=none
+        // $ make sjcl.js tidy
+        'sjcl': 'libs/sjcl',
         'bxSlider': 'vendor/jquery.bxslider',
         'freewall': 'vendor/freewall',
         'jquery.clarify': 'web.core/plugins/jquery.clarify',
@@ -24,23 +27,8 @@ require.config({
         'jquery.clarify': [ 'jquery', 'require' ],
         'jquery.debounce': [ 'jquery' ],
         'web.core/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery', 'modernizr' ],
-        'web.core/plugins/jquery.referrerCount': [ 'jquery' ],
-        'web.magazin/plugins/jquery.animatescroll': [ 'jquery' ],
         'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],
-        'web.magazin/plugins/jquery.switchvideo': [ 'jquery' ],
-        'web.site/plugins/jquery.adaptnav': [ 'jquery' ],
-        'web.site/plugins/jquery.extendfooter': [ 'jquery' ],
-        'web.site/plugins/jquery.scrollup': [ 'jquery' ],
-        'web.site/plugins/jquery.selectNav': [ 'jquery' ],
         'web.site/plugins/jquery.snapshot': [ 'jquery', 'jquery.inview' ],
-        'web.site/plugins/jquery.toggleBeta': [ 'jquery' ],
-        'web.site/plugins/jquery.togglenavi': [ 'jquery' ],
-        'web.site/plugins/jquery.togglesearch': [ 'jquery' ],
-        'web.site/plugins/jquery.infobox': [ 'jquery' ],
-        'web.site/plugins/jquery.searchTools': [ 'jquery' ],
-        'sjcl': {
-            exports: 'sjcl'
-        },
         'freewall': {
             deps: [ 'jquery' ],
             exports: 'freewall'

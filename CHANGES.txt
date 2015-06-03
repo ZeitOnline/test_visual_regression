@@ -1,7 +1,17 @@
 Change log for zeit.web
 =======================
 
-1.25 (unreleased)
+1.26 (unreleased)
+-----------------
+
+- ZON-1566: Implement video solo page view and basic template
+
+- FIX: Update and maintain javascript vendor scripts
+
+- HOTFIX: Add modernizr test for CSS 3D Transforms
+
+
+1.25 (2015-06-03)
 -----------------
 
 - ZON-1582: Enable liveblogs
@@ -16,7 +26,7 @@ Change log for zeit.web
 
 - FIX: Consider disabled comment section
 
-- Fix view config for comment postings
+- FIX: Repair view config for comment postings
 
 - Add ordered and unordered list elements
 

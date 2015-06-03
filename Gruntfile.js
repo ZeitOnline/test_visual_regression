@@ -348,7 +348,7 @@ module.exports = function(grunt) {
                 'uglify': true,
 
                 // Define any tests you want to implicitly include.
-                'tests': [ 'video', 'touch' ],
+                'tests': [ 'video', 'touch', 'csstransforms3d' ],
 
                 // By default, this task will crawl your project for references to Modernizr tests.
                 // Set to false to disable.

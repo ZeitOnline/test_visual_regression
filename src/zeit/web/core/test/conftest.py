@@ -131,6 +131,14 @@ settings = {
     'vivi_zeit.imp_scale-source': 'egg://zeit.web.core/data/config/scales.xml',
     'vivi_zeit.content.link_source-blogs': (
         'egg://zeit.web.core/data/config/blogs_meta.xml'),
+    'vivi_zeit.brightcove_read-url': 'http://localhost:6552/video/bc.json',
+    'vivi_zeit.brightcove_write-url': 'http://localhost:6552/video/bc.json',
+    'vivi_zeit.brightcove_read-token': 'foo',
+    'vivi_zeit.brightcove_write-token': 'bar',
+    'vivi_zeit.brightcove_index-principal': 'zope.brightcove',
+    'vivi_zeit.brightcove_timeout': '300',
+    'vivi_zeit.brightcove_video-folder': 'video',
+    'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 
