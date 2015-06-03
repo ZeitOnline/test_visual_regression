@@ -15,7 +15,6 @@ import zeit.content.image.interfaces
 
 import zeit.web
 import zeit.web.core.article
-import zeit.web.core.comments
 import zeit.web.core.interfaces
 import zeit.web.core.reach
 import zeit.web.core.template
