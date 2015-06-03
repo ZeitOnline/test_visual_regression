@@ -3,6 +3,7 @@ import logging
 from pyramid.view import view_config
 from pyramid.view import view_defaults
 import babel.dates
+import pyramid.view
 
 import zeit.content.video.interfaces
 
@@ -59,3 +60,11 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
     @zeit.web.reify
     def subtitle(self):
         return self.context.subtitle or self.context.teaserText
+
+
+@pyramid.view.view_config(name='comment-form',
+                          renderer='templates/inc/comments/comment-form.html')
+@pyramid.view.view_config(name='report-form',
+                          renderer='templates/inc/comments/report-form.html')
+class CommentForm(Video):
+    pass
