@@ -4,7 +4,7 @@ Change log for zeit.web
 1.26 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Add modernizr test for CSS 3D Transforms
 
 
 1.25 (2015-06-03)
