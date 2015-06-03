@@ -93,12 +93,9 @@ class RenderedLegacyArea(LegacyArea):
         values = auto._query_centerpage()[:area.count]
 
         lids = [block.layout.id] + area.count * ['zon-parquet-small']
-        la = LegacyArea.__init__(self, [], kind='parquet', is_teaserbar=True)
         modules = [LegacyModule(
-            [t], layout=lids.pop(0), parent=la) for t in values]
-
-        for module in modules:
-            la.append(module)
+            [t], layout=lids.pop(0), parent=self) for t in values]
+        LegacyArea.__init__(self, modules, kind='parquet', is_teaserbar=True)
 
         self.read_more = block.read_more
         self.read_more_url = block.read_more_url

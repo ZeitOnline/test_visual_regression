@@ -130,7 +130,7 @@ def get_layout(block, request=None):
 
     def allowed(layout_id):
 
-        if getattr(block, '__parent__', None):
+        if not getattr(block, '__parent__', None):
             return
 
         return block.__parent__.kind in source_xml.xpath(

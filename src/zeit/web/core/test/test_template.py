@@ -377,6 +377,8 @@ def test_teaser_layout_for_series_should_be_adjusted_accordingly(application):
     block = mock.Mock()
     block.__parent__ = mock.Mock()
     block.layout.id = 'zon-small'
+    block.__parent__ = mock.Mock()
+    block.__parent__.kind = 'major'
     block.__iter__ = lambda _: iter([article])
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-series'
