@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.25 (unreleased)
+1.25 (2015-06-03)
 -----------------
 
 - ZON-1582: Enable liveblogs
