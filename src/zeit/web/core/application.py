@@ -442,7 +442,7 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle, dict)
-class ITraversableArticle(dict):
+class TraversableArticle(dict):
 
     def __init__(self, context, tdict):
         settings = zeit.magazin.interfaces.IArticleTemplateSettings(context)
@@ -472,12 +472,12 @@ class ITraversableArticle(dict):
         if tdict['view_name'][0:5] == 'seite' and not tdict['subpath']:
             tdict['view_name'] = 'seite'
 
-        super(ITraversableArticle, self).__init__(tdict)
+        super(TraversableArticle, self).__init__(tdict)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
 @grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery, dict)
-class ITraversableGallery(dict):
+class TraversableGallery(dict):
 
     def __init__(self, context, tdict):
         context = tdict['context']
@@ -490,12 +490,12 @@ class ITraversableGallery(dict):
             zope.interface.alsoProvides(
                 context, zeit.web.core.gallery.IGallery)
 
-        super(ITraversableGallery, self).__init__(tdict)
+        super(TraversableGallery, self).__init__(tdict)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage, dict)
-class ITraversableCenterPage(dict):
+class TraversableCenterPage(dict):
 
     def __init__(self, context, tdict):
         try:
@@ -521,12 +521,12 @@ class ITraversableCenterPage(dict):
             area.query = form.query
             area.page = form.page
 
-        super(ITraversableCenterPage, self).__init__(tdict)
+        super(TraversableCenterPage, self).__init__(tdict)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
 @grokcore.component.adapter(zeit.cms.repository.interfaces.IFolder, dict)
-class ITraversableFolder(dict):
+class TraversableFolder(dict):
 
     def __init__(self, context, tdict):
         try:
@@ -538,4 +538,4 @@ class ITraversableFolder(dict):
             tdict['traversed'] += (tdict['view_name'],)
             tdict['view_name'] = ''
         finally:
-            super(ITraversableFolder, self).__init__(tdict)
+            super(TraversableFolder, self).__init__(tdict)
