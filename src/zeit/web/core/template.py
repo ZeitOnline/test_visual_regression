@@ -51,6 +51,7 @@ def create_url(obj):
 @zeit.web.register_filter
 def format_date(obj, type='short'):
     formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
+               'regular': "d. MMMM yyyy, H:mm",
                'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd",
                'iso8601': "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
                'time_only': "HH:mm 'Uhr'"}
