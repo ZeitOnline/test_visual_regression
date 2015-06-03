@@ -11,5 +11,11 @@
     {% endfor %}
 {% endblock article_pages %}
 
+{% block article_google_ad %}
+    {% if view.context.advertising_enabled -%}
+        {{ blocks.adplace_desktop(view.banner(5)) }}
+    {%- endif %}
+{% endblock article_google_ad %}
+
 {% block article_pagination %}
 {% endblock article_pagination %}
