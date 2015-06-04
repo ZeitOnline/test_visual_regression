@@ -8,7 +8,7 @@
         ignore missing with context %}
     {% include
         ["zeit.web.site:templates/inc/teaser/zon-topic-main.tpl",
-         "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing %}
+         "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing with context %}
     <div class="teaser-topic-list">
     {% for module in area.values()[1:4] -%}
         {% set teaser = module | first_child %}
