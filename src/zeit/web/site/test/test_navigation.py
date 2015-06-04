@@ -17,8 +17,7 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     html_str = tpl.render(view=mock_view)
     html = lxml.html.fromstring(html_str).cssselect
 
-    assert len(html('.main_nav')) == 1, (
-        'just one .main_nav should be present')
+    assert len(html('.main_nav')) == 1, 'just one .main_nav should be present'
 
     assert len(html('.main_nav > div')) == 7, 'seven divs within .main_nav'
 
@@ -32,24 +31,24 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
         'just one .main_nav__teaser')
 
     assert len(html('.main_nav > div.main_nav__community'
-                    '[data-dropdown="true"]')) == 1, (
-        'just one .main_nav__community w/ data-dropdown=true')
+                    '[data-dropdown="true"]')
+               ) == 1, 'just one .main_nav__community w/ data-dropdown=true'
 
     assert len(html('.main_nav > div.main_nav__ressorts'
-                    '[data-dropdown="true"]')) == 1, (
-        'just one .main_nav__ressorts w/ data-dropdown=true')
+                    '[data-dropdown="true"]')
+               ) == 1, 'just one .main_nav__ressorts w/ data-dropdown=true'
 
     assert len(html('.main_nav > div.main_nav__services'
-                    '[data-dropdown="true"]')) == 1, (
-        'just one .main_nav__services w/ data-dropdown=true')
+                    '[data-dropdown="true"]')
+               ) == 1, 'just one .main_nav__services w/ data-dropdown=true'
 
     assert len(html('.main_nav > div.main_nav__classifieds'
-                    '[data-dropdown="true"]')) == 1, (
-        'just one .main_nav__classifieds w/ data-dropdown=true')
+                    '[data-dropdown="true"]')
+               ) == 1, 'just one .main_nav__classifieds w/ data-dropdown=true'
 
     assert len(html('.main_nav > div.main_nav__search'
-                    '[data-dropdown="true"]')) == 1, (
-        'just one .main_nav__search w/ data-dropdown=true')
+                    '[data-dropdown="true"]')
+               ) == 1, 'just one .main_nav__search w/ data-dropdown=true'
 
     assert len(html('nav[role="navigation"] ul.primary-nav')) == 1
 
@@ -77,7 +76,7 @@ def test_nav_ressorts_should_produce_markup(application, jinja2_env):
     assert len(html('ul li.primary-nav__item')) > 1
     assert len(html('ul li.primary-nav__item a.primary-nav__link')) == (
         len(html('ul li.primary-nav__item'))), (
-        'Links must have same length a list items.')
+            'Links must have same length a list items.')
 
 
 def test_nav_services_should_have_expected_links(application, jinja2_env):
@@ -100,12 +99,10 @@ def test_nav_services_should_have_expected_links(application, jinja2_env):
     html = lxml.html.fromstring(html_str).cssselect
 
     assert html('li > a[href="http://www.zeitabo.de/'
-                '?mcwt=2009_07_0002"]')[0] is not None, (
-        'No link for zeitabo.de')
+                '?mcwt=2009_07_0002"]')[0] is not None, 'No link for zeit abo'
     assert html('li[data-id="hp.global.topnav.links.shop"]'
                 '> a[href="http://shop.zeit.de?et=l6VVNm&et_cid=42&'
-                'et_lid=175"]')[0] is not None, (
-        'No link for shop.zeit.de')
+                'et_lid=175"]')[0] is not None, 'No link for shop zeit'
 
 
 def test_nav_classifieds_should_have_expected_links(application, jinja2_env):
@@ -129,12 +126,11 @@ def test_nav_classifieds_should_have_expected_links(application, jinja2_env):
 
     assert html('li[data-id="hp.global.topnav.links.jobs"]'
                 '> a[href="http://jobs.zeit.de/"]'
-                '')[0] is not None, (
-        'No link for job.zeit.de')
+                '')[0] is not None, 'No link for zeit jobs'
     assert html('li[data-id="hp.global.topnav.links.partnersuche"]'
                 '> a[href="http://www.zeit.de/angebote/partnersuche/index?'
                 'pscode=01_100"]')[0] is not None, (
-        'Link for partnersuche not present')
+                    'Link for partnersuche not present')
 
 
 def test_nav_contains_essential_elements(application, jinja2_env):
@@ -152,25 +148,25 @@ def test_nav_contains_essential_elements(application, jinja2_env):
                 '[rel="nofollow"]'
                 '[class="user"]'
                 '[id="drupal_login"]')[0] is not None, (
-        'Community login is missing')
+                    'Community login is missing')
 
     # Logo
     assert html('a[href*="/index"]'
                 '[title="Nachrichten auf ZEIT ONLINE"]'
                 '[class="icon-zon-logo-desktop"]'
                 '[id="hp.global.topnav.centerpages.logo"]')[0] is not None, (
-        'Logo link is missing')
+                    'Logo link is missing')
 
     # Main menu icon
     assert html(u'a[aria-label="Hauptmenü"]')[0] is not None, (
         'Main menu link is missing')
     assert len(html('div.logo_bar__menue__image.main_nav__icon--plain'
                     '.icon-zon-logo-navigation_menu')) == 1, (
-        'Logo for bar menu is not present')
+                        'Logo for bar menu is not present')
     assert len(html('div.logo_bar__menue__image'
                     '.main_nav__icon--hover.icon-zon-logo-'
                     'navigation_menu-hover')) == 1, (
-        'A div for the burger menu is missing.')
+                        'A div for the burger menu is missing.')
 
     # Search
     assert html('form.search'
@@ -178,7 +174,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
                 '[method="get"]'
                 '[role="search"]'
                 '[action$="suche/index"]')[0] is not None, (
-        'Form element is not present')
+                    'Form element is not present')
     assert html('label.hideme[for="q"]')[0] is not None, (
         'Hide me label is not present')
     assert html('button.search__button[type="submit"]')[0] is not None, (
@@ -186,14 +182,14 @@ def test_nav_contains_essential_elements(application, jinja2_env):
     assert html('span.icon-zon-logo-navigation_suche'
                 '.search__button__image.'
                 'main_nav__icon--plain')[0] is not None, (
-        'No search logo present')
+                    'No search logo present')
     assert html('span.icon-zon-logo-navigation_suche-hover'
                 '.search__button__image.'
                 'main_nav__icon--hover')[0] is not None, (
-        'No icon-hover present')
+                    'No icon-hover present')
     assert html('input.search__input[id="q"][name="q"]'
                 '[type="search"][placeholder="Suche"]')[0] is not None, (
-        'No search input present')
+                    'No search input present')
 
 
 def test_nav_should_contain_schema_org_markup(application, jinja2_env):
@@ -280,7 +276,7 @@ def test_cp_should_have_valid_classifieds_structure(testserver, testbrowser):
         'Job link is not present.')
     assert len(html(
         'li[data-id="hp.global.topnav.links.partnersuche"] > a')) == 1, (
-        'Link partnersuche is not present.')
+            'Link partnersuche is not present.')
     assert len(html('li[data-id="hp.global.topnav.links.mehr"] > a')) == 1, (
         'Link mehr is not present')
 
@@ -291,12 +287,12 @@ def test_cp_has_valid_community_structure(testserver, testbrowser):
     html = lxml.html.fromstring(html_str).cssselect
     assert html(
         'a[href="http://community.zeit.de/user/login?"]') is not None, (
-        'Link to login form is invalid')
+            'Link to login form is invalid')
     assert html('span.main_nav__community__image') is not None, (
         'span.main_nav__community__image is invalid')
     assert 'Anmelden' in lxml.etree.tostring(
         html('a[id="drupal_login"]')[0]), (
-        'Link to login has invalid label')
+            'Link to login has invalid label')
 
 
 def test_cp_has_valid_logo_structure(testserver, testbrowser):
@@ -307,7 +303,7 @@ def test_cp_has_valid_logo_structure(testserver, testbrowser):
                 '[href="http://www.zeit.de/index"]'
                 '[title="Nachrichten auf ZEIT ONLINE"]'
                 '[id="hp.global.topnav.centerpages.logo"]') is not None, (
-        'Element a.icon-zon-logo-desktop is invalid')
+                    'Element a.icon-zon-logo-desktop is invalid')
 
 
 def test_cp_has_valid_burger_structure(testserver, testbrowser):
@@ -317,11 +313,11 @@ def test_cp_has_valid_burger_structure(testserver, testbrowser):
     assert html('div.logo_bar__menue__image'
                 '.main_nav__icon--plain'
                 '.icon-zon-logo-navigation_menu') is not None, (
-        'Element div.main_nav__icon--plain is invalid')
+                    'Element div.main_nav__icon--plain is invalid')
     assert html('div.logo_bar__menue__image'
                 '.main_nav__icon--hover'
                 '.icon-zon-logo-navigation_menu-hover') is not None, (
-        'Element .main_nav__icon--hover is invalid')
+                    'Element .main_nav__icon--hover is invalid')
 
 
 def test_cp_has_valid_search_structure(testserver, testbrowser):
@@ -333,7 +329,7 @@ def test_cp_has_valid_search_structure(testserver, testbrowser):
                 '[method="get"]'
                 '[role="search"]'
                 '[action$="suche/index"]') is not None, (
-        'Element form.search is invalid')
+                    'Element form.search is invalid')
     assert html('label.hideme[for="q"]') is not None, (
         'label.hideme is invalid')
     assert html('label.hideme[for="q"]')[0].text == 'suchen', (
@@ -341,21 +337,21 @@ def test_cp_has_valid_search_structure(testserver, testbrowser):
     assert html('button.search__button'
                 '[type="submit"]'
                 '[tabindex="2"]') is not None, (
-        'Element button.search__button is invalid')
+                    'Element button.search__button is invalid')
     assert html('span.icon-zon-logo-navigation_suche.search__button__image'
                 '.main_nav__icon--plain') is not None, (
-        'Element span in invalid')
+                    'Element span in invalid')
     assert html('span.icon-zon-logo-navigation_suche-hover'
                 '.search__button__image'
                 '.main_nav__icon--hover')[0].text is None, (
-        'Element span is not empty')
+                    'Element span is not empty')
     assert html('input.search__input'
                 '[id="q"]'
                 '[name="q"]'
                 '[type="search"]'
                 '[placeholder="Suche"]'
                 '[tabindex="1"]') is not None, (
-        'Element input.search__input is invalid')
+                    'Element input.search__input is invalid')
 
 
 @pytest.fixture(scope='session', params=(
@@ -588,10 +584,11 @@ def test_zmo_link_exists_and_is_clickable(selenium_driver, testserver):
         'primary-nav__link')
 
     assert zmo_link.get_attribute('href') == '{}/zeit-magazin/index'.format(
-        testserver.url), 'zmo link is not set correctly'
+        testserver.url
+    ), 'zmo link is not set correctly'
     assert (zmo_link.get_attribute('id') ==
             'hp.global.topnav.centerpages.zeitmagazin'), (
-        'zmo tracking is not set correctly')
+                'zmo tracking is not set correctly')
 
     zmo_link.click()
 

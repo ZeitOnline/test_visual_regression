@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-1755: Refactor traversal, allow parallel folder discovery
 
+- FIX: Repair all the PEP8 E122 errors
+
 
 1.25 (2015-06-03)
 -----------------
