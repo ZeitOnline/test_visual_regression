@@ -151,3 +151,7 @@ class IBreakingNews(zope.interface.Interface):
     title = zope.interface.Attribute('title')
     uniqueId = zope.interface.Attribute(
         'UniqueId of breaking news')
+
+
+class ITraversable(zope.interface.Interface):
+    """Content types that modify the traversal dictionary"""

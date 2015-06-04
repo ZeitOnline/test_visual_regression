@@ -30,5 +30,6 @@
     <include package="zeit.push" />
     <include package="zeit.solr" />
     <include package="zeit.wysiwyg" />
+    <include package="zeit.brightcove" />
 
 </configure>

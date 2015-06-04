@@ -37,16 +37,17 @@ require([
     images.init();
 });
 
-// add required jQuery-Plugins that are writte with AMD header here
-// make a shim of them first
-// plugins that require plugins need to make this requirement in the shim-section of config
+// add required jQuery plugins
+// require jQuery first, so we don't have to shim simple plugins
+// plugins that require other plugins or libraries must use the shim config
 require([
+    'jquery',
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount',
     'web.magazin/plugins/jquery.switchvideo',
     'web.magazin/plugins/jquery.backgroundvideo',
     'web.magazin/plugins/jquery.animatescroll'
-], function() {
+], function( $ ) {
     $( window ).referrerCount();
     $( '.inline-gallery' ).inlinegallery();
     $( 'figure[data-video]' ).switchVideo();

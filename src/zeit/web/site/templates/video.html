@@ -1,0 +1,44 @@
+{% extends "zeit.web.site:templates/content.html" %}
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+
+{% block content %}
+    <div class="video-stage-main" itemtype="http://schema.org/VideoObject" itemscope>
+        <meta itemprop="playerType" content="HTML5 Flash">
+        <meta itemprop="duration" content="{{ view.iso_duration }}">
+        <meta itemprop="thumbnail" content="{{ view.video_still | default_image_url }}">
+        <meta itemprop="width" content="{{ view.frame_width }}">
+        <article data-video-id="{{ view.context.__name__ }}">
+            {% with image = view.video_still %}
+                {% include "zeit.web.site:templates/inc/teaser_asset/image_videostage.tpl" %}
+            {% endwith %}
+            <div>
+                {{ lama.playbutton('block', view.duration) }}
+
+                <h1 itemprop="headline">
+                    <span>{{ view.supertitle | hide_none }}</span>
+                    <span>{{ view.title | hide_none }}</span>
+                </h1>
+
+                <div itemprop="description">
+                    {{ view.subtitle | hide_none }}
+                </div>
+
+                <div>
+                    <span class="modified-date">
+                        {{ view.date_last_modified | format_date('regular') }}
+                    </span>
+                    /
+                    {% if view.comments and view.comments.comment_count %}
+                        <span class="comment-count" itemprop="commentCount">{{ view.comments.headline }}</span>
+                    {% else %}
+                        <span class="comment-count">Noch keine Kommentare.</span>
+                        <meta itemprop="commentCount" content="0">
+                    {% endif %}
+                    /
+                    {# TODO: Insert article sharing menu here. #}
+                    <a href="#">Teilen</a>
+                </div>
+            </div>
+        </article>
+    </div>
+{% endblock %}
