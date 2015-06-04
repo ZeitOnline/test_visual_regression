@@ -4,6 +4,8 @@ Change log for zeit.web
 1.26 (unreleased)
 -----------------
 
+- BUG-58: Prevent that main script is sourced twice
+
 - ZON-1566: Implement video solo page view and basic template
 
 - FIX: Update and maintain javascript vendor scripts
