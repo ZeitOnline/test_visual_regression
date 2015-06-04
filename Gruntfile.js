@@ -16,7 +16,6 @@ module.exports = function(grunt) {
     var project = {
         name: '<%= pkg.name %>-<%= pkg.version%>',
         sourceDir: './',
-        d11nDir: './../zeit.web.d11n/',
         codePath: 'src/zeit/web/static/',
         codeDir: './src/zeit/web/static/',
         rubyVersion: '1.9.3',
@@ -127,12 +126,6 @@ module.exports = function(grunt) {
                 cwd: project.sourceDir + 'sass',
                 src: 'vendor/*.css',
                 dest: project.codeDir + 'css/'
-            },
-            d11n: {
-                expand: true,
-                cwd: project.sourceDir,
-                src: project.codePath,
-                dest: project.d11nDir + project.codePath
             }
         },
 
