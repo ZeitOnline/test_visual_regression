@@ -71,7 +71,7 @@ settings = {
 
     'breaking_news': (
         'http://xml.zeit.de/eilmeldung/homepage-banner'),
-
+    'enable_third_party_modules': '',
     'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
 
     'vivi_zeit.cms_keyword-configuration': (

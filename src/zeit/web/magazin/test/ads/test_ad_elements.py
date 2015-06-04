@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 import pytest
+import zeit.web.core.view
 
+def tpm(me):
+    return True
 
-def test_ad_keyword_diuqilon(selenium_driver, testserver):
+def test_ad_keyword_diuqilon(selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     driver = selenium_driver
     driver.set_window_size(768, 1024)
     driver.get('%s/artikel/01' % testserver.url)
@@ -49,7 +55,10 @@ def test_viewport_is_resized_in_ipad_landscape(selenium_driver, testserver):
         assert 'width=1280' in content
 
 
-def test_viewport_is_not_resized_in_other_browser(selenium_driver, testserver):
+def test_viewport_is_not_resized_in_other_browser(
+        selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('%s/artikel/01' % testserver.url)
@@ -62,7 +71,9 @@ def test_viewport_is_not_resized_in_other_browser(selenium_driver, testserver):
         assert 'width=device-width' in content
 
 
-def test_var_IQD_varPack_isset(selenium_driver, testserver):
+def test_var_IQD_varPack_isset(selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
     driver = selenium_driver
     driver.get('%s/artikel/01' % testserver.url)
     try:
@@ -75,7 +86,9 @@ def test_var_IQD_varPack_isset(selenium_driver, testserver):
     assert varpack == "object"
 
 
-def test_var_Krux_isset(selenium_driver, testserver):
+def test_var_Krux_isset(selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
     driver = selenium_driver
     driver.get('%s/artikel/01' % testserver.url)
     try:
@@ -88,7 +101,10 @@ def test_var_Krux_isset(selenium_driver, testserver):
     assert krux == "function"
 
 
-def test_ad_tile2_ommitted_in_portrait(selenium_driver, testserver):
+def test_ad_tile2_ommitted_in_portrait(
+        selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
     driver = selenium_driver
     driver.set_window_size(768, 1024)
     driver.get('%s/artikel/01' % testserver.url)
@@ -97,7 +113,10 @@ def test_ad_tile2_ommitted_in_portrait(selenium_driver, testserver):
     assert scripts == 1
 
 
-def test_ad_tile2_not_ommitted_in_landscape(selenium_driver, testserver):
+def test_ad_tile2_not_ommitted_in_landscape(
+        selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('%s/artikel/01' % testserver.url)

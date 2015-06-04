@@ -11,6 +11,9 @@ import zeit.web.magazin
 def is_adcontrolled(contents):
     return 'data-adDeliveryType="adcontroller"' in contents
 
+# use this to enable third_party_modules
+def tpm(me):
+    return True
 
 def test_banner_place_should_be_serialized(testserver, testbrowser):
     place = zeit.web.core.banner.Place(1, ['728x90'], True, label='')
@@ -120,7 +123,11 @@ def test_banner_view_should_be_displayed_on_succeeding_pages(
 
 
 def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
-        testserver, testbrowser):
+        testserver, testbrowser, monkeypatch):
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     # test article with xml banner is missing
     browser = testbrowser('%s/artikel/10' % testserver.url)
     # desktop ads
@@ -131,7 +138,10 @@ def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
 
 # Tests for articles
 def test_banner_mobile_should_request_with_correct_data_in_article_mode(
-        testserver, testbrowser):
+        testserver, testbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     # Ressort mode-design
     browser = testbrowser('%s/artikel/01' % testserver.url)
     if is_adcontrolled(browser.contents):
@@ -143,7 +153,10 @@ def test_banner_mobile_should_request_with_correct_data_in_article_mode(
 
 
 def test_banner_mobile_should_request_with_correct_data_in_article_leben(
-        testserver, testbrowser):
+        testserver, testbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     # Ressort leben
     browser = testbrowser('%s/artikel/02' % testserver.url)
     if is_adcontrolled(browser.contents):
@@ -155,8 +168,12 @@ def test_banner_mobile_should_request_with_correct_data_in_article_leben(
 
 
 def test_banner_mobile_should_request_with_correct_data_in_article_essen(
-        testserver, testbrowser):
+        testserver, testbrowser, monkeypatch):
+
     # Ressort essen-trinken
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     browser = testbrowser('%s/artikel/03' % testserver.url)
     if is_adcontrolled(browser.contents):
         pytest.skip("not applicable due to new ad configuration")
@@ -177,7 +194,9 @@ def test_banner_mobile_should_fallback_for_articles_without_sub_ressort(
 
 # Tests for cps
 def test_banner_mobile_should_request_with_correct_data_in_cp_leben(
-        testserver, testbrowser):
+        testserver, testbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
     # Ressort leben
     browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
     if is_adcontrolled(browser.contents):
@@ -188,7 +207,9 @@ def test_banner_mobile_should_request_with_correct_data_in_cp_leben(
 
 
 def test_banner_mobile_should_request_with_correct_data_in_cp_mode(
-        testserver, testbrowser):
+        testserver, testbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
     # Ressort mode-design
     browser = testbrowser('%s/centerpage/lebensart-2' % testserver.url)
     if is_adcontrolled(browser.contents):
@@ -199,7 +220,10 @@ def test_banner_mobile_should_request_with_correct_data_in_cp_mode(
 
 
 def test_banner_mobile_should_request_with_correct_data_in_cp_essen(
-        testserver, testbrowser):
+        testserver, testbrowser, monkeypatch):
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
     # Ressort essen-trinken
     browser = testbrowser('%s/centerpage/lebensart-3' % testserver.url)
     if is_adcontrolled(browser.contents):
@@ -211,7 +235,11 @@ def test_banner_mobile_should_request_with_correct_data_in_cp_essen(
 
 # Tests for galleries
 def test_banner_mobile_should_request_with_correct_data_in_gallery_mode(
-        testserver, testbrowser):
+        testserver, testbrowser, monkeypatch):
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     # Ressort mode-design
     browser = testbrowser(
         '%s/galerien/fs-desktop-schreibtisch-computer-3' % testserver.url)
@@ -222,7 +250,11 @@ def test_banner_mobile_should_request_with_correct_data_in_gallery_mode(
 
 
 def test_banner_mobile_should_request_with_correct_data_in_gallery_essen(
-        testserver, testbrowser):
+        testserver, testbrowser, monkeypatch):
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     # Ressort essen-trinken
     browser = testbrowser(
         '%s/galerien/fs-desktop-schreibtisch-computer-2' % testserver.url)
@@ -233,7 +265,11 @@ def test_banner_mobile_should_request_with_correct_data_in_gallery_essen(
 
 
 def test_banner_mobile_should_request_with_correct_data_in_gallery_leben(
-        testserver, testbrowser):
+        testserver, testbrowser, monkeypatch):
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     # Ressort leben
     browser = testbrowser(
         '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
@@ -245,7 +281,11 @@ def test_banner_mobile_should_request_with_correct_data_in_gallery_leben(
 
 # Test for hp
 def test_banner_mobile_should_request_with_correct_data_at_hp(
-        testserver, testbrowser):
+        testserver, testbrowser, monkeypatch):
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
     if is_adcontrolled(browser.contents):
         pytest.skip("not applicable due to new ad configuration")
