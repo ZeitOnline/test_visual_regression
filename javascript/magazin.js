@@ -7,10 +7,10 @@
 // This lets Modernizr be in the <head> and also compatible with other modules.
 define( 'modernizr', [], window.Modernizr );
 
-// load config first including path and shim config
-require([ 'config' ], function() {});
+// include requirejs and config first, including path and shim config
+require([ 'vendor/require', 'config' ], function() {});
 
-// required plain vanilla JS programs here
+// require anonymous AMD modules here
 // the order in the array and the function names have to correlate
 // which is quite disturbing in my book…
 require([
