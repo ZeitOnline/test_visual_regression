@@ -81,31 +81,31 @@
 		color: $white
 		font-size: $font-mxl--rem
 		line-height: 1.12em
+		&:hover
+			color: $white
 		+respond-min($break-tablet-min)
 			font-size: remify(26px)
 		+respond-min($break-desktop-min)
 			font-size: $font-xxxl--rem
 			line-height: 1.28em
-		&:hover
-			color: $white
 
 .teaser-topic-item
 	display: none
 	+respond-min($break-tablet-min)
 		display: block
-	&:after
-		content: ""
-		display: block
-		width: 15%
-		height: 0px
-		margin-bottom: $petite
-		+respond-min($break-desktop-min)
+		&:after
+			content: ""
+			display: block
+			width: 15%
+			height: 0px
+			margin-bottom: $petite
+		&:first-child:after
 			border-bottom: 1px solid $zon_mid_grey
-	&:first-child:after
-		+respond-min($break-tablet-min)
+		&:last-child:after
+			border: none
+	+respond-min($break-desktop-min)
+		&:after
 			border-bottom: 1px solid $zon_mid_grey
-	&:last-child:after
-		border: none
 	&__kicker
 		@extend %teaser-kicker
 		color: $zon_mid_grey
