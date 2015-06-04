@@ -24,7 +24,12 @@
 {% endblock %}
 
 {% block teaser_media_position_after_title %}
-    <a href="{{ teaser.uniqueId | translate_url }}">
+    {% if area.referenced_cp is not none %}
+        {% set readmore_ref = area.referenced_cp.uniqueId | translate_url %}
+    {% else %}
+        {% set readmore_ref = teaser.uniqueId | translate_url %}
+    {% endif %}
+    <a href="{{ readmore_ref }}">
         <span class="{{ self.layout() }}__readmore">Alles zum Thema</span>
     </a>
 {% endblock %}
