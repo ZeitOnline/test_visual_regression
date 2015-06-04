@@ -26,6 +26,7 @@ import zeit.cms.repository.interfaces
 import zeit.connector
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
+import zeit.content.dynamicfolder.interfaces
 import zeit.content.gallery.interfaces
 import zeit.find.search
 import zeit.magazin.interfaces
@@ -429,6 +430,7 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
         try:
             tdict = super(RepositoryTraverser, self).__call__(request)
             tdict.setdefault('request', request)
+            self.rewrite_cp2015(tdict)
             tdict = zope.component.getMultiAdapter(
                 (tdict['context'], tdict),
                 zeit.web.core.interfaces.ITraversable)
@@ -437,7 +439,21 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                 raise pyramid.httpexceptions.HTTPNotFound()
         except (zope.component.ComponentLookupError, TypeError):
             pass
-        return tdict
+        finally:
+            return tdict
+
+    @staticmethod
+    def rewrite_cp2015(tdict):
+        # XXX Remove after parallel cp-editor operation period is over (ND).
+        try:
+            name = '{}.cp2015'.format(tdict['context'].__name__)
+            pos = tdict['traversed'].index(tdict['context'].__name__)
+            tdict['context'] = tdict['context'].__parent__[name]
+        except (KeyError, TypeError, ValueError):
+            pass
+        else:
+            travd = tdict['traversed']
+            tdict['traversed'] = travd[:pos] + (name,) + travd[pos + 1:]
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
@@ -469,7 +485,7 @@ class TraversableArticle(dict):
             zope.interface.alsoProvides(
                 context, zeit.web.core.article.IPhotoclusterArticle)
 
-        if tdict['view_name'][0:5] == 'seite' and not tdict['subpath']:
+        if tdict['view_name'].startswith('seite') and not tdict['subpath']:
             tdict['view_name'] = 'seite'
 
         super(TraversableArticle, self).__init__(tdict)
@@ -498,12 +514,6 @@ class TraversableGallery(dict):
 class TraversableCenterPage(dict):
 
     def __init__(self, context, tdict):
-        try:
-            tdict['context'] = tdict['context'].__parent__[
-                '{}.cp2015'.format(tdict['context'].__name__)]
-        except (KeyError, TypeError):
-            pass
-
         form = find_block(context, module='search-form')
         area = find_block(context, attrib='area', kind='ranking')
         if form and area:
@@ -525,17 +535,17 @@ class TraversableCenterPage(dict):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
-@grokcore.component.adapter(zeit.cms.repository.interfaces.IFolder, dict)
-class TraversableFolder(dict):
+@grokcore.component.adapter(
+    zeit.content.dynamicfolder.interfaces.IRepositoryDynamicFolder, dict)
+class TraversableDynamic(dict):
 
     def __init__(self, context, tdict):
         try:
-            tdict['context'] = tdict['context']['{}.cp2015'.format(
-                tdict['view_name'])][tdict['subpath'][0]]
+            tdict['context'] = tdict['context'][tdict['view_name']]
         except (IndexError, KeyError, TypeError):
             pass
         else:
             tdict['traversed'] += (tdict['view_name'],)
             tdict['view_name'] = ''
         finally:
-            super(TraversableFolder, self).__init__(tdict)
+            super(TraversableDynamic, self).__init__(tdict)
