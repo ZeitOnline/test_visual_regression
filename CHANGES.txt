@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-1755: Refactor traversal, allow parallel folder discovery
 
+- NFR: Make inclusion of tpm configurable
+
 
 1.25 (2015-06-03)
 -----------------
