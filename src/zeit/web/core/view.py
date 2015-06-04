@@ -597,6 +597,7 @@ def json_delta_time(request):
         return pyramid.response.Response(
             'Missing parameter: unique_id or date', 412)
 
+
 @pyramid.view.view_config(
     route_name='toggle_third_party_modules',
     renderer='json',

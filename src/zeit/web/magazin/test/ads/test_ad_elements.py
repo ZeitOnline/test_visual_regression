@@ -2,8 +2,10 @@
 import pytest
 import zeit.web.core.view
 
+
 def tpm(me):
     return True
+
 
 def test_ad_keyword_diuqilon(selenium_driver, testserver, monkeypatch):
     monkeypatch.setattr(

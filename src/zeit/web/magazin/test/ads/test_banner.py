@@ -11,9 +11,11 @@ import zeit.web.magazin
 def is_adcontrolled(contents):
     return 'data-adDeliveryType="adcontroller"' in contents
 
+
 # use this to enable third_party_modules
 def tpm(me):
     return True
+
 
 def test_banner_place_should_be_serialized(testserver, testbrowser):
     place = zeit.web.core.banner.Place(1, ['728x90'], True, label='')
