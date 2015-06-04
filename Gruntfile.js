@@ -201,8 +201,8 @@ module.exports = function(grunt) {
             },
             dev: {
                 options: {
-                    useSourceUrl: false, // true causes a bug in sjcl
-                    generateSourceMaps: true,
+                    useSourceUrl: true,
+                    generateSourceMaps: false,
                     optimize: 'none'
                 }
             },
