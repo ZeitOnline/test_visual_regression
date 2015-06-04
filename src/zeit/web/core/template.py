@@ -23,6 +23,7 @@ import zeit.web
 import zeit.web.core.comments
 import zeit.web.core.interfaces
 import zeit.web.core.utils
+import zeit.content.cp
 
 log = logging.getLogger(__name__)
 
@@ -125,6 +126,18 @@ def get_layout(block, request=None):
         if layout:
             return layout
 
+    source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS.factory
+    source_xml = source._get_tree()
+
+    def allowed(layout_id):
+
+        if not getattr(block, '__parent__', None):
+            return
+
+        return block.__parent__.kind in source_xml.xpath(
+            '/layouts/layout[@id="{}"]/@areas'.format(
+                layout_id))[0].split(' ')
+
     try:
         layout_id = block.layout.id
     except (AttributeError, TypeError):
@@ -138,6 +151,8 @@ def get_layout(block, request=None):
         else:
             layout = 'hide'
     else:
+        layout = layout_id
+
         if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
             log.debug('Broken ref at {}'.format(teaser.uniqueId))
             layout = 'hide'
@@ -145,13 +160,15 @@ def get_layout(block, request=None):
             # XXX What about placeholder containers?
             layout = 'hide'
         elif getattr(teaser, 'serie', None):
-            layout = 'zon-series'
-            if teaser.serie.column and get_column_image(teaser):
+            if allowed('zon-series'):
+                layout = 'zon-series'
+
+            if teaser.serie.column and get_column_image(teaser) and (
+                    allowed("zon-column")):
                 layout = 'zon-column'
         elif getattr(teaser, 'blog', None):
-            layout = 'zon-blog'
-        else:
-            layout = layout_id
+            if allowed("zon-blog"):
+                layout = 'zon-blog'
 
     layout = zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)

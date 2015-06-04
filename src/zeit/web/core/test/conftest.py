@@ -108,6 +108,13 @@ settings = {
         'egg://zeit.web.core/data/config/cp-layouts.xml'),
     'vivi_zeit.content.cp_bar-layout-source': (
         'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
+    'vivi_zeit.content.cp_area-config-source': (
+        'egg://zeit.web.core/data/config/cp-areas.xml'),
+    'vivi_zeit.content.cp_region-config-source': (
+        'egg://zeit.web.core/data/config/cp-regions.xml'),
+    'vivi_zeit.content.cp_cp-types-url': (
+        'egg://zeit.web.core/data/config/cp-types.xml'),
+    'vivi_zeit.content.cp_cp-feed-max-items': '30',
     'vivi_zeit.web_banner-source': (
         'egg://zeit.web.core/data/config/banner.xml'),
     'vivi_zeit.web_banner-id-mappings': (

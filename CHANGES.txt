@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - ZON-1597: Add focussed nextread
 
+- ZON-1492: Add newsticker box
+
 - FIX: Consider disabled comment section
 
 - FIX: Repair view config for comment postings
