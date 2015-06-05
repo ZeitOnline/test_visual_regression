@@ -445,12 +445,12 @@ def test_article_has_correct_sharing_image(testserver, testbrowser):
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert zeit.web.core.template.closest_substitute_image(
         article_view.image_group, 'og-image').uniqueId == (
-        'http://xml.zeit.de/exampleimages/artikel/01/'
-        'schoppenstube/schoppenstube-540x304.jpg')
+            'http://xml.zeit.de/exampleimages/artikel/01/'
+            'schoppenstube/schoppenstube-540x304.jpg')
     assert zeit.web.core.template.closest_substitute_image(
         article_view.image_group, 'twitter-image-large').uniqueId == (
-        'http://xml.zeit.de/exampleimages/artikel/01/'
-        'schoppenstube/schoppenstube-540x304.jpg')
+            'http://xml.zeit.de/exampleimages/artikel/01/'
+            'schoppenstube/schoppenstube-540x304.jpg')
 
 
 def test_article_has_correct_product_id(testserver):

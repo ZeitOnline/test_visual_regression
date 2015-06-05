@@ -519,13 +519,12 @@ class NextreadTeaserBlock(object):
     zope.interface.implements(zeit.web.core.interfaces.INextreadTeaserBlock)
 
     def __init__(self, context, image_pattern='default'):
-        self.teasers = zeit.magazin.interfaces.INextRead(
-            context).nextread
+        self.teasers = zeit.magazin.interfaces.INextRead(context).nextread
 
         # Select layout id from a list of possible values, default to 'base'.
-        self.layout_id = (
-            lambda l: l if l in ('base', 'minimal', 'maximal') else 'base')(
-            zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout)
+        nrl = zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout
+        self.layout_id = nrl if nrl in ('minimal', 'maximal') else 'base'
+
         self.image_pattern = image_pattern
         # TODO: Nextread lead should be configurable with ZMO-185.
         self.lead = 'Lesen Sie jetzt'
