@@ -4,9 +4,9 @@ import logging
 import mimetypes
 import re
 import time
+import types
 import urllib
 import urlparse
-
 import jinja2
 import babel.dates
 import pyramid.threadlocal
@@ -23,6 +23,7 @@ import zeit.web
 import zeit.web.core.comments
 import zeit.web.core.interfaces
 import zeit.web.core.utils
+import zeit.content.cp
 
 log = logging.getLogger(__name__)
 
@@ -51,6 +52,7 @@ def create_url(obj):
 @zeit.web.register_filter
 def format_date(obj, type='short'):
     formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
+               'regular': "d. MMMM yyyy, H:mm",
                'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd",
                'iso8601': "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
                'time_only': "HH:mm 'Uhr'"}
@@ -124,6 +126,18 @@ def get_layout(block, request=None):
         if layout:
             return layout
 
+    source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS.factory
+    source_xml = source._get_tree()
+
+    def allowed(layout_id):
+
+        if not getattr(block, '__parent__', None):
+            return
+
+        return block.__parent__.kind in source_xml.xpath(
+            '/layouts/layout[@id="{}"]/@areas'.format(
+                layout_id))[0].split(' ')
+
     try:
         layout_id = block.layout.id
     except (AttributeError, TypeError):
@@ -137,6 +151,8 @@ def get_layout(block, request=None):
         else:
             layout = 'hide'
     else:
+        layout = layout_id
+
         if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
             log.debug('Broken ref at {}'.format(teaser.uniqueId))
             layout = 'hide'
@@ -144,13 +160,15 @@ def get_layout(block, request=None):
             # XXX What about placeholder containers?
             layout = 'hide'
         elif getattr(teaser, 'serie', None):
-            layout = 'zon-series'
-            if teaser.serie.column and get_column_image(teaser):
+            if allowed('zon-series'):
+                layout = 'zon-series'
+
+            if teaser.serie.column and get_column_image(teaser) and (
+                    allowed("zon-column")):
                 layout = 'zon-column'
         elif getattr(teaser, 'blog', None):
-            layout = 'zon-blog'
-        else:
-            layout = layout_id
+            if allowed("zon-blog"):
+                layout = 'zon-blog'
 
     layout = zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
@@ -226,6 +244,7 @@ scales = {
     'zon-article-large': (820, 462),
     'zon-printbox': (320, 234),
     'zon-printbox-wide': (320, 148),
+    'zon-topic': (980, 418),
     'zon-column': (300, 400),
     'brightcove-still': (580, 326),
     'brightcove-thumbnail': (120, 67),
@@ -500,6 +519,12 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
 
 
 @zeit.web.register_global
+def get_default_image_id():
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return conf.get('default_teaser_images')
+
+
+@zeit.web.register_global
 def create_image_url(teaser_block, image):
     image_pattern = teaser_block.layout.image_pattern
     image_url = default_image_url(
@@ -553,6 +578,21 @@ def attr_safe(text):
 def get_google_tag_manager_host():
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get('google_tag_manager_host')
+
+
+@zeit.web.register_global
+def to_list(iterable):
+    return types.ListType(iterable)
+
+
+@zeit.web.register_global
+def to_tuple(iterable):
+    return types.TupleType(iterable)
+
+
+@zeit.web.register_global
+def to_dict(mapping):
+    return types.DictType(mapping)
 
 
 @zeit.web.register_global

@@ -35,6 +35,7 @@ class LegacyModule(zeit.web.core.block.Module, zeit.web.core.utils.nslist):
         zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
         self.layout = kw.pop('layout', 'default')
         self.type = kw.pop('type', 'teaser')
+        self.__parent = kw.pop('parent', None)
 
     def __hash__(self):
         if getattr(self.layout, 'id', None):
@@ -92,9 +93,10 @@ class RenderedLegacyArea(LegacyArea):
         values = auto._query_centerpage()[:area.count]
 
         lids = [block.layout.id] + area.count * ['zon-parquet-small']
-        modules = [LegacyModule([t], layout=lids.pop(0)) for t in values]
-
+        modules = [LegacyModule(
+            [t], layout=lids.pop(0), parent=self) for t in values]
         LegacyArea.__init__(self, modules, kind='parquet', is_teaserbar=True)
+
         self.read_more = block.read_more
         self.read_more_url = block.read_more_url
         self.title = block.title

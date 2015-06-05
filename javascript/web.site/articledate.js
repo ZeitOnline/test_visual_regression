@@ -3,7 +3,7 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.1
  */
-define([ 'require', 'jquery' ], function( require, $ ) {
+define([ 'jquery' ], function( $ ) {
     return {
         init: function() {
             var dates = $( '.encoded-date' );

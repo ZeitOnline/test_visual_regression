@@ -6,7 +6,7 @@
  * photocluster.js: module for photocluster
  * @module photocluster
  */
-define(['require', 'jquery'], function(require, $) {
+define([ 'jquery' ], function( $ ) {
 
     /**
      * photocluster.js: initialize photocluster

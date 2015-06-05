@@ -18,6 +18,7 @@
 {%- if request.authenticated_userid %}
 	{%- block comment_form %}
 	<form class="comment-form" method="POST" id="comment-form" data-uid="{{ request.session.user.uid }}">
+		{% if view.comments_allowed -%}
 		<div class="comment-form__text">
 			{% if request.session.user.picture %}
 			<img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name }}" src="{{ request.session.user.picture }}">
@@ -37,6 +38,7 @@
 			<a href="{{ view.content_url }}" class="comment-form__cancel {{ class }} js-cancel-reply">Abbrechen</a>
 			<input class="button" type="submit" value="{{ submit_value }}" />
 		</p>
+		{%- endif %}
 	</form>
 	{%- endblock %}
 {%- else %}

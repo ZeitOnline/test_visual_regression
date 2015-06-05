@@ -100,7 +100,7 @@ def test_copyright_entry_images_are_rendered_correctly(
         '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     assert ('/zeit-magazin/2014/17/lamm-aubergine/'
             'lamm-aubergine-zmo-landscape-large.jpg') in browser.cssselect(
-        '.copyrights__entry__image')[0].attrib['style']
+                '.copyrights__entry__image')[0].attrib['style']
 
 
 def test_copyright_entry_labels_are_rendered_correctly(
@@ -138,7 +138,7 @@ def test_nextread_teaser_images_show_up_in_copyrights(testserver, testbrowser):
     browser = testbrowser('%s/artikel/header1' % testserver.url)
     assert ('/zeit-magazin/2014/17/pistazienparfait/'
             'pistazienparfait-zmo-nextread.jpg') in browser.cssselect(
-        'div.copyrights__entry__image')[0].attrib['style']
+                'div.copyrights__entry__image')[0].attrib['style']
 
 
 def test_minimal_nextread_teaser_does_not_show_up_in_copyrights(

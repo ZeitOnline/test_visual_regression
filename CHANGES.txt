@@ -1,12 +1,42 @@
 Change log for zeit.web
 =======================
 
-1.25 (unreleased)
+1.26 (unreleased)
 -----------------
+
+- BUG-58: Prevent that main script is sourced twice
+
+- ZON-1566: Implement video solo page view and basic template
+
+- ZON-1755: Refactor traversal, allow parallel folder discovery
+
+- HOTFIX: Add modernizr test for CSS 3D Transforms
+
+- FIX: Update and maintain javascript vendor scripts
+
+- FIX: Repair all the PEP8 E122 errors
+
+- NFR: Make inclusion of tpm configurable
+
+
+1.25 (2015-06-03)
+-----------------
+
+- ZON-1582: Enable liveblogs
 
 - ZON-1749: Add dynamic centerpage collection test folder
 
 - ZON-1432: Add Servicebox as CP-Extra
+
+- ZON-1692: Implement topic teaser (Dossier-Teaser)
+
+- ZON-1597: Add focussed nextread
+
+- ZON-1492: Add newsticker box
+
+- FIX: Consider disabled comment section
+
+- FIX: Repair view config for comment postings
 
 - Add ordered and unordered list elements
 

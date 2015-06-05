@@ -65,24 +65,28 @@
         <noscript>
             <link href="{{ request.asset_url('css/icons/magazin.fallback.css') }}" rel="stylesheet">
         </noscript>
-        <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
-        <script type="text/javascript" src="{{ request.asset_url('js/libs/iqd/adam.js') }}"></script>
-        <script type="text/javascript" src="http://c.t4ft.de/c/ftg_iq.min.js"></script>
-        {% if view.context.advertising_enabled %}
-            <!--[if gt IE 9]>-->
-            <script src="{{ request.asset_url('js/libs/iqd/sasmobile.js') }}"></script>
-            <!-- <![endif]-->
+        {% if view.enable_third_party_modules and view.enable_iqd%}
+            <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
+            <script type="text/javascript" src="{{ request.asset_url('js/libs/iqd/adam.js') }}"></script>
+
+            <script type="text/javascript" src="http://c.t4ft.de/c/ftg_iq.min.js"></script>
+            {% if view.context.advertising_enabled %}
+                <!--[if gt IE 9]>-->
+                <script src="{{ request.asset_url('js/libs/iqd/sasmobile.js') }}"></script>
+                <!-- <![endif]-->
+            {% endif %}
+            {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.ad_delivery_type ignore missing %}
+            {%- block content_ad_script -%}{%- endblock -%}
         {% endif %}
-        {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.ad_delivery_type ignore missing %}
-        {%- block content_ad_script -%}{%- endblock -%}
     </head>
     <body itemscope itemtype="http://schema.org/WebPage" data-adDeliveryType="{{ view.ad_delivery_type }}">
+        {% if view.enable_third_party_modules and view.enable_tracking %}
         <!-- tracking at top -->
-        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/ads/%s/iqd_nuggad.html" % view.ad_delivery_type ignore missing %}
-        {% include "zeit.web.core:templates/inc/ads/%s/iqd_krux.html" % view.ad_delivery_type ignore missing %}
-        {% include "zeit.web.core:templates/inc/ads/%s/static_oop_tag.html" % view.ad_delivery_type ignore missing %}
-
+            {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
+            {% include "zeit.web.core:templates/inc/ads/%s/iqd_nuggad.html" % view.ad_delivery_type ignore missing %}
+            {% include "zeit.web.core:templates/inc/ads/%s/iqd_krux.html" % view.ad_delivery_type ignore missing %}
+            {% include "zeit.web.core:templates/inc/ads/%s/static_oop_tag.html" % view.ad_delivery_type ignore missing %}
+        {% endif %}
         <div class="page-wrap">
 
         {% block adplace_top %}
@@ -192,10 +196,11 @@
 
         <script type="text/javascript">
             var require = {
+                baseUrl: '{{ request.asset_url("js/") }}',
                 urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"
             };
         </script>
-        <script type="text/javascript" data-main="{{ request.asset_url('js/magazin.js') }}" src="{{ request.asset_url('js/vendor/require.js') }}"></script>
+        <script type="text/javascript" src="{{ request.asset_url('js/magazin.js') }}"></script>
         <script type="text/javascript">
             if( typeof window.sasmobile === 'function' && window.ZMO.isMobileView() ) {
                 iqd.callAds();

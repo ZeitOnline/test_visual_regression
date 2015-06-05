@@ -6,7 +6,7 @@
  * Module for the homepage videoStage
  * @module videoStage
  */
-define([ 'jquery', 'video' ], function( $, video ) {
+define([ 'jquery', 'web.site/video/video' ], function( $, video ) {
     return {
         init: function() {
             var article = $( '.video-stage-main .video-large' ),

@@ -13,9 +13,9 @@ class Gallery(zeit.web.core.view_gallery.Gallery, zeit.web.site.view.Base):
     advertising_enabled = True
 
 
-@pyramid.view.view_config(request_param='form=comment',
+@pyramid.view.view_config(name='comment-form',
                           renderer='templates/inc/comments/comment-form.html')
-@pyramid.view.view_config(request_param='form=report',
+@pyramid.view.view_config(name='report-form',
                           renderer='templates/inc/comments/report-form.html')
 class CommentForm(Gallery):
     pass

@@ -7,8 +7,10 @@ import pyramid.request
 import pyramid.testing
 import pyramid.traversal
 import pytest
-import zeit.web.core.application
 import requests
+
+import zeit.content.cp.interfaces
+import zeit.web.core.application
 
 
 @pytest.fixture
@@ -63,6 +65,15 @@ def test_parallel_cps_should_be_discovered_during_traversal(my_traverser):
     tdict = my_traverser(req)
     assert tdict['context'].uniqueId == (
         'http://xml.zeit.de/parallel_cps/index.cp2015')
+    assert zeit.content.cp.interfaces.ICenterPage.providedBy(tdict['context'])
+
+
+def test_parallel_folders_should_be_discovered_during_traversal(my_traverser):
+    req = pyramid.request.Request.blank('/parallel_cps/serie/index')
+    tdict = my_traverser(req)
+    assert tdict['context'].uniqueId == (
+        'http://xml.zeit.de/parallel_cps/serie.cp2015/index')
+    assert zeit.content.cp.interfaces.ICenterPage.providedBy(tdict['context'])
 
 
 def test_acceptable_pagination_should_not_redirect(testserver):

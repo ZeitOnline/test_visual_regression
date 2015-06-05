@@ -788,13 +788,13 @@ def test_macro_copyrights(jinja2_env):
     assert len(snippet.cssselect('li.copyrights__entry')) == 2, (
         'Two copyright entries should be contained in the list.')
 
-    assert snippet.cssselect('li.copyrights__entry:nth-child(1) '
-                             'span.copyrights__entry__label a'), (
-        'The first entry should produce a link element.')
+    assert snippet.cssselect(
+        'li.copyrights__entry:nth-child(1) .copyrights__entry__label a'), (
+            'The first entry should produce a link element.')
 
-    assert not snippet.cssselect('li.copyrights__entry:nth-child(2) '
-                                 'span.copyrights__entry__label a'), (
-        'The second entry should not produce a link element.')
+    assert not snippet.cssselect(
+        'li.copyrights__entry:nth-child(2) .copyrights__entry__label a'), (
+            'The second entry should not produce a link element.')
 
 
 def test_macro_include_cp_ad_produces_markup(jinja2_env):

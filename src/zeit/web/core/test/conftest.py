@@ -71,7 +71,7 @@ settings = {
 
     'breaking_news': (
         'http://xml.zeit.de/eilmeldung/homepage-banner'),
-
+    'enable_third_party_modules': '',
     'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
 
     'vivi_zeit.cms_keyword-configuration': (
@@ -108,6 +108,13 @@ settings = {
         'egg://zeit.web.core/data/config/cp-layouts.xml'),
     'vivi_zeit.content.cp_bar-layout-source': (
         'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
+    'vivi_zeit.content.cp_area-config-source': (
+        'egg://zeit.web.core/data/config/cp-areas.xml'),
+    'vivi_zeit.content.cp_region-config-source': (
+        'egg://zeit.web.core/data/config/cp-regions.xml'),
+    'vivi_zeit.content.cp_cp-types-url': (
+        'egg://zeit.web.core/data/config/cp-types.xml'),
+    'vivi_zeit.content.cp_cp-feed-max-items': '30',
     'vivi_zeit.web_banner-source': (
         'egg://zeit.web.core/data/config/banner.xml'),
     'vivi_zeit.web_banner-id-mappings': (
@@ -131,6 +138,14 @@ settings = {
     'vivi_zeit.imp_scale-source': 'egg://zeit.web.core/data/config/scales.xml',
     'vivi_zeit.content.link_source-blogs': (
         'egg://zeit.web.core/data/config/blogs_meta.xml'),
+    'vivi_zeit.brightcove_read-url': 'http://localhost:6552/video/bc.json',
+    'vivi_zeit.brightcove_write-url': 'http://localhost:6552/video/bc.json',
+    'vivi_zeit.brightcove_read-token': 'foo',
+    'vivi_zeit.brightcove_write-token': 'bar',
+    'vivi_zeit.brightcove_index-principal': 'zope.brightcove',
+    'vivi_zeit.brightcove_timeout': '300',
+    'vivi_zeit.brightcove_video-folder': 'video',
+    'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 

@@ -50,6 +50,21 @@ class Base(object):
         self.context = context
         self.request = request
 
+    @zeit.web.reify
+    def enable_third_party_modules(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('enable_third_party_modules', True)
+
+    @zeit.web.reify
+    def enable_iqd(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('enable_iqd', True)
+
+    @zeit.web.reify
+    def enable_tracking(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('enable_tracking', True)
+
     def _set_response_headers(self):
         # ZMO Version header
         try:
@@ -459,6 +474,9 @@ class Content(Base):
 
     @zeit.web.reify
     def comments(self):
+        if not self.show_commentthread:
+            return
+
         sort = self.request.params.get('sort', 'asc')
         page = self.request.params.get('page', 1)
         cid = self.request.params.get('cid', None)
@@ -524,6 +542,14 @@ class Content(Base):
                         "d. MMMM yyyy", locale="de_De")
                 return base64.b64encode(label.encode('latin-1'))
 
+    @zeit.web.reify
+    def comments_allowed(self):
+        return self.context.commentsAllowed and self.show_commentthread
+
+    @zeit.web.reify
+    def show_commentthread(self):
+        return self.context.commentSectionEnable
+
 
 @pyramid.view.view_config(route_name='health_check')
 def health_check(request):
@@ -570,6 +596,16 @@ def json_delta_time(request):
     else:
         return pyramid.response.Response(
             'Missing parameter: unique_id or date', 412)
+
+
+@pyramid.view.view_config(
+    route_name='toggle_third_party_modules',
+    renderer='json',
+    custom_predicates=(zeit.web.core.is_admin,))
+def toggle_third_party_modules(request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['enable_third_party_modules'] = not conf['enable_third_party_modules']
+    return conf
 
 
 def json_delta_time_from_date(date, parsed_base_date):

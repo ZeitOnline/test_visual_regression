@@ -2,7 +2,6 @@
 import logging
 import os.path
 
-import PIL
 import grokcore.component
 import lxml.etree
 import lxml.html
@@ -158,8 +157,17 @@ class BaseImage(object):
 
     @property
     def ratio(self):
-        width, height = PIL.Image.open(self.image.open()).size
-        return float(width) / float(height)
+        try:
+            width, height = self.image.getImageSize()
+            return float(width) / float(height)
+        except (TypeError, ZeroDivisionError):
+            return
+
+    def getImageSize(self):  # NOQA
+        try:
+            return self.image.getImageSize()
+        except AttributeError:
+            return
 
 
 @grokcore.component.implementer(IFrontendBlock)
@@ -274,16 +282,11 @@ class BaseVideo(object):
 
     @property
     def highest_rendition(self):
-        try:
-            highest_rendition = self.renditions[0]
-            for rendition in self.renditions:
-                if highest_rendition.frame_width < rendition.frame_width:
-                    highest_rendition = rendition
-            return highest_rendition.url
-        except AttributeError:
-            logging.exception('No renditions set')
-        except TypeError:
-            logging.exception('Renditions are propably empty')
+        if self.renditions:
+            high = sorted(self.renditions, key=lambda r: r.frame_width).pop()
+            return getattr(high, 'url', '')
+        else:
+            logging.exception('No video renditions set.')
 
 
 @grokcore.component.implementer(IFrontendBlock)
@@ -510,39 +513,28 @@ def _inline_html(xml, elements=None):
         return
 
 
-class NextreadLayout(object):
-
-    """Implementation to match layout sources from centerpages."""
-
-    def __init__(self, **kwargs):
-        self.id = kwargs.get('id')
-        self.image_pattern = 'zmo-nextread'
-
-    def __eq__(self, value):
-        return self.id == value
-
-    def __ne__(self, value):
-        return self.id != value
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.INextreadTeaserBlock)
-@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 class NextreadTeaserBlock(object):
-
     """Teaser block for nextread teasers in articles."""
 
-    def __init__(self, context):
-        self.teasers = zeit.magazin.interfaces.INextRead(
-            context).nextread
+    zope.interface.implements(zeit.web.core.interfaces.INextreadTeaserBlock)
+
+    def __init__(self, context, image_pattern='default'):
+        self.teasers = zeit.magazin.interfaces.INextRead(context).nextread
 
         # Select layout id from a list of possible values, default to 'base'.
-        layout_id = (
-            lambda l: l if l in ('base', 'minimal', 'maximal') else 'base')(
-            zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout)
-        self.layout = NextreadLayout(id=layout_id)
+        nrl = zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout
+        self.layout_id = nrl if nrl in ('minimal', 'maximal') else 'base'
+
+        self.image_pattern = image_pattern
         # TODO: Nextread lead should be configurable with ZMO-185.
-        self.lead = 'Lesen Sie jetzt:'
+        self.lead = 'Lesen Sie jetzt'
         self.multitude = 'multi' if len(self) - 1 else 'single'
+
+    @property
+    def layout(self):
+        return zeit.content.cp.layout.BlockLayout(
+            self.layout_id, self.layout_id, areas=[],
+            image_pattern=self.image_pattern)
 
     def __iter__(self):
         return iter(self.teasers)
