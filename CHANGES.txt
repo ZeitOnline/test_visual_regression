@@ -8,11 +8,13 @@ Change log for zeit.web
 
 - ZON-1566: Implement video solo page view and basic template
 
-- FIX: Update and maintain javascript vendor scripts
+- ZON-1755: Refactor traversal, allow parallel folder discovery
 
 - HOTFIX: Add modernizr test for CSS 3D Transforms
 
-- ZON-1755: Refactor traversal, allow parallel folder discovery
+- FIX: Update and maintain javascript vendor scripts
+
+- FIX: Repair all the PEP8 E122 errors
 
 - NFR: Make inclusion of tpm configurable
 
