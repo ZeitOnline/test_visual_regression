@@ -51,7 +51,10 @@
 			max-width: 300px
 			padding: 0
 	&--tile_8-on-article
+		display: none
 		background: $zon_lighter_grey
 		margin: 0 auto
 		padding: remify(30px 0)
+		+respond_min($break-tablet-min)
+			display: block
 
