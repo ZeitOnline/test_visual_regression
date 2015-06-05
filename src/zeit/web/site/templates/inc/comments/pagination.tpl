@@ -1,12 +1,13 @@
 {%- set pages = view.comments.pages %}
 {%- if pages.pager %}
+
 <div class="comment-section__item">
 	<div class="pager" role="navigation" aria-labeledby="comments-pagination-title">
 		<div class="visually-hidden" id="comments-pagination-title">Kommentarseiten</div>
 		{% if pages.current == pages.total %}
-		<a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(page=pages.current-1, cid=None) }}#comments">Vorherige Kommentare</a>
+		<a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(page=pages.current-1, cid=None) }}#comments">Vorherige Kommentar-Seite</a>
 		{% else %}
-		<a class="pager__button pager__button--next" href="{{ view.request | append_get_params(page=pages.current+1, cid=None) }}#comments">Nächste Kommentare</a>
+		<a class="pager__button pager__button--next" href="{{ view.request | append_get_params(page=pages.current+1, cid=None) }}#comments">Nächste Kommentar-Seite</a>
 		{% endif %}
 		<ul class="pager__pages">
 			{% for page in pages.pager %}
