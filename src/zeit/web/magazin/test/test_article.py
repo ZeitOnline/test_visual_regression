@@ -203,7 +203,15 @@ def test_webtrekk_series_tag_is_set_corectly(testserver, testbrowser):
             '06') % (testserver.host, testserver.port) in browser.contents
 
 
-def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):
+def test_ivw_tracking_for_mobile_and_desktop(
+        selenium_driver, testserver, monkeypatch):
+
+    def tpm(me):
+        return True
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     driver = selenium_driver
     # ipad landscape
     driver.set_window_size(1024, 768)

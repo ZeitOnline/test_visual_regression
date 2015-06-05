@@ -12,6 +12,11 @@ def is_adcontrolled(contents):
     return 'data-adDeliveryType="adcontroller"' in contents
 
 
+# use this to enable third_party_modules
+def tpm(me):
+    return True
+
+
 def test_banner_toggles_should_return_value(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/zeitonline')
@@ -19,7 +24,12 @@ def test_banner_toggles_should_return_value(application):
     assert view.banner_toggles('testing_me') is False
 
 
-def test_adcontroller_head_code_is_present(testserver, testbrowser):
+def test_adcontroller_head_code_is_present(
+        testserver, testbrowser, monkeypatch):
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     browser = testbrowser('%s/zeit-online/index' % testserver.url)
     if not is_adcontrolled(browser.contents):
         pytest.skip("not applicable due to oldschool ad configuration")
@@ -40,7 +50,10 @@ def test_adcontroller_adtags_are_present(testserver, testbrowser):
     assert 'AdController.render(\'iqadtile7\');' in browser.contents
 
 
-def test_adcontroller_finanlizer_is_present(testserver, testbrowser):
+def test_adcontroller_finanlizer_is_present(
+        testserver, testbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
     browser = testbrowser('%s/zeit-online/index' % testserver.url)
     if not is_adcontrolled(browser.contents):
         pytest.skip("not applicable due to oldschool ad configuration")
@@ -48,7 +61,9 @@ def test_adcontroller_finanlizer_is_present(testserver, testbrowser):
     assert 'AdController.finalize();' in browser.contents
 
 
-def test_adcontroller_js_var_isset(selenium_driver, testserver):
+def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
     driver = selenium_driver
     driver.get('%s/zeit-online/index' % testserver.url)
     try:
