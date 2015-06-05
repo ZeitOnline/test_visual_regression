@@ -45,6 +45,11 @@
 
 	<div id="js-comments-body">
 	{% for comment in view.comments.comments %}
+		{% if loop.length > 3 and loop.index == 3 %}
+		    {% if view.context.advertising_enabled -%}
+		        {{ blocks.adplace_desktop(view.banner(8)) }}
+		    {%- endif %}
+		{% endif %}
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}
