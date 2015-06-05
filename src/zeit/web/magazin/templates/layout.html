@@ -196,10 +196,11 @@
 
         <script type="text/javascript">
             var require = {
+                baseUrl: '{{ request.asset_url("js/") }}',
                 urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"
             };
         </script>
-        <script type="text/javascript" data-main="{{ request.asset_url('js/magazin.js') }}" src="{{ request.asset_url('js/vendor/require.js') }}"></script>
+        <script type="text/javascript" src="{{ request.asset_url('js/magazin.js') }}"></script>
         <script type="text/javascript">
             if( typeof window.sasmobile === 'function' && window.ZMO.isMobileView() ) {
                 iqd.callAds();

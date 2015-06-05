@@ -138,9 +138,10 @@
 
     <script>
         var require = {
+            baseUrl: '{{ request.asset_url("js/") }}',
             urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"
         };
     </script>
-    <script data-main="{{ request.asset_url('js/site.js') }}" src="{{ request.asset_url('js/vendor/require.js') }}"></script>
+    <script src="{{ request.asset_url('js/site.js') }}"></script>
 </body>
 </html>
