@@ -344,7 +344,7 @@
         </cluster>
         <cluster visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f">
             <region visible="True" area="id-c8a4bedc-5721-412f-994f-c55fb03955d2" kind="duo">
-                <container cp:type="teaser" module="one-half" visible="True" hide-dupes="True" cp:__name__="id-a560c834-fa2e-4d35-a540-d20dff18f95a">
+                <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-a560c834-fa2e-4d35-a540-d20dff18f95a">
                     <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" uniqueId="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" year="2015" issue="7" ressort="zeit-magazin" contenttype="gallery" publication-date="" expires="">
                         <badges>
                             <badge py:pytype="str">gallery</badge>
@@ -363,7 +363,7 @@
                 </container>
             </region>
             <region visible="True" area="id-bb856af5-0ad1-4849-b2f3-43fb635f4fc6" kind="duo">
-                <container cp:type="teaser" module="one-half" visible="True" hide-dupes="True" cp:__name__="id-fac15e19-b931-4441-8d40-7ed4eb76f35e">
+                <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-fac15e19-b931-4441-8d40-7ed4eb76f35e">
                     <block href="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview" uniqueId="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview" year="2014" issue="19" ressort="zeit-magazin" contenttype="article" publication-date="" expires="" author="Tillmann Prüfer" genre="interview">
                         <video href="http://xml.zeit.de/video/2014-05/3537359236001" href2="" expires="" video_id="vid3537359236001" video_id_2=""/>
                         <supertitle py:pytype="str">Karl Lagerfeld</supertitle>

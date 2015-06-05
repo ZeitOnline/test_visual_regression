@@ -246,6 +246,7 @@ scales = {
     'zon-printbox-wide': (320, 148),
     'zon-topic': (980, 418),
     'zon-column': (300, 400),
+    'zon-square': (460, 460),
     'brightcove-still': (580, 326),
     'brightcove-thumbnail': (120, 67),
     'spektrum': (220, 124)

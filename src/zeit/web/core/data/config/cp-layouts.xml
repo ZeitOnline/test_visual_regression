@@ -9,7 +9,7 @@
         />
     <layout
         id="zon-small"
-        title="kleiner Teaser"
+        title="Kleiner Teaser"
         image_pattern="zon-thumbnail"
         areas="solo duo major minor ranking parquet"
         />
@@ -22,9 +22,10 @@
         />
     <layout
         id="zon-square"
-        title="quadratischer Teaser"
-        image_pattern="zmo-square-large"
-        areas="solo duo major minor ranking parquet"
+        title="Grafischer Teaser"
+        image_pattern="zon-square"
+        areas="duo minor"
+        default="duo"
         />
     <!-- formally known as zon-fullwidth-onimage/zon-fullwidth -->
     <layout
@@ -95,13 +96,6 @@
         title="Vollbreiter Aufmacher"
         image_pattern="940x400"
         areas="solo duo major minor ranking parquet"
-        />
-    <layout
-        id="one-half"
-        title="quadratischer Teaser"
-        image_pattern="zmo-square-large"
-        areas="duo"
-        default="duo"
         />
     <layout
         id="text-teaser"
@@ -348,7 +342,7 @@
         />
     <layout
         id="fullgraphical"
-        title="Vollgraphischer Block für die Informatives"
+        title="ZMO Vollgraphischer Block für die Informatives"
         image_pattern="zmo-square-large"
         areas="solo duo major minor ranking parquet"
         available="zeit.magazin.interfaces.IZMOContent"
