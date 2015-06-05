@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - NFR: Make inclusion of tpm configurable
 
+- Ads: Google Ad at article bottom, only 1 MR in article content, ad in discussions, content ad activated, switching of MR in minor region based on big news, billboard right before video stage, css for ads, and a lot of bugfixes to be iqd ready
+
 
 1.25 (2015-06-03)
 -----------------
