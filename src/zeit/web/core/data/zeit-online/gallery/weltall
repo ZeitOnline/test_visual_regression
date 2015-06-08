@@ -2,9 +2,9 @@
 <gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
     <image-folder>http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/</image-folder>
-    <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" title="Das Pistazienparfait wird verspeist" alt="Das Pistazienparfait wird verspeist" align="left" publication-date="" expires="2014-05-17T08:09:14+00:00">
-      <bu py:pytype="str">Das Pistazienparfait wird verspeist</bu>
-      <copyright py:pytype="str">© Silvio Knezevic</copyright>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-online/image/weltall/" type="jpg" align="left" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+      <copyright py:pytype="str">© Alexander Gerst/ESA</copyright>
     </image>
     <badges>
       <badge>gallery</badge>
