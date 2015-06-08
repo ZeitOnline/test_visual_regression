@@ -68,7 +68,7 @@ def test_comment_pagination_button_should_have_a_certain_label(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/article/01?page=2' % testserver.url)
     button = browser.cssselect('.pager__button--next')
-    assert button[0].text == u'N\xe4chste Kommentar-Seite'
+    assert button[0].text == u'Weitere Kommentare'
 
 
 def test_comment_sorting_should_work(testbrowser, testserver):
