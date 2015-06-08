@@ -35,7 +35,7 @@ $layout: ".teaser-square"
 	&__combined-link
 		@extend %teaser-combined-link
 		color: $white
-		text-shadow: 0 0 10px rgba(0, 0, 0, .5)
+		+teaser-image-text-shadow
 	&__kicker
 		display: block
 		font-size: em(14px)
@@ -59,7 +59,7 @@ $layout: ".teaser-square"
 		font-style: italic
 		letter-spacing: 0.02em
 		margin: 0
-		text-shadow: 0 0 10px rgba(0, 0, 0, .5)
+		+teaser-image-text-shadow
 		+respond-min($break-phablet-min)
 			display: block
 		+respond-min($break-areas)
