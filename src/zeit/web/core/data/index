@@ -93,136 +93,32 @@
             <region area="lead" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 1" visible="True">
                 <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
-                        <supertitle>CP-Editor</supertitle>
-                        <title>Universaler Testartikel 2.0</title>
-                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
-                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
-                            <bu>Jelly danish pudding chocolate cake.</bu>
-                            <copyright>© ZEIT ONLINE</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                            <display_name>Test Mann</display_name>
-                        </author>
                     </block>
                 </container>
                 <container cp:__name__="id-bab27568-9d14-4553-ab74-70310bf45317" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/kolumne" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/kolumne" year="2008">
-                        <supertitle>CP-Editor</supertitle>
-                        <title>Universaler Testartikel 2.0</title>
-                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
-                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
-                            <bu>Jelly danish pudding chocolate cake.</bu>
-                            <copyright>© ZEIT ONLINE</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                            <display_name>Test Mann</display_name>
-                        </author>
                     </block>
                 </container>
                 <container cp:__name__="id-6a370fea-c678-46ac-b546-dc1d30143978" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-05" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-05" year="2008">
-                        <supertitle>CP-Editor</supertitle>
-                        <title>Universaler Testartikel 2.0</title>
-                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
-                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
-                            <bu>Jelly danish pudding chocolate cake.</bu>
-                            <copyright>© ZEIT ONLINE</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                            <display_name>Test Mann</display_name>
-                        </author>
                     </block>
                 </container>
                 <container cp:__name__="id-0e4c300a-813a-4549-95a7-2ccde49167fe" cp:type="teaser" hide-dupes="True" module="zon-large" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
-                        <supertitle>CP-Editor</supertitle>
-                        <title>Universaler Testartikel 2.0</title>
-                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
-                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
-                            <bu>Jelly danish pudding chocolate cake.</bu>
-                            <copyright>© ZEIT ONLINE</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                            <display_name>Test Mann</display_name>
-                        </author>
                     </block>
                 </container>
             </region>
             <region area="id-da65a250-0482-4ce8-b662-5ca24af05061" visible="True" kind="minor">
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
-                        <supertitle>CP-Editor</supertitle>
-                        <title>Universaler Testartikel 2.0</title>
-                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
-                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
-                            <bu>Jelly danish pudding chocolate cake.</bu>
-                            <copyright>© ZEIT ONLINE</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                            <display_name>Test Mann</display_name>
-                        </author>
                     </block>
                     <block author="Test Mann" contenttype="article" date-first-released="2010-09-28T14:47:21.340730+00:00" date-last-modified="2014-07-17T14:02:48+00:00" date-last-published="2012-07-20T03:48:01+00:00" expires="" genre="gastbeitrag" href="http://xml.zeit.de/zeit-online/article/01" issue="39" last-semantic-change="2014-07-17T14:02:47.393607+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2010">
-                        <supertitle>Atomstreit</supertitle>
-                        <title>&quot;Ein Kalter Krieg mit Iran ist das optimistische Szenario&quot;</title>
-                        <text>Wir müssen akzeptieren, dass Iran irgendwann fähig ist, Atomwaffen zu produzieren, sagt der Iran-Experte Fitzpatrick. Entscheidend sei, dass es bei der Fähigkeit bleibe.</text>
-                        <description>Wir müssen akzeptieren, dass Iran irgendwann fähig ist, Atomwaffen zu produzieren, sagt der Iran-Experte Fitzpatrick. Entscheidend sei, dass es bei der Fähigkeit bleibe.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2010-09/geistlicher-iran-nuklearprogramm/" expires="" publication-date="" type="jpg">
-                            <bu>Im November 2009 führte Iran Militärmanöver durch. Geprobt wurde dabei der Schutz der iranischen Nuklearanlagen</bu>
-                            <copyright>© Ali Shayegan/AFP/Getty Images</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                            <display_name>Test Mann</display_name>
-                        </author>
                     </block>
                 </container>
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
-                        <supertitle>CP-Editor</supertitle>
-                        <title>Universaler Testartikel 2.0</title>
-                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
-                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
-                            <bu>Jelly danish pudding chocolate cake.</bu>
-                            <copyright>© ZEIT ONLINE</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                            <display_name>Test Mann</display_name>
-                        </author>
                     </block>
                     <block author="Test Mann" contenttype="article" date-first-released="2010-09-28T14:47:21.340730+00:00" date-last-modified="2014-07-17T14:02:48+00:00" date-last-published="2012-07-20T03:48:01+00:00" expires="" genre="gastbeitrag" href="http://xml.zeit.de/zeit-online/article/01" issue="39" last-semantic-change="2014-07-17T14:02:47.393607+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2010">
-                        <supertitle>Atomstreit</supertitle>
-                        <title>&quot;Ein Kalter Krieg mit Iran ist das optimistische Szenario&quot;</title>
-                        <text>Wir müssen akzeptieren, dass Iran irgendwann fähig ist, Atomwaffen zu produzieren, sagt der Iran-Experte Fitzpatrick. Entscheidend sei, dass es bei der Fähigkeit bleibe.</text>
-                        <description>Wir müssen akzeptieren, dass Iran irgendwann fähig ist, Atomwaffen zu produzieren, sagt der Iran-Experte Fitzpatrick. Entscheidend sei, dass es bei der Fähigkeit bleibe.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2010-09/geistlicher-iran-nuklearprogramm/" expires="" publication-date="" type="jpg">
-                            <bu>Im November 2009 führte Iran Militärmanöver durch. Geprobt wurde dabei der Schutz der iranischen Nuklearanlagen</bu>
-                            <copyright>© Ali Shayegan/AFP/Getty Images</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                            <display_name>Test Mann</display_name>
-                        </author>
                     </block>
                 </container>
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
@@ -263,38 +159,12 @@
             <region area="id-c1a352a2-5e54-4ab1-86f3-bbf565666083" visible="True" kind="duo">
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
-                        <supertitle>CP-Editor</supertitle>
-                        <title>Universaler Testartikel 2.0</title>
-                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
-                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
-                            <bu>Jelly danish pudding chocolate cake.</bu>
-                            <copyright>© ZEIT ONLINE</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                            <display_name>Test Mann</display_name>
-                        </author>
                     </block>
                 </container>
             </region>
             <region area="id-76a16784-b3f0-487f-a2cb-b5cecf4daf9e" visible="True" kind="duo">
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
-                        <supertitle>CP-Editor</supertitle>
-                        <title>Universaler Testartikel 2.0</title>
-                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
-                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
-                            <bu>Jelly danish pudding chocolate cake.</bu>
-                            <copyright>© ZEIT ONLINE</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                            <display_name>Test Mann</display_name>
-                        </author>
                     </block>
                 </container>
             </region>
@@ -303,19 +173,6 @@
             <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
                 <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
-                        <supertitle>CP-Editor</supertitle>
-                        <title>Universaler Testartikel 2.0</title>
-                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
-                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
-                            <bu>Jelly danish pudding chocolate cake.</bu>
-                            <copyright>© ZEIT ONLINE</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                            <display_name>Test Mann</display_name>
-                        </author>
                     </block>
                 </container>
             </region>
@@ -324,19 +181,6 @@
             <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 2" visible="True" kind="major">
                 <container cp:__name__="id-7948b50a-f6b3-485a-baae-9b6d00b67cd4" cp:type="teaser" hide-dupes="True" module="buttons" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
-                        <supertitle>CP-Editor</supertitle>
-                        <title>Universaler Testartikel 2.0</title>
-                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
-                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
-                        <byline/>
-                        <breadcrumb_title/>
-                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
-                            <bu>Jelly danish pudding chocolate cake.</bu>
-                            <copyright>© ZEIT ONLINE</copyright>
-                        </image>
-                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
-                            <display_name>Test Mann</display_name>
-                        </author>
                     </block>
                 </container>
             </region>
