@@ -1,9 +1,9 @@
 <gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
     <head>
         <image-folder>http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/</image-folder>
-        <image align="left" base-id="http://xml.zeit.de/exampleimages/artikel/01/schoppenstube" expires="" publication-date="" title="Desktops Teaser" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <bu/>
-            <copyright>© Mathias Modica</copyright>
+        <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/frau-isst-suppe-2/" type="jpg" title="Eine Frau isst Paprikasuppe" alt="Eine Frau isst Paprikasuppe" align="left" publication-date="" expires="2014-05-18T07:51:24+00:00">
+            <bu py:pytype="str">Paprikasuppe löffelweise</bu>
+            <copyright py:pytype="str">© Jason Lowe</copyright>
         </image>
         <badges>
             <badge>gallery</badge>
