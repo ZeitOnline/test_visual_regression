@@ -17,7 +17,7 @@
         <area kind="major"/>
         <area kind="minor"/>
     </region>
-    <region kind="solo" title="Parquet">
+    <region kind="parquet" title="Parquet">
         <area kind="parquet"/>
     </region>
     <region kind="solo" title="Ranking">
