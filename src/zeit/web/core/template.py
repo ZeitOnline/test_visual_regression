@@ -15,15 +15,16 @@ import zope.component
 import zope.component.interfaces
 
 import zeit.cms.interfaces
-import zeit.content.link.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.cp.layout
+import zeit.content.gallery.interfaces
+import zeit.content.link.interfaces
+import zeit.magazin.interfaces
 
 import zeit.web
 import zeit.web.core.comments
 import zeit.web.core.interfaces
 import zeit.web.core.utils
-import zeit.content.cp
 
 log = logging.getLogger(__name__)
 
@@ -195,6 +196,16 @@ def remove_break(string):
 @zeit.web.register_filter
 def replace_list_seperator(scsv, seperator):
     return scsv.replace(';', seperator)
+
+
+@zeit.web.register_filter
+def is_zmo(teaser):
+    return zeit.magazin.interfaces.IZMOContent.providedBy(teaser)
+
+
+@zeit.web.register_filter
+def is_gallery(teaser):
+    return zeit.content.gallery.interfaces.IGallery.providedBy(teaser)
 
 
 # definition of default images sizes per layout context
