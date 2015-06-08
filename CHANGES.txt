@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - ZON-1777: Wording Kommentarpaginierung
 
+- ZON-1613: Topic pages (Dynamic CPs)
+
 
 1.25 (2015-06-03)
 -----------------
