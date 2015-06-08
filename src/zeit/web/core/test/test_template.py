@@ -318,6 +318,8 @@ def test_teaser_fullwidth_mapping_is_working_as_expected(application):
 
 def test_hide_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
+    block.__parent__ = mock.Mock()
+    block.__parent__.kind = 'major'
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'archive-print-volume'
     teaser = zeit.web.core.template.get_layout(block)
@@ -349,17 +351,34 @@ def test_teaser_layout_for_columns_should_be_adjusted_accordingly(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/kolumne')
     block = mock.Mock()
+    block.__parent__ = mock.Mock()
+    block.__parent__.kind = 'major'
     block.layout.id = 'zon-small'
     block.__iter__ = lambda _: iter([article])
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-column'
 
 
+def test_columns_layout_should_only_be_set_for_allowed_areas(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/kolumne')
+    block = mock.Mock()
+    block.__parent__ = mock.Mock()
+    block.__parent__.kind = 'newsticker'
+    block.layout.id = 'zon-small'
+    block.__iter__ = lambda _: iter([article])
+    teaser = zeit.web.core.template.get_layout(block)
+    assert teaser == 'zon-small'
+
+
 def test_teaser_layout_for_series_should_be_adjusted_accordingly(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik')
     block = mock.Mock()
+    block.__parent__ = mock.Mock()
     block.layout.id = 'zon-small'
+    block.__parent__ = mock.Mock()
+    block.__parent__.kind = 'major'
     block.__iter__ = lambda _: iter([article])
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-series'
@@ -369,6 +388,8 @@ def test_layout_for_empty_teaser_block_should_be_set_to_hide(application):
     block = zeit.content.cp.blocks.teaser.TeaserBlock(
         mock.Mock(), lxml.objectify.E.block(module='zon-small'))
     block.__iter__ = lambda _: iter([])
+    block.__parent__ = mock.Mock()
+    block.__parent__.kind = 'major'
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
 

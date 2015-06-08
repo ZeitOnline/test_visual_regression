@@ -1,4 +1,4 @@
-{% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp with context %}
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 <article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="{{ teaser.__name__ }}">
     <a class="{{ self.layout() }}__combined-link" href="{{ teaser | create_url }}">
@@ -9,7 +9,7 @@
             {% endblock video_thumbnail %}
             <div class="{{ self.layout() }}__inner">
                 {% block playbutton %}
-                    {{ cp.playbutton('block', teaser.videoDuration) }}
+                    {{ lama.playbutton('block', teaser.videoDuration) }}
                 {% endblock playbutton %}
                 <h2 class="{{ self.layout() }}-title">
                     <span class="{{ self.layout() }}-title__kicker">
@@ -19,7 +19,7 @@
                         {{- teaser.teaserTitle | hide_none -}}
                     </span>
                     {% block inlineplaybutton %}
-                        {{ cp.playbutton('inline', teaser.videoDuration) }}
+                        {{ lama.playbutton('inline', teaser.videoDuration) }}
                     {% endblock %}
                 </h2>
                 {% block description %}{% endblock %}

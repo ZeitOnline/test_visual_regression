@@ -22,8 +22,11 @@ import zope.configuration.xmlconfig
 import zope.interface
 import zope.interface.declarations
 
+import zeit.cms.repository.interfaces
 import zeit.connector
+import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
+import zeit.content.dynamicfolder.interfaces
 import zeit.content.gallery.interfaces
 import zeit.find.search
 import zeit.magazin.interfaces
@@ -56,6 +59,12 @@ class Application(object):
         settings = pyramid.config.settings.Settings(d=settings)
         settings['app_servers'] = filter(
             None, settings['app_servers'].split(','))
+        settings['enable_third_party_modules'] = bool(settings.get(
+            'enable_third_party_modules', True))
+        settings['enable_trackers'] = bool(settings.get(
+            'enable_trackers', True))
+        settings['enable_iqd'] = bool(settings.get(
+            'enable_iqd', True))
 
         interface = zeit.web.core.interfaces.ISettings
         zope.interface.declarations.alsoProvides(settings, interface)
@@ -155,6 +164,7 @@ class Application(object):
 
         # Route to post comments to a communit service
         config.add_route('post_test_comments', '/admin/test-comments')
+        config.add_route('toggle_third_party_modules', '/admin/toggle-tpm')
 
         config.add_static_view(name='css', path='zeit.web.static:css/')
         config.add_static_view(name='js', path='zeit.web.static:js/')
@@ -426,84 +436,123 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
     def __call__(self, request):
         try:
             tdict = super(RepositoryTraverser, self).__call__(request)
-            context = tdict['context']
-
-            # Rewriting the context, if we have a CP2015
-            # When zeit.content.cp is in production for everybody,
-            # we can remove this. (RD)
-            try:
-                if (zeit.content.cp.interfaces.ICenterPage.providedBy(
-                        context)):
-                    tdict['context'] = context = context.__parent__[(
-                        '{}.cp2015'.format(context.__name__))]
-            except (KeyError, TypeError):
-                pass
-
-            if zeit.content.article.interfaces.IArticle.providedBy(context):
-                self._handle_article(context, request)
-            elif zeit.content.cp.interfaces.ICenterPage.providedBy(context):
-                self._handle_centerpage(context, request)
-            elif zeit.content.gallery.interfaces.IGallery.providedBy(context):
-                self._handle_gallery(context, request)
-            return self._change_viewname(tdict)
+            tdict.setdefault('request', request)
+            self.rewrite_cp2015(tdict)
+            tdict = zope.component.getMultiAdapter(
+                (tdict['context'], tdict),
+                zeit.web.core.interfaces.ITraversable)
         except OSError as e:
             if e.errno == 2:
                 raise pyramid.httpexceptions.HTTPNotFound()
+        except (zope.component.ComponentLookupError, TypeError):
+            pass
+        finally:
+            return tdict
 
-    def _handle_article(self, context, request):
-        template = zeit.magazin.interfaces.IArticleTemplateSettings(
-            context).template
-        # ToDo: Remove when Longform will be generally used on
-        # www.zeit.de. By then do not forget to remove marker
-        # interfaces from uniqueID http://xml.zeit.de/feature (RD)
+    @staticmethod
+    def rewrite_cp2015(tdict):
+        # XXX Remove after parallel cp-editor operation period is over (ND).
+        try:
+            name = '{}.cp2015'.format(tdict['context'].__name__)
+            pos = tdict['traversed'].index(tdict['context'].__name__)
+            tdict['context'] = tdict['context'].__parent__[name]
+        except (KeyError, TypeError, ValueError):
+            pass
+        else:
+            travd = tdict['traversed']
+            tdict['traversed'] = travd[:pos] + (name,) + travd[pos + 1:]
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle, dict)
+class TraversableArticle(dict):
+
+    def __init__(self, context, tdict):
+        settings = zeit.magazin.interfaces.IArticleTemplateSettings(context)
+
         if urlparse.urlparse(context.uniqueId).path.startswith('/feature/'):
+            # ToDo: Remove when Longform will be generally used on
+            # www.zeit.de. By then do not forget to remove marker
+            # interfaces from uniqueID http://xml.zeit.de/feature (RD)
             zope.interface.alsoProvides(
                 context, zeit.web.core.article.IFeatureLongform)
-        elif template == 'longform':
+        elif settings.template == 'longform':
             zope.interface.alsoProvides(
                 context, zeit.web.core.article.ILongformArticle)
-        elif template == 'short':
+        elif settings.template == 'short':
             zope.interface.alsoProvides(
                 context, zeit.web.core.article.IShortformArticle)
-        elif template == 'column':
+        elif settings.template == 'column':
             zope.interface.alsoProvides(
                 context, zeit.web.core.article.IColumnArticle)
-        elif template == 'liveblog':
+        elif settings.template == 'liveblog':
             zope.interface.alsoProvides(
                 context, zeit.web.core.article.ILiveblogArticle)
-        elif template == 'photocluster':
+        elif settings.template == 'photocluster':
             zope.interface.alsoProvides(
                 context, zeit.web.core.article.IPhotoclusterArticle)
 
-    def _handle_gallery(self, context, request):
-        meta = zeit.content.gallery.interfaces.IGalleryMetadata(context)
-        if meta.type == 'zmo-product':
+        if tdict['view_name'].startswith('seite') and not tdict['subpath']:
+            tdict['view_name'] = 'seite'
+
+        super(TraversableArticle, self).__init__(tdict)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
+@grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery, dict)
+class TraversableGallery(dict):
+
+    def __init__(self, context, tdict):
+        context = tdict['context']
+        metadata = zeit.content.gallery.interfaces.IGalleryMetadata(context)
+
+        if metadata.type == 'zmo-product':
             zope.interface.alsoProvides(
                 context, zeit.web.core.gallery.IProductGallery)
         else:
             zope.interface.alsoProvides(
                 context, zeit.web.core.gallery.IGallery)
 
-    def _handle_centerpage(self, context, request):
-        if urlparse.urlparse(context.uniqueId).path.startswith('/suche/index'):
-            form = find_block(context, module='search-form')
-            area = find_block(context, attrib='area', kind='ranking')
-            if form and area:
-                form = zeit.web.core.template.get_module(form)
-                area = zeit.web.core.template.get_area(area)
+        super(TraversableGallery, self).__init__(tdict)
 
-                form['q'] = ' '.join(request.GET.getall('q'))
-                form['type'] = ' '.join(request.GET.getall('type'))
-                form['mode'] = request.GET.get('mode')
-                form['sort'] = request.GET.get('sort')
-                form['page'] = request.GET.get('p')
 
-                area.raw_query = form.raw_query
-                area.sort_order = form.sort_order
-                area.query = form.query
-                area.page = form.page
+@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
+@grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage, dict)
+class TraversableCenterPage(dict):
 
-    def _change_viewname(self, tdict):
-        if tdict['view_name'][0:5] == 'seite' and not tdict['subpath']:
-            tdict['view_name'] = 'seite'
-        return tdict
+    def __init__(self, context, tdict):
+        form = find_block(context, module='search-form')
+        area = find_block(context, attrib='area', kind='ranking')
+        if form and area:
+            form = zeit.web.core.template.get_module(form)
+            area = zeit.web.core.template.get_area(area)
+
+            form['q'] = ' '.join(tdict['request'].GET.getall('q'))
+            form['type'] = ' '.join(tdict['request'].GET.getall('type'))
+            form['mode'] = tdict['request'].GET.get('mode')
+            form['sort'] = tdict['request'].GET.get('sort')
+            form['page'] = tdict['request'].GET.get('p')
+
+            area.raw_query = form.raw_query
+            area.sort_order = form.sort_order
+            area.query = form.query
+            area.page = form.page
+
+        super(TraversableCenterPage, self).__init__(tdict)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
+@grokcore.component.adapter(
+    zeit.content.dynamicfolder.interfaces.IRepositoryDynamicFolder, dict)
+class TraversableDynamic(dict):
+
+    def __init__(self, context, tdict):
+        try:
+            tdict['context'] = tdict['context'][tdict['view_name']]
+        except (IndexError, KeyError, TypeError):
+            pass
+        else:
+            tdict['traversed'] += (tdict['view_name'],)
+            tdict['view_name'] = ''
+        finally:
+            super(TraversableDynamic, self).__init__(tdict)

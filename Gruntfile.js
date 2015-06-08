@@ -16,7 +16,6 @@ module.exports = function(grunt) {
     var project = {
         name: '<%= pkg.name %>-<%= pkg.version%>',
         sourceDir: './',
-        d11nDir: './../zeit.web.d11n/',
         codePath: 'src/zeit/web/static/',
         codeDir: './src/zeit/web/static/',
         rubyVersion: '1.9.3',
@@ -127,12 +126,6 @@ module.exports = function(grunt) {
                 cwd: project.sourceDir + 'sass',
                 src: 'vendor/*.css',
                 dest: project.codeDir + 'css/'
-            },
-            d11n: {
-                expand: true,
-                cwd: project.sourceDir,
-                src: project.codePath,
-                dest: project.d11nDir + project.codePath
             }
         },
 
@@ -208,8 +201,8 @@ module.exports = function(grunt) {
             },
             dev: {
                 options: {
-                    useSourceUrl: false, // true causes a bug in sjcl
-                    generateSourceMaps: true,
+                    useSourceUrl: true,
+                    generateSourceMaps: false,
                     optimize: 'none'
                 }
             },
@@ -348,7 +341,7 @@ module.exports = function(grunt) {
                 'uglify': true,
 
                 // Define any tests you want to implicitly include.
-                'tests': [ 'video', 'touch' ],
+                'tests': [ 'video', 'touch', 'csstransforms3d' ],
 
                 // By default, this task will crawl your project for references to Modernizr tests.
                 // Set to false to disable.

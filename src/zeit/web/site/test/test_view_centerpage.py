@@ -785,6 +785,23 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     assert link[0].get('href') == url
 
 
+def test_newsticker_should_have_expected_dom(testserver, testbrowser):
+    url = '{}/index'.format(testserver.url)
+    browser = testbrowser(url)
+
+    cols = browser.cssselect('.cp-area--news .newsticker__column')
+    assert len(cols) == 2
+    teaser = browser.cssselect('.newsticker article')
+    assert len(teaser) == 8
+    assert len(teaser[0].cssselect('time')) == 1
+    assert len(
+        teaser[0].cssselect('.newsteaser__text a .newsteaser__kicker')) == 1
+    assert len(
+        teaser[0].cssselect('.newsteaser__text a .newsteaser__title')) == 1
+    assert len(
+        teaser[0].cssselect('.newsteaser__text .newsteaser__product')) == 1
+
+
 def test_servicebox_present_in_wide_breakpoints(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver

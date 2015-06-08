@@ -167,10 +167,8 @@ class DeltaTime(object):
             return
         # Dirty hack, since we are building the string ourself
         # instead of using babels "add_direction"
-        return 'vor ' + human_readable.replace(
-            'Tage', 'Tagen', 1).replace(
-            'Monate', 'Monaten', 1).replace(
-            'Jahre', 'Jahren', 1)
+        return 'vor ' + human_readable.replace('Tage', 'Tagen', 1).replace(
+            'Monate', 'Monaten', 1).replace('Jahre', 'Jahren', 1)
 
     def get_time_since_modification(self):
         self._get_babelfied_delta_time()

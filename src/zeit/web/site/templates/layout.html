@@ -68,20 +68,22 @@
     <noscript>
         <link href="{{ request.asset_url('css/icons/site.fallback.css') }}" rel="stylesheet">
     </noscript>
-
-    {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.ad_delivery_type ignore missing %}
-    {%- block content_ad_script -%}{%- endblock -%}
+    {% if view.enable_third_party_modules and view.enable_iqd %}
+        {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.ad_delivery_type ignore missing %}
+        {%- block content_ad_script -%}{%- endblock -%}
+    {% endif %}
     {% if view.is_dev_environment %}
     <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ context.uniqueId }}" data-adDeliveryType="{{view.ad_delivery_type}}">
     <!-- tracking at top -->
-    {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
-    {% include "zeit.web.core:templates/inc/ads/%s/iqd_nuggad.html" % view.ad_delivery_type ignore missing %}
-    {% include "zeit.web.core:templates/inc/ads/%s/iqd_krux.html" % view.ad_delivery_type ignore missing %}
-    {% include "zeit.web.core:templates/inc/ads/%s/static_oop_tag.html" % view.ad_delivery_type ignore missing %}
-
+    {% if view.enable_third_party_modules and view.enable_tracking %}
+        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/%s/iqd_nuggad.html" % view.ad_delivery_type ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/%s/iqd_krux.html" % view.ad_delivery_type ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/%s/static_oop_tag.html" % view.ad_delivery_type ignore missing %}
+    {% endif %}
     {% block skiplink %}
     <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
     {% endblock skiplink %}
@@ -136,9 +138,10 @@
 
     <script>
         var require = {
+            baseUrl: '{{ request.asset_url("js/") }}',
             urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"
         };
     </script>
-    <script data-main="{{ request.asset_url('js/site.js') }}" src="{{ request.asset_url('js/vendor/require.js') }}"></script>
+    <script src="{{ request.asset_url('js/site.js') }}"></script>
 </body>
 </html>

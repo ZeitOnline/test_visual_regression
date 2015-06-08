@@ -81,27 +81,27 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
 
     assert locate_by_selector(
         '//script[@src=\'//stats.g.doubleclick.net/dc.js\']'), (
-        'script for Doubleclick not in DOM')
+            'script for Doubleclick not in DOM')
     assert locate_by_selector(
         '//script[@src=\'//www.googletagmanager.com'
         '/gtm.js?id=GTM-TQGX6J\']'), (
-        'script for Google tag manager not in DOM')
+            'script for Google tag manager not in DOM')
     assert locate_by_selector(
         '//script[@src=\'http://scripts.zeit.de/js/rsa.js\']'), (
-        'script for RSA not in DOM')
+            'script for RSA not in DOM')
     assert locate_by_selector(
         '//script[@src=\'http://scripts.zeit.de/static/js/'
         'webtrekk/webtrekk_v3.js\']'), (
-        'script for Webtrekk not in DOM')
+            'script for Webtrekk not in DOM')
     assert locate_by_selector(
         '//script[@src=\'https://script.ioam.de/iam.js\']'), (
-        'script for IVW not in DOM')
+            'script for IVW not in DOM')
     assert locate_by_selector(
         '//img[starts-with(@src,\'http://cc.zeit.de/cc.gif\')]'), (
-        'pixel for ClickCounter not in DOM')
+            'pixel for ClickCounter not in DOM')
     assert locate_by_selector(
         '//img[starts-with(@src,\'http://zeitonl.ivwbox.de\')]'), (
-        'pixel for IVW not in DOM')
+            'pixel for IVW not in DOM')
 
 
 def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
@@ -203,7 +203,15 @@ def test_webtrekk_series_tag_is_set_corectly(testserver, testbrowser):
             '06') % (testserver.host, testserver.port) in browser.contents
 
 
-def test_ivw_tracking_for_mobile_and_desktop(selenium_driver, testserver):
+def test_ivw_tracking_for_mobile_and_desktop(
+        selenium_driver, testserver, monkeypatch):
+
+    def tpm(me):
+        return True
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     driver = selenium_driver
     # ipad landscape
     driver.set_window_size(1024, 768)
