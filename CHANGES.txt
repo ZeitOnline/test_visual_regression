@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1566: Implement video solo page view and basic template
 
+- ZON-1613: Topic pages (Dynamic CPs)
+
 - ZON-1755: Refactor traversal, allow parallel folder discovery
 
 - ZON-1777: Wording Kommentarpaginierung
