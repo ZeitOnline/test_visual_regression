@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - NFR: Make inclusion of tpm configurable
 
+- ZON-1380: Send ajax requests to toggle beta/classic
+
 
 1.25 (2015-06-03)
 -----------------
