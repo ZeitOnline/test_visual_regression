@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<head xmlns:D="DAV:">
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">unknown</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">unknown</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
+    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+      &lt;initialized_object&gt;
+        &lt;klass&gt;
+          &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+        &lt;/klass&gt;
+        &lt;arguments&gt;
+          &lt;tuple&gt;
+            &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+          &lt;/tuple&gt;
+        &lt;/arguments&gt;
+      &lt;/initialized_object&gt;
+    &lt;/pickle&gt;</attribute>
+</head>
