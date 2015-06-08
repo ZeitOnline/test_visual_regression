@@ -53,7 +53,7 @@
         </topiclinks>
     </head>
     <body>
-        <title>Schlagwort {{lexical_value}}</title>
+        <title>Schlagwort {{ text }}</title>
         <cluster area="id-4cb09a25-12f5-4d90-bc9b-3b116277660d" kind="solo" visible="True">
           <region area="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38e" kind="solo" visible="True">
             <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526" cp:type="cpextra" module="dynamic-cp-header">
@@ -71,12 +71,9 @@
             <container cp:__name__="id-aa3d66b6-5a83-4c28-89de-78686d074a62" cp:type="auto-teaser" module="zon-small" visible="True"/>
             <container cp:__name__="id-13b34132-500d-414b-b565-2e29f7f9840f" cp:type="auto-teaser" module="zon-small" visible="True"/>
             <container cp:__name__="id-097121c4-65ca-4171-950d-54989b5ed453" cp:type="auto-teaser" module="zon-small" visible="True"/>
-            <raw_query>published:&quot;published&quot; AND keywords:&quot;{{url_value}}&quot;</raw_query>
+            <raw_query>published:&quot;published&quot; AND keywords:&quot;{{ url_value }}&quot;</raw_query>
           </region>
         </cluster>
     </body>
     <feed/>
-    <teaser>
-        <title>Schlagwort {{lexical_value}}</title>
-    </teaser>
 </centerpage>
