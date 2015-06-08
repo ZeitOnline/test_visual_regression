@@ -161,7 +161,7 @@
                 </container>
             </region>
             <region area="id-da65a250-0482-4ce8-b662-5ca24af05061" visible="True" kind="minor">
-                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-square" visible="True">
+                <container cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe1b7" cp:type="teaser" hide-dupes="True" module="zon-square" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/gallery/biga_1" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/gallery/biga_1" year="2008">
                         <supertitle>CP-Editor</supertitle>
                         <title>Universaler Testartikel 2.0</title>
@@ -178,7 +178,7 @@
                         </author>
                     </block>
                 </container>
-                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-suare" visible="True">
+                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60597" cp:type="teaser" hide-dupes="True" module="zon-square" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
                         <supertitle>CP-Editor</supertitle>
                         <title>Universaler Testartikel 2.0</title>
@@ -195,7 +195,7 @@
                         </author>
                     </block>
                 </container>
-                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60598" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
                         <supertitle>CP-Editor</supertitle>
                         <title>Universaler Testartikel 2.0</title>
