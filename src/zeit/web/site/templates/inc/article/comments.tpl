@@ -47,14 +47,14 @@
 	</div>
 
 	<div id="js-comments-body">
-	{% for comment in view.comments.comments %}
-		{% if loop.index == 4 -%}
-			{% if view.context.advertising_enabled -%}
-			<div class="comment__ad">
-				{{ lama_core.adplace(view.banner(8), view) }}
-			</div>
-			{%- endif %}
-		{% endif %}
+		{% for comment in view.comments.comments %}
+			{% if loop.index == 4 -%}
+				{% if view.context.advertising_enabled -%}
+				<div class="comment__ad">
+					{{ lama_core.adplace(view.banner(8), view) }}
+				</div>
+				{%- endif %}
+			{% endif %}
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}
