@@ -128,4 +128,3 @@ def test_vivi_module_should_have_a_layout_attribute():
         context, zeit.edit.interfaces.IBlock)
     module = zeit.web.core.block.Module(context)
     assert module._layout.id == 'barbapapa'
-
