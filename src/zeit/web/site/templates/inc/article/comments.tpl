@@ -23,7 +23,7 @@
 	{% endif %}
 	</div>
 
-	{% if view.comments %}
+	{% if view.comments and view.comments.comment_count %}
 	<div class="comment-section__preferences">
 		<div class="comment-section__item">
 			{# funky future feature?
