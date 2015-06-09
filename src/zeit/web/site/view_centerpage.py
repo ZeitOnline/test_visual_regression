@@ -277,12 +277,8 @@ class LegacyCenterpage(Centerpage):
         except TypeError:
             return
 
-        module = LegacyModule([], layout='videostage')
-
-        for index, video in enumerate(content.videos):
-            layout = index and 'video-small' or 'video-large'
-            module.append(LegacyModule([video], layout=layout))
-
+        module = LegacyModule(content.videos, layout='playlist')
+        module.videos = content.videos
         module.video_series_list = zeit.web.core.sources.video_series
         return module
 

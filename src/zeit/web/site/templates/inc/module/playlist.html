@@ -4,21 +4,17 @@
         <h6 class="video-stage-heading">Videos auf <span class="video-stage-heading__logo icon-logo-zon-large">ZEIT ONLINE</span></h6>
     </header>
     {# We heard you like modules, so we put some modules in your module (ND) #}
-    {% set video_module = module %}
+    {% set video_module = module.videos %}
     <div class="video-stage-main">
         {% with %}
-            {% set module = video_module[0] %}
-            {% set teaser = module | first_child %}
-            {% include ["zeit.web.site:templates/inc/teaser/{}.tpl".format(module | get_layout),
-                        "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing %}
+            {% set teaser = video_module[0] %}
+            {% include "zeit.web.site:templates/inc/teaser/video-large.tpl" ignore missing %}
         {% endwith %}
     </div>
     <div class="video-stage-secondary">
         <h6 class="video-stage-secondary__title">Die neuesten Videos</h6>
-        {% for module in video_module[1:4] %}
-            {% set teaser = module | first_child %}
-            {% include ["zeit.web.site:templates/inc/teaser/{}.tpl".format(module | get_layout),
-                        "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing %}
+        {% for teaser in video_module[1:4] %}
+            {% include "zeit.web.site:templates/inc/teaser/video-small.tpl" ignore missing %}
         {% endfor %}
     </div>
     <footer class="video-stage-footer">
