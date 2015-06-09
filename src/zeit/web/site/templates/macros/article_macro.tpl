@@ -89,10 +89,6 @@
     {{ lama_core.adplace_middle_mobile(item) }}
 {%- endmacro %}
 
-{% macro adplace_desktop(item) -%}
-    {{ lama_core.adplace(item, view) }}
-{%- endmacro %}
-
 {% macro contentadblock(item) -%}
     {{ lama_core.content_ad_article(view) }}
 {%- endmacro %}

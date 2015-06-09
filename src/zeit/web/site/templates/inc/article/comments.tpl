@@ -51,7 +51,7 @@
 		{% if loop.length > 3 and loop.index == 3 %}
 			{% if view.context.advertising_enabled -%}
 			<div class="comment__ad">
-				{{ blocks.adplace_desktop(view.banner(8)) }}
+				{{ lama_core.adplace(view.banner(8), view) }}
 			</div>
 			{%- endif %}
 		{% endif %}

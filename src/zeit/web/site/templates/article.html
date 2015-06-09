@@ -30,7 +30,7 @@
 
 {% block article_google_ad %}
     {% if view.context.advertising_enabled -%}
-        {{ blocks.adplace_desktop(view.banner(5)) }}
+        {{ lama_core.adplace(view.banner(5), view) }}
     {%- endif %}
 {% endblock article_google_ad %}
 
