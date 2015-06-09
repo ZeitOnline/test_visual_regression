@@ -1,5 +1,3 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama with context %}
-
 {% macro include_teaser_datetime(teaser, layout_id='', modifier='') -%}
     <time class="{{ layout_id }}__datetime {{modifier}} js-update-datetime" datetime="{{ teaser | mod_date | format_date('iso8601') }}">{{ get_delta_time_from_article(teaser) | hide_none }}</time>
 {%- endmacro %}

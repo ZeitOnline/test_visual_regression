@@ -39,7 +39,9 @@
 		z-index: 1
 		+background-image(linear-gradient($direction, rgba($color, $alpha_start) 0%, rgba($color, $alpha_stop) $length))
 
-=teaser-image-dark-overlay($color: rgb(0, 15, 20), $angle: 12deg)
+=teaser-image-dark-overlay($color: rgb(0, 15, 20), $angle: 12deg, $gradient: 0)
+	@if $gradient == 0
+		$gradient: rgba($color, 0.6) 15%, rgba($color, 0.15) 52%, rgba($color, 0) 70%
 	background-color: $color
 	position: relative
 	&:after
@@ -51,7 +53,10 @@
 		right: 0
 		top: 0
 		width: 100%
-		+background-image(linear-gradient($angle, rgba($color, 0.6) 15%, rgba($color, 0.15) 52%, rgba($color, 0) 70%))
+		+background-image(linear-gradient($angle, $gradient))
+
+=teaser-image-text-shadow
+	text-shadow: 0 0 10px rgba(0, 0, 0, .5)
 
 =fake-box-dimming($color: $black, $perc: 0.5)
 	&:after

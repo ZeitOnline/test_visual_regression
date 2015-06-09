@@ -1,5 +1,6 @@
 // nth() needed because remify() gives back a list
 $additional-margin: nth($page-padding, 1) * 2
+$layout: ".teaser-square"
 
 .teaser-square
 	background-color: $zon_mid_grey
@@ -9,8 +10,7 @@ $additional-margin: nth($page-padding, 1) * 2
 	// calc() needed to compensate the negative margin
 	padding-bottom: calc(100% + #{$additional-margin})
 	position: relative
-	// this breakpoint must be the same as the one for .cp-area--onehalf
-	+respond-min($break-tablet-min)
+	+respond-min($break-areas)
 		margin: 0 0 $petite 0
 		padding-bottom: 100%
 
@@ -28,17 +28,17 @@ $additional-margin: nth($page-padding, 1) * 2
 		bottom: 0
 		left: 0
 		right: 0
-		padding: $junior
+		padding: em(24px)
 	&__heading
 		@extend %teaser-heading
-		margin: 0
+		margin: 0 0 em(12px)
 	&__combined-link
 		@extend %teaser-combined-link
 		color: $white
-		text-shadow: 0 0 10px rgba(0, 0, 0, .5)
+		+teaser-image-text-shadow
 	&__kicker
 		display: block
-		font-size: $font-s
+		font-size: em(14px)
 		font-weight: normal
 		letter-spacing: $zon-letter-spacing-m
 		line-height: 1.2857
@@ -52,8 +52,25 @@ $additional-margin: nth($page-padding, 1) * 2
 		+respond-min($break-desktop-min)
 			font-size: remify(34px)
 			line-height: 1.2352
+	&__text
+		display: none
+		font-family: $font-franziska
+		font-size: em(18px)
+		font-style: italic
+		letter-spacing: 0.02em
+		margin: 0
+		+teaser-image-text-shadow
+		+respond-min($break-phablet-min)
+			display: block
+		+respond-min($break-areas)
+			display: none
+		+respond-min($break-desktop-min)
+			display: block
+		.cp-area--minor &
+			+respond-min($break-desktop-min)
+				display: none
+
 	&__product
-		margin-top: em(12px)
 		&:before
 			background-color: $white
 			content: ""
@@ -62,8 +79,51 @@ $additional-margin: nth($page-padding, 1) * 2
 			opacity: .5
 			width: 20%
 
+	&__button
+		+zon-button-dark($margin: remify(30px 0 16px))
+		+font-smoothing()
+		.cp-area--minor &
+			+respond-min($break-areas)
+				margin-top: remify(16px)
+
+	&__button-extra
+		.cp-area--minor &
+			+respond-min($break-areas)
+				display: none
+			+respond-min($break-desktop-min)
+				display: inline
+
 	&__zmo-logo
 		+background-size(contain)
 		width: em(183px)
 		height: em(18px)
 		margin-top: em(26px)
+
+	&--graphic
+		#{$layout}__container
+			padding-left: $page-padding
+			padding-right: $page-padding
+			text-align: center
+
+		#{$layout}__media-container
+			+teaser-image-dark-overlay($angle: 0deg, $gradient: (rgba(0, 15, 20, 0.8), rgba(0, 15, 20, 0.1)))
+
+		#{$layout}__kicker
+			font-size: em(13px)
+			letter-spacing: 0.14em
+			margin-bottom: .9em
+			text-transform: uppercase
+
+		#{$layout}__title
+			+respond-min($break-desktop-min)
+				font-size: remify(32px)
+				line-height: 1.125
+
+	// &--zmo
+
+.cp-area--minor
+	#{$layout}__container
+		+respond-min($break-areas)
+			padding: em(10px)
+		+respond-min($break-desktop-min)
+			padding: em(24px) $page-padding

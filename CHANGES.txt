@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-1.26 (unreleased)
+1.27 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.26 (2015-06-09)
 -----------------
 
 - ZON-1566: Implement video solo page view and basic template
@@ -11,6 +17,8 @@ Change log for zeit.web
 - ZON-1755: Refactor traversal, allow parallel folder discovery
 
 - ZON-1777: Wording Kommentarpaginierung
+
+- ZON-1821: Add square grafical teaser
 
 - BUG-58: Prevent that main script is sourced twice
 
