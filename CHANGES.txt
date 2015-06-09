@@ -4,7 +4,9 @@ Change log for zeit.web
 1.27 (unreleased)
 -----------------
 
-- Ads: Google Ad at article bottom, only 1 MR in article content,
+- ZON-1821: Add square grafical teaser
+
+- ZON-1631: Google Ad at article bottom, only 1 MR in article content,
   ad in discussions, content ad activated,
   switching of MR in minor region based on big news,
   billboard right before video stage, css for ads,
@@ -21,8 +23,6 @@ Change log for zeit.web
 - ZON-1755: Refactor traversal, allow parallel folder discovery
 
 - ZON-1777: Wording Kommentarpaginierung
-
-- ZON-1821: Add square grafical teaser
 
 - BUG-58: Prevent that main script is sourced twice
 
