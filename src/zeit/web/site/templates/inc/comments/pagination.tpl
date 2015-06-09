@@ -1,12 +1,19 @@
 {%- set pages = view.comments.pages %}
 {%- if pages.pager %}
+	{%- if view.comments.sort == 'asc' -%}
+		{%- set prev_label = 'Ältere Kommentare' -%}
+		{%- set next_label = 'Neuere Kommentare' -%}
+	{%- else -%}
+		{%- set prev_label = 'Neuere Kommentare' -%}
+		{%- set next_label = 'Ältere Kommentare' -%}
+	{%- endif -%}
 <div class="comment-section__item">
 	<div class="pager" role="navigation" aria-labeledby="comments-pagination-title">
 		<div class="visually-hidden" id="comments-pagination-title">Kommentarseiten</div>
 		{% if pages.current == pages.total %}
-		<a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(page=pages.current-1, cid=None) }}#comments">Vorherige Seite</a>
+		<a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(page=pages.current-1, cid=None) }}#comments">{{ prev_label }}</a>
 		{% else %}
-		<a class="pager__button pager__button--next" href="{{ view.request | append_get_params(page=pages.current+1, cid=None) }}#comments">Nächste Seite</a>
+		<a class="pager__button pager__button--next" href="{{ view.request | append_get_params(page=pages.current+1, cid=None) }}#comments">Weitere Kommentare</a>
 		{% endif %}
 		<ul class="pager__pages">
 			{% for page in pages.pager %}

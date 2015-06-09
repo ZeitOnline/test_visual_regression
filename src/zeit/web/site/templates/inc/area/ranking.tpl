@@ -3,6 +3,7 @@
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 
 {% block before_module_list %}
+{% if area.query %}
 <div class="search-counter">
     <div class="search-counter__hits">
         {{ area.hits | default(0) | pluralize('Keine Suchergebnisse', '{} Suchergebnis', '{} Suchergebnisse') }}
@@ -14,6 +15,7 @@
         <a class="search-counter__link{% if area.sort_order == 'aktuell' %} search-counter__link--marked{% endif %}" href={{ view.request | append_get_params(sort='aktuell') }}>Aktualität</a>
     </nav>
 </div>
+{% endif %}
 {% endblock %}
 
 {% block after_module_list %}
