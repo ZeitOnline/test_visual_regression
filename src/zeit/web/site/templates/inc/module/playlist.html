@@ -1,3 +1,8 @@
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
+
+{% if view.is_hp and view.context.advertising_enabled -%}
+    {{ lama_core.adplace(view.banner(10), view) }}
+{%- endif %}
 <section class="video-stage" id="video-stage">
     {# html5, eine section braucht eine headline, falls das seomäßig nicht geht, können wir auch nicht section nehmen (NB) #}
     <header>

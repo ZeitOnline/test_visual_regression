@@ -109,21 +109,21 @@ class FeatureLongform(LongformArticle):
 @view_config(context=zeit.web.core.article.IShortformArticle,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/shortform.html')
-class ShortformArticle(Article, zeit.web.core.view_article.Article):
+class ShortformArticle(Article):
     pass
 
 
 @view_config(context=zeit.web.core.article.IColumnArticle,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/column.html')
-class ColumnArticle(Article, zeit.web.core.view_article.Article):
+class ColumnArticle(Article):
     pass
 
 
 @view_config(context=zeit.web.core.article.IPhotoclusterArticle,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/photocluster.html')
-class PhotoclusterArticle(Article, zeit.web.core.view_article.Article):
+class PhotoclusterArticle(Article):
 
     def __init__(self, *args, **kwargs):
         super(PhotoclusterArticle, self).__init__(*args, **kwargs)
@@ -140,7 +140,7 @@ class PhotoclusterArticle(Article, zeit.web.core.view_article.Article):
              context=zeit.content.article.interfaces.IArticle,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/teaser.html')
-class Teaser(Article, zeit.web.core.view_article.Article):
+class Teaser(Article):
 
     @zeit.web.reify
     def teaser_text(self):

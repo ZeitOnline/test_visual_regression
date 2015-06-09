@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <image-folder>http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/</image-folder>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-online/image/weltall/" type="jpg" align="left" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+      <copyright py:pytype="str">© Alexander Gerst/ESA</copyright>
+    </image>
+    <badges>
+      <badge>gallery</badge>
+    </badges>
+    <rankedTags xmlns:ns5="http://namespaces.zeit.de/CMS/tagging">
+      <tag type="Person" url_value="" uuid="a9f848df-bc0a-4e16-a318-8cba8d89a307" py:pytype="str">Alexander Gerst</tag>
+      <tag type="topic" url_value="" uuid="5053a8b9-8df6-4b28-a69d-c1e37b2c9750" py:pytype="str">Weltraum</tag>
+      <tag type="topic" url_value="" uuid="fbcd1d0b-81fd-48c5-923e-26e68131d60c" py:pytype="str">Fotografie</tag>
+      <tag type="free" url_value="" uuid="1d594845-7955-4e15-ba37-958af527ce92" py:pytype="str">ISS</tag>
+    </rankedTags>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-02T14:52:24.496321+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-06-02T14:38:40.247713+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-06-02T14:52:39.354530+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-06-02T14:53:38.983403+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-06-02T14:38:13.119368+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-06-02T14:38:13.433290+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-02T14:37:11.009741+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.stockrahm</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Wie viele Schätze wohl noch auf der Speicherkarte von Alexander Gersts Kamera schlummern… (sg)</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wissen</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Vor einem Jahr twitterte @Astro_Alex das erste Foto aus dem All. Viele eindrucksvolle folgten. Eine Auswahl (sg)</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">gallery</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.gallery" name="type">standalone</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:25a73684-224a-4f93-b440-32c448a525a9}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">22</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Gallery" module="zeit.content.gallery.gallery"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <column layout="left"/>
+    <column layout="right">
+      <container>
+        <block name="01-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Der Blick auf die Banks Peninsula in Neuseeland war das erste Bild, das Alexander Gerst aus der Raumstation ISS twitterte. Am Boden kannte er sich dort bereits aus: "Großartige Landschaft, war dort oft wandern…"</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/01-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/01-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="02-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Weltraumspaziergang klingt romantisch, tatsächlich war Gersts einziger Ausstieg aus der ISS ein streng durchgeplantes Montage-Manöver.</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/02-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/02-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="03-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Die Straße von Gibraltar</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/03-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/03-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="04-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Wo Sie solche Bilder machen können? 400 Kilometer über dem Erdboden!</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/04-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/04-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="05-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Unter den Tausenden Bildern, die Gerst machte, waren auch ein paar Heimataufnahmen – wie die Deutsche Bucht an der Nordseeküste…</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/05-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/05-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="06-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">… oder Berlin.</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/06-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/06-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="07-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Kleines Suchspiel: Auf diesem Bild verstecken sich Pyramiden.</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/07-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/07-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="08-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Ein Gasfeld in Kasachstan: Aus dem All konnte Gerst sogar bei Tageslicht die Flammen erkennen.</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/08-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/08-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="09-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Dieser dunkle Schlund ist das Auge des Taifuns Vongfong. Er zog im Oktober 2014 über Japan hinweg.</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/09-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/09-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="10-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Zitat @Astro_Alex: "Ich denke, das ist in Kasachstan." Ganz sicher ist er sich aber nicht – vom All aus verschwimmen die Grenzen.</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/10-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/10-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="11-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Das einzige Wort, das laut Gerst die chilenische Landschaft passend beschreibt: "majestätisch".</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/11-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/11-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="12-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Eingerahmte Alpen: Eiger, Matterhorn und Mont Blanc in einem Bild</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/12-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/12-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="13-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Schottland, wie wir es von der Landkarte kennen</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/13-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/13-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="14-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Die Straße von Moskau nach St. Petersburg</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/14-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/14-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+        <block name="15-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">"Manchmal scheint es fast so, als sei unser Planet ein lebendiges Wesen", schreibt Alexander Gerst.</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/15-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/15-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Alexander Gerst/ESA</copyright>
+          </thumbnail>
+        </block>
+      </container>
+    </column>
+    <title>Bin mal eben im Weltraum spazieren</title>
+    <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <p>Sechs Monate verbrachte Alexander Gerst 2014 auf der Raumstation ISS. Er führte Experimente im schwerelosen Raum durch und verließ die Station auch einmal für Außenarbeiten. In seiner Freizeit schoss er mit den Spiegelreflexkameras an Bord zahlreiche Fotos aus der Beobachtungskuppel der ISS und schuf so ein überwältigendes Porträt unseres Planeten. Viele seiner Bilder veröffentlichte er auf seinem Twitter-Account <a href="https://twitter.com/astro_alex">@Astro_Alex</a>. Das erste postete er heute vor einem Jahr.</p>
+    </text>
+    <supertitle>Alexander Gerst</supertitle>
+    <subtitle>Etwas Heimat, das glitzernde Moskau, der dunkle Schlund: Seit einem Jahr twittert @Astro_Alex seine Fotos aus dem All. Für alle war leider kein Platz. Hier ein Best-of</subtitle>
+  </body>
+  <teaser>
+    <title>Bin mal eben im Weltraum spazieren</title>
+    <text>Etwas Heimat, das glitzernde Moskau, der dunkle Schlund: Seit einem Jahr twittert @Astro_Alex seine Fotos aus dem All. Für alle war leider kein Platz. Hier ein Best-of</text>
+  </teaser>
+</gallery>

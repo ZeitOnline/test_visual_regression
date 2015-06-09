@@ -89,11 +89,11 @@
 {% macro adplace_adctrl(banner, view) -%}
     {{ caller() }}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
-    <div id="iqadtile{{ banner.tile }}" class="ad-{{ banner.name }} ad-{{ banner.name }}--on-{{ pagetype }}" data-ad_width="{{ banner.noscript_width_height[0] }}" data-ad_minwidth="{{ banner.min_width }}">
+    <div id="iqadtile{{ banner.tile }}" class="ad ad--{{ banner.name }} ad--{{ banner.name }}-on-{{ pagetype }}" data-ad_width="{{ banner.noscript_width_height[0] }}" data-ad_minwidth="{{ banner.min_width }}">
         {% if banner.label -%}
-        <div class="ad-{{ banner.name }}__label">{{ banner.label }}</div>
+        <div class="ad__label ad__label--{{ banner.name }}">{{ banner.label }}</div>
         {% endif -%}
-        <div class="ad-{{ banner.name }}__inner">
+        <div class="ad__inner ad_inner--{{ banner.name }}">
             <script type="text/javascript">
                 if (typeof AdController !== 'undefined') {
                     AdController.render('iqadtile{{ banner.tile }}');
@@ -163,8 +163,8 @@
 {%- endmacro %}
 
 
-{% macro use_svg_icon(name, class=None) -%}
-    <svg{% if class %} class="{{ class }}"{% endif %} role="img" aria-labelledby="title">
+{% macro use_svg_icon(name, class, request) -%}
+    <svg class="{{ class }}" role="img" aria-labelledby="title">
         <use xlink:href="{{ request.asset_url('css/web.site/icons.svg') }}#svg-{{ name }}"></use>
     </svg>
 {%- endmacro %}
