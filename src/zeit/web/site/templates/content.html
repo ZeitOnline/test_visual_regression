@@ -1,5 +1,5 @@
 {% extends "zeit.web.site:templates/layout.html" %}
-{% import "zeit.web.site:templates/macros/article_macro.tpl" as blocks with context %}
+{% import "zeit.web.site:templates/macros/article_macro.tpl" as blocks %}
 
 {% block main %}
     {% block content %}
@@ -58,7 +58,8 @@
             {% block article_pages %}
                 <!-- Here goes the content for a page -->
             {% endblock article_pages %}
-
+            {% block article_google_ad %}
+            {% endblock article_google_ad %}
             {% block article_pagination %}
                 <!-- Here goes the pagination -->
             {% endblock article_pagination %}

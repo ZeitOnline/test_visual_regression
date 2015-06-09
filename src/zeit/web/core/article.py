@@ -41,28 +41,42 @@ class Page(object):
             self.blocks.append(block)
 
 
-def _inject_banner_code(pages, advertising_enabled, is_longform):
+def _inject_banner_code(
+        pages, advertising_enabled, is_longform, pubtype='zon'):
     """Injecting banner code in page.blocks counts and injects only after
-    paragraphs (2nd actually) tile 7 and 8 are injected"""
+    paragraphs, configured for zon, zmo, longforms... for now"""
 
-    tile_list = [7, 8]  # banner tiles in articles
     possible_pages = [i for i in xrange(1, len(pages) + 1)]
-    possible_paragraphs = [2, 6]  # paragraph(s) to insert ad after
-    possible_content_p = [4]  # paragraph/s to insert content ad after ZON-1531
+    banner_conf = {
+        'zon': {
+            'tiles': [7],  # banner tiles in articles
+            'ad_paras': [2],  # paragraph(s) to insert ad after
+            'content_ad_para': [4]  # paragraph/s to insert content ad after
+        },
+        'zmo': {
+            'tiles': [7, 8],
+            'ad_paras': [2, 6],
+            'content_ad_para': [4]
+        },
+        'longform': {
+            'tiles': [8],
+            'ad_paras': [5]
+        }
+    }
 
     if is_longform:
-        tile_list = [8]
         possible_pages = [2]  # page 1 is somehow the "intro text"
-        possible_paragraphs = [5]
+        pubtype = 'longform'
 
     if advertising_enabled:
         for i, page in enumerate(pages, start=1):
             if i in possible_pages:
                 _place_adtag_by_paragraph(page,
-                                          tile_list,
-                                          possible_paragraphs)
+                                          banner_conf[pubtype]['tiles'],
+                                          banner_conf[pubtype]['ad_paras'])
                 if not is_longform:
-                    _place_content_ad_by_paragraph(page, possible_content_p)
+                    _place_content_ad_by_paragraph(
+                        page, banner_conf[pubtype]['content_ad_para'])
     return pages
 
 
@@ -126,6 +140,9 @@ def pages_of_article(context):
             pages.append(page)
         else:
             page.append(block)
+    if zeit.magazin.interfaces.IZMOContent.providedBy(context):
+        return _inject_banner_code(
+            pages, advertising_enabled, is_longform, pubtype='zmo')
     return _inject_banner_code(pages, advertising_enabled, is_longform)
 
 

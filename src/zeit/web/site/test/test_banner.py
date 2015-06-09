@@ -78,5 +78,5 @@ def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
 
 def test_article_ads_should_have_pagetype_modifier(testserver, testbrowser):
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
-    assert browser.cssselect('#iqadtile8.ad-tile_8--on-article'), (
-        'The pagetype modifier CSS class for article adtile #8 isn‘t present.')
+    assert browser.cssselect('#iqadtile7.ad--tile_7-on-article'), (
+        'The pagetype modifier CSS class for article adtile #7 isn‘t present.')

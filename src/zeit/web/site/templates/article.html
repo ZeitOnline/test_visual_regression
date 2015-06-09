@@ -9,8 +9,7 @@
 
 {% block content_ad_script -%}
 {% if view.context.advertising_enabled %}
-<!-- content ad script, commented out until toggled -->
-<!--script type="text/javascript">
+<script type="text/javascript">
     (function() {
         var s = document.createElement('script');
         s.type = 'text/javascript';
@@ -18,7 +17,7 @@
         s.src = document.location.protocol + '//cdn.iqcontentplatform.de/iq.js';
         var sc = document.getElementsByTagName('script')[0]; sc.parentNode.insertBefore(s, sc);
     })();
-</script-->
+</script>
 {% endif %}
 {%- endblock %}
 
@@ -28,6 +27,12 @@
         {{ render_page(view.current_page) }}
     </div>
 {% endblock article_pages %}
+
+{% block article_google_ad %}
+    {% if view.context.advertising_enabled -%}
+        {{ lama_core.adplace(view.banner(5), view) }}
+    {%- endif %}
+{% endblock article_google_ad %}
 
 {% block article_pagination %}
     {% include "zeit.web.site:templates/inc/article/pagination.tpl" ignore missing %}

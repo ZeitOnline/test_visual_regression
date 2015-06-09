@@ -3,3 +3,4 @@
         <span class="video-text-playbutton__text video-text-playbutton__text--{{ modifier }}">Video ansehen</span><span class="video-text-playbutton__duration">{{ duration | hide_none }}</span>
     </div>
 {% endmacro %}
+

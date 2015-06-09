@@ -9,8 +9,7 @@
 
 {% block content_ad_script -%}
 {% if view.context.advertising_enabled %}
-<!-- content ad script, commented out until toggled -->
-<!--script type="text/javascript">
+<script type="text/javascript">
     (function() {
         var s = document.createElement('script');
         s.type = 'text/javascript';
@@ -18,7 +17,7 @@
         s.src = document.location.protocol + '//cdn.iqcontentplatform.de/iq.js';
         var sc = document.getElementsByTagName('script')[0]; sc.parentNode.insertBefore(s, sc);
     })();
-</script-->
+</script>
 {% endif %}
 {%- endblock %}
 
