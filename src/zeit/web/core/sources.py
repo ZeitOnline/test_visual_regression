@@ -66,7 +66,6 @@ class TeaserMapping(zeit.web.core.utils.frozendict):
             'zon-fullwidth': ['leader-fullwidth'],
             'zon-parquet-large': ['parquet-large'],
             'zon-parquet-small': ['parquet-regular', 'parquet-spektrum'],
-            'zon-square': ['one-half'],
             'hide': ['archive-print-volume', 'archive-print-year',
                      'two-side-by-side', 'ressort', 'leader-upright',
                      'buttons-fullwidth', 'parquet-printteaser',
