@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.26 (unreleased)
+1.26 (2015-06-09)
 -----------------
 
 - BUG-58: Prevent that main script is sourced twice
