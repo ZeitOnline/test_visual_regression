@@ -162,8 +162,8 @@ def register_module(name):
 
     def registrator(cls):
         gsm = zope.component.getGlobalSiteManager()
-        gsm.registerAdapter(cls, (zeit.content.cp.interfaces.ICPExtraBlock,),
-                            zeit.edit.interfaces.IBlock, name)
+        gsm.registerAdapter(cls, (zeit.edit.interfaces.IBlock,),
+                            zeit.web.core.interfaces.IBlock, name)
         return cls
     return registrator
 

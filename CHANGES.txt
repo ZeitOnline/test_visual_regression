@@ -12,6 +12,8 @@ Change log for zeit.web
   billboard right before video stage, css for ads,
   and a lot of bugfixes to be iqd ready
 
+- ZON-1827: Videostage/Playlist-Module for new CPs
+
 
 1.26 (2015-06-09)
 -----------------

@@ -570,8 +570,15 @@ def get_image_group(asset):
 
 @zeit.web.register_filter
 def get_module(module, name=None):
+    if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(module):
+        name = 'cpextra'
+    elif zeit.edit.interfaces.IBlock.providedBy(module):
+        name = 'type'
+    else:
+        return module
+
     return zeit.web.core.utils.get_named_adapter(
-        module, zeit.edit.interfaces.IBlock, 'cpextra')
+        module, zeit.web.core.interfaces.IBlock, name)
 
 
 @zeit.web.register_filter

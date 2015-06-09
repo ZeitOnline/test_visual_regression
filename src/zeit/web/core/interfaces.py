@@ -2,6 +2,8 @@ import pyramid.interfaces
 import zope.interface
 import zope.interface.common.sequence
 
+import zeit.edit.interfaces
+
 
 class IDeltaTime(zope.interface.Interface):
     """A date that has been processed through babel which is actually used
@@ -155,3 +157,7 @@ class IBreakingNews(zope.interface.Interface):
 
 class ITraversable(zope.interface.Interface):
     """Content types that modify the traversal dictionary"""
+
+
+class IBlock(zeit.edit.interfaces.IBlock):
+    """Interface for zeit.web specific IBlock implementations"""
