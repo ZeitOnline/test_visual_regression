@@ -1,4 +1,4 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 {% extends 'zeit.web.core:templates/macros/article_macro.tpl' %}
 
 {% macro image(obj, loop) -%}
@@ -147,11 +147,6 @@
         </div>
     </aside>
 {%- endif %}
-{%- endmacro %}
-
-
-{% macro use_svg_icon(name, class=None) -%}
-    {{ lama_core.use_svg_icon(name, class) }}
 {%- endmacro %}
 
 
