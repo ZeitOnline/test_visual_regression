@@ -1,6 +1,6 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 
-{% if view.comments_allowed or view.comments %}
+{% if view.comments_allowed or (view.comments and view.comments.comment_count) %}
 <section class="comment-section" id="comments">
 	<div class="comment-section__head comment-section__item">
 	{% if view.comments and view.comments.comment_count %}
