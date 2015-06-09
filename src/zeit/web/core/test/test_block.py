@@ -2,6 +2,9 @@
 import lxml.etree
 import mock
 
+import zope.interface.declarations
+
+import zeit.edit.interfaces
 import zeit.web.core.block
 
 
@@ -109,8 +112,20 @@ def test_module_class_should_hash_as_expected():
     assert hash(mod) == 42
 
 
-def test_module_class_should_have_a_layout_attribute():
+def test_cpextra_module_should_have_a_layout_attribute():
     context = mock.Mock()
     context.cpextra = 'lorem-ipsum'
-    mod = zeit.web.core.block.Module(context)
-    assert mod._layout.id == 'lorem-ipsum'
+    zope.interface.declarations.alsoProvides(
+        context, zeit.content.cp.interfaces.ICPExtraBlock)
+    module = zeit.web.core.block.Module(context)
+    assert module._layout.id == 'lorem-ipsum'
+
+
+def test_vivi_module_should_have_a_layout_attribute():
+    context = mock.Mock()
+    context.type = 'barbapapa'
+    zope.interface.declarations.alsoProvides(
+        context, zeit.edit.interfaces.IBlock)
+    module = zeit.web.core.block.Module(context)
+    assert module._layout.id == 'barbapapa'
+
