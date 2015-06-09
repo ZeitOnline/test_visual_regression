@@ -167,10 +167,6 @@ class LegacyCenterpage(Centerpage):
                                     kind='multi')
         regions.append(region_multi)
 
-        area_videostage = LegacyArea([self.module_videostage])
-        region_video = LegacyRegion([area_videostage])
-        regions.append(region_video)
-
         regions += self.region_list_parquet
 
         regions.append(self.region_snapshot)
@@ -265,21 +261,6 @@ class LegacyCenterpage(Centerpage):
         except (AttributeError, TypeError):
             module.image = None
 
-        return module
-
-    @zeit.web.reify
-    def module_videostage(self):
-        """Return a video playlist module to be displayed on the homepage."""
-
-        try:
-            content = zeit.cms.interfaces.ICMSContent(
-                'http://xml.zeit.de/video/playlist/36516804001')
-        except TypeError:
-            return
-
-        module = LegacyModule(content.videos, layout='playlist')
-        module.videos = content.videos
-        module.video_series_list = zeit.web.core.sources.video_series
         return module
 
     @zeit.web.reify
