@@ -48,7 +48,7 @@
 
 	<div id="js-comments-body">
 	{% for comment in view.comments.comments %}
-		{% if loop.length > 3 and loop.index == 3 %}
+		{% if loop.index == 4 -%}
 			{% if view.context.advertising_enabled -%}
 			<div class="comment__ad">
 				{{ lama_core.adplace(view.banner(8), view) }}
