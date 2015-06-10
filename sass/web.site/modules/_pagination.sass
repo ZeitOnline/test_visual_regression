@@ -7,9 +7,6 @@
 		+link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)
 	&__button
 		+zon-button-inky
-		font-weight: normal
-		letter-spacing: 0.1em
-		line-height: remify(18px)
 		&--previous
 			&:before
 				content: "\2039" // ‹ = single left-pointing angle quotation mark
@@ -54,11 +51,7 @@
 .pager
 	margin: remify(16px 0 32px)
 	&__button
-		+zon-button-inky
-		font-weight: normal
-		letter-spacing: 0.1em
-		line-height: remify(18px)
-		margin: remify(20px 14px 0 0)
+		+zon-button-inky($margin: remify(20px 14px 0 0))
 		&--previous
 			&:before
 				content: "\2039" // ‹ = single left-pointing angle quotation mark
