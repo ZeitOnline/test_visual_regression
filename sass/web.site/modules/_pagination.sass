@@ -12,12 +12,16 @@
 		line-height: remify(18px)
 		&--previous
 			&:before
-				content: "\27E8" // \27E9 \2329 \3008
+				content: "\2039" // ‹ = single left-pointing angle quotation mark
 				padding-right: .5em
+				font-size: 1rem
+				line-height: 1
 		&--next
 			&:after
-				content: "\27E9" // \27E9 \232A \3009
+				content: "\203A" // › = single right-pointing angle quotation mark
 				padding-left: .5em
+				font-size: 1rem
+				line-height: 1
 	&__nexttitle
 		display: none
 		letter-spacing: $zon-letter-spacing-s
@@ -57,12 +61,16 @@
 		margin: remify(20px 14px 0 0)
 		&--previous
 			&:before
-				content: "\27E8" // \27E9 \2329 \3008
+				content: "\2039" // ‹ = single left-pointing angle quotation mark
 				padding-right: .5em
+				font-size: 1rem
+				line-height: 1
 		&--next
 			&:after
-				content: "\27E9" // \27E9 \232A \3009
+				content: "\203A" // › = single right-pointing angle quotation mark
 				padding-left: .5em
+				font-size: 1rem
+				line-height: 1
 	&__pages
 		+inline-block
 		font-size: remify(14px)
