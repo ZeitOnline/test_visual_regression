@@ -186,3 +186,16 @@ def test_rss_feed_of_cp_has_requested_format(testbrowser, testserver):
             'article-image-asset.bildtext.link.x' in feed)
     assert re.search('<enclosure .* url="%s/centerpage/katzencontent/'
                      % testserver.url, feed)
+
+
+def test_spektrum_also_renders_on_ng_centerpages(testbrowser, testserver):
+    browser = testbrowser(
+        '%s/index' % testserver.url)
+    teasers = browser.cssselect(
+        '.parquet-meta__more.parquet-meta__more--spektrum')
+    actual_amount = len(teasers)
+    assert actual_amount == 1, (
+        'Parquet row does not display the right amount of spektrum.')
+    text = teasers[0].text
+    assert "Aktuelles aus der Welt von Wissenschaft und Forschung:" in text, (
+        'Spektrum link has not the correct text')
