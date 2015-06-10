@@ -109,19 +109,36 @@ $zon-search-square-size: remify(35px)
 
 //box 2: community
 .main_nav__community
-	@extend %main_nav_links
 	+add_nav_bar_style($zon-bar-height-phablet)
-	line-height: $zon-bar-height-phablet
 	+order(20)
+	+inline-block
+	letter-spacing: 1px
+	line-height: $zon-bar-height-phablet
 	text-align: left
 	+respond-min($break-tablet-min)
-		+remove_nav_bar_style($width: 7%)
+		+remove_nav_bar_style($width: auto)
 		+order(30)
+		+flex(0 0 auto)
+		+inline-block
+		color: $zon_grey
+		font-size: remify(9px)
 		text-align: right
-		display: inline-block
-		a
-			+link-colors($black, $zon_dark_grey, $black, $black, $black)
+		text-transform: uppercase
 
+.user-link
+	+respond-min($break-tablet-min)
+		+inline-block
+		+link-colors($black, $zon_dark_grey, $black, $black, $black)
+		margin-right: remify(5px)
+
+.beta-badge
+	+inline-block
+	+link-colors($white, $white, $white, $white, $white)
+	background-color: #58595c
+	border-radius: 2px
+	color: $white
+	line-height: 1
+	padding: 4px 4px 2px 4px
 
 .main_nav__community__image
 	@extend %main_nav_icons
@@ -163,8 +180,9 @@ $zon-search-square-size: remify(35px)
 			li
 				width: 33%
 	+respond-min($break-tablet-min)
-		+remove_nav_bar_style($width: 55%)
+		+remove_nav_bar_style($width: auto)
 		+order(10)
+		+flex(2 0 35%)
 		text-align: left
 		& > ul
 			margin-right: $petite
@@ -199,8 +217,9 @@ $zon-search-square-size: remify(35px)
 				border-left: 1px solid $zon_light_grey
 				border-right: 1px solid $zon_light_grey
 	+respond-min($break-tablet-min)
-		+remove_nav_bar_style($width: 38%)
+		+remove_nav_bar_style($width: auto)
 		+order(20)
+		+flex(0 0 auto)
 		text-align: right
 		padding-left: auto
 		& > ul
