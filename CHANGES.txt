@@ -4,7 +4,7 @@ Change log for zeit.web
 1.28 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-267: Invalidate memcache on every request in zeit.web.magazin
 
 
 1.27 (2015-06-09)
