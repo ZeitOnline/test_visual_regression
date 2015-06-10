@@ -191,11 +191,11 @@ def test_rss_feed_of_cp_has_requested_format(testbrowser, testserver):
 def test_spektrum_also_renders_on_ng_centerpages(testbrowser, testserver):
     browser = testbrowser(
         '%s/index' % testserver.url)
-    teasers = browser.cssselect(
+    rows = browser.cssselect(
         '.parquet-meta__more.parquet-meta__more--spektrum')
-    actual_amount = len(teasers)
+    actual_amount = len(rows)
     assert actual_amount == 1, (
         'Parquet row does not display the right amount of spektrum.')
-    text = teasers[0].text
+    text = rows[0].text
     assert "Aktuelles aus der Welt von Wissenschaft und Forschung:" in text, (
         'Spektrum link has not the correct text')

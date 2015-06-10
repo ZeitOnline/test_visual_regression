@@ -262,7 +262,7 @@
                 <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="id-913cb698-41ee-479b-997c-86232fd3c3d3"/>
             </region>
         </cluster>
-        <cluster visible="True" area="id-d976a64d-0409-4b49-a153-12bdcdf94d1e" kind="solo">
+        <cluster visible="True" area="id-d976a64d-0409-4b49-a153-12bdcdf94d1e" kind="parquet">
             <region visible="True" hide-dupes="True" area="id-fab3ebde-2ea6-423c-87ab-39ea2c6e3c19" kind="spektrum" count="3"/>
         </cluster>
         <cluster area="solo" visible="True">
