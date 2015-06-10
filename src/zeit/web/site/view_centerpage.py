@@ -21,7 +21,7 @@ import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
-import zeit.web.site.spektrum
+import zeit.web.site.areas.spektrum
 import zeit.web.site.view
 
 
@@ -117,7 +117,12 @@ class Centerpage(
         :rtype: list
         """
 
-        return self.context.values()
+        region_list = self.context.values()
+
+        if self.is_hp:
+            region_list.append(self.region_snapshot)
+
+        return region_list
 
     @zeit.web.reify
     def last_semantic_change(self):
@@ -147,6 +152,20 @@ class Centerpage(
         elif self.context.ressort:
             return self.context.ressort.lower()
         return ''
+
+    @zeit.web.reify
+    def region_snapshot(self):
+        """Return the centerpage snapshot region aka Momentaufnahme."""
+        # TODO: Reimplement snapshot as a proper vivi+friedbert module.
+        try:
+            snapshot = zeit.web.core.interfaces.ITeaserImage(
+                self.context.snapshot)
+            assert snapshot
+        except TypeError:
+            snapshot = None
+
+        module = LegacyModule([snapshot], layout='snapshot')
+        return LegacyRegion([LegacyArea([module])])
 
 
 @pyramid.view.view_config(
@@ -275,7 +294,7 @@ class LegacyCenterpage(Centerpage):
                 if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
                     if block.cpextra != 'parquet-spektrum':
                         continue
-                    legacy = zeit.web.site.spektrum.HPFeed()
+                    legacy = zeit.web.site.areas.spektrum.HPFeed()
                 else:
                     try:
                         legacy = zope.component.getMultiAdapter(
@@ -287,20 +306,6 @@ class LegacyCenterpage(Centerpage):
                 regions.append(LegacyRegion([legacy], kind='parquet'))
 
         return regions
-
-    @zeit.web.reify
-    def region_snapshot(self):
-        """Return the centerpage snapshot region aka Momentaufnahme."""
-
-        try:
-            snapshot = zeit.web.core.interfaces.ITeaserImage(
-                self.context.snapshot)
-            assert snapshot
-        except TypeError:
-            snapshot = None
-
-        module = LegacyModule([snapshot], layout='snapshot')
-        return LegacyRegion([LegacyArea([module])])
 
 
 # First of all: congrats for scrolling all the way down. Now that you've made
