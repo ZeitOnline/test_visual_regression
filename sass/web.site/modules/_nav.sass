@@ -12,6 +12,16 @@ $zon-classifieds-width-phablet: em(180px)
 $zon-search-width: em(120px)
 $zon-search-square-size: remify(35px)
 
+%beta-badge
+	+inline-block
+	+link-colors($white, $white, $white, $white, $white)
+	+font-smoothing
+	background-color: $zon_grey
+	border-radius: 2px
+	color: $white
+	line-height: 1
+	padding: 4px 4px 3px 4px
+
 // basic style for nav box
 // important is important here, as we have to overwrite js toggling
 .main_nav
@@ -96,6 +106,7 @@ $zon-search-square-size: remify(35px)
 	display: inline-block
 	font-size: inherit
 	margin: 0
+	position: relative
 	a
 		+hide-text
 		@extend %main_nav_icons
@@ -106,6 +117,20 @@ $zon-search-square-size: remify(35px)
 			margin: 0
 			width: $zon-logo-width
 			height: $zon-logo-height
+	&:after
+		@extend %beta-badge
+		+inline-block
+		content: 'Beta'
+		font-size: remify(9px)
+		font-weight: normal
+		position: absolute
+		right: remify(-40px)
+		text-transform: uppercase
+		top: calc(50% - 8.5px)
+		+respond-min($break-tablet-min)
+			display: none
+
+
 
 //box 2: community
 .main_nav__community
@@ -132,13 +157,7 @@ $zon-search-square-size: remify(35px)
 		margin-right: remify(5px)
 
 .beta-badge
-	+inline-block
-	+link-colors($white, $white, $white, $white, $white)
-	background-color: #58595c
-	border-radius: 2px
-	color: $white
-	line-height: 1
-	padding: 4px 4px 2px 4px
+	@extend %beta-badge
 
 .main_nav__community__image
 	@extend %main_nav_icons
