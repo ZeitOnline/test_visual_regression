@@ -23,46 +23,36 @@
 		overflow: hidden // needed for animation
 		padding: 0
 	&__item
-		+inline-block(baseline)
+		+inline-block
 		&:before
-			+inline-block(baseline)
 			content: " / "
 			color: $zon_light_grey
 			margin: remify(0 8px)
 		&:first-child:before
-			content: ""
-			display: none
+			content: none
 		&--whatsapp
 			+respond-min($break-tablet-min)
 				display: none
 	&__link
 		font-weight: bold
 		line-height: 2.0
+		+on-interaction
+			border-bottom: 1px solid currentColor
 		&--facebook
 			+link
-				color: #3B5998 // corporate fb color
-			+on-interaction
-				border-bottom: 1px solid #3B5998
+				color: $color-facebook
 		&--twitter
 			+link
-				color: #55ACEE // corporate twitter color
-			+on-interaction
-				border-bottom: 1px solid #55ACEE
+				color: $color-twitter
 		&--google
 			+link
-				color: #CC3732 // corporate g+ color
-			+on-interaction
-				border-bottom: 1px solid #CC3732
+				color: $color-google
+		&--whatsapp
+			+link
+				color: $color-whatsapp
 		&--mail
 			+link
 				color: $zon_grey
-			+on-interaction
-				border-bottom: 1px solid $zon_grey
-		&--whatsapp
-			+link
-				color: #4DC247 // corporate whatsapp color
-			+on-interaction
-				border-bottom: 1px solid #4DC247
 
 // js-induced state modifications
 .sharing-menu--active > .sharing-menu__title
