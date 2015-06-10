@@ -1,14 +1,16 @@
 import lxml.etree
 import pyramid.view
+
 import zeit.content.cp.interfaces
 import zeit.push.interfaces
+
 import zeit.web.core.view_centerpage
-import zeit.web.site.spektrum
+import zeit.web.site.areas.spektrum
 import zeit.web.site.view
 
 
-# XXX This is copy&paste&tweak of zeit.web.site.spektrum.RSSFeed. Could we
-# extract common functionality somehow?
+# XXX This is copy&paste&tweak of zeit.web.site.areas.spektrum.RSSFeed.
+# Could we extract common functionality somehow?
 class FeedBase(
         zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
 
@@ -22,10 +24,11 @@ class FeedBase(
             encoding='UTF-8')
 
     def build_feed(self):
-        E = zeit.web.site.spektrum.ElementMaker
+        E = zeit.web.site.areas.spektrum.ElementMaker
         # Convoluted way of creating a namespaced tag, sigh.
-        E_content_encoded = getattr(
-            E, '{%s}encoded' % zeit.web.site.spektrum.CONTENT_NAMESPACE)
+        cns = '{%s}encoded' % zeit.web.site.areas.spektrum.CONTENT_NAMESPACE
+        ans = '{%s}link' % zeit.web.site.areas.spektrum.ATOM_NAMESPACE
+        E_content_encoded = getattr(E, cns)
         root = E.rss(version='2.0')
         channel = E.channel(
             E.title('ZEIT ONLINE SocialFlow'),
@@ -33,7 +36,7 @@ class FeedBase(
             E.description(),
             E.language('de-de'),
             E.copyright('Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
-            getattr(E, '{%s}link' % zeit.web.site.spektrum.ATOM_NAMESPACE)(
+            getattr(E, ans)(
                 href=self.request.url,
                 type=self.request.response.content_type)
         )
@@ -49,12 +52,14 @@ class FeedBase(
             # unfortunately still generates un-unseful production links.
             content_url = content_url.replace(
                 self.request.route_url('home'), 'http://www.zeit.de/', 1)
+            last_published_semantic = (
+                zeit.web.site.areas.spektrum.last_published_semantic(content))
             item = E.item(
                 E.title(content.title),
                 E.link(content_url),
                 E.description(content.teaserText),
-                E.pubDate(zeit.web.site.spektrum.format_rfc822_date(
-                    zeit.web.site.spektrum.last_published_semantic(content))),
+                E.pubDate(zeit.web.site.areas.spektrum.format_rfc822_date(
+                    last_published_semantic)),
                 E.guid(content.uniqueId, isPermaLink='false'),
             )
             social_value = getattr(

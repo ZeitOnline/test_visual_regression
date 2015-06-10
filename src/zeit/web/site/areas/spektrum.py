@@ -24,9 +24,10 @@ import zeit.web.site.view
 log = logging.getLogger(__name__)
 
 
+@zeit.web.register_area('spektrum')
 class HPFeed(object):
 
-    def __new__(cls):
+    def __new__(cls, *args):
         """Generate a list of teasers from an RSS feed."""
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         feed_url = conf.get('spektrum_hp_feed')

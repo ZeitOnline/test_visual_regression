@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<centerpage type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <head>
         <header_image/>
         <snapshot align="left" expires="" publication-date="" src="http://xml.zeit.de/exampleimages/artikel/leinwand.jpg" title="Ein schneebedecktes Feld bei Buffalo im US-Bundesstaat New York" type="jpg">
@@ -262,28 +262,29 @@
                 <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="id-913cb698-41ee-479b-997c-86232fd3c3d3"/>
             </region>
         </cluster>
-
-      <cluster area="solo" visible="True">
-      <region visible="True" hide-dupes="True" kind="news"
-      area="id-7c964ac7-6bc7-41aa-bd0b-44237e187c24" count="8" automatic="True" automatic_type="query" title="Schlagzeilen">
-        <raw_query>merkel</raw_query>
-        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
-        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-396f44ea-f59b-46d7-adc1-856964e221a2"/>
-        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-8bc57b9a-4670-400f-9a01-1f6c0afd8c16"/>
-        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
-        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
-        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
-        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
-        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
-      </region>
-    </cluster>
-    <cluster visible="True" area="gnnpf" title="Servicebox">
+        <cluster visible="True" area="id-d976a64d-0409-4b49-a153-12bdcdf94d1e" kind="parquet">
+            <region visible="True" hide-dupes="True" area="id-fab3ebde-2ea6-423c-87ab-39ea2c6e3c19" kind="spektrum" count="3"/>
+        </cluster>
+        <cluster area="solo" visible="True">
+            <region visible="True" hide-dupes="True" kind="news" area="id-7c964ac7-6bc7-41aa-bd0b-44237e187c24" count="8" automatic="True" automatic_type="query" title="Schlagzeilen">
+                <raw_query>merkel</raw_query>
+                <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
+                <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-396f44ea-f59b-46d7-adc1-856964e221a2"/>
+                <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-8bc57b9a-4670-400f-9a01-1f6c0afd8c16"/>
+                <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
+                <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
+                <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
+                <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
+                <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
+            </region>
+        </cluster>
+        <cluster visible="True" area="gnnpf" title="Servicebox">
             <region visible="True" area="grrrmmmpf" kind="solo" title="Servicebox">
                 <container cp:__name__="huwaaaaa" cp:type="cpextra" module="servicebox" visible="True">
                     <cp_extra for="zeit.content.cp.interfaces.IArea" id="servicebox" />
                 </container>
             </region>
-    </cluster>
+        </cluster>
     </body>
     <feed/>
     <teaser>

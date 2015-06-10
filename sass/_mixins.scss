@@ -1,0 +1,386 @@
+@mixin link {
+	&:link,
+	&:visited {
+		@content;
+	}
+}
+
+@mixin on-interaction {
+	&:hover,
+	&:active,
+	&:focus {
+		@content;
+	}
+}
+
+@mixin default-article-textlink {
+	a {
+		border-bottom: 1px solid rgba($color-link--default, 0.5);
+		@include transition-property(border-bottom-color, color);
+		@include transition-duration(0.2s);
+		&:focus {
+			border-bottom-color: rgba($color-link--focus, 0.5);
+		}
+		&:hover {
+			border-bottom-color: rgba($color-link--hover, 0.5);
+		}
+		&:active {
+			border-bottom-color: rgba($color-link--active, 0.5);
+		}
+	}
+}
+
+@mixin fake-box-shadow-inset($color: $black, $alpha_start: 0.7, $alpha_stop: 0, $direction: to top, $length: 60%) {
+	background-color: $color;
+	position: relative;
+	&:after {
+		bottom: 0;
+		content: "";
+		height: 100%;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 100%;
+		z-index: 1;
+		@include background-image(linear-gradient($direction, rgba($color, $alpha_start) 0%, rgba($color, $alpha_stop) $length));
+	}
+}
+
+@mixin teaser-image-dark-overlay($color: rgb(0, 15, 20), $angle: 12deg, $gradient: 0) {
+	@if $gradient == 0 {
+		$gradient: rgba($color, 0.6) 15%, rgba($color, 0.15) 52%, rgba($color, 0) 70%;
+	}
+	background-color: $color;
+	position: relative;
+	&:after {
+		bottom: 0;
+		content: "";
+		height: 100%;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 100%;
+		@include background-image(linear-gradient($angle, $gradient));
+	}
+}
+
+@mixin teaser-image-text-shadow($color: rgb(0, 0, 20)) {
+	text-shadow: 0 0 20px rgba($color, 0.25);
+}
+
+@mixin no-user-select {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+// if you change this, please change =unpadded accordingly
+@mixin padded {
+	padding-left: $page-padding--small;
+	padding-right: $page-padding--small;
+	@include respond-min($break-1) {
+		padding-left: $page-padding;
+		padding-right: $page-padding;
+	}
+}
+
+// should be =padded inverted
+@mixin unpadded {
+	margin-left: -$page-padding--small;
+	margin-right: -$page-padding--small;
+	@include respond-min($break-1) {
+		margin-left: -$page-padding;
+		margin-right: -$page-padding;
+	}
+}
+
+@mixin bleed($max: $medium-content-width + 2 * $gutter) {
+	margin-left: -$page-padding--small;
+	margin-right: -$page-padding--small;
+	@include respond-min($break-1) {
+		margin-left: -$page-padding;
+		margin-right: -$page-padding;
+	}
+
+	@include respond-min($max) {
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+@mixin visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+@mixin ir {
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-indent: 150%;
+}
+
+@mixin body-type-zoom {
+	font-size: $font-ml;
+	@include respond-min($break-3) {
+		font-size: $font-l;
+	}
+}
+
+@mixin input-placeholder {
+	::-webkit-input-placeholder {
+		@content;
+	}
+	::-moz-placeholder {
+		@content;
+	}
+	::input-placeholder {
+		@content;
+	}
+}
+
+@mixin justify-children-horizontally($elements-selector, $vertical-alignment: top) {
+	text-align: justify;
+	text-justify: distribute-all-lines;
+	-ms-text-justify: distribute-all-lines;
+	// this :after is sort-of a hack to justify the elements selected by $elements-selector
+	// > short explanation:
+	//   the elements get 'inline-block'-ed and can therefore be justified via 'justify'.
+	//   but: justification happens for every *line* except the last one, which is left-aligned.
+	//   hence the need to have an additional line, which is provided by :after.
+	//   it takes up a whole line (width: 100%) and is invisible due to it's font-size and line-height of 0
+	// source: http://stackoverflow.com/questions/6865194/fluid-width-with-equally-spaced-divs
+	&:after {
+		@include inline-block;
+		content: "";
+		font-size: 0;
+		line-height: 0;
+		width: 100%;
+	}
+	& > * {
+		text-align: left;
+	}
+	@at-root #{$elements-selector} {
+		@include inline-block($vertical-alignment);
+	}
+}
+
+@mixin animated-interaction($color: $color-link--hover) {
+	@include transition(border-color 0.2s);
+	border-bottom: 1px solid transparent;
+	border-bottom: 1px solid rgba($color, 0);
+	@include on-interaction {
+		color: $color;
+		border-color: $color;
+	}
+}
+
+@mixin drop_icon {
+	display: inline-block;
+	margin-left: $tiny;
+	content: "▾";
+}
+
+/* mixins for navigation/header */
+
+@mixin add_nav_bar_style($height, $double: false) {
+	border-bottom: 1px solid $zon_light_grey;
+	height: $height;
+	padding-left: $fine;
+	width: 100%;
+	@if $double {
+		border-top: 1px solid $zon_light_grey;
+	}
+}
+
+@mixin remove_nav_bar_style($width: auto) {
+	border: 0;
+	height: auto;
+	padding-left: 0;
+	width: $width;
+}
+
+@mixin hover_nav_icon($display: block, $bgcolor: #FFF, $padding: $small) {
+	.main_nav__icon--hover {
+		display: none;
+	}
+	a {
+		display: $display;
+		padding: $padding;
+		&:hover {
+			.main_nav__icon--hover {
+				display: $display;
+				background-color: $bgcolor;
+			}
+			.main_nav__icon--plain {
+				display: none;
+			}
+		}
+	}
+}
+
+/* END: mixins for navigation/header */
+
+@mixin image_text_replacement($display: block, $vertical-align: middle) {
+	@include background-size(contain);
+	background-position: 50% 50%;
+	display: $display;
+	text-indent: -50000em;
+	@if $display == inline-block or $display == inline {
+		vertical-align: $vertical-align;
+	}
+}
+
+@mixin zon-button($background-color,
+                  $hover-background-color,
+                  $border-color,
+                  $hover-border-color,
+                  $color,
+                  $hover-color,
+                  $visited-color,
+                  $font-size: remify(13px),
+                  $font-weight: bold,
+                  $letter-spacing: $zon-letter-spacing-l,
+                  $margin: remify(14px 6px),
+                  $padding: remify(9px 18px 7px)
+	) {
+	@include inline-block(none);
+	background-color: $background-color;
+	border-radius: 5px;
+	border: 2px solid $border-color;
+	color: $color;
+	font-size: $font-size;
+	font-weight: $font-weight;
+	letter-spacing: $letter-spacing;
+	line-height: remify(18px);
+	margin: $margin;
+	padding: $padding;
+	text-align: center;
+	text-transform: uppercase;
+	@include transition(all 0.15s ease-in-out);
+	&:visited {
+		color: $visited-color;
+	}
+	&:hover,
+	&:focus {
+		background-color: $hover-background-color;
+		border-color: $hover-border-color;
+		color: $hover-color;
+		cursor: pointer;
+	}
+	&[disabled] {
+		opacity: 0.5;
+	}
+	&[disabled]:hover,
+	&[disabled]:focus {
+		background-color: $background-color;
+		border-color: $border-color;
+		color: $color;
+		cursor: default;
+	}
+}
+
+@mixin zon-button-inky($margin: 0) {
+	@include zon-button($background-color: $zon_dark_grey,
+	                    $hover-background-color: $zon_charcoal,
+	                    $border-color: $zon_dark_grey,
+	                    $hover-border-color: $zon_charcoal,
+	                    $color: $white,
+	                    $hover-color: $white,
+	                    $visited-color: $white,
+	                    $font-weight: normal,
+	                    $letter-spacing: 0.1em,
+	                    $margin: $margin,
+	                    $padding: remify(5px) 1em remify(4px)
+	);
+}
+
+@mixin zon-button-dark($color: $zon_lighter_grey, $margin: remify(14px 6px)) {
+	@include zon-button($background-color: rgba(0, 0, 0, 0.2),
+	                    $hover-background-color: rgba(0, 0, 0, 0.5),
+	                    $border-color: $zon_mid_grey,
+	                    $hover-border-color: $zon-alto,
+	                    $color: $color,
+	                    $hover-color: $white,
+	                    $visited-color: $color,
+	                    $margin: $margin
+	);
+	@if (lightness($color) > 50) {
+		@include font-smoothing()
+	}
+}
+
+@mixin zon-button-light($margin: 0) {
+	@include zon-button($background-color: rgba(255, 255, 255, 0.5),
+	                    $hover-background-color: rgba(255, 255, 255, 0.8),
+	                    $border-color: $zon_light_grey,
+	                    $hover-border-color: $zon_mid_grey,
+	                    $color: $zon-charcoal,
+	                    $hover-color: $black,
+	                    $visited-color: $zon-charcoal,
+	                    $margin: $margin
+	);
+}
+
+// mac font smoothing switching
+// please use extremely carefully http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing/
+// rather use case may be **light text on dark background**
+// switching off fontsmoothing is prohibited except on high density mobile safari screens (see media query)
+// @param {bool} $antialiased [true] - switch on antialiasing
+@mixin font-smoothing($antialiased: true) {
+	@if $antialiased {
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
+	}
+	@else {
+		@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 200dpi), only screen and (min-resolution: 1.25dppx) {
+			-webkit-font-smoothing: subpixel-antialiased;
+			-moz-osx-font-smoothing: auto;
+		}
+	}
+}
+
+// animating elements *on hover* over one of it's parents
+// @param {element} $parent  - parent element for hover effect, if not supplied the $element is used
+// @param {map} $trans - transition properties
+// @property {string} $trans.property [opacity] - transition property
+// @property {number} $trans.duration [.5s] - transition duration
+// @property {number} $trans.delay [0] - transition delay
+// @property {string} $trans.timing [ease-in-out] - transition timing function
+// @content css of the animated state
+// @output styles for the element, the parent (@-rooted) and the hover state
+@mixin transition-on-parent-hover($parent, $trans: ()) {
+	$element: &;
+	$default-transition: ("property": opacity, "duration": 0.5s, "delay": 0, "timing": ease-in-out);
+	$transition: map_merge($default-transition, $trans);
+	@include transition(map-get($transition, "property") map-get($transition, "duration") map-get($transition, "delay") map-get($transition, "timing"));
+	@at-root #{$parent} {
+		&:hover {
+			#{$element} {
+				@content;
+			}
+		}
+	}
+}
+
+// pseudo classes
+%off-screen {
+	height: 1px;
+	left: -10000px;
+	overflow: hidden;
+	position: absolute;
+	top: auto;
+	width: 1px;
+}
