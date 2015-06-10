@@ -10,7 +10,6 @@ import zeit.connector.interfaces
 import zeit.content.image.interfaces
 
 import zeit.web.core.view
-import zeit.web.site.spektrum
 
 
 @view_config(context=zeit.content.image.interfaces.IImage)
