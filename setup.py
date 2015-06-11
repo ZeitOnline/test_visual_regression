@@ -73,6 +73,7 @@ setup(
         'zope.component',
         'zope.configuration',
         'zope.processlifetime',
+        'zeit.vgwort',
     ],
     description='This package is all about ZEIT ONLINE website delivery.',
     long_description=open('README.md', 'r').read(),

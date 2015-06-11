@@ -31,5 +31,6 @@
     <include package="zeit.solr" />
     <include package="zeit.wysiwyg" />
     <include package="zeit.brightcove" />
+    <include package="zeit.vgwort" />
 
 </configure>
