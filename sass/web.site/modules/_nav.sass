@@ -338,6 +338,22 @@ $zon-search-square-size: remify(35px)
 		margin: $petite
 
 
+//box 10: beta notice
+.beta-notice
+	+font-smoothing
+	+flex-grow(1)
+	+order(25)
+	background: $color-body-bg
+	color: $zon_mid_grey
+	padding: remify(16px)
+	text-align: center 
+	+respond-min($break-tablet-min)
+		display: none
+	&__link
+		+link-colors($white, $white, $white, $white)
+		border-bottom: 1px solid $zon_mid_grey
+
+
 /* primary navigation (ressorts and stuff) */
 
 .primary-nav
