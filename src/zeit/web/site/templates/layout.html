@@ -150,5 +150,11 @@
         };
     </script>
     <script src="{{ request.asset_url('js/site.js') }}"></script>
+
+    {% if view.vgwort_url %}
+    <!--start: vgwort-->
+    <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" id="vgwort_pixel">
+    <!--end: vgwort--> 
+    {% endif %}
 </body>
 </html>

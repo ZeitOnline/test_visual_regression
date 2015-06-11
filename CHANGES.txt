@@ -8,6 +8,7 @@ Change log for zeit.web
 
 - FIX: Port spektrum and snapshot to 2015 centerpages
 
+- FIX: vgwort pixel for web.site and web.magazin
 
 1.28 (2015-06-10)
 -----------------
