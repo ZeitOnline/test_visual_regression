@@ -31,7 +31,7 @@
         var el = {
             bindNaviEvents: function( that ) {
                 var $buttonMenue = $( that ).find( 'a' ),
-                    $toggleEls = $( '.main_nav' ).find( 'div[data-dropdown="true"]' ),
+                    $toggleEls = $( '.main_nav' ).find( 'div[data-dropdown="true"]' ).add( '.beta-notice' ),
                     $icons = $buttonMenue.find( '.logo_bar__menue__image' ),
                     icons = [ 'icon-zon-logo-navigation_menu', 'icon-zon-logo-navigation_close' ];
 

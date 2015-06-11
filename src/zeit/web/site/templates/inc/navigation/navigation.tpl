@@ -43,7 +43,7 @@
 		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
 	</div>
 	<div class="main_nav__search" data-dropdown="true">{% include "zeit.web.site:templates/inc/navigation/navigation-search.tpl" %}</div>
-	<div class="beta-notice" data-dropdown="true">
+	<div class="beta-notice">
 		<div>Sie benutzen die neue ZEIT ONLINE Beta.</div>
 		<div><a class="beta-notice__link" href="http://www.zeit.de/beta">Zurück zur klassischen Version?</a></div>
 	</div>
