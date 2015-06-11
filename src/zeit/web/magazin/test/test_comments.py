@@ -1,24 +1,37 @@
 # -*- coding: utf-8 -*-
+import lxml.etree
 import mock
-import urlparse
 
 import zeit.cms.interfaces
 
 
-def test_comment_post_url_contains_destination(application, testserver):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    request = mock.Mock()
-    request.url = 'foo.bar/artikel/01'
-    view = zeit.web.magazin.view_article.Article(context, request)
-    url = view.comments.get('comment_post_url')
-    scheme, netloc, path, query, frag = urlparse.urlsplit(url)
-    param = urlparse.parse_qs(query, True)
+def test_comments_template_respects_metadata(jinja2_env, testserver):
+    url = 'http://xml.zeit.de/artikel/01'
+    comments = jinja2_env.get_template(
+        'zeit.web.magazin:templates/inc/article/comments.html')
+    content = zeit.cms.interfaces.ICMSContent(url)
+    request = mock.MagicMock()
+    request.authenticated_userid = 123
+    request.session = {'user': {'uid': '123', 'name': 'Max'}}
+    request.path_url = url
+    view = zeit.web.magazin.view_article.Article(content, request)
+    view.content_url = url
+    view.comments_allowed = False
+    string = comments.render(view=view, request=request)
+    html = lxml.html.fromstring(string)
 
-    assert param.get('destination') == [request.url]
+    assert len(html.cssselect('#js-comments')) == 1, (
+        'comment section must be present')
+    assert len(html.cssselect('article.comment')) > 0, (
+        'comments must be displayed')
+    assert len(html.cssselect('#js-comments-form')) == 0, (
+        'comment form must not be present')
 
+    # reset view (kind of)
+    view = zeit.web.magazin.view_article.Article(content, request)
+    view.content_url = url
+    view.show_commentthread = False
+    string = comments.render(view=view, request=request)
 
-def test_comment_thread_contains_comment_report_url(application, testserver):
-    report_url = 'http://localhost:6551/services/json'
-    unique_id = 'http://xml.zeit.de/artikel/01'
-    thread = zeit.web.core.comments.get_thread(unique_id)
-    assert thread['comment_report_url'] == report_url
+    assert string.strip() == '', (
+        'comment section template must return an empty document')
