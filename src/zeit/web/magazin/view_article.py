@@ -92,16 +92,21 @@ class LongformArticle(Article):
                           renderer='templates/feature_longform.html')
 class FeatureLongform(LongformArticle):
     @zeit.web.reify
-    def breadcrumbx(self):
-        crumb = self._navigation
-        l = [crumb['start']]
-        if self.context.ressort in crumb:
-            l.append(crumb[self.context.ressort])
-        if self.context.sub_ressort in crumb:
-            l.append(crumb[self.context.sub_ressort])
+    def breadcrumb(self):
+        crumb = super(FeatureLongform, self).breadcrumb
+        items = self.navigation.navigation_items
+        crumb_list = crumb[:1]
+        if self.ressort in items:
+            item = items[self.ressort]
+            href = zeit.web.core.template.translate_url(item.href)
+            crumb_list.append((item.text, href))
+        if self.sub_ressort in items:
+            item = items[self.sub_ressort]
+            href = zeit.web.core.template.translate_url(item.href)
+            crumb_list.append((item.text, href))
         if self.title:
-            l.append((self.title, ''))
-        return l
+            crumb_list.append((self.title, ''))
+        return crumb_list
 
 
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle,
