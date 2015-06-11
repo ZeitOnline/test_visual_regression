@@ -4,6 +4,8 @@ Change log for zeit.web
 1.29 (unreleased)
 -----------------
 
+- ZON-1789: Wrap liveblog article content
+
 - FIX: Map old images to new teasers
 
 - ZON-1613: Allow pagination for dynamic centerpages
