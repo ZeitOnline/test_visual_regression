@@ -15,8 +15,8 @@ import zeit.push.interfaces
 import zeit.web.core.interfaces
 import zeit.web.core.template
 import zeit.web.core.view_centerpage
-import zeit.web.site.areas.spektrum
 import zeit.web.site.view
+
 
 log = logging.getLogger(__name__)
 

@@ -6,7 +6,7 @@ import pysolr
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 
-import zeit.web.site.modules.search_form
+import zeit.web.site.module.search_form
 import zeit.web.core.application
 import zeit.web.core.sources
 
@@ -128,7 +128,7 @@ def test_search_form_should_create_valid_date_range_query_string(
         return datetime.datetime(2000, 1, 1), datetime.datetime(2010, 1, 1)
 
     monkeypatch.setattr(
-        zeit.web.site.modules.search_form, 'MODES', {'1y': (year_range,)})
+        zeit.web.site.module.search_form, 'MODES', {'1y': (year_range,)})
 
     search_form['mode'] = '1y'
     assert search_form.raw_query == (

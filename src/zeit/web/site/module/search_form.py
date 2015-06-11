@@ -12,7 +12,7 @@ import zeit.solr.interfaces
 import zeit.web
 import zeit.web.core.block
 import zeit.web.core.template
-import zeit.web.site.areas.ranking
+import zeit.web.site.area.ranking
 
 
 log = logging.getLogger(__name__)
@@ -95,7 +95,7 @@ class Form(zeit.web.core.block.Module):
         if self.query in (None, lq.any_value()):
             return 'aktuell'
         this = self['sort']
-        orders = zeit.web.site.areas.ranking.ORDERS
+        orders = zeit.web.site.area.ranking.ORDERS
         return this in orders and this or 'relevanz'
 
     @zeit.web.reify

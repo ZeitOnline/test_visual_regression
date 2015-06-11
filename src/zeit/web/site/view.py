@@ -3,7 +3,7 @@ import pyramid.view
 
 import zeit.web.core.view
 import zeit.web.magazin.view
-import zeit.web.site.areas.spektrum
+import zeit.web.site.area.spektrum
 
 
 def is_zon_content(context, request):
@@ -42,6 +42,6 @@ def spektrum_hp_feed(request):
     request.response.cache_expires(60)
     return {
         'esi_toggle': True,
-        'area': zeit.web.site.areas.spektrum.HPFeed(),
+        'area': zeit.web.site.area.spektrum.HPFeed(),
         'parquet_position': request.params.get('parquet-position')
     }
