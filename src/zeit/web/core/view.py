@@ -482,7 +482,6 @@ class Content(Base):
         cid = self.request.params.get('cid', None)
         return zeit.web.core.comments.get_thread(
             self.context.uniqueId,
-            destination=self.request.url,
             sort=sort,
             page=page,
             cid=cid)

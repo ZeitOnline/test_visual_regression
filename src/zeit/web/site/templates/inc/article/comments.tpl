@@ -1,9 +1,9 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 
-{% if view.comments_allowed or (view.comments and view.comments.comment_count) %}
+{% if view.comments_allowed or view.comments %}
 <section class="comment-section" id="comments">
 	<div class="comment-section__head comment-section__item">
-	{% if view.comments and view.comments.comment_count %}
+	{% if view.comments %}
 		<span class="comment-section__headline">
 			{{ view.comments.headline }}
 			{% if view.comments.pages.title %}
@@ -23,7 +23,7 @@
 	{% endif %}
 	</div>
 
-	{% if view.comments and view.comments.comment_count %}
+	{% if view.comments %}
 	<div class="comment-section__preferences">
 		<div class="comment-section__item">
 			{# funky future feature?

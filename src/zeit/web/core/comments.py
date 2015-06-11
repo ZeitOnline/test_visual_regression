@@ -16,7 +16,6 @@ import zeit.cms.interfaces
 
 import zeit.web.core.interfaces
 import zeit.web.core.template
-import zeit.web.core.utils
 
 
 log = logging.getLogger(__name__)
@@ -153,18 +152,17 @@ def request_thread(path):
         return
 
 
-def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
+def get_thread(unique_id, sort='asc', page=None, cid=None):
     """Return a dict representation of the comment thread of the given
     article.
 
-    :param destination: URL of the redirect destination
     :param sort: Sort order of comments, desc or asc
     :param page: Pagination value
     :param cid: Comment ID to calculate appropriate pagination
     :rtype: dict or None
     """
     thread = get_cacheable_thread(unique_id)
-    if thread is None:
+    if thread is None or thread['comment_count'] == 0:
         return
 
     # We do not want to touch the references of the cached thread
@@ -234,13 +232,6 @@ def get_thread(unique_id, destination=None, sort='asc', page=None, cid=None):
                 thread['pages']['title'] = u'Kommentar {} – {} von {}'.format(
                     first, last, comment_count)
 
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
-
-    thread['comment_post_url'] = '{}/agatho/thread{}?destination={}'.format(
-        conf.get('agatho_host', ''), path, destination)
-    thread['comment_report_url'] = '{}/services/json'.format(
-        conf.get('community_host', ''))
     return thread
 
 
