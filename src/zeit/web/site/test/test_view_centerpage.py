@@ -14,6 +14,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 import zeit.web.core.utils
+import zeit.web.site.module.playlist
 import zeit.web.site.view_centerpage
 
 
@@ -537,7 +538,7 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
 
 
 def test_playlist_video_series_should_be_available(application):
-    playlist = zeit.web.site.modules.playlist.Playlist(mock.Mock())
+    playlist = zeit.web.site.module.playlist.Playlist(mock.Mock())
     assert len(playlist.video_series_list) == 24
 
 

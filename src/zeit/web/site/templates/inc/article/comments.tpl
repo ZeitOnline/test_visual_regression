@@ -1,6 +1,6 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 
-{% if view.comments_allowed or view.comments %}
+{% if view.comments_allowed or (view.comments and view.comments.comment_count) %}
 <section class="comment-section" id="comments">
 	<div class="comment-section__head comment-section__item">
 	{% if view.comments and view.comments.comment_count %}
@@ -23,7 +23,7 @@
 	{% endif %}
 	</div>
 
-	{% if view.comments %}
+	{% if view.comments and view.comments.comment_count %}
 	<div class="comment-section__preferences">
 		<div class="comment-section__item">
 			{# funky future feature?
@@ -47,14 +47,14 @@
 	</div>
 
 	<div id="js-comments-body">
-	{% for comment in view.comments.comments %}
-		{% if loop.index == 4 -%}
-			{% if view.context.advertising_enabled -%}
-			<div class="comment__ad">
-				{{ lama_core.adplace(view.banner(8), view) }}
-			</div>
-			{%- endif %}
-		{% endif %}
+		{% for comment in view.comments.comments %}
+			{% if loop.index == 4 -%}
+				{% if view.context.advertising_enabled -%}
+				<div class="comment__ad">
+					{{ lama_core.adplace(view.banner(8), view) }}
+				</div>
+				{%- endif %}
+			{% endif %}
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}

@@ -15,7 +15,6 @@ import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
 import zeit.edit.interfaces
-import zeit.edit.interfaces
 import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 

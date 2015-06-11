@@ -7,7 +7,7 @@ import re
 import lxml.etree
 import requests
 
-import zeit.web.site.spektrum
+import zeit.web.site.area.spektrum
 import zeit.web.site.view_centerpage
 import zeit.web.core.centerpage
 
@@ -20,7 +20,7 @@ def test_spektrum_teaser_object_should_have_expected_attributes():
     iterator = iter(xml.xpath('/rss/channel/item'))
     item = next(iterator)
 
-    teaser = zeit.web.site.spektrum.Teaser(item)
+    teaser = zeit.web.site.area.spektrum.Teaser(item)
 
     assert teaser.teaserTitle == (
         'Ein Dinosaurier mit einem Hals wie ein Baukran')
@@ -41,7 +41,7 @@ def test_spektrum_teaser_object_with_empty_values_should_not_break():
         </item>"""
 
     xml = lxml.etree.fromstring(xml_str)
-    teaser = zeit.web.site.spektrum.Teaser(xml)
+    teaser = zeit.web.site.area.spektrum.Teaser(xml)
 
     assert teaser.teaserSupertitle == ''
     assert teaser.teaserTitle == ''
@@ -57,7 +57,8 @@ def test_spektrum_title_should_be_colon_splitted():
             <description><![CDATA[]]></description>
         </item>"""
 
-    teaser = zeit.web.site.spektrum.Teaser(lxml.etree.fromstring(xml_str))
+    teaser = zeit.web.site.area.spektrum.Teaser(
+        lxml.etree.fromstring(xml_str))
     assert teaser._split('supertitle: title') == ('supertitle', 'title')
     assert teaser._split('') == ('', '')
     assert teaser._split('title') == ('', 'title')
@@ -77,7 +78,7 @@ def test_spektrum_image_should_have_expected_attributes(application):
         </item>""".format(enclosure)
 
     xml = lxml.etree.fromstring(xml_str)
-    image = zeit.web.site.spektrum.Teaser(xml).image
+    image = zeit.web.site.area.spektrum.Teaser(xml).image
     assert image.mimeType == 'image/png'
     assert image.image_pattern == 'spektrum'
     assert image.caption == 'Puzzle puzzle puzzle'
@@ -93,7 +94,8 @@ def test_centerpage_recognizes_spektrum_cpextra(testserver):
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
     mods = view.region_list_parquet[1].values()[0].values()
-    assert all(isinstance(t[0], zeit.web.site.spektrum.Teaser) for t in mods)
+    assert all(isinstance(
+        t[0], zeit.web.site.area.spektrum.Teaser) for t in mods)
 
 
 def test_spektrum_parquet_should_render_special_parquet_link(
@@ -129,7 +131,7 @@ def test_sprektrum_parquet_should_display_meta_more(
 
 def test_spektrum_area_should_render_empty_if_feed_unavailable(
         testbrowser, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.site.spektrum, 'HPFeed', list)
+    monkeypatch.setattr(zeit.web.site.area.spektrum, 'HPFeed', list)
     browser = testbrowser(
         '%s/zeit-online/parquet-teaser-setup' % testserver.url)
     assert not browser.cssselect('.parquet-row--spektrum')
@@ -184,3 +186,16 @@ def test_rss_feed_of_cp_has_requested_format(testbrowser, testserver):
             'article-image-asset.bildtext.link.x' in feed)
     assert re.search('<enclosure .* url="%s/centerpage/katzencontent/'
                      % testserver.url, feed)
+
+
+def test_spektrum_also_renders_on_ng_centerpages(testbrowser, testserver):
+    browser = testbrowser(
+        '%s/index' % testserver.url)
+    rows = browser.cssselect(
+        '.parquet-meta__more.parquet-meta__more--spektrum')
+    actual_amount = len(rows)
+    assert actual_amount == 1, (
+        'Parquet row does not display the right amount of spektrum.')
+    text = rows[0].text
+    assert "Aktuelles aus der Welt von Wissenschaft und Forschung:" in text, (
+        'Spektrum link has not the correct text')

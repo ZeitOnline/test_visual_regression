@@ -18,6 +18,7 @@ import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.core.view_article
+import zeit.web.core.view_comment
 
 import zeit.web.magazin.view
 
@@ -39,6 +40,10 @@ log = logging.getLogger(__name__)
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
     @zeit.web.reify
     def comments(self):
+        # XXX: We need to invalidate the comment_thread here, because
+        # zeit.w.magazin is not using the comment interface, yet.
+        zeit.web.core.view_comment.invalidate_comment_thread(
+            self.context.uniqueId)
         return zeit.web.core.comments.get_thread(
             self.context.uniqueId, destination=self.request.url, sort='desc')
 
