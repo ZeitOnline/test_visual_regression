@@ -1,0 +1,36 @@
+.article
+	&--video
+		+pie-clearfix
+		background-color: #33333A
+		color: $grey--light
+		margin: 0 (-$page-padding) // enforce full width background with padding
+		padding: 0 $page-padding // enforce full width background with padding
+		// Micro Clearfix Hack with "table" for "before" (http://nicolasgallagher.com/micro-clearfix-hack/)
+		&:before
+			content: ''
+			display: table
+
+.video-article
+	&-summary
+		color: $zon_light_grey
+		font-size: remify(18px)
+		line-height: 1.4
+		margin-bottom: remify($petite--px)
+		+respond-min($break-tablet-min)
+			line-height: 1.5
+		+respond-min($break-desktop-min)
+			font-size: remify(20px)
+	&-metadata
+		color: $zon_mid_grey
+		font-size: remify(14px)
+		letter-spacing: $zon-letter-spacing-s
+		margin-bottom: remify(40px)
+
+		& > *
+			&:before
+				+inline-block(baseline)
+				content: " / "
+				color: $zon_mid_grey
+				margin: remify(0 8px)
+			&:first-child:before
+				content: none

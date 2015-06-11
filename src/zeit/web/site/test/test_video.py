@@ -124,24 +124,26 @@ def test_video_page_should_display_modified_date(testserver, testbrowser):
     doc = testbrowser(
         '{}/video/2015-01/4004256546001'.format(testserver.url)).document
     assert '22. Januar 2015, 10:27' in doc.xpath(
-        '//span[@class="modified-date"]/text()')[0]
+        '//time[@datetime]/text()')[0]
 
 
+@pytest.mark.xfail(reason='Comment module is to be included on video pages.')
 def test_video_page_should_output_zero_comment_count(testserver, testbrowser):
     doc = testbrowser(
         '{}/video/2015-01/4004256546001'.format(testserver.url)).document
     assert 'Noch keine Kommentare.' in doc.xpath(
-        '//span[@class="comment-count"]/text()')[0]
+        '//span[@itemprop="commentCount"]/text()')[0]
     assert doc.xpath('//meta[@itemprop="commentCount" and @content="0"]')
 
 
+@pytest.mark.xfail(reason='Comment module is to be included on video pages.')
 def test_video_page_should_output_comment_count_number(
         testserver, testbrowser, monkeypatch):
     attr = {'comment_count': 7, 'pages': {'title', 'meh'}, 'headline': 'bar'}
     monkeypatch.setattr(zeit.web.site.view_video.Video, 'comments', attr)
     doc = testbrowser(
         '{}/video/2015-01/4004256546001'.format(testserver.url)).document
-    assert 'bar' in doc.xpath('//span[@class="comment-count"]/text()')[0]
+    assert 'bar' in doc.xpath('//span[@itemprop="commentCount"]/text()')[0]
 
 
 def test_video_page_should_include_comment_section(testserver, testbrowser):

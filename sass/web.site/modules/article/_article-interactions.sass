@@ -5,10 +5,13 @@
 .sharing-menu
 	font-size: remify(14px)
 	font-family: $font-tabletgothic
+	&--inline
+		display: inline
 	&__title
 		color: $zon_grey
 		cursor: pointer
 		letter-spacing: 0.04em
+		white-space: nowrap // prevent the drop_icon from being put into a new line
 		+on-interaction
 			color: $zon_dark_grey
 		&:after
@@ -64,3 +67,13 @@
 .no-js .sharing-menu__items // no-js fallback
 	margin:  remify(14px 0) // animated
 	max-height: remify(64px) // animated
+
+// The sharing menu appears on pages with dark background (video single page)
+// TODO: cleanup. this is shit.
+.sharing-menu--on-dark-background
+	.sharing-menu__title
+		color: $zon_mid_grey
+		+on-interaction
+			color: $zon_light_grey
+	&.sharing-menu--active > .sharing-menu__title
+		color: $zon_light_grey

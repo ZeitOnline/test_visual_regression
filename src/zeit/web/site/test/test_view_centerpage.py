@@ -542,15 +542,14 @@ def test_playlist_video_series_should_be_available(application):
 
 
 def test_videostage_should_have_right_video_count(testserver, testbrowser):
+    __import__("pdb").set_trace()
     browser = testbrowser('%s/index' % testserver.url)
-
     videos = browser.cssselect('#video-stage article')
     assert len(videos) == 4, 'We expect 4 videos in video-stage'
 
 
 def test_videostage_videos_should_have_video_ids(testserver, testbrowser):
     browser = testbrowser('%s/index' % testserver.url)
-
     videos = browser.cssselect('#video-stage article')
     for video in videos:
         attr = video.attrib

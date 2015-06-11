@@ -1,44 +1,56 @@
 {% extends "zeit.web.site:templates/content.html" %}
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
 {% block content %}
-    <div class="video-stage-main" itemtype="http://schema.org/VideoObject" itemscope>
+    <article class="article article--video" itemtype="http://schema.org/VideoObject" itemscope>
+
         <meta itemprop="playerType" content="HTML5 Flash">
         <meta itemprop="duration" content="{{ view.iso_duration }}">
         <meta itemprop="thumbnail" content="{{ view.video_still | default_image_url }}">
-        <meta itemprop="width" content="{{ view.frame_width }}">
-        <article data-video-id="{{ view.context.__name__ }}">
-            {% with image = view.video_still %}
-                {% include "zeit.web.site:templates/inc/teaser_asset/image_videostage.tpl" %}
-            {% endwith %}
-            <div>
-                {{ lama.playbutton('block', view.duration) }}
 
-                <h1 itemprop="headline">
-                    <span>{{ view.supertitle | hide_none }}</span>
-                    <span>{{ view.title | hide_none }}</span>
-                </h1>
+        {{ vima.brightcove_video_tag(view.context.__name__, iframe=True, expanded=True) }}
 
-                <div itemprop="description">
-                    {{ view.subtitle | hide_none }}
-                </div>
+        <div class="article__item">
+            <h1 class="article-heading" itemprop="headline">
+                <span class="article-heading__kicker article-heading__kicker--on-dark-background">{{ view.supertitle | hide_none  }}</span>
+                <span class="article-heading__colon">: </span>
+                <span class="article-heading__title article-heading__title--on-dark-background">{{ view.title | hide_none }}</span>
+            </h1>
+        </div>
 
-                <div>
-                    <span class="modified-date">
-                        {{ view.date_last_modified | format_date('regular') }}
-                    </span>
-                    /
-                    {% if view.comments and view.comments.comment_count %}
-                        <span class="comment-count" itemprop="commentCount">{{ view.comments.headline }}</span>
-                    {% else %}
-                        <span class="comment-count">Noch keine Kommentare.</span>
-                        <meta itemprop="commentCount" content="0">
-                    {% endif %}
-                    /
-                    {# TODO: Insert article sharing menu here. #}
-                    <a href="#">Teilen</a>
-                </div>
+        <div class="article__item">
+            <div class="video-article-summary" itemprop="description">
+                {{ view.subtitle | hide_none }}
             </div>
-        </article>
-    </div>
+            <div class="video-article-metadata">
+
+                {% if view.source_label -%}
+                    <span class="{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}">
+                        {%- if view.source_url -%}
+                            <a href="{{ view.source_url }}">{{ view.source_label }}</a> -
+                        {%- else -%}
+                            {{ view.source_label }}
+                        {%- endif -%}
+                    </span>
+                {% endif -%}
+
+                <time class="{% if view.obfuscated_date %} encoded-date" data-obfuscated="{{ view.obfuscated_date }}{% endif %}" datetime="{{ view.date_last_modified | format_date('iso8601') }}">
+                    {{- view.date_last_modified | format_date(view.show_date_format) -}}
+                </time>
+
+                {# itemprop and "Keine Kommentare. Diskutieren Sie mit." will be rendered on the page bottom via Comment Module.#}
+                {% if view.comments and view.comments.comment_count %}
+                    <span>{{ view.comments.headline }}</span>
+                {% endif %}
+
+                <div class="sharing-menu sharing-menu--inline sharing-menu--on-dark-background">
+                    <span class="sharing-menu__title js-sharing-menu">Teilen</span>
+                    {% include "zeit.web.site:templates/inc/article/sharing-menu-items.tpl" %}
+                </div>
+
+            </div>
+        </div>
+
+    </article>
 {% endblock %}
