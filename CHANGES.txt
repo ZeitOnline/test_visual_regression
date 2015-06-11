@@ -4,7 +4,8 @@ Change log for zeit.web
 1.29 (unreleased)
 -----------------
 
-- HOTFIX: Map old images to new teasers
+- FIX: Map old images to new teasers
+
 - FIX: Port spektrum and snapshot to 2015 centerpages
 
 
