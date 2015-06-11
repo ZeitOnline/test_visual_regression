@@ -22,10 +22,7 @@
 
 	<!-- wrap start -->
 	<div class="main_nav__community" data-dropdown="true">
-		<a href="{{ view.request.registry.settings.community_host }}/user/login?destination=http://{{ view.request.host }}/index" rel="nofollow" class="user-link" id="drupal_login">
-			<span class="main_nav__community__image icon-zon-logo-navigation_login"></span>
-			Anmelden
-		</a>
+                <esi:include src="http://{{ view.request.host }}/login-state" />
 		<a href="http://{{ view.request.host }}/beta/index" class="beta-badge beta-badge--navigation">Beta</a>
 	</div>
 	<div class="main_nav__ressorts" data-dropdown="true">
