@@ -16,6 +16,7 @@ import zeit.content.cp.blocks.teaser
 
 import zeit.web.core.decorator
 import zeit.web.core.template
+import zeit.web.site.modules.search_form
 
 
 @pytest.fixture(scope='session')
@@ -505,7 +506,7 @@ def test_get_module_filter_should_correctly_extract_cpextra_id(application):
     block.visible = True
     block.cpextra = 'search-form'
     assert isinstance(zeit.web.core.template.get_module(block),
-                      zeit.web.site.search.Form)
+                      zeit.web.site.modules.search_form.Form)
 
     block.visible = False
     block.cpextra = 'n/a'
