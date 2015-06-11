@@ -1,5 +1,6 @@
 
-// TODO: this is (currently) only the player on the video single page. Should we name it accordingly ?
+// This is (currently) only the player on the video single page ("article of type video" = "video-article").
+// If there is any confusion with videos inside of an ordinary article, we might reconsider the naming.
 .video-article-player
 	position: relative
 	width: 100%
@@ -22,7 +23,4 @@
 		width: auto
 	+respond-min($break-tablet-min)
 		max-width: remify($break-tablet-min)
-		margin-left: auto
-		margin-right: auto
-		margin-top: $big
-		margin-bottom: $big
+		margin: remify(48px) auto

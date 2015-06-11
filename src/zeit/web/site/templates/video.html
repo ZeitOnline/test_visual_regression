@@ -13,9 +13,9 @@
 
         <div class="article__item">
             <h1 class="article-heading" itemprop="headline">
-                <span class="article-heading__kicker article-heading__kicker--on-dark-background">{{ view.supertitle | hide_none  }}</span>
+                <span class="article-heading__kicker article-heading__kicker--on-video-article">{{ view.supertitle | hide_none  }}</span>
                 <span class="article-heading__colon">: </span>
-                <span class="article-heading__title article-heading__title--on-dark-background">{{ view.title | hide_none }}</span>
+                <span class="article-heading__title article-heading__title--on-video-article">{{ view.title | hide_none }}</span>
             </h1>
         </div>
 
@@ -44,7 +44,7 @@
                     <span>{{ view.comments.headline }}</span>
                 {% endif %}
 
-                <div class="sharing-menu sharing-menu--inline sharing-menu--on-dark-background">
+                <div class="sharing-menu sharing-menu--inline sharing-menu--on-video-article">
                     <span class="sharing-menu__title js-sharing-menu">Teilen</span>
                     {% include "zeit.web.site:templates/inc/article/sharing-menu-items.tpl" %}
                 </div>
