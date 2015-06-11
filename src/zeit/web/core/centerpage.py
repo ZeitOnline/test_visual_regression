@@ -20,7 +20,7 @@ import zeit.web
 import zeit.web.core.block
 import zeit.web.core.interfaces
 import zeit.web.core.utils
-import zeit.web.site.areas.spektrum
+import zeit.web.site.area.spektrum
 
 
 log = logging.getLogger(__name__)
@@ -306,7 +306,7 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
-@grokcore.component.adapter(zeit.web.site.areas.spektrum.Teaser)
+@grokcore.component.adapter(zeit.web.site.area.spektrum.Teaser)
 class SpektrumImage(zeit.web.core.block.BaseImage):
 
     def __init__(self, context):
