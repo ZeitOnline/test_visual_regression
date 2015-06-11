@@ -259,12 +259,12 @@ def get_cacheable_thread(unique_id):
         return
 
     try:
-        comment_count = document.xpath('/comments/comment_count/text()')[0]
         comment_nid = document.xpath('/comments/nid/text()')[0]
         comment_list = document.xpath('//comment')
     except (IndexError, lxml.etree.XMLSyntaxError):
         return
 
+    comment_count = len(comment_list)
     comment_list = list(comment_to_dict(c) for c in comment_list)
     sorted_tree, index = _sort_comments(comment_list)
 
@@ -272,7 +272,7 @@ def get_cacheable_thread(unique_id):
         return dict(
             sorted_tree=sorted_tree,
             index=index,
-            comment_count=zeit.web.core.utils.to_int(comment_count),
+            comment_count=comment_count,
             sort='asc',
             nid=comment_nid)
     except (IndexError, AttributeError):
