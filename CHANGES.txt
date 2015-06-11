@@ -4,6 +4,8 @@ Change log for zeit.web
 1.29 (unreleased)
 -----------------
 
+- FIX: Map old images to new teasers
+
 - ZON-1613: Allow pagination for dynamic centerpages
 
 - FIX: Port spektrum and snapshot to 2015 centerpages

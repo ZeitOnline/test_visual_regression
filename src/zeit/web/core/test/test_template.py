@@ -397,7 +397,7 @@ def test_layout_for_empty_teaser_block_should_be_set_to_hide(application):
 def test_function_get_image_pattern_is_working_as_expected(application):
     # Existing formats
     teaser = zeit.web.core.template.get_image_pattern('zon-large', 'default')
-    assert teaser == ['zon-large']
+    assert teaser == ['zon-large', '540x304']
     teaser = zeit.web.core.template.get_image_pattern('zon-small', 'default')
     assert teaser == ['zon-thumbnail', '540x304']
 
