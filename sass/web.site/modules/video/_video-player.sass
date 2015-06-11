@@ -1,0 +1,30 @@
+
+// TODO: this is (currently) only the player on the video single page. Should we name it accordingly ?
+.video-player
+	position: relative
+	width: 100%
+	&:after
+		content: ''
+		display: block
+		padding-top: 56.25%
+	&__iframe,
+	&__videotag
+		border: none
+		bottom: 0
+		height: 100%
+		left: 0
+		position: absolute
+		right: 0
+		top: 0
+		width: 100%
+	// TODO: wording
+	&--expanded
+		margin: 0 (-$page-padding) // "overwrite" padding of the parent container
+		width: auto
+	// TODO: override of override of override ...
+	+respond-min($break-tablet-min)
+		max-width: remify($break-tablet-min)
+		margin-left: auto
+		margin-right: auto
+		margin-top: $big
+		margin-bottom: $big
