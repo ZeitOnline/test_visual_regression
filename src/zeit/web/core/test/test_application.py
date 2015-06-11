@@ -140,14 +140,13 @@ def test_salvageable_pagination_should_redirect_to_article_page(testserver):
 
 
 def test_vgwort_pixel_should_be_present(testserver, testbrowser):
-    select = testbrowser('{}/artikel/01'.format(
-                testserver.url)).cssselect
+    select = testbrowser('{}/artikel/01'.format(testserver.url)).cssselect
     assert len(select('body img#vgwort_pixel')) == 1
 
     select = testbrowser('{}/zeit-online/article/01'.format(
-                testserver.url)).cssselect
+        testserver.url)).cssselect
     assert len(select('body img#vgwort_pixel')) == 1
 
     select = testbrowser('{}/index'.format(
-                testserver.url)).cssselect
+        testserver.url)).cssselect
     assert len(select('body img#vgwort_pixel')) == 0
