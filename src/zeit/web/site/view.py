@@ -50,6 +50,7 @@ def spektrum_hp_feed(request):
     route_name='login_state',
     renderer='templates/inc/navigation/login-state.html')
 def login_state(request):
+    request.authenticated_userid
     settings = request.registry.settings
     info = {}
     info['login'] = "{}/user/login?destination=http://{}".format(
