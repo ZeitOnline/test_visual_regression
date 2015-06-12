@@ -42,6 +42,7 @@ import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
 import zeit.web.core.sources
+import zeit.web.site.module.search_form
 
 
 log = logging.getLogger(__name__)
@@ -159,6 +160,7 @@ class Application(object):
         config.add_route('home', '/')
         config.add_route('beta_toggle', '/beta')
         config.add_route('login_state', '/login-state')
+        config.add_route('beta_toggle_json', '/beta/json')
         config.add_route('health_check', '/health_check')
         config.add_route('spektrum-kooperation', '/spektrum-kooperation')
         config.add_route('spektrum-image', '/spektrum-image/*path')
@@ -537,7 +539,7 @@ class TraversableCenterPage(dict):
                 area.sort_order = form.sort_order
                 area.query = form.query
             else:
-                form = zeit.web.site.search.Form(context)
+                form = zeit.web.site.module.search_form.Form(context)
 
             form['page'] = tdict['request'].GET.get('p')
             area.page = form.page

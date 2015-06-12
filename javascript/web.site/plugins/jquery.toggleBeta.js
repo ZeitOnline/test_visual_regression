@@ -37,14 +37,18 @@
 
     $.fn.toggleBeta = function() {
 
-        var that = this;
-
+        var toggle = $( '#beta-toggle' ),
+            action = toggle.attr( 'action' ) + '/json';
         $( '#opt-out', this ).click(function() {
-            that.submit();
+            jQuery.post( action, { 'opt': 'out' } ).fail( function() {
+                $( '#opt-in' ).attr( 'checked', 'checked' );
+            });
         });
 
         $( '#opt-in', this ).click(function() {
-            that.submit();
+            jQuery.post( action, { 'opt': 'in' } ).fail( function() {
+                $( '#opt-out' ).attr( 'checked', 'checked' );
+            });
         });
 
         return this;
