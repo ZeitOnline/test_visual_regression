@@ -4,17 +4,17 @@ Change log for zeit.web
 1.29 (unreleased)
 -----------------
 
-- FIX: Map old images to new teasers
-
 - ZON-1613: Allow pagination for dynamic centerpages
 
-- FIX: Port spektrum and snapshot to 2015 centerpages
+- FIX: Map old images to new teasers
 
-- NFR: Move spektrum+social rss, search-form and ranking where they belong
+- FIX: Port spektrum and snapshot to 2015 centerpages
 
 - FIX: vgwort pixel for web.site and web.magazin
 
 - FIX: Improve esi error handling
+
+- NFR: Move spektrum+social rss, search-form and ranking where they belong
 
 
 1.28 (2015-06-10)
