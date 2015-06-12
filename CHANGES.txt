@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.30 (unreleased)
+1.30 (2015-06-12)
 -----------------
 
 - ZON-1380: Improve beta toggle
