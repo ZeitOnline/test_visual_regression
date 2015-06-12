@@ -522,21 +522,24 @@ class TraversableGallery(dict):
 class TraversableCenterPage(dict):
 
     def __init__(self, context, tdict):
-        form = find_block(context, module='search-form')
         area = find_block(context, attrib='area', kind='ranking')
-        if form and area:
-            form = zeit.web.core.template.get_module(form)
+        if area:
             area = zeit.web.core.template.get_area(area)
+            form = find_block(context, module='search-form')
+            # XXX: Pretty inelegant, maybe use pub/subbing in the future? (ND)
+            if form:
+                form = zeit.web.core.template.get_module(form)
+                form['q'] = ' '.join(tdict['request'].GET.getall('q'))
+                form['type'] = ' '.join(tdict['request'].GET.getall('type'))
+                form['mode'] = tdict['request'].GET.get('mode')
+                form['sort'] = tdict['request'].GET.get('sort')
+                area.raw_query = form.raw_query
+                area.sort_order = form.sort_order
+                area.query = form.query
+            else:
+                form = zeit.web.site.search.Form(context)
 
-            form['q'] = ' '.join(tdict['request'].GET.getall('q'))
-            form['type'] = ' '.join(tdict['request'].GET.getall('type'))
-            form['mode'] = tdict['request'].GET.get('mode')
-            form['sort'] = tdict['request'].GET.get('sort')
             form['page'] = tdict['request'].GET.get('p')
-
-            area.raw_query = form.raw_query
-            area.sort_order = form.sort_order
-            area.query = form.query
             area.page = form.page
 
         super(TraversableCenterPage, self).__init__(tdict)

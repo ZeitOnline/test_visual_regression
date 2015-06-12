@@ -178,3 +178,10 @@ def test_dynamic_centerpage_collection_should_output_teasers(
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
     assert len(view.regions[0].values()[0]) == 8
+
+
+def test_dynamic_centerpage_should_be_paginatable(testserver, testbrowser):
+    browser = testbrowser(
+        '{}/dynamic/angela-merkel?p=2'.format(testserver.url))
+    text = browser.cssselect('.pager__page.pager__page--current span')[0].text
+    assert text == '2'
