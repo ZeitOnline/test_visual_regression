@@ -57,7 +57,7 @@ class BetaJSON(zeit.web.core.view.Base):
 
     @property
     def site_version(self):
-        return  self._set_opt_cookie(
+        return self._set_opt_cookie(
             self.request.cookies.get('site-version'),
             self.request.params.get('version'))
 
@@ -91,4 +91,3 @@ class Beta(BetaJSON):
         update = self.request.params.get('version')
         self._set_opt_cookie(original, update)
         return {}
-
