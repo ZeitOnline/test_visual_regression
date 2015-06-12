@@ -9,6 +9,11 @@ import zeit.content.image.interfaces
 import zeit.web.core.centerpage
 import zeit.web.site.view_video
 
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC  # NOQA
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 def test_video_imagegroup_should_adapt_videos(application):
     video = zeit.cms.interfaces.ICMSContent(
@@ -94,14 +99,6 @@ def test_video_page_should_feature_schema_org_props(testserver, testbrowser):
     assert doc.xpath('//meta[@itemprop="duration" and @content="PT436S"]')
 
 
-@pytest.mark.xfail(reason='To be discussed')
-def test_video_page_should_designate_video_duration(testserver, testbrowser):
-    doc = testbrowser(
-        '{}/video/2015-01/4004256546001'.format(testserver.url)).document
-    assert '7 Minuten' == doc.xpath(
-        '//span[@class="video-text-playbutton__duration"]/text()')[0]
-
-
 def test_video_page_should_print_out_video_headline(testserver, testbrowser):
     doc = testbrowser(
         '{}/video/2015-01/4004256546001'.format(testserver.url)).document
@@ -119,7 +116,6 @@ def test_video_page_should_render_video_description(testserver, testbrowser):
 
 
 def test_video_page_should_display_modified_date(testserver, testbrowser):
-
     doc = testbrowser(
         '{}/video/2015-01/4004256546001'.format(testserver.url)).document
     assert '22. Januar 2015, 10:27' in doc.xpath(
@@ -151,7 +147,34 @@ def test_video_page_should_include_comment_section(testserver, testbrowser):
     assert doc.xpath('//section[@class="comment-section" and @id="comments"]')
 
 
-@pytest.mark.xfail(reason='Feature not yet implemented.')
 def test_video_page_should_embed_sharing_menu(testserver, testbrowser):
-    testbrowser('{}/video/2015-01/4004256546001'.format(testserver.url))
-    raise NotImplementedError()
+    browser = testbrowser(
+        '{}/video/2015-01/4004256546001'.format(testserver.url))
+    assert len(browser.cssselect('.sharing-menu .sharing-menu__title')) > 0
+    assert len(browser.cssselect('.sharing-menu a.sharing-menu__link')) > 0
+
+
+def test_video_page_video_iframe_should_exist(testserver, testbrowser):
+    browser = testbrowser(
+        '{}/video/2015-01/4004256546001'.format(testserver.url))
+    assert len(browser.cssselect('.video-article-player__iframe')) > 0
+
+
+def test_video_page_video_should_play(selenium_driver, testserver):
+    video_id = '4004256546001'
+
+    driver = selenium_driver
+    driver.get('{}/video/2015-01/{}'.format(testserver.url, video_id))
+
+    iframe = driver.find_element_by_css_selector(
+        '.video-article-player__iframe')
+    driver.switch_to.frame(iframe)
+
+    try:
+        player = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, '.video-js'))
+        )
+        assert player.get_attribute('data-video-id') == video_id
+    except TimeoutException:
+        assert False, 'Video not visible within 10 seconds'

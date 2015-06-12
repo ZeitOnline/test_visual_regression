@@ -6,7 +6,9 @@
     <article class="article article--video" itemtype="http://schema.org/VideoObject" itemscope>
 
         <meta itemprop="playerType" content="HTML5 Flash">
-        <meta itemprop="duration" content="{{ view.iso_duration }}">
+        {% if view.iso_duration %}
+            <meta itemprop="duration" content="{{ view.iso_duration }}">
+        {% endif %}
         <meta itemprop="thumbnail" content="{{ view.video_still | default_image_url }}">
 
         {{ vima.brightcove_video_tag(view.context.__name__, iframe=True, expanded=True) }}
