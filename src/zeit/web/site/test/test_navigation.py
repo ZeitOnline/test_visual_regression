@@ -19,7 +19,7 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
 
     assert len(html('.main_nav')) == 1, 'just one .main_nav should be present'
 
-    assert len(html('.main_nav > div')) == 7, 'seven divs within .main_nav'
+    assert len(html('.main_nav > div')) == 8, 'seven divs within .main_nav'
 
     assert len(html('.main_nav > div.logo_bar >'
                     'h1.logo_bar__image')) == 1, 'just one .logo_bar__image'
@@ -29,10 +29,6 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
 
     assert len(html('.main_nav > div.main_nav__teaser')) == 1, (
         'just one .main_nav__teaser')
-
-    assert len(html('.main_nav > div.main_nav__community'
-                    '[data-dropdown="true"]')
-               ) == 1, 'just one .main_nav__community w/ data-dropdown=true'
 
     assert len(html('.main_nav > div.main_nav__ressorts'
                     '[data-dropdown="true"]')
@@ -141,14 +137,6 @@ def test_nav_contains_essential_elements(application, jinja2_env):
     mock_view.displayed_last_published_semantic = datetime.datetime.now()
     html_str = tpl.render(view=mock_view)
     html = lxml.html.fromstring(html_str).cssselect
-
-    # Community
-    assert html('a[href*="/user/login?destination='
-                'http://www.zeit.de/index"]'
-                '[rel="nofollow"]'
-                '[class="user"]'
-                '[id="drupal_login"]')[0] is not None, (
-                    'Community login is missing')
 
     # Logo
     assert html('a[href*="/index"]'
@@ -290,9 +278,6 @@ def test_cp_has_valid_community_structure(testserver, testbrowser):
             'Link to login form is invalid')
     assert html('span.main_nav__community__image') is not None, (
         'span.main_nav__community__image is invalid')
-    assert 'Anmelden' in lxml.etree.tostring(
-        html('a[id="drupal_login"]')[0]), (
-            'Link to login has invalid label')
 
 
 def test_cp_has_valid_logo_structure(testserver, testbrowser):

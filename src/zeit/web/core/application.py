@@ -159,6 +159,7 @@ class Application(object):
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
         config.add_route('beta_toggle', '/beta')
+        config.add_route('login_state', '/login-state')
         config.add_route('beta_toggle_json', '/beta/json')
         config.add_route('health_check', '/health_check')
         config.add_route('spektrum-kooperation', '/spektrum-kooperation')

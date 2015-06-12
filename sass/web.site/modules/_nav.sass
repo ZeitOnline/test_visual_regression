@@ -12,6 +12,16 @@ $zon-classifieds-width-phablet: em(180px)
 $zon-search-width: em(120px)
 $zon-search-square-size: remify(35px)
 
+%beta-badge
+	+inline-block
+	+link-colors($white, $white, $white, $white, $white)
+	+font-smoothing
+	background-color: $zon_grey
+	border-radius: 2px
+	color: $white
+	line-height: 1
+	padding: 4px 4px 3px 4px
+
 // basic style for nav box
 // important is important here, as we have to overwrite js toggling
 .main_nav
@@ -96,6 +106,7 @@ $zon-search-square-size: remify(35px)
 	display: inline-block
 	font-size: inherit
 	margin: 0
+	position: relative
 	a
 		+hide-text
 		@extend %main_nav_icons
@@ -106,22 +117,55 @@ $zon-search-square-size: remify(35px)
 			margin: 0
 			width: $zon-logo-width
 			height: $zon-logo-height
+	&:after
+		@extend %beta-badge
+		+inline-block
+		content: 'Beta'
+		font-size: remify(9px)
+		font-weight: normal
+		position: absolute
+		right: remify(-40px)
+		text-transform: uppercase
+		top: calc(50% - 8.5px)
+		+respond-min($break-tablet-min)
+			display: none
+
+
 
 //box 2: community
 .main_nav__community
-	@extend %main_nav_links
-	+add_nav_bar_style($zon-bar-height-phablet)
-	line-height: $zon-bar-height-phablet
+	+add_nav_bar_style(auto)
 	+order(20)
+	+inline-block
+	letter-spacing: 1px
+	padding: remify(20px 10px)
 	text-align: left
 	+respond-min($break-tablet-min)
-		+remove_nav_bar_style($width: 7%)
+		+remove_nav_bar_style($width: auto)
 		+order(30)
+		+flex(0 0 auto)
+		+inline-block
+		color: $zon_grey
+		font-size: remify(9px)
+		line-height: $zon-bar-height-phablet
+		min-width: remify(80px) // fallback for failing esi include
+		padding: 0
 		text-align: right
-		display: inline-block
-		a
-			+link-colors($black, $zon_dark_grey, $black, $black, $black)
+		text-transform: uppercase
+		ul
+			list-style: none
+			margin: 0
+			padding: 0
+			text-align: left
 
+.user-link
+	+respond-min($break-tablet-min)
+		+inline-block
+		+link-colors($black, $zon_dark_grey, $black, $black, $black)
+		margin-right: remify(5px)
+
+.beta-badge
+	@extend %beta-badge
 
 .main_nav__community__image
 	@extend %main_nav_icons
@@ -163,8 +207,9 @@ $zon-search-square-size: remify(35px)
 			li
 				width: 33%
 	+respond-min($break-tablet-min)
-		+remove_nav_bar_style($width: 55%)
+		+remove_nav_bar_style($width: auto)
 		+order(10)
+		+flex(2 0 35%)
 		text-align: left
 		& > ul
 			margin-right: $petite
@@ -199,8 +244,9 @@ $zon-search-square-size: remify(35px)
 				border-left: 1px solid $zon_light_grey
 				border-right: 1px solid $zon_light_grey
 	+respond-min($break-tablet-min)
-		+remove_nav_bar_style($width: 38%)
+		+remove_nav_bar_style($width: auto)
 		+order(20)
+		+flex(0 0 auto)
 		text-align: right
 		padding-left: auto
 		& > ul
@@ -299,6 +345,71 @@ $zon-search-square-size: remify(35px)
 		+flex-grow(1)
 		margin: $petite
 
+
+//box 10: beta notice
+.beta-notice
+	+font-smoothing
+	+flex-grow(1)
+	+order(25)
+	background: $color-body-bg
+	color: $zon_mid_grey
+	display: none
+	padding: remify(16px)
+	text-align: center 
+	+respond-min($break-tablet-min)
+		display: none !important
+	&__link
+		+link-colors($white, $white, $white, $white)
+		border-bottom: 1px solid $zon_mid_grey
+
+.login-state
+	display: none
+	+respond-min($break-tablet-min)
+		+inline-block
+		margin-right: remify(10px)
+	&__name
+		font-weight: 700
+		+link-colors($black, $black, $black, $black, $black)
+
+.login-state-mobile
+	// position: relative
+	+display-flex()
+	+justify-content(space-between)
+	+align-items(center)
+	padding: remify(10px 0)
+	&__avatar
+		border-radius: 50%
+		height: remify(50px)
+		margin-right: 10px
+		vertical-align: middle
+		width: remify(50px)
+	&__icon
+		@extend %main_nav_icons
+		display: inline-block
+		font-size: remify(18px)
+		height: $small
+		margin-right: $micro
+		position: relative
+		top: 3px
+		vertical-align: -2px
+		width: $small
+	&__logoff
+		display: table-cell
+		text-transform: uppercase
+		width: remify(130px)
+		+link-colors($zon-grey, $zon-grey, $zon-grey, $zon-grey, $zon-grey)
+	&__name
+		font-weight: 700
+		height: remify(50px)
+		line-height: remify(50px)
+		overflow: hidden
+		max-width: 50% // old android fallback
+		max-width: calc(100% - 50px - 130px)
+		text-overflow: ellipsis
+		vertical-align: middle
+		+flex-grow(1)
+	+respond-min($break-tablet-min)
+		display: none
 
 /* primary navigation (ressorts and stuff) */
 

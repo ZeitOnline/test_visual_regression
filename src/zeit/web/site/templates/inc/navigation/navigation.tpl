@@ -22,10 +22,8 @@
 
 	<!-- wrap start -->
 	<div class="main_nav__community" data-dropdown="true">
-		<a href="{{ view.request.registry.settings.community_host }}/user/login?destination=http://{{ view.request.host }}/index" rel="nofollow" class="user" id="drupal_login">
-			<span class="main_nav__community__image icon-zon-logo-navigation_login"></span>
-			Anmelden
-		</a>
+		<esi:include src="http://{{ view.request.host }}/login-state?context-uri={{ view.content_url }}" onerror="continue" />
+		<a href="http://{{ view.request.host }}/beta/index" class="beta-badge beta-badge--navigation">Beta</a>
 	</div>
 	<div class="main_nav__ressorts" data-dropdown="true">
 		<nav role="navigation" id="primary_nav">
@@ -45,5 +43,9 @@
 		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
 	</div>
 	<div class="main_nav__search" data-dropdown="true">{% include "zeit.web.site:templates/inc/navigation/navigation-search.tpl" %}</div>
+	<div class="beta-notice">
+		<div>Sie benutzen die neue ZEIT ONLINE Beta.</div>
+		<div><a class="beta-notice__link" href="http://www.zeit.de/beta">Zurück zur klassischen Version?</a></div>
+	</div>
 	<!-- wrap end -->
 </div>

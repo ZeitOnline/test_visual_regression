@@ -45,3 +45,32 @@ def spektrum_hp_feed(request):
         'area': zeit.web.site.area.spektrum.HPFeed(),
         'parquet_position': request.params.get('parquet-position')
     }
+
+
+@pyramid.view.view_config(
+    route_name='login_state',
+    renderer='templates/inc/navigation/login-state.html')
+def login_state(request):
+    request.authenticated_userid
+    settings = request.registry.settings
+    destination = request.params['context-uri'] if request.params.get(
+        'context-uri') else 'http://{}'.format(request.host)
+    info = {}
+    info['login'] = "{}/user/login?destination={}".format(
+        settings['community_host'],
+        destination)
+    info['logout'] = "{}/user/logout?destination={}".format(
+        settings['community_host'],
+        destination)
+    info['profile'] = "{}/user/".format(settings['community_host'])
+    if 'user' in request.session:
+        user = request.session['user']
+        if 'picture' in user:
+            if user['picture'] != '0':
+                user['picture'] = user['picture'].replace(
+                    settings['community_host'],
+                    settings['community_static_host'])
+            else:
+                del user['picture']
+        info['user'] = user
+    return info
