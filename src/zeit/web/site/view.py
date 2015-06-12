@@ -53,14 +53,16 @@ def spektrum_hp_feed(request):
 def login_state(request):
     request.authenticated_userid
     settings = request.registry.settings
+    destination = request.params['context-uri'] if request.params.get(
+        'context-uri') else 'http://{}'.format(request.host)
     info = {}
-    info['login'] = "{}/user/login?destination=http://{}".format(
-        settings.community_host,
-        request.host)
+    info['login'] = "{}/user/login?destination={}".format(
+        settings['community_host'],
+        destination)
     if 'user' in request.session:
         user = request.session['user']
         if 'picture' in user:
             user['picture'] = user['picture'].replace(
-                settings.community_host, settings.community_static_host)
+                settings['community_host'], settings['community_static_host'])
         info['user'] = user
     return info
