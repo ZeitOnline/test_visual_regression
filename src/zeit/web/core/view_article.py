@@ -329,10 +329,9 @@ class ArticlePage(Article):
 
     @zeit.web.reify
     def current_page(self):
-        return zeit.web.core.interfaces.IPages(self.context)[self.page_nr - 1]
+        return self.pages[self.page_nr - 1]
 
     @zeit.web.reify
     def next_title(self):
-        pages = zeit.web.core.interfaces.IPages(self.context)
-        if self.page_nr < len(pages):
-            return pages[self.page_nr].teaser
+        if self.page_nr < len(self.pages):
+            return self.pages[self.page_nr].teaser
