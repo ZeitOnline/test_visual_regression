@@ -2,6 +2,7 @@ import pytest
 import zeit.web.site.view
 import mock
 
+
 def test_login_state_view_should_deliver_correct_destination():
     request = mock.Mock()
     request.registry.settings = {}
