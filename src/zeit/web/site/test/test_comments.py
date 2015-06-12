@@ -53,7 +53,7 @@ def test_comment_form_should_be_rendered(testbrowser, testserver):
 
 def test_comment_form_should_be_rendered_through_esi(testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
-    assert len(browser.cssselect('include')) == 1
+    assert len(browser.cssselect('include')) == 2
 
 
 def test_comment_pagination_should_work(testbrowser, testserver):
