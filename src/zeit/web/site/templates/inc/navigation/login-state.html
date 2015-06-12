@@ -1,9 +1,18 @@
-<a href="{{ login }}" rel="nofollow" class="user-link" id="drupal_login">
+<!-- {% if user %}
+    {% if user.picture %}
+        <span>{{ user.picture }}</span>
+    {% endif %}
+{% else %}
+<a href="{{ login }}" rel="nofollow" class="user-link esi-include-link" id="drupal_login">
     <span class="main_nav__community__image icon-zon-logo-navigation_login"></span>
     Anmelden
 </a>
-{% if user %}
-    {% if user.picture %}
-        <!-- <span>{{ user.picture }}</span>-->
-    {% endif %}
-{% endif %}
+{% endif %} -->
+
+<a href="{{ logoff }}" rel="nofollow" class="user-link user-link--logged-in" id="drupal_login"><span>{{ user.name }}</span></a>
+<ul class="dropdown">
+    <li class="login-dropdown">
+        <img class="login-dropdown__avatar" alt="Avatarbild von {{ user.name }}" src="{{ user.picture }}">
+        <span class="login-dropdown__name">{{ user.name }}</span>
+    </li>
+</ul>
