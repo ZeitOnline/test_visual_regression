@@ -4,21 +4,21 @@ Change log for zeit.web
 1.30 (unreleased)
 -----------------
 
-- ZON-1740: Implement backend port of photo gallery teaser bar
+- ZON-1740: Implement backend part of photo gallery teaser bar
 
 
 1.29 (2015-06-12)
 -----------------
 
-- FIX: Map old images to new teasers
-
 - ZON-1613: Allow pagination for dynamic centerpages
+
+- FIX: Map old images to new teasers
 
 - FIX: Port spektrum and snapshot to 2015 centerpages
 
-- NFR: Move spektrum+social rss, search-form and ranking where they belong
+- FIX: Vgwort pixel for web.site and web.magazin
 
-- FIX: vgwort pixel for web.site and web.magazin
+- NFR: Move spektrum+social rss, search-form and ranking where they belong
 
 
 1.28 (2015-06-10)
