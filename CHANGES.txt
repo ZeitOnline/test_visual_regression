@@ -9,11 +9,12 @@ Change log for zeit.web
        Fix feature longform breadcrumb
        Respect commentsAllowed and commentSectionEnable in ZMO
 
+- ZON-1789: Wrap liveblog article content
+
+
 
 1.29 (2015-06-12)
 -----------------
-
-- ZON-1789: Wrap liveblog article content
 
 - FIX: Map old images to new teasers
 
