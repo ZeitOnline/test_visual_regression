@@ -41,6 +41,7 @@ require([
     'web.site/plugins/jquery.toggleBeta',
     'web.site/plugins/jquery.selectNav',
     'web.site/plugins/jquery.infobox',
+    'web.site/plugins/jquery.liveblog',
     'web.site/plugins/jquery.searchTools'
 ], function( $ ) {
     $( window ).referrerCount();
@@ -54,5 +55,6 @@ require([
     $( '#beta-toggle' ).toggleBeta();
     $( '#series_select' ).selectNav();
     $( '.js-infobox' ).infobox();
+    $( '#js-article' ).find( '.liveblog' ).liveblog();
     $( '.search-form' ).searchTools();
 });
