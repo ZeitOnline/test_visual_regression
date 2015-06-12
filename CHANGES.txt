@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1380: Improve beta toggle
 
+- DEV-295: Don't display a gallery icon for product galleries.
+
 - ZON-1740: Implement backend part of photo gallery teaser bar
 
 - FIX: Use comment API for ZMO
