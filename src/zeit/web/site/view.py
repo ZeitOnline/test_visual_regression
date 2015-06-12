@@ -59,10 +59,18 @@ def login_state(request):
     info['login'] = "{}/user/login?destination={}".format(
         settings['community_host'],
         destination)
+    info['logout'] = "{}/user/logout?destination={}".format(
+        settings['community_host'],
+        destination)
+    info['profile'] = "{}/user/".format(settings['community_host'])
     if 'user' in request.session:
         user = request.session['user']
         if 'picture' in user:
-            user['picture'] = user['picture'].replace(
-                settings['community_host'], settings['community_static_host'])
+            if user['picture'] != '0':
+                user['picture'] = user['picture'].replace(
+                    settings['community_host'],
+                    settings['community_static_host'])
+            else:
+                del user['picture']
         info['user'] = user
     return info
