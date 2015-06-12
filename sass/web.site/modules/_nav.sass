@@ -134,11 +134,11 @@ $zon-search-square-size: remify(35px)
 
 //box 2: community
 .main_nav__community
-	+add_nav_bar_style($zon-bar-height-phablet)
+	+add_nav_bar_style(auto)
 	+order(20)
 	+inline-block
 	letter-spacing: 1px
-	line-height: $zon-bar-height-phablet
+	padding: remify(20px 10px)
 	text-align: left
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style($width: auto)
@@ -147,8 +147,16 @@ $zon-search-square-size: remify(35px)
 		+inline-block
 		color: $zon_grey
 		font-size: remify(9px)
+		line-height: $zon-bar-height-phablet
+		min-width: remify(80px) // fallback for failing esi include
+		padding: 0
 		text-align: right
 		text-transform: uppercase
+		ul
+			list-style: none
+			margin: 0
+			padding: 0
+			text-align: left
 
 .user-link
 	+respond-min($break-tablet-min)
@@ -349,11 +357,59 @@ $zon-search-square-size: remify(35px)
 	padding: remify(16px)
 	text-align: center 
 	+respond-min($break-tablet-min)
-		display: none
+		display: none !important
 	&__link
 		+link-colors($white, $white, $white, $white)
 		border-bottom: 1px solid $zon_mid_grey
 
+.login-state
+	display: none
+	+respond-min($break-tablet-min)
+		+inline-block
+		margin-right: remify(10px)
+	&__name
+		font-weight: 700
+		+link-colors($black, $black, $black, $black, $black)
+
+.login-state-mobile
+	// position: relative
+	+display-flex()
+	+justify-content(space-between)
+	+align-items(center)
+	padding: remify(10px 0)
+	&__avatar
+		border-radius: 50%
+		height: remify(50px)
+		margin-right: 10px
+		vertical-align: middle
+		width: remify(50px)
+	&__icon
+		@extend %main_nav_icons
+		display: inline-block
+		font-size: remify(18px)
+		height: $small
+		margin-right: $micro
+		position: relative
+		top: 3px
+		vertical-align: -2px
+		width: $small
+	&__logoff
+		display: table-cell
+		text-transform: uppercase
+		width: remify(130px)
+		+link-colors($zon-grey, $zon-grey, $zon-grey, $zon-grey, $zon-grey)
+	&__name
+		font-weight: 700
+		height: remify(50px)
+		line-height: remify(50px)
+		overflow: hidden
+		max-width: 50% // old android fallback
+		max-width: calc(100% - 50px - 130px)
+		text-overflow: ellipsis
+		vertical-align: middle
+		+flex-grow(1)
+	+respond-min($break-tablet-min)
+		display: none
 
 /* primary navigation (ressorts and stuff) */
 
