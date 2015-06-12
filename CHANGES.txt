@@ -4,7 +4,7 @@ Change log for zeit.web
 1.30 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1740: Implement backend port of photo gallery teaser bar
 
 
 1.29 (2015-06-12)
