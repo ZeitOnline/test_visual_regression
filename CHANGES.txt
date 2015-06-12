@@ -4,6 +4,8 @@ Change log for zeit.web
 1.30 (unreleased)
 -----------------
 
+- DEV-295: Don't display a gallery icon for product galleries.
+
 - ZON-1740: Implement backend part of photo gallery teaser bar
 
 - FIX: Use comment API for ZMO
@@ -12,7 +14,6 @@ Change log for zeit.web
        Respect commentsAllowed and commentSectionEnable in ZMO
 
 - ZON-1789: Wrap liveblog article content
-
 
 
 1.29 (2015-06-12)

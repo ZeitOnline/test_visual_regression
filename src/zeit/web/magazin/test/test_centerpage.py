@@ -9,6 +9,7 @@ import mock
 import pyramid.threadlocal
 import pytest
 
+from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
 import zeit.content.gallery.gallery
 import zeit.cms.syndication.feed
@@ -901,6 +902,19 @@ def test_cp_has_no_gallery_icon_for_gallery_upright_teaser(
     icon = browser.cssselect(
         'div.cp_button--gallery .cp_button__title__wrap a span')
     assert len(icon) == 1
+
+
+def test_cp_has_no_gallery_icon_for_gallery_type_product(
+        testserver, testbrowser, workingcopy):
+    gallery = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer')
+    with checked_out(gallery) as co:
+        co.type = u'zmo-product'
+    browser = testbrowser(
+        '%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    icon = browser.cssselect(
+        'div.cp_button--gallery .cp_button__title__wrap a span')
+    assert len(icon) == 0
 
 
 def test_print_cover_teaser_should_have_modifier(testserver, testbrowser):
