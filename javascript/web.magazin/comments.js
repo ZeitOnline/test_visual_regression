@@ -59,7 +59,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
             comment = $(this).closest('article'),
             form = comment.find('.js-reply-form');
 
-        if ( ! form.length ) {
+        if ( !form.length ) {
             form = $('#js-comments-form')
                 .clone()
                 .removeAttr('id')
@@ -83,9 +83,15 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
             form = comment.find('.js-report-form'),
             template;
 
-        if ( ! form.length ) {
-            template = $('#js-report-comment-template').html().replace( /<% commentId %>/, cid );
-            form = $(template).addClass('js-report-form').appendTo(comment);
+        if ( !form.length ) {
+            template = $( '#js-report-comment-template' ).html();
+            form = $( template )
+                .removeAttr( 'id' )
+                .addClass( 'js-report-form' )
+                .css( 'display', 'none' )
+                .appendTo( comment );
+            form.find( 'input[type="submit"]' ).prop( 'disabled', true );
+            form.find( 'input[name="pid"]' ).val( cid );
         }
 
         showForm(form, comment);
@@ -140,7 +146,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
     var submitReport = function(e) {
         e.preventDefault();
 
-        var sendurl = this.form.getAttribute('action'),
+        var sendurl = window.location.href,
             form = this.form,
             input = this.form.elements;
 
@@ -150,18 +156,17 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
         $.ajax({
             url: sendurl,
             data: {
-                method:     'flag.flagnote',
-                flag_name:  'kommentar_bedenklich',
-                uid:        input.uid.value,
-                content_id: input.content_id.value,
-                note:       input.note.value
+                'ajax':     'true',
+                'action':   'report',
+                'pid':      input.pid.value,
+                'comment':  input.comment.value
             },
-            jsonpCallback: 'jsonp' + generateJSONPNumber(),
-            dataType: 'jsonp',
-            success: function(response) {
-                if (response) {
-                    if (!response['#error']) {
-                        var $form = $(form),
+            dataType: 'json',
+            method: 'POST',
+            success: function( response ) {
+                if ( response ) {
+                    if ( response.response.error === false ) {
+                        var $form = $( form ),
                             html = $('#js-report-success-template').html(),
                             height = $form.css('height'),
                             newHeight;
@@ -173,14 +178,12 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
                         $form
                             .css('height', height)
                             .animate({height: newHeight});
-                    }
-                    else {
+                    } else {
                         // what else?
                     }
                 }
             }
-         });
-
+        });
     };
 
     /**
@@ -210,7 +213,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
 
         // attach event handler function on page, but only for devices without touch support
         // we can not check reliably for real mouse events here, because e.g. Mobile Safari emulates mouse events
-        if (! Modernizr.touch) {
+        if ( !Modernizr.touch ) {
             // and only if comments are shown
             if ($body.hasClass('show-comments')) {
                 $page.on('mousedown', hideComments);
@@ -374,7 +377,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
                     hidden = target.is(':hidden'),
                     offset;
 
-                if (! target.length) {
+                if ( !target.length ) {
                     return;
                 }
 
@@ -496,21 +499,12 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
     };
 
     /**
-     * comments.js: generate jsonp number
-     * @function generateJSONPNumber
-     * @return {integer}
-     */
-    var generateJSONPNumber = function() {
-        return (1361462065627 + Math.floor(Math.random()*101));
-    };
-
-    /**
      * comments.js: initialize
      * @function init
      */
     var init = function() {
 
-        if (! $comments.length) {
+        if ( !$comments.length ) {
             return;
         }
 

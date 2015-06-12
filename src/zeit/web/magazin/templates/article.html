@@ -62,9 +62,7 @@
                 </div>
 
                 {% block article_comments %}
-                    {% if view.comments %}
-                        {{ blocks.comments(view, request) }}
-                    {% endif %}
+                    {%- include "zeit.web.magazin:templates/inc/article/comments.html" -%}
                 {% endblock article_comments %}
 
                 {% if view.nextread %}

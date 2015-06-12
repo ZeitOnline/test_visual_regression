@@ -12,8 +12,6 @@ import requests
 import operator
 import beaker
 
-import zeit.cms.interfaces
-
 
 def test_comment_count_should_handle_missing_uid_param(comment_counter):
     resp = comment_counter()
@@ -122,7 +120,7 @@ def test_entire_thread_should_be_parsed(application, testserver):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread_as_json = zeit.web.core.comments.get_thread(
-        unique_id, destination='foo', sort='desc')
+        unique_id, sort='desc')
     assert thread_as_json['comments'][0]['cid'] == 2969196
     assert thread_as_json['comments'][40]['cid'] == 2968920
     assert thread_as_json['comment_count'] == 41
@@ -134,7 +132,7 @@ def test_entire_thread_should_be_parsed(application, testserver):
 #     unique_id = ('http://xml.zeit.de/politik/deutschland/'
 #                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
 #     thread_as_json = zeit.web.core.comments.get_thread(
-#         unique_id, destination='foo', sort='desc')
+#         unique_id, sort='desc')
 #     assert thread_as_json['comments'][0]['cid'] == 2969196
 #     assert thread_as_json['comments'][40]['cid'] == 2968920
 #     assert thread_as_json['comment_count'] == 41
@@ -464,41 +462,3 @@ def test_action_url_should_be_created_correctly(
         monkeypatch, action, path, service):
     poster = _create_poster(monkeypatch)
     assert poster._action_url(action, path) == service
-
-
-def test_comments_template_respects_metadata(jinja2_env, testserver):
-    comments = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/article/comments.tpl')
-    comment_form = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/comments/comment-form.html')
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    request = mock.MagicMock()
-    request.authenticated_userid = 123
-    request.session = {'user': {'uid': '123', 'name': 'Max'}}
-    request.path_url = 'http://xml.zeit.de/zeit-online/article/01'
-    view = zeit.web.site.view_article.Article(content, request)
-    view.comments_allowed = False
-    string = comments.render(view=view, request=request)
-    html = lxml.html.fromstring(string)
-
-    assert len(html.cssselect('#comments')) == 1, (
-        'comment section must be present')
-    assert len(html.cssselect('article.comment')) > 0, (
-        'comments must be displayed')
-
-    string = comment_form.render(view=view, request=request)
-    html = lxml.html.fromstring(string)
-
-    assert len(html.cssselect('#comment-form[data-uid="123"]')) == 1, (
-        'comment form tag with data-uid attribute must be present')
-    assert len(html.cssselect('#comment-form textarea')) == 0, (
-        'comment form must be empty')
-
-    # reset view (kind of)
-    view = zeit.web.site.view_article.Article(content, request)
-    view.show_commentthread = False
-    string = comments.render(view=view, request=request)
-
-    assert string.strip() == '', (
-        'comment section template must return an empty document')

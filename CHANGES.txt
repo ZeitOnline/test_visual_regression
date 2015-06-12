@@ -4,11 +4,16 @@ Change log for zeit.web
 1.30 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Use comment API for ZMO
+       Fix wrong comment count
+       Fix feature longform breadcrumb
+       Respect commentsAllowed and commentSectionEnable in ZMO
 
 
 1.29 (2015-06-12)
 -----------------
+
+- FIX: Map old images to new teasers
 
 - ZON-1613: Allow pagination for dynamic centerpages
 

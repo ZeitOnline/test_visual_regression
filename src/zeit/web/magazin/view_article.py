@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from pyramid.view import view_config
-from pyramid.decorator import reify
+import pyramid.view
 
 import zeit.connector.connector
 import zeit.connector.interfaces
@@ -26,40 +25,35 @@ import zeit.web.magazin.view
 log = logging.getLogger(__name__)
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                                zeit.web.magazin.view.is_advertorial),
-             renderer='templates/advertorial.html')
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
-             renderer='templates/article.html')
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
-             name='komplettansicht',
-             renderer='templates/article_komplett.html')
+@pyramid.view.view_defaults(
+    context=zeit.content.article.interfaces.IArticle,
+    custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
+    request_method='GET')
+@pyramid.view.view_config(
+    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
+                       zeit.web.magazin.view.is_advertorial),
+    renderer='templates/advertorial.html')
+@pyramid.view.view_config(renderer='templates/article.html')
+@pyramid.view.view_config(name='komplettansicht',
+                          renderer='templates/article_komplett.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
     @zeit.web.reify
     def comments(self):
-        # XXX: We need to invalidate the comment_thread here, because
-        # zeit.w.magazin is not using the comment interface, yet.
-        zeit.web.core.view_comment.invalidate_comment_thread(
-            self.context.uniqueId)
-        return zeit.web.core.comments.get_thread(
-            self.context.uniqueId, destination=self.request.url, sort='desc')
+        if not self.show_commentthread:
+            return
+        return zeit.web.core.comments.get_thread(self.context.uniqueId,
+                                                 sort='desc')
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
-             name='seite',
-             path_info='.*seite-(.*)',
-             renderer='templates/article.html')
+@pyramid.view.view_config(name='seite',
+                          path_info='.*seite-(.*)',
+                          renderer='templates/article.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
 
-@view_config(context=zeit.web.core.article.ILongformArticle,
-             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
-             renderer='templates/longform.html')
+@pyramid.view.view_config(context=zeit.web.core.article.ILongformArticle,
+                          renderer='templates/longform.html')
 class LongformArticle(Article):
 
     main_nav_full_width = True
@@ -94,40 +88,41 @@ class LongformArticle(Article):
         return 'short'
 
 
-@view_config(context=zeit.web.core.article.IFeatureLongform,
-             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
-             renderer='templates/feature_longform.html')
+@pyramid.view.view_config(context=zeit.web.core.article.IFeatureLongform,
+                          renderer='templates/feature_longform.html')
 class FeatureLongform(LongformArticle):
-    @reify
+    @zeit.web.reify
     def breadcrumb(self):
-        crumb = self._navigation
-        l = [crumb['start']]
-        if self.context.ressort in crumb:
-            l.append(crumb[self.context.ressort])
-        if self.context.sub_ressort in crumb:
-            l.append(crumb[self.context.sub_ressort])
+        crumb = super(FeatureLongform, self).breadcrumb
+        items = self.navigation.navigation_items
+        crumb_list = crumb[:1]
+        if self.ressort in items:
+            item = items[self.ressort]
+            href = zeit.web.core.template.translate_url(item.href)
+            crumb_list.append((item.text, href))
+        if self.sub_ressort in items:
+            item = items[self.sub_ressort]
+            href = zeit.web.core.template.translate_url(item.href)
+            crumb_list.append((item.text, href))
         if self.title:
-            l.append((self.title, ''))
-        return l
+            crumb_list.append((self.title, ''))
+        return crumb_list
 
 
-@view_config(context=zeit.web.core.article.IShortformArticle,
-             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
-             renderer='templates/shortform.html')
+@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle,
+                          renderer='templates/shortform.html')
 class ShortformArticle(Article):
     pass
 
 
-@view_config(context=zeit.web.core.article.IColumnArticle,
-             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
-             renderer='templates/column.html')
+@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle,
+                          renderer='templates/column.html')
 class ColumnArticle(Article):
     pass
 
 
-@view_config(context=zeit.web.core.article.IPhotoclusterArticle,
-             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
-             renderer='templates/photocluster.html')
+@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle,
+                          renderer='templates/photocluster.html')
 class PhotoclusterArticle(Article):
 
     def __init__(self, *args, **kwargs):
@@ -141,10 +136,8 @@ class PhotoclusterArticle(Article):
                     page[index] = cls(page[index].context)
 
 
-@view_config(name='teaser',
-             context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
-             renderer='templates/teaser.html')
+@pyramid.view.view_config(name='teaser',
+                          renderer='templates/teaser.html')
 class Teaser(Article):
 
     @zeit.web.reify
