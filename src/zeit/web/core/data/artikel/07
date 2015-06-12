@@ -44,7 +44,7 @@
             <bu>Einäscherung</bu>
             <copyright>© Benne Ochs</copyright>
         </image>
-        <attribute name="template" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">photocluster</attribute>
+        <attribute name="template" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">longform</attribute>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
         <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
         <attribute name="article_id" ns="http://namespaces.zeit.de/CMS/print" xmlns:py="http://codespeak.net/lxml/objectify/pytype">1585573</attribute>

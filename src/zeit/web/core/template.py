@@ -131,13 +131,11 @@ def get_layout(block, request=None):
     source_xml = source._get_tree()
 
     def allowed(layout_id):
-
-        if not getattr(block, '__parent__', None):
+        try:
+            xp = '/layouts/layout[@id="{}"]/@areas'.format(layout_id)
+            return block.__parent__.kind in source_xml.xpath(xp)[0].split(' ')
+        except (AttributeError, IndexError):
             return
-
-        return block.__parent__.kind in source_xml.xpath(
-            '/layouts/layout[@id="{}"]/@areas'.format(
-                layout_id))[0].split(' ')
 
     try:
         layout_id = block.layout.id
