@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - FIX: vgwort pixel for web.site and web.magazin
 
+- FIX: Improve esi error handling
+
 
 1.28 (2015-06-10)
 -----------------
