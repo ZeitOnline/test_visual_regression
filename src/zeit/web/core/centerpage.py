@@ -3,6 +3,7 @@ import urllib2
 import md5
 import tempfile
 import PIL
+import os
 
 import grokcore.component
 import zope.component
@@ -19,8 +20,7 @@ import zeit.web
 import zeit.web.core.block
 import zeit.web.core.interfaces
 import zeit.web.core.utils
-import zeit.web.site.spektrum
-import os
+import zeit.web.site.area.spektrum
 
 
 log = logging.getLogger(__name__)
@@ -306,7 +306,7 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
-@grokcore.component.adapter(zeit.web.site.spektrum.Teaser)
+@grokcore.component.adapter(zeit.web.site.area.spektrum.Teaser)
 class SpektrumImage(zeit.web.core.block.BaseImage):
 
     def __init__(self, context):
@@ -336,7 +336,7 @@ class SpektrumImage(zeit.web.core.block.BaseImage):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
-class TopicLink(object):
+class TopicLink(zeit.web.core.utils.nslist):
     """Filter and restructure all topiclinks and labels
     :rtype: generator
     """
@@ -344,10 +344,8 @@ class TopicLink(object):
     def __init__(self, context):
         self.context = context
         self.title = context.topiclink_title or 'Schwerpunkte'
-
-    def __iter__(self):
         for i in xrange(1, 4):
             label = getattr(self.context, 'topiclink_label_%s' % i, None)
             link = getattr(self.context, 'topiclink_url_%s' % i, None)
             if label is not None and link is not None:
-                yield label, link
+                self.append((label, link))

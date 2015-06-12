@@ -18,6 +18,7 @@ import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.core.view_article
+import zeit.web.core.view_comment
 
 import zeit.web.magazin.view
 
@@ -39,6 +40,10 @@ log = logging.getLogger(__name__)
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
     @zeit.web.reify
     def comments(self):
+        # XXX: We need to invalidate the comment_thread here, because
+        # zeit.w.magazin is not using the comment interface, yet.
+        zeit.web.core.view_comment.invalidate_comment_thread(
+            self.context.uniqueId)
         return zeit.web.core.comments.get_thread(
             self.context.uniqueId, destination=self.request.url, sort='desc')
 
@@ -109,21 +114,21 @@ class FeatureLongform(LongformArticle):
 @view_config(context=zeit.web.core.article.IShortformArticle,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/shortform.html')
-class ShortformArticle(Article, zeit.web.core.view_article.Article):
+class ShortformArticle(Article):
     pass
 
 
 @view_config(context=zeit.web.core.article.IColumnArticle,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/column.html')
-class ColumnArticle(Article, zeit.web.core.view_article.Article):
+class ColumnArticle(Article):
     pass
 
 
 @view_config(context=zeit.web.core.article.IPhotoclusterArticle,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/photocluster.html')
-class PhotoclusterArticle(Article, zeit.web.core.view_article.Article):
+class PhotoclusterArticle(Article):
 
     def __init__(self, *args, **kwargs):
         super(PhotoclusterArticle, self).__init__(*args, **kwargs)
@@ -140,7 +145,7 @@ class PhotoclusterArticle(Article, zeit.web.core.view_article.Article):
              context=zeit.content.article.interfaces.IArticle,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
              renderer='templates/teaser.html')
-class Teaser(Article, zeit.web.core.view_article.Article):
+class Teaser(Article):
 
     @zeit.web.reify
     def teaser_text(self):

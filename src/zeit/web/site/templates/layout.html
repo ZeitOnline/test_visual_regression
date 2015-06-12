@@ -1,4 +1,4 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html lang="de" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]> <html lang="de" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -96,6 +96,13 @@
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
+                        <div id="iqadtileOOP">
+                            <script type="text/javascript">
+                                if (typeof AdController !== 'undefined' && AdController._siteConfig._adapterName != 'dfp5') {
+                                    AdController.render('iqadtileOOP');
+                                }
+                            </script>
+                        </div>
                         {{ lama_core.adplace(view.banner(1), view) }}
                         <div id="iqd_rightAd">
                             {{ lama_core.adplace(view.banner(2), view) }}
@@ -143,5 +150,11 @@
         };
     </script>
     <script src="{{ request.asset_url('js/site.js') }}"></script>
+
+    {% if view.vgwort_url %}
+    <!--start: vgwort-->
+    <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" id="vgwort_pixel">
+    <!--end: vgwort--> 
+    {% endif %}
 </body>
 </html>

@@ -31,6 +31,13 @@ class Centerpage(zeit.web.core.view.Base):
         return self.context.type == 'homepage'
 
     @zeit.web.reify
+    def has_solo_leader(self):
+        try:
+            return self.regions[0].values()[0].kind == 'solo'
+        except (AttributeError, IndexError):
+            return False
+
+    @zeit.web.reify
     def tracking_type(self):
         return type(self.context).__name__.title()
 

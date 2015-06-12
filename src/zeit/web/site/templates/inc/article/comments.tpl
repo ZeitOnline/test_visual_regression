@@ -1,6 +1,6 @@
-{% import "zeit.web.site:templates/macros/article_macro.tpl" as blocks with context %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 
-{% if view.comments_allowed or view.comments %}
+{% if view.comments_allowed or (view.comments and view.comments.comment_count) %}
 <section class="comment-section" id="comments">
 	<div class="comment-section__head comment-section__item">
 	{% if view.comments and view.comments.comment_count %}
@@ -23,12 +23,12 @@
 	{% endif %}
 	</div>
 
-	{% if view.comments %}
+	{% if view.comments and view.comments.comment_count %}
 	<div class="comment-section__preferences">
 		<div class="comment-section__item">
 			{# funky future feature?
 			<a class="comment-section__link-autoupdate nowrap" href="{{ request.url }}#comments">
-				{{ blocks.use_svg_icon('spinner', 'comment-section__icon-spinner') }}
+				{{ lama_core.use_svg_icon('spinner', 'comment-section__icon-spinner', request) }}
 				Auto-Aktualisierung an
 			</a>
 			#}
@@ -40,7 +40,7 @@
 				{% set label = 'Neueste zuerst' %}
 			{% endif %}
 			<a class="comment-section__link-sorting nowrap" href="{{ href }}#comments">
-				{{ blocks.use_svg_icon('sorting', 'comment-section__icon-sorting') }}
+				{{ lama_core.use_svg_icon('sorting', 'comment-section__icon-sorting', request) }}
 				{{ label }}
 			</a>
 		</div>
@@ -48,6 +48,13 @@
 
 	<div id="js-comments-body">
 		{% for comment in view.comments.comments %}
+			{% if loop.index == 4 -%}
+				{% if view.context.advertising_enabled -%}
+				<div class="comment__ad">
+					{{ lama_core.adplace(view.banner(8), view) }}
+				</div>
+				{%- endif %}
+			{% endif %}
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}
@@ -59,7 +66,7 @@
 					{% endif %}
 					{% if comment.is_author %}
 					<span title="{{ comment.role }}">
-						{{ blocks.use_svg_icon('comment-author', 'comment__badge comment__badge--author') }}
+						{{ lama_core.use_svg_icon('comment-author', 'comment__badge comment__badge--author', request) }}
 					</span>
 					{% endif %}
 					<a class="comment__name" href="{{ comment.userprofile_url }}">
@@ -80,16 +87,16 @@
 				<div class="comment__reactions">
 					{% if view.comments_allowed -%}
 					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='comment', pid=comment.cid) }}#comment-form" title="Antworten">
-						{{ blocks.use_svg_icon('comment-reply', 'comment__icon comment__icon-reply') }}
+						{{ lama_core.use_svg_icon('comment-reply', 'comment__icon comment__icon-reply', request) }}
 						<span class="comment__action">Antworten</span>
 					</a>
 					{% endif -%}
 					<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='report', pid=comment.cid) }}#report-comment-form" title="Melden">
-						{{ blocks.use_svg_icon('comment-report', 'comment__icon comment__icon-report') }}
+						{{ lama_core.use_svg_icon('comment-report', 'comment__icon comment__icon-report', request) }}
 						<span class="comment__action">Melden</span>
 					</a>
 					<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" data-fans="{{ comment.fans }}" href="{{ view.request | append_get_params(action='recommend', pid=comment.cid) }}#cid-{{ comment.cid }}" title="Empfehlen">
-						{{ blocks.use_svg_icon('comment-recommend', 'comment__icon comment__icon-recommend') }}
+						{{ lama_core.use_svg_icon('comment-recommend', 'comment__icon comment__icon-recommend', request) }}
 						<span class="comment__action">Empfehlen</span>
 					</a>
 				</div>

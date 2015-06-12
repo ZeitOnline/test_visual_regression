@@ -21,7 +21,7 @@ import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
-import zeit.web.site.spektrum
+import zeit.web.site.area.spektrum
 import zeit.web.site.view
 
 
@@ -117,7 +117,12 @@ class Centerpage(
         :rtype: list
         """
 
-        return self.context.values()
+        region_list = self.context.values()
+
+        if self.is_hp:
+            region_list.append(self.region_snapshot)
+
+        return region_list
 
     @zeit.web.reify
     def last_semantic_change(self):
@@ -148,6 +153,20 @@ class Centerpage(
             return self.context.ressort.lower()
         return ''
 
+    @zeit.web.reify
+    def region_snapshot(self):
+        """Return the centerpage snapshot region aka Momentaufnahme."""
+        # TODO: Reimplement snapshot as a proper vivi+friedbert module.
+        try:
+            snapshot = zeit.web.core.interfaces.ITeaserImage(
+                self.context.snapshot)
+            assert snapshot
+        except TypeError:
+            snapshot = None
+
+        module = LegacyModule([snapshot], layout='snapshot')
+        return LegacyRegion([LegacyArea([module])])
+
 
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
@@ -166,10 +185,6 @@ class LegacyCenterpage(Centerpage):
         region_multi = LegacyRegion([self.area_major, self.area_minor],
                                     kind='multi')
         regions.append(region_multi)
-
-        area_videostage = LegacyArea([self.module_videostage])
-        region_video = LegacyRegion([area_videostage])
-        regions.append(region_video)
 
         regions += self.region_list_parquet
 
@@ -268,25 +283,6 @@ class LegacyCenterpage(Centerpage):
         return module
 
     @zeit.web.reify
-    def module_videostage(self):
-        """Return a video playlist module to be displayed on the homepage."""
-
-        try:
-            content = zeit.cms.interfaces.ICMSContent(
-                'http://xml.zeit.de/video/playlist/36516804001')
-        except TypeError:
-            return
-
-        module = LegacyModule([], layout='videostage')
-
-        for index, video in enumerate(content.videos):
-            layout = index and 'video-small' or 'video-large'
-            module.append(LegacyModule([video], layout=layout))
-
-        module.video_series_list = zeit.web.core.sources.video_series
-        return module
-
-    @zeit.web.reify
     def region_list_parquet(self):
         """Re-model the parquet to conform with new RAM-style structure."""
 
@@ -298,7 +294,7 @@ class LegacyCenterpage(Centerpage):
                 if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
                     if block.cpextra != 'parquet-spektrum':
                         continue
-                    legacy = zeit.web.site.spektrum.HPFeed()
+                    legacy = zeit.web.site.area.spektrum.HPFeed()
                 else:
                     try:
                         legacy = zope.component.getMultiAdapter(
@@ -310,20 +306,6 @@ class LegacyCenterpage(Centerpage):
                 regions.append(LegacyRegion([legacy], kind='parquet'))
 
         return regions
-
-    @zeit.web.reify
-    def region_snapshot(self):
-        """Return the centerpage snapshot region aka Momentaufnahme."""
-
-        try:
-            snapshot = zeit.web.core.interfaces.ITeaserImage(
-                self.context.snapshot)
-            assert snapshot
-        except TypeError:
-            snapshot = None
-
-        module = LegacyModule([snapshot], layout='snapshot')
-        return LegacyRegion([LegacyArea([module])])
 
 
 # First of all: congrats for scrolling all the way down. Now that you've made

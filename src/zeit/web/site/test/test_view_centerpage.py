@@ -14,6 +14,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 import zeit.web.core.utils
+import zeit.web.site.module.playlist
 import zeit.web.site.view_centerpage
 
 
@@ -536,24 +537,20 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
         'Small parquet teaser must show it‘s image on desktop.')
 
 
-def test_video_series_should_be_available(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/index')
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
-    video_series = view.module_videostage.video_series_list
-    assert len(video_series) > 0, (
-        'Series object is empty')
+def test_playlist_video_series_should_be_available(application):
+    playlist = zeit.web.site.module.playlist.Playlist(mock.Mock())
+    assert len(playlist.video_series_list) == 24
 
 
 def test_videostage_should_have_right_video_count(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('%s/index' % testserver.url)
 
     videos = browser.cssselect('#video-stage article')
     assert len(videos) == 4, 'We expect 4 videos in video-stage'
 
 
-def test_videos_should_have_video_ids(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+def test_videostage_videos_should_have_video_ids(testserver, testbrowser):
+    browser = testbrowser('%s/index' % testserver.url)
 
     videos = browser.cssselect('#video-stage article')
     for video in videos:
@@ -562,9 +559,10 @@ def test_videos_should_have_video_ids(testserver, testbrowser):
         assert videoid is not ''
 
 
-def test_series_select_should_navigate_away(selenium_driver, testserver):
+def test_videostage_series_select_should_navigate_away(
+        selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/zeit-online/index' % testserver.url)
+    driver.get('%s/index' % testserver.url)
     select = driver.find_element_by_css_selector('#series_select')
     for option in select.find_elements_by_tag_name('option'):
         if option.text == 'Rekorder':
@@ -574,9 +572,9 @@ def test_series_select_should_navigate_away(selenium_driver, testserver):
     assert '/serie/rekorder' in driver.current_url
 
 
-def test_video_stage_video_should_play(selenium_driver, testserver):
+def test_videostage_video_should_play(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/zeit-online/index' % testserver.url)
+    driver.get('%s/index' % testserver.url)
     article = driver.find_element_by_css_selector(
         '#video-stage .video-large')
     videolink = driver.find_element_by_css_selector(

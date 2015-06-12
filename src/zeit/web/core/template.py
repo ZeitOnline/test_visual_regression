@@ -15,15 +15,16 @@ import zope.component
 import zope.component.interfaces
 
 import zeit.cms.interfaces
-import zeit.content.link.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.cp.layout
+import zeit.content.gallery.interfaces
+import zeit.content.link.interfaces
+import zeit.magazin.interfaces
 
 import zeit.web
 import zeit.web.core.comments
 import zeit.web.core.interfaces
 import zeit.web.core.utils
-import zeit.content.cp
 
 log = logging.getLogger(__name__)
 
@@ -197,6 +198,16 @@ def replace_list_seperator(scsv, seperator):
     return scsv.replace(';', seperator)
 
 
+@zeit.web.register_filter
+def is_zmo(teaser):
+    return zeit.magazin.interfaces.IZMOContent.providedBy(teaser)
+
+
+@zeit.web.register_filter
+def is_gallery(teaser):
+    return zeit.content.gallery.interfaces.IGallery.providedBy(teaser)
+
+
 # definition of default images sizes per layout context
 scales = {
     'default': (200, 300),
@@ -246,6 +257,7 @@ scales = {
     'zon-printbox-wide': (320, 148),
     'zon-topic': (980, 418),
     'zon-column': (300, 400),
+    'zon-square': (460, 460),
     'brightcove-still': (580, 326),
     'brightcove-thumbnail': (120, 67),
     'spektrum': (220, 124)
@@ -413,10 +425,18 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
     layout = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS
     layout_image = {block.id: [block.image_pattern] for block in
                     list(layout(None)) if block.image_pattern}
+    try:
+        layout_image['zon-small'].extend(layout_image['leader'])
+        layout_image['zon-parquet-small'].extend(layout_image['leader'])
+        layout_image['zon-parquet-large'].extend(layout_image['leader'])
+        layout_image['zon-fullwidth'].extend(layout_image['leader-fullwidth'])
+        layout_image['zon-large'].extend(layout_image['leader'])
+        layout_image['zon-series'].extend(layout_image['leader'])
+        layout_image['zon-column'].extend(layout_image['leader'])
+        layout_image['zon-square'].extend(layout_image['leader'])
+    except KeyError:
+        log.warn("Layout could not be extended")
 
-    layout_image['zon-small'].extend(layout_image['leader'])
-    layout_image['zon-parquet-small'].extend(layout_image['leader'])
-    layout_image['zon-parquet-large'].extend(layout_image['leader'])
     return layout_image.get(teaser_layout, [orig_image_pattern])
 
 
@@ -558,8 +578,15 @@ def get_image_group(asset):
 
 @zeit.web.register_filter
 def get_module(module, name=None):
+    if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(module):
+        name = 'cpextra'
+    elif zeit.edit.interfaces.IBlock.providedBy(module):
+        name = 'type'
+    else:
+        return module
+
     return zeit.web.core.utils.get_named_adapter(
-        module, zeit.edit.interfaces.IBlock, 'cpextra')
+        module, zeit.web.core.interfaces.IBlock, name)
 
 
 @zeit.web.register_filter

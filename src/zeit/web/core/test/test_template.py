@@ -16,6 +16,7 @@ import zeit.content.cp.blocks.teaser
 
 import zeit.web.core.decorator
 import zeit.web.core.template
+import zeit.web.site.module.search_form
 
 
 @pytest.fixture(scope='session')
@@ -397,7 +398,7 @@ def test_layout_for_empty_teaser_block_should_be_set_to_hide(application):
 def test_function_get_image_pattern_is_working_as_expected(application):
     # Existing formats
     teaser = zeit.web.core.template.get_image_pattern('zon-large', 'default')
-    assert teaser == ['zon-large']
+    assert teaser == ['zon-large', '540x304']
     teaser = zeit.web.core.template.get_image_pattern('zon-small', 'default')
     assert teaser == ['zon-thumbnail', '540x304']
 
@@ -505,7 +506,7 @@ def test_get_module_filter_should_correctly_extract_cpextra_id(application):
     block.visible = True
     block.cpextra = 'search-form'
     assert isinstance(zeit.web.core.template.get_module(block),
-                      zeit.web.site.search.Form)
+                      zeit.web.site.module.search_form.Form)
 
     block.visible = False
     block.cpextra = 'n/a'

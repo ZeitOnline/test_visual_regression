@@ -1,14 +1,58 @@
 Change log for zeit.web
 =======================
 
-1.26 (unreleased)
+1.30 (unreleased)
 -----------------
 
-- BUG-58: Prevent that main script is sourced twice
+- Nothing changed yet.
+
+
+1.29 (2015-06-12)
+-----------------
+
+- FIX: Map old images to new teasers
+
+- ZON-1613: Allow pagination for dynamic centerpages
+
+- FIX: Port spektrum and snapshot to 2015 centerpages
+
+- NFR: Move spektrum+social rss, search-form and ranking where they belong
+
+- FIX: vgwort pixel for web.site and web.magazin
+
+
+1.28 (2015-06-10)
+-----------------
+
+- BUG-267: Invalidate memcache on every request in zeit.web.magazin
+
+
+1.27 (2015-06-09)
+-----------------
+
+- ZON-1821: Add square grafical teaser
+
+- ZON-1631: Google Ad at article bottom, only 1 MR in article content,
+  ad in discussions, content ad activated,
+  switching of MR in minor region based on big news,
+  billboard right before video stage, css for ads,
+  and a lot of bugfixes to be iqd ready
+
+- ZON-1827: Videostage/Playlist-Module for new CPs
+
+
+1.26 (2015-06-09)
+-----------------
 
 - ZON-1566: Implement video solo page view and basic template
 
+- ZON-1613: Topic pages (Dynamic CPs)
+
 - ZON-1755: Refactor traversal, allow parallel folder discovery
+
+- ZON-1777: Wording Kommentarpaginierung
+
+- BUG-58: Prevent that main script is sourced twice
 
 - HOTFIX: Add modernizr test for CSS 3D Transforms
 
@@ -24,17 +68,17 @@ Change log for zeit.web
 1.25 (2015-06-03)
 -----------------
 
-- ZON-1582: Enable liveblogs
-
-- ZON-1749: Add dynamic centerpage collection test folder
-
 - ZON-1432: Add Servicebox as CP-Extra
 
-- ZON-1692: Implement topic teaser (Dossier-Teaser)
+- ZON-1492: Add newsticker box
+
+- ZON-1582: Enable liveblogs
 
 - ZON-1597: Add focussed nextread
 
-- ZON-1492: Add newsticker box
+- ZON-1692: Implement topic teaser (Dossier-Teaser)
+
+- ZON-1749: Add dynamic centerpage collection test folder
 
 - FIX: Consider disabled comment section
 
@@ -52,23 +96,23 @@ Change log for zeit.web
 1.24 (2015-05-26)
 -----------------
 
-- ZON-1713: Enable unflagging recommended comments
-
-- ZON-1732: Add banner code mapping rules and table
-
-- ZON-1569: Upgrade author column images to image groups
-
-- ZON-1532: Render raw elements enabled for all devices
-
 - ZON-1253: Safeguard jinja tests, modifiers and globals
 
 - ZON-1345: Article body: display images w/ layout 'small' correctly
 
+- ZON-1532: Render raw elements enabled for all devices
+
+- ZON-1569: Upgrade author column images to image groups
+
+- ZON-1713: Enable unflagging recommended comments
+
+- ZON-1732: Add banner code mapping rules and table
+
 - ZON-1744: Enable friedbert to memcache comment threads
 
-- Remove ESI parser javascript library
+- HOTFIX: Repair centerpage printbox
 
-- Hotfix: Repair printbox
+- Remove ESI parser javascript library
 
 
 1.23.1 (2015-05-20)
@@ -84,15 +128,15 @@ Change log for zeit.web
 1.23 (2015-05-19)
 -----------------
 
-- ZON-1733: Enable deeplinks and working redirects for comments
-
-- ZON-1731: Prepare centerpage areas for dynamic operation
-
-- FIX: Diverse fixes for infobox, HTML conformity and a11y errors
+- DEV-774: Wire up zeit.content.dynamicfolder
 
 - ZON-1658: Add campaign params to share URLs
 
-- DEV-774: Wire up zeit.content.dynamicfolder
+- ZON-1731: Prepare centerpage areas for dynamic operation
+
+- ZON-1733: Enable deeplinks and working redirects for comments
+
+- FIX: Diverse fixes for infobox, HTML conformity and a11y errors
 
 - FIX: Straighten comment dates
 
@@ -100,7 +144,25 @@ Change log for zeit.web
 1.22 (2015-05-15)
 -----------------
 
+- ZON-1519: Article: prevent superflous pagination slugs
+
+- ZON-1520: Add canonical urls to ZON/ZMO
+
+- ZON-1521/22: ZMO articles and longform should have only one h1
+
+- ZON-1523: Rework seo page title and descriptions
+
+- ZON-1527: ZON HP has an H1-Logo
+
+- ZON-1674: Implement No-JS variant for comment forms
+
+- ZON-1683: Invalidate comment thread on all app servers
+
+- ZON-1698: Sorting and pagination for comment_thread
+
 - ZON-1700: Show relative dates for comments
+
+- ZON-1710: Upgrade to new centerpage editor paradigms
 
 - ZON-1714: Add pagination for comments
 
@@ -108,40 +170,21 @@ Change log for zeit.web
 
 - ZON-1720: Use new comment API and enable "recommend comment"
 
-- ZON-1729: Setup view defaults to DRY
-
-- ZON-1698: Sorting and pagination for comment_thread
-
-- ZON-1674: Implement No-JS variant for comment forms
-
-- ZON-1710: Upgrade to new centerpage editor paradigms
-
-- ZON-1683: Invalidate comment thread on all app servers
+- ZON-1722: New version of jinja2
 
 - ZON-1723: Remove wrong keywords from adcontroller code
 
 - ZON-1724: Add $handle mapping in adcontroller code
 
-- ZON-1523: Rework seo page title and descriptions
-
-- ZON-1520: Add canonical urls to ZON/ZMO
-
-- ZON-1521/22: ZMO articles and longform should have only one h1
-
-- ZON-1527: ZON HP has an H1-Logo
-
-- ZON-1519: Article: prevent superflous pagination slugs
+- ZON-1729: Setup view defaults to DRY
 
 - ZON-1731: Refactor parquet and spektrum to extend default area template
-
-- ZON-1722: New version of jinja2
 
 
 1.21.2 (2015-05-15)
 -------------------
 
-- BUG-251: Don't display "None" in image captions (fixes regression introduced
-  in 1.20.4 by fix for BUG-226).
+- BUG-251: Don't display None in image captions
 
 
 1.21.1 (2015-05-05)
@@ -153,37 +196,37 @@ Change log for zeit.web
 1.21 (2015-05-05)
 -----------------
 
+- ZON-1238: Standard teaser in a onethird area
+
 - ZON-1534: Improve search implementation test coverage
-
-- ZON-1646: Reply, report and recommend comments
-
-- ZON-1667: Implement search centerpage, spice up cpextra handling
-
-- ZON-1628: Fix/clearify vertical spaces on centerpages
-
-- ZON-1627: Add some webtrekk features hidden as errors
-
-- ZON-1660: Implement comment interface.
 
 - ZON-1535: Polishing comments & ZON author badge
 
+- ZON-1622: Add video description
+
 - ZON-1626: Fix/clarify vertical spaces on centerpages
 
-- ZON-1701: Fix test-comment form
+- ZON-1627: Add some webtrekk features hidden as errors
+
+- ZON-1628: Fix/clearify vertical spaces on centerpages
+
+- ZON-1646: Reply, report and recommend comments
+
+- ZON-1660: Implement comment interface.
 
 - ZON-1664: WhatsApp sharing link for mobile
 
-- ZON-1238: Standard teaser in a onethird area
+- ZON-1667: Implement search centerpage, spice up cpextra handling
 
-- ZON-1704: Generate json for ajax requests on comment interface
-
-- ZON-1622: add video description
+- ZON-1669: Pagination for Centerpages, like search
 
 - ZON-1673: Render comment form through edge side includes
 
 - ZON-1700: Beautfiy comment dates
 
-- ZON-1669: Pagination for Centerpages, like search
+- ZON-1701: Fix test-comment form
+
+- ZON-1704: Generate json for ajax requests on comment interface
 
 
 1.20.4 (2015-04-27)
@@ -447,7 +490,7 @@ Change log for zeit.web
 
 - ZON-1297: Video-stage completion
 
-- ZON-1326: tweak navigation
+- ZON-1326: Tweak navigation
 
 
 1.12.2 (2015-02-11)
@@ -465,7 +508,7 @@ Change log for zeit.web
 1.12 (2015-02-11)
 -----------------
 
-- ZON-1369: beta: add button/link 'to homepage'
+- ZON-1369: Beta: add button/link 'to homepage'
 
 - ZON-1270: Polishing HP CSS
 

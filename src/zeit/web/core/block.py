@@ -11,6 +11,7 @@ import zope.interface.declarations
 
 import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
+import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
 import zeit.edit.interfaces
@@ -580,7 +581,10 @@ class Module(object):
 
     def __init__(self, context):
         self.context = context
-        self.layout = getattr(context, 'cpextra', None)
+        if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(context):
+            self.layout = context.cpextra
+        elif zeit.edit.interfaces.IBlock.providedBy(context):
+            self.layout = context.type
 
     def __hash__(self):
         return self.context.xml.attrib.get(
