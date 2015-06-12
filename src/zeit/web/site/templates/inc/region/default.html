@@ -1,7 +1,7 @@
 <div class="{{ 'cp-region' | with_mods(region.kind) }}">
     {% block before_area_list %}{% endblock %}
     {% for area in region.values() | map('get_area') %}
-        {% include "zeit.web.site:templates/inc/region/includer.html" with context %}
+        {% include "zeit.web.site:templates/inc/area/includer.html" with context %}
     {% endfor %}
     {% block after_area_list %}{% endblock %}
 </div>
