@@ -169,6 +169,29 @@ class Centerpage(
 
 
 @pyramid.view.view_config(
+    name='area',
+    context=zeit.content.cp.interfaces.ICP2015,
+    renderer='templates/inc/area/includer.html')
+class CenterpageArea(Centerpage):
+
+    def __init__(self, context, request):
+        if not request.subpath:
+            raise pyramid.httpexceptions.NotFound()
+
+        self.context = None
+        self.request = request
+
+        for region in context.values():
+            for area in region.values():
+                if area.uniqueId.rsplit('/', 1)[-1] == request.subpath[-1]:
+                    self.context = zeit.web.core.template.get_area(area)
+                    return
+
+    def __call__(self):
+        return {'area': self.context}
+
+
+@pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
