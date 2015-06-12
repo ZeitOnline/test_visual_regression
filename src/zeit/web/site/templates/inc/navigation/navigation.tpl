@@ -22,7 +22,7 @@
 
 	<!-- wrap start -->
 	<div class="main_nav__community" data-dropdown="true">
-                <esi:include src="http://{{ view.request.host }}/login-state" />
+                <esi:include src="http://{{ view.request.host }}/login-state" onerror="continue" />
 		<a href="http://{{ view.request.host }}/beta/index" class="beta-badge beta-badge--navigation">Beta</a>
 	</div>
 	<div class="main_nav__ressorts" data-dropdown="true">
