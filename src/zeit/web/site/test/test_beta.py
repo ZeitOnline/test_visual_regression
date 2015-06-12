@@ -90,9 +90,16 @@ def test_beta_view_should_lookup_beta_role_correctly(
     'opt_in',
     'opt_out'
 ])
-def test_beta_view_should_pass_through_site_version_from_session(version):
+def test_beta_view_should_pass_through_site_version_from_session(
+        version, monkeypatch):
     request = mock.MagicMock()
     request.cookies = {'site-version': 'beta-{}'.format(version)}
+    request.params = {'version': None}
+
+    def beta(me):
+        return True
+
+    monkeypatch.setattr(zeit.web.site.view_beta.BetaJSON, 'beta_user', beta)
 
     def set_cookie(key, max_age, value=''):
         request.cookies[key] = value
@@ -109,12 +116,19 @@ def test_beta_view_should_pass_through_site_version_from_session(version):
     ('out', 'foo'),
     ('out', '')
 ])
-def test_beta_view_should_write_updated_site_version_to_session(opt, version):
+def test_beta_view_should_write_updated_site_version_to_session(
+        opt, version, monkeypatch):
     request = mock.MagicMock()
     request.cookies = {'site-version': 'beta-{}'.format(version)}
+    request.params = {'version': opt}
 
     def set_cookie(key, max_age, value=''):
         request.cookie[key] = value
+
+    def beta(me):
+        return True
+
+    monkeypatch.setattr(zeit.web.site.view_beta.BetaJSON, 'beta_user', beta)
 
     request.response.set_cookie = set_cookie
     request.POST = {'opt': opt}
