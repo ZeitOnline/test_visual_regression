@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import re
 
-import lxml
+import lxml.html
+import lxml.etree
 import mock
 import pytest
 import requests
@@ -783,8 +784,7 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
 
 
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
-    url = '{}/index'.format(testserver.url)
-    browser = testbrowser(url)
+    browser = testbrowser('{}/index'.format(testserver.url))
 
     cols = browser.cssselect('.cp-area--news .newsticker__column')
     assert len(cols) == 2
@@ -814,3 +814,12 @@ def test_servicebox_present_in_wide_breakpoints(
         assert servicebox.is_displayed() is True, 'Servicebox not displayed'
     if screen_size[0] == 980:
         assert servicebox.is_displayed() is True, 'Servicebox not displayed'
+
+
+def test_centerpage_area_should_render_in_isolation(testbrowser, testserver):
+    browser = testbrowser('{}/index/area/id-5fe59e73-e388-42a4-a8d4-'
+                          '750b0bf96812'.format(testserver.url))
+    document = lxml.etree.fromstring(browser.contents)
+    assert document.tag == 'div'
+    assert document.attrib['class'] == 'cp-area cp-area--gallery'
+    assert len(browser.cssselect('article.teaser-small')) == 2
