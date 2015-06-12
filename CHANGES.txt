@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-1.29 (unreleased)
+1.30 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.29 (2015-06-12)
 -----------------
 
 - FIX: Use comment API for ZMO
@@ -14,6 +20,10 @@ Change log for zeit.web
 - ZON-1613: Allow pagination for dynamic centerpages
 
 - FIX: Port spektrum and snapshot to 2015 centerpages
+
+- NFR: Move spektrum+social rss, search-form and ranking where they belong
+
+- FIX: vgwort pixel for web.site and web.magazin
 
 
 1.28 (2015-06-10)

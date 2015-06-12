@@ -68,12 +68,11 @@ settings = {
     'default_teaser_images': (
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
     'connector_type': 'mock',
-
+    'vgwort_url': 'http://example.com/vgwort',
     'breaking_news': (
         'http://xml.zeit.de/eilmeldung/homepage-banner'),
     'enable_third_party_modules': '',
     'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
-
     'vivi_zeit.cms_keyword-configuration': (
         'egg://zeit.cms.tagging.tests/keywords_config.xml'),
     'vivi_zeit.cms_source-badges': 'egg://zeit.cms.asset/badges.xml',

@@ -51,6 +51,13 @@ class Base(object):
         self.request = request
 
     @zeit.web.reify
+    def vgwort_url(self):
+        token = zeit.vgwort.interfaces.IToken(self.context).public_token
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        if token and conf.get('vgwort_url'):
+            return '{}/{}'.format(conf.get('vgwort_url'), token)
+
+    @zeit.web.reify
     def enable_third_party_modules(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('enable_third_party_modules', True)
