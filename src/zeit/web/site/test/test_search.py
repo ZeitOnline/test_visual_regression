@@ -6,7 +6,7 @@ import pysolr
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 
-import zeit.web.site.search
+import zeit.web.site.module.search_form
 import zeit.web.core.application
 import zeit.web.core.sources
 
@@ -105,19 +105,21 @@ def test_search_form_should_ignore_invalid_page_numbers(search_form):
 
 def test_search_form_should_create_valid_empty_query_string(search_form):
     assert search_form.raw_query == (
-        'type:(article OR gallery OR video) NOT expires:[* TO NOW] NOT '
-        'product_id:(News OR afp OR SID OR ADV) NOT ressort:(Administratives '
-        'OR News OR Aktuelles)')
+        'type:(article OR gallery OR video) '
+        'NOT product_id:(News OR afp OR SID OR ADV) '
+        'NOT ressort:(Administratives OR News OR Aktuelles) '
+        'NOT expires:[* TO NOW]')
 
 
 def test_search_form_should_create_valid_fulltext_query_string(search_form):
     search_form['q'] = 'pfannkuchen AND ahornsirup'
     assert search_form.raw_query == (
         '{!boost b=recip(ms(NOW,last-semantic-change),3.16e-11,1,1)}'
-        '{!type=IntrafindQueryParser}(pfannkuchen AND ahornsirup) type:'
-        '(article OR gallery OR video) NOT expires:[* TO NOW] NOT product_id:'
-        '(News OR afp OR SID OR ADV) NOT ressort:(Administratives OR News OR '
-        'Aktuelles)')
+        '{!type=IntrafindQueryParser}(pfannkuchen AND ahornsirup) '
+        'type:(article OR gallery OR video) '
+        'NOT product_id:(News OR afp OR SID OR ADV) '
+        'NOT ressort:(Administratives OR News OR Aktuelles) '
+        'NOT expires:[* TO NOW]')
 
 
 def test_search_form_should_create_valid_date_range_query_string(
@@ -126,22 +128,24 @@ def test_search_form_should_create_valid_date_range_query_string(
         return datetime.datetime(2000, 1, 1), datetime.datetime(2010, 1, 1)
 
     monkeypatch.setattr(
-        zeit.web.site.search, 'MODES', {'1y': (year_range,)})
+        zeit.web.site.module.search_form, 'MODES', {'1y': (year_range,)})
 
     search_form['mode'] = '1y'
     assert search_form.raw_query == (
         'last-semantic-change:[2000-01-01T00:00:00Z TO 2010-01-01T00:00:00Z] '
-        'type:(article OR gallery OR video) NOT expires:[* TO NOW] NOT '
-        'product_id:(News OR afp OR SID OR ADV) NOT ressort:(Administratives '
-        'OR News OR Aktuelles)')
+        'type:(article OR gallery OR video) '
+        'NOT product_id:(News OR afp OR SID OR ADV) '
+        'NOT ressort:(Administratives OR News OR Aktuelles) '
+        'NOT expires:[* TO NOW]')
 
 
 def test_search_form_should_create_valid_type_restricted_query(search_form):
     search_form['mode'] = 'article gallery'
     assert search_form.raw_query == (
-        'type:(article OR gallery OR video) NOT expires:[* TO NOW] NOT '
-        'product_id:(News OR afp OR SID OR ADV) NOT ressort:(Administratives '
-        'OR News OR Aktuelles)')
+        'type:(article OR gallery OR video) '
+        'NOT product_id:(News OR afp OR SID OR ADV) '
+        'NOT ressort:(Administratives OR News OR Aktuelles) '
+        'NOT expires:[* TO NOW]')
 
 
 def test_search_area_should_produce_valid_set_of_search_results(

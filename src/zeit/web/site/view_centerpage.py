@@ -21,7 +21,7 @@ import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
-import zeit.web.site.areas.spektrum
+import zeit.web.site.area.spektrum
 import zeit.web.site.view
 
 
@@ -317,7 +317,7 @@ class LegacyCenterpage(Centerpage):
                 if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
                     if block.cpextra != 'parquet-spektrum':
                         continue
-                    legacy = zeit.web.site.areas.spektrum.HPFeed()
+                    legacy = zeit.web.site.area.spektrum.HPFeed()
                 else:
                     try:
                         legacy = zope.component.getMultiAdapter(
