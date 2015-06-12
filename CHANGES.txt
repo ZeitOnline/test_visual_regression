@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.29 (unreleased)
+1.29 (2015-06-12)
 -----------------
 
 - FIX: Map old images to new teasers
