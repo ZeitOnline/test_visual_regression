@@ -6,6 +6,11 @@ Change log for zeit.web
 
 - ZON-1740: Implement backend part of photo gallery teaser bar
 
+- FIX: Use comment API for ZMO
+       Fix wrong comment count
+       Fix feature longform breadcrumb
+       Respect commentsAllowed and commentSectionEnable in ZMO
+
 
 1.29 (2015-06-12)
 -----------------
@@ -17,6 +22,10 @@ Change log for zeit.web
 - FIX: Port spektrum and snapshot to 2015 centerpages
 
 - FIX: Vgwort pixel for web.site and web.magazin
+
+- NFR: Move spektrum+social rss, search-form and ranking where they belong
+
+- FIX: Improve esi error handling
 
 - NFR: Move spektrum+social rss, search-form and ranking where they belong
 

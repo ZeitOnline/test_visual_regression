@@ -1,0 +1,133 @@
+{% if view.linkreach or view.comments_allowed or view.comments %}
+	<div class="article__socialbox tc" id="js-social-services">
+	{% if view.linkreach %}
+		<div class="article__sharing">
+		{% if view.linkreach.total %}
+			<div class="article__sharing__item article__sharing__sum js-toggle-sharing">
+				<span class="article__sharing__total">{{ view.linkreach.total[0] }}</span>
+				<span class="article__sharing__unit">{{ view.linkreach.total[1] }}</span>
+			</div>
+		{% endif %}
+			<div class="article__sharing__services blind">
+				<a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.int.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_int&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
+					<span class="article__sharing__services__icon icon-sharebox-facebook"></span>
+					<span class="article__sharing__services__text">{{ ' '.join(view.linkreach.facebook) }}</span>
+				</a>
+				<a href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&via=zeitonline&url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.twitter.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=twitter_zonaudev_int&utm_campaign=twitter_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
+					<span class="article__sharing__services__icon icon-sharebox-twitter"></span>
+					<span class="article__sharing__services__text">{{ ' '.join(view.linkreach.twitter) }}</span>
+				</a>
+				<a href="https://plus.google.com/share?url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.gplus.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=gplus_zonaudev_int&utm_campaign=gplus_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
+					<span class="article__sharing__services__icon icon-sharebox-google"></span>
+					<span class="article__sharing__services__text">{{ ' '.join(view.linkreach.googleplus) }}</span>
+			   </a>
+			</div>
+			<div class="article__sharing__item">
+				<a class="article__sharing__link js-toggle-sharing">
+					<span class="article__sharing__icon icon-sharebox-share"></span>
+					Teilen
+				</a>
+			</div>
+		</div>
+	{% endif %}
+
+	{% if view.comments_allowed or view.comments %}
+		<div class="article__comments-trigger">
+			<a class="article__comments-trigger__link js-comments-trigger">
+				<span class="article__comments-trigger__count icon-sharebox-close">{{ view.comments.comment_count | default(0) }}</span>
+				<span class="article__comments-trigger__text">{% if view.comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
+			</a>
+		</div>
+	{% endif %}
+	</div>
+{% endif %}
+
+{% if view.comments_allowed or view.comments %}
+	<section class="comments" id="js-comments">
+		<div class="comments__head" id="js-comments-head">
+		{% if view.comments_allowed %}
+			{% if request.authenticated_userid -%}
+			<form method="POST" class="comment__form" id="js-comments-form">
+				<p>
+					<textarea name="comment" placeholder="Ihr Kommentar" class="js-required"></textarea>
+					<input type="hidden" name="action" value="comment">
+					<input type="hidden" name="pid" value="">
+				</p>
+				<div class="comment__form__note comment__form__note--casual">angemeldet als <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">{{ request.session.user.name|e }}</a></div>
+				<div class="comment__form__actions">
+					<input type="submit" class="button" value="Kommentieren" disabled />
+				</div>
+			</form>
+			{% else -%}
+			<form class="comment__form comment__form--login" id="js-comments-form">
+				<div class="comment__form__wrap">
+					<div class="comment__form__note">Bitte melden Sie sich an, um zu kommentieren.</div>
+				</div>
+				<a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url|e }}" class="button">Anmelden</a>
+				<a href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url|e }}" class="button">Registrieren</a>
+			</form>
+			{% endif %}
+		{% endif %}
+		</div>
+		<div class="tabs has-2">
+			<div class="tabs__head" id="js-comments-tabs-head">
+				<a href="#tab1" class="tabs__head__tab is-active">Alle</a>
+				<a href="#tab2" class="tabs__head__tab">Ausgewählte</a>
+			</div>
+			<div class="comments__body" id="js-comments-body">
+				<div class="tabs__content is-active">
+					<div class="comments__list" id="tab1">
+						{% for comment in view.comments.comments %}
+							{% include "zeit.web.magazin:templates/inc/article/comment.html" %}
+						{% endfor %}
+					</div>
+				</div>
+				<div class="tabs__content">
+					<div class="comments__list" id="tab2">
+						{% for comment in view.comments.comments %}
+							{% if comment.is_promoted -%}
+								{% include "zeit.web.magazin:templates/inc/article/comment.html" %}
+							{%- endif %}
+						{% endfor %}
+					</div>
+				</div>
+				<div class="comments__button__newer" id="js-comments-button-up">
+					<div class="button icon-comments-newer js-scroll-comments" data-direction="up">Neuere</div>
+				</div>
+			</div>
+		</div>
+		<div class="comments__button__older" id="js-comments-button-down">
+			<div class="button icon-comments-older js-scroll-comments" data-direction="down">Ältere</div>
+		</div>
+		<script type="text/template" id="js-report-success-template">
+			<div class="comment__form__success">
+				<span class="comment__icon--40 icon-check-kommentar-gesendet"></span>
+				<div class="comment__form__success__text">Danke! Ihre Meldung wird an die Redaktion weitergeleitet.</div>
+			</div>
+		</script>
+		<script type="text/template" id="js-report-comment-template">
+			{% if request.authenticated_userid -%}
+			<form method="POST" class="comment__form">
+				<p><textarea name="comment" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
+				<p class="comment__form__text">
+					Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://{{ request.host }}/administratives/2010-03/netiquette">Netiquette</a> zu melden.
+					Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
+				</p>
+				<p class="comment__form__actions">
+					<input type="hidden" name="action" value="report">
+					<input type="hidden" name="pid" value="">
+					<a href="#" class="js-cancel-report">Abbrechen</a><button disabled="disabled" class="button js-submit-report" type="button">Abschicken</button>
+				</p>
+			</form>
+			{% else -%}
+			<form class="comment__form comment__form--login">
+				<div class="comment__form__wrap">
+					<div class="comment__form__note">Bitte melden Sie sich an, um diesen Kommentar zu melden.</div>
+				</div>
+				<a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url|e }}" class="button">Anmelden</a>
+				<a href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url|e }}" class="button">Registrieren</a>
+			</form>
+			{% endif -%}
+		</script>
+	</section>
+{%- endif %}
