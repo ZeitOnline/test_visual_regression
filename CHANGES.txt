@@ -4,7 +4,7 @@ Change log for zeit.web
 1.30 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- DEV-295: Don't display a gallery icon for product galleries.
 
 
 1.29 (2015-06-12)
