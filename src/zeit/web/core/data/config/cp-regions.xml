@@ -28,4 +28,7 @@
     <region kind="topic" title="Dossier">
         <area kind="topic"/>
     </region>
+    <region kind="solo" title="Galerie">
+        <area kind="gallery"/>
+    </region>
 </regions>
