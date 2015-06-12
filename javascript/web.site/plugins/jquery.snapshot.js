@@ -1,4 +1,3 @@
-/* global GWPLine, GWPLine3, nsIqd_setBg */
 /**
 * ZON Snapshot formally know as Bottompic Plugin
 * snapshot picture is loaded after the part of the page is in the visible area

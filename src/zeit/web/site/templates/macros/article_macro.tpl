@@ -44,7 +44,7 @@
 
 {% macro liveblog(liveblog) -%}
     {% if liveblog.blog_id -%}
-    <div class="article__item">
+    <div class="liveblog article__item">
         <esi:include src="http://www.zeit.de/liveblog-backend/{{ liveblog.blog_id }}.html" onerror="continue" />
     </div>
     {%- endif %}

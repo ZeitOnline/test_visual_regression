@@ -6,6 +6,13 @@ Change log for zeit.web
 
 - DEV-295: Don't display a gallery icon for product galleries.
 
+- FIX: Use comment API for ZMO
+       Fix wrong comment count
+       Fix feature longform breadcrumb
+       Respect commentsAllowed and commentSectionEnable in ZMO
+
+- ZON-1789: Wrap liveblog article content
+
 
 1.29 (2015-06-12)
 -----------------
@@ -14,11 +21,15 @@ Change log for zeit.web
 
 - ZON-1613: Allow pagination for dynamic centerpages
 
+- FIX: Map old images to new teasers
+
 - FIX: Port spektrum and snapshot to 2015 centerpages
 
-- NFR: Move spektrum+social rss, search-form and ranking where they belong
-
 - FIX: vgwort pixel for web.site and web.magazin
+
+- FIX: Improve esi error handling
+
+- NFR: Move spektrum+social rss, search-form and ranking where they belong
 
 
 1.28 (2015-06-10)
