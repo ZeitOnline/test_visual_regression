@@ -376,7 +376,6 @@ def test_teaser_layout_for_series_should_be_adjusted_accordingly(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik')
     block = mock.Mock()
-    block.__parent__ = mock.Mock()
     block.layout.id = 'zon-small'
     block.__parent__ = mock.Mock()
     block.__parent__.kind = 'major'
