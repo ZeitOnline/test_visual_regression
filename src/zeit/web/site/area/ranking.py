@@ -52,6 +52,9 @@ class IResultsArea(zeit.content.cp.interfaces.IArea):
     sort_order = zope.schema.TextLine(
         title=u'Search result order', default=u'relevanz', required=False)
 
+    raw_query = zope.schema.Text(
+        title=u'Raw solr query', default=None, required=False)
+
     hits = zope.schema.Int(
         title=u'Search result count', default=None, required=False)
 
@@ -70,6 +73,9 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
 
     query = zeit.cms.content.property.ObjectPathProperty(
         '.query', IResultsArea['query'])
+
+    raw_query = zeit.cms.content.property.ObjectPathProperty(
+        '.raw_query', IResultsArea['raw_query'])
 
     _page = zeit.cms.content.property.ObjectPathProperty(
         '.page', IResultsArea['page'])

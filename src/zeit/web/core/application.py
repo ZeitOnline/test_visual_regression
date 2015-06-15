@@ -550,15 +550,15 @@ class TraversableCenterPage(dict):
 @grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
 @grokcore.component.adapter(
     zeit.content.dynamicfolder.interfaces.IRepositoryDynamicFolder, dict)
-class TraversableDynamic(dict):
+class TraversableDynamic(TraversableCenterPage):
 
     def __init__(self, context, tdict):
         try:
-            tdict['context'] = tdict['context'][tdict['view_name']]
+            tdict['context'] = context = tdict['context'][tdict['view_name']]
         except (IndexError, KeyError, TypeError):
             pass
         else:
             tdict['traversed'] += (tdict['view_name'],)
             tdict['view_name'] = ''
         finally:
-            super(TraversableDynamic, self).__init__(tdict)
+            super(TraversableDynamic, self).__init__(context, tdict)
