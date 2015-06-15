@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - FIX: vgwort pixel for web.site and web.magazin
 
+- ZON-1764: Styling for video single page
+
 
 1.28 (2015-06-10)
 -----------------
