@@ -1,13 +1,11 @@
 .article
 	&--video
-		+pie-clearfix
 		background-color: #33333A
 		color: $grey--light
 		margin: 0 (-$page-padding) // enforce full width background with padding
-		padding: 0 $page-padding // enforce full width background with padding
+		padding: 0 $page-padding remify(40px) $page-padding // enforce full width background with padding
 		+respond-min($break-tablet-min)
-			padding-top: remify(48px)
-
+			padding-top: remify(68px)
 
 .video-article
 	&-summary
@@ -23,7 +21,6 @@
 		color: $zon_mid_grey
 		font-size: remify(14px)
 		letter-spacing: $zon-letter-spacing-s
-		margin-bottom: remify(40px)
 
 		& > *
 			&:before
