@@ -5,10 +5,9 @@
 		color: $grey--light
 		margin: 0 (-$page-padding) // enforce full width background with padding
 		padding: 0 $page-padding // enforce full width background with padding
-		// Micro Clearfix Hack with "table" for "before" (http://nicolasgallagher.com/micro-clearfix-hack/)
-		&:before
-			content: ''
-			display: table
+		+respond-min($break-tablet-min)
+			padding-top: remify(48px)
+
 
 .video-article
 	&-summary
@@ -28,8 +27,7 @@
 
 		& > *
 			&:before
-				+inline-block(baseline)
-				content: " / "
+				content: "/"
 				color: $zon_mid_grey
 				margin: remify(0 8px)
 			&:first-child:before

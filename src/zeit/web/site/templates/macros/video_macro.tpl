@@ -8,11 +8,11 @@
 	brightcove_embed="default"
 	) %}
 
-<div class="video-article-player video-article-player--expanded">
+<div class="article__item article__item--wide video-player">
 
 	{% if iframe %}
 		<iframe
-			class="video-article-player__iframe"
+			class="video-player__iframe"
 			src='{{ brightcove_host }}/{{ brightcove_account }}/{{ brightcove_player }}_{{ brightcove_embed }}/index.html?videoId={{ video_id }}&wmode=transparent'
 			allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
 	{% else %}
@@ -21,7 +21,7 @@
 	        data-player="{{ brightcove_player }}"
 	        data-embed="{{ brightcove_embed }}"
 	        data-video-id="{{ video_id }}"
-	        class="video-js video-article-player__videotag"
+	        class="video-js video-player__videotag"
 	        controls></video>
 	    <script src="{{ brightcove_host }}/{{ brightcove_account }}/{{ brightcove_player }}_{{ brightcove_embed }}/index.min.js"></script>
 	{% endif %}

@@ -157,24 +157,24 @@ def test_video_page_should_embed_sharing_menu(testserver, testbrowser):
 def test_video_page_video_iframe_should_exist(testserver, testbrowser):
     browser = testbrowser(
         '{}/video/2015-01/4004256546001'.format(testserver.url))
-    assert len(browser.cssselect('.video-article-player__iframe')) > 0
+    assert len(browser.cssselect('.video-player__iframe')) > 0
 
 
-def test_video_page_video_should_play(selenium_driver, testserver):
+def test_video_page_video_should_exist(selenium_driver, testserver):
     video_id = '4004256546001'
 
     driver = selenium_driver
     driver.get('{}/video/2015-01/{}'.format(testserver.url, video_id))
 
     iframe = driver.find_element_by_css_selector(
-        '.video-article-player__iframe')
+        '.video-player__iframe')
     driver.switch_to.frame(iframe)
 
     try:
-        player = WebDriverWait(driver, 10).until(
+        player = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, '.video-js'))
         )
         assert player.get_attribute('data-video-id') == video_id
     except TimeoutException:
-        assert False, 'Video not visible within 10 seconds'
+        assert False, 'Video not visible within 20 seconds'
