@@ -394,6 +394,23 @@ def test_teaser_layout_for_empty_block_should_be_set_to_hide(application):
     assert teaser == 'hide'
 
 
+def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/feature/feature_longform')
+    block = mock.Mock()
+    block.layout.id = 'zon-square'
+    block.__parent__ = mock.Mock()
+    block.__parent__.kind = 'major'
+    block.__iter__ = lambda _: iter([article])
+    layout = zeit.web.core.template.get_layout(block)
+    assert layout == 'zon-square'
+
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    block.__iter__ = lambda _: iter([article])
+    layout = zeit.web.core.template.get_layout(block)
+    assert layout == 'zmo-square'
+
+
 def test_function_get_image_pattern_is_working_as_expected(application):
     # Existing formats
     teaser = zeit.web.core.template.get_image_pattern('zon-large', 'default')
