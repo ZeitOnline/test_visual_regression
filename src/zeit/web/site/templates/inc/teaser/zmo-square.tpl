@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/teaser/zon-square-graphic.tpl" -%}
+{%- extends "zeit.web.site:templates/inc/teaser/zon-square.tpl" -%}
 
 {% block teaser_modifier %}{{ self.layout() }}--zmo{% endblock %}
 
