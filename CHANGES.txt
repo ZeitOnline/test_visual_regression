@@ -4,7 +4,7 @@ Change log for zeit.web
 1.30.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- BUG-274: Use zon-square teaser for feature longform
 
 
 1.30.1 (2015-06-15)
