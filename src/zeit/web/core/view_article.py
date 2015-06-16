@@ -44,6 +44,11 @@ class Article(zeit.web.core.view.Content):
             raise pyramid.httpexceptions.HTTPNotFound()
 
     @zeit.web.reify
+    def main_image_block(self):
+        return zeit.web.core.block.IFrontendBlock(
+            self.context.main_image_block, None)
+
+    @zeit.web.reify
     def template(self):
         return IArticleTemplateSettings(self.context).template or 'default'
 
