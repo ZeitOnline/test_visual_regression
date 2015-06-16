@@ -14,7 +14,7 @@ $live-blog-indicator-diameter: 10px
     +clearfix
 
     &__label
-        background-color: $zon-red
+        background-color: $trout
         color: $white
         float: left
         font-size: em(13px)
@@ -22,8 +22,6 @@ $live-blog-indicator-diameter: 10px
         letter-spacing: $zon-letter-spacing-m
         text-transform: uppercase
         &:before
-            +animation(live-blog-indicator-animation 2s infinite)
-            +transition(background-color 250ms ease-in-out)
             background-color: $white
             border-radius: 50%
             content: ""
@@ -32,13 +30,14 @@ $live-blog-indicator-diameter: 10px
             margin-right: 5px
             width: $live-blog-indicator-diameter
 
-    &--closed &__label
-        background-color: $trout
+    &__label--live
+        background-color: $zon-red
         &:before
-            +animation(none)
+            +animation(live-blog-indicator-animation 2s infinite)
 
     &__label,
     &__meta
+        line-height: remify(20px)
         padding: remify(15px) $page-padding
 
     &__meta
@@ -46,7 +45,7 @@ $live-blog-indicator-diameter: 10px
         float: right
         font-size: em(14px)
         letter-spacing: $zon-letter-spacing-s
-        text-align: right
+        padding-left: 0
 
     &__meta-date,
     &__meta-divider
@@ -58,7 +57,7 @@ $live-blog-indicator-diameter: 10px
             padding: remify(15px 28px)
 
         &__meta
-            text-align: inherit
+            float: left
 
         &__meta-date,
         &__meta-divider
