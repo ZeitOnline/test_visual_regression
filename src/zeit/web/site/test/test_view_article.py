@@ -169,7 +169,7 @@ def test_article_obfuscated_source_without_date_print_published():
     content.year = 2011
     view = zeit.web.site.view_article.Article(content, mock.Mock())
     view.date_print_published = None
-    source = u'DIE ZEIT N\u00B0\u00A01/2011'
+    source = u'DIE ZEIT Nr.\u00A01/2011'
     assert view.obfuscated_source == base64.b64encode(source.encode('latin-1'))
 
 
