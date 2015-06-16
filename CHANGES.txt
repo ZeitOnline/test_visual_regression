@@ -4,6 +4,8 @@ Change log for zeit.web
 1.33 (unreleased)
 -----------------
 
+- ZON-1790: Get liveblog metadata through ReSTful API
+
 - ZON-1735: Change label for print source volume number
 
 - BUG-274: Use zon-square teaser for feature longform
