@@ -47,6 +47,8 @@ Change log for zeit.web
 
 - NFR: Move spektrum+social rss, search-form and ranking where they belong
 
+- ZON-1764: Styling for video single page
+
 
 1.28 (2015-06-10)
 -----------------
