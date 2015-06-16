@@ -17,10 +17,14 @@ class Centerpage(zeit.web.core.view.Base):
         self.context.advertising_enabled = self.banner_on
 
     def __iter__(self):
-        for teaser in zeit.content.cp.interfaces.ITeaseredContent(
-                self.context, iter([])):
-            if zeit.web.core.view.known_content(teaser):
-                yield teaser
+        for region in self.context.values():
+            for area in region.values():
+                for block in area.values():
+                    if not hasattr(block, '__iter__'):
+                        continue
+                    for teaser in block:
+                        if zeit.web.core.view.known_content(teaser):
+                            yield teaser
 
     @zeit.web.reify
     def is_hp(self):
