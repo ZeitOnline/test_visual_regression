@@ -1,31 +1,33 @@
-.article
-	&--video
-		background-color: #33333A
-		color: $grey--light
-		margin: 0 (-$page-padding) // enforce full width background with padding
-		padding: 0 $page-padding remify(40px) $page-padding // enforce full width background with padding
-		+respond-min($break-tablet-min)
-			padding-top: remify(68px)
+.article--video
+	background-color: #33333A
+	color: $grey--light
+	margin: 0 (-$page-padding) // enforce full width background with padding
+	padding: 0 $page-padding remify(40px) $page-padding // enforce full width background with padding
+	+respond-min($break-tablet-min)
+		padding-top: remify(68px)
 
-.video-article
-	&-summary
+	.article-heading
+		&__kicker
+			color: $zon_mid_grey
+		&__title
+			color: $zon_lighter_grey
+
+	.summary
 		color: $zon_light_grey
-		font-size: remify(18px)
-		line-height: 1.4
-		margin-bottom: remify($petite--px)
-		+respond-min($break-tablet-min)
-			line-height: 1.5
-		+respond-min($break-desktop-min)
-			font-size: remify(20px)
-	&-metadata
+
+	.metadata
 		color: $zon_mid_grey
-		font-size: remify(14px)
-		letter-spacing: $zon-letter-spacing-s
+		margin-bottom: 0
+
+		&__link
+			color: inherit
+			white-space: nowrap
+			+on-interaction
+				color: $zon_light_grey
 
 		& > *
-			&:before
+			&:after
 				content: "/"
-				color: $zon_mid_grey
 				margin: remify(0 8px)
-			&:first-child:before
+			&:last-child:after
 				content: none
