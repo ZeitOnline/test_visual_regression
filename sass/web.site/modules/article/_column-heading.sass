@@ -1,6 +1,7 @@
 .column-heading
 	margin-left: -$page-padding
 	margin-right: -$page-padding
+	padding-bottom: remify(40px)
 
 	// general colour and positioning
 	&__upper
@@ -9,10 +10,9 @@
 
 	&__lower
 		background-color: $cararra
-		padding: $medium $page-padding
+		padding: remify(36px) $page-padding
 		+respond-min($break-phablet-min)
-			padding-top: $big
-			padding-bottom: $big
+			padding: remify(48px 36px)
 
 	&__inner
 		position: relative
@@ -25,13 +25,13 @@
 
 	&__information
 		+font-smoothing
-		padding: em(10px) 0 em(50px)
+		padding: remify(10px 0 50px 0)
 		vertical-align: middle
 		+respond-max($break-phablet-min)
 			position: relative
 			z-index: 1
 		+respond-min($break-phablet-min)
-			padding: em(30px) 0 em(40px)
+			padding: remify(30px 0 40px 0)
 			width: 65%
 		+respond-min($break-tablet-min)
 			width: 70%
@@ -68,8 +68,8 @@
 		display: block
 		color: $charcoal
 		letter-spacing: $zon-letter-spacing-m
-		margin-bottom: em(3px)
-		font-size: $font-m--rem
+		margin-bottom: reimfy(3px)
+		font-size: remify(16px)
 
 	&__title
 		display: block
@@ -81,7 +81,7 @@
 		+respond-min($break-phablet-min)
 			max-width: remify(550px)
 		+respond-min($break-tablet-min)
-			margin-top: remify(0em)
+			margin-top: 0
 			margin-bottom: remify(-3px)
 			max-width: auto
 			font-size: remify(32px)
