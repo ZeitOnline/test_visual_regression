@@ -72,12 +72,11 @@ class JsonUpdateTimeView(zeit.web.core.view.Base):
 
 
 def get_last_published_semantic(context):
-    date = zeit.cms.workflow.interfaces.IPublishInfo(
+    return zeit.cms.workflow.interfaces.IPublishInfo(
         context).date_last_published_semantic
-    return date
 
 
 def form_date(date):
     tz = babel.dates.get_timezone('Europe/Berlin')
-    if date and not (not date):
+    if date:
         return date.astimezone(tz)
