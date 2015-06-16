@@ -555,7 +555,7 @@ class Content(Base):
 
     @zeit.web.reify
     def show_commentthread(self):
-        return self.context.commentSectionEnable != False
+        return self.context.commentSectionEnable is not False
 
 
 @pyramid.view.view_config(route_name='health_check')
