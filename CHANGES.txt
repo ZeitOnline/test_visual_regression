@@ -4,7 +4,7 @@ Change log for zeit.web
 1.33 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1840: Register buzz modules to be available on new centerpages
 
 
 1.32 (2015-06-16)
