@@ -93,6 +93,7 @@
         title="Großer Teaser mit Bild und Teaserliste"
         image_pattern="540x304"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="leader-two-columns"
@@ -100,29 +101,34 @@
         image_pattern="540x304"
         areas="solo duo major minor ranking parquet"
         columns="2"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="leader-fullwidth"
         title="Vollbreiter Aufmacher"
         image_pattern="940x400"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="text-teaser"
         title="Teaser ohne Bild"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="archive-print-volume"
         title="Ausgabenteaser im Printarchiv"
         image_pattern="184x84"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="archive-print-year"
         title="Jahresteaser im Printarchiv"
         image_pattern="184x84"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="buttons"
@@ -130,18 +136,21 @@
         image_pattern="148x84"
         areas="solo duo major minor ranking parquet"
         default="major"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="buttons-fullwidth"
         title="Vollbreiter Teaser mit mittlerem Bild und Teaserliste"
         image_pattern="540x304"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="two-side-by-side"
         title="Zwei kleine Teaser mit Bild"
         image_pattern="175x99"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="large"
@@ -149,6 +158,7 @@
         image_pattern="368x220"
         areas="solo duo major minor ranking parquet"
         default="true"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="ressort"
@@ -156,16 +166,19 @@
         image_pattern="220x124"
         areas="solo duo major minor ranking parquet"
         default="true"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="short"
         title="Kurzteaser"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="date"
         title="Datumsteaser"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="parquet-regular"
@@ -173,6 +186,7 @@
         image_positions="true"
         areas="solo duo major minor ranking parquet"
         default="solo"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="parquet-large"
@@ -180,6 +194,7 @@
         image_pattern="540x304"
         image_positions="true"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="parquet-verlag"
@@ -187,6 +202,7 @@
         image_pattern="220x124"
         image_positions="true"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="parquet-printteaser"
@@ -194,12 +210,14 @@
         image_pattern="220x124"
         image_positions="true"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
         id="hamburg-buttons"
         title="Hamburgseiten: 'Knöpfe' mit kleinem Bild und Werbung rechts"
         image_pattern="148x84"
         areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
         />
 
 

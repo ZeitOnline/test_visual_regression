@@ -513,7 +513,7 @@ class Content(Base):
 
     @zeit.web.reify
     def issue_format(self):
-        return u' N\u00B0\u00A0{}/{}'
+        return u' Nr.\u00A0{}/{}'
 
     @zeit.web.reify
     def last_modified_wording(self):
