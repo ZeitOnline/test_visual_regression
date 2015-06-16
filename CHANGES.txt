@@ -4,7 +4,8 @@ Change log for zeit.web
 1.32 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- DEV-820: Mark ICMSContent with ``IInternalUse``, so Source entries can be
+  ``available`` only for zeit.web, but not vivi.
 
 
 1.31 (2015-06-16)
