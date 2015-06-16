@@ -183,6 +183,8 @@ class Liveblog(object):
                 date_format = '%d.%m.%y %H:%M'
                 if '/' in content['PublishedOn']:
                     date_format = '%m/%d/%y %I:%M %p'
+                elif '-' in content['PublishedOn']:
+                    date_format = '%Y-%m-%dT%H:%M:%SZ'
                 self.last_modified = datetime.datetime.strptime(
                     content['PublishedOn'], date_format).replace(
                         tzinfo=utc).astimezone(tz)
