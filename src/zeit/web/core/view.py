@@ -513,7 +513,7 @@ class Content(Base):
 
     @zeit.web.reify
     def issue_format(self):
-        return u' N\u00B0\u00A0{}/{}'
+        return u' Nr.\u00A0{}/{}'
 
     @zeit.web.reify
     def last_modified_wording(self):
@@ -554,7 +554,7 @@ class Content(Base):
 
     @zeit.web.reify
     def show_commentthread(self):
-        return self.context.commentSectionEnable
+        return self.context.commentSectionEnable is not False
 
 
 @pyramid.view.view_config(route_name='health_check')

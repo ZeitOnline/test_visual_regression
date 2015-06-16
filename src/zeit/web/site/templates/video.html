@@ -1,44 +1,39 @@
 {% extends "zeit.web.site:templates/content.html" %}
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
 {% block content %}
-    <div class="video-stage-main" itemtype="http://schema.org/VideoObject" itemscope>
+    <article class="article article--video" itemtype="http://schema.org/VideoObject" itemscope>
+
         <meta itemprop="playerType" content="HTML5 Flash">
-        <meta itemprop="duration" content="{{ view.iso_duration }}">
+        {% if view.iso_duration %}
+            <meta itemprop="duration" content="{{ view.iso_duration }}">
+        {% endif %}
         <meta itemprop="thumbnail" content="{{ view.video_still | default_image_url }}">
-        <meta itemprop="width" content="{{ view.frame_width }}">
-        <article data-video-id="{{ view.context.__name__ }}">
-            {% with image = view.video_still %}
-                {% include "zeit.web.site:templates/inc/teaser_asset/image_videostage.tpl" %}
-            {% endwith %}
-            <div>
-                {{ lama.playbutton('block', view.duration) }}
 
-                <h1 itemprop="headline">
-                    <span>{{ view.supertitle | hide_none }}</span>
-                    <span>{{ view.title | hide_none }}</span>
-                </h1>
+        {{ vima.brightcove_video_tag(view.context.__name__, iframe=True, expanded=True) }}
 
-                <div itemprop="description">
-                    {{ view.subtitle | hide_none }}
-                </div>
+        {{ self.schema_org_image_info() }}
+        {{ self.article_heading() }}
 
-                <div>
-                    <span class="modified-date">
-                        {{ view.date_last_modified | format_date('regular') }}
-                    </span>
-                    /
-                    {% if view.comments and view.comments.comment_count %}
-                        <span class="comment-count" itemprop="commentCount">{{ view.comments.headline }}</span>
-                    {% else %}
-                        <span class="comment-count">Noch keine Kommentare.</span>
-                        <meta itemprop="commentCount" content="0">
-                    {% endif %}
-                    /
-                    {# TODO: Insert article sharing menu here. #}
-                    <a href="#">Teilen</a>
-                </div>
+        <div class="article__item">
+            <div class="summary" itemprop="description">
+                {{ view.subtitle | hide_none }}
             </div>
-        </article>
-    </div>
+            <div class="metadata">
+                {% include "zeit.web.site:templates/inc/article/metadata.tpl" %}
+
+                {% if view.comments %}
+                    <span><a href="#comments" class="metadata__link">{{ view.comments.headline }}</a></span>
+                {% endif %}
+
+                <div class="sharing-menu sharing-menu--video">
+                    <span class="sharing-menu__title metadata__link js-sharing-menu">Teilen</span>
+                    {% include "zeit.web.site:templates/inc/article/sharing-menu-items.tpl" %}
+                </div>
+
+            </div>
+        </div>
+
+    </article>
 {% endblock %}

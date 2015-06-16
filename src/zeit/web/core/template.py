@@ -163,6 +163,12 @@ def get_layout(block, request=None):
         elif False:
             # XXX What about placeholder containers?
             layout = 'hide'
+        elif layout == 'zon-square':
+            # ToDo: Remove when Longform will be generally used on www.zeit.de
+            if urlparse.urlparse(teaser.uniqueId).path.startswith('/feature/'):
+                layout = layout
+            elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
+                layout = 'zmo-square'
         elif getattr(teaser, 'serie', None):
             if allowed('zon-series'):
                 layout = 'zon-series'
@@ -202,13 +208,8 @@ def replace_list_seperator(scsv, seperator):
 
 
 @zeit.web.register_filter
-def is_zmo(teaser):
-    return zeit.magazin.interfaces.IZMOContent.providedBy(teaser)
-
-
-@zeit.web.register_filter
-def is_gallery(teaser):
-    return zeit.content.gallery.interfaces.IGallery.providedBy(teaser)
+def is_gallery(context):
+    return zeit.content.gallery.interfaces.IGallery.providedBy(context)
 
 
 # definition of default images sizes per layout context

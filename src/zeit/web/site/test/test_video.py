@@ -9,6 +9,11 @@ import zeit.content.image.interfaces
 import zeit.web.core.centerpage
 import zeit.web.site.view_video
 
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC  # NOQA
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 def test_video_imagegroup_should_adapt_videos(application):
     video = zeit.cms.interfaces.ICMSContent(
@@ -94,25 +99,13 @@ def test_video_page_should_feature_schema_org_props(testserver, testbrowser):
     assert doc.xpath('//meta[@itemprop="duration" and @content="PT436S"]')
 
 
-def test_video_page_should_annotate_video_id(testserver, testbrowser):
-    doc = testbrowser(
-        '{}/video/2015-01/4004256546001'.format(testserver.url)).document
-    assert doc.xpath('//article[@data-video-id="4004256546001"]')
-
-
-def test_video_page_should_designate_video_duration(testserver, testbrowser):
-    doc = testbrowser(
-        '{}/video/2015-01/4004256546001'.format(testserver.url)).document
-    assert '7 Minuten' == doc.xpath(
-        '//span[@class="video-text-playbutton__duration"]/text()')[0]
-
-
 def test_video_page_should_print_out_video_headline(testserver, testbrowser):
     doc = testbrowser(
         '{}/video/2015-01/4004256546001'.format(testserver.url)).document
     assert [u'Künstliche Intelligenz',
-            u'Roboter Myon übernimmt Opernrolle'] == doc.xpath(
-                '//h1[@itemprop="headline"]/span/text()')
+            u': ',
+            u'Roboter Myon übernimmt Opernrolle'
+            ] == doc.xpath('//h1[@itemprop="headline"]/span/text()')
 
 
 def test_video_page_should_render_video_description(testserver, testbrowser):
@@ -126,24 +119,26 @@ def test_video_page_should_display_modified_date(testserver, testbrowser):
     doc = testbrowser(
         '{}/video/2015-01/4004256546001'.format(testserver.url)).document
     assert '22. Januar 2015, 10:27' in doc.xpath(
-        '//span[@class="modified-date"]/text()')[0]
+        '//time[@datetime]/text()')[0]
 
 
+@pytest.mark.xfail(reason='Comment module is to be included on video pages.')
 def test_video_page_should_output_zero_comment_count(testserver, testbrowser):
     doc = testbrowser(
         '{}/video/2015-01/4004256546001'.format(testserver.url)).document
     assert 'Noch keine Kommentare.' in doc.xpath(
-        '//span[@class="comment-count"]/text()')[0]
+        '//span[@itemprop="commentCount"]/text()')[0]
     assert doc.xpath('//meta[@itemprop="commentCount" and @content="0"]')
 
 
+@pytest.mark.xfail(reason='Comment module is to be included on video pages.')
 def test_video_page_should_output_comment_count_number(
         testserver, testbrowser, monkeypatch):
     attr = {'comment_count': 7, 'pages': {'title', 'meh'}, 'headline': 'bar'}
     monkeypatch.setattr(zeit.web.site.view_video.Video, 'comments', attr)
     doc = testbrowser(
         '{}/video/2015-01/4004256546001'.format(testserver.url)).document
-    assert 'bar' in doc.xpath('//span[@class="comment-count"]/text()')[0]
+    assert 'bar' in doc.xpath('//span[@itemprop="commentCount"]/text()')[0]
 
 
 def test_video_page_should_include_comment_section(testserver, testbrowser):
@@ -152,7 +147,34 @@ def test_video_page_should_include_comment_section(testserver, testbrowser):
     assert doc.xpath('//section[@class="comment-section" and @id="comments"]')
 
 
-@pytest.mark.xfail(reason='Feature not yet implemented.')
 def test_video_page_should_embed_sharing_menu(testserver, testbrowser):
-    testbrowser('{}/video/2015-01/4004256546001'.format(testserver.url))
-    raise NotImplementedError()
+    browser = testbrowser(
+        '{}/video/2015-01/4004256546001'.format(testserver.url))
+    assert len(browser.cssselect('.sharing-menu .sharing-menu__title')) > 0
+    assert len(browser.cssselect('.sharing-menu a.sharing-menu__link')) > 0
+
+
+def test_video_page_video_iframe_should_exist(testserver, testbrowser):
+    browser = testbrowser(
+        '{}/video/2015-01/4004256546001'.format(testserver.url))
+    assert len(browser.cssselect('.video-player__iframe')) > 0
+
+
+def test_video_page_video_should_exist(selenium_driver, testserver):
+    video_id = '4004256546001'
+
+    driver = selenium_driver
+    driver.get('{}/video/2015-01/{}'.format(testserver.url, video_id))
+
+    iframe = driver.find_element_by_css_selector(
+        '.video-player__iframe')
+    driver.switch_to.frame(iframe)
+
+    try:
+        player = WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, '.video-js'))
+        )
+        assert player.get_attribute('data-video-id') == video_id
+    except TimeoutException:
+        assert False, 'Video not visible within 20 seconds'
