@@ -171,7 +171,11 @@
                     </block>
                 </container>
             </region>
-            <region area="id-6dd22838-9f14-4294-a96d-3e2fa1a7bc91" visible="True" kind="minor"/>
+            <region area="id-6dd22838-9f14-4294-a96d-3e2fa1a7bc91" visible="True" kind="minor">
+                <container cp:__name__="id-bc912838-9f14-4294-a96d-3e2fa1a76dd2" cp:type="cpextra" module="mostread" visible="True">
+                    <cp_extra for="zeit.content.cp.interfaces.IArea" id="mostread" />
+                </container>
+            </region>
         </cluster>
         <cluster visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f">
             <region visible="True" area="id-c8a4bedc-5721-412f-994f-c55fb03955d2" kind="duo">
