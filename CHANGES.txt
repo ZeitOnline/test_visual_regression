@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.32 (unreleased)
+1.32 (2015-06-16)
 -----------------
 
 - DEV-820: Mark ICMSContent with ``IInternalUse``, so Source entries can be
