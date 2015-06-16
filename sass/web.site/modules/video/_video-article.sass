@@ -31,3 +31,28 @@
 				margin: remify(0 8px)
 			&:last-child:after
 				content: none
+
+	// TODO: laut Screendesign soll die Werbung auch auf Tablet neben dem Text stehen. Also muss anders umgebrochen werden.
+
+	// TODO: bgcolor als Konstante hinterlegen? Mittlerweile häufig genutzt.
+	// TODO: Clearfix für Skyscraper-Werbung.
+	.ad--tile_7,
+	.ad--tile_8,
+	.ad--tile_9,
+	.ad--tile_10,
+	.ad--tile_11
+		background-color: #33333A
+
+		// sometimes, ads have transparency and rely on a white background
+		iframe
+			background-color: $white
+
+	// TODO: this is mist
+	// TODO: unify with tile 8-11 ?
+	.ad--tile_7-on-article
+		+respond_min($break-desktop-min)
+			border-left: 1px $zon_grey solid
+			margin-left: remify(24px)
+			padding-left: remify(18px)
+			max-width: 318px
+			width: 318px
