@@ -1,11 +1,14 @@
+// enable video iframes to be full-width inside the article
+// (solution copied from ZMO zeit.web/sass/web.magazin/modules/_video.sass).
+// This is used for video stages ("Videoriegel" on home page) and video single pages.
 .video-player
 	position: relative
-	width: 100%
 	&:after
 		content: ''
 		display: block
 		padding-top: 56.25%
-	&__iframe
+	&__iframe,
+	&__videotag
 		border: none
 		bottom: 0
 		height: 100%
@@ -14,4 +17,6 @@
 		right: 0
 		top: 0
 		width: 100%
-		z-index: 5
+
+.article--video .article__item--wide.video-player
+	margin-top: 0

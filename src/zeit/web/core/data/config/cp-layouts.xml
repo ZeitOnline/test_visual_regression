@@ -66,6 +66,7 @@
     <layout
         id="zon-column"
         title="Kolumnenteaser"
+        image_pattern="zon-thumbnail"
         image_positions="true"
         areas="major minor"
         />
@@ -73,6 +74,7 @@
     <layout
         id="zon-blog"
         title="Blogteaser"
+        image_pattern="zon-thumbnail"
         image_positions="true"
         areas="major minor"
         />
@@ -80,6 +82,7 @@
     <layout
         id="zon-series"
         title="Serienteaser"
+        image_pattern="zon-thumbnail"
         image_positions="true"
         areas="major minor"
         />

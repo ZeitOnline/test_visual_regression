@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - BUG-274: Use zon-square teaser for feature longform
 
+- ZON-1764: Styling for video single page
+
 
 1.30.1 (2015-06-15)
 -------------------
