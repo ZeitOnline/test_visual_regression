@@ -1,8 +1,23 @@
 Change log for zeit.web
 =======================
 
-1.30.2 (unreleased)
--------------------
+1.33 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.32 (2015-06-16)
+-----------------
+
+- DEV-820: Mark ICMSContent with ``IInternalUse``, so Source entries can be
+  ``available`` only for zeit.web, but not vivi.
+
+
+1.31 (2015-06-16)
+-----------------
+
+- HOTFIX: Set link to /beta. beta/index is nor our Beta-URL.
 
 - ZON-1735: Change label for print source volume number
 
