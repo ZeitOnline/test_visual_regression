@@ -76,4 +76,21 @@ class ColumnArticle(Article):
 @view_config(context=zeit.web.core.article.ILiveblogArticle,
              renderer='templates/liveblog.html')
 class LiveblogArticle(Article):
-    pass
+
+    def __init__(self, *args, **kwargs):
+        super(LiveblogArticle, self).__init__(*args, **kwargs)
+        self.liveblog_last_modified = self.date_last_modified
+        self.liveblog_is_live = False
+        for page in self.pages:
+            for block in page.blocks:
+                if isinstance(block, zeit.web.core.block.Liveblog):
+                    self.liveblog_is_live = block.is_live
+                    if block.last_modified:
+                        self.liveblog_last_modified = block.last_modified
+                    # break the inner loop
+                    break
+            else:
+                # continue if the inner loop wasn't broken
+                continue
+            # inner loop was broken, break the outer
+            break

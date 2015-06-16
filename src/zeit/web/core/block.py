@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
+import datetime
+import json
 import logging
 import os.path
 
+import babel.dates
 import grokcore.component
 import lxml.etree
 import lxml.html
+import requests
 import urlparse
 import zope.interface
 import zope.interface.declarations
@@ -152,6 +156,73 @@ class Liveblog(object):
 
     def __init__(self, model_block):
         self.blog_id = model_block.blog_id
+        self.is_live = False
+        self.last_modified = None
+        self.id = None
+        self.seo_id = None
+
+        try:
+            self.id, self.seo_id = model_block.blog_id.split('-')[:2]
+        except ValueError:
+            self.id = self.blog_id
+
+        url = 'http://www.zeit.de/liveblog-status/{}/Post/Published'
+        content = self.getReSTful(url.format(self.id))
+
+        if content and len(content['PostList']):
+            last_post_url = content['PostList'][0]['href']
+
+        if last_post_url:
+            url = 'http:{}'.format(last_post_url).replace(
+                'zeit.superdesk.pro/resources/LiveDesk/Blog',
+                'www.zeit.de/liveblog-status', 1)
+            content = self.getReSTful(url)
+            if content:
+                tz = babel.dates.get_timezone('Europe/Berlin')
+                utc = babel.dates.get_timezone('UTC')
+                date_format = '%d.%m.%y %H:%M'
+                if '/' in content['PublishedOn']:
+                    date_format = '%m/%d/%y %I:%M %p'
+                self.last_modified = datetime.datetime.strptime(
+                    content['PublishedOn'], date_format).replace(
+                        tzinfo=utc).astimezone(tz)
+                delta = self.last_modified - datetime.datetime.now(
+                    self.last_modified.tzinfo)
+                if delta.days == 0:
+                    self.is_live = True
+
+        # only needed for beta testing with liveblog embed code
+        # ToDo: remove after finished relaunch
+        self.theme = self.getTheme()
+
+    def getReSTful(self, url):
+        response = requests.get(url)
+        if response.status_code >= 200 and response.status_code < 300:
+            if response.content:
+                return json.loads(response.content)
+
+    def getTheme(self):
+        if self.seo_id is None:
+            url = 'http://www.zeit.de/liveblog-status/{}/Seo'
+            content = self.getReSTful(url.format(self.id))
+            if content and len(content['SeoList']):
+                href = content['SeoList'][0]['href']
+        else:
+            href = '//zeit.superdesk.pro/resources/LiveDesk/Seo/{}'.format(
+                self.seo_id)
+
+        if href:
+            content = self.getReSTful('http:' + href)
+            if content and content['BlogTheme']:
+                blog_theme_id = int(content['BlogTheme']['Id'])
+
+        # ToDo: return new theme names
+        # 23 = zeit      => zeit-online
+        # 24 = zeit-solo => zeit-online-solo
+        if blog_theme_id == 24:
+            return 'zeit-solo'
+
+        return 'zeit'
 
 
 class BaseImage(object):
