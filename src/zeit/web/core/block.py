@@ -591,6 +591,9 @@ class Module(object):
             '{http://namespaces.zeit.de/CMS/cp}__name__',
             super(Module, self)).__hash__()
 
+    def __repr__(self):
+        return object.__repr__(self)
+
     @property
     def layout(self):
         return getattr(self, '_layout', None)
