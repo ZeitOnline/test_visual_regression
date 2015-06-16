@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.30.2 (unreleased)
--------------------
+1.31 (2015-06-16)
+-----------------
 
 - HOTFIX: Set link to /beta. beta/index is nor our Beta-URL.
 
