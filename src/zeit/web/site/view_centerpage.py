@@ -147,11 +147,7 @@ class Centerpage(
         :rtype: str
         """
 
-        if self.is_hp:
-            return 'homepage'
-        elif self.context.ressort:
-            return self.context.ressort.lower()
-        return ''
+        return zeit.web.core.centerpage.get_ressort_id(self.context)
 
     @zeit.web.reify
     def region_snapshot(self):
