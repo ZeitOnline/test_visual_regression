@@ -64,6 +64,11 @@ def format_date(obj, type='short'):
             return obj.replace(microsecond=0).isoformat()
         except AttributeError:
             return
+    elif type == 'timedelta':
+        delta = obj - datetime.datetime.now(obj.tzinfo)
+        text = babel.dates.format_timedelta(delta, threshold=1,
+                                            add_direction=True, locale="de_De")
+        return text[:1].lower() + text[1:] if text else ''
     return babel.dates.format_datetime(obj, formats[type], locale="de_De")
 
 
