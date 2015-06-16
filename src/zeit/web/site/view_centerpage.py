@@ -252,26 +252,6 @@ class LegacyCenterpage(Centerpage):
         return module
 
     @zeit.web.reify
-    def module_buzz_comments(self):
-        """Return buzz box module with the top 3 most commented articles."""
-
-        module = LegacyModule(
-            zeit.web.core.reach.fetch('comments', self.ressort, limit=3),
-            layout='buzz-comments')
-        module.header = 'Meistkommentiert'
-        return module
-
-    @zeit.web.reify
-    def module_buzz_facebook(self):
-        """Return buzz box module with the top 3 most shared articles."""
-
-        module = LegacyModule(
-            zeit.web.core.reach.fetch('facebook', self.ressort, limit=3),
-            layout='buzz-facebook')
-        module.header = 'Meistgeteilt'
-        return module
-
-    @zeit.web.reify
     def module_printbox(self):
         """Return the module block for the Printbox or Angebotsbox."""
 
