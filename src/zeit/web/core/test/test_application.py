@@ -10,7 +10,9 @@ import pytest
 import requests
 
 import zeit.content.cp.interfaces
+import zeit.cms.interfaces
 import zeit.web.core.application
+import zeit.web.core.interfaces
 
 
 @pytest.fixture
@@ -150,3 +152,8 @@ def test_vgwort_pixel_should_be_present(testserver, testbrowser):
     select = testbrowser('{}/index'.format(
         testserver.url)).cssselect
     assert len(select('body img#vgwort_pixel')) == 0
+
+
+def test_content_should_have_marker_interface(application):
+    content = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    assert zeit.web.core.interfaces.IInternalUse.providedBy(content)
