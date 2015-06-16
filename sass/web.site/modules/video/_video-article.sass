@@ -36,23 +36,20 @@
 
 	// TODO: bgcolor als Konstante hinterlegen? Mittlerweile häufig genutzt.
 	// TODO: Clearfix für Skyscraper-Werbung.
-	.ad--tile_7,
-	.ad--tile_8,
-	.ad--tile_9,
-	.ad--tile_10,
-	.ad--tile_11
+	.ad--tile_7
 		background-color: #33333A
 
 		// sometimes, ads have transparency and rely on a white background
 		iframe
 			background-color: $white
 
-	// TODO: this is mist
-	// TODO: unify with tile 8-11 ?
-	.ad--tile_7-on-article
-		+respond_min($break-desktop-min)
-			border-left: 1px $zon_grey solid
-			margin-left: remify(24px)
-			padding-left: remify(18px)
-			max-width: 318px
-			width: 318px
+// when on video single pages, the should be side-by-side with text on tablets
++respond_min($break-tablet-min)
+	.article--video .ad--tile_7
+		border-left: 1px $zon_grey solid
+		float: right
+		margin-left: remify(24px)
+		padding-left: remify(18px)
+		padding-bottom: remify(18px)
+		max-width: 318px
+		width: 318px
