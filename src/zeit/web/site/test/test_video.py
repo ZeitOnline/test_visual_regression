@@ -15,6 +15,15 @@ from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait
 
 
+def is_adcontrolled(contents):
+    return 'data-adDeliveryType="adcontroller"' in contents
+
+
+# use this to enable third_party_modules
+def tpm(me):
+    return True
+
+
 def test_video_imagegroup_should_adapt_videos(application):
     video = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/video/2015-01/4004256546001')
@@ -178,3 +187,53 @@ def test_video_page_video_should_exist(selenium_driver, testserver):
         assert player.get_attribute('data-video-id') == video_id
     except TimeoutException:
         assert False, 'Video not visible within 20 seconds'
+
+
+def test_video_page_adcontroller_code_is_embedded(
+        testserver, testbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+    browser = testbrowser(
+        '{}/video/2015-01/4004256546001'.format(testserver.url))
+    assert len(browser.cssselect('.ad.ad--tile_7')) > 0
+    assert 'AdController.render(\'iqadtile7\');' in browser.contents
+
+
+def test_video_page_adcontroller_js_var_isset(
+        selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+    driver = selenium_driver
+    driver.get('{}/video/2015-01/4004256546001'.format(testserver.url))
+    try:
+        selector = 'body[data-adDeliveryType="adcontroller"]'
+        driver.find_element_by_css_selector(selector)
+    except:
+        pytest.skip("not applicable due to oldschool ad configuration")
+
+    adctrl = driver.execute_script("return typeof window.AdController")
+    assert adctrl == "object"
+
+
+# TODO: iFrame (?) wird eingebunden auf großen Bildschirmen
+# TODO: iFrame (?) wird nicht eingebunden auf kleinen Bildschirmen
+# => Wobei, beide Tests gehören eher nach banner.py.
+#    Wenn wir hier den JS Code und Wrapper haben und der andere Test für
+#    Artikel-Banner läuft, können wir davon ausgehen dass er überall
+#    funktioniert !?
+
+@pytest.mark.xfail(reason='Why dont the ads get loaded in test browser???')
+def test_video_page_adcontroller_content_gets_included(
+        selenium_driver, testserver, monkeypatch):
+
+    driver = selenium_driver
+    driver.get('{}/video/2015-01/4004256546001'.format(testserver.url))
+
+    try:
+        iframe = WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, 'ad__inner iframe'))
+        )
+        assert ('google_ads_iframe_' in iframe.get_attribute('id')) is True
+    except TimeoutException:
+        assert False, 'Iframe not found within 20 seconds'

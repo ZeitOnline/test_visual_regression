@@ -1,11 +1,13 @@
 .article--video
 	// needs a clearfix hack, in case the floating ad--tile is higher than the content
 	+pie-clearfix
-	background-color: #33333A
+	background-color: $color-video-background
 	color: $grey--light
 	margin: 0 (-$page-padding) // enforce full width background with padding
 	padding: 0 $page-padding remify(40px) $page-padding // enforce full width background with padding
 	+respond-min($break-tablet-min)
+		padding-top: remify(48px)
+	+respond-min($break-desktop-min)
 		padding-top: remify(68px)
 
 	.article-heading
@@ -34,26 +36,31 @@
 			&:last-child:after
 				content: none
 
-
-	// TODO: bgcolor als Konstante hinterlegen? Mittlerweile häufig genutzt.
 	.ad--tile_7
-		background-color: #33333A
+		background-color: $color-video-background
+
+		+respond_min($break-tablet-min)
+			border-left: 1px $zon_grey solid
+			float: right
+			margin-left: remify(24px)
+			padding-left: remify(18px)
+			padding-bottom: remify(18px)
+			max-width: 318px
+			width: 318px
+
 
 		// sometimes, ads have transparency and rely on a white background
 		iframe
 			background-color: $white
 
-// when on video single pages, the should be side-by-side with text on tablets.
-// (in articles, tablets display the ad as block element)
-+respond_min($break-tablet-min)
-	.article--video .ad--tile_7
-		border-left: 1px $zon_grey solid
-		float: right
-		margin-left: remify(24px)
-		padding-left: remify(18px)
-		padding-bottom: remify(18px)
-		max-width: 318px
-		width: 318px
+// article__item inside article--video behave like the video (same width as
+// video), except on small screens, where we want to preserve the default
+// padding of the container. So we use the max-width definition of
+// .article__item--wide.
++respond-min($break-tablet-min)
+	.article--video .article__item
+		max-width: remify(660px)
 
-// TODO: margin-right müsste sich mit dem article__item gleich laufen.
-// Tut es aber noch nicht auf Tablet-Größe.
++respond-min($break-desktop-min)
+	.article--video .article__item
+		max-width: remify(820px)
