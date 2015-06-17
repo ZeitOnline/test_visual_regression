@@ -1,6 +1,6 @@
-import pytest
-import zeit.web.site.view
 import mock
+
+import zeit.web.site.view
 
 
 def test_login_state_view_should_deliver_correct_destination():

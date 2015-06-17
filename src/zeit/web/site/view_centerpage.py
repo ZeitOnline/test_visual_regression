@@ -147,11 +147,7 @@ class Centerpage(
         :rtype: str
         """
 
-        if self.is_hp:
-            return 'homepage'
-        elif self.context.ressort:
-            return self.context.ressort.lower()
-        return ''
+        return zeit.web.core.centerpage.get_ressort_id(self.context)
 
     @zeit.web.reify
     def region_snapshot(self):
@@ -253,26 +249,6 @@ class LegacyCenterpage(Centerpage):
             zeit.web.core.reach.fetch('mostread', self.ressort, limit=3),
             layout='buzz-mostread')
         module.header = 'Meistgelesene Artikel'
-        return module
-
-    @zeit.web.reify
-    def module_buzz_comments(self):
-        """Return buzz box module with the top 3 most commented articles."""
-
-        module = LegacyModule(
-            zeit.web.core.reach.fetch('comments', self.ressort, limit=3),
-            layout='buzz-comments')
-        module.header = 'Meistkommentiert'
-        return module
-
-    @zeit.web.reify
-    def module_buzz_facebook(self):
-        """Return buzz box module with the top 3 most shared articles."""
-
-        module = LegacyModule(
-            zeit.web.core.reach.fetch('facebook', self.ressort, limit=3),
-            layout='buzz-facebook')
-        module.header = 'Meistgeteilt'
         return module
 
     @zeit.web.reify

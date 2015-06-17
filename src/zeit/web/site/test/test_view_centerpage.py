@@ -822,3 +822,9 @@ def test_centerpage_area_should_render_in_isolation(testbrowser, testserver):
     assert document.tag == 'div'
     assert document.attrib['class'] == 'cp-area cp-area--gallery'
     assert len(browser.cssselect('article.teaser-small')) == 2
+
+
+def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
+    browser = testbrowser('{}/index'.format(testserver.url))
+    assert browser.cssselect('.buzz-box')
+    assert len(browser.cssselect('.buzz-box__teasers article')) == 3
