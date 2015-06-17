@@ -451,18 +451,14 @@ def set_image_id(asset_id, image_base_name, image_pattern, ext):
 
 
 def _existing_image(asset_id, base_name, patterns, ext, filenames):
-    possible_filenames = set(["{}-{}.{}".format(
-        base_name, pattern, ext) for pattern in patterns])
-
-    try:
-        name = possible_filenames.intersection(filenames).pop()
-        pattern = name.replace('{}-'.format(base_name), '')
-        pattern = pattern.replace('.{}'.format(ext), '')
-        name = "{}{}".format(asset_id, name)
-
-        return zeit.cms.interfaces.ICMSContent(name), pattern
-    except:
-        pass
+    for pattern in patterns:
+        name = '{}-{}.{}'.format(base_name, pattern, ext)
+        if name not in filenames:
+            continue
+        unique_id = '{}{}'.format(asset_id, name)
+        image = zeit.cms.interfaces.ICMSContent(unique_id, None)
+        if image:
+            return image, pattern
 
     return None, None
 
