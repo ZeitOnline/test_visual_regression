@@ -1,4 +1,6 @@
 .article--video
+	// needs a clearfix hack, in case the floating ad--tile is higher than the content
+	+pie-clearfix
 	background-color: #33333A
 	color: $grey--light
 	margin: 0 (-$page-padding) // enforce full width background with padding
@@ -34,7 +36,6 @@
 
 
 	// TODO: bgcolor als Konstante hinterlegen? Mittlerweile häufig genutzt.
-	// TODO: Clearfix für Skyscraper-Werbung.
 	.ad--tile_7
 		background-color: #33333A
 
