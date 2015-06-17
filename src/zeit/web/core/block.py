@@ -4,6 +4,7 @@ import logging
 import os.path
 
 import babel.dates
+import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
@@ -193,7 +194,7 @@ class Liveblog(object):
 
         # only needed for beta testing with liveblog embed code
         # ToDo: remove after finished relaunch
-        self.theme = self.getTheme()
+        self.theme = self.getTheme(self.id)
 
     def getReSTful(self, url):
         try:
@@ -203,7 +204,8 @@ class Liveblog(object):
         except requests.exceptions.RequestException:
             return
 
-    def getTheme(self):
+    @beaker.cache.cache_region('long_term', 'liveblog_theme')
+    def getTheme(self, cache_key):
         if self.seo_id is None:
             url = 'http://www.zeit.de/liveblog-status/{}/Seo'
             content = self.getReSTful(url.format(self.id))
