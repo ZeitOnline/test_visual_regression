@@ -828,3 +828,11 @@ def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
     browser = testbrowser('{}/index'.format(testserver.url))
     assert browser.cssselect('.buzz-box')
     assert len(browser.cssselect('.buzz-box__teasers article')) == 3
+
+
+def test_centerpage_square_teaser_has_pixelperfect_image(testbrowser, testserver):
+    browser = testbrowser('{}/index'.format(testserver.url))
+    images = browser.cssselect('.teaser-square .scaled-image')
+    assert len(images)
+    for image in images:
+        assert 'is-pixelperfect' in image.get('class')
