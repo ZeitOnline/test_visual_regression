@@ -167,15 +167,13 @@ class Liveblog(object):
         except ValueError:
             self.id = self.blog_id
 
-        url = 'http://www.zeit.de/liveblog-status/{}/Post/Published'
+        url = 'http://www.zeit.de/liveblog-status/Blog/{}/Post/Published'
         content = self.getReSTful(url.format(self.id))
 
         if (content and 'PostList' in content and len(content['PostList'])
                     and 'href' in content['PostList'][0]):
-            url = 'http:{}'.format(content['PostList'][0]['href']).replace(
-                'zeit.superdesk.pro/resources/LiveDesk/Blog',
-                'www.zeit.de/liveblog-status', 1)
-            content = self.getReSTful(url)
+            href = content['PostList'][0]['href']
+            content = self.getReSTful(self.prepareRef(href))
             if content:
                 tz = babel.dates.get_timezone('Europe/Berlin')
                 utc = babel.dates.get_timezone('UTC')
@@ -196,6 +194,11 @@ class Liveblog(object):
         # ToDo: remove after finished relaunch
         self.theme = self.getTheme(self.id)
 
+    def prepareRef(self, url):
+        return 'http:{}'.format(url).replace(
+            'zeit.superdesk.pro/resources/LiveDesk',
+            'www.zeit.de/liveblog-status', 1)
+
     def getReSTful(self, url):
         try:
             response = requests.get(url, timeout=1)
@@ -210,7 +213,7 @@ class Liveblog(object):
         blog_theme_id = None
 
         if self.seo_id is None:
-            url = 'http://www.zeit.de/liveblog-status/{}/Seo'
+            url = 'http://www.zeit.de/liveblog-status/Blog/{}/Seo'
             content = self.getReSTful(url.format(self.id))
             if (content and 'SeoList' in content and len(content['SeoList'])
                         and 'href' in content['SeoList'][0]):
@@ -220,7 +223,7 @@ class Liveblog(object):
                 self.seo_id)
 
         if href:
-            content = self.getReSTful('http:' + href)
+            content = self.getReSTful(self.prepareRef(href))
             if content and content['BlogTheme']:
                 blog_theme_id = int(content['BlogTheme']['Id'])
 
