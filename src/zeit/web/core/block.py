@@ -206,6 +206,9 @@ class Liveblog(object):
 
     @beaker.cache.cache_region('long_term', 'liveblog_theme')
     def getTheme(self, cache_key):
+        href = None
+        blog_theme_id = None
+
         if self.seo_id is None:
             url = 'http://www.zeit.de/liveblog-status/{}/Seo'
             content = self.getReSTful(url.format(self.id))
