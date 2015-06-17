@@ -2,6 +2,11 @@
 
 {% set ref_cp = area.referenced_cp %}
 {% set topic_supertitle = area.supertitle or ref_cp.teaserSupertitle or ref_cp.supertitle %}
+{% if ref_cp is not none %}
+    {% set readmore_ref = ref_cp.uniqueId | translate_url %}
+{% else %}
+    {# Custom Readmore #}
+{% endif %}
 
 {% block layout %}teaser-topic-main{% endblock %}
 
@@ -14,10 +19,12 @@
 {% endblock %}
 
 {% block teaser_link %}
-    <a class="{{ self.layout() }}__combined-link" title="{{ topic_supertitle | hide_none }} - {{ area.title | hide_none }}" href="{{ ref_cp.uniqueId | translate_url }}">
+    {% if readmore_ref %}
+    <a class="{{ self.layout() }}__combined-link" title="{{ topic_supertitle | hide_none }} - {{ area.title | hide_none }}" href="{{ readmore_ref }}">
         <span class="{{ self.layout() }}__kicker">{{ topic_supertitle | hide_none }}</span>
         <span class="{{ self.layout() }}__title">{{ area.title | hide_none }}</span>
     </a>
+    {% endif %}
 {% endblock %}
 
 {% block teaser_container %}
@@ -28,12 +35,9 @@
 {% endblock %}
 
 {% block teaser_media_position_after_title %}
-    {% if ref_cp is not none %}
-        {% set readmore_ref = ref_cp.uniqueId | translate_url %}
-    {% else %}
-        {% set readmore_ref = teaser.uniqueId | translate_url %}
-    {% endif %}
+    {% if readmore_ref %}
     <a href="{{ readmore_ref }}">
         <span class="{{ self.layout() }}__readmore">Alles zum Thema</span>
     </a>
+    {% endif %}
 {% endblock %}
