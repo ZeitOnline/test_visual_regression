@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1790: Get liveblog metadata through ReSTful API
 
+- ZON-1859: Use pixelperfect fallback image for square teaser
+
 - ZON-1840: Register buzz modules to be available on new centerpages
 
 - ZON-1735: Change label for print source volume number
