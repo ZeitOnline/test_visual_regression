@@ -169,11 +169,9 @@ class Liveblog(object):
         url = 'http://www.zeit.de/liveblog-status/{}/Post/Published'
         content = self.getReSTful(url.format(self.id))
 
-        if content and len(content['PostList']):
-            last_post_url = content['PostList'][0]['href']
-
-        if last_post_url:
-            url = 'http:{}'.format(last_post_url).replace(
+        if (content and 'PostList' in content and len(content['PostList'])
+                    and 'href' in content['PostList'][0]):
+            url = 'http:{}'.format(content['PostList'][0]['href']).replace(
                 'zeit.superdesk.pro/resources/LiveDesk/Blog',
                 'www.zeit.de/liveblog-status', 1)
             content = self.getReSTful(url)
@@ -207,7 +205,8 @@ class Liveblog(object):
         if self.seo_id is None:
             url = 'http://www.zeit.de/liveblog-status/{}/Seo'
             content = self.getReSTful(url.format(self.id))
-            if content and len(content['SeoList']):
+            if (content and 'SeoList' in content and len(content['SeoList'])
+                        and 'href' in content['SeoList'][0]):
                 href = content['SeoList'][0]['href']
         else:
             href = '//zeit.superdesk.pro/resources/LiveDesk/Seo/{}'.format(
