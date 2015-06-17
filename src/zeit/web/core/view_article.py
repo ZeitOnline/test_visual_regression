@@ -142,15 +142,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def header_img(self):
-        obj = self.first_body_obj
-        if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            img = zeit.web.core.block.HeaderImageStandard(obj)
-            if img:
-                try:
-                    self._copyrights.setdefault(img.uniqueId, img)
-                except AttributeError:
-                    pass
-            return img
+        return zeit.web.core.block.HeaderImageStandard(self.main_image_block)
 
     @zeit.web.reify
     def header_video(self):
