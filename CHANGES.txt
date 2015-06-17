@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-1840: Register buzz modules to be available on new centerpages
 
+- ZON-1735: Change label for print source volume number
+
+- BUG-274: Use zon-square teaser for feature longform
+
 
 1.32 (2015-06-16)
 -----------------
