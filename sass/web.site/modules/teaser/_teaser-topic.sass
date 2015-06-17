@@ -11,10 +11,9 @@
 		margin-bottom: remify(24px)
 		+respond-min($break-tablet-min)
 			margin-bottom: remify(34px)
-			margin-top: remify(10px)
+			margin-top: remify(3px)
 		+respond-min($break-desktop-min)
 			margin-bottom: remify(45px)
-			margin-top: remify(15px)
 	&__inner-helper
 		left: 0
 		position: absolute
@@ -33,13 +32,16 @@
 		+respond-min($break-desktop-min)
 			padding-right: remify(42px)
 			width: 66.66%
-	&__introduction
+	&__kicker
+		@extend %teaser-kicker
 		color: $white
 		font-size: $font-s--rem
 		letter-spacing: $zon-letter-spacing-l
 		text-transform: uppercase
+		margin-bottom: remify(14px)
 		+respond-min($break-tablet-min)
 			font-size: $font-m--rem
+			margin-bottom: remify(18px)
 		+respond-min($break-desktop-min)
 			font-size: $font-m--rem
 	&__media
