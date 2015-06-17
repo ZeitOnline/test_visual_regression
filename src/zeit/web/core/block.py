@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import json
 import logging
 import os.path
 
@@ -9,6 +8,7 @@ import grokcore.component
 import lxml.etree
 import lxml.html
 import requests
+import requests.exceptions
 import urlparse
 import zope.interface
 import zope.interface.declarations
@@ -196,10 +196,12 @@ class Liveblog(object):
         self.theme = self.getTheme()
 
     def getReSTful(self, url):
-        response = requests.get(url)
-        if response.status_code >= 200 and response.status_code < 300:
-            if response.content:
-                return json.loads(response.content)
+        try:
+            response = requests.get(url, timeout=1)
+            if response.ok and response.content:
+                return response.json()
+        except requests.exceptions.RequestException:
+            return
 
     def getTheme(self):
         if self.seo_id is None:
