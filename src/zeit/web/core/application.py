@@ -23,6 +23,7 @@ import zope.interface
 import zope.interface.declarations
 
 import zeit.cms.repository.interfaces
+import zeit.cms.repository.repository
 import zeit.connector
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
@@ -437,8 +438,8 @@ def find_block(context, attrib='cp:__name__', **specs):
 class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
 
     def __call__(self, request):
+        tdict = super(RepositoryTraverser, self).__call__(request)
         try:
-            tdict = super(RepositoryTraverser, self).__call__(request)
             tdict.setdefault('request', request)
             self.rewrite_cp2015(tdict)
             tdict = zope.component.getMultiAdapter(
@@ -562,3 +563,15 @@ class TraversableDynamic(TraversableCenterPage):
             tdict['view_name'] = ''
         finally:
             super(TraversableDynamic, self).__init__(context, tdict)
+
+
+# Monkey-patch so our content provides a marker interface,
+# thus Source entries can be ``available`` only for zeit.web, but not vivi.
+def getitem_with_marker_interface(self, key):
+    content = original_getitem(self, key)
+    zope.interface.alsoProvides(
+        content, zeit.web.core.interfaces.IInternalUse)
+    return content
+original_getitem = zeit.cms.repository.repository.Container.__getitem__
+zeit.cms.repository.repository.Container.__getitem__ = (
+    getitem_with_marker_interface)

@@ -545,14 +545,12 @@ def test_playlist_video_series_should_be_available(application):
 
 def test_videostage_should_have_right_video_count(testserver, testbrowser):
     browser = testbrowser('%s/index' % testserver.url)
-
     videos = browser.cssselect('#video-stage article')
     assert len(videos) == 4, 'We expect 4 videos in video-stage'
 
 
 def test_videostage_videos_should_have_video_ids(testserver, testbrowser):
     browser = testbrowser('%s/index' % testserver.url)
-
     videos = browser.cssselect('#video-stage article')
     for video in videos:
         attr = video.attrib
@@ -824,3 +822,9 @@ def test_centerpage_area_should_render_in_isolation(testbrowser, testserver):
     assert document.tag == 'div'
     assert document.attrib['class'] == 'cp-area cp-area--gallery'
     assert len(browser.cssselect('article.teaser-small')) == 2
+
+
+def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
+    browser = testbrowser('{}/index'.format(testserver.url))
+    assert browser.cssselect('.buzz-box')
+    assert len(browser.cssselect('.buzz-box__teasers article')) == 3

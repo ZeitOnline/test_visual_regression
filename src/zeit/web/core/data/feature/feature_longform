@@ -13,7 +13,8 @@
             <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2013/42/bestattungsunternehmen-serway" year="2013" issue="42" ressort="Karriere" author="Christine Böhringer " contenttype="article" publication-date="" expires="">
                 <supertitle>Bestattungsunternehmen</supertitle>
                 <title>Ich besorg noch den Trauerflor, Papa</title>
-                <text>Der Tod anderer Menschen begegnet Jule Serway an jedem Arbeitstag. Ganz bewusst hat sie sich dafür entschieden, als Bestatterin im Familienunternehmen zu arbeiten.</text> <description>Der Tod anderer Menschen begegnet Jule Serway an jedem Arbeitstag. Ganz bewusst hat sie sich dafür entschieden, als Bestatterin im Familienunternehmen zu arbeiten.</description>
+                <text>Der Tod anderer Menschen begegnet Jule Serway an jedem Arbeitstag. Ganz bewusst hat sie sich dafür entschieden, als Bestatterin im Familienunternehmen zu arbeiten.</text>
+                <description>Der Tod anderer Menschen begegnet Jule Serway an jedem Arbeitstag. Ganz bewusst hat sie sich dafür entschieden, als Bestatterin im Familienunternehmen zu arbeiten.</description>
                 <byline>von Christine Böhringer</byline>
             </reference>
             <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/gesellschaft/2013-10/spaetmoderner-mensch-sterben-optimierter-tod" year="2013" issue="41" ressort="Gesellschaft" author="Christian Schüle" contenttype="article" publication-date="" expires="">
@@ -35,7 +36,7 @@
                 </image>
             </reference>
         </references>
-        <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/gesellschaft/2013-10/s15-einaescherung/" type="jpg" publication-date="" expires="2014-01-24T13:50:43+00:00">
+        <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-online/image/s15-einaescherung/" type="jpg" publication-date="" expires="2014-01-24T13:50:43+00:00">
             <bu>Einäscherung</bu>
             <copyright>© Benne Ochs</copyright>
         </image>
@@ -52,9 +53,9 @@
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-11-03T23:51:40.633335+00:00</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-11-04T13:33:20.284399+00:00</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-10-24T06:00:00+00:00</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-11-03T23:52:43.246934+00:00</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-11-07T03:18:58.278426+00:00</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-11-03T07:10:00.626737+00:00</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">24.10.2013</attribute>
@@ -71,8 +72,8 @@
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="jobname">Ohlsdorf</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-11-03T07:09:52.421693+00:00</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="last_count">2013-11-02</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.helmund</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="last_count">2013-11-06</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.cruz</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="origname">Ohlsdorf</attribute>
@@ -89,7 +90,7 @@
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="text-length">37848</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="total_hits">688</attribute>
+        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="total_hits">19906</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
         <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
@@ -113,8 +114,8 @@
     &lt;/pickle&gt;</attribute>
     </head>
     <body>
-        <title>Im Schnabel des Graureihers</title>
-        <subtitle>Gestorben wird immer. Aber nicht mehr genug. Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen.</subtitle>
+        <title>Die Angst des Friedhofs vor dem Tod</title>
+        <subtitle>Gestorben wird immer. Aber nicht mehr genug. Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen. Auch auf dem Großfriedhof in Hamburg-Ohlsdorf wächst die Sorge ums Geschäft: Bringen Apfelhaine und Ruhewälder die Rettung?</subtitle>
         <byline>von Henning Sußebach</byline>
         <division type="page">
             <image src="http://xml.zeit.de/exampleimages/artikel/05/01.jpg" type="jpg" publication-date="" expires="" layout="zmo-xl-header" is_empty="False" alt="My 05 alt attribute" title="my 05 title attribute">

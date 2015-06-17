@@ -64,3 +64,9 @@
 .no-js .sharing-menu__items // no-js fallback
 	margin:  remify(14px 0) // animated
 	max-height: remify(64px) // animated
+
+// The sharing menu appears on pages with dark background (video single page)
+.sharing-menu--video
+	display: inline
+	&.sharing-menu--active > .sharing-menu__title
+		color: $zon_light_grey
