@@ -38,7 +38,9 @@
             <div class="article__body-wrap">
                 <div class="article__body">
                     {% block article_main_image %}
-                        {{ blocks['image'](view.main_image_block)}}
+                        {% if view.page_nr == 1 %}
+                            {{ blocks['image'](view.main_image_block)}}
+                        {% endif %}
                     {% endblock article_main_image %}
                     {% block article_pages %}
                         <div class="article__page">

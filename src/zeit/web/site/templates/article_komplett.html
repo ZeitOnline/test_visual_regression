@@ -1,5 +1,9 @@
 {% extends "zeit.web.site:templates/article.html" %}
 
+{% block article_main_image %}
+    {{ blocks['image'](view.main_image_block)}}
+{% endblock article_main_image %}
+
 {% block article_pages %}
     {% for page in view.pages %}
         <div class="article-page">
