@@ -32,7 +32,6 @@
 			&:last-child:after
 				content: none
 
-	// TODO: laut Screendesign soll die Werbung auch auf Tablet neben dem Text stehen. Also muss anders umgebrochen werden.
 
 	// TODO: bgcolor als Konstante hinterlegen? Mittlerweile häufig genutzt.
 	// TODO: Clearfix für Skyscraper-Werbung.
@@ -43,7 +42,8 @@
 		iframe
 			background-color: $white
 
-// when on video single pages, the should be side-by-side with text on tablets
+// when on video single pages, the should be side-by-side with text on tablets.
+// (in articles, tablets display the ad as block element)
 +respond_min($break-tablet-min)
 	.article--video .ad--tile_7
 		border-left: 1px $zon_grey solid
@@ -53,3 +53,6 @@
 		padding-bottom: remify(18px)
 		max-width: 318px
 		width: 318px
+
+// TODO: margin-right müsste sich mit dem article__item gleich laufen.
+// Tut es aber noch nicht auf Tablet-Größe.
