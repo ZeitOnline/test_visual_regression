@@ -155,6 +155,8 @@ class Infobox(object):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ILiveblog)
 class Liveblog(object):
 
+    timeout = 1
+
     def __init__(self, model_block):
         self.blog_id = model_block.blog_id
         self.is_live = False
@@ -201,7 +203,7 @@ class Liveblog(object):
 
     def getReSTful(self, url):
         try:
-            response = requests.get(url, timeout=1)
+            response = requests.get(url, timeout=self.timeout)
             if response.ok and response.content:
                 return response.json()
         except requests.exceptions.RequestException:

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import beaker
 import lxml.etree
 import mock
 
@@ -128,3 +129,24 @@ def test_vivi_module_should_have_a_layout_attribute():
         context, zeit.edit.interfaces.IBlock)
     module = zeit.web.core.block.Module(context)
     assert module._layout.id == 'barbapapa'
+
+
+def test_block_liveblog_instance_causing_timeouts(monkeypatch):
+    # Disable caching
+    beaker.cache.cache_regions.update({'long_term':{'enabled':False}})
+
+    model_block = mock.Mock()
+    model_block.blog_id = '123-456'
+    liveblog = zeit.web.core.block.Liveblog(model_block)
+    assert liveblog.id == '123'
+    assert liveblog.seo_id == '456'
+
+    # Set unachievable timeout
+    monkeypatch.setattr(zeit.web.core.block.Liveblog, 'timeout', 0.00001)
+
+    model_block = mock.Mock()
+    model_block.blog_id = 'foo-bar'
+    liveblog = zeit.web.core.block.Liveblog(model_block)
+    assert liveblog.id == 'foo'
+    assert liveblog.seo_id == 'bar'
+    assert liveblog.theme == 'zeit'
