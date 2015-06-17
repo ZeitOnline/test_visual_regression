@@ -562,7 +562,7 @@ def test_remove_get_params_should_remove_get_params():
 
 @pytest.mark.parametrize('patterns', itertools.permutations(
                          ['540x304', '368x220', '148x84']))
-def test_existing_image_should_preserve_patttern_order(patterns, application):
+def test_existing_image_should_preserve_pattern_order(patterns, application):
     image, pattern = zeit.web.core.template._existing_image(
         'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/',
         'schoppenstube', patterns, 'jpg',
