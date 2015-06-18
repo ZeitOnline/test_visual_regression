@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.34 (unreleased)
------------------
+1.33.2 (2015-06-18)
+-------------------
 
 - FIX: Map legacy images for zon-blog and zon-topic
 
