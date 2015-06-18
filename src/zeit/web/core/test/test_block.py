@@ -149,4 +149,4 @@ def test_block_liveblog_instance_causing_timeouts(monkeypatch):
     liveblog = zeit.web.core.block.Liveblog(model_block)
     assert liveblog.id == 'foo'
     assert liveblog.seo_id == 'bar'
-    assert liveblog.theme == 'zeit'
+    assert liveblog.theme == 'zeit-online'
