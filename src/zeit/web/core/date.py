@@ -19,7 +19,9 @@ def get_base_date(date):
 def parse_date(date,
                date_format='%Y-%m-%dT%H:%M:%S.%f+00:00'):
     try:
-        return datetime.datetime.strptime(date, date_format)
+        utc = babel.dates.get_timezone('UTC')
+        dt = datetime.datetime.strptime(date, date_format)
+        return dt.replace(tzinfo=utc)
     except (TypeError, ValueError):
         return
 
@@ -48,7 +50,7 @@ def format_comment_date(comment_date, base_date=None):
 def get_delta_time_from_article(article, base_date=None):
     modification = mod_date(article)
     if modification is not None:
-        dt = DeltaTime(modification.replace(tzinfo=None), base_date)
+        dt = DeltaTime(modification, base_date)
         return dt.get_time_since_modification()
 
 
