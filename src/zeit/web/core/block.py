@@ -210,7 +210,7 @@ class Liveblog(object):
             return
 
     @beaker.cache.cache_region('long_term', 'liveblog_theme')
-    def getTheme(self, cache_key):
+    def getTheme(self, blog_id):
         href = None
         blog_theme_id = None
 
