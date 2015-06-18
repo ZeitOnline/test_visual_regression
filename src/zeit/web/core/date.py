@@ -165,9 +165,12 @@ class DeltaTime(object):
             if i is not None and i.number != 0)
         if human_readable is '':
             return
+        prefix = 'vor '
+        if self.delta.seconds + self.delta.days * 24 * 3600 < 0:
+            prefix = 'in '
         # Dirty hack, since we are building the string ourself
         # instead of using babels "add_direction"
-        return 'vor ' + human_readable.replace('Tage', 'Tagen', 1).replace(
+        return prefix + human_readable.replace('Tage', 'Tagen', 1).replace(
             'Monate', 'Monaten', 1).replace('Jahre', 'Jahren', 1)
 
     def get_time_since_modification(self):
