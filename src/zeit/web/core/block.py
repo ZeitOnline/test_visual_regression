@@ -226,8 +226,11 @@ class Liveblog(object):
 
         if href:
             content = self.getReSTful(self.prepareRef(href))
-            if content and content['BlogTheme']:
-                blog_theme_id = int(content['BlogTheme']['Id'])
+            if content and 'BlogTheme' in content:
+                try:
+                    blog_theme_id = int(content['BlogTheme']['Id'])
+                except KeyError, ValueError:
+                    pass
 
         # ToDo: return new theme names
         # 23 = zeit      => zeit-online
