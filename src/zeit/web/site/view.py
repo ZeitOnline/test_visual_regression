@@ -72,5 +72,5 @@ def login_state(request):
                 del user['picture']
         info['user'] = user
         info['profile'] = "{}/user/{}".format(settings['community_host'],
-                                              user.uid)
+                                              request.authenticated_userid)
     return info
