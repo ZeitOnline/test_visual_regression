@@ -15,9 +15,13 @@
 			color: $zon_mid_grey
 		&__title
 			color: $zon_lighter_grey
+			+respond-min($break-tablet-min)
+				font-size: remify(30px)
 
 	.summary
 		color: $zon_light_grey
+		+respond-min($break-tablet-min)
+			font-size: remify(18px)
 
 	.metadata
 		color: $zon_mid_grey
@@ -57,9 +61,6 @@
 // video), except on small screens, where we want to preserve the default
 // padding of the container. So we use the max-width definition of
 // .article__item--wide.
-+respond-min($break-tablet-min)
-	.article--video .article__item
-		max-width: remify(660px)
 
 +respond-min($break-desktop-min)
 	.article--video .article__item
