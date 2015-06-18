@@ -4,7 +4,7 @@ Change log for zeit.web
 1.34 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1837: Fix timedeltas for article teaser
 
 
 1.33.2 (2015-06-18)
