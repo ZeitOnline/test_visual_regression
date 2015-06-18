@@ -45,7 +45,7 @@
 {% macro liveblog(liveblog) -%}
     {# use liveblog embed code to request an alternative theme for beta testing #}
     {% if liveblog.id -%}
-    <div class="liveblog article__item" data-gimme="liveblog-embed-code"></div>
+    <div class="liveblog" data-gimme="liveblog-embed-code"></div>
     <script type="text/javascript">
     /* <![CDATA[ */
     var liveblog = (function(d) {
