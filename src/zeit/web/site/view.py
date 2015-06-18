@@ -70,7 +70,7 @@ def login_state(request):
                     settings['community_static_host'])
             else:
                 del user['picture']
-        info['user'] = user
-        info['profile'] = "{}/user/{}".format(settings['community_host'],
+        user['profile'] = "{}/user/{}".format(settings['community_host'],
                                               request.authenticated_userid)
+        info['user'] = user
     return info

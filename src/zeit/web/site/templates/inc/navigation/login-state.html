@@ -1,10 +1,10 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 {% if user %}
 <div class="login-state" data-feature="dropdown">
-    <a href="{{ profile }}" class="login-state__name">{{ user.name }}</a>
+    <a href="{{ user.profile }}" class="login-state__name">{{ user.name }}</a>
     <ul class="dropdown">
         <li class="dropdown__item">
-            <a href="{{ profile }}" class="dropdown__link">Profil</a>
+            <a href="{{ user.profile }}" class="dropdown__link">Profil</a>
             <a href="{{ logout }}" class="dropdown__link" rel="nofollow">Abmelden</a>
         </li>
     </ul>
