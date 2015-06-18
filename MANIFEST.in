@@ -1,3 +1,2 @@
 graft src/zeit/web/static
 exclude .gitignore
-recursive-exclude src/zeit/web/core/data *
