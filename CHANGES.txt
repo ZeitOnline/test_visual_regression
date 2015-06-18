@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.33 (unreleased)
+1.33 (2015-06-18)
 -----------------
 
 - ZON-1859: Use pixelperfect fallback image for square teaser
