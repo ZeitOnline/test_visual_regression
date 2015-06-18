@@ -114,6 +114,10 @@ settings = {
     'vivi_zeit.content.cp_cp-types-url': (
         'egg://zeit.web.core/data/config/cp-types.xml'),
     'vivi_zeit.content.cp_cp-feed-max-items': '30',
+    'vivi_zeit.content.image_variant-source': (
+        'egg://zeit.web.core/data/config/image-variants.xml'),
+    'vivi_zeit.content.image_legacy-variant-source': (
+        'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
     'vivi_zeit.web_banner-source': (
         'egg://zeit.web.core/data/config/banner.xml'),
     'vivi_zeit.web_banner-id-mappings': (
