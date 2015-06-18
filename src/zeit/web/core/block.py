@@ -165,7 +165,7 @@ class Liveblog(object):
         self.seo_id = None
 
         try:
-            self.id, self.seo_id = model_block.blog_id.split('-')[:2]
+            self.id, self.seo_id = self.blog_id.split('-')[:2]
         except ValueError:
             self.id = self.blog_id
 
