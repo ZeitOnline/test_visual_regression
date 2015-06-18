@@ -61,7 +61,6 @@ def login_state(request):
     info['logout'] = "{}/user/logout?destination={}".format(
         settings['community_host'],
         destination)
-    info['profile'] = "{}/user/".format(settings['community_host'])
     if request.authenticated_userid and 'user' in request.session:
         user = request.session['user']
         if 'picture' in user:
@@ -72,4 +71,6 @@ def login_state(request):
             else:
                 del user['picture']
         info['user'] = user
+        info['profile'] = "{}/user/{}".format(settings['community_host'],
+                                              user.uid)
     return info
