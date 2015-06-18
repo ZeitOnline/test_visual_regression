@@ -232,13 +232,13 @@ class Liveblog(object):
                 except KeyError, ValueError:
                     pass
 
-        # ToDo: return new theme names
+        # return new theme names
         # 23 = zeit      => zeit-online
         # 24 = zeit-solo => zeit-online-solo
         if blog_theme_id == 24:
-            return 'zeit-solo'
+            return 'zeit-online-solo'
 
-        return 'zeit'
+        return 'zeit-online'
 
 
 class BaseImage(object):
