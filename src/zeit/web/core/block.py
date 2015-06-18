@@ -266,8 +266,7 @@ class BaseImage(object):
 class Image(BaseImage):
 
     def __new__(cls, model_block):
-        if (model_block.layout == 'zmo-xl-header' or
-                getattr(model_block, 'is_empty', False)):
+        if getattr(model_block, 'is_empty', False):
             return
         return super(Image, cls).__new__(cls, model_block)
 
