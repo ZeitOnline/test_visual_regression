@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import mock
 import pytest
 import requests
@@ -109,7 +110,11 @@ def test_json_delta_time_from_unique_id_should_use_custom_base_time(
         '{}/json/delta_time?base_date=2014-10-15T16%3A06%3A45.95%2B00%3A00&'
         'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'.format(
             testserver.url))
-    assert 'vor 1 Stunde' in browser.contents
+    content = json.loads(browser.contents)
+    a1 = 'http://xml.zeit.de/zeit-online/cp-content/article-01'
+    a2 = 'http://xml.zeit.de/zeit-online/cp-content/article-02'
+    assert content['delta_time'][0][a1]['time'] == 'vor 1 Stunde'
+    assert content['delta_time'][1][a2]['time'] == 'vor 12 Minuten'
 
 
 def test_http_header_should_contain_c1_header_fields(testserver, testbrowser):
