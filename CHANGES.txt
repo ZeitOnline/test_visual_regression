@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.34 (unreleased)
------------------
+1.33.1 (2015-06-18)
+-------------------
 
 - FIX: Release with data-folder
 
