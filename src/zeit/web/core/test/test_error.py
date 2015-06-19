@@ -123,7 +123,7 @@ faulty_templates = [
      'Insanity',
      {})]
 
-message = '{} should not bother friedbert.'
+message = '{} should not bother friedbert'
 
 
 @pytest.mark.parametrize('markup,assertion,kw', faulty_templates,

@@ -158,6 +158,12 @@ def get_layout(block, request=None):
         elif False:
             # XXX What about placeholder containers?
             layout = 'hide'
+        elif layout == 'zon-square':
+            # ToDo: Remove when Longform will be generally used on www.zeit.de
+            if urlparse.urlparse(teaser.uniqueId).path.startswith('/feature/'):
+                layout = layout
+            elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
+                layout = 'zmo-square'
         elif getattr(teaser, 'serie', None):
             if allowed('zon-series'):
                 layout = 'zon-series'
@@ -197,13 +203,8 @@ def replace_list_seperator(scsv, seperator):
 
 
 @zeit.web.register_filter
-def is_zmo(teaser):
-    return zeit.magazin.interfaces.IZMOContent.providedBy(teaser)
-
-
-@zeit.web.register_filter
-def is_gallery(teaser):
-    return zeit.content.gallery.interfaces.IGallery.providedBy(teaser)
+def is_gallery(context):
+    return zeit.content.gallery.interfaces.IGallery.providedBy(context)
 
 
 # definition of default images sizes per layout context
@@ -432,6 +433,8 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
         layout_image['zon-series'].extend(layout_image['leader'])
         layout_image['zon-column'].extend(layout_image['leader'])
         layout_image['zon-square'].extend(layout_image['leader'])
+        layout_image['zon-blog'].extend(layout_image['leader'])
+        layout_image['zon-topic'].extend(layout_image['leader-fullwidth'])
     except KeyError:
         log.warn("Layout could not be extended")
 
@@ -445,18 +448,14 @@ def set_image_id(asset_id, image_base_name, image_pattern, ext):
 
 
 def _existing_image(asset_id, base_name, patterns, ext, filenames):
-    possible_filenames = set(["{}-{}.{}".format(
-        base_name, pattern, ext) for pattern in patterns])
-
-    try:
-        name = possible_filenames.intersection(filenames).pop()
-        pattern = name.replace('{}-'.format(base_name), '')
-        pattern = pattern.replace('.{}'.format(ext), '')
-        name = "{}{}".format(asset_id, name)
-
-        return zeit.cms.interfaces.ICMSContent(name), pattern
-    except:
-        pass
+    for pattern in patterns:
+        name = '{}-{}.{}'.format(base_name, pattern, ext)
+        if name not in filenames:
+            continue
+        unique_id = '{}{}'.format(asset_id, name)
+        image = zeit.cms.interfaces.ICMSContent(unique_id, None)
+        if image:
+            return image, pattern
 
     return None, None
 

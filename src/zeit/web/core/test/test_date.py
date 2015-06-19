@@ -18,7 +18,7 @@ def test_parse_date_should_parse_iso_date():
     date = '2014-10-09T14:42:00.0+00:00'
     parsed_date = zeit.web.core.date.parse_date(date)
     assert type(parsed_date) == datetime.datetime
-    assert parsed_date.isoformat() == '2014-10-09T14:42:00'
+    assert parsed_date.isoformat() == '2014-10-09T14:42:00+00:00'
 
 
 def test_parse_date_should_parse_date_with_custom_format():
@@ -26,7 +26,7 @@ def test_parse_date_should_parse_date_with_custom_format():
     date_format = '%d.%m.%Y - %H:%M'
     parsed_date = zeit.web.core.date.parse_date(date, date_format)
     assert type(parsed_date) == datetime.datetime
-    assert parsed_date.isoformat() == '2014-10-09T14:42:00'
+    assert parsed_date.isoformat() == '2014-10-09T14:42:00+00:00'
 
 
 def test_parse_date_should_return_none_on_invalid_date():
