@@ -1,9 +1,13 @@
 .article--video
-	background-color: #33333A
+	// needs a clearfix hack, in case the floating ad--tile is higher than the content
+	+pie-clearfix
+	background-color: $color-video-background
 	color: $grey--light
 	margin: 0 (-$page-padding) // enforce full width background with padding
 	padding: 0 $page-padding remify(40px) $page-padding // enforce full width background with padding
 	+respond-min($break-tablet-min)
+		padding-top: remify(48px)
+	+respond-min($break-desktop-min)
 		padding-top: remify(68px)
 
 	.article-heading
@@ -11,9 +15,13 @@
 			color: $zon_mid_grey
 		&__title
 			color: $zon_lighter_grey
+			+respond-min($break-tablet-min)
+				font-size: remify(30px)
 
 	.summary
 		color: $zon_light_grey
+		+respond-min($break-tablet-min)
+			font-size: remify(18px)
 
 	.metadata
 		color: $zon_mid_grey
@@ -31,3 +39,29 @@
 				margin: remify(0 8px)
 			&:last-child:after
 				content: none
+
+	.ad--tile_7
+		background-color: $color-video-background
+
+		+respond_min($break-tablet-min)
+			border-left: 1px $zon_grey solid
+			float: right
+			margin-left: remify(24px)
+			padding-left: remify(18px)
+			padding-bottom: remify(18px)
+			max-width: 318px
+			width: 318px
+
+
+		// sometimes, ads have transparency and rely on a white background
+		iframe
+			background-color: $white
+
+// article__item inside article--video behave like the video (same width as
+// video), except on small screens, where we want to preserve the default
+// padding of the container. So we use the max-width definition of
+// .article__item--wide.
+
++respond-min($break-desktop-min)
+	.article--video .article__item
+		max-width: remify(820px)

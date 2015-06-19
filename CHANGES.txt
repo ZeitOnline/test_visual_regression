@@ -4,6 +4,10 @@ Change log for zeit.web
 1.34 (unreleased)
 -----------------
 
+- ZON-1837: Fix timedeltas for article teaser
+
+- ZON-1765: MedRec Ad on video single page
+
 - FIX: Show user menu for logged in users only
 
 
