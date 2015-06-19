@@ -1,0 +1,64 @@
+.cp-area--gallery
+	background-color: $zon_lighter_grey
+	padding: remify(20px) remify(14px)
+	// TODO: break out of the regions padding
+
+// TODO: remify all the pixels!?
+
+.zon-gallery
+	border-top: none
+	background-color: $white
+	box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.05)
+	margin-bottom: remify(20px)
+	padding-bottom: remify(17px)
+
+	&__media
+		margin: 0
+
+	&__container
+		padding-left: 20px
+		padding-right: 20px
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__kicker
+		color: $zon-red
+		display: block
+		font-size: remify(14px)
+		letter-spacing: $zon-letter-spacing-m
+		+respond-min($break-desktop-min)
+			font-size: remify(14px)
+
+	// TODO: das ist dahingestrickt. Wo krieg ich ein vernüftig geerbtes
+	// Styling her?
+	&__title
+		display: block
+		font-size: 18px
+		line-height: 22px
+		margin-top: 10px
+
+	&__text,
+	&__byline,
+	&__counter
+		+respond-max($break-tablet-min)
+			display: none
+
+	&__shuffle-button
+		margin: 0 auto
+		display: block
+
+
+// TODO: first-child does not work if included inside zon-gallery block above!?
+// TODO: same height!
++respond-min($break-tablet-min)
+	.zon-gallery
+		width: remify(354px)
+		float: left
+	// substitute for margin and last-of-type margin Gedöns
+	.zon-gallery+.zon-gallery
+		margin-left: remify(12px)
+
++respond-min($break-desktop-min)
+	.zon-gallery
+		width: remify(460px)
