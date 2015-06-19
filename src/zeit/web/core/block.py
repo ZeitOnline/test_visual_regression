@@ -176,8 +176,8 @@ class Liveblog(object):
         url = '{}/Blog/{}/Post/Published'
         content = self.getReSTful(url.format(self.status_url, self.id))
 
-        if (content and 'PostList' in content and len(content['PostList'])
-                    and 'href' in content['PostList'][0]):
+        if (content and 'PostList' in content and len(
+                content['PostList']) and 'href' in content['PostList'][0]):
             href = content['PostList'][0]['href']
             content = self.getReSTful(self.prepareRef(href))
             if content:
@@ -220,8 +220,8 @@ class Liveblog(object):
         if self.seo_id is None:
             url = '{}/Blog/{}/Seo'
             content = self.getReSTful(url.format(self.status_url, self.id))
-            if (content and 'SeoList' in content and len(content['SeoList'])
-                        and 'href' in content['SeoList'][0]):
+            if (content and 'SeoList' in content and len(
+                    content['SeoList']) and 'href' in content['SeoList'][0]):
                 href = content['SeoList'][0]['href']
         else:
             href = '//zeit.superdesk.pro/resources/LiveDesk/Seo/{}'.format(
