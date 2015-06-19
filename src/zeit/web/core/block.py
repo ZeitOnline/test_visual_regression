@@ -11,6 +11,7 @@ import lxml.html
 import requests
 import requests.exceptions
 import urlparse
+import zope.component
 import zope.interface
 import zope.interface.declarations
 
@@ -164,13 +165,16 @@ class Liveblog(object):
         self.id = None
         self.seo_id = None
 
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        self.status_url = conf.get('liveblog_status_url')
+
         try:
             self.id, self.seo_id = self.blog_id.split('-')[:2]
         except ValueError:
             self.id = self.blog_id
 
-        url = 'http://www.zeit.de/liveblog-status/Blog/{}/Post/Published'
-        content = self.getReSTful(url.format(self.id))
+        url = '{}/Blog/{}/Post/Published'
+        content = self.getReSTful(url.format(self.status_url, self.id))
 
         if (content and 'PostList' in content and len(content['PostList'])
                     and 'href' in content['PostList'][0]):
@@ -198,8 +202,7 @@ class Liveblog(object):
 
     def prepareRef(self, url):
         return 'http:{}'.format(url).replace(
-            'zeit.superdesk.pro/resources/LiveDesk',
-            'www.zeit.de/liveblog-status', 1)
+            'http://zeit.superdesk.pro/resources/LiveDesk', self.status_url, 1)
 
     def getReSTful(self, url):
         try:
@@ -215,8 +218,8 @@ class Liveblog(object):
         blog_theme_id = None
 
         if self.seo_id is None:
-            url = 'http://www.zeit.de/liveblog-status/Blog/{}/Seo'
-            content = self.getReSTful(url.format(self.id))
+            url = '{}/Blog/{}/Seo'
+            content = self.getReSTful(url.format(self.status_url, self.id))
             if (content and 'SeoList' in content and len(content['SeoList'])
                         and 'href' in content['SeoList'][0]):
                 href = content['SeoList'][0]['href']
