@@ -25,10 +25,11 @@
     </region>
     <region kind="solo" title="News">
         <area kind="news"/>
+    </region>
     <region kind="topic" title="Dossier">
         <area kind="topic"/>
     </region>
-    <region kind="solo" title="Galerie">
+    <region kind="gallery" title="Galerie">
         <area kind="gallery"/>
     </region>
 </regions>
