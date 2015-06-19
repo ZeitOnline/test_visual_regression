@@ -76,19 +76,18 @@ def test_json_delta_time_from_date_should_return_http_error_on_missing_params(
 def test_json_delta_time_from_unique_id_should_return_delta_time(testserver,
                                                                  testbrowser,
                                                                  monkeypatch):
-    now = zeit.web.core.date.parse_date('2014-10-15T16:53:59.780412+00:00')
+    now = zeit.web.core.date.parse_date('2014-10-15T16:23:59.780412+00:00')
     monkeypatch.setattr(zeit.web.core.date, 'get_base_date', lambda *_: now)
 
     browser = testbrowser(
         '{}/json/delta_time?'
         'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'.format(
             testserver.url))
-    assert browser.contents == (
-        '{"delta_time": ['
-        '{"http://xml.zeit.de/zeit-online/cp-content/article-01": '
-        '{"time": "vor 2 Stunden"}}, '
-        '{"http://xml.zeit.de/zeit-online/cp-content/article-02": '
-        '{"time": "vor 2 Stunden"}}]}')
+    content = json.loads(browser.contents)
+    a1 = 'http://xml.zeit.de/zeit-online/cp-content/article-01'
+    a2 = 'http://xml.zeit.de/zeit-online/cp-content/article-02'
+    assert content['delta_time'][0][a1]['time'] == 'vor 1 Stunde'
+    assert content['delta_time'][1][a2]['time'] == 'vor 30 Minuten'
 
 
 def test_json_delta_time_from_unique_id_should_return_http_error_on_false_uid(
