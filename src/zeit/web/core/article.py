@@ -135,7 +135,7 @@ def pages_of_article(context):
     page = Page(first_division)
     pages.append(page)
     blocks = body.values()
-    # move article image to own property if present
+    # delete article image. it resides in its own property 'main_image_block'
     if zeit.content.article.edit.interfaces.IImage.providedBy(blocks[0]):
         del blocks[0]
     for block in blocks:
