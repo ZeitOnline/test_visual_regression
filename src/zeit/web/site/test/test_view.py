@@ -12,21 +12,22 @@ def test_login_state_view_should_deliver_correct_destination():
     request.host = "destination"
     request.params = {}
     result = zeit.web.site.view.login_state(request)
-    assert result == {'profile': 'http://community/user/', 'login': (
-        'http://community/user/login?destination=http://destination'),
-        'logout': (
-            'http://community/user/logout?destination=http://destination')}
+    assert result == {
+        'login': 'http://community/user/login?destination=http://destination',
+        'logout': 'http://community/user/logout?destination=http://destination'
+    }
     request.params = {'context-uri': 'http://context-uri'}
     result = zeit.web.site.view.login_state(request)
-    assert result == {'profile': 'http://community/user/', 'login': (
-        'http://community/user/login?destination=http://context-uri'),
-        'logout': (
-            'http://community/user/logout?destination=http://context-uri')}
+    assert result == {
+        'login': 'http://community/user/login?destination=http://context-uri',
+        'logout': 'http://community/user/logout?destination=http://context-uri'
+    }
 
 
 def test_login_state_view_should_deliver_correct_user():
     request = mock.Mock()
     request.registry.settings = {}
+    request.authenticated_userid = 123
     request.session = {}
     request.session['user'] = {}
     request.registry.settings['community_host'] = "http://community"
@@ -35,7 +36,9 @@ def test_login_state_view_should_deliver_correct_user():
     request.host = "destination"
     request.params = {}
     result = zeit.web.site.view.login_state(request)
-    assert result['user'] == {}
+    assert result['user'] == {
+        'profile': 'http://community/user/123'
+    }
 
     request.session['user']['picture'] = 'http://community/pic'
     result = zeit.web.site.view.login_state(request)
