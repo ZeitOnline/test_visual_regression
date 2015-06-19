@@ -131,22 +131,38 @@ def test_vivi_module_should_have_a_layout_attribute():
     assert module._layout.id == 'barbapapa'
 
 
-def test_block_liveblog_instance_causing_timeouts(monkeypatch):
+def test_block_liveblog_instance_causing_timeouts(monkeypatch, mockserver):
+
+    def util(arg):
+        return {
+            'liveblog_backend_url': 'http://www.zeit.de/liveblog-backend',
+            'liveblog_status_url': 'http://www.zeit.de/liveblog-status'}
+
+    monkeypatch.setattr(zope.component, 'getUtility', util)
+
     # Disable caching
     beaker.cache.cache_regions.update({'long_term':{'enabled':False}})
 
     model_block = mock.Mock()
-    model_block.blog_id = '123-456'
+    model_block.blog_id = '158'
     liveblog = zeit.web.core.block.Liveblog(model_block)
-    assert liveblog.id == '123'
-    assert liveblog.seo_id == '456'
+    assert liveblog.id == '158'
+    assert liveblog.last_modified.isoformat() == '2015-03-20T12:26:00+01:00'
+
+    model_block = mock.Mock()
+    model_block.blog_id = '166-201'
+    liveblog = zeit.web.core.block.Liveblog(model_block)
+    assert liveblog.id == '166'
+    assert liveblog.seo_id == '201'
+    assert liveblog.theme == 'zeit-online-solo'
+    assert liveblog.last_modified.isoformat() == '2015-05-06T22:46:00+02:00'
 
     # Set unachievable timeout
     monkeypatch.setattr(zeit.web.core.block.Liveblog, 'timeout', 0.00001)
 
     model_block = mock.Mock()
-    model_block.blog_id = 'foo-bar'
+    model_block.blog_id = '166-201'
     liveblog = zeit.web.core.block.Liveblog(model_block)
-    assert liveblog.id == 'foo'
-    assert liveblog.seo_id == 'bar'
+    # requests failed, default theme applied
     assert liveblog.theme == 'zeit-online'
+    assert liveblog.last_modified is None

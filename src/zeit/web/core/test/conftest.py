@@ -45,6 +45,8 @@ settings = {
     'cache.default_term.expire': '300',
     'cache.long_term.expire': '3600',
     'scripts_url': '/js/static',
+    'liveblog_backend_url': 'http://localhost:6552/liveblog/backend',
+    'liveblog_status_url': 'http://localhost:6552/liveblog/status',
     'caching_time_content': '5',
     'caching_time_article': '10',
     'caching_time_centerpage': '20',
