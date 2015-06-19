@@ -4,6 +4,8 @@ Change log for zeit.web
 1.34 (unreleased)
 -----------------
 
+- ZON-1790: Get liveblog metadata through ReSTful API
+
 - ZON-1837: Fix timedeltas for article teaser
 
 - ZON-1765: MedRec Ad on video single page

@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
+import datetime
 import logging
 import os.path
 
+import babel.dates
+import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
+import requests
+import requests.exceptions
 import urlparse
+import zope.component
 import zope.interface
 import zope.interface.declarations
 
@@ -150,8 +156,92 @@ class Infobox(object):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ILiveblog)
 class Liveblog(object):
 
+    timeout = 1
+
     def __init__(self, model_block):
         self.blog_id = model_block.blog_id
+        self.is_live = False
+        self.last_modified = None
+        self.id = None
+        self.seo_id = None
+
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        self.status_url = conf.get('liveblog_status_url')
+
+        try:
+            self.id, self.seo_id = self.blog_id.split('-')[:2]
+        except ValueError:
+            self.id = self.blog_id
+
+        url = '{}/Blog/{}/Post/Published'
+        content = self.getReSTful(url.format(self.status_url, self.id))
+
+        if (content and 'PostList' in content and len(
+                content['PostList']) and 'href' in content['PostList'][0]):
+            href = content['PostList'][0]['href']
+            content = self.getReSTful(self.prepareRef(href))
+            if content:
+                tz = babel.dates.get_timezone('Europe/Berlin')
+                utc = babel.dates.get_timezone('UTC')
+                date_format = '%d.%m.%y %H:%M'
+                if '/' in content['PublishedOn']:
+                    date_format = '%m/%d/%y %I:%M %p'
+                elif '-' in content['PublishedOn']:
+                    date_format = '%Y-%m-%dT%H:%M:%SZ'
+                self.last_modified = datetime.datetime.strptime(
+                    content['PublishedOn'], date_format).replace(
+                        tzinfo=utc).astimezone(tz)
+                delta = self.last_modified - datetime.datetime.now(
+                    self.last_modified.tzinfo)
+                if delta.days == 0:
+                    self.is_live = True
+
+        # only needed for beta testing with liveblog embed code
+        # ToDo: remove after finished relaunch
+        self.theme = self.getTheme(self.id)
+
+    def prepareRef(self, url):
+        return 'http:{}'.format(url).replace(
+            'http://zeit.superdesk.pro/resources/LiveDesk', self.status_url, 1)
+
+    def getReSTful(self, url):
+        try:
+            response = requests.get(url, timeout=self.timeout)
+            if response.ok and response.content:
+                return response.json()
+        except requests.exceptions.RequestException:
+            return
+
+    @beaker.cache.cache_region('long_term', 'liveblog_theme')
+    def getTheme(self, blog_id):
+        href = None
+        blog_theme_id = None
+
+        if self.seo_id is None:
+            url = '{}/Blog/{}/Seo'
+            content = self.getReSTful(url.format(self.status_url, self.id))
+            if (content and 'SeoList' in content and len(
+                    content['SeoList']) and 'href' in content['SeoList'][0]):
+                href = content['SeoList'][0]['href']
+        else:
+            href = '//zeit.superdesk.pro/resources/LiveDesk/Seo/{}'.format(
+                self.seo_id)
+
+        if href:
+            content = self.getReSTful(self.prepareRef(href))
+            if content and 'BlogTheme' in content:
+                try:
+                    blog_theme_id = int(content['BlogTheme']['Id'])
+                except KeyError, ValueError:
+                    pass
+
+        # return new theme names
+        # 23 = zeit      => zeit-online
+        # 24 = zeit-solo => zeit-online-solo
+        if blog_theme_id == 24:
+            return 'zeit-online-solo'
+
+        return 'zeit-online'
 
 
 class BaseImage(object):

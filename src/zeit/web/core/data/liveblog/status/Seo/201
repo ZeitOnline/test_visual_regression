@@ -1,0 +1,23 @@
+{
+    "Id": "201",
+    "CallbackActive": "True",
+    "RefreshActive": "True",
+    "LastCId": "24843",
+    "MaxPosts": "20",
+    "RefreshInterval": "60",
+    "HtmlURL": "/content/seo/166-201.html",
+    "ChangedOn": "05.05.15 14:44",
+    "LastSync": "06.05.15 21:35",
+    "NextSync": "19.06.15 10:11",
+    "Blog": {
+        "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/166",
+        "Id": "166"
+    },
+    "BlogTheme": {
+        "href": "//zeit.superdesk.pro/resources/LiveDesk/BlogTheme/24",
+        "Id": "24"
+    },
+    "lastCId": {
+        "href": "//zeit.superdesk.pro/resources/LiveDesk/Seo/201/lastCId"
+    }
+}
