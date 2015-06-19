@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1837: Fix timedeltas for article teaser
 
+- ZON-1765: MedRec Ad on video single page
+
 
 1.33.2 (2015-06-18)
 -------------------

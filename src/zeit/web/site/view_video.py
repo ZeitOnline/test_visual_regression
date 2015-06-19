@@ -22,6 +22,12 @@ log = logging.getLogger(__name__)
 @view_config(renderer='templates/video.html')
 class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
 
+    advertising_enabled = True
+
+    def __init__(self, *args, **kwargs):
+        super(Video, self).__init__(*args, **kwargs)
+        self.context.advertising_enabled = self.banner_on
+
     @zeit.web.reify
     def image_group(self):
         return zeit.content.image.interfaces.IImageGroup(self.context)
