@@ -4,12 +4,12 @@
     {% set module = area.values()[:1][0] %}
     {% set teaser = module | first_child %}
     {% set module_layout = 'teaser-topic-main' %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/{}.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
+    {% include "zeit.web.site:templates/inc/teaser_asset/imagegroup_zon-topic.tpl" ignore missing with context %}
     {% include
         ["zeit.web.site:templates/inc/teaser/zon-topic-main.tpl",
          "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing with context %}
     <div class="teaser-topic-list">
-    {% for module in area.values()[1:4] -%}
+    {% for module in area.values()[0:3] -%}
         {% set teaser = module | first_child %}
         {% include
             ["zeit.web.site:templates/inc/teaser/zon-topic-list.tpl",

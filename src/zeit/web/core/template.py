@@ -438,6 +438,8 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
         layout_image['zon-series'].extend(layout_image['leader'])
         layout_image['zon-column'].extend(layout_image['leader'])
         layout_image['zon-square'].extend(layout_image['leader'])
+        layout_image['zon-blog'].extend(layout_image['leader'])
+        layout_image['zon-topic'].extend(layout_image['leader-fullwidth'])
     except KeyError:
         log.warn("Layout could not be extended")
 
