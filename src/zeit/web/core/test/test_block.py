@@ -131,14 +131,8 @@ def test_vivi_module_should_have_a_layout_attribute():
     assert module._layout.id == 'barbapapa'
 
 
-def test_block_liveblog_instance_causing_timeouts(monkeypatch, mockserver):
-
-    def util(arg):
-        return {
-            'liveblog_backend_url': 'http://www.zeit.de/liveblog-backend',
-            'liveblog_status_url': 'http://www.zeit.de/liveblog-status'}
-
-    monkeypatch.setattr(zope.component, 'getUtility', util)
+def test_block_liveblog_instance_causing_timeouts(application, mockserver,
+        monkeypatch):
 
     # Disable caching
     beaker.cache.cache_regions.update({'long_term':{'enabled':False}})
