@@ -56,11 +56,9 @@ def login_state(request):
         'context-uri') else 'http://{}'.format(request.host)
     info = {}
     info['login'] = "{}/user/login?destination={}".format(
-        settings['community_host'],
-        destination)
+        settings['community_host'], destination)
     info['logout'] = "{}/user/logout?destination={}".format(
-        settings['community_host'],
-        destination)
+        settings['community_host'], destination)
     if request.authenticated_userid and 'user' in request.session:
         user = request.session['user']
         if 'picture' in user:
@@ -70,7 +68,7 @@ def login_state(request):
                     settings['community_static_host'])
             else:
                 del user['picture']
-        user['profile'] = "{}/user/{}".format(settings['community_host'],
-                                              request.authenticated_userid)
+        user['profile'] = "{}/user/{}".format(
+            settings['community_host'], request.authenticated_userid)
         info['user'] = user
     return info
