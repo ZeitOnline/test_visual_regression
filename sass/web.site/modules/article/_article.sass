@@ -94,3 +94,14 @@
 		a
 			// normal, hover, active, visited, focus
 			+link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)
+
+
+.article-page > .paragraph:first-of-type:first-letter
+	float: left
+	font-size: em(50px)
+	line-height: 0.75
+	font-family: $font-tabletgothic
+	font-weight: bold
+	margin: remify(8px 4px -12px -2px) // negative margin to prevent whitespace under drop cap
+	+respond-min($break-desktop-min)
+		margin-top: 12px
