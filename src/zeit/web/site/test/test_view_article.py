@@ -381,3 +381,20 @@ def test_nextread_is_responsive(selenium_driver, testserver, screen_size):
 
     if screen_size[0] == 980:
         assert nextread.size.get('height') < 450
+
+
+def test_article_column_should_have_no_body_image(testserver, testbrowser):
+    browser = testbrowser('{}/zeit-online/cp-content/kolumne'.format(
+        testserver.url))
+    assert not browser.cssselect('.article-body img')
+
+
+def test_article_column_author_image_should_be_present(
+        testserver, testbrowser):
+    browser = testbrowser('{}/zeit-online/cp-content/kolumne'.format(
+        testserver.url))
+    img = browser.cssselect(
+        '.column-heading__author .column-heading__media-item')
+    ratio = img[0].get('data-ratio')
+    src = img[0].get('src')
+    assert src != ""  and ratio != ""
