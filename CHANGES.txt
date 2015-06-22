@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - FIX: Show user menu for logged in users only
 
+- Improvement testing: Allow mockserver to sleep
+
 
 1.33.2 (2015-06-18)
 -------------------

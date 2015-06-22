@@ -390,7 +390,6 @@ def testserver(application_session, request, mockserver):
     return server
 
 
-
 @pytest.fixture(scope='session', params=[503])
 def http_testserver(request):
     from pyramid.config import Configurator
