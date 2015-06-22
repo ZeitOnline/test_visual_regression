@@ -42,10 +42,6 @@ class Centerpage(zeit.web.core.view.Base):
         return type(self.context).__name__.title()
 
     @zeit.web.reify
-    def displayed_last_published_semantic(self):
-        return form_date(get_last_published_semantic(self.context))
-
-    @zeit.web.reify
     def comment_counts(self):
         return zeit.web.core.comments.get_counts(*[t.uniqueId for t in self])
 
