@@ -362,7 +362,7 @@ def test_zon_main_nav_has_correct_structure(
     main_nav__ressorts = driver.find_elements_by_class_name(
         'main_nav__ressorts')[0]
     header__tags = driver.find_elements_by_class_name('header__tags')[0]
-    header__metadata = driver.find_elements_by_class_name('header__metadata')[0]
+    header_metadata = driver.find_elements_by_class_name('header__metadata')[0]
     main_nav__services = driver.find_elements_by_class_name(
         'main_nav__services')[0]
     main_nav__classifieds = driver.find_elements_by_class_name(
@@ -379,7 +379,7 @@ def test_zon_main_nav_has_correct_structure(
         # tags are hidden
         assert header__tags.is_displayed() is False
         # date bar is hidden
-        assert header__metadata.is_displayed() is False
+        assert header_metadata.is_displayed() is False
         # services li hidden from 4th elem on
         serv_li = main_nav__services.find_elements_by_tag_name('li')
         for li in serv_li[:3]:
