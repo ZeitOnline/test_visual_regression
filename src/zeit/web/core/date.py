@@ -139,7 +139,6 @@ class DeltaTime(object):
             'hours': 1  # blank minutes data after this many hours
         }
         self.hide = {
-            'days': 0,  # suppress delta after this many days
             'hours': 3  # suppress delta after this many hours
         }
 
