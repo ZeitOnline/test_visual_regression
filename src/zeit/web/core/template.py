@@ -30,6 +30,23 @@ log = logging.getLogger(__name__)
 
 
 @zeit.web.register_filter
+def block_type(obj):
+    """Outputs the class name in lower case format of one or multiple block
+    elements.
+
+    :param obj: list, str or tuple
+    :rtype: list, str or tuple
+    """
+
+    if obj is None:
+        return 'no_block'
+    elif isinstance(obj, list) or isinstance(obj, tuple):
+        return obj.__class__(block_type(o) for o in obj)
+    else:
+        return type(obj).__name__.lower()
+
+
+@zeit.web.register_filter
 def translate_url(url):
     if url is None:
         return
