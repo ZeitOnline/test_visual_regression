@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - FIX: Show user menu for logged in users only
 
+- FIX: Don't render empty tags like ``<em/>`` (which browsers don't like)
+
 
 1.33.2 (2015-06-18)
 -------------------

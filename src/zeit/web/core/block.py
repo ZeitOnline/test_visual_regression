@@ -531,7 +531,7 @@ def _inline_html(xml, elements=None):
     filter_xslt = lxml.etree.XML("""
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-            <xsl:output method="xml"
+            <xsl:output method="html"
                         omit-xml-declaration="yes" />
           <!-- Semantische HTML-ELemente übernehmen -->
           <xsl:template match="%s">
