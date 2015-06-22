@@ -332,17 +332,48 @@ def mockserver_factory(request):
     return factory
 
 
+class ISettings(pyramid.interfaces.ISettings):
+    """Custom interface class to register settings as a utility"""
+
+
+def sleep_tween(handler, registry):
+    """Tween to control wheter server should sleep for a little while"""
+    def timeout(request):
+        # Setting timeout globally can cause race conditions, if tests run
+        # parallel.
+        # XXX. Set sleep time per request
+        conf = zope.component.getUtility(ISettings)
+        import time
+        time.sleep(conf['sleep'])
+        print 'For request %s, mockserver slept %s seconds.' % (request.path,
+                                                                conf['sleep'])
+        response = handler(request)
+
+        # For comfortability set sleep back to 0
+        conf['sleep'] = 0
+        return response
+    return timeout
+
+
 @pytest.fixture(scope='session')
 def mockserver(request):
     """Used for mocking external HTTP dependencies like agatho or spektrum."""
     from pyramid.config import Configurator
+
     config = Configurator()
     config.add_static_view('/', 'zeit.web.core:data/')
+    settings = {'sleep': 0}
+    settings = pyramid.config.settings.Settings(d=settings)
+    interface = ISettings
+    zope.interface.declarations.alsoProvides(settings, interface)
+    zope.component.provideUtility(settings, interface)
+    config.add_tween('zeit.web.core.test.conftest.sleep_tween')
     app = config.make_wsgi_app()
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6552
     server.wsgi_app = app
     server.setUp()
+    server.settings = settings
     server.url = 'http://%s' % server['http_address']
     request.addfinalizer(server.tearDown)
     return server
@@ -357,6 +388,7 @@ def testserver(application_session, request, mockserver):
     server.url = 'http://%s' % server['http_address']
     request.addfinalizer(server.tearDown)
     return server
+
 
 
 @pytest.fixture(scope='session', params=[503])
