@@ -67,8 +67,3 @@ class JsonUpdateTimeView(zeit.web.core.view.Base):
             return date.isoformat()
         except AttributeError:
             return ''
-
-
-def get_last_published_semantic(context):
-    return zeit.cms.workflow.interfaces.IPublishInfo(
-        context).date_last_published_semantic
