@@ -55,15 +55,14 @@ class JsonUpdateTimeView(zeit.web.core.view.Base):
                 'last_published_semantic': self.last_published_semantic()}
 
     def last_published(self):
-        date = zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_last_published
+        date = self.publish_info.date_last_published
         try:
             return date.isoformat()
         except AttributeError:
             return ''
 
     def last_published_semantic(self):
-        date = get_last_published_semantic(self.context)
+        date = self.publish_info.date_last_published_semantic
         try:
             return date.isoformat()
         except AttributeError:
