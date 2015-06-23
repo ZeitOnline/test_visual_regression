@@ -368,6 +368,10 @@ class Base(object):
         return conf.get('dev_environment', '')
 
     @zeit.web.reify
+    def timezone(self):
+        return babel.dates.get_timezone('Europe/Berlin')
+
+    @zeit.web.reify
     def publish_info(self):
         return zeit.cms.workflow.interfaces.IPublishInfo(self.context)
 
@@ -377,18 +381,16 @@ class Base(object):
 
     @zeit.web.reify
     def date_first_released(self):
-        tz = babel.dates.get_timezone('Europe/Berlin')
         date = self.publish_info.date_first_released
         if date:
-            return date.astimezone(tz)
+            return date.astimezone(self.timezone)
 
     @zeit.web.reify
     def date_last_published_semantic(self):
-        tz = babel.dates.get_timezone('Europe/Berlin')
         date = self.publish_info.date_last_published_semantic
-        if (self.date_first_released is not None and date is not
-                None and date > self.date_first_released):
-            return date.astimezone(tz)
+        if (self.date_first_released is not None and date is not None
+                and date > self.date_first_released):
+            return date.astimezone(self.timezone)
 
 
 class Content(Base):
@@ -401,10 +403,9 @@ class Content(Base):
 
     @zeit.web.reify
     def date_print_published(self):
-        tz = babel.dates.get_timezone('Europe/Berlin')
         date = self.publish_info.date_print_published
         if date:
-            return date.astimezone(tz)
+            return date.astimezone(self.timezone)
 
     @zeit.web.reify
     def date_format(self):
@@ -436,8 +437,7 @@ class Content(Base):
 
     @zeit.web.reify
     def is_lead_story(self):
-        tz = babel.dates.get_timezone('Europe/Berlin')
-        today = datetime.datetime.now(tz).date()
+        today = datetime.datetime.now(self.timezone).date()
         yesterday = (today - datetime.timedelta(days=1))
 
         if self.leadtime.start:
