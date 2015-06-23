@@ -4,6 +4,8 @@ Change log for zeit.web
 1.34 (unreleased)
 -----------------
 
+- HOTFIX: Add view config for ZMO articles to comments view
+
 - ZON-1564: Show relative date on homepage
 
 - ZON-1790: Get liveblog metadata through ReSTful API
