@@ -52,7 +52,7 @@ class Reach(object):
 
     def get_buzz(self, unique_id='http://xml.zeit.de/index'):
         url = unique_id.replace(
-            'http://www.zeit.de/', zeit.cms.interfaces.ID_NAMESPACE, 1)
+            zeit.cms.interfaces.ID_NAMESPACE, 'http://www.zeit.de/', 1)
         return self._get('buzz', url=url) or {}
 
 
