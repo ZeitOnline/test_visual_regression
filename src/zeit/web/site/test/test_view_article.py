@@ -397,4 +397,4 @@ def test_article_column_author_image_should_be_present(
         '.column-heading__author .column-heading__media-item')
     ratio = img[0].get('data-ratio')
     src = img[0].get('src')
-    assert src != ""  and ratio != ""
+    assert src != "" and ratio != ""
