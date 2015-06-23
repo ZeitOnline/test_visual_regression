@@ -13,7 +13,6 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
-    mock_view.displayed_last_published_semantic = datetime.datetime.now()
     html_str = tpl.render(view=mock_view)
     html = lxml.html.fromstring(html_str).cssselect
 
@@ -134,7 +133,6 @@ def test_nav_contains_essential_elements(application, jinja2_env):
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
     mock_view.request.host = 'www.zeit.de'
-    mock_view.displayed_last_published_semantic = datetime.datetime.now()
     html_str = tpl.render(view=mock_view)
     html = lxml.html.fromstring(html_str).cssselect
 
@@ -185,7 +183,6 @@ def test_nav_should_contain_schema_org_markup(application, jinja2_env):
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
     mock_view.request.host = 'www.zeit.de'
-    mock_view.displayed_last_published_semantic = datetime.datetime.now()
     html_str = tpl.render(view=mock_view)
     html = lxml.html.fromstring(html_str).cssselect
 
@@ -365,7 +362,7 @@ def test_zon_main_nav_has_correct_structure(
     main_nav__ressorts = driver.find_elements_by_class_name(
         'main_nav__ressorts')[0]
     header__tags = driver.find_elements_by_class_name('header__tags')[0]
-    header__date = driver.find_elements_by_class_name('header__date')[0]
+    header_metadata = driver.find_elements_by_class_name('header__metadata')[0]
     main_nav__services = driver.find_elements_by_class_name(
         'main_nav__services')[0]
     main_nav__classifieds = driver.find_elements_by_class_name(
@@ -382,7 +379,7 @@ def test_zon_main_nav_has_correct_structure(
         # tags are hidden
         assert header__tags.is_displayed() is False
         # date bar is hidden
-        assert header__date.is_displayed() is False
+        assert header_metadata.is_displayed() is False
         # services li hidden from 4th elem on
         serv_li = main_nav__services.find_elements_by_tag_name('li')
         for li in serv_li[:3]:
@@ -579,3 +576,30 @@ def test_zmo_link_exists_and_is_clickable(selenium_driver, testserver):
 
     assert driver.current_url == '{}/zeit-magazin/index'.format(
         testserver.url), 'zmo hp wasnt called correctly'
+
+
+def test_nav_hp_contains_relative_date(jinja2_env):
+    def now(**kwargs):
+        return datetime.datetime.now() - datetime.timedelta(**kwargs)
+
+    tpl = jinja2_env.get_template(
+        'zeit.web.site:templates/centerpage.html')
+    view = mock.Mock()
+    view.topic_links = {}
+    view.is_hp = True
+    view.date_last_modified = now(hours=1)
+    lines = tpl.blocks['metadata'](tpl.new_context({'view': view}))
+    html_str = ' '.join(lines).strip()
+    html = lxml.html.fromstring(html_str)
+    header_date = html.cssselect('.header__date')
+
+    assert len(header_date) == 1
+    assert header_date[0].text_content().strip() == 'Aktualisiert vor 1 Stunde'
+
+    view.date_last_modified = now(hours=3)
+    lines = tpl.blocks['metadata'](tpl.new_context({'view': view}))
+    html_str = ' '.join(lines).strip()
+    html = lxml.html.fromstring(html_str)
+    header_date = html.cssselect('.header__date')
+
+    assert len(header_date) == 0

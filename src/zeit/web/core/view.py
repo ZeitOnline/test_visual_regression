@@ -367,26 +367,9 @@ class Base(object):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('dev_environment', '')
 
-
-class Content(Base):
-
-    is_longform = False
-
-    @zeit.web.reify
-    def subtitle(self):
-        return self.context.subtitle
-
     @zeit.web.reify
     def date_last_modified(self):
         return self.date_last_published_semantic or self.date_first_released
-
-    @zeit.web.reify
-    def date_print_published(self):
-        tz = babel.dates.get_timezone('Europe/Berlin')
-        date = zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_print_published
-        if date:
-            return date.astimezone(tz)
 
     @zeit.web.reify
     def date_first_released(self):
@@ -403,6 +386,23 @@ class Content(Base):
             self.context).date_last_published_semantic
         if (self.date_first_released is not None and date is not
                 None and date > self.date_first_released):
+            return date.astimezone(tz)
+
+
+class Content(Base):
+
+    is_longform = False
+
+    @zeit.web.reify
+    def subtitle(self):
+        return self.context.subtitle
+
+    @zeit.web.reify
+    def date_print_published(self):
+        tz = babel.dates.get_timezone('Europe/Berlin')
+        date = zeit.cms.workflow.interfaces.IPublishInfo(
+            self.context).date_print_published
+        if date:
             return date.astimezone(tz)
 
     @zeit.web.reify
