@@ -1,4 +1,5 @@
 import requests
+import requests_file
 import zope.component
 
 import zeit.content.article.interfaces
@@ -7,7 +8,7 @@ import zeit.web.core.interfaces
 import zeit.web.core.reach
 
 
-def test_reach_host_should_be_stored_in_instance(application):
+def test_reach_host_should_be_configured_in_instance(application):
     conn = zeit.web.core.reach.Reach()
     assert conn.host.endswith('zeit.web/src/zeit/web/core/data/linkreach/api/')
 
@@ -16,6 +17,12 @@ def test_reach_connection_should_be_stored_in_class(application):
     conn = zeit.web.core.reach.Reach()
     assert conn.session is zeit.web.core.reach.Reach.session
     assert isinstance(conn.session, requests.Session)
+
+
+def test_mock_reach_connection_should_handle_file_scheme(application):
+    conn = zeit.web.core.reach.MockReach()
+    adapter = conn.session.get_adapter('file://')
+    assert isinstance(adapter, requests_file.FileAdapter)
 
 
 def test_data_for_twitter_should_be_fetched(application):
