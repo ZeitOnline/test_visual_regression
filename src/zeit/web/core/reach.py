@@ -8,6 +8,7 @@ import zope.interface
 
 import zeit.cms.interfaces
 
+import zeit.web
 import zeit.web.core.interfaces
 
 
@@ -18,9 +19,12 @@ class Reach(object):
 
     zope.interface.implements(zeit.web.core.interfaces.IReach)
 
-    host = zope.component.getUtility(
-        zeit.web.core.interfaces.ISettings).get('linkreach_host', '')
     session = requests.Session()
+
+    @zeit.web.reify
+    def host(self):
+        return zope.component.getUtility(
+            zeit.web.core.interfaces.ISettings).get('linkreach_host', '')
 
     def _get(self, location, **kw):
         url = '{}/{}'.format(self.host, location)
