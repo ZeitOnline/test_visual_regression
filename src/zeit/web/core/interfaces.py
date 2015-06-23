@@ -161,3 +161,21 @@ class ITraversable(zope.interface.Interface):
 
 class IBlock(zeit.edit.interfaces.IBlock):
     """Interface for zeit.web specific IBlock implementations"""
+
+
+class IReach(zope.interface.Interface):
+
+    def get_comments(self):
+        """Retrieve a ranking of most commented articles"""
+
+    def get_score(self):
+        """Return a ranking of highest buzz-scoring articles"""
+
+    def get_social(self):
+        """Get a ranking of articles trending on social platforms"""
+
+    def get_views(self):
+        """Output a ranking of articles with top view counts"""
+
+    def get_buzz(self):
+        """Collect a buzz summary for an article by uniqueId"""
