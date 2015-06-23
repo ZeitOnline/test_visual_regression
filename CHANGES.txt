@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1790: Get liveblog metadata through ReSTful API
 
+- ZON-1634: Article type 'column' with author image
+
 - ZON-1837: Fix timedeltas for article teaser
 
 - ZON-1765: MedRec Ad on video single page
