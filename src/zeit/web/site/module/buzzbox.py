@@ -1,19 +1,25 @@
+import logging
+
+import zope.component
+
 import zeit.content.cp.interfaces
 
 import zeit.web
 import zeit.web.core.block
 import zeit.web.core.centerpage
+import zeit.web.core.interfaces
+
+
+log = logging.getLogger(__name__)
 
 
 class Buzzbox(zeit.web.core.block.Module, list):
 
-    category = None
     header = None
 
-    def __init__(self, context):
-        super(Buzzbox, self).__init__(context)
-        self += zeit.web.core.reach.fetch(self.category, self.ressort, 3)
-        self.layout = 'buzz-{}'.format(self.category)
+    @zeit.web.reify
+    def reach(self):
+        return zope.component.getUtility(zeit.web.core.interfaces.IReach)
 
     @zeit.web.reify
     def ressort(self):
@@ -24,19 +30,31 @@ class Buzzbox(zeit.web.core.block.Module, list):
 @zeit.web.register_module('mostread')
 class MostreadBuzzbox(Buzzbox):
 
-    category = 'mostread'
     header = 'Meistgelesene Artikel'
+
+    def __init__(self, context):
+        super(MostreadBuzzbox, self).__init__(context)
+        self += self.reach.get_views(section=self.ressort)
+        self.layout = 'buzz-mostread'
 
 
 @zeit.web.register_module('mostcommented')
 class CommentsBuzzbox(Buzzbox):
 
-    category = 'comments'
     header = 'Meistkommentiert'
+
+    def __init__(self, context):
+        super(CommentsBuzzbox, self).__init__(context)
+        self += self.reach.get_comments(section=self.ressort)
+        self.layout = 'buzz-comments'
 
 
 @zeit.web.register_module('mostshared')
 class FacebookBuzzbox(Buzzbox):
 
-    category = 'facebook'
     header = 'Meistgeteilt'
+
+    def __init__(self, context):
+        super(FacebookBuzzbox, self).__init__(context)
+        self += self.reach.get_social(facet='facebook', section=self.ressort)
+        self.layout = 'buzz-facebook'
