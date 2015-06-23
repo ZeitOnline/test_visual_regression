@@ -42,7 +42,7 @@ setup(
         'repoze.bitblt',
         'repoze.vhm',
         'requests',
-        'requests_file',
+        'requests-file',
         'setuptools',
         'zc.iso8601',
         'wsgiproxy',
