@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.34 (unreleased)
+1.34 (2015-06-23)
 -----------------
 
 - HOTFIX: Add view config for ZMO articles to comments view
