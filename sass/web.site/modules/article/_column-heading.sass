@@ -25,13 +25,13 @@
 
 	&__information
 		+font-smoothing
-		padding: remify(20px 0 50px 0)
+		padding: remify(20px 0 50px)
 		vertical-align: middle
 		+respond-max($break-phablet-min)
 			position: relative
 			z-index: 1
 		+respond-min($break-phablet-min)
-			padding: remify(40px 0 40px 0)
+			padding: remify(40px 0)
 			width: 65%
 		+respond-min($break-tablet-min)
 			width: 70%
@@ -64,30 +64,29 @@
 		width: 100%
 
 	&__header
-		margin-top: remify(0.25em)
-		margin-bottom: remify(0.25em)
+		margin: 0
 
 	&__kicker
-		display: block
 		color: $charcoal
+		display: block
+		font-size: remify(16px)
 		letter-spacing: $zon-letter-spacing-m
 		margin-bottom: remify(4px)
-		font-size: remify(16px)
 
 	&__title
-		display: block
 		color: $white
-		letter-spacing: 0.008em
+		display: block
 		font-size: remify(24px)
+		letter-spacing: 0.008em
 		line-height: percentage(31/24)
+		margin-bottom: remify(4px)
 		max-width: remify(400px)
 		+respond-min($break-phablet-min)
 			max-width: remify(550px)
 		+respond-min($break-tablet-min)
-			margin-top: 0
-			margin-bottom: remify(-3px)
-			max-width: auto
 			font-size: remify(32px)
+			margin-bottom: 0
+			max-width: none
 
 	&__name
 		color: $cararra
