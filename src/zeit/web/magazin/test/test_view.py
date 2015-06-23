@@ -110,7 +110,7 @@ def test_linkreach_property_should_fetch_correct_data(application):
     article_view.request.url = 'index'
     article_view.request.traversed = ('index',)
     article_view.request.route_url = lambda *args: ''
-    assert article_view.linkreach['social']['total'] == 1.1
+    assert article_view.linkreach['total'] == 92
 
 
 def test_header_img_should_be_first_image_of_content_blocks(application):
