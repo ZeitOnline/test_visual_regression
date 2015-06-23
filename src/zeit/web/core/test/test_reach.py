@@ -1,35 +1,16 @@
-# -*- coding: utf-8 -*-
-import pytest
-
 import zeit.content.article.interfaces
 
 import zeit.web.core.reach
 
 
-def test_unavailable_service_should_throw_exceptio():
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('N/A', 'zeit-magazin')
+def test_reach_host_should_be_stored_in_instance(application):
+    conn = zeit.web.core.reach.Reach()
+    assert conn.host == 'http://reach.zeit.de:4044/api'
 
 
-def test_unavailable_section_should_not_throw_exception():
-    assert zeit.web.core.reach.fetch('comments', 'N/A') == []
-    assert zeit.web.core.reach.fetch('mostread', 'N/A') == []
-    assert zeit.web.core.reach.fetch('twitter', 'N/A') == []
-
-
-def test_out_of_bounds_limits_should_throw_exception():
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('comments', 'zeit-magazin', limit=0)
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('comments', 'zeit-magazin', limit=99)
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('mostread', 'zeit-magazin', limit=0)
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('mostread', 'zeit-magazin', limit=99)
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('twitter', 'zeit-magazin', limit=0)
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('twitter', 'zeit-magazin', limit=99)
+def test_reach_connection_should_be_stored_in_class(application):
+    conn = zeit.web.core.reach.Reach()
+    assert conn._session is zeit.web.core.reach.Reach._session
 
 
 def test_data_for_twitter_should_be_fetched(application):
@@ -40,12 +21,6 @@ def test_data_for_twitter_should_be_fetched(application):
 
 def test_data_for_facebook_should_be_fetched(application):
     data = zeit.web.core.reach.fetch('facebook', 'zeit-magazin')
-    assert len(data) == 3
-    assert all(['teaserTitle' in a for a in data])
-
-
-def test_data_for_googleplus_should_be_fetched(application):
-    data = zeit.web.core.reach.fetch('googleplus', 'zeit-magazin')
     assert len(data) == 3
     assert all(['teaserTitle' in a for a in data])
 
