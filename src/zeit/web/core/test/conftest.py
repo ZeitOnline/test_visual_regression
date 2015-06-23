@@ -58,6 +58,8 @@ settings = {
     'community_static_host': 'http://static_community/foo',
     'agatho_host': 'http://localhost:6552/comments',
     'linkreach_host': 'egg://zeit.web.core/data/linkreach/api',
+    'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
+        'zeit.web.core', 'data/linkreach/api'),
     'google_tag_manager_host': 'foo.baz',
     'app_servers': '',
     'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
