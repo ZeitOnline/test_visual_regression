@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from pyramid.view import view_config
-import babel.dates
 
 import zeit.content.cp.interfaces
 
@@ -74,9 +73,3 @@ class JsonUpdateTimeView(zeit.web.core.view.Base):
 def get_last_published_semantic(context):
     return zeit.cms.workflow.interfaces.IPublishInfo(
         context).date_last_published_semantic
-
-
-def form_date(date):
-    tz = babel.dates.get_timezone('Europe/Berlin')
-    if date:
-        return date.astimezone(tz)
