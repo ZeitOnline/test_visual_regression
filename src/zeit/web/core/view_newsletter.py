@@ -1,4 +1,3 @@
-import babel.dates
 import pyramid.view
 
 import zeit.cms.workflow.interfaces
