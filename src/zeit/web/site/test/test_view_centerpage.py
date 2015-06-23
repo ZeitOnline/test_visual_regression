@@ -480,7 +480,7 @@ def test_parquet_region_list_should_have_regions(application):
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
     assert len(view.region_list_parquet) == 4, (
-        'View contains {} parquet regions instead of 4' % len(
+        'View contains %s parquet regions instead of 4' % len(
             view.region_list_parquet))
 
 
@@ -672,9 +672,6 @@ def test_centerpage_should_have_header_tags(testbrowser, testserver):
 
     assert len(html('.header__tags')) == 1
     assert html('.header__tags__label')[0].text == 'Schwerpunkte'
-
-    assert len(html('.header__date')) == 1
-    assert html('.header__date')[0].text == '3. Dezember 2014, 12:50 Uhr'
 
     assert len(html('.header__tags__link')) == 3
     assert html('.header__tags__link')[0].get('href').endswith(

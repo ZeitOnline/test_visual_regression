@@ -45,6 +45,8 @@ settings = {
     'cache.default_term.expire': '300',
     'cache.long_term.expire': '3600',
     'scripts_url': '/js/static',
+    'liveblog_backend_url': 'http://localhost:6552/liveblog/backend',
+    'liveblog_status_url': 'http://localhost:6552/liveblog/status',
     'caching_time_content': '5',
     'caching_time_article': '10',
     'caching_time_centerpage': '20',
@@ -114,6 +116,10 @@ settings = {
     'vivi_zeit.content.cp_cp-types-url': (
         'egg://zeit.web.core/data/config/cp-types.xml'),
     'vivi_zeit.content.cp_cp-feed-max-items': '30',
+    'vivi_zeit.content.image_variant-source': (
+        'egg://zeit.web.core/data/config/image-variants.xml'),
+    'vivi_zeit.content.image_legacy-variant-source': (
+        'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
     'vivi_zeit.web_banner-source': (
         'egg://zeit.web.core/data/config/banner.xml'),
     'vivi_zeit.web_banner-id-mappings': (

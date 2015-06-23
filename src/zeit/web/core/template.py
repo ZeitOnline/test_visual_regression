@@ -51,7 +51,9 @@ def create_url(obj):
 
 
 @zeit.web.register_filter
-def format_date(obj, type='short'):
+def format_date(date, type='short', pattern=None):
+    if date is None:
+        return ''
     formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
                'regular': "d. MMMM yyyy, H:mm",
                'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd",
@@ -61,10 +63,17 @@ def format_date(obj, type='short'):
     # "yyyy-MM-dd'T'HH:mm:ssZZZZZ" or "yyyy-MM-dd'T'HH:mm:ssXXX" is not working
     if type == 'iso8601':
         try:
-            return obj.replace(microsecond=0).isoformat()
+            return date.replace(microsecond=0).isoformat()
         except AttributeError:
             return
-    return babel.dates.format_datetime(obj, formats[type], locale="de_De")
+    elif type == 'timedelta':
+        delta = date - datetime.datetime.now(date.tzinfo)
+        text = babel.dates.format_timedelta(delta, threshold=1,
+                                            add_direction=True, locale="de_DE")
+        return text[:1].lower() + text[1:] if text else ''
+    if pattern is None:
+        pattern = formats[type]
+    return babel.dates.format_datetime(date, pattern, locale="de_DE")
 
 
 @zeit.web.register_filter
@@ -449,6 +458,8 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
         layout_image['zon-series'].extend(layout_image['leader'])
         layout_image['zon-column'].extend(layout_image['leader'])
         layout_image['zon-square'].extend(layout_image['leader'])
+        layout_image['zon-blog'].extend(layout_image['leader'])
+        layout_image['zon-topic'].extend(layout_image['leader-fullwidth'])
     except KeyError:
         log.warn("Layout could not be extended")
 

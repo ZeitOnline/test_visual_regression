@@ -1,1 +1,2 @@
 graft src/zeit/web/static
+exclude .gitignore

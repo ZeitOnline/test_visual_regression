@@ -90,6 +90,8 @@ class RenderedLegacyArea(LegacyArea):
         uid = unicode(block.xml.find('./referenced_cp'))
         area.referenced_cp = zeit.cms.interfaces.ICMSContent(uid, None)
         auto = zeit.content.cp.interfaces.IRenderedArea(area)
+        # XXX We really should call auto.values() here instead of private API.
+        area._v_retrieved_content = 0
         values = auto._query_centerpage()[:area.count]
 
         lids = [block.layout.id] + area.count * ['zon-parquet-small']

@@ -1,3 +1,6 @@
+.liveblog
+	margin: 0 (-$page-padding) em(20px)
+
 .liveblog-text-wrapper
 	+transition(max-height .5s)
 	overflow: hidden
@@ -5,7 +8,7 @@
 
 .liveblog-text-wrapper--wrapped
 	cursor: pointer
-	margin: 0 auto
+	margin: 0 auto em(20px)
 	max-width: em(660px)
 	max-height: 5 * 1.4 * em(18px) // 5 lines paragraph text
 	+respond-min($break-desktop-min)
