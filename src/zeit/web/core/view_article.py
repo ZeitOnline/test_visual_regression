@@ -44,6 +44,16 @@ class Article(zeit.web.core.view.Content):
             raise pyramid.httpexceptions.HTTPNotFound()
 
     @zeit.web.reify
+    def main_image_block(self):
+        img = zeit.web.core.block.IFrontendBlock(
+            self.context.main_image_block, None)
+        try:
+            self._copyrights.setdefault(img.uniqueId, img)
+        except AttributeError:
+            pass
+        return img
+
+    @zeit.web.reify
     def template(self):
         return IArticleTemplateSettings(self.context).template or 'default'
 
@@ -312,10 +322,9 @@ class ArticlePage(Article):
 
     @zeit.web.reify
     def current_page(self):
-        return zeit.web.core.interfaces.IPages(self.context)[self.page_nr - 1]
+        return self.pages[self.page_nr - 1]
 
     @zeit.web.reify
     def next_title(self):
-        pages = zeit.web.core.interfaces.IPages(self.context)
-        if self.page_nr < len(pages):
-            return pages[self.page_nr].teaser
+        if self.page_nr < len(self.pages):
+            return self.pages[self.page_nr].teaser

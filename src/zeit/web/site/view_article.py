@@ -69,7 +69,14 @@ def is_column_article(context, request):
                                 is_column_article),
              renderer='templates/column.html')
 class ColumnArticle(Article):
-    pass
+
+    @zeit.web.reify
+    def author_img(self):
+        img = zeit.web.core.template.closest_substitute_image(
+            self.authors[0]['image_group'], 'zon-column')
+        # TODO: we adapt ITeaserImage to get image.ratio as property
+        # @wosc wanted to integrate this into zeit.content.image
+        return zeit.web.core.interfaces.ITeaserImage(img)
 
 
 @view_config(context=zeit.web.core.article.ILiveblogArticle,
