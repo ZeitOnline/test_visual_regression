@@ -1,3 +1,4 @@
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 
 {% if area is undefined %}
@@ -23,12 +24,20 @@ TODO:
       <span class="centerpage-ressort-heading__readmore-linktext">Alle Fotostrecken</span>
     </a>
   </div>
+
+  {# TODO: is this the right way to implement a wrapper? (1/2) #}
+  <div class="zon-gallery-wrapper">
+
 {% endblock %}
 
 
 {% block after_module_list %}
-  <button type="button" class="zon-gallery__shuffle-button" id="shuffle-gallery" onclick="shuffleGallery()">
-      Andere laden
+
+  {# TODO: is this the right way to implement a wrapper? (2/2) #}
+  </div>
+
+  <button type="button" class="button zon-gallery__shuffle-button" id="shuffle-gallery" onclick="shuffleGallery()">
+    {{ lama_core.use_svg_icon('shuffle', 'zon-gallery__shuffle-icon', request) }}Andere laden
   </button>
 
   <script type="text/javascript">

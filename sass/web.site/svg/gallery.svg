@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="32px" height="22px" viewBox="0 0 32 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.1 (12002) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_gallery</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Vermaßung" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="bigariegel_phone+phablet_vermaßt" sketch:type="MSArtboardGroup" transform="translate(-313.000000, -535.000000)">
+            <g id="Card-Hover" sketch:type="MSLayerGroup" transform="translate(303.000000, 404.000000)">
+                <g id="icon_gallery" transform="translate(9.000000, 131.000000)" sketch:type="MSShapeGroup">
+                    <g id="Group-5" transform="translate(2.000000, 1.000000)" fill="#1D1D1B">
+                        <path d="M30,15.8271 L30,0.0001 L4.963,0.0001 L4.963,3.1731 L26.037,3.1731 L26.037,15.8271 L30,15.8271 Z" id="Fill-1"></path>
+                        <path d="M25.0371,15.8271 L25.0371,4.1731 L4.9631,4.1731 L3.9631,4.1731 L0.0001,4.1731 L0.0001,20.0001 L25.0371,20.0001 L25.0371,16.8271 L25.0371,15.8271 Z" id="Fill-3"></path>
+                    </g>
+                    <path d="M5.9626,0.0004 L5.9626,4.1724 L0.9996,4.1724 L0.9996,22.0004 L28.0366,22.0004 L28.0366,17.8264 L33.0006,17.8264 L33.0006,0.0004 L5.9626,0.0004 Z M6.9626,1.0004 L31.9996,1.0004 L31.9996,16.8264 L28.0366,16.8264 L28.0366,4.1724 L6.9626,4.1724 L6.9626,1.0004 Z M1.9996,5.1724 L5.9626,5.1724 L6.9626,5.1724 L27.0366,5.1724 L27.0366,16.8264 L27.0366,17.8264 L27.0366,21.0004 L1.9996,21.0004 L1.9996,5.1724 Z" id="Fill-6" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

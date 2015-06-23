@@ -1,21 +1,22 @@
 .cp-area--gallery
 	background-color: $zon_lighter_grey
-	padding: remify(20px) remify(20px)
-// TODO: remify all the pixels!?
+	padding: remify(20px)
 
 .zon-gallery
-	border-top: none
 	background-color: $white
-	box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.05)
 	margin-bottom: remify(20px)
-	padding-bottom: remify(17px)
+
+	&:hover
+		box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.05)
 
 	&__media
 		margin: 0
 
 	&__container
-		padding-left: 20px
-		padding-right: 20px
+		padding: remify(20px) remify(18px)
+
+	&__heading
+		margin: 0
 
 	&__combined-link
 		@extend %teaser-combined-link
@@ -25,30 +26,66 @@
 		display: block
 		font-size: remify(14px)
 		letter-spacing: $zon-letter-spacing-m
-		+respond-min($break-desktop-min)
-			font-size: remify(14px)
 
 	// TODO: das ist dahingestrickt. Wo krieg ich ein vernüftig geerbtes
 	// Styling her?
 	&__title
 		display: block
 		font-size: 18px
-		line-height: 22px
-		margin-top: 10px
+		+respond-min($break-tablet-min)
+			margin-top: 0
 
+	// TODO: Media Queries hier reinstricken, oder unten gebündelt?
 	&__text,
 	&__byline,
 	&__counter
 		+respond-max($break-tablet-min)
 			display: none
 
+	&__text
+		+respond-min($break-tablet-min)
+			margin: 0
+			font-size: 15px
+			color: $zon_grey
+
+	&__figurewrapper
+		position: relative
+
+	&__icon
+		position: absolute
+		bottom: remify(6px)
+		left: remify(12px)
+		height: remify(32px)
+		width: remify(32px)
+		// svg colors
+		stroke: $white
+		fill: rgba(33,33,33,0.2)
+
+	&__counter
+		position: absolute
+		bottom: 0
+		right: 0
+		padding: remify(2px) 1rem
+		background-color: #333338
+		color: $white
+		font-size: remify(12px)
+		letter-spacing: 0.04em
+
+
+	// TODO: this is not an element of zon-gallery (which is a single teaser)
 	&__shuffle-button
-		margin: 0 auto
+		background-color: $white
 		display: block
+		margin: 0 auto
 
+	&__shuffle-icon
+		+inline-block
+		width: em(16px)  // em intended
+		height: em(14px) // em intended
+		margin-right: 0.5em
+		// svg colors
+		fill: $zon-charcoal
 
-// TODO: first-child does not work if included inside zon-gallery block above!?
-// TODO: same height!
 +respond-min($break-tablet-min)
 	.zon-gallery
 		width: remify(354px)
@@ -56,6 +93,9 @@
 	// substitute for margin and last-of-type margin Gedöns
 	.zon-gallery+.zon-gallery
 		margin-left: remify(20px)
+	// flexbox for same height
+	.zon-gallery-wrapper
+		+display-flex
 
 +respond-min($break-desktop-min)
 	.zon-gallery
