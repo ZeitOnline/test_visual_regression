@@ -52,8 +52,7 @@ log = logging.getLogger(__name__)
 
 class Application(object):
 
-    DONT_SCAN_TESTS = [re.compile('test$').search]
-    DONT_SCAN = DONT_SCAN_TESTS + ['zeit.web.core.preview']
+    DONT_SCAN = [re.compile('test$').search]
 
     def __init__(self):
         self.settings = {}

@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - Code cleanup: Harmonize template code
 
+- Maintenance: Drop vivi-internal preview capabilities
+
 
 1.34 (2015-06-23)
 -----------------
