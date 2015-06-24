@@ -157,12 +157,12 @@ class Liveblog(object):
             self.id = self.blog_id
 
         url = '{}/Blog/{}/Post/Published'
-        content = self.getReSTful(url.format(self.status_url, self.id))
+        content = self.get_restful(url.format(self.status_url, self.id))
 
         if (content and 'PostList' in content and len(
                 content['PostList']) and 'href' in content['PostList'][0]):
             href = content['PostList'][0]['href']
-            content = self.getReSTful(self.prepareRef(href))
+            content = self.get_restful(self.prepare_ref(href))
             if content:
                 tz = babel.dates.get_timezone('Europe/Berlin')
                 utc = babel.dates.get_timezone('UTC')
@@ -181,28 +181,26 @@ class Liveblog(object):
 
         # only needed for beta testing with liveblog embed code
         # ToDo: remove after finished relaunch
-        self.theme = self.getTheme(self.id)
+        self.theme = self.get_theme(self.id)
 
-    def prepareRef(self, url):
+    def prepare_ref(self, url):
         return 'http:{}'.format(url).replace(
             'http://zeit.superdesk.pro/resources/LiveDesk', self.status_url, 1)
 
-    def getReSTful(self, url):
+    def get_restful(self, url):
         try:
-            response = requests.get(url, timeout=self.timeout)
-            if response.ok and response.content:
-                return response.json()
-        except requests.exceptions.RequestException:
-            return
+            return requests.get(url, timeout=self.timeout).json()
+        except (requests.exceptions.RequestException, ValueError):
+            pass
 
     @beaker.cache.cache_region('long_term', 'liveblog_theme')
-    def getTheme(self, blog_id):
+    def get_theme(self, blog_id):
         href = None
         blog_theme_id = None
 
         if self.seo_id is None:
             url = '{}/Blog/{}/Seo'
-            content = self.getReSTful(url.format(self.status_url, self.id))
+            content = self.get_restful(url.format(self.status_url, self.id))
             if (content and 'SeoList' in content and len(
                     content['SeoList']) and 'href' in content['SeoList'][0]):
                 href = content['SeoList'][0]['href']
@@ -211,7 +209,7 @@ class Liveblog(object):
                 self.seo_id)
 
         if href:
-            content = self.getReSTful(self.prepareRef(href))
+            content = self.get_restful(self.prepare_ref(href))
             if content and 'BlogTheme' in content:
                 try:
                     blog_theme_id = int(content['BlogTheme']['Id'])
