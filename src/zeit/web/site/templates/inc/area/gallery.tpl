@@ -7,41 +7,43 @@
 
 {#
 TODO:
-- set region.kind for the cp-region modifier
 - get right image, create dummy images for the dummy galleries
 - JS
-- Gallery Icon
-- Button with Icon
 #}
 
 {% block before_module_list %}
 
-  <div class="centerpage-ressort-heading">
+  <div class="cp-ressort-heading">
     {# TODO: This could be a headline or something? #}
-    <div class="centerpage-ressort-heading__title">Fotostrecken</div>
+    <div class="cp-ressort-heading__title">Fotostrecken</div>
     {# TODO: probably we have a URL generator or something ... ? #}
-    <a href="/foto/index" class="centerpage-ressort-heading__readmore-link">
-      <span class="centerpage-ressort-heading__readmore-linktext">Alle Fotostrecken</span>
+    <a href="/foto/index" class="cp-ressort-heading__readmore-link">
+      <span class="cp-ressort-heading__readmore-linktext">Alle Fotostrecken</span>
     </a>
   </div>
 
-  {# TODO: is this the right way to implement a wrapper? (1/2) #}
+  {# TODO: is this the right way to implement a wrapper? We would need it inside the area/default.html. (1/2) #}
   <div class="zon-gallery-wrapper">
 
 {% endblock %}
 
+{% block before_module_include scoped %}{% endblock %}
+{% block after_module_include scoped %}{% endblock %}
 
 {% block after_module_list %}
 
-  {# TODO: is this the right way to implement a wrapper? (2/2) #}
+  {# TODO: is this the right way to implement a wrapper? We would need it inside the area/default.html. (2/2) #}
   </div>
 
+  {# TODO: shuffle-button is NOT an element of a zon-gallery block! #}
   <button type="button" class="button zon-gallery__shuffle-button" id="shuffle-gallery" onclick="shuffleGallery()">
     {{ lama_core.use_svg_icon('shuffle', 'zon-gallery__shuffle-icon', request) }}Andere laden
   </button>
 
   <script type="text/javascript">
   {# XXX This script is just meant to be a proof of concept. Please rewrite to your liking. #}
+  {# TODO: run imageJS after loading the new images #}
+  {# TODO: put this into a requireJS module ??? #}
   function shuffleGallery() {
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {

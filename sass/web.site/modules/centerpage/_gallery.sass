@@ -1,6 +1,7 @@
-.cp-area--gallery
-	background-color: $zon_lighter_grey
-	padding: remify(20px)
+
+// REFERENCE:
+// https://zeit-online.atlassian.net/secure/attachment/19208/bigariegel_desktop%2Btablet_vermaßt.png
+// https://zeit-online.atlassian.net/secure/attachment/19207/bigariegel_phone%2Bphablet_vermaßt.png
 
 .zon-gallery
 	background-color: $white
@@ -37,7 +38,6 @@
 
 	// TODO: Media Queries hier reinstricken, oder unten gebündelt?
 	&__text,
-	&__byline,
 	&__counter
 		+respond-max($break-tablet-min)
 			display: none
@@ -50,6 +50,8 @@
 
 	&__figurewrapper
 		position: relative
+		// min-height in case the image is not loaded (yet)
+		min-height: 3rem
 
 	&__icon
 		position: absolute
