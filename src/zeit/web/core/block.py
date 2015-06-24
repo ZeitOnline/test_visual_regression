@@ -215,7 +215,7 @@ class Liveblog(object):
             if content and 'BlogTheme' in content:
                 try:
                     blog_theme_id = int(content['BlogTheme']['Id'])
-                except KeyError, ValueError:
+                except (KeyError, ValueError):
                     pass
 
         # return new theme names
