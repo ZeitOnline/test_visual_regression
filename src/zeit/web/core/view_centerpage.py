@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from pyramid.view import view_config
-import babel.dates
 
 import zeit.content.cp.interfaces
 
@@ -42,10 +41,6 @@ class Centerpage(zeit.web.core.view.Base):
         return type(self.context).__name__.title()
 
     @zeit.web.reify
-    def displayed_last_published_semantic(self):
-        return form_date(get_last_published_semantic(self.context))
-
-    @zeit.web.reify
     def comment_counts(self):
         return zeit.web.core.comments.get_counts(*[t.uniqueId for t in self])
 
@@ -78,9 +73,3 @@ class JsonUpdateTimeView(zeit.web.core.view.Base):
 def get_last_published_semantic(context):
     return zeit.cms.workflow.interfaces.IPublishInfo(
         context).date_last_published_semantic
-
-
-def form_date(date):
-    tz = babel.dates.get_timezone('Europe/Berlin')
-    if date:
-        return date.astimezone(tz)

@@ -46,6 +46,14 @@ def format_comment_date(comment_date, base_date=None):
             comment_date, "d. MMMM yyyy, H:mm 'Uhr'", locale=locale)
 
 
+@zeit.web.register_filter
+def format_timedelta(date, **kwargs):
+    if date is None:
+        return ''
+    interval = DeltaTime(date)
+    return interval.get_time_since_modification(**kwargs) or ''
+
+
 @zeit.web.register_global
 def get_delta_time_from_article(article, base_date=None):
     modification = mod_date(article)
@@ -131,7 +139,6 @@ class DeltaTime(object):
             'hours': 1  # blank minutes data after this many hours
         }
         self.hide = {
-            'days': 0,  # suppress delta after this many days
             'hours': 3  # suppress delta after this many hours
         }
 
@@ -142,11 +149,7 @@ class DeltaTime(object):
         self.seconds = zeit.web.core.date.DeltaSecondsEntity(self.delta)
 
     def _filter_delta_time(self):
-        if (self.hide and (
-                (self.hide.get('days') and
-                 self.days.number >= self.hide['days']) or
-                (self.hide.get('hours') and self.hours.number +
-                 self.days.number * 24 >= self.hide['hours']))):
+        if (self.hide and self.delta >= datetime.timedelta(**self.hide)):
             self.days = None
             self.hours = None
             self.minutes = None
@@ -175,7 +178,9 @@ class DeltaTime(object):
         return prefix + human_readable.replace('Tage', 'Tagen', 1).replace(
             'Monate', 'Monaten', 1).replace('Jahre', 'Jahren', 1)
 
-    def get_time_since_modification(self):
+    def get_time_since_modification(self, **kwargs):
+        if len(kwargs):
+            self.hide = kwargs
         self._get_babelfied_delta_time()
         self._filter_delta_time()
         stringified_dt = self._stringify_delta_time()

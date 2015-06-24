@@ -266,6 +266,9 @@ class PostCommentAdmin(PostComment):
 @pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 class PostCommentResource(PostComment):
     def __init__(self, context, request):
         super(PostCommentResource, self).__init__(context, request)
@@ -300,6 +303,9 @@ class PostCommentResource(PostComment):
 @pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 class RecommendCommentResource(PostCommentResource):
     def __init__(self, context, request):
         super(RecommendCommentResource, self).__init__(context, request)

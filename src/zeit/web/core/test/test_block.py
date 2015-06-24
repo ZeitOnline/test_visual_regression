@@ -44,6 +44,11 @@ def test_inline_html_should_consider_additional_elements():
     assert out == str(zeit.web.core.block._inline_html(xml, add)).strip()
 
 
+def test_inline_html_should_not_render_empty_tags():
+    assert str(zeit.web.core.block._inline_html(lxml.etree.fromstring(
+        '<em></em>'))).strip() == '<em></em>'
+
+
 def test_video_block_should_be_fault_tolerant_if_video_is_none():
     model_block = mock.Mock()
     model_block.video = None
