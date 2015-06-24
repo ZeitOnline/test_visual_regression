@@ -51,6 +51,14 @@ def test_beta_user_should_see_toggle_form_on_beta_page(
     assert len(browser.cssselect('input.beta-teaser__button')) == 1
 
 
+def test_ab_test_user_should_see_toggle_form_on_beta_page(
+        testserver, testbrowser):
+    browser = testbrowser('{}/beta'.format(testserver.url))
+    browser.cookies['may-use-beta'] = 'true'
+    browser.reload()
+    assert len(browser.cssselect('input.beta-teaser__button')) == 1
+
+
 def test_beta_view_should_identify_community_user(
         app_settings, mockserver_factory):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
