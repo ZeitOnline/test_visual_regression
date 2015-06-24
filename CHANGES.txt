@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1564: (Part 2) Add view property for publish info + timezone
 
+- FIX: Allow not_found view for any HTTP method, not just GET
+
 - FIX: Register RenderedLegacyArea via grok
 
 - Improvement testing: Allow mockserver to sleep
