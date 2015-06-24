@@ -353,3 +353,17 @@ def test_centerpage_should_have_default_seo_pagedescription(application):
         'http://xml.zeit.de/index')
     view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
     assert view.pagedescription == zeit.web.magazin.view.Base.seo_title_default
+
+
+def test_notfound_view_works_for_get(testserver, testbrowser):
+    browser = testbrowser()
+    with pytest.raises(urllib2.HTTPError) as err:
+        browser.open('{}/nonexistent'.format(testserver.url))
+    assert err.value.getcode() == 404
+
+
+def test_notfound_view_works_for_post(testserver, testbrowser):
+    browser = testbrowser()
+    with pytest.raises(urllib2.HTTPError) as err:
+        browser.post('{}/nonexistent'.format(testserver.url), data='')
+    assert err.value.getcode() == 404
