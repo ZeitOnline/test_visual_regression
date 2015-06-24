@@ -4,7 +4,7 @@ Change log for zeit.web
 1.35 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Register RenderedLegacyArea via grok
 
 
 1.34 (2015-06-23)
