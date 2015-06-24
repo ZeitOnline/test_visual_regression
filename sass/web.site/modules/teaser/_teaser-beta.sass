@@ -35,11 +35,22 @@
 		position: absolute
 
 	&__label
-		margin: 0 0 $tiny $medium
 		display: block
+		margin: 0 remify(-21px) $tiny $medium
 
 	&__button
 		+zon-button-light($margin: remify(14px 6px))
 
+	&__status
+		display: inline-block
+		height: 17px
+		position: relative
+		right: remify(-12px)
+		vertical-align: middle
+		width: 21px
+
 .js #beta-toggle-submit
 	display: none
+
+.icon-zon-logo-navigation_close
+	+animation(rotate 1s linear infinite)
