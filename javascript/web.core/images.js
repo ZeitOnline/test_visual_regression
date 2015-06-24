@@ -49,18 +49,46 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
     rescaleOne = function( image ) {
         var $img = $( image ),
             $parent = $img.closest( '.scaled-image' ),
+            ratio = $img.data( 'ratio' ),
             msieWidth = false,
-            width, height, token, source;
+            width, height, token, source, subject,
+            styles, minHeight, maxHeight;
 
         if ( $parent.hasClass( 'is-pixelperfect' ) ) {
             // use explicit width and height from parent
             width  = $parent.width();
             height = $parent.innerHeight();
         } else {
-            // determine size of image from width + ratio of original image
-            width = $img.width();
+            // the element to measure
+            subject = $parent;
 
-            //ie workarround to detect auto width
+            // determine size of image from container width + ratio of original image
+            width = subject.width();
+
+            // workaround for hidden images
+            if ( !subject.is( ':visible' ) ) {
+                var leaf = subject;
+
+                do {
+                    if ( leaf.prop( 'hidden' ) ) {
+                        leaf.prop( 'hidden', false ).css( 'display', 'block' );
+                        width = leaf.width();
+                        leaf.prop( 'hidden', true ).css( 'display', '' );
+                    } else if ( leaf.css( 'display' ) === 'none' ) {
+                        leaf.css( 'display', 'block' );
+                        width = leaf.width();
+                        leaf.css( 'display', '' );
+                    }
+
+                    leaf = leaf.parent();
+
+                    if ( leaf.is( ':visible' ) ) {
+                        break;
+                    }
+                } while ( leaf[0].nodeName !== 'BODY' );
+            }
+
+            // ie workarround to detect auto width
             if ( image.currentStyle ) {
                 msieWidth = image.currentStyle.width;
             }
@@ -71,10 +99,25 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
                 $img.width( '' );
             }
 
-            height = Math.round( width / $img.data( 'ratio' ) );
+            height = width / ratio;
+
+            // be carefull, this would give 'dd%' for invisible elements
+            if ( $img.is( ':visible' ) ) {
+                styles = $img.css([ 'min-height', 'max-height' ]);
+                minHeight = parseFloat( styles[ 'min-height' ] );
+                maxHeight = parseFloat( styles[ 'max-height' ] );
+
+                if ( minHeight && minHeight > height ) {
+                    width = minHeight * ratio;
+                    height = minHeight;
+                } else if ( maxHeight && maxHeight < height ) {
+                    width = maxHeight * ratio;
+                    height = maxHeight;
+                }
+            }
         }
 
-        token = prefix( Math.ceil( width ), Math.ceil( height ) );
+        token = prefix( Math.round( width ), Math.round( height ) );
         source = image.src || $img.data( 'src' );
         image.src = source.replace( /\/bitblt-\d+x\d+-[a-z0-9]+/, token );
     },
