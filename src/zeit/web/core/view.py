@@ -571,7 +571,7 @@ class service_unavailable(object):  # NOQA
         return pyramid.response.Response(body, 503)
 
 
-@pyramid.view.notfound_view_config(request_method='GET')
+@pyramid.view.notfound_view_config()
 def not_found(request):
     body = 'Status 404: Dokument nicht gefunden.'
     return pyramid.response.Response(body, 404, [('X-Render-With', 'default')])

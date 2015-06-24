@@ -4,7 +4,7 @@ Change log for zeit.web
 1.35 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Allow not_found view for any HTTP method, not just GET.
 
 
 1.34 (2015-06-23)
