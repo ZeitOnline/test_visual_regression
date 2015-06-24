@@ -35,8 +35,9 @@ def format_rfc822_date(date):
     return email.utils.formatdate(calendar.timegm(date.timetuple()))
 
 
-def last_published_semantic(content):
-    return zeit.web.core.view_centerpage.get_last_published_semantic(content)
+def last_published_semantic(context):
+    return zeit.cms.workflow.interfaces.IPublishInfo(
+        context).date_last_published_semantic
 
 
 @pyramid.view.view_config(

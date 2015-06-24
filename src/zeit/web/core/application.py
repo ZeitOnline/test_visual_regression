@@ -33,6 +33,7 @@ import zeit.find.search
 import zeit.magazin.interfaces
 import zeit.solr.interfaces
 
+import zeit.web
 import zeit.web.core
 import zeit.web.core.article
 import zeit.web.core.banner
@@ -280,7 +281,7 @@ class Application(object):
         zope.component.hooks.setHooks()
         context = zope.configuration.config.ConfigurationMachine()
         zope.configuration.xmlconfig.registerCommonDirectives(context)
-        zope.configuration.xmlconfig.include(context, package=zeit.web.core)
+        zope.configuration.xmlconfig.include(context, package=zeit.web)
         self.configure_connector(context)
         self.configure_overrides(context)
         context.execute_actions()
