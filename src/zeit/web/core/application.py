@@ -572,8 +572,10 @@ class TraversableDynamic(TraversableCenterPage):
 class TraversableVideo(dict):
 
     def __init__(self, context, tdict):
-        tdict['request'].GET['slug'] = tdict['view_name']
-        tdict['view_name'] = ''
+        # XXX: Let's hope no video is ever called 'imagegroup'. (ND)
+        if tdict['view_name'] != 'imagegroup':
+            tdict['request'].GET['slug'] = tdict['view_name']
+            tdict['view_name'] = ''
         super(TraversableVideo, self).__init__(tdict)
 
 
