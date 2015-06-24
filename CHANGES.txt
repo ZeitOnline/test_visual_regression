@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - Improvement testing: Allow mockserver to sleep
 
+- Code cleanup: Harmonize template code
+
 
 1.34 (2015-06-23)
 -----------------
