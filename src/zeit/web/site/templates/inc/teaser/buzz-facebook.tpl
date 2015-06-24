@@ -6,7 +6,7 @@
         {% set icon = module.layout.id %}
         {% set label = teaser.score %}
         {% set modifier = module.layout %}
-        {% include "zeit.web.site:templates/inc/teaser_asset/annotation.tpl" with context %}
+        {% include "zeit.web.site:templates/inc/teaser_asset/annotation.tpl" %}
     {%- endwith %}
 {% endblock %}
 

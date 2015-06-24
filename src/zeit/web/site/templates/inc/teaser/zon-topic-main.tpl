@@ -11,10 +11,7 @@
 {% block layout %}teaser-topic-main{% endblock %}
 
 {% block teaser_media_position_before_title %}
-    {% set teaser_block_layout = self.layout() %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/"+
-        teaser | auto_select_asset | block_type +
-        "_zop-topic.tpl" ignore missing with context %}
+    {% include "zeit.web.site:templates/inc/teaser_asset/{}_zop-topic.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
     <div class="{{ self.layout() }}__inner-helper">
 {% endblock %}
 

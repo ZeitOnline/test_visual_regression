@@ -11,9 +11,7 @@
         {% if image %}
             {%- if not has_default_image -%}
                 {% set module_layout = 'nextread' %}
-                {% include "zeit.web.site:templates/inc/teaser_asset/"+
-                    teaser | auto_select_asset | block_type +
-                    "_zon-nextread.tpl" ignore missing with context %}
+                {% include "zeit.web.site:templates/inc/teaser_asset/{}_zon-nextread.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
             {%- endif -%}
         {%- endif -%}
         <div class="nextread__helper {% if has_default_image %}nextread__helper--without-image{% endif %}">
