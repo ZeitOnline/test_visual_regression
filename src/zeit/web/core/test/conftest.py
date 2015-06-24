@@ -337,7 +337,7 @@ class ISettings(pyramid.interfaces.ISettings):
 
 
 def sleep_tween(handler, registry):
-    """Tween to control wheter server should sleep for a little while"""
+    """Tween to control whether server should sleep for a little while"""
     def timeout(request):
         # Setting timeout globally can cause race conditions, if tests run
         # parallel.
