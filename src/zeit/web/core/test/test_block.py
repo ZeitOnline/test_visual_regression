@@ -161,7 +161,8 @@ def test_block_liveblog_instance_causing_timeouts(application, mockserver,
             '2015-05-06T22:46:00+02:00')
 
         # Set unachievable timeout
-        monkeypatch.setattr(zeit.web.core.block.Liveblog, 'timeout', 0.00001)
+        mockserver.settings['sleep'] = 1
+        monkeypatch.setattr(zeit.web.core.block.Liveblog, 'timeout', 0.001)
 
         model_block = mock.Mock()
         model_block.blog_id = '166-201'
