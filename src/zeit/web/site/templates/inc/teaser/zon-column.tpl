@@ -7,7 +7,7 @@
 
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/columnpic_zon-column.tpl" ignore missing with context %}
+    {% include "zeit.web.site:templates/inc/teaser_asset/columnpic_zon-column.tpl" %}
 {% endblock %}
 
 {% block teaser_link %}
