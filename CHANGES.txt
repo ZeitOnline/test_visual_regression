@@ -1,10 +1,24 @@
 Change log for zeit.web
 =======================
 
-1.34 (unreleased)
+1.35 (unreleased)
 -----------------
 
+- FIX: Register RenderedLegacyArea via grok
+
+- Improvement testing: Allow mockserver to sleep
+
+
+1.34 (2015-06-23)
+-----------------
+
+- HOTFIX: Add view config for ZMO articles to comments view
+
+- ZON-1564: Show relative date on homepage
+
 - ZON-1790: Get liveblog metadata through ReSTful API
+
+- ZON-1634: Article type 'column' with author image
 
 - ZON-1837: Fix timedeltas for article teaser
 
@@ -12,7 +26,7 @@ Change log for zeit.web
 
 - FIX: Show user menu for logged in users only
 
-- Improvement testing: Allow mockserver to sleep
+- FIX: Don't render empty tags like ``<em/>`` (which browsers don't like)
 
 
 1.33.2 (2015-06-18)

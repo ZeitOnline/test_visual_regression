@@ -21,14 +21,6 @@ class Newsletter(zeit.web.core.view.Base):
         return {}
 
     @property
-    def date_first_released(self):
-        timezone = babel.dates.get_timezone('Europe/Berlin')
-        context = zeit.cms.workflow.interfaces.IPublishInfo(self.context)
-        date = context.date_first_released
-        if date:
-            return date.astimezone(timezone)
-
-    @property
     def body(self):
         return [zeit.web.core.block.IFrontendBlock(x) for x in
                 self.context.body.values()]
