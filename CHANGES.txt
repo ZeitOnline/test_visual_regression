@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1564: (Part 2) Add view property for publish info + timezone
 
+- ZON-1891: Adapt video traversal and redirect URLs to seo slugs
+
 - FIX: Allow not_found view for any HTTP method, not just GET
 
 - FIX: Register RenderedLegacyArea via grok

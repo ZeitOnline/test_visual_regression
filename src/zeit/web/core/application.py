@@ -29,6 +29,7 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.dynamicfolder.interfaces
 import zeit.content.gallery.interfaces
+import zeit.content.video.interfaces
 import zeit.find.search
 import zeit.magazin.interfaces
 import zeit.solr.interfaces
@@ -564,6 +565,16 @@ class TraversableDynamic(TraversableCenterPage):
             tdict['view_name'] = ''
         finally:
             super(TraversableDynamic, self).__init__(context, tdict)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo, dict)
+class TraversableVideo(dict):
+
+    def __init__(self, context, tdict):
+        tdict['request'].GET['slug'] = tdict['view_name']
+        tdict['view_name'] = ''
+        super(TraversableVideo, self).__init__(tdict)
 
 
 # Monkey-patch so our content provides a marker interface,
