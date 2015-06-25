@@ -40,21 +40,14 @@
         var toggle = $( '#beta-toggle' ),
             action = toggle.attr( 'action' ) + '/json',
             /**
-             * hideRequestStatus – hide request status icons for other label
-             * @param  {object} elem jQuery-Object of the label
-             */
-            hideRequestStatus = function( label ) {
-                label.siblings( 'label' ).first().children( 'span' ).first().remove();
-            },
-            /**
              * showRequestWait – visualize status while waiting for request
              * completion
              * @param  {object} elem jQuery-Object of the input
              */
             showRequestWait = function( label ) {
                 if ( !label.children().length ) {
-                    hideRequestStatus( label );
-                    $( '<span class="beta-teaser__status icon-beta-throbber" />' ).appendTo( label );
+                    label.siblings().find( '.beta-teaser__status' ).remove();
+                    $( '<span class="beta-teaser__status icon-beta-throbber">' ).appendTo( label );
                 }
             },
             /**
