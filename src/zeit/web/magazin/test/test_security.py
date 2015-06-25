@@ -113,7 +113,7 @@ def test_get_community_user_info_strips_malformed_picture_value(
     """
     mockserver_factory(user_xml)
     user_info = get_community_user_info(dummy_request)
-    assert user_info['picture'] == None
+    assert user_info['picture'] is None
 
 
 def test_get_community_user_info_replaces_community_host(
