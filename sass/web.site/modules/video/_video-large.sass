@@ -4,15 +4,14 @@
 		+link
 			color: $white
 	&__container
-		display: block
 		position: relative
+		margin: 0 (-$page-padding)
+		+respond-min($break-phablet-min)
+			margin: 0
 	&__inner
-		+respond-min($break-desktop-min)
-			position: relative
-			z-index: 3
-			margin-top: remify(-60px)
-		&--playing
-			margin-top: 0
+		position: relative
+		z-index: 2
+		// +respond-min($break-desktop-min)
 	&__description
 		@extend %teaser-text
 		display: none
