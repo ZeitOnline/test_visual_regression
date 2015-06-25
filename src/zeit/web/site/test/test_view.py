@@ -29,10 +29,9 @@ def test_login_state_view_should_deliver_correct_user():
     request.registry.settings = {}
     request.authenticated_userid = 123
     request.session = {}
+    request.session['user'] = {}
     request.registry.settings['community_host'] = "http://community"
-    request.registry.settings['community_static_host'] = (
-        "http://community_static")
-    request.host = "destination"
     request.params = {}
     result = zeit.web.site.view.login_state(request)
     assert result['user'] == {}
+    assert result['profile'] == 'http://community/user'
