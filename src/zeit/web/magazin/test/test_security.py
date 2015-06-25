@@ -102,3 +102,12 @@ def test_malformed_community_response_should_not_produce_error(
     dummy_request.headers['Cookie'] = ''
     user_info = dict(uid=0, name=None, picture=None, roles=[], mail=None)
     assert get_community_user_info(dummy_request) == user_info
+
+
+def test_community_user_info_strips_invalid_picture_value(
+        application, mockserver, dummy_request):
+    dummy_request.registry.settings['community_host'] = (
+        'http://localhost:6552/comments')
+    user_info = dict(uid='457322', name='test-user', picture=None,
+        roles=['authenticated user', 'beta'], mail='test-user@example.com')
+    assert get_community_user_info(dummy_request) == user_info
