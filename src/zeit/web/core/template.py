@@ -7,7 +7,6 @@ import time
 import types
 import urllib
 import urlparse
-import jinja2
 import babel.dates
 import pyramid.threadlocal
 import repoze.bitblt.transform
@@ -419,7 +418,7 @@ def topic_links(centerpage):
                   getattr(centerpage, 'uniqueId', '')))
 
 
-@jinja2.contextfilter
+@zeit.web.register_ctxfilter
 def call_macro_by_name(context, macro_name, *args, **kwargs):
     return context.vars[macro_name](*args, **kwargs)
 
