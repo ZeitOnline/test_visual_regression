@@ -38,15 +38,45 @@
     $.fn.toggleBeta = function() {
 
         var toggle = $( '#beta-toggle' ),
-            action = toggle.attr( 'action' ) + '/json';
+            action = toggle.attr( 'action' ) + '/json',
+            /**
+             * showRequestWait – visualize status while waiting for request
+             * completion
+             * @param  {object} elem jQuery-Object of the input
+             */
+            showRequestWait = function( label ) {
+                if ( !label.children().length ) {
+                    label.siblings().find( '.beta-teaser__status' ).remove();
+                    $( '<span class="beta-teaser__status icon-beta-throbber">' ).appendTo( label );
+                }
+            },
+            /**
+             * showRequestComplete – visualize status after request completion
+             * @param  {object} elem jQuery-Object of the input
+             */
+            showRequestComplete = function( label ) {
+                var span = label.children( 'span' ).first();
+                span.removeClass( 'icon-beta-throbber' );
+                span.addClass( 'icon-beta-toggle_done' );
+            };
         $( '#opt-out', this ).click(function() {
-            jQuery.post( action, { 'opt': 'out' } ).fail( function() {
+            var elem = this,
+                label = $( elem ).next( 'label' );
+            showRequestWait( label );
+            jQuery.post( action, { 'opt': 'out' }, function() {
+                showRequestComplete( label );
+            } ).fail( function() {
                 $( '#opt-in' ).attr( 'checked', 'checked' );
             });
         });
 
         $( '#opt-in', this ).click(function() {
-            jQuery.post( action, { 'opt': 'in' } ).fail( function() {
+            var elem = this,
+                label = $( elem ).next( 'label' );
+            showRequestWait( label );
+            jQuery.post( action, { 'opt': 'in' }, function() {
+                showRequestComplete( label );
+            } ).fail( function() {
                 $( '#opt-out' ).attr( 'checked', 'checked' );
             });
         });
