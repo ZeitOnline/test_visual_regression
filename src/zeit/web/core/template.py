@@ -46,9 +46,10 @@ def block_type(obj):
 
 
 @zeit.web.register_ctxfilter
-def create_url(context, obj):
+def create_url(context, obj, request=None):
     try:
-        host = context.get('view').request.route_url('home')
+        req = request or context.get('view').request  # See zwc.decorator
+        host = req.route_url('home')
     except:
         log.debug('Could not retrieve request from context: %s' % obj)
         host = '/'
@@ -61,8 +62,10 @@ def create_url(context, obj):
         titles = obj.supertitle, obj.title
         slug = zeit.cms.interfaces.normalize_filename(' '.join(titles))
         return create_url(context, '{}/{}'.format(obj.uniqueId, slug))
+    elif zeit.cms.interfaces.ICMSContent.providedBy(obj):
+        return create_url(context, obj.uniqueId, request=request)
     else:
-        return
+        return ''
 
 
 @zeit.web.register_filter

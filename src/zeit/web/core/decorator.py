@@ -99,6 +99,10 @@ def JinjaEnvRegistrator(env_attr, marker=None, category='jinja'):  # NOQA
     return registrator
 
 
+# TODO: Implement requestfilter/-global/-test decorators that inject the
+#       request as the first argument into the function. Then adapt signature
+#       of create_url, get_layout and others in need of a request.
+
 register_filter = JinjaEnvRegistrator('filters')
 register_ctxfilter = JinjaEnvRegistrator('filters', 'contextfilter')
 register_envfilter = JinjaEnvRegistrator('filters', 'environmentfilter')

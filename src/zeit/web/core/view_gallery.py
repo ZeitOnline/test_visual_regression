@@ -40,7 +40,7 @@ class Gallery(zeit.web.core.view.Content):
                 dict(
                     label=image_meta.copyrights[0][0],
                     image=zeit.web.core.template.create_url(
-                        i.image.uniqueId),
+                        None, i.image.uniqueId, self.request),
                     link=image_meta.copyrights[0][1],
                     nofollow=image_meta.copyrights[0][2]
                 )

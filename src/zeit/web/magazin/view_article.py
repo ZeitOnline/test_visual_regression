@@ -98,11 +98,13 @@ class FeatureLongform(LongformArticle):
         crumb_list = crumb[:1]
         if self.ressort in items:
             item = items[self.ressort]
-            href = zeit.web.core.template.create_url(item.href)
+            href = zeit.web.core.template.create_url(
+                None, item.href, self.request)
             crumb_list.append((item.text, href))
         if self.sub_ressort in items:
             item = items[self.sub_ressort]
-            href = zeit.web.core.template.create_url(item.href)
+            href = zeit.web.core.template.create_url(
+                None, item.href, self.request)
             crumb_list.append((item.text, href))
         if self.title:
             crumb_list.append((self.title, ''))

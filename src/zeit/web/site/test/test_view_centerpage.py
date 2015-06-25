@@ -98,7 +98,8 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
         'No block named teaser_commentcount')
 
 
-def test_default_teaser_should_match_css_selectors(application, jinja2_env):
+def test_default_teaser_should_match_css_selectors(
+        application, jinja2_env, testserver):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default.tpl')
 
@@ -116,7 +117,7 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
         'No headline is present')
 
     link = html('a.teaser__combined-link')[0]
-    assert link.attrib['href'] == uid, 'No link is present'
+    assert link.attrib['href'] == '/artikel/01', 'No link is present'
     assert link.attrib['title'] == 'teaserSupertitle - teaserTitle', (
         'There is no link title')
 
@@ -146,8 +147,8 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
 
     teaser_co = html('div.teaser__metadata > a.teaser__commentcount')[0]
 
-    assert teaser_co.attrib['href'] == teaser.uniqueId + '#comments', (
-        'No comment link href present')
+    assert teaser_co.attrib['href'] == teaser.uniqueId.replace(
+        'http://xml.zeit.de', '') + '#comments'
 
     assert teaser_co.attrib['title'] == '129 Kommentare', (
         'No comment link title present')

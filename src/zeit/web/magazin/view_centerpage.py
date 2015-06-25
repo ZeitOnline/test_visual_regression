@@ -131,7 +131,8 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
             teaser_list.append(
                 dict(
                     label=teaser.copyright[0][0],
-                    image=zeit.web.core.template.create_url(teaser.src),
+                    image=zeit.web.core.template.create_url(
+                        None, teaser.src, self.request),
                     link=teaser.copyright[0][1],
                     nofollow=teaser.copyright[0][2]
                 )

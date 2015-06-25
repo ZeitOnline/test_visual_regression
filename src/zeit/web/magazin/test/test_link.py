@@ -20,5 +20,5 @@ def test_link_object_teaser_should_lead_directly_to_destination(
 def test_create_url_filter_should_create_correct_url(testserver, testbrowser):
     path = '/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview'
     obj = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de%s-2' % path)
-    assert zeit.web.core.template.create_url(obj) == (
+    assert zeit.web.core.template.create_url(None, obj) == (
         'http://www.zeit.de' + path)
