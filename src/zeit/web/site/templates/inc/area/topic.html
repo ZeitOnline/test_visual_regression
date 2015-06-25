@@ -4,7 +4,7 @@
     {% set module = area.values()[:1][0] %}
     {% set teaser = module | first_child %}
     {% set module_layout = 'teaser-topic-main' %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/imagegroup_zon-topic.tpl" ignore missing with context %}
+    {% include "zeit.web.site:templates/inc/teaser_asset/imagegroup_zon-topic.tpl" %}
     {% include
         ["zeit.web.site:templates/inc/teaser/zon-topic-main.tpl",
          "zeit.web.site:templates/inc/teaser/default.tpl"] ignore missing with context %}
