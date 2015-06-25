@@ -37,6 +37,7 @@
 	&__label
 		display: block
 		margin: 0 remify(-21px) $tiny $medium
+		position: relative
 
 	&__button
 		+zon-button-light($margin: remify(14px 6px))
@@ -45,8 +46,9 @@
 		background: $white
 		display: inline-block
 		height: 23px
-		left: remify(46px)
+		left: remify(-39px)
 		position: absolute
+		top: 0
 		vertical-align: middle
 		width: 23px
 
@@ -56,4 +58,4 @@
 
 .icon-beta-throbber
 	+animation(rotate 0.6s linear infinite)
-	left: remify(42px)
+	left: remify(-41px)
