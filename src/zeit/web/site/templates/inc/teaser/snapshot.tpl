@@ -7,7 +7,9 @@
 <div class="snapshot" id="snapshot" hidden>
     <div class="snapshot__title">Momentaufnahme</div>
     <a href="{{ href }}" class="snapshot-readmore"><span class="snapshot-readmore__item">Gesammelte Momente</span></a>
-    {% include "zeit.web.site:templates/inc/linked-image.tpl" %}
+    <div class="snapshot__picture">
+        {% include "zeit.web.site:templates/inc/linked-image.tpl" %}
+    </div>
     <div class="snapshot-caption">
         {{ teaser.attr_title | trim | hide_none }} {{ cp.image_copyright(teaser.copyright, 'snapshot-caption') }}</span>
     </div>

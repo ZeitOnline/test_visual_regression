@@ -72,11 +72,11 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
                 do {
                     if ( leaf.prop( 'hidden' ) ) {
                         leaf.prop( 'hidden', false ).css( 'display', 'block' );
-                        width = leaf.width();
+                        width = subject.width();
                         leaf.prop( 'hidden', true ).css( 'display', '' );
                     } else if ( leaf.css( 'display' ) === 'none' ) {
                         leaf.css( 'display', 'block' );
-                        width = leaf.width();
+                        width = subject.width();
                         leaf.css( 'display', '' );
                     }
 
