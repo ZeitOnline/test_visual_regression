@@ -419,7 +419,8 @@ def topic_links(centerpage):
 
 
 @zeit.web.register_ctxfilter
-def call_macro_by_name(context, macro_name, *args, **kwargs):
+def macro(context, macro_name, *args, **kwargs):
+    """Call a macro extracted from the context by its name."""
     return context.vars[macro_name](*args, **kwargs)
 
 
