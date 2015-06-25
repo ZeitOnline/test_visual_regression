@@ -392,16 +392,25 @@ def test_series_teaser_should_have_mobile_layout(
         assert border == 'dotted'  # desktop: border-top wrong
 
 
+def test_snapshot_hidden_on_initial_load(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/index' % testserver.url)
+    snapshot = driver.find_element_by_id('snapshot')
+    assert not snapshot.is_displayed(), 'Snapshot not hidden onload'
+
+
 def test_snapshot_displayed_after_scroll(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/index' % testserver.url)
-    driver.execute_script(
-        "window.scrollTo(0, $('.footer').get(0).offsetTop);")
+    driver.execute_script("window.scrollTo(0, \
+        document.getElementById('snapshot').parentNode.offsetTop)")
     try:
         wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located((By.ID, 'snapshot')))
+        wait.until(EC.visibility_of_element_located((By.ID, 'snapshot')))
     except TimeoutException:
         assert False, 'Snapshot not visible after scrolled into view'
 
@@ -413,9 +422,9 @@ def test_snapshot_displayed_after_direct_load_with_anchor(
     driver.get('%s/zeit-online/index#snapshot' % testserver.url)
     try:
         wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located((By.ID, 'snapshot')))
+        wait.until(EC.visibility_of_element_located((By.ID, 'snapshot')))
     except TimeoutException:
-        assert False, 'Snapshot not visible after scrolled into view'
+        assert False, 'Snapshot not visible for link with fragment identifier'
 
 
 def test_snapshot_morelink_text_icon_switch(
@@ -423,15 +432,11 @@ def test_snapshot_morelink_text_icon_switch(
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/index' % testserver.url)
-    driver.execute_script(
-        "window.scrollTo(0, $('.footer').get(0).offsetTop);")
+    linkdisplay = driver.execute_script(
+        "return $('.snapshot-readmore__item').eq(0).css('display')")
     if screen_size[0] == 320:
-        linkdisplay = driver.execute_script(
-            'return $(".snapshot-readmore__item").css("display")')
         assert linkdisplay == u'none', 'Linktext not hidden on mobile'
     else:
-        linkdisplay = driver.execute_script(
-            'return $(".snapshot-readmore__item").css("display")')
         assert linkdisplay == u'inline', 'Linktext hidden on other than mobile'
 
 
