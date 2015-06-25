@@ -51,7 +51,7 @@ require([
     $( 'body[data-page-type=\'centerpage\']' ).up2dateSignals();
     $( '.footer-publisher__more' ).extendFooter();
     $( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
-    $( '.snapshot' ).snapshot();
+    $( '#snapshot' ).snapshot();
     $( '#beta-toggle' ).toggleBeta();
     $( '#series_select' ).selectNav();
     $( '.js-infobox' ).infobox();
