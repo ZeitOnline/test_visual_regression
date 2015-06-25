@@ -104,11 +104,25 @@ def test_malformed_community_response_should_not_produce_error(
     assert get_community_user_info(dummy_request) == user_info
 
 
-def test_community_user_info_strips_invalid_picture_value(
-        application, mockserver, dummy_request):
-    dummy_request.registry.settings['community_host'] = (
-        'http://localhost:6552/comments')
-    user_info = dict(uid='457322', name='test-user', picture=None,
-                     roles=['authenticated user', 'beta'],
-                     mail='test-user@example.com')
-    assert get_community_user_info(dummy_request) == user_info
+def test_get_community_user_info_strips_malformed_picture_value(
+        dummy_request, mockserver_factory):
+    user_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <user>
+        <picture>0</picture>
+    </user>
+    """
+    mockserver_factory(user_xml)
+    user_info = get_community_user_info(dummy_request)
+    assert user_info['picture'] == None
+
+
+def test_get_community_user_info_replaces_community_host(
+        dummy_request, mockserver_factory):
+    user_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <user>
+        <picture>http://localhost:6551/picture.png</picture>
+    </user>
+    """
+    mockserver_factory(user_xml)
+    user_info = get_community_user_info(dummy_request)
+    assert user_info['picture'] == 'http://static_community/foo/picture.png'
