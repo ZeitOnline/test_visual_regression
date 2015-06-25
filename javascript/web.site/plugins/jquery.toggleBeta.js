@@ -54,7 +54,7 @@
             showRequestWait = function( label ) {
                 if ( !label.children().length ) {
                     hideRequestStatus( label );
-                    $( '<span class="beta-teaser__status icon-zon-logo-navigation_close" />' ).appendTo( label );
+                    $( '<span class="beta-teaser__status icon-beta-throbber" />' ).appendTo( label );
                 }
             },
             /**
@@ -63,7 +63,7 @@
              */
             showRequestComplete = function( label ) {
                 var span = label.children( 'span' ).first();
-                span.removeClass( 'icon-zon-logo-navigation_close' );
+                span.removeClass( 'icon-beta-throbber' );
                 span.addClass( 'icon-beta-toggle_done' );
             };
         $( '#opt-out', this ).click(function() {
