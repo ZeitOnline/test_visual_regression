@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - FIX: Register RenderedLegacyArea via grok
 
+- FIX: Suppress invalid user picture reliably
+
 - Improvement testing: Allow mockserver to sleep
 
 - Code cleanup: Harmonize template code
