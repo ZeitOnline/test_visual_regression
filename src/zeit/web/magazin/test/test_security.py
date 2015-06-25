@@ -109,5 +109,6 @@ def test_community_user_info_strips_invalid_picture_value(
     dummy_request.registry.settings['community_host'] = (
         'http://localhost:6552/comments')
     user_info = dict(uid='457322', name='test-user', picture=None,
-        roles=['authenticated user', 'beta'], mail='test-user@example.com')
+                     roles=['authenticated user', 'beta'],
+                     mail='test-user@example.com')
     assert get_community_user_info(dummy_request) == user_info
