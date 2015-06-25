@@ -46,25 +46,24 @@ def block_type(obj):
         return type(obj).__name__.lower()
 
 
-@zeit.web.register_filter
-def translate_url(url):
-    if url is None:
-        return
-    # XXX Is it really not possible to get to the actual template variables
-    # (like context, view, request) through the jinja2 context?!??
-    request = pyramid.threadlocal.get_current_request()
-    if request is None:  # XXX should only happen in tests
-        return url
+@zeit.web.register_ctxfilter
+def create_url(context, obj):
+    try:
+        host = context.get('view').request.route_url('home')
+    except:
+        log.debug('Could not retrieve request from context: %s' % obj)
+        host = '/'
 
-    return url.replace('http://xml.zeit.de/', request.route_url('home'), 1)
-
-
-@zeit.web.register_filter
-def create_url(obj):
-    if zeit.content.link.interfaces.ILink.providedBy(obj):
+    if isinstance(obj, basestring):
+        return obj.replace(zeit.cms.interfaces.ID_NAMESPACE, host, 1)
+    elif zeit.content.link.interfaces.ILink.providedBy(obj):
         return obj.url
+    elif zeit.content.video.interfaces.IVideo.providedBy(obj):
+        titles = obj.supertitle, obj.title
+        slug = zeit.cms.interfaces.normalize_filename(' '.join(titles))
+        return create_url(context, '{}/{}'.format(obj.uniqueId, slug))
     else:
-        return translate_url(obj.uniqueId)
+        return
 
 
 @zeit.web.register_filter

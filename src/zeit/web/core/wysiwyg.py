@@ -21,7 +21,7 @@ zeit.wysiwyg.html.ConversionStep.__init__ = init_without_request
 
 
 def pyramid_url(self, obj):
-    return zeit.web.core.template.translate_url(obj.uniqueId)
+    return zeit.web.core.template.create_url(obj.uniqueId)
 zeit.wysiwyg.html.ConversionStep.url = pyramid_url
 
 

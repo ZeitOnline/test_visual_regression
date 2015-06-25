@@ -6,7 +6,7 @@
     {% set image = get_teaser_image(module, teaser) %}
     {% set has_default_image = get_default_image_id() in image.uniqueId %}
 <div class="nextread {% if has_default_image %}nextread--without-image{% endif %}" id="nextread">
-    <a class="nextread__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | translate_url }}">
+    <a class="nextread__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
         <div class="nextread__lead {% if has_default_image %}nextread__lead--without-image{% endif %}">{{ module.lead }}</div>
         {% if image %}
             {%- if not has_default_image -%}

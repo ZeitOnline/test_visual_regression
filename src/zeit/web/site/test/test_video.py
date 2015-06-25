@@ -237,3 +237,12 @@ def test_video_page_adcontroller_content_gets_included(
         assert ('google_ads_iframe_' in iframe.get_attribute('id')) is True
     except TimeoutException:
         assert False, 'Iframe not found within 20 seconds'
+
+
+def test_create_url_filter_should_append_seo_slug_to_all_video_links(
+        application):
+    video = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2015-01/4004256546001')
+    assert zeit.web.core.template.create_url(None, video) == (
+        '/video/2015-01/4004256546001/kuenstliche-intelligenz'
+        '-roboter-myon-uebernimmt-opernrolle')
