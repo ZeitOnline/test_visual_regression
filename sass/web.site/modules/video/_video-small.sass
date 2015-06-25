@@ -1,9 +1,9 @@
 .video-small
 	display: none
-	margin-bottom: $page-padding
+	margin-bottom: $vertical-space
 	+respond-min($break-phablet-min)
 		width: 48%
-		// going unBEMmish here, but hiding/displaying 
+		// going unBEMmish here, but hiding/displaying
 		// by adding another modificator
 		// will be much more complicated on the template side
 		&:nth-child(2),
@@ -27,5 +27,4 @@
 		+link
 			color: $white
 	&__container
-		display: block
 		position: relative
