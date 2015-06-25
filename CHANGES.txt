@@ -4,6 +4,8 @@ Change log for zeit.web
 1.35 (unreleased)
 -----------------
 
+- ZON-1866: Beta login enhancements
+
 - BUG-22: Fix for slideshow images being too small in webkit
 
 - ZON-1575: Restore prospective lazy loading for snapshot
@@ -17,6 +19,8 @@ Change log for zeit.web
 - FIX: Allow not_found view for any HTTP method, not just GET
 
 - FIX: Register RenderedLegacyArea via grok
+
+- FIX: Suppress invalid user picture reliably
 
 - Improvement testing: Allow mockserver to sleep
 
