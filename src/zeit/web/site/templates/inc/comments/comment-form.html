@@ -24,7 +24,7 @@
 			<img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name }}" src="{{ request.session.user.picture }}">
 			{% endif %}
 			Angemeldet als
-			<a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">
+			<a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
 				{{ request.session.user.name }}
 			</a>
 			<a class="comment-form__cancel" href="{{ request.registry.settings.community_host }}/logout?destination={{ view.content_url | e }}">
