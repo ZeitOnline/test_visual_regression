@@ -5,7 +5,7 @@
         {% set class = 'buzz-line' %}
         {% set label = teaser.score | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
         {% set modifier = module.layout %}
-        {% include "zeit.web.site:templates/inc/teaser_asset/annotation.tpl" with context %}
+        {% include "zeit.web.site:templates/inc/teaser_asset/annotation.tpl" %}
     {%- endwith %}
 {% endblock %}
 
