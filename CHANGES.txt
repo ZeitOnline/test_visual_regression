@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-1564: (Part 2) Add view property for publish info + timezone
 
+- ZON-1876: Custom wt param to distinguish between classic and beta
+
 - FIX: Allow not_found view for any HTTP method, not just GET
 
 - FIX: Register RenderedLegacyArea via grok
