@@ -4,7 +4,7 @@ Change log for zeit.web
 1.36 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Integrate bugsnag middleware into WSGI pipeline
 
 
 1.35 (2015-06-26)
