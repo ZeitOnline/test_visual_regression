@@ -7,14 +7,14 @@ $teaser-column-mobile-image-size: 80px
 .teaser-column
 	@extend %teaser
 	background: $color-column-background
-	margin: em(40px) (-$page-padding) $vertical-space (-$page-padding)
+	margin: remify(40px) (-$page-padding) $vertical-space (-$page-padding)
 	position: relative
 	+respond-min($break-tablet-min)
 		margin-left: 0
 		margin-right: 0
 		padding: $page-padding
 	+respond-min($break-desktop-min)
-		margin: $petite 0 $vertical-space 0
+		margin: $vertical-space 0 $vertical-space 0
 		min-height: remify(250px)
 		padding: $petite $petite $petite remify(250px+20px)
 	&__media
@@ -48,12 +48,12 @@ $teaser-column-mobile-image-size: 80px
 	&__series
 		color: $zon_grey
 		display: block
-		font-size: $font-xs--rem
+		font-size: remify(12px)
 		letter-spacing: $zon-letter-spacing-l
-		margin: 0 0 $junior 0
+		margin: 0 0 remify(24px) 0
 		text-transform: uppercase
 		+respond-min($break-desktop-min)
-			font-size: $font-s--rem
+			font-size: remify(14px)
 	&__kicker
 		@extend %teaser-kicker
 	&__title
@@ -63,7 +63,7 @@ $teaser-column-mobile-image-size: 80px
 	&__byline
 		@extend %teaser-byline
 		color: $zon_mid_grey
-		font-size: $font-s--rem
+		font-size: remify(14px)
 	&__metadata
 		@extend %teaser-metadata
 	&__datetime
@@ -75,12 +75,12 @@ $teaser-column-mobile-image-size: 80px
 // if there is an image, make sure the byline wraps around it.
 .teaser-column--hasmedia
 	.teaser-column__container
-		padding-bottom: 2.75rem
+		padding-bottom: remify(44px)
 		+respond-min($break-desktop-min)
 			padding-bottom: 0
 	.teaser-column__byline,
 	.teaser-column__metadata
-		padding-right: 6.25rem
+		padding-right: remify(100px)
 		+respond-min($break-desktop-min)
 			padding-right: 0
 
