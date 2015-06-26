@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1893: Allow A/B-test users to toggle their site version
 
+- ZON-1876: Custom wt param to distinguish between classic and beta
+
 
 1.35 (2015-06-26)
 -----------------
