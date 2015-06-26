@@ -4,6 +4,14 @@ Change log for zeit.web
 1.35 (unreleased)
 -----------------
 
+- ZON-1564: Fix video stage thumbnails on resize
+
+- ZON-1866: Beta login enhancements
+
+- BUG-22: Fix for slideshow images being too small in webkit
+
+- ZON-1575: Restore prospective lazy loading for snapshot
+
 - ZON-1871: Fix topic-teaser background image in iOS
 
 - ZON-1564: (Part 2) Add view property for publish info + timezone
@@ -11,6 +19,8 @@ Change log for zeit.web
 - FIX: Allow not_found view for any HTTP method, not just GET
 
 - FIX: Register RenderedLegacyArea via grok
+
+- FIX: Suppress invalid user picture reliably
 
 - Improvement testing: Allow mockserver to sleep
 
