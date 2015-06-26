@@ -416,7 +416,7 @@ def test_teaser_layout_for_series_on_zmo_cps_should_remain_untouched(
         application, monkeypatch):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/04')
     monkeypatch.setattr(zeit.content.cp.interfaces,
-                        'ICenterPage', lambda _: article)
+                        'ICenterPage', lambda *_: article)
     block = mock.MagicMock()
     block.layout.id = 'zmo-square-large'
     block.__iter__.return_value = iter([article])
