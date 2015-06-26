@@ -1,12 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.36 (unreleased)
+1.37 (unreleased)
 -----------------
 
 - ZON-1888/1889: improve mobile teaser images
 
 - ZON-1895: column teaser
+
+
+1.36 (2015-06-26)
+-----------------
 
 - BUG-283: Prevent automatic layout deviations for zeit-magazin
 
