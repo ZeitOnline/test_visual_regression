@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1888/1889: improve mobile teaser images
 
+- ZON-1895: column teaser
+
 - BUG-283: Prevent automatic layout deviations for zeit-magazin
 
 - ZON-1891: Adapt video traversal and redirect URLs to seo slugs
