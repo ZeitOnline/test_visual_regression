@@ -650,6 +650,8 @@ class Module(object):
 
     zope.interface.implements(zeit.edit.interfaces.IBlock)
 
+    __parent__ = NotImplemented
+
     def __init__(self, context):
         self.context = context
         if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(context):

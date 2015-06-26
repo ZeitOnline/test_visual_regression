@@ -177,7 +177,7 @@ def get_layout(block, request=None):
     else:
         layout = layout_id
         source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS.factory._get_tree()
-        cp = zeit.content.cp.interfaces.ICenterPage(block)
+        cp = zeit.content.cp.interfaces.ICenterPage(block, None)
 
         if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
             log.debug('Broken ref at {}'.format(teaser.uniqueId))
