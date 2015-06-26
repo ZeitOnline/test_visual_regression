@@ -54,7 +54,8 @@
             9: "{{ view.banner_channel | lower }}", // Banner-Channel
             10: "{%- if view.context.advertising_enabled %}yes{% endif -%}", // Banner aktiv?
             11: "", // Fehler
-            12: window.innerWidth >= ivw_min_width ? 'desktop.site' : 'mobile.site'
+            12: window.innerWidth >= ivw_min_width ? 'desktop.site' : 'mobile.site',
+            14: "neu"
         };
         {% endif -%}
 

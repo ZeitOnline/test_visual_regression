@@ -3,8 +3,10 @@ import logging
 from pyramid.view import view_config
 from pyramid.view import view_defaults
 import babel.dates
+import pyramid.httpexceptions
 import pyramid.view
 
+import zeit.cms.interfaces
 import zeit.content.video.interfaces
 
 import zeit.web
@@ -27,6 +29,9 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
     def __init__(self, *args, **kwargs):
         super(Video, self).__init__(*args, **kwargs)
         self.context.advertising_enabled = self.banner_on
+        if self.request.GET.get('slug') != self.slug:
+            location = '{}/{}'.format(self.content_url, self.slug)
+            raise pyramid.httpexceptions.HTTPSeeOther(location=location)
 
     @zeit.web.reify
     def image_group(self):
@@ -66,6 +71,11 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
     @zeit.web.reify
     def subtitle(self):
         return self.context.subtitle or self.context.teaserText
+
+    @zeit.web.reify
+    def slug(self):
+        return zeit.cms.interfaces.normalize_filename(
+            ' '.join((self.supertitle, self.title)))
 
 
 @pyramid.view.view_config(name='comment-form',
