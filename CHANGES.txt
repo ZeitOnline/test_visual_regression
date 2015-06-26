@@ -4,6 +4,8 @@ Change log for zeit.web
 1.36 (unreleased)
 -----------------
 
+- BUG-283: Prevent automatic layout deviations for zeit-magazin
+
 - ZON-1891: Adapt video traversal and redirect URLs to seo slugs
 
 - ZON-1893: Allow A/B-test users to toggle their site version
