@@ -60,15 +60,6 @@ def login_state(request):
     info['logout'] = "{}/user/logout?destination={}".format(
         settings['community_host'], destination)
     if request.authenticated_userid and 'user' in request.session:
-        user = request.session['user']
-        if 'picture' in user:
-            if user['picture'] != '0':
-                user['picture'] = user['picture'].replace(
-                    settings['community_host'],
-                    settings['community_static_host'])
-            else:
-                del user['picture']
-        user['profile'] = "{}/user/{}".format(
-            settings['community_host'], request.authenticated_userid)
-        info['user'] = user
+        info['user'] = request.session['user']
+        info['profile'] = "{}/user".format(settings['community_host'])
     return info

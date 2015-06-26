@@ -70,6 +70,8 @@ def get_community_user_info(request):
         if len(elements) == 0:
             continue
         elif key == 'picture':
+            if elements[0] == '0':
+                continue
             elements = zeit.web.core.comments.rewrite_picture_url(elements[0])
         elif 'roles' not in key:
             elements = elements[0]
