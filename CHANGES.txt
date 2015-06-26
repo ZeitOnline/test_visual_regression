@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.35 (unreleased)
+1.35 (2015-06-26)
 -----------------
 
 - ZON-1894: Adjust series teaser to latest design version
