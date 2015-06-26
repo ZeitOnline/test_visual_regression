@@ -4,6 +4,8 @@ Change log for zeit.web
 1.35 (unreleased)
 -----------------
 
+- ZON-1894: Adjust series teaser to latest design version
+
 - ZON-1564: Fix video stage thumbnails on resize
 
 - ZON-1866: Beta login enhancements
