@@ -1,6 +1,12 @@
 Change log for zeit.web
 =======================
 
+1.36 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
 1.35 (2015-06-26)
 -----------------
 
