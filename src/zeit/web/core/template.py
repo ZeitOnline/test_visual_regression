@@ -139,6 +139,8 @@ def get_layout(block, request=None):
     # Since we might lookup a layout more than once per request, we can cache
     # it in the request object.
 
+    # XXX This filter is in desperate need of a major overhaul!
+
     request = request or pyramid.threadlocal.get_current_request()
 
     try:
@@ -153,13 +155,10 @@ def get_layout(block, request=None):
         if layout:
             return layout
 
-    source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS.factory
-    source_xml = source._get_tree()
-
     def allowed(layout_id):
         try:
             xp = '/layouts/layout[@id="{}"]/@areas'.format(layout_id)
-            return block.__parent__.kind in source_xml.xpath(xp)[0].split(' ')
+            return block.__parent__.kind in source.xpath(xp)[0].split(' ')
         except (AttributeError, IndexError):
             return
 
@@ -177,12 +176,11 @@ def get_layout(block, request=None):
             layout = 'hide'
     else:
         layout = layout_id
+        source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS.factory._get_tree()
+        cp = zeit.content.cp.interfaces.ICenterPage(block)
 
         if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
             log.debug('Broken ref at {}'.format(teaser.uniqueId))
-            layout = 'hide'
-        elif False:
-            # XXX What about placeholder containers?
             layout = 'hide'
         elif layout == 'zon-square':
             # ToDo: Remove when Longform will be generally used on www.zeit.de
@@ -190,16 +188,15 @@ def get_layout(block, request=None):
                 layout = layout
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
-        elif getattr(teaser, 'serie', None):
-            if allowed('zon-series'):
-                layout = 'zon-series'
-
-            if teaser.serie.column and get_column_image(teaser) and (
-                    allowed("zon-column")):
+        elif getattr(teaser, 'serie', None) and not (
+                zeit.magazin.interfaces.IZMOContent.providedBy(cp)):
+            if teaser.serie.column and get_column_image(teaser) and allowed(
+                    'zon-column'):
                 layout = 'zon-column'
-        elif getattr(teaser, 'blog', None):
-            if allowed("zon-blog"):
-                layout = 'zon-blog'
+            elif allowed('zon-series'):
+                layout = 'zon-series'
+        elif getattr(teaser, 'blog', None) and allowed('zon-blog'):
+            layout = 'zon-blog'
 
     layout = zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
@@ -523,19 +520,18 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     if len(asset) == 0:
         return get_teaser_image(teaser_block, teaser, unique_id=default_id)
 
+    try:
+        image_patterns = get_image_pattern(
+            get_layout(teaser_block), teaser_block.layout.image_pattern)
+    except AttributeError:
+        return
+
     # Assumes all images in this group have the same mimetype.
     filenames = asset.keys()
     sample_image = u'{}{}'.format(asset.uniqueId, filenames[0])
 
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
         mimetypes.guess_type(sample_image)[0], 'jpg')
-
-    try:
-        image_patterns = get_image_pattern(
-            get_layout(teaser_block),
-            teaser_block.layout.image_pattern)
-    except AttributeError:
-        return
 
     image, image_pattern = _existing_image(asset_id, image_base_name,
                                            image_patterns, ext, filenames)

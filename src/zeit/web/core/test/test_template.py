@@ -412,6 +412,20 @@ def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
     assert layout == 'zmo-square'
 
 
+def test_teaser_layout_for_series_on_zmo_cps_should_remain_untouched(
+        application, monkeypatch):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/04')
+    monkeypatch.setattr(zeit.content.cp.interfaces,
+                        'ICenterPage', lambda _: article)
+    block = mock.MagicMock()
+    block.layout.id = 'zmo-square-large'
+    block.__iter__.return_value = iter([article])
+    block.__parent__ = mock.Mock()
+    block.__parent__.kind = 'major'
+    layout = zeit.web.core.template.get_layout(block)
+    assert layout == 'zmo-square-large'
+
+
 def test_function_get_image_pattern_is_working_as_expected(application):
     # Existing formats
     teaser = zeit.web.core.template.get_image_pattern('zon-large', 'default')
