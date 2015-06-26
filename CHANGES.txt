@@ -4,6 +4,8 @@ Change log for zeit.web
 1.35 (unreleased)
 -----------------
 
+- ZON-1888/1889: improve mobile teaser images
+
 - ZON-1564: Fix video stage thumbnails on resize
 
 - ZON-1866: Beta login enhancements
