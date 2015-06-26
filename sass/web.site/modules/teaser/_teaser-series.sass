@@ -5,29 +5,16 @@
 		border-top: 1px dotted $zon_light_grey
 		border-bottom: 1px dotted $zon_light_grey
 		margin-top: remify(5px)
-		position: relative
 	+respond-min($break-desktop-min)
 		margin-top: remify(25px)
 	&__label
-		font-size: $font-s
+		color: $zon_grey
+		font-size: $font-xs
 		letter-spacing: $zon-letter-spacing-l
-		line-height: 1
-		margin: 0 0 1em 0
+		margin: 0 0 $thin 0
 		text-transform: uppercase
-		+respond-min($break-phablet-min)
-			background: $color-page-bg
-			left: remify(17px)
-			padding: 0 remify(3px)
-			position: absolute
-			top: em(-6px, $little--px)
-			+inline-block
-		+respond-min($break-tablet-min)
-			left: 0
-			padding-left: 0
 		+respond-min($break-desktop-min)
-			font-size: 0.0875
-			padding-right: 0.75
-			top: em(-8px, 16px)
+			font-size: $font-s
 	&__media
 		@extend %teaser-media
 		@extend %teaser-small-media
