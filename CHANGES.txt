@@ -1,10 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.35 (unreleased)
+1.36 (unreleased)
 -----------------
 
 - ZON-1888/1889: improve mobile teaser images
+
+
+1.35 (2015-06-26)
+-----------------
+
+- ZON-1894: Adjust series teaser to latest design version
 
 - ZON-1564: Fix video stage thumbnails on resize
 
