@@ -1,8 +1,18 @@
 Change log for zeit.web
 =======================
 
-1.35 (unreleased)
+1.36 (unreleased)
 -----------------
+
+- ZON-1891: Adapt video traversal and redirect URLs to seo slugs
+
+- ZON-1893: Allow A/B-test users to toggle their site version
+
+
+1.35 (2015-06-26)
+-----------------
+
+- ZON-1894: Adjust series teaser to latest design version
 
 - ZON-1564: Fix video stage thumbnails on resize
 
