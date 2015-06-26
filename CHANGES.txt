@@ -4,7 +4,9 @@ Change log for zeit.web
 1.36 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1891: Adapt video traversal and redirect URLs to seo slugs
+
+- ZON-1893: Allow A/B-test users to toggle their site version
 
 
 1.35 (2015-06-26)
@@ -23,8 +25,6 @@ Change log for zeit.web
 - ZON-1871: Fix topic-teaser background image in iOS
 
 - ZON-1564: (Part 2) Add view property for publish info + timezone
-
-- ZON-1893: Allow A/B-test users to toggle their site version
 
 - FIX: Allow not_found view for any HTTP method, not just GET
 
