@@ -48,21 +48,12 @@ class Centerpage(zeit.web.core.view.Base):
 @view_config(route_name='json_update_time',
              renderer='jsonp')
 def json_update_time(request):
-    if "path" not in request.matchdict:
-        return {}
-
     try:
         resource = zeit.cms.interfaces.ICMSContent(
             'http://xml.zeit.de/{}'.format(request.matchdict['path']))
         info = zeit.cms.workflow.interfaces.IPublishInfo(resource)
-
-        dlps = info.date_last_published_semantic.isoformat() if (
-            info.date_last_published_semantic) else None
-
-        dlp = info.date_last_published.isoformat if (
-            info.date_last_published) else None
-
-        return {'last_published': dlp,
-                'last_published_semantic': dlps}
-    except TypeError:
-        return {}
+        dlps = info.date_last_published_semantic.isoformat()
+        dlp = info.date_last_published.isoformat()
+    except (AttributeError, KeyError, TypeError):
+        dlps = dlp = None
+    return {'last_published': dlp, 'last_published_semantic': dlps}
