@@ -156,17 +156,15 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
         'No comment text present')
 
 
-def test_first_small_teaser_has_no_image_on_mobile_mode(
+def test_small_teaser_should_display_no_image_on_mobile(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
     box = driver.find_elements_by_class_name('cp-area--major')[0]
-    first = box.find_elements_by_class_name('teaser-small__media')[0]
-    second = box.find_elements_by_class_name('teaser-small__media')[1]
+    teaser_image = box.find_elements_by_class_name('teaser-small__media')[0]
 
-    assert first.is_displayed() is True, 'image is not displayed'
-    assert second.is_displayed() is False, 'image is displayed'
+    assert teaser_image.is_displayed() is False, 'image is not displayed'
 
 
 def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
