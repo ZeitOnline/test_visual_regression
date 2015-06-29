@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1895: column teaser
 
+- FIX: Change cp update time route to url dispatching
+
 
 1.36 (2015-06-26)
 -----------------
