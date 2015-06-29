@@ -4,7 +4,6 @@ from pyramid.view import view_config
 import zeit.content.cp.interfaces
 
 import zeit.web.core.view
-import babel
 
 
 class Centerpage(zeit.web.core.view.Base):
