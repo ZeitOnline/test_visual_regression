@@ -4,6 +4,7 @@ from pyramid.view import view_config
 import zeit.content.cp.interfaces
 
 import zeit.web.core.view
+import babel
 
 
 class Centerpage(zeit.web.core.view.Base):
@@ -45,25 +46,24 @@ class Centerpage(zeit.web.core.view.Base):
         return zeit.web.core.comments.get_counts(*[t.uniqueId for t in self])
 
 
-@view_config(context=zeit.content.cp.interfaces.ICenterPage,
-             name='json_update_time',
+@view_config(route_name='json_update_time',
              renderer='jsonp')
-class JsonUpdateTimeView(zeit.web.core.view.Base):
+def json_update_time(request):
+    if "path" not in request.matchdict:
+        return {}
 
-    def __call__(self):
-        return {'last_published': self.last_published(),
-                'last_published_semantic': self.last_published_semantic()}
+    try:
+        resource = zeit.cms.interfaces.ICMSContent(
+            'http://xml.zeit.de/{}'.format(request.matchdict['path']))
+        info = zeit.cms.workflow.interfaces.IPublishInfo(resource)
 
-    def last_published(self):
-        date = self.publish_info.date_last_published
-        try:
-            return date.isoformat()
-        except AttributeError:
-            return ''
+        dlps = info.date_last_published_semantic.isoformat() if (
+            info.date_last_published_semantic) else None
 
-    def last_published_semantic(self):
-        date = self.publish_info.date_last_published_semantic
-        try:
-            return date.isoformat()
-        except AttributeError:
-            return ''
+        dlp = info.date_last_published.isoformat if (
+            info.date_last_published) else None
+
+        return {'last_published': dlp,
+                'last_published_semantic': dlps}
+    except TypeError:
+        return {}
