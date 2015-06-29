@@ -13,14 +13,11 @@ import requests.exceptions
 import urlparse
 import zope.component
 import zope.interface
-import zope.interface.declarations
 
 import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
-import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
-import zeit.edit.interfaces
 import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 
@@ -643,35 +640,3 @@ class BreakingNews(object):
             zeit.cms.workflow.interfaces.IPublishInfo(
                 bn_article).date_last_published_semantic)
         self.doc_path = urlparse.urlparse(bn_article.uniqueId).path
-
-
-class Module(object):
-    """Base class for RAM-style modules to be used in cp2015 centerpages."""
-
-    zope.interface.implements(zeit.edit.interfaces.IBlock)
-
-    __parent__ = NotImplemented
-
-    def __init__(self, context):
-        self.context = context
-        if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(context):
-            self.layout = context.cpextra
-        elif zeit.edit.interfaces.IBlock.providedBy(context):
-            self.layout = context.type
-
-    def __hash__(self):
-        return self.context.xml.attrib.get(
-            '{http://namespaces.zeit.de/CMS/cp}__name__',
-            super(Module, self)).__hash__()
-
-    def __repr__(self):
-        return object.__repr__(self)
-
-    @property
-    def layout(self):
-        return getattr(self, '_layout', None)
-
-    @layout.setter
-    def layout(self, value):
-        self._layout = zeit.content.cp.layout.BlockLayout(
-            value, value, areas=[], image_pattern=value)

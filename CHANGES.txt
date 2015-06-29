@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1895: column teaser
 
+- MAINT: Re-locate base module class to zeit.web.site.module
+
 
 1.36 (2015-06-26)
 -----------------
