@@ -79,8 +79,7 @@ setup(
     long_description=open('README.md', 'r').read(),
     entry_points={
         'paste.app_factory': [
-            'main=zeit.web.core.application:factory',
-            'preview=zeit.web.core.preview:factory'
+            'main=zeit.web.core.application:factory'
         ]
     },
     extras_require={
