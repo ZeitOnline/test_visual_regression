@@ -17,60 +17,7 @@
       <tag score="4" type="Person" url_value="ridley-scott" uuid="096c6141-d20c-4b14-9ee1-3824560be7d0">Ridley Scott</tag>
     </rankedTags>
     <references>
-      <reference author="David Hugendick" contenttype="article" expires="" href="http://xml.zeit.de/kultur/film/2013-12/film-hobbit-smaugs-einoede" issue="50" publication-date="" ressort="Kultur" type="intern" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" year="2013">
-        <badges>
-          <badge py:pytype="str">video</badge>
-        </badges>
-        <supertitle py:pytype="str">&quot;Der Hobbit&quot;</supertitle>
-        <title py:pytype="str">Bombastische Einöde</title>
-        <text py:pytype="str">13 Zwerge und ein Hobbit ziehen im Gänsemarsch von Höhepunkt zu Höhepunkt. Das war es dann wohl, das Kinoerlebnis 2013. Unser Autor hat versucht, sich ihm hinzugeben.</text>
-        <description py:pytype="str">13 Zwerge und ein Hobbit ziehen im Gänsemarsch von Höhepunkt zu Höhepunkt. Das war es dann wohl, das Kinoerlebnis 2013. Unser Autor hat versucht, sich ihm hinzugeben.</description>
-        <byline xsi:nil="true"/>
-        <breadcrumb_title py:pytype="str">Der Hobbit: Smaugs bombastische Einöde</breadcrumb_title>
-        <image align="left" base-id="http://xml.zeit.de/kultur/film/2013-12/filmszene-hobbit-smaugs-einoede/" expires="2014-03-07T09:08:44+00:00" publication-date="" type="jpg">
-          <bu py:pytype="str">Freeman als Hobbit Bilbo über allen Wipfeln</bu>
-          <copyright py:pytype="str">© Warner Bros 2013</copyright>
-        </image>
-        <author expires="" href="http://xml.zeit.de/autoren/H/David_Hugendick/index.xml" publication-date="">
-          <display_name py:pytype="str">David Hugendick</display_name>
-        </author>
-      </reference>
-      <reference author="Ulrich Greiner" contenttype="article" expires="" href="http://xml.zeit.de/2012/51/Film-Hobbit-Peter-Jackson-Tolkien" issue="51" publication-date="" ressort="Kultur" type="intern" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" year="2012">
-        <badges>
-          <badge py:pytype="str">video</badge>
-        </badges>
-        <supertitle py:pytype="str">Film &quot;Der Hobbit&quot;</supertitle>
-        <title py:pytype="str">Verzaubert vom eigenen Erfolg</title>
-        <text py:pytype="str">Peter Jackson hat den ersten Teil von J.R.R. Tolkiens &quot;Hobbit&quot; verfilmt. Damit versucht der Regisseur, seinen eigenen &quot;Herrn der Ringe&quot; zu überbieten. Von Ulrich Greiner</text>
-        <description py:pytype="str">Peter Jackson hat den ersten Teil von J.R.R. Tolkiens &quot;Hobbit&quot; verfilmt. Damit versucht der Regisseur, seinen eigenen &quot;Herrn der Ringe&quot; zu überbieten. Von Ulrich Greiner</description>
-        <byline py:pytype="str">Von Ulrich Greiner</byline>
-        <breadcrumb_title xsi:nil="true"/>
-        <image align="left" base-id="http://xml.zeit.de/kultur/film/2012-12/filmszene-hobbit-unerwartete-reise/" expires="2013-03-13T09:48:01+00:00" publication-date="" type="jpg">
-          <bu py:pytype="str">Unter Zauberern darf noch geraucht werden: Gandalf (Ian McKellen, links) und Radagast (Sylvester McKoy) im &amp;quot;Hobbit&amp;quot;</bu>
-          <copyright py:pytype="str">© Warner Bros. Filmverleih</copyright>
-        </image>
-        <author expires="" href="http://xml.zeit.de/autoren/G/Ulrich_Greiner/index.xml" publication-date="">
-          <display_name py:pytype="str">Ulrich Greiner</display_name>
-        </author>
-      </reference>
-      <reference author="Oliver Kaever" contenttype="article" expires="" href="http://xml.zeit.de/kultur/film/2014-04/noah-bibelfilm-darren-aronofsky" issue="14" publication-date="" ressort="Kultur" type="intern" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" year="2014">
-        <badges>
-          <badge py:pytype="str">video</badge>
-        </badges>
-        <supertitle py:pytype="str">&quot;Noah&quot;</supertitle>
-        <title py:pytype="str">Gott, was ein Bombast!</title>
-        <text py:pytype="str">Autorenfilmer Darren Aronofsky bringt die Noah-Geschichte als Fantasy-Blockbuster ins Kino. Damit ist er nur der erste von etlichen Bibelverfilmern, die folgen werden.</text>
-        <description py:pytype="str">Autorenfilmer Darren Aronofsky bringt die Noah-Geschichte als Fantasy-Blockbuster ins Kino. Damit ist er nur der erste von etlichen Bibelverfilmern, die folgen werden.</description>
-        <byline xsi:nil="true"/>
-        <breadcrumb_title xsi:nil="true"/>
-        <image align="left" base-id="http://xml.zeit.de/kultur/film/2014-04/filmplakat-noah/" expires="2014-07-01T10:03:59+00:00" publication-date="" type="jpg">
-          <bu py:pytype="str">Russell Crowe als Noah im Angesicht der Sintflut</bu>
-          <copyright py:pytype="str">© Paramount Pictures</copyright>
-        </image>
-        <author expires="" href="http://xml.zeit.de/autoren/K/Oliver_Kaever/index" publication-date="">
-          <display_name py:pytype="str">Oliver Kaever</display_name>
-        </author>
-      </reference>
+      <reference author="Wenke Husmann" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/article/01" contenttype="article" publication-date="" expires=""></reference>
     </references>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
     <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
@@ -131,9 +78,6 @@
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
-    <nextread>
-      <reference author="Wenke Husmann" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/article/01" contenttype="article" publication-date="" expires=""></reference>
-    </nextread>
   </head>
   <body>
     <title>Zwei Baguettes und ein Zimmer bitte</title>
@@ -146,10 +90,10 @@
       </image>
       <p>Es fällt auf, dass in Barcelona das Dribbling ein wichtiges Stilmittel ist (189 erfolgreiche). Mit großem Abstand gewinnt übrigens Lionel Messi diese Einzelwertung (71). Seine Alleingänge schaffen Raum für die Mitspieler. Weil sie trotzdem oft den Ball besitzen, zeigt das: Sie passen öfter, spielen lieber ab.</p>
       <raw py:pytype="str">
-        <img style="margin:auto;padding:30px;" src="http://i.giphy.com/cYhaIIyjjxg1W.gif"/>
+        <img style="padding:5% 25%;width:100%;" src="http://i.giphy.com/cYhaIIyjjxg1W.gif"/>
       </raw>
       <raw alldevices="true" py:pytype="str">
-        <img style="margin:auto;padding:30px;" src="http://i.giphy.com/fVwQok9xnLGOA.gif"/>
+        <img style="padding:5% 25%;width:100%;" src="http://i.giphy.com/fVwQok9xnLGOA.gif"/>
       </raw>
       <p>Es fällt auf, dass in Barcelona das Dribbling ein wichtiges Stilmittel ist (189 erfolgreiche). Mit großem Abstand gewinnt übrigens Lionel Messi diese Einzelwertung (71). Seine Alleingänge schaffen Raum für die Mitspieler. Weil sie trotzdem oft den Ball besitzen, zeigt das: Sie passen öfter, spielen lieber ab.</p>
     </division>
