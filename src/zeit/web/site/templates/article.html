@@ -53,7 +53,7 @@
             {% include "zeit.web.site:templates/inc/article/sharing-menu-items.tpl" %}
         </div>
     </div>
-    {% if view.nextread and view.nextread.teasers %}
+    {% if view.nextread %}
         {%- include "zeit.web.site:templates/inc/article/nextread.tpl" ignore missing -%}
     {% endif %}
 {% endblock %}

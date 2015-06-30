@@ -48,7 +48,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
     @zeit.web.reify
     def nextread(self):
         nextread = super(Article, self).nextread
-        nextread.image_pattern = 'zmo-nextread'
         if nextread.layout.id != 'minimal':  # XXX Ugly hack to register CRs.
             for i in zeit.web.core.interfaces.ITeaserSequence(nextread):
                 i.image and self._copyrights.setdefault(

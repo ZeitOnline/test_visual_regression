@@ -582,58 +582,70 @@ def _inline_html(xml, elements=None):
         return
 
 
-class Nextread(object):
+class Nextread(zeit.web.core.utils.nslist):
     """Teaser block for nextread teasers in articles."""
 
-    def __init__(self, context):
+    image_pattern = 'default'
+
+    def __init__(self, context, *args):
+        super(Nextread, self).__init__(*args)
         self.context = context
-        self.teasers = zeit.magazin.interfaces.INextRead(context).nextread
-        self.image_pattern = 'default'
 
     @property
+    def teasers(self):
+        raise NotImplementedError()
+
+    @zeit.web.reify
     def layout_id(self):
         # Select layout id from a list of possible values, default to 'base'.
         related = zeit.magazin.interfaces.IRelatedLayout(self.context)
         layout = related.nextread_layout
         return layout if layout in ('minimal', 'maximal') else 'base'
 
-    @property
+    @zeit.web.reify
     def layout(self):
         return zeit.content.cp.layout.BlockLayout(
             self.layout_id, self.layout_id,
             areas=[], image_pattern=self.image_pattern)
 
-    @property
+    @zeit.web.reify
     def multitude(self):
         return 'multi' if len(self) > 1 else 'single'
 
-    def __iter__(self):
-        return iter(self.teasers)
+    def __hash__(self):
+        return hash(self.context.uniqueId)
 
-    def __getitem__(self, index):
-        return self.teasers[index]
-
-    def __len__(self):
-        return len(self.teasers)
+    def __repr__(self):
+        return object.__repr__(self)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.INextread)
 @grokcore.component.adapter(zeit.magazin.interfaces.IZMOContent)
 class ZMONextread(Nextread):
-    pass
+
+    image_pattern = 'zmo-nextread'
+
+    def __init__(self, context):
+        nxr = zeit.magazin.interfaces.INextRead(context, None)
+        args = nxr.nextread if nxr and nxr.nextread else ()
+        super(ZMONextread, self).__init__(context, args)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.INextread)
-@grokcore.component.adapter(zeit.cms.section.interfaces.IZONContent)
+@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
 class ZONNextread(Nextread):
-    pass
+
+    image_pattern = '940x400'
+
+    def __init__(self, context):
+        rel = zeit.cms.related.interfaces.IRelatedContent(context, None)
+        args = rel.related if rel and rel.related else ()
+        super(ZONNextread, self).__init__(context, args)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IBreakingNews)
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 class BreakingNews(object):
-
-    """Breaking news"""
 
     def __init__(self):
         bn_path = zope.component.getUtility(

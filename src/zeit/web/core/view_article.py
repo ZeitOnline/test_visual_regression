@@ -213,10 +213,8 @@ class Article(zeit.web.core.view.Content):
         # TODO: remove prose list, if integration of article-genres.xml
         # is clear (as)
         prefix = 'ein'
-        if (self.context.genre == 'glosse') or \
-           (self.context.genre == 'reportage') or \
-           (self.context.genre == 'nachricht') or \
-           (self.context.genre == 'analyse'):
+        if self.context.genre in (
+                'analyse', 'glosse', 'nachricht', 'reportage'):
             prefix = 'eine'
         if self.context.genre:
             return prefix + ' ' + self.context.genre.title()
@@ -227,9 +225,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def nextread(self):
-        nextread = zeit.web.core.interfaces.INextread(self.context)
-        nextread.image_pattern = '940x400'
-        return nextread
+        return zeit.web.core.interfaces.INextread(self.context)
 
     @zeit.web.reify
     def linkreach(self):
