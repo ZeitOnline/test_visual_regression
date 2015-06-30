@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - FIX: Change cp update time route to url dispatching
 
+- FIX: Prevent seo-slugging for video comment forms the ugly way
+
 
 1.36 (2015-06-26)
 -----------------
