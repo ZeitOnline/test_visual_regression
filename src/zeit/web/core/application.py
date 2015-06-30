@@ -422,6 +422,10 @@ def find_block(context, attrib='cp:__name__', **specs):
     You may also need to override the name of the uuid attribute using the
     attrib keyword.
     """
+    # XXX Maybe this would also work with IXMLReference?
+    # zope.component.queryAdapter(
+    #     context, zeit.cms.content.interfaces.IXMLReference, name='related')
+
     tpl = jinja2.Template("""
         .//*[{% for k, v in specs %}@{{ k }}="{{ v }}"{% endfor %}]/@{{ attr }}
     """)

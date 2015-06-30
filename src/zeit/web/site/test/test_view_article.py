@@ -383,6 +383,15 @@ def test_nextread_is_responsive(selenium_driver, testserver, screen_size):
         assert nextread.size.get('height') < 450
 
 
+def test_zon_nextread_teaser_block_has_teasers_available(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    nextread = zeit.web.core.interfaces.INextread(context)
+    assert hasattr(nextread, '__iter__')
+    assert len(nextread) == 1
+    assert nextread[0].uniqueId.endswith('/zeit-online/article/01')
+
+
 def test_article_column_should_have_no_body_image(testserver, testbrowser):
     browser = testbrowser('{}/zeit-online/cp-content/kolumne'.format(
         testserver.url))
