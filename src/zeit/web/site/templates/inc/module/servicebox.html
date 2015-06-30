@@ -1,4 +1,4 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 <nav class="servicebox" id="servicebox">
     <h3 class="servicebox__heading">Service</h3>
@@ -7,7 +7,7 @@
         <div class="servicebox__column">
             {% for service in service_column %}
             <a class="servicebox__link" href="{{ service.href }}">
-                {{ lama_core.use_svg_icon('servicebox-{}'.format(service.id), 'servicebox__icon servicebox__icon--{}'.format(service.id), request) }}
+                {{ lama.use_svg_icon('servicebox-{}'.format(service.id), 'servicebox__icon servicebox__icon--{}'.format(service.id), request) }}
                 <span>{{ service.title }}</span>
             </a>
             {% endfor %}

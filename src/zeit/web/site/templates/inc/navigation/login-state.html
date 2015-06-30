@@ -1,4 +1,4 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% if user %}
 <div class="login-state" data-feature="dropdown">
     <a href="{{ profile }}" class="login-state__name">{{ user.name }}</a>
@@ -16,12 +16,12 @@
     <span class="login-state-mobile__name">{{ user.name }}</span>
     <a href="{{ logout }}" rel="nofollow" class="login-state-mobile__logoff">
         Abmelden
-        {{ lama_core.use_svg_icon('navigation-login', 'login-state-mobile__icon', request) }}
+        {{ lama.use_svg_icon('navigation-login', 'login-state-mobile__icon', request) }}
     </a>
 </div>
 {% else %}
 <a href="{{ login }}" rel="nofollow" class="user-link">
-    {{ lama_core.use_svg_icon('navigation-login', 'main_nav__community__icon', request) }}
+    {{ lama.use_svg_icon('navigation-login', 'main_nav__community__icon', request) }}
     Anmelden
 </a>
 {% endif %}
