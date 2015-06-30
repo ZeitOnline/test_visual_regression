@@ -117,12 +117,12 @@
     </ol>
 {%- endmacro %}
 
-{% macro place(item) -%}
+{% macro place(item, view) -%}
     {{ lama.adplace(item, view) }}
     {{ lama.adplace_middle_mobile(item) }}
 {%- endmacro %}
 
-{% macro contentadblock(item) -%}
+{% macro contentadblock(item, view) -%}
     {{ lama.content_ad_article(view) }}
 {%- endmacro %}
 
