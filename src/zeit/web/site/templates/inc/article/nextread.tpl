@@ -1,8 +1,7 @@
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
 {%- set module = view.nextread -%}
-{% if module is iterable -%}
-    {% for teaser in module %}
+{% for teaser in module %}
     {% set image = get_teaser_image(module, teaser) %}
     {% set has_default_image = get_default_image_id() in image.uniqueId %}
 <div class="nextread {% if has_default_image %}nextread--without-image{% endif %}" id="nextread">
@@ -23,5 +22,4 @@
         </div>
     </a>
 </div>
-    {% endfor %}
-{% endif %}
+{% endfor %}

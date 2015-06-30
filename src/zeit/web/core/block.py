@@ -13,7 +13,6 @@ import requests.exceptions
 import urlparse
 import zope.component
 import zope.interface
-import zope.interface.declarations
 
 import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
@@ -84,7 +83,7 @@ class Portraitbox(object):
 
     def _author_text(self, pbox):
         # not the most elegant solution, but it gets sh*t done
-        return "".join([lxml.etree.tostring(element) for element in
+        return ''.join([lxml.etree.tostring(element) for element in
                        lxml.html.fragments_fromstring(pbox) if
                        element.tag != 'raw'])
 
@@ -585,28 +584,30 @@ def _inline_html(xml, elements=None):
         return
 
 
-class NextreadTeaserBlock(object):
+class Nextread(object):
     """Teaser block for nextread teasers in articles."""
 
-    zope.interface.implements(zeit.web.core.interfaces.INextreadTeaserBlock)
-
-    def __init__(self, context, image_pattern='default'):
+    def __init__(self, context):
+        self.context = context
         self.teasers = zeit.magazin.interfaces.INextRead(context).nextread
+        self.image_pattern = 'default'
 
+    @property
+    def layout_id(self):
         # Select layout id from a list of possible values, default to 'base'.
-        nrl = zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout
-        self.layout_id = nrl if nrl in ('minimal', 'maximal') else 'base'
-
-        self.image_pattern = image_pattern
-        # TODO: Nextread lead should be configurable with ZMO-185.
-        self.lead = 'Lesen Sie jetzt'
-        self.multitude = 'multi' if len(self) - 1 else 'single'
+        related = zeit.magazin.interfaces.IRelatedLayout(self.context)
+        layout = related.nextread_layout
+        return layout if layout in ('minimal', 'maximal') else 'base'
 
     @property
     def layout(self):
         return zeit.content.cp.layout.BlockLayout(
-            self.layout_id, self.layout_id, areas=[],
-            image_pattern=self.image_pattern)
+            self.layout_id, self.layout_id,
+            areas=[], image_pattern=self.image_pattern)
+
+    @property
+    def multitude(self):
+        return 'multi' if len(self) > 1 else 'single'
 
     def __iter__(self):
         return iter(self.teasers)
@@ -616,6 +617,18 @@ class NextreadTeaserBlock(object):
 
     def __len__(self):
         return len(self.teasers)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.INextread)
+@grokcore.component.adapter(zeit.magazin.interfaces.IZMOContent)
+class ZMONextread(Nextread):
+    pass
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.INextread)
+@grokcore.component.adapter(zeit.cms.section.interfaces.IZONContent)
+class ZONNextread(Nextread):
+    pass
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IBreakingNews)
