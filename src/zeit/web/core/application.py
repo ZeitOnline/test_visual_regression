@@ -158,6 +158,7 @@ class Application(object):
 
         log.debug('Configuring Pyramid')
         config.add_route('json_delta_time', '/json/delta_time')
+        config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
@@ -572,8 +573,9 @@ class TraversableDynamic(TraversableCenterPage):
 class TraversableVideo(dict):
 
     def __init__(self, context, tdict):
-        # XXX: Let's hope no video is ever called 'imagegroup'. (ND)
-        if tdict['view_name'] != 'imagegroup':
+        # XXX: Let's hope no video is ever called 'imagegroup'
+        #      or 'comment-form'. (ND)
+        if tdict['view_name'] not in ('imagegroup', 'comment-form'):
             tdict['request'].GET['slug'] = tdict['view_name']
             tdict['view_name'] = ''
         super(TraversableVideo, self).__init__(tdict)
