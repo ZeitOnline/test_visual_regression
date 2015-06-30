@@ -818,10 +818,9 @@ def test_servicebox_present_in_wide_breakpoints(
 def test_centerpage_area_should_render_in_isolation(testbrowser, testserver):
     browser = testbrowser('{}/index/area/id-5fe59e73-e388-42a4-a8d4-'
                           '750b0bf96812'.format(testserver.url))
-    document = lxml.etree.fromstring(browser.contents)
-    assert document.tag == 'div'
-    assert document.attrib['class'] == 'cp-area cp-area--gallery'
-    assert len(browser.cssselect('article.teaser-small')) == 2
+    select = browser.cssselect
+    assert len(select('div.cp-area.cp-area--gallery')) == 1
+    assert len(select('article.zon-gallery')) == 2
 
 
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):

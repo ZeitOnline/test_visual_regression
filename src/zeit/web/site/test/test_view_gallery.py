@@ -69,39 +69,39 @@ def test_zon_gallery_teaser_on_homepage_should_have_two_correct_teasers(
 
     assert(
         len(select('.zon-gallery > .zon-gallery__figurewrapper'))
-        ) == assumed_number_of_teasers
+    ) == assumed_number_of_teasers
 
     assert(
         len(select('.zon-gallery__figurewrapper > .zon-gallery__media'))
-        ) == assumed_number_of_teasers
+    ) == assumed_number_of_teasers
 
     assert(
         len(select('.zon-gallery__figurewrapper > .zon-gallery__icon'))
-        ) == assumed_number_of_teasers
+    ) == assumed_number_of_teasers
 
     assert(
         len(select('.zon-gallery__figurewrapper > .zon-gallery__counter'))
-        ) == assumed_number_of_teasers
+    ) == assumed_number_of_teasers
 
     assert(
         len(select('.zon-gallery > .zon-gallery__container'))
-        ) == assumed_number_of_teasers
+    ) == assumed_number_of_teasers
 
     assert(
         len(select('.zon-gallery__container > .zon-gallery__heading'))
-        ) == assumed_number_of_teasers
+    ) == assumed_number_of_teasers
 
     assert(len(select(
         '.zon-gallery__heading > a > .zon-gallery__kicker'))
-        ) == assumed_number_of_teasers
+    ) == assumed_number_of_teasers
 
     assert(len(select(
         '.zon-gallery__heading > a > .zon-gallery__title'))
-        ) == assumed_number_of_teasers
+    ) == assumed_number_of_teasers
 
     assert(
         len(select('.zon-gallery__container > .zon-gallery__text'))
-        ) == assumed_number_of_teasers
+    ) == assumed_number_of_teasers
 
 
 def test_zon_gallery_teaser_on_homepage_should_hide_elements_on_mobile(

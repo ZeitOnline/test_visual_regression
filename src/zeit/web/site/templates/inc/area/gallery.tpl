@@ -14,7 +14,7 @@ TODO:
 {% block before_module_list %}
   <div class="cp-ressort-heading">
     {# TODO: This could be a headline or something? #}
-    <h6 class="cp-ressort-heading__title">Fotostrecken</h3>
+    <h6 class="cp-ressort-heading__title">Fotostrecken</h6>
     <a href="{{ view.request.route_url('home') }}foto/index" class="cp-ressort-heading__readmore-link">
       <span class="cp-ressort-heading__readmore-linktext">Alle Fotostrecken</span>
     </a>
