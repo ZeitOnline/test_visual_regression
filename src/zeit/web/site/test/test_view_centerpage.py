@@ -837,3 +837,20 @@ def test_centerpage_square_teaser_has_pixelperfect_image(
     assert len(images)
     for image in images:
         assert 'is-pixelperfect' in image.get('class')
+
+
+def test_centerpage_teaser_is_clickable_en_block_for_touch_devices(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/index?touch' % testserver.url)
+    article = driver.find_element_by_css_selector('article[data-unique-id]')
+    link = article.find_element_by_tag_name('a')
+    href = link.get_attribute('href')
+    article.click()
+    assert driver.current_url == href
+
+    driver.back()
+    article = driver.find_element_by_css_selector('article[data-unique-id]')
+    text = article.find_element_by_tag_name('p')
+    text.click()
+    assert driver.current_url == href
