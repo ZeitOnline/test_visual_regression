@@ -58,7 +58,7 @@ require([
         // homepage
         $( '#snapshot' ).snapshot();
         // centerpage
-        $( 'body' ).up2dateSignals();
+        $.up2dateSignals();
         $( '#main' ).autoclick();
         $( '#series_select' ).selectNav();
     } else if ( pageType === 'article' ) {
