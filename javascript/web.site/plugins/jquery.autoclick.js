@@ -10,8 +10,6 @@
 
         if ( insideLink ) {
             return true;
-        } else {
-            return false;
         }
 
         if ( firstLink ) {
