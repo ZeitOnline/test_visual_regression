@@ -12,13 +12,13 @@
     <div class="video-stage-main">
         {% with %}
             {% set teaser = module.videos[0] %}
-            {% include "zeit.web.site:templates/inc/teaser/video-large.tpl" ignore missing %}
+            {% include "zeit.web.site:templates/inc/teaser/video-large.tpl" %}
         {% endwith %}
     </div>
     <div class="video-stage-secondary">
         <h6 class="video-stage-secondary__title">Die neuesten Videos</h6>
         {% for teaser in module.videos[1:4] %}
-            {% include "zeit.web.site:templates/inc/teaser/video-small.tpl" ignore missing %}
+            {% include "zeit.web.site:templates/inc/teaser/video-small.tpl" %}
         {% endfor %}
     </div>
     <footer class="video-stage-footer">

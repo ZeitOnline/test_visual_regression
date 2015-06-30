@@ -41,7 +41,7 @@
 {% endblock article_main_image %}
 
 {% block article_pagination %}
-    {% include "zeit.web.site:templates/inc/article/pagination.tpl" ignore missing %}
+    {% include "zeit.web.site:templates/inc/article/pagination.tpl" %}
 {% endblock article_pagination %}
 
 {% block article_interactions %}
@@ -54,6 +54,6 @@
         </div>
     </div>
     {% if view.nextread %}
-        {%- include "zeit.web.site:templates/inc/article/nextread.tpl" ignore missing -%}
+        {%- include "zeit.web.site:templates/inc/article/nextread.tpl" -%}
     {% endif %}
 {% endblock %}
