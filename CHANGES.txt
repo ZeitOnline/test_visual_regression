@@ -4,6 +4,8 @@ Change log for zeit.web
 1.37 (unreleased)
 -----------------
 
+- ZON-1908: Implement zmo and zon specific nextread sources
+
 - ZON-1505: Make centerpage teaser clickable en bloc
 
 - ZON-1888/1889: improve mobile teaser images
