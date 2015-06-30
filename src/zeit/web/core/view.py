@@ -664,7 +664,7 @@ def json_comment_count(request):
     for article in articles:
         count = counts.get(article.uniqueId, 0)
         comment_count[article.uniqueId] = '%s Kommentar%s' % (
-            count == 0 and 'Keine' or count, count != 1 and 'e' or '')
+            count == 0 and 'Keine' or count, count != '1' and 'e' or '')
 
     return {'comment_count': comment_count}
 
