@@ -53,13 +53,10 @@
 		@extend %teaser-datetime
 	&__commentcount
 		@extend %teaser-commentcount
-	
-// mobile in a list of small minor teasers
-// only the first should show an image
+
+
 +respond-max($break-phablet-min)
-	.teaser-small-minor 
-		& ~ .teaser-small-minor
-			.teaser-small-minor__media
-				display: none
-			.teaser-small-minor__container
-				padding-left: 0
+	.teaser-small-minor__media
+		display: none
+	.teaser-small-minor__container
+		padding-left: 0

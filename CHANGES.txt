@@ -1,8 +1,48 @@
 Change log for zeit.web
 =======================
 
-1.35 (unreleased)
+1.37 (unreleased)
 -----------------
+
+- ZON-1888/1889: improve mobile teaser images
+
+- ZON-1895: column teaser
+
+- MAINT: Drop vivi-internal preview capabilities
+
+- MAINT: Re-locate base module class to zeit.web.site.module
+
+- FIX: Change cp update time route to url dispatching
+
+- FIX: Prevent seo-slugging for video comment forms the ugly way
+
+
+1.36 (2015-06-26)
+-----------------
+
+- BUG-283: Prevent automatic layout deviations for zeit-magazin
+
+- ZON-1891: Adapt video traversal and redirect URLs to seo slugs
+
+- ZON-1893: Allow A/B-test users to toggle their site version
+
+- ZON-1876: Custom wt param to distinguish between classic and beta
+
+
+1.35 (2015-06-26)
+-----------------
+
+- ZON-1894: Adjust series teaser to latest design version
+
+- ZON-1564: Fix video stage thumbnails on resize
+
+- ZON-1866: Beta login enhancements
+
+- BUG-22: Fix for slideshow images being too small in webkit
+
+- ZON-1575: Restore prospective lazy loading for snapshot
+
+- ZON-1871: Fix topic-teaser background image in iOS
 
 - ZON-1564: (Part 2) Add view property for publish info + timezone
 
@@ -10,11 +50,13 @@ Change log for zeit.web
 
 - FIX: Register RenderedLegacyArea via grok
 
+- FIX: Suppress invalid user picture reliably
+
 - Improvement testing: Allow mockserver to sleep
 
 - Code cleanup: Harmonize template code
 
-- Maintenance: Drop vivi-internal preview capabilities
+- Quickfix: Avoid inappropriate transition of liveblog text in Safari
 
 
 1.34 (2015-06-23)

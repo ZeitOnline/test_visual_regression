@@ -31,20 +31,7 @@ def test_login_state_view_should_deliver_correct_user():
     request.session = {}
     request.session['user'] = {}
     request.registry.settings['community_host'] = "http://community"
-    request.registry.settings['community_static_host'] = (
-        "http://community_static")
-    request.host = "destination"
     request.params = {}
     result = zeit.web.site.view.login_state(request)
-    assert result['user'] == {
-        'profile': 'http://community/user/123'
-    }
-
-    request.session['user']['picture'] = 'http://community/pic'
-    result = zeit.web.site.view.login_state(request)
-    assert result['user']['picture'] == 'http://community_static/pic'
-
-    # community bug
-    request.session['user']['picture'] = '0'
-    result = zeit.web.site.view.login_state(request)
-    assert 'picture' not in result['user']
+    assert result['user'] == {}
+    assert result['profile'] == 'http://community/user'

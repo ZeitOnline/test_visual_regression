@@ -301,12 +301,12 @@ $user-picture-diameter: remify(45px)
 		width: $zon-search-width
 	+respond-min-max($break-tablet-min, $break-desktop-min - .001em)
 		visibility: hidden
-		transition: transform .2s ease-out, visibility .2s
-		transform: translateX($zon-search-width)
+		+transition(transform .2s ease-out, visibility .2s)
+		+transform(translateX($zon-search-width))
 
 .search__input--visible
 	visibility: visible
-	transform: translateX(0)
+	+transform(translateX(0))
 	& + .search__button
 		border-top-left-radius: 0
 		border-bottom-left-radius: 0
