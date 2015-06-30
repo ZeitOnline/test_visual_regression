@@ -12,32 +12,24 @@ TODO:
 #}
 
 {% block before_module_list %}
-
   <div class="cp-ressort-heading">
     {# TODO: This could be a headline or something? #}
-    <div class="cp-ressort-heading__title">Fotostrecken</div>
-    {# TODO: probably we have a URL generator or something ... ? #}
-    <a href="/foto/index" class="cp-ressort-heading__readmore-link">
+    <h6 class="cp-ressort-heading__title">Fotostrecken</h3>
+    <a href="{{ view.request.route_url('home') }}foto/index" class="cp-ressort-heading__readmore-link">
       <span class="cp-ressort-heading__readmore-linktext">Alle Fotostrecken</span>
     </a>
   </div>
-
-  {# TODO: is this the right way to implement a wrapper? We would need it inside the area/default.html. (1/2) #}
-  <div class="zon-gallery-wrapper">
-
 {% endblock %}
 
-{% block before_module_include scoped %}{% endblock %}
-{% block after_module_include scoped %}{% endblock %}
+{% block module_list %}
+  <div class="zon-gallery-group__container">
+    {{ super() }}
+  </div>
+{% endblock %}
 
 {% block after_module_list %}
-
-  {# TODO: is this the right way to implement a wrapper? We would need it inside the area/default.html. (2/2) #}
-  </div>
-
-  {# TODO: shuffle-button is NOT an element of a zon-gallery block! #}
-  <button type="button" class="button zon-gallery__shuffle-button" id="shuffle-gallery" onclick="shuffleGallery()">
-    {{ lama_core.use_svg_icon('shuffle', 'zon-gallery__shuffle-icon', request) }}Andere laden
+  <button type="button" class="button zon-gallery-group__shuffle-button" id="shuffle-gallery" onclick="shuffleGallery()">
+    {{ lama_core.use_svg_icon('shuffle', 'zon-gallery-group__shuffle-icon', request) }}Andere laden
   </button>
 
   <script type="text/javascript">

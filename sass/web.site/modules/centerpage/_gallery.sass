@@ -3,9 +3,24 @@
 // https://zeit-online.atlassian.net/secure/attachment/19208/bigariegel_desktop%2Btablet_vermaßt.png
 // https://zeit-online.atlassian.net/secure/attachment/19207/bigariegel_phone%2Bphablet_vermaßt.png
 
+// TODO:
+// .gallery-teasergroup mit __headline, __button
+// .gallery-teaser mit Elementen
+// Button vielleicht sogar als eigenen Block?
+
 .zon-gallery
 	background-color: $white
 	margin-bottom: remify(20px)
+	+respond-min($break-tablet-min)
+		width: remify(354px)
+		float: left
+
+		// substitute for margin and last-of-type margin Gedöns
+		&+.zon-gallery
+			margin-left: remify(20px)
+
+	+respond-min($break-desktop-min)
+		width: remify(460px)
 
 	&:hover
 		box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.05)
@@ -23,20 +38,14 @@
 		@extend %teaser-combined-link
 
 	&__kicker
-		color: $zon-red
-		display: block
+		@extend %teaser-kicker
 		font-size: remify(14px)
-		letter-spacing: $zon-letter-spacing-m
 
-	// TODO: das ist dahingestrickt. Wo krieg ich ein vernüftig geerbtes
 	// Styling her?
 	&__title
-		display: block
-		font-size: 18px
-		+respond-min($break-tablet-min)
-			margin-top: 0
+		@extend %teaser-title
+		font-size: remify(18px)
 
-	// TODO: Media Queries hier reinstricken, oder unten gebündelt?
 	&__text,
 	&__counter
 		+respond-max($break-tablet-min)
@@ -73,8 +82,12 @@
 		font-size: remify(12px)
 		letter-spacing: 0.04em
 
+.zon-gallery-group
+	&__container
+		// flexbox for same height
+		+respond-min($break-tablet-min)
+			+display-flex
 
-	// TODO: this is not an element of zon-gallery (which is a single teaser)
 	&__shuffle-button
 		background-color: $white
 		display: block
@@ -88,17 +101,7 @@
 		// svg colors
 		fill: $zon-charcoal
 
-+respond-min($break-tablet-min)
-	.zon-gallery
-		width: remify(354px)
-		float: left
-	// substitute for margin and last-of-type margin Gedöns
-	.zon-gallery+.zon-gallery
-		margin-left: remify(20px)
-	// flexbox for same height
-	.zon-gallery-wrapper
-		+display-flex
-
-+respond-min($break-desktop-min)
-	.zon-gallery
-		width: remify(460px)
+//+respond-min($break-tablet-min)
+//	// substitute for margin and last-of-type margin Gedöns
+//	.zon-gallery+.zon-gallery
+//		margin-left: remify(20px)

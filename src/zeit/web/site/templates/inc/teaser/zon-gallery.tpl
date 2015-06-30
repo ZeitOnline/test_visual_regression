@@ -4,8 +4,9 @@
 {% block teaser_media_position_before_title %}
 	{% set module_layout = self.layout() %}
 
-	{# TODO: Figcaption would be better than this wrapper. #}
-	<div class="zon-gallery__figurewrapper">
+	{# OPTIMIZE: Figcaption would be better than this wrapper.
+	   But JS fills the whole <figure> when loading an image.#}
+	<div class="{{ self.layout() }}__figurewrapper">
 		{% include "zeit.web.site:templates/inc/teaser_asset/imagegroup.tpl" %}
 
 		{{ lama_core.use_svg_icon('gallery', '{}__icon'.format(self.layout()), request) }}
