@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1895: column teaser
 
+- MAINT: Re-locate base module class to zeit.web.site.module
+
 - FIX: Change cp update time route to url dispatching
 
 - FIX: Prevent seo-slugging for video comment forms the ugly way
