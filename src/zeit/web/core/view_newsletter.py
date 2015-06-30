@@ -1,4 +1,3 @@
-import babel.dates
 import pyramid.view
 
 import zeit.cms.workflow.interfaces
@@ -19,14 +18,6 @@ class Newsletter(zeit.web.core.view.Base):
         if self.request.params.get('format') == 'txt':
             self.request.response.content_type = 'text/plain; charset=utf-8'
         return {}
-
-    @property
-    def date_first_released(self):
-        timezone = babel.dates.get_timezone('Europe/Berlin')
-        context = zeit.cms.workflow.interfaces.IPublishInfo(self.context)
-        date = context.date_first_released
-        if date:
-            return date.astimezone(timezone)
 
     @property
     def body(self):

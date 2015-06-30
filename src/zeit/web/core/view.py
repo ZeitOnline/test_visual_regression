@@ -367,6 +367,31 @@ class Base(object):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('dev_environment', '')
 
+    @zeit.web.reify
+    def timezone(self):
+        return babel.dates.get_timezone('Europe/Berlin')
+
+    @zeit.web.reify
+    def publish_info(self):
+        return zeit.cms.workflow.interfaces.IPublishInfo(self.context)
+
+    @zeit.web.reify
+    def date_last_modified(self):
+        return self.date_last_published_semantic or self.date_first_released
+
+    @zeit.web.reify
+    def date_first_released(self):
+        date = self.publish_info.date_first_released
+        if date:
+            return date.astimezone(self.timezone)
+
+    @zeit.web.reify
+    def date_last_published_semantic(self):
+        date = self.publish_info.date_last_published_semantic
+        if (self.date_first_released is not None and date is not None and
+                date > self.date_first_released):
+            return date.astimezone(self.timezone)
+
 
 class Content(Base):
 
@@ -377,33 +402,10 @@ class Content(Base):
         return self.context.subtitle
 
     @zeit.web.reify
-    def date_last_modified(self):
-        return self.date_last_published_semantic or self.date_first_released
-
-    @zeit.web.reify
     def date_print_published(self):
-        tz = babel.dates.get_timezone('Europe/Berlin')
-        date = zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_print_published
+        date = self.publish_info.date_print_published
         if date:
-            return date.astimezone(tz)
-
-    @zeit.web.reify
-    def date_first_released(self):
-        tz = babel.dates.get_timezone('Europe/Berlin')
-        date = zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_first_released
-        if date:
-            return date.astimezone(tz)
-
-    @zeit.web.reify
-    def date_last_published_semantic(self):
-        tz = babel.dates.get_timezone('Europe/Berlin')
-        date = zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_last_published_semantic
-        if (self.date_first_released is not None and date is not
-                None and date > self.date_first_released):
-            return date.astimezone(tz)
+            return date.astimezone(self.timezone)
 
     @zeit.web.reify
     def date_format(self):
@@ -435,8 +437,7 @@ class Content(Base):
 
     @zeit.web.reify
     def is_lead_story(self):
-        tz = babel.dates.get_timezone('Europe/Berlin')
-        today = datetime.datetime.now(tz).date()
+        today = datetime.datetime.now(self.timezone).date()
         yesterday = (today - datetime.timedelta(days=1))
 
         if self.leadtime.start:
@@ -571,7 +572,7 @@ class service_unavailable(object):  # NOQA
         return pyramid.response.Response(body, 503)
 
 
-@pyramid.view.notfound_view_config(request_method='GET')
+@pyramid.view.notfound_view_config()
 def not_found(request):
     body = 'Status 404: Dokument nicht gefunden.'
     return pyramid.response.Response(body, 404, [('X-Render-With', 'default')])

@@ -1,24 +1,27 @@
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 {% if user %}
 <div class="login-state" data-feature="dropdown">
-    <a href="{{ logout }}" class="login-state__name">{{ user.name }}</a>
+    <a href="{{ profile }}" class="login-state__name">{{ user.name }}</a>
     <ul class="dropdown">
         <li class="dropdown__item">
             <a href="{{ profile }}" class="dropdown__link">Profil</a>
-            <a href="{{ logout }}" class="dropdown__link">Abmelden</a>
+            <a href="{{ logout }}" class="dropdown__link" rel="nofollow">Abmelden</a>
         </li>
     </ul>
 </div>
 <div class="login-state-mobile">
-    {% if user.picture %}<img class="login-state-mobile__avatar" alt="Avatarbild von {{ user.name }}" src="{{ user.picture }}">{% endif %}
-    <span class="login-state-mobile__name {% if user.picture %}login-state-mobile__name--with-image{% endif %}">{{ user.name }}</span>
-    <a href="{{ logoff }}" rel="nofollow" class="login-state-mobile__logoff">
-        <span>Abmelden</span>
-        <span class="login-state-mobile__icon icon-zon-logo-navigation_login"></span>
+    {% if user.picture -%}
+        <img class="login-state-mobile__avatar" alt="Avatarbild von {{ user.name }}" src="{{ user.picture }}">
+    {% endif %}
+    <span class="login-state-mobile__name">{{ user.name }}</span>
+    <a href="{{ logout }}" rel="nofollow" class="login-state-mobile__logoff">
+        Abmelden
+        {{ lama_core.use_svg_icon('navigation-login', 'login-state-mobile__icon', request) }}
     </a>
 </div>
 {% else %}
-<a href="{{ login }}" rel="nofollow" class="user-link" id="drupal_login">
-    <span class="main_nav__community__image icon-zon-logo-navigation_login"></span>
+<a href="{{ login }}" rel="nofollow" class="user-link">
+    {{ lama_core.use_svg_icon('navigation-login', 'main_nav__community__icon', request) }}
     Anmelden
 </a>
 {% endif %}

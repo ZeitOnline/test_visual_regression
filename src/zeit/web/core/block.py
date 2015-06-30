@@ -1,20 +1,23 @@
 # -*- coding: utf-8 -*-
+import datetime
 import logging
 import os.path
 
+import babel.dates
+import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
+import requests
+import requests.exceptions
 import urlparse
+import zope.component
 import zope.interface
-import zope.interface.declarations
 
 import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
-import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
-import zeit.edit.interfaces
 import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 
@@ -37,23 +40,6 @@ class IFrontendHeaderBlock(zope.interface.Interface):
     """A HeaderBlock identifies elements that appear only in headers of
     the content.
     """
-
-
-@zeit.web.register_filter
-def block_type(obj):
-    """Outputs the class name in lower case format of one or multiple block
-    elements.
-
-    :param obj: list, str or tuple
-    :rtype: list, str or tuple
-    """
-
-    if obj is None:
-        return 'no_block'
-    elif isinstance(obj, list) or isinstance(obj, tuple):
-        return obj.__class__(block_type(o) for o in obj)
-    else:
-        return type(obj).__name__.lower()
 
 
 @grokcore.component.implementer(IFrontendBlock)
@@ -150,8 +136,90 @@ class Infobox(object):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ILiveblog)
 class Liveblog(object):
 
+    timeout = 1
+
     def __init__(self, model_block):
         self.blog_id = model_block.blog_id
+        self.is_live = False
+        self.last_modified = None
+        self.id = None
+        self.seo_id = None
+
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        self.status_url = conf.get('liveblog_status_url')
+
+        try:
+            self.id, self.seo_id = self.blog_id.split('-')[:2]
+        except ValueError:
+            self.id = self.blog_id
+
+        url = '{}/Blog/{}/Post/Published'
+        content = self.get_restful(url.format(self.status_url, self.id))
+
+        if (content and 'PostList' in content and len(
+                content['PostList']) and 'href' in content['PostList'][0]):
+            href = content['PostList'][0]['href']
+            content = self.get_restful(self.prepare_ref(href))
+            if content:
+                tz = babel.dates.get_timezone('Europe/Berlin')
+                utc = babel.dates.get_timezone('UTC')
+                date_format = '%d.%m.%y %H:%M'
+                if '/' in content['PublishedOn']:
+                    date_format = '%m/%d/%y %I:%M %p'
+                elif '-' in content['PublishedOn']:
+                    date_format = '%Y-%m-%dT%H:%M:%SZ'
+                self.last_modified = datetime.datetime.strptime(
+                    content['PublishedOn'], date_format).replace(
+                        tzinfo=utc).astimezone(tz)
+                delta = self.last_modified - datetime.datetime.now(
+                    self.last_modified.tzinfo)
+                if delta.days == 0:
+                    self.is_live = True
+
+        # only needed for beta testing with liveblog embed code
+        # ToDo: remove after finished relaunch
+        self.theme = self.get_theme(self.id)
+
+    def prepare_ref(self, url):
+        return 'http:{}'.format(url).replace(
+            'http://zeit.superdesk.pro/resources/LiveDesk', self.status_url, 1)
+
+    def get_restful(self, url):
+        try:
+            return requests.get(url, timeout=self.timeout).json()
+        except (requests.exceptions.RequestException, ValueError):
+            pass
+
+    @beaker.cache.cache_region('long_term', 'liveblog_theme')
+    def get_theme(self, blog_id):
+        href = None
+        blog_theme_id = None
+
+        if self.seo_id is None:
+            url = '{}/Blog/{}/Seo'
+            content = self.get_restful(url.format(self.status_url, self.id))
+            if (content and 'SeoList' in content and len(
+                    content['SeoList']) and 'href' in content['SeoList'][0]):
+                href = content['SeoList'][0]['href']
+        else:
+            href = '//zeit.superdesk.pro/resources/LiveDesk/Seo/{}'.format(
+                self.seo_id)
+
+        if href:
+            content = self.get_restful(self.prepare_ref(href))
+            if content and 'BlogTheme' in content:
+                try:
+                    blog_theme_id = int(content['BlogTheme']['Id'])
+                except (KeyError, ValueError):
+                    pass
+
+        # return new theme names
+        # 23 = zeit      => zeit-online
+        # 24 = zeit-solo => zeit-online-solo
+        if blog_theme_id == 24:
+            return 'zeit-online-solo'
+
+        return 'zeit-online'
 
 
 class BaseImage(object):
@@ -441,7 +509,7 @@ def _inline_html(xml, elements=None):
     filter_xslt = lxml.etree.XML("""
         <xsl:stylesheet version="1.0"
             xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-            <xsl:output method="xml"
+            <xsl:output method="html"
                         omit-xml-declaration="yes" />
           <!-- Semantische HTML-ELemente übernehmen -->
           <xsl:template match="%s">
@@ -572,33 +640,3 @@ class BreakingNews(object):
             zeit.cms.workflow.interfaces.IPublishInfo(
                 bn_article).date_last_published_semantic)
         self.doc_path = urlparse.urlparse(bn_article.uniqueId).path
-
-
-class Module(object):
-    """Base class for RAM-style modules to be used in cp2015 centerpages."""
-
-    zope.interface.implements(zeit.edit.interfaces.IBlock)
-
-    def __init__(self, context):
-        self.context = context
-        if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(context):
-            self.layout = context.cpextra
-        elif zeit.edit.interfaces.IBlock.providedBy(context):
-            self.layout = context.type
-
-    def __hash__(self):
-        return self.context.xml.attrib.get(
-            '{http://namespaces.zeit.de/CMS/cp}__name__',
-            super(Module, self)).__hash__()
-
-    def __repr__(self):
-        return object.__repr__(self)
-
-    @property
-    def layout(self):
-        return getattr(self, '_layout', None)
-
-    @layout.setter
-    def layout(self, value):
-        self._layout = zeit.content.cp.layout.BlockLayout(
-            value, value, areas=[], image_pattern=value)

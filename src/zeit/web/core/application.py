@@ -29,10 +29,12 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.dynamicfolder.interfaces
 import zeit.content.gallery.interfaces
+import zeit.content.video.interfaces
 import zeit.find.search
 import zeit.magazin.interfaces
 import zeit.solr.interfaces
 
+import zeit.web
 import zeit.web.core
 import zeit.web.core.article
 import zeit.web.core.banner
@@ -156,6 +158,7 @@ class Application(object):
 
         log.debug('Configuring Pyramid')
         config.add_route('json_delta_time', '/json/delta_time')
+        config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
@@ -280,7 +283,7 @@ class Application(object):
         zope.component.hooks.setHooks()
         context = zope.configuration.config.ConfigurationMachine()
         zope.configuration.xmlconfig.registerCommonDirectives(context)
-        zope.configuration.xmlconfig.include(context, package=zeit.web.core)
+        zope.configuration.xmlconfig.include(context, package=zeit.web)
         self.configure_connector(context)
         self.configure_overrides(context)
         context.execute_actions()
@@ -563,6 +566,19 @@ class TraversableDynamic(TraversableCenterPage):
             tdict['view_name'] = ''
         finally:
             super(TraversableDynamic, self).__init__(context, tdict)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo, dict)
+class TraversableVideo(dict):
+
+    def __init__(self, context, tdict):
+        # XXX: Let's hope no video is ever called 'imagegroup'
+        #      or 'comment-form'. (ND)
+        if tdict['view_name'] not in ('imagegroup', 'comment-form'):
+            tdict['request'].GET['slug'] = tdict['view_name']
+            tdict['view_name'] = ''
+        super(TraversableVideo, self).__init__(tdict)
 
 
 # Monkey-patch so our content provides a marker interface,

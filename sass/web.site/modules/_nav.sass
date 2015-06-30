@@ -11,6 +11,9 @@ $zon-classifieds-height: em(50px)
 $zon-classifieds-width-phablet: em(180px)
 $zon-search-width: em(120px)
 $zon-search-square-size: remify(35px)
+$login-icon-width: remify(18px)
+$login-icon-height: remify(18px)
+$user-picture-diameter: remify(45px)
 
 %beta-badge
 	+inline-block
@@ -138,7 +141,7 @@ $zon-search-square-size: remify(35px)
 	+order(20)
 	+inline-block
 	letter-spacing: 1px
-	padding: remify(20px 10px)
+	padding: remify(20px)
 	text-align: left
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style($width: auto)
@@ -167,14 +170,10 @@ $zon-search-square-size: remify(35px)
 .beta-badge
 	@extend %beta-badge
 
-.main_nav__community__image
-	@extend %main_nav_icons
-	display: inline-block
-	width: $small
-	height: $small
-	position: relative
-	top: 3px
-	margin-right: $micro
+.main_nav__community__icon
+	width: $login-icon-width
+	height: $login-icon-height
+	margin: remify(0 8px -2px 0)
 	+respond-min($break-tablet-min)
 		display: none
 
@@ -302,12 +301,12 @@ $zon-search-square-size: remify(35px)
 		width: $zon-search-width
 	+respond-min-max($break-tablet-min, $break-desktop-min - .001em)
 		visibility: hidden
-		transition: transform .2s ease-out, visibility .2s
-		transform: translateX($zon-search-width)
+		+transition(transform .2s ease-out, visibility .2s)
+		+transform(translateX($zon-search-width))
 
 .search__input--visible
 	visibility: visible
-	transform: translateX(0)
+	+transform(translateX(0))
 	& + .search__button
 		border-top-left-radius: 0
 		border-bottom-left-radius: 0
@@ -355,7 +354,7 @@ $zon-search-square-size: remify(35px)
 	color: $zon_mid_grey
 	display: none
 	padding: remify(16px)
-	text-align: center 
+	text-align: center
 	+respond-min($break-tablet-min)
 		display: none !important
 	&__link
@@ -372,41 +371,27 @@ $zon-search-square-size: remify(35px)
 		+link-colors($black, $black, $black, $black, $black)
 
 .login-state-mobile
-	// position: relative
 	+display-flex()
 	+justify-content(space-between)
 	+align-items(center)
-	padding: remify(10px 0)
 	&__avatar
 		border-radius: 50%
-		height: remify(50px)
-		margin-right: 10px
-		vertical-align: middle
-		width: remify(50px)
+		height: $user-picture-diameter
+		margin-right: em(10px)
+		width: $user-picture-diameter
 	&__icon
-		@extend %main_nav_icons
-		display: inline-block
-		font-size: remify(18px)
-		height: $small
-		margin-right: $micro
-		position: relative
-		top: 3px
-		vertical-align: -2px
-		width: $small
+		width: $login-icon-width
+		height: $login-icon-height
+		margin: remify(0 0 -2px 8px)
 	&__logoff
-		display: table-cell
-		text-transform: uppercase
-		width: remify(130px)
+		white-space: nowrap
 		+link-colors($zon-grey, $zon-grey, $zon-grey, $zon-grey, $zon-grey)
 	&__name
 		font-weight: 700
-		height: remify(50px)
-		line-height: remify(50px)
+		line-height: normal
+		max-height: $user-picture-diameter
 		overflow: hidden
-		max-width: 50% // old android fallback
-		max-width: calc(100% - 50px - 130px)
 		text-overflow: ellipsis
-		vertical-align: middle
 		+flex-grow(1)
 	+respond-min($break-tablet-min)
 		display: none

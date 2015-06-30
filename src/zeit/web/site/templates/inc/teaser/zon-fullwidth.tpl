@@ -4,9 +4,7 @@
 
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/"+
-        teaser | auto_select_asset | block_type +
-        "_zon-fullwidth.tpl" ignore missing with context %}
+    {% include "zeit.web.site:templates/inc/teaser_asset/{}.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
     <div class="{{ self.layout() }}__inner-helper">
 {% endblock %}
 

@@ -2,6 +2,7 @@
 import re
 
 import pytest
+import requests
 
 import zeit.cms.interfaces
 import zeit.content.image.interfaces
@@ -13,6 +14,15 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait
+
+
+def is_adcontrolled(contents):
+    return 'data-adDeliveryType="adcontroller"' in contents
+
+
+# use this to enable third_party_modules
+def tpm(me):
+    return True
 
 
 def test_video_imagegroup_should_adapt_videos(application):
@@ -178,3 +188,89 @@ def test_video_page_video_should_exist(selenium_driver, testserver):
         assert player.get_attribute('data-video-id') == video_id
     except TimeoutException:
         assert False, 'Video not visible within 20 seconds'
+
+
+def test_video_page_adcontroller_code_is_embedded(
+        testserver, testbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+    browser = testbrowser(
+        '{}/video/2015-01/4004256546001'.format(testserver.url))
+    assert len(browser.cssselect('.ad.ad--tile_7')) > 0
+    assert 'AdController.render(\'iqadtile7\');' in browser.contents
+
+
+def test_video_page_adcontroller_js_var_isset(
+        selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+    driver = selenium_driver
+    driver.get('{}/video/2015-01/4004256546001'.format(testserver.url))
+    try:
+        selector = 'body[data-adDeliveryType="adcontroller"]'
+        driver.find_element_by_css_selector(selector)
+    except:
+        pytest.skip("not applicable due to oldschool ad configuration")
+
+    adctrl = driver.execute_script("return typeof window.AdController")
+    assert adctrl == "object"
+
+
+# TODO: iFrame (?) wird eingebunden auf großen Bildschirmen
+# TODO: iFrame (?) wird nicht eingebunden auf kleinen Bildschirmen
+# => Wobei, beide Tests gehören eher nach banner.py.
+#    Wenn wir hier den JS Code und Wrapper haben und der andere Test für
+#    Artikel-Banner läuft, können wir davon ausgehen dass er überall
+#    funktioniert !?
+
+@pytest.mark.xfail(reason='Why dont the ads get loaded in test browser???')
+def test_video_page_adcontroller_content_gets_included(
+        selenium_driver, testserver, monkeypatch):
+
+    driver = selenium_driver
+    driver.get('{}/video/2015-01/4004256546001'.format(testserver.url))
+
+    try:
+        iframe = WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, 'ad__inner iframe'))
+        )
+        assert ('google_ads_iframe_' in iframe.get_attribute('id')) is True
+    except TimeoutException:
+        assert False, 'Iframe not found within 20 seconds'
+
+
+def test_video_page_should_redirect_to_slug_from_plain_id_url(
+        testserver, testbrowser):
+    path = '/video/2015-01/4004256546001'
+    slug = '/kuenstliche-intelligenz-roboter-myon-uebernimmt-opernrolle'
+
+    resp = requests.get(testserver.url + path, allow_redirects=False)
+    assert resp.headers.get('Location', '') == testserver.url + path + slug
+
+    resp = requests.get(testserver.url + path, allow_redirects=True)
+    assert resp.url == testserver.url + path + slug
+
+
+def test_video_page_should_redirect_to_correct_slug_from_faulty_slug(
+        testserver, testbrowser):
+    path = '/video/2015-01/4004256546001'
+    slug = '/kuenstliche-intelligenz-roboter-myon-uebernimmt-opernrolle'
+
+    resp = requests.get(testserver.url + path + '/foo', allow_redirects=False)
+    assert resp.headers.get('Location', '') == testserver.url + path + slug
+
+    resp = requests.get(testserver.url + path + '/foo', allow_redirects=True)
+    assert resp.url == testserver.url + path + slug
+
+
+def test_video_page_should_not_redirect_from_correct_slug_url(
+        testserver, testbrowser):
+    path = '/video/2015-01/4004256546001'
+    slug = '/kuenstliche-intelligenz-roboter-myon-uebernimmt-opernrolle'
+
+    resp = requests.get(testserver.url + path + slug, allow_redirects=False)
+    assert 'Location' not in resp.headers
+
+    resp = requests.get(testserver.url + path + slug, allow_redirects=True)
+    assert resp.url == testserver.url + path + slug

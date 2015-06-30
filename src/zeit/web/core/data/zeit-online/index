@@ -6,6 +6,10 @@
             <bu>Ein schneebedecktes Feld bei Buffalo im US-Bundesstaat New York</bu>
             <copyright>© Lindsay DeDario/Reuters</copyright>
         </snapshot>
+        <image src="http://xml.zeit.de/zeit-online/cp-content/ig-1/" type="jpg" title="Ein Seemann im Hafen von Hamburg " alt="Ein Seemann im Hafen von Hamburg " align="left" publication-date="" expires="">
+            <bu py:pytype="str">Mauerfall</bu>
+            <copyright py:pytype="str">© dpa</copyright>
+        </image>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
         <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
         <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>

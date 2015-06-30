@@ -45,6 +45,8 @@ settings = {
     'cache.default_term.expire': '300',
     'cache.long_term.expire': '3600',
     'scripts_url': '/js/static',
+    'liveblog_backend_url': 'http://localhost:6552/liveblog/backend',
+    'liveblog_status_url': 'http://localhost:6552/liveblog/status',
     'caching_time_content': '5',
     'caching_time_article': '10',
     'caching_time_centerpage': '20',
@@ -114,6 +116,10 @@ settings = {
     'vivi_zeit.content.cp_cp-types-url': (
         'egg://zeit.web.core/data/config/cp-types.xml'),
     'vivi_zeit.content.cp_cp-feed-max-items': '30',
+    'vivi_zeit.content.image_variant-source': (
+        'egg://zeit.web.core/data/config/image-variants.xml'),
+    'vivi_zeit.content.image_legacy-variant-source': (
+        'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
     'vivi_zeit.web_banner-source': (
         'egg://zeit.web.core/data/config/banner.xml'),
     'vivi_zeit.web_banner-id-mappings': (
@@ -326,17 +332,48 @@ def mockserver_factory(request):
     return factory
 
 
+class ISettings(pyramid.interfaces.ISettings):
+    """Custom interface class to register settings as a utility"""
+
+
+def sleep_tween(handler, registry):
+    """Tween to control whether server should sleep for a little while"""
+    def timeout(request):
+        # Setting timeout globally can cause race conditions, if tests run
+        # parallel.
+        # XXX. Set sleep time per request
+        conf = zope.component.getUtility(ISettings)
+        import time
+        time.sleep(conf['sleep'])
+        print 'For request %s, mockserver slept %s seconds.' % (request.path,
+                                                                conf['sleep'])
+        response = handler(request)
+
+        # For comfortability set sleep back to 0
+        conf['sleep'] = 0
+        return response
+    return timeout
+
+
 @pytest.fixture(scope='session')
 def mockserver(request):
     """Used for mocking external HTTP dependencies like agatho or spektrum."""
     from pyramid.config import Configurator
+
     config = Configurator()
     config.add_static_view('/', 'zeit.web.core:data/')
+    settings = {'sleep': 0}
+    settings = pyramid.config.settings.Settings(d=settings)
+    interface = ISettings
+    zope.interface.declarations.alsoProvides(settings, interface)
+    zope.component.provideUtility(settings, interface)
+    config.add_tween('zeit.web.core.test.conftest.sleep_tween')
     app = config.make_wsgi_app()
     server = gocept.httpserverlayer.wsgi.Layer()
     server.port = 6552
     server.wsgi_app = app
     server.setUp()
+    server.settings = settings
     server.url = 'http://%s' % server['http_address']
     request.addfinalizer(server.tearDown)
     return server

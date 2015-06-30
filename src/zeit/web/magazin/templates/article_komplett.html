@@ -1,5 +1,8 @@
 {% extends "zeit.web.magazin:templates/article.html" %}
 {% block article_pages %}
+    {% block article_main_image %}
+        {{ blocks['image'](view.main_image_block)}}
+    {% endblock article_main_image %}
     {% for page in view.pages %}
         <div class="article__page">
             {{ render_page(page) }}

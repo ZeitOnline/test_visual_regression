@@ -30,6 +30,23 @@ log = logging.getLogger(__name__)
 
 
 @zeit.web.register_filter
+def block_type(obj):
+    """Outputs the class name in lower case format of one or multiple block
+    elements.
+
+    :param obj: list, str or tuple
+    :rtype: list, str or tuple
+    """
+
+    if obj is None:
+        return 'no_block'
+    elif isinstance(obj, list) or isinstance(obj, tuple):
+        return obj.__class__(block_type(o) for o in obj)
+    else:
+        return type(obj).__name__.lower()
+
+
+@zeit.web.register_filter
 def translate_url(url):
     if url is None:
         return
@@ -51,7 +68,9 @@ def create_url(obj):
 
 
 @zeit.web.register_filter
-def format_date(obj, type='short'):
+def format_date(date, type='short', pattern=None):
+    if date is None:
+        return ''
     formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
                'regular': "d. MMMM yyyy, H:mm",
                'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd",
@@ -61,10 +80,17 @@ def format_date(obj, type='short'):
     # "yyyy-MM-dd'T'HH:mm:ssZZZZZ" or "yyyy-MM-dd'T'HH:mm:ssXXX" is not working
     if type == 'iso8601':
         try:
-            return obj.replace(microsecond=0).isoformat()
+            return date.replace(microsecond=0).isoformat()
         except AttributeError:
             return
-    return babel.dates.format_datetime(obj, formats[type], locale="de_De")
+    elif type == 'timedelta':
+        delta = date - datetime.datetime.now(date.tzinfo)
+        text = babel.dates.format_timedelta(delta, threshold=1,
+                                            add_direction=True, locale="de_DE")
+        return text[:1].lower() + text[1:] if text else ''
+    if pattern is None:
+        pattern = formats[type]
+    return babel.dates.format_datetime(date, pattern, locale="de_DE")
 
 
 @zeit.web.register_filter
@@ -113,6 +139,8 @@ def get_layout(block, request=None):
     # Since we might lookup a layout more than once per request, we can cache
     # it in the request object.
 
+    # XXX This filter is in desperate need of a major overhaul!
+
     request = request or pyramid.threadlocal.get_current_request()
 
     try:
@@ -127,13 +155,10 @@ def get_layout(block, request=None):
         if layout:
             return layout
 
-    source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS.factory
-    source_xml = source._get_tree()
-
     def allowed(layout_id):
         try:
             xp = '/layouts/layout[@id="{}"]/@areas'.format(layout_id)
-            return block.__parent__.kind in source_xml.xpath(xp)[0].split(' ')
+            return block.__parent__.kind in source.xpath(xp)[0].split(' ')
         except (AttributeError, IndexError):
             return
 
@@ -151,12 +176,11 @@ def get_layout(block, request=None):
             layout = 'hide'
     else:
         layout = layout_id
+        source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS.factory._get_tree()
+        cp = zeit.content.cp.interfaces.ICenterPage(block, None)
 
         if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
             log.debug('Broken ref at {}'.format(teaser.uniqueId))
-            layout = 'hide'
-        elif False:
-            # XXX What about placeholder containers?
             layout = 'hide'
         elif layout == 'zon-square':
             # ToDo: Remove when Longform will be generally used on www.zeit.de
@@ -164,16 +188,15 @@ def get_layout(block, request=None):
                 layout = layout
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
-        elif getattr(teaser, 'serie', None):
-            if allowed('zon-series'):
-                layout = 'zon-series'
-
-            if teaser.serie.column and get_column_image(teaser) and (
-                    allowed("zon-column")):
+        elif getattr(teaser, 'serie', None) and not (
+                zeit.magazin.interfaces.IZMOContent.providedBy(cp)):
+            if teaser.serie.column and get_column_image(teaser) and allowed(
+                    'zon-column'):
                 layout = 'zon-column'
-        elif getattr(teaser, 'blog', None):
-            if allowed("zon-blog"):
-                layout = 'zon-blog'
+            elif allowed('zon-series'):
+                layout = 'zon-series'
+        elif getattr(teaser, 'blog', None) and allowed('zon-blog'):
+            layout = 'zon-blog'
 
     layout = zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
@@ -433,6 +456,8 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
         layout_image['zon-series'].extend(layout_image['leader'])
         layout_image['zon-column'].extend(layout_image['leader'])
         layout_image['zon-square'].extend(layout_image['leader'])
+        layout_image['zon-blog'].extend(layout_image['leader'])
+        layout_image['zon-topic'].extend(layout_image['leader-fullwidth'])
     except KeyError:
         log.warn("Layout could not be extended")
 
@@ -495,19 +520,18 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     if len(asset) == 0:
         return get_teaser_image(teaser_block, teaser, unique_id=default_id)
 
+    try:
+        image_patterns = get_image_pattern(
+            get_layout(teaser_block), teaser_block.layout.image_pattern)
+    except AttributeError:
+        return
+
     # Assumes all images in this group have the same mimetype.
     filenames = asset.keys()
     sample_image = u'{}{}'.format(asset.uniqueId, filenames[0])
 
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
         mimetypes.guess_type(sample_image)[0], 'jpg')
-
-    try:
-        image_patterns = get_image_pattern(
-            get_layout(teaser_block),
-            teaser_block.layout.image_pattern)
-    except AttributeError:
-        return
 
     image, image_pattern = _existing_image(asset_id, image_base_name,
                                            image_patterns, ext, filenames)

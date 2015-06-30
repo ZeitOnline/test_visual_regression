@@ -38,8 +38,7 @@
             timeEndpoint: '/json/delta_time?unique_id=',
             commentsEndpoint: '/json/comment_count?unique_id='
         }, options ),
-        // remove this, when the real endpoint is in use
-        fakecounter = 1,
+
         /**
          * recursive polling function
          * works with comet(ish) server too, I'd say
@@ -81,9 +80,6 @@
                                 }
                             });
                         });
-                        // remove this when real endpoint is in use
-                        // not in use? [ms]
-                        fakecounter = fakecounter % 6 + 1;
                     }, dataType: 'json',
                     /**
                      * on completion go recursive

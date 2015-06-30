@@ -70,10 +70,34 @@ def is_column_article(context, request):
                                 is_column_article),
              renderer='templates/column.html')
 class ColumnArticle(Article):
-    pass
+
+    @zeit.web.reify
+    def author_img(self):
+        img = zeit.web.core.template.closest_substitute_image(
+            self.authors[0]['image_group'], 'zon-column')
+        # TODO: we adapt ITeaserImage to get image.ratio as property
+        # @wosc wanted to integrate this into zeit.content.image
+        return zeit.web.core.interfaces.ITeaserImage(img)
 
 
 @view_config(context=zeit.web.core.article.ILiveblogArticle,
              renderer='templates/liveblog.html')
 class LiveblogArticle(Article):
-    pass
+
+    def __init__(self, *args, **kwargs):
+        super(LiveblogArticle, self).__init__(*args, **kwargs)
+        self.liveblog_last_modified = self.date_last_modified
+        self.liveblog_is_live = False
+        for page in self.pages:
+            for block in page.blocks:
+                if isinstance(block, zeit.web.core.block.Liveblog):
+                    self.liveblog_is_live = block.is_live
+                    if block.last_modified:
+                        self.liveblog_last_modified = block.last_modified
+                    # break the inner loop
+                    break
+            else:
+                # continue if the inner loop wasn't broken
+                continue
+            # inner loop was broken, break the outer
+            break

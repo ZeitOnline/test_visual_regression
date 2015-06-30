@@ -1,11 +1,11 @@
 import zeit.content.cp.interfaces
 
 import zeit.web
-import zeit.web.core.block
+import zeit.web.site.module
 import zeit.web.core.centerpage
 
 
-class Buzzbox(zeit.web.core.block.Module, list):
+class Buzzbox(zeit.web.site.module.Module, list):
 
     category = None
     header = None

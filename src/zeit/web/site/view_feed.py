@@ -1,5 +1,5 @@
+import calendar
 import datetime
-import time
 import email
 import logging
 import urllib
@@ -29,15 +29,15 @@ ATOM_MAKER = getattr(ELEMENT_MAKER, '{%s}link' % ATOM_NAMESPACE)
 CONTENT_MAKER = getattr(ELEMENT_MAKER, '{%s}encoded' % CONTENT_NAMESPACE)
 
 
-def format_rfc822_date(timestamp):
-    if timestamp is None:
-        timestamp = datetime.datetime.min
-    return email.utils.formatdate(time.mktime(timestamp.timetuple()))
+def format_rfc822_date(date):
+    if date is None:
+        date = datetime.datetime.min
+    return email.utils.formatdate(calendar.timegm(date.timetuple()))
 
 
-def last_published_semantic(content):
-    return zeit.web.core.view_centerpage.form_date(
-        zeit.web.core.view_centerpage.get_last_published_semantic(content))
+def last_published_semantic(context):
+    return zeit.cms.workflow.interfaces.IPublishInfo(
+        context).date_last_published_semantic
 
 
 @pyramid.view.view_config(
