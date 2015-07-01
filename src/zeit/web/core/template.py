@@ -207,7 +207,7 @@ def get_journalistic_format(block):
         return
 
     if getattr(teaser, 'serie', None):
-        if teaser.serie.column and get_column_image(teaser):
+        if teaser.serie.column:
             return 'zon-column'
         else:
             return 'zon-series'
