@@ -21,7 +21,7 @@
 										{%- if loop.last %} und {% else %}, {% endif -%}
 									{%- endif -%}
 									{%- if author.href -%}
-										<a href="{{ author.href | translate_url }}" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>
+										<a href="{{ author.href | create_url }}" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>
 									{%- else -%}
 										<span itemprop="name">{{ author.name }}</span>
 									{%- endif -%}
