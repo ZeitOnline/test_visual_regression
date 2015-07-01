@@ -6,7 +6,7 @@
 * Module for the homepage gallery teaser (shuffle loading)
 * @module galleryTeaser
 */
-define([ 'jquery' ], function( $ ) {
+define([ 'jquery', 'web.core/images' ], function( $, images ) {
 
     /**
     * galleryTeaser.js: load and inject teasers
@@ -14,38 +14,22 @@ define([ 'jquery' ], function( $ ) {
     */
     var loadGalleryTeasers = function( event ) {
 
-        var $eventTarget = $( event.target ),
-            $galleryArea,
-            sourceUrl;
+        var $this = $( this ),
+            $galleryArea = $this.closest( '.cp-area--gallery' ),
+            sourceUrl = $this.data( 'sourceurl' );
 
-        $galleryArea = $eventTarget.closest( '.cp-area--gallery' );
-        if ( typeof $galleryArea !== 'object' || $galleryArea.length === 0 ) {
-            // OPTIMIZE: wrap this shit into a globally available module,
-            // including the possibility to log it somewhere,
-            // have debug mode (Konami Code FTW!), and so on.
-            if ( typeof console === 'object' && typeof console.log === 'function' ) {
-                console.log( 'Error with galleryTeaser.js, ' +
-                'could not find $galleryArea for $eventTarget' );
-            }
-            return false;
-        }
-
-        sourceUrl = $eventTarget.data( 'sourceurl' );
-        if ( typeof sourceUrl !== 'string' || sourceUrl === '' ) {
-            // OPTIMIZE: wrap this shit into a globally available module,
-            // including the possibility to log it somewhere,
-            // have debug mode (Konami Code FTW!), and so on.
-            if ( typeof console === 'object' && typeof console.log === 'function' ) {
-                console.log( 'Error with galleryTeaser.js, ' +
-                'reading sourceurl: "' + sourceUrl + '"' );
-            }
+        if ( !$galleryArea.length || !sourceUrl ) {
             return false;
         }
 
         sourceUrl = sourceUrl.replace( '___JS-RANDOM___', Math.floor( Math.random() * 10 ) );
 
         $.get( sourceUrl, function( data ) {
-            $galleryArea.replaceWith( data );
+            var selector = '.teaser-gallery-group__container',
+                $data = $( data ),
+                $teasers = $data.find( selector );
+
+            images.scale( $galleryArea.find( selector ).html( $teasers.html() ) );
         } ).fail(function( errorObj ) {
             // OPTIMIZE: wrap this shit into a globally available module,
             // including the possibility to log it somewhere,
