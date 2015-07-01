@@ -4,6 +4,8 @@ Change log for zeit.web
 1.37 (unreleased)
 -----------------
 
+- ZON-1897: Transform all video links to contain seo slug
+
 - ZON-1908: Implement zmo and zon specific nextread sources
 
 - ZON-1505: Make centerpage teaser clickable en bloc
@@ -45,8 +47,6 @@ Change log for zeit.web
 - BUG-22: Fix for slideshow images being too small in webkit
 
 - ZON-1575: Restore prospective lazy loading for snapshot
-
-- ZON-1897: Transform all video links to contain seo slug
 
 - ZON-1871: Fix topic-teaser background image in iOS
 
