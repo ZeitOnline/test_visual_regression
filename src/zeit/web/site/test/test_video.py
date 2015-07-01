@@ -157,6 +157,18 @@ def test_video_page_should_include_comment_section(testserver, testbrowser):
     assert doc.xpath('//section[@class="comment-section" and @id="comments"]')
 
 
+def test_video_comment_form_should_be_rendered(testserver, testbrowser):
+    browser = testbrowser(
+        '{}/video/2015-01/4004256546001/comment-form'.format(testserver.url))
+    assert len(browser.cssselect('#comment-form')) == 1
+
+
+def test_video_report_form_should_be_rendered(testserver, testbrowser):
+    browser = testbrowser(
+        '{}/video/2015-01/4004256546001/report-form'.format(testserver.url))
+    assert len(browser.cssselect('#comment-form')) == 1
+
+
 def test_video_page_should_embed_sharing_menu(testserver, testbrowser):
     browser = testbrowser(
         '{}/video/2015-01/4004256546001'.format(testserver.url))
