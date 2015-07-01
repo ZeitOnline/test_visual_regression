@@ -703,13 +703,13 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
 
     lines = tpl.module.head_user_is_logged_in_true(request)
     doc = lxml.html.fromstring(lines).cssselect
+
     assert doc('span .main-nav__community__icon')[0].attrib['style'] == (
         'background-image: url(www.zeit.de/test.jpg)')
-    assert doc('a')[0].attrib == {'href': 'www.zeit.de/user/1',
-                                  'id': 'hp.zm.topnav.community.account'}
-    assert doc('a')[1].attrib == {
-        'href': 'www.zeit.de/logout?destination=test',
-        'id': 'hp.zm.topnav.community.logout'}
+    assert doc('a')[0].attrib['href'] == 'www.zeit.de/user/1'
+    assert doc('a')[0].attrib['id'] == 'hp.zm.topnav.community.account'
+    assert doc('a')[1].attrib['href'] == 'www.zeit.de/logout?destination=test'
+    assert doc('a')[1].attrib['id'] == 'hp.zm.topnav.community.logout'
 
     request = mock.Mock()
     request.registry.settings.sso_url = 'sso.zeit.de'
@@ -719,13 +719,11 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     request.session.user.uid = 1
     request.url = 'test_sso'
 
-    assert doc('a')[0].attrib == {'href': 'community.zeit.de/user/1',
-                                  'id': 'hp.zm.topnav.community.account'}
-    assert doc('a')[1].attrib == {'href': 'sso.zeit.de/abmelden?url=test_sso',
-                                  'id': 'hp.zm.topnav.community.logout'}
-
     lines = tpl.module.head_user_is_logged_in_true(request)
     doc = lxml.html.fromstring(lines).cssselect
+
+    assert doc('a')[0].attrib['href'] == 'www.zeit.de/user/1'
+    assert doc('a')[1].attrib['href'] == 'sso.zeit.de/abmelden?url=test_sso'
 
 
 def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
