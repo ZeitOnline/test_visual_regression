@@ -155,7 +155,7 @@ def register_module(name):
     First, implement your module class in python
 
     @zeit.web.register_module('ice-cream-truck')
-    class IceCreamTruck(zeit.web.core.block.Module):
+    class IceCreamTruck(zeit.web.site.module.Module):
         @zeit.web.reify
         def flavours(self):
             return ('chocolate', 'vanilla', 'cherry')

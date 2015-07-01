@@ -213,10 +213,8 @@ class Article(zeit.web.core.view.Content):
         # TODO: remove prose list, if integration of article-genres.xml
         # is clear (as)
         prefix = 'ein'
-        if (self.context.genre == 'glosse') or \
-           (self.context.genre == 'reportage') or \
-           (self.context.genre == 'nachricht') or \
-           (self.context.genre == 'analyse'):
+        if self.context.genre in (
+                'analyse', 'glosse', 'nachricht', 'reportage'):
             prefix = 'eine'
         if self.context.genre:
             return prefix + ' ' + self.context.genre.title()
@@ -227,16 +225,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def nextread(self):
-        is_zmo = zeit.magazin.interfaces.IZMOContent.providedBy(self.context)
-        nextread = zeit.web.core.block.NextreadTeaserBlock(
-            self.context, ('940x400', 'zmo-nextread')[int(is_zmo)])
-        if not nextread.teasers:
-            return
-        if nextread.layout.id != 'minimal':
-            for i in zeit.web.core.interfaces.ITeaserSequence(nextread):
-                i.image and self._copyrights.setdefault(
-                    i.image.image_group, i.image)
-        return nextread
+        return zeit.web.core.interfaces.INextread(self.context)
 
     @zeit.web.reify
     def linkreach(self):

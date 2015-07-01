@@ -29,6 +29,7 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.dynamicfolder.interfaces
 import zeit.content.gallery.interfaces
+import zeit.content.video.interfaces
 import zeit.find.search
 import zeit.magazin.interfaces
 import zeit.solr.interfaces
@@ -52,8 +53,7 @@ log = logging.getLogger(__name__)
 
 class Application(object):
 
-    DONT_SCAN_TESTS = [re.compile('test$').search]
-    DONT_SCAN = DONT_SCAN_TESTS + ['zeit.web.core.preview']
+    DONT_SCAN = [re.compile('test$').search]
 
     def __init__(self):
         self.settings = {}
@@ -157,6 +157,7 @@ class Application(object):
 
         log.debug('Configuring Pyramid')
         config.add_route('json_delta_time', '/json/delta_time')
+        config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
@@ -418,6 +419,10 @@ def find_block(context, attrib='cp:__name__', **specs):
     You may also need to override the name of the uuid attribute using the
     attrib keyword.
     """
+    # XXX Maybe this would also work with IXMLReference?
+    # zope.component.queryAdapter(
+    #     context, zeit.cms.content.interfaces.IXMLReference, name='related')
+
     tpl = jinja2.Template("""
         .//*[{% for k, v in specs %}@{{ k }}="{{ v }}"{% endfor %}]/@{{ attr }}
     """)
@@ -561,6 +566,19 @@ class TraversableDynamic(TraversableCenterPage):
             tdict['view_name'] = ''
         finally:
             super(TraversableDynamic, self).__init__(context, tdict)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo, dict)
+class TraversableVideo(dict):
+
+    def __init__(self, context, tdict):
+        # XXX: Let's hope no video is ever called 'imagegroup'
+        #      or 'comment-form'. (ND)
+        if tdict['view_name'] not in ('imagegroup', 'comment-form'):
+            tdict['request'].GET['slug'] = tdict['view_name']
+            tdict['view_name'] = ''
+        super(TraversableVideo, self).__init__(tdict)
 
 
 # Monkey-patch so our content provides a marker interface,

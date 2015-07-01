@@ -2,6 +2,7 @@
 import re
 
 import pytest
+import requests
 
 import zeit.cms.interfaces
 import zeit.content.image.interfaces
@@ -246,3 +247,39 @@ def test_create_url_filter_should_append_seo_slug_to_all_video_links(
     assert zeit.web.core.template.create_url(None, video) == (
         '/video/2015-01/4004256546001/kuenstliche-intelligenz'
         '-roboter-myon-uebernimmt-opernrolle')
+
+
+def test_video_page_should_redirect_to_slug_from_plain_id_url(
+        testserver, testbrowser):
+    path = '/video/2015-01/4004256546001'
+    slug = '/kuenstliche-intelligenz-roboter-myon-uebernimmt-opernrolle'
+
+    resp = requests.get(testserver.url + path, allow_redirects=False)
+    assert resp.headers.get('Location', '') == testserver.url + path + slug
+
+    resp = requests.get(testserver.url + path, allow_redirects=True)
+    assert resp.url == testserver.url + path + slug
+
+
+def test_video_page_should_redirect_to_correct_slug_from_faulty_slug(
+        testserver, testbrowser):
+    path = '/video/2015-01/4004256546001'
+    slug = '/kuenstliche-intelligenz-roboter-myon-uebernimmt-opernrolle'
+
+    resp = requests.get(testserver.url + path + '/foo', allow_redirects=False)
+    assert resp.headers.get('Location', '') == testserver.url + path + slug
+
+    resp = requests.get(testserver.url + path + '/foo', allow_redirects=True)
+    assert resp.url == testserver.url + path + slug
+
+
+def test_video_page_should_not_redirect_from_correct_slug_url(
+        testserver, testbrowser):
+    path = '/video/2015-01/4004256546001'
+    slug = '/kuenstliche-intelligenz-roboter-myon-uebernimmt-opernrolle'
+
+    resp = requests.get(testserver.url + path + slug, allow_redirects=False)
+    assert 'Location' not in resp.headers
+
+    resp = requests.get(testserver.url + path + slug, allow_redirects=True)
+    assert resp.url == testserver.url + path + slug

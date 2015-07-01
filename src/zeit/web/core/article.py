@@ -101,7 +101,7 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
 def _place_content_ad_by_paragraph(page, possible_paragraphs):
     paragraphs = filter(
         lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
-    contentAd = zeit.web.core.banner.ContentAdBlock("iq-artikelanker")
+    content_ad = zeit.web.core.banner.ContentAdBlock("iq-artikelanker")
 
     for index, pp in enumerate(possible_paragraphs):
         if len(paragraphs) > pp + 1:
@@ -109,7 +109,7 @@ def _place_content_ad_by_paragraph(page, possible_paragraphs):
                 _para = paragraphs[pp]
                 for i, block in enumerate(page.blocks):
                     if _para == block:
-                        page.blocks.insert(i, contentAd)
+                        page.blocks.insert(i, content_ad)
                         break
             except IndexError:
                 pass
@@ -176,6 +176,6 @@ class IPhotoclusterArticle(zeit.content.article.interfaces.IArticle):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
-@grokcore.component.adapter(zeit.web.core.interfaces.INextreadTeaserBlock)
-class NextreadTeaserBlock(zeit.web.core.centerpage.TeaserBlock):
+@grokcore.component.adapter(zeit.web.core.interfaces.INextread)
+class Nextread(zeit.web.core.centerpage.TeaserBlock):
     pass

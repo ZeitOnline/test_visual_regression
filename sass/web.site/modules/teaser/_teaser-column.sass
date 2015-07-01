@@ -2,31 +2,26 @@
 // Styles for the so-called "Kolumnenteaser"
 
 $color-column-background: $zon-warm-grey
-$color-column-shadow: $zon-warm-dark-grey
-$teaser-column-shadow: 50px
 $teaser-column-mobile-image-size: 80px
 
 .teaser-column
 	@extend %teaser
 	background: $color-column-background
-	border-top: none
-	padding: $petite
-	margin: em(40px) (-$page-padding) $vertical-space (-$page-padding)
+	margin: remify(40px) (-$page-padding) $vertical-space (-$page-padding)
 	position: relative
-	box-shadow: inset 0 $teaser-column-shadow 0 0 $color-column-shadow
 	+respond-min($break-tablet-min)
 		margin-left: 0
 		margin-right: 0
+		padding: $page-padding
 	+respond-min($break-desktop-min)
-		box-shadow: none
-		margin: $petite 0 $vertical-space 0
+		margin: $vertical-space 0 $vertical-space 0
 		min-height: remify(250px)
 		padding: $petite $petite $petite remify(250px+20px)
 	&__media
 		overflow: hidden
 		position: absolute
-		top: -($teaser-column-mobile-image-size - $teaser-column-shadow)
-		left: 0
+		bottom: 0
+		right: 0
 		width: $teaser-column-mobile-image-size
 		height: $teaser-column-mobile-image-size
 		margin: 0
@@ -48,55 +43,47 @@ $teaser-column-mobile-image-size: 80px
 			position: static
 	&__heading
 		@extend %teaser-heading
-		&--padded
-			padding-top: $petite
-			+respond-min($break-desktop-min)
-				padding-top: 0
 	&__combined-link
 		@extend %teaser-combined-link
 	&__series
+		color: $zon_grey
+		display: block
+		font-size: remify(12px)
 		letter-spacing: $zon-letter-spacing-l
-		display: inline-block
-		font-size: $font-xs--rem
-		font-weight: bold
-		left: 100px
-		position: absolute
+		margin: 0 0 remify(24px) 0
 		text-transform: uppercase
-		top: $small
-		color: $zon-charcoal
-		a:link &,
-		a:visited &,
-		a:hover &,
-		a:active &
-			color: $grey--mid
 		+respond-min($break-desktop-min)
-			display: inline
-			left: auto
-			position: static
-			top: auto
-			&:after
-				content: ' \29F8 ' // ⧸ = Big solidus
+			font-size: remify(14px)
 	&__kicker
 		@extend %teaser-kicker
-		padding: remify(24px 0 3px 0)
-		+respond-min($break-desktop-min)
-			display: inline
 	&__title
 		@extend %teaser-title
 	&__text
 		@extend %teaser-text
 	&__byline
 		@extend %teaser-byline
+		color: $zon_mid_grey
+		font-size: remify(14px)
 	&__metadata
 		@extend %teaser-metadata
 	&__datetime
 		@extend %teaser-datetime
 	&__commentcount
 		@extend %teaser-commentcount
-	&__kicker-container
+
+
+// if there is an image, make sure the byline wraps around it.
+.teaser-column--hasmedia
+	.teaser-column__container
+		padding-bottom: remify(44px)
 		+respond-min($break-desktop-min)
-			display: block
-			margin-bottom: remify(4px)
+			padding-bottom: 0
+	.teaser-column__byline,
+	.teaser-column__metadata
+		padding-right: remify(100px)
+		+respond-min($break-desktop-min)
+			padding-right: 0
+
 
 // prevent next teaser from having border
 .teaser-column + .teaser // deprecated

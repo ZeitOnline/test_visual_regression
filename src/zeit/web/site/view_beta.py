@@ -33,14 +33,13 @@ class BetaJSON(zeit.web.core.view.Base):
             original = original.lstrip('beta-')
         if update in ('in', 'out'):
             update = 'opt_{}'.format(update)
-        if update is not None and original != update:
-            # Users w/o beta role should not be able to toggle th cookie value
-            if self.beta_user:
-                self.request.response.set_cookie(
-                    'site-version',
-                    value='beta-%s' % update,
-                    max_age=(60 * 60 * 24 * 30)  # cookie lifetime = 30 days
-                )
+        if update is not None and original != update and self.beta_user:
+            # Users w/o beta role should not be able to toggle cookie value
+            self.request.response.set_cookie(
+                'site-version',
+                value='beta-%s' % update,
+                max_age=(60 * 60 * 24 * 30)  # cookie lifetime = 30 days
+            )
         return update or original
 
     @property
@@ -49,7 +48,8 @@ class BetaJSON(zeit.web.core.view.Base):
 
     @property
     def beta_user(self):
-        return 'beta' in self.community_user.get('roles')
+        return (self.request.cookies.get('may-use-beta') == 'true' or
+                'beta' in self.community_user.get('roles'))
 
     @property
     def meta_robots(self):
@@ -79,6 +79,7 @@ class BetaJSON(zeit.web.core.view.Base):
     route_name='beta_toggle',
     renderer='templates/beta.html')
 class Beta(BetaJSON):
+
     def __call__(self):
         res = super(Beta, self).__call__()
         location = '{}#{}'.format(
