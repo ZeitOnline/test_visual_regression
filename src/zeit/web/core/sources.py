@@ -117,4 +117,4 @@ class Solr(object):
             random.sample(results, min(rows, len(results))), len(results))
 
     def update_raw(self, xml, **kw):
-        raise NotImplementedError()
+        pass
