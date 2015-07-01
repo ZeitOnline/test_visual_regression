@@ -6,6 +6,8 @@ import re
 import urlparse
 import warnings
 
+import bugsnag
+import bugsnag.wsgi.middleware
 import grokcore.component
 import jinja2
 import jinja2.ext
@@ -82,6 +84,7 @@ class Application(object):
         self.configure_banner()
         self.configure_series()
         self.configure_navigation()
+        self.configure_bugsnag()
 
     def configure_banner(self):
         banner_source = maybe_convert_egg_url(
@@ -132,6 +135,15 @@ class Application(object):
         zeit.web.core.navigation.navigation_footer_links = (
             zeit.web.core.navigation.make_navigation(
                 navigation_footer_links_config))
+
+    def configure_bugsnag(self):
+        bugsnag.configure(
+            api_key=self.settings['bugsnag_token'],
+            project_root=pkg_resources.get_distribution('zeit.web').location,
+            app_version=self.settings['version'],
+            notify_release_stages=['devel', 'staging', 'production'],
+            release_stage=self.settings['environment']
+        )
 
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
@@ -356,12 +368,16 @@ class Application(object):
         """
         return [
             ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
-            ('remove_asset_prefix', 'factory', '', {})
+            ('remove_asset_prefix', 'factory', '', {}),
+            ('bugsnag_notifier', 'factory', '', {})
         ]
 
     def remove_asset_prefix(self, app):
         return URLPrefixMiddleware(
             app, prefix=self.settings.get('asset_prefix', ''))
+
+    def bugsnag_notifier(self, app):
+        return bugsnag.wsgi.middleware.BugsnagMiddleware(app)
 
     def make_wsgi_app(self, global_config):
         app = self.config.make_wsgi_app()

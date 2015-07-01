@@ -36,6 +36,8 @@ Change log for zeit.web
 
 - ZON-1876: Custom wt param to distinguish between classic and beta
 
+- Integrate bugsnag middleware into WSGI pipeline
+
 
 1.35 (2015-06-26)
 -----------------
