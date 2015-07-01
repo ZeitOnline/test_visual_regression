@@ -732,6 +732,7 @@ def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
 
     request = mock.Mock()
     request.registry.settings.community_host = 'www.zeit.de'
+    request.registry.settings.sso_url = 'sso.zeit.de'
     request.url = 'test'
     request.registry.settings.sso_activate = False
 
@@ -739,6 +740,12 @@ def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
     doc = lxml.html.fromstring(html)
     elem_a = doc.cssselect('a')[0]
     assert elem_a.attrib['href'] == "www.zeit.de/user/login?destination=test"
+
+    request.registry.settings.sso_activate = True
+    html = tpl.module.head_user_is_logged_in_false(request)
+    doc = lxml.html.fromstring(html)
+    elem_a = doc.cssselect('a')[0]
+    assert elem_a.attrib['href'] == "sso.zeit.de/anmelden?url=test"
 
 
 def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
