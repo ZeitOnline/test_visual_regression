@@ -222,7 +222,7 @@ class Base(object):
                 ('level3', levels[1]),
                 ('level4', ''),
                 ('$autoSizeFrames', True),
-                ('keywords', ''),
+                ('keywords', ','.join(self.adwords)),
                 ('tma', '')]
 
     @zeit.web.reify
