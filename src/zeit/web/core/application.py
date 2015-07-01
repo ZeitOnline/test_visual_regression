@@ -138,11 +138,11 @@ class Application(object):
 
     def configure_bugsnag(self):
         bugsnag.configure(
-            api_key=self.settings['bugsnag_token'],
+            api_key=self.settings.get('bugsnag_token'),
             project_root=pkg_resources.get_distribution('zeit.web').location,
-            app_version=self.settings['version'],
+            app_version=self.settings.get('version'),
             notify_release_stages=['devel', 'staging', 'production'],
-            release_stage=self.settings['environment']
+            release_stage=self.settings.get('environment', 'dev')
         )
 
     def configure_pyramid(self):
