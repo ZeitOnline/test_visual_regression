@@ -8,7 +8,7 @@
  */
 define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
 
-    var images = [],
+    var images = [];
 
     /**
      * images.js: create prefix
@@ -17,13 +17,13 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
      * @param  {integer} height height of image
      * @return {string} prefix string for image path
      */
-    prefix = function( width, height ) {
+    function prefix( width, height ) {
         var key = width + ':' + height + ':time',
             out = sjcl.hash.sha1.hash( key ),
             digest = sjcl.codec.hex.fromBits( out );
 
         return '/bitblt-' + width + 'x' + height + '-' + digest;
-    },
+    }
 
     /**
      * images.js: use standard image or hide allocated image spaces and
@@ -32,23 +32,24 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
      * @param  {object} imageWrapper image area containing noscript
      * @param  {string} altSource alternative image source
      */
-    hideImages = function( $imageWrapper, altSource ) {
+    function hideImages( $imageWrapper, altSource ) {
         if ( altSource ) {
             $imageWrapper.html( '<img src="' + altSource + '"/>' );
         } else {
-            $imageWrapper.height( 'auto' );
-            // OPTIMIZE: we should hide things inside the $imageWrapper,
+            $imageWrapper.html( '' ).height( 'auto' );
+            // @todo: we should hide things inside the $imageWrapper,
             // but not all comment count on the whole page
+            // unfortunately comment count is outside of the $imageWrapper in ZMO
             $( '.cp_comment__count__wrap' ).hide();
         }
-    },
+    }
 
     /**
-     * images.js: rescale one image
-     * @function rescaleOne
-     * @param  {object} image image object
+     * images.js: scale one image
+     * @function scaleImage
+     * @param  {object} image HTMLImageElement
      */
-    rescaleOne = function( image ) {
+    function scaleImage( image ) {
         var $img = $( image ),
             $parent = $img.closest( '.scaled-image' ),
             ratio = $img.data( 'ratio' ),
@@ -122,68 +123,85 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
         token = prefix( Math.round( width ), Math.round( height ) );
         source = image.src || $img.data( 'src' );
         image.src = source.replace( /\/bitblt-\d+x\d+-[a-z0-9]+/, token );
-    },
+    }
 
     /**
-     * images.js: rescale all images
-     * @function rescaleAll
-     * @param  {object} e event object
+     * images.js: scale contained images
+     * @function scaleImages
+     * @param  {object} container DOM element, array of elements or jQuery object
+     *                            used as selector context, defaults to document root
      */
-    rescaleAll = function( e ) {
-        if ( !e ) {
-            // initial case, no images there yet, so create them
-            $( '.scaled-image > noscript' ).each( function() {
-                var $noscript = $( this ),
-                    $parent = $noscript.parent(),
-                    markup = $noscript.text();
+    function scaleImages( container ) {
+        $( '.scaled-image > noscript', container ).each( function() {
+            var $noscript = $( this ),
+                $parent = $noscript.parent(),
+                markup = $noscript.text();
 
-                if ( markup.trim() !== '' ) {
+            if ( markup.trim() !== '' ) {
 
-                    markup = markup.replace( 'src="', 'data-src="' );
-                    $parent.html( markup );
-                    var $imgs = $parent.find( 'img' ),
-                        width = 0,
-                        height = 0;
+                markup = markup.replace( 'src="', 'data-src="' );
+                $parent.html( markup );
+                var $imgs = $parent.find( 'img' ),
+                    width = 0,
+                    height = 0;
 
-                    $imgs.each( function() {
-                        var $img = $( this );
+                $imgs.each( function() {
+                    var $img = $( this );
 
-                        // add event triggering to tell the world
-                        $img.on( 'load', function( e ) {
-                            $img.trigger( 'scaling_ready' );
-                        });
-
-                        rescaleOne( this );
-
-                        images.push( this );
+                    // add event triggering to tell the world
+                    $img.on( 'load', function( e ) {
+                        $img.trigger( 'scaling_ready' );
                     });
 
-                } else {
-                    // noscript doesn't has any content we can read (might happen in older browsers)
-                    // therefore we have to hide allocated image spaces
-                    hideImages( $parent, $noscript.attr( 'data-src' ));
-                }
+                    scaleImage( this );
 
-            });
-        } else {
-            // rescale after resize, images already set up, just update
-            for ( var i = images.length; i--; ) {
-                rescaleOne( images[i] );
+                    images.push( this );
+                });
+
+            } else {
+                // noscript tag contains no readable content (might happen in older browsers)
+                // therefore we have to hide allocated image spaces
+                hideImages( $parent, $noscript.attr( 'data-src' ));
             }
-        }
-    },
+        });
+    }
 
     /**
-     * images.js: init scaling
+     * images.js: scale all images in document
+     * @function scaleAll
+     */
+    function scaleAll() {
+        scaleImages();
+    }
+
+    /**
+     * images.js: rescale all previously scaled images
+     * @function rescaleAll
+     */
+    function rescaleAll() {
+        for ( var i = images.length; i--; ) {
+            // verify that image is still part of the DOM
+            if ( $.contains( document.documentElement, images[i] )) {
+                scaleImage( images[i] );
+            } else {
+                // remove the image reference
+                images.splice( i, 1 );
+            }
+        }
+    }
+
+    /**
+     * images.js: initialize image scaling
      * @function init
      */
-    init = function() {
-        rescaleAll();
+    function init() {
+        scaleAll();
 
         $( window ).on( 'resize', $.debounce( rescaleAll, 1000 ) );
-    };
+    }
 
     return {
+        scale: scaleImages,
         init: init
     };
 
