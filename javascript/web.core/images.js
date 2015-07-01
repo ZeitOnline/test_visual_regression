@@ -26,15 +26,15 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
     }
 
     /**
-     * images.js: use standard image or hide allocated image spaces and
-     * comments if noscript has no content
-     * @function hideImages
+     * images.js: use standard image or hide allocated image space and
+     * comment counter if no alternative source URL is present
+     * @function hideImage
      * @param  {object} imageWrapper image area containing noscript
-     * @param  {string} altSource alternative image source
+     * @param  {string} source alternative image source
      */
-    function hideImages( $imageWrapper, altSource ) {
-        if ( altSource ) {
-            $imageWrapper.html( '<img src="' + altSource + '"/>' );
+    function hideImage( $imageWrapper, source ) {
+        if ( source ) {
+            $imageWrapper.html( '<img src="' + source + '"/>' );
         } else {
             $imageWrapper.html( '' ).height( 'auto' );
             // @todo: we should hide things inside the $imageWrapper,
@@ -161,7 +161,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
             } else {
                 // noscript tag contains no readable content (might happen in older browsers)
                 // therefore we have to hide allocated image spaces
-                hideImages( $parent, $noscript.attr( 'data-src' ));
+                hideImage( $parent, $noscript.attr( 'data-src' ));
             }
         });
     }
