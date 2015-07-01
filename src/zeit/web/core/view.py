@@ -220,6 +220,7 @@ class Base(object):
         return [('$handle', self.adcontroller_handle),
                 ('level2', levels[0]),
                 ('level3', levels[1]),
+                ('level4', ''),
                 ('$autoSizeFrames', True),
                 ('keywords', ''),
                 ('tma', '')]
