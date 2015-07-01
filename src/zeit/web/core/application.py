@@ -577,7 +577,7 @@ class TraversableVideo(dict):
         #      or 'comment-form' or 'report-form'. (ND)
         if tdict['view_name'] not in ('imagegroup', 'comment-form',
                                       'report-form'):
-            tdict['request'].GET['slug'] = tdict['view_name']
+            tdict['request'].headers['X-SEO-Slug'] = tdict['view_name']
             tdict['view_name'] = ''
         super(TraversableVideo, self).__init__(tdict)
 
