@@ -163,7 +163,7 @@ def fetch_path(path):
     """
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    params = urllib.urlencode({'url': path})
+    params = urllib.urlencode({'url': path.encode('utf-8')})
     url = '{}/reach?{}'.format(conf.get('linkreach_host', ''), params)
 
     output = zeit.web.core.utils.nsdict()

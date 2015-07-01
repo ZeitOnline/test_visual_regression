@@ -70,3 +70,8 @@ def test_counts_per_url_are_fetchable(application):
 def test_unreachable_url_fails_gracefully(application):
     data = zeit.web.core.reach.fetch('path', 'N/A')
     assert data == {}
+
+
+def test_non_ascii_url_fails_gracefully(application):
+    data = zeit.web.core.reach.fetch('path', u'ümläut')
+    assert data == {}
