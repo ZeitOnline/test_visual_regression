@@ -24,6 +24,8 @@ Change log for zeit.web
 
 - FIX: Prevent seo-slugging for video comment forms the ugly way
 
+- Include URL in jinja error logging
+
 
 1.36 (2015-06-26)
 -----------------

@@ -5,7 +5,6 @@ import logging
 import os
 import pkg_resources
 import pstats
-import traceback
 
 import StringIO
 import urlparse
@@ -16,12 +15,10 @@ import jinja2.loaders
 import jinja2.nodes
 import jinja2.runtime
 import jinja2.utils
+import pyramid.threadlocal
 import pytz
 import requests
 import zope.component
-import zope.interface
-
-import zeit.cms.interfaces
 
 import zeit.web.core.interfaces
 import zeit.web.core.utils
@@ -63,14 +60,20 @@ class Environment(jinja2.environment.Environment):
         self.tests = zeit.web.core.utils.defaultdict(undefined, self.tests)
 
     def handle_exception(self, *args, **kw):
-        log.error(traceback.format_exc())
+        path = '<unknown>'
+        try:
+            request = pyramid.threadlocal.get_current_request()
+            path = request.path_info
+        except:
+            pass
+        log.error('Error rendering %s', path, exc_info=True)
         return getattr(self.undefined(), '__html__', lambda: '')()
 
     def __getsth__(self, func, obj, name):
         try:
             return getattr(super(Environment, self), func)(obj, name)
         except BaseException:
-            log.error(traceback.format_exc())
+            self.handle_exception()
             return self.undefined(obj, name)
 
     def getitem(self, obj, argument):
