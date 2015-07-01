@@ -13,7 +13,7 @@
         {% endblock %}
         <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
             {% block teaser_link %}
-            <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | translate_url }}">
+            <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | create_url }}">
                 {% block teaser_kicker %}
                 <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
                 {% endblock %}
@@ -46,7 +46,7 @@
                     {% set comments = view.comment_counts[teaser.uniqueId] %}
                     {% if comments %}
                         {% set comments_string = comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
-                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser.uniqueId | translate_url }}#comments" title="{{ comments_string }}">{{ comments_string }}</a>
+                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser.uniqueId | create_url }}#comments" title="{{ comments_string }}">{{ comments_string }}</a>
                     {% endif %}
                 {% endblock %}
             </div>

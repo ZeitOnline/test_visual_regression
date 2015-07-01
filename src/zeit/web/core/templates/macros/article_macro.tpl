@@ -2,12 +2,12 @@
     {%- if authors -%}
         {%- for author in authors -%}
             {%- if titlecase -%}
-                {{ author.prefix|title }}
+                {{ author.prefix | title }}
             {% else %}
                 {{ author.prefix }}
             {% endif %}
             {%- if author.href -%}
-                <a href="{{ author.href|translate_url }}" class="{{ class }}" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>{{ author.location }}
+                <a href="{{ author.href | create_url }}" class="{{ class }}" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>{{ author.location }}
             {%- else -%}
                 <span class="{{ class }}"><span itemprop="name">{{ author.name }}</span>{{ author.location }}</span>
             {%- endif -%}

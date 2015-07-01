@@ -10,7 +10,7 @@ itemtype="http://schema.org/SiteNavigationElement"
 	<li class="{{ class }}__item" data-id="{{ section.item_id }}"{% if section.has_children() %} data-feature="dropdown"{% endif %}>
 		<a class="{{ class }}__link{% if section.item_id in (view.ressort,
         view.sub_ressort) %} {{ class }}__link--current{% endif %}" href="{{
-        section.href | translate_url }}" itemprop="url"><span itemprop="name">{{
+        section.href | create_url }}" itemprop="url"><span itemprop="name">{{
         section.text }}</span></a>
 		{% if section.has_children() -%}
 			{%- set navigation = section -%}

@@ -4,6 +4,8 @@ Change log for zeit.web
 1.37 (unreleased)
 -----------------
 
+- ZON-1897: Transform all video links to contain seo slug
+
 - MAINT: Refactor update signals
 
 - ZON-1908: Implement zmo and zon specific nextread sources
@@ -17,6 +19,8 @@ Change log for zeit.web
 - MAINT: Drop vivi-internal preview capabilities
 
 - MAINT: Re-locate base module class to zeit.web.site.module
+
+- MAINT: Clean up jinja templates
 
 - FIX: Change cp update time route to url dispatching
 

@@ -1,5 +1,3 @@
-{% import "zeit.web.core:templates/macros/layout_macro.tpl" as lama %}
-
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 
 {% block before_module_include %}
@@ -13,5 +11,3 @@
         {{ lama.adplace(view.banner(7), view) }}
     {% endif %}
 {% endblock %}
-
-

@@ -1,5 +1,4 @@
-{% extends "zeit.web.site:templates/content.html" %}
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% extends 'zeit.web.site:templates/content.html' %}
 {% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
 {% block content %}
@@ -16,7 +15,7 @@
         {{ self.schema_org_image_info() }}
 
         {% if view.context.advertising_enabled %}
-            {{ lama_core.adplace(view.banner(7), view) }}
+            {{ lama.adplace(view.banner(7), view) }}
         {% endif %}
 
         {{ self.article_heading() }}

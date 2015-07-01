@@ -270,9 +270,6 @@ class Application(object):
             ignore=self.DONT_SCAN
         )
 
-        # TODO: We would want to make contextfilters venusian-discoverable too.
-        env.filters['macro'] = zeit.web.core.template.call_macro_by_name
-
     def configure_zca(self):
         """Sets up zope.component registrations by reading our
         configure.zcml file.
@@ -577,9 +574,10 @@ class TraversableVideo(dict):
 
     def __init__(self, context, tdict):
         # XXX: Let's hope no video is ever called 'imagegroup'
-        #      or 'comment-form'. (ND)
-        if tdict['view_name'] not in ('imagegroup', 'comment-form'):
-            tdict['request'].GET['slug'] = tdict['view_name']
+        #      or 'comment-form' or 'report-form'. (ND)
+        if tdict['view_name'] not in ('imagegroup', 'comment-form',
+                                      'report-form'):
+            tdict['request'].headers['X-SEO-Slug'] = tdict['view_name']
             tdict['view_name'] = ''
         super(TraversableVideo, self).__init__(tdict)
 
