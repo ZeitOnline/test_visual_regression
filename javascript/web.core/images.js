@@ -37,6 +37,8 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
             $imageWrapper.html( '<img src="' + altSource + '"/>' );
         } else {
             $imageWrapper.height( 'auto' );
+            // OPTIMIZE: we should hide things inside the $imageWrapper,
+            // but not all comment count on the whole page
             $( '.cp_comment__count__wrap' ).hide();
         }
     },

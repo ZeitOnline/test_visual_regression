@@ -15,13 +15,28 @@ define([ 'jquery' ], function( $ ) {
     var loadGalleryTeasers = function( event ) {
 
         var $eventTarget = $( event.target ),
-            sourceUrl = $eventTarget.data( 'sourceurl' ),
-            $galleryArea = $eventTarget.closest( '.cp-area--gallery' );
+            $galleryArea,
+            sourceUrl;
 
-        if ( typeof sourceUrl !== 'string' || sourceUrl === '' ) {
-            // TODO: wrap this shit, incuding the possibility to log it somewhere
+        $galleryArea = $eventTarget.closest( '.cp-area--gallery' );
+        if ( typeof $galleryArea !== 'object' || $galleryArea.length === 0 ) {
+            // OPTIMIZE: wrap this shit into a globally available module,
+            // including the possibility to log it somewhere,
+            // have debug mode (Konami Code FTW!), and so on.
             if ( typeof console === 'object' && typeof console.log === 'function' ) {
-                console.log( 'Error with galleryTeaser.js ' +
+                console.log( 'Error with galleryTeaser.js, ' +
+                'could not find $galleryArea for $eventTarget' );
+            }
+            return false;
+        }
+
+        sourceUrl = $eventTarget.data( 'sourceurl' );
+        if ( typeof sourceUrl !== 'string' || sourceUrl === '' ) {
+            // OPTIMIZE: wrap this shit into a globally available module,
+            // including the possibility to log it somewhere,
+            // have debug mode (Konami Code FTW!), and so on.
+            if ( typeof console === 'object' && typeof console.log === 'function' ) {
+                console.log( 'Error with galleryTeaser.js, ' +
                 'reading sourceurl: "' + sourceUrl + '"' );
             }
             return false;
@@ -31,21 +46,22 @@ define([ 'jquery' ], function( $ ) {
 
         $.get( sourceUrl, function( data ) {
             $galleryArea.replaceWith( data );
+        } ).fail(function( errorObj ) {
+            // OPTIMIZE: wrap this shit into a globally available module,
+            // including the possibility to log it somewhere,
+            // have debug mode (Konami Code FTW!), and so on.
+            if ( typeof console === 'object' &&
+                typeof console.log === 'function' &&
+                typeof errorObj === 'object' &&
+                typeof errorObj.statusText === 'string' ) {
+                console.log( 'Error with galleryTeaser.js, ' +
+                'loading new teasers: "' + errorObj.statusText + '"' );
+            }
+            // TODO: where to get the URL? We cannot traverse the area and find read-more, can we?
+            window.location.href = '/foto/index';
+            return false;
         });
 
-        // TODO: Error Handling
-
-        // $galleryArea.parent().load( sourceUrl, function( response, status, xhr ) {
-        //     if ( status === 'error' ) {
-        //         // TODO: wrap this shit, incuding the possibility to log it somewhere
-        //         if ( typeof console === 'object' && typeof console.log === 'function' ) {
-        //             console.log( 'Error with galleryTeaser.js loading from "' +
-        //             sourceUrl + '": ' +
-        //             xhr.status + ' ' + xhr.statusText );
-        //         }
-        //         return false;
-        //     }
-        // });
     },
 
     /**
