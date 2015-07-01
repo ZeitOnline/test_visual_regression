@@ -1,5 +1,5 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 {% extends 'zeit.web.core:templates/macros/article_macro.tpl' %}
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 {% macro image(obj, loop) -%}
     {% if obj | default_image_url -%}
@@ -13,7 +13,7 @@
             {%- endif -%}
             ">
             <div class="scaled-image">
-                {{ lama_core.insert_responsive_image(obj, None, 'article') }}
+                {{ lama.insert_responsive_image(obj, None, 'article') }}
             </div>
             <figcaption class="figure__caption {% if obj.layout == 'small' %}figure__caption--marginalia{%- endif -%}">
                 {% if loop -%}
@@ -117,13 +117,13 @@
     </ol>
 {%- endmacro %}
 
-{% macro place(item) -%}
-    {{ lama_core.adplace(item, view) }}
-    {{ lama_core.adplace_middle_mobile(item) }}
+{% macro place(item, view) -%}
+    {{ lama.adplace(item, view) }}
+    {{ lama.adplace_middle_mobile(item) }}
 {%- endmacro %}
 
-{% macro contentadblock(item) -%}
-    {{ lama_core.content_ad_article(view) }}
+{% macro contentadblock(item, view) -%}
+    {{ lama.content_ad_article(view) }}
 {%- endmacro %}
 
 {% macro portraitbox(obj) -%}
