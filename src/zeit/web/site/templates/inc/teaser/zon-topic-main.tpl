@@ -2,9 +2,9 @@
 
 {% set ref_cp = area.referenced_cp %}
 {% set topic_supertitle = area.supertitle or ref_cp.teaserSupertitle or ref_cp.supertitle %}
-{% set readmore_url = area.read_more_url | translate_url %}
+{% set readmore_url = area.read_more_url | create_url %}
 {% if readmore_url is none and ref_cp is not none %}
-    {% set readmore_url = ref_cp.uniqueId | translate_url %}
+    {% set readmore_url = ref_cp.uniqueId | create_url %}
 {% endif %}
 {% set readmore_text = area.read_more or 'Alles zum Thema' %}
 

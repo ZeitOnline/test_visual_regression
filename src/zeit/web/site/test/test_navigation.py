@@ -13,8 +13,10 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
-    mock_request = mock.MagicMock()
-    html_str = tpl.render(view=mock_view, request=mock_request)
+    mock_request = mock.Mock()
+    mock_request.route_url.return_value = 'http://www.zeit.de/'
+    mock_view.request = mock_request
+    html_str = tpl.render(view=mock_view)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('.main_nav')) == 1, 'just one .main_nav should be present'
@@ -64,6 +66,9 @@ def test_nav_ressorts_should_produce_markup(application, jinja2_env):
             'Partnersuche',
             'http://www.zeit.de/angebote/partnersuche/index?pscode=01_100'))
     mock_view = mock.Mock()
+    mock_request = mock.Mock()
+    mock_request.route_url.return_value = 'http://www.zeit.de/'
+    mock_view.request = mock_request
     html_str = tpl.render(view=mock_view,
                           navigation=nav, nav_class='primary-nav')
     html = lxml.html.fromstring(html_str).cssselect
@@ -90,6 +95,9 @@ def test_nav_services_should_have_expected_links(application, jinja2_env):
             'Shop',
             'http://shop.zeit.de?et=l6VVNm&et_cid=42&et_lid=175'))
     mock_view = mock.Mock()
+    mock_request = mock.Mock()
+    mock_request.route_url.return_value = 'http://www.zeit.de/'
+    mock_view.request = mock_request
     html_str = tpl.render(view=mock_view,
                           navigation=nav, nav_class='primary-nav-services')
     html = lxml.html.fromstring(html_str).cssselect
@@ -116,6 +124,9 @@ def test_nav_classifieds_should_have_expected_links(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation-list.tpl')
     mock_view = mock.Mock()
+    mock_request = mock.Mock()
+    mock_request.route_url.return_value = 'http://www.zeit.de/'
+    mock_view.request = mock_request
     html_str = tpl.render(view=mock_view,
                           navigation=nav, nav_class='main-nav-classifieds')
     html = lxml.html.fromstring(html_str).cssselect

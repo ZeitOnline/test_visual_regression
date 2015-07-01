@@ -23,6 +23,7 @@ import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
 import zeit.web.site.area.spektrum
+import zeit.web.site.module
 import zeit.web.site.view
 
 
@@ -30,7 +31,7 @@ log = logging.getLogger(__name__)
 
 
 @zope.interface.implementer(zeit.edit.interfaces.IBlock)
-class LegacyModule(zeit.web.core.block.Module, zeit.web.core.utils.nslist):
+class LegacyModule(zeit.web.site.module.Module, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
         zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])

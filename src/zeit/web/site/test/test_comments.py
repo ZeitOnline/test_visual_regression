@@ -48,8 +48,14 @@ def test_comments_get_thread_should_respect_top_level_sort_order(testserver):
 
 
 def test_comment_form_should_be_rendered(testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/article/01/comment-form' %
-                          testserver.url)
+    browser = testbrowser('{}/zeit-online/article/01/comment-form'.format(
+                          testserver.url))
+    assert len(browser.cssselect('#comment-form')) == 1
+
+
+def test_report_form_should_be_rendered(testserver, testbrowser):
+    browser = testbrowser('{}/zeit-online/article/01/report-form'.format(
+                          testserver.url))
     assert len(browser.cssselect('#comment-form')) == 1
 
 

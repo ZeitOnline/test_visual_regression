@@ -29,7 +29,8 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
     def __init__(self, *args, **kwargs):
         super(Video, self).__init__(*args, **kwargs)
         self.context.advertising_enabled = self.banner_on
-        if self.request.GET.get('slug') != self.slug:
+        if 'X-SEO-Slug' in self.request.headers and (
+                self.request.headers['X-SEO-Slug'] != self.slug):
             location = '{}/{}'.format(self.content_url, self.slug)
             raise pyramid.httpexceptions.HTTPSeeOther(location=location)
 

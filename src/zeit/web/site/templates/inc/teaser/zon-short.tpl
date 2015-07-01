@@ -1,5 +1,4 @@
-{% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
-{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
+{% extends "zeit.web.site:templates/inc/teaser/default.tpl" %}
 
 {% block layout %}teaser-short{% endblock %}
 {% block teaser_time %}

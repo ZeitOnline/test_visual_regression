@@ -39,8 +39,8 @@ class Gallery(zeit.web.core.view.Content):
             teaser_list.append(
                 dict(
                     label=image_meta.copyrights[0][0],
-                    image=zeit.web.core.template.translate_url(
-                        i.image.uniqueId),
+                    image=zeit.web.core.template.create_url(
+                        None, i.image.uniqueId, self.request),
                     link=image_meta.copyrights[0][1],
                     nofollow=image_meta.copyrights[0][2]
                 )

@@ -17,7 +17,7 @@
         {% set extra = 'Alle Bilder' %}
         {% set label = 'anzeigen' %}
     {% endif %}
-    <a href="{{ teaser.uniqueId | translate_url }}" class="{{ self.layout() }}__button">
+    <a href="{{ teaser.uniqueId | create_url }}" class="{{ self.layout() }}__button">
         <span class="{{ self.layout() }}__button-extra">{{ extra }}</span>
         {{ label }}
     </a>

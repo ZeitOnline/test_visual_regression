@@ -7,6 +7,8 @@ import pyramid.config
 import lxml
 import lxml.html
 
+import zeit.content.article.article
+
 
 def test_macro_p_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
@@ -603,7 +605,7 @@ def test_macro_teaser_text_block_should_produce_markup(jinja2_env):
     # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    teaser = mock.Mock()
+    teaser = zeit.content.article.article.Article()
     teaser.teaserSupertitle = "SUPATITLE"
     teaser.teaserTitle = "TITLE"
     teaser.teaserText = "TEXT"

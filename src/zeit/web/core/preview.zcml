@@ -1,7 +1,0 @@
-<configure xmlns="http://namespaces.zope.org/zope" xmlns:grok="http://namespaces.zope.org/grok">
-
-    <include file="meta.zcml" package="zope.component" />
-    <grok:grok exclude="test" package="." />
-    <subscriber handler=".preview.setup_zodb" />
-
-</configure>
