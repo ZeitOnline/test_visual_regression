@@ -3,12 +3,29 @@
 // https://zeit-online.atlassian.net/secure/attachment/19208/bigariegel_desktop%2Btablet_vermaßt.png
 // https://zeit-online.atlassian.net/secure/attachment/19207/bigariegel_phone%2Bphablet_vermaßt.png
 
-// TODO:
-// .gallery-teasergroup mit __headline, __button
-// .gallery-teaser mit Elementen
-// Button vielleicht sogar als eigenen Block?
+.teaser-gallery-group
+	&__container
+		// flexbox for same height
+		+respond-min($break-tablet-min)
+			+display-flex
 
-.zon-gallery
+	&__shuffle-button
+		background-color: $white
+		display: block
+		margin: 0 auto
+
+	&__shuffle-icon
+		+inline-block
+		width: em(16px)  // em intended
+		height: em(14px) // em intended
+		margin-right: 0.5em
+		// svg colors
+		fill: $zon-charcoal
+
+.no-js .js-gallery-teaser-shuffle
+	display: none
+
+.teaser-gallery
 	background-color: $white
 	margin-bottom: remify(20px)
 	+respond-min($break-tablet-min)
@@ -16,7 +33,7 @@
 		float: left
 
 		// substitute for margin and last-of-type margin Gedöns
-		&+.zon-gallery
+		&+.teaser-gallery
 			margin-left: remify(20px)
 
 	+respond-min($break-desktop-min)
@@ -81,27 +98,3 @@
 		color: $white
 		font-size: remify(12px)
 		letter-spacing: 0.04em
-
-.zon-gallery-group
-	&__container
-		// flexbox for same height
-		+respond-min($break-tablet-min)
-			+display-flex
-
-	&__shuffle-button
-		background-color: $white
-		display: block
-		margin: 0 auto
-
-	&__shuffle-icon
-		+inline-block
-		width: em(16px)  // em intended
-		height: em(14px) // em intended
-		margin-right: 0.5em
-		// svg colors
-		fill: $zon-charcoal
-
-//+respond-min($break-tablet-min)
-//	// substitute for margin and last-of-type margin Gedöns
-//	.zon-gallery+.zon-gallery
-//		margin-left: remify(20px)

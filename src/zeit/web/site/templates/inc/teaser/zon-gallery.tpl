@@ -1,6 +1,8 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 {%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
+{% block layout %}teaser-gallery{% endblock %}
+
 {% block teaser_media_position_before_title %}
 	{% set module_layout = self.layout() %}
 

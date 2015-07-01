@@ -15,15 +15,9 @@
 	&--topic
 		padding: 0
 	&--gallery
+		border-top: 1px solid $zon_light_grey
+		margin-bottom: 0
 		padding: 0
-	// TODO: --gallery Trennlinie zum nächsten Ressort: 1px solid #CCC.
-	//       Aber: cp-region haben Margin statt Bottom. Soll das für die --gallery geändert werden???
-	//       Andere Regions müssten doch auch den Border haben.
-	//       Wie ist es dort gelöst?
-	//       => Gar nicht. Es gibt keine Borders. Wenn, dann böte sich ein border-top an, weil
-	//          die alle keinen margin-top haben.
-	//       => Wenn das nächste Ressort z.B. Spektrum ist, dann braucht man auch keinen Border.
-	//       => Idealerweise weiß eine Region, ob sie sich nach oben abgrenzen muss.
 
 .cp-area
 	padding: 0 $cp-padding

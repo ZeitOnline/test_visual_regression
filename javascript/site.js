@@ -16,13 +16,15 @@ require([
     'web.site/video/videoStage',
     'web.site/articledate',
     'web.site/articlesharing',
-    'web.site/comments'
-], function( images, videoStage, articledate, articlesharing, comments ) {
+    'web.site/comments',
+    'web.site/teaser/galleryTeaser'
+], function( images, videoStage, articledate, articlesharing, comments, galleryTeaser ) {
     images.init();
     videoStage.init();
     articledate.init();
     articlesharing.init();
     comments.init();
+    galleryTeaser.init();
 });
 
 // add required jQuery plugins
