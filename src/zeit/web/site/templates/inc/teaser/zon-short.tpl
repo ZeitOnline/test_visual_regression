@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
+{% extends "zeit.web.site:templates/inc/teaser/default.tpl" %}
 
 {% block layout %}teaser-short{% endblock %}
 {% block teaser_time %}
