@@ -705,8 +705,9 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
         'background-image: url(www.zeit.de/test.jpg)')
     assert doc('a')[0].attrib == {'href': 'www.zeit.de/user/1',
                                   'id': 'hp.zm.topnav.community.account'}
-    assert doc('a')[1].attrib == {'href': 'www.zeit.de/logout?destination=test',
-                                  'id': 'hp.zm.topnav.community.logout'}
+    assert doc('a')[1].attrib == {
+        'href': 'www.zeit.de/logout?destination=test',
+        'id': 'hp.zm.topnav.community.logout'}
 
     request = mock.Mock()
     request.registry.settings.sso_url = 'sso.zeit.de'

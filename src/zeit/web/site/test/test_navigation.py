@@ -135,7 +135,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
     mock_view = mock.MagicMock()
     mock_view.request.host = 'www.zeit.de'
     mock_request = mock.Mock()
-    html_str = tpl.render(view=mock_view,request=mock_request)
+    html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect
 
     # Logo
