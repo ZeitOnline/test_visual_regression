@@ -582,10 +582,10 @@ def test_article09_should_have_a_nextread(application):
     assert view.nextread is not None
 
 
-def test_article01_should_not_have_a_nextread(application):
+def test_article01_should_not_have_nextread_teasers(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert view.nextread is None
+    assert len(view.nextread) == 0
 
 
 def test_caching_headers_should_be_set(testserver, testbrowser):
