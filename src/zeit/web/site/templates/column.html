@@ -1,4 +1,5 @@
 {% extends "zeit.web.site:templates/article_komplett.html" %}
+
 {% block article_heading %}
 	<div class="column-heading">
 		<div class="column-heading__upper">
@@ -40,7 +41,7 @@
 					{{ view.subtitle | hide_none }}
 				</div>
 				<div class="metadata metadata--column">
-					{% include "zeit.web.site:templates/inc/article/metadata.tpl" ignore missing %}
+					{% include "zeit.web.site:templates/inc/article/metadata.tpl" %}
 				</div>
 			</div>
 		</div>
