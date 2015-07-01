@@ -1,6 +1,7 @@
 import urllib2
 
 import lxml.etree
+import zope.component
 import pyramid.authentication
 
 import zeit.web.core.comments
@@ -13,18 +14,30 @@ class CommunityAuthenticationPolicy(
     """
 
     def authenticated_userid(self, request):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
-        drupal_id = request.cookies.get('drupal-userid')
+        login_id = None
+        if conf.get("sso_activate"):
+            login_id = request.cookies.get(conf.get('sso_cookie'))
+        else:
+            login_id = request.cookies.get('drupal-userid')
+
+        # For now it is sufficient to just have an sso_cookie, because
+        # zeit.web is only a proxy for the community, which will validate the
+        # cookie itself.
+
         # If no community cookie is present, bail out straight away:
-        if drupal_id is None:
+        if login_id is None:
             # Avoid stale session data by making sure it's deleted
             if 'user' in request.session:
                 del request.session['user']
             return
 
+        drupal_id = request.cookies.get('drupal-userid')
         # If we have a community cookie for the current user, store/retrieve
         # the user info in/from the session
-        if 'user' in request.session and drupal_id == (
+        if drupal_id is not None and (
+            'user' in request.session) and drupal_id == (
                 request.session['user'].get('uid')):
             user_info = request.session['user']
         else:
@@ -44,7 +57,8 @@ def get_community_user_info(request):
     the Cookie that Community has set when the user logged in there.
     """
 
-    user_info = dict(uid=0, name=None, mail=None, picture=None, roles=[])
+    user_info = dict(uid=0, name="Kein Benutzername", mail=None,
+                     picture=None, roles=[])
     community_host = request.registry.settings['community_host']
 
     community_request = urllib2.Request(

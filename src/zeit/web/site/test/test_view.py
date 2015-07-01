@@ -7,6 +7,7 @@ def test_login_state_view_should_deliver_correct_destination():
     request = mock.Mock()
     request.registry.settings = {}
     request.session = {}
+    request.registry.settings['sso_activate'] = ""
     request.registry.settings['community_host'] = "http://community"
     request.registry.settings['community_static_host'] = "community_static"
     request.host = "destination"
@@ -30,6 +31,7 @@ def test_login_state_view_should_deliver_correct_user():
     request.authenticated_userid = 123
     request.session = {}
     request.session['user'] = {}
+    request.registry.settings['sso_activate'] = ""
     request.registry.settings['community_host'] = "http://community"
     request.params = {}
     result = zeit.web.site.view.login_state(request)

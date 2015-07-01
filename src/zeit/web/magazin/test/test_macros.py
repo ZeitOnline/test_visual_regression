@@ -5,6 +5,7 @@ import mock
 import pyramid.threadlocal
 import pyramid.config
 import lxml
+import lxml.html
 
 
 def test_macro_p_should_produce_markup(jinja2_env):
@@ -685,35 +686,43 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     # no pic
     markup = '<span class="main-nav__community__icon icon-avatar-std"></span>'
 
-    lines = tpl.module.head_user_is_logged_in_true(request).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert markup in output
+    lines = tpl.module.head_user_is_logged_in_true(request)
+    doc = lxml.html.fromstring(lines)
+    assert doc.cssselect('span')[1].attrib['class'] == (
+        'main-nav__community__icon icon-avatar-std')
 
     # pic
     request = mock.Mock()
     request.registry.settings.community_host = 'www.zeit.de'
+    request.registry.settings.sso_activate = False
     request.session.user.picture = 'test.jpg'
     request.session.user.uid = 1
     request.url = 'test'
 
-    markup = ('<span class="main-nav__community__icon"'
-              ' style="background-image: url(www.zeit.de/test.jpg)"></span>')
-    account = ('<a href="www.zeit.de/user/1"'
-               ' id="hp.zm.topnav.community.account">Account</a>')
-    logout = ('<a href="www.zeit.de/logout?destination=test"'
-              ' id="hp.zm.topnav.community.logout">Logout</a>')
+    lines = tpl.module.head_user_is_logged_in_true(request)
+    doc = lxml.html.fromstring(lines).cssselect
+    assert doc('span .main-nav__community__icon')[0].attrib['style'] == (
+        'background-image: url(www.zeit.de/test.jpg)')
+    assert doc('a')[0].attrib == {'href': 'www.zeit.de/user/1',
+                                  'id': 'hp.zm.topnav.community.account'}
+    assert doc('a')[1].attrib == {'href': 'www.zeit.de/logout?destination=test',
+                                  'id': 'hp.zm.topnav.community.logout'}
 
-    lines = tpl.module.head_user_is_logged_in_true(request).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
+    request = mock.Mock()
+    request.registry.settings.sso_url = 'sso.zeit.de'
+    request.registry.settings.community_host = 'www.zeit.de'
+    request.registry.settings.sso_activate = True
+    request.session.user.picture = 'test.jpg'
+    request.session.user.uid = 1
+    request.url = 'test_sso'
 
-    assert markup in output
-    assert account in output
-    assert logout in output
+    assert doc('a')[0].attrib == {'href': 'community.zeit.de/user/1',
+                                  'id': 'hp.zm.topnav.community.account'}
+    assert doc('a')[1].attrib == {'href': 'sso.zeit.de/abmelden?url=test_sso',
+                                  'id': 'hp.zm.topnav.community.logout'}
+
+    lines = tpl.module.head_user_is_logged_in_true(request)
+    doc = lxml.html.fromstring(lines).cssselect
 
 
 def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
@@ -723,16 +732,12 @@ def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
     request = mock.Mock()
     request.registry.settings.community_host = 'www.zeit.de'
     request.url = 'test'
+    request.registry.settings.sso_activate = False
 
-    markup = ('<a href="www.zeit.de/user/login?destination=test"'
-              ' id="hp.zm.topnav.community.login">Anmelden</a>')
-
-    lines = tpl.module.head_user_is_logged_in_false(request).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert markup in output
+    html = tpl.module.head_user_is_logged_in_false(request)
+    doc = lxml.html.fromstring(html)
+    elem_a = doc.cssselect('a')[0]
+    assert elem_a.attrib['href'] == "www.zeit.de/user/login?destination=test"
 
 
 def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):

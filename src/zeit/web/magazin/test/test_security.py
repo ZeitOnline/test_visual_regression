@@ -81,7 +81,7 @@ def test_unreachable_community_should_not_produce_error(dummy_request):
         'http://thisurlshouldnotexist.moep/')
     dummy_request.cookies['drupal-userid'] = 23
     dummy_request.headers['Cookie'] = ''
-    user_info = dict(uid=0, name=None, picture=None, roles=[], mail=None)
+    user_info = dict(uid=0, name="Kein Benutzername", picture=None, roles=[], mail=None)
     assert get_community_user_info(dummy_request) == user_info
 
 
