@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - FIX: Prevent seo-slugging for video comment forms the ugly way
 
+- ZON-1829: HP Foto-Gallerie-Teaser / Style und das Frontend
+
 
 1.36 (2015-06-26)
 -----------------

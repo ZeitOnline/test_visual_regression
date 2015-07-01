@@ -69,8 +69,7 @@ define([ 'jquery' ], function( $ ) {
     * @function init
     */
     init = function() {
-        // register event handler
-        $( '.cp-region--gallery' ).on( 'click', '.js-gallery-teaser-shuffle', loadGalleryTeasers );
+        $( '.js-gallery-teaser-shuffle' ).on( 'click', loadGalleryTeasers );
     };
 
     return {
@@ -78,6 +77,3 @@ define([ 'jquery' ], function( $ ) {
     };
 
 });
-
-// TODO:
-// - was, wenn mehrere Teaser-Groups auf einer Seite sind?
