@@ -1,12 +1,11 @@
 {%- extends "zeit.web.site:templates/inc/teaser/zon-fullwidth.tpl" -%}
 
-{% block layout %}teaser-fullwidth-blog{% endblock %}
 
-{% block teaser_journlistic_format %}
-	<div class="{{ self.layout() }}__journlistic-format">
-		<span class="{{ self.layout() }}__marker">Blog</span>
-		<span class="{{ self.layout() }}__name">
+
 {% block teaser_journalistic_format %}
+	<div class="blog-format blog-format--fullwidth">
+		<span class="blog-format__marker blog-format__marker--fullwidth">Blog</span>
+		<span class="blog-format__name blog-format__name--fullwidth">
 			{{ teaser.blog.name | hide_none }}
 		</span>
 	</div>
