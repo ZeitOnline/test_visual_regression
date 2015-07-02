@@ -2,13 +2,12 @@
 
 {% block layout %}teaser-fullwidth-blog{% endblock %}
 
-{% block teaser_format_marker %}
-	<span class="{{ self.layout() }}__marker">Blog</span>
-{% endblock %}
-
-{% block teaser_format_name %}
-	<span class="{{ self.layout() }}__name">
-		{{ teaser.blog.name | hide_none }}
-		{% if teaser.teaserSupertitle or teaser.supertitle %} / {% endif %}
-	</span>
+{% block teaser_journlistic_format %}
+	<div class="{{ self.layout() }}__journlistic-format">
+		<span class="{{ self.layout() }}__marker">Blog</span>
+		<span class="{{ self.layout() }}__name">
+{% block teaser_journalistic_format %}
+			{{ teaser.blog.name | hide_none }}
+		</span>
+	</div>
 {% endblock %}

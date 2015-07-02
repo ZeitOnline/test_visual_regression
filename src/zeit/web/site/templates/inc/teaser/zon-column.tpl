@@ -11,7 +11,7 @@
     {% include "zeit.web.site:templates/inc/teaser_asset/columnpic_zon-column.tpl" %}
 {% endblock %}
 
-{% block teaser_format_marker %}
+{% block teaser_journalistic_format %}
    <span class="teaser-column__series">{{ teaser.serie.serienname }}</span>
 {% endblock %}
 {% block teaser_kicker %}

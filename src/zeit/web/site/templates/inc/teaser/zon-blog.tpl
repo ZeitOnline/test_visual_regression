@@ -7,13 +7,9 @@
     {% include "zeit.web.site:templates/inc/teaser_asset/{}.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
 {% endblock %}
 
-{% block teaser_format_marker %}
+{% block teaser_journalistic_format %}
 	<span class="{{ self.layout() }}__marker">Blog</span>
-{% endblock %}
-
-{% block teaser_format_name %}
 	<span class="{{ self.layout() }}__name">
 		{{ teaser.blog.name | hide_none }}
-		{% if teaser.teaserSupertitle or teaser.supertitle %} / {% endif %}
 	</span>
 {% endblock %}

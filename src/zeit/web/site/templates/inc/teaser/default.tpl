@@ -7,10 +7,8 @@
     {% block teaser_media_position_before_title %}{% endblock %}
 
     <div class="{{ self.layout() }}__container {% block teaser_container_modifier %}{% endblock %}">
-        {% block teaser_format_marker %}
-        {% endblock %}
-        {% block teaser_format_name %}
-        {% endblock %}
+        {% block teaser_journalistic_format %}
+        {% endblock teaser_journalistic_format%}
         <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
             {% block teaser_link %}
             <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | translate_url }}">
