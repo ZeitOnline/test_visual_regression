@@ -31,16 +31,6 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
 
             images.scale( $galleryArea.find( selector ).html( $teasers.html() ) );
         } ).fail(function( errorObj ) {
-            // OPTIMIZE: wrap this shit into a globally available module,
-            // including the possibility to log it somewhere,
-            // have debug mode (Konami Code FTW!), and so on.
-            if ( typeof console === 'object' &&
-                typeof console.log === 'function' &&
-                typeof errorObj === 'object' &&
-                typeof errorObj.statusText === 'string' ) {
-                console.log( 'Error with galleryTeaser.js, ' +
-                'loading new teasers: "' + errorObj.statusText + '"' );
-            }
             // TODO: where to get the URL? We cannot traverse the area and find read-more, can we?
             window.location.href = '/foto/index';
             return false;
