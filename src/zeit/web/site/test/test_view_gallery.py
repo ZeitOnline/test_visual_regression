@@ -109,8 +109,6 @@ def test_zon_gallery_teaser_on_homepage_should_hide_elements_on_mobile(
     driver = selenium_driver
     driver.get('{}/index'.format(testserver.url))
 
-    # OPTIMIZE: the ressort link might be tested in its own test suite
-
     ressort_linktext = driver.find_element_by_css_selector(
         '.cp-ressort-heading__readmore-linktext')
     gallery_counter = driver.find_element_by_css_selector(
@@ -150,5 +148,18 @@ def test_zon_gallery_teaser_on_homepage_should_hide_elements_on_mobile(
     assert gallery_text.is_displayed(), (
         'Gallery description text must be displayed on desktop.')
 
-# TODO: readmore has correct link destination?
-# TODO: wait for the actual image and check its presence
+
+def test_zon_gallery_teaser_on_homepage_should_shuffle_load_on_click(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('{}/index'.format(testserver.url))
+    teaserbutton = driver.find_element_by_css_selector(
+        '.js-gallery-teaser-shuffle')
+    teasertext1 = driver.find_element_by_css_selector(
+        '.teaser-gallery__heading').text
+    teaserbutton.click()
+    driver.implicitly_wait(2)  # seconds
+    teasertext2 = driver.find_element_by_css_selector(
+        '.teaser-gallery__heading').text
+
+    assert teasertext1 != teasertext2
