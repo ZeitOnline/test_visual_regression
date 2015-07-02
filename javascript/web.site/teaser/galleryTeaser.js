@@ -16,10 +16,11 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
 
         var $this = $( this ),
             $galleryArea = $this.closest( '.cp-area--gallery' ),
-            sourceUrl = $this.data( 'sourceurl' );
+            sourceUrl = $this.data( 'sourceurl' ),
+            fallbackUrl;
 
         if ( !$galleryArea.length || !sourceUrl ) {
-            return false;
+            return true;
         }
 
         sourceUrl = sourceUrl.replace( '___JS-RANDOM___', Math.floor( Math.random() * 10 ) );
@@ -30,11 +31,14 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
                 $teasers = $data.find( selector );
 
             images.scale( $galleryArea.find( selector ).html( $teasers.html() ) );
-        } ).fail(function( errorObj ) {
-            // TODO: where to get the URL? We cannot traverse the area and find read-more, can we?
-            window.location.href = '/foto/index';
-            return false;
+        } ).fail(function( ) {
+            fallbackUrl = $this.attr( 'href' );
+            if ( sourceUrl ) {
+                window.location.href = fallbackUrl;
+            }
         });
+
+        return false;
 
     },
 
