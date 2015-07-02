@@ -7,7 +7,6 @@ import time
 import types
 import urllib
 import urlparse
-import jinja2
 import babel.dates
 import pyramid.threadlocal
 import repoze.bitblt.transform
@@ -46,25 +45,27 @@ def block_type(obj):
         return type(obj).__name__.lower()
 
 
-@zeit.web.register_filter
-def translate_url(url):
-    if url is None:
-        return
-    # XXX Is it really not possible to get to the actual template variables
-    # (like context, view, request) through the jinja2 context?!??
-    request = pyramid.threadlocal.get_current_request()
-    if request is None:  # XXX should only happen in tests
-        return url
+@zeit.web.register_ctxfilter
+def create_url(context, obj, request=None):
+    try:
+        req = request or context.get('view').request  # See zwc.decorator
+        host = req.route_url('home')
+    except:
+        log.debug('Could not retrieve request from context: %s' % obj)
+        host = '/'
 
-    return url.replace('http://xml.zeit.de/', request.route_url('home'), 1)
-
-
-@zeit.web.register_filter
-def create_url(obj):
-    if zeit.content.link.interfaces.ILink.providedBy(obj):
+    if isinstance(obj, basestring):
+        return obj.replace(zeit.cms.interfaces.ID_NAMESPACE, host, 1)
+    elif zeit.content.link.interfaces.ILink.providedBy(obj):
         return obj.url
+    elif zeit.content.video.interfaces.IVideo.providedBy(obj):
+        titles = obj.supertitle, obj.title
+        slug = zeit.cms.interfaces.normalize_filename(' '.join(titles))
+        return create_url(context, '{}/{}'.format(obj.uniqueId, slug))
+    elif zeit.cms.interfaces.ICMSContent.providedBy(obj):
+        return create_url(context, obj.uniqueId, request=request)
     else:
-        return translate_url(obj.uniqueId)
+        return ''
 
 
 @zeit.web.register_filter
@@ -397,6 +398,22 @@ def pluralize(num, *forms):
 
 
 @zeit.web.register_filter
+def unitize(num, select_token=None):
+    if num <= 999:
+        tokens = str(num), ''
+    elif num <= 9999:
+        tokens = ','.join(list(str(num))[:2]), 'Tsd.'
+    elif num <= 999999:
+        tokens = str(num / 1000), 'Tsd.'
+    else:
+        tokens = str(num / 1000000), 'Mio.'
+    if select_token is None:
+        return ' '.join(tokens)
+    else:
+        return tokens[select_token]
+
+
+@zeit.web.register_filter
 def with_mods(b_or_e, *mods):
     """Decorate a BEM-style block or element with an a set of modifiers."""
     return ' '.join([b_or_e] + ['{}--{}'.format(b_or_e, m) for m in
@@ -417,8 +434,9 @@ def topic_links(centerpage):
                   getattr(centerpage, 'uniqueId', '')))
 
 
-@jinja2.contextfilter
-def call_macro_by_name(context, macro_name, *args, **kwargs):
+@zeit.web.register_ctxfilter
+def macro(context, macro_name, *args, **kwargs):
+    """Call a macro extracted from the context by its name."""
     return context.vars[macro_name](*args, **kwargs)
 
 

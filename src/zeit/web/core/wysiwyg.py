@@ -1,3 +1,4 @@
+import pyramid.threadlocal
 import pyramid.view
 import pytz
 import zc.iso8601.parse
@@ -21,7 +22,8 @@ zeit.wysiwyg.html.ConversionStep.__init__ = init_without_request
 
 
 def pyramid_url(self, obj):
-    return zeit.web.core.template.translate_url(obj.uniqueId)
+    request = pyramid.threadlocal.get_current_request()
+    return zeit.web.core.template.create_url(None, obj.uniqueId, request)
 zeit.wysiwyg.html.ConversionStep.url = pyramid_url
 
 

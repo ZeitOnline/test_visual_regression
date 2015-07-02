@@ -4,6 +4,8 @@ Change log for zeit.web
 1.37 (unreleased)
 -----------------
 
+- ZON-1897: Transform all video links to contain seo slug
+
 - ZON-1908: Implement zmo and zon specific nextread sources
 
 - ZON-1505: Make centerpage teaser clickable en bloc
@@ -16,9 +18,17 @@ Change log for zeit.web
 
 - MAINT: Re-locate base module class to zeit.web.site.module
 
+- MAINT: Clean up jinja templates
+
 - FIX: Change cp update time route to url dispatching
 
 - FIX: Prevent seo-slugging for video comment forms the ugly way
+
+- Include URL in jinja error logging
+
+- ZON-1856: Upgrade buzz integration to API version 2.0
+
+- FIX: Ignore authors without display_name instead of crashing
 
 
 1.36 (2015-06-26)
@@ -31,6 +41,8 @@ Change log for zeit.web
 - ZON-1893: Allow A/B-test users to toggle their site version
 
 - ZON-1876: Custom wt param to distinguish between classic and beta
+
+- Integrate bugsnag middleware into WSGI pipeline
 
 
 1.35 (2015-06-26)

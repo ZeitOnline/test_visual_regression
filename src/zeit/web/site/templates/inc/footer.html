@@ -1,16 +1,17 @@
-{% import 'zeit.web.site:templates/macros/footer_macro.tpl' as footer %}
-    <div class="footer-logo">
-        <div class="footer-logo__image">
-            {{ footer.footer_logo(view.request) }}
-        </div>
+{% import 'zeit.web.site:templates/macros/footer_macro.tpl' as foma %}
+
+<div class="footer-logo">
+    <div class="footer-logo__image">
+        {{ foma.footer_logo(view.request) }}
     </div>
-    <div class="footer-publisher">
-        {{ footer.footer_publisher(view) }}
+</div>
+<div class="footer-publisher">
+    {{ foma.footer_publisher(view) }}
+</div>
+<div class="footer-links">
+    {{ foma.footer_links(view) }}
+    <div class="footer-links__seperator"></div>
+    <div class="footer-links__button">
+        <a href="?" class="footer-links__linkbutton" title="Zurück nach oben">Nach oben</a>
     </div>
-    <div class="footer-links">
-        {{ footer.footer_links(view) }}
-        <div class="footer-links__seperator"></div>
-        <div class="footer-links__button">
-            <a href="?" class="footer-links__linkbutton" title="Zurück nach oben">Nach oben</a>
-        </div>
-    </div>
+</div>

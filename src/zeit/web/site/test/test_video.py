@@ -157,6 +157,18 @@ def test_video_page_should_include_comment_section(testserver, testbrowser):
     assert doc.xpath('//section[@class="comment-section" and @id="comments"]')
 
 
+def test_video_comment_form_should_be_rendered(testserver, testbrowser):
+    browser = testbrowser(
+        '{}/video/2015-01/4004256546001/comment-form'.format(testserver.url))
+    assert len(browser.cssselect('#comment-form')) == 1
+
+
+def test_video_report_form_should_be_rendered(testserver, testbrowser):
+    browser = testbrowser(
+        '{}/video/2015-01/4004256546001/report-form'.format(testserver.url))
+    assert len(browser.cssselect('#comment-form')) == 1
+
+
 def test_video_page_should_embed_sharing_menu(testserver, testbrowser):
     browser = testbrowser(
         '{}/video/2015-01/4004256546001'.format(testserver.url))
@@ -238,6 +250,15 @@ def test_video_page_adcontroller_content_gets_included(
         assert ('google_ads_iframe_' in iframe.get_attribute('id')) is True
     except TimeoutException:
         assert False, 'Iframe not found within 20 seconds'
+
+
+def test_create_url_filter_should_append_seo_slug_to_all_video_links(
+        application):
+    video = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2015-01/4004256546001')
+    assert zeit.web.core.template.create_url(None, video) == (
+        '/video/2015-01/4004256546001/kuenstliche-intelligenz'
+        '-roboter-myon-uebernimmt-opernrolle')
 
 
 def test_video_page_should_redirect_to_slug_from_plain_id_url(

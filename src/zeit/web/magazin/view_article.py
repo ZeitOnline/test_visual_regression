@@ -13,7 +13,6 @@ import zeit.web
 import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.interfaces
-import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.core.view_article
@@ -108,11 +107,13 @@ class FeatureLongform(LongformArticle):
         crumb_list = crumb[:1]
         if self.ressort in items:
             item = items[self.ressort]
-            href = zeit.web.core.template.translate_url(item.href)
+            href = zeit.web.core.template.create_url(
+                None, item.href, self.request)
             crumb_list.append((item.text, href))
         if self.sub_ressort in items:
             item = items[self.sub_ressort]
-            href = zeit.web.core.template.translate_url(item.href)
+            href = zeit.web.core.template.create_url(
+                None, item.href, self.request)
             crumb_list.append((item.text, href))
         if self.title:
             crumb_list.append((self.title, ''))

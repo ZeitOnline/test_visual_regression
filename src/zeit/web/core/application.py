@@ -6,6 +6,8 @@ import re
 import urlparse
 import warnings
 
+import bugsnag
+import bugsnag.wsgi.middleware
 import grokcore.component
 import jinja2
 import jinja2.ext
@@ -68,6 +70,8 @@ class Application(object):
             'enable_trackers', True))
         settings['enable_iqd'] = bool(settings.get(
             'enable_iqd', True))
+        settings['linkreach_host'] = maybe_convert_egg_url(
+            settings.get('linkreach_host', ''))
 
         interface = zeit.web.core.interfaces.ISettings
         zope.interface.declarations.alsoProvides(settings, interface)
@@ -82,6 +86,7 @@ class Application(object):
         self.configure_banner()
         self.configure_series()
         self.configure_navigation()
+        self.configure_bugsnag()
 
     def configure_banner(self):
         banner_source = maybe_convert_egg_url(
@@ -133,12 +138,18 @@ class Application(object):
             zeit.web.core.navigation.make_navigation(
                 navigation_footer_links_config))
 
+    def configure_bugsnag(self):
+        bugsnag.configure(
+            api_key=self.settings.get('bugsnag_token'),
+            project_root=pkg_resources.get_distribution('zeit.web').location,
+            app_version=self.settings.get('version'),
+            notify_release_stages=['devel', 'staging', 'production'],
+            release_stage=self.settings.get('environment', 'dev')
+        )
+
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
-
-        self.settings['linkreach_host'] = maybe_convert_egg_url(
-            self.settings.get('linkreach_host', ''))
 
         version = pkg_resources.get_distribution('zeit.web').version
         self.settings['version'] = version
@@ -270,9 +281,6 @@ class Application(object):
             ignore=self.DONT_SCAN
         )
 
-        # TODO: We would want to make contextfilters venusian-discoverable too.
-        env.filters['macro'] = zeit.web.core.template.call_macro_by_name
-
     def configure_zca(self):
         """Sets up zope.component registrations by reading our
         configure.zcml file.
@@ -359,12 +367,16 @@ class Application(object):
         """
         return [
             ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
-            ('remove_asset_prefix', 'factory', '', {})
+            ('remove_asset_prefix', 'factory', '', {}),
+            ('bugsnag_notifier', 'factory', '', {})
         ]
 
     def remove_asset_prefix(self, app):
         return URLPrefixMiddleware(
             app, prefix=self.settings.get('asset_prefix', ''))
+
+    def bugsnag_notifier(self, app):
+        return bugsnag.wsgi.middleware.BugsnagMiddleware(app)
 
     def make_wsgi_app(self, global_config):
         app = self.config.make_wsgi_app()
@@ -577,9 +589,10 @@ class TraversableVideo(dict):
 
     def __init__(self, context, tdict):
         # XXX: Let's hope no video is ever called 'imagegroup'
-        #      or 'comment-form'. (ND)
-        if tdict['view_name'] not in ('imagegroup', 'comment-form'):
-            tdict['request'].GET['slug'] = tdict['view_name']
+        #      or 'comment-form' or 'report-form'. (ND)
+        if tdict['view_name'] not in ('imagegroup', 'comment-form',
+                                      'report-form'):
+            tdict['request'].headers['X-SEO-Slug'] = tdict['view_name']
             tdict['view_name'] = ''
         super(TraversableVideo, self).__init__(tdict)
 

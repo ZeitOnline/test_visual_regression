@@ -1,5 +1,6 @@
 from pyramid.view import view_config
 import lxml.etree
+import zope.component
 
 import zeit.cms.interfaces
 import zeit.connector.connector
@@ -13,7 +14,6 @@ import zeit.magazin.interfaces
 import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.interfaces
-import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
@@ -115,11 +115,12 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
 
     @zeit.web.reify
     def area_buzz(self):
-        teaser_dict = {}
-        for service in 'twitter', 'facebook', 'comments':
-            teaser_dict[service] = zeit.web.core.reach.fetch(
-                service, 'zeit-magazin', limit=3)
-        return teaser_dict
+        conn = zope.component.getUtility(zeit.web.core.interfaces.IReach)
+        return dict(
+            twitter=conn.get_social(facet='twitter', section='zeit-magazin'),
+            facebook=conn.get_social(facet='facebook', section='zeit-magazin'),
+            comments=conn.get_comments(section='zeit-magazin')
+        )
 
     @zeit.web.reify
     def copyrights(self):
@@ -131,7 +132,8 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
             teaser_list.append(
                 dict(
                     label=teaser.copyright[0][0],
-                    image=zeit.web.core.template.translate_url(teaser.src),
+                    image=zeit.web.core.template.create_url(
+                        None, teaser.src, self.request),
                     link=teaser.copyright[0][1],
                     nofollow=teaser.copyright[0][2]
                 )
