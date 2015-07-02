@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - Include URL in jinja error logging
 
+- ZON-1856: Upgrade buzz integration to API version 2.0
+
 - FIX: Ignore authors without display_name instead of crashing
 
 

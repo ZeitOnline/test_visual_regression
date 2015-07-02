@@ -5,12 +5,8 @@
     <include file="vivi.zcml" />
     <grok:grok exclude="test" package="." />
 
-    <utility
-      factory="zeit.web.core.sources.ImageScales"
-      provides="zeit.web.core.interfaces.IImageScales"/>
-
-    <utility
-      factory="zeit.web.core.sources.TeaserMapping"
-      provides="zeit.web.core.interfaces.ITeaserMapping"/>
+    <utility factory="zeit.web.core.sources.ImageScales" provides="zeit.web.core.interfaces.IImageScales"/>
+    <utility factory="zeit.web.core.sources.TeaserMapping" provides="zeit.web.core.interfaces.ITeaserMapping"/>
+    <utility factory="zeit.web.core.reach.Reach" provides="zeit.web.core.interfaces.IReach"/>
 
 </configure>
