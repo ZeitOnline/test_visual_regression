@@ -5,6 +5,8 @@
 	+respond-min($break-tablet-min)
 		&--fullwidth
 			color: $white
+			position: absolute
+			top: remify(28px)
 
 	&__marker
 		+inline-block
@@ -15,7 +17,9 @@
 		margin: remify(0 2px 14px 0)
 		padding-bottom: remify(8px)
 		+respond-min($break-tablet-min)
-			border-color: $white
+			&--fullwidth
+				border-color: $white
+
 	&__name
 		font-family: $font-franziska
 		font-style: italic
