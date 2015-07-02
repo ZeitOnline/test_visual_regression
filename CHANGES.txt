@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - Include URL in jinja error logging
 
+- FIX: Ignore authors without display_name instead of crashing
+
 
 1.36 (2015-06-26)
 -----------------
