@@ -30,7 +30,8 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
                 $data = $( data ),
                 $teasers = $data.find( selector );
 
-            images.scale( $galleryArea.find( selector ).html( $teasers.html() ) );
+            $galleryArea.find( selector ).replaceWith( $teasers );
+            images.scale( $teasers );
         } ).fail(function( ) {
             fallbackUrl = $this.attr( 'href' );
             if ( sourceUrl ) {
