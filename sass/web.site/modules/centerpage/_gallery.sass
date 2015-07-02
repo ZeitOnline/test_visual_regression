@@ -15,12 +15,10 @@
 		margin: 0 auto
 
 	&__shuffle-icon
-		+inline-block
-		width: em(16px)  // em intended
-		height: em(14px) // em intended
+		width: remify(15px)
+		height: remify(13px)
 		margin-right: 0.5em
-		// svg colors
-		fill: $zon-charcoal
+		vertical-align: text-top
 
 .no-js .js-gallery-teaser-shuffle
 	display: none
@@ -81,13 +79,14 @@
 
 	&__icon
 		position: absolute
-		bottom: remify(6px)
-		left: remify(12px)
-		height: remify(32px)
-		width: remify(32px)
+		bottom: em(10px)
+		left: em(10px)
+		height: em(22px)
+		width: em(32px)
 		// svg colors
 		stroke: $white
-		fill: rgba(33,33,33,0.2)
+		fill: $zon-charcoal
+		fill-opacity: 0.6
 
 	&__counter
 		position: absolute
