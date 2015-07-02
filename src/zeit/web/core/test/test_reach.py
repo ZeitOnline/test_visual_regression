@@ -1,72 +1,59 @@
-# -*- coding: utf-8 -*-
-import pytest
+import requests
+import requests_file
+import zope.component
 
 import zeit.content.article.interfaces
 
+import zeit.web.core.interfaces
 import zeit.web.core.reach
 
 
-def test_unavailable_service_should_throw_exceptio():
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('N/A', 'zeit-magazin')
+def test_reach_host_should_be_configured_in_instance(application):
+    conn = zeit.web.core.reach.Reach()
+    assert conn.host.endswith('zeit.web/src/zeit/web/core/data/linkreach/api/')
 
 
-def test_unavailable_section_should_not_throw_exception():
-    assert zeit.web.core.reach.fetch('comments', 'N/A') == []
-    assert zeit.web.core.reach.fetch('mostread', 'N/A') == []
-    assert zeit.web.core.reach.fetch('twitter', 'N/A') == []
+def test_reach_connection_should_be_stored_in_class(application):
+    conn = zeit.web.core.reach.Reach()
+    assert conn.session is zeit.web.core.reach.Reach.session
+    assert isinstance(conn.session, requests.Session)
 
 
-def test_out_of_bounds_limits_should_throw_exception():
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('comments', 'zeit-magazin', limit=0)
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('comments', 'zeit-magazin', limit=99)
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('mostread', 'zeit-magazin', limit=0)
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('mostread', 'zeit-magazin', limit=99)
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('twitter', 'zeit-magazin', limit=0)
-    with pytest.raises(ValueError):
-        zeit.web.core.reach.fetch('twitter', 'zeit-magazin', limit=99)
+def test_mock_reach_connection_should_handle_file_scheme(application):
+    conn = zeit.web.core.reach.MockReach()
+    adapter = conn.session.get_adapter('file://')
+    assert isinstance(adapter, requests_file.FileAdapter)
 
 
 def test_data_for_twitter_should_be_fetched(application):
-    data = zeit.web.core.reach.fetch('twitter', 'zeit-magazin')
+    reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
+    data = reach.get_social(facet='twitter', section='zeit-magazin')
     assert len(data) == 3
-    assert all(['teaserTitle' in a for a in data])
+    assert all(['uniqueId' in a for a in data])
 
 
 def test_data_for_facebook_should_be_fetched(application):
-    data = zeit.web.core.reach.fetch('facebook', 'zeit-magazin')
+    reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
+    data = reach.get_social(facet='facebook', section='zeit-magazin')
     assert len(data) == 3
-    assert all(['teaserTitle' in a for a in data])
-
-
-def test_data_for_googleplus_should_be_fetched(application):
-    data = zeit.web.core.reach.fetch('googleplus', 'zeit-magazin')
-    assert len(data) == 3
-    assert all(['teaserTitle' in a for a in data])
+    assert all(['uniqueId' in a for a in data])
 
 
 def test_data_for_comments_should_be_fetched(application):
-    data = zeit.web.core.reach.fetch('comments', 'zeit-magazin')
+    reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
+    data = reach.get_comments(section='zeit-magazin')
     assert len(data) == 3
-    assert all(['teaserTitle' in a for a in data])
+    assert all(['uniqueId' in a for a in data])
 
 
 def test_data_for_mostread_should_be_fetched(application):
-    data = zeit.web.core.reach.fetch('mostread', 'zeit-magazin')
+    reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
+    data = reach.get_views(section='zeit-magazin')
     assert len(data) == 3
-    assert all(['teaserTitle' in a for a in data])
+    assert all(['uniqueId' in a for a in data])
 
 
 def test_counts_per_url_are_fetchable(application):
-    data = zeit.web.core.reach.fetch('path', 'index')
-    assert {'googleplus', 'twitter', 'facebook'}.issubset(data)
-
-
-def test_unreachable_url_fails_gracefully(application):
-    data = zeit.web.core.reach.fetch('path', 'N/A')
-    assert data == {}
+    reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
+    data = reach.get_buzz('http://xml.zeit.de/index')
+    assert {'social', 'comments', 'views', 'score'}.issubset(data.keys())
