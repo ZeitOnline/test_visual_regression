@@ -98,7 +98,8 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
         'No block named teaser_commentcount')
 
 
-def test_default_teaser_should_match_css_selectors(application, jinja2_env):
+def test_default_teaser_should_match_css_selectors(
+        application, jinja2_env, testserver):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default.tpl')
 
@@ -116,7 +117,7 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
         'No headline is present')
 
     link = html('a.teaser__combined-link')[0]
-    assert link.attrib['href'] == uid, 'No link is present'
+    assert link.attrib['href'] == '/artikel/01', 'No link is present'
     assert link.attrib['title'] == 'teaserSupertitle - teaserTitle', (
         'There is no link title')
 
@@ -146,8 +147,8 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
 
     teaser_co = html('div.teaser__metadata > a.teaser__commentcount')[0]
 
-    assert teaser_co.attrib['href'] == teaser.uniqueId + '#comments', (
-        'No comment link href present')
+    assert teaser_co.attrib['href'] == teaser.uniqueId.replace(
+        'http://xml.zeit.de', '') + '#comments'
 
     assert teaser_co.attrib['title'] == '129 Kommentare', (
         'No comment link title present')
@@ -156,17 +157,15 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
         'No comment text present')
 
 
-def test_first_small_teaser_has_no_image_on_mobile_mode(
+def test_small_teaser_should_display_no_image_on_mobile(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
     box = driver.find_elements_by_class_name('cp-area--major')[0]
-    first = box.find_elements_by_class_name('teaser-small__media')[0]
-    second = box.find_elements_by_class_name('teaser-small__media')[1]
+    teaser_image = box.find_elements_by_class_name('teaser-small__media')[0]
 
-    assert first.is_displayed() is True, 'image is not displayed'
-    assert second.is_displayed() is False, 'image is displayed'
+    assert teaser_image.is_displayed() is False, 'image is not displayed'
 
 
 def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
@@ -392,16 +391,25 @@ def test_series_teaser_should_have_mobile_layout(
         assert border == 'dotted'  # desktop: border-top wrong
 
 
+def test_snapshot_hidden_on_initial_load(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/index' % testserver.url)
+    snapshot = driver.find_element_by_id('snapshot')
+    assert not snapshot.is_displayed(), 'Snapshot not hidden onload'
+
+
 def test_snapshot_displayed_after_scroll(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/index' % testserver.url)
-    driver.execute_script(
-        "window.scrollTo(0, $('.footer').get(0).offsetTop);")
+    driver.execute_script("window.scrollTo(0, \
+        document.getElementById('snapshot').parentNode.offsetTop)")
     try:
         wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located((By.ID, 'snapshot')))
+        wait.until(EC.visibility_of_element_located((By.ID, 'snapshot')))
     except TimeoutException:
         assert False, 'Snapshot not visible after scrolled into view'
 
@@ -413,9 +421,9 @@ def test_snapshot_displayed_after_direct_load_with_anchor(
     driver.get('%s/zeit-online/index#snapshot' % testserver.url)
     try:
         wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located((By.ID, 'snapshot')))
+        wait.until(EC.visibility_of_element_located((By.ID, 'snapshot')))
     except TimeoutException:
-        assert False, 'Snapshot not visible after scrolled into view'
+        assert False, 'Snapshot not visible for link with fragment identifier'
 
 
 def test_snapshot_morelink_text_icon_switch(
@@ -423,15 +431,11 @@ def test_snapshot_morelink_text_icon_switch(
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/index' % testserver.url)
-    driver.execute_script(
-        "window.scrollTo(0, $('.footer').get(0).offsetTop);")
+    linkdisplay = driver.execute_script(
+        "return $('.snapshot-readmore__item').eq(0).css('display')")
     if screen_size[0] == 320:
-        linkdisplay = driver.execute_script(
-            'return $(".snapshot-readmore__item").css("display")')
         assert linkdisplay == u'none', 'Linktext not hidden on mobile'
     else:
-        linkdisplay = driver.execute_script(
-            'return $(".snapshot-readmore__item").css("display")')
         assert linkdisplay == u'inline', 'Linktext hidden on other than mobile'
 
 
@@ -834,3 +838,20 @@ def test_centerpage_square_teaser_has_pixelperfect_image(
     assert len(images)
     for image in images:
         assert 'is-pixelperfect' in image.get('class')
+
+
+def test_centerpage_teaser_is_clickable_en_block_for_touch_devices(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/index?touch' % testserver.url)
+    article = driver.find_element_by_css_selector('article[data-unique-id]')
+    link = article.find_element_by_tag_name('a')
+    href = link.get_attribute('href')
+    article.click()
+    assert driver.current_url == href
+
+    driver.back()
+    article = driver.find_element_by_css_selector('article[data-unique-id]')
+    text = article.find_element_by_tag_name('p')
+    text.click()
+    assert driver.current_url == href

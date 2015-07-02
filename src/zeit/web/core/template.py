@@ -7,7 +7,6 @@ import time
 import types
 import urllib
 import urlparse
-import jinja2
 import babel.dates
 import pyramid.threadlocal
 import repoze.bitblt.transform
@@ -46,25 +45,27 @@ def block_type(obj):
         return type(obj).__name__.lower()
 
 
-@zeit.web.register_filter
-def translate_url(url):
-    if url is None:
-        return
-    # XXX Is it really not possible to get to the actual template variables
-    # (like context, view, request) through the jinja2 context?!??
-    request = pyramid.threadlocal.get_current_request()
-    if request is None:  # XXX should only happen in tests
-        return url
+@zeit.web.register_ctxfilter
+def create_url(context, obj, request=None):
+    try:
+        req = request or context.get('view').request  # See zwc.decorator
+        host = req.route_url('home')
+    except:
+        log.debug('Could not retrieve request from context: %s' % obj)
+        host = '/'
 
-    return url.replace('http://xml.zeit.de/', request.route_url('home'), 1)
-
-
-@zeit.web.register_filter
-def create_url(obj):
-    if zeit.content.link.interfaces.ILink.providedBy(obj):
+    if isinstance(obj, basestring):
+        return obj.replace(zeit.cms.interfaces.ID_NAMESPACE, host, 1)
+    elif zeit.content.link.interfaces.ILink.providedBy(obj):
         return obj.url
+    elif zeit.content.video.interfaces.IVideo.providedBy(obj):
+        titles = obj.supertitle, obj.title
+        slug = zeit.cms.interfaces.normalize_filename(' '.join(titles))
+        return create_url(context, '{}/{}'.format(obj.uniqueId, slug))
+    elif zeit.cms.interfaces.ICMSContent.providedBy(obj):
+        return create_url(context, obj.uniqueId, request=request)
     else:
-        return translate_url(obj.uniqueId)
+        return ''
 
 
 @zeit.web.register_filter
@@ -139,6 +140,8 @@ def get_layout(block, request=None):
     # Since we might lookup a layout more than once per request, we can cache
     # it in the request object.
 
+    # XXX This filter is in desperate need of a major overhaul!
+
     request = request or pyramid.threadlocal.get_current_request()
 
     try:
@@ -153,13 +156,10 @@ def get_layout(block, request=None):
         if layout:
             return layout
 
-    source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS.factory
-    source_xml = source._get_tree()
-
     def allowed(layout_id):
         try:
             xp = '/layouts/layout[@id="{}"]/@areas'.format(layout_id)
-            return block.__parent__.kind in source_xml.xpath(xp)[0].split(' ')
+            return block.__parent__.kind in source.xpath(xp)[0].split(' ')
         except (AttributeError, IndexError):
             return
 
@@ -177,12 +177,11 @@ def get_layout(block, request=None):
             layout = 'hide'
     else:
         layout = layout_id
+        source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS.factory._get_tree()
+        cp = zeit.content.cp.interfaces.ICenterPage(block, None)
 
         if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
             log.debug('Broken ref at {}'.format(teaser.uniqueId))
-            layout = 'hide'
-        elif False:
-            # XXX What about placeholder containers?
             layout = 'hide'
         elif layout == 'zon-square':
             # ToDo: Remove when Longform will be generally used on www.zeit.de
@@ -190,16 +189,15 @@ def get_layout(block, request=None):
                 layout = layout
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
-        elif getattr(teaser, 'serie', None):
-            if allowed('zon-series'):
-                layout = 'zon-series'
-
-            if teaser.serie.column and get_column_image(teaser) and (
-                    allowed("zon-column")):
+        elif getattr(teaser, 'serie', None) and not (
+                zeit.magazin.interfaces.IZMOContent.providedBy(cp)):
+            if teaser.serie.column and get_column_image(teaser) and allowed(
+                    'zon-column'):
                 layout = 'zon-column'
-        elif getattr(teaser, 'blog', None):
-            if allowed("zon-blog"):
-                layout = 'zon-blog'
+            elif allowed('zon-series'):
+                layout = 'zon-series'
+        elif getattr(teaser, 'blog', None) and allowed('zon-blog'):
+            layout = 'zon-blog'
 
     layout = zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
@@ -436,8 +434,9 @@ def topic_links(centerpage):
                   getattr(centerpage, 'uniqueId', '')))
 
 
-@jinja2.contextfilter
-def call_macro_by_name(context, macro_name, *args, **kwargs):
+@zeit.web.register_ctxfilter
+def macro(context, macro_name, *args, **kwargs):
+    """Call a macro extracted from the context by its name."""
     return context.vars[macro_name](*args, **kwargs)
 
 
@@ -539,19 +538,18 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     if len(asset) == 0:
         return get_teaser_image(teaser_block, teaser, unique_id=default_id)
 
+    try:
+        image_patterns = get_image_pattern(
+            get_layout(teaser_block), teaser_block.layout.image_pattern)
+    except AttributeError:
+        return
+
     # Assumes all images in this group have the same mimetype.
     filenames = asset.keys()
     sample_image = u'{}{}'.format(asset.uniqueId, filenames[0])
 
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
         mimetypes.guess_type(sample_image)[0], 'jpg')
-
-    try:
-        image_patterns = get_image_pattern(
-            get_layout(teaser_block),
-            teaser_block.layout.image_pattern)
-    except AttributeError:
-        return
 
     image, image_pattern = _existing_image(asset_id, image_base_name,
                                            image_patterns, ext, filenames)

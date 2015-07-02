@@ -6,6 +6,8 @@ import re
 import urlparse
 import warnings
 
+import bugsnag
+import bugsnag.wsgi.middleware
 import grokcore.component
 import jinja2
 import jinja2.ext
@@ -29,10 +31,12 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.dynamicfolder.interfaces
 import zeit.content.gallery.interfaces
+import zeit.content.video.interfaces
 import zeit.find.search
 import zeit.magazin.interfaces
 import zeit.solr.interfaces
 
+import zeit.web
 import zeit.web.core
 import zeit.web.core.article
 import zeit.web.core.banner
@@ -51,8 +55,7 @@ log = logging.getLogger(__name__)
 
 class Application(object):
 
-    DONT_SCAN_TESTS = [re.compile('test$').search]
-    DONT_SCAN = DONT_SCAN_TESTS + ['zeit.web.core.preview']
+    DONT_SCAN = [re.compile('test$').search]
 
     def __init__(self):
         self.settings = {}
@@ -83,6 +86,7 @@ class Application(object):
         self.configure_banner()
         self.configure_series()
         self.configure_navigation()
+        self.configure_bugsnag()
 
     def configure_banner(self):
         banner_source = maybe_convert_egg_url(
@@ -134,6 +138,15 @@ class Application(object):
             zeit.web.core.navigation.make_navigation(
                 navigation_footer_links_config))
 
+    def configure_bugsnag(self):
+        bugsnag.configure(
+            api_key=self.settings.get('bugsnag_token'),
+            project_root=pkg_resources.get_distribution('zeit.web').location,
+            app_version=self.settings.get('version'),
+            notify_release_stages=['devel', 'staging', 'production'],
+            release_stage=self.settings.get('environment', 'dev')
+        )
+
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
@@ -155,6 +168,7 @@ class Application(object):
 
         log.debug('Configuring Pyramid')
         config.add_route('json_delta_time', '/json/delta_time')
+        config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('home', '/')
@@ -267,9 +281,6 @@ class Application(object):
             ignore=self.DONT_SCAN
         )
 
-        # TODO: We would want to make contextfilters venusian-discoverable too.
-        env.filters['macro'] = zeit.web.core.template.call_macro_by_name
-
     def configure_zca(self):
         """Sets up zope.component registrations by reading our
         configure.zcml file.
@@ -279,7 +290,7 @@ class Application(object):
         zope.component.hooks.setHooks()
         context = zope.configuration.config.ConfigurationMachine()
         zope.configuration.xmlconfig.registerCommonDirectives(context)
-        zope.configuration.xmlconfig.include(context, package=zeit.web.core)
+        zope.configuration.xmlconfig.include(context, package=zeit.web)
         self.configure_connector(context)
         self.configure_overrides(context)
         context.execute_actions()
@@ -356,12 +367,16 @@ class Application(object):
         """
         return [
             ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
-            ('remove_asset_prefix', 'factory', '', {})
+            ('remove_asset_prefix', 'factory', '', {}),
+            ('bugsnag_notifier', 'factory', '', {})
         ]
 
     def remove_asset_prefix(self, app):
         return URLPrefixMiddleware(
             app, prefix=self.settings.get('asset_prefix', ''))
+
+    def bugsnag_notifier(self, app):
+        return bugsnag.wsgi.middleware.BugsnagMiddleware(app)
 
     def make_wsgi_app(self, global_config):
         app = self.config.make_wsgi_app()
@@ -419,6 +434,10 @@ def find_block(context, attrib='cp:__name__', **specs):
     You may also need to override the name of the uuid attribute using the
     attrib keyword.
     """
+    # XXX Maybe this would also work with IXMLReference?
+    # zope.component.queryAdapter(
+    #     context, zeit.cms.content.interfaces.IXMLReference, name='related')
+
     tpl = jinja2.Template("""
         .//*[{% for k, v in specs %}@{{ k }}="{{ v }}"{% endfor %}]/@{{ attr }}
     """)
@@ -562,6 +581,20 @@ class TraversableDynamic(TraversableCenterPage):
             tdict['view_name'] = ''
         finally:
             super(TraversableDynamic, self).__init__(context, tdict)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo, dict)
+class TraversableVideo(dict):
+
+    def __init__(self, context, tdict):
+        # XXX: Let's hope no video is ever called 'imagegroup'
+        #      or 'comment-form' or 'report-form'. (ND)
+        if tdict['view_name'] not in ('imagegroup', 'comment-form',
+                                      'report-form'):
+            tdict['request'].headers['X-SEO-Slug'] = tdict['view_name']
+            tdict['view_name'] = ''
+        super(TraversableVideo, self).__init__(tdict)
 
 
 # Monkey-patch so our content provides a marker interface,

@@ -35,8 +35,9 @@ def format_rfc822_date(date):
     return email.utils.formatdate(calendar.timegm(date.timetuple()))
 
 
-def last_published_semantic(content):
-    return zeit.web.core.view_centerpage.get_last_published_semantic(content)
+def last_published_semantic(context):
+    return zeit.cms.workflow.interfaces.IPublishInfo(
+        context).date_last_published_semantic
 
 
 @pyramid.view.view_config(
@@ -78,7 +79,8 @@ class SpektrumFeed(
                 'utm_campaign': 'feed',
                 'utm_content': '%s_bildtext_link_x' % normalized_title,
             })
-            content_url = zeit.web.core.template.create_url(content)
+            content_url = zeit.web.core.template.create_url(
+                None, content, self.request)
             # XXX Since this view will be accessed via newsfeed.zeit.de, we
             # cannot use route_url() as is, since it uses that hostname, which
             # is not the one we want. In non-production environments this
@@ -143,7 +145,8 @@ class SocialFeed(
         # available in the ICPFeed.
         for content in zeit.content.cp.interfaces.ITeaseredContent(
                 self.context):
-            content_url = zeit.web.core.template.create_url(content)
+            content_url = zeit.web.core.template.create_url(
+                None, content, self.request)
             # XXX Since this view will be accessed via newsfeed.zeit.de, we
             # cannot use route_url() as is, since it uses that hostname, which
             # is not the one we want. In non-production environments this

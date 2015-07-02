@@ -145,7 +145,7 @@ def test_not_renderable_content_object_should_trigger_restart(testserver):
     assert resp.headers['x-render-with'] == 'default'
 
 
-@zeit.web.core.decorator.JinjaEnvRegistrator('filters', '_c1')
+@zeit.web.core.decorator.JinjaEnvRegistrator('filters', category='_c1')
 def do_things(arg, kw1=42, kw2=45):
     """Docstrings document things."""
     return arg * (kw2 - kw1)
@@ -163,7 +163,7 @@ def test_safeguarded_jinja_modifier_should_preserve_func(debug_application):
     assert do_things('bar', kw2=4, kw1=2) == 'barbar'
 
 
-@zeit.web.core.decorator.JinjaEnvRegistrator('filters', '_c2')
+@zeit.web.core.decorator.JinjaEnvRegistrator('filters', category='_c2')
 def faulty_filter(*args):
     1 / 0
 
@@ -175,7 +175,7 @@ def test_faulty_jinja_filter_should_not_bother_friedbert(debug_application):
     assert tpl.render().strip() == 'foo'
 
 
-@zeit.web.core.decorator.JinjaEnvRegistrator('globals', '_c3')
+@zeit.web.core.decorator.JinjaEnvRegistrator('globals', category='_c3')
 def faulty_global(*args):
     1 / 0
 
@@ -187,7 +187,7 @@ def test_faulty_jinja_global_should_not_bother_friedbert(debug_application):
     assert tpl.render().strip() == 'foo'
 
 
-@zeit.web.core.decorator.JinjaEnvRegistrator('tests', '_c4')
+@zeit.web.core.decorator.JinjaEnvRegistrator('tests', category='_c4')
 def faulty_test(*args):
     1 / 0
 

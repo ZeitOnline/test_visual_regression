@@ -6,6 +6,7 @@ import uuid
 import grokcore.component
 import pyramid.response
 import pyramid.view
+import zope.interface
 import zope.component
 import zope.component.interfaces
 
@@ -22,14 +23,15 @@ import zeit.web.core.view
 import zeit.web.site.module.buzzbox
 import zeit.web.core.view_centerpage
 import zeit.web.site.area.spektrum
+import zeit.web.site.module
 import zeit.web.site.view
 
 
 log = logging.getLogger(__name__)
 
 
-@grokcore.component.implementer(zeit.edit.interfaces.IBlock)
-class LegacyModule(zeit.web.core.block.Module, zeit.web.core.utils.nslist):
+@zope.interface.implementer(zeit.edit.interfaces.IBlock)
+class LegacyModule(zeit.web.site.module.Module, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
         zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
@@ -47,7 +49,7 @@ class LegacyModule(zeit.web.core.block.Module, zeit.web.core.utils.nslist):
         return object.__repr__(self)
 
 
-@grokcore.component.implementer(zeit.content.cp.interfaces.IArea)
+@zope.interface.implementer(zeit.content.cp.interfaces.IArea)
 class LegacyArea(collections.OrderedDict, zeit.content.cp.area.AreaFactory):
 
     def __init__(self, arg, **kw):
@@ -76,13 +78,18 @@ class LegacyArea(collections.OrderedDict, zeit.content.cp.area.AreaFactory):
         return object.__repr__(self)
 
 
-@grokcore.component.implementer(zeit.content.cp.interfaces.IRegion)
+@zope.interface.implementer(zeit.content.cp.interfaces.IRegion)
 class LegacyRegion(LegacyArea, zeit.content.cp.area.RegionFactory):
 
     def __init__(self, arg, **kw):
         LegacyArea.__init__(self, arg, **kw)
 
 
+@grokcore.component.adapter(
+    zeit.content.cp.interfaces.IArea,
+    zeit.content.cp.interfaces.ITeaserBlock)
+@grokcore.component.implementer(
+    zeit.content.cp.interfaces.IRenderedArea)
 class RenderedLegacyArea(LegacyArea):
 
     def __init__(self, area, block):
@@ -303,12 +310,3 @@ class LegacyCenterpage(Centerpage):
                 regions.append(LegacyRegion([legacy], kind='parquet'))
 
         return regions
-
-
-# First of all: congrats for scrolling all the way down. Now that you've made
-# it this far, registering the RLA as a ZCA multiadapter with grokcore should
-# be a breeze for you #TodosFromHell #FIXME
-zope.component.getGlobalSiteManager().registerAdapter(
-    RenderedLegacyArea, (zeit.content.cp.interfaces.IArea,
-                         zeit.content.cp.interfaces.ITeaserBlock),
-    zeit.content.cp.interfaces.IRenderedArea)
