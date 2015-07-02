@@ -16,15 +16,13 @@ require([
     'web.site/video/videoStage',
     'web.site/articledate',
     'web.site/articlesharing',
-    'web.site/comments',
-    'web.site/teaser/galleryTeaser'
-], function( images, videoStage, articledate, articlesharing, comments, galleryTeaser ) {
+    'web.site/comments'
+], function( images, videoStage, articledate, articlesharing, comments ) {
     images.init();
     videoStage.init();
     articledate.init();
     articlesharing.init();
     comments.init();
-    galleryTeaser.init();
 });
 
 // add required jQuery plugins
@@ -45,7 +43,8 @@ require([
     'web.site/plugins/jquery.toggleBeta',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
-    'web.site/plugins/jquery.up2dateSignals'
+    'web.site/plugins/jquery.up2dateSignals',
+    'web.site/plugins/jquery.galleryTeaser'
 ], function( $ ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         article = $( '#js-article' );
@@ -75,4 +74,6 @@ require([
     $( '.search-form' ).searchTools();
     // beta
     $( '#beta-toggle' ).toggleBeta();
+
+    $( '.js-gallery-teaser-shuffle' ).loadGalleryTeasers();
 });
