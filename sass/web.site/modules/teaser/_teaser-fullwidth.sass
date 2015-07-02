@@ -52,14 +52,23 @@
 			width: em(640px)
 	&__heading
 		@extend %teaser-heading
+
 	&__kicker
 		@extend %teaser-kicker
+		margin-bottom: remify(10px)
+		&--blog
+			color: $zon_dark_grey
+			font-family: $font-franziska
+			font-size: remify(14px)
+			font-style: italic
+			font-weight: normal
 		+respond-min($break-tablet-min)
 			color: $white
-			font-size: $font-s
+			font-size: remify(14px)
 			letter-spacing: 0.12em
 			margin-bottom: remify(6px)
 			+font-smoothing()
+
 	&__title
 		@extend %teaser-title
 		font-size: em(28px)

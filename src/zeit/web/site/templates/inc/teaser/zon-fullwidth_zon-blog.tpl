@@ -10,3 +10,7 @@
 		</span>
 	</div>
 {% endblock %}
+
+{% block teaser_kicker %}
+	<span class="{{ self.layout() }}__kicker {{ self.layout() }}__kicker--blog">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
+{% endblock %}
