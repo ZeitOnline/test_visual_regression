@@ -5,11 +5,13 @@
 
 .teaser-gallery-group
 	&__container
-		// flexbox for same height
+		margin-bottom: remify(10px)
 		+respond-min($break-tablet-min)
+			margin-bottom: remify(20px)
+			// flexbox for same height
 			+display-flex
 
-	&__shuffle-button
+	&__button
 		background-color: $white
 		display: block
 		margin: 0 auto

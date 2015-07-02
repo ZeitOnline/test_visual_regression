@@ -15,9 +15,10 @@
 	&--topic
 		padding: 0
 	&--gallery
+		background-color: $zon_lighter_grey
 		border-top: 1px solid $zon_light_grey
-		margin-bottom: 0
-		padding: 0
+		padding-top: remify(20px)
+		padding-bottom: remify(40px)
 
 .cp-area
 	padding: 0 $cp-padding
@@ -26,16 +27,19 @@
 	&--parquet,
 	&--spektrum,
 	&--topic
-		padding: 0
+		padding-left: 0
+		padding-right: 0
 		position: relative
+	&--parquet
+		+respond-min($break-tablet-min)
+			border-top: 1px solid $zon_light_grey
+	&--spektrum
+		padding-top: remify(60px)
 	&--ranking
 		float: none
 		max-width: remify(660px)
 		margin-left: auto
 		margin-right: auto
-	&--gallery
-		background-color: $zon_lighter_grey
-		padding: remify(20px)
 	+respond-min($break-areas)
 		&--major
 			width: 66.66%

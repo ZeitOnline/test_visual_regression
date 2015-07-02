@@ -26,7 +26,7 @@
 {% block after_module_list %}
   <button
     type="button"
-    class="button {{ module_layout }}-group__shuffle-button js-gallery-teaser-shuffle"
+    class="button {{ module_layout }}-group__button js-gallery-teaser-shuffle"
     {# The random segment in the url below is supposed to generate ten (somewhat)
     different versions of this area that will still be varnish-cacheable.
     The actual value will be set via JS just before the request. #}
