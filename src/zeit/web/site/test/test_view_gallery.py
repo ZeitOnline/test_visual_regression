@@ -63,44 +63,45 @@ def test_zon_gallery_teaser_on_homepage_should_have_two_correct_teasers(
     assumed_number_of_teasers = 2
 
     select = testbrowser('{}/index'.format(testserver.url)).cssselect
-    teasers = select('.cp-area--gallery .zon-gallery')
+    teasers = select('.cp-area--gallery .teaser-gallery')
 
     assert len(teasers) == assumed_number_of_teasers
 
     assert(
-        len(select('.zon-gallery > .zon-gallery__figurewrapper'))
+        len(select('.teaser-gallery > .teaser-gallery__figurewrapper'))
     ) == assumed_number_of_teasers
 
     assert(
-        len(select('.zon-gallery__figurewrapper > .zon-gallery__media'))
+        len(select('.teaser-gallery__figurewrapper > .teaser-gallery__media'))
     ) == assumed_number_of_teasers
 
     assert(
-        len(select('.zon-gallery__figurewrapper > .zon-gallery__icon'))
+        len(select('.teaser-gallery__figurewrapper > .teaser-gallery__icon'))
     ) == assumed_number_of_teasers
 
     assert(
-        len(select('.zon-gallery__figurewrapper > .zon-gallery__counter'))
+        len(select(
+            '.teaser-gallery__figurewrapper > .teaser-gallery__counter'))
     ) == assumed_number_of_teasers
 
     assert(
-        len(select('.zon-gallery > .zon-gallery__container'))
+        len(select('.teaser-gallery > .teaser-gallery__container'))
     ) == assumed_number_of_teasers
 
     assert(
-        len(select('.zon-gallery__container > .zon-gallery__heading'))
+        len(select('.teaser-gallery__container > .teaser-gallery__heading'))
     ) == assumed_number_of_teasers
 
     assert(len(select(
-        '.zon-gallery__heading > a > .zon-gallery__kicker'))
+        '.teaser-gallery__heading > a > .teaser-gallery__kicker'))
     ) == assumed_number_of_teasers
 
     assert(len(select(
-        '.zon-gallery__heading > a > .zon-gallery__title'))
+        '.teaser-gallery__heading > a > .teaser-gallery__title'))
     ) == assumed_number_of_teasers
 
     assert(
-        len(select('.zon-gallery__container > .zon-gallery__text'))
+        len(select('.teaser-gallery__container > .teaser-gallery__text'))
     ) == assumed_number_of_teasers
 
 
@@ -112,9 +113,9 @@ def test_zon_gallery_teaser_on_homepage_should_hide_elements_on_mobile(
     ressort_linktext = driver.find_element_by_css_selector(
         '.cp-ressort-heading__readmore-linktext')
     gallery_counter = driver.find_element_by_css_selector(
-        '.zon-gallery__counter')
+        '.teaser-gallery__counter')
     gallery_text = driver.find_element_by_css_selector(
-        '.zon-gallery__text')
+        '.teaser-gallery__text')
 
     driver.set_window_size(480, 600)
     assert not ressort_linktext.is_displayed(), (

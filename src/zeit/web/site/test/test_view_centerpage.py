@@ -821,7 +821,7 @@ def test_centerpage_area_should_render_in_isolation(testbrowser, testserver):
                           '750b0bf96812'.format(testserver.url))
     select = browser.cssselect
     assert len(select('div.cp-area.cp-area--gallery')) == 1
-    assert len(select('article.zon-gallery')) == 2
+    assert len(select('article.teaser-gallery')) == 2
 
 
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
