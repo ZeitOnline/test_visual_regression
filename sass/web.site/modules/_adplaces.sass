@@ -7,17 +7,18 @@
 	max-width: 940px
 	margin: 0 auto
 	padding: $little 0
-
+%label
+	color: $zon_mid_grey
+	font-family: $font-tabletgothic
+	font-size: remify(9px)
+	letter-spacing: remify(1.5px)
+	line-height: remify(10px)
+	margin-bottom: remify(10px)
+	text-align: right
+	text-transform: uppercase
 .ad
 	&__label
-		color: $zon_mid_grey
-		font-family: $font-tabletgothic
-		font-size: remify(9px)
-		letter-spacing: remify(1.5px)
-		line-height: remify(10px)
-		margin-bottom: remify(10px)
-		text-align: right
-		text-transform: uppercase
+		@extend %label
 		&--tile_3,
 		&--tile_12
 			text-align: right
@@ -40,9 +41,30 @@
 			margin-top: remify(15px)
 		+respond_min($break-desktop-min)
 			display: block
+	// fuck you iqd: centering of content of unknowable width
+	// and positioning of adlabel
 	&--tile_5-on-article
-		margin: remify(30px) auto
-		width: 400px
+		display: table
+		vertical-align: middle
+		width: 100%
+		// hide original label cause we cannot position it
+		.ad__label
+			display: none
+		// uses code by iqd, may break tomorrow
+		div[id*="__container__"]
+			display: table-cell
+			padding-top: remify(15px)
+			position: relative
+			text-align: center
+			& > iframe[id^="google_ads_iframe"]
+				display: inline-block
+				margin: 0 auto
+		div[id*="__container__"]:after
+			@extend %label
+			content: "Anzeige"
+			margin-left: remify(-45px)
+			position: absolute
+			top: 0
 	&--tile_7-on-article
 		clear: both
 		+respond_min($break-desktop-min)
