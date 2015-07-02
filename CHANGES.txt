@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - ZON-1856: Upgrade buzz integration to API version 2.0
 
+- FIX: Ignore authors without display_name instead of crashing
+
 
 1.36 (2015-06-26)
 -----------------
