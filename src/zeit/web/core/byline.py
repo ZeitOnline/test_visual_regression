@@ -1,144 +1,132 @@
 # -*- coding: utf-8 -*-
+import itertools
 
 import grokcore.component
 import zope.interface
 
 import zeit.content.article.interfaces
+import zeit.content.cp.interfaces
 import zeit.content.link.interfaces
 
 import zeit.web
 
 
-class IRenderByline(zope.interface.Interface):
-
-    """A string representation of information on
-    author, genre, location of a ICMSContent resource
+class ITeaserByline(zope.interface.Interface):
+    """A string representation of information on author, genre, location of a
+    ICMSContent resource to be displayed in a teaser context.
     """
 
 
-@zeit.web.register_filter
-def render_byline(resource):
-    """Extract a natural language byline composited of authors and locations.
-    The returned object sports an __html__ method and is jinja serializable.
-
-    :param article: Article providing zeit.content.article.IArticle
-    :rtype: zeit.web.core.byline.IRenderByline
+class IContentByline(zope.interface.Interface):
+    """A string representation of information on author, genre, location of a
+    ICMSContent resource to be displayed on a content page.
     """
-    try:
-        return unicode(IRenderByline(resource))
-    except TypeError:
-        return ''
 
 
-@grokcore.component.implementer(IRenderByline)
-@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
-class RenderByline(object):
-    # ToDo: This should be configured by a XMLSource
-    # So far the given Simple-XML-Source in vivi does not offer
-    # what we need.
-    genre = ['glosse', 'reportage', 'nachricht', 'analyse']
-    display_fe = ['glosse', 'kommentar', 'leserartikel', 'gastbeitrag',
-                  'interview']
+@zeit.web.register_ctxfilter
+def get_byline(context, content):
+    """Natural language byline for centerpage teasers and article heads."""
+    context = getattr(context.get('view'), 'context')
+    if zeit.content.cp.interfaces.ICenterPage.providedBy(context):
+        return ITeaserByline(content, ())
+    return IContentByline(content, ())
 
-    def eine_n(self, x):
-        return 'Eine ' if x in self.genre else 'Ein '
 
-    def __init__(self, content):
-        self.byline = []
-        self._genre(content)
-        self._von(content)
-        self._interview_exception(content)
-        self._author_str(content)
+class Byline(list):
 
-    def __unicode__(self):
-        return ''.join(unicode(x[0]) + x[1] if isinstance(x, tuple)
-                       else str(x) for x in self.byline)
+    # TODO: This should be configured by an XMLSource. So far the given
+    # Simple-XML-Source in vivi does not offer what we need.
 
-    def __str__(self):
-        return unicode(self.byline).encode('utf-8')
+    genres = {'glosse': 'eine',
+              'kommentar': 'ein',
+              'leserartikel': 'ein',
+              'gastbeitrag': 'ein',
+              'interview': 'ein'}
 
-    def __html__(self):
-        return unicode(self.byline)
+    def __init__(self, context):
+        super(Byline, self).__init__()
+        self.context = context
+        self.genre()
+        self.from_()
+        self.interview()
+        self.groups()
 
-    def _genre(self, content):
-        if getattr(content, 'genre', '') in self.display_fe:
-            self.byline.append(self.eine_n(content.genre))
-            self.byline.append(content.genre.title() + ' ')
+    # def __repr__(self):
+    #     return object.__repr__(self)
 
-    def _von(self, content):
-        if self.byline:
-            self.byline.append('von ')
-        else:
-            self.byline.append('Von ')
+    def genre(self):
+        if getattr(self.context, 'genre', None) in self.genres:
+            prefix = self.genres.get(self.context.genre, 'ein')
+            genre = u'{} {}'.format(prefix, self.context.genre).title()
+            self.append(('text', genre))
 
-    def _interview_exception(self, content):
-        if (getattr(content, 'genre', '') in self.display_fe and
-                getattr(content, 'genre', '') == 'interview'):
-            self.byline = ['%s: ' % content.genre.title()]
+    def from_(self):
+        self.append(('text', u'von' if self else u'Von'))
 
-    def _author_str(self, content):
-        authors = filter(lambda a: a is not None, content.authorships)
+    def interview(self):
+        if getattr(self.context, 'genre', None) == 'interview':
+            # Replace any prior byline efforts with a special interview label.
+            self[:] = [('text', u'{}:'.format(self.context.genre.title()))]
 
-        if not authors:  # we don't have a byline, if we have no authors for it
-            self.byline = []
+    @staticmethod
+    def expand_authors(authors):
+        for author in authors:
+            yield 'text', author.target.display_name
+
+    def groups(self):
+        authors, groups = filter(bool, self.context.authorships), ()
+
+        if not authors:
+            self[:] = []  # Bail out if we don't have any authors.
             return
 
-        authors_str, authors_location = self._author_location_list(authors)
-        zipped = zip(authors_str, authors_location)
+        def get_loc(author):
+            return author.location or None
 
-        # insert punctation and remove last ', '
-        punctation = [', ' for x in authors_str]
-        zipped = list(sum(zip(zipped, punctation), ()))[:-1]
+        cluster = itertools.groupby(sorted(authors, key=get_loc), get_loc)
+        for location, sublist in cluster:
+            group = ('enum', tuple(self.expand_authors(sublist)))
+            if location:
+                group = ('csv', (group, ('text', location)))
+            groups += (group,)
 
-        # insert conjunction
-        if len(zipped) > 1:
-            zipped[-2] = ' und '  # whitespace is relevant
-
-        # append authors list to byline
-        self.byline += zipped
-
-    def _author_location_list(self, authors):
-        authors_str = [Author(a) for a in authors]
-        authors_loc = [', ' + author.location if author.location else ''
-                       for author in authors]
-
-        if len(set(authors_loc)) == 1:
-            authors_loc = (['' for x in range(len(authors_loc) - 1)] +
-                           [authors_loc[0]])
-
-        assert len(authors_str) == len(authors_loc)
-        return authors_str, authors_loc
+        self.append(('enum', groups))
 
 
-@grokcore.component.implementer(IRenderByline)
-@grokcore.component.adapter(zeit.content.link.interfaces.ILink)
-class RenderLinkByline(RenderByline):
-
-    def __init__(self, content):
-        self.byline = []
-        self._von(content)
-        self._interview_exception(content)
-        self._author_str(content)
-
-
-@grokcore.component.implementer(IRenderByline)
-@grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery)
-class RenderGalleryByline(RenderByline):
+@grokcore.component.implementer(ITeaserByline)
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
+class ArticleTeaserByline(Byline):
     pass
 
 
-class Author(object):
+@grokcore.component.implementer(ITeaserByline)
+@grokcore.component.adapter(zeit.content.link.interfaces.ILink)
+class LinkTeaserByline(Byline):
 
-    def __init__(self, obj):
+    def __init__(self, context):
+        super(Byline, self).__init__()
+        self.context = context
+        self.from_()
+        self.interview()
+        self.groups()
 
-        self.name = obj.target.display_name
-        self.href = obj.target.uniqueId
 
-    def __unicode__(self):
-        return self.name
+@grokcore.component.implementer(ITeaserByline)
+@grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery)
+class GalleryTeaserByline(Byline):
+    pass
 
-    def __str__(self):
-        return unicode(self.name).encode('utf-8')
 
-    def render(self, html):
-        return html.format((self.name, self.uniqueId))
+@grokcore.component.implementer(IContentByline)
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
+class ArticleContentByline(Byline):
+
+    genres = {'leserartikel': 'ein'}
+
+    @staticmethod
+    def expand_authors(authors):
+        for author in authors:
+            if author.target.uniqueId:
+                yield 'linked_author', author.target
+            else:
+                yield 'plain_author', author.target
