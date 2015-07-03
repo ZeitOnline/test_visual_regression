@@ -70,6 +70,8 @@ class Application(object):
             'enable_trackers', True))
         settings['enable_iqd'] = bool(settings.get(
             'enable_iqd', True))
+        settings['linkreach_host'] = maybe_convert_egg_url(
+            settings.get('linkreach_host', ''))
 
         interface = zeit.web.core.interfaces.ISettings
         zope.interface.declarations.alsoProvides(settings, interface)
@@ -148,9 +150,6 @@ class Application(object):
     def configure_pyramid(self):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
-
-        self.settings['linkreach_host'] = maybe_convert_egg_url(
-            self.settings.get('linkreach_host', ''))
 
         version = pkg_resources.get_distribution('zeit.web').version
         self.settings['version'] = version
