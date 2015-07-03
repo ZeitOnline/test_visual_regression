@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-1856: Upgrade buzz integration to API version 2.0
 
+- ZON-1695: Integrate single sign on into friedbert
+
 - MAINT: Drop vivi-internal preview capabilities
 
 - MAINT: Re-locate base module class to zeit.web.site.module
