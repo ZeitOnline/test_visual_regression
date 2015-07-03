@@ -31,6 +31,7 @@ def test_comments_template_respects_metadata(jinja2_env, testserver):
     view = zeit.web.magazin.view_article.Article(content, request)
     view.content_url = url
     view.show_commentthread = False
+    view.linkreach = {}
     string = comments.render(view=view, request=request)
 
     assert string.strip() == '', (
