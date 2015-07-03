@@ -20,27 +20,23 @@ def screen_size(request):
     return request.param
 
 
-def test_article_should_render_full_view(testserver, testbrowser):
-    article_path = '{}/zeit-online/article/zeit{}'
-    browser = testbrowser(article_path.format(
-        testserver.url, '/komplettansicht'))
+def test_article_should_render_full_view(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
     article = zeit.cms.interfaces.ICMSContent(
-        article_path.format('http://xml.zeit.de', ''))
+        'http://xml.zeit.de/zeit-online/article/zeit')
     assert len(browser.cssselect(
         '.article-page > p.paragraph')) == article.paragraphs
 
 
-def test_article_full_view_has_no_pagination(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/article/zeit/komplettansicht'.format(
-        testserver.url)).cssselect
+def test_article_full_view_has_no_pagination(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
 
     assert len(select('.summary, .byline, .metadata')) == 3
     assert len(select('.article-pagination')) == 0
 
 
-def test_article_with_pagination(testbrowser, testserver):
-    browser = testbrowser('{}/zeit-online/article/zeit'.format(testserver.url))
-    select = browser.cssselect
+def test_article_with_pagination(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit').cssselect
     nexttitle = select('.article-pagination__nexttitle')
     numbers = select('.article-pager__number')
 
@@ -54,9 +50,8 @@ def test_article_with_pagination(testbrowser, testserver):
     assert '--current' in (numbers[0].get('class'))
 
 
-def test_article_pagination_active_state(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/article/zeit/seite-3'.format(
-        testserver.url)).cssselect
+def test_article_pagination_active_state(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/seite-3').cssselect
 
     assert len(select('.summary, .byline, .metadata')) == 0
     assert select('.article__page-teaser')[0].text.strip() == (
@@ -66,97 +61,91 @@ def test_article_pagination_active_state(testbrowser, testserver):
     assert '--current' in (select('.article-pager__number')[2].get('class'))
 
 
-def test_breaking_news_article_renders_breaking_bar(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/article/eilmeldungsartikel'.format(
-        testserver.url)).cssselect
+def test_fresh_breaking_news_article_renders_breaking_bar(testbrowser):
+    browser = testbrowser('/zeit-online/article/eilmeldungsartikel')
 
-    assert len(select('.breaking-news-banner')) == 1
-    assert len(select('.breaking-news-heading')) == 1
+    assert len(browser.cssselect('.breaking-news-banner')) == 1
+    assert len(browser.cssselect('.breaking-news-heading')) == 1
 
 
-def test_schema_org_main_content_of_page(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/article/01'.format(
-        testserver.url)).cssselect
+def test_stale_breaking_news_article_renders_breaking_bar(testbrowser):
+    browser = testbrowser('/zeit-online/article/alte-eilmeldung')
+
+    assert len(browser.cssselect('.breaking-news-banner')) == 0
+    assert len(browser.cssselect('.breaking-news-heading')) == 0
+
+
+def test_schema_org_main_content_of_page(testbrowser):
+    select = testbrowser('/zeit-online/article/01').cssselect
 
     assert len(select('main[itemprop="mainContentOfPage"]')) == 1
 
 
-def test_schema_org_article(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/article/01'.format(
-        testserver.url)).cssselect
+def test_schema_org_article(testbrowser):
+    select = testbrowser('/zeit-online/article/01').cssselect
 
     assert len(select(
         'article[itemtype="http://schema.org/Article"][itemscope]')) == 1
 
 
-def test_schema_org_headline(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/article/01'.format(
-        testserver.url)).cssselect
+def test_schema_org_headline(testbrowser):
+    select = testbrowser('/zeit-online/article/01').cssselect
     headline = select('h1[itemprop="headline"]')
     text = u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?'
     assert len(headline) == 1
     assert text in headline[0].text_content()
 
 
-def test_schema_org_description(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/article/01'.format(
-        testserver.url)).cssselect
+def test_schema_org_description(testbrowser):
+    select = testbrowser('/zeit-online/article/01').cssselect
 
     assert len(select('div[itemprop="description"]')) == 1
 
 
-def test_schema_org_author(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/article/01'.format(
-        testserver.url)).cssselect
+def test_schema_org_author(testbrowser):
+    select = testbrowser('/zeit-online/article/01').cssselect
 
     assert len(select('.byline[itemprop="author"]')) == 1
     assert len(select('.byline a[itemprop="url"]')) == 1
     assert len(select('.byline span[itemprop="name"]')) == 1
 
 
-def test_schema_org_article_body(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/article/01'.format(
-        testserver.url)).cssselect
+def test_schema_org_article_body(testbrowser):
+    select = testbrowser('/zeit-online/article/01').cssselect
 
     assert len(select('.article-body[itemprop="articleBody"]')) == 1
 
 
-def test_schema_org_image(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/article/01'.format(
-        testserver.url)).cssselect
+def test_schema_org_image(testbrowser):
+    select = testbrowser('/zeit-online/article/01').cssselect
     json = 'article > script[type="application/ld+json"]'
     assert len(select(json)) == 1
 
 
-def test_multipage_article_should_designate_meta_pagination(
-        testbrowser, testserver):
-    browser = testbrowser('{}/zeit-online/article/zeit'.format(
-        testserver.url))
+def test_multipage_article_should_designate_meta_pagination(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
     assert not browser.xpath('//head/meta[@rel="prev"]')
     href = browser.xpath('//head/meta[@rel="next"]')[0].attrib.get('href')
     assert href.endswith('zeit-online/article/zeit/seite-2')
 
-    browser = testbrowser('{}/zeit-online/article/zeit/seite-2'.format(
-        testserver.url))
+    browser = testbrowser('/zeit-online/article/zeit/seite-2')
     href = browser.xpath('//head/meta[@rel="prev"]')[0].attrib.get('href')
     assert href.endswith('zeit-online/article/zeit')
     href = browser.xpath('//head/meta[@rel="next"]')[0].attrib.get('href')
     assert href.endswith('zeit-online/article/zeit/seite-3')
 
-    browser = testbrowser('{}/zeit-online/article/zeit/seite-5'.format(
-        testserver.url))
+    browser = testbrowser('/zeit-online/article/zeit/seite-5')
     href = browser.xpath('//head/meta[@rel="prev"]')[0].attrib.get('href')
     assert href.endswith('zeit-online/article/zeit/seite-4')
     assert not browser.xpath('//head/meta[@rel="next"]')
 
 
-def test_other_page_types_should_not_designate_meta_pagination(
-        testbrowser, testserver):
-    browser = testbrowser('{}/zeit-online/article/01'.format(testserver.url))
+def test_other_page_types_should_not_designate_meta_pagination(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
     assert not browser.xpath('//head/meta[@rel="prev"]')
     assert not browser.xpath('//head/meta[@rel="next"]')
 
-    browser = testbrowser('{}/zeit-online/index'.format(testserver.url))
+    browser = testbrowser('/zeit-online/index')
     assert not browser.xpath('//head/meta[@rel="prev"]')
     assert not browser.xpath('//head/meta[@rel="next"]')
 
@@ -174,15 +163,14 @@ def test_article_obfuscated_source_without_date_print_published():
 
 
 def test_article_sharing_menu_should_open_and_close(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.set_window_size(320, 480)
-    driver.get('%s/zeit-online/article/01' % testserver.url)
+        testserver, selenium_driver):
+    selenium_driver.set_window_size(320, 480)
+    selenium_driver.get('{}/zeit-online/article/01'.format(testserver.url))
 
     sharing_menu_selector = '.sharing-menu > .sharing-menu__items'
-    sharing_menu_target = driver.find_element_by_css_selector(
+    sharing_menu_target = selenium_driver.find_element_by_css_selector(
         '.sharing-menu > .sharing-menu__title.js-sharing-menu')
-    sharing_menu_items = driver.find_element_by_css_selector(
+    sharing_menu_items = selenium_driver.find_element_by_css_selector(
         sharing_menu_selector)
 
     assert sharing_menu_items.is_displayed() is False, (
@@ -197,19 +185,19 @@ def test_article_sharing_menu_should_open_and_close(
     # so the sharing menu is actually hidden
     condition = EC.invisibility_of_element_located((
         By.CSS_SELECTOR, sharing_menu_selector))
-    assert WebDriverWait(driver, 1).until(condition), (
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition), (
         'sharing menu should hide again on click')
 
 
 def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.set_window_size(768, 800)
-    driver.get('%s/zeit-online/article/01' % testserver.url)
+        testserver, selenium_driver):
+    selenium_driver.set_window_size(768, 800)
+    selenium_driver.get('{}/zeit-online/article/01'.format(testserver.url))
 
-    sharing_menu_target = driver.find_element_by_css_selector(
+    sharing_menu_target = selenium_driver.find_element_by_css_selector(
         '.sharing-menu > .sharing-menu__title.js-sharing-menu')
-    whatsapp_item = driver.find_element_by_css_selector(
+    whatsapp_item = selenium_driver.find_element_by_css_selector(
         '.sharing-menu__item--whatsapp')
 
     sharing_menu_target.click()
@@ -217,8 +205,8 @@ def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
         'Sharing link to WhatsApp should be hidden on tablet & desktop')
 
 
-def test_article_sharing_links_should_be_url_encoded(testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+def test_article_sharing_links_should_be_url_encoded(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
     # it's hard to check for url-encodedness,
     # but checking for unencoded spaces nearly should do the trick
     spacey_sharing_links = browser.cssselect(
@@ -226,20 +214,18 @@ def test_article_sharing_links_should_be_url_encoded(testbrowser, testserver):
     assert len(spacey_sharing_links) == 0
 
 
-def test_infobox_in_article_is_shown(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/article/infoboxartikel'.format(
-        testserver.url)).cssselect
+def test_infobox_in_article_is_shown(testbrowser):
+    select = testbrowser('/zeit-online/article/infoboxartikel').cssselect
     assert len(select('aside#sauriersindsuper.infobox')) == 1
     assert len(select('#sauriersindsuper .infobox-tab__title')) == 6
 
 
-def test_infobox_mobile_actions(selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/article/infoboxartikel' % testserver.url)
-    infobox = driver.find_element_by_id('sauriersindsuper')
-    tabnavigation = infobox.find_elements_by_class_name(
-        'infobox__navigation')[0]
+def test_infobox_mobile_actions(testserver, selenium_driver, screen_size):
+    selenium_driver.set_window_size(screen_size[0], screen_size[1])
+    selenium_driver.get('{}/zeit-online/article/infoboxartikel'.format(
+        testserver.url))
+    infobox = selenium_driver.find_element_by_id('sauriersindsuper')
+    tabnavigation = infobox.find_elements_by_class_name('infobox__navigation')
     tabpanels = infobox.find_elements_by_class_name('infobox-tab__content')
     clicker = infobox.find_elements_by_css_selector(
         '.infobox-tab .infobox-tab__title')
@@ -247,7 +233,7 @@ def test_infobox_mobile_actions(selenium_driver, testserver, screen_size):
     assert infobox.is_displayed(), 'Infobox missing'
 
     if screen_size[0] == 320 or screen_size[0] == 520:
-        assert not tabnavigation.is_displayed(), 'Mobile not accordion'
+        assert not tabnavigation[0].is_displayed(), 'Mobile not accordion'
         assert tabpanels[0].get_attribute('aria-hidden') == 'true'
         assert tabpanels[1].get_attribute('aria-hidden') == 'true'
         assert tabpanels[2].get_attribute('aria-hidden') == 'true'
@@ -266,11 +252,11 @@ def test_infobox_mobile_actions(selenium_driver, testserver, screen_size):
         assert tabpanels[0].get_attribute('aria-hidden') == 'true'
 
 
-def test_infobox_desktop_actions(selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/article/infoboxartikel' % testserver.url)
-    infobox = driver.find_element_by_id('sauriersindsuper')
+def test_infobox_desktop_actions(testserver, selenium_driver, screen_size):
+    selenium_driver.set_window_size(screen_size[0], screen_size[1])
+    selenium_driver.get('{}/zeit-online/article/infoboxartikel'.format(
+        testserver.url))
+    infobox = selenium_driver.find_element_by_id('sauriersindsuper')
     tabnavigation = infobox.find_elements_by_class_name(
         'infobox__navigation')[0]
     tabpanels = infobox.find_elements_by_class_name('infobox-tab__content')
@@ -344,29 +330,25 @@ def test_adcontroller_values_return_values_on_article(application):
     assert adcv == view.adcontroller_values
 
 
-def test_article_view_renders_alldevices_raw_box(
-        testbrowser, testserver):
-    browser = testbrowser('{}/zeit-online/article/02'.format(testserver.url))
+def test_article_view_renders_alldevices_raw_box(testbrowser):
+    browser = testbrowser('/zeit-online/article/02')
     assert 'fVwQok9xnLGOA' in browser.contents
 
 
-def test_article_skips_raw_box_not_suitable_for_alldevices(
-        testbrowser, testserver):
-    browser = testbrowser('{}/zeit-online/article/02'.format(testserver.url))
+def test_article_skips_raw_box_not_suitable_for_alldevices(testbrowser):
+    browser = testbrowser('/zeit-online/article/02')
     assert 'cYhaIIyjjxg1W' not in browser.contents
 
 
-def test_nextread_is_placed_on_article_02(testserver, testbrowser):
-    select = testbrowser('{}/zeit-online/article/02'.format(
-        testserver.url)).cssselect
-    assert len(select('div#nextread')) == 1
+def test_nextread_is_placed_on_article_02(testbrowser):
+    browser = testbrowser('/zeit-online/article/02')
+    assert len(browser.cssselect('div#nextread')) == 1
 
 
-def test_nextread_is_responsive(selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/article/02' % testserver.url)
-    nextread = driver.find_element_by_id('nextread')
+def test_nextread_is_responsive(testserver, selenium_driver, screen_size):
+    selenium_driver.set_window_size(screen_size[0], screen_size[1])
+    selenium_driver.get('{}/zeit-online/article/02'.format(testserver.url))
+    nextread = selenium_driver.find_element_by_id('nextread')
 
     assert nextread.is_displayed(), 'Nextread missing'
 
@@ -392,16 +374,13 @@ def test_zon_nextread_teaser_block_has_teasers_available(application):
     assert nextread[0].uniqueId.endswith('/zeit-online/article/01')
 
 
-def test_article_column_should_have_no_body_image(testserver, testbrowser):
-    browser = testbrowser('{}/zeit-online/cp-content/kolumne'.format(
-        testserver.url))
+def test_article_column_should_have_no_body_image(testbrowser):
+    browser = testbrowser('/zeit-online/cp-content/kolumne')
     assert not browser.cssselect('.article-body img')
 
 
-def test_article_column_author_image_should_be_present(
-        testserver, testbrowser):
-    browser = testbrowser('{}/zeit-online/cp-content/kolumne'.format(
-        testserver.url))
+def test_article_column_author_image_should_be_present(testbrowser):
+    browser = testbrowser('/zeit-online/cp-content/kolumne')
     img = browser.cssselect(
         '.column-heading__author .column-heading__media-item')
     ratio = img[0].get('data-ratio')
@@ -410,8 +389,7 @@ def test_article_column_author_image_should_be_present(
 
 
 def test_article_column_should_be_identifiable_by_suitable_css_class(
-        testbrowser, testserver):
-    browser = testbrowser('{}/zeit-online/cp-content/kolumne'.format(
-        testserver.url))
+        testbrowser):
+    browser = testbrowser('/zeit-online/cp-content/kolumne')
     assert browser.cssselect('.article.article--columnarticle')
     assert browser.cssselect('.article-body.article-body--columnarticle')

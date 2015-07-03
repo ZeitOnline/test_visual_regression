@@ -1,8 +1,12 @@
+import datetime
 import logging
 
 from pyramid.view import view_config
 from pyramid.view import view_defaults
+import babel.dates
+import zope.component
 
+import zeit.cms.workflow.interfaces
 import zeit.connector.connector
 import zeit.connector.interfaces
 import zeit.content.article.edit.interfaces
@@ -14,6 +18,7 @@ import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.interfaces
 import zeit.web.core.template
+import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_article
 
@@ -51,12 +56,20 @@ class CommentForm(Article):
 
 
 def is_breaking_news(context, request):
-    return zeit.content.article.interfaces.IBreakingNews(context).is_breaking
+    breaking = zeit.content.article.interfaces.IBreakingNews(context, None)
+    if not (breaking and breaking.is_breaking):
+        return False
+    now = datetime.datetime.now(babel.dates.get_timezone('Europe/Berlin'))
+    info = zeit.cms.workflow.interfaces.IPublishInfo(context, None)
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    seconds = zeit.web.core.utils.to_int(conf.get('breaking_news_timeout'))
+    threshold = datetime.timedelta(seconds=seconds)
+    return info and (now - info.date_first_released) < threshold
 
 
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
                                 is_breaking_news),
-             renderer='templates/breaking_news_article.html')
+             renderer='templates/article_breaking.html')
 class BreakingNews(Article):
     pass
 

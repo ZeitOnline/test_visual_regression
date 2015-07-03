@@ -649,7 +649,7 @@ class BreakingNews(object):
 
     def __init__(self):
         bn_path = zope.component.getUtility(
-            zeit.web.core.interfaces.ISettings).get('breaking_news')
+            zeit.web.core.interfaces.ISettings).get('breaking_news_config')
         try:
             bn_banner_content = zeit.cms.interfaces.ICMSContent(bn_path)
         except TypeError:
