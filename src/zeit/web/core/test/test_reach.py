@@ -63,4 +63,4 @@ def test_counts_per_url_are_fetchable(application):
 def test_non_ascii_url_fails_gracefully(application):
     reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
     data = reach.get_buzz(u'http://xml.zeit.de/ümläut')
-    assert data == {}
+    assert data.get('score') == 3.535
