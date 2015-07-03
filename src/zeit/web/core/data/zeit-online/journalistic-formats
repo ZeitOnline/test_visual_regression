@@ -68,20 +68,20 @@
   </head>
   <body>
     <title>ZEIT ONLINE Startseite</title>
-    <cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher">
+    <cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher">
       <region visible="True" hide-dupes="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
         <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-fullwidth" visible="True">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/blogs/nsu-blog-bouffier" uniqueId="http://xml.zeit.de/blogs/nsu-blog-bouffier" year="2015" issue="8" ressort="Gesellschaft" contenttype="link" publication-date="" expires="" ns0:href="http://blog.zeit.de/nsu-prozess-blog/2015/02/25/medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/" date-last-modified="2015-02-25T07:29:19+00:00" date-first-released="2015-02-25T07:29:54.791058+00:00" date-last-published="2015-02-25T07:30:19.241979+00:00" last-semantic-change="2015-02-25T07:28:33.069549+00:00" author="Tom Sundermann"/>
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
         </container>
       </region>
     </cluster>
     <cluster visible="True" area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
       <region visible="True" hide-dupes="True" area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
         <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-large" visible="True">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/blogs/nsu-blog-bouffier" uniqueId="http://xml.zeit.de/blogs/nsu-blog-bouffier" year="2015" issue="8" ressort="Gesellschaft" contenttype="link" publication-date="" expires="" ns0:href="http://blog.zeit.de/nsu-prozess-blog/2015/02/25/medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/" date-last-modified="2015-02-25T07:29:19+00:00" date-first-released="2015-02-25T07:29:54.791058+00:00" date-last-published="2015-02-25T07:30:19.241979+00:00" last-semantic-change="2015-02-25T07:28:33.069549+00:00" author="Tom Sundermann"/>
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
         </container>
         <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff371e2" cp:type="teaser" module="zon-small" visible="True">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/blogs/nsu-blog-bouffier" uniqueId="http://xml.zeit.de/blogs/nsu-blog-bouffier" year="2015" issue="8" ressort="Gesellschaft" contenttype="link" publication-date="" expires="" ns0:href="http://blog.zeit.de/nsu-prozess-blog/2015/02/25/medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/" date-last-modified="2015-02-25T07:29:19+00:00" date-first-released="2015-02-25T07:29:54.791058+00:00" date-last-published="2015-02-25T07:30:19.241979+00:00" last-semantic-change="2015-02-25T07:28:33.069549+00:00" author="Tom Sundermann"/>
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
         </container>
       </region>
       <region visible="True" hide-dupes="True" area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor" title="Marginalspalte">
