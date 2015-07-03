@@ -29,6 +29,12 @@
                     this.meta.setAttribute( 'content', this.standard );
                 }
             }
+        },
+        breakpoint: {
+            value: "",
+            refreshValue: function () {
+                this.value = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '') || 'stationaer';
+            }
         }
     };
 
@@ -38,5 +44,4 @@
         window.addEventListener( 'resize', function() { window.ZMO.viewport.set(); }, false );
     }
 {%- endif %}
-
 </script>
