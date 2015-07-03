@@ -3,12 +3,8 @@ import logging
 
 import pyramid.view
 
-import zeit.connector.connector
-import zeit.connector.interfaces
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.content.author.interfaces
-import zeit.content.image.interfaces
 
 import zeit.web
 import zeit.web.core.article

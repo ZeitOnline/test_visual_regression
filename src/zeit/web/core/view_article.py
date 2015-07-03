@@ -6,12 +6,9 @@ import re
 import pyramid.httpexceptions
 import zope.component
 
-from zeit.magazin.interfaces import IArticleTemplateSettings
-import zeit.connector.connector
-import zeit.connector.interfaces
 import zeit.content.article.edit.interfaces
-import zeit.content.article.interfaces
-import zeit.content.image.interfaces
+import zeit.content.author.interfaces
+import zeit.magazin.interfaces
 
 import zeit.web
 import zeit.web.core.article
@@ -54,12 +51,13 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def template(self):
-        return IArticleTemplateSettings(self.context).template or 'default'
+        return zeit.magazin.interfaces.IArticleTemplateSettings(
+            self.context).template or 'default'
 
     @zeit.web.reify
     def header_layout(self):
-        return IArticleTemplateSettings(self.context).header_layout or \
-            'default'
+        return zeit.magazin.interfaces.IArticleTemplateSettings(
+            self.context).header_layout or 'default'
 
     @zeit.web.reify
     def pages(self):
