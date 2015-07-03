@@ -1,9 +1,9 @@
 {%- extends "zeit.web.site:templates/inc/teaser/zon-small.tpl" -%}
 
 {% block teaser_journalistic_format %}
-	<div class="blog-format blog-format--large">
-		<span class="blog-format__marker blog-format__marker--large">Blog</span>
-		<span class="blog-format__name blog-format__name--large">
+	<div class="blog-format">
+		<span class="blog-format__marker">Blog</span>
+		<span class="blog-format__name">
 			{{ teaser.blog.name | hide_none }}
 		</span>
 	</div>
