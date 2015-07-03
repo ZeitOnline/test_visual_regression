@@ -87,6 +87,25 @@
       <region visible="True" hide-dupes="True" area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor" title="Marginalspalte">
       </region>
     </cluster>
+    <cluster visible="True" area="id-c7243c08-55d4-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher">
+      <region visible="True" hide-dupes="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
+        <container cp:__name__="id-953fe557-d941-47f2-af4c-c770dfba3daa" cp:type="teaser" module="zon-fullwidth">
+            <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
+        </container>
+      </region>
+    </cluster>
+    <cluster visible="True" area="id-7cb3cdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
+      <region visible="True" hide-dupes="True" area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
+        <container cp:__name__="id-593fe557-d941-47f2-af4c-c770dfba3daa" cp:type="teaser" module="zon-large">
+            <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
+        </container>
+        <container cp:__name__="id-95f3e557-d941-47f2-af4c-c770dfba3daa" cp:type="teaser" module="zon-small">
+            <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
+        </container>
+      </region>
+      <region visible="True" hide-dupes="True" area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor" title="Marginalspalte">
+      </region>
+    </cluster>
   </body>
   <feed />
   <teaser>
