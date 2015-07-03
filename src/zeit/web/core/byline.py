@@ -26,7 +26,7 @@ class IContentByline(zope.interface.Interface):
 @zeit.web.register_ctxfilter
 def get_byline(context, content):
     """Natural language byline for centerpage teasers and article heads."""
-    context = getattr(context.get('view'), 'context')
+    context = getattr(context.get('view'), 'context', None)
     if zeit.content.cp.interfaces.ICenterPage.providedBy(context):
         return ITeaserByline(content, ())
     return IContentByline(content, ())
@@ -51,8 +51,8 @@ class Byline(list):
         self.interview()
         self.groups()
 
-    # def __repr__(self):
-    #     return object.__repr__(self)
+    def __repr__(self):
+        return object.__repr__(self)
 
     def genre(self):
         if getattr(self.context, 'genre', None) in self.genres:
@@ -90,7 +90,7 @@ class Byline(list):
                 group = ('csv', (group, ('text', location)))
             groups += (group,)
 
-        self.append(('enum', groups))
+        self.append(('enum', groups) if len(groups) > 1 else groups[0])
 
 
 @grokcore.component.implementer(ITeaserByline)
