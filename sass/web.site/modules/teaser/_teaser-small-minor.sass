@@ -13,6 +13,8 @@
 			padding-left: remify(170px)
 		+respond-min($break-tablet-min)
 			padding-left: 0
+	&__series-label
+		@extend %teaser-series-label
 	&__heading
 		@extend %teaser-heading
 		+order(2)
@@ -41,6 +43,8 @@
 		@extend %teaser-combined-link
 	&__kicker
 		@extend %teaser-kicker
+		&--blog
+			@extend %teaser-kicker--blog
 	&__title
 		@extend %teaser-title
 	&__text
