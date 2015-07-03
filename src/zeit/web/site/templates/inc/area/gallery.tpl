@@ -1,4 +1,3 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 
 {% if area is undefined %}
@@ -30,6 +29,6 @@
     different versions of this area that will still be varnish-cacheable.
     The actual value will be set via JS just before the request. #}
     data-sourceurl="{{ view.content_url }}/area/___JS-RANDOM___/{{ area.uniqueId.rsplit('/', 1)[-1] }}">
-    {{ lama_core.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), request) }}Andere laden
+    {{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), request) }}Andere laden
   </a>
 {% endblock %}

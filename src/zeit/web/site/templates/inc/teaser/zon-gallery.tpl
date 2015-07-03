@@ -1,4 +1,3 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 {%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
 {% block layout %}teaser-gallery{% endblock %}
@@ -11,7 +10,7 @@
 	<div class="{{ self.layout() }}__figurewrapper">
 		{% include "zeit.web.site:templates/inc/teaser_asset/imagegroup.tpl" %}
 
-		{{ lama_core.use_svg_icon('gallery', '{}__icon'.format(self.layout()), request) }}
+		{{ lama.use_svg_icon('gallery', '{}__icon'.format(self.layout()), request) }}
 
 		<small class="{{ self.layout() }}__counter">
 			{{ teaser.keys() | list | length | pluralize('Keine Fotos', 'Ein Foto', '{} Fotos') }}
