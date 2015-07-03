@@ -5,7 +5,6 @@ import re
 
 import pyramid.httpexceptions
 
-from zeit.content.author.interfaces import IAuthorReference
 from zeit.magazin.interfaces import IArticleTemplateSettings
 import zeit.connector.connector
 import zeit.connector.interfaces
@@ -171,57 +170,6 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def resource_url(self):
         return self.request.resource_url(self.context).rstrip('/')
-
-    @zeit.web.reify
-    def authors(self):
-        author_list = []
-        try:
-            author_ref = self.context.authorships
-            for index, author in enumerate(author_ref):
-                location = IAuthorReference(author).location
-                author = {
-                    'name': getattr(author.target, 'display_name', None),
-                    'href': getattr(author.target, 'uniqueId', None),
-                    'image_group': getattr(author.target, 'image_group', None),
-                    'prefix': u'', 'suffix': u'', 'location': u''}
-                # add location
-                if location and not self.is_longform:
-                    author['location'] = u', {}'.format(location)
-                # add prefix
-                if index == 0:
-                    if self.is_longform:
-                        author['prefix'] = u'\u2014 von'
-                    else:
-                        author['prefix'] = u' von'
-                # add suffix
-                if index == len(author_ref) - 2:
-                    author['suffix'] = u' und'
-                elif index < len(author_ref) - 1:
-                    author['suffix'] = u', '
-                author_list.append(author)
-            return author_list
-        except (IndexError, OSError):
-            return
-
-    @zeit.web.reify
-    def authors_list(self):
-        if self.authors:
-            return u';'.join([rt['name'] for rt in self.authors])
-
-    @zeit.web.reify
-    def genre(self):
-        # TODO: remove prose list, if integration of article-genres.xml
-        # is clear (as)
-        prefix = 'ein'
-        if self.context.genre in (
-                'analyse', 'glosse', 'nachricht', 'reportage'):
-            prefix = 'eine'
-        if self.context.genre:
-            return prefix + ' ' + self.context.genre.title()
-
-    @zeit.web.reify
-    def location(self):
-        return  # XXX not implemented in zeit.content.article yet
 
     @zeit.web.reify
     def nextread(self):

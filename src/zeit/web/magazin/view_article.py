@@ -7,6 +7,7 @@ import zeit.connector.connector
 import zeit.connector.interfaces
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
+import zeit.content.author.interfaces
 import zeit.content.image.interfaces
 
 import zeit.web
@@ -53,6 +54,52 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
                 i.image and self._copyrights.setdefault(
                     i.image.image_group, i.image)
         return nextread
+
+    @zeit.web.reify
+    def authors(self):
+        author_list = []
+        try:
+            author_ref = self.context.authorships
+            for index, author in enumerate(author_ref):
+                location = zeit.content.author.interfaces.IAuthorReference(
+                    author).location
+                author = {
+                    'name': getattr(author.target, 'display_name', None),
+                    'href': getattr(author.target, 'uniqueId', None),
+                    'image_group': getattr(author.target, 'image_group', None),
+                    'prefix': u'', 'suffix': u'', 'location': u''}
+                # add location
+                if location and not self.is_longform:
+                    author['location'] = u', {}'.format(location)
+                # add prefix
+                if index == 0:
+                    if self.is_longform:
+                        author['prefix'] = u'\u2014 von'
+                    else:
+                        author['prefix'] = u' von'
+                # add suffix
+                if index == len(author_ref) - 2:
+                    author['suffix'] = u' und'
+                elif index < len(author_ref) - 1:
+                    author['suffix'] = u', '
+                author_list.append(author)
+            return author_list
+        except (IndexError, OSError):
+            return
+
+    @zeit.web.reify
+    def authors_list(self):
+        if self.authors:
+            return u';'.join([rt['name'] for rt in self.authors])
+
+    @zeit.web.reify
+    def genre(self):
+        prefix = 'ein'
+        if self.context.genre in (
+                'analyse', 'glosse', 'nachricht', 'reportage'):
+            prefix = 'eine'
+        if self.context.genre:
+            return prefix + ' ' + self.context.genre.title()
 
 
 @pyramid.view.view_config(name='seite',
