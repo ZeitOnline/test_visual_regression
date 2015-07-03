@@ -55,6 +55,11 @@
 	&__heading
 		@extend %teaser-heading
 
+	&__series-label
+		@extend %teaser-series-label
+		+respond-min($break-tablet-min)
+			color: $white
+
 	&__kicker
 		@extend %teaser-kicker
 		margin-bottom: remify(10px)
