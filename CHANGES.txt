@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-1856: Upgrade buzz integration to API version 2.0
 
+- ZON-1670: Test release date of breaking news against configured timeout
+
 - MAINT: Drop vivi-internal preview capabilities
 
 - MAINT: Re-locate base module class to zeit.web.site.module
