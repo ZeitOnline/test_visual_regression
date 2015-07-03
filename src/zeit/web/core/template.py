@@ -398,6 +398,22 @@ def pluralize(num, *forms):
 
 
 @zeit.web.register_filter
+def unitize(num, select_token=None):
+    if num <= 999:
+        tokens = str(num), ''
+    elif num <= 9999:
+        tokens = ','.join(list(str(num))[:2]), 'Tsd.'
+    elif num <= 999999:
+        tokens = str(num / 1000), 'Tsd.'
+    else:
+        tokens = str(num / 1000000), 'Mio.'
+    if select_token is None:
+        return ' '.join(tokens)
+    else:
+        return tokens[select_token]
+
+
+@zeit.web.register_filter
 def with_mods(b_or_e, *mods):
     """Decorate a BEM-style block or element with an a set of modifiers."""
     return ' '.join([b_or_e] + ['{}--{}'.format(b_or_e, m) for m in
