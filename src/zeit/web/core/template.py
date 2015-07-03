@@ -208,11 +208,11 @@ def get_journalistic_format(block):
 
     if getattr(teaser, 'serie', None):
         if teaser.serie.column:
-            return 'zon-column'
+            return 'column'
         else:
-            return 'zon-series'
+            return 'series'
     elif getattr(teaser, 'blog', None):
-        return 'zon-blog'
+        return 'blog'
 
 
 @zeit.web.register_filter
