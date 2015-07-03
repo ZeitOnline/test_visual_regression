@@ -7,7 +7,11 @@
     {% block teaser_media_position_before_title %}{% endblock %}
 
     <div class="{{ self.layout() }}__container {% block teaser_container_modifier %}{% endblock %}">
+
         {% block teaser_journalistic_format %}
+            {% if teaser.serie and not teaser.serie.column %}
+                <div class="{{ self.layout() }}__series-label">Serie: {{ teaser.serie.serienname }}</div>
+            {% endif %}
         {% endblock teaser_journalistic_format%}
 
         <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
