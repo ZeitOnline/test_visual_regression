@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 
 import requests
@@ -27,7 +28,7 @@ class Reach(object):
             zeit.web.core.interfaces.ISettings).get('linkreach_host', '')
 
     def _get(self, location, **kw):
-        url = '{}/{}'.format(self.host, location)
+        url = u'{}/{}'.format(self.host, location.encode('utf-8'))
         try:
             return self.session.get(url, params=kw, timeout=3.0).json()
         except (requests.exceptions.RequestException, ValueError), err:

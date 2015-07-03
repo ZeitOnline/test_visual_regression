@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests
 import requests_file
 import zope.component
@@ -57,3 +58,9 @@ def test_counts_per_url_are_fetchable(application):
     reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
     data = reach.get_buzz('http://xml.zeit.de/index')
     assert {'social', 'comments', 'views', 'score'}.issubset(data.keys())
+
+
+def test_non_ascii_url_fails_gracefully(application):
+    reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
+    data = reach.get_buzz(u'http://xml.zeit.de/ümläut')
+    assert data.get('score') == 3.535
