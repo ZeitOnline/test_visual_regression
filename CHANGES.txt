@@ -12,7 +12,9 @@ Change log for zeit.web
 
 - ZON-1888/1889: improve mobile teaser images
 
-- ZON-1895: column teaser
+- ZON-1895: Column teaser
+
+- ZON-1856: Upgrade buzz integration to API version 2.0
 
 - MAINT: Drop vivi-internal preview capabilities
 
@@ -23,6 +25,12 @@ Change log for zeit.web
 - FIX: Change cp update time route to url dispatching
 
 - FIX: Prevent seo-slugging for video comment forms the ugly way
+
+- FIX: Encode non-ascii URLs as utf-8 (e.g. for reach, comments)
+
+- FIX: Ignore authors without display_name instead of crashing
+
+- Include URL in jinja error logging
 
 
 1.36 (2015-06-26)

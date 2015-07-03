@@ -2,24 +2,24 @@
 	<div class="article__socialbox tc" id="js-social-services">
 	{% if view.linkreach %}
 		<div class="article__sharing">
-		{% if view.linkreach.total %}
+		{% if view.linkreach.total >= 10 %}
 			<div class="article__sharing__item article__sharing__sum js-toggle-sharing">
-				<span class="article__sharing__total">{{ view.linkreach.total[0] }}</span>
-				<span class="article__sharing__unit">{{ view.linkreach.total[1] }}</span>
+				<span class="article__sharing__total">{{ view.linkreach.total | unitize(0) }}</span>
+				<span class="article__sharing__unit">{{ view.linkreach.total | unitize(1) }}</span>
 			</div>
 		{% endif %}
 			<div class="article__sharing__services blind">
 				<a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.int.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_int&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
 					<span class="article__sharing__services__icon icon-sharebox-facebook"></span>
-					<span class="article__sharing__services__text">{{ ' '.join(view.linkreach.facebook) }}</span>
+					<span class="article__sharing__services__text">{{ view.linkreach.facebook.total | unitize }}</span>
 				</a>
 				<a href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&via=zeitonline&url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.twitter.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=twitter_zonaudev_int&utm_campaign=twitter_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
 					<span class="article__sharing__services__icon icon-sharebox-twitter"></span>
-					<span class="article__sharing__services__text">{{ ' '.join(view.linkreach.twitter) }}</span>
+					<span class="article__sharing__services__text">{{ view.linkreach.twitter.total | unitize }}</span>
 				</a>
 				<a href="https://plus.google.com/share?url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.gplus.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=gplus_zonaudev_int&utm_campaign=gplus_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
 					<span class="article__sharing__services__icon icon-sharebox-google"></span>
-					<span class="article__sharing__services__text">{{ ' '.join(view.linkreach.googleplus) }}</span>
+					<span class="article__sharing__services__text">{{ view.linkreach.googleplus.total | unitize }}</span>
 			   </a>
 			</div>
 			<div class="article__sharing__item">
