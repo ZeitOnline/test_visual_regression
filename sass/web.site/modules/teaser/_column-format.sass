@@ -1,0 +1,39 @@
+// Styles for the so-called "Kolumnenteaser"
+
+$color-column-background: $zon-warm-grey
+$teaser-column-mobile-image-size: 80px
+$teaser-column-image-size: 120px
+
+
+%teaser-column
+	@extend %teaser
+	background: $color-column-background
+	margin: remify(40px) (-$page-padding) $vertical-space (-$page-padding)
+	position: relative
+	+respond-min($break-tablet-min)
+		margin-left: 0
+		margin-right: 0
+		padding: $page-padding
+
+%teaser-column__media
+	@extend %teaser-media
+	overflow: hidden
+	position: absolute
+	bottom: 0
+	right: 0
+	width: $teaser-column-mobile-image-size
+	height: $teaser-column-mobile-image-size
+	margin: 0
+
+%teaser-column__media-item
+	@extend %teaser-media-item
+	+old-ie
+		background: $white
+		margin-left: 20px
+		margin-top: 30px
+		position: static
+
+%teaser-column__byline
+	@extend %teaser-byline
+	color: $zon_mid_grey
+	font-size: remify(14px)

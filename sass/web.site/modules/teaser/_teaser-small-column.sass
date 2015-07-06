@@ -1,4 +1,4 @@
-.teaser-small-column-minor
+.teaser-small-column
 	@extend %teaser-column
 	&__media
 		@extend %teaser-column__media
@@ -27,8 +27,23 @@
 	&__commentcount
 		@extend %teaser-commentcount
 
-.teaser-small-column-minor--has-media
-	.teaser-small-column-minor__byline
+.teaser-small-column--has-media
+	.teaser-small-column__byline
 		padding-right: remify($teaser-column-mobile-image-size)
 		// min-height: $teaser-column-mobile-image-size - $page-padding - ownMarginBottom
 		min-height: 3.5rem
+
++respond-min($break-desktop-min)
+	.teaser-small-column
+		margin: $vertical-space 0 $vertical-space 0
+	.teaser-small-column
+		&--has-media,
+			min-height: remify(250px)
+			padding: $petite $petite $petite remify(250px+20px)
+		&__media
+			top: 0
+			right: 60%
+			bottom: 0
+			left: 0
+			width: 40%
+			height: 100%
