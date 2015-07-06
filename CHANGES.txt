@@ -32,6 +32,8 @@ Change log for zeit.web
 
 - Include URL in jinja error logging
 
+- ZON-1920: Extend webtrekk pixel
+
 
 1.36 (2015-06-26)
 -----------------
