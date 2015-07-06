@@ -67,7 +67,7 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <title>ZEIT ONLINE Startseite</title>
+    <title>ZEIT ONLINE Übersicht Teaser (Journalistische Formate)</title>
 
     <!-- JOFO: Blog -->
 
@@ -195,6 +195,6 @@
   </body>
   <feed />
   <teaser>
-    <title>ZEIT ONLINE Startseite</title>
+    <title>ZEIT ONLINE Übersicht Teaser (Journalistische Formate)</title>
   </teaser>
 </centerpage>

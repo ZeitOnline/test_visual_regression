@@ -1,9 +1,9 @@
-.teaser-small
-	@extend %teaser
+.teaser-small-column-minor
+	@extend %teaser-column
 	&__media
 		@extend %teaser-column__media
 	&__media-item
-		@extend %teaser-media-item
+		@extend %teaser-column__media-item
 	&__container
 		@extend %teaser-small-container
 	&__series-label
@@ -14,8 +14,6 @@
 		@extend %teaser-combined-link
 	&__kicker
 		@extend %teaser-kicker
-		&--blog
-			@extend %teaser-kicker--blog
 	&__title
 		@extend %teaser-title
 	&__text
@@ -29,6 +27,6 @@
 	&__commentcount
 		@extend %teaser-commentcount
 
-+respond-max($break-phablet-min)
-	.teaser-small__media
-		display: none
+.teaser-small-column-minor--has-media
+	.teaser-small-column-minor__byline
+		@extend %teaser-column--has-media__byline

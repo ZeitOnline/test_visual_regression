@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block teaser_journalistic_format %}
-   <span class="teaser-column__series">{{ teaser.serie.serienname }}</span>
+   <div class="teaser-column__series-label">{{ teaser.serie.serienname }}</div>
 {% endblock %}
 {% block teaser_kicker %}
     <span class="teaser-column__kicker">{{ teaser.teaserSupertitle }}</span>
