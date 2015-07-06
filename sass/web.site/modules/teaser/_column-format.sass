@@ -9,11 +9,13 @@ $teaser-column-image-size: 120px
 	@extend %teaser
 	background: $color-column-background
 	margin: remify(40px) (-$page-padding) $vertical-space (-$page-padding)
+	padding: $page-padding
 	position: relative
+
+%teaser-column--margin-for-not-fullwidth
 	+respond-min($break-tablet-min)
 		margin-left: 0
 		margin-right: 0
-		padding: $page-padding
 
 %teaser-column__media
 	@extend %teaser-media

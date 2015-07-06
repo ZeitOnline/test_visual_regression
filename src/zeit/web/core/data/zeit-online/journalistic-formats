@@ -168,7 +168,7 @@
       </region>
     </cluster>
 
-    <cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f5469e012c" kind="solo" title="Aufmacher">
+    <cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f7149e012c" kind="solo" title="Aufmacher">
       <region visible="True" hide-dupes="True" area="id-49b67be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
         <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e43" cp:type="teaser" module="zon-fullwidth" visible="True">
           <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild" />
