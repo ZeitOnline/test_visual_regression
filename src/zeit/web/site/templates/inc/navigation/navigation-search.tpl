@@ -1,8 +1,8 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 <form accept-charset="utf-8" method="get" class="search" role="search" action="{{ view.request.route_url('home') }}suche/index">
-	<label for="q" class="hideme">suchen</label>
-	{# Please don't break line here, due to inline-block state. #}
-	<input class="search__input" id="q" name="q" type="search" placeholder="Suche"><button class="search__button" type="submit">
-		<span class="icon-zon-logo-navigation_suche search__button__image main_nav__icon--plain"></span>
-		<span class="icon-zon-logo-navigation_suche-hover search__button__image main_nav__icon--hover"></span>
+	<label for="q" class="visually-hidden">suchen</label>
+	<input class="search__input" id="q" name="q" type="search" placeholder="Suche">
+    <button class="search__button" type="submit">
+		{{ lama.use_svg_icon('search', 'search__icon', view.request) }}
 	</button>
 </form>

@@ -27,7 +27,7 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
                     'h1.logo_bar__image')) == 1, 'just one .logo_bar__image'
 
     assert len(html('.main_nav > div.logo_bar >'
-                    'div.logo_bar__menue')) == 1, 'just one .logo_bar__menue'
+                    'div.logo_bar__menu')) == 1, 'just one .logo_bar__menu'
 
     assert len(html('.main_nav > div.main_nav__teaser')) == 1, (
         'just one .main_nav__teaser')
@@ -156,38 +156,26 @@ def test_nav_contains_essential_elements(application, jinja2_env):
                     'Logo link is missing')
 
     # Main menu icon
-    assert html(u'a[aria-label="Hauptmenü"]')[0] is not None, (
+    assert len(html(u'a[aria-label="Hauptmenü"]')) == 1, (
         'Main menu link is missing')
-    assert len(html('div.logo_bar__menue__image.main_nav__icon--plain'
-                    '.icon-zon-logo-navigation_menu')) == 1, (
-                        'Logo for bar menu is not present')
-    assert len(html('div.logo_bar__menue__image'
-                    '.main_nav__icon--hover.icon-zon-logo-'
-                    'navigation_menu-hover')) == 1, (
-                        'A div for the burger menu is missing.')
+    assert len(html('svg.logo_bar__menu-icon--burger')) == 1, (
+        'Main menu icon is missing')
 
     # Search
-    assert html('form.search'
-                '[accept-charset="utf-8"]'
-                '[method="get"]'
-                '[role="search"]'
-                '[action$="suche/index"]')[0] is not None, (
-                    'Form element is not present')
-    assert html('label.hideme[for="q"]')[0] is not None, (
-        'Hide me label is not present')
-    assert html('button.search__button[type="submit"]')[0] is not None, (
-        'No search button present')
-    assert html('span.icon-zon-logo-navigation_suche'
-                '.search__button__image.'
-                'main_nav__icon--plain')[0] is not None, (
-                    'No search logo present')
-    assert html('span.icon-zon-logo-navigation_suche-hover'
-                '.search__button__image.'
-                'main_nav__icon--hover')[0] is not None, (
-                    'No icon-hover present')
-    assert html('input.search__input[id="q"][name="q"]'
-                '[type="search"][placeholder="Suche"]')[0] is not None, (
-                    'No search input present')
+    assert len(html('form.search'
+                    '[accept-charset="utf-8"]'
+                    '[method="get"]'
+                    '[role="search"]'
+                    '[action$="suche/index"]')) == 1, (
+                        'Search form must be present')
+    assert len(html('form.search label[for="q"]')) == 1, (
+        'Search label must be present')
+    assert len(html('button.search__button[type="submit"]')) == 1, (
+        'Search button must be present')
+    assert len(html('svg.search__icon')) == 1, (
+        'Search icon must be present')
+    assert len(html('input.search__input[id="q"][name="q"]')) == 1, (
+        'Search input must be present')
 
 
 def test_nav_should_contain_schema_org_markup(application, jinja2_env):
@@ -241,12 +229,12 @@ def test_cp_should_have_valid_main_nav_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
 
-    assert len(html('.main_nav')) == 1, 'Nav main_nav is not present.'
-    assert len(html('div.logo_bar__image')) == 1, 'Logo bar image not present.'
-    assert len(html('div.logo_bar__menue')) == 1, 'Menu bar is not present.'
-    assert len(html('div.main_nav__teaser')) == 1, 'Nav teaser not present.'
-    assert len(html('div.main_nav__community[data-dropdown="true"]')) == 1, (
-        'Data dropdown not present')
+    assert len(html('.main_nav')) == 1, 'Main navigation must be present'
+    assert len(html('div.logo_bar__image')) == 1, 'ZON logo must be present'
+    assert len(html('div.logo_bar__menu')) == 1, 'Menu link must be present'
+    assert len(html('div.main_nav__teaser')) == 1, 'Teaser must be present'
+    assert len(html('div.main_nav__community')) == 1, (
+        'User profile must be present')
 
 
 def test_cp_should_have_valid_services_structure(testserver, testbrowser):
@@ -278,74 +266,46 @@ def test_cp_should_have_valid_classifieds_structure(testserver, testbrowser):
         'Link mehr is not present')
 
 
-def test_cp_has_valid_community_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    html_str = browser.contents
-    html = lxml.html.fromstring(html_str).cssselect
-    assert html(
-        'a[href="http://community.zeit.de/user/login?"]') is not None, (
-            'Link to login form is invalid')
-    assert html('span.main_nav__community__image') is not None, (
-        'span.main_nav__community__image is invalid')
-
-
 def test_cp_has_valid_logo_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
-    assert html('a.icon-zon-logo-desktop'
-                '[href="http://www.zeit.de/index"]'
-                '[title="Nachrichten auf ZEIT ONLINE"]'
-                '[id="hp.global.topnav.centerpages.logo"]') is not None, (
-                    'Element a.icon-zon-logo-desktop is invalid')
+    link = html('.logo_bar a.icon-zon-logo-desktop')[0]
+    assert link.get('href') == 'http://localhost:6543/index'
+    assert link.get('title') == 'Nachrichten auf ZEIT ONLINE'
+    assert link.get('id') == 'hp.global.topnav.centerpages.logo'
 
 
 def test_cp_has_valid_burger_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
-    assert html('div.logo_bar__menue__image'
-                '.main_nav__icon--plain'
-                '.icon-zon-logo-navigation_menu') is not None, (
-                    'Element div.main_nav__icon--plain is invalid')
-    assert html('div.logo_bar__menue__image'
-                '.main_nav__icon--hover'
-                '.icon-zon-logo-navigation_menu-hover') is not None, (
-                    'Element .main_nav__icon--hover is invalid')
+    assert len(html('svg.logo_bar__menu-icon--burger')) == 1, (
+        'Main menu burger icon is missing')
+    assert len(html('svg.logo_bar__menu-icon--close')) == 1, (
+        'Main menu close icon is missing')
 
 
 def test_cp_has_valid_search_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
-    assert html('form.search'
-                '[accept-charset="utf-8"]'
-                '[method="get"]'
-                '[role="search"]'
-                '[action$="suche/index"]') is not None, (
-                    'Element form.search is invalid')
-    assert html('label.hideme[for="q"]') is not None, (
-        'label.hideme is invalid')
-    assert html('label.hideme[for="q"]')[0].text == 'suchen', (
-        'Element label.hideme has wrong text')
-    assert html('button.search__button'
-                '[type="submit"]'
-                '[tabindex="2"]') is not None, (
-                    'Element button.search__button is invalid')
-    assert html('span.icon-zon-logo-navigation_suche.search__button__image'
-                '.main_nav__icon--plain') is not None, (
-                    'Element span in invalid')
-    assert html('span.icon-zon-logo-navigation_suche-hover'
-                '.search__button__image'
-                '.main_nav__icon--hover')[0].text is None, (
-                    'Element span is not empty')
-    assert html('input.search__input'
-                '[id="q"]'
-                '[name="q"]'
-                '[type="search"]'
-                '[placeholder="Suche"]'
-                '[tabindex="1"]') is not None, (
-                    'Element input.search__input is invalid')
+    assert len(html('form.search'
+                    '[accept-charset="utf-8"]'
+                    '[method="get"]'
+                    '[role="search"]'
+                    '[action$="suche/index"]')) == 1, (
+                        'Search form must be present')
+    assert len(html('form.search label[for="q"]')) == 1, (
+        'Search label must be present')
+    assert html('form.search label[for="q"]')[0].text == 'suchen', (
+        'Search label has wrong text')
+    assert len(html('button.search__button[type="submit"]')) == 1, (
+        'Search button must be present')
+    assert len(html('svg.search__icon')) == 1, (
+        'Search icon must be present')
+    assert len(html('input.search__input[id="q"][name="q"]')) == 1, (
+        'Search input must be present')
 
 
 @pytest.fixture(scope='session', params=(
@@ -370,7 +330,7 @@ def test_zon_main_nav_has_correct_structure(
     search__input = driver.find_elements_by_class_name('search__input')[0]
     main_nav__community = driver.find_elements_by_class_name(
         'main_nav__community')[0]
-    logo_bar__menue = driver.find_elements_by_class_name('logo_bar__menue')[0]
+    logo_bar__menu = driver.find_elements_by_class_name('logo_bar__menu')[0]
     main_nav__ressorts = driver.find_elements_by_class_name(
         'main_nav__ressorts')[0]
     header__tags = driver.find_elements_by_class_name('header__tags')[0]
@@ -386,8 +346,8 @@ def test_zon_main_nav_has_correct_structure(
     assert logo_bar__image.is_displayed()
 
     if small_screen:
-        # burger menue is visible
-        assert logo_bar__menue.is_displayed()
+        # burger menu is visible
+        assert logo_bar__menu.is_displayed()
         # tags are hidden
         assert header__tags.is_displayed() is False
         # date bar is hidden
@@ -423,8 +383,8 @@ def test_nav_search_is_working_as_expected(
 
     search__button = driver.find_elements_by_class_name('search__button')[0]
     search__input = driver.find_elements_by_class_name('search__input')[0]
-    logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
-    menue__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
+    logo_bar__menu = driver.find_element_by_class_name('logo_bar__menu')
+    menu__button = logo_bar__menu.find_elements_by_tag_name('a')[0]
     document = driver.find_element_by_class_name('page')
     transition_duration = 0.2
 
@@ -449,7 +409,7 @@ def test_nav_search_is_working_as_expected(
 
     # open search for mobile
     if screen_width < 768:
-        menue__button.click()
+        menu__button.click()
     # open search for tablet
     elif screen_width == 768:
         search__button.click()
@@ -462,18 +422,18 @@ def test_nav_search_is_working_as_expected(
     assert driver.current_url.endswith('suche/index?q=test')
 
 
-@pytest.mark.xfail(reason='Maybe a problem with tear down. Runs isolated.')
-def test_nav_burger_menue_is_working_as_expected(
-        selenium_driver, testserver):
+def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
 
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/centerpage/zeitonline' % testserver.url)
 
-    logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
-    menue__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
-    icon_burger = logo_bar__menue.find_element_by_class_name(
-        'icon-zon-logo-navigation_menu')
+    logo_bar__menu = driver.find_element_by_class_name('logo_bar__menu')
+    menu_link = logo_bar__menu.find_element_by_tag_name('a')
+    icon_burger = logo_bar__menu.find_element_by_class_name(
+        'logo_bar__menu-icon--burger')
+    icon_close = logo_bar__menu.find_element_by_class_name(
+        'logo_bar__menu-icon--close')
 
     main_nav__community = driver.find_element_by_class_name(
         'main_nav__community')
@@ -486,13 +446,13 @@ def test_nav_burger_menue_is_working_as_expected(
     main_nav__search = driver.find_element_by_class_name('main_nav__search')
 
     # test main elements are displayed
-    assert logo_bar__menue.is_displayed(), 'Logo bar is not displayed'
-    assert menue__button.is_displayed(), 'Menue button is not displayed'
+    assert logo_bar__menu.is_displayed(), 'Logo bar is not displayed'
+    assert menu_link.is_displayed(), 'menu button is not displayed'
     assert icon_burger.is_displayed(), 'Burger Icon is not displayed'
 
-    menue__button.click()
+    menu_link.click()
 
-    # test element states after menue button is clicked
+    # test element states after menu button is clicked
     assert main_nav__community.is_displayed(), (
         'Community bar is not displayed')
     assert main_nav__ressorts.is_displayed(), (
@@ -505,23 +465,21 @@ def test_nav_burger_menue_is_working_as_expected(
         'Search bar is not displayed')
 
     # test close button is displayed
-    icon_close = logo_bar__menue.find_element_by_class_name(
-        'icon-zon-logo-navigation_close-hover')
     assert icon_close.is_displayed(), 'Closing Icon is not displayed'
 
-    menue__button.click()
+    menu_link.click()
 
-    # test element states after menue button is clicked again
+    # test element states after menu button is clicked again
     assert main_nav__community.is_displayed() is False, (
         'Community bar is displayed')
     assert main_nav__ressorts.is_displayed() is False, (
-        'Ressort bar is not displayed')
+        'Ressorts bar is displayed')
     assert main_nav__services.is_displayed() is False, (
-        'Services bar is not displayed')
+        'Services bar is displayed')
     assert main_nav__classifieds.is_displayed() is False, (
-        'Classifieds bar is not displayed')
+        'Classifieds bar is displayed')
     assert main_nav__search.is_displayed() is False, (
-        'Search bar is not displayed')
+        'Search bar is displayed')
 
 
 def test_primary_nav_should_resize_to_fit(
@@ -541,8 +499,8 @@ def test_primary_nav_should_resize_to_fit(
     chosen_more_dropdown_item = driver.find_element_by_css_selector(
         '[data-id="more-dropdown"] [data-id="sport"]')
 
-    logo_bar__menue = driver.find_element_by_class_name('logo_bar__menue')
-    menu__button = logo_bar__menue.find_elements_by_tag_name('a')[0]
+    logo_bar__menu = driver.find_element_by_class_name('logo_bar__menu')
+    menu__button = logo_bar__menu.find_elements_by_tag_name('a')[0]
     menu__button.click()
 
     assert more_dropdown.is_displayed() is False, (

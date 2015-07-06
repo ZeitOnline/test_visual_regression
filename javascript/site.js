@@ -51,7 +51,7 @@ require([
     $( window ).referrerCount();
     // global
     $( '.main_nav__search' ).toggleSearch();
-    $( '.logo_bar__menue' ).toggleNavi();
+    $( '.logo_bar__menu' ).toggleNavi();
     $( '.primary-nav' ).adaptToSpace();
     $( '.footer-publisher__more' ).extendFooter();
 

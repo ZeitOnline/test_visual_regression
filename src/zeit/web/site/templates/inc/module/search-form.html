@@ -1,38 +1,49 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 <form class="search-form">
-    <div class="search-text-input">
-        <label for="query" class="search-text-input__label">Suchbegriff</label>
-        <input type="text" name="q" id="query" value="{{ module.q | hide_none }}" placeholder="Suchbegriff eingeben" class="search-text-input__input" autofocus />
-        <button type="submit" id="search" value="Suchen" class="search-submit">
-            <span class="search-submit__icon icon-zon-logo-navigation_suche"></span>
-            <span class="search-submit__text">Suchen</span>
-        </button>
-    </div>
-    <div class="search-additional-queries">
-        <span class="search-additional-queries__on">+ Suchergebnis eingrenzen</span>
-        <div class="search-additional-queries__container search-additional-queries__container--hidden">
-            <fieldset class="search-timerange">
-                <legend class="search-timerange__legend icon-dropdown-closed">Datum eingrenzen</legend>
-                <div class="search-timerange__extend search-timerange__extend--hidden">
-                    {% for id, checked, label in module.mode_choice %}
-                    <div class="search-timerange__group">
-                        <input type="radio" name="mode" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
-                        <label class="search-timerange__label" for="{{ id }}">{{ label }}</label>
-                    </div>
-                    {% endfor %}
-                </div>
-            </fieldset>
-            <fieldset class="search-typerange">
-                <legend class="search-typerange__legend icon-dropdown-closed">Typ eingrenzen</legend>
-                <div class="search-typerange__extend search-typerange__extend--hidden">
-                    {% for id, checked, label in module.type_choice %}
-                    <div class="search-typerange__group">
-                        <input type="checkbox" name="type" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
-                        <label class="search-typerange__label" for="{{ id }}">{{ label }}</label>
-                    </div>
-                    {% endfor %}
-                </div>
-            </fieldset>
-            <span class="search-additional-queries__off icon-zon-logo-navigation_close"></span>
-        </div>
-    </div>
+	<div class="search-form__fieldset">
+		<div class="search-text-input">
+			<label for="query" class="visually-hidden">Suchbegriff</label>
+			<input type="text" name="q" id="query" value="{{ module.q | hide_none }}" placeholder="Suchbegriff eingeben" class="search-text-input__input" autofocus />
+			<button type="submit" id="search" value="Suchen" class="search-submit">
+				{{ lama.use_svg_icon('search', 'search-submit__icon', view.request) }}
+				<span class="search-submit__text">Suchen</span>
+			</button>
+		</div>
+		<div class="search-options">
+			<span class="search-options__on">+ Suchergebnis eingrenzen</span>
+			<div class="search-options__container">
+				<fieldset class="search-range">
+					<legend class="search-range__legend">
+						Datum eingrenzen
+						{{ lama.use_svg_icon('arrow-down', 'search-range__icon', view.request) }}
+					</legend>
+					<div class="search-range__extend">
+						{% for id, checked, label in module.mode_choice %}
+						<div class="search-range__group">
+							<input type="radio" name="mode" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
+							<label class="search-range__label" for="{{ id }}">{{ label }}</label>
+						</div>
+						{% endfor %}
+					</div>
+				</fieldset>
+				<fieldset class="search-range">
+					<legend class="search-range__legend">
+						Typ eingrenzen
+						{{ lama.use_svg_icon('arrow-down', 'search-range__icon', view.request) }}
+					</legend>
+					<div class="search-range__extend">
+						{% for id, checked, label in module.type_choice %}
+						<div class="search-range__group">
+							<input type="checkbox" name="type" id="{{ id }}" value="{{ id }}"{% if checked %} checked{% endif %}/>
+							<label class="search-range__label" for="{{ id }}">{{ label }}</label>
+						</div>
+						{% endfor %}
+					</div>
+				</fieldset>
+				<span class="search-options__off">
+					{{ lama.use_svg_icon('close', 'search-options__icon', view.request) }}
+				</span>
+			</div>
+		</div>
+	</div>
 </form>
