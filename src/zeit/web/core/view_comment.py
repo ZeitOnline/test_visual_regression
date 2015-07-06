@@ -16,6 +16,7 @@ import zeit.web.core
 import zeit.web.core.comments
 import zeit.web.core.template
 import zeit.web.core.view
+import zeit.web.core.security
 
 
 log = logging.getLogger(__name__)
@@ -33,6 +34,13 @@ class PostComment(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
                 explanation='Please log in in order to comment')
+
+        if 'user' in request.session and (
+                request.session['user']['name'] == 'Kein Benutzername'):
+            self.user_name = ''
+        else:
+            self.user_name = request.session['user']['name']
+
         self.new_cid = None
         self.request_method = 'POST'
         self.path = request.params.get('path') or path
@@ -54,11 +62,22 @@ class PostComment(zeit.web.core.view.Base):
         params = (request.GET, request.POST)[self.request_method == 'POST']
         comment = params.get('comment')
         action = params.get('action')
+        user_name = params.get('user_name')
 
         try:
             pid = int(params.get('pid'))
         except (TypeError, ValueError):
             pid = None
+
+        if not user_name and not self.user_name and action == 'comment':
+            raise pyramid.httpexceptions.HTTPBadRequest(
+                title='No user_name given',
+                explanation= 'A user name must be set in order to comment.')
+
+        if not self.user_name and action != 'comment':
+            raise pyramid.httpexceptions.HTTPBadRequest(
+                title='user_name could not be set',
+                explanation= 'A user name can only be set on action comment.')
 
         if not request.method == self.request_method:
             raise pyramid.httpexceptions.HTTPMethodNotAllowed(
@@ -106,6 +125,9 @@ class PostComment(zeit.web.core.view.Base):
             data['subject'] = '[empty]'
             data['comment'] = comment
             data['pid'] = pid
+            if not self.user_name:
+                data['user_name'] = user_name
+
         elif action == 'report' and pid:
             method = 'get'
             data['note'] = comment
@@ -139,6 +161,16 @@ class PostComment(zeit.web.core.view.Base):
 
             invalidate_comment_thread(unique_id)
 
+            if not self.user_name and action == 'comment':
+                if zeit.web.core.security.reload_user_info(self.request) and (
+                        'user' in request.session) and not (
+                        request.session['user']['name'] == 'Kein Benutzername'):
+                    self.user_name = request.session['user']['name']
+                else:
+                    raise pyramid.httpexceptions.HTTPInternalServerError(
+                        title='No user name found',
+                        explanation='Session could not be'
+                            ' reloaded with new user_name.')
             content = None
             error = None
             if response.content:
@@ -161,11 +193,16 @@ class PostComment(zeit.web.core.view.Base):
                     'new_cid': self.new_cid}
             }
 
+        elif response.status_code == 409:
+            error = json.loads(response.content)
+            raise pyramid.httpexceptions.HTTPBadRequest(
+                title='user_name could not be set',
+                explanation= error['error_message'])
         else:
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='Action {} could not be performed'.format(action),
                 explanation='Status code {} was send for action {} '
-                            'on resource {}.'.format(
+                            'on resource {}'.format(
                                 action,
                                 response.status_code,
                                 unique_id))
@@ -224,6 +261,7 @@ class PostComment(zeit.web.core.view.Base):
             'X-uniqueId': 'http://{}{}'.format(
                 self.request.host, urlparse.urlparse(unique_id)[2]),
             'Content-Type': 'text/xml'}
+
         response = requests.post(
             '{}/agatho/commentsection'.format(self.community_host),
             headers=headers,
@@ -276,7 +314,13 @@ class PostCommentResource(PostComment):
 
     def __call__(self):
         self.request.response.cache_expires(0)
-        result = self.post_comment()
+        result = {}
+        try:
+            result = self.post_comment()
+        except pyramid.httpexceptions.HTTPBadRequest, e:
+            import pdb; pdb.set_trace()  # XXX BREAKPOINT
+
+            return {}
 
         if self.request.params.get('ajax') == 'true':
             return result
