@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.37 (unreleased)
+1.37 (2015-07-06)
 -----------------
 
 - ZON-1897: Transform all video links to contain seo slug
