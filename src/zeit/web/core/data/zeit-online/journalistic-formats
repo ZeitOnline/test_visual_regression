@@ -67,7 +67,7 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <title>ZEIT ONLINE Startseite</title>
+    <title>ZEIT ONLINE Übersicht Teaser (Journalistische Formate)</title>
 
     <cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher">
       <region visible="True" hide-dupes="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
@@ -163,6 +163,6 @@
   </body>
   <feed />
   <teaser>
-    <title>ZEIT ONLINE Startseite</title>
+    <title>ZEIT ONLINE Übersicht Teaser (Journalistische Formate)</title>
   </teaser>
 </centerpage>
