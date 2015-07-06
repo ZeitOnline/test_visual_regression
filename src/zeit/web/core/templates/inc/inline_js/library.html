@@ -33,7 +33,8 @@
         breakpoint: {
             value: "",
             refreshValue: function () {
-                this.value = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '') || 'stationaer';
+                this.value = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '') || 'desktop';
+                // we need the fallback to desktop to account for a proper value in IE 8 !
             }
         }
     };
