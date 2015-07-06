@@ -7,7 +7,7 @@
             {% with -%}
                 {% set index = loop.index %}
                 {% set layout = module | get_layout %}
-                {% include "zeit.web.site:templates/inc/teaser/{}.tpl".format(layout) with context %}
+                {% include "zeit.web.site:templates/inc/teaser/{}.tpl".format(layout) %}
             {%- endwith %}
         {%- endfor %}
     </div>

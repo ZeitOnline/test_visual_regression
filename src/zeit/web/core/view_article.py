@@ -4,6 +4,7 @@ import logging
 import re
 
 import pyramid.httpexceptions
+import zope.component
 
 from zeit.content.author.interfaces import IAuthorReference
 from zeit.magazin.interfaces import IArticleTemplateSettings
@@ -16,7 +17,6 @@ import zeit.content.image.interfaces
 import zeit.web
 import zeit.web.core.article
 import zeit.web.core.interfaces
-import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.magazin.view
@@ -206,17 +206,16 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def authors_list(self):
         if self.authors:
-            return u';'.join([rt['name'] for rt in self.authors])
+            return u';'.join([
+                rt['name'] for rt in self.authors if rt.get('name')])
 
     @zeit.web.reify
     def genre(self):
         # TODO: remove prose list, if integration of article-genres.xml
         # is clear (as)
         prefix = 'ein'
-        if (self.context.genre == 'glosse') or \
-           (self.context.genre == 'reportage') or \
-           (self.context.genre == 'nachricht') or \
-           (self.context.genre == 'analyse'):
+        if self.context.genre in (
+                'analyse', 'glosse', 'nachricht', 'reportage'):
             prefix = 'eine'
         if self.context.genre:
             return prefix + ' ' + self.context.genre.title()
@@ -227,38 +226,12 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def nextread(self):
-        is_zmo = zeit.magazin.interfaces.IZMOContent.providedBy(self.context)
-        nextread = zeit.web.core.block.NextreadTeaserBlock(
-            self.context, ('940x400', 'zmo-nextread')[int(is_zmo)])
-        if not nextread.teasers:
-            return
-        if nextread.layout.id != 'minimal':
-            for i in zeit.web.core.interfaces.ITeaserSequence(nextread):
-                i.image and self._copyrights.setdefault(
-                    i.image.image_group, i.image)
-        return nextread
+        return zeit.web.core.interfaces.INextread(self.context)
 
     @zeit.web.reify
     def linkreach(self):
-        def unitize(n):
-            if n <= 999:
-                return str(n), ''
-            elif n <= 9999:
-                return ','.join(list(str(n))[:2]), 'Tsd.'
-            elif n <= 999999:
-                return str(n / 1000), 'Tsd.'
-            else:
-                return str(n / 1000000), 'Mio.'
-
-        raw = zeit.web.core.reach.fetch('path', self.content_url)
-        total = raw.pop('total', 0)
-        counts = {'total': unitize(total)} if total >= 10 else {}
-        for k, v in raw.items():
-            try:
-                counts[k] = unitize(v['total'])
-            except:
-                continue
-        return counts
+        reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
+        return reach.get_buzz(self.context.uniqueId).get('social')
 
     @zeit.web.reify
     def tracking_type(self):
@@ -297,7 +270,8 @@ class Article(zeit.web.core.view.Content):
                 cr_list.append(
                     dict(
                         label=i.copyright[0][0],
-                        image=zeit.web.core.template.translate_url(i.src),
+                        image=zeit.web.core.template.create_url(
+                            None, i.src, self.request),
                         link=i.copyright[0][1],
                         nofollow=i.copyright[0][2]
                     )

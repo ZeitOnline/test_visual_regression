@@ -144,7 +144,8 @@ def request_thread(path):
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     timeout = float(conf.get('community_host_timeout_secs', 5))
-    uri = '{}/agatho/thread{}'.format(conf.get('agatho_host', ''), path)
+    uri = '{}/agatho/thread{}'.format(
+        conf.get('agatho_host', ''), path.encode('utf-8'))
     try:
         response = requests.get(uri, timeout=timeout)
         return response.ok and response.content or None
