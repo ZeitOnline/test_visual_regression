@@ -12,11 +12,11 @@
 {% endblock %}
 
 {% block teaser_journalistic_format %}
-   <div class="teaser-column__series-label">{{ teaser.serie.serienname }}</div>
+   <div class="{{ self.layout() }}__series-label">{{ teaser.serie.serienname }}</div>
 {% endblock %}
 {% block teaser_kicker %}
-    <span class="teaser-column__kicker">{{ teaser.teaserSupertitle }}</span>
+    <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle }}</span>
 {% endblock %}
 {% block teaser_title %}
-    <span class="teaser-column__title">{{ teaser.teaserTitle }}</span>
+    <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle }}</span>
 {% endblock %}

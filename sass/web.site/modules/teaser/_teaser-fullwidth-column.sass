@@ -1,7 +1,5 @@
-.teaser-small-column-minor
+.teaser-fullwidth-column
 	@extend %teaser-column
-	@extend %teaser-column--margin-for-not-fullwidth
-	%teaser-column--not-fullwidth
 	&__media
 		@extend %teaser-column__media
 	&__media-item
@@ -29,8 +27,20 @@
 	&__commentcount
 		@extend %teaser-commentcount
 
-.teaser-small-column-minor--has-media
-	.teaser-small-column-minor__byline
+.teaser-fullwidth-column--has-media
+	.teaser-fullwidth-column__byline
 		padding-right: remify($teaser-column-mobile-image-size)
-		// min-height: $teaser-column-mobile-image-size - $page-padding - ownMarginBottom
+		// min-height: $teaser-column-mobile-image-size - $page-padding - ownMarginBottom = 5rem - 1.25rem - 0.25rem
 		min-height: 3.5rem
+
++respond-min($break-phablet-min)
+	.teaser-fullwidth-column--has-media
+		.teaser-fullwidth-column__media
+			width: $teaser-column-image-size
+			height: $teaser-column-image-size
+		.teaser-fullwidth-column__byline
+			min-height: initial
+		.teaser-fullwidth-column__text,
+		.teaser-fullwidth-column__title
+			padding-right: remify($teaser-column-image-size)
+
