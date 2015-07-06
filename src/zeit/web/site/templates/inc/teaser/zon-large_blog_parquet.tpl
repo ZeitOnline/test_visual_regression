@@ -1,9 +1,14 @@
-{%- extends "zeit.web.site:templates/inc/teaser/zon-large_blog.tpl" -%}
+{%- extends "zeit.web.site:templates/inc/teaser/zon-large_parquet.tpl" -%}
 
-{% block teaser_media_position_before_title %}
-    {% set module_layout = self.layout() %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/{}.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
+{% block teaser_journalistic_format %}
+	<div class="blog-format blog-format--large">
+		<span class="blog-format__marker blog-format__marker--large">Blog</span>
+		<span class="blog-format__name blog-format__name--large">
+			{{ teaser.blog.name | hide_none }}
+		</span>
+	</div>
 {% endblock %}
 
-{% block teaser_media_position_after_title %}
+{% block teaser_kicker %}
+	<span class="{{ self.layout() }}__kicker {{ self.layout() }}__kicker--blog">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
 {% endblock %}
