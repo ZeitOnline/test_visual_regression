@@ -29,6 +29,13 @@
                     this.meta.setAttribute( 'content', this.standard );
                 }
             }
+        },
+        breakpoint: {
+            value: "",
+            refreshValue: function () {
+                this.value = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '') || 'desktop';
+                // we need the fallback to desktop to account for a proper value in IE 8 !
+            }
         }
     };
 
@@ -38,5 +45,4 @@
         window.addEventListener( 'resize', function() { window.ZMO.viewport.set(); }, false );
     }
 {%- endif %}
-
 </script>
