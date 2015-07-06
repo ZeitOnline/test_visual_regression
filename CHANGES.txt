@@ -4,7 +4,7 @@ Change log for zeit.web
 1.38 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1811: Fix search input for iOS Safari and add thousands separator
 
 
 1.37 (2015-07-06)
