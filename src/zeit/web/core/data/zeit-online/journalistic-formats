@@ -69,6 +69,8 @@
   <body>
     <title>ZEIT ONLINE Übersicht Teaser (Journalistische Formate)</title>
 
+    <!-- JOFO: Blog -->
+
     <cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher">
       <region visible="True" hide-dupes="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
         <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-fullwidth" visible="True">
@@ -92,6 +94,20 @@
       </region>
     </cluster>
 
+    <cluster visible="True" area="id-bdfb0156-4df4-4bcd-bf1e-68609ef1a109" kind="parquet" title="ArneParquet">
+      <region visible="True" hide-dupes="True" area="id-1ac0ac50-fe94-4431-baac-435cc2a934dd" kind="parquet">
+        <container cp:type="teaser" module="zon-parquet-large" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5afa4cad1">
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
+        </container>
+        <container cp:type="teaser" module="zon-parquet-small" visible="True" cp:__name__="id-bda25015-57f7-4f6a-bdbd-783e4a50e5d7">
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
+        </container>
+      </region>
+    </cluster>
+
+
+    <!-- JOFO: Serie -->
+
     <cluster visible="True" area="id-c7243c08-55d4-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher">
       <region visible="True" hide-dupes="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
         <container cp:__name__="id-953fe557-d941-47f2-af4c-c770dfba3daa" cp:type="teaser" module="zon-fullwidth">
@@ -114,6 +130,20 @@
         </container>
       </region>
     </cluster>
+
+    <cluster visible="True" area="id-bdfb0156-4df4-4cbd-bf1e-68609ef1a109" kind="parquet" title="ArneParquet">
+      <region visible="True" hide-dupes="True" area="id-1ac0a5c0-fe94-4431-baac-435cc2a934dd" kind="parquet">
+        <container cp:type="teaser" module="zon-parquet-large" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5aaf4cad1">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
+        </container>
+        <container cp:type="teaser" module="zon-parquet-small" visible="True" cp:__name__="id-bda25015-57f7-4f6a-bdbd-738e4a50e5d7">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
+        </container>
+      </region>
+    </cluster>
+
+
+    <!-- JOFO: Kolumne -->
 
     <cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f5469e012c" kind="solo" title="Aufmacher">
       <region visible="True" hide-dupes="True" area="id-49b67be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
@@ -160,6 +190,8 @@
         </container>
       </region>
     </cluster>
+
+
   </body>
   <feed />
   <teaser>
