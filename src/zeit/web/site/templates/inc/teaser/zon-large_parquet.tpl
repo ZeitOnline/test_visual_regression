@@ -1,11 +1,8 @@
 {%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
-{% block layout %}teaser-parquet-large{% endblock %}
-{% block block_type %}teaser{% endblock %}
+{% block layout %}teaser-large{% endblock %}
 
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
-    {# set again due to scope #}
-    {% set module = module %}
     {% include "zeit.web.site:templates/inc/teaser_asset/{}.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
 {% endblock %}
