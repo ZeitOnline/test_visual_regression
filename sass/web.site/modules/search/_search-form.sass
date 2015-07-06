@@ -51,17 +51,21 @@ $dropdown-width: remify(160px)
 			padding-left: .5em
 
 .search-options
-	margin-top: remify(14px) // has topmargin to defend position on toggle effect
+	margin-top: remify(14px)
 	&__on
-		cursor: pointer
-		display: block
-		font-size: remify(14px)
-		max-height: 5000px // absurd high px value for get height anim working
-		overflow: hidden
-		+transition(max-height .5s ease-in-out)
+		display: none
+		+transition(max-height .3s ease-in-out)
+		.js &
+			cursor: pointer
+			display: block
+			font-size: remify(14px)
+			max-height: 1.5em
+			overflow: hidden
+			+respond-min($break-tablet-min)
+				display: none
 	&__container
 		overflow: hidden
-		+transition(max-height .5s ease-in-out)
+		+transition(max-height .3s ease-in-out)
 		.js &
 			max-height: 0
 			+respond-min($break-tablet-min)
@@ -84,10 +88,8 @@ $dropdown-width: remify(160px)
 	&--open
 		.search-options__on
 			max-height: 0
-			+respond-min($break-tablet-min)
-				display: none
 		.search-options__container
-			max-height: 5000px // absurd high px value for get height anim working
+			max-height: em(320px)
 
 .search-range
 	border: none
@@ -140,4 +142,4 @@ $dropdown-width: remify(160px)
 		.search-range__icon
 			+transform(rotate(180deg))
 		.search-range__extend
-			max-height: em(300px)
+			max-height: em(320px)
