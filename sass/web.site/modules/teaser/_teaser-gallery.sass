@@ -7,9 +7,11 @@ $break-gallery-teasers: $break-phablet-min
 
 .teaser-gallery-group
 	&__container
-		padding-bottom: remify(20px)
-		// flexbox for same height
-		+display-flex
+		padding-bottom: em(10px)
+		+respond-min($break-gallery-teasers)
+			padding-bottom: em(20px)
+			// flexbox for same height
+			+display-flex
 
 	&__button
 		background-color: $white
