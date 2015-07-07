@@ -245,6 +245,10 @@ def test_video_page_adcontroller_content_gets_included(
     try:
         iframe = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located(
+                # syntax of expected condition is wrong
+                # plus condition is not matching our current HTML structure
+                # ckeck http://selenium-python.readthedocs.org/waits.html#explicit-waits
+                # check http://selenium-python.readthedocs.org/api.html#selenium.webdriver.common.by.By
                 (By.CSS_SELECTOR, 'ad__inner iframe'))
         )
         assert ('google_ads_iframe_' in iframe.get_attribute('id')) is True
