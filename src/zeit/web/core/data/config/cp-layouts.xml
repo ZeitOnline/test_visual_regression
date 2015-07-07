@@ -60,7 +60,7 @@
         id="zon-newsteaser"
         title="Kurzteaser (für News)"
         image_positions="true"
-        areas="news"
+        areas="news ranking"
         />
 
     <layout
