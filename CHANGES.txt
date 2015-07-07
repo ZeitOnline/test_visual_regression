@@ -4,7 +4,7 @@ Change log for zeit.web
 1.38 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1829: HP Foto-Gallerie-Teaser / Style und das Frontend
 
 
 1.37 (2015-07-06)
@@ -35,8 +35,6 @@ Change log for zeit.web
 - FIX: Encode non-ascii URLs as utf-8 (e.g. for reach, comments)
 
 - FIX: Ignore authors without display_name instead of crashing
-
-- ZON-1829: HP Foto-Gallerie-Teaser / Style und das Frontend
 
 - Include URL in jinja error logging
 
