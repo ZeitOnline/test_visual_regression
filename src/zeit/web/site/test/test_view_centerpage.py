@@ -9,7 +9,7 @@ import requests
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC  # NOQA
+from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 import zeit.web.core.centerpage
@@ -409,7 +409,8 @@ def test_snapshot_displayed_after_scroll(
         document.getElementById('snapshot').parentNode.offsetTop)")
     try:
         wait = WebDriverWait(driver, 10)
-        wait.until(EC.visibility_of_element_located((By.ID, 'snapshot')))
+        wait.until(expected_conditions.visibility_of_element_located(
+                   (By.ID, 'snapshot')))
     except TimeoutException:
         assert False, 'Snapshot not visible after scrolled into view'
 
@@ -421,7 +422,8 @@ def test_snapshot_displayed_after_direct_load_with_anchor(
     driver.get('%s/zeit-online/index#snapshot' % testserver.url)
     try:
         wait = WebDriverWait(driver, 10)
-        wait.until(EC.visibility_of_element_located((By.ID, 'snapshot')))
+        wait.until(expected_conditions.visibility_of_element_located(
+                   (By.ID, 'snapshot')))
     except TimeoutException:
         assert False, 'Snapshot not visible for link with fragment identifier'
 
@@ -585,7 +587,7 @@ def test_videostage_video_should_play(selenium_driver, testserver):
     videolink.click()
     try:
         player = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located(
+            expected_conditions.presence_of_element_located(
                 (By.CSS_SELECTOR, '#video-stage .video-player__iframe'))
         )
         assert article.get_attribute(
@@ -819,10 +821,9 @@ def test_servicebox_present_in_wide_breakpoints(
 def test_centerpage_area_should_render_in_isolation(testbrowser, testserver):
     browser = testbrowser('{}/index/area/id-5fe59e73-e388-42a4-a8d4-'
                           '750b0bf96812'.format(testserver.url))
-    document = lxml.etree.fromstring(browser.contents)
-    assert document.tag == 'div'
-    assert document.attrib['class'] == 'cp-area cp-area--gallery'
-    assert len(browser.cssselect('article.teaser-small')) == 2
+    select = browser.cssselect
+    assert len(select('div.cp-area.cp-area--gallery')) == 1
+    assert len(select('article.teaser-gallery')) == 2
 
 
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
@@ -855,3 +856,98 @@ def test_centerpage_teaser_is_clickable_en_block_for_touch_devices(
     text = article.find_element_by_tag_name('p')
     text.click()
     assert driver.current_url == href
+
+
+def test_gallery_teaser_exists(testbrowser, testserver):
+    select = testbrowser('{}/index'.format(testserver.url)).cssselect
+    assert len(select('.cp-region--gallery')) == 1
+    assert len(select('.cp-area--gallery')) == 1
+
+
+def test_gallery_teaser_has_ressort_heading(testbrowser, testserver):
+    select = testbrowser('{}/index'.format(testserver.url)).cssselect
+    title = select('.cp-area--gallery .cp-ressort-heading__title')
+    assert len(title) == 1
+    assert "Fotostrecken" in title[0].text
+
+
+def test_gallery_teaser_has_correct_elements(testbrowser, testserver):
+    wanted = 2
+    browser = testbrowser('{}/index'.format(testserver.url))
+    area = browser.cssselect('.cp-area--gallery')[0]
+
+    assert len(area.cssselect('.teaser-gallery')) == wanted
+    assert len(area.cssselect('.teaser-gallery__figurewrapper')) == wanted
+    assert len(area.cssselect('.teaser-gallery__media')) == wanted
+    assert len(area.cssselect('.teaser-gallery__icon')) == wanted
+    assert len(area.cssselect('.teaser-gallery__counter')) == wanted
+    assert len(area.cssselect('.teaser-gallery__container')) == wanted
+    assert len(area.cssselect('.teaser-gallery__heading')) == wanted
+    assert len(area.cssselect('.teaser-gallery__kicker')) == wanted
+    assert len(area.cssselect('.teaser-gallery__title')) == wanted
+    assert len(area.cssselect('.teaser-gallery__text')) == wanted
+
+
+def test_gallery_teaser_hides_elements_on_mobile(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('{}/index'.format(testserver.url))
+
+    ressort_linktext = driver.find_element_by_css_selector(
+        '.cp-ressort-heading__readmore-linktext')
+    gallery_counter = driver.find_element_by_css_selector(
+        '.teaser-gallery__counter')
+    gallery_text = driver.find_element_by_css_selector(
+        '.teaser-gallery__text')
+
+    driver.set_window_size(480, 600)
+    assert not ressort_linktext.is_displayed(), (
+        'Gallery Ressort linktext should not be displayed on mobile.')
+    assert not gallery_counter.is_displayed(), (
+        'Gallery image counter should not be displayed on mobile.')
+    assert not gallery_text.is_displayed(), (
+        'Gallery description text should not be displayed on mobile.')
+
+    driver.set_window_size(520, 650)
+    assert ressort_linktext.is_displayed(), (
+        'Gallery Ressort linktext must be displayed on phablet.')
+    assert not gallery_counter.is_displayed(), (
+        'Gallery image counter should not be displayed on phablet.')
+    assert not gallery_text.is_displayed(), (
+        'Gallery description text should not be displayed on phablet.')
+
+    driver.set_window_size(768, 960)
+    assert ressort_linktext.is_displayed(), (
+        'Gallery Ressort linktext must be displayed on tablet.')
+    assert gallery_counter.is_displayed(), (
+        'Gallery image counter must be displayed on tablet.')
+    assert gallery_text.is_displayed(), (
+        'Gallery description text must be displayed on tablet.')
+
+    driver.set_window_size(980, 1024)
+    assert ressort_linktext.is_displayed(), (
+        'Gallery Ressort linktext must be displayed on desktop.')
+    assert gallery_counter.is_displayed(), (
+        'Gallery image counter must be displayed on desktop.')
+    assert gallery_text.is_displayed(), (
+        'Gallery description text must be displayed on desktop.')
+
+
+def test_gallery_teaser_shuffles_on_click(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('{}/index'.format(testserver.url))
+    teaserbutton = driver.find_element_by_css_selector(
+        '.js-gallery-teaser-shuffle')
+    teasertext1 = driver.find_element_by_css_selector(
+        '.teaser-gallery__heading').text
+    teaserbutton.click()
+
+    try:
+        heading = WebDriverWait(driver, 2).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.teaser-gallery__heading')))
+    except TimeoutException:
+        assert False, 'New teasers not loaded within 2 seconds'
+    else:
+        teasertext2 = driver.find_element_by_css_selector(
+            '.teaser-gallery__heading').text
+        assert teasertext1 != teasertext2

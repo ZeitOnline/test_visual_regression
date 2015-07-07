@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <image-folder>http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/</image-folder>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+      <copyright py:pytype="str">© Alexander Gerst/ESA</copyright>
+    </image>
+    <badges>
+      <badge>gallery</badge>
+    </badges>
+    <rankedTags>
+      <tag type="free" url_value="" uuid="ac953db2-de3d-4b6f-838e-229c90045678">Bildband</tag>
+      <tag type="topic" url_value="" uuid="fbcd1d0b-81fd-48c5-923e-26e68131d60c">Fotografie</tag>
+      <tag type="Location" url_value="" uuid="60ea3a47-e23b-453c-96f7-122f91d91c8e">Großbritannien</tag>
+      <tag type="Location" url_value="" uuid="cb1e56ad-b088-4bfe-ab5b-2e0e56de057a">England</tag>
+    </rankedTags>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-26T07:35:46.785614+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-06-25T15:12:52.735930+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-06-26T07:39:31.595405+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-06-26T07:34:08.140706+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-06-26T07:33:27.707951+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-06-26T07:33:27.749233+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-26T07:41:19.785670+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bildbestellung</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Jeder Mensch ist eine Insel? Das vielleicht nicht. Aber jede Insel hat besondere Menschen. Nehmen wir England... (raa)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Reisen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Menschen, die sich an steinigen Küsten sonnen. Und an schönen Stränden frieren. Sheila Rocks England-Fotos (raa)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">gallery</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.gallery" name="type">standalone</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:669b26f1-3682-4903-9bfe-2c5d728d0189}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">25</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Gallery" module="zeit.content.gallery.gallery"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <column layout="left"/>
+    <column layout="right">
+      <container>
+        <block name="01-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Weston-Super-Mare</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/01-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Sheila Rock</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/01-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Sheila Rock</copyright>
+          </thumbnail>
+        </block>
+      </container>
+    </column>
+    <title>Immer nur das Meer sehen</title>
+    <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <p>Inseln zeichnen sich durch zwei Dinge aus: Sie liegen im Meer; begibt man sich an den Inselrand, sieht man nichts als Weite. Sie haben aber auch klare Grenzen; nirgends ist die Welt so klein wie auf einer Insel. Die in den USA geborene Fotografin Sheila Rock hat für ihren Schwarz-Weiß-Bildband Tough &amp; Tender (Kehrer Verlag) Menschen am englischen Meer porträtiert. Menschen, die beide Seiten des Insellebens kennen. Die sich an steinigen Küsten sonnen. Und an schönen Stränden im Regen stehen.</p>
+    </text>
+    <supertitle>Fotos aus England</supertitle>
+    <subtitle>Weite! Planschen! Inseln sind Traumorte. Aber sie haben auch enge Grenzen. Was macht das mit ihren Bewohnern? Sheila Rock hat englische Küstenbewohner fotografiert.</subtitle>
+  </body>
+  <teaser>
+    <title>Immer nur das Meer sehen</title>
+    <text>Weite! Planschen! Inseln sind Traumorte. Aber sie haben auch enge Grenzen. Was macht das mit ihren Bewohnern? Sheila Rock hat englische Küstenbewohner fotografiert.</text>
+  </teaser>
+</gallery>

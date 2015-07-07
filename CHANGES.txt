@@ -4,7 +4,7 @@ Change log for zeit.web
 1.37.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1829: HP Foto-Gallerie-Teaser / Style und das Frontend
 
 
 1.37.1 (2015-07-07)
