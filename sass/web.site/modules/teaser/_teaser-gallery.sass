@@ -3,13 +3,13 @@
 // https://zeit-online.atlassian.net/secure/attachment/19208/bigariegel_desktop%2Btablet_vermaßt.png
 // https://zeit-online.atlassian.net/secure/attachment/19207/bigariegel_phone%2Bphablet_vermaßt.png
 
+$break-gallery-teasers: $break-phablet-min
+
 .teaser-gallery-group
 	&__container
-		padding-bottom: remify(10px)
-		+respond-min($break-tablet-min)
-			padding-bottom: remify(20px)
-			// flexbox for same height
-			+display-flex
+		padding-bottom: remify(20px)
+		// flexbox for same height
+		+display-flex
 
 	&__button
 		background-color: $white
@@ -28,19 +28,15 @@
 .teaser-gallery
 	background-color: $white
 	margin-bottom: remify(20px)
-	+respond-min($break-tablet-min)
-		width: remify(354px)
-		float: left
+	+respond-min($break-gallery-teasers)
+		width: 50%
 
-		// substitute for margin and last-of-type margin Gedöns
-		&+.teaser-gallery
+		// substitute for :nth-child(even)
+		& + &
 			margin-left: remify(20px)
 
-	+respond-min($break-desktop-min)
-		width: remify(460px)
-
 	&:hover
-		box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.05)
+		box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.05)
 
 	&__media
 		margin: 0
@@ -49,19 +45,16 @@
 		padding: remify(20px) remify(18px)
 
 	&__heading
-		margin: 0
+		@extend %teaser-heading
 
 	&__combined-link
 		@extend %teaser-combined-link
 
 	&__kicker
 		@extend %teaser-kicker
-		font-size: remify(14px)
 
-	// Styling her?
 	&__title
 		@extend %teaser-title
-		font-size: remify(18px)
 
 	&__text,
 	&__counter
@@ -69,10 +62,7 @@
 			display: none
 
 	&__text
-		+respond-min($break-tablet-min)
-			margin: 0
-			font-size: remify(15px)
-			color: $zon_grey
+		@extend %teaser-text
 
 	&__figurewrapper
 		position: relative
