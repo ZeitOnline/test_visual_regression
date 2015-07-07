@@ -57,6 +57,7 @@ settings = {
     'community_host': 'http://localhost:6551',
     'community_static_host': 'http://static_community/foo',
     'agatho_host': 'http://localhost:6552/comments',
+    'linkreach_host': 'egg://zeit.web.core/data/linkreach/api',
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/linkreach/api'),
     'google_tag_manager_host': 'foo.baz',
@@ -87,6 +88,7 @@ settings = {
         'egg://zeit.web.core/data/config/products.xml'),
     'vivi_zeit.cms_source-serie': (
         'egg://zeit.web.core/data/config/series.xml'),
+    'vivi_zeit.cms_task-queue-async': 'not-applicable',
     'vivi_zeit.cms_whitelist-url': (
         'egg://zeit.cms.tagging.tests/whitelist.xml'),
     'vivi_zeit.web_iqd-mobile-ids': (

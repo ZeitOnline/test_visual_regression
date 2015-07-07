@@ -16,11 +16,11 @@ import zeit.content.cp.interfaces
 import zeit.content.cp.layout
 
 import zeit.web.core.interfaces
-import zeit.web.core.reach
 import zeit.web.core.sources
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
+import zeit.web.site.module.buzzbox
 import zeit.web.core.view_centerpage
 import zeit.web.site.area.spektrum
 import zeit.web.site.module
@@ -254,11 +254,7 @@ class LegacyCenterpage(Centerpage):
     def module_buzz_mostread(self):
         """Return buzz box module with the top 3 most read articles."""
 
-        module = LegacyModule(
-            zeit.web.core.reach.fetch('mostread', self.ressort, limit=3),
-            layout='buzz-mostread')
-        module.header = 'Meistgelesene Artikel'
-        return module
+        return zeit.web.site.module.buzzbox.MostreadBuzzbox(self.context)
 
     @zeit.web.reify
     def module_printbox(self):

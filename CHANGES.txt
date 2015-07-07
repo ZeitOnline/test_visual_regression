@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-1.37 (unreleased)
+1.38 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.37 (2015-07-06)
 -----------------
 
 - ZON-1897: Transform all video links to contain seo slug
@@ -14,7 +20,9 @@ Change log for zeit.web
 
 - ZON-1888/1889: improve mobile teaser images
 
-- ZON-1895: column teaser
+- ZON-1895: Column teaser
+
+- ZON-1856: Upgrade buzz integration to API version 2.0
 
 - MAINT: Drop vivi-internal preview capabilities
 
@@ -25,6 +33,14 @@ Change log for zeit.web
 - FIX: Change cp update time route to url dispatching
 
 - FIX: Prevent seo-slugging for video comment forms the ugly way
+
+- FIX: Encode non-ascii URLs as utf-8 (e.g. for reach, comments)
+
+- FIX: Ignore authors without display_name instead of crashing
+
+- Include URL in jinja error logging
+
+- ZON-1920: Extend webtrekk pixel
 
 
 1.36 (2015-06-26)
@@ -37,6 +53,8 @@ Change log for zeit.web
 - ZON-1893: Allow A/B-test users to toggle their site version
 
 - ZON-1876: Custom wt param to distinguish between classic and beta
+
+- Integrate bugsnag middleware into WSGI pipeline
 
 
 1.35 (2015-06-26)
