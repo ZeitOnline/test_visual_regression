@@ -358,8 +358,8 @@ def test_teaser_for_columns_should_have_according_journalistic_format(
     block.__parent__.kind = 'major'
     block.layout.id = 'zon-small'
     block.__iter__ = lambda _: iter([article])
-    teaser = zeit.web.core.template.get_journalistic_format(block)
-    assert teaser == 'zon-column'
+    jofo = zeit.web.core.template.get_journalistic_format(block)
+    assert jofo == 'column'
 
 
 def test_teaser_layout_should_only_be_set_for_allowed_areas(application):
@@ -383,8 +383,8 @@ def test_teaser_for_series_should_have_according_journalistic_format(
     block.__parent__ = mock.Mock()
     block.__parent__.kind = 'major'
     block.__iter__ = lambda _: iter([article])
-    teaser = zeit.web.core.template.get_journalistic_format(block)
-    assert teaser == 'zon-series'
+    jofo = zeit.web.core.template.get_journalistic_format(block)
+    assert jofo == 'series'
 
 
 def test_teaser_for_blogs_should_have_according_journalistic_format(
@@ -396,8 +396,8 @@ def test_teaser_for_blogs_should_have_according_journalistic_format(
     block.__parent__ = mock.Mock()
     block.__parent__.kind = 'major'
     block.__iter__ = lambda _: iter([article])
-    teaser = zeit.web.core.template.get_journalistic_format(block)
-    assert teaser == 'zon-blog'
+    jofo = zeit.web.core.template.get_journalistic_format(block)
+    assert jofo == 'blog'
 
 
 def test_teaser_layout_for_empty_block_should_be_set_to_hide(application):
