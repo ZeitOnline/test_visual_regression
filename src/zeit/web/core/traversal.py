@@ -23,6 +23,7 @@ import zeit.web.core.utils
 import zeit.web.core.gallery
 import zeit.web.core.interfaces
 
+
 log = logging.getLogger(__name__)
 
 
@@ -56,14 +57,10 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
         return self.call_subs(request=request, **tdict)
 
     def call_subs(self, **tdict):
-        from pprint import pprint as pp
         for sub in zope.component.subscribers(
                 [tdict.get('context')], zeit.web.core.interfaces.ITraversable):
             try:
-                pp('____________')
-                pp(tdict)
                 sub(tdict)
-                pp(tdict)
             except Retraverse:
                 return self.call_subs(**tdict)
         return tdict
