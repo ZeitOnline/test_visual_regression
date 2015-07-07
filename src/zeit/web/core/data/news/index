@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="arena">
+  <head>
+    <header_image xsi:nil="true"/>
+    <snapshot xsi:nil="true"/>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-04-22T09:21:34.320676+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-04-22T08:44:09.685814+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-04-22T09:23:42.528639+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-04-22T08:44:39.000639+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-04-22T08:43:26.238987+00:00</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-04-22T09:24:54.998128+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.drebenstedt</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Administratives</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">arena</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">arena</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ae02c77e-d132-4693-9a7a-6a74c058dbc9}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">16</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Schlagzeilen</title>
+    <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa252" title="Schlagzeilen">
+      <region visible="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96fc2" kind="ranking" title="Ergebnisse" count="100" automatic="True">
+        <query>
+          <condition type="Channel" py:pytype="str">News</condition>
+        </query>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="ca89bdc0-2691-40d9-8743-63ccac2266cd"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="964cf1a6-0de9-46c8-86c9-3ba3f2b91523"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="79833cea-0215-4714-9c7b-eee1e06436f0"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="94f0f46d-40ef-4401-8c22-d3e3ead60e32"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="85b5d922-ca02-4096-aa1d-2cf9b7dc2b1d"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="b069c44b-6312-42b0-8b8e-81f0a1e5d714"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="c0f8c445-495d-4bb8-8542-feaca135b27f"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="ca16b1b8-a124-4e16-b49a-42ed402bfe39"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="d590242f-4f2e-440f-9b32-a0a3be9db459"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="9bd13c23-734d-4712-b0eb-7c055a2b98ae"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="a7791e35-a7a7-45a7-9956-4be83641e8fb"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="ef4f74b7-cdc9-43da-9df8-02f2572be513"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="3e281fbe-e81b-42b9-ac92-257718213f3a"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="2665cc67-3880-4136-b1e8-4a830cea1d2f"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="c9c2f153-5e20-4e40-bba3-03a5612b225e"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="a24cacce-a6ee-4238-b55a-ef5193c1389f"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="4657359c-0c53-4471-a8cc-683822aaa54a"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="f55c80d1-9901-4e2d-bfb3-5862ee3dc338"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="0d8d3800-2d59-4f82-9d46-6fb0eb300a8c"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="019e2260-5282-42b7-b38f-52ef104b7337"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="2bfb68fb-a40c-4351-b22b-418378efc32b"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="3465e75d-cf46-481a-bf61-546070b0c180"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="b9821792-04bb-4005-9b6b-eaf7b2373f18"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="a791412c-eb5b-4aa1-b06b-773502866f40"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="f19363da-ff21-4ac1-9bdd-006ba4ea52cd"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="56f0c4b1-f868-463c-94ea-9e75ee7b0269"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="b58610d7-cfc3-4cde-bdc8-76e70801a545"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="1861342d-f2b6-4b16-86a0-7a434d1eee48"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="65a07ec8-c2f6-4789-b636-1c3dd520be7f"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="c850b7a7-52dd-4048-bb43-f5e74f97aae9"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="3fedaa19-12e1-4254-9a1e-0e848c737ebf"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="3924d44c-5837-4b74-93e1-eebbc8b8f0ac"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="847ee33c-9fd9-4e41-bdfa-9981db4dcf68"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="1ed0e8ef-bf69-46d6-9fa5-c675a5bc6dee"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="e29a9934-b7d4-462a-a4f8-a28e3d54ebf8"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="54f95813-dfa7-4df6-866f-df8cc50a4b79"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="9658e5b9-9a29-4445-ac95-f876b9d9e84d"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="c96f50bf-5fa2-4bfb-9f6c-bcea65d11366"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="cc66eaa7-08a6-4735-b1b3-ffc7c59ab8bf"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="d5e5f410-02c1-4222-9e90-1d959658ddae"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="3c128fd1-dd32-4304-ba2e-8d0b8a822c1d"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="977da23d-211a-4eb1-bd5a-e5c2b06f0b28"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="05fc7aa8-a16c-417e-8313-d6540a6239bd"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="6767a6e8-3715-498b-aaa9-31c1454f29e9"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="fb38552e-22af-4c3f-ac27-fe938ee68bf2"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="16cb8bd0-9319-4cf3-bac7-771ae6fc0bbc"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="22ab10de-6d76-49b7-89f4-87cebaf718d7"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="7ea839f6-c4cf-449a-9bcf-c5eff03054b4"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="cc8b96b7-9474-4634-8e8e-8f168e0eab6d"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="f07379b5-2f54-4a90-a25d-c1e35e7eea4e"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="9638f8b4-0ecd-4d1a-a773-c31c67ab470e"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="781df32f-473b-4a1f-bf70-ebf9b58feed7"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="303a9336-c18a-47bc-b116-538d2d2fdc9f"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="44d062a1-51d0-47fc-b28d-ea8c560dab91"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="110051c5-b0ca-42b2-94e1-c99af8781756"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="76153c13-520d-4fcf-bfc3-2c7c2150a379"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="40e82cf7-e383-47e1-a3cc-f21ccb31ea28"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="06f4e953-cb01-4996-82d1-0dd2ef1d25b7"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="6cf9e074-e807-40e7-abba-d297c4e35c9d"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="4509aac7-896a-47d1-b850-4aeebb29fe46"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="cfecf784-17fb-45e4-873a-8dd6398c8e51"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="6ab0295d-a661-4fdb-a527-39d876205110"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="33e43bb3-2b46-452f-b45a-951f96ddac2f"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="35c37b5b-34cb-4f35-b4e4-87378ae600b2"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="3d14d012-e6bd-45a5-b120-94dfd840fcd3"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="1bfb374f-02e7-43fa-a3c1-018bca06167c"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="b24b5153-5cdf-45c6-a1e3-fa28773bd171"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="6842f749-a2ea-43bc-99af-cdf5d54c3800"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="8a57a094-95c7-46a1-9bc0-e2e5f0e1cefa"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="df439496-a63f-44e4-97d2-bcbbf6178716"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="4e1e0342-7bfb-4379-8313-f087e3a94683"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="f7118adf-6cc8-45b1-8896-5f6ac21a7eac"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="987f2abc-e8ed-43a8-985b-f455765aa0e2"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="7f5f72d1-ecd6-43dc-a4c2-8fc19d7623e3"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="e0ad9aba-8dd8-4e41-935e-796951704d0b"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="f2a0e9e8-d032-495d-8746-7d33e3697685"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="5077e8c2-20a4-4c01-8310-8ca5b6f6aed2"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="fba0adcc-09c0-4b1f-939e-abed6bd5b3e4"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="a4060ad8-5d3a-49ca-85f1-facfeaabe7df"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="81395153-8724-4d12-8b3b-1f5d97d5a517"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="f886b15b-06ef-4121-97de-b7c626a2afff"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="59e9eded-9c7a-46b2-9c3e-5a27d4ffdf3c"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="2b97b9a7-7c8d-4268-b9dc-0ce13b57495d"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="e4b04136-f4ca-4682-8aff-331d7f2b7524"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="e0fd4f62-6c33-4e0e-b6fd-7957177f218f"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="09cb5251-c1bd-4828-9a50-9a2f0b7b7c5d"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="a47bcc10-5f63-48d5-8ba2-584b52ef3886"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="d4790aff-7d9b-47d2-8dbe-1b1a6e87a955"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="f45b05d2-af09-4e6e-ac00-abe120187d99"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="ee73e65c-4393-4403-aa22-f2690316580b"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="e3c87bb4-377a-4056-9e26-28583e84e68e"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="042546a0-468e-4b4c-b497-67c24f6a359e"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="c608f703-4fce-4c23-941d-171b36d998ee"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="1b7c9843-c9a3-4c88-8a43-8cd38bafdfb8"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="1537baa9-a6d3-4d93-a973-06348cabeea4"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="d85a8a74-06dd-41b2-aa9a-c8b9945913fe"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="71266514-e5e4-4b18-8b00-8aaf2a3809d0"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="a89854b9-9d68-4bbc-8843-e0ca3af36e91"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="3df4aafa-6283-44f8-a9ec-375d7782473b"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="dcd798e6-0512-4aa7-bbf4-6daff1a774f0"/>
+      </region>
+    </cluster>
+  </body>
+  <feed/>
+  <teaser>
+    <title>Schlagzeilen</title>
+  </teaser>
+</centerpage>
