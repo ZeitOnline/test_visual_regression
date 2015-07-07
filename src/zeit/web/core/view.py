@@ -363,6 +363,11 @@ class Base(object):
         return zeit.web.core.block.BreakingNews()
 
     @zeit.web.reify
+    def content_url(self):
+        path = '/'.join(self.request.traversed)
+        return self.request.route_url('home') + path
+
+    @zeit.web.reify
     def is_dev_environment(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('dev_environment', '')
@@ -474,11 +479,6 @@ class Content(Base):
                 return group
         except TypeError:
             return
-
-    @zeit.web.reify
-    def content_url(self):
-        path = '/'.join(self.request.traversed)
-        return self.request.route_url('home') + path
 
     @zeit.web.reify
     def comments(self):

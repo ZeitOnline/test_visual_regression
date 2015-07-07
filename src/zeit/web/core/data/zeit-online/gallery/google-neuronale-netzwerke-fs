@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <image-folder>http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/</image-folder>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+      <copyright py:pytype="str">© Alexander Gerst/ESA</copyright>
+    </image>
+    <badges>
+      <badge>gallery</badge>
+    </badges>
+    <rankedTags>
+      <tag uuid="aa3d17b4-aa8d-4131-a0d0-dca38ad4c244" url_value="" type="Organization">Google</tag>
+      <tag uuid="8d6a6c59-993c-4469-81a3-5b2ef667594d" url_value="" type="free">Künstliche Intelligenz</tag>
+      <tag uuid="fbcd1d0b-81fd-48c5-923e-26e68131d60c" url_value="" type="topic">Fotografie</tag>
+    </rankedTags>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute><attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Patrick Beuth</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breadcrumb_title">Googles neuronale Netzwerke interpretieren Bilder</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-22T11:09:51.739042+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-06-22T09:56:53.587470+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-06-22T11:10:13.897841+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-06-22T11:11:13.629165+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-06-22T09:56:20.768385+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-06-22T09:56:21.583487+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-22T09:53:51.973835+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bildbestellung</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/digital/2015-06/google-fs</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Digital</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Das Wolkenkuckucksheim von Googles neuronalen Netzwerken (pb)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">gallery</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.gallery" name="type">standalone</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:60dfceaf-c5be-4c75-9869-303292cf0ab0}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">25</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Gallery" module="zeit.content.gallery.gallery"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <column layout="left"/>
+    <column layout="right">
+      <container>
+        <block name="01-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">In den Jardins du Trocadéro am Fuße des Eiffelturms herrscht Hochbetrieb. Frankreich muss sich auf bis zu 40 Grad einstellen.</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/01-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Chesnot/Getty Images</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/01-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Chesnot/Getty Images</copyright>
+          </thumbnail>
+        </block>
+      </container>
+    </column>
+    <title>Googles Wolkenkuckucksheim</title>
+    <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <p>Googles neuronale Netze bestehen aus bis zu 30 Schichten künstlicher Neuronen, <a target="_blank" href="http://googleblog.blogspot.de/2012/06/using-large-scale-brain-simulations-for.html">simuliert in mächtigen Computern</a>. Sie interpretieren Fotos und Gemälde: Niedrige Schichten "achten" nur auf Ecken oder Ränder. Höhere Schichten suchen Motive wie Tiere. Doch so wie Menschen am Wolkenhimmel Schäfchen zu sehen glauben, können auch neuronale Netzwerke Bilder überinterpretieren. <a target="_blank" href="http://googleresearch.blogspot.de/2015/06/inceptionism-going-deeper-into-neural.html?m=1">Google-Forscher ließen ihre KI</a> Bilder so verändern, dass jene Elemente hervortreten, die einzelne Schicht zu erkennen glauben. So entstehen selbst aus Pixelrauschen psychedelische Motive.</p>
+    </text>
+    <supertitle>Neuronale Netzwerke</supertitle>
+    <subtitle>Wenn Google seinen neuronalen Netzwerken sagt: "Zeig uns die Tiere in diesem Bild", dann finden sie welche. Selbst dort, wo keine sind. So entstehen fantastische Werke.</subtitle>
+  </body>
+  <teaser>
+    <title>Googles Wolkenkuckucksheim</title>
+    <text>Wenn Google seinen neuronalen Netzwerken sagt: "Zeig uns die Tiere in diesem Bild", dann finden sie welche. Selbst dort, wo keine sind. So entstehen fantastische Werke.</text>
+  </teaser>
+</gallery>
