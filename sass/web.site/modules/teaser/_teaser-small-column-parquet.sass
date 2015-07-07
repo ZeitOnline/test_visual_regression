@@ -32,9 +32,7 @@
 
 .teaser-small-column-parquet--has-media
 	.teaser-small-column-parquet__byline
-		padding-right: remify($teaser-column-mobile-image-size)
-		// min-height: $teaser-column-mobile-image-size - $page-padding - ownMarginBottom = 5rem - 1.25rem - 0.25rem
-		min-height: 3.5rem
+		@extend %teaser-column__media-space
 
 +respond-min($break-tablet-min)
 	.teaser-small-column-parquet
@@ -51,10 +49,9 @@
 			left: 0
 			overflow: hidden
 			width: remify(180px)
-			max-height: remify(135px) // width 250 in 4:3 format
+			max-height: remify(135px) // width 180 in 4:3 format
 			+respond-min($break-desktop-min)
 				width: remify(250px)
-				max-height: remify(188px) // width 180 in 4:3 format
 		&__media
 			top: 0
 			bottom: 0
@@ -63,6 +60,3 @@
 			overflow: hidden
 			width: remify(140px)
 			max-height: remify(135px) // height of __mediawrapper
-			+respond-min($break-desktop-min)
-				max-height: remify(188px) // height of __mediawrapper
-

@@ -6,7 +6,7 @@ $teaser-column-mobile-image-size: 80px
 $teaser-column-image-height-large: 130px
 $teaser-column-image-width-large: 130px
 $teaser-column-image-height-fullwidth: 210px
-$teaser-column-image-width-fullwidth: 220px
+$teaser-column-image-width-fullwidth: 210px
 
 
 %teaser-column
@@ -38,6 +38,11 @@ $teaser-column-image-width-fullwidth: 220px
 		margin-left: 20px
 		margin-top: 30px
 		position: static
+
+%teaser-column__media-space
+	padding-right: remify($teaser-column-mobile-image-size + 20px)
+	// min-height: $teaser-column-mobile-image-size - $page-padding - ownMarginBottom = 5rem - 1.25rem - 0.25rem
+	min-height: 3.5rem
 
 %teaser-column__byline
 	@extend %teaser-byline

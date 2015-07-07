@@ -27,9 +27,7 @@
 
 .teaser-large-column--has-media
 	.teaser-large-column__byline
-		padding-right: remify($teaser-column-mobile-image-size)
-		// min-height: $teaser-column-mobile-image-size - $page-padding - ownMarginBottom = 5rem - 1.25rem - 0.25rem
-		min-height: 3.5rem
+		@extend %teaser-column__media-space
 
 +respond-min($break-phablet-min)
 	.teaser-large-column--has-media
