@@ -1,7 +1,10 @@
 import collections
 import re
 
+import jinja2
 import zope.component
+
+import zeit.cms.interfaces
 
 
 def fix_misrepresented_latin(val):
@@ -45,6 +48,30 @@ def get_named_adapter(obj, iface, attr, name=None):
         if name is None:
             return get_named_adapter(obj, iface, attr, u'')
     return obj
+
+
+def find_block(context, attrib='cp:__name__', **specs):
+    """Find a block (region/area/module/block/container/cluster, you name it)
+    in the XML of a given context. You can pass in arbitrary keyword arguments
+    that need to match the attributes of your desired block.
+    You may also need to override the name of the uuid attribute using the
+    attrib keyword.
+    """
+    # XXX Maybe this would also work with IXMLReference?
+    # zope.component.queryAdapter(
+    #     context, zeit.cms.content.interfaces.IXMLReference, name='related')
+
+    tpl = jinja2.Template("""
+        .//*[{% for k, v in specs %}@{{ k }}="{{ v }}"{% endfor %}]/@{{ attr }}
+    """)
+    unique_ids = context.xml.xpath(
+        tpl.render(attr=attrib, specs=specs.items()).strip(),
+        namespaces={'cp': 'http://namespaces.zeit.de/CMS/cp'})
+    try:
+        block = context.get_recursive(unique_ids[0])
+        return zeit.cms.interfaces.ICMSContent(block.uniqueId)
+    except (AttributeError, IndexError, TypeError):
+        return
 
 
 def first_child(iterable):

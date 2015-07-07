@@ -7,7 +7,7 @@ import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 
 import zeit.web.site.module.search_form
-import zeit.web.core.application
+import zeit.web.core.utils
 import zeit.web.core.sources
 
 
@@ -15,7 +15,7 @@ import zeit.web.core.sources
 def search_form(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/suche/index')
-    block = zeit.web.core.application.find_block(
+    block = zeit.web.core.utils.find_block(
         context, module='search-form')
     return zeit.web.core.template.get_module(block)
 
@@ -24,7 +24,7 @@ def search_form(application):
 def search_area(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/suche/index')
-    area = zeit.web.core.application.find_block(
+    area = zeit.web.core.utils.find_block(
         context, attrib='area', kind='ranking')
     return zeit.web.core.template.get_area(area)
 

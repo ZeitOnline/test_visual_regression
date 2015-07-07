@@ -8,7 +8,6 @@ import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 
 import zeit.web.core.block
-import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 
 
@@ -172,10 +171,4 @@ class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
 
 
 class IPhotoclusterArticle(zeit.content.article.interfaces.IArticle):
-    pass
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
-@grokcore.component.adapter(zeit.web.core.interfaces.INextread)
-class Nextread(zeit.web.core.centerpage.TeaserBlock):
     pass

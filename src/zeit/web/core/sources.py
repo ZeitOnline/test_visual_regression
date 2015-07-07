@@ -13,6 +13,7 @@ import zope.interface
 import zeit.cms.interfaces
 import zeit.content.article.interfaces
 import zeit.imp.source
+import zeit.solr.interfaces
 
 import zeit.web.core.interfaces
 import zeit.web.core.utils

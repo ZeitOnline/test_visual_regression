@@ -8,7 +8,6 @@ import warnings
 
 import bugsnag
 import bugsnag.wsgi.middleware
-import grokcore.component
 import jinja2
 import jinja2.ext
 import pyramid.authorization
@@ -27,27 +26,14 @@ import zope.interface.declarations
 import zeit.cms.repository.interfaces
 import zeit.cms.repository.repository
 import zeit.connector
-import zeit.content.article.interfaces
-import zeit.content.cp.interfaces
-import zeit.content.dynamicfolder.interfaces
-import zeit.content.gallery.interfaces
-import zeit.content.video.interfaces
-import zeit.find.search
-import zeit.magazin.interfaces
-import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core
-import zeit.web.core.article
 import zeit.web.core.banner
-import zeit.web.core.block
-import zeit.web.core.centerpage
-import zeit.web.core.gallery
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
 import zeit.web.core.sources
-import zeit.web.site.module.search_form
 
 
 log = logging.getLogger(__name__)

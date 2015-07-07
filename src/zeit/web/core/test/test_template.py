@@ -17,6 +17,7 @@ import zeit.content.cp.blocks.teaser
 
 import zeit.web.core.decorator
 import zeit.web.core.template
+import zeit.web.core.utils
 import zeit.web.site.module.search_form
 
 
@@ -528,7 +529,7 @@ def test_get_module_filter_should_correctly_extract_cpextra_id(application):
     assert zeit.web.core.template.get_module(block) is block
 
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
-    block = zeit.web.core.application.find_block(cp, module='search-form')
+    block = zeit.web.core.utils.find_block(cp, module='search-form')
 
     block.visible = True
     block.cpextra = 'n/a'
