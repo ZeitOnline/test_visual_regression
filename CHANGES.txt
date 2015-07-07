@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-1.37 (unreleased)
+1.38 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.37 (2015-07-06)
 -----------------
 
 - ZON-1897: Transform all video links to contain seo slug
@@ -33,6 +39,8 @@ Change log for zeit.web
 - ZON-1829: HP Foto-Gallerie-Teaser / Style und das Frontend
 
 - Include URL in jinja error logging
+
+- ZON-1920: Extend webtrekk pixel
 
 
 1.36 (2015-06-26)
