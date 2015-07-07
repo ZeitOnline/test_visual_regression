@@ -183,6 +183,12 @@ def get_layout(block, request=None):
         if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
             log.debug('Broken ref at {}'.format(teaser.uniqueId))
             layout = 'hide'
+        elif layout == 'zon-parquet-small':
+            # TODO: remove after change in cp-layouts-2015.xml
+            layout = 'zon-small'
+        elif layout == 'zon-parquet-large':
+            # TODO: remove after change in cp-layouts-2015.xml
+            layout = 'zon-large'
         elif layout == 'zon-square':
             # ToDo: Remove when Longform will be generally used on www.zeit.de
             if urlparse.urlparse(teaser.uniqueId).path.startswith('/feature/'):
