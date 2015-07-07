@@ -39,6 +39,7 @@ require([
     'web.site/plugins/jquery.liveblog',
     'web.site/plugins/jquery.searchTools',
     'web.site/plugins/jquery.selectNav',
+    'web.site/plugins/jquery.shuffleTeasers',
     'web.site/plugins/jquery.snapshot',
     'web.site/plugins/jquery.toggleBeta',
     'web.site/plugins/jquery.togglenavi',
@@ -62,6 +63,7 @@ require([
         $( 'body' ).up2dateSignals();
         $( '#main' ).autoclick();
         $( '#series_select' ).selectNav();
+        $( '.js-gallery-teaser-shuffle' ).shuffleTeasers();
     } else if ( article.length ) {
         // article, gallery etc.
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
