@@ -28,12 +28,20 @@
 
 .teaser-fullwidth-column--has-media
 	.teaser-fullwidth-column__byline
-		padding-right: remify($teaser-column-mobile-image-size)
-		// min-height: $teaser-column-mobile-image-size - $page-padding - ownMarginBottom = 5rem - 1.25rem - 0.25rem
-		min-height: 3.5rem
+		@extend %teaser-column__media-space
 
 +respond-min($break-phablet-min)
+	.teaser-fullwidth-column
+		padding: remify(40px)
+		&__title
+			font-size: remify(32px)
+		&__text
+			font-size: remify(16px)
+		&__byline
+			margin-top: remify(8px)
+
 	.teaser-fullwidth-column--has-media
+		min-height: $teaser-column-image-height-fullwidth * 1.2
 		.teaser-fullwidth-column__media
 			width: $teaser-column-image-width-fullwidth
 			height: $teaser-column-image-height-fullwidth
@@ -41,5 +49,5 @@
 			min-height: initial
 		.teaser-fullwidth-column__text,
 		.teaser-fullwidth-column__title
-			padding-right: remify($teaser-column-image-width-fullwidth)
+			padding-right: remify($teaser-column-image-width-fullwidth * 1.2)
 
