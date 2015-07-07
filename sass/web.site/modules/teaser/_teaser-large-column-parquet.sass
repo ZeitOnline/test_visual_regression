@@ -1,25 +1,22 @@
 .teaser-large-column-parquet
 	@extend %teaser-column
-	@extend %teaser-column--margin-for-not-fullwidth
 	@extend %teaser-column--in-parquet
 	&__media
 		@extend %teaser-column__media
 	&__media-item
 		@extend %teaser-column__media-item
-	&__container
-		@extend %teaser-small-container
 	&__series-label
-		@extend %teaser-series-label
+		@extend .teaser-large__series-label
 	&__heading
-		@extend %teaser-heading
+		@extend .teaser-large__heading
 	&__combined-link
-		@extend %teaser-combined-link
+		@extend .teaser-large__combined-link
 	&__kicker
-		@extend %teaser-kicker
+		@extend .teaser-large__kicker
 	&__title
-		@extend %teaser-title
+		@extend .teaser-large__title
 	&__text
-		@extend %teaser-text
+		@extend .teaser-large__text
 	&__byline
 		@extend %teaser-column__byline
 	&__metadata
@@ -29,16 +26,20 @@
 	&__commentcount
 		@extend %teaser-commentcount
 
-.teaser-large-column-parquet
-	margin: $vertical-space 0 $vertical-space 0
-	&--has-media,
-		min-height: remify(250px)
-		padding: $petite $petite $petite remify(250px+20px)
-	&__media
-		background: $color-column-background
-		top: 0
-		right: 70%
-		bottom: 0
-		left: 0
-		width: 30%
-		height: 100%
+
+.teaser-large-column-parquet--has-media
+	.teaser-large-column-parquet__byline
+		padding-right: remify($teaser-column-mobile-image-size)
+		// min-height: $teaser-column-mobile-image-size - $page-padding - ownMarginBottom = 5rem - 1.25rem - 0.25rem
+		min-height: 3.5rem
+
++respond-min($break-tablet-min)
+	.teaser-large-column-parquet--has-media
+		.teaser-large-column-parquet__media
+			width: $teaser-column-image-width-large
+			height: $teaser-column-image-height-large
+		.teaser-large-column-parquet__byline
+			min-height: initial
+		.teaser-large-column-parquet__text,
+		.teaser-large-column-parquet__title
+			padding-right: remify($teaser-column-image-width-large + 20px)

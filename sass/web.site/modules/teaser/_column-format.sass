@@ -2,24 +2,24 @@
 
 $color-column-background: $zon-warm-grey
 $teaser-column-mobile-image-size: 80px
-$teaser-column-image-size: 120px
+
+$teaser-column-image-height-large: 130px
+$teaser-column-image-width-large: 130px
+$teaser-column-image-height-fullwidth: 210px
+$teaser-column-image-width-fullwidth: 220px
 
 
 %teaser-column
 	@extend %teaser
 	background: $color-column-background
-	margin: remify(40px) (-$page-padding) $vertical-space (-$page-padding)
 	padding: $page-padding
 	position: relative
 
-%teaser-column--margin-for-not-fullwidth
-	+respond-min($break-tablet-min)
-		margin-left: 0
-		margin-right: 0
-
 %teaser-column--in-parquet
 	background: none
-	padding: 0
+	+respond-min($break-tablet-min)
+		padding-left: 0
+		padding-right: 0
 
 %teaser-column__media
 	@extend %teaser-media

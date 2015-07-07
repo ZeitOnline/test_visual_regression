@@ -1,6 +1,5 @@
 .teaser-small-column-parquet
 	@extend %teaser-column
-	@extend %teaser-column--margin-for-not-fullwidth
 	@extend %teaser-column--in-parquet
 	&__media
 		@extend %teaser-column__media
@@ -9,15 +8,17 @@
 	&__container
 		@extend %teaser-small-container
 	&__series-label
-		@extend %teaser-series-label
+		@extend .teaser-small__series-label
 	&__heading
-		@extend %teaser-heading
+		@extend .teaser-small__heading
 	&__combined-link
-		@extend %teaser-combined-link
+		@extend .teaser-small__combined-link
 	&__kicker
-		@extend %teaser-kicker
+		@extend .teaser-small__kicker
 	&__title
-		@extend %teaser-title
+		@extend .teaser-small__title
+	&__text
+		@extend .teaser-small__text
 	&__text
 		@extend %teaser-text
 	&__byline
@@ -29,16 +30,39 @@
 	&__commentcount
 		@extend %teaser-commentcount
 
-.teaser-small-column-parquet
-	margin: $vertical-space 0 $vertical-space 0
-	&--has-media,
-		min-height: remify(250px)
-		padding: $petite $petite $petite remify(250px+20px)
-	&__media
-		background: $color-column-background
-		top: 0
-		right: 70%
-		bottom: 0
-		left: 0
-		width: 30%
-		height: 100%
+.teaser-small-column-parquet--has-media
+	.teaser-small-column-parquet__byline
+		padding-right: remify($teaser-column-mobile-image-size)
+		// min-height: $teaser-column-mobile-image-size - $page-padding - ownMarginBottom = 5rem - 1.25rem - 0.25rem
+		min-height: 3.5rem
+
++respond-min($break-tablet-min)
+	.teaser-small-column-parquet
+		margin: $vertical-space 0 $vertical-space 0
+		&--has-media
+			padding: 0 $petite $petite remify(180px+20px)
+			+respond-min($break-desktop-min)
+				padding-left: remify(250px+20px)
+		&__mediawrapper
+			background: $color-column-background
+			position: absolute
+			top: 0
+			bottom: 0
+			left: 0
+			overflow: hidden
+			width: remify(180px)
+			max-height: remify(135px) // width 250 in 4:3 format
+			+respond-min($break-desktop-min)
+				width: remify(250px)
+				max-height: remify(188px) // width 180 in 4:3 format
+		&__media
+			top: 0
+			bottom: 0
+			left: 0
+			height: 100%
+			overflow: hidden
+			width: remify(140px)
+			max-height: remify(135px) // height of __mediawrapper
+			+respond-min($break-desktop-min)
+				max-height: remify(188px) // height of __mediawrapper
+
