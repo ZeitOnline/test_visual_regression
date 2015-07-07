@@ -4,15 +4,13 @@ Change log for zeit.web
 1.38 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Refactor update signals
 
 
 1.37 (2015-07-06)
 -----------------
 
 - ZON-1897: Transform all video links to contain seo slug
-
-- MAINT: Refactor update signals
 
 - ZON-1908: Implement zmo and zon specific nextread sources
 
