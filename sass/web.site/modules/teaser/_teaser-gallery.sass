@@ -1,0 +1,93 @@
+
+// REFERENCE:
+// https://zeit-online.atlassian.net/secure/attachment/19208/bigariegel_desktop%2Btablet_vermaßt.png
+// https://zeit-online.atlassian.net/secure/attachment/19207/bigariegel_phone%2Bphablet_vermaßt.png
+
+$break-gallery-teasers: $break-phablet-min
+
+.teaser-gallery-group
+	&__container
+		padding-bottom: em(10px)
+		+respond-min($break-gallery-teasers)
+			padding-bottom: em(20px)
+			// flexbox for same height
+			+display-flex
+
+	&__button
+		background-color: $white
+		display: table
+		margin: 0 auto
+
+	&__shuffle-icon
+		width: remify(15px)
+		height: remify(13px)
+		margin-right: 0.5em
+		vertical-align: text-top
+
+.no-js .js-gallery-teaser-shuffle
+	display: none
+
+.teaser-gallery
+	background-color: $white
+	margin-bottom: remify(20px)
+	+respond-min($break-gallery-teasers)
+		width: 50%
+
+		// substitute for :nth-child(even)
+		& + &
+			margin-left: remify(20px)
+
+	&:hover
+		box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.05)
+
+	&__media
+		margin: 0
+
+	&__container
+		padding: remify(20px) remify(18px)
+
+	&__heading
+		@extend %teaser-heading
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__kicker
+		@extend %teaser-kicker
+
+	&__title
+		@extend %teaser-title
+
+	&__text,
+	&__counter
+		+respond-max($break-tablet-min)
+			display: none
+
+	&__text
+		@extend %teaser-text
+
+	&__figurewrapper
+		position: relative
+		// min-height in case the image is not loaded (yet)
+		min-height: 3rem
+
+	&__icon
+		position: absolute
+		bottom: em(10px)
+		left: em(10px)
+		height: em(22px)
+		width: em(32px)
+		// svg colors
+		stroke: $white
+		fill: $zon-charcoal
+		fill-opacity: 0.6
+
+	&__counter
+		position: absolute
+		bottom: 0
+		right: 0
+		padding: remify(2px) 1rem
+		background-color: #333338
+		color: $white
+		font-size: remify(12px)
+		letter-spacing: 0.04em

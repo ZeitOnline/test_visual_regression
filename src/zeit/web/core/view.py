@@ -253,7 +253,7 @@ class Base(object):
     def canonical_url(self):
         """ Set own url as default canonical. Overwrite for special
             cases and page types"""
-        return "{}{}".format(self.request.host_url, self.request.path_info)
+        return u"{}{}".format(self.request.host_url, self.request.path_info)
 
     @zeit.web.reify
     def js_vars(self):
@@ -362,6 +362,11 @@ class Base(object):
     @zeit.web.reify
     def breaking_news(self):
         return zeit.web.core.block.BreakingNews()
+
+    @zeit.web.reify
+    def content_url(self):
+        path = '/'.join(self.request.traversed)
+        return self.request.route_url('home') + path
 
     @zeit.web.reify
     def is_dev_environment(self):
@@ -475,11 +480,6 @@ class Content(Base):
                 return group
         except TypeError:
             return
-
-    @zeit.web.reify
-    def content_url(self):
-        path = '/'.join(self.request.traversed)
-        return self.request.route_url('home') + path
 
     @zeit.web.reify
     def comments(self):

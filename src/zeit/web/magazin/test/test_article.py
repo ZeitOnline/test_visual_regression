@@ -121,7 +121,7 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
 
     # custom parameter
     assert '1: "anne mustermann",' in browser.contents
-    assert '2: "zeitmz/essenundtrinken/article",' in browser.contents
+    assert '2: "lebensart/essen-trinken/bild-text",' in browser.contents
     assert '3: "1/7",' in browser.contents
     assert '4: "wein;italien;toskana;bologna;bozen;florenz;tübingen",' \
         in browser.contents
@@ -141,8 +141,8 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
             'artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=article'
             '&amp;cg3=lebensart&amp;cg4=online&amp;cg5=essen-trinken&amp;cg6'
             '=weinkolumne&amp;cg7=03&amp;cg8=zeitmz/essenundtrinken/article'
-            '&amp;cg9=2013-07-30&amp;cp1=anne mustermann&amp;cp2=zeitmz/'
-            'essenundtrinken/article&amp;cp3=1/7&amp;cp4=wein;italien;'
+            '&amp;cg9=2013-07-30&amp;cp1=anne mustermann&amp;cp2=lebensart/'
+            'essen-trinken/bild-text&amp;cp3=1/7&amp;cp4=wein;italien;'
             'toskana;bologna;bozen;florenz;tübingen&amp;cp5=2013-07-30 '
             '17:20:50.176115+02:00&amp;cp6=4952&amp;cp7=&amp;cp8=zede'
             '&amp;cp9=zeitmz/essenundtrinken/article&amp;cp10=&amp;'
@@ -166,7 +166,7 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, testbrowser):
             '&amp;cg2=article&amp;cg3=lebensart&amp;cg4=online&amp;cg5=essen-'
             'trinken&amp;cg6=weinkolumne&amp;cg7=seite-2&amp;cg8=zeitmz/'
             'essenundtrinken/article&amp;cg9=2013-07-30&amp;cp1=anne '
-            'mustermann&amp;cp2=zeitmz/essenundtrinken/article&amp;'
+            'mustermann&amp;cp2=lebensart/essen-trinken/bild-text&amp;'
             'cp3=2/7&amp;cp4=wein;italien;toskana;bologna;bozen;florenz;'
             'tübingen&amp;cp5=2013-07-30 17:20:50.176115+02:00&amp;cp6=4952'
             '&amp;cp7=&amp;cp8=zede&amp;cp9=zeitmz/essenundtrinken/article'
