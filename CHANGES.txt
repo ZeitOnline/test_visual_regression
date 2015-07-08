@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - BUG-281: Evaluate automatic areas when iterating over centerpage
 
+- HOTFIX: Attach jinja markers to safeguarded functions
+
 
 1.38 (2015-07-08)
 -----------------
