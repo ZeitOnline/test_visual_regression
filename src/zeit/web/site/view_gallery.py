@@ -12,6 +12,10 @@ import zeit.web.site.view
 class Gallery(zeit.web.core.view_gallery.Gallery, zeit.web.site.view.Base):
     advertising_enabled = True
 
+    @zeit.web.reify
+    def banner_type(self):
+        return 'gallery'
+
 
 @pyramid.view.view_config(name='comment-form',
                           renderer='templates/inc/comments/comment-form.html')
