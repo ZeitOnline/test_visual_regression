@@ -66,25 +66,8 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
         return tdict
 
 
-@traverser(zeit.content.cp.interfaces.ICenterPage)
-class CP2015(Traversable):
-
-    def __call__(self, tdict):
-        try:
-            name = u'{}.cp2015'.format(tdict['context'].__name__)
-            assert name != tdict['context'].__name__
-            pos = tdict['traversed'].index(tdict['context'].__name__)
-            tdict['context'] = tdict['context'].__parent__[name]
-        except (AssertionError, KeyError, TypeError, ValueError):
-            pass
-        else:
-            travd = tdict['traversed']
-            tdict['traversed'] = travd[:pos] + (name,) + travd[pos + 1:]
-            raise Retraverse(tdict['request'])
-
-
 @traverser(zeit.content.article.interfaces.IArticle)
-class TraversableArticle(Traversable):
+class Article(Traversable):
 
     def __call__(self, tdict):
         settings = zeit.magazin.interfaces.IArticleTemplateSettings(
@@ -118,7 +101,7 @@ class TraversableArticle(Traversable):
 
 
 @traverser(zeit.content.gallery.interfaces.IGallery)
-class TraversableGallery(Traversable):
+class Gallery(Traversable):
 
     def __call__(self, tdict):
         metadata = zeit.content.gallery.interfaces.IGalleryMetadata(
@@ -133,16 +116,17 @@ class TraversableGallery(Traversable):
 
 
 @traverser(zeit.content.cp.interfaces.ICenterPage)
-class TraversableCenterPage(Traversable):
+class CenterPage(Traversable):
 
     def __call__(self, tdict):
+        # XXX: RAM block sensitive traversal hacking is pretty inelegant,
+        #      let's think of something better. (ND)
         area = zeit.web.core.utils.find_block(
             self.context, attrib='area', kind='ranking')
         if area:
             area = zeit.web.core.template.get_area(area)
             form = zeit.web.core.utils.find_block(
                 self.context, module='search-form')
-            # XXX: Pretty inelegant, maybe use pub/subbing in the future? (ND)
             if form:
                 form = zeit.web.core.template.get_module(form)
                 form['q'] = u' '.join(tdict['request'].GET.getall('q'))
@@ -159,8 +143,25 @@ class TraversableCenterPage(Traversable):
             area.page = form.page
 
 
+@traverser(zeit.content.cp.interfaces.ICenterPage)
+class CenterPage2015(Traversable):
+
+    def __call__(self, tdict):
+        try:
+            name = u'{}.cp2015'.format(tdict['context'].__name__)
+            assert name != tdict['context'].__name__
+            pos = tdict['traversed'].index(tdict['context'].__name__)
+            tdict['context'] = tdict['context'].__parent__[name]
+        except (AssertionError, KeyError, TypeError, ValueError):
+            pass
+        else:
+            travd = tdict['traversed']
+            tdict['traversed'] = travd[:pos] + (name,) + travd[pos + 1:]
+            raise Retraverse(tdict['request'])
+
+
 @traverser(zeit.content.dynamicfolder.interfaces.IRepositoryDynamicFolder)
-class TraversableDynamic(TraversableCenterPage):
+class DynamicFolder(CenterPage):
 
     def __call__(self, tdict):
         try:
@@ -173,7 +174,7 @@ class TraversableDynamic(TraversableCenterPage):
 
 
 @traverser(zeit.content.video.interfaces.IVideo)
-class TraversableVideo(Traversable):
+class Video(Traversable):
 
     def __call__(self, tdict):
         # XXX: Let's hope no video is ever called 'imagegroup'

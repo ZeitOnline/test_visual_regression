@@ -18,25 +18,27 @@ import zeit.web.core.interfaces
 log = logging.getLogger(__name__)
 
 
+ATTRIB_MAP = {
+    'title': 'teaserTitle',
+    'description': 'teaserText',
+    'link': 'url',
+    'guid': 'guid'
+}
+
+
 class Teaser(object):
 
-    _map = {'title': 'teaserTitle',
-            'description': 'teaserText',
-            'link': 'url',
-            'guid': 'guid'}
-
-    uniqueId = None
-
     def __init__(self, item):
-        for value in self._map.values():
+        for value in ATTRIB_MAP.values():
             setattr(self, value, '')
 
         self.feed_image = None
         self.teaserSupertitle = ''
+        self.uniqueId = None
 
         for value in item:
-            if value.tag in self._map.keys() and value.text:
-                setattr(self, self._map[value.tag], value.text.strip())
+            if value.tag in ATTRIB_MAP.keys() and value.text:
+                setattr(self, ATTRIB_MAP[value.tag], value.text.strip())
             elif value.tag == 'enclosure' and 'url' in value.keys():
                 self.feed_image = value.get('url')
 

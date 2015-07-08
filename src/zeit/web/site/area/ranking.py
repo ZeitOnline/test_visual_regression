@@ -47,7 +47,7 @@ ORDERS = collections.defaultdict(
 )
 
 
-class IResultsArea(zeit.content.cp.interfaces.IArea):
+class IRanking(zeit.content.cp.interfaces.IArea):
 
     sort_order = zope.schema.TextLine(
         title=u'Search result order', default=u'relevanz', required=False)
@@ -63,25 +63,25 @@ class IResultsArea(zeit.content.cp.interfaces.IArea):
 
 
 @zeit.web.register_area('ranking')
-class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
+class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
-    zope.interface.implements(IResultsArea,
-                              zeit.content.cp.interfaces.IRenderedArea)
+    zope.interface.implements(
+        IRanking, zeit.content.cp.interfaces.IRenderedArea)
 
     sort_order = zeit.cms.content.property.ObjectPathProperty(
-        '.sort_order', IResultsArea['sort_order'])
+        '.sort_order', IRanking['sort_order'])
 
     query = zeit.cms.content.property.ObjectPathProperty(
-        '.query', IResultsArea['query'])
+        '.query', IRanking['query'])
 
     raw_query = zeit.cms.content.property.ObjectPathProperty(
-        '.raw_query', IResultsArea['raw_query'])
+        '.raw_query', IRanking['raw_query'])
 
     _page = zeit.cms.content.property.ObjectPathProperty(
-        '.page', IResultsArea['page'])
+        '.page', IRanking['page'])
 
     _hits = zeit.cms.content.property.ObjectPathProperty(
-        '.hits', IResultsArea['hits'])
+        '.hits', IRanking['hits'])
 
     def values(self):
         return self._values
@@ -95,7 +95,7 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
             fl=FIELDS, start=self.count * (self.page - 1), **HIGHLIGHTING)
         docs = collections.deque(solr_result)
         self.hits = solr_result.hits
-        for block in self.context.values():
+        for block in self.placeholder:
             if not zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(
                     block) or not len(docs):
                 result.append(block)
@@ -108,6 +108,10 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
                 continue
             result.append(block)
         return result
+
+    @property
+    def placeholder(self):
+        return iter(self.context.values())
 
     @property
     def hits(self):
@@ -132,7 +136,7 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
 
     @zeit.web.reify
     def total_pages(self):
-        if self.hits > 0:
+        if self.hits + self.count > 0:
             return int(math.ceil(float(self.hits) / float(self.count)))
         else:
             return 0
