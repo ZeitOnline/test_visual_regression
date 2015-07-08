@@ -722,8 +722,9 @@ def test_adcontroller_values_return_values_on_hp(application):
         ('$handle', 'homepage'),
         ('level2', 'homepage'),
         ('level3', ''),
+        ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', ''),
+        ('keywords', 'zeitonline'),
         ('tma', '')]
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
     assert adcv == view.adcontroller_values
@@ -736,8 +737,9 @@ def test_adcontroller_values_return_values_on_cp(application):
         ('$handle', 'index'),
         ('level2', 'politik'),
         ('level3', ''),
+        ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', ''),
+        ('keywords', 'zeitonline'),
         ('tma', '')]
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
     assert adcv == view.adcontroller_values

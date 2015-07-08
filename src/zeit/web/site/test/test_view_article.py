@@ -337,8 +337,9 @@ def test_adcontroller_values_return_values_on_article(application):
         ('$handle', 'artikel'),
         ('level2', u'wissen'),
         ('level3', 'umwelt'),
+        ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', ''),
+        ('keywords', 'zeitonline'),
         ('tma', '')]
     view = view = zeit.web.site.view_article.Article(content, mock.Mock())
     assert adcv == view.adcontroller_values
