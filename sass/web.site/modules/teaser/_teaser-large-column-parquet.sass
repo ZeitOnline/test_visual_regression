@@ -1,6 +1,7 @@
 .teaser-large-column-parquet
 	@extend %teaser-column
-	@extend %teaser-column--in-parquet
+	&:first-child
+		margin-top: $vertical-space
 	&__media
 		@extend %teaser-column__media
 	&__media-item
@@ -8,7 +9,8 @@
 	&__series-label
 		@extend .teaser-large__series-label
 	&__heading
-		@extend .teaser-large__heading
+		@extend %teaser-heading
+		margin-bottom: remify(4px)
 	&__combined-link
 		@extend .teaser-large__combined-link
 	&__kicker
