@@ -4,13 +4,11 @@ Change log for zeit.web
 1.39 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Refactor update signals
 
 
 1.38 (2015-07-08)
 -----------------
-
-- MAINT: Refactor update signals
 
 - ZON-1829: HP Foto-Gallerie-Teaser / Style und das Frontend
 
