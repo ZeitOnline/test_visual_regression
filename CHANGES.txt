@@ -4,6 +4,8 @@ Change log for zeit.web
 1.37.2 (unreleased)
 -------------------
 
+- ZON-1836: Show release date in breaking news banner
+
 - ZON-1829: HP Foto-Gallerie-Teaser / Style und das Frontend
 
 
