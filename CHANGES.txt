@@ -1,7 +1,26 @@
 Change log for zeit.web
 =======================
 
-1.37 (unreleased)
+1.39 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.38 (2015-07-08)
+-----------------
+
+- ZON-1829: HP Foto-Gallerie-Teaser / Style und das Frontend
+
+
+1.37.1 (2015-07-07)
+-------------------
+
+- BUG-287: Don't keep on trying to retrieve additional teasers when there
+  simply are no more.
+
+
+1.37 (2015-07-06)
 -----------------
 
 - ZON-1897: Transform all video links to contain seo slug

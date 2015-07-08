@@ -116,7 +116,8 @@
 		@extend %teaser-datetime
 	&__commentcount
 		@extend %teaser-commentcount
-		&:link, &:visited
-			border-bottom: 1px solid $zon_dark_grey
-		&:hover
-			border-bottom: 1px solid $zon_mid_grey
+		+respond-min($break-tablet-min)
+			&:link, &:visited
+				border-bottom: 1px solid $zon_dark_grey
+			&:hover
+				border-bottom: 1px solid $zon_mid_grey
