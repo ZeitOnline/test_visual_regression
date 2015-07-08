@@ -4,7 +4,7 @@ Change log for zeit.web
 1.39 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Ensure create_url can handle empty video titles
 
 
 1.38 (2015-07-08)
