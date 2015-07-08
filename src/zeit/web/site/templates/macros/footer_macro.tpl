@@ -25,9 +25,7 @@
                     {% for j in section -%}
                         {% set item = section[j] %}
                         <li class="footer-{{ class }}__item">
-                            <a class="footer-{{ class }}__link" href="{{
-                            item.href | create_url }}"  itemprop="url"><span
-                            itemprop="name">{{ item.text }}</span></a>
+                            <a class="footer-{{ class }}__link" href="{{ item.href }}"  itemprop="url"><span itemprop="name">{{ item.text }}</span></a>
                         </li>
                     {%- endfor %}
                 {%- endif %}
