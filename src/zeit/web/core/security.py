@@ -87,8 +87,7 @@ def get_community_user_info(request):
     the Cookie that Community has set when the user logged in there.
     """
 
-    user_info = dict(uid=0, name="Kein Benutzername", mail=None,
-                     picture=None, roles=[])
+    user_info = dict(uid=0, name=None, mail=None, picture=None, roles=[])
     community_host = request.registry.settings['community_host']
 
     community_request = urllib2.Request(

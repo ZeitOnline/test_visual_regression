@@ -37,8 +37,7 @@ class PostComment(zeit.web.core.view.Base):
                 title='No User',
                 explanation='Please log in in order to comment')
 
-        if 'user' in request.session and (
-                request.session['user']['name'] == 'Kein Benutzername'):
+        if 'user' in request.session and not request.session['user']['name']:
             self.user_name = ''
         else:
             self.user_name = request.session['user']['name']
@@ -165,8 +164,8 @@ class PostComment(zeit.web.core.view.Base):
 
             if not self.user_name and action == 'comment':
                 if zeit.web.core.security.reload_user_info(self.request) and (
-                        'user' in request.session) and not (
-                        request.session['user']['name'] == 'Kein Benutzername'):
+                        'user' in request.session) and (
+                            request.session['user']['name']):
                     self.user_name = request.session['user']['name']
                 else:
                     raise pyramid.httpexceptions.HTTPInternalServerError(

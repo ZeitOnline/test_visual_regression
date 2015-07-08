@@ -23,8 +23,8 @@
 			{% if request.session.user.picture %}
 			<img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name }}" src="{{ request.session.user.picture }}">
 			{% endif %}
-                        {% if request.session.user.name == "Kein Benutzername" %}
-                            Noch kein Benutzername  
+                        {% if not request.session.user.name %}
+                            Noch kein Benutzername
                              <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
 			    	(Profil bearbeiten)
 			    </a>
@@ -47,7 +47,7 @@
                         {% endif %}
 		</div>
                 {% if request.registry.settings.sso_activate %}
-                    {% if request.session.user.name == "Kein Benutzername" %}
+                    {% if not request.session.user.name %}
 			<input class="comment-form__text" placeholder="Ihr neuer Benutzername" type="text" name="user_name" {% if view.error.user_name %}value="{{ view.error.user_name }}"{% endif %}>
 			{% if view.error.error == 'username_exists_or_invalid' %}
 			    <span class='error'>Benutzername enthält ungültige Zeichen oder ist bereits vergeben</span>
