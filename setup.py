@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
 
@@ -9,7 +8,7 @@ setup(
     url='https://github.com/ZeitOnline/zeit.web',
     version='1.39.dev0',
     author=(
-        'Thomas Baumann, Nico Brünjes, Nicolas Drebenstedt, Ron Drongowski, '
+        'Thomas Baumann, Nico Bruenjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
         'Malte Modrow, Thomas Puppe, Wolfgang Schnerring, Arne Seemann, '
         'Moritz Stoltenburg, Anika Szuppa, Christian Zagrodnick, '
