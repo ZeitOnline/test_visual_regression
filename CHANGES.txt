@@ -12,7 +12,11 @@ Change log for zeit.web
 
 - ZON-1888/1889: improve mobile teaser images
 
-- ZON-1895: column teaser
+- ZON-1895: Column teaser
+
+- ZON-1856: Upgrade buzz integration to API version 2.0
+
+- ZON-1695: Integrate single sign on into friedbert
 
 - MAINT: Drop vivi-internal preview capabilities
 
@@ -24,11 +28,11 @@ Change log for zeit.web
 
 - FIX: Prevent seo-slugging for video comment forms the ugly way
 
-- Include URL in jinja error logging
-
-- ZON-1856: Upgrade buzz integration to API version 2.0
+- FIX: Encode non-ascii URLs as utf-8 (e.g. for reach, comments)
 
 - FIX: Ignore authors without display_name instead of crashing
+
+- Include URL in jinja error logging
 
 
 1.36 (2015-06-26)
