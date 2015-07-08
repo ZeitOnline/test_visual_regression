@@ -944,7 +944,7 @@ def test_gallery_teaser_shuffles_on_click(selenium_driver, testserver):
     teaserbutton.click()
 
     try:
-        heading = WebDriverWait(driver, 2).until(
+        WebDriverWait(driver, 2).until(
             expected_conditions.presence_of_element_located(
                 (By.CSS_SELECTOR, '.teaser-gallery__heading')))
     except TimeoutException:
