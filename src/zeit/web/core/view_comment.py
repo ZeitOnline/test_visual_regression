@@ -5,6 +5,8 @@ import logging
 
 import beaker.cache
 import lxml
+import md5
+import json
 import pyramid.httpexceptions
 import pyramid.view
 import requests
@@ -308,6 +310,11 @@ class PostCommentAdmin(PostComment):
 @pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 class PostCommentResource(PostComment):
+
+    msg = {
+        'Username exists or not valid': 'username_exists_or_invalid'}
+
+
     def __init__(self, context, request):
         super(PostCommentResource, self).__init__(context, request)
         self.path = urlparse.urlparse(self.context.uniqueId)[2][1:]
@@ -318,20 +325,41 @@ class PostCommentResource(PostComment):
         try:
             result = self.post_comment()
         except pyramid.httpexceptions.HTTPBadRequest, e:
-            import pdb; pdb.set_trace()  # XXX BREAKPOINT
-
-            return {}
+            result = {'error': self.msg.get(unicode(e))}
+            params = self.request.params
+            action = params.get('action')
+            if action == 'comment':
+                result['comment'] = params.get('comment')
+                result['pid'] = params.get('pid')
+                result['user_name'] = params.get('user_name')
 
         if self.request.params.get('ajax') == 'true':
             return result
         else:
             location = zeit.web.core.template.append_get_params(
-                self.request, action=None, pid=None, cid=self.new_cid)
+                self.request,
+                action=None,
+                pid=None,
+                cid=self.new_cid)
+
             if self.new_cid:
                 # remove page param in redirect
                 location = zeit.web.core.template.remove_get_params(
                     location, 'page')
                 location = '{}#cid-{}'.format(location, self.new_cid)
+
+            # We might need to save data to our user session, because
+            # we want to perform a redirect after a POST, but we want to
+            # have the acutal data available, which might be to long for
+            # GET params.
+            if 'error' in result:
+                md5sum = md5.md5(json.dumps(result, sort_keys=True)).hexdigest()
+                self.request.session[md5sum] = result
+                location = zeit.web.core.template.append_get_params(
+                    self.request,
+                    error=md5sum)
+                location = '{}#comment-form'.format(location)
+
             return pyramid.httpexceptions.HTTPSeeOther(location=location)
 
 
