@@ -293,14 +293,16 @@ def test_banner_channel_mapping_should_apply_last_rule(mock_ad_view):
 
 def test_adcontroller_values_are_correctly_returned(mock_ad_view):
     zw_code = [('$handle', 'centerpage'), ('level2', 'wissen'),
-               ('level3', 'zeit_wissen'), ('$autoSizeFrames', True),
-               ('keywords', ''), ('tma', '')]
+               ('level3', 'zeit_wissen'), ('level4', ''),
+               ('$autoSizeFrames', True), ('keywords', 'zeitonline'),
+               ('tma', '')]
     zw_test = mock_ad_view(
         'centerpage', 'sport', 'zeit wissen').adcontroller_values
     assert zw_code == zw_test
     zmz_code = [('$handle', 'index'), ('level2', 'zeitmz'),
-                ('level3', 'irgendwas'), ('$autoSizeFrames', True),
-                ('keywords', ''), ('tma', '')]
+                ('level3', 'irgendwas'), ('level4', ''),
+                ('$autoSizeFrames', True), ('keywords', 'zeitonline,zeitmz'),
+                ('tma', '')]
     zmz_test = mock_ad_view(
         'centerpage', 'zeit-magazin', 'irgendwas').adcontroller_values
     assert zmz_code == zmz_test
