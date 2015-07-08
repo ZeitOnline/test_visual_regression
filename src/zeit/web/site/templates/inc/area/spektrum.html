@@ -1,7 +1,6 @@
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 
 {% block before_module_list %}
-<div class="parquet-row parquet-row--spektrum">
     <div class="parquet-meta">
         <a {% if parquet_position %}id="hp.centerpage.teaser.parquet.{{ parquet_position }}.1|http://www.spektrum.de"{% endif %} class="parquet-meta__title parquet-meta__title--spektrum" href="http://www.spektrum.de"><span class="parquet-meta__logo parquet-meta__logo--spektrum icon-logo-spektrum">Spektrum.de</span></a>
         <ul class="parquet-meta__topic-links parquet-meta__topic-links--spektrum">
@@ -23,10 +22,9 @@
         </div>
     </div>
     <div class="parquet-teasers">
-    {# XXX Do we really need the parquet-row and parquet-teasers divs? (ND) #}
+    {# XXX Do we really need the parquet-teasers divs? (ND) #}
 {% endblock %}
 
 {% block after_module_list %}
     </div>
-</div>
 {% endblock %}
