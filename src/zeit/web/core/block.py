@@ -661,8 +661,11 @@ class BreakingNews(object):
             bn_banner_content)
         self.uniqueId = bn_banner.article_id
         bn_article = zeit.cms.interfaces.ICMSContent(self.uniqueId)
+        bd_date = zeit.cms.workflow.interfaces.IPublishInfo(
+            bn_article).date_first_released
+        if bd_date:
+            tz = babel.dates.get_timezone('Europe/Berlin')
+            bd_date = bd_date.astimezone(tz)
         self.title = bn_article.title
-        self.date_last_published_semantic = (
-            zeit.cms.workflow.interfaces.IPublishInfo(
-                bn_article).date_last_published_semantic)
+        self.date_first_released = bd_date
         self.doc_path = urlparse.urlparse(bn_article.uniqueId).path
