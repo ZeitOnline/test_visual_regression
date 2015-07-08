@@ -4,15 +4,13 @@ Change log for zeit.web
 1.39 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1811: Fix search input for iOS Safari and add thousands separator
 
 
 1.38 (2015-07-08)
 -----------------
 
 - ZON-1829: HP Foto-Gallerie-Teaser / Style und das Frontend
-
-- ZON-1811: Fix search input for iOS Safari and add thousands separator
 
 
 1.37.1 (2015-07-07)
