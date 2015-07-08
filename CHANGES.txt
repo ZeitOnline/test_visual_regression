@@ -4,7 +4,17 @@ Change log for zeit.web
 1.39 (unreleased)
 -----------------
 
+- ZON-1809: Galleries have now adc level3 empty
+
 - ZON-1811: Fix search input for iOS Safari and add thousands separator
+
+- ZON-1907: update adc signature
+
+- ZON-1915: fix ad tile 5 in articles
+
+- ZON-1921: add keywords to adc code
+
+- BUG-281: Evaluate automatic areas when iterating over centerpage
 
 
 1.38 (2015-07-08)
