@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.39 (unreleased)
+1.39 (2015-07-08)
 -----------------
 
 - ZON-1809: Galleries have now adc level3 empty
