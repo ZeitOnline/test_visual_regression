@@ -441,4 +441,3 @@ def test_breaking_news_banner_shows_date_first_released(jinja2_env):
     html = lxml.html.fromstring(html_str)
     time = html.cssselect('.breaking-news-banner__time')
     assert time[0].text == '11:55 Uhr'
-
