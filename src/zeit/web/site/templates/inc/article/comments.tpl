@@ -54,10 +54,10 @@
 			{% if (loop.length < 4 and loop.last ) or loop.index == 4 -%}
 				{% if view.context.advertising_enabled -%}
 				<div class="comment__ad">
-						{{ lama.adplace(view.banner(8), view) }}
-					</div>
+					{{ lama.adplace(view.banner(8), view) }}
+				</div>
 				{%- endif %}
-			{%- endif %}
+			{% endif %}
 
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
