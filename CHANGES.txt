@@ -4,7 +4,7 @@ Change log for zeit.web
 1.39 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-281: Evaluate automatic areas when iterating over centerpage
 
 
 1.38 (2015-07-08)
