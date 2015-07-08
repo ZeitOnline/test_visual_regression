@@ -242,6 +242,42 @@ define([ 'jquery' ], function( $ ) {
     },
 
     /**
+     * comments.js: submit comment
+     * @function submitComment
+     * @param  {object} e event object
+     */
+    submitComment = function( e ) {
+        e.preventDefault();
+
+        var sendurl = window.location.href,
+            form = this,
+            input = this.elements;
+
+        $( this ).prop( 'disabled', true );
+
+        $.ajax({
+            url: sendurl,
+            data: {
+                'ajax':     'true',
+                'action':   'comment',
+                'pid':      input.pid.value,
+                'comment':  input.comment.value
+            },
+            dataType: 'json',
+            method: 'POST',
+            success: function( response ) {
+                if ( response ) {
+                    if ( response.error === 'username_exists_or_invalid' ) {
+                        window.alert ( 'We have an error!' );
+                    } else {
+                        // redirect
+                    }
+                }
+            }
+        });
+    },
+
+    /**
      * comments.js: enable form submit button
      * @function enableForm
      * @param  {object} e event object
@@ -291,6 +327,7 @@ define([ 'jquery' ], function( $ ) {
         });
 
         // register event handlers
+        $commentsBody.on( 'submit', '.js-submit-comment', submitComment );
         $commentsBody.on( startEvent, '.js-reply-to-comment', replyToComment );
         $commentsBody.on( startEvent, '.js-cancel-reply', cancelReply );
         $commentsBody.on( startEvent, '.js-report-comment', reportComment );

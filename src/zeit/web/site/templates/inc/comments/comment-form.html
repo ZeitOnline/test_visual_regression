@@ -17,42 +17,43 @@
 <div class="comment-section__form comment-section__item">
 {%- if request.authenticated_userid %}
 	{%- block comment_form %}
-	<form class="comment-form" method="POST" id="comment-form" data-uid="{{ request.session.user.uid }}">
+	<form class="comment-form  js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.session.user.uid }}">
 		{% if view.comments_allowed -%}
 		<div class="comment-form__text">
 			{% if request.session.user.picture %}
 			<img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name }}" src="{{ request.session.user.picture }}">
 			{% endif %}
                         {% if not request.session.user.name %}
-                            Noch kein Benutzername
-                             <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
-			    	(Profil bearbeiten)
-			    </a>
+				Angemeldet, noch kein Benutzername
+				<a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
+				(Profil bearbeiten)
+				 </a>
 
-                        {% else %}
+			{% else %}
 			    Angemeldet als
 			    <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
 			    	{{ request.session.user.name }}
 			    </a>
-                            {% endif %}
-                        {% if request.registry.settings.sso_activate %}
-			    <a class="comment-form__cancel" href="{{
-                                request.registry.settings.sso_url}}/abmelden?url={{ request.url| e }}">
-			    	Abmelden
-			    </a>
+			{% endif %}
+			{% if request.registry.settings.sso_activate %}
+				<a class="comment-form__cancel" href="{{
+				request.registry.settings.sso_url}}/abmelden?url={{ request.url| e }}">
+				Abmelden
+				</a>
                         {% else %}
-			    <a class="comment-form__cancel" href="{{ request.registry.settings.community_host }}/logout?destination={{ view.content_url | e }}">
-			    	Abmelden
-			    </a>
+				<a class="comment-form__cancel" href="{{ request.registry.settings.community_host }}/logout?destination={{ view.content_url | e }}">
+				Abmelden
+				</a>
                         {% endif %}
 		</div>
-                {% if request.registry.settings.sso_activate %}
-                    {% if not request.session.user.name %}
-			<input class="comment-form__text" placeholder="Ihr neuer Benutzername" type="text" name="user_name" {% if view.error.user_name %}value="{{ view.error.user_name }}"{% endif %}>
-			{% if view.error.error == 'username_exists_or_invalid' %}
-			    <span class='error'>Benutzername enthält ungültige Zeichen oder ist bereits vergeben</span>
+		{% if request.registry.settings.sso_activate %}
+			{% if not request.session.user.name %}
+				<input class="comment-form__text" placeholder="Ihr neuer Benutzername" type="text" name="user_name" {% if view.error.user_name %}value="{{ view.error.user_name }}"{% endif %}>
+				{% if view.error.error == 'username_exists_or_invalid' %}
+					<span class='error'>Benutzername ist bereits
+					vergeben oder enthält ungültige Zeichen.</span>
+				{% endif %}
 			{% endif %}
-                    {% endif %}
                 {% endif %}
 		<textarea class="comment-form__textarea js-required" name="comment" placeholder="{{ placeholder }}" maxlength="1500">
 {% if view.error and view.error.comment %}{{ view.error.comment }}{% endif %}</textarea>
