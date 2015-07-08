@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - BUG-281: Evaluate automatic areas when iterating over centerpage
 
+- ZON-1912: Bug: auf HP, CP und Artikeln wird als zweites MR tile_7 statt tile_8 ausgegeben
+
 
 1.38 (2015-07-08)
 -----------------
