@@ -88,11 +88,12 @@ def JinjaEnvRegistrator(env_attr, marker=None, category='jinja'):  # NOQA
                 setattr(sys.modules[obj.__module__], obj.func_name, fn)
                 obj = fn
 
+            if marker and isinstance(obj, types.FunctionType):
+                setattr(obj, marker, True)
+
             if hasattr(scanner, 'env') and env_attr in scanner.env.__dict__:
                 scanner.env.__dict__[env_attr][name] = obj
 
-        if marker and isinstance(func, types.FunctionType):
-            setattr(func, marker, True)
         venusian.attach(func, callback, category=category)
         return func
 
