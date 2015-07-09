@@ -118,11 +118,10 @@ def test_one_author_should_be_in_byline(patched_byline):
     byline = patched_byline(context)
     byline.groups()
     assert byline == [
-        ('enum', (
-            ('csv', (
-                ('enum', (
-                    ('text', u'Max Mustermann'),)),
-                ('text', u'Bimbachtal'))),))]
+        ('csv', (
+            ('enum', (
+                ('text', u'Max Mustermann'),)),
+            ('text', u'Bimbachtal')))]
 
 
 def test_two_authors_should_be_in_byline(patched_byline):
@@ -140,12 +139,11 @@ def test_two_authors_should_be_in_byline(patched_byline):
     byline = patched_byline(context)
     byline.groups()
     assert byline == [
-        ('enum', (
-            ('csv', (
-                ('enum', (
-                    ('text', u'Max Mustermann'),
-                    ('text', u'Anne Mustermann'))),
-                ('text', u'Bimbachtal'))),))]
+        ('csv', (
+            ('enum', (
+                ('text', u'Max Mustermann'),
+                ('text', u'Anne Mustermann'))),
+            ('text', u'Bimbachtal')))]
 
 
 def test_no_locations_should_be_in_byline_if_not_provided(patched_byline):
@@ -164,9 +162,8 @@ def test_no_locations_should_be_in_byline_if_not_provided(patched_byline):
     byline.groups()
     assert byline == [
         ('enum', (
-            ('enum', (
-                ('text', u'Max Mustermann'),
-                ('text', u'Anne Mustermann'))),))]
+            ('text', u'Max Mustermann'),
+            ('text', u'Anne Mustermann')))]
 
 
 def test_three_authors_should_be_in_byline(patched_byline):
@@ -188,13 +185,12 @@ def test_three_authors_should_be_in_byline(patched_byline):
     byline = patched_byline(context)
     byline.groups()
     assert byline == [
-        ('enum', (
-            ('csv', (
-                ('enum', (
-                    ('text', u'Max Mustermann'),
-                    ('text', u'Anne Mustermann'),
-                    ('text', u'Ernst Ärgerlich'))),
-                ('text', u'Bimbachtal'))),))]
+        ('csv', (
+            ('enum', (
+                ('text', u'Max Mustermann'),
+                ('text', u'Anne Mustermann'),
+                ('text', u'Ernst Ärgerlich'))),
+            ('text', u'Bimbachtal')))]
 
 
 def test_locations_none_b_b_authors_should_be_in_byline(patched_byline):
@@ -245,13 +241,12 @@ def test_locations_a_a_a_should_produce_correct_list(patched_byline):
     byline = patched_byline(context)
     byline.groups()
     assert byline == [
-        ('enum', (
-            ('csv', (
-                ('enum', (
-                    ('text', u'Max Mustermann'),
-                    ('text', u'Anne Mustermann'),
-                    ('text', u'Ernst Ärgerlich'))),
-                ('text', u'Hørsholm'))),))]
+        ('csv', (
+            ('enum', (
+                ('text', u'Max Mustermann'),
+                ('text', u'Anne Mustermann'),
+                ('text', u'Ernst Ärgerlich'))),
+            ('text', u'Hørsholm')))]
 
 
 def test_locations_a_b_a_should_produce_correct_list(patched_byline):
