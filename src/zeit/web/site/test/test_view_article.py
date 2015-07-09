@@ -398,6 +398,15 @@ def test_article_column_should_be_identifiable_by_suitable_css_class(
     assert browser.cssselect('.article-body.article-body--columnarticle')
 
 
+def test_article_should_have_proper_meetrics_integration(
+        testserver, testbrowser):
+    browser = testbrowser(
+        '{}/zeit-online/article/01'.format(testserver.url))
+    meetrics = browser.cssselect(
+        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+    assert len(meetrics) == 1
+
+
 def test_breaking_news_article_shows_date_first_released(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/article_breaking.html')

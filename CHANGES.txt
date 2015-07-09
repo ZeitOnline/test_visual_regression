@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1836: Show release date in breaking news banner
 
+- ZON-1581: Integrate Meetrics into Beta
+
 - MAINT: Refactor update signals
 
 
