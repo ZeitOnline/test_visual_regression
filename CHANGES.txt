@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.41 (unreleased)
------------------
+1.40.1 (2015-07-09)
+-------------------
 
 - HOTFIX: Re-Release w/ freshly grunted files
 
