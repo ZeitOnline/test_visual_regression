@@ -120,9 +120,7 @@ $color-comment-border: $zon_light_grey
 
 	&__reaction
 		+inline-block
-		margin-left: remify(16px)
-		+respond-min($break-phablet-min)
-			margin-left: remify(24px)
+		margin-left: remify(18px)
 		&:first-child
 			margin-left: 0
 		&--active
@@ -133,7 +131,7 @@ $color-comment-border: $zon_light_grey
 		display: none
 		+respond-min($break-phablet-min)
 			display: inline
-			padding-left: .5em
+			padding-left: remify(4px)
 
 
 .comment--indented
@@ -213,7 +211,6 @@ $color-comment-border: $zon_light_grey
 		text-align: center
 
 .comment__icon
-	vertical-align: text-bottom
 	&-reply
 		width: remify(17px)
 		height: remify(15px)
@@ -223,6 +220,16 @@ $color-comment-border: $zon_light_grey
 	&-recommend
 		width: remify(17px)
 		height: remify(16px)
+	+respond-min($break-phablet-min)
+		&-reply
+			width: remify(12px)
+			height: remify(10px)
+		&-report
+			width: remify(8px)
+			height: remify(10px)
+		&-recommend
+			width: remify(12px)
+			height: remify(12px)
 	.comment__reaction--sending &
 		+animation(rotate 1s linear infinite)
 
