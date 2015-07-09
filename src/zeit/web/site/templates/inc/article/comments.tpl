@@ -112,11 +112,11 @@
 	{% include "zeit.web.site:templates/inc/comments/pagination.tpl" %}
 
 	{% else %}
-
-		<div class="comment__ad">
-			{{ lama.adplace(view.banner(8), view) }}
-		</div>
-
+		{% if view.context.advertising_enabled -%}
+			<div class="comment__ad">
+				{{ lama.adplace(view.banner(8), view) }}
+			</div>
+		{% endif %}
 	{% endif %}
 
 	{% if view.request.GET.action == 'report' %}
