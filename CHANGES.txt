@@ -1,10 +1,28 @@
 Change log for zeit.web
 =======================
 
-1.40 (unreleased)
------------------
+1.40.2 (unreleased)
+-------------------
 
 - Nothing changed yet.
+
+
+1.40.1 (2015-07-09)
+-------------------
+
+- HOTFIX: Re-Release w/ freshly grunted files
+
+
+1.40 (2015-07-09)
+-----------------
+
+- ZON-1670: Test release date of breaking news against configured timeout
+
+- ZON-1836: Show release date in breaking news banner
+
+- ZON-1581: Integrate Meetrics into Beta
+
+- MAINT: Refactor update signals
 
 
 1.39 (2015-07-08)
