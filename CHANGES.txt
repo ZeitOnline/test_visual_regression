@@ -4,7 +4,7 @@ Change log for zeit.web
 1.40.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1788: Apply snazzy tuple stream byline to teasers and articles
 
 
 1.40.1 (2015-07-09)
@@ -62,8 +62,6 @@ Change log for zeit.web
 - ZON-1908: Implement zmo and zon specific nextread sources
 
 - ZON-1505: Make centerpage teaser clickable en bloc
-
-- ZON-1788: Apply snazzy tuple stream byline to teasers and articles
 
 - ZON-1888/1889: improve mobile teaser images
 
