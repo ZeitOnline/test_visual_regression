@@ -7,8 +7,9 @@ itemtype="http://schema.org/SiteNavigationElement"
 {% endif %}>
 	{% for i in items -%}
 	{% set section = items[i] %}
-	<li class="{{ class }}__item"{% if section.has_children() %} data-feature="dropdown"{% endif %}>
-		<a class="{{ class }}__link{% if section.item_id in (view.ressort,
+    {% set id = section.item_id | getIdFromWebtrekkString %}
+	<li class="{{ class }}__item" data-id="{{ id if id else section.item_id }}" {% if section.has_children() %} data-feature="dropdown"{% endif %}>
+		<a class="{{ class }}__link{% if id in (view.ressort,
         view.sub_ressort) %} {{ class }}__link--current{% endif %}" href="{{
         section.href | create_url }}" itemprop="url" data-id="{{ section.item_id }}"><span itemprop="name">{{
         section.text }}</span></a>
