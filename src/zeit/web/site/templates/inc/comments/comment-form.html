@@ -36,8 +36,7 @@
 			    </a>
 			{% endif %}
 			{% if request.registry.settings.sso_activate %}
-				<a class="comment-form__cancel" href="{{
-				request.registry.settings.sso_url}}/abmelden?url={{ request.url| e }}">
+				<a class="comment-form__cancel" href="{{ request.registry.settings.sso_url}}/abmelden?url={{ view.content_url | e }}">
 				Abmelden
 				</a>
                         {% else %}
