@@ -4,7 +4,16 @@
  * @version  0.1
  */
 define( [ 'jquery' ], function( $ ) {
+    /**
+     * trackElement - collection of the different functions to gather the needed info to track smth
+     * @type {Object}
+     */
     var trackElement = {
+        /**
+         * track elements in the main section
+         * @param  {Object} $element jQuery Element with the link that was click
+         * @return {string}          formatted linkId-string for webtrekk call
+         */
         main: function( $element ) {
             var data = [], type = 'text';
             if ( $element.attr( 'class' ).indexOf( 'button' ) !== -1 ) {
@@ -23,6 +32,11 @@ define( [ 'jquery' ], function( $ ) {
             ];
             return formatTrackingData( data );
         },
+        /**
+         * track elements in the nav section section, i.e. links with data-id attribute that contains the complete webtrekk id
+         * @param  {Object} $element jQuery Element with the link that was click
+         * @return {string}          formatted linkId-string for webtrekk call
+         */
         nav: function( $element ) {
             var data = [
                 window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value, // breakpoint
@@ -61,7 +75,7 @@ define( [ 'jquery' ], function( $ ) {
              * trackingLinks - a collection of jQuery-Objects to add trackElement to.
              * The keys represent the trackElement type, so add new types, or add to jQuery-Collection if type is already in use
              *
-             * @type {Object}
+             * @type Object
              */
             var trackingLinks = {
                 main: $( '.main article a' ).not( '[data-wt-click]' ),
