@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import base64
+import datetime
+import lxml.etree
 import mock
 import pytest
 
@@ -68,7 +70,7 @@ def test_fresh_breaking_news_article_renders_breaking_bar(testbrowser):
     assert len(browser.cssselect('.breaking-news-heading')) == 1
 
 
-def test_stale_breaking_news_article_renders_breaking_bar(testbrowser):
+def test_stale_breaking_news_article_must_not_render_breaking_bar(testbrowser):
     browser = testbrowser('/zeit-online/article/alte-eilmeldung')
 
     assert len(browser.cssselect('.breaking-news-banner')) == 0
@@ -323,8 +325,9 @@ def test_adcontroller_values_return_values_on_article(application):
         ('$handle', 'artikel'),
         ('level2', u'wissen'),
         ('level3', 'umwelt'),
+        ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', ''),
+        ('keywords', 'zeitonline'),
         ('tma', '')]
     view = view = zeit.web.site.view_article.Article(content, mock.Mock())
     assert adcv == view.adcontroller_values
@@ -393,3 +396,27 @@ def test_article_column_should_be_identifiable_by_suitable_css_class(
     browser = testbrowser('/zeit-online/cp-content/kolumne')
     assert browser.cssselect('.article.article--columnarticle')
     assert browser.cssselect('.article-body.article-body--columnarticle')
+
+
+def test_breaking_news_article_shows_date_first_released(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.site:templates/article_breaking.html')
+    view = mock.Mock()
+    view.date_first_released = datetime.time(11, 55, 0)
+    lines = tpl.blocks['breaking_news'](tpl.new_context({'view': view}))
+    html_str = ' '.join(lines).strip()
+    html = lxml.html.fromstring(html_str)
+    time = html.cssselect('.breaking-news-banner__time')
+    assert time[0].text == '11:55 Uhr'
+
+
+def test_breaking_news_banner_shows_date_first_released(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.site:templates/inc/breaking_news.tpl')
+    view = mock.Mock()
+    view.breaking_news.published = True
+    view.breaking_news.date_first_released = datetime.time(11, 55, 0)
+    html_str = tpl.render(view=view)
+    html = lxml.html.fromstring(html_str)
+    time = html.cssselect('.breaking-news-banner__time')
+    assert time[0].text == '11:55 Uhr'

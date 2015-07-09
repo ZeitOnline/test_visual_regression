@@ -39,11 +39,12 @@ require([
     'web.site/plugins/jquery.liveblog',
     'web.site/plugins/jquery.searchTools',
     'web.site/plugins/jquery.selectNav',
+    'web.site/plugins/jquery.shuffleTeasers',
     'web.site/plugins/jquery.snapshot',
     'web.site/plugins/jquery.toggleBeta',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
-    'web.site/plugins/jquery.up2dateSignals'
+    'web.site/plugins/jquery.updateSignals'
 ], function( $ ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         article = $( '#js-article' );
@@ -59,9 +60,10 @@ require([
         // homepage
         $( '#snapshot' ).snapshot();
         // centerpage
-        $( 'body' ).up2dateSignals();
+        $.updateSignals();
         $( '#main' ).autoclick();
         $( '#series_select' ).selectNav();
+        $( '.js-gallery-teaser-shuffle' ).shuffleTeasers();
     } else if ( article.length ) {
         // article, gallery etc.
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });

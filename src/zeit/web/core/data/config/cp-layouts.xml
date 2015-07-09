@@ -30,7 +30,7 @@
     <layout
         id="zon-gallery"
         title="Biga Teaser"
-        image_pattern="zon-thumbnail"
+        image_pattern="540x304"
         areas="gallery"
         default="gallery"
         />
