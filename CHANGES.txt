@@ -4,6 +4,8 @@ Change log for zeit.web
 1.40.2 (unreleased)
 -------------------
 
+- MAINT: Polish liveblog, header, comments, topic teaser to mention but a few
+
 - ZON-1788: Apply snazzy tuple stream byline to teasers and articles
 
 
