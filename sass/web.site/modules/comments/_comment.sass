@@ -5,6 +5,9 @@ $color-comment-border: $zon_light_grey
 	padding: 0 $page-padding
 	border-top: 1px solid $color-comment-border
 
+	&:first-child
+		border-top: none
+
 	&--author
 		border-top-width: 0
 		background-color: $color-comment-author-bg
@@ -163,6 +166,13 @@ $color-comment-border: $zon_light_grey
 		&:after
 			border-bottom-color: $white
 			top: -9px
+
+	&:first-child
+		.comment__container
+			border-top: none
+			&:before,
+			&:after
+				content: none
 
 	&.comment--author
 		.comment__container
