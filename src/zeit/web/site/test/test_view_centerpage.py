@@ -103,12 +103,15 @@ def test_default_teaser_should_match_css_selectors(
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default.tpl')
 
-    uid = 'http://xml.zeit.de/artikel/01'
-    teaser = zeit.cms.interfaces.ICMSContent(uid)
+    teaser = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/index')
     teaser.teaserSupertitle = 'teaserSupertitle'
     teaser.teaserTitle = 'teaserTitle'
     teaser.teaserText = 'teaserText'
-    view = {'comment_counts': {uid: 129}}
+    view = mock.Mock()
+    view.comment_counts = {'http://xml.zeit.de/artikel/01': 129}
+    view.context = cp
+    view.request.route_url.return_value = '/'
 
     area = mock.Mock()
     area.kind = 'solo'
@@ -116,48 +119,38 @@ def test_default_teaser_should_match_css_selectors(
     html_str = tpl.render(teaser=teaser, layout='teaser', view=view, area=area)
     html = lxml.html.fromstring(html_str).cssselect
 
-    assert len(html('article.teaser h2.teaser__heading')) == 1, (
-        'No headline is present')
+    assert len(html('article.teaser h2.teaser__heading')) == 1
 
     link = html('a.teaser__combined-link')[0]
-    assert link.attrib['href'] == '/artikel/01', 'No link is present'
-    assert link.attrib['title'] == 'teaserSupertitle - teaserTitle', (
-        'There is no link title')
+    assert link.attrib['href'] == '/artikel/01'
+    assert link.attrib['title'] == 'teaserSupertitle - teaserTitle'
 
     link_kicker = html('a.teaser__combined-link span.teaser__kicker')[0]
-    assert link_kicker.text == 'teaserSupertitle', 'A kicker is missing'
+    assert link_kicker.text == 'teaserSupertitle'
 
     link_title = html('a.teaser__combined-link span.teaser__title')[0]
-    assert link_title.text == 'teaserTitle', 'A teaser title is missing'
+    assert link_title.text == 'teaserTitle'
 
-    assert len(html('article > div.teaser__container')) == 1, (
-        'No teaser container')
+    assert len(html('article > div.teaser__container')) == 1
 
     teaser_text = html('div.teaser__container > p.teaser__text')[0]
-    assert teaser_text.text == 'teaserText', 'No teaser text'
+    assert teaser_text.text == 'teaserText'
 
-    teaser_byline = html('div.teaser__container > span.teaser__byline')[0]
-    assert teaser_byline.text == 'Von Anne Mustermann', (
-        'No byline present')
+    byline = html('div.teaser__container > span.teaser__byline')[0]
+    assert re.sub('\s+', ' ', byline.text).strip() == 'Von Anne Mustermann'
 
-    assert len(html('div.teaser__container > div.teaser__metadata')) == 1, (
-        'No teaser metadata container')
+    assert len(html('div.teaser__container > div.teaser__metadata')) == 1
     teaser_datetime = html('div.teaser__metadata > time.teaser__datetime')[0]
-    assert teaser_datetime.text is None, 'Outdated datetime present'
+    assert teaser_datetime.text is None
 
-    assert teaser_datetime.attrib['datetime'] == '2013-10-08T09:25:03+00:00', (
-        'Incorrect datetime attribute')
+    assert teaser_datetime.attrib['datetime'] == '2013-10-08T09:25:03+00:00'
 
     teaser_co = html('div.teaser__metadata > a.teaser__commentcount')[0]
 
     assert teaser_co.attrib['href'] == teaser.uniqueId.replace(
         'http://xml.zeit.de', '') + '#comments'
-
-    assert teaser_co.attrib['title'] == '129 Kommentare', (
-        'No comment link title present')
-
-    assert teaser_co.text == '129 Kommentare', (
-        'No comment text present')
+    assert teaser_co.attrib['title'] == '129 Kommentare'
+    assert teaser_co.text == '129 Kommentare'
 
 
 def test_small_teaser_should_display_no_image_on_mobile(
@@ -657,7 +650,7 @@ def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
 
     byline = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
                                '.teaser-blog__byline'.format(uid))[0]
-    assert byline.text == 'Von Anne Mustermann'
+    assert re.sub('\s+', ' ', byline.text).strip() == 'Von Anne Mustermann'
 
 
 def test_gallery_teaser_should_contain_supertitle(testserver, testbrowser):

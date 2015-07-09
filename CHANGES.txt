@@ -4,7 +4,7 @@ Change log for zeit.web
 1.40.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1788: Apply snazzy tuple stream byline to teasers and articles
 
 
 1.40.1 (2015-07-09)
