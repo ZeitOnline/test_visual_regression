@@ -951,3 +951,21 @@ def test_gallery_teaser_shuffles_on_click(selenium_driver, testserver):
         teasertext2 = driver.find_element_by_css_selector(
             '.teaser-gallery__heading').text
         assert teasertext1 != teasertext2
+
+
+def test_homepage_should_have_proper_meetrics_integration(
+        testserver, testbrowser):
+    browser = testbrowser(
+        '{}/index'.format(testserver.url))
+    meetrics = browser.cssselect(
+        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+    assert len(meetrics) == 1
+
+
+def test_centerpage_must_not_have_meetrics_integration(
+        testserver, testbrowser):
+    browser = testbrowser(
+        '{}/zeit-online/main-teaser-setup'.format(testserver.url))
+    meetrics = browser.cssselect(
+        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+    assert len(meetrics) == 0
