@@ -107,13 +107,9 @@
 	letter-spacing: $zon-letter-spacing-s
 
 %teaser-datetime
-	&:not(:empty)
-		display: inline-block // needed for text-transform to work
-	&:first-letter
-		text-transform: uppercase
 	&:not(:last-child):not(:empty):after
 		content: ' / '
-		margin: 0 $micro 0 $micro
+		margin: 0 $micro
 
 %teaser-commentcount
 	&:link, &:visited
