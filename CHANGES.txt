@@ -4,7 +4,7 @@ Change log for zeit.web
 1.40 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1836: Show release date in breaking news banner
 
 
 1.39 (2015-07-08)
