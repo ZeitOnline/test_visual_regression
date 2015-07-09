@@ -1,7 +1,42 @@
 Change log for zeit.web
 =======================
 
-1.37 (unreleased)
+1.40 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.39 (2015-07-08)
+-----------------
+
+- ZON-1809: Galleries have now adc level3 empty
+
+- ZON-1907: Update adc signature
+
+- ZON-1915: Fix ad tile 5 in articles
+
+- ZON-1921: Add keywords to adc code
+
+- BUG-281: Evaluate automatic areas when iterating over centerpage
+
+- HOTFIX: Attach jinja markers to safeguarded functions
+
+
+1.38 (2015-07-08)
+-----------------
+
+- ZON-1829: HP Foto-Gallerie-Teaser / Style und das Frontend
+
+
+1.37.1 (2015-07-07)
+-------------------
+
+- BUG-287: Don't keep on trying to retrieve additional teasers when there
+  simply are no more.
+
+
+1.37 (2015-07-06)
 -----------------
 
 - ZON-1897: Transform all video links to contain seo slug
@@ -14,7 +49,9 @@ Change log for zeit.web
 
 - ZON-1888/1889: improve mobile teaser images
 
-- ZON-1895: column teaser
+- ZON-1895: Column teaser
+
+- ZON-1856: Upgrade buzz integration to API version 2.0
 
 - MAINT: Drop vivi-internal preview capabilities
 
@@ -26,11 +63,13 @@ Change log for zeit.web
 
 - FIX: Prevent seo-slugging for video comment forms the ugly way
 
-- Include URL in jinja error logging
-
-- ZON-1856: Upgrade buzz integration to API version 2.0
+- FIX: Encode non-ascii URLs as utf-8 (e.g. for reach, comments)
 
 - FIX: Ignore authors without display_name instead of crashing
+
+- Include URL in jinja error logging
+
+- ZON-1920: Extend webtrekk pixel
 
 
 1.36 (2015-06-26)

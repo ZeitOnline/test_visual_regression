@@ -5,6 +5,8 @@ import pytest
 import requests
 import urllib2
 
+import pyramid.request
+
 import zeit.web.core.date
 import zeit.web.core.interfaces
 import zeit.web.magazin.view
@@ -291,14 +293,16 @@ def test_banner_channel_mapping_should_apply_last_rule(mock_ad_view):
 
 def test_adcontroller_values_are_correctly_returned(mock_ad_view):
     zw_code = [('$handle', 'centerpage'), ('level2', 'wissen'),
-               ('level3', 'zeit_wissen'), ('$autoSizeFrames', True),
-               ('keywords', ''), ('tma', '')]
+               ('level3', 'zeit_wissen'), ('level4', ''),
+               ('$autoSizeFrames', True), ('keywords', 'zeitonline'),
+               ('tma', '')]
     zw_test = mock_ad_view(
         'centerpage', 'sport', 'zeit wissen').adcontroller_values
     assert zw_code == zw_test
     zmz_code = [('$handle', 'index'), ('level2', 'zeitmz'),
-                ('level3', 'irgendwas'), ('$autoSizeFrames', True),
-                ('keywords', ''), ('tma', '')]
+                ('level3', 'irgendwas'), ('level4', ''),
+                ('$autoSizeFrames', True), ('keywords', 'zeitonline,zeitmz'),
+                ('tma', '')]
     zmz_test = mock_ad_view(
         'centerpage', 'zeit-magazin', 'irgendwas').adcontroller_values
     assert zmz_code == zmz_test
@@ -367,3 +371,9 @@ def test_notfound_view_works_for_post(testserver, testbrowser):
     with pytest.raises(urllib2.HTTPError) as err:
         browser.post('{}/nonexistent'.format(testserver.url), data='')
     assert err.value.getcode() == 404
+
+
+def test_canonical_handles_non_ascii_urls():
+    req = pyramid.request.Request.blank(u'/ümläut'.encode('utf-8'))
+    view = zeit.web.core.view.Base(None, req)
+    assert u'http://localhost/ümläut' == view.canonical_url
