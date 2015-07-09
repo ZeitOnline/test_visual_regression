@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - ZON-1921: Add keywords to adc code
 
+- MAINT: Refactor update signals
+
 - BUG-281: Evaluate automatic areas when iterating over centerpage
 
 - HOTFIX: Attach jinja markers to safeguarded functions
