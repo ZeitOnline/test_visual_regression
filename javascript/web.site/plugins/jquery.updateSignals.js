@@ -88,7 +88,7 @@
          * @memberOf jQuery
          * @category Function
          */
-        up2dateSignals: function() {
+        updateSignals: function() {
             poll( options.timeEndpoint, 1000 * 60, '.js-update-datetime' );
             poll( options.commentsEndpoint, 1000 * 20, '.js-update-commentcount' );
 
