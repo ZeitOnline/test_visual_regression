@@ -48,10 +48,19 @@
 		</div>
 		{% if request.registry.settings.sso_activate %}
 			{% if not request.session.user.name %}
-				<input class="comment-form__text" placeholder="Ihr neuer Benutzername" type="text" name="user_name" {% if view.error.user_name %}value="{{ view.error.user_name }}"{% endif %}>
+				{% if view.error and not view.error.error == 'username_exists_or_invalid' %}
+				    <p class='comment-form__hint comment-form__hint--error'>
+				{% else %}
+				    <p class='comment-form__hint'>
+				{% endif %}
+				<strong>Achtung: </strong>Die Registrierung
+			bei ZEIT ONLINE erfolgt nur mit Ihrer E-Mail-Adresse.
+			Um kommentieren zu können, benötigen Sie allerdings
+			noch einen zusätzlichen Benutzernamen. Diesen können
+			Sie hier anlegen.</p> 
+				<input class="comment-form__input" placeholder="Ihr neuer Benutzername" type="text" name="username" {% if view.error.user_name %}value="{{ view.error.user_name }}"{% endif %}>
 				{% if view.error.error == 'username_exists_or_invalid' %}
-					<span class='error'>Benutzername ist bereits
-					vergeben oder enthält ungültige Zeichen.</span>
+					<div class='comment-form__error'>Benutzername ist bereits vergeben oder enthält ungültige Zeichen.</div>
 				{% endif %}
 			{% endif %}
                 {% endif %}

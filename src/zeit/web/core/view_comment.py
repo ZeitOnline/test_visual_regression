@@ -63,7 +63,7 @@ class PostComment(zeit.web.core.view.Base):
         params = (request.GET, request.POST)[self.request_method == 'POST']
         comment = params.get('comment')
         action = params.get('action')
-        user_name = params.get('user_name')
+        user_name = params.get('username')
 
         try:
             pid = int(params.get('pid'))
@@ -330,36 +330,40 @@ class PostCommentResource(PostComment):
             if action == 'comment':
                 result['comment'] = params.get('comment')
                 result['pid'] = params.get('pid')
-                result['user_name'] = params.get('user_name')
+                result['user_name'] = params.get('username')
+
+        location = zeit.web.core.template.append_get_params(
+            self.request,
+            action=None,
+            pid=None,
+            cid=self.new_cid)
+
+        location = zeit.web.core.template.remove_get_params(
+                location, 'ajax')
+
+        if self.new_cid:
+            # remove page param in redirect
+            location = zeit.web.core.template.remove_get_params(
+                location, 'page')
+            location = '{}#cid-{}'.format(location, self.new_cid)
 
         if self.request.params.get('ajax') == 'true':
+            result['location'] = location
             return result
-        else:
+
+        # We might need to save data to our user session, because
+        # we want to perform a redirect after a POST, but we want to
+        # have the acutal data available, which might be to long for
+        # GET params.
+        if 'error' in result:
+            md5sum = md5.md5(json.dumps(result, sort_keys=True)).hexdigest()
+            self.request.session[md5sum] = result
             location = zeit.web.core.template.append_get_params(
                 self.request,
-                action=None,
-                pid=None,
-                cid=self.new_cid)
+                error=md5sum)
+            location = '{}#comment-form'.format(location)
 
-            if self.new_cid:
-                # remove page param in redirect
-                location = zeit.web.core.template.remove_get_params(
-                    location, 'page')
-                location = '{}#cid-{}'.format(location, self.new_cid)
-
-            # We might need to save data to our user session, because
-            # we want to perform a redirect after a POST, but we want to
-            # have the acutal data available, which might be to long for
-            # GET params.
-            if 'error' in result:
-                md5sum = md5.md5(json.dumps(result, sort_keys=True)).hexdigest()
-                self.request.session[md5sum] = result
-                location = zeit.web.core.template.append_get_params(
-                    self.request,
-                    error=md5sum)
-                location = '{}#comment-form'.format(location)
-
-            return pyramid.httpexceptions.HTTPSeeOther(location=location)
+        return pyramid.httpexceptions.HTTPSeeOther(location=location)
 
 
 @pyramid.view.view_defaults(
