@@ -18,15 +18,17 @@ def fix_misrepresented_latin(val):
     return val
 
 
-def to_int(value, pattern=re.compile(r'[^\d.]+')):
+def to_int(val, pattern=re.compile(r'[^\d.]+')):
     """Converts an arbitrary object with a unicode representation to an int
-    by trashing all non-decimal characters.
+    by trashing all non-decimal chars from its unicode or str representation.
 
-    :param value: Arbitrary input
+    :param val: Arbitrary input
     :rtype: int
     """
 
-    return int(pattern.sub('', unicode(value, errors='ignore')))
+    if hasattr(val, '__unicode__') or isinstance(val, unicode):
+        val = unicode(val).encode('ascii', 'ignore')
+    return int(pattern.sub('', '0' + str(val)))
 
 
 def get_named_adapter(obj, iface, attr, name=None):

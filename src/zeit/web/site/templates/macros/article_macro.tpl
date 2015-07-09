@@ -178,7 +178,6 @@
 {%- endif %}
 {%- endmacro %}
 
-
 {% macro raw(obj) -%}
     {% if obj.alldevices %}
     <div class="raw">{{ obj.xml | safe }}</div>

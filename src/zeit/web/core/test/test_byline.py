@@ -8,220 +8,304 @@ import zeit.cms.interfaces
 import zeit.web.core.byline
 
 
-def test_byline_should_be_represented_by_a_string(application):
+def test_byline_should_be_represented_as_a_nested_tuple(application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
-    byline = zeit.web.core.byline.IRenderByline(article)
-    assert unicode(byline) == ('Ein Kommentar von Anne Mustermann, '
-                               'Berlin und Oliver Fritsch, London')
+    byline = zeit.web.core.byline.ITeaserByline(article)
+    assert byline.context == article
+    assert byline == [
+        ('text', u'Ein Kommentar'),
+        ('text', u'von'),
+        ('enum', (
+            ('csv', (
+                ('enum', (
+                    ('text', u'Anne Mustermann'),)),
+                ('text', u'Berlin'))),
+            ('csv', (
+                ('enum', (
+                    ('text', u'Oliver Fritsch'),)),
+                ('text', u'London')))))]
 
 
 @pytest.fixture(scope='function')
 def patched_byline(request, monkeypatch):
-    def init(self):
-        self.byline = []
-    monkeypatch.setattr(zeit.web.core.byline.RenderByline, '__init__', init)
-    return zeit.web.core.byline.RenderByline
+    def init(self, context):
+        list.__init__(self)
+        self.context = context
+    monkeypatch.setattr(zeit.web.core.byline.Byline, '__init__', init)
+    return zeit.web.core.byline.Byline
 
 
 def test_byline_should_have_genres_if_provided(patched_byline):
-    byline = patched_byline()
+    context = mock.Mock()
+    context.genre = 'glosse'
+    byline = patched_byline(context)
+    byline.genre()
+    assert byline[0] == ('text', u'Eine Glosse')
 
-    content = mock.Mock()
-    content.genre = 'glosse'
-    content.title = lambda x: 'glosse'
-    byline._genre(content)
-    assert unicode(byline) == 'Eine Glosse '
+    context.genre = 'kommentar'
+    byline = patched_byline(context)
+    byline.genre()
+    assert byline[0] == ('text', u'Ein Kommentar')
 
 
 def test_some_byline_genres_should_not_be_displayed(patched_byline):
-    byline = patched_byline()
-    content = mock.Mock()
-    content.genre = 'nachricht'
-    byline._genre(content)
-    assert unicode(byline) == ''
+    context = mock.Mock()
+    context.genre = 'nachricht'
+    byline = patched_byline(context)
+    byline.genre()
+    assert len(byline) == 0
 
 
-def test_byline_should_have_von_or_Von(patched_byline):
-    byline = patched_byline()
-    content = mock.Mock()
+def test_byline_should_have_von_or_von(patched_byline):
+    context = mock.Mock()
+    byline = patched_byline(context)
+    byline.from_()
+    assert byline[0] == ('text', u'Von')
 
-    byline._von(content)
-    assert byline.byline == ['Von ']
-
-    byline.byline = ['not empty']
-    byline._von(content)
-    assert byline.byline[1] == 'von '
+    byline.from_()
+    assert byline[1] == ('text', u'von')
 
 
-def test_byline_should_have_interview_exception(patched_byline):
-    byline = patched_byline()
-    content = mock.Mock()
-    content.genre = 'interview'
-    content.title = lambda x: 'Interview'
-    byline._interview_exception(content)
-    assert unicode(byline) == 'Interview: '
+def test_byline_should_handle_interview_exception(patched_byline):
+    context = mock.Mock()
+    context.genre = 'interview'
+    byline = patched_byline(context)
+    byline.append(('text', u'foo'))
+    byline.interview()
+    assert byline[0] == ('text', u'Interview:')
 
 
 def test_byline_should_be_empty_if_no_authors_given(patched_byline):
-    byline = patched_byline()
-    content = mock.Mock()
-    content.authorships = [None]
-    byline.byline = ['full']
-    byline._author_str(content)
-    assert not byline.byline
+    context = mock.Mock()
+    context.authorships = [None]
+    byline = patched_byline(context)
+    byline.append(('text', u'foo'))
+    byline.groups()
+    assert len(byline) == 0
+
+
+def test_teaser_byline_should_expand_authors_as_text(monkeypatch):
+    author = mock.Mock()
+    author.target.display_name = u'Max Mustermann'
+    author2 = mock.Mock()
+    author2.target.display_name = u'Anne Mustermann'
+    cls = zeit.web.core.byline.ArticleTeaserByline
+    monkeypatch.setattr(cls, '__init__', lambda s: list.__init__(s))
+    assert tuple(cls().expand_authors([author, author2])) == (
+        ('text', u'Max Mustermann'), ('text', u'Anne Mustermann'))
+
+
+def test_content_byline_should_expand_authors_with_links(monkeypatch):
+    author = mock.Mock()
+    author.target.display_name = u'Max Mustermann'
+    author.target.uniqueId = u'http://max'
+    author2 = mock.Mock()
+    author2.target.display_name = u'Anne Mustermann'
+    author2.target.uniqueId = None
+    cls = zeit.web.core.byline.ArticleContentByline
+    monkeypatch.setattr(cls, '__init__', lambda s: list.__init__(s))
+    assert tuple(cls().expand_authors([author, author2])) == (
+        ('linked_author', author.target), ('plain_author', author2.target))
 
 
 def test_one_author_should_be_in_byline(patched_byline):
-    byline = patched_byline()
-    content = mock.Mock()
+    context = mock.Mock()
     author = mock.Mock()
-    author.target.display_name = 'Max Mustermann'
-    author.target.uniqueId = 'http://author'
-    author.location = 'Berlin'
-    content.authorships = [author]
-    byline._author_str(content)
-    assert unicode(byline) == 'Max Mustermann, Berlin'
+    author.target.display_name = u'Max Mustermann'
+    author.target.uniqueId = u'http://authör'
+    author.location = u'Bimbachtal'
+    context.authorships = [author]
+    byline = patched_byline(context)
+    byline.groups()
+    assert byline == [
+        ('csv', (
+            ('enum', (
+                ('text', u'Max Mustermann'),)),
+            ('text', u'Bimbachtal')))]
 
 
 def test_two_authors_should_be_in_byline(patched_byline):
-    byline = patched_byline()
-    content = mock.Mock()
+    context = mock.Mock()
     author = mock.Mock()
-    author.target.display_name = 'Max Mustermann'
-    author.target.uniqueId = 'http://author'
-    author.location = 'Berlin'
+    author.target.display_name = u'Max Mustermann'
+    author.target.uniqueId = u'http://authör'
+    author.location = u'Bimbachtal'
     author2 = mock.Mock()
-    author2.target.display_name = 'Anne Mustermann'
-    author2.target.uniqueId = 'http://author2'
-    author2.location = 'Berlin'
+    author2.target.display_name = u'Anne Mustermann'
+    author2.target.uniqueId = u'http://author2'
+    author2.location = u'Bimbachtal'
 
-    content.authorships = [author, author2]
-    byline._author_str(content)
-    assert unicode(byline) == (u'Max Mustermann und Anne Mustermann, Berlin')
+    context.authorships = [author, author2]
+    byline = patched_byline(context)
+    byline.groups()
+    assert byline == [
+        ('csv', (
+            ('enum', (
+                ('text', u'Max Mustermann'),
+                ('text', u'Anne Mustermann'))),
+            ('text', u'Bimbachtal')))]
 
 
 def test_no_locations_should_be_in_byline_if_not_provided(patched_byline):
-    byline = patched_byline()
-    content = mock.Mock()
+    context = mock.Mock()
     author = mock.Mock()
-    author.target.display_name = 'Max Mustermann'
-    author.target.uniqueId = 'http://author'
+    author.target.display_name = u'Max Mustermann'
+    author.target.uniqueId = u'http://authör'
     author.location = None
     author2 = mock.Mock()
-    author2.target.display_name = 'Anne Mustermann'
-    author2.target.uniqueId = 'http://author2'
+    author2.target.display_name = u'Anne Mustermann'
+    author2.target.uniqueId = u'http://author2'
     author2.location = None
 
-    content.authorships = [author, author2]
-    byline._author_str(content)
-    assert unicode(byline) == (u'Max Mustermann und Anne Mustermann')
+    context.authorships = [author, author2]
+    byline = patched_byline(context)
+    byline.groups()
+    assert byline == [
+        ('enum', (
+            ('text', u'Max Mustermann'),
+            ('text', u'Anne Mustermann')))]
 
 
 def test_three_authors_should_be_in_byline(patched_byline):
-    byline = patched_byline()
-    content = mock.Mock()
+    context = mock.Mock()
     author = mock.Mock()
-    author.target.display_name = 'Max Mustermann'
-    author.target.uniqueId = 'http://author'
-    author.location = 'Berlin'
+    author.target.display_name = u'Max Mustermann'
+    author.target.uniqueId = u'http://authör'
+    author.location = u'Bimbachtal'
     author2 = mock.Mock()
-    author2.target.display_name = 'Anne Mustermann'
-    author2.target.uniqueId = 'http://author2'
-    author2.location = 'Berlin'
+    author2.target.display_name = u'Anne Mustermann'
+    author2.target.uniqueId = u'http://author2'
+    author2.location = u'Bimbachtal'
     author3 = mock.Mock()
     author3.target.display_name = u'Ernst Ärgerlich'
-    author3.target.uniqueId = 'http://author3'
-    author3.location = 'Berlin'
+    author3.target.uniqueId = u'http://author3'
+    author3.location = u'Bimbachtal'
 
-    content.authorships = [author, author2, author3]
-    byline._author_str(content)
-    assert unicode(byline) == (u'Max Mustermann, Anne Mustermann und '
-                               u'Ernst Ärgerlich, Berlin')
+    context.authorships = [author, author2, author3]
+    byline = patched_byline(context)
+    byline.groups()
+    assert byline == [
+        ('csv', (
+            ('enum', (
+                ('text', u'Max Mustermann'),
+                ('text', u'Anne Mustermann'),
+                ('text', u'Ernst Ärgerlich'))),
+            ('text', u'Bimbachtal')))]
 
 
 def test_locations_none_b_b_authors_should_be_in_byline(patched_byline):
-    byline = patched_byline()
-    content = mock.Mock()
+    context = mock.Mock()
     author = mock.Mock()
-    author.target.display_name = 'Max Mustermann'
-    author.target.uniqueId = 'http://author'
+    author.target.display_name = u'Max Mustermann'
+    author.target.uniqueId = u'http://authör'
     author.location = None
     author2 = mock.Mock()
-    author2.target.display_name = 'Anne Mustermann'
-    author2.target.uniqueId = 'http://author2'
-    author2.location = 'Berlin'
+    author2.target.display_name = u'Anne Mustermann'
+    author2.target.uniqueId = u'http://author2'
+    author2.location = u'Bimbachtal'
     author3 = mock.Mock()
     author3.target.display_name = u'Ernst Ärgerlich'
-    author3.target.uniqueId = 'http://author3'
-    author3.location = 'Berlin'
+    author3.target.uniqueId = u'http://author3'
+    author3.location = u'Bimbachtal'
 
-    content.authorships = [author, author2, author3]
-    authors = filter(lambda a: a is not None, content.authorships)
-    authors, locations = byline._author_location_list(authors)
-    assert locations == ['', ', Berlin', ', Berlin']
+    context.authorships = [author, author2, author3]
+    byline = patched_byline(context)
+    byline.groups()
+    assert byline == [
+        ('enum', (
+            ('enum', (
+                ('text', u'Max Mustermann'),)),
+            ('csv', (
+                ('enum', (
+                    ('text', u'Anne Mustermann'),
+                    ('text', u'Ernst Ärgerlich'))),
+                ('text', u'Bimbachtal')))))]
 
 
 def test_locations_a_a_a_should_produce_correct_list(patched_byline):
-    byline = patched_byline()
-    content = mock.Mock()
+    context = mock.Mock()
     author = mock.Mock()
-    author.target.display_name = 'Max Mustermann'
-    author.target.uniqueId = 'http://author'
-    author.location = 'Hamburg'
+    author.target.display_name = u'Max Mustermann'
+    author.target.uniqueId = u'http://authör'
+    author.location = u'Hørsholm'
     author2 = mock.Mock()
-    author2.target.display_name = 'Anne Mustermann'
-    author2.target.uniqueId = 'http://author2'
-    author2.location = 'Hamburg'
+    author2.target.display_name = u'Anne Mustermann'
+    author2.target.uniqueId = u'http://author2'
+    author2.location = u'Hørsholm'
     author3 = mock.Mock()
-    author3.target.display_name = 'Ernst Ärgerlich'
-    author3.target.uniqueId = 'http://author3'
-    author3.location = 'Hamburg'
+    author3.target.display_name = u'Ernst Ärgerlich'
+    author3.target.uniqueId = u'http://author3'
+    author3.location = u'Hørsholm'
 
-    content.authorships = [author, author2, author3]
-    authors = filter(lambda a: a is not None, content.authorships)
-    authors, locations = byline._author_location_list(authors)
-    assert locations == ['', '', ', Hamburg']
+    context.authorships = [author, author2, author3]
+    byline = patched_byline(context)
+    byline.groups()
+    assert byline == [
+        ('csv', (
+            ('enum', (
+                ('text', u'Max Mustermann'),
+                ('text', u'Anne Mustermann'),
+                ('text', u'Ernst Ärgerlich'))),
+            ('text', u'Hørsholm')))]
 
 
 def test_locations_a_b_a_should_produce_correct_list(patched_byline):
-    byline = patched_byline()
-    content = mock.Mock()
+    context = mock.Mock()
     author = mock.Mock()
-    author.target.display_name = 'Max Mustermann'
-    author.target.uniqueId = 'http://author'
-    author.location = 'Hamburg'
+    author.target.display_name = u'Max Mustermann'
+    author.target.uniqueId = u'http://authör'
+    author.location = u'Hørsholm'
     author2 = mock.Mock()
-    author2.target.display_name = 'Anne Mustermann'
-    author2.target.uniqueId = 'http://author2'
-    author2.location = 'Berlin'
+    author2.target.display_name = u'Anne Mustermann'
+    author2.target.uniqueId = u'http://author2'
+    author2.location = u'Bimbachtal'
     author3 = mock.Mock()
-    author3.target.display_name = 'Ernst Ärgerlich'
-    author3.target.uniqueId = 'http://author3'
-    author3.location = 'Hamburg'
+    author3.target.display_name = u'Ernst Ärgerlich'
+    author3.target.uniqueId = u'http://author3'
+    author3.location = u'Hørsholm'
 
-    content.authorships = [author, author2, author3]
-    authors = filter(lambda a: a is not None, content.authorships)
-    authors, locations = byline._author_location_list(authors)
-    assert locations == [', Hamburg', ', Berlin', ', Hamburg']
+    context.authorships = [author, author2, author3]
+    byline = patched_byline(context)
+    byline.groups()
+    assert byline == [
+        ('enum', (
+            ('csv', (
+                ('enum', (
+                    ('text', u'Anne Mustermann'),)),
+                ('text', u'Bimbachtal'))),
+            ('csv', (
+                ('enum', (
+                    ('text', u'Max Mustermann'),
+                    ('text', u'Ernst Ärgerlich'))),
+                ('text', u'Hørsholm')))))]
 
 
 def test_locations_b_b_a_should_produce_correct_list(patched_byline):
-    byline = patched_byline()
-    content = mock.Mock()
+    context = mock.Mock()
     author = mock.Mock()
-    author.target.display_name = 'Max Mustermann'
-    author.target.uniqueId = 'http://author'
-    author.location = 'Berlin'
+    author.target.display_name = u'Max Mustermann'
+    author.target.uniqueId = u'http://authör'
+    author.location = u'Bimbachtal'
     author2 = mock.Mock()
-    author2.target.display_name = 'Anne Mustermann'
-    author2.target.uniqueId = 'http://author2'
-    author2.location = 'Berlin'
+    author2.target.display_name = u'Anne Mustermann'
+    author2.target.uniqueId = u'http://author2'
+    author2.location = u'Bimbachtal'
     author3 = mock.Mock()
-    author3.target.display_name = 'Ernst Ärgerlich'
-    author3.target.uniqueId = 'http://author3'
-    author3.location = 'Hamburg'
+    author3.target.display_name = u'Ernst Ärgerlich'
+    author3.target.uniqueId = u'http://author3'
+    author3.location = u'Hørsholm'
 
-    content.authorships = [author, author2, author3]
-    authors = filter(lambda a: a is not None, content.authorships)
-    authors, locations = byline._author_location_list(authors)
-    assert locations == [', Berlin', ', Berlin', ', Hamburg']
+    context.authorships = [author, author2, author3]
+    byline = patched_byline(context)
+    byline.groups()
+    assert byline == [
+        ('enum', (
+            ('csv', (
+                ('enum', (
+                    ('text', u'Max Mustermann'),
+                    ('text', u'Anne Mustermann'))),
+                ('text', u'Bimbachtal'))),
+            ('csv', (
+                ('enum', (
+                    ('text', u'Ernst Ärgerlich'),)),
+                ('text', u'Hørsholm')))))]

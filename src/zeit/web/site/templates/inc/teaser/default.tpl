@@ -36,7 +36,10 @@
             <p class="{{ self.layout() }}__text">{{ teaser.teaserText | hide_none }}{% block teaser_byline_inner %}{% endblock %}</p>
             {% endblock %}
             {% block teaser_byline %}
-                {{ cp.include_teaser_byline(teaser, self.layout()) }}
+                <span class="{{ self.layout() }}__byline">
+                    {% set byline = teaser | get_byline %}
+                    {% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
+                </span>
             {% endblock %}
             {% block teaser_metadata_default %}
             <div class="{{ self.layout() }}__metadata">
