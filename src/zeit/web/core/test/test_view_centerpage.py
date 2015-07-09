@@ -1,5 +1,3 @@
-import zope.component
-
 import zeit.content.cp.centerpage
 import zeit.cms.interfaces
 import zeit.cms.repository.interfaces

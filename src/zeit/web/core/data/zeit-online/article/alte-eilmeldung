@@ -8,12 +8,12 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2150-03-16T18:18:19.307303+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2150-03-16T18:17:04.110958+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2150-03-16T18:22:25.690095+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2150-03-16T18:19:19.138962+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2150-03-16T18:16:36.338865+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2150-03-16T18:16:48.745763+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-03-16T18:18:19.307303+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-03-16T18:17:04.110958+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-03-16T18:22:25.690095+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-03-16T18:19:19.138962+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-03-16T18:16:36.338865+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-03-16T18:16:48.745763+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="enabled">no</attribute>
     <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
@@ -22,7 +22,7 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_breaking">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2150-03-16T18:23:18.309935+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-03-16T18:23:18.309935+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.klormann</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">DOSB-Präsidium empfiehlt Hamburg als deutschen Olympia-Bewerber</attribute>
@@ -40,7 +40,7 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:52d58a09-6cbb-433c-88db-284174e1bc14}</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">11</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2150</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
@@ -63,7 +63,7 @@
     <subtitle/>
     <division type="page">
       <image layout="large" is_empty="True"/>
-      <p>Deutschland soll sich mit Hamburg um die Olympischen Spiele 2024 bewerben. Dies hat das Präsidium des Deutschen Olympischen Sportbundes seinen Mitgliedern für die Abstimmung am Samstag empfohlen und sich damit gegen Berlin ausgesprochen. Lesen Sie mehr dazu hier auf ZEIT ONLINE.</p>
+      <p>Deutschland soll sich mit Hamburg um die Olympischen Spiele 2024 bewerben. Dies hat das Präsidium des Deutschen Olympischen Sportbundes seinen Mitgliedern für die Abstimmung am Samstag empfohlen und sich damit gegen Berlin ausgesprochen. Lesen Sie mehr <a class="" href="http://www.zeit.de/sport/2015-03/olympische-spiele-dosb-berlin-hamburg" target="_blank">dazu hier auf ZEIT ONLINE.</a></p>
     </division>
   </body>
 </article>
