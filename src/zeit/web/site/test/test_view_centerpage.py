@@ -110,7 +110,10 @@ def test_default_teaser_should_match_css_selectors(
     teaser.teaserText = 'teaserText'
     view = {'comment_counts': {uid: 129}}
 
-    html_str = tpl.render(teaser=teaser, layout='teaser', view=view)
+    area = mock.Mock()
+    area.kind = 'solo'
+
+    html_str = tpl.render(teaser=teaser, layout='teaser', view=view, area=area)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('article.teaser h2.teaser__heading')) == 1, (
