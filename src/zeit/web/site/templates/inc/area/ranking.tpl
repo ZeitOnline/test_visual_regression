@@ -6,7 +6,7 @@
 {% if area.query %}
 <div class="search-counter">
     <div class="search-counter__hits">
-        {{ area.hits | default(0) | pluralize('Keine Suchergebnisse', '{} Suchergebnis', '{} Suchergebnisse') }}
+        {{ area.hits | default(0) | pluralize('Keine Suchergebnisse', '{} Suchergebnis', '{:,d} Suchergebnisse') | replace(',', '.') }}
         {% if area.query %}für &raquo;{{ area.query }}&laquo;{% endif %}
     </div>
     <nav>
