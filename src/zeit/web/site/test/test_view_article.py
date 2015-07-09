@@ -415,3 +415,12 @@ def test_article_column_should_be_identifiable_by_suitable_css_class(
         testserver.url))
     assert browser.cssselect('.article.article--columnarticle')
     assert browser.cssselect('.article-body.article-body--columnarticle')
+
+
+def test_article_should_have_proper_meetrics_integration(
+        testserver, testbrowser):
+    browser = testbrowser(
+        '{}/zeit-online/article/01'.format(testserver.url))
+    meetrics = browser.cssselect(
+        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+    assert len(meetrics) == 1
