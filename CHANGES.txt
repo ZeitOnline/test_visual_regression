@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1836: Show release date in breaking news banner
 
+- ZON-1581: Integrate Meetrics into Beta
+
 
 1.39 (2015-07-08)
 -----------------
@@ -25,8 +27,6 @@ Change log for zeit.web
 
 1.38 (2015-07-08)
 -----------------
-
-- ZON-1581: Integrate Meetrics into Beta
 
 - ZON-1829: HP Foto-Gallerie-Teaser / Style und das Frontend
 
