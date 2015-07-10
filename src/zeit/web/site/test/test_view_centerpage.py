@@ -487,7 +487,7 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
     driver = selenium_driver
     driver.get('%s/zeit-online/parquet-teaser-setup' % testserver.url)
     small_teaser = driver.find_element_by_css_selector(
-        '.teaser-parquet-small__media')
+        '.cp-area--parquet .teaser-small__media')
 
     driver.set_window_size(320, 480)
     assert not small_teaser.is_displayed(), (
