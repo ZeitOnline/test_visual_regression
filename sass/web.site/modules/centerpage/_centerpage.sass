@@ -31,7 +31,6 @@
 
 .cp-area
 	padding: 0 $cp-padding
-	float: left
 	width: 100%
 	&--parquet,
 	&--spektrum,
@@ -41,12 +40,13 @@
 		position: relative
 	&--spektrum
 		padding-top: remify(60px)
-	&--ranking
-		float: none
-		max-width: remify(660px)
-		margin-left: auto
-		margin-right: auto
 	+respond-min($break-areas)
+		float: left
+		&--ranking
+			float: none
+			max-width: remify(680px) // + 2 * $cp-padding
+			margin-left: auto
+			margin-right: auto
 		&--major
 			width: 66.66%
 		&--duo
