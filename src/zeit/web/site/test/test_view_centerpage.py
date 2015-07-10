@@ -683,7 +683,7 @@ def test_centerpage_should_have_header_tags(testbrowser, testserver):
 
 
 def test_new_centerpage_renders(testserver):
-    resp = requests.get('%s/index' % testserver.url)
+    resp = requests.get('%s/zeit-online/slenderized-index' % testserver.url)
     assert resp.ok
 
 
@@ -832,7 +832,7 @@ def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
 
 def test_centerpage_square_teaser_has_pixelperfect_image(
         testbrowser, testserver):
-    browser = testbrowser('{}/index'.format(testserver.url))
+    browser = testbrowser('/zeit-online/teaser-square-setup')
     images = browser.cssselect('.teaser-square .scaled-image')
     assert len(images)
     for image in images:
@@ -953,8 +953,7 @@ def test_gallery_teaser_shuffles_on_click(selenium_driver, testserver):
 
 def test_homepage_should_have_proper_meetrics_integration(
         testserver, testbrowser):
-    browser = testbrowser(
-        '{}/index'.format(testserver.url))
+    browser = testbrowser('/zeit-online/slenderized-index')
     meetrics = browser.cssselect(
         'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1
