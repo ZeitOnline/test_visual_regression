@@ -1,5 +1,5 @@
 {% macro footer_logo(request) -%}
-    <a href="http://{{ request.host }}/index" title="Nachrichten auf ZEIT ONLINE" class="icon-zon-logo-desktop">
+    <a href="http://{{ request.host }}/index" title="Nachrichten auf ZEIT ONLINE" class="icon-zon-logo-desktop" data-id="footernav.logo.1..logo">
         <!--start: title-->Nachrichten auf ZEIT ONLINE<!--end: title-->
     </a>
 {%- endmacro %}
@@ -26,7 +26,7 @@
                         {% set item = section[j] %}
                         <li class="footer-{{ class }}__item">
                             <a class="footer-{{ class }}__link" href="{{
-                            item.href | create_url }}"  itemprop="url"><span
+                            item.href | create_url }}"  itemprop="url" data-id="{{ item.item_id if item.item_id }}"><span
                             itemprop="name">{{ item.text }}</span></a>
                         </li>
                     {%- endfor %}
@@ -35,7 +35,7 @@
         </div>
         {% if more and section.item_id == 'first' %}
             <div class="footer-{{ class }}__more">
-                <a href="#">Mehr</a>
+                <a href="#" data-id="footernav.mehr.1..more">Mehr</a>
             </div>
         {% endif %}
     {%- endfor %}
