@@ -354,7 +354,7 @@ def test_image_macro_should_hide_none(testserver, testbrowser):
 def test_macro_meta_author_should_produce_html_if_author_exists(
         application, jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.core:templates/macros/article_macro.tpl')
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     test_class = 'test'
     authors = [{'prefix': 'Von', 'href': 'www.zeit.de', 'name': 'Tom',
                 'location': ', Bern', 'suffix': 'und'},
@@ -372,7 +372,7 @@ def test_macro_meta_author_should_produce_html_if_author_exists(
 
 def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.core:templates/macros/article_macro.tpl')
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
     authors = []
     lines = tpl.module.meta_author(authors).splitlines()
     output = ''

@@ -21,7 +21,7 @@
     <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="flv_url">http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319165001_thegreatrabbit-1280-720-h264.mp4</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/brightcove" name="id">4004256546001</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/brightcove" name="id">3537342483001</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-01-22T09:26:56+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.brightcove</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>

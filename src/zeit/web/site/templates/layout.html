@@ -148,7 +148,9 @@
     </script>
     {% include "zeit.web.core:templates/inc/ads/%s/finalize.html" % view.ad_delivery_type ignore missing %}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
-
+    {% block meetrics %}
+        {% include "zeit.web.core:templates/inc/tracking/meetrics_relaunch.html" ignore missing %}
+    {% endblock %}
     <script>
         var require = {
             baseUrl: '{{ request.asset_url("js/") }}',

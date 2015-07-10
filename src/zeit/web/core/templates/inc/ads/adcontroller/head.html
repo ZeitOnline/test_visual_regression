@@ -1,16 +1,19 @@
 {% if view.context.advertising_enabled %}
 <!-- ad controller head start -->
 <!-- gzip testing -->
-<script>var gzipEnabled = false;</script>
+<script type="text/javascript">
+    var gzipEnabled = false;
+</script>
 <script type="text/javascript" src="https://s3-eu-central-1.amazonaws.com/prod.iqdcontroller.iqdigital/iqd_gzip_test.js.gz"></script>
+
 
 <!-- adcontroller load -->
 <script type="text/javascript">
     // edited version of the original iqd code
-    // maybe this should be loaded via appending a script instead of doucment.write
+    // adds the ability to load different adcontroller versions depending on isMobileView()
     var iqd_mode = (function() {
             var dm = window.location.href.toLowerCase();
-            return ZMO.isMobileView() ? 'live' : ((dm.indexOf('iqdeployment=')>1) ? dm.split('iqdeployment=')[1] : 'live');
+            return ZMO.isMobileView() ? 'live' : ((dm.indexOf('iqdeployment=')>1) ? dm.split('iqdeployment=')[1].split('&')[0] : 'live');
         })(),
         // conditionalize output of gzip fileending, to prevent code replication
         gz_suffix = gzipEnabled ? '.gz' : '',
@@ -28,6 +31,13 @@
                 {{ '' | indent(4, true) }}{{ name }}: {% if value is string %}'{{ value }}'{% else %}{{ value | lower }}{% endif %}{{ ',' if not loop.last }}
         {% endfor -%}
         });
+    }
+    try {
+        AdController.stage();
+    } catch(e) {}
+</script>
+<script type="text/javascript">
+    if (typeof AdController !== 'undefined') {
         AdController.initialize();
     }
 </script>
