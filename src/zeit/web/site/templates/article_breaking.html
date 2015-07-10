@@ -2,7 +2,7 @@
 
 {% block breaking_news %}
 	<div class="breaking-news-banner">
-		<strong class="breaking-news-banner__label">Eilmeldung</strong> <span class="breaking-news-banner__time">{{- view.date_last_published_semantic | format_date('time_only') -}}</span>
+		<strong class="breaking-news-banner__label">Eilmeldung</strong> <span class="breaking-news-banner__time">{{ view.date_first_released | format_date('time_only') }}</span>
 	</div>
 {% endblock breaking_news %}
 

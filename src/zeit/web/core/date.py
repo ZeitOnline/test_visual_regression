@@ -58,8 +58,10 @@ def format_timedelta(date, **kwargs):
 def get_delta_time_from_article(article, base_date=None):
     modification = mod_date(article)
     if modification is not None:
-        dt = DeltaTime(modification, base_date)
-        return dt.get_time_since_modification()
+        delta = DeltaTime(modification, base_date)
+        delta = delta.get_time_since_modification()
+        if delta:
+            return delta.title()
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IDeltaTimeEntity)

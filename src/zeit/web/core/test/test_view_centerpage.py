@@ -1,4 +1,6 @@
+import zeit.content.cp.centerpage
 import zeit.cms.interfaces
+import zeit.cms.repository.interfaces
 
 import zeit.web.core.view_centerpage
 
@@ -38,6 +40,24 @@ def test_centerpage_should_aggregate_all_teasers_correctly(
     assert items[0].uniqueId == (
         'http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm')
     assert len(items) == 19
+
+
+def test_centerpage_should_evaluate_automatic_areas_for_teasers(
+        application, dummy_request):
+    cp = zeit.content.cp.centerpage.CenterPage()
+    cp.uniqueId = 'http://xml.zeit.de/testcp'
+    other = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2')
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = 'duo'  # Fixture config default teaser layout
+    area.automatic_type = 'centerpage'
+    area.referenced_cp = other
+    area.count = 5
+    area.automatic = True
+    items = list(zeit.web.core.view_centerpage.Centerpage(cp, dummy_request))
+    assert items[0].uniqueId == (
+        'http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm')
+    assert len(items) == area.count
 
 
 def test_centerpage_should_collect_teaser_counts_from_community(

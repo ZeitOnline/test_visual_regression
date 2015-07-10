@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <image-folder>http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/</image-folder>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+      <copyright py:pytype="str">© Alexander Gerst/ESA</copyright>
+    </image>
+    <badges>
+      <badge>gallery</badge>
+    </badges>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-27T06:32:15.932344+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-06-27T06:32:47.196581+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-06-27T06:32:36.581034+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-06-27T06:33:36.349158+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-06-27T06:32:03.131203+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-06-27T06:32:27.367640+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-24T15:03:46.469829+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.dobmeier</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Auch Kleingärten können groß rauskommen. (ben)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Reisen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Lassen Sie mich durch, ich bin Gartenzwerg! Wir zeigen Kleingärten aus aller Welt. (ben)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">gallery</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.gallery" name="type">standalone</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:670a903b-9cde-4738-b612-92e0d01cb9e6}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">24</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Gallery" module="zeit.content.gallery.gallery"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <column layout="left"/>
+    <column layout="right">
+      <container>
+        <block name="01-alexander-gerst-weltall-fotos-erde-iss.jpg">
+          <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">I51.000 Euro für 125 Quadratmeter Garten. In der Kleingartenanlage am Fürstenweg im österreichischen Innsbruck gibt es dafür WLAN, Strom, fließend Wasser und den nahe gelegenen Innsbrucker Flughafen. Falls man trotz all der Idylle mal in den Urlaub fliegen will.</caption>
+          <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/01-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Victoria Strachwitz, Angelika Ziebart/Quadriga Verlag</copyright>
+          </image>
+          <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/01-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Victoria Strachwitz, Angelika Ziebart/Quadriga Verlag</copyright>
+          </thumbnail>
+        </block>
+      </container>
+    </column>
+    <title>Dr. Gartenzwerg und Prof. Zucchini</title>
+    <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <p>Deutschland, Land der Kleingärtner. Organisiert auf Kreis-, Bezirks-, Landes- und Bundesebene stellen Kleingärtner 5 Prozent der deutschen Bevölkerung. Natürlich gilt für Klein- oder auch Schrebergärten: Es gibt nichts, was es nicht gibt. Die Autorinnen Victoria Strachwitz und Angelika Ziebart wollten das Phänomen Kleingarten verstehen und haben sich auf eine weltweite Suche begeben. Die Ergebnisse sind jetzt in dem Buch <a href="http://www.luebbe.de/quadriga"><em>Mein Stück vom Glück – Die verborgenen Paradiese der Kleingärtner</em></a> nachzulesen. Wir zeigen eine Auswahl der schönsten Fotos.</p>
+    </text>
+    <supertitle>Garten</supertitle>
+    <subtitle>Holzhütte, Zaun und viel zu viel Gemüse: Im Sommer zieht es nicht nur die Deutschen wieder in ihr umzäuntes Stück Natur. Wir zeigen Kleingärten aus aller Welt.</subtitle>
+  </body>
+  <teaser>
+    <title>Dr. Gartenzwerg und Prof. Zucchini</title>
+    <text>Holzhütte, Zaun und viel zu viel Gemüse: Im Sommer zieht es nicht nur die Deutschen wieder in ihr umzäuntes Stück Natur. Wir zeigen Kleingärten aus aller Welt.</text>
+  </teaser>
+</gallery>

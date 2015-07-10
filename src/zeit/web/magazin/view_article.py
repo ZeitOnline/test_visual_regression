@@ -3,11 +3,8 @@ import logging
 
 import pyramid.view
 
-import zeit.connector.connector
-import zeit.connector.interfaces
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.content.image.interfaces
 
 import zeit.web
 import zeit.web.core.article
@@ -52,6 +49,15 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
                 i.image and self._copyrights.setdefault(
                     i.image.image_group, i.image)
         return nextread
+
+    @zeit.web.reify
+    def genre(self):
+        prefix = 'ein'
+        if self.context.genre in (
+                'analyse', 'glosse', 'nachricht', 'reportage'):
+            prefix = 'eine'
+        if self.context.genre:
+            return prefix + ' ' + self.context.genre.title()
 
 
 @pyramid.view.view_config(name='seite',

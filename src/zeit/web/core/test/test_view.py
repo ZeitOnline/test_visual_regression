@@ -88,8 +88,8 @@ def test_json_delta_time_from_unique_id_should_return_delta_time(testserver,
     content = json.loads(browser.contents)
     a1 = 'http://xml.zeit.de/zeit-online/cp-content/article-01'
     a2 = 'http://xml.zeit.de/zeit-online/cp-content/article-02'
-    assert content['delta_time'][0][a1]['time'] == 'vor 1 Stunde'
-    assert content['delta_time'][1][a2]['time'] == 'vor 30 Minuten'
+    assert content['delta_time'][a1] == 'Vor 1 Stunde'
+    assert content['delta_time'][a2] == 'Vor 30 Minuten'
 
 
 def test_json_delta_time_from_unique_id_should_return_http_error_on_false_uid(
@@ -114,8 +114,8 @@ def test_json_delta_time_from_unique_id_should_use_custom_base_time(
     content = json.loads(browser.contents)
     a1 = 'http://xml.zeit.de/zeit-online/cp-content/article-01'
     a2 = 'http://xml.zeit.de/zeit-online/cp-content/article-02'
-    assert content['delta_time'][0][a1]['time'] == 'vor 1 Stunde'
-    assert content['delta_time'][1][a2]['time'] == 'vor 12 Minuten'
+    assert content['delta_time'][a1] == 'Vor 1 Stunde'
+    assert content['delta_time'][a2] == 'Vor 12 Minuten'
 
 
 def test_http_header_should_contain_c1_header_fields(testserver, testbrowser):
@@ -293,14 +293,16 @@ def test_banner_channel_mapping_should_apply_last_rule(mock_ad_view):
 
 def test_adcontroller_values_are_correctly_returned(mock_ad_view):
     zw_code = [('$handle', 'centerpage'), ('level2', 'wissen'),
-               ('level3', 'zeit_wissen'), ('$autoSizeFrames', True),
-               ('keywords', ''), ('tma', '')]
+               ('level3', 'zeit_wissen'), ('level4', ''),
+               ('$autoSizeFrames', True), ('keywords', 'zeitonline'),
+               ('tma', '')]
     zw_test = mock_ad_view(
         'centerpage', 'sport', 'zeit wissen').adcontroller_values
     assert zw_code == zw_test
     zmz_code = [('$handle', 'index'), ('level2', 'zeitmz'),
-                ('level3', 'irgendwas'), ('$autoSizeFrames', True),
-                ('keywords', ''), ('tma', '')]
+                ('level3', 'irgendwas'), ('level4', ''),
+                ('$autoSizeFrames', True), ('keywords', 'zeitonline,zeitmz'),
+                ('tma', '')]
     zmz_test = mock_ad_view(
         'centerpage', 'zeit-magazin', 'irgendwas').adcontroller_values
     assert zmz_code == zmz_test

@@ -24,7 +24,15 @@
 
 {% block main %}
     {% for region in view.regions %}
+        {% set region_loop = loop %}
         {%- include ["zeit.web.site:templates/inc/region/{}.html".format(region.kind),
                      "zeit.web.site:templates/inc/region/default.html"] ignore missing -%}
     {% endfor %}
 {% endblock main %}
+
+{% block meetrics %}
+    {# meetrics should only track the homepage #}
+    {% if view.is_hp %}
+        {{ super() }}
+    {% endif %}
+{% endblock meetrics %}
