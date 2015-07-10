@@ -7,7 +7,7 @@
 
 <div class="nextread {% if has_default_image %}nextread--without-image{% endif %}" id="nextread">
     <a class="nextread__link {% if has_default_image %}nextread__link--without-image{% endif %}" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
-        <div class="nextread__lead {% if has_default_image %}nextread__lead--without-image{% endif %}">{{ module.lead }}</div>
+        <div class="nextread__lead {% if has_default_image %}c--without-image{% endif %}">{{ module.lead or 'Lesen Sie jetzt' }}</div>
         {% if image %}
             {%- if not has_default_image -%}
                 {% set module_layout = 'nextread' %}
