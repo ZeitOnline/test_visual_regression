@@ -4,7 +4,13 @@ Change log for zeit.web
 1.40.2 (unreleased)
 -------------------
 
+- ZON-1811: Fix search input for iOS Safari and add thousands separator
+
 - ZON-1788: Apply snazzy tuple stream byline to teasers and articles
+
+- ZON-1912: Bug: auf HP, CP und Artikeln wird als zweites MR tile_7 statt tile_8 ausgegeben
+
+- ZON-1919: Show comment section ads despite there are comments or not
 
 - FIX: Ensure create_url can handle empty video titles
 

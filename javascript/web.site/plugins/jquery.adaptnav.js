@@ -86,7 +86,7 @@
             },
             isDesktop: function() {
                 // check that some "mobile only"-divs aren't visible
-                return ( $( '.logo_bar__menue, .main_nav' ).is( ':hidden' ) );
+                return ( $( '.main_nav .logo_bar__menu' ).is( ':hidden' ) );
             },
             getAvailableWidth: function() {
                 //get size available in navi
