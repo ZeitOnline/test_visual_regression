@@ -37,7 +37,8 @@ class PostComment(zeit.web.core.view.Base):
                 title='No User',
                 explanation='Please log in in order to comment')
 
-        if 'user' in request.session and not request.session['user']['name']:
+        if request.session.get('user') and not (
+                request.session['user'].get('name')):
             self.user_name = ''
         else:
             self.user_name = request.session['user']['name']
@@ -73,12 +74,12 @@ class PostComment(zeit.web.core.view.Base):
         if not user_name and not self.user_name and action == 'comment':
             raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No user_name given',
-                explanation= 'A user name must be set in order to comment.')
+                explanation='A user name must be set in order to comment.')
 
         if not self.user_name and action != 'comment':
             raise pyramid.httpexceptions.HTTPBadRequest(
                 title='user_name could not be set',
-                explanation= 'A user name can only be set on action comment.')
+                explanation='A user name can only be set on action comment.')
 
         if not request.method == self.request_method:
             raise pyramid.httpexceptions.HTTPMethodNotAllowed(
@@ -170,8 +171,8 @@ class PostComment(zeit.web.core.view.Base):
                 else:
                     raise pyramid.httpexceptions.HTTPInternalServerError(
                         title='No user name found',
-                        explanation='Session could not be'
-                            ' reloaded with new user_name.')
+                        explanation='Session could not be '
+                                    'reloaded with new user_name.')
             content = None
             error = None
             if response.content:
@@ -198,7 +199,7 @@ class PostComment(zeit.web.core.view.Base):
             error = json.loads(response.content)
             raise pyramid.httpexceptions.HTTPBadRequest(
                 title='user_name could not be set',
-                explanation= error['error_message'])
+                explanation=error['error_message'])
         else:
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='Action {} could not be performed'.format(action),
@@ -312,7 +313,6 @@ class PostCommentResource(PostComment):
 
     msg = {
         'Username exists or not valid': 'username_exists_or_invalid'}
-
 
     def __init__(self, context, request):
         super(PostCommentResource, self).__init__(context, request)

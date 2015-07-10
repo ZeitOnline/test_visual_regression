@@ -9,6 +9,7 @@ import logging
 
 log = logging.getLogger(__name__)
 
+
 class CommunityAuthenticationPolicy(
         pyramid.authentication.SessionAuthenticationPolicy):
     """An authentication policy that queries the Community backend for user
@@ -41,7 +42,6 @@ class CommunityAuthenticationPolicy(
                 request.session['user'].get('sso_verification') != sso_id):
             del request.session['user']
 
-
         drupal_id = request.cookies.get('drupal-userid')
 
         # We might never get a drupal cookie, if we are just using the
@@ -49,7 +49,7 @@ class CommunityAuthenticationPolicy(
         if conf.get("sso_activate") and not drupal_id and (
                 request.session.get('user')) and (
                 request.session['user'].get('uid')):
-           drupal_id = request.session['user'].get('uid')
+            drupal_id = request.session['user'].get('uid')
 
         # If we have a community cookie for the current user, store/retrieve
         # the user info in/from the session
