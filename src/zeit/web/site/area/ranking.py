@@ -26,20 +26,6 @@ FIELDS = ' '.join([
 ])
 
 
-HIGHLIGHTING = {
-    'hl': 'true',
-    'hl.fl': 'main_text,teaser_text',
-    'hl.highlightMultiTerm': 'true',
-    'hl.fragsize': '250',
-    'hl.alternateField': 'teaser_text',
-    'hl.snippets': '1',
-    'hl.mergeContiguous': 'true',
-    'hl.usePhraseHighlighter': 'true',
-    'hl.simple.pre': '%3Cb%3E',
-    'hl.simple.post': '%3C/b%3E'
-}
-
-
 ORDERS = collections.defaultdict(
     lambda: 'score desc', {
         'aktuell': 'last-semantic-change desc'}
@@ -95,8 +81,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                 sort=ORDERS[self.sort_order],
                 rows=self.count,
                 fl=FIELDS,
-                start=self.count * (self.page - 1),
-                **HIGHLIGHTING)
+                start=self.count * (self.page - 1))
         except (pysolr.SolrError, ValueError) as e:
             log.warning('{} for query {}'.format(e, self.raw_query))
             return result
