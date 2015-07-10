@@ -1,17 +1,23 @@
+%teaser-kicker-topic
+	color: $zon_mid_grey
+	font-size: remify(14px)
+	font-weight: normal
+	letter-spacing: $zon-letter-spacing-l
+	margin-bottom: remify(14px)
+	text-transform: uppercase
+
 .teaser-topic-main
 	@extend %teaser
 	+font-smoothing
-	margin: $petite 0
+	margin: 0 0 $petite
 	padding: 0
 	position: relative
 	&__heading
 		@extend %teaser-heading
+		margin: 0 0 remify(24px)
 		position: relative
-		margin-top: remify(6px)
-		margin-bottom: remify(24px)
 		+respond-min($break-tablet-min)
 			margin-bottom: remify(34px)
-			margin-top: remify(3px)
 		+respond-min($break-desktop-min)
 			margin-bottom: remify(45px)
 	&__inner-helper
@@ -19,7 +25,7 @@
 		position: absolute
 		text-align: center
 		top: 50%
-		+transform(translateY(-60%))
+		+transform(translateY(-50%))
 		width: 100%
 		z-index: 1
 		+respond-min($break-tablet-min)
@@ -27,23 +33,14 @@
 			padding-right: remify(24px)
 			text-align: left
 			+transform(none)
-			top: remify(35px)
+			top: remify(60px)
 			width: 57%
 		+respond-min($break-desktop-min)
 			padding-right: remify(42px)
 			width: 66.66%
 	&__kicker
 		@extend %teaser-kicker
-		color: $white
-		font-size: $font-s--rem
-		letter-spacing: $zon-letter-spacing-l
-		text-transform: uppercase
-		margin-bottom: remify(14px)
-		+respond-min($break-tablet-min)
-			font-size: $font-m--rem
-			margin-bottom: remify(18px)
-		+respond-min($break-desktop-min)
-			font-size: $font-m--rem
+		@extend %teaser-kicker-topic
 	&__media
 		float: left
 		margin: 0
@@ -66,15 +63,6 @@
 			+background(rgba(0, 0, 0, 0.5))
 			+respond-min($break-tablet-min)
 				+background(rgba(0, 0, 0, 0.5))
-	&__media-item
-		height: auto
-		left: -35%
-		max-width: none
-		position: absolute
-		width: 165vw
-		+respond-min($break-tablet-min)
-			max-width: 100%
-			position: static
 	&__readmore
 		+zon-button-dark($margin: 0)
 
@@ -82,50 +70,49 @@
 		@extend %teaser-title
 		color: $white
 		font-size: $font-mxl--rem
-		line-height: 1.12em
+		line-height: 1.12
 		&:hover
 			color: $white
 		+respond-min($break-tablet-min)
 			font-size: remify(26px)
 		+respond-min($break-desktop-min)
 			font-size: $font-xxxl--rem
-			line-height: 1.28em
+			line-height: 1.28
+
+img.teaser-topic-main__media-item
+	height: auto
+	left: -35%
+	position: absolute
+	width: 165vw // !important // please shoot me
+	+respond-min($break-tablet-min)
+		width: 100%
+		position: static
 
 .teaser-topic-item
-	display: none
-	+respond-min($break-tablet-min)
+	&:after
+		border-bottom: 1px solid $zon_mid_grey
+		content: none
 		display: block
-		&:after
-			content: ""
-			display: block
-			width: 15%
-			height: 0px
-			margin-bottom: $petite
-		&:first-child:after
-			border-bottom: 1px solid $zon_mid_grey
-		&:last-child:after
-			border: none
+		height: 0
+		margin: remify(20px) 0
+		margin-bottom: $petite
+		width: 15%
+	&:first-child:after
+		content: ""
+	&:last-child:after
+		content: none
 	+respond-min($break-desktop-min)
 		&:after
-			border-bottom: 1px solid $zon_mid_grey
+			content: ""
+	&__heading
+		margin: 0
 	&__kicker
 		@extend %teaser-kicker
-		color: $zon_mid_grey
-		font-size: $font-s--rem
-		font-weight: normal
-		letter-spacing: 0.1em
-		margin-bottom: $thin
-		text-transform: uppercase
-		+respond-min($break-tablet-min)
-			font-size: $font-mm--rem
+		@extend %teaser-kicker-topic
 	&__title
 		@extend %teaser-title
-		+font-smoothing
 		color: $white
-		line-height: 1.12em
-		letter-spacing: $zon-letter-spacing-m
-		+respond-min($break-tablet-min)
-			font-size: $font-l--rem
+		font-size: remify(18px)
 		&:hover
 			color: $white
 
@@ -136,15 +123,14 @@
 		display: block
 
 .teaser-topic-list
+	+font-smoothing
+	display: none
 	+respond-min($break-tablet-min)
-		padding-left: $cp-padding
+		display: block
 		padding-right: remify(20px)
-		padding: 0
 		position: absolute
 		right: 0
-		top: remify(27px)
-	+respond-min($break-tablet-min)
-		top: remify(36px)
+		top: remify(60px)
 		width: 43%
 	+respond-min($break-desktop-min)
 		width: 33.33%
