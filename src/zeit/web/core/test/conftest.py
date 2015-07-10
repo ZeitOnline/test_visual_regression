@@ -72,8 +72,9 @@ settings = {
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
     'connector_type': 'mock',
     'vgwort_url': 'http://example.com/vgwort',
-    'breaking_news': (
+    'breaking_news_config': (
         'http://xml.zeit.de/eilmeldung/homepage-banner'),
+    'breaking_news_timeout': 2 * 60 * 60,
     'enable_third_party_modules': '',
     'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
     'vivi_zeit.cms_keyword-configuration': (
@@ -309,17 +310,6 @@ def dummy_request(request, config, app_settings):
     return req
 
 
-@pytest.fixture
-def debug_testserver(debug_application, request):
-    server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 6547
-    server.wsgi_app = debug_application
-    server.setUp()
-    server.url = 'http://%s' % server['http_address']
-    request.addfinalizer(server.tearDown)
-    return server
-
-
 @pytest.fixture(scope='function')
 def mockserver_factory(request):
     def factory(response=None):
@@ -470,9 +460,10 @@ def my_traverser(application):
 
 
 @pytest.fixture
-def testbrowser(application):
+def testbrowser(application, testserver):
     # We require ``application`` here so that stuff is properly isolated
     # between tests; see comment there for details.
+    Browser._testserver = testserver.url
     return Browser
 
 
@@ -543,10 +534,11 @@ class Browser(zope.testbrowser.browser.Browser):
     """
 
     _translator = None
+    _testserver = None
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, url=None, mech_browser=None):
         """Call base constructor and cache a translator instance."""
-        super(Browser, self).__init__(*args, **kwargs)
+        super(Browser, self).__init__(url, mech_browser)
         self._translator = cssselect.HTMLTranslator()
 
     def cssselect(self, selector):
@@ -556,6 +548,11 @@ class Browser(zope.testbrowser.browser.Browser):
         xpath = self._translator.css_to_xpath(selector)
         if self.document is not None:
             return self.document.xpath(xpath)
+
+    def open(self, url, data=None):
+        if url and self._testserver and not url.startswith(self._testserver):
+            url = '{}/{}'.format(self._testserver, url.lstrip('/'))
+        return super(Browser, self).open(url, data)
 
     def xpath(self, selector):
         """Return a list of lxml.HTMLElement instances that match a given

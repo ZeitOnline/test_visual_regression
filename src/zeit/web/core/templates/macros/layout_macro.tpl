@@ -93,13 +93,11 @@
         {% if banner.label -%}
         <div class="ad__label ad__label--{{ banner.name }}">{{ banner.label }}</div>
         {% endif -%}
-        <div class="ad__inner ad_inner--{{ banner.name }}">
-            <script type="text/javascript">
-                if (typeof AdController !== 'undefined') {
-                    AdController.render('iqadtile{{ banner.tile }}');
-                }
-            </script>
-        </div>
+        <script type="text/javascript">
+            if (typeof AdController !== 'undefined') {
+                AdController.render('iqadtile{{ banner.tile }}');
+            }
+        </script>
     </div>
 {% endmacro %}
 

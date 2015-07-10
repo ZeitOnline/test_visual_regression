@@ -9,7 +9,7 @@
 	padding: $vertical-space $page-padding
 	&:nth-of-type(1)
 		border-top: none
-	+respond-min($break-tablet-min)
+	+respond-min($break-areas)
 		border-bottom: none
 		border-top: none
 		margin: 0
@@ -42,6 +42,13 @@
 		display: table-cell
 		vertical-align: top
 
+%teaser-series-label
+	color: $zon_grey
+	font-size: remify(12px)
+	letter-spacing: $zon-letter-spacing-l
+	margin: 0 0 remify(8px) 0
+	text-transform: uppercase
+
 %teaser-heading
 	font-size: 1em
 	margin: 0 0 $tiny 0
@@ -55,6 +62,12 @@
 	letter-spacing: $zon-letter-spacing-m
 	line-height: 1.2
 	margin-bottom: em(3px, 13px)
+
+%teaser-kicker--blog
+	color: $zon_dark_grey
+	font-family: $font-franziska
+	font-style: italic
+	font-weight: normal
 
 %teaser-combined-link
 	color: $color-text
@@ -80,7 +93,7 @@
 		color: $black
 
 %teaser-media
-	margin: 0 0 $petite 0
+	margin: 0 0 remify(20px) 0
 
 %teaser-media-item
 	height: auto
@@ -110,13 +123,9 @@
 	letter-spacing: $zon-letter-spacing-s
 
 %teaser-datetime
-	&:not(:empty)
-		display: inline-block // needed for text-transform to work
-	&:first-letter
-		text-transform: uppercase
 	&:not(:last-child):not(:empty):after
 		content: ' / '
-		margin: 0 $micro 0 $micro
+		margin: 0 $micro
 
 %teaser-commentcount
 	&:link, &:visited

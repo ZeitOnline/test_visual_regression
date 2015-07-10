@@ -220,8 +220,9 @@ class Base(object):
         return [('$handle', self.adcontroller_handle),
                 ('level2', levels[0]),
                 ('level3', levels[1]),
+                ('level4', ''),
                 ('$autoSizeFrames', True),
-                ('keywords', ''),
+                ('keywords', ','.join(self.adwords)),
                 ('tma', '')]
 
     @zeit.web.reify
@@ -629,14 +630,13 @@ def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
         content = zeit.cms.interfaces.ICMSContent(unique_id)
     except TypeError:
         return pyramid.response.Response('Invalid resource', 500)
-    json_dt = {'delta_time': []}
+    delta_time = {}
     for article in zeit.web.site.view_centerpage.Centerpage(content, request):
         time = zeit.web.core.date.get_delta_time_from_article(
             article, base_date=parsed_base_date)
         if time:
-            json_dt['delta_time'].append(
-                {article.uniqueId: {'time': time}})
-    return json_dt
+            delta_time[article.uniqueId] = time
+    return {'delta_time': delta_time}
 
 
 @pyramid.view.view_config(route_name='json_comment_count', renderer='json')
@@ -664,7 +664,7 @@ def json_comment_count(request):
     for article in articles:
         count = counts.get(article.uniqueId, 0)
         comment_count[article.uniqueId] = '%s Kommentar%s' % (
-            count == 0 and 'Keine' or count, count != 1 and 'e' or '')
+            count == 0 and 'Keine' or count, count != '1' and 'e' or '')
 
     return {'comment_count': comment_count}
 
