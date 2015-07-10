@@ -75,8 +75,12 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
 
     @zeit.web.reify
     def slug(self):
-        return zeit.cms.interfaces.normalize_filename(
-            ' '.join((self.supertitle, self.title)))
+        return self.get_slug(self)
+
+    @staticmethod
+    def get_slug(self):
+        titles = (t for t in (self.supertitle, self.title) if t)
+        return zeit.cms.interfaces.normalize_filename(u' '.join(titles))
 
 
 @pyramid.view.view_config(name='comment-form',

@@ -61,11 +61,12 @@ class TeaserMapping(zeit.web.core.utils.frozendict):
 
     zope.interface.implements(zeit.web.core.interfaces.ITeaserMapping)
 
-    _map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama'],
-            'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date'],
+    _map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama',
+                          'parquet-large', 'zon-parquet-large'],
+            'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date',
+                          'parquet-regular', 'parquet-spektrum',
+                          'zon-parquet-small'],
             'zon-fullwidth': ['leader-fullwidth'],
-            'zon-parquet-large': ['parquet-large'],
-            'zon-parquet-small': ['parquet-regular', 'parquet-spektrum'],
             'hide': ['archive-print-volume', 'archive-print-year',
                      'two-side-by-side', 'ressort', 'leader-upright',
                      'buttons-fullwidth', 'parquet-printteaser',

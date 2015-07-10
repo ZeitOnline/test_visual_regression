@@ -1,0 +1,26 @@
+.blog-format
+	color: $zon_dark_grey
+	font-size: remify(14px)
+	line-height: 1.2
+	+respond-min($break-tablet-min)
+		&--fullwidth
+			color: $white
+			position: absolute
+			top: remify(28px)
+
+	&__marker
+		+inline-block
+		border-bottom: remify(5px) solid $zon-alto
+		font-family: $font-tabletgothic
+		font-weight: bold
+		letter-spacing: 0.14em
+		margin: remify(0 2px 14px 0)
+		padding-bottom: remify(8px)
+		+respond-min($break-tablet-min)
+			&--fullwidth
+				border-color: $white
+
+	&__name
+		font-family: $font-franziska
+		font-style: italic
+		font-weight: normal

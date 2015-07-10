@@ -1,0 +1,62 @@
+.teaser-small-column-parquet
+	@extend %teaser-column
+	&__media
+		@extend %teaser-column__media
+	&__media-item
+		@extend %teaser-column__media-item
+	&__container
+		@extend %teaser-small-container
+	&__series-label
+		@extend .teaser-small__series-label
+	&__heading
+		@extend .teaser-small__heading
+	&__combined-link
+		@extend .teaser-small__combined-link
+	&__kicker
+		@extend .teaser-small__kicker
+	&__title
+		@extend .teaser-small__title
+	&__text
+		@extend .teaser-small__text
+	&__text
+		@extend %teaser-text
+	&__byline
+		@extend %teaser-column__byline
+	&__metadata
+		@extend %teaser-metadata
+	&__datetime
+		@extend %teaser-datetime
+	&__commentcount
+		@extend %teaser-commentcount
+
+.teaser-small-column-parquet--has-media
+	.teaser-small-column-parquet__byline
+		@extend %teaser-column__media-space
+
++respond-min($break-tablet-min)
+	.teaser-small-column-parquet
+		margin: $vertical-space 0 $vertical-space 0
+		&--has-media
+			background: none
+			padding: 0 0 $petite remify(180px+20px)
+			+respond-min($break-desktop-min)
+				padding-left: remify(250px+20px)
+		&__mediawrapper
+			background: $color-column-background
+			position: absolute
+			top: 0
+			bottom: 0
+			left: 0
+			overflow: hidden
+			width: remify(180px)
+			max-height: remify(135px) // width 180 in 4:3 format
+			+respond-min($break-desktop-min)
+				width: remify(250px)
+		&__media
+			top: 0
+			bottom: 0
+			left: 0
+			height: 100%
+			overflow: hidden
+			width: remify(140px)
+			max-height: remify(135px) // height of __mediawrapper
