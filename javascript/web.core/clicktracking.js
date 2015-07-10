@@ -68,7 +68,6 @@ define( [ 'jquery' ], function( $ ) {
 
     return {
         init: function() {
-            console.debug( 'Initted good.' );
             if ( typeof window.ZMO === 'undefined' || typeof window.wt === 'undefined' ) {
                 return;
             }
