@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - CFG: Properly configure spektrum parquet area
 
+- ZON-1695: Add SSO for zeit.magazin
+
 
 
 1.40.1 (2015-07-09)
