@@ -1,0 +1,32 @@
+.teaser-small-column-minor
+	@extend %teaser-column
+	&__media
+		@extend %teaser-column__media
+	&__media-item
+		@extend %teaser-column__media-item
+	&__container
+		@extend %teaser-small-container
+	&__series-label
+		@extend .teaser-small__series-label
+	&__heading
+		@extend .teaser-small__heading
+	&__combined-link
+		@extend .teaser-small__combined-link
+	&__kicker
+		@extend .teaser-small__kicker
+	&__title
+		@extend .teaser-small__title
+	&__text
+		@extend .teaser-small__text
+	&__byline
+		@extend %teaser-column__byline
+	&__metadata
+		@extend %teaser-metadata
+	&__datetime
+		@extend %teaser-datetime
+	&__commentcount
+		@extend %teaser-commentcount
+
+.teaser-small-column-minor--has-media
+	.teaser-small-column-minor__byline
+		@extend %teaser-column__media-space
