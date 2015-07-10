@@ -2,6 +2,7 @@ import collections
 import logging
 import math
 
+import pysolr
 import zope.component
 import zope.schema
 
@@ -21,9 +22,7 @@ log = logging.getLogger(__name__)
 
 
 FIELDS = ' '.join([
-    'title',
-    'uniqueId',
-    'uuid'
+    'uniqueId'
 ])
 
 
@@ -90,9 +89,17 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     def _values(self):
         result = []
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        solr_result = conn.search(
-            self.raw_query, sort=ORDERS[self.sort_order], rows=self.count,
-            fl=FIELDS, start=self.count * (self.page - 1), **HIGHLIGHTING)
+        try:
+            solr_result = conn.search(
+                self.raw_query,
+                sort=ORDERS[self.sort_order],
+                rows=self.count,
+                fl=FIELDS,
+                start=self.count * (self.page - 1),
+                **HIGHLIGHTING)
+        except (pysolr.SolrError, ValueError) as e:
+            log.warning('{} for query {}'.format(e, self.raw_query))
+            return result
         docs = collections.deque(solr_result)
         self.hits = solr_result.hits
         for block in self.placeholder:
