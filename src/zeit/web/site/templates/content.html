@@ -1,5 +1,5 @@
 {% import 'zeit.web.site:templates/macros/article_macro.tpl' as blocks %}
-{% extends "zeit.web.site:templates/layout.html" %}
+{% extends 'zeit.web.site:templates/layout.html' %}
 
 {% block main %}
     {% block content %}
@@ -41,9 +41,8 @@
                     {{ view.subtitle | hide_none }}
                 </div>
                 <div class="byline" itemscope itemtype="http://schema.org/Person" itemprop="author">
-                    {% if view.authors %}
-                        {{ blocks.meta_author(view.authors, class="byline__author") }}
-                    {% endif %}
+                    {% set byline = view.context | get_byline %}
+                    {% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
                 </div>
                 <div class="metadata">
                     {% include "zeit.web.site:templates/inc/article/metadata.tpl" %}

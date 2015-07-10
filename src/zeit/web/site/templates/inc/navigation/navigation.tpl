@@ -1,3 +1,4 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 <div class="main_nav">
 	<!-- logo -->
 	<div itemscope itemtype="http://schema.org/Organization" class="logo_bar">
@@ -10,10 +11,10 @@
 			</a>
 		</{{ tag_name }}>
 		{% endwith %}
-		<div class="logo_bar__menue">
+		<div class="logo_bar__menu">
 			<a href="#primary_nav" title="Hauptmenü" aria-label="Hauptmenü" role="button" aria-controls="navigation" aria-expanded="false">
-				<div class="logo_bar__menue__image main_nav__icon--plain icon-zon-logo-navigation_menu"></div>
-				<div class="logo_bar__menue__image main_nav__icon--hover icon-zon-logo-navigation_menu-hover"></div>
+				{{ lama.use_svg_icon('menu', 'logo_bar__menu-icon logo_bar__menu-icon--burger', view.request) }}
+				{{ lama.use_svg_icon('close', 'logo_bar__menu-icon logo_bar__menu-icon--close', view.request) }}
 			</a>
 		</div>
 	</div>
@@ -44,7 +45,7 @@
 		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
 	</div>
 	<div class="main_nav__search" data-dropdown="true">{% include "zeit.web.site:templates/inc/navigation/navigation-search.tpl" %}</div>
-	<div class="beta-notice">
+	<div class="beta-notice" data-dropdown="true">
 		<div>Sie benutzen die neue ZEIT ONLINE Beta.</div>
 		<div><a class="beta-notice__link" href="http://www.zeit.de/beta">Zurück zur klassischen Version?</a></div>
 	</div>

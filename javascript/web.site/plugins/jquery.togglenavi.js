@@ -30,24 +30,16 @@
 
         var el = {
             bindNaviEvents: function( that ) {
-                var $buttonMenue = $( that ).find( 'a' ),
-                    $toggleEls = $( '.main_nav' ).find( 'div[data-dropdown="true"]' ).add( '.beta-notice' ),
-                    $icons = $buttonMenue.find( '.logo_bar__menue__image' ),
-                    icons = [ 'icon-zon-logo-navigation_menu', 'icon-zon-logo-navigation_close' ];
+                var $menu = $( that ),
+                    $menuLink = $menu.find( 'a' ),
+                    $mainNav = $menu.closest( '.main_nav' );
 
-                //toggle icon and visibility of dropdown elements
-                $buttonMenue.on( 'click', function( event ) {
+                // toggle visibility of main navigation items
+                $menuLink.on( 'click', function( event ) {
                     event.preventDefault();
-                    if ( $buttonMenue.attr( 'aria-expanded' ) === 'false' ) {
-                        $buttonMenue.attr( 'aria-expanded', 'true' );
-                    } else if ( $buttonMenue.attr( 'aria-expanded' ) === 'true' ) {
-                        $buttonMenue.attr( 'aria-expanded', 'false' );
-                    }
-                    $toggleEls.toggle();
-                    $.each( icons, function( index, value ) {
-                        $( $icons[0] ).toggleClass( value );
-                        $( $icons[1] ).toggleClass( value + '-hover' );
-                    });
+
+                    $mainNav.toggleClass( 'main_nav--open' );
+                    $menuLink.attr( 'aria-expanded', $mainNav.hasClass( 'main_nav--open' ) );
                 });
             }
         };
