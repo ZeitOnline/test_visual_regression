@@ -211,25 +211,6 @@
 	width: $width;
 }
 
-@mixin hover_nav_icon($display: block, $bgcolor: #FFF, $padding: $small) {
-	.main_nav__icon--hover {
-		display: none;
-	}
-	a {
-		display: $display;
-		padding: $padding;
-		&:hover {
-			.main_nav__icon--hover {
-				display: $display;
-				background-color: $bgcolor;
-			}
-			.main_nav__icon--plain {
-				display: none;
-			}
-		}
-	}
-}
-
 /* END: mixins for navigation/header */
 
 @mixin image_text_replacement($display: block, $vertical-align: middle) {
