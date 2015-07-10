@@ -14,6 +14,11 @@ Change log for zeit.web
 
 - ZON-1919: Show comment section ads despite there are comments or not
 
+- FIX: Ensure create_url can handle empty video titles
+
+- CFG: Properly configure spektrum parquet area
+
+
 
 1.40.1 (2015-07-09)
 -------------------
