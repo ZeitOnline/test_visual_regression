@@ -190,15 +190,6 @@ def get_layout(block, request=None):
                 layout = layout
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
-        elif getattr(teaser, 'serie', None) and not (
-                zeit.magazin.interfaces.IZMOContent.providedBy(cp)):
-            if teaser.serie.column and get_column_image(teaser) and allowed(
-                    'zon-column'):
-                layout = 'zon-column'
-            elif allowed('zon-series'):
-                layout = 'zon-series'
-        elif getattr(teaser, 'blog', None) and allowed('zon-blog'):
-            layout = 'zon-blog'
 
     layout = zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
@@ -207,6 +198,23 @@ def get_layout(block, request=None):
         request.teaser_layout[key] = layout
 
     return layout
+
+
+@zeit.web.register_filter
+def get_journalistic_format(block):
+    # TODO: do we need the allowed() function for journ. formats here, too?
+    try:
+        teaser = list(block)[0]
+    except (IndexError, TypeError):
+        return
+
+    if getattr(teaser, 'serie', None):
+        if teaser.serie.column:
+            return 'column'
+        else:
+            return 'series'
+    elif getattr(teaser, 'blog', None):
+        return 'blog'
 
 
 @zeit.web.register_filter
