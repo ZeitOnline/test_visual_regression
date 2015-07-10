@@ -3,10 +3,13 @@
 	&--without-image
 		background: $zon_light_grey
 		margin: remify(40px) (-$page-padding) 0 (-$page-padding) // 40px topmargin until other elements are build
+		padding: 0
 	&__link
 		display: block
 		margin: 0 (-$page-padding)
 		padding: 0 $page-padding
+		&--without-image
+			padding: $page-padding remify(40px)
 	&__lead
 		font-size: remify(15px)
 		font-weight: 700
@@ -40,6 +43,8 @@
 		&__link
 			margin: 0
 			padding: 0
+			&--without-image
+				padding: $page-padding
 		&__lead
 			height: em(38px)  // intentional em usage
 			max-width: remify(660px)
