@@ -84,16 +84,18 @@ def test_nav_services_should_have_expected_links(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation-list.tpl')
     nav = zeit.web.core.navigation.Navigation()
-    nav['abo'] = (
+    nav['topnav.services.1..epaper'] = (
         zeit.web.core.navigation.NavigationItem(
-            'abo',
-            'Abo',
-            'http://www.zeitabo.de/?mcwt=2009_07_0002'))
-    nav['hp.global.topnav.links.shop'] = (
+            'topnav.services.1..epaper',
+            'E-Paper',
+            'https://premium.zeit.de/?wt_mc=pm.intern.fix.\
+            zeitde.fix.dach.text.epaper'))
+    nav['topnav.services.2..audio'] = (
         zeit.web.core.navigation.NavigationItem(
-            'hp.global.topnav.links.shop',
-            'Shop',
-            'http://shop.zeit.de?et=l6VVNm&et_cid=42&et_lid=175'))
+            'topnav.services.2..audio',
+            'Audio',
+            'https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.\
+            zeitde.fix.dach.text.audio'))
     mock_view = mock.Mock()
     mock_request = mock.Mock()
     mock_request.route_url.return_value = 'http://www.zeit.de/'
@@ -102,23 +104,22 @@ def test_nav_services_should_have_expected_links(application, jinja2_env):
                           navigation=nav, nav_class='primary-nav-services')
     html = lxml.html.fromstring(html_str).cssselect
 
-    assert html('li > a[href="http://www.zeitabo.de/'
-                '?mcwt=2009_07_0002"]')[0] is not None, 'No link for zeit abo'
-    assert html('li[data-id="hp.global.topnav.links.shop"]'
-                '> a[href="http://shop.zeit.de?et=l6VVNm&et_cid=42&'
-                'et_lid=175"]')[0] is not None, 'No link for shop zeit'
+    assert (html('li > a[href^="https://premium.zeit.de/?wt_mc=pm.intern"]')[0]
+            is not None, 'No link for epaper')
+    assert (html('li > a[href^="https://premium.zeit.de/abo/digitalpaket"]')[0]
+            is not None, 'No link audio')
 
 
 def test_nav_classifieds_should_have_expected_links(application, jinja2_env):
     nav = zeit.web.core.navigation.Navigation()
-    nav['hp.global.topnav.links.jobs'] = (
+    nav['topnav.classifieds.3..jobs'] = (
         zeit.web.core.navigation.NavigationItem(
-            'hp.global.topnav.links.jobs',
+            'topnav.classifieds.3..jobs',
             'Jobs',
             'http://jobs.zeit.de/'))
-    nav['hp.global.topnav.links.partnersuche'] = (
+    nav['topnav.classifieds.4..partnersuche'] = (
         zeit.web.core.navigation.NavigationItem(
-            'hp.global.topnav.links.partnersuche',
+            'topnav.classifieds.4..partnersuche',
             'Partnersuche',
             'http://www.zeit.de/angebote/partnersuche/index?pscode=01_100'))
     tpl = jinja2_env.get_template(
@@ -131,13 +132,10 @@ def test_nav_classifieds_should_have_expected_links(application, jinja2_env):
                           navigation=nav, nav_class='main-nav-classifieds')
     html = lxml.html.fromstring(html_str).cssselect
 
-    assert html('li[data-id="hp.global.topnav.links.jobs"]'
-                '> a[href="http://jobs.zeit.de/"]'
-                '')[0] is not None, 'No link for zeit jobs'
-    assert html('li[data-id="hp.global.topnav.links.partnersuche"]'
-                '> a[href="http://www.zeit.de/angebote/partnersuche/index?'
-                'pscode=01_100"]')[0] is not None, (
-                    'Link for partnersuche not present')
+    assert html('li > a[href^="http://jobs.zeit.de/"]')[0] is not None, (
+        'No link for zeit jobs')
+    assert html('li > a[href*="zeit.de/angebote/partner]')[0] is not None, (
+        'Link for partnersuche not present')
 
 
 def test_nav_contains_essential_elements(application, jinja2_env):
@@ -241,29 +239,32 @@ def test_cp_should_have_valid_services_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
 
-    assert len(html('li[data-id="hp.global.topnav.links.abo"]')) == 1, (
-        'Abo link not present.')
-    assert len(html('li[data-id="hp.global.topnav.links.shop"]')) == 1, (
-        'Shop link is not present')
-    assert len(html('li[data-id="hp.global.topnav.links.audio"]')) == 1, (
-        'Audio link is not present.')
-    assert len(html('li[data-id="hp.global.topnav.links.apps"]')) == 1, (
-        'App link is not present.')
-    assert len(html('li[data-id="hp.global.topnav.links.archiv"]')) == 1, (
-        'Archiv link is not present')
+    assert len(html('li[data-id="epaper"]')) == 1, (
+        'Epaper link not present.')
+    assert len(html('li[data-id="audio"]')) == 1, (
+        'Audio link not present.')
+    assert len(html('li[data-id="apps"]')) == 1, (
+        'Apps link not present.')
+    assert len(html('li[data-id="archiv"]')) == 1, (
+        'Archiv link not present.')
 
 
 def test_cp_should_have_valid_classifieds_structure(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
     html = browser.cssselect
 
-    assert len(html('li[data-id="hp.global.topnav.links.jobs"] > a')) == 1, (
+    assert len(html('li[data-id="abo"] > a')) == 1, (
+        'Abo link is not present.')
+    assert len(html('li[data-id="shop"] > a')) == 1, (
+        'Shop link is not present.')
+    assert len(html('li[data-id="jobs"] > a')) == 1, (
         'Job link is not present.')
-    assert len(html(
-        'li[data-id="hp.global.topnav.links.partnersuche"] > a')) == 1, (
-            'Link partnersuche is not present.')
-    assert len(html('li[data-id="hp.global.topnav.links.mehr"] > a')) == 1, (
-        'Link mehr is not present')
+    assert len(html('li[data-id="partnersuche"] > a')) == 1, (
+        'Partnersuche link is not present.')
+    assert len(html('li[data-id="immobilien"] > a')) == 2, (
+        'Immo link is not present.')
+    assert len(html('li[data-id="automarkt"] > a')) == 2, (
+        'Automarkt link is not present.')
 
 
 def test_cp_has_valid_logo_structure(testserver, testbrowser):
