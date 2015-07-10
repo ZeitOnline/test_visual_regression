@@ -92,11 +92,11 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                     block) or not len(docs):
                 result.append(block)
                 continue
-            unique_id = docs.popleft().get('uniqueId')
+            context = docs.popleft()
             try:
-                block.insert(0, zeit.cms.interfaces.ICMSContent(unique_id))
-            except TypeError, err:
-                log.debug('Corrupted search result', unique_id, err)
+                block.insert(0, zeit.cms.interfaces.ICMSContent(context))
+            except TypeError:
+                log.debug('Corrupted search result', context.get('uniqueId'))
                 continue
             result.append(block)
         return result
