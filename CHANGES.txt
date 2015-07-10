@@ -1,10 +1,46 @@
 Change log for zeit.web
 =======================
 
-1.39 (unreleased)
------------------
+1.40.2 (unreleased)
+-------------------
+
+- ZON-1788: Apply snazzy tuple stream byline to teasers and articles
 
 - FIX: Ensure create_url can handle empty video titles
+
+
+1.40.1 (2015-07-09)
+-------------------
+
+- HOTFIX: Re-Release w/ freshly grunted files
+
+
+1.40 (2015-07-09)
+-----------------
+
+- ZON-1670: Test release date of breaking news against configured timeout
+
+- ZON-1836: Show release date in breaking news banner
+
+- ZON-1581: Integrate Meetrics into Beta
+
+- MAINT: Refactor update signals
+
+
+1.39 (2015-07-08)
+-----------------
+
+- ZON-1809: Galleries have now adc level3 empty
+
+- ZON-1907: Update adc signature
+
+- ZON-1915: Fix ad tile 5 in articles
+
+- ZON-1921: Add keywords to adc code
+
+- BUG-281: Evaluate automatic areas when iterating over centerpage
+
+- HOTFIX: Attach jinja markers to safeguarded functions
 
 
 1.38 (2015-07-08)
