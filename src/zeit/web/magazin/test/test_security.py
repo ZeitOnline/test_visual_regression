@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 from mock import MagicMock
 from zeit.web.core.comments import get_thread
-from zeit.web.core.security import CommunityAuthenticationPolicy
+from zeit.web.core.security import AuthenticationPolicy
 from zeit.web.core.security import get_community_user_info
 import pytest
 
 
 @pytest.fixture
 def policy():
-    return CommunityAuthenticationPolicy()
+    return AuthenticationPolicy()
 
 
 def test_cookieless_request_returns_nothing(policy, dummy_request):

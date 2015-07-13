@@ -10,7 +10,7 @@ import logging
 log = logging.getLogger(__name__)
 
 
-class CommunityAuthenticationPolicy(
+class AuthenticationPolicy(
         pyramid.authentication.SessionAuthenticationPolicy):
     """An authentication policy that queries the Community backend for user
     validation and additional user data and stores the result in the session.
