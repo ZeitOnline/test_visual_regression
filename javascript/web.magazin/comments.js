@@ -502,7 +502,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
         var form = this,
             input = this.elements,
             sendurl = window.location.href,
-            errormsg = $( form ).find( '.comments__error' )
+            errormsg = $( form ).find( '.comments__error' ),
             msg = 'Dieser Benutzername ist bereits vergeben oder enthält ungültige Zeichen.';
 
         if ( input.username ) {
