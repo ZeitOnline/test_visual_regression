@@ -111,12 +111,22 @@ $comments-min-width: $comments__break-outside - $max-page-width
     color: #b91109
 
 .comments__error
-    width: 100%
+    +transition(opacity .3s, visibility .3s)
     color: #b91109
-    padding-top: 10px
+    opacity: 0
+    padding-top: .5em
+    visibility: hidden
+    &--visible
+        opacity: 1
+        visibility: visible
 
 .comments__input
     width: 100%
+    border: 2px solid $color-input-bg
+    &--error
+        background-color: #ffe9ed
+        border-color: #b91109
+        color: #b91109
 
 .comments__list
     +respond-max($comments__break-overlap)

@@ -249,28 +249,20 @@ define([ 'jquery' ], function( $ ) {
     submitComment = function( e ) {
         e.preventDefault();
 
-        var sendurl = window.location.href,
-            form = this,
+        var $form = $( this ),
             input = this.elements,
-            errormsg = $( form ).children( '.comment-form__error' ),
-            msg = 'Dieser Benutzername ist bereits vergeben oder enthält ungültige Zeichen.';
+            sendurl = window.location.href;
 
-        $( form ).children( '.comment-form__hint' ).removeClass( 'comment-form__hint--error' );
-        $( this ).prop( 'disabled', true );
+        $form.prop( 'disabled', true );
 
-        if ( $( errormsg ).length === 1 && $( errormsg ).css( 'visibility' ) === 'visible' ) {
-            var el = $( form ).children( '.comment-form__input--error' );
-            $( form ).children( '.comment-form__error' ).animate(
-                    { opacity: 0 },
-                    200,
-                    function() {
-                        $( this ).css( { visibility: 'hidden' } );
-                    });
-            $( el ).attr( 'class', 'comment-form__input' );
-        }
+        $form.find( '.comment-form__hint' ).removeClass( 'comment-form__hint--error' );
+        $form.find( '.comment-form__input' ).removeClass( 'error' );
+        $form.find( '.comment-form__error' ).removeClass( 'comment-form__error--visible' );
 
-        if ( input.username && input.username.value === '' ) {
-            $( form ).children( '.comment-form__hint' ).addClass( 'comment-form__hint--error' );
+        if ( input.username && /^\s*$/.test( input.username.value ) ) {
+            $form.find( '.comment-form__hint' ).addClass( 'comment-form__hint--error' );
+            input.username.focus();
+            return false;
         }
 
         var data = {
@@ -292,19 +284,17 @@ define([ 'jquery' ], function( $ ) {
             success: function( response ) {
                 if ( response ) {
                     if ( response.error === 'username_exists_or_invalid' ) {
-                        var el = $( form ).children( 'input[name="username"]' ),
-                            errormsg = $( form ).children( '.comment-form__error' );
+                        var input = $form.find( '.comment-form__input' ),
+                            error = $form.find( '.comment-form__error' );
 
-                        if ( $( errormsg ).length === 0 ) {
-                            errormsg = $( '<div></div>' ).addClass( 'comment-form__error' ).
-                                text( msg ).
-                                css( { visiblility: 'hidden' } ).
-                                css( { opacity: 0 } ).
-                                insertAfter( el );
+                        if ( error.length === 0 ) {
+                            error = $( '<div></div>' ).addClass( 'comment-form__error' )
+                                .text( 'Dieser Benutzername ist bereits vergeben oder enthält ungültige Zeichen.' )
+                                .insertAfter( input );
                         }
 
-                        $( errormsg ).css( { visibility: 'visible' } ).animate( { opacity: 100 }, 200 );
-                        $( el ).addClass( 'comment-form__input--error' );
+                        error.addClass( 'comment-form__error--visible' );
+                        input.addClass( 'error' );
                     } else {
                         window.location.href = response.location;
                     }
@@ -358,9 +348,7 @@ define([ 'jquery' ], function( $ ) {
         }
 
         // disable submit buttons of required fields
-        $comments.find( '.js-required' ).each( function() {
-            $( this.form ).find( '.button' ).prop( 'disabled', true );
-        });
+        $comments.find( '.js-required' ).each( enableForm );
 
         // register event handlers
         $comments.on( 'submit', '.js-submit-comment', submitComment );

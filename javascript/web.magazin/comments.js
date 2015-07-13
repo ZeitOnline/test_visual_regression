@@ -187,14 +187,81 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
     };
 
     /**
+     * comments.js: submit comment
+     * @function submitComment
+     * @param  {object} e event object
+     */
+    var submitComment = function( e ) {
+        e.preventDefault();
+
+        var $form = $( this ),
+            input = this.elements,
+            sendurl = window.location.href;
+
+        $form.prop( 'disabled', true );
+
+        $form.find( '.comments__hint' ).removeClass( 'comments__hint--error' );
+        $form.find( '.comments__input' ).removeClass( 'comments__input--error' );
+        $form.find( '.comments__error' ).removeClass( 'comments__error--visible' );
+
+        if ( input.username && /^\s*$/.test( input.username.value ) ) {
+            $form.find( '.comments__hint' ).addClass( 'comments__hint--error' );
+            input.username.focus();
+            return false;
+        }
+
+        var data = {
+            'ajax':      'true',
+            'action':    'comment',
+            'pid':       input.pid.value,
+            'comment':   input.comment.value
+        };
+
+        if ( input.username ) {
+            data.username = input.username.value;
+        }
+
+        $.ajax({
+            url: sendurl,
+            dataType: 'json',
+            data: data,
+            method: 'POST',
+            success: function( response ) {
+                if ( response ) {
+                    if ( response.error === 'username_exists_or_invalid' ) {
+                        var input = $form.find( '.comments__input' ),
+                            error = $form.find( '.comments__error' );
+
+                        if ( error.length === 0 ) {
+                            error = $( '<div></div>' ).addClass( 'comments__error' )
+                                .text( 'Dieser Benutzername ist bereits vergeben oder enthält ungültige Zeichen.' )
+                                .insertAfter( input );
+                        }
+
+                        error.addClass( 'comments__error--visible' );
+                        input.addClass( 'comments__input--error' );
+                    } else {
+                        window.location.href = response.location;
+                    }
+                }
+            }
+        });
+    };
+
+    /**
      * comments.js: enable form submit button
      * @function enableForm
      * @param  {object} e event object
      */
     var enableForm = function() {
-        var blank = /^\s*$/.test(this.value);
+        var $form = $( this.form ),
+            blank;
 
-        $(this.form).find('.button').prop('disabled', blank);
+        blank = $form.find( '.js-required' ).filter( function() {
+            return /^\s*$/.test( this.value );
+        });
+
+        $form.find( '.button' ).prop( 'disabled', blank.length !== 0 );
     };
 
     /**
@@ -496,68 +563,6 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
      */
     var hideOtherForms = function() {
         $commentsBody.find('form').filter(':visible').slideToggle(slideDuration);
-    };
-    
-    var submitComment = function( e ) {
-        var form = this,
-            input = this.elements,
-            sendurl = window.location.href,
-            errormsg = $( form ).find( '.comments__error' ),
-            msg = 'Dieser Benutzername ist bereits vergeben oder enthält ungültige Zeichen.';
-
-        if ( input.username ) {
-            e.preventDefault();
-
-
-            if ( $( errormsg ).length === 1 && $( errormsg ).css( 'visibility' ) === 'visible' ) {
-                var el = $( form ).find( '.comments__input--error' );
-                $( errormsg ).animate(
-                        { opacity: 0 },
-                        200,
-                        function() {
-                            $( this ).css( { visibility: 'hidden' } );
-                        });
-                $( el ).attr( 'class', 'comments__input' );
-            }
-
-            if ( input.username.value === '' || input.comment.value === '' ) {
-                $( form ).find( '.comments__hint' ).addClass( 'comments__hint--error' );
-            } else {
-                $( form ).find( '.comments__hint' ).removeClass( 'comments__hint--error' );
-                $.ajax({
-                    url: sendurl,
-                    dataType: 'json',
-                    data: {
-                        'ajax':      'true',
-                        'action':    'comment',
-                        'pid':       input.pid.value,
-                        'comment':   input.comment.value,
-                        'username':  input.username.value },
-                    method: 'POST',
-                    success: function( response ) {
-                        if ( response ) {
-                            if ( response.error === 'username_exists_or_invalid' ) {
-                                var el = $( form ).find( 'input[name="username"]' ),
-                                    errormsg = $( form ).find( '.comments__error' );
-
-                                if ( $( errormsg ).length === 0 ) {
-                                    errormsg = $( '<div></div>' ).addClass( 'comments__error' ).
-                                        text( msg ).
-                                        css( { visiblility: 'hidden' } ).
-                                        css( { opacity: 0 } ).
-                                        insertAfter( el );
-                                }
-
-                                $( errormsg ).css( { visibility: 'visible' } ).animate( { opacity: 100 }, 200 );
-                                $( el ).addClass( 'comments__input--error' );
-                            } else {
-                                window.location.href = response.location;
-                            }
-                        }
-                    }
-                });
-            }
-        }
     };
 
     /**

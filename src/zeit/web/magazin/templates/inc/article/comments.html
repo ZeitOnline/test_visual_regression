@@ -50,10 +50,10 @@
 			<form method="POST" class="comment__form js-submit-comment" id="js-comments-form">
 				{% if not request.session.user.name %}
 					<p class="comments__hint">
-					<strong>Achtung: </strong>Die Registrierung bei ZEIT ONLINE erfolgt nur mit Ihrer E-Mail-Adresse. Um kommentieren zu können, benötigen Sie allerdings noch einen zusätzlichen Benutzernamen. Diesen können Sie hier anlegen.
+						Sie haben noch keinen Benutzernamen. Dieser wird einmalig festgelegt und ist öffentlich sichtbar.
 					</p>
 					<p>
-						<input name="username" placeholder="Ihr Benutzername" class="js-required comments__input"></input>
+						<input name="username" placeholder="Ihr neuer Benutzername" class="comments__input js-required">
 					</p>
 				{% endif %}
 				<p>

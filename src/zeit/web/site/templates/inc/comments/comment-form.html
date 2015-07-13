@@ -28,46 +28,32 @@
 			{% if request.session.user.picture %}
 			<img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name }}" src="{{ request.session.user.picture }}">
 			{% endif %}
-                        {% if not request.session.user.name %}
+			{% if not request.session.user.name %}
 				Angemeldet, noch kein Benutzername
 				<a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
 				(Profil bearbeiten)
 				 </a>
 
 			{% else %}
-			    Angemeldet als
-			    <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
-			    	{{ request.session.user.name }}
-			    </a>
+				Angemeldet als
+				<a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
+					{{ request.session.user.name }}
+				</a>
 			{% endif %}
-			{% if request.registry.settings.sso_activate %}
-				<a class="comment-form__cancel" href="{{ request.registry.settings.sso_url}}/abmelden?url={{ view.content_url | e }}">
-				Abmelden
-				</a>
-                        {% else %}
-				<a class="comment-form__cancel" href="{{ request.registry.settings.community_host }}/logout?destination={{ view.content_url | e }}">
-				Abmelden
-				</a>
-                        {% endif %}
 		</div>
 		{% if request.registry.settings.sso_activate %}
 			{% if not request.session.user.name %}
-				{% if view.error and not view.error.error == 'username_exists_or_invalid' %}
-				    <p class='comment-form__hint comment-form__hint--error'>
-				{% else %}
-				    <p class='comment-form__hint'>
-				{% endif %}
-				<strong>Achtung: </strong>Die Registrierung
-			bei ZEIT ONLINE erfolgt nur mit Ihrer E-Mail-Adresse.
-			Um kommentieren zu können, benötigen Sie allerdings
-			noch einen zusätzlichen Benutzernamen. Diesen können
-			Sie hier anlegen.</p> 
+			<div class="comment-form__sso-username">
+				<p class="comment-form__hint{% if view.error and not view.error.error == 'username_exists_or_invalid' %} comment-form__hint--error{% endif %}">
+					Sie haben noch keinen Benutzernamen. Dieser wird einmalig festgelegt und ist öffentlich sichtbar.
+				</p>
 				<input class="comment-form__input" placeholder="Ihr neuer Benutzername" type="text" name="username" {% if view.error.user_name %}value="{{ view.error.user_name }}"{% endif %}>
 				{% if view.error.error == 'username_exists_or_invalid' %}
 					<div class='comment-form__error'>Benutzername ist bereits vergeben oder enthält ungültige Zeichen.</div>
 				{% endif %}
+			</div>
 			{% endif %}
-                {% endif %}
+		{% endif %}
 		<textarea class="comment-form__textarea js-required" name="comment" placeholder="{{ placeholder }}" maxlength="1500">
 {% if view.error and view.error.comment %}{{ view.error.comment }}{% endif %}</textarea>
 		<p class="comment-form__actions">
