@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 import pyramid.view
 
+import zeit.content.article.interfaces
+import zeit.content.video.interfaces
+import zeit.cms.content.interfaces
+
+import zeit.web.core.gallery
 import zeit.web.core.view
 import zeit.web.magazin.view
 import zeit.web.site.area.spektrum
@@ -55,11 +60,37 @@ def login_state(request):
     destination = request.params['context-uri'] if request.params.get(
         'context-uri') else 'http://{}'.format(request.host)
     info = {}
-    info['login'] = "{}/user/login?destination={}".format(
-        settings['community_host'], destination)
-    info['logout'] = "{}/user/logout?destination={}".format(
-        settings['community_host'], destination)
+
+    if settings['sso_activate']:
+        info['login'] = "{}/anmelden?url={}".format(
+            settings['sso_url'], destination)
+        info['logout'] = "{}/abmelden?url={}".format(
+            settings['sso_url'], destination)
+    else:
+        info['login'] = "{}/user/login?destination={}".format(
+            settings['community_host'], destination)
+        info['logout'] = "{}/user/logout?destination={}".format(
+            settings['community_host'], destination)
     if request.authenticated_userid and 'user' in request.session:
         info['user'] = request.session['user']
         info['profile'] = "{}/user".format(settings['community_host'])
     return info
+
+
+# XXX We should be a little more specific here, ie ICommentableContent
+@pyramid.view.view_defaults(
+    custom_predicates=(is_zon_content,),
+    containment=zeit.cms.content.interfaces.ICommonMetadata)
+@pyramid.view.view_config(
+    name='comment-form',
+    renderer='templates/inc/comments/comment-form.html')
+@pyramid.view.view_config(
+    name='report-form',
+    renderer='templates/inc/comments/report-form.html')
+class CommentForm(zeit.web.core.view.Content):
+
+    @zeit.web.reify
+    def error(self):
+        if 'error' not in self.request.params:
+            return
+        return self.request.session.pop(self.request.params['error'])

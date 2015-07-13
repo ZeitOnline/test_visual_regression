@@ -242,6 +242,66 @@ define([ 'jquery' ], function( $ ) {
     },
 
     /**
+     * comments.js: submit comment
+     * @function submitComment
+     * @param  {object} e event object
+     */
+    submitComment = function( e ) {
+        e.preventDefault();
+
+        var $form = $( this ),
+            input = this.elements,
+            sendurl = window.location.href;
+
+        $form.find( '.comment-form__hint' ).removeClass( 'comment-form__hint--error' );
+        $form.find( '.comment-form__input' ).removeClass( 'error' );
+        $form.find( '.comment-form__error' ).removeClass( 'comment-form__error--visible' );
+
+        if ( input.username && /^\s*$/.test( input.username.value ) ) {
+            $form.find( '.comment-form__hint' ).addClass( 'comment-form__hint--error' );
+            input.username.focus();
+            return false;
+        }
+
+        var data = {
+            'ajax':      'true',
+            'action':    'comment',
+            'pid':       input.pid.value,
+            'comment':   input.comment.value
+        };
+
+        if ( input.username ) {
+            data.username = input.username.value;
+        }
+
+        $.ajax({
+            url: sendurl,
+            dataType: 'json',
+            data: data,
+            method: 'POST',
+            success: function( response ) {
+                if ( response ) {
+                    if ( response.error === 'username_exists_or_invalid' ) {
+                        var input = $form.find( '.comment-form__input' ),
+                            error = $form.find( '.comment-form__error' );
+
+                        if ( error.length === 0 ) {
+                            error = $( '<div></div>' ).addClass( 'comment-form__error' )
+                                .text( 'Dieser Benutzername ist bereits vergeben oder enthält ungültige Zeichen.' )
+                                .insertAfter( input );
+                        }
+
+                        error.addClass( 'comment-form__error--visible' );
+                        input.addClass( 'error' );
+                    } else {
+                        window.location.href = response.location;
+                    }
+                }
+            }
+        });
+    },
+
+    /**
      * comments.js: enable form submit button
      * @function enableForm
      * @param  {object} e event object
@@ -286,11 +346,10 @@ define([ 'jquery' ], function( $ ) {
         }
 
         // disable submit buttons of required fields
-        $comments.find( '.js-required' ).each( function() {
-            $( this.form ).find( '.button' ).prop( 'disabled', true );
-        });
+        $comments.find( '.js-required' ).each( enableForm );
 
         // register event handlers
+        $comments.on( 'submit', '.js-submit-comment', submitComment );
         $commentsBody.on( startEvent, '.js-reply-to-comment', replyToComment );
         $commentsBody.on( startEvent, '.js-cancel-reply', cancelReply );
         $commentsBody.on( startEvent, '.js-report-comment', reportComment );
