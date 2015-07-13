@@ -17,7 +17,7 @@
       <tag type="Person" score="4" uuid="096c6141-d20c-4b14-9ee1-3824560be7d0" url_value="ridley-scott">Ridley Scott</tag>
     </rankedTags>
     <references>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/kultur/film/2013-12/film-hobbit-smaugs-einoede" year="2013" issue="50" ressort="Kultur" contenttype="article" publication-date="" expires="" author="David Hugendick">
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/article/zeit" year="2013" issue="50" ressort="Kultur" contenttype="article" publication-date="" expires="" author="David Hugendick">
         <badges>
           <badge py:pytype="str">video</badge>
         </badges>
