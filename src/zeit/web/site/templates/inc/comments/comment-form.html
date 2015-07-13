@@ -10,6 +10,11 @@
 	{% set class = '' %}
 {% else %}
 	{% set submit_value = 'Kommentar senden' %}
+
+	{% if not request.session.user.name %}
+		{% set submit_value = 'Absenden' %}
+	{% endif %}
+
 	{% set placeholder = 'Ihr Kommentar' %}
 	{% set class = 'comment-form__cancel--hidden' %}
 {% endif %}

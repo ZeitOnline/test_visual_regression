@@ -49,14 +49,14 @@
 			{% if request.authenticated_userid -%}
 			<form method="POST" class="comment__form js-submit-comment" id="js-comments-form">
 				{% if not request.session.user.name %}
-				    <p class="comments__hint">
-				    <strong>Achtung: </strong>Die Registrierung bei ZEIT ONLINE erfolgt nur mit Ihrer E-Mail-Adresse. Um kommentieren zu können, benötigen Sie allerdings noch einen zusätzlichen Benutzernamen. Diesen können Sie hier anlegen.
-				    </p>
-				    <p>
-					    <input name="username"
-					    placeholder="Ihr Benutzername"
-					    class="js-required comments__input"></input>
-				    </p>
+					<p class="comments__hint">
+					<strong>Achtung: </strong>Die Registrierung bei ZEIT ONLINE erfolgt nur mit Ihrer E-Mail-Adresse. Um kommentieren zu können, benötigen Sie allerdings noch einen zusätzlichen Benutzernamen. Diesen können Sie hier anlegen.
+					</p>
+					<p>
+						<input name="username"
+						placeholder="Ihr Benutzername"
+						class="js-required comments__input"></input>
+					</p>
 				{% endif %}
 				<p>
 					<textarea name="comment" placeholder="Ihr Kommentar" class="js-required"></textarea>
@@ -64,15 +64,19 @@
 					<input type="hidden" name="pid" value="">
 				</p>
 				<div class="comment__form__note comment__form__note--casual">
-                                    {% if request.session.user.name %}
-                                        angemeldet als <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">{{ request.session.user.name|e }}</a>
-                                    {% else %}
-                                        angemeldet, <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">kein Benutzername</a>
-				    {% endif %}
+				{% if request.session.user.name %}
+					angemeldet als <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">{{ request.session.user.name|e }}</a>
 				</div>
 				<div class="comment__form__actions">
 					<input type="submit" class="button" value="Kommentieren" disabled />
 				</div>
+				{% else %}
+					angemeldet, <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">kein Benutzername</a>
+				</div>
+				<div class="comment__form__actions">
+					<input type="submit" class="button" value="Absenden" disabled />
+				</div>
+				{% endif %}
 			</form>
 			{% else -%}
 			<form class="comment__form comment__form--login" id="js-comments-form">

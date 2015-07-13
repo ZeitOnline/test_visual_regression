@@ -76,9 +76,9 @@ class PostComment(zeit.web.core.view.Base):
                 title='No user_name given',
                 explanation='A user name must be set in order to comment.')
 
-        if not self.user_name and action != 'comment':
+        if not self.user_name and user_name and not action == 'comment':
             raise pyramid.httpexceptions.HTTPBadRequest(
-                title='user_name could not be set',
+                title='A user_name could not be set',
                 explanation='A user name can only be set on action comment.')
 
         if not request.method == self.request_method:
