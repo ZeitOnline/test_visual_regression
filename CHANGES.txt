@@ -4,6 +4,8 @@ Change log for zeit.web
 1.40.2 (unreleased)
 -------------------
 
+- ZON-1900: Fix nextread without image
+
 - ZON-1822: Re-work teaser for blogs, series and columns
 
 - ZON-1811: Fix search input for iOS Safari and add thousands separator
