@@ -87,7 +87,7 @@ def login_state(request):
 @pyramid.view.view_config(
     name='report-form',
     renderer='templates/inc/comments/report-form.html')
-class CommentForm(Base):
+class CommentForm(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def error(self):
