@@ -11,7 +11,7 @@
 {% else %}
 	{% set submit_value = 'Kommentar senden' %}
 
-	{% if not request.authenticated_userid or not request.session.user.name %}
+	{% if not request.session.user.name %}
 		{% set submit_value = 'Absenden' %}
 	{% endif %}
 
@@ -33,7 +33,6 @@
 				<a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
 				(Profil bearbeiten)
 				 </a>
-
 			{% else %}
 				Angemeldet als
 				<a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
@@ -55,7 +54,8 @@
 			{% endif %}
 		{% endif %}
 		<textarea class="comment-form__textarea js-required" name="comment" placeholder="{{ placeholder }}" maxlength="1500">
-{% if view.error and view.error.comment %}{{ view.error.comment }}{% endif %}</textarea>
+			{%- if view.error and view.error.comment %}{{ view.error.comment }}{% endif -%}
+		</textarea>
 		<p class="comment-form__actions">
 			<input type="hidden" name="action" value="comment">
 			<input type="hidden" name="pid" value="{{ pid }}">
