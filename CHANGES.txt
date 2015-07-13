@@ -22,6 +22,7 @@ Change log for zeit.web
 
 - CFG: Properly configure spektrum parquet area
 
+- MAINT: Speed up some sluggish tests
 
 
 1.40.1 (2015-07-09)
