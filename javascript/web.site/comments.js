@@ -253,8 +253,6 @@ define([ 'jquery' ], function( $ ) {
             input = this.elements,
             sendurl = window.location.href;
 
-        $form.prop( 'disabled', true );
-
         $form.find( '.comment-form__hint' ).removeClass( 'comment-form__hint--error' );
         $form.find( '.comment-form__input' ).removeClass( 'error' );
         $form.find( '.comment-form__error' ).removeClass( 'comment-form__error--visible' );

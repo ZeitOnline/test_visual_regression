@@ -198,8 +198,6 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
             input = this.elements,
             sendurl = window.location.href;
 
-        $form.prop( 'disabled', true );
-
         $form.find( '.comments__hint' ).removeClass( 'comments__hint--error' );
         $form.find( '.comments__input' ).removeClass( 'comments__input--error' );
         $form.find( '.comments__error' ).removeClass( 'comments__error--visible' );
