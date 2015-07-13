@@ -11,7 +11,7 @@
 {% else %}
 	{% set submit_value = 'Kommentar senden' %}
 
-	{% if not request.session.user.name %}
+	{% if not request.authenticated_userid %}
 		{% set submit_value = 'Absenden' %}
 	{% endif %}
 
