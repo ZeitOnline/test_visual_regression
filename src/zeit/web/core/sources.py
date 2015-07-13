@@ -111,7 +111,8 @@ class Solr(object):
                     assert zeit.content.article.interfaces.IArticle.providedBy(
                         content)
                     results.append(zeit.web.core.utils.frozendict(
-                        {u'uniqueId': content.uniqueId}))
+                        {u'uniqueId': content.uniqueId,
+                         u'date_last_published': u'2015-07-01T09:50:42Z'}))
                 except (AssertionError, TypeError):
                     continue
         return pysolr.Results(

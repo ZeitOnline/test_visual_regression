@@ -16,6 +16,7 @@ def get_base_date(date):
     return datetime.datetime.now(date.tzinfo)
 
 
+@zeit.web.register_filter
 def parse_date(date,
                date_format='%Y-%m-%dT%H:%M:%S.%f+00:00'):
     try:

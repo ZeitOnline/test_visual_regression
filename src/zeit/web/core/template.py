@@ -189,14 +189,15 @@ def get_layout(block, request=None):
                 layout = layout
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
-        elif getattr(teaser, 'serie', None) and not (
-                zeit.magazin.interfaces.IZMOContent.providedBy(cp)):
+        elif (allowed('zon-column') or allowed('zon-series')) and getattr(
+                teaser, 'serie', None) and not (
+                    zeit.magazin.interfaces.IZMOContent.providedBy(cp)):
             if teaser.serie.column and get_column_image(teaser) and allowed(
                     'zon-column'):
                 layout = 'zon-column'
             elif allowed('zon-series'):
                 layout = 'zon-series'
-        elif getattr(teaser, 'blog', None) and allowed('zon-blog'):
+        elif allowed('zon-blog') and getattr(teaser, 'blog', None):
             layout = 'zon-blog'
 
     layout = zope.component.getUtility(

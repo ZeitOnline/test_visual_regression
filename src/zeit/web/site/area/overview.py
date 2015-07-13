@@ -15,41 +15,56 @@ import zeit.web.site.area.ranking
 log = logging.getLogger(__name__)
 
 
-SANITY_BOUND = 10
+SANITY_BOUND = 500
+
+_get, _set = object.__getattribute__, object.__setattr__
 
 
 @grokcore.component.adapter(dict)
 @grokcore.component.implementer(zeit.cms.interfaces.ICMSContent)
-class ContentProxy(object):
+class LazyProxy(object):
 
-    def __init__(self, context):
+    def __init__(self, context, istack=[zeit.cms.interfaces.ICMSContent]):
         def callback():
-            object.__setattr__(self, '__exposed__', True)
-            unique_id = context.get('uniqueId', None)
-            return zeit.cms.interfaces.ICMSContent(unique_id, None)
+            _set(self, '__exposed__', True)
+            factory = context.get('uniqueId', None)
+            istack = iter(_get(self, '__istack__'))
+            while True:
+                try:
+                    iface = next(istack)
+                    factory = iface(factory)
+                except (StopIteration, TypeError):
+                    return factory
 
-        proxy = peak.util.proxies.LazyProxy(callback)
-        object.__setattr__(self, '__proxy__', context)
-        object.__setattr__(self, '__origin__', proxy)
-        object.__setattr__(self, '__exposed__', False)
+        origin = peak.util.proxies.LazyProxy(callback)
+        _set(self, '__proxy__', context)
+        _set(self, '__origin__', origin)
+        _set(self, '__exposed__', False)
+        _set(self, '__istack__', istack)
 
     def __getattr__(self, key):
         try:
-            return object.__getattribute__(self, '__proxy__')[key]
+            return _get(self, '__proxy__')[key]
         except KeyError:
-            return getattr(object.__getattribute__(self, '__origin__'), key)
+            return getattr(_get(self, '__origin__'), key)
 
     def __setattr__(self, key, value):
         if self.__exposed__:
-            setattr(object.__getattribute__(self, '__origin__'), key, value)
+            setattr(_get(self, '__origin__'), key, value)
         else:
-            object.__getattribute__(self, '__proxy__')[key] = value
+            # TODO: Properly defer setting until origin is exposed.
+            _get(self, '__proxy__')[key] = value
 
     def __delattr__(self, key):
         raise NotImplementedError('I\'m too lazy to delete anything.')
 
     def __dir__(self):
         return dir(zeit.cms.content.metadata.CommonMetadata)
+
+    def __conform__(self, iface):
+        context = _get(self, '__proxy__')
+        istack = _get(self, '__istack__')
+        return LazyProxy(context, istack + [iface])
 
 
 @zeit.web.register_area('overview')

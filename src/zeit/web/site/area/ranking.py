@@ -22,8 +22,18 @@ log = logging.getLogger(__name__)
 
 
 FIELDS = ' '.join([
+    'date_last_published',
+    'product_id',
+    'supertitle',
+    'title',
     'uniqueId'
 ])
+
+
+FIELD_MAP = [
+    ('supertitle', 'teaserSupertitle'),
+    ('title', 'teaserTitle')
+]
 
 
 ORDERS = collections.defaultdict(
@@ -83,7 +93,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                 fl=FIELDS,
                 start=self.count * (self.page - 1))
         except (pysolr.SolrError, ValueError) as e:
-            log.warning('{} for query {}'.format(e, self.raw_query))
+            log.warning(u'{} for query {}'.format(e, self.raw_query))
             return result
         docs = collections.deque(solr_result)
         self.hits = solr_result.hits
@@ -93,6 +103,9 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                 result.append(block)
                 continue
             context = docs.popleft()
+            for src, target in FIELD_MAP:
+                context[target] = context[src]
+                del context[src]
             try:
                 block.insert(0, zeit.cms.interfaces.ICMSContent(context))
             except TypeError:
