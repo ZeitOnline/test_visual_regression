@@ -47,19 +47,6 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
 
-@view_config(name='comment-form',
-             renderer='templates/inc/comments/comment-form.html')
-@view_config(name='report-form',
-             renderer='templates/inc/comments/report-form.html')
-class CommentForm(Article):
-
-    @zeit.web.reify
-    def error(self):
-        if 'error' not in self.request.params:
-            return
-        return self.request.session.pop(self.request.params['error'])
-
-
 def is_breaking_news(context, request):
     breaking = zeit.content.article.interfaces.IBreakingNews(context, None)
     if not (breaking and breaking.is_breaking):
