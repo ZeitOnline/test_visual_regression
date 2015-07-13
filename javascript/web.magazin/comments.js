@@ -510,7 +510,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
 
 
             if ( $( errormsg ).length === 1 && $( errormsg ).css( 'visibility' ) === 'visible' ) {
-                var el = $( form ).children( '.comments__input--error' );
+                var el = $( form ).find( '.comments__input--error' );
                 $( errormsg ).animate(
                         { opacity: 0 },
                         200,
@@ -521,9 +521,9 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
             }
 
             if ( input.username.value === '' || input.comment.value === '' ) {
-                $( form ).children( '.comments__hint' ).addClass( 'comments__hint--error' );
+                $( form ).find( '.comments__hint' ).addClass( 'comments__hint--error' );
             } else {
-                $( form ).children( '.comments__hint' ).removeClass( 'comments__hint--error' );
+                $( form ).find( '.comments__hint' ).removeClass( 'comments__hint--error' );
                 $.ajax({
                     url: sendurl,
                     dataType: 'json',
