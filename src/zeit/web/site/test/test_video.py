@@ -263,6 +263,14 @@ def test_create_url_filter_should_append_seo_slug_to_all_video_links(
         '-roboter-myon-uebernimmt-opernrolle')
 
 
+def test_create_url_filter_should_handle_empty_supertitles(application):
+    video = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2014-01/1953013471001')
+    assert zeit.web.core.template.create_url(None, video) == (
+        '/video/2014-01/1953013471001/foto-momente'
+        '-die-stille-schoenheit-der-polarlichter')
+
+
 def test_video_page_should_redirect_to_slug_from_plain_id_url(
         testserver, testbrowser):
     path = '/video/2015-01/3537342483001'

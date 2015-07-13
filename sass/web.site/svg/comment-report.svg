@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="14px" height="16px" viewBox="0 0 14 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Fahne</title>
-    <path role="presentation" fill="#444444" d="M1.8500061,16H0.1499939V0h1.7000122V16L1.8500061,16z M13.8500061,1.2000122H3.0500183v8.3999939
-        h10.7999878l-2.7999878-4.2000122L13.8500061,1.2000122L13.8500061,1.2000122z"/>
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="8px" height="10px" viewBox="0 0 8 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Melden</title>
+    <g>
+	   <polygon fill="#444444" points="8,0 1.999,0 1.999,5 8,5 6.444,2.5"/>
+	   <rect fill="#444444" width="1" height="10"/>
+    </g>
 </svg>

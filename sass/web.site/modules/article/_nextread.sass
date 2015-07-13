@@ -1,23 +1,26 @@
 .nextread
 	padding: 40px 0
+	&--without-image
+		background: $zon_light_grey
+		margin: remify(40px) (-$page-padding) 0 (-$page-padding) // 40px topmargin until other elements are build
+		padding: 0
 	&__link
 		display: block
 		margin: 0 (-$page-padding)
 		padding: 0 $page-padding
+		&--without-image
+			padding: $page-padding remify(40px)
+		+on-interaction
+			color: $zon-charcoal
 	&__lead
 		font-size: remify(15px)
 		font-weight: 700
 		letter-spacing: $zon-letter-spacing-m
 		margin-bottom: remify(14px)
 		text-transform: uppercase
-		a:hover &
-			color: $zon-charcoal
 	&__media
 		margin: 0 (-$page-padding) remify(14px) (-$page-padding)
 		position: relative
-	&__media-item
-		max-width: auto
-		width: 100%
 	&__kicker
 		@extend %teaser-kicker
 	&__title
@@ -34,9 +37,18 @@
 	.nextread
 		margin: remify(40px) (-$page-padding) 0 (-$page-padding) // 40px topmargin until other elements are build
 		padding: 0
+		&--with-image
+			+font-smoothing()
+			color: $white
+			.nextread__lead,
+			.nextread__kicker,
+			.nextread__title
+				color: $white
 		&__link
 			margin: 0
 			padding: 0
+			&--without-image
+				padding: $page-padding
 		&__lead
 			height: em(38px)  // intentional em usage
 			max-width: remify(660px)
@@ -44,12 +56,6 @@
 			padding-top: remify(20px)
 			position: relative
 			z-index: 1
-			a:link &,
-			a:visited &,
-			a:hover &,
-			a:active &
-				color: $white
-				+font-smoothing()
 			&:after
 				border-bottom: 1px solid #fff
 				content: ""
@@ -59,7 +65,7 @@
 				width: remify(70px)
 			&--without-image
 				height: auto
-				margin: 0 auto
+				margin: 0 auto remify(16px)
 				position: static
 		&__media
 			margin: 0
@@ -91,15 +97,7 @@
 			left: 0
 			position: absolute
 			width: 100%
-			a:link & > div,
-			a:visited & > div,
-			a:hover & > div,
-			a:active & > div
-				color: $white
-				+font-smoothing()
 			&--without-image
-				bottom: auto
-				left: auto
 				position: static
 		&__kicker
 			font-size: $font-s
@@ -111,25 +109,3 @@
 			margin-bottom: remify(8px)
 			width: 72%
 
-// unbemish fallback link styling
-+respond-min($break-tablet-min)
-	a:link .nextread__lead--without-image,
-	a:visited .nextread__lead--without-image,
-	a:hover .nextread__lead--without-image,
-	a:active .nextread__lead--without-image
-		color: $black
-	a:link .nextread__inner-helper--without-image .nextread__kicker,
-	a:visited .nextread__inner-helper--without-image .nextread__kicker,
-	a:hover .nextread__inner-helper--without-image .nextread__kicker,
-	a:active .nextread__inner-helper--without-image .nextread__kicker
-		color: $zon-red
-	a:link .nextread__inner-helper--without-image .nextread__title,
-	a:visited .nextread__inner-helper--without-image .nextread__title,
-	a:hover .nextread__inner-helper--without-image .nextread__title,
-	a:active .nextread__inner-helper--without-image .nextread__title
-		color: $black
-	a:link .nextread__inner-helper--without-image .nextread__metadata,
-	a:visited .nextread__inner-helper--without-image .nextread__metadata,
-	a:hover .nextread__inner-helper--without-image .nextread__metadata,
-	a:active .nextread__inner-helper--without-image .nextread__metadata
-		color: $zon_grey

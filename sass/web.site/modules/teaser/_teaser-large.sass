@@ -1,20 +1,26 @@
 .teaser-large
 	@extend %teaser
+	&__series-label
+		@extend %teaser-series-label
 	&__heading
 		@extend %teaser-heading
 		margin-bottom: remify(14px)
+		&--parquet
+			margin-bottom: remify(6px)
 	&__combined-link
 		@extend %teaser-combined-link
 	&__kicker
 		@extend %teaser-kicker
 		margin-bottom: remify(8px)
+		&--blog
+			@extend %teaser-kicker--blog
 	&__title
 		@extend %teaser-title
-		font-size: remify($font-mxxl--px)
+		font-size: remify(28px)
 	&__media
 		@extend %teaser-media
 	&__media-item
-		@extend %teaser-media-item
+		@extend %teaser-media-item !optional
 	&__text
 		@extend %teaser-text
 	&__byline

@@ -2,28 +2,29 @@
 
 {% block metadata %}
     <div class="header__metadata">
-    {% if view.topic_links | length %}
+    {%- if view.topic_links | length -%}
         <div class="header__tags">
             <span class="header__tags__label">{{ view.topic_links.title | hide_none }}</span>
             {% for label, link in view.topic_links %}
             <a href="{{ link }}" title="{{ label }}" class="header__tags__link">{{ label }}</a>
             {% endfor %}
         </div>
-    {% endif %}
+    {%- endif -%}
 
-    {% if view.is_hp %}
+    {%- if view.is_hp -%}
         {% set date = view.date_last_modified | format_timedelta(hours=3) %}
         {% if date %}
         <div class="header__date">
             <time datetime="{{ view.date_last_modified | format_date('iso8601') }}">Aktualisiert {{ date }}</time>
         </div>
         {% endif %}
-    {% endif %}
+    {%- endif -%}
     </div>
 {% endblock metadata %}
 
 {% block main %}
     {% for region in view.regions %}
+        {% set region_loop = loop %}
         {%- include ["zeit.web.site:templates/inc/region/{}.html".format(region.kind),
                      "zeit.web.site:templates/inc/region/default.html"] ignore missing -%}
     {% endfor %}

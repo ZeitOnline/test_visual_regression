@@ -4,9 +4,24 @@ Change log for zeit.web
 1.40.2 (unreleased)
 -------------------
 
+- ZON-1900: Fix nextread without image
+
+- ZON-1822: Re-work teaser for blogs, series and columns
+
 - ZON-1811: Fix search input for iOS Safari and add thousands separator
 
+- MAINT: Polish liveblog, header, comments, topic teaser to mention but a few
+
 - ZON-1788: Apply snazzy tuple stream byline to teasers and articles
+
+- ZON-1912: Bug: auf HP, CP und Artikeln wird als zweites MR tile_7 statt tile_8 ausgegeben
+
+- ZON-1919: Show comment section ads despite there are comments or not
+
+- FIX: Ensure create_url can handle empty video titles
+
+- CFG: Properly configure spektrum parquet area
+
 
 
 1.40.1 (2015-07-09)
