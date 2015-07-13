@@ -1,6 +1,6 @@
 .header
     +respond-min($break-tablet-min)
-        padding: $fine $petite
+        padding: $fine $petite 0
 
 .header__metadata
     +clearfix
@@ -9,7 +9,10 @@
     font-size: remify(11px)
     letter-spacing: $zon-letter-spacing-l
     line-height: 1rem
+    margin: remify(12px 0 7px)
     text-transform: uppercase
+    &:empty
+        display: none
     +respond-min($break-tablet-min)
         display: block
 

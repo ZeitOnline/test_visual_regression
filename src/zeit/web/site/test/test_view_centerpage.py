@@ -307,84 +307,42 @@ def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
 
 def test_column_teaser_should_render_series_element(testserver, testbrowser):
     browser = testbrowser(
-        '%s/zeit-online/teaser-types-setup' % testserver.url)
+        '%s/zeit-online/journalistic-formats' % testserver.url)
 
     col_element = browser.cssselect(
-        '.teaser-column .teaser-column__series')
-    assert len(col_element) == 1
-    assert col_element[0].text == u'F\xfcnf vor acht'
-
-
-def test_column_teaser_should_have_mobile_layout(
-        selenium_driver, testserver, screen_size):
-
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/teaser-types-setup' % testserver.url)
-    img_box = driver.find_elements_by_class_name('teaser-column__media')[0]
-    assert img_box.is_displayed(), 'image box is not displayed'
-
-    width_script = 'return $(".teaser-column__media").width()'
-    width = driver.execute_script(width_script)
-
-    if screen_size[0] == 320:
-        assert width == 80, 'mobile: imgage box of wrong size'
-    elif screen_size[0] == 520:
-        assert width == 80, 'phablet: imgage box of wrong size'
-    elif screen_size[0] == 768:
-        assert width == 80, 'ipad: imgage box of wrong size'
-    else:
-        assert width > 200, 'desktop: image box of wrong size'
-
-
-def test_column_teaser_should_have_different_font(
-        selenium_driver, testserver, screen_size):
-
-    driver = selenium_driver
-    driver.get('%s/zeit-online/teaser-types-setup' % testserver.url)
-
-    font_script = 'return $(".teaser-column__title").css("font-family")'
-    font = driver.execute_script(font_script)
-    assert "TabletGothic" in font, 'teaser column font is wrong'
+        '.teaser-fullwidth-column__series-label')[0]
+    assert col_element.text == u'Fünf vor acht'
 
 
 def test_series_teaser_should_render_series_element(testserver, testbrowser):
 
     browser = testbrowser(
-        '%s/zeit-online/teaser-serie-setup' % testserver.url)
+        '%s/zeit-online/journalistic-formats' % testserver.url)
 
-    series_element = browser.cssselect('.teaser-series__label')
-    assert len(series_element) == 2
+    series_element = browser.cssselect('.teaser-large__series-label')
     assert series_element[0].text == 'Serie: App-Kritik'
 
 
-def test_series_teaser_should_have_mobile_layout(
+def test_small_teaser_should_have_responsive_layout(
         selenium_driver, testserver, screen_size):
 
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/teaser-serie-setup' % testserver.url)
-    img_box = driver.find_elements_by_class_name('teaser-series__media')[0]
-    assert img_box.is_displayed(), 'image box is not displayed'
+    driver.get('%s/index' % testserver.url)
 
-    width_script = 'return $(".teaser-series__media").width()'
+    width_script = 'return $(".teaser-small__media").first().width()'
     width = driver.execute_script(width_script)
 
-    border_script = 'return $(".teaser-series").css("border-top-style")'
-    border = driver.execute_script(border_script)
+    img_box = driver.find_elements_by_class_name('teaser-small__media')[0]
 
     if screen_size[0] == 320:
-        assert width > 250  # mobile: imgage box of wrong size
-        assert border == 'solid'  # mobile: border-top wrong
+        assert not img_box.is_displayed(), 'no image should be shown on mobile'
     elif screen_size[0] == 520:
-        assert width == 150  # phablet: imgage box of wrong size
-        assert border == 'dotted'  # phablet: border-top wrong
+        assert width == 150
     elif screen_size[0] == 768:
-        assert width == 150  # ipad: imgage box of wrong size
-        assert border == 'dotted'  # ipad: border-top wrong
+        assert width == 150
     else:
-        assert width == 250  # desktop: image box of wrong size
-        assert border == 'dotted'  # desktop: border-top wrong
+        assert width == 250
 
 
 def test_snapshot_hidden_on_initial_load(
@@ -529,7 +487,7 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
     driver = selenium_driver
     driver.get('%s/zeit-online/parquet-teaser-setup' % testserver.url)
     small_teaser = driver.find_element_by_css_selector(
-        '.teaser-parquet-small__media')
+        '.cp-area--parquet .teaser-small__media')
 
     driver.set_window_size(320, 480)
     assert not small_teaser.is_displayed(), (
@@ -626,30 +584,28 @@ def test_linkobject_teaser_should_contain_supertitle(testserver, testbrowser):
 
 
 def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser(
+        '%s/zeit-online/journalistic-formats' % testserver.url)
     uid = 'http://xml.zeit.de/blogs/nsu-blog-bouffier'
-    kicker = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                               '.teaser-blog__kicker'.format(uid))[0]
+    teaser = browser.cssselect(
+        '.teaser-large[data-unique-id="{}"] '.format(uid))[0]
+
+    kicker = teaser.cssselect('.teaser-large__kicker--blog')[0]
     assert kicker.text == 'Zeugenvernehmung'
 
-    marker = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                               '.teaser-blog__marker'.format(uid))[0]
+    marker = teaser.cssselect('.blog-format__marker')[0]
     assert marker.text == 'Blog'
 
-    name_of_blog = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                                     '.teaser-blog__name'.format(uid))[0]
-    assert re.sub(r'^\s+|\t|\n|\s+$', '', name_of_blog.text) == 'NSU-Prozess /'
+    name_of_blog = teaser.cssselect('.blog-format__name')[0]
+    assert name_of_blog.text.strip() == 'NSU-Prozess'
 
-    title = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                              '.teaser-blog__title'.format(uid))[0]
+    title = teaser.cssselect('.teaser-large__title')[0]
     assert title.text == 'Beate, die harmlose Hausfrau'
 
-    blog_text = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                                  '.teaser-blog__text'.format(uid))[0]
+    blog_text = teaser.cssselect('.teaser-large__text')[0]
     assert 'Lorem ipsum' in blog_text.text
 
-    byline = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                               '.teaser-blog__byline'.format(uid))[0]
+    byline = teaser.cssselect('.teaser-large__byline')[0]
     assert re.sub('\s+', ' ', byline.text).strip() == 'Von Anne Mustermann'
 
 
