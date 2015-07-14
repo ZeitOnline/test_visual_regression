@@ -8,6 +8,11 @@ import mock
 import zeit.web.core.navigation
 import selenium.webdriver
 
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     tpl = jinja2_env.get_template(
@@ -16,7 +21,8 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     mock_request = mock.Mock()
     mock_request.route_url.return_value = 'http://www.zeit.de/'
     mock_view.request = mock_request
-    html_str = tpl.render(view=mock_view)
+    mock_request.registry.settings.sso_activate = False
+    html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('.main_nav')) == 1, 'just one .main_nav should be present'
@@ -143,7 +149,8 @@ def test_nav_contains_essential_elements(application, jinja2_env):
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
     mock_view.request.host = 'www.zeit.de'
-    html_str = tpl.render(view=mock_view)
+    mock_request = mock.Mock()
+    html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect
 
     # Logo
@@ -181,7 +188,8 @@ def test_nav_should_contain_schema_org_markup(application, jinja2_env):
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
     mock_view.request.host = 'www.zeit.de'
-    html_str = tpl.render(view=mock_view)
+    mock_request = mock.Mock()
+    html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect
 
     site_nav_element = html(
@@ -382,31 +390,53 @@ def test_nav_search_is_working_as_expected(
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/centerpage/zeitonline' % testserver.url)
 
+    driver.execute_script(
+        "document.querySelector('.main_nav__search form').onsubmit = \
+            function(){ alert(this.q.value); return false; };")
+
     search__button = driver.find_elements_by_class_name('search__button')[0]
     search__input = driver.find_elements_by_class_name('search__input')[0]
     logo_bar__menu = driver.find_element_by_class_name('logo_bar__menu')
     menu__button = logo_bar__menu.find_elements_by_tag_name('a')[0]
     document = driver.find_element_by_class_name('page')
-    transition_duration = 0.2
+    input_visible_ec = expected_conditions.visibility_of(search__input)
+    input_invisible_ec = expected_conditions.invisibility_of_element_located(
+        (By.CSS_SELECTOR, ".main_nav__search .search__input"))
 
     if screen_width == 768:
         # test search input is shown after button click
         search__button.click()
-        time.sleep(transition_duration)  # wait for animation
-        assert search__input.is_displayed(), 'Input is not displayed'
+        # wait for animation
+        try:
+            WebDriverWait(driver, 1).until(input_visible_ec)
+        except TimeoutException:
+            assert False, 'Input must be visible'
+
         # test search input is not hidden after click in input
         search__input.click()
-        assert search__input.is_displayed(), 'Input is not displayed'
+        assert search__input.is_displayed(), 'Input must be visible'
+
         # test search input is hidden after button click, if its empty
         search__button.click()
-        time.sleep(transition_duration)  # wait for animation
-        assert search__input.is_displayed() is False, 'Input is displayed'
+        # wait for animation
+        try:
+            WebDriverWait(driver, 1).until(input_invisible_ec)
+        except TimeoutException:
+            assert False, 'Input must be hidden'
+
         # test search input is hidden after click somewhere else, show it first
         search__button.click()
-        time.sleep(transition_duration)  # wait for animation
+        # wait for animation
+        try:
+            WebDriverWait(driver, 1).until(input_visible_ec)
+        except TimeoutException:
+            assert False, 'Input must be visible'
         document.click()
-        time.sleep(transition_duration)  # wait for animation
-        assert search__input.is_displayed() is False, 'Input is displayed'
+        # wait for animation
+        try:
+            WebDriverWait(driver, 1).until(input_invisible_ec)
+        except TimeoutException:
+            assert False, 'Input must be hidden'
 
     # open search for mobile
     if screen_width < 768:
@@ -414,13 +444,24 @@ def test_nav_search_is_working_as_expected(
     # open search for tablet
     elif screen_width == 768:
         search__button.click()
-        time.sleep(transition_duration)  # wait for animation
+        # wait for animation
+        try:
+            WebDriverWait(driver, 1).until(input_visible_ec)
+        except TimeoutException:
+            assert False, 'Input must be visible'
 
-    # test if search is performed
+    # test if search form gets submitted
     search__input.send_keys('test')
     search__button.click()
 
-    assert driver.current_url.endswith('suche/index?q=test')
+    try:
+        WebDriverWait(driver, 1).until(expected_conditions.alert_is_present())
+    except TimeoutException:
+        assert False, 'Search form not submitted'
+    else:
+        alert = driver.switch_to.alert
+        assert alert.text == 'test'
+        alert.accept()
 
 
 def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):

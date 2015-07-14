@@ -157,13 +157,6 @@ def get_layout(block, request=None):
         if layout:
             return layout
 
-    def allowed(layout_id):
-        try:
-            xp = '/layouts/layout[@id="{}"]/@areas'.format(layout_id)
-            return block.__parent__.kind in source.xpath(xp)[0].split(' ')
-        except (AttributeError, IndexError):
-            return
-
     try:
         layout_id = block.layout.id
     except (AttributeError, TypeError):
@@ -178,8 +171,6 @@ def get_layout(block, request=None):
             layout = 'hide'
     else:
         layout = layout_id
-        source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS.factory._get_tree()
-        cp = zeit.content.cp.interfaces.ICenterPage(block, None)
 
         if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
             log.debug('Broken ref at {}'.format(teaser.uniqueId))

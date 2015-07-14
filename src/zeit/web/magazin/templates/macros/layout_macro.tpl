@@ -136,12 +136,20 @@
     </span>
     <div class="main-nav__section__content js-main-nav-section-content">
         <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}" id="hp.zm.topnav.community.account">Account</a>
-        <a href="{{ request.registry.settings.community_host }}/logout?destination={{ request.url }}" id="hp.zm.topnav.community.logout">Logout</a>
+        {% if request.registry.settings.sso_activate %}
+            <a href="{{ request.registry.settings.sso_url }}/abmelden?url={{ request.url }}" id="hp.zm.topnav.community.logout">Logout</a>
+        {% else %}
+            <a href="{{ request.registry.settings.community_host }}/logout?destination={{ request.url }}" id="hp.zm.topnav.community.logout">Logout</a>
+        {% endif %}
     </div>
 {%- endmacro %}
 
 {% macro head_user_is_logged_in_false(request) -%}
-    <a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
+    {% if request.registry.settings.sso_activate %}
+        <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
+    {% else %}
+        <a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
+    {% endif %}
 {%- endmacro %}
 
 {% macro copyrights(cr_list) -%}
