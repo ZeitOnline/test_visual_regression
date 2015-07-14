@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.40.2 (unreleased)
--------------------
+1.41 (2015-07-14)
+-----------------
 
 - ZON-1900: Fix nextread without image
 
