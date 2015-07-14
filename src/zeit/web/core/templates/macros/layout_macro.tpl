@@ -89,7 +89,7 @@
 {% macro adplace_adctrl(banner, view, mobile) -%}
     {{ caller() }}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
-    <div id="iqadtile{{ banner.tile }}" class="ad ad--{{ banner.name }} ad--{{ banner.name }}-on-{{ pagetype }}" data-ad_width="{{ banner.noscript_width_height[0] }}" data-ad_minwidth="{{ banner.min_width }}">
+    <div id="iqadtile{{ banner.tile }}" class="ad ad--{{ banner.name }} ad--{{ banner.name }}-on-{{ pagetype }}" data-banner-type="{{ 'mobile' if mobile else 'desktop' }}">
         {% if banner.label -%}
         <div class="ad__label ad__label--{{ banner.name }}">{{ banner.label }}</div>
         {% endif -%}
