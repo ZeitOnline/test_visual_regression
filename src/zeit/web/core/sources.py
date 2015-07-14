@@ -84,18 +84,6 @@ class Solr(object):
 
     zope.interface.implements(zeit.solr.interfaces.ISolr)
 
-    def add(self, docs, **kw):
-        raise NotImplementedError()
-
-    def commit(self, **kw):
-        raise NotImplementedError()
-
-    def delete(self, **kw):
-        raise NotImplementedError()
-
-    def more_like_this(self, q, mltfl, **kw):
-        raise NotImplementedError()
-
     def search(self, q, rows=10, **kw):
         parts = urlparse.urlparse('egg://zeit.web.core/data')
         repo = pkg_resources.resource_filename(parts.netloc, parts.path[1:])
@@ -111,9 +99,13 @@ class Solr(object):
                     content = zeit.cms.interfaces.ICMSContent(unique_id)
                     assert zeit.content.article.interfaces.IArticle.providedBy(
                         content)
-                    results.append(zeit.web.core.utils.frozendict(
-                        {u'uniqueId': content.uniqueId,
-                         u'date_last_published': u'2015-07-01T09:50:42Z'}))
+                    results.append({
+                        u'uniqueId': content.uniqueId,
+                        u'date_last_published': u'2015-07-01T09:50:42Z',
+                        u'title': content.title,
+                        u'supertitle': content.supertitle,
+                        u'product_id': content.product.id
+                    })
                 except (AssertionError, TypeError):
                     continue
         return pysolr.Results(

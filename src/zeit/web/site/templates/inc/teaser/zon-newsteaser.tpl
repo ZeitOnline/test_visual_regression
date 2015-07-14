@@ -1,6 +1,6 @@
 <article class="newsteaser">
     <time class="newsteaser__time">
-        {{ ((teaser.date_last_published | parse_date('%Y-%m-%dT%H:%M:%SZ')) or (teaser | mod_date)) | format_date(pattern='HH:mm') }}
+        {{ teaser | mod_date | format_date(pattern='HH:mm') }}
     </time>
     <div class="newsteaser__text">
         <a class="newsteaser__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | create_url }}">

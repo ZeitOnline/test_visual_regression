@@ -4,6 +4,7 @@ import logging
 
 import peak.util.proxies
 import grokcore.component
+import zope.component
 
 import zeit.cms
 import zeit.cms.content.metadata
@@ -17,8 +18,6 @@ log = logging.getLogger(__name__)
 
 SANITY_BOUND = 500
 
-_get, _set = object.__getattribute__, object.__setattr__
-
 
 @grokcore.component.adapter(dict)
 @grokcore.component.implementer(zeit.cms.interfaces.ICMSContent)
@@ -26,44 +25,54 @@ class LazyProxy(object):
 
     def __init__(self, context, istack=[zeit.cms.interfaces.ICMSContent]):
         def callback():
-            _set(self, '__exposed__', True)
             factory = context.get('uniqueId', None)
-            istack = iter(_get(self, '__istack__'))
+            istack = iter(self.__istack__)
             while True:
                 try:
                     iface = next(istack)
                     factory = iface(factory)
-                except (StopIteration, TypeError):
+                except (StopIteration, TypeError,
+                        zope.component.ComponentLookupError):
+                    self.__exposed__ = True
                     return factory
 
         origin = peak.util.proxies.LazyProxy(callback)
-        _set(self, '__proxy__', context)
-        _set(self, '__origin__', origin)
-        _set(self, '__exposed__', False)
-        _set(self, '__istack__', istack)
+        object.__setattr__(self, '__exposed__', False)
+        object.__setattr__(self, '__istack__', istack)
+        object.__setattr__(self, '__origin__', origin)
+        object.__setattr__(self, '__proxy__', context)
 
     def __getattr__(self, key):
         try:
-            return _get(self, '__proxy__')[key]
+            return self.__proxy__[key]
         except KeyError:
-            return getattr(_get(self, '__origin__'), key)
+            return getattr(self.__origin__, key)
 
     def __setattr__(self, key, value):
         if self.__exposed__:
-            setattr(_get(self, '__origin__'), key, value)
+            setattr(self.__origin__, key, value)
         else:
-            # TODO: Properly defer setting until origin is exposed.
-            _get(self, '__proxy__')[key] = value
+            # TODO: Properly defer setter until origin is exposed.
+            self.__proxy__[key] = value
 
     def __delattr__(self, key):
-        raise NotImplementedError('I\'m too lazy to delete anything.')
+        raise NotImplementedError('Sorry, I am too lazy to delete anything.')
+
+    def __hash__(self):
+        return hash(self.__origin__)
+
+    def __len__(self):
+        return len(self.__origin__)
+
+    def __iter__(self):
+        return iter(self.__origin__)
 
     def __dir__(self):
-        return dir(zeit.cms.content.metadata.CommonMetadata)
+        return dir(self.__origin__)
 
     def __conform__(self, iface):
-        context = _get(self, '__proxy__')
-        istack = _get(self, '__istack__')
+        context = self.__proxy__
+        istack = self.__istack__
         return LazyProxy(context, istack + [iface])
 
 

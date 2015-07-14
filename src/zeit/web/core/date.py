@@ -28,9 +28,13 @@ def parse_date(date,
 
 
 @zeit.web.register_filter
-def mod_date(resource):
+def mod_date(context):
+    pub_date = parse_date(
+        getattr(context, 'date_last_published', ''), '%Y-%m-%dT%H:%M:%SZ')
+    if pub_date:
+        return pub_date
     try:
-        pub_info = zeit.cms.workflow.interfaces.IPublishInfo(resource)
+        pub_info = zeit.cms.workflow.interfaces.IPublishInfo(context)
         return (pub_info.date_last_published_semantic or
                 pub_info.date_last_published)
     except TypeError:

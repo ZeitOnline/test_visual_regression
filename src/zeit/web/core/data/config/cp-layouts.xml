@@ -68,7 +68,7 @@
         title="Kolumnenteaser"
         image_pattern="zon-thumbnail"
         image_positions="true"
-        areas="major minor"
+        areas="solo major minor"
         />
 
     <layout
@@ -76,7 +76,7 @@
         title="Blogteaser"
         image_pattern="zon-thumbnail"
         image_positions="true"
-        areas="major minor"
+        areas="solo major minor"
         />
 
     <layout
@@ -84,7 +84,7 @@
         title="Serienteaser"
         image_pattern="zon-thumbnail"
         image_positions="true"
-        areas="major minor"
+        areas="solo major minor"
         />
 
     <!-- Legacy teaser formats -->
