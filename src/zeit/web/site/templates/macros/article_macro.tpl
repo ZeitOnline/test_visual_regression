@@ -118,6 +118,7 @@
 {%- endmacro %}
 
 {% macro place(item, view) -%}
+    <pre style="background:#afe;">adplace {{ item.tile }}</pre>
     {{ lama.adplace(item, view) }}
     {{ lama.adplace_middle_mobile(item) }}
 {%- endmacro %}

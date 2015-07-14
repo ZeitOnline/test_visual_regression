@@ -49,7 +49,7 @@ def _inject_banner_code(
     possible_pages = [i for i in xrange(1, len(pages) + 1)]
     banner_conf = {
         'zon': {
-            'tiles': [7],  # banner tiles in articles
+            'tiles': [7, 8, 9],  # banner tiles in articles
             'ad_paras': [2],  # paragraph(s) to insert ad after
             'content_ad_para': [4]  # paragraph/s to insert content ad after
         },
@@ -90,7 +90,14 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
                 _para = paragraphs[pp]
                 for i, block in enumerate(page.blocks):
                     if _para == block:
-                        t = tile_list[index] - 1
+                        # for multipage layout:
+                        # on every page, use another ad_tile
+                        # (as long as available)
+                        adtile_on_page = index + int(page.number)
+                        if adtile_on_page >= len(tile_list):
+                            break
+                        t = tile_list[adtile_on_page] - 1
+                        #t = tile_list[index] - 1
                         page.blocks.insert(
                             i, zeit.web.core.banner.banner_list[t])
                         break
