@@ -4,7 +4,7 @@ Change log for zeit.web
 1.42 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Remove font TabletGothicNarrow
 
 
 1.41 (2015-07-14)
