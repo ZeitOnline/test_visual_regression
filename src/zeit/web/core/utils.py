@@ -1,10 +1,16 @@
 import collections
+import logging
 import re
 
+import grokcore.component
 import jinja2
+import peak.util.proxies
 import zope.component
 
 import zeit.cms.interfaces
+
+
+log = logging.getLogger(__name__)
 
 
 def fix_misrepresented_latin(val):
@@ -196,3 +202,87 @@ class defaultattrdict(attrdict, defaultdict):
 
     def __getattr__(self, key):
         return self[key]
+
+
+@grokcore.component.adapter(dict)
+@grokcore.component.implementer(zeit.cms.interfaces.ICMSContent)
+class LazyProxy(object):
+    """Proxy class for ICMSContent implementations which expects a dict in its
+    constructor containing a `uniqueId` key-value pair.
+    The resulting adapter tries to obtain all accessed properties from keys
+    in its underlying dictionary.
+    The actual repository lookup and XML parsing is deferred until an
+    unresolvable key is discovered or a magic method called.
+    Proxies pretend to conform to any interface that is called upon them by
+    spawning a sub-proxy with the new interface pushed to the resolution stack.
+
+    >>> obj = LazyProxy({'uniqueId': 'xml://index', 'title': 'Lorem ipsum'})
+    >>> obj.title
+    'Lorem ipsum'
+    >>> obj
+    <zeit.cms.interfaces.ICMSContent proxy at 0x109bbe510>
+    >>> obj.author
+    'Any one'
+    >>> obj
+    <zeit.content.cp.interfaces.ICenterPage proxy at 0x109bbe510>
+    """
+
+    def __init__(self, context, istack=[zeit.cms.interfaces.ICMSContent]):
+        def callback():
+            factory = context.get('uniqueId', None)
+            istack = iter(self.__istack__)
+            while True:
+                try:
+                    iface = next(istack)
+                    factory = iface(factory)
+                except (StopIteration, TypeError,
+                        zope.component.ComponentLookupError):
+                    self.__exposed__ = True
+                    return factory
+
+        origin = peak.util.proxies.LazyProxy(callback)
+        object.__setattr__(self, '__exposed__', False)
+        object.__setattr__(self, '__istack__', istack)
+        object.__setattr__(self, '__origin__', origin)
+        object.__setattr__(self, '__proxy__', context)
+
+    def __getattr__(self, key):
+        try:
+            return self.__proxy__[key]
+        except KeyError:
+            return getattr(self.__origin__, key)
+
+    def __setattr__(self, key, value):
+        if self.__exposed__:
+            setattr(self.__origin__, key, value)
+        else:
+            # TODO: Properly defer setter until origin is exposed.
+            self.__proxy__[key] = value
+
+    def __delattr__(self, key):
+        raise NotImplementedError()
+
+    def __repr__(self):
+        if self.__exposed__:
+            cls = self.__origin__.__class__
+        else:
+            cls = self.__istack__[-1]
+        return '<{}.{} proxy at {}>'.format(
+            cls.__module__, cls.__name__, hex(id(self)))
+
+    def __hash__(self):
+        return hash(self.__origin__)
+
+    def __len__(self):
+        return len(self.__origin__)
+
+    def __iter__(self):
+        return iter(self.__origin__)
+
+    def __dir__(self):
+        return dir(self.__origin__)
+
+    def __conform__(self, iface):
+        context = self.__proxy__
+        istack = self.__istack__
+        return LazyProxy(context, istack + [iface])
