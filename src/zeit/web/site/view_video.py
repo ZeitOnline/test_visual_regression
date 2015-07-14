@@ -1,7 +1,6 @@
 import logging
 
-from pyramid.view import view_config
-from pyramid.view import view_defaults
+import pyramid.view
 import babel.dates
 import pyramid.httpexceptions
 import pyramid.view
@@ -18,10 +17,11 @@ import zeit.web.site.view
 log = logging.getLogger(__name__)
 
 
-@view_defaults(context=zeit.content.video.interfaces.IVideo,
-               custom_predicates=(zeit.web.site.view.is_zon_content,),
-               request_method='GET')
-@view_config(renderer='templates/video.html')
+@pyramid.view.view_config(
+    context=zeit.content.video.interfaces.IVideo,
+    custom_predicates=(zeit.web.site.view.is_zon_content,),
+    request_method='GET',
+    renderer='templates/video.html')
 class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
 
     advertising_enabled = True
@@ -81,11 +81,3 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
     def get_slug(self):
         titles = (t for t in (self.supertitle, self.title) if t)
         return zeit.cms.interfaces.normalize_filename(u' '.join(titles))
-
-
-@pyramid.view.view_config(name='comment-form',
-                          renderer='templates/inc/comments/comment-form.html')
-@pyramid.view.view_config(name='report-form',
-                          renderer='templates/inc/comments/report-form.html')
-class CommentForm(Video):
-    pass

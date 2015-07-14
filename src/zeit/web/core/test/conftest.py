@@ -160,7 +160,9 @@ settings = {
     'vivi_zeit.solr_solr-url': 'http://mock.solr',
     'vivi_zeit.content.cp_cp-types-url': (
         'egg://zeit.web.core/data/config/cp-types.xml'),
-
+    'sso_activate': '',
+    'sso_url': 'http://my_sso',
+    'sso_cookie': 'http://my_sso_cookie',
     'debug.show_exceptions': True,
     'debug.propagate_jinja_errors': True,
     'debug.enable_profiler': False,

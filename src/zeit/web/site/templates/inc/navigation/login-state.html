@@ -1,8 +1,9 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 {% if user %}
+{% set username = user.name or 'Angemeldet' %}
 <div class="login-state" data-feature="dropdown">
-    <a href="{{ profile }}" class="login-state__name">{{ user.name }}</a>
+    <a href="{{ profile }}" class="login-state__name">{{ username }}</a>
     <ul class="dropdown">
         <li class="dropdown__item">
             <a href="{{ profile }}" class="dropdown__link">Profil</a>
@@ -14,7 +15,7 @@
     {% if user.picture -%}
         <img class="login-state-mobile__avatar" alt="Avatarbild von {{ user.name }}" src="{{ user.picture }}">
     {% endif %}
-    <span class="login-state-mobile__name">{{ user.name }}</span>
+    <span class="login-state-mobile__name">{{ username }}</span>
     <a href="{{ logout }}" rel="nofollow" class="login-state-mobile__logoff">
         Abmelden
         {{ lama.use_svg_icon('navigation-login', 'login-state-mobile__icon', request) }}

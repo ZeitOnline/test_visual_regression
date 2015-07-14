@@ -504,13 +504,13 @@ def test_playlist_video_series_should_be_available(application):
 
 
 def test_videostage_should_have_right_video_count(testserver, testbrowser):
-    browser = testbrowser('%s/index' % testserver.url)
+    browser = testbrowser('/zeit-online/video-stage')
     videos = browser.cssselect('#video-stage article')
     assert len(videos) == 4, 'We expect 4 videos in video-stage'
 
 
 def test_videostage_videos_should_have_video_ids(testserver, testbrowser):
-    browser = testbrowser('%s/index' % testserver.url)
+    browser = testbrowser('/zeit-online/video-stage')
     videos = browser.cssselect('#video-stage article')
     for video in videos:
         attr = video.attrib
@@ -521,7 +521,7 @@ def test_videostage_videos_should_have_video_ids(testserver, testbrowser):
 def test_videostage_series_select_should_navigate_away(
         selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/index' % testserver.url)
+    driver.get('%s/zeit-online/video-stage' % testserver.url)
     select = driver.find_element_by_css_selector('#series_select')
     for option in select.find_elements_by_tag_name('option'):
         if option.text == 'Rekorder':
@@ -533,7 +533,7 @@ def test_videostage_series_select_should_navigate_away(
 
 def test_videostage_video_should_play(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/index' % testserver.url)
+    driver.get('%s/zeit-online/video-stage' % testserver.url)
     article = driver.find_element_by_css_selector(
         '#video-stage .video-large')
     videolink = driver.find_element_by_css_selector(
@@ -639,7 +639,7 @@ def test_centerpage_should_have_header_tags(testbrowser, testserver):
 
 
 def test_new_centerpage_renders(testserver):
-    resp = requests.get('%s/index' % testserver.url)
+    resp = requests.get('%s/zeit-online/slenderized-index' % testserver.url)
     assert resp.ok
 
 
@@ -647,7 +647,7 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/index' % testserver.url)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     teaser = driver.find_elements_by_class_name('teaser-small-minor')[0]
     main = driver.find_element_by_id('main')
     main_width = main.size.get('width')
@@ -759,7 +759,7 @@ def test_servicebox_present_in_wide_breakpoints(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/index' % testserver.url)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     servicebox = driver.find_element_by_id('servicebox')
 
     if screen_size[0] == 320:
@@ -788,7 +788,7 @@ def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
 
 def test_centerpage_square_teaser_has_pixelperfect_image(
         testbrowser, testserver):
-    browser = testbrowser('{}/index'.format(testserver.url))
+    browser = testbrowser('/zeit-online/teaser-square-setup')
     images = browser.cssselect('.teaser-square .scaled-image')
     assert len(images)
     for image in images:
@@ -813,13 +813,13 @@ def test_centerpage_teaser_is_clickable_en_block_for_touch_devices(
 
 
 def test_gallery_teaser_exists(testbrowser, testserver):
-    select = testbrowser('{}/index'.format(testserver.url)).cssselect
+    select = testbrowser('/zeit-online/teaser-gallery-setup').cssselect
     assert len(select('.cp-region--gallery')) == 1
     assert len(select('.cp-area--gallery')) == 1
 
 
 def test_gallery_teaser_has_ressort_heading(testbrowser, testserver):
-    select = testbrowser('{}/index'.format(testserver.url)).cssselect
+    select = testbrowser('/zeit-online/teaser-gallery-setup').cssselect
     title = select('.cp-area--gallery .cp-ressort-heading__title')
     assert len(title) == 1
     assert "Fotostrecken" in title[0].text
@@ -827,7 +827,7 @@ def test_gallery_teaser_has_ressort_heading(testbrowser, testserver):
 
 def test_gallery_teaser_has_correct_elements(testbrowser, testserver):
     wanted = 2
-    browser = testbrowser('{}/index'.format(testserver.url))
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
     area = browser.cssselect('.cp-area--gallery')[0]
 
     assert len(area.cssselect('.teaser-gallery')) == wanted
@@ -844,7 +844,7 @@ def test_gallery_teaser_has_correct_elements(testbrowser, testserver):
 
 def test_gallery_teaser_hides_elements_on_mobile(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('{}/index'.format(testserver.url))
+    driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
 
     ressort_linktext = driver.find_element_by_css_selector(
         '.cp-ressort-heading__readmore-linktext')
@@ -888,7 +888,7 @@ def test_gallery_teaser_hides_elements_on_mobile(selenium_driver, testserver):
 
 def test_gallery_teaser_shuffles_on_click(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('{}/index'.format(testserver.url))
+    driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
     teaserbutton = driver.find_element_by_css_selector(
         '.js-gallery-teaser-shuffle')
     teasertext1 = driver.find_element_by_css_selector(
@@ -909,8 +909,7 @@ def test_gallery_teaser_shuffles_on_click(selenium_driver, testserver):
 
 def test_homepage_should_have_proper_meetrics_integration(
         testserver, testbrowser):
-    browser = testbrowser(
-        '{}/index'.format(testserver.url))
+    browser = testbrowser('/zeit-online/slenderized-index')
     meetrics = browser.cssselect(
         'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1

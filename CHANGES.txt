@@ -1,8 +1,14 @@
 Change log for zeit.web
 =======================
 
-1.40.2 (unreleased)
--------------------
+1.42 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.41 (2015-07-14)
+-----------------
 
 - ZON-1900: Fix nextread without image
 
@@ -18,10 +24,15 @@ Change log for zeit.web
 
 - ZON-1919: Show comment section ads despite there are comments or not
 
+- ZON-1695: Add SSO for zeit.magazin
+
+- ZON-1695: Integrate single sign on into friedbert
+
 - FIX: Ensure create_url can handle empty video titles
 
 - CFG: Properly configure spektrum parquet area
 
+- MAINT: Speed up some sluggish tests
 
 
 1.40.1 (2015-07-09)
