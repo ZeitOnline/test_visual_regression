@@ -47,14 +47,18 @@
 	</div>
 
 	<div id="js-comments-body">
+
+		{# Show ads before the 4th comment, or before the last comment if there are less than 4 [ZON-1919] #}
 		{% for comment in view.comments.comments %}
-			{% if loop.index == 4 -%}
+
+			{% if (loop.length < 4 and loop.last ) or loop.index == 4 -%}
 				{% if view.context.advertising_enabled -%}
 				<div class="comment__ad">
 					{{ lama.adplace(view.banner(8), view) }}
 				</div>
 				{%- endif %}
 			{% endif %}
+
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}
@@ -107,12 +111,22 @@
 
 	{% include "zeit.web.site:templates/inc/comments/pagination.tpl" %}
 
+	{% else %}
+		{% if view.context.advertising_enabled -%}
+			<div class="comment__ad">
+				{{ lama.adplace(view.banner(8), view) }}
+			</div>
+		{% endif %}
 	{% endif %}
 
 	{% if view.request.GET.action == 'report' %}
 		<esi:include src="{{ view.content_url }}/report-form?pid={{ view.request.GET.pid }}" onerror="continue" />
 	{% else %}
-		<esi:include src="{{ view.content_url }}/comment-form?pid={{ view.request.GET.pid }}" onerror="continue" />
+		{% if view.request.GET.error %}
+		    <esi:include src="{{ view.content_url }}/comment-form?error={{ view.request.GET.error }}" onerror="continue" />
+		{% else %}
+		    <esi:include src="{{ view.content_url }}/comment-form?pid={{ view.request.GET.pid }}" onerror="continue" />
+		{% endif %}
 	{% endif %}
 
 	<script type="text/template" id="js-report-success-template">

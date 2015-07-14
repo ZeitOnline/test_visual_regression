@@ -223,7 +223,7 @@ class Application(object):
         config.set_session_factory(session_factory)
 
         config.set_authentication_policy(
-            zeit.web.core.security.CommunityAuthenticationPolicy())
+            zeit.web.core.security.AuthenticationPolicy())
         config.set_authorization_policy(
             pyramid.authorization.ACLAuthorizationPolicy())
 
