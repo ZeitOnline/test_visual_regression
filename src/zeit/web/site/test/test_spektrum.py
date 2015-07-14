@@ -169,9 +169,9 @@ def test_spektrum_teasers_should_produce_correct_tracking_slugs(
         index, img_slug, title_slug, testbrowser, testserver):
     browser = testbrowser(
         '%s/spektrum-kooperation?parquet-position=43' % testserver.url)
-    img = browser.cssselect('.teaser-parquet-small__media-link')[index]
+    img = browser.cssselect('.teaser-small__media-link')[index]
     assert img.get('id').startswith(img_slug)
-    title = browser.cssselect('.teaser-parquet-small__combined-link')[index]
+    title = browser.cssselect('.teaser-small__combined-link')[index]
     assert title.get('id').startswith(title_slug)
 
 

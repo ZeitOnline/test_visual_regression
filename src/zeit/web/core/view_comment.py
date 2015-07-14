@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import json
-import urlparse
 import logging
+import md5
+import urlparse
 
 import beaker.cache
 import lxml
@@ -14,6 +15,7 @@ import zeit.cms.interfaces
 
 import zeit.web.core
 import zeit.web.core.comments
+import zeit.web.core.security
 import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.site.view
@@ -34,6 +36,13 @@ class PostComment(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
                 explanation='Please log in in order to comment')
+
+        if request.session.get('user') and not (
+                request.session['user'].get('name')):
+            self.user_name = ''
+        else:
+            self.user_name = request.session['user']['name']
+
         self.new_cid = None
         self.request_method = 'POST'
         self.path = request.params.get('path') or path
@@ -55,11 +64,22 @@ class PostComment(zeit.web.core.view.Base):
         params = (request.GET, request.POST)[self.request_method == 'POST']
         comment = params.get('comment')
         action = params.get('action')
+        user_name = params.get('username')
 
         try:
             pid = int(params.get('pid'))
         except (TypeError, ValueError):
             pid = None
+
+        if not user_name and not self.user_name and action == 'comment':
+            raise pyramid.httpexceptions.HTTPBadRequest(
+                title='No user_name given',
+                explanation='A user name must be set in order to comment.')
+
+        if not self.user_name and user_name and not action == 'comment':
+            raise pyramid.httpexceptions.HTTPBadRequest(
+                title='A user_name could not be set',
+                explanation='A user name can only be set on action comment.')
 
         if not request.method == self.request_method:
             raise pyramid.httpexceptions.HTTPMethodNotAllowed(
@@ -107,6 +127,9 @@ class PostComment(zeit.web.core.view.Base):
             data['subject'] = '[empty]'
             data['comment'] = comment
             data['pid'] = pid
+            if not self.user_name:
+                data['user_name'] = user_name
+
         elif action == 'report' and pid:
             method = 'get'
             data['note'] = comment
@@ -140,6 +163,16 @@ class PostComment(zeit.web.core.view.Base):
 
             invalidate_comment_thread(unique_id)
 
+            if not self.user_name and action == 'comment':
+                if zeit.web.core.security.reload_user_info(self.request) and (
+                        'user' in request.session) and (
+                            request.session['user']['name']):
+                    self.user_name = request.session['user']['name']
+                else:
+                    raise pyramid.httpexceptions.HTTPInternalServerError(
+                        title='No user name found',
+                        explanation='Session could not be '
+                                    'reloaded with new user_name.')
             content = None
             error = None
             if response.content:
@@ -162,11 +195,16 @@ class PostComment(zeit.web.core.view.Base):
                     'new_cid': self.new_cid}
             }
 
+        elif response.status_code == 409:
+            error = json.loads(response.content)
+            raise pyramid.httpexceptions.HTTPBadRequest(
+                title='user_name could not be set',
+                explanation=error['error_message'])
         else:
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='Action {} could not be performed'.format(action),
                 explanation='Status code {} was send for action {} '
-                            'on resource {}.'.format(
+                            'on resource {}'.format(
                                 action,
                                 response.status_code,
                                 unique_id))
@@ -225,6 +263,7 @@ class PostComment(zeit.web.core.view.Base):
             'X-uniqueId': 'http://{}{}'.format(
                 self.request.host, urlparse.urlparse(unique_id)[2]),
             'Content-Type': 'text/xml'}
+
         response = requests.post(
             '{}/agatho/commentsection'.format(self.community_host),
             headers=headers,
@@ -271,25 +310,58 @@ class PostCommentAdmin(PostComment):
 @pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 class PostCommentResource(PostComment):
+
+    msg = {'Username exists or not valid': 'username_exists_or_invalid'}
+
     def __init__(self, context, request):
         super(PostCommentResource, self).__init__(context, request)
         self.path = urlparse.urlparse(self.context.uniqueId)[2][1:]
 
     def __call__(self):
         self.request.response.cache_expires(0)
-        result = self.post_comment()
+        result = {}
+        try:
+            result = self.post_comment()
+        except pyramid.httpexceptions.HTTPBadRequest, e:
+            result = {'error': self.msg.get(unicode(e))}
+            params = self.request.params
+            action = params.get('action')
+            if action == 'comment':
+                result['comment'] = params.get('comment')
+                result['pid'] = params.get('pid')
+                result['user_name'] = params.get('username')
+
+        location = zeit.web.core.template.append_get_params(
+            self.request,
+            action=None,
+            pid=None,
+            cid=self.new_cid)
+
+        location = zeit.web.core.template.remove_get_params(location, 'ajax')
+
+        if self.new_cid:
+            # remove page param in redirect
+            location = zeit.web.core.template.remove_get_params(
+                location, 'page')
+            location = '{}#cid-{}'.format(location, self.new_cid)
 
         if self.request.params.get('ajax') == 'true':
+            result['location'] = location
             return result
-        else:
+
+        # We might need to save data to our user session, because
+        # we want to perform a redirect after a POST, but we want to
+        # have the acutal data available, which might be to long for
+        # GET params.
+        if 'error' in result:
+            md5sum = md5.md5(json.dumps(result, sort_keys=True)).hexdigest()
+            self.request.session[md5sum] = result
             location = zeit.web.core.template.append_get_params(
-                self.request, action=None, pid=None, cid=self.new_cid)
-            if self.new_cid:
-                # remove page param in redirect
-                location = zeit.web.core.template.remove_get_params(
-                    location, 'page')
-                location = '{}#cid-{}'.format(location, self.new_cid)
-            return pyramid.httpexceptions.HTTPSeeOther(location=location)
+                self.request,
+                error=md5sum)
+            location = '{}#comment-form'.format(location)
+
+        return pyramid.httpexceptions.HTTPSeeOther(location=location)
 
 
 @pyramid.view.view_defaults(

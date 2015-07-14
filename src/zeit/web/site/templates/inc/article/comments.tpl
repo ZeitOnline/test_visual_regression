@@ -122,7 +122,11 @@
 	{% if view.request.GET.action == 'report' %}
 		<esi:include src="{{ view.content_url }}/report-form?pid={{ view.request.GET.pid }}" onerror="continue" />
 	{% else %}
-		<esi:include src="{{ view.content_url }}/comment-form?pid={{ view.request.GET.pid }}" onerror="continue" />
+		{% if view.request.GET.error %}
+		    <esi:include src="{{ view.content_url }}/comment-form?error={{ view.request.GET.error }}" onerror="continue" />
+		{% else %}
+		    <esi:include src="{{ view.content_url }}/comment-form?pid={{ view.request.GET.pid }}" onerror="continue" />
+		{% endif %}
 	{% endif %}
 
 	<script type="text/template" id="js-report-success-template">
