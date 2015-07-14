@@ -16,6 +16,23 @@
 	margin-bottom: remify(10px)
 	text-align: right
 	text-transform: uppercase
+
+// General display/hiding of adplace
+// according to the banner type mobile/desktop
+// might be, as unbemmish as it is be overruled
+// by special rules for certain asplaces
+.ad
+	&[data-banner-type='desktop']
+		display: none
+	&[data-banner-type='mobile']
+		display: block
++respond_min($break-mobile-ad-width)
+	.ad
+		&[data-banner-type='desktop']
+			display: block
+		&[data-banner-type='mobile']
+			display: none
+
 .ad
 	&__label
 		@extend %label
@@ -80,4 +97,3 @@
 		padding: remify(30px 0)
 		+respond_min($break-tablet-min)
 			display: block
-
