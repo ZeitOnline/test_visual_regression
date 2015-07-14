@@ -21,7 +21,8 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     mock_request = mock.Mock()
     mock_request.route_url.return_value = 'http://www.zeit.de/'
     mock_view.request = mock_request
-    html_str = tpl.render(view=mock_view)
+    mock_request.registry.settings.sso_activate = False
+    html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('.main_nav')) == 1, 'just one .main_nav should be present'
@@ -150,7 +151,8 @@ def test_nav_contains_essential_elements(application, jinja2_env):
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
     mock_view.request.host = 'www.zeit.de'
-    html_str = tpl.render(view=mock_view)
+    mock_request = mock.Mock()
+    html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect
 
     # Logo
@@ -188,7 +190,8 @@ def test_nav_should_contain_schema_org_markup(application, jinja2_env):
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
     mock_view.request.host = 'www.zeit.de'
-    html_str = tpl.render(view=mock_view)
+    mock_request = mock.Mock()
+    html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect
 
     site_nav_element = html(
