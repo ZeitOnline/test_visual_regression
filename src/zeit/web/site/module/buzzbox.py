@@ -26,6 +26,9 @@ class Buzzbox(zeit.web.site.module.Module, list):
         centerpage = zeit.content.cp.interfaces.ICenterPage(self.context)
         return zeit.web.core.centerpage.get_ressort_id(centerpage)
 
+    def __hash__(self):
+        return hash((self.layout, self.ressort))
+
 
 @zeit.web.register_module('mostread')
 class MostreadBuzzbox(Buzzbox):
