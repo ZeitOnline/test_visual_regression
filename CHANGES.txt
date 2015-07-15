@@ -8,7 +8,7 @@ Change log for zeit.web
 
 - ZON-1950: Webtrekk clicktracking bottom navigation
 
-- ZON- 1947: Webtrekk clicktracking content elements in main
+- ZON-1947: Webtrekk clicktracking content elements in main
 
 - ZON-1900: Fix nextread without image
 
