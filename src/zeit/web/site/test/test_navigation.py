@@ -140,7 +140,7 @@ def test_nav_classifieds_should_have_expected_links(application, jinja2_env):
 
     assert html('li > a[href^="http://jobs.zeit.de/"]')[0] is not None, (
         'No link for zeit jobs')
-    assert html('li > a[href*="zeit.de/angebote/partner]')[0] is not None, (
+    assert html('li > a[href*="zeit.de/angebote/partner"]')[0] is not None, (
         'Link for partnersuche not present')
 
 
