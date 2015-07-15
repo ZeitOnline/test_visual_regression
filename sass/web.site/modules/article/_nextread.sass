@@ -1,7 +1,8 @@
 .nextread
+	+font-smoothing()
 	padding: 40px 0
 	&--without-image
-		background: $zon_light_grey
+		background: $zon_dark_grey
 		margin: remify(40px) (-$page-padding) 0 (-$page-padding) // 40px topmargin until other elements are build
 		padding: 0
 	&__link
@@ -9,7 +10,7 @@
 		margin: 0 (-$page-padding)
 		padding: 0 $page-padding
 		&--without-image
-			padding: $page-padding remify(40px)
+			padding: remify(30px) remify(40px)
 	&__lead
 		font-size: remify(15px)
 		font-weight: 700
@@ -18,6 +19,8 @@
 		text-transform: uppercase
 		a:hover &
 			color: $zon-charcoal
+		&--without-image
+			margin-bottom: remify(30px)
 	&__media
 		margin: 0 (-$page-padding) remify(14px) (-$page-padding)
 		position: relative
@@ -26,6 +29,8 @@
 		width: 100%
 	&__kicker
 		@extend %teaser-kicker
+		&--without-image
+			margin-bottom: remify(8px)
 	&__title
 		@extend %teaser-title
 		font-size: remify(24px)
@@ -44,12 +49,12 @@
 			margin: 0
 			padding: 0
 			&--without-image
-				padding: $page-padding
+				padding: 0 $page-padding remify(30px)
 		&__lead
 			height: em(38px)  // intentional em usage
 			max-width: remify(660px)
 			margin: 0 auto em(-38px) auto // intentional em usage
-			padding-top: remify(20px)
+			padding-top: remify(30px)
 			position: relative
 			z-index: 1
 			a:link &,
@@ -57,7 +62,6 @@
 			a:hover &,
 			a:active &
 				color: $white
-				+font-smoothing()
 			&:after
 				border-bottom: 1px solid #fff
 				content: ""
@@ -67,7 +71,7 @@
 				width: remify(70px)
 			&--without-image
 				height: auto
-				margin: 0 auto remify(16px)
+				margin: 0 auto remify(30px)
 				position: static
 		&__media
 			margin: 0
@@ -104,7 +108,6 @@
 			a:hover & > div,
 			a:active & > div
 				color: $white
-				+font-smoothing()
 			&--without-image
 				bottom: auto
 				left: auto
@@ -118,26 +121,28 @@
 			line-height: 1.232
 			margin-bottom: remify(8px)
 			width: 72%
+		&__metadata
+			margin-top: remify(8px)
 
 // unbemish fallback link styling
-+respond-min($break-tablet-min)
-	a:link .nextread__lead--without-image,
-	a:visited .nextread__lead--without-image,
-	a:hover .nextread__lead--without-image,
-	a:active .nextread__lead--without-image
-		color: $black
-	a:link .nextread__inner-helper--without-image .nextread__kicker,
-	a:visited .nextread__inner-helper--without-image .nextread__kicker,
-	a:hover .nextread__inner-helper--without-image .nextread__kicker,
-	a:active .nextread__inner-helper--without-image .nextread__kicker
-		color: $zon-red
-	a:link .nextread__inner-helper--without-image .nextread__title,
-	a:visited .nextread__inner-helper--without-image .nextread__title,
-	a:hover .nextread__inner-helper--without-image .nextread__title,
-	a:active .nextread__inner-helper--without-image .nextread__title
-		color: $black
-	a:link .nextread__inner-helper--without-image .nextread__metadata,
-	a:visited .nextread__inner-helper--without-image .nextread__metadata,
-	a:hover .nextread__inner-helper--without-image .nextread__metadata,
-	a:active .nextread__inner-helper--without-image .nextread__metadata
-		color: $zon_grey
+// OPTIMIZE: why dont we simply use ONE selector?
+a:link .nextread__lead--without-image,
+a:visited .nextread__lead--without-image,
+a:hover .nextread__lead--without-image,
+a:active .nextread__lead--without-image
+	color: $zon_lighter_grey
+a:link .nextread__inner-helper--without-image .nextread__kicker--without-image,
+a:visited .nextread__inner-helper--without-image .nextread__kicker--without-image,
+a:hover .nextread__inner-helper--without-image .nextread__kicker--without-image,
+a:active .nextread__inner-helper--without-image .nextread__kicker--without-image
+	color: $zon_mid_grey
+a:link .nextread__inner-helper--without-image .nextread__title--without-image,
+a:visited .nextread__inner-helper--without-image .nextread__title--without-image,
+a:hover .nextread__inner-helper--without-image .nextread__title--without-image,
+a:active .nextread__inner-helper--without-image .nextread__title--without-image
+	color: #fff
+a:link .nextread__inner-helper--without-image .nextread__metadata--without-image,
+a:visited .nextread__inner-helper--without-image .nextread__metadata--without-image,
+a:hover .nextread__inner-helper--without-image .nextread__metadata--without-image,
+a:active .nextread__inner-helper--without-image .nextread__metadata--without-image
+	color: $zon_mid_grey
