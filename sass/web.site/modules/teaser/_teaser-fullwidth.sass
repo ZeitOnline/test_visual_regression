@@ -10,21 +10,7 @@
 		padding: 0
 		position: relative
 		+teaser-image-text-shadow
-		&:before
-			content: ''
-			min-height: 100%
-			min-width: 100%
-			position: absolute
-			top: 0
-			right: 0
-			bottom: 0
-			left: 0
-			z-index: 1
-			background-color: rgba(0, 0, 0, .1)
-			opacity: 0
-			+transition(opacity .2s ease-in-out)
-		&:hover:before
-			opacity: 1
+		+darken-on-hover
 	&__media
 		margin: 0 (-$page-padding) $petite
 		// this upsizes the fullwidth-image (ratio 2,35) appear to 16:9
