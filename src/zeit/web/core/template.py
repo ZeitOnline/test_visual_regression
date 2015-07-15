@@ -434,6 +434,14 @@ def topic_links(centerpage):
                   getattr(centerpage, 'uniqueId', '')))
 
 
+@zeit.web.register_filter
+def getIdFromWebtrekkString(str):
+    try:
+        return str.split('.').pop()
+    except AttributeError:
+        return
+
+
 @zeit.web.register_ctxfilter
 def macro(context, macro_name, *args, **kwargs):
     """Call a macro extracted from the context by its name."""

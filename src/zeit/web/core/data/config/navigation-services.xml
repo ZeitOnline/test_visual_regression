@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <navigation>
   <section>
-    <link href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="hp.global.topnav.links.epaper">E-Paper</link>
+    <link href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.fix.dach.text.epaper" id="topnav.services.1..epaper">E-Paper</link>
   </section>
   <section>
-    <link href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio" id="hp.global.topnav.links.audio">Audio</link>
+    <link href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zeitde.fix.dach.text.audio" id="topnav.services.2..audio">Audio</link>
   </section>
   <section>
-    <link href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps" id="hp.global.topnav.links.apps">Apps</link>
+    <link href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zeitde.fix.dach.text.apps" id="topnav.services.3..apps">Apps</link>
   </section>
   <section>
-    <link href="http://www.zeit.de/archiv" id="hp.global.topnav.links.archiv">Archiv</link>
+    <link href="http://www.zeit.de/archiv" id="topnav.services.4..archiv">Archiv</link>
   </section>
 </navigation>

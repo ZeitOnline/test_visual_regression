@@ -37,5 +37,8 @@ def test_make_navigation_should_register_navigation_items(app_settings):
     navigation_config = zeit.web.core.application.maybe_convert_egg_url(
         app_settings['vivi_zeit.web_navigation'])
     navigation = zeit.web.core.navigation.make_navigation(navigation_config)
-    assert navigation['kultur'].href == 'http://xml.zeit.de/kultur/index'
-    assert navigation['kultur']['kunst'].text == 'Kunst'
+    assert (navigation['topnav.mainnav.4..kultur'].href ==
+            'http://xml.zeit.de/kultur/index')
+    assert (navigation[
+            'topnav.mainnav.4..kultur']['topnav.mainnav.4.4.kunst'].text ==
+            'Kunst')
