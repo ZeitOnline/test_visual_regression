@@ -90,14 +90,14 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
                 _para = paragraphs[pp]
                 for i, block in enumerate(page.blocks):
                     if _para == block:
-                        # for multipage layout:
-                        # on every page, use another ad_tile
-                        # (as long as available)
-                        adtile_on_page = index + int(page.number)
-                        if adtile_on_page >= len(tile_list):
-                            break
-                        t = tile_list[adtile_on_page] - 1
-                        #t = tile_list[index] - 1
+                        # # for multipage layout:
+                        # # on every page, use another ad_tile
+                        # # (as long as available)
+                        # adtile_on_page = index + int(page.number)
+                        # if adtile_on_page >= len(tile_list):
+                        #     break
+                        # t = tile_list[adtile_on_page] - 1
+                        t = tile_list[index] - 1
                         page.blocks.insert(
                             i, zeit.web.core.banner.banner_list[t])
                         break
@@ -142,6 +142,9 @@ def pages_of_article(context):
     page = Page(first_division)
     pages.append(page)
     blocks = body.values()
+
+    #__import__("pdb").set_trace()
+
     # delete article image. it resides in its own property 'main_image_block'
     if zeit.content.article.edit.interfaces.IImage.providedBy(blocks[0]):
         del blocks[0]

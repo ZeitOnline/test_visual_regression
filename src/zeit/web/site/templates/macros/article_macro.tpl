@@ -118,7 +118,7 @@
 {%- endmacro %}
 
 {% macro place(item, view) -%}
-    <pre style="background:#afe;">adplace {{ item.tile }}</pre>
+    <pre style="background:#afe;">adplace {{ item.tile }} in {{ view.is_all_pages_view }} on page {{ view.current_page.page_nr }}, {{ view.page_nr }},  {{ view.current_page.number }}, {{ view.number }}</pre>
     {{ lama.adplace(item, view) }}
     {{ lama.adplace_middle_mobile(item) }}
 {%- endmacro %}
