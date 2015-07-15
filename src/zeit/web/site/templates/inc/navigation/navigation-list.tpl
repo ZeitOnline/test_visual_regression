@@ -1,7 +1,7 @@
 {%- set items = navigation -%}
 {%- set class = nav_class -%}
-<ul class="{{ class }}{% if class == 'primary-nav' %} primary-nav--js-no-overflow{% endif %}" 
-{% if class == 'primary-nav' %} 
+<ul class="{{ class }}{% if class == 'primary-nav' %} primary-nav--js-no-overflow{% endif %}"
+{% if class == 'primary-nav' %}
 itemscope="itemscope"
 itemtype="http://schema.org/SiteNavigationElement"
 {% endif %}>
@@ -31,7 +31,7 @@ itemtype="http://schema.org/SiteNavigationElement"
 	<li class="{{ class }}__item {{ class }}__item--featured">
 		<a class="{{ class }}__link" itemprop="url" href="http://{{
         view.request.host }}/zeit-magazin/index"
-        id="hp.global.topnav.centerpages.zeitmagazin"><span
+        data-id="topnav.mainnav.14..zeitmagazin"><span
         itemprop="name">ZEITmagazin</span></a>
 	</li>
 	{% endif %}
