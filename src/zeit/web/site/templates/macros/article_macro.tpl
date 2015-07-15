@@ -118,9 +118,23 @@
 {%- endmacro %}
 
 {% macro place(item, view) -%}
-    <pre style="background:#afe;">adplace {{ item.tile }} in {{ view.is_all_pages_view }} on page {{ view.current_page.page_nr }}, {{ view.page_nr }},  {{ view.current_page.number }}, {{ view.number }}</pre>
-    {{ lama.adplace(item, view) }}
-    {{ lama.adplace_middle_mobile(item) }}
+
+    {# On "komplettansicht", we do not want to have duplicate banner IDs.
+    That's why we set Banners 7+8+9 only on the first three pages and do
+    not display ads on other pages. #}
+    {% if view.is_all_pages_view %}
+        {% if item.on_page_nr == 1 %}
+            {{ lama.adplace(view.banner(7), view) }}
+        {% elif item.on_page_nr == 2 %}
+            {{ lama.adplace(view.banner(8), view) }}
+        {% elif item.on_page_nr == 3 %}
+            {{ lama.adplace(view.banner(9), view) }}
+        {% endif %}
+    {% else %}
+        {{ lama.adplace(item, view) }}
+        {{ lama.adplace_middle_mobile(item) }}
+    {% endif %}
+
 {%- endmacro %}
 
 {% macro contentadblock(item, view) -%}
