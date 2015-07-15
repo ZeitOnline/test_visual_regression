@@ -37,7 +37,7 @@
 		+respond-min($break-tablet-min)
 			background: none
 			font-size: remify(21px)
-			line-height: 1.0
+			line-height: 1
 			margin: 0
 			padding: 0
 		+respond-min($break-desktop-min)
@@ -50,11 +50,10 @@
 			top: remify(12px)
 			color: $grey
 			+respond-min($break-tablet-min)
-				content: ''
+				content: none
 		&--spektrum
 			+link
 				color: $white
-				text-decoration: none
 			+on-interaction
 				color: $white
 				text-decoration: none
@@ -70,14 +69,8 @@
 			width: 100%
 			+font-smoothing()
 			&:after
-				content: '\203A' // › = Single right-pointing angle quotation mark
-				position: absolute
-				right: remify($petite--px)
-				font-size: remify(32px)
 				top: remify(-2px)
 				color: $white
-				+respond-min($break-tablet-min)
-					content: ''
 
 	&__topic-links
 		display: none
