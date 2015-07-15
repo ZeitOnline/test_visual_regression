@@ -1,32 +1,32 @@
 <?xml version="1.0"?>
 <navigation>
   <section>
-    <link href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="hp.global.topnav.links.abo">Abo</link>
+    <link href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="topnav.classifieds.1..abo">Abo</link>
   </section>
   <section>
-    <link href="http://shop.zeit.de?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header" id="hp.global.topnav.links.shop">Shop</link>
+    <link href="http://shop.zeit.de?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header" id="topnav.classifieds.2..shop">Shop</link>
   </section>
   <section>
-    <link href="http://jobs.zeit.de/" id="hp.global.topnav.links.jobs">Jobs</link>
+    <link href="http://jobs.zeit.de/" id="topnav.classifieds.3..jobs">Jobs</link>
   </section>
   <section>
-    <link href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.global.topnav.links.partnersuche">Partnersuche</link>
+    <link href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="topnav.classifieds.4..partnersuche">Partnersuche</link>
   </section>
   <section>
-    <link href="#" id="hp.global.topnav.links.mehr">mehr</link>
+    <link href="#" id="topnav.classifieds.5..mehr">mehr</link>
     <sub_sections>
         <sub_section>
-            <link href="http://zeit.immowelt.de/" id="hp.global.topnav.links.immobilien" rel="nofollow">Immobilien</link>
+            <link href="http://zeit.immowelt.de/" id="topnav.classifieds.5.1.immobilien" rel="nofollow">Immobilien</link>
         </sub_section>
         <sub_section>
-            <link href="http://automarkt.zeit.de/" id="hp.global.topnav.links.automarkt">Automarkt</link>
+            <link href="http://automarkt.zeit.de/" id="topnav.classifieds.5.2.automarkt">Automarkt</link>
         </sub_section>
     </sub_sections>
   </section>
   <section>
-    <link href="http://zeit.immowelt.de/" id="hp.global.topnav.links.immobilien" rel="nofollow">Immobilien</link>
+    <link href="http://zeit.immowelt.de/" id="topnav.classifieds.5..immobilien" rel="nofollow">Immobilien</link>
   </section>
   <section>
-    <link href="http://automarkt.zeit.de/" id="hp.global.topnav.links.automarkt">Automarkt</link>
+    <link href="http://automarkt.zeit.de/" id="topnav.classifieds.6..automarkt">Automarkt</link>
   </section>
 </navigation>

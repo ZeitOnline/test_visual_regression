@@ -10,6 +10,12 @@ Change log for zeit.web
 1.41 (2015-07-14)
 -----------------
 
+- ZON-1949: Webtrekk clicktracking top navigation
+
+- ZON-1950: Webtrekk clicktracking bottom navigation
+
+- ZON-1947: Webtrekk clicktracking content elements in main
+
 - ZON-1900: Fix nextread without image
 
 - ZON-1822: Re-work teaser for blogs, series and columns
@@ -20,7 +26,7 @@ Change log for zeit.web
 
 - ZON-1788: Apply snazzy tuple stream byline to teasers and articles
 
-- ZON-1912: Bug: auf HP, CP und Artikeln wird als zweites MR tile_7 statt tile_8 ausgegeben
+- ZON-1912: fix doubled display tile_7 on centerpages
 
 - ZON-1919: Show comment section ads despite there are comments or not
 
