@@ -247,10 +247,13 @@ class LazyProxy(object):
         object.__setattr__(self, '__proxy__', context)
 
     def __getattr__(self, key):
-        try:
-            return self.__proxy__[key]
-        except KeyError:
-            return getattr(self.__origin__, key)
+        if not self.__exposed__:
+            try:
+                return self.__proxy__[key]
+            except KeyError:
+                log.debug("ProxyExposed: '{}' has no attribute '{}'".format(
+                    self, key))
+        return getattr(self.__origin__, key)
 
     def __setattr__(self, key, value):
         if self.__exposed__:
@@ -283,6 +286,4 @@ class LazyProxy(object):
         return dir(self.__origin__)
 
     def __conform__(self, iface):
-        context = self.__proxy__
-        istack = self.__istack__
-        return LazyProxy(context, istack + [iface])
+        return LazyProxy(self.__proxy__, self.__istack__ + [iface])
