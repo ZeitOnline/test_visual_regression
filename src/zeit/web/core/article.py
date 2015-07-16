@@ -140,8 +140,6 @@ def pages_of_article(context):
     pages.append(page)
     blocks = body.values()
 
-    #__import__("pdb").set_trace()
-
     # delete article image. it resides in its own property 'main_image_block'
     if zeit.content.article.edit.interfaces.IImage.providedBy(blocks[0]):
         del blocks[0]
