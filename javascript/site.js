@@ -13,12 +13,14 @@ require([ 'vendor/require', 'config' ], function() {});
 // require anonymous AMD modules here
 require([
     'web.core/images',
+    'web.core/clicktracking',
     'web.site/video/videoStage',
     'web.site/articledate',
     'web.site/articlesharing',
     'web.site/comments'
-], function( images, videoStage, articledate, articlesharing, comments ) {
+], function( images, clicktracking, videoStage, articledate, articlesharing, comments ) {
     images.init();
+    clicktracking.init();
     videoStage.init();
     articledate.init();
     articlesharing.init();
