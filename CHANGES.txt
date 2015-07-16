@@ -4,6 +4,10 @@ Change log for zeit.web
 1.42 (unreleased)
 -----------------
 
+- ZON-1917: Hidden Ads should not request AdServer
+
+- ZON-1917: hide mobile/desktop ads per breakpoint
+
 - MAINT: Remove font TabletGothicNarrow
 
 
