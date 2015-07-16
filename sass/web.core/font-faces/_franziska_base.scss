@@ -1,0 +1,8 @@
+// Regular
+@include font-face("FranziskaWebPro", font-files("franziska/FranziskaWebPro.woff"), "franziska/FranziskaWebPro.eot", normal, normal);
+
+// Demibold
+@include font-face("FranziskaWebPro", font-files("franziska/FranziskaWebPro-Demibold.woff"), "franziska/FranziskaWebPro-Demibold.eot", bold, normal);
+
+// Italic
+@include font-face("FranziskaWebPro", font-files("franziska/FranziskaWebPro-Italic.woff"), "franziska/FranziskaWebPro-Italic.eot", normal, italic);

@@ -11,18 +11,19 @@
 		padding: 0 $page-padding
 		&--without-image
 			padding: remify(30px) remify(40px)
+		+on-interaction
+			color: $zon-charcoal
 	&__lead
 		font-size: remify(15px)
 		font-weight: 700
 		letter-spacing: $zon-letter-spacing-m
 		margin-bottom: remify(14px)
 		text-transform: uppercase
-		a:hover &
-			color: $zon-charcoal
 		&--without-image
 			margin-bottom: remify(30px)
 	&__media
 		margin: 0 (-$page-padding) remify(14px) (-$page-padding)
+		position: relative
 	&__media-item
 		max-width: auto
 		width: 100%
@@ -45,6 +46,13 @@
 		margin: remify(40px) (-$page-padding) 0 (-$page-padding) // 40px topmargin until other elements are build
 		padding: 0
 		+teaser-image-text-shadow
+		&--with-image
+			+font-smoothing()
+			color: $white
+			.nextread__lead,
+			.nextread__kicker,
+			.nextread__title
+				color: $white
 		&__link
 			margin: 0
 			padding: 0
@@ -57,11 +65,6 @@
 			padding-top: remify(30px)
 			position: relative
 			z-index: 1
-			a:link &,
-			a:visited &,
-			a:hover &,
-			a:active &
-				color: $white
 			&:after
 				border-bottom: 1px solid #fff
 				content: ""
@@ -91,14 +94,7 @@
 			left: 0
 			position: absolute
 			width: 100%
-			a:link & > div,
-			a:visited & > div,
-			a:hover & > div,
-			a:active & > div
-				color: $white
 			&--without-image
-				bottom: auto
-				left: auto
 				position: static
 		&__kicker
 			font-size: $font-s
@@ -111,26 +107,3 @@
 			width: 72%
 		&__metadata
 			margin-top: remify(8px)
-
-// unbemish fallback link styling
-// OPTIMIZE: why dont we simply use ONE selector?
-a:link .nextread__lead--without-image,
-a:visited .nextread__lead--without-image,
-a:hover .nextread__lead--without-image,
-a:active .nextread__lead--without-image
-	color: $zon_lighter_grey
-a:link .nextread__inner-helper--without-image .nextread__kicker--without-image,
-a:visited .nextread__inner-helper--without-image .nextread__kicker--without-image,
-a:hover .nextread__inner-helper--without-image .nextread__kicker--without-image,
-a:active .nextread__inner-helper--without-image .nextread__kicker--without-image
-	color: $zon_mid_grey
-a:link .nextread__inner-helper--without-image .nextread__title--without-image,
-a:visited .nextread__inner-helper--without-image .nextread__title--without-image,
-a:hover .nextread__inner-helper--without-image .nextread__title--without-image,
-a:active .nextread__inner-helper--without-image .nextread__title--without-image
-	color: #fff
-a:link .nextread__inner-helper--without-image .nextread__metadata--without-image,
-a:visited .nextread__inner-helper--without-image .nextread__metadata--without-image,
-a:hover .nextread__inner-helper--without-image .nextread__metadata--without-image,
-a:active .nextread__inner-helper--without-image .nextread__metadata--without-image
-	color: $zon_mid_grey

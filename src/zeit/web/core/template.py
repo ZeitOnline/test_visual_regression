@@ -157,13 +157,6 @@ def get_layout(block, request=None):
         if layout:
             return layout
 
-    def allowed(layout_id):
-        try:
-            xp = '/layouts/layout[@id="{}"]/@areas'.format(layout_id)
-            return block.__parent__.kind in source.xpath(xp)[0].split(' ')
-        except (AttributeError, IndexError):
-            return
-
     try:
         layout_id = block.layout.id
     except (AttributeError, TypeError):
@@ -178,8 +171,6 @@ def get_layout(block, request=None):
             layout = 'hide'
     else:
         layout = layout_id
-        source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS.factory._get_tree()
-        cp = zeit.content.cp.interfaces.ICenterPage(block, None)
 
         if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
             log.debug('Broken ref at {}'.format(teaser.uniqueId))
@@ -190,15 +181,6 @@ def get_layout(block, request=None):
                 layout = layout
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
-        elif getattr(teaser, 'serie', None) and not (
-                zeit.magazin.interfaces.IZMOContent.providedBy(cp)):
-            if teaser.serie.column and get_column_image(teaser) and allowed(
-                    'zon-column'):
-                layout = 'zon-column'
-            elif allowed('zon-series'):
-                layout = 'zon-series'
-        elif getattr(teaser, 'blog', None) and allowed('zon-blog'):
-            layout = 'zon-blog'
 
     layout = zope.component.getUtility(
         zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
@@ -207,6 +189,23 @@ def get_layout(block, request=None):
         request.teaser_layout[key] = layout
 
     return layout
+
+
+@zeit.web.register_filter
+def get_journalistic_format(block):
+    # TODO: do we need the allowed() function for journ. formats here, too?
+    try:
+        teaser = list(block)[0]
+    except (IndexError, TypeError):
+        return
+
+    if getattr(teaser, 'serie', None):
+        if teaser.serie.column:
+            return 'column'
+        else:
+            return 'series'
+    elif getattr(teaser, 'blog', None):
+        return 'blog'
 
 
 @zeit.web.register_filter
@@ -433,6 +432,14 @@ def topic_links(centerpage):
     except TypeError:
         log.debug('object %s could not be adapted' % (
                   getattr(centerpage, 'uniqueId', '')))
+
+
+@zeit.web.register_filter
+def getIdFromWebtrekkString(str):
+    try:
+        return str.split('.').pop()
+    except AttributeError:
+        return
 
 
 @zeit.web.register_ctxfilter

@@ -33,19 +33,35 @@
 			padding: 0 $twice $twice $twice
 			width: em(510px) + (2 * $twice)
 			z-index: 2
+			&--blog
+				top: 0
 		+respond-min($break-desktop-min)
 			padding: 0 0 $medium $medium
 			width: em(640px)
 	&__heading
 		@extend %teaser-heading
-	&__kicker
-		@extend %teaser-kicker
+		margin-bottom: remify(4px)
+
+	&__series-label
+		@extend %teaser-series-label
 		+respond-min($break-tablet-min)
 			color: $white
-			font-size: $font-s
-			letter-spacing: 0.12em
+
+	&__kicker
+		@extend %teaser-kicker
+		margin-bottom: remify(10px)
+		&--blog
+			@extend %teaser-kicker--blog
+			color: $zon_dark_grey
+			font-family: $font-franziska
+			font-style: italic
+			font-weight: normal
+		+respond-min($break-tablet-min)
+			color: $white
+			font-size: remify(14px)
 			margin-bottom: remify(6px)
 			+font-smoothing()
+
 	&__title
 		@extend %teaser-title
 		font-size: em(28px)
@@ -60,8 +76,11 @@
 			line-height: 1.232
 	&__combined-link
 		@extend %teaser-combined-link
-	// &__container
-	// not in use
+	&__container
+		+respond-min($break-tablet-min)
+			&--blog
+				bottom: remify(36px)
+				position: absolute
 	&__text
 		@extend %teaser-text
 		+respond-min($break-tablet-min)

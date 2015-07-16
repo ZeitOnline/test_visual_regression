@@ -1,16 +1,17 @@
 {%- set items = navigation -%}
 {%- set class = nav_class -%}
-<ul class="{{ class }}{% if class == 'primary-nav' %} primary-nav--js-no-overflow{% endif %}" 
-{% if class == 'primary-nav' %} 
+<ul class="{{ class }}{% if class == 'primary-nav' %} primary-nav--js-no-overflow{% endif %}"
+{% if class == 'primary-nav' %}
 itemscope="itemscope"
 itemtype="http://schema.org/SiteNavigationElement"
 {% endif %}>
 	{% for i in items -%}
 	{% set section = items[i] %}
-	<li class="{{ class }}__item" data-id="{{ section.item_id }}"{% if section.has_children() %} data-feature="dropdown"{% endif %}>
-		<a class="{{ class }}__link{% if section.item_id in (view.ressort,
+    {% set id = section.item_id | getIdFromWebtrekkString %}
+	<li class="{{ class }}__item" data-id="{{ id if id else section.item_id }}" {% if section.has_children() %} data-feature="dropdown"{% endif %}>
+		<a class="{{ class }}__link{% if id in (view.ressort,
         view.sub_ressort) %} {{ class }}__link--current{% endif %}" href="{{
-        section.href | create_url }}" itemprop="url"><span itemprop="name">{{
+        section.href | create_url }}" itemprop="url" data-id="{{ section.item_id }}"><span itemprop="name">{{
         section.text }}</span></a>
 		{% if section.has_children() -%}
 			{%- set navigation = section -%}
@@ -30,7 +31,7 @@ itemtype="http://schema.org/SiteNavigationElement"
 	<li class="{{ class }}__item {{ class }}__item--featured">
 		<a class="{{ class }}__link" itemprop="url" href="http://{{
         view.request.host }}/zeit-magazin/index"
-        id="hp.global.topnav.centerpages.zeitmagazin"><span
+        data-id="topnav.mainnav.14..zeitmagazin"><span
         itemprop="name">ZEITmagazin</span></a>
 	</li>
 	{% endif %}
