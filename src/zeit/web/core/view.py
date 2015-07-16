@@ -213,13 +213,15 @@ class Base(object):
 
     @zeit.web.reify
     def adcontroller_values(self):
-        """Fill the adcontroller js object with actual values"""
+        """Fill the adcontroller js object with actual values.
+        Output in level strings only allows latin characters, numbers and
+        underscore."""
         levels = self.banner_channel.split('/')
         # remove type from level3
         levels[1] = '' if levels[1] == self.type else levels[1]
         return [('$handle', self.adcontroller_handle),
-                ('level2', levels[0]),
-                ('level3', levels[1]),
+                ('level2', "".join(re.findall(r"[A-Za-z0-9_]*", levels[0]))),
+                ('level3', "".join(re.findall(r"[A-Za-z0-9_]*", levels[1]))),
                 ('level4', ''),
                 ('$autoSizeFrames', True),
                 ('keywords', ','.join(self.adwords)),
