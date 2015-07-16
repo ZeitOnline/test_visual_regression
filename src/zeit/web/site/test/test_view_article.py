@@ -448,4 +448,3 @@ def test_tiles7_9_are_rendered_on_articles_with_multiple_pages_on_onepage_view(
     browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
     assert len(browser.cssselect('#iqadtile7')) == 1
     assert len(browser.cssselect('#iqadtile9')) == 1
-
