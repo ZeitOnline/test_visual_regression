@@ -580,9 +580,9 @@ def test_zmo_link_exists_and_is_clickable(selenium_driver, testserver):
     assert zmo_link.get_attribute('href') == '{}/zeit-magazin/index'.format(
         testserver.url
     ), 'zmo link is not set correctly'
-    assert (zmo_link.get_attribute('id') ==
-            'hp.global.topnav.centerpages.zeitmagazin'), (
-                'zmo tracking is not set correctly')
+    assert (zmo_link.get_attribute('data-id') ==
+            'topnav.mainnav.14..zeitmagazin'), (
+        'zmo tracking is not set correctly')
 
     zmo_link.click()
 
