@@ -5,6 +5,7 @@ Change log for zeit.web
 -----------------
 
 - MAINT: Remove font TabletGothicNarrow
+- ZON-1914: fix multiple tile_7 on full view of multi-page-articles
 
 
 1.41 (2015-07-14)
