@@ -126,8 +126,6 @@
         {% if item.on_page_nr == 1 %}
             {{ lama.adplace(view.banner(7), view) }}
         {% elif item.on_page_nr == 2 %}
-            {{ lama.adplace(view.banner(8), view) }}
-        {% elif item.on_page_nr == 3 %}
             {{ lama.adplace(view.banner(9), view) }}
         {% endif %}
     {% else %}
