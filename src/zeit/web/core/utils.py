@@ -259,7 +259,7 @@ class LazyProxy(object):
         if self.__exposed__:
             setattr(self.__origin__, key, value)
         else:
-            # TODO: Properly defer setter until origin is exposed.
+            # TODO: Properly defer attribute setter until origin is exposed.
             self.__proxy__[key] = value
 
     def __delattr__(self, key):
@@ -273,6 +273,29 @@ class LazyProxy(object):
         return '<{}.{} proxy at {}>'.format(
             cls.__module__, cls.__name__, hex(id(self)))
 
+    def __getitem__(self, key):
+        if not self.__exposed__:
+            try:
+                return self.__proxy__[key]
+            except KeyError:
+                log.debug("ProxyExposed: '{}' has no key '{}'".format(
+                    self, key))
+        return self.__origin__[key]
+
+    def __setitem__(self, key, value):
+        if self.__exposed__:
+            self.__origin__[key] = value
+        else:
+            # TODO: Properly defer item setter until origin is exposed.
+            self.__proxy__[key] = value
+
+    def __delitem__(self, key):
+        raise NotImplementedError()
+
+    # XXX: Would have been a lot sleeker to generically produce the remaining
+    #      magic methods. Not gonna happen though, see 3.4.12.
+    #      https://docs.python.org/2/reference/datamodel.html
+
     def __hash__(self):
         return hash(self.__origin__)
 
@@ -281,6 +304,9 @@ class LazyProxy(object):
 
     def __iter__(self):
         return iter(self.__origin__)
+
+    def __contains__(self, item):
+        return item in self.__origin__
 
     def __dir__(self):
         return dir(self.__origin__)

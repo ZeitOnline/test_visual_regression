@@ -523,8 +523,7 @@ def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
         'Search bar is displayed')
 
 
-def test_primary_nav_should_resize_to_fit(
-        selenium_driver, testserver):
+def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
 
     driver = selenium_driver
     actions = selenium.webdriver.ActionChains(driver)
@@ -577,16 +576,13 @@ def test_zmo_link_exists_and_is_clickable(selenium_driver, testserver):
         'primary-nav__link')
 
     assert zmo_link.get_attribute('href') == '{}/zeit-magazin/index'.format(
-        testserver.url
-    ), 'zmo link is not set correctly'
-    assert (zmo_link.get_attribute('id') ==
-            'hp.global.topnav.centerpages.zeitmagazin'), (
-                'zmo tracking is not set correctly')
+        testserver.url)
+    assert zmo_link.get_attribute('id') == (
+        'hp.global.topnav.centerpages.zeitmagazin')
 
     zmo_link.click()
 
-    assert driver.current_url == '{}/zeit-magazin/index'.format(
-        testserver.url), 'zmo hp wasnt called correctly'
+    assert driver.current_url == '{}/zeit-magazin/index'.format(testserver.url)
 
 
 def test_nav_hp_contains_relative_date(jinja2_env):

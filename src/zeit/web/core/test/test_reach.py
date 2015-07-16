@@ -30,28 +30,28 @@ def test_data_for_twitter_should_be_fetched(application):
     reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
     data = reach.get_social(facet='twitter', section='zeit-magazin')
     assert len(data) == 3
-    assert all(['uniqueId' in a for a in data])
+    assert all([hasattr(a, 'uniqueId') for a in data])
 
 
 def test_data_for_facebook_should_be_fetched(application):
     reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
     data = reach.get_social(facet='facebook', section='zeit-magazin')
     assert len(data) == 3
-    assert all(['uniqueId' in a for a in data])
+    assert all([hasattr(a, 'uniqueId') for a in data])
 
 
 def test_data_for_comments_should_be_fetched(application):
     reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
     data = reach.get_comments(section='zeit-magazin')
     assert len(data) == 3
-    assert all(['uniqueId' in a for a in data])
+    assert all([hasattr(a, 'uniqueId') for a in data])
 
 
 def test_data_for_mostread_should_be_fetched(application):
     reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
     data = reach.get_views(section='zeit-magazin')
     assert len(data) == 3
-    assert all(['uniqueId' in a for a in data])
+    assert all([hasattr(a, 'uniqueId') for a in data])
 
 
 def test_counts_per_url_are_fetchable(application):

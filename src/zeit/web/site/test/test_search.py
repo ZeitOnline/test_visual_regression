@@ -222,5 +222,5 @@ def test_mock_solr_should_produce_usable_results(application):
         raise AssertionError(err.message)
 
     assert len(conn.search(None, 3)) == 3
-
-    assert set(conn.search(None, 1)[1]) == {'uniqueId', 'date_last_published'}
+    assert 'uniqueId' in list(conn.search(None, 1))[0]
+    assert 'date_last_published' in list(conn.search(None, 1))[0]
