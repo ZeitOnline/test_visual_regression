@@ -576,13 +576,16 @@ def test_zmo_link_exists_and_is_clickable(selenium_driver, testserver):
         'primary-nav__link')
 
     assert zmo_link.get_attribute('href') == '{}/zeit-magazin/index'.format(
-        testserver.url)
-    assert zmo_link.get_attribute('id') == (
-        'hp.global.topnav.centerpages.zeitmagazin')
+        testserver.url
+    ), 'zmo link is not set correctly'
+    assert (zmo_link.get_attribute('data-id') ==
+            'topnav.mainnav.14..zeitmagazin'), (
+        'zmo tracking is not set correctly')
 
     zmo_link.click()
 
-    assert driver.current_url == '{}/zeit-magazin/index'.format(testserver.url)
+    assert driver.current_url == '{}/zeit-magazin/index'.format(
+        testserver.url), 'zmo hp wasnt called correctly'
 
 
 def test_nav_hp_contains_relative_date(jinja2_env):
