@@ -1,8 +1,6 @@
 .page
 	&__content
 		background: $color-page-bg // we need background here, if page is colored
+		margin: 0 auto
 		min-width: em(300px)
-		max-width: $break-tablet-min
-		+respond-min($break-desktop-min)
-			margin: 0 auto
-			max-width: $break-desktop-min
+		max-width: $break-desktop-min
