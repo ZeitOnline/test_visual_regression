@@ -17,11 +17,11 @@ def tpm(me):
     return True
 
 
-def test_banner_toggles_should_return_value(application):
+def test_banner_toggles_viewport_zoom(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/zeitonline')
     view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
-    assert view.banner_toggles('testing_me') is False
+    assert view.banner_toggles('viewport_zoom') == 'tablet'
 
 
 def test_adcontroller_head_code_is_present(

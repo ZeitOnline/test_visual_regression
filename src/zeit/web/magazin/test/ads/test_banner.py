@@ -47,11 +47,10 @@ def test_banner_view_should_return_None_if_tile_is_not_present(application):
     assert article_view.banner(999) is None
 
 
-def test_banner_toggles_should_return_value(application):
+def test_banner_toggles_viewport_zoom(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    # ZMO always true
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.banner_toggles('testing_me')
+    view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert view.banner_toggles('viewport_zoom') == 'tablet-landscape'
 
 
 def test_banner_should_fallback_on_not_registered_banner_types(
