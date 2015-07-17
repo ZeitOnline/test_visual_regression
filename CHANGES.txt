@@ -4,6 +4,8 @@ Change log for zeit.web
 1.42 (unreleased)
 -----------------
 
+- MAINT: Add invisible page shadow
+
 - MAINT: Remove font TabletGothicNarrow
 
 - ZON-1914: fix multiple tile_7 on full view of multi-page-articles
