@@ -140,12 +140,6 @@
             {% endprofile %}
         </div>
     </div>
-    <script>
-        window.ZMO.breakpoint.refreshValue();
-        if ( window.addEventListener ) {
-            window.addEventListener( 'resize', function() { window.ZMO.breakpoint.refreshValue(); }, false );
-        }
-    </script>
     {% include "zeit.web.core:templates/inc/ads/%s/finalize.html" % view.ad_delivery_type ignore missing %}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
     {% block meetrics %}
