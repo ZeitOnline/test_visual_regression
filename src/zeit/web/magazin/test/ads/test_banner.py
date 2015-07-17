@@ -328,6 +328,7 @@ def test_inject_banner_code_should_be_inserted_between_paragraphs(monkeypatch):
 
     monkeypatch.setattr(zeit.web.core.banner, "banner_list", banner_list)
     page = mock.Mock()
+    setattr(page, "number", 1)
     p = zeit.web.core.block.Paragraph
     # we need at least three paragraphs to insert AFTER 1st (before 2nd)
     page.blocks = [p(mock.Mock()), p(mock.Mock()), p(mock.Mock())]

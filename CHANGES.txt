@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - MAINT: Remove font TabletGothicNarrow
 
+- ZON-1914: fix multiple tile_7 on full view of multi-page-articles
+
 - ZON-1810: strip special characters from level-strings in adcontroller
 
 

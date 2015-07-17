@@ -1,5 +1,6 @@
 import grokcore.component
 import zope.interface
+import copy
 
 import zeit.cms.repository.interfaces
 import zeit.content.article
@@ -91,8 +92,11 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
                 for i, block in enumerate(page.blocks):
                     if _para == block:
                         t = tile_list[index] - 1
-                        page.blocks.insert(
-                            i, zeit.web.core.banner.banner_list[t])
+                        # save the (virtual) page nr on (copies) of the banner,
+                        # to be able to handle banner display inside the macro.
+                        banner = copy.copy(zeit.web.core.banner.banner_list[t])
+                        setattr(banner, 'on_page_nr', int(page.number+1))
+                        page.blocks.insert(i, banner)
                         break
             except IndexError:
                 pass
