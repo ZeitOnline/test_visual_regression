@@ -429,3 +429,22 @@ def test_breaking_news_banner_shows_date_first_released(jinja2_env):
     html = lxml.html.fromstring(html_str)
     time = html.cssselect('.breaking-news-banner__time')
     assert time[0].text == '11:55 Uhr'
+
+
+def test_tile7_is_rendered_on_articles_with_multiple_pages(
+        testbrowser, testserver):
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect('#iqadtile7')) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit/seite-2')
+    assert len(browser.cssselect('#iqadtile7')) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit/seite-5')
+    assert len(browser.cssselect('#iqadtile7')) == 1
+
+
+def test_tiles7_9_are_rendered_on_articles_with_multiple_pages_on_onepage_view(
+        testbrowser, testserver):
+    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    assert len(browser.cssselect('#iqadtile7')) == 1
+    assert len(browser.cssselect('#iqadtile9')) == 1
