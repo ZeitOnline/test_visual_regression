@@ -328,7 +328,7 @@ def test_small_teaser_should_have_responsive_layout(
 
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/index' % testserver.url)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
 
     width_script = 'return $(".teaser-small__media").first().width()'
     width = driver.execute_script(width_script)
