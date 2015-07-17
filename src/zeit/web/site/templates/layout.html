@@ -81,7 +81,7 @@
     {% if view.enable_third_party_modules and view.enable_tracking %}
         {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/ads/%s/iqd_nuggad.html" % view.ad_delivery_type ignore missing %}
-        {% include "zeit.web.core:templates/inc/ads/%s/iqd_krux.html" % view.ad_delivery_type ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/%s/iqd_yieldlab.html" % view.ad_delivery_type ignore missing %}
         {% include "zeit.web.core:templates/inc/ads/%s/static_oop_tag.html" % view.ad_delivery_type ignore missing %}
     {% endif %}
     {% block skiplink %}
