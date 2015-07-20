@@ -1,101 +1,57 @@
 .nextread
 	+font-smoothing()
-	padding: 40px 0
-	&--without-image
-		background: $zon_dark_grey
-		margin: remify(40px) (-$page-padding) 0 (-$page-padding) // 40px topmargin until other elements are build
-		padding: 0
+	background: $zon_dark_grey
+	margin: remify(40px) (-$page-padding) 0 (-$page-padding) // 40px topmargin until other elements are build
+	padding: 0
 	&__link
 		display: block
+		// padding instead of margin to make the whole box clickable
 		margin: 0 (-$page-padding)
-		padding: 0 $page-padding
-		&--without-image
-			padding: remify(30px) remify(40px)
-		+on-interaction
-			color: $zon-charcoal
+		padding: remify(30px) remify(40px)
+		&--with-image
+			padding: 0 remify(40px)
 	&__lead
+		color: $zon_lighter_grey
 		font-size: remify(15px)
 		font-weight: 700
 		letter-spacing: $zon-letter-spacing-m
-		margin-bottom: remify(14px)
 		text-transform: uppercase
-		&--without-image
-			margin-bottom: remify(30px)
+		margin-bottom: remify(30px)
+		&--with-image
+			margin-bottom: remify(14px)
+	&__kicker
+		@extend %teaser-kicker
+		color: $zon_mid_grey
+		margin-bottom: remify(3px)
+		&--with-image
+			color: $color-text-highlighted
+	&__title
+		@extend %teaser-title
+		color: $white
+		font-size: remify(24px)
+		line-height: 1.12
+	&__metadata
+		@extend %teaser-metadata
+		color: $zon_mid_grey
+		margin-top: remify(5px)
+	&__datetime
+		@extend %teaser-datetime
+
+	&--with-image
+		background-color: transparent
+		.nextread__lead,
+		.nextread__title,
+		.nextread__metadata
+			color: $zon-charcoal
 	&__media
 		margin: 0 (-$page-padding) remify(14px) (-$page-padding)
 		position: relative
 	&__media-item
 		max-width: auto
 		width: 100%
-	&__kicker
-		@extend %teaser-kicker
-		&--without-image
-			margin-bottom: remify(8px)
-	&__title
-		@extend %teaser-title
-		font-size: remify(24px)
-		line-height: 1.12
-	&__metadata
-		@extend %teaser-metadata
-		margin-top: remify(5px)
-	&__datetime
-		@extend %teaser-datetime
 
 +respond-min($break-tablet-min)
 	.nextread
-		margin: remify(40px) (-$page-padding) 0 (-$page-padding) // 40px topmargin until other elements are build
-		padding: 0
-		+teaser-image-text-shadow
-		&--with-image
-			+font-smoothing()
-			color: $white
-			.nextread__lead,
-			.nextread__kicker,
-			.nextread__title
-				color: $white
-		&__link
-			margin: 0
-			padding: 0
-			&--without-image
-				padding: 0 $page-padding remify(30px)
-		&__lead
-			height: em(38px)  // intentional em usage
-			max-width: remify(660px)
-			margin: 0 auto em(-38px) auto // intentional em usage
-			padding-top: remify(30px)
-			position: relative
-			z-index: 1
-			&:after
-				border-bottom: 1px solid #fff
-				content: ""
-				display: block
-				height: 8px
-				opacity: 0.7
-				width: remify(70px)
-			&--without-image
-				height: auto
-				margin: 0 auto remify(30px)
-				position: static
-		&__media
-			margin: 0
-			+darken-on-hover
-			+teaser-image-dark-overlay($angle: 0deg)
-		&__helper // absolute positioning in a container that has variing width and margin auto: a mess
-			height: em(250px) // intentional em usage
-			max-width: remify(660px)
-			margin: em(-250px) auto 0 auto  // intentional em usage
-			position: relative
-			&--without-image
-				height: auto
-				margin: 0 auto
-				position: static
-		&__inner-helper // ach… used flexbox to align the content but couldn't find a replacement for IE < 11, so more div-tery :(
-			bottom: remify(60px)
-			left: 0
-			position: absolute
-			width: 100%
-			&--without-image
-				position: static
 		&__kicker
 			font-size: $font-s
 			letter-spacing: 0.12em
@@ -107,3 +63,49 @@
 			width: 72%
 		&__metadata
 			margin-top: remify(8px)
+		&__lead
+			max-width: remify(660px)
+			margin: 0 auto remify(30px)
+			&:after
+				border-bottom: 1px solid #fff
+				content: ""
+				display: block
+				height: 8px
+				opacity: 0.7
+				width: remify(70px)
+		&__helper
+			max-width: remify(660px)
+			margin: 0 auto
+
+		&__media
+			+darken-on-hover
+			+teaser-image-dark-overlay($angle: 0deg)
+			margin: 0
+		&__lead--with-image
+			height: em(38px)  // intentional em usage
+			max-width: remify(660px)
+			margin: 0 auto em(-38px) auto // intentional em usage
+			padding-top: remify(30px)
+			position: relative
+			z-index: 1
+		&__helper--with-image // absolute positioning in a container that has variing width and margin auto: a mess
+			height: em(250px) // intentional em usage
+			max-width: remify(660px)
+			margin: em(-250px) auto 0 auto  // intentional em usage
+			position: relative
+		&__inner-helper--with-image // ach… used flexbox to align the content but couldn't find a replacement for IE < 11, so more div-tery :(
+			bottom: remify(60px)
+			left: 0
+			position: absolute
+			width: 100%
+		&--with-image
+			+font-smoothing()
+			+teaser-image-text-shadow
+			background-color: initial
+			color: $white
+			margin-bottom: remify(14px)
+			.nextread__lead,
+			.nextread__kicker,
+			.nextread__title,
+			.nextread__metadata
+				color: $white
