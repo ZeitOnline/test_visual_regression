@@ -4,6 +4,8 @@ Change log for zeit.web
 1.42 (unreleased)
 -----------------
 
+- ZON-1814: Configure viewport zoom for tablets
+
 - MAINT: Add invisible page shadow
 
 - MAINT: Remove font TabletGothicNarrow
