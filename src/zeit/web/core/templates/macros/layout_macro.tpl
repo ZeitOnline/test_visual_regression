@@ -90,14 +90,18 @@
     {{ caller() }}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
     {% set operator = '<=' if mobile else '>' %}
-    <div id="iqadtile{{ banner.tile }}{{'---mobile' if mobile else '---desktop'}}" class="ad ad--{{ banner.name }} ad--{{ banner.name }}-on-{{ pagetype }}" data-banner-type="{{ 'mobile' if mobile else 'desktop' }}">
-        {% if banner.label -%}
-        <div class="ad__label ad__label--{{ banner.name }}">{{ banner.label }}</div>
-        {% endif -%}
-        <script type="text/javascript">
+    {% set type = 'mobile' if mobile else 'desktop' %}
+    {% set scriptname = 'ad-%s-%s' | format(type, banner.tile) %}
+    <div>
+        <script type="text/javascript" id="{{ scriptname }}">
             if (typeof AdController !== 'undefined' && ZMO.clientWidth {{ operator | safe }} ZMO.mobileWidth) {
-                document.getElementById("iqadtile{{ banner.tile }}{{'---mobile' if mobile else '---desktop'}}").id="iqadtile{{ banner.tile }}";
+                var elem = document.createElement('div');
+                elem.id = "iqadtile{{ banner.tile }}";
+                elem.className = "ad ad--{{ banner.name }} ad--{{ banner.name }}-on-{{ pagetype }}{% if banner.label -%} ad--with-label{% endif -%}";
+                elem.setAttribute('data-banner-type', '{{ type }}');
+                document.getElementById('{{ scriptname }}').parentNode.appendChild(elem);
                 AdController.render('iqadtile{{ banner.tile }}');
+                console.info('Tile {{ banner.tile }} called.')
             }
         </script>
     </div>
