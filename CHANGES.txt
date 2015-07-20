@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-1810: strip special characters from level-strings in adcontroller
 
+- FIX: Don't break on strangely encoded URLs
+
 
 1.41 (2015-07-14)
 -----------------
