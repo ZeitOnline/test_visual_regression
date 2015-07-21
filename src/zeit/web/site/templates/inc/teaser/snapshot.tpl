@@ -1,6 +1,6 @@
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
-{% set href = "/kultur/2012-03/fs-momente" %}
+{% set href = "{}kultur/2012-03/fs-momente".format(view.request.route_url('home')) %}
 {% set image = teaser %}
 {% set module_layout = 'snapshot' %}
 {% set tracking_slug = 'snapshot..1.snapshot.'%}
