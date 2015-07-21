@@ -12,6 +12,10 @@ Change log for zeit.web
 
 - ZON-1810: strip special characters from level-strings in adcontroller
 
+- ZON-1979: Verpixelung Momentaufnahme
+
+- ZON-1963: Verpixelung Back 2 top
+
 
 1.41 (2015-07-14)
 -----------------
