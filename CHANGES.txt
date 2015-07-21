@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-1961: Verpixelung Servicebox
 
+- ZON-1963: Verpixelung Back 2 top
+
 
 1.41 (2015-07-14)
 -----------------
