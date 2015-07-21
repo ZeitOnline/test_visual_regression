@@ -101,7 +101,7 @@
                 elem.setAttribute('data-banner-type', '{{ type }}');
                 document.getElementById('{{ scriptname }}').parentNode.appendChild(elem);
                 AdController.render('iqadtile{{ banner.tile }}');
-                console.info('Tile {{ banner.tile }} called.')
+                console.info('Tile {{ banner.tile }} {{ type }} called.')
             }
         </script>
     </div>
@@ -154,7 +154,7 @@
             {%- endcall %}
         {% else %}
             {% call adplace_adctrl(banner, view, mobile) -%}
-                <!-- tile: {{ banner.tile }} adctrl -->
+                <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
             {%- endcall %}
         {% endif %}
     {% endif -%}
