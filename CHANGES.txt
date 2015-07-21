@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - ZON-1963: Verpixelung Back 2 top
 
+- ZON-1962: Verpixelung Logos
+
 
 1.41 (2015-07-14)
 -----------------
