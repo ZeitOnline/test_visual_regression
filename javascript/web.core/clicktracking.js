@@ -76,6 +76,9 @@ define( [ 'jquery' ], function( $ ) {
     },
     formatTrackingData = function( trackingData ) {
         var url = trackingData.pop();
+        if ( url.indexOf( '?' ) > -1 ) {
+            url = url.substring( 0, url.indexOf( '?' ) );
+        }
         return trackingData.join( '.' ) + '|' + url;
     },
     /**
