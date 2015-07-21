@@ -4,6 +4,7 @@
 	padding-top: 0
 	+respond-min($break-tablet-min)
 		+teaser-image-text-shadow
+		+font-smoothing()
 		border-bottom: none
 		margin-left: -$page-padding
 		margin-right: -$page-padding
@@ -39,19 +40,16 @@
 	&__media-container
 		+respond-min($break-tablet-min)
 			+teaser-image-dark-overlay
-	&__inner-helper
+	&__container
 		+respond-min($break-tablet-min)
 			bottom: 0
 			left: 0
+			padding: 0 em(10px) em(32px) em(32px)
 			position: absolute
-			padding: 0 $twice $twice $twice
-			width: em(510px) + (2 * $twice)
+			width: 66.66%
 			z-index: 2
-			&--blog
-				top: 0
 		+respond-min($break-desktop-min)
-			padding: 0 0 $medium $medium
-			width: em(640px)
+			padding: 0 em(10px) em(36px) em(36px)
 	&__heading
 		@extend %teaser-heading
 		margin-bottom: remify(4px)
@@ -66,15 +64,10 @@
 		margin-bottom: remify(10px)
 		&--blog
 			@extend %teaser-kicker--blog
-			color: $zon_dark_grey
-			font-family: $font-franziska
-			font-style: italic
-			font-weight: normal
 		+respond-min($break-tablet-min)
 			color: $white
 			font-size: em(14px)
 			margin-bottom: remify(6px)
-			+font-smoothing()
 
 	&__title
 		@extend %teaser-title
@@ -84,22 +77,15 @@
 			color: $white
 			&:hover
 				color: $white
-			+font-smoothing()
 		+respond-min($break-desktop-min)
 			font-size: em(34px)
 			line-height: 1.232
 	&__combined-link
 		@extend %teaser-combined-link
-	&__container
-		+respond-min($break-tablet-min)
-			&--blog
-				bottom: remify(36px)
-				position: absolute
 	&__text
 		@extend %teaser-text
 		+respond-min($break-tablet-min)
 			color: $white
-			+font-smoothing()
 		+respond-min($break-desktop-min)
 			font-size: em(18px)
 	&__byline,
@@ -108,7 +94,6 @@
 		+respond-min($break-tablet-min)
 			color: $zon_lighter_grey
 			margin-bottom: 0
-			+font-smoothing()
 		+respond-min($break-desktop-min)
 			font-size: em(14px)
 			letter-spacing: 0.04em
