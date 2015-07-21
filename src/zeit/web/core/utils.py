@@ -237,7 +237,7 @@ class LazyProxy(object):
                     factory = iface(factory)
                 except (StopIteration, TypeError,
                         zope.component.ComponentLookupError):
-                    self.__exposed__ = True
+                    object.__setattr__(self, '__exposed__', True)
                     return factory
 
         origin = peak.util.proxies.LazyProxy(callback)
