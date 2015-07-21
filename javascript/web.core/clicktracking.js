@@ -86,7 +86,7 @@ define( [ 'jquery' ], function( $ ) {
                 if ( trackingLinks.hasOwnProperty( key ) ) {
                     trackingLinks[ key ].on( 'click', {
                         funcName: key,
-                        debug: document.location.href.indexOf( '?webtrekk-clicktacking-debug' ) > -1 || false
+                        debug: document.location.href.indexOf( '?webtrekk-clicktracking-debug' ) > -1 || false
                     }, clickTrack );
                 }
             }
