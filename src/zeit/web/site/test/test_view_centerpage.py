@@ -739,7 +739,7 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
 
 
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
-    browser = testbrowser('{}/index'.format(testserver.url))
+    browser = testbrowser('/zeit-online/news-teaser')
 
     cols = browser.cssselect('.cp-area--news .newsticker__column')
     assert len(cols) == 2
