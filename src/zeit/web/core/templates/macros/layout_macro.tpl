@@ -95,10 +95,15 @@
     <div>
         <script type="text/javascript" id="{{ scriptname }}">
             if (typeof AdController !== 'undefined' && ZMO.clientWidth {{ operator | safe }} ZMO.mobileWidth) {
-                var elem = document.createElement('div');
+                var elem = document.createElement('div'){% if banner.label and not(mobile) -%}, label = document.createElement('span'){% endif -%};
                 elem.id = "iqadtile{{ banner.tile }}";
                 elem.className = "ad ad--{{ banner.name }} ad--{{ banner.name }}-on-{{ pagetype }}{% if banner.label -%} ad--with-label{% endif -%}";
                 elem.setAttribute('data-banner-type', '{{ type }}');
+                {% if banner.label and not(mobile) -%}
+                    label.className = "ad__label";
+                    label.innerText = "{{ banner.label }}";
+                    elem.appendChild(label);
+                {% endif -%}
                 document.getElementById('{{ scriptname }}').parentNode.appendChild(elem);
                 AdController.render('iqadtile{{ banner.tile }}');
                 console.info('Tile {{ banner.tile }} {{ type }} called.')
