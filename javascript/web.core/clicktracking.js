@@ -44,6 +44,19 @@ define( [ 'jquery' ], function( $ ) {
                 $element.attr( 'href' ).replace( /http(s)?:\/\//, '' ) // url
             ];
             return formatTrackingData( data );
+        },
+        /**
+         * track links with data-id attribute that contains the complete webtrekk id
+         * @param  {Object} $element jQuery Element with the link that was click
+         * @return {string}          formatted linkId-string for webtrekk call
+         */
+        useDataId: function( $element ) {
+            var data = [
+                window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value, // breakpoint
+                $element.data( 'id' ),
+                $element.attr( 'href' ).replace( /http(s)?:\/\//, '' ) // url
+            ];
+            return formatTrackingData( data );
         }
     },
     clickTrack = function( event ) {
@@ -79,7 +92,8 @@ define( [ 'jquery' ], function( $ ) {
              */
             var trackingLinks = {
                 main: $( '.main article a' ).not( '[data-wt-click]' ),
-                nav: $( '.main_nav a[data-id], .footer a[data-id]' ).not( '[data-wt-click]' )
+                nav: $( '.main_nav a[data-id], .footer a[data-id]' ).not( '[data-wt-click]' ),
+                useDataId: $( '.snapshot a[data-id]' ).not( '[data-wt-click]' )
             };
             // The key name is used for calling the corresponding function in this.tracking
             for ( var key in trackingLinks ) {
