@@ -23,6 +23,8 @@ $classic-padding: remify(20px)
 	&__kicker
 		@extend %teaser-kicker
 		margin-bottom: remify(5px)
+		&--blog
+			@extend %teaser-kicker--blog
 	&__title
 		@extend %teaser-title
 		+respond-min($break-tablet-min)

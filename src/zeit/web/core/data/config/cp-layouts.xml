@@ -39,13 +39,13 @@
         id="zon-fullwidth"
         title="Vollbreiter Aufmacher Text auf Bild"
         image_pattern="zon-fullwidth"
-        areas="solo duo major minor ranking parquet"
+        areas="solo ranking"
         />
     <layout
         id="zon-classic"
         title="Vollbreiter Aufmacher klassisch"
         image_pattern="zon-fullwidth"
-        areas="solo duo major minor ranking parquet"
+        areas="solo ranking"
         />
      <layout
         id="zon-parquet-large"
