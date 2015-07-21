@@ -11,7 +11,7 @@ define( [ 'jquery' ], function( $ ) {
     var trackElement = {
         /**
          * track elements in the main section
-         * @param  {Object} $element jQuery Element with the link that was click
+         * @param  {Object} $element jQuery Element with the link that was clicked
          * @return {string}          formatted linkId-string for webtrekk call
          */
         main: function( $element ) {
@@ -22,7 +22,7 @@ define( [ 'jquery' ], function( $ ) {
                 type = 'image';
             }
             data = [
-                window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value, // breakpoint
+                getBreakpoint(),
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // region bzw. verortung
                 $element.closest( '.cp-area' ).index() + 1, // area bzw. reihe
                 $element.closest( 'article' ).index() + 1, // module bzw. spalte
@@ -34,12 +34,12 @@ define( [ 'jquery' ], function( $ ) {
         },
         /**
          * track elements in the nav section section, i.e. links with data-id attribute that contains the complete webtrekk id
-         * @param  {Object} $element jQuery Element with the link that was click
+         * @param  {Object} $element jQuery Element with the link that was clicked
          * @return {string}          formatted linkId-string for webtrekk call
          */
         nav: function( $element ) {
             var data = [
-                window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value, // breakpoint
+                getBreakpoint(),
                 $element.data( 'id' ),
                 $element.attr( 'href' ).replace( /http(s)?:\/\//, '' ) // url
             ];
@@ -47,12 +47,12 @@ define( [ 'jquery' ], function( $ ) {
         },
         /**
          * track links with data-id attribute that contains the complete webtrekk id
-         * @param  {Object} $element jQuery Element with the link that was click
+         * @param  {Object} $element jQuery Element with the link that was clicked
          * @return {string}          formatted linkId-string for webtrekk call
          */
         useDataId: function( $element ) {
             var data = [
-                window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value, // breakpoint
+                getBreakpoint(),
                 $element.data( 'id' ),
                 $element.attr( 'href' ).replace( /http(s)?:\/\//, '' ) // url
             ];
@@ -77,6 +77,13 @@ define( [ 'jquery' ], function( $ ) {
     formatTrackingData = function( trackingData ) {
         var url = trackingData.pop();
         return trackingData.join( '.' ) + '|' + url;
+    },
+    /**
+     * returns the current breakpoint, and replaces "desktop" with "stationaer"
+     * @return {string}          breakpoint for webtrekk
+     */
+    getBreakpoint = function() {
+        return window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value;
     };
 
     return {
