@@ -100,7 +100,7 @@ define( [ 'jquery' ], function( $ ) {
             var trackingLinks = {
                 main: $( '.main article a' ).not( '[data-wt-click]' ),
                 nav: $( '.main_nav a[data-id], .footer a[data-id]' ).not( '[data-wt-click]' ),
-                useDataId: $( '.snapshot a[data-id]' ).not( '[data-wt-click]' )
+                useDataId: $( '#snapshot a[data-id], #servicebox a[data-id]' ).not( '[data-wt-click]' )
             };
             // The key name is used for calling the corresponding function in this.tracking
             for ( var key in trackingLinks ) {
