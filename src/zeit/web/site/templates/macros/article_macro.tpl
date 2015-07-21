@@ -130,7 +130,9 @@
         {% endif %}
     {% else %}
         {{ lama.adplace(item, view) }}
-        {{ lama.adplace_middle_mobile(item) }}
+        {% if item.tile == 7 %}
+            {{ lama.adplace(view.banner(4), view, mobile=True) }}
+        {% endif %}
     {% endif %}
 
 {%- endmacro %}
