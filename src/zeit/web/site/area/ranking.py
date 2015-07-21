@@ -23,22 +23,25 @@ log = logging.getLogger(__name__)
 
 FIELDS = ' '.join([
     'date_last_published',
+    'last-semantic-change',
     'product_id',
     'supertitle',
     'title',
-    'uniqueId'
+    'uniqueId',
+    'type'
 ])
 
 
 FIELD_MAP = [
-    ('supertitle', 'teaserSupertitle'),
-    ('title', 'teaserTitle')
+    (u'supertitle', u'teaserSupertitle'),
+    (u'title', u'teaserTitle')
 ]
 
 
 ORDERS = collections.defaultdict(
     lambda: 'score desc', {
-        'aktuell': 'last-semantic-change desc'}
+        'aktuell': 'last-semantic-change desc',
+        'publikation': 'date_last_published asc'}
 )
 
 
@@ -85,15 +88,16 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     def _values(self):
         result = []
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+        query = self._build_query()
         try:
             solr_result = conn.search(
-                self.raw_query,
+                query,
                 sort=ORDERS[self.sort_order],
                 rows=self.count,
                 fl=FIELDS,
                 start=self.count * (self.page - 1))
         except (pysolr.SolrError, ValueError) as e:
-            log.warning(u'{} for query {}'.format(e, self.raw_query))
+            log.warning(u'{} for query {}'.format(e, query))
             return result
         docs = collections.deque(solr_result)
         self.hits = solr_result.hits
@@ -102,10 +106,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                     block) or not len(docs):
                 result.append(block)
                 continue
-            context = docs.popleft()
-            for src, target in FIELD_MAP:
-                context[target] = context[src]
-                del context[src]
+            context = self.document_hook(docs.popleft())
             try:
                 block.insert(0, zeit.cms.interfaces.ICMSContent(context))
             except TypeError:
@@ -113,6 +114,17 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                 continue
             result.append(block)
         return result
+
+    def _build_query(self):
+        return self.raw_query
+
+    def document_hook(self, doc):
+        for source, target in FIELD_MAP:
+            try:
+                doc[target] = doc[source]
+            except KeyError:
+                continue
+        return doc
 
     @property
     def placeholder(self):
