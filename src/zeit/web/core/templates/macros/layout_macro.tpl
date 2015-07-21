@@ -97,7 +97,7 @@
             if (typeof AdController !== 'undefined' && ZMO.clientWidth {{ operator | safe }} ZMO.mobileWidth) {
                 var elem = document.createElement('div'){% if banner.label and not(mobile) -%}, label = document.createElement('span'){% endif -%};
                 elem.id = "iqadtile{{ banner.tile }}";
-                elem.className = "ad ad--{{ banner.name }} ad--{{ banner.name }}-on-{{ pagetype }}{% if banner.label -%} ad--with-label{% endif -%}";
+                elem.className = "ad ad-{{ type }} ad-{{type}}--{{ banner.tile }} ad-{{type}}--{{ banner.tile }}-on-{{ pagetype }}";
                 elem.setAttribute('data-banner-type', '{{ type }}');
                 {% if banner.label and not(mobile) -%}
                     label.className = "ad__label";

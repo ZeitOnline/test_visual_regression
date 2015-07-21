@@ -9,6 +9,7 @@
 	padding: $little 0
 %label
 	color: $zon_mid_grey
+	display: block
 	font-family: $font-tabletgothic
 	font-size: remify(9px)
 	letter-spacing: remify(1.5px)
@@ -17,50 +18,50 @@
 	text-align: right
 	text-transform: uppercase
 
-// General display/hiding of adplace
-// according to the banner type mobile/desktop
-// might be, as unbemmish as it is be overruled
-// by special rules for certain asplaces
-.ad
-	&[data-banner-type='desktop']
-		display: none
-	&[data-banner-type='mobile']
-		display: block
-+respond_min($break-mobile-ad-width)
-	.ad
-		&[data-banner-type='desktop']
-			display: block
-		&[data-banner-type='mobile']
-			display: none
-
 .ad
 	&__label
 		@extend %label
-		&--tile_3,
-		&--tile_12
+		.ad-desktop--3 &,
+		.ad-desktop--12 &
 			text-align: right
-	&--tile_3,
-	&--tile_12
+
+// mobile ads
+.ad-mobile
+	background: $zon-ad-grey
+	border-bottom: 1px solid $zon_light_grey
+	border-top: 1px solid $zon_light_grey
+	display: block // generally visible on mobile	
+	margin: -1px 0 // prevent border overlapping
+	padding: 0
+	.cp-area &
+		margin: -1px (-$page-padding)
+	+respond_min($break-mobile-ad-width)
+		display: none // generally hidden on desktop
+
+// desktop ads
+.ad-desktop
+	display: none // generally hidden on mobile
+	+respond_min($break-mobile-ad-width)
+		display: block // generally visible on desktop
+	&--3,
+	&--12
 		@extend %monsterbanner
-	&--tile_7,
-	&--tile_8,
-	&--tile_9,
-	&--tile_10,
-	&--tile_11
+	&--7,
+	&--8,
+	&--9,
+	&--10,
+	&--11
 		@extend %medium-rectangle
-	&--tile_7-on-centerpage,
-	&--tile_8-on-centerpage,
-	&--tile_9-on-centerpage,
-	&--tile_10-on-centerpage,
-	&--tile_11-on-centerpage
-		display: none
-		&:first-child
+	&--7-on-centerpage,
+	&--8-on-centerpage,
+	&--9-on-centerpage,
+	&--10-on-centerpage,
+	&--11-on-centerpage
+		&:first-of-type
 			margin-top: remify(15px)
-		+respond_min($break-desktop-min)
-			display: block
 	// fuck you iqd: centering of content of unknowable width
 	// and positioning of adlabel
-	&--tile_5-on-article
+	&--5-on-article
 		display: table
 		margin: remify(60px 0 28px 0)
 		vertical-align: middle
@@ -83,17 +84,13 @@
 			margin-left: remify(-45px)
 			position: absolute
 			top: 0
-	&--tile_7-on-article
-		clear: both
-		+respond_min($break-desktop-min)
-			float: right
-			margin: 0 remify(60px) remify(28px) remify(36px)
-			max-width: 300px
-			padding: 0
-	&--tile_8-on-article
-		display: none
+	&--7-on-article
+		float: right
+		margin: 0 remify(60px) remify(28px) remify(36px)
+		max-width: 300px
+		padding: 0
+	&--8-on-article
 		background: $zon_lighter_grey
 		margin: 0 auto
 		padding: remify(30px 0)
-		+respond_min($break-tablet-min)
-			display: block
+			
