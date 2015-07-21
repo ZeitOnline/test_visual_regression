@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-1810: strip special characters from level-strings in adcontroller
 
+- ZON-1956: Add classic fullwidth teaser
+
 - ZON-1979: Verpixelung Momentaufnahme
 
 
