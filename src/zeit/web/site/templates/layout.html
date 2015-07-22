@@ -77,13 +77,7 @@
     {% endif %}
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ view.context.uniqueId }}" data-adDeliveryType="{{ view.ad_delivery_type }}">
-    <!-- tracking at top -->
-    {% if view.enable_third_party_modules and view.enable_tracking %}
-        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/ads/%s/iqd_nuggad.html" % view.ad_delivery_type ignore missing %}
-        {% include "zeit.web.core:templates/inc/ads/%s/iqd_yieldlab.html" % view.ad_delivery_type ignore missing %}
-        {% include "zeit.web.core:templates/inc/ads/%s/static_oop_tag.html" % view.ad_delivery_type ignore missing %}
-    {% endif %}
+    {% include "zeit.web.core:templates/inc/marketing.html" %}
     {% block skiplink %}
     <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
     {% endblock skiplink %}
