@@ -76,7 +76,12 @@ def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
     assert adctrl == "object"
 
 
-def test_article_ads_should_have_pagetype_modifier(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
-    assert browser.cssselect('#iqadtile7.ad--tile_7-on-article'), (
+def test_article_ads_should_have_pagetype_modifier(
+        selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+    driver = selenium_driver
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+    selector = '#iqadtile7.ad-desktop--7-on-article'
+    assert driver.find_element_by_css_selector(selector), (
         'The pagetype modifier CSS class for article adtile #7 isn‘t present.')
