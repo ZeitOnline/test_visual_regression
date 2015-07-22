@@ -5,21 +5,31 @@
 {% set image = get_teaser_image(module, teaser) %}
 {% set has_default_image = get_default_image_id() in image.uniqueId %}
 
-<div class="nextread {% if has_default_image %}nextread--without-image{% else %}nextread--with-image{% endif %}" id="nextread">
-    <a class="nextread__link {% if has_default_image %}nextread__link--without-image{% endif %}" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
-        <div class="nextread__lead{% if has_default_image %} nextread__lead--without-image{% endif %}">{{ module.lead or 'Lesen Sie jetzt' }}</div>
-        {% if image %}
-            {%- if not has_default_image -%}
-                {% set module_layout = 'nextread' %}
-                {% include "zeit.web.site:templates/inc/teaser_asset/{}_zon-nextread.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
-            {%- endif -%}
-        {%- endif -%}
-        <div class="nextread__helper {% if has_default_image %}nextread__helper--without-image{% endif %}">
-            <div class="nextread__inner-helper {% if has_default_image %}nextread__inner-helper--without-image{% endif %}">
-                <div class="nextread__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</div>
-                <div class="nextread__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</div>
-                <div class="nextread__metadata">{{ cp.include_teaser_datetime(teaser, 'nextread') }}</div>
-            </div>
-        </div>
-    </a>
-</div>
+{% if view.nextread %}
+	<article class="nextread{% if has_default_image %} nextread--no-image{% else %} nextread--with-image{% endif %}" id="nextread">
+		<a class="nextread__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
+			<div class="nextread__lead">{{ module.lead or 'Lesen Sie jetzt' }}</div>
+			{% if image and not has_default_image -%}
+				{% set module_layout = 'nextread' %}
+				{% include "zeit.web.site:templates/inc/teaser_asset/{}_zon-nextread.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
+			{%- endif -%}
+			<div class="nextread__container">
+				<h2 class="nextread__heading">
+					<span class="nextread__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
+					<span class="nextread__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
+				</h2>
+				<div class="nextread__metadata">
+					<time class="nextread__datetime" datetime="{{ teaser | mod_date | format_date('iso8601') }}">
+						{{- teaser | mod_date | format_timedelta(days=356, absolute=True) | title -}}
+					</time>
+					{% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
+					{% if comments -%}
+						<span class="nextread__commentcount">
+							{{- comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') -}}
+						</span>
+					{%- endif %}
+				</div>
+			</div>
+		</a>
+	</article>
+{% endif %}

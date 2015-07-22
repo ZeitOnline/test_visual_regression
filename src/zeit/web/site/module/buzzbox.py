@@ -24,7 +24,9 @@ class Buzzbox(zeit.web.site.module.Module, list):
     @zeit.web.reify
     def ressort(self):
         centerpage = zeit.content.cp.interfaces.ICenterPage(self.context)
-        return zeit.web.core.centerpage.get_ressort_id(centerpage)
+        if not centerpage.ressort or centerpage.type == 'homepage':
+            return
+        return centerpage.ressort.lower()
 
 
 @zeit.web.register_module('mostread')

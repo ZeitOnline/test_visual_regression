@@ -4,6 +4,8 @@ Change log for zeit.web
 1.42 (unreleased)
 -----------------
 
+- ZON-1966: remove Krux, add AdAudience in ZMO
+
 - ZON-1814: Configure viewport zoom for tablets
 
 - MAINT: Add invisible page shadow
@@ -13,6 +15,14 @@ Change log for zeit.web
 - ZON-1914: fix multiple tile_7 on full view of multi-page-articles
 
 - ZON-1810: strip special characters from level-strings in adcontroller
+
+- FIX: Ignore homepage ressort for reach api calls
+
+- FIX: Don't break on strangely encoded URLs
+
+- ZON-1979: Verpixelung Momentaufnahme
+
+- ZON-1963: Verpixelung Back 2 top
 
 
 1.41 (2015-07-14)
