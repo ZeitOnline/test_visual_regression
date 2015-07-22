@@ -88,14 +88,6 @@ def get_image_asset(teaser):
         return
 
 
-def get_ressort_id(context):
-    if context.type == 'homepage':
-        return 'homepage'
-    elif context.ressort:
-        return context.ressort.lower()
-    return ''
-
-
 class TeaserSequence(object):
 
     def __init__(self, context):
@@ -248,7 +240,7 @@ class LocalVideoImage(object):
             return os.stat(self.filename).st_size
         return 0
 
-    def getImageSize(self):
+    def getImageSize(self):  # NOQA
         if self.isfile():
             return PIL.Image.open(self.open()).size
         return (0, 0)
