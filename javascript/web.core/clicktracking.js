@@ -28,7 +28,7 @@ define( [ 'jquery' ], function( $ ) {
                 $element.closest( 'article' ).index() + 1, // module bzw. spalte
                 '', // subreihe
                 type, // bezeichner (image, button, text)
-                $element.attr( 'href' ).replace( /http(s)?:\/\//, '' ) // url
+                $element.attr( 'href' ) // url
             ];
             return formatTrackingData( data );
         },
@@ -41,7 +41,7 @@ define( [ 'jquery' ], function( $ ) {
             var data = [
                 getBreakpoint(),
                 $element.data( 'id' ),
-                $element.attr( 'href' ).replace( /http(s)?:\/\//, '' ) // url
+                $element.attr( 'href' ) // url
             ];
             return formatTrackingData( data );
         },
@@ -54,7 +54,7 @@ define( [ 'jquery' ], function( $ ) {
             var data = [
                 getBreakpoint(),
                 $element.data( 'id' ),
-                $element.attr( 'href' ).replace( /http(s)?:\/\//, '' ) // url
+                $element.attr( 'href' ) // url
             ];
             return formatTrackingData( data );
         }
@@ -76,8 +76,8 @@ define( [ 'jquery' ], function( $ ) {
     },
     formatTrackingData = function( trackingData ) {
         var url = trackingData.pop();
-        if ( url.indexOf( '?' ) > -1 ) {
-            url = url.substring( 0, url.indexOf( '?' ) );
+        if ( url ) {
+            url = url.replace( /http(s)?:\/\//, '' ).split( '?' )[0];
         }
         return trackingData.join( '.' ) + '|' + url;
     },
