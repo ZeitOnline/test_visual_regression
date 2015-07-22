@@ -567,8 +567,8 @@ class Content(Base):
     @zeit.web.reify
     def comment_counts(self):
         if self.nextread:
-            return zeit.web.core.comments.get_counts(*[t.uniqueId for t in self.nextread])
-
+            return zeit.web.core.comments.get_counts(
+                *[t.uniqueId for t in self.nextread])
 
 
 @pyramid.view.view_config(route_name='health_check')
