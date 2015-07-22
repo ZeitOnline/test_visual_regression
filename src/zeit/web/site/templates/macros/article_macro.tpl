@@ -125,6 +125,7 @@
     {% if view.is_all_pages_view %}
         {% if item.on_page_nr == 1 %}
             {{ lama.adplace(view.banner(7), view) }}
+            {{ lama.adplace(view.banner(4), view, mobile=True) }}
         {% elif item.on_page_nr == 2 %}
             {{ lama.adplace(view.banner(9), view) }}
         {% endif %}
