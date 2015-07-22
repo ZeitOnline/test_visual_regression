@@ -82,12 +82,13 @@
 			& > iframe[id^="google_ads_iframe"]
 				display: inline-block
 				margin: 0 auto
-		div[id*="__container__"]:after
-			@extend %label
-			content: "Anzeige"
-			margin-left: remify(-45px)
-			position: absolute
-			top: 0
+				max-width: 100%
+			&:before
+				@extend %label
+				content: "Anzeige"
+				margin-left: auto
+				margin-right: auto
+				max-width: remify(660px)
 	&--7-on-article
 		clear: right
 		float: right
