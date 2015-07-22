@@ -1,111 +1,101 @@
 .nextread
-	+font-smoothing()
-	background: $zon_dark_grey
-	margin: remify(40px) (-$page-padding) 0 (-$page-padding) // 40px topmargin until other elements are build
-	padding: 0
+	margin: 0 (-$page-padding)
 	&__link
 		display: block
-		// padding instead of margin to make the whole box clickable
-		margin: 0 (-$page-padding)
-		padding: remify(30px) remify(40px)
-		&--with-image
-			padding: 0 remify(40px)
 	&__lead
-		color: $zon_lighter_grey
-		font-size: remify(15px)
+		color: $color-text
+		font-size: em(15px)
 		font-weight: 700
 		letter-spacing: $zon-letter-spacing-m
 		text-transform: uppercase
-		margin-bottom: remify(30px)
-		&--with-image
-			margin-bottom: remify(14px)
+		padding: remify(24px) $page-padding remify(15px)
+	&__container
+		padding: remify(12px) $page-padding remify(32px)
+	&__media
+		margin: 0
+	&__heading
+		@extend %teaser-heading
+		margin-bottom: remify(10px)
 	&__kicker
 		@extend %teaser-kicker
-		color: $zon_mid_grey
-		margin-bottom: remify(3px)
-		&--with-image
-			color: $color-text-highlighted
+		margin-bottom: remify(7px)
 	&__title
 		@extend %teaser-title
-		color: $white
-		font-size: remify(24px)
-		line-height: 1.12
 	&__metadata
 		@extend %teaser-metadata
-		color: $zon_mid_grey
-		margin-top: remify(5px)
 	&__datetime
 		@extend %teaser-datetime
+	&__commentcount
+		@extend %teaser-commentcount
+		&:hover
+			border-bottom: none // disable hover effect as long as comment count is not linked
 
-	&--with-image
-		background-color: transparent
-		.nextread__lead,
-		.nextread__title,
+	&--no-image
+		+font-smoothing
+		background: $zon_dark_grey
+		.nextread__lead
+			color: $zon_lighter_grey
+		.nextread__kicker
+			color: $zon_mid_grey
+		.nextread__title
+			color: $white
 		.nextread__metadata
-			color: $zon-charcoal
-	&__media
-		margin: 0 (-$page-padding) remify(14px) (-$page-padding)
-		position: relative
-	&__media-item
-		max-width: auto
-		width: 100%
+			color: $zon_mid_grey
 
 +respond-min($break-tablet-min)
 	.nextread
-		&__kicker
-			font-size: $font-s
-			letter-spacing: 0.12em
-			margin-bottom: remify(12px)
-		&__title
-			font-size: em(34px)
-			line-height: 1.232
-			margin-bottom: remify(8px)
-			width: 72%
-		&__metadata
-			margin-top: remify(8px)
-		&__lead
-			max-width: remify(660px)
-			margin: 0 auto remify(30px)
-			&:after
-				border-bottom: 1px solid #fff
-				content: ""
-				display: block
-				height: 8px
-				opacity: 0.7
-				width: remify(70px)
-		&__helper
-			max-width: remify(660px)
+		&__link
+			position: relative
+			z-index: 1 // needed for the link to work with absolute positioned child nodes
+		&__lead,
+		&__container
+			padding-left: 0
+			padding-right: 0
+			width: remify(660px)
 			margin: 0 auto
-
+		&__lead
+			position: relative
+			&:after
+				border-bottom: 1px solid rgba($white, .5)
+				bottom: remify(5px)
+				content: ""
+				left: 0
+				position: absolute
+				width: 10%
+		&__container
+			margin-top: remify(27px)
 		&__media
-			+darken-on-hover
 			+teaser-image-dark-overlay($angle: 0deg)
-			margin: 0
-		&__lead--with-image
-			height: em(38px)  // intentional em usage
-			max-width: remify(660px)
-			margin: 0 auto em(-38px) auto // intentional em usage
-			padding-top: remify(30px)
-			position: relative
-			z-index: 1
-		&__helper--with-image // absolute positioning in a container that has variing width and margin auto: a mess
-			height: em(250px) // intentional em usage
-			max-width: remify(660px)
-			margin: em(-250px) auto 0 auto  // intentional em usage
-			position: relative
-		&__inner-helper--with-image // ach… used flexbox to align the content but couldn't find a replacement for IE < 11, so more div-tery :(
-			bottom: remify(60px)
-			left: 0
-			position: absolute
-			width: 100%
+		&__heading
+			margin-bottom: remify(16px)
+		&__kicker
+			margin-bottom: remify(10px)
+		&__title
+			font-size: em(28px)
+			line-height: 1.12
+			width: 72%
+			+respond-min($break-desktop-min)
+				font-size: em(34px)
+				line-height: 1.2
+
 		&--with-image
-			+font-smoothing()
+			+font-smoothing
 			+teaser-image-text-shadow
-			background-color: initial
+			+darken-on-hover
 			color: $white
-			margin-bottom: remify(14px)
 			.nextread__lead,
-			.nextread__kicker,
-			.nextread__title,
-			.nextread__metadata
+			.nextread__container
+				position: absolute
+				left: 50%
+				margin-left: remify(-330px)
+			.nextread__lead
 				color: $white
+				top: 0
+				z-index: 2
+			.nextread__container
+				bottom: 0
+			.nextread__title
+				color: $white
+			.nextread__kicker,
+			.nextread__metadata
+				color: $zon_lighter_grey
