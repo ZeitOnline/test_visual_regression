@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-1810: strip special characters from level-strings in adcontroller
 
+- FIX: Decode HTML entities in image caption
+
 - FIX: Ignore homepage ressort for reach api calls
 
 - FIX: Don't break on strangely encoded URLs

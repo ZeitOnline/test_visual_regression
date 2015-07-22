@@ -254,11 +254,15 @@ class Image(BaseImage):
         self.layout = model_block.layout
 
         if model_block.xml is not None:
+            bu = _inline_html(model_block.xml.find('bu'))
+            if bu:
+                bu = lxml.html.fromstring(unicode(bu)).text_content().strip()
+
             self.align = model_block.xml.get('align')
             self.href = model_block.xml.get('href')
-            self.caption = _inline_html(model_block.xml.find('bu'))
-            self.attr_title = _inline_html(model_block.xml.find('bu'))
-            self.attr_alt = _inline_html(model_block.xml.find('bu'))
+            self.caption = bu
+            self.attr_title = bu
+            self.attr_alt = bu
             cr = model_block.xml.find('copyright')
             if cr is not None:
                 rel = cr.attrib.get('rel', '') == 'nofollow'
