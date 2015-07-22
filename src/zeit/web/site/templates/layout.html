@@ -121,10 +121,14 @@
             {% block liveblog_status %}{% endblock %}
             {% endprofile %}
             {% block adplace_billboard %}
+                {# desktop ad place 3 #}
                 {{ lama.adplace(view.banner(3), view) }}
+                {# mobile ad place 1 #}
+                {{ lama.adplace(view.banner(1), view, mobile=True) }}
             {% endblock adplace_billboard %}
             <main class="{{ 'main' |  with_mods(view.type) }}" id="main" role="main" itemprop="mainContentOfPage">
                 {% block main %}{% endblock main %}
+                {{ lama.adplace(view.banner(8), view, mobile=True) }}
             </main>
             {% profile %}
             <footer class="footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" >

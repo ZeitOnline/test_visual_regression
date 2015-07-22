@@ -4,7 +4,13 @@ Change log for zeit.web
 1.42 (unreleased)
 -----------------
 
-- ZON-1966: remove Krux, add AdAudience in ZMO
+- ZON-1918: Add mobile ads to ZON
+
+- ZON-1917: Hidden Ads should not request AdServer
+
+- ZON-1917: hide mobile/desktop ads per breakpoint
+
+- ZON-1966: Remove Krux, add AdAudience in ZMO
 
 - MAINT: Add invisible page shadow
 
