@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1917: hide mobile/desktop ads per breakpoint
 
+- ZON-1966: Remove Krux, add AdAudience in ZMO
+
 - MAINT: Add invisible page shadow
 
 - MAINT: Remove font TabletGothicNarrow
@@ -24,7 +26,11 @@ Change log for zeit.web
 
 - ZON-1979: Verpixelung Momentaufnahme
 
+- ZON-1961: Verpixelung Servicebox
+
 - ZON-1963: Verpixelung Back 2 top
+
+- ZON-1962: Verpixelung Logos
 
 
 1.41 (2015-07-14)

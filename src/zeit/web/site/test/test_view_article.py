@@ -345,7 +345,7 @@ def test_article_skips_raw_box_not_suitable_for_alldevices(testbrowser):
 
 def test_nextread_is_placed_on_article_02(testbrowser):
     browser = testbrowser('/zeit-online/article/02')
-    assert len(browser.cssselect('div#nextread')) == 1
+    assert len(browser.cssselect('#nextread')) == 1
 
 
 def test_nextread_is_responsive(testserver, selenium_driver, screen_size):

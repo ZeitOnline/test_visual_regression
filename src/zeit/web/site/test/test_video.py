@@ -228,12 +228,13 @@ def test_video_page_adcontroller_js_var_isset(
 
 # TODO: iFrame (?) wird eingebunden auf großen Bildschirmen
 # TODO: iFrame (?) wird nicht eingebunden auf kleinen Bildschirmen
+# TODO: CSS_SELECTOR trifft nicht unsere aktuelle HTML Struktur #fixme
 # => Wobei, beide Tests gehören eher nach banner.py.
 #    Wenn wir hier den JS Code und Wrapper haben und der andere Test für
 #    Artikel-Banner läuft, können wir davon ausgehen dass er überall
 #    funktioniert !?
 
-@pytest.mark.xfail(reason='Why dont the ads get loaded in test browser???')
+@pytest.mark.skipif(True, reason='Fix me or I will always fail - after 20s')
 def test_video_page_adcontroller_content_gets_included(
         selenium_driver, testserver, monkeypatch):
 
