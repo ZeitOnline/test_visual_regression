@@ -3,10 +3,12 @@ import requests
 import requests_file
 import zope.component
 
+import zeit.cms.interfaces
 import zeit.content.article.interfaces
 
 import zeit.web.core.interfaces
 import zeit.web.core.reach
+import zeit.web.site.module.buzzbox
 
 
 def test_reach_host_should_be_configured_in_instance(application):
@@ -64,3 +66,17 @@ def test_non_ascii_url_fails_gracefully(application):
     reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
     data = reach.get_buzz(u'http://xml.zeit.de/ümläut')
     assert data.get('score') == 3.535
+
+
+def test_buzz_module_should_extract_ressort_from_centerpage(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/centerpage/zeitonline')
+    module = zeit.web.site.module.buzzbox.Buzzbox(context)
+    assert module.ressort == 'administratives'
+
+
+def test_buzz_module_should_ignore_ressort_of_homepage(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/slenderized-index')
+    module = zeit.web.site.module.buzzbox.Buzzbox(context)
+    assert module.ressort is None
