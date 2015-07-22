@@ -118,7 +118,7 @@ def test_image_should_decode_html_entities_in_caption():
     model_block = mock.Mock()
     model_block.layout = 'large'
     model_block.is_empty = False
-    xml = ('<image base-id="http://xml.zeit.de/wirtschaft/2015-07/standard-poors-new-york/" type="jpg" align="left" publication-date="" expires="" layout="large" is_empty="False">'
+    xml = ('<image base-id="http://xml.zeit.de/foo">'
            '<bu>Standard &amp; Poor´s Zentrale in New York</bu>'
            '<copyright>© Justin Lane / dpa</copyright>'
            '</image>')
