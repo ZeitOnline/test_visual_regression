@@ -432,29 +432,21 @@ def test_breaking_news_banner_shows_date_first_released(jinja2_env):
 
 
 def test_tile7_is_rendered_on_articles_with_multiple_pages(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    selector = '#iqadtile7'
+        testbrowser):
+    selector = ('#ad-desktop-7')
 
-    driver.get('%s/zeit-online/article/zeit' % testserver.url)
-    assert driver.find_element_by_css_selector(selector), (
-        'adtile #7 missing on page 1 of article')
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect(selector)) == 1
 
-    driver.get('%s/zeit-online/article/zeit/seite-2' % testserver.url)
-    assert driver.find_element_by_css_selector(selector), (
-        'adtile #7 missing on page 2 of article')
+    browser = testbrowser('/zeit-online/article/zeit/seite-2')
+    assert len(browser.cssselect(selector)) == 1
 
-    driver.get('%s/zeit-online/article/zeit/seite-5' % testserver.url)
-    assert driver.find_element_by_css_selector(selector), (
-        'adtile #7 missing on page 5 of article')
+    browser = testbrowser('/zeit-online/article/zeit/seite-5')
+    assert len(browser.cssselect(selector)) == 1
 
 
 def test_tiles7_9_are_rendered_on_articles_with_multiple_pages_on_onepage_view(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-online/article/zeit/komplettansicht' % testserver.url)
-
-    assert driver.find_element_by_css_selector('#iqadtile7'), (
-        'adtile #7 missing on komplettansicht')
-    assert driver.find_element_by_css_selector('#iqadtile9'), (
-        'adtile #9 missing on komplettansicht')
+        testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
+    assert len(browser.cssselect('#ad-desktop-9')) == 1

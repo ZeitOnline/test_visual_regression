@@ -203,14 +203,12 @@ def test_video_page_video_should_exist(selenium_driver, testserver):
 
 
 def test_video_page_adcontroller_code_is_embedded(
-        selenium_driver, testserver, monkeypatch):
+        testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
-    driver = selenium_driver
-    driver.get('{}/video/2015-01/3537342483001'.format(testserver.url))
-    selector = '#iqadtile7'
-    assert driver.find_element_by_css_selector(selector), (
-        'Adtile #7 is missing on video page.')
+
+    browser = testbrowser('/video/2015-01/3537342483001')
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
 
 
 def test_video_page_adcontroller_js_var_isset(
