@@ -28,7 +28,7 @@ define( [ 'jquery' ], function( $ ) {
                 $element.closest( 'article' ).index() + 1, // module bzw. spalte
                 '', // subreihe
                 type, // bezeichner (image, button, text)
-                $element.attr( 'href' ).replace( /http(s)?:\/\//, '' ) // url
+                $element.attr( 'href' ) // url
             ];
             return formatTrackingData( data );
         },
@@ -41,7 +41,7 @@ define( [ 'jquery' ], function( $ ) {
             var data = [
                 getBreakpoint(),
                 $element.data( 'id' ),
-                $element.attr( 'href' ).replace( /http(s)?:\/\//, '' ) // url
+                $element.attr( 'href' ) // url
             ];
             return formatTrackingData( data );
         },
@@ -54,7 +54,7 @@ define( [ 'jquery' ], function( $ ) {
             var data = [
                 getBreakpoint(),
                 $element.data( 'id' ),
-                $element.attr( 'href' ).replace( /http(s)?:\/\//, '' ) // url
+                $element.attr( 'href' ) // url
             ];
             return formatTrackingData( data );
         }
@@ -76,6 +76,9 @@ define( [ 'jquery' ], function( $ ) {
     },
     formatTrackingData = function( trackingData ) {
         var url = trackingData.pop();
+        if ( url ) {
+            url = url.replace( /http(s)?:\/\//, '' ).split( '?' )[0];
+        }
         return trackingData.join( '.' ) + '|' + url;
     },
     /**
@@ -100,7 +103,7 @@ define( [ 'jquery' ], function( $ ) {
             var trackingLinks = {
                 main: $( '.main article a' ).not( '[data-wt-click]' ),
                 nav: $( '.main_nav a[data-id], .footer a[data-id]' ).not( '[data-wt-click]' ),
-                useDataId: $( '.snapshot a[data-id]' ).not( '[data-wt-click]' )
+                useDataId: $( '#snapshot a[data-id], #servicebox a[data-id]' ).not( '[data-wt-click]' )
             };
             // The key name is used for calling the corresponding function in this.tracking
             for ( var key in trackingLinks ) {
