@@ -781,7 +781,7 @@ def test_centerpage_area_should_render_in_isolation(testbrowser, testserver):
 
 
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
-    browser = testbrowser('{}/index'.format(testserver.url))
+    browser = testbrowser('/centerpage/zeitonline')
     assert browser.cssselect('.buzz-box')
     assert len(browser.cssselect('.buzz-box__teasers article')) == 3
 
