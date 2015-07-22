@@ -107,7 +107,9 @@
                 {% endif -%}
                 document.getElementById('{{ scriptname }}').parentNode.appendChild(elem);
                 AdController.render('iqadtile{{ banner.tile }}');
-                console.info('Tile {{ banner.tile }} {{ type }} called.')
+                if (console && typeof console.info === 'function') {
+                    console.info('AdController ' + AdController.VERSION + ' tile {{ banner.tile }} {{ type }}')
+                }
             }
         </script>
     </div>
