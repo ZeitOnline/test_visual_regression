@@ -76,7 +76,20 @@ def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
     assert adctrl == "object"
 
 
-def test_article_ads_should_have_pagetype_modifier(testbrowser):
-    browser = testbrowser('/zeit-online/article/01')
+def test_adplaces_present_on_pages(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert len(browser.cssselect('#iqadtileOOP')) == 1
+    assert len(browser.cssselect('#ad-desktop-1')) == 1
+    assert len(browser.cssselect('#ad-desktop-2')) == 1
+    assert len(browser.cssselect('#ad-desktop-3')) == 1
     assert len(browser.cssselect('#ad-desktop-7')) == 1
-    assert 'ad-desktop--7-on-article' in browser.contents
+
+    assert len(browser.cssselect('#ad-mobile-1')) == 1
+    assert len(browser.cssselect('#ad-mobile-3')) == 1
+    assert len(browser.cssselect('#ad-mobile-4')) == 1
+    assert len(browser.cssselect('#ad-mobile-8')) == 1
+
+
+def test_adplaces_present_before_video_stage(testbrowser):
+    browser = testbrowser('/zeit-online/video-stage')
+    assert len(browser.cssselect('#ad-desktop-12')) == 1
