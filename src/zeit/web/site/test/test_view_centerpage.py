@@ -149,7 +149,7 @@ def test_default_teaser_should_match_css_selectors(
 
     assert teaser_co.attrib['href'] == teaser.uniqueId.replace(
         'http://xml.zeit.de', '') + '#comments'
-    assert teaser_co.attrib['title'] == '129 Kommentare'
+    assert teaser_co.attrib['title'] == 'Kommentare anzeigen'
     assert teaser_co.text == '129 Kommentare'
 
 
