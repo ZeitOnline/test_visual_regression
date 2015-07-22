@@ -11,12 +11,12 @@ import pysolr
 import zope.interface
 
 import zeit.cms.interfaces
-import zeit.content.article.interfaces
 import zeit.imp.source
 import zeit.solr.interfaces
 
 import zeit.web.core.interfaces
 import zeit.web.core.utils
+import zeit.web.core.view
 
 
 video_series = None
@@ -97,16 +97,17 @@ class Solr(object):
                     unique_id = os.path.join(
                         root.replace(repo, 'http://xml.zeit.de'), filename)
                     content = zeit.cms.interfaces.ICMSContent(unique_id)
-                    assert zeit.content.article.interfaces.IArticle.providedBy(
-                        content)
+                    assert zeit.web.core.view.known_content(content)
                     results.append({
-                        u'uniqueId': content.uniqueId,
                         u'date_last_published': u'2015-07-01T09:50:42Z',
-                        u'title': content.title,
+                        u'last-semantic-change': u'2015-07-01T09:50:42Z',
+                        u'product_id': content.product.id,
                         u'supertitle': content.supertitle,
-                        u'product_id': content.product.id
+                        u'title': content.title,
+                        u'type': content.__class__.__name__.lower(),
+                        u'uniqueId': content.uniqueId
                     })
-                except (AssertionError, TypeError):
+                except (AttributeError, AssertionError, TypeError):
                     continue
         return pysolr.Results(
             random.sample(results, min(rows, len(results))), len(results))
