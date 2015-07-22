@@ -560,6 +560,16 @@ class Content(Base):
     def show_commentthread(self):
         return self.context.commentSectionEnable is not False
 
+    @zeit.web.reify
+    def nextread(self):
+        return zeit.web.core.interfaces.INextread(self.context)
+
+    @zeit.web.reify
+    def comment_counts(self):
+        if self.nextread:
+            return zeit.web.core.comments.get_counts(
+                *[t.uniqueId for t in self.nextread])
+
 
 @pyramid.view.view_config(route_name='health_check')
 def health_check(request):
@@ -568,7 +578,14 @@ def health_check(request):
 
 class service_unavailable(object):  # NOQA
     def __init__(self, context, request):
-        log.error(u'{} at {}'.format(repr(context), request.path))
+        try:
+            path = request.path
+        except UnicodeDecodeError:
+            # path_info is not exactly what request.path returns, but should be
+            # close enough.
+            path = request.environ.get('PATH_INFO').decode(
+                request.url_encoding, 'replace')
+        log.error(u'{} at {}'.format(repr(context), path))
 
     def __call__(self):
         body = 'Status 503: Dokument zurzeit nicht verfügbar.'

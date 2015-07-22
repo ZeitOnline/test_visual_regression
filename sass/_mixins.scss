@@ -66,6 +66,28 @@
 	}
 }
 
+@mixin darken-on-hover($color: rgba(0, 0, 0, .1)) {
+	position: relative;
+	&:before {
+		content: "";
+		min-height: 100%;
+		min-width: 100%;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+		background-color: $color;
+		opacity: 0;
+		@include transition(opacity .2s ease-in-out);
+	}
+	&:hover:before {
+		opacity: 1;
+	}
+
+}
+
 @mixin teaser-image-text-shadow($color: rgb(0, 0, 20)) {
 	text-shadow: 0 0 20px rgba($color, 0.25);
 }

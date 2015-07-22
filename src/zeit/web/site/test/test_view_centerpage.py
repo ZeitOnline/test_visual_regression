@@ -149,7 +149,7 @@ def test_default_teaser_should_match_css_selectors(
 
     assert teaser_co.attrib['href'] == teaser.uniqueId.replace(
         'http://xml.zeit.de', '') + '#comments'
-    assert teaser_co.attrib['title'] == '129 Kommentare'
+    assert teaser_co.attrib['title'] == 'Kommentare anzeigen'
     assert teaser_co.text == '129 Kommentare'
 
 
@@ -328,7 +328,7 @@ def test_small_teaser_should_have_responsive_layout(
 
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/index' % testserver.url)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
 
     width_script = 'return $(".teaser-small__media").first().width()'
     width = driver.execute_script(width_script)
@@ -781,7 +781,7 @@ def test_centerpage_area_should_render_in_isolation(testbrowser, testserver):
 
 
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
-    browser = testbrowser('{}/index'.format(testserver.url))
+    browser = testbrowser('/centerpage/zeitonline')
     assert browser.cssselect('.buzz-box')
     assert len(browser.cssselect('.buzz-box__teasers article')) == 3
 
