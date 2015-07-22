@@ -88,21 +88,6 @@ def test_var_IQD_varPack_isset(selenium_driver, testserver, monkeypatch):
     assert varpack == "object"
 
 
-def test_var_Krux_isset(selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
-    driver = selenium_driver
-    driver.get('%s/artikel/01' % testserver.url)
-    try:
-        selector = 'body[data-adDeliveryType="oldschool"]'
-        driver.find_element_by_css_selector(selector)
-    except:
-        pytest.skip("not applicable due to new ad configuration")
-
-    krux = driver.execute_script("return typeof window.Krux")
-    assert krux == "function"
-
-
 def test_ad_tile2_ommitted_in_portrait(
         selenium_driver, testserver, monkeypatch):
     monkeypatch.setattr(

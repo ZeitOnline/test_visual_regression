@@ -4,6 +4,8 @@ Change log for zeit.web
 1.42 (unreleased)
 -----------------
 
+- ZON-1966: remove Krux, add AdAudience in ZMO
+
 - MAINT: Add invisible page shadow
 
 - MAINT: Remove font TabletGothicNarrow
