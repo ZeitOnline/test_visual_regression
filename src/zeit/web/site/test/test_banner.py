@@ -65,7 +65,7 @@ def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
     driver = selenium_driver
-    driver.get('%s/zeit-online/index' % testserver.url)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     try:
         selector = 'body[data-adDeliveryType="adcontroller"]'
         driver.find_element_by_css_selector(selector)
