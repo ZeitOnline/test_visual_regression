@@ -78,6 +78,7 @@
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ view.context.uniqueId }}" data-adDeliveryType="{{ view.ad_delivery_type }}">
     {% include "zeit.web.core:templates/inc/marketing.html" %}
+
     {% block skiplink %}
     <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
     {% endblock skiplink %}
