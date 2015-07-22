@@ -14,7 +14,13 @@ Change log for zeit.web
 
 - ZON-1956: Add classic fullwidth teaser
 
+- FIX: Ignore homepage ressort for reach api calls
+
+- FIX: Don't break on strangely encoded URLs
+
 - ZON-1979: Verpixelung Momentaufnahme
+
+- ZON-1963: Verpixelung Back 2 top
 
 
 1.41 (2015-07-14)

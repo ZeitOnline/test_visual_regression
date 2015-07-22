@@ -384,3 +384,10 @@ def test_canonical_handles_non_ascii_urls():
     req = pyramid.request.Request.blank(u'/ümläut'.encode('utf-8'))
     view = zeit.web.core.view.Base(None, req)
     assert u'http://localhost/ümläut' == view.canonical_url
+
+
+def test_unavailable_handles_broken_unicode():
+    req = pyramid.request.Request.blank('/%14%85')
+    view = zeit.web.core.view.service_unavailable(None, req)
+    # assert nothing raised:
+    view()
