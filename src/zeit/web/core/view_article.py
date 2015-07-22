@@ -207,10 +207,6 @@ class Article(zeit.web.core.view.Content):
             return u';'.join([rt['name'] for rt in self.authors])
 
     @zeit.web.reify
-    def nextread(self):
-        return zeit.web.core.interfaces.INextread(self.context)
-
-    @zeit.web.reify
     def linkreach(self):
         reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
         return reach.get_buzz(self.context.uniqueId).get('social')

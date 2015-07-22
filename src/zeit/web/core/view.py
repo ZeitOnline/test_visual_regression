@@ -561,6 +561,10 @@ class Content(Base):
         return self.context.commentSectionEnable is not False
 
     @zeit.web.reify
+    def nextread(self):
+        return zeit.web.core.interfaces.INextread(self.context)
+
+    @zeit.web.reify
     def comment_counts(self):
         if self.nextread:
             return zeit.web.core.comments.get_counts(*[t.uniqueId for t in self.nextread])
