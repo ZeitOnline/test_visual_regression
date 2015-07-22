@@ -102,7 +102,7 @@
                 {% if banner.label and not(mobile) -%}
                     var label = document.createElement('span');
                     label.className = "ad__label";
-                    label.innerText = "{{ banner.label }}";
+                    label.textContent = "{{ banner.label }}";
                     elem.appendChild(label);
                 {% endif -%}
                 document.getElementById('{{ scriptname }}').parentNode.appendChild(elem);
