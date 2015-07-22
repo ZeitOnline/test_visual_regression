@@ -431,8 +431,7 @@ def test_breaking_news_banner_shows_date_first_released(jinja2_env):
     assert time[0].text == '11:55 Uhr'
 
 
-def test_tile7_is_rendered_on_articles_with_multiple_pages(
-        testbrowser):
+def test_tile7_is_rendered_on_articles_with_multiple_pages(testbrowser):
     selector = ('#ad-desktop-7', '#ad-mobile-4')
 
     browser = testbrowser('/zeit-online/article/zeit')
