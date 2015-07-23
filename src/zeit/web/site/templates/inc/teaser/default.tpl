@@ -46,7 +46,7 @@
             {% block teaser_metadata_default %}
             <div class="{{ self.layout() }}__metadata">
                 {% block teaser_datetime %}
-                    {{ cp.include_teaser_datetime(teaser, self.layout()) }}
+                    {{ cp.include_teaser_datetime(teaser, self.layout(), area.kind) }}
                 {% endblock %}
                 {% block teaser_commentcount %}
                     {% set comments = view.comment_counts[teaser.uniqueId] %}
