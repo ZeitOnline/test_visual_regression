@@ -104,7 +104,7 @@ settings = {
         'egg://zeit.web.core/data/config/article-video-layouts.xml'),
     'vivi_zeit.content.article_htmlblock-layout-source': (
         'egg://zeit.web.core/data/config/article-htmlblock-layouts.xml'),
-    'vivi_zeit.magazin_article-template-source': (
+    'vivi_zeit.content.article_template-source': (
         'egg://zeit.web.core/data/config/article-templates.xml'),
     'vivi_zeit.magazin_article-related-layout-source': (
         'egg://zeit.web.core/data/config/article-related-layouts.xml'),

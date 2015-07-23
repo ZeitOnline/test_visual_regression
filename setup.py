@@ -49,7 +49,7 @@ setup(
         'zeit.brightcove',
         'zeit.cms',
         'zeit.connector',
-        'zeit.content.article',
+        'zeit.content.article >= 3.7.0.dev0',
         'zeit.content.author',
         'zeit.content.cp',
         'zeit.content.dynamicfolder',
