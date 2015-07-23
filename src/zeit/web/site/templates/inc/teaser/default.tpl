@@ -39,8 +39,8 @@
             {% endblock %}
             {% block teaser_byline %}
                 <span class="{{ self.layout() }}__byline">
-                    {% set byline = teaser | get_byline %}
-                    {% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
+                    {%- set byline = teaser | get_byline -%}
+                    {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
                 </span>
             {% endblock %}
             {% block teaser_metadata_default %}
