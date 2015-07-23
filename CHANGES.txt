@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.42 (unreleased)
+1.42 (2015-07-23)
 -----------------
 
 - ZON-1918: Add mobile ads to ZON
