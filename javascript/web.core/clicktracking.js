@@ -84,6 +84,61 @@ define( [ 'jquery' ], function( $ ) {
      */
     getBreakpoint = function() {
         return window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value;
+    },
+    /**
+     *
+     */
+    registerGlobalTrackingMessageEndpointForVideoPlayer = function() {
+
+        window.addEventListener( 'message', function( event ) {
+
+            var messageData,
+                messageSender,
+                eventString;
+
+            if ( event.origin.indexOf( 'players.brightcove.net' ) === -1 ) {
+                return;
+            }
+
+            try {
+                messageData = JSON.parse( event.data );
+            } catch ( e ) {
+                return;
+            }
+
+            if ( typeof( messageData.sender ) !== 'string' || typeof( messageData.message ) !== 'string' ) {
+                return;
+            }
+
+            if ( messageData.sender !== 'videojsWebtrekk' ) {
+                return;
+            }
+
+            eventString = messageData.message;
+
+            console.log( event ); // DEBUGtpuppe
+
+            var data = [
+                getBreakpoint(),
+                'video',
+                '[large]',
+                '[in100sekunden]',
+                '[brightcove]',
+                '[zdf]',
+                eventString,
+                window.location.href.replace( /http(s)?:\/\//, '' ) // url
+            ],
+            trackingData = formatTrackingData( data );
+
+            /*
+            window.wt.sendinfo({
+                linkId: trackingData,
+                sendOnUnload: 1
+            });
+            */
+            window.console.log( 'TREKK THIS OUT: ' + trackingData );
+
+        }, false );
     };
 
     return {
@@ -111,6 +166,8 @@ define( [ 'jquery' ], function( $ ) {
                     }, clickTrack );
                 }
             }
+
+            registerGlobalTrackingMessageEndpointForVideoPlayer();
         }
     };
 });
