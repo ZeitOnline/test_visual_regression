@@ -39,9 +39,32 @@ class Base(zeit.web.core.view.Base):
     @zeit.web.reify
     def breadcrumbs(self):
         breadcrumbs = [('Start', 'http://xml.zeit.de/index', 'ZEIT ONLINE')]
-        context_type = getattr(self.context, 'type', '')
+        context_type = getattr(self.context, 'type', self.type)
+
+        def add_breadcrumbs_by_navigation():
+            for segment in (self.ressort, self.sub_ressort):
+                try:
+                    nav_item = zeit.web.core.navigation.navigation_by_name[
+                        segment]
+                    breadcrumbs.extend([(
+                        nav_item['text'], nav_item['link'])])
+                except KeyError:
+                    # Segment is no longer be part of the navigation
+                    next
+
+        # Article
+        if context_type == 'article':
+            # Add breadcrumbs that belong to the navgiation
+            add_breadcrumbs_by_navigation()
+            # Append page teaser
+            page_teaser = self.current_page.teaser
+            if len(page_teaser) > 0:
+                breadcrumbs.extend([(page_teaser, self.context.uniqueId)])
+            else:
+                breadcrumbs.extend([(
+                    u"{}: {}".format(self.supertitle, self.title), None)])
         # Archive year index
-        if context_type == 'archive-print-year':
+        elif context_type == 'archive-print-year':
             breadcrumbs.extend([
                 ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
                 ("Jahrgang: {}".format(self.context.year), None)])
@@ -52,26 +75,6 @@ class Base(zeit.web.core.view.Base):
                 ("Jahrgang {}".format(self.context.year),
                     '{}/index'.format(self.content_url.rsplit('/', 2)[0])),
                 ("Ausgabe: {}".format(self.context.volume), None)])
-        # Articles
-        else:
-            # Add breadcrumbs that belong to the navgiation
-            for segment in (
-                    self.ressort, self.sub_ressort):
-                try:
-                    nav_item = zeit.web.core.navigation.navigation_by_name[
-                        segment]
-                    breadcrumbs.extend([(
-                        nav_item['text'], nav_item['link'])])
-                except KeyError:
-                    # Segment is no longer be part of the navigation
-                    next
-            # Append page teaser
-            page_teaser = self.current_page.teaser
-            if len(page_teaser) > 0:
-                breadcrumbs.extend([(page_teaser, self.context.uniqueId)])
-            else:
-                breadcrumbs.extend([(
-                    u"{}: {}".format(self.supertitle, self.title), None)])
         return breadcrumbs
 
 
