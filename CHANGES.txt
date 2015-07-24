@@ -4,7 +4,7 @@ Change log for zeit.web
 1.43 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1948: Configure separate serie source for videos.
 
 
 1.42 (2015-07-23)
