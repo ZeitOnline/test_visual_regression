@@ -52,6 +52,10 @@ class Base(zeit.web.core.view.Base):
                     # Segment is no longer be part of the navigation
                     next
 
+        def add_default_breadcrumbs():
+            breadcrumbs.extend([(
+                self.pagetitle.replace(self.pagetitle_suffix, ''), None)])
+
         # Article
         if context_type == 'article':
             # Add breadcrumbs that belong to the navgiation
@@ -61,8 +65,7 @@ class Base(zeit.web.core.view.Base):
             if len(page_teaser) > 0:
                 breadcrumbs.extend([(page_teaser, self.context.uniqueId)])
             else:
-                breadcrumbs.extend([(
-                    u"{}: {}".format(self.supertitle, self.title), None)])
+                add_default_breadcrumbs()
         # Topicpage
         elif context_type == 'topicpage':
             add_breadcrumbs_by_navigation()
@@ -80,6 +83,8 @@ class Base(zeit.web.core.view.Base):
                 ("Jahrgang {}".format(self.context.year),
                     '{}/index'.format(self.content_url.rsplit('/', 2)[0])),
                 ("Ausgabe: {}".format(self.context.volume), None)])
+        else:
+            add_default_breadcrumbs()
         return breadcrumbs
 
 
