@@ -34,6 +34,13 @@ class Base(zeit.web.core.view.Base):
     @zeit.web.reify
     def breadcrumbs(self):
         breadcrumbs = [('Start', 'http://xml.zeit.de/index', 'ZEIT ONLINE')]
+        context_type = getattr(self.context, 'type', '')
+        # Archive year index
+        if context_type == 'archive-print-year':
+            breadcrumbs.extend([
+                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
+                ("Jahrgang: {}".format(self.context.year), None)])
+        # Archive volume index
 
 @pyramid.view.view_config(
     route_name='spektrum-kooperation',
