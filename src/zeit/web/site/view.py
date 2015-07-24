@@ -41,6 +41,13 @@ class Base(zeit.web.core.view.Base):
                 ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
                 ("Jahrgang: {}".format(self.context.year), None)])
         # Archive volume index
+        elif context_type == 'archive-print-volume':
+            breadcrumbs.extend([
+                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
+                ("Jahrgang {}".format(self.context.year),
+                    '{}/index'.format(self.content_url.rsplit('/', 2)[0])),
+                ("Ausgabe: {}".format(self.context.volume), None)])
+        # Articles
 
 @pyramid.view.view_config(
     route_name='spektrum-kooperation',
