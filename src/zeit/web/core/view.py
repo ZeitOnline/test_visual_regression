@@ -392,6 +392,11 @@ class Base(object):
                 date > self.date_first_released):
             return date.astimezone(self.timezone)
 
+    @zeit.web.reify
+    def content_url(self):
+        path = '/'.join(self.request.traversed)
+        return self.request.route_url('home') + path
+
 
 class Content(Base):
 
@@ -474,11 +479,6 @@ class Content(Base):
                 return group
         except TypeError:
             return
-
-    @zeit.web.reify
-    def content_url(self):
-        path = '/'.join(self.request.traversed)
-        return self.request.route_url('home') + path
 
     @zeit.web.reify
     def comments(self):
