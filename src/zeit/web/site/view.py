@@ -31,6 +31,9 @@ class Base(zeit.web.core.view.Base):
         except (IndexError, TypeError):
             return False
 
+    @zeit.web.reify
+    def breadcrumbs(self):
+        breadcrumbs = [('Start', 'http://xml.zeit.de/index', 'ZEIT ONLINE')]
 
 @pyramid.view.view_config(
     route_name='spektrum-kooperation',
