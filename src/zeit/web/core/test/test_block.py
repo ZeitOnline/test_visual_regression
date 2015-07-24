@@ -6,8 +6,10 @@ import copy
 
 import zope.interface.declarations
 
+import zeit.cms.interfaces
 import zeit.edit.interfaces
-import zeit.web.core.block
+import zeit.web.site.module
+import zeit.web.site.view_article
 
 
 def test_inline_html_should_filter_to_valid_html():
@@ -115,7 +117,7 @@ def test_image_should_be_fail_if_is_empty_doesnot_exist():
 def test_module_class_should_hash_as_expected():
     context = mock.Mock()
     context.xml.attrib = {'{http://namespaces.zeit.de/CMS/cp}__name__': 42}
-    mod = zeit.web.core.block.Module(context)
+    mod = zeit.web.site.module.Module(context)
     assert hash(mod) == 42
 
 
@@ -124,7 +126,7 @@ def test_cpextra_module_should_have_a_layout_attribute():
     context.cpextra = 'lorem-ipsum'
     zope.interface.declarations.alsoProvides(
         context, zeit.content.cp.interfaces.ICPExtraBlock)
-    module = zeit.web.core.block.Module(context)
+    module = zeit.web.site.module.Module(context)
     assert module._layout.id == 'lorem-ipsum'
 
 
@@ -133,7 +135,7 @@ def test_vivi_module_should_have_a_layout_attribute():
     context.type = 'barbapapa'
     zope.interface.declarations.alsoProvides(
         context, zeit.edit.interfaces.IBlock)
-    module = zeit.web.core.block.Module(context)
+    module = zeit.web.site.module.Module(context)
     assert module._layout.id == 'barbapapa'
 
 
@@ -170,3 +172,12 @@ def test_block_liveblog_instance_causing_timeouts(application, mockserver,
         # requests failed, default theme applied
         assert liveblog.theme == 'zeit-online'
         assert liveblog.last_modified is None
+
+
+def test_block_breaking_news_has_correct_date(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+
+    breaking_news = zeit.web.core.block.BreakingNews()
+    assert breaking_news.date_first_released == view.date_first_released

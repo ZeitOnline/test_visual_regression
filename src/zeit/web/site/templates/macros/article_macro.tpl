@@ -1,5 +1,5 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
 {% extends 'zeit.web.core:templates/macros/article_macro.tpl' %}
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 {% macro image(obj, loop) -%}
     {% if obj | default_image_url -%}
@@ -13,7 +13,7 @@
             {%- endif -%}
             ">
             <div class="scaled-image">
-                {{ lama_core.insert_responsive_image(obj, None, 'article') }}
+                {{ lama.insert_responsive_image(obj, None, 'article') }}
             </div>
             <figcaption class="figure__caption {% if obj.layout == 'small' %}figure__caption--marginalia{%- endif -%}">
                 {% if loop -%}
@@ -117,13 +117,29 @@
     </ol>
 {%- endmacro %}
 
-{% macro place(item) -%}
-    {{ lama_core.adplace(item, view) }}
-    {{ lama_core.adplace_middle_mobile(item) }}
+{% macro place(item, view) -%}
+
+    {# On "komplettansicht", we do not want to have duplicate banner IDs.
+    That's why we set Banners 7+8+9 only on the first three pages and do
+    not display ads on other pages. #}
+    {% if view.is_all_pages_view %}
+        {% if item.on_page_nr == 1 %}
+            {{ lama.adplace(view.banner(7), view) }}
+            {{ lama.adplace(view.banner(4), view, mobile=True) }}
+        {% elif item.on_page_nr == 2 %}
+            {{ lama.adplace(view.banner(9), view) }}
+        {% endif %}
+    {% else %}
+        {{ lama.adplace(item, view) }}
+        {% if item.tile == 7 %}
+            {{ lama.adplace(view.banner(4), view, mobile=True) }}
+        {% endif %}
+    {% endif %}
+
 {%- endmacro %}
 
-{% macro contentadblock(item) -%}
-    {{ lama_core.content_ad_article(view) }}
+{% macro contentadblock(item, view) -%}
+    {{ lama.content_ad_article(view) }}
 {%- endmacro %}
 
 {% macro portraitbox(obj) -%}
@@ -177,7 +193,6 @@
     </aside>
 {%- endif %}
 {%- endmacro %}
-
 
 {% macro raw(obj) -%}
     {% if obj.alldevices %}

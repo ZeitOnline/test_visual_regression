@@ -4,22 +4,22 @@
     <link id="first"></link>
     <sub_sections>
       <sub_section>
-        <link id="blogs" href="http://www.zeit.de/blogs/index">Blogs</link>
+        <link id="footernav.bottom.1.1.blogs" href="http://www.zeit.de/blogs/index">Blogs</link>
       </sub_section>
       <sub_section>
-        <link id="foto" href="http://www.zeit.de/foto/index">Foto</link>
+        <link id="footernav.bottom.1.2.foto" href="http://www.zeit.de/foto/index">Foto</link>
       </sub_section>
       <sub_section>
-        <link id="video" href="http://www.zeit.de/video">Video</link>
+        <link id="footernav.bottom.1.3.video" href="http://www.zeit.de/video">Video</link>
       </sub_section>
       <sub_section>
-        <link id="leserartikel" href="http://www.zeit.de/leserartikel/index">Leserartikel</link>
+        <link id="footernav.bottom.1.4.leserartikel" href="http://www.zeit.de/leserartikel/index">Leserartikel</link>
       </sub_section>
       <sub_section>
-        <link id="print-archiv" href="http://www.zeit.de/archiv">Print-Archiv</link>
+        <link id="footernav.bottom.1.5.print-archiv" href="http://www.zeit.de/archiv">Print-Archiv</link>
       </sub_section>
       <sub_section>
-        <link id="schlagworte" href="http://www.zeit.de/schlagworte/index/A/index">Schlagworte</link>
+        <link id="footernav.bottom.1.6.schlagworte" href="http://www.zeit.de/schlagworte/index/A/index">Schlagworte</link>
       </sub_section>
     </sub_sections>
   </section>
@@ -27,19 +27,19 @@
     <link id="last"></link>
     <sub_sections>
       <sub_section>
-        <link id="agb" href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</link>
+        <link id="footernav.bottom.2.1.agb" href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</link>
       </sub_section>
       <sub_section>
-        <link id="cookie" href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</link>
+        <link id="footernav.bottom.2.2.cookie" href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</link>
       </sub_section>
       <sub_section>
-        <link id="hilfekontakt" href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</link>
+        <link id="footernav.bottom.2.3.hilfekontakt" href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</link>
       </sub_section>
       <sub_section>
-        <link id="newsletter" href="http://community.zeit.de/newsletter">Newsletter</link>
+        <link id="footernav.bottom.2.4.newsletter" href="http://community.zeit.de/newsletter">Newsletter</link>
       </sub_section>
       <sub_section>
-        <link id="RSS" href="http://www.zeit.de/hilfe/hilfe#rss">RSS</link>
+        <link id="footernav.bottom.2.5.RSS" href="http://www.zeit.de/hilfe/hilfe#rss">RSS</link>
       </sub_section>
     </sub_sections>
   </section>

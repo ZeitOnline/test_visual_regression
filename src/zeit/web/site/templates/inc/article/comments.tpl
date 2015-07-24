@@ -1,4 +1,4 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core %}
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 {% if view.comments_allowed or view.comments %}
 <section class="comment-section" id="comments">
@@ -28,7 +28,7 @@
 		<div class="comment-section__item">
 			{# funky future feature?
 			<a class="comment-section__link-autoupdate nowrap" href="{{ request.url }}#comments">
-				{{ lama_core.use_svg_icon('spinner', 'comment-section__icon-spinner', request) }}
+				{{ lama.use_svg_icon('spinner', 'comment-section__icon-spinner', request) }}
 				Auto-Aktualisierung an
 			</a>
 			#}
@@ -40,21 +40,25 @@
 				{% set label = 'Neueste zuerst' %}
 			{% endif %}
 			<a class="comment-section__link-sorting nowrap" href="{{ href }}#comments">
-				{{ lama_core.use_svg_icon('sorting', 'comment-section__icon-sorting', request) }}
+				{{ lama.use_svg_icon('sorting', 'comment-section__icon-sorting', request) }}
 				{{ label }}
 			</a>
 		</div>
 	</div>
 
 	<div id="js-comments-body">
+
+		{# Show ads before the 4th comment, or before the last comment if there are less than 4 [ZON-1919] #}
 		{% for comment in view.comments.comments %}
-			{% if loop.index == 4 -%}
+
+			{% if (loop.length < 4 and loop.last ) or loop.index == 4 -%}
 				{% if view.context.advertising_enabled -%}
 				<div class="comment__ad">
-					{{ lama_core.adplace(view.banner(8), view) }}
+					{{ lama.adplace(view.banner(8), view) }}
 				</div>
 				{%- endif %}
 			{% endif %}
+
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}
@@ -66,7 +70,7 @@
 					{% endif %}
 					{% if comment.is_author %}
 					<span title="{{ comment.role }}">
-						{{ lama_core.use_svg_icon('comment-author', 'comment__badge comment__badge--author', request) }}
+						{{ lama.use_svg_icon('comment-author', 'comment__badge comment__badge--author', request) }}
 					</span>
 					{% endif %}
 					<a class="comment__name" href="{{ comment.userprofile_url }}">
@@ -87,16 +91,16 @@
 				<div class="comment__reactions">
 					{% if view.comments_allowed -%}
 					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='comment', pid=comment.cid) }}#comment-form" title="Antworten">
-						{{ lama_core.use_svg_icon('comment-reply', 'comment__icon comment__icon-reply', request) }}
+						{{ lama.use_svg_icon('comment-reply', 'comment__icon comment__icon-reply', request) }}
 						<span class="comment__action">Antworten</span>
 					</a>
 					{% endif -%}
 					<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='report', pid=comment.cid) }}#report-comment-form" title="Melden">
-						{{ lama_core.use_svg_icon('comment-report', 'comment__icon comment__icon-report', request) }}
+						{{ lama.use_svg_icon('comment-report', 'comment__icon comment__icon-report', request) }}
 						<span class="comment__action">Melden</span>
 					</a>
 					<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" data-fans="{{ comment.fans }}" href="{{ view.request | append_get_params(action='recommend', pid=comment.cid) }}#cid-{{ comment.cid }}" title="Empfehlen">
-						{{ lama_core.use_svg_icon('comment-recommend', 'comment__icon comment__icon-recommend', request) }}
+						{{ lama.use_svg_icon('comment-recommend', 'comment__icon comment__icon-recommend', request) }}
 						<span class="comment__action">Empfehlen</span>
 					</a>
 				</div>
@@ -107,12 +111,22 @@
 
 	{% include "zeit.web.site:templates/inc/comments/pagination.tpl" %}
 
+	{% else %}
+		{% if view.context.advertising_enabled -%}
+			<div class="comment__ad">
+				{{ lama.adplace(view.banner(8), view) }}
+			</div>
+		{% endif %}
 	{% endif %}
 
 	{% if view.request.GET.action == 'report' %}
 		<esi:include src="{{ view.content_url }}/report-form?pid={{ view.request.GET.pid }}" onerror="continue" />
 	{% else %}
-		<esi:include src="{{ view.content_url }}/comment-form?pid={{ view.request.GET.pid }}" onerror="continue" />
+		{% if view.request.GET.error %}
+		    <esi:include src="{{ view.content_url }}/comment-form?error={{ view.request.GET.error }}" onerror="continue" />
+		{% else %}
+		    <esi:include src="{{ view.content_url }}/comment-form?pid={{ view.request.GET.pid }}" onerror="continue" />
+		{% endif %}
 	{% endif %}
 
 	<script type="text/template" id="js-report-success-template">

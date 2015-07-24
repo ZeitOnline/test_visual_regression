@@ -89,6 +89,10 @@ def test_request_thread_should_respond_for_nonexistent(
     assert zeit.web.core.comments.request_thread('nosuchthread') is None
 
 
+def test_request_thread_should_handle_non_ascii_urls(application, mockserver):
+    assert zeit.web.core.comments.request_thread(u'ümläut') is None
+
+
 def test_comment_to_dict_should_parse_correctly(application, testserver):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')
@@ -241,6 +245,7 @@ def _create_poster(monkeypatch):
     request.params = {'path': 'my/path'}
     request.GET = request.POST = request.params
     request.session = {'user': {'uid': '123'}}
+    request.session['user']['name'] = 'foo'
     request.cookies = {}
     context = mock.Mock()
 

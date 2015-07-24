@@ -1,5 +1,5 @@
 .liveblog
-	margin: 0 (-$page-padding) em(20px)
+	margin: em(50px) (-$page-padding) em(20px)
 
 .liveblog-text-wrapper
 	+transition(max-height .5s)
@@ -8,7 +8,7 @@
 
 .liveblog-text-wrapper--wrapped
 	cursor: pointer
-	margin: 0 auto em(20px)
+	margin: 0 auto
 	max-width: em(660px)
 	max-height: 5 * 1.4 * em(18px) // 5 lines paragraph text
 	+respond-min($break-desktop-min)
@@ -30,7 +30,6 @@
 		bottom: 0
 		left: 0
 		text-align: center
-		font-family: $font-tabletgothic
 		letter-spacing: $zon-letter-spacing-s
 		border-bottom: 1px solid rgba($color-link--default, .5)
 		+transition-property(border-bottom-color, color)

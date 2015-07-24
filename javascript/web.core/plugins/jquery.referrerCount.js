@@ -14,7 +14,7 @@
 * @author Nico Bruenjes
 */
 
-(function( $, win, doc ) {
+(function( $, window, document ) {
     /**
     * See (http://jquery.com/)
     * @name jQuery
@@ -48,7 +48,7 @@
         },
         hasLocalstorage = function() {
             try {
-                return ( 'localStorage' in win ) && ( 'setItem' in localStorage );
+                return ( 'localStorage' in window ) && ( 'setItem' in localStorage );
             } catch ( e ) {
                 return false;
             }
@@ -65,7 +65,7 @@
                 // check against sites
                 var ret = false;
                 $.each( defaults.sites, function( i, n ) {
-                    if ( doc.referrer.search( n.regex ) > -1 ) {
+                    if ( document.referrer.search( n.regex ) > -1 ) {
                         ret = n.name;
                         return false; // return false to exit loop
                     }

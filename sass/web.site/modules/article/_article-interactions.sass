@@ -4,7 +4,6 @@
 
 .sharing-menu
 	font-size: remify(14px)
-	font-family: $font-tabletgothic
 	&__title
 		color: $zon_grey
 		cursor: pointer
@@ -58,7 +57,7 @@
 .sharing-menu--active > .sharing-menu__title
 	color: $zon_dark_grey
 	&:after
-		+rotate(180deg)
+		+transform(rotate(180deg))
 
 .sharing-menu--active > .sharing-menu__items,
 .no-js .sharing-menu__items // no-js fallback

@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 from mock import MagicMock
 from zeit.web.core.comments import get_thread
-from zeit.web.core.security import CommunityAuthenticationPolicy
+from zeit.web.core.security import AuthenticationPolicy
 from zeit.web.core.security import get_community_user_info
 import pytest
 
 
 @pytest.fixture
 def policy():
-    return CommunityAuthenticationPolicy()
+    return AuthenticationPolicy()
 
 
 def test_cookieless_request_returns_nothing(policy, dummy_request):
@@ -81,7 +81,8 @@ def test_unreachable_community_should_not_produce_error(dummy_request):
         'http://thisurlshouldnotexist.moep/')
     dummy_request.cookies['drupal-userid'] = 23
     dummy_request.headers['Cookie'] = ''
-    user_info = dict(uid=0, name=None, picture=None, roles=[], mail=None)
+    user_info = dict(uid=0, name=None, picture=None, roles=[],
+                     mail=None)
     assert get_community_user_info(dummy_request) == user_info
 
 
@@ -102,3 +103,27 @@ def test_malformed_community_response_should_not_produce_error(
     dummy_request.headers['Cookie'] = ''
     user_info = dict(uid=0, name=None, picture=None, roles=[], mail=None)
     assert get_community_user_info(dummy_request) == user_info
+
+
+def test_get_community_user_info_strips_malformed_picture_value(
+        dummy_request, mockserver_factory):
+    user_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <user>
+        <picture>0</picture>
+    </user>
+    """
+    mockserver_factory(user_xml)
+    user_info = get_community_user_info(dummy_request)
+    assert user_info['picture'] is None
+
+
+def test_get_community_user_info_replaces_community_host(
+        dummy_request, mockserver_factory):
+    user_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <user>
+        <picture>http://localhost:6551/picture.png</picture>
+    </user>
+    """
+    mockserver_factory(user_xml)
+    user_info = get_community_user_info(dummy_request)
+    assert user_info['picture'] == 'http://static_community/foo/picture.png'

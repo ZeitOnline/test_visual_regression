@@ -1,5 +1,6 @@
 import grokcore.component
 import zope.interface
+import copy
 
 import zeit.cms.repository.interfaces
 import zeit.content.article
@@ -91,8 +92,11 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
                 for i, block in enumerate(page.blocks):
                     if _para == block:
                         t = tile_list[index] - 1
-                        page.blocks.insert(
-                            i, zeit.web.core.banner.banner_list[t])
+                        # save the (virtual) page nr on (copies) of the banner,
+                        # to be able to handle banner display inside the macro.
+                        banner = copy.copy(zeit.web.core.banner.banner_list[t])
+                        setattr(banner, 'on_page_nr', int(page.number+1))
+                        page.blocks.insert(i, banner)
                         break
             except IndexError:
                 pass
@@ -101,7 +105,7 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
 def _place_content_ad_by_paragraph(page, possible_paragraphs):
     paragraphs = filter(
         lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
-    contentAd = zeit.web.core.banner.ContentAdBlock("iq-artikelanker")
+    content_ad = zeit.web.core.banner.ContentAdBlock("iq-artikelanker")
 
     for index, pp in enumerate(possible_paragraphs):
         if len(paragraphs) > pp + 1:
@@ -109,7 +113,7 @@ def _place_content_ad_by_paragraph(page, possible_paragraphs):
                 _para = paragraphs[pp]
                 for i, block in enumerate(page.blocks):
                     if _para == block:
-                        page.blocks.insert(i, contentAd)
+                        page.blocks.insert(i, content_ad)
                         break
             except IndexError:
                 pass
@@ -176,6 +180,6 @@ class IPhotoclusterArticle(zeit.content.article.interfaces.IArticle):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
-@grokcore.component.adapter(zeit.web.core.interfaces.INextreadTeaserBlock)
-class NextreadTeaserBlock(zeit.web.core.centerpage.TeaserBlock):
+@grokcore.component.adapter(zeit.web.core.interfaces.INextread)
+class Nextread(zeit.web.core.centerpage.TeaserBlock):
     pass

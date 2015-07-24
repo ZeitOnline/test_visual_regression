@@ -86,20 +86,32 @@
 </script>
 {% endmacro %}
 
-{% macro adplace_adctrl(banner, view) -%}
+{% macro adplace_adctrl(banner, view, mobile) -%}
     {{ caller() }}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
-    <div id="iqadtile{{ banner.tile }}" class="ad ad--{{ banner.name }} ad--{{ banner.name }}-on-{{ pagetype }}" data-ad_width="{{ banner.noscript_width_height[0] }}" data-ad_minwidth="{{ banner.min_width }}">
-        {% if banner.label -%}
-        <div class="ad__label ad__label--{{ banner.name }}">{{ banner.label }}</div>
-        {% endif -%}
-        <div class="ad__inner ad_inner--{{ banner.name }}">
-            <script type="text/javascript">
-                if (typeof AdController !== 'undefined') {
-                    AdController.render('iqadtile{{ banner.tile }}');
+    {% set operator = '<=' if mobile else '>' %}
+    {% set type = 'mobile' if mobile else 'desktop' %}
+    {% set scriptname = 'ad-%s-%s' | format(type, banner.tile) %}
+    <div>
+        <script type="text/javascript" id="{{ scriptname }}">
+            if (typeof AdController !== 'undefined' && ZMO.clientWidth {{ operator | safe }} ZMO.mobileWidth) {
+                var elem = document.createElement('div');
+                elem.id = "iqadtile{{ banner.tile }}";
+                elem.className = "ad ad-{{ type }} ad-{{type}}--{{ banner.tile }} ad-{{type}}--{{ banner.tile }}-on-{{ pagetype }}";
+                elem.setAttribute('data-banner-type', '{{ type }}');
+                {% if banner.label and not(mobile) -%}
+                    var label = document.createElement('span');
+                    label.className = "ad__label";
+                    label.textContent = "{{ banner.label }}";
+                    elem.appendChild(label);
+                {% endif -%}
+                document.getElementById('{{ scriptname }}').parentNode.appendChild(elem);
+                AdController.render('iqadtile{{ banner.tile }}');
+                if (console && typeof console.info === 'function') {
+                    console.info('AdController ' + AdController.VERSION + ' tile {{ banner.tile }} {{ type }}')
                 }
-            </script>
-        </div>
+            }
+        </script>
     </div>
 {% endmacro %}
 
@@ -142,15 +154,15 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro adplace(banner, view) -%}
+{% macro adplace(banner, view, mobile=False) -%}
     {% if view.context.advertising_enabled -%}
         {% if view.deliver_ads_oldschoolish %}
             {% call adplace_oldschoolish(banner, view) -%}
                 <!-- tile: {{ banner.tile }} oldschoolish -->
             {%- endcall %}
         {% else %}
-            {% call adplace_adctrl(banner, view) -%}
-                <!-- tile: {{ banner.tile }} adctrl -->
+            {% call adplace_adctrl(banner, view, mobile) -%}
+                <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
             {%- endcall %}
         {% endif %}
     {% endif -%}
@@ -185,12 +197,12 @@
 
     {% if image %}
         <!--[if gt IE 8]><!-->
-            <noscript data-src="{{image | default_image_url}}">
+            <noscript data-src="{{ image | default_image_url }}">
         <!--<![endif]-->
         {% if page_type == 'article' and image.href %}
-            <a href="{{image.href}}">
+            <a href="{{ image.href }}">
         {% endif %}
-                <img alt="{{alt}}" {% if title %}title="{{title}}" {% endif %}class="{{image_class | default('', true)}} figure__media" src="{{image | default_image_url}}" data-ratio="{{image.ratio}}">
+                <img alt="{{ alt }}" {% if title %}title="{{ title }}" {% endif %}class="{{ image_class | default('', true) }} figure__media" src="{{ image | default_image_url }}" data-ratio="{{ image.ratio }}">
         {% if page_type == 'article' and image.href %}
             </a>
         {% endif %}

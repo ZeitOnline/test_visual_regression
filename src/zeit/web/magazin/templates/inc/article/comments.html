@@ -2,24 +2,24 @@
 	<div class="article__socialbox tc" id="js-social-services">
 	{% if view.linkreach %}
 		<div class="article__sharing">
-		{% if view.linkreach.total %}
+		{% if view.linkreach.total >= 10 %}
 			<div class="article__sharing__item article__sharing__sum js-toggle-sharing">
-				<span class="article__sharing__total">{{ view.linkreach.total[0] }}</span>
-				<span class="article__sharing__unit">{{ view.linkreach.total[1] }}</span>
+				<span class="article__sharing__total">{{ view.linkreach.total | unitize(0) }}</span>
+				<span class="article__sharing__unit">{{ view.linkreach.total | unitize(1) }}</span>
 			</div>
 		{% endif %}
 			<div class="article__sharing__services blind">
 				<a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.int.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_int&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
 					<span class="article__sharing__services__icon icon-sharebox-facebook"></span>
-					<span class="article__sharing__services__text">{{ ' '.join(view.linkreach.facebook) }}</span>
+					<span class="article__sharing__services__text">{{ view.linkreach.facebook.total | unitize }}</span>
 				</a>
 				<a href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&via=zeitonline&url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.twitter.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=twitter_zonaudev_int&utm_campaign=twitter_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
 					<span class="article__sharing__services__icon icon-sharebox-twitter"></span>
-					<span class="article__sharing__services__text">{{ ' '.join(view.linkreach.twitter) }}</span>
+					<span class="article__sharing__services__text">{{ view.linkreach.twitter.total | unitize }}</span>
 				</a>
 				<a href="https://plus.google.com/share?url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.gplus.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=gplus_zonaudev_int&utm_campaign=gplus_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
 					<span class="article__sharing__services__icon icon-sharebox-google"></span>
-					<span class="article__sharing__services__text">{{ ' '.join(view.linkreach.googleplus) }}</span>
+					<span class="article__sharing__services__text">{{ view.linkreach.googleplus.total | unitize }}</span>
 			   </a>
 			</div>
 			<div class="article__sharing__item">
@@ -47,24 +47,47 @@
 		<div class="comments__head" id="js-comments-head">
 		{% if view.comments_allowed %}
 			{% if request.authenticated_userid -%}
-			<form method="POST" class="comment__form" id="js-comments-form">
+			<form method="POST" class="comment__form js-submit-comment" id="js-comments-form">
+				{% if not request.session.user.name %}
+					<p class="comments__hint">
+						Sie haben noch keinen Benutzernamen. Dieser wird einmalig festgelegt und ist öffentlich sichtbar.
+					</p>
+					<p>
+						<input name="username" placeholder="Ihr neuer Benutzername" class="comments__input js-required">
+					</p>
+				{% endif %}
 				<p>
-					<textarea name="comment" placeholder="Ihr Kommentar" class="js-required"></textarea>
+					<textarea name="comment" placeholder="Ihr Kommentar" class="js-required" maxlength="1500"></textarea>
 					<input type="hidden" name="action" value="comment">
 					<input type="hidden" name="pid" value="">
 				</p>
-				<div class="comment__form__note comment__form__note--casual">angemeldet als <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">{{ request.session.user.name|e }}</a></div>
+				<div class="comment__form__note comment__form__note--casual">
+				{% if request.session.user.name %}
+					angemeldet als <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">{{ request.session.user.name|e }}</a>
+				</div>
 				<div class="comment__form__actions">
 					<input type="submit" class="button" value="Kommentieren" disabled />
 				</div>
+				{% else %}
+					angemeldet, <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">kein Benutzername</a>
+				</div>
+				<div class="comment__form__actions">
+					<input type="submit" class="button" value="Absenden" disabled />
+				</div>
+				{% endif %}
 			</form>
 			{% else -%}
 			<form class="comment__form comment__form--login" id="js-comments-form">
 				<div class="comment__form__wrap">
 					<div class="comment__form__note">Bitte melden Sie sich an, um zu kommentieren.</div>
 				</div>
+				{% if request.registry.settings.sso_activate %}
+					<a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ request.url|e }}" class="button">Anmelden</a>
+					<a href="{{ request.registry.settings.sso_url }}/registrieren?url={{ request.url|e }}" class="button">Registrieren</a>
+				{% else %}
 				<a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url|e }}" class="button">Anmelden</a>
 				<a href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url|e }}" class="button">Registrieren</a>
+				{% endif %}
 			</form>
 			{% endif %}
 		{% endif %}

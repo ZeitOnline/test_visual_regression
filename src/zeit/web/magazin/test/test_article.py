@@ -9,7 +9,7 @@ import mock
 from zeit.content.article.article import Article
 import zeit.cms.interfaces
 
-from zeit.web.core.interfaces import IPages
+import zeit.web.core.interfaces
 import zeit.web.magazin.view_article
 
 import pytest
@@ -29,7 +29,7 @@ def test_ipages_contains_blocks(application):
 </article>
 """)
     article = Article(xml)
-    pages = IPages(article)
+    pages = zeit.web.core.interfaces.IPages(article)
     assert 2 == len(pages)
     assert 'foo bar\n' == str(list(pages[0])[0])
     assert 1 == pages[1].number
@@ -121,7 +121,7 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
 
     # custom parameter
     assert '1: "anne mustermann",' in browser.contents
-    assert '2: "zeitmz/essenundtrinken/article",' in browser.contents
+    assert '2: "lebensart/essen-trinken/bild-text",' in browser.contents
     assert '3: "1/7",' in browser.contents
     assert '4: "wein;italien;toskana;bologna;bozen;florenz;tübingen",' \
         in browser.contents
@@ -141,8 +141,8 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
             'artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=article'
             '&amp;cg3=lebensart&amp;cg4=online&amp;cg5=essen-trinken&amp;cg6'
             '=weinkolumne&amp;cg7=03&amp;cg8=zeitmz/essenundtrinken/article'
-            '&amp;cg9=2013-07-30&amp;cp1=anne mustermann&amp;cp2=zeitmz/'
-            'essenundtrinken/article&amp;cp3=1/7&amp;cp4=wein;italien;'
+            '&amp;cg9=2013-07-30&amp;cp1=anne mustermann&amp;cp2=lebensart/'
+            'essen-trinken/bild-text&amp;cp3=1/7&amp;cp4=wein;italien;'
             'toskana;bologna;bozen;florenz;tübingen&amp;cp5=2013-07-30 '
             '17:20:50.176115+02:00&amp;cp6=4952&amp;cp7=&amp;cp8=zede'
             '&amp;cp9=zeitmz/essenundtrinken/article&amp;cp10=&amp;'
@@ -166,7 +166,7 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, testbrowser):
             '&amp;cg2=article&amp;cg3=lebensart&amp;cg4=online&amp;cg5=essen-'
             'trinken&amp;cg6=weinkolumne&amp;cg7=seite-2&amp;cg8=zeitmz/'
             'essenundtrinken/article&amp;cg9=2013-07-30&amp;cp1=anne '
-            'mustermann&amp;cp2=zeitmz/essenundtrinken/article&amp;'
+            'mustermann&amp;cp2=lebensart/essen-trinken/bild-text&amp;'
             'cp3=2/7&amp;cp4=wein;italien;toskana;bologna;bozen;florenz;'
             'tübingen&amp;cp5=2013-07-30 17:20:50.176115+02:00&amp;cp6=4952'
             '&amp;cp7=&amp;cp8=zede&amp;cp9=zeitmz/essenundtrinken/article'
@@ -203,6 +203,7 @@ def test_webtrekk_series_tag_is_set_corectly(testserver, testbrowser):
             '06') % (testserver.host, testserver.port) in browser.contents
 
 
+@pytest.mark.xfail(reason='tracking scripts & pixels may timeout')
 def test_ivw_tracking_for_mobile_and_desktop(
         selenium_driver, testserver, monkeypatch):
 
@@ -215,7 +216,7 @@ def test_ivw_tracking_for_mobile_and_desktop(
     driver = selenium_driver
     # ipad landscape
     driver.set_window_size(1024, 768)
-    driver.get('%s/artikel/01' % testserver.url)
+    driver.get('%s/artikel/03' % testserver.url)
     content = driver.execute_script("return iam_data.st")
     assert content == "zeitonl"
     # ipad portrait and smaller
@@ -502,34 +503,34 @@ def test_gallery_should_have_click_counter_functions(testserver, testbrowser):
 
 def test_nextread_teaser_block_has_teasers_available(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    nextread = zeit.web.core.block.NextreadTeaserBlock(context)
-    assert isinstance(nextread.teasers, tuple), \
-        'The "teasers" attribute should return a tuple.'
-    assert len(nextread.teasers) == 1, \
+    nextread = zeit.web.core.interfaces.INextread(context)
+    assert hasattr(nextread, '__iter__'), \
+        'The nextread block should be iterable.'
+    assert len(nextread) == 1, \
         '"Artikel 09" has exactly one nextread.'
-    assert all(map(lambda a: isinstance(a, Article), nextread.teasers)), \
+    assert all(map(lambda a: isinstance(a, Article), nextread)), \
         'All nextread teasers should be articles.'
 
 
 def test_nextread_teaser_blocks_has_correct_layout_id(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    nextread = zeit.web.core.block.NextreadTeaserBlock(context)
+    nextread = zeit.web.core.interfaces.INextread(context)
     assert nextread.layout.id == 'base', \
         '"Artikel 09" has a base nextread layout.'
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    nextread = zeit.web.core.block.NextreadTeaserBlock(context)
+    nextread = zeit.web.core.interfaces.INextread(context)
     assert nextread.layout.id == 'maximal', \
         '"Artikel 03" has a maximal nextread layout.'
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/artikel/01')
-    nextread = zeit.web.core.block.NextreadTeaserBlock(context)
+    nextread = zeit.web.core.interfaces.INextread(context)
     assert nextread.layout.id == 'base', \
         '"Artikel 01" has no nextread layout, should fallback to base.'
 
 
 def test_nextread_teaser_block_teasers_is_accessable(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
-    nextread = zeit.web.core.block.NextreadTeaserBlock(context)
+    nextread = zeit.web.core.interfaces.INextread(context)
     assert all(teaser for teaser in nextread), \
         'Nextread block should iterate over its teasers.'
     assert nextread[0], \
@@ -562,7 +563,7 @@ def test_nextread_maximal_layout_has_image_background_if_available(
 
 def test_nextread_should_fallback_to_default_layout(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
-    nextread = zeit.web.core.block.NextreadTeaserBlock(context)
+    nextread = zeit.web.core.interfaces.INextread(context)
     assert nextread.layout.id == 'base', \
         '"Artikel 02" has invalid nextread layout, should fallback to base.'
 

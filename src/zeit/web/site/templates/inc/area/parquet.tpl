@@ -1,14 +1,13 @@
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 
 {% block before_module_list %}
-<div class="parquet-row">
     <div class="parquet-meta">
         {% if area.referenced_cp is none %}
             <span class="parquet-meta__title">
                 {{ area.title | hide_none }}
             </span>
         {% else %}
-            <a class="parquet-meta__title" href="{{ area.referenced_cp.uniqueId | translate_url }}">
+            <a class="parquet-meta__title" href="{{ area.referenced_cp.uniqueId | create_url }}">
                 {{ area.title | hide_none }}
             </a>
             <ul class="parquet-meta__topic-links">
@@ -29,10 +28,9 @@
         {% endif %}
     </div>
     <div class="parquet-teasers">
-    {# XXX Do we really need the parquet-row and parquet-teasers divs? (ND) #}
+    {# XXX Do we really need the parquet-teasers divs? (ND) #}
 {% endblock %}
 
 {% block after_module_list %}
     </div>
-</div>
 {% endblock %}

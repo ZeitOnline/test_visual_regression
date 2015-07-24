@@ -4,8 +4,7 @@ $zon-logo-height: em(38px)
 $zon-logo-width-small: em(231px)
 $zon-logo-height-small: em(26px)
 $zon-search-bar-height-phablet: em(70px)
-$zon-search-bar-width: em(250px)
-$zon-burger-size: em(37px)
+$zon-search-bar-width: em(250px) // is this still correct? It's more than used
 $zon-classifieds-width: em(120px)
 $zon-classifieds-height: em(50px)
 $zon-classifieds-width-phablet: em(180px)
@@ -14,6 +13,9 @@ $zon-search-square-size: remify(35px)
 $login-icon-width: remify(18px)
 $login-icon-height: remify(18px)
 $user-picture-diameter: remify(45px)
+
+$icon-color: $zon_dark_grey
+$icon-color--hover: $zon-charcoal
 
 %beta-badge
 	+inline-block
@@ -31,10 +33,13 @@ $user-picture-diameter: remify(45px)
 	+display-flex()
 	+flex-wrap(wrap)
 	width: 100%
-	& > *[data-dropdown="true"]
+	*[data-dropdown="true"]
 		display: none
 		+respond-min($break-tablet-min)
-			display: inline-block !important
+			display: inline-block
+	&--open
+		*[data-dropdown="true"]
+			display: block
 
 %main_nav_icons
 	+background-size(contain)
@@ -62,48 +67,40 @@ $user-picture-diameter: remify(45px)
 		a
 			+link-colors($black)
 
-%main_nav_button
-	+hide-text
-	display: inline-block
-	width: $zon-search-square-size
-	height: $zon-search-square-size
-	line-height: $zon-search-square-size
-	border: 1px solid $zon_light_grey
-	background-color: $white
-	vertical-align: middle
-	position: relative
-	&:focus
-		outline-width: 0
-	&:hover
-		background-color: $zon_lighter_grey
-	+respond-min($break-tablet-min)
-		vertical-align: bottom
-
 //box 1: logo
 .logo_bar
 	+add_nav_bar_style($zon-bar-height-phablet)
 	+display-flex()
 	+justify-content(space-between)
 	+order(10)
-	margin: 0
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style($width: $zon-logo-width)
 		+order(40)
-		margin: $petite 0 $petite 0
+		margin: $petite 0
 
-.logo_bar__menue
+.logo_bar__menu
 	display: inline-block
 	width: $zon-bar-height-phablet
 	border-left: 1px solid $zon_light_grey
-	+hover_nav_icon()
 	+respond-min($break-tablet-min)
 		display: none
+	a
+		color: $icon-color
+		+on-interaction
+			color: $icon-color--hover
 
-.logo_bar__menue__image
-	@extend %main_nav_icons
-	width: $small
-	height: $small
-	margin: 0
+.logo_bar__menu-icon
+	width: remify(18px)
+	height: remify(18px)
+	display: block
+	margin: remify( (($zon-bar-height-phablet-px - 18px) / 2) ) auto 0
+	&--burger
+		.main_nav--open &
+			display: none
+	&--close
+		display: none
+		.main_nav--open &
+			display: block
 
 .logo_bar__image
 	display: inline-block
@@ -139,15 +136,12 @@ $user-picture-diameter: remify(45px)
 .main_nav__community
 	+add_nav_bar_style(auto)
 	+order(20)
-	+inline-block
 	letter-spacing: 1px
 	padding: remify(20px)
-	text-align: left
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style($width: auto)
 		+order(30)
 		+flex(0 0 auto)
-		+inline-block
 		color: $zon_grey
 		font-size: remify(9px)
 		line-height: $zon-bar-height-phablet
@@ -262,14 +256,10 @@ $user-picture-diameter: remify(45px)
 //box 6: search
 .main_nav__search
 	+add_nav_bar_style($zon-search-bar-height-phablet)
-	line-height: $zon-search-bar-height-phablet
-	text-align: left
 	+order(60)
-	margin: 0
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style()
 		+order(50)
-		text-align: right
 		margin: $petite 0 0 0
 		line-height: $zon-search-square-size
 		overflow: hidden
@@ -277,63 +267,69 @@ $user-picture-diameter: remify(45px)
 		width: $zon-search-bar-width
 
 .search
-	label
-		display: none
+	padding-top: em(17px)
+	+respond-min($break-tablet-min)
+		padding-top: 0
+		float: right
 
 .search__input
-	// display: inline-block
-	width: 70%
-	height: $zon-search-square-size
 	background-color: $white
-	padding: 0
+	border-radius: $micro 0 0 $micro
 	border: 1px solid $zon_light_grey
 	border-right: none
-	font-size: $font-m
 	color: $zon_grey
-	padding-left: $fine
-	border-top-left-radius: $micro
-	border-bottom-left-radius: $micro
-	vertical-align: middle
+	float: left
+	font-size: $font-m
+	height: $zon-search-square-size
+	padding: 0 0 0 $fine
+	width: 70%
 	&:focus
 		outline-width: 0
 		color: $zon_dark_grey
 	+respond-min($break-tablet-min)
 		width: $zon-search-width
-	+respond-min-max($break-tablet-min, $break-desktop-min - .001em)
 		visibility: hidden
-		transition: transform .2s ease-out, visibility .2s
-		transform: translateX($zon-search-width)
+		+transition(transform .2s ease-out, visibility .2s)
+		+transform(translateX($zon-search-width))
+	+respond-min($break-desktop-min)
+		visibility: visible
+		+transform(none)
 
 .search__input--visible
 	visibility: visible
-	transform: translateX(0)
+	+transform(translateX(0))
 	& + .search__button
-		border-top-left-radius: 0
-		border-bottom-left-radius: 0
-		border-top-right-radius: $micro
-		border-bottom-right-radius: $micro
+		border-radius: 0 $micro $micro 0
 
 .search__button
-	@extend %main_nav_button
-	+hover_nav_icon(block,$zon_lighter_grey,0)
-	border-top-right-radius: $micro
-	border-bottom-right-radius: $micro
+	background-color: $white
+	border-radius: 0 $micro $micro 0
+	border: 1px solid $zon_light_grey
+	display: inline-block
+	float: left
+	height: $zon-search-square-size
+	position: relative // needed for the transition
+	width: $zon-search-square-size
+	color: $icon-color
+	+on-interaction
+		background-color: $zon_lighter_grey
+		color: $icon-color--hover
+		outline-width: 0
 	+respond-min($break-tablet-min)
 		border-radius: $micro
-		box-shadow: $micro 0 0 #fff
+		box-shadow: $micro 0 0 #fff // this is here to hide the underlying search input border
+		vertical-align: bottom
 	+respond-min($break-desktop-min)
-		border-top-left-radius: 0
-		border-bottom-left-radius: 0
+		border-radius: 0 $micro $micro 0
 
-.search__button__image
-	@extend %main_nav_icons
-	width: $small
-	height: $small
+.search__icon
+	width: remify(16px)
+	height: remify(16px)
+	position: absolute
+	top: 50%
+	left: 50%
+	margin: remify(-8px 0 0 -8px)
 
-.search__close__image
-	@extend %main_nav_icons
-	width: $small
-	height: $small
 
 //box 9: special teaser
 .main_nav__teaser
@@ -352,7 +348,6 @@ $user-picture-diameter: remify(45px)
 	+order(25)
 	background: $color-body-bg
 	color: $zon_mid_grey
-	display: none
 	padding: remify(16px)
 	text-align: center
 	+respond-min($break-tablet-min)
@@ -402,7 +397,8 @@ $user-picture-diameter: remify(45px)
 	+columns(2)
 	+pie-clearfix
 	font-size: $font-m
-	letter-spacing: .05em
+	letter-spacing: $zon-letter-spacing-m
+	margin: .5em 0 0
 	padding: 0 0 0 $petite
 
 	+respond-min($break-phablet-min)
@@ -473,7 +469,7 @@ $user-picture-diameter: remify(45px)
 			& > a
 				box-shadow: none
 				&:after
-					+rotate(180deg)
+					+transform(rotate(180deg))
 			& > .dropdown
 				display: block
 				z-index: 2

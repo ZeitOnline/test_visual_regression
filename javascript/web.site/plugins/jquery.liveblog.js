@@ -35,8 +35,8 @@
 
                 $( container ).on( 'click', function() {
                     $( this ).off( 'click' ).on( 'transitionend', function() {
-                        this.style.maxHeight = 'none';
-                        this.style.overflow = 'visible';
+                        this.className = '';
+                        this.removeAttribute( 'style' );
                     });
                     this.className = 'liveblog-text-wrapper';
                     this.style.maxHeight = ( height + 60 ) + 'px';

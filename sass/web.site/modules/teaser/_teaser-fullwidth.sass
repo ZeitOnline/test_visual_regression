@@ -10,32 +10,21 @@
 		padding: 0
 		position: relative
 		+teaser-image-text-shadow
-		&:before
-			content: ''
-			min-height: 100%
-			min-width: 100%
-			position: absolute
-			top: 0
-			right: 0
-			bottom: 0
-			left: 0
-			z-index: 1
-			background-color: rgba(0, 0, 0, .1)
-			opacity: 0
-			+transition(opacity .2s ease-in-out)
-		&:hover:before
-			opacity: 1
+		+darken-on-hover
 	&__media
 		margin: 0 (-$page-padding) $petite
+		// this upsizes the fullwidth-image (ratio 2,35) appear to 16:9
+		// this is a temporary hack w/ magic number. it's not perfectly 16:9, because of margins and sh*t
+		width: 136% // for browsers without proper calc support
+		width: calc(135% + 2 * #{$page-padding})
+		max-width: none
 		+respond-min($break-tablet-min)
+			width: 100%
 			margin: 0
 			z-index: 1
 	&__media-container
 		+respond-min($break-tablet-min)
 			+teaser-image-dark-overlay
-	&__media-item
-		height: auto
-		width: 100%
 	&__inner-helper
 		+respond-min($break-tablet-min)
 			bottom: 0
@@ -44,35 +33,52 @@
 			padding: 0 $twice $twice $twice
 			width: em(510px) + (2 * $twice)
 			z-index: 2
+			&--blog
+				top: 0
 		+respond-min($break-desktop-min)
 			padding: 0 0 $medium $medium
 			width: em(640px)
 	&__heading
 		@extend %teaser-heading
-	&__kicker
-		@extend %teaser-kicker
+		margin-bottom: remify(4px)
+
+	&__series-label
+		@extend %teaser-series-label
 		+respond-min($break-tablet-min)
 			color: $white
-			font-size: $font-s
-			letter-spacing: 0.12em
+
+	&__kicker
+		@extend %teaser-kicker
+		margin-bottom: remify(10px)
+		&--blog
+			@extend %teaser-kicker--blog
+			color: $zon_dark_grey
+			font-family: $font-franziska
+			font-style: italic
+			font-weight: normal
+		+respond-min($break-tablet-min)
+			color: $white
+			font-size: remify(14px)
 			margin-bottom: remify(6px)
 			+font-smoothing()
+
 	&__title
 		@extend %teaser-title
 		font-size: em(28px)
 		line-height: 1.12
 		+respond-min($break-tablet-min)
 			color: $white
-			&:hover
-				color: $white
 			+font-smoothing()
 		+respond-min($break-desktop-min)
 			font-size: em(34px)
-			line-height: 1.232
+			line-height: 1.2
 	&__combined-link
 		@extend %teaser-combined-link
-	// &__container
-	// not in use
+	&__container
+		+respond-min($break-tablet-min)
+			&--blog
+				bottom: remify(36px)
+				position: absolute
 	&__text
 		@extend %teaser-text
 		+respond-min($break-tablet-min)
@@ -94,7 +100,8 @@
 		@extend %teaser-datetime
 	&__commentcount
 		@extend %teaser-commentcount
-		&:link, &:visited
-			border-bottom: 1px solid $zon_dark_grey
-		&:hover
-			border-bottom: 1px solid $zon_mid_grey
+		+respond-min($break-tablet-min)
+			&:link, &:visited
+				border-bottom: 1px solid $zon_dark_grey
+			&:hover
+				border-bottom: 1px solid $zon_mid_grey

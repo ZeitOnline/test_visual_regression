@@ -1,0 +1,42 @@
+.teaser-large-column
+	@extend %teaser-column
+	&__media
+		@extend %teaser-column__media
+	&__media-item
+		@extend %teaser-column__media-item !optional
+	&__series-label
+		@extend .teaser-large__series-label
+	&__heading
+		@extend %teaser-heading
+		margin-bottom: remify(4px)
+	&__combined-link
+		@extend .teaser-large__combined-link
+	&__kicker
+		@extend .teaser-large__kicker
+	&__title
+		@extend .teaser-large__title
+	&__text
+		@extend .teaser-large__text
+	&__byline
+		@extend %teaser-column__byline
+	&__metadata
+		@extend %teaser-metadata
+	&__datetime
+		@extend %teaser-datetime
+	&__commentcount
+		@extend %teaser-commentcount
+
+.teaser-large-column--has-media
+	.teaser-large-column__byline
+		@extend %teaser-column__media-space
+
++respond-min($break-phablet-min)
+	.teaser-large-column--has-media
+		.teaser-large-column__media
+			width: $teaser-column-image-width-large
+			height: $teaser-column-image-height-large
+		.teaser-large-column__byline
+			min-height: initial
+		.teaser-large-column__text,
+		.teaser-large-column__title
+			padding-right: remify($teaser-column-image-width-large + 20px)

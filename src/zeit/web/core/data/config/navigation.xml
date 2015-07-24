@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <navigation>
   <section>
-    <link href="http://xml.zeit.de/politik/index" id="politik">Politik</link>
+    <link href="http://xml.zeit.de/politik/index" id="topnav.mainnav.1..politik">Politik</link>
     <!-- <sub_sections>
       <sub_section>
         <link href="http://xml.zeit.de/politik/deutschland/index" id="deutschland">Deutschland</link>
@@ -12,7 +12,7 @@
     </sub_sections> -->
   </section>
   <section>
-    <link href="http://xml.zeit.de/gesellschaft/index" id="gesellschaft">Gesellschaft</link>
+    <link href="http://xml.zeit.de/gesellschaft/index" id="topnav.mainnav.2..gesellschaft">Gesellschaft</link>
     <!-- <sub_sections>
       <sub_section>
         <link href="http://xml.zeit.de/gesellschaft/zeitgeschehen/index" id="zeitgeschehen">Zeitgeschehen</link>
@@ -26,7 +26,7 @@
     </sub_sections> -->
   </section>
   <section>
-    <link href="http://xml.zeit.de/wirtschaft/index" id="wirtschaft">Wirtschaft</link>
+    <link href="http://xml.zeit.de/wirtschaft/index" id="topnav.mainnav.3..wirtschaft">Wirtschaft</link>
     <!-- <sub_sections>
       <sub_section>
         <link href="http://xml.zeit.de/wirtschaft/unternehmen/index" id="unternehmen">Unternehmen</link>
@@ -40,24 +40,24 @@
     </sub_sections> -->
   </section>
   <section>
-    <link href="http://xml.zeit.de/kultur/index" id="kultur">Kultur</link>
+    <link href="http://xml.zeit.de/kultur/index" id="topnav.mainnav.4..kultur">Kultur</link>
     <sub_sections>
       <sub_section>
-        <link href="http://xml.zeit.de/kultur/literatur/index" id="literatur">Literatur</link>
+        <link href="http://xml.zeit.de/kultur/literatur/index" id="topnav.mainnav.4.1.literatur">Literatur</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/kultur/film/index" id="film">Film&#8239;&amp;&#8239;TV</link>
+        <link href="http://xml.zeit.de/kultur/film/index" id="topnav.mainnav.4.2.film">Film&#8239;&amp;&#8239;TV</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/kultur/musik/index" id="musik">Musik</link>
+        <link href="http://xml.zeit.de/kultur/musik/index" id="topnav.mainnav.4.3.musik">Musik</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/kultur/kunst/index" id="kunst">Kunst</link>
+        <link href="http://xml.zeit.de/kultur/kunst/index" id="topnav.mainnav.4.4.kunst">Kunst</link>
       </sub_section>
     </sub_sections>
   </section>
   <section>
-    <link href="http://xml.zeit.de/wissen/index" id="wissen">Wissen</link>
+    <link href="http://xml.zeit.de/wissen/index" id="topnav.mainnav.5..wissen">Wissen</link>
     <!-- <sub_sections>
       <sub_section>
         <link href="http://xml.zeit.de/wissen/gesundheit/index" id="gesundheit">Gesundheit</link>
@@ -71,7 +71,7 @@
     </sub_sections> -->
   </section>
   <section>
-    <link href="http://xml.zeit.de/digital/index" id="digital">Digital</link>
+    <link href="http://xml.zeit.de/digital/index" id="topnav.mainnav.6..digital">Digital</link>
     <!-- <sub_sections>
       <sub_section>
         <link href="http://xml.zeit.de/digital/internet/index" id="internet">Internet</link>
@@ -88,24 +88,24 @@
     </sub_sections> -->
   </section>
   <section>
-    <link href="http://xml.zeit.de/studium/index" id="studium">Studium</link>
+    <link href="http://xml.zeit.de/studium/index" id="topnav.mainnav.7..studium">Studium</link>
     <sub_sections>
       <sub_section>
-        <link href="http://xml.zeit.de/studium/uni-leben/index" id="uni-leben">Uni-Leben</link>
+        <link href="http://xml.zeit.de/studium/uni-leben/index" id="topnav.mainnav.7.1.uni-leben">Uni-Leben</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/studium/hochschule/index" id="hochschule">Hochschule</link>
+        <link href="http://xml.zeit.de/studium/hochschule/index" id="topnav.mainnav.7.2.hochschule">Hochschule</link>
       </sub_section>
       <sub_section>
-        <link href="http://ranking.zeit.de/" id="rankings">Uni-Rankings</link>
+        <link href="http://ranking.zeit.de/" id="topnav.mainnav.7.3.rankings">Uni-Rankings</link>
       </sub_section>
       <sub_section>
-        <link href="http://xml.zeit.de/studium/studiengaenge" id="studiengaenge">Studiengänge</link>
+        <link href="http://xml.zeit.de/studium/studiengaenge" id="topnav.mainnav.7.4.studiengaenge">Studiengänge</link>
       </sub_section>
     </sub_sections>
   </section>
   <section>
-    <link href="http://xml.zeit.de/karriere/index" id="karriere">Karriere</link>
+    <link href="http://xml.zeit.de/karriere/index" id="topnav.mainnav.8..karriere">Karriere</link>
     <!-- <sub_sections>
       <sub_section>
         <link href="http://xml.zeit.de/karriere/bewerbung/index" id="bewerbung">Bewerbung</link>
@@ -119,10 +119,10 @@
     </sub_sections> -->
   </section>
   <section>
-    <link href="http://xml.zeit.de/reisen/index" id="reisen">Reise</link>
+    <link href="http://xml.zeit.de/reisen/index" id="topnav.mainnav.9..reisen">Reise</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/sport/index" id="sport">Sport</link>
+    <link href="http://xml.zeit.de/sport/index" id="topnav.mainnav.10..sport">Sport</link>
     <!-- <sub_sections>
       <sub_section>
         <link href="http://xml.zeit.de/sport/index" id="fussball">Fußball</link>
@@ -136,12 +136,12 @@
     </sub_sections> -->
   </section>
   <section>
-    <link href="http://xml.zeit.de/spiele/index" id="spiele">Spiele</link>
+    <link href="http://xml.zeit.de/spiele/index" id="topnav.mainnav.11..spiele">Spiele</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/mobilitaet/index" id="mobilitaet">Mobilität</link>
+    <link href="http://xml.zeit.de/mobilitaet/index" id="topnav.mainnav.12..mobilitaet">Mobilität</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/hamburg/index" id="hamburg">Hamburg</link>
+    <link href="http://xml.zeit.de/hamburg/index" id="topnav.mainnav.13..hamburg">Hamburg</link>
   </section>
 </navigation>

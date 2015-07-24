@@ -66,6 +66,28 @@
 	}
 }
 
+@mixin darken-on-hover($color: rgba(0, 0, 0, .1)) {
+	position: relative;
+	&:before {
+		content: "";
+		min-height: 100%;
+		min-width: 100%;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+		background-color: $color;
+		opacity: 0;
+		@include transition(opacity .2s ease-in-out);
+	}
+	&:hover:before {
+		opacity: 1;
+	}
+
+}
+
 @mixin teaser-image-text-shadow($color: rgb(0, 0, 20)) {
 	text-shadow: 0 0 20px rgba($color, 0.25);
 }
@@ -209,25 +231,6 @@
 	height: auto;
 	padding-left: 0;
 	width: $width;
-}
-
-@mixin hover_nav_icon($display: block, $bgcolor: #FFF, $padding: $small) {
-	.main_nav__icon--hover {
-		display: none;
-	}
-	a {
-		display: $display;
-		padding: $padding;
-		&:hover {
-			.main_nav__icon--hover {
-				display: $display;
-				background-color: $bgcolor;
-			}
-			.main_nav__icon--plain {
-				display: none;
-			}
-		}
-	}
 }
 
 /* END: mixins for navigation/header */

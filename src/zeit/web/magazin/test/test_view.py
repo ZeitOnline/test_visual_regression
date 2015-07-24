@@ -110,7 +110,7 @@ def test_linkreach_property_should_fetch_correct_data(application):
     article_view.request.url = 'index'
     article_view.request.traversed = ('index',)
     article_view.request.route_url = lambda *args: ''
-    assert article_view.linkreach['total'] == ('1,1', 'Tsd.')
+    assert article_view.linkreach['total'] == 92
 
 
 def test_header_img_should_be_first_image_of_content_blocks(application):
@@ -582,10 +582,10 @@ def test_article09_should_have_a_nextread(application):
     assert view.nextread is not None
 
 
-def test_article01_should_not_have_a_nextread(application):
+def test_article01_should_not_have_nextread_teasers(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert view.nextread is None
+    assert len(view.nextread) == 0
 
 
 def test_caching_headers_should_be_set(testserver, testbrowser):

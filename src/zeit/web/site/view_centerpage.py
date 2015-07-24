@@ -16,13 +16,14 @@ import zeit.content.cp.interfaces
 import zeit.content.cp.layout
 
 import zeit.web.core.interfaces
-import zeit.web.core.reach
 import zeit.web.core.sources
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
+import zeit.web.site.module.buzzbox
 import zeit.web.core.view_centerpage
 import zeit.web.site.area.spektrum
+import zeit.web.site.module
 import zeit.web.site.view
 
 
@@ -30,7 +31,7 @@ log = logging.getLogger(__name__)
 
 
 @zope.interface.implementer(zeit.edit.interfaces.IBlock)
-class LegacyModule(zeit.web.core.block.Module, zeit.web.core.utils.nslist):
+class LegacyModule(zeit.web.site.module.Module, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
         zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
@@ -97,6 +98,7 @@ class RenderedLegacyArea(LegacyArea):
         area.referenced_cp = zeit.cms.interfaces.ICMSContent(uid, None)
         auto = zeit.content.cp.interfaces.IRenderedArea(area)
         # XXX We really should call auto.values() here instead of private API.
+        area._v_try_to_retrieve_content = True
         area._v_retrieved_content = 0
         values = auto._query_centerpage()[:area.count]
 
@@ -155,7 +157,11 @@ class Centerpage(
         :rtype: str
         """
 
-        return zeit.web.core.centerpage.get_ressort_id(self.context)
+        if self.context.type == 'homepage':
+            return 'homepage'
+        elif self.context.ressort:
+            return self.context.ressort.lower()
+        return ''
 
     @zeit.web.reify
     def region_snapshot(self):
@@ -253,11 +259,7 @@ class LegacyCenterpage(Centerpage):
     def module_buzz_mostread(self):
         """Return buzz box module with the top 3 most read articles."""
 
-        module = LegacyModule(
-            zeit.web.core.reach.fetch('mostread', self.ressort, limit=3),
-            layout='buzz-mostread')
-        module.header = 'Meistgelesene Artikel'
-        return module
+        return zeit.web.site.module.buzzbox.MostreadBuzzbox(self.context)
 
     @zeit.web.reify
     def module_printbox(self):

@@ -213,15 +213,18 @@ class Base(object):
 
     @zeit.web.reify
     def adcontroller_values(self):
-        """Fill the adcontroller js object with actual values"""
+        """Fill the adcontroller js object with actual values.
+        Output in level strings only allows latin characters, numbers and
+        underscore."""
         levels = self.banner_channel.split('/')
         # remove type from level3
         levels[1] = '' if levels[1] == self.type else levels[1]
         return [('$handle', self.adcontroller_handle),
-                ('level2', levels[0]),
-                ('level3', levels[1]),
+                ('level2', "".join(re.findall(r"[A-Za-z0-9_]*", levels[0]))),
+                ('level3', "".join(re.findall(r"[A-Za-z0-9_]*", levels[1]))),
+                ('level4', ''),
                 ('$autoSizeFrames', True),
-                ('keywords', ''),
+                ('keywords', ','.join(self.adwords)),
                 ('tma', '')]
 
     @zeit.web.reify
@@ -252,7 +255,7 @@ class Base(object):
     def canonical_url(self):
         """ Set own url as default canonical. Overwrite for special
             cases and page types"""
-        return "{}{}".format(self.request.host_url, self.request.path_info)
+        return u"{}{}".format(self.request.host_url, self.request.path_info)
 
     @zeit.web.reify
     def js_vars(self):
@@ -361,6 +364,11 @@ class Base(object):
     @zeit.web.reify
     def breaking_news(self):
         return zeit.web.core.block.BreakingNews()
+
+    @zeit.web.reify
+    def content_url(self):
+        path = '/'.join(self.request.traversed)
+        return self.request.route_url('home') + path
 
     @zeit.web.reify
     def is_dev_environment(self):
@@ -557,6 +565,16 @@ class Content(Base):
     def show_commentthread(self):
         return self.context.commentSectionEnable is not False
 
+    @zeit.web.reify
+    def nextread(self):
+        return zeit.web.core.interfaces.INextread(self.context)
+
+    @zeit.web.reify
+    def comment_counts(self):
+        if self.nextread:
+            return zeit.web.core.comments.get_counts(
+                *[t.uniqueId for t in self.nextread])
+
 
 @pyramid.view.view_config(route_name='health_check')
 def health_check(request):
@@ -565,7 +583,14 @@ def health_check(request):
 
 class service_unavailable(object):  # NOQA
     def __init__(self, context, request):
-        log.error('{} at {}'.format(repr(context), request.path))
+        try:
+            path = request.path
+        except UnicodeDecodeError:
+            # path_info is not exactly what request.path returns, but should be
+            # close enough.
+            path = request.environ.get('PATH_INFO').decode(
+                request.url_encoding, 'replace')
+        log.error(u'{} at {}'.format(repr(context), path))
 
     def __call__(self):
         body = 'Status 503: Dokument zurzeit nicht verfügbar.'
@@ -629,14 +654,13 @@ def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
         content = zeit.cms.interfaces.ICMSContent(unique_id)
     except TypeError:
         return pyramid.response.Response('Invalid resource', 500)
-    json_dt = {'delta_time': []}
+    delta_time = {}
     for article in zeit.web.site.view_centerpage.Centerpage(content, request):
         time = zeit.web.core.date.get_delta_time_from_article(
             article, base_date=parsed_base_date)
         if time:
-            json_dt['delta_time'].append(
-                {article.uniqueId: {'time': time}})
-    return json_dt
+            delta_time[article.uniqueId] = time
+    return {'delta_time': delta_time}
 
 
 @pyramid.view.view_config(route_name='json_comment_count', renderer='json')
@@ -664,7 +688,7 @@ def json_comment_count(request):
     for article in articles:
         count = counts.get(article.uniqueId, 0)
         comment_count[article.uniqueId] = '%s Kommentar%s' % (
-            count == 0 and 'Keine' or count, count != 1 and 'e' or '')
+            count == 0 and 'Keine' or count, count != '1' and 'e' or '')
 
     return {'comment_count': comment_count}
 

@@ -1,135 +1,101 @@
 .nextread
-	padding: 40px 0
+	margin: em(40px) (-$page-padding) 0 // margin-top until preceding elements are build
 	&__link
 		display: block
-		margin: 0 (-$page-padding)
-		padding: 0 $page-padding
 	&__lead
-		font-size: remify(15px)
+		color: $color-text
+		font-size: em(15px)
 		font-weight: 700
 		letter-spacing: $zon-letter-spacing-m
-		margin-bottom: remify(14px)
 		text-transform: uppercase
-		a:hover &
-			color: $zon-charcoal
+		padding: remify(24px) $page-padding remify(15px)
+	&__container
+		padding: remify(12px) $page-padding remify(32px)
 	&__media
-		margin: 0 (-$page-padding) remify(14px) (-$page-padding)
-		position: relative
-	&__media-item
-		max-width: auto
-		width: 100%
+		margin: 0
+	&__heading
+		@extend %teaser-heading
+		margin-bottom: remify(10px)
 	&__kicker
 		@extend %teaser-kicker
+		margin-bottom: remify(7px)
 	&__title
 		@extend %teaser-title
-		font-size: remify(24px)
-		line-height: 1.12
 	&__metadata
 		@extend %teaser-metadata
-		margin-top: remify(5px)
 	&__datetime
 		@extend %teaser-datetime
+	&__commentcount
+		@extend %teaser-commentcount
+		&:hover
+			border-bottom: none // disable hover effect as long as comment count is not linked
+
+	&--no-image
+		+font-smoothing
+		background: $zon_dark_grey
+		.nextread__lead
+			color: $zon_lighter_grey
+		.nextread__kicker
+			color: $zon_mid_grey
+		.nextread__title
+			color: $white
+		.nextread__metadata
+			color: $zon_mid_grey
 
 +respond-min($break-tablet-min)
 	.nextread
-		margin: remify(40px) (-$page-padding) 0 (-$page-padding) // 40px topmargin until other elements are build
-		padding: 0
 		&__link
-			margin: 0
-			padding: 0
+			position: relative
+			z-index: 1 // needed for the link to work with absolute positioned child nodes
+		&__lead,
+		&__container
+			padding-left: 0
+			padding-right: 0
+			width: remify(660px)
+			margin: 0 auto
 		&__lead
-			height: em(38px)  // intentional em usage
-			max-width: remify(660px)
-			margin: 0 auto em(-38px) auto // intentional em usage
-			padding-top: remify(20px)
 			position: relative
-			z-index: 1
-			a:link &,
-			a:visited &,
-			a:hover &,
-			a:active &
-				color: $white
-				+font-smoothing()
 			&:after
-				border-bottom: 1px solid #fff
+				border-bottom: 1px solid rgba($white, .5)
+				bottom: remify(5px)
 				content: ""
-				display: block
-				height: 8px
-				opacity: 0.7
-				width: remify(70px)
-			&--without-image
-				height: auto
-				margin: 0 auto
-				position: static
-		&__media
-			margin: 0
-			&:after
-				bottom: 0
-				display: block
-				content: ''
 				left: 0
-				opacity: 1 // designer wanted 0.7
 				position: absolute
-				right: 0
-				top: 0
-				+background-image(linear-gradient(-180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.50) 100%))
-				a:hover &
-					+background-image(linear-gradient(-180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.7) 100%))
-				.lt-ie10 &
-					background: rgba(0,0,0,0.4)
-		&__helper // absolute positioning in a container that has variing width and margin auto: a mess
-			height: em(250px) // intentional em usage
-			max-width: remify(660px)
-			margin: em(-250px) auto 0 auto  // intentional em usage
-			position: relative
-			&--without-image
-				height: auto
-				margin: 0 auto
-				position: static
-		&__inner-helper // ach… used flexbox to align the content but couldn't find a replacement for IE < 11, so more div-tery :(
-			bottom: remify(60px)
-			left: 0
-			position: absolute
-			width: 100%
-			a:link & > div,
-			a:visited & > div,
-			a:hover & > div,
-			a:active & > div
-				color: $white
-				+font-smoothing()
-			&--without-image
-				bottom: auto
-				left: auto
-				position: static
+				width: 10%
+		&__container
+			margin-top: remify(27px)
+		&__media
+			+teaser-image-dark-overlay($angle: 0deg)
+		&__heading
+			margin-bottom: remify(16px)
 		&__kicker
-			font-size: $font-s
-			letter-spacing: 0.12em
-			margin-bottom: remify(12px)
+			margin-bottom: remify(10px)
 		&__title
-			font-size: em(34px)
-			line-height: 1.232
-			margin-bottom: remify(8px)
+			font-size: em(28px)
+			line-height: 1.12
 			width: 72%
+			+respond-min($break-desktop-min)
+				font-size: em(34px)
+				line-height: 1.2
 
-// unbemish fallback link styling
-+respond-min($break-tablet-min)
-	a:link .nextread__lead--without-image,
-	a:visited .nextread__lead--without-image,
-	a:hover .nextread__lead--without-image,
-	a:active .nextread__lead--without-image
-		color: $black
-	a:link .nextread__inner-helper--without-image .nextread__kicker,
-	a:visited .nextread__inner-helper--without-image .nextread__kicker,
-	a:hover .nextread__inner-helper--without-image .nextread__kicker,
-	a:active .nextread__inner-helper--without-image .nextread__kicker
-		color: $zon-red
-	a:link .nextread__inner-helper--without-image .nextread__title,
-	a:visited .nextread__inner-helper--without-image .nextread__title,
-	a:hover .nextread__inner-helper--without-image .nextread__title,
-	a:active .nextread__inner-helper--without-image .nextread__title
-		color: $black
-	a:link .nextread__inner-helper--without-image .nextread__metadata,
-	a:visited .nextread__inner-helper--without-image .nextread__metadata,
-	a:hover .nextread__inner-helper--without-image .nextread__metadata,
-	a:active .nextread__inner-helper--without-image .nextread__metadata
-		color: $zon_grey
+		&--with-image
+			+font-smoothing
+			+teaser-image-text-shadow
+			+darken-on-hover
+			color: $white
+			.nextread__lead,
+			.nextread__container
+				position: absolute
+				left: 50%
+				margin-left: remify(-330px)
+			.nextread__lead
+				color: $white
+				top: 0
+				z-index: 2
+			.nextread__container
+				bottom: 0
+			.nextread__title
+				color: $white
+			.nextread__kicker,
+			.nextread__metadata
+				color: $zon_lighter_grey

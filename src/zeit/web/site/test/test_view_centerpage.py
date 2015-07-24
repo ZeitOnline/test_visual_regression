@@ -9,7 +9,7 @@ import requests
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC  # NOQA
+from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 import zeit.web.core.centerpage
@@ -98,75 +98,70 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
         'No block named teaser_commentcount')
 
 
-def test_default_teaser_should_match_css_selectors(application, jinja2_env):
+def test_default_teaser_should_match_css_selectors(
+        application, jinja2_env, testserver):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default.tpl')
 
-    uid = 'http://xml.zeit.de/artikel/01'
-    teaser = zeit.cms.interfaces.ICMSContent(uid)
+    teaser = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/index')
     teaser.teaserSupertitle = 'teaserSupertitle'
     teaser.teaserTitle = 'teaserTitle'
     teaser.teaserText = 'teaserText'
-    view = {'comment_counts': {uid: 129}}
+    view = mock.Mock()
+    view.comment_counts = {'http://xml.zeit.de/artikel/01': 129}
+    view.context = cp
+    view.request.route_url.return_value = '/'
 
-    html_str = tpl.render(teaser=teaser, layout='teaser', view=view)
+    area = mock.Mock()
+    area.kind = 'solo'
+
+    html_str = tpl.render(teaser=teaser, layout='teaser', view=view, area=area)
     html = lxml.html.fromstring(html_str).cssselect
 
-    assert len(html('article.teaser h2.teaser__heading')) == 1, (
-        'No headline is present')
+    assert len(html('article.teaser h2.teaser__heading')) == 1
 
     link = html('a.teaser__combined-link')[0]
-    assert link.attrib['href'] == uid, 'No link is present'
-    assert link.attrib['title'] == 'teaserSupertitle - teaserTitle', (
-        'There is no link title')
+    assert link.attrib['href'] == '/artikel/01'
+    assert link.attrib['title'] == 'teaserSupertitle - teaserTitle'
 
     link_kicker = html('a.teaser__combined-link span.teaser__kicker')[0]
-    assert link_kicker.text == 'teaserSupertitle', 'A kicker is missing'
+    assert link_kicker.text == 'teaserSupertitle'
 
     link_title = html('a.teaser__combined-link span.teaser__title')[0]
-    assert link_title.text == 'teaserTitle', 'A teaser title is missing'
+    assert link_title.text == 'teaserTitle'
 
-    assert len(html('article > div.teaser__container')) == 1, (
-        'No teaser container')
+    assert len(html('article > div.teaser__container')) == 1
 
     teaser_text = html('div.teaser__container > p.teaser__text')[0]
-    assert teaser_text.text == 'teaserText', 'No teaser text'
+    assert teaser_text.text == 'teaserText'
 
-    teaser_byline = html('div.teaser__container > span.teaser__byline')[0]
-    assert teaser_byline.text == 'Von Anne Mustermann', (
-        'No byline present')
+    byline = html('div.teaser__container > span.teaser__byline')[0]
+    assert re.sub('\s+', ' ', byline.text).strip() == 'Von Anne Mustermann'
 
-    assert len(html('div.teaser__container > div.teaser__metadata')) == 1, (
-        'No teaser metadata container')
+    assert len(html('div.teaser__container > div.teaser__metadata')) == 1
     teaser_datetime = html('div.teaser__metadata > time.teaser__datetime')[0]
-    assert teaser_datetime.text is None, 'Outdated datetime present'
+    assert teaser_datetime.text is None
 
-    assert teaser_datetime.attrib['datetime'] == '2013-10-08T09:25:03+00:00', (
-        'Incorrect datetime attribute')
+    assert teaser_datetime.attrib['datetime'] == '2013-10-08T09:25:03+00:00'
 
     teaser_co = html('div.teaser__metadata > a.teaser__commentcount')[0]
 
-    assert teaser_co.attrib['href'] == teaser.uniqueId + '#comments', (
-        'No comment link href present')
-
-    assert teaser_co.attrib['title'] == '129 Kommentare', (
-        'No comment link title present')
-
-    assert teaser_co.text == '129 Kommentare', (
-        'No comment text present')
+    assert teaser_co.attrib['href'] == teaser.uniqueId.replace(
+        'http://xml.zeit.de', '') + '#comments'
+    assert teaser_co.attrib['title'] == 'Kommentare anzeigen'
+    assert teaser_co.text == '129 Kommentare'
 
 
-def test_first_small_teaser_has_no_image_on_mobile_mode(
+def test_small_teaser_should_display_no_image_on_mobile(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
     box = driver.find_elements_by_class_name('cp-area--major')[0]
-    first = box.find_elements_by_class_name('teaser-small__media')[0]
-    second = box.find_elements_by_class_name('teaser-small__media')[1]
+    teaser_image = box.find_elements_by_class_name('teaser-small__media')[0]
 
-    assert first.is_displayed() is True, 'image is not displayed'
-    assert second.is_displayed() is False, 'image is displayed'
+    assert teaser_image.is_displayed() is False, 'image is not displayed'
 
 
 def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
@@ -312,84 +307,51 @@ def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
 
 def test_column_teaser_should_render_series_element(testserver, testbrowser):
     browser = testbrowser(
-        '%s/zeit-online/teaser-types-setup' % testserver.url)
+        '%s/zeit-online/journalistic-formats' % testserver.url)
 
     col_element = browser.cssselect(
-        '.teaser-column .teaser-column__series')
-    assert len(col_element) == 1
-    assert col_element[0].text == u'F\xfcnf vor acht'
-
-
-def test_column_teaser_should_have_mobile_layout(
-        selenium_driver, testserver, screen_size):
-
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/teaser-types-setup' % testserver.url)
-    img_box = driver.find_elements_by_class_name('teaser-column__media')[0]
-    assert img_box.is_displayed(), 'image box is not displayed'
-
-    width_script = 'return $(".teaser-column__media").width()'
-    width = driver.execute_script(width_script)
-
-    if screen_size[0] == 320:
-        assert width == 80, 'mobile: imgage box of wrong size'
-    elif screen_size[0] == 520:
-        assert width == 80, 'phablet: imgage box of wrong size'
-    elif screen_size[0] == 768:
-        assert width == 80, 'ipad: imgage box of wrong size'
-    else:
-        assert width > 200, 'desktop: image box of wrong size'
-
-
-def test_column_teaser_should_have_different_font(
-        selenium_driver, testserver, screen_size):
-
-    driver = selenium_driver
-    driver.get('%s/zeit-online/teaser-types-setup' % testserver.url)
-
-    font_script = 'return $(".teaser-column__title").css("font-family")'
-    font = driver.execute_script(font_script)
-    assert "TabletGothic" in font, 'teaser column font is wrong'
+        '.teaser-fullwidth-column__series-label')[0]
+    assert col_element.text == u'Fünf vor acht'
 
 
 def test_series_teaser_should_render_series_element(testserver, testbrowser):
 
     browser = testbrowser(
-        '%s/zeit-online/teaser-serie-setup' % testserver.url)
+        '%s/zeit-online/journalistic-formats' % testserver.url)
 
-    series_element = browser.cssselect('.teaser-series__label')
-    assert len(series_element) == 2
+    series_element = browser.cssselect('.teaser-large__series-label')
     assert series_element[0].text == 'Serie: App-Kritik'
 
 
-def test_series_teaser_should_have_mobile_layout(
+def test_small_teaser_should_have_responsive_layout(
         selenium_driver, testserver, screen_size):
 
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/teaser-serie-setup' % testserver.url)
-    img_box = driver.find_elements_by_class_name('teaser-series__media')[0]
-    assert img_box.is_displayed(), 'image box is not displayed'
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
 
-    width_script = 'return $(".teaser-series__media").width()'
+    width_script = 'return $(".teaser-small__media").first().width()'
     width = driver.execute_script(width_script)
 
-    border_script = 'return $(".teaser-series").css("border-top-style")'
-    border = driver.execute_script(border_script)
+    img_box = driver.find_elements_by_class_name('teaser-small__media')[0]
 
     if screen_size[0] == 320:
-        assert width > 250  # mobile: imgage box of wrong size
-        assert border == 'solid'  # mobile: border-top wrong
+        assert not img_box.is_displayed(), 'no image should be shown on mobile'
     elif screen_size[0] == 520:
-        assert width == 150  # phablet: imgage box of wrong size
-        assert border == 'dotted'  # phablet: border-top wrong
+        assert width == 150
     elif screen_size[0] == 768:
-        assert width == 150  # ipad: imgage box of wrong size
-        assert border == 'dotted'  # ipad: border-top wrong
+        assert width == 150
     else:
-        assert width == 250  # desktop: image box of wrong size
-        assert border == 'dotted'  # desktop: border-top wrong
+        assert width == 250
+
+
+def test_snapshot_hidden_on_initial_load(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/index' % testserver.url)
+    snapshot = driver.find_element_by_id('snapshot')
+    assert not snapshot.is_displayed(), 'Snapshot not hidden onload'
 
 
 def test_snapshot_displayed_after_scroll(
@@ -397,11 +359,12 @@ def test_snapshot_displayed_after_scroll(
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/index' % testserver.url)
-    driver.execute_script(
-        "window.scrollTo(0, $('.footer').get(0).offsetTop);")
+    driver.execute_script("window.scrollTo(0, \
+        document.getElementById('snapshot').parentNode.offsetTop)")
     try:
         wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located((By.ID, 'snapshot')))
+        wait.until(expected_conditions.visibility_of_element_located(
+                   (By.ID, 'snapshot')))
     except TimeoutException:
         assert False, 'Snapshot not visible after scrolled into view'
 
@@ -413,9 +376,10 @@ def test_snapshot_displayed_after_direct_load_with_anchor(
     driver.get('%s/zeit-online/index#snapshot' % testserver.url)
     try:
         wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located((By.ID, 'snapshot')))
+        wait.until(expected_conditions.visibility_of_element_located(
+                   (By.ID, 'snapshot')))
     except TimeoutException:
-        assert False, 'Snapshot not visible after scrolled into view'
+        assert False, 'Snapshot not visible for link with fragment identifier'
 
 
 def test_snapshot_morelink_text_icon_switch(
@@ -423,15 +387,11 @@ def test_snapshot_morelink_text_icon_switch(
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/index' % testserver.url)
-    driver.execute_script(
-        "window.scrollTo(0, $('.footer').get(0).offsetTop);")
+    linkdisplay = driver.execute_script(
+        "return $('.snapshot-readmore__item').eq(0).css('display')")
     if screen_size[0] == 320:
-        linkdisplay = driver.execute_script(
-            'return $(".snapshot-readmore__item").css("display")')
         assert linkdisplay == u'none', 'Linktext not hidden on mobile'
     else:
-        linkdisplay = driver.execute_script(
-            'return $(".snapshot-readmore__item").css("display")')
         assert linkdisplay == u'inline', 'Linktext hidden on other than mobile'
 
 
@@ -527,7 +487,7 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
     driver = selenium_driver
     driver.get('%s/zeit-online/parquet-teaser-setup' % testserver.url)
     small_teaser = driver.find_element_by_css_selector(
-        '.teaser-parquet-small__media')
+        '.cp-area--parquet .teaser-small__media')
 
     driver.set_window_size(320, 480)
     assert not small_teaser.is_displayed(), (
@@ -544,13 +504,13 @@ def test_playlist_video_series_should_be_available(application):
 
 
 def test_videostage_should_have_right_video_count(testserver, testbrowser):
-    browser = testbrowser('%s/index' % testserver.url)
+    browser = testbrowser('/zeit-online/video-stage')
     videos = browser.cssselect('#video-stage article')
     assert len(videos) == 4, 'We expect 4 videos in video-stage'
 
 
 def test_videostage_videos_should_have_video_ids(testserver, testbrowser):
-    browser = testbrowser('%s/index' % testserver.url)
+    browser = testbrowser('/zeit-online/video-stage')
     videos = browser.cssselect('#video-stage article')
     for video in videos:
         attr = video.attrib
@@ -561,7 +521,7 @@ def test_videostage_videos_should_have_video_ids(testserver, testbrowser):
 def test_videostage_series_select_should_navigate_away(
         selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/index' % testserver.url)
+    driver.get('%s/zeit-online/video-stage' % testserver.url)
     select = driver.find_element_by_css_selector('#series_select')
     for option in select.find_elements_by_tag_name('option'):
         if option.text == 'Rekorder':
@@ -573,7 +533,7 @@ def test_videostage_series_select_should_navigate_away(
 
 def test_videostage_video_should_play(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/index' % testserver.url)
+    driver.get('%s/zeit-online/video-stage' % testserver.url)
     article = driver.find_element_by_css_selector(
         '#video-stage .video-large')
     videolink = driver.find_element_by_css_selector(
@@ -581,7 +541,7 @@ def test_videostage_video_should_play(selenium_driver, testserver):
     videolink.click()
     try:
         player = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located(
+            expected_conditions.presence_of_element_located(
                 (By.CSS_SELECTOR, '#video-stage .video-player__iframe'))
         )
         assert article.get_attribute(
@@ -624,31 +584,29 @@ def test_linkobject_teaser_should_contain_supertitle(testserver, testbrowser):
 
 
 def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser(
+        '%s/zeit-online/journalistic-formats' % testserver.url)
     uid = 'http://xml.zeit.de/blogs/nsu-blog-bouffier'
-    kicker = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                               '.teaser-blog__kicker'.format(uid))[0]
+    teaser = browser.cssselect(
+        '.teaser-large[data-unique-id="{}"] '.format(uid))[0]
+
+    kicker = teaser.cssselect('.teaser-large__kicker--blog')[0]
     assert kicker.text == 'Zeugenvernehmung'
 
-    marker = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                               '.teaser-blog__marker'.format(uid))[0]
+    marker = teaser.cssselect('.blog-format__marker')[0]
     assert marker.text == 'Blog'
 
-    name_of_blog = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                                     '.teaser-blog__name'.format(uid))[0]
-    assert re.sub(r'^\s+|\t|\n|\s+$', '', name_of_blog.text) == 'NSU-Prozess /'
+    name_of_blog = teaser.cssselect('.blog-format__name')[0]
+    assert name_of_blog.text.strip() == 'NSU-Prozess'
 
-    title = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                              '.teaser-blog__title'.format(uid))[0]
+    title = teaser.cssselect('.teaser-large__title')[0]
     assert title.text == 'Beate, die harmlose Hausfrau'
 
-    blog_text = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                                  '.teaser-blog__text'.format(uid))[0]
+    blog_text = teaser.cssselect('.teaser-large__text')[0]
     assert 'Lorem ipsum' in blog_text.text
 
-    byline = browser.cssselect('.teaser-blog[data-unique-id="{}"] '
-                               '.teaser-blog__byline'.format(uid))[0]
-    assert byline.text == 'Von Anne Mustermann'
+    byline = teaser.cssselect('.teaser-large__byline')[0]
+    assert re.sub('\s+', ' ', byline.text).strip() == 'Von Anne Mustermann'
 
 
 def test_gallery_teaser_should_contain_supertitle(testserver, testbrowser):
@@ -681,7 +639,7 @@ def test_centerpage_should_have_header_tags(testbrowser, testserver):
 
 
 def test_new_centerpage_renders(testserver):
-    resp = requests.get('%s/index' % testserver.url)
+    resp = requests.get('%s/zeit-online/slenderized-index' % testserver.url)
     assert resp.ok
 
 
@@ -689,7 +647,7 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/index' % testserver.url)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     teaser = driver.find_elements_by_class_name('teaser-small-minor')[0]
     main = driver.find_element_by_id('main')
     main_width = main.size.get('width')
@@ -716,8 +674,9 @@ def test_adcontroller_values_return_values_on_hp(application):
         ('$handle', 'homepage'),
         ('level2', 'homepage'),
         ('level3', ''),
+        ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', ''),
+        ('keywords', 'zeitonline'),
         ('tma', '')]
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
     assert adcv == view.adcontroller_values
@@ -730,8 +689,9 @@ def test_adcontroller_values_return_values_on_cp(application):
         ('$handle', 'index'),
         ('level2', 'politik'),
         ('level3', ''),
+        ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', ''),
+        ('keywords', 'zeitonline'),
         ('tma', '')]
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
     assert adcv == view.adcontroller_values
@@ -799,7 +759,7 @@ def test_servicebox_present_in_wide_breakpoints(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/index' % testserver.url)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     servicebox = driver.find_element_by_id('servicebox')
 
     if screen_size[0] == 320:
@@ -815,22 +775,150 @@ def test_servicebox_present_in_wide_breakpoints(
 def test_centerpage_area_should_render_in_isolation(testbrowser, testserver):
     browser = testbrowser('{}/index/area/id-5fe59e73-e388-42a4-a8d4-'
                           '750b0bf96812'.format(testserver.url))
-    document = lxml.etree.fromstring(browser.contents)
-    assert document.tag == 'div'
-    assert document.attrib['class'] == 'cp-area cp-area--gallery'
-    assert len(browser.cssselect('article.teaser-small')) == 2
+    select = browser.cssselect
+    assert len(select('div.cp-area.cp-area--gallery')) == 1
+    assert len(select('article.teaser-gallery')) == 2
 
 
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
-    browser = testbrowser('{}/index'.format(testserver.url))
+    browser = testbrowser('/centerpage/zeitonline')
     assert browser.cssselect('.buzz-box')
     assert len(browser.cssselect('.buzz-box__teasers article')) == 3
 
 
 def test_centerpage_square_teaser_has_pixelperfect_image(
         testbrowser, testserver):
-    browser = testbrowser('{}/index'.format(testserver.url))
+    browser = testbrowser('/zeit-online/teaser-square-setup')
     images = browser.cssselect('.teaser-square .scaled-image')
     assert len(images)
     for image in images:
         assert 'is-pixelperfect' in image.get('class')
+
+
+def test_centerpage_teaser_is_clickable_en_block_for_touch_devices(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/index?touch' % testserver.url)
+    article = driver.find_element_by_css_selector('article[data-unique-id]')
+    link = article.find_element_by_tag_name('a')
+    href = link.get_attribute('href')
+    article.click()
+    assert driver.current_url == href
+
+    driver.back()
+    article = driver.find_element_by_css_selector('article[data-unique-id]')
+    text = article.find_element_by_tag_name('p')
+    text.click()
+    assert driver.current_url == href
+
+
+def test_gallery_teaser_exists(testbrowser, testserver):
+    select = testbrowser('/zeit-online/teaser-gallery-setup').cssselect
+    assert len(select('.cp-region--gallery')) == 1
+    assert len(select('.cp-area--gallery')) == 1
+
+
+def test_gallery_teaser_has_ressort_heading(testbrowser, testserver):
+    select = testbrowser('/zeit-online/teaser-gallery-setup').cssselect
+    title = select('.cp-area--gallery .cp-ressort-heading__title')
+    assert len(title) == 1
+    assert "Fotostrecken" in title[0].text
+
+
+def test_gallery_teaser_has_correct_elements(testbrowser, testserver):
+    wanted = 2
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    area = browser.cssselect('.cp-area--gallery')[0]
+
+    assert len(area.cssselect('.teaser-gallery')) == wanted
+    assert len(area.cssselect('.teaser-gallery__figurewrapper')) == wanted
+    assert len(area.cssselect('.teaser-gallery__media')) == wanted
+    assert len(area.cssselect('.teaser-gallery__icon')) == wanted
+    assert len(area.cssselect('.teaser-gallery__counter')) == wanted
+    assert len(area.cssselect('.teaser-gallery__container')) == wanted
+    assert len(area.cssselect('.teaser-gallery__heading')) == wanted
+    assert len(area.cssselect('.teaser-gallery__kicker')) == wanted
+    assert len(area.cssselect('.teaser-gallery__title')) == wanted
+    assert len(area.cssselect('.teaser-gallery__text')) == wanted
+
+
+def test_gallery_teaser_hides_elements_on_mobile(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
+
+    ressort_linktext = driver.find_element_by_css_selector(
+        '.cp-ressort-heading__readmore-linktext')
+    gallery_counter = driver.find_element_by_css_selector(
+        '.teaser-gallery__counter')
+    gallery_text = driver.find_element_by_css_selector(
+        '.teaser-gallery__text')
+
+    driver.set_window_size(480, 600)
+    assert not ressort_linktext.is_displayed(), (
+        'Gallery Ressort linktext should not be displayed on mobile.')
+    assert not gallery_counter.is_displayed(), (
+        'Gallery image counter should not be displayed on mobile.')
+    assert not gallery_text.is_displayed(), (
+        'Gallery description text should not be displayed on mobile.')
+
+    driver.set_window_size(520, 650)
+    assert ressort_linktext.is_displayed(), (
+        'Gallery Ressort linktext must be displayed on phablet.')
+    assert not gallery_counter.is_displayed(), (
+        'Gallery image counter should not be displayed on phablet.')
+    assert not gallery_text.is_displayed(), (
+        'Gallery description text should not be displayed on phablet.')
+
+    driver.set_window_size(768, 960)
+    assert ressort_linktext.is_displayed(), (
+        'Gallery Ressort linktext must be displayed on tablet.')
+    assert gallery_counter.is_displayed(), (
+        'Gallery image counter must be displayed on tablet.')
+    assert gallery_text.is_displayed(), (
+        'Gallery description text must be displayed on tablet.')
+
+    driver.set_window_size(980, 1024)
+    assert ressort_linktext.is_displayed(), (
+        'Gallery Ressort linktext must be displayed on desktop.')
+    assert gallery_counter.is_displayed(), (
+        'Gallery image counter must be displayed on desktop.')
+    assert gallery_text.is_displayed(), (
+        'Gallery description text must be displayed on desktop.')
+
+
+def test_gallery_teaser_shuffles_on_click(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
+    teaserbutton = driver.find_element_by_css_selector(
+        '.js-gallery-teaser-shuffle')
+    teasertext1 = driver.find_element_by_css_selector(
+        '.teaser-gallery__heading').text
+    teaserbutton.click()
+
+    try:
+        WebDriverWait(driver, 2).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.teaser-gallery__heading')))
+    except TimeoutException:
+        assert False, 'New teasers not loaded within 2 seconds'
+    else:
+        teasertext2 = driver.find_element_by_css_selector(
+            '.teaser-gallery__heading').text
+        assert teasertext1 != teasertext2
+
+
+def test_homepage_should_have_proper_meetrics_integration(
+        testserver, testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    meetrics = browser.cssselect(
+        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+    assert len(meetrics) == 1
+
+
+def test_centerpage_must_not_have_meetrics_integration(
+        testserver, testbrowser):
+    browser = testbrowser(
+        '{}/zeit-online/main-teaser-setup'.format(testserver.url))
+    meetrics = browser.cssselect(
+        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+    assert len(meetrics) == 0

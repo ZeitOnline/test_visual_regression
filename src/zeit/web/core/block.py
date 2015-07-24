@@ -13,14 +13,11 @@ import requests.exceptions
 import urlparse
 import zope.component
 import zope.interface
-import zope.interface.declarations
 
 import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
-import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
-import zeit.edit.interfaces
 import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 
@@ -84,7 +81,7 @@ class Portraitbox(object):
 
     def _author_text(self, pbox):
         # not the most elegant solution, but it gets sh*t done
-        return "".join([lxml.etree.tostring(element) for element in
+        return ''.join([lxml.etree.tostring(element) for element in
                        lxml.html.fragments_fromstring(pbox) if
                        element.tag != 'raw'])
 
@@ -585,48 +582,74 @@ def _inline_html(xml, elements=None):
         return
 
 
-class NextreadTeaserBlock(object):
+class Nextread(zeit.web.core.utils.nslist):
     """Teaser block for nextread teasers in articles."""
 
-    zope.interface.implements(zeit.web.core.interfaces.INextreadTeaserBlock)
+    image_pattern = 'default'
 
-    def __init__(self, context, image_pattern='default'):
-        self.teasers = zeit.magazin.interfaces.INextRead(context).nextread
-
-        # Select layout id from a list of possible values, default to 'base'.
-        nrl = zeit.magazin.interfaces.IRelatedLayout(context).nextread_layout
-        self.layout_id = nrl if nrl in ('minimal', 'maximal') else 'base'
-
-        self.image_pattern = image_pattern
-        # TODO: Nextread lead should be configurable with ZMO-185.
-        self.lead = 'Lesen Sie jetzt'
-        self.multitude = 'multi' if len(self) - 1 else 'single'
+    def __init__(self, context, *args):
+        super(Nextread, self).__init__(*args)
+        self.context = context
 
     @property
+    def teasers(self):
+        raise NotImplementedError()
+
+    @zeit.web.reify
+    def layout_id(self):
+        # Select layout id from a list of possible values, default to 'base'.
+        related = zeit.magazin.interfaces.IRelatedLayout(self.context)
+        layout = related.nextread_layout
+        return layout if layout in ('minimal', 'maximal') else 'base'
+
+    @zeit.web.reify
     def layout(self):
         return zeit.content.cp.layout.BlockLayout(
-            self.layout_id, self.layout_id, areas=[],
-            image_pattern=self.image_pattern)
+            self.layout_id, self.layout_id,
+            areas=[], image_pattern=self.image_pattern)
 
-    def __iter__(self):
-        return iter(self.teasers)
+    @zeit.web.reify
+    def multitude(self):
+        return 'multi' if len(self) > 1 else 'single'
 
-    def __getitem__(self, index):
-        return self.teasers[index]
+    def __hash__(self):
+        return hash(self.context.uniqueId)
 
-    def __len__(self):
-        return len(self.teasers)
+    def __repr__(self):
+        return object.__repr__(self)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.INextread)
+@grokcore.component.adapter(zeit.magazin.interfaces.IZMOContent)
+class ZMONextread(Nextread):
+
+    image_pattern = 'zmo-nextread'
+
+    def __init__(self, context):
+        nxr = zeit.magazin.interfaces.INextRead(context, None)
+        args = nxr.nextread if nxr and nxr.nextread else ()
+        super(ZMONextread, self).__init__(context, args)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.INextread)
+@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
+class ZONNextread(Nextread):
+
+    image_pattern = '940x400'
+
+    def __init__(self, context):
+        rel = zeit.cms.related.interfaces.IRelatedContent(context, None)
+        args = rel.related if rel and rel.related else ()
+        super(ZONNextread, self).__init__(context, args)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IBreakingNews)
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 class BreakingNews(object):
 
-    """Breaking news"""
-
     def __init__(self):
         bn_path = zope.component.getUtility(
-            zeit.web.core.interfaces.ISettings).get('breaking_news')
+            zeit.web.core.interfaces.ISettings).get('breaking_news_config')
         try:
             bn_banner_content = zeit.cms.interfaces.ICMSContent(bn_path)
         except TypeError:
@@ -638,38 +661,11 @@ class BreakingNews(object):
             bn_banner_content)
         self.uniqueId = bn_banner.article_id
         bn_article = zeit.cms.interfaces.ICMSContent(self.uniqueId)
+        bd_date = zeit.cms.workflow.interfaces.IPublishInfo(
+            bn_article).date_first_released
+        if bd_date:
+            tz = babel.dates.get_timezone('Europe/Berlin')
+            bd_date = bd_date.astimezone(tz)
         self.title = bn_article.title
-        self.date_last_published_semantic = (
-            zeit.cms.workflow.interfaces.IPublishInfo(
-                bn_article).date_last_published_semantic)
+        self.date_first_released = bd_date
         self.doc_path = urlparse.urlparse(bn_article.uniqueId).path
-
-
-class Module(object):
-    """Base class for RAM-style modules to be used in cp2015 centerpages."""
-
-    zope.interface.implements(zeit.edit.interfaces.IBlock)
-
-    def __init__(self, context):
-        self.context = context
-        if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(context):
-            self.layout = context.cpextra
-        elif zeit.edit.interfaces.IBlock.providedBy(context):
-            self.layout = context.type
-
-    def __hash__(self):
-        return self.context.xml.attrib.get(
-            '{http://namespaces.zeit.de/CMS/cp}__name__',
-            super(Module, self)).__hash__()
-
-    def __repr__(self):
-        return object.__repr__(self)
-
-    @property
-    def layout(self):
-        return getattr(self, '_layout', None)
-
-    @layout.setter
-    def layout(self, value):
-        self._layout = zeit.content.cp.layout.BlockLayout(
-            value, value, areas=[], image_pattern=value)

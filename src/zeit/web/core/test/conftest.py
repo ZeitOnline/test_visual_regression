@@ -57,6 +57,7 @@ settings = {
     'community_host': 'http://localhost:6551',
     'community_static_host': 'http://static_community/foo',
     'agatho_host': 'http://localhost:6552/comments',
+    'linkreach_host': 'egg://zeit.web.core/data/linkreach/api',
     'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
         'zeit.web.core', 'data/linkreach/api'),
     'google_tag_manager_host': 'foo.baz',
@@ -71,8 +72,9 @@ settings = {
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
     'connector_type': 'mock',
     'vgwort_url': 'http://example.com/vgwort',
-    'breaking_news': (
+    'breaking_news_config': (
         'http://xml.zeit.de/eilmeldung/homepage-banner'),
+    'breaking_news_timeout': 2 * 60 * 60,
     'enable_third_party_modules': '',
     'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
     'vivi_zeit.cms_keyword-configuration': (
@@ -87,6 +89,7 @@ settings = {
         'egg://zeit.web.core/data/config/products.xml'),
     'vivi_zeit.cms_source-serie': (
         'egg://zeit.web.core/data/config/series.xml'),
+    'vivi_zeit.cms_task-queue-async': 'not-applicable',
     'vivi_zeit.cms_whitelist-url': (
         'egg://zeit.cms.tagging.tests/whitelist.xml'),
     'vivi_zeit.web_iqd-mobile-ids': (
@@ -157,7 +160,9 @@ settings = {
     'vivi_zeit.solr_solr-url': 'http://mock.solr',
     'vivi_zeit.content.cp_cp-types-url': (
         'egg://zeit.web.core/data/config/cp-types.xml'),
-
+    'sso_activate': '',
+    'sso_url': 'http://my_sso',
+    'sso_cookie': 'http://my_sso_cookie',
     'debug.show_exceptions': True,
     'debug.propagate_jinja_errors': True,
     'debug.enable_profiler': False,
@@ -303,17 +308,6 @@ def dummy_request(request, config, app_settings):
     req.registry.settings = app_settings
     config.manager.get()['request'] = req
     return req
-
-
-@pytest.fixture
-def debug_testserver(debug_application, request):
-    server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 6547
-    server.wsgi_app = debug_application
-    server.setUp()
-    server.url = 'http://%s' % server['http_address']
-    request.addfinalizer(server.tearDown)
-    return server
 
 
 @pytest.fixture(scope='function')
@@ -466,9 +460,10 @@ def my_traverser(application):
 
 
 @pytest.fixture
-def testbrowser(application):
+def testbrowser(application, testserver):
     # We require ``application`` here so that stuff is properly isolated
     # between tests; see comment there for details.
+    Browser._testserver = testserver.url
     return Browser
 
 
@@ -539,10 +534,11 @@ class Browser(zope.testbrowser.browser.Browser):
     """
 
     _translator = None
+    _testserver = None
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, url=None, mech_browser=None):
         """Call base constructor and cache a translator instance."""
-        super(Browser, self).__init__(*args, **kwargs)
+        super(Browser, self).__init__(url, mech_browser)
         self._translator = cssselect.HTMLTranslator()
 
     def cssselect(self, selector):
@@ -552,6 +548,11 @@ class Browser(zope.testbrowser.browser.Browser):
         xpath = self._translator.css_to_xpath(selector)
         if self.document is not None:
             return self.document.xpath(xpath)
+
+    def open(self, url, data=None):
+        if url and self._testserver and not url.startswith(self._testserver):
+            url = '{}/{}'.format(self._testserver, url.lstrip('/'))
+        return super(Browser, self).open(url, data)
 
     def xpath(self, selector):
         """Return a list of lxml.HTMLElement instances that match a given

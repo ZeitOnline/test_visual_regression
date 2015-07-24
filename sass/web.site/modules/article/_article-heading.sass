@@ -1,27 +1,21 @@
 .article-heading
-	margin: remify(20px 0 25px)
+	margin: remify(24px 0)
 	&__kicker
 		color: $zon-red
 		display: block
 		font-size: remify(14px)
 		letter-spacing: $zon-letter-spacing-m
 		padding-bottom: remify(17px)
-		+respond-min($break-desktop-min)
-			font-size: remify(14px)
 	&__title
 		color: $zon-charcoal
 		display: block
 		font-size: remify(30px)
 		line-height: 1.2
-		+respond-min($break-desktop-min)
-			font-size: remify(42px)
 	&__colon
 		+visuallyhidden
 
 	&__media
 		margin: 0 0 remify(9px)
-	&__media-item
-		width: 100%
 
 	+respond-min($break-phablet-min)
 		&--liveblog
@@ -41,17 +35,22 @@
 		&__image
 			width: 35%
 
+	+respond-min($break-tablet-min)
+		margin-top: remify(60px)
+
 	+respond-min($break-desktop-min)
 		&--liveblog
 			margin-left: remify(-90px)
+		&__title
+			font-size: remify(42px)
 		&__media
 			margin-bottom: remify(10px)
 
 .breaking-news-heading
 	background: #fffee8
-	margin: 0 (-$page-padding) remify(25px)
-	padding: em(25px) $page-padding
-	+respond-min($break-desktop-min)
+	margin: 0 (-$page-padding) em(24px)
+	padding: em(24px) $page-padding
+	+respond-min($break-tablet-min)
 		padding: em(40px) $page-padding
 	.article-heading
 		margin: 0

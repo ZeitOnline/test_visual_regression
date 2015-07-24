@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
 
@@ -7,9 +6,9 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.web',
     url='https://github.com/ZeitOnline/zeit.web',
-    version='1.35.dev0',
+    version='1.43.dev0',
     author=(
-        'Thomas Baumann, Nico Brünjes, Nicolas Drebenstedt, Ron Drongowski, '
+        'Thomas Baumann, Nico Bruenjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
         'Malte Modrow, Thomas Puppe, Wolfgang Schnerring, Arne Seemann, '
         'Moritz Stoltenburg, Anika Szuppa, Christian Zagrodnick, '
@@ -26,6 +25,7 @@ setup(
     ),
     install_requires=[
         'Babel',
+        'bugsnag',
         'colander',
         'grokcore.component',
         'iso8601',
@@ -33,24 +33,25 @@ setup(
         'martian',
         'pyramid',
         'pyramid_beaker',
-        'pyramid_jinja2>=2.5',
-        'pyramid_tm',
         'pyramid_debugtoolbar',
+        'pyramid_jinja2',
         'pyramid_mako',
+        'pyramid_tm',
         'pyramid_zodbconn',
         'pytz',
         'repoze.bitblt',
         'repoze.vhm',
         'requests',
+        'requests-file',
         'setuptools',
-        'zc.iso8601',
         'wsgiproxy',
+        'zc.iso8601',
         'zeit.brightcove',
         'zeit.cms',
-        'zeit.connector >= 2.6.2',
+        'zeit.connector',
         'zeit.content.article',
-        'zeit.content.author >= 2.3.0',
-        'zeit.content.cp >= 3.0.0b16',
+        'zeit.content.author',
+        'zeit.content.cp',
         'zeit.content.dynamicfolder',
         'zeit.content.gallery',
         'zeit.content.image',
@@ -66,21 +67,20 @@ setup(
         'zeit.magazin',
         'zeit.newsletter',
         'zeit.push',
-        'zeit.wysiwyg',
         'zeit.seo',
         'zeit.solr',
+        'zeit.vgwort',
+        'zeit.wysiwyg',
         'zope.app.appsetup',
         'zope.component',
         'zope.configuration',
-        'zope.processlifetime',
-        'zeit.vgwort',
+        'zope.processlifetime'
     ],
     description='This package is all about ZEIT ONLINE website delivery.',
     long_description=open('README.md', 'r').read(),
     entry_points={
         'paste.app_factory': [
-            'main=zeit.web.core.application:factory',
-            'preview=zeit.web.core.preview:factory'
+            'main=zeit.web.core.application:factory'
         ]
     },
     extras_require={

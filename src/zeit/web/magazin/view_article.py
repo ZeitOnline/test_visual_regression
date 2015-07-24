@@ -3,17 +3,13 @@ import logging
 
 import pyramid.view
 
-import zeit.connector.connector
-import zeit.connector.interfaces
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.content.image.interfaces
 
 import zeit.web
 import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.interfaces
-import zeit.web.core.reach
 import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.core.view_article
@@ -37,12 +33,31 @@ log = logging.getLogger(__name__)
 @pyramid.view.view_config(name='komplettansicht',
                           renderer='templates/article_komplett.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
+
     @zeit.web.reify
     def comments(self):
         if not self.show_commentthread:
             return
-        return zeit.web.core.comments.get_thread(self.context.uniqueId,
-                                                 sort='desc')
+        return zeit.web.core.comments.get_thread(
+            self.context.uniqueId, sort='desc')
+
+    @zeit.web.reify
+    def nextread(self):
+        nextread = super(Article, self).nextread
+        if nextread.layout.id != 'minimal':  # XXX Ugly hack to register CRs.
+            for i in zeit.web.core.interfaces.ITeaserSequence(nextread):
+                i.image and self._copyrights.setdefault(
+                    i.image.image_group, i.image)
+        return nextread
+
+    @zeit.web.reify
+    def genre(self):
+        prefix = 'ein'
+        if self.context.genre in (
+                'analyse', 'glosse', 'nachricht', 'reportage'):
+            prefix = 'eine'
+        if self.context.genre:
+            return prefix + ' ' + self.context.genre.title()
 
 
 @pyramid.view.view_config(name='seite',
@@ -98,11 +113,13 @@ class FeatureLongform(LongformArticle):
         crumb_list = crumb[:1]
         if self.ressort in items:
             item = items[self.ressort]
-            href = zeit.web.core.template.translate_url(item.href)
+            href = zeit.web.core.template.create_url(
+                None, item.href, self.request)
             crumb_list.append((item.text, href))
         if self.sub_ressort in items:
             item = items[self.sub_ressort]
-            href = zeit.web.core.template.translate_url(item.href)
+            href = zeit.web.core.template.create_url(
+                None, item.href, self.request)
             crumb_list.append((item.text, href))
         if self.title:
             crumb_list.append((self.title, ''))

@@ -19,7 +19,7 @@ require.config({
         'jquery.debounce': 'web.core/plugins/jquery.debounce',
         'jquery.inview': 'vendor/jquery.inview'
     },
-    // a shim is need for jQuery Plugins to load
+    // a shim is needed for jQuery Plugins to load
     // add the name or path and an array of required scripts
     shim: {
         'bxSlider': [ 'jquery' ],
@@ -27,6 +27,7 @@ require.config({
         'jquery.debounce': [ 'jquery' ],
         'web.core/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery', 'modernizr' ],
         'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],
+        'web.site/plugins/jquery.autoclick': [ 'jquery', 'modernizr' ],
         'web.site/plugins/jquery.snapshot': [ 'jquery', 'jquery.inview' ],
         'freewall': {
             deps: [ 'jquery' ],
