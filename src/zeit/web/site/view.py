@@ -56,6 +56,13 @@ class Base(zeit.web.core.view.Base):
             breadcrumbs.extend([(
                 self.pagetitle.replace(self.pagetitle_suffix, ''), None)])
 
+        # "Angebote" and "Administratives"
+        if (self.ressort in ('angebote', 'administratives')):
+            html_title = zeit.seo.interfaces.ISEO(self.context).html_title
+            if html_title is not None:
+                breadcrumbs.extend([(html_title, None)])
+            else:
+                add_default_breadcrumbs()
         # Article
         if context_type == 'article':
             # Add breadcrumbs that belong to the navgiation
