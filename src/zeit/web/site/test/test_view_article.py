@@ -345,7 +345,7 @@ def test_article_skips_raw_box_not_suitable_for_alldevices(testbrowser):
 
 def test_nextread_is_placed_on_article_02(testbrowser):
     browser = testbrowser('/zeit-online/article/02')
-    assert len(browser.cssselect('div#nextread')) == 1
+    assert len(browser.cssselect('#nextread')) == 1
 
 
 def test_nextread_is_responsive(testserver, selenium_driver, screen_size):
@@ -431,20 +431,31 @@ def test_breaking_news_banner_shows_date_first_released(jinja2_env):
     assert time[0].text == '11:55 Uhr'
 
 
-def test_tile7_is_rendered_on_articles_with_multiple_pages(
-        testbrowser, testserver):
+def test_tile7_is_rendered_on_articles_with_multiple_pages(testbrowser):
+    selector = ('#ad-desktop-7', '#ad-mobile-4')
+
     browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect('#iqadtile7')) == 1
+    assert len(browser.cssselect(selector[0])) == 1
+    assert len(browser.cssselect(selector[1])) == 1
 
     browser = testbrowser('/zeit-online/article/zeit/seite-2')
-    assert len(browser.cssselect('#iqadtile7')) == 1
+    assert len(browser.cssselect(selector[0])) == 1
+    assert len(browser.cssselect(selector[1])) == 1
 
     browser = testbrowser('/zeit-online/article/zeit/seite-5')
-    assert len(browser.cssselect('#iqadtile7')) == 1
+    assert len(browser.cssselect(selector[0])) == 1
+    assert len(browser.cssselect(selector[1])) == 1
 
 
 def test_tiles7_9_are_rendered_on_articles_with_multiple_pages_on_onepage_view(
-        testbrowser, testserver):
+        testbrowser):
     browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
-    assert len(browser.cssselect('#iqadtile7')) == 1
-    assert len(browser.cssselect('#iqadtile9')) == 1
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
+    assert len(browser.cssselect('#ad-mobile-4')) == 1
+    assert len(browser.cssselect('#ad-desktop-9')) == 1
+
+
+def test_article_ads_should_have_pagetype_modifier(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
+    assert 'ad-desktop--7-on-article' in browser.contents

@@ -88,8 +88,6 @@
 	font-weight: 700
 	letter-spacing: $zon-letter-spacing-s
 	line-height: 1.2
-	&:hover
-		color: $black
 
 %teaser-media
 	margin: 0 0 remify(20px) 0
@@ -111,6 +109,8 @@
 	line-height: 1.3846
 	letter-spacing: $zon-letter-spacing-s
 	margin-bottom: remify(4px)
+	&:empty
+		display: none
 
 %teaser-metadata
 	color: $zon_grey

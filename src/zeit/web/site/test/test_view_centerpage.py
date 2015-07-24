@@ -149,7 +149,7 @@ def test_default_teaser_should_match_css_selectors(
 
     assert teaser_co.attrib['href'] == teaser.uniqueId.replace(
         'http://xml.zeit.de', '') + '#comments'
-    assert teaser_co.attrib['title'] == '129 Kommentare'
+    assert teaser_co.attrib['title'] == 'Kommentare anzeigen'
     assert teaser_co.text == '129 Kommentare'
 
 
@@ -157,7 +157,7 @@ def test_small_teaser_should_display_no_image_on_mobile(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(320, 480)
-    driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
+    driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
     box = driver.find_elements_by_class_name('cp-area--major')[0]
     teaser_image = box.find_elements_by_class_name('teaser-small__media')[0]
 
@@ -178,16 +178,16 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
     driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
     teaser = driver.find_elements_by_class_name('teaser-fullwidth')[0]
     helper = driver.find_elements_by_class_name(
-        'teaser-fullwidth__inner-helper')[0]
+        'teaser-fullwidth__container')[0]
 
     assert teaser.is_displayed(), 'Fullwidth teaser missing'
     assert helper.is_displayed(), 'Fullwidth teaser helper missing'
 
     if screen_size[0] == 768:
         # test ipad width
-        assert helper.size.get('width') == 574
+        assert helper.size.get('width') == 553  # 542
     elif screen_size[0] == 980:
-        assert helper.size.get('width') == 640
+        assert helper.size.get('width') == 653  # 643
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
@@ -293,8 +293,7 @@ def test_centerpage_view_should_have_topic_links(testserver):
 
 
 def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
+    browser = testbrowser('/zeit-online/fullwidth-teaser')
 
     fullwidth = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
     content = browser.cssselect('.cp-area.cp-area--major')
@@ -740,7 +739,7 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
 
 
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
-    browser = testbrowser('{}/index'.format(testserver.url))
+    browser = testbrowser('/zeit-online/news-teaser')
 
     cols = browser.cssselect('.cp-area--news .newsticker__column')
     assert len(cols) == 2
