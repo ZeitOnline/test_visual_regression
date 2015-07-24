@@ -43,6 +43,7 @@ class NavigationItem(Navigation):
 
 
 navigation = None
+navigation_by_name = None
 navigation_services = None
 navigation_classifieds = None
 navigation_footer_publisher = None
@@ -61,6 +62,16 @@ def make_navigation(navigation_config):
     _register_navigation_items(navigation, root.xpath('section'))
 
     return navigation
+
+
+def make_navigation_by_name(navigation_config):
+    navigation_links = Navigation()
+    for n in navigation:
+        nav_item = navigation[n]
+        navigation_links[nav_item.text.lower()] = {}
+        navigation_links[nav_item.text.lower()]['link'] = nav_item.href
+        navigation_links[nav_item.text.lower()]['text'] = nav_item.text
+    return navigation_links
 
 
 def _register_navigation_items(navigation, node):

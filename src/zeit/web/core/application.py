@@ -110,6 +110,9 @@ class Application(object):
             self.settings.get('vivi_zeit.web_navigation', ''))
         zeit.web.core.navigation.navigation = (
             zeit.web.core.navigation.make_navigation(navigation_config))
+        zeit.web.core.navigation.navigation_by_name = (
+            zeit.web.core.navigation.make_navigation_by_name(
+                navigation_config))
         navigation_services_config = maybe_convert_egg_url(
             self.settings.get('vivi_zeit.web_navigation-services', ''))
         zeit.web.core.navigation.navigation_services = (
