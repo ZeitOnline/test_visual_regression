@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1956: Add classic fullwidth teaser
 
+- ZON-1814: Configure viewport zoom for tablets
+
 
 1.42 (2015-07-23)
 -----------------
@@ -19,8 +21,6 @@ Change log for zeit.web
 - ZON-1917: hide mobile/desktop ads per breakpoint
 
 - ZON-1966: Remove Krux, add AdAudience in ZMO
-
-- ZON-1814: Configure viewport zoom for tablets
 
 - MAINT: Add invisible page shadow
 
