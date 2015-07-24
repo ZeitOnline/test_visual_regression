@@ -8,7 +8,5 @@
    <span class="teaser-short__product">{{ teaser.product.id }}</span>
 {% endblock teaser_product %}
 
-{% block teaser_media_position_before_title %}
-{% endblock %}
 {% block teaser_container %}
 {% endblock %}

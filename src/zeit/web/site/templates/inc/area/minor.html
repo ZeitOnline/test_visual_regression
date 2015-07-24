@@ -36,3 +36,10 @@
         {{ lama.adplace(view.banner(7), view) }}
     {% endif %}
 {% endblock %}
+
+{% block after_module_list %}
+    {# assuming 1st or 2nd region is the region we're looking for. #}
+    {% if (view.has_solo_leader and region_loop.index == 2) or (not(view.has_solo_leader) and region_loop.index == 1) %}
+        {{ lama.adplace(view.banner(4), view, mobile=True) }}
+    {% endif %}
+{% endblock %}

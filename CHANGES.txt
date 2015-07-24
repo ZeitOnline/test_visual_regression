@@ -1,10 +1,24 @@
 Change log for zeit.web
 =======================
 
-1.42 (unreleased)
+1.43 (unreleased)
 -----------------
 
-- ZON-1966: remove Krux, add AdAudience in ZMO
+- ZON-1948: Configure separate serie source for videos.
+
+- ZON-1956: Add classic fullwidth teaser
+
+
+1.42 (2015-07-23)
+-----------------
+
+- ZON-1918: Add mobile ads to ZON
+
+- ZON-1917: Hidden Ads should not request AdServer
+
+- ZON-1917: hide mobile/desktop ads per breakpoint
+
+- ZON-1966: Remove Krux, add AdAudience in ZMO
 
 - ZON-1814: Configure viewport zoom for tablets
 
@@ -22,7 +36,11 @@ Change log for zeit.web
 
 - ZON-1979: Verpixelung Momentaufnahme
 
+- ZON-1961: Verpixelung Servicebox
+
 - ZON-1963: Verpixelung Back 2 top
+
+- ZON-1962: Verpixelung Logos
 
 
 1.41 (2015-07-14)
