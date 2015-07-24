@@ -48,6 +48,27 @@ class Base(zeit.web.core.view.Base):
                     '{}/index'.format(self.content_url.rsplit('/', 2)[0])),
                 ("Ausgabe: {}".format(self.context.volume), None)])
         # Articles
+        else:
+            # Add breadcrumbs that belong to the navgiation
+            for segment in (
+                    self.ressort, self.sub_ressort):
+                try:
+                    nav_item = zeit.web.core.navigation.navigation_by_name[
+                        segment]
+                    breadcrumbs.extend([(
+                        nav_item['text'], nav_item['link'])])
+                except KeyError:
+                    # Segment is no longer be part of the navigation
+                    next
+            # Append page teaser
+            page_teaser = self.current_page.teaser
+            if len(page_teaser) > 0:
+                breadcrumbs.extend([(page_teaser, self.context.uniqueId)])
+            else:
+                breadcrumbs.extend([(
+                    u"{}: {}".format(self.supertitle, self.title), None)])
+        return breadcrumbs
+
 
 @pyramid.view.view_config(
     route_name='spektrum-kooperation',
