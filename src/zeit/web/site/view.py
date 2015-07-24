@@ -63,6 +63,11 @@ class Base(zeit.web.core.view.Base):
             else:
                 breadcrumbs.extend([(
                     u"{}: {}".format(self.supertitle, self.title), None)])
+        # Topicpage
+        elif context_type == 'topicpage':
+            add_breadcrumbs_by_navigation()
+            breadcrumbs.extend([(
+                'Thema: {}'.format(self.context.title), None)])
         # Archive year index
         elif context_type == 'archive-print-year':
             breadcrumbs.extend([
