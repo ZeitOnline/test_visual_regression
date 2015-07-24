@@ -4,6 +4,8 @@ Change log for zeit.web
 1.43 (unreleased)
 -----------------
 
+- FIX: Decode HTML entities in image caption
+
 - ZON-1948: Configure separate serie source for videos.
 
 - ZON-1956: Add classic fullwidth teaser
@@ -27,8 +29,6 @@ Change log for zeit.web
 - ZON-1914: fix multiple tile_7 on full view of multi-page-articles
 
 - ZON-1810: strip special characters from level-strings in adcontroller
-
-- FIX: Decode HTML entities in image caption
 
 - FIX: Ignore homepage ressort for reach api calls
 
