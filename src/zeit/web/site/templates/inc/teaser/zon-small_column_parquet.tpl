@@ -11,5 +11,3 @@
     	</div>
     {% endif %}
 {% endblock %}
-
-{% block teaser_modifier %}{% if get_column_image(teaser) %}teaser-small-column-parquet--has-media{% endif %}{% endblock %}
