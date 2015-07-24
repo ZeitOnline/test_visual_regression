@@ -2,7 +2,6 @@
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
 {% block teaser %}
-
 <article class="{% block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}"{% if module %} data-block-type="{{ module.type | hide_none }}"{% endif %} data-unique-id="{{ teaser.uniqueId }}" data-meetrics="{{ area.kind }}">
 
     {% block teaser_media_position_before_title %}{% endblock %}
@@ -45,14 +44,14 @@
             {% endblock %}
             {% block teaser_byline %}
                 <span class="{{ self.layout() }}__byline">
-                    {% set byline = teaser | get_byline %}
-                    {% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
+                    {%- set byline = teaser | get_byline -%}
+                    {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
                 </span>
             {% endblock %}
             {% block teaser_metadata_default %}
             <div class="{{ self.layout() }}__metadata">
                 {% block teaser_datetime %}
-                    {{ cp.include_teaser_datetime(teaser, self.layout()) }}
+                    {{ cp.include_teaser_datetime(teaser, self.layout(), area.kind) }}
                 {% endblock %}
                 {% block teaser_commentcount %}
                     {% set comments = view.comment_counts[teaser.uniqueId] %}
@@ -69,4 +68,7 @@
     {% block teaser_media_position_after_container %}{% endblock %}
 
 </article>
+{% if view.is_hp and region_loop and region_loop.index == 1 and area_loop.index == 1 and loop.index == 1 %}
+    {{ lama.adplace(view.banner(3), view, mobile=True) }}
+{% endif %}
 {% endblock %}

@@ -65,7 +65,7 @@ def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
     driver = selenium_driver
-    driver.get('%s/zeit-online/index' % testserver.url)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     try:
         selector = 'body[data-adDeliveryType="adcontroller"]'
         driver.find_element_by_css_selector(selector)
@@ -76,7 +76,20 @@ def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
     assert adctrl == "object"
 
 
-def test_article_ads_should_have_pagetype_modifier(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
-    assert browser.cssselect('#iqadtile7.ad--tile_7-on-article'), (
-        'The pagetype modifier CSS class for article adtile #7 isn‘t present.')
+def test_adplaces_present_on_pages(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert len(browser.cssselect('#iqadtileOOP')) == 1
+    assert len(browser.cssselect('#ad-desktop-1')) == 1
+    assert len(browser.cssselect('#ad-desktop-2')) == 1
+    assert len(browser.cssselect('#ad-desktop-3')) == 1
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
+
+    assert len(browser.cssselect('#ad-mobile-1')) == 1
+    assert len(browser.cssselect('#ad-mobile-3')) == 1
+    assert len(browser.cssselect('#ad-mobile-4')) == 1
+    assert len(browser.cssselect('#ad-mobile-8')) == 1
+
+
+def test_adplaces_present_before_video_stage(testbrowser):
+    browser = testbrowser('/zeit-online/video-stage')
+    assert len(browser.cssselect('#ad-desktop-12')) == 1

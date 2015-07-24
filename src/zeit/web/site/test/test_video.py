@@ -202,14 +202,12 @@ def test_video_page_video_should_exist(selenium_driver, testserver):
         assert False, 'Video not visible within 20 seconds'
 
 
-def test_video_page_adcontroller_code_is_embedded(
-        testserver, testbrowser, monkeypatch):
+def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
-    browser = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url))
-    assert len(browser.cssselect('.ad.ad--tile_7')) > 0
-    assert 'AdController.render(\'iqadtile7\');' in browser.contents
+
+    browser = testbrowser('/video/2015-01/3537342483001')
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
 
 
 def test_video_page_adcontroller_js_var_isset(
