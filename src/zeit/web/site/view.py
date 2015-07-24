@@ -64,7 +64,7 @@ class Base(zeit.web.core.view.Base):
             else:
                 add_default_breadcrumbs()
         # Article
-        if context_type == 'article':
+        elif context_type in ('article', 'gallery', 'quiz'):
             # Add breadcrumbs that belong to the navgiation
             add_breadcrumbs_by_navigation()
             # Append page teaser
