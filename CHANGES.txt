@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1948: Configure separate serie source for videos.
 
+- ZON-1956: Add classic fullwidth teaser
+
 
 1.42 (2015-07-23)
 -----------------
@@ -25,8 +27,6 @@ Change log for zeit.web
 - ZON-1914: fix multiple tile_7 on full view of multi-page-articles
 
 - ZON-1810: strip special characters from level-strings in adcontroller
-
-- ZON-1956: Add classic fullwidth teaser
 
 - FIX: Ignore homepage ressort for reach api calls
 
