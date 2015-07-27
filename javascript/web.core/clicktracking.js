@@ -15,18 +15,24 @@ define( [ 'jquery' ], function( $ ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         main: function( $element ) {
-            var data = [], type = 'text';
+            var data = [],
+                type = 'text',
+                teasertype = '',
+                $article = $element.closest( 'article' ),
+                articleClasses = $article.get( 0 ).className.split( ' ' );
             if ( $element.attr( 'class' ).indexOf( 'button' ) !== -1 ) {
                 type = 'button';
             } else if ( $element.closest( 'figure' ).length > 0 ) {
                 type = 'image';
             }
+            teasertype += $article.data( 'meetrics' ) ?  $article.data( 'meetrics' ) : '';
+            teasertype += articleClasses[0] !== '' ? '-' + articleClasses[0] : '';
             data = [
                 getBreakpoint(),
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // region bzw. verortung
                 $element.closest( '.cp-area' ).index() + 1, // area bzw. reihe
-                $element.closest( 'article' ).index() + 1, // module bzw. spalte
-                '', // subreihe
+                $article.index() + 1, // module bzw. spalte
+                teasertype, // subreihe
                 type, // bezeichner (image, button, text)
                 $element.attr( 'href' ) // url
             ];
