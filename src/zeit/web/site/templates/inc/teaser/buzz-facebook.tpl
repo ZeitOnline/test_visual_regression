@@ -1,13 +1,10 @@
 {%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
-{% block teaser_media_position_after_title %}
-    {% with -%}
-        {% set class = 'buzz-line' %}
-        {% set icon = module.layout.id %}
-        {% set label = teaser.score %}
-        {% set modifier = module.layout %}
-        {% include "zeit.web.site:templates/inc/teaser_asset/annotation.tpl" %}
-    {%- endwith %}
-{% endblock %}
+{% block layout %}teaser-buzz{% endblock %}
 
-{% block teaser_container %}{% endblock %}
+{% block teaser_container %}
+	<span class="{{ self.layout() }}__metadata">
+        {{ lama.use_svg_icon('buzz-shared', self.layout() + '__icon', request) }}
+        {{ teaser.score | pluralize('Nie geteilt', '{} mal geteilt') }}
+    </span>
+{% endblock %}

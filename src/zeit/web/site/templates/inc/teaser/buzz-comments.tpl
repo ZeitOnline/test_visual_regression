@@ -1,12 +1,12 @@
 {%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
-{% block teaser_media_position_after_title %}
-    {% with -%}
-        {% set class = 'buzz-line' %}
-        {% set label = teaser.score | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
-        {% set modifier = module.layout %}
-        {% include "zeit.web.site:templates/inc/teaser_asset/annotation.tpl" %}
-    {%- endwith %}
-{% endblock %}
+{% block layout %}teaser-buzz{% endblock %}
 
-{% block teaser_container %}{% endblock %}
+{% block teaser_container %}
+    <span class="{{ self.layout() }}__metadata">
+        {{ lama.use_svg_icon('buzz-comment', self.layout() + '__icon', request) }}
+        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser.uniqueId | create_url }}#comments" title="Kommentare anzeigen">
+            {{- teaser.score | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') -}}
+        </a>
+    </span>
+{% endblock %}
