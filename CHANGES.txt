@@ -4,6 +4,8 @@ Change log for zeit.web
 1.44 (unreleased)
 -----------------
 
+- FIX: Decode HTML entities in image caption
+
 - DEV-801: Support article templates everywhere, not just ZMO
 
 - FIX: Repair a couple of moot assertions in tests
@@ -11,8 +13,6 @@ Change log for zeit.web
 
 1.43 (2015-07-27)
 -----------------
-
-- FIX: Decode HTML entities in image caption
 
 - ZON-1948: Configure separate serie source for videos.
 
