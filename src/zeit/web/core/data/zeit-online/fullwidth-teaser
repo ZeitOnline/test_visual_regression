@@ -72,6 +72,10 @@
           <block href="http://xml.zeit.de/zeit-online/cp-content/article-02" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
           </block>
         </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-02" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+          </block>
+        </container>
         <container cp:type="teaser" module="zon-large" cp:__name__="id-e5fec0f8-772a-42dc-8f8a-ab1559b814f5">
           <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
             <badges>

@@ -478,6 +478,7 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
         layout_image['zon-parquet-small'].extend(layout_image['leader'])
         layout_image['zon-parquet-large'].extend(layout_image['leader'])
         layout_image['zon-fullwidth'].extend(layout_image['leader-fullwidth'])
+        layout_image['zon-classic'].extend(layout_image['leader-fullwidth'])
         layout_image['zon-large'].extend(layout_image['leader'])
         layout_image['zon-series'].extend(layout_image['leader'])
         layout_image['zon-column'].extend(layout_image['leader'])

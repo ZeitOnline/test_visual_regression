@@ -11,6 +11,7 @@
 		position: relative
 		+teaser-image-text-shadow
 		+darken-on-hover
+		+font-smoothing
 	&__media
 		margin: 0 (-$page-padding) $petite
 		// this upsizes the fullwidth-image (ratio 2,35) appear to 16:9
@@ -25,19 +26,17 @@
 	&__media-container
 		+respond-min($break-tablet-min)
 			+teaser-image-dark-overlay
-	&__inner-helper
+	&__container
 		+respond-min($break-tablet-min)
 			bottom: 0
 			left: 0
+			padding: 0 0 em(32px) em(32px)
 			position: absolute
-			padding: 0 $twice $twice $twice
-			width: em(510px) + (2 * $twice)
+			width: 72%
 			z-index: 2
-			&--blog
-				top: 0
 		+respond-min($break-desktop-min)
-			padding: 0 0 $medium $medium
-			width: em(640px)
+			width: 66.66%
+			padding: 0 em(10px) em(36px) em(36px)
 	&__heading
 		@extend %teaser-heading
 		margin-bottom: remify(4px)
@@ -52,15 +51,10 @@
 		margin-bottom: remify(10px)
 		&--blog
 			@extend %teaser-kicker--blog
-			color: $zon_dark_grey
-			font-family: $font-franziska
-			font-style: italic
-			font-weight: normal
 		+respond-min($break-tablet-min)
 			color: $white
-			font-size: remify(14px)
+			font-size: em(14px)
 			margin-bottom: remify(6px)
-			+font-smoothing()
 
 	&__title
 		@extend %teaser-title
@@ -68,33 +62,25 @@
 		line-height: 1.12
 		+respond-min($break-tablet-min)
 			color: $white
-			+font-smoothing()
 		+respond-min($break-desktop-min)
 			font-size: em(34px)
 			line-height: 1.2
 	&__combined-link
 		@extend %teaser-combined-link
-	&__container
-		+respond-min($break-tablet-min)
-			&--blog
-				bottom: remify(36px)
-				position: absolute
 	&__text
 		@extend %teaser-text
 		+respond-min($break-tablet-min)
 			color: $white
-			+font-smoothing()
 		+respond-min($break-desktop-min)
-			font-size: $font-ml
+			font-size: em(18px)
 	&__byline,
 	&__metadata
 		@extend %teaser-byline
 		+respond-min($break-tablet-min)
 			color: $zon_lighter_grey
 			margin-bottom: 0
-			+font-smoothing()
 		+respond-min($break-desktop-min)
-			font-size: $font-s--rem
+			font-size: em(14px)
 			letter-spacing: 0.04em
 	&__datetime
 		@extend %teaser-datetime
