@@ -435,9 +435,9 @@ def topic_links(centerpage):
 
 
 @zeit.web.register_filter
-def getIdFromWebtrekkString(str):
+def pop_from_dotted_name(string, index=-1):
     try:
-        return str.split('.').pop()
+        return string.split('.').pop(index)
     except AttributeError:
         return
 
