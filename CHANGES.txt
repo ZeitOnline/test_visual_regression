@@ -4,7 +4,7 @@ Change log for zeit.web
 1.44 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Hide VG Wort pixel
 
 
 1.43 (2015-07-27)
