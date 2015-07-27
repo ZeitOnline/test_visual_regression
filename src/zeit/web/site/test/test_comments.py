@@ -31,20 +31,17 @@ def test_comments_should_contain_basic_meta_data(
 
 
 def test_comments_get_thread_should_respect_top_level_sort_order(testserver):
-    unique_id = ('http://xml.zeit.de/politik/deutschland/'
-                 '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
+    uid = ('http://xml.zeit.de/politik/deutschland/'
+           '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
 
-    thread_chronological = zeit.web.core.comments.get_thread(unique_id)
-    thread_most_recent = zeit.web.core.comments.get_thread(unique_id,
-                                                           sort='desc')
+    comments = zeit.web.core.comments.get_thread(uid)['comments']
+    assert comments[0]['created'] < comments[1]['created'], (
+        'Comments are not chronological.')
 
-    assert (thread_chronological['comments'][0]['created'] <
-            thread_chronological['comments'][1]['created'],
-            'Comments are not chronological.')
+    comments = zeit.web.core.comments.get_thread(uid, sort='desc')['comments']
 
-    assert (thread_most_recent['comments'][0]['created'] >
-            thread_most_recent['comments'][1]['created'],
-            'Comments are not sorted most recent first.')
+    assert comments[0]['created'] > comments[1]['created'], (
+        'Comments are not sorted most recent first.')
 
 
 def test_comment_form_should_be_rendered(testbrowser, testserver):

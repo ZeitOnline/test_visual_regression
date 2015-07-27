@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - HOTFIX: Use relative font path to tolerate optional asset prefix [zmo-assets]
 
+- DEV-801: Support article templates everywhere, not just ZMO
+
+- FIX: Repair a couple of moot assertions in tests
+
 
 1.43 (2015-07-27)
 -----------------
