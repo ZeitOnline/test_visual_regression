@@ -155,6 +155,8 @@ settings = {
     'vivi_zeit.brightcove_timeout': '300',
     'vivi_zeit.brightcove_video-folder': 'video',
     'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
+    'vivi_zeit.content.video_source-serie': (
+        'egg://zeit.web.core/data/config/video-serie.xml'),
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 

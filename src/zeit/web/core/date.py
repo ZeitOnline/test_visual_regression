@@ -6,6 +6,7 @@ import zope.interface
 
 import zeit.web
 import zeit.web.core.interfaces
+import zeit.web.core.template
 
 locale = 'de_DE'
 
@@ -43,16 +44,18 @@ def format_comment_date(comment_date, base_date=None):
     if interval.delta.days < 365:
         return interval.get_time_since_comment_posting()
     else:
-        return babel.dates.format_datetime(
-            comment_date, "d. MMMM yyyy, H:mm 'Uhr'", locale=locale)
+        return zeit.web.core.template.format_date(comment_date, 'long')
 
 
 @zeit.web.register_filter
-def format_timedelta(date, **kwargs):
+def format_timedelta(date, absolute=False, format='short', **kwargs):
     if date is None:
         return ''
     interval = DeltaTime(date)
-    return interval.get_time_since_modification(**kwargs) or ''
+    relative = interval.get_time_since_modification(**kwargs)
+    if absolute and not relative:
+        return zeit.web.core.template.format_date(date, format)
+    return relative or ''
 
 
 @zeit.web.register_global

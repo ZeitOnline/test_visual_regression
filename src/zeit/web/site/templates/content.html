@@ -71,6 +71,9 @@
     {% endblock content %}
     {% block article_interactions %}
     {% endblock %}
+    {% block nextread %}
+        {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
+    {% endblock %}
     {% block comments %}
     {% profile %}
         {% include "zeit.web.site:templates/inc/article/comments.tpl" %}
