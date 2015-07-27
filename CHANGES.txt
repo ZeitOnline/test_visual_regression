@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-1986: add teaser-class and area to tracking
 
+- MAINT: Log stack traces of exceptions we catch and send them to bugsnag.
+
 
 1.43 (2015-07-27)
 -----------------

@@ -260,6 +260,7 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
     def __init__(self, video):
         super(VideoImageGroup, self).__init__()
         self.uniqueId = '{}/imagegroup/'.format(video.uniqueId)
+        return
         for image_pattern, src in [('still', video.video_still),
                                    ('thumbnail', video.thumbnail)]:
             image = zeit.web.core.block.BaseImage()
