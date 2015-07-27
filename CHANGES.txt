@@ -4,6 +4,8 @@ Change log for zeit.web
 1.44 (unreleased)
 -----------------
 
+- ZON-1814: Configure viewport zoom for tablets
+
 - DEV-801: Support article templates everywhere, not just ZMO
 
 - FIX: Repair a couple of moot assertions in tests
@@ -15,8 +17,6 @@ Change log for zeit.web
 - ZON-1948: Configure separate serie source for videos.
 
 - ZON-1956: Add classic fullwidth teaser
-
-- ZON-1814: Configure viewport zoom for tablets
 
 
 1.42 (2015-07-23)
