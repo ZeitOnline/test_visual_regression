@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - MAINT: Hide VG Wort pixel
 
+- DEV-801: Support article templates everywhere, not just ZMO
+
+- FIX: Repair a couple of moot assertions in tests
+
 
 1.43 (2015-07-27)
 -----------------

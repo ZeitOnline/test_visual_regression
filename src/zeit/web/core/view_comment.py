@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 import json
-import urlparse
 import logging
+import md5
+import urlparse
 
 import beaker.cache
 import lxml
-import md5
-import json
 import pyramid.httpexceptions
 import pyramid.view
 import requests
@@ -338,8 +337,7 @@ class PostCommentResource(PostComment):
             pid=None,
             cid=self.new_cid)
 
-        location = zeit.web.core.template.remove_get_params(
-                location, 'ajax')
+        location = zeit.web.core.template.remove_get_params(location, 'ajax')
 
         if self.new_cid:
             # remove page param in redirect
