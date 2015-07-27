@@ -51,13 +51,11 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def template(self):
-        return zeit.magazin.interfaces.IArticleTemplateSettings(
-            self.context).template or 'default'
+        return self.context.template or 'default'
 
     @zeit.web.reify
     def header_layout(self):
-        return zeit.magazin.interfaces.IArticleTemplateSettings(
-            self.context).header_layout or 'default'
+        return self.context.header_layout or 'default'
 
     @zeit.web.reify
     def pages(self):

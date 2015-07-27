@@ -4,6 +4,8 @@ Change log for zeit.web
 1.44 (unreleased)
 -----------------
 
+- DEV-801: Support article templates everywhere, not just ZMO
+
 - FIX: Repair a couple of moot assertions in tests
 
 
