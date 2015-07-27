@@ -1,10 +1,9 @@
 {%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
-{# TODO: "get_column_image(teaser)" is also used in columnpic_zon-column.tpl . Should not be redundant. #}
-{% block teaser_modifier %}{% if get_column_image(teaser) %}teaser-column--hasmedia{% endif %}{% endblock %}
-
-
 {% block layout %}teaser-column{% endblock %}
+
+{# TODO: "get_column_image(teaser)" is also used in columnpic_zon-column.tpl . Should not be redundant. #}
+{% block teaser_modifier %}{% if get_column_image(teaser) %}{{ self.layout() }}--has-media{% endif %}{% endblock %}
 
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}

@@ -7,6 +7,7 @@ def tpm(me):
     return True
 
 
+@pytest.mark.xfail(reason='ad scripts may timeout')
 def test_ad_keyword_diuqilon(selenium_driver, testserver, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
@@ -30,6 +31,7 @@ def test_ad_keyword_diuqilon(selenium_driver, testserver, monkeypatch):
     assert diuqilon == ''
 
 
+@pytest.mark.xfail(reason='ad scripts may timeout')
 def test_ad_display(selenium_driver, testserver):
     driver = selenium_driver
     m_sel = "div[id='sas_13500']"
@@ -44,6 +46,7 @@ def test_ad_display(selenium_driver, testserver):
     assert driver.find_element_by_css_selector(m_sel) != 0
 
 
+@pytest.mark.xfail(reason='ad scripts may timeout')
 def test_viewport_is_resized_in_ipad_landscape(selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(1024, 768)
@@ -57,6 +60,7 @@ def test_viewport_is_resized_in_ipad_landscape(selenium_driver, testserver):
         assert 'width=1280' in content
 
 
+@pytest.mark.xfail(reason='ad scripts may timeout')
 def test_viewport_is_not_resized_in_other_browser(
         selenium_driver, testserver, monkeypatch):
     monkeypatch.setattr(
@@ -73,6 +77,7 @@ def test_viewport_is_not_resized_in_other_browser(
         assert 'width=device-width' in content
 
 
+@pytest.mark.xfail(reason='ad scripts may timeout')
 def test_var_IQD_varPack_isset(selenium_driver, testserver, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
@@ -88,21 +93,6 @@ def test_var_IQD_varPack_isset(selenium_driver, testserver, monkeypatch):
     assert varpack == "object"
 
 
-def test_var_Krux_isset(selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
-    driver = selenium_driver
-    driver.get('%s/artikel/01' % testserver.url)
-    try:
-        selector = 'body[data-adDeliveryType="oldschool"]'
-        driver.find_element_by_css_selector(selector)
-    except:
-        pytest.skip("not applicable due to new ad configuration")
-
-    krux = driver.execute_script("return typeof window.Krux")
-    assert krux == "function"
-
-
 def test_ad_tile2_ommitted_in_portrait(
         selenium_driver, testserver, monkeypatch):
     monkeypatch.setattr(
@@ -115,6 +105,7 @@ def test_ad_tile2_ommitted_in_portrait(
     assert scripts == 1
 
 
+@pytest.mark.xfail(reason='ad scripts may timeout')
 def test_ad_tile2_not_ommitted_in_landscape(
         selenium_driver, testserver, monkeypatch):
     monkeypatch.setattr(
@@ -127,6 +118,7 @@ def test_ad_tile2_not_ommitted_in_landscape(
     assert scripts > 1
 
 
+@pytest.mark.xfail(reason='ad scripts may timeout')
 def test_ad_content_ad_in_article(testserver, testbrowser):
     browser = testbrowser('%s/artikel/01' % testserver.url)
     assert browser.cssselect('#iq-artikelanker')

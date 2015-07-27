@@ -202,14 +202,12 @@ def test_video_page_video_should_exist(selenium_driver, testserver):
         assert False, 'Video not visible within 20 seconds'
 
 
-def test_video_page_adcontroller_code_is_embedded(
-        testserver, testbrowser, monkeypatch):
+def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
-    browser = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url))
-    assert len(browser.cssselect('.ad.ad--tile_7')) > 0
-    assert 'AdController.render(\'iqadtile7\');' in browser.contents
+
+    browser = testbrowser('/video/2015-01/3537342483001')
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
 
 
 def test_video_page_adcontroller_js_var_isset(
@@ -230,12 +228,13 @@ def test_video_page_adcontroller_js_var_isset(
 
 # TODO: iFrame (?) wird eingebunden auf großen Bildschirmen
 # TODO: iFrame (?) wird nicht eingebunden auf kleinen Bildschirmen
+# TODO: CSS_SELECTOR trifft nicht unsere aktuelle HTML Struktur #fixme
 # => Wobei, beide Tests gehören eher nach banner.py.
 #    Wenn wir hier den JS Code und Wrapper haben und der andere Test für
 #    Artikel-Banner läuft, können wir davon ausgehen dass er überall
 #    funktioniert !?
 
-@pytest.mark.xfail(reason='Why dont the ads get loaded in test browser???')
+@pytest.mark.skipif(True, reason='Fix me or I will always fail - after 20s')
 def test_video_page_adcontroller_content_gets_included(
         selenium_driver, testserver, monkeypatch):
 
