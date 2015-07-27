@@ -1,7 +1,21 @@
 Change log for zeit.web
 =======================
 
-1.42 (unreleased)
+1.44 (unreleased)
+-----------------
+
+- FIX: Repair a couple of moot assertions in tests
+
+
+1.43 (2015-07-27)
+-----------------
+
+- ZON-1948: Configure separate serie source for videos.
+
+- ZON-1956: Add classic fullwidth teaser
+
+
+1.42 (2015-07-23)
 -----------------
 
 - ZON-1918: Add mobile ads to ZON
