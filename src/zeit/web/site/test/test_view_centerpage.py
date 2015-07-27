@@ -185,6 +185,9 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
 
     if screen_size[0] == 768:
         # test ipad width
+
+        # XXX Having to test a tuple is messed up. We need to come up with
+        # something better or we cannot use the width attribute in selenium.
         assert helper.size.get('width') in (553, 542)
     elif screen_size[0] == 980:
         assert helper.size.get('width') in (653, 643)
