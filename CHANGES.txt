@@ -4,6 +4,8 @@ Change log for zeit.web
 1.44 (unreleased)
 -----------------
 
+- DEV-801: Support article templates everywhere, not just ZMO
+
 - FIX: Repair a couple of moot assertions in tests
 
 
@@ -45,8 +47,6 @@ Change log for zeit.web
 - ZON-1963: Verpixelung Back 2 top
 
 - ZON-1962: Verpixelung Logos
-
-- DEV-801: Support article templates everywhere, not just ZMO
 
 
 1.41 (2015-07-14)
