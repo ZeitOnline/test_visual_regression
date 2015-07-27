@@ -185,9 +185,9 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
 
     if screen_size[0] == 768:
         # test ipad width
-        assert helper.size.get('width') == 553  # 542
+        assert helper.size.get('width') in (553, 542)
     elif screen_size[0] == 980:
-        assert helper.size.get('width') == 653  # 643
+        assert helper.size.get('width') in (653, 643)
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
