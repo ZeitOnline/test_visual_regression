@@ -1,4 +1,5 @@
 import os.path
+import logging
 import urllib2
 
 from pyramid.view import view_config
@@ -12,36 +13,57 @@ import zeit.content.image.interfaces
 import zeit.web.core.view
 
 
+log = logging.getLogger(__name__)
+
+
 @view_config(context=zeit.content.image.interfaces.IImage)
 class Image(zeit.web.core.view.Base):
 
     def __call__(self):
-        connector = zope.component.getUtility(
-            zeit.connector.interfaces.IConnector)
-        if not isinstance(connector, zeit.connector.connector.Connector):
-            # Default case: filesystem. We can avoid loading the image
-            # contents into memory here, and instead simply tell the web server
-            # to stream out the file by giving its absolute path.
-            repository_path = connector.repository_path
-            if not repository_path.endswith('/'):
-                repository_path += '/'
-            response = pyramid.response.FileResponse(
-                self.context.uniqueId.replace(
-                    'http://xml.zeit.de/', repository_path),
-                content_type=self.context.mimeType)
-        else:
-            # Special case for DAV (preview environment)
-            response = self.request.response
-            response.app_iter = pyramid.response.FileIter(self.context.open())
+        resp = self.request.response
 
-        # Workaround for <https://github.com/Pylons/webob/issues/130>
-        response.content_type = self.context.mimeType.encode('utf-8')
-        response.headers['Content-Type'] = response.content_type
-        response.headers['Content-Length'] = str(self.context.size)
-        response.headers['Content-Disposition'] = 'inline; filename="%s"' % (
-            os.path.basename(self.context.uniqueId).encode('utf8'))
-        response.cache_expires(zeit.web.core.cache.ICachingTime(self.context))
-        return response
+        try:
+            filehandle = self.context.open()
+        except AttributeError, err:
+            log.warning(u'Image not openable: {} at {}'.format(
+                err.message, self.request.path_qs))
+            raise pyramid.httpexceptions.HTTPNotFound(err.message)
+
+        try:
+            filehandle.seek(0, 2)
+            resp.headers['Content-Length'] = str(filehandle.tell())
+        except Exception, err:
+            log.warning(u'Content-Length indeterminable: {} at {}'.format(
+                err.message, self.request.path_qs))
+        finally:
+            filehandle.seek(0, 0)
+
+        try:
+            filename = os.path.basename(
+                self.context.__parent__.uniqueId.rstrip('/'))
+        except:
+            filename = self.request.traversed[-1]
+
+        try:
+            fileext = self.context.mimeType.split('/')[-1]
+        except:
+            fileext = 'jpeg'
+
+        disposition = 'inline; filename="{}.{}"'.format(
+            filename.encode('utf8', 'ignore'), fileext)
+        resp.headers['Content-Disposition'] = disposition
+
+        try:
+            # Workaround for <https://github.com/Pylons/webob/issues/130>
+            resp.content_type = self.context.mimeType.encode('utf-8')
+            resp.headers['Content-Type'] = resp.content_type
+        except:
+            pass
+
+        resp.app_iter = pyramid.response.FileIter(filehandle)
+        resp.cache_expires(zeit.web.core.cache.ICachingTime(self.context))
+
+        return resp
 
 
 @view_config(context=zeit.content.video.interfaces.IVideo,
