@@ -120,9 +120,14 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
             }
         }
 
-        token = prefix( Math.round( width ), Math.round( height ) );
         source = image.src || $img.data( 'src' );
-        image.src = source.replace( /\/bitblt-\d+x\d+-[a-z0-9]+/, token );
+
+        if ( source.includes( 'bitblt' ) ) {
+            token = prefix( Math.round( width ), Math.round( height ) );
+            image.src = source.replace( /\/bitblt-\d+x\d+-[a-z0-9]+/, token );
+        } else if ( source.includes( '__' ) ) {
+            image.src = source.replace( /([0-9]+x[0-9]+)$/, width + 'x' + height );
+        }
     }
 
     /**
