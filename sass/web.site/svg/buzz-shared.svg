@@ -1,14 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="17px" height="12px" viewBox="0 0 17 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
-    <title>icon_meistgeteilt</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Buzzbox-Groß" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="Buzzbox-Groß-Desktop" sketch:type="MSArtboardGroup" transform="translate(-290.000000, -150.000000)" fill="#444444">
-            <g id="MEISTGETEILT-+-Fill-1-Copy-6" sketch:type="MSLayerGroup" transform="translate(290.000000, 149.000000)">
-                <path d="M13.7097174,1 L12.4601063,1.79854823 L14.1710915,4.70880786 C10.1314895,4.78721243 7.0857027,5.3537194 3.9094398,8.94695984 L4.86917875,9.99907659 C8.26648875,6.63447837 10.9206232,6.4500237 14.0861252,6.4586346 L12.4370152,9.42758436 L13.6864021,10.2730394 L16.8063944,5.48469581 L13.7097174,1 Z M9.62227415,11.6403833 L1.34511416,11.6403833 L1.34511416,2.46976836 L9.62227415,2.46976836 L9.62227415,4.29074837 C10.0612297,4.18424506 10.5091528,4.09994883 10.9673883,4.03332761 L10.9673883,1.11015162 L0,1.11015162 L0,13 L10.9673883,13 L10.9673883,7.558134 C10.5167751,7.63744498 10.0704213,7.74848035 9.62227415,7.90211704 L9.62227415,11.6403833 Z" id="icon_meistgeteilt" sketch:type="MSShapeGroup"></path>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="17px" height="12px" viewBox="0 0 17 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Teilen</title>
+    <path fill="#444444" d="M13.7097178,0l-1.2496119,0.7985482l1.7109852,2.9102597 c-4.0396013,0.0784044-7.0853882,0.6449113-10.261651,4.2381516l0.959739,1.0521173 c3.3973103-3.3645983,6.0514441-3.5490532,9.2169466-3.5404425l-1.6491098,2.9689503l1.2493868,0.8454552l3.1199923-4.7883439 L13.7097178,0z M9.6222744,10.6403837H1.3451141V1.4697683h8.2771606v1.8209803 c0.4389553-0.1065035,0.886878-0.1907997,1.3451138-0.257421V0.1101516H0V12h10.9673882V6.5581341 c-0.450613,0.0793109-0.8969669,0.1903462-1.3451138,0.3439832V10.6403837z"/>
 </svg>

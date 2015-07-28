@@ -1,14 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="14px" height="13px" viewBox="0 0 14 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
-    <title>icon_meistkommentiert</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Buzzbox-Groß" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="Buzzbox-Groß-Desktop" sketch:type="MSArtboardGroup" transform="translate(-520.000000, -151.000000)" fill="#444444">
-            <g id="MEISTKOMMENTIERT-+-Path-Copy" sketch:type="MSLayerGroup" transform="translate(520.000000, 149.000000)">
-                <path d="M0.309721244,11.0784028 L2.67196517,11.0784028 L2.67196517,13.9714871 C2.67196517,14.3121805 2.88102701,14.4069552 3.13685676,14.1814781 L6.54345885,11.0784028 L12.8995801,11.0784028 C13.0699268,11.0784028 13.2093013,10.939338 13.2093013,10.7686816 L13.2093013,2.61372124 C13.2093013,2.44368428 13.0699268,2.304 12.8995801,2.304 L0.309721244,2.304 C0.13937456,2.304 2.84217094e-14,2.44368428 2.84217094e-14,2.61372124 L2.84217094e-14,10.7686816 C2.84217094e-14,10.939338 0.13937456,11.0784028 0.309721244,11.0784028 Z" id="icon_meistkommentiert" sketch:type="MSShapeGroup"></path>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="14px" height="12px" viewBox="0 0 14 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Kommentare</title>
+    <path fill="#444444" d="M0.3097212,8.7744026h2.3622439v2.8930845c0,0.3406935,0.2090619,0.4354677,0.4648917,0.2099915 l3.4066021-3.103076H12.89958c0.1703472,0,0.309721-0.1390648,0.309721-0.309721V0.3097212 C13.209301,0.1396844,13.0699272,0,12.89958,0H0.3097212C0.1393746,0,0,0.1396844,0,0.3097212v8.1549606 C0,8.6353378,0.1393746,8.7744026,0.3097212,8.7744026z"/>
 </svg>
