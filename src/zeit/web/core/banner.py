@@ -73,7 +73,6 @@ class IqdMobileList(object):
 
 banner_list = None
 iqd_mobile_ids = None
-banner_toggles = None
 banner_id_mappings = None
 
 
@@ -108,20 +107,6 @@ def make_banner_list(banner_config):
             min_width=place.min_width, active=place.get('active'),
             dcopt=dcopt))
     return sorted(banner_list, key=lambda place: place.tile)
-
-
-def make_banner_toggles(banner_config):
-    if not banner_config:
-        return
-    try:
-        banner_file = urllib2.urlopen(banner_config)
-    except urllib2.URLError:
-        return
-    root = lxml.objectify.fromstring(banner_file.read())
-    try:
-        return root.toggles
-    except AttributeError:
-        return
 
 
 def make_iqd_mobile_ids(banner_config):

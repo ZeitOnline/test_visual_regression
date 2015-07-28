@@ -193,7 +193,19 @@ def get_layout(block, request=None):
 
 @zeit.web.register_filter
 def get_journalistic_format(block):
-    # TODO: do we need the allowed() function for journ. formats here, too?
+    source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS.factory._get_tree()
+
+    def allowed(layout_id):
+        try:
+            xpath = '/layouts/layout[@id="{}"]/@areas'.format(layout_id)
+            return block.__parent__.kind in source.xpath(xpath)[0].split(' ')
+        except (AttributeError, IndexError):
+            return
+
+    if not (allowed('zon-series') or allowed('zon-column') or
+            allowed('zon-blog')):
+        return
+
     try:
         teaser = list(block)[0]
     except (IndexError, TypeError):

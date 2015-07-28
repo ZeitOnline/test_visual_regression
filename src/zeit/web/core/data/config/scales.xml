@@ -16,7 +16,7 @@
   <scale name="small" width="300" height="200" title="Small generic scale" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="upright" width="320" height="480" title="Upright generic scale" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="og-image" width="600" height="315" title="Facebook share image" available="zeit.web.core.interfaces.IInternalUse"/>
-  <scale name="twitter-image_small" width="120" height="120" title="Twitter summary" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="twitter-image-small" width="120" height="120" title="Twitter summary" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="twitter-image-large" width="560" height="300" title="Twitter large photo" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="newsletter-540x304" width="540" height="304" title="Newsletter large" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="newsletter-220x124" width="220" height="124" title="Newsletter small" available="zeit.web.core.interfaces.IInternalUse"/>
