@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1030: Add tiny buzzbox-accordion
 
+- ZON-1934: News Overview
+
 
 1.44 (2015-07-28)
 -----------------

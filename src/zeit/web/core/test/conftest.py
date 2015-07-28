@@ -25,8 +25,9 @@ import zeit.content.image.interfaces
 import zeit.cms.interfaces
 
 import zeit.web.core
-import zeit.web.core.comments
 import zeit.web.core.application
+import zeit.web.core.comments
+import zeit.web.core.traversal
 import zeit.web.core.utils
 import zeit.web.core.view
 
@@ -458,7 +459,7 @@ def image_group_factory():
 def my_traverser(application):
     root = zope.component.getUtility(
         zeit.cms.repository.interfaces.IRepository)
-    return zeit.web.core.application.RepositoryTraverser(root)
+    return zeit.web.core.traversal.RepositoryTraverser(root)
 
 
 @pytest.fixture
