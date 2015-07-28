@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1030: Add tiny buzzbox-accordion
 
+- ZON-1814: Configure viewport zoom for tablets
+
 - ZON-1934: News Overview
 
 
