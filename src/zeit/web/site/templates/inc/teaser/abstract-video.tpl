@@ -1,6 +1,10 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-<article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="{{ teaser.__name__ }}">
+<article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="{{ teaser.__name__ }}"
+    {% if teaser.serie and teaser.serie.serienname %} data-video-series="{{ teaser.serie.serienname|attr_safe }}"{% endif %}
+    {% block data_video_size %}{% endblock %}
+    data-video-provider="brightcove" {#only brightcove is used currently#}
+    >
     <a class="{{ self.layout() }}__combined-link" href="{{ teaser | create_url }}">
         <div class="{{ self.layout() }}__container">
             {% block video_thumbnail %}

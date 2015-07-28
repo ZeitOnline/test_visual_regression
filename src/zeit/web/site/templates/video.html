@@ -2,7 +2,11 @@
 {% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
 {% block content %}
-    <article class="article article--video" itemtype="http://schema.org/VideoObject" itemscope>
+    <article class="article article--video"
+        {% if view.serie %} data-video-series="{{ view.serie|attr_safe }}"{% endif %}
+        data-video-provider="brightcove"
+        data-video-size="large"
+        itemtype="http://schema.org/VideoObject" itemscope>
 
         <meta itemprop="playerType" content="HTML5 Flash">
         {% if view.iso_duration %}
@@ -10,7 +14,7 @@
         {% endif %}
         <meta itemprop="thumbnail" content="{{ view.video_still | default_image_url }}">
 
-        {{ vima.brightcove_video_tag(view.context.__name__, iframe=True, expanded=True) }}
+        {{ vima.brightcove_video_tag(view, iframe=True, expanded=True) }}
 
         {{ self.schema_org_image_info() }}
 

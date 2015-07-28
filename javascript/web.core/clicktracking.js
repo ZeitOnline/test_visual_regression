@@ -97,11 +97,13 @@ define( [ 'jquery' ], function( $ ) {
 
             var messageData,
                 messageSender,
-                eventString;
-
-            if ( event.origin.indexOf( 'players.brightcove.net' ) === -1 ) {
-                return;
-            }
+                eventString,
+                $videoArticle,
+                videoSeries = '',
+                videoProvider = '',
+                videoSize = '',
+                data,
+                trackingData;
 
             try {
                 messageData = JSON.parse( event.data );
@@ -119,27 +121,29 @@ define( [ 'jquery' ], function( $ ) {
 
             eventString = messageData.message;
 
-            console.log( event ); // DEBUGtpuppe
+            $videoArticle = $( '.video-player' ).closest( 'article' );
+            if ( $videoArticle.length > 0 ) {
+                videoSeries = $videoArticle.data( 'video-series' ) || '';
+                videoProvider = $videoArticle.data( 'video-provider' ) || '';
+                videoSize = $videoArticle.data( 'video-size' ) || '';
+            }
 
-            var data = [
+            data = [
                 getBreakpoint(),
                 'video',
-                '[large]',
-                '[in100sekunden]',
-                '[brightcove]',
-                '[zdf]',
+                videoSize,
+                videoSeries,
+                videoProvider,
+                '', // origin (zdf/reuters)
                 eventString,
                 window.location.href.replace( /http(s)?:\/\//, '' ) // url
-            ],
+            ];
             trackingData = formatTrackingData( data );
 
-            /*
             window.wt.sendinfo({
                 linkId: trackingData,
                 sendOnUnload: 1
             });
-            */
-            window.console.log( 'TREKK THIS OUT: ' + trackingData );
 
         }, false );
     };
