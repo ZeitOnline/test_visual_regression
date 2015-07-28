@@ -1,6 +1,5 @@
 <script>
     window.ZMO = {
-        home: '{{ request.asset_url("/") }}',
         scriptsURL: '{{ request.registry.settings.scripts_url | hide_none }}',
         view: {
             {% for key, value in view.js_vars -%}

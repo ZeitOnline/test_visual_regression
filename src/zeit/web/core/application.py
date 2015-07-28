@@ -8,7 +8,6 @@ import warnings
 
 import bugsnag
 import bugsnag.wsgi.middleware
-import grokcore.component
 import jinja2
 import jinja2.ext
 import pyramid.authorization
@@ -27,27 +26,14 @@ import zope.interface.declarations
 import zeit.cms.repository.interfaces
 import zeit.cms.repository.repository
 import zeit.connector
-import zeit.content.article.interfaces
-import zeit.content.cp.interfaces
-import zeit.content.dynamicfolder.interfaces
-import zeit.content.gallery.interfaces
-import zeit.content.video.interfaces
-import zeit.find.search
-import zeit.magazin.interfaces
-import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core
-import zeit.web.core.article
 import zeit.web.core.banner
-import zeit.web.core.block
-import zeit.web.core.centerpage
-import zeit.web.core.gallery
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
 import zeit.web.core.sources
-import zeit.web.site.module.search_form
 
 
 log = logging.getLogger(__name__)
@@ -425,174 +411,6 @@ def join_url_path(base, path):
     path = os.path.join(parts.path, path)
     return urlparse.urlunsplit(
         (parts[0], parts[1], path, parts[3], parts[4]))
-
-
-def find_block(context, attrib='cp:__name__', **specs):
-    """Find a block (region/area/module/block/container/cluster, you name it)
-    in the XML of a given context. You can pass in arbitrary keyword arguments
-    that need to match the attributes of your desired block.
-    You may also need to override the name of the uuid attribute using the
-    attrib keyword.
-    """
-    # XXX Maybe this would also work with IXMLReference?
-    # zope.component.queryAdapter(
-    #     context, zeit.cms.content.interfaces.IXMLReference, name='related')
-
-    tpl = jinja2.Template("""
-        .//*[{% for k, v in specs %}@{{ k }}="{{ v }}"{% endfor %}]/@{{ attr }}
-    """)
-    unique_ids = context.xml.xpath(
-        tpl.render(attr=attrib, specs=specs.items()).strip(),
-        namespaces={'cp': 'http://namespaces.zeit.de/CMS/cp'})
-    try:
-        block = context.get_recursive(unique_ids[0])
-        return zeit.cms.interfaces.ICMSContent(block.uniqueId)
-    except (AttributeError, IndexError, TypeError):
-        return
-
-
-@grokcore.component.adapter(zeit.cms.repository.interfaces.IRepository)
-@grokcore.component.implementer(pyramid.interfaces.ITraverser)
-class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
-
-    def __call__(self, request):
-        tdict = super(RepositoryTraverser, self).__call__(request)
-        try:
-            tdict.setdefault('request', request)
-            self.rewrite_cp2015(tdict)
-            tdict = zope.component.getMultiAdapter(
-                (tdict['context'], tdict),
-                zeit.web.core.interfaces.ITraversable)
-        except OSError as e:
-            if e.errno == 2:
-                raise pyramid.httpexceptions.HTTPNotFound()
-        except (zope.component.ComponentLookupError, TypeError):
-            pass
-        finally:
-            return tdict
-
-    @staticmethod
-    def rewrite_cp2015(tdict):
-        # XXX Remove after parallel cp-editor operation period is over (ND).
-        try:
-            name = '{}.cp2015'.format(tdict['context'].__name__)
-            pos = tdict['traversed'].index(tdict['context'].__name__)
-            tdict['context'] = tdict['context'].__parent__[name]
-        except (KeyError, TypeError, ValueError):
-            pass
-        else:
-            travd = tdict['traversed']
-            tdict['traversed'] = travd[:pos] + (name,) + travd[pos + 1:]
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
-@grokcore.component.adapter(zeit.content.article.interfaces.IArticle, dict)
-class TraversableArticle(dict):
-
-    def __init__(self, context, tdict):
-        if urlparse.urlparse(context.uniqueId).path.startswith('/feature/'):
-            # ToDo: Remove when Longform will be generally used on
-            # www.zeit.de. By then do not forget to remove marker
-            # interfaces from uniqueID http://xml.zeit.de/feature (RD)
-            zope.interface.alsoProvides(
-                context, zeit.web.core.article.IFeatureLongform)
-        elif context.template == 'longform':
-            zope.interface.alsoProvides(
-                context, zeit.web.core.article.ILongformArticle)
-        elif context.template == 'short':
-            zope.interface.alsoProvides(
-                context, zeit.web.core.article.IShortformArticle)
-        elif context.template == 'column':
-            zope.interface.alsoProvides(
-                context, zeit.web.core.article.IColumnArticle)
-        elif context.template == 'liveblog':
-            zope.interface.alsoProvides(
-                context, zeit.web.core.article.ILiveblogArticle)
-        elif context.template == 'photocluster':
-            zope.interface.alsoProvides(
-                context, zeit.web.core.article.IPhotoclusterArticle)
-
-        if tdict['view_name'].startswith('seite') and not tdict['subpath']:
-            tdict['view_name'] = 'seite'
-
-        super(TraversableArticle, self).__init__(tdict)
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
-@grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery, dict)
-class TraversableGallery(dict):
-
-    def __init__(self, context, tdict):
-        context = tdict['context']
-        metadata = zeit.content.gallery.interfaces.IGalleryMetadata(context)
-
-        if metadata.type == 'zmo-product':
-            zope.interface.alsoProvides(
-                context, zeit.web.core.gallery.IProductGallery)
-        else:
-            zope.interface.alsoProvides(
-                context, zeit.web.core.gallery.IGallery)
-
-        super(TraversableGallery, self).__init__(tdict)
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
-@grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage, dict)
-class TraversableCenterPage(dict):
-
-    def __init__(self, context, tdict):
-        area = find_block(context, attrib='area', kind='ranking')
-        if area:
-            area = zeit.web.core.template.get_area(area)
-            form = find_block(context, module='search-form')
-            # XXX: Pretty inelegant, maybe use pub/subbing in the future? (ND)
-            if form:
-                form = zeit.web.core.template.get_module(form)
-                form['q'] = ' '.join(tdict['request'].GET.getall('q'))
-                form['type'] = ' '.join(tdict['request'].GET.getall('type'))
-                form['mode'] = tdict['request'].GET.get('mode')
-                form['sort'] = tdict['request'].GET.get('sort')
-                area.raw_query = form.raw_query
-                area.sort_order = form.sort_order
-                area.query = form.query
-            else:
-                form = zeit.web.site.module.search_form.Form(context)
-
-            form['page'] = tdict['request'].GET.get('p')
-            area.page = form.page
-
-        super(TraversableCenterPage, self).__init__(tdict)
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
-@grokcore.component.adapter(
-    zeit.content.dynamicfolder.interfaces.IRepositoryDynamicFolder, dict)
-class TraversableDynamic(TraversableCenterPage):
-
-    def __init__(self, context, tdict):
-        try:
-            tdict['context'] = context = tdict['context'][tdict['view_name']]
-        except (IndexError, KeyError, TypeError):
-            pass
-        else:
-            tdict['traversed'] += (tdict['view_name'],)
-            tdict['view_name'] = ''
-        finally:
-            super(TraversableDynamic, self).__init__(context, tdict)
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITraversable)
-@grokcore.component.adapter(zeit.content.video.interfaces.IVideo, dict)
-class TraversableVideo(dict):
-
-    def __init__(self, context, tdict):
-        # XXX: Let's hope no video is ever called 'imagegroup'
-        #      or 'comment-form' or 'report-form'. (ND)
-        if tdict['view_name'] not in ('imagegroup', 'comment-form',
-                                      'report-form'):
-            tdict['request'].headers['X-SEO-Slug'] = tdict['view_name']
-            tdict['view_name'] = ''
-        super(TraversableVideo, self).__init__(tdict)
 
 
 # Monkey-patch so our content provides a marker interface,
