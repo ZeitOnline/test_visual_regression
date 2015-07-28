@@ -5,13 +5,13 @@ $layout: ".teaser-square"
 .teaser-square
 	background-color: $zon_mid_grey
 	color: $white
-	margin: 0 -($page-padding) $petite
+	margin: 0 -($page-padding) $vertical-space
 	padding-bottom: 100%
 	// calc() needed to compensate the negative margin
 	padding-bottom: calc(100% + #{$additional-margin})
 	position: relative
 	+respond-min($break-areas)
-		margin: 0 0 $petite 0
+		margin: 0 0 $vertical-space 0
 		padding-bottom: 100%
 
 	&__media
