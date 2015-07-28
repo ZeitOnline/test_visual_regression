@@ -11,9 +11,14 @@ $teaser-column-image-width-fullwidth: 210px
 
 %teaser-column
 	@extend %teaser
-	background: $color-column-background
+	background-color: $color-column-background
+	border-top: none
 	padding: $page-padding
 	position: relative
+
+	// remove border on successive teaser
+	& + article
+		border-top: none
 
 %teaser-column__media
 	@extend %teaser-media
