@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1367: IVW Verpixelung relaunch
 
+- FIX: Decode HTML entities in image caption
+
 - ZON-1814: Configure viewport zoom for tablets
 
 - ZON-1934: News Overview
