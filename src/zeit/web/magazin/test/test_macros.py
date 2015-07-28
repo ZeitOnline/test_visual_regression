@@ -686,8 +686,6 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     request.session.user.picture = None
 
     # no pic
-    markup = '<span class="main-nav__community__icon icon-avatar-std"></span>'
-
     lines = tpl.module.head_user_is_logged_in_true(request)
     doc = lxml.html.fromstring(lines)
     assert doc.cssselect('span')[1].attrib['class'] == (
