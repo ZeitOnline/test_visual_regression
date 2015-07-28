@@ -2,10 +2,10 @@
 import base64
 import pkg_resources
 
+import mock
 import pyramid.interfaces
 import pyramid.request
 import pyramid.testing
-import pyramid.traversal
 import pytest
 import requests
 
@@ -157,3 +157,9 @@ def test_vgwort_pixel_should_be_present(testserver, testbrowser):
 def test_content_should_have_marker_interface(application):
     content = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     assert zeit.web.core.interfaces.IInternalUse.providedBy(content)
+
+
+def test_transaction_aborts_after_request(testserver, testbrowser):
+    with mock.patch('transaction.TransactionManager.commit') as commit:
+        testbrowser('{}/artikel/01'.format(testserver.url))
+        assert not commit.called

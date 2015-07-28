@@ -16,6 +16,9 @@ Change log for zeit.web
 
 - FIX: Ignore authors without display_name instead of crashing
 
+- MAINT: Abort transaction instead of commiting, this prevents ConflictErrors
+  in preview mode.
+
 
 1.44 (2015-07-28)
 -----------------
