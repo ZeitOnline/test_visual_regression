@@ -31,10 +31,10 @@ class Base(zeit.web.core.view.Base):
     pagetitle_suffix = u' | ZEIT ONLINE'
 
     def banner_toggles(self, name):
-        try:
-            return bool(zeit.web.core.banner.banner_toggles[name])
-        except (IndexError, TypeError):
-            return False
+        cases = {
+            'viewport_zoom': 'tablet',
+        }
+        return cases.get(name, None)
 
 
 @pyramid.view.view_config(
