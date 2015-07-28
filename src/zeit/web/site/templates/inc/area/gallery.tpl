@@ -7,7 +7,7 @@
 {% set module_layout = 'teaser-gallery' %}
 
 {% block before_module_list %}
-	{{ cp.section_heading('Fotostrecken', view, 'foto/index', 'Alle Fotostrecken') }}
+	{{ cp.section_heading('Fotostrecken', 'Alle Fotostrecken', 'foto/index', view) }}
 {% endblock %}
 
 {% block module_list %}

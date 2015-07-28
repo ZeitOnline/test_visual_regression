@@ -7,7 +7,7 @@
 {% set tracking_slug = 'snapshot..1.snapshot.' %}
 
 <div class="snapshot" id="snapshot" hidden>
-    {{ cp.section_heading('Momentaufnahme', view, path, 'Gesammelte Momente', tracking_slug) }}
+    {{ cp.section_heading('Momentaufnahme', 'Gesammelte Momente', path, view, tracking_slug) }}
     {% include "zeit.web.site:templates/inc/linked-image.tpl" %}
     <div class="snapshot-caption">
         {{ teaser.attr_title | trim | hide_none }} {{ cp.image_copyright(teaser.copyright, 'snapshot-caption') }}</span>

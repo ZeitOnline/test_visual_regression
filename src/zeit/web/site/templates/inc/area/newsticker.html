@@ -1,7 +1,7 @@
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 
 {% block before_module_list %}
-    {{ cp.section_heading(area.title, view, 'news/index', 'Alle Schlagzeilen') }}
+    {{ cp.section_heading(area.title, 'Alle Schlagzeilen', 'news/index', view) }}
 {% endblock %}
 
 {% block module_list %}
