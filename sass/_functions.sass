@@ -120,6 +120,10 @@ $rem-to-px-base: 16 !default
 		@else
 			@warn 'There is currently no unit conversion for #{$unit}'
 
+	// do not return single value list - e.g. this makes math operations simpler
+	@if length($list) == 1
+		@return nth($list, 1)
+
 	@return $list
 
 /**
