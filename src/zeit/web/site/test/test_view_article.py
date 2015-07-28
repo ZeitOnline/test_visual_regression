@@ -459,3 +459,11 @@ def test_article_ads_should_have_pagetype_modifier(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     assert len(browser.cssselect('#ad-desktop-7')) == 1
     assert 'ad-desktop--7-on-article' in browser.contents
+
+
+def test_does_not_break_when_author_has_no_display_name(
+        testserver, testbrowser):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    with mock.patch('zeit.content.author.author.Author.display_name', None):
+        assert article_view.authors_list == ''

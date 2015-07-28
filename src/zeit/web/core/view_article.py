@@ -202,7 +202,8 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def authors_list(self):
         if self.authors:
-            return u';'.join([rt['name'] for rt in self.authors])
+            return u';'.join([
+                rt['name'] for rt in self.authors if rt.get('name')])
 
     @zeit.web.reify
     def linkreach(self):
