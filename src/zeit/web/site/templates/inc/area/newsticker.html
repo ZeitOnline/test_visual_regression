@@ -1,0 +1,19 @@
+<div class="{{ 'cp-area' | with_mods(area.kind) }}">
+    <div class="newsticker">
+        {% block before_module_list %}
+            <div class="newsticker__head" id="newsticker">
+                <span class="newsticker__title">{{ area.title }}</span>
+                <a class="newsticker__link" href="{{ view.request.route_url('home') }}news/index">Alle Schlagzeilen</a>
+            </div>
+        {% endblock %}
+        {% for column in area.values() | map('get_module') | slice(2) -%}
+            <div class="newsticker__column newsticker__column--{{ loop.index }}">
+                {% for module in column %}
+                    {% set teaser = module | first_child %}
+                    {% include "zeit.web.site:templates/inc/teaser/zon-newsteaser.tpl".format(layout) %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {% block after_module_list %}{% endblock %}
+    </div>
+</div>

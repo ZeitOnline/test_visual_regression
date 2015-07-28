@@ -5,17 +5,17 @@
 	&__media-item
 		@extend %teaser-column__media-item !optional
 	&__series-label
-		@extend .teaser-small__series-label
+		@extend %teaser-series-label
 	&__heading
-		@extend .teaser-small__heading
+		@extend %teaser-heading
 	&__combined-link
-		@extend .teaser-small__combined-link
+		@extend %teaser-combined-link
 	&__kicker
-		@extend .teaser-small__kicker
+		@extend %teaser-kicker
 	&__title
-		@extend .teaser-small__title
+		@extend %teaser-title
 	&__text
-		@extend .teaser-small__text
+		@extend %teaser-text
 	&__byline
 		@extend %teaser-column__byline
 	&__metadata
@@ -32,10 +32,12 @@
 +respond-min($break-desktop-min)
 	.teaser-small-column
 		margin: $vertical-space 0 $vertical-space 0
-	.teaser-small-column
-		&--has-media,
+		&--has-media
 			min-height: remify(250px)
 			padding: $petite $petite $petite remify(250px+20px)
+			.teaser-small-column__byline
+				min-height: initial
+				padding-right: 0
 		&__media
 			top: 0
 			right: 60%
