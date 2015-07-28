@@ -21,7 +21,6 @@
 	&__title
 		+link
 			color: inherit
-			text-decoration: none
 		display: block
 		font-size: remify(21px)
 		font-weight: bold
@@ -29,23 +28,25 @@
 		line-height: 1
 		padding: remify(14px) $page-padding
 		position: relative
-		width: auto
 		@at-root a#{&}
 			+on-interaction
 				text-decoration: underline
-		+respond-min($break-tablet-min)
-			margin: 0
-			padding: 0
-		+respond-min($break-desktop-min)
-			font-size: remify(24px)
 		&:after
 			color: $zon_grey
 			content: "\203A" // › = single right-pointing angle quotation mark
 			float: right
 			font-size: remify(32px)
 			line-height: remify(12px)
-			+respond-min($break-tablet-min)
+		+respond-min($break-tablet-min)
+			line-height: normal
+			margin: 0
+			overflow: hidden
+			padding: 0
+			text-overflow: ellipsis
+			&:after
 				content: none
+		+respond-min($break-desktop-min)
+			font-size: remify(24px)
 		&--spektrum
 			+font-smoothing
 			+link
@@ -55,8 +56,8 @@
 				text-decoration: none
 			background: $spektrum_de_blue
 			color: $white
-			display: block
 			left: 0
+			line-height: 1
 			padding: remify(17px) $page-padding
 			position: absolute
 			top: 0
