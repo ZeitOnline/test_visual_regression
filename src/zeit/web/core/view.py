@@ -6,6 +6,7 @@ import lxml.etree
 import re
 
 import babel.dates
+import bugsnag
 import pyramid.response
 import pyramid.view
 import werkzeug.http
@@ -585,7 +586,8 @@ class service_unavailable(object):  # NOQA
             # close enough.
             path = request.environ.get('PATH_INFO').decode(
                 request.url_encoding, 'replace')
-        log.error(u'{} at {}'.format(repr(context), path))
+        log.error(u'Error at {}'.format(path), exc_info=True)
+        bugsnag.notify(context, context=path)
 
     def __call__(self):
         body = 'Status 503: Dokument zurzeit nicht verfügbar.'
