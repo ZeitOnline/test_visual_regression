@@ -26,12 +26,10 @@
     {% set area_duo_count = 0 %}
     {% for region in view.regions %}
         {% set region_loop = loop %}
-        {% set region_values = region.values() %}
         {%- include ["zeit.web.site:templates/inc/region/{}.html".format(region.kind),
                      "zeit.web.site:templates/inc/region/default.html"] ignore missing -%}
-
-        {# ZON-1913: display adtile_12 after the first "duo region" (region with area.duo) #}
-        {% if (region_values is defined) and (region_values[0] is defined) and region_values[0].kind == 'duo' and area_duo_count == 0 and view.is_hp and view.context.advertising_enabled %}
+        {# ZON-1913: display adtile_12 after the first duo region #}
+        {% if view.is_hp and (area_duo_count == 0) and (region.kind == 'duo') and view.context.advertising_enabled %}
             {{ lama.adplace(view.banner(10), view) }}
             {% set area_duo_count = area_duo_count + 1 %}
         {% endif %}
