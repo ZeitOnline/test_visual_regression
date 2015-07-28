@@ -31,6 +31,7 @@ setup(
         'iso8601',
         'lxml',
         'martian',
+        'ProxyTypes',
         'pyramid',
         'pyramid_beaker',
         'pyramid_debugtoolbar',

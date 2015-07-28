@@ -11,7 +11,6 @@ import zope.component
 import zeit.content.cp.interfaces
 import zeit.edit.interfaces
 
-from zeit.web.core.interfaces import ISettings
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 
@@ -73,7 +72,8 @@ def JinjaEnvRegistrator(env_attr, marker=None, category='jinja'):  # NOQA
             :internal:
             """
             if not zope.component.getUtility(
-                    ISettings).get('debug.propagate_jinja_errors', False):
+                    zeit.web.core.interfaces.ISettings).get(
+                        'debug.propagate_jinja_errors', False):
 
                 fn = types.FunctionType(
                     safeguard.func_code, obj.func_globals.copy(),

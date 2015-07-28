@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1814: Configure viewport zoom for tablets
 
+- ZON-1934: News Overview
+
 
 1.44 (2015-07-28)
 -----------------
