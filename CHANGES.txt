@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - FIX: Ignore authors without display_name instead of crashing
 
+- MAINT: Send exceptions caught by Jinja to bugsnag, too.
+
 
 1.44 (2015-07-28)
 -----------------
