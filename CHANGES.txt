@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Repair a couple of moot assertions in tests
 
+- ZON-1986: add teaser-class and area to tracking
+
 
 1.43 (2015-07-27)
 -----------------
