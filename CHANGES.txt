@@ -4,6 +4,8 @@ Change log for zeit.web
 1.45 (unreleased)
 -----------------
 
+- ZON-1814: Configure viewport zoom for tablets
+
 - ZON-1934: News Overview
 
 
