@@ -114,6 +114,19 @@ def test_image_should_be_fail_if_is_empty_doesnot_exist():
     assert image is None
 
 
+def test_image_should_decode_html_entities_in_caption():
+    model_block = mock.Mock()
+    model_block.layout = 'large'
+    model_block.is_empty = False
+    xml = ('<image base-id="http://xml.zeit.de/foo">'
+           '<bu>Standard &amp; Poor´s Zentrale in New York</bu>'
+           '<copyright>© Justin Lane / dpa</copyright>'
+           '</image>')
+    model_block.xml = lxml.etree.fromstring(xml)
+    image = zeit.web.core.block.Image(model_block)
+    assert image.caption == u'Standard & Poor´s Zentrale in New York'
+
+
 def test_module_class_should_hash_as_expected():
     context = mock.Mock()
     context.xml.attrib = {'{http://namespaces.zeit.de/CMS/cp}__name__': 42}

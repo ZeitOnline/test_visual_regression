@@ -71,6 +71,7 @@ setup(
         'zeit.seo',
         'zeit.solr',
         'zeit.vgwort',
+        'zeit.website',
         'zeit.wysiwyg',
         'zope.app.appsetup',
         'zope.component',

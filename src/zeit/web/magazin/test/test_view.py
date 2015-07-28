@@ -237,8 +237,8 @@ def test_column_should_have_header_image(testserver, testbrowser):
         '%s/artikel/standardkolumne-beispiel' % testserver.url)
     assert '<div class="article__column__headerimage">' in browser.contents
     assert '<div class="scaled-image">' in browser.contents
-    assert ('<img alt="Die ist der image sub text\n" title="Die ist der image'
-            ' sub text\n" class=" figure__media"') in browser.contents
+    assert ('<img alt="Die ist der image sub text" title="Die ist der image'
+            ' sub text" class=" figure__media"') in browser.contents
 
 
 def test_column_should_not_have_header_image(testserver, testbrowser):

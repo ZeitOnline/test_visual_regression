@@ -12,36 +12,71 @@
                 return this[key] ? this[key] : '';
             }
         },
-        clientWidth: Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
+        clientWidth: Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 ),
         mobileWidth: 768,
+        maxWidth: 1280,
         isMobileView: function() {
             return this.clientWidth < this.mobileWidth;
         },
         viewport: {
             meta: document.getElementById('viewport-meta'),
             standard: document.getElementById('viewport-meta').getAttribute('content'),
-            landscape: 'width=1280',
-            set: function() {
-                if ( screen.width === window.ZMO.mobileWidth && Math.abs( window.orientation ) === 90 ) {
-                    this.meta.setAttribute( 'content', this.landscape );
-                } else {
-                    this.meta.setAttribute( 'content', this.standard );
+            banner: 'width=1280',
+            set: function( key ) {
+                this.meta.setAttribute( 'content', this[ key ] );
+            },
+            isLandscape: function() {
+                if ( window.matchMedia ) {
+                    return window.matchMedia( '(orientation: landscape)' ).matches;
                 }
+
+                var orientation = screen.orientation || screen.mozOrientation || screen.msOrientation,
+                    angle;
+
+                if ( typeof orientation === 'string' ) {
+                    return /^landscape/.test( orientation );
+                }
+
+                if ( typeof orientation === 'object' ) {
+                    angle = orientation.angle;
+                } else if ( 'orientation' in window ) {
+                    angle = window.orientation;
+                }
+
+                return Math.abs( angle ) === 90;
             }
         },
         breakpoint: {
             value: '',
-            refreshValue: function () {
-                this.value = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '').replace(/\'/g, '') || 'desktop';
-                // we need the fallback to desktop to account for a proper value in IE 8 !
+            get: function () {
+                try {
+                    this.value = window.getComputedStyle( document.querySelector('body'), ':before' ).getPropertyValue( 'content' ).replace( /"/g, '' ) || 'desktop';
+                } catch( e ) {
+                    this.value = 'desktop';
+                }
             }
         }
     };
 
-{%- if view.context.advertising_enabled and view.banner_toggles('viewport_zoom') %}
-    window.ZMO.viewport.set();
-    if ( window.addEventListener ) {
-        window.addEventListener( 'resize', function() { window.ZMO.viewport.set(); }, false );
+    // initialize breakpoint value
+    window.ZMO.breakpoint.get();
+
+{%- if view.context.advertising_enabled %}
+    {%- if view.banner_toggles('viewport_zoom') == 'tablet' %}
+    {# /* ZON style: set viewport for tablets */ #}
+
+    if ( screen.width >= window.ZMO.mobileWidth && screen.width < window.ZMO.maxWidth ) {
+        window.ZMO.viewport.set( 'banner' );
     }
+
+    {%- elif view.banner_toggles('viewport_zoom') == 'tablet-landscape' %}
+    {# /* ZMO style: set viewport for tablets in landscape mode */ #}
+
+    if ( screen.width >= window.ZMO.mobileWidth && screen.width < window.ZMO.maxWidth && window.ZMO.viewport.isLandscape() ) {
+        window.ZMO.viewport.set( 'banner' );
+    }
+
+    {%- endif %}
 {%- endif %}
+
 </script>

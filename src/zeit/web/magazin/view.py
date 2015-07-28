@@ -54,8 +54,10 @@ class Base(zeit.web.core.view.Base):
         return crumb_list
 
     def banner_toggles(self, name):
-        # no banner toggles in ZMO in the moment
-        return True
+        cases = {
+            'viewport_zoom': 'tablet-landscape',
+        }
+        return cases.get(name, None)
 
     @zeit.web.reify
     def deliver_ads_oldschoolish(self):
