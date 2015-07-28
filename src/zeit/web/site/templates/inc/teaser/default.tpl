@@ -40,7 +40,7 @@
         {% block teaser_container %}
             {% block teaser_text %}
                 {# TODO: Extract teaser-length text snippet from articles that don't have a teaser text. #}
-                <p class="{{ self.layout() }}__text">{{ teaser.teaserText | hide_none }}{% block teaser_byline_inner %}{% endblock %}</p>
+                <p class="{{ self.layout() }}__text">{{ teaser.teaserText | hide_none }}</p>
             {% endblock %}
             {% block teaser_byline %}
                 <span class="{{ self.layout() }}__byline">
