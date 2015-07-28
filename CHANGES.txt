@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1934: News Overview
 
+- ZON-1948: Verpixelung Video-Riegel
+
 
 1.44 (2015-07-28)
 -----------------
