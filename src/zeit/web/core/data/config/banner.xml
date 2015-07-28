@@ -1,12 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <banner>
-  <toggles>
-    <!-- banner feature toggles: use 0 for off and 1 for on -->
-    <!-- feature-toggle: activate viewport zoom feature True/False -->
-    <viewport_zoom>0</viewport_zoom>
-    <!-- this one is just for testing purposes, plz ignore -->
-    <testing_me>0</testing_me>
-  </toggles>
   <place number="1" active="true">
     <name>superbanner</name>
     <type/>

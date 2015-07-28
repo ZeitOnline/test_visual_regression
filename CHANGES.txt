@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - MAINT: Hide VG Wort pixel
 
+- ZON-1814: Configure viewport zoom for tablets
+
 - ZON-1934: News Overview
 
 
