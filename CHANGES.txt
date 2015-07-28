@@ -4,7 +4,7 @@ Change log for zeit.web
 1.45 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1934: News Overview
 
 
 1.44 (2015-07-28)

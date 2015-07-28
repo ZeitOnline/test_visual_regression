@@ -37,7 +37,12 @@ class Reach(object):
     def _get_ranking(self, location, facet=None, **kw):
         location = '.'.join(filter(bool, (location, facet)))
         kw.setdefault('limit', 3)
-        return self._get('/'.join(('ranking', location)), **kw) or []
+        docs = self._get('/'.join(('ranking', location)), **kw) or []
+        for idx, doc in enumerate(docs):
+            doc['teaserTitle'] = doc['title']
+            doc['teaserSupertitle'] = doc['supertitle']
+            docs[idx] = zeit.cms.interfaces.ICMSContent(doc)
+        return docs
 
     def get_comments(self, **kw):
         return self._get_ranking('comments', **kw)

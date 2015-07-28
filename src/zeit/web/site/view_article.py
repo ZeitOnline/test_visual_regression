@@ -21,6 +21,7 @@ import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_article
+import zeit.web.site.view
 
 
 log = logging.getLogger(__name__)

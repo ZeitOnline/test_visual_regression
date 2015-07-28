@@ -277,7 +277,7 @@
             <region visible="True" hide-dupes="True" area="id-fab3ebde-2ea6-423c-87ab-39ea2c6e3c19" kind="spektrum" count="3"/>
         </cluster>
         <cluster area="solo" visible="True">
-            <region visible="True" hide-dupes="True" kind="news" area="id-7c964ac7-6bc7-41aa-bd0b-44237e187c24" count="8" automatic="True" automatic_type="query" title="Schlagzeilen">
+            <region visible="True" hide-dupes="True" kind="newsticker" area="id-7c964ac7-6bc7-41aa-bd0b-44237e187c24" count="8" automatic="True" automatic_type="query" title="Schlagzeilen">
                 <raw_query>merkel</raw_query>
                 <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
                 <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-396f44ea-f59b-46d7-adc1-856964e221a2"/>

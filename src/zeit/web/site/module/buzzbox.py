@@ -28,6 +28,9 @@ class Buzzbox(zeit.web.site.module.Module, list):
             return
         return centerpage.ressort.lower()
 
+    def __hash__(self):
+        return hash((self.layout, self.ressort))
+
 
 @zeit.web.register_module('mostread')
 class MostreadBuzzbox(Buzzbox):

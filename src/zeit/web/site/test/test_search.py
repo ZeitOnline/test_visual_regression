@@ -7,7 +7,7 @@ import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 
 import zeit.web.site.module.search_form
-import zeit.web.core.application
+import zeit.web.core.utils
 import zeit.web.core.sources
 
 
@@ -15,7 +15,7 @@ import zeit.web.core.sources
 def search_form(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/suche/index')
-    block = zeit.web.core.application.find_block(
+    block = zeit.web.core.utils.find_block(
         context, module='search-form')
     return zeit.web.core.template.get_module(block)
 
@@ -24,7 +24,7 @@ def search_form(application):
 def search_area(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/suche/index')
-    area = zeit.web.core.application.find_block(
+    area = zeit.web.core.utils.find_block(
         context, attrib='area', kind='ranking')
     return zeit.web.core.template.get_area(area)
 
@@ -177,12 +177,21 @@ def test_empty_search_result_should_produce_valid_resultset(
     assert len([a for b in search_area.values() for a in b if b]) == 0
 
 
+def get_result_dict(unique_id):
+    return {
+        'date_last_published': '2015-07-01T09:50:42Z',
+        'product_id': 'ZEI',
+        'supertitle': 'Lorem ipsum',
+        'title': 'Lorem ipsum',
+        'uniqueId': unique_id}
+
+
 def test_successful_search_result_should_produce_valid_resultset(
         monkeypatch, search_area):
     def search(self, q, **kw):
-        return pysolr.Results(
-            [{'uniqueId': 'http://xml.zeit.de/artikel/0%s' % i}
-                for i in range(1, 9)], 8)
+        return pysolr.Results([
+            get_result_dict('http://xml.zeit.de/artikel/0%s' % i)
+            for i in range(1, 9)], 8)
     monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
     assert len([a for b in search_area.values() for a in b if b]) == 8
 
@@ -195,11 +204,23 @@ def test_successful_search_result_should_render_in_browser(
         monkeypatch, testserver, testbrowser):
     def search(self, q, **kw):
         return pysolr.Results([
-            {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
-            {'uniqueId': 'http://xml.zeit.de/zeit-online/article/zeit'},
-            {'uniqueId': 'http://xml.zeit.de/artikel/artikel-ohne-assets'}
+            get_result_dict('http://xml.zeit.de/zeit-online/article/01'),
+            get_result_dict('http://xml.zeit.de/zeit-online/article/zeit'),
+            get_result_dict('http://xml.zeit.de/artikel/artikel-ohne-assets')
         ], 3)
     monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
 
     browser = testbrowser('{}/suche/index'.format(testserver.url))
     assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 3
+
+
+def test_mock_solr_should_produce_usable_results(application):
+    conn = zeit.web.core.sources.Solr()
+    try:
+        conn.update_raw(None)
+    except Exception as err:
+        raise AssertionError(err.message)
+
+    assert len(conn.search(None, 3)) == 3
+    assert 'uniqueId' in list(conn.search(None, 1))[0]
+    assert 'date_last_published' in list(conn.search(None, 1))[0]
