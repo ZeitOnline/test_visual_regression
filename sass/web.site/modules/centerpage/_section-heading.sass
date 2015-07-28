@@ -1,43 +1,34 @@
-.cp-ressort-heading
+.section-heading
+	padding: remify(24px) 0
 	position: relative
 	&__title
-		color: $zon-charcoal
 		font-size: remify(21px)
 		font-weight: 700
 		letter-spacing: $zon-letter-spacing-s
 		line-height: 1
-		margin: 0 0 remify(14px) 0
+		margin: 0
 		+respond-min($break-desktop-min)
 			font-size: remify(24px)
-	&__readmore-link
-		color: $grey--mid
-		display: block
+	&__link
+		bottom: remify(24px)
+		color: $zon_dark_grey
 		font-size: remify(14px)
 		font-weight: 700
 		letter-spacing: $zon-letter-spacing-s
 		line-height: 1
 		position: absolute
 		right: 0
-		text-decoration: none
-		top: remify(7px)
 
 		+link
-			color: $grey--mid
-			text-decoration: none
+			color: $zon_dark_grey
 		+on-interaction
-			color: $grey
+			color: $zon_grey
 		&:after
-			+inline-block
-			content: " \203A"
+			content: "\203A" // › = single right-pointing angle quotation mark
 			font-size: remify(32px)
-			line-height: 0
-			position: absolute
-			right: 0
 			+respond-min($break-phablet-min)
+				content: "\25B8" // ▸ = Black Right-Pointing Small Triangle
 				font-size: 1em
-				padding-left: remify(4px)
-				position: static
-				right: auto
-	&__readmore-linktext
+	&__text
 		+respond-max($break-phablet-min)
 			display: none

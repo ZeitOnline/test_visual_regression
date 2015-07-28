@@ -1,9 +1,11 @@
 <div class="{{ 'cp-area' | with_mods(area.kind) }}">
     <div class="newsticker">
         {% block before_module_list %}
-            <div class="newsticker__head" id="newsticker">
-                <span class="newsticker__title">{{ area.title }}</span>
-                <a class="newsticker__link" href="{{ view.request.route_url('home') }}news/index">Alle Schlagzeilen</a>
+            <div class="section-heading" id="newsticker">
+                <h6 class="section-heading__title">{{ area.title }}</h6>
+                <a href="{{ view.request.route_url('home') }}news/index" class="section-heading__link">
+                    <span class="section-heading__text">Alle Fotostrecken</span>
+                </a>
             </div>
         {% endblock %}
         {% for column in area.values() | map('get_module') | slice(2) -%}

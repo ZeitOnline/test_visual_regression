@@ -6,8 +6,12 @@
 {% set tracking_slug = 'snapshot..1.snapshot.'%}
 
 <div class="snapshot" id="snapshot" hidden>
-    <div class="snapshot__title">Momentaufnahme</div>
-    <a href="{{ href }}" class="snapshot-readmore"{% if tracking_slug %} data-id="{{ tracking_slug }}text"{% endif %}><span class="snapshot-readmore__item">Gesammelte Momente</span></a>
+    <div class="section-heading">
+        <h6 class="section-heading__title">Momentaufnahme</h6>
+        <a href="{{ href }}" class="section-heading__link"{% if tracking_slug %} data-id="{{ tracking_slug }}text"{% endif %}>
+            <span class="section-heading__text">Gesammelte Momente</span>
+        </a>
+    </div>
     {% include "zeit.web.site:templates/inc/linked-image.tpl" %}
     <div class="snapshot-caption">
         {{ teaser.attr_title | trim | hide_none }} {{ cp.image_copyright(teaser.copyright, 'snapshot-caption') }}</span>
