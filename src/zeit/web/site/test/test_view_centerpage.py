@@ -390,7 +390,7 @@ def test_snapshot_morelink_text_icon_switch(
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/index' % testserver.url)
     linkdisplay = driver.execute_script(
-        "return $('.snapshot-readmore__item').eq(0).css('display')")
+        "return $('#snapshot .section-heading__text').eq(0).css('display')")
     if screen_size[0] == 320:
         assert linkdisplay == u'none', 'Linktext not hidden on mobile'
     else:

@@ -1,11 +1,10 @@
-.newsticker
-	&__column
-		+respond-min($break-tablet-min)
-			+inline-block(top)
-			width: 48%
-	&__column--1
-		+respond-min($break-tablet-min)
-			padding-right: remify(15px)
++respond-min($break-tablet-min)
+	.newsticker
+		&__column
+			float: left
+			width: 50%
+			&:nth-last-child(even)
+				padding-right: remify(15px)
 
 .newsteaser
 	font-size: remify(14px)
@@ -20,7 +19,8 @@
 		color: $color-text-highlighted
 		font-weight: bold
 		letter-spacing: $zon-letter-spacing-m
+	&__title
+		padding-right: remify(5px)
 	&__product
 		color: $zon_mid_grey
-		padding-left: remify(5px)
 		font-size: remify(12px)

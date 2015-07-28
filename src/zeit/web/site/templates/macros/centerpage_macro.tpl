@@ -19,3 +19,15 @@
         </a>
     {%- endif -%}
 {%- endmacro %}
+
+{% macro section_heading(title, view=None, path=None, label='', tracking_slug=None) -%}
+    <div class="section-heading">
+        <h3 class="section-heading__title">{{ title }}</h3>
+        {% if path -%}
+        <a href="{{ view.request.route_url('home') }}{{ path }}" class="section-heading__link"
+            {%- if tracking_slug %} data-id="{{ tracking_slug }}text"{% endif %}>
+            <span class="section-heading__text">{{ label }}</span>
+        </a>
+        {%- endif %}
+    </div>
+{%- endmacro %}

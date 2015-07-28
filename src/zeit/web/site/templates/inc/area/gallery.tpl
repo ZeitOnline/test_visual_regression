@@ -7,12 +7,7 @@
 {% set module_layout = 'teaser-gallery' %}
 
 {% block before_module_list %}
-	<div class="section-heading">
-		<h6 class="section-heading__title">Fotostrecken</h6>
-		<a href="{{ view.request.route_url('home') }}foto/index" class="section-heading__link">
-			<span class="section-heading__text">Alle Fotostrecken</span>
-		</a>
-	</div>
+	{{ cp.section_heading('Fotostrecken', view, 'foto/index', 'Alle Fotostrecken') }}
 {% endblock %}
 
 {% block module_list %}

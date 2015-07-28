@@ -1,17 +1,13 @@
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
-{% set href = "{}kultur/2012-03/fs-momente".format(view.request.route_url('home')) %}
+{% set path = 'kultur/2012-03/fs-momente' %}
+{% set href = '{}{}'.format(view.request.route_url('home'), path) %}
 {% set image = teaser %}
 {% set module_layout = 'snapshot' %}
-{% set tracking_slug = 'snapshot..1.snapshot.'%}
+{% set tracking_slug = 'snapshot..1.snapshot.' %}
 
 <div class="snapshot" id="snapshot" hidden>
-    <div class="section-heading">
-        <h6 class="section-heading__title">Momentaufnahme</h6>
-        <a href="{{ href }}" class="section-heading__link"{% if tracking_slug %} data-id="{{ tracking_slug }}text"{% endif %}>
-            <span class="section-heading__text">Gesammelte Momente</span>
-        </a>
-    </div>
+    {{ cp.section_heading('Momentaufnahme', view, path, 'Gesammelte Momente', tracking_slug) }}
     {% include "zeit.web.site:templates/inc/linked-image.tpl" %}
     <div class="snapshot-caption">
         {{ teaser.attr_title | trim | hide_none }} {{ cp.image_copyright(teaser.copyright, 'snapshot-caption') }}</span>
