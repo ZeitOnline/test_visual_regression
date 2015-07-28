@@ -1,7 +1,16 @@
 import collections
+import logging
 import re
 
+import grokcore.component
+import jinja2
+import peak.util.proxies
 import zope.component
+
+import zeit.cms.interfaces
+
+
+log = logging.getLogger(__name__)
 
 
 def fix_misrepresented_latin(val):
@@ -47,6 +56,30 @@ def get_named_adapter(obj, iface, attr, name=None):
         if name is None:
             return get_named_adapter(obj, iface, attr, u'')
     return obj
+
+
+def find_block(context, attrib='cp:__name__', **specs):
+    """Find a block (region/area/module/block/container/cluster, you name it)
+    in the XML of a given context. You can pass in arbitrary keyword arguments
+    that need to match the attributes of your desired block.
+    You may also need to override the name of the uuid attribute using the
+    attrib keyword.
+    """
+    # XXX Maybe this would also work with IXMLReference?
+    # zope.component.queryAdapter(
+    #     context, zeit.cms.content.interfaces.IXMLReference, name='related')
+
+    tpl = jinja2.Template("""
+        .//*[{% for k, v in specs %}@{{ k }}="{{ v }}"{% endfor %}]/@{{ attr }}
+    """)
+    unique_ids = context.xml.xpath(
+        tpl.render(attr=attrib, specs=specs.items()).strip(),
+        namespaces={'cp': 'http://namespaces.zeit.de/CMS/cp'})
+    try:
+        block = context.get_recursive(unique_ids[0])
+        return zeit.cms.interfaces.ICMSContent(block.uniqueId)
+    except (AttributeError, IndexError, TypeError):
+        return
 
 
 def first_child(iterable):
@@ -169,3 +202,114 @@ class defaultattrdict(attrdict, defaultdict):
 
     def __getattr__(self, key):
         return self[key]
+
+
+@grokcore.component.adapter(dict)
+@grokcore.component.implementer(zeit.cms.interfaces.ICMSContent)
+class LazyProxy(object):
+    """Proxy class for ICMSContent implementations which expects a dict in its
+    constructor containing a `uniqueId` key-value pair.
+    The resulting adapter tries to obtain all accessed properties from keys
+    in its underlying dictionary.
+    The actual repository lookup and XML parsing is deferred until an
+    unresolvable key is discovered or a magic method called.
+    Proxies pretend to conform to any interface that is called upon them by
+    spawning a sub-proxy with the new interface pushed to the resolution stack.
+
+    >>> obj = LazyProxy({'uniqueId': 'xml://index', 'title': 'Lorem ipsum'})
+    >>> obj.title
+    'Lorem ipsum'
+    >>> obj
+    <zeit.cms.interfaces.ICMSContent proxy at 0x109bbe510>
+    >>> obj.author
+    'Any one'
+    >>> obj
+    <zeit.content.cp.interfaces.ICenterPage proxy at 0x109bbe510>
+    """
+
+    def __init__(self, context, istack=[zeit.cms.interfaces.ICMSContent]):
+        def callback():
+            factory = context.get('uniqueId', None)
+            istack = iter(self.__istack__)
+            while True:
+                try:
+                    iface = next(istack)
+                    factory = iface(factory)
+                except (StopIteration, TypeError,
+                        zope.component.ComponentLookupError):
+                    object.__setattr__(self, '__exposed__', True)
+                    return factory
+
+        origin = peak.util.proxies.LazyProxy(callback)
+        object.__setattr__(self, '__exposed__', False)
+        object.__setattr__(self, '__istack__', istack)
+        object.__setattr__(self, '__origin__', origin)
+        object.__setattr__(self, '__proxy__', context)
+
+    def __getattr__(self, key):
+        if not self.__exposed__:
+            try:
+                return self.__proxy__[key]
+            except KeyError:
+                log.debug("ProxyExposed: '{}' has no attribute '{}'".format(
+                    self, key))
+        return getattr(self.__origin__, key)
+
+    def __setattr__(self, key, value):
+        if self.__exposed__:
+            setattr(self.__origin__, key, value)
+        else:
+            # TODO: Properly defer attribute setter until origin is exposed.
+            self.__proxy__[key] = value
+
+    def __delattr__(self, key):
+        raise NotImplementedError()
+
+    def __repr__(self):
+        if self.__exposed__:
+            cls = self.__origin__.__class__
+        else:
+            cls = self.__istack__[-1]
+        return '<{}.{} proxy at {}>'.format(
+            cls.__module__, cls.__name__, hex(id(self)))
+
+    def __getitem__(self, key):
+        if not self.__exposed__:
+            try:
+                return self.__proxy__[key]
+            except KeyError:
+                log.debug("ProxyExposed: '{}' has no key '{}'".format(
+                    self, key))
+        return self.__origin__[key]
+
+    def __setitem__(self, key, value):
+        if self.__exposed__:
+            self.__origin__[key] = value
+        else:
+            # TODO: Properly defer item setter until origin is exposed.
+            self.__proxy__[key] = value
+
+    def __delitem__(self, key):
+        raise NotImplementedError()
+
+    # XXX: Would have been a lot sleeker to generically produce the remaining
+    #      magic methods. Not gonna happen though, see 3.4.12.
+    #      https://docs.python.org/2/reference/datamodel.html
+
+    def __hash__(self):
+        return hash(self.__origin__)
+
+    def __len__(self):
+        return len(self.__origin__)
+
+    def __iter__(self):
+        return iter(self.__origin__)
+
+    def __contains__(self, item):
+        return item in self.__origin__
+
+    def __dir__(self):
+        return dir(self.__origin__)
+
+    def __conform__(self, iface):
+        return LazyProxy(self.__proxy__, self.__istack__ + [iface])

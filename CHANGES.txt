@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Decode HTML entities in image caption
 
+- ZON-1934: News Overview
+
 
 1.44 (2015-07-28)
 -----------------
