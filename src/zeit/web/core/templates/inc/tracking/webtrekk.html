@@ -44,7 +44,6 @@
             9: "{{ date }}" // {{ view.date_first_released | default("not published yet") }}
         };
 
-        ivw_min_width = ivw_min_width || 767;
         wt.customParameter = {
             1: "{{ view.authors_list | lower | hide_none }}", // Autor
             2: "{{ ivw_code }}", // IVW-Code
@@ -57,7 +56,7 @@
             9: "{{ view.banner_channel | lower }}", // Banner-Channel
             10: "{%- if view.context.advertising_enabled %}yes{% endif -%}", // Banner aktiv?
             11: "", // Fehler
-            12: window.innerWidth >= ivw_min_width ? 'desktop.site' : 'mobile.site',
+            12: window.ZMO.isMobileView() ?  'mobile.site' : 'desktop.site',
             13: window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value,
             14: "neu"
         };
