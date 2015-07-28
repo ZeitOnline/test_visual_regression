@@ -36,6 +36,7 @@ class Base(zeit.web.core.view.Base):
         }
         return cases.get(name, None)
 
+
 @pyramid.view.view_config(
     route_name='spektrum-kooperation',
     renderer='templates/inc/area/spektrum.html')
