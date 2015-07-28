@@ -1,14 +1,24 @@
 Change log for zeit.web
 =======================
 
-1.44 (unreleased)
+1.45 (unreleased)
 -----------------
 
 - ZON-1030: Add tiny buzzbox-accordion
 
+
+1.44 (2015-07-28)
+-----------------
+
+- HOTFIX: Use relative font path to tolerate optional asset prefix [zmo-assets]
+
 - DEV-801: Support article templates everywhere, not just ZMO
 
 - FIX: Repair a couple of moot assertions in tests
+
+- ZON-1986: add teaser-class and area to tracking
+
+- MAINT: Log stack traces of exceptions we catch and send them to bugsnag.
 
 
 1.43 (2015-07-27)
