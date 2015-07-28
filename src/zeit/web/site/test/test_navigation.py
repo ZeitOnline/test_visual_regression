@@ -110,9 +110,9 @@ def test_nav_services_should_have_expected_links(application, jinja2_env):
     html = lxml.html.fromstring(html_str).cssselect
 
     assert (html('li > a[href^="https://premium.zeit.de/?wt_mc=pm.intern"]')[0]
-            is not None, 'No link for epaper')
+            is not None), 'No link for epaper'
     assert (html('li > a[href^="https://premium.zeit.de/abo/digitalpaket"]')[0]
-            is not None, 'No link audio')
+            is not None), 'No link audio'
 
 
 def test_nav_classifieds_should_have_expected_links(application, jinja2_env):

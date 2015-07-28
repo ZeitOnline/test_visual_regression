@@ -70,9 +70,6 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
 class Article(Traversable):
 
     def __call__(self, tdict):
-        settings = zeit.magazin.interfaces.IArticleTemplateSettings(
-            self.context)
-
         if urlparse.urlparse(
                 self.context.uniqueId).path.startswith('/feature/'):
             # ToDo: Remove when Longform will be generally used on
@@ -80,19 +77,19 @@ class Article(Traversable):
             # interfaces from uniqueID http://xml.zeit.de/feature (RD)
             zope.interface.alsoProvides(
                 self.context, zeit.web.core.article.IFeatureLongform)
-        elif settings.template == 'longform':
+        elif self.context.template == 'longform':
             zope.interface.alsoProvides(
                 self.context, zeit.web.core.article.ILongformArticle)
-        elif settings.template == 'short':
+        elif self.context.template == 'short':
             zope.interface.alsoProvides(
                 self.context, zeit.web.core.article.IShortformArticle)
-        elif settings.template == 'column':
+        elif self.context.template == 'column':
             zope.interface.alsoProvides(
                 self.context, zeit.web.core.article.IColumnArticle)
-        elif settings.template == 'liveblog':
+        elif self.context.template == 'liveblog':
             zope.interface.alsoProvides(
                 self.context, zeit.web.core.article.ILiveblogArticle)
-        elif settings.template == 'photocluster':
+        elif self.context.template == 'photocluster':
             zope.interface.alsoProvides(
                 self.context, zeit.web.core.article.IPhotoclusterArticle)
 
