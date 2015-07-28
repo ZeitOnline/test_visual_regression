@@ -523,8 +523,7 @@ def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
         'Search bar is displayed')
 
 
-def test_primary_nav_should_resize_to_fit(
-        selenium_driver, testserver):
+def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
 
     driver = selenium_driver
     actions = selenium.webdriver.ActionChains(driver)
