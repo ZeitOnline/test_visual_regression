@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.44 (unreleased)
+1.44 (2015-07-28)
 -----------------
 
 - HOTFIX: Use relative font path to tolerate optional asset prefix [zmo-assets]
