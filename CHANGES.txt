@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - FIX: Ignore authors without display_name instead of crashing
 
+- FIX: Make fallback for video images more robust.
+
 
 1.44 (2015-07-28)
 -----------------
