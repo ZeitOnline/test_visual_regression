@@ -25,8 +25,8 @@ define( [ 'jquery' ], function( $ ) {
             } else if ( $element.closest( 'figure' ).length > 0 ) {
                 type = 'image';
             }
-            teasertype += $article.data( 'meetrics' ) ?  $article.data( 'meetrics' ) : '';
-            teasertype += articleClasses[0] !== '' ? '-' + articleClasses[0] : '';
+            teasertype += $article.data( 'meetrics' ) ? $article.data( 'meetrics' ) + '-' : '';
+            teasertype += articleClasses[0];
             data = [
                 getBreakpoint(),
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // region bzw. verortung
