@@ -4,6 +4,8 @@ Change log for zeit.web
 1.44 (unreleased)
 -----------------
 
+- HOTFIX: Use relative font path to tolerate optional asset prefix [zmo-assets]
+
 - DEV-801: Support article templates everywhere, not just ZMO
 
 - FIX: Repair a couple of moot assertions in tests
