@@ -39,6 +39,7 @@ setup(
         'pyramid_mako',
         'pyramid_tm',
         'pyramid_zodbconn',
+        'python-statsd',
         'pytz',
         'repoze.bitblt',
         'repoze.vhm',

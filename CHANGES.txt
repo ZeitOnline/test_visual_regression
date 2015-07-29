@@ -14,9 +14,13 @@ Change log for zeit.web
 
 - ZON-1934: News Overview
 
+- ZON-1913: Umziehen tile_12 von "vor dem Video" nach "nach der ersten Duo-Region"
+
 - FIX: Ignore authors without display_name instead of crashing
 
 - FIX: Make fallback for video images more robust.
+
+- MAINT: Send coarse timing metrics (traversal, rendering) to statsd.
 
 
 1.44 (2015-07-28)
