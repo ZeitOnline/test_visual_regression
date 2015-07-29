@@ -95,3 +95,90 @@ def test_spektrum_images_should_set_caching_headers(testserver, app_settings):
         testserver.url))
     assert resp.headers.get('Cache-Control') == 'max-age={}'.format(
         app_settings.get('caching_time_external'))
+
+
+def test_variant_image_should_provide_desired_attributes(application):
+    group = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-4')
+    meta = zeit.content.image.interfaces.IImageMetadata(group)
+    variant = group.get_variant_by_key('default')
+    img = zeit.web.core.interfaces.ITeaserImage(variant)
+
+    assert img.alt == img.attr_alt == meta.alt
+    assert img.title == img.attr_title == meta.title
+    assert img.caption == meta.caption
+    assert img.copyright == meta.copyrights
+    assert img.image_pattern == img.variant == variant.name
+    assert img.ratio == variant.ratio
+    assert img.path == 'zeit-online/cp-content/ig-4/default'
+
+
+def test_variant_jinja_test_should_recognize_variants(application):
+    assert zeit.web.core.template.variant(42) is False
+
+    group = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-4')
+    variant = group.get_variant_by_key('default')
+    img = zeit.web.core.interfaces.ITeaserImage(variant)
+
+    assert zeit.web.core.template.variant(img) is True
+
+
+def test_variant_getter_should_fallback_to_fallback_if_fallback_is_enabled(
+        application):
+    pass
+
+
+def test_variant_getter_should_fallback_to_fallback_if_fallback_is_disabled(
+        application):
+    pass
+
+
+def test_variant_getter_should_favour_provided_image_over_extracted(
+        application):
+    pass
+
+
+def test_variant_getter_should_extract_image_if_not_explicitly_provided(
+        application):
+    pass
+
+
+def test_variant_getter_should_bail_if_provided_content_has_no_image(
+        application):
+    pass
+
+
+def test_variant_getter_should_bail_if_extracted_content_has_no_image(
+        application):
+    pass
+
+
+def test_variant_getter_should_know_how_to_extrawurst_nextread_modules(
+        application):
+    pass
+
+
+def test_variant_getter_should_extract_image_pattern_from_a_provided_module(
+        application):
+    pass
+
+
+def test_variant_getter_should_default_to_default_pattern_if_pattern_invalid(
+        application):
+    pass
+
+
+def test_variant_getter_should_get_correct_variant_by_image_pattern(
+        application):
+    pass
+
+
+def test_variant_getter_should_gracefully_handle_unavailable_variant(
+        application):
+    pass
+
+
+def test_variant_getter_should_output_a_variant_image_if_all_went_well(
+        application):
+    pass
