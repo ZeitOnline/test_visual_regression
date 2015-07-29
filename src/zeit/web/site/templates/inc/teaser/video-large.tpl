@@ -7,3 +7,5 @@
 {% block description %}<p class="{{ self.layout() }}__description">{{ teaser.teaserText }}</p>{% endblock %}
 
 {% block inlineplaybutton %}{% endblock %}
+
+{% block data_video_size %} data-video-size="large"{% endblock %}

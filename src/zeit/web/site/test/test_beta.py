@@ -17,7 +17,7 @@ def test_anon_user_should_see_login_prompt_on_beta_page(
     """
     mockserver_factory(user_xml)
     browser = testbrowser('{}/beta'.format(testserver.url))
-    assert len(browser.cssselect('a.beta-teaser__button')) == 2
+    assert len(browser.cssselect('a.beta-teaser__button')) == 1
 
 
 def test_community_user_should_see_email_prompt_on_beta_page(

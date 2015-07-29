@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-1934: News Overview
 
+- ZON-1948: Verpixelung Video-Riegel
+
 - ZON-1913: Umziehen tile_12 von "vor dem Video" nach "nach der ersten Duo-Region"
 
 - FIX: Ignore authors without display_name instead of crashing
@@ -30,6 +32,8 @@ Change log for zeit.web
 - DEV-889: Don't switch to ``.cp2015`` for Spektrum feed
 
 - MAINT: Send coarse timing metrics (traversal, rendering) to statsd.
+
+- FIX: Change text for beta toggle page
 
 
 1.44 (2015-07-28)
