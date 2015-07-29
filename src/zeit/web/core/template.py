@@ -443,7 +443,7 @@ def closest_substitute_image(image_group,
 @zeit.web.register_filter
 def pluralize(num, *forms):
     try:
-        num = int(num)
+        num = '{:,d}'.format(int(num)).replace(',', '.')
     except ValueError:
         num = 0
     return forms[min(len(forms) - 1, num):][0].format(num)
@@ -538,8 +538,9 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
         layout_image['zon-square'].extend(layout_image['leader'])
         layout_image['zon-blog'].extend(layout_image['leader'])
         layout_image['zon-topic'].extend(layout_image['leader-fullwidth'])
-    except KeyError:
-        log.warn("Layout could not be extended")
+    except KeyError, e:
+        log.warn("Layouts for '%s' could not be extended: %s not found",
+                 teaser_layout, e)
 
     return layout_image.get(teaser_layout, [orig_image_pattern])
 
