@@ -33,6 +33,8 @@ Change log for zeit.web
 
 - MAINT: Send coarse timing metrics (traversal, rendering) to statsd.
 
+- FIX: Change text for beta toggle page
+
 
 1.44 (2015-07-28)
 -----------------
