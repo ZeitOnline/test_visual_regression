@@ -6,6 +6,7 @@
         {% if view.serie %} data-video-series="{{ view.serie|attr_safe }}"{% endif %}
         data-video-provider="brightcove"
         data-video-size="large"
+        data-video-page-url="{{ view.content_url }}{% if view.slug %}/{{ view.slug }}{% endif %}"
         itemtype="http://schema.org/VideoObject" itemscope>
 
         <meta itemprop="playerType" content="HTML5 Flash">

@@ -108,6 +108,7 @@ define( [ 'jquery' ], function( $ ) {
                 videoSeries = '',
                 videoProvider = '',
                 videoSize = '',
+                videoPageUrl = '',
                 data,
                 trackingData;
 
@@ -132,6 +133,7 @@ define( [ 'jquery' ], function( $ ) {
                 videoSeries = $videoArticle.data( 'video-series' ) || '';
                 videoProvider = $videoArticle.data( 'video-provider' ) || '';
                 videoSize = $videoArticle.data( 'video-size' ) || '';
+                videoPageUrl = $videoArticle.data( 'video-page-url' ) || '';
             }
 
             data = [
@@ -142,7 +144,7 @@ define( [ 'jquery' ], function( $ ) {
                 videoProvider,
                 '', // origin (zdf/reuters)
                 eventString,
-                window.location.href.replace( /http(s)?:\/\//, '' ) // url
+                videoPageUrl.replace( /http(s)?:\/\//, '' )
             ];
             trackingData = formatTrackingData( data );
 
