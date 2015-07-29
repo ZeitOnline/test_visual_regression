@@ -43,6 +43,10 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     @zeit.web.reify
     def breadcrumbs(self):
         breadcrumbs = super(Article, self).breadcrumbs
+        if self.ressort == 'news':
+            breadcrumbs.extend([('News', 'http://xml.zeit.de/news/index')])
+            self.breadcrumbs_by_title(breadcrumbs)
+            return breadcrumbs
         self.breadcrumbs_by_navigation(breadcrumbs)
         page_teaser = self.current_page.teaser
         if len(page_teaser) > 0:

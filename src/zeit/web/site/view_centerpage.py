@@ -136,7 +136,7 @@ class Centerpage(
         except (KeyError, IndexError):
             pass
         # "Angebote" and "Administratives"
-        if self.ressort in ('angebote', 'administratives'):
+        if self.ressort in ('angebote', 'administratives', 'news'):
             html_title = zeit.seo.interfaces.ISEO(self.context).html_title
             if html_title is not None:
                 breadcrumbs.extend([(html_title, None)])
