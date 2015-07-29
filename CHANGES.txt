@@ -20,6 +20,9 @@ Change log for zeit.web
 
 - FIX: Ignore authors without display_name instead of crashing
 
+- MAINT: Abort transaction instead of commiting, this prevents ConflictErrors
+  in preview mode.
+
 - MAINT: Send exceptions caught by Jinja to bugsnag, too.
 
 - FIX: Make fallback for video images more robust.
