@@ -90,6 +90,6 @@ def test_adplaces_present_on_pages(testbrowser):
     assert len(browser.cssselect('#ad-mobile-8')) == 1
 
 
-def test_adplaces_present_before_video_stage(testbrowser):
-    browser = testbrowser('/zeit-online/video-stage')
+def test_adplaces_present_on_home_page(testbrowser):
+    browser = testbrowser('/index')
     assert len(browser.cssselect('#ad-desktop-12')) == 1
