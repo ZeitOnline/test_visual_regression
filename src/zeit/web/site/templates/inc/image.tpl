@@ -1,5 +1,5 @@
 {% if image %}
-{# XXX Rather crude bitblt/zci image api switch #}
+{# TRASHME Rather crude bitblt/zci image api switch #}
 {% set source = view.request.route_url('home') + image.path if image is variant else image | default_image_url %}
 
 <figure class="{% block mediablock %}{{ module_layout }}__media{% endblock %} scaled-image">
