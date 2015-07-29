@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - FIX: Make fallback for video images more robust.
 
+- DEV-889: Don't switch to ``.cp2015`` for Spektrum feed
+
 - MAINT: Send coarse timing metrics (traversal, rendering) to statsd.
 
 

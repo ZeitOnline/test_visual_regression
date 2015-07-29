@@ -50,6 +50,17 @@
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
         <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
+        <topiclinks>
+            <topiclink_title>Schwerpunkte</topiclink_title>
+            <topiclink>
+                <topiclink_label_1>Islamischer Staat</topiclink_label_1>
+                <topiclink_url_1>http://www.zeit.de/schlagworte/organisationen/islamischer-staat/index</topiclink_url_1>
+                <topiclink_label_2>Bundeswehr</topiclink_label_2>
+                <topiclink_url_2>http://www.zeit.de/schlagworte/themen/bundeswehr/index</topiclink_url_2>
+                <topiclink_label_3>Hongkong</topiclink_label_3>
+                <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
+            </topiclink>
+        </topiclinks>
     </head>
     <body>
         <title>Schlagzeilen</title>
