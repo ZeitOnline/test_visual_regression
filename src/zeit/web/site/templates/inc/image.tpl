@@ -8,7 +8,7 @@
     <!--<![endif]-->
         <div class="{% block mediablock_helper %}{{ module_layout }}__media-container{% endblock %}">
             {% block mediablock_wrapper %}
-            <img class="{% block mediablock_item %}{{ module_layout }}__media-item{% endblock %}" alt="{{ image.alt or image.title | hide_none }}" src="{{ source }}" data-ratio="{{ image.ratio }}" data-variant="{{ image.variant | hide_none }}">
+            <img class="{% block mediablock_item %}{{ module_layout }}__media-item{% endblock %}" alt="{{ image.attr_title | hide_none }}" src="{{ source }}" data-ratio="{{ image.ratio }}" data-variant="{{ image.variant | hide_none }}">
             {% endblock %}
         </div>
     <!--[if gt IE 8]><!-->
