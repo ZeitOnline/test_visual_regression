@@ -93,6 +93,67 @@ define( [ 'jquery' ], function( $ ) {
      */
     getBreakpoint = function() {
         return window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value;
+    },
+    /**
+     *
+     */
+    registerGlobalTrackingMessageEndpointForVideoPlayer = function() {
+
+        $( window ).on( 'message', function( event ) {
+
+            var messageData,
+                messageSender,
+                eventString,
+                $videoArticle,
+                videoSeries = '',
+                videoProvider = '',
+                videoSize = '',
+                videoPageUrl = '',
+                data,
+                trackingData;
+
+            try {
+                messageData = JSON.parse( event.originalEvent.data );
+            } catch ( e ) {
+                return;
+            }
+
+            if ( typeof( messageData.sender ) !== 'string' || typeof( messageData.message ) !== 'string' ) {
+                return;
+            }
+
+            if ( messageData.sender !== 'videojsWebtrekk' ) {
+                return;
+            }
+
+            eventString = messageData.message;
+
+            $videoArticle = $( '.video-player' ).closest( 'article' );
+            if ( $videoArticle.length > 0 ) {
+                videoSeries = $videoArticle.data( 'video-series' ) || '';
+                videoProvider = $videoArticle.data( 'video-provider' ) || '';
+                videoSize = $videoArticle.data( 'video-size' ) || '';
+                videoPageUrl = $videoArticle.data( 'video-page-url' ) || '';
+            }
+
+            data = [
+                getBreakpoint(),
+                'video',
+                videoSize,
+                videoSeries,
+                videoProvider,
+                '', // origin (zdf/reuters)
+                eventString,
+                videoPageUrl.replace( /http(s)?:\/\//, '' )
+            ];
+            trackingData = formatTrackingData( data );
+
+            window.wt.sendinfo({
+                linkId: trackingData,
+                sendOnUnload: 1
+            });
+
+        });
     };
 
     return {
@@ -120,6 +181,8 @@ define( [ 'jquery' ], function( $ ) {
                     }, clickTrack );
                 }
             }
+
+            registerGlobalTrackingMessageEndpointForVideoPlayer();
         }
     };
 });
