@@ -41,7 +41,10 @@
 			&:last-child:after
 				content: none
 
-	.ad--tile_7
+	// TODO: ad-div should have ".ad-desktop--7-on-video" and then we could
+	// apply the styles to this class.
+	.ad-desktop--7,
+	.ad-mobile--7
 		background-color: $color-video-background
 
 		+respond_min($break-tablet-min)

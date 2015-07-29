@@ -1,5 +1,5 @@
 {% macro brightcove_video_tag(
-	video_id,
+	view,
 	iframe=False,
 	expanded=False,
 	brightcove_host="//players.brightcove.net",
@@ -8,19 +8,18 @@
 	brightcove_embed="default"
 	) %}
 
-<div class="article__item article__item--wide video-player">
-
+<div class="article__item article__item--wide video-player" id="video-player-{{ view.context.__name__ }}">
 	{% if iframe %}
 		<iframe
 			class="video-player__iframe"
-			src='{{ brightcove_host }}/{{ brightcove_account }}/{{ brightcove_player }}_{{ brightcove_embed }}/index.html?videoId={{ video_id }}&wmode=transparent'
+			src='{{ brightcove_host }}/{{ brightcove_account }}/{{ brightcove_player }}_{{ brightcove_embed }}/index.html?videoId={{ view.context.__name__ }}&wmode=transparent'
 			allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
 	{% else %}
 	    <video
 	        data-account="{{ brightcove_account }}"
 	        data-player="{{ brightcove_player }}"
 	        data-embed="{{ brightcove_embed }}"
-	        data-video-id="{{ video_id }}"
+	        data-video-id="{{ view.context.__name__ }}"
 	        class="video-js video-player__videotag"
 	        controls></video>
 	    <script src="{{ brightcove_host }}/{{ brightcove_account }}/{{ brightcove_player }}_{{ brightcove_embed }}/index.min.js"></script>

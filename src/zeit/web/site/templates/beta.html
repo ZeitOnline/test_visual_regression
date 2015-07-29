@@ -7,7 +7,7 @@
             <img class="beta-teaser__image" alt="ZEIT ONLINE Beta Teaser" src="{{ view.beta_teaser_img }}">
             {% endif %}
             {% if view.beta_user == True %}
-            <span class="beta-teaser__kicker">Closed Beta</span>
+            <span class="beta-teaser__kicker">Open Beta</span>
             <span class="beta-teaser__title" id="beta-title">ZEIT&nbsp;ONLINE Beta</span>
             <p class="beta-teaser__prose">
                 Vielen Dank, dass Sie die Beta-Version von ZEIT&nbsp;ONLINE testen.
@@ -25,40 +25,37 @@
                 <a class="beta-teaser__button" href="/index">Zur Homepage</a>
             </div>
             {% elif view.community_user.uid != "0" %}
-            <span class="beta-teaser__kicker">Closed Beta</span>
-            <span class="beta-teaser__title">Beta-Tester von ZEIT&nbsp;ONLINE werden</span>
+            <span class="beta-teaser__kicker">Open Beta</span>
+            <span class="beta-teaser__title">Beta-Test von ZEIT&nbsp;ONLINE</span>
             <p class="beta-teaser__prose">
                 Wir entwickeln die neue Version von ZEIT&nbsp;ONLINE gemeinsam mit unseren
-                Nutzerinnen und Nutzern. Wenn Sie mithelfen wollen, die neue Version zu
-                testen, bevor sie öffentlich zugänglich ist, können Sie sich für einen 
-                Beta-Zugang bewerben. Schicken Sie dazu eine E&#x2011;Mail mit ihrem 
-                Community-Benutzernamen an <a href="mailto:beta@zeit.de">beta@zeit.de</a>.
+                Nutzerinnen und Nutzern. Es gibt zwei Möglichkeiten, die neue Seite zu sehen.
+                Ein Teil der Nutzer wird derzeit zufällig für den Beta-Test ausgewählt.
+                Wenn Sie nicht ausgewählt wurden, also das bisherige Design sehen,
+                können Sie dennoch beim Betatest mitmachen: Senden Sie bitte eine E-Mail
+                mit Ihrem Nutzernamen an <a href="mailto:beta@zeit.de">beta@zeit.de</a>.
             </p>
             <div class="beta-teaser__cta">
                 <a class="beta-teaser__button" href="mailto:beta@zeit.de">E&#x2011;Mail 
                 senden</a>
             </div>
             {% else %}
-            <span class="beta-teaser__kicker">Closed Beta</span>
+            <span class="beta-teaser__kicker">Open Beta</span>
             <span class="beta-teaser__title">Werden Sie Beta-Tester von ZEIT&nbsp;ONLINE</span>
             <p class="beta-teaser__prose">
                 Wir entwickeln die neue Version von ZEIT&nbsp;ONLINE gemeinsam mit unseren
-                Nutzerinnen und Nutzern. Registrieren Sie sich als Beta-Nutzer, um schon
-                heute neue Artikelformate und ein modernisiertes Design zu genießen. Helfen
-                Sie mit, die neue Version von ZEIT&nbsp;ONLINE zu testen, bevor sie öffentlich
-                zugänglich ist. Schicken Sie dazu eine E&#x2011;Mail mit ihrem 
-                Community-Benutzernamen an <a href="mailto:beta@zeit.de">beta@zeit.de</a>.
+                Nutzerinnen und Nutzern. Es gibt zwei Möglichkeiten, die neue Seite zu sehen.
+                Ein Teil der Nutzer wird derzeit zufällig für den Beta-Test ausgewählt.
+                Wenn Sie nicht ausgewählt wurden, also das bisherige Design sehen, können Sie
+                dennoch beim Betatest mitmachen: Senden Sie bitte eine E-Mail mit
+                Ihrem Nutzernamen an <a href="mailto:beta@zeit.de">beta@zeit.de</a>.
             </p>
             <p class="beta-teaser__prose">
-                <b>Bitte loggen Sie sich ein!</b>
-                Sie benötigen einen Community-Benutzernamen, um die Beta-Version von
-                ZEIT&nbsp;ONLINE testen zu können. Bitte loggen Sie sich mit Ihren bestehenden
-                Zugangsdaten ein. Wenn Sie noch kein Benutzerkonto besitzen, können Sie sich
-                hier registrieren.
+                <b>Sie sind schon Beta-Tester?</b>
+                Melden Sie sich an.
             </p>
             <div class="beta-teaser__cta">
-                <a class="beta-teaser__button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ view.friedbert_host }}beta">Zur Anmeldung</a>
-                <a class="beta-teaser__button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ view.friedbert_host }}beta">Zur Registrierung</a>
+                <a class="beta-teaser__button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.friedbert_host }}beta">Zur Anmeldung</a>
             </div>
             {% endif %}
         </div>
