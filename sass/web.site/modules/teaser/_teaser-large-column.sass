@@ -1,5 +1,8 @@
 .teaser-large-column
 	@extend %teaser-column
+	&--parquet
+		&:first-of-type
+			border-top-width: 1px
 	&__media
 		@extend %teaser-column__media
 	&__media-item
@@ -8,7 +11,6 @@
 		@extend %teaser-series-label
 	&__heading
 		@extend %teaser-heading
-		margin-bottom: remify(4px)
 	&__combined-link
 		@extend %teaser-combined-link
 	&__kicker
@@ -38,5 +40,13 @@
 		.teaser-large-column__byline
 			min-height: initial
 		.teaser-large-column__text,
-		.teaser-large-column__title
+		.teaser-large-column__title,
+		.teaser-large-column__byline,
+		.teaser-large-column__metadata
 			padding-right: remify($teaser-column-image-width-large + 20px)
+
++respond-min($break-tablet-min)
+	.teaser-large-column
+		&--parquet
+			&:first-of-type
+				border-top-width: 0
