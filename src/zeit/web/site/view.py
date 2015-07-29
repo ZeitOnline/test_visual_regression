@@ -62,14 +62,14 @@ def login_state(request):
     info = {}
 
     if settings['sso_activate']:
-        info['login'] = "{}/anmelden?url={}".format(
+        info['login'] = u"{}/anmelden?url={}".format(
             settings['sso_url'], destination)
-        info['logout'] = "{}/abmelden?url={}".format(
+        info['logout'] = u"{}/abmelden?url={}".format(
             settings['sso_url'], destination)
     else:
-        info['login'] = "{}/user/login?destination={}".format(
+        info['login'] = u"{}/user/login?destination={}".format(
             settings['community_host'], destination)
-        info['logout'] = "{}/user/logout?destination={}".format(
+        info['logout'] = u"{}/user/logout?destination={}".format(
             settings['community_host'], destination)
     if request.authenticated_userid and 'user' in request.session:
         info['user'] = request.session['user']
