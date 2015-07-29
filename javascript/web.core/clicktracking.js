@@ -21,6 +21,11 @@ define( [ 'jquery' ], function( $ ) {
                 return trackElement.useDataId( $element );
             }
 
+            // is this a link inside an article text? track this specific case.
+            if ( $element.parents( '.article-page' ).length > 0 ) {
+                return trackElement.linkInArticleContent( $element );
+            }
+
             var data = [],
                 type = 'text',
                 teasertype = '',
@@ -68,6 +73,30 @@ define( [ 'jquery' ], function( $ ) {
                 $element.data( 'id' ),
                 $element.attr( 'href' ) // url
             ];
+            return formatTrackingData( data );
+        },
+        /**
+         * track links which are inside an article text
+         * @param  {Object} $element jQuery Element with the link that was clicked
+         * @return {string}          formatted linkId-string for webtrekk call
+         */
+        linkInArticleContent: function( $element ) {
+
+            var $currentPage = $element.closest( '.article-page' ),
+                $currentPageNumber = $currentPage.data( 'page-number' ) || 0,
+                $allParagraphsOnPage = $currentPage.children( 'p' ),
+                $currentParagraph = $element.closest( 'p' ),
+                currentParagraphNumber = $allParagraphsOnPage.index( $currentParagraph ) + 1,
+                data = [
+                    getBreakpoint(),
+                    'intext', // [verortung] Immer (intext)
+                    currentParagraphNumber + '/seite-' + $currentPageNumber, // "Nummer des Absatzes"/"Nummer der Seite" Bsp: "2/seite-1"
+                    '', // [spalte] leer lassen
+                    '', // [subreihe] leer lassen
+                    $element.text(), // [bezeichner] Verlinkter Text bsp. "Koalitionsverhandlungen sind gescheitert"
+                    $element.attr( 'href' ) // url
+                ];
+
             return formatTrackingData( data );
         }
     },
