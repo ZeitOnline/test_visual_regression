@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - MAINT: Hide VG Wort pixel
 
+- ZON-1367: IVW Verpixelung relaunch
+
 - ZON-1030: Add tiny buzzbox-accordion
 
 - FIX: Decode HTML entities in image caption
