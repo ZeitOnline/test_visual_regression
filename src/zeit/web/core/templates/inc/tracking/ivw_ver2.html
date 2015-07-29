@@ -10,7 +10,7 @@
             "co" : "URL: {{ request.path_info }}"
         };
 
-    if( typeof window.ZMO !== 'undefined' && window.ZMO.isMobileView() ) {
+    if ( window.ZMO.isMobileView() ) {
         iam_data.st = "mobzeit";
         iam_data.sv = "mo";
     } else {
