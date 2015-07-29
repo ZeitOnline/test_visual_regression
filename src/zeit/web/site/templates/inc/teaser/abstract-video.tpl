@@ -1,7 +1,12 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
-
-<article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="{{ teaser.__name__ }}">
-    <a class="{{ self.layout() }}__combined-link" href="{{ teaser | create_url }}">
+{% set teaser_url = teaser | create_url %}
+<article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="{{ teaser.__name__ }}"
+    {% if teaser.serie and teaser.serie.serienname %} data-video-series="{{ teaser.serie.serienname|attr_safe }}"{% endif %}
+    {% block data_video_size %}{% endblock %}
+    data-video-provider="brightcove" {#only brightcove is used currently#}
+    data-video-page-url="{{ teaser_url }}"
+    >
+    <a class="{{ self.layout() }}__combined-link" href="{{ teaser_url }}">
         <div class="{{ self.layout() }}__container">
             {% block video_thumbnail %}
                 {% set image = (teaser | get_image_group)['still.jpg'] %}
