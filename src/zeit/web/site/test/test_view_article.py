@@ -467,3 +467,23 @@ def test_does_not_break_when_author_has_no_display_name(
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     with mock.patch('zeit.content.author.author.Author.display_name', None):
         assert article_view.authors_list == ''
+
+
+def test_article_views_have_page_numbers_in_data_attribute(testbrowser):
+    select_fullview = testbrowser(
+        '/zeit-online/article/zeit/komplettansicht').cssselect
+    assert len(select_fullview('.article-page[data-page-number="1"]')) == 1
+    assert len(select_fullview('.article-page[data-page-number="2"]')) == 1
+    assert len(select_fullview('.article-page[data-page-number="3"]')) == 1
+    assert len(select_fullview('.article-page[data-page-number="4"]')) == 1
+    assert len(select_fullview('.article-page[data-page-number="5"]')) == 1
+
+    select_firstpage = testbrowser(
+        '/zeit-online/article/zeit').cssselect
+    assert len(select_firstpage('.article-page[data-page-number="1"]')) == 1
+    assert len(select_firstpage('.article-page[data-page-number="2"]')) == 0
+
+    select_page3 = testbrowser(
+        '/zeit-online/article/zeit/seite-3').cssselect
+    assert len(select_page3('.article-page[data-page-number="1"]')) == 0
+    assert len(select_page3('.article-page[data-page-number="3"]')) == 1
