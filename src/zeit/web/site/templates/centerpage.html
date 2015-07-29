@@ -23,17 +23,15 @@
 {% endblock metadata %}
 
 {% block main %}
-    {% set area_duo_count = 0 %}
+    {% set first_region_duo_found = false %}
     {% for region in view.regions %}
         {% set region_loop = loop %}
         {%- include ["zeit.web.site:templates/inc/region/{}.html".format(region.kind),
                      "zeit.web.site:templates/inc/region/default.html"] ignore missing -%}
-        {# ZON-1913: display adtile_12 after the first duo region #}
-        {% if view.is_hp and (area_duo_count == 0) and (region.kind == 'duo') and view.context.advertising_enabled %}
+        {% if view.is_hp and (first_region_duo_found == false) and (region.kind == 'duo') and view.context.advertising_enabled %}
             {{ lama.adplace(view.banner(10), view) }}
-            {% set area_duo_count = area_duo_count + 1 %}
+            {% set first_region_duo_found = true %}
         {% endif %}
-
     {% endfor %}
 {% endblock main %}
 
