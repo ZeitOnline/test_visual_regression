@@ -1,2 +1,37 @@
 <legacy_variants>
+  <variant old="540x304" new="zon-large" />
+  <variant old="940x400" new="zon-fullwidth" />
+  <variant old="148x84" new="zon-large" />
+  <variant old="220x124" new="zon-large" />
+  <variant old="368x220" new="zon-large" />
+  <variant old="368x110" new="zon-large" />
+  <!-- XXX -->
+  <variant old="180x101" new="zon-large" />
+  <variant old="180xVar" new="zon-large" />
+  <variant old="580x148" new="zon-large" />
+  <!-- XXX -->
+  <variant old="zmo-landscape-large" new="zon-large" />
+  <variant old="zmo-landscape-small" new="zon-large" />
+  <variant old="zmo-square-large" new="zon-square" />
+  <variant old="zmo-square-small" new="zon-square" />
+  <variant old="zmo-lead-upright" new="zon-large" />
+  <!-- XXX -->
+  <variant old="zmo-upright" new="zon-large" />
+  <!-- XXX -->
+  <variant old="zmo-large" new="zon-large" />
+  <variant old="zmo-medium" new="zon-large" />
+  <variant old="zmo-small" new="zon-large" />
+  <variant old="zmo-x-small" new="zon-large" />
+  <variant old="zmo-nextread" new="zon-large" />
+  <!-- XXX -->
+  <variant old="zmo-article-dream" new="zon-large" />
+  <!-- XXX -->
+  <variant old="zmo-card-picture" new="zon-large" />
+  <!-- XXX -->
+  <variant old="zmo-print-cover" new="zon-large" />
+  <!-- XXX -->
+  <variant old="og-image" new="zon-large" />
+  <!-- XXX -->
+  <variant old="twitter-image-small" new="zon-square" />
+  <variant old="twitter-image-large" new="zon-large" />
 </legacy_variants>

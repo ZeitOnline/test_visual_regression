@@ -1,3 +1,8 @@
 <variants>
-  <variant name="default" zoom="1.0"/>
+  <variant name="default" focus_x="0.5" focus_y="0.3" zoom="1.0"/>
+  <variant name="zon-fullwidth" aspect_ratio="16:9"/>
+  <variant name="zon-large" aspect_ratio="16:9"/>
+  <variant name="zon-thumbnail" aspect_ratio="16:9"/>
+  <variant name="zon-topic" aspect_ratio="16:9"/>
+  <variant name="zon-square" aspect_ratio="1:1"/>
 </variants>
