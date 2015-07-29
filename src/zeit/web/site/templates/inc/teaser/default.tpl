@@ -24,6 +24,7 @@
             <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | create_url }}">
                 {% block teaser_kicker %}
                 <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format) }}">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
+                {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">:</span>{% endif %}
                 {% endblock %}
                 {% block teaser_title %}
                 <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
