@@ -924,3 +924,20 @@ def test_centerpage_must_not_have_meetrics_integration(
     meetrics = browser.cssselect(
         'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 0
+
+
+def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/buzz-box' % testserver.url)
+    try:
+        WebDriverWait(driver, 5).until(
+            expected_conditions.presence_of_element_located(
+                (By.CLASS_NAME, 'buzz-accordion')))
+    except TimeoutException:
+        assert False, 'Timeout accordion script'
+    else:
+        slides = driver.find_elements_by_css_selector('.buzz-box__teasers')
+        assert len(slides) == 3
+        assert slides[0].is_displayed()
+        assert not slides[1].is_displayed()
+        assert not slides[2].is_displayed()
