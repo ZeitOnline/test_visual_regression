@@ -56,8 +56,8 @@
             9: "{{ view.banner_channel | lower }}", // Banner-Channel
             10: "{%- if view.context.advertising_enabled %}yes{% endif -%}", // Banner aktiv?
             11: "", // Fehler
-            12: window.ZMO.isMobileView() ?  'mobile.site' : 'desktop.site',
-            13: window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value,
+            12: window.ZMO.isMobileView() ? "mobile.site" : "desktop.site",
+            13: window.ZMO.breakpoint.value === "desktop" ? "stationaer" : window.ZMO.breakpoint.value,
             14: "neu"
         };
 
