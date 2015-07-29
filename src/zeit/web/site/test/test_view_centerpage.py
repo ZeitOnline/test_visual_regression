@@ -746,7 +746,7 @@ def test_newsticker_should_have_expected_dom(testserver, testbrowser):
 
     cols = browser.cssselect('.cp-area--newsticker .newsticker__column')
     assert len(cols) == 2
-    teaser = browser.cssselect('.newsticker article')
+    teaser = browser.cssselect('.cp-area--newsticker article.newsteaser')
     assert len(teaser) == 8
     assert len(teaser[0].cssselect('time')) == 1
     assert len(
