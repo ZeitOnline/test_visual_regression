@@ -4,7 +4,7 @@ Change log for zeit.web
 1.46 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Don't break on empty image captions (regression was introduced in 1.45)
 
 
 1.45 (2015-07-29)
