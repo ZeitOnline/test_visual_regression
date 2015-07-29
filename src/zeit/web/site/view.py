@@ -56,8 +56,12 @@ class Base(zeit.web.core.view.Base):
             breadcrumbs.extend([(
                 self.pagetitle.replace(self.pagetitle_suffix, ''), None)])
 
+        # "Suche"
+        if context_type == 'arena' and self.title == 'Suche':
+            breadcrumbs.extend([(u'Suchergebnisse für {}'.format(
+                self.request.GET['q']), None)])
         # "Angebote" and "Administratives"
-        if self.ressort in ('angebote', 'administratives'):
+        elif self.ressort in ('angebote', 'administratives'):
             html_title = zeit.seo.interfaces.ISEO(self.context).html_title
             if html_title is not None:
                 breadcrumbs.extend([(html_title, None)])
