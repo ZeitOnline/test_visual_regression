@@ -124,10 +124,10 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
         width = Math.round( width );
         height = Math.round( height );
 
-        if ( source.includes( 'bitblt' ) ) {
+        if ( /bitblt/.test( source ) ) {
             token = prefix( width, height );
             image.src = source.replace( /\/bitblt-\d+x\d+-[a-z0-9]+/, token );
-        } else if ( source.includes( '__' ) ) {
+        } else if ( /__/.test( source ) ) {
             image.src = source.replace( /([0-9]+x[0-9]+)$/, width + 'x' + height );
         } else {
             image.src = source + '__' + width + 'x' + height;
