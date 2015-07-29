@@ -30,6 +30,41 @@ log = logging.getLogger(__name__)
 
 
 @zeit.web.register_filter
+def get_image(module=None, content=None, fallback=True):
+    try:
+        content = content or first_child(module)
+        imagegroup = zeit.content.image.interfaces.IImages(content).image
+    except (TypeError, AttributeError):
+        imagegroup = None
+
+    if not zeit.content.image.interfaces.IImageGroup.providedBy(
+            imagegroup) and fallback:
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        default_id = conf.get('default_teaser_images')
+        imagegroup = zeit.cms.interfaces.ICMSContent(default_id, None)
+
+    if zeit.web.core.interfaces.INextread.providedBy(module):
+        # XXX Yeah, that's what you get when you use teasers on a content page
+        layout = module
+    else:
+        layout = zeit.content.cp.layout.get_layout(get_layout(module))
+
+    if layout is not None:
+        image_pattern = layout.image_pattern
+    else:
+        image_pattern = 'default'
+
+    variant = imagegroup.get_variant_by_name(image_pattern)
+    return zeit.web.core.interfaces.ITeaserImage(variant)
+
+
+@zeit.web.register_test
+def variant(image):
+    # TRASHME: Jinja test to distinguish between bitblt/zci images.
+    return isinstance(image, zeit.web.core.centerpage.VariantImage)
+
+
+@zeit.web.register_filter
 def block_type(obj):
     """Outputs the class name in lower case format of one or multiple block
     elements.

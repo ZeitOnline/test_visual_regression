@@ -218,6 +218,29 @@ class TeaserImage(zeit.web.core.block.BaseImage):
         self.uniqueId = image.uniqueId
 
 
+@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
+@grokcore.component.adapter(zeit.content.image.interfaces.IVariant)
+class VariantImage(object):
+
+    def __init__(self, context):
+        group = zeit.content.image.interfaces.IImageGroup(context)
+        meta = zeit.content.image.interfaces.IImageMetadata(group)
+        self.alt = meta.alt
+        self.attr_alt = meta.alt or meta.caption
+        self.attr_title = meta.title or meta.caption
+        self.caption = meta.caption
+        self.copyright = meta.copyrights
+        self.image_group = group
+        self.image_pattern = context.name
+        self.ratio = context.ratio
+        self.title = meta.title
+        self.variant = context.legacy_name or context.name
+
+    @zeit.web.reify
+    def path(self):
+        return self.image_group.variant_url(self.image_pattern).lstrip('/')
+
+
 class LocalVideoImage(object):
 
     def __init__(self, video_url):
