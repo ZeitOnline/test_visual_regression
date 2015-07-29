@@ -99,7 +99,7 @@ define( [ 'jquery' ], function( $ ) {
      */
     registerGlobalTrackingMessageEndpointForVideoPlayer = function() {
 
-        window.addEventListener( 'message', function( event ) {
+        $( window ).on( 'message', function( event ) {
 
             var messageData,
                 messageSender,
@@ -112,7 +112,7 @@ define( [ 'jquery' ], function( $ ) {
                 trackingData;
 
             try {
-                messageData = JSON.parse( event.data );
+                messageData = JSON.parse( event.originalEvent.data );
             } catch ( e ) {
                 return;
             }
@@ -151,7 +151,7 @@ define( [ 'jquery' ], function( $ ) {
                 sendOnUnload: 1
             });
 
-        }, false );
+        });
     };
 
     return {
