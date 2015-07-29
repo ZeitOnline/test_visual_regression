@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1934: News Overview
 
+- DEV-889: Don't switch to ``.cp2015`` for Spektrum feed
+
 
 1.44 (2015-07-28)
 -----------------

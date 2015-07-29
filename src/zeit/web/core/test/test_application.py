@@ -78,6 +78,14 @@ def test_parallel_folders_should_be_discovered_during_traversal(my_traverser):
     assert zeit.content.cp.interfaces.ICenterPage.providedBy(tdict['context'])
 
 
+def test_spektrum_feed_should_not_use_parallel_cp(my_traverser):
+    req = pyramid.request.Request.blank(
+        '/parallel_cps/index/rss-spektrum-flavoured')
+    tdict = my_traverser(req)
+    assert tdict['context'].uniqueId == (
+        'http://xml.zeit.de/parallel_cps/index')
+
+
 def test_acceptable_pagination_should_not_redirect(testserver):
     resp = requests.get('%s/artikel/03/seite-3' % testserver.url,
                         allow_redirects=False)
