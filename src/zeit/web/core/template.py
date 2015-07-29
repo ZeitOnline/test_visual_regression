@@ -279,7 +279,7 @@ def is_gallery(context):
     return zeit.content.gallery.interfaces.IGallery.providedBy(context)
 
 
-# definition of default images sizes per layout context
+# TRASHME: Definition of default images sizes for bitblt images
 scales = {
     'default': (200, 300),
     'large': (800, 600),
@@ -337,6 +337,7 @@ scales = {
 
 @zeit.web.register_filter
 def default_image_url(image, image_pattern='default'):
+    # TRASHME: Creates image urls for bitblt images
     try:
         image_pattern = getattr(image, 'image_pattern', image_pattern)
         if image_pattern != 'default':
@@ -370,6 +371,7 @@ def default_image_url(image, image_pattern='default'):
 @zeit.web.register_filter
 def sharing_image_url(image_group,
                       image_pattern):
+    # TRASHME: Create image URLs for twitter and facebook
     sharing_image = closest_substitute_image(image_group, image_pattern)
 
     if not sharing_image:
@@ -382,6 +384,8 @@ def sharing_image_url(image_group,
 def closest_substitute_image(image_group,
                              image_pattern,
                              force_orientation=False):
+    # TRASHME: We don't need substitutes any more since zci images can be
+    #          requested in any size and shape
     """Returns the image from an image group, that most closely matches the
     target image pattern (while ignoring the master image). Larger resolutions
     are always favored over smaller ones and the image orientation matching may
@@ -518,6 +522,7 @@ def get_teaser_template(block_layout,
 
 @zeit.web.register_global
 def get_image_pattern(teaser_layout, orig_image_pattern):
+    # TRASHME: This is solved by legacy variant image configuration
     layout = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS
     layout_image = {block.id: [block.image_pattern] for block in
                     list(layout(None)) if block.image_pattern}
@@ -541,11 +546,13 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
 
 @zeit.web.register_global
 def set_image_id(asset_id, image_base_name, image_pattern, ext):
+    # TRASHME: Only needed by deprecated get_teaser_image function
     return '%s/%s-%s.%s' % (
         asset_id, image_base_name, image_pattern, ext)
 
 
 def _existing_image(asset_id, base_name, patterns, ext, filenames):
+    # TRASHME: Only needed by deprecated get_teaser_image function
     for pattern in patterns:
         name = '{}-{}.{}'.format(base_name, pattern, ext)
         if name not in filenames:
@@ -560,6 +567,7 @@ def _existing_image(asset_id, base_name, patterns, ext, filenames):
 
 @zeit.web.register_global
 def get_column_image(teaser):
+    # TRASHME: Could be done entirely in template code and with get_image
     try:
         image_group = teaser.authorships[0].target.image_group
         image = closest_substitute_image(image_group, 'zon-column')
@@ -571,6 +579,7 @@ def get_column_image(teaser):
 
 @zeit.web.register_global
 def get_teaser_image(teaser_block, teaser, unique_id=None):
+    # TRASHME: Deprecated for zci images in favour of get_image
     import zeit.web.core.centerpage
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
@@ -634,12 +643,14 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
 
 @zeit.web.register_global
 def get_default_image_id():
+    # TRASHME: Use get_image with disabled fallback instead
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get('default_teaser_images')
 
 
 @zeit.web.register_filter
 def get_repository_image(image):
+    # TRASHME: Should be solved by using get_image on fullgraphical teaser
     base_image = zeit.web.core.block.BaseImage()
     base_image.image = image
     base_image.uniqueId = image.uniqueId
@@ -648,6 +659,7 @@ def get_repository_image(image):
 
 @zeit.web.register_filter
 def get_image_group(asset):
+    # TRASHME: Should be solved by using get_image on video modules
     try:
         return zeit.content.image.interfaces.IImageGroup(asset)
     except TypeError:
