@@ -5,7 +5,7 @@
 
 {% block teaser_container %}
 	<span class="{{ self.layout() }}__metadata">
-        {{ lama.use_svg_icon('buzz-shared', self.layout() + '__icon', request) }}
-        {{ teaser.score | pluralize('Nie geteilt', '{} mal geteilt') }}
-    </span>
+		{{ lama.use_svg_icon('buzz-shared', self.layout() + '__icon', request) }}
+		{{ teaser.score | pluralize('Nie geteilt', '{} mal geteilt') }}
+	</span>
 {% endblock %}
