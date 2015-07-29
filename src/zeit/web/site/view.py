@@ -38,72 +38,29 @@ class Base(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def breadcrumbs(self):
-        breadcrumbs = [('Start', 'http://xml.zeit.de/index', 'ZEIT ONLINE')]
-        context_type = getattr(self.context, 'type', self.type)
+        return [('Start', 'http://xml.zeit.de/index', 'ZEIT ONLINE')]
 
-        def add_breadcrumbs_by_navigation():
-            for segment in (self.ressort, self.sub_ressort):
-                try:
-                    nav_item = zeit.web.core.navigation.navigation_by_name[
-                        segment]
-                    breadcrumbs.extend([(
-                        nav_item['text'], nav_item['link'])])
-                except KeyError:
-                    # Segment is no longer be part of the navigation
-                    next
+    def breadcrumbs_by_title(self, breadcrumbs=None):
+        if breadcrumbs is None:
+            breadcrumbs = []
+        breadcrumbs.extend([(
+            self.pagetitle.replace(self.pagetitle_suffix, ''), None)])
+        return breadcrumbs
 
-        def add_default_breadcrumbs():
-            breadcrumbs.extend([(
-                self.pagetitle.replace(self.pagetitle_suffix, ''), None)])
-
-        # "Suche"
-        if context_type == 'arena' and self.title == 'Suche':
-            breadcrumbs.extend([(u'Suchergebnisse für {}'.format(
-                self.request.GET['q']), None)])
-        # "Angebote" and "Administratives"
-        elif self.ressort in ('angebote', 'administratives'):
-            html_title = zeit.seo.interfaces.ISEO(self.context).html_title
-            if html_title is not None:
-                breadcrumbs.extend([(html_title, None)])
-            else:
-                add_default_breadcrumbs()
-        # Video index
-        elif self.ressort == 'video':
-            breadcrumbs.extend([('Video', self.context.uniqueId)])
-        # Video
-        elif context_type == 'video':
-            breadcrumbs.extend([('Video', 'http://xml.zeit.de/video/index')])
-            add_breadcrumbs_by_navigation()
-            add_default_breadcrumbs()
-        # Article
-        elif context_type in ('article', 'gallery', 'quiz'):
-            # Add breadcrumbs that belong to the navgiation
-            add_breadcrumbs_by_navigation()
-            # Append page teaser
-            page_teaser = self.current_page.teaser
-            if len(page_teaser) > 0:
-                breadcrumbs.extend([(page_teaser, self.context.uniqueId)])
-            else:
-                add_default_breadcrumbs()
-        # Topicpage
-        elif context_type == 'topicpage':
-            add_breadcrumbs_by_navigation()
-            breadcrumbs.extend([(
-                'Thema: {}'.format(self.context.title), None)])
-        # Archive year index
-        elif context_type == 'archive-print-year':
-            breadcrumbs.extend([
-                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
-                ("Jahrgang: {}".format(self.context.year), None)])
-        # Archive volume index
-        elif context_type == 'archive-print-volume':
-            breadcrumbs.extend([
-                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
-                ("Jahrgang {}".format(self.context.year),
-                    '{}/index'.format(self.content_url.rsplit('/', 2)[0])),
-                ("Ausgabe: {}".format(self.context.volume), None)])
-        else:
-            add_default_breadcrumbs()
+    def breadcrumbs_by_navigation(self, breadcrumbs=None):
+        if breadcrumbs is None:
+            breadcrumbs = []
+        for segment in (self.ressort, self.sub_ressort):
+            if segment == u'reisen':
+                segment = u'reise'
+            try:
+                nav_item = zeit.web.core.navigation.navigation_by_name[
+                    segment]
+                breadcrumbs.extend([(
+                    nav_item['text'], nav_item['link'])])
+            except KeyError:
+                # Segment is no longer be part of the navigation
+                next
         return breadcrumbs
 
 

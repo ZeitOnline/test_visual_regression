@@ -40,6 +40,17 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         """ Canonical for komplettansicht is first page """
         return self.resource_url
 
+    @zeit.web.reify
+    def breadcrumbs(self):
+        breadcrumbs = super(Article, self).breadcrumbs
+        self.breadcrumbs_by_navigation(breadcrumbs)
+        page_teaser = self.current_page.teaser
+        if len(page_teaser) > 0:
+            breadcrumbs.extend([(page_teaser, self.context.uniqueId)])
+        else:
+            self.breadcrumbs_by_title(breadcrumbs)
+        return breadcrumbs
+
 
 @view_config(name='seite',
              path_info='.*seite-(.*)',

@@ -122,6 +122,52 @@ class Centerpage(
     """Main view class for ZEIT ONLINE centerpages."""
 
     @zeit.web.reify
+    def breadcrumbs(self):
+        breadcrumbs = super(Centerpage, self).breadcrumbs
+        try:
+            # Search form
+            if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(
+                    self.regions[0][0][0]):
+                cpextra = self.regions[0][0][0].cpextra
+                if cpextra == 'search-form' or cpextra == 'dwds-suche':
+                    breadcrumbs.extend([(u'Suchergebnisse für "{}"'.format(
+                        self.request.GET['q']), None)])
+                    return breadcrumbs
+        except (KeyError, IndexError):
+            pass
+        # "Angebote" and "Administratives"
+        if self.ressort in ('angebote', 'administratives'):
+            html_title = zeit.seo.interfaces.ISEO(self.context).html_title
+            if html_title is not None:
+                breadcrumbs.extend([(html_title, None)])
+            else:
+                return self.breadcrumbs_by_navigation(breadcrumbs)
+        # Video CP
+        elif self.ressort == 'video':
+            breadcrumbs.extend([('Video', self.context.uniqueId)])
+        # Topicpage
+        elif self.context.type == 'topicpage':
+            self.breadcrumbs_by_navigation(breadcrumbs)
+            breadcrumbs.extend([(
+                'Thema: {}'.format(self.context.title), None)])
+        # Archive year index
+        elif self.context.type == 'archive-print-year':
+            breadcrumbs.extend([
+                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
+                ("Jahrgang: {}".format(self.context.year), None)])
+        # Archive volume index
+        elif self.context.type == 'archive-print-volume':
+            breadcrumbs.extend([
+                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
+                ("Jahrgang {}".format(self.context.year),
+                    '{}/index'.format(self.content_url.rsplit('/', 2)[0])),
+                ("Ausgabe: {}".format(self.context.volume), None)])
+        else:
+            return self.breadcrumbs_by_navigation(breadcrumbs)
+
+        return breadcrumbs
+
+    @zeit.web.reify
     def regions(self):
         """List of regions, the outermost container making up our centerpage.
         :rtype: list

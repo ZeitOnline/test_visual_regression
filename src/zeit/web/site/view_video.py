@@ -35,6 +35,14 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
             raise pyramid.httpexceptions.HTTPSeeOther(location=location)
 
     @zeit.web.reify
+    def breadcrumbs(self):
+        breadcrumbs = super(Video, self).breadcrumbs
+        breadcrumbs.extend([('Video', 'http://xml.zeit.de/video/index')])
+        self.breadcrumbs_by_navigation(breadcrumbs)
+        self.breadcrumbs_by_title(breadcrumbs)
+        return breadcrumbs
+
+    @zeit.web.reify
     def image_group(self):
         return zeit.content.image.interfaces.IImageGroup(self.context)
 
