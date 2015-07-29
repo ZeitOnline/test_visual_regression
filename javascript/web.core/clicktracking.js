@@ -89,7 +89,13 @@ define( [ 'jquery' ], function( $ ) {
     formatTrackingData = function( trackingData ) {
         var url = trackingData.pop();
         if ( url ) {
-            url = url.replace( /http(s)?:\/\//, '' ).split( '?' )[0];
+            url = url.replace( /http(s)?:\/\//, '' );
+
+            // For sharing links, we want to preserve the GET parameters.
+            // Otherwise, remove them!
+            if ( typeof( trackingData[1] ) !== 'string' || trackingData[1].indexOf( '.social.' ) === -1 ) {
+                url = url.split( '?' )[0];
+            }
         }
         return trackingData.join( '.' ) + '|' + url;
     },
