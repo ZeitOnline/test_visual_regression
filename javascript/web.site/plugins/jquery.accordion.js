@@ -14,6 +14,7 @@
 
     function Accordion( element, options ) {
         this.items = [];
+        this.parent = element.parentNode;
 
         this.options = $.extend( {}, defaults, options );
         this.wrapper = $( '<div/>' ).addClass( this.options.wrapper.slice( 1 ) );
@@ -63,8 +64,7 @@
     };
 
     $.fn.accordion = function( options ) {
-        var add,
-            current;
+        var current;
 
         return this.each( function() {
 
@@ -72,9 +72,7 @@
                 // very first item
                 current = new Accordion( this, options );
             } else {
-                add = $( this ).prev( current.options.wrapper ).length;
-
-                if ( add ) {
+                if ( current.parent === this.parentNode ) {
                     current.addItem( this, true );
                 } else {
                     current = new Accordion( this, options );
