@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - MAINT: Send exceptions caught by Jinja to bugsnag, too.
 
+- FIX: Make fallback for video images more robust.
+
 - MAINT: Send coarse timing metrics (traversal, rendering) to statsd.
 
 
