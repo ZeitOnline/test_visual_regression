@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - FIX: Ignore authors without display_name instead of crashing
 
+- MAINT: Send coarse timing metrics (traversal, rendering) to statsd.
+
 
 1.44 (2015-07-28)
 -----------------
