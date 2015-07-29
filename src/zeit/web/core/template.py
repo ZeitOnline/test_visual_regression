@@ -7,6 +7,7 @@ import time
 import types
 import urllib
 import urlparse
+
 import babel.dates
 import pyramid.threadlocal
 import repoze.bitblt.transform
@@ -600,22 +601,6 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
 def get_default_image_id():
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get('default_teaser_images')
-
-
-@zeit.web.register_global
-def create_image_url(teaser_block, image):
-    image_pattern = teaser_block.layout.image_pattern
-    image_url = default_image_url(
-        image, image_pattern=image_pattern)
-    return image_url
-
-
-@zeit.web.register_filter
-def get_image_metadata(image):
-    try:
-        return zeit.content.image.interfaces.IImageMetadata(image)
-    except TypeError:
-        return
 
 
 @zeit.web.register_filter

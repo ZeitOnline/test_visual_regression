@@ -14,7 +14,6 @@ import zeit.cms.interfaces
 import zeit.content.gallery.gallery
 import zeit.cms.syndication.feed
 
-from zeit.web.core.template import create_image_url
 from zeit.web.core.template import default_image_url
 from zeit.web.core.template import get_teaser_image
 from zeit.web.core.template import get_teaser_template
@@ -640,24 +639,6 @@ def test_default_teaser_should_return_default_teaser_image(
     article_context = zeit.cms.interfaces.ICMSContent(article)
     teaser_img = get_teaser_image(teaser_block, article_context)
     assert zeit.web.core.interfaces.ITeaserImage.providedBy(teaser_img)
-
-
-def test_teaser_image_url_should_be_created(
-        testserver, monkeyreq):
-    cp = 'http://xml.zeit.de/centerpage/lebensart'
-    cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    teaser_block = cp_context['lead'][0]
-
-    article = 'http://xml.zeit.de/centerpage/article_image_asset'
-    article_context = zeit.cms.interfaces.ICMSContent(article)
-
-    teaser_image = get_teaser_image(teaser_block, article_context)
-
-    image_url = create_image_url(teaser_block, teaser_image)
-    assert re.search(
-        "http://example.com/centerpage/katzencontent/"
-        "bitblt-.*katzencontent-zmo-square-large.jpg",
-        image_url)
 
 
 def test_teaser_image_should_be_created_from_image_group_and_image(
