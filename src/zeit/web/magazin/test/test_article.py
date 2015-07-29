@@ -111,12 +111,11 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
     assert '1: "redaktion",' in browser.contents
     assert '2: "article",' in browser.contents
     assert '3: "lebensart",' in browser.contents
-    assert '4: "online"' in browser.contents
+    assert '4: "online",' in browser.contents
     assert '5: "essen-trinken",' in browser.contents
     assert '6: "weinkolumne",' in browser.contents
     assert '7: "03",' in browser.contents
-    assert '8: "zeitmz/essenundtrinken/article",' in \
-        browser.contents
+    assert '8: "zeitmz/essenundtrinken/article",' in browser.contents
     assert '9: "2013-07-30"' in browser.contents
 
     # custom parameter
@@ -129,11 +128,14 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
     assert '6: "4952",' in browser.contents
     assert '7: "",' in browser.contents
     assert '8: "zede",' in browser.contents
-    assert '9: "zeitmz/essenundtrinken/article"' in browser.contents
+    assert '9: "zeitmz/essenundtrinken/article",' in browser.contents
     assert '10: "yes",' or '10: "",' in browser.contents
     assert '11: "",' in browser.contents
-    assert '12: window.innerWidth >= ivw_min_width ?' \
-        ' \'desktop.site\' : \'mobile.site\''
+    assert '12: window.ZMO.isMobileView() ? "mobile.site" : "desktop.site",' \
+        in browser.contents
+    assert ('13: window.ZMO.breakpoint.value === "desktop" ? "stationaer" : '
+            'window.ZMO.breakpoint.value,') in browser.contents
+    assert '14: "neu"' in browser.contents
 
     # noscript string
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,redaktion'

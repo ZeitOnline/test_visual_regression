@@ -4,11 +4,19 @@ Change log for zeit.web
 1.45 (unreleased)
 -----------------
 
+- ZON-1367: IVW Verpixelung relaunch
+
+- ZON-1030: Add tiny buzzbox-accordion
+
+- FIX: Decode HTML entities in image caption
+
 - ZON-1814: Configure viewport zoom for tablets
 
 - ZON-1934: News Overview
 
 - ZON-1913: Umziehen tile_12 von "vor dem Video" nach "nach der ersten Duo-Region"
+
+- FIX: Ignore authors without display_name instead of crashing
 
 
 1.44 (2015-07-28)
