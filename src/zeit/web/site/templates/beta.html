@@ -55,7 +55,7 @@
                 Melden Sie sich an.
             </p>
             <div class="beta-teaser__cta">
-                <a class="beta-teaser__button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ view.friedbert_host }}beta">Zur Anmeldung</a>
+                <a class="beta-teaser__button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.friedbert_host }}beta">Zur Anmeldung</a>
             </div>
             {% endif %}
         </div>
