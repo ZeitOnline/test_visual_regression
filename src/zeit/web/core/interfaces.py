@@ -179,3 +179,34 @@ class IReach(zope.interface.Interface):
 
     def get_buzz(self):
         """Collect a buzz summary for an article by uniqueId"""
+
+
+class IMetrics(zope.interface.Interface):
+
+    def time(identifier):
+        """Context manager that collects timing information.
+        Pass a full dotted name as identifier.
+
+        Also available via convenience shortcut ``zeit.web.metrics.timer``.
+
+        Example:
+        with zeit.web.metrics.timer('zeit.web.core.template.something'):
+            # do things
+        """
+
+    def increment(identifier, delta=1):
+        """Increments the given counter."""
+
+    def set_gauge(identifier, value):
+        """Sets a gauge value."""
+
+    # low-level access for more involved operations.
+
+    def timer(identifier=None):
+        """Returns a ``statsd.Timer``."""
+
+    def counter(identifier=None):
+        """Returns a ``statsd.Counter``."""
+
+    def gauge(identifier=None):
+        """Returns a ``statsd.Gauge``."""

@@ -4,6 +4,12 @@ Change log for zeit.web
 1.45 (unreleased)
 -----------------
 
+- MAINT: Hide VG Wort pixel
+
+- ZON-1367: IVW Verpixelung relaunch
+
+- ZON-1030: Add tiny buzzbox-accordion
+
 - FIX: Decode HTML entities in image caption
 
 - ZON-1814: Configure viewport zoom for tablets
@@ -11,6 +17,21 @@ Change log for zeit.web
 - ZON-1934: News Overview
 
 - ZON-1948: Verpixelung Video-Riegel
+
+- ZON-1913: Umziehen tile_12 von "vor dem Video" nach "nach der ersten Duo-Region"
+
+- FIX: Ignore authors without display_name instead of crashing
+
+- MAINT: Abort transaction instead of commiting, this prevents ConflictErrors
+  in preview mode.
+
+- MAINT: Send exceptions caught by Jinja to bugsnag, too.
+
+- FIX: Make fallback for video images more robust.
+
+- DEV-889: Don't switch to ``.cp2015`` for Spektrum feed
+
+- MAINT: Send coarse timing metrics (traversal, rendering) to statsd.
 
 
 1.44 (2015-07-28)

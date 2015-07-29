@@ -34,6 +34,7 @@ require([
     'jquery',
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount',
+    'web.site/plugins/jquery.accordion',
     'web.site/plugins/jquery.adaptnav',
     'web.site/plugins/jquery.autoclick',
     'web.site/plugins/jquery.extendfooter',
@@ -66,6 +67,7 @@ require([
         $( '#main' ).autoclick();
         $( '#series_select' ).selectNav();
         $( '.js-gallery-teaser-shuffle' ).shuffleTeasers();
+        $( '.js-accordion' ).accordion();
     } else if ( article.length ) {
         // article, gallery etc.
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });

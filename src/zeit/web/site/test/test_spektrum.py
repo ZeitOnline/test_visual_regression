@@ -189,13 +189,12 @@ def test_rss_feed_of_cp_has_requested_format(testbrowser, testserver):
 
 
 def test_spektrum_also_renders_on_ng_centerpages(testbrowser, testserver):
-    browser = testbrowser(
-        '%s/index' % testserver.url)
-    rows = browser.cssselect(
-        '.parquet-meta__more.parquet-meta__more--spektrum')
-    actual_amount = len(rows)
-    assert actual_amount == 1, (
+    browser = testbrowser('/zeit-online/parquet')
+    rows = browser.cssselect('.cp-region--parquet .cp-area--spektrum')
+    assert len(rows) == 1, (
         'Parquet row does not display the right amount of spektrum.')
-    text = rows[0].text
+    links = rows[0].find_class('parquet-meta__more--spektrum')
+    assert len(links) == 1, 'link to www.spektrum.de is missing'
+    text = links[0].text
     assert "Aktuelles aus der Welt von Wissenschaft und Forschung:" in text, (
         'Spektrum link has not the correct text')
