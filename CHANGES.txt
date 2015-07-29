@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - MAINT: Send coarse timing metrics (traversal, rendering) to statsd.
 
+- ZON-1881: Eventverpixelung Artikel
+
 
 1.44 (2015-07-28)
 -----------------
