@@ -1,3 +1,4 @@
+import StringIO
 import cProfile
 import datetime
 import email.utils
@@ -5,10 +6,10 @@ import logging
 import os
 import pkg_resources
 import pstats
-
-import StringIO
+import sys
 import urlparse
 
+import bugsnag
 import jinja2.environment
 import jinja2.ext
 import jinja2.loaders
@@ -59,7 +60,10 @@ class Environment(jinja2.environment.Environment):
         self.globals = zeit.web.core.utils.defaultdict(undefined, self.globals)
         self.tests = zeit.web.core.utils.defaultdict(undefined, self.tests)
 
-    def handle_exception(self, *args, **kw):
+    def handle_exception(
+            self, exc_info=None, rendered=False, source_hint=None):
+        if exc_info is None:
+            exc_info = sys.exc_info()
         path = '<unknown>'
         try:
             request = pyramid.threadlocal.get_current_request()
@@ -67,6 +71,7 @@ class Environment(jinja2.environment.Environment):
         except:
             pass
         log.error('Error rendering %s', path, exc_info=True)
+        bugsnag.notify(exc_info[1], context=path)
         return getattr(self.undefined(), '__html__', lambda: '')()
 
     def __getsth__(self, func, obj, name):
