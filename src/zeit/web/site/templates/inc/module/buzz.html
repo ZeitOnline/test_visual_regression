@@ -1,14 +1,15 @@
-<div class="{{ 'buzz-box' | with_mods(module.layout) }}">
-    <div class="{{ 'buzz-box__heading' | with_mods(module.layout) }}">
-        {{ module.header }}
-    </div>
-    <div class="{{ 'buzz-box__teasers' | with_mods(module.layout) }}">
-        {% for teaser in module -%}
-            {% with -%}
-                {% set index = loop.index %}
-                {% set layout = module | get_layout %}
-                {% include "zeit.web.site:templates/inc/teaser/{}.tpl".format(layout) %}
-            {%- endwith %}
-        {%- endfor %}
-    </div>
+{% set modifier = module.layout.id.strip('buzz-') %}
+{% set template = module | get_layout %}
+{% set id = template %}
+<div class="{{ 'buzz-box' | with_mods(modifier) }} js-accordion" id="{{ id }}">
+	<a class="buzz-box__heading" href="#{{ id }}">
+		{{ module.header }}
+	</a>
+	<ol class="buzz-box__teasers">
+		{% for teaser in module -%}
+		<li>
+			{% include "zeit.web.site:templates/inc/teaser/{}.tpl".format(template) %}
+		</li>
+		{%- endfor %}
+	</ol>
 </div>
