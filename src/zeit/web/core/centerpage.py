@@ -243,17 +243,60 @@ class VariantImage(object):
 
 class LocalVideoImage(object):
 
+    def __new__(cls, video_url):
+        instance = object.__new__(cls)
+        instance.__init__(video_url)
+        try:
+            instance.fetch()
+        except VideoImageNotFound:
+            return cls.fallback_image()
+        return instance
+
     def __init__(self, video_url):
+        self.url = video_url or ''
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         self.filename = "{}/{}".format(
             conf.get('brightcove_image_cache', tempfile.gettempdir()),
-            md5.new(video_url).hexdigest())
-
-    def open(self, mode="r"):
-        return open(self.filename, mode)
+            md5.new(self.url).hexdigest())
 
     def isfile(self):
         return os.path.isfile(self.filename)
+
+    def fetch(self):
+        if self.isfile():
+            return
+        if not self.url:
+            # Even though video_still and thumbnail should always be set,
+            # especially in some older videos they are empty for unknown
+            # reasons.
+            raise VideoImageNotFound()
+        try:
+            request = urllib2.urlopen(self.url, timeout=1.5)
+            content = request.read()
+            if len(content) <= 20:
+                raise ContentTooShort()
+
+            with self.open('w+') as fh:
+                fh.write(content)
+                log.debug("Save brightcove image {} to local file {}".format(
+                    self.url, self.filename))
+        except (IOError, AttributeError, ContentTooShort):
+            raise VideoImageNotFound()
+
+    @classmethod
+    def fallback_image(cls):
+        try:
+            conf = zope.component.getUtility(
+                zeit.web.core.interfaces.ISettings)
+            return zeit.cms.interfaces.ICMSContent(
+                '{}/{}'.format(
+                    conf.get('default_teaser_images'),
+                    'teaser_image-default.jpg'))
+        except:
+            raise VideoImageNotFound()
+
+    def open(self, mode="r"):
+        return open(self.filename, mode)
 
     @zeit.web.reify
     def size(self):
@@ -271,6 +314,10 @@ class ContentTooShort(Exception):
     pass
 
 
+class VideoImageNotFound(Exception):
+    pass
+
+
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
 class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
@@ -284,34 +331,11 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
         for image_pattern, src in [('still', video.video_still),
                                    ('thumbnail', video.thumbnail)]:
             image = zeit.web.core.block.BaseImage()
+            try:
+                image.image = LocalVideoImage(src)
+            except VideoImageNotFound:
+                continue
 
-            image.image = LocalVideoImage(src)
-            file_name = '{}.jpg'.format(image_pattern)
-
-            if not image.image.isfile():
-                try:
-                    request = urllib2.urlopen(src, timeout=1.5)
-                    content = request.read()
-                    if len(content) <= 20:
-                        raise ContentTooShort()
-
-                    with image.image.open('w+') as fh:
-                        fh.write(content)
-                        log.debug("Save brightcove image {} "
-                                  "to local file {}".format(
-                                      src,
-                                      image.image.filename))
-                except (IOError, AttributeError, ContentTooShort):
-                    try:
-                        conf = zope.component.getUtility(
-                            zeit.web.core.interfaces.ISettings)
-
-                        image.image = zeit.cms.interfaces.ICMSContent(
-                            '{}/{}'.format(
-                                conf.get('default_teaser_images'),
-                                'teaser_image-default.jpg'))
-                    except:
-                        continue
             image.src = src
             image.mimeType = 'image/jpeg'
             image.image_pattern = 'brightcove-{}'.format(image_pattern)
@@ -319,6 +343,7 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
             image.caption = (video.teaserText or '').strip('\n')
             image.title = (video.teaserTitle or '').strip('\n')
             image.alt = (video.title or '').strip('\n')
+            file_name = '{}.jpg'.format(image_pattern)
             image.uniqueId = '{}{}'.format(self.uniqueId, file_name)
             self[file_name] = image
 

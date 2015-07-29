@@ -144,6 +144,10 @@ class CenterPage(Traversable):
 class CenterPage2015(Traversable):
 
     def __call__(self, tdict):
+        # XXX Ugly workaround until the "new world" content is up to date.
+        if tdict['view_name'] == 'rss-spektrum-flavoured':
+            return
+
         try:
             name = u'{}.cp2015'.format(tdict['context'].__name__)
             assert name != tdict['context'].__name__
