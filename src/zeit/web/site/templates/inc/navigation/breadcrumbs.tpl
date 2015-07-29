@@ -2,7 +2,7 @@
 {% for breadcrumb in view.breadcrumbs %}
     {% set bcrumb_text = breadcrumb[0] %}
     {% set bcrumb_link = breadcrumb[1] %}
-    {% if breadcrumb[2] is not none %}
+    {% if breadcrumb[2] and breadcrumb[2] is not none %}
         {% set bcrumb_title = breadcrumb[2] %}
     {% else %}
         {% set bcrumb_title = bcrumb_text %}
