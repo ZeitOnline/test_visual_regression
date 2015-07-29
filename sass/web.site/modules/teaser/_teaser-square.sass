@@ -14,9 +14,8 @@ $layout: ".teaser-square"
 		margin-right: 0
 		padding-bottom: 100%
 
-	// remove possible border on any successive teaser
-	& + article
-		border-top: none
+	& + article // remove border on successive teaser
+		border-top-width: 0
 
 	&__media
 		margin: 0

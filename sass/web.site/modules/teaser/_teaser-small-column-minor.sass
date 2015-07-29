@@ -19,7 +19,7 @@
 	&__text
 		@extend %teaser-text
 	&__byline
-		@extend %teaser-column__byline
+		@extend %teaser-byline
 	&__metadata
 		@extend %teaser-metadata
 	&__datetime
@@ -27,6 +27,5 @@
 	&__commentcount
 		@extend %teaser-commentcount
 
-.teaser-small-column-minor--has-media
-	.teaser-small-column-minor__byline
+	&--has-media &__metadata
 		@extend %teaser-column__media-space

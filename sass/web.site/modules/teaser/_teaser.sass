@@ -4,15 +4,17 @@
 
 %teaser
 	+pie-clearfix
-	border-top: 1px solid $zon_light_grey
+	border-color: $zon_light_grey
+	border-style: solid
+	border-width: 1px 0 0
 	margin: 0 (-$page-padding)
 	padding: $vertical-space $page-padding
 	&:nth-of-type(1)
-		border-top: none
+		border-top-width: 0
 	+respond-min($break-areas)
-		border-bottom: none
-		border-top: none
-		margin: 0
+		border-top-width: 0
+		margin-left: 0
+		margin-right: 0
 		padding: $vertical-space 0
 
 %teaser-small-media-placement
@@ -97,21 +99,18 @@
 	+respond-min($break-phablet-min)
 		font-size: remify(15px)
 
-%teaser-byline
-	color: $zon_grey
-	display: block
-	font-size: $font-ss
-	line-height: 1.3846
-	letter-spacing: $zon-letter-spacing-s
-	margin-bottom: remify(4px)
-	&:empty
-		display: none
-
 %teaser-metadata
 	color: $zon_grey
 	font-size: $font-ss
 	line-height: 1.3846
 	letter-spacing: $zon-letter-spacing-s
+
+%teaser-byline
+	@extend %teaser-metadata
+	display: block
+	margin-bottom: remify(4px)
+	&:empty
+		display: none
 
 %teaser-datetime
 	&:not(:last-child):not(:empty):after

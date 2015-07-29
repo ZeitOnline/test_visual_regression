@@ -72,12 +72,14 @@
 			color: $white
 		+respond-min($break-desktop-min)
 			font-size: em(18px)
+	&__byline
+		@extend %teaser-byline
+	&__metadata
+		@extend %teaser-metadata
 	&__byline,
 	&__metadata
-		@extend %teaser-byline
 		+respond-min($break-tablet-min)
 			color: $zon_lighter_grey
-			margin-bottom: 0
 		+respond-min($break-desktop-min)
 			font-size: em(14px)
 			letter-spacing: 0.04em
