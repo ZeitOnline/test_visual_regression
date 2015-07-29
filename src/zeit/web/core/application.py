@@ -144,6 +144,10 @@ class Application(object):
             registry=registry)
         config.setup_registry(settings=self.settings)
 
+        # Never commit, always abort. zeit.web should never write anything,
+        # anyway, and at least when running in preview mode, not committing
+        # neatly avoids ConflictErrors.
+        self.config.registry.settings['tm.commit_veto'] = lambda *args: True
         self.config.include('pyramid_tm')
         self.configure_jinja()
 
