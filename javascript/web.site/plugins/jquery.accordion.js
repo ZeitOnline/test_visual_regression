@@ -14,7 +14,7 @@
 
     function Accordion( element, options ) {
         this.items = [];
-        this.parent = element.parentNode;
+        this.parentNode = element.parentNode;
 
         this.options = $.extend( {}, defaults, options );
         this.wrapper = $( '<div/>' ).addClass( this.options.wrapper.slice( 1 ) );
@@ -68,15 +68,11 @@
 
         return this.each( function() {
 
-            if ( !current ) {
-                // very first item
+            // very first item or inside different area
+            if ( !current || current.parentNode !== this.parentNode ) {
                 current = new Accordion( this, options );
             } else {
-                if ( current.parent === this.parentNode ) {
-                    current.addItem( this, true );
-                } else {
-                    current = new Accordion( this, options );
-                }
+                current.addItem( this, true );
             }
         });
     };
