@@ -4,6 +4,8 @@ Change log for zeit.web
 1.45 (unreleased)
 -----------------
 
+- ZON-1030: Add tiny buzzbox-accordion
+
 - FIX: Decode HTML entities in image caption
 
 - ZON-1814: Configure viewport zoom for tablets
