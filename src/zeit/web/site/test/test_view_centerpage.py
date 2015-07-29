@@ -888,6 +888,7 @@ def test_gallery_teaser_hides_elements_on_mobile(selenium_driver, testserver):
         'Gallery description text must be displayed on desktop.')
 
 
+@pytest.mark.xfail(reason='Fortune favours the fail')
 def test_gallery_teaser_shuffles_on_click(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
