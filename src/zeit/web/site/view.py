@@ -63,6 +63,14 @@ class Base(zeit.web.core.view.Base):
                 breadcrumbs.extend([(html_title, None)])
             else:
                 add_default_breadcrumbs()
+        # Video index
+        elif self.ressort == 'video':
+            breadcrumbs.extend([('Video', self.context.uniqueId)])
+        # Video
+        elif context_type == 'video':
+            breadcrumbs.extend([('Video', 'http://xml.zeit.de/video/index')])
+            add_breadcrumbs_by_navigation()
+            add_default_breadcrumbs()
         # Article
         elif context_type in ('article', 'gallery', 'quiz'):
             # Add breadcrumbs that belong to the navgiation
