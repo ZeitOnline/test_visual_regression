@@ -25,8 +25,9 @@ import zeit.content.image.interfaces
 import zeit.cms.interfaces
 
 import zeit.web.core
-import zeit.web.core.comments
 import zeit.web.core.application
+import zeit.web.core.comments
+import zeit.web.core.traversal
 import zeit.web.core.utils
 import zeit.web.core.view
 
@@ -104,7 +105,7 @@ settings = {
         'egg://zeit.web.core/data/config/article-video-layouts.xml'),
     'vivi_zeit.content.article_htmlblock-layout-source': (
         'egg://zeit.web.core/data/config/article-htmlblock-layouts.xml'),
-    'vivi_zeit.magazin_article-template-source': (
+    'vivi_zeit.content.article_template-source': (
         'egg://zeit.web.core/data/config/article-templates.xml'),
     'vivi_zeit.magazin_article-related-layout-source': (
         'egg://zeit.web.core/data/config/article-related-layouts.xml'),
@@ -154,6 +155,8 @@ settings = {
     'vivi_zeit.brightcove_timeout': '300',
     'vivi_zeit.brightcove_video-folder': 'video',
     'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
+    'vivi_zeit.content.video_source-serie': (
+        'egg://zeit.web.core/data/config/video-serie.xml'),
 
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 
@@ -456,7 +459,7 @@ def image_group_factory():
 def my_traverser(application):
     root = zope.component.getUtility(
         zeit.cms.repository.interfaces.IRepository)
-    return zeit.web.core.application.RepositoryTraverser(root)
+    return zeit.web.core.traversal.RepositoryTraverser(root)
 
 
 @pytest.fixture

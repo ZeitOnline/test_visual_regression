@@ -157,7 +157,7 @@ def test_small_teaser_should_display_no_image_on_mobile(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(320, 480)
-    driver.get('%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
+    driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
     box = driver.find_elements_by_class_name('cp-area--major')[0]
     teaser_image = box.find_elements_by_class_name('teaser-small__media')[0]
 
@@ -178,16 +178,19 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
     driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
     teaser = driver.find_elements_by_class_name('teaser-fullwidth')[0]
     helper = driver.find_elements_by_class_name(
-        'teaser-fullwidth__inner-helper')[0]
+        'teaser-fullwidth__container')[0]
 
     assert teaser.is_displayed(), 'Fullwidth teaser missing'
     assert helper.is_displayed(), 'Fullwidth teaser helper missing'
 
     if screen_size[0] == 768:
         # test ipad width
-        assert helper.size.get('width') == 574
+
+        # XXX Having to test a tuple is messed up. We need to come up with
+        # something better or we cannot use the width attribute in selenium.
+        assert helper.size.get('width') in (553, 542)
     elif screen_size[0] == 980:
-        assert helper.size.get('width') == 640
+        assert helper.size.get('width') in (653, 643)
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
@@ -293,8 +296,7 @@ def test_centerpage_view_should_have_topic_links(testserver):
 
 
 def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-online/fullwidth-onimage-teaser' % testserver.url)
+    browser = testbrowser('/zeit-online/fullwidth-teaser')
 
     fullwidth = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
     content = browser.cssselect('.cp-area.cp-area--major')
@@ -740,9 +742,9 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
 
 
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
-    browser = testbrowser('{}/index'.format(testserver.url))
+    browser = testbrowser('/zeit-online/news-teaser')
 
-    cols = browser.cssselect('.cp-area--news .newsticker__column')
+    cols = browser.cssselect('.cp-area--newsticker .newsticker__column')
     assert len(cols) == 2
     teaser = browser.cssselect('.newsticker article')
     assert len(teaser) == 8
@@ -922,3 +924,20 @@ def test_centerpage_must_not_have_meetrics_integration(
     meetrics = browser.cssselect(
         'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 0
+
+
+def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/buzz-box' % testserver.url)
+    try:
+        WebDriverWait(driver, 5).until(
+            expected_conditions.presence_of_element_located(
+                (By.CLASS_NAME, 'buzz-accordion')))
+    except TimeoutException:
+        assert False, 'Timeout accordion script'
+    else:
+        slides = driver.find_elements_by_css_selector('.buzz-box__teasers')
+        assert len(slides) == 3
+        assert slides[0].is_displayed()
+        assert not slides[1].is_displayed()
+        assert not slides[2].is_displayed()

@@ -1,10 +1,42 @@
 Change log for zeit.web
 =======================
 
-1.43 (unreleased)
+1.45 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1367: IVW Verpixelung relaunch
+
+- ZON-1030: Add tiny buzzbox-accordion
+
+- FIX: Decode HTML entities in image caption
+
+- ZON-1814: Configure viewport zoom for tablets
+
+- ZON-1934: News Overview
+
+- FIX: Ignore authors without display_name instead of crashing
+
+
+1.44 (2015-07-28)
+-----------------
+
+- HOTFIX: Use relative font path to tolerate optional asset prefix [zmo-assets]
+
+- DEV-801: Support article templates everywhere, not just ZMO
+
+- FIX: Repair a couple of moot assertions in tests
+
+- ZON-1986: add teaser-class and area to tracking
+
+- MAINT: Log stack traces of exceptions we catch and send them to bugsnag.
+
+
+1.43 (2015-07-27)
+-----------------
+
+- ZON-1948: Configure separate serie source for videos.
+
+- ZON-1956: Add classic fullwidth teaser
 
 
 1.42 (2015-07-23)

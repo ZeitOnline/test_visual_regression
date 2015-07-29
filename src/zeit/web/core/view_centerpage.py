@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from pyramid.view import view_config
 
+import zeit.cms.interfaces
+import zeit.cms.workflow
 import zeit.content.cp.interfaces
 
 import zeit.web.core.view

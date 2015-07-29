@@ -16,7 +16,6 @@ require([ 'vendor/require', 'config' ], function() {});
 require([
     'web.core/images',
     'web.magazin/errors',
-    'web.magazin/fontloader-body',
     'web.magazin/main-nav',
     'web.magazin/tabs',
     'web.magazin/comments',
@@ -24,9 +23,8 @@ require([
     'web.magazin/cards',
     'web.magazin/copyrights',
     'web.magazin/photocluster'
-], function( images, errors, fontloader, nav, tabs, comments, sharing, cards, copyrights, photocluster ) {
+], function( images, errors, nav, tabs, comments, sharing, cards, copyrights, photocluster ) {
     errors.init();
-    fontloader.init();
     nav.init();
     tabs.init();
     comments.init();

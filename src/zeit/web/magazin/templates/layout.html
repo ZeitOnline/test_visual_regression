@@ -55,7 +55,6 @@
         {%- endblock sharing_meta %}
 
         <script src="{{ request.asset_url('js/libs/modernizr-custom.js') }}"></script>
-        <script src="{{ request.asset_url('js/web.magazin/fontloader-head.js') }}"></script>
 
         <script>
             /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
@@ -183,12 +182,6 @@
         {% include "zeit.web.core:templates/inc/ads/%s/finalize.html" % view.ad_delivery_type ignore missing %}
 
         <!-- tracking at end -->
-        <script>
-            window.ZMO.breakpoint.refreshValue();
-            if ( window.addEventListener ) {
-                window.addEventListener( 'resize', function() { window.ZMO.breakpoint.refreshValue(); }, false );
-            }
-        </script>
         {% include "zeit.web.core:templates/inc/tracking/google.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/zeit.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}

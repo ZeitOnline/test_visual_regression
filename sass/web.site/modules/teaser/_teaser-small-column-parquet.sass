@@ -7,17 +7,17 @@
 	&__container
 		@extend %teaser-small-container
 	&__series-label
-		@extend .teaser-small__series-label
+		@extend %teaser-series-label
 	&__heading
-		@extend .teaser-small__heading
+		@extend %teaser-heading
 	&__combined-link
-		@extend .teaser-small__combined-link
+		@extend %teaser-combined-link
 	&__kicker
-		@extend .teaser-small__kicker
+		@extend %teaser-kicker
 	&__title
-		@extend .teaser-small__title
+		@extend %teaser-title
 	&__text
-		@extend .teaser-small__text
+		@extend %teaser-text
 	&__text
 		@extend %teaser-text
 	&__byline
@@ -39,6 +39,10 @@
 		&--has-media
 			background: none
 			padding: 0 0 $petite remify(180px+20px)
+			+respond-min($break-tablet-min)
+				.teaser-small-column-parquet__byline
+					min-height: initial
+					padding-right: 0
 			+respond-min($break-desktop-min)
 				padding-left: remify(250px+20px)
 		&__mediawrapper

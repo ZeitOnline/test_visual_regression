@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 import json
-import urlparse
 import logging
+import md5
+import urlparse
 
 import beaker.cache
 import lxml
-import md5
-import json
 import pyramid.httpexceptions
 import pyramid.view
 import requests
@@ -16,9 +15,10 @@ import zeit.cms.interfaces
 
 import zeit.web.core
 import zeit.web.core.comments
+import zeit.web.core.security
 import zeit.web.core.template
 import zeit.web.core.view
-import zeit.web.core.security
+import zeit.web.site.view
 
 
 log = logging.getLogger(__name__)
@@ -311,8 +311,7 @@ class PostCommentAdmin(PostComment):
 @pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 class PostCommentResource(PostComment):
 
-    msg = {
-        'Username exists or not valid': 'username_exists_or_invalid'}
+    msg = {'Username exists or not valid': 'username_exists_or_invalid'}
 
     def __init__(self, context, request):
         super(PostCommentResource, self).__init__(context, request)
@@ -338,8 +337,7 @@ class PostCommentResource(PostComment):
             pid=None,
             cid=self.new_cid)
 
-        location = zeit.web.core.template.remove_get_params(
-                location, 'ajax')
+        location = zeit.web.core.template.remove_get_params(location, 'ajax')
 
         if self.new_cid:
             # remove page param in redirect

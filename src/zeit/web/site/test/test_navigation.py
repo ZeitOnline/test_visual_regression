@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import time
 import lxml
 import pytest
 import mock
@@ -111,9 +110,9 @@ def test_nav_services_should_have_expected_links(application, jinja2_env):
     html = lxml.html.fromstring(html_str).cssselect
 
     assert (html('li > a[href^="https://premium.zeit.de/?wt_mc=pm.intern"]')[0]
-            is not None, 'No link for epaper')
+            is not None), 'No link for epaper'
     assert (html('li > a[href^="https://premium.zeit.de/abo/digitalpaket"]')[0]
-            is not None, 'No link audio')
+            is not None), 'No link audio'
 
 
 def test_nav_classifieds_should_have_expected_links(application, jinja2_env):
@@ -524,8 +523,7 @@ def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
         'Search bar is displayed')
 
 
-def test_primary_nav_should_resize_to_fit(
-        selenium_driver, testserver):
+def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
 
     driver = selenium_driver
     actions = selenium.webdriver.ActionChains(driver)

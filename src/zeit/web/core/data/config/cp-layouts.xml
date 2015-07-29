@@ -37,9 +37,15 @@
     <!-- formally known as zon-fullwidth-onimage/zon-fullwidth -->
     <layout
         id="zon-fullwidth"
-        title="vollbreiter Aufmacher Text auf Bild"
+        title="Vollbreiter Aufmacher Text auf Bild"
         image_pattern="zon-fullwidth"
         areas="solo duo major minor ranking parquet"
+        />
+    <layout
+        id="zon-classic"
+        title="Vollbreiter Aufmacher klassisch"
+        image_pattern="zon-fullwidth"
+        areas="solo ranking"
         />
      <layout
         id="zon-parquet-large"
@@ -60,7 +66,7 @@
         id="zon-newsteaser"
         title="Kurzteaser (für News)"
         image_positions="true"
-        areas="news"
+        areas="newsticker overview"
         />
 
     <layout
@@ -68,7 +74,7 @@
         title="Kolumnenteaser"
         image_pattern="zon-thumbnail"
         image_positions="true"
-        areas="major minor"
+        areas="solo major minor"
         />
 
     <layout
@@ -76,7 +82,7 @@
         title="Blogteaser"
         image_pattern="zon-thumbnail"
         image_positions="true"
-        areas="major minor"
+        areas="solo major minor"
         />
 
     <layout
@@ -84,7 +90,7 @@
         title="Serienteaser"
         image_pattern="zon-thumbnail"
         image_positions="true"
-        areas="major minor"
+        areas="solo major minor"
         />
 
     <!-- Legacy teaser formats -->

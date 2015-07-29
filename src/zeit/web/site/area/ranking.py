@@ -2,6 +2,7 @@ import collections
 import logging
 import math
 
+import pysolr
 import zope.component
 import zope.schema
 
@@ -21,33 +22,30 @@ log = logging.getLogger(__name__)
 
 
 FIELDS = ' '.join([
+    'date_last_published',
+    'last-semantic-change',
+    'product_id',
+    'supertitle',
     'title',
     'uniqueId',
-    'uuid'
+    'type'
 ])
 
 
-HIGHLIGHTING = {
-    'hl': 'true',
-    'hl.fl': 'main_text,teaser_text',
-    'hl.highlightMultiTerm': 'true',
-    'hl.fragsize': '250',
-    'hl.alternateField': 'teaser_text',
-    'hl.snippets': '1',
-    'hl.mergeContiguous': 'true',
-    'hl.usePhraseHighlighter': 'true',
-    'hl.simple.pre': '%3Cb%3E',
-    'hl.simple.post': '%3C/b%3E'
-}
+FIELD_MAP = [
+    (u'supertitle', u'teaserSupertitle'),
+    (u'title', u'teaserTitle')
+]
 
 
 ORDERS = collections.defaultdict(
     lambda: 'score desc', {
-        'aktuell': 'last-semantic-change desc'}
+        'aktuell': 'last-semantic-change desc',
+        'publikation': 'date_last_published asc'}
 )
 
 
-class IResultsArea(zeit.content.cp.interfaces.IArea):
+class IRanking(zeit.content.cp.interfaces.IArea):
 
     sort_order = zope.schema.TextLine(
         title=u'Search result order', default=u'relevanz', required=False)
@@ -63,25 +61,25 @@ class IResultsArea(zeit.content.cp.interfaces.IArea):
 
 
 @zeit.web.register_area('ranking')
-class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
+class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
-    zope.interface.implements(IResultsArea,
-                              zeit.content.cp.interfaces.IRenderedArea)
+    zope.interface.implements(
+        IRanking, zeit.content.cp.interfaces.IRenderedArea)
 
     sort_order = zeit.cms.content.property.ObjectPathProperty(
-        '.sort_order', IResultsArea['sort_order'])
+        '.sort_order', IRanking['sort_order'])
 
     query = zeit.cms.content.property.ObjectPathProperty(
-        '.query', IResultsArea['query'])
+        '.query', IRanking['query'])
 
     raw_query = zeit.cms.content.property.ObjectPathProperty(
-        '.raw_query', IResultsArea['raw_query'])
+        '.raw_query', IRanking['raw_query'])
 
     _page = zeit.cms.content.property.ObjectPathProperty(
-        '.page', IResultsArea['page'])
+        '.page', IRanking['page'])
 
     _hits = zeit.cms.content.property.ObjectPathProperty(
-        '.hits', IResultsArea['hits'])
+        '.hits', IRanking['hits'])
 
     def values(self):
         return self._values
@@ -90,24 +88,47 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
     def _values(self):
         result = []
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        solr_result = conn.search(
-            self.raw_query, sort=ORDERS[self.sort_order], rows=self.count,
-            fl=FIELDS, start=self.count * (self.page - 1), **HIGHLIGHTING)
+        query = self._build_query()
+        try:
+            solr_result = conn.search(
+                query,
+                sort=ORDERS[self.sort_order],
+                rows=self.count,
+                fl=FIELDS,
+                start=self.count * (self.page - 1))
+        except (pysolr.SolrError, ValueError) as e:
+            log.warning(u'{} for query {}'.format(e, query))
+            return result
         docs = collections.deque(solr_result)
         self.hits = solr_result.hits
-        for block in self.context.values():
+        for block in self.placeholder:
             if not zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(
                     block) or not len(docs):
                 result.append(block)
                 continue
-            unique_id = docs.popleft().get('uniqueId')
+            context = self.document_hook(docs.popleft())
             try:
-                block.insert(0, zeit.cms.interfaces.ICMSContent(unique_id))
-            except TypeError, err:
-                log.debug('Corrupted search result', unique_id, err)
+                block.insert(0, zeit.cms.interfaces.ICMSContent(context))
+            except TypeError:
+                log.debug('Corrupted search result', context.get('uniqueId'))
                 continue
             result.append(block)
         return result
+
+    def _build_query(self):
+        return self.raw_query
+
+    def document_hook(self, doc):
+        for source, target in FIELD_MAP:
+            try:
+                doc[target] = doc[source]
+            except KeyError:
+                continue
+        return doc
+
+    @property
+    def placeholder(self):
+        return iter(self.context.values())
 
     @property
     def hits(self):
@@ -132,7 +153,7 @@ class ResultsArea(zeit.content.cp.automatic.AutomaticArea):
 
     @zeit.web.reify
     def total_pages(self):
-        if self.hits > 0:
+        if self.hits + self.count > 0:
             return int(math.ceil(float(self.hits) / float(self.count)))
         else:
             return 0

@@ -6,19 +6,25 @@
 
     {% block teaser_media_position_before_title %}{% endblock %}
 
-    <div class="{{ self.layout() }}__container {% block teaser_container_modifier %}{% endblock %}">
+    <div class="{{ self.layout() }}__container">
 
         {% block teaser_journalistic_format %}
             {% if teaser.serie and not teaser.serie.column %}
                 <div class="{{ self.layout() }}__series-label">Serie: {{ teaser.serie.serienname }}</div>
+            {% elif teaser.blog %}
+                <div class="blog-format">
+                    <span class="blog-format__marker">Blog</span>
+                    <span class="blog-format__name">{{ teaser.blog.name | hide_none }}</span>
+                </div>
             {% endif %}
-        {% endblock teaser_journalistic_format%}
+        {% endblock teaser_journalistic_format %}
 
         <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
             {% block teaser_link %}
             <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | create_url }}">
                 {% block teaser_kicker %}
-                <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
+                <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format) }}">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
+                {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">:</span>{% endif %}
                 {% endblock %}
                 {% block teaser_title %}
                 <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>

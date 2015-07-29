@@ -11,11 +11,12 @@ import pysolr
 import zope.interface
 
 import zeit.cms.interfaces
-import zeit.content.article.interfaces
 import zeit.imp.source
+import zeit.solr.interfaces
 
 import zeit.web.core.interfaces
 import zeit.web.core.utils
+import zeit.web.core.view
 
 
 video_series = None
@@ -83,18 +84,6 @@ class Solr(object):
 
     zope.interface.implements(zeit.solr.interfaces.ISolr)
 
-    def add(self, docs, **kw):
-        raise NotImplementedError()
-
-    def commit(self, **kw):
-        raise NotImplementedError()
-
-    def delete(self, **kw):
-        raise NotImplementedError()
-
-    def more_like_this(self, q, mltfl, **kw):
-        raise NotImplementedError()
-
     def search(self, q, rows=10, **kw):
         parts = urlparse.urlparse('egg://zeit.web.core/data')
         repo = pkg_resources.resource_filename(parts.netloc, parts.path[1:])
@@ -108,11 +97,17 @@ class Solr(object):
                     unique_id = os.path.join(
                         root.replace(repo, 'http://xml.zeit.de'), filename)
                     content = zeit.cms.interfaces.ICMSContent(unique_id)
-                    assert zeit.content.article.interfaces.IArticle.providedBy(
-                        content)
-                    results.append(zeit.web.core.utils.frozendict(
-                        {u'uniqueId': content.uniqueId}))
-                except (AssertionError, TypeError):
+                    assert zeit.web.core.view.known_content(content)
+                    results.append({
+                        u'date_last_published': u'2015-07-01T09:50:42Z',
+                        u'last-semantic-change': u'2015-07-01T09:50:42Z',
+                        u'product_id': content.product.id,
+                        u'supertitle': content.supertitle,
+                        u'title': content.title,
+                        u'type': content.__class__.__name__.lower(),
+                        u'uniqueId': content.uniqueId
+                    })
+                except (AttributeError, AssertionError, TypeError):
                     continue
         return pysolr.Results(
             random.sample(results, min(rows, len(results))), len(results))
