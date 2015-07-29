@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-1934: News Overview
 
+- FIX: Ignore authors without display_name instead of crashing
+
 
 1.44 (2015-07-28)
 -----------------
