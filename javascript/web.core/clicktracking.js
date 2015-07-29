@@ -15,6 +15,12 @@ define( [ 'jquery' ], function( $ ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         main: function( $element ) {
+
+            // in case we already have a complete ID, we do not need to calculate it
+            if ( $element.data( 'id' ) ) {
+                return trackElement.useDataId( $element );
+            }
+
             var data = [],
                 type = 'text',
                 teasertype = '',
