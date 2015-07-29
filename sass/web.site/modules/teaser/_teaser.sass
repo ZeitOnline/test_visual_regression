@@ -19,8 +19,6 @@
 	position: relative
 	+respond-min($break-phablet-min)
 		padding: $petite 0 $petite remify(150px+20px)
-	+respond-min($break-tablet-min)
-		padding: $petite 0 $petite remify(150px+20px)
 	+respond-min($break-desktop-min)
 		padding: $petite 0 $petite remify(250px+20px)
 
@@ -31,8 +29,6 @@
 		display: table-cell
 		padding-right: $petite
 		width: remify(150px+20px)
-	+respond-min($break-tablet-min)
-		width: remify(150px+20px)
 	+respond-min($break-desktop-min)
 		width: remify(250px+20px)
 
@@ -40,18 +36,17 @@
 	vertical-align: top
 	+respond-min($break-phablet-min)
 		display: table-cell
-		vertical-align: top
 
 %teaser-series-label
 	color: $zon_grey
 	font-size: remify(12px)
 	letter-spacing: $zon-letter-spacing-l
-	margin: 0 0 remify(8px) 0
+	margin: 0 0 remify(8px)
 	text-transform: uppercase
 
 %teaser-heading
 	font-size: 1em
-	margin: 0 0 $tiny 0
+	margin: 0 0 remify(6px)
 
 %teaser-kicker
 	display: block
@@ -90,7 +85,7 @@
 	line-height: 1.2
 
 %teaser-media
-	margin: 0 0 remify(20px) 0
+	margin: 0 0 remify(20px)
 
 %teaser-media-item
 
@@ -98,7 +93,7 @@
 	color: $zon_dark_grey
 	font-size: remify(17px)
 	line-height: 1.4
-	margin: 0 0 remify(4px) 0
+	margin: 0 0 remify(4px)
 	+respond-min($break-phablet-min)
 		font-size: remify(15px)
 

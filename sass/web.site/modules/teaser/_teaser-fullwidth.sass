@@ -2,7 +2,7 @@
 	@extend %teaser
 	border-bottom: 1px solid $zon_light_grey
 	padding-top: 0
-	+respond-min($break-tablet-min)
+	+respond-min($break-areas)
 		border-bottom: none
 		margin-left: -$page-padding
 		margin-right: -$page-padding
@@ -39,7 +39,6 @@
 			padding: 0 em(10px) em(36px) em(36px)
 	&__heading
 		@extend %teaser-heading
-		margin-bottom: remify(4px)
 
 	&__series-label
 		@extend %teaser-series-label
