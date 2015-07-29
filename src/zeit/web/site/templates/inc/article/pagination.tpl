@@ -3,12 +3,12 @@
 	<div class="visually-hidden" id="article-pagination-title">Seitennavigation</div>
 
 	{% if view.pagination.next_page_url -%}
-	<a href="{{ view.pagination.next_page_url }}" data-id="article-pager....next-button">
-		<span class="article-pagination__button article-pagination__button--next">Nächste Seite</span>
-	</a>
+		<a href="{{ view.pagination.next_page_url }}" data-id="article-pager....next-button">
+			<span class="article-pagination__button article-pagination__button--next">Nächste Seite</span>
+		</a>
 
 		{% if view.pagination.next_page_title -%}
-		<a href="{{ view.pagination.next_page_url }}" class="article-pagination__nexttitle" data-id="article-pager....next-title">{{ view.pagination.next_page_title }}</a>
+			<a href="{{ view.pagination.next_page_url }}" class="article-pagination__nexttitle" data-id="article-pager....next-title">{{ view.pagination.next_page_title }}</a>
 		{%- endif %}
 	{%- endif %}
 
