@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-1.45 (unreleased)
+1.46 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.45 (2015-07-29)
 -----------------
 
 - MAINT: Hide VG Wort pixel
