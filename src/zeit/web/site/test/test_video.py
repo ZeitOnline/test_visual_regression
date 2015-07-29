@@ -71,10 +71,6 @@ def test_video_imagegroup_should_set_local_image_fileobj(
 
 def test_video_imagegroup_should_fallback(
         application, workingcopy, monkeypatch, mockserver):
-    def filename(me, src):
-        me.filename = "/dev/null/fusel"
-    monkeypatch.setattr(
-        zeit.web.core.centerpage.LocalVideoImage, "__init__", filename)
     unique_id = 'http://xml.zeit.de/video/2015-01/3537342483001'
     video = zeit.cms.interfaces.ICMSContent(unique_id)
     with zeit.cms.checkout.helper.checked_out(
@@ -86,6 +82,12 @@ def test_video_imagegroup_should_fallback(
     with zeit.cms.checkout.helper.checked_out(
             video, ignore_conflicts=True, events=False) as obj:
         obj.video_still = 'http://fusel'
+    group = zeit.content.image.interfaces.IImageGroup(video)
+    assert group['still.jpg'].image.getImageSize() == (500, 300)
+
+    with zeit.cms.checkout.helper.checked_out(
+            video, ignore_conflicts=True, events=False) as obj:
+        obj.video_still = None
     group = zeit.content.image.interfaces.IImageGroup(video)
     assert group['still.jpg'].image.getImageSize() == (500, 300)
 
