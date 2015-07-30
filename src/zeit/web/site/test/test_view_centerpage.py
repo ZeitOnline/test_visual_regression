@@ -184,13 +184,21 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
     assert helper.is_displayed(), 'Fullwidth teaser helper missing'
 
     if screen_size[0] == 768:
-        # test ipad width
+        # testbrowser has differing width due to in-/visible scrollbar
+        width = driver.execute_script('return jQuery(window).width()')
+        innerwidth = driver.execute_script('return window.innerWidth')
+        if width == innerwidth:
+            assert helper.size.get('width') == 553
+        else:
+            assert helper.size.get('width') == 542
 
-        # XXX Having to test a tuple is messed up. We need to come up with
-        # something better or we cannot use the width attribute in selenium.
-        assert helper.size.get('width') in (553, 542)
     elif screen_size[0] == 980:
-        assert helper.size.get('width') in (653, 643)
+        width = driver.execute_script('return jQuery(window).width()')
+        innerwidth = driver.execute_script('return window.innerWidth')
+        if width == innerwidth:
+            assert helper.size.get('width') == 653
+        else:
+            assert helper.size.get('width') == 643
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
