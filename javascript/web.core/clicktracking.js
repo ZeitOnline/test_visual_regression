@@ -76,6 +76,36 @@ define( [ 'jquery' ], function( $ ) {
             return formatTrackingData( data );
         },
         /**
+         * track elements in the parquet-meta section
+         * definition: https://docs.google.com/spreadsheets/d/1uY8XXULPq7zUre9prBWiKDaBQercLmAEENCVF8LQk4Q/edit#gid=1056411343
+         * @param  {Object} $element jQuery Element with the link that was clicked
+         * @return {string}          formatted linkId-string for webtrekk call
+         */
+        parquetMeta: function( $element ) {
+
+            var linkClassName = $element.get( 0 ).className.split( ' ' )[0],
+                linkType,
+                data;
+
+            if ( linkClassName === 'parquet-meta__title' ) {
+                linkType = sanitizeString( $element.text().trim().toLowerCase() );
+            } else {
+                linkType = linkClassName.split( '__' ).pop().replace( '-', '' );
+            }
+
+            data = [
+                getBreakpoint(),
+                'parquet', // Verortung
+                $element.index( '.parquet-meta a' ) + 1, // Reihe (insgesamt, nicht aktueller Riegel)
+                '1', // Spalte
+                '', // Teasertyp, hier leer
+                linkType, // Name (bei Ressort) oder Linktyp (politik|wirtschaft / topiclink|morelink)
+                $element.attr( 'href' ) // Ziel-URL
+            ];
+
+            return formatTrackingData( data );
+        },
+        /**
          * track links which are inside an article text
          * @param  {Object} $element jQuery Element with the link that was clicked
          * @return {string}          formatted linkId-string for webtrekk call
@@ -134,6 +164,23 @@ define( [ 'jquery' ], function( $ ) {
      */
     getBreakpoint = function() {
         return window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value;
+    },
+    /**
+     * returns a string that is webtrekk-safe
+     * @param  {string}     string from
+     * @return {string}     string that only contains characters, numbers and minus
+     */
+    sanitizeString = function( str ) {
+        return str.
+            replace( 'ä', 'ae' ).
+            replace( 'ö', 'oe' ).
+            replace( 'ü', 'ue' ).
+            replace( 'Ä', 'Ae' ).
+            replace( 'Ö', 'Oe' ).
+            replace( 'Ü', 'Ue' ).
+            replace( 'ß', 'ss' ).
+            replace( '_', '-' ).
+            replace( /[^A-Za-z0-9\-]/g, '' );
     },
     /**
      *
@@ -211,7 +258,8 @@ define( [ 'jquery' ], function( $ ) {
             var trackingLinks = {
                 main: $( '.main article a' ).not( '[data-wt-click]' ),
                 nav: $( '.main_nav a[data-id], .footer a[data-id]' ).not( '[data-wt-click]' ),
-                useDataId: $( '#snapshot a[data-id], #servicebox a[data-id], .article-interactions a[data-id]' ).not( '[data-wt-click]' )
+                useDataId: $( '#snapshot a[data-id], #servicebox a[data-id], .article-interactions a[data-id]' ).not( '[data-wt-click]' ),
+                parquetMeta: $( '.parquet-meta a' ).not( '[data-wt-click]' )
             };
             // The key name is used for calling the corresponding function in this.tracking
             for ( var key in trackingLinks ) {
