@@ -4,7 +4,7 @@ Change log for zeit.web
 1.47 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1586: Introduce new image tool
 
 
 1.46 (2015-07-30)
