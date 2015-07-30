@@ -4,6 +4,8 @@ Change log for zeit.web
 1.46 (unreleased)
 -----------------
 
+- ZON-1974: Remove shading hover effect for fullwidth and nextread teasers
+
 - ZON-1881: Eventverpixelung Artikel
 
 - ZON-1665: Eventverpixelung Parkett-Meta
