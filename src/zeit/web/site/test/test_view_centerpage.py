@@ -179,23 +179,22 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
     teaser = driver.find_elements_by_class_name('teaser-fullwidth')[0]
     helper = driver.find_elements_by_class_name(
         'teaser-fullwidth__container')[0]
+    script = 'return window.innerWidth == document.documentElement.clientWidth'
 
     assert teaser.is_displayed(), 'Fullwidth teaser missing'
     assert helper.is_displayed(), 'Fullwidth teaser helper missing'
 
     if screen_size[0] == 768:
         # testbrowser has differing width due to in-/visible scrollbar
-        width = driver.execute_script('return jQuery(window).width()')
-        innerwidth = driver.execute_script('return window.innerWidth')
-        if width == innerwidth:
+        invisible_scrollbar = driver.execute_script(script)
+        if invisible_scrollbar:
             assert helper.size.get('width') == 553
         else:
             assert helper.size.get('width') == 542
 
     elif screen_size[0] == 980:
-        width = driver.execute_script('return jQuery(window).width()')
-        innerwidth = driver.execute_script('return window.innerWidth')
-        if width == innerwidth:
+        invisible_scrollbar = driver.execute_script(script)
+        if invisible_scrollbar:
             assert helper.size.get('width') == 653
         else:
             assert helper.size.get('width') == 643
