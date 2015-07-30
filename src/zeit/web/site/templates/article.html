@@ -27,7 +27,7 @@
 
 
 {% block article_pages %}
-    <div class="article-page">
+    <div class="article-page" data-page-number="{{ view.current_page.number+1 }}">
         {{ render_page(view.current_page) }}
     </div>
 {% endblock article_pages %}
