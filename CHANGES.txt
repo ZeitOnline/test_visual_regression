@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1976: Adjust teaser margins
 
+- MAINT: Update CP layouts, tweak parquet styles, improve accordion script
+
 - FIX: Don't break on other kinds of empty image captions
 
 
