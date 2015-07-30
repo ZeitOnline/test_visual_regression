@@ -43,10 +43,23 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     @zeit.web.reify
     def breadcrumbs(self):
         breadcrumbs = super(Article, self).breadcrumbs
+        # News
         if self.ressort == 'news':
             breadcrumbs.extend([('News', 'http://xml.zeit.de/news/index')])
             self.breadcrumbs_by_title(breadcrumbs)
             return breadcrumbs
+        # Archive article
+        if self.product_id in ('ZEI', 'ZEAR'):
+            breadcrumbs.extend([
+                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
+                ("Jahrgang {}".format(self.context.year),
+                    'http://xml.zeit.de/{}/index'.format(self.context.year)),
+                ("Ausgabe: {0:02d}".format(self.context.volume),
+                    'http://xml.zeit.de/{0}/{1:02d}/index'.format(
+                        self.context.year, self.context.volume))])
+            self.breadcrumbs_by_title(breadcrumbs)
+            return breadcrumbs
+        # Ordinary articles
         self.breadcrumbs_by_navigation(breadcrumbs)
         page_teaser = self.current_page.teaser
         if len(page_teaser) > 0:

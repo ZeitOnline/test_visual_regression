@@ -168,8 +168,8 @@ class Centerpage(
             breadcrumbs.extend([
                 ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
                 ("Jahrgang {}".format(self.context.year),
-                    '{}/index'.format(self.content_url.rsplit('/', 2)[0])),
-                ("Ausgabe: {}".format(self.context.volume), None)])
+                    'http://xml.zeit.de/{}/index'.format(self.context.year)),
+                ("Ausgabe: {0:02d}".format(self.context.volume), None)])
         else:
             return self.breadcrumbs_by_navigation(breadcrumbs)
 
