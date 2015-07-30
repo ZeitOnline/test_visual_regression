@@ -129,7 +129,7 @@ class Centerpage(
             if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(
                     self.regions[0][0][0]):
                 cpextra = self.regions[0][0][0].cpextra
-                if cpextra == 'search-form' or cpextra == 'dwds-suche':
+                if cpextra == 'search-form':
                     breadcrumbs.extend([(u'Suchergebnisse für "{}"'.format(
                         self.request.GET['q']), None)])
                     return breadcrumbs
