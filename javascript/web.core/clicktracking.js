@@ -22,7 +22,7 @@ define( [ 'jquery' ], function( $ ) {
             }
 
             // is this a link inside an article text? track this specific case.
-            if ( $element.parents( '.article-page' ).length > 0 ) {
+            if ( $element.closest( '.article-page' ).length > 0 ) {
                 return trackElement.linkInArticleContent( $element );
             }
 
