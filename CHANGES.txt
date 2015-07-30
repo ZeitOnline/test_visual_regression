@@ -8,8 +8,6 @@ Change log for zeit.web
 
 - ZON-1030: Add tiny buzzbox-accordion
 
-- FIX: Decode HTML entities in image caption
-
 - ZON-1814: Configure viewport zoom for tablets
 
 - ZON-1934: News Overview
@@ -17,6 +15,8 @@ Change log for zeit.web
 - ZON-1942: Implement breadcrumbs
 
 - FIX: Ignore authors without display_name instead of crashing
+
+- FIX: Decode HTML entities in image caption
 
 
 1.44 (2015-07-28)
