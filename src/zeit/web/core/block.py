@@ -254,9 +254,9 @@ class Image(BaseImage):
         self.layout = model_block.layout
 
         if model_block.xml is not None:
-            bu = _inline_html(model_block.xml.find('bu'))
+            bu = unicode(_inline_html(model_block.xml.find('bu')))
             if bu:
-                bu = lxml.html.fromstring(unicode(bu)).text_content().strip()
+                bu = lxml.html.fromstring(bu).text_content().strip()
 
             self.align = model_block.xml.get('align')
             self.href = model_block.xml.get('href')

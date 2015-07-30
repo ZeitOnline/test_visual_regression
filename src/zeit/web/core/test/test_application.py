@@ -2,10 +2,10 @@
 import base64
 import pkg_resources
 
+import mock
 import pyramid.interfaces
 import pyramid.request
 import pyramid.testing
-import pyramid.traversal
 import pytest
 import requests
 
@@ -76,6 +76,14 @@ def test_parallel_folders_should_be_discovered_during_traversal(my_traverser):
     assert tdict['context'].uniqueId == (
         'http://xml.zeit.de/parallel_cps/serie.cp2015/index')
     assert zeit.content.cp.interfaces.ICenterPage.providedBy(tdict['context'])
+
+
+def test_spektrum_feed_should_not_use_parallel_cp(my_traverser):
+    req = pyramid.request.Request.blank(
+        '/parallel_cps/index/rss-spektrum-flavoured')
+    tdict = my_traverser(req)
+    assert tdict['context'].uniqueId == (
+        'http://xml.zeit.de/parallel_cps/index')
 
 
 def test_acceptable_pagination_should_not_redirect(testserver):
@@ -157,3 +165,9 @@ def test_vgwort_pixel_should_be_present(testserver, testbrowser):
 def test_content_should_have_marker_interface(application):
     content = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     assert zeit.web.core.interfaces.IInternalUse.providedBy(content)
+
+
+def test_transaction_aborts_after_request(testserver, testbrowser):
+    with mock.patch('transaction.TransactionManager.commit') as commit:
+        testbrowser('{}/artikel/01'.format(testserver.url))
+        assert not commit.called

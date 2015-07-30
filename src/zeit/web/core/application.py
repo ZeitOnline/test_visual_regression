@@ -147,6 +147,10 @@ class Application(object):
             registry=registry)
         config.setup_registry(settings=self.settings)
 
+        # Never commit, always abort. zeit.web should never write anything,
+        # anyway, and at least when running in preview mode, not committing
+        # neatly avoids ConflictErrors.
+        self.config.registry.settings['tm.commit_veto'] = lambda *args: True
         self.config.include('pyramid_tm')
         self.configure_jinja()
 
@@ -194,6 +198,11 @@ class Application(object):
                 url = request.static_url(prefix + path, **kw)
             if url.rsplit('.', 1)[-1] in ('css', 'js'):
                 url += '?' + request.registry.settings.get('version_hash', '')
+            else:
+                svg_sprite = url.split('/icons.svg', 1)
+                if len(svg_sprite) == 2:
+                    version = request.registry.settings.get('version_hash', '')
+                    url = '/icons.svg?{}'.format(version).join(svg_sprite)
             return url
 
         config.add_request_method(asset_url)

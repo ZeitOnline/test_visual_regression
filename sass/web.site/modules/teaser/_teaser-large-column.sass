@@ -1,5 +1,10 @@
 .teaser-large-column
 	@extend %teaser-column
+	&--parquet
+		&:first-child
+			border-top-width: 1px
+		&:last-child
+			border-bottom-width: 1px
 	&__media
 		@extend %teaser-column__media
 	&__media-item
@@ -8,7 +13,6 @@
 		@extend %teaser-series-label
 	&__heading
 		@extend %teaser-heading
-		margin-bottom: remify(4px)
 	&__combined-link
 		@extend %teaser-combined-link
 	&__kicker
@@ -18,7 +22,7 @@
 	&__text
 		@extend %teaser-text
 	&__byline
-		@extend %teaser-column__byline
+		@extend %teaser-byline
 	&__metadata
 		@extend %teaser-metadata
 	&__datetime
@@ -26,17 +30,24 @@
 	&__commentcount
 		@extend %teaser-commentcount
 
-.teaser-large-column--has-media
-	.teaser-large-column__byline
+	&--has-media &__metadata
 		@extend %teaser-column__media-space
 
 +respond-min($break-phablet-min)
-	.teaser-large-column--has-media
-		.teaser-large-column__media
+	.teaser-large-column
+		&--has-media &__media
 			width: $teaser-column-image-width-large
 			height: $teaser-column-image-height-large
-		.teaser-large-column__byline
+		&--has-media &__metadata
 			min-height: initial
-		.teaser-large-column__text,
-		.teaser-large-column__title
-			padding-right: remify($teaser-column-image-width-large + 20px)
+			padding-right: 0
+		&--has-media &__container
+			width: 75%
+
++respond-min($break-tablet-min)
+	.teaser-large-column
+		&--parquet
+			&:first-child
+				border-top-width: 0
+			&:last-child
+				border-bottom-width: 0
