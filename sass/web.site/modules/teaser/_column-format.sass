@@ -11,9 +11,23 @@ $teaser-column-image-width-fullwidth: 210px
 
 %teaser-column
 	@extend %teaser
-	background: $color-column-background
+	background-color: $color-column-background
+	border-top-width: 0
 	padding: $page-padding
 	position: relative
+
+	& + article // remove border on successive teaser
+		border-top-width: 0
+
+	& + &
+		border-top-width: 1px
+
+	+respond-min($break-areas)
+		margin-top: $vertical-space
+		margin-bottom: $vertical-space
+
+		& + &
+			border-top-width: 0
 
 %teaser-column__media
 	@extend %teaser-media
@@ -37,8 +51,3 @@ $teaser-column-image-width-fullwidth: 210px
 	padding-right: remify($teaser-column-mobile-image-size + 20px)
 	// min-height: $teaser-column-mobile-image-size - $page-padding - ownMarginBottom = 5rem - 1.25rem - 0.25rem
 	min-height: 3.5rem
-
-%teaser-column__byline
-	@extend %teaser-byline
-	color: $zon_mid_grey
-	font-size: remify(14px)

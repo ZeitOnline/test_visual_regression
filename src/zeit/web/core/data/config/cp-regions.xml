@@ -29,7 +29,7 @@
     <region kind="solo" title="Overview">
         <area kind="overview"/>
     </region>
-    <region kind="solo" title="News Ticker">
+    <region kind="solo" title="Schlagzeilen">
         <area kind="newsticker"/>
     </region>
     <region kind="topic" title="Dossier">
