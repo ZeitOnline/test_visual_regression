@@ -123,6 +123,10 @@ class Centerpage(
 
     @zeit.web.reify
     def breadcrumbs(self):
+        # No breadcrumbs for homepage
+        if self.is_hp:
+            return []
+
         breadcrumbs = super(Centerpage, self).breadcrumbs
         try:
             # Search form
