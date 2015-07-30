@@ -5,9 +5,13 @@ from StringIO import StringIO
 from PIL import Image
 from pytest import mark
 import mock
+import pyramid.httpexceptions
+import pytest
 import requests
+import zope.interface.declarations
 
 import zeit.cms.interfaces
+import zeit.content.article.interfaces
 
 
 def test_image_download(appbrowser):
@@ -222,71 +226,154 @@ def test_variant_getter_should_output_a_variant_image_if_all_went_well(
     assert isinstance(variant, zeit.web.core.centerpage.VariantImage)
 
 
-def test_image_view_uses_native_filename_for_legacy_images(
-        application):
-    assert False
+def test_image_view_uses_native_filename_for_legacy_images():
+    context = mock.Mock()
+    context.__name__ = 'foobar.bmp'
+    context.__parent__ = ['foobar.bmp']
+    context.mimeType = u'mööp'
+    view = zeit.web.core.view_image.Image(context, None)
+    assert view.content_disposition == 'inline; filename="foobar.bmp"'
 
 
-def test_image_view_uses_parents_basename_as_filename_if_available(
-        application):
-    assert False
+def test_image_view_uses_parents_basename_as_filename_if_available():
+    context = mock.Mock()
+    context.__name__ = 'foobar.bmp'
+    context.__parent__ = mock.MagicMock()
+    context.__parent__.__iter__.return_value = []
+    context.__parent__.uniqueId = '/lorem/ipsum/dolorset'
+    context.mimeType = u'mööp'
+    view = zeit.web.core.view_image.Image(context, None)
+    assert view.content_disposition == 'inline; filename="dolorset.jpeg"'
 
 
-def test_image_view_uses_traversed_path_segment_if_parent_unavailable(
-        application):
-    assert False
+def test_image_view_uses_traversed_path_segment_if_parent_unavailable():
+    context = mock.Mock()
+    context.__name__ = 'foobar.bmp'
+    context.__parent__ = []
+    context.mimeType = u'mööp'
+    request = mock.Mock()
+    request.traversed = ['lorem', 'ipsum']
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view.content_disposition == 'inline; filename="ipsum.jpeg"'
 
 
-def test_image_view_uses_content_type_as_fileextension_if_available(
-        application):
-    assert False
+def test_image_view_uses_content_type_as_fileextension_if_available():
+    context = mock.Mock()
+    context.__name__ = 'foobar.bmp'
+    context.__parent__ = []
+    context.mimeType = 'image/png'
+    request = mock.Mock()
+    request.traversed = ['dolorset']
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view.content_disposition == 'inline; filename="dolorset.png"'
 
 
-def test_image_view_uses_jpeg_as_fileextension_if_content_type_unavailable(
-        application):
-    assert False
+def test_image_view_uses_jpeg_as_fileextension_if_content_type_unavailable():
+    context = mock.Mock()
+    context.__name__ = 'foobar.bmp'
+    context.__parent__ = []
+    context.mimeType = u'mööp'
+    request = mock.Mock()
+    request.traversed = ['dolorset']
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view.content_disposition == 'inline; filename="dolorset.jpeg"'
 
 
-def test_image_view_should_handle_unicode_filename_and_extension(
-        application):
-    assert False
+def test_image_view_should_handle_unicode_filename_and_extension():
+    context = mock.Mock()
+    context.__name__ = u'porträt.jpg'
+    context.__parent__ = []
+    context.mimeType = u'image/gemälde'
+    request = mock.Mock()
+    request.traversed = [u'wunder', u'schönes porträt']
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view.content_disposition == (
+        'inline; filename="schoenes-portraet.jpeg"')
 
 
-def test_image_view_should_handle_unicode_mime_types_correctly(
-        application):
-    assert False
+def test_image_view_should_handle_ioerrors_on_filehandle_opening():
+    def broken_func():
+        raise IOError('This file is broken!')
+
+    context = mock.Mock()
+    context.open = broken_func
+    view = zeit.web.core.view_image.Image(context, mock.Mock())
+    with pytest.raises(pyramid.httpexceptions.HTTPNotFound):
+        view.filehandle
 
 
-def test_image_view_should_handle_ioerrors_on_filehandle_opening(
-        application):
-    assert False
+def test_image_view_should_open_context_image_and_provide_filehandle():
+    context = mock.Mock()
+    mockfile = object()
+    context.open.return_value = mockfile
+    view = zeit.web.core.view_image.Image(context, None)
+    assert view.filehandle is mockfile
+    assert context.open.call_count == 1
 
 
-def test_image_view_should_open_context_image_and_provide_filehandle(
-        application):
-    assert False
+def test_image_view_should_calculate_content_length_of_context_image():
+    context = mock.Mock()
+    mockfile = mock.Mock()
+    mockfile.tell.return_value = 42
+    context.open.return_value = mockfile
+    request = mock.Mock()
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view.content_length == '42'
+    assert mockfile.seek.call_args_list == [((0, 2), {}), ((0, 0), {})]
 
 
-def test_image_view_should_calculate_content_length_of_context_image(
-        application):
-    assert False
+def test_image_view_should_reset_file_handle_pointer_even_on_read_error():
+    def broken_func():
+        raise IOError('This file is broken!')
+
+    context = mock.Mock()
+    mockfile = mock.Mock()
+    mockfile.tell = broken_func
+    context.open.return_value = mockfile
+    request = mock.Mock()
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view.content_length is None
+    assert mockfile.seek.call_args == ((0, 0), {})
 
 
-def test_image_view_should_reset_file_handle_pointer_even_on_read_error(
-        application):
-    assert False
+def test_image_view_should_set_headers_to_calculated_values(application):
+    context = mock.Mock()
+    context.__name__ = 'foobar.jpg'
+    context.__parent__ = ['foobar.jpg']
+    mockfile = mock.Mock()
+    mockfile.tell.return_value = 4212345
+    context.open.return_value = mockfile
+    context.mimeType = 'foo/bar'
+    interface = zeit.content.article.interfaces.IArticle
+    zope.interface.declarations.alsoProvides(context, interface)
+    request = mock.Mock()
+    request.response.headers = {}
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view().headers == {
+        'Content-Disposition': 'inline; filename="foobar.jpg"',
+        'Content-Length': '4212345',
+        'Content-Type': "foo/bar"}
 
 
-def test_image_view_should_set_headers_to_calculated_values(
-        application):
-    assert False
+def test_image_view_should_create_fileiter_pyramid_response():
+    context = mock.Mock()
+    context.__name__ = 'foobar.jpg'
+    context.__parent__ = ['foobar.jpg']
+    mockfile = mock.Mock()
+    context.open.return_value = mockfile
+    request = mock.Mock()
+    request.response.headers = {}
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view().app_iter.file is mockfile
 
 
-def test_image_view_should_create_fileiter_pyramid_response(
-        application):
-    assert False
-
-
-def test_image_view_should_calculate_caching_time_from_image_context(
-        application):
-    assert False
+def test_image_view_should_calculate_caching_time_from_context(application):
+    context = mock.Mock()
+    context.__name__ = 'foobar.jpg'
+    context.__parent__ = ['foobar.jpg']
+    interface = zeit.content.article.interfaces.IArticle
+    zope.interface.declarations.alsoProvides(context, interface)
+    request = mock.Mock()
+    request.response.headers = {}
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view().cache_expires.call_args[0][0] == 10

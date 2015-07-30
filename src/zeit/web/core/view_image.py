@@ -7,10 +7,12 @@ import pyramid.httpexceptions
 import pyramid.response
 import zope.component
 
+import zeit.cms.interfaces
 import zeit.connector.interfaces
 import zeit.content.image.interfaces
 
 import zeit.web
+import zeit.web.core.cache
 import zeit.web.core.view
 
 
@@ -33,22 +35,25 @@ class Image(zeit.web.core.view.Base):
     @zeit.web.reify
     def content_disposition(self):
         if self.context.__name__ in self.context.__parent__:
-            return 'inline; filename="{}"'.format(self.context.__name__)
+            name = zeit.cms.interfaces.normalize_filename(
+                self.context.__name__)
+            return 'inline; filename="{}"'.format(name)
         try:
             name = os.path.basename(
                 self.context.__parent__.uniqueId.rstrip('/'))
         except:
             name = self.request.traversed[-1]
-        try:
-            ext = self.content_type.split('/')[-1]
-        except:
-            ext = 'jpeg'
-        return 'inline; filename="{}.{}"'.format(
-            name.encode('utf8', 'ignore'), ext)
+
+        ext = self.content_type.split('/')[-1]
+        name = zeit.cms.interfaces.normalize_filename(name)
+        return 'inline; filename="{}.{}"'.format(name, ext)
 
     @zeit.web.reify
     def content_type(self):
-        return self.context.mimeType.encode('utf-8')
+        try:
+            return str(self.context.mimeType)
+        except (AttributeError, UnicodeEncodeError):
+            return 'image/jpeg'
 
     @zeit.web.reify
     def content_length(self):
@@ -67,7 +72,7 @@ class Image(zeit.web.core.view.Base):
     def filehandle(self):
         try:
             return self.context.open()
-        except AttributeError, err:
+        except (AttributeError, IOError), err:
             log.warning(u'Image not openable: {} at {}'.format(
                 err.message, self.request.path_qs))
             raise pyramid.httpexceptions.HTTPNotFound(err.message)
