@@ -24,6 +24,18 @@ def test_banner_toggles_viewport_zoom(application):
     assert view.banner_toggles('viewport_zoom') == 'tablet'
 
 
+def test_homepage_should_have_proper_ivw_script_integration(
+        testbrowser, monkeypatch):
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
+    browser = testbrowser('/zeit-online/slenderized-index')
+    ivw = browser.cssselect(
+        'script[id="ivw-v2"]')
+    assert len(ivw) == 1
+
+
 def test_adcontroller_head_code_is_present(
         testserver, testbrowser, monkeypatch):
 
