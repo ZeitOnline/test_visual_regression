@@ -170,6 +170,10 @@ class Centerpage(
                 ("Jahrgang {}".format(self.context.year),
                     'http://xml.zeit.de/{}/index'.format(self.context.year)),
                 ("Ausgabe: {0:02d}".format(self.context.volume), None)])
+        # Dynamic folder
+        elif zeit.content.dynamicfolder.interfaces.\
+                IRepositoryDynamicFolder.providedBy(self.context.__parent__):
+            breadcrumbs.extend([(self.title, None)])
         else:
             return self.breadcrumbs_by_navigation(breadcrumbs)
 
