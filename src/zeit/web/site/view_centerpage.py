@@ -127,18 +127,15 @@ class Centerpage(
         if self.is_hp:
             return []
 
+        # Default breadcrumbs
         breadcrumbs = super(Centerpage, self).breadcrumbs
-        try:
-            # Search form
-            if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(
-                    self.regions[0][0][0]):
-                cpextra = self.regions[0][0][0].cpextra
-                if cpextra == 'search-form':
-                    breadcrumbs.extend([(u'Suchergebnisse für "{}"'.format(
-                        self.request.GET['q']), None)])
-                    return breadcrumbs
-        except (KeyError, IndexError):
-            pass
+
+        # Search forms
+        if zeit.web.core.utils.find_block(
+                self.context, module='search-form') is not None:
+            breadcrumbs.extend([(u'Suchergebnisse für "{}"'.format(
+                self.request.GET['q']), None)])
+            return breadcrumbs
         # "Angebote" and "Administratives"
         if self.ressort in ('angebote', 'administratives', 'news'):
             # Hamburg news
