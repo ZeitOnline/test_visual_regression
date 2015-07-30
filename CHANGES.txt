@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.46 (unreleased)
+1.46 (2015-07-30)
 -----------------
 
 - ZON-1881: Eventverpixelung Artikel
