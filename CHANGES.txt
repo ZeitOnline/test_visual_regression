@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1976: Adjust teaser margins
 
+- ZON-1586: Introduce new image tool
+
 
 1.45.1 (2015-07-29)
 -------------------
