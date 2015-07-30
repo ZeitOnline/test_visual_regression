@@ -390,7 +390,7 @@ def test_snapshot_morelink_text_icon_switch(
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/index' % testserver.url)
     linkdisplay = driver.execute_script(
-        "return $('.snapshot-readmore__item').eq(0).css('display')")
+        "return $('#snapshot .section-heading__text').eq(0).css('display')")
     if screen_size[0] == 320:
         assert linkdisplay == u'none', 'Linktext not hidden on mobile'
     else:
@@ -746,7 +746,7 @@ def test_newsticker_should_have_expected_dom(testserver, testbrowser):
 
     cols = browser.cssselect('.cp-area--newsticker .newsticker__column')
     assert len(cols) == 2
-    teaser = browser.cssselect('.newsticker article')
+    teaser = browser.cssselect('.cp-area--newsticker article.newsteaser')
     assert len(teaser) == 8
     assert len(teaser[0].cssselect('time')) == 1
     assert len(
@@ -822,7 +822,7 @@ def test_gallery_teaser_exists(testbrowser, testserver):
 
 def test_gallery_teaser_has_ressort_heading(testbrowser, testserver):
     select = testbrowser('/zeit-online/teaser-gallery-setup').cssselect
-    title = select('.cp-area--gallery .cp-ressort-heading__title')
+    title = select('.cp-area--gallery .section-heading__title')
     assert len(title) == 1
     assert "Fotostrecken" in title[0].text
 
@@ -849,7 +849,7 @@ def test_gallery_teaser_hides_elements_on_mobile(selenium_driver, testserver):
     driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
 
     ressort_linktext = driver.find_element_by_css_selector(
-        '.cp-ressort-heading__readmore-linktext')
+        '.section-heading__text')
     gallery_counter = driver.find_element_by_css_selector(
         '.teaser-gallery__counter')
     gallery_text = driver.find_element_by_css_selector(

@@ -4,7 +4,7 @@ Change log for zeit.web
 1.46 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1976: Adjust teaser margins
 
 
 1.45.1 (2015-07-29)

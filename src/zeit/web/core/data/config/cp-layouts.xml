@@ -74,7 +74,7 @@
         title="Kolumnenteaser"
         image_pattern="zon-thumbnail"
         image_positions="true"
-        areas="solo major minor"
+        areas="solo major minor ranking parquet"
         />
 
     <layout
@@ -82,7 +82,7 @@
         title="Blogteaser"
         image_pattern="zon-thumbnail"
         image_positions="true"
-        areas="solo major minor"
+        areas="solo major minor ranking parquet"
         />
 
     <layout
@@ -90,7 +90,7 @@
         title="Serienteaser"
         image_pattern="zon-thumbnail"
         image_positions="true"
-        areas="solo major minor"
+        areas="solo major minor ranking parquet"
         />
 
     <!-- Legacy teaser formats -->
