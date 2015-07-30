@@ -229,6 +229,7 @@ class VariantImage(object):
         self.attr_alt = meta.alt or meta.caption
         self.attr_title = meta.title or meta.caption
         self.caption = meta.caption
+        self.context = context
         self.copyright = meta.copyrights
         self.image_group = group
         self.image_pattern = context.name
