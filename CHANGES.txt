@@ -4,7 +4,13 @@ Change log for zeit.web
 1.46 (unreleased)
 -----------------
 
+- ZON-1881: Eventverpixelung Artikel
+
+- ZON-1665: Eventverpixelung Parkett-Meta
+
 - ZON-1976: Adjust teaser margins
+
+- FIX: Don't break on other kinds of empty image captions
 
 
 1.45.1 (2015-07-29)
