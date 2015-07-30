@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-1934: News Overview
 
+- ZON-1942: Implement breadcrumbs
+
 - FIX: Ignore authors without display_name instead of crashing
 
 
