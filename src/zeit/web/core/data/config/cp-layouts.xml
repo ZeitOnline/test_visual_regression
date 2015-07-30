@@ -40,7 +40,7 @@
         id="zon-fullwidth"
         title="Vollbreiter Aufmacher Text auf Bild"
         image_pattern="zon-fullwidth"
-        areas="solo"
+        areas="solo major"
         default="solo"
         />
     <layout
