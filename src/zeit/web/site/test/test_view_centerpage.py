@@ -157,7 +157,7 @@ def test_small_teaser_should_display_no_image_on_mobile(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(320, 480)
-    driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     box = driver.find_elements_by_class_name('cp-area--major')[0]
     teaser_image = box.find_elements_by_class_name('teaser-small__media')[0]
 
@@ -303,7 +303,7 @@ def test_centerpage_view_should_have_topic_links(testserver):
 
 
 def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
-    browser = testbrowser('/zeit-online/fullwidth-teaser')
+    browser = testbrowser('/zeit-online/index')
 
     fullwidth = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
     content = browser.cssselect('.cp-area.cp-area--major')
