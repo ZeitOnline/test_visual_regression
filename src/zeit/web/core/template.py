@@ -213,8 +213,10 @@ def get_layout(block, request=None):
             log.debug('Broken ref at {}'.format(teaser.uniqueId))
             layout = 'hide'
         elif layout == 'zon-square':
-            # TODO: Remove when Longform will be generally used on www.zeit.de
-            if zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
+            # ToDo: Remove when Longform will be generally used on www.zeit.de
+            if urlparse.urlparse(teaser.uniqueId).path.startswith('/feature/'):
+                layout = layout
+            elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
 
     layout = zope.component.getUtility(
