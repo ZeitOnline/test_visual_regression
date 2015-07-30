@@ -184,13 +184,21 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
     assert helper.is_displayed(), 'Fullwidth teaser helper missing'
 
     if screen_size[0] == 768:
-        # test ipad width
+        # testbrowser has differing width due to in-/visible scrollbar
+        width = driver.execute_script('return jQuery(window).width()')
+        innerwidth = driver.execute_script('return window.innerWidth')
+        if width == innerwidth:
+            assert helper.size.get('width') == 553
+        else:
+            assert helper.size.get('width') == 542
 
-        # XXX Having to test a tuple is messed up. We need to come up with
-        # something better or we cannot use the width attribute in selenium.
-        assert helper.size.get('width') in (553, 542)
     elif screen_size[0] == 980:
-        assert helper.size.get('width') in (653, 643)
+        width = driver.execute_script('return jQuery(window).width()')
+        innerwidth = driver.execute_script('return window.innerWidth')
+        if width == innerwidth:
+            assert helper.size.get('width') == 653
+        else:
+            assert helper.size.get('width') == 643
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
@@ -390,7 +398,7 @@ def test_snapshot_morelink_text_icon_switch(
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/index' % testserver.url)
     linkdisplay = driver.execute_script(
-        "return $('.snapshot-readmore__item').eq(0).css('display')")
+        "return $('#snapshot .section-heading__text').eq(0).css('display')")
     if screen_size[0] == 320:
         assert linkdisplay == u'none', 'Linktext not hidden on mobile'
     else:
@@ -746,7 +754,7 @@ def test_newsticker_should_have_expected_dom(testserver, testbrowser):
 
     cols = browser.cssselect('.cp-area--newsticker .newsticker__column')
     assert len(cols) == 2
-    teaser = browser.cssselect('.newsticker article')
+    teaser = browser.cssselect('.cp-area--newsticker article.newsteaser')
     assert len(teaser) == 8
     assert len(teaser[0].cssselect('time')) == 1
     assert len(
@@ -822,7 +830,7 @@ def test_gallery_teaser_exists(testbrowser, testserver):
 
 def test_gallery_teaser_has_ressort_heading(testbrowser, testserver):
     select = testbrowser('/zeit-online/teaser-gallery-setup').cssselect
-    title = select('.cp-area--gallery .cp-ressort-heading__title')
+    title = select('.cp-area--gallery .section-heading__title')
     assert len(title) == 1
     assert "Fotostrecken" in title[0].text
 
@@ -849,7 +857,7 @@ def test_gallery_teaser_hides_elements_on_mobile(selenium_driver, testserver):
     driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
 
     ressort_linktext = driver.find_element_by_css_selector(
-        '.cp-ressort-heading__readmore-linktext')
+        '.section-heading__text')
     gallery_counter = driver.find_element_by_css_selector(
         '.teaser-gallery__counter')
     gallery_text = driver.find_element_by_css_selector(

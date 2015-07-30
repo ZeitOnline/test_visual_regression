@@ -1,5 +1,9 @@
 .teaser-small-column-parquet
 	@extend %teaser-column
+	&:first-child
+		border-top-width: 1px
+	&:last-child
+		border-bottom-width: 1px
 	&__media
 		@extend %teaser-column__media
 	&__media-item
@@ -21,7 +25,7 @@
 	&__text
 		@extend %teaser-text
 	&__byline
-		@extend %teaser-column__byline
+		@extend %teaser-byline
 	&__metadata
 		@extend %teaser-metadata
 	&__datetime
@@ -29,38 +33,30 @@
 	&__commentcount
 		@extend %teaser-commentcount
 
-.teaser-small-column-parquet--has-media
-	.teaser-small-column-parquet__byline
+	&--has-media &__metadata
 		@extend %teaser-column__media-space
 
 +respond-min($break-tablet-min)
 	.teaser-small-column-parquet
-		margin: $vertical-space 0 $vertical-space 0
-		&--has-media
-			background: none
-			padding: 0 0 $petite remify(180px+20px)
-			+respond-min($break-tablet-min)
-				.teaser-small-column-parquet__byline
-					min-height: initial
-					padding-right: 0
-			+respond-min($break-desktop-min)
-				padding-left: remify(250px+20px)
-		&__mediawrapper
-			background: $color-column-background
-			position: absolute
-			top: 0
-			bottom: 0
-			left: 0
-			overflow: hidden
-			width: remify(180px)
-			max-height: remify(135px) // width 180 in 4:3 format
-			+respond-min($break-desktop-min)
-				width: remify(250px)
+		background-color: transparent
+		margin: 0
+		padding: $vertical-space 0
+		&:first-child
+			border-top-width: 0
+		&:last-child
+			border-bottom-width: 0
 		&__media
-			top: 0
-			bottom: 0
-			left: 0
-			height: 100%
-			overflow: hidden
-			width: remify(140px)
-			max-height: remify(135px) // height of __mediawrapper
+			background-color: $color-column-background
+			border-right: remify(150px - 85px) solid $color-column-background
+			float: left
+			height: remify(85px) // 16:9
+			margin-right: remify(20px)
+			position: static
+			width: remify(150px)
+			+respond-min($break-desktop-min)
+				border-right-width: remify(250px - 140px)
+				height: remify(140px) // 16:9
+				width: remify(250px)
+		&--has-media &__metadata
+			min-height: initial
+			padding-right: 0

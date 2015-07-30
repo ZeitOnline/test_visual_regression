@@ -2,7 +2,7 @@
 	@extend %teaser
 	border-bottom: 1px solid $zon_light_grey
 	padding-top: 0
-	+respond-min($break-tablet-min)
+	+respond-min($break-areas)
 		border-bottom: none
 		margin-left: -$page-padding
 		margin-right: -$page-padding
@@ -39,7 +39,6 @@
 			padding: 0 em(10px) em(36px) em(36px)
 	&__heading
 		@extend %teaser-heading
-		margin-bottom: remify(4px)
 
 	&__series-label
 		@extend %teaser-series-label
@@ -73,12 +72,14 @@
 			color: $white
 		+respond-min($break-desktop-min)
 			font-size: em(18px)
+	&__byline
+		@extend %teaser-byline
+	&__metadata
+		@extend %teaser-metadata
 	&__byline,
 	&__metadata
-		@extend %teaser-byline
 		+respond-min($break-tablet-min)
 			color: $zon_lighter_grey
-			margin-bottom: 0
 		+respond-min($break-desktop-min)
 			font-size: em(14px)
 			letter-spacing: 0.04em

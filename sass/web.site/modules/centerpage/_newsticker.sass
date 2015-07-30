@@ -1,28 +1,10 @@
-.newsticker
-	&__head
-		font-weight: bold
-		margin-bottom: remify(25px)
-		min-height: remify(30px)
-		position: relative
-	&__title
-		font-size: remify(24px)
-		left: 0
-		letter-spacing: $zon-letter-spacing-m
-		position: absolute
-	&__link
-		font-size: remify(14px)
-		position: absolute
-		right: 0
-		top: remify(10px)
-		&:after
-			content: ' \203A' // › = Single right-pointing angle quotation mark
-	&__column
-		+respond-min($break-tablet-min)
-			+inline-block(top)
-			width: 48%
-	&__column--1
-		+respond-min($break-tablet-min)
-			padding-right: remify(15px)
++respond-min($break-tablet-min)
+	.newsticker
+		&__column
+			float: left
+			width: 50%
+			&:nth-last-child(even)
+				padding-right: remify(15px)
 
 .newsteaser
 	font-size: remify(14px)
@@ -37,7 +19,8 @@
 		color: $color-text-highlighted
 		font-weight: bold
 		letter-spacing: $zon-letter-spacing-m
+	&__title
+		padding-right: remify(5px)
 	&__product
 		color: $zon_mid_grey
-		padding-left: remify(5px)
 		font-size: remify(12px)
