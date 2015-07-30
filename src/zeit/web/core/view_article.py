@@ -223,7 +223,7 @@ class Article(zeit.web.core.view.Content):
         """1:1 implementation of questionable xslt construct"""
 
         if (self.context.ressort == 'News' and
-            self.context.product and self.context.product.id == 'News'):
+                self.context.product and self.context.product.id == 'News'):
             return 'dpa'
         elif self.context.product and self.context.product.id == 'SID':
             return 'Sport-Informations-Dienst'
