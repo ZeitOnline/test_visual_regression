@@ -4,6 +4,8 @@ Change log for zeit.web
 1.46 (unreleased)
 -----------------
 
+- ZON-1881: Eventverpixelung Artikel
+
 - ZON-1976: Adjust teaser margins
 
 - ZON-1942: Implement breadcrumbs

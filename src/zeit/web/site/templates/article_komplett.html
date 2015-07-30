@@ -2,7 +2,7 @@
 
 {% block article_pages %}
     {% for page in view.pages %}
-        <div class="article-page">
+        <div class="article-page" data-page-number="{{ page.number+1 }}">
             {% if not loop.first %}
             <h3 class="article-page__page-teaser article__item">{{ page.teaser }}</h3>
             {% endif %}
