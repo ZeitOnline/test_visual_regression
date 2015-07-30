@@ -318,6 +318,18 @@ def test_article_has_news_source_empty():
     assert view.news_source == ''
 
 
+def test_article_news_source_should_not_break_without_product():
+    # While product is required in vivi, we've seen content without one
+    # in production preview (presumably while the article is being created).
+    content = mock.Mock()
+    content.copyrights = None
+    content.ressort = 'News'
+    content.product = None
+
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    assert view.news_source == ''
+
+
 def test_adcontroller_values_return_values_on_article(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/infoboxartikel')
