@@ -155,16 +155,21 @@ define( [ 'jquery' ], function( $ ) {
      * @return {string}     string that only contains characters, numbers and minus
      */
     sanitizeString = function( str ) {
-        return str.
-            replace( 'ä', 'ae' ).
-            replace( 'ö', 'oe' ).
-            replace( 'ü', 'ue' ).
-            replace( 'Ä', 'Ae' ).
-            replace( 'Ö', 'Oe' ).
-            replace( 'Ü', 'Ue' ).
-            replace( 'ß', 'ss' ).
-            replace( '_', '-' ).
-            replace( /[^A-Za-z0-9\-]/g, '' );
+        var map = {
+                'ä': 'ae',
+                'ö': 'oe',
+                'ü': 'ue',
+                'Ä': 'Ae',
+                'Ö': 'Oe',
+                'Ü': 'Ue',
+                'ß': 'ss',
+                '_': '-'
+            },
+            transliterate = function( m ) {
+                return map[m] || '';
+            };
+
+        return str.replace( /[^A-Za-z0-9\-]/g, transliterate );
     },
     /**
      *
