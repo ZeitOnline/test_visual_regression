@@ -195,6 +195,11 @@ class Application(object):
                 url = request.static_url(prefix + path, **kw)
             if url.rsplit('.', 1)[-1] in ('css', 'js'):
                 url += '?' + request.registry.settings.get('version_hash', '')
+            else:
+                svg_sprite = url.split('/icons.svg', 1)
+                if len(svg_sprite) == 2:
+                    version = request.registry.settings.get('version_hash', '')
+                    url = '/icons.svg?{}'.format(version).join(svg_sprite)
             return url
 
         config.add_request_method(asset_url)

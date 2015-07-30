@@ -4,22 +4,22 @@
 
 %teaser
 	+pie-clearfix
-	border-top: 1px solid $zon_light_grey
-	margin: 0 -($page-padding)
+	border-color: $zon_light_grey
+	border-style: solid
+	border-width: 1px 0 0
+	margin: 0 (-$page-padding)
 	padding: $vertical-space $page-padding
 	&:nth-of-type(1)
-		border-top: none
+		border-top-width: 0
 	+respond-min($break-areas)
-		border-bottom: none
-		border-top: none
-		margin: 0
+		border-top-width: 0
+		margin-left: 0
+		margin-right: 0
 		padding: $vertical-space 0
 
 %teaser-small-media-placement
 	position: relative
 	+respond-min($break-phablet-min)
-		padding: $petite 0 $petite remify(150px+20px)
-	+respond-min($break-tablet-min)
 		padding: $petite 0 $petite remify(150px+20px)
 	+respond-min($break-desktop-min)
 		padding: $petite 0 $petite remify(250px+20px)
@@ -31,8 +31,6 @@
 		display: table-cell
 		padding-right: $petite
 		width: remify(150px+20px)
-	+respond-min($break-tablet-min)
-		width: remify(150px+20px)
 	+respond-min($break-desktop-min)
 		width: remify(250px+20px)
 
@@ -40,18 +38,17 @@
 	vertical-align: top
 	+respond-min($break-phablet-min)
 		display: table-cell
-		vertical-align: top
 
 %teaser-series-label
 	color: $zon_grey
 	font-size: remify(12px)
 	letter-spacing: $zon-letter-spacing-l
-	margin: 0 0 remify(8px) 0
+	margin: 0 0 remify(8px)
 	text-transform: uppercase
 
 %teaser-heading
 	font-size: 1em
-	margin: 0 0 $tiny 0
+	margin: 0 0 remify(6px)
 
 %teaser-kicker
 	display: block
@@ -90,7 +87,7 @@
 	line-height: 1.2
 
 %teaser-media
-	margin: 0 0 remify(20px) 0
+	margin: 0 0 remify(20px)
 
 %teaser-media-item
 
@@ -98,25 +95,22 @@
 	color: $zon_dark_grey
 	font-size: remify(17px)
 	line-height: 1.4
-	margin: 0 0 remify(4px) 0
+	margin: 0 0 remify(4px)
 	+respond-min($break-phablet-min)
 		font-size: remify(15px)
-
-%teaser-byline
-	color: $zon_grey
-	display: block
-	font-size: $font-ss
-	line-height: 1.3846
-	letter-spacing: $zon-letter-spacing-s
-	margin-bottom: remify(4px)
-	&:empty
-		display: none
 
 %teaser-metadata
 	color: $zon_grey
 	font-size: $font-ss
 	line-height: 1.3846
 	letter-spacing: $zon-letter-spacing-s
+
+%teaser-byline
+	@extend %teaser-metadata
+	display: block
+	margin-bottom: remify(4px)
+	&:empty
+		display: none
 
 %teaser-datetime
 	&:not(:last-child):not(:empty):after

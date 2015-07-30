@@ -32,21 +32,24 @@
 	border-top: 1px solid $zon_light_grey
 	display: block // generally visible on mobile
 	margin: -1px 0 // prevent border overlapping
-	padding: 0
 	.cp-area &
 		margin: -1px (-$page-padding)
 	+respond_min($break-mobile-ad-width)
 		display: none // generally hidden on desktop
 	&--4-on-article
-		margin: remify(0 -20px 20px -20px)
+		margin: 0 (-$page-padding) remify(20px)
 	&--8-on-article
-		margin: remify(25px -20px 0px)
+		margin: remify(25px) (-$page-padding) 0
+	&:empty
+		display: none
 
 // desktop ads
 .ad-desktop
 	display: none // generally hidden on mobile
 	+respond_min($break-mobile-ad-width)
 		display: block // generally visible on desktop
+		&:empty
+			display: none
 	&--3,
 	&--12
 		@extend %monsterbanner

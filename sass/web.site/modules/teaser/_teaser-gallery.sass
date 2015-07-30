@@ -83,11 +83,12 @@ $break-gallery-teasers: $break-phablet-min
 		fill-opacity: 0.6
 
 	&__counter
-		position: absolute
+		background-color: $zon-charcoal
 		bottom: 0
-		right: 0
-		padding: remify(2px) 1rem
-		background-color: #333338
 		color: $white
 		font-size: remify(12px)
 		letter-spacing: 0.04em
+		padding: remify(2px) 1rem
+		pointer-events: none // enable covered link
+		position: absolute
+		right: 0

@@ -114,11 +114,18 @@ $rem-to-px-base: 16 !default
 		@else if ($unit == 'em') // conversion to rem
 			$list: append($list, $val * 1rem)
 
+		@else if ($unit == 'rem')
+			$list: append($list, $val)
+
 		@else if ($unit == '') // unitless values, like in 'margin: 0 16px'
 			$list: append($list, $value)
 
 		@else
 			@warn 'There is currently no unit conversion for #{$unit}'
+
+	// do not return single value list - e.g. this makes math operations simpler
+	@if length($list) == 1
+		@return nth($list, 1)
 
 	@return $list
 
