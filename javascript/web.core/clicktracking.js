@@ -15,6 +15,17 @@ define( [ 'jquery' ], function( $ ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         main: function( $element ) {
+            // in case we already have a complete ID, we do not need to calculate it
+            if ( $element.data( 'id' ) ) {
+                return this.useDataId( $element );
+            }
+
+            // is this a link inside an article text? track this specific case.
+            var $page = $element.closest( '.article-page' );
+            if ( $page.length ) {
+                return this.linkInArticleContent( $element, $page );
+            }
+
             var data = [],
                 type = 'text',
                 teasertype = '',
@@ -22,7 +33,7 @@ define( [ 'jquery' ], function( $ ) {
                 articleClasses = $article.get( 0 ).className.split( ' ' );
             if ( $element.attr( 'class' ).indexOf( 'button' ) !== -1 ) {
                 type = 'button';
-            } else if ( $element.closest( 'figure' ).length > 0 ) {
+            } else if ( $element.closest( 'figure' ).length ) {
                 type = 'image';
             }
             teasertype += $article.data( 'meetrics' ) ? $article.data( 'meetrics' ) + '-' : '';
@@ -39,21 +50,8 @@ define( [ 'jquery' ], function( $ ) {
             return formatTrackingData( data );
         },
         /**
-         * track elements in the nav section section, i.e. links with data-id attribute that contains the complete webtrekk id
-         * @param  {Object} $element jQuery Element with the link that was clicked
-         * @return {string}          formatted linkId-string for webtrekk call
-         */
-        nav: function( $element ) {
-            var data = [
-                getBreakpoint(),
-                $element.data( 'id' ),
-                $element.attr( 'href' ) // url
-            ];
-            return formatTrackingData( data );
-        },
-        /**
          * track links with data-id attribute that contains the complete webtrekk id
-         * @param  {Object} $element jQuery Element with the link that was clicked
+         * @param  {object} $element jQuery collection with the link that was clicked
          * @return {string}          formatted linkId-string for webtrekk call
          */
         useDataId: function( $element ) {
@@ -63,14 +61,35 @@ define( [ 'jquery' ], function( $ ) {
                 $element.attr( 'href' ) // url
             ];
             return formatTrackingData( data );
+        },
+        /**
+         * track links which are inside an article text
+         * @param  {object} $element jQuery collection with the link that was clicked
+         * @param  {object} $page    jQuery collection with the page containing the clicked link
+         * @return {string}          formatted linkId-string for webtrekk call
+         */
+        linkInArticleContent: function( $element, $page ) {
+            var $allParagraphsOnPage = $page.children( 'p' ),
+                $currentParagraph = $element.closest( 'p' ),
+                currentPageNumber = $page.data( 'page-number' ) || 0,
+                currentParagraphNumber = $allParagraphsOnPage.index( $currentParagraph ) + 1,
+                data = [
+                    getBreakpoint(),
+                    'intext', // [verortung] Immer (intext)
+                    currentParagraphNumber + '/seite-' + currentPageNumber, // "Nummer des Absatzes"/"Nummer der Seite" Bsp: "2/seite-1"
+                    '', // [spalte] leer lassen
+                    '', // [subreihe] leer lassen
+                    $element.text(), // [bezeichner] Verlinkter Text bsp. "Koalitionsverhandlungen sind gescheitert"
+                    $element.attr( 'href' ) // url
+                ];
+
+            return formatTrackingData( data );
         }
     },
     clickTrack = function( event ) {
-        if ( event.data.debug ) {
-            event.preventDefault();
-        }
         var trackingData = trackElement[ event.data.funcName ]( $( event.target ).closest( 'a' ) );
         if ( event.data.debug ) {
+            event.preventDefault();
             console.debug( trackingData );
         }
         if ( trackingData ) {
@@ -83,7 +102,13 @@ define( [ 'jquery' ], function( $ ) {
     formatTrackingData = function( trackingData ) {
         var url = trackingData.pop();
         if ( url ) {
-            url = url.replace( /http(s)?:\/\//, '' ).split( '?' )[0];
+            url = url.replace( /http(s)?:\/\//, '' );
+
+            // For sharing links, we want to preserve the GET parameters.
+            // Otherwise, remove them!
+            if ( typeof trackingData[1] !== 'string' || trackingData[1].indexOf( '.social.' ) === -1 ) {
+                url = url.split( '?' )[0];
+            }
         }
         return trackingData.join( '.' ) + '|' + url;
     },
@@ -118,7 +143,7 @@ define( [ 'jquery' ], function( $ ) {
                 return;
             }
 
-            if ( typeof( messageData.sender ) !== 'string' || typeof( messageData.message ) !== 'string' ) {
+            if ( typeof messageData.sender !== 'string' || typeof messageData.message !== 'string' ) {
                 return;
             }
 
@@ -163,21 +188,34 @@ define( [ 'jquery' ], function( $ ) {
             }
             /**
              * trackingLinks - a collection of jQuery-Objects to add trackElement to.
-             * The keys represent the trackElement type, so add new types, or add to jQuery-Collection if type is already in use
              *
-             * @type Object
+             * The keys represent the trackElement type, so add new types, or add to
+             * jQuery collection if type is already in use.
+             * The values are a list of delegates for event handling and optional selector strings
+             * to filter the descendants of the selected elements that trigger the event.
              */
             var trackingLinks = {
-                main: $( '.main article a' ).not( '[data-wt-click]' ),
-                nav: $( '.main_nav a[data-id], .footer a[data-id]' ).not( '[data-wt-click]' ),
-                useDataId: $( '#snapshot a[data-id], #servicebox a[data-id]' ).not( '[data-wt-click]' )
-            };
-            // The key name is used for calling the corresponding function in this.tracking
+                    main: [
+                        '.main article',
+                        'a:not([data-wt-click])'
+                    ],
+                    useDataId: [
+                        '.main_nav, .footer, .article-interactions, #snapshot, #servicebox',
+                        'a[data-id]:not([data-wt-click])'
+                    ]
+                },
+                debugMode = document.location.search.indexOf( '?webtrekk-clicktracking-debug' ) === 0;
+
+            // The key name is used for calling the corresponding function in trackElement
             for ( var key in trackingLinks ) {
                 if ( trackingLinks.hasOwnProperty( key ) ) {
-                    trackingLinks[ key ].on( 'click', {
+                    var selectors = trackingLinks[ key ],
+                        delegate = selectors.shift(),
+                        filter = selectors.shift() || null;
+
+                    $( delegate ).on( 'click', filter, {
                         funcName: key,
-                        debug: document.location.href.indexOf( '?webtrekk-clicktracking-debug' ) > -1 || false
+                        debug: debugMode
                     }, clickTrack );
                 }
             }
