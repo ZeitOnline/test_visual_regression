@@ -22,7 +22,8 @@ class Image(zeit.web.core.view.Base):
 
     def __call__(self):
         resp = self.request.response
-        resp.headers['Content-Length'] = self.content_length
+        if self.content_length:
+            resp.headers['Content-Length'] = self.content_length
         resp.headers['Content-Disposition'] = self.content_disposition
         resp.headers['Content-Type'] = resp.content_type = self.content_type
         resp.app_iter = pyramid.response.FileIter(self.filehandle)
@@ -53,12 +54,12 @@ class Image(zeit.web.core.view.Base):
     def content_length(self):
         try:
             self.filehandle.seek(0, 2)
-            mime = str(self.filehandle.tell())
+            length = str(self.filehandle.tell())
         except Exception, err:
             log.warning(u'Content-Length indeterminable: {} at {}'.format(
                 err.message, self.request.path_qs))
         else:
-            return mime
+            return length
         finally:
             self.filehandle.seek(0, 0)
 
