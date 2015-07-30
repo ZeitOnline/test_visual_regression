@@ -355,12 +355,14 @@ def test_image_view_should_set_headers_to_calculated_values(application):
         'Content-Type': "foo/bar"}
 
 
-def test_image_view_should_create_fileiter_pyramid_response():
+def test_image_view_should_create_fileiter_pyramid_response(application):
     context = mock.Mock()
     context.__name__ = 'foobar.jpg'
     context.__parent__ = ['foobar.jpg']
     mockfile = mock.Mock()
     context.open.return_value = mockfile
+    interface = zeit.content.article.interfaces.IArticle
+    zope.interface.declarations.alsoProvides(context, interface)
     request = mock.Mock()
     request.response.headers = {}
     view = zeit.web.core.view_image.Image(context, request)
