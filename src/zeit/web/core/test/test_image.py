@@ -4,6 +4,7 @@ from StringIO import StringIO
 
 from PIL import Image
 from pytest import mark
+import mock
 import requests
 
 import zeit.cms.interfaces
@@ -126,59 +127,166 @@ def test_variant_jinja_test_should_recognize_variants(application):
 
 def test_variant_getter_should_fallback_to_fallback_if_fallback_is_enabled(
         application):
-    pass
+    variant = zeit.web.core.template.get_image(None, fallback=True)
+    assert variant.image_group.uniqueId.endswith('/default/teaser_image/')
 
 
 def test_variant_getter_should_fallback_to_fallback_if_fallback_is_disabled(
         application):
-    pass
+    variant = zeit.web.core.template.get_image(None, fallback=False)
+    assert variant is None
 
 
-def test_variant_getter_should_favour_provided_image_over_extracted(
+def test_variant_getter_should_favour_provided_content_over_extracted(
         application):
-    pass
+    module = [zeit.cms.interfaces.ICMSContent(
+              'http://xml.zeit.de/zeit-online/cp-content/article-01')]
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-02')
+    variant = zeit.web.core.template.get_image(module, content)
+    assert variant.path.endswith('default')
 
 
-def test_variant_getter_should_extract_image_if_not_explicitly_provided(
+def test_variant_getter_should_extract_content_if_not_explicitly_provided(
         application):
-    pass
+    module = [zeit.cms.interfaces.ICMSContent(
+              'http://xml.zeit.de/zeit-online/cp-content/article-01')]
+    variant = zeit.web.core.template.get_image(module)
+    assert variant.path.endswith('default')
 
 
 def test_variant_getter_should_bail_if_provided_content_has_no_image(
         application):
-    pass
+    variant = zeit.web.core.template.get_image([], mock.Mock(), False)
+    assert variant is None
 
 
 def test_variant_getter_should_bail_if_extracted_content_has_no_image(
         application):
-    pass
+    variant = zeit.web.core.template.get_image(mock.Mock(), None, False)
+    assert variant is None
 
 
 def test_variant_getter_should_know_how_to_extrawurst_nextread_modules(
         application):
-    pass
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    module = zeit.web.core.block.ZONNextread([content])
+    variant = zeit.web.core.template.get_image(module)
+    assert variant.path.endswith('cinema')
 
 
 def test_variant_getter_should_extract_image_pattern_from_a_provided_module(
-        application):
-    pass
+        application, monkeypatch):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'large'.format)
+    variant = zeit.web.core.template.get_image(mock.Mock(), content)
+    assert variant.path.endswith('wide')
 
 
 def test_variant_getter_should_default_to_default_pattern_if_pattern_invalid(
-        application):
-    pass
+        application, monkeypatch):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'foobar'.format)
+    variant = zeit.web.core.template.get_image(mock.Mock(), content)
+    assert variant.path.endswith('default')
 
 
 def test_variant_getter_should_get_correct_variant_by_image_pattern(
-        application):
-    pass
+        application, monkeypatch):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'large'.format)
+    variant = zeit.web.core.template.get_image(mock.Mock(), content)
+    imagegroup = zeit.content.image.interfaces.IImages(content).image
+    assert imagegroup.get_variant_by_key('wide') == variant.context
 
 
 def test_variant_getter_should_gracefully_handle_unavailable_variant(
-        application):
-    pass
+        application, monkeypatch):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    monkeypatch.setattr(zeit.content.cp.layout, 'get_layout', mock.MagicMock())
+    variant = zeit.web.core.template.get_image(mock.Mock(), content, False)
+    assert variant is None
 
 
 def test_variant_getter_should_output_a_variant_image_if_all_went_well(
+        application, monkeypatch):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'large'.format)
+    variant = zeit.web.core.template.get_image(mock.Mock(), content)
+    assert isinstance(variant, zeit.web.core.centerpage.VariantImage)
+
+
+def test_image_view_uses_native_filename_for_legacy_images(
         application):
-    pass
+    assert False
+
+
+def test_image_view_uses_parents_basename_as_filename_if_available(
+        application):
+    assert False
+
+
+def test_image_view_uses_traversed_path_segment_if_parent_unavailable(
+        application):
+    assert False
+
+
+def test_image_view_uses_content_type_as_fileextension_if_available(
+        application):
+    assert False
+
+
+def test_image_view_uses_jpeg_as_fileextension_if_content_type_unavailable(
+        application):
+    assert False
+
+
+def test_image_view_should_handle_unicode_filename_and_extension(
+        application):
+    assert False
+
+
+def test_image_view_should_handle_unicode_mime_types_correctly(
+        application):
+    assert False
+
+
+def test_image_view_should_handle_ioerrors_on_filehandle_opening(
+        application):
+    assert False
+
+
+def test_image_view_should_open_context_image_and_provide_filehandle(
+        application):
+    assert False
+
+
+def test_image_view_should_calculate_content_length_of_context_image(
+        application):
+    assert False
+
+
+def test_image_view_should_reset_file_handle_pointer_even_on_read_error(
+        application):
+    assert False
+
+
+def test_image_view_should_set_headers_to_calculated_values(
+        application):
+    assert False
+
+
+def test_image_view_should_create_fileiter_pyramid_response(
+        application):
+    assert False
+
+
+def test_image_view_should_calculate_caching_time_from_image_context(
+        application):
+    assert False
