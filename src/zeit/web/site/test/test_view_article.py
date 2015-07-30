@@ -467,3 +467,18 @@ def test_does_not_break_when_author_has_no_display_name(
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     with mock.patch('zeit.content.author.author.Author.display_name', None):
         assert article_view.authors_list == ''
+
+
+def test_messy_archive_metadata_should_have_minimal_breadcrumbs(
+        application, monkeypatch):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'ZEI')
+    monkeypatch.setattr(
+        zeit.content.article.article.Article, u'year', None)
+    monkeypatch.setattr(
+        zeit.content.article.article.Article, u'volume', u'xx')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    # Fallback to default breadcrumbs, including the article title
+    assert article_view.title in article_view.breadcrumbs[1][0]
