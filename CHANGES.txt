@@ -4,7 +4,7 @@ Change log for zeit.web
 1.48 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1974: Remove shading hover effect for fullwidth and nextread teasers
 
 
 1.47 (2015-07-30)
@@ -15,8 +15,6 @@ Change log for zeit.web
 
 1.46 (2015-07-30)
 -----------------
-
-- ZON-1974: Remove shading hover effect for fullwidth and nextread teasers
 
 - ZON-1881: Eventverpixelung Artikel
 
