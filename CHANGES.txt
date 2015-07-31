@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-1.47 (unreleased)
+1.48 (unreleased)
+-----------------
+
+- ZON-1974: Remove shading hover effect for fullwidth and nextread teasers
+
+
+1.47 (2015-07-30)
 -----------------
 
 - ZON-1586: Introduce new image tool
