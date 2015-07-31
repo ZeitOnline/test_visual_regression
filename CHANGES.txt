@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1974: Remove shading hover effect for fullwidth and nextread teasers
 
+- ZON-1945: Add article tags
+
 - MAINT: Update CP layouts, tweak parquet styles, improve accordion script
 
 
