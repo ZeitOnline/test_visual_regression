@@ -1,7 +1,7 @@
 // RAM vertical space rules
 // Regions have vertical space as margin-bottom of $vertical-space
 // Areas have no vertical space (and as they float don't collapse margins of children)
-// Modules have vertical space on top and bottom as padding
+// Modules have vertical space on top and bottom as padding (or margin, e.g. column teaser)
 //
 // $vertcal-space * 2 is the vertical gutter between two elements (rule of thumb)
 
@@ -19,8 +19,10 @@
 		padding: 0
 		+respond-min($break-tablet-min)
 			border-top-width: 1px
-			+ .cp-region:not(.cp-region--parquet)
-				border-top-width: 1px
+			&:last-child
+				border-bottom-width: 1px
+			+ div:not(.cp-region--parquet)
+				border-top: 1px solid $zon_light_grey
 	&--topic
 		padding: 0
 	&--gallery

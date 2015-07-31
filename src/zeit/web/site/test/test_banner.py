@@ -42,7 +42,7 @@ def test_adcontroller_head_code_is_present(
     monkeypatch.setattr(
         zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
 
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
     if not is_adcontrolled(browser.contents):
         pytest.skip("not applicable due to oldschool ad configuration")
 
@@ -52,7 +52,7 @@ def test_adcontroller_head_code_is_present(
 
 
 def test_adcontroller_adtags_are_present(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
     if not is_adcontrolled(browser.contents):
         pytest.skip("not applicable due to oldschool ad configuration")
 
@@ -66,7 +66,7 @@ def test_adcontroller_finanlizer_is_present(
         testserver, testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
     if not is_adcontrolled(browser.contents):
         pytest.skip("not applicable due to oldschool ad configuration")
 
