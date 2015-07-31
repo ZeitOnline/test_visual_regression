@@ -50,6 +50,27 @@ define( [ 'jquery' ], function( $ ) {
             return formatTrackingData( data );
         },
         /**
+         * track header tags
+         * @param  {Object} $element jQuery Element with the link that was clicked
+         * @return {string}          formatted linkId-string for webtrekk call
+         */
+        headerTags: function( $element ) {
+            // in case we already have a complete ID, we do not need to calculate it
+            if ( $element.data( 'id' ) ) {
+                return this.useDataId( $element );
+            }
+            var data = [
+                getBreakpoint(),
+                'topnav', // region bzw. verortung
+                'article-tag', // area bzw. reihe
+                $element.index(), // module bzw. spalte
+                '', // subreihe
+                '', // bezeichner (image, button, text)
+                $element.attr( 'href' ) // url
+            ];
+            return formatTrackingData( data );
+        },
+        /**
          * track links with data-id attribute that contains the complete webtrekk id
          * @param  {object} $element jQuery collection with the link that was clicked
          * @return {string}          formatted linkId-string for webtrekk call
@@ -258,6 +279,9 @@ define( [ 'jquery' ], function( $ ) {
                     parquetMeta: [
                         '.parquet-meta',
                         'a:not([data-wt-click])'
+                    ],
+                    headerTags: [
+                        '.header__tags__link'
                     ]
                 },
                 debugMode = document.location.search.indexOf( '?webtrekk-clicktracking-debug' ) === 0;
