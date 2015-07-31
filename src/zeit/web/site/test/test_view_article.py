@@ -511,3 +511,18 @@ def test_article_views_have_page_numbers_in_data_attribute(testbrowser):
         '/zeit-online/article/zeit/seite-3').cssselect
     assert len(select_page3('.article-page[data-page-number="1"]')) == 0
     assert len(select_page3('.article-page[data-page-number="3"]')) == 1
+
+
+def test_messy_archive_metadata_should_have_minimal_breadcrumbs(
+        application, monkeypatch):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'ZEI')
+    monkeypatch.setattr(
+        zeit.content.article.article.Article, u'year', None)
+    monkeypatch.setattr(
+        zeit.content.article.article.Article, u'volume', u'xx')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    # Fallback to default breadcrumbs, including the article title
+    assert article_view.title in article_view.breadcrumbs[1][0]

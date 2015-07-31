@@ -954,6 +954,24 @@ def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
         assert not slides[2].is_displayed()
 
 
+def test_non_navigation_centerpage_should_have_minimal_breadcrumbs(
+        application, monkeypatch):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/main-teaser-setup')
+    monkeypatch.setattr(
+        zeit.web.site.view_centerpage.Centerpage, u'ressort', u'moep')
+    view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
+    assert view.breadcrumbs == [
+        ('Start', 'http://xml.zeit.de/index', 'ZEIT ONLINE')]
+
+
+def test_homepage_should_have_no_breadcrumbs(
+        application, monkeypatch):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
+    view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
+    assert view.breadcrumbs == []
+
+
 def test_mobile_invisibility(testbrowser):
     browser = testbrowser('/zeit-online/mobile-visible-index')
     region = '#main .cp-region:first-child.mobile-hidden'
