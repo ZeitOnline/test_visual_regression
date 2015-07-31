@@ -4,7 +4,7 @@ Change log for zeit.web
 1.48 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Update CP layouts, tweak parquet styles, improve accordion script
 
 
 1.47 (2015-07-30)
@@ -21,8 +21,6 @@ Change log for zeit.web
 - ZON-1665: Eventverpixelung Parkett-Meta
 
 - ZON-1976: Adjust teaser margins
-
-- MAINT: Update CP layouts, tweak parquet styles, improve accordion script
 
 - FIX: Don't break on other kinds of empty image captions
 
