@@ -1,4 +1,4 @@
-<div class="{{ 'cp-region' | with_mods(region.kind) }}{% if not(region.visible_mobile) %} mobile-hidden{% endif %}">
+<div class="{{ 'cp-region' | with_mods(region.kind) }}{% if region.visible_mobile == False %} mobile-hidden{% endif %}">
     {%- block before_area_list %}{% endblock %}
     {%- for area in region.values() | map('get_area') %}
         {% include "zeit.web.site:templates/inc/area/includer.html" %}
