@@ -5,13 +5,14 @@
         id="zon-large"
         title="Großer Teaser"
         image_pattern="zon-large"
-        areas="solo duo major minor ranking parquet"
+        areas="duo major ranking parquet"
         />
     <layout
         id="zon-small"
         title="Kleiner Teaser"
         image_pattern="zon-thumbnail"
-        areas="solo duo major minor ranking parquet"
+        areas="duo major minor ranking parquet spektrum"
+        default="major minor parquet"
         />
     <layout
         id="zon-topic"
@@ -39,27 +40,28 @@
         id="zon-fullwidth"
         title="Vollbreiter Aufmacher Text auf Bild"
         image_pattern="zon-fullwidth"
-        areas="solo duo major minor ranking parquet"
+        areas="solo major"
+        default="solo"
         />
     <layout
         id="zon-classic"
         title="Vollbreiter Aufmacher klassisch"
         image_pattern="zon-fullwidth"
-        areas="solo ranking"
+        areas="solo"
         />
      <layout
         id="zon-parquet-large"
         title="Rebrush 2014: Parkett – großer Teaser"
         image_pattern="zon-large"
         image_positions="true"
-        areas="solo duo major minor ranking parquet"
+        areas="parquet"
         />
     <layout
         id="zon-parquet-small"
         title="Rebrush 2014: Parkett – kleiner Teaser"
         image_pattern="zon-thumbnail"
         image_positions="true"
-        areas="solo duo major minor ranking parquet spektrum"
+        areas="parquet"
         />
 
     <layout
@@ -67,6 +69,7 @@
         title="Kurzteaser (für News)"
         image_positions="true"
         areas="newsticker overview"
+        default="overview"
         />
 
     <layout
@@ -141,7 +144,6 @@
         title="Kleiner Teaser mit kleinem Bild und Teaserliste"
         image_pattern="148x84"
         areas="solo duo major minor ranking parquet"
-        default="major"
         available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
@@ -191,7 +193,6 @@
         title="Parkett – standard"
         image_positions="true"
         areas="solo duo major minor ranking parquet"
-        default="solo"
         available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
