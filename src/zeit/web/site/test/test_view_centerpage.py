@@ -116,7 +116,10 @@ def test_default_teaser_should_match_css_selectors(
     area = mock.Mock()
     area.kind = 'solo'
 
-    html_str = tpl.render(teaser=teaser, layout='teaser', view=view, area=area)
+    module = mock.Mock()
+
+    html_str = tpl.render(
+        teaser=teaser, layout='teaser', view=view, area=area, module=module)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('article.teaser h2.teaser__heading')) == 1
@@ -157,7 +160,7 @@ def test_small_teaser_should_display_no_image_on_mobile(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(320, 480)
-    driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     box = driver.find_elements_by_class_name('cp-area--major')[0]
     teaser_image = box.find_elements_by_class_name('teaser-small__media')[0]
 
@@ -179,23 +182,22 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
     teaser = driver.find_elements_by_class_name('teaser-fullwidth')[0]
     helper = driver.find_elements_by_class_name(
         'teaser-fullwidth__container')[0]
+    script = 'return window.innerWidth == document.documentElement.clientWidth'
 
     assert teaser.is_displayed(), 'Fullwidth teaser missing'
     assert helper.is_displayed(), 'Fullwidth teaser helper missing'
 
     if screen_size[0] == 768:
         # testbrowser has differing width due to in-/visible scrollbar
-        width = driver.execute_script('return jQuery(window).width()')
-        innerwidth = driver.execute_script('return window.innerWidth')
-        if width == innerwidth:
+        invisible_scrollbar = driver.execute_script(script)
+        if invisible_scrollbar:
             assert helper.size.get('width') == 553
         else:
             assert helper.size.get('width') == 542
 
     elif screen_size[0] == 980:
-        width = driver.execute_script('return jQuery(window).width()')
-        innerwidth = driver.execute_script('return window.innerWidth')
-        if width == innerwidth:
+        invisible_scrollbar = driver.execute_script(script)
+        if invisible_scrollbar:
             assert helper.size.get('width') == 653
         else:
             assert helper.size.get('width') == 643
@@ -304,7 +306,7 @@ def test_centerpage_view_should_have_topic_links(testserver):
 
 
 def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
-    browser = testbrowser('/zeit-online/fullwidth-teaser')
+    browser = testbrowser('/zeit-online/index')
 
     fullwidth = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
     content = browser.cssselect('.cp-area.cp-area--major')
@@ -968,3 +970,14 @@ def test_homepage_should_have_no_breadcrumbs(
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
     view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
     assert view.breadcrumbs == []
+
+
+def test_mobile_invisibility(testbrowser):
+    browser = testbrowser('/zeit-online/mobile-visible-index')
+    region = '#main .cp-region:first-child.mobile-hidden'
+    area = '#main .cp-region:nth-child(2) .cp-area:first-child.mobile-hidden'
+    teaser = '#main .cp-region:nth-child(2) \
+        .cp-area:nth-child(2) article:first-of-type.mobile-hidden'
+    assert len(browser.cssselect(region)) == 1
+    assert len(browser.cssselect(area)) == 1
+    assert len(browser.cssselect(teaser)) == 1

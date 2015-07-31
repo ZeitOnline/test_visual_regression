@@ -39,7 +39,7 @@
         },
 
         toggleItem: function( item ) {
-            if ( !item.data( 'active' ) ) {
+            if ( item.data( 'active' ) === false ) {
                 this.hideItem( $( this.items ).not( item ) );
                 this.showItem( item );
             }
