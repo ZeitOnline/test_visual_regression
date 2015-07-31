@@ -950,3 +950,14 @@ def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
         assert slides[0].is_displayed()
         assert not slides[1].is_displayed()
         assert not slides[2].is_displayed()
+
+
+def test_mobile_invisibility(testbrowser):
+    browser = testbrowser('/zeit-online/mobile-visible-index')
+    region = '#main .cp-region:first-child.mobile-hidden'
+    area = '#main .cp-region:nth-child(2) .cp-area:first-child.mobile-hidden'
+    teaser = '#main .cp-region:nth-child(2) \
+        .cp-area:nth-child(2) article:first-of-type.mobile-hidden'
+    assert len(browser.cssselect(region)) == 1
+    assert len(browser.cssselect(area)) == 1
+    assert len(browser.cssselect(teaser)) == 1
