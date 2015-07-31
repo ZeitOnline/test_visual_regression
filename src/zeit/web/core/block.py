@@ -254,8 +254,10 @@ class Image(BaseImage):
         self.layout = model_block.layout
 
         if model_block.xml is not None:
-            bu = unicode(_inline_html(model_block.xml.find('bu')))
+            bu_node = model_block.xml.find('bu')
+            bu = unicode(_inline_html(bu_node) or '').strip()
             if bu:
+                # Repair encoded entities
                 bu = lxml.html.fromstring(bu).text_content().strip()
 
             self.align = model_block.xml.get('align')

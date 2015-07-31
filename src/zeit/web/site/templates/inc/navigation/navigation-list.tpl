@@ -7,7 +7,7 @@ itemtype="http://schema.org/SiteNavigationElement"
 {% endif %}>
 	{% for i in items -%}
 	{% set section = items[i] %}
-    {% set id = section.item_id | getIdFromWebtrekkString %}
+    {% set id = section.item_id | pop_from_dotted_name %}
 	<li class="{{ class }}__item" data-id="{{ id if id else section.item_id }}" {% if section.has_children() %} data-feature="dropdown"{% endif %}>
 		<a class="{{ class }}__link{% if id in (view.ressort,
         view.sub_ressort) %} {{ class }}__link--current{% endif %}" href="{{

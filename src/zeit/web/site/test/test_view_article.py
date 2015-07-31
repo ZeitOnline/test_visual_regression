@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait
 
+from zeit.cms.checkout.helper import checked_out
 import zeit.web.site.view_article
 import zeit.cms.interfaces
 
@@ -318,6 +319,18 @@ def test_article_has_news_source_empty():
     assert view.news_source == ''
 
 
+def test_article_news_source_should_not_break_without_product():
+    # While product is required in vivi, we've seen content without one
+    # in production preview (presumably while the article is being created).
+    content = mock.Mock()
+    content.copyrights = None
+    content.ressort = 'News'
+    content.product = None
+
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    assert view.news_source == ''
+
+
 def test_adcontroller_values_return_values_on_article(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/infoboxartikel')
@@ -389,6 +402,17 @@ def test_article_column_author_image_should_be_present(testbrowser):
     ratio = img[0].get('data-ratio')
     src = img[0].get('src')
     assert src != "" and ratio != ""
+
+
+def test_article_should_not_break_on_author_without_image(
+        testbrowser, workingcopy):
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/author3')
+    with checked_out(author) as co:
+        co.image_group = None
+    browser = testbrowser('/zeit-online/cp-content/kolumne')
+    assert not browser.cssselect(
+        '.column-heading__author .column-heading__media-item')
 
 
 def test_article_column_should_be_identifiable_by_suitable_css_class(

@@ -63,6 +63,36 @@ define( [ 'jquery' ], function( $ ) {
             return formatTrackingData( data );
         },
         /**
+         * track elements in the parquet-meta section
+         * definition: https://docs.google.com/spreadsheets/d/1uY8XXULPq7zUre9prBWiKDaBQercLmAEENCVF8LQk4Q/edit#gid=1056411343
+         * @param  {Object} $element jQuery Element with the link that was clicked
+         * @return {string}          formatted linkId-string for webtrekk call
+         */
+        parquetMeta: function( $element ) {
+
+            var linkClassName = $element.get( 0 ).className.split( ' ' )[0],
+                linkType,
+                data;
+
+            if ( linkClassName === 'parquet-meta__title' ) {
+                linkType = sanitizeString( $element.text().trim().toLowerCase() );
+            } else {
+                linkType = linkClassName.split( '__' ).pop().replace( '-', '' );
+            }
+
+            data = [
+                getBreakpoint(),
+                'parquet', // Verortung
+                $element.index( '.parquet-meta a' ) + 1, // Reihe (insgesamt, nicht aktueller Riegel)
+                '1', // Spalte
+                '', // Teasertyp, hier leer
+                linkType, // Name (bei Ressort) oder Linktyp (politik|wirtschaft / topiclink|morelink)
+                $element.attr( 'href' ) // Ziel-URL
+            ];
+
+            return formatTrackingData( data );
+        },
+        /**
          * track links which are inside an article text
          * @param  {object} $element jQuery collection with the link that was clicked
          * @param  {object} $page    jQuery collection with the page containing the clicked link
@@ -118,6 +148,28 @@ define( [ 'jquery' ], function( $ ) {
      */
     getBreakpoint = function() {
         return window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value;
+    },
+    /**
+     * returns a string that is webtrekk-safe
+     * @param  {string}     string from
+     * @return {string}     string that only contains characters, numbers and minus
+     */
+    sanitizeString = function( str ) {
+        var map = {
+                'ä': 'ae',
+                'ö': 'oe',
+                'ü': 'ue',
+                'Ä': 'Ae',
+                'Ö': 'Oe',
+                'Ü': 'Ue',
+                'ß': 'ss',
+                '_': '-'
+            },
+            transliterate = function( m ) {
+                return map[m] || '';
+            };
+
+        return str.replace( /[^A-Za-z0-9\-]/g, transliterate );
     },
     /**
      *
@@ -202,6 +254,10 @@ define( [ 'jquery' ], function( $ ) {
                     useDataId: [
                         '.main_nav, .footer, .article-interactions, #snapshot, #servicebox',
                         'a[data-id]:not([data-wt-click])'
+                    ],
+                    parquetMeta: [
+                        '.parquet-meta',
+                        'a:not([data-wt-click])'
                     ]
                 },
                 debugMode = document.location.search.indexOf( '?webtrekk-clicktracking-debug' ) === 0;
