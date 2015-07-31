@@ -8,7 +8,7 @@ import zeit.cms.interfaces
 import zeit.web.core.byline
 
 
-def test_byline_should_be_represented_as_a_nested_tuple(application):
+def test_article_byline_should_be_represented_as_a_nested_tuple(application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     byline = zeit.web.core.byline.ITeaserByline(article)
     assert byline.context == article
@@ -24,6 +24,17 @@ def test_byline_should_be_represented_as_a_nested_tuple(application):
                 ('enum', (
                     ('text', u'Oliver Fritsch'),)),
                 ('text', u'London')))))]
+
+
+def test_quiz_byline_should_be_represented_as_a_nested_tuple(application):
+    quiz = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/quiz/quiz-workaholic')
+    byline = zeit.web.core.byline.ITeaserByline(quiz)
+    assert byline.context == quiz
+    assert byline == [
+        ('text', u'Von'),
+        ('enum', (
+            ('text', u'Nicole Sagener'),))]
 
 
 @pytest.fixture(scope='function')
@@ -78,6 +89,7 @@ def test_byline_should_handle_interview_exception(patched_byline):
 def test_byline_should_be_empty_if_no_authors_given(patched_byline):
     context = mock.Mock()
     context.authorships = [None]
+    context.authors = [None]
     byline = patched_byline(context)
     byline.append(('text', u'foo'))
     byline.groups()
@@ -89,7 +101,7 @@ def test_teaser_byline_should_expand_authors_as_text(monkeypatch):
     author.target.display_name = u'Max Mustermann'
     author2 = mock.Mock()
     author2.target.display_name = u'Anne Mustermann'
-    cls = zeit.web.core.byline.ArticleTeaserByline
+    cls = zeit.web.core.byline.TeaserByline
     monkeypatch.setattr(cls, '__init__', lambda s: list.__init__(s))
     assert tuple(cls().expand_authors([author, author2])) == (
         ('text', u'Max Mustermann'), ('text', u'Anne Mustermann'))
