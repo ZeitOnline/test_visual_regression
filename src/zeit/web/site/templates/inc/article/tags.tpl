@@ -1,4 +1,4 @@
-{% if view.ranked_tags.count | length or True %}
+{% if view.ranked_tags | length %}
 	<div class="article-tags article__item">
 		<h6>Schlagworte</h6>
 		<ul>
