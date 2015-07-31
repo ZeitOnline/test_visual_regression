@@ -157,7 +157,7 @@ def test_small_teaser_should_display_no_image_on_mobile(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(320, 480)
-    driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     box = driver.find_elements_by_class_name('cp-area--major')[0]
     teaser_image = box.find_elements_by_class_name('teaser-small__media')[0]
 
@@ -179,23 +179,22 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
     teaser = driver.find_elements_by_class_name('teaser-fullwidth')[0]
     helper = driver.find_elements_by_class_name(
         'teaser-fullwidth__container')[0]
+    script = 'return window.innerWidth == document.documentElement.clientWidth'
 
     assert teaser.is_displayed(), 'Fullwidth teaser missing'
     assert helper.is_displayed(), 'Fullwidth teaser helper missing'
 
     if screen_size[0] == 768:
         # testbrowser has differing width due to in-/visible scrollbar
-        width = driver.execute_script('return jQuery(window).width()')
-        innerwidth = driver.execute_script('return window.innerWidth')
-        if width == innerwidth:
+        invisible_scrollbar = driver.execute_script(script)
+        if invisible_scrollbar:
             assert helper.size.get('width') == 553
         else:
             assert helper.size.get('width') == 542
 
     elif screen_size[0] == 980:
-        width = driver.execute_script('return jQuery(window).width()')
-        innerwidth = driver.execute_script('return window.innerWidth')
-        if width == innerwidth:
+        invisible_scrollbar = driver.execute_script(script)
+        if invisible_scrollbar:
             assert helper.size.get('width') == 653
         else:
             assert helper.size.get('width') == 643
@@ -304,7 +303,7 @@ def test_centerpage_view_should_have_topic_links(testserver):
 
 
 def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
-    browser = testbrowser('/zeit-online/fullwidth-teaser')
+    browser = testbrowser('/zeit-online/index')
 
     fullwidth = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
     content = browser.cssselect('.cp-area.cp-area--major')
