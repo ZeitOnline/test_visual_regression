@@ -58,7 +58,8 @@ def test_article_should_have_breadcrumbs(testserver, testbrowser):
     assert len(breadcrumbs) == 1
 
 
-def test_article_should_have_correct_breadcrumb_structure(testserver, testbrowser):
+def test_article_should_have_correct_breadcrumb_structure(
+        testserver, testbrowser):
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
     breadcrumbs_items = browser.cssselect('.footer-breadcrumbs__item')
     assert len(breadcrumbs_items) == 3
