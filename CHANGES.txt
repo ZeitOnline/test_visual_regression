@@ -4,7 +4,7 @@ Change log for zeit.web
 1.48 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Fix byline for generic ICMSContent without authorships (e.g. quiz)
 
 
 1.47 (2015-07-30)

@@ -74,15 +74,21 @@ class Byline(list):
             yield 'text', author.target.display_name
 
     def groups(self):
-        authors, groups = filter(bool, self.context.authorships), ()
+        authors = filter(bool, self.context.authorships)
 
         if not authors:
-            self[:] = []  # Bail out if we don't have any authors.
+            authors = filter(bool, self.context.authors)
+            if not authors:
+                self[:] = []  # Bail out if we don't have any authors.
+            else:
+                authors = tuple(('text', a) for a in authors)
+                self.append(('enum', authors))
             return
 
         def get_loc(author):
             return author.location or None
 
+        groups = ()
         cluster = itertools.groupby(sorted(authors, key=get_loc), get_loc)
         for location, sublist in cluster:
             group = ('enum', tuple(self.expand_authors(sublist)))
@@ -94,32 +100,28 @@ class Byline(list):
 
 
 @grokcore.component.implementer(ITeaserByline)
-@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
-class ArticleTeaserByline(Byline):
+@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
+class TeaserByline(Byline):
     pass
 
 
 @grokcore.component.implementer(ITeaserByline)
 @grokcore.component.adapter(zeit.content.link.interfaces.ILink)
-class LinkTeaserByline(Byline):
+class LinkTeaserByline(TeaserByline):
 
-    def __init__(self, context):
-        super(Byline, self).__init__()
-        self.context = context
-        self.from_()
-        self.interview()
-        self.groups()
+    def genre(self):
+        pass
 
 
-@grokcore.component.implementer(ITeaserByline)
-@grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery)
-class GalleryTeaserByline(Byline):
+@grokcore.component.implementer(IContentByline)
+@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
+class ContentByline(Byline):
     pass
 
 
 @grokcore.component.implementer(IContentByline)
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
-class ArticleContentByline(Byline):
+class ArticleContentByline(ContentByline):
 
     genres = {'leserartikel': 'ein'}
 
