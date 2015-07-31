@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.48 (unreleased)
+1.48 (2015-07-31)
 -----------------
 
 - ZON-1942: Implement breadcrumbs
