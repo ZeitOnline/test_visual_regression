@@ -133,8 +133,11 @@ class Centerpage(
         # Search forms
         if zeit.web.core.utils.find_block(
                 self.context, module='search-form') is not None:
-            breadcrumbs.extend([(u'Suchergebnisse für "{}"'.format(
-                self.request.GET['q']), None)])
+            try:
+                breadcrumbs.extend([(u'Suchergebnisse für "{}"'.format(
+                    self.request.GET['q']), None)])
+            except KeyError:
+                pass
             return breadcrumbs
         # "Angebote" and "Administratives"
         if self.ressort in ('angebote', 'administratives', 'news'):
