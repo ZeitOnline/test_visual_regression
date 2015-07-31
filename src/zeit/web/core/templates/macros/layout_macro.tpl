@@ -95,20 +95,22 @@
     <div>
         <script type="text/javascript" id="{{ scriptname }}">
             if (typeof AdController !== 'undefined' && ZMO.clientWidth {{ operator | safe }} ZMO.mobileWidth) {
-                var elem = document.createElement('div');
-                elem.id = "iqadtile{{ banner.tile }}";
-                elem.className = "ad ad-{{ type }} ad-{{type}}--{{ banner.tile }} ad-{{type}}--{{ banner.tile }}-on-{{ pagetype }}";
-                elem.setAttribute('data-banner-type', '{{ type }}');
-                {% if banner.label and not(mobile) -%}
-                    var label = document.createElement('span');
-                    label.className = "ad__label";
-                    label.textContent = "{{ banner.label }}";
-                    elem.appendChild(label);
-                {% endif -%}
-                document.getElementById('{{ scriptname }}').parentNode.appendChild(elem);
-                AdController.render('iqadtile{{ banner.tile }}');
-                if (console && typeof console.info === 'function') {
-                    console.info('AdController ' + AdController.VERSION + ' tile {{ banner.tile }} {{ type }}')
+                if( ! document.getElementById( "iqadtile{{ banner.tile }}" ) ) {
+                    var elem = document.createElement('div');
+                    elem.id = "iqadtile{{ banner.tile }}";
+                    elem.className = "ad ad-{{ type }} ad-{{type}}--{{ banner.tile }} ad-{{type}}--{{ banner.tile }}-on-{{ pagetype }}";
+                    elem.setAttribute('data-banner-type', '{{ type }}');
+                    {% if banner.label and not(mobile) -%}
+                        var label = document.createElement('span');
+                        label.className = "ad__label";
+                        label.textContent = "{{ banner.label }}";
+                        elem.appendChild(label);
+                    {% endif -%}
+                    document.getElementById('{{ scriptname }}').parentNode.appendChild(elem);
+                    AdController.render('iqadtile{{ banner.tile }}');
+                    if (console && typeof console.info === 'function') {
+                        console.info('AdController ' + AdController.VERSION + ' tile {{ banner.tile }} {{ type }}')
+                    }
                 }
             }
         </script>
