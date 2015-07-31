@@ -4,6 +4,8 @@ Change log for zeit.web
 1.48 (unreleased)
 -----------------
 
+- ZON-1994: Make mobile hidden elements available
+
 - ZON-1974: Remove shading hover effect for fullwidth and nextread teasers
 
 - MAINT: Update CP layouts, tweak parquet styles, improve accordion script

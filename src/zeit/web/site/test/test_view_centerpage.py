@@ -116,7 +116,10 @@ def test_default_teaser_should_match_css_selectors(
     area = mock.Mock()
     area.kind = 'solo'
 
-    html_str = tpl.render(teaser=teaser, layout='teaser', view=view, area=area)
+    module = mock.Mock()
+
+    html_str = tpl.render(
+        teaser=teaser, layout='teaser', view=view, area=area, module=module)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('article.teaser h2.teaser__heading')) == 1
@@ -949,3 +952,14 @@ def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
         assert slides[0].is_displayed()
         assert not slides[1].is_displayed()
         assert not slides[2].is_displayed()
+
+
+def test_mobile_invisibility(testbrowser):
+    browser = testbrowser('/zeit-online/mobile-visible-index')
+    region = '#main .cp-region:first-child.mobile-hidden'
+    area = '#main .cp-region:nth-child(2) .cp-area:first-child.mobile-hidden'
+    teaser = '#main .cp-region:nth-child(2) \
+        .cp-area:nth-child(2) article:first-of-type.mobile-hidden'
+    assert len(browser.cssselect(region)) == 1
+    assert len(browser.cssselect(area)) == 1
+    assert len(browser.cssselect(teaser)) == 1
