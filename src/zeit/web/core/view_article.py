@@ -117,9 +117,9 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def syndication_source(self):
-        if self.context.product.id == 'TGS':
+        if self.context.product and self.context.product.id == 'TGS':
             return 'http://www.tagesspiegel.de'
-        elif self.context.product.id == 'HaBl':
+        elif self.context.product and self.context.product.id == 'HaBl':
             return 'http://www.handelsblatt.com'
         else:
             return
@@ -222,10 +222,10 @@ class Article(zeit.web.core.view.Content):
     def news_source(self):
         """1:1 implementation of questionable xslt construct"""
 
-        if self.context.ressort == 'News' and \
-           self.context.product.id == 'News':
+        if (self.context.ressort == 'News' and
+                self.context.product and self.context.product.id == 'News'):
             return 'dpa'
-        elif self.context.product.id == 'SID':
+        elif self.context.product and self.context.product.id == 'SID':
             return 'Sport-Informations-Dienst'
         else:
             try:

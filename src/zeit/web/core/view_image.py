@@ -1,4 +1,5 @@
 import os.path
+import logging
 import urllib2
 
 from pyramid.view import view_config
@@ -6,42 +7,75 @@ import pyramid.httpexceptions
 import pyramid.response
 import zope.component
 
+import zeit.cms.interfaces
 import zeit.connector.interfaces
 import zeit.content.image.interfaces
 
+import zeit.web
+import zeit.web.core.cache
 import zeit.web.core.view
+
+
+log = logging.getLogger(__name__)
 
 
 @view_config(context=zeit.content.image.interfaces.IImage)
 class Image(zeit.web.core.view.Base):
 
     def __call__(self):
-        connector = zope.component.getUtility(
-            zeit.connector.interfaces.IConnector)
-        if not isinstance(connector, zeit.connector.connector.Connector):
-            # Default case: filesystem. We can avoid loading the image
-            # contents into memory here, and instead simply tell the web server
-            # to stream out the file by giving its absolute path.
-            repository_path = connector.repository_path
-            if not repository_path.endswith('/'):
-                repository_path += '/'
-            response = pyramid.response.FileResponse(
-                self.context.uniqueId.replace(
-                    'http://xml.zeit.de/', repository_path),
-                content_type=self.context.mimeType)
-        else:
-            # Special case for DAV (preview environment)
-            response = self.request.response
-            response.app_iter = pyramid.response.FileIter(self.context.open())
+        resp = self.request.response
+        if self.content_length:
+            resp.headers['Content-Length'] = self.content_length
+        resp.headers['Content-Disposition'] = self.content_disposition
+        resp.headers['Content-Type'] = resp.content_type = self.content_type
+        resp.app_iter = pyramid.response.FileIter(self.filehandle)
+        resp.cache_expires(zeit.web.core.cache.ICachingTime(self.context))
+        return resp
 
-        # Workaround for <https://github.com/Pylons/webob/issues/130>
-        response.content_type = self.context.mimeType.encode('utf-8')
-        response.headers['Content-Type'] = response.content_type
-        response.headers['Content-Length'] = str(self.context.size)
-        response.headers['Content-Disposition'] = 'inline; filename="%s"' % (
-            os.path.basename(self.context.uniqueId).encode('utf8'))
-        response.cache_expires(zeit.web.core.cache.ICachingTime(self.context))
-        return response
+    @zeit.web.reify
+    def content_disposition(self):
+        if self.context.__name__ in self.context.__parent__:
+            name = zeit.cms.interfaces.normalize_filename(
+                self.context.__name__)
+            return 'inline; filename="{}"'.format(name)
+        try:
+            name = os.path.basename(
+                self.context.__parent__.uniqueId.rstrip('/'))
+        except:
+            name = self.request.traversed[-1]
+
+        ext = self.content_type.split('/')[-1]
+        name = zeit.cms.interfaces.normalize_filename(name)
+        return 'inline; filename="{}.{}"'.format(name, ext)
+
+    @zeit.web.reify
+    def content_type(self):
+        try:
+            return str(self.context.mimeType)
+        except (AttributeError, UnicodeEncodeError):
+            return 'image/jpeg'
+
+    @zeit.web.reify
+    def content_length(self):
+        try:
+            self.filehandle.seek(0, 2)
+            length = str(self.filehandle.tell())
+        except Exception, err:
+            log.warning(u'Content-Length indeterminable: {} at {}'.format(
+                err.message, self.request.path_qs))
+        else:
+            return length
+        finally:
+            self.filehandle.seek(0, 0)
+
+    @zeit.web.reify
+    def filehandle(self):
+        try:
+            return self.context.open()
+        except (AttributeError, IOError), err:
+            log.warning(u'Image not openable: {} at {}'.format(
+                err.message, self.request.path_qs))
+            raise pyramid.httpexceptions.HTTPNotFound(err.message)
 
 
 @view_config(context=zeit.content.video.interfaces.IVideo,

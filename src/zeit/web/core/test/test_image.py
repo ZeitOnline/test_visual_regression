@@ -4,9 +4,14 @@ from StringIO import StringIO
 
 from PIL import Image
 from pytest import mark
+import mock
+import pyramid.httpexceptions
+import pytest
 import requests
+import zope.interface.declarations
 
 import zeit.cms.interfaces
+import zeit.content.article.interfaces
 
 
 def test_image_download(appbrowser):
@@ -95,3 +100,282 @@ def test_spektrum_images_should_set_caching_headers(testserver, app_settings):
         testserver.url))
     assert resp.headers.get('Cache-Control') == 'max-age={}'.format(
         app_settings.get('caching_time_external'))
+
+
+def test_variant_image_should_provide_desired_attributes(application):
+    group = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-4')
+    meta = zeit.content.image.interfaces.IImageMetadata(group)
+    variant = group.get_variant_by_key('default')
+    img = zeit.web.core.interfaces.ITeaserImage(variant)
+
+    assert img.alt == img.attr_alt == meta.alt
+    assert img.title == img.attr_title == meta.title
+    assert img.caption == meta.caption
+    assert img.copyright == meta.copyrights
+    assert img.image_pattern == img.variant == variant.name
+    assert img.ratio == variant.ratio
+    assert img.path == 'zeit-online/cp-content/ig-4/default'
+
+
+def test_variant_jinja_test_should_recognize_variants(application):
+    assert zeit.web.core.template.variant(42) is False
+
+    group = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-4')
+    variant = group.get_variant_by_key('default')
+    img = zeit.web.core.interfaces.ITeaserImage(variant)
+
+    assert zeit.web.core.template.variant(img) is True
+
+
+def test_variant_getter_should_fallback_to_fallback_if_fallback_is_enabled(
+        application):
+    variant = zeit.web.core.template.get_image(None, fallback=True)
+    assert variant.image_group.uniqueId.endswith('/default/teaser_image/')
+
+
+def test_variant_getter_should_fallback_to_fallback_if_fallback_is_disabled(
+        application):
+    variant = zeit.web.core.template.get_image(None, fallback=False)
+    assert variant is None
+
+
+def test_variant_getter_should_favour_provided_content_over_extracted(
+        application):
+    module = [zeit.cms.interfaces.ICMSContent(
+              'http://xml.zeit.de/zeit-online/cp-content/article-01')]
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-02')
+    variant = zeit.web.core.template.get_image(module, content)
+    assert variant.path.endswith('default')
+
+
+def test_variant_getter_should_extract_content_if_not_explicitly_provided(
+        application):
+    module = [zeit.cms.interfaces.ICMSContent(
+              'http://xml.zeit.de/zeit-online/cp-content/article-01')]
+    variant = zeit.web.core.template.get_image(module)
+    assert variant.path.endswith('default')
+
+
+def test_variant_getter_should_bail_if_provided_content_has_no_image(
+        application):
+    variant = zeit.web.core.template.get_image([], mock.Mock(), False)
+    assert variant is None
+
+
+def test_variant_getter_should_bail_if_extracted_content_has_no_image(
+        application):
+    variant = zeit.web.core.template.get_image(mock.Mock(), None, False)
+    assert variant is None
+
+
+def test_variant_getter_should_know_how_to_extrawurst_nextread_modules(
+        application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    module = zeit.web.core.block.ZONNextread([content])
+    variant = zeit.web.core.template.get_image(module)
+    assert variant.path.endswith('cinema')
+
+
+def test_variant_getter_should_extract_image_pattern_from_a_provided_module(
+        application, monkeypatch):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'large'.format)
+    variant = zeit.web.core.template.get_image(mock.Mock(), content)
+    assert variant.path.endswith('wide')
+
+
+def test_variant_getter_should_default_to_default_pattern_if_pattern_invalid(
+        application, monkeypatch):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'foobar'.format)
+    variant = zeit.web.core.template.get_image(mock.Mock(), content)
+    assert variant.path.endswith('default')
+
+
+def test_variant_getter_should_get_correct_variant_by_image_pattern(
+        application, monkeypatch):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'large'.format)
+    variant = zeit.web.core.template.get_image(mock.Mock(), content)
+    imagegroup = zeit.content.image.interfaces.IImages(content).image
+    assert imagegroup.get_variant_by_key('wide') == variant.context
+
+
+def test_variant_getter_should_gracefully_handle_unavailable_variant(
+        application, monkeypatch):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    monkeypatch.setattr(zeit.content.cp.layout, 'get_layout', mock.MagicMock())
+    variant = zeit.web.core.template.get_image(mock.Mock(), content, False)
+    assert variant is None
+
+
+def test_variant_getter_should_output_a_variant_image_if_all_went_well(
+        application, monkeypatch):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'large'.format)
+    variant = zeit.web.core.template.get_image(mock.Mock(), content)
+    assert isinstance(variant, zeit.web.core.centerpage.VariantImage)
+
+
+def test_image_view_uses_native_filename_for_legacy_images():
+    context = mock.Mock()
+    context.__name__ = 'foobar.bmp'
+    context.__parent__ = ['foobar.bmp']
+    context.mimeType = u'mööp'
+    view = zeit.web.core.view_image.Image(context, None)
+    assert view.content_disposition == 'inline; filename="foobar.bmp"'
+
+
+def test_image_view_uses_parents_basename_as_filename_if_available():
+    context = mock.Mock()
+    context.__name__ = 'foobar.bmp'
+    context.__parent__ = mock.MagicMock()
+    context.__parent__.__iter__.return_value = []
+    context.__parent__.uniqueId = '/lorem/ipsum/dolorset'
+    context.mimeType = u'mööp'
+    view = zeit.web.core.view_image.Image(context, None)
+    assert view.content_disposition == 'inline; filename="dolorset.jpeg"'
+
+
+def test_image_view_uses_traversed_path_segment_if_parent_unavailable():
+    context = mock.Mock()
+    context.__name__ = 'foobar.bmp'
+    context.__parent__ = []
+    context.mimeType = u'mööp'
+    request = mock.Mock()
+    request.traversed = ['lorem', 'ipsum']
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view.content_disposition == 'inline; filename="ipsum.jpeg"'
+
+
+def test_image_view_uses_content_type_as_fileextension_if_available():
+    context = mock.Mock()
+    context.__name__ = 'foobar.bmp'
+    context.__parent__ = []
+    context.mimeType = 'image/png'
+    request = mock.Mock()
+    request.traversed = ['dolorset']
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view.content_disposition == 'inline; filename="dolorset.png"'
+
+
+def test_image_view_uses_jpeg_as_fileextension_if_content_type_unavailable():
+    context = mock.Mock()
+    context.__name__ = 'foobar.bmp'
+    context.__parent__ = []
+    context.mimeType = u'mööp'
+    request = mock.Mock()
+    request.traversed = ['dolorset']
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view.content_disposition == 'inline; filename="dolorset.jpeg"'
+
+
+def test_image_view_should_handle_unicode_filename_and_extension():
+    context = mock.Mock()
+    context.__name__ = u'porträt.jpg'
+    context.__parent__ = []
+    context.mimeType = u'image/gemälde'
+    request = mock.Mock()
+    request.traversed = [u'wunder', u'schönes porträt']
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view.content_disposition == (
+        'inline; filename="schoenes-portraet.jpeg"')
+
+
+def test_image_view_should_handle_ioerrors_on_filehandle_opening():
+    def broken_func():
+        raise IOError('This file is broken!')
+
+    context = mock.Mock()
+    context.open = broken_func
+    view = zeit.web.core.view_image.Image(context, mock.Mock())
+    with pytest.raises(pyramid.httpexceptions.HTTPNotFound):
+        view.filehandle
+
+
+def test_image_view_should_open_context_image_and_provide_filehandle():
+    context = mock.Mock()
+    mockfile = object()
+    context.open.return_value = mockfile
+    view = zeit.web.core.view_image.Image(context, None)
+    assert view.filehandle is mockfile
+    assert context.open.call_count == 1
+
+
+def test_image_view_should_calculate_content_length_of_context_image():
+    context = mock.Mock()
+    mockfile = mock.Mock()
+    mockfile.tell.return_value = 42
+    context.open.return_value = mockfile
+    request = mock.Mock()
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view.content_length == '42'
+    assert mockfile.seek.call_args_list == [((0, 2), {}), ((0, 0), {})]
+
+
+def test_image_view_should_reset_file_handle_pointer_even_on_read_error():
+    def broken_func():
+        raise IOError('This file is broken!')
+
+    context = mock.Mock()
+    mockfile = mock.Mock()
+    mockfile.tell = broken_func
+    context.open.return_value = mockfile
+    request = mock.Mock()
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view.content_length is None
+    assert mockfile.seek.call_args == ((0, 0), {})
+
+
+def test_image_view_should_set_headers_to_calculated_values(application):
+    context = mock.Mock()
+    context.__name__ = 'foobar.jpg'
+    context.__parent__ = ['foobar.jpg']
+    mockfile = mock.Mock()
+    mockfile.tell.return_value = 4212345
+    context.open.return_value = mockfile
+    context.mimeType = 'foo/bar'
+    interface = zeit.content.article.interfaces.IArticle
+    zope.interface.declarations.alsoProvides(context, interface)
+    request = mock.Mock()
+    request.response.headers = {}
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view().headers == {
+        'Content-Disposition': 'inline; filename="foobar.jpg"',
+        'Content-Length': '4212345',
+        'Content-Type': "foo/bar"}
+
+
+def test_image_view_should_create_fileiter_pyramid_response(application):
+    context = mock.Mock()
+    context.__name__ = 'foobar.jpg'
+    context.__parent__ = ['foobar.jpg']
+    mockfile = mock.Mock()
+    context.open.return_value = mockfile
+    interface = zeit.content.article.interfaces.IArticle
+    zope.interface.declarations.alsoProvides(context, interface)
+    request = mock.Mock()
+    request.response.headers = {}
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view().app_iter.file is mockfile
+
+
+def test_image_view_should_calculate_caching_time_from_context(application):
+    context = mock.Mock()
+    context.__name__ = 'foobar.jpg'
+    context.__parent__ = ['foobar.jpg']
+    interface = zeit.content.article.interfaces.IArticle
+    zope.interface.declarations.alsoProvides(context, interface)
+    request = mock.Mock()
+    request.response.headers = {}
+    view = zeit.web.core.view_image.Image(context, request)
+    assert view().cache_expires.call_args[0][0] == 10

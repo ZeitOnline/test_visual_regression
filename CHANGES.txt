@@ -1,7 +1,19 @@
 Change log for zeit.web
 =======================
 
-1.46 (unreleased)
+1.48 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.47 (2015-07-30)
+-----------------
+
+- ZON-1586: Introduce new image tool
+
+
+1.46 (2015-07-30)
 -----------------
 
 - ZON-1881: Eventverpixelung Artikel
