@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - MAINT: Update CP layouts, tweak parquet styles, improve accordion script
 
+- MAINT: If a memcache error occurs, bypass it instead of breaking
+
 
 1.47 (2015-07-30)
 -----------------
