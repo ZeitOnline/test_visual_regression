@@ -1,5 +1,5 @@
 {% if view.breadcrumbs %}
-<div class="footer-breadcrumbs">
+<nav class="footer-breadcrumbs">
     <ul class="footer-breadcrumbs__list">
     {% for breadcrumb in view.breadcrumbs %}
         {% set bcrumb_text = breadcrumb[0] %}
@@ -18,5 +18,5 @@
         </li>
     {% endfor %}
     </ul>
-</div>
+</nav>
 {% endif %}
