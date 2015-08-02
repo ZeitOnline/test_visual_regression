@@ -252,7 +252,15 @@ define( [ 'jquery' ], function( $ ) {
                         'a:not([data-wt-click])'
                     ],
                     useDataId: [
-                        '.main_nav, .header__tags, .footer, .article-interactions, #snapshot, #servicebox',
+                        [
+                         '.main_nav',
+                         '.header__tags',
+                         '.footer',
+                         '.article-interactions',
+                         '.article-tags',
+                         '#snapshot',
+                         '#servicebox'
+                        ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],
                     parquetMeta: [
