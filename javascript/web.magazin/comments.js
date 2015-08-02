@@ -104,14 +104,16 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
      * @param  {object} comment jQuery object
      */
     var showForm = function(form, comment) {
-        var checkHeight = false;
+        var animation = 'slideUp',
+        	checkHeight = false;
 
-        if (form.is(':hidden')) {
+        if ( form.is( ':hidden' ) ) {
             hideOtherForms();
             checkHeight = paginated;
+            animation = 'slideDown';
         }
 
-        form.slideToggle(slideDuration, function() {
+        form.velocity( animation, slideDuration, function() {
             if (checkHeight) {
                 var needed = comment.offset().top + comment.height(),
                     available = getCachedValue('visibleBottom'),
@@ -123,7 +125,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
                 }
             }
 
-            form.find('textarea').focus();
+            form.find( 'textarea' ).focus();
         });
     };
 
@@ -135,7 +137,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
     var cancelReport = function(e) {
         e.preventDefault();
 
-        $(this).closest('.js-report-form').slideUp(slideDuration);
+        $( this ).closest( '.js-report-form' ).velocity( 'slideUp', slideDuration );
     };
 
     /**
@@ -151,7 +153,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
             input = this.form.elements;
 
         // avoid repeated submits
-        $(this).prop('disabled', true);
+        $( this ).prop( 'disabled', true );
 
         $.ajax({
             url: sendurl,
@@ -167,17 +169,19 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
                 if ( response ) {
                     if ( response.response.error === false ) {
                         var $form = $( form ),
-                            html = $('#js-report-success-template').html(),
-                            height = $form.css('height'),
+                            html = $( '#js-report-success-template' ).html(),
+                            height = $form.css( 'height' ),
                             newHeight;
 
-                        $form.html(html);
+                        $form.html( html );
 
-                        newHeight = $form.css('height');
+                        newHeight = $form.css( 'height' );
 
                         $form
-                            .css('height', height)
-                            .animate({height: newHeight});
+                            .css( 'height', height )
+                            .velocity({ height: newHeight }, function() {
+                                $form.css( 'height', '' );
+                            });
                     } else {
                         // what else?
                     }
@@ -560,7 +564,10 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
      * @function hideOtherForms
      */
     var hideOtherForms = function() {
-        $commentsBody.find('form').filter(':visible').slideToggle(slideDuration);
+        $commentsBody
+        	.find( 'form' )
+        	.filter( ':visible' )
+        	.velocity( 'slideUp', slideDuration );
     };
 
     /**
