@@ -9,6 +9,8 @@ require.config({
     // e.g. if you'll require jQuery later, you can refer to it as 'jquery'
     paths: {
         'jquery': 'vendor/jquery',
+        'velocity': 'vendor/velocity',
+        'velocity.ui': 'vendor/velocity.ui',
         // to build current sjcl.js, in bower_components/sjcl do
         // $ ./configure --without-all --with-sha1 --with-codecHex --compress=none
         // $ make sjcl.js tidy
@@ -32,6 +34,12 @@ require.config({
         'freewall': {
             deps: [ 'jquery' ],
             exports: 'freewall'
+        },
+        'velocity': {
+            deps: [ 'jquery' ]
+        },
+        'velocity.ui': {
+            deps: [ 'velocity' ]
         }
     }
 });
