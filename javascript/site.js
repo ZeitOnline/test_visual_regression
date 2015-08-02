@@ -32,6 +32,8 @@ require([
 // plugins that require other plugins or libraries must use the shim config
 require([
     'jquery',
+    'velocity',
+    'web.core/plugins/jquery.animatescroll',
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount',
     'web.site/plugins/jquery.accordion',
@@ -48,7 +50,7 @@ require([
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals'
-], function( $ ) {
+], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         article = $( '#js-article' );
 
@@ -68,6 +70,7 @@ require([
         $( '#series_select' ).selectNav();
         $( '.js-gallery-teaser-shuffle' ).shuffleTeasers();
         $( '.js-accordion' ).accordion();
+        $( '.js-scroll' ).animateScroll();
     } else if ( article.length ) {
         // article, gallery etc.
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
