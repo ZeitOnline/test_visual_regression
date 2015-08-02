@@ -1,95 +1,67 @@
-//sizes
+// sizes
 $footer_logo_width: em(300px)
 $footer_logo_width_small: em(280px)
-$footer_bar_min_height: em(30px)
-$footer_button_height: em(30px)
-$footer_button_width: em(150px)
-$footer_button_icon_height: em(14px)
-$footer_button_icon_width: em(10px)
 
-%footer_icons
-	+background-size(contain)
-	background-position: 50% 50%
-	display: block
-
-%footer_bar
-	min-height: $footer_bar_min_height
-	font-size: remify(14px)
-	line-height: remify(42px)
-	text-align: left
-	+respond-min($break-tablet-min)
-		line-height: remify(32px)
-		text-align: center
-
-
-%footer_dark_light_switch
-	color: $zon_grey
-	a
-		+link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_grey)
-	+respond-min($break-tablet-min)
-		color: $zon_dark_grey
-		a
-			+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $zon_dark_grey)
 
 %footer_light
 	background-color: $zon_lighter_grey
 	color: $zon_dark_grey
 	a
-		+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $zon_dark_grey)
+		+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $black)
 	+respond-min($break-tablet-min)
 		color: $zon_dark_grey
 		a
-			+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $zon_dark_grey)
+			+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $black)
 
 %footer_dark
 	color: $zon_grey
 	a
-		+link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_grey)
-	+respond-min($break-tablet-min)
-		color: $zon_grey
-		a
-			+link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_grey)
+		+link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_lighter_grey)
 
-%footer_inner
-	width: 40%
+%footer_row
+	+clearfix
 	display: none
-	vertical-align: top
-	padding: $petite
-	+respond-min($break-phablet-min)
-		padding: $petite $hefty
+	font-size: remify(14px)
+	max-width: remify(420px)
+	margin: auto
 	+respond-min($break-tablet-min)
-		width: 100%
-		display: inline-block !important
-		padding: 0
+		display: block !important
+		max-width: none
+		padding: 0 $page-padding
 
 %footer_list
+	float: left
 	list-style: none
-	padding: 0
 	margin: 0
+	padding: $petite $page-padding
+	text-align: left
+	width: 50%
+	+respond-min($break-tablet-min)
+		width: 100%
+		float: none
+		padding: 0
+		text-align: center
 
 %footer_item
-	display: inline-block
+	display: block
+	+respond-min($break-tablet-min)
+		display: inline-block
+	a
+		display: inline-block
+		padding: remify(10px) 0
+		+respond-min($break-tablet-min)
+			padding: remify(5px) 0
+
 
 %footer_dot
 	&:after
-		content: '•'
 		font-weight: bold
-		color: $zon_grey
-		margin: 0 $tiny 0 $tiny
-	&:last-child:after
-		content: ''
-		display: inline-block
-	+respond-max($break-tablet-min)
-		display: block
+		margin: 0 .3em
+	+respond-min($break-tablet-min)
 		&:after
-			content: ''
-			display: inline-block
-
-%footer_bold
-	font-weight: bold
-	&:after
-		content: ''
-		display: inline-block
+			content: '•'
+		&:last-child:after
+			content: none
 
 .footer
 	width: 100%
@@ -102,7 +74,9 @@ $footer_button_icon_width: em(10px)
 		margin-bottom: $petite
 		a
 			+hide-text
-			@extend %footer_icons
+			+background-size(contain)
+			background-position: 50% 50%
+			display: block
 			width: $footer_logo_width_small
 			+respond-min($break-tablet-min)
 				width: $footer_logo_width
@@ -114,76 +88,81 @@ $footer_button_icon_width: em(10px)
 	background-color: $zon-charcoal
 	+respond-min($break-tablet-min)
 		background-color: $zon_lighter_grey
-	&__inner
-		@extend %footer_inner
-		@extend %footer_bar
-		@extend %footer_dark_light_switch
+		padding-bottom: $petite
+	&__row
+		@extend %footer_row
+		@extend %footer_dark
+		+respond-min($break-tablet-min)
+			color: $zon_dark_grey
+			a
+				+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $black)
 	&__list
 		@extend %footer_list
 	&__item
 		@extend %footer_item
 		@extend %footer_dot
-	&__inner--isfirst
+		&--label
+			font-weight: bold
+			padding: remify(10px) 0
+			&:after
+				content: none
+			+respond-min($break-tablet-min)
+				padding: remify(5px) .5em remify(5px) 0
+	&__row:first-child
 		@extend %footer_light
+		display: block
+		max-width: none
+	&__row:first-child &__list
+		float: none
+		font-weight: bold
+		padding: remify(9px) $page-padding
 		text-align: center
 		width: 100%
-		font-weight: bold
-		display: block
-		padding: $fine 0 $fine 0
-		.footer-publisher__item
-			display: inline-block
-			&:after
-				content: '•'
-			&:last-child:after
-				content: ''
-		.footer-publisher__item--isbold
-			&:after
-				content: ''
-				display: inline-block
-	&__inner--islast
-		padding-bottom: $petite
-	&__item--isbold
-		@extend %footer_bold
+	&__row:first-child &__item
+		display: inline-block
+		&:after
+			content: '•'
+		&:last-child:after
+			content: none
 	&__more
-		@extend %footer_bar
+		@extend %footer_row
 		@extend %footer_light
-		text-align: center
+		+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $black)
 		border-top: 1px solid $zon_light_grey
-		border-bottom: 1px solid $zon_light_grey
-		padding: $fine 0 $fine 0
+		display: block
+		max-width: none
+		padding: remify(20px) $page-padding
 		+respond-min($break-tablet-min)
-			display: none
-		a
+			display: none !important
+		&:after
+			+drop_icon()
+			+transition(transform .5s)
+		&--expanded
 			&:after
-				+drop_icon()
-			&:hover
-				&:after
-					+transform(rotate(180deg))
+				+transform(rotate(-180deg))
 
 .footer-links
 	background-color: $zon-charcoal
 	border-top: 1px solid $zon_grey
 	padding-bottom: $junior
-	&__inner
-		@extend %footer_inner
-		@extend %footer_bar
+	+respond-min($break-tablet-min)
+		border-top: none
+		padding-top: $petite
+	&__row
+		@extend %footer_row
 		@extend %footer_dark
 	&__list
 		@extend %footer_list
 	&__item
 		@extend %footer_item
 		@extend %footer_dot
-	&__inner--isfirst
-		padding-top: $petite
-	&__item--isbold
-		@extend %footer_bold
-		display: none
-	&__seperator
-		display: none
-		+respond-max($break-tablet-min)
-			border-top: 1px solid $zon_grey
 	&__button
+		clear: both
+		border-top: 1px solid $zon_grey
+		margin-top: -1px
 		padding: remify(18px) 0
-		text-align: center
+		+respond-min($break-tablet-min)
+			border-top: none
+			margin-top: 0
 	&__linkbutton
 		+zon-button-dark

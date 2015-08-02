@@ -27,40 +27,30 @@
     * @return {object} jQuery-Object for chaining
     */
     $.fn.extendFooter = function() {
+        var animationDuration = 300,
+            scrollDuration = 500;
 
-        //scroll to bottom
-        function scrollToBottom() {
-            var target = $( 'html,body' );
-            target.animate( { scrollTop: target.height() }, 1000 );
-        }
+        // toggle footer display
+        function toggleFooter( $button ) {
+            var $slides = $button.nextAll( '.footer-publisher__row' ).add( '.footer-links__row' );
 
-        //toggle footer display
-        function toggleFooter( button ) {
-            //done like this to get an inline block
-            if ( $( '.footer-links__inner' ).is( ':visible' ) ) {
-                toggleFooterText( button, 'Mehr' );
-                $( '.footer-links__inner' ).slideToggle( 200 );
-                $( '.footer-publisher__inner' ).not( '.footer-publisher__inner--isfirst' ).slideToggle( 200 );
-                $( '.footer-links__seperator' ).css( 'display', 'none' );
+            $button.toggleClass( 'footer-publisher__more--expanded' );
+
+            if ( $button.hasClass( 'footer-publisher__more--expanded' ) ) {
+                $button.text( 'Schließen' ).velocity( 'scroll', scrollDuration );
+                $slides.velocity( 'slideDown', { duration: animationDuration } );
             } else {
-                toggleFooterText( button, 'Schließen' );
-                $( '.footer-links__inner' ).css( 'display', 'inline-block' ).animate( { opacity: 1 }, 200 );
-                $( '.footer-links__seperator' ).css( 'display', 'block' );
-                $( '.footer-publisher__inner' ).css( 'display', 'inline-block' ).animate( { opacity: 1 }, 200 );
-                scrollToBottom();
+                $button.text( 'Mehr' );
+                $slides.velocity( 'slideUp', { duration: animationDuration } );
             }
         }
 
-        //toggle footer text
-        function toggleFooterText( button, text ) {
-            $( button ).find( 'a' ).text( text );
-        }
-
-        //run through search element and return object
         return this.each( function() {
-            $( this ).on( 'click', function( e ) {
+            var $button = $( this );
+
+            $button.on( 'click', function( e ) {
                 e.preventDefault();
-                toggleFooter( this );
+                toggleFooter( $button );
             } );
         });
     };
