@@ -4,7 +4,7 @@ Change log for zeit.web
 1.49 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Fix: Add forgotten header tags tracking
 
 
 1.48 (2015-07-31)
