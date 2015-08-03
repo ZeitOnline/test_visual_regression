@@ -47,19 +47,20 @@
             }
         },
         breakpoint: {
-            value: '',
             get: function () {
                 try {
-                    this.value = window.getComputedStyle( document.querySelector('body'), ':before' ).getPropertyValue( 'content' ).replace( /"/g, '' ) || 'desktop';
+                    return window.getComputedStyle( document.querySelector('body'), ':before' ).getPropertyValue( 'content' ).replace( /"/g, '' ) || 'desktop';
                 } catch( e ) {
-                    this.value = 'desktop';
+                    return 'desktop';
                 }
+            },
+            getTrackingBreakpoint: function() {
+                var point = this.get();
+                return point === 'desktop' ? 'stationaer' : point;
             }
         }
     };
 
-    // initialize breakpoint value
-    window.ZMO.breakpoint.get();
 
 {%- if view.context.advertising_enabled %}
     {%- if view.banner_toggles('viewport_zoom') == 'tablet' %}
