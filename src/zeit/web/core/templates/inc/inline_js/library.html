@@ -53,6 +53,10 @@
                 } catch( e ) {
                     return 'desktop';
                 }
+            },
+            getTrackingBreakpoint: function() {
+                var point = this.get();
+                return point === 'desktop' ? 'stationaer' : point;
             }
         }
     };
