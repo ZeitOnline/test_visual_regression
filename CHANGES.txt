@@ -4,6 +4,8 @@ Change log for zeit.web
 1.49 (unreleased)
 -----------------
 
+- Fix: Read/Set breakpoint vars correctly
+
 - Fix: Add forgotten header tags tracking
 
 
