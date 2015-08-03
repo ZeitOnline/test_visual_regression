@@ -32,16 +32,16 @@
 
         // toggle footer display
         function toggleFooter( $button ) {
-            var $slides = $button.nextAll( '.footer-publisher__row' ).add( '.footer-links__row' );
+            var $slides = $button.parent().nextAll( '.footer-publisher__row' ).add( '.footer-links__row' );
 
             $button.toggleClass( 'footer-publisher__more--expanded' );
 
             if ( $button.hasClass( 'footer-publisher__more--expanded' ) ) {
+                $slides.slideDown({ duration: animationDuration });
                 $button.text( 'Schließen' ).scrollIntoView({ duration: scrollDuration });
-                $slides.velocity( 'slideDown', { duration: animationDuration } );
             } else {
+                $slides.slideUp({ duration: animationDuration });
                 $button.text( 'Mehr' );
-                $slides.velocity( 'slideUp', { duration: animationDuration } );
             }
         }
 

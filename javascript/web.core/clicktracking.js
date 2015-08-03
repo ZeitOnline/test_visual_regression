@@ -147,7 +147,7 @@ define( [ 'jquery' ], function( $ ) {
      * @return {string}          breakpoint for webtrekk
      */
     getBreakpoint = function() {
-        return window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value;
+        return window.ZMO.breakpoint.getTrackingBreakpoint();
     },
     /**
      * returns a string that is webtrekk-safe
@@ -252,7 +252,15 @@ define( [ 'jquery' ], function( $ ) {
                         'a:not([data-wt-click])'
                     ],
                     useDataId: [
-                        '.main_nav, .footer, .article-interactions, #snapshot, #servicebox',
+                        [
+                         '.main_nav',
+                         '.header__tags',
+                         '.footer',
+                         '.article-interactions',
+                         '.article-tags',
+                         '#snapshot',
+                         '#servicebox'
+                        ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],
                     parquetMeta: [

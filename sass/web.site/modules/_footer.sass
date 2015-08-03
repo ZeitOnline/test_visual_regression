@@ -2,26 +2,23 @@
 $footer_logo_width: em(300px)
 $footer_logo_width_small: em(280px)
 
+// carefull, the order of this pseudo class is important here
+%footer_dark
+	background-color: $zon-charcoal
+	color: $zon_grey
+	a
+		+link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_lighter_grey)
 
+// carefull, the order of this pseudo class is important here
 %footer_light
 	background-color: $zon_lighter_grey
 	color: $zon_dark_grey
 	a
 		+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $black)
-	+respond-min($break-tablet-min)
-		color: $zon_dark_grey
-		a
-			+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $black)
 
-%footer_dark
-	color: $zon_grey
-	a
-		+link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_lighter_grey)
-
-%footer_row
+%footer_column_row
 	+clearfix
 	display: none
-	font-size: remify(14px)
 	max-width: remify(420px)
 	margin: auto
 	+respond-min($break-tablet-min)
@@ -30,10 +27,12 @@ $footer_logo_width_small: em(280px)
 		padding: 0 $page-padding
 
 %footer_list
-	float: left
 	list-style: none
 	margin: 0
 	padding: $petite $page-padding
+
+%footer_column_list
+	float: left
 	text-align: left
 	width: 50%
 	+respond-min($break-tablet-min)
@@ -45,7 +44,7 @@ $footer_logo_width_small: em(280px)
 %footer_item
 	display: block
 	+respond-min($break-tablet-min)
-		display: inline-block
+		display: inline
 	a
 		display: inline-block
 		padding: remify(10px) 0
@@ -56,7 +55,7 @@ $footer_logo_width_small: em(280px)
 %footer_dot
 	&:after
 		font-weight: bold
-		margin: 0 .3em
+		margin: 0 .2em
 	+respond-min($break-tablet-min)
 		&:after
 			content: '•'
@@ -64,9 +63,9 @@ $footer_logo_width_small: em(280px)
 			content: none
 
 .footer
-	width: 100%
-	text-align: center
+	font-size: remify(14px)
 	margin-top: $wide
+	text-align: center
 
 .footer-logo
 	&__image
@@ -85,19 +84,23 @@ $footer_logo_width_small: em(280px)
 				width: 346px
 
 .footer-publisher
-	background-color: $zon-charcoal
+	@extend %footer_dark
 	+respond-min($break-tablet-min)
 		background-color: $zon_lighter_grey
+		color: $zon_dark_grey
 		padding-bottom: $petite
 	&__row
-		@extend %footer_row
-		@extend %footer_dark
-		+respond-min($break-tablet-min)
-			color: $zon_dark_grey
-			a
-				+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $black)
+		&--extra
+			@extend %footer_column_row
+			+respond-min($break-tablet-min)
+				background-color: $zon_lighter_grey
+				color: $zon_dark_grey
+				a
+					+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $black)
 	&__list
 		@extend %footer_list
+	&__row--extra &__list
+		@extend %footer_column_list
 	&__item
 		@extend %footer_item
 		@extend %footer_dot
@@ -110,30 +113,23 @@ $footer_logo_width_small: em(280px)
 				padding: remify(5px) .5em remify(5px) 0
 	&__row:first-child
 		@extend %footer_light
-		display: block
-		max-width: none
 	&__row:first-child &__list
-		float: none
 		font-weight: bold
 		padding: remify(9px) $page-padding
-		text-align: center
-		width: 100%
 	&__row:first-child &__item
-		display: inline-block
+		display: inline
 		&:after
 			content: '•'
 		&:last-child:after
 			content: none
-	&__more
-		@extend %footer_row
+	&__row--more
 		@extend %footer_light
-		+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $black)
 		border-top: 1px solid $zon_light_grey
-		display: block
-		max-width: none
-		padding: remify(20px) $page-padding
 		+respond-min($break-tablet-min)
 			display: none !important
+	&__more
+		display: block
+		padding: remify(20px) $page-padding
 		&:after
 			+drop_icon()
 			+transition(transform .5s)
@@ -149,10 +145,11 @@ $footer_logo_width_small: em(280px)
 		border-top: none
 		padding-top: $petite
 	&__row
-		@extend %footer_row
+		@extend %footer_column_row
 		@extend %footer_dark
 	&__list
 		@extend %footer_list
+		@extend %footer_column_list
 	&__item
 		@extend %footer_item
 		@extend %footer_dot

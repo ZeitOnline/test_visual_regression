@@ -17,7 +17,7 @@
         {% set section = navigation[i] %}
 
         {% if (loop.index == 1) or (publisher and loop.index % 2 == 0) or (not publisher and loop.index % 2 == 1) -%}
-        <div class="footer-{{ class }}__row">
+        <div class="footer-{{ class }}__row{% if publisher and loop.index > 1 %} footer-{{ class }}__row--extra{% endif %}">
         {%- endif %}
 
             <ul class="footer-{{ class }}__list">
@@ -42,7 +42,9 @@
         {%- endif %}
 
         {% if publisher and section.item_id == 'first' %}
-        <a href="#" class="footer-{{ class }}__more" data-id="footernav.mehr.1..more">Mehr</a>
+        <div class="footer-{{ class }}__row footer-{{ class }}__row--more">
+            <a href="#" class="footer-{{ class }}__more" data-id="footernav.mehr.1..more">Mehr</a>
+        </div>
         {% endif %}
     {%- endfor %}
 {%- endmacro %}
