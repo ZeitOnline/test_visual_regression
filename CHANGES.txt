@@ -4,7 +4,7 @@ Change log for zeit.web
 1.48.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- HOTFIX: Generate URLs for article images properly.
 
 
 1.48.1 (2015-08-03)

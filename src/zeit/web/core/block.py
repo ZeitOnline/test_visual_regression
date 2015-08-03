@@ -275,8 +275,7 @@ class Image(BaseImage):
         #      … and 99% of images in articles are 'large'
         target = model_block.references.target
         if zeit.content.image.interfaces.IImageGroup.providedBy(target):
-            target = zeit.web.core.template.closest_substitute_image(
-                target, 'wide')
+            target = target['wide']
 
         if model_block.references:
             self.image = target
