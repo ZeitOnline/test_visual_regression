@@ -6,7 +6,7 @@
         <div class="header__tags">
             <span class="header__tags__label">{{ view.topic_links.title | hide_none }}</span>
             {% for label, link in view.topic_links %}
-            <a href="{{ link }}" title="{{ label }}" class="header__tags__link">{{ label }}</a>
+            <a href="{{ link }}" class="header__tags__link" data-id="topnav.article-tag.{{ loop.index }}..">{{ label }}</a>
             {% endfor %}
         </div>
     {%- endif -%}
