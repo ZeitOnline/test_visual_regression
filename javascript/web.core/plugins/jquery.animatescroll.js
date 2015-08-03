@@ -57,7 +57,7 @@
                 e.preventDefault();
 
                 // animate scrolling
-                $( target ).velocity( 'scroll', { duration: options.duration } );
+                $( target ).scrollIntoView({ duration: options.duration });
 
                 // change location hash without page jump
                 attribute = ( target.id === anchor ) ? 'id' : 'name';

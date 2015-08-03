@@ -20,7 +20,7 @@ define(['jquery'], function() {
         e.preventDefault();
 
         if ( $copyrights.is( ':hidden' ) ) {
-            $copyrights.css({ display: 'block' }).velocity( 'scroll', duration );
+            $copyrights.css({ display: 'block' }).scrollIntoView({ duration: duration });
         } else {
             $copyrights.velocity( 'slideUp', duration );
         }

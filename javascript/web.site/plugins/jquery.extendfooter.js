@@ -37,7 +37,7 @@
             $button.toggleClass( 'footer-publisher__more--expanded' );
 
             if ( $button.hasClass( 'footer-publisher__more--expanded' ) ) {
-                $button.text( 'Schließen' ).velocity( 'scroll', scrollDuration );
+                $button.text( 'Schließen' ).scrollIntoView({ duration: scrollDuration });
                 $slides.velocity( 'slideDown', { duration: animationDuration } );
             } else {
                 $button.text( 'Mehr' );

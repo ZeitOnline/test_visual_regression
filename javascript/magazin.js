@@ -44,6 +44,7 @@ require([
     'web.core/plugins/jquery.animatescroll',
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount',
+    'web.core/plugins/jquery.scrollIntoView',
     'web.magazin/plugins/jquery.backgroundvideo',
     'web.magazin/plugins/jquery.switchvideo'
 ], function( $, Velocity ) {
