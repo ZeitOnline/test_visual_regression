@@ -179,28 +179,20 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
-    teaser = driver.find_elements_by_class_name('teaser-fullwidth')[0]
-    helper = driver.find_elements_by_class_name(
-        'teaser-fullwidth__container')[0]
-    script = 'return window.innerWidth == document.documentElement.clientWidth'
+    teaser = driver.find_element_by_class_name('teaser-fullwidth')
+    helper = driver.find_element_by_class_name('teaser-fullwidth__container')
+    script = 'return document.documentElement.clientWidth'
 
     assert teaser.is_displayed(), 'Fullwidth teaser missing'
-    assert helper.is_displayed(), 'Fullwidth teaser helper missing'
+    assert helper.is_displayed(), 'Fullwidth teaser container missing'
 
     if screen_size[0] == 768:
-        # testbrowser has differing width due to in-/visible scrollbar
-        invisible_scrollbar = driver.execute_script(script)
-        if invisible_scrollbar:
-            assert helper.size.get('width') == 553
-        else:
-            assert helper.size.get('width') == 542
+        client_width = driver.execute_script(script)
+        assert helper.size.get('width') == int('%.0f' % (client_width*0.72))
 
     elif screen_size[0] == 980:
-        invisible_scrollbar = driver.execute_script(script)
-        if invisible_scrollbar:
-            assert helper.size.get('width') == 653
-        else:
-            assert helper.size.get('width') == 643
+        client_width = driver.execute_script(script)
+        assert helper.size.get('width') == int('%.0f' % (client_width*0.6666))
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
