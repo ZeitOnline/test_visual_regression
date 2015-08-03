@@ -21,16 +21,14 @@ require([
     'web.magazin/comments',
     'web.magazin/sharing',
     'web.magazin/cards',
-    'web.magazin/copyrights',
     'web.magazin/photocluster'
-], function( images, errors, nav, tabs, comments, sharing, cards, copyrights, photocluster ) {
+], function( images, errors, nav, tabs, comments, sharing, cards, photocluster ) {
     errors.init();
     nav.init();
     tabs.init();
     comments.init();
     sharing.init();
     cards.init();
-    copyrights.init();
     photocluster.init();
     images.init();
 });
@@ -45,11 +43,13 @@ require([
     'web.core/plugins/jquery.referrerCount',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.magazin/plugins/jquery.backgroundvideo',
+    'web.magazin/plugins/jquery.copyrights',
     'web.magazin/plugins/jquery.switchvideo'
 ], function( $ ) {
     $( window ).referrerCount();
     $( '.inline-gallery' ).inlinegallery();
     $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();
+    $( '.js-toggle-copyrights' ).copyrights();
     $( 'main' ).animateScroll({ selector: '.js-scroll' });
 });
