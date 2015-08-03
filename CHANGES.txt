@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - FIX: Add forgotten header tags tracking
 
+- FIX: Explicitly pass teaser object to image getter
+
 
 1.48 (2015-07-31)
 -----------------
