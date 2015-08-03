@@ -103,5 +103,5 @@ def test_adplaces_present_on_pages(testbrowser):
 
 
 def test_adplaces_present_on_home_page(testbrowser):
-    browser = testbrowser('/index')
+    browser = testbrowser('/zeit-online/buzz-box')
     assert len(browser.cssselect('#ad-desktop-12')) == 1
