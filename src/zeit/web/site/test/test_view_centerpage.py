@@ -646,7 +646,6 @@ def test_centerpage_should_have_header_tags(testbrowser, testserver):
     assert len(html('.header__tags__link')) == 3
     assert html('.header__tags__link')[0].get('href').endswith(
         '/schlagworte/organisationen/islamischer-staat/index')
-    assert html('.header__tags__link')[0].get('title') == 'Islamischer Staat'
     assert html('.header__tags__link')[0].text == 'Islamischer Staat'
 
 
