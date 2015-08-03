@@ -6,6 +6,9 @@ Change log for zeit.web
 
 - Fix: Add forgotten header tags tracking
 
+- HOTFIX: Use an image variant name for article images that actually exists
+  (`wide` instead of `zon-article-large`).
+
 
 1.48 (2015-07-31)
 -----------------
