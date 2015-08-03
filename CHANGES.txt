@@ -4,7 +4,7 @@ Change log for zeit.web
 1.48.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1999: Bottom-align small column teaser image
 
 
 1.48.1 (2015-08-03)
