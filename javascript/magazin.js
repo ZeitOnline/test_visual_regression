@@ -40,11 +40,12 @@ require([
 // plugins that require other plugins or libraries must use the shim config
 require([
     'jquery',
+    'web.core/plugins/jquery.animatescroll',
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount',
-    'web.magazin/plugins/jquery.switchvideo',
+    'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.magazin/plugins/jquery.backgroundvideo',
-    'web.magazin/plugins/jquery.animatescroll'
+    'web.magazin/plugins/jquery.switchvideo'
 ], function( $ ) {
     $( window ).referrerCount();
     $( '.inline-gallery' ).inlinegallery();

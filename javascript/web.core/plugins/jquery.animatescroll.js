@@ -1,12 +1,14 @@
 /**
  * @fileOverview jQuery Plugin for animated scrolling
- * @version  0.1
+ * @author moritz.stoltenburg@zeit.de
+ * @version  0.2
  */
-(function($){
+(function( $ ) {
 
     'use strict';
 
     var defaults = {
+        duration: 500,
         selector: null
     };
 
@@ -33,39 +35,37 @@
      * @param {object} options configuration object, overwriting presetted options
      * @return {object} jQuery-Object for chaining
      */
-    $.fn.animateScroll = function(options) {
+    $.fn.animateScroll = function( options ) {
 
-        options = $.extend({}, defaults, options);
+        options = $.extend( {}, defaults, options );
 
         //run through links that jump to anchors
-        return this.each(function() {
-            $(this).on('click', options.selector, function(e) {
-                var anchor = this.hash.slice(1), // remove '#'
+        return this.each( function() {
+            $( this ).on( 'click', options.selector, function( e ) {
+                var anchor = this.hash.slice( 1 ), // remove '#'
                     target,
                     attribute;
 
-                if (anchor) {
-                    target = document.getElementById(anchor) || document.getElementsByName(anchor)[0];
+                if ( anchor ) {
+                    target = document.getElementById( anchor ) || document.getElementsByName( anchor )[0];
                 }
 
-                if (!target) {
+                if ( !target ) {
                     return;
                 }
 
                 e.preventDefault();
 
+                // animate scrolling
+                $( target ).scrollIntoView({ duration: options.duration });
+
                 // change location hash without page jump
-                attribute = (target.id === anchor) ? 'id' : 'name';
+                attribute = ( target.id === anchor ) ? 'id' : 'name';
                 target[attribute] = '';
                 location.hash = this.hash;
                 target[attribute] = anchor;
-
-                // animate scrolling
-                $('html, body').stop().animate({
-                    scrollTop: $(target).offset().top
-                }, 500);
             });
         });
 
     };
-})(jQuery);
+})( jQuery );
