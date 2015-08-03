@@ -37,7 +37,7 @@
                 {%- endif %}
             </ul>
 
-        {% if (publisher and loop.index % 2 == 1) or (not publisher and loop.index % 2 == 0) -%}
+        {% if (loop.last) or (publisher and loop.index % 2 == 1) or (not publisher and loop.index % 2 == 0) -%}
         </div>
         {%- endif %}
 
