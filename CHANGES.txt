@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.49 (unreleased)
------------------
+1.48.1 (2015-08-03)
+-------------------
 
 - HOTFIX: Use an image variant name for article images that actually exists
 
