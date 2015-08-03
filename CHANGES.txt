@@ -4,9 +4,11 @@ Change log for zeit.web
 1.49 (unreleased)
 -----------------
 
-- Fix: Read/Set breakpoint vars correctly
+- HOTFIX: Use an image variant name for article images that actually exists
 
-- Fix: Add forgotten header tags tracking
+- FIX: Read/Set breakpoint vars correctly
+
+- FIX: Add forgotten header tags tracking
 
 
 1.48 (2015-07-31)
