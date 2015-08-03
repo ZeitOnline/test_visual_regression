@@ -147,7 +147,7 @@ define( [ 'jquery' ], function( $ ) {
      * @return {string}          breakpoint for webtrekk
      */
     getBreakpoint = function() {
-        return window.ZMO.breakpoint.value === 'desktop' ? 'stationaer' : window.ZMO.breakpoint.value;
+        return window.ZMO.breakpoint.getTrackingBreakpoint();
     },
     /**
      * returns a string that is webtrekk-safe

@@ -646,7 +646,6 @@ def test_centerpage_should_have_header_tags(testbrowser, testserver):
     assert len(html('.header__tags__link')) == 3
     assert html('.header__tags__link')[0].get('href').endswith(
         '/schlagworte/organisationen/islamischer-staat/index')
-    assert html('.header__tags__link')[0].get('title') == 'Islamischer Staat'
     assert html('.header__tags__link')[0].text == 'Islamischer Staat'
 
 
@@ -981,3 +980,30 @@ def test_mobile_invisibility(testbrowser):
     assert len(browser.cssselect(region)) == 1
     assert len(browser.cssselect(area)) == 1
     assert len(browser.cssselect(teaser)) == 1
+
+
+def test_breakpoint_sniffer_script(
+        selenium_driver, testserver, monkeypatch, screen_size):
+
+    def tpm(me):
+        return True
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('{}/zeit-online/slenderized-index'.format(testserver.url))
+
+    if screen_size[0] == 320:
+        assert "mobile" == driver.execute_script(
+            "return window.ZMO.breakpoint.get()")
+    if screen_size[0] == 520:
+        assert "phablet" == driver.execute_script(
+            "return window.ZMO.breakpoint.get()")
+    if screen_size[0] == 768:
+        assert "tablet" == driver.execute_script(
+            "return window.ZMO.breakpoint.get()")
+    if screen_size[0] == 980:
+        assert "desktop" == driver.execute_script(
+            "return window.ZMO.breakpoint.get()")
