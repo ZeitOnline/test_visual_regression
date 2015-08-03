@@ -276,7 +276,7 @@ class Image(BaseImage):
         target = model_block.references.target
         if zeit.content.image.interfaces.IImageGroup.providedBy(target):
             target = zeit.web.core.template.closest_substitute_image(
-                target, 'zon-article-large')
+                target, 'wide')
 
         if model_block.references:
             self.image = target

@@ -1,0 +1,20 @@
+.footer-breadcrumbs
+	border-top: 1px solid $zon_light_grey
+	&__item
+		color: $zon_mid_grey
+		display: inline
+		font-size: remify(15px)
+		letter-spacing: $zon-letter-spacing-s
+		&:after
+			content: "›"
+			margin-left: remify(0.2em)
+			margin-right: remify(0.2em)
+		&:last-child:after
+			content: none
+	&__link
+		list-style: outside none none
+		&:hover, &:link, &:visited
+			color: inherit
+	&__list
+		margin: 1em 0
+		padding: 0

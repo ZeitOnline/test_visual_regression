@@ -219,9 +219,9 @@ def test_footer_should_contain_schema_org_markup(testserver, testbrowser):
 
     item_prop_url = html(
         'footer[itemtype="http://schema.org/SiteNavigationElement"] '
-        'li a[itemprop="url"]')
+        'div li a[itemprop="url"]')
     item_prop_name = html(
-        'footer[itemtype="http://schema.org/SiteNavigationElement"] li '
+        'footer[itemtype="http://schema.org/SiteNavigationElement"] div li '
         'a[itemprop="url"] span[itemprop="name"]')
 
     assert len(item_prop_url) > 0

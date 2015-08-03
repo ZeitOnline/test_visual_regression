@@ -36,6 +36,33 @@ class Base(zeit.web.core.view.Base):
         }
         return cases.get(name, None)
 
+    @zeit.web.reify
+    def breadcrumbs(self):
+        return [('Start', 'http://xml.zeit.de/index', 'ZEIT ONLINE')]
+
+    def breadcrumbs_by_title(self, breadcrumbs=None):
+        if breadcrumbs is None:
+            breadcrumbs = []
+        breadcrumbs.extend([(
+            self.pagetitle.replace(self.pagetitle_suffix, ''), None)])
+        return breadcrumbs
+
+    def breadcrumbs_by_navigation(self, breadcrumbs=None):
+        if breadcrumbs is None:
+            breadcrumbs = []
+        for segment in (self.ressort, self.sub_ressort):
+            if segment == u'reisen':
+                segment = u'reise'
+            try:
+                nav_item = zeit.web.core.navigation.navigation_by_name[
+                    segment]
+                breadcrumbs.extend([(
+                    nav_item['text'], nav_item['link'])])
+            except KeyError:
+                # Segment is no longer be part of the navigation
+                next
+        return breadcrumbs
+
 
 @pyramid.view.view_config(
     route_name='spektrum-kooperation',

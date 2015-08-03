@@ -1,14 +1,27 @@
 Change log for zeit.web
 =======================
 
-1.48 (unreleased)
+1.49 (unreleased)
 -----------------
+
+- Fix: Add forgotten header tags tracking
+
+- HOTFIX: Use an image variant name for article images that actually exists
+  (`wide` instead of `zon-article-large`).
+
+
+1.48 (2015-07-31)
+-----------------
+
+- ZON-1942: Implement breadcrumbs
 
 - FIX: Fix byline for generic ICMSContent without authorships (e.g. quiz)
 
 - ZON-1994: Make mobile hidden elements available
 
 - ZON-1974: Remove shading hover effect for fullwidth and nextread teasers
+
+- ZON-1945: Add article tags
 
 - MAINT: Update CP layouts, tweak parquet styles, improve accordion script
 
@@ -42,13 +55,9 @@ Change log for zeit.web
 1.45 (2015-07-29)
 -----------------
 
-- MAINT: Hide VG Wort pixel
-
 - ZON-1367: IVW Verpixelung relaunch
 
 - ZON-1030: Add tiny buzzbox-accordion
-
-- FIX: Decode HTML entities in image caption
 
 - ZON-1814: Configure viewport zoom for tablets
 
@@ -58,20 +67,26 @@ Change log for zeit.web
 
 - ZON-1913: Umziehen tile_12 von "vor dem Video" nach "nach der ersten Duo-Region"
 
+- DEV-889: Don't switch to ``.cp2015`` for Spektrum feed
+
 - FIX: Ignore authors without display_name instead of crashing
+
+- FIX: Decode HTML entities in image caption
+
+- FIX: Ignore authors without display_name instead of crashing
+
+- FIX: Make fallback for video images more robust.
+
+- FIX: Change text for beta toggle page
+
+- MAINT: Hide VG Wort pixel
 
 - MAINT: Abort transaction instead of commiting, this prevents ConflictErrors
   in preview mode.
 
 - MAINT: Send exceptions caught by Jinja to bugsnag, too.
 
-- FIX: Make fallback for video images more robust.
-
-- DEV-889: Don't switch to ``.cp2015`` for Spektrum feed
-
 - MAINT: Send coarse timing metrics (traversal, rendering) to statsd.
-
-- FIX: Change text for beta toggle page
 
 
 1.44 (2015-07-28)
@@ -81,9 +96,9 @@ Change log for zeit.web
 
 - DEV-801: Support article templates everywhere, not just ZMO
 
-- FIX: Repair a couple of moot assertions in tests
-
 - ZON-1986: add teaser-class and area to tracking
+
+- FIX: Repair a couple of moot assertions in tests
 
 - MAINT: Log stack traces of exceptions we catch and send them to bugsnag.
 
@@ -107,17 +122,9 @@ Change log for zeit.web
 
 - ZON-1966: Remove Krux, add AdAudience in ZMO
 
-- MAINT: Add invisible page shadow
-
-- MAINT: Remove font TabletGothicNarrow
-
 - ZON-1914: fix multiple tile_7 on full view of multi-page-articles
 
 - ZON-1810: strip special characters from level-strings in adcontroller
-
-- FIX: Ignore homepage ressort for reach api calls
-
-- FIX: Don't break on strangely encoded URLs
 
 - ZON-1979: Verpixelung Momentaufnahme
 
@@ -126,6 +133,14 @@ Change log for zeit.web
 - ZON-1963: Verpixelung Back 2 top
 
 - ZON-1962: Verpixelung Logos
+
+- FIX: Ignore homepage ressort for reach api calls
+
+- FIX: Don't break on strangely encoded URLs
+
+- MAINT: Add invisible page shadow
+
+- MAINT: Remove font TabletGothicNarrow
 
 
 1.41 (2015-07-14)
@@ -143,8 +158,6 @@ Change log for zeit.web
 
 - ZON-1811: Fix search input for iOS Safari and add thousands separator
 
-- MAINT: Polish liveblog, header, comments, topic teaser to mention but a few
-
 - ZON-1788: Apply snazzy tuple stream byline to teasers and articles
 
 - ZON-1912: fix doubled display tile_7 on centerpages
@@ -160,6 +173,8 @@ Change log for zeit.web
 - CFG: Properly configure spektrum parquet area
 
 - MAINT: Speed up some sluggish tests
+
+- MAINT: Polish liveblog, header, comments, topic teaser to mention but a few
 
 
 1.40.1 (2015-07-09)
