@@ -26,11 +26,11 @@
      * @memberOf jQuery
      */
     /**
-     * Animate scrolling for elements
-     * @class animateScroll
+     * Use animated scrolling to scroll elements into view
+     * @class scrollIntoView
      * @memberOf jQuery.fn
      * @param {object} options configuration object, overwriting presetted options
-     * @return {object} jQuery-Object for chaining
+     * @return {object} jQuery collection for chaining
      */
     $.fn.scrollIntoView = function( options ) {
 
