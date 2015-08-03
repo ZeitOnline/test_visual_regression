@@ -4,6 +4,10 @@ Change log for zeit.web
 1.49 (unreleased)
 -----------------
 
+- Fix: Prevent multiple adding of ad tags
+
+- Fix: Fix double OOP Tag
+
 - Fix: Add forgotten header tags tracking
 
 
