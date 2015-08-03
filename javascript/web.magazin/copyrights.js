@@ -13,21 +13,18 @@ define(['jquery'], function() {
      * @function toggleCopyrights
      * @param  {object} e event object
      */
-    var toggleCopyrights = function(e) {
-        var area = $('.copyrights');
-        e.preventDefault();
-        area.slideToggle('slow');
-    };
+    var toggleCopyrights = function( e ) {
+        var $copyrights = $( '#copyrights' ),
+            duration = 500;
 
-    /**
-     * copyrights.js: scroll to bottom of page
-     * @function scrollToBottom
-     * @param  {object} e event object
-     */
-    var scrollToBottom = function(e) {
-        var target = $('html,body');
         e.preventDefault();
-        target.animate({scrollTop: target.height()}, 1000);
+
+        if ( $copyrights.is( ':hidden' ) ) {
+            $copyrights.css({ display: 'block' }).velocity( 'scroll', duration );
+        } else {
+            $copyrights.velocity( 'slideUp', duration );
+        }
+
     };
 
     /**
@@ -35,9 +32,7 @@ define(['jquery'], function() {
      * @function init
      */
     var init = function() {
-        var node = $('.page-wrap');
-        node.on('click', '.js-toggle-copyrights', toggleCopyrights);
-        node.on('click', '.js-toggle-copyrights', scrollToBottom);
+        $( '.page-wrap' ).on( 'click', '.js-toggle-copyrights', toggleCopyrights );
     };
 
     return {
