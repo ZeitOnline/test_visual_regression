@@ -1,16 +1,24 @@
 Change log for zeit.web
 =======================
 
-1.49 (unreleased)
------------------
+1.48.2 (unreleased)
+-------------------
 
 - ZON-1817: Adjust ZON footer line-height
 
 - ZON-1816: Scroll footer into view
 
-- Fix: Read/Set breakpoint vars correctly
 
-- Fix: Add forgotten header tags tracking
+1.48.1 (2015-08-03)
+-------------------
+
+- HOTFIX: Use an image variant name for article images that actually exists
+
+- FIX: Read/Set breakpoint vars correctly
+
+- FIX: Add forgotten header tags tracking
+
+- FIX: Explicitly pass teaser object to image getter
 
 
 1.48 (2015-07-31)
