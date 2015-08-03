@@ -4,9 +4,11 @@ Change log for zeit.web
 1.49 (unreleased)
 -----------------
 
-- ZON-1817: Adjust ZON footer lineheight
+- ZON-1817: Adjust ZON footer line-height
 
 - ZON-1816: Scroll footer into view
+
+- Fix: Read/Set breakpoint vars correctly
 
 - Fix: Add forgotten header tags tracking
 
