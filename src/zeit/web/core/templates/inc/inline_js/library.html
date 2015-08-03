@@ -47,12 +47,11 @@
             }
         },
         breakpoint: {
-            value: '',
             get: function () {
                 try {
-                    this.value = window.getComputedStyle( document.querySelector('body'), ':before' ).getPropertyValue( 'content' ).replace( /"/g, '' ) || 'desktop';
+                    return window.getComputedStyle( document.querySelector('body'), ':before' ).getPropertyValue( 'content' ).replace( /"/g, '' ) || 'desktop';
                 } catch( e ) {
-                    this.value = 'desktop';
+                    return 'desktop';
                 }
             }
         }
