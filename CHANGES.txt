@@ -1,13 +1,22 @@
 Change log for zeit.web
 =======================
 
-1.49 (unreleased)
------------------
+1.48.2 (unreleased)
+-------------------
 
-- Fix: Add forgotten header tags tracking
+- Nothing changed yet.
+
+
+1.48.1 (2015-08-03)
+-------------------
 
 - HOTFIX: Use an image variant name for article images that actually exists
-  (`wide` instead of `zon-article-large`).
+
+- FIX: Read/Set breakpoint vars correctly
+
+- FIX: Add forgotten header tags tracking
+
+- FIX: Explicitly pass teaser object to image getter
 
 
 1.48 (2015-07-31)
