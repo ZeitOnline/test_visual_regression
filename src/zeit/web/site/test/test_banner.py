@@ -88,7 +88,11 @@ def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
     assert adctrl == "object"
 
 
-def test_adplaces_present_on_pages(testbrowser):
+def test_adplaces_present_on_pages(testbrowser, monkeypatch):
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+
     browser = testbrowser('/zeit-online/slenderized-index')
     assert len(browser.cssselect('#iqadtileOOP')) == 1
     assert len(browser.cssselect('#ad-desktop-1')) == 1
