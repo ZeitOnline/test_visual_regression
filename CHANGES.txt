@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Handle umlauts in topicpage breadcrumbs
 
+- HOTFIX: Handle articles without authors
+
 - ZON-1999: Bottom-align small column teaser image
 
 
