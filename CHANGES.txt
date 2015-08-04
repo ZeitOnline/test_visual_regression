@@ -18,6 +18,12 @@ Change log for zeit.web
 
 - FIX: Add forgotten header tags tracking
 
+- Fix: Prevent multiple adding of ad tags
+
+- Fix: Fix double OOP Tag
+
+- Fix: Add forgotten header tags tracking
+
 - FIX: Explicitly pass teaser object to image getter
 
 
@@ -35,6 +41,8 @@ Change log for zeit.web
 - ZON-1945: Add article tags
 
 - MAINT: Update CP layouts, tweak parquet styles, improve accordion script
+
+- MAINT: If a memcache error occurs, bypass it instead of breaking
 
 
 1.47 (2015-07-30)
