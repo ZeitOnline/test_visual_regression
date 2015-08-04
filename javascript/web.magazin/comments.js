@@ -105,7 +105,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
      */
     var showForm = function(form, comment) {
         var animation = 'slideUp',
-        	checkHeight = false;
+            checkHeight = false;
 
         if ( form.is( ':hidden' ) ) {
             hideOtherForms();
@@ -565,9 +565,9 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
      */
     var hideOtherForms = function() {
         $commentsBody
-        	.find( 'form' )
-        	.filter( ':visible' )
-        	.velocity( 'slideUp', slideDuration );
+            .find( 'form' )
+            .filter( ':visible' )
+            .velocity( 'slideUp', slideDuration );
     };
 
     /**
