@@ -4,6 +4,10 @@ Change log for zeit.web
 1.50 (unreleased)
 -----------------
 
+- FIX: Fix wrong cp14 in webtrekk on ZMO
+
+- FIX: Avoid empty regions
+
 - HOTFIX: Handle umlauts in topicpage breadcrumbs
 
 - ZON-1999: Bottom-align small column teaser image

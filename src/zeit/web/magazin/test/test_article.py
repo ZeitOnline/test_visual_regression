@@ -135,7 +135,7 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
         in browser.contents
     assert '13: window.ZMO.breakpoint.getTrackingBreakpoint(),' \
         in browser.contents
-    assert '14: "neu"' in browser.contents
+    assert '14: "alt"' in browser.contents
 
     # noscript string
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,redaktion'
