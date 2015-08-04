@@ -253,8 +253,8 @@ define( [ 'jquery' ], function( $ ) {
              */
             var trackingLinks = {
                     main: [
-                        '.main article',
-                        'a:not([data-wt-click])'
+                        '.main',
+                        'article a:not([data-wt-click])'
                     ],
                     useDataId: [
                         [
