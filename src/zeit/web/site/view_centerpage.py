@@ -160,7 +160,7 @@ class Centerpage(
         elif self.context.type == 'topicpage':
             self.breadcrumbs_by_navigation(breadcrumbs)
             breadcrumbs.extend([(
-                'Thema: {}'.format(self.context.title), None)])
+                u'Thema: {}'.format(self.context.title), None)])
         # Archive year index
         elif self.context.type == 'archive-print-year':
             breadcrumbs.extend([
