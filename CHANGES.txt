@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1999: Bottom-align small column teaser image
 
+- FIX: Re-enable profiling of default area template
+
 
 1.49 (2015-08-04)
 -----------------
