@@ -76,7 +76,7 @@ define( [ 'jquery' ], function( $ ) {
                 data;
 
             if ( linkClassName === 'parquet-meta__title' ) {
-                linkType = sanitizeString( $element.text().trim().toLowerCase() );
+                linkType = sanitizeString( $element.text() );
             } else {
                 linkType = linkClassName.split( '__' ).pop().replace( '-', '' );
             }
@@ -110,7 +110,7 @@ define( [ 'jquery' ], function( $ ) {
                     currentParagraphNumber + '/seite-' + currentPageNumber, // "Nummer des Absatzes"/"Nummer der Seite" Bsp: "2/seite-1"
                     '', // [spalte] leer lassen
                     '', // [subreihe] leer lassen
-                    $element.text(), // [bezeichner] Verlinkter Text bsp. "Koalitionsverhandlungen sind gescheitert"
+                    sanitizeString( $element.text() ), // [bezeichner] Verlinkter Text bsp. "koalitionsverhandlungen_sind_gescheitert"
                     $element.attr( 'href' ) // url
                 ];
 
@@ -153,24 +153,28 @@ define( [ 'jquery' ], function( $ ) {
     /**
      * returns a string that is webtrekk-safe
      * @param  {string}     string from
-     * @return {string}     string that only contains characters, numbers and minus
+     * @return {string}     lowercase string that only contains alphanumeric characters and underscore
      */
     sanitizeString = function( str ) {
         var map = {
                 'ä': 'ae',
                 'ö': 'oe',
                 'ü': 'ue',
-                'Ä': 'Ae',
-                'Ö': 'Oe',
-                'Ü': 'Ue',
-                'ß': 'ss',
-                '_': '-'
+                'á': 'a',
+                'à': 'a',
+                'é': 'e',
+                'è': 'e',
+                'ß': 'ss'
             },
             transliterate = function( m ) {
-                return map[m] || '';
+                return map[m] || '_';
             };
 
-        return str.replace( /[^A-Za-z0-9\-]/g, transliterate );
+        return str
+            .toLowerCase()
+            .replace( /\W/g, transliterate )
+            .replace( /_+/g, '_' )
+            .replace( /^_|_$/g, '' );
     },
     /**
      *
