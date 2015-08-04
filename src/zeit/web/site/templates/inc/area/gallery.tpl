@@ -7,7 +7,8 @@
 {% set module_layout = 'teaser-gallery' %}
 
 {% block before_module_list %}
-	{{ cp.section_heading('Fotostrecken', 'Alle Fotostrecken', 'foto/index', view) }}
+    {% set tracking_slug = '{}...{}.{}'.format(region_loop.index, '-'.join([area.kind, module_layout]), 'alle_fotostrecken') %}
+	{{ cp.section_heading('Fotostrecken', 'Alle Fotostrecken', 'foto/index', view, tracking_slug) }}
 {% endblock %}
 
 {% block module_list %}

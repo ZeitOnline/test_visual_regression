@@ -258,7 +258,8 @@ define( [ 'jquery' ], function( $ ) {
                          '.footer',
                          '.article-interactions',
                          '.article-tags',
-                         '#snapshot',
+                         '.section-heading',
+                         '.snapshot__media',
                          '#servicebox'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
