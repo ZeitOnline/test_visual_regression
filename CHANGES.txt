@@ -4,6 +4,8 @@ Change log for zeit.web
 1.48.2 (unreleased)
 -------------------
 
+- HOTFIX: Generate URLs for article images properly.
+
 - ZON-1817: Adjust ZON footer line-height
 
 - ZON-1816: Scroll footer into view

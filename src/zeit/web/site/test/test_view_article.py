@@ -431,6 +431,12 @@ def test_article_column_should_be_identifiable_by_suitable_css_class(
     assert browser.cssselect('.article-body.article-body--columnarticle')
 
 
+def test_article_should_show_main_image_from_imagegroup(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    images = browser.cssselect('.article-body img')
+    assert 'filmstill-hobbit-schlacht-fuenf-hee' in images[0].get('src')
+
+
 def test_article_should_have_proper_meetrics_integration(
         testserver, testbrowser):
     browser = testbrowser(
