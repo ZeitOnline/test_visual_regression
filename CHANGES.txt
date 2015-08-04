@@ -4,6 +4,8 @@ Change log for zeit.web
 2.0.0 (unreleased)
 ------------------
 
+- HOTFIX: Sanitize click tracking breakpoint value correctly
+
 - HOTFIX: Handle articles without authors
 
 - ZON-1965: Verpixelung Printbox und Angebotsbox
