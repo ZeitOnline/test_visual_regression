@@ -32,8 +32,10 @@ require([
 // plugins that require other plugins or libraries must use the shim config
 require([
     'jquery',
+    'web.core/plugins/jquery.animatescroll',
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount',
+    'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.site/plugins/jquery.accordion',
     'web.site/plugins/jquery.adaptnav',
     'web.site/plugins/jquery.autoclick',
@@ -68,6 +70,7 @@ require([
         $( '#series_select' ).selectNav();
         $( '.js-gallery-teaser-shuffle' ).shuffleTeasers();
         $( '.js-accordion' ).accordion();
+        $( '.js-scroll' ).animateScroll();
     } else if ( article.length ) {
         // article, gallery etc.
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });

@@ -209,9 +209,9 @@
 }
 
 @mixin drop_icon {
-	display: inline-block;
-	margin-left: $tiny;
 	content: "▾";
+	display: inline-block; // needed for working transformation
+	margin-left: $tiny;
 }
 
 /* mixins for navigation/header */
