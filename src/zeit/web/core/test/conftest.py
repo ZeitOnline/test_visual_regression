@@ -86,6 +86,8 @@ settings = {
         'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
     'vivi_zeit.cms_source-navigation': (
         'egg://zeit.cms.content/navigation.xml'),
+    'vivi_zeit.cms_source-channels': (
+        'egg://zeit.cms.content/navigation.xml'),
     'vivi_zeit.cms_source-products': (
         'egg://zeit.web.core/data/config/products.xml'),
     'vivi_zeit.cms_source-serie': (

@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2001: Mimic article tags display like back in the days of ZON vintage
 
+- HOTFIX: Handle articles without authors
+
 
 1.50 (2015-08-04)
 -----------------

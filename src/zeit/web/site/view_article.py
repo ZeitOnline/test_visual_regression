@@ -111,6 +111,8 @@ class ColumnArticle(Article):
 
     @zeit.web.reify
     def author_img(self):
+        if not self.authors:
+            return
         return zeit.web.core.template.closest_substitute_image(
             self.authors[0]['image_group'], 'zon-column')
 
