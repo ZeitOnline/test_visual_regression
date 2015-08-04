@@ -32,7 +32,7 @@ define( [ 'jquery' ], function( $ ) {
                 $article = $element.closest( 'article' ),
                 $area = $element.closest( '.cp-area' ),
                 articleClasses = $article.get( 0 ).className.split( ' ' );
-            if ( $element.attr( 'class' ).indexOf( 'button' ) !== -1 ) {
+            if ( $element.get( 0 ).className.indexOf( 'button' ) !== -1 ) {
                 type = 'button';
             } else if ( $element.closest( 'figure' ).length ) {
                 type = 'image';
@@ -265,7 +265,8 @@ define( [ 'jquery' ], function( $ ) {
                          '.article-tags',
                          '.section-heading',
                          '.snapshot__media',
-                         '#servicebox'
+                         '#servicebox',
+                         '.print-box'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],

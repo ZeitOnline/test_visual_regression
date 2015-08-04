@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Handle articles without authors
 
+- ZON-1965: Verpixelung Printbox und Angebotsbox
+
 
 1.50 (2015-08-04)
 -----------------
