@@ -12,6 +12,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
+import zeit.content.cp.centerpage
+
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 import zeit.web.core.utils
@@ -961,6 +963,17 @@ def test_homepage_should_have_no_breadcrumbs(
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
     view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
     assert view.breadcrumbs == []
+
+
+def test_breadcrumbs_should_handle_non_ascii(application, monkeypatch):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/main-teaser-setup')
+    monkeypatch.setattr(
+        zeit.content.cp.centerpage.CenterPage, u'title', u'umläut')
+    monkeypatch.setattr(
+        zeit.content.cp.centerpage.CenterPage, u'type', u'topicpage')
+    view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
+    assert (u'Thema: umläut', None) in view.breadcrumbs
 
 
 def test_mobile_invisibility(testbrowser):

@@ -4,6 +4,8 @@ Change log for zeit.web
 1.50 (unreleased)
 -----------------
 
+- HOTFIX: Handle umlauts in topicpage breadcrumbs
+
 - ZON-1999: Bottom-align small column teaser image
 
 
