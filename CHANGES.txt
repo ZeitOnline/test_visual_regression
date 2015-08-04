@@ -1,16 +1,30 @@
 Change log for zeit.web
 =======================
 
-1.50 (unreleased)
+2.0.0 (unreleased)
+------------------
+
+- HOTFIX: Handle articles without authors
+
+- ZON-1965: Verpixelung Printbox und Angebotsbox
+
+
+1.50 (2015-08-04)
 -----------------
+
+- PERF: Cache variant image retrieval by group and pattern
+
+- FIX: Fix wrong cp14 in webtrekk on ZMO
+
+- FIX: Avoid empty regions
+
+- FIX: Add click tracking for section heading
 
 - HOTFIX: Handle umlauts in topicpage breadcrumbs
 
 - ZON-1999: Bottom-align small column teaser image
 
 - FIX: Re-enable profiling of default area template
-
-- ZON-1965: Verpixelung Printbox und Angebotsbox
 
 
 1.49 (2015-08-04)
