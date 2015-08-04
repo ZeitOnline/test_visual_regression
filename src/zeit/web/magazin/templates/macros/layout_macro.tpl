@@ -153,7 +153,7 @@
 {%- endmacro %}
 
 {% macro copyrights(cr_list) -%}
-    <div class="copyrights">
+    <div id="copyrights" class="copyrights">
         <a class="js-toggle-copyrights copyrights__close copyrights__close--cross icon-copyrights-close"></a>
         <section class="copyrights__wrapper is-centered is-constrained">
             <span class="copyrights__title">Bildrechte auf dieser Seite</span>

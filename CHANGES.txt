@@ -4,7 +4,9 @@ Change log for zeit.web
 1.48.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1817: Adjust ZON footer line-height
+
+- ZON-1816: Scroll footer into view
 
 
 1.48.1 (2015-08-03)
