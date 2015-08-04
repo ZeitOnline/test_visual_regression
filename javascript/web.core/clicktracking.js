@@ -260,7 +260,8 @@ define( [ 'jquery' ], function( $ ) {
                          '.article-interactions',
                          '.article-tags',
                          '#snapshot',
-                         '#servicebox'
+                         '#servicebox',
+                         '.print-box'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],
