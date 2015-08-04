@@ -4,6 +4,8 @@ Change log for zeit.web
 1.50 (unreleased)
 -----------------
 
+- ZON-2001: Mimic article tags display like back in the days of ZON vintage
+
 - FIX: Fix wrong cp14 in webtrekk on ZMO
 
 - FIX: Avoid empty regions
