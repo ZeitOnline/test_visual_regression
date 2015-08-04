@@ -1,10 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.50 (unreleased)
------------------
+2.0.0 (unreleased)
+------------------
 
 - ZON-2001: Mimic article tags display like back in the days of ZON vintage
+
+
+1.50 (2015-08-04)
+-----------------
+
+- PERF: Cache variant image retrieval by group and pattern
 
 - FIX: Fix wrong cp14 in webtrekk on ZMO
 

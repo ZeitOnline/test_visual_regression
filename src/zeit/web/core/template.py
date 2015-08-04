@@ -9,6 +9,7 @@ import urllib
 import urlparse
 
 import babel.dates
+import beaker.cache
 import pyramid.threadlocal
 import repoze.bitblt.transform
 import zope.component
@@ -27,6 +28,13 @@ import zeit.web.core.interfaces
 import zeit.web.core.utils
 
 log = logging.getLogger(__name__)
+
+
+@beaker.cache.cache_region('long_term', 'variant_image')
+def get_variant(unique_id, pattern):
+    imagegroup = zeit.cms.interfaces.ICMSContent(unique_id)
+    variant = imagegroup.get_variant_by_name(pattern)
+    return zeit.web.core.interfaces.ITeaserImage(variant, None)
 
 
 @zeit.web.register_filter
@@ -55,8 +63,7 @@ def get_image(module, content=None, fallback=True):
     else:
         image_pattern = 'default'
 
-    variant = imagegroup.get_variant_by_name(image_pattern)
-    return zeit.web.core.interfaces.ITeaserImage(variant, None)
+    return get_variant(imagegroup.uniqueId, image_pattern)
 
 
 @zeit.web.register_test
