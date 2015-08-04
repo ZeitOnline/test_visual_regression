@@ -30,8 +30,9 @@ define( [ 'jquery' ], function( $ ) {
                 type = 'text',
                 teasertype = '',
                 $article = $element.closest( 'article' ),
+                elementClass = $element.attr( 'class' ) || '',
                 articleClasses = $article.get( 0 ).className.split( ' ' );
-            if ( $element.attr( 'class' ).indexOf( 'button' ) !== -1 ) {
+            if ( elementClass.indexOf( 'button' ) !== -1 ) {
                 type = 'button';
             } else if ( $element.closest( 'figure' ).length ) {
                 type = 'image';
