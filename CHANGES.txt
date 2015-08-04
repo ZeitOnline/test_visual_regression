@@ -4,7 +4,11 @@ Change log for zeit.web
 1.50 (unreleased)
 -----------------
 
+- HOTFIX: Handle umlauts in topicpage breadcrumbs
+
 - ZON-1999: Bottom-align small column teaser image
+
+- FIX: Re-enable profiling of default area template
 
 
 1.49 (2015-08-04)
@@ -15,6 +19,8 @@ Change log for zeit.web
 - ZON-1817: Adjust ZON footer line-height
 
 - ZON-1816: Scroll footer into view
+
+- MAINT: Improve diagnostics for video images
 
 
 1.48.1 (2015-08-03)
