@@ -1,9 +1,5 @@
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 
-{% if area is undefined %}
-{% set area = view %}
-{% endif %}
-
 {% set module_layout = 'teaser-gallery' %}
 
 {% block before_module_list %}
