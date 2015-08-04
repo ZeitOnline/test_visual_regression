@@ -132,10 +132,10 @@ def test_variant_jinja_test_should_recognize_variants(application):
 def test_variant_getter_should_fallback_to_fallback_if_fallback_is_enabled(
         application):
     variant = zeit.web.core.template.get_image(None, fallback=True)
-    assert variant.image_group.uniqueId.endswith('/default/teaser_image/')
+    assert variant.path.endswith('/teaser_image/default')
 
 
-def test_variant_getter_should_fallback_to_fallback_if_fallback_is_disabled(
+def test_variant_getter_shant_fallback_to_fallback_if_fallback_is_disabled(
         application):
     variant = zeit.web.core.template.get_image(None, fallback=False)
     assert variant is None
