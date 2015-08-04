@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.50 (unreleased)
+1.50 (2015-08-04)
 -----------------
 
 - PERF: Cache variant image retrieval by group and pattern
