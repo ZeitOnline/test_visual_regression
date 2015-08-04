@@ -30,6 +30,7 @@ define( [ 'jquery' ], function( $ ) {
                 type = 'text',
                 teasertype = '',
                 $article = $element.closest( 'article' ),
+                $area = $element.closest( '.cp-area' ),
                 articleClasses = $article.get( 0 ).className.split( ' ' );
             if ( $element.attr( 'class' ).indexOf( 'button' ) !== -1 ) {
                 type = 'button';
@@ -41,8 +42,8 @@ define( [ 'jquery' ], function( $ ) {
             data = [
                 getBreakpoint(),
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // region bzw. verortung
-                $element.closest( '.cp-area' ).index() + 1, // area bzw. reihe
-                $article.index() + 1, // module bzw. spalte
+                $area.index() + 1, // area bzw. reihe
+                $area.find( 'article' ).index( $article ) + 1, // module bzw. spalte
                 teasertype, // subreihe
                 type, // bezeichner (image, button, text)
                 $element.attr( 'href' ) // url
@@ -75,7 +76,7 @@ define( [ 'jquery' ], function( $ ) {
                 data;
 
             if ( linkClassName === 'parquet-meta__title' ) {
-                linkType = sanitizeString( $element.text().trim().toLowerCase() );
+                linkType = sanitizeString( $element.text() );
             } else {
                 linkType = linkClassName.split( '__' ).pop().replace( '-', '' );
             }
@@ -109,7 +110,7 @@ define( [ 'jquery' ], function( $ ) {
                     currentParagraphNumber + '/seite-' + currentPageNumber, // "Nummer des Absatzes"/"Nummer der Seite" Bsp: "2/seite-1"
                     '', // [spalte] leer lassen
                     '', // [subreihe] leer lassen
-                    $element.text(), // [bezeichner] Verlinkter Text bsp. "Koalitionsverhandlungen sind gescheitert"
+                    sanitizeString( $element.text() ), // [bezeichner] Verlinkter Text bsp. "koalitionsverhandlungen_sind_gescheitert"
                     $element.attr( 'href' ) // url
                 ];
 
@@ -152,24 +153,28 @@ define( [ 'jquery' ], function( $ ) {
     /**
      * returns a string that is webtrekk-safe
      * @param  {string}     string from
-     * @return {string}     string that only contains characters, numbers and minus
+     * @return {string}     lowercase string that only contains alphanumeric characters and underscore
      */
     sanitizeString = function( str ) {
         var map = {
                 'ä': 'ae',
                 'ö': 'oe',
                 'ü': 'ue',
-                'Ä': 'Ae',
-                'Ö': 'Oe',
-                'Ü': 'Ue',
-                'ß': 'ss',
-                '_': '-'
+                'á': 'a',
+                'à': 'a',
+                'é': 'e',
+                'è': 'e',
+                'ß': 'ss'
             },
             transliterate = function( m ) {
-                return map[m] || '';
+                return map[m] || '_';
             };
 
-        return str.replace( /[^A-Za-z0-9\-]/g, transliterate );
+        return str
+            .toLowerCase()
+            .replace( /\W/g, transliterate )
+            .replace( /_+/g, '_' )
+            .replace( /^_|_$/g, '' );
     },
     /**
      *
@@ -248,8 +253,8 @@ define( [ 'jquery' ], function( $ ) {
              */
             var trackingLinks = {
                     main: [
-                        '.main article',
-                        'a:not([data-wt-click])'
+                        '.main',
+                        'article a:not([data-wt-click])'
                     ],
                     useDataId: [
                         [
@@ -258,7 +263,8 @@ define( [ 'jquery' ], function( $ ) {
                          '.footer',
                          '.article-interactions',
                          '.article-tags',
-                         '#snapshot',
+                         '.section-heading',
+                         '.snapshot__media',
                          '#servicebox'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'

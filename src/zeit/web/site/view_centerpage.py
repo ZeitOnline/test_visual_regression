@@ -259,7 +259,10 @@ class CenterpageArea(Centerpage):
                     return
 
     def __call__(self):
-        return {'area': self.context}
+        return {
+            'area': self.context,
+            'region_loop': {'index': 1}
+        }
 
 
 @pyramid.view.view_config(

@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Avoid empty regions
 
+- FIX: Add click tracking for section heading
+
 - HOTFIX: Handle umlauts in topicpage breadcrumbs
 
 - ZON-1999: Bottom-align small column teaser image
