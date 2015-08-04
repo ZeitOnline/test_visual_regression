@@ -58,7 +58,7 @@
             11: "", // Fehler
             12: window.ZMO.isMobileView() ? "mobile.site" : "desktop.site",
             13: window.ZMO.breakpoint.getTrackingBreakpoint(),
-            14: "neu"
+            14: "{{ 'alt' if 'zeitmz' in view.banner_channel else 'neu'  }}"
         };
 
         wt.contentId = Z_WT_KENNUNG;

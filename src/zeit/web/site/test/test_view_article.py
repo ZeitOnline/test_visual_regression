@@ -424,11 +424,28 @@ def test_article_should_not_break_on_author_without_image(
         '.column-heading__author .column-heading__media-item')
 
 
+def test_article_should_not_break_without_author(
+        testbrowser, workingcopy):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/kolumne')
+    with checked_out(content) as co:
+        co.authorships = ()
+    browser = testbrowser('/zeit-online/cp-content/kolumne')
+    assert not browser.cssselect(
+        '.column-heading__author .column-heading__media-item')
+
+
 def test_article_column_should_be_identifiable_by_suitable_css_class(
         testbrowser):
     browser = testbrowser('/zeit-online/cp-content/kolumne')
     assert browser.cssselect('.article.article--columnarticle')
     assert browser.cssselect('.article-body.article-body--columnarticle')
+
+
+def test_article_should_show_main_image_from_imagegroup(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    images = browser.cssselect('.article-body img')
+    assert 'filmstill-hobbit-schlacht-fuenf-hee' in images[0].get('src')
 
 
 def test_article_should_have_proper_meetrics_integration(

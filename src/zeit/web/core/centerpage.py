@@ -231,30 +231,27 @@ class VariantImage(object):
         self.caption = meta.caption
         self.context = context
         self.copyright = meta.copyrights
-        self.image_group = group
         self.image_pattern = context.name
+        self.path = group.variant_url(self.image_pattern).lstrip('/')
         self.ratio = context.ratio
         self.title = meta.title
         self.variant = context.legacy_name or context.name
 
-    @zeit.web.reify
-    def path(self):
-        return self.image_group.variant_url(self.image_pattern).lstrip('/')
-
 
 class LocalVideoImage(object):
 
-    def __new__(cls, video_url):
+    def __new__(cls, video_url, video_id):
         instance = object.__new__(cls)
-        instance.__init__(video_url)
+        instance.__init__(video_url, video_id)
         try:
             instance.fetch()
         except VideoImageNotFound:
             return cls.fallback_image()
         return instance
 
-    def __init__(self, video_url):
+    def __init__(self, video_url, video_id):
         self.url = video_url or ''
+        self.video_id = video_id
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         self.filename = "{}/{}".format(
             conf.get('brightcove_image_cache', tempfile.gettempdir()),
@@ -279,8 +276,9 @@ class LocalVideoImage(object):
 
             with self.open('w+') as fh:
                 fh.write(content)
-                log.debug("Save brightcove image {} to local file {}".format(
-                    self.url, self.filename))
+                log.debug(
+                    "Save brightcove image {} for {} to local file {}".format(
+                        self.url, self.video_id, self.filename))
         except (IOError, AttributeError, ContentTooShort):
             raise VideoImageNotFound()
 
@@ -333,7 +331,7 @@ class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
                                    ('thumbnail', video.thumbnail)]:
             image = zeit.web.core.block.BaseImage()
             try:
-                image.image = LocalVideoImage(src)
+                image.image = LocalVideoImage(src, video.uniqueId)
             except VideoImageNotFound:
                 continue
 

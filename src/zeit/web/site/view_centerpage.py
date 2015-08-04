@@ -160,7 +160,7 @@ class Centerpage(
         elif self.context.type == 'topicpage':
             self.breadcrumbs_by_navigation(breadcrumbs)
             breadcrumbs.extend([(
-                'Thema: {}'.format(self.context.title), None)])
+                u'Thema: {}'.format(self.context.title), None)])
         # Archive year index
         elif self.context.type == 'archive-print-year':
             breadcrumbs.extend([
@@ -259,7 +259,10 @@ class CenterpageArea(Centerpage):
                     return
 
     def __call__(self):
-        return {'area': self.context}
+        return {
+            'area': self.context,
+            'region_loop': {'index': 1}
+        }
 
 
 @pyramid.view.view_config(
@@ -273,8 +276,9 @@ class LegacyCenterpage(Centerpage):
     def regions(self):
         regions = []
 
-        region_fullwidth = LegacyRegion([self.area_solo])
-        regions.append(region_fullwidth)
+        if(len(self.area_solo.values()) > 0):
+            region_fullwidth = LegacyRegion([self.area_solo])
+            regions.append(region_fullwidth)
 
         region_multi = LegacyRegion([self.area_major, self.area_minor],
                                     kind='multi')
