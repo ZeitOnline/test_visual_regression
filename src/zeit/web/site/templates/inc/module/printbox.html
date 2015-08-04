@@ -1,6 +1,4 @@
-{% set teaser_position_region = region_loop.index %}
-{% set teaser_position_area = area_loop.index %}
-{% set teaser_position_module = module_loop.index %}
+{% set teaser_position = '{}.{}.{}'.format(region_loop.index, area_loop.index, module_loop.index) %}
 
 {% if module.has_digital_ad -%}
 
@@ -9,17 +7,17 @@
         {{ teaser.supertitle }}
     </div>
     <div class="print-box__content">
-            <a class="print-box__title" href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.headline.headline&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_headline_headline" title="{{ teaser.title }}" data-id="{{ teaser_position_region }}.{{ teaser_position_area }}.{{ teaser_position_module }}.angebots-box.title">{{ teaser.title }}</a>
+            <a class="print-box__title" href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.headline.headline&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_headline_headline" title="{{ teaser.title }}" data-id="{{ teaser_position }}.angebots-box.title">{{ teaser.title }}</a>
         <figure class="print-box__media">
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_cover_cover" title="{{ teaser.title }}" data-id="{{ teaser_position_region }}.{{ teaser_position_area }}.{{ teaser_position_module }}.angebots-box.image">
+            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_cover_cover" title="{{ teaser.title }}" data-id="{{ teaser_position }}.angebots-box.image">
                 <img class="print-box__media-item" src="{{ module.image | default_image_url('zon-printbox') }}">
             </a>
         </figure>
         <div class="print-box__container">
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.text.text&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_text_text" title="{{ teaser.title }}" data-id="{{ teaser_position_region }}.{{ teaser_position_area }}.{{ teaser_position_module }}.angebots-box.text">
+            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.text.text&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_text_text" title="{{ teaser.title }}" data-id="{{ teaser_position }}.angebots-box.text">
                 <p class="print-box__text">{{ teaser.subtitle }}</p>
             </a>
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.button.button&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_button_button" data-id="{{ teaser_position_region }}.{{ teaser_position_area }}.{{ teaser_position_module }}.angebots-box.button">
+            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.button.button&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_button_button" data-id="{{ teaser_position }}.angebots-box.button">
                 <span class="print-box__button">Test-Zugang sichern</span>
             </a>
         </div>
@@ -34,25 +32,25 @@
     </div>
     <div class="print-box__content">
         <figure class="print-box__media">
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_cover_cover" title="{{ title }}" data-id="{{ teaser_position_region }}.{{ teaser_position_area }}.{{ teaser_position_module }}.print-box.image">
+            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_cover_cover" title="{{ title }}" data-id="{{ teaser_position }}.print-box.image">
                 <img class="print-box__media-item" src="{{ module.image | default_image_url('zon-printbox-wide') }}">
             </a>
         </figure>
         <div class="print-box__container">
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.headline.headline&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_headline_headline" title="{{ title }}" class="print-box__combined-link" data-id="{{ teaser_position_region }}.{{ teaser_position_area }}.{{ teaser_position_module }}.print-box.title-and-text">
+            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.headline.headline&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_headline_headline" title="{{ title }}" class="print-box__combined-link" data-id="{{ teaser_position }}.print-box.title-and-text">
                 <h2 class="print-box__content-heading">
                     <span class="print-box__kicker">{{ teaser.supertitle }}</span>
                     <span class="print-box__title">{{ teaser.title }}</span>
                 </h2>
                 <p class="print-box__text">{{ teaser.subtitle }}</p>
             </a>
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.weitere.weitere&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_weitere_weitere" class="print-box__link" data-id="{{ teaser_position_region }}.{{ teaser_position_area }}.{{ teaser_position_module }}.print-box.weitere-themen">
+            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.weitere.weitere&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_weitere_weitere" class="print-box__link" data-id="{{ teaser_position }}.print-box.weitere-themen">
                 Weitere Themen
             </a>
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.button.button&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_button_button" data-id="{{ teaser_position_region }}.{{ teaser_position_area }}.{{ teaser_position_module }}.print-box.button">
+            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.button.button&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_button_button" data-id="{{ teaser_position }}.print-box.button">
                 <span class="print-box__button">Mehr erfahren</span>
             </a>
-            <a href="http://leserservice.zeit.de/diesewoche/DIE-ZEIT-kostenlos-testen/index.php?r=npb" id="intern.box.zeitde.fix.probe.homepage.leserservice.text.cross" class="print-box__link" data-id="{{ teaser_position_region }}.{{ teaser_position_area }}.{{ teaser_position_module }}.print-box.testen-sie">
+            <a href="http://leserservice.zeit.de/diesewoche/DIE-ZEIT-kostenlos-testen/index.php?r=npb" id="intern.box.zeitde.fix.probe.homepage.leserservice.text.cross" class="print-box__link" data-id="{{ teaser_position }}.print-box.testen-sie">
                 Testen Sie 3 Wochen die gedruckte ZEIT
             </a>
         </div>
