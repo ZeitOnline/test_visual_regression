@@ -2,6 +2,7 @@
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
 <div class="{{ 'cp-area' | with_mods(area.kind) }}{% if area.visible_mobile == False %} mobile-hidden{% endif %}">
+    {% profile %}
     {% block before_module_list %}{% endblock %}
     {% block module_list %}
         {% for module in area.values() | map('get_module') -%}
@@ -24,4 +25,5 @@
         {% endfor %}
     {% endblock module_list %}
     {% block after_module_list %}{% endblock %}
+    {% endprofile %}
 </div>
