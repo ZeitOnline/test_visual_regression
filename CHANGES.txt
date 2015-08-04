@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-1816: Scroll footer into view
 
+- MAINT: Improve diagnostics for video images
+
 
 1.48.1 (2015-08-03)
 -------------------
