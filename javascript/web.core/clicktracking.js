@@ -30,6 +30,7 @@ define( [ 'jquery' ], function( $ ) {
                 type = 'text',
                 teasertype = '',
                 $article = $element.closest( 'article' ),
+                $area = $element.closest( '.cp-area' ),
                 articleClasses = $article.get( 0 ).className.split( ' ' );
             if ( $element.attr( 'class' ).indexOf( 'button' ) !== -1 ) {
                 type = 'button';
@@ -41,8 +42,8 @@ define( [ 'jquery' ], function( $ ) {
             data = [
                 getBreakpoint(),
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // region bzw. verortung
-                $element.closest( '.cp-area' ).index() + 1, // area bzw. reihe
-                $article.index() + 1, // module bzw. spalte
+                $area.index() + 1, // area bzw. reihe
+                $area.find( 'article' ).index( $article ) + 1, // module bzw. spalte
                 teasertype, // subreihe
                 type, // bezeichner (image, button, text)
                 $element.attr( 'href' ) // url
