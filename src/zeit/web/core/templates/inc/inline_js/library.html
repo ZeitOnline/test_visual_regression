@@ -49,7 +49,7 @@
         breakpoint: {
             get: function () {
                 try {
-                    return window.getComputedStyle( document.querySelector('body'), ':before' ).getPropertyValue( 'content' ).replace( /"/g, '' ) || 'desktop';
+                    return window.getComputedStyle( document.querySelector('body'), ':before' ).getPropertyValue( 'content' ).replace( /\W/g, '' ) || 'desktop'; // replace " and ' at last
                 } catch( e ) {
                     return 'desktop';
                 }
