@@ -20,21 +20,6 @@ def test_anon_user_should_see_login_prompt_on_beta_page(
     assert len(browser.cssselect('a.beta-teaser__button')) == 1
 
 
-def test_community_user_should_see_email_prompt_on_beta_page(
-        mockserver_factory, testserver, testbrowser):
-    user_xml = """<?xml version="1.0" encoding="UTF-8"?>
-    <user>
-        <uid>223754</uid>
-        <roles>
-            <role>authenticated user</role>
-        </roles>
-    </user>
-    """
-    mockserver_factory(user_xml)
-    browser = testbrowser('{}/beta'.format(testserver.url))
-    assert len(browser.cssselect('a.beta-teaser__button')) == 1
-
-
 def test_beta_user_should_see_toggle_form_on_beta_page(
         mockserver_factory, testserver, testbrowser):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
