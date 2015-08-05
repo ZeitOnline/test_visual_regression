@@ -4,7 +4,7 @@ Change log for zeit.web
 1.50 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- IMPROVEMENT: Add tag manager
 
 
 1.49 (2015-08-04)
