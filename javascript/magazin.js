@@ -38,7 +38,7 @@ require([
 // plugins that require other plugins or libraries must use the shim config
 require([
     'jquery',
-    'velocity',
+    'velocity.ui',
     'web.core/plugins/jquery.animatescroll',
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount',
