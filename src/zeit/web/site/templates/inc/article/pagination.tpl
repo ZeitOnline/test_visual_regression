@@ -16,7 +16,9 @@
 	{%- for page in view.pagination.pager %}
 
 		<li class="article-pager__number{% if page == view.pagination.current %} article-pager__number--current{% endif %}">
-			{%- if page -%}
+			{%- if page == view.pagination.current -%}
+				<span>{{ page }}</span>
+			{%- elif page -%}
 				<a href="{{ view.pagination.pages_urls[page - 1] }}" data-id="article-pager....{{ page }}">{{ page }}</a>
 			{%- else -%}
 				<span>…</span>
