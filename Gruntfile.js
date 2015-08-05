@@ -315,7 +315,7 @@ module.exports = function(grunt) {
                 'devFile': project.sourceDir + 'javascript/vendor/modernizr.js',
 
                 // [REQUIRED] Path to save out the built file.
-                'outputFile': project.sourceDir + 'javascript/libs/modernizr-custom.js',
+                'outputFile': project.sourceDir + 'javascript/vendor/modernizr-custom.js',
 
                 // Based on default settings on http://modernizr.com/download/
                 'extra': {
