@@ -59,8 +59,6 @@
             {% block article_pages %}
                 <!-- Here goes the content for a page -->
             {% endblock article_pages %}
-            {% block article_google_ad %}
-            {% endblock article_google_ad %}
             {% block article_pagination %}
                 <!-- Here goes the pagination -->
             {% endblock article_pagination %}
@@ -70,6 +68,7 @@
     </article>
     {% endblock content %}
     {% block article_interactions %}
+        {% include "zeit.web.site:templates/inc/article/interactions.tpl" %}
     {% endblock %}
     {% block article_tags %}
         {% include "zeit.web.site:templates/inc/article/tags.tpl" %}
@@ -77,6 +76,11 @@
     {% block nextread %}
         {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
     {% endblock %}
+    {% block article_google_ad %}
+        {% if view.context.advertising_enabled -%}
+            {{ lama.adplace(view.banner(5), view) }}
+        {%- endif %}
+    {% endblock article_google_ad %}
     {% block comments %}
     {% profile %}
         {% include "zeit.web.site:templates/inc/article/comments.tpl" %}

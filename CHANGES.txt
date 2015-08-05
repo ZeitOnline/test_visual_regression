@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - HOTFIX: Handle articles without authors
 
+- ZON-1971: Move Google ads below nextread
+
 - ZON-2001: Mimic article tags display like back in the days of ZON vintage
 
 - ZON-1965: Verpixelung Printbox und Angebotsbox
