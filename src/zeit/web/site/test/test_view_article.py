@@ -217,7 +217,7 @@ def test_article_sharing_links_should_be_url_encoded(testbrowser):
     assert len(spacey_sharing_links) == 0
 
 
-def test_article_tags_are_present(testbrowser):
+def test_article_tags_are_present_and_limited(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     tags = browser.cssselect('.article-tags')
 
