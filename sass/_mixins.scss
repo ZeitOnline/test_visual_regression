@@ -235,6 +235,13 @@
 
 /* END: mixins for navigation/header */
 
+@mixin transform-origin($value...) {
+	-webkit-transform-origin: $value;
+	   -moz-transform-origin: $value;
+	    -ms-transform-origin: $value;
+	        transform-origin: $value;
+}
+
 @mixin image_text_replacement($display: block, $vertical-align: middle) {
 	@include background-size(contain);
 	background-position: 50% 50%;
