@@ -208,10 +208,23 @@
 	}
 }
 
-@mixin drop_icon {
-	content: "▾";
-	display: inline-block; // needed for working transformation
-	margin-left: $tiny;
+@mixin drop_icon($open: false, $cross: true) {
+	@if $open {
+		@if $cross {
+			content: "\2573";
+			@include transform(rotate(-90deg));
+		}
+		@else {
+			@include transform(rotate(-180deg));
+		}
+	}
+	@else {
+		content: "▾";
+		display: inline-block; // needed for working transformation
+		margin: remify(0 4px);
+		@include transition(transform .5s);
+		@include transform-origin(50% 55%);
+	}
 }
 
 /* mixins for navigation/header */
