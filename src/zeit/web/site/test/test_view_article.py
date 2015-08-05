@@ -223,7 +223,7 @@ def test_article_tags_are_present(testbrowser):
 
     assert len(tags) == 1
     assert len(tags[0].find_class('article-tags__title')) == 1
-    assert len(tags[0].find_class('article-tags__link')) == 7
+    assert len(tags[0].find_class('article-tags__link')) == 6
 
 
 def test_infobox_in_article_is_shown(testbrowser):
