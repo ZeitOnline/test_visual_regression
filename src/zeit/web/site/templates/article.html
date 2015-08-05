@@ -25,18 +25,11 @@
 {% endif %}
 {%- endblock %}
 
-
 {% block article_pages %}
     <div class="article-page" data-page-number="{{ view.current_page.number+1 }}">
         {{ render_page(view.current_page) }}
     </div>
 {% endblock article_pages %}
-
-{% block article_google_ad %}
-    {% if view.context.advertising_enabled -%}
-        {{ lama.adplace(view.banner(5), view) }}
-    {%- endif %}
-{% endblock article_google_ad %}
 
 {% block article_main_image %}
     {% if view.page_nr == 1 %}
@@ -47,7 +40,3 @@
 {% block article_pagination %}
     {% include "zeit.web.site:templates/inc/article/pagination.tpl" %}
 {% endblock article_pagination %}
-
-{% block article_interactions %}
-    {% include "zeit.web.site:templates/inc/article/interactions.tpl" %}
-{% endblock %}

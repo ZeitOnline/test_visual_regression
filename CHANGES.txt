@@ -1,10 +1,39 @@
 Change log for zeit.web
 =======================
 
-1.50 (unreleased)
------------------
+2.0.0 (unreleased)
+------------------
+
+- HOTFIX: Sanitize click tracking breakpoint value correctly
+
+- HOTFIX: Handle articles without authors
+
+- ZON-1971: Move Google ads below nextread
+
+- ZON-2001: Mimic article tags display like back in the days of ZON vintage
+
+- ZON-1965: Verpixelung Printbox und Angebotsbox
 
 - IMPROVEMENT: Add tag manager
+
+
+
+1.50 (2015-08-04)
+-----------------
+
+- HOTFIX: Handle umlauts in topicpage breadcrumbs
+
+- ZON-1999: Bottom-align small column teaser image
+
+- FIX: Add click tracking for section heading
+
+- FIX: Avoid empty regions
+
+- FIX: Fix wrong cp14 in webtrekk on ZMO
+
+- FIX: Re-enable profiling of default area template
+
+- PERF: Cache variant image retrieval by group and pattern
 
 
 1.49 (2015-08-04)
@@ -16,6 +45,8 @@ Change log for zeit.web
 
 - ZON-1816: Scroll footer into view
 
+- MAINT: Improve diagnostics for video images
+
 
 1.48.1 (2015-08-03)
 -------------------
@@ -26,11 +57,11 @@ Change log for zeit.web
 
 - FIX: Add forgotten header tags tracking
 
-- Fix: Prevent multiple adding of ad tags
+- FIX: Prevent multiple adding of ad tags
 
-- Fix: Fix double OOP Tag
+- FIX: Fix double OOP Tag
 
-- Fix: Add forgotten header tags tracking
+- FIX: Add forgotten header tags tracking
 
 - FIX: Explicitly pass teaser object to image getter
 
@@ -40,13 +71,13 @@ Change log for zeit.web
 
 - ZON-1942: Implement breadcrumbs
 
-- FIX: Fix byline for generic ICMSContent without authorships (e.g. quiz)
-
 - ZON-1994: Make mobile hidden elements available
 
 - ZON-1974: Remove shading hover effect for fullwidth and nextread teasers
 
 - ZON-1945: Add article tags
+
+- FIX: Fix byline for generic ICMSContent without authorships (e.g. quiz)
 
 - MAINT: Update CP layouts, tweak parquet styles, improve accordion script
 
