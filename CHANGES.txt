@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-1965: Verpixelung Printbox und Angebotsbox
 
+- MAINT: Move modernizr custom script to vendor dir
+
 
 1.50 (2015-08-04)
 -----------------
