@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-2.0.0 (unreleased)
-------------------
+1.51 (2015-08-06)
+-----------------
 
 - HOTFIX: Sanitize click tracking breakpoint value correctly
 
