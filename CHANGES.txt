@@ -16,6 +16,12 @@ Change log for zeit.web
 
 - ZON-1965: Verpixelung Printbox und Angebotsbox
 
+- FIX: Ensure article pages without divisions can be rendered
+
+- PERF: Fix memcache-ability of VariantImage
+
+- IMPROVEMENT: Add tag manager
+
 
 1.50 (2015-08-04)
 -----------------

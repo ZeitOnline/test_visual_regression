@@ -94,7 +94,7 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
                         # save the (virtual) page nr on (copies) of the banner,
                         # to be able to handle banner display inside the macro.
                         banner = copy.copy(zeit.web.core.banner.banner_list[t])
-                        setattr(banner, 'on_page_nr', int(page.number+1))
+                        setattr(banner, 'on_page_nr', int(page.number + 1))
                         page.blocks.insert(i, banner)
                         break
             except IndexError:
@@ -122,6 +122,7 @@ def _place_content_ad_by_paragraph(page, possible_paragraphs):
 @grokcore.component.implementer(zeit.web.core.interfaces.IPages)
 def pages_of_article(context):
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
+    body.ensure_division()  # Old articles don't always have divisions.
     try:
         advertising_enabled = context.advertising_enabled
     except AttributeError:
