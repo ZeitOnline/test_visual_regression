@@ -247,7 +247,7 @@ class LazyProxy(object):
         object.__setattr__(self, '__proxy__', context)
 
     def __getattr__(self, key):
-        if not self.__exposed__:
+        if not self.__exposed__ or not hasattr(self.__origin__, key):
             try:
                 return self.__proxy__[key]
             except KeyError:
@@ -274,7 +274,7 @@ class LazyProxy(object):
             cls.__module__, cls.__name__, hex(id(self)))
 
     def __getitem__(self, key):
-        if not self.__exposed__:
+        if not self.__exposed__ or key not in self.__origin__:
             try:
                 return self.__proxy__[key]
             except KeyError:
