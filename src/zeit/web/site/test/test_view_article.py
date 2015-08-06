@@ -552,3 +552,10 @@ def test_messy_archive_metadata_should_have_minimal_breadcrumbs(
     article_view = zeit.web.site.view_article.Article(context, mock.Mock())
     # Fallback to default breadcrumbs, including the article title
     assert article_view.title in article_view.breadcrumbs[1][0]
+
+
+def test_old_archive_text_without_divisions_should_render_paragraphs(
+        testbrowser):
+    browser = testbrowser('/zeit-online/article/alter-archivtext')
+    assert len(browser.cssselect('.article__item.paragraph')) == 7
+    assert len(browser.cssselect('.article-pager__number')) == 3
