@@ -39,8 +39,8 @@ class Reach(object):
         kw.setdefault('limit', 3)
         docs = self._get('/'.join(('ranking', location)), **kw) or []
         for idx, doc in enumerate(docs):
-            doc['teaserTitle'] = doc['title']
-            doc['teaserSupertitle'] = doc['supertitle']
+            doc['teaserTitle'] = doc.get('title')
+            doc['teaserSupertitle'] = doc.get('supertitle')
             docs[idx] = zeit.cms.interfaces.ICMSContent(doc)
         return docs
 

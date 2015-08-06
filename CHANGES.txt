@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - MAINT: Move modernizr custom script to vendor dir
 
+- FIX: Repair lazy proxy exposed getter, stabilize buzz box
+
 - FIX: Ensure article pages without divisions can be rendered
 
 - PERF: Fix memcache-ability of VariantImage
