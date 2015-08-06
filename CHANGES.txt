@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - FIX: Ensure article pages without divisions can be rendered
 
+- PERF: Fix memcache-ability of VariantImage
+
 - IMPROVEMENT: Add tag manager
 
 
