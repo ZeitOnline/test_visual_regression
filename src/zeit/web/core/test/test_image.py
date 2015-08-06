@@ -205,7 +205,8 @@ def test_variant_getter_should_get_correct_variant_by_image_pattern(
     monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'large'.format)
     variant = zeit.web.core.template.get_image(mock.Mock(), content)
     imagegroup = zeit.content.image.interfaces.IImages(content).image
-    assert imagegroup.get_variant_by_key('wide') == variant.context
+    wide_url = imagegroup.variant_url('wide')
+    assert wide_url == '/' + variant.path
 
 
 def test_variant_getter_should_gracefully_handle_unavailable_variant(

@@ -16,6 +16,7 @@ Change log for zeit.web
 
 - IMPROVEMENT: Add tag manager
 
+- PERF: Fix memcache-ability of VariantImage
 
 
 1.50 (2015-08-04)
