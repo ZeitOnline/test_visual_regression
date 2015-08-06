@@ -52,10 +52,10 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
     function scaleImage( image ) {
         var $img = $( image ),
             $parent = $img.closest( '.scaled-image' ),
-            ratio = $img.data( 'ratio' ),
             isMobile = window.ZMO.breakpoint.get() === 'mobile' || window.ZMO.breakpoint.get() === 'phablet',
             hasMobileVariant = isMobile && typeof $img.data( 'mobile-ratio' ) !== 'undefined' &&
                 typeof $img.data( 'mobile-src' ) !== 'undefined',
+            ratio = hasMobileVariant ? $img.data( 'mobile-ratio' ) : $img.data( 'ratio' ),
             msieWidth = false,
             width, height, token, source, subject,
             styles, minHeight, maxHeight;
