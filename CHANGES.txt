@@ -16,8 +16,11 @@ Change log for zeit.web
 
 - MAINT: Move modernizr custom script to vendor dir
 
-- IMPROVEMENT: Add tag manager
+- FIX: Ensure article pages without divisions can be rendered
 
+- PERF: Fix memcache-ability of VariantImage
+
+- IMPROVEMENT: Add tag manager
 
 
 1.50 (2015-08-04)
