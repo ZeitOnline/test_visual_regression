@@ -449,6 +449,11 @@ def closest_substitute_image(image_group,
 
 
 @zeit.web.register_filter
+def replace_variant_in_image_url(image_url, new_variant):
+    return image_url.rsplit('/', 1)[0] + '/' + new_variant
+
+
+@zeit.web.register_filter
 def pluralize(num, *forms):
     try:
         num = '{:,d}'.format(int(num)).replace(',', '.')
