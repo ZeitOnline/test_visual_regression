@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - PERF: Fix memcache-ability of VariantImage
 
+- MAINT: Article polishing
+
 - IMPROVEMENT: Add tag manager
 
 
