@@ -123,15 +123,15 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
             }
         }
 
-        source = image.src || $img.data( 'src' );
+        source = hasMobileVariant ? $img.data( 'mobile-src' ) : $img.data( 'src' ); // image.src ||
         width = Math.round( width );
         height = Math.round( height );
 
-        if ( /bitblt/.test( source ) ) {
+        if ( /bitblt/.test( source ) ) { // #TRASHME: for old BitBlt shizzle
             token = prefix( width, height );
             image.src = source.replace( /\/bitblt-\d+x\d+-[a-z0-9]+/, token );
-        } else if ( /__/.test( source ) ) {
-            image.src = source.replace( /([0-9]+x[0-9]+)$/, width + 'x' + height );
+        // } else if ( /__/.test( source ) ) {
+        //     image.src = source.replace( /([0-9]+x[0-9]+)$/, width + 'x' + height );
         } else {
             image.src = source + '__' + width + 'x' + height;
         }
