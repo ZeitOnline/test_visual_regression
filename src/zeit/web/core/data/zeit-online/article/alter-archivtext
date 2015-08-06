@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article>
+  <head>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="new_comments">1</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="revision">42</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">÷-Scientologen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">Politik</attribute>
+    <references>
+      <reference type="intern" href="http://xml.zeit.de/2008/13/Evangelikale" year="2008" issue="13">
+        <title>So groß  ist unser  Gott!</title>
+        <description>Erzkonservativ in coolem Outfit: Die evangelikalen Freikirchen fristen in Österreich ein Schattendasein. Dennoch schenken sie immer mehr Jugendlichen neuen Lebensinhalt.</description>
+      </reference>
+      <reference type="intern" href="http://xml.zeit.de/2008/13/Donnerstalk" year="2008" issue="13">
+        <title>Im falschen Film</title>
+        <description>Alfred Dorfer über moderne Religionsgründer mit Geschäftssinn</description>
+      </reference>
+    </references>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Nikolaus Jilch</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comment-id">/cms/work/2008/13/Scientologen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">1</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">DIE ZEIT, 20.03.2008 Nr. 13</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2008-03-19T02:35Z</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="keywords">Österreich;Religion;Sekte;Scientology</attribute>
+    <keywordset>
+      <keyword source="manual">Österreich</keyword>
+      <keyword source="manual">Religion</keyword>
+      <keyword source="manual">Sekte</keyword>
+      <keyword source="manual">Scientology</keyword>
+    </keywordset>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="leftcol_ressort">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">14</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">9</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">10466</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="topic">International</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">13</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2008</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">OT 8 antwortet nicht</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">cbunte</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2008-03-20T12:00:00Z</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Ausland</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2008-03-19T02:35:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:d16fd0a7-277a-480b-9b21-a6271ac4f6d2}</attribute>
+  <rankedTags><tag url_value="martin-bartenstein" uuid="95c26264-d854-4ee5-936b-5160cf7c94e6" score="6" type="Person">Martin Bartenstein</tag><tag url_value="oesterreich" uuid="dd4341ba-1e05-4077-9654-ea49ec962630" score="5" type="Location">Österreich</tag><tag url_value="aussteiger" uuid="646ae17b-7605-483c-802c-19f4e8de8861" score="4" type="free">Aussteiger</tag><tag url_value="hollywood" uuid="97ace102-c85a-46ba-8b3d-ed1f4173ae8e" score="4" type="free">Hollywood</tag><tag url_value="ikea" uuid="647c952d-d1cf-43d5-afea-bd2ace8e31ea" score="4" type="Organization">Ikea</tag><tag url_value="innenministeriums" uuid="762e5d9d-eed0-4d62-9bba-1862712c2eb7" score="4" type="Organization">Innenministerium </tag><tag url_value="sekte" uuid="d4824fe5-42a6-4630-83bf-b6722761edd2" score="4" type="free">Sekte</tag><tag url_value="amerika" uuid="8bf4f936-32f2-4a23-ac8f-c06cc00424ae" score="3" type="Location">USA</tag><tag url_value="wien" uuid="7a683a87-3ab0-48ad-b719-e3b375a8b6b5" score="2" type="Location">Wien</tag><tag url_value="berlin" uuid="f0c02270-9bb3-47da-9fa2-a33f919f75d4" score="1" type="Location">Berlin</tag></rankedTags></head><body>
+    <supertitle>Österreich</supertitle>
+    <title>OT 8 antwortet nicht</title>
+    <subtitle>Scientology ist eine Gefahr. In Österreich allerdings nur für Verstand und Geldbörsen seiner wenigen Mitglieder</subtitle>
+    <byline>Von Nikolaus Jilch</byline>
+    <p>Den Persönlichkeitstest gibt es auch zum Mitnehmen. Jeder kann ihn bequem bei sich daheim ausfüllen. 200 Fragen stehen da auf einigen pinkfarbenen Blättern. Keine Spur von der pompösen Hochglanzästhetik, die Scientology sonst bevorzugt. Dafür ist der Test gratis und das Ergebnis vorherbestimmt: »Sie haben ein Problem.« Mindestens. Aber keine Sorge, Scientology hat die Lösung. Gegen entsprechende Spenden, versteht sich.</p>
+    <p>Angelika Thonauer protestiert. »Bei mir wurden damals gar keine Probleme festgestellt«, berichtet sie von ihrem ersten Kontakt mit der Sekte. Die fotoscheue Werbekauffrau mit den langen dunklen Haaren ist seit 15 Jahren Scientologin und eine von zwei Pressesprecherinnen der Organisation in <entity idref="%C3%96sterreich" entity_type="Location" url_value="orte/oesterreich">Österreich</entity>. Sie hat auf jeden Vorwurf die passende Antwort, meist behauptet sie schlicht das Gegenteil.</p>
+    <p>Scientologen bevorzugen ein simples Freund-Feind-Schema. »Entweder bist du für uns oder gegen uns«, so lässt sich die jüngst veröffentlichte Internetpredigt von Tom Cruise zusammenfassen, dem weltweiten Aushängeschild der Sekte. In Deutschland, wo der Filmstar zuletzt seine Missionstätigkeit konzentrierte, nähren solche Aussprüche alte Sorgen. Seit zehn Jahren beobachtet der Verfassungsschutz der Bundesrepublik die Organisation, weil er sie für »demokratie- und verfassungsfeindlich« hält. Regelmäßig warnen deutsche Politiker und Experten vor den Verführern. In Österreich hingegen besticht die Sekte mehr durch ihren klingenden Namen denn durch Präsenz. An einem weltweiten Protesttag gegen Scientology, dem 10. Februar, tauchten auch vor der Wiener Zentrale Demonstranten auf: Gezählte zwölf Sektengegner waren gekommen. Diese Zahl entspricht der Bedeutung von Scientology in Österreich. Pressesprecherin Thonauer spricht zwar von »5.000 bis 7.000 Mitgliedern«. Sektenexperten und Behörden gehen aber von höchstens 500 aktiven Scientologen in Österreich aus. »In absoluten Zahlen klingt das wenig, aber im Vergleich zu anderen Sekten ist Scientology immer noch im Spitzenbereich«, behauptet Martin Felinger von der Gesellschaft gegen Sekten- und Kultgefahren in <entity idref="Wien" entity_type="Location" url_value="orte/wien">Wien</entity>.</p>
+    <p>Die Scientologen gelten als Meister der Reklame. Dafür zuständig: das Office of Special Affairs (OSA), Propagandaministerium im Staate Scientology, das kiloweise Hochglanz-Werbematerial produziert. Angelika Thonauer ist die OSA-Residentin in Österreich. Als Kämpfer gegen Drogen, gegen Leid und für den Weltfrieden – so will sich Scientology der Öffentlichkeit verkaufen.</p>
+    <p>»Weltfrieden? Wohl eher Weltherrschaft«, sagt Wilfried Handl und lacht. Der 53-jährige Wiener war 28 Jahre lang in der Sekte. Dann wurde bei ihm Krebs diagnostiziert. Die Nähe zum Tod ließ ihn das System erstmals hinterfragen. Er stieg aus, schrieb ein Buch und ist heute der Kronzeuge gegen Scientology im deutschsprachigen Raum. Immerhin war er einmal Chef der Organisation in Wien. Handl sagt heute, dass er ein »Parteisoldat in einem faschistischen System« war. »Ich habe Menschen von Scientology abhängig gemacht, habe sie genötigt, Kurse zu besuchen und viel Geld dafür zu bezahlen«, gesteht er.</p>
+    <p>In Österreich ist die Organisation weder eine anerkannte Religions- noch eine Bekenntnisgemeinschaft, sondern lediglich der eingetragene Verein Scientology Kirche Österreich, Capistrangasse 4 in Wien-Mariahilf, gegründet am 31. März 1971, Vereinsregister-Zahl 028678946. Der Empfangsraum der »Kirche« sieht aus wie eine schlecht sortierte Buchhandlung. So als habe nur ein Mensch jemals Bücher geschrieben: Lafayette Ron Hubbard, Erfinder von Scientology, gestorben 1986. »Was Sie hier sehen, sind Neuübersetzungen, gerade erst erschienen«, sagt Thonauer. Bunt, protzig und sehr amerikanisch kommen die Titel daher.</p>
+    <p>
+      Für Scientologen ist der Vielschreiber »L. Ron« die zentrale Bezugsperson. Schon in seinem ersten Buch,
+      <em>Dianetik,</em>
+      behauptete er, alle Antworten auf alle Probleme der Menschheit zu besitzen. In weiteren 200 Schmökern gab er sie dann auch. Dass er dabei jedes Übel der Welt auf außerirdische Eingriffe zurückführt, darf nicht überraschen: Hubbard war ursprünglich Science-Fiction-Autor.
+    </p>
+    <intertitle>»Wenn man Geld verdienen will, sollte man eine Religion starten«</intertitle>
+    <p>Angelika Thonauers Büro liegt gleich neben jenem des Gründers. Jede »Mission« beherbergt solch eine Büroattrappe für das Phantom. Verkaufsraumdesigner von <entity idref="Ikea" entity_type="Organization" url_value="organisationen/ikea">Ikea</entity> hätten sie nicht besser hinbekommen: dunkles Holz, rote Vorhänge, Aktenordner und viele, viele Bücher. Auf dem Schreibtisch liegt ein Vergrößerungsglas. »Hier arbeitet ein Gelehrter«, will die Einrichtung sagen. Von seinem Schreibtisch aus hätte Hubbard, würde er noch leben und in Wien vorbeischauen, einen guten Blick auf die Monitore, an die vier Überwachungskameras angeschlossen sind und die Aktivitäten in den verschiedenen Räumen der Zentrale übertragen.</p>
+    <p>»Für einen Penny pro Wort zu schreiben ist lächerlich. Wenn man eine Million Dollar verdienen will, sollte man seine eigene Religion starten«, soll Hubbard einmal gesagt haben. Als Religionsgemeinschaft steht die Church of Scientology seit 1953 in den USA unter dem Schutz des ersten Verfassungszusatzes und zahlt keine Steuern. Auf dieser Basis schuf sich Hubbard einen hartnäckigen und zahlungswilligen Fanclub. Auch in Österreich.</p>
+    <p>
+      Eine Kette von Kursen bildet das Rückgrat des Systems Scientology. Über zwanzig Stufen kann ein Scientologe die »Brücke zur völligen Freiheit« beschreiten, die in ein irdisches Paradies führen soll. Ständiger Begleiter auf dem Weg ist das sogenannte Auditing. Bei diesem Seelenstrip wird der Scientologe an das »E-Meter«, ein Bioresonanzgerät, angeschlossen. »Diese Sessions können über zehn Stunden dauern«, erzählt Aussteiger Handl. »Kein noch so intimer Lebensbereich wird dabei ausgespart. Am Ende wissen sie alles über dich.« Zum Beispiel, wer »mögliche Problemquellen« im Umkreis eines Scientologen sind. Gibt es im Bekanntenkreis jemanden, der die »Religion« des Mitglieds nicht akzeptiert, kann es zu einem
+      <em>disconnect</em>
+      kommen, zu einer Trennung. »Seit meine Exfrau einen Scientologen in <entity idref="Amerika" entity_type="Location" url_value="orte/amerika">Amerika</entity> geheiratet hat, ist mir jeder Kontakt zu meinen Söhnen untersagt«, erzählt Handl. Seine Aussagen decken sich mit denen anderer Aussteiger.
+    </p>
+    <p>Auch wenn Angelika Thonauer versichert, dass Auditing-Inhalte nicht gespeichert würden und daher nicht gegen ehemalige Mitglieder verwendet werden könnten, schweigen die meisten Aussteiger beharrlich. Der Wiener Geschäftsmann Michael A. hängt gar das Telefon auf, sobald die Sprache auf die Sekte kommt. Dabei war A. eine Spitzenkraft, ein »OT 8«, wie das bei Scientology heißt: ein »operativer Thetan der 8. Stufe«. Von seiner Sorte gibt es nicht viele in Österreich. Es ist die höchste und teuerste Würde, die man bei der Sekte erwerben kann, benannt nach dem Geisteswesen, das laut Hubbard in jedem Menschen steckt und befreit werden muss. Thonauer sagt, dass ihr Thetan schon ab und zu ihren Körper verlasse. Wo er zum Zeitpunkt des Interviews war, wollte sie nicht beantworten: »Diese Frage ist zu persönlich.«</p>
+    <p>
+      OT 8 Michael A. ist inzwischen von seinen früheren Gefährten zu einer »unterdrückerischen Person« erklärt worden. Das ist die schlimmste Strafe, die Scientology kennt. 2,5 Prozent der Weltbevölkerung, stellte schon Hubbard fest, seien solche
+      <em>suppressive persons,</em>
+      kurz SP. Von ihnen gilt es sich fernzuhalten.
+    </p>
+    <intertitle>Die »Knusperstube« in St. Gertraut  ist das Scientology-Handelsgericht</intertitle>
+    <p>Ist das Sektenmitglied auch von der letzten SP isoliert, besteht sein Leben fast nur noch aus Hubbard, Auditing und E-Meter. Dem Scientologen bleibt allenfalls sein Beruf, um die Kosten seiner Erlösung erwirtschaften zu können. Das Unternehmen Scientology bietet allerdings auch Beschäftigungsmöglichkeiten – sei es als hauptberuflicher Mitarbeiter in einer der drei österreichischen »Missionen« oder als Angestellter bei einer Wise-Firma. Die World Institute of Scientology Enterprises sind so etwas wie die Handelskammer der Organisation. Dort kann man eine Firma registrieren, wenn sie nach Hubbards krausen, aber sehr profitorientierten Management-Vorstellungen umgestaltet wurde. In Österreich gibt es rund zwanzig Wise-Firmen, meist kleine Betriebe. Angelika Thonauer betreibt selbst eine Werbefirma, die diesem Netzwerk angehört. Der Großteil der Wise-Firmen ist in den Bereichen Werbung, PR, Nachhilfe und Unternehmensberatung tätig. Es gibt in Österreich aber auch Trafiken und Bäckereien, die nach Scientology-Prinzipien geführt werden. Die »Knusperstube« im Kärntner Ort St. Gertraut ist eine davon. Ihrem Besitzer Edwin Storfer untersteht auch das Charter Committee für Österreich, worunter das Handelsgericht von Scientology zu verstehen ist.</p>
+    <p>Ein weiteres Betätigungsfeld für Mitglieder sind Vorfeldorganisationen, die weltweit nach demselben Muster aufgebaut sind. Zum Beispiel die »Kommission für Verstöße der Psychiatrie gegen Menschenrechte«. Die Psychiatrie, aus Scientology-Sicht ein Konkurrent in Sachen Lebenshilfe, gehört zu den Lieblingsfeinden der Organisation. Es gibt in Wien auch ein Celebrity Centre, wie in Hollywood. Allein: Am Viktor-Adler-Markt in Favoriten wurde noch kein Promi gesichtet.</p>
+    <p>
+      Während in Deutschland immer wieder ein Verbot von Scientology diskutiert wird, ignoriert der österreichische Staat die Organisation. »Für eine Beobachtung fehlen uns die Argumente«, sagt Rudolf Gollia, der Sprecher des <entity idref="Innenministeriums" entity_type="Organization" url_value="organisationen/innenministeriums">Innenministeriums</entity>. Tatsächlich dürften Ängste vor einer Infiltration von Politik und Wirtschaft durch Scientology in Österreich unberechtigt sein. Ein ÖVP-Gemeinderat wurde in den Neunzigern als Scientologe entlarvt, ein blauer Vizebürgermeister outete sich. Der ehemalige Skistar Patrick Ortlieb hielt eine Zeit lang Anteile an der Energydrink-Marke Power Horse, die von einem bekannten Scientologen erfunden worden war. Das war’s dann auch schon. Einzig <entity idref="Martin+Bartenstein" entity_type="Person" url_value="personen/martin-bartenstein">Martin Bartenstein</entity> legte sich 1998 als Familienminister ein wenig mit der Organisation an und ließ in einer Sektenbroschüre vor Scientology warnen. Das US-Hauptquartier erklärte daraufhin »Big Brother Bartenstein« recht folgenlos zu einer »unterdrückerischen Person«. Die lange Hand der Jünger Hubbards mag nach Hollywood reichen, vielleicht sogar nach <entity idref="Berlin" entity_type="Location" url_value="orte/berlin">Berlin</entity>. Wien hingegen scheint außer Reichweite.
+      <br />
+      <br />
+      <em>Dieser Artikel wurde für die  wöchentliche Österreich-Ausgabe der ZEIT geschrieben</em>
+    </p>
+    <bu>
+      Sektengründer
+      <strong>L. Ron hubbard</strong>
+      machte Außerirdische für jedes Übel der Welt verantwortlich
+    </bu>
+  </body>
+  
+  <indexteaser>
+    <title>Scientology</title>
+    <text>Ist die Sekte eine Gefahr für Österreich?</text>
+  </indexteaser>
+  <teaser>
+    <text>Scientology ist eine Gefahr. In Österreich allerdings nur für Verstand und Geldbörsen seiner wenigen Mitglieder.</text>
+    <title>OT 8 antwortet nicht</title>
+  </teaser>
+</article>
