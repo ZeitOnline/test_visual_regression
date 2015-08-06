@@ -81,6 +81,7 @@
     {% endif %}
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ view.context.uniqueId }}" data-adDeliveryType="{{ view.ad_delivery_type }}">
+    {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/marketing.html" %}
 
     {% block skiplink %}
