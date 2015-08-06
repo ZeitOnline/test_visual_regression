@@ -13,13 +13,7 @@
 		+teaser-image-text-shadow
 	&__media
 		margin: 0 (-$page-padding) $petite
-		// this upsizes the fullwidth-image (ratio 2,35) appear to 16:9
-		// this is a temporary hack w/ magic number. it's not perfectly 16:9, because of margins and sh*t
-		width: 136% // for browsers without proper calc support
-		width: calc(135% + 2 * #{$page-padding})
-		max-width: none
 		+respond-min($break-tablet-min)
-			width: 100%
 			margin: 0
 			z-index: 1
 	&__media-container
