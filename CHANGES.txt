@@ -4,8 +4,6 @@ Change log for zeit.web
 2.0.0 (unreleased)
 ------------------
 
-- MAINT: Article polishing
-
 - HOTFIX: Sanitize click tracking breakpoint value correctly
 
 - HOTFIX: Handle articles without authors
@@ -19,6 +17,8 @@ Change log for zeit.web
 - FIX: Ensure article pages without divisions can be rendered
 
 - PERF: Fix memcache-ability of VariantImage
+
+- MAINT: Article polishing
 
 - IMPROVEMENT: Add tag manager
 
