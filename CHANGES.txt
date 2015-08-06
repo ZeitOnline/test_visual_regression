@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - FIX: Ensure article pages without divisions can be rendered
 
+- IMPROVEMENT: Add tag manager
+
 
 1.50 (2015-08-04)
 -----------------
