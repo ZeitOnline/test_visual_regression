@@ -1,10 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.52 (unreleased)
+1.53 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+1.52 (2015-08-07)
+-----------------
+
+- IMPROVEMENT: Set s-maxage header
 
 
 1.51 (2015-08-06)
