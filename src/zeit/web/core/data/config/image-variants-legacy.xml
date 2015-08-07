@@ -55,7 +55,6 @@
   <variant old="zon-printbox-x-cinema" new="cinema"/>
   <variant old="zon-column" new="portrait"/>
 
-  <variant old="default" new="super"/>
   <variant old="large" new="super"/>
   <variant old="small" new="super"/>
   <variant old="upright" new="narrow"/>
