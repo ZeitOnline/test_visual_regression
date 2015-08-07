@@ -52,10 +52,10 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
     function scaleImage( image ) {
         var $img = $( image ),
             $parent = $img.closest( '.scaled-image' ),
-            isMobile = window.ZMO.breakpoint.get() === 'mobile' || window.ZMO.breakpoint.get() === 'phablet',
-            hasMobileVariant = isMobile && typeof $img.data( 'mobile-ratio' ) !== 'undefined' &&
+            isMobile = /mobile|phablet/.test(window.ZMO.breakpoint.get()),
+            useMobileVariant = isMobile && typeof $img.data( 'mobile-ratio' ) !== 'undefined' &&
                 typeof $img.data( 'mobile-src' ) !== 'undefined',
-            ratio = hasMobileVariant ? $img.data( 'mobile-ratio' ) : $img.data( 'ratio' ),
+            ratio = useMobileVariant ? $img.data( 'mobile-ratio' ) : $img.data( 'ratio' ),
             msieWidth = false,
             width, height, token, source, subject,
             styles, minHeight, maxHeight;
@@ -123,7 +123,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
             }
         }
 
-        source = hasMobileVariant ? $img.data( 'mobile-src' ) : $img.data( 'src' ); // image.src ||
+        source = useMobileVariant ? $img.data( 'mobile-src' ) : $img.data( 'src' ); // image.src ||
         width = Math.round( width );
         height = Math.round( height );
 
