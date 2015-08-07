@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1973: Add markdown module for centerpages
 
+- PERF: Render CP areas only once per request
+
 
 1.52 (2015-08-07)
 -----------------

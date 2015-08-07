@@ -15,8 +15,8 @@ import zeit.content.cp.area
 import zeit.content.cp.interfaces
 import zeit.content.cp.layout
 
+import zeit.web.core.centerpage
 import zeit.web.core.interfaces
-import zeit.web.core.sources
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
@@ -249,7 +249,7 @@ class CenterpageArea(Centerpage):
         for region in context.values():
             for area in region.values():
                 if area.uniqueId.rsplit('/', 1)[-1] == request.subpath[-1]:
-                    self.context = zeit.web.core.template.get_area(area)
+                    self.context = zeit.web.core.centerpage.get_area(area)
                     return
 
     def __call__(self):

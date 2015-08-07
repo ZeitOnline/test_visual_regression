@@ -27,7 +27,8 @@ class Centerpage(zeit.web.core.view.Base):
         """List of regions, the outermost container making up our centerpage.
         :rtype: list
         """
-        return self.context.values()
+        return [zeit.web.core.centerpage.IRendered(x)
+                for x in self.context.values()]
 
     def __iter__(self):
         for region in self.regions:
