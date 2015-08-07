@@ -64,7 +64,7 @@
 &lt;/pickle&gt;</attribute>
 	</head>
 	<body>
-		<title>Vollbreiter Aufmacher</title>
+		<title>Vollbreite Aufmacher</title>
 		<cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher" visible_mobile="True">
 			<region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo" visible_mobile="True">
 				<container cp:type="teaser" module="zon-fullwidth" visible="True" cp:__name__="id-b0eaa5e2-807b-4fed-9a09-886eafda5b21" visible_mobile="True">
@@ -72,6 +72,13 @@
 				</container>
 			</region>
 		</cluster>
+		<cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="True">
+            <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
+                <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" module="zon-classic" visible="True">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
+                </container>
+            </region>
+        </cluster>
 	</body>
 	<feed/>
 	<teaser>
