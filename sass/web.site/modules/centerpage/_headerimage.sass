@@ -1,0 +1,44 @@
+.header-image
+	+transform-style(preserve-3d)
+	background: $zon_light_grey
+	margin: 0 (-$page-padding)
+	min-height: calc(100vw / 3.5) // change factor after mobile-image-format is supplied
+	&__media
+		margin: 0
+	&__media-container
+		+teaser-image-dark-overlay($angle: 0deg)
+	&__heading
+		+transform(translateY(-50%))
+		+teaser-image-text-shadow
+		font-size: 1rem
+		margin: 0
+		position: absolute
+		top: 50%
+		width: 100%
+		z-index: 1
+	&__kicker,
+	&__title
+		display: block
+		font-family: $font-tabletgothic
+		text-align: center
+	&__kicker
+		color: $zon_lighter_grey
+		font-size: rem(14px)
+		font-weight: 400
+		letter-spacing: 0.125em
+		margin-bottom: 0.2em
+		text-transform: uppercase
+	&__title
+		+font-smoothing
+		color: $white
+		font-size: rem(18px)
+		font-weight: 700
+		letter-spacing: $zon-letter-spacing-m
+
++respond-min($break-tablet-min)
+	.header-image
+		min-height: calc(100% / 3.5) // panorama factor
+		&__kicker
+			font-size: rem(16px)
+		&__title
+			font-size: rem(36px)
