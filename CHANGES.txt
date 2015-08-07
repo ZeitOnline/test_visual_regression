@@ -1,10 +1,18 @@
 Change log for zeit.web
 =======================
 
-1.52 (unreleased)
+1.53 (unreleased)
 -----------------
 
 - ZON-1973: Add markdown module for centerpages
+
+
+1.52 (2015-08-07)
+-----------------
+
+- ZON-1997: The very last article footer polishing part two
+
+- IMPROVEMENT: Set s-maxage header
 
 
 1.51 (2015-08-06)

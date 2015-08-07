@@ -75,3 +75,8 @@ def test_centerpage_should_collect_teaser_counts_from_community(
     path, count = view.comment_counts.items()[0]
     assert '/zeit-magazin/test-cp/essen-geniessen-spargel-lamm' in path
     assert count == '129'
+
+
+def test_centerpage_should_have_smaxage(testserver, testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert browser.headers.dict['s-maxage'] == '21600'
