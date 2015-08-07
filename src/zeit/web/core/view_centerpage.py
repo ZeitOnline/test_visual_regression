@@ -22,11 +22,20 @@ class Centerpage(zeit.web.core.view.Base):
         # (RD, 7.8.2015)
         self.request.response.headers.add('s-maxage', '21600')
 
+    @zeit.web.reify
+    def regions(self):
+        """List of regions, the outermost container making up our centerpage.
+        :rtype: list
+        """
+        return self.context.values()
+
     def __iter__(self):
-        for teaser in zeit.content.cp.interfaces.ITeaseredContent(
-                self.context):
-            if zeit.web.core.view.known_content(teaser):
-                yield teaser
+        for region in self.regions:
+            for area in region.values():
+                for teaser in zeit.content.cp.interfaces.ITeaseredContent(
+                        area):
+                    if zeit.web.core.view.known_content(teaser):
+                        yield teaser
 
     @zeit.web.reify
     def is_hp(self):

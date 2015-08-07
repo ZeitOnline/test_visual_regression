@@ -184,15 +184,9 @@ class Centerpage(
 
     @zeit.web.reify
     def regions(self):
-        """List of regions, the outermost container making up our centerpage.
-        :rtype: list
-        """
-
-        region_list = self.context.values()
-
+        region_list = super(Centerpage, self).regions
         if self.is_hp:
             region_list.append(self.region_snapshot)
-
         return region_list
 
     @zeit.web.reify
