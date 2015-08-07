@@ -8,7 +8,8 @@
  */
 define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
 
-    var images = [];
+    var images = [],
+        isMobile;
 
     /**
      * images.js: create prefix
@@ -45,6 +46,14 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
     }
 
     /**
+     * images.js: initiate globals for module
+     * @function prepareScaling
+     */
+    function prepareScaling () {
+        isMobile = /mobile|phablet/.test( window.ZMO.breakpoint.get() );
+    }
+
+    /**
      * images.js: scale one image
      * @function scaleImage
      * @param  {object} image HTMLImageElement
@@ -52,7 +61,6 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
     function scaleImage( image ) {
         var $img = $( image ),
             $parent = $img.closest( '.scaled-image' ),
-            isMobile = /mobile|phablet/.test(window.ZMO.breakpoint.get()),
             useMobileVariant = isMobile && typeof $img.data( 'mobile-ratio' ) !== 'undefined' &&
                 typeof $img.data( 'mobile-src' ) !== 'undefined',
             ratio = useMobileVariant ? $img.data( 'mobile-ratio' ) : $img.data( 'ratio' ),
@@ -123,6 +131,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
             }
         }
 
+        source = useMobileVariant ? $img.data( 'mobile-src' ) : $img.data( 'src' );
         width = Math.round( width );
         height = Math.round( height );
 
@@ -141,6 +150,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
      *                            used as selector context, defaults to document root
      */
     function scaleImages( container ) {
+        prepareScaling();
         $( '.scaled-image > noscript', container ).each( function() {
             var $noscript = $( this ),
                 $parent = $noscript.parent(),
@@ -161,7 +171,6 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
                     $img.on( 'load', function( e ) {
                         $img.trigger( 'scaling_ready' );
                     });
-
                     scaleImage( this );
 
                     images.push( this );
@@ -180,6 +189,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
      * @function rescaleAll
      */
     function rescaleAll() {
+        prepareScaling();
         for ( var i = images.length; i--; ) {
             // verify that image is still part of the DOM
             if ( $.contains( document.documentElement, images[i] )) {
