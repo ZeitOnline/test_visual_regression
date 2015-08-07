@@ -1,7 +1,6 @@
 .teaser-small
 	@extend %teaser
 	&__media
-		@extend %teaser-media
 		@extend %teaser-small-media
 	&__media-item
 		@extend %teaser-media-item !optional
@@ -31,7 +30,3 @@
 		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
-
-+respond-max($break-phablet-min)
-	.teaser-small__media
-		display: none
