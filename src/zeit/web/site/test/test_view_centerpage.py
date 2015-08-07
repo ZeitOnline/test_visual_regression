@@ -176,6 +176,28 @@ def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
     assert len(teaser) == 1
 
 
+def test_fullwidth_teaser_image_should_have_attributes_for_mobile_variant(
+        testserver, testbrowser):
+    browser = testbrowser('/zeit-online/fullwidth-teaser')
+    img = browser.cssselect('.teaser-fullwidth__media-item')[0]
+    assert img.attrib['data-mobile-variant'] == 'wide'
+    assert img.attrib['data-mobile-ratio'] == '1.77'
+    assert 'cp-content/ig-1/wide' in img.attrib['data-mobile-src']
+
+
+def test_fullwidth_teaser_image_should_use_mobile_variant_on_mobile(
+        selenium_driver, testserver):
+    driver = selenium_driver
+
+    driver.set_window_size(screen_sizes[1][0], screen_sizes[1][1])
+    driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
+    img = driver.find_element_by_class_name('teaser-fullwidth__media-item')
+    ratio = float(img.size['width']) / img.size['height']
+    assert '/wide__' in img.get_attribute('src'), \
+        'wide image variant should be used on mobile devices'
+    assert 1.7 < ratio < 1.8, 'mobile ratio should be 16:9-ish'
+
+
 def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
