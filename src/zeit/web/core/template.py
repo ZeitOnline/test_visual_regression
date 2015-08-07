@@ -31,10 +31,18 @@ log = logging.getLogger(__name__)
 
 
 @beaker.cache.cache_region('long_term', 'variant_image')
-def get_variant(unique_id, pattern):
-    imagegroup = zeit.cms.interfaces.ICMSContent(unique_id)
-    variant = imagegroup.get_variant_by_name(pattern)
-    return zeit.web.core.interfaces.ITeaserImage(variant, None)
+def get_variant(unique_id, variant_id):
+    try:
+        imagegroup = zeit.cms.interfaces.ICMSContent(unique_id)
+        variant = zeit.web.core.sources.VARIANT_SOURCE.factory.find(
+            imagegroup, variant_id)
+    except TypeError, err:
+        log.debug(err.message)
+    except KeyError:
+        log.debug(u'No {} variant for {}'.format(variant_id, unique_id))
+    else:
+        variant.__parent__ = imagegroup
+        return zeit.web.core.interfaces.ITeaserImage(variant, None)
 
 
 @zeit.web.register_filter
