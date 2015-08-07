@@ -83,19 +83,13 @@
             </ul>
           </text>
         </container>
-        <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-7948b50a-f6b3-485a-baae-9b6d00b67cd4">
+        <container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-7948b50a-f6b3-485a-baae-9b6d00b67cd4">
           <block href="http://xml.zeit.de/zeit-online/article/01" />
-        </container>
-        <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-9032184a-3fd5-48f9-9a25-3cc34a22ba84">
-          <block href="http://xml.zeit.de/zeit-online/article/02" />
         </container>
       </region>
       <region area="id-6dd22838-9f14-4294-a96d-3e2fa1a7bc91" visible="True" kind="minor">
-        <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-7948b50a-f6b3-485a-baae-9b6d00b67cd4">
-          <block href="http://xml.zeit.de/zeit-online/article/01" />
-        </container>
-        <container cp:__name__="id-bc912838-9f14-4294-a96d-3e2fa1a76dd2" cp:type="cpextra" module="mostread" visible="True">
-          <cp_extra for="zeit.content.cp.interfaces.IArea" id="mostread" />
+        <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-9032184a-3fd5-48f9-9a25-3cc34a22ba84">
+          <block href="http://xml.zeit.de/zeit-online/article/02" />
         </container>
       </region>
     </cluster>
