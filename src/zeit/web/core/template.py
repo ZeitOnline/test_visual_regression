@@ -689,7 +689,7 @@ def get_module(module, name=None):
 
 
 @zeit.web.register_filter
-def get_area(area, name=None):
+def get_area(area):
     return zeit.web.core.utils.get_named_adapter(
         area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
 
