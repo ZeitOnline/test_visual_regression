@@ -30,6 +30,9 @@
 		&:hover
 			border-bottom: none // disable hover effect as long as comment count is not linked
 
+	&--with-image &__container
+		padding-bottom: remify(64px)
+
 	&--no-image
 		+font-smoothing
 		background: $zon_dark_grey
@@ -87,6 +90,7 @@
 				position: absolute
 				left: 50%
 				margin-left: remify(-330px)
+				padding-bottom: remify(32px)
 			.nextread__lead
 				color: $white
 				top: 0
