@@ -185,3 +185,16 @@ def test_dynamic_centerpage_should_be_paginatable(testserver, testbrowser):
         '{}/dynamic/angela-merkel?p=2'.format(testserver.url))
     text = browser.cssselect('.pager__page.pager__page--current span')[0].text
     assert text == '2'
+
+
+def test_mardown_module_is_rendered(jinja2_env):
+    tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/thema')
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    html_str = tpl.render(view=view)
+    html = lxml.html.fromstring(html_str)
+
+    assert len(html.cssselect('.markup')) == 1
+    assert len(html.cssselect('.markup__title')) == 1
+    assert len(html.cssselect('.markup__text li')) == 4
