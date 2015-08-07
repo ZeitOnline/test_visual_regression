@@ -26,3 +26,10 @@ def test_headerimage_should_have_title(headerimage):
 def test_headerimage_should_have_image(headerimage):
     assert zeit.content.image.interfaces.IImageGroup.providedBy(
         headerimage.image)
+
+
+def test_headerimage_should_have_complete_source(testbrowser):
+    browser = testbrowser('/zeit-online/index-with-image')
+    assert len(browser.cssselect('.header-image')) == 1
+    assert len(browser.cssselect('.header-image__kicker')) == 1
+    assert len(browser.cssselect('.header-image__title')) == 1
