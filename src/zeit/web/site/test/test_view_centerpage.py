@@ -170,7 +170,7 @@ def test_small_teaser_should_display_no_image_on_mobile(
 
 
 def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/fullwidth-teaser' % testserver.url)
+    browser = testbrowser('/zeit-online/fullwidth-teaser')
     teaser = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
 
     assert len(teaser) == 1
@@ -198,16 +198,14 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-online/main-teaser-setup' % testserver.url)
+    browser = testbrowser('/zeit-online/main-teaser-setup')
 
     articles = browser.cssselect('#main .cp-region .cp-area--major article')
     assert len(articles) == 3
 
 
 def test_main_teasers_should_have_ids_attached(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-online/main-teaser-setup' % testserver.url)
+    browser = testbrowser('/zeit-online/main-teaser-setup')
 
     all_articles = len(browser.cssselect('.teaser'))
     articles_with_ids = len(browser.cssselect('.teaser[data-unique-id]'))
@@ -215,8 +213,7 @@ def test_main_teasers_should_have_ids_attached(testserver, testbrowser):
 
 
 def test_main_teasers_should_have_id_attached(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-online/main-teaser-setup' % testserver.url)
+    browser = testbrowser('/zeit-online/main-teaser-setup')
 
     body = browser.cssselect(
         'body[data-unique-id="'
@@ -225,8 +222,7 @@ def test_main_teasers_should_have_id_attached(testserver, testbrowser):
 
 
 def test_main_teasers_should_have_type_attached(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-online/main-teaser-setup' % testserver.url)
+    browser = testbrowser('/zeit-online/main-teaser-setup')
 
     body = browser.cssselect(
         'body[data-page-type="centerpage"]')
@@ -234,8 +230,7 @@ def test_main_teasers_should_have_type_attached(testserver, testbrowser):
 
 
 def test_responsive_image_should_render_correctly(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-online/main-teaser-setup' % testserver.url)
+    browser = testbrowser('/zeit-online/main-teaser-setup')
 
     image = browser.cssselect(
         '#main .cp-region .cp-area'
@@ -245,24 +240,21 @@ def test_responsive_image_should_render_correctly(testserver, testbrowser):
 
 
 def test_image_should_be_on_position_b(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-online/main-teaser-setup' % testserver.url)
+    browser = testbrowser('/zeit-online/main-teaser-setup')
     articles = browser.cssselect('#main .cp-region .cp-area article')
 
     assert articles[0][0][1].tag == 'figure', 'This position should haz image'
 
 
 def test_image_should_be_on_position_a(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-online/main-teaser-setup' % testserver.url)
+    browser = testbrowser('/zeit-online/main-teaser-setup')
     articles = browser.cssselect('#main .cp-region .cp-area article')
 
     assert articles[1][0].tag == 'figure', 'An img should be on this position'
 
 
 def test_responsive_image_should_have_noscript(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-online/main-teaser-setup' % testserver.url)
+    browser = testbrowser('/zeit-online/main-teaser-setup')
 
     noscript = browser.cssselect(
         '#main .cp-region--multi .scaled-image noscript')
@@ -312,8 +304,7 @@ def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
 
 
 def test_column_teaser_should_render_series_element(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-online/journalistic-formats' % testserver.url)
+    browser = testbrowser('/zeit-online/journalistic-formats')
 
     col_element = browser.cssselect(
         '.teaser-fullwidth-column__series-label')[0]
@@ -322,8 +313,7 @@ def test_column_teaser_should_render_series_element(testserver, testbrowser):
 
 def test_series_teaser_should_render_series_element(testserver, testbrowser):
 
-    browser = testbrowser(
-        '%s/zeit-online/journalistic-formats' % testserver.url)
+    browser = testbrowser('/zeit-online/journalistic-formats')
 
     series_element = browser.cssselect('.teaser-large__series-label')
     assert series_element[0].text == 'Serie: App-Kritik'
@@ -404,7 +394,7 @@ def test_snapshot_morelink_text_icon_switch(
 def test_snapshot_should_display_copyright_with_nonbreaking_space(
         testserver, testbrowser):
 
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('/zeit-online/index')
 
     copyright = browser.cssselect('.snapshot-caption__item')
 
@@ -415,8 +405,7 @@ def test_snapshot_should_display_copyright_with_nonbreaking_space(
 def test_snapshot_should_not_be_displayed_where_no_snapshot_is_present(
         testserver, testbrowser):
 
-    browser = testbrowser(
-        '%s/zeit-online/main-teaser-setup' % testserver.url)
+    browser = testbrowser('/zeit-online/main-teaser-setup')
 
     assert not browser.cssselect('#snapshot'), (
         'There is an snaphot on a page which should not have one')
@@ -424,7 +413,7 @@ def test_snapshot_should_not_be_displayed_where_no_snapshot_is_present(
 
 def test_snapshot_should_have_description_text(testserver, testbrowser):
 
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('/zeit-online/index')
     description = browser.cssselect('.snapshot-caption')
     text = u'Die Installation "Cantareira-Wüste" des brasilianischen Künstlers'
     assert text in description[0].text
@@ -582,7 +571,7 @@ def test_homepage_ressort_is_homepage(testserver):
 
 
 def test_linkobject_teaser_should_contain_supertitle(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('/zeit-online/index')
     uid = 'http://xml.zeit.de/zeit-online/cp-content/link_teaser'
     kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
                                '.teaser-small__kicker'.format(uid))[0]
@@ -590,8 +579,7 @@ def test_linkobject_teaser_should_contain_supertitle(testserver, testbrowser):
 
 
 def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-online/journalistic-formats' % testserver.url)
+    browser = testbrowser('/zeit-online/journalistic-formats')
     uid = 'http://xml.zeit.de/blogs/nsu-blog-bouffier'
     teaser = browser.cssselect(
         '.teaser-large[data-unique-id="{}"] '.format(uid))[0]
@@ -616,7 +604,7 @@ def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
 
 
 def test_gallery_teaser_should_contain_supertitle(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('/zeit-online/index')
     uid = 'http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer'
     kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
                                '.teaser-small__kicker'.format(uid))[0]
@@ -631,7 +619,7 @@ def test_oldads_toggle_is_off(application):
 
 
 def test_centerpage_should_have_header_tags(testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('/zeit-online/index')
     html = lxml.html.fromstring(browser.contents).cssselect
 
     assert len(html('.header__tags')) == 1
@@ -713,32 +701,32 @@ def test_canonical_url_returns_correct_value_on_cp(application):
 
 
 def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
-    url = '%s/zeit-online/index' % testserver.url
+    url = '/zeit-online/index'
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
-    url = '%s/zeit-online/article/01' % testserver.url
+    url = '/zeit-online/article/01'
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
-    url = '%s/zeit-online/article/zeit' % testserver.url
+    url = '/zeit-online/article/zeit'
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
-    url = '%s/zeit-online/article/zeit' % testserver.url
+    url = '/zeit-online/article/zeit'
     browser = testbrowser("{}/komplettansicht".format(url))
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
-    url = '%s/suche/index' % testserver.url
+    url = '/suche/index'
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
-    url = '%s/suche/index' % testserver.url
+    url = '/suche/index'
     browser = testbrowser("{}?p=2".format(url))
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
@@ -778,8 +766,8 @@ def test_servicebox_present_in_wide_breakpoints(
 
 
 def test_centerpage_area_should_render_in_isolation(testbrowser, testserver):
-    browser = testbrowser('{}/index/area/id-5fe59e73-e388-42a4-a8d4-'
-                          '750b0bf96812'.format(testserver.url))
+    browser = testbrowser('/index/area/id-5fe59e73-e388-42a4-a8d4-'
+                          '750b0bf96812')
     select = browser.cssselect
     assert len(select('div.cp-area.cp-area--gallery')) == 1
     assert len(select('article.teaser-gallery')) == 2
