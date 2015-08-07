@@ -7,9 +7,9 @@
 		min-height: calc(100vw / 3.5) // change factor after mobile-image-format is supplied
 		margin: 0
 		+respond-min($break-tablet-min)
-			min-height: rem(768px/3.5) // panorama factor
+			min-height: remify(768px/3.5) // panorama factor
 		+respond-min($break-desktop-min)
-			min-height: rem(980px/3.5) // panorama factor
+			min-height: remify(980px/3.5) // panorama factor
 	&__media-container
 		+teaser-image-dark-overlay($angle: 0deg)
 	&__heading
@@ -27,18 +27,18 @@
 		text-align: center
 	&__kicker
 		color: $zon_lighter_grey
-		font-size: rem(14px)
+		font-size: remify(14px)
 		font-weight: 400
 		letter-spacing: 0.125em
 		margin-bottom: 0.2em
 		text-transform: uppercase
 		+respond-min($break-tablet-min)
-			font-size: rem(16px)
+			font-size: remify(16px)
 	&__title
 		+font-smoothing
 		color: $white
-		font-size: rem(18px)
+		font-size: remify(18px)
 		font-weight: 700
 		letter-spacing: $zon-letter-spacing-m
 		+respond-min($break-tablet-min)
-			font-size: rem(36px)
+			font-size: remify(36px)
