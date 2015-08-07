@@ -13,9 +13,13 @@
 		+teaser-image-text-shadow
 	&__media
 		margin: 0 (-$page-padding) $petite
+		min-height: calc(100vw / 1.77777) // reserve space for mobile-ish image variant
 		+respond-min($break-tablet-min)
 			margin: 0
+			min-height: remify(768px / 2.3333) // reserve space for tablet image variant
 			z-index: 1
+		+respond-min($break-desktop-min)
+			min-height: calc(#{$max-page-width} / 2.3333) // reserve space for desktop image variant
 	&__media-container
 		+respond-min($break-tablet-min)
 			+teaser-image-dark-overlay

@@ -9,6 +9,11 @@ $classic-padding: remify(20px)
 		overflow: hidden
 	&__media
 		@extend %teaser-media
+		min-height: calc(100vw / 1.77777) // reserve space for mobile-ish image variant
+		+respond-min($break-tablet-min)
+			min-height: remify(768px / 2.3333) // reserve space for tablet image variant
+		+respond-min($break-desktop-min)
+			min-height: calc(#{$max-page-width} / 2.3333) // reserve space for desktop image variant
 	&__media-item
 		@extend %teaser-media-item !optional
 	&__series-label
