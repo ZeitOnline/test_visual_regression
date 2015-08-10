@@ -4,7 +4,7 @@ Change log for zeit.web
 1.53 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1973: Add markdown module for centerpages
 
 
 1.52 (2015-08-07)
