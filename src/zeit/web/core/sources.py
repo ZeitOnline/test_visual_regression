@@ -100,7 +100,7 @@ class VariantSource(zeit.content.image.variant.VariantSource):
                 attributes['id'] = attributes['name']
                 variant = zeit.content.image.variant.Variant(**attributes)
                 if variant_id != mapped:
-                    variant.legacy_name = mapped
+                    variant.legacy_name = variant_id
                 return variant
         raise KeyError(variant_id)
 
