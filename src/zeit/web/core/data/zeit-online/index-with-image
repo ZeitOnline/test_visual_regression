@@ -71,6 +71,16 @@
     </cluster>
     <cluster area="feature" visible="True">
         <region area="lead" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 1" visible="True">
+            <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-287eb191f251" title="Was Sie wissen müssen">
+              <text>
+                <ul>
+                  <li>Am 24. März verunglückte ein Airbus A320-211 der Lufthansa-Tochter Germanwings auf dem Weg von Barcelona nach Düsseldorf. Das Flugzeug zerschellte nach achtminütigem Sinkflug in den südfranzösischen Alpen. Alle 150 Menschen an Bord der Maschine kamen ums Leben.</li>
+                  <li>Ermittlungen deutscher und französischer Behörden haben ergeben, dass der Copilot die Maschine mit Absicht abstürzen ließ. Die Staatsanwaltschaft Marseille stuft ihn inzwischen als fluguntauglich ein.</li>
+                  <li>Die Ermittler in Marseille wollen in einem Verfahren gegen unbekannt wegen fahrlässiger Tötung auch eine mögliche Verantwortung von Germanwings und Konzernmutter Lufthansa klären. Es gebe aber bisher keinerlei Beweise, dass bei den Fluggesellschaften der aktuelle Gesundheitszustand des Copiloten bekannt gewesen sei.</li>
+                  <li>Aktuelle Berichte und Hintergrundartikel zu dem <a href="#top">Absturz des Germanwings-Airbus mit der Flugnummer 4U9525 finden Sie hier</a>.</li>
+                </ul>
+              </text>
+            </container>
             <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                 <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
                 </block>
