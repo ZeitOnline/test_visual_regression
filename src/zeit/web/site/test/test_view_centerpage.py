@@ -141,14 +141,9 @@ def test_default_teaser_should_match_css_selectors(
     teaser_text = html('div.teaser__container > p.teaser__text')[0]
     assert teaser_text.text == 'teaserText'
 
-    byline = html('div.teaser__container > span.teaser__byline')[0]
-    assert re.sub('\s+', ' ', byline.text).strip() == 'Von Anne Mustermann'
-
     assert len(html('div.teaser__container > div.teaser__metadata')) == 1
-    teaser_datetime = html('div.teaser__metadata > time.teaser__datetime')[0]
-    assert teaser_datetime.text is None
-
-    assert teaser_datetime.attrib['datetime'] == '2013-10-08T09:25:03+00:00'
+    byline = html('div.teaser__metadata > span.teaser__byline')[0]
+    assert re.sub('\s+', ' ', byline.text).strip() == 'Von Anne Mustermann'
 
     teaser_co = html('div.teaser__metadata > a.teaser__commentcount')[0]
 
@@ -173,7 +168,7 @@ def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
     browser = testbrowser('%s/zeit-online/fullwidth-teaser' % testserver.url)
     teaser = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
 
-    assert len(teaser) == 1
+    assert len(teaser) == 3
 
 
 def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(

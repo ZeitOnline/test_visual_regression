@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="homepage">
 	<head>
 		<topiclinks>
@@ -67,8 +67,20 @@
 		<title>Vollbreiter Aufmacher</title>
 		<cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher" visible_mobile="True">
 			<region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo" visible_mobile="True">
-				<container cp:type="teaser" module="zon-fullwidth" visible="True" cp:__name__="id-b0eaa5e2-807b-4fed-9a09-886eafda5b21" visible_mobile="True">
+				<container cp:__name__="id-b0eaa5e2-807b-4fed-9a09-886eafda5b21" cp:type="teaser" module="zon-fullwidth">
 					<block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
+				</container>
+				<container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-fullwidth">
+					<block href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
+				</container>
+				<container cp:__name__="id-953fe557-d941-47f2-af4c-c770dfba3daa" cp:type="teaser" module="zon-fullwidth">
+					<block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
+				</container>
+				<container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e43" cp:type="teaser" module="zon-fullwidth">
+					<block href="http://xml.zeit.de/zeit-online/cp-content/kolumne" />
+				</container>
+				<container cp:__name__="id-653607ee-ecdd-4804-870b-8fd67ff27e16" cp:type="teaser" module="zon-fullwidth">
+					<block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild" />
 				</container>
 			</region>
 		</cluster>

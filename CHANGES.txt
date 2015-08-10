@@ -4,6 +4,8 @@ Change log for zeit.web
 1.53 (unreleased)
 -----------------
 
+- ZON-1970: Display teaser byline, date and commentcount in one line
+
 - ZON-1969: Header image element for centerpages
 
 - ZON-1973: Add markdown module for centerpages
