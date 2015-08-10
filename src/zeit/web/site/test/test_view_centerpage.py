@@ -723,32 +723,32 @@ def test_canonical_url_returns_correct_value_on_cp(application):
 
 
 def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
-    url = '/zeit-online/index'
+    url = '%s/zeit-online/index' % testserver.url
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
-    url = '/zeit-online/article/01'
+    url = '%s/zeit-online/article/01' % testserver.url
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
-    url = '/zeit-online/article/zeit'
+    url = '%s/zeit-online/article/zeit' % testserver.url
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
-    url = '/zeit-online/article/zeit'
+    url = '%s/zeit-online/article/zeit' % testserver.url
     browser = testbrowser("{}/komplettansicht".format(url))
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
-    url = '/suche/index'
+    url = '%s/suche/index' % testserver.url
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
-    url = '/suche/index'
+    url = '%s/suche/index' % testserver.url
     browser = testbrowser("{}?p=2".format(url))
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
