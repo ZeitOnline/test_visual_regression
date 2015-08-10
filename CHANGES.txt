@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-1973: Add markdown module for centerpages
 
+- ZON-2045: Rely on config source to generate image variant URLs
+
 
 1.52 (2015-08-07)
 -----------------
