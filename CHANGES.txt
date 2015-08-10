@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2010: Fullwidth teaser: use 16:9 image variant on mobile
 
+- ZON-1969: Header image element for centerpages
+
 - ZON-1973: Add markdown module for centerpages
 
 
