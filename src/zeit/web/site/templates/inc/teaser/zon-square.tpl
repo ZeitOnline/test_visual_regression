@@ -2,6 +2,7 @@
 
 {% block layout %}teaser-square{% endblock %}
 {% block teaser_modifier %}{{ self.layout() }}--graphic{% endblock %}
+{% block teaser_journalistic_format %}{% endblock %}
 
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}

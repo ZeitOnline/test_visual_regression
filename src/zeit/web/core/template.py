@@ -30,6 +30,7 @@ import zeit.web.core.utils
 log = logging.getLogger(__name__)
 
 
+@zeit.web.register_filter
 @beaker.cache.cache_region('long_term', 'variant_image')
 def get_variant(unique_id, pattern):
     imagegroup = zeit.cms.interfaces.ICMSContent(unique_id)
