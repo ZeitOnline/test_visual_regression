@@ -32,12 +32,6 @@ log = logging.getLogger(__name__)
 
 @zeit.web.register_filter
 def get_variant(unique_id, variant_id):
-    # We need to relay filter registration to ensure proper cacheability
-    return _get_variant(unique_id, variant_id)
-
-
-@beaker.cache.cache_region('long_term', 'variant_image')
-def _get_variant(unique_id, variant_id):
     try:
         imagegroup = zeit.cms.interfaces.ICMSContent(unique_id)
         variant = zeit.web.core.sources.VARIANT_SOURCE.factory.find(
@@ -705,12 +699,6 @@ def get_module(module, name=None):
 
     return zeit.web.core.utils.get_named_adapter(
         module, zeit.web.core.interfaces.IBlock, name)
-
-
-@zeit.web.register_filter
-def get_area(area, name=None):
-    return zeit.web.core.utils.get_named_adapter(
-        area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
 
 
 @zeit.web.register_filter
