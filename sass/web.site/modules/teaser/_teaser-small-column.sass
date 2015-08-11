@@ -31,8 +31,8 @@
 +respond-min($break-desktop-min)
 	.teaser-small-column
 		&--has-media
-			min-height: remify(250px)
-			padding: $petite $petite $petite remify(250px+20px)
+			min-height: remify($teaser-column-small-image-size-desktop)
+			padding: $petite $petite $petite remify($teaser-column-small-image-size-desktop + 20px)
 		&--has-media &__metadata
 			min-height: initial
 			padding-right: 0
@@ -41,7 +41,7 @@
 			height: 100%
 			left: 0
 			margin-top: auto
-			max-height: remify(250px)
+			max-height: remify($teaser-column-small-image-size-desktop)
 			right: auto
 			top: 0
-			width: remify(250px)
+			width: remify($teaser-column-small-image-size-desktop)
