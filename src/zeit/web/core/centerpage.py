@@ -265,6 +265,7 @@ class VariantImage(object):
         self.attr_title = meta.title or meta.caption
         self.caption = meta.caption
         self.copyright = meta.copyrights
+        self.image_group = group.uniqueId
         self.image_pattern = context.name
         self.path = group.variant_url(self.image_pattern).lstrip('/')
         self.ratio = context.ratio

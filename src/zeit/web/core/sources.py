@@ -6,11 +6,13 @@ import random
 import re
 import urlparse
 
+import gocept.cache.method
 import lxml.etree
 import pysolr
 import zope.interface
 
 import zeit.cms.interfaces
+import zeit.content.image.variant
 import zeit.imp.source
 import zeit.solr.interfaces
 
@@ -77,6 +79,38 @@ class TeaserMapping(zeit.web.core.utils.frozendict):
         # Flattens and reverses _map, so we can easily lookup a layout.
         super(TeaserMapping, self).__init__(
             x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
+
+
+class VariantSource(zeit.content.image.variant.VariantSource):
+
+    product_configuration = 'zeit.content.image'
+    config_url = 'variant-source'
+
+    def find(self, context, variant_id):
+        mapping = self._get_mapping()
+        tree = self._get_tree()
+        for node in tree.iterchildren('*'):
+            if not self.isAvailable(node, context):
+                continue
+
+            attributes = dict(node.attrib)
+            mapped = mapping.get(variant_id, variant_id)
+
+            if attributes['name'] == mapped:
+                attributes['id'] = attributes['name']
+                variant = zeit.content.image.variant.Variant(**attributes)
+                if variant_id != mapped:
+                    variant.legacy_name = variant_id
+                return variant
+        raise KeyError(variant_id)
+
+    @gocept.cache.method.Memoize(600, ignore_self=True)
+    def _get_mapping(self):
+        return {k['old']: k['new'] for k in
+                zeit.content.image.variant.LEGACY_VARIANT_SOURCE(None)}
+
+
+VARIANT_SOURCE = VariantSource()
 
 
 class Solr(object):

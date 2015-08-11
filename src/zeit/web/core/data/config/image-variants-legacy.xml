@@ -19,20 +19,20 @@
   <variant old="zon-square" new="square"/>
 
   <!-- zmo -->
-  <variant old="zmo-large" width="920" height="400" new="super"/>
-  <variant old="zmo-medium" width="660" height="200" new="cinema"/>
-  <variant old="zmo-small" width="500" height="100" new="cinema"/>
-  <variant old="zmo-x-small" width="350" height="100" new="cinema"/>
-  <variant old="zmo-landscape-large" width="980" height="551" new="wide"/>
-  <variant old="zmo-landscape-small" width="290" height="163" new="wide"/>
-  <variant old="zmo-square-small" width="100" height="100" new="square"/>
-  <variant old="zmo-square-large" width="660" height="660" new="square"/>
-  <variant old="zmo-upright" width="290" height="387" new="portrait"/>
-  <variant old="zmo-lead-upright" width="612" height="826" new="portrait"/>
-  <variant old="zmo-nextread" width="260" height="172" new="wide"/>
-  <variant old="zmo-article-dream" width="920" height="1150" new="tile"/>
-  <variant old="zmo-card-picture" width="320" height="480" new="narrow"/>
-  <variant old="zmo-print-cover" width="315" height="424" new="portrait"/>
+  <variant old="zmo-large" new="super"/>
+  <variant old="zmo-medium" new="cinema"/>
+  <variant old="zmo-small" new="cinema"/>
+  <variant old="zmo-x-small" new="cinema"/>
+  <variant old="zmo-landscape-large" new="wide"/>
+  <variant old="zmo-landscape-small" new="wide"/>
+  <variant old="zmo-square-small" new="square"/>
+  <variant old="zmo-square-large" new="square"/>
+  <variant old="zmo-upright" new="portrait"/>
+  <variant old="zmo-lead-upright" new="portrait"/>
+  <variant old="zmo-nextread" new="wide"/>
+  <variant old="zmo-article-dream" new="tile"/>
+  <variant old="zmo-card-picture" new="narrow"/>
+  <variant old="zmo-print-cover" new="portrait"/>
 
   <!-- internal -->
   <variant old="og-image" new="wide"/>
@@ -49,20 +49,19 @@
   <variant old="zmo-small-left" new="wide"/>
   <variant old="zmo-small-right" new="wide"/>
 
-  <variant old="zmo-xl" width="460" height="306" new="super"/>
-  <variant old="zmo-xl-header" width="460" height="306" new="super"/>
-  <variant old="zon-printbox" width="320" height="234" new="standard"/>
-  <variant old="zon-printbox-x-cinema" width="320" height="148" new="cinema"/>
-  <variant old="zon-column" width="300" height="400" new="portrait"/>
+  <variant old="zmo-xl" new="super"/>
+  <variant old="zmo-xl-header" new="super"/>
+  <variant old="zon-printbox" new="standard"/>
+  <variant old="zon-printbox-x-cinema" new="cinema"/>
+  <variant old="zon-column" new="portrait"/>
 
-  <variant old="default" width="300" height="200" new="super"/>
-  <variant old="large" width="800" height="600" new="super"/>
-  <variant old="small" width="300" height="200" new="super"/>
-  <variant old="upright" width="320" height="480" new="narrow"/>
+  <variant old="large" new="super"/>
+  <variant old="small" new="super"/>
+  <variant old="upright" new="narrow"/>
 
-  <variant old="newsletter-540x304" width="540" height="304" new="wide"/>
-  <variant old="newsletter-220x124" width="220" height="124" new="wide"/>
-  <variant old="brightcove-still" width="580" height="326" new="wide"/>
-  <variant old="brightcove-thumbnail" width="120" height="67" new="wide"/>
-  <variant old="spektrum" width="220" height="124" new="wide"/>
+  <variant old="newsletter-540x304" new="wide"/>
+  <variant old="newsletter-220x124" new="wide"/>
+  <variant old="brightcove-still" new="wide"/>
+  <variant old="brightcove-thumbnail" new="wide"/>
+  <variant old="spektrum" new="wide"/>
 </legacy_variants>

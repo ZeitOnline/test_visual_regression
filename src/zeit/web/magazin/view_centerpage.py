@@ -1,5 +1,4 @@
 from pyramid.view import view_config
-import lxml.etree
 import zope.component
 
 import zeit.cms.interfaces
@@ -147,13 +146,3 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
     @zeit.web.reify
     def is_hp(self):
         return self.context.type == 'ZMO'
-
-
-@view_config(context=zeit.content.cp.interfaces.ICenterPage,
-             name='xml',
-             renderer='string')
-class XMLView(zeit.web.core.view.Base):
-
-    def __call__(self):
-        xml = zeit.content.cp.interfaces.IRenderedXML(self.context)
-        return lxml.etree.tostring(xml, pretty_print=True)

@@ -17,12 +17,12 @@
 		@extend .teaser-large__title
 	&__text
 		@extend %teaser-text
-	&__byline
-		@extend %teaser-byline
 	&__metadata
 		@extend %teaser-metadata
+	&__byline
+		@extend %teaser-byline !optional
 	&__datetime
-		@extend %teaser-datetime
+		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
 
@@ -55,11 +55,9 @@
 		padding-left: em(36px)
 		padding-right: em(36px)
 		&__title
-			font-size: em(34px)
+			font-size: em(32px)
 		&__text
 			font-size: em(18px)
-			margin-bottom: remify(8px)
-		&__byline,
 		&__metadata
 			font-size: em(14px)
 			letter-spacing: 0.04em

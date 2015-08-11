@@ -1,12 +1,22 @@
 Change log for zeit.web
 =======================
 
-1.53 (unreleased)
+1.54 (unreleased)
 -----------------
+
+- PERF: Render CP areas only once per request
+
+
+1.53 (2015-08-10)
+-----------------
+
+- ZON-1970: Display teaser byline, date and commentcount in one line
+
+- ZON-1969: Header image element for centerpages
 
 - ZON-1973: Add markdown module for centerpages
 
-- PERF: Render CP areas only once per request
+- ZON-2045: Rely on config source to generate image variant URLs
 
 
 1.52 (2015-08-07)
