@@ -4,6 +4,9 @@ Change log for zeit.web
 1.54 (unreleased)
 -----------------
 
+- PERF: Remove memcaching of Variants, with the improvements of ZON-2045
+  this no longer helps much.
+
 - PERF: Render CP areas only once per request
 
 
