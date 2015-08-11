@@ -36,6 +36,8 @@
 			padding: 0 em(10px) em(36px) em(36px)
 	&__heading
 		@extend %teaser-heading
+		+respond-min($break-tablet-min)
+			margin-bottom: remify(16px)
 
 	&__series-label
 		@extend %teaser-series-label
@@ -44,44 +46,39 @@
 
 	&__kicker
 		@extend %teaser-kicker
-		margin-bottom: remify(10px)
 		&--blog
 			@extend %teaser-kicker--blog
 		+respond-min($break-tablet-min)
 			color: $white
 			font-size: em(14px)
-			margin-bottom: remify(6px)
 
 	&__title
 		@extend %teaser-title
 		font-size: em(28px)
-		line-height: 1.12
 		+respond-min($break-tablet-min)
 			color: $white
 		+respond-min($break-desktop-min)
-			font-size: em(34px)
-			line-height: 1.2
+			font-size: em(32px)
 	&__combined-link
 		@extend %teaser-combined-link
 	&__text
 		@extend %teaser-text
 		+respond-min($break-tablet-min)
 			color: $white
+			margin-bottom: remify(16px)
 		+respond-min($break-desktop-min)
 			font-size: em(18px)
-	&__byline
-		@extend %teaser-byline
 	&__metadata
 		@extend %teaser-metadata
-	&__byline,
-	&__metadata
 		+respond-min($break-tablet-min)
 			color: $zon_lighter_grey
 		+respond-min($break-desktop-min)
 			font-size: em(14px)
 			letter-spacing: 0.04em
+	&__byline
+		@extend %teaser-byline !optional
 	&__datetime
-		@extend %teaser-datetime
+		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
 		+respond-min($break-tablet-min)

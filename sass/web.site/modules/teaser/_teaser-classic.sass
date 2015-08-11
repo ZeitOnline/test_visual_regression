@@ -27,7 +27,6 @@ $classic-padding: remify(20px)
 		@extend %teaser-combined-link
 	&__kicker
 		@extend %teaser-kicker
-		margin-bottom: remify(5px)
 		&--blog
 			@extend %teaser-kicker--blog
 	&__title
@@ -46,18 +45,21 @@ $classic-padding: remify(20px)
 			width: 66.66%
 		+respond-min($break-desktop-min)
 			font-size: em(18px)
-	&__byline
-		@extend %teaser-byline
-		+respond-min($break-areas)
-			margin-bottom: remify(12px)
 	&__metadata
 		@extend %teaser-metadata
-	&__datetime
-		@extend %teaser-datetime
-	&__commentcount
-		@extend %teaser-commentcount
-
-	&__byline,
-	&__metadata
 		+respond-min($break-areas)
 			margin-left: calc(66.66% + #{$page-padding})
+	&__byline
+		@extend %teaser-byline !optional
+		display: block
+		margin-bottom: remify(4px)
+		&:after
+			content: none !important
+		&:empty
+			display: none
+		+respond-min($break-areas)
+			margin-bottom: remify(12px)
+	&__datetime
+		@extend %teaser-datetime !optional
+	&__commentcount
+		@extend %teaser-commentcount

@@ -8,6 +8,7 @@
 		@extend %teaser-heading
 	&__media
 		@extend %teaser-media
+		display: none
 		+respond-min($break-phablet-min)
 			display: table-cell
 			padding-right: remify(20px)
@@ -28,16 +29,11 @@
 		@extend %teaser-title
 	&__text
 		@extend %teaser-text
-	&__byline
-		@extend %teaser-byline
 	&__metadata
 		@extend %teaser-metadata
+	&__byline
+		@extend %teaser-byline !optional
 	&__datetime
-		@extend %teaser-datetime
+		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
-
-
-+respond-max($break-phablet-min)
-	.teaser-small-minor__media
-		display: none
