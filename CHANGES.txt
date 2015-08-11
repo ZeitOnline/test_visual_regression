@@ -9,6 +9,8 @@ Change log for zeit.web
 
 - PERF: Render CP areas only once per request
 
+- ZON-2016: Kolumnenteaser Bilder
+
 
 1.53 (2015-08-10)
 -----------------
