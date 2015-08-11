@@ -7,6 +7,7 @@ import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 
 import zeit.web.site.module.search_form
+import zeit.web.core.centerpage
 import zeit.web.core.utils
 import zeit.web.core.sources
 
@@ -26,7 +27,7 @@ def search_area(application):
         'http://xml.zeit.de/suche/index')
     area = zeit.web.core.utils.find_block(
         context, attrib='area', kind='ranking')
-    return zeit.web.core.template.get_area(area)
+    return zeit.web.core.centerpage.get_area(area)
 
 
 def test_search_form_should_allow_empty_query(search_form):

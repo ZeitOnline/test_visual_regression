@@ -697,12 +697,6 @@ def get_module(module, name=None):
 
 
 @zeit.web.register_filter
-def get_area(area, name=None):
-    return zeit.web.core.utils.get_named_adapter(
-        area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
-
-
-@zeit.web.register_filter
 def attr_safe(text):
     """ Return an attribute safe version of text """
     return re.sub('[^a-zA-Z]', '', text).lower()
