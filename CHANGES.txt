@@ -9,6 +9,8 @@ Change log for zeit.web
 
 - PERF: Render CP areas only once per request
 
+- IMPROVEMENT: add clicktracking to breadcrumbs in footer
+
 
 1.53 (2015-08-10)
 -----------------
