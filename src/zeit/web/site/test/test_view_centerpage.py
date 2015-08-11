@@ -176,7 +176,7 @@ def test_fullwidth_teaser_image_should_have_attributes_for_mobile_variant(
     browser = testbrowser('/zeit-online/fullwidth-teaser')
     img = browser.cssselect('.teaser-fullwidth__media-item')[0]
     assert img.attrib['data-mobile-variant'] == 'wide'
-    assert img.attrib['data-mobile-ratio'] == '1.77'
+    assert img.attrib['data-mobile-ratio'].startswith('1.77')
     assert 'cp-content/ig-1/wide' in img.attrib['data-mobile-src']
 
 
@@ -206,12 +206,12 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
     assert helper.is_displayed(), 'Fullwidth teaser container missing'
 
     if screen_size[0] == 768:
-        client_width = driver.execute_script(script)
-        assert helper.size.get('width') == int('%.0f' % (client_width*0.72))
+        width = driver.execute_script(script)
+        assert helper.size.get('width') == int('%.0f' % (width * 0.72))
 
     elif screen_size[0] == 980:
-        client_width = driver.execute_script(script)
-        assert helper.size.get('width') == int('%.0f' % (client_width*0.6666))
+        width = driver.execute_script(script)
+        assert helper.size.get('width') == int('%.0f' % (width * 0.6666))
 
 
 def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
