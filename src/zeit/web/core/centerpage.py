@@ -9,6 +9,7 @@ import grokcore.component
 import zope.component
 
 import zeit.cms.interfaces
+import zeit.content.cp.area
 import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
 import zeit.content.image.imagegroup
@@ -84,6 +85,40 @@ def get_image_asset(teaser):
         return zeit.content.image.interfaces.IImages(teaser).image
     except (TypeError, AttributeError):
         return
+
+
+def get_area(area):
+    return zeit.web.core.utils.get_named_adapter(
+        area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
+
+
+class IRendered(zope.interface.Interface):
+    """Calculates values() only once.
+    """
+
+
+@grokcore.component.adapter(zeit.content.cp.interfaces.IRegion)
+@grokcore.component.implementer(IRendered)
+class RenderedRegion(zeit.content.cp.area.Region):
+
+    def __init__(self, context):
+        super(RenderedRegion, self).__init__(context.__parent__, context.xml)
+
+    def values(self):
+        if not hasattr(self, '_v_values'):
+            self._v_values = [IRendered(get_area(x))
+                              for x in super(RenderedRegion, self).values()]
+        return self._v_values
+
+
+@grokcore.component.adapter(zeit.content.cp.interfaces.IArea)
+@grokcore.component.implementer(IRendered)
+def cache_values_area(context):
+    def cached_values(self):
+        return self._v_values
+    context._v_values = context.values()
+    context.values = cached_values.__get__(context)
+    return context
 
 
 class TeaserSequence(object):
@@ -230,6 +265,7 @@ class VariantImage(object):
         self.attr_title = meta.title or meta.caption
         self.caption = meta.caption
         self.copyright = meta.copyrights
+        self.image_group = group.uniqueId
         self.image_pattern = context.name
         self.path = group.variant_url(self.image_pattern).lstrip('/')
         self.ratio = context.ratio

@@ -18,6 +18,7 @@ import zeit.magazin.interfaces
 
 import zeit.web.site.module
 import zeit.web.core.article
+import zeit.web.core.centerpage
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.gallery
@@ -121,7 +122,7 @@ class CenterPage(Traversable):
         area = zeit.web.core.utils.find_block(
             self.context, attrib='area', kind='ranking')
         if area:
-            area = zeit.web.core.template.get_area(area)
+            area = zeit.web.core.centerpage.get_area(area)
             form = zeit.web.core.utils.find_block(
                 self.context, module='search-form')
             if form:
