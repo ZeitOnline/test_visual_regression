@@ -4,7 +4,7 @@ Change log for zeit.web
 1.54 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Handle missing or expired article images
 
 
 1.53 (2015-08-10)

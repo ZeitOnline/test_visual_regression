@@ -273,11 +273,14 @@ class Image(BaseImage):
         # XXX: This is a rather unelegant and inflexible!
         #      But it gets images rolling in beta articles - so wth.
         #      … and 99% of images in articles are 'large'
-        target = model_block.references.target
+        target = model_block.references and model_block.references.target
         if zeit.content.image.interfaces.IImageGroup.providedBy(target):
-            target = target['wide']
+            try:
+                target = target['wide']
+            except KeyError:
+                target = None
 
-        if model_block.references:
+        if target:
             self.image = target
             self.src = self.image and self.image.uniqueId
             self.uniqueId = self.image and self.image.uniqueId
