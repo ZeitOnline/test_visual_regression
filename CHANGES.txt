@@ -11,6 +11,10 @@ Change log for zeit.web
 
 - IMPROVEMENT: add clicktracking to breadcrumbs in footer
 
+- ZON-2016: Kolumnenteaser Bilder
+
+- ZON-1843: Mobil: Aufmacher-Classic an Pos 1. soll gleiche Überschriftengröße wie im Parkett
+
 
 1.53 (2015-08-10)
 -----------------
