@@ -11,6 +11,8 @@ Change log for zeit.web
 
 - PERF: Render CP areas only once per request
 
+- ZON-1843: Mobil: Aufmacher-Classic an Pos 1. soll gleiche Überschriftengröße wie im Parkett
+
 
 1.53 (2015-08-10)
 -----------------
