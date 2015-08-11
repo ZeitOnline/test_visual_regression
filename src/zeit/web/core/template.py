@@ -9,7 +9,6 @@ import urllib
 import urlparse
 
 import babel.dates
-import beaker.cache
 import pyramid.threadlocal
 import repoze.bitblt.transform
 import zope.component
@@ -454,11 +453,6 @@ def closest_substitute_image(image_group,
 
     # Select the candidate that is preferably one size larger than the target.
     return image_group.get(candidates[:idx + 1][-1][0])
-
-
-@zeit.web.register_filter
-def replace_variant_in_image_url(image_url, new_variant):
-    return image_url.rsplit('/', 1)[0] + '/' + new_variant
 
 
 @zeit.web.register_filter
