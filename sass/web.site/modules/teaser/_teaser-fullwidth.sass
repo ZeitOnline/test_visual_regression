@@ -1,7 +1,7 @@
 .teaser-fullwidth
 	@extend %teaser
 	border-bottom: 1px solid $zon_light_grey
-	padding-top: 0
+	padding: 0 0 $vertical-space
 	+respond-min($break-areas)
 		border-bottom: none
 		margin-left: -$page-padding
@@ -13,18 +13,19 @@
 		+teaser-image-text-shadow
 	&__media
 		height: 0
-		padding-bottom: calc(56.25% + 2 * #{$page-padding} * 0.5625 ) // 56.25% = 16:9; adjust for negative margin
+		padding-bottom: 100% / 16 * 9 // image variant 'wide'
 		background-color: $zon_lighter_grey // placeholder for image
-		margin: 0 (-$page-padding) $petite
+		margin: 0 0 $petite
 		+respond-min($break-tablet-min)
-			background-color: rgb(0, 15, 20) // placeholder for image, same as default for +teaser-image-dark-overlay
+			background-color: rgb(0, 15, 20) // placeholder for image; same as default for +teaser-image-dark-overlay
 			margin: 0
-			padding-bottom: 100% / 7 * 3
+			padding-bottom: 100% / 7 * 3 // image variant 'cinema'
 			z-index: 1
 	&__media-container
 		+respond-min($break-tablet-min)
 			+teaser-image-dark-overlay
 	&__container
+		padding: 0 $page-padding
 		+respond-min($break-tablet-min)
 			bottom: 0
 			left: 0
