@@ -9,6 +9,8 @@ Change log for zeit.web
 
 - PERF: Render CP areas only once per request
 
+- FIX: Hide iqdSiteBar if moved to mobile breakpoint 
+
 
 1.53 (2015-08-10)
 -----------------
