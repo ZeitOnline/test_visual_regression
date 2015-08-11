@@ -6,6 +6,11 @@ Change log for zeit.web
 
 - ZON-2010: Fullwidth teaser: use 16:9 image variant on mobile
 
+- PERF: Remove memcaching of Variants, with the improvements of ZON-2045
+  this no longer helps much.
+
+- PERF: Render CP areas only once per request
+
 
 1.53 (2015-08-10)
 -----------------
