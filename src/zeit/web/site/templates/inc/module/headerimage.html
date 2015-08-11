@@ -3,7 +3,7 @@
     {% set image = module.image.uniqueId | get_variant("panorama") %}
     {# we need to explecitly pass the layout aka block class name #}
     {% set module_layout = "header-image" %}
-    {% include "zeit.web.site:templates/inc/image.tpl" ignore missing %}
+    {% include "zeit.web.site:templates/inc/module/headerimage_image.tpl" ignore missing %}
     <h1 class="header-image__heading">
         <span class="header-image__kicker">{{ module.supertitle }}</span>
         <span class="visually-hidden">: </span>
