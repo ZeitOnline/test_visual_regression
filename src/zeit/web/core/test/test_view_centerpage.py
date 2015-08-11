@@ -1,7 +1,9 @@
+import mock
+
 import zeit.content.cp.centerpage
 import zeit.cms.interfaces
-import zeit.cms.repository.interfaces
 
+import zeit.web.core.centerpage
 import zeit.web.core.view_centerpage
 
 
@@ -80,3 +82,31 @@ def test_centerpage_should_collect_teaser_counts_from_community(
 def test_centerpage_should_have_smaxage(testserver, testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     assert browser.headers.dict['s-maxage'] == '21600'
+
+
+def test_rendering_centerpage_should_cache_region_and_area_values(
+        application, monkeypatch):
+    call_count = {'region': 0, 'area': 0}
+
+    def count_values_region(self):
+        call_count['region'] += 1
+        return region_values(self)
+    region_values = zeit.content.cp.area.Region.values
+    monkeypatch.setattr(
+        zeit.content.cp.area.Region, 'values', count_values_region)
+
+    def count_values_area(self):
+        call_count['area'] += 1
+        return area_values(self)
+    area_values = zeit.content.cp.area.Area.values
+    monkeypatch.setattr(
+        zeit.content.cp.area.Area, 'values', count_values_area)
+
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    rendered = zeit.web.core.centerpage.IRendered(cp.body['feature'])
+    for i in range(10):
+        rendered.values()[0].values()
+    assert call_count['region'] == 1
+    # Region has 2 Areas.
+    assert call_count['area'] == 2

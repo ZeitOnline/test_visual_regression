@@ -4,7 +4,7 @@ Change log for zeit.web
 1.54 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- PERF: Render CP areas only once per request
 
 
 1.53 (2015-08-10)
