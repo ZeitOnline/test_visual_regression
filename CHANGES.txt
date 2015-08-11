@@ -4,7 +4,8 @@ Change log for zeit.web
 1.54 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- PERF: Remove memcaching of Variants, with the improvements of ZON-2045
+  this no longer helps much.
 
 
 1.53 (2015-08-10)
