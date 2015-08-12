@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.56 (unreleased)
+1.56 (2015-08-12)
 -----------------
 
 - ZON-2010: Fullwidth teaser uses 16:9 image variant on mobile
