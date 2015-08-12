@@ -9,6 +9,7 @@ import grokcore.component
 import zope.component
 
 import zeit.cms.interfaces
+import zeit.content.cp.area
 import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
 import zeit.content.image.imagegroup
@@ -84,6 +85,40 @@ def get_image_asset(teaser):
         return zeit.content.image.interfaces.IImages(teaser).image
     except (TypeError, AttributeError):
         return
+
+
+def get_area(area):
+    return zeit.web.core.utils.get_named_adapter(
+        area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
+
+
+class IRendered(zope.interface.Interface):
+    """Calculates values() only once.
+    """
+
+
+@grokcore.component.adapter(zeit.content.cp.interfaces.IRegion)
+@grokcore.component.implementer(IRendered)
+class RenderedRegion(zeit.content.cp.area.Region):
+
+    def __init__(self, context):
+        super(RenderedRegion, self).__init__(context.__parent__, context.xml)
+
+    def values(self):
+        if not hasattr(self, '_v_values'):
+            self._v_values = [IRendered(get_area(x))
+                              for x in super(RenderedRegion, self).values()]
+        return self._v_values
+
+
+@grokcore.component.adapter(zeit.content.cp.interfaces.IArea)
+@grokcore.component.implementer(IRendered)
+def cache_values_area(context):
+    def cached_values(self):
+        return self._v_values
+    context._v_values = context.values()
+    context.values = cached_values.__get__(context)
+    return context
 
 
 class TeaserSequence(object):
@@ -181,6 +216,7 @@ class Teaser(object):
 class Image(zeit.web.core.block.BaseImage):
 
     def __init__(self, image):
+        group = zeit.content.image.interfaces.IImageGroup(image, None)
         meta = zeit.content.image.interfaces.IImageMetadata(image)
         self.align = None
         self.alt = meta.alt
@@ -189,7 +225,7 @@ class Image(zeit.web.core.block.BaseImage):
         self.caption = meta.caption
         self.copyright = meta.copyrights
         self.image = image
-        self.image_group = None
+        self.image_group = getattr(group, 'uniqueId', None)
         self.image_pattern = 'default'
         self.layout = ''
         self.src = self.uniqueId = image.uniqueId
@@ -201,8 +237,8 @@ class Image(zeit.web.core.block.BaseImage):
                             zeit.content.image.interfaces.IImage)
 class TeaserImage(zeit.web.core.block.BaseImage):
 
-    def __init__(self, image_group, image):
-        meta = zeit.content.image.interfaces.IImageMetadata(image_group)
+    def __init__(self, group, image):
+        meta = zeit.content.image.interfaces.IImageMetadata(group)
         self.align = None
         self.alt = meta.alt
         self.attr_alt = meta.alt or meta.caption
@@ -210,7 +246,7 @@ class TeaserImage(zeit.web.core.block.BaseImage):
         self.caption = meta.caption
         self.copyright = meta.copyrights
         self.image = image
-        self.image_group = image_group.uniqueId
+        self.image_group = group.uniqueId
         self.image_pattern = 'default'
         self.layout = ''
         self.src = self.uniqueId = image.uniqueId
@@ -222,20 +258,20 @@ class TeaserImage(zeit.web.core.block.BaseImage):
 @grokcore.component.adapter(zeit.content.image.interfaces.IVariant)
 class VariantImage(object):
 
-    def __init__(self, context):
-        group = zeit.content.image.interfaces.IImageGroup(context)
+    def __init__(self, variant):
+        group = zeit.content.image.interfaces.IImageGroup(variant, None)
         meta = zeit.content.image.interfaces.IImageMetadata(group)
         self.alt = meta.alt
         self.attr_alt = meta.alt or meta.caption
         self.attr_title = meta.title or meta.caption
         self.caption = meta.caption
-        self.context = context
         self.copyright = meta.copyrights
-        self.image_pattern = context.name
+        self.image_group = getattr(group, 'uniqueId', None)
+        self.image_pattern = variant.name
         self.path = group.variant_url(self.image_pattern).lstrip('/')
-        self.ratio = context.ratio
+        self.ratio = variant.ratio
         self.title = meta.title
-        self.variant = context.legacy_name or context.name
+        self.variant = variant.legacy_name or variant.name
 
 
 class LocalVideoImage(object):

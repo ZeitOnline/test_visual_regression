@@ -29,7 +29,6 @@ $color-comment-border: $zon_light_grey
 	&__container
 		margin-left: auto
 		margin-right: auto
-		max-width: remify(660px)
 		padding-bottom: remify(30px)
 		padding-top: remify(20px)
 		position: relative
@@ -37,6 +36,8 @@ $color-comment-border: $zon_light_grey
 		+respond-min($break-phablet-min)
 			padding-bottom: remify(50px)
 			padding-top: remify(50px)
+		+respond-min($break-tablet-min)
+			max-width: remify(660px)
 
 	&__avatar
 		border-radius: 50%

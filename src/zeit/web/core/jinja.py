@@ -79,7 +79,7 @@ class Environment(jinja2.environment.Environment):
             return getattr(super(Environment, self), func)(obj, name)
         except BaseException:
             self.handle_exception()
-            return self.undefined(obj, name)
+            return self.undefined(obj=obj, name=name)
 
     def getitem(self, obj, argument):
         return self.__getsth__('getitem', obj, argument)

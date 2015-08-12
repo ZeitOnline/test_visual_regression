@@ -43,14 +43,14 @@
                 {# TODO: Extract teaser-length text snippet from articles that don't have a teaser text. #}
                 <p class="{{ self.layout() }}__text">{{ teaser.teaserText | hide_none }}</p>
             {% endblock %}
-            {% block teaser_byline %}
-                <span class="{{ self.layout() }}__byline">
-                    {%- set byline = teaser | get_byline -%}
-                    {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
-                </span>
-            {% endblock %}
             {% block teaser_metadata_default %}
             <div class="{{ self.layout() }}__metadata">
+                {% block teaser_byline %}
+                    <span class="{{ self.layout() }}__byline">
+                        {%- set byline = teaser | get_byline -%}
+                        {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
+                    </span>
+                {% endblock %}
                 {% block teaser_datetime %}
                     {{ cp.include_teaser_datetime(teaser, self.layout(), area.kind) }}
                 {% endblock %}

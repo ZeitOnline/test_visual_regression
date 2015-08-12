@@ -1,12 +1,15 @@
 .comment-section
-	border-top: 2px solid $zon-seashell
-	margin: 4rem (-$page-padding) 0
+	margin: 0 (-$page-padding)
+	+respond-min($break-tablet-min)
+		border-top: 1px solid $zon_light_grey
 	&__item
 		margin-left: auto
 		margin-right: auto
-		max-width: remify(700px) // 660px + 2*$page-padding
 		padding: 0 $page-padding
+		+respond-min($break-tablet-min)
+			max-width: remify(700px) // 660px + 2*$page-padding
 	&__head
+		background-color: $zon_lighter_grey
 		padding-bottom: em(32px)
 		padding-top: em(32px)
 		text-align: center
@@ -14,6 +17,8 @@
 			+display-flex // flexbox
 			+justify-content(space-between) // flexbox
 			+align-items(center)
+		+respond-min($break-tablet-min)
+			background-color: transparent
 	&__headline
 		font-size: remify(18px)
 		font-weight: bold
@@ -39,7 +44,7 @@
 		background-color: $zon_lighter_grey
 		color: $zon_grey
 		font-size: em(13px)
-		margin-bottom: 1px
+		margin: 1px 0 // simple border
 		padding-bottom: remify(13px)
 		padding-top: remify(13px)
 		a

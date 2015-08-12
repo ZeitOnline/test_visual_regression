@@ -1,9 +1,11 @@
 %teaser-kicker-topic
 	color: $zon_mid_grey
+	display: block
 	font-size: remify(14px)
 	font-weight: normal
 	letter-spacing: $zon-letter-spacing-l
-	margin-bottom: remify(14px)
+	line-height: 1.2
+	margin-bottom: 1em
 	text-transform: uppercase
 
 .teaser-topic-main
@@ -39,7 +41,6 @@
 			padding-right: remify(42px)
 			width: 66.66%
 	&__kicker
-		@extend %teaser-kicker
 		@extend %teaser-kicker-topic
 	&__media
 		float: left
@@ -105,7 +106,6 @@ img.teaser-topic-main__media-item
 	&__heading
 		margin: 0
 	&__kicker
-		@extend %teaser-kicker
 		@extend %teaser-kicker-topic
 	&__title
 		@extend %teaser-title

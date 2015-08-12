@@ -1,6 +1,6 @@
 .teaser-fullwidth-column
 	@extend %teaser-column
-	margin: 0 (-$page-padding)
+	margin: 0
 	&__media
 		@extend %teaser-column__media
 	&__media-item
@@ -17,12 +17,12 @@
 		@extend .teaser-large__title
 	&__text
 		@extend %teaser-text
-	&__byline
-		@extend %teaser-byline
 	&__metadata
 		@extend %teaser-metadata
+	&__byline
+		@extend %teaser-byline !optional
 	&__datetime
-		@extend %teaser-datetime
+		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
 
@@ -32,22 +32,26 @@
 +respond-min($break-phablet-min)
 	.teaser-fullwidth-column
 		&--has-media
-			min-height: $teaser-column-image-height-fullwidth * 1.2
-		&--has-media &__container
+			min-height: remify($teaser-column-fullwidth-image-size-phablet * 1.2)
+		&__container
 			max-width: 66%
-		&--has-media &__media
-			width: $teaser-column-image-width-fullwidth
-			height: $teaser-column-image-height-fullwidth
-		&--has-media &__metadata
+		&__media
+			width: remify($teaser-column-fullwidth-image-size-phablet)
+			height: remify($teaser-column-fullwidth-image-size-phablet)
+		&__metadata
 			min-height: initial
 			padding-right: 0
 
 +respond-min($break-tablet-min)
 	.teaser-fullwidth-column
 		padding: em(32px)
+		&--has-media
+			min-height: remify($teaser-column-fullwidth-image-size-tablet * 1.2)
 		&__container
 			max-width: 72%
 		&__media
+			width: remify($teaser-column-fullwidth-image-size-tablet)
+			height: remify($teaser-column-fullwidth-image-size-tablet)
 			right: 3%
 
 +respond-min($break-desktop-min)
@@ -55,11 +59,9 @@
 		padding-left: em(36px)
 		padding-right: em(36px)
 		&__title
-			font-size: em(34px)
+			font-size: em(32px)
 		&__text
 			font-size: em(18px)
-			margin-bottom: remify(8px)
-		&__byline,
 		&__metadata
 			font-size: em(14px)
 			letter-spacing: 0.04em

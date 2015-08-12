@@ -2,6 +2,7 @@
 
 {% if view.comments_allowed or view.comments %}
 <section class="comment-section" id="comments">
+	<h3 class="visually-hidden">Kommentare</h3>
 	<div class="comment-section__head comment-section__item">
 	{% if view.comments %}
 		<span class="comment-section__headline">
