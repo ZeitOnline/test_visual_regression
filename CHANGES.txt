@@ -4,7 +4,7 @@ Change log for zeit.web
 1.56 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Don't switch to ``.cp2015`` for classic auto cps
 
 
 1.55 (2015-08-12)
