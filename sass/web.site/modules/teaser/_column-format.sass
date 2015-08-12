@@ -1,13 +1,11 @@
 // Styles for the so-called "Kolumnenteaser"
 
 $color-column-background: $zon-warm-grey
-$teaser-column-mobile-image-size: 80px
-
-$teaser-column-image-height-large: 130px
-$teaser-column-image-width-large: 130px
-$teaser-column-image-height-fullwidth: 210px
-$teaser-column-image-width-fullwidth: 210px
-
+$teaser-column-image-size-mobile: 100px
+$teaser-column-fullwidth-image-size-phablet: 150px
+$teaser-column-fullwidth-image-size-tablet: 200px
+$teaser-column-large-image-size-phablet: 150px
+$teaser-column-small-image-size-desktop: 200px
 
 %teaser-column
 	@extend %teaser
@@ -33,9 +31,9 @@ $teaser-column-image-width-fullwidth: 210px
 	overflow: hidden
 	position: absolute
 	bottom: 0
-	right: 0
-	width: $teaser-column-mobile-image-size
-	height: $teaser-column-mobile-image-size
+	right: remify(10px)
+	width: $teaser-column-image-size-mobile
+	height: $teaser-column-image-size-mobile
 	margin: 0
 
 %teaser-column__media-item
@@ -47,6 +45,6 @@ $teaser-column-image-width-fullwidth: 210px
 		position: static
 
 %teaser-column__media-space
-	padding-right: remify($teaser-column-mobile-image-size + 20px)
-	// min-height: $teaser-column-mobile-image-size - $page-padding - ownMarginBottom = 5rem - 1.25rem - 0.25rem
-	min-height: 3.5rem
+	padding-right: remify($teaser-column-image-size-mobile + 20px)
+	// min-height: $teaser-column-image-size-mobile - ownMarginBottom
+	min-height: remify($teaser-column-image-size-mobile - 20px)
