@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - PERF: Render CP areas only once per request
 
+- MAINT: Improve jinja error messages
+
 - FIX: Handle missing or expired article images
 
 - FIX: Be more tolerant of broken/invalid author references
