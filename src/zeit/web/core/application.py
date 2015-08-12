@@ -423,11 +423,17 @@ def join_url_path(base, path):
 
 # Monkey-patch so our content provides a marker interface,
 # thus Source entries can be ``available`` only for zeit.web, but not vivi.
+# We copy the method wholesale since calling alsoProvides only once
+# proved to be a significant performance gain.
 def getitem_with_marker_interface(self, key):
-    content = original_getitem(self, key)
+    unique_id = self._get_id_for_name(key)
+    __traceback_info__ = (key, unique_id)
+    content = self.repository.getUncontainedContent(unique_id)
     zope.interface.alsoProvides(
-        content, zeit.web.core.interfaces.IInternalUse)
-    return content
-original_getitem = zeit.cms.repository.repository.Container.__getitem__
+        content,
+        zeit.cms.repository.interfaces.IRepositoryContent,
+        zeit.web.core.interfaces.IInternalUse)
+    return zope.container.contained.contained(
+        content, self, content.__name__)
 zeit.cms.repository.repository.Container.__getitem__ = (
     getitem_with_marker_interface)
