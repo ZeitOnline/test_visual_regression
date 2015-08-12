@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.54 (unreleased)
+1.56 (unreleased)
 -----------------
 
 - ZON-2010: Fullwidth teaser: use 16:9 image variant on mobile
@@ -9,11 +9,33 @@ Change log for zeit.web
 - PERF: Remove memcaching of Variants, with the improvements of ZON-2045
   this no longer helps much.
 
+- Nothing changed yet.
+
+
+1.55 (2015-08-12)
+-----------------
+
+- FIX: Encode non-ascii URLs as utf-8 (for Spektrum images)
+
+
+1.54 (2015-08-12)
+-----------------
+
+- ZON-2016: Polish images of column teaser
+
+- ZON-1843: Polish zon-classic mobile headline
+
+- PERF: Remove memcaching of Variants, which was made redundant by ZON-2045
+
 - PERF: Render CP areas only once per request
 
-- ZON-2016: Kolumnenteaser Bilder
+- MAINT: Improve jinja error messages
 
-- ZON-1843: Mobil: Aufmacher-Classic an Pos 1. soll gleiche Überschriftengröße wie im Parkett
+- MAINT: Ignore memcache errors on getitem, too, not only contains and set
+
+- FIX: Handle missing or expired article images
+
+- FIX: Be more tolerant of broken/invalid author references
 
 
 1.53 (2015-08-10)

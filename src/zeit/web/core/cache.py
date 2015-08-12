@@ -83,6 +83,18 @@ beaker.ext.memcached.PyLibMCNamespaceManager.__contains__ = (
     contains_ignore_server_error)
 
 
+def getitem_ignore_server_error(self, *args, **kw):
+    try:
+        return original_getitem(self, *args, **kw)
+    except:
+        log.warning(
+            'Error connecting to memcache at %s', self.mc.addresses)
+        return False
+original_getitem = beaker.ext.memcached.PyLibMCNamespaceManager.__getitem__
+beaker.ext.memcached.PyLibMCNamespaceManager.__getitem__ = (
+    getitem_ignore_server_error)
+
+
 def setvalue_ignore_server_error(self, *args, **kw):
     try:
         return original_setvalue(self, *args, **kw)
