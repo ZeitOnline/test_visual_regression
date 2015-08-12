@@ -3,12 +3,21 @@ $classic-padding: remify(20px)
 .teaser-classic
 	@extend %teaser
 	border-bottom: 1px solid $zon_light_grey
+	margin: 0
 	+respond-min($break-areas)
 		border-bottom: none
+		padding-left: $page-padding
+		padding-right: $page-padding
 	&__container
 		overflow: hidden
 	&__media
 		@extend %teaser-media
+		background-color: $zon_lighter_grey // placeholder for image
+		height: 0
+		padding-bottom: 100% / 16 * 9 // image variant 'wide'
+		overflow: hidden
+		+respond-min($break-tablet-min)
+			padding-bottom: 100% / 7 * 3 // image variant 'cinema'
 	&__media-item
 		@extend %teaser-media-item !optional
 	&__series-label
@@ -26,8 +35,7 @@ $classic-padding: remify(20px)
 			@extend %teaser-kicker--blog
 	&__title
 		@extend %teaser-title
-		+respond-min($break-tablet-min)
-			font-size: em(28px)
+		font-size: em(28px)
 		+respond-min($break-desktop-min)
 			font-size: em(32px)
 	&__text
