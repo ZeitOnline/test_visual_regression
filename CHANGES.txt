@@ -4,6 +4,8 @@ Change log for zeit.web
 1.56 (unreleased)
 -----------------
 
+- ZON-2010: Fullwidth teaser: use 16:9 image variant on mobile
+
 - MAINT: Drop repoze.vhm dependency
 
 

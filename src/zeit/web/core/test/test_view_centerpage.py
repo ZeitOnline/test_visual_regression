@@ -1,5 +1,3 @@
-import mock
-
 import zeit.content.cp.centerpage
 import zeit.cms.interfaces
 

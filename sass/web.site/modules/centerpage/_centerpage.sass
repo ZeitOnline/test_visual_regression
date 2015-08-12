@@ -32,6 +32,12 @@
 	&--gallery + &--parquet
 		border-top-width: 1px
 
+	// EXPERIMENT: We're trying to get rid of the 'padding/margin breakout kerfuffle'.
+	// 			   Seems like we started with the desktop and retrofitted.
+	// 			   This is an atempt to do it *mobile first*.
+	&--solo
+		padding: 0
+
 .cp-area
 	padding: 0 $cp-padding
 	width: 100%
@@ -41,6 +47,11 @@
 		padding-left: 0
 		padding-right: 0
 		position: relative
+	// EXPERIMENT: We're trying to get rid of the 'padding/margin breakout kerfuffle'.
+	// 			   Seems like we started with the desktop and retrofitted.
+	// 			   This is an atempt to do it *mobile first*.
+	&--solo
+		padding: 0
 	&--spektrum
 		padding-top: remify(60px)
 	+respond-min($break-areas)

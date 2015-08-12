@@ -1,31 +1,30 @@
 .teaser-fullwidth
 	@extend %teaser
 	border-bottom: 1px solid $zon_light_grey
-	padding-top: 0
+	padding: 0 0 $vertical-space
+	margin: 0
 	+respond-min($break-areas)
 		border-bottom: none
-		margin-left: -$page-padding
-		margin-right: -$page-padding
 		overflow: hidden
 		padding: 0
 		position: relative
 		+font-smoothing
 		+teaser-image-text-shadow
 	&__media
-		margin: 0 (-$page-padding) $petite
-		// this upsizes the fullwidth-image (ratio 2,35) appear to 16:9
-		// this is a temporary hack w/ magic number. it's not perfectly 16:9, because of margins and sh*t
-		width: 136% // for browsers without proper calc support
-		width: calc(135% + 2 * #{$page-padding})
-		max-width: none
+		height: 0
+		padding-bottom: 100% / 16 * 9 // image variant 'wide'
+		background-color: $zon_lighter_grey // placeholder for image
+		margin: 0 0 $petite
 		+respond-min($break-tablet-min)
-			width: 100%
+			background-color: rgb(0, 15, 20) // placeholder for image; same as default for +teaser-image-dark-overlay
 			margin: 0
+			padding-bottom: 100% / 7 * 3 // image variant 'cinema'
 			z-index: 1
 	&__media-container
 		+respond-min($break-tablet-min)
 			+teaser-image-dark-overlay
 	&__container
+		padding: 0 $page-padding
 		+respond-min($break-tablet-min)
 			bottom: 0
 			left: 0
