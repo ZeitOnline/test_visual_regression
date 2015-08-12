@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.54 (unreleased)
+1.54 (2015-08-12)
 -----------------
 
 - ZON-2016: Polish images of column teaser
