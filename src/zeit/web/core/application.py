@@ -362,10 +362,8 @@ class Application(object):
         as kw parameters.
         """
         return [
-            ('repoze.vhm', 'paste.filter_app_factory', 'vhm_xheaders', {}),
             ('remove_asset_prefix', 'factory', '', {}),
-            ('bugsnag_notifier', 'factory', '', {})
-        ]
+            ('bugsnag_notifier', 'factory', '', {})]
 
     def remove_asset_prefix(self, app):
         return URLPrefixMiddleware(
