@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <head xmlns:D="DAV:">
   <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/centerpage/katzencontent/</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">back.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">katzencontent.jpg</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-23T08:23:18.838431+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">Dies ist der Titel</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">Katze!</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Die ist der image sub text </attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:fe0f4d26-5c16-4664-bd84-b40d2e900134}</attribute>
