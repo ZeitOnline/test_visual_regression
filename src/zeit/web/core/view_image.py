@@ -102,7 +102,7 @@ class Brightcove(zeit.web.core.view.Base):
 class SpektrumImage(zeit.web.core.view.Base):
 
     def __call__(self):
-        path = '/'.join(self.request.matchdict.get('path'))
+        path = '/'.join(self.request.matchdict.get('path')).encode('utf-8')
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         image_url = '{}/{}'.format(conf.get('spektrum_img_host', ''), path)
         _, file_name = path.rsplit('/', 1)
@@ -117,6 +117,6 @@ class SpektrumImage(zeit.web.core.view.Base):
         response.content_type = 'image/jpeg'
         response.headers['Content-Type'] = response.content_type
         response.headers['Content-Disposition'] = (
-            'inline; filename="{}"'.format(file_name).encode('utf8'))
+            'inline; filename="{}"'.format(file_name))
         response.cache_expires(zeit.web.core.cache.ICachingTime(image_url))
         return response
