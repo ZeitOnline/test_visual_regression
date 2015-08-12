@@ -107,6 +107,14 @@ def test_teaser_byline_should_expand_authors_as_text(monkeypatch):
         ('text', u'Max Mustermann'), ('text', u'Anne Mustermann'))
 
 
+def test_teaser_byline_should_ignore_authors_without_display_name(monkeypatch):
+    author = mock.Mock()
+    author.target = mock.Mock(spec=[])
+    cls = zeit.web.core.byline.TeaserByline
+    monkeypatch.setattr(cls, '__init__', lambda s: list.__init__(s))
+    assert tuple(cls().expand_authors([author])) == ()
+
+
 def test_content_byline_should_expand_authors_with_links(monkeypatch):
     author = mock.Mock()
     author.target.display_name = u'Max Mustermann'
