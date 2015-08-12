@@ -2,9 +2,10 @@
 
 import datetime
 
-import pytest
-import pysolr
+import lxml.html
 import mock
+import pysolr
+import pytest
 
 import zeit.cms.interfaces
 from zeit.cms.checkout.helper import checked_out

@@ -4,6 +4,11 @@ Change log for zeit.web
 1.56 (unreleased)
 -----------------
 
+- ZON-2010: Fullwidth teaser: use 16:9 image variant on mobile
+
+- PERF: Remove memcaching of Variants, with the improvements of ZON-2045
+  this no longer helps much.
+
 - Nothing changed yet.
 
 
