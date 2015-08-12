@@ -173,6 +173,7 @@ class DynamicFolder(CenterPage):
         else:
             tdict['traversed'] += (tdict['view_name'],)
             tdict['view_name'] = ''
+            raise Retraverse(tdict['request'])
 
 
 @traverser(zeit.content.video.interfaces.IVideo)
