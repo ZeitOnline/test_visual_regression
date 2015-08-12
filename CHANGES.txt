@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - MAINT: Improve jinja error messages
 
+- MAINT: Ignore memcache errors on getitem, too, not only contains and set
+
 - FIX: Handle missing or expired article images
 
 - FIX: Be more tolerant of broken/invalid author references
