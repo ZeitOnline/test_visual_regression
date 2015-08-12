@@ -4,9 +4,11 @@ Change log for zeit.web
 1.56 (unreleased)
 -----------------
 
-- ZON-2010: Fullwidth teaser: use 16:9 image variant on mobile
+- ZON-2010: Fullwidth teaser uses 16:9 image variant on mobile
 
 - FIX: Don't switch to ``.cp2015`` for classic auto cps
+
+- FIX: Hide iqdSiteBar if moved to mobile breakpoint 
 
 - MAINT: Drop repoze.vhm dependency
 
