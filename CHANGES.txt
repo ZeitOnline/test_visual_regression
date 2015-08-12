@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - FIX: Be more tolerant of broken/invalid author references
 
+- FIX: Encode non-ascii URLs as utf-8 (for Spektrum images)
+
 
 1.53 (2015-08-10)
 -----------------
