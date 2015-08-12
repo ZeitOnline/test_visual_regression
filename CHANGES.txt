@@ -4,7 +4,9 @@ Change log for zeit.web
 1.57 (unreleased)
 -----------------
 
-- MAINT: add velocity.js for smooth animations
+- ZON-2031: Never ever ever ever cache comment-form
+
+- MAINT: Add velocity.js for smooth animations
 
 
 1.56 (2015-08-12)
