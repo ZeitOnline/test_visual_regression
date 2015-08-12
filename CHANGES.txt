@@ -14,7 +14,7 @@ Change log for zeit.web
 
 - FIX: Don't switch to ``.cp2015`` for classic auto cps
 
-- FIX: Hide iqdSiteBar if moved to mobile breakpoint 
+- FIX: Hide iqdSiteBar if moved to mobile breakpoint
 
 - MAINT: Drop repoze.vhm dependency
 
