@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.55 (unreleased)
+1.55 (2015-08-12)
 -----------------
 
 - FIX: Encode non-ascii URLs as utf-8 (for Spektrum images)
