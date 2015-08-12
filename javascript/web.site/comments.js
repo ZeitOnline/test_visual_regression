@@ -50,7 +50,7 @@ define([ 'jquery' ], function( $ ) {
     cancelReply = function( e ) {
         e.preventDefault();
 
-        $( this ).closest( '.js-reply-form' ).slideUp( slideDuration );
+        $( this ).closest( '.js-reply-form' ).velocity( 'slideUp', slideDuration );
     },
 
     /**
@@ -173,11 +173,14 @@ define([ 'jquery' ], function( $ ) {
      * @param  {object} comment jQuery object
      */
     showForm = function( form, comment ) {
+        var animation = 'slideUp';
+
         if ( form.is( ':hidden' ) ) {
             hideOtherForms();
+            animation = 'slideDown';
         }
 
-        form.slideToggle( slideDuration, function() {
+        form.velocity( animation, slideDuration, function() {
             form.find( 'textarea' ).focus();
         });
     },
@@ -190,7 +193,7 @@ define([ 'jquery' ], function( $ ) {
     cancelReport = function( e ) {
         e.preventDefault();
 
-        $( this ).closest( '.js-report-form' ).slideUp( slideDuration );
+        $( this ).closest( '.js-report-form' ).velocity( 'slideUp', slideDuration );
     },
 
     /**
@@ -232,7 +235,9 @@ define([ 'jquery' ], function( $ ) {
 
                         $form
                             .css( 'height', height )
-                            .animate({ height: newHeight });
+                            .velocity({ height: newHeight }, function() {
+                                $form.css( 'height', '' );
+                            });
                     } else {
                         // what else?
                     }
@@ -317,7 +322,10 @@ define([ 'jquery' ], function( $ ) {
      * @function hideOtherForms
      */
     hideOtherForms = function() {
-        $commentsBody.find( 'form' ).filter( ':visible' ).slideToggle( slideDuration );
+        $commentsBody
+            .find( 'form' )
+            .filter( ':visible' )
+            .velocity( 'slideUp', slideDuration );
     },
 
     /**
