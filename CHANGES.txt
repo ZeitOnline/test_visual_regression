@@ -4,7 +4,19 @@ Change log for zeit.web
 1.54 (unreleased)
 -----------------
 
+- ZON-2016: Polish images of column teaser
+
+- ZON-1843: Polish zon-classic mobile headline
+
+- PERF: Remove memcaching of Variants, which was made redundant by ZON-2045
+
+- PERF: Render CP areas only once per request
+
 - MAINT: Improve jinja error messages
+
+- FIX: Handle missing or expired article images
+
+- FIX: Be more tolerant of broken/invalid author references
 
 
 1.53 (2015-08-10)
