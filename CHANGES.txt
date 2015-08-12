@@ -9,7 +9,7 @@ Change log for zeit.web
 - PERF: Remove memcaching of Variants, with the improvements of ZON-2045
   this no longer helps much.
 
-- Nothing changed yet.
+- MAINT: add velocity.js for smooth animations
 
 
 1.55 (2015-08-12)
