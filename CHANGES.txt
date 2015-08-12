@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - IMPROVEMENT: add clicktracking to breadcrumbs in footer
 
+- IMPROVEMENT: add label to Schwerpunkte clicktracking
+
 
 1.55 (2015-08-12)
 -----------------
