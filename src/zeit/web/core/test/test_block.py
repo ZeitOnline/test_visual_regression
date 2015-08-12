@@ -165,6 +165,18 @@ def test_image_should_not_break_on_whitespace_caption():
     assert image.caption == ''
 
 
+def test_image_should_not_break_on_missing_image(application):
+    model_block = mock.Mock()
+    model_block.layout = 'large'
+    model_block.is_empty = False
+    model_block.xml = None
+    model_block.references.target = zeit.content.image.imagegroup.ImageGroup()
+    # We use an otherwise empty folder to simulate missing master image.
+    model_block.references.target.uniqueId = 'http://xml.zeit.de/news'
+    image = zeit.web.core.block.Image(model_block)
+    assert image.image is None
+
+
 def test_module_class_should_hash_as_expected():
     context = mock.Mock()
     context.xml.attrib = {'{http://namespaces.zeit.de/CMS/cp}__name__': 42}
