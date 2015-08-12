@@ -4,7 +4,7 @@ Change log for zeit.web
 1.58 (unreleased)
 -----------------
 
-- FIX: Retraverse dynamic-cps to allow for pagination rules to apply
+- ZON-2000: Retraverse dynamic-cps to allow for pagination rules to apply
 
 
 1.57 (2015-08-12)
