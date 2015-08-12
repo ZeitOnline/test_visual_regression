@@ -4,6 +4,8 @@ Change log for zeit.web
 1.57 (unreleased)
 -----------------
 
+- HOTFIX: Don't cache social flow feeds for 6h
+
 - MAINT: add velocity.js for smooth animations
 
 
