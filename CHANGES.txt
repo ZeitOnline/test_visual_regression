@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Don't switch to ``.cp2015`` for classic auto cps
 
+- MAINT: Drop repoze.vhm dependency
+
 
 1.55 (2015-08-12)
 -----------------
