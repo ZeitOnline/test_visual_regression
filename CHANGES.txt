@@ -16,8 +16,6 @@ Change log for zeit.web
 
 - MAINT: Ignore memcache errors on getitem, too, not only contains and set
 
-- FIX: Encode non-ascii URLs as utf-8 (for Spektrum images)
-
 - FIX: Handle missing or expired article images
 
 - FIX: Be more tolerant of broken/invalid author references
