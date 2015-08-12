@@ -42,7 +42,6 @@ setup(
         'python-statsd',
         'pytz',
         'repoze.bitblt',
-        'repoze.vhm',
         'requests',
         'requests-file',
         'setuptools',

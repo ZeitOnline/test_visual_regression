@@ -6,10 +6,7 @@ Change log for zeit.web
 
 - ZON-2010: Fullwidth teaser: use 16:9 image variant on mobile
 
-- PERF: Remove memcaching of Variants, with the improvements of ZON-2045
-  this no longer helps much.
-
-- Nothing changed yet.
+- MAINT: Drop repoze.vhm dependency
 
 
 1.55 (2015-08-12)
