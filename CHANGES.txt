@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2023: Prevent jumping on load via reserved image heights
 
+- ZON-2031: Never ever ever ever cache comment-form
+
 
 1.57 (2015-08-12)
 -----------------
@@ -22,7 +24,7 @@ Change log for zeit.web
 
 - FIX: Don't switch to ``.cp2015`` for classic auto cps
 
-- FIX: Hide iqdSiteBar if moved to mobile breakpoint 
+- FIX: Hide iqdSiteBar if moved to mobile breakpoint
 
 - MAINT: Drop repoze.vhm dependency
 
