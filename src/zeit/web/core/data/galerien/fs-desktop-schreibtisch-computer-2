@@ -41,7 +41,7 @@
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">gallery</attribute>
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.gallery">standalone</attribute>
         <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
-        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:cbcd4ccf-56b6-4989-9086-04cf7642d193}</attribute>
+        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:8cbe21c0-8852-4caa-bc15-bd1d5143a4c4}</attribute>
         <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">14</attribute>
         <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
         <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;

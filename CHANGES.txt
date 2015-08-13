@@ -1,12 +1,24 @@
 Change log for zeit.web
 =======================
 
-1.58 (unreleased)
+1.59 (unreleased)
 -----------------
+
+- ZON-1932: Video als Aufmacher oder kleiner Teaser / Icon für Video-Teaser auf CPs
+
+
+1.58 (2015-08-13)
+-----------------
+
+- ZON-2023: Prevent jumping on load via reserved image heights
 
 - ZON-2031: Never ever ever ever cache comment-form
 
-- ZON-1932: Video als Aufmacher oder kleiner Teaser
+- IMPROVEMENT: Add clicktracking to breadcrumbs in footer
+
+- IMPROVEMENT: Add label to Schwerpunkte clicktracking
+
+- CONF: Set json_update_time caching to 5 seconds
 
 
 1.57 (2015-08-12)
@@ -14,7 +26,7 @@ Change log for zeit.web
 
 - HOTFIX: Don't cache social flow feeds for 6h
 
-- MAINT: add velocity.js for smooth animations
+- MAINT: Add velocity.js for smooth animations
 
 
 1.56 (2015-08-12)
@@ -45,6 +57,8 @@ Change log for zeit.web
 - PERF: Remove memcaching of Variants, which was made redundant by ZON-2045
 
 - PERF: Render CP areas only once per request
+
+- ZON-2016: Kolumnenteaser Bilder
 
 - MAINT: Improve jinja error messages
 
