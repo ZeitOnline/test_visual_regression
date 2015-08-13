@@ -6,13 +6,15 @@ Change log for zeit.web
 
 - ZON-2031: Never ever ever ever cache comment-form
 
+- CONF: Set json_update_time caching to 5 seconds
+
 
 1.57 (2015-08-12)
 -----------------
 
 - HOTFIX: Don't cache social flow feeds for 6h
 
-- MAINT: add velocity.js for smooth animations
+- MAINT: Add velocity.js for smooth animations
 
 
 1.56 (2015-08-12)
