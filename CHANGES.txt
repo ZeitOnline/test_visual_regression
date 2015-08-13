@@ -4,7 +4,7 @@ Change log for zeit.web
 1.59 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2064: Kommentarezahl Artikel oben
 
 
 1.58 (2015-08-13)
