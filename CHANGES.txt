@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2023: Prevent jumping on load via reserved image heights
 
+- IMPROVEMENT: add clicktracking to breadcrumbs in footer
+
 - ZON-2031: Never ever ever ever cache comment-form
 
 
@@ -29,6 +31,7 @@ Change log for zeit.web
 - MAINT: Drop repoze.vhm dependency
 
 
+
 1.55 (2015-08-12)
 -----------------
 
@@ -45,6 +48,8 @@ Change log for zeit.web
 - PERF: Remove memcaching of Variants, which was made redundant by ZON-2045
 
 - PERF: Render CP areas only once per request
+
+- ZON-2016: Kolumnenteaser Bilder
 
 - MAINT: Improve jinja error messages
 
