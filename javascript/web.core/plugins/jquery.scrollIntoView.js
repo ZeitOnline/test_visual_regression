@@ -36,10 +36,7 @@
 
         options = $.extend( {}, defaults, options );
 
-        // this.eq( 0 ).velocity( 'scroll', { duration: options.duration } );
-        $( 'html, body' ).stop().animate({
-            scrollTop: this.eq( 0 ).offset().top
-        }, options.duration );
+        this.eq( 0 ).velocity( 'scroll', { duration: options.duration } );
 
         return this;
     };

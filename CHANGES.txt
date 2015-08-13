@@ -1,10 +1,18 @@
 Change log for zeit.web
 =======================
 
-1.57 (unreleased)
+1.58 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+1.57 (2015-08-12)
+-----------------
+
+- HOTFIX: Don't cache social flow feeds for 6h
+
+- MAINT: add velocity.js for smooth animations
 
 
 1.56 (2015-08-12)
