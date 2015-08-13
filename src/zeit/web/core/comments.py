@@ -171,9 +171,15 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
     sorted_tree = thread['sorted_tree'].values()
     del thread['sorted_tree']
 
-    if (sort != 'asc'):
+    thread['sort'] = sort
+    if (sort == 'desc'):
         sorted_tree = reversed(sorted_tree)
-        thread['sort'] = 'desc'
+    elif (sort == 'promoted'):
+        sorted_tree = []
+        for comment in thread['flattened_comments']:
+            if comment['is_promoted'] is True:
+                comment['is_reply'] = False
+                sorted_tree.append([comment, []])
 
     comments = []
     positional_index = {}
