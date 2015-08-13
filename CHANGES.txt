@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2031: Never ever ever ever cache comment-form
 
+- ZON-1932: Video als Aufmacher oder kleiner Teaser
+
 
 1.57 (2015-08-12)
 -----------------
