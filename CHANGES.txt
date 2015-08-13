@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - IMPROVEMENT: Add label to Schwerpunkte clicktracking
 
+- CONF: Set json_update_time caching to 5 seconds
+
 
 1.57 (2015-08-12)
 -----------------

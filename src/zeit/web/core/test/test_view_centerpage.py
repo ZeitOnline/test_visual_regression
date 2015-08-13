@@ -6,11 +6,10 @@ import zeit.web.core.view_centerpage
 
 
 def test_centerpage_should_return_jsonp_with_timestamp_if_released(
-        testserver, testbrowser):
+        testbrowser):
     # published page returns its pubdate
     browser = testbrowser(
-        '%s/json_update_time/zeit-online/main-teaser-setup?callback=123'
-        % testserver.url)
+        '/json_update_time/zeit-online/main-teaser-setup?callback=123')
     pubstring = (
         '123({"last_published_semantic": '
         '"2014-11-18T12:18:27.293179+00:00", '
@@ -20,16 +19,21 @@ def test_centerpage_should_return_jsonp_with_timestamp_if_released(
 
 
 def test_centerpage_should_return_jsonp_with_timestamp_if_not_released(
-        testserver, testbrowser):
+        testbrowser):
     # published page returns empty string
     browser = testbrowser(
-        '%s/json_update_time/zeit-online/teaser-serie-setup?callback=123'
-        % testserver.url)
+        '/json_update_time/zeit-online/teaser-serie-setup?callback=123')
     pubstring = (
         '123({"last_published_semantic": null, '
         '"last_published": null})')
     assert browser.headers.type == 'application/javascript'
     assert pubstring == browser.contents
+
+
+def test_json_update_time_handler_should_set_exipration_header(testbrowser):
+    browser = testbrowser(
+        '/json_update_time/zeit-online/main-teaser-setup?callback=123')
+    assert browser.headers.get('cache-control') == 'max-age=5'
 
 
 def test_centerpage_should_aggregate_all_teasers_correctly(
