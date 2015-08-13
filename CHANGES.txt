@@ -4,7 +4,7 @@ Change log for zeit.web
 1.59 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Ignore nonexistent gallery references in article body
 
 
 1.58 (2015-08-13)
