@@ -140,8 +140,11 @@ def pages_of_article(context):
     pages.append(page)
     blocks = body.values()
     # delete article image. it resides in its own property 'main_image_block'
-    if zeit.content.article.edit.interfaces.IImage.providedBy(blocks[0]):
-        del blocks[0]
+    try:
+        if zeit.content.article.edit.interfaces.IImage.providedBy(blocks[0]):
+            del blocks[0]
+    except IndexError:
+        pass
     for block in blocks:
         if zeit.content.article.edit.interfaces.IDivision.providedBy(block):
             page = Page(block)
