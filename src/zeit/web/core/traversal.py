@@ -146,7 +146,7 @@ class CenterPage2015(Traversable):
 
     def __call__(self, tdict):
         # XXX Ugly workaround until the "new world" content is up to date.
-        if tdict['view_name'] == 'rss-spektrum-flavoured':
+        if tdict['view_name'] in ['rss-spektrum-flavoured', 'xml']:
             return
 
         try:

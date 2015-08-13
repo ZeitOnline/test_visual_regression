@@ -1,13 +1,56 @@
 Change log for zeit.web
 =======================
 
-1.54 (unreleased)
+1.58 (unreleased)
 -----------------
 
-- PERF: Remove memcaching of Variants, with the improvements of ZON-2045
-  this no longer helps much.
+- ZON-2031: Never ever ever ever cache comment-form
+
+
+1.57 (2015-08-12)
+-----------------
+
+- HOTFIX: Don't cache social flow feeds for 6h
+
+- MAINT: add velocity.js for smooth animations
+
+
+1.56 (2015-08-12)
+-----------------
+
+- ZON-2010: Fullwidth teaser uses 16:9 image variant on mobile
+
+- FIX: Don't switch to ``.cp2015`` for classic auto cps
+
+- FIX: Hide iqdSiteBar if moved to mobile breakpoint
+
+- MAINT: Drop repoze.vhm dependency
+
+
+1.55 (2015-08-12)
+-----------------
+
+- FIX: Encode non-ascii URLs as utf-8 (for Spektrum images)
+
+
+1.54 (2015-08-12)
+-----------------
+
+- ZON-2016: Polish images of column teaser
+
+- ZON-1843: Polish zon-classic mobile headline
+
+- PERF: Remove memcaching of Variants, which was made redundant by ZON-2045
 
 - PERF: Render CP areas only once per request
+
+- MAINT: Improve jinja error messages
+
+- MAINT: Ignore memcache errors on getitem, too, not only contains and set
+
+- FIX: Handle missing or expired article images
+
+- FIX: Be more tolerant of broken/invalid author references
 
 
 1.53 (2015-08-10)

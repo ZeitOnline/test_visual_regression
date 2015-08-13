@@ -106,6 +106,12 @@ def test_spektrum_images_should_set_caching_headers(testserver, app_settings):
         app_settings.get('caching_time_external'))
 
 
+def test_spektrum_images_should_handle_non_ascii(testserver):
+    resp = requests.get(u'{}/spektrum-image/images/umläut.jpg'.format(
+        testserver.url))
+    assert resp.status_code == 404
+
+
 def test_variant_image_should_provide_desired_attributes(application):
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/ig-4')

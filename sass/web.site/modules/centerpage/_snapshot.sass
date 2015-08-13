@@ -2,9 +2,7 @@
 	margin-top: $twice
 	position: relative
 	&__media
-		margin: 0 (-$page-padding) remify(14px)
-		+respond-min($break-desktop-min)
-			margin: 0 0 remify(14px) 0
+		margin: 0 0 remify(14px)
 
 .js
 	.snapshot__media
@@ -25,6 +23,7 @@
 	color: $zon-charcoal
 	font-size: remify(16px)
 	line-height: 1.35em
+	padding: 0 $page-padding
 	&__link
 		+link
 			color: $zon_mid_grey

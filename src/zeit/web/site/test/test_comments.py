@@ -50,6 +50,12 @@ def test_comment_form_should_be_rendered(testbrowser, testserver):
     assert len(browser.cssselect('#comment-form')) == 1
 
 
+def test_comment_form_should_not_be_cached(testbrowser, testserver):
+    browser = testbrowser('{}/zeit-online/article/01/comment-form'.format(
+                          testserver.url))
+    assert 'no-cache' in browser.headers['Cache-Control']
+
+
 def test_report_form_should_be_rendered(testserver, testbrowser):
     browser = testbrowser('{}/zeit-online/article/01/report-form'.format(
                           testserver.url))

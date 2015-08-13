@@ -71,7 +71,13 @@ class Byline(list):
     @staticmethod
     def expand_authors(authors):
         for author in authors:
-            yield 'text', author.target.display_name
+            # Don't break because of missing .meta files or invalid references.
+            # (Surprisingly common in older articles is referencing the folder
+            # instead of the author's index.xml).
+            display_name = getattr(author.target, 'display_name', None)
+            if not display_name:
+                continue
+            yield 'text', display_name
 
     def groups(self):
         authors = filter(bool, self.context.authorships)
