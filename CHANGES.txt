@@ -6,11 +6,11 @@ Change log for zeit.web
 
 - ZON-2023: Prevent jumping on load via reserved image heights
 
-- IMPROVEMENT: add clicktracking to breadcrumbs in footer
-
-- IMPROVEMENT: add label to Schwerpunkte clicktracking
-
 - ZON-2031: Never ever ever ever cache comment-form
+
+- IMPROVEMENT: Add clicktracking to breadcrumbs in footer
+
+- IMPROVEMENT: Add label to Schwerpunkte clicktracking
 
 
 1.57 (2015-08-12)
@@ -18,7 +18,7 @@ Change log for zeit.web
 
 - HOTFIX: Don't cache social flow feeds for 6h
 
-- MAINT: add velocity.js for smooth animations
+- MAINT: Add velocity.js for smooth animations
 
 
 1.56 (2015-08-12)
@@ -31,8 +31,6 @@ Change log for zeit.web
 - FIX: Hide iqdSiteBar if moved to mobile breakpoint
 
 - MAINT: Drop repoze.vhm dependency
-
->>>>>>> zeitonline/master
 
 
 1.55 (2015-08-12)
