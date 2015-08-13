@@ -1,31 +1,30 @@
 .teaser-fullwidth
 	@extend %teaser
 	border-bottom: 1px solid $zon_light_grey
-	padding-top: 0
+	padding: 0 0 $vertical-space
+	margin: 0
 	+respond-min($break-areas)
 		border-bottom: none
-		margin-left: -$page-padding
-		margin-right: -$page-padding
 		overflow: hidden
 		padding: 0
 		position: relative
 		+font-smoothing
 		+teaser-image-text-shadow
 	&__media
-		margin: 0 (-$page-padding) $petite
-		// this upsizes the fullwidth-image (ratio 2,35) appear to 16:9
-		// this is a temporary hack w/ magic number. it's not perfectly 16:9, because of margins and sh*t
-		width: 136% // for browsers without proper calc support
-		width: calc(135% + 2 * #{$page-padding})
-		max-width: none
+		height: 0
+		padding-bottom: 100% / 16 * 9 // image variant 'wide'
+		background-color: $zon_lighter_grey // placeholder for image
+		margin: 0 0 $petite
 		+respond-min($break-tablet-min)
-			width: 100%
+			background-color: rgb(0, 15, 20) // placeholder for image; same as default for +teaser-image-dark-overlay
 			margin: 0
+			padding-bottom: 100% / 7 * 3 // image variant 'cinema'
 			z-index: 1
 	&__media-container
 		+respond-min($break-tablet-min)
 			+teaser-image-dark-overlay
 	&__container
+		padding: 0 $page-padding
 		+respond-min($break-tablet-min)
 			bottom: 0
 			left: 0
@@ -38,6 +37,8 @@
 			padding: 0 em(10px) em(36px) em(36px)
 	&__heading
 		@extend %teaser-heading
+		+respond-min($break-tablet-min)
+			margin-bottom: remify(16px)
 
 	&__series-label
 		@extend %teaser-series-label
@@ -46,44 +47,39 @@
 
 	&__kicker
 		@extend %teaser-kicker
-		margin-bottom: remify(10px)
 		&--blog
 			@extend %teaser-kicker--blog
 		+respond-min($break-tablet-min)
 			color: $white
 			font-size: em(14px)
-			margin-bottom: remify(6px)
 
 	&__title
 		@extend %teaser-title
 		font-size: em(28px)
-		line-height: 1.12
 		+respond-min($break-tablet-min)
 			color: $white
 		+respond-min($break-desktop-min)
-			font-size: em(34px)
-			line-height: 1.2
+			font-size: em(32px)
 	&__combined-link
 		@extend %teaser-combined-link
 	&__text
 		@extend %teaser-text
 		+respond-min($break-tablet-min)
 			color: $white
+			margin-bottom: remify(16px)
 		+respond-min($break-desktop-min)
 			font-size: em(18px)
-	&__byline
-		@extend %teaser-byline
 	&__metadata
 		@extend %teaser-metadata
-	&__byline,
-	&__metadata
 		+respond-min($break-tablet-min)
 			color: $zon_lighter_grey
 		+respond-min($break-desktop-min)
 			font-size: em(14px)
 			letter-spacing: 0.04em
+	&__byline
+		@extend %teaser-byline !optional
 	&__datetime
-		@extend %teaser-datetime
+		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
 		+respond-min($break-tablet-min)

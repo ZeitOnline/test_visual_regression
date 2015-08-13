@@ -9,12 +9,6 @@
             Twitter
         </a>
     </li>
-    {# Google+ will be closed in the near future, all info is fetched automaticall, no params needed #}
-    <li class="sharing-menu__item">
-        <a class="sharing-menu__link sharing-menu__link--google" href="https://plus.google.com/share?url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.gplus.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=gplus_zonaudev_int&utm_campaign=gplus_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" data-id="articlebottom.1.3.social.googleplus">
-            Google +
-        </a>
-    </li>
     <li class="sharing-menu__item sharing-menu__item--whatsapp">
         <a class="sharing-menu__link sharing-menu__link--whatsapp" href="whatsapp://send?text={{ (view.title + ' - Artikel auf ZEIT ONLINE: ' + view.content_url) | urlencode }}" data-id="articlebottom.1.4.social.whatsapp">
             WhatsApp

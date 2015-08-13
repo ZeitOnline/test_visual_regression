@@ -1,20 +1,134 @@
 Change log for zeit.web
 =======================
 
-1.50 (unreleased)
+1.58 (unreleased)
 -----------------
 
 - DEV-792: Change campaign links
 
 - FIX: Fix wrong cp14 in webtrekk on ZMO
 
-- FIX: Avoid empty regions
+- ZON-2023: Prevent jumping on load via reserved image heights
+
+- IMPROVEMENT: add clicktracking to breadcrumbs in footer
+
+- IMPROVEMENT: add label to Schwerpunkte clicktracking
+
+- ZON-2031: Never ever ever ever cache comment-form
+
+
+1.57 (2015-08-12)
+-----------------
+
+- HOTFIX: Don't cache social flow feeds for 6h
+
+- MAINT: add velocity.js for smooth animations
+
+
+1.56 (2015-08-12)
+-----------------
+
+- ZON-2010: Fullwidth teaser uses 16:9 image variant on mobile
+
+- FIX: Don't switch to ``.cp2015`` for classic auto cps
+
+- FIX: Hide iqdSiteBar if moved to mobile breakpoint
+
+- MAINT: Drop repoze.vhm dependency
+
+>>>>>>> zeitonline/master
+
+
+1.55 (2015-08-12)
+-----------------
+
+- FIX: Encode non-ascii URLs as utf-8 (for Spektrum images)
+
+
+1.54 (2015-08-12)
+-----------------
+
+- ZON-2016: Polish images of column teaser
+
+- ZON-1843: Polish zon-classic mobile headline
+
+- PERF: Remove memcaching of Variants, which was made redundant by ZON-2045
+
+- PERF: Render CP areas only once per request
+
+- ZON-2016: Kolumnenteaser Bilder
+
+- MAINT: Improve jinja error messages
+
+- MAINT: Ignore memcache errors on getitem, too, not only contains and set
+
+- FIX: Handle missing or expired article images
+
+- FIX: Be more tolerant of broken/invalid author references
+
+
+1.53 (2015-08-10)
+-----------------
+
+- ZON-1970: Display teaser byline, date and commentcount in one line
+
+- ZON-1969: Header image element for centerpages
+
+- ZON-1973: Add markdown module for centerpages
+
+- ZON-2045: Rely on config source to generate image variant URLs
+
+
+1.52 (2015-08-07)
+-----------------
+
+- ZON-1997: The very last article footer polishing part two
+
+- IMPROVEMENT: Set s-maxage header
+
+
+1.51 (2015-08-06)
+-----------------
+
+- HOTFIX: Sanitize click tracking breakpoint value correctly
+
+- HOTFIX: Handle articles without authors
+
+- ZON-1971: Move Google ads below nextread
+
+- ZON-2001: Mimic article tags display like back in the days of ZON vintage
+
+- ZON-1965: Verpixelung Printbox und Angebotsbox
+
+- MAINT: Move modernizr custom script to vendor dir
+
+- FIX: Repair lazy proxy exposed getter, stabilize buzz box
+
+- FIX: Ensure article pages without divisions can be rendered
+
+- PERF: Fix memcache-ability of VariantImage
+
+- MAINT: Article polishing
+
+- IMPROVEMENT: Add tag manager
+
+
+1.50 (2015-08-04)
+-----------------
 
 - HOTFIX: Handle umlauts in topicpage breadcrumbs
 
 - ZON-1999: Bottom-align small column teaser image
 
+- FIX: Add click tracking for section heading
+
+- FIX: Avoid empty regions
+
+- FIX: Fix wrong cp14 in webtrekk on ZMO
+
 - FIX: Re-enable profiling of default area template
+
+- PERF: Cache variant image retrieval by group and pattern
 
 
 1.49 (2015-08-04)
@@ -38,11 +152,11 @@ Change log for zeit.web
 
 - FIX: Add forgotten header tags tracking
 
-- Fix: Prevent multiple adding of ad tags
+- FIX: Prevent multiple adding of ad tags
 
-- Fix: Fix double OOP Tag
+- FIX: Fix double OOP Tag
 
-- Fix: Add forgotten header tags tracking
+- FIX: Add forgotten header tags tracking
 
 - FIX: Explicitly pass teaser object to image getter
 
@@ -52,13 +166,13 @@ Change log for zeit.web
 
 - ZON-1942: Implement breadcrumbs
 
-- FIX: Fix byline for generic ICMSContent without authorships (e.g. quiz)
-
 - ZON-1994: Make mobile hidden elements available
 
 - ZON-1974: Remove shading hover effect for fullwidth and nextread teasers
 
 - ZON-1945: Add article tags
+
+- FIX: Fix byline for generic ICMSContent without authorships (e.g. quiz)
 
 - MAINT: Update CP layouts, tweak parquet styles, improve accordion script
 

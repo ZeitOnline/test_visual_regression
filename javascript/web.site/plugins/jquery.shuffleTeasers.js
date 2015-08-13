@@ -22,12 +22,27 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
         sourceUrl = sourceUrl.replace( '___JS-RANDOM___', Math.floor( Math.random() * 10 ) );
 
         $.get( sourceUrl, function( data ) {
-            var selector = '.teaser-gallery-group__container',
+            var selector = '.teaser-gallery',
                 $data = $( data ),
-                $teasers = $data.find( selector );
+                $teasers = $data.find( selector ),
+                duration = 400;
 
-            $galleryArea.find( selector ).replaceWith( $teasers );
-            images.scale( $teasers );
+            if ( $galleryArea.offset().top < document.documentElement.scrollTop ) {
+                $galleryArea.velocity( 'scroll', duration );
+            }
+
+            $galleryArea.find( selector ).velocity( 'transition.slideLeftBigOut', {
+                    duration: duration,
+                    stagger: 50,
+                    complete: function( elements ) {
+                        $( elements ).parent().replaceWith( $teasers.parent() );
+                        images.scale( $teasers );
+                        $teasers.velocity( 'transition.slideRightBigIn', {
+                            duration: duration,
+                            stagger: 50
+                        });
+                    }
+                });
         }).fail(function( ) {
             fallbackUrl = $this.attr( 'href' );
             if ( sourceUrl ) {

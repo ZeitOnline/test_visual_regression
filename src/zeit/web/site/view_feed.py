@@ -44,8 +44,7 @@ def last_published_semantic(context):
     context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-spektrum-flavoured',
     renderer='string')
-class SpektrumFeed(
-        zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
+class SpektrumFeed(zeit.web.site.view.Base):
 
     def __call__(self):
         super(SpektrumFeed, self).__call__()
@@ -116,8 +115,7 @@ class SpektrumFeed(
 
 # XXX This is a copy&paste&tweak of the above SpektrumFeed.
 # Could we extract common functionality somehow?
-class SocialFeed(
-        zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
+class SocialFeed(zeit.web.site.view.Base):
 
     social_field = NotImplemented
 

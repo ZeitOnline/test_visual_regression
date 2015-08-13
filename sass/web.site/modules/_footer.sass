@@ -132,10 +132,9 @@ $footer_logo_width_small: em(280px)
 		padding: remify(20px) $page-padding
 		&:after
 			+drop_icon()
-			+transition(transform .5s)
 		&--expanded
 			&:after
-				+transform(rotate(-180deg))
+				+drop_icon($open: true)
 
 .footer-links
 	background-color: $zon-charcoal

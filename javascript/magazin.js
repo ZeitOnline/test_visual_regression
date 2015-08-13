@@ -38,6 +38,7 @@ require([
 // plugins that require other plugins or libraries must use the shim config
 require([
     'jquery',
+    'velocity.ui',
     'web.core/plugins/jquery.animatescroll',
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount',
@@ -45,7 +46,7 @@ require([
     'web.magazin/plugins/jquery.backgroundvideo',
     'web.magazin/plugins/jquery.copyrights',
     'web.magazin/plugins/jquery.switchvideo'
-], function( $ ) {
+], function( $, Velocity ) {
     $( window ).referrerCount();
     $( '.inline-gallery' ).inlinegallery();
     $( 'figure[data-video]' ).switchVideo();

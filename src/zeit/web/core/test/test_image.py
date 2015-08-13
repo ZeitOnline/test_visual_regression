@@ -12,6 +12,10 @@ import zope.interface.declarations
 
 import zeit.cms.interfaces
 import zeit.content.article.interfaces
+import zeit.content.image.variant
+
+import zeit.web.core.sources
+import zeit.web.core.template
 
 
 def test_image_download(appbrowser):
@@ -102,6 +106,12 @@ def test_spektrum_images_should_set_caching_headers(testserver, app_settings):
         app_settings.get('caching_time_external'))
 
 
+def test_spektrum_images_should_handle_non_ascii(testserver):
+    resp = requests.get(u'{}/spektrum-image/images/umläut.jpg'.format(
+        testserver.url))
+    assert resp.status_code == 404
+
+
 def test_variant_image_should_provide_desired_attributes(application):
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/ig-4')
@@ -132,10 +142,10 @@ def test_variant_jinja_test_should_recognize_variants(application):
 def test_variant_getter_should_fallback_to_fallback_if_fallback_is_enabled(
         application):
     variant = zeit.web.core.template.get_image(None, fallback=True)
-    assert variant.image_group.uniqueId.endswith('/default/teaser_image/')
+    assert variant.path.endswith('/teaser_image/default')
 
 
-def test_variant_getter_should_fallback_to_fallback_if_fallback_is_disabled(
+def test_variant_getter_shant_fallback_to_fallback_if_fallback_is_disabled(
         application):
     variant = zeit.web.core.template.get_image(None, fallback=False)
     assert variant is None
@@ -205,7 +215,7 @@ def test_variant_getter_should_get_correct_variant_by_image_pattern(
     monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'large'.format)
     variant = zeit.web.core.template.get_image(mock.Mock(), content)
     imagegroup = zeit.content.image.interfaces.IImages(content).image
-    assert imagegroup.get_variant_by_key('wide') == variant.context
+    assert imagegroup.variant_url('wide').endswith(variant.path)
 
 
 def test_variant_getter_should_gracefully_handle_unavailable_variant(
@@ -379,3 +389,73 @@ def test_image_view_should_calculate_caching_time_from_context(application):
     request.response.headers = {}
     view = zeit.web.core.view_image.Image(context, request)
     assert view().cache_expires.call_args[0][0] == 10
+
+
+def test_variant_getter_should_handle_unavailable_ressource(application):
+    variant = zeit.web.core.template.get_variant(
+        'http://xml.zeit.de/foo', 'default')
+    assert variant is None
+
+
+def test_variant_getter_should_handle_unavailable_variant_spec(application):
+    variant = zeit.web.core.template.get_variant(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-4', 'foo')
+    assert variant is None
+
+
+def test_variant_getter_should_output_variant_teaser_image(application):
+    variant = zeit.web.core.template.get_variant(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-1', 'cinema')
+    assert zeit.web.core.interfaces.ITeaserImage.providedBy(variant)
+
+
+def test_variant_getter_should_set_appropriate_parent_attribute(application):
+    variant = zeit.web.core.template.get_variant(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-1', 'cinema')
+    assert zeit.content.image.interfaces.IImageGroup.providedBy(
+        zeit.cms.interfaces.ICMSContent(variant.image_group))
+
+
+def test_variant_source_should_produce_variant_legacy_mapping(application):
+    vs = zeit.web.core.sources.VARIANT_SOURCE
+    assert len(vs.factory._get_mapping()) == 54
+
+
+def test_variant_source_should_honor_configured_availability(
+        application, monkeypatch):
+
+    def isAvailable(self, node, context):  # NOQA
+        return 'cinema' not in node.attrib['name']
+
+    monkeypatch.setattr(
+        zeit.content.image.variant.VariantSource, 'isAvailable', isAvailable)
+    vs = zeit.web.core.sources.VARIANT_SOURCE
+    group = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-1')
+    assert vs.factory.find(group, 'default') is not None
+    with pytest.raises(KeyError):
+        vs.factory.find(group, 'cinema')
+
+
+def test_variant_source_should_find_and_output_variant_instance(application):
+    vs = zeit.web.core.sources.VARIANT_SOURCE
+    group = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-1')
+    variant = vs.factory.find(group, 'zmo-xl')
+    assert zeit.content.image.interfaces.IVariant.providedBy(variant)
+
+
+def test_variant_source_should_set_legacy_name_for_mapped_images(application):
+    vs = zeit.web.core.sources.VARIANT_SOURCE
+    group = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-1')
+    variant = vs.factory.find(group, 'zmo-xl')
+    assert variant.legacy_name == 'zmo-xl'
+
+
+def test_variant_source_should_raise_keyerror_for_faulty_specs(application):
+    vs = zeit.web.core.sources.VARIANT_SOURCE
+    group = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-1')
+    with pytest.raises(KeyError):
+        vs.factory.find(group, 'extra-foo')

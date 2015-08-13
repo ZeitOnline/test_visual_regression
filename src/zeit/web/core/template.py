@@ -1,3 +1,4 @@
+# coding: utf8
 import datetime
 import itertools
 import logging
@@ -30,6 +31,21 @@ log = logging.getLogger(__name__)
 
 
 @zeit.web.register_filter
+def get_variant(unique_id, variant_id):
+    try:
+        imagegroup = zeit.cms.interfaces.ICMSContent(unique_id)
+        variant = zeit.web.core.sources.VARIANT_SOURCE.factory.find(
+            imagegroup, variant_id)
+    except TypeError, err:
+        log.debug(err.message)
+    except KeyError:
+        log.debug(u'No {} variant for {}'.format(variant_id, unique_id))
+    else:
+        variant.__parent__ = imagegroup
+        return zeit.web.core.interfaces.ITeaserImage(variant, None)
+
+
+@zeit.web.register_filter
 def get_image(module, content=None, fallback=True):
     try:
         content = content or first_child(module)
@@ -55,8 +71,7 @@ def get_image(module, content=None, fallback=True):
     else:
         image_pattern = 'default'
 
-    variant = imagegroup.get_variant_by_name(image_pattern)
-    return zeit.web.core.interfaces.ITeaserImage(variant, None)
+    return get_variant(imagegroup.uniqueId, image_pattern)
 
 
 @zeit.web.register_test
@@ -682,15 +697,28 @@ def get_module(module, name=None):
 
 
 @zeit.web.register_filter
-def get_area(area, name=None):
-    return zeit.web.core.utils.get_named_adapter(
-        area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
-
-
-@zeit.web.register_filter
 def attr_safe(text):
     """ Return an attribute safe version of text """
     return re.sub('[^a-zA-Z]', '', text).lower()
+
+
+@zeit.web.register_filter
+def format_webtrekk(text):
+    """ returns a string that is webtrekk-safe."""
+    """ This code does the same as sanitizeString in clicktracking.js """
+    text = text.lower().replace(
+        u'ä', 'ae').replace(
+        u'ö', 'oe').replace(
+        u'ü', 'ue').replace(
+        u'á', 'a').replace(
+        u'à', 'a').replace(
+        u'é', 'e').replace(
+        u'è', 'e').replace(
+        u'ß', 'ss')
+    text = re.sub(u'[^a-zA-Z0-9]', '_', text)
+    text = re.sub(u'_+', '_', text)
+    text = re.sub(u'^_|_$', '', text)
+    return text
 
 
 @zeit.web.register_global

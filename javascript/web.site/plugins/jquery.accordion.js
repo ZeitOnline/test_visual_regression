@@ -46,11 +46,17 @@
         },
 
         showItem: function( item ) {
-            item.data( 'active', true ).find( this.options.slide ).slideDown( this.options.duration );
+            item
+                .data( 'active', true )
+                .find( this.options.slide )
+                .velocity( 'slideDown', { duration: this.options.duration } );
         },
 
         hideItem: function( item ) {
-            item.data( 'active', false ).find( this.options.slide ).slideUp( this.options.duration );
+            item
+                .data( 'active', false )
+                .find( this.options.slide )
+                .velocity( 'slideUp', { duration: this.options.duration } );
         },
 
         addItem: function( element, hide ) {

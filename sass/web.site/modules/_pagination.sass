@@ -1,6 +1,5 @@
 .article-pagination
 	font-size: remify(14px)
-	margin-top: remify(50px)
 	margin-bottom: remify(20px)
 	a
 		// normal, hover, active, visited, focus
@@ -40,9 +39,8 @@
 			padding: 0 1em
 			display: inline-block
 		&--current
-			a
-				// normal, hover, active, visited, focus
-				+link-colors($zon-charcoal, $color-link--hover, $color-link--active, $zon-charcoal, $color-link--focus)
+			span
+				color: $zon-charcoal
 				font-weight: bold
 	&__all
 		display: inline-block
