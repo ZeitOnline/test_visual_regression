@@ -180,6 +180,18 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
             if comment['is_promoted'] is True:
                 comment['is_reply'] = False
                 sorted_tree.append([comment, []])
+    elif (sort == 'recommended'):
+        def comment_helper(comment):
+            comment[0]['is_reply'] = False
+            return comment[0]['recommendations']
+
+        # Sort comment thread by recommendations
+        # for comments with at least one recommendation
+        sorted_tree = sorted(
+            ([comment, []] for comment in thread['flattened_comments'] if (
+                comment['recommendations'] > 0)),
+            key=comment_helper,
+            reverse=True)
 
     comments = []
     positional_index = {}
