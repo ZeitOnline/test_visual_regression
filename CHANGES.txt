@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2068: Gracefully handle empty ranked tag urls and labels
 
+- ZON-2007: Change default sort order for ranking area
+
 
 1.58 (2015-08-13)
 -----------------
