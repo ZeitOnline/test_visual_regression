@@ -1,3 +1,4 @@
+# coding: utf8
 import datetime
 import itertools
 import logging
@@ -699,6 +700,25 @@ def get_module(module, name=None):
 def attr_safe(text):
     """ Return an attribute safe version of text """
     return re.sub('[^a-zA-Z]', '', text).lower()
+
+
+@zeit.web.register_filter
+def format_webtrekk(text):
+    """ returns a string that is webtrekk-safe."""
+    """ This code does the same as sanitizeString in clicktracking.js """
+    text = text.lower().replace(
+        u'ä', 'ae').replace(
+        u'ö', 'oe').replace(
+        u'ü', 'ue').replace(
+        u'á', 'a').replace(
+        u'à', 'a').replace(
+        u'é', 'e').replace(
+        u'è', 'e').replace(
+        u'ß', 'ss')
+    text = re.sub(u'[^a-zA-Z0-9]', '_', text)
+    text = re.sub(u'_+', '_', text)
+    text = re.sub(u'^_|_$', '', text)
+    return text
 
 
 @zeit.web.register_global
