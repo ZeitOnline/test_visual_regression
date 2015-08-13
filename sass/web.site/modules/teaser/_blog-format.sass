@@ -3,7 +3,9 @@
 	font-size: remify(14px)
 	line-height: 1.2
 	&--fullwidth
+		padding-left: $page-padding
 		+respond-min($break-tablet-min)
+			padding-left: 0
 			color: $white
 			left: remify(32px)
 			position: absolute

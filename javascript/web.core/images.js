@@ -8,7 +8,8 @@
  */
 define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
 
-    var images = [];
+    var images = [],
+        isMobile;
 
     /**
      * images.js: create prefix
@@ -45,6 +46,14 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
     }
 
     /**
+     * images.js: initiate globals for module
+     * @function prepareScaling
+     */
+    function prepareScaling () {
+        isMobile = /mobile|phablet/.test( window.ZMO.breakpoint.get() );
+    }
+
+    /**
      * images.js: scale one image
      * @function scaleImage
      * @param  {object} image HTMLImageElement
@@ -52,7 +61,9 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
     function scaleImage( image ) {
         var $img = $( image ),
             $parent = $img.closest( '.scaled-image' ),
-            ratio = $img.data( 'ratio' ),
+            useMobileVariant = isMobile && typeof $img.data( 'mobile-ratio' ) !== 'undefined' &&
+                typeof $img.data( 'mobile-src' ) !== 'undefined',
+            ratio = useMobileVariant ? $img.data( 'mobile-ratio' ) : $img.data( 'ratio' ),
             msieWidth = false,
             width, height, token, source, subject,
             styles, minHeight, maxHeight;
@@ -120,15 +131,13 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
             }
         }
 
-        source = image.src || $img.data( 'src' );
+        source = useMobileVariant ? $img.data( 'mobile-src' ) : $img.data( 'src' );
         width = Math.round( width );
         height = Math.round( height );
 
-        if ( /bitblt/.test( source ) ) {
+        if ( /bitblt/.test( source ) ) { // #TRASHME: for old BitBlt shizzle
             token = prefix( width, height );
             image.src = source.replace( /\/bitblt-\d+x\d+-[a-z0-9]+/, token );
-        } else if ( /__/.test( source ) ) {
-            image.src = source.replace( /([0-9]+x[0-9]+)$/, width + 'x' + height );
         } else {
             image.src = source + '__' + width + 'x' + height;
         }
@@ -141,6 +150,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
      *                            used as selector context, defaults to document root
      */
     function scaleImages( container ) {
+        prepareScaling();
         $( '.scaled-image > noscript', container ).each( function() {
             var $noscript = $( this ),
                 $parent = $noscript.parent(),
@@ -161,7 +171,6 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
                     $img.on( 'load', function( e ) {
                         $img.trigger( 'scaling_ready' );
                     });
-
                     scaleImage( this );
 
                     images.push( this );
@@ -176,18 +185,11 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
     }
 
     /**
-     * images.js: scale all images in document
-     * @function scaleAll
-     */
-    function scaleAll() {
-        scaleImages();
-    }
-
-    /**
      * images.js: rescale all previously scaled images
      * @function rescaleAll
      */
     function rescaleAll() {
+        prepareScaling();
         for ( var i = images.length; i--; ) {
             // verify that image is still part of the DOM
             if ( $.contains( document.documentElement, images[i] )) {
@@ -204,7 +206,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
      * @function init
      */
     function init() {
-        scaleAll();
+        scaleImages();
 
         $( window ).on( 'resize', $.debounce( rescaleAll, 1000 ) );
     }

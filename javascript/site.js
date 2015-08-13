@@ -32,6 +32,7 @@ require([
 // plugins that require other plugins or libraries must use the shim config
 require([
     'jquery',
+    'velocity.ui',
     'web.core/plugins/jquery.animatescroll',
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount',
@@ -50,7 +51,7 @@ require([
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals'
-], function( $ ) {
+], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         article = $( '#js-article' );
 
