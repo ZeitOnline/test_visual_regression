@@ -4,6 +4,8 @@ Change log for zeit.web
 1.50 (unreleased)
 -----------------
 
+- DEV-792: Change campaign links
+
 - FIX: Fix wrong cp14 in webtrekk on ZMO
 
 - FIX: Avoid empty regions
