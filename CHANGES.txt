@@ -4,6 +4,7 @@ Change log for zeit.web
 1.58 (unreleased)
 -----------------
 
+- ZON-2023: Prevent jumping on load via reserved image heights
 
 - IMPROVEMENT: add clicktracking to breadcrumbs in footer
 
