@@ -10,7 +10,6 @@ import urllib
 import urlparse
 
 import babel.dates
-import beaker.cache
 import pyramid.threadlocal
 import repoze.bitblt.transform
 import zope.component

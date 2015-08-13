@@ -73,11 +73,11 @@
         var $elem = $( this );
 
         if ( $elem.text() !== text ) {
-            $elem.animate( options.inEffect, options.inVelocity, function() {
+            $elem.velocity( options.inEffect, options.inVelocity, function() {
                 $elem
                     .html( text )
                     .delay( 10 )
-                    .animate( options.outEffect, options.outVelocity );
+                    .velocity( options.outEffect, options.outVelocity );
             });
         }
     }
