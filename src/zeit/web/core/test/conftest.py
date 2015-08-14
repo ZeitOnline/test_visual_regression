@@ -59,12 +59,9 @@ settings = {
     'community_static_host': 'http://static_community/foo',
     'agatho_host': 'http://localhost:6552/comments',
     'linkreach_host': 'egg://zeit.web.core/data/linkreach/api',
-    'linkreach_host': u'file://%s/' % pkg_resources.resource_filename(
-        'zeit.web.core', 'data/linkreach/api'),
     'google_tag_manager_host': 'foo.baz',
     'app_servers': '',
     'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
-
     'community_host_timeout_secs': '10',
     'spektrum_hp_feed': 'http://localhost:6552/spektrum/feed.xml',
     'spektrum_img_host': 'http://localhost:6552/spektrum',
@@ -146,6 +143,8 @@ settings = {
         'egg://zeit.web.core/data/config/gallery-types.xml'),
     'vivi_zeit.web_series-source': (
         'egg://zeit.web.core/data/config/series.xml'),
+    'vivi_zeit.web_blacklist-url': (
+        'egg://zeit.web.core/data/config/blacklist.xml'),
     'vivi_zeit.imp_scale-source': 'egg://zeit.web.core/data/config/scales.xml',
     'vivi_zeit.content.link_source-blogs': (
         'egg://zeit.web.core/data/config/blogs_meta.xml'),
@@ -222,7 +221,7 @@ class ZODBLayer(plone.testing.zodb.EmptyZODB):
         del self['zope_application']
         super(ZODBLayer, self).tearDown()
 
-    def getRootFolder(self):
+    def getRootFolder(self):  # NOQA
         # The name never ever changes, so there's no real need to import it
         # from zope.app.publication.
         return self['zodbRoot']['Application']

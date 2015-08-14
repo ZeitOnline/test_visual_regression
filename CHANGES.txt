@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2065: Change comment section date and link colors
 
+- ZON-2040: Make friedbert surrender to blacklisted routes
+
 - DEV-792: Change campaign links
 
 - DEV-908: Traverse workingcopy directly for preview

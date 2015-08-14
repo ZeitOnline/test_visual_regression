@@ -186,6 +186,16 @@ class Application(object):
 
         config.add_route('xml', '/xml/*traverse')
 
+        try:
+            blacklist = zeit.web.core.sources.BlacklistSource(
+            ).factory.getValues()
+        except Exception, err:
+            log.error('Could not parse route blacklist: {}'.format(err))
+        else:
+            for index, route in enumerate(blacklist):
+                config.add_route('blacklist_{}'.format(index), route,
+                                 zeit.web.core.view.surrender)
+
         if not self.settings.get('debug.show_exceptions'):
             config.add_view(view=zeit.web.core.view.service_unavailable,
                             context=Exception)
