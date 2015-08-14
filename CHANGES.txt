@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - DEV-792: Change campaign links
 
+- PERF: Log memory usage per request
+
 - FIX: Fix wrong cp14 in webtrekk on ZMO
 
 
