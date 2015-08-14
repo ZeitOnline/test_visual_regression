@@ -21,8 +21,8 @@
     {%- endif -%}
 {%- endmacro %}
 
-{% macro section_heading(title, label='', path=None, view=None, tracking_slug=None) -%}
-    <div class="section-heading">
+{% macro section_heading(title, label='', path=None, view=None, tracking_slug=None, unpadded=None) -%}
+    <div class="section-heading {% if unpadded %}section-heading--unpadded{% endif %}">
         <h3 class="section-heading__title">{{ title }}</h3>
         {% if path -%}
         <a href="{% if view %}{{ view.request.route_url('home') }}{% endif %}{{ path }}" class="section-heading__link"
