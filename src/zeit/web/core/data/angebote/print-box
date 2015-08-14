@@ -63,6 +63,9 @@
     <subtitle>Wie sich das Lebensgefühl der Menschen ändert. Und was an den Drohungen in Deutschland dran ist.</subtitle>
     <url>http://services.zeit.de/ausgabenseite/</url>
     <nofollow>false</nofollow>
+    <!-- use byline "mo-mi" for Angebotsbox (digital edition for free) -->
+    <!-- byline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">mo-mi</byline -->
+    <!-- use no byline for Printbox (this weeks issue) -->
     <byline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
   </body>
   <teaser>
