@@ -495,6 +495,32 @@ def test_attr_safe_returns_safe_text(application):
     assert zeit.web.core.template.attr_safe(text) == target
 
 
+def test_format_webtrekk_returns_safe_text(application):
+    text = u'Studium'
+    target = 'studium'
+    assert zeit.web.core.template.format_webtrekk(text) == target
+
+    text = u'DIE ZEIT Archiv'
+    target = 'die_zeit_archiv'
+    assert zeit.web.core.template.format_webtrekk(text) == target
+
+    text = u'Ausgabe: 30'
+    target = 'ausgabe_30'
+    assert zeit.web.core.template.format_webtrekk(text) == target
+
+    text = u'"1992": Bella, ciao'
+    target = '1992_bella_ciao'
+    assert zeit.web.core.template.format_webtrekk(text) == target
+
+    text = u' Großwildjagd: Der Löwenkopf ist inklusive '
+    target = 'grosswildjagd_der_loewenkopf_ist_inklusive'
+    assert zeit.web.core.template.format_webtrekk(text) == target
+
+    text = u'Ä Ö Ü á à é è ß !?)&'
+    target = 'ae_oe_ue_a_a_e_e_ss'
+    assert zeit.web.core.template.format_webtrekk(text) == target
+
+
 def test_filter_append_get_params_should_create_params():
     request = mock.Mock()
     request.path_url = 'http://example.com'
