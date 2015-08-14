@@ -5,10 +5,9 @@ Change log for zeit.web
 -----------------
 
 - ZON-1932: Video als Aufmacher oder kleiner Teaser / Icon für Video-Teaser auf CPs
-
 - ZON-2000: Retraverse dynamic-cps to allow for pagination rules to apply
 
-- ZON-2012: Refactor prinbox to be RAM-style module
+- ZON-2012: Refactor printbox to be RAM-style module
 
 - ZON-2068: Gracefully handle empty ranked tag urls and labels
 
