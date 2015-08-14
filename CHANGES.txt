@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2007: Change default sort order for ranking area
 
+- ZON-2065: Change comment section date and link colors
+
 - DEV-792: Change campaign links
 
 - PERF: Log memory usage per request
@@ -25,8 +27,6 @@ Change log for zeit.web
 - ZON-2023: Prevent jumping on load via reserved image heights
 
 - ZON-2031: Never ever ever ever cache comment-form
-
-- ZON-2065: Change comment section date and link colors
 
 - IMPROVEMENT: Add clicktracking to breadcrumbs in footer
 
