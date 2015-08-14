@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - DEV-792: Change campaign links
 
+- DEV-908: Traverse workingcopy directly for preview
+
 - PERF: Log memory usage per request
 
 - PERF: Try to resolve ICMSContent without traversal
