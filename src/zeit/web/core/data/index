@@ -276,7 +276,7 @@
         <cluster visible="True" area="id-d976a64d-0409-4b49-a153-12bdcdf94d1e" kind="parquet">
             <region visible="True" hide-dupes="True" area="id-fab3ebde-2ea6-423c-87ab-39ea2c6e3c19" kind="spektrum" count="3"/>
         </cluster>
-        <cluster area="solo" visible="True">
+        <cluster visible="True" area="id-d976a64d-1589-4b49-a153-12bdcdf94d1e" kind="solo">
             <region visible="True" hide-dupes="True" kind="newsticker" area="id-7c964ac7-6bc7-41aa-bd0b-44237e187c24" count="8" automatic="True" automatic_type="query" title="Schlagzeilen">
                 <raw_query>merkel</raw_query>
                 <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
@@ -289,9 +289,9 @@
                 <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
             </region>
         </cluster>
-        <cluster visible="True" area="solo" title="Servicebox">
-            <region visible="True" area="grrrmmmpf" kind="solo" title="Servicebox">
-                <container cp:__name__="huwaaaaa" cp:type="cpextra" module="servicebox" visible="True">
+        <cluster visible="True" area="id-d976a64d-1589-4b49-a765-12bdcdf94d1d" kind="solo" title="Servicebox">
+            <region visible="True" area="id-d976a64d-1589-4b49-a765-12bdcdf94d1e" kind="solo" title="Servicebox">
+                <container cp:__name__="id-d976a64d-1589-4b49-a765-12bdcdf94d1f" cp:type="cpextra" module="servicebox" visible="True">
                     <cp_extra for="zeit.content.cp.interfaces.IArea" id="servicebox" />
                 </container>
             </region>
