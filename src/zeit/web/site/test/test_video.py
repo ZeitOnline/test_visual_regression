@@ -313,6 +313,8 @@ def test_video_teaser_should_be_identified_as_such(application):
         'http://xml.zeit.de/video/2014-01/1953013471001')
     assert zeit.web.core.template.is_video(video)
 
+
+def test_article_teaser_should_not_be_identified_as_video(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/gesellschaft/2015-02/crystal-meth-nancy-schmidt')
     assert not zeit.web.core.template.is_video(article)
