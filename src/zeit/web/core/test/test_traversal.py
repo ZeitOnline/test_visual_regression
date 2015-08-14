@@ -1,5 +1,6 @@
 import pyramid.request
 
+from zeit.cms.checkout.helper import checked_out
 import zeit.content.cp.interfaces
 import zeit.cms.interfaces
 
@@ -76,3 +77,12 @@ def test_dynamic_folder_traversal_should_allow_for_ranking_pagination(
 
     area = tdict['context'].values()[0].values()[1]
     assert zeit.web.core.centerpage.get_area(area).page == 7
+
+
+def test_preview_can_traverse_workingcopy_directly(my_traverser, workingcopy):
+    content = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
+    with checked_out(content, temporary=False):
+        req = pyramid.request.Request.blank('/wcpreview/zope.user/10')
+        tdict = my_traverser(req)
+        assert zeit.content.article.interfaces.IArticle.providedBy(
+            tdict['context'])

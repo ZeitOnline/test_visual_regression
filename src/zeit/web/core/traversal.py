@@ -54,7 +54,18 @@ class Retraverse(Exception):
 class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
 
     def __call__(self, request):
-        tdict = super(RepositoryTraverser, self).__call__(request)
+        if request.path_info.startswith(u'/wcpreview'):
+            # wosc: Changing request.path_info is kludgy, but I haven't found a
+            # cleaner way to get the traversal mechanism to do what I want.
+            request.path_info = request.path_info.replace(
+                u'/wcpreview', u'', 1)
+            self.root = zope.component.getUtility(
+                zeit.cms.workingcopy.interfaces.IWorkingcopyLocation)
+            tdict = super(RepositoryTraverser, self).__call__(request)
+            tdict['traversed'] = (u'wcpreview',) + tdict['traversed']
+            request.path_info = u'/wcpreview' + request.path_info
+        else:
+            tdict = super(RepositoryTraverser, self).__call__(request)
         return self.invoke(request=request, **tdict)
 
     @classmethod
