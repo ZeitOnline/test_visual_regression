@@ -133,9 +133,8 @@ def test_http_header_should_contain_c1_header_fields(testserver, testbrowser):
 def test_http_header_should_not_contain_empty_fields(
         testserver, testbrowser):
     with pytest.raises(KeyError):
-        requests.head(
-            testserver.url +
-            '/zeit-magazin/index').headers['c1-track-sub-channel']
+        url = testserver.url + '/zeit-magazin/index'
+        requests.head(url).headers['c1-track-sub-channel']
 
 
 def test_text_file_content_should_be_rendered(testserver, testbrowser):
@@ -146,15 +145,14 @@ def test_text_file_content_should_be_rendered(testserver, testbrowser):
 def test_inline_gallery_should_be_contained_in_body(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    assert (
-        isinstance(body.values()[14],
-                   zeit.content.article.edit.reference.Gallery))
+    assert isinstance(
+        body.values()[-1], zeit.content.article.edit.reference.Gallery)
 
 
 def test_inline_gallery_should_have_images(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    gallery = zeit.web.core.block.IFrontendBlock(body.values()[14])
+    gallery = zeit.web.core.block.IFrontendBlock(body.values()[-1])
     assert all(
         zeit.web.core.gallery.IGalleryImage.providedBy(i)
         for i in gallery.itervalues())
@@ -162,7 +160,7 @@ def test_inline_gallery_should_have_images(testserver, testbrowser):
     image = gallery.values()[4]
     assert image.src == (
         u'http://xml.zeit.de/galerien/bg-automesse-detroit'
-        '-2014-usa-bilder/chrysler 200 s 1-540x304.jpg')
+        u'-2014-usa-bilder/chrysler 200 s 1-540x304.jpg')
     assert image.alt is None
     assert image.copyright[0][0] == u'\xa9'
 

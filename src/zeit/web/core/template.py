@@ -703,14 +703,15 @@ def get_module(module, name=None):
 
 @zeit.web.register_filter
 def attr_safe(text):
-    """ Return an attribute safe version of text """
+    """Return an attribute safe version of text"""
     return re.sub('[^a-zA-Z]', '', text).lower()
 
 
 @zeit.web.register_filter
 def format_webtrekk(text):
-    """ returns a string that is webtrekk-safe."""
-    """ This code does the same as sanitizeString in clicktracking.js """
+    """Returns a string that is webtrekk-safe.
+    This code does the same as sanitizeString in clicktracking.js
+    """
     text = text.lower().replace(
         u'ä', 'ae').replace(
         u'ö', 'oe').replace(

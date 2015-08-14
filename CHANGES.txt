@@ -6,6 +6,28 @@ Change log for zeit.web
 
 - ZON-1932: Video als Aufmacher oder kleiner Teaser / Icon für Video-Teaser auf CPs
 
+- ZON-2000: Retraverse dynamic-cps to allow for pagination rules to apply
+
+- ZON-2012: Refactor prinbox to be RAM-style module
+
+- ZON-2068: Gracefully handle empty ranked tag urls and labels
+
+- ZON-2007: Change default sort order for ranking area
+
+- ZON-2065: Change comment section date and link colors
+
+- DEV-792: Change campaign links
+
+- DEV-908: Traverse workingcopy directly for preview
+
+- PERF: Log memory usage per request
+
+- PERF: Try to resolve ICMSContent without traversal
+
+- FIX: Fix wrong cp14 in webtrekk on ZMO
+
+- FIX: Ignore nonexistent gallery references in article body
+
 
 1.58 (2015-08-13)
 -----------------

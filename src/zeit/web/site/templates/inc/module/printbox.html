@@ -1,29 +1,5 @@
 {% set teaser_position = '{}.{}.{}'.format(region_loop.index, area_loop.index, module_loop.index) %}
 
-{% if module.has_digital_ad -%}
-
-<aside class="print-box print-box--angebot">
-    <div class="print-box__heading">
-        {{ teaser.supertitle }}
-    </div>
-    <div class="print-box__content">
-            <a class="print-box__title" href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.headline.headline&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_headline_headline" title="{{ teaser.title }}" data-id="{{ teaser_position }}.angebots-box.title">{{ teaser.title }}</a>
-        <figure class="print-box__media">
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_cover_cover" title="{{ teaser.title }}" data-id="{{ teaser_position }}.angebots-box.image">
-                <img class="print-box__media-item" src="{{ module.image | default_image_url('zon-printbox') }}">
-            </a>
-        </figure>
-        <div class="print-box__container">
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.text.text&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_text_text" title="{{ teaser.title }}" data-id="{{ teaser_position }}.angebots-box.text">
-                <p class="print-box__text">{{ teaser.subtitle }}</p>
-            </a>
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.button.button&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_button_button" data-id="{{ teaser_position }}.angebots-box.button">
-                <span class="print-box__button">Test-Zugang sichern</span>
-            </a>
-        </div>
-    </div>
-</aside>
-{% else -%}
 <aside class="print-box">
     {% set title = teaser.supertitle + ' - ' + teaser.title -%}
     <div class="print-box__heading">
@@ -56,4 +32,3 @@
         </div>
     </div>
 </aside>
-{% endif -%}
