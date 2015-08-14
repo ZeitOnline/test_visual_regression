@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - FIX: Ignore nonexistent gallery references in article body
 
+- ZON-1980: Show ads on news ticker page
+
 
 1.58 (2015-08-13)
 -----------------
