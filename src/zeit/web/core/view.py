@@ -588,7 +588,7 @@ class service_unavailable(object):  # NOQA
             path = request.environ.get('PATH_INFO').decode(
                 request.url_encoding, 'replace')
         log.error(u'Error at {}'.format(path), exc_info=True)
-        bugsnag.notify(context, context=path)
+        bugsnag.notify(context, severity='error', context=path)
 
     def __call__(self):
         body = 'Status 503: Dokument zurzeit nicht verfügbar.'
