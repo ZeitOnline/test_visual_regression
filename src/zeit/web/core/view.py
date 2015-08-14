@@ -313,7 +313,8 @@ class Base(object):
 
     @zeit.web.reify
     def ranked_tags(self):
-        return self.context.keywords
+        return sorted([t for t in self.context.keywords if t.label],
+                      key=lambda t: not t.url_value)
 
     @zeit.web.reify
     def ranked_tags_list(self):
