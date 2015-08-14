@@ -42,3 +42,37 @@ def test_parallel_folders_should_be_discovered_during_traversal(my_traverser):
     assert tdict['context'].uniqueId == (
         'http://xml.zeit.de/parallel_cps/serie.cp2015/index')
     assert zeit.content.cp.interfaces.ICenterPage.providedBy(tdict['context'])
+
+
+def test_dynamic_folder_traversal_should_rewrite_traversal_dictionary(
+        application, dummy_request):
+    initial = dict(
+        context=zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic'),
+        traversed=('dynamic',),
+        view_name='adel-tawil',
+        request=dummy_request)
+
+    expected = dict(
+        context=zeit.cms.interfaces.ICMSContent(
+            'http://xml.zeit.de/dynamic/adel-tawil'),
+        traversed=('dynamic', 'adel-tawil'),
+        view_name='',
+        request=dummy_request)
+
+    resulting = zeit.web.core.traversal.RepositoryTraverser.invoke(**initial)
+    assert resulting == expected
+
+
+def test_dynamic_folder_traversal_should_allow_for_ranking_pagination(
+        application, dummy_request):
+    request = dummy_request
+    request.GET['p'] = '7'
+
+    tdict = zeit.web.core.traversal.RepositoryTraverser.invoke(
+        context=zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic'),
+        traversed=('dynamic',),
+        view_name='adel-tawil',
+        request=request)
+
+    area = tdict['context'].values()[0].values()[1]
+    assert zeit.web.core.centerpage.get_area(area).page == 7
