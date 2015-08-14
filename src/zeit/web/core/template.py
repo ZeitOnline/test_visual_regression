@@ -295,6 +295,11 @@ def is_gallery(context):
     return zeit.content.gallery.interfaces.IGallery.providedBy(context)
 
 
+@zeit.web.register_filter
+def is_video(context):
+    return zeit.content.video.interfaces.IVideo.providedBy(context)
+
+
 # TRASHME: Definition of default images sizes for bitblt images
 scales = {
     'default': (200, 300),
