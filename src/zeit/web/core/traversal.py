@@ -66,6 +66,7 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             request.path_info = u'/wcpreview' + request.path_info
         else:
             tdict = super(RepositoryTraverser, self).__call__(request)
+
         return self.invoke(request=request, **tdict)
 
     @classmethod
