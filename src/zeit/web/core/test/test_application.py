@@ -56,44 +56,6 @@ def test_asset_url_appends_version_hash_where_needed(app_request):
             request.asset_url('img/favicon.ico'))
 
 
-def test_feature_longform_should_be_discovered_during_traversal(my_traverser):
-    req = pyramid.request.Request.blank('/feature/feature_longform')
-    tdict = my_traverser(req)
-    assert zeit.web.core.article.IFeatureLongform.providedBy(tdict['context'])
-
-
-def test_parallel_cps_should_be_discovered_during_traversal(my_traverser):
-    req = pyramid.request.Request.blank('/parallel_cps/index')
-    tdict = my_traverser(req)
-    assert tdict['context'].uniqueId == (
-        'http://xml.zeit.de/parallel_cps/index.cp2015')
-    assert zeit.content.cp.interfaces.ICenterPage.providedBy(tdict['context'])
-
-
-def test_parallel_folders_should_be_discovered_during_traversal(my_traverser):
-    req = pyramid.request.Request.blank('/parallel_cps/serie/index')
-    tdict = my_traverser(req)
-    assert tdict['context'].uniqueId == (
-        'http://xml.zeit.de/parallel_cps/serie.cp2015/index')
-    assert zeit.content.cp.interfaces.ICenterPage.providedBy(tdict['context'])
-
-
-def test_spektrum_feed_should_not_use_parallel_cp(my_traverser):
-    req = pyramid.request.Request.blank(
-        '/parallel_cps/index/rss-spektrum-flavoured')
-    tdict = my_traverser(req)
-    assert tdict['context'].uniqueId == (
-        'http://xml.zeit.de/parallel_cps/index')
-
-
-def test_rendered_xml_view_should_not_use_parallel_cp(my_traverser):
-    req = pyramid.request.Request.blank(
-        '/parallel_cps/index/xml')
-    tdict = my_traverser(req)
-    assert tdict['context'].uniqueId == (
-        'http://xml.zeit.de/parallel_cps/index')
-
-
 def test_acceptable_pagination_should_not_redirect(testserver):
     resp = requests.get('%s/artikel/03/seite-3' % testserver.url,
                         allow_redirects=False)
