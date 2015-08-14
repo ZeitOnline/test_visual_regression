@@ -152,6 +152,7 @@ define( [ 'jquery' ], function( $ ) {
     },
     /**
      * returns a string that is webtrekk-safe
+     * This code does the same as format_webtrekk in template-py
      * @param  {string}     string from
      * @return {string}     lowercase string that only contains alphanumeric characters and underscore
      */

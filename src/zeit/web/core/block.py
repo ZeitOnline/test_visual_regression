@@ -400,6 +400,8 @@ def inlinegallery(context):
     # class would introduce a circular dependency.
     from zeit.web.core.gallery import Gallery
     cls = type('Inlinegallery', (Gallery,), {})
+    if context.references is None:
+        return None
     return cls(context.references)
 
 

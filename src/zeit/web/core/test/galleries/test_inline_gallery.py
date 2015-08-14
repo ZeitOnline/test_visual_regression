@@ -8,10 +8,21 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+from zeit.cms.checkout.helper import checked_out
+import zeit.cms.interfaces
+
 
 def test_inline_gallery_is_there(testserver, testbrowser):
     browser = testbrowser('%s/artikel/01' % testserver.url)
     assert '<div class="inline-gallery"' in browser.contents
+
+
+def test_nonexistent_gallery_is_ignored(testserver, testbrowser, workingcopy):
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    with checked_out(article) as co:
+        co.xml.body.division.gallery.set('href', 'http://xml.zeit.de/invalid')
+    browser = testbrowser('%s/artikel/01' % testserver.url)
+    assert '<div class="inline-gallery"' not in browser.contents
 
 
 def test_inline_gallery_buttons(selenium_driver, testserver):
