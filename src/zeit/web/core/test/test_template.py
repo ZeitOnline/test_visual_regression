@@ -402,13 +402,12 @@ def test_teaser_for_blogs_should_have_according_journalistic_format(
 
 
 def test_teaser_layout_for_empty_block_should_be_set_to_hide(application):
-    teaser = mock.Mock()
-    teaser.__parent__ = None
+    area = mock.Mock()
+    area.kind = 'major'
+    area.__parent__ = None
     block = zeit.content.cp.blocks.teaser.TeaserBlock(
-        teaser, lxml.objectify.E.block(module='zon-small'))
+        area, lxml.objectify.E.block(module='zon-small'))
     block.__iter__ = lambda _: iter([])
-    block.__parent__ = mock.Mock()
-    block.__parent__.kind = 'major'
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
 

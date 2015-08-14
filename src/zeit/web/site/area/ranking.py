@@ -39,7 +39,8 @@ FIELD_MAP = [
 
 
 ORDERS = collections.defaultdict(
-    lambda: 'score desc', {
+    lambda: 'last-semantic-change desc', {
+        'relevanz': 'score desc',
         'aktuell': 'last-semantic-change desc',
         'publikation': 'date_last_published asc'}
 )
