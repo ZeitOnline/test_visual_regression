@@ -4,7 +4,7 @@ Change log for zeit.web
 1.60 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Create properly jinja'fied tracebacks for template errors
 
 
 1.59 (2015-08-14)
