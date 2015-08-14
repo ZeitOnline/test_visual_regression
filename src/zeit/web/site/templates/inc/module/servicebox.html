@@ -2,7 +2,7 @@
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
 <nav class="servicebox" id="servicebox">
-    {{ cp.section_heading('Service') }}
+    {{ cp.section_heading('Service', unpadded=True) }}
     {% for service_column in module.service_items %}
     {% set column_loop = loop %}
     <div class="servicebox__column">
