@@ -4,6 +4,8 @@ Change log for zeit.web
 1.59 (unreleased)
 -----------------
 
+- ZON-2012: Refactor prinbox to be RAM-style module
+
 - ZON-2023: Prevent jumping on load via reserved image heights
 
 - ZON-2068: Gracefully handle empty ranked tag urls and labels
