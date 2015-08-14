@@ -54,16 +54,28 @@ class Retraverse(Exception):
 class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
 
     def __call__(self, request):
-        tdict = super(RepositoryTraverser, self).__call__(request)
-        return self.call_subs(request=request, **tdict)
+        if request.path_info.startswith(u'/wcpreview'):
+            # wosc: Changing request.path_info is kludgy, but I haven't found a
+            # cleaner way to get the traversal mechanism to do what I want.
+            request.path_info = request.path_info.replace(
+                u'/wcpreview', u'', 1)
+            self.root = zope.component.getUtility(
+                zeit.cms.workingcopy.interfaces.IWorkingcopyLocation)
+            tdict = super(RepositoryTraverser, self).__call__(request)
+            tdict['traversed'] = (u'wcpreview',) + tdict['traversed']
+            request.path_info = u'/wcpreview' + request.path_info
+        else:
+            tdict = super(RepositoryTraverser, self).__call__(request)
+        return self.invoke(request=request, **tdict)
 
-    def call_subs(self, **tdict):
+    @classmethod
+    def invoke(cls, **tdict):
         for sub in zope.component.subscribers(
                 [tdict.get('context')], zeit.web.core.interfaces.ITraversable):
             try:
                 sub(tdict)
             except Retraverse:
-                return self.call_subs(**tdict)
+                return cls.invoke(**tdict)
         return tdict
 
 
@@ -173,6 +185,7 @@ class DynamicFolder(CenterPage):
         else:
             tdict['traversed'] += (tdict['view_name'],)
             tdict['view_name'] = ''
+            raise Retraverse(tdict['request'])
 
 
 @traverser(zeit.content.video.interfaces.IVideo)
