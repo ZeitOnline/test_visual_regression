@@ -4,7 +4,9 @@ Change log for zeit.web
 1.59 (unreleased)
 -----------------
 
-- ZON-1932: Video als Aufmacher oder kleiner Teaser / Icon für Video-Teaser auf CPs
+- ZON-1932: Video als Aufmacher oder kleiner Teaser
+  Icon für Video-Teaser auf CPs
+
 - ZON-2000: Retraverse dynamic-cps to allow for pagination rules to apply
 
 - ZON-2012: Refactor printbox to be RAM-style module
@@ -26,6 +28,10 @@ Change log for zeit.web
 - FIX: Fix wrong cp14 in webtrekk on ZMO
 
 - FIX: Ignore nonexistent gallery references in article body
+
+- FIX: Paddings for newsticker, servicebox and gallery
+
+- SEO: Send 301 (not 303) for video page redirects
 
 
 1.58 (2015-08-13)

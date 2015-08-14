@@ -41,17 +41,19 @@
 .cp-area
 	padding: 0 $cp-padding
 	width: 100%
-	&--parquet,
-	&--spektrum,
-	&--topic
-		padding-left: 0
-		padding-right: 0
-		position: relative
 	// EXPERIMENT: We're trying to get rid of the 'padding/margin breakout kerfuffle'.
 	// 			   Seems like we started with the desktop and retrofitted.
 	// 			   This is an atempt to do it *mobile first*.
-	&--solo
+	&--parquet,
+	&--solo,
+	&--spektrum,
+	&--topic
 		padding: 0
+		position: relative
+	&--newsticker
+		padding-left: $page-padding
+		padding-right: $page-padding
+
 	&--spektrum
 		padding-top: remify(60px)
 	+respond-min($break-areas)
