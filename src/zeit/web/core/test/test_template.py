@@ -402,11 +402,12 @@ def test_teaser_for_blogs_should_have_according_journalistic_format(
 
 
 def test_teaser_layout_for_empty_block_should_be_set_to_hide(application):
+    area = mock.Mock()
+    area.kind = 'major'
+    area.__parent__ = None
     block = zeit.content.cp.blocks.teaser.TeaserBlock(
-        mock.Mock(), lxml.objectify.E.block(module='zon-small'))
+        area, lxml.objectify.E.block(module='zon-small'))
     block.__iter__ = lambda _: iter([])
-    block.__parent__ = mock.Mock()
-    block.__parent__.kind = 'major'
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
 
@@ -492,6 +493,32 @@ def test_attr_safe_returns_safe_text(application):
     text = u'10 Saurier sind super % auf Zack'
     target = 'sauriersindsuperaufzack'
     assert zeit.web.core.template.attr_safe(text) == target
+
+
+def test_format_webtrekk_returns_safe_text(application):
+    text = u'Studium'
+    target = 'studium'
+    assert zeit.web.core.template.format_webtrekk(text) == target
+
+    text = u'DIE ZEIT Archiv'
+    target = 'die_zeit_archiv'
+    assert zeit.web.core.template.format_webtrekk(text) == target
+
+    text = u'Ausgabe: 30'
+    target = 'ausgabe_30'
+    assert zeit.web.core.template.format_webtrekk(text) == target
+
+    text = u'"1992": Bella, ciao'
+    target = '1992_bella_ciao'
+    assert zeit.web.core.template.format_webtrekk(text) == target
+
+    text = u' Großwildjagd: Der Löwenkopf ist inklusive '
+    target = 'grosswildjagd_der_loewenkopf_ist_inklusive'
+    assert zeit.web.core.template.format_webtrekk(text) == target
+
+    text = u'Ä Ö Ü á à é è ß !?)&'
+    target = 'ae_oe_ue_a_a_e_e_ss'
+    assert zeit.web.core.template.format_webtrekk(text) == target
 
 
 def test_filter_append_get_params_should_create_params():

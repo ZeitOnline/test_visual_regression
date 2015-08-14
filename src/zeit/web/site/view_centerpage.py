@@ -6,9 +6,9 @@ import uuid
 import grokcore.component
 import pyramid.response
 import pyramid.view
-import zope.interface
 import zope.component
 import zope.component.interfaces
+import zope.interface
 
 import zeit.cms.interfaces
 import zeit.content.cp.area
@@ -20,10 +20,11 @@ import zeit.web.core.interfaces
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
-import zeit.web.site.module.buzzbox
 import zeit.web.core.view_centerpage
 import zeit.web.site.area.spektrum
 import zeit.web.site.module
+import zeit.web.site.module.buzzbox
+import zeit.web.site.module.printbox
 import zeit.web.site.view
 
 
@@ -324,31 +325,7 @@ class LegacyCenterpage(Centerpage):
     def module_printbox(self):
         """Return the module block for the Printbox or Angebotsbox."""
 
-        try:
-            box = zeit.cms.interfaces.ICMSContent(
-                'http://xml.zeit.de/angebote/print-box')
-        except TypeError:
-            return
-
-        module = LegacyModule([box], layout='printbox')
-        module.has_digital_ad = False
-
-        if box.byline == 'mo-mi':
-            try:
-                # Rewrite content with digital ad box
-                box = zeit.cms.interfaces.ICMSContent(
-                    'http://xml.zeit.de/angebote/angebotsbox')
-                module = LegacyModule([box], layout='printbox')
-                module.has_digital_ad = True
-            except TypeError:
-                pass
-
-        try:
-            module.image = zeit.content.image.interfaces.IImages(box).image
-        except (AttributeError, TypeError):
-            module.image = None
-
-        return module
+        return zeit.web.site.module.printbox.Printbox(self.context)
 
     @zeit.web.reify
     def region_list_parquet(self):

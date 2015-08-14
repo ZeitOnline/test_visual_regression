@@ -73,6 +73,7 @@ def json_update_time(request):
         dlp = info.date_last_published.isoformat()
     except (AttributeError, KeyError, TypeError):
         dlps = dlp = None
+    request.response.cache_expires(5)
     return {'last_published': dlp, 'last_published_semantic': dlps}
 
 

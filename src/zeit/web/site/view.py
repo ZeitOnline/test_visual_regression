@@ -116,6 +116,12 @@ def login_state(request):
     renderer='templates/inc/comments/report-form.html')
 class CommentForm(zeit.web.core.view.Content):
 
+    def __call__(self):
+        super(CommentForm, self).__call__()
+        # Never ever ever ever cache comment forms
+        self.request.response.cache_expires(0)
+        return {}
+
     @zeit.web.reify
     def error(self):
         if 'error' not in self.request.params:

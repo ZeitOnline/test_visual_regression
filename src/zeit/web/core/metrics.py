@@ -1,11 +1,14 @@
 import contextlib
 import logging
+import resource
+
 import mock
 import pyramid.events
 import statsd
-import zeit.web.core.interfaces
 import zope.component
 import zope.interface
+
+import zeit.web.core.interfaces
 
 
 log = logging.getLogger(__name__)
@@ -66,6 +69,7 @@ def view_timer_start(event):
     metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
     event.request.view_timer = metrics.timer('zeit.web.core.view.pyramid')
     event.request.view_timer.start()
+    event.request.memory = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
 
 
 @pyramid.events.subscriber(pyramid.events.ContextFound)
@@ -77,3 +81,6 @@ def view_timer_traversal(event):
 def view_timer_rendering(event):
     event.request.view_timer.intermediate('rendering')
     event.request.view_timer.stop('total')
+    memory = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    memory_delta = memory - event.request.memory
+    log.info('Memory delta %s: %s KB', event.request.path, memory_delta)
