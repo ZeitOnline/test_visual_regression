@@ -4,17 +4,23 @@ Change log for zeit.web
 1.59 (unreleased)
 -----------------
 
-- ZON-2012: Refactor prinbox to be RAM-style module
+- ZON-2000: Retraverse dynamic-cps to allow for pagination rules to apply
 
-- ZON-2023: Prevent jumping on load via reserved image heights
+- ZON-2012: Refactor prinbox to be RAM-style module
 
 - ZON-2068: Gracefully handle empty ranked tag urls and labels
 
 - ZON-2007: Change default sort order for ranking area
 
+- ZON-2065: Change comment section date and link colors
+
 - DEV-792: Change campaign links
 
+- DEV-908: Traverse workingcopy directly for preview
+
 - PERF: Log memory usage per request
+
+- PERF: Try to resolve ICMSContent without traversal
 
 - FIX: Fix wrong cp14 in webtrekk on ZMO
 
