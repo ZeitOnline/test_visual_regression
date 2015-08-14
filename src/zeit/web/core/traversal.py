@@ -55,15 +55,16 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
 
     def __call__(self, request):
         tdict = super(RepositoryTraverser, self).__call__(request)
-        return self.call_subs(request=request, **tdict)
+        return self.invoke(request=request, **tdict)
 
-    def call_subs(self, **tdict):
+    @classmethod
+    def invoke(cls, **tdict):
         for sub in zope.component.subscribers(
                 [tdict.get('context')], zeit.web.core.interfaces.ITraversable):
             try:
                 sub(tdict)
             except Retraverse:
-                return self.call_subs(**tdict)
+                return cls.invoke(**tdict)
         return tdict
 
 
