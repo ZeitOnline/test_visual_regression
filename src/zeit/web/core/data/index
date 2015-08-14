@@ -289,7 +289,7 @@
                 <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
             </region>
         </cluster>
-        <cluster visible="True" area="gnnpf" title="Servicebox">
+        <cluster visible="True" area="gnnpf" title="Servicebox" kind="solo">
             <region visible="True" area="grrrmmmpf" kind="solo" title="Servicebox">
                 <container cp:__name__="huwaaaaa" cp:type="cpextra" module="servicebox" visible="True">
                     <cp_extra for="zeit.content.cp.interfaces.IArea" id="servicebox" />
