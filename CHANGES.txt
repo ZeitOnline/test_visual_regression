@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.59 (unreleased)
+1.59 (2015-08-14)
 -----------------
 
 - ZON-1932: Video als Aufmacher oder kleiner Teaser
