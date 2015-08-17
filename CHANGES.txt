@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: Create properly jinja'fied tracebacks for template errors
 
+- ZON-2055: Filter comments by recommendations and editorial promotions
+
 
 1.59.1 (2015-08-17)
 -------------------
