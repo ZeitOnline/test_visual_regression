@@ -277,12 +277,19 @@ def get_cacheable_thread(unique_id):
     comment_count = len(comment_list)
     comment_list = list(comment_to_dict(c) for c in comment_list)
     flattened_comments = comment_list[:]
+    has_recommendations = any(
+        [comment for comment in flattened_comments
+         if comment['recommendations'] > 0])
+    has_promotion = any(
+        [comment for comment in flattened_comments if comment['is_promoted']])
     sorted_tree, index = _sort_comments(comment_list)
 
     try:
         return dict(
             sorted_tree=sorted_tree,
             flattened_comments=flattened_comments,
+            has_recommendations=has_recommendations,
+            has_promotion=has_promotion,
             index=index,
             comment_count=comment_count,
             sort='asc',
