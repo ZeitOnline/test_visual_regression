@@ -1,3 +1,4 @@
+$prefs-link-color: #4c4f5f
 .comment-preferences
 	background-color: $zon_lighter_grey
 	color: $zon_grey
@@ -21,7 +22,7 @@
 			+respond-min($break-tablet-min)
 				border: none
 	&__link
-		+link-colors(inherit, #4c4f5f)
+		+link-colors(inherit, $prefs-link-color, $prefs-link-color, $prefs-link-color, $prefs-link-color)
 		+inline-block
 		padding: remify(13px) remify(14px)
 		&:hover span
