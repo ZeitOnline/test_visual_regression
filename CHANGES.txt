@@ -4,6 +4,8 @@ Change log for zeit.web
 1.60.0 (unreleased)
 -------------------
 
+- ZON-2034: Bring back images for dynamic ranking areas
+
 - IMPROVEMENT: Schlagworte Verpixelung on articlebottom
 
 - MAINT: Create properly jinja'fied tracebacks for template errors
