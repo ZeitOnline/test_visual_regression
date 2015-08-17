@@ -4,7 +4,7 @@ Change log for zeit.web
 1.60 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Enforce trailings slash on parent_id for lazy parent resolution
 
 
 1.59 (2015-08-14)
