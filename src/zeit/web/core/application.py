@@ -483,8 +483,7 @@ def resolve_parent(self):
     if trailing_slash:
         unique_id = unique_id[:-1]
     parent_id = os.path.dirname(unique_id)
-    if trailing_slash:
-        parent_id += '/'
+    parent_id = parent_id.rstrip('/') + '/'
     repository = zope.component.getUtility(
         zeit.cms.repository.interfaces.IRepository)
     return original_getcontent(repository, parent_id)
