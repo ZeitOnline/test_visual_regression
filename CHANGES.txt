@@ -4,7 +4,10 @@ Change log for zeit.web
 1.60 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1943: Adapt classifieds: new xml values, make font taller,
+  put ellipsis to mobile view
+
+- FIX: make Spiele in navigation visible again
 
 
 1.59 (2015-08-14)

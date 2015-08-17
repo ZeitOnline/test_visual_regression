@@ -61,7 +61,7 @@ $icon-color--hover: $zon-charcoal
 		+link-colors($black, $black, $black, $black, $black)
 	+respond-min($break-tablet-min)
 		width: auto
-		font-size: remify(9px)
+		font-size: remify(9.5px)
 		text-transform: uppercase
 		color: $zon_grey
 		a
@@ -143,7 +143,7 @@ $icon-color--hover: $zon-charcoal
 		+order(30)
 		+flex(0 0 auto)
 		color: $zon_grey
-		font-size: remify(9px)
+		font-size: remify(9.5px)
 		line-height: $zon-bar-height-phablet
 		min-width: remify(80px) // fallback for failing esi include
 		padding: 0
@@ -214,6 +214,13 @@ $icon-color--hover: $zon-charcoal
 					display: none
 		& [data-feature='dropdown']
 			display: inline-block
+
+	// sry for that, ellipsis was destroying the dropdown
+	// on desktop, rework when polish mobile nav (as)
+	+respond-max($break-tablet-min)
+		ul
+			li
+				+ellipsis()
 
 
 // box 5: services
