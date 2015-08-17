@@ -14,7 +14,7 @@
     <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:cbcd4ccf-56b6-4989-9086-04cf7642d193}</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:1d13d7af-cc9e-4b97-9d28-5be90f5bc574}</attribute>
     <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
     <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>

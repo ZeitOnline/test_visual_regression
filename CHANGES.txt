@@ -1,10 +1,59 @@
 Change log for zeit.web
 =======================
 
-1.58 (unreleased)
+1.60 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+1.59 (2015-08-14)
+-----------------
+
+- ZON-1932: Video als Aufmacher oder kleiner Teaser
+  Icon für Video-Teaser auf CPs
+
+- ZON-2000: Retraverse dynamic-cps to allow for pagination rules to apply
+
+- ZON-2012: Refactor printbox to be RAM-style module
+
+- ZON-2068: Gracefully handle empty ranked tag urls and labels
+
+- ZON-2007: Change default sort order for ranking area
+
+- ZON-2065: Change comment section date and link colors
+
+- ZON-2040: Make friedbert surrender to blacklisted routes
+
+- DEV-792: Change campaign links
+
+- DEV-908: Traverse workingcopy directly for preview
+
+- PERF: Log memory usage per request
+
+- PERF: Try to resolve ICMSContent without traversal
+
+- FIX: Fix wrong cp14 in webtrekk on ZMO
+
+- FIX: Ignore nonexistent gallery references in article body
+
+- FIX: Paddings for newsticker, servicebox and gallery
+
+- SEO: Send 301 (not 303) for video page redirects
+
+
+1.58 (2015-08-13)
+-----------------
+
+- ZON-2023: Prevent jumping on load via reserved image heights
+
+- ZON-2031: Never ever ever ever cache comment-form
+
+- IMPROVEMENT: Add clicktracking to breadcrumbs in footer
+
+- IMPROVEMENT: Add label to Schwerpunkte clicktracking
+
+- CONF: Set json_update_time caching to 5 seconds
 
 
 1.57 (2015-08-12)
@@ -12,7 +61,7 @@ Change log for zeit.web
 
 - HOTFIX: Don't cache social flow feeds for 6h
 
-- MAINT: add velocity.js for smooth animations
+- MAINT: Add velocity.js for smooth animations
 
 
 1.56 (2015-08-12)
@@ -22,7 +71,7 @@ Change log for zeit.web
 
 - FIX: Don't switch to ``.cp2015`` for classic auto cps
 
-- FIX: Hide iqdSiteBar if moved to mobile breakpoint 
+- FIX: Hide iqdSiteBar if moved to mobile breakpoint
 
 - MAINT: Drop repoze.vhm dependency
 
@@ -43,6 +92,8 @@ Change log for zeit.web
 - PERF: Remove memcaching of Variants, which was made redundant by ZON-2045
 
 - PERF: Render CP areas only once per request
+
+- ZON-2016: Kolumnenteaser Bilder
 
 - MAINT: Improve jinja error messages
 
