@@ -4,6 +4,8 @@ Change log for zeit.web
 1.60.0 (unreleased)
 -------------------
 
+- IMPROVEMENT: Schlagworte Verpixelung on articlebottom
+
 - MAINT: Create properly jinja'fied tracebacks for template errors
 
 
