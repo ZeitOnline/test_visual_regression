@@ -8,10 +8,10 @@
   <service href="http://marktplatz.zeit.de/kataloge/" id="kataloge">Kataloge</service>
   <!-- 2. Spalte (von 4) -->
   <service href="http://studiengaenge.zeit.de/" id="studiengangsuche">Studiengangsuche</service>
-  <service href="http://xml.zeit.de/studium/rankings/index" id="uni-rankings">Uni-Rankings</service>
+  <service href="http://www.zeit.de/studium/rankings/index" id="uni-rankings">Uni-Rankings</service>
   <service href="http://marktplatz.zeit.de/veranstaltungen/index" id="kulturangebote">Kulturangebote</service>
   <service href="https://premium.zeit.de/zeit-audio?wt_zmc=fix.int.zonpme.zeitde.servicezeile.premium.text.audio.audio&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=servicezeile&amp;utm_content=premium_text_audio_audio" id="zeit-audio">ZEIT Audio</service>
-  <service href="http://xml.zeit.de/spiele/index" id="spiele">Spiele</service>
+  <service href="http://www.zeit.de/spiele/index" id="spiele">Spiele</service>
   <!-- 3. Spalte (von 4) -->
   <service href="http://automarkt.zeit.de/" id="automarkt">Automarkt</service>
   <service href="http://jobs.zeit.de/" id="jobsuche">Jobsuche</service>

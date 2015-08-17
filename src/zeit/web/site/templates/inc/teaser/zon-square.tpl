@@ -17,6 +17,9 @@
         {# 'Alle Bilder anzeigen' is too long for .cp-area--minor tablet view #}
         {% set extra = 'Alle Bilder' %}
         {% set label = 'anzeigen' %}
+    {% elif teaser | is_video %}
+        {# 'Jetzt lesen' makes no sense for videos #}
+        {% set label = 'Video ansehen' %}
     {% endif %}
     <a href="{{ teaser.uniqueId | create_url }}" class="{{ self.layout() }}__button">
         <span class="{{ self.layout() }}__button-extra">{{ extra }}</span>

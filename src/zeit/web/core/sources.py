@@ -113,6 +113,15 @@ class VariantSource(zeit.content.image.variant.VariantSource):
 VARIANT_SOURCE = VariantSource()
 
 
+class BlacklistSource(zeit.cms.content.sources.SimpleXMLSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'blacklist-url'
+
+
+BLACKLIST_SOURCE = BlacklistSource()
+
+
 class Solr(object):
     """Mock Solr implementation that is used for local development."""
 

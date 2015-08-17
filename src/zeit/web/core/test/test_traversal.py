@@ -86,3 +86,9 @@ def test_preview_can_traverse_workingcopy_directly(my_traverser, workingcopy):
         tdict = my_traverser(req)
         assert zeit.content.article.interfaces.IArticle.providedBy(
             tdict['context'])
+
+
+def test_route_config_should_make_friedbert_surrender_to_blacklisted_routes(
+        testbrowser):
+    browser = testbrowser('/studium/rankings/index')
+    assert browser.headers.get('X-Render-With')
