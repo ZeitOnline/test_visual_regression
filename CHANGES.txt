@@ -1,10 +1,27 @@
 Change log for zeit.web
 =======================
 
-1.60 (unreleased)
------------------
+1.60.0 (unreleased)
+-------------------
+
+- ZON-1943: Adapt classifieds: new xml values, make font taller,
+  put ellipsis to mobile view
+
+- FIX: make Spiele in navigation visible again
+
+- IMPROVEMENT: Schlagworte Verpixelung on articlebottom
+
+- MAINT: Create properly jinja'fied tracebacks for template errors
+
+- MAINT: Log memory usage to separate log file
 
 - ZON-1980: Show ads on news ticker page
+
+
+1.59.1 (2015-08-17)
+-------------------
+
+- FIX: Enforce trailings slash on parent_id for lazy parent resolution
 
 
 1.59 (2015-08-14)

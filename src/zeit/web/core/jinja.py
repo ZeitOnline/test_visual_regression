@@ -29,6 +29,11 @@ log = logging.getLogger(__name__)
 p_log = logging.getLogger('profile')
 
 
+# The function to create jinja traceback objects.  This is dynamically
+# imported on the first exception in handle_exception().
+_make_traceback = None
+
+
 class Undefined(jinja2.runtime.Undefined):
 
     """Custom jinja Undefined class that represents unresolvable template
@@ -64,14 +69,20 @@ class Environment(jinja2.environment.Environment):
             self, exc_info=None, rendered=False, source_hint=None):
         if exc_info is None:
             exc_info = sys.exc_info()
+        global _make_traceback
+        if _make_traceback is None:
+            from jinja2.debug import make_traceback as _make_traceback
+        traceback = _make_traceback(exc_info, source_hint)
+        exc_info = traceback.standard_exc_info
+
         path = '<unknown>'
         try:
             request = pyramid.threadlocal.get_current_request()
             path = request.path_info
         except:
             pass
-        log.error('Error rendering %s', path, exc_info=True)
-        bugsnag.notify(exc_info[1], context=path)
+        log.error('Error rendering %s', path, exc_info=exc_info)
+        bugsnag.notify(exc_info[1], traceback=exc_info[2], context=path)
         return getattr(self.undefined(), '__html__', lambda: '')()
 
     def __getsth__(self, func, obj, name):
