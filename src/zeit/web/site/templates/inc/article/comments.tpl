@@ -130,6 +130,30 @@
 		{% endif %}
 	{% endif %}
 
+<pre style="background-color:#c0ffee;">COMMENTFORM TEST BEGIN</pre>
+<div class="comment-section__form comment-section__item">
+	<form class="comment-form  js-submit-comment" method="POST" id="comment-form" data-uid="123">
+		<div class="comment-form__text">
+			<img class="comment-form__avatar" src="">
+				Angemeldet als
+				<a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
+					Thomas Puppe
+				</a>
+			<span class="comment-form__textcount">
+				<span class="js-count-formchars" data-textcount-element="#comment-form textarea[name='comment']"></span> 1500 Zeichen
+			</span>
+		</div>
+		<textarea class="comment-form__textarea js-required" name="comment" placeholder="{{ placeholder }}" maxlength="1500"></textarea>
+		<p class="comment-form__actions">
+			<input type="hidden" name="action" value="comment">
+			<input type="hidden" name="pid" value="{{ pid }}">
+			<a href="{{ view.content_url }}" class="comment-form__cancel {{ class }} js-cancel-reply">Abbrechen</a>
+			<input class="button" type="submit" value="Speichern" />
+		</p>
+	</form>
+</div>
+<pre style="background-color:#c0ffee;">COMMENTFORM TEST END</pre>
+
 	<script type="text/template" id="js-report-success-template">
 		<div class="comment-form__response--success">
 			Danke! Ihre Meldung wird an die Redaktion weitergeleitet.
