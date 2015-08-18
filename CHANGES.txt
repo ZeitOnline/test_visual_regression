@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: Create properly jinja'fied tracebacks for template errors
 
+- MAINT: Log memory usage to separate log file
+
 
 1.59.1 (2015-08-17)
 -------------------
