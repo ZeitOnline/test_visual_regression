@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2055: Filter comments by recommendations and editorial promotions
 
+- MAINT: Log memory usage to separate log file
+
 
 1.59.1 (2015-08-17)
 -------------------
