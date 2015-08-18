@@ -85,29 +85,37 @@
 
 		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
-				{% if comment.img_url %}
-				<img class="comment__avatar" alt="Avatarbild von {{ comment.name }}" src="{{ comment.img_url }}">
-				{% endif %}
-				<div class="comment__meta">
+				<div class="comment-meta">
 					{% if comment.is_promoted %}
-					<span class="comment__badge comment__badge--promoted" title="Redaktionsempfehlung">&#9733;</span>
+						<div class="comment-meta__badge comment-meta__badge--promoted">
+							{{ lama.use_svg_icon('promoted', 'comment-meta__icon-promoted', request) }}
+							<span class="comment-meta__text">Redaktionsempfehlung</span>
+						</div>
 					{% endif %}
-					{% if comment.is_author %}
-					<span title="{{ comment.role }}">
-						{{ lama.use_svg_icon('comment-author', 'comment__badge comment__badge--author', request) }}
-					</span>
-					{% endif %}
-					<a class="comment__name" href="{{ comment.userprofile_url }}">
-						{{ comment.name }}
-					</a>
-					<span class="comment__recommendations" title="Leserempfehlungen">
 					{%- if comment.recommendations -%}
-						{{ comment.recommendations }} &#9733;
-					{%- endif -%}
-					</span>
-					<a  class="comment__date" href="{{ '{0}?cid={1}#cid-{1}'.format(view.content_url, comment.cid) }}">
-					#{{ comment.shown_num }} &nbsp;/&nbsp; {{ comment.created | format_comment_date }}
-					</a>
+						<div class="comment-meta__badge comment-meta__badge--recommended" title="Leserempfehlungen">
+							{{ lama.use_svg_icon('recommended', 'comment-meta__icon-recommended', request) }}
+							<span class="comment-meta__text">{{ comment.recommendations }}</span>
+						</div>
+					{% endif %}
+					<div class="comment-meta__user">
+						{% if comment.img_url %}
+							<img class="comment-meta__avatar" alt="Avatarbild von {{ comment.name }}" src="{{ comment.img_url }}">
+						{% endif %}
+						<div class="comment-meta__author">
+							{% if comment.is_author %}
+							<span title="{{ comment.role }}">
+								{{ lama.use_svg_icon('promoted', 'comment-meta__icon-author', request) }}
+							</span>
+							{% endif %}
+							<a class="comment-meta__name" href="{{ comment.userprofile_url }}">
+								{{ comment.name }}
+							</a>
+						</div>
+						<a  class="comment-meta__date" href="{{ '{0}?cid={1}#cid-{1}'.format(view.content_url, comment.cid) }}">
+						#{{ comment.shown_num }} &nbsp;—&nbsp; {{ comment.created | format_comment_date }}
+						</a>
+					</div>
 				</div>
 				<div class="comment__body">
 					{{ comment.text | safe }}
