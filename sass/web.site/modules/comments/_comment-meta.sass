@@ -1,0 +1,55 @@
+.comment-meta
+	+display-flex()
+	+flex-wrap(wrap)
+	+justify-content(space-between)
+	&__badge
+		&--promoted
+			color: #999
+			margin-bottom: remify(20px)
+		&--recommended
+			+order(2)
+			color: #999
+			margin-top: -2px
+			// different placement if comment is promoted and recommended
+			.comment-meta__badge--promoted + &
+				+order(initial)
+				margin-top: 0
+	&__icon-promoted
+		fill: #fff
+		height: em(16px) // em intended
+		vertical-align: em(-3px) // em intended
+		width: em(16px)  // em intended
+	&__icon-recommended
+		height: em(16px) // em intended
+		vertical-align: text-bottom
+		width: em(16px)  // em intended
+	&__user
+		width: 80%
+	&__text
+		color: $zon_grey
+		font-size: remify(12px)
+		letter-spacing: $zon-letter-spacing-s
+		padding-left: remify(2px)
+	&__avatar
+		border-radius: 50%
+		float: left
+		height: remify(50px)
+		margin-right: remify(20px)
+		overflow: hidden
+		width: remify(50px)
+	&__author
+	&__icon-author
+	&__name
+		+link
+			color: $zon-red
+		+on-interaction
+			text-decoration: underline
+		font-size: remify(16px)
+		font-weight: bold
+	&__date
+		+link
+			color: $zon_grey
+		+on-interaction
+			color: $zon_dark_grey
+		font-size: remify(12px)
+		letter-spacing: $zon-letter-spacing-s
