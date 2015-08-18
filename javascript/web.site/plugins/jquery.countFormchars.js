@@ -29,7 +29,7 @@
     $.fn.countFormchars = function() {
         return this.each( function() {
             var $counter = $( this ),
-                $formField = $( $counter.data( 'textcount-element' ) );
+                $formField = $( $counter.data( 'charcount-element' ) );
 
             $formField.on( 'change keyup paste', function( e ) {
                 var formFieldContentLength = this.value.length;
