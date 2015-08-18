@@ -36,10 +36,10 @@
 			<div class="comment-preferences__item">
 				{% if view.comments.sort == 'asc' %}
 					{% set href = '{}?sort=desc'.format(view.request.path_url) %}
-					{% set label = 'Älteste zuerst' %}
+					{% set label = 'Neueste zuerst' %}
 				{% elif view.comments.sort == 'desc' %}
 					{% set href = view.request.path_url %}
-					{% set label = 'Neueste zuerst' %}
+					{% set label = 'Älteste zuerst' %}
 				{% else %}
 					{% set href = view.request.path_url %}
 					{% set label = 'Alle Kommentare anzeigen' %}
