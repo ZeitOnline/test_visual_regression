@@ -19,6 +19,8 @@ Change log for zeit.web
 
 - ZON-2078: Versteckte h3 entfernen
 
+- ZON-2099: Kolumnen-Nextread
+
 
 1.59.1 (2015-08-17)
 -------------------
