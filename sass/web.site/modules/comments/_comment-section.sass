@@ -40,29 +40,6 @@
 		&:after
 			content: "\25B8" // ▸ = Black right-pointing small triangle
 			margin-left: 3px
-	&__preferences
-		background-color: $zon_lighter_grey
-		color: $zon_grey
-		font-size: em(13px)
-		margin: 1px 0 // simple border
-		padding-bottom: remify(13px)
-		padding-top: remify(13px)
-		a
-			+link-colors(inherit, $color-link--hover, $color-link--active, inherit, $color-link--focus)
-			margin-right: 2em
-			&:last-child
-				margin-right: 0
-		svg
-			vertical-align: text-top
-		+respond-min($break-phablet-min)
-			font-size: em(15px)
-	&__icon-sorting
-		width: em(14px)  // em intended
-		height: em(16px) // em intended
-	&__icon-spinner
-		width: em(17px)  // em intended
-		height: em(14px) // em intended
-
 	&__form
 		border-top: 1px solid $zon_lighter_grey
 

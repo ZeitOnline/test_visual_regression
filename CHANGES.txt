@@ -13,6 +13,8 @@ Change log for zeit.web
 
 - MAINT: Create properly jinja'fied tracebacks for template errors
 
+- ZON-2055: Filter comments by recommendations and editorial promotions
+
 - MAINT: Log memory usage to separate log file
 
 - FIX: adapt navi classifieds test
