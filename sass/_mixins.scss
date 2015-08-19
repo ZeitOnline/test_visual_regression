@@ -221,7 +221,7 @@
 	@else {
 		content: "▾";
 		display: inline-block; // needed for working transformation
-		margin: remify(0 4px);
+		margin: remify(0 0 0 2.5px);
 		@include transition(transform .5s);
 		@include transform-origin(50% 55%);
 	}
