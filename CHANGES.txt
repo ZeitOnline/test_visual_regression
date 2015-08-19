@@ -15,7 +15,9 @@ Change log for zeit.web
 
 - MAINT: Log memory usage to separate log file
 
-- IMPROVEMENT: tracking-information for schwerpunkte in articlebottom
+- ZON-2081: Zweite Datumsangabe entfernen
+
+- ZON-2078: Versteckte h3 entfernen
 
 
 1.59.1 (2015-08-17)
