@@ -313,7 +313,8 @@ class Base(object):
 
     @zeit.web.reify
     def ranked_tags(self):
-        return self.context.keywords
+        return sorted([t for t in self.context.keywords if t.label],
+                      key=lambda t: not t.url_value)
 
     @zeit.web.reify
     def ranked_tags_list(self):
@@ -587,7 +588,7 @@ class service_unavailable(object):  # NOQA
             path = request.environ.get('PATH_INFO').decode(
                 request.url_encoding, 'replace')
         log.error(u'Error at {}'.format(path), exc_info=True)
-        bugsnag.notify(context, context=path)
+        bugsnag.notify(context, severity='error', context=path)
 
     def __call__(self):
         body = 'Status 503: Dokument zurzeit nicht verfügbar.'
@@ -606,9 +607,9 @@ def not_found(request):
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
 @pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
-def generate_render_with_header(context, request):
+def surrender(context, request):
     return pyramid.response.Response(
-        'OK', 200, headerlist=[('X-render-with', 'default')])
+        'OK', 200, headerlist=[('X-Render-With', 'default')])
 
 
 @pyramid.view.view_config(route_name='json_delta_time', renderer='json')

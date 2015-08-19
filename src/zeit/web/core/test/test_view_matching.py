@@ -85,7 +85,7 @@ def test_content_should_be_rendered_with_render_with_header(application):
     def render_with_view(pviews):
         for view in pviews:
             if view[1].__dict__['__original_view__'] == (
-                    zeit.web.core.view.generate_render_with_header):
+                    zeit.web.core.view.surrender):
                 return view[1]
 
     view_wrapper = render_with_view(views)

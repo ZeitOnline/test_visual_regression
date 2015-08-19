@@ -4,7 +4,7 @@
 
 {% block before_module_list %}
     {% set tracking_slug = '{}...{}.{}'.format(region_loop.index, '-'.join([area.kind, module_layout]), 'alle_fotostrecken') %}
-	{{ cp.section_heading('Fotostrecken', 'Alle Fotostrecken', 'foto/index', view, tracking_slug) }}
+	{{ cp.section_heading('Fotostrecken', 'Alle Fotostrecken', 'foto/index', view, tracking_slug, unpadded=True) }}
 {% endblock %}
 
 {% block module_list %}
