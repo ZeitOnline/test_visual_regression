@@ -20,14 +20,26 @@
         {% endblock schema_org_image_info %}
         {% block article_heading %}
             <div class="article__item">
-                <h1 class="article-heading" itemprop="headline">
-                    <span class="article-heading__kicker">
-                        {{- view.supertitle | hide_none -}}
-                    </span>{%- if view.title -%}<span class="article-heading__colon">: </span>{%- endif -%}
-                    <span class="article-heading__title">
-                        {{- view.title | hide_none -}}
-                    </span>
-                </h1>
+
+                {% if view.pagination and view.pagination.current > 1 %}
+                    <div class="article-heading" itemprop="headline">
+                {% else %}
+                    <h1 class="article-heading" itemprop="headline">
+                {% endif %}
+
+                        <span class="article-heading__kicker">
+                            {{- view.supertitle | hide_none -}}
+                        </span>{%- if view.title -%}<span class="article-heading__colon">: </span>{%- endif -%}
+                        <span class="article-heading__title">
+                            {{- view.title | hide_none -}}
+                        </span>
+
+                {% if view.pagination and view.pagination.current > 1 %}
+                    </div>
+                {% else %}
+                    </h1>
+                {% endif %}
+                
             </div>
         {% endblock article_heading %}
         {% block article_meta %}
