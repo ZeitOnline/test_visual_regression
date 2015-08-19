@@ -21,7 +21,7 @@
         {% block article_heading %}
             <div class="article__item">
 
-                {% if view.pagination and view.pagination.current > 1 %}
+                {% if view.pagination and view.pagination.current > 1 and view.current_page.teaser %}
                     <div class="article-heading" itemprop="headline">
                 {% else %}
                     <h1 class="article-heading" itemprop="headline">
@@ -34,7 +34,7 @@
                             {{- view.title | hide_none -}}
                         </span>
 
-                {% if view.pagination and view.pagination.current > 1 %}
+                {% if view.pagination and view.pagination.current > 1 and view.current_page.teaser %}
                     </div>
                 {% else %}
                     </h1>
@@ -46,7 +46,10 @@
             <div class="article__item">
                 {% if view.pagination and view.pagination.current > 1 %}
                 <div class="article__page-teaser">
-                    Seite {{ view.pagination.current }}/{{ view.pagination.total }}: <h1>{{ view.current_page.teaser }}</h1>
+                    Seite {{ view.pagination.current }}/{{ view.pagination.total }}
+                    {%- if view.current_page.teaser -%} 
+                        : <h1>{{ view.current_page.teaser }}</h1>
+                    {% endif %}
                 </div>
                 {% else %}
                 <div class="summary" itemprop="description">

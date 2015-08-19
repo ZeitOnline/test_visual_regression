@@ -4,6 +4,9 @@ Change log for zeit.web
 1.60.0 (unreleased)
 -------------------
 
+- ZON-2076: move h1 to teasertext of paginated articles,
+  make teasertext page title if page is paginated
+
 - ZON-1943: Adapt classifieds: new xml values, make font taller,
   put ellipsis to mobile view
 
