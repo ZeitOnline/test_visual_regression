@@ -13,9 +13,13 @@ Change log for zeit.web
 
 - MAINT: Create properly jinja'fied tracebacks for template errors
 
+- ZON-2055: Filter comments by recommendations and editorial promotions
+
 - MAINT: Log memory usage to separate log file
 
 - ZON-2032: correct canoncial for article, series, search and topic pages
+
+- FIX: adapt navi classifieds test
 
 
 1.59.1 (2015-08-17)
