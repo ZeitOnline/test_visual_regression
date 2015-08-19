@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - MAINT: Log memory usage to separate log file
 
+- ZON-2032: correct canoncial for article, series, search and topic pages
+
 
 1.59.1 (2015-08-17)
 -------------------
