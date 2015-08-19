@@ -82,8 +82,7 @@
 				</div>
 				{%- endif %}
 			{% endif %}
-
-		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
+		<article class="comment{% if comment.is_reply and not view.comments.sort in ('promoted', 'recommended') %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}
 				<img class="comment__avatar" alt="Avatarbild von {{ comment.name }}" src="{{ comment.img_url }}">
