@@ -98,23 +98,25 @@
 							<span class="comment-meta__text">{{ comment.recommendations }}</span>
 						</div>
 					{% endif %}
-					<div class="comment-meta__user">
+					<div class="comment-metadata">
 						{% if comment.img_url %}
-							<img class="comment-meta__avatar" alt="Avatarbild von {{ comment.name }}" src="{{ comment.img_url }}">
+							<img class="comment-metadata__avatar" alt="Avatarbild von {{ comment.name }}" src="{{ comment.img_url }}">
 						{% endif %}
-						<div class="comment-meta__author">
-							{% if comment.is_author %}
-							<span title="{{ comment.role }}">
-								{{ lama.use_svg_icon('promoted', 'comment-meta__icon-author', request) }}
-							</span>
-							{% endif %}
-							<a class="comment-meta__name" href="{{ comment.userprofile_url }}">
-								{{ comment.name }}
+						<div class="comment-metadata__container">
+							<div class="comment-metadata__user">
+								{% if comment.is_author %}
+								<span title="{{ comment.role }}">
+									{{ lama.use_svg_icon('promoted', 'comment-metadata__icon-user', request) }}
+								</span>
+								{% endif %}
+								<a class="comment-metadata__name" href="{{ comment.userprofile_url }}">
+									{{ comment.name }}
+								</a>
+							</div>
+							<a  class="comment-metadata__date" href="{{ '{0}?cid={1}#cid-{1}'.format(view.content_url, comment.cid) }}">
+							#{{ comment.shown_num }} &nbsp;—&nbsp; {{ comment.created | format_comment_date }}
 							</a>
 						</div>
-						<a  class="comment-meta__date" href="{{ '{0}?cid={1}#cid-{1}'.format(view.content_url, comment.cid) }}">
-						#{{ comment.shown_num }} &nbsp;—&nbsp; {{ comment.created | format_comment_date }}
-						</a>
 					</div>
 				</div>
 				<div class="comment__body">
