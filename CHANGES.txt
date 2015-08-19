@@ -17,6 +17,8 @@ Change log for zeit.web
 
 - FIX: adapt navi classifieds test
 
+- ZON-2050: do not load hidden images
+
 
 1.59.1 (2015-08-17)
 -------------------

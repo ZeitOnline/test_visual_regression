@@ -68,6 +68,11 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
             width, height, token, source, subject,
             styles, minHeight, maxHeight;
 
+        // do not load images which are not shown anyway (zon-small on mobile for example)
+        if ( $parent.css( 'display' ) === 'none' ) {
+            return;
+        }
+
         if ( $parent.hasClass( 'is-pixelperfect' ) ) {
             // use explicit width and height from parent
             width  = $parent.width();
