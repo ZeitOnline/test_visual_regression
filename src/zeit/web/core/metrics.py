@@ -12,7 +12,7 @@ import zeit.web.core.interfaces
 
 
 log = logging.getLogger(__name__)
-memory_log = logging.getLogger(__name__ + '.memory')
+memory_log = logging.getLogger('memory')
 
 
 class Metrics(object):
@@ -84,4 +84,5 @@ def view_timer_rendering(event):
     event.request.view_timer.stop('total')
     memory = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     memory_delta = memory - event.request.memory
-    memory_log.info('Memory delta %s: %s KB', event.request.path, memory_delta)
+    memory_log.debug(
+        'Memory delta %s: %s KB', event.request.path, memory_delta)

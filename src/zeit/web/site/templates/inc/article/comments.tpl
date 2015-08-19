@@ -36,10 +36,10 @@
 			<div class="comment-preferences__item">
 				{% if view.comments.sort == 'asc' %}
 					{% set href = '{}?sort=desc'.format(view.request.path_url) %}
-					{% set label = 'Älteste zuerst' %}
+					{% set label = 'Neueste zuerst' %}
 				{% elif view.comments.sort == 'desc' %}
 					{% set href = view.request.path_url %}
-					{% set label = 'Neueste zuerst' %}
+					{% set label = 'Älteste zuerst' %}
 				{% else %}
 					{% set href = view.request.path_url %}
 					{% set label = 'Alle Kommentare anzeigen' %}
@@ -82,8 +82,7 @@
 				</div>
 				{%- endif %}
 			{% endif %}
-
-		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
+		<article class="comment{% if comment.is_reply and not view.comments.sort in ('promoted', 'recommended') %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				<div class="comment-meta">
 					{% if comment.is_promoted %}

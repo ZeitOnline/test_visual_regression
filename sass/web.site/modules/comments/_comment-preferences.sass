@@ -1,4 +1,4 @@
-$prefs-link-color: #4c4f5f
+$prefs-link-color: $zon_grey
 .comment-preferences
 	background-color: $zon_lighter_grey
 	color: $zon_grey
@@ -27,21 +27,26 @@ $prefs-link-color: #4c4f5f
 		padding: remify(13px) remify(14px)
 		&:hover span
 			border-bottom: 1px solid $zon_light_grey
+		& > svg
+			color: #909090
 		&--active
-			color: #4c4f5f
+			+link-colors($zon-darker-grey, $zon-darker-grey, $zon-darker-grey, $zon-darker-grey, $zon-darker-grey)
+			& > svg
+				color: inherit
 	&__text
 		display: none
 		+respond-min($break-tablet-min)
+			color: inherit
 			display: inline
 	&__icon-sorting
 		height: em(16px) // em intended
 		vertical-align: baseline
 		width: em(14px)  // em intended
+
 	&__icon-spinner
 		height: em(14px) // em intended
 		width: em(17px)  // em intended
 	&__icon-promoted
-		fill: #fff
 		height: em(21.35px) // em intended
 		vertical-align: text-top
 		width: em(21.35px) // em intended

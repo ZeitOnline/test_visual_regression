@@ -4,6 +4,11 @@ Change log for zeit.web
 1.60.0 (unreleased)
 -------------------
 
+- ZON-1943: Adapt classifieds: new xml values, make font taller,
+  put ellipsis to mobile view
+
+- FIX: make Spiele in navigation visible again
+
 - IMPROVEMENT: Schlagworte Verpixelung on articlebottom
 
 - MAINT: Create properly jinja'fied tracebacks for template errors
@@ -11,6 +16,8 @@ Change log for zeit.web
 - ZON-2055: Filter comments by recommendations and editorial promotions
 
 - MAINT: Log memory usage to separate log file
+
+- FIX: adapt navi classifieds test
 
 
 1.59.1 (2015-08-17)
