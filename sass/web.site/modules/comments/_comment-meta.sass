@@ -58,9 +58,6 @@ $user-avatar-size: 50px
 			+flex-direction(row)
 			+justify-content(space-between)
 			+align-items(center)
-			.comment--indented &
-				+flex-direction(column)
-				+align-items(flex-start)
 	&__avatar
 		+flex-basis(remify($user-avatar-size))
 		border-radius: 50%
@@ -71,6 +68,8 @@ $user-avatar-size: 50px
 	&__user
 		+respond-min($break-tablet-min)
 			width: remify(240px)
+			.comment--indented &
+				width: remify(220px)
 	&__icon-user
 		+inline-block
 		color: $zon-charcoal
