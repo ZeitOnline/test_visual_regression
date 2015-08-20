@@ -7,6 +7,8 @@ Change log for zeit.web
 - ZON-1943: Adapt classifieds: new xml values, make font taller,
   put ellipsis to mobile view
 
+- ZON-2052: Enable DNS Prefetch for assets
+
 - FIX: Make Spiele in navigation visible again
 
 - FIX: Adapt navi classifieds test
