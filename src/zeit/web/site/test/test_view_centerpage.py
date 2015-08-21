@@ -1042,7 +1042,7 @@ def test_hidden_images_must_not_be_loaded_via_js(
             assert len(smallimage) == 0
             assert len(largeimage) == 1
         elif screen_size[0] == 520:
-            assert len(smallimage) == 0
+            assert len(smallimage) > 0
             assert len(largeimage) == 1
         elif screen_size[0] == 768:
             assert len(smallimage) > 0
