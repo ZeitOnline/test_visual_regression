@@ -82,41 +82,37 @@
 				</div>
 				{%- endif %}
 			{% endif %}
-		<article class="comment{% if comment.is_reply and not view.comments.sort in ('promoted', 'recommended') %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
+		<article class="comment{% if comment.is_reply and not view.comments.sort in ('promoted', 'recommended') %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}{% if comment.is_promoted %} comment--promoted{% endif %}{% if comment.recommendations %} comment--recommended{% endif %}{% if comment.img_url %} comment--avatar{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				<div class="comment-meta">
-					{% if comment.is_promoted %}
-						<div class="comment-meta__badge comment-meta__badge--promoted">
-							{{ lama.use_svg_icon('promoted', 'comment-meta__icon-promoted', request) }}
-							<span class="comment-meta__text">Redaktionsempfehlung</span>
-						</div>
+					{% if comment.img_url %}
+					<div class="comment-meta__avatar">
+						<img alt="Avatarbild von {{ comment.name }}" src="{{ comment.img_url }}">
+					</div>
 					{% endif %}
+					<div class="comment-meta__name">
+						{% if comment.is_author %}
+						<span title="{{ comment.role }}" class="comment-meta__badge comment-meta__badge--author">
+							{{ lama.use_svg_icon('promoted', 'comment-meta__icon comment-meta__icon--author', request) }}
+						</span>
+						{% endif %}
+						<a href="{{ comment.userprofile_url }}">{{ comment.name }}</a>
+					</div>
+					<a  class="comment-meta__date" href="{{ '{0}?cid={1}#cid-{1}'.format(view.content_url, comment.cid) }}">
+						#{{ comment.shown_num }} &nbsp;—&nbsp; {{ comment.created | format_comment_date }}
+					</a>
 					{%- if comment.recommendations -%}
 						<div class="comment-meta__badge comment-meta__badge--recommended" title="Leserempfehlungen">
-							{{ lama.use_svg_icon('recommended', 'comment-meta__icon-recommended', request) }}
+							{{ lama.use_svg_icon('recommended', 'comment-meta__icon comment-meta__icon--recommended', request) }}
 							<span class="comment-meta__text">{{ comment.recommendations }}</span>
 						</div>
 					{% endif %}
-					<div class="comment-metadata">
-						{% if comment.img_url %}
-							<img class="comment-metadata__avatar" alt="Avatarbild von {{ comment.name }}" src="{{ comment.img_url }}">
-						{% endif %}
-						<div class="comment-metadata__container">
-							<div class="comment-metadata__user">
-								{% if comment.is_author %}
-								<span title="{{ comment.role }}">
-									{{ lama.use_svg_icon('promoted', 'comment-metadata__icon-user', request) }}
-								</span>
-								{% endif %}
-								<a class="comment-metadata__name" href="{{ comment.userprofile_url }}">
-									{{ comment.name }}
-								</a>
-							</div>
-							<a  class="comment-metadata__date" href="{{ '{0}?cid={1}#cid-{1}'.format(view.content_url, comment.cid) }}">
-							#{{ comment.shown_num }} &nbsp;—&nbsp; {{ comment.created | format_comment_date }}
-							</a>
+					{% if comment.is_promoted %}
+						<div class="comment-meta__badge comment-meta__badge--promoted">
+							{{ lama.use_svg_icon('promoted', 'comment-meta__icon comment-meta__icon--promoted', request) }}
+							<span class="comment-meta__text">Redaktionsempfehlung</span>
 						</div>
-					</div>
+					{% endif %}
 				</div>
 				<div class="comment__body">
 					{{ comment.text | safe }}
