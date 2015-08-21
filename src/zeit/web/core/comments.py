@@ -204,11 +204,17 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
         if page < 1 or page > pages:
             page = 1
 
-    # change page id if needed
-    # TODO
+    # compute page if comment id is supplied
+    if cid is not None:
+        c_index = thread['index']
+        c_info = c_index[int(cid)]
+        if c_info['in_reply'] is not None:
+            c_info = c_index[int(c_info['in_reply'])]
+        c_position = c_info['shown_num']
+        page = int(math.ceil(float(c_position) / float(page_size)))
 
     # slice comment tree when there's more than one page
-    if page:
+    if page > 1:
         sorted_tree = sorted_tree[(page - 1) * page_size: page * page_size]
 
     # flatten comment tree
