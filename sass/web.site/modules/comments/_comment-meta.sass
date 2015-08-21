@@ -1,96 +1,80 @@
-.comment-meta
-	+display-flex()
-	+flex-wrap(wrap)
-	+justify-content(space-between)
-	&__badge
-		line-height: 1
-		&--promoted
-			color: $zon_mid_grey
-			margin-bottom: remify(20px)
-			+respond-min($break-tablet-min)
-				+order(3)
-				+align-self(center)
-				margin-left: remify(20px)
-				margin-bottom: 0
-				text-align: right
-		&--recommended
-			+order(2)
-			color: $zon_mid_grey
-			margin-top: em(7px) // em intended
-			+respond-min($break-tablet-min)
-				margin-top: 0
-				margin-left: remify(20px)
-				+align-self(center)
-			// different placement if comment is promoted and recommended
-			.comment-meta__badge--promoted + &
-				+order(initial)
-				margin-top: 0
-				+respond-min($break-tablet-min)
-					+order(2)
-	&__icon-promoted
-		color: $zon_grey
-		height: em(16px) // em intended
-		vertical-align: em(-3px) // em intended
-		width: em(16px)  // em intended
-	&__icon-recommended
-		color: $zon_grey
-		height: em(18px) // em intended
-		vertical-align: em(-3px)
-		width: em(18px)  // em intended
-	&__text
-		color: $zon_grey
-		font-size: remify(12px)
-		letter-spacing: $zon-letter-spacing-s
-		padding-left: remify(2px)
-
 $user-avatar-size: 50px
-.comment-metadata
-	+display-flex()
-	+flex-basis(80%) // leave place for lonely star
-	+align-items(center)
-	line-height: 1.2
-	&__container
-		+display-flex()
-		+flex-direction(column)
-		line-height: 1.4
-		+respond-min($break-tablet-min)
-			+flex-grow(1)
-			+flex-direction(row)
-			+justify-content(space-between)
-			+align-items(center)
+%meta-text
+	color: $zon_mid_grey
+	font-size: remify(12px)
+	letter-spacing: $zon-letter-spacing-s
+
+.comment-meta
 	&__avatar
-		+flex-basis(remify($user-avatar-size))
-		border-radius: 50%
-		height: remify($user-avatar-size)
-		margin-right: remify(20px)
-		overflow: hidden
-		width: remify($user-avatar-size)
-	&__user
+		img
+			border-radius: 50%
+			height: remify($user-avatar-size)
+			overflow: hidden
+			width: remify($user-avatar-size)
 		+respond-min($break-tablet-min)
-			width: remify(240px)
-			.comment--indented &
-				width: remify(220px)
-	&__icon-user
-		+inline-block
-		color: $zon-charcoal
-		height: em(16px)
-		margin-right: remify(5px)
-		vertical-align: -0.2em
-		width: em(16px)
+			display: table-cell
+			vertical-align: middle
+			padding-right: remify(15px)
+			width: remify($user-avatar-size)
 	&__name
-		+link
-			color: $zon-red
-		+on-interaction
-			text-decoration: underline
 		font-size: remify(16px)
 		font-weight: bold
+		a
+			+link
+				color: $zon-red
+			+on-interaction
+				text-decoration: underline
+		+respond-min($break-tablet-min)
+			display: table-cell
+			vertical-align: middle
+			word-break: break-word
 	&__date
 		+link
 			color: $zon_grey
 		+on-interaction
 			color: $zon_dark_grey
-		font-size: remify(12px)
-		letter-spacing: $zon-letter-spacing-s
+		@extend %meta-text
+		+respond-min($break-tablet-min)
+			display: table-cell
+			vertical-align: middle
+			padding-left: remify(5px)
+			text-align: right
+			width: remify(145px)
+	&__badge
+		@extend %meta-text
+		&--promoted
+			+respond-min($break-tablet-min)
+				display: table-cell
+				vertical-align: middle
+				padding-left: remify(22px)
+				text-align: right
+				width: remify(178px)
+		&--recommended
+			+respond-min($break-tablet-min)
+				display: table-cell
+				vertical-align: middle
+				padding-left: remify(5px)
+				text-align: right
+				width: remify(70px)
+		&--author
+			+respond-min($break-tablet-min)
+				+inline-block(0.2em)
+				margin-right: remify(8px)
+	&__icon
+		color: $zon_grey
+		height: em(16px, 12px) // em indented
+		vertical-align: em(-3px, 12px) // em indented
+		width: em(16px, 12px)  // em indented
+		&--promoted
+		&--recommended
+			height: em(18px, 12px) // em indented
+			width: em(18px, 12px)  // em indented
+		&--author
+			color: $zon-charcoal
+	&__text
+		padding-left: remify(4px)
 	+respond-min($break-tablet-min)
-		+flex-basis(auto)
-		+flex-grow(1)
+		display: table
+		width: 100%
+		// height: $user-avatar-size
+		// line-height: $user-avatar-size
