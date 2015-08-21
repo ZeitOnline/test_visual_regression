@@ -184,11 +184,14 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
             c['recommendations'] > 0))
         sorted_tree = sorted(gen, None, lambda c: c[0]['recommendations'], 1)
 
+    # calculate comment counts, which differ depending on sort
+    top_level_comment_count = len(sorted_tree)
+    total_comment_count = len(thread['flattened_comments']) if sort in (
+        'desc', 'asc') else len(sorted_tree)
+
     # calculate number of pages
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
-
-    top_level_comment_count = len(sorted_tree)
     pages = int(math.ceil(float(top_level_comment_count) / float(page_size)))
 
     # sanitize page value
@@ -205,8 +208,7 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
     # TODO
 
     # slice comment tree when there's more than one page
-    if page and sort in ('desc', 'asc'):
-        # Seite 2: 10 bis 19, page-nr -1 * page_size : page-nr * page_sieze
+    if page:
         sorted_tree = sorted_tree[(page - 1) * page_size: page * page_size]
 
     # flatten comment tree
@@ -220,8 +222,6 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
             comments.append(sub_comment)
 
     # display comment count
-    total_comment_count = len(thread['flattened_comments']) if sort in (
-        'desc', 'asc') else len(sorted_tree)
     thread['headline'] = '{} {}'.format(
         total_comment_count,
         'Kommentar' if total_comment_count == 1 else 'Kommentare')
