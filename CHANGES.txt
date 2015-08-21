@@ -7,13 +7,17 @@ Change log for zeit.web
 - ZON-1943: Adapt classifieds: new xml values, make font taller,
   put ellipsis to mobile view
 
-- FIX: make Spiele in navigation visible again
+- ZON-1980: Show ads on news ticker page
+
+- ZON-2055: Filter comments by recommendations and editorial promotions
+
+- FIX: Make Spiele in navigation visible again
+
+- FIX: Adapt navi classifieds test
 
 - IMPROVEMENT: Schlagworte Verpixelung on articlebottom
 
 - MAINT: Create properly jinja'fied tracebacks for template errors
-
-- ZON-2055: Filter comments by recommendations and editorial promotions
 
 - MAINT: Log memory usage to separate log file
 
