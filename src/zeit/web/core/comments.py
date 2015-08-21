@@ -169,6 +169,7 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
     # We do not want to touch the references of the cached thread
     thread = thread.copy()
     sorted_tree = thread.pop('sorted_tree', {}).values()
+    thread['sort'] = sort
 
     if sort == 'desc':
         sorted_tree.reverse()
@@ -232,16 +233,8 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
         'pager': zeit.web.core.template.calculate_pagination(page, pages)}
 
     if page and thread['pages']['pager']:
-        first = ((page - 1) * page_size) + 1
-        last = min(
-            top_level_comment_count, ((page - 1) * page_size) + page_size)
-
-        if first == last:  # comment page with only one comment
-            thread['pages']['title'] = u'Kommentar {} von {}'.format(
-                top_level_comment_count, top_level_comment_count)
-        else:
-            thread['pages']['title'] = u'Kommentar {} – {} von {}'.format(
-                first, last, top_level_comment_count)
+        thread['pages']['title'] = u'Seite {} von {}'.format(
+            page, pages)
 
     return thread
 
