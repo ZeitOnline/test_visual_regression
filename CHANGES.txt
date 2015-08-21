@@ -6,6 +6,19 @@ Change log for zeit.web
 
 - ZON-2057: Character counter above the form field
 
+- ZON-1943: Adapt classifieds: new xml values, make font taller,
+  put ellipsis to mobile view
+
+- ZON-1980: Show ads on news ticker page
+
+- ZON-2055: Filter comments by recommendations and editorial promotions
+
+- FIX: Make Spiele in navigation visible again
+
+- FIX: Adapt navi classifieds test
+
+- FIX: provide closest_substitute_image for zon-column
+
 - IMPROVEMENT: Schlagworte Verpixelung on articlebottom
 
 - MAINT: Create properly jinja'fied tracebacks for template errors
