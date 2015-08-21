@@ -13,6 +13,8 @@ Change log for zeit.web
 
 - ZON-2055: Filter comments by recommendations and editorial promotions
 
+- ZON-2032: Correct canoncial for article, series, search and topic pages
+
 - FIX: Make Spiele in navigation visible again
 
 - FIX: Adapt navi classifieds test
@@ -24,6 +26,8 @@ Change log for zeit.web
 - MAINT: Create properly jinja'fied tracebacks for template errors
 
 - MAINT: Log memory usage to separate log file
+
+- FIX: adapt navi classifieds test
 
 
 1.59.1 (2015-08-17)
