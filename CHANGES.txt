@@ -4,13 +4,13 @@ Change log for zeit.web
 1.60.0 (unreleased)
 -------------------
 
+- ZON-2057: Character counter above the form field
+
 - IMPROVEMENT: Schlagworte Verpixelung on articlebottom
 
 - MAINT: Create properly jinja'fied tracebacks for template errors
 
 - MAINT: Log memory usage to separate log file
-
-- ZON-2057: character counter above the form field
 
 
 1.59.1 (2015-08-17)
