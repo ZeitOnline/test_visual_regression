@@ -4,6 +4,8 @@ Change log for zeit.web
 1.60.0 (unreleased)
 -------------------
 
+- ZON-2077: integrate former noindex rules from XSLT
+
 - ZON-1943: Adapt classifieds: new xml values, make font taller,
   put ellipsis to mobile view
 

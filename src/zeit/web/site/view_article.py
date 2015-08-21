@@ -40,6 +40,26 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         """ Canonical for komplettansicht is first page """
         return self.resource_url
 
+
+    @zeit.web.reify
+    def meta_robots(self):
+    # try seo presets first
+        try:
+            seo = zeit.seo.interfaces.ISEO(self.context)
+            if seo.meta_robots:
+                return seo.meta_robots
+        except (AttributeError, TypeError):
+            pass
+
+    # exclude certain products and ressorts from being followed
+        exclude_products = ('ZEAR', 'TGS', 'HaBl', 'WIWO', 'GOLEM')
+        if self.product_id in exclude_products or self.ressort == 'Fehler':
+            return 'noindex, follow'
+
+    # else default
+        return 'index,follow,noodp,noydir,noarchive'
+
+
     @zeit.web.reify
     def breadcrumbs(self):
         breadcrumbs = super(Article, self).breadcrumbs
