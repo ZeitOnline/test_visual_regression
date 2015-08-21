@@ -170,7 +170,6 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
     thread = thread.copy()
     sorted_tree = thread.pop('sorted_tree', {}).values()
 
-    thread['sort'] = sort
     if sort == 'desc':
         sorted_tree.reverse()
     elif sort == 'promoted':
@@ -184,20 +183,12 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
             c['recommendations'] > 0))
         sorted_tree = sorted(gen, None, lambda c: c[0]['recommendations'], 1)
 
-    thread['comments'] = comments = []
-    positional_index = {}
-    for main_comment in sorted_tree:
-        positional_index[main_comment[0]['cid']] = len(comments)
-        comments.append(main_comment[0])
-        for sub_comment in main_comment[1]:
-            positional_index[sub_comment['cid']] = len(comments)
-            comments.append(sub_comment)
-
+    # calculate number of pages
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
 
-    comment_count = len(comments)
-    pages = int(math.ceil(float(comment_count) / float(page_size)))
+    top_level_comment_count = len(sorted_tree)
+    pages = int(math.ceil(float(top_level_comment_count) / float(page_size)))
 
     # sanitize page value
     if page:
@@ -209,35 +200,48 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
         if page < 1 or page > pages:
             page = 1
 
-    # find page by cid
-    if cid:
-        try:
-            pos = positional_index[int(cid)] + 1
-            page = int(math.ceil(float(pos) / float(page_size)))
-        except (KeyError, ValueError):
-            pass
+    # change page id if needed
+    # TODO
 
+    # slice comment tree when there's more than one page
+    if page and sort in ('desc', 'asc'):
+        # Seite 2: 10 bis 19, page-nr -1 * page_size : page-nr * page_sieze
+        sorted_tree = sorted_tree[(page - 1) * page_size: page * page_size]
+
+    # flatten comment tree
+    thread['comments'] = comments = []
+    # positional_index = {}
+    for main_comment in sorted_tree:
+        # positional_index[main_comment[0]['cid']] = len(comments)
+        comments.append(main_comment[0])
+        for sub_comment in main_comment[1]:
+            # positional_index[sub_comment['cid']] = len(comments)
+            comments.append(sub_comment)
+
+    # display comment count
+    total_comment_count = len(thread['flattened_comments']) if sort in (
+        'desc', 'asc') else len(sorted_tree)
     thread['headline'] = '{} {}'.format(
-        comment_count, 'Kommentar' if comment_count == 1 else 'Kommentare')
+        total_comment_count,
+        'Kommentar' if total_comment_count == 1 else 'Kommentare')
+
+    # all things pagination
     thread['pages'] = {
         'current': page,
         'total': pages,
         'pager': zeit.web.core.template.calculate_pagination(page, pages)}
 
-    if page:
-        thread['comments'] = (
-            comments[(page - 1) * page_size: page * page_size])
+    if page and thread['pages']['pager']:
+        first = ((page - 1) * page_size) + 1
+        last = min(
+            top_level_comment_count, ((page - 1) * page_size) + page_size)
 
-        if thread['pages']['pager']:
-            first = ((page - 1) * page_size) + 1
-            last = min(comment_count, ((page - 1) * page_size) + page_size)
-
-            if first == last:
-                thread['pages']['title'] = u'Kommentar {} von {}'.format(
-                    first, comment_count)
-            else:
-                thread['pages']['title'] = u'Kommentar {} – {} von {}'.format(
-                    first, last, comment_count)
+        if first == last:  # comment page with only one comment
+            thread['pages']['title'] = u'Kommentar {} von {}'.format(
+                top_level_comment_count, top_level_comment_count)
+        else:
+            thread['pages']['title'] = u'Kommentar {} – {} von {}'.format(
+                first, last, top_level_comment_count)
 
     return thread
 
