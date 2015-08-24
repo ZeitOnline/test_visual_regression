@@ -264,9 +264,15 @@ def test_cp_should_have_valid_classifieds_structure(testserver, testbrowser):
         'Abo link is not present.')
     assert len(html('li[data-id="shop"] > a')) == 1, (
         'Shop link is not present.')
+    assert len(html('li[data-id="akademie"] > a')) == 1, (
+        'Akademie link is not present.')
     assert len(html('li[data-id="jobs"] > a')) == 1, (
         'Job link is not present.')
-    assert len(html('li[data-id="partnersuche"] > a')) == 1, (
+    assert len(html('li[data-id="urlaubsziele"] > a')) == 2, (
+        'Urlaubsziele link is not present.')
+    assert len(html('li[data-id="kulturveranstaltungen"] > a')) == 2, (
+        'Kulturveranstaltungen link is not present.')
+    assert len(html('li[data-id="partnersuche"] > a')) == 2, (
         'Partnersuche link is not present.')
     assert len(html('li[data-id="immobilien"] > a')) == 2, (
         'Immo link is not present.')
