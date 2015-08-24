@@ -38,7 +38,10 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     @zeit.web.reify
     def canonical_url(self):
         """ Canonical for komplettansicht is first page """
-        return self.resource_url
+        if not self.is_all_pages_view:
+            return self.request.url
+        else:
+            return self.resource_url
 
     @zeit.web.reify
     def pagetitle(self):

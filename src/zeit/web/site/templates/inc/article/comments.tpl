@@ -25,25 +25,48 @@
 	</div>
 
 	{% if view.comments %}
-	<div class="comment-section__preferences">
-		<div class="comment-section__item">
+	<div class="comment-preferences">
+		<div class="comment-preferences__container">
 			{# funky future feature?
-			<a class="comment-section__link-autoupdate nowrap" href="{{ request.url }}#comments">
+			<a class="comment-preferences__item comment-preferences__item--autoupdate nowrap" href="{{ request.url }}#comments">
 				{{ lama.use_svg_icon('spinner', 'comment-section__icon-spinner', request) }}
 				Auto-Aktualisierung an
 			</a>
 			#}
-			{% if view.comments.sort == 'asc' %}
-				{% set href = '{}?sort=desc'.format(view.request.path_url) %}
-				{% set label = 'Älteste zuerst' %}
-			{% else %}
-				{% set href = view.request.path_url %}
-				{% set label = 'Neueste zuerst' %}
+			<div class="comment-preferences__item">
+				{% if view.comments.sort == 'asc' %}
+					{% set href = '{}?sort=desc'.format(view.request.path_url) %}
+					{% set label = 'Neueste zuerst' %}
+				{% elif view.comments.sort == 'desc' %}
+					{% set href = view.request.path_url %}
+					{% set label = 'Älteste zuerst' %}
+				{% else %}
+					{% set href = view.request.path_url %}
+					{% set label = 'Alle Kommentare anzeigen' %}
+				{% endif %}
+				<a class="comment-preferences__link nowrap" href="{{ href }}#comments">
+					{{ lama.use_svg_icon('sorting', 'comment-preferences__icon-sorting', request) }}
+					<span>{{ label }}</span>
+				</a>
+			</div>
+			{% if view.comments.has_promotion %}
+				{% set href = '{}?sort=promoted'.format(view.request.path_url) %}
+				<div class="comment-preferences__item comment-preferences__item--buttonized">
+					<a class="comment-preferences__link nowrap{% if view.comments.sort == 'promoted' %} comment-preferences__link--active{% endif %}" href="{{ href }}#comments">
+						{{ lama.use_svg_icon('promoted', 'comment-preferences__icon-promoted', request) }}
+						<span class="comment-preferences__text">Nur Redaktionsempfehlungen</span>
+					</a>
+				</div>
 			{% endif %}
-			<a class="comment-section__link-sorting nowrap" href="{{ href }}#comments">
-				{{ lama.use_svg_icon('sorting', 'comment-section__icon-sorting', request) }}
-				{{ label }}
-			</a>
+			{% if view.comments.has_recommendations %}
+				{% set href = '{}?sort=recommended'.format(view.request.path_url) %}
+				<div class="comment-preferences__item comment-preferences__item--buttonized">
+					<a class="comment-preferences__link nowrap {% if view.comments.sort == 'recommended' %} comment-preferences__link--active{% endif %}" href="{{ href }}#comments">
+						{{ lama.use_svg_icon('recommended', 'comment-preferences__icon-recommended', request) }}
+						<span class="comment-preferences__text">Nur Leserempfehlungen</span>
+					</a>
+				</div>
+			{% endif %}
 		</div>
 	</div>
 
@@ -59,8 +82,7 @@
 				</div>
 				{%- endif %}
 			{% endif %}
-
-		<article class="comment{% if comment.is_reply %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
+		<article class="comment{% if comment.is_reply and not view.comments.sort in ('promoted', 'recommended') %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}" id="cid-{{ comment.cid }}">
 			<div class="comment__container">
 				{% if comment.img_url %}
 				<img class="comment__avatar" alt="Avatarbild von {{ comment.name }}" src="{{ comment.img_url }}">
