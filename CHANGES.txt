@@ -11,6 +11,8 @@ Change log for zeit.web
 
 - ZON-2055: Filter comments by recommendations and editorial promotions
 
+- ZON-1939: Search page polishing
+
 - FIX: Make Spiele in navigation visible again
 
 - FIX: Adapt navi classifieds test
