@@ -711,8 +711,7 @@ def test_canonical_url_returns_correct_value_on_cp(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
     request = mock.Mock()
-    request.host_url = 'http://localhorst'
-    request.path_info = '/centerpage/index'
+    request.url = 'http://localhorst/centerpage/index'
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, request)
     assert view.canonical_url == 'http://localhorst/centerpage/index'
 
@@ -738,6 +737,11 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
+    url = '%s/zeit-online/article/zeit' % testserver.url
+    browser = testbrowser("{}/seite-2".format(url))
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url + '/seite-2'
+
     url = '%s/suche/index' % testserver.url
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
@@ -746,7 +750,17 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     url = '%s/suche/index' % testserver.url
     browser = testbrowser("{}?p=2".format(url))
     link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url + '?p=2'
+
+    url = '%s/dynamic/ukraine' % testserver.url
+    browser = testbrowser(url)
+    link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
+
+    url = '%s/dynamic/ukraine' % testserver.url
+    browser = testbrowser("{}?p=2".format(url))
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url + '?p=2'
 
 
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
@@ -1017,3 +1031,12 @@ def test_breakpoint_sniffer_script(
     if screen_size[0] == 980:
         assert "desktop" == driver.execute_script(
             "return window.ZMO.breakpoint.get()")
+
+
+def test_app_wrapper_script(selenium_driver, testserver):
+
+    driver = selenium_driver
+    driver.get('{}/zeit-online/slenderized-index'.format(testserver.url))
+
+    ressort = driver.execute_script('return window.wrapper.getRessort()')
+    assert ressort == 'homepage'
