@@ -4,6 +4,8 @@ Change log for zeit.web
 1.60.0 (unreleased)
 -------------------
 
+- ZON-2116: Add javascript object for wrapper apps
+
 - ZON-2057: Character counter above the form field
 
 - ZON-1943: Adapt classifieds: new xml values, make font taller,
