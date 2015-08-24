@@ -4,7 +4,7 @@ Change log for zeit.web
 1.60.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-2058: Reposition comment recommendations
 
 
 1.60.0 (2015-08-24)
