@@ -58,10 +58,88 @@ def test_article_pagination_active_state(testbrowser):
 
     assert len(select('.summary, .byline, .metadata')) == 0
     assert select('.article__page-teaser')[0].text.strip() == (
-        u'Seite 3/5: Man wird schlank und lüstern')
+        u'Seite 3/5:')
+    assert select('.article__page-teaser > h1')[0].text.strip() == (
+        u'Man wird schlank und lüstern')
     assert select('.article-pagination__nexttitle')[0].text.strip() == (
         u'Aus dem abenteuerlustigen Mädchen vom Dorf wurde ein Junkie')
     assert '--current' in (select('.article-pager__number')[2].get('class'))
+
+
+def test_article_page_1_has_correct_h1(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit').cssselect
+    node = '.article__item > h1 > .article-heading__title'
+    assert select(node)[0].text.strip() == (
+        u'Nancy braucht was Schnelles'), (
+        'article headline is not h1')
+
+
+def test_article_page_2_has_correct_h1(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/seite-2').cssselect
+    node = '.article__page-teaser > h1'
+    assert select(node)[0].text.strip() == (
+        u'Der Horror von Crystal wurzelt in der Normalität'), (
+        'article page teaser is not h1')
+
+
+def test_article_page_teaserless_has_correct_h1(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/seite-5').cssselect
+    node = '.article__item > h1 > .article-heading__title'
+    assert select(node)[0].text.strip() == (
+        u'Nancy braucht was Schnelles'), (
+        'article headline is not h1')
+
+
+def test_article_complete_has_correct_h1(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
+    node = '.article__item > h1 > .article-heading__title'
+    assert select(node)[0].text.strip() == (
+        u'Nancy braucht was Schnelles'), (
+        'article headline is not h1')
+
+
+def test_article_plain_has_correct_h1(testbrowser):
+    select = testbrowser('/zeit-online/article/02').cssselect
+    node = '.article__item > h1 > .article-heading__title'
+    assert select(node)[0].text.strip() == (
+        u'Zwei Baguettes und ein Zimmer bitte'), (
+        'article headline is not h1')
+
+
+def test_article_page_1_has_correct_title(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit').cssselect
+    assert select('title')[0].text.strip() == (
+        u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
+        'article headline is not title')
+
+
+def test_article_page_2_has_correct_title(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/seite-2').cssselect
+    assert select('title')[0].text.strip() == (
+        u'Crystal Meth: Der Horror von Crystal '
+        u'wurzelt in der Normalität |\xa0ZEIT ONLINE'), (
+        'article page teaser is not title')
+
+
+def test_article_page_teaserless_has_correct_title(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/seite-5').cssselect
+    assert select('title')[0].text.strip() == (
+        u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
+        'article headline is not title')
+
+
+def test_article_complete_has_correct_title(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
+    assert select('title')[0].text.strip() == (
+        u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
+        'article headline is not title')
+
+
+def test_article_plain_has_correct_title(testbrowser):
+    select = testbrowser('zeit-online/article/02').cssselect
+    assert select('title')[0].text.strip() == (
+        u'Zwei Baguettes und ein Zimmer bitte |\xa0ZEIT ONLINE'), (
+        'article headline is not title')
 
 
 def test_fresh_breaking_news_article_renders_breaking_bar(testbrowser):

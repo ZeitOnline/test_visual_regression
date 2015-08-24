@@ -4,6 +4,13 @@ Change log for zeit.web
 1.60.0 (unreleased)
 -------------------
 
+- ZON-2116: Add javascript object for wrapper apps
+
+- ZON-2076: move h1 to teasertext of paginated articles,
+  make teasertext page title if page is paginated
+
+- ZON-2057: Character counter above the form field
+
 - ZON-1943: Adapt classifieds: new xml values, make font taller,
   put ellipsis to mobile view
 
@@ -13,15 +20,21 @@ Change log for zeit.web
 
 - ZON-1939: Search page polishing
 
+- ZON-2032: Correct canoncial for article, series, search and topic pages
+
 - FIX: Make Spiele in navigation visible again
 
 - FIX: Adapt navi classifieds test
+
+- FIX: provide closest_substitute_image for zon-column
 
 - IMPROVEMENT: Schlagworte Verpixelung on articlebottom
 
 - MAINT: Create properly jinja'fied tracebacks for template errors
 
 - MAINT: Log memory usage to separate log file
+
+- FIX: adapt navi classifieds test
 
 
 1.59.1 (2015-08-17)
