@@ -4,6 +4,8 @@ Change log for zeit.web
 1.60.0 (unreleased)
 -------------------
 
+- ZON-2116: Add javascript object for wrapper apps
+
 - ZON-2076: move h1 to teasertext of paginated articles,
   make teasertext page title if page is paginated
 
