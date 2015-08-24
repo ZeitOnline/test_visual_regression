@@ -1040,3 +1040,42 @@ def test_app_wrapper_script(selenium_driver, testserver):
 
     ressort = driver.execute_script('return window.wrapper.getRessort()')
     assert ressort == 'homepage'
+
+
+def test_frames_are_placed_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/index-with-quizzez')
+    frame1 = browser.cssselect('.cp-area--minor > .frame')
+    frame2 = browser.cssselect('.cp-area--duo > .frame')
+    assert len(frame1) == 1
+    assert len(frame2) == 1
+
+    iframe1 = frame1[0].cssselect('iframe.frame__iframe')
+    iframe2 = frame2[0].cssselect('iframe.frame__iframe')
+    assert len(iframe1) == 1
+    assert len(iframe2) == 1
+
+    assert iframe1[0].get('src') == 'http://quiz.zeit.de/#/quiz/103'
+    assert iframe2[0].get('src') == 'http://quiz.zeit.de/#/quiz/136'
+
+
+def test_frame_dimensions(selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('{}/zeit-online/index-with-quizzez'.format(testserver.url))
+
+    frame1 = driver.find_element_by_css_selector('.cp-area--minor > .frame')
+    frame2 = driver.find_element_by_css_selector('.cp-area--duo > .frame')
+
+    if screen_size[0] == 320:
+        assert frame1.size.get('height') == 450
+        assert frame2.size.get('height') == 460
+
+    if screen_size[0] == 520:
+        assert frame1.size.get('height') == 450
+        assert frame2.size.get('height') == 460
+
+    if screen_size[0] == 768:
+        assert frame1.size.get('height') == 450
+
+    if screen_size[0] == 980:
+        assert frame1.size.get('height') == 450
