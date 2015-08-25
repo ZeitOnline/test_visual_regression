@@ -2,11 +2,6 @@
 import mock
 import pytest
 
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.ui import WebDriverWait
-
 import zeit.cms.interfaces
 
 import zeit.web.core.banner
