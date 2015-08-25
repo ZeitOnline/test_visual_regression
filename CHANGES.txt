@@ -28,11 +28,19 @@ Change log for zeit.web
 
 - ZON-2032: Correct canoncial for article, series, search and topic pages
 
+- ZON-2081: Zweite Datumsangabe entfernen
+
+- ZON-2078: Versteckte h3 entfernen
+
+- ZON-2099: Kolumnen-Nextread
+
 - FIX: Make Spiele in navigation visible again
 
 - FIX: Adapt navi classifieds test
 
 - FIX: Provide closest_substitute_image for zon-column
+
+- FIX: adapt navi classifieds test
 
 - IMPROVEMENT: Schlagworte Verpixelung on articlebottom
 
