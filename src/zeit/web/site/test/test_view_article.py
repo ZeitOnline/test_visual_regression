@@ -649,35 +649,35 @@ def test_imported_article_has_special_meta_robots(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'ZEAR')
     article_view = zeit.web.site.view_article.Article(context, mock.Mock())
-    assert article_view.meta_robots == 'noindex, follow', (
+    assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for ZEAR')
 
     # test TGS
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'TGS')
     article_view = zeit.web.site.view_article.Article(context, mock.Mock())
-    assert article_view.meta_robots == 'noindex, follow', (
+    assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for TGS')
 
     # test HaBl
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'HaBl')
     article_view = zeit.web.site.view_article.Article(context, mock.Mock())
-    assert article_view.meta_robots == 'noindex, follow', (
+    assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for HaBl')
 
     # test WIWO
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'WIWO')
     article_view = zeit.web.site.view_article.Article(context, mock.Mock())
-    assert article_view.meta_robots == 'noindex, follow', (
+    assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for WIWO')
 
     # test GOLEM
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'GOLEM')
     article_view = zeit.web.site.view_article.Article(context, mock.Mock())
-    assert article_view.meta_robots == 'noindex, follow', (
+    assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for GOLEM')
 
     # test ZEI
@@ -705,7 +705,7 @@ def test_article_of_ressort_fehler_has_special_meta_robots(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'ressort', u'Fehler')
     article_view = zeit.web.site.view_article.Article(context, mock.Mock())
-    assert article_view.meta_robots == 'noindex, follow', (
+    assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for fehler ressort')
 
     # test any other ressort

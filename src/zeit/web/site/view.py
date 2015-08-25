@@ -10,8 +10,6 @@ import zeit.web.core.view
 import zeit.web.magazin.view
 import zeit.web.site.area.spektrum
 
-import re
-
 
 def is_zon_content(context, request):
     """Custom predicate to verify, if this can be rendered via zeit.web
@@ -67,41 +65,19 @@ class Base(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def meta_robots(self):
-        # try seo presets first
-        try:
-            seo = zeit.seo.interfaces.ISEO(self.context)
-            if seo.meta_robots:
-                return seo.meta_robots
-        except (AttributeError, TypeError):
-            pass
+        # Try seo presets first
+        if self.seo_robot_override:
+            return self.seo_robot_override
 
-        # exclude certain paths from being indexed
-        path = self.request.path
-        url = self.request.url
-        exclude_folders = ['/thema/', '/test/', '/templates/', '/banner/', '/angebote/',
-            '/suche/', '/autoren/index']
-        for folder in exclude_folders:
-            if folder in path:
-                # if suche or autoren set to noindex, follow
-                if folder == '/suche/' or folder == '/autoren/index':
-                    return 'noindex, follow'
-                # if thema than only exclude following pages
-                if folder == '/thema/' and (
-                    len(re.findall('\\b.'+r'\\?p=1'+'\\b', url)) == 1 or 
-                    len(re.findall('\\b.'+r'\\?p=', url)) == 0) :
-                        return 'follow, noarchive'
-                # if angebote, we have nofollow
-                if folder == '/angebote/':
-                    if 'partnersuche' in path:
-                        return 'index, follow, noodp, noydir, noarchive'
-                    else:
-                        return 'index, nofollow, noodp, noydir, noarchive'
-                # default case for everything else
-                else:
-                    return 'noindex, follow, noodp, noydir, noarchive'
+        # Exclude certain paths from being indexed
+        path = self.request.path.startswith
 
-        # else default
-        return 'index,follow,noodp,noydir,noarchive'
+        if path('/angebote') and not path('/angebote/partnersuche'):
+            return 'index,nofollow,noodp,noydir,noarchive'
+        elif path('/banner') or path('/test') or path('/templates'):
+            return 'noindex,follow,noodp,noydir,noarchive'
+        else:
+            return 'index,follow,noodp,noydir,noarchive'
 
 
 @pyramid.view.view_config(
