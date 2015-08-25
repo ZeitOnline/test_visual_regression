@@ -25,6 +25,16 @@
         isMobileView: function() {
             return this.clientWidth < this.mobileWidth;
         },
+        getSiteParam: function( concatString ) {
+            concatString = concatString || '';
+            if ( this.isMobileView() ) {
+                if ( this.is_wrapped ) {
+                    return this.wrapped.ivwclient + concatString;
+                }
+                return "mobile" + concatString;
+            }
+            return "desktop" + concatString;
+        },
         viewport: {
             meta: document.getElementById('viewport-meta'),
             standard: document.getElementById('viewport-meta').getAttribute('content'),
