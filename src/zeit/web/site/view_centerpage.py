@@ -186,7 +186,7 @@ class Centerpage(
             return self.breadcrumbs_by_navigation(breadcrumbs)
 
         return breadcrumbs
-    
+
     @zeit.web.reify
     def regions(self):
         region_list = super(Centerpage, self).regions
