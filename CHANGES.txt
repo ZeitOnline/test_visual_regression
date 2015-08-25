@@ -4,6 +4,8 @@ Change log for zeit.web
 1.60.1 (unreleased)
 -------------------
 
+- ZON-1968: Add Iframe 50/50 Teaser
+
 - ZON-2058: Reposition comment recommendations
 
 
