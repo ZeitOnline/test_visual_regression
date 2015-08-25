@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2034: Bring back images for dynamic ranking areas
 
+- ZON-2129: integrate former noindex rules from XSLT
+
 - FIX: iqd sitebar should not again be seen on mobile
 
 - ZON-1968: Add Iframe 50/50 Teaser
