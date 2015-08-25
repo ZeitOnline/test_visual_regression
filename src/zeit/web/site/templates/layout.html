@@ -115,6 +115,7 @@
         {% endblock adplace_top %}
         <div class="page__content">
             {% profile %}
+            {% if not view.is_wrapped %}
             <header class="header" role="banner">
                 {% block navigation %}
                     {%- include "zeit.web.site:templates/inc/navigation/navigation.tpl" ignore missing -%}
@@ -122,6 +123,7 @@
                 {% block metadata %}
                 {% endblock metadata %}
             </header>
+            {% endif %}
             {% block breaking_news %}
                 {%- include "zeit.web.site:templates/inc/breaking_news.tpl" ignore missing -%}
             {% endblock breaking_news %}
