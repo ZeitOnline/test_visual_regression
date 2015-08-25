@@ -10,3 +10,17 @@
         <span class="newsteaser__product">{{ teaser.product_id or teaser.product.id | hide_none }}</span>
     </div>
 </article>
+
+{# only include ads on /news/index page, NOT on home page #}
+{% if view.banner_on and area.kind == 'overview' and layout == 'zon-newsteaser' -%}
+    {% if loop.index == 10 %}
+        <div class="newsteaser__ad">
+            {{ lama.adplace(view.banner(7), view) }}
+            {{ lama.adplace(view.banner(4), view, mobile=True) }}
+        </div>
+    {% elif loop.index == 30 %}
+        <div class="newsteaser__ad">
+            {{ lama.adplace(view.banner(8), view) }}
+        </div>
+    {% endif %}
+{% endif %}

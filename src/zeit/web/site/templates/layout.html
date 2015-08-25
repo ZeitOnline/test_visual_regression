@@ -139,6 +139,7 @@
     </div>
     {% include "zeit.web.core:templates/inc/ads/%s/finalize.html" % view.ad_delivery_type ignore missing %}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
+    {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
     {% block meetrics %}
         {% include "zeit.web.core:templates/inc/tracking/meetrics_relaunch.html" ignore missing %}
     {% endblock %}

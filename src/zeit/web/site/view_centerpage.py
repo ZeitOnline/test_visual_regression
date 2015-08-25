@@ -123,6 +123,10 @@ class Centerpage(
     """Main view class for ZEIT ONLINE centerpages."""
 
     @zeit.web.reify
+    def canonical_url(self):
+        return self.request.url
+
+    @zeit.web.reify
     def breadcrumbs(self):
         # No breadcrumbs for homepage
         if self.is_hp:
