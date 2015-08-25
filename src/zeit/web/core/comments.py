@@ -162,6 +162,7 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
     :param cid: Comment ID to calculate appropriate pagination
     :rtype: dict or None
     """
+
     thread = get_cacheable_thread(unique_id)
     if thread is None or thread['comment_count'] == 0:
         return
@@ -206,15 +207,14 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
 
     # compute page if comment id is supplied
     if cid is not None:
-        c_index = thread['index']
-        c_info = c_index[int(cid)]
-        if c_info['in_reply'] is not None:
-            c_info = c_index[int(c_info['in_reply'])]
-        c_position = c_info['shown_num']
-        page = int(math.ceil(float(c_position) / float(page_size)))
+        comment_index = thread['index']
+        root_index = comment_index[int(cid)]['root_index']
+        if sort == 'desc':
+            root_index = abs(root_index - top_level_comment_count)
+        page = int(math.ceil(float(root_index) / float(page_size)))
 
     # slice comment tree when there's more than one page
-    if page > 1:
+    if page and pages > 1:
         sorted_tree = sorted_tree[(page - 1) * page_size: page * page_size]
 
     # flatten comment tree
