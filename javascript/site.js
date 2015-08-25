@@ -50,7 +50,8 @@ require([
     'web.site/plugins/jquery.toggleBeta',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
-    'web.site/plugins/jquery.updateSignals'
+    'web.site/plugins/jquery.updateSignals',
+    'web.site/plugins/jquery.countFormchars'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         article = $( '#js-article' );
@@ -77,6 +78,7 @@ require([
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
         article.find( '.js-infobox' ).infobox();
         article.find( '.liveblog' ).liveblog();
+        $( '.js-count-formchars' ).countFormchars();
     }
 
     // search
