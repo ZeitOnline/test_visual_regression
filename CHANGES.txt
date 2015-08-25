@@ -6,13 +6,15 @@ Change log for zeit.web
 
 - ZON-2058: Reposition comment recommendations
 
+- ZON-2052: Enable DNS Prefetch for assets
+
 
 1.60.0 (2015-08-24)
 -------------------
 
 - ZON-2116: Add javascript object for wrapper apps
 
-- ZON-2076: move h1 to teasertext of paginated articles,
+- ZON-2076: Move h1 to teasertext of paginated articles,
   make teasertext page title if page is paginated
 
 - ZON-2057: Character counter above the form field
@@ -30,7 +32,7 @@ Change log for zeit.web
 
 - FIX: Adapt navi classifieds test
 
-- FIX: provide closest_substitute_image for zon-column
+- FIX: Provide closest_substitute_image for zon-column
 
 - IMPROVEMENT: Schlagworte Verpixelung on articlebottom
 
@@ -38,7 +40,7 @@ Change log for zeit.web
 
 - MAINT: Log memory usage to separate log file
 
-- FIX: adapt navi classifieds test
+- FIX: Adapt navi classifieds test
 
 
 1.59.1 (2015-08-17)
