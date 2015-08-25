@@ -205,7 +205,7 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
         if page < 1 or page > pages:
             page = 1
 
-    # compute page if comment id is supplied
+    # compute page if comment id is supplied, effectively ignoring page param
     if cid is not None:
         comment_index = thread['index']
         root_index = comment_index[int(cid)]['root_index']
