@@ -5,6 +5,7 @@
       <display_name py:pytype="str">Dorit Kowitz</display_name>
     </author>
     <references>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/cp-content/kolumne-julia-zange" />
       <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/article/simple" year="2014" issue="47" ressort="Wissen" serie="Global Drug Survey" contenttype="article" publication-date="" expires="" author="Theodor Schaarschmidt">
         <supertitle py:pytype="str">Crystal Meth</supertitle>
         <title py:pytype="str">"Die einfache Herstellung macht den Stoff unkontrollierbar"</title>
@@ -313,7 +314,7 @@
       <p>Zu ihren Kindern kam sie deshalb nicht.</p>
       <p>Ein paar Wochen nachdem Sandras Aussagen ausgewertet worden waren, holten die Polizisten auch Nancy ab und schlossen sie in einer Zelle in der Greizer Straße in Gera ein.</p>
     </division>
-    <division type="page" teaser="&quot;Ich kann mir nicht vorstellen, dass ich mein Leben lang clean bleibe&quot;">
+    <division type="page">
       <p>Es war der erste Tag seit vier Jahren, an dem sie kein Crystal nahm, und der erste seit 17 Jahren, ohne zu kiffen. Nancy zitterte, fror, schwitzte. Sie erbrach sich, sie schlief nicht, sie klapperte. Sie hatte Panikattacken. Nur der Schließer bekam das mit. Sie sagt: "Vielleicht war das gar nicht schlecht. So bleibt es in Erinnerung." Dabei sind sich nicht mal spezialisierte Mediziner sicher, welche Gefahren der kalte Entzug von Methamphetamin birgt und ob man ihn ohne Aufsicht geschehen lassen darf.</p>
       <p>Am nächsten Tag unterschrieb Nancy eine Vollmacht, die es ihren Eltern
       erlaubte, ihre Kinder zu betreuen. Die Kinder sehen durfte sie nicht. Ihr stand ein Telefonat
