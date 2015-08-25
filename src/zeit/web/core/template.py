@@ -430,9 +430,6 @@ def closest_substitute_image(image_group,
     elif image_pattern in image_group:
         # return happily if image_pattern is present
         return image_group.get(image_pattern)
-    elif image_pattern == 'zon-column' and 'zon-column.png' in image_group:
-        # return happily if image_pattern that almost fits the column exists
-        return image_group.get('zon-column.png')
 
     # Determine the image scale correlating to the provided pattern.
     scale = zope.component.getUtility(

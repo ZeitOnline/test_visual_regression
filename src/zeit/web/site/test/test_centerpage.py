@@ -188,7 +188,7 @@ def test_dynamic_centerpage_should_be_paginatable(testserver, testbrowser):
     assert text == '2'
 
 
-def test_centerpage_mardown_module_is_rendered(jinja2_env):
+def test_centerpage_markdown_module_is_rendered(jinja2_env):
     tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/thema')
