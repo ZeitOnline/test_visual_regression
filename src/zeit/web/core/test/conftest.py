@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import copy
 import json
 import os.path
 import pkg_resources
@@ -262,6 +263,15 @@ def application(application_session, zodb, request):
     # ``application``, ``testbrowser``), but if it's needed elsewhere, it has
     # to be integrated explicitly.
     request.addfinalizer(reset_connector)
+
+    def restore_settings():
+        settings = zope.component.getUtility(
+            zeit.web.core.interfaces.ISettings)
+        settings.__init__(settings_orig)
+    request.addfinalizer(restore_settings)
+    settings_orig = copy.copy(zope.component.getUtility(
+        zeit.web.core.interfaces.ISettings))
+
     return application_session
 
 
@@ -489,24 +499,6 @@ def comment_counter(app_settings, application):
         request.GET = kwargs
         return zeit.web.core.view.json_comment_count(request)
     return get_count
-
-
-@pytest.fixture(autouse=True)
-def ephemeral_settings(request):
-    # Store genuine settings
-    settings_orig = pyramid.config.settings.Settings(d=settings)
-    interface = zeit.web.core.interfaces.ISettings
-
-    def update_settings(custom_settings):
-        settings = pyramid.config.settings.Settings(d=custom_settings)
-        zope.interface.declarations.alsoProvides(settings, interface)
-        zope.component.provideUtility(settings, interface)
-
-    def restore_settings():
-        zope.interface.declarations.alsoProvides(settings_orig, interface)
-        zope.component.provideUtility(settings_orig, interface)
-    request.addfinalizer(restore_settings)
-    return update_settings
 
 
 class TestApp(webtest.TestApp):
