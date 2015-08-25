@@ -1031,3 +1031,12 @@ def test_breakpoint_sniffer_script(
     if screen_size[0] == 980:
         assert "desktop" == driver.execute_script(
             "return window.ZMO.breakpoint.get()")
+
+
+def test_app_wrapper_script(selenium_driver, testserver):
+
+    driver = selenium_driver
+    driver.get('{}/zeit-online/slenderized-index'.format(testserver.url))
+
+    ressort = driver.execute_script('return window.wrapper.getRessort()')
+    assert ressort == 'homepage'
