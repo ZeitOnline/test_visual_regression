@@ -4,7 +4,7 @@ Change log for zeit.web
 1.60.1 (unreleased)
 -------------------
 
-- ZON-2077: integrate former noindex rules from XSLT
+- ZON-2129: integrate former noindex rules from XSLT
 
 - ZON-2058: Reposition comment recommendations
 
