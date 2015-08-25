@@ -52,7 +52,7 @@
       <display_name py:pytype="str">Anne Mustermann</display_name>
       <location>Berlin</location>
     </author>
-    <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-2" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+    <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-6" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
       <bu py:pytype="str">Die ist der image sub text</bu>
       <copyright link="http://foo.de">©foo</copyright>
     </image>
