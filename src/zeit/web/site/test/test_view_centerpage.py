@@ -1033,6 +1033,39 @@ def test_breakpoint_sniffer_script(
             "return window.ZMO.breakpoint.get()")
 
 
+def test_hidden_images_must_not_be_loaded_via_js(
+        selenium_driver, testserver, screen_size):
+
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+
+    try:
+        WebDriverWait(driver, 2).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.teaser-fullwidth__media img')))
+    except TimeoutException:
+        assert False, 'Fullsize Image not loaded within 2 seconds'
+    else:
+        largeimage = driver.find_elements_by_css_selector(
+            'figure.teaser-fullwidth__media img[src]')
+        smallimage = driver.find_elements_by_css_selector(
+            'figure.teaser-small__media img[src]')
+
+        if screen_size[0] == 320:
+            assert len(smallimage) == 0
+            assert len(largeimage) == 1
+        elif screen_size[0] == 520:
+            assert len(smallimage) > 0
+            assert len(largeimage) == 1
+        elif screen_size[0] == 768:
+            assert len(smallimage) > 0
+            assert len(largeimage) == 1
+        else:
+            assert len(smallimage) > 0
+            assert len(largeimage) == 1
+
+
 def test_app_wrapper_script(selenium_driver, testserver):
 
     driver = selenium_driver
