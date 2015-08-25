@@ -54,7 +54,9 @@ Change log for zeit.web
 
 - MAINT: Log memory usage to separate log file
 
-- FIX: adapt navi classifieds test
+- FIX: Adapt navi classifieds test
+
+- FIX: Handle empty markup module title and text fields
 
 
 1.59.1 (2015-08-17)
