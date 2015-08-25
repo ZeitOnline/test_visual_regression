@@ -274,7 +274,7 @@ class LazyProxy(object):
             location = 'for {}'.format(self.__proxy__['uniqueId'])
         else:
             location = 'at {}>'.format(hex(id(self)))
-        return '<{}.{} proxy at {}>'.format(
+        return '<{}.{} proxy {}>'.format(
             cls.__module__, cls.__name__, location)
 
     def __getitem__(self, key):
