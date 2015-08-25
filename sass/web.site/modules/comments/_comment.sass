@@ -39,43 +39,6 @@ $color-comment-border: $zon_light_grey
 		+respond-min($break-tablet-min)
 			max-width: remify(660px)
 
-	&__avatar
-		border-radius: 50%
-		float: left
-		height: remify(50px)
-		margin-bottom: remify(30px)
-		width: remify(50px)
-		overflow: hidden
-		& + .comment__meta
-			margin: remify(6px) 0 0 remify(66px)
-			+respond-min($break-phablet-min)
-				margin: remify(12px) 0 0 remify(72px)
-
-	&__name
-		+link
-			color: $zon-red
-		+on-interaction
-			text-decoration: underline
-		font-size: remify(16px)
-		font-weight: bold
-		+respond-min($break-desktop-min)
-			font-size: remify(18px)
-
-	&__date
-		display: block
-		line-height: 2
-		+respond-min($break-phablet-min)
-			float: right
-
-	&__recommendations
-		color: $zon-red
-		float: right
-		font-size: remify(12px)
-		line-height: 2
-		margin-left: remify(20px)
-		&:empty
-			margin-left: 0
-
 	&__body
 		+default-article-textlink
 		clear: both
