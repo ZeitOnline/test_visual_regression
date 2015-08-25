@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2034: Bring back images for dynamic ranking areas
 
+- FIX: iqd sitebar should not again be seen on mobile
+
 - ZON-1968: Add Iframe 50/50 Teaser
 
 - ZON-2058: Reposition comment recommendations
@@ -54,6 +56,11 @@ Change log for zeit.web
 
 - MAINT: Log memory usage to separate log file
 
+<<<<<<< HEAD
+=======
+- FIX: Adapt navi classifieds test
+
+>>>>>>> 7138fb78dcac6861903c537a653cb1a63f91a3ef
 - FIX: Handle empty markup module title and text fields
 
 
