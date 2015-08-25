@@ -78,9 +78,13 @@ class Base(zeit.web.core.view.Base):
         # exclude certain paths from being indexed
         path = self.request.path
         url = self.request.url
-        exclude_folders = ['/thema/', '/test/', '/templates/', '/banner/', '/angebote/']
+        exclude_folders = ['/thema/', '/test/', '/templates/', '/banner/', '/angebote/',
+            '/suche/', '/autoren/index']
         for folder in exclude_folders:
             if folder in path:
+                # if suche or autoren set to noindex, follow
+                if folder == '/suche/' or folder == '/autoren/index':
+                    return 'noindex, follow'
                 # if thema than only exclude following pages
                 if folder == '/thema/' and (
                     len(re.findall('\\b.'+r'\\?p=1'+'\\b', url)) == 1 or 

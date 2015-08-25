@@ -828,6 +828,18 @@ def test_robots_rules_for_diverse_paths(application):
     assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
         'wrong robots for any other folder')
 
+    # search folder
+    request.path = '/suche/'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex, follow', (
+        'wrong robots for search folder')
+
+    # autoren folder
+    request.path = '/autoren/index'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex, follow', (
+        'wrong robots for autoren folder')
+
 
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
     browser = testbrowser('/zeit-online/news-teaser')
