@@ -44,6 +44,8 @@ Change log for zeit.web
 
 - FIX: adapt navi classifieds test
 
+- REVERT: FIX: provide closest_substitute_image for zon-column
+
 - IMPROVEMENT: Schlagworte Verpixelung on articlebottom
 
 - MAINT: Create properly jinja'fied tracebacks for template errors
