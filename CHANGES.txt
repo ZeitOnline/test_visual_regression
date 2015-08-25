@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-1.60.0 (unreleased)
+1.60.1 (unreleased)
+-------------------
+
+- ZON-2058: Reposition comment recommendations
+
+
+1.60.0 (2015-08-24)
 -------------------
 
 - ZON-2116: Add javascript object for wrapper apps
