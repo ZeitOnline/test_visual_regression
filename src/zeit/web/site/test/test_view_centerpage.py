@@ -1054,6 +1054,12 @@ def test_frames_are_placed_correctly(testbrowser):
     assert len(iframe1) == 1
     assert len(iframe2) == 1
 
+    frameheadline1 = frame1[0].cssselect('h2')
+    frameheadline2 = frame2[0].cssselect('h2')
+    assert len(frameheadline1) == 1
+    assert len(frameheadline2) == 0
+    assert frameheadline1[0].text == 'Quiz'
+
     assert iframe1[0].get('src') == 'http://quiz.zeit.de/#/quiz/103'
     assert iframe2[0].get('src') == 'http://quiz.zeit.de/#/quiz/136'
 

@@ -122,7 +122,7 @@
                         </author>
                     </block>
                 </container>
-                <container cp:type="frame" module="frame" visible="True" visible_mobile="True" cp:__name__="id-6d45df0c-6340-4e89-9a0a-f84b727d2152">
+                <container cp:type="frame" module="frame" title="Quiz" visible="True" visible_mobile="True" cp:__name__="id-6d45df0c-6340-4e89-9a0a-f84b727d2152">
                     <url>http://quiz.zeit.de/#/quiz/103</url>
                 </container>
             </region>

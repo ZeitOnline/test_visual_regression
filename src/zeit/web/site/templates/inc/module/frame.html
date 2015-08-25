@@ -1,4 +1,6 @@
 <section class="frame">
-    <h2 class="frame__title visually-hidden">Quiz</h2>
+    {% if module.title %}
+        <h2 class="frame__title visually-hidden">{{ module.title }}</h2>
+    {% endif %}
     <iframe class="frame__iframe" src="{{ module.src }}"></iframe>
 </section>
