@@ -1118,3 +1118,16 @@ def test_frame_dimensions(selenium_driver, testserver, screen_size):
 
     if screen_size[0] == 980:
         assert frame1.size.get('height') == 450
+
+
+def test_teaser_for_columns_without_authorimage_should_be_rendered_default(
+        testbrowser):
+    browser = testbrowser('/zeit-online/teaser-columns-without-image')
+    teasers = browser.cssselect('main article')
+    assert len(teasers) == 10
+
+    assert len(browser.cssselect('.teaser-fullwidth-column')) == 0
+    assert len(browser.cssselect('.teaser-large-column')) == 0
+    assert len(browser.cssselect('.teaser-small-column')) == 0
+    assert len(browser.cssselect('.teaser-small-column-minor')) == 0
+    assert len(browser.cssselect('.teaser-small-column-parquet')) == 0
