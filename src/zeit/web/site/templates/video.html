@@ -8,6 +8,7 @@
         data-video-size="large"
         data-video-page-url="{{ view.content_url }}{% if view.slug %}/{{ view.slug }}{% endif %}"
         itemtype="http://schema.org/VideoObject" itemscope>
+        {% profile %}
 
         <meta itemprop="playerType" content="HTML5 Flash">
         {% if view.iso_duration %}
@@ -44,7 +45,7 @@
 
             </div>
         </div>
-
+        {% endprofile %}
     </article>
 {% endblock %}
 
