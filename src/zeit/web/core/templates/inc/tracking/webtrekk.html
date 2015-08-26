@@ -61,6 +61,12 @@
             14: "{{ 'alt' if 'zeitmz' in view.banner_channel else 'neu'  }}"
         };
 
+        {% if view.is_wrapped %}
+        wt.customSessionParameter = {
+            1: window.ZMO.wrapped.client
+        };
+        {% endif %}
+
         wt.contentId = Z_WT_KENNUNG;
         wt.sendinfo();
     }
