@@ -204,6 +204,11 @@ def test_webtrekk_series_tag_is_set_corectly(testserver, testbrowser):
             '06') % (testserver.host, testserver.port) in browser.contents
 
 
+def test_webtrekk_has_session_parameter(testserver, testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index?app-content')
+    assert '1: window.ZMO.wrapped.client' in browser.contents
+
+
 @pytest.mark.xfail(reason='tracking scripts & pixels may timeout')
 def test_ivw_tracking_for_mobile_and_desktop(
         selenium_driver, testserver, monkeypatch):
