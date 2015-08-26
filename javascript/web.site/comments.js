@@ -328,6 +328,18 @@ define([ 'jquery' ], function( $ ) {
             .velocity( 'slideUp', slideDuration );
     },
 
+    hideCommentReplies = function() {
+        var $replyThreads = $commentsBody
+            .find( '.js-comment-toplevel + .comment--indented + .comment--indented' );
+
+        $replyThreads.each( function() {
+            $( this ).prev( '.comment--indented' ) // get first reply
+                .nextUntil( '.js-comment-toplevel' ) // get other replies
+                .filter( '.comment--indented' ) // filter to remove ads from result
+                .hide();
+        } );
+    },
+
     /**
      * comments.js: initialize
      * @function init
@@ -355,6 +367,8 @@ define([ 'jquery' ], function( $ ) {
 
         // disable submit buttons of required fields
         $comments.find( '.js-required' ).each( enableForm );
+
+        hideCommentReplies();
 
         // register event handlers
         $comments.on( 'submit', '.js-submit-comment', submitComment );
