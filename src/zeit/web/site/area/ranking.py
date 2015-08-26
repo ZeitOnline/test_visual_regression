@@ -15,6 +15,7 @@ import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core.block
+import zeit.web.core.date
 import zeit.web.core.template
 
 
@@ -32,12 +33,6 @@ FIELDS = ' '.join([
 ])
 
 
-FIELD_MAP = [
-    (u'supertitle', u'teaserSupertitle'),
-    (u'title', u'teaserTitle')
-]
-
-
 ORDERS = collections.defaultdict(
     lambda: 'last-semantic-change desc', {
         'relevanz': 'score desc',
@@ -49,7 +44,7 @@ ORDERS = collections.defaultdict(
 class IRanking(zeit.content.cp.interfaces.IArea):
 
     sort_order = zope.schema.TextLine(
-        title=u'Search result order', default=u'relevanz', required=False)
+        title=u'Search result order', default=u'aktuell', required=False)
 
     raw_query = zope.schema.Text(
         title=u'Raw solr query', default=None, required=False)
@@ -107,25 +102,17 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                     block) or not len(docs):
                 result.append(block)
                 continue
-            context = self.document_hook(docs.popleft())
+            unique_id = docs.popleft().get('uniqueId')
             try:
-                block.insert(0, zeit.cms.interfaces.ICMSContent(context))
+                block.insert(0, zeit.cms.interfaces.ICMSContent(unique_id))
             except TypeError:
-                log.debug('Corrupted search result', context.get('uniqueId'))
+                log.debug('Corrupted search result', unique_id)
                 continue
             result.append(block)
         return result
 
     def _build_query(self):
         return self.raw_query
-
-    def document_hook(self, doc):
-        for source, target in FIELD_MAP:
-            try:
-                doc[target] = doc[source]
-            except KeyError:
-                continue
-        return doc
 
     @property
     def placeholder(self):
