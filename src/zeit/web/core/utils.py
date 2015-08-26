@@ -270,8 +270,12 @@ class LazyProxy(object):
             cls = self.__origin__.__class__
         else:
             cls = self.__istack__[-1]
-        return '<{}.{} proxy at {}>'.format(
-            cls.__module__, cls.__name__, hex(id(self)))
+        if 'uniqueId' in self.__proxy__:
+            location = 'for {}'.format(self.__proxy__['uniqueId'])
+        else:
+            location = 'at {}>'.format(hex(id(self)))
+        return '<{}.{} proxy {}>'.format(
+            cls.__module__, cls.__name__, location)
 
     def __getitem__(self, key):
         if not self.__exposed__ or key not in self.__origin__:
