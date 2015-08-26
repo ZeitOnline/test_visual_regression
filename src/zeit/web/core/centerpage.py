@@ -278,15 +278,17 @@ class LocalVideoImage(object):
         return instance
 
     def __init__(self, video_url, video_id):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         self.url = video_url or ''
         self.video_id = video_id
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        self.filename = "{}/{}".format(
+        self.mimeType = 'image/jpeg'
+        self.format = 'jpeg'
+        self.__name__ = '{}/{}'.format(
             conf.get('brightcove_image_cache', tempfile.gettempdir()),
             md5.new(self.url).hexdigest())
 
     def isfile(self):
-        return os.path.isfile(self.filename)
+        return os.path.isfile(self.__name__)
 
     def fetch(self):
         if self.isfile():
@@ -305,8 +307,8 @@ class LocalVideoImage(object):
             with self.open('w+') as fh:
                 fh.write(content)
                 log.debug(
-                    "Save brightcove image {} for {} to local file {}".format(
-                        self.url, self.video_id, self.filename))
+                    'Save brightcove image {} for {} to local file {}'.format(
+                        self.url, self.video_id, self.__name__))
         except (IOError, AttributeError, ContentTooShort):
             raise VideoImageNotFound()
 
@@ -322,13 +324,13 @@ class LocalVideoImage(object):
         except:
             raise VideoImageNotFound()
 
-    def open(self, mode="r"):
-        return open(self.filename, mode)
+    def open(self, mode='r'):
+        return open(self.__name__, mode)
 
     @zeit.web.reify
     def size(self):
         if self.isfile():
-            return os.stat(self.filename).st_size
+            return os.stat(self.__name__).st_size
         return 0
 
     def getImageSize(self):  # NOQA
