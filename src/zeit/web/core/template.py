@@ -46,7 +46,7 @@ def get_variant(unique_id, variant_id):
 
 
 @zeit.web.register_filter
-def get_image(module, content=None, fallback=True):
+def get_image(module, content=None, fallback=True, default='default'):
     try:
         content = content or first_child(module)
         imagegroup = zeit.content.image.interfaces.IImages(content).image
