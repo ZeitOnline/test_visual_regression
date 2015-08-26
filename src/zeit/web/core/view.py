@@ -334,9 +334,9 @@ class Base(object):
 
     @zeit.web.reify
     def is_wrapped(self):
-        return ('appcontent.zeit.de' in self.request.host_url) or (
+        return ('app-content.zeit.de' in self.request.host_url) or (
             self.is_dev_environment and (
-                'appcontent' in self.request.query_string))
+                'app-content' in self.request.query_string))
 
     @zeit.web.reify
     def iqd_mobile_settings(self):
