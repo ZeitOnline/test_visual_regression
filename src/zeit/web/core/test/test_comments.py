@@ -165,6 +165,7 @@ def test_thread_should_have_valid_page_information(application, testserver):
     thread = zeit.web.core.comments.get_thread(unique_id, page=3, cid=2968742)
     assert thread['pages']['current'] == 2
 
+    # comment id AND sort descendant
     thread = zeit.web.core.comments.get_thread(unique_id, sort='desc',
                                                cid=2968742)
     assert thread['pages']['current'] == 1
