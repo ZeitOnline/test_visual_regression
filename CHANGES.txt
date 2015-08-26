@@ -4,9 +4,9 @@ Change log for zeit.web
 1.60.1 (unreleased)
 -------------------
 
-- ZON-2129: integrate former noindex rules from XSLT
+- ZON-2034: Bring back images for dynamic ranking areas
 
-- FIX: iqd sitebar should not again be seen on mobile
+- ZON-2129: integrate former noindex rules from XSLT
 
 - ZON-1968: Add Iframe 50/50 Teaser
 
@@ -14,7 +14,9 @@ Change log for zeit.web
 
 - ZON-2052: Enable DNS Prefetch for assets
 
-- ZON-2050: do not load hidden images
+- ZON-2050: Do not load hidden images
+
+- FIX: iqd sitebar should not again be seen on mobile
 
 
 1.60.0 (2015-08-24)
@@ -48,7 +50,9 @@ Change log for zeit.web
 
 - FIX: Provide closest_substitute_image for zon-column
 
-- FIX: adapt navi classifieds test
+- FIX: Adapt navi classifieds test
+
+- FIX: Handle empty markup module title and text fields
 
 - REVERT: FIX: provide closest_substitute_image for zon-column
 
@@ -57,10 +61,6 @@ Change log for zeit.web
 - MAINT: Create properly jinja'fied tracebacks for template errors
 
 - MAINT: Log memory usage to separate log file
-
-- FIX: Adapt navi classifieds test
-
-- FIX: Handle empty markup module title and text fields
 
 
 1.59.1 (2015-08-17)
