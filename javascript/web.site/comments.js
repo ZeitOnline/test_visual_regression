@@ -333,10 +333,11 @@ define([ 'jquery' ], function( $ ) {
             .find( '.js-comment-toplevel + .comment--indented + .comment--indented' );
 
         $replyThreads.each( function() {
-            $( this ).prev( '.comment--indented' ) // get first reply
-                .nextUntil( '.js-comment-toplevel' ) // get other replies
+            var $firstReply = $( this ).prev( '.comment--indented' );
+            $firstReply.nextUntil( '.js-comment-toplevel' ) // get other replies
                 .filter( '.comment--indented' ) // filter to remove ads from result
                 .hide();
+            $firstReply.addClass( 'comment--wrapped' );
         } );
     },
 

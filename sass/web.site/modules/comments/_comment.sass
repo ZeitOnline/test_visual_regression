@@ -21,6 +21,22 @@ $color-comment-border: $zon_light_grey
 	&--author + &--author // keep border-top between consecutive author comments
 		border-top-width: 1px
 
+	&--wrapped
+		overflow: hidden
+		position: relative
+		cursor: pointer
+		max-height: remify(240px)
+
+		&:before
+			+background-image(linear-gradient(0deg, rgba($white, 1) 1.5em, rgba($white, 0) 100%))
+			content: ""
+			position: absolute
+			left: 0
+			right: 0
+			bottom: 0
+			height: remify(100px)
+			z-index: 1
+
 	&__ad
 		background: $zon_lighter_grey
 		margin: 1px 0 // 1px creates white line between ad and author comments
