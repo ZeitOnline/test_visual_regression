@@ -4,6 +4,8 @@ Change log for zeit.web
 1.60.1 (unreleased)
 -------------------
 
+- ZON-2129: integrate former noindex rules from XSLT
+
 - FIX: iqd sitebar should not again be seen on mobile
 
 - ZON-1968: Add Iframe 50/50 Teaser

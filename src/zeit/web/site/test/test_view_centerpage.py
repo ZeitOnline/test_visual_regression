@@ -766,6 +766,55 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     assert link[0].get('href') == url + '?p=2'
 
 
+def test_robots_rules_for_angebote_paths(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = mock.Mock()
+
+    # usual angebot
+    request.path = '/angebote/immobilien/test'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'index,nofollow,noodp,noydir,noarchive', (
+        'wrong robots for usual angebot')
+
+    # partnersuche
+    request.path = '/angebote/partnersuche/test'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for partnersuche')
+
+
+def test_robots_rules_for_diverse_paths(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = mock.Mock()
+    request.url = 'http://localhost'
+
+    # test folder
+    request.path = '/test/'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for test folder')
+
+    # templates folder
+    request.path = '/templates/'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for templates folder')
+
+    # banner folder
+    request.path = '/banner/'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for banner folder')
+
+    # any folder
+    request.path = '/any/'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for any other folder')
+
+
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
     browser = testbrowser('/zeit-online/news-teaser')
 

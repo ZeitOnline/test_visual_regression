@@ -106,7 +106,7 @@ class Byline(list):
 
 
 @grokcore.component.implementer(ITeaserByline)
-@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
+@grokcore.component.adapter(zeit.cms.content.interfaces.ICommonMetadata)
 class TeaserByline(Byline):
     pass
 
@@ -120,7 +120,7 @@ class LinkTeaserByline(TeaserByline):
 
 
 @grokcore.component.implementer(IContentByline)
-@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
+@grokcore.component.adapter(zeit.cms.content.interfaces.ICommonMetadata)
 class ContentByline(Byline):
     pass
 
