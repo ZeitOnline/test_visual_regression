@@ -117,7 +117,7 @@ class IBannerlist(zope.interface.Interface):
     """A list of ad places"""
 
 
-class INextread(zope.interface.Interface):
+class INextread(IFrontendBlock):
     """Nextread teaser block must be similar to zeit.content.cp.TeaserBlock"""
 
 

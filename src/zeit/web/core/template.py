@@ -60,16 +60,15 @@ def get_image(module, content=None, fallback=True):
         default_id = conf.get('default_teaser_images')
         imagegroup = zeit.cms.interfaces.ICMSContent(default_id, None)
 
-    if zeit.web.core.interfaces.INextread.providedBy(module):
-        # XXX Yeah, that's what you get when you use teasers on a content page
+    if zeit.web.core.interfaces.IFrontendBlock.providedBy(module):
         layout = module
     else:
         layout = zeit.content.cp.layout.get_layout(get_layout(module))
 
-    if layout is not None:
+    try:
         image_pattern = layout.image_pattern
-    else:
-        image_pattern = 'default'
+    except AttributeError:
+        image_pattern = default
 
     return get_variant(imagegroup.uniqueId, image_pattern)
 
