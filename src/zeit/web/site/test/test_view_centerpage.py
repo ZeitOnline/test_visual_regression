@@ -1172,7 +1172,7 @@ def test_frame_dimensions(selenium_driver, testserver, screen_size):
         assert frame1.size.get('height') == 450
 
 
-def test_teaser_for_columns_without_authorimage_should_be_rendered_default(
+def test_teaser_for_column_without_authorimage_should_be_rendered_default(
         testbrowser):
     browser = testbrowser('/zeit-online/teaser-columns-without-authorimage')
     teasers = browser.cssselect('main article')
