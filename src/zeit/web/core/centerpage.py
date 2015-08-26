@@ -297,8 +297,8 @@ class LocalVideoImage(object):
             # reasons.
             raise VideoImageNotFound()
         try:
-            request = urllib2.urlopen(self.url, timeout=1.5)
-            content = request.read()
+            resp = urllib2.urlopen(self.url, timeout=1.5)
+            content = resp.read()
             if len(content) <= 20:
                 raise ContentTooShort()
 

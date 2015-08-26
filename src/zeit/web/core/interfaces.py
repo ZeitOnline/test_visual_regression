@@ -198,7 +198,7 @@ class IReach(zope.interface.Interface):
 
 class IMetrics(zope.interface.Interface):
 
-    def time(identifier):
+    def time(self, identifier):
         """Context manager that collects timing information.
         Pass a full dotted name as identifier.
 
@@ -209,19 +209,19 @@ class IMetrics(zope.interface.Interface):
             # do things
         """
 
-    def increment(identifier, delta=1):
+    def increment(self, identifier, delta=1):
         """Increments the given counter."""
 
-    def set_gauge(identifier, value):
+    def set_gauge(self, identifier, value):
         """Sets a gauge value."""
 
     # low-level access for more involved operations.
 
-    def timer(identifier=None):
+    def timer(self, identifier=None):
         """Returns a ``statsd.Timer``."""
 
-    def counter(identifier=None):
+    def counter(self, identifier=None):
         """Returns a ``statsd.Counter``."""
 
-    def gauge(identifier=None):
+    def gauge(self, identifier=None):
         """Returns a ``statsd.Gauge``."""

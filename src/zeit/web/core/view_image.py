@@ -105,7 +105,7 @@ class SpektrumImage(zeit.web.core.view.Base):
         path = '/'.join(self.request.matchdict.get('path')).encode('utf-8')
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         image_url = '{}/{}'.format(conf.get('spektrum_img_host', ''), path)
-        _, file_name = path.rsplit('/', 1)
+        file_name = path.rsplit('/', 1).pop()
 
         try:
             fileobj = urllib2.urlopen(image_url, timeout=4)
