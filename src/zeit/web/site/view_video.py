@@ -44,14 +44,6 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
         return breadcrumbs
 
     @zeit.web.reify
-    def image_group(self):
-        return zeit.content.image.interfaces.IImageGroup(self.context)
-
-    @zeit.web.reify
-    def video_still(self):
-        return self.image_group['still.jpg']
-
-    @zeit.web.reify
     def _seconds(self):
         try:
             return self.context.renditions[0].video_duration / 1000
