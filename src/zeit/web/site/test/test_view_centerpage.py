@@ -1122,7 +1122,7 @@ def test_frame_dimensions(selenium_driver, testserver, screen_size):
 
 def test_teaser_for_columns_without_authorimage_should_be_rendered_default(
         testbrowser):
-    browser = testbrowser('/zeit-online/teaser-columns-without-image')
+    browser = testbrowser('/zeit-online/teaser-columns-without-authorimage')
     teasers = browser.cssselect('main article')
     # we want to be sure that there are teasers at all.
     assert len(teasers) == 10
