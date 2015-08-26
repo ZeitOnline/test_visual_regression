@@ -107,8 +107,11 @@ def test_video_page_should_feature_schema_org_props(testserver, testbrowser):
         '{}/video/2015-01/3537342483001'.format(testserver.url)).document
     assert doc.xpath('//meta[@itemprop="duration" and @content="PT436S"]')
     assert re.match(r'.*video/2015-01/3537342483001/imagegroup/.*/still.jpg',
-                    doc.xpath('//meta[@itemprop="thumbnail"]/@content')[0])
+                    doc.xpath('//meta[@itemprop="thumbnailUrl"]/@content')[0])
     assert doc.xpath('//meta[@itemprop="duration" and @content="PT436S"]')
+    assert doc.xpath('//meta[@itemprop="playerType" and @content="HTML5 Flash"]')
+    assert doc.xpath(u'//meta[@itemprop="name" and @content="Roboter Myon übernimmt Opernrolle"]')
+    assert doc.xpath('//meta[@itemprop="uploadDate" and @content="2015-01-22T10:27:01+01:00"]')
 
 
 def test_video_page_should_print_out_video_headline(testserver, testbrowser):
