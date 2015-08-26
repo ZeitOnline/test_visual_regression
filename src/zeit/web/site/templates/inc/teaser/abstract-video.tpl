@@ -1,17 +1,17 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% set teaser_url = teaser | create_url %}
 <article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="{{ teaser.__name__ }}"
-    {% if teaser.serie and teaser.serie.serienname %} data-video-series="{{ teaser.serie.serienname|attr_safe }}"{% endif %}
+    {% if teaser.serie and teaser.serie.serienname %} data-video-series="{{ teaser.serie.serienname | attr_safe }}"{% endif %}
     {% block data_video_size %}{% endblock %}
-    data-video-provider="brightcove" {#only brightcove is used currently#}
-    data-video-page-url="{{ teaser_url }}"
-    >
+    data-video-provider="brightcove" {# only brightcove is used currently #}
+    data-video-page-url="{{ teaser_url }}">
     <a class="{{ self.layout() }}__combined-link" href="{{ teaser_url }}">
         <div class="{{ self.layout() }}__container">
-            {% block video_thumbnail %}
-                {% set image = (teaser | get_image_group)['still.jpg'] %}
-                {% include "zeit.web.site:templates/inc/teaser_asset/image_videostage.tpl" %}
-            {% endblock video_thumbnail %}
+            {% block teaser_media_position_before_title %}
+                {% set image = module | get_image(teaser) %}
+                {% include "zeit.web.site:templates/inc/teaser_asset/image_{}.tpl".format(self.layout()) ignore missing %}
+                {# todo: image->ig #}
+            {% endblock %}
             <div class="{{ self.layout() }}__inner">
                 {% block playbutton %}
                     {{ lama.playbutton('block', teaser.videoDuration) }}
