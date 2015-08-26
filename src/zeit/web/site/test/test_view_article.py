@@ -637,3 +637,80 @@ def test_old_archive_text_without_divisions_should_render_paragraphs(
     browser = testbrowser('/zeit-online/article/alter-archivtext')
     assert len(browser.cssselect('.article__item.paragraph')) == 7
     assert len(browser.cssselect('.article-pager__number')) == 3
+
+
+def test_imported_article_has_special_meta_robots(
+        application, monkeypatch):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+
+    # test ZEAR
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'ZEAR')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'noindex,follow', (
+        'wrong robots for ZEAR')
+
+    # test TGS
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'TGS')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'noindex,follow', (
+        'wrong robots for TGS')
+
+    # test HaBl
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'HaBl')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'noindex,follow', (
+        'wrong robots for HaBl')
+
+    # test WIWO
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'WIWO')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'noindex,follow', (
+        'wrong robots for WIWO')
+
+    # test GOLEM
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'GOLEM')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'noindex,follow', (
+        'wrong robots for GOLEM')
+
+    # test ZEI
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'ZEI')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for ZEI')
+
+    # test no product id
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', None)
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for none product article')
+
+
+def test_article_of_ressort_fehler_has_special_meta_robots(
+        application, monkeypatch):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+
+    # test ressort Fehler
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'Fehler')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'noindex,follow', (
+        'wrong robots for fehler ressort')
+
+    # test any other ressort
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'Politik')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for any other ressort')

@@ -5,6 +5,7 @@
       <display_name py:pytype="str">Dorit Kowitz</display_name>
     </author>
     <references>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/cp-content/kolumne-julia-zange" />
       <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/article/simple" year="2014" issue="47" ressort="Wissen" serie="Global Drug Survey" contenttype="article" publication-date="" expires="" author="Theodor Schaarschmidt">
         <supertitle py:pytype="str">Crystal Meth</supertitle>
         <title py:pytype="str">"Die einfache Herstellung macht den Stoff unkontrollierbar"</title>

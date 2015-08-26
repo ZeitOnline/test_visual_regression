@@ -4,9 +4,17 @@ Change log for zeit.web
 1.60.1 (unreleased)
 -------------------
 
+- ZON-2129: integrate former noindex rules from XSLT
+
+- FIX: iqd sitebar should not again be seen on mobile
+
+- ZON-1968: Add Iframe 50/50 Teaser
+
 - ZON-2058: Reposition comment recommendations
 
 - ZON-2052: Enable DNS Prefetch for assets
+
+- ZON-2050: do not load hidden images
 
 
 1.60.0 (2015-08-24)
@@ -28,11 +36,21 @@ Change log for zeit.web
 
 - ZON-2032: Correct canoncial for article, series, search and topic pages
 
+- ZON-2081: Zweite Datumsangabe entfernen
+
+- ZON-2078: Versteckte h3 entfernen
+
+- ZON-2099: Kolumnen-Nextread
+
 - FIX: Make Spiele in navigation visible again
 
 - FIX: Adapt navi classifieds test
 
 - FIX: Provide closest_substitute_image for zon-column
+
+- FIX: adapt navi classifieds test
+
+- REVERT: FIX: provide closest_substitute_image for zon-column
 
 - IMPROVEMENT: Schlagworte Verpixelung on articlebottom
 
@@ -41,6 +59,8 @@ Change log for zeit.web
 - MAINT: Log memory usage to separate log file
 
 - FIX: Adapt navi classifieds test
+
+- FIX: Handle empty markup module title and text fields
 
 
 1.59.1 (2015-08-17)
