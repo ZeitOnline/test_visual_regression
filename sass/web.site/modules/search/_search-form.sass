@@ -22,7 +22,9 @@ $dropdown-width: remify(160px)
 		padding: remify(10px)
 		+flex-grow(1)
 		&:focus,
-		&:focus+.search-submit
+		&:hover,
+		&:focus+.search-submit,
+		&:hover+.search-submit
 			border-color: $zon_mid_grey
 		&:focus
 			background-color: $white
