@@ -36,6 +36,8 @@ Change log for zeit.web
 
 - ZON-2055: Filter comments by recommendations and editorial promotions
 
+- ZON-1939: Search page polishing
+
 - ZON-2032: Correct canoncial for article, series, search and topic pages
 
 - ZON-2081: Zweite Datumsangabe entfernen
