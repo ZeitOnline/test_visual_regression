@@ -349,35 +349,92 @@ class VideoImageNotFound(Exception):
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
-class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
-                      zeit.web.core.utils.nsdict):
-
-    master_image = None
+class ImageGroup(zeit.content.image.imagegroup.ImageGroup,
+                 zeit.web.core.utils.nsdict):
 
     def __init__(self, video):
-        super(VideoImageGroup, self).__init__()
+        super(ImageGroup, self).__init__()
         self.uniqueId = '{}/imagegroup/'.format(video.uniqueId)
-        for image_pattern, src in [('still', video.video_still),
-                                   ('thumbnail', video.thumbnail)]:
-            image = zeit.web.core.block.BaseImage()
-            try:
-                image.image = LocalVideoImage(src, video.uniqueId)
-            except VideoImageNotFound:
-                continue
-
-            image.src = src
+        self.copyrights = copyrights = (video.copyrights or '').strip('\n')
+        self.teaserText = teaserText = (video.teaserText or '').strip('\n')
+        self.teaserTitle = teaserTitle = (video.teaserTitle or '').strip('\n')
+        self.title = title = (video.title or '').strip('\n')
+        try:
+            image = LocalVideoImage(video.video_still, video.uniqueId)
+        except VideoImageNotFound:
+            image = None
+        else:
+            image.src = video.video_still
             image.mimeType = 'image/jpeg'
-            image.image_pattern = 'brightcove-{}'.format(image_pattern)
-            image.copyright = video.copyrights
-            image.caption = (video.teaserText or '').strip('\n')
-            image.title = (video.teaserTitle or '').strip('\n')
-            image.alt = (video.title or '').strip('\n')
-            file_name = '{}.jpg'.format(image_pattern)
-            image.uniqueId = '{}{}'.format(self.uniqueId, file_name)
-            self[file_name] = image
+            image.image_pattern = 'wide-large'
+            image.copyright = copyrights
+            image.caption = teaserText
+            image.title = teaserTitle
+            image.alt = title
+            image.uniqueId = '{}{}'.format(self.uniqueId, 'video_still.jpg')
+        self.master_image = image
+
+    def __getitem__(self, key):
+        return self.create_variant_image(key)
 
     def __repr__(self):
         return object.__repr__(self)
+
+    def __len__(self):
+        return int(bool(self.master_image))
+
+    def __contains__(self, key):
+        return False  # Video imagegroups *only* contain master images.
+
+    @property
+    def master_image(self):
+        return self._master_image
+
+    @master_image.setter
+    def master_image(self, value):
+        self._master_image = value
+
+
+VideoImageGroup = ImageGroup  # XXX This should move out of centerpage.py
+
+
+# @grokcore.component.implementer(
+#     zeit.content.image.interfaces.IRepositoryImageGroup)
+# @grokcore.component.adapter(VideoImageGroup)
+# def videoimagegroup_to_repositoryimagegroup(group):
+#     return group
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
+class VideoImages(object):
+
+    def __init__(self, video):
+        self.context = video
+        self.image = zeit.content.image.interfaces.IImageGroup(video)
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImageMetadata)
+@grokcore.component.adapter(VideoImageGroup)
+class VideoImageMetaData(object):
+
+    def __init__(self, group):
+        self.alt = group.title
+        self.caption = group.teaserText
+        self.title = group.teaserTitle
+        self.copyrights = group.copyrights
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IMasterImage)
+@grokcore.component.adapter(VideoImageGroup)
+def videoimagegroup_to_masterimage(group):
+    return group.master_image
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.ITransform)
+@grokcore.component.adapter(LocalVideoImage)
+def videoimage_to_imagetransform(image):
+    return zeit.content.image.transform.ImageTransform(image)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
