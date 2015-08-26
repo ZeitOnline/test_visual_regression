@@ -8,13 +8,11 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="{{ view.title or 'ZEIT ONLINE' }}">
 <meta property="og:description" content="{{ view.subtitle or '' }}">
-<meta property="og:url" content="{{ view.content_url or 'http://' + request.host + request.path_info }}">
-{% if view.image_group -%}
-    <meta property="og:image" content="{{ view.image_group|sharing_image_url(image_pattern='og-image') }}">
-    <link itemprop="image" rel="image_src" href="{{ view.image_group|sharing_image_url(image_pattern='og-image') }}">
-    {% if view.twitter_card_type == 'summary' -%}
-        <meta name="twitter:image:src" content="{{ view.image_group|sharing_image_url(image_pattern='twitter-image-small') }}">
-    {% else -%}
-        <meta name="twitter:image:src" content="{{ view.image_group|sharing_image_url(image_pattern='twitter-image-large') }}">
-    {% endif -%}
-{% endif -%}
+<meta property="og:url" content="{{ view.content_url }}">
+{% set image = view | get_image(view.context, default='wide') %}
+{% if image -%}
+    {% set source = request.route_url('home') + image.path %}
+    <meta property="og:image" content="{{ source }}">
+    <meta name="twitter:image:src" content="{{ source }}">
+    <link itemprop="image" rel="image_src" href="{{ source }}">
+{%- endif %}
