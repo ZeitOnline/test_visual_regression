@@ -13,7 +13,8 @@
         {% if view.iso_duration %}
             <meta itemprop="duration" content="{{ view.iso_duration }}">
         {% endif %}
-        <meta itemprop="thumbnail" content="{{ view.video_still | default_image_url }}">
+        {% set image = view | get_image(view.context, default='wide') %}
+        <meta itemprop="thumbnail" content="{{ view.request.route_url('home') + image.path }}">
 
         {{ vima.brightcove_video_tag(view, iframe=True, expanded=True) }}
 
