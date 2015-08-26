@@ -16,6 +16,9 @@ Change log for zeit.web
 
 - ZON-2050: Do not load hidden images
 
+- ZON-2011: Use default style/template on column teaser and article
+  if there is no author image
+
 - FIX: iqd sitebar should not again be seen on mobile
 
 
