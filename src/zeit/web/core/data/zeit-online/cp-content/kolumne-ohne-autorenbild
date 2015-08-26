@@ -120,9 +120,9 @@
     <title>Mitleidsloser ökonomischer Purismus schadet Europa</title>
     <subtitle>Deutschland sollte weniger orthodox Wirtschaftspolitik betreiben und mehr Nachsicht mit den Nachbarn haben. Rigides Sparen allein hilft nicht und nützt den Europhoben.</subtitle>
     <division type="page">
-      <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-3" type="png" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
-        <bu py:pytype="str">Die ist der image sub text</bu>
-        <copyright link="http://foo.de">©foo</copyright>
+      <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-2" type="png" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+        <bu py:pytype="str">Das ist das Artikelbild, das an der Kolumne hängt, deren Autor kein Autorenbild hat.</bu>
+        <copyright link="http://foo.de">©Benjamin von Stuckradt-Barre</copyright>
       </image>
       <p>Derzeit macht es wenig Freude, in internationalen Zeitungen die Urteile über Deutschland und seine Wirtschaftspolitik zu lesen. "Globaler Wirtschaftsterrorismus"
 wird da dem Bundesfinanzminister Wolfgang Schäuble vorgeworfen. "Fiskalischer
