@@ -131,8 +131,7 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
     assert '9: "zeitmz/essenundtrinken/article",' in browser.contents
     assert '10: "yes",' or '10: "",' in browser.contents
     assert '11: "",' in browser.contents
-    assert '12: window.ZMO.isMobileView() ? "mobile.site" : "desktop.site",' \
-        in browser.contents
+    assert '12: window.ZMO.getSiteParam(\'.site\'),' in browser.contents
     assert '13: window.ZMO.breakpoint.getTrackingBreakpoint(),' \
         in browser.contents
     assert '14: "alt"' in browser.contents
