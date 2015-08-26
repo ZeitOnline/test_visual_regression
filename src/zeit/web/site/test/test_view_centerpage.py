@@ -167,8 +167,11 @@ def test_small_teaser_should_display_no_image_on_mobile(
 def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
     browser = testbrowser('/zeit-online/fullwidth-teaser')
     teaser = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
+    teaser_column = browser.cssselect(
+        '.cp-area.cp-area--solo .teaser-fullwidth-column')
 
-    assert len(teaser) == 3
+    assert len(teaser) == 4
+    assert len(teaser_column) == 1
 
 
 def test_fullwidth_teaser_image_should_have_attributes_for_mobile_variant(
