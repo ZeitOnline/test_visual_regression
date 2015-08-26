@@ -8,9 +8,8 @@
     <a class="{{ self.layout() }}__combined-link" href="{{ teaser_url }}">
         <div class="{{ self.layout() }}__container">
             {% block teaser_media_position_before_title %}
-                {% set image = module | get_image(teaser) %}
+                {% set image = module | get_image(teaser, default='wide') %}
                 {% include "zeit.web.site:templates/inc/teaser_asset/image_{}.tpl".format(self.layout()) ignore missing %}
-                {# todo: image->ig #}
             {% endblock %}
             <div class="{{ self.layout() }}__inner">
                 {% block playbutton %}
@@ -18,10 +17,10 @@
                 {% endblock playbutton %}
                 <h2 class="{{ self.layout() }}-title">
                     <span class="{{ self.layout() }}-title__kicker">
-                        {{- teaser.supertitle | hide_none -}}
+                        {{ teaser.supertitle | hide_none }}
                     </span>
                     <span class="{{ self.layout() }}-title__title">
-                        {{- teaser.teaserTitle | hide_none -}}
+                        {{ teaser.teaserTitle | hide_none }}
                     </span>
                     {% block inlineplaybutton %}
                         {{ lama.playbutton('inline', teaser.videoDuration) }}
