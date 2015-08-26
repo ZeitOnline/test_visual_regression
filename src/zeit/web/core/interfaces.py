@@ -5,6 +5,21 @@ import zope.interface.common.sequence
 import zeit.edit.interfaces
 
 
+class IFrontendBlock(zope.interface.Interface):
+    """An item that provides data from an article-body block to a Jinja macro.
+
+    This interface is both a marker for identifying front-end objects
+    representing blocks, and a mechanical detail of using the ZCA to construct
+    such a front-end representation of a given vivi article-body block.
+    """
+
+
+class IFrontendHeaderBlock(zope.interface.Interface):
+    """A HeaderBlock identifies elements that appear only in headers of
+    the content.
+    """
+
+
 class IDeltaTime(zope.interface.Interface):
     """A date that has been processed through babel which is actually used
     for delta time representations.
