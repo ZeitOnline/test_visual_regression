@@ -40,7 +40,7 @@ $fix-mqs-h: false !default;
 
 @mixin respond-minw-minh($width, $height) {
 	@if $fix-mqs {
-		@if $fix-mqs >= em($width) {
+		@if $fix-mqs >= em($width) and $fix-mqs-h >= em($height) {
 			@content;
 		}
 	}
@@ -51,15 +51,18 @@ $fix-mqs-h: false !default;
 	}
 }
 
-@mixin respond-max($width) {
+@mixin respond-max($width, $exclusive: true) {
+	@if $exclusive {
+		$width: $width - 0.001;
+	}
+
 	@if $fix-mqs {
-		@if $fix-mqs < em($width) {
+		@if $fix-mqs <= em($width) {
 			@content;
 		}
 	}
 	@else {
-		$rounded-width: $width - .001em;
-		@media screen and (max-width: $rounded-width) {
+		@media screen and (max-width: $width) {
 			@content;
 		}
 	}
@@ -67,7 +70,7 @@ $fix-mqs-h: false !default;
 
 @mixin respond-min-max($min-width, $max-width) {
 	@if $fix-mqs {
-		@if $fix-mqs >= em($min-width) or $fix-mqs < em($max-width) {
+		@if $fix-mqs >= em($min-width) and $fix-mqs <= em($max-width) {
 			@content;
 		}
 	} @else {
