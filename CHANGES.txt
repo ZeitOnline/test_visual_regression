@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-2050: Do not load hidden images
 
+- DEV-923: Use image variant specified on the layout for article images
+
 - FIX: iqd sitebar should not again be seen on mobile
 
 
