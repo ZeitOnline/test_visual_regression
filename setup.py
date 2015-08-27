@@ -50,6 +50,7 @@ setup(
         'zeit.brightcove',
         'zeit.cms',
         'zeit.connector',
+        'zeit.content.advertisement',
         'zeit.content.article',
         'zeit.content.author',
         'zeit.content.cp',
