@@ -943,4 +943,4 @@ def test_wrapped_features_are_triggered(testbrowser):
 
     browser = testbrowser('/zeit-magazin/index?app-content')
     assert not browser.cssselect('nav.main-nav')
-    assert browser.cssselect('body[data-isWrapped="true"]')
+    assert browser.cssselect('body[data-is-wrapped="true"]')

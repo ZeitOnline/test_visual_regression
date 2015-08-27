@@ -78,7 +78,7 @@
             {%- block content_ad_script -%}{%- endblock -%}
         {% endif %}
     </head>
-    <body itemscope itemtype="http://schema.org/WebPage" data-adDeliveryType="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-isWrapped="true"{% endif %}>
+    <body itemscope itemtype="http://schema.org/WebPage" data-adDeliveryType="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
         {% include "zeit.web.core:templates/inc/marketing.html" %}
 
         <div class="page-wrap">
