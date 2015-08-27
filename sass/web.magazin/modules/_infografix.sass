@@ -1,0 +1,46 @@
+// styles for "external" content
+// intended for Datenjournalismus & Co.
+// prefixed with "x"
+
+// standard content width
+.x-content-column
+	max-width: remify($article-content-max-width)
+	margin-left: auto
+	margin-right: auto
+	.article--longform &
+		max-width: remify($longform-content-max-width)
+		+respond-min($break-3)
+			max-width: remify($longform-content-max-width--desktop)
+
+// vertical space
+.x-spacing
+	margin-top: 666px
+	margin-bottom: 666px
+.x-spacing--paragraph
+	margin-top: .6em
+	margin-bottom: .6em
+.x-spacing--large
+	margin-top: 666px * 2
+	margin-bottom: 666px * 2
+
+// responsive fullwidth
+.x-fullwidth
+	+unpadded
+
++respond-max(em(480px), false)
+	.x-fullwidth--mobile
+		+unpadded
+
++respond-max($break-2)
+	.x-fullwidth--phablet
+		+unpadded
+
++respond-max($break-3)
+	.x-fullwidth--tablet
+		+unpadded
+
+// $break-0:  em(480px) !default
+// $break-1:  em(576px) !default
+// $break-2:  em(720px) !default
+// $break-3: em(1024px) !default
+// $break-4: em(1120px) !default
