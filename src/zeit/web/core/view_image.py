@@ -78,6 +78,22 @@ class Image(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPNotFound(err.message)
 
 
+@view_config(context=zeit.content.video.interfaces.IVideo,
+             name='imagegroup')
+class Brightcove(Image):
+
+    mapping = {'still.jpg': 'wide__580x326', 'thumbnail.jpg': 'wide__120x67'}
+
+    def __init__(self, context, request):
+        super(Brightcove, self).__init__(context, request)
+        group = zeit.content.image.interfaces.IImageGroup(self.context)
+        variant = request.path_info.rsplit('/', 1).pop()
+        try:
+            self.context = group[self.mapping.get(variant, variant)]
+        except Exception, err:
+            raise pyramid.httpexceptions.HTTPNotFound(err.message)
+
+
 @view_config(route_name='spektrum-image')
 class SpektrumImage(zeit.web.core.view.Base):
 
