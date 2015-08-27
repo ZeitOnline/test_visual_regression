@@ -14,8 +14,10 @@
         {% if view.iso_duration %}
             <meta itemprop="duration" content="{{ view.iso_duration }}">
         {% endif %}
-        {% set image = view | get_image(view.context, default='wide') %}
-        <meta itemprop="thumbnail" content="{{ view.request.route_url('home') + image.path }}">
+        {% set image = view | get_image(view.context, fallback=False, default='wide') %}
+        {% if image %}
+            <meta itemprop="thumbnail" content="{{ view.request.route_url('home') + image.path }}">
+        {% endif %}
 
         {{ vima.brightcove_video_tag(view, iframe=True, expanded=True) }}
 
