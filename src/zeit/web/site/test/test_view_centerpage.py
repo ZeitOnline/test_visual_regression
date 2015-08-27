@@ -1168,3 +1168,12 @@ def test_frame_dimensions(selenium_driver, testserver, screen_size):
 
     if screen_size[0] == 980:
         assert frame1.size.get('height') == 450
+
+
+def test_wrapped_features_are_triggered(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert browser.cssselect('header.header')
+
+    browser = testbrowser('/zeit-online/slenderized-index?app-content')
+    assert not browser.cssselect('header.header')
+    assert browser.cssselect('body[data-isWrapped="true"]')
