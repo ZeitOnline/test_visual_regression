@@ -4,6 +4,8 @@ Change log for zeit.web
 1.60.1 (unreleased)
 -------------------
 
+- ZON-1591: Wrapper functionality for mobile apps
+
 - MAINT: Polish square teaser, topic teaser, column byline and button
 
 - ZON-2034: Bring back images for dynamic ranking areas

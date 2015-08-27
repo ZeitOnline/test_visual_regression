@@ -1118,7 +1118,8 @@ def test_hidden_images_must_not_be_loaded_via_js(
 def test_app_wrapper_script(selenium_driver, testserver):
 
     driver = selenium_driver
-    driver.get('{}/zeit-online/slenderized-index'.format(testserver.url))
+    driver.get(
+        '{}/zeit-online/slenderized-index?app-content'.format(testserver.url))
 
     ressort = driver.execute_script('return window.wrapper.getRessort()')
     assert ressort == 'homepage'
@@ -1167,3 +1168,12 @@ def test_frame_dimensions(selenium_driver, testserver, screen_size):
 
     if screen_size[0] == 980:
         assert frame1.size.get('height') == 450
+
+
+def test_wrapped_features_are_triggered(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert browser.cssselect('header.header')
+
+    browser = testbrowser('/zeit-online/slenderized-index?app-content')
+    assert not browser.cssselect('header.header')
+    assert browser.cssselect('body[data-is-wrapped="true"]')

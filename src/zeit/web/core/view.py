@@ -334,6 +334,15 @@ class Base(object):
             return False
 
     @zeit.web.reify
+    def is_wrapped(self):
+        try:
+            return ('app-content.zeit.de' in self.request.host_url) or (
+                self.is_dev_environment and (
+                    'app-content' in self.request.query_string))
+        except TypeError:
+            return False
+
+    @zeit.web.reify
     def iqd_mobile_settings(self):
         iqd_ids = zeit.web.core.banner.iqd_mobile_ids
         if self.is_hp:

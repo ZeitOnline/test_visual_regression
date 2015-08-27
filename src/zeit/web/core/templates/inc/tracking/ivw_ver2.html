@@ -11,7 +11,7 @@
         };
 
     if ( window.ZMO.isMobileView() ) {
-        iam_data.st = "mobzeit";
+        iam_data.st = typeof ZMO.wrapped !== 'undefined' ? ZMO.wrapped.ivwclient : "mobzeit";
         iam_data.sv = "mo";
     } else {
         iam_data.st = "zeitonl";
