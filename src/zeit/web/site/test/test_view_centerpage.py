@@ -1121,7 +1121,8 @@ def test_hidden_images_must_not_be_loaded_via_js(
 def test_app_wrapper_script(selenium_driver, testserver):
 
     driver = selenium_driver
-    driver.get('{}/zeit-online/slenderized-index'.format(testserver.url))
+    driver.get(
+        '{}/zeit-online/slenderized-index?app-content'.format(testserver.url))
 
     ressort = driver.execute_script('return window.wrapper.getRessort()')
     assert ressort == 'homepage'
@@ -1181,3 +1182,12 @@ def test_teaser_for_column_without_authorimage_should_be_rendered_default(
     for teaser in teasers:
         assert 'teaser' in teaser.get('class')
         assert 'column' not in teaser.get('class')
+
+
+def test_wrapped_features_are_triggered(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert browser.cssselect('header.header')
+
+    browser = testbrowser('/zeit-online/slenderized-index?app-content')
+    assert not browser.cssselect('header.header')
+    assert browser.cssselect('body[data-is-wrapped="true"]')

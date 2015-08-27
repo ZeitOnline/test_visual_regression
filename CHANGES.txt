@@ -1,8 +1,18 @@
 Change log for zeit.web
 =======================
 
-1.60.1 (unreleased)
--------------------
+1.62 (unreleased)
+-----------------
+
+- ZON-1591: Allow app-content mode for staging environment
+
+
+1.61 (2015-08-27)
+-----------------
+
+- ZON-1591: Wrapper functionality for mobile apps
+
+- MAINT: Polish square teaser, topic teaser, column byline and button
 
 - ZON-2034: Bring back images for dynamic ranking areas
 
@@ -20,6 +30,8 @@ Change log for zeit.web
   if there is no author image
 
 - FIX: iqd sitebar should not again be seen on mobile
+
+- ZON-2079: extend schema.org for videos
 
 
 1.60.0 (2015-08-24)
