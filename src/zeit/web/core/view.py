@@ -335,9 +335,12 @@ class Base(object):
 
     @zeit.web.reify
     def is_wrapped(self):
-        return ('app-content.zeit.de' in self.request.host_url) or (
-            self.is_dev_environment and (
-                'app-content' in self.request.query_string))
+        try:
+            return ('app-content.zeit.de' in self.request.host_url) or (
+                self.is_dev_environment and (
+                    'app-content' in self.request.query_string))
+        except TypeError:
+            return False
 
     @zeit.web.reify
     def iqd_mobile_settings(self):
