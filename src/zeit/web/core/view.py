@@ -374,6 +374,12 @@ class Base(object):
         return self.request.route_url('home') + path
 
     @zeit.web.reify
+    def og_url(self):
+    # for og url, hide cp2015 ending
+        path = '/'.join(self.request.traversed)
+        return self.request.route_url('home') + path.replace('index.cp2015','index')
+
+    @zeit.web.reify
     def is_dev_environment(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('dev_environment', '')
