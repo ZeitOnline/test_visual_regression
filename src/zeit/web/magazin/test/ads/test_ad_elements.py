@@ -16,7 +16,7 @@ def test_ad_keyword_diuqilon(selenium_driver, testserver, monkeypatch):
     driver.set_window_size(768, 1024)
     driver.get('%s/artikel/01' % testserver.url)
     try:
-        selector = 'body[data-adDeliveryType="oldschool"]'
+        selector = 'body[data-ad-delivery-type="oldschool"]'
         driver.find_element_by_css_selector(selector)
     except:
         pytest.skip("not applicable due to new ad configuration")
@@ -38,7 +38,7 @@ def test_ad_display(selenium_driver, testserver):
     driver.set_window_size(320, 480)
     driver.get('%s/artikel/01' % testserver.url)
     try:
-        selector = 'body[data-adDeliveryType="oldschool"]'
+        selector = 'body[data-ad-delivery-type="oldschool"]'
         driver.find_element_by_css_selector(selector)
     except:
         pytest.skip("not applicable due to new ad configuration")
@@ -84,7 +84,7 @@ def test_var_IQD_varPack_isset(selenium_driver, testserver, monkeypatch):
     driver = selenium_driver
     driver.get('%s/artikel/01' % testserver.url)
     try:
-        selector = 'body[data-adDeliveryType="oldschool"]'
+        selector = 'body[data-ad-delivery-type="oldschool"]'
         driver.find_element_by_css_selector(selector)
     except:
         pytest.skip("not applicable due to new ad configuration")

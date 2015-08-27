@@ -15,7 +15,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 def is_adcontrolled(contents):
-    return 'data-adDeliveryType="adcontroller"' in contents
+    return 'data-ad-delivery-type="adcontroller"' in contents
 
 
 # use this to enable third_party_modules
@@ -212,7 +212,7 @@ def test_video_page_adcontroller_js_var_isset(
     driver = selenium_driver
     driver.get('{}/video/2015-01/3537342483001'.format(testserver.url))
     try:
-        selector = 'body[data-adDeliveryType="adcontroller"]'
+        selector = 'body[data-ad-delivery-type="adcontroller"]'
         driver.find_element_by_css_selector(selector)
     except:
         pytest.skip("not applicable due to oldschool ad configuration")
