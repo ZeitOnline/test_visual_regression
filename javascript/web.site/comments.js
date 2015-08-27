@@ -6,7 +6,7 @@
  * comments.js: module for comments
  * @module comments
  */
-define([ 'jquery' ], function( $ ) {
+define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
     var $comments = $( '#comments' ),
         $commentsBody = $( '#js-comments-body' ),
@@ -328,7 +328,7 @@ define([ 'jquery' ], function( $ ) {
             .velocity( 'slideUp', slideDuration );
     },
 
-    hideCommentReplies = function() {
+    hideReplies = function() {
         var $replyThreads = $commentsBody
             .find( '.js-comment-toplevel + .comment--indented + .comment--indented' );
 
@@ -336,9 +336,17 @@ define([ 'jquery' ], function( $ ) {
             var $firstReply = $( this ).prev( '.comment--indented' );
             $firstReply.nextUntil( '.js-comment-toplevel' ) // get other replies
                 .filter( '.comment--indented' ) // filter to remove ads from result
-                .hide();
+                .velocity( 'slideUp', slideDuration );
             $firstReply.addClass( 'comment--wrapped' );
         } );
+    },
+
+    showReplies = function( e ) {
+        e.preventDefault();
+        $( this ).removeClass( 'comment--wrapped' )
+            .nextUntil( '.js-comment-toplevel' ) // get other replies
+            .filter( '.comment--indented' ) // filter to remove ads from result
+            .velocity( 'slideDown', slideDuration );
     },
 
     /**
@@ -369,7 +377,7 @@ define([ 'jquery' ], function( $ ) {
         // disable submit buttons of required fields
         $comments.find( '.js-required' ).each( enableForm );
 
-        hideCommentReplies();
+        hideReplies();
 
         // register event handlers
         $comments.on( 'submit', '.js-submit-comment', submitComment );
@@ -379,6 +387,7 @@ define([ 'jquery' ], function( $ ) {
         $commentsBody.on( startEvent, '.js-cancel-report', cancelReport );
         $commentsBody.on( startEvent, '.js-submit-report', submitReport );
         $commentsBody.on( startEvent, '.js-recommend-comment', recommendComment );
+        $commentsBody.on( startEvent, '.comment--wrapped', showReplies );
         $comments.on( inputEvent, '.js-required', enableForm );
     };
 
