@@ -397,6 +397,6 @@ def test_og_url_is_set_correctly(application):
     request = mock.Mock()
     request.route_url.return_value = 'foo/'
     view = zeit.web.site.view_centerpage.Centerpage(context, request)
-    view.request.traversed = ('politik','index.cp2015')
+    view.request.traversed = ('politik', 'index.cp2015')
     assert view.og_url == 'foo/politik/index'
 
