@@ -9,14 +9,15 @@
         data-video-page-url="{{ view.content_url }}{% if view.slug %}/{{ view.slug }}{% endif %}"
         itemtype="http://schema.org/VideoObject" itemscope>
         {% profile %}
-
         <meta itemprop="playerType" content="HTML5 Flash">
+        <meta itemprop="name" content="{{ view.title | hide_none }}">
+        <meta itemprop="uploadDate" content="{{ view.date_last_modified | format_date('iso8601') }}">
         {% if view.iso_duration %}
             <meta itemprop="duration" content="{{ view.iso_duration }}">
         {% endif %}
         {% set image = view | get_image(view.context, fallback=False, default='wide') %}
         {% if image %}
-            <meta itemprop="thumbnail" content="{{ view.request.route_url('home') + image.path }}">
+            <meta itemprop="thumbnailUrl" content="{{ view.request.route_url('home') + image.path }}">
         {% endif %}
 
         {{ vima.brightcove_video_tag(view, iframe=True, expanded=True) }}

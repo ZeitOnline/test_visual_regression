@@ -101,9 +101,17 @@ def test_video_page_should_feature_sharing_images(testserver, testbrowser):
 def test_video_page_should_feature_schema_org_props(testserver, testbrowser):
     doc = testbrowser('/video/2015-01/3537342483001').document
     assert doc.xpath('//meta[@itemprop="duration" and @content="PT436S"]')
-    assert doc.xpath('//meta[@itemprop="thumbnail"]/@content')[0].endswith(
+    assert doc.xpath('//meta[@itemprop="thumbnailUrl"]/@content')[0].endswith(
         '/video/2015-01/3537342483001/imagegroup/wide')
     assert doc.xpath('//meta[@itemprop="duration" and @content="PT436S"]')
+    assert doc.xpath(
+        '//meta[@itemprop="playerType" and @content="HTML5 Flash"]')
+    assert doc.xpath(
+        u'//meta[@itemprop="name" and ' +
+        u'@content="Roboter Myon übernimmt Opernrolle"]')
+    assert doc.xpath(
+        u'//meta[@itemprop="uploadDate" and ' +
+        u'@content="2015-01-22T10:27:01+01:00"]')
 
 
 def test_video_page_should_print_out_video_headline(testserver, testbrowser):

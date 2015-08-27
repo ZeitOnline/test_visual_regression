@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - FIX: iqd sitebar should not again be seen on mobile
 
+- ZON-2079: extend schema.org for videos
+
 
 1.60.0 (2015-08-24)
 -------------------
