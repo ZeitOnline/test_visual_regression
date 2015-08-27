@@ -31,17 +31,16 @@ log = logging.getLogger(__name__)
 
 
 @zeit.web.register_filter
-def get_variant(unique_id, variant_id):
+def get_variant(group, variant_id):
     try:
-        imagegroup = zeit.cms.interfaces.ICMSContent(unique_id)
         variant = zeit.web.core.sources.VARIANT_SOURCE.factory.find(
-            imagegroup, variant_id)
+            group, variant_id)
     except TypeError, err:
         log.debug(err.message)
     except KeyError:
-        log.debug(u'No {} variant for {}'.format(variant_id, unique_id))
+        log.debug(u'No {} variant for {}'.format(variant_id, group.uniqueId))
     else:
-        variant.__parent__ = imagegroup
+        variant.__parent__ = group
         return zeit.web.core.interfaces.ITeaserImage(variant, None)
 
 
@@ -49,16 +48,16 @@ def get_variant(unique_id, variant_id):
 def get_image(module, content=None, fallback=True, default='default'):
     try:
         content = content or first_child(module)
-        imagegroup = zeit.content.image.interfaces.IImages(content).image
+        group = zeit.content.image.interfaces.IImages(content).image
     except (TypeError, AttributeError):
-        imagegroup = None
+        group = None
 
-    if not zeit.content.image.interfaces.IImageGroup.providedBy(imagegroup):
+    if not zeit.content.image.interfaces.IImageGroup.providedBy(group):
         if not fallback:
             return None
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         default_id = conf.get('default_teaser_images')
-        imagegroup = zeit.cms.interfaces.ICMSContent(default_id, None)
+        group = zeit.cms.interfaces.ICMSContent(default_id, None)
 
     if zeit.web.core.interfaces.IFrontendBlock.providedBy(module):
         layout = module
@@ -66,11 +65,11 @@ def get_image(module, content=None, fallback=True, default='default'):
         layout = zeit.content.cp.layout.get_layout(get_layout(module))
 
     try:
-        image_pattern = layout.image_pattern
+        variant_id = layout.image_pattern
     except AttributeError:
-        image_pattern = default
+        variant_id = default
 
-    return get_variant(imagegroup.uniqueId, image_pattern)
+    return get_variant(group, variant_id)
 
 
 @zeit.web.register_test
