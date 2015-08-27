@@ -4,7 +4,7 @@ Change log for zeit.web
 1.62 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1591: Allow app-content mode for staging environment
 
 
 1.61 (2015-08-27)
