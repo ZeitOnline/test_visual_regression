@@ -93,7 +93,7 @@
     <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-unique-id="{{ view.context.uniqueId }}" data-adDeliveryType="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
+<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/marketing.html" %}
 
