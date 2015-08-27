@@ -276,7 +276,7 @@
                   $font-weight: bold,
                   $letter-spacing: $zon-letter-spacing-l,
                   $margin: remify(14px 6px),
-                  $padding: remify(9px 18px 7px)
+                  $padding: remify(8px 16px)
 	) {
 	@include inline-block(none);
 	background-color: $background-color;
