@@ -45,7 +45,8 @@ def get_variant(group, variant_id):
 
 
 @zeit.web.register_filter
-def get_image(module, content=None, fallback=True, default='default'):
+def get_image(module=None, content=None, fallback=True, variant_id=None,
+              default='default'):
     try:
         content = content or first_child(module)
         group = zeit.content.image.interfaces.IImages(content).image
@@ -64,10 +65,11 @@ def get_image(module, content=None, fallback=True, default='default'):
     else:
         layout = zeit.content.cp.layout.get_layout(get_layout(module))
 
-    try:
-        variant_id = layout.image_pattern
-    except AttributeError:
-        variant_id = default
+    if variant_id is not None:
+        try:
+            variant_id = layout.image_pattern
+        except AttributeError:
+            variant_id = default
 
     return get_variant(group, variant_id)
 
