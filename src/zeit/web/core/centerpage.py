@@ -398,11 +398,11 @@ class ImageGroup(zeit.content.image.imagegroup.ImageGroup,
 VideoImageGroup = ImageGroup  # XXX This should move out of centerpage.py
 
 
-# @grokcore.component.implementer(
-#     zeit.content.image.interfaces.IRepositoryImageGroup)
-# @grokcore.component.adapter(VideoImageGroup)
-# def videoimagegroup_to_repositoryimagegroup(group):
-#     return group
+@grokcore.component.implementer(
+    zeit.content.image.interfaces.IRepositoryImageGroup)
+@grokcore.component.adapter(VideoImageGroup)
+def videoimagegroup_to_repositoryimagegroup(group):
+    return group
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
