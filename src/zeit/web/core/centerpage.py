@@ -208,20 +208,26 @@ class Teaser(object):
 class Image(zeit.web.core.block.BaseImage):
 
     def __init__(self, image):
-        group = zeit.content.image.interfaces.IImageGroup(image, None)
-        meta = zeit.content.image.interfaces.IImageMetadata(image)
         self.align = None
-        self.alt = meta.alt
-        self.attr_alt = meta.alt or meta.caption
-        self.attr_title = meta.title or meta.caption
-        self.caption = meta.caption
-        self.copyright = meta.copyrights
         self.image = image
-        self.image_group = getattr(group, 'uniqueId', None)
         self.image_pattern = 'default'
         self.layout = ''
         self.src = self.uniqueId = image.uniqueId
-        self.title = meta.title
+
+        group = zeit.content.image.interfaces.IImageGroup(image, None)
+        if group:
+            self.image_group = group.uniqueId
+        else:
+            self.image_group = None
+
+        meta = zeit.content.image.interfaces.IImageMetadata(image, None)
+        if meta:
+            self.alt = meta.alt
+            self.attr_alt = meta.alt or meta.caption
+            self.attr_title = meta.title or meta.caption
+            self.caption = meta.caption
+            self.copyright = meta.copyrights
+            self.title = meta.title
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
@@ -230,20 +236,22 @@ class Image(zeit.web.core.block.BaseImage):
 class TeaserImage(zeit.web.core.block.BaseImage):
 
     def __init__(self, group, image):
-        meta = zeit.content.image.interfaces.IImageMetadata(group)
         self.align = None
-        self.alt = meta.alt
-        self.attr_alt = meta.alt or meta.caption
-        self.attr_title = meta.title or meta.caption
-        self.caption = meta.caption
-        self.copyright = meta.copyrights
         self.image = image
         self.image_group = group.uniqueId
         self.image_pattern = 'default'
         self.layout = ''
         self.src = self.uniqueId = image.uniqueId
-        self.title = meta.title
         self.uniqueId = image.uniqueId
+
+        meta = zeit.content.image.interfaces.IImageMetadata(group, None)
+        if meta:
+            self.alt = meta.alt
+            self.attr_alt = meta.alt or meta.caption
+            self.attr_title = meta.title or meta.caption
+            self.caption = meta.caption
+            self.copyright = meta.copyrights
+            self.title = meta.title
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
@@ -251,19 +259,25 @@ class TeaserImage(zeit.web.core.block.BaseImage):
 class VariantImage(object):
 
     def __init__(self, variant):
-        group = zeit.content.image.interfaces.IImageGroup(variant, None)
-        meta = zeit.content.image.interfaces.IImageMetadata(group)
-        self.alt = meta.alt
-        self.attr_alt = meta.alt or meta.caption
-        self.attr_title = meta.title or meta.caption
-        self.caption = meta.caption
-        self.copyright = meta.copyrights
-        self.image_group = getattr(group, 'uniqueId', None)
         self.image_pattern = variant.name
-        self.path = group.variant_url(self.image_pattern).lstrip('/')
         self.ratio = variant.ratio
-        self.title = meta.title
         self.variant = variant.legacy_name or variant.name
+
+        group = zeit.content.image.interfaces.IImageGroup(variant, None)
+        if group:
+            self.image_group = group.uniqueId
+            self.path = group.variant_url(self.image_pattern).lstrip('/')
+        else:
+            self.image_group = None
+
+        meta = zeit.content.image.interfaces.IImageMetadata(group, None)
+        if meta:
+            self.alt = meta.alt
+            self.attr_alt = meta.alt or meta.caption
+            self.attr_title = meta.title or meta.caption
+            self.caption = meta.caption
+            self.copyright = meta.copyrights
+            self.title = meta.title
 
 
 class LocalVideoImage(object):
@@ -371,7 +385,7 @@ class ImageGroup(zeit.content.image.imagegroup.ImageGroup,
             image.caption = teaserText
             image.title = teaserTitle
             image.alt = title
-            image.uniqueId = '{}{}'.format(self.uniqueId, 'video_still.jpg')
+            image.uniqueId = '{}{}'.format(self.uniqueId, 'still.jpg')
         self.master_image = image
 
     def __getitem__(self, key):

@@ -41,14 +41,20 @@ def get_variant(group, variant_id):
         log.debug(u'No {} variant for {}'.format(variant_id, group.uniqueId))
     else:
         variant.__parent__ = group
-        return zeit.web.core.interfaces.ITeaserImage(variant, None)
+        try:
+            return zeit.web.core.interfaces.ITeaserImage(variant)
+        except TypeError:
+            return None
 
 
 @zeit.web.register_filter
 def get_image(module=None, content=None, fallback=True, variant_id=None,
               default='default'):
+
+    if content is None:
+        content = first_child(module)
+
     try:
-        content = content or first_child(module)
         group = zeit.content.image.interfaces.IImages(content).image
     except (TypeError, AttributeError):
         group = None
@@ -56,6 +62,7 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
     if not zeit.content.image.interfaces.IImageGroup.providedBy(group):
         if not fallback:
             return None
+
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         default_id = conf.get('default_teaser_images')
         group = zeit.cms.interfaces.ICMSContent(default_id, None)
@@ -65,7 +72,7 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
     else:
         layout = zeit.content.cp.layout.get_layout(get_layout(module))
 
-    if variant_id is not None:
+    if variant_id is None:
         try:
             variant_id = layout.image_pattern
         except AttributeError:

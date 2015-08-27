@@ -56,7 +56,7 @@ def test_image_download_from_brightcove_assets(appbrowser):
     result = appbrowser.get(path)
     group = zeit.content.image.interfaces.IImageGroup(
         zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de{}'.format(path)))
+            'http://xml.zeit.de/video/2014-01/3035864892001'))
     assert ''.join(result.app_iter) == group['wide'].open().read()
     assert result.headers['Content-Length'] == '481006'
     assert result.headers['Content-Type'] == 'image/jpeg'
@@ -76,10 +76,10 @@ def test_scaled_image_download_from_brightcove_assets(appbrowser):
 
 def test_brightcove_images_should_set_cache_headers(testserver, app_settings):
     resp = requests.get(
-        '{}/video/2014-01/3089721834001/imagegroup/{}.jpg'.format(
+        '{}/video/2014-01/3089721834001/imagegroup/wide'.format(
             testserver.url))
     assert resp.headers.get('Cache-Control') == 'max-age={}'.format(
-        app_settings.get('caching_time_videostill'))
+        app_settings.get('caching_time_image'))
 
 
 def test_native_images_should_set_cache_headers(testserver, app_settings):
@@ -383,28 +383,29 @@ def test_image_view_should_calculate_caching_time_from_context(application):
 
 
 def test_variant_getter_should_handle_unavailable_ressource(application):
-    variant = zeit.web.core.template.get_variant(
-        'http://xml.zeit.de/foo', 'default')
+    variant = zeit.web.core.template.get_variant(None, 'default')
     assert variant is None
 
 
 def test_variant_getter_should_handle_unavailable_variant_spec(application):
-    variant = zeit.web.core.template.get_variant(
-        'http://xml.zeit.de/zeit-online/cp-content/ig-4', 'foo')
+    group = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-4')
+    variant = zeit.web.core.template.get_variant(group, 'foo')
     assert variant is None
 
 
 def test_variant_getter_should_output_variant_teaser_image(application):
-    variant = zeit.web.core.template.get_variant(
-        'http://xml.zeit.de/zeit-online/cp-content/ig-1', 'cinema')
+    group = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-1')
+    variant = zeit.web.core.template.get_variant(group, 'cinema')
     assert zeit.web.core.interfaces.ITeaserImage.providedBy(variant)
 
 
 def test_variant_getter_should_set_appropriate_parent_attribute(application):
-    variant = zeit.web.core.template.get_variant(
-        'http://xml.zeit.de/zeit-online/cp-content/ig-1', 'cinema')
-    assert zeit.content.image.interfaces.IImageGroup.providedBy(
-        zeit.cms.interfaces.ICMSContent(variant.image_group))
+    group = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/ig-1')
+    variant = zeit.web.core.template.get_variant(group, 'cinema')
+    assert variant.image_group == group.uniqueId
 
 
 def test_variant_source_should_produce_variant_legacy_mapping(application):
