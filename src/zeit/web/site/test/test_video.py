@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import re
-
 import pytest
 import requests
 
@@ -77,43 +75,39 @@ def test_video_imagegroup_should_fallback(
             video, ignore_conflicts=True, events=False) as obj:
         obj.video_still = 'http://example.com/foo'
     group = zeit.content.image.interfaces.IImageGroup(video)
-    assert group['still.jpg'].image.getImageSize() == (500, 300)
+    assert group['default'].image.getImageSize() == (500, 300)
 
     with zeit.cms.checkout.helper.checked_out(
             video, ignore_conflicts=True, events=False) as obj:
         obj.video_still = 'http://fusel'
     group = zeit.content.image.interfaces.IImageGroup(video)
-    assert group['still.jpg'].image.getImageSize() == (500, 300)
+    assert group['default'].image.getImageSize() == (500, 300)
 
     with zeit.cms.checkout.helper.checked_out(
             video, ignore_conflicts=True, events=False) as obj:
         obj.video_still = None
     group = zeit.content.image.interfaces.IImageGroup(video)
-    assert group['still.jpg'].image.getImageSize() == (500, 300)
+    assert group['default'].image.getImageSize() == (500, 300)
 
 
 def test_video_page_should_feature_sharing_images(testserver, testbrowser):
-    doc = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url)).document
-    url = r'.*video/2015-01/3537342483001/imagegroup/.*/still.jpg'
-    assert re.match(
-        url, doc.xpath('//meta[@property="og:image"]/@content')[0])
-    assert re.match(
-        url, doc.xpath('//meta[@name="twitter:image:src"]/@content')[0])
+    doc = testbrowser('/video/2015-01/3537342483001').document
+    assert doc.xpath('//meta[@property="og:image"]/@content')[0].endswith(
+        '/video/2015-01/3537342483001/imagegroup/wide')
+    assert doc.xpath('//meta[@name="twitter:image:src"]/@content')[0].endswith(
+        '/video/2015-01/3537342483001/imagegroup/wide')
 
 
 def test_video_page_should_feature_schema_org_props(testserver, testbrowser):
-    doc = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url)).document
+    doc = testbrowser('/video/2015-01/3537342483001').document
     assert doc.xpath('//meta[@itemprop="duration" and @content="PT436S"]')
-    assert re.match(r'.*video/2015-01/3537342483001/imagegroup/.*/still.jpg',
-                    doc.xpath('//meta[@itemprop="thumbnail"]/@content')[0])
+    assert doc.xpath('//meta[@itemprop="thumbnail"]/@content')[0].endswith(
+        '/video/2015-01/3537342483001/imagegroup/wide')
     assert doc.xpath('//meta[@itemprop="duration" and @content="PT436S"]')
 
 
 def test_video_page_should_print_out_video_headline(testserver, testbrowser):
-    doc = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url)).document
+    doc = testbrowser('/video/2015-01/3537342483001').document
     assert [u'Künstliche Intelligenz',
             u': ',
             u'Roboter Myon übernimmt Opernrolle'
@@ -121,23 +115,20 @@ def test_video_page_should_print_out_video_headline(testserver, testbrowser):
 
 
 def test_video_page_should_render_video_description(testserver, testbrowser):
-    doc = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url)).document
+    doc = testbrowser('/video/2015-01/3537342483001').document
     assert u'Er ist so groß wie ein siebenjähriges Kind und lernt noch' in (
         doc.xpath('//div[@itemprop="description"]/text()')[0])
 
 
 def test_video_page_should_display_modified_date(testserver, testbrowser):
-    doc = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url)).document
+    doc = testbrowser('/video/2015-01/3537342483001').document
     assert '22. Januar 2015, 10:27' in doc.xpath(
         '//time[@datetime]/text()')[0]
 
 
 @pytest.mark.xfail(reason='Comment module is to be included on video pages.')
 def test_video_page_should_output_zero_comment_count(testserver, testbrowser):
-    doc = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url)).document
+    doc = testbrowser('/video/2015-01/3537342483001').document
     assert 'Noch keine Kommentare.' in doc.xpath(
         '//span[@itemprop="commentCount"]/text()')[0]
     assert doc.xpath('//meta[@itemprop="commentCount" and @content="0"]')
@@ -148,39 +139,33 @@ def test_video_page_should_output_comment_count_number(
         testserver, testbrowser, monkeypatch):
     attr = {'comment_count': 7, 'pages': {'title', 'meh'}, 'headline': 'bar'}
     monkeypatch.setattr(zeit.web.site.view_video.Video, 'comments', attr)
-    doc = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url)).document
+    doc = testbrowser('/video/2015-01/3537342483001').document
     assert 'bar' in doc.xpath('//span[@itemprop="commentCount"]/text()')[0]
 
 
 def test_video_page_should_include_comment_section(testserver, testbrowser):
-    doc = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url)).document
+    doc = testbrowser('/video/2015-01/3537342483001').document
     assert doc.xpath('//section[@class="comment-section" and @id="comments"]')
 
 
 def test_video_comment_form_should_be_rendered(testserver, testbrowser):
-    browser = testbrowser(
-        '{}/video/2015-01/3537342483001/comment-form'.format(testserver.url))
+    browser = testbrowser('/video/2015-01/3537342483001/comment-form')
     assert len(browser.cssselect('#comment-form')) == 1
 
 
 def test_video_report_form_should_be_rendered(testserver, testbrowser):
-    browser = testbrowser(
-        '{}/video/2015-01/3537342483001/report-form'.format(testserver.url))
+    browser = testbrowser('/video/2015-01/3537342483001/report-form')
     assert len(browser.cssselect('#comment-form')) == 1
 
 
 def test_video_page_should_embed_sharing_menu(testserver, testbrowser):
-    browser = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url))
+    browser = testbrowser('/video/2015-01/3537342483001')
     assert len(browser.cssselect('.sharing-menu .sharing-menu__title')) > 0
     assert len(browser.cssselect('.sharing-menu a.sharing-menu__link')) > 0
 
 
 def test_video_page_video_iframe_should_exist(testserver, testbrowser):
-    browser = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url))
+    browser = testbrowser('/video/2015-01/3537342483001')
     assert len(browser.cssselect('.video-player__iframe')) > 0
 
 
