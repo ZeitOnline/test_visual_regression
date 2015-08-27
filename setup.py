@@ -61,7 +61,7 @@ setup(
         'zeit.content.portraitbox',
         'zeit.content.quiz',
         'zeit.content.text',
-        'zeit.content.video>=2.5.2.dev0',
+        'zeit.content.video',
         'zeit.edit',
         'zeit.find',
         'zeit.intrafind',
