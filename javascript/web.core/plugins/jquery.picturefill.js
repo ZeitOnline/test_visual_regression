@@ -12,7 +12,7 @@ define([ 'jquery' ], function( $ ) {
          * @category Function
          */
         picturefill: function() {
-            var container = $( '.js-picturefill' );
+            var container = $( '.x-picturefill' );
 
             if ( container.length ) {
                 require([

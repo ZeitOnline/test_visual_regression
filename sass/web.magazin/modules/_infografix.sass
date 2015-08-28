@@ -12,17 +12,6 @@
 		+respond-min($break-3)
 			max-width: remify($longform-content-max-width--desktop)
 
-// vertical space
-.x-spacing
-	margin-top: $compact
-	margin-bottom: $compact
-	&--paragraph
-		margin-top: $fine
-		margin-bottom: $fine
-	&--large
-		margin-top: $large
-		margin-bottom: $large
-
 // responsive fullwidth
 //     $break-0:  480px
 //     $break-1:  576px
@@ -61,7 +50,8 @@
 .x-subheadline
 	border-bottom: 1px solid $grey--light
 	font-size: em(18px)
-	margin: 0 0 .5rem
+	margin-bottom: .5em
+	margin-top: .5em
 	padding-bottom: .5rem
 	+respond-min($break-3)
 		font-size: em(20px)
@@ -85,10 +75,25 @@
 	+clearfix
 	color: $grey
 	font-size: em(14px)
-	margin: .5rem 0 0
+	margin-bottom: .5em
+	margin-top: .5em
 
 .x-footer
 	border-top: 1px solid $grey--light
 	padding-top: .5rem
 	&__copyright
 		float: right
+
+// vertical space
+.x-spacing
+	margin-top: $compact
+	margin-bottom: $compact
+	&--paragraph
+		margin-top: $fine
+		margin-bottom: $fine
+	&--large
+		margin-top: $large
+		margin-bottom: $large
+
+.x-picturefill img
+	max-width: 100%
