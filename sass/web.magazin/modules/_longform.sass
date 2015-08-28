@@ -153,19 +153,15 @@ $longform-header-max-height: 1400px
 
   .article__subpage-head
     @extend %headline
-    margin: 0 auto $small auto
-    font-size: $font-xl--px
-    font-size: $font-xl--rem
-    max-width: remify($longform-content-max-width)
+    margin: 0 auto $small
+    font-size: $font-xl
     +respond-min($break-1)
-      font-size: $font-xxl--px
-      font-size: $font-xxl--rem
-      margin-top: 0
+      font-size: $font-xxl
     a
       display: block
       position: relative
       top: -$large
-      border-bottom: 0px
+      border-bottom: 0
 
   //there is a strange ff rendering bug, therefore
   //we have an earlier breakpoint for index
@@ -261,7 +257,7 @@ $longform-header-max-height: 1400px
   .article__page-wrap
     +padded
     max-width: $max-longform-width
-    margin: $fine auto $medium auto
+    margin: $fine auto $medium
 
   .quote--wide
     +respond-min($break-3)
