@@ -157,6 +157,38 @@ def pages_of_article(context):
     return _inject_banner_code(pages, advertising_enabled, is_longform)
 
 
+def convert_authors(article, is_longform=False):
+    author_list = []
+    try:
+        author_ref = article.authorships
+        for index, author in enumerate(author_ref):
+            location = zeit.content.author.interfaces.IAuthorReference(
+                author).location
+            author = {
+                'name': getattr(author.target, 'display_name', None),
+                'href': getattr(author.target, 'uniqueId', None),
+                'image_group': getattr(author.target, 'image_group', None),
+                'prefix': u'', 'suffix': u'', 'location': u''}
+            # add location
+            if location and not is_longform:
+                author['location'] = u', {}'.format(location)
+            # add prefix
+            if index == 0:
+                if is_longform:
+                    author['prefix'] = u'\u2014 von'
+                else:
+                    author['prefix'] = u' von'
+            # add suffix
+            if index == len(author_ref) - 2:
+                author['suffix'] = u' und'
+            elif index < len(author_ref) - 1:
+                author['suffix'] = u', '
+            author_list.append(author)
+        return author_list
+    except (IndexError, OSError):
+        return []
+
+
 class ILongformArticle(zeit.content.article.interfaces.IArticle):
     # TODO: Please remove when we have Longforms for ICMSContent
     pass
