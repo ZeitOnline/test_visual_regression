@@ -345,9 +345,6 @@ def test_hide_teaser_mapping_is_working_as_expected(application):
     block.layout.id = 'parquet-printteaser'
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
-    block.layout.id = 'parquet-verlag'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'hide'
 
 
 def test_teaser_for_columns_should_have_according_journalistic_format(
