@@ -333,12 +333,29 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
             .find( '.js-comment-toplevel + .comment--indented + .comment--indented' );
 
         $replyThreads.each( function() {
-            var $firstReply = $( this ).prev( '.comment--indented' );
-            $firstReply.nextUntil( '.js-comment-toplevel' ) // get other replies
-                .filter( '.comment--indented' ) // filter to remove ads from result
-                .velocity( 'slideUp', slideDuration );
-            $firstReply.addClass( 'comment--wrapped' );
+            var $firstReply = $( this ).prev( '.comment--indented' ),
+                $otherReplies = $firstReply.nextUntil( '.js-comment-toplevel' ) // get other replies
+                    .filter( '.comment--indented' ); // filter to remove ads from result;
+
+            coverReply( $firstReply, $otherReplies.length );
+            $otherReplies.velocity( 'slideUp', slideDuration );
         } );
+
+    },
+
+    coverReply = function( $firstReply, replyCount ) {
+        var overlayHTML = '' +
+            '<div class="comment-overlay">\n' +
+                '<div class="comment-overlay__wrap">\n' +
+                    '<span class="comment-overlay__count">+%replyCount%</span>\n' +
+                    '<span class="comment-overlay__cta">Weitere Antworten anzeigen</span>\n' +
+                '</div>\n' +
+            '</div>\n';
+
+        overlayHTML = overlayHTML.replace( '%replyCount%', replyCount );
+        $firstReply.addClass( 'comment--wrapped' )
+            .find( '.comment__body' )
+            .append( overlayHTML );
     },
 
     showReplies = function( e ) {
