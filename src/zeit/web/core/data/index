@@ -186,6 +186,7 @@
                 <container cp:__name__="id-bc912838-9f14-4294-a96d-3e2fa1a76dd2" cp:type="cpextra" module="mostread" visible="True">
                     <cp_extra for="zeit.content.cp.interfaces.IArea" id="mostread" />
                 </container>
+                <container cp:type="cardstack" module="cardstack" visible="True" visible_mobile="True" cp:__name__="id-4d606521-99e2-483d-a19d-353089396e89" card_id="foo"/>
             </region>
         </cluster>
         <cluster visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f" kind="duo">

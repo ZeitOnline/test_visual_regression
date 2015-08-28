@@ -403,6 +403,10 @@ class Base(object):
                 date > self.date_first_released):
             return date.astimezone(self.timezone)
 
+    @zeit.web.reify
+    def has_card_stack(self):
+        return False
+
 
 class Content(Base):
 
