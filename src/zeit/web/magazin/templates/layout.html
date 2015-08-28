@@ -69,7 +69,7 @@
             <script type="text/javascript" src="{{ request.asset_url('js/libs/iqd/adam.js') }}"></script>
 
             <script type="text/javascript" src="http://c.t4ft.de/c/ftg_iq.min.js"></script>
-            {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.ad_delivery_type ignore missing %}
+            {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
             {%- block content_ad_script -%}{%- endblock -%}
         {% endif %}
     </head>
@@ -176,7 +176,7 @@
 
         <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
-        {% include "zeit.web.core:templates/inc/ads/%s/finalize.html" % view.ad_delivery_type ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
 
         <!-- tracking at end -->
         {% include "zeit.web.core:templates/inc/tracking/google.html" ignore missing %}
