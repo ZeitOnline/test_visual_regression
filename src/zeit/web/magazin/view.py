@@ -58,8 +58,3 @@ class Base(zeit.web.core.view.Base):
             'viewport_zoom': 'tablet-landscape',
         }
         return cases.get(name, None)
-
-    @zeit.web.reify
-    def deliver_ads_oldschoolish(self):
-        # old school ads in ZMO
-        return True

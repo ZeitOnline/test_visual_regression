@@ -362,16 +362,7 @@ class Base(object):
             return None
 
     @zeit.web.reify
-    def deliver_ads_oldschoolish(self):
-        """Toggle for switching from ad controller to old style adplaces"""
-        # TODO: use XML/JSON/YAML file for toggles
-        # TODODO: build feature toggle framework like waffle for pyramid
-        return False
-
-    @zeit.web.reify
     def ad_delivery_type(self):
-        if self.deliver_ads_oldschoolish:
-            return 'oldschool'
         return 'adcontroller'
 
     @zeit.web.reify

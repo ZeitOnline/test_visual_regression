@@ -158,15 +158,9 @@
 
 {% macro adplace(banner, view, mobile=False) -%}
     {% if view.context.advertising_enabled -%}
-        {% if view.deliver_ads_oldschoolish %}
-            {% call adplace_oldschoolish(banner, view) -%}
-                <!-- tile: {{ banner.tile }} oldschoolish -->
-            {%- endcall %}
-        {% else %}
-            {% call adplace_adctrl(banner, view, mobile) -%}
-                <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
-            {%- endcall %}
-        {% endif %}
+        {% call adplace_adctrl(banner, view, mobile) -%}
+            <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
+        {%- endcall %}
     {% endif -%}
 {%- endmacro %}
 
