@@ -82,7 +82,7 @@
             u'<li>and <b>furious anger</b> those who <strong>would</strong> attempt</li>'
             u'<li>to poison and destroy <a href="#">My brothers</a>.</li>')
   #}
-    <ul>
+    <ul class="is-constrained is-centered">
         {{ html | safe }}
     </ul>
 {%- endmacro %}
@@ -93,7 +93,7 @@
             u'<li>and <b>furious anger</b> those who <strong>would</strong> attempt</li>'
             u'<li>to poison and destroy <a href="#">My brothers</a>.</li>')
   #}
-    <ol>
+    <ol class="is-constrained is-centered">
         {{ html | safe }}
     </ol>
 {%- endmacro %}
