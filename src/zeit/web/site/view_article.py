@@ -139,8 +139,17 @@ def is_column_article(context, request):
     return getattr(context, 'serie', None) and context.serie.column
 
 
+def has_author_image(context, request):
+    authors = zeit.web.core.article.convert_authors(context)
+    if not authors:
+        return False
+    return zeit.web.core.template.closest_substitute_image(
+        authors[0]['image_group'], 'zon-column')
+
+
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-                                is_column_article),
+                                is_column_article,
+                                has_author_image),
              renderer='templates/column.html')
 class ColumnArticle(Article):
 

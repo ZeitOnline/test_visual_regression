@@ -1,5 +1,5 @@
 {# special javascript treatment for wrapper apps #}
-{# in a better world we expose this only to the app referrers #}
+{% if view.is_wrapped %}
 <script>
     window.wrapper = {
         // provide ressort if questioned
@@ -8,3 +8,4 @@
         }
     };
 </script>
+{% endif %}
