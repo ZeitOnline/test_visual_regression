@@ -13,7 +13,7 @@
     // adds the ability to load different adcontroller versions depending on isMobileView()
     var iqd_mode = (function() {
             var dm = window.location.href.toLowerCase();
-            return ZMO.isMobileView() ? 'live' : ((dm.indexOf('iqdeployment=')>1) ? dm.split('iqdeployment=')[1].split('&')[0] : 'live');
+            return dm.indexOf( 'iqdeployment=' ) > 1 ? dm.split( 'iqdeployment=' )[1].split( '&' )[0] : 'live';
         })(),
         // conditionalize output of gzip fileending, to prevent code replication
         gz_suffix = gzipEnabled ? '.gz' : '',
