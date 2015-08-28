@@ -41,6 +41,8 @@
             banner: 'width=1280',
             set: function( key ) {
                 this.meta.setAttribute( 'content', this[ key ] );
+                {# update clientWidth after swicth #}
+                ZMO.clientWidth = Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 );
             },
             isLandscape: function() {
                 if ( window.matchMedia ) {
