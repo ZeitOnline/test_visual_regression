@@ -4,7 +4,7 @@ Change log for zeit.web
 1.61.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- IMPROVEMENT: Add styles and scripts for Datenjourmalismus
 
 
 1.61.1 (2015-08-27)
