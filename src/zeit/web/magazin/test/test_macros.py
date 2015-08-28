@@ -337,8 +337,8 @@ def test_macro_headerimage_should_produce_markup(jinja2_env):
     assert output.endswith(end)
 
 
-def test_image_macro_should_not_autoescape_markup(testserver, testbrowser):
-    browser = testbrowser('%s/feature/feature_longform' % testserver.url)
+def test_image_macro_should_not_autoescape_markup(testbrowser):
+    browser = testbrowser('/feature/feature_longform')
     text = browser.cssselect('.figure-stamp--right .figure__text')[0]
     assert u'Heckler & Koch' in text.text
 
@@ -489,32 +489,30 @@ def test_macro_headervideo_handles_video_id_correctly(jinja2_env):
     assert len(vid) == 1
 
 
-def test_macro_sharing_meta_should_produce_markup(jinja2_env):
+def test_macro_sharing_meta_should_produce_markup(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
-    # test usual
-    obj = {'title': 'title', 'subtitle': 'subtitle', 'image_group': 'true',
-           'twitter_card_type': 'summary_large_image'}
-    request = {'host': 'test.de', 'path_info': '/myurl'}
-    twitter = ['<meta name="twitter:card" content="summary_large_image">',
-               '<meta name="twitter:site" content="@zeitonline">',
-               '<meta name="twitter:creator" content="@ZEITmagazin">',
-               '<meta name="twitter:title" content="title">',
-               '<meta name="twitter:description" content="subtitle">']
-    fb = ['<meta property="og:site_name" content="ZEITmagazin">',
-          '<meta property="fb:admins" content="595098294">',
-          '<meta property="og:type" content="article">',
-          '<meta property="og:title" content="title">',
-          '<meta property="og:description" content="subtitle">',
-          '<meta property="og:url" content="http://test.de/myurl">']
-    image = ['<meta property="og:image" content="',
-             '<link itemprop="image" rel="image_src"',
-             '<meta name="twitter:image:src" content="']
-    lines = tpl.module.sharing_meta(obj, request).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
+    obj = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    request = mock.Mock()
+    request.host = 'test.de'
+    request.path_info = '/myurl'
+    request.route_url.return_value = request.host + request.path_info
+    twitter = [u'<meta name="twitter:card" content="">',
+               u'<meta name="twitter:site" content="@zeitonline">',
+               u'<meta name="twitter:creator" content="@ZEITmagazin">',
+               u'<meta name="twitter:title" content="Mei, is des traurig!">',
+               u'<meta name="twitter:description" content="Die Münchner Sch']
+    fb = [u'<meta property="og:site_name" content="ZEITmagazin">',
+          u'<meta property="fb:admins" content="595098294">',
+          u'<meta property="og:type" content="article">',
+          u'<meta property="og:title" content="Mei, is des traurig!">',
+          u'<meta property="og:description" content="Die Münchner Sch',
+          u'<meta property="og:url" content="http://test.de/myurl">']
+    image = [u'<meta property="og:image" content="',
+             u'<link itemprop="image" rel="image_src"',
+             u'<meta name="twitter:image:src" content="']
+    output = u' '.join(tpl.module.sharing_meta(obj, request).split())
     for fb_meta in fb:
         assert fb_meta in output
     for twitter_meta in twitter:

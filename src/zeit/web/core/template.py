@@ -30,7 +30,7 @@ import zeit.web.core.utils
 log = logging.getLogger(__name__)
 
 
-@zeit.web.register_filter
+@zeit.web.register_global
 def get_variant(group, variant_id):
     try:
         variant = zeit.web.core.sources.VARIANT_SOURCE.factory.find(
@@ -47,7 +47,7 @@ def get_variant(group, variant_id):
             return None
 
 
-@zeit.web.register_filter
+@zeit.web.register_global
 def get_image(module=None, content=None, fallback=True, variant_id=None,
               default='default'):
 

@@ -6,7 +6,7 @@
     <article class="article article--{{ view | block_type }}" id="js-article" itemtype="http://schema.org/Article" itemscope>
     {% profile %}
         {% block schema_org_image_info %}
-            {% set image = view | get_image(view.context, default='wide') %}
+            {% set image = get_image(view, view.context, default='wide') %}
             {%- if image -%}
             <script type="application/ld+json">
             {

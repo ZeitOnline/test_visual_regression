@@ -30,25 +30,9 @@ def test_video_imagegroup_should_adapt_videos(application):
     assert isinstance(group, zeit.web.core.centerpage.VideoImageGroup)
 
 
-@pytest.mark.parametrize('img', ['wide', 'square'])
-def test_video_imagegroup_should_set_appropriate_properties(img, application):
-    unique_id = 'http://xml.zeit.de/video/2015-01/3537342483001'
-    video = zeit.cms.interfaces.ICMSContent(unique_id)
-    group = zeit.content.image.interfaces.IImageGroup(video)
-    image = group[img]
-    assert 'Bildschirmfoto-2015-01-22-um-09-27-07.jpg' in image.src
-    assert image.mimeType == 'image/jpeg'
-    assert image.image_pattern == img
-    assert image.copyright is None
-    assert image.caption.startswith(u'Er ist so groß wie ein siebenjähriges')
-    assert image.title == u'Roboter Myon übernimmt Opernrolle'
-    assert image.alt == u'Roboter Myon übernimmt Opernrolle'
-    assert image.uniqueId == '{}/imagegroup/{}'.format(unique_id, img)
-
-
 @pytest.mark.parametrize('img,size,res', [
-    ('wide', 460207, (580, 328)),
-    ('cinema', 23420, (120, 67))
+    ('wide', 429354, (822, 462)),
+    ('cinema', 217003, (580, 248))
 ])
 def test_video_imagegroup_should_set_local_image_fileobj(
         img, size, res, application):
@@ -56,8 +40,8 @@ def test_video_imagegroup_should_set_local_image_fileobj(
     video = zeit.cms.interfaces.ICMSContent(unique_id)
     group = zeit.content.image.interfaces.IImageGroup(video)
     image = group[img]
-    assert image.image.size == size
-    assert image.image.getImageSize() == res
+    assert image.size == size
+    assert image.getImageSize() == res
 
 
 def test_video_page_should_feature_sharing_images(testserver, testbrowser):

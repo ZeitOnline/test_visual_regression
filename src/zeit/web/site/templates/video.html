@@ -15,7 +15,7 @@
         {% if view.iso_duration %}
             <meta itemprop="duration" content="{{ view.iso_duration }}">
         {% endif %}
-        {% set image = view | get_image(view.context, fallback=False, default='wide') %}
+        {% set image = get_image(view, view.context, fallback=False, default='wide') %}
         {% if image %}
             <meta itemprop="thumbnailUrl" content="{{ view.request.route_url('home') + image.path }}">
         {% endif %}

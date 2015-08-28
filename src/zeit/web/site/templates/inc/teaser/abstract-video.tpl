@@ -8,7 +8,7 @@
     <a class="{{ self.layout() }}__combined-link" href="{{ teaser_url }}">
         <div class="{{ self.layout() }}__container">
             {% block teaser_media_position_before_title %}
-                {% set image = module | get_image(teaser, default='wide') %}
+                {% set image = get_image(module, teaser, default='wide') %}
                 {% include "zeit.web.site:templates/inc/teaser_asset/image_{}.tpl".format(self.layout()) ignore missing %}
             {% endblock %}
             <div class="{{ self.layout() }}__inner">
