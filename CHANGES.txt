@@ -4,7 +4,7 @@ Change log for zeit.web
 1.61.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-2062: Migrate video and sharinge images to new image server
 
 
 1.61.1 (2015-08-27)
@@ -32,7 +32,8 @@ Change log for zeit.web
 
 - ZON-2050: Do not load hidden images
 
-- ZON-2062: Migrate video and sharinge images to new image server
+- ZON-2011: Use default style/template on column teaser and article
+  if there is no author image
 
 - FIX: iqd sitebar should not again be seen on mobile
 

@@ -1,6 +1,11 @@
 {% import 'zeit.web.site:templates/macros/article_macro.tpl' as blocks %}
 {% extends 'zeit.web.site:templates/layout.html' %}
 
+{# Sometimes (if the author has no image), colums are rendered as default
+   articles (instead of column.html). In this case, we need to adjust a few
+   Things inside the article template (here). #}
+{% set is_column = view and view.context and view.context.serie and view.context.serie.column %}
+
 {% block main %}
     {% block content %}
     <article class="article article--{{ view | block_type }}" id="js-article" itemtype="http://schema.org/Article" itemscope>
@@ -27,6 +32,9 @@
                 {% endif %}
 
                         <span class="article-heading__kicker">
+                            {% if is_column == True %}
+                                {{ view.serie + ' / ' }}
+                            {% endif %}
                             {{- view.supertitle | hide_none -}}
                         </span>{%- if view.title -%}<span class="article-heading__colon">: </span>{%- endif -%}
                         <span class="article-heading__title">
@@ -38,7 +46,7 @@
                 {% else %}
                     </h1>
                 {% endif %}
-                
+
             </div>
         {% endblock article_heading %}
         {% block article_meta %}
@@ -46,7 +54,7 @@
                 {% if view.pagination and view.pagination.current > 1 %}
                 <div class="article__page-teaser">
                     Seite {{ view.pagination.current }}/{{ view.pagination.total }}
-                    {%- if view.current_page.teaser -%} 
+                    {%- if view.current_page.teaser -%}
                         : <h1>{{ view.current_page.teaser }}</h1>
                     {% endif %}
                 </div>
