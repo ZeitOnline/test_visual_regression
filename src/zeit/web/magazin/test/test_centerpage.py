@@ -935,3 +935,12 @@ def test_oldads_toggle_is_on(application):
         'http://xml.zeit.de/zeit-magazin/index')
     view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
     assert view.deliver_ads_oldschoolish is True
+
+
+def test_wrapped_features_are_triggered(testbrowser):
+    browser = testbrowser('/zeit-magazin/index')
+    assert browser.cssselect('nav.main-nav')
+
+    browser = testbrowser('/zeit-magazin/index?app-content')
+    assert not browser.cssselect('nav.main-nav')
+    assert browser.cssselect('body[data-is-wrapped="true"]')

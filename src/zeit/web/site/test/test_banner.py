@@ -9,7 +9,7 @@ import zeit.web.site
 
 
 def is_adcontrolled(contents):
-    return 'data-adDeliveryType="adcontroller"' in contents
+    return 'data-ad-delivery-type="adcontroller"' in contents
 
 
 # use this to enable third_party_modules
@@ -79,7 +79,7 @@ def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
     driver = selenium_driver
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     try:
-        selector = 'body[data-adDeliveryType="adcontroller"]'
+        selector = 'body[data-ad-delivery-type="adcontroller"]'
         driver.find_element_by_css_selector(selector)
     except:
         pytest.skip("not applicable due to oldschool ad configuration")

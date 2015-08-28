@@ -167,8 +167,11 @@ def test_small_teaser_should_display_no_image_on_mobile(
 def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
     browser = testbrowser('/zeit-online/fullwidth-teaser')
     teaser = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
+    teaser_column = browser.cssselect(
+        '.cp-area.cp-area--solo .teaser-fullwidth-column')
 
-    assert len(teaser) == 3
+    assert len(teaser) == 4
+    assert len(teaser_column) == 1
 
 
 def test_fullwidth_teaser_image_should_have_attributes_for_mobile_variant(
@@ -1118,7 +1121,8 @@ def test_hidden_images_must_not_be_loaded_via_js(
 def test_app_wrapper_script(selenium_driver, testserver):
 
     driver = selenium_driver
-    driver.get('{}/zeit-online/slenderized-index'.format(testserver.url))
+    driver.get(
+        '{}/zeit-online/slenderized-index?app-content'.format(testserver.url))
 
     ressort = driver.execute_script('return window.wrapper.getRessort()')
     assert ressort == 'homepage'
@@ -1167,3 +1171,23 @@ def test_frame_dimensions(selenium_driver, testserver, screen_size):
 
     if screen_size[0] == 980:
         assert frame1.size.get('height') == 450
+
+
+def test_teaser_for_column_without_authorimage_should_be_rendered_default(
+        testbrowser):
+    browser = testbrowser('/zeit-online/teaser-columns-without-authorimage')
+    teasers = browser.cssselect('main article')
+    # we want to be sure that there are teasers at all.
+    assert len(teasers) == 10
+    for teaser in teasers:
+        assert 'teaser' in teaser.get('class')
+        assert 'column' not in teaser.get('class')
+
+
+def test_wrapped_features_are_triggered(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert browser.cssselect('header.header')
+
+    browser = testbrowser('/zeit-online/slenderized-index?app-content')
+    assert not browser.cssselect('header.header')
+    assert browser.cssselect('body[data-is-wrapped="true"]')

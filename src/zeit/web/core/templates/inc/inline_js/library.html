@@ -12,11 +12,28 @@
                 return this[key] ? this[key] : '';
             }
         },
+        {% if view.is_wrapped -%}
+        is_wrapped: true,
+        wrapped: {
+            client: /Android/i.test(navigator.userAgent) ? 'android' : 'ios',
+            ivwclient: this.client === 'android' ? 'aadzeion' : 'appzeion'
+        },
+        {% endif -%}
         clientWidth: Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 ),
         mobileWidth: 768,
         maxWidth: 1280,
         isMobileView: function() {
             return this.clientWidth < this.mobileWidth;
+        },
+        getSiteParam: function( concatString ) {
+            concatString = concatString || '';
+            if ( this.isMobileView() ) {
+                if ( this.is_wrapped ) {
+                    return this.wrapped.ivwclient + concatString;
+                }
+                return "mobile" + concatString;
+            }
+            return "desktop" + concatString;
         },
         viewport: {
             meta: document.getElementById('viewport-meta'),

@@ -2,9 +2,9 @@
 <centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <head>
     <header_image/>
-    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
-    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
     <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
@@ -20,7 +20,7 @@
     <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:00.932648+00:00</attribute>
     <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.bruenjes</attribute>
     <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
     <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
     <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
@@ -63,63 +63,58 @@
     </topiclinks>
 </head>
 <body>
-    <title>Video-Teaser</title>
-
-    <cluster area="id-a2dff7f3-9172-4a6f-b88d-143fdfc5cff7" visible="True">
-        <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
-            <container cp:__name__="id-0e4c344a-813a-2816-95a7-2affe49167fe" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
-                <block contenttype="video" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" />
-            </container>
-        </region>
-    </cluster>
+    <title>Test Pages Overview</title>
 
     <cluster area="id-a2dff7f3-9876-4a6f-b88d-143fdfc5cff7" visible="True">
         <region area="id-8152c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
-            <container cp:__name__="id-0e4c715a-813a-2816-95a7-2affe49167fe" cp:type="teaser" hide-dupes="True" module="zon-classic" visible="True">
-                <block contenttype="video" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" />
+            <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-234eb191f212" title="">
+                <text>
+                    <h1>Test-Overview-Page</h1>
+                    <blockquote><em>Wo finde ich Video-Teaser?<br/>Wie teste ich die Webtrekk-Verpixelung?<br/>Gibt es eine Übersicht über alle Journalistischen Formate?</em></blockquote>
+                    <p>Auf dieser Seite werden Links zu Test-Seiten versammelt.</p>
+                </text>
             </container>
         </region>
     </cluster>
 
-    <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" kind="duo">
-        <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" kind="major">
-            <container cp:__name__="id-b0eaa5e2-807b-4fed-9a09-886eafda5b21" cp:type="teaser" module="zon-large">
-                <block contenttype="video" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" />
-            </container>
-            <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-small">
-                <block contenttype="video" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" />
-            </container>
-        </region>
-        <region area="id-6dd22838-9f14-4294-a96d-3e2fa1a7bc91" kind="minor">
-            <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37a12" cp:type="teaser" module="zon-small">
-                <block contenttype="video" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" />
-            </container>
-            <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-ace15e19-b931-4441-8d40-7ed4eb76f35e">
-                <block contenttype="video" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" />
+    <cluster visible="True" area="id-01aa0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet">
+        <region visible="True" hide-dupes="True" area="id-0100a3c0-fe49-6291-baac-453cc2a213ee" kind="parquet" title="Mehrseitige Artikel">
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf4caee">
+                <block contenttype="article" uniqueId="http://xml.zeit.de/zeit-online/article/zeit" />
             </container>
         </region>
     </cluster>
 
-    <cluster area="id-d102845f-8aa2-4305-a731-81efaf03919f" kind="duo">
-        <region visible="True" area="id-bb856af5-0ad1-4849-b2f3-43fb635f4fc6" kind="duo">
-            <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-fac15e19-b931-4441-8d40-7ed4eb76f35e">
-                <block contenttype="video" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" />
+    <cluster visible="True" area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet">
+        <region visible="True" hide-dupes="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213ee" kind="parquet" title="Video-CPs">
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5aaf4caee">
+                <block contenttype="video" uniqueId="http://xml.zeit.de/zeit-online/video-teaser" />
             </container>
-        </region>
-        <region visible="True" area="id-bb856af5-0ad1-4849-b2f3-43fb123f4fc6" kind="duo">
-            <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-fac15e19-b931-4441-8d40-7ed4eb76f35e">
-                <block contenttype="video" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" />
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e5d7">
+                <block contenttype="video" uniqueId="http://xml.zeit.de/zeit-online/video-stage" />
             </container>
         </region>
     </cluster>
 
-    <cluster visible="True" area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet" title="ParquetVideo">
-        <region visible="True" hide-dupes="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213dd" kind="parquet" title="Parkett: Video-Teaser">
-            <container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5aaf4cad1">
-                <block contenttype="video" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" />
+    <cluster visible="True" area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a020" kind="parquet">
+        <region visible="True" hide-dupes="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213dd" kind="parquet" title="Test-Modi">
+            <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-287eb191f252" title="Webtrekk-Debug-Modus">
+                <text>
+                <p>Im Webtrekk-Debug-Modus wird das Klicktracking <strong>nicht</strong> an Webtrekk gesendet (und der Klick ausgeführt), <strong>sondern</strong> der String wird über `console.log` ausgegeben.</p>
+                <h3>Wie wird der Modus ausgelöst?</h3>
+                <ul>
+                    <li>Über den Query Parameter <a href="127.0.0.1:9090/index?webtrekk-clicktracking-debug">?webtrekk-clicktracking-debug</a>.</li>
+                </ul>
+                </text>
             </container>
-            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d7">
-                <block contenttype="video" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" />
+            <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-287eb191f251" title="Wrapper-App">
+                <text>
+                <h3>Wie wird der Modus ausgelöst?</h3>
+                <ul>
+                    <li>if the pages are requested from a host with the URL app-content.zeit.de</li>
+                    <li>if the dev environment and the query parameter <a href="http://127.0.0.1:9090/zeit-online/article/01?app-content">?app-content</a> is present.</li>
+                </ul>
+                </text>
             </container>
         </region>
     </cluster>
@@ -127,8 +122,6 @@
 </body>
 <feed/>
 <teaser>
-    <supertitle>Test CP</supertitle>
-    <title>Video Teaser</title>
-    <text>Teaser auf Videos, an allen möglichen Stellen innerhalb einer CP.</text>
+    <title>Test Pages Overview</title>
 </teaser>
 </centerpage>
