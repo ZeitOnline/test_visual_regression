@@ -394,7 +394,11 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         // disable submit buttons of required fields
         $comments.find( '.js-required' ).each( enableForm );
 
-        hideReplies();
+        // when deeplinked, prevent collapse of reply threads
+        if ( window.location.search.indexOf( 'cid=' ) === -1 &&
+             window.location.hash.indexOf( '#cid-' ) === -1 ) {
+            hideReplies();
+        }
 
         // register event handlers
         $comments.on( 'submit', '.js-submit-comment', submitComment );
