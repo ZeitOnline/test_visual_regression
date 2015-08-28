@@ -18,6 +18,6 @@ def test_cardstack_should_be_included_in_cp(
     assert esiscripts in browser.contents
 
     esibody = ('<esi:include src="http://www.zeit.de'
-               '/cardstack-backend/stacks/foo/esi/body')
+               '/cardstack-backend/stacks/kekse')
 
     assert esibody in browser.contents
