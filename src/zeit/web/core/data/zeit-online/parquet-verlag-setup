@@ -41,6 +41,8 @@
     &lt;arguments&gt;
       &lt;tuple&gt;
         &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
         &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
@@ -62,15 +64,25 @@
   </head>
 
   <body>
-    <cluster area="feature">
-      <region area="lead">
-        <container cp:type="teaser" module="parquet-verlag" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/article-02" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-          </block>
+    <cluster visible="True" area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
+      <region visible="True" hide-dupes="True" area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
+        <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="parquet-verlag" visible="True">
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
+        </container>
+      </region>
+      <region visible="True" hide-dupes="True" area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor" title="Marginalspalte">
+        <container cp:type="teaser" module="parquet-verlag" visible="True" cp:__name__="id-052280d1-a006-4c44-b681-dc638ff8758a">
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
         </container>
       </region>
     </cluster>
-    <cluster area="teaser-mosaic"/>
+    <cluster visible="True" area="id-bdfb0156-4df4-4bcd-bf1e-68609ef1a109" kind="parquet" title="ArneParquet">
+      <region visible="True" hide-dupes="True" area="id-1ac0ac50-fe94-4431-baac-435cc2a934dd" kind="parquet" title="Parkett: Blog-Teaser">
+        <container cp:type="teaser" module="parquet-verlag" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5afa4cad1">
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
+        </container>
+      </region>
+    </cluster>
     <supertitle>ZMO CP</supertitle>
     <title>ZMO</title>
     <subtitle>ZMO CP</subtitle>

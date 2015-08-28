@@ -206,4 +206,4 @@ def test_verlagsangebot_label_should_be_displayed(
     browser = testbrowser(
         '%s/zeit-online/parquet-verlag-setup' % testserver.url)
     labels = browser.cssselect('.teasr-small__label')
-    assert len(labels) == 1
+    assert len(labels) == 3
