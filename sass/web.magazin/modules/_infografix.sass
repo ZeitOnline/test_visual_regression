@@ -14,33 +14,81 @@
 
 // vertical space
 .x-spacing
-	margin-top: 666px
-	margin-bottom: 666px
-.x-spacing--paragraph
-	margin-top: .6em
-	margin-bottom: .6em
-.x-spacing--large
-	margin-top: 666px * 2
-	margin-bottom: 666px * 2
+	margin-top: $compact
+	margin-bottom: $compact
+	&--paragraph
+		margin-top: $fine
+		margin-bottom: $fine
+	&--large
+		margin-top: $large
+		margin-bottom: $large
 
 // responsive fullwidth
+//     $break-0:  480px
+//     $break-1:  576px
+//     $break-2:  720px
+//     $break-3: 1024px
+//     $break-4: 1120px
 .x-fullwidth
 	+unpadded
+	+respond-max($break-0, false)
+		&--mobile
+			+unpadded
+	+respond-max($break-2)
+		&--phablet
+			+unpadded
+	+respond-max($break-3)
+		&--tablet
+			+unpadded
 
-+respond-max(em(480px), false)
-	.x-fullwidth--mobile
-		+unpadded
+// text styles
+.x-headline,
+.x-subheadline,
+.x-copytext,
+.x-footer
+	font-family: $sans-serif-base-font
+	letter-spacing: $letter-spacing-s
+	line-height: 1.4
 
-+respond-max($break-2)
-	.x-fullwidth--phablet
-		+unpadded
+.x-headline
+	font-size: em(24px)
+	line-height: 1.25
+	margin-bottom: .5em
+	margin-top: 1.5em
+	+respond-min($break-1)
+		font-size: em(30px)
 
-+respond-max($break-3)
-	.x-fullwidth--tablet
-		+unpadded
+.x-subheadline
+	border-bottom: 1px solid $grey--light
+	font-size: em(18px)
+	margin: 0 0 .5rem
+	padding-bottom: .5rem
+	+respond-min($break-3)
+		font-size: em(20px)
 
-// $break-0:  em(480px) !default
-// $break-1:  em(576px) !default
-// $break-2:  em(720px) !default
-// $break-3: em(1024px) !default
-// $break-4: em(1120px) !default
+.x-copytext
+	font-size: em(15px)
+	+respond-min($break-3)
+		font-size: em(16px)
+
+.x-caption
+	color: $grey--mid
+	font-size: em(14px)
+	line-height: 1.5
+	&--sans
+		font-family: $sans-serif-base-font
+	&--serif
+		font-family: $font-franziska
+
+.x-footer,
+.x-footer--borderless
+	+clearfix
+	color: $grey
+	font-size: em(14px)
+	margin: .5rem 0 0
+
+.x-footer
+	border-top: 1px solid $grey--light
+	padding-top: .5rem
+	&__copyright
+		float: right

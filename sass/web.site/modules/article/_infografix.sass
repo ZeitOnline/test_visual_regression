@@ -13,31 +13,81 @@
 .x-spacing
 	margin-top: $vertical-space
 	margin-bottom: $vertical-space
-.x-spacing--paragraph
-	margin-top: .6em
-	margin-bottom: .6em
-.x-spacing--large
-	margin-top: $vertical-space * 2
-	margin-bottom: $vertical-space * 2
+	&--paragraph
+		margin-top: .6em
+		margin-bottom: .6em
+	&--large
+		margin-top: $vertical-space * 2
+		margin-bottom: $vertical-space * 2
 
 // responsive fullwidth
 .x-fullwidth
 	margin-left: -$page-padding
 	margin-right: -$page-padding
+	+respond-max(em(480px), false)
+		&--mobile
+			margin-left: -$page-padding
+			margin-right: -$page-padding
+	+respond-max($break-phablet-min, false)
+		&--phablet
+			margin-left: -$page-padding
+			margin-right: -$page-padding
+	+respond-max($break-tablet-min, false)
+		&--tablet
+			margin-left: -$page-padding
+			margin-right: -$page-padding
 
-+respond-max(em(480px), false)
-	.x-fullwidth--mobile
-		margin-left: -$page-padding
-		margin-right: -$page-padding
+// text styles
+.x-headline,
+.x-subheadline,
+.x-copytext,
+.x-footer
+	font-family: $font-tabletgothic
+	letter-spacing: $zon-letter-spacing-s
+	line-height: 1.4
 
-+respond-max($break-phablet-min, false)
-	.x-fullwidth--phablet
-		margin-left: -$page-padding
-		margin-right: -$page-padding
+.x-headline
+	font-size: em(20px)
+	line-height: 1.25
+	margin-bottom: .5em
+	margin-top: 1.4em
+	+respond-min($break-desktop-min)
+		font-size: em(24px)
 
-+respond-max($break-tablet-min, false)
-	.x-fullwidth--tablet
-		margin-left: -$page-padding
-		margin-right: -$page-padding
+.x-subheadline
+	border-bottom: 1px solid $color-border
+	font-size: em(18px)
+	margin: 0 0 .5rem
+	padding-bottom: .5rem
+	+respond-min($break-desktop-min)
+		font-size: em(20px)
 
+.x-copytext
+	font-size: em(15px)
+	+respond-min($break-desktop-min)
+		font-size: em(16px)
 
+.x-caption
+	color: $zon_dark_grey
+	font-size: em(15px)
+	font-style: italic
+	line-height: 1.5
+	+respond-min($break-desktop-min)
+		font-size: em(16px)
+	&--sans
+		font-family: $font-tabletgothic
+	&--serif
+		font-family: $font-franziska
+
+.x-footer,
+.x-footer--borderless
+	+clearfix
+	color: $zon_grey
+	font-size: em(14px)
+	margin: .5rem 0 0
+
+.x-footer
+	border-top: 1px solid $color-border
+	padding-top: .5rem
+	&__copyright
+		float: right
