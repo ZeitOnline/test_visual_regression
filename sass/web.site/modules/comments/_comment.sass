@@ -23,6 +23,12 @@ $color-comment-border: $zon_light_grey
 
 	&--wrapped
 		cursor: pointer
+		&:hover
+			.comment-overlay__count
+				background-color: $zon_mid_grey
+			.comment-overlay__cta
+				color: $zon_dark_grey
+				border-bottom: 1px solid $zon_mid_grey
 		.comment__body
 			overflow: hidden
 			margin-bottom: 0
@@ -190,19 +196,20 @@ $color-comment-border: $zon_light_grey
 		bottom: remify(20px)
 	&__count
 		+border-radius(1em)
-		background: $zon_dark_grey
+		+transition-property(background-color)
+		+transition-duration(.2s)
+		background-color: $zon-trout
 		color: $zon_lighter_grey
 		font-size: remify(11px)
-		background-color: $zon-trout
-		padding: remify(3px 12px)
 		margin-right: remify(12px)
+		padding: remify(3px 12px)
 	&__cta
+		+transition-property(border-bottom-color, color)
+		+transition-duration(.2s)
 		color: $zon_grey
 		font-size: remify(15px)
 		letter-spacing: $zon-letter-spacing-s
 		border-bottom: 1px solid $zon_light_grey
-		+transition-property(border-bottom-color, color)
-		+transition-duration(.2s)
 
 
 // icons
