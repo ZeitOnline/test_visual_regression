@@ -41,6 +41,7 @@ require([
     'velocity.ui',
     'web.core/plugins/jquery.animatescroll',
     'web.core/plugins/jquery.inlinegallery',
+    'web.core/plugins/jquery.picturefill',
     'web.core/plugins/jquery.referrerCount',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.magazin/plugins/jquery.backgroundvideo',
@@ -51,6 +52,7 @@ require([
     $( '.inline-gallery' ).inlinegallery();
     $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();
+    $.picturefill();
     $( '.js-toggle-copyrights' ).copyrights();
     $( 'main' ).animateScroll({ selector: '.js-scroll' });
 });

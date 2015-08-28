@@ -9,6 +9,7 @@ require.config({
     // e.g. if you'll require jQuery later, you can refer to it as 'jquery'
     paths: {
         'jquery': 'vendor/jquery',
+        'picturefill': 'vendor/picturefill',
         'velocity': 'vendor/velocity',
         'velocity.ui': 'vendor/velocity.ui',
         // to build current sjcl.js, in bower_components/sjcl do
