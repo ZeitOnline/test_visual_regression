@@ -48,7 +48,6 @@
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
-
     <topiclinks>
         <topiclink_title>Schwerpunkte</topiclink_title>
         <topiclink>
@@ -60,9 +59,7 @@
             <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
         </topiclink>
     </topiclinks>
-
   </head>
-
   <body>
     <cluster visible="True" area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
       <region visible="True" hide-dupes="True" area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
