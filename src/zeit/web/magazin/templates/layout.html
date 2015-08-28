@@ -69,11 +69,6 @@
             <script type="text/javascript" src="{{ request.asset_url('js/libs/iqd/adam.js') }}"></script>
 
             <script type="text/javascript" src="http://c.t4ft.de/c/ftg_iq.min.js"></script>
-            {% if view.context.advertising_enabled %}
-                <!--[if gt IE 9]>-->
-                <script src="{{ request.asset_url('js/libs/iqd/sasmobile.js') }}"></script>
-                <!-- <![endif]-->
-            {% endif %}
             {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.ad_delivery_type ignore missing %}
             {%- block content_ad_script -%}{%- endblock -%}
         {% endif %}
