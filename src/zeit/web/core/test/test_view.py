@@ -389,3 +389,18 @@ def test_unavailable_handles_broken_unicode():
     view = zeit.web.core.view.service_unavailable(None, req)
     # assert nothing raised:
     view()
+
+
+def test_wrapped_page_has_wrapped_property(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/slenderized-index')
+    request = mock.Mock()
+    request.host_url = 'http://app-content.zeit.de'
+    view = zeit.web.site.view_centerpage.Centerpage(context, request)
+    assert view.is_wrapped
+
+    request = mock.Mock()
+    request.query_string = "app-content"
+    request.host_url = 'http://www.zeit.de'
+    view = zeit.web.site.view_centerpage.Centerpage(context, request)
+    assert view.is_wrapped
