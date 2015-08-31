@@ -32,5 +32,7 @@
 		@extend %teaser-commentcount
 	&__label
 		@extend %teaser-label
+		+respond-min($break-phablet-min)
+			text-align: left
 	&--verlag &__media
-		@extend %teaser-small-media-verlag !optional
+		@extend %teaser-small-media-verlag

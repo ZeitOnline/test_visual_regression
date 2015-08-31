@@ -39,8 +39,7 @@
 		@extend %teaser-commentcount
 	&__label
 		@extend %teaser-label
-		padding: remify(6px) 0
-		display: block
-		text-align: right
+		+respond-min-max($break-phablet-min, $break-areas)
+			text-align: left
 	&--verlag &__media
-		@extend %teaser-small-media-verlag !optional
+		@extend %teaser-small-media-verlag
