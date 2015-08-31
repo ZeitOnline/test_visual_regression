@@ -1,10 +1,22 @@
 Change log for zeit.web
 =======================
 
-1.60.1 (unreleased)
+1.61.2 (unreleased)
 -------------------
 
 - ZON-2080: hide cp2015 ending in sharing data
+
+
+1.61.1 (2015-08-27)
+-------------------
+
+- ZON-1591: Allow app-content mode for staging environment
+
+
+1.61 (2015-08-27)
+-----------------
+
+- ZON-1591: Wrapper functionality for mobile apps
 
 - MAINT: Polish square teaser, topic teaser, column byline and button
 
@@ -19,6 +31,9 @@ Change log for zeit.web
 - ZON-2052: Enable DNS Prefetch for assets
 
 - ZON-2050: Do not load hidden images
+
+- ZON-2011: Use default style/template on column teaser and article
+  if there is no author image
 
 - FIX: iqd sitebar should not again be seen on mobile
 

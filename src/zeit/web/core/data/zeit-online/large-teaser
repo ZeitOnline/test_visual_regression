@@ -79,7 +79,7 @@
                     <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne" />
                 </container>
                 <container cp:__name__="id-653607ee-ecdd-4804-870b-8fd67ff27e16" cp:type="teaser" module="zon-large">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild" />
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild" />
                 </container>
             </region>
             <region area="id-6dd22838-9f14-4294-a96d-3e2fa1a7bc91" kind="minor">
@@ -100,7 +100,7 @@
                     <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne" />
                 </container>
                 <container cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5aaf4cad2" cp:type="teaser" module="zon-large">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild" />
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild" />
                 </container>
             </region>
         </cluster>

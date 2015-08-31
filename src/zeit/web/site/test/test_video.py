@@ -17,7 +17,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 def is_adcontrolled(contents):
-    return 'data-adDeliveryType="adcontroller"' in contents
+    return 'data-ad-delivery-type="adcontroller"' in contents
 
 
 # use this to enable third_party_modules
@@ -119,13 +119,12 @@ def test_video_page_should_feature_schema_org_props(testserver, testbrowser):
         u'@content="2015-01-22T10:27:01+01:00"]')
 
 
-def test_video_page_should_print_out_video_headline(testserver, testbrowser):
-    doc = testbrowser(
-        '{}/video/2015-01/3537342483001'.format(testserver.url)).document
-    assert [u'Künstliche Intelligenz',
-            u': ',
-            u'Roboter Myon übernimmt Opernrolle'
-            ] == doc.xpath('//h1[@itemprop="headline"]/span/text()')
+def test_video_page_should_print_out_video_headline(testbrowser):
+    browser = testbrowser('/video/2015-01/3537342483001')
+    headline = browser.xpath('//h1[@itemprop="headline"]/span/text()')
+    assert headline[0].strip() == u'Künstliche Intelligenz'
+    assert headline[1] == u': '
+    assert headline[2].strip() == u'Roboter Myon übernimmt Opernrolle'
 
 
 def test_video_page_should_render_video_description(testserver, testbrowser):
@@ -227,7 +226,7 @@ def test_video_page_adcontroller_js_var_isset(
     driver = selenium_driver
     driver.get('{}/video/2015-01/3537342483001'.format(testserver.url))
     try:
-        selector = 'body[data-adDeliveryType="adcontroller"]'
+        selector = 'body[data-ad-delivery-type="adcontroller"]'
         driver.find_element_by_css_selector(selector)
     except:
         pytest.skip("not applicable due to oldschool ad configuration")
