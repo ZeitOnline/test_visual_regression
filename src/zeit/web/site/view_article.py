@@ -110,7 +110,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
     def has_cardstack(self):
-        return True
+        return len(self.context.xml.xpath('/article/body//cardstack')) > 0
 
 
 @view_config(name='seite',
