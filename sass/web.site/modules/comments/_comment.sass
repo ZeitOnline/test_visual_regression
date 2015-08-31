@@ -30,9 +30,9 @@ $color-comment-border: $zon_light_grey
 				color: $zon_dark_grey
 				border-bottom: 1px solid $zon_mid_grey
 		.comment__body
-			overflow: hidden
 			margin-bottom: 0
 			max-height: 7em // em-tentional :D
+			overflow: hidden
 		.comment__reactions
 			display: none
 		.comment-overlay
@@ -181,19 +181,20 @@ $color-comment-border: $zon_light_grey
 // comment thread collapsed
 .comment-overlay
 	+background-image(linear-gradient(0deg, rgba($white, 1) 3em, rgba($white, 0) 100%))
-	display: none
-	position: absolute
-	left: 0
-	right: 0
 	bottom: 0
+	display: none
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ) // IE 9 fallback
 	height: 80%
+	left: 0
 	padding-left: remify(48px)
+	position: absolute
+	right: 0
 	+respond-min($break-phablet-min)
 		padding-left: remify(80px)
 
 	&__wrap
-		position: absolute
 		bottom: remify(20px)
+		position: absolute
 	&__count
 		+border-radius(1em)
 		+transition-property(background-color)
@@ -206,10 +207,10 @@ $color-comment-border: $zon_light_grey
 	&__cta
 		+transition-property(border-bottom-color, color)
 		+transition-duration(.2s)
+		border-bottom: 1px solid $zon_light_grey
 		color: $zon_grey
 		font-size: remify(15px)
 		letter-spacing: $zon-letter-spacing-s
-		border-bottom: 1px solid $zon_light_grey
 
 
 // icons
