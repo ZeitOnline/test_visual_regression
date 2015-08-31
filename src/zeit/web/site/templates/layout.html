@@ -96,7 +96,7 @@
         <esi:include src="http://www.zeit.de/cardstack-backend/stacks/esi/head?shareUrl={{ request.url }}" onerror="continue" />
     {% endif %}
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ view.context.uniqueId }}" data-adDeliveryType="{{ view.ad_delivery_type }}">
+<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/marketing.html" %}
 
@@ -105,10 +105,6 @@
     {% endblock skiplink %}
     <div class="page">
         {% block adplace_top %}
-            <!-- mobile ad at top -->
-            <div class="iqd-mobile-adplace">
-                <div id="sas_13500"></div>
-            </div>
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
@@ -122,6 +118,7 @@
         {% endblock adplace_top %}
         <div class="page__content">
             {% profile %}
+            {% if not view.is_wrapped %}
             <header class="header" role="banner">
                 {% block navigation %}
                     {%- include "zeit.web.site:templates/inc/navigation/navigation.tpl" ignore missing -%}
@@ -129,6 +126,7 @@
                 {% block metadata %}
                 {% endblock metadata %}
             </header>
+            {% endif %}
             {% block breaking_news %}
                 {%- include "zeit.web.site:templates/inc/breaking_news.tpl" ignore missing -%}
             {% endblock breaking_news %}

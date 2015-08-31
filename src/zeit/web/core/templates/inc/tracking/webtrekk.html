@@ -56,10 +56,16 @@
             9: "{{ view.banner_channel | lower }}", // Banner-Channel
             10: "{%- if view.context.advertising_enabled %}yes{% endif -%}", // Banner aktiv?
             11: "", // Fehler
-            12: window.ZMO.isMobileView() ? "mobile.site" : "desktop.site",
+            12: window.ZMO.getSiteParam('.site'),
             13: window.ZMO.breakpoint.getTrackingBreakpoint(),
             14: "{{ 'alt' if 'zeitmz' in view.banner_channel else 'neu'  }}"
         };
+
+        {% if view.is_wrapped %}
+        wt.customSessionParameter = {
+            1: window.ZMO.wrapped.client
+        };
+        {% endif %}
 
         wt.contentId = Z_WT_KENNUNG;
         wt.sendinfo();

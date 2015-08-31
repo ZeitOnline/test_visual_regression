@@ -44,7 +44,7 @@ ORDERS = collections.defaultdict(
 class IRanking(zeit.content.cp.interfaces.IArea):
 
     sort_order = zope.schema.TextLine(
-        title=u'Search result order', default=u'relevanz', required=False)
+        title=u'Search result order', default=u'aktuell', required=False)
 
     raw_query = zope.schema.Text(
         title=u'Raw solr query', default=None, required=False)
