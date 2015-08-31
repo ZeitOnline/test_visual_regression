@@ -414,7 +414,7 @@ class Base(object):
             return date.astimezone(self.timezone)
 
     @zeit.web.reify
-    def has_card_stack(self):
+    def has_cardstack(self):
         return False
 
 

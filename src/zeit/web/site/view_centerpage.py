@@ -127,7 +127,7 @@ class Centerpage(
         return self.request.url
 
     @zeit.web.reify
-    def has_card_stack(self):
+    def has_cardstack(self):
         kwargs = {'cp:type': 'cardstack'}
         return bool(zeit.web.core.utils.find_block(self.context, **kwargs))
 

@@ -92,7 +92,7 @@
     {% if view.is_dev_environment %}
     <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
-    {% if view.has_card_stack %}
+    {% if view.has_cardstack %}
         <esi:include src="http://www.zeit.de/cardstack-backend/stacks/esi/head?shareUrl={{ request.url }}" onerror="continue" />
     {% endif %}
 </head>
@@ -170,7 +170,7 @@
     <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" id="vgwort_pixel" class="visually-hidden">
     <!--end: vgwort-->
     {% endif %}
-    {% if view.has_card_stack %}
+    {% if view.has_cardstack %}
         <esi:include src="http://www.zeit.de/cardstack-backend/stacks/esi/scripts?shareUrl={{ request.url }}" onerror="continue" />
     {% endif %}
 </body>

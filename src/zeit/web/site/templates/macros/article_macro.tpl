@@ -199,3 +199,8 @@
     <div class="raw">{{ obj.xml | safe }}</div>
     {% endif %}
 {%- endmacro %}
+
+{% macro cardstack(module, view) -%}
+    {% set request = view.request %}
+    {% include 'zeit.web.site:templates/inc/module/cardstack.html' %}
+{% endmacro -%}
