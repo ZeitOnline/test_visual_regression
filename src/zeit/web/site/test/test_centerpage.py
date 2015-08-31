@@ -201,9 +201,7 @@ def test_centerpage_markdown_module_is_rendered(jinja2_env):
     assert len(html.cssselect('.markup__text li')) == 4
 
 
-def test_verlagsangebot_label_should_be_displayed(
-        testbrowser, testserver):
-    browser = testbrowser(
-        '%s/zeit-online/parquet-verlag-setup' % testserver.url)
-    labels = browser.cssselect('.teasr-small__label')
+def test_verlagsangebot_label_should_be_displayed(testbrowser, testserver):
+    browser = testbrowser('/zeit-online/teaser-inhouse-setup')
+    labels = browser.cssselect('.teaser-small__label')
     assert len(labels) == 3
