@@ -3,10 +3,6 @@
   <head>
     <header_image/>
     <snapshot/>
-    <rankedTags xmlns:ns0="http://namespaces.zeit.de/CMS/tagging">
-      <tag type="Person" url_value="sasha-waltz" uuid="ee170ef7-ccdc-48f7-a617-62f5158512ea">Sasha Waltz</tag>
-      <tag type="Organization" url_value="interpol" uuid="0d1b12e1-1ee1-4cde-810b-033f45ce3450">Interpol</tag>
-    </rankedTags>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
@@ -26,7 +22,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Zeit-Magazin</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
@@ -49,15 +45,14 @@
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
     <topiclinks>
-        <topiclink_title>Schwerpunkte</topiclink_title>
-        <topiclink>
-            <topiclink_label_1>Islamischer Staat</topiclink_label_1>
-            <topiclink_url_1>http://www.zeit.de/schlagworte/organisationen/islamischer-staat/index</topiclink_url_1>
-            <topiclink_label_2>Bundeswehr</topiclink_label_2>
-            <topiclink_url_2>http://www.zeit.de/schlagworte/themen/bundeswehr/index</topiclink_url_2>
-            <topiclink_label_3>Hongkong</topiclink_label_3>
-            <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
-        </topiclink>
+      <topiclink>
+        <topiclink_label_1>Türkei</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/schlagworte/orte/tuerkei/index</topiclink_url_1>
+        <topiclink_label_2>Griechenland</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/schlagworte/orte/griechenland/index</topiclink_url_2>
+        <topiclink_label_3>G-7-Gipfel</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/schlagworte/themen/g-7-gipfel/index</topiclink_url_3>
+      </topiclink>
     </topiclinks>
   </head>
   <body>
@@ -80,13 +75,10 @@
         </container>
       </region>
     </cluster>
-    <supertitle>ZMO CP</supertitle>
-    <title>ZMO</title>
-    <subtitle>ZMO CP</subtitle>
+    <title>Verlagsangebot</title>
   </body>
   <feed/>
   <teaser>
-    <title>ZMO</title>
-    <text>ZMO CP</text>
+    <title>Verlagsangebot</title>
   </teaser>
 </centerpage>
