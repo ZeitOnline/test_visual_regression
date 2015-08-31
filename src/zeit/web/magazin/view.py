@@ -58,3 +58,11 @@ class Base(zeit.web.core.view.Base):
             'viewport_zoom': 'tablet-landscape',
         }
         return cases.get(name, None)
+
+    @zeit.web.reify
+    def adcontroller_handle(self):
+        if self.is_hp:
+            return 'zm_index'
+        if self.type == 'centerpage':
+            return 'zm_centerpage'
+        return 'zm_artikel'
