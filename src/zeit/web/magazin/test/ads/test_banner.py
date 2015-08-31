@@ -96,21 +96,21 @@ def test_banner_should_not_be_displayed_on_disabled_cp(
 
 def test_banner_view_should_be_displayed_on_pages(testserver, testbrowser):
     browser = testbrowser('%s/artikel/03' % testserver.url)
-    assert browser.cssselect('#iqadtile7')
-    assert browser.cssselect('#iqadtile8')
+    assert browser.cssselect('#ad-desktop-7')
+    assert browser.cssselect('#ad-desktop-8')
     browser = testbrowser('%s/artikel/03/seite-3' % testserver.url)
-    assert browser.cssselect('#iqadtile7')
+    assert browser.cssselect('#ad-desktop-7')
     browser = testbrowser('%s/artikel/03/seite-4' % testserver.url)
-    assert browser.cssselect('#iqadtile7')
+    assert browser.cssselect('#ad-desktop-7')
     browser = testbrowser('%s/artikel/03/seite-7' % testserver.url)
-    assert browser.cssselect('#iqadtile7')
+    assert browser.cssselect('#ad-desktop-7')
 
 
 def test_banner_tile3_should_be_displayed_on_pages(testserver, testbrowser):
     browser = testbrowser('%s/artikel/01' % testserver.url)
-    assert browser.cssselect('#iqadtile3')
+    assert browser.cssselect('#ad-desktop-3')
     browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
-    assert browser.cssselect('#iqadtile3')
+    assert browser.cssselect('#ad-desktop-3')
 
 
 def test_banner_view_should_be_displayed_on_succeeding_pages(
@@ -132,9 +132,7 @@ def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
     # test article with xml banner is missing
     browser = testbrowser('%s/artikel/10' % testserver.url)
     # desktop ads
-    assert browser.cssselect('div[class*="ad-tile_"]')
-    # mobile ad script
-    assert browser.cssselect('script[src*="js/libs/iqd/sasmobile.js"]')
+    assert browser.cssselect('script[id^="ad-desktop-"]')
 
 
 # Tests for articles
