@@ -1,3 +1,5 @@
+import re
+
 import zeit.magazin.interfaces
 
 import zeit.web.core.view
@@ -66,3 +68,25 @@ class Base(zeit.web.core.view.Base):
         if self.type == 'centerpage':
             return 'zm_centerpage'
         return 'zm_artikel'
+
+    @zeit.web.reify
+    def adcontroller_values(self):
+        """Fill the adcontroller js object with actual values.
+        Output in level strings only allows latin characters, numbers and
+        underscore."""
+        levels = self.banner_channel.replace('zeitmz/', '')
+        levels = levels.split('/')
+        # remove type from level3
+        try:
+            levels[1] = '' if levels[1] == self.type else levels[1]
+        except IndexError:
+            if levels[0] == 'centerpage':
+                levels[0] = 'homepage'
+            levels.append('')
+        return [('$handle', self.adcontroller_handle),
+                ('level2', "".join(re.findall(r"[A-Za-z0-9_]*", levels[0]))),
+                ('level3', "".join(re.findall(r"[A-Za-z0-9_]*", levels[1]))),
+                ('level4', ''),
+                ('$autoSizeFrames', True),
+                ('keywords', ','.join(self.adwords)),
+                ('tma', '')]
