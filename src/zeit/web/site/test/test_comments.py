@@ -148,3 +148,30 @@ def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
 
     assert string.strip() == '', (
         'comment section template must return an empty document')
+
+
+def test_comment_reply_threads_wrap_on_load_and_expand_on_click(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/article/02' % testserver.url)
+
+    wrapped_threads = driver.find_elements_by_css_selector('.comment--wrapped')
+    assert len(wrapped_threads) == 5
+
+    hidden_reply = driver.find_element_by_id('cid-5122767')
+    assert not hidden_reply.is_displayed()
+
+    comment_count_overlay = driver.find_element_by_class_name(
+        'comment-overlay__count')
+    assert comment_count_overlay.text == '+2'
+
+    wrapped_threads[0].click()
+    assert len(driver.find_elements_by_css_selector('.comment--wrapped')) == 4
+    assert hidden_reply.is_displayed()
+
+
+def test_comment_reply_thread_must_not_wrap_if_deeplinked(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/article/02#cid-5122767' % testserver.url)
+    assert driver.find_element_by_id('cid-5122767').is_displayed()
