@@ -49,6 +49,7 @@ class Byline(list):
         self.genre()
         self.from_()
         self.interview()
+        self.column()
         self.groups()
 
     def __repr__(self):
@@ -67,6 +68,11 @@ class Byline(list):
         if getattr(self.context, 'genre', None) == 'interview':
             # Replace any prior byline efforts with a special interview label.
             self[:] = [('text', u'{}:'.format(self.context.genre.title()))]
+
+    def column(self):
+        if getattr(self.context, 'serie', None) and self.context.serie.column:
+            # Replace any prior byline efforts with a special interview label.
+            self[:] = [('text', u'Eine Kolumne von ')]
 
     @staticmethod
     def expand_authors(authors):
