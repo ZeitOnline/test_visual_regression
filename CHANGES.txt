@@ -6,6 +6,11 @@ Change log for zeit.web
 
 - ZON-2002: Include cards from espi-be via esi
 
+- ZON-2080: hide cp2015 ending in sharing data
+
+- ZON-1592: Label "Verlagsangebote"
+
+
 
 1.61.1 (2015-08-27)
 -------------------
@@ -31,6 +36,9 @@ Change log for zeit.web
 - ZON-2052: Enable DNS Prefetch for assets
 
 - ZON-2050: Do not load hidden images
+
+- ZON-2011: Use default style/template on column teaser and article
+  if there is no author image
 
 - FIX: iqd sitebar should not again be seen on mobile
 
