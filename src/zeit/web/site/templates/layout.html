@@ -94,8 +94,11 @@
     {% endif %}
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
+    
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
-    {% include "zeit.web.core:templates/inc/marketing.html" %}
+
+    {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
+    {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
 
     {% block skiplink %}
     <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>

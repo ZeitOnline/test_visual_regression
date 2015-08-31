@@ -1,3 +1,4 @@
+{% if view.enable_third_party_modules and view.enable_iqd and view.context.advertising_enabled %}
 <!-- begin ad tag (oop) -->
 <div id="iqadtileOOP">
     <script type="text/javascript">
@@ -7,3 +8,4 @@
     </script>
 </div>
 <!-- end ad tag (oop) -->
+{% endif %}
