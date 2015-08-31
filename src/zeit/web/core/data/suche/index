@@ -55,11 +55,9 @@
   </head>
   <body>
     <title>Suche</title>
-    <cluster area="feature" visible="True" title="Suchformular">
-      <region visible="True" area="id-12e4530c-1806-481b-bff9-7a47c2095a05" kind="solo" title="Formular">
-        <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526" cp:type="cpextra" module="search-form">
-          <cp_extra id="search-form"/>
-        </container>
+     <cluster visible="True" area="id-66f12362-97e2-4e95-afee-75e1064dee62" kind="solo" visible_mobile="True">
+      <region visible="True" hide-dupes="True" area="id-0b738a33-8e36-4dd2-92f5-96e82137555e" kind="solo" visible_mobile="True">
+        <container cp:type="cpextra" module="search-form" visible="True" cp:__name__="id-5edb2b47-9405-457f-ad9d-188a464927c5" visible_mobile="True"/>
       </region>
     </cluster>
     <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa257" title="Suchergebnisse">
