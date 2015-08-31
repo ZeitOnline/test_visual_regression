@@ -2,11 +2,10 @@
 import pytest
 
 
-@pytest.mark.parametrize('url', ['index', 'zeit-online/article/01'])
+@pytest.mark.parametrize('url', ['/index', '/zeit-online/article/01'])
 def test_cardstack_should_be_included_in_content_objects(
-        testbrowser, testserver, url):
-    browser = testbrowser(
-        '%s/%s' % (testserver.url, url))
+        testbrowser, url):
+    browser = testbrowser(url)
 
     # To bad. We cannot select namespaces elements on undeclared namespaces.
     # This is why we can't use cssselect.
