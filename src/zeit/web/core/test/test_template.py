@@ -319,6 +319,14 @@ def test_zon_fullwidth_teaser_mapping_is_working_as_expected(application):
     assert teaser == 'zon-fullwidth'
 
 
+def test_zon_inhouse_teaser_mapping_is_working_as_expected(application):
+    block = mock.Mock()
+    block.__iter__ = lambda _: iter(['article'])
+    block.layout.id = 'parquet-verlag'
+    teaser = zeit.web.core.template.get_layout(block)
+    assert teaser == 'zon-inhouse'
+
+
 def test_hide_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.__parent__ = mock.Mock()
@@ -343,9 +351,6 @@ def test_hide_teaser_mapping_is_working_as_expected(application):
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
     block.layout.id = 'parquet-printteaser'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'hide'
-    block.layout.id = 'parquet-verlag'
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
 

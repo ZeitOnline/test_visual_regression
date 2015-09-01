@@ -3,7 +3,7 @@
 {% macro render_page(page) %}
     {% for item in page %}
         {% set type = item | block_type %}
-        {% if type in ['place', 'contentadblock'] %}
+        {% if type in ['place', 'contentadblock', 'cardstack'] %}
             {{ blocks[type](item, view) }}
         {% else %}
             {{ (blocks[type] or blocks["no_block"])(item) }}
