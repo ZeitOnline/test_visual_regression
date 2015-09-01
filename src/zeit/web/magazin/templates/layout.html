@@ -86,7 +86,6 @@
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
-                        {{ lama_core.adplace(view.banner(1), view, True) }}
                         {{ lama_core.adplace(view.banner(1), view) }}
                         <div id="iqd_rightAd">
                             {{ lama_core.adplace(view.banner(2), view) }}
@@ -110,6 +109,7 @@
 
                 {% block adplace_billboard %}
                     {{ lama_core.adplace(view.banner(3), view) }}
+                    {{ lama_core.adplace(view.banner(1), view, True) }}
                 {% endblock adplace_billboard %}
 
                 {% block page_title %}
