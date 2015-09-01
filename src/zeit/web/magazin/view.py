@@ -74,15 +74,14 @@ class Base(zeit.web.core.view.Base):
         """Fill the adcontroller js object with actual values.
         Output in level strings only allows latin characters, numbers and
         underscore."""
-        levels = self.banner_channel.replace('zeitmz/', '')
-        levels = levels.split('/')
+        levels = self.banner_channel.split('/')
         # remove type from level3
+        levels[1] = '' if levels[1] == self.type else levels[1]
         try:
-            levels[1] = '' if levels[1] == self.type else levels[1]
+            if self.is_hp:
+                levels[1] = 'homepage'
         except IndexError:
-            if levels[0] == 'centerpage':
-                levels[0] = 'homepage'
-            levels.append('')
+            pass
         return [('$handle', self.adcontroller_handle),
                 ('level2', "".join(re.findall(r"[A-Za-z0-9_]*", levels[0]))),
                 ('level3', "".join(re.findall(r"[A-Za-z0-9_]*", levels[1]))),
