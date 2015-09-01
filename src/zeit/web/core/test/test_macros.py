@@ -2,21 +2,6 @@
 import mock
 
 
-def test_adplace_middle_mobile_produces_html(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.core:templates/macros/layout_macro.tpl')
-    elems = ['<div class="iqd-mobile-adplace iqd-mobile-adplace--middle">',
-             '<div id="sas_13557"></div>']
-    obj = mock.Mock()
-    obj.tile = 7
-    lines = tpl.module.adplace_middle_mobile(obj).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    for el in elems:
-        assert el in output
-
-
 def test_adplace_middle_mobile_dont_produces_html(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.core:templates/macros/layout_macro.tpl')

@@ -32,21 +32,6 @@ def test_ad_keyword_diuqilon(selenium_driver, testserver, monkeypatch):
 
 
 @pytest.mark.xfail(reason='ad scripts may timeout')
-def test_ad_display(selenium_driver, testserver):
-    driver = selenium_driver
-    m_sel = "div[id='sas_13500']"
-    driver.set_window_size(320, 480)
-    driver.get('%s/artikel/01' % testserver.url)
-    try:
-        selector = 'body[data-ad-delivery-type="oldschool"]'
-        driver.find_element_by_css_selector(selector)
-    except:
-        pytest.skip("not applicable due to new ad configuration")
-
-    assert driver.find_element_by_css_selector(m_sel) != 0
-
-
-@pytest.mark.xfail(reason='ad scripts may timeout')
 def test_viewport_is_resized_in_ipad_landscape(selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(1024, 768)
