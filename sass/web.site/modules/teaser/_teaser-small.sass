@@ -30,3 +30,9 @@
 		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
+	&__label
+		@extend %teaser-label
+		+respond-min($break-phablet-min)
+			text-align: left
+	&--inhouse &__media
+		@extend %teaser-small-media-inhouse !optional

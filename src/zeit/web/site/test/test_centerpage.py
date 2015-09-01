@@ -46,7 +46,8 @@ def test_buzz_mostread_should_output_correct_titles(
     assert u'Das neue Heft \x96 im Video durchgeblättert' in title.text
 
 
-@pytest.skip('Hidden until referrer-sensitive buzzbox is added.')
+@pytest.mark.skipif(True,
+                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_comments_should_render_correct_article_count(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
@@ -54,7 +55,8 @@ def test_buzz_comments_should_render_correct_article_count(
     assert len(articles) == 3
 
 
-@pytest.skip('Hidden until referrer-sensitive buzzbox is added.')
+@pytest.mark.skipif(True,
+                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_comments_should_render_with_correct_scores(
         testbrowser, testserver, mockserver_factory):
     cp_counts = """<?xml version="1.0" encoding="UTF-8"?>
@@ -70,7 +72,8 @@ def test_buzz_comments_should_render_with_correct_scores(
     assert [to_int(m.text) for m in media] == [129, 142, 110]
 
 
-@pytest.skip('Hidden until referrer-sensitive buzzbox is added.')
+@pytest.mark.skipif(True,
+                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_comments_should_output_correct_titles(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
@@ -80,7 +83,8 @@ def test_buzz_comments_should_output_correct_titles(
     assert u'Das neue Heft \x96 im Video durchgeblättert' in title.text
 
 
-@pytest.skip('Hidden until referrer-sensitive buzzbox is added.')
+@pytest.mark.skipif(True,
+                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_facebook_should_render_correct_article_count(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
@@ -88,7 +92,8 @@ def test_buzz_facebook_should_render_correct_article_count(
     assert len(articles) == 3
 
 
-@pytest.skip('Hidden until referrer-sensitive buzzbox is added.')
+@pytest.mark.skipif(True,
+                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_facebook_should_render_with_correct_scores(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
@@ -96,7 +101,8 @@ def test_buzz_facebook_should_render_with_correct_scores(
     assert [to_int(m.text) for m in media] == [16674, 5780, 2391]
 
 
-@pytest.skip('Hidden until referrer-sensitive buzzbox is added.')
+@pytest.mark.skipif(True,
+                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_facebook_should_output_correct_titles(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
@@ -199,3 +205,11 @@ def test_centerpage_markdown_module_is_rendered(jinja2_env):
     assert len(html.cssselect('.markup')) == 1
     assert len(html.cssselect('.markup__title')) == 1
     assert len(html.cssselect('.markup__text li')) == 4
+
+
+def test_verlagsangebot_label_should_be_displayed(testbrowser):
+    select = testbrowser('/zeit-online/teaser-inhouse-setup').cssselect
+    labels = select('.teaser-small--inhouse .teaser-small__label')
+    assert len(labels) == 2
+    labels = select('.teaser-small-minor--inhouse .teaser-small-minor__label')
+    assert len(labels) == 1

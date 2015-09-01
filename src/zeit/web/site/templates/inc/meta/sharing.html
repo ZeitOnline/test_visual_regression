@@ -9,7 +9,7 @@
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="{{ view.title or 'ZEIT ONLINE' }}">
 	<meta property="og:description" content="{{ view.subtitle or '' }}">
-	<meta property="og:url" content="{{ view.content_url or 'http://' + request.host + request.path_info }}">
+	<meta property="og:url" content="{{ view.og_url or 'http://' + request.host + request.path_info }}">
 	{% if view.image_group -%}
 		<meta property="og:image" content="{{ view.image_group|sharing_image_url(image_pattern='og-image') }}">
 		<link itemprop="image" rel="image_src" href="{{ view.image_group|sharing_image_url(image_pattern='og-image') }}">

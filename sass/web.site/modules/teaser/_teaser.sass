@@ -28,6 +28,11 @@
 	+respond-min($break-desktop-min)
 		width: remify(250px+20px)
 
+%teaser-small-media-inhouse
+	+respond-max($break-phablet-min)
+		display: block
+		margin: 0 0 remify(20px)
+
 %teaser-small-container
 	vertical-align: top
 	+respond-min($break-phablet-min)
@@ -120,3 +125,6 @@
 		text-decoration: none
 	&:hover
 		border-bottom: 1px solid $zon_light_grey
+
+%teaser-label
+	@extend %ad-label

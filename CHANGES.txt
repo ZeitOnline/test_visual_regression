@@ -6,6 +6,13 @@ Change log for zeit.web
 
 - ZON-2121: Add styles and scripts for Datenjournalismus
 
+- ZON-2002: Include cards from espi-be via esi
+
+- ZON-2080: hide cp2015 ending in sharing data
+
+- ZON-1592: Label "Verlagsangebote"
+
+
 
 1.61.1 (2015-08-27)
 -------------------

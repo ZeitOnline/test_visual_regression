@@ -37,3 +37,9 @@
 		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
+	&__label
+		@extend %teaser-label
+		+respond-min-max($break-phablet-min, $break-areas)
+			text-align: left
+	&--inhouse &__media
+		@extend %teaser-small-media-inhouse !optional

@@ -70,10 +70,10 @@ class TeaserMapping(zeit.web.core.utils.frozendict):
                           'parquet-regular', 'parquet-spektrum',
                           'zon-parquet-small'],
             'zon-fullwidth': ['leader-fullwidth'],
+            'zon-inhouse': ['parquet-verlag'],
             'hide': ['archive-print-volume', 'archive-print-year',
                      'two-side-by-side', 'ressort', 'leader-upright',
-                     'buttons-fullwidth', 'parquet-printteaser',
-                     'parquet-verlag']}
+                     'buttons-fullwidth', 'parquet-printteaser']}
 
     def __init__(self, *args, **kw):
         # Flattens and reverses _map, so we can easily lookup a layout.

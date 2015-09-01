@@ -384,6 +384,13 @@ class Base(object):
         return self.request.route_url('home') + path
 
     @zeit.web.reify
+    def og_url(self):
+        # for og url, hide cp2015 ending
+        path = '/'.join(self.request.traversed)
+        return self.request.route_url('home') + path.replace(
+            'index.cp2015', 'index')
+
+    @zeit.web.reify
     def is_dev_environment(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('dev_environment', '')
@@ -412,6 +419,10 @@ class Base(object):
         if (self.date_first_released is not None and date is not None and
                 date > self.date_first_released):
             return date.astimezone(self.timezone)
+
+    @zeit.web.reify
+    def has_cardstack(self):
+        return False
 
 
 class Content(Base):
