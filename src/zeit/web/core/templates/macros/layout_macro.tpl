@@ -94,7 +94,13 @@
     {% set scriptname = 'ad-%s-%s' | format(type, banner.tile) %}
     <div>
         <script type="text/javascript" id="{{ scriptname }}">
-            if (typeof AdController !== 'undefined' && ZMO.clientWidth {{ operator | safe }} ZMO.mobileWidth) {
+            if (
+                typeof AdController !== 'undefined'
+                {% if type == 'desktop' and banner.tile == 2 %}
+                && ZMO.clientWidth > ZMO.sideAdMinWidth 
+                {% endif %}
+                && ZMO.clientWidth {{ operator | safe }} ZMO.mobileWidth
+                ) {
                 if( ! document.getElementById( "iqadtile{{ banner.tile }}" ) ) {
                     var elem = document.createElement('div');
                     elem.id = "iqadtile{{ banner.tile }}";
