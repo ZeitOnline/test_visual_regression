@@ -407,9 +407,7 @@ def test_cp_should_have_informatives_ad_at_3rd_place(
     elements = wrap[0].find_elements_by_xpath("div")
     add = elements[2].get_attribute("class")
     assert add == 'cp_button--ad'
-    mr = elements[2].find_element_by_css_selector(
-        "#iqadtile7").get_attribute("class")
-    assert mr == "ad-tile_7 ad-tile_7--on-centerpage"
+    assert elements[2].find_element_by_css_selector("#ad-desktop-7")
 
 
 def test_cp_with_video_lead_has_correct_markup(selenium_driver, testserver):
