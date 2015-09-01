@@ -117,12 +117,11 @@
     </div>
 {% endmacro %}
 
-{% macro adplace_middle_mobile(item) -%}
-    {% if item.tile == 7 -%}
-    <!-- only integrate onces as equivalent to desktop tile 7 -->
-        <div class="iqd-mobile-adplace iqd-mobile-adplace--middle">
-            <div id="sas_13557"></div>
-        </div>
+{% macro adplace_middle_mobile(banner, view, mobile=True) -%}
+    {% if banner.tile == 7 -%}
+        {% call adplace_adctrl(banner, view, mobile) -%}
+            <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
+        {%- endcall %}
     {%- endif %}
 {%- endmacro %}
 

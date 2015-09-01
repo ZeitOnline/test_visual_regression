@@ -6,6 +6,9 @@
         {% for module in obj -%}
             {% if module.layout -%}
                 {{ include_teaser(module) }}
+                {% if loop.first and module.layout.id == 'zmo-square-large' %}
+                    {{ lama_core.adplace(view.banner(3), view, True) }}
+                {% endif %}    
             {% endif %}
         {% endfor %}
     {% endif %}

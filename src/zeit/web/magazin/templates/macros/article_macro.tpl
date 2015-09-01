@@ -4,7 +4,7 @@
 
 {% macro place(item) -%}
     {{ lama_core.adplace(item, view) }}
-    {{ lama_core.adplace_middle_mobile(item) }}
+    {{ lama_core.adplace_middle_mobile(item, view) }}
 {%- endmacro %}
 
 {% macro contentadblock(item) -%}
