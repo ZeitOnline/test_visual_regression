@@ -749,8 +749,7 @@ def to_dict(mapping):
 
 
 @zeit.web.register_global
-def debug_breaking_news():
-    request = pyramid.threadlocal.get_current_request()
+def debug_breaking_news(request):
     return 'eilmeldung' == request.GET.get('debug', '')
 
 
