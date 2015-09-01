@@ -22,6 +22,7 @@ Available attributes:
     {% profile %}
     {%- include "zeit.web.magazin:templates/inc/cp_area_lead_full_teaser.html" ignore missing -%}
     {%- include "zeit.web.magazin:templates/inc/cp_area_lead_1.html" ignore missing -%}
+    {{ lama_core.adplace(view.banner(4), view, True) }}
     {% endprofile %}
 
     {% if view.is_hp %}
