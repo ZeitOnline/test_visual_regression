@@ -93,18 +93,6 @@ def test_var_IQD_varPack_isset(selenium_driver, testserver, monkeypatch):
     assert varpack == "object"
 
 
-def test_ad_tile2_ommitted_in_portrait(
-        selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
-    driver = selenium_driver
-    driver.set_window_size(768, 1024)
-    driver.get('%s/artikel/01' % testserver.url)
-    script = 'return $(".ad-tile_2").find("script").size()'
-    scripts = driver.execute_script(script)
-    assert scripts == 1
-
-
 @pytest.mark.xfail(reason='ad scripts may timeout')
 def test_ad_tile2_not_ommitted_in_landscape(
         selenium_driver, testserver, monkeypatch):
