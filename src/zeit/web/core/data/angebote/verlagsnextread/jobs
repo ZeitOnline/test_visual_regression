@@ -1,0 +1,28 @@
+<advertisement xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-09-01T10:44:14.467753+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Advertisement" module="zeit.content.advertisement.advertisement"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-01T10:44:20.672560+00:00</attribute>
+  </head>
+  <body>
+		<supertitle>mySupertitle</supertitle>
+		<title>myTitle</title>
+		<text>myText</text>
+		<button_text>myButtonText</button_text>
+		<button_color>#c0ffee</button_color>
+		<image></image>
+		<url>http://www.zeit.de/jobs</url>
+  </body>
+</advertisement>

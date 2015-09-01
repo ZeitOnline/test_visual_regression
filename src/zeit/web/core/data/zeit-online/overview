@@ -85,6 +85,20 @@
         </region>
     </cluster>
 
+    <cluster visible="True" area="id-01aa0739-4df4-4cbd-bf1e-86809ef1a020" kind="parquet">
+        <region visible="True" hide-dupes="True" area="id-0100a3c0-fe49-6291-baac-453cc2a213ef" kind="parquet" title="Nextreads">
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf4caef">
+                <block contenttype="article" uniqueId="http://xml.zeit.de/zeit-online/article/zeit" />
+            </container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf5caef">
+                <block contenttype="article" uniqueId="http://xml.zeit.de/zeit-online/article/01" />
+            </container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf6caef">
+                <block contenttype="article" uniqueId="http://xml.zeit.de/zeit-online/article/simple-verlagsnextread" />
+            </container>
+        </region>
+    </cluster>
+
     <cluster visible="True" area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet">
         <region visible="True" hide-dupes="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213ee" kind="parquet" title="Video-CPs">
             <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5aaf4caee">
