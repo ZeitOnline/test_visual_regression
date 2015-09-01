@@ -27,7 +27,7 @@ def test_buzz_mostread_should_render_correct_article_count(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     box = browser.cssselect('.buzz-box--mostread')
     items = browser.cssselect('.buzz-box--mostread li')
-    articles = browser.cssselect('.teaser-buzz')
+    articles = browser.cssselect('.buzz-box--mostread articles.teaser-buzz')
     assert len(box) == 1
     assert len(items) == 3
     assert len(articles) == 3
