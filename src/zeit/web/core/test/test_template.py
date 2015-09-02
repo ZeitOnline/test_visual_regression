@@ -483,15 +483,14 @@ def test_get_column_image_should_return_an_image_or_none(application):
     assert zeit.web.core.template.get_column_image(teaser) is None
 
 
-def test_debug_breaking_news_should_be_enableable(testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    assert not browser.cssselect('.breaking-news-banner')
-
-
-def test_debug_breaking_news_should_be_disableable(testbrowser, testserver):
-    browser = testbrowser(
-        '%s/zeit-online/index?debug=eilmeldung' % testserver.url)
+def test_debug_breaking_news_request(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index?debug=eilmeldung')
     assert browser.cssselect('.breaking-news-banner')
+
+
+def test_debug_breaking_news_default(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert not browser.cssselect('.breaking-news-banner')
 
 
 def test_attr_safe_returns_safe_text(application):

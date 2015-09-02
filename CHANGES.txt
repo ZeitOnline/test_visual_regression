@@ -10,8 +10,9 @@ Change log for zeit.web
 
 - ZON-1592: Label "Verlagsangebote"
 
-- FIX: Fix SASS mixin for rem values
+- ZON-2064: Kommentarezahl Artikel oben
 
+- FIX: Fix SASS mixin for rem values
 
 
 1.61.1 (2015-08-27)
