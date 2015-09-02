@@ -132,13 +132,11 @@ define([ 'jquery' ], function( $ ) {
                     link.removeClass( 'comment__reaction--sending' );
 
                     if ( response.response.error === false ) {
-                        var recommendations = comment.find( '.comment__recommendations' ),
-                            number = response.response.recommendations,
-                            stars;
-
                         toggleRecommendationLink( link );
-                        stars = number ? number + ' &#9733;' : '';
-                        recommendations.html( stars );
+                        comment
+                            .find( '.js-comment-recommendations' )
+                            .html( response.response.recommendations )
+                            .parent().css( 'display', response.response.recommendations ? '' : 'none' );
                     } else {
                         // what else?
                     }

@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - DEV-923: Use image variant specified on the layout for article images
 
+- MAINT: Polish comments preferences and parquet topic links
+
 
 1.62 (2015-09-02)
 -----------------
