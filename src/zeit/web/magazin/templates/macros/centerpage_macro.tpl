@@ -30,6 +30,10 @@
     {% endif %}
 {%- endmacro %}
 
+{% macro include_ad_tile_4(view) %}
+    {{ lama_core.adplace(view.banner(4), view, True) }}
+{% endmacro %}
+
 {% macro include_teaser(module, prefix) -%}
     {% if prefix is not defined -%}
         {% set prefix = '' -%}

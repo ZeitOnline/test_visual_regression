@@ -125,7 +125,7 @@
 
 {% macro adplace_middle_mobile(banner, view, mobile=True) -%}
     {% if banner.tile == 7 -%}
-        {% call adplace_adctrl(banner, view, mobile) -%}
+        {% call adplace_adctrl(view.banner(4), view, mobile) -%}
             <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
         {%- endcall %}
     {%- endif %}
