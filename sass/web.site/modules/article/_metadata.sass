@@ -3,6 +3,16 @@
 	font-size: remify(14px)
 	letter-spacing: $zon-letter-spacing-s
 	margin-bottom: remify(40px)
-
+	>*:not(:last-child):not(:empty):after
+		content: ' / '
+		opacity: .71
+		margin: 0 remify(4px)
 	&--column
 		margin-bottom: 0
+	&__commentcount
+		white-space: nowrap
+		&:link, &:visited
+			color: inherit
+			text-decoration: none
+		&:hover
+			border-bottom: 1px solid $zon_light_grey
