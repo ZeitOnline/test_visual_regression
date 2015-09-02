@@ -189,13 +189,13 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
     top_level_comment_count = len(sorted_tree)
     total_comment_count = len(thread['flattened_comments']) if sort in (
         'desc', 'asc') else len(sorted_tree)
+    thread['comment_count'] = len(thread['flattened_comments'])
 
     # calculate number of pages
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
     pages = int(math.ceil(float(top_level_comment_count) / float(page_size)))
 
-    thread['comment_count'] = comment_count
 
     # sanitize page value
     if page:
