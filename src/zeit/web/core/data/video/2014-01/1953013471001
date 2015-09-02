@@ -1,8 +1,6 @@
 <video xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <head>
 	<keywordset/>
-	<image base-id="http://xml.zeit.de/zeit-online/image/video-polarlichter/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00">
-    </image>
 	<renditions>
 		<rendition url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/3809/18140073001_3094832002001_Aurora-Borealis--Northern-Lights--Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4" frame_width="1280"/>
 	</renditions>
