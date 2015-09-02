@@ -50,7 +50,7 @@ setup(
         'zeit.brightcove',
         'zeit.cms',
         'zeit.connector>=2.6.6.dev0',
-        'zeit.content.article==3.8.0',
+        'zeit.content.article>3.8.0',
         'zeit.content.author',
         'zeit.content.cp',
         'zeit.content.dynamicfolder',
