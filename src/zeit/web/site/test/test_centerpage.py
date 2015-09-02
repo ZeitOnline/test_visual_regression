@@ -176,8 +176,14 @@ def test_dynamic_centerpage_collection_should_output_teasers(
 
     monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
-    assert len(view.regions[0].values()[0]) == 8
+    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    counter = 0
+    for region in view.regions:
+            for area in region.values():
+                for teaser in zeit.content.cp.interfaces.ITeaseredContent(
+                        area):
+                    counter = counter+1
+    assert counter == 8
 
 
 def test_dynamic_centerpage_should_be_paginatable(testserver, testbrowser):
