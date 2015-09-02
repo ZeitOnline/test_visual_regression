@@ -489,8 +489,8 @@ def test_macro_headervideo_handles_video_id_correctly(jinja2_env):
     assert len(vid) == 1
 
 
-def test_macro_sharing_meta_should_produce_markup(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/01' % testserver.url)
+def test_macro_sharing_meta_should_produce_markup(testbrowser):
+    browser = testbrowser('/artikel/01')
     assert browser.cssselect('meta[name="twitter:card"]')
     assert browser.cssselect(
         'meta[name="twitter:site"][content="@zeitonline"]')
