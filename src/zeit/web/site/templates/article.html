@@ -3,7 +3,7 @@
 {% macro render_page(page) %}
     {% for item in page %}
         {% set type = item | block_type %}
-        {% if type in ['place', 'contentadblock'] %}
+        {% if type in ['place', 'contentadblock', 'cardstack'] %}
             {{ blocks[type](item, view) }}
         {% else %}
             {{ (blocks[type] or blocks["no_block"])(item) }}
@@ -27,13 +27,6 @@
 
 {% block article_pages %}
     <section class="article-page" data-page-number="{{ view.current_page.number+1 }}">
-        <h3 class="visually-hidden">
-        {%- if view.pagination and view.pagination.current -%}
-            Seite {{ view.pagination.current }}/{{ view.pagination.total }}: {{ view.current_page.teaser }}
-        {%- else -%}
-            Seite {{ view.page_nr }}
-        {%- endif -%}
-        </h3>
         {{ render_page(view.current_page) }}
     </section>
 {% endblock article_pages %}

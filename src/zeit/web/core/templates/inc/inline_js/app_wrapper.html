@@ -1,0 +1,11 @@
+{# special javascript treatment for wrapper apps #}
+{% if view.is_wrapped %}
+<script>
+    window.wrapper = {
+        // provide ressort if questioned
+        getRessort: function() {
+            return "{{ view.sub_ressort if view.sub_ressort != '' else view.ressort }}"
+        }
+    };
+</script>
+{% endif %}

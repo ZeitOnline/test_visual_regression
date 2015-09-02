@@ -10,10 +10,12 @@
         itemtype="http://schema.org/VideoObject" itemscope>
 
         <meta itemprop="playerType" content="HTML5 Flash">
+        <meta itemprop="name" content="{{ view.title | hide_none }}">
         {% if view.iso_duration %}
             <meta itemprop="duration" content="{{ view.iso_duration }}">
         {% endif %}
-        <meta itemprop="thumbnail" content="{{ view.video_still | default_image_url }}">
+        <meta itemprop="thumbnailUrl" content="{{ view.video_still | default_image_url }}">
+        <meta itemprop="uploadDate" content="{{ view.date_last_modified | format_date('iso8601') }}">
 
         {{ vima.brightcove_video_tag(view, iframe=True, expanded=True) }}
 

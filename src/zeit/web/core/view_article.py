@@ -169,35 +169,8 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def authors(self):
-        author_list = []
-        try:
-            author_ref = self.context.authorships
-            for index, author in enumerate(author_ref):
-                location = zeit.content.author.interfaces.IAuthorReference(
-                    author).location
-                author = {
-                    'name': getattr(author.target, 'display_name', None),
-                    'href': getattr(author.target, 'uniqueId', None),
-                    'image_group': getattr(author.target, 'image_group', None),
-                    'prefix': u'', 'suffix': u'', 'location': u''}
-                # add location
-                if location and not self.is_longform:
-                    author['location'] = u', {}'.format(location)
-                # add prefix
-                if index == 0:
-                    if self.is_longform:
-                        author['prefix'] = u'\u2014 von'
-                    else:
-                        author['prefix'] = u' von'
-                # add suffix
-                if index == len(author_ref) - 2:
-                    author['suffix'] = u' und'
-                elif index < len(author_ref) - 1:
-                    author['suffix'] = u', '
-                author_list.append(author)
-            return author_list
-        except (IndexError, OSError):
-            return
+        return zeit.web.core.article.convert_authors(
+            self.context, self.is_longform)
 
     @zeit.web.reify
     def authors_list(self):

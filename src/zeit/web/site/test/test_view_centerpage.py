@@ -167,8 +167,11 @@ def test_small_teaser_should_display_no_image_on_mobile(
 def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
     browser = testbrowser('/zeit-online/fullwidth-teaser')
     teaser = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
+    teaser_column = browser.cssselect(
+        '.cp-area.cp-area--solo .teaser-fullwidth-column')
 
-    assert len(teaser) == 3
+    assert len(teaser) == 4
+    assert len(teaser_column) == 1
 
 
 def test_fullwidth_teaser_image_should_have_attributes_for_mobile_variant(
@@ -711,8 +714,7 @@ def test_canonical_url_returns_correct_value_on_cp(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
     request = mock.Mock()
-    request.host_url = 'http://localhorst'
-    request.path_info = '/centerpage/index'
+    request.url = 'http://localhorst/centerpage/index'
     view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, request)
     assert view.canonical_url == 'http://localhorst/centerpage/index'
 
@@ -738,6 +740,11 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
+    url = '%s/zeit-online/article/zeit' % testserver.url
+    browser = testbrowser("{}/seite-2".format(url))
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url + '/seite-2'
+
     url = '%s/suche/index' % testserver.url
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
@@ -746,7 +753,66 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     url = '%s/suche/index' % testserver.url
     browser = testbrowser("{}?p=2".format(url))
     link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url + '?p=2'
+
+    url = '%s/dynamic/ukraine' % testserver.url
+    browser = testbrowser(url)
+    link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
+
+    url = '%s/dynamic/ukraine' % testserver.url
+    browser = testbrowser("{}?p=2".format(url))
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url + '?p=2'
+
+
+def test_robots_rules_for_angebote_paths(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = mock.Mock()
+
+    # usual angebot
+    request.path = '/angebote/immobilien/test'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'index,nofollow,noodp,noydir,noarchive', (
+        'wrong robots for usual angebot')
+
+    # partnersuche
+    request.path = '/angebote/partnersuche/test'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for partnersuche')
+
+
+def test_robots_rules_for_diverse_paths(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = mock.Mock()
+    request.url = 'http://localhost'
+
+    # test folder
+    request.path = '/test/'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for test folder')
+
+    # templates folder
+    request.path = '/templates/'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for templates folder')
+
+    # banner folder
+    request.path = '/banner/'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for banner folder')
+
+    # any folder
+    request.path = '/any/'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for any other folder')
 
 
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
@@ -1017,3 +1083,111 @@ def test_breakpoint_sniffer_script(
     if screen_size[0] == 980:
         assert "desktop" == driver.execute_script(
             "return window.ZMO.breakpoint.get()")
+
+
+def test_hidden_images_must_not_be_loaded_via_js(
+        selenium_driver, testserver, screen_size):
+
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+
+    try:
+        WebDriverWait(driver, 2).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.teaser-fullwidth__media img')))
+    except TimeoutException:
+        assert False, 'Fullsize Image not loaded within 2 seconds'
+    else:
+        largeimage = driver.find_elements_by_css_selector(
+            'figure.teaser-fullwidth__media img[src]')
+        smallimage = driver.find_elements_by_css_selector(
+            'figure.teaser-small__media img[src]')
+
+        if screen_size[0] == 320:
+            assert len(smallimage) == 0
+            assert len(largeimage) == 1
+        elif screen_size[0] == 520:
+            assert len(smallimage) > 0
+            assert len(largeimage) == 1
+        elif screen_size[0] == 768:
+            assert len(smallimage) > 0
+            assert len(largeimage) == 1
+        else:
+            assert len(smallimage) > 0
+            assert len(largeimage) == 1
+
+
+def test_app_wrapper_script(selenium_driver, testserver):
+
+    driver = selenium_driver
+    driver.get(
+        '{}/zeit-online/slenderized-index?app-content'.format(testserver.url))
+
+    ressort = driver.execute_script('return window.wrapper.getRessort()')
+    assert ressort == 'homepage'
+
+
+def test_frames_are_placed_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/index-with-quizzez')
+    frame1 = browser.cssselect('.cp-area--minor > .frame')
+    frame2 = browser.cssselect('.cp-area--duo > .frame')
+    assert len(frame1) == 1
+    assert len(frame2) == 1
+
+    iframe1 = frame1[0].cssselect('iframe.frame__iframe')
+    iframe2 = frame2[0].cssselect('iframe.frame__iframe')
+    assert len(iframe1) == 1
+    assert len(iframe2) == 1
+
+    frameheadline1 = frame1[0].cssselect('h2')
+    frameheadline2 = frame2[0].cssselect('h2')
+    assert len(frameheadline1) == 1
+    assert len(frameheadline2) == 0
+    assert frameheadline1[0].text == 'Quiz'
+
+    assert iframe1[0].get('src') == 'http://quiz.zeit.de/#/quiz/103'
+    assert iframe2[0].get('src') == 'http://quiz.zeit.de/#/quiz/136'
+
+
+def test_frame_dimensions(selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('{}/zeit-online/index-with-quizzez'.format(testserver.url))
+
+    frame1 = driver.find_element_by_css_selector('.cp-area--minor > .frame')
+    frame2 = driver.find_element_by_css_selector('.cp-area--duo > .frame')
+
+    if screen_size[0] == 320:
+        assert frame1.size.get('height') == 450
+        assert frame2.size.get('height') == 460
+
+    if screen_size[0] == 520:
+        assert frame1.size.get('height') == 450
+        assert frame2.size.get('height') == 460
+
+    if screen_size[0] == 768:
+        assert frame1.size.get('height') == 450
+
+    if screen_size[0] == 980:
+        assert frame1.size.get('height') == 450
+
+
+def test_teaser_for_column_without_authorimage_should_be_rendered_default(
+        testbrowser):
+    browser = testbrowser('/zeit-online/teaser-columns-without-authorimage')
+    teasers = browser.cssselect('main article')
+    # we want to be sure that there are teasers at all.
+    assert len(teasers) == 10
+    for teaser in teasers:
+        assert 'teaser' in teaser.get('class')
+        assert 'column' not in teaser.get('class')
+
+
+def test_wrapped_features_are_triggered(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert browser.cssselect('header.header')
+
+    browser = testbrowser('/zeit-online/slenderized-index?app-content')
+    assert not browser.cssselect('header.header')
+    assert browser.cssselect('body[data-is-wrapped="true"]')

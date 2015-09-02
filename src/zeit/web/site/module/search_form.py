@@ -96,7 +96,7 @@ class Form(zeit.web.site.module.Module):
             return 'aktuell'
         this = self['sort']
         orders = zeit.web.site.area.ranking.ORDERS
-        return this in orders and this or 'relevanz'
+        return this in orders and this or 'aktuell'
 
     @zeit.web.reify
     def raw_query(self):

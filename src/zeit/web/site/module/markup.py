@@ -12,8 +12,10 @@ class Markup(zeit.web.site.module.Module, list):
 
     @zeit.web.reify
     def title(self):
-        return self.context.title.strip()
+        if self.context.title is not None:
+            return self.context.title.strip()
 
     @zeit.web.reify
     def text(self):
-        return self.context.text.strip()
+        if self.context.text is not None:
+            return self.context.text.strip()

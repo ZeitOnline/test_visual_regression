@@ -1,0 +1,22 @@
+$additional-margin: $page-padding * 2
+
+.frame
+	background-color: $zon_mid_grey
+	color: $white
+	margin: $vertical-space (-$page-padding)
+	padding-bottom: rem(460px)
+	position: relative
+	+respond-min($break-tablet-min)
+		margin-left: 0
+		margin-right: 0
+		padding-bottom: 100%
+	&__iframe
+		border: none
+		height: 100%
+		margin: 0
+		position: absolute
+		top: 0
+		width: 100%
+	.cp-area--minor &
+		padding-bottom: rem(450px)
+

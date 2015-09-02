@@ -131,8 +131,7 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
     assert '9: "zeitmz/essenundtrinken/article",' in browser.contents
     assert '10: "yes",' or '10: "",' in browser.contents
     assert '11: "",' in browser.contents
-    assert '12: window.ZMO.isMobileView() ? "mobile.site" : "desktop.site",' \
-        in browser.contents
+    assert '12: window.ZMO.getSiteParam(\'.site\'),' in browser.contents
     assert '13: window.ZMO.breakpoint.getTrackingBreakpoint(),' \
         in browser.contents
     assert '14: "alt"' in browser.contents
@@ -203,6 +202,11 @@ def test_webtrekk_series_tag_is_set_corectly(testserver, testbrowser):
     assert ('redaktion.zeit-magazin..tödlichekeime.'
             'article.online|%s:%s/artikel/'
             '06') % (testserver.host, testserver.port) in browser.contents
+
+
+def test_webtrekk_has_session_parameter(testserver, testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index?app-content')
+    assert '1: window.ZMO.wrapped.client' in browser.contents
 
 
 @pytest.mark.xfail(reason='tracking scripts & pixels may timeout')

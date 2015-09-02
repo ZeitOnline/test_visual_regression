@@ -9,6 +9,12 @@
             {% set teaser = module | first_child %}
             {% set layout = module | get_layout %}
             {% set journalistic_format = module | get_journalistic_format %}
+
+            {# ZON-2011: if there is no author image on columns, render as default teaser #}
+            {% if journalistic_format == 'column' and not get_column_image(teaser) %}
+                {% set journalistic_format = None %}
+            {% endif %}
+
             {% set module_loop = loop %}
             {% block before_module_include scoped %}{% endblock %}
             {% include

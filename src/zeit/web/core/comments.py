@@ -168,14 +168,23 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
 
     # We do not want to touch the references of the cached thread
     thread = thread.copy()
-    sorted_tree = thread['sorted_tree'].values()
-    del thread['sorted_tree']
+    sorted_tree = thread.pop('sorted_tree', {}).values()
 
-    if (sort != 'asc'):
-        sorted_tree = reversed(sorted_tree)
-        thread['sort'] = 'desc'
+    thread['sort'] = sort
+    if sort == 'desc':
+        sorted_tree.reverse()
+    elif sort == 'promoted':
+        # Filter comment thread by promotions, retain sort oder
+        gen = ([c, []] for c in thread['flattened_comments'] if (
+            c['is_promoted'] is True))
+        sorted_tree = sorted(gen, None, lambda c: c[0]['is_promoted'], 1)
+    elif sort == 'recommended':
+        # Sort and filter comment thread by recommendations
+        gen = ([c, []] for c in thread['flattened_comments'] if (
+            c['recommendations'] > 0))
+        sorted_tree = sorted(gen, None, lambda c: c[0]['recommendations'], 1)
 
-    comments = []
+    thread['comments'] = comments = []
     positional_index = {}
     for main_comment in sorted_tree:
         positional_index[main_comment[0]['cid']] = len(comments)
@@ -184,12 +193,10 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
             positional_index[sub_comment['cid']] = len(comments)
             comments.append(sub_comment)
 
-    thread['comments'] = comments
-
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
 
-    comment_count = len(thread['comments'])
+    comment_count = len(comments)
     pages = int(math.ceil(float(comment_count) / float(page_size)))
 
     thread['comment_count'] = comment_count
@@ -217,12 +224,11 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
     thread['pages'] = {
         'current': page,
         'total': pages,
-        'pager': zeit.web.core.template.calculate_pagination(page, pages)
-    }
+        'pager': zeit.web.core.template.calculate_pagination(page, pages)}
 
     if page:
         thread['comments'] = (
-            thread['comments'][(page - 1) * page_size: page * page_size])
+            comments[(page - 1) * page_size: page * page_size])
 
         if thread['pages']['pager']:
             first = ((page - 1) * page_size) + 1
@@ -260,11 +266,23 @@ def get_cacheable_thread(unique_id):
 
     comment_count = len(comment_list)
     comment_list = list(comment_to_dict(c) for c in comment_list)
+    flattened_comments = comment_list[:]
+    has_promotion = has_recommendations = False
+    for comment in flattened_comments:
+        if comment['recommendations'] > 0:
+            has_recommendations = True
+        if comment['is_promoted'] is True:
+            has_promotion = True
+        if has_recommendations and has_promotion:
+            break
     sorted_tree, index = _sort_comments(comment_list)
 
     try:
         return dict(
             sorted_tree=sorted_tree,
+            flattened_comments=flattened_comments,
+            has_recommendations=has_recommendations,
+            has_promotion=has_promotion,
             index=index,
             comment_count=comment_count,
             sort='asc',

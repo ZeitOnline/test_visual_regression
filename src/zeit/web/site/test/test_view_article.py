@@ -58,10 +58,88 @@ def test_article_pagination_active_state(testbrowser):
 
     assert len(select('.summary, .byline, .metadata')) == 0
     assert select('.article__page-teaser')[0].text.strip() == (
-        u'Seite 3/5: Man wird schlank und lüstern')
+        u'Seite 3/5:')
+    assert select('.article__page-teaser > h1')[0].text.strip() == (
+        u'Man wird schlank und lüstern')
     assert select('.article-pagination__nexttitle')[0].text.strip() == (
         u'Aus dem abenteuerlustigen Mädchen vom Dorf wurde ein Junkie')
     assert '--current' in (select('.article-pager__number')[2].get('class'))
+
+
+def test_article_page_1_has_correct_h1(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit').cssselect
+    node = '.article__item > h1 > .article-heading__title'
+    assert select(node)[0].text.strip() == (
+        u'Nancy braucht was Schnelles'), (
+        'article headline is not h1')
+
+
+def test_article_page_2_has_correct_h1(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/seite-2').cssselect
+    node = '.article__page-teaser > h1'
+    assert select(node)[0].text.strip() == (
+        u'Der Horror von Crystal wurzelt in der Normalität'), (
+        'article page teaser is not h1')
+
+
+def test_article_page_teaserless_has_correct_h1(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/seite-5').cssselect
+    node = '.article__item > h1 > .article-heading__title'
+    assert select(node)[0].text.strip() == (
+        u'Nancy braucht was Schnelles'), (
+        'article headline is not h1')
+
+
+def test_article_complete_has_correct_h1(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
+    node = '.article__item > h1 > .article-heading__title'
+    assert select(node)[0].text.strip() == (
+        u'Nancy braucht was Schnelles'), (
+        'article headline is not h1')
+
+
+def test_article_plain_has_correct_h1(testbrowser):
+    select = testbrowser('/zeit-online/article/02').cssselect
+    node = '.article__item > h1 > .article-heading__title'
+    assert select(node)[0].text.strip() == (
+        u'Zwei Baguettes und ein Zimmer bitte'), (
+        'article headline is not h1')
+
+
+def test_article_page_1_has_correct_title(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit').cssselect
+    assert select('title')[0].text.strip() == (
+        u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
+        'article headline is not title')
+
+
+def test_article_page_2_has_correct_title(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/seite-2').cssselect
+    assert select('title')[0].text.strip() == (
+        u'Crystal Meth: Der Horror von Crystal '
+        u'wurzelt in der Normalität |\xa0ZEIT ONLINE'), (
+        'article page teaser is not title')
+
+
+def test_article_page_teaserless_has_correct_title(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/seite-5').cssselect
+    assert select('title')[0].text.strip() == (
+        u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
+        'article headline is not title')
+
+
+def test_article_complete_has_correct_title(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
+    assert select('title')[0].text.strip() == (
+        u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
+        'article headline is not title')
+
+
+def test_article_plain_has_correct_title(testbrowser):
+    select = testbrowser('zeit-online/article/02').cssselect
+    assert select('title')[0].text.strip() == (
+        u'Zwei Baguettes und ein Zimmer bitte |\xa0ZEIT ONLINE'), (
+        'article headline is not title')
 
 
 def test_fresh_breaking_news_article_renders_breaking_bar(testbrowser):
@@ -435,6 +513,14 @@ def test_article_should_not_break_without_author(
         '.column-heading__author .column-heading__media-item')
 
 
+def test_article_for_column_without_authorimage_should_be_rendered_default(
+        testbrowser):
+    browser = testbrowser('/zeit-online/cp-content/kolumne-ohne-autorenbild')
+
+    assert len(browser.cssselect('.article--columnarticle')) == 0
+    assert len(browser.cssselect('.column-heading')) == 0
+
+
 def test_article_column_should_be_identifiable_by_suitable_css_class(
         testbrowser):
     browser = testbrowser('/zeit-online/cp-content/kolumne')
@@ -559,3 +645,80 @@ def test_old_archive_text_without_divisions_should_render_paragraphs(
     browser = testbrowser('/zeit-online/article/alter-archivtext')
     assert len(browser.cssselect('.article__item.paragraph')) == 7
     assert len(browser.cssselect('.article-pager__number')) == 3
+
+
+def test_imported_article_has_special_meta_robots(
+        application, monkeypatch):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+
+    # test ZEAR
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'ZEAR')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'noindex,follow', (
+        'wrong robots for ZEAR')
+
+    # test TGS
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'TGS')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'noindex,follow', (
+        'wrong robots for TGS')
+
+    # test HaBl
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'HaBl')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'noindex,follow', (
+        'wrong robots for HaBl')
+
+    # test WIWO
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'WIWO')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'noindex,follow', (
+        'wrong robots for WIWO')
+
+    # test GOLEM
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'GOLEM')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'noindex,follow', (
+        'wrong robots for GOLEM')
+
+    # test ZEI
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', u'ZEI')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for ZEI')
+
+    # test no product id
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'product_id', None)
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for none product article')
+
+
+def test_article_of_ressort_fehler_has_special_meta_robots(
+        application, monkeypatch):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+
+    # test ressort Fehler
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'Fehler')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'noindex,follow', (
+        'wrong robots for fehler ressort')
+
+    # test any other ressort
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'Politik')
+    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for any other ressort')

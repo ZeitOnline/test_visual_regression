@@ -87,7 +87,7 @@
 					<block href="http://xml.zeit.de/zeit-online/cp-content/kolumne"/>
 				</container>
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-e4a845a3-0a34-4c7c-a02c-fc32535ba418">
-					<block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild"/>
+					<block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild"/>
 				</container>
 			</region>
 		</cluster>

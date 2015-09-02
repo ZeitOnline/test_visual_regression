@@ -226,29 +226,29 @@
     <cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f7149e012c" kind="solo" title="AufmacherColumnWithoutImage">
       <region visible="True" hide-dupes="True" area="id-49b67be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
         <container cp:__name__="id-265307ee-ecdd-4480-870b-8fd67ff73e43" cp:type="teaser" module="zon-fullwidth" visible="True">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild" />
+          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild" />
         </container>
       </region>
     </cluster>
     <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff2" visible="True">
       <region area="id-6280c8ee-b68e-40dd-a117-4d676e282598" visible="True" kind="solo">
         <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" module="zon-classic" visible="True">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild" />
+          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild" />
         </container>
       </region>
     </cluster>
     <cluster visible="True" area="id-6c7bdcd2-7c8a-4bd1-9905-ce39fbec867f" kind="duo" title="TeasersColumnWithoutImage">
       <region visible="True" hide-dupes="True" area="id-687f7c34-8a0e-5451-9123-1826de4ea33d" kind="major">
         <container cp:__name__="id-653607ee-ecdd-4804-870b-8fd67ff27e16" cp:type="teaser" module="zon-large" visible="True">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild" />
+          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild" />
         </container>
         <container cp:__name__="id-653607ee-edcd-1447-070b-8df67ff731e2" cp:type="teaser" module="zon-small" visible="True">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild" />
+          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild" />
         </container>
       </region>
       <region visible="True" hide-dupes="True" area="id-610027e2-3274-4c9f-bef6-eb915b53888a" kind="minor" title="Marginalspalte">
         <container cp:__name__="id-656307ee-ecdd-2647-070b-8fd67ff371e2" cp:type="teaser" module="zon-small" visible="True">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild" />
+          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild" />
         </container>
       </region>
     </cluster>
@@ -256,10 +256,10 @@
     <cluster visible="True" area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet" title="ParquetColumnWithoutImage">
       <region visible="True" hide-dupes="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213dd" kind="parquet" title="Parkett: Kolumnen-Teaser ohne Bild">
         <container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5aaf4cad1">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild" />
+          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild" />
         </container>
         <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d7">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild" />
+          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild" />
         </container>
       </region>
     </cluster>

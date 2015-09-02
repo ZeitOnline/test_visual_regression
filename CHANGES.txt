@@ -1,13 +1,88 @@
 Change log for zeit.web
 =======================
 
-1.60.0 (unreleased)
+1.61.2 (unreleased)
 -------------------
+
+- ZON-2002: Include cards from espi-be via esi
+
+- ZON-2080: hide cp2015 ending in sharing data
+
+- ZON-1592: Label "Verlagsangebote"
+
+
+
+1.61.1 (2015-08-27)
+-------------------
+
+- ZON-1591: Allow app-content mode for staging environment
+
+
+1.61 (2015-08-27)
+-----------------
+
+- ZON-1591: Wrapper functionality for mobile apps
+
+- MAINT: Polish square teaser, topic teaser, column byline and button
+
+- ZON-2034: Bring back images for dynamic ranking areas
+
+- ZON-2129: integrate former noindex rules from XSLT
+
+- ZON-1968: Add Iframe 50/50 Teaser
+
+- ZON-2058: Reposition comment recommendations
+
+- ZON-2052: Enable DNS Prefetch for assets
+
+- ZON-2050: Do not load hidden images
+
+- ZON-2011: Use default style/template on column teaser and article
+  if there is no author image
+
+- FIX: iqd sitebar should not again be seen on mobile
+
+- ZON-2079: extend schema.org for videos
+
+
+1.60.0 (2015-08-24)
+-------------------
+
+- ZON-2116: Add javascript object for wrapper apps
+
+- ZON-2076: Move h1 to teasertext of paginated articles,
+  make teasertext page title if page is paginated
+
+- ZON-2057: Character counter above the form field
 
 - ZON-1943: Adapt classifieds: new xml values, make font taller,
   put ellipsis to mobile view
 
-- FIX: make Spiele in navigation visible again
+- ZON-1980: Show ads on news ticker page
+
+- ZON-2055: Filter comments by recommendations and editorial promotions
+
+- ZON-1939: Search page polishing
+
+- ZON-2032: Correct canoncial for article, series, search and topic pages
+
+- ZON-2081: Zweite Datumsangabe entfernen
+
+- ZON-2078: Versteckte h3 entfernen
+
+- ZON-2099: Kolumnen-Nextread
+
+- FIX: Make Spiele in navigation visible again
+
+- FIX: Adapt navi classifieds test
+
+- FIX: Provide closest_substitute_image for zon-column
+
+- FIX: Adapt navi classifieds test
+
+- FIX: Handle empty markup module title and text fields
+
+- REVERT: FIX: provide closest_substitute_image for zon-column
 
 - IMPROVEMENT: Schlagworte Verpixelung on articlebottom
 

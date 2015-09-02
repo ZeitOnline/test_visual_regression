@@ -78,7 +78,7 @@
             {%- block content_ad_script -%}{%- endblock -%}
         {% endif %}
     </head>
-    <body itemscope itemtype="http://schema.org/WebPage" data-adDeliveryType="{{ view.ad_delivery_type }}">
+    <body itemscope itemtype="http://schema.org/WebPage" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
         {% include "zeit.web.core:templates/inc/marketing.html" %}
 
         <div class="page-wrap">
@@ -107,7 +107,9 @@
                 {% profile %}
 
                 {% block navigation %}
+                    {% if not view.is_wrapped %}
                     {{ lama.main_nav(view.context.main_nav_full_width, request) }}
+                    {% endif %}
                 {% endblock navigation %}
 
                 {% block adplace_billboard %}
@@ -202,7 +204,13 @@
         </script>
 
         <!-- handler for wrapper app modifications -->
-        {{lama_core.wrapper_handling( view )}}
+        {# TODO: delete else branch after app relaunch #}
+        {% if view.is_wrapped %}
+            {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
+        {% else %}
+            {{lama_core.wrapper_handling( view )}}
+        {% endif %}
+
         {% if view.vgwort_url %}
         <!--start: vgwort-->
         <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" id="vgwort_pixel" class="visually-hidden">

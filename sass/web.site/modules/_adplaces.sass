@@ -7,20 +7,10 @@
 	max-width: 940px
 	margin: 0 auto
 	padding: $little 0
-%label
-	color: $zon_mid_grey
-	display: block
-	font-family: $font-tabletgothic
-	font-size: remify(9px)
-	letter-spacing: remify(1.5px)
-	line-height: remify(10px)
-	margin-bottom: remify(10px)
-	text-align: right
-	text-transform: uppercase
 
 .ad
 	&__label
-		@extend %label
+		@extend %ad-label
 		.ad-desktop--3 &,
 		.ad-desktop--12 &
 			text-align: right
@@ -87,7 +77,7 @@
 				margin: 0 auto
 				max-width: 100%
 			&:before
-				@extend %label
+				@extend %ad-label
 				content: "Anzeige"
 				margin-left: auto
 				margin-right: auto
@@ -104,6 +94,6 @@
 		padding: remify(30px 0)
 
 // Fix hillarious unusable ad extras by iqd
-+respond-min($break-mobile-ad-width)
++respond-max($break-mobile-ad-width)
 	body > #iqdSitebar
 		display: none

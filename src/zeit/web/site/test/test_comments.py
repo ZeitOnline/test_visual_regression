@@ -21,11 +21,11 @@ def test_comments_should_contain_basic_meta_data(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
     comm = browser.cssselect('article.comment')[0]
-    assert 'Skarsgard' in comm.cssselect('.comment__name')[0].text
+    assert 'Skarsgard' in comm.cssselect('.comment-meta__name > a')[0].text
     date = zeit.web.core.template.format_date(
         datetime.datetime(2013, 8, 16, 20, 24))
-    assert date in comm.cssselect('.comment__date')[0].text
-    assert '#1' in comm.cssselect('.comment__date')[0].text
+    assert date in comm.cssselect('.comment-meta__date')[0].text
+    assert '#1' in comm.cssselect('.comment-meta__date')[0].text
     assert ('Ein Iraner,der findet,dass die Deutschen zu wenig meckern'
             in (comm.cssselect('.comment__body')[0].text_content()))
 
@@ -64,7 +64,7 @@ def test_report_form_should_be_rendered(testserver, testbrowser):
 
 def test_comment_form_should_be_rendered_through_esi(testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
-    assert len(browser.cssselect('include')) == 2
+    assert len(browser.cssselect('include')) == 5
 
 
 def test_comment_pagination_should_work(testbrowser, testserver):
@@ -82,15 +82,40 @@ def test_comment_pagination_button_should_have_a_certain_label(
     assert button[0].text == u'Weitere Kommentare'
 
 
-def test_comment_sorting_should_work(testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/article/01?sort=desc' %
-                          testserver.url)
+def test_comment_sorting_should_work(testbrowser):
+    browser = testbrowser('/zeit-online/article/01?sort=desc')
     comments_body = browser.document.get_element_by_id('js-comments-body')
     comments = comments_body.cssselect('article')
-    link = browser.cssselect('.comment-section__link-sorting')
+    link = browser.cssselect('.comment-preferences__link')
     assert comments[0].get('id') == 'cid-2969196'
-    assert link[0].text_content().strip() == 'Neueste zuerst'
+    assert link[0].text_content().strip() == u'Älteste zuerst'
     assert '/zeit-online/article/01#comments' in link[0].get('href')
+
+
+def test_comment_filter_links_are_present(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    assert browser.cssselect('a[href*="sort=promoted"]')
+    assert browser.cssselect('a[href*="sort=recommended"]')
+
+
+def test_comment_filter_links_are_activated(testbrowser):
+    browser = testbrowser('/zeit-online/article/01?sort=promoted')
+    assert browser.cssselect(
+        'a[href*="sort=promoted"].comment-preferences__link--active')
+    browser = testbrowser('/zeit-online/article/01?sort=recommended')
+    assert browser.cssselect(
+        'a[href*="sort=recommended"].comment-preferences__link--active')
+
+
+def test_comment_filter_works_as_expected(testbrowser):
+    browser = testbrowser('/zeit-online/article/01?sort=promoted')
+    comments_body = browser.document.get_element_by_id('js-comments-body')
+    comments = comments_body.cssselect('article')
+    assert len(comments) == 1
+    browser = testbrowser('/zeit-online/article/01?sort=recommended')
+    comments_body = browser.document.get_element_by_id('js-comments-body')
+    comments = comments_body.cssselect('article')
+    assert len(comments) == 10
 
 
 def test_comments_template_respects_metadata(jinja2_env, testserver):

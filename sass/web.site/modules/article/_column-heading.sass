@@ -75,14 +75,13 @@
 		display: block
 		font-size: remify(24px)
 		letter-spacing: 0.008em
-		line-height: percentage(31/24)
+		line-height: 1.25
 		margin-bottom: remify(4px)
 		max-width: remify(400px)
 		+respond-min($break-phablet-min)
 			max-width: remify(550px)
 		+respond-min($break-tablet-min)
 			font-size: remify(32px)
-			margin-bottom: 0
 			max-width: none
 
 	&__name
@@ -91,9 +90,8 @@
 		font-style: italic
 		font-weight: bold
 		font-size: remify(18px)
-		line-height: percentage(22/18)
+		line-height: 1.25
 		+respond-max($break-phablet-min)
 			width: 67%
 		+respond-min($break-tablet-min)
 			font-size: remify(32px)
-			line-height: 1.5

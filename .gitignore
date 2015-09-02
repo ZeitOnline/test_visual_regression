@@ -5,6 +5,7 @@
 .sass-cache
 .ftppass
 .cache/
+.eggs/
 Gemfile.lock
 /bower_components/
 /javascript/documentation/

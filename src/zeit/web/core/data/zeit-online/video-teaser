@@ -127,6 +127,8 @@
 </body>
 <feed/>
 <teaser>
-    <title>Teaser Video</title>
+    <supertitle>Test CP</supertitle>
+    <title>Video Teaser</title>
+    <text>Teaser auf Videos, an allen möglichen Stellen innerhalb einer CP.</text>
 </teaser>
 </centerpage>

@@ -50,7 +50,8 @@
 
 .summary,
 .byline,
-.article__page-teaser
+.article__page-teaser,
+.article__page-teaser > h1
 	color: $grey--mid
 	font-size: remify(18px)
 	line-height: 1.4
@@ -59,6 +60,10 @@
 		line-height: 1.5
 	+respond-min($break-desktop-min)
 		font-size: remify(20px)
+	& > h1
+		margin: 0
+		display: inline
+		font-weight: normal
 
 .byline
 	margin-bottom: remify(30px)

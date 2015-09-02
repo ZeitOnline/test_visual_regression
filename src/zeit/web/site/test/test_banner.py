@@ -9,7 +9,7 @@ import zeit.web.site
 
 
 def is_adcontrolled(contents):
-    return 'data-adDeliveryType="adcontroller"' in contents
+    return 'data-ad-delivery-type="adcontroller"' in contents
 
 
 # use this to enable third_party_modules
@@ -79,7 +79,7 @@ def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
     driver = selenium_driver
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     try:
-        selector = 'body[data-adDeliveryType="adcontroller"]'
+        selector = 'body[data-ad-delivery-type="adcontroller"]'
         driver.find_element_by_css_selector(selector)
     except:
         pytest.skip("not applicable due to oldschool ad configuration")
@@ -109,3 +109,22 @@ def test_adplaces_present_on_pages(testbrowser, monkeypatch):
 def test_adplaces_present_on_home_page(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     assert len(browser.cssselect('#ad-desktop-12')) == 1
+
+
+def test_iqd_sitebar_should_be_hidden_on_mobile(
+        selenium_driver, testserver, monkeypatch):
+
+    driver = selenium_driver
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+
+    script = """
+        var el = document.createElement('div');
+        el.id = 'iqdSitebar';
+        el.textContent = 'NUR ZUM TESTEN';
+        document.body.appendChild(el);"""
+    driver.execute_script(script)
+    elem = driver.find_element_by_css_selector('#iqdSitebar')
+    driver.set_window_size(520, 800)
+    assert not elem.is_displayed()
+    driver.set_window_size(768, 800)
+    assert elem.is_displayed()

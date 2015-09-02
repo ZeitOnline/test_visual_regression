@@ -1,0 +1,56 @@
+$prefs-link-color: $zon_grey
+.comment-preferences
+	background-color: $zon_lighter_grey
+	color: $zon_grey
+	font-size: em(14px)
+	margin: 1px 0 // simple border
+	&__container
+		+display-flex()
+		+justify-content(space-between)
+		+respond-min($break-tablet-min)
+			display: block
+			margin-left: auto
+			margin-right: auto
+			max-width: remify(700px)  // 660px + 2*$page-padding
+	&__item // link as item
+		+flex-grow(1)
+		+respond-min($break-tablet-min)
+			display: inline-block
+		&--buttonized
+			+flex-grow(0)
+			border-left: 1px solid $zon_light_grey
+			+respond-min($break-tablet-min)
+				border: none
+	&__link
+		+link-colors(inherit, $prefs-link-color, $prefs-link-color, $prefs-link-color, $prefs-link-color)
+		+inline-block
+		padding: remify(13px) remify(14px)
+		&:hover span
+			border-bottom: 1px solid $zon_light_grey
+		& > svg
+			color: #909090
+		&--active
+			+link-colors($zon-darker-grey, $zon-darker-grey, $zon-darker-grey, $zon-darker-grey, $zon-darker-grey)
+			& > svg
+				color: inherit
+	&__text
+		display: none
+		+respond-min($break-tablet-min)
+			color: inherit
+			display: inline
+	&__icon-sorting
+		height: em(16px) // em intended
+		vertical-align: baseline
+		width: em(14px)  // em intended
+
+	&__icon-spinner
+		height: em(14px) // em intended
+		width: em(17px)  // em intended
+	&__icon-promoted
+		height: em(21.35px) // em intended
+		vertical-align: text-top
+		width: em(21.35px) // em intended
+	&__icon-recommended
+		height: em(21.35px) // em intended
+		vertical-align: text-top
+		width: em(21.35px) // em intended

@@ -80,7 +80,7 @@
 					<block href="http://xml.zeit.de/zeit-online/cp-content/kolumne" />
 				</container>
 				<container cp:__name__="id-653607ee-ecdd-4804-870b-8fd67ff27e16" cp:type="teaser" module="zon-fullwidth">
-					<block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-bild" />
+					<block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild" />
 				</container>
 			</region>
 		</cluster>

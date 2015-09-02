@@ -6,6 +6,7 @@ import requests
 import urllib2
 
 import pyramid.request
+import zope.component
 
 import zeit.web.core.date
 import zeit.web.core.interfaces
@@ -183,10 +184,9 @@ def test_published_breaking_news_should_be_detected(application, monkeypatch):
     assert view.breaking_news.published is True
 
 
-def test_missing_breaking_news_should_eval_to_false(
-        application, app_settings, ephemeral_settings):
-    app_settings['breaking_news'] = 'moep'
-    ephemeral_settings(app_settings)
+def test_missing_breaking_news_should_eval_to_false(application):
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['breaking_news'] = 'moep'
     view = zeit.web.core.view.Base(None, None)
     assert view.breaking_news.published is False
 
@@ -389,3 +389,28 @@ def test_unavailable_handles_broken_unicode():
     view = zeit.web.core.view.service_unavailable(None, req)
     # assert nothing raised:
     view()
+
+
+def test_og_url_is_set_correctly(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = mock.Mock()
+    request.route_url.return_value = 'foo/'
+    view = zeit.web.site.view_centerpage.Centerpage(context, request)
+    view.request.traversed = ('politik', 'index.cp2015')
+    assert view.og_url == 'foo/politik/index'
+
+
+def test_wrapped_page_has_wrapped_property(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/slenderized-index')
+    request = mock.Mock()
+    request.host_url = 'http://app-content.zeit.de'
+    view = zeit.web.site.view_centerpage.Centerpage(context, request)
+    assert view.is_wrapped
+
+    request = mock.Mock()
+    request.query_string = "app-content"
+    request.host_url = 'http://www.zeit.de'
+    view = zeit.web.site.view_centerpage.Centerpage(context, request)
+    assert view.is_wrapped

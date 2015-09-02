@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<head>
+    <header_image/>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:03.346120+00:00</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:09:09.014473+00:00</attribute>
+    <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:08:09.170784+00:00</attribute>
+    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2015-03-24T17:09:09.014473+00:00</attribute>
+    <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:00.932648+00:00</attribute>
+    <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.bruenjes</attribute>
+    <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Politik</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
+    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+    &lt;initialized_object&gt;
+    &lt;klass&gt;
+    &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+    &lt;tuple&gt;
+    &lt;global name=&quot;CenterPage&quot; module=&quot;zeit.content.cp.centerpage&quot;/&gt;
+    &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+    &lt;global name=&quot;ICP2015&quot; module=&quot;zeit.content.cp.interfaces&quot;/&gt;
+    &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+    &lt;/tuple&gt;
+    &lt;/arguments&gt;
+    &lt;/initialized_object&gt;
+    &lt;/pickle&gt;</attribute>
+    <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
+    <topiclinks>
+        <topiclink_title>Schwerpunkte</topiclink_title>
+        <topiclink>
+            <topiclink_label_1>Islamischer Staat</topiclink_label_1>
+            <topiclink_url_1>http://www.zeit.de/schlagworte/organisationen/islamischer-staat/index</topiclink_url_1>
+            <topiclink_label_2>Bundeswehr</topiclink_label_2>
+            <topiclink_url_2>http://www.zeit.de/schlagworte/themen/bundeswehr/index</topiclink_url_2>
+            <topiclink_label_3>Hongkong</topiclink_label_3>
+            <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
+        </topiclink>
+    </topiclinks>
+</head>
+<body>
+    <title>Test Pages Overview</title>
+
+    <cluster area="id-a2dff7f3-9876-4a6f-b88d-143fdfc5cff7" visible="True">
+        <region area="id-8152c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
+            <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-234eb191f212" title="">
+                <text>
+                    <h1>Test-Overview-Page</h1>
+                    <blockquote><em>Wo finde ich Video-Teaser?<br/>Wie teste ich die Webtrekk-Verpixelung?<br/>Gibt es eine Übersicht über alle Journalistischen Formate?</em></blockquote>
+                    <p>Auf dieser Seite werden Links zu Test-Seiten versammelt.</p>
+                </text>
+            </container>
+        </region>
+    </cluster>
+
+    <cluster visible="True" area="id-01aa0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet">
+        <region visible="True" hide-dupes="True" area="id-0100a3c0-fe49-6291-baac-453cc2a213ee" kind="parquet" title="Mehrseitige Artikel">
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf4caee">
+                <block contenttype="article" uniqueId="http://xml.zeit.de/zeit-online/article/zeit" />
+            </container>
+        </region>
+    </cluster>
+
+    <cluster visible="True" area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet">
+        <region visible="True" hide-dupes="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213ee" kind="parquet" title="Video-CPs">
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5aaf4caee">
+                <block contenttype="video" uniqueId="http://xml.zeit.de/zeit-online/video-teaser" />
+            </container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e5d7">
+                <block contenttype="video" uniqueId="http://xml.zeit.de/zeit-online/video-stage" />
+            </container>
+        </region>
+    </cluster>
+
+    <cluster visible="True" area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a020" kind="parquet">
+        <region visible="True" hide-dupes="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213dd" kind="parquet" title="Test-Modi">
+            <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-287eb191f252" title="Webtrekk-Debug-Modus">
+                <text>
+                <p>Im Webtrekk-Debug-Modus wird das Klicktracking <strong>nicht</strong> an Webtrekk gesendet (und der Klick ausgeführt), <strong>sondern</strong> der String wird über `console.log` ausgegeben.</p>
+                <h3>Wie wird der Modus ausgelöst?</h3>
+                <ul>
+                    <li>Über den Query Parameter <a href="127.0.0.1:9090/index?webtrekk-clicktracking-debug">?webtrekk-clicktracking-debug</a>.</li>
+                </ul>
+                </text>
+            </container>
+            <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-287eb191f251" title="Wrapper-App">
+                <text>
+                <h3>Wie wird der Modus ausgelöst?</h3>
+                <ul>
+                    <li>if the pages are requested from a host with the URL app-content.zeit.de</li>
+                    <li>if the dev environment and the query parameter <a href="http://127.0.0.1:9090/zeit-online/article/01?app-content">?app-content</a> is present.</li>
+                </ul>
+                </text>
+            </container>
+        </region>
+    </cluster>
+
+</body>
+<feed/>
+<teaser>
+    <title>Test Pages Overview</title>
+</teaser>
+</centerpage>

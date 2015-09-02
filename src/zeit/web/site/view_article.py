@@ -38,7 +38,42 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     @zeit.web.reify
     def canonical_url(self):
         """ Canonical for komplettansicht is first page """
-        return self.resource_url
+        if not self.is_all_pages_view:
+            return self.request.url
+        else:
+            return self.resource_url
+
+    @zeit.web.reify
+    def pagetitle(self):
+        try:
+            title = zeit.seo.interfaces.ISEO(self.context).html_title
+            assert title
+        except (AssertionError, TypeError):
+            if self.page_nr > 1 and self.current_page.teaser:
+                title = ': '.join(
+                    [t for t in (
+                        self.supertitle, self.current_page.teaser) if t])
+            else:
+                title = ': '.join(
+                    [t for t in (
+                        self.supertitle, self.title) if t])
+        if title:
+            return title + (u'' if self.is_hp else self.pagetitle_suffix)
+        return self.seo_title_default
+
+    @zeit.web.reify
+    def meta_robots(self):
+        # Try seo presets first
+        if self.seo_robot_override:
+            return self.seo_robot_override
+
+        # Exclude certain products and ressorts from being followed
+        exclude_products = ('ZEAR', 'TGS', 'HaBl', 'WIWO', 'GOLEM')
+
+        if self.product_id in exclude_products or self.ressort == 'Fehler':
+            return 'noindex,follow'
+        else:
+            return 'index,follow,noodp,noydir,noarchive'
 
     @zeit.web.reify
     def breadcrumbs(self):
@@ -73,6 +108,10 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             self.breadcrumbs_by_title(breadcrumbs)
         return breadcrumbs
 
+    @zeit.web.reify
+    def has_cardstack(self):
+        return len(self.context.xml.xpath('/article/body//cardstack')) > 0
+
 
 @view_config(name='seite',
              path_info='.*seite-(.*)',
@@ -104,8 +143,17 @@ def is_column_article(context, request):
     return getattr(context, 'serie', None) and context.serie.column
 
 
+def has_author_image(context, request):
+    authors = zeit.web.core.article.convert_authors(context)
+    if not authors:
+        return False
+    return zeit.web.core.template.closest_substitute_image(
+        authors[0]['image_group'], 'zon-column')
+
+
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-                                is_column_article),
+                                is_column_article,
+                                has_author_image),
              renderer='templates/column.html')
 class ColumnArticle(Article):
 

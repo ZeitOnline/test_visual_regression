@@ -74,19 +74,25 @@ def test_search_form_should_default_to_recency_sort_order(search_form):
 def test_search_form_should_sort_valid_queries_by_relevancy(search_form):
     search_form['q'] = 'pfannkuchen'
     search_form['sort'] = None
-    assert search_form.sort_order == 'relevanz'
+    assert search_form.sort_order == 'aktuell'
 
 
 def test_search_form_should_ignore_invalid_sort_orders(search_form):
     search_form['q'] = 'pfannkuchen'
     search_form['sort'] = 'pfannkuchen'
-    assert search_form.sort_order == 'relevanz'
+    assert search_form.sort_order == 'aktuell'
 
 
-def test_search_form_should_allow_valid_valid_search_orders(search_form):
+def test_search_form_should_allow_valid_search_order_aktuell(search_form):
     search_form['q'] = 'pfannkuchen'
     search_form['sort'] = 'aktuell'
     assert search_form.sort_order == 'aktuell'
+
+
+def test_search_form_should_allow_valid_search_order_relevanz(search_form):
+    search_form['q'] = 'pfannkuchen'
+    search_form['sort'] = 'relevanz'
+    assert search_form.sort_order == 'relevanz'
 
 
 def test_search_form_should_ignore_negative_page_numbers(search_form):

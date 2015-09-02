@@ -9,7 +9,7 @@ import zeit.web.magazin
 
 
 def is_adcontrolled(contents):
-    return 'data-adDeliveryType="adcontroller"' in contents
+    return 'data-ad-delivery-type="adcontroller"' in contents
 
 
 # use this to enable third_party_modules

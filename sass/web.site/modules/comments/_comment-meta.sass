@@ -1,0 +1,110 @@
+$user-avatar-size: 50px
+%meta-text
+	color: $zon_mid_grey
+	font-size: remify(12px)
+	letter-spacing: $zon-letter-spacing-s
+
+.comment-meta
+	position: relative
+	.comment--promoted &
+		padding-top: remify(45px)
+		+respond-min($break-tablet-min)
+			padding-top: 0
+	&__avatar
+		float: left
+		margin-right: remify(15px)
+		margin-top: remify(-5px)
+		img
+			border-radius: 50%
+			display: block
+			height: remify($user-avatar-size)
+			overflow: hidden
+			width: remify($user-avatar-size)
+		+respond-min($break-tablet-min)
+			display: table-cell
+			float: none
+			margin: 0
+			padding-right: remify(15px)
+			vertical-align: middle
+			width: remify($user-avatar-size)
+	&__name
+		font-size: remify(16px)
+		font-weight: bold
+		line-height: 1.2
+		overflow: hidden
+		text-overflow: ellipsis
+		white-space: nowrap
+		a
+			+link
+				color: $zon-red
+			+on-interaction
+				text-decoration: underline
+		.comment--recommended:not(.comment--promoted) &
+			padding-right: remify(60px) // leave room for star
+			+respond-min($break-tablet-min)
+				padding-right: 0	
+		+respond-min($break-tablet-min)
+			display: table-cell
+			overflow: visible
+			vertical-align: middle
+			white-space: normal
+			word-break: break-word
+	&__date
+		+link
+			color: $zon_grey
+		+on-interaction
+			color: $zon_dark_grey
+		@extend %meta-text
+		+respond-min($break-tablet-min)
+			display: table-cell
+			padding-left: remify(5px)
+			text-align: right
+			vertical-align: middle
+			width: remify(145px)
+	&__badge
+		@extend %meta-text
+		&--promoted
+			left: 0
+			position: absolute
+			top: 0
+			+respond-min($break-tablet-min)
+				display: table-cell
+				left: auto
+				padding-left: remify(22px)
+				position: static
+				text-align: right
+				top: auto
+				vertical-align: middle
+				width: remify(178px)
+		&--recommended
+			position: absolute
+			right: 0
+			top: 0
+			+respond-min($break-tablet-min)
+				display: table-cell
+				padding-left: remify(5px)
+				position: static
+				right: auto
+				text-align: right
+				top: auto
+				vertical-align: middle
+				width: remify(70px)
+		&--author
+			+inline-block(0.2em)
+			margin-right: remify(8px)
+	&__icon
+		color: $zon_grey
+		height: em(16px, 12px) // em indented
+		vertical-align: em(-3px, 12px) // em indented
+		width: em(16px, 12px)  // em indented
+		&--promoted
+		&--recommended
+			height: em(18px, 12px) // em indented
+			width: em(18px, 12px)  // em indented
+		&--author
+			color: $zon-charcoal
+	&__text
+		padding-left: remify(4px)
+	+respond-min($break-tablet-min)
+		display: table
+		width: 100%

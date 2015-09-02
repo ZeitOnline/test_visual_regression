@@ -81,7 +81,9 @@
         </cluster>
     </body>
     <feed/>
-    <teaser>
-        <title>CP-Editor 0.4</title>
-    </teaser>
+<teaser>
+    <supertitle>Test CP</supertitle>
+    <title>Video Stage</title>
+    <text>Der Videoriegel auf einer CP.</text>
+</teaser>
 </centerpage>

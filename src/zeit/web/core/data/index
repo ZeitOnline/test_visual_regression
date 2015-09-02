@@ -140,6 +140,9 @@
                         </author>
                     </block>
                 </container>
+                <container cp:type="frame" module="frame" title="Quiz" visible="True" visible_mobile="True" cp:__name__="id-6d45df0c-6340-4e89-9a0a-f84b727d2152">
+                    <url>http://quiz.zeit.de/#/quiz/103</url>
+                </container>
             </region>
         </cluster>
         <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff4" visible="True">
@@ -183,8 +186,19 @@
                 <container cp:__name__="id-bc912838-9f14-4294-a96d-3e2fa1a76dd2" cp:type="cpextra" module="mostread" visible="True">
                     <cp_extra for="zeit.content.cp.interfaces.IArea" id="mostread" />
                 </container>
+                <container cp:type="cardstack" module="cardstack" visible="True" visible_mobile="True" cp:__name__="id-4d606521-99e2-483d-a19d-353089396e89" card_id="kekse-rezept-pecorino-haselnuss-cantucci"/>
             </region>
         </cluster>
+
+        <cluster visible="True" visible_mobile="True" area="id-5b36e42a-af3e-431f-9896-d428ecabb032" kind="duo">
+            <region visible="True" visible_mobile="True" hide-dupes="True" area="id-62f5cc01-12a0-49e2-b7fd-d826ddb0efa1" kind="duo">
+                <container cp:type="cardstack" module="cardstack" visible="True" visible_mobile="True" cp:__name__="id-02e943a3-0463-40a0-83e7-5551c4653aa6" card_id="gaming-glossar-boss-endgegner"/>
+            </region>
+            <region visible="True" visible_mobile="True" hide-dupes="True" area="id-021517b6-4ee7-41cc-92f0-9848ee27ec82" kind="duo">
+                <container cp:type="cardstack" module="cardstack" visible="True" visible_mobile="True" cp:__name__="id-7f2aab8a-9cb3-4d1f-a25e-b95af573bf1e" card_id="erkaeltung-hausmittel-wirkung"/>
+            </region>
+        </cluster>
+
         <cluster visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f" kind="duo">
             <region visible="True" area="id-c8a4bedc-5721-412f-994f-c55fb03955d2" kind="duo">
                 <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-a560c834-fa2e-4d35-a540-d20dff18f95a">
@@ -244,7 +258,7 @@
                 </container>
             </region>
             <region visible="True" hide-dupes="True" area="id-0e98c5c2-2b95-42b7-9ccc-83e684fa87ba" kind="duo">
-                <container cp:type="teaser" module="zon-square" visible="True" cp:__name__="id-908960fb-7e9f-4e5f-bb94-ad0893e6fcf0">
+                <!-- <container cp:type="teaser" module="zon-square" visible="True" cp:__name__="id-908960fb-7e9f-4e5f-bb94-ad0893e6fcf0">
                     <block href="http://xml.zeit.de/zeit-online/gallery/weltall" uniqueId="http://xml.zeit.de/zeit-online/gallery/weltall" year="2015" issue="22" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" genre="nachricht" date-last-modified="2015-06-03T13:08:48+00:00" date-first-released="2015-06-03T02:00:45.365310+00:00" date-last-published="2015-06-03T05:21:07.289981+00:00" last-semantic-change="2015-06-03T13:08:27.793747+00:00">
                         <supertitle>Alexander Gerst</supertitle>
                         <title>Bin mal eben im Weltraum spazieren</title>
@@ -261,6 +275,9 @@
                             <copyright>© Alkis Konstantinidis/Reuters</copyright>
                         </image>
                     </block>
+                </container> -->
+                <container cp:type="frame" module="frame" visible="True" visible_mobile="True" cp:__name__="id-6d45df0c-6340-4e89-9a0a-f84b727d2152">
+                    <url>http://quiz.zeit.de/#/quiz/136</url>
                 </container>
             </region>
         </cluster>

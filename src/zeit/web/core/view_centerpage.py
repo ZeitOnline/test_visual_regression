@@ -1,6 +1,3 @@
-import collections
-import copy
-
 import pyramid.view
 import lxml.etree
 

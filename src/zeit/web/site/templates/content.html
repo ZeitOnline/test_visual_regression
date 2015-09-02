@@ -1,6 +1,11 @@
 {% import 'zeit.web.site:templates/macros/article_macro.tpl' as blocks %}
 {% extends 'zeit.web.site:templates/layout.html' %}
 
+{# Sometimes (if the author has no image), colums are rendered as default
+   articles (instead of column.html). In this case, we need to adjust a few
+   Things inside the article template (here). #}
+{% set is_column = view and view.context and view.context.serie and view.context.serie.column %}
+
 {% block main %}
     {% block content %}
     <article class="article article--{{ view | block_type }}" id="js-article" itemtype="http://schema.org/Article" itemscope>
@@ -20,21 +25,39 @@
         {% endblock schema_org_image_info %}
         {% block article_heading %}
             <div class="article__item">
-                <h1 class="article-heading" itemprop="headline">
-                    <span class="article-heading__kicker">
-                        {{- view.supertitle | hide_none -}}
-                    </span>{%- if view.title -%}<span class="article-heading__colon">: </span>{%- endif -%}
-                    <span class="article-heading__title">
-                        {{- view.title | hide_none -}}
-                    </span>
-                </h1>
+
+                {% if view.pagination and view.pagination.current > 1 and view.current_page.teaser %}
+                    <div class="article-heading" itemprop="headline">
+                {% else %}
+                    <h1 class="article-heading" itemprop="headline">
+                {% endif %}
+
+                        <span class="article-heading__kicker">
+                            {% if is_column == True %}
+                                {{ view.serie + ' / ' }}
+                            {% endif %}
+                            {{- view.supertitle | hide_none -}}
+                        </span>{%- if view.title -%}<span class="article-heading__colon">: </span>{%- endif -%}
+                        <span class="article-heading__title">
+                            {{- view.title | hide_none -}}
+                        </span>
+
+                {% if view.pagination and view.pagination.current > 1 and view.current_page.teaser %}
+                    </div>
+                {% else %}
+                    </h1>
+                {% endif %}
+
             </div>
         {% endblock article_heading %}
         {% block article_meta %}
             <div class="article__item">
                 {% if view.pagination and view.pagination.current > 1 %}
                 <div class="article__page-teaser">
-                    Seite {{ view.pagination.current }}/{{ view.pagination.total }}: {{ view.current_page.teaser }}
+                    Seite {{ view.pagination.current }}/{{ view.pagination.total }}
+                    {%- if view.current_page.teaser -%}
+                        : <h1>{{ view.current_page.teaser }}</h1>
+                    {% endif %}
                 </div>
                 {% else %}
                 <div class="summary" itemprop="description">

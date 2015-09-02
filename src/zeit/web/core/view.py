@@ -229,14 +229,15 @@ class Base(object):
                 ('tma', '')]
 
     @zeit.web.reify
-    def meta_robots(self):
+    def seo_robot_override(self):
         try:
-            seo = zeit.seo.interfaces.ISEO(self.context)
-            if seo.meta_robots:
-                return seo.meta_robots
+            return zeit.seo.interfaces.ISEO(self.context).meta_robots
         except (AttributeError, TypeError):
             pass
-        return 'index,follow,noodp,noydir,noarchive'
+
+    @zeit.web.reify
+    def meta_robots(self):
+        return self.seo_robot_override or 'index,follow,noodp,noydir,noarchive'
 
     @zeit.web.reify
     def adwords(self):
@@ -333,6 +334,16 @@ class Base(object):
             return False
 
     @zeit.web.reify
+    def is_wrapped(self):
+        try:
+            return ('app-content.zeit.de' in self.request.host_url) or (
+                'app-content.staging.zeit.de' in self.request.host_url) or (
+                self.is_dev_environment and (
+                    'app-content' in self.request.query_string))
+        except TypeError:
+            return False
+
+    @zeit.web.reify
     def iqd_mobile_settings(self):
         iqd_ids = zeit.web.core.banner.iqd_mobile_ids
         if self.is_hp:
@@ -373,6 +384,13 @@ class Base(object):
         return self.request.route_url('home') + path
 
     @zeit.web.reify
+    def og_url(self):
+        # for og url, hide cp2015 ending
+        path = '/'.join(self.request.traversed)
+        return self.request.route_url('home') + path.replace(
+            'index.cp2015', 'index')
+
+    @zeit.web.reify
     def is_dev_environment(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('dev_environment', '')
@@ -401,6 +419,10 @@ class Base(object):
         if (self.date_first_released is not None and date is not None and
                 date > self.date_first_released):
             return date.astimezone(self.timezone)
+
+    @zeit.web.reify
+    def has_cardstack(self):
+        return False
 
 
 class Content(Base):

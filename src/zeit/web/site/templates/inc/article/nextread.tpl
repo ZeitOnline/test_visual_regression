@@ -4,12 +4,13 @@
 {% set teaser = module | first_child %}
 {% set image = get_teaser_image(module, teaser) %}
 {% set has_default_image = get_default_image_id() in image.uniqueId %}
+{% set is_column = teaser and teaser.serie and teaser.serie.column %}
 
 {% if view.nextread %}
-	<article class="{% block layout %}nextread{% endblock %}{% if has_default_image %} {{ self.layout() }}--no-image{% else %} {{ self.layout() }}--with-image{% endif %}" id="{{ self.layout() }}">
+	<article class="{% block layout %}nextread{% endblock %}{% if has_default_image or is_column %} {{ self.layout() }}--no-image{% else %} {{ self.layout() }}--with-image{% endif %}" id="{{ self.layout() }}">
 		<a class="{{ self.layout() }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
 			<div class="{{ self.layout() }}__lead">{{ module.lead or 'Lesen Sie jetzt' }}</div>
-			{% if image and not has_default_image -%}
+			{% if image and not has_default_image and not is_column -%}
 				{% set module_layout = self.layout() %}
 				{% include "zeit.web.site:templates/inc/teaser_asset/{}_zon-nextread.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
 			{%- endif -%}

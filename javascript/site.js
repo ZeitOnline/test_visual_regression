@@ -50,17 +50,17 @@ require([
     'web.site/plugins/jquery.toggleBeta',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
-    'web.site/plugins/jquery.updateSignals'
+    'web.site/plugins/jquery.updateSignals',
+    'web.site/plugins/jquery.countFormchars'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         article = $( '#js-article' );
 
     $( window ).referrerCount();
-    // global
+    // global and "above the fold"
     $( '.main_nav__search' ).toggleSearch();
     $( '.logo_bar__menu' ).toggleNavi();
     $( '.primary-nav' ).adaptToSpace();
-    $( '.footer-publisher__more' ).extendFooter();
 
     if ( pageType === 'centerpage' ) {
         // homepage
@@ -71,14 +71,17 @@ require([
         $( '#series_select' ).selectNav();
         $( '.js-gallery-teaser-shuffle' ).shuffleTeasers();
         $( '.js-accordion' ).accordion();
-        $( '.js-scroll' ).animateScroll();
     } else if ( article.length ) {
         // article, gallery etc.
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
         article.find( '.js-infobox' ).infobox();
         article.find( '.liveblog' ).liveblog();
+        $( '.js-count-formchars' ).countFormchars();
     }
 
+    // more ("non critical") global stuff
+    $( '.footer-publisher__more' ).extendFooter();
+    $( '.js-scroll' ).animateScroll();
     // search
     $( '.search-form' ).searchTools();
     // beta

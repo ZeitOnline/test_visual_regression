@@ -33,6 +33,19 @@
     {% if view.syndication_source -%}
         <meta name="syndication-source" href="{{ view.syndication_source }}">
     {% endif -%}
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="//scripts.zeit.de">
+    <link rel="dns-prefetch" href="//css.zeit.de">
+    <link rel="dns-prefetch" href="//js.zeit.de">
+    <link rel="dns-prefetch" href="//images.zeit.de">
+    <link rel="dns-prefetch" href="//static.zeit.de">
+    <link rel="dns-prefetch" href="//de.ioam.de">
+    <link rel="dns-prefetch" href="//s62.mxcdn.net">
+    <link rel="dns-prefetch" href="//s62.research.de.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//zeit01.webtrekk.net">
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <link rel="dns-prefetch" href="//securepubads.g.doubleclick.net">
     <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
     <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
@@ -79,8 +92,11 @@
     {% if view.is_dev_environment %}
     <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
+    {% if view.has_cardstack %}
+        <esi:include src="http://www.zeit.de/cardstack-backend/stacks/esi/head?shareUrl={{ request.url }}" onerror="continue" />
+    {% endif %}
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}"  data-unique-id="{{ view.context.uniqueId }}" data-adDeliveryType="{{ view.ad_delivery_type }}">
+<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/marketing.html" %}
 
@@ -89,10 +105,6 @@
     {% endblock skiplink %}
     <div class="page">
         {% block adplace_top %}
-            <!-- mobile ad at top -->
-            <div class="iqd-mobile-adplace">
-                <div id="sas_13500"></div>
-            </div>
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
@@ -106,6 +118,7 @@
         {% endblock adplace_top %}
         <div class="page__content">
             {% profile %}
+            {% if not view.is_wrapped %}
             <header class="header" role="banner">
                 {% block navigation %}
                     {%- include "zeit.web.site:templates/inc/navigation/navigation.tpl" ignore missing -%}
@@ -113,6 +126,7 @@
                 {% block metadata %}
                 {% endblock metadata %}
             </header>
+            {% endif %}
             {% block breaking_news %}
                 {%- include "zeit.web.site:templates/inc/breaking_news.tpl" ignore missing -%}
             {% endblock breaking_news %}
@@ -139,6 +153,7 @@
     </div>
     {% include "zeit.web.core:templates/inc/ads/%s/finalize.html" % view.ad_delivery_type ignore missing %}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
+    {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
     {% block meetrics %}
         {% include "zeit.web.core:templates/inc/tracking/meetrics_relaunch.html" ignore missing %}
     {% endblock %}
@@ -154,6 +169,9 @@
     <!--start: vgwort-->
     <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" id="vgwort_pixel" class="visually-hidden">
     <!--end: vgwort-->
+    {% endif %}
+    {% if view.has_cardstack %}
+        <esi:include src="http://www.zeit.de/cardstack-backend/stacks/esi/scripts?shareUrl={{ request.url }}" onerror="continue" />
     {% endif %}
 </body>
 </html>

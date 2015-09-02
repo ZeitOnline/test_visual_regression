@@ -63,6 +63,22 @@ class Base(zeit.web.core.view.Base):
                 next
         return breadcrumbs
 
+    @zeit.web.reify
+    def meta_robots(self):
+        # Try seo presets first
+        if self.seo_robot_override:
+            return self.seo_robot_override
+
+        # Exclude certain paths from being indexed
+        path = self.request.path.startswith
+
+        if path('/angebote') and not path('/angebote/partnersuche'):
+            return 'index,nofollow,noodp,noydir,noarchive'
+        elif path('/banner') or path('/test') or path('/templates'):
+            return 'noindex,follow,noodp,noydir,noarchive'
+        else:
+            return 'index,follow,noodp,noydir,noarchive'
+
 
 @pyramid.view.view_config(
     route_name='spektrum-kooperation',
