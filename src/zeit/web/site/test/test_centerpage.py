@@ -23,30 +23,26 @@ def test_centerpage_has_last_semantic_change_property(application):
     assert view.last_semantic_change.strftime('%d %b %y') == '21 May 14'
 
 
-def test_buzz_mostread_should_render_correct_article_count(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
-    articles = browser.cssselect('.buzz-box__teasers--buzz-mostread article')
+def test_buzz_mostread_should_render_correct_article_count(testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    box = browser.cssselect('.buzz-box--mostread')
+    items = browser.cssselect('.buzz-box--mostread li')
+    articles = browser.cssselect('.buzz-box--mostread article.teaser-buzz')
+    assert len(box) == 1
+    assert len(items) == 3
     assert len(articles) == 3
 
 
-def test_buzz_mostread_should_render_with_correct_indices(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
-    media = browser.cssselect('.buzz-index__label--buzz-mostread')
-    assert [to_int(m.text) for m in media] == [1, 2, 3]
+def test_buzz_mostread_should_output_correct_titles(testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    kicker = browser.cssselect('.teaser-buzz__kicker')
+    titles = browser.cssselect('.teaser-buzz__title')
+    assert kicker and u'"Game of Thrones"' in kicker[0].text
+    assert titles and u'Es gibt keinen Himmel über Westeros' in titles[0].text
 
 
-def test_buzz_mostread_should_output_correct_titles(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
-    kicker = browser.cssselect('.buzz-mostread__kicker')[0]
-    assert u'Gentrifizierung' in kicker.text
-    title = browser.cssselect('.buzz-mostread__title')[1]
-    assert u'Das neue Heft \x96 im Video durchgeblättert' in title.text
-
-
-@pytest.skip('Hidden until referrer-sensitive buzzbox is added.')
+@pytest.mark.skipif(True,
+                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_comments_should_render_correct_article_count(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
@@ -54,7 +50,8 @@ def test_buzz_comments_should_render_correct_article_count(
     assert len(articles) == 3
 
 
-@pytest.skip('Hidden until referrer-sensitive buzzbox is added.')
+@pytest.mark.skipif(True,
+                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_comments_should_render_with_correct_scores(
         testbrowser, testserver, mockserver_factory):
     cp_counts = """<?xml version="1.0" encoding="UTF-8"?>
@@ -70,7 +67,8 @@ def test_buzz_comments_should_render_with_correct_scores(
     assert [to_int(m.text) for m in media] == [129, 142, 110]
 
 
-@pytest.skip('Hidden until referrer-sensitive buzzbox is added.')
+@pytest.mark.skipif(True,
+                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_comments_should_output_correct_titles(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
@@ -80,7 +78,8 @@ def test_buzz_comments_should_output_correct_titles(
     assert u'Das neue Heft \x96 im Video durchgeblättert' in title.text
 
 
-@pytest.skip('Hidden until referrer-sensitive buzzbox is added.')
+@pytest.mark.skipif(True,
+                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_facebook_should_render_correct_article_count(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
@@ -88,7 +87,8 @@ def test_buzz_facebook_should_render_correct_article_count(
     assert len(articles) == 3
 
 
-@pytest.skip('Hidden until referrer-sensitive buzzbox is added.')
+@pytest.mark.skipif(True,
+                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_facebook_should_render_with_correct_scores(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
@@ -96,7 +96,8 @@ def test_buzz_facebook_should_render_with_correct_scores(
     assert [to_int(m.text) for m in media] == [16674, 5780, 2391]
 
 
-@pytest.skip('Hidden until referrer-sensitive buzzbox is added.')
+@pytest.mark.skipif(True,
+                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_facebook_should_output_correct_titles(
         testbrowser, testserver):
     browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
@@ -106,27 +107,25 @@ def test_buzz_facebook_should_output_correct_titles(
     assert u'Shakespeare im Kugelhagel' in title.text
 
 
-def test_tile7_is_rendered_on_correct_position(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
+def test_tile7_is_rendered_on_correct_position(testbrowser):
+    browser = testbrowser('/zeit-online/main-teaser-setup')
     tile7_on_first_position = browser.cssselect(
-        '.cp-area.informatives > div:first-child[id="iqadtile7"]')
+        '.cp-area--minor > div:first-child > script[id="ad-desktop-7"]')
     tile7_is_present = browser.cssselect(
-        '.cp-area.informatives > div[id="iqadtile7"]')
+        '.cp-area--minor > div > script[id="ad-desktop-7"]')
 
     assert not tile7_on_first_position, (
-        'There should be no iqadtile7 on the first position.')
+        'There should be no ad tile 7 on the first position.')
     assert tile7_is_present, (
-        'Tile iqadtile7 is not present.')
+        'Ad tile 7 is not present.')
 
 
-def test_tile7_for_fullwidth_is_rendered_on_correct_position(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+def test_tile7_for_fullwidth_is_rendered_on_correct_position(testbrowser):
+    browser = testbrowser('/zeit-online/index')
     tile7_on_first_position = browser.cssselect(
-        '.cp-area.informatives > div:first-child[id="iqadtile7"]')
+        '.cp-area--minor > div:first-child > script[id="ad-desktop-7"]')
     assert tile7_on_first_position, (
-        'Tile iqadtile7 is not present on first position.')
+        'Ad tile 7 is not present on first position.')
 
 
 def test_printbox_is_present_and_has_digital_offerings(
@@ -192,10 +191,20 @@ def test_centerpage_markdown_module_is_rendered(jinja2_env):
     tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/thema')
-    view = zeit.web.site.view_article.Article(content, mock.Mock())
-    html_str = tpl.render(view=view)
+    request = mock.MagicMock()
+    request.route_url.return_value = 'http://foo.bar/'
+    view = zeit.web.site.view_centerpage.Centerpage(content, request)
+    html_str = tpl.render(view=view, request=request)
     html = lxml.html.fromstring(html_str)
 
     assert len(html.cssselect('.markup')) == 1
     assert len(html.cssselect('.markup__title')) == 1
     assert len(html.cssselect('.markup__text li')) == 4
+
+
+def test_verlagsangebot_label_should_be_displayed(testbrowser):
+    select = testbrowser('/zeit-online/teaser-inhouse-setup').cssselect
+    labels = select('.teaser-small--inhouse .teaser-small__label')
+    assert len(labels) == 2
+    labels = select('.teaser-small-minor--inhouse .teaser-small-minor__label')
+    assert len(labels) == 1

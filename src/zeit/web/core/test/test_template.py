@@ -319,6 +319,14 @@ def test_zon_fullwidth_teaser_mapping_is_working_as_expected(application):
     assert teaser == 'zon-fullwidth'
 
 
+def test_zon_inhouse_teaser_mapping_is_working_as_expected(application):
+    block = mock.Mock()
+    block.__iter__ = lambda _: iter(['article'])
+    block.layout.id = 'parquet-verlag'
+    teaser = zeit.web.core.template.get_layout(block)
+    assert teaser == 'zon-inhouse'
+
+
 def test_hide_teaser_mapping_is_working_as_expected(application):
     block = mock.Mock()
     block.__parent__ = mock.Mock()
@@ -343,9 +351,6 @@ def test_hide_teaser_mapping_is_working_as_expected(application):
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
     block.layout.id = 'parquet-printteaser'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'hide'
-    block.layout.id = 'parquet-verlag'
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'hide'
 
@@ -478,15 +483,14 @@ def test_get_column_image_should_return_an_image_or_none(application):
     assert zeit.web.core.template.get_column_image(teaser) is None
 
 
-def test_debug_breaking_news_should_be_enableable(testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    assert not browser.cssselect('.breaking-news-banner')
-
-
-def test_debug_breaking_news_should_be_disableable(testbrowser, testserver):
-    browser = testbrowser(
-        '%s/zeit-online/index?debug=eilmeldung' % testserver.url)
+def test_debug_breaking_news_request(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index?debug=eilmeldung')
     assert browser.cssselect('.breaking-news-banner')
+
+
+def test_debug_breaking_news_default(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert not browser.cssselect('.breaking-news-banner')
 
 
 def test_attr_safe_returns_safe_text(application):
