@@ -489,36 +489,27 @@ def test_macro_headervideo_handles_video_id_correctly(jinja2_env):
     assert len(vid) == 1
 
 
-def test_macro_sharing_meta_should_produce_markup(application, jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/layout_macro.tpl')
-
-    obj = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    request = mock.Mock()
-    request.host = 'test.de'
-    request.path_info = '/myurl'
-    request.route_url.return_value = request.host + request.path_info
-    twitter = [u'<meta name="twitter:card" content="">',
-               u'<meta name="twitter:site" content="@zeitonline">',
-               u'<meta name="twitter:creator" content="@ZEITmagazin">',
-               u'<meta name="twitter:title" content="Mei, is des traurig!">',
-               u'<meta name="twitter:description" content="Die Münchner Sch']
-    fb = [u'<meta property="og:site_name" content="ZEITmagazin">',
-          u'<meta property="fb:admins" content="595098294">',
-          u'<meta property="og:type" content="article">',
-          u'<meta property="og:title" content="Mei, is des traurig!">',
-          u'<meta property="og:description" content="Die Münchner Sch',
-          u'<meta property="og:url" content="http://test.de/myurl">']
-    image = [u'<meta property="og:image" content="',
-             u'<link itemprop="image" rel="image_src"',
-             u'<meta name="twitter:image:src" content="']
-    output = u' '.join(tpl.module.sharing_meta(obj, request).split())
-    for fb_meta in fb:
-        assert fb_meta in output
-    for twitter_meta in twitter:
-        assert twitter_meta in output
-    for img in image:
-        assert img in output
+def test_macro_sharing_meta_should_produce_markup(testserver, testbrowser):
+    browser = testbrowser('%s/artikel/01' % testserver.url)
+    assert browser.cssselect('meta[name="twitter:card"]')
+    assert browser.cssselect(
+        'meta[name="twitter:site"][content="@zeitonline"]')
+    assert browser.cssselect(
+        'meta[name="twitter:creator"][content="@ZEITmagazin"]')
+    assert browser.cssselect(
+        'meta[name="twitter:title"][content="Mei, is des traurig!"]')
+    assert browser.cssselect('meta[name="twitter:description"]')
+    assert browser.cssselect(
+        'meta[property="og:site_name"][content="ZEITmagazin"]')
+    assert browser.cssselect('meta[property="fb:admins"][content="595098294"]')
+    assert browser.cssselect('meta[property="og:type"][content="article"]')
+    assert browser.cssselect(
+        'meta[property="og:title"][content="Mei, is des traurig!"]')
+    assert browser.cssselect('meta[property="og:description"]')
+    assert browser.cssselect('meta[property="og:url"]')
+    assert browser.cssselect('meta[property="og:image"]')
+    assert browser.cssselect('link[itemprop="image"][rel="image_src"]')
+    assert browser.cssselect('meta[name="twitter:image:src"]')
 
 
 def test_add_publish_date_generates_script(jinja2_env):
