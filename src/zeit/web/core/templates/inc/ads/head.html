@@ -26,11 +26,17 @@
 <!-- mandanten object -->
 <script type="text/javascript">
     if (typeof AdController !== 'undefined') {
-        AdController.setPageInfo({
+        var adcSiteInfo = {
         {% for name, value in view.adcontroller_values -%}
                 {{ '' | indent(4, true) }}{{ name }}: {% if value is string %}'{{ value }}'{% else %}{{ value | lower }}{% endif %}{{ ',' if not loop.last }}
         {% endfor -%}
-        });
+        };
+        if ( ZMO.clientWidth > ZMO.mobileWidth && ZMO.clientWidth <= ZMO.noliquidMaxWidth ) {
+           var kws = adcSiteInfo.keywords.split(',');
+           kws.push('diuqilon');
+           adcSiteInfo.keywords = kws.join(',');
+        }
+        AdController.setPageInfo(adcSiteInfo);
     }
     try {
         AdController.stage();
