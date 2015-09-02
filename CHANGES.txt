@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1960: Adcontroller for ZMO
 
+- MAINT: Polish comments preferences and parquet topic links
+
 
 1.62 (2015-09-02)
 -----------------
