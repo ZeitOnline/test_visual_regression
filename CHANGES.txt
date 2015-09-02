@@ -4,7 +4,7 @@ Change log for zeit.web
 1.63 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1960: Adcontroller for ZMO
 
 
 1.62 (2015-09-02)
