@@ -4,6 +4,8 @@ Change log for zeit.web
 1.61.2 (unreleased)
 -------------------
 
+- MAINT: Polish comments preferences and parquet topic links
+
 - ZON-2002: Include cards from espi-be via esi
 
 - ZON-2080: hide cp2015 ending in sharing data
