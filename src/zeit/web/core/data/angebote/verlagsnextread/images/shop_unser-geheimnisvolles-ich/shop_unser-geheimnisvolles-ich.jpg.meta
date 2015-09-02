@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/angebote/verlagsnextread/images/shop_unser-geheimnisvolles-ich/shop_unser-geheimnisvolles-ich.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.thurm</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-02-13T13:28:52.711592+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Milos Djuric &lt;/unicode&gt; &lt;string&gt;http://www.milosdjuric.com/&lt;/string&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImage" module="zeit.content.image.image"/&gt; &lt;global name="IMasterImage" module="zeit.content.image.interfaces"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-02-13T13:29:52.658298+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Packshot: ZEIT Edition: Unser geheimnisvolles Ich</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">5</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:eb89b613-bed8-4f86-adc6-e34e8ed4accf}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-02-13T13:29:52.658298+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">ZEIT Edition: Unser geheimnisvolles Ich</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-02-13T13:29:00.454951+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-02-13T12:45:31+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2015-02-13T13:28:52Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">597242</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Fri, 13 Feb 2015 13:28:52 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"e39a20-91cfa-50ef837b3c9c5"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">image/jpeg</attribute>
+</head>

@@ -1,28 +1,40 @@
-{% set image = get_teaser_image(module, teaser) %}
-{% set has_default_image = get_default_image_id() in image.uniqueId %}
-{% set is_column = teaser and teaser.serie and teaser.serie.column %}
+{% set blockname = 'nextread-advertisement' %}
 
-<article class="{% block layout %}nextread{% endblock %}{% if has_default_image or is_column %} {{ self.layout() }}--no-image{% else %} {{ self.layout() }}--with-image{% endif %}" id="{{ self.layout() }}">
-	<a class="{{ self.layout() }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
-		<div class="{{ self.layout() }}__lead">{{ module.lead or 'Lesen Sie jetzt' }}</div>
-		{% if image and not has_default_image and not is_column -%}
-			{% set module_layout = self.layout() %}
-			{% include "zeit.web.site:templates/inc/teaser_asset/{}_zon-nextread.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
-		{%- endif -%}
-		<div class="{{ self.layout() }}__container">
-			<h2 class="{{ self.layout() }}__heading">
-				<span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
-				<span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
-			</h2>
-			<div class="{{ self.layout() }}__metadata">
-                {{ cp.include_teaser_datetime(teaser, self.layout(), self.layout()) }}
-				{% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
-				{% if comments -%}
-					<span class="{{ self.layout() }}__commentcount">
-						{{- comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') -}}
-					</span>
-				{%- endif %}
-			</div>
+{% macro get_label(xml_label) -%}
+	{% if xml_label == 'publisher' %}
+		Verlagsangebot
+	{% elif xml_label == 'advertisement' %}
+		Anzeige
+	{% else %}{% endif %}
+{%- endmacro %}
+
+<article class="{{ blockname }}">
+	<span class="{{ blockname }}__label">{{ get_label(teaser.supertitle) }}</span>
+	<div class="{{ blockname }}__container">
+		<h2 class="{{ blockname }}__title">{{ teaser.title }}</h2>
+		<p class="{{ blockname }}__text">{{ teaser.text }}</p>
+
+		<div class="{{ blockname }}__image-container">
+			{{ teaser.image }}
+
+		{#
+        <figure class="print-box__media">
+            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_cover_cover" title="{{ teaser.title }}" data-id="{{ teaser_position }}.angebots-box.image">
+                <img class="print-box__media-item" src="{{ module.image | default_image_url('zon-printbox') }}">
+            </a>
+        </figure>
+        #}
+
+		{#
+        {%- extends "zeit.web.site:templates/inc/linked-image.tpl" -%}
+		{% set image = module | get_image(teaser) %}
+		{% set href = teaser.uniqueId | create_url %}
+		#}
+
 		</div>
-	</a>
+
+		<a class="{{ blockname }}__button" title="{{ teaser.title }}: {{ teaser.text }}" href="{{ teaser.url }}" style="background-color:{{ teaser.button_color }}">
+			{{ teaser.button_text }}
+		</a>
+	</div>
 </article>

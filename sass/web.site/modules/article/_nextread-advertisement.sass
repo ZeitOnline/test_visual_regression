@@ -1,0 +1,56 @@
+.nextread-advertisement
+	margin: remify(40px) (-$page-padding) 0 // margin-top until preceding elements are build
+
+	&__label
+		@extend %ad-label
+		margin-right: $page-padding
+
+	&__container
+		border-width: 1px 0
+		border-color: $zon_light_grey
+		border-style: solid
+		padding: remify(10px) $page-padding remify(40px)
+		// TODO: kriegen wir den Button nicht für sich zentriert? #brettVormKopf
+		text-align: center
+
+	&__title,
+	&__text
+		letter-spacing: $zon-letter-spacing-s
+		margin: remify(8px) 0
+		text-align: left
+
+	&__title
+		color: #252525
+		font-size: remify(20px)
+		line-height: remify(22px)
+
+	&__text
+		color: $zon_dark_grey
+		font-size: remify(15px)
+		line-height: remify(17px)
+
+	&__image-container
+		background-color: $zon-seashell
+		height: remify(150px)
+		margin: remify(20px) (-$page-padding)
+
+	&__button
+		+zon-button-inky
+		border: none
+
++respond-min($break-tablet-min)
+	.nextread-advertisement
+		background-color: $zon-seashell
+		position: relative
+
+		&__label
+			padding: remify(8px)
+			position: absolute
+			right: 0
+			top: 0
+		&__container
+			border: none
+			margin: 0 auto
+			padding-left: 0
+			padding-right: 0
+			width: remify(660px)
