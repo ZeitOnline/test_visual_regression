@@ -199,6 +199,8 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
     comment_count = len(comments)
     pages = int(math.ceil(float(comment_count) / float(page_size)))
 
+    thread['comment_count'] = comment_count
+
     # sanitize page value
     if page:
         try:

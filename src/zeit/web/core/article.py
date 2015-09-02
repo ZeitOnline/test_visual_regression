@@ -36,7 +36,7 @@ class Page(object):
         del self.blocks[key]
 
     def append(self, block):
-        block = zeit.web.core.block.IFrontendBlock(block, None)
+        block = zeit.web.core.interfaces.IFrontendBlock(block, None)
         if block is not None:
             self.blocks.append(block)
 
