@@ -4,6 +4,7 @@
 {% block teaser %}
 <article class="{% block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}{% if module.visible_mobile == False %} mobile-hidden{% endif %}"{% if module %} data-block-type="{{ module.type | hide_none }}"{% endif %} data-unique-id="{{ teaser.uniqueId }}" data-meetrics="{{ area.kind }}">
 
+    {% block teaser_label %}{% endblock %}
     {% block teaser_media_position_before_title %}{% endblock %}
 
     <div class="{{ self.layout() }}__container">

@@ -153,7 +153,7 @@ def test_inline_gallery_should_be_contained_in_body(testserver, testbrowser):
 def test_inline_gallery_should_have_images(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    gallery = zeit.web.core.block.IFrontendBlock(body.values()[-1])
+    gallery = zeit.web.core.interfaces.IFrontendBlock(body.values()[-1])
     assert all(
         zeit.web.core.gallery.IGalleryImage.providedBy(i)
         for i in gallery.itervalues())
@@ -389,6 +389,16 @@ def test_unavailable_handles_broken_unicode():
     view = zeit.web.core.view.service_unavailable(None, req)
     # assert nothing raised:
     view()
+
+
+def test_og_url_is_set_correctly(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = mock.Mock()
+    request.route_url.return_value = 'foo/'
+    view = zeit.web.site.view_centerpage.Centerpage(context, request)
+    view.request.traversed = ('politik', 'index.cp2015')
+    assert view.og_url == 'foo/politik/index'
 
 
 def test_wrapped_page_has_wrapped_property(application):

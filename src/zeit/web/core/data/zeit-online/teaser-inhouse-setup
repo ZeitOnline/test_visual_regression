@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
+  <head>
+    <header_image/>
+    <snapshot/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-07-25T09:18:21.094801+00:00</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-05-21T10:58:36.573625+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.dhoppe</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:deea5ce3-46fa-45a7-887b-95b5727f68d1}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">26</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2008</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <topiclinks>
+      <topiclink>
+        <topiclink_label_1>Türkei</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/schlagworte/orte/tuerkei/index</topiclink_url_1>
+        <topiclink_label_2>Griechenland</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/schlagworte/orte/griechenland/index</topiclink_url_2>
+        <topiclink_label_3>G-7-Gipfel</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/schlagworte/themen/g-7-gipfel/index</topiclink_url_3>
+      </topiclink>
+    </topiclinks>
+  </head>
+  <body>
+    <cluster visible="True" area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
+      <region visible="True" hide-dupes="True" area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
+        <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="parquet-verlag" visible="True">
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
+        </container>
+      </region>
+      <region visible="True" hide-dupes="True" area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor" title="Marginalspalte">
+        <container cp:type="teaser" module="parquet-verlag" visible="True" cp:__name__="id-052280d1-a006-4c44-b681-dc638ff8758a">
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
+        </container>
+      </region>
+    </cluster>
+    <cluster visible="True" area="id-bdfb0156-4df4-4bcd-bf1e-68609ef1a109" kind="parquet" title="ArneParquet">
+      <region visible="True" hide-dupes="True" area="id-1ac0ac50-fe94-4431-baac-435cc2a934dd" kind="parquet" title="Parkett: Blog-Teaser">
+        <container cp:type="teaser" module="parquet-verlag" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5afa4cad1">
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
+        </container>
+      </region>
+    </cluster>
+    <title>Verlagsangebot</title>
+  </body>
+  <feed/>
+  <teaser>
+    <title>Verlagsangebot</title>
+  </teaser>
+</centerpage>

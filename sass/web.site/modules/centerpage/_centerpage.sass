@@ -23,8 +23,6 @@
 				border-bottom-width: 1px
 			+ div:not(.cp-region--parquet)
 				border-top: 1px solid $zon_light_grey
-	&--topic
-		padding: 0
 	&--gallery
 		background-color: $zon_lighter_grey
 		padding-bottom: remify(40px)
@@ -35,7 +33,8 @@
 	// EXPERIMENT: We're trying to get rid of the 'padding/margin breakout kerfuffle'.
 	// 			   Seems like we started with the desktop and retrofitted.
 	// 			   This is an atempt to do it *mobile first*.
-	&--solo
+	&--solo,
+	&--topic
 		padding: 0
 
 .cp-area

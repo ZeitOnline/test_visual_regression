@@ -7,20 +7,10 @@
 	max-width: 940px
 	margin: 0 auto
 	padding: $little 0
-%label
-	color: $zon_mid_grey
-	display: block
-	font-family: $font-tabletgothic
-	font-size: remify(9px)
-	letter-spacing: remify(1.5px)
-	line-height: remify(10px)
-	margin-bottom: remify(10px)
-	text-align: right
-	text-transform: uppercase
 
 .ad
 	&__label
-		@extend %label
+		@extend %ad-label
 		.ad-desktop--3 &,
 		.ad-desktop--12 &
 			text-align: right
@@ -87,7 +77,7 @@
 				margin: 0 auto
 				max-width: 100%
 			&:before
-				@extend %label
+				@extend %ad-label
 				content: "Anzeige"
 				margin-left: auto
 				margin-right: auto
@@ -95,7 +85,7 @@
 	&--7-on-article
 		clear: both
 		float: right
-		margin: 0 remify(60px) remify(28px) remify(36px)
+		margin: remify(0 60px 28px 36px)
 		max-width: 300px
 		padding: 0
 	&--8-on-article

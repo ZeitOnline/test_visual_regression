@@ -1,7 +1,7 @@
 .centerpage-header
 	background-color: $zon_lighter_grey
-	margin: remify(0 -20px 32px -20px) // neutralize $cp-paddings
-	padding: remify(40px 20px)
+	margin: remify(0 (-$page-padding) 32px)
+	padding: remify(40px $page-padding)
 	+respond-min($break-tablet-min)
 		margin-bottom: remify(48px)
 	&__title

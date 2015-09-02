@@ -26,24 +26,15 @@ log = logging.getLogger(__name__)
 
 
 @zeit.web.register_filter
-def get_all_assets(teaser):
-    try:
-        assets = (get_video_asset(teaser),
-                  get_gallery_asset(teaser),
-                  get_image_asset(teaser))
-        return tuple(a for a in assets if a)
-    except TypeError:
-        log.debug('No assets for %s' % teaser.uniqueId)
-        return ()
+def auto_select_asset(teaser):
+    for getter in (get_video_asset, get_gallery_asset, get_image_asset):
+        asset = getter(teaser)
+        if asset:
+            return asset
+    log.debug('No assets for %s' % teaser.uniqueId)
 
 
 @zeit.web.register_filter
-def auto_select_asset(teaser):
-    assets = get_all_assets(teaser)
-    if len(assets):
-        return assets[0]
-
-
 def get_video_asset(teaser):
 
     def get_video_source(self):
@@ -71,6 +62,7 @@ def get_video_asset(teaser):
     return asset.video
 
 
+@zeit.web.register_filter
 def get_gallery_asset(teaser):
     try:
         return zeit.content.gallery.interfaces.IGalleryReference(
@@ -216,20 +208,26 @@ class Teaser(object):
 class Image(zeit.web.core.block.BaseImage):
 
     def __init__(self, image):
-        group = zeit.content.image.interfaces.IImageGroup(image, None)
-        meta = zeit.content.image.interfaces.IImageMetadata(image)
         self.align = None
-        self.alt = meta.alt
-        self.attr_alt = meta.alt or meta.caption
-        self.attr_title = meta.title or meta.caption
-        self.caption = meta.caption
-        self.copyright = meta.copyrights
         self.image = image
-        self.image_group = getattr(group, 'uniqueId', None)
         self.image_pattern = 'default'
         self.layout = ''
         self.src = self.uniqueId = image.uniqueId
-        self.title = meta.title
+
+        group = zeit.content.image.interfaces.IImageGroup(image, None)
+        if group:
+            self.image_group = group.uniqueId
+        else:
+            self.image_group = None
+
+        meta = zeit.content.image.interfaces.IImageMetadata(image, None)
+        if meta:
+            self.alt = meta.alt
+            self.attr_alt = meta.alt or meta.caption
+            self.attr_title = meta.title or meta.caption
+            self.caption = meta.caption
+            self.copyright = meta.copyrights
+            self.title = meta.title
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
@@ -238,20 +236,22 @@ class Image(zeit.web.core.block.BaseImage):
 class TeaserImage(zeit.web.core.block.BaseImage):
 
     def __init__(self, group, image):
-        meta = zeit.content.image.interfaces.IImageMetadata(group)
         self.align = None
-        self.alt = meta.alt
-        self.attr_alt = meta.alt or meta.caption
-        self.attr_title = meta.title or meta.caption
-        self.caption = meta.caption
-        self.copyright = meta.copyrights
         self.image = image
         self.image_group = group.uniqueId
         self.image_pattern = 'default'
         self.layout = ''
         self.src = self.uniqueId = image.uniqueId
-        self.title = meta.title
         self.uniqueId = image.uniqueId
+
+        meta = zeit.content.image.interfaces.IImageMetadata(group, None)
+        if meta:
+            self.alt = meta.alt
+            self.attr_alt = meta.alt or meta.caption
+            self.attr_title = meta.title or meta.caption
+            self.caption = meta.caption
+            self.copyright = meta.copyrights
+            self.title = meta.title
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
@@ -259,19 +259,25 @@ class TeaserImage(zeit.web.core.block.BaseImage):
 class VariantImage(object):
 
     def __init__(self, variant):
-        group = zeit.content.image.interfaces.IImageGroup(variant, None)
-        meta = zeit.content.image.interfaces.IImageMetadata(group)
-        self.alt = meta.alt
-        self.attr_alt = meta.alt or meta.caption
-        self.attr_title = meta.title or meta.caption
-        self.caption = meta.caption
-        self.copyright = meta.copyrights
-        self.image_group = getattr(group, 'uniqueId', None)
         self.image_pattern = variant.name
-        self.path = group.variant_url(self.image_pattern).lstrip('/')
         self.ratio = variant.ratio
-        self.title = meta.title
         self.variant = variant.legacy_name or variant.name
+
+        group = zeit.content.image.interfaces.IImageGroup(variant, None)
+        if group:
+            self.image_group = group.uniqueId
+            self.path = group.variant_url(self.image_pattern).lstrip('/')
+        else:
+            self.image_group = None
+
+        meta = zeit.content.image.interfaces.IImageMetadata(group, None)
+        if meta:
+            self.alt = meta.alt
+            self.attr_alt = meta.alt or meta.caption
+            self.attr_title = meta.title or meta.caption
+            self.caption = meta.caption
+            self.copyright = meta.copyrights
+            self.title = meta.title
 
 
 class LocalVideoImage(object):
@@ -286,15 +292,17 @@ class LocalVideoImage(object):
         return instance
 
     def __init__(self, video_url, video_id):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         self.url = video_url or ''
         self.video_id = video_id
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        self.filename = "{}/{}".format(
+        self.mimeType = 'image/jpeg'
+        self.format = 'jpeg'
+        self.__name__ = '{}/{}'.format(
             conf.get('brightcove_image_cache', tempfile.gettempdir()),
             md5.new(self.url).hexdigest())
 
     def isfile(self):
-        return os.path.isfile(self.filename)
+        return os.path.isfile(self.__name__)
 
     def fetch(self):
         if self.isfile():
@@ -305,16 +313,16 @@ class LocalVideoImage(object):
             # reasons.
             raise VideoImageNotFound()
         try:
-            request = urllib2.urlopen(self.url, timeout=1.5)
-            content = request.read()
+            resp = urllib2.urlopen(self.url, timeout=1.5)
+            content = resp.read()
             if len(content) <= 20:
                 raise ContentTooShort()
 
             with self.open('w+') as fh:
                 fh.write(content)
                 log.debug(
-                    "Save brightcove image {} for {} to local file {}".format(
-                        self.url, self.video_id, self.filename))
+                    'Save brightcove image {} for {} to local file {}'.format(
+                        self.url, self.video_id, self.__name__))
         except (IOError, AttributeError, ContentTooShort):
             raise VideoImageNotFound()
 
@@ -330,13 +338,13 @@ class LocalVideoImage(object):
         except:
             raise VideoImageNotFound()
 
-    def open(self, mode="r"):
-        return open(self.filename, mode)
+    def open(self, mode='r'):
+        return open(self.__name__, mode)
 
     @zeit.web.reify
     def size(self):
         if self.isfile():
-            return os.stat(self.filename).st_size
+            return os.stat(self.__name__).st_size
         return 0
 
     def getImageSize(self):  # NOQA
@@ -355,35 +363,92 @@ class VideoImageNotFound(Exception):
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
-class VideoImageGroup(zeit.content.image.imagegroup.ImageGroupBase,
-                      zeit.web.core.utils.nsdict):
-
-    master_image = None
+class ImageGroup(zeit.content.image.imagegroup.ImageGroup,
+                 zeit.web.core.utils.nsdict):
 
     def __init__(self, video):
-        super(VideoImageGroup, self).__init__()
+        super(ImageGroup, self).__init__()
         self.uniqueId = '{}/imagegroup/'.format(video.uniqueId)
-        for image_pattern, src in [('still', video.video_still),
-                                   ('thumbnail', video.thumbnail)]:
-            image = zeit.web.core.block.BaseImage()
-            try:
-                image.image = LocalVideoImage(src, video.uniqueId)
-            except VideoImageNotFound:
-                continue
-
-            image.src = src
+        self.copyrights = copyrights = (video.copyrights or '').strip('\n')
+        self.teaserText = teaserText = (video.teaserText or '').strip('\n')
+        self.teaserTitle = teaserTitle = (video.teaserTitle or '').strip('\n')
+        self.title = title = (video.title or '').strip('\n')
+        try:
+            image = LocalVideoImage(video.video_still, video.uniqueId)
+        except VideoImageNotFound:
+            image = None
+        else:
+            image.src = video.video_still
             image.mimeType = 'image/jpeg'
-            image.image_pattern = 'brightcove-{}'.format(image_pattern)
-            image.copyright = video.copyrights
-            image.caption = (video.teaserText or '').strip('\n')
-            image.title = (video.teaserTitle or '').strip('\n')
-            image.alt = (video.title or '').strip('\n')
-            file_name = '{}.jpg'.format(image_pattern)
-            image.uniqueId = '{}{}'.format(self.uniqueId, file_name)
-            self[file_name] = image
+            image.image_pattern = 'wide-large'
+            image.copyright = copyrights
+            image.caption = teaserText
+            image.title = teaserTitle
+            image.alt = title
+            image.uniqueId = '{}{}'.format(self.uniqueId, 'still.jpg')
+        self.master_image = image
+
+    def __getitem__(self, key):
+        return self.create_variant_image(key)
 
     def __repr__(self):
         return object.__repr__(self)
+
+    def __len__(self):
+        return int(bool(self.master_image))
+
+    def __contains__(self, key):
+        return False  # Video imagegroups *only* contain master images.
+
+    @property
+    def master_image(self):
+        return self._master_image
+
+    @master_image.setter
+    def master_image(self, value):
+        self._master_image = value
+
+
+VideoImageGroup = ImageGroup  # XXX This should move out of centerpage.py
+
+
+@grokcore.component.implementer(
+    zeit.content.image.interfaces.IRepositoryImageGroup)
+@grokcore.component.adapter(VideoImageGroup)
+def videoimagegroup_to_repositoryimagegroup(group):
+    return group
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
+class VideoImages(object):
+
+    def __init__(self, video):
+        self.context = video
+        self.image = zeit.content.image.interfaces.IImageGroup(video)
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImageMetadata)
+@grokcore.component.adapter(VideoImageGroup)
+class VideoImageMetaData(object):
+
+    def __init__(self, group):
+        self.alt = group.title
+        self.caption = group.teaserText
+        self.title = group.teaserTitle
+        self.copyrights = group.copyrights
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IMasterImage)
+@grokcore.component.adapter(VideoImageGroup)
+def videoimagegroup_to_masterimage(group):
+    return group.master_image
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.ITransform)
+@grokcore.component.adapter(LocalVideoImage)
+def videoimage_to_imagetransform(image):
+    return zeit.content.image.transform.ImageTransform(image)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
