@@ -80,8 +80,9 @@ def test_comment_pagination_button_should_have_a_certain_label(testbrowser):
 
 def test_comment_sorting_should_work(testbrowser):
     browser = testbrowser('/zeit-online/article/01?sort=desc')
-    comments = browser.cssselect('.comment')
-    link = browser.cssselect('.comment-preferences__link')
+    comments_body = browser.document.get_element_by_id('js-comments-body')
+    comments = comments_body.cssselect('.comment')
+    link = browser.cssselect('.comment-preferences__item')
     assert comments[0].get('id') == 'cid-2969196'
     assert link[0].text_content().strip() == u'Älteste zuerst'
     assert '/zeit-online/article/01#comments' in link[0].get('href')
@@ -96,10 +97,10 @@ def test_comment_filter_links_are_present(testbrowser):
 def test_comment_filter_links_are_activated(testbrowser):
     browser = testbrowser('/zeit-online/article/01?sort=promoted')
     assert browser.cssselect(
-        'a[href*="sort=promoted"].comment-preferences__link--active')
+        'a[href*="sort=promoted"].comment-preferences__item--active')
     browser = testbrowser('/zeit-online/article/01?sort=recommended')
     assert browser.cssselect(
-        'a[href*="sort=recommended"].comment-preferences__link--active')
+        'a[href*="sort=recommended"].comment-preferences__item--active')
 
 
 def test_comment_filter_works_as_expected(testbrowser):

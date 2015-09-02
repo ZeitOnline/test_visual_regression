@@ -1,6 +1,6 @@
 $user-avatar-size: 50px
 %meta-text
-	color: $zon_mid_grey
+	color: $zon_grey
 	font-size: remify(12px)
 	letter-spacing: $zon-letter-spacing-s
 
@@ -42,7 +42,7 @@ $user-avatar-size: 50px
 		.comment--recommended:not(.comment--promoted) &
 			padding-right: remify(60px) // leave room for star
 			+respond-min($break-tablet-min)
-				padding-right: 0	
+				padding-right: 0
 		+respond-min($break-tablet-min)
 			display: table-cell
 			overflow: visible
@@ -50,61 +50,42 @@ $user-avatar-size: 50px
 			white-space: normal
 			word-break: break-word
 	&__date
+		@extend %meta-text
 		+link
 			color: $zon_grey
 		+on-interaction
 			color: $zon_dark_grey
-		@extend %meta-text
-		+respond-min($break-tablet-min)
-			display: table-cell
-			padding-left: remify(5px)
-			text-align: right
-			vertical-align: middle
-			width: remify(145px)
 	&__badge
 		@extend %meta-text
+		&--promoted,
+		&--recommended
+			position: absolute
+			top: 0
 		&--promoted
 			left: 0
-			position: absolute
-			top: 0
-			+respond-min($break-tablet-min)
-				display: table-cell
-				left: auto
-				padding-left: remify(22px)
-				position: static
-				text-align: right
-				top: auto
-				vertical-align: middle
-				width: remify(178px)
 		&--recommended
-			position: absolute
 			right: 0
-			top: 0
-			+respond-min($break-tablet-min)
-				display: table-cell
-				padding-left: remify(5px)
-				position: static
-				right: auto
-				text-align: right
-				top: auto
-				vertical-align: middle
-				width: remify(70px)
-		&--author
-			+inline-block(0.2em)
-			margin-right: remify(8px)
+	&__date,
+	&__badge--promoted,
+	&__badge--recommended
+		+respond-min($break-tablet-min)
+			display: table-cell
+			padding-left: remify(20px)
+			vertical-align: middle
+			width: remify(145px)
+			position: static
+			width: 1%
+			white-space: nowrap
 	&__icon
-		color: $zon_grey
-		height: em(16px, 12px) // em indented
-		vertical-align: em(-3px, 12px) // em indented
-		width: em(16px, 12px)  // em indented
-		&--promoted
+		height: remify(16px)
+		margin-right: remify(5px)
+		vertical-align: remify(-3px)
+		width: remify(16px)
 		&--recommended
-			height: em(18px, 12px) // em indented
-			width: em(18px, 12px)  // em indented
+			height: remify(18px)
+			width: remify(18px)
 		&--author
 			color: $zon-charcoal
-	&__text
-		padding-left: remify(4px)
 	+respond-min($break-tablet-min)
 		display: table
 		width: 100%
