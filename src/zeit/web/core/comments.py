@@ -196,7 +196,6 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
     page_size = int(conf.get('comment_page_size', '10'))
     pages = int(math.ceil(float(top_level_comment_count) / float(page_size)))
 
-
     # sanitize page value
     if page:
         try:
