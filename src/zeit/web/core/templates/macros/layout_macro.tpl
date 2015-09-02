@@ -89,7 +89,7 @@
 {% macro adplace_adctrl(banner, view, mobile) -%}
     {{ caller() }}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
-    {% set operator = '<=' if mobile else '>' %}
+    {% set operator = '<' if mobile else '>=' %}
     {% set type = 'mobile' if mobile else 'desktop' %}
     {% set scriptname = 'ad-%s-%s' | format(type, banner.tile) %}
     <div>
