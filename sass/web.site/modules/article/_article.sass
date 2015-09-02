@@ -48,22 +48,27 @@
 	+respond-min($break-desktop-min)
 		font-size: remify(24px)
 
+.article__page-teaser
+	color: $zon_grey
+	font-size: em(16px)
+	margin-bottom: remify(28px)
+	h1
+		color: inherit
+		display: inline
+		font-size: 1em
+		font-weight: normal
+		margin: 0
+
 .summary,
-.byline,
-.article__page-teaser,
-.article__page-teaser > h1
-	color: $grey--mid
-	font-size: remify(18px)
+.byline
+	color: $zon_dark_grey
+	font-size: em(18px)
 	line-height: 1.4
-	margin-bottom: remify($petite--px)
+	margin-bottom: remify(20px)
 	+respond-min($break-tablet-min)
 		line-height: 1.5
 	+respond-min($break-desktop-min)
-		font-size: remify(20px)
-	& > h1
-		margin: 0
-		display: inline
-		font-weight: normal
+		font-size: em(20px)
 
 .byline
 	margin-bottom: remify(30px)
