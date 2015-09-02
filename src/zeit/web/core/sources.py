@@ -39,6 +39,23 @@ def get_video_series(series_source):
     return videoseries_list
 
 
+def get_whitelist_meta(whitelist_meta_source):
+    # try:
+    #     meta_xml = lxml.etree.parse(whitelist_meta_source)
+    # except (TypeError, IOError):
+    #     return list()
+    # meta = meta_xml.xpath('/tagReferences')
+    # __import__("pdb").set_trace()
+    # for meta_data in meta:
+    #     meta = meta_data.xpath('/categoryReference')
+    #     meta_list = list()
+
+    #     url = data.xpath('@url')[0]
+    #     title = data.xpath('@title')[0]
+    #     meta_list.append(dict(url=url, title=title))
+    return 'test'
+
+
 class ScaleSource(zeit.imp.source.ScaleSource):
 
     def isAvailable(self, *args):  # NOQA

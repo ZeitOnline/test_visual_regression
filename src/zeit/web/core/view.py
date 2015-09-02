@@ -294,12 +294,18 @@ class Base(object):
 
     @zeit.web.reify
     def pagetitle(self):
+
+        path = self.request.path.startswith
+
         try:
             title = zeit.seo.interfaces.ISEO(self.context).html_title
             assert title
         except (AssertionError, TypeError):
             title = ': '.join([t for t in (self.supertitle, self.title) if t])
-        if title:
+        if path('/sthema'):
+        # special rules for keywordpages
+            pass
+        elif title:
             return title + (u'' if self.is_hp else self.pagetitle_suffix)
         return self.seo_title_default
 

@@ -1,0 +1,22 @@
+<tagReferences>
+  <categoryReference for_type_value="Person">
+    <postTitle> - News und Infos</postTitle>
+    <preDescription>Hier finden Sie alle News und Hintergrund-Informationen von ZEIT ONLINE zu </preDescription>
+    <postDescription>.</postDescription>
+  </categoryReference>
+  <categoryReference for_type_value="Location">
+    <postTitle> – News und Infos</postTitle>
+    <preDescription>Hier finden Sie alle News und Hintergrund-Informationen von ZEIT ONLINE zu </preDescription>
+    <postDescription>.</postDescription>
+  </categoryReference>
+  <categoryReference for_type_value="Organization">
+    <postTitle> – News und Infos</postTitle>
+    <preDescription>Hier finden Sie alle News und Hintergrund-Informationen von ZEIT ONLINE zu dem Thema </preDescription>
+    <postDescription>.</postDescription>
+  </categoryReference>
+  <categoryReference for_type_value="Subject">
+    <postTitle> – News und Infos</postTitle>
+    <preDescription>Hier finden Sie alle News und Hintergrund-Informationen von ZEIT ONLINE zu dem Thema </preDescription>
+    <postDescription>.</postDescription>
+  </categoryReference>
+</tagReferences>
