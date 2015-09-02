@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.61.2 (unreleased)
--------------------
+1.62 (2015-09-02)
+-----------------
 
 - ZON-2062: Migrate video and sharinge images to new image server
 
