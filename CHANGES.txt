@@ -6,6 +6,7 @@ Change log for zeit.web
 
 - MAINT: Polish comments preferences and parquet topic links
 
+
 1.62 (2015-09-02)
 -----------------
 
