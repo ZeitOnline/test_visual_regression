@@ -91,7 +91,7 @@ class IPage(zope.interface.Interface):
         'The position of this division in the article body (0-based)')
     teaser = zope.interface.Attribute('Page teaser')
 
-    def __iter__(self):
+    def __iter__():
         """Iterate over our blocks"""
 
 
@@ -180,25 +180,25 @@ class IBlock(zeit.edit.interfaces.IBlock):
 
 class IReach(zope.interface.Interface):
 
-    def get_comments(self):
+    def get_comments():
         """Retrieve a ranking of most commented articles"""
 
-    def get_score(self):
+    def get_score():
         """Return a ranking of highest buzz-scoring articles"""
 
-    def get_social(self):
+    def get_social():
         """Get a ranking of articles trending on social platforms"""
 
-    def get_views(self):
+    def get_views():
         """Output a ranking of articles with top view counts"""
 
-    def get_buzz(self):
+    def get_buzz():
         """Collect a buzz summary for an article by uniqueId"""
 
 
 class IMetrics(zope.interface.Interface):
 
-    def time(self, identifier):
+    def time(identifier):
         """Context manager that collects timing information.
         Pass a full dotted name as identifier.
 
@@ -209,19 +209,19 @@ class IMetrics(zope.interface.Interface):
             # do things
         """
 
-    def increment(self, identifier, delta=1):
+    def increment(identifier, delta=1):
         """Increments the given counter."""
 
-    def set_gauge(self, identifier, value):
+    def set_gauge(identifier, value):
         """Sets a gauge value."""
 
     # low-level access for more involved operations.
 
-    def timer(self, identifier=None):
+    def timer(identifier=None):
         """Returns a ``statsd.Timer``."""
 
-    def counter(self, identifier=None):
+    def counter(identifier=None):
         """Returns a ``statsd.Counter``."""
 
-    def gauge(self, identifier=None):
+    def gauge(identifier=None):
         """Returns a ``statsd.Gauge``."""
