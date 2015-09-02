@@ -4,6 +4,8 @@ Change log for zeit.web
 1.63 (unreleased)
 -----------------
 
+- MAINT: Polish headline of following pages
+
 - MAINT: Polish comments preferences and parquet topic links
 
 
