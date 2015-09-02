@@ -21,5 +21,5 @@ class Newsletter(zeit.web.core.view.Base):
 
     @property
     def body(self):
-        return [zeit.web.core.block.IFrontendBlock(x) for x in
+        return [zeit.web.core.interfaces.IFrontendBlock(x) for x in
                 self.context.body.values()]

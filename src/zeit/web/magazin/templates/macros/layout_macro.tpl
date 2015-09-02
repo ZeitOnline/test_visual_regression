@@ -31,15 +31,13 @@
     <meta property="og:title" content="{{obj.title or 'ZEITmagazin ONLINE'}}">
     <meta property="og:description" content="{{obj.subtitle or 'Mode&Design, Essen&Trinken, Leben'}}">
     <meta property="og:url" content="{{obj.content_url or 'http://' + request.host + request.path_info}}">
-    {% if obj.image_group -%}
-        <meta property="og:image" content="{{ obj.image_group|sharing_image_url(image_pattern='og-image') }}">
-        <link itemprop="image" rel="image_src" href="{{ obj.image_group|sharing_image_url(image_pattern='og-image') }}">
-        {% if obj.twitter_card_type == 'summary' -%}
-            <meta name="twitter:image:src" content="{{ obj.image_group|sharing_image_url(image_pattern='twitter-image-small') }}">
-        {% else -%}
-            <meta name="twitter:image:src" content="{{ obj.image_group|sharing_image_url(image_pattern='twitter-image-large') }}">
-        {% endif -%}
-    {% endif -%}
+    {% set image = get_image(content=obj.context, fallback=False, default='wide') %}
+    {% if image -%}
+        {% set source = request.route_url('home') + image.path %}
+        <meta property="og:image" content="{{ source }}">
+        <meta name="twitter:image:src" content="{{ source }}">
+        <link itemprop="image" rel="image_src" href="{{ source }}">
+    {%- endif %}
 {%- endmacro %}
 
 {% macro main_nav(is_full_width, request, is_advertorial=False, is_main_h1=True) -%}
