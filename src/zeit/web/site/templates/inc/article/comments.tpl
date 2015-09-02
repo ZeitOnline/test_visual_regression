@@ -78,8 +78,9 @@
 			{% endif %}
 
 		<article id="cid-{{ comment.cid }}" class="comment
-			{%- if comment.is_reply and not view.comments.sort in ('promoted', 'recommended') %} comment--indented
-			{%- else %} js-comment-toplevel{% endif %}
+			{%- if not view.comments.sort in ('promoted', 'recommended') %}
+				{%- if comment.is_reply %} comment--indented{% else %} js-comment-toplevel{% endif %}
+			{%- endif %}
 			{%- if comment.is_author %} comment--author{% endif %}
 			{%- if comment.is_promoted %} comment--promoted{% endif %}
 			{%- if comment.recommendations %} comment--recommended{% endif %}
