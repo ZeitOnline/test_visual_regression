@@ -49,22 +49,13 @@ setup(
         'zc.iso8601',
         'zeit.brightcove',
         'zeit.cms',
-<<<<<<< HEAD
-        'zeit.connector',
-        'zeit.content.article >= 3.9.0.dev0',
-=======
         'zeit.connector>=2.6.6.dev0',
-        'zeit.content.article>3.8.0',
->>>>>>> master
+        'zeit.content.article>3.9.0',
         'zeit.content.author',
         'zeit.content.cp',
         'zeit.content.dynamicfolder',
         'zeit.content.gallery',
-<<<<<<< HEAD
         'zeit.content.image >= 2.8.0.dev0',
-=======
-        'zeit.content.image>=2.7.3.dev0',
->>>>>>> master
         'zeit.content.infobox',
         'zeit.content.link',
         'zeit.content.portraitbox',
