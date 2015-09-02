@@ -5,6 +5,21 @@ import zope.interface.common.sequence
 import zeit.edit.interfaces
 
 
+class IFrontendBlock(zope.interface.Interface):
+    """An item that provides data from an article-body block to a Jinja macro.
+
+    This interface is both a marker for identifying front-end objects
+    representing blocks, and a mechanical detail of using the ZCA to construct
+    such a front-end representation of a given vivi article-body block.
+    """
+
+
+class IFrontendHeaderBlock(zope.interface.Interface):
+    """A HeaderBlock identifies elements that appear only in headers of
+    the content.
+    """
+
+
 class IDeltaTime(zope.interface.Interface):
     """A date that has been processed through babel which is actually used
     for delta time representations.
@@ -76,7 +91,7 @@ class IPage(zope.interface.Interface):
         'The position of this division in the article body (0-based)')
     teaser = zope.interface.Attribute('Page teaser')
 
-    def __iter__(self):
+    def __iter__():
         """Iterate over our blocks"""
 
 
@@ -102,7 +117,7 @@ class IBannerlist(zope.interface.Interface):
     """A list of ad places"""
 
 
-class INextread(zope.interface.Interface):
+class INextread(IFrontendBlock):
     """Nextread teaser block must be similar to zeit.content.cp.TeaserBlock"""
 
 
@@ -165,19 +180,19 @@ class IBlock(zeit.edit.interfaces.IBlock):
 
 class IReach(zope.interface.Interface):
 
-    def get_comments(self):
+    def get_comments():
         """Retrieve a ranking of most commented articles"""
 
-    def get_score(self):
+    def get_score():
         """Return a ranking of highest buzz-scoring articles"""
 
-    def get_social(self):
+    def get_social():
         """Get a ranking of articles trending on social platforms"""
 
-    def get_views(self):
+    def get_views():
         """Output a ranking of articles with top view counts"""
 
-    def get_buzz(self):
+    def get_buzz():
         """Collect a buzz summary for an article by uniqueId"""
 
 
