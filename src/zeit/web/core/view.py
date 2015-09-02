@@ -499,15 +499,6 @@ class Content(Base):
         return 'summary_large_image'
 
     @zeit.web.reify
-    def image_group(self):
-        try:
-            group = zeit.content.image.interfaces.IImages(self.context).image
-            if zeit.content.image.interfaces.IImageGroup.providedBy(group):
-                return group
-        except TypeError:
-            return
-
-    @zeit.web.reify
     def comments(self):
         if not self.show_commentthread:
             return

@@ -27,7 +27,19 @@
 		&:first-child
 			margin-left: $page-padding
 			+respond-min($break-tablet-min)
+<<<<<<< HEAD
 				margin-left: 0
+=======
+				border: none
+	&__link
+		+link-colors(inherit, $prefs-link-color, $prefs-link-color, $prefs-link-color, $prefs-link-color)
+		+inline-block
+		padding: remify(13px 14px)
+		&:hover span
+			border-bottom: 1px solid $zon_light_grey
+		& > svg
+			color: #909090
+>>>>>>> master
 		&--active
 			+link
 				color: $zon-darker-grey

@@ -153,7 +153,7 @@ def test_inline_gallery_should_be_contained_in_body(testserver, testbrowser):
 def test_inline_gallery_should_have_images(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    gallery = zeit.web.core.block.IFrontendBlock(body.values()[-1])
+    gallery = zeit.web.core.interfaces.IFrontendBlock(body.values()[-1])
     assert all(
         zeit.web.core.gallery.IGalleryImage.providedBy(i)
         for i in gallery.itervalues())

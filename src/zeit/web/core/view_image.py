@@ -79,23 +79,19 @@ class Image(zeit.web.core.view.Base):
 
 
 @view_config(context=zeit.content.video.interfaces.IVideo,
-             name='imagegroup',
-             path_info='.*imagegroup/(still|thumbnail).jpg')
-class Brightcove(zeit.web.core.view.Base):
+             name='imagegroup')
+class Brightcove(Image):
 
-    def __call__(self):
-        _, file_name = self.request.path_info.rsplit('/', 1)
+    mapping = {'still.jpg': 'wide__580x326', 'thumbnail.jpg': 'wide__120x67'}
+
+    def __init__(self, context, request):
+        super(Brightcove, self).__init__(context, request)
         group = zeit.content.image.interfaces.IImageGroup(self.context)
-        image = group[file_name]
-
-        response = self.request.response
-        response.app_iter = pyramid.response.FileIter(image.image.open())
-        response.content_type = image.mimeType
-        response.headers['Content-Type'] = response.content_type
-        response.headers['Content-Disposition'] = (
-            'inline; filename="{}"'.format(file_name))
-        response.cache_expires(zeit.web.core.cache.ICachingTime(self.context))
-        return response
+        variant = request.path_info.rsplit('/', 1).pop()
+        try:
+            self.context = group[self.mapping.get(variant, variant)]
+        except Exception, err:
+            raise pyramid.httpexceptions.HTTPNotFound(err.message)
 
 
 @view_config(route_name='spektrum-image')
@@ -105,7 +101,7 @@ class SpektrumImage(zeit.web.core.view.Base):
         path = '/'.join(self.request.matchdict.get('path')).encode('utf-8')
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         image_url = '{}/{}'.format(conf.get('spektrum_img_host', ''), path)
-        _, file_name = path.rsplit('/', 1)
+        file_name = path.rsplit('/', 1).pop()
 
         try:
             fileobj = urllib2.urlopen(image_url, timeout=4)
