@@ -4,7 +4,7 @@ Change log for zeit.web
 1.63 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Polish comments preferences and parquet topic links
 
 
 1.62 (2015-09-02)
