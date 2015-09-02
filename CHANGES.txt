@@ -10,6 +10,7 @@ Change log for zeit.web
 
 - ZON-1592: Label "Verlagsangebote"
 
+- ZON-2064: Kommentarezahl Artikel oben
 
 
 1.61.1 (2015-08-27)
@@ -89,8 +90,6 @@ Change log for zeit.web
 - MAINT: Create properly jinja'fied tracebacks for template errors
 
 - MAINT: Log memory usage to separate log file
-
-- ZON-2064: Kommentarezahl Artikel oben
 
 
 1.59.1 (2015-08-17)
