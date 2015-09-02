@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2080: Hide cp2015 ending in sharing data
 
+- ZON-2002: Include cards from espi-be via esi
+
 - ZON-1592: Label "Verlagsangebote"
 
 
