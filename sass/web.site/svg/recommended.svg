@@ -1,14 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="17px" height="15px" viewBox="0 0 17 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
-    <title>status-leseremp</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Juli-2015" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="red-empf-auszeichnung-desktop_verm_150812_dl" sketch:type="MSArtboardGroup" transform="translate(-609.000000, -229.000000)" fill="#707070">
-            <g id="status-leseremp-+-351-" sketch:type="MSLayerGroup" transform="translate(609.000000, 229.000000)">
-                <polygon id="status-leseremp" sketch:type="MSShapeGroup" points="8.5 11.6228436 3.50382536 15.0440377 5.41703081 9.51469465 0.416019611 6.09976583 6.59462025 6.10363804 8.5 0.571901789 10.4053797 6.10363804 16.5839804 6.09976583 11.5829692 9.51469465 13.4961746 15.0440377 "></polygon>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="17px" height="15px" viewBox="0 0 17 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>Leserempfehlung</title>
+	<polygon fill="#707070" points="8.5,11.4540195 3.3215923,15 5.3045812,9.2689762 0.1211604,5.7294903 6.5251222,5.7335038 8.5,0 10.4748774,5.7335038 16.8788395,5.7294903 11.6954193,9.2689762 13.6784077,15">
+	</polygon>
 </svg>
