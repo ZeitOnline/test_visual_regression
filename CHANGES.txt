@@ -4,9 +4,13 @@ Change log for zeit.web
 1.61.2 (unreleased)
 -------------------
 
+- ZON-2002: Include cards from espi-be via esi
+
 - ZON-2080: hide cp2015 ending in sharing data
 
 - ZON-1592: Label "Verlagsangebote"
+
+- ZON-2064: Kommentarezahl Artikel oben
 
 
 1.61.1 (2015-08-27)

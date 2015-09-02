@@ -115,7 +115,7 @@ $rem-to-px-base: 16 !default
 			$list: append($list, $val * 1rem)
 
 		@else if ($unit == 'rem')
-			$list: append($list, $val)
+			$list: append($list, $value)
 
 		@else if ($unit == '') // unitless values, like in 'margin: 0 16px'
 			$list: append($list, $value)
