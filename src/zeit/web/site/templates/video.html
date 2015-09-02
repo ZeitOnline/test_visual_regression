@@ -34,10 +34,6 @@
             <div class="metadata">
                 {% include "zeit.web.site:templates/inc/article/metadata.tpl" %}
 
-                {% if view.comments %}
-                    <span><a href="#comments" class="metadata__link">{{ view.comments.headline }}</a></span>
-                {% endif %}
-
                 <div class="sharing-menu sharing-menu--video">
                     <span class="sharing-menu__title metadata__link js-sharing-menu">Teilen</span>
                     {% include "zeit.web.site:templates/inc/article/sharing-menu-items.tpl" %}
