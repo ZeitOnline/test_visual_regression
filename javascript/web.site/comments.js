@@ -327,18 +327,23 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
     },
 
     hideReplies = function() {
-        var $replyThreads = $commentsBody
-            .find( '.js-comment-toplevel + .comment--indented + .comment--indented' );
+        var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
+            $target;
 
-        $replyThreads.each( function() {
-            var $firstReply = $( this ).prev( '.comment--indented' ),
-                $otherReplies = $firstReply.nextUntil( '.js-comment-toplevel' ) // get other replies
-                    .filter( '.comment--indented' ); // filter to remove ads from result;
+        if ( window.location.hash.indexOf( '#cid-' ) === 0 ) {
+            $target = $( window.location.hash );
+        }
 
-            coverReply( $firstReply, $otherReplies.length );
-            $otherReplies.velocity( 'slideUp', slideDuration );
-        } );
+        $rootComments.each( function() {
+            var $answers = $( this ).nextUntil( '.js-comment-toplevel', '.comment--indented' ),
+                containsTarget = $answers.length > 1 && $target && $answers.is( $target );
 
+            // when deeplinked, prevent collapse of reply thread
+            if ( $answers.length > 1  && !containsTarget ) {
+                coverReply( $answers.eq( 0 ), $answers.length - 1 );
+                $answers.slice( 1 ).velocity( 'slideUp', slideDuration );
+            }
+        });
     },
 
     coverReply = function( $firstReply, replyCount ) {
@@ -392,11 +397,8 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         // disable submit buttons of required fields
         $comments.find( '.js-required' ).each( enableForm );
 
-        // when deeplinked, prevent collapse of reply threads
-        if ( window.location.search.indexOf( 'cid=' ) === -1 &&
-             window.location.hash.indexOf( '#cid-' ) === -1 ) {
-            hideReplies();
-        }
+        // collapse consecutive replies
+        hideReplies();
 
         // register event handlers
         $comments.on( 'submit', '.js-submit-comment', submitComment );
