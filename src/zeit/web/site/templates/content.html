@@ -11,14 +11,13 @@
     <article class="article article--{{ view | block_type }}" id="js-article" itemtype="http://schema.org/Article" itemscope>
     {% profile %}
         {% block schema_org_image_info %}
-            {% set schema_image_url = view.image_group | sharing_image_url(image_pattern='og-image') %}
-            {%- if schema_image_url -%}
+            {% set image = get_image(view, view.context, default='wide') %}
+            {%- if image -%}
             <script type="application/ld+json">
             {
                 "@context": "http://schema.org",
                 "@type": "ImageObject",
-                "contentUrl": "{{ schema_image_url }}",
-                "datePublished": "2008-01-25"
+                "contentUrl": "{{ view.request.route_url('home') + image.path }}"
             }
             </script>
             {%- endif -%}

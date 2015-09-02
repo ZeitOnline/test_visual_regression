@@ -30,48 +30,55 @@ import zeit.web.core.utils
 log = logging.getLogger(__name__)
 
 
-@zeit.web.register_filter
-def get_variant(unique_id, variant_id):
+@zeit.web.register_global
+def get_variant(group, variant_id):
     try:
-        imagegroup = zeit.cms.interfaces.ICMSContent(unique_id)
         variant = zeit.web.core.sources.VARIANT_SOURCE.factory.find(
-            imagegroup, variant_id)
+            group, variant_id)
     except TypeError, err:
         log.debug(err.message)
     except KeyError:
-        log.debug(u'No {} variant for {}'.format(variant_id, unique_id))
+        log.debug(u'No {} variant for {}'.format(variant_id, group.uniqueId))
     else:
-        variant.__parent__ = imagegroup
-        return zeit.web.core.interfaces.ITeaserImage(variant, None)
+        variant.__parent__ = group
+        try:
+            return zeit.web.core.interfaces.ITeaserImage(variant)
+        except TypeError:
+            return None
 
 
-@zeit.web.register_filter
-def get_image(module, content=None, fallback=True):
+@zeit.web.register_global
+def get_image(module=None, content=None, fallback=True, variant_id=None,
+              default='default'):
+
+    if content is None:
+        content = first_child(module)
+
     try:
-        content = content or first_child(module)
-        imagegroup = zeit.content.image.interfaces.IImages(content).image
+        group = zeit.content.image.interfaces.IImages(content).image
     except (TypeError, AttributeError):
-        imagegroup = None
+        group = None
 
-    if not zeit.content.image.interfaces.IImageGroup.providedBy(imagegroup):
+    if not zeit.content.image.interfaces.IImageGroup.providedBy(group):
         if not fallback:
             return None
+
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         default_id = conf.get('default_teaser_images')
-        imagegroup = zeit.cms.interfaces.ICMSContent(default_id, None)
+        group = zeit.cms.interfaces.ICMSContent(default_id, None)
 
-    if zeit.web.core.interfaces.INextread.providedBy(module):
-        # XXX Yeah, that's what you get when you use teasers on a content page
+    if zeit.web.core.interfaces.IFrontendBlock.providedBy(module):
         layout = module
     else:
         layout = zeit.content.cp.layout.get_layout(get_layout(module))
 
-    if layout is not None:
-        image_pattern = layout.image_pattern
-    else:
-        image_pattern = 'default'
+    if variant_id is None:
+        try:
+            variant_id = layout.image_pattern
+        except AttributeError:
+            variant_id = default
 
-    return get_variant(imagegroup.uniqueId, image_pattern)
+    return get_variant(group, variant_id)
 
 
 @zeit.web.register_test
