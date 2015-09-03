@@ -4,8 +4,6 @@ Change log for zeit.web
 1.64 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
 - ZON-2121: Add styles and scripts for Datenjournalismus
 
 
