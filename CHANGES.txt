@@ -4,13 +4,11 @@ Change log for zeit.web
 1.64 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2075: Redirect unauthorized comment recommendation requests
 
 
 1.63 (2015-09-03)
 -----------------
-
-- ZON-2075: Redirect unauthorized comment recommendation requests
 
 - ZON-1960: Adcontroller for ZMO
 
