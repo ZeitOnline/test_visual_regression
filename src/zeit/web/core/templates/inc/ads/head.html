@@ -13,7 +13,7 @@
     // adds the ability to load different adcontroller versions depending on isMobileView()
     var iqd_mode = (function() {
             var dm = window.location.href.toLowerCase();
-            return ZMO.isMobileView() ? 'live' : ((dm.indexOf('iqdeployment=')>1) ? dm.split('iqdeployment=')[1].split('&')[0] : 'live');
+            return dm.indexOf( 'iqdeployment=' ) > 1 ? dm.split( 'iqdeployment=' )[1].split( '&' )[0] : 'live';
         })(),
         // conditionalize output of gzip fileending, to prevent code replication
         gz_suffix = gzipEnabled ? '.gz' : '',
@@ -26,11 +26,17 @@
 <!-- mandanten object -->
 <script type="text/javascript">
     if (typeof AdController !== 'undefined') {
-        AdController.setPageInfo({
+        var adcSiteInfo = {
         {% for name, value in view.adcontroller_values -%}
                 {{ '' | indent(4, true) }}{{ name }}: {% if value is string %}'{{ value }}'{% else %}{{ value | lower }}{% endif %}{{ ',' if not loop.last }}
         {% endfor -%}
-        });
+        };
+        if ( ZMO.clientWidth > ZMO.mobileWidth && ZMO.clientWidth <= ZMO.noliquidMaxWidth ) {
+           var kws = adcSiteInfo.keywords.split(',');
+           kws.push('diuqilon');
+           adcSiteInfo.keywords = kws.join(',');
+        }
+        AdController.setPageInfo(adcSiteInfo);
     }
     try {
         AdController.stage();

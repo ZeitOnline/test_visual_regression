@@ -4,6 +4,10 @@ Change log for zeit.web
 1.63 (unreleased)
 -----------------
 
+- ZON-2053: Resort and collapse comment replies
+
+- ZON-1960: Adcontroller for ZMO
+
 - ZON-1901: Verlagsnextread
 
 - MAINT: Polish comments preferences and parquet topic links
@@ -11,8 +15,6 @@ Change log for zeit.web
 
 1.62 (2015-09-02)
 -----------------
-
-- ZON-2053: Resort and collapse comment replies
 
 - ZON-2062: Migrate video and sharinge images to new image server
 
