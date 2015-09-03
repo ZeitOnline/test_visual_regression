@@ -21,6 +21,8 @@
         {% endif -%}
         clientWidth: Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 ),
         mobileWidth: 768,
+        noliquidMaxWidth: 1024,
+        sideAdMinWidth: 998,
         maxWidth: 1280,
         isMobileView: function() {
             return this.clientWidth < this.mobileWidth;
@@ -41,6 +43,8 @@
             banner: 'width=1280',
             set: function( key ) {
                 this.meta.setAttribute( 'content', this[ key ] );
+                {# update clientWidth after swicth #}
+                ZMO.clientWidth = Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 );
             },
             isLandscape: function() {
                 if ( window.matchMedia ) {
