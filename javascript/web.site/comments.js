@@ -6,7 +6,7 @@
  * comments.js: module for comments
  * @module comments
  */
-define([ 'jquery' ], function( $ ) {
+define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
     var $comments = $( '#comments' ),
         $commentsBody = $( '#js-comments-body' ),
@@ -326,6 +326,49 @@ define([ 'jquery' ], function( $ ) {
             .velocity( 'slideUp', slideDuration );
     },
 
+    hideReplies = function() {
+        var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
+            $target;
+
+        if ( window.location.hash.indexOf( '#cid-' ) === 0 ) {
+            $target = $( window.location.hash );
+        }
+
+        $rootComments.each( function() {
+            var $answers = $( this ).nextUntil( '.js-comment-toplevel', '.comment--indented' ),
+                containsTarget = $answers.length > 1 && $target && $answers.is( $target );
+
+            // when deeplinked, prevent collapse of reply thread
+            if ( $answers.length > 1  && !containsTarget ) {
+                coverReply( $answers.eq( 0 ), $answers.length - 1 );
+                $answers.slice( 1 ).velocity( 'slideUp', slideDuration );
+            }
+        });
+    },
+
+    coverReply = function( $firstReply, replyCount ) {
+        var overlayHTML = '' +
+            '<div class="comment-overlay">\n' +
+                '<div class="comment-overlay__wrap">\n' +
+                    '<span class="comment-overlay__count">+%replyCount%</span>\n' +
+                    '<span class="comment-overlay__cta">Weitere Antworten anzeigen</span>\n' +
+                '</div>\n' +
+            '</div>\n';
+
+        overlayHTML = overlayHTML.replace( '%replyCount%', replyCount );
+        $firstReply.addClass( 'comment--wrapped' )
+            .find( '.comment__body' )
+            .append( overlayHTML );
+    },
+
+    showReplies = function( e ) {
+        e.preventDefault();
+        $( this ).removeClass( 'comment--wrapped' )
+            .nextUntil( '.js-comment-toplevel' ) // get other replies
+            .filter( '.comment--indented' ) // filter to remove ads from result
+            .velocity( 'slideDown', slideDuration );
+    },
+
     /**
      * comments.js: initialize
      * @function init
@@ -354,6 +397,9 @@ define([ 'jquery' ], function( $ ) {
         // disable submit buttons of required fields
         $comments.find( '.js-required' ).each( enableForm );
 
+        // collapse consecutive replies
+        hideReplies();
+
         // register event handlers
         $comments.on( 'submit', '.js-submit-comment', submitComment );
         $commentsBody.on( startEvent, '.js-reply-to-comment', replyToComment );
@@ -362,6 +408,7 @@ define([ 'jquery' ], function( $ ) {
         $commentsBody.on( startEvent, '.js-cancel-report', cancelReport );
         $commentsBody.on( startEvent, '.js-submit-report', submitReport );
         $commentsBody.on( startEvent, '.js-recommend-comment', recommendComment );
+        $commentsBody.on( startEvent, '.comment--wrapped', showReplies );
         $comments.on( inputEvent, '.js-required', enableForm );
     };
 
