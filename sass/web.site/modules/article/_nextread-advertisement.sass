@@ -30,17 +30,14 @@
 		font-size: remify(15px)
 		line-height: remify(17px)
 
-	&__media,
-	&__media-item
-		height: remify(150px)
-
 	&__media
 		background-color: $zon-seashell
 		margin: remify(20px) (-$page-padding)
+		height: remify(150px)
 
-	&__media-item
+	&__media-container
 		margin: 0 auto
-		max-width: 100%
+		width: remify(225px)
 
 	&__button
 		+zon-button-inky
@@ -90,9 +87,10 @@
 			font-size: remify(16px)
 			line-height: remify(18px)
 
-		&__media,
-		&__media-item
+		&__media
 			height: remify(210px)
+
+		&__media-container
 			width: remify(315px)
 
 		&__media
