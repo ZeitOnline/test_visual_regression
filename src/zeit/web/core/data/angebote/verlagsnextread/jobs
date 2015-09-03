@@ -15,6 +15,10 @@
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-01T10:44:20.672560+00:00</attribute>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/verlagsnextread/images/shop_unser-geheimnisvolles-ich/" type="jpg" title="ZEIT-Edition: Unser geheimnisvolles Ich" alt="ZEIT-Edition: Unser geheimnisvolles Ich" align="left" publication-date="" expires="">
+      <bu py:pytype="str">ZEIT-Edition: Unser geheimnisvolles Ich</bu>
+      <copyright py:pytype="str">©ZEIT Shop</copyright>
+    </image>
   </head>
   <body>
     <supertitle>publisher</supertitle>
@@ -24,8 +28,4 @@
     <button_color>c71585</button_color>
     <url>http://shop.zeit.de/sortiment/kinderwelt/spielzeug-und-accessoires/2178/zookids-stiftemaeppchen-tom-tiger?c=2853</url>
   </body>
-  <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/verlagsnextread/images/shop_unser-geheimnisvolles-ich/" type="jpg" title="ZEIT-Edition: Unser geheimnisvolles Ich" alt="ZEIT-Edition: Unser geheimnisvolles Ich" align="left" publication-date="" expires="">
-    <bu py:pytype="str">ZEIT-Edition: Unser geheimnisvolles Ich</bu>
-    <copyright py:pytype="str">©ZEIT Shop</copyright>
-  </image>
 </advertisement>
