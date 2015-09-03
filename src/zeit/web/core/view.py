@@ -302,7 +302,7 @@ class Base(object):
             assert title
         except (AssertionError, TypeError):
             title = ': '.join([t for t in (self.supertitle, self.title) if t])
-        if path('/sthema'):
+        if path('/thema'):
         # special rules for keywordpages
             pass
         elif title:
