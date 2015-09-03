@@ -258,8 +258,8 @@ class Image(BaseImage):
 
         target = model_block.references and model_block.references.target
         if zeit.content.image.interfaces.IImageGroup.providedBy(target):
-            variant = (getattr(model_block.layout, 'variant', None)
-                       or self.DEFAULT_VARIANT)
+            variant = getattr(model_block.layout, 'variant', None) or (
+                self.DEFAULT_VARIANT)
             try:
                 target = target[variant]
             except KeyError:
