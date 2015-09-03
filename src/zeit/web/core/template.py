@@ -59,6 +59,12 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
     except (TypeError, AttributeError):
         group = None
 
+    try:
+        if group is None:
+            group = module.image
+    except (TypeError, AttributeError):
+        pass
+
     if not zeit.content.image.interfaces.IImageGroup.providedBy(group):
         if not fallback:
             return None
