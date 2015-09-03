@@ -76,7 +76,15 @@
 				</div>
 				{%- endif %}
 			{% endif %}
-		<article class="comment{% if comment.is_reply and not view.comments.sort in ('promoted', 'recommended') %} comment--indented{% endif %}{% if comment.is_author %} comment--author{% endif %}{% if comment.is_promoted %} comment--promoted{% endif %}{% if comment.recommendations %} comment--recommended{% endif %}{% if comment.img_url %} comment--avatar{% endif %}" id="cid-{{ comment.cid }}">
+
+		<article id="cid-{{ comment.cid }}" class="comment
+			{%- if not view.comments.sort in ('promoted', 'recommended') %}
+				{%- if comment.is_reply %} comment--indented{% else %} js-comment-toplevel{% endif %}
+			{%- endif %}
+			{%- if comment.is_author %} comment--author{% endif %}
+			{%- if comment.is_promoted %} comment--promoted{% endif %}
+			{%- if comment.recommendations %} comment--recommended{% endif %}
+			{%- if comment.img_url %} comment--avatar{% endif %}">
 			<div class="comment__container">
 				<div class="comment-meta">
 					{% if comment.img_url %}

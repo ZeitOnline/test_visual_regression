@@ -69,25 +69,20 @@
             <script type="text/javascript" src="{{ request.asset_url('js/libs/iqd/adam.js') }}"></script>
 
             <script type="text/javascript" src="http://c.t4ft.de/c/ftg_iq.min.js"></script>
-            {% if view.context.advertising_enabled %}
-                <!--[if gt IE 9]>-->
-                <script src="{{ request.asset_url('js/libs/iqd/sasmobile.js') }}"></script>
-                <!-- <![endif]-->
-            {% endif %}
-            {% include "zeit.web.core:templates/inc/ads/%s/head.html" % view.ad_delivery_type ignore missing %}
+            {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
             {%- block content_ad_script -%}{%- endblock -%}
         {% endif %}
     </head>
     <body itemscope itemtype="http://schema.org/WebPage" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
-        {% include "zeit.web.core:templates/inc/marketing.html" %}
+
+        {% include "zeit.web.core:templates/inc/tag-manager.html" %}
+
+        {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
 
         <div class="page-wrap">
 
         {% block adplace_top %}
-            <!-- mobile ad at top -->
-            <div class="iqd-mobile-adplace">
-                <div id="sas_13500"></div>
-            </div>
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
@@ -114,6 +109,7 @@
 
                 {% block adplace_billboard %}
                     {{ lama_core.adplace(view.banner(3), view) }}
+                    {{ lama_core.adplace(view.banner(1), view, True) }}
                 {% endblock adplace_billboard %}
 
                 {% block page_title %}
@@ -172,16 +168,14 @@
 
         {% block adplace_floor %}
             <!-- mobile ad at bottom -->
-            <div class="iqd-mobile-adplace">
-                <div id="sas_13501"></div>
-            </div>
+            {{ lama_core.adplace(view.banner(8), view, True) }}
         {% endblock adplace_floor %}
 
         </div>
 
         <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
-        {% include "zeit.web.core:templates/inc/ads/%s/finalize.html" % view.ad_delivery_type ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
 
         <!-- tracking at end -->
         {% include "zeit.web.core:templates/inc/tracking/google.html" ignore missing %}
