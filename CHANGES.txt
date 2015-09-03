@@ -4,6 +4,8 @@ Change log for zeit.web
 1.63 (unreleased)
 -----------------
 
+- DEV-935: Quickfix for Community-Redaktions-Auszeichnung
+
 - ZON-1960: Adcontroller for ZMO
 
 - MAINT: Polish comments preferences and parquet topic links
