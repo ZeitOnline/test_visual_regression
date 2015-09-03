@@ -10,7 +10,6 @@
 		border-color: $zon_light_grey
 		border-style: solid
 		padding: remify(10px) $page-padding remify(40px)
-		// TODO: kriegen wir den Button nicht für sich zentriert? #brettVormKopf
 		text-align: center
 
 	&__title,
@@ -47,8 +46,8 @@
 		&:hover
 			opacity: 1.0
 
-.nextread-advertisement__text + .nextread-advertisement__button
-	margin-top: remify(8px)
+	&__text + &__button
+		margin-top: remify(8px)
 
 +respond-min($break-tablet-min)
 	.nextread-advertisement
