@@ -480,6 +480,11 @@ def test_nextread_is_responsive(testserver, selenium_driver, screen_size):
         assert nextread.size.get('height') < 450
 
 
+def test_publisher_nextread_on_article_has_own_template(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-verlagsnextread')
+    assert len(browser.cssselect('.nextread-advertisement')) == 1
+
+
 def test_zon_nextread_teaser_block_has_teasers_available(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/02')
