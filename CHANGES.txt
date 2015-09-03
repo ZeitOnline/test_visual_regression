@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - MAINT: Polish comments preferences and parquet topic links
 
+- ZON-2077 - Part 2: Put in thema and authoren noindex again
+
 
 1.62 (2015-09-02)
 -----------------

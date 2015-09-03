@@ -10,6 +10,8 @@ import zeit.web.core.view
 import zeit.web.magazin.view
 import zeit.web.site.area.spektrum
 
+import re
+
 
 def is_zon_content(context, request):
     """Custom predicate to verify, if this can be rendered via zeit.web
@@ -69,13 +71,22 @@ class Base(zeit.web.core.view.Base):
         if self.seo_robot_override:
             return self.seo_robot_override
 
+        url = self.request.url
+
         # Exclude certain paths from being indexed
         path = self.request.path.startswith
 
         if path('/angebote') and not path('/angebote/partnersuche'):
             return 'index,nofollow,noodp,noydir,noarchive'
-        elif path('/banner') or path('/test') or path('/templates'):
-            return 'noindex,follow,noodp,noydir,noarchive'
+        elif path('/thema') and (
+            len(re.findall('\\b.'+r'\\?p=1'+'\\b', url)) == 1 or
+                len(re.findall('\\b.'+r'\\?p=', url)) == 0):
+                    return 'follow,noarchive'
+        elif path('/banner') or path('/test') or path('/templates') \
+                or path('/thema'):
+                return 'noindex,follow,noodp,noydir,noarchive'
+        elif path('/autoren/index'):
+            return 'noindex,follow'
         else:
             return 'index,follow,noodp,noydir,noarchive'
 
