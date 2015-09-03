@@ -1,12 +1,5 @@
-%medium-rectangle
-    background-color: $white
-    color: $zon-charcoal
-    margin: remify(40px) auto
-    width: 300px
-%monsterbanner
-    max-width: 940px
-    margin: 0 auto
-    padding: $little 0
+$mobile_ad_width: em(320px)
+$mobile_middle_ad_break_left_margin: $mobile_ad_width + $page-padding--small*2
 
 .ad
     &__label
@@ -15,7 +8,16 @@
         .ad-desktop--12 &
             text-align: right
 
-// mobile ads
+div[id*="__container__"]
+    &:before
+        @extend %ad-label
+        content: "Anzeige"
+        display: none
+        margin-left: auto
+        margin-right: auto
+        max-width: remify(300px)
+
+
 .ad-mobile
     background: $zon-ad-grey
     border-bottom: 1px solid $zon_light_grey
@@ -28,130 +30,48 @@
         display: none // generally hidden on desktop
     &--4-on-centerpage
         margin-bottom: remify(20px)
+        +respond_min($break-2)
+            display: none
     &--4-on-article
         margin: remify(40px) (-$page-padding)
-    &--8-on-article
-        margin: remify(56px) (-$page-padding) 0
+    &--8
+        margin: 0 (-$page-padding) 0
     &:empty
         display: none
 
-// desktop ads
 .ad-desktop
-    display: none // generally hidden on mobile
+    display: none // generally hidden in mobile view
     +respond_min($break-mobile-ad-width)
         display: block // generally visible on desktop
         &:empty
             display: none
     &--3,
     &--12
-        @extend %monsterbanner
-    &--7,
-    &--8,
-    &--9,
-    &--10,
-    &--11
-        @extend %medium-rectangle
+        margin: 0 auto
+        max-width: 940px
+        padding: $little 0
     &--7-on-centerpage,
-    &--8-on-centerpage,
-    &--9-on-centerpage,
-    &--10-on-centerpage,
-    &--11-on-centerpage
-        &:first-of-type
-            margin-top: remify(15px)
-    // fuck you iqd: centering of content of unknowable width
-    // and positioning of adlabel
-    &--7-on-article
-        display: none
-        +respond_min($break-mobile-ad-width)
-            border-top: 1px solid $charcoal
-            border-bottom: 1px solid $charcoal
-            max-width: 41.25rem
-            padding-bottom: remify(15px)
-            display: table
-            vertical-align: middle
-            width: 100%
-            // hide original label cause we cannot position it
-            .ad__label
-                display: none
-                +respond-min($break-3)
-                    display: block
-            // uses code by iqd, may break tomorrow
-            div[id*="__container__"]
-                display: table-cell
-                padding-top: remify(15px)
-                position: relative
-                text-align: center
-                & > iframe[id^="google_ads_iframe"]
-                    display: inline-block
-                    margin: 0 auto
-                    max-width: 100%
-                &:before
-                    color: $zon_mid_grey
-                    content: "Anzeige"
-                    display: block
-                    font-family: $font-tabletgothic
-                    font-size: em(9px)
-                    letter-spacing: .15em
-                    line-height: 1
-                    margin-bottom: remify(10px)
-                    margin-left: auto
-                    margin-right: auto
-                    max-width: remify(300px)
-                    text-align: right
-                    text-transform: uppercase
-            +respond-min($break-3)
-                border: none
-                clear: both
-                float: right
-                margin: 0 remify(60px) remify(28px) remify(36px)
-                max-width: 300px
-                padding: 0
-                div[id*="__container__"]
-                    display: block
-                    padding-top: 0
-                    margin: 0
-                    max-width: 100%
-                    &:before
-                        display: none
+    &--8-on-centerpage
+        background-color: $white
+        color: $zon-charcoal
+        margin: 0 auto $compact auto
+        width: 300px
+    &--7-on-article,
     &--8-on-article
         display: none
+        .ad__label
+            display: none
+            +respond-min($break-3)
+                display: block
         +respond_min($break-mobile-ad-width)
             border-top: 1px solid $charcoal
             border-bottom: 1px solid $charcoal
+            margin: 0 auto 0.625em
             max-width: 41.25rem
             padding-bottom: remify(15px)
             display: table
             vertical-align: middle
             width: 100%
-            // hide original label cause we cannot position it
-            .ad__label
-                display: none
-                +respond-min($break-3)
-                    display: block
-            // uses code by iqd, may break tomorrow
-            div[id*="__container__"]
-                display: table-cell
-                padding-top: remify(15px)
-                position: relative
-                text-align: center
-                & > iframe[id^="google_ads_iframe"]
-                    display: inline-block
-                    margin: 0 auto
-                    max-width: 100%
-                &:before
-                    color: $zon_mid_grey
-                    content: "Anzeige"
-                    display: block
-                    font-family: $font-tabletgothic
-                    font-size: em(9px)
-                    letter-spacing: .15em
-                    line-height: 1
-                    margin-bottom: remify(10px)
-                    margin-left: auto
-                    margin-right: auto
-                    max-width: remify(300px)
-                    text-align: right
-                    text-transform: uppercase
             +respond-min($break-3)
                 border: none
                 clear: both
@@ -159,14 +79,26 @@
                 margin: 0 remify(60px) remify(28px) remify(36px)
                 max-width: 300px
                 padding: 0
-                div[id*="__container__"]
-                    display: block
-                    padding-top: 0
-                    margin: 0
-                    max-width: 100%
-                    &:before
-                        display: none
-
+        // uses code by iqd, may break tomorrow
+        div[id*="__container__"]
+            display: table-cell
+            padding-top: remify(15px)
+            position: relative
+            text-align: center
+            & > iframe[id^="google_ads_iframe"]
+                display: inline-block
+                margin: 0 auto
+                max-width: 100%
+            &:before
+                display: block
+                +respond-min($break-3)
+                    display: none
+            +respond-min($break-3)
+                display: block
+                padding-top: 0
+                margin: 0
+                max-width: 100%
+                        
 // Fix hillarious unusable ad extras by iqd
 +respond-max($break-mobile-ad-width)
     body > #iqdSitebar
