@@ -4,13 +4,11 @@ Change log for zeit.web
 1.64 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- DEV-935: Quickfix for Community-Redaktions-Auszeichnung
 
 
 1.63 (2015-09-03)
 -----------------
-
-- DEV-935: Quickfix for Community-Redaktions-Auszeichnung
 
 - ZON-1960: Adcontroller for ZMO
 
