@@ -17,7 +17,7 @@
 
 			{% set image = get_image(module, teaser, variant_id='super') %}
 	        {% set href = teaser.url %}
-	        {% set tracking_slug = 'articlebottom.publisher-nextread...' %}
+	        {% set tracking_slug = 'articlebottom.publisher-nextread...area-' %}
 
 	        {% include "zeit.web.site:templates/inc/linked-image.tpl" %}
 

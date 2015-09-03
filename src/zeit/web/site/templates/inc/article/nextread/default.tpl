@@ -1,7 +1,7 @@
 {% set image = get_teaser_image(module, teaser) %}
 {% set has_default_image = get_default_image_id() in image.uniqueId %}
 {% set is_column = teaser and teaser.serie and teaser.serie.column %}
-{% set tracking_slug = 'articlebottom.editorial-nextread-large...' %}
+{% set tracking_slug = 'articlebottom.editorial-nextread...area' %}
 
 <article class="{% block layout %}nextread{% endblock %}{% if has_default_image or is_column %} {{ self.layout() }}--no-image{% else %} {{ self.layout() }}--with-image{% endif %}" id="{{ self.layout() }}">
 	<a class="{{ self.layout() }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}" data-id="{{ tracking_slug }}">
