@@ -1,12 +1,22 @@
 Change log for zeit.web
 =======================
 
-1.63 (unreleased)
+1.64 (unreleased)
 -----------------
 
 - MAINT: Polish headline of following pages
 
+
+1.63 (2015-09-03)
+-----------------
+
+- ZON-1960: Adcontroller for ZMO
+
+- ZON-2053: Resort and collapse comment replies
+
 - MAINT: Polish comments preferences and parquet topic links
+
+- FIX: Provide additional fallback for teaser images
 
 
 1.62 (2015-09-02)

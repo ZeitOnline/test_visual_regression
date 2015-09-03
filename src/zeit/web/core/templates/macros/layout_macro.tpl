@@ -89,12 +89,18 @@
 {% macro adplace_adctrl(banner, view, mobile) -%}
     {{ caller() }}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
-    {% set operator = '<=' if mobile else '>' %}
+    {% set operator = '<' if mobile else '>=' %}
     {% set type = 'mobile' if mobile else 'desktop' %}
     {% set scriptname = 'ad-%s-%s' | format(type, banner.tile) %}
     <div>
         <script type="text/javascript" id="{{ scriptname }}">
-            if (typeof AdController !== 'undefined' && ZMO.clientWidth {{ operator | safe }} ZMO.mobileWidth) {
+            if (
+                typeof AdController !== 'undefined'
+                {% if type == 'desktop' and banner.tile == 2 %}
+                && ZMO.clientWidth > ZMO.sideAdMinWidth 
+                {% endif %}
+                && ZMO.clientWidth {{ operator | safe }} ZMO.mobileWidth
+                ) {
                 if( ! document.getElementById( "iqadtile{{ banner.tile }}" ) ) {
                     var elem = document.createElement('div');
                     elem.id = "iqadtile{{ banner.tile }}";
@@ -117,56 +123,19 @@
     </div>
 {% endmacro %}
 
-{% macro adplace_oldschoolish(banner, view) -%}
-    {{ caller() }}
-    {% set kw = 'iqadtile' ~ banner.tile ~ ',' ~ view.adwords|join(',') -%}
-    {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
-    <!-- Bannerplatz: "{{banner.name}}", Tile: {{banner.tile}} -->
-    <div id="iqadtile{{ banner.tile }}" class="ad-{{ banner.name }} ad-{{ banner.name }}--on-{{ pagetype }}" data-ad_width="{{ banner.noscript_width_height[0] }}" data-ad_minwidth="{{ banner.min_width }}">
-        {% if banner.label -%}
-        <div class="ad-{{ banner.name }}__label">{{ banner.label }}</div>
-        {% endif -%}
-        <div class="ad-{{ banner.name }}__inner">
-            <script type="text/javascript">
-                if (
-                    window.ZMO.clientWidth >= {{ banner.min_width|default(0) }}
-                    {% if banner.tile == 2 %}
-                    && window.ZMO.clientWidth != window.ZMO.mobileWidth
-                    {% endif %}
-                ) {
-                    document.write('<script src="http://ad.de.doubleclick.net/adj/zeitonline/{{ view.banner_channel }}{% if banner.dcopt %};dcopt={{ banner.dcopt }}{% endif %};tile={{ banner.tile }};' + n_pbt + ';sz={{ banner.sizes|join(',') }};kw={{ kw }},' + iqd_TestKW {% if banner.diuqilon %}+ window.diuqilon {% endif %}+ ';ord=' + IQD_varPack.ord + '?" type="text/javascript"><\/script>');
-                }
-            </script>
-            <noscript>
-            <div>
-                <a href="http://ad.de.doubleclick.net/jump/zeitonline/{{ view.banner_channel }};tile={{ banner.tile }};sz={{ banner.sizes|join(',') }};kw={{ kw }};ord=123456789?" rel="nofollow">
-                    <img src="http://ad.de.doubleclick.net/ad/zeitonline/{{ view.banner_channel }};tile={{ banner.tile }};sz={{ banner.sizes|join(',') }};kw={{ kw }};ord=123456789?" width="{{ banner.noscript_width_height[0] }}" height="{{ banner.noscript_width_height[1] }}" alt="">
-            </a></div>
-            </noscript>
-        </div>
-    </div>
-{%- endmacro %}
-
-{% macro adplace_middle_mobile(item) -%}
-    {% if item.tile == 7 -%}
-    <!-- only integrate onces as equivalent to desktop tile 7 -->
-        <div class="iqd-mobile-adplace iqd-mobile-adplace--middle">
-            <div id="sas_13557"></div>
-        </div>
+{% macro adplace_middle_mobile(banner, view, mobile=True) -%}
+    {% if banner.tile == 7 -%}
+        {% call adplace_adctrl(view.banner(4), view, mobile) -%}
+            <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
+        {%- endcall %}
     {%- endif %}
 {%- endmacro %}
 
 {% macro adplace(banner, view, mobile=False) -%}
     {% if view.context.advertising_enabled -%}
-        {% if view.deliver_ads_oldschoolish %}
-            {% call adplace_oldschoolish(banner, view) -%}
-                <!-- tile: {{ banner.tile }} oldschoolish -->
-            {%- endcall %}
-        {% else %}
-            {% call adplace_adctrl(banner, view, mobile) -%}
-                <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
-            {%- endcall %}
-        {% endif %}
+        {% call adplace_adctrl(banner, view, mobile) -%}
+            <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
+        {%- endcall %}
     {% endif -%}
 {%- endmacro %}
 
