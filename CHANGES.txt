@@ -1,16 +1,24 @@
 Change log for zeit.web
 =======================
 
-1.63 (unreleased)
+1.64 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.63 (2015-09-03)
 -----------------
 
 - DEV-935: Quickfix for Community-Redaktions-Auszeichnung
 
 - ZON-1960: Adcontroller for ZMO
 
+- ZON-2053: Resort and collapse comment replies
+
 - MAINT: Polish comments preferences and parquet topic links
 
-- ZON-2053: Resort and collapse comment replies
+- FIX: Provide additional fallback for teaser images
 
 
 1.62 (2015-09-02)
