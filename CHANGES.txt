@@ -4,6 +4,8 @@ Change log for zeit.web
 1.63 (unreleased)
 -----------------
 
+- ZON-1901: Verlagsnextread
+
 - MAINT: Polish comments preferences and parquet topic links
 
 
