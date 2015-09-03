@@ -15,12 +15,12 @@
 			<h2 class="{{ module_layout }}__title">{{ teaser.title }}</h2>
 			<p class="{{ module_layout }}__text">{{ teaser.text }}</p>
 
-			{% set image = get_image(module, teaser, variant_id='super') %}
-	        {% set href = teaser.url %}
-	        {% set tracking_slug = 'articlebottom.publisher-nextread...area-' %}
-
-	        {% include "zeit.web.site:templates/inc/linked-image.tpl" %}
-
+			{% set image = get_image(module, teaser, variant_id='super', fallback=False) %}
+			{% if image %}
+		        {% set href = teaser.url %}
+		        {% set tracking_slug = 'articlebottom.publisher-nextread...area-' %}
+		        {% include "zeit.web.site:templates/inc/linked-image.tpl" %}
+		    {% endif %}
 			<a class="{{ module_layout }}__button" title="{{ teaser.title }}: {{ teaser.text }}" href="{{ teaser.url }}" style="background-color:#{{ teaser.button_color }}" data-id="{{ tracking_slug }}button">
 				{{ teaser.button_text }}
 			</a>
