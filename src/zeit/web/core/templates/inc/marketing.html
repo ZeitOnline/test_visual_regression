@@ -1,7 +1,0 @@
-{% if view.enable_third_party_modules and view.enable_tracking %}
-	<!-- tracking at top -->
-	{% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
-{% endif %}
-{% if view.enable_third_party_modules and view.enable_iqd %}
-    {% include "zeit.web.core:templates/inc/ads/%s/body.html" % view.ad_delivery_type ignore missing %}
-{% endif %}
