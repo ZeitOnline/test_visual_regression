@@ -1,3 +1,5 @@
+import re
+
 import zeit.magazin.interfaces
 
 import zeit.web.core.view
@@ -60,6 +62,30 @@ class Base(zeit.web.core.view.Base):
         return cases.get(name, None)
 
     @zeit.web.reify
-    def deliver_ads_oldschoolish(self):
-        # old school ads in ZMO
-        return True
+    def adcontroller_handle(self):
+        if self.is_hp:
+            return 'zm_index'
+        if self.type == 'centerpage':
+            return 'zm_centerpage'
+        return 'zm_artikel'
+
+    @zeit.web.reify
+    def adcontroller_values(self):
+        """Fill the adcontroller js object with actual values.
+        Output in level strings only allows latin characters, numbers and
+        underscore."""
+        levels = self.banner_channel.split('/')
+        # remove type from level3
+        levels[1] = '' if levels[1] == self.type else levels[1]
+        try:
+            if self.is_hp:
+                levels[1] = 'homepage'
+        except IndexError:
+            pass
+        return [('$handle', self.adcontroller_handle),
+                ('level2', "".join(re.findall(r"[A-Za-z0-9_]*", levels[0]))),
+                ('level3', "".join(re.findall(r"[A-Za-z0-9_]*", levels[1]))),
+                ('level4', ''),
+                ('$autoSizeFrames', True),
+                ('keywords', ','.join(self.adwords)),
+                ('tma', '')]

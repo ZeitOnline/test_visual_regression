@@ -4,6 +4,8 @@ Change log for zeit.web
 1.63 (unreleased)
 -----------------
 
+- ZON-1960: Adcontroller for ZMO
+
 - MAINT: Polish comments preferences and parquet topic links
 
 - ZON-2053: Resort and collapse comment replies
