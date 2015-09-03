@@ -4,7 +4,7 @@ Change log for zeit.web
 1.64 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Fix wrong layout for MR7 and 8 in ZMO
 
 
 1.63 (2015-09-03)
