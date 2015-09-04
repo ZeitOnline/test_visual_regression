@@ -35,6 +35,10 @@ def known_content(resource):
             zeit.content.video.interfaces.IVideo.providedBy(resource))
 
 
+def is_advertorial(context, request):
+    return getattr(context, 'product_text', None) == 'Advertorial'
+
+
 class Base(object):
     """Base class for all views."""
 
