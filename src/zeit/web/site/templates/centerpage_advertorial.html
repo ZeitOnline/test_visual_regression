@@ -6,3 +6,7 @@
     <link href="{{ request.asset_url('css/web.site/advertorial.css') }}" media="screen" rel="stylesheet" type="text/css" />
 <!--<![endif]-->
 {% endblock css_link %}
+
+{% block navigation %}
+    {%- include "zeit.web.site:templates/inc/advertorial/navigation.tpl" ignore missing -%}
+{% endblock navigation %}
