@@ -1,7 +1,27 @@
 Change log for zeit.web
 =======================
 
-1.63 (unreleased)
+1.63.3 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+1.63.2 (2015-09-04)
+-------------------
+
+- DEV-923: Use image variant specified on the layout for article images
+
+- FIX: Fix another layout breaking banner between 720 and 768px in ZMO
+
+
+1.63.1 (2015-09-03)
+-------------------
+
+- FIX: Fix wrong layout for MR7 and 8 in ZMO
+
+
+1.63 (2015-09-03)
 -----------------
 
 - ZON-2053: Resort and collapse comment replies
