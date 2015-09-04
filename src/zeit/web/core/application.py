@@ -438,6 +438,7 @@ def join_url_path(base, path):
 # thus Source entries can be ``available`` only for zeit.web, but not vivi.
 def getitem_with_marker_interface(self, key):
     unique_id = self._get_id_for_name(key)
+
     __traceback_info__ = (key, unique_id)
     content = self.repository.getUncontainedContent(unique_id)
     # We copied the original method wholesale since calling alsoProvides only
