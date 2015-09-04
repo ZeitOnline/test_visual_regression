@@ -4,7 +4,7 @@ Change log for zeit.web
 1.63.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- FIX: Fix another layout breaking banner between 720 and 768px in ZMO
 
 
 1.63.1 (2015-09-03)
