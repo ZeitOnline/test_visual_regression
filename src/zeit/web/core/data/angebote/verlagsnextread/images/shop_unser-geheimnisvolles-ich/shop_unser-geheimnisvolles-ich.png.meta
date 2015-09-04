@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
-  <attribute ns="DAV:" name="href">/cms/work/angebote/verlagsnextread/images/shop_unser-geheimnisvolles-ich/shop_unser-geheimnisvolles-ich.jpg</attribute>
+  <attribute ns="DAV:" name="href">/cms/work/angebote/verlagsnextread/images/shop_unser-geheimnisvolles-ich/shop_unser-geheimnisvolles-ich.png</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.thurm</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-02-13T13:28:52.711592+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Milos Djuric &lt;/unicode&gt; &lt;string&gt;http://www.milosdjuric.com/&lt;/string&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
@@ -26,5 +26,5 @@
   <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
   <attribute ns="DAV:" name="supportedlock"> </attribute>
   <attribute ns="DAV:" name="lockdiscovery"/>
-  <attribute ns="DAV:" name="getcontenttype">image/jpeg</attribute>
+  <attribute ns="DAV:" name="getcontenttype">image/png</attribute>
 </head>
