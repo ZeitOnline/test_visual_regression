@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.63.3 (unreleased)
+1.63.3 (2015-09-04)
 -------------------
 
 - ZON-2160: Render links from entity tag
