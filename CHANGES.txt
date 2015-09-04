@@ -4,7 +4,7 @@ Change log for zeit.web
 1.63.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-1901: Verlagsnextread
 
 
 1.63.2 (2015-09-04)
@@ -27,8 +27,6 @@ Change log for zeit.web
 - ZON-2053: Resort and collapse comment replies
 
 - ZON-1960: Adcontroller for ZMO
-
-- ZON-1901: Verlagsnextread
 
 - MAINT: Polish comments preferences and parquet topic links
 
