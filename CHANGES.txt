@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - DEV-923: Use image variant specified on the layout for article images
 
+- MAINT: Polish comment count styles
+
 - FIX: Fix another layout breaking banner between 720 and 768px in ZMO
 
 
