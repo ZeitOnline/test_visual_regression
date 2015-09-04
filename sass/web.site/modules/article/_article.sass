@@ -96,5 +96,6 @@
 	&__copyright
 		color: $zon_grey
 		a
-			// normal, hover, active, visited, focus
-			+link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)
+			color: inherit
+			+on-interaction
+				color: $color-link--hover
