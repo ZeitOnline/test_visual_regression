@@ -228,16 +228,18 @@ class BaseImage(object):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class Image(BaseImage):
 
+    DEFAULT_VARIANT = 'wide'
+
     def __new__(cls, model_block):
-        if (model_block.layout == 'zmo-xl-header' or
+        if (getattr(model_block.layout, 'id', None) == 'zmo-xl-header' or
                 getattr(model_block, 'is_empty', False)):
             return
         return super(Image, cls).__new__(cls, model_block)
 
     def __init__(self, model_block):
-        # TODO: don't use XML but adapt an Image and use it's metadata
-        self.layout = model_block.layout
+        self.layout = getattr(model_block.layout, 'id', None)
 
+        # TODO: don't use XML but adapt an Image and use it's metadata
         if model_block.xml is not None:
             bu_node = model_block.xml.find('bu')
             bu = unicode(_inline_html(bu_node) or '').strip()
@@ -255,13 +257,12 @@ class Image(BaseImage):
                 rel = cr.attrib.get('rel', '') == 'nofollow'
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
-        # XXX: This is a rather unelegant and inflexible!
-        #      But it gets images rolling in beta articles - so wth.
-        #      … and 99% of images in articles are 'large'
         target = model_block.references and model_block.references.target
         if zeit.content.image.interfaces.IImageGroup.providedBy(target):
+            variant = getattr(model_block.layout, 'variant', None) or (
+                self.DEFAULT_VARIANT)
             try:
-                target = target['wide']
+                target = target[variant]
             except KeyError:
                 target = None
 
@@ -283,7 +284,7 @@ class Image(BaseImage):
 class HeaderImage(Image):
 
     def __new__(cls, model_block):
-        if (model_block.layout != 'zmo-xl-header' or
+        if (getattr(model_block.layout, 'id', None) != 'zmo-xl-header' or
                 getattr(model_block, 'is_empty', False)):
             return
         return super(Image, cls).__new__(cls, model_block)
