@@ -1,0 +1,25 @@
+.storystream-headerimage
+	position: relative
+
+	&__container
+		border-left: 2px $color-border solid
+		bottom: 0
+		margin: 0 $cp-padding
+		padding: $vertical-space $cp-padding 0
+		position: absolute
+		top: 0
+
+	&__kicker,
+	&__title
+		color: $white
+
+	&__title
+		font-family: $font-franziska
+		font-style: italic
+		font-weight: bold
+		font-size: remify(36px)
+		line-height: 1.25
+		+respond-max($break-phablet-min)
+			width: 67%
+		+respond-min($break-tablet-min)
+			font-size: remify(32px)
