@@ -168,6 +168,7 @@ def test_image_should_not_break_on_whitespace_caption():
 def test_image_should_not_break_on_missing_image(application):
     model_block = mock.Mock()
     model_block.layout.id = 'large'
+    model_block.layout.variant = 'large'
     model_block.is_empty = False
     model_block.xml = None
     model_block.references.target = zeit.content.image.imagegroup.ImageGroup()
