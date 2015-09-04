@@ -498,8 +498,14 @@ def _raw_html(xml):
 
 
 def _inline_html(xml, elements=None):
-    request = pyramid.threadlocal.get_current_request()
-    home_url = request.route_url('home')
+
+    home_url = "http://www.zeit.de/"
+
+    try:
+        request = pyramid.threadlocal.get_current_request()
+        home_url = request.route_url('home')
+    except:
+        pass
 
     allowed_elements = 'a|span|strong|img|em|sup|sub|caption|br|entity'
     if elements:
