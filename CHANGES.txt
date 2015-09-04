@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.63.2 (unreleased)
+1.63.2 (2015-09-04)
 -------------------
 
 - DEV-923: Use image variant specified on the layout for article images
