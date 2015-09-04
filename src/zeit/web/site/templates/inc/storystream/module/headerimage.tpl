@@ -1,1 +1,1 @@
-<pre>	headerimage.tpl</pre>
+{% extends "zeit.web.site:templates/inc/module/headerimage.html" %}

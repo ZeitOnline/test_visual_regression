@@ -1,1 +1,1 @@
-<pre>	teaser_zon-milestone.tpl</pre>
+{% extends "zeit.web.site:templates/inc/storystream/module/teaser.tpl" %}

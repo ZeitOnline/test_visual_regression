@@ -1,7 +1,6 @@
 {% extends "zeit.web.site:templates/layout.html" %}
 
 {% block main %}
-    <pre style="background:#c0ff33;">DEBUGtpuppe: STORYSTREAM.HTML</pre>
     {% for region in view.regions %}
         {% set region_loop = loop %}
         {% include "zeit.web.site:templates/inc/storystream/region.tpl" %}

@@ -7,7 +7,6 @@
 	{% set module_layout = None %}
 {% endif %}
 
-<pre style="background:#33c0ff;">DEBUGtpuppe: MODULE: {{ module_type }} | {{ module_layout }}</pre>
 {% include [
 	"zeit.web.site:templates/inc/storystream/module/{}_{}.tpl".format(module_type, module_layout),
 	"zeit.web.site:templates/inc/storystream/module/{}.tpl".format(module_type),
