@@ -42,6 +42,80 @@ def last_published_semantic(context):
 
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
+    route_name='newsfeed',
+    renderer='string')
+class Newsfeed(zeit.web.core.view.Base):
+
+    def __call__(self):
+        super(Newsfeed, self).__call__()
+        self.request.response.content_type = 'application/rss+xml'
+        return lxml.etree.tostring(
+            self.build_feed(), pretty_print=True, xml_declaration=True,
+            encoding='UTF-8')
+
+    def build_feed(self):
+        root = ELEMENT_MAKER.rss(version='2.0')
+        channel = ELEMENT_MAKER.channel(
+            ELEMENT_MAKER.title('Spektrum Kooperationsfeed'),
+            ELEMENT_MAKER.link(self.request.route_url('home')),
+            ELEMENT_MAKER.description(),
+            ELEMENT_MAKER.language('de-de'),
+            ELEMENT_MAKER.copyright(
+                'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
+            ATOM_MAKER(href=self.request.url,
+                       type=self.request.response.content_type)
+        )
+        root.append(channel)
+        for content in zeit.content.cp.interfaces.ITeaseredContent(
+                self.context):
+            normalized_title = zeit.cms.interfaces.normalize_filename(
+                content.title)
+            tracking = urllib.urlencode({
+                'wt_zmc':
+                'koop.ext.zonaudev.spektrumde.feed.%s.bildtext.link.x' % (
+                    normalized_title),
+                'utm_medium': 'koop',
+                'utm_source': 'spektrumde_zonaudev_ext',
+                'utm_campaign': 'feed',
+                'utm_content': '%s_bildtext_link_x' % normalized_title,
+            })
+            content_url = zeit.web.core.template.create_url(
+                None, content, self.request)
+            # XXX Since this view will be accessed via newsfeed.zeit.de, we
+            # cannot use route_url() as is, since it uses that hostname, which
+            # is not the one we want. In non-production environments this
+            # unfortunately still generates useless production links.
+            content_url = content_url.replace(
+                self.request.route_url('home'), 'http://www.zeit.de/', 1)
+            item = ELEMENT_MAKER.item(
+                ELEMENT_MAKER.title(content.title),
+                ELEMENT_MAKER.link('%s?%s' % (content_url, tracking)),
+                ELEMENT_MAKER.description(content.teaserText),
+                ELEMENT_MAKER.pubDate(format_rfc822_date(
+                    last_published_semantic(content))),
+                ELEMENT_MAKER.guid(content.uniqueId, isPermaLink='false'),
+            )
+            image = zeit.content.image.interfaces.IMasterImage(
+                zeit.content.image.interfaces.IImages(content).image, None)
+            if image is not None:
+                image_url = zeit.web.core.template.default_image_url(
+                    image, 'spektrum')
+                image_url = image_url.replace(
+                    self.request.route_url('home'),
+                    self.request.asset_url('/'), 1)
+                item.append(ELEMENT_MAKER.enclosure(
+                    url=image_url,
+                    # XXX Incorrect length, since bitblt will resize the image,
+                    # but since that happens outside of the application, we
+                    # cannot know the real size here.
+                    length=str(image.size),
+                    type=image.mimeType))
+            channel.append(item)
+        return root
+
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-spektrum-flavoured',
     renderer='string')
 class SpektrumFeed(zeit.web.site.view.Base):
