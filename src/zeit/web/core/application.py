@@ -165,6 +165,7 @@ class Application(object):
         config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
         config.add_route('comments', '/-comments/collection/*traverse')
+        config.add_route('newsfeed', '/newsfeed/*traverse')
         config.add_route('home', '/')
         config.add_route('beta_toggle', '/beta')
         config.add_route('login_state', '/login-state')
