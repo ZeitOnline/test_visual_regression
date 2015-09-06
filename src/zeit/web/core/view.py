@@ -3,6 +3,7 @@ import base64
 import datetime
 import logging
 import lxml.etree
+import urlparse
 import re
 
 import babel.dates
@@ -35,6 +36,16 @@ def known_content(resource):
             zeit.content.video.interfaces.IVideo.providedBy(resource))
 
 
+def redirect_on_trailing_slash(request):
+    if request.path.endswith('/') and not len(request.path) == 1:
+        scheme, netloc, path, params, query, fragment = urlparse.urlparse(
+            request.url)
+        url = '{}://{}{}'.format(scheme, netloc, path[:-1])
+        url = url if query == '' else '{}?{}'.format(url, query)
+        raise pyramid.httpexceptions.HTTPMovedPermanently(
+            location=url)
+
+
 class Base(object):
     """Base class for all views."""
 
@@ -42,6 +53,7 @@ class Base(object):
     pagetitle_suffix = u''
 
     def __call__(self):
+        redirect_on_trailing_slash(self.request)
         time = zeit.web.core.cache.ICachingTime(self.context)
         self.request.response.cache_expires(time)
         self._set_response_headers()
