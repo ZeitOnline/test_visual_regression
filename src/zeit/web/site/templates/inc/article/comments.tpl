@@ -134,6 +134,20 @@
 						{{ lama.use_svg_icon('comment-recommend', 'comment__icon comment__icon-recommend', request) }}
 						<span class="comment__action">Empfehlen</span>
 					</a>
+				{% if request.authenticated_userid and ('admin-tech' in request.session.user.roles or 'admin-editor' in request.session.user.roles) %}
+					<ul class="comment__moderations">
+						<li>
+							<a class="comment__moderation" href="{{ request.registry.settings.community_host }}/comment/edit/{{ comment.cid }}">
+								Kommentar bearbeiten
+							</a>
+						</li>
+						<li>
+							<a class="comment__moderation js-promote-comment" href="">
+								Redaktionsempfehlung
+							</a>
+						</li>
+					</ul>
+				{% endif %}
 				</div>
 			</div>
 		</article>
