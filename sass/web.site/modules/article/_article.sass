@@ -48,22 +48,27 @@
 	+respond-min($break-desktop-min)
 		font-size: remify(24px)
 
+.article__page-teaser
+	color: $zon_grey
+	font-size: em(16px)
+	margin-bottom: remify(28px)
+	h1
+		color: inherit
+		display: inline
+		font-size: 1em
+		font-weight: normal
+		margin: 0
+
 .summary,
-.byline,
-.article__page-teaser,
-.article__page-teaser > h1
-	color: $grey--mid
-	font-size: remify(18px)
+.byline
+	color: $zon_dark_grey
+	font-size: em(18px)
 	line-height: 1.4
-	margin-bottom: remify($petite--px)
+	margin-bottom: remify(20px)
 	+respond-min($break-tablet-min)
 		line-height: 1.5
 	+respond-min($break-desktop-min)
-		font-size: remify(20px)
-	& > h1
-		margin: 0
-		display: inline
-		font-weight: normal
+		font-size: em(20px)
 
 .byline
 	margin-bottom: remify(30px)
@@ -82,19 +87,21 @@
 		font-size: remify(15px)
 		font-style: italic
 		line-height: 1.5
-		margin: $thin $page-padding 0 $page-padding
+		margin: remify(8px $page-padding 0)
 		color: $zon_dark_grey
 		&--marginalia
 			margin: remify(12px 0 0)
+		+respond-min($break-tablet-min)
+			max-width: remify(660px)
+			margin-left: auto
+			margin-right: auto
 		+respond-min($break-desktop-min)
-			margin: remify(8px 80px 0)
 			font-size: remify(16px)
-			&--marginalia
-				margin: remify(12px 0 0)
 
 
 	&__copyright
 		color: $zon_grey
 		a
-			// normal, hover, active, visited, focus
-			+link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)
+			color: inherit
+			+on-interaction
+				color: $color-link--hover
