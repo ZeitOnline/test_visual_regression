@@ -1,0 +1,25 @@
+.storystream-sharing
+	background-color: #41434D
+	position: relative
+	&__container
+		border-left: 1px #777 solid
+		margin: 0 $storystream-padding-mobile
+		padding: $vertical-space $storystream-padding-mobile
+		// TODO: this is obsolete if the content is present
+		height: remify(65px)
+
++respond-min($break-tablet-min)
+	.storystream-sharing
+		&__container
+			margin: 0 $storystream-padding-tablet
+			padding: $vertical-space $storystream-padding-tablet
+			// TODO: this is obsolete if the content is present
+			height: remify(75px)
+
++respond-min($break-tablet-min)
+	.storystream-sharing
+		&__container
+			margin: 0 remify(90px)
+			padding: $vertical-space remify(70px)
+			// TODO: this is obsolete if the content is present
+			height: remify(75px)

@@ -1,4 +1,13 @@
 .storystream-markup
-	border-left: 2px $color-border solid
-	margin: 0 $cp-padding
+	background-color: $zon_light_grey
 	padding: $vertical-space $cp-padding
+
+	&__title
+		font-size: remify(14px)
+		margin: 0
+
+	&__text
+		font-size: remify(14px)
+
+	ul
+		@extend %markup-ul
