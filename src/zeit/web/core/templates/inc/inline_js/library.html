@@ -79,7 +79,8 @@
                 var point = this.get();
                 return point === 'desktop' ? 'stationaer' : point;
             }
-        }
+        },
+        communityHost: '{{ request.registry.settings.community_host }}'
     };
 
 
