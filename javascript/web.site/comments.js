@@ -369,6 +369,27 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
             .velocity( 'slideDown', slideDuration );
     },
 
+    addModeration = function() {
+        var $comment = $( this ),
+            cid = this.id.substr( 4 ),
+            modHTML = '' +
+            '<ul class="comment__moderations">' +
+                '<li>' +
+                    '<a class="comment__moderation" href="%ch%/comment/edit/%cid%">' +
+                        'Kommentar bearbeiten' +
+                    '</a>' +
+                '</li>' +
+                '<li>' +
+                    '<a class="comment__moderation js-promote-comment" data-cid="%cid%" href="">' +
+                        'Redaktionsempfehlung' +
+                    '</a>' +
+                '</li>' +
+            '</ul>';
+        modHTML = modHTML.replace( '%cid%', cid ).replace( '%ch%', window.ZMO.communityHost );
+        $comment.find( '.comment__reactions' )
+            .append( modHTML );
+    },
+
     /**
      * comments.js: initialize
      * @function init
@@ -392,6 +413,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                     toggleRecommendationLink( $( this ) );
                 }
             });
+            $commentsBody.find( '.comment' ).each( addModeration );
         }
 
         // disable submit buttons of required fields
