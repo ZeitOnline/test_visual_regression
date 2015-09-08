@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2179: Redirect on cp2015 suffix
 
+- ZON-2073: Redirect on trailing slash.
+
 
 1.63.3 (2015-09-04)
 -------------------
