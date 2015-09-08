@@ -2,7 +2,7 @@
 	{
 		"location": "/gesellschaft/zeitgeschehen/2015-09/rottenburg-brand-fluechtlingsheim",
 		"score": 271,
-		"uniqueId": "http://xml.zeit.de/artikel/header1",
+		"uniqueId": "http://xml.zeit.de/zeit-online/article/zeit",
 		"ressort": "gesellschaft",
 		"sub_ressort": "zeitgeschehen",
 		"date_first_released": "2015-09-07T03:11:55Z",
@@ -17,7 +17,7 @@
 	{
 		"location": "/politik/ausland/2015-09/tuerkei-pkk-bombenanschlag",
 		"score": 84,
-		"uniqueId": "http://xml.zeit.de/artikel/header2",
+		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-02",
 		"ressort": "politik",
 		"sub_ressort": "ausland",
 		"date_first_released": "2015-09-06T23:12:37Z",
@@ -32,7 +32,7 @@
 	{
 		"location": "/gesellschaft/2015-09/fluechtlinge-helfer-gemeinnuetzigkeit-interview",
 		"score": 82,
-		"uniqueId": "http://xml.zeit.de/artikel/header3",
+		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-03",
 		"ressort": "gesellschaft",
 		"date_first_released": "2015-09-07T08:52:19Z",
 		"product_id": "ZEDE",

@@ -17,7 +17,7 @@
 	{
 		"location": "/politik/deutschland/2015-09/deutschland-moral-fluechtlingspolitik",
 		"score": 0.004282090132090131,
-		"uniqueId": "http://xml.zeit.de/artikel/header2",
+		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-05",
 		"ressort": "politik",
 		"sub_ressort": "deutschland",
 		"date_first_released": "2015-09-07T12:02:13Z",
@@ -32,7 +32,7 @@
 	{
 		"location": "/gesellschaft/2015-09/fluechtlinge-helfer-gemeinnuetzigkeit-interview",
 		"score": 0.0031609168609168636,
-		"uniqueId": "http://xml.zeit.de/artikel/header3",
+		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-01",
 		"ressort": "gesellschaft",
 		"date_first_released": "2015-09-07T08:52:19Z",
 		"product_id": "ZEDE",

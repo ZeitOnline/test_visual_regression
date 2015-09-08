@@ -17,7 +17,7 @@
     {
         "location": "/politik/deutschland/2015-09/fluechtlinge-bundesregierung-milliardenpaket",
         "score": 69167,
-        "uniqueId": "http://xml.zeit.de/artikel/header2",
+        "uniqueId": "http://xml.zeit.de/zeit-online/cp-content/kolumne",
         "ressort": "politik",
         "sub_ressort": "deutschland",
         "date_first_released": "2015-09-07T01:29:23Z",
@@ -32,7 +32,7 @@
     {
         "location": "/gesellschaft/zeitgeschehen/2015-09/fluchthilfe-fluechtlinge-wien-budapest-auto-konvoi",
         "score": 44349,
-        "uniqueId": "http://xml.zeit.de/artikel/header3",
+        "uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-06",
         "ressort": "gesellschaft",
         "sub_ressort": "zeitgeschehen",
         "date_first_released": "2015-09-06T17:37:16Z",

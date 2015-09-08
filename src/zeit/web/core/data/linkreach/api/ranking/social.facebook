@@ -17,7 +17,7 @@
 	{
 		"location": "/gesellschaft/zeitgeschehen/2015-09/fluchthilfe-fluechtlinge-wien-budapest-auto-konvoi",
 		"score": 408,
-		"uniqueId": "http://xml.zeit.de/artikel/header2",
+		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-02",
 		"ressort": "gesellschaft",
 		"sub_ressort": "zeitgeschehen",
 		"date_first_released": "2015-09-06T17:37:16Z",
@@ -32,7 +32,7 @@
 	{
 		"location": "/gesellschaft/zeitgeschehen/2015-09/fluechtlinge-oesterreich-schleuser-ungarn",
 		"score": 393,
-		"uniqueId": "http://xml.zeit.de/artikel/header3",
+		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-03",
 		"ressort": "gesellschaft",
 		"sub_ressort": "zeitgeschehen",
 		"date_first_released": "2015-09-06T20:32:32Z",
