@@ -4,14 +4,16 @@
 
 	&__container
 		border-left: 1px #777 solid
+		height: remify(65px)
 		margin: 0 $storystream-padding-mobile
-		padding: remify(15px) $storystream-padding-mobile
+		padding: remify(13px) $storystream-padding-mobile
 
 	&__button
 		background-color: rgba(0, 0, 0, 0.2)
 		border-color: #999
-		color: #eee
 		vertical-align: top
+		+link
+			color: #eee
 		&:hover
 			background-color: rgba(0, 0, 0, 0.5)
 			border-color: #ccc

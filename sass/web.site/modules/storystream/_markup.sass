@@ -1,13 +1,41 @@
 .storystream-markup
-	background-color: $zon_light_grey
+	background-color: $zon_lighter_grey
 	padding: $vertical-space $cp-padding
 
 	&__title
-		font-size: remify(14px)
+		font-size: em(18px)
+		font-weight: bold
+		line-height: em(22px)
 		margin: 0
 
 	&__text
-		font-size: remify(14px)
+		color: #777
+		font-size: em(16px)
+		line-height: em(21px)
 
 	ul
 		@extend %markup-ul
+
++respond-min($break-tablet-min)
+	.storystream-markup
+		padding: $vertical-space remify(55px)
+
+		&__title
+			font-size: em(21px)
+			line-height: em(24px)
+
+		&__text
+			font-size: em(17px)
+			line-height: em(22px)
+
+		ul li
+			margin-left: 0
+			&:before
+				border-radius: 50%
+				height: remify(5px)
+				left: em(-12px)
+				width: remify(5px)
+
++respond-min($break-desktop-min)
+	.storystream-markup
+		padding: $vertical-space remify(180px) $vertical-space remify(160px)

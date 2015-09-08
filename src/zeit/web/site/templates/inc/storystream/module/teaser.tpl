@@ -5,7 +5,7 @@
 		{{ atom.tldr_date | format_date(None, 'dd.MM.yy') }}
 	</span>
 	<h2 class="{{ blockname }}__heading">{{ atom.tldr_title | hide_none }}</h2>
-	<p>
+	<p class="{{ blockname }}__text">
 		{{ atom.tldr_text }}
 		<a class="{{ blockname }}__link" href="{{ atom.uniqueId | create_url }}">mehr lesen</a>
 	</p>

@@ -4,17 +4,21 @@
 	padding: $vertical-space $cp-padding
 
 	&__heading
-		font-size: remify(14px)
+		font-size: em(16px)
+
+	&__text
+		font-size: remify(18px)
+		line-height: 1.4
 
 	&__date
 		background: $white
 		border-radius: em(4px)
-		font-size: remify(12px)
+		font-size: em(13px)
 		letter-spacing: $zon-letter-spacing-m
 		margin-left: remify(-15px)
-		padding: 0.1rem 0.6rem
+		padding: remify(10px)
 		&--milestone
-			background: $zon-charcoal
+			background: #4c4f5f
 			color: $white
 
 	&__link
@@ -26,3 +30,37 @@
 			border-bottom: 1px solid rgba($zon_grey, .4)
 		+on-interaction
 			border-bottom-color: rgba($zon_grey, .8)
+
++respond-min($break-tablet-min)
+	.storystream-teaser
+		margin: 0 $storystream-padding-tablet
+		padding: $vertical-space $storystream-padding-tablet
+
+		&__date
+			margin-left: remify(-35px)
+
+		&__heading
+			font-size: em(20px)
+			line-height: em(26px)
+
+		&__text
+			line-height: 1.5
+
++respond-min($break-desktop-min)
+	.storystream-teaser
+		margin: 0 remify(90px)
+		padding: $vertical-space remify(70px)
+
+		&__heading
+			margin: 0
+
+		&__text
+			font-size: remify(20px)
+
+		&__date
+			display: inline-block
+			float: left
+			margin-left: remify(-115px)
+			padding: 0.4rem
+			text-align: center
+			width: remify(90px)
