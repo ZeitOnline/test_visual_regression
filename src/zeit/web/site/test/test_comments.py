@@ -2,6 +2,8 @@
 import datetime
 import lxml.etree
 import mock
+import requests
+import urllib
 import zope.component
 
 import zeit.cms.interfaces
@@ -10,16 +12,16 @@ import zeit.web.core.interfaces
 import zeit.web.core.template
 
 
-def test_comment_section_should_be_limited(testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+def test_comment_section_should_be_limited_in_top_level_comments(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
-    assert len(browser.cssselect('article.comment')) == page_size
+    assert len(
+        browser.cssselect('.comment:not(.comment--indented)')) == page_size
 
 
-def test_comments_should_contain_basic_meta_data(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+def test_comments_should_contain_basic_meta_data(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
     comm = browser.cssselect('article.comment')[0]
     assert 'Skarsgard' in comm.cssselect('.comment-meta__name > a')[0].text
     date = zeit.web.core.template.format_date(
@@ -44,40 +46,36 @@ def test_comments_get_thread_should_respect_top_level_sort_order(testserver):
         'Comments are not sorted most recent first.')
 
 
-def test_comment_form_should_be_rendered(testbrowser, testserver):
-    browser = testbrowser('{}/zeit-online/article/01/comment-form'.format(
-                          testserver.url))
+def test_comment_form_should_be_rendered(testbrowser):
+    browser = testbrowser('/zeit-online/article/01/comment-form')
     assert len(browser.cssselect('#comment-form')) == 1
 
 
-def test_comment_form_should_not_be_cached(testbrowser, testserver):
-    browser = testbrowser('{}/zeit-online/article/01/comment-form'.format(
-                          testserver.url))
+def test_comment_form_should_not_be_cached(testbrowser):
+    browser = testbrowser('/zeit-online/article/01/comment-form')
     assert 'no-cache' in browser.headers['Cache-Control']
 
 
-def test_report_form_should_be_rendered(testserver, testbrowser):
-    browser = testbrowser('{}/zeit-online/article/01/report-form'.format(
-                          testserver.url))
+def test_report_form_should_be_rendered(testbrowser):
+    browser = testbrowser('/zeit-online/article/01/report-form')
     assert len(browser.cssselect('#comment-form')) == 1
 
 
-def test_comment_form_should_be_rendered_through_esi(testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
-    assert len(browser.cssselect('include')) == 2
+def test_comment_form_should_be_rendered_through_esi(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    assert len(browser.cssselect('include')) == 5
 
 
-def test_comment_pagination_should_work(testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/article/01?page=2' % testserver.url)
+def test_comment_pagination_should_work(testbrowser):
+    browser = testbrowser('/zeit-online/article/01?page=2')
     section = browser.document.get_element_by_id('comments')
     pages = section.find_class('pager__page')
-    assert len(pages) == 5
+    assert len(pages) == 2
     assert '--current' in (pages[1].get('class'))
 
 
-def test_comment_pagination_button_should_have_a_certain_label(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/article/01?page=2' % testserver.url)
+def test_comment_pagination_button_should_have_a_certain_label(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
     button = browser.cssselect('.pager__button--next')
     assert button[0].text == u'Weitere Kommentare'
 
@@ -85,8 +83,8 @@ def test_comment_pagination_button_should_have_a_certain_label(
 def test_comment_sorting_should_work(testbrowser):
     browser = testbrowser('/zeit-online/article/01?sort=desc')
     comments_body = browser.document.get_element_by_id('js-comments-body')
-    comments = comments_body.cssselect('article')
-    link = browser.cssselect('.comment-preferences__link')
+    comments = comments_body.cssselect('.comment')
+    link = browser.cssselect('.comment-preferences__item')
     assert comments[0].get('id') == 'cid-2969196'
     assert link[0].text_content().strip() == u'Älteste zuerst'
     assert '/zeit-online/article/01#comments' in link[0].get('href')
@@ -101,24 +99,22 @@ def test_comment_filter_links_are_present(testbrowser):
 def test_comment_filter_links_are_activated(testbrowser):
     browser = testbrowser('/zeit-online/article/01?sort=promoted')
     assert browser.cssselect(
-        'a[href*="sort=promoted"].comment-preferences__link--active')
+        'a[href*="sort=promoted"].comment-preferences__item--active')
     browser = testbrowser('/zeit-online/article/01?sort=recommended')
     assert browser.cssselect(
-        'a[href*="sort=recommended"].comment-preferences__link--active')
+        'a[href*="sort=recommended"].comment-preferences__item--active')
 
 
 def test_comment_filter_works_as_expected(testbrowser):
     browser = testbrowser('/zeit-online/article/01?sort=promoted')
-    comments_body = browser.document.get_element_by_id('js-comments-body')
-    comments = comments_body.cssselect('article')
+    comments = browser.cssselect('.comment')
     assert len(comments) == 1
     browser = testbrowser('/zeit-online/article/01?sort=recommended')
-    comments_body = browser.document.get_element_by_id('js-comments-body')
-    comments = comments_body.cssselect('article')
+    comments = browser.cssselect('.comment')
     assert len(comments) == 10
 
 
-def test_comments_template_respects_metadata(jinja2_env, testserver):
+def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
     comments = jinja2_env.get_template(
         'zeit.web.site:templates/inc/article/comments.tpl')
     comment_form = jinja2_env.get_template(
@@ -129,6 +125,7 @@ def test_comments_template_respects_metadata(jinja2_env, testserver):
     request.authenticated_userid = 123
     request.session = {'user': {'uid': '123', 'name': 'Max'}}
     request.path_url = 'http://xml.zeit.de/zeit-online/article/01'
+    request.params = {'cid': None}
     view = zeit.web.site.view_article.Article(content, request)
     view.comments_allowed = False
     string = comments.render(view=view, request=request)
@@ -154,3 +151,47 @@ def test_comments_template_respects_metadata(jinja2_env, testserver):
 
     assert string.strip() == '', (
         'comment section template must return an empty document')
+
+
+def test_comment_reply_threads_wrap_on_load_and_expand_on_click(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/article/02' % testserver.url)
+
+    wrapped_threads = driver.find_elements_by_css_selector('.comment--wrapped')
+    assert len(wrapped_threads) == 5
+
+    hidden_reply = driver.find_element_by_id('cid-5122767')
+    assert not hidden_reply.is_displayed()
+
+    comment_count_overlay = driver.find_element_by_class_name(
+        'comment-overlay__count')
+    assert comment_count_overlay.text == '+2'
+
+    wrapped_threads[0].click()
+    assert len(driver.find_elements_by_css_selector('.comment--wrapped')) == 4
+    assert hidden_reply.is_displayed()
+
+
+def test_comment_reply_thread_must_not_wrap_if_deeplinked(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/article/02#cid-5122767' % testserver.url)
+    assert driver.find_element_by_id('cid-5122767').is_displayed()
+
+
+def test_comment_action_recommend_should_redirect_to_login(testserver):
+    path = '/zeit-online/article/01?action=recommend&pid=2968470'
+    url = testserver.url + path
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    if conf.get('sso_activate'):
+        pattern = '{}/anmelden?url={}'
+        host = conf.get('sso_url')
+    else:
+        pattern = '{}/user/login?destination={}'
+        host = conf.get('community_host')
+    location = pattern.format(host, urllib.quote_plus(url))
+
+    response = requests.get(url, allow_redirects=False)
+    assert response.headers.get('Location', '') == location
+    assert response.status_code == 303

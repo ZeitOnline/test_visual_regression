@@ -6,6 +6,9 @@
         {% for module in obj -%}
             {% if module.layout -%}
                 {{ include_teaser(module) }}
+                {% if view.is_hp and loop.first and module.layout.id == 'zmo-square-large' %}
+                    {{ lama_core.adplace(view.banner(3), view, True) }}
+                {% endif %}    
             {% endif %}
         {% endfor %}
     {% endif %}
@@ -26,6 +29,10 @@
         {% endfor %}
     {% endif %}
 {%- endmacro %}
+
+{% macro include_ad_tile_4(view) %}
+    {{ lama_core.adplace(view.banner(4), view, True) }}
+{% endmacro %}
 
 {% macro include_teaser(module, prefix) -%}
     {% if prefix is not defined -%}

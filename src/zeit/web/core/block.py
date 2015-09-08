@@ -8,6 +8,7 @@ import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
+import pyramid
 import requests
 import requests.exceptions
 import urlparse
@@ -25,24 +26,7 @@ import zeit.web
 import zeit.web.core.interfaces
 
 
-class IFrontendBlock(zope.interface.Interface):
-
-    """An item that provides data from an article-body block to a Jinja macro.
-
-    This interface is both a marker for identifying front-end objects
-    representing blocks, and a mechanical detail of using the ZCA to construct
-    such a front-end representation of a given vivi article-body block.
-    """
-
-
-class IFrontendHeaderBlock(zope.interface.Interface):
-
-    """A HeaderBlock identifies elements that appear only in headers of
-    the content.
-    """
-
-
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IParagraph)
 class Paragraph(object):
 
@@ -53,7 +37,7 @@ class Paragraph(object):
         return unicode(self.html)
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(
     zeit.content.article.edit.interfaces.IUnorderedList)
 class UnorderedList(Paragraph):
@@ -64,13 +48,13 @@ class UnorderedList(Paragraph):
         self.html = _inline_html(model_block.xml, additional_elements)
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IOrderedList)
 class OrderedList(UnorderedList):
     pass
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPortraitbox)
 class Portraitbox(object):
 
@@ -112,7 +96,7 @@ def make_article_blocks_work_with_infobox_content(context):
     return context.__parent__
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IInfobox)
 class Infobox(object):
 
@@ -129,10 +113,11 @@ class Infobox(object):
             title = block.find('title')
             division = InfoboxDivision(model_block.references, text)
             self.contents.append(
-                (title, [IFrontendBlock(b, None) for b in division.values()]))
+                (title, [zeit.web.core.interfaces.IFrontendBlock(
+                    b, None) for b in division.values()]))
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ILiveblog)
 class Liveblog(object):
 
@@ -239,20 +224,22 @@ class BaseImage(object):
             return
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class Image(BaseImage):
 
+    DEFAULT_VARIANT = 'wide'
+
     def __new__(cls, model_block):
-        if (model_block.layout == 'zmo-xl-header' or
+        if (getattr(model_block.layout, 'id', None) == 'zmo-xl-header' or
                 getattr(model_block, 'is_empty', False)):
             return
         return super(Image, cls).__new__(cls, model_block)
 
     def __init__(self, model_block):
-        # TODO: don't use XML but adapt an Image and use it's metadata
-        self.layout = model_block.layout
+        self.layout = getattr(model_block.layout, 'id', None)
 
+        # TODO: don't use XML but adapt an Image and use it's metadata
         if model_block.xml is not None:
             bu_node = model_block.xml.find('bu')
             bu = unicode(_inline_html(bu_node) or '').strip()
@@ -270,13 +257,12 @@ class Image(BaseImage):
                 rel = cr.attrib.get('rel', '') == 'nofollow'
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
-        # XXX: This is a rather unelegant and inflexible!
-        #      But it gets images rolling in beta articles - so wth.
-        #      … and 99% of images in articles are 'large'
         target = model_block.references and model_block.references.target
         if zeit.content.image.interfaces.IImageGroup.providedBy(target):
+            variant = getattr(model_block.layout, 'variant', None) or (
+                self.DEFAULT_VARIANT)
             try:
-                target = target['wide']
+                target = target[variant]
             except KeyError:
                 target = None
 
@@ -293,12 +279,12 @@ class Image(BaseImage):
             self.src = None
 
 
-@grokcore.component.implementer(IFrontendHeaderBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class HeaderImage(Image):
 
     def __new__(cls, model_block):
-        if (model_block.layout != 'zmo-xl-header' or
+        if (getattr(model_block.layout, 'id', None) != 'zmo-xl-header' or
                 getattr(model_block, 'is_empty', False)):
             return
         return super(Image, cls).__new__(cls, model_block)
@@ -307,13 +293,13 @@ class HeaderImage(Image):
         super(HeaderImage, self).__init__(model_block)
 
 
-@grokcore.component.implementer(IFrontendHeaderBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class HeaderImageStandard(HeaderImage):
     pass
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IIntertitle)
 class Intertitle(object):
 
@@ -324,7 +310,7 @@ class Intertitle(object):
         return self.text
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawXML)
 class Raw(object):
 
@@ -333,7 +319,7 @@ class Raw(object):
         self.xml = _raw_html(model_block.xml)
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ICitation)
 class Citation(object):
 
@@ -366,7 +352,7 @@ class BaseVideo(object):
             logging.exception('No video renditions set.')
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
 class Video(BaseVideo):
 
@@ -379,7 +365,7 @@ class Video(BaseVideo):
         super(Video, self).__init__(model_block)
 
 
-@grokcore.component.implementer(IFrontendHeaderBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
 class HeaderVideo(BaseVideo):
 
@@ -392,7 +378,7 @@ class HeaderVideo(BaseVideo):
         super(HeaderVideo, self).__init__(model_block)
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IGallery)
 def inlinegallery(context):
     # Inline galleries are created dynamically via this factory because
@@ -405,7 +391,7 @@ def inlinegallery(context):
     return cls(context.references)
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.newsletter.interfaces.IGroup)
 class NewsletterGroup(object):
 
@@ -416,10 +402,11 @@ class NewsletterGroup(object):
         self.title = context.title
 
     def values(self):
-        return [IFrontendBlock(x) for x in self.context.values()]
+        return [zeit.web.core.interfaces.IFrontendBlock(x)
+                for x in self.context.values()]
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.newsletter.interfaces.ITeaser)
 class NewsletterTeaser(object):
 
@@ -461,7 +448,7 @@ class NewsletterTeaser(object):
             self.context.reference, None)
         if body is None:
             return []
-        return [IFrontendBlock(element)
+        return [zeit.web.core.interfaces.IFrontendBlock(element)
                 for element in body.values()
                 if zeit.content.article.edit.interfaces.IVideo.providedBy(
                     element)]
@@ -478,7 +465,7 @@ class NewsletterTeaser(object):
         return getattr(self.context.reference, name)
 
 
-@grokcore.component.implementer(IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.newsletter.interfaces.IAdvertisement)
 class NewsletterAdvertisement(object):
 
@@ -512,7 +499,16 @@ def _raw_html(xml):
 
 
 def _inline_html(xml, elements=None):
-    allowed_elements = 'a|span|strong|img|em|sup|sub|caption|br'
+
+    home_url = "http://www.zeit.de/"
+
+    try:
+        request = pyramid.threadlocal.get_current_request()
+        home_url = request.route_url('home')
+    except:
+        pass
+
+    allowed_elements = 'a|span|strong|img|em|sup|sub|caption|br|entity'
     if elements:
         elements.append(allowed_elements)
         allowed_elements = '|'.join(elements)
@@ -584,7 +580,17 @@ def _inline_html(xml, elements=None):
               </xsl:attribute>
             </xsl:template>
           <xsl:template match="@*" />
-        </xsl:stylesheet>""" % (allowed_elements))
+          <xsl:template match="entity">
+                <a>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="concat(
+                            '%sthema/',
+                            substring-after(@url_value, '/'))" />
+                    </xsl:attribute>
+                    <xsl:apply-templates />
+                </a>
+          </xsl:template>
+        </xsl:stylesheet>""" % (allowed_elements, home_url))
     try:
         transform = lxml.etree.XSLT(filter_xslt)
         return transform(xml)

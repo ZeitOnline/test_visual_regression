@@ -3,6 +3,7 @@ import base64
 import datetime
 import logging
 import lxml.etree
+import urlparse
 import re
 
 import babel.dates
@@ -36,6 +37,26 @@ def known_content(resource):
             zeit.content.video.interfaces.IVideo.providedBy(resource))
 
 
+def redirect_on_trailing_slash(request):
+    if request.path.endswith('/') and not len(request.path) == 1:
+        scheme, netloc, path, params, query, fragment = urlparse.urlparse(
+            request.url)
+        url = '{}://{}{}'.format(scheme, netloc, path[:-1])
+        url = url if query == '' else '{}?{}'.format(url, query)
+        raise pyramid.httpexceptions.HTTPMovedPermanently(
+            location=url)
+
+
+def redirect_on_cp2015_suffix(request):
+    if request.path.endswith('.cp2015') and not len(request.path) == 7:
+        scheme, netloc, path, params, query, fragment = urlparse.urlparse(
+            request.url)
+        url = '{}://{}{}'.format(scheme, netloc, path[:-7])
+        url = url if query == '' else '{}?{}'.format(url, query)
+        raise pyramid.httpexceptions.HTTPMovedPermanently(
+            location=url)
+
+
 class Base(object):
     """Base class for all views."""
 
@@ -43,6 +64,8 @@ class Base(object):
     pagetitle_suffix = u''
 
     def __call__(self):
+        redirect_on_trailing_slash(self.request)
+        redirect_on_cp2015_suffix(self.request)
         time = zeit.web.core.cache.ICachingTime(self.context)
         self.request.response.cache_expires(time)
         self._set_response_headers()
@@ -394,16 +417,7 @@ class Base(object):
             return None
 
     @zeit.web.reify
-    def deliver_ads_oldschoolish(self):
-        """Toggle for switching from ad controller to old style adplaces"""
-        # TODO: use XML/JSON/YAML file for toggles
-        # TODODO: build feature toggle framework like waffle for pyramid
-        return False
-
-    @zeit.web.reify
     def ad_delivery_type(self):
-        if self.deliver_ads_oldschoolish:
-            return 'oldschool'
         return 'adcontroller'
 
     @zeit.web.reify
@@ -451,6 +465,10 @@ class Base(object):
         if (self.date_first_released is not None and date is not None and
                 date > self.date_first_released):
             return date.astimezone(self.timezone)
+
+    @zeit.web.reify
+    def has_cardstack(self):
+        return False
 
 
 class Content(Base):
@@ -525,15 +543,6 @@ class Content(Base):
         # TODO: use reasonable value depending on content type or template
         # summary_large_image, photo, gallery
         return 'summary_large_image'
-
-    @zeit.web.reify
-    def image_group(self):
-        try:
-            group = zeit.content.image.interfaces.IImages(self.context).image
-            if zeit.content.image.interfaces.IImageGroup.providedBy(group):
-                return group
-        except TypeError:
-            return
 
     @zeit.web.reify
     def comments(self):

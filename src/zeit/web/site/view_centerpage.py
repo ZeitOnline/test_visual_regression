@@ -127,6 +127,11 @@ class Centerpage(
         return self.request.url
 
     @zeit.web.reify
+    def has_cardstack(self):
+        kwargs = {'cp:type': 'cardstack'}
+        return bool(zeit.web.core.utils.find_block(self.context, **kwargs))
+
+    @zeit.web.reify
     def breadcrumbs(self):
         # No breadcrumbs for homepage
         if self.is_hp:

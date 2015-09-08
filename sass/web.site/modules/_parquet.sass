@@ -83,11 +83,18 @@
 		+respond-min($break-tablet-min)
 			+link
 				color: $zon_grey
-			display: block
+			+on-interaction
+				color: $zon_dark_grey
+			display: inline-block
 			font-size: remify(14px)
 			letter-spacing: $zon-letter-spacing-s
 			text-overflow: ellipsis
 			overflow: hidden
+
+	&__topic-link
+		border-bottom: 1px solid rgba($zon_mid_grey, .4)
+		+on-interaction
+			border-bottom-color: $zon_mid_grey
 
 	&__more-link
 		font-weight: bold

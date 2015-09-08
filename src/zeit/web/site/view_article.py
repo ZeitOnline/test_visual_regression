@@ -108,6 +108,10 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             self.breadcrumbs_by_title(breadcrumbs)
         return breadcrumbs
 
+    @zeit.web.reify
+    def has_cardstack(self):
+        return len(self.context.xml.xpath('/article/body//cardstack')) > 0
+
 
 @view_config(name='seite',
              path_info='.*seite-(.*)',

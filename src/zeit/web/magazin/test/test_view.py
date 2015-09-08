@@ -432,24 +432,12 @@ def test_longform_has_correct_twitter_card_type(testserver, testbrowser):
     assert article_view.twitter_card_type == 'summary_large_image'
 
 
-def test_article_has_correct_image_group(testserver, testbrowser):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.image_group.uniqueId == \
-        'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/'
-
-
 def test_article_has_correct_sharing_image(testserver, testbrowser):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert zeit.web.core.template.closest_substitute_image(
-        article_view.image_group, 'og-image').uniqueId == (
-            'http://xml.zeit.de/exampleimages/artikel/01/'
-            'schoppenstube/schoppenstube-540x304.jpg')
-    assert zeit.web.core.template.closest_substitute_image(
-        article_view.image_group, 'twitter-image-large').uniqueId == (
-            'http://xml.zeit.de/exampleimages/artikel/01/'
-            'schoppenstube/schoppenstube-540x304.jpg')
+    xpath = testbrowser('/artikel/01').document.xpath
+    source = testserver.url + '/exampleimages/artikel/01/schoppenstube/wide'
+    assert xpath('//link[@itemprop="image"]/@href')[0] == source
+    assert xpath('//meta[@property="og:image"]/@content')[0] == source
+    assert xpath('//meta[@name="twitter:image:src"]/@content')[0] == source
 
 
 def test_article_has_correct_product_id(testserver):

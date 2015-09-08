@@ -1,109 +1,102 @@
-$desktop_mobile_ad_breakpoint: em(768px)
-$mobile_ad_width: em(320px)
-$mobile_middle_ad_break_left_margin: $mobile_ad_width + $page-padding--small*2
+.ad
+    &__label
+        @extend %ad-label
+        .ad-desktop--3 &,
+        .ad-desktop--12 &
+            text-align: right
 
-// extend these please
-%ad__label
-	color: $charcoal
-	font-family: $font-tabletgothic
-	font-size: $font-xxs
-	letter-spacing: 2px
-	text-align: left
-	text-transform: uppercase
-
-%ad__mr
-	background-color: $white
-	color: $charcoal
-	margin: $large auto
-	+respond-min($break-1)
-		border-top: 1px solid $charcoal
-		border-bottom: 1px solid $charcoal
-		max-width: 41.25rem
-		padding: $small 0
-	+respond-min($break-3)
-		border: none
-		float: right
-		margin: 0 0 $compact $medium
-		max-width: 300px
-		padding: 0
-	object
-		display: block
-
-%ad__mr__label
-	@extend %ad__label
-	width: 300px
-	margin: 0 auto
-
-%ad__mr__inner
-	margin: 0 auto
-	width: 300px
+div[id*="__container__"]
+    &:before
+        @extend %ad-label
+        content: "Anzeige"
+        display: none
+        margin-left: auto
+        margin-right: auto
+        max-width: remify(300px)
 
 
-// desktop adplaces
-.ad-tile_3
-	max-width: 940px
-	margin: 0 auto
-	padding: $little 0
-	&__label
-		@extend %ad__label
-		text-align: right
+.ad-mobile
+    background: $zon-ad-grey
+    border-bottom: 1px solid $zon_light_grey
+    border-top: 1px solid $zon_light_grey
+    display: block // generally visible on mobile
+    margin: -1px 0 // prevent border overlapping
+    .cp-area &
+        margin: -1px (-$page-padding)
+    +respond_min($break-mobile-ad-width)
+        display: none // generally hidden on desktop
+    &--4-on-centerpage
+        margin-bottom: remify(20px)
+        +respond_min($break-2)
+            display: none
+    &--4-on-article
+        margin: remify(40px) (-$page-padding)
+    &--8
+        margin: 0 (-$page-padding) 0
+    &:empty
+        display: none
 
-.ad-tile_4
-	@extend %ad__mr
-	&__label
-		@extend %ad__mr__label
-	&__inner
-		@extend %ad__mr__inner
-
-.ad-tile_7
-	@extend %ad__mr
-	&__label
-		@extend %ad__mr__label
-	&__inner
-		@extend %ad__mr__inner
-	&--on-centerpage
-		margin: 0 auto $compact auto
-		+respond-min($break-2)
-			padding: 0
-			border: none
-		+respond-min($break-3)
-			float: none
-		// a little bit unbemmy, but this would end rather complicated
-		.ad-tile_7__label
-			display: none
-
-.ad-tile_8
-	@extend %ad__mr
-	&__label
-		@extend %ad__mr__label
-	&__inner
-		@extend %ad__mr__inner
-	&--on-centerpage
-		margin: 0 auto $compact auto
-		+respond-min($break-2)
-			padding: 0
-			border: none
-		+respond-min($break-3)
-			float: none
-		// a little bit unbemmy, but this would end rather complicated
-		.ad-tile_8__label
-			display: none
-
-
-// hide all desktop ads on mobile
-*[data-ad_minwidth='768']
-	display: none
-	+respond-min($desktop_mobile_ad_breakpoint)
-		display: block
-
-// mobile
-.iqd-mobile-adplace
-	width: $mobile_ad_width
-	margin: auto
-	a > *, iframe
-		margin: $fine auto $fine auto
-	+respond-min($desktop_mobile_ad_breakpoint)
-		display: none
-	&--middle
-		+respond-max($mobile_middle_ad_break_left_margin)
-			margin-left: -$page-padding--small
+.ad-desktop
+    display: none // generally hidden in mobile view
+    +respond_min($break-mobile-ad-width)
+        display: block // generally visible on desktop
+        &:empty
+            display: none
+    &--3,
+    &--12
+        margin: 0 auto
+        max-width: 940px
+        padding: $little 0
+    &--7-on-centerpage,
+    &--8-on-centerpage
+        background-color: $white
+        color: $zon-charcoal
+        margin: 0 auto $compact auto
+        width: 300px
+    &--7-on-article,
+    &--8-on-article
+        display: none
+        .ad__label
+            display: none
+            +respond-min($break-3)
+                display: block
+        +respond_min($break-mobile-ad-width)
+            border-top: 1px solid $charcoal
+            border-bottom: 1px solid $charcoal
+            margin: 0 auto 0.625em
+            max-width: 41.25rem
+            padding-bottom: remify(15px)
+            display: table
+            vertical-align: middle
+            width: 100%
+            +respond-min($break-3)
+                border: none
+                clear: both
+                float: right
+                margin: 0 remify(60px) remify(28px) remify(36px)
+                max-width: 300px
+                padding: 0
+        // uses code by iqd, may break tomorrow
+        div[id*="__container__"]
+            display: table-cell
+            padding-top: remify(15px)
+            position: relative
+            text-align: center
+            & > iframe[id^="google_ads_iframe"]
+                display: inline-block
+                margin: 0 auto
+                max-width: 100%
+            &:before
+                display: block
+                +respond-min($break-3)
+                    display: none
+            +respond-min($break-3)
+                display: block
+                padding-top: 0
+                margin: 0
+                max-width: 100%
+                        
+// Fix hillarious unusable ad extras by iqd
++respond-max($break-mobile-ad-width)
+    body > #iqdSitebar
+        display: none

@@ -2,7 +2,7 @@
 	// needs a clearfix hack, in case the floating ad--tile is higher than the content
 	+pie-clearfix
 	background-color: $color-video-background
-	color: $grey--light
+	color: $zon_lighter_grey
 	margin: 0 (-$page-padding) // enforce full width background with padding
 	padding: 0 $page-padding remify(40px) $page-padding // enforce full width background with padding
 	+respond-min($break-tablet-min)
@@ -33,13 +33,6 @@
 			white-space: nowrap
 			+on-interaction
 				color: $zon_light_grey
-
-		& > *
-			&:after
-				content: "/"
-				margin: remify(0 8px)
-			&:last-child:after
-				content: none
 
 	// TODO: ad-div should have ".ad-desktop--7-on-video" and then we could
 	// apply the styles to this class.

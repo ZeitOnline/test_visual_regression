@@ -1,17 +1,18 @@
 .infobox
 	background: $zon_lighter_grey
-	margin: remify(40px) remify(-20px)
+	clear: both
+	margin: remify(40px (-$page-padding))
 	overflow: hidden
-	padding: 0 remify(20px)
+	padding: 0 $page-padding
 	.js &__navigation
 		display: none
 		+respond-min($break-tablet-min)
 			display: block
 			float: left
-			margin: remify(35px 40px 50px 40px)
+			margin: remify(35px 40px 50px)
 			width: remify(148px)
 		+respond-min($break-desktop-min)
-			margin: remify(35px 65px 50px 40px)
+			margin-right: remify(65px)
 			width: 180px
 	.js &__content
 		+respond-min($break-tablet-min)
@@ -31,7 +32,7 @@
 		border: none
 	&__title
 		margin: 0
-		padding: remify(15px 0 13px 0)
+		padding: remify(15px 0 13px)
 		text-transform: uppercase
 		+respond-min($break-tablet-min)
 			border-bottom: 1px solid $zon_light_grey
@@ -105,9 +106,9 @@
 			font-family: $font-tabletgothic
 			font-size: remify(14px)
 			line-height: remify(20px)
-			margin: remify(5px 0 10px 0)
+			margin: remify(5px 0 10px)
 			+respond-min($break-tablet-min)
-				margin: remify(0 0 15px 0)
+				margin: remify(0 0 15px)
 				font-size: remify(16px)
 				line-height: remify(23px)
 		figure
@@ -118,6 +119,6 @@
 		.figure__caption
 			font-size: remify(14px)
 			line-height: 1.3
-			margin: remify(8px 0 0 0)
+			margin: remify(8px 0 0)
 		img
 			max-width: 100%
