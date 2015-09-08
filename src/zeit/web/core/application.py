@@ -176,6 +176,7 @@ class Application(object):
             'schlagworte_index',
             '/schlagworte/{entity}/{item:[A-Z]}/index',
             zeit.web.core.view.surrender)
+        config.add_route('schlagworte', '/schlagworte/{entity}/{item}/index')
 
         # Route to post comments to a communit service
         config.add_route('post_test_comments', '/admin/test-comments')
