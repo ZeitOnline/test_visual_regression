@@ -1,0 +1,48 @@
+.buzzboard
+	&__headline
+		color: $zon_dark_grey
+		font-family: $font-franziska
+		font-size: em(32px)
+		font-style: italic
+		font-weight: normal
+		margin: remify(20px 0 40px)
+		text-align: center
+	&__table
+		table-layout: fixed
+		border-collapse: separate
+		border-spacing: em(30px 0)
+		margin-left: em(30px)
+		tbody
+			counter-reset: buzz-board
+		tr
+			counter-increment: buzz-board
+		td:first-child
+			position: relative
+			&:before
+				content: counter(buzz-board)
+				font-family: $font-franziska
+				font-size: em(36px)
+				font-style: italic
+				left: remify(-60px)
+				line-height: 1
+				position: absolute
+				text-align: center
+				width: remify(60px)
+		th, td
+			text-align: left
+			vertical-align: top
+			width: 25%
+			max-width: 20.5vw // caution
+		th
+			font-size: em(14px)
+			font-weight: bold
+			letter-spacing: .06em
+			text-transform: uppercase
+		td
+			padding: em(20px) 0
+			border-bottom: 1px solid $color-border
+	&__icon
+		height: em(12px, 14px)
+		margin-right: .25em
+		vertical-align: em(-1px, 14px)
+		width: em(21px, 14px)
