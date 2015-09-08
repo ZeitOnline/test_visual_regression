@@ -51,6 +51,11 @@ def lps_sort(context):
         context).date_last_published_semantic or datetime.datetime(
             datetime.MINYEAR, 1, 1, tzinfo=pytz.UTC)
 
+
+class Base(zeit.web.core.view.Base):
+    pass
+
+
 @pyramid.view.view_defaults(
     context=zeit.content.cp.interfaces.ICP2015,
     renderer='string')
@@ -59,10 +64,7 @@ def lps_sort(context):
 @pyramid.view.view_config(
     header='host:newsfeed.zeit.de',
     custom_predicates=(zeit.web.site.view.is_zon_content,))
-@pyramid.view.view_config(
-    header='host:newsfeed.zeit.de',
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,))
-class Newsfeed(zeit.web.core.view.Base):
+class Newsfeed(Base):
 
     def __call__(self):
         super(Newsfeed, self).__call__()
