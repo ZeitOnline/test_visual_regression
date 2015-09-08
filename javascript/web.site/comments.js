@@ -372,6 +372,11 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
     addModeration = function() {
         var $comment = $( this ),
             cid = this.id.substr( 4 ),
+            promoteUrl = document.location.protocol + '//' +
+                document.location.host +
+                document.location.pathname +
+                '?action=promote&pid=' + cid +
+                '#cid-' + cid,
             modHTML = '' +
             '<ul class="comment__moderations">' +
                 '<li>' +
@@ -380,12 +385,15 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                     '</a>' +
                 '</li>' +
                 '<li>' +
-                    '<a class="comment__moderation js-promote-comment" data-cid="%cid%" href="">' +
+                    '<a class="comment__moderation js-promote-comment" data-cid="%cid%" href="%purl%">' +
                         'Redaktionsempfehlung' +
                     '</a>' +
                 '</li>' +
             '</ul>';
-        modHTML = modHTML.replace( '%cid%', cid ).replace( '%ch%', window.ZMO.communityHost );
+
+        modHTML = modHTML.replace( /%cid%/g, cid )
+            .replace( '%ch%', window.ZMO.communityHost )
+            .replace( '%purl%', promoteUrl );
         $comment.find( '.comment__reactions' )
             .append( modHTML );
     },
