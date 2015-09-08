@@ -6,7 +6,7 @@
 		{{ module.header }}
 	</a>
 	<ol class="buzz-box__teasers">
-		{% for teaser in module -%}
+		{% for teaser in module[:3] -%}
 		<li>
 			{% include "zeit.web.site:templates/inc/teaser/{}.tpl".format(template) %}
 		</li>
