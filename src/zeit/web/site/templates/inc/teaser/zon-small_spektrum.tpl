@@ -1,4 +1,4 @@
-<article class="teaser-small " data-block-type="teaser">
+<article class="teaser-small">
     {% if esi_toggle %}
         {% if teaser.image %}
         <figure class="teaser-small__media scaled-image">

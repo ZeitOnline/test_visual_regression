@@ -1,4 +1,4 @@
-<header class="header-image{% if module.visible_mobile == False %} mobile-hidden{% endif %}"{% if module %} data-block-type="{{ module.type | hide_none }}"{% endif %} data-unique-id="{{ module.uniqueId }}" data-meetrics="{{ area.kind }}">
+<header class="header-image{% if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="{{ module.uniqueId }}" data-meetrics="{{ area.kind }}">
     {# get the image directy from the supplied image group #}
     {% set image = get_image(module, default='panorama') %}
     {# we need to explecitly pass the layout aka block class name #}
