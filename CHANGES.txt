@@ -4,6 +4,8 @@ Change log for zeit.web
 1.63.4 (unreleased)
 -------------------
 
+- ZON-2075: Redirect unauthorized comment recommendation requests
+
 - MAINT: Polish headline of following pages
 
 
