@@ -822,7 +822,7 @@ def test_meta_rules_for_keyword_paths(application):
         'wrong pagetitle for person')
     assert view.pagedescription == 'Hier finden Sie alle News ' \
         'und Hintergrund-Informationen von ZEIT ONLINE zu Mahmud Abbas.', (
-        'wrong pagedescription for person')
+            'wrong pagedescription for person')
 
     # location
     request.path = '/thema/aachen'
@@ -832,7 +832,7 @@ def test_meta_rules_for_keyword_paths(application):
         'wrong pagetitle for location')
     assert view.pagedescription == 'Hier finden Sie alle News ' \
         'und Hintergrund-Informationen von ZEIT ONLINE zu Aachen.', (
-        'wrong pagedescription for location')
+            'wrong pagedescription for location')
 
     # organisation
     request.path = '/thema/abn-amro'
@@ -843,7 +843,7 @@ def test_meta_rules_for_keyword_paths(application):
     assert view.pagedescription == 'Hier finden Sie alle News ' \
         'und Hintergrund-Informationen von ZEIT ONLINE zu dem ' \
         'Thema Abn Amro.', (
-        'wrong pagedescription for organisation')
+            'wrong pagedescription for organisation')
 
     # subject
     request.path = '/thema/agrarmarkt'
@@ -854,7 +854,7 @@ def test_meta_rules_for_keyword_paths(application):
     assert view.pagedescription == 'Hier finden Sie alle News ' \
         'und Hintergrund-Informationen von ZEIT ONLINE zu dem ' \
         'Thema Agrarmarkt.', (
-        'wrong pagedescription for subject')
+            'wrong pagedescription for subject')
 
     # not valid fallback
     request.path = '/thema/justmurcks'

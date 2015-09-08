@@ -350,8 +350,8 @@ class Base(object):
         except (AssertionError, TypeError):
             title = ': '.join([t for t in (self.supertitle, self.title) if t])
         if title:
-            if path('/thema/') or path('/dynamic/'):
-            # special rules for keywordpages
+            if path('/thema/') is True or path('/dynamic/') is True:
+                # special rules for keywordpages
                 return self.get_topic_meta('title')
             return title + (u'' if self.is_hp else self.pagetitle_suffix)
         return self.seo_title_default
@@ -364,8 +364,8 @@ class Base(object):
             assert desc
         except (AssertionError, TypeError):
             desc = self.context.subtitle
-            if path('/thema/') or path('/dynamic/'):
-            # special rules for keywordpages
+            if path('/thema/') is True or path('/dynamic/') is True:
+                # special rules for keywordpages
                 return self.get_topic_meta('desc')
         return desc or self.seo_title_default
 

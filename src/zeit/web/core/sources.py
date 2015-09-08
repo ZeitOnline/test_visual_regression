@@ -52,7 +52,10 @@ def get_whitelist_meta(whitelist_meta_source):
         pre_desc = tag.xpath('preDescription')[0].text
         post_desc = tag.xpath('postDescription')[0].text
         category = tag.xpath('@for_type_value')[0]
-        meta_list.append(dict(post_title=post_title, pre_desc=pre_desc, post_desc=post_desc, category=category))
+        meta_list.append(dict(post_title=post_title,
+                         pre_desc=pre_desc,
+                         post_desc=post_desc,
+                         category=category))
     return meta_list
 
 
