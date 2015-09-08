@@ -24,15 +24,16 @@
     padding-right: 1em
 
 .header__tags__link
-    // normal, hover, active, visited, focus
-    +link-colors($zon_dark_grey, $color-link--hover, $color-link--active, $zon_dark_grey, $color-link--focus)
-    border-radius: $tiny
+    border-radius: .3em
     border: 1px solid $zon_light_grey
+    color: inherit
     display: inline-block
     margin: remify(0 9px 5px 0)
     padding: remify(2px 7px 3px)
-    &:hover
+    +on-interaction
         background-color: $zon_lighter_grey
+        border-color: $zon_mid_grey
+        color: inherit
 
 .header__date
     float: right

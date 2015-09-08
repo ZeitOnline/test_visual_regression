@@ -3,6 +3,7 @@ import base64
 import datetime
 import logging
 import lxml.etree
+import urlparse
 import re
 
 import babel.dates
@@ -35,6 +36,26 @@ def known_content(resource):
             zeit.content.video.interfaces.IVideo.providedBy(resource))
 
 
+def redirect_on_trailing_slash(request):
+    if request.path.endswith('/') and not len(request.path) == 1:
+        scheme, netloc, path, params, query, fragment = urlparse.urlparse(
+            request.url)
+        url = '{}://{}{}'.format(scheme, netloc, path[:-1])
+        url = url if query == '' else '{}?{}'.format(url, query)
+        raise pyramid.httpexceptions.HTTPMovedPermanently(
+            location=url)
+
+
+def redirect_on_cp2015_suffix(request):
+    if request.path.endswith('.cp2015') and not len(request.path) == 7:
+        scheme, netloc, path, params, query, fragment = urlparse.urlparse(
+            request.url)
+        url = '{}://{}{}'.format(scheme, netloc, path[:-7])
+        url = url if query == '' else '{}?{}'.format(url, query)
+        raise pyramid.httpexceptions.HTTPMovedPermanently(
+            location=url)
+
+
 class Base(object):
     """Base class for all views."""
 
@@ -53,6 +74,8 @@ class Base(object):
                 issubclass(type(self), zeit.web.site.view_feed.Base)):
             raise pyramid.httpexceptions.HTTPNotFound()
 
+        redirect_on_trailing_slash(self.request)
+        redirect_on_cp2015_suffix(self.request)
         time = zeit.web.core.cache.ICachingTime(self.context)
         self.request.response.cache_expires(time)
         self._set_response_headers()
