@@ -3,7 +3,7 @@
 	margin: 0 $cp-padding
 	padding: $vertical-space $cp-padding
 
-	&__heading
+	&__title
 		font-size: em(16px)
 
 	&__text
@@ -31,6 +31,10 @@
 		+on-interaction
 			border-bottom-color: rgba($zon_grey, .8)
 
+	&__media
+		margin: 1em 0
+		width: remify(140px)
+
 +respond-min($break-tablet-min)
 	.storystream-teaser
 		margin: 0 $storystream-padding-tablet
@@ -39,7 +43,7 @@
 		&__date
 			margin-left: remify(-35px)
 
-		&__heading
+		&__title
 			font-size: em(20px)
 			line-height: em(26px)
 
@@ -51,7 +55,7 @@
 		margin: 0 remify(90px)
 		padding: $vertical-space remify(70px)
 
-		&__heading
+		&__title
 			margin: 0
 
 		&__text
@@ -64,3 +68,12 @@
 			padding: 0.4rem
 			text-align: center
 			width: remify(90px)
+
+		&__content
+			position: relative
+
+		&__media
+			margin-top: 0
+			position: absolute
+			right: remify(-140px)
+			top: 0
