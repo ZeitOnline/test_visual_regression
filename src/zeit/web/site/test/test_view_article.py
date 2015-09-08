@@ -668,6 +668,8 @@ def test_imported_article_has_special_meta_robots(
     # test ZEAR
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'ZEAR')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'Fehler')
     article_view = zeit.web.site.view_article.Article(context, mock.Mock())
     assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for ZEAR')

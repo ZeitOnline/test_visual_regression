@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-2073: Redirect on trailing slash.
 
+- FIX: Fix wrong ZEAR rule at noindex setting
+
 
 1.63.3 (2015-09-04)
 -------------------
