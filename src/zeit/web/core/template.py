@@ -844,6 +844,9 @@ def remove_get_params(url, *args):
     query_p = urlparse.parse_qs(query)
     for arg in args:
         query_p.pop(arg, None)
-
-    return '{}://{}{}?{}'.format(
-        scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
+    if len(query_p) == 0:
+        return '{}://{}{}'.format(
+            scheme, netloc, path)
+    else:
+        return '{}://{}{}?{}'.format(
+            scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
