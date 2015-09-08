@@ -1,3 +1,5 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+
 {% set blockname = 'storystream-headerimage' %}
 <header class="{{ blockname }}">
     {# get the image directy from the supplied image group #}
@@ -9,7 +11,10 @@
 	<div class="{{ blockname }}__container">
     	<span class="{{ blockname }}__kicker">{{ view.context.supertitle }}</span>
     	<h1 class="{{ blockname }}__title">{{ view.context.title }}</h1>
-    	<span class="{{ blockname }}__update">Zuletzt aktualisiert am 9. Juni 2015</span>
+    	<span class="{{ blockname }}__update">
+            {{ lama.use_svg_icon('storystream-updated', 'storystream-headerimage__updateicon', request) }}
+            Zuletzt aktualisiert am 9. Juni 2015
+        </span>
     </div>
 </header>
 
