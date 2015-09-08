@@ -100,7 +100,7 @@ class Application(object):
 
     def configure_whitelist_meta(self):
         whitelist_meta_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_whitelist_meta-source', ''))
+            self.settings.get('vivi_zeit.web_whitelist-meta-source', ''))
         zeit.web.core.sources.whitelist_meta = (
             zeit.web.core.sources.get_whitelist_meta(whitelist_meta_source))
 

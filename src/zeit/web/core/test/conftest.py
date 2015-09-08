@@ -161,8 +161,6 @@ settings = {
     'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
     'vivi_zeit.content.video_source-serie': (
         'egg://zeit.web.core/data/config/video-serie.xml'),
-    'vivi_zeit.content.video_source-serie': (
-        'egg://zeit.web.core/data/config/whitelist_meta.xml'),
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 
     'vivi_zeit.solr_solr-url': 'http://mock.solr',

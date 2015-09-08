@@ -19,6 +19,7 @@ import zeit.web.core.interfaces
 import zeit.web.core.utils
 import zeit.web.site.module.playlist
 import zeit.web.site.view_centerpage
+import zeit.web.core.sources
 
 
 screen_sizes = ((320, 480, True), (520, 960, True),
