@@ -8,6 +8,7 @@ import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
+import pyramid
 import requests
 import requests.exceptions
 import urlparse
@@ -227,16 +228,18 @@ class BaseImage(object):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class Image(BaseImage):
 
+    DEFAULT_VARIANT = 'wide'
+
     def __new__(cls, model_block):
-        if (model_block.layout == 'zmo-xl-header' or
+        if (getattr(model_block.layout, 'id', None) == 'zmo-xl-header' or
                 getattr(model_block, 'is_empty', False)):
             return
         return super(Image, cls).__new__(cls, model_block)
 
     def __init__(self, model_block):
-        # TODO: don't use XML but adapt an Image and use it's metadata
-        self.layout = model_block.layout
+        self.layout = getattr(model_block.layout, 'id', None)
 
+        # TODO: don't use XML but adapt an Image and use it's metadata
         if model_block.xml is not None:
             bu_node = model_block.xml.find('bu')
             bu = unicode(_inline_html(bu_node) or '').strip()
@@ -254,13 +257,12 @@ class Image(BaseImage):
                 rel = cr.attrib.get('rel', '') == 'nofollow'
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
-        # XXX: This is a rather unelegant and inflexible!
-        #      But it gets images rolling in beta articles - so wth.
-        #      … and 99% of images in articles are 'large'
         target = model_block.references and model_block.references.target
         if zeit.content.image.interfaces.IImageGroup.providedBy(target):
+            variant = getattr(model_block.layout, 'variant', None) or (
+                self.DEFAULT_VARIANT)
             try:
-                target = target['wide']
+                target = target[variant]
             except KeyError:
                 target = None
 
@@ -282,7 +284,7 @@ class Image(BaseImage):
 class HeaderImage(Image):
 
     def __new__(cls, model_block):
-        if (model_block.layout != 'zmo-xl-header' or
+        if (getattr(model_block.layout, 'id', None) != 'zmo-xl-header' or
                 getattr(model_block, 'is_empty', False)):
             return
         return super(Image, cls).__new__(cls, model_block)
@@ -497,7 +499,16 @@ def _raw_html(xml):
 
 
 def _inline_html(xml, elements=None):
-    allowed_elements = 'a|span|strong|img|em|sup|sub|caption|br'
+
+    home_url = "http://www.zeit.de/"
+
+    try:
+        request = pyramid.threadlocal.get_current_request()
+        home_url = request.route_url('home')
+    except:
+        pass
+
+    allowed_elements = 'a|span|strong|img|em|sup|sub|caption|br|entity'
     if elements:
         elements.append(allowed_elements)
         allowed_elements = '|'.join(elements)
@@ -569,7 +580,17 @@ def _inline_html(xml, elements=None):
               </xsl:attribute>
             </xsl:template>
           <xsl:template match="@*" />
-        </xsl:stylesheet>""" % (allowed_elements))
+          <xsl:template match="entity">
+                <a>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="concat(
+                            '%sthema/',
+                            substring-after(@url_value, '/'))" />
+                    </xsl:attribute>
+                    <xsl:apply-templates />
+                </a>
+          </xsl:template>
+        </xsl:stylesheet>""" % (allowed_elements, home_url))
     try:
         transform = lxml.etree.XSLT(filter_xslt)
         return transform(xml)
