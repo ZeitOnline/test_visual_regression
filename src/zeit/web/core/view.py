@@ -318,9 +318,7 @@ class Base(object):
 
     def get_topic_meta(self, data_type):
 
-        if self.title:
-            title = self.title.replace('Schlagwort ', '')
-
+        title = self.title
         whitelist_data = zeit.web.core.sources.whitelist_meta
 
         try:
