@@ -92,7 +92,7 @@ settings = {
         'egg://zeit.web.core/data/config/series.xml'),
     'vivi_zeit.cms_task-queue-async': 'not-applicable',
     'vivi_zeit.cms_whitelist-url': (
-        'egg://zeit.cms.tagging.tests/whitelist.xml'),
+        'egg://zeit.web.core/data/config/whitelist.xml'),
     'vivi_zeit.web_iqd-mobile-ids': (
         'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
     'vivi_zeit.web_image-scales': (

@@ -816,6 +816,45 @@ def test_robots_rules_for_diverse_paths(application):
         'wrong robots for any other folder')
 
 
+def test_meta_rules_for_keyword_paths(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = mock.Mock()
+
+    # person
+    request.path = '/thema/mahmud-abbas'
+    view = zeit.web.core.view_centerpage.Centerpage(cp, request)
+
+    assert view.pagetitle == '', (
+        'wrong pagetitle for person')
+    assert view.pagedescription == '', (
+        'wrong pagedescription for person')
+
+    # location
+    request.path = '/thema/aachen'
+    view = zeit.web.core.view_centerpage.Centerpage(cp, request)
+    assert view.pagetitle == '', (
+        'wrong pagetitle for location')
+    assert view.pagedescription == '', (
+        'wrong pagedescription for location')
+
+    # organisation
+    request.path = '/thema/abn-amro'
+    view = zeit.web.core.view_centerpage.Centerpage(cp, request)
+    assert view.pagetitle == '', (
+        'wrong pagetitle for organisation')
+    assert view.pagedescription == '', (
+        'wrong pagedescription for organisation')
+
+    # subject
+    request.path = '/thema/agrarmarkt'
+    view = zeit.web.core.view_centerpage.Centerpage(cp, request)
+    assert view.pagetitle == '', (
+        'wrong pagetitle for subject')
+    assert view.pagedescription == '', (
+        'wrong pagedescription for subject')
+
+
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
     browser = testbrowser('/zeit-online/news-teaser')
 
