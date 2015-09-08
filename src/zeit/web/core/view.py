@@ -325,18 +325,20 @@ class Base(object):
 
         try:
             url_value = self.request.path.split('/').pop()
-            entity_type = zeit.web.core.utils.tag_by_url_value(url_value).entity_type
+            entity_type = zeit.web.core.utils.tag_by_url_value(
+                url_value).entity_type
             if entity_type == 'free':
-              entity_type = 'Subject'
+                entity_type = 'Subject'
         except:
             return title + whitelist_data.pop()['post_' + data_type]
 
         for data in whitelist_data:
             if data['category'] == entity_type and title:
+                post = data['post_' + data_type]
                 try:
-                    return data['pre_' + data_type] + title + data['post_' + data_type]
+                    return data['pre_' + data_type] + title + post
                 except:
-                    return title + data['post_' + data_type]
+                    return title + post
         return title + whitelist_data.pop()['post_' + data_type]
 
     @zeit.web.reify

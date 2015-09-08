@@ -144,7 +144,7 @@ settings = {
         'egg://zeit.web.core/data/config/gallery-types.xml'),
     'vivi_zeit.web_series-source': (
         'egg://zeit.web.core/data/config/series.xml'),
-    'vivi_zeit.whitelist_meta-source': (
+    'vivi_zeit.web_whitelist-meta-source': (
         'egg://zeit.web.core/data/config/whitelist_meta.xml'),
     'vivi_zeit.web_blacklist-url': (
         'egg://zeit.web.core/data/config/blacklist.xml'),

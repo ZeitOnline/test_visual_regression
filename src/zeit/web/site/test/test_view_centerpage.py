@@ -811,41 +811,59 @@ def test_robots_rules_for_diverse_paths(application):
 
 def test_meta_rules_for_keyword_paths(application):
     cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/index')
+        'http://xml.zeit.de/zeit-online/thema')
     request = mock.Mock()
 
     # person
     request.path = '/thema/mahmud-abbas'
     view = zeit.web.core.view_centerpage.Centerpage(cp, request)
-
-    assert view.pagetitle == '', (
+    view.title = 'Mahmud Abbas'
+    assert view.pagetitle == 'Mahmud Abbas - News und Infos', (
         'wrong pagetitle for person')
-    assert view.pagedescription == '', (
+    assert view.pagedescription == 'Hier finden Sie alle News ' \
+        'und Hintergrund-Informationen von ZEIT ONLINE zu Mahmud Abbas.', (
         'wrong pagedescription for person')
 
     # location
     request.path = '/thema/aachen'
     view = zeit.web.core.view_centerpage.Centerpage(cp, request)
-    assert view.pagetitle == '', (
+    view.title = 'Aachen'
+    assert view.pagetitle == 'Aachen - News und Infos', (
         'wrong pagetitle for location')
-    assert view.pagedescription == '', (
+    assert view.pagedescription == 'Hier finden Sie alle News ' \
+        'und Hintergrund-Informationen von ZEIT ONLINE zu Aachen.', (
         'wrong pagedescription for location')
 
     # organisation
     request.path = '/thema/abn-amro'
     view = zeit.web.core.view_centerpage.Centerpage(cp, request)
-    assert view.pagetitle == '', (
+    view.title = 'Abn Amro'
+    assert view.pagetitle == 'Abn Amro - News und Infos', (
         'wrong pagetitle for organisation')
-    assert view.pagedescription == '', (
+    assert view.pagedescription == 'Hier finden Sie alle News ' \
+        'und Hintergrund-Informationen von ZEIT ONLINE zu dem ' \
+        'Thema Abn Amro.', (
         'wrong pagedescription for organisation')
 
     # subject
     request.path = '/thema/agrarmarkt'
     view = zeit.web.core.view_centerpage.Centerpage(cp, request)
-    assert view.pagetitle == '', (
+    view.title = 'Agrarmarkt'
+    assert view.pagetitle == 'Agrarmarkt - News und Infos', (
         'wrong pagetitle for subject')
-    assert view.pagedescription == '', (
+    assert view.pagedescription == 'Hier finden Sie alle News ' \
+        'und Hintergrund-Informationen von ZEIT ONLINE zu dem ' \
+        'Thema Agrarmarkt.', (
         'wrong pagedescription for subject')
+
+    # not valid fallback
+    request.path = '/thema/justmurcks'
+    view = zeit.web.core.view_centerpage.Centerpage(cp, request)
+    view.title = 'Just Murcks'
+    assert view.pagetitle == 'Just Murcks - News und Infos', (
+        'wrong pagetitle for subject')
+    assert view.pagedescription == 'Just Murcks.', (
+        'wrong pagedescription for not valid keyword')
 
 
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
