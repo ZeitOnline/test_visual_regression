@@ -46,6 +46,16 @@ def redirect_on_trailing_slash(request):
             location=url)
 
 
+def redirect_on_cp2015_suffix(request):
+    if request.path.endswith('.cp2015') and not len(request.path) == 7:
+        scheme, netloc, path, params, query, fragment = urlparse.urlparse(
+            request.url)
+        url = '{}://{}{}'.format(scheme, netloc, path[:-7])
+        url = url if query == '' else '{}?{}'.format(url, query)
+        raise pyramid.httpexceptions.HTTPMovedPermanently(
+            location=url)
+
+
 class Base(object):
     """Base class for all views."""
 
@@ -54,6 +64,7 @@ class Base(object):
 
     def __call__(self):
         redirect_on_trailing_slash(self.request)
+        redirect_on_cp2015_suffix(self.request)
         time = zeit.web.core.cache.ICachingTime(self.context)
         self.request.response.cache_expires(time)
         self._set_response_headers()
