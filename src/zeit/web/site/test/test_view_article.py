@@ -734,3 +734,8 @@ def test_article_of_ressort_fehler_has_special_meta_robots(
     article_view = zeit.web.site.view_article.Article(context, mock.Mock())
     assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
         'wrong robots for any other ressort')
+
+
+def test_video_in_article_is_there(testbrowser):
+    article = testbrowser('/zeit-online/article/zeit')
+    assert len(article.cssselect('.video-player__iframe')) == 1
