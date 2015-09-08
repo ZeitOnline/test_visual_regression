@@ -316,4 +316,4 @@ class LazyProxy(object):
         return dir(self.__origin__)
 
     def __conform__(self, iface):
-        return LazyProxy(self.__proxy__, self.__istack__ + [iface])
+        return iface(self.__origin__)
