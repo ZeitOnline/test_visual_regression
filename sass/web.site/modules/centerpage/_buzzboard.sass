@@ -1,3 +1,5 @@
+$buzzboard-label-font-size: 14px
+
 .buzzboard
 	&__headline
 		color: $zon_dark_grey
@@ -8,10 +10,11 @@
 		margin: remify(20px 0 40px)
 		text-align: center
 	&__table
-		table-layout: fixed
 		border-collapse: separate
 		border-spacing: em(30px 0)
-		margin-left: em(30px)
+		padding-left: em(30px)
+		table-layout: fixed
+		width: 100% // needed in conjunction with table-layout: fixed
 		tbody
 			counter-reset: buzz-board
 		tr
@@ -29,20 +32,31 @@
 				text-align: center
 				width: remify(60px)
 		th, td
+			max-width: 20.5vw // caution
 			text-align: left
 			vertical-align: top
 			width: 25%
-			max-width: 20.5vw // caution
 		th
-			font-size: em(14px)
+			font-size: em($buzzboard-label-font-size)
 			font-weight: bold
 			letter-spacing: .06em
+			padding-left: 1.5em
+			text-indent: -1.5em
 			text-transform: uppercase
 		td
-			padding: em(20px) 0
 			border-bottom: 1px solid $color-border
+			padding: em(20px) 0
+			// word-wrap: break-word
 	&__icon
-		height: em(12px, 14px)
-		margin-right: .25em
-		vertical-align: em(-1px, 14px)
-		width: em(21px, 14px)
+		height: em(12px, $buzzboard-label-font-size)
+		margin-right: em(3px, $buzzboard-label-font-size)
+		vertical-align: em(-1px, $buzzboard-label-font-size)
+		width: em(21px, $buzzboard-label-font-size)
+		&--comment
+			width: round(14 / 12 * 10000) / 10000 * em(12px, $buzzboard-label-font-size)
+		&--read
+			width: round(22 / 11 * 10000) / 10000 * em(12px, $buzzboard-label-font-size)
+		&--shared
+			width: round(17 / 12 * 10000) / 10000 * em(12px, $buzzboard-label-font-size)
+		&--trend
+			width: round(19 / 12 * 10000) / 10000 * em(12px, $buzzboard-label-font-size)
