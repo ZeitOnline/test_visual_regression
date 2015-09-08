@@ -70,7 +70,8 @@ class Base(object):
         # for our views, this is necessary to control, that only explicitly
         # configured views, will render an RSS feed on newsfeed.zeit.de
         # host header (RD, 2015-09)
-        if self.request.headers.get('host') == 'newsfeed.zeit.de' and not (
+        host = self.request.headers.get('host')
+        if re.match('newsfeed(\.staging)?\.zeit\.de', host) and not (
                 issubclass(type(self), zeit.web.site.view_feed.Base)):
             raise pyramid.httpexceptions.HTTPNotFound()
 

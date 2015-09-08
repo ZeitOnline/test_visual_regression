@@ -62,7 +62,7 @@ class Base(zeit.web.core.view.Base):
 @pyramid.view.view_config(
     route_name='newsfeed')
 @pyramid.view.view_config(
-    header='host:newsfeed.zeit.de',
+    header='host:newsfeed(\.staging)?\.zeit\.de',
     custom_predicates=(zeit.web.site.view.is_zon_content,))
 class Newsfeed(Base):
 
