@@ -360,11 +360,3 @@ class LegacyCenterpage(Centerpage):
                 regions.append(LegacyRegion([legacy], kind='parquet'))
 
         return regions
-
-
-@pyramid.view.view_config(
-    context=zeit.content.cp.interfaces.IStoryStream,
-    request_method='GET',
-    renderer='templates/storystream.html')
-class Storystream(Centerpage):
-    pass
