@@ -59,7 +59,7 @@ def test_data_for_mostread_should_be_fetched(application):
 def test_counts_per_url_are_fetchable(application):
     reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
     data = reach.get_buzz('http://xml.zeit.de/index')
-    assert {'social', 'comments', 'views', 'score'}.issubset(data.keys())
+    assert {'social', 'comments', 'views', 'score', 'trend'}.issubset(data.keys())
 
 
 def test_non_ascii_url_fails_gracefully(application):
