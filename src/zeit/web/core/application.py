@@ -172,6 +172,10 @@ class Application(object):
         config.add_route('health_check', '/health_check')
         config.add_route('spektrum-kooperation', '/spektrum-kooperation')
         config.add_route('spektrum-image', '/spektrum-image/*path')
+        config.add_route(
+            'schlagworte_index',
+            '/schlagworte/{entity}/{item:[A-Z]}/index',
+            zeit.web.core.view.surrender)
 
         # Route to post comments to a communit service
         config.add_route('post_test_comments', '/admin/test-comments')
