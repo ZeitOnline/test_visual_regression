@@ -4,6 +4,8 @@ Change log for zeit.web
 1.63.4 (unreleased)
 -------------------
 
+- ZON-1341: Advertorial CP
+
 - DEV-935: Quickfix for Community-Redaktions-Auszeichnung
 
 - ZON-2075: Redirect unauthorized comment recommendation requests
