@@ -1,5 +1,6 @@
 {% extends 'zeit.web.core:templates/macros/article_macro.tpl' %}
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
 {% macro image(obj, loop) -%}
     {% if obj | default_image_url -%}
@@ -203,4 +204,9 @@
 {% macro cardstack(module, view) -%}
     {% set request = view.request %}
     {% include 'zeit.web.site:templates/inc/module/cardstack.html' %}
+{% endmacro -%}
+
+{% macro video(video) -%}
+    {% set playerId = 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9' %}
+    {{ vima.brightcove_video_tag(video.id, iframe=True, brightcove_player=playerId) }}
 {% endmacro -%}
