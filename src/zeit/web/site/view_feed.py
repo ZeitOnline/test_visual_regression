@@ -126,13 +126,14 @@ class Newsfeed(Base):
                 teaser_image) else ''
 
             if variant:
-                description = (u'<a href="{}"><img style="float:left; '
-                               'margin-right:5px" src="{}"></a> {}').format(
-                                    content_url,
-                                    '{}{}'.format(
-                                        self.request.asset_url('/'),
-                                        variant.lstrip('/')),
-                                    content.teaserText)
+                description = (
+                    u'<a href="{}"><img style="float:left; '
+                    'margin-right:5px" src="{}"></a> {}').format(
+                        content_url,
+                        '{}{}'.format(
+                            self.request.asset_url('/'),
+                            variant.lstrip('/')),
+                        content.teaserText)
 
             item = E.item(
                 E.title(content.title),
