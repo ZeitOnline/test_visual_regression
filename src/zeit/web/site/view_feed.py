@@ -27,11 +27,11 @@ log = logging.getLogger(__name__)
 ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
 CONTENT_NAMESPACE = 'http://purl.org/rss/1.0/modules/content/'
 DC_NAMESPACE = 'http://purl.org/dc/elements/1.1/'
-ELEMENT_MAKER = lxml.objectify.ElementMaker(annotate=False, nsmap={
+E = lxml.objectify.ElementMaker(annotate=False, nsmap={
     'atom': ATOM_NAMESPACE, 'content': CONTENT_NAMESPACE, 'dc': DC_NAMESPACE})
-ATOM_MAKER = getattr(ELEMENT_MAKER, '{%s}link' % ATOM_NAMESPACE)
-CONTENT_MAKER = getattr(ELEMENT_MAKER, '{%s}encoded' % CONTENT_NAMESPACE)
-DC_MAKER = getattr(ELEMENT_MAKER, '{%s}creator' % DC_NAMESPACE)
+ATOM_MAKER = getattr(E, '{%s}link' % ATOM_NAMESPACE)
+CONTENT_MAKER = getattr(E, '{%s}encoded' % CONTENT_NAMESPACE)
+DC_MAKER = getattr(E, '{%s}creator' % DC_NAMESPACE)
 
 
 def format_rfc822_date(date):
@@ -74,27 +74,27 @@ class Newsfeed(Base):
 
     def build_feed(self):
         year = datetime.datetime.today().year
-        root = ELEMENT_MAKER.rss(version='2.0')
-        channel = ELEMENT_MAKER.channel(
-            ELEMENT_MAKER.title(self.pagetitle),
-            ELEMENT_MAKER.link(self.request.route_url('home')),
-            ELEMENT_MAKER.description(self.pagedescription),
-            ELEMENT_MAKER.language('de-de'),
-            ELEMENT_MAKER.copyright(
+        root = E.rss(version='2.0')
+        channel = E.channel(
+            E.title(self.pagetitle),
+            E.link(self.request.route_url('home')),
+            E.description(self.pagedescription),
+            E.language('de-de'),
+            E.copyright(
                 u'Copyright © {}, ZEIT ONLINE GmbH'.format(year)),
             ATOM_MAKER(href=self.request.url,
                        type=self.request.response.content_type),
-            ELEMENT_MAKER.docs('http://www.zeit.de/hilfe/rss'),
-            ELEMENT_MAKER.generator('zeit.web {}'.format(
+            E.docs('http://www.zeit.de/hilfe/rss'),
+            E.generator('zeit.web {}'.format(
                 self.request.registry.settings.version)),
-            ELEMENT_MAKER.managingEditor(
+            E.managingEditor(
                 'online-cr.zeit.de (Chefredaktion ZEIT ONLINE)'),
-            ELEMENT_MAKER.webMaster('webmaster@zeit.de (Technik ZEIT ONLINE)'),
-            ELEMENT_MAKER.image(
-                ELEMENT_MAKER.url(('http://images.zeit.de/bilder/elemente_01_'
+            E.webMaster('webmaster@zeit.de (Technik ZEIT ONLINE)'),
+            E.image(
+                E.url(('http://images.zeit.de/bilder/elemente_01_'
                                    '06/logos/homepage_top.gif')),
-                ELEMENT_MAKER.title(self.pagetitle),
-                ELEMENT_MAKER.link(self.request.route_url('home'))
+                E.title(self.pagetitle),
+                E.link(self.request.route_url('home'))
                 )
             )
         root.append(channel)
@@ -130,17 +130,17 @@ class Newsfeed(Base):
                                         teaser_image.path),
                                     content.teaserText)
 
-            item = ELEMENT_MAKER.item(
-                ELEMENT_MAKER.title(content.title),
-                ELEMENT_MAKER.link(content_url),
-                ELEMENT_MAKER.description(description),
-                ELEMENT_MAKER.category(content.sub_ressort or content.ressort),
+            item = E.item(
+                E.title(content.title),
+                E.link(content_url),
+                E.description(description),
+                E.category(content.sub_ressort or content.ressort),
                 DC_MAKER(u'ZEIT ONLINE: {} - {}'.format(
                     (content.sub_ressort or content.ressort),
                     u', '.join(authors))),
-                ELEMENT_MAKER.pubDate(format_rfc822_date(
+                E.pubDate(format_rfc822_date(
                     last_published_semantic(content))),
-                ELEMENT_MAKER.guid(content_url, isPermaLink='false'),
+                E.guid(content_url, isPermaLink='false'),
             )
             channel.append(item)
         return root
@@ -160,13 +160,13 @@ class SpektrumFeed(zeit.web.site.view.Base):
             encoding='UTF-8')
 
     def build_feed(self):
-        root = ELEMENT_MAKER.rss(version='2.0')
-        channel = ELEMENT_MAKER.channel(
-            ELEMENT_MAKER.title('Spektrum Kooperationsfeed'),
-            ELEMENT_MAKER.link(self.request.route_url('home')),
-            ELEMENT_MAKER.description(),
-            ELEMENT_MAKER.language('de-de'),
-            ELEMENT_MAKER.copyright(
+        root = E.rss(version='2.0')
+        channel = E.channel(
+            E.title('Spektrum Kooperationsfeed'),
+            E.link(self.request.route_url('home')),
+            E.description(),
+            E.language('de-de'),
+            E.copyright(
                 'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
             ATOM_MAKER(href=self.request.url,
                        type=self.request.response.content_type)
@@ -196,13 +196,13 @@ class SpektrumFeed(zeit.web.site.view.Base):
             # unfortunately still generates useless production links.
             content_url = content_url.replace(
                 self.request.route_url('home'), 'http://www.zeit.de/', 1)
-            item = ELEMENT_MAKER.item(
-                ELEMENT_MAKER.title(content.title),
-                ELEMENT_MAKER.link('%s?%s' % (content_url, tracking)),
-                ELEMENT_MAKER.description(content.teaserText),
-                ELEMENT_MAKER.pubDate(format_rfc822_date(
+            item = E.item(
+                E.title(content.title),
+                E.link('%s?%s' % (content_url, tracking)),
+                E.description(content.teaserText),
+                E.pubDate(format_rfc822_date(
                     last_published_semantic(content))),
-                ELEMENT_MAKER.guid(content.uniqueId, isPermaLink='false'),
+                E.guid(content.uniqueId, isPermaLink='false'),
             )
             image = zeit.content.image.interfaces.IMasterImage(
                 zeit.content.image.interfaces.IImages(content).image, None)
@@ -212,7 +212,7 @@ class SpektrumFeed(zeit.web.site.view.Base):
                 image_url = image_url.replace(
                     self.request.route_url('home'),
                     self.request.asset_url('/'), 1)
-                item.append(ELEMENT_MAKER.enclosure(
+                item.append(E.enclosure(
                     url=image_url,
                     # XXX Incorrect length, since bitblt will resize the image,
                     # but since that happens outside of the application, we
@@ -237,13 +237,13 @@ class SocialFeed(zeit.web.site.view.Base):
             encoding='UTF-8')
 
     def build_feed(self):
-        root = ELEMENT_MAKER.rss(version='2.0')
-        channel = ELEMENT_MAKER.channel(
-            ELEMENT_MAKER.title('ZEIT ONLINE SocialFlow'),
-            ELEMENT_MAKER.link(self.request.route_url('home')),
-            ELEMENT_MAKER.description(),
-            ELEMENT_MAKER.language('de-de'),
-            ELEMENT_MAKER.copyright(
+        root = E.rss(version='2.0')
+        channel = E.channel(
+            E.title('ZEIT ONLINE SocialFlow'),
+            E.link(self.request.route_url('home')),
+            E.description(),
+            E.language('de-de'),
+            E.copyright(
                 'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
             ATOM_MAKER(href=self.request.url,
                        type=self.request.response.content_type)
@@ -261,13 +261,13 @@ class SocialFeed(zeit.web.site.view.Base):
             # unfortunately still generates un-unseful production links.
             content_url = content_url.replace(
                 self.request.route_url('home'), 'http://www.zeit.de/', 1)
-            item = ELEMENT_MAKER.item(
-                ELEMENT_MAKER.title(content.title),
-                ELEMENT_MAKER.link(content_url),
-                ELEMENT_MAKER.description(content.teaserText),
-                ELEMENT_MAKER.pubDate(
+            item = E.item(
+                E.title(content.title),
+                E.link(content_url),
+                E.description(content.teaserText),
+                E.pubDate(
                     format_rfc822_date(last_published_semantic(content))),
-                ELEMENT_MAKER.guid(content.uniqueId, isPermaLink='false'),
+                E.guid(content.uniqueId, isPermaLink='false'),
             )
             social_value = getattr(
                 zeit.push.interfaces.IPushMessages(content), self.social_field)
