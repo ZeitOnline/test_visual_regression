@@ -720,3 +720,8 @@ def test_imported_article_has_special_meta_robots(
     article_view = zeit.web.site.view_article.Article(context, mock.Mock())
     assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
         'wrong robots for none product article')
+
+
+def test_video_in_article_is_there(testbrowser):
+    article = testbrowser('/zeit-online/article/zeit')
+    assert len(article.cssselect('.video-player__iframe')) == 1

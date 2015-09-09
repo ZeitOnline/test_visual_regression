@@ -165,6 +165,7 @@ class Application(object):
         config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
         config.add_route('comments', '/-comments/collection/*traverse')
+        config.add_route('newsfeed', '/newsfeed/*traverse')
         config.add_route('home', '/')
         config.add_route('beta_toggle', '/beta')
         config.add_route('login_state', '/login-state')
@@ -172,6 +173,11 @@ class Application(object):
         config.add_route('health_check', '/health_check')
         config.add_route('spektrum-kooperation', '/spektrum-kooperation')
         config.add_route('spektrum-image', '/spektrum-image/*path')
+        config.add_route(
+            'schlagworte_index',
+            '/schlagworte/{entity}/{item:[A-Z]}/index',
+            zeit.web.core.view.surrender)
+        config.add_route('schlagworte', '/schlagworte/{entity}/{item}/index')
 
         # Route to post comments to a communit service
         config.add_route('post_test_comments', '/admin/test-comments')
