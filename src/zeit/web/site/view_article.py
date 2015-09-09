@@ -116,6 +116,13 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     def has_cardstack(self):
         return len(self.context.xml.xpath('/article/body//cardstack')) > 0
 
+    @zeit.web.reify
+    def advertorial_marker(self):
+        try:
+            return (self.context.cap_title, self.context.byline)
+        except:
+            return None
+
 
 @view_config(name='seite',
              path_info='.*seite-(.*)',
