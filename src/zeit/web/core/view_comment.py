@@ -88,7 +88,8 @@ class PostComment(zeit.web.core.view.Base):
                     'Only {} requests are allowed for this action.'.format(
                         self.request_method)))
 
-        if action not in ('comment', 'report', 'recommend', 'promote'):
+        if action not in (
+                'comment', 'report', 'recommend', 'promote', 'demote'):
             raise pyramid.httpexceptions.HTTPBadRequest(
                 title='Nothing could be posted',
                 explanation=(
@@ -149,11 +150,12 @@ class PostComment(zeit.web.core.view.Base):
             data['content_id'] = pid
             data['method'] = 'flag.flag'
             data['flag_name'] = 'leser_empfehlung'
-        elif action == 'promote' and pid:
+        elif action in ('promote', 'demote') and pid:
             method = 'get'
             data['content_id'] = pid
             data['method'] = 'flag.flag'
             data['flag_name'] = 'kommentar_empfohlen'
+            data['action'] = 'unflag'
 
         # GET/POST the request to the community
         response = getattr(requests, method)(
@@ -216,8 +218,8 @@ class PostComment(zeit.web.core.view.Base):
                                 unique_id))
 
     def _action_url(self, action, path):
-        endpoint = 'services/json?callback=zeit' if (
-            action in ['promote', 'recommend', 'report']) else 'agatho/thread'
+        endpoint = 'services/json?callback=zeit' if (action in [
+            'promote', 'demote', 'recommend', 'report']) else 'agatho/thread'
 
         if endpoint == 'services/json?callback=zeit':
             path = ''
