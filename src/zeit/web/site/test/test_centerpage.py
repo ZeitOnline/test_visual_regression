@@ -35,76 +35,59 @@ def test_buzz_mostread_should_render_correct_article_count(testbrowser):
 
 def test_buzz_mostread_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
-    kicker = browser.cssselect('.teaser-buzz__kicker')
-    titles = browser.cssselect('.teaser-buzz__title')
-    assert kicker and u'"Game of Thrones"' in kicker[0].text
-    assert titles and u'Es gibt keinen Himmel über Westeros' in titles[0].text
+    kicker = browser.cssselect('.buzz-box--mostread .teaser-buzz__kicker')
+    titles = browser.cssselect('.buzz-box--mostread .teaser-buzz__title')
+    assert kicker and u'Asylbewerber' in kicker[1].text
+    assert titles and u'Fluchthilfe ganz privat' in titles[2].text
 
 
-@pytest.mark.skipif(True,
-                    reason='Hidden until referrer-sensitive buzzbox is added.')
-def test_buzz_comments_should_render_correct_article_count(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
-    articles = browser.cssselect('.buzz-box__teasers--buzz-comments article')
+def test_buzz_comments_should_render_correct_article_count(testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    articles = browser.cssselect('.buzz-box--comments article.teaser-buzz')
     assert len(articles) == 3
 
 
-@pytest.mark.skipif(True,
-                    reason='Hidden until referrer-sensitive buzzbox is added.')
 def test_buzz_comments_should_render_with_correct_scores(
-        testbrowser, testserver, mockserver_factory):
+        testbrowser, mockserver_factory):
     cp_counts = """<?xml version="1.0" encoding="UTF-8"?>
     <nodes>
-        <node comment_count="129" url="/artikel/01"/>
-        <node comment_count="142" url="/artikel/02"/>
-        <node comment_count="110" url="/artikel/03"/>
+        <node comment_count="129" url="/zeit-online/article/tagesspiegel"/>
+        <node comment_count="142" url="/blogs/nsu-blog-bouffier"/>
+        <node comment_count="110" url="/zeit-online/cp-content/serie_app_kritik"/>
     </nodes>
     """
     mockserver_factory(cp_counts)
-    browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
-    media = browser.cssselect('.buzz-line__label--buzz-comments')
+    browser = testbrowser('/zeit-online/buzz-box')
+    media = browser.cssselect('.buzz-box--comments .teaser-buzz__commentcount')
     assert [to_int(m.text) for m in media] == [129, 142, 110]
 
 
-@pytest.mark.skipif(True,
-                    reason='Hidden until referrer-sensitive buzzbox is added.')
-def test_buzz_comments_should_output_correct_titles(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
-    kicker = browser.cssselect('.buzz-comments__kicker')[0]
-    assert u'Gentrifizierung' in kicker.text
-    title = browser.cssselect('.buzz-comments__title')[1]
-    assert u'Das neue Heft \x96 im Video durchgeblättert' in title.text
+def test_buzz_comments_should_output_correct_titles(testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    kicker = browser.cssselect('.buzz-box--comments .teaser-buzz__kicker')
+    titles = browser.cssselect('.buzz-box--comments .teaser-buzz__title')
+    assert u'Gentrifizierung' in kicker[0].text
+    assert u'Das neue Heft \x96 im Video durchgeblättert' in titles[1].text
 
 
-@pytest.mark.skipif(True,
-                    reason='Hidden until referrer-sensitive buzzbox is added.')
-def test_buzz_facebook_should_render_correct_article_count(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
-    articles = browser.cssselect('.buzz-box__teasers--buzz-facebook article')
+def test_buzz_mostshared_should_render_correct_article_count(testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    articles = browser.cssselect('.buzz-box--sharing article.teaser-buzz')
     assert len(articles) == 3
 
 
-@pytest.mark.skipif(True,
-                    reason='Hidden until referrer-sensitive buzzbox is added.')
-def test_buzz_facebook_should_render_with_correct_scores(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
-    media = browser.cssselect('.buzz-line__label--buzz-facebook')
+def test_buzz_mostshared_should_render_with_correct_scores(testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    media = browser.cssselect('.buzz-box--sharing .teaser-buzz__metadata')
     assert [to_int(m.text) for m in media] == [16674, 5780, 2391]
 
 
-@pytest.mark.skipif(True,
-                    reason='Hidden until referrer-sensitive buzzbox is added.')
-def test_buzz_facebook_should_output_correct_titles(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
-    kicker = browser.cssselect('.buzz-facebook__kicker')[0]
-    assert u'Jens Spahn' in kicker.text
-    title = browser.cssselect('.buzz-facebook__title')[1]
-    assert u'Shakespeare im Kugelhagel' in title.text
+def test_buzz_mostshared_should_output_correct_titles(testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    kicker = browser.cssselect('.buzz-box--sharing .teaser-buzz__kicker')
+    titles = browser.cssselect('.buzz-box--sharing .teaser-buzz__title')
+    assert u'Jens Spahn' in kicker[0].text
+    assert u'Shakespeare im Kugelhagel' in title[1].text
 
 
 def test_tile7_is_rendered_on_correct_position(testbrowser):
