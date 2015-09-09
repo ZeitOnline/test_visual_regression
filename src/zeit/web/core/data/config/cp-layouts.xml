@@ -75,7 +75,6 @@
         image_positions="true"
         areas="parquet"
         />
-
     <layout
         id="zon-newsteaser"
         title="Kurzteaser (für News)"
@@ -238,9 +237,6 @@
         areas="solo duo major minor ranking parquet"
         available="zeit.web.core.interfaces.IInternalUse"
         />
-
-
-
     <layout
         id="zmo-leader-fullwidth"
         title="ZMO Vollbreiter Aufmacher"
@@ -248,7 +244,6 @@
         areas="solo duo major minor ranking parquet"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-
     <layout
         id="zmo-leader-fullwidth-light"
         title="ZMO Vollbreiter Aufmacher (helles Bild)"
