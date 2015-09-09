@@ -357,14 +357,13 @@ class Base(object):
 
     @zeit.web.reify
     def pagetitle(self):
-        path = self.request.path.startswith
         try:
             title = zeit.seo.interfaces.ISEO(self.context).html_title
             assert title
         except (AssertionError, TypeError):
             title = ': '.join([t for t in (self.supertitle, self.title) if t])
         if title:
-            if path('/thema/') is True or path('/dynamic/') is True:
+            if self._is_keyword_page:
                 # special rules for keywordpages
                 return self.get_topic_meta('title')
             return title + (u'' if self.is_hp else self.pagetitle_suffix)
@@ -372,16 +371,21 @@ class Base(object):
 
     @zeit.web.reify
     def pagedescription(self):
-        path = self.request.path.startswith
         try:
             desc = zeit.seo.interfaces.ISEO(self.context).html_description
             assert desc
         except (AssertionError, TypeError):
             desc = self.context.subtitle
-            if path('/thema/') is True or path('/dynamic/') is True:
+            if self._is_keyword_page:
                 # special rules for keywordpages
                 return self.get_topic_meta('desc')
         return desc or self.seo_title_default
+
+    @property
+    def _is_keyword_page(self):
+        # XXX Make types configurable?
+        return zeit.content.cp.interfaces.ICenterPage.providedBy(
+            self.context) and self.context.type in ['keywordpage', 'topicpage']
 
     @zeit.web.reify
     def ranked_tags(self):
