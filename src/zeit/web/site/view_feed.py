@@ -100,7 +100,7 @@ class Newsfeed(Base):
             E.webMaster('webmaster@zeit.de (Technik ZEIT ONLINE)'),
             E.image(
                 E.url(('http://images.zeit.de/bilder/elemente_01_'
-                                   '06/logos/homepage_top.gif')),
+                       '06/logos/homepage_top.gif')),
                 E.title(self.pagetitle),
                 E.link(self.request.route_url('home'))
                 )
