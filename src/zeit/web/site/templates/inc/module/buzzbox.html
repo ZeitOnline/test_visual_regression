@@ -1,6 +1,6 @@
-{% set modifier = module.layout.id.strip('buzz-') %}
+{% set modifier = module.identification.strip('buzz-') %}
 {% set template = module | get_layout %}
-{% set id = template %}
+{% set id = module.identification %}
 <div class="{{ 'buzz-box' | with_mods(modifier) }} js-accordion" id="{{ id }}">
 	<a class="buzz-box__heading" href="#{{ id }}">
 		{{ module.header }}
