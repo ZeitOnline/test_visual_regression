@@ -115,16 +115,6 @@ class RenderedLegacyArea(LegacyArea):
 
 
 @pyramid.view.view_config(
-    context=zeit.content.cp.interfaces.IStoryStream,
-    custom_predicates=(zeit.web.site.view.is_zon_content,),
-    renderer='templates/storystream.html')
-class Storystream(
-        zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
-    """Main view class for ZEIT ONLINE storystreams."""
-    pass
-
-
-@pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
     custom_predicates=(zeit.web.site.view.is_zon_content,
                        zeit.web.core.view.is_advertorial),
@@ -282,6 +272,16 @@ class CenterpageArea(Centerpage):
             'area': self.context,
             'region_loop': {'index': 1}
         }
+
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.IStoryStream,
+    custom_predicates=(zeit.web.site.view.is_zon_content,),
+    renderer='templates/storystream.html')
+class Storystream(
+        Centerpage):
+    """Main view class for ZEIT ONLINE storystreams."""
+    pass
 
 
 @pyramid.view.view_config(

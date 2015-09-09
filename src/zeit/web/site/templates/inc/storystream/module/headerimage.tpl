@@ -11,10 +11,12 @@
 	<div class="{{ blockname }}__container">
     	<span class="{{ blockname }}__kicker">{{ view.context.supertitle }}</span>
     	<h1 class="{{ blockname }}__title">{{ view.context.title }}</h1>
-    	<span class="{{ blockname }}__update">
-            {{ lama.use_svg_icon('storystream-updated', 'storystream-headerimage__updateicon', request) }}
-            Zuletzt aktualisiert am 9. Juni 2015
-        </span>
+        {% if view.date_last_modified %}
+        	<span class="{{ blockname }}__update">
+                {{ lama.use_svg_icon('storystream-updated', 'storystream-headerimage__updateicon', request) }}
+                Zuletzt aktualisiert am {{ view.date_last_modified | format_date('short') }}
+            </span>
+        {% endif %}
     </div>
 </header>
 
