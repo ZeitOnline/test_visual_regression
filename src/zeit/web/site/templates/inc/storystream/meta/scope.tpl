@@ -1,7 +1,20 @@
 {% set blockname = 'storystream-scope' %}
 <div class="{{ blockname }}">
 	<p class="{{ blockname }}__container">
-		<span class="{{ blockname }}__counter"><span class="{{ blockname }}__number">{{ module_loop.length }}</span> Beiträge</span>
-		<span class="{{ blockname }}__dates"><a href="#" class="{{ blockname }}__link">01. Januar 2015</a> bis <a href="#" class="{{ blockname }}__link">31. Dezember 2015</a></span>
+		{% if view.atom_meta.count %}
+			<span class="{{ blockname }}__counter"><span class="{{ blockname }}__number">{{ view.atom_meta.count }}</span> Beiträge</span>
+		{% endif %}
+
+		{% if view.atom_meta.oldest_date and view.atom_meta.latest_date %}
+			{% set oldest_date = view.atom_meta.oldest_date | format_date('short') %}
+			{% set latest_date = view.atom_meta.latest_date | format_date('short') %}
+			<span class="{{ blockname }}__dates">
+				{% if oldest_date == latest_date %}
+					{{ oldest_date }}
+				{% else %}
+					<a href="#" class="{{ blockname }}__link">{{ oldest_date }}</a> bis <a href="#" class="{{ blockname }}__link">{{ latest_date }}</a>
+				{% endif %}
+			</span>
+		{% endif %}
 	</p>
 </div>
