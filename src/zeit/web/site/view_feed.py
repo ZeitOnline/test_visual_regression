@@ -106,7 +106,7 @@ class Newsfeed(Base):
                 )
             )
         root.append(channel)
-        for content in filter_and_sort_entries[1:15]:
+        for content in filter_and_sort_entries(self.context)[1:15]:
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
             # XXX Since this view will be accessed via newsfeed.zeit.de, we
@@ -177,7 +177,7 @@ class SpektrumFeed(zeit.web.site.view.Base):
                        type=self.request.response.content_type)
         )
         root.append(channel)
-        for content in filter_and_sort_entries[1:100]:
+        for content in filter_and_sort_entries(self.context)[1:100]:
             normalized_title = zeit.cms.interfaces.normalize_filename(
                 content.title)
             tracking = urllib.urlencode({
