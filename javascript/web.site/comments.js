@@ -148,12 +148,11 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
     promoteComment = function( e ) {
         var link = $( this ),
+            action = link.data( 'action' ),
             cid  = link.data( 'cid' ),
             comment = link.closest( '.comment__container' ),
             sendurl = window.location.href,
-            authenticated = $commentForm.hasClass( 'comment-form' ),
-            form,
-            template;
+            failText = 'Empfehlung fehlgeschlagen, bitte Seite neu laden.';
 
         e.preventDefault();
         this.blur();
@@ -168,30 +167,33 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
             url: sendurl,
             data: {
                 'ajax':     'true',
-                'action':   'promote',
+                'action':   action,
                 'pid':      cid
             },
             dataType: 'json',
-            method: 'POST',
-            success: function( response ) {
-                if ( response ) {
-                    // link.removeClass( 'comment__moderation--sending' );
-                    if ( response.response.error === false ) {
-                        link.removeClass( 'comment__moderation--sending' );
-                        link.text( 'Redaktionsempfehlung entfernen' );
-                        // toggleRecommendationLink( link );
-                        // comment
-                        //     .find( '.js-comment-recommendations' )
-                        //     .html( response.response.recommendations )
-                        //     .parent().css( 'display', response.response.recommendations ? '' : 'none' );
-                    } else {
-                        // what else?
-                    }
+            method: 'POST'
+        })
+        .done( function( response ) {
+            if ( response ) {
+                if ( response.response.error === false ) {
+                    link.removeClass( 'comment__moderation--sending' );
 
+                    if ( action === 'promote' ) {
+                        link.text( 'Redaktionsempfehlung entfernen' )
+                            .data( 'action', 'demote' );
+                    }
+                    if ( action === 'demote' ) {
+                        link.text( 'Redaktionsempfehlung' )
+                            .data( 'action', 'promote' );
+                    }
+                } else {
+                    link.text( failText );
                 }
             }
+        })
+        .fail( function() {
+            link.text( failText );
         });
-
     },
 
     /**
@@ -419,12 +421,10 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
     addModeration = function() {
         var $comment = $( this ),
+            action = $comment.find( '.comment-meta__badge--promoted' ).length ? 'demote' : 'promote',
+            actionLabel = $comment.find( '.comment-meta__badge--promoted' ).length ?
+                'Redaktionsempfehlung entfernen' : 'Redaktionsempfehlung',
             cid = this.id.substr( 4 ),
-            promoteUrl = document.location.protocol + '//' +
-                document.location.host +
-                document.location.pathname +
-                '?action=promote&pid=' + cid +
-                '#cid-' + cid,
             modHTML = '' +
             '<ul class="comment__moderations">' +
                 '<li>' +
@@ -433,15 +433,15 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                     '</a>' +
                 '</li>' +
                 '<li>' +
-                    '<a class="comment__moderation js-promote-comment" data-cid="%cid%" href="%purl%">' +
-                        'Redaktionsempfehlung' +
+                    '<a class="comment__moderation js-promote-comment" data-action="%action%" data-cid="%cid%" href="#">' +
+                        actionLabel +
                     '</a>' +
                 '</li>' +
             '</ul>';
 
         modHTML = modHTML.replace( /%cid%/g, cid )
-            .replace( '%ch%', window.ZMO.communityHost )
-            .replace( '%purl%', promoteUrl );
+            .replace( '%action%', action )
+            .replace( '%ch%', window.ZMO.communityHost );
         $comment.find( '.comment__reactions' )
             .append( modHTML );
     },
