@@ -4,7 +4,7 @@ Change log for zeit.web
 1.63.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- ZON-2180: Add routes for keyword pages
 
 
 1.63.2 (2015-09-04)
