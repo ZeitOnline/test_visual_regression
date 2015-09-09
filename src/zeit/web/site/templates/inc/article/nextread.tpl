@@ -3,7 +3,7 @@
 {% if view.nextread %}
 
 	{% set module = view.nextread %}
-	{% set teaser = module | first_child %}
+	{% set teaser = module | first_child %}
 	{% set teaser_type = teaser | block_type %}
 
 	{% include
