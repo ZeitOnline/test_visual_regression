@@ -1,4 +1,5 @@
 $buzzboard-label-font-size: 14px
+$buzzboard-icon-height: em(12px, $buzzboard-label-font-size)
 
 .buzzboard
 	&__headline
@@ -48,15 +49,15 @@ $buzzboard-label-font-size: 14px
 			padding: em(20px) 0
 			// word-wrap: break-word
 	&__icon
-		height: em(12px, $buzzboard-label-font-size)
+		height: $buzzboard-icon-height
 		margin-right: em(3px, $buzzboard-label-font-size)
 		vertical-align: em(-1px, $buzzboard-label-font-size)
 		width: em(21px, $buzzboard-label-font-size)
 		&--comment
-			width: round(14 / 12 * 10000) / 10000 * em(12px, $buzzboard-label-font-size)
+			width: round(14 / 12 * 10000) / 10000 * $buzzboard-icon-height
 		&--read
-			width: round(22 / 11 * 10000) / 10000 * em(12px, $buzzboard-label-font-size)
+			width: round(22 / 11 * 10000) / 10000 * $buzzboard-icon-height
 		&--shared
-			width: round(17 / 12 * 10000) / 10000 * em(12px, $buzzboard-label-font-size)
+			width: round(17 / 12 * 10000) / 10000 * $buzzboard-icon-height
 		&--trend
-			width: round(19 / 12 * 10000) / 10000 * em(12px, $buzzboard-label-font-size)
+			width: round(19 / 12 * 10000) / 10000 * $buzzboard-icon-height
