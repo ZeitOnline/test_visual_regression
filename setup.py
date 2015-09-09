@@ -49,6 +49,7 @@ setup(
         'zc.iso8601',
         'zeit.brightcove',
         'zeit.cms',
+        'zeit.content.advertisement',
         'zeit.connector>=2.6.6.dev0',
         'zeit.content.article>3.9.0',
         'zeit.content.author',
