@@ -18,9 +18,12 @@
 			</a>
 		</div>
 	</div>
-	<!-- special teaser -->
-	<div class="main_nav__teaser">{# planned special teaser #}</div>
 
+	<!-- special teaser -->
+	{% block special_teaser %}
+	<div class="main_nav__teaser">{# planned special teaser #}</div>
+	{% endblock special_teaser %}
+	
 	<!-- wrap start -->
 	<div class="main_nav__community" data-dropdown="true">
 		<esi:include src="http://{{ view.request.host

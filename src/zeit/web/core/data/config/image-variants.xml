@@ -1,20 +1,20 @@
 <variants>
   <variant name="default" focus_x="0.5" focus_y="0.3" zoom="1.0"/>
   <variant name="narrow" display_name="Schmal (2:3)" aspect_ratio="2:3"/>
-  <variant name="portrait" display_name="Porträt (3:4)" aspect_ratio="3:4">
+  <variant name="portrait" display_name="Porträt (3:4)" aspect_ratio="3:4" fallback_size="612x816">
     <size id="small" display_name="Porträt 3:4 (klein)" max_size="300x400"/>
-    <size id="large" display_name="Porträt 3:4 (groß)" max_size="612x816"/>
+    <size id="large" display_name="Porträt 3:4 (groß)"/>
   </variant>
-  <variant name="tile" display_name="Kachel (4:5)" aspect_ratio="4:5"/>
+  <variant name="tile" display_name="Kachel (4:5)" aspect_ratio="4:5" fallback_size="660x660"/>
   <variant name="square" display_name="Quadrat (1:1)" aspect_ratio="1:1">
     <size id="small" display_name="Quadrat (klein)" max_size="460x460"/>
-    <size id="large" display_name="Quadrat (groß)" max_size="660x660"/>
+    <size id="large" display_name="Quadrat (groß)"/>
   </variant>
   <variant name="standard" disay_name="Standard (4:3)" aspect_ratio="4:3"/>
   <variant name="super" display_name="Super (3:2)" aspect_ratio="3:2"/>
-  <variant name="wide" display_name="Breitbild (16:9)" aspect_ratio="16:9">
+  <variant name="wide" display_name="Breitbild (16:9)" aspect_ratio="16:9" fallback_size="822x462">
     <size id="small" display_name="Standard 16:9 (klein)" max_size="250x141"/>
-    <size id="large" display_name="Standard 16:9 (groß)" max_size="822x462"/>
+    <size id="large" display_name="Standard 16:9 (groß)"/>
   </variant>
   <variant name="cinema" display_name="Leinwand (7:3)" aspect_ratio="7:3"/>
   <variant name="background" display_name="Hintergrund (7:3)" aspect_ratio="7:3"/>
