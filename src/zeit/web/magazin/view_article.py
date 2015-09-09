@@ -27,7 +27,7 @@ log = logging.getLogger(__name__)
     request_method='GET')
 @pyramid.view.view_config(
     custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.magazin.view.is_advertorial),
+                       zeit.web.core.view.is_advertorial),
     renderer='templates/advertorial.html')
 @pyramid.view.view_config(renderer='templates/article.html')
 @pyramid.view.view_config(name='komplettansicht',

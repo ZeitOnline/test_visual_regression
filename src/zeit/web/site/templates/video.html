@@ -20,7 +20,7 @@
             <meta itemprop="thumbnailUrl" content="{{ view.request.route_url('home') + image.path }}">
         {% endif %}
 
-        {{ vima.brightcove_video_tag(view, iframe=True, expanded=True) }}
+        {{ vima.brightcove_video_tag(view.context.__name__, iframe=True) }}
 
         {{ self.schema_org_image_info() }}
 
