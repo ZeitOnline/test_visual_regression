@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.63.4 (unreleased)
--------------------
+1.64 (2015-09-09)
+-----------------
 
 - ZON-1901: Verlagsnextread
 
