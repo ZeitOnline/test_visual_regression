@@ -6,6 +6,7 @@ import lxml.html
 import mock
 import pyramid.httpexceptions
 import pyramid.response
+import pyramid.testing
 import pytest
 import requests
 
@@ -25,7 +26,7 @@ def test_base_view_produces_acceptable_return_type(application):
 
         pass
     content = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    obj = BaseView(content, mock.Mock())
+    obj = BaseView(content, pyramid.testing.DummyRequest())
     assert hasattr(obj(), '__iter__'), 'BaseView returns an iterable type.'
 
 
@@ -460,7 +461,8 @@ def test_article_page_should_throw_404_if_no_pages_are_exceeded(application):
 
 def test_article_page_should_work_if_pages_from_request_fit(application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
-    page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
+    page = zeit.web.magazin.view_article.ArticlePage(
+        article, pyramid.testing.DummyRequest())
     page.request.registry.settings = {}
     page.request.path_info = 'article/03/seite-3'
     page()
