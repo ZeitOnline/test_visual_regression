@@ -36,6 +36,10 @@ def known_content(resource):
             zeit.content.video.interfaces.IVideo.providedBy(resource))
 
 
+def is_advertorial(context, request):
+    return getattr(context, 'product_text', None) == 'Advertorial'
+
+
 def redirect_on_trailing_slash(request):
     if request.path.endswith('/') and not len(request.path) == 1:
         scheme, netloc, path, params, query, fragment = urlparse.urlparse(

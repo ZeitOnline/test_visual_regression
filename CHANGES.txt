@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2015: Videos in articles
 
+- ZON-1341: Advertorial CP
+
 - ZON-2013: Make tile12 max wide with ad centered
 
 - DEV-935: Quickfix for Community-Redaktions-Auszeichnung
@@ -17,6 +19,9 @@ Change log for zeit.web
 - ZON-2179: Redirect on cp2015 suffix
 
 - ZON-2073: Redirect on trailing slash.
+
+- ZON-2145: Use new fallback_size setting to restrict image sizes for noscript,
+  so we don't have to restrict the largest available variant via max_size.
 
 - FIX: Fix wrong ZEAR rule at noindex setting
 
