@@ -39,13 +39,13 @@
         id="zon-inhouse"
         title="Verlagsangebot"
         image_pattern="zon-thumbnail"
-        areas="major minor ranking parquet"
+        areas="solo duo major minor ranking parquet"
         />
     <layout
         id="zon-ad"
         title="Anzeige"
         image_pattern="zon-thumbnail"
-        areas="major minor ranking parquet"
+        areas="solo duo major minor ranking parquet"
         />
     <!-- formally known as zon-fullwidth-onimage/zon-fullwidth -->
     <layout
