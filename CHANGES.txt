@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1901: Verlagsnextread
 
+- ZON-2121: Add styles and scripts for Datenjournalismus
+
 - ZON-2180: Add routes for keyword pages
 
 - ZON-2015: Videos in articles
