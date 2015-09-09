@@ -4,6 +4,8 @@ Change log for zeit.web
 1.63.4 (unreleased)
 -------------------
 
+- ZON-2015: Videos in articles
+
 - ZON-1341: Advertorial CP
 
 - ZON-2013: Make tile12 max wide with ad centered
