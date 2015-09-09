@@ -23,6 +23,8 @@ Change log for zeit.web
 - ZON-2145: Use new fallback_size setting to restrict image sizes for noscript,
   so we don't have to restrict the largest available variant via max_size.
 
+- ZON-1984: Storystream CP
+
 - DEV-935: Quickfix for Community-Redaktions-Auszeichnung
 
 - MAINT: Polish headline of following pages
