@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1341: Advertorial CP
 
+- ZON-2013: Make tile12 max wide with ad centered
+
 - DEV-935: Quickfix for Community-Redaktions-Auszeichnung
 
 - ZON-2075: Redirect unauthorized comment recommendation requests
@@ -15,6 +17,8 @@ Change log for zeit.web
 - ZON-2179: Redirect on cp2015 suffix
 
 - ZON-2073: Redirect on trailing slash.
+
+- FIX: Fix wrong ZEAR rule at noindex setting
 
 
 1.63.3 (2015-09-04)
