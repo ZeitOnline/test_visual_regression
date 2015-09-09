@@ -56,6 +56,28 @@
 	&--11-on-centerpage
 		&:first-of-type
 			margin-top: remify(15px)
+	&--12-on-centerpage
+		display: table
+		max-width: none
+		vertical-align: middle
+		width: 100%
+		div[id*="__container__"]
+			display: table-cell
+			position: relative
+			text-align: center
+			& > iframe[id^="google_ads_iframe"]
+				display: inline-block
+				margin: 0 auto
+				max-width: 100%
+			&:before
+				@extend %ad-label
+				content: "Anzeige"
+				margin-left: auto
+				margin-right: auto
+				max-width: remify(980px)
+				padding-right: remify(20px)
+		.ad__label
+			display: none
 	// fuck you iqd: centering of content of unknowable width
 	// and positioning of adlabel
 	&--5-on-article

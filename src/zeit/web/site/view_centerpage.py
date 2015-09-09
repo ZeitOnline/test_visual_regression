@@ -116,6 +116,11 @@ class RenderedLegacyArea(LegacyArea):
 
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       zeit.web.core.view.is_advertorial),
+    renderer='templates/centerpage_advertorial.html')
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICP2015,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
 class Centerpage(
@@ -269,6 +274,11 @@ class CenterpageArea(Centerpage):
         }
 
 
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       zeit.web.core.view.is_advertorial),
+    renderer='templates/centerpage_advertorial.html')
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     custom_predicates=(zeit.web.site.view.is_zon_content,),

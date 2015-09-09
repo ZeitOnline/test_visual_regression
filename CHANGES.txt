@@ -1,16 +1,43 @@
 Change log for zeit.web
 =======================
 
-1.63.3 (unreleased)
+1.63.4 (unreleased)
 -------------------
 
 - ZON-1901: Verlagsnextread
+
+- ZON-1341: Advertorial CP
+
+- ZON-2013: Make tile12 max wide with ad centered
+
+- DEV-935: Quickfix for Community-Redaktions-Auszeichnung
+
+- ZON-2075: Redirect unauthorized comment recommendation requests
+
+- MAINT: Polish headline of following pages
+
+- ZON-2179: Redirect on cp2015 suffix
+
+- ZON-2073: Redirect on trailing slash.
+
+- ZON-2145: Use new fallback_size setting to restrict image sizes for noscript,
+  so we don't have to restrict the largest available variant via max_size.
+
+- FIX: Fix wrong ZEAR rule at noindex setting
+
+
+1.63.3 (2015-09-04)
+-------------------
+
+- ZON-2160: Render links from entity tag
 
 
 1.63.2 (2015-09-04)
 -------------------
 
 - DEV-923: Use image variant specified on the layout for article images
+
+- MAINT: Polish comment count styles
 
 - FIX: Fix another layout breaking banner between 720 and 768px in ZMO
 

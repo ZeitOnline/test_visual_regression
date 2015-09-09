@@ -2,8 +2,9 @@
 	font-size: remify(14px)
 	margin-bottom: remify(20px)
 	a
-		// normal, hover, active, visited, focus
-		+link-colors($zon_grey, $color-link--hover, $color-link--active, $zon_grey, $color-link--focus)
+		color: $zon_grey
+		+on-interaction
+			color: $color-link--hover
 	&__button
 		+zon-button-inky
 		&--previous
