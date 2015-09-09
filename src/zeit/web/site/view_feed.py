@@ -52,9 +52,9 @@ def lps_sort(context):
 
 
 def filter_and_sort_entries(context):
-    filter_news = filter(lambda c: '/news' not in c.uniqueId,
-                         zeit.content.cp.interfaces.ITeaseredContent(
-                            context))
+    filter_news = filter(
+        lambda c: '/news' not in c.uniqueId,
+        zeit.content.cp.interfaces.ITeaseredContent(context))
     return sorted(filter_news, key=lps_sort, reverse=True)
 
 
