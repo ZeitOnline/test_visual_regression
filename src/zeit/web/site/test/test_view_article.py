@@ -480,6 +480,11 @@ def test_nextread_is_responsive(testserver, selenium_driver, screen_size):
         assert nextread.size.get('height') < 450
 
 
+def test_publisher_nextread_on_article_has_own_template(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-verlagsnextread')
+    assert len(browser.cssselect('.nextread-advertisement')) == 1
+
+
 def test_zon_nextread_teaser_block_has_teasers_available(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/02')
@@ -668,6 +673,8 @@ def test_imported_article_has_special_meta_robots(
     # test ZEAR
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'ZEAR')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'Fehler')
     article_view = zeit.web.site.view_article.Article(context, mock.Mock())
     assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for ZEAR')
@@ -715,22 +722,6 @@ def test_imported_article_has_special_meta_robots(
         'wrong robots for none product article')
 
 
-def test_article_of_ressort_fehler_has_special_meta_robots(
-        application, monkeypatch):
-
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-
-    # test ressort Fehler
-    monkeypatch.setattr(
-        zeit.web.site.view_article.Article, u'ressort', u'Fehler')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
-    assert article_view.meta_robots == 'noindex,follow', (
-        'wrong robots for fehler ressort')
-
-    # test any other ressort
-    monkeypatch.setattr(
-        zeit.web.site.view_article.Article, u'ressort', u'Politik')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
-    assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
-        'wrong robots for any other ressort')
+def test_video_in_article_is_there(testbrowser):
+    article = testbrowser('/zeit-online/article/zeit')
+    assert len(article.cssselect('.video-player__iframe')) == 1

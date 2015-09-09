@@ -1,7 +1,7 @@
 {% if view.source_label -%}
 	<span class="metadata__source{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}">
 		{%- if view.source_url -%}
-			<a href="{{ view.source_url }}">{{ view.source_label }}</a> -
+			<a href="{{ view.source_url }}">{{ view.source_label }}</a>
 		{%- else -%}
 			{{ view.source_label }}
 		{%- endif -%}
