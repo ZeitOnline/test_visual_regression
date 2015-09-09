@@ -35,6 +35,7 @@ require([
     'velocity.ui',
     'web.core/plugins/jquery.animatescroll',
     'web.core/plugins/jquery.inlinegallery',
+    'web.core/plugins/jquery.picturefill',
     'web.core/plugins/jquery.referrerCount',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.site/plugins/jquery.accordion',
@@ -76,6 +77,7 @@ require([
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
         article.find( '.js-infobox' ).infobox();
         article.find( '.liveblog' ).liveblog();
+        $.picturefill();
         $( '.js-count-formchars' ).countFormchars();
     }
 
