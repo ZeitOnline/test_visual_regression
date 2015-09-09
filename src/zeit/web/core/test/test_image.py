@@ -453,8 +453,7 @@ def test_variant_source_should_raise_keyerror_for_faulty_specs(application):
         vs.factory.find(group, 'extra-foo')
 
 
-def test_img_src_should_contain_fallback_size(testserver, testbrowser):
-    b = testbrowser('{}/zeit-online/slenderized-index'.format(testserver.url))
-    assert ('src="{}/zeit-online/image'
-            '/filmstill-hobbit-schlacht-fuenf-hee/wide__822x462"'.format(
-                testserver.url)) in b.contents
+def test_img_src_should_contain_fallback_size(testbrowser):
+    b = testbrowser('/zeit-online/slenderized-index')
+    assert b.cssselect(
+        'img[src$="/filmstill-hobbit-schlacht-fuenf-hee/wide__822x462"]')
