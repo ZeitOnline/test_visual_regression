@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2015: Videos in articles
 
+- ZON-2013: Make tile12 max wide with ad centered
+
 - DEV-935: Quickfix for Community-Redaktions-Auszeichnung
 
 - ZON-2075: Redirect unauthorized comment recommendation requests
