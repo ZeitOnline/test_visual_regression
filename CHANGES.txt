@@ -4,7 +4,7 @@ Change log for zeit.web
 1.65 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2115: Add Meta Title, Description Ruleset for Keywordpages
 
 
 1.64 (2015-09-09)
@@ -38,6 +38,7 @@ Change log for zeit.web
 - FIX: Fix wrong ZEAR rule at noindex setting
 
 - ZON-1990: Render feeds for newsfeed.zeit.de
+
 
 
 1.63.3 (2015-09-04)
