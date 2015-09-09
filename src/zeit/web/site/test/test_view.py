@@ -1,4 +1,5 @@
 import mock
+import requests
 
 import zeit.web.site.view
 
@@ -65,3 +66,18 @@ def test_article_should_have_correct_breadcrumb_structure(
     assert len(breadcrumbs_items) == 3
     breadcrumbs_links = browser.cssselect('.footer-breadcrumbs__link')
     assert len(breadcrumbs_links) == 2
+
+
+def test_keyword_index_pages_should_fall_back_to_xslt(testserver, testbrowser):
+    resp = requests.get(
+        '%s/schlagworte/index/A/index' % testserver.url,
+        allow_redirects=False)
+    assert resp.status_code == 200
+    assert resp.headers['x-render-with'] == 'default'
+
+
+def test_keyword_pages_should_send_redirect(testserver, testbrowser):
+    resp = requests.get(
+        '%s/schlagworte/orte/Xy/index' % testserver.url,
+        allow_redirects=False)
+    assert resp.status_code == 301
