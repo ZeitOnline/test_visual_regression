@@ -70,7 +70,7 @@
     </cluster>
     <cluster visible="True" area="id-bdfb0156-4df4-4bcd-bf1e-68609ef1a109" kind="parquet" title="ArneParquet">
       <region visible="True" hide-dupes="True" area="id-1ac0ac50-fe94-4431-baac-435cc2a934dd" kind="parquet" title="Parkett: Blog-Teaser">
-        <container cp:type="teaser" module="zon-ad" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5afa4cad1">
+        <container cp:type="teaser" module="zon-inhouse" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5afa4cad1">
           <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
         </container>
       </region>
