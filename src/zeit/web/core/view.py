@@ -67,6 +67,18 @@ class Base(object):
     pagetitle_suffix = u''
 
     def __call__(self):
+        # to avoid circular imports
+        import zeit.web.site.view_feed
+
+        # XXX: Since we do not have a configuration based on containments
+        # for our views, this is necessary to control, that only explicitly
+        # configured views, will render an RSS feed on newsfeed.zeit.de
+        # host header (RD, 2015-09)
+        host = self.request.headers.get('host')
+        if re.match('newsfeed(\.staging)?\.zeit\.de', host) and not (
+                issubclass(type(self), zeit.web.site.view_feed.Base)):
+            raise pyramid.httpexceptions.HTTPNotFound()
+
         redirect_on_trailing_slash(self.request)
         redirect_on_cp2015_suffix(self.request)
         time = zeit.web.core.cache.ICachingTime(self.context)
