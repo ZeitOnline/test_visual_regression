@@ -1,11 +1,8 @@
-$article-content-max-width: 660px
-
 // Opt-in Typography
-.copy, %copy
+%copy
   p, ul, ol
     +body-type-zoom
     margin: 0 auto $fine
-    max-width: remify($article-content-max-width)
 
   h1, h2, h3, h4, h5, h6
     margin-bottom: $thin
@@ -40,7 +37,7 @@ figure
     width: 100%
   .figure__caption, figcaption
     @extend %figcaption
-    @extend %font-s
+    font-size: $font-s
     margin-top: $small
   .figure__media--embed
     .figure__media--embed__wrap
