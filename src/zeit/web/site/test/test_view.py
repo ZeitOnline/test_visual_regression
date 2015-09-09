@@ -81,3 +81,4 @@ def test_keyword_pages_should_send_redirect(testserver, testbrowser):
         '%s/schlagworte/orte/Xy/index' % testserver.url,
         allow_redirects=False)
     assert resp.status_code == 301
+    assert resp.headers['Location'] == '%s/thema/xy' % testserver.url
