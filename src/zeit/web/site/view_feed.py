@@ -123,7 +123,7 @@ class Newsfeed(Base):
             description = content.teaserText
             teaser_image = zeit.content.image.interfaces.IImages(content).image
             variant = teaser_image.variant_url('wide', 148, 84) if (
-                teaser_image) else None
+                teaser_image) else ''
 
             if variant:
                 description = (u'<a href="{}"><img style="float:left; '
