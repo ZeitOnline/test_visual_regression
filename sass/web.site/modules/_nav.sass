@@ -58,14 +58,12 @@ $icon-color--hover: $zon-charcoal
 			margin-right: $little
 	width: 100%
 	a
-		+link-colors($black, $black, $black, $black, $black)
+		color: $black
 	+respond-min($break-tablet-min)
 		width: auto
 		font-size: remify(10px)
 		text-transform: uppercase
 		color: $zon_grey
-		a
-			+link-colors($black)
 
 //box 1: logo
 .logo_bar
@@ -158,7 +156,7 @@ $icon-color--hover: $zon-charcoal
 .user-link
 	+respond-min($break-tablet-min)
 		+inline-block
-		+link-colors($black, $zon_dark_grey, $black, $black, $black)
+		+link-colors($black, $zon_dark_grey, $zon_dark_grey, $black, $zon_dark_grey)
 		margin-right: remify(5px)
 
 .beta-badge
@@ -454,7 +452,7 @@ $icon-color--hover: $zon-charcoal
 		padding-right: 0
 
 	.primary-nav__link
-		+link-colors($white)
+		color: $white
 		background-color: $zon_dark_grey
 		border-radius: 3px
 		+transition(background-color .15s linear)
@@ -497,7 +495,7 @@ $icon-color--hover: $zon-charcoal
 			display: block // get rid of bullet points
 			width: 100%
 			& > .dropdown__link
-				+link-colors($black)
+				color: $black
 				display: block
 				width: 100%
 				padding: 0 $fine 0 $fine

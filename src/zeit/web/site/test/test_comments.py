@@ -2,6 +2,8 @@
 import datetime
 import lxml.etree
 import mock
+import requests
+import urllib
 import zope.component
 
 import zeit.cms.interfaces
@@ -176,3 +178,20 @@ def test_comment_reply_thread_must_not_wrap_if_deeplinked(
     driver = selenium_driver
     driver.get('%s/zeit-online/article/02#cid-5122767' % testserver.url)
     assert driver.find_element_by_id('cid-5122767').is_displayed()
+
+
+def test_comment_action_recommend_should_redirect_to_login(testserver):
+    path = '/zeit-online/article/01?action=recommend&pid=2968470'
+    url = testserver.url + path
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    if conf.get('sso_activate'):
+        pattern = '{}/anmelden?url={}'
+        host = conf.get('sso_url')
+    else:
+        pattern = '{}/user/login?destination={}'
+        host = conf.get('community_host')
+    location = pattern.format(host, urllib.quote_plus(url))
+
+    response = requests.get(url, allow_redirects=False)
+    assert response.headers.get('Location', '') == location
+    assert response.status_code == 303
