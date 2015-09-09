@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2121: Add styles and scripts for Datenjournalismus
 
+- ZON-2015: Videos in articles
+
 - ZON-1341: Advertorial CP
 
 - ZON-2013: Make tile12 max wide with ad centered
