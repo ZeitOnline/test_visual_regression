@@ -30,6 +30,9 @@ log = logging.getLogger(__name__)
 @view_defaults(context=zeit.content.article.interfaces.IArticle,
                custom_predicates=(zeit.web.site.view.is_zon_content,),
                request_method='GET')
+@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
+             zeit.web.core.view.is_advertorial),
+             renderer='templates/article_advertorial.html')
 @view_config(renderer='templates/article.html')
 @view_config(name='komplettansicht',
              renderer='templates/article_komplett.html')
