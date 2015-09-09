@@ -75,6 +75,9 @@
 				<container cp:type="teaser" module="zon-square" visible="True" cp:__name__="id-49dbe9b9-450e-44ef-bfb8-b2a7d7bebc28">
 					<block href="http://xml.zeit.de/zeit-online/article/01" />
 				</container>
+				<container cp:type="cpextra" module="mosttrending" visible="True" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a007">
+					<cp_extra id="mosttrending"/>
+				</container>
 				<container cp:type="cpextra" module="mostread" visible="True" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a003">
 					<cp_extra id="mostread"/>
 				</container>
