@@ -4,6 +4,8 @@ Change log for zeit.web
 1.65 (unreleased)
 -----------------
 
+- ZON-2056: Add links in comments for Community moderators
+
 - ZON-2115: Add Meta Title, Description Ruleset for Keywordpages
 
 
