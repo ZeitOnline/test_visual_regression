@@ -51,6 +51,13 @@ def lps_sort(context):
             datetime.MINYEAR, 1, 1, tzinfo=pytz.UTC)
 
 
+def filter_and_sort_entries(context):
+    filter_news = filter(lambda c: '/news' not in c.uniqueId,
+                         zeit.content.cp.interfaces.ITeaseredContent(
+                            context))
+    return sorted(filter_news, key=lps_sort, reverse=True)
+
+
 class Base(zeit.web.core.view.Base):
     pass
 
@@ -99,12 +106,7 @@ class Newsfeed(Base):
                 )
             )
         root.append(channel)
-        filter_news = filter(lambda c: '/news' not in c.uniqueId,
-                             zeit.content.cp.interfaces.ITeaseredContent(
-                                 self.context))
-        entries = sorted(filter_news, key=lps_sort, reverse=True)
-
-        for content in entries[1:15]:
+        for content in filter_and_sort_entries[1:15]:
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
             # XXX Since this view will be accessed via newsfeed.zeit.de, we
@@ -175,11 +177,7 @@ class SpektrumFeed(zeit.web.site.view.Base):
                        type=self.request.response.content_type)
         )
         root.append(channel)
-        filter_news = filter(lambda c: '/news' not in c.uniqueId,
-                             zeit.content.cp.interfaces.ITeaseredContent(
-                                 self.context))
-        entries = sorted(filter_news, key=lps_sort, reverse=True)
-        for content in entries[1:100]:
+        for content in filter_and_sort_entries[1:100]:
             normalized_title = zeit.cms.interfaces.normalize_filename(
                 content.title)
             tracking = urllib.urlencode({
