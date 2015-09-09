@@ -126,6 +126,9 @@ $color-comment-border: $zon_light_grey
 			border-bottom: 1px solid rgba(204, 204, 204, 1)
 			color: $zon-red
 
+		@at-root #{&}#{&}--sending // generates: .comment__moderation.comment__moderation--sending
+			color: $zon_light_grey
+
 
 .comment--indented
 	border-top-width: 0 !important

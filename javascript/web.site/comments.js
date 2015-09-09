@@ -146,6 +146,54 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
     },
 
+    promoteComment = function( e ) {
+        var link = $( this ),
+            cid  = link.data( 'cid' ),
+            comment = link.closest( '.comment__container' ),
+            sendurl = window.location.href,
+            authenticated = $commentForm.hasClass( 'comment-form' ),
+            form,
+            template;
+
+        e.preventDefault();
+        this.blur();
+
+        if ( link.hasClass( 'comment__moderation--sending' ) ) {
+            return false;
+        }
+
+        link.addClass( 'comment__moderation--sending' );
+
+        $.ajax({
+            url: sendurl,
+            data: {
+                'ajax':     'true',
+                'action':   'promote',
+                'pid':      cid
+            },
+            dataType: 'json',
+            method: 'POST',
+            success: function( response ) {
+                if ( response ) {
+                    // link.removeClass( 'comment__moderation--sending' );
+                    if ( response.response.error === false ) {
+                        link.removeClass( 'comment__moderation--sending' );
+                        link.text( 'Redaktionsempfehlung entfernen' );
+                        // toggleRecommendationLink( link );
+                        // comment
+                        //     .find( '.js-comment-recommendations' )
+                        //     .html( response.response.recommendations )
+                        //     .parent().css( 'display', response.response.recommendations ? '' : 'none' );
+                    } else {
+                        // what else?
+                    }
+
+                }
+            }
+        });
+
+    },
+
     /**
      * comments.js: toggle recommendation link
      * @function toggleRecommendationLink
@@ -439,6 +487,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         $commentsBody.on( startEvent, '.js-submit-report', submitReport );
         $commentsBody.on( startEvent, '.js-recommend-comment', recommendComment );
         $commentsBody.on( startEvent, '.comment--wrapped', showReplies );
+        $commentsBody.on( startEvent, '.js-promote-comment', promoteComment );
         $comments.on( inputEvent, '.js-required', enableForm );
     };
 
