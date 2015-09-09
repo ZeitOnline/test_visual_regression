@@ -4,8 +4,9 @@ Change log for zeit.web
 1.63.4 (unreleased)
 -------------------
 
-
 - ZON-2180: Add routes for keyword pages
+
+- ZON-2015: Videos in articles
 
 - ZON-1341: Advertorial CP
 
