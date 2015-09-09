@@ -328,7 +328,7 @@ class Base(object):
             if entity_type == 'free':
                 entity_type = 'Subject'
         except:
-            return title + whitelist_data.pop()['post_' + data_type]
+            return title + whitelist_data[0]['post_' + data_type]
 
         for data in whitelist_data:
             if data['category'] == entity_type and title:
@@ -337,7 +337,7 @@ class Base(object):
                     return data['pre_' + data_type] + title + post
                 except:
                     return title + post
-        return title + whitelist_data.pop()['post_' + data_type]
+        return title + whitelist_data[0]['post_' + data_type]
 
     @zeit.web.reify
     def pagetitle(self):
