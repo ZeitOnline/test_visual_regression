@@ -8,7 +8,7 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="cap_title">ANZEIGE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="cap_title">Buchtipp</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels">Angebote buchtipp</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Verlag</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
@@ -103,7 +103,7 @@ begrabene Riese – wer sich dahinter verbirgt, muss der Leser selbst
 herausfinden. </p>
       <infobox is_empty="False" href="http://xml.zeit.de/angebote/buchtipp/ishiguro/infobox-ishiguro" publication-date="" expires=""/>
     </division>
-    <byline>Buchtipp: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+    <byline>Dies ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
     <division type="page" teaser="Erinnern oder Vergessen?">
       <p>Ist
 der Roman ein Geschichts-Epos oder gar eine Fantasy-Erzählung? Das Buch hat
