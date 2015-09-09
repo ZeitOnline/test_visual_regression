@@ -7,14 +7,18 @@ $footer_logo_width_small: em(280px)
 	background-color: $zon-charcoal
 	color: $zon_grey
 	a
-		+link-colors($zon_grey, $zon_lighter_grey, $zon_lighter_grey, $zon_grey, $zon_lighter_grey)
+		color: inherit
+		+on-interaction
+			color: $zon_lighter_grey
 
 // carefull, the order of this pseudo class is important here
 %footer_light
 	background-color: $zon_lighter_grey
 	color: $zon_dark_grey
 	a
-		+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $black)
+		color: inherit
+		+on-interaction
+			color: $black
 
 %footer_column_row
 	+clearfix
@@ -96,7 +100,9 @@ $footer_logo_width_small: em(280px)
 				background-color: $zon_lighter_grey
 				color: $zon_dark_grey
 				a
-					+link-colors($zon_dark_grey, $black, $black, $zon_dark_grey, $black)
+					color: inherit
+					+on-interaction
+						color: $black
 	&__list
 		@extend %footer_list
 	&__row--extra &__list

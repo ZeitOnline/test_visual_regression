@@ -14,9 +14,10 @@ figure img
 	display: block
 
 a
-	// normal, hover, active, visited, focus
-	+link-colors($color-link--default, $color-link--hover, $color-link--active, $color-link--visited, $color-link--focus)
+	color: $color-link--default
 	text-decoration: none
+	+on-interaction
+		color: $color-link--hover
 
 // only target svg sprites to not destroy interactive/dataviz graphics
 svg use

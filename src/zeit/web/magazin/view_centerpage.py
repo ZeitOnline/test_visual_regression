@@ -22,7 +22,7 @@ import zeit.web.magazin.view
 
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                                zeit.web.magazin.view.is_advertorial),
+                                zeit.web.core.view.is_advertorial),
              renderer='templates/advertorial.html')
 @view_config(context=zeit.content.cp.interfaces.ICenterPage,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),

@@ -414,3 +414,51 @@ def test_wrapped_page_has_wrapped_property(application):
     request.host_url = 'http://www.zeit.de'
     view = zeit.web.site.view_centerpage.Centerpage(context, request)
     assert view.is_wrapped
+
+
+def test_trailing_slash_should_lead_to_redirect():
+    request = mock.Mock
+    request.path = '/foo/baa/'
+    request.url = 'http://foo.xyz.de/foo/baa/?batz'
+    with pytest.raises(
+            pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
+        zeit.web.core.view.redirect_on_trailing_slash(request)
+
+    assert redirect.value.location == 'http://foo.xyz.de/foo/baa?batz'
+
+    request.path = '/foo/baa/'
+    request.url = 'http://foo.xyz.de/foo/baa/'
+
+    with pytest.raises(
+            pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
+        zeit.web.core.view.redirect_on_trailing_slash(request)
+
+    assert redirect.value.location == 'http://foo.xyz.de/foo/baa'
+
+    request.path = '/foo/baa'
+    request.url = 'http://foo.xyz.de/foo/baa'
+    assert zeit.web.core.view.redirect_on_trailing_slash(request) == None
+
+
+def test_cp2015_suffix_should_lead_to_redirect():
+    request = mock.Mock
+    request.path = '/foo/baa.cp2015'
+    request.url = 'http://foo.xyz.de/foo/baa.cp2015'
+    with pytest.raises(
+            pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
+        zeit.web.core.view.redirect_on_cp2015_suffix(request)
+
+    assert redirect.value.location == 'http://foo.xyz.de/foo/baa'
+
+    request.path = '/foo/baa.cp2015'
+    request.url = 'http://foo.xyz.de/foo/baa.cp2015?x=y'
+
+    with pytest.raises(
+            pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
+        zeit.web.core.view.redirect_on_cp2015_suffix(request)
+
+    assert redirect.value.location == 'http://foo.xyz.de/foo/baa?x=y'
+
+    request.path = '/foo/baa'
+    request.url = 'http://foo.xyz.de/foo/baa'
+    assert zeit.web.core.view.redirect_on_cp2015_suffix(request) == None
