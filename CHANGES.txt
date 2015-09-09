@@ -4,19 +4,32 @@ Change log for zeit.web
 1.63.4 (unreleased)
 -------------------
 
+- ZON-2121: Add styles and scripts for Datenjournalismus
+
+- ZON-2180: Add routes for keyword pages
+
+- ZON-2015: Videos in articles
+
+- ZON-1341: Advertorial CP
+
 - ZON-2013: Make tile12 max wide with ad centered
 
-- DEV-935: Quickfix for Community-Redaktions-Auszeichnung
-
 - ZON-2075: Redirect unauthorized comment recommendation requests
-
-- MAINT: Polish headline of following pages
 
 - ZON-2179: Redirect on cp2015 suffix
 
 - ZON-2073: Redirect on trailing slash.
 
+- ZON-2145: Use new fallback_size setting to restrict image sizes for noscript,
+  so we don't have to restrict the largest available variant via max_size.
+
+- DEV-935: Quickfix for Community-Redaktions-Auszeichnung
+
+- MAINT: Polish headline of following pages
+
 - FIX: Fix wrong ZEAR rule at noindex setting
+
+- ZON-1990: Render feeds for newsfeed.zeit.de
 
 
 1.63.3 (2015-09-04)

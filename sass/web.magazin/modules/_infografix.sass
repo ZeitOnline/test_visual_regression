@@ -1,0 +1,99 @@
+// styles for "external" content
+// intended for Datenjournalismus & Co.
+// prefixed with "x"
+
+// standard content width
+.x-content-column
+	max-width: remify($article-content-max-width)
+	margin-left: auto
+	margin-right: auto
+	.article--longform &
+		max-width: remify($longform-content-max-width)
+		+respond-min($break-3)
+			max-width: remify($longform-content-max-width--desktop)
+
+// responsive fullwidth
+//     $break-0:  480px
+//     $break-1:  576px
+//     $break-2:  720px
+//     $break-3: 1024px
+//     $break-4: 1120px
+.x-fullwidth
+	+unpadded
+	+respond-max($break-0, false)
+		&--mobile
+			+unpadded
+	+respond-max($break-2)
+		&--phablet
+			+unpadded
+	+respond-max($break-3)
+		&--tablet
+			+unpadded
+
+// text styles
+.x-headline,
+.x-subheadline,
+.x-copytext,
+.x-footer
+	font-family: $sans-serif-base-font
+	letter-spacing: $letter-spacing-s
+	line-height: 1.4
+
+.x-headline
+	font-size: em(24px)
+	line-height: 1.25
+	margin-bottom: .5em
+	margin-top: 1.5em
+	+respond-min($break-1)
+		font-size: em(30px)
+
+.x-subheadline
+	border-bottom: 1px solid $grey--light
+	font-size: em(18px)
+	margin-bottom: .5em
+	margin-top: .5em
+	padding-bottom: .5rem
+	+respond-min($break-3)
+		font-size: em(20px)
+
+.x-copytext
+	font-size: em(15px)
+	+respond-min($break-3)
+		font-size: em(16px)
+
+.x-caption
+	color: $grey--mid
+	font-size: em(14px)
+	line-height: 1.5
+	&--sans
+		font-family: $sans-serif-base-font
+	&--serif
+		font-family: $font-franziska
+
+.x-footer,
+.x-footer--borderless
+	+clearfix
+	color: $grey
+	font-size: em(14px)
+	margin-bottom: .5em
+	margin-top: .5em
+
+.x-footer
+	border-top: 1px solid $grey--light
+	padding-top: .5rem
+	&__copyright
+		float: right
+
+// vertical space
+.x-spacing
+	margin-top: $compact
+	margin-bottom: $compact
+	&--paragraph
+		margin-top: $fine
+		margin-bottom: $fine
+	&--large
+		margin-top: $large
+		margin-bottom: $large
+
+.x-picturefill img
+	max-width: 100%

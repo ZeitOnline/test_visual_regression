@@ -12,10 +12,13 @@ $break-areas: $break-tablet-min
 // exclusively used by .mobile-hidden
 $break-mobile-max: em(767px)
 
-// letter-spacing (a half of a pixel)
-$zon-letter-spacing-l: 0.08em
-$zon-letter-spacing-m: 0.05em
-$zon-letter-spacing-s: 0.03em
+// letter-spacing
+// 1.28px
+$zon-letter-spacing-l: 0.08em !default
+// 0.8px
+$zon-letter-spacing-m: 0.05em !default
+// a half of a pixel
+$zon-letter-spacing-s: 0.03em !default
 
 @import "../constants"
 
@@ -41,7 +44,7 @@ $spektrum_de_blue: #4d86a4
 // semantic colors
 $color-body-bg: #41464d
 $color-body-text: $white
-$color-page-bg: $white
+$color-page-bg: $white !default
 $color-text: $zon-charcoal
 $color-text-highlighted: $zon-red
 $color-canvas-bg: $white

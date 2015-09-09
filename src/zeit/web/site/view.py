@@ -64,6 +64,10 @@ class Base(zeit.web.core.view.Base):
         return breadcrumbs
 
     @zeit.web.reify
+    def is_advertorial(self):
+        return zeit.web.core.view.is_advertorial(self.context, self.request)
+
+    @zeit.web.reify
     def meta_robots(self):
         # Try seo presets first
         if self.seo_robot_override:
@@ -118,6 +122,13 @@ def login_state(request):
         info['user'] = request.session['user']
         info['profile'] = "{}/user".format(settings['community_host'])
     return info
+
+
+@pyramid.view.view_config(route_name='schlagworte')
+def schlagworte(request):
+    raise pyramid.httpexceptions.HTTPMovedPermanently(
+        'http://{}/thema/{}'.format(
+            request.host, request.matchdict['item'].lower()))
 
 
 # XXX We should be a little more specific here, ie ICommentableContent
