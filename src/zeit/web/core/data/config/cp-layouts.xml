@@ -215,14 +215,6 @@
         available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
-        id="parquet-verlag"
-        title="Parkett – Verlagsangebot"
-        image_pattern="220x124"
-        image_positions="true"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.web.core.interfaces.IInternalUse"
-        />
-    <layout
         id="parquet-printteaser"
         title="Parkett – Print-Teaser/Blick in die Zeit"
         image_pattern="220x124"
