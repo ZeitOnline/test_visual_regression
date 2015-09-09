@@ -17,6 +17,7 @@ class Buzzbox(zeit.web.site.module.Module, list):
 
     header = None
     score_factor = 1
+    image_pattern = 'wide'
 
     @zeit.web.reify
     def reach(self):
@@ -58,21 +59,36 @@ class CommentsBuzzbox(Buzzbox):
         self += self.reach.get_comments(section=self.ressort)
         self.layout = 'buzz-comments'
         self.icon = 'buzz-comment'
-        self.score_pattern = ['Keine Kommentare', '{} Kommentar', '{} Kommentare']
+        self.score_pattern = [
+            'Keine Kommentare', '{} Kommentar', '{} Kommentare']
 
 
 @zeit.web.register_module('mostshared')
-class FacebookBuzzbox(Buzzbox):
+class SharingBuzzbox(Buzzbox):
 
     header = 'Meistgeteilt'
     label = 'Meist&shy;geteilt'
+
+    def __init__(self, context):
+        super(SharingBuzzbox, self).__init__(context)
+        self += self.reach.get_social(section=self.ressort)
+        self.layout = 'buzz-sharing'
+        self.icon = 'buzz-shared'
+        self.score_pattern = ['Nie geteilt', '{} mal geteilt']
+
+
+@zeit.web.register_module('mostliked')
+class FacebookBuzzbox(Buzzbox):
+
+    header = 'Meistgeliked'
+    label = 'Meist&shy;geliked'
 
     def __init__(self, context):
         super(FacebookBuzzbox, self).__init__(context)
         self += self.reach.get_social(facet='facebook', section=self.ressort)
         self.layout = 'buzz-facebook'
         self.icon = 'buzz-shared'
-        self.score_pattern = ['Nie geteilt', '{} mal geteilt']
+        self.score_pattern = ['Nie geliked', '{} mal geliked']
 
 
 @zeit.web.register_module('mosttrending')
