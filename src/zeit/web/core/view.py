@@ -194,6 +194,10 @@ class Base(object):
         return self.context.serie.serienname
 
     @zeit.web.reify
+    def cap_title(self):
+        return self.context.cap_title.title()
+
+    @zeit.web.reify
     def banner_channel(self):
         # manually banner_id rules first
         if self.context.banner_id is not None:

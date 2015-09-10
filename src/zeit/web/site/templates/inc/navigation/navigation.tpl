@@ -22,7 +22,7 @@
 	<!-- special teaser -->
 	{% block special_teaser %}
 		{% if view.is_advertorial %}
-		<div class="main_nav__ad-label advertorial__ad-label">Anzeige</div>
+		<div class="main_nav__ad-label advertorial__ad-label">{{ view.cap_title | default('Anzeige') }}</div>
 		{% else %}
 		<div class="main_nav__teaser">{# planned special teaser #}</div>
 		{% endif %}

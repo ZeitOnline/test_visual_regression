@@ -16,7 +16,7 @@
         {% endif %}
     </{{tag}}>
     {% if view.is_advertorial %}
-    <div class="header-image__adlabel">Anzeige</div>
+    <div class="header-image__adlabel">{{ view.cap_title | default('Anzeige') }}</div>
     {% endif %}
 </header>
 
