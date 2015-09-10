@@ -212,9 +212,12 @@ def test_inhouse_label_should_be_displayed(testbrowser):
     select = testbrowser('/zeit-online/teaser-inhouse-setup').cssselect
     labels = select('.teaser-small--inhouse .teaser-small__label')
     assert len(labels) == 2
+    assert map(lambda x: x.text, labels) == (
+        ['Verlagsangebot', 'Verlagsangebot'])
 
 
 def test_ad_label_should_be_displayed(testbrowser):
     select = testbrowser('/zeit-online/teaser-inhouse-setup').cssselect
     labels = select('.teaser-small-minor--ad .teaser-small-minor__label')
     assert len(labels) == 1
+    assert labels[0].text == 'Anzeige'
