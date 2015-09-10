@@ -1,0 +1,16 @@
+
+$color-storystream-border: $zon-alto
+
+$storystream-padding-mobile: $cp-padding
+$storystream-padding-tablet: remify(27px)
+
+.storystream-summary
+	padding: 0 $cp-padding
+	font-size: em(18px)
+	line-height: 1.4
+	margin-bottom: remify(20px)
+	+respond-min($break-tablet-min)
+		line-height: 1.5
+		padding: 0 remify(55px)
+	+respond-min($break-desktop-min)
+		font-size: em(20px)
