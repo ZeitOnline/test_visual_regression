@@ -208,8 +208,7 @@ class Base(object):
             return u'{}/{}'.format(self.context.banner_id, self.banner_type)
         # second rule: angebote are mapped with two levels
         if self.ressort == 'angebote':
-            _serie = self.serie.replace(' ', '_')
-            return u'{}/{}/{}'.format(self.ressort, _serie, self.banner_type)
+            return u'{}/{}/{}'.format(self.ressort, 'adv', self.banner_type)
         # third: do the mapping
         mappings = zeit.web.core.banner.banner_id_mappings
         for mapping in mappings:
@@ -254,10 +253,11 @@ class Base(object):
             'video': 'video_artikel'}
         if self.is_hp:
             return 'homepage'
-        else:
-            return 'index' if self.type == 'centerpage' and (
-                self.sub_ressort == '' or self.ressort ==
-                'zeit-magazin') else replacements[self.type]
+        if self.is_advertorial:
+            return 'adv_index' if self.type == 'centerpage' else 'adv_artikel'
+        return 'index' if self.type == 'centerpage' and (
+            self.sub_ressort == '' or self.ressort ==
+            'zeit-magazin') else replacements[self.type]
 
     @zeit.web.reify
     def adcontroller_values(self):
