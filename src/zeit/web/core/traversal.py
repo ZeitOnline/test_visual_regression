@@ -156,9 +156,14 @@ class CenterPage(Traversable):
             try:
                 page_num = int(form['page'])
             except ValueError:
+                # page is not a number
                 raise pyramid.httpexceptions.HTTPNotFound()
-            if page_num > area.total_pages or page_num <= 0:
-                raise pyramid.httpexceptions.HTTPNotFound()
+            except TypeError:
+                # page is None
+                pass
+            else:
+                if page_num > area.total_pages or page_num <= 0:
+                    raise pyramid.httpexceptions.HTTPNotFound()
             area.page = form.page
 
 
