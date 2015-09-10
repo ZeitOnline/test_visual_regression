@@ -10,6 +10,8 @@ Change log for zeit.web
 1.66 (2015-09-10)
 -----------------
 
+- ZON-2164: Place12 before video on hp and cp_extra for AdPlace12
+
 - ZON-2176: Fix modified date
 
 - ZON-1340: Advertorial Article
