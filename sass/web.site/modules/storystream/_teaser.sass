@@ -4,12 +4,18 @@
 	padding: $vertical-space $cp-padding
 
 	&__title
-		font-size: em(16px)
+		font-size: remify(16px)
+		&--milestone
+			font-size: remify(16px)
+			line-height: remify(18px)
 
 	&__text
 		font-family: $font-franziska
-		font-size: remify(18px)
-		line-height: 1.4
+		font-size: remify(17px)
+		line-height: remify(24px)
+		&--milestone
+			font-size: remify(18px)
+			line-height: 1.4
 
 	&__date
 		background: $white
@@ -50,7 +56,9 @@
 			line-height: em(26px)
 
 		&__text
-			line-height: 1.5
+			line-height: remify(25px)
+			&--milestone
+				line-height: 1.5
 
 +respond-min($break-desktop-min)
 	.storystream-teaser
@@ -61,7 +69,10 @@
 			margin: 0
 
 		&__text
-			font-size: remify(20px)
+			font-size: remify(18px)
+			line-height: remify(26px)
+			&--milestone
+				font-size: remify(20px)
 
 		&__date
 			display: inline-block
