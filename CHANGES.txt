@@ -4,7 +4,7 @@ Change log for zeit.web
 1.66 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- QUICKFIX: Swap font files for Tablet Gothic
 
 
 1.65 (2015-09-10)
