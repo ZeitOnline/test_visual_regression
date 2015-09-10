@@ -188,6 +188,10 @@ class Base(object):
             return ''
 
     @zeit.web.reify
+    def is_advertorial(self):
+        return is_advertorial(self.context, self.request)
+
+    @zeit.web.reify
     def serie(self):
         if self.context.serie is None:
             return ''
