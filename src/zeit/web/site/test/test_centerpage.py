@@ -85,6 +85,16 @@ def test_buzz_mostshared_should_output_correct_titles(testbrowser):
     assert u'Zuwanderer haben häufiger Abitur' in titles[1].text
 
 
+def test_buzzboard_renders(testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    area = browser.cssselect('.cp-area--buzzboard')
+    assert len(area) == 1
+    board = area[0].cssselect('.buzzboard__table')
+    assert len(board) == 1
+    images = board[0].cssselect('.teaser-buzzboard__media')
+    assert len(images) == 4
+
+
 def test_tile7_is_rendered_on_correct_position(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     tile7_on_first_position = browser.cssselect(
