@@ -23,10 +23,11 @@
 		font-size: em(13px)
 		letter-spacing: $zon-letter-spacing-m
 		margin-left: remify(-15px)
-		padding: remify(8px 10px)
+		padding: remify(8px 10px 8px 3px)
 		&--milestone
 			background: #4c4f5f
 			color: $white
+			padding: remify(8px 10px)
 
 	&__link
 		color: $zon-red
@@ -63,7 +64,7 @@
 +respond-min($break-desktop-min)
 	.storystream-teaser
 		margin: 0 remify(90px)
-		padding: $vertical-space remify(70px)
+		padding: $vertical-space remify(90px)
 
 		&__title
 			margin: 0
@@ -71,8 +72,10 @@
 		&__text
 			font-size: remify(18px)
 			line-height: remify(26px)
+			margin: remify(5px 0 1em 0)
 			&--milestone
 				font-size: remify(20px)
+				margin: 1em 0
 
 		&__date
 			display: inline-block
@@ -88,5 +91,5 @@
 		&__media
 			margin-top: 0
 			position: absolute
-			right: remify(-140px)
+			right: remify(-160px)
 			top: 0
