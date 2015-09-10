@@ -14,6 +14,10 @@ from zeit.web.core.utils import to_int
 import zeit.web.site.view_centerpage
 
 
+def get_num(x):
+    return int(''.join(char for char in x.strip() if char.isdigit()))
+
+
 def test_centerpage_has_last_semantic_change_property(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/zeitonline')
@@ -47,47 +51,38 @@ def test_buzz_comments_should_render_correct_article_count(testbrowser):
     assert len(articles) == 3
 
 
-def test_buzz_comments_should_render_with_correct_scores(
-        testbrowser, mockserver_factory):
-    cp_counts = """<?xml version="1.0" encoding="UTF-8"?>
-    <nodes>
-        <node comment_count="129" url="/zeit-online/article/tagesspiegel"/>
-        <node comment_count="142" url="/blogs/nsu-blog-bouffier"/>
-        <node comment_count="110" url="/zeit-online/cp-content/serie_app_kritik"/>
-    </nodes>
-    """
-    mockserver_factory(cp_counts)
+def test_buzz_comments_should_render_with_correct_scores(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
-    media = browser.cssselect('.buzz-box--comments .teaser-buzz__commentcount')
-    assert [to_int(m.text) for m in media] == [129, 142, 110]
+    media = browser.cssselect('.buzz-box--comments .teaser-buzz__metadata')
+    assert [get_num(m.text_content()) for m in media] == [531, 461, 265]
 
 
 def test_buzz_comments_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     kicker = browser.cssselect('.buzz-box--comments .teaser-buzz__kicker')
     titles = browser.cssselect('.buzz-box--comments .teaser-buzz__title')
-    assert u'Gentrifizierung' in kicker[0].text
-    assert u'Das neue Heft \x96 im Video durchgeblättert' in titles[1].text
+    assert u'Asylbewerber' in kicker[0].text
+    assert u'Orbán verlangt Schließung der Grenzen' in titles[2].text
 
 
 def test_buzz_mostshared_should_render_correct_article_count(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
-    articles = browser.cssselect('.buzz-box--sharing article.teaser-buzz')
+    articles = browser.cssselect('.buzz-box--shared article.teaser-buzz')
     assert len(articles) == 3
 
 
 def test_buzz_mostshared_should_render_with_correct_scores(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
-    media = browser.cssselect('.buzz-box--sharing .teaser-buzz__metadata')
-    assert [to_int(m.text) for m in media] == [16674, 5780, 2391]
+    media = browser.cssselect('.buzz-box--shared .teaser-buzz__metadata')
+    assert [get_num(m.text_content()) for m in media] == [2357, 2346, 1227]
 
 
 def test_buzz_mostshared_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
-    kicker = browser.cssselect('.buzz-box--sharing .teaser-buzz__kicker')
-    titles = browser.cssselect('.buzz-box--sharing .teaser-buzz__title')
-    assert u'Jens Spahn' in kicker[0].text
-    assert u'Shakespeare im Kugelhagel' in title[1].text
+    kicker = browser.cssselect('.buzz-box--shared .teaser-buzz__kicker')
+    titles = browser.cssselect('.buzz-box--shared .teaser-buzz__title')
+    assert u'Studienwahl' in kicker[0].text
+    assert u'Zuwanderer haben häufiger Abitur' in titles[1].text
 
 
 def test_tile7_is_rendered_on_correct_position(testbrowser):
