@@ -4,6 +4,8 @@ Change log for zeit.web
 1.66 (unreleased)
 -----------------
 
+- ZON-2125: Assemble identical byline
+
 - QUICKFIX: Swap font files for Tablet Gothic
 
 
