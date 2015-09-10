@@ -1247,3 +1247,8 @@ def test_wrapped_features_are_triggered(testbrowser):
 def test_advertorial_page_has_advertorial_label(testbrowser):
     browser = testbrowser('/zeit-online/advertorial-index')
     assert browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
+
+
+def test_adtile12_from_cp_extra_is_there(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-centerpage')
+    assert browser.cssselect('#ad-desktop-12')
