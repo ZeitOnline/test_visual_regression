@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.63.4 (unreleased)
--------------------
+1.65 (unreleased)
+-----------------
+
+- ZON-2115: Add Meta Title, Description Ruleset for Keywordpages
+
+
+1.64 (2015-09-09)
+-----------------
+
+- ZON-1901: Verlagsnextread
 
 - ZON-2121: Add styles and scripts for Datenjournalismus
 
@@ -32,6 +40,7 @@ Change log for zeit.web
 - ZON-1990: Render feeds for newsfeed.zeit.de
 
 
+
 1.63.3 (2015-09-04)
 -------------------
 
@@ -57,7 +66,11 @@ Change log for zeit.web
 1.63 (2015-09-03)
 -----------------
 
+- ZON-2053: Resort and collapse comment replies
+
 - ZON-1960: Adcontroller for ZMO
+
+- MAINT: Polish comments preferences and parquet topic links
 
 - ZON-2053: Resort and collapse comment replies
 

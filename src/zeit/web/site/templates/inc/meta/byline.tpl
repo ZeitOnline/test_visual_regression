@@ -12,7 +12,7 @@
 
 {%- macro csv(obj) -%}
     {%- for type, item in obj -%}
-        {{ type | macro(item) }}
+        {{ type | macro(item) }}
         {%- if not loop.last -%}
             ,
         {% endif -%}
@@ -26,10 +26,10 @@
         {%- elif loop.last and loop.length > 1 %}
             und
         {%- endif %}
-        {{ type | macro(item) }}
+        {{ type | macro(item) }}
     {%- endfor %}
 {%- endmacro -%}
 
 {% for type, obj in byline -%}
-    {{ type | macro(obj) }}
+    {{ type | macro(obj) }}
 {%- endfor %}

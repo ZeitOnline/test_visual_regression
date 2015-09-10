@@ -1,0 +1,130 @@
+.nextread-advertisement
+	margin: remify(40px) (-$page-padding) 0 // margin-top until preceding elements are build
+
+	&__label
+		@extend %ad-label
+		margin-right: $page-padding
+
+	&__container-inner
+		border-width: 1px 0
+		border-color: $zon_light_grey
+		border-style: solid
+		padding: remify(10px) $page-padding remify(40px)
+		text-align: center
+
+	&__title,
+	&__text
+		+font-smoothing
+		letter-spacing: $zon-letter-spacing-s
+		margin: remify(8px) 0
+		text-align: left
+
+	&__title
+		color: #252525
+		font-size: remify(20px)
+		line-height: remify(22px)
+
+	&__text
+		color: $zon_dark_grey
+		font-size: remify(15px)
+		line-height: remify(17px)
+
+	&__media
+		background-color: $zon-seashell
+		margin: remify(20px) (-$page-padding)
+		height: remify(150px)
+
+	&__media-container
+		margin: 0 auto
+		width: remify(225px)
+
+	&__button
+		+zon-button-inky
+		border: none
+		opacity: 0.8
+		padding: remify(7px) 1em remify(6px)
+		&:hover
+			opacity: 1.0
+
+	&__text + &__button
+		margin-top: remify(8px)
+
++respond-min($break-tablet-min)
+	.nextread-advertisement
+		background-color: $zon-seashell
+		position: relative
+		height: remify(210px)
+
+		&__label
+			background: rgba(255, 255, 255, 0.8)
+			margin: 0
+			padding: remify(8px)
+			position: absolute
+			right: 0
+			top: 0
+			z-index: 2
+
+		&__container-outer
+			margin: 0 auto
+			padding-left: 0
+			padding-right: 0
+			position: relative
+			width: remify(660px)
+
+		&__container-inner
+			border: none
+			padding-left: 0
+			padding-right: 0
+			position: relative
+			text-align: left
+
+		&__title,
+		&__text
+			width: remify(330px)
+
+		&__title
+			font-size: remify(24px)
+			line-height: remify(27px)
+
+		&__text
+			font-size: remify(16px)
+			line-height: remify(18px)
+
+		&__media
+			height: remify(210px)
+
+		&__media-container
+			width: remify(315px)
+
+		&__media
+			margin: 0
+			position: absolute
+			right: 0
+			top: 0
+
+		&__button
+			margin-top: remify(12px)
+
++respond-min($break-desktop-min)
+	.nextread-advertisement
+		&__container-outer
+			position: initial
+
+		&__label
+			margin-right: 0
+
+		&__title,
+		&__text,
+		&__button
+			margin-left: 0
+
+		&__title,
+		&__text
+			width: remify(390px)
+
+		&__text
+			font-size: remify(16px)
+			line-height: remify(18px)
+
+		&__media
+			margin-right: remify(-60px)

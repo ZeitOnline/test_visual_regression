@@ -52,9 +52,9 @@ def lps_sort(context):
 
 
 def filter_and_sort_entries(context):
-    filter_news = filter(lambda c: '/news' not in c.uniqueId,
-                         zeit.content.cp.interfaces.ITeaseredContent(
-                            context))
+    filter_news = filter(
+        lambda c: '/news' not in c.uniqueId,
+        zeit.content.cp.interfaces.ITeaseredContent(context))
     return sorted(filter_news, key=lps_sort, reverse=True)
 
 
@@ -100,7 +100,7 @@ class Newsfeed(Base):
             E.webMaster('webmaster@zeit.de (Technik ZEIT ONLINE)'),
             E.image(
                 E.url(('http://images.zeit.de/bilder/elemente_01_'
-                                   '06/logos/homepage_top.gif')),
+                       '06/logos/homepage_top.gif')),
                 E.title(self.pagetitle),
                 E.link(self.request.route_url('home'))
                 )
@@ -126,13 +126,14 @@ class Newsfeed(Base):
                 teaser_image) else ''
 
             if variant:
-                description = (u'<a href="{}"><img style="float:left; '
-                               'margin-right:5px" src="{}"></a> {}').format(
-                                    content_url,
-                                    '{}{}'.format(
-                                        self.request.asset_url('/'),
-                                        variant.lstrip('/')),
-                                    content.teaserText)
+                description = (
+                    u'<a href="{}"><img style="float:left; '
+                    'margin-right:5px" src="{}"></a> {}').format(
+                        content_url,
+                        '{}{}'.format(
+                            self.request.asset_url('/'),
+                            variant.lstrip('/')),
+                        content.teaserText)
 
             item = E.item(
                 E.title(content.title),
