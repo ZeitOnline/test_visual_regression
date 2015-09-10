@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import urllib2
 
 import lxml.html
 import mock
@@ -191,6 +192,18 @@ def test_dynamic_centerpage_should_be_paginatable(testserver, testbrowser):
         '{}/dynamic/angela-merkel?p=2'.format(testserver.url))
     text = browser.cssselect('.pager__page.pager__page--current span')[0].text
     assert text == '2'
+
+
+def test_pagination_should_be_validated(testserver, testbrowser):
+    with pytest.raises(urllib2.HTTPError):
+        assert '404 Not Found' in testbrowser(
+            '{}/dynamic/angela-merkel?p=-1'.format(testserver.url)).headers
+    with pytest.raises(urllib2.HTTPError):
+        assert '404 Not Found' in testbrowser(
+            '{}/dynamic/angela-merkel?p=123'.format(testserver.url)).headers
+    with pytest.raises(urllib2.HTTPError):
+        assert '404 Not Found' in testbrowser(
+            '{}/dynamic/angela-merkel?p=1moep'.format(testserver.url)).headers
 
 
 def test_centerpage_markdown_module_is_rendered(jinja2_env):
