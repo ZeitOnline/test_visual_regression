@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.65 (unreleased)
+1.65 (2015-09-10)
 -----------------
 
 - ZON-1592: Label "Anzeige" according to "Verlagsangebot"
