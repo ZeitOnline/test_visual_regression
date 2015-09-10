@@ -1112,12 +1112,6 @@ def test_mobile_invisibility(testbrowser):
 def test_breakpoint_sniffer_script(
         selenium_driver, testserver, monkeypatch, screen_size):
 
-    def tpm(me):
-        return True
-
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
-
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('{}/zeit-online/slenderized-index'.format(testserver.url))

@@ -64,10 +64,6 @@ class Base(zeit.web.core.view.Base):
         return breadcrumbs
 
     @zeit.web.reify
-    def is_advertorial(self):
-        return zeit.web.core.view.is_advertorial(self.context, self.request)
-
-    @zeit.web.reify
     def meta_robots(self):
         # Try seo presets first
         if self.seo_robot_override:
