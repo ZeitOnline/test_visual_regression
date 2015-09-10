@@ -194,7 +194,7 @@ def test_dynamic_centerpage_should_be_paginatable(testserver, testbrowser):
     assert text == '2'
 
 
-def test_pagination_should_be_verified(testserver, testbrowser):
+def test_pagination_should_be_validated(testserver, testbrowser):
     with pytest.raises(urllib2.HTTPError):
         assert '404 Not Found' in testbrowser(
             '{}/dynamic/angela-merkel?p=-1'.format(testserver.url)).headers
