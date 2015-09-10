@@ -1,7 +1,7 @@
 {% set blockname = 'storystream-sharing' %}
 <div class="{{ blockname }}">
 	<div class="{{ blockname }}__container">
-		<a class="button {{ blockname }}__button" href="#">Folgen</a>
+		{#<a class="button {{ blockname }}__button" href="#">Folgen</a>#}
 		<a class="{{ blockname }}__link {{ blockname }}__link--facebook" href="#">
 			{{ lama.use_svg_icon('storystream-facebook', 'storystream-sharing__icon', request) }}
 		</a>
