@@ -24,7 +24,7 @@
 		display: inline-block
 		height: remify(38px)
 		opacity: 0.7
-		&:hover
+		+on-interaction
 			color: #fff
 			opacity: 1.0
 
@@ -32,9 +32,8 @@
 		border-left: 1px rgba(119, 119, 119, 0.7) solid
 
 	&__icon
-		color: inherit
 		height: 22px
-		margin: remify(9px) remify(12px)
+		margin: remify(9px 12px)
 		width: 22px
 
 +respond-min($break-tablet-min)
@@ -52,5 +51,3 @@
 		&__container
 			margin: 0 remify(90px)
 			padding: $vertical-space remify(70px)
-			// TODO: this is obsolete if the content is present
-			height: remify(75px)
