@@ -4,9 +4,13 @@ Change log for zeit.web
 1.65 (unreleased)
 -----------------
 
+- ZON-1592: Label "Anzeige" according to "Verlagsangebot"
+
 - ZON-2115: Add Meta Title, Description Ruleset for Keywordpages
 
 - ZON-2181: Validate page number from GET parameter
+
+- FIX: Inherit from newsfeed for all classes in view_feed
 
 
 1.64 (2015-09-09)

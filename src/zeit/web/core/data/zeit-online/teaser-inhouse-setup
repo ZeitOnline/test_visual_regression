@@ -58,19 +58,19 @@
   <body>
     <cluster visible="True" area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
       <region visible="True" hide-dupes="True" area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
-        <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="parquet-verlag" visible="True">
+        <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-inhouse" visible="True">
           <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
         </container>
       </region>
       <region visible="True" hide-dupes="True" area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor" title="Marginalspalte">
-        <container cp:type="teaser" module="parquet-verlag" visible="True" cp:__name__="id-052280d1-a006-4c44-b681-dc638ff8758a">
+        <container cp:type="teaser" module="zon-ad" visible="True" cp:__name__="id-052280d1-a006-4c44-b681-dc638ff8758a">
           <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
         </container>
       </region>
     </cluster>
     <cluster visible="True" area="id-bdfb0156-4df4-4bcd-bf1e-68609ef1a109" kind="parquet" title="ArneParquet">
       <region visible="True" hide-dupes="True" area="id-1ac0ac50-fe94-4431-baac-435cc2a934dd" kind="parquet" title="Parkett: Blog-Teaser">
-        <container cp:type="teaser" module="parquet-verlag" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5afa4cad1">
+        <container cp:type="teaser" module="zon-inhouse" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5afa4cad1">
           <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
         </container>
       </region>
