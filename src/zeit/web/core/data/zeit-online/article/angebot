@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/buchtipp/ishiguro/aufmacher-ishiguro/" type="jpg" align="left" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+    </image>
+    <author href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Wenke Husmann</display_name>
+    </author>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner_id">adv/randomhouse_buchtipp</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="cap_title">ANZEIGE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels">Angebote buchtipp</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Verlag</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-09-01T10:00:59.017641+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-09-01T10:02:01.344677+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-01T10:01:01.584489+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-09-01T10:02:01.344677+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-09-01T09:53:24.281402+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.krueger</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mobile_alternative">http://marktplatz.zeit.de/advertorial/buchtipp/ishiguro/index</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/angebote/buchtipp/ishiguro/5eb36fcf-4b2b-4749-913d-a5a5b4097fb3.tmp</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ADV</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Advertorial</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">ebdd22d402a04c3dad7ef33bbc70d370</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Angebote</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">buchtipp</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">3456</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="advertisement_title">IWC Schaffhausen</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="advertisement_text">Dies ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:16ab17d0-b75c-4f86-ba57-aa8e64c9b84c}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Kazuo Ishiguro</supertitle>
+    <title>Der begrabene Riese</title>
+    <subtitle>Drachen und Geister, Menschenfresser und Höllenhunde – in seinem neuen Roman nimmt Kazuo Ishiguro uns mit in das Britannien des frühen Mittelalters.</subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/gesellschaft/2015-02/crystal-meth-nancy-schmidt/" type="jpg" alt="Crystal Meth: Gesellschaft, Crystal Meth, Drogensucht, Drogenkonsum" align="left" publication-date="" expires="2015-05-13T11:46:39+00:00" layout="large" is_empty="False" title_local="Crystal Meth: Nancy braucht was Schnelles" alt_local="Crystal Meth: Gesellschaft, Crystal Meth, Drogensucht, Drogenkonsum" title="Crystal Meth: Nancy braucht was Schnelles">
+        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Nancy Schmidt auf einem Feld in ihrem Heimatort zwischen Gera und Jena</bu>
+        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" link="http://www.milosdjuric.com/">© Milos Djuric </copyright>
+      </image>
+      <p>Zwischen
+dem Bestseller "Was vom Tage übrig blieb" und dem neuen Roman von Kazuo Ishiguro
+liegen zehn Jahre. Der Autor war geschockt, als er das feststellte, und hat das
+Bedürfnis, sich zu rechtfertigen. Denn nachdem er angefangen hatte, "Der
+begrabene Riese" zu schreiben, gab er seiner Frau die ersten 80 Seiten zum
+Lesen. Ihr Urteil stand schnell fest: "Es ist fürchterlich!" Wie sollte der
+weltberühmte Autor, um dessen Stoffe sich die Filmemacher reißen und der für
+"Was vom Tage übrig blieb", den Booker Prize gewann, darauf reagieren? </p>
+      <p>Er
+folgte dem Rat seiner Frau, begann noch einmal von vorne, lenkte sich dann doch
+lieber eine Weile mit ganz anderen Projekten ab und schaffte es schließlich,
+seinen Roman völlig neu aufzuziehen. "Der begrabene Riese" nimmt den Leser mit
+in die Jahre 480 bis 500 nach Christus, als in Britannien die Römer abzogen und
+die Angelsachsen das Land noch nicht erobert hatten. Nach zahlreichen
+Bürgerkriegen ist die Insel verwüstet, und die Menschen müssen sich neu
+orientieren. Im Mittelpunkt des Romans stehen Axl und Beatrice, sie sind
+christliche Bretonen, die in ihrer Dorfgemeinschaft nicht mehr erwünscht sind.
+So lassen sie alles hinter sich und begeben <a href="#" name="_GoBack" target="_blank"/>sich auf die
+Suche nach ihrem Sohn, der viele Jahre zuvor weggezogen ist. Sie fühlen sich
+wie unter einer Dunstglocke, die ihnen die Erinnerung raubt, auch die an den
+eigenen Sohn. Über dem ganzen Land scheinen Nebelschwaden zu wabern, die dazu
+führen, dass die Menschen die schreckliche Vergangenheit vergessen.</p>
+      <p>Die
+lange Reise von Axl und Beatrice durch das kaum erschlossene Land ist
+gefährlich, in den düsteren Wäldern lauern Drachen und Geister, Ritter und
+geheimnisvolle Mönche, Menschenfresser und Höllenhunde. Und natürlich der
+begrabene Riese – wer sich dahinter verbirgt, muss der Leser selbst
+herausfinden. </p>
+      <infobox is_empty="False" href="http://xml.zeit.de/angebote/buchtipp/ishiguro/infobox-ishiguro" publication-date="" expires=""/>
+    </division>
+    <byline>Dies ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+    <division type="page" teaser="Erinnern oder Vergessen?">
+      <p>Ist
+der Roman ein Geschichts-Epos oder gar eine Fantasy-Erzählung? Das Buch hat
+Elemente von beidem, doch es ist viel mehr und passt in keine Schublade. <br/></p>
+      <p>Kazuo
+Ishiguro, der Engländer mit japanischen Wurzeln, ist bekannt für tiefgründige
+und zugleich verstörende Stoffe. In seinem Werk stellt er sich immer wieder die
+Frage: Wann sollte man sich an etwas erinnern – und wann ist es besser, zu
+vergessen? Sollte man lieber nach vorne oder zurück schauen? Mit seinem neuen
+Roman geht er dieser Problematik erneut auf den Grund, er will wissen, wie
+ganze Gesellschaften mit dem Vergessen und Erinnern umgehen und was es für ihre
+Identität bedeutet. Muss es eine Erinnerungskultur geben oder ist es ein Segen,
+traumatische Ereignisse wie in diesem Fall einen Völkermord zu vergessen? </p>
+      <p>Um
+sich nach Britannien zur Zeit des Frühmittelalters hineinzuversetzen, befasste der
+Bestseller-Autor sich intensiv mit dieser Zeit und erschafft so eine mystische
+Welt, in der die Liebe eines alternden Paares auf eine harte Probe gestellt
+wird. <br/></p>
+      <p>Kazuo Ishiguro zeigt auch in diesem Buch wieder, dass er ein exzellenter Kenner
+der menschlichen Psyche, ein hervorragender Rechercheur und ein Meister der
+Spannung ist. Und darüber hinaus hat er offensichtlich eine sehr kluge Frau,
+schließlich war sie es, die ihn zu dieser Höchstleistung anspornte.</p>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Kazuo Ishiguro</supertitle>
+    <title>Der begrabene Riese</title>
+    <text>Drachen und Geister, Menschenfresser und Höllenhunde – in seinem neuen Roman nimmt Kazuo Ishiguro uns mit in das Britannien des frühen Mittelalters.</text>
+  </teaser>
+</article>
