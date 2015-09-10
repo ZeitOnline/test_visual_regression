@@ -1,0 +1,95 @@
+.storystream-teaser
+	border-left: 1px $color-storystream-border solid
+	margin: 0 $cp-padding
+	padding: $vertical-space $cp-padding
+
+	&__title
+		font-size: remify(16px)
+		&--milestone
+			font-size: remify(16px)
+			line-height: remify(18px)
+
+	&__text
+		font-family: $font-franziska
+		font-size: remify(17px)
+		line-height: remify(24px)
+		&--milestone
+			font-size: remify(18px)
+			line-height: 1.4
+
+	&__date
+		background: $white
+		border-radius: em(4px)
+		font-size: em(13px)
+		letter-spacing: $zon-letter-spacing-m
+		margin-left: remify(-15px)
+		padding: remify(8px 10px 8px 3px)
+		&--milestone
+			background: #4c4f5f
+			color: $white
+			padding: remify(8px 10px)
+
+	&__link
+		color: $zon-red
+		font-family: $font-tabletgothic
+		font-size: 80%
+		text-transform: uppercase
+		white-space: nowrap
+		+link
+			border-bottom: 1px solid rgba($zon_grey, .4)
+		+on-interaction
+			border-bottom-color: rgba($zon_grey, .8)
+
+	&__media
+		margin: 1em 0
+		width: remify(140px)
+
++respond-min($break-tablet-min)
+	.storystream-teaser
+		margin: 0 $storystream-padding-tablet
+		padding: $vertical-space $storystream-padding-tablet
+
+		&__date
+			margin-left: remify(-35px)
+
+		&__title
+			font-size: em(20px)
+			line-height: em(26px)
+
+		&__text
+			line-height: remify(25px)
+			&--milestone
+				line-height: 1.5
+
++respond-min($break-desktop-min)
+	.storystream-teaser
+		margin: 0 remify(90px)
+		padding: $vertical-space remify(90px)
+
+		&__title
+			margin: 0
+
+		&__text
+			font-size: remify(18px)
+			line-height: remify(26px)
+			margin: remify(5px 0 1em 0)
+			&--milestone
+				font-size: remify(20px)
+				margin: 1em 0
+
+		&__date
+			display: inline-block
+			float: left
+			margin-left: remify(-115px)
+			padding: 0.4rem
+			text-align: center
+			width: remify(90px)
+
+		&__content
+			position: relative
+
+		&__media
+			margin-top: 0
+			position: absolute
+			right: remify(-160px)
+			top: 0

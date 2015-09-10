@@ -1,0 +1,56 @@
+.storystream-sharing
+	background-color: #41434D
+	position: relative
+
+	&__container
+		border-left: 1px #777 solid
+		height: remify(65px)
+		margin: 0 $storystream-padding-mobile
+		padding: remify(13px) $storystream-padding-mobile
+
+	// &__button
+	// 	background-color: rgba(0, 0, 0, 0.2)
+	// 	border-color: #999
+	// 	vertical-align: top
+	// 	+link
+	// 		color: #eee
+	// 	&:hover
+	// 		background-color: rgba(0, 0, 0, 0.5)
+	// 		border-color: #ccc
+	// 		color: #fff
+
+	&__link
+		color: #fff
+		display: inline-block
+		height: remify(38px)
+		opacity: 0.7
+		&:hover
+			color: #fff
+			opacity: 1.0
+
+	&__link + &__link
+		border-left: 1px rgba(119, 119, 119, 0.7) solid
+
+	&__icon
+		color: inherit
+		height: 22px
+		margin: remify(9px) remify(12px)
+		width: 22px
+
++respond-min($break-tablet-min)
+	.storystream-sharing
+		&__container
+			margin: 0 $storystream-padding-tablet
+			padding: $vertical-space $storystream-padding-tablet
+			// TODO: this is obsolete if the content is present
+			height: remify(75px)
+		&__link--whatsapp
+			display: none
+
++respond-min($break-desktop-min)
+	.storystream-sharing
+		&__container
+			margin: 0 remify(90px)
+			padding: $vertical-space remify(70px)
+			// TODO: this is obsolete if the content is present
+			height: remify(75px)
