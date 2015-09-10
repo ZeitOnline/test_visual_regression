@@ -55,15 +55,15 @@ $buzzboard-icon-height: em(12px, $buzzboard-label-font-size)
 			padding: em(20px) 0
 			// word-wrap: break-word
 	&__icon
-		height: $buzzboard-icon-height
+		height: round-to-precision($buzzboard-icon-height)
 		margin-right: em(3px, $buzzboard-label-font-size)
 		vertical-align: em(-1px, $buzzboard-label-font-size)
 		width: em(21px, $buzzboard-label-font-size)
 		&--comment
-			width: round(14 / 12 * 10000) / 10000 * $buzzboard-icon-height
+			width: round-to-precision(14 / 12 * $buzzboard-icon-height)
 		&--read
-			width: round(21 / 11 * 10000) / 10000 * $buzzboard-icon-height
+			width: round-to-precision(22 / 11 * $buzzboard-icon-height)
 		&--shared
-			width: round(17 / 12 * 10000) / 10000 * $buzzboard-icon-height
+			width: round-to-precision(17 / 12 * $buzzboard-icon-height)
 		&--trend
-			width: round(19 / 12 * 10000) / 10000 * $buzzboard-icon-height
+			width: round-to-precision(19 / 12 * $buzzboard-icon-height)
