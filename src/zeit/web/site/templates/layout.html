@@ -104,7 +104,7 @@
     {% endif %}
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
-    
+
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
 
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
@@ -148,7 +148,7 @@
                 {# mobile ad place 1 #}
                 {{ lama.adplace(view.banner(1), view, mobile=True) }}
             {% endblock adplace_billboard %}
-            <main class="{{ 'main' |  with_mods(view.type) }}" id="main" role="main" itemprop="mainContentOfPage">
+            <main class="{{ 'main' | with_mods(view.type) }}" id="main" role="main" itemprop="mainContentOfPage">
                 {% block main %}{% endblock main %}
                 {{ lama.adplace(view.banner(8), view, mobile=True) }}
             </main>

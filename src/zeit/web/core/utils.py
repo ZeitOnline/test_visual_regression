@@ -6,11 +6,23 @@ import grokcore.component
 import jinja2
 import peak.util.proxies
 import zope.component
+import beaker.cache
 
 import zeit.cms.interfaces
 
 
 log = logging.getLogger(__name__)
+
+
+@beaker.cache.cache_region('short_term', 'whitelist')
+def _whitelist_by_url_value():
+    whitelist = zope.component.getUtility(
+        zeit.cms.tagging.interfaces.IWhitelist)
+    return {tag.url_value: tag for tag in whitelist.values()}
+
+
+def tag_by_url_value(tag_url_value):
+    return _whitelist_by_url_value().get(tag_url_value, None)
 
 
 def fix_misrepresented_latin(val):
