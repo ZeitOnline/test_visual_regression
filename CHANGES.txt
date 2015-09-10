@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - FIX: Fix wrong ZEAR rule at noindex setting
 
+- ZON-2176: Fix modified date
+
 
 1.63.3 (2015-09-04)
 -------------------

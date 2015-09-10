@@ -535,7 +535,8 @@ class Content(Base):
         if self.context.product and self.context.product.show == 'issue':
             date = u'ver\u00F6ffentlicht am '
         date += first_released
-        if self.date_last_published_semantic:
+        if self.date_last_published_semantic and \
+                self.date_last_published_semantic != self.date_first_released:
             date = u'{} ({} am {})'.format(
                 date,
                 self.last_modified_wording,

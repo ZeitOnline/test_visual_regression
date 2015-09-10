@@ -715,3 +715,9 @@ def test_imported_article_has_special_meta_robots(
     article_view = zeit.web.site.view_article.Article(context, mock.Mock())
     assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
         'wrong robots for none product article')
+
+
+def test_article_doesnt_show_modified_date(testbrowser):
+    select = testbrowser('/zeit-online/article/01').cssselect
+    date_string = select('.metadata__date')[0].text
+    assert date_string == '27. Mai 2015, 19:11 Uhr'
