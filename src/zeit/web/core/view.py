@@ -19,6 +19,7 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.content.text.interfaces
+import zeit.cms.tagging.interfaces
 
 import zeit.web
 import zeit.web.core.article
@@ -34,6 +35,10 @@ def known_content(resource):
     return (zeit.content.article.interfaces.IArticle.providedBy(resource) or
             zeit.content.gallery.interfaces.IGallery.providedBy(resource) or
             zeit.content.video.interfaces.IVideo.providedBy(resource))
+
+
+def is_advertorial(context, request):
+    return getattr(context, 'product_text', None) == 'Advertorial'
 
 
 def redirect_on_trailing_slash(request):
@@ -63,6 +68,18 @@ class Base(object):
     pagetitle_suffix = u''
 
     def __call__(self):
+        # to avoid circular imports
+        import zeit.web.site.view_feed
+
+        # XXX: Since we do not have a configuration based on containments
+        # for our views, this is necessary to control, that only explicitly
+        # configured views, will render an RSS feed on newsfeed.zeit.de
+        # host header (RD, 2015-09)
+        host = self.request.headers.get('host', '')
+        if re.match('newsfeed(\.staging)?\.zeit\.de', host) and not (
+                issubclass(type(self), zeit.web.site.view_feed.Base)):
+            raise pyramid.httpexceptions.HTTPNotFound()
+
         redirect_on_trailing_slash(self.request)
         redirect_on_cp2015_suffix(self.request)
         time = zeit.web.core.cache.ICachingTime(self.context)
@@ -315,6 +332,29 @@ class Base(object):
     def supertitle(self):
         return self.context.supertitle
 
+    def get_topic_meta(self, data_type):
+
+        title = self.title
+        whitelist_data = zeit.web.core.sources.whitelist_meta
+
+        try:
+            url_value = self.request.path.split('/').pop()
+            entity_type = zeit.web.core.utils.tag_by_url_value(
+                url_value).entity_type
+            if entity_type == 'free':
+                entity_type = 'Subject'
+        except:
+            return title + whitelist_data[0]['post_' + data_type]
+
+        for data in whitelist_data:
+            if data['category'] == entity_type and title:
+                post = data['post_' + data_type]
+                try:
+                    return data['pre_' + data_type] + title + post
+                except:
+                    return title + post
+        return title + whitelist_data[0]['post_' + data_type]
+
     @zeit.web.reify
     def pagetitle(self):
         try:
@@ -323,6 +363,9 @@ class Base(object):
         except (AssertionError, TypeError):
             title = ': '.join([t for t in (self.supertitle, self.title) if t])
         if title:
+            if self._is_keyword_page:
+                # special rules for keywordpages
+                return self.get_topic_meta('title')
             return title + (u'' if self.is_hp else self.pagetitle_suffix)
         return self.seo_title_default
 
@@ -333,7 +376,16 @@ class Base(object):
             assert desc
         except (AssertionError, TypeError):
             desc = self.context.subtitle
+            if self._is_keyword_page:
+                # special rules for keywordpages
+                return self.get_topic_meta('desc')
         return desc or self.seo_title_default
+
+    @property
+    def _is_keyword_page(self):
+        # XXX Make types configurable?
+        return zeit.content.cp.interfaces.ICenterPage.providedBy(
+            self.context) and self.context.type in ['keywordpage', 'topicpage']
 
     @zeit.web.reify
     def ranked_tags(self):

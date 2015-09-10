@@ -58,7 +58,7 @@ def test_image_download_from_brightcove_assets(appbrowser):
         zeit.cms.interfaces.ICMSContent(
             'http://xml.zeit.de/video/2014-01/3035864892001'))
     assert ''.join(result.app_iter) == group['wide'].open().read()
-    assert result.headers['Content-Length'] == '481006'
+    assert result.headers['Content-Length'] == '307690'
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
         'inline; filename="imagegroup.jpeg"')
@@ -451,3 +451,9 @@ def test_variant_source_should_raise_keyerror_for_faulty_specs(application):
         'http://xml.zeit.de/zeit-online/cp-content/ig-1')
     with pytest.raises(KeyError):
         vs.factory.find(group, 'extra-foo')
+
+
+def test_img_src_should_contain_fallback_size(testbrowser):
+    b = testbrowser('/zeit-online/slenderized-index')
+    assert b.cssselect(
+        'img[src$="/filmstill-hobbit-schlacht-fuenf-hee/wide__822x462"]')

@@ -480,6 +480,11 @@ def test_nextread_is_responsive(testserver, selenium_driver, screen_size):
         assert nextread.size.get('height') < 450
 
 
+def test_publisher_nextread_on_article_has_own_template(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-verlagsnextread')
+    assert len(browser.cssselect('.nextread-advertisement')) == 1
+
+
 def test_zon_nextread_teaser_block_has_teasers_available(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/02')
@@ -717,7 +722,13 @@ def test_imported_article_has_special_meta_robots(
         'wrong robots for none product article')
 
 
+<<<<<<< HEAD
 def test_article_doesnt_show_modified_date(testbrowser):
     select = testbrowser('/zeit-online/article/01').cssselect
     date_string = select('.metadata__date')[0].text
     assert date_string == '27. Mai 2015, 19:11 Uhr'
+=======
+def test_video_in_article_is_there(testbrowser):
+    article = testbrowser('/zeit-online/article/zeit')
+    assert len(article.cssselect('.video-player__iframe')) == 1
+>>>>>>> master

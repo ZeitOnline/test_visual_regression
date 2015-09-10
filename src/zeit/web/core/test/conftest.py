@@ -92,7 +92,7 @@ settings = {
         'egg://zeit.web.core/data/config/series.xml'),
     'vivi_zeit.cms_task-queue-async': 'not-applicable',
     'vivi_zeit.cms_whitelist-url': (
-        'egg://zeit.cms.tagging.tests/whitelist.xml'),
+        'egg://zeit.web.core/data/config/whitelist.xml'),
     'vivi_zeit.web_iqd-mobile-ids': (
         'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
     'vivi_zeit.web_image-scales': (
@@ -144,6 +144,8 @@ settings = {
         'egg://zeit.web.core/data/config/gallery-types.xml'),
     'vivi_zeit.web_series-source': (
         'egg://zeit.web.core/data/config/series.xml'),
+    'vivi_zeit.web_whitelist-meta-source': (
+        'egg://zeit.web.core/data/config/whitelist_meta.xml'),
     'vivi_zeit.web_blacklist-url': (
         'egg://zeit.web.core/data/config/blacklist.xml'),
     'vivi_zeit.imp_scale-source': 'egg://zeit.web.core/data/config/scales.xml',
@@ -159,7 +161,6 @@ settings = {
     'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
     'vivi_zeit.content.video_source-serie': (
         'egg://zeit.web.core/data/config/video-serie.xml'),
-
     'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
 
     'vivi_zeit.solr_solr-url': 'http://mock.solr',

@@ -50,15 +50,21 @@
     <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
     <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
 
+    {% block css_lte_8_link %}
     <!--[if lte IE 8]>
         <link href="{{ request.asset_url('css/web.site/all-old-ie.css') }}" media="screen" rel="stylesheet" type="text/css">
     <![endif]-->
+    {% endblock css_lte_8_link %}
+    {% block css_link %}
     <!--[if gt IE 8]><!-->
         <link href="{{ request.asset_url('css/web.site/screen.css') }}" media="screen" rel="stylesheet" type="text/css">
     <!--<![endif]-->
+    {% endblock css_link %}
+    {% block css_lte9_navi_link %}
     <!--[if lte IE 9]>
         <link href="{{ request.asset_url('css/web.site/ie-navi.css') }}" media="screen" rel="stylesheet" type="text/css">
     <![endif]-->
+    {% endblock css_lte9_navi_link %}
 
     {%- include "zeit.web.core:templates/inc/inline_js/library.html" ignore missing -%}
     {%- include "zeit.web.core:templates/inc/meta/date.html" ignore missing -%}
@@ -67,7 +73,8 @@
     {# Modernizr -#}
     <script src="{{ request.asset_url('js/vendor/modernizr-custom.js') }}"></script>
     {# SVG4everybody TODO: replace Grunticon completely, check IE8 Fallback -#}
-    <script src="{{ request.asset_url('js/vendor/svg4everybody.min.js') }}"></script>
+    <script src="{{ request.asset_url('js/vendor/svg4everybody.legacy.js') }}"></script>
+    <script>svg4everybody();</script>
     {# Grunticon SVG -#}
     <script>
         {%- include "zeit.web.static:css/icons/grunticon.loader.js" ignore missing -%}
@@ -97,7 +104,7 @@
     {% endif %}
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
-    
+
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
 
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
@@ -141,7 +148,7 @@
                 {# mobile ad place 1 #}
                 {{ lama.adplace(view.banner(1), view, mobile=True) }}
             {% endblock adplace_billboard %}
-            <main class="{{ 'main' |  with_mods(view.type) }}" id="main" role="main" itemprop="mainContentOfPage">
+            <main class="{{ 'main' | with_mods(view.type) }}" id="main" role="main" itemprop="mainContentOfPage">
                 {% block main %}{% endblock main %}
                 {{ lama.adplace(view.banner(8), view, mobile=True) }}
             </main>
