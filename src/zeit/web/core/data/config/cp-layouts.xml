@@ -39,7 +39,13 @@
         id="zon-inhouse"
         title="Verlagsangebot"
         image_pattern="zon-thumbnail"
-        areas="major minor ranking parquet"
+        areas="solo duo major minor ranking parquet"
+        />
+    <layout
+        id="zon-ad"
+        title="Anzeige"
+        image_pattern="zon-thumbnail"
+        areas="solo duo major minor ranking parquet"
         />
     <!-- formally known as zon-fullwidth-onimage/zon-fullwidth -->
     <layout
@@ -69,7 +75,6 @@
         image_positions="true"
         areas="parquet"
         />
-
     <layout
         id="zon-newsteaser"
         title="Kurzteaser (für News)"
@@ -210,14 +215,6 @@
         available="zeit.web.core.interfaces.IInternalUse"
         />
     <layout
-        id="parquet-verlag"
-        title="Parkett – Verlagsangebot"
-        image_pattern="220x124"
-        image_positions="true"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.web.core.interfaces.IInternalUse"
-        />
-    <layout
         id="parquet-printteaser"
         title="Parkett – Print-Teaser/Blick in die Zeit"
         image_pattern="220x124"
@@ -232,9 +229,6 @@
         areas="solo duo major minor ranking parquet"
         available="zeit.web.core.interfaces.IInternalUse"
         />
-
-
-
     <layout
         id="zmo-leader-fullwidth"
         title="ZMO Vollbreiter Aufmacher"
@@ -242,7 +236,6 @@
         areas="solo duo major minor ranking parquet"
         available="zeit.magazin.interfaces.IZMOContent"
     />
-
     <layout
         id="zmo-leader-fullwidth-light"
         title="ZMO Vollbreiter Aufmacher (helles Bild)"

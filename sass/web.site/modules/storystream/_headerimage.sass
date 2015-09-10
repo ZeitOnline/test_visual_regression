@@ -1,0 +1,88 @@
+.storystream-headerimage
+	+transform-style(preserve-3d)
+	position: relative
+	&__media
+		background-color: rgb(0, 15, 20) // placeholder for image, same as default for +teaser-image-dark-overlay
+		height: 0
+		margin: 0
+		padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+		+respond-min($break-tablet-min)
+			padding-bottom: 100% / 7 * 2 // image variant 'panorama'
+	&__media-container
+		+teaser-image-dark-overlay($angle: 0deg)
+
+	&__container
+		+font-smoothing
+		+teaser-image-text-shadow
+		border-left: 1px #777 solid
+		bottom: 0
+		margin: remify(26px) $storystream-padding-mobile 0 $storystream-padding-mobile
+		padding: 0 $storystream-padding-mobile $vertical-space $storystream-padding-mobile
+		position: absolute
+		top: 0
+
+	&__kicker
+		color: $zon_lighter_grey
+		font-size: remify(15px)
+		letter-spacing: $zon-letter-spacing-m
+		line-height: remify(17px)
+		position: absolute
+		top: remify(-6px)
+		&:before
+			color: #eee
+			content: '\2B24' // ⬤ = Black large circle
+			display: block
+			font-size: remify(9px)
+			left: remify(-16px)
+			position: absolute
+
+	&__title
+		color: $white
+		font-family: $font-franziska
+		font-style: italic
+		font-size: remify(28px)
+		line-height: remify(34px)
+		margin: remify(16px 0 12px 0)
+		+respond-min($break-tablet-min)
+			font-size: remify(32px)
+
+	&__update
+		color: $zon_light_grey
+		font-size: remify(15px)
+		letter-spacing: $zon-letter-spacing-s
+		line-height: remify(17px)
+	&__updateicon
+		color: inherit
+		height: remify(16px)
+		margin-right: 0.1rem
+		vertical-align: baseline
+		width: remify(16px)
+
++respond-min($break-tablet-min)
+	.storystream-headerimage
+		&__container
+			margin: $storystream-padding-tablet $storystream-padding-tablet 0 $storystream-padding-tablet
+			padding: 0 $storystream-padding-tablet $vertical-space $storystream-padding-tablet
+			top: initial
+		&__kicker
+			font-size: remify(16px)
+			line-height: remify(20px)
+			&:before
+				font-size: remify(11px)
+				left: remify(-33px)
+				top: remify(-1px)
+		&__title
+			font-size: remify(48px)
+			line-height: remify(58px)
+
++respond-min($break-desktop-min)
+	.storystream-headerimage
+		&__container
+			margin: $storystream-padding-tablet remify(90px) 0 remify(90px)
+			padding: 0 remify(70px) $vertical-space remify(70px)
+		&__title
+			font-size: remify(54px)
+			line-height: remify(65px)
+		&__kicker
+			&:before
+				left: remify(-77px)
