@@ -151,6 +151,14 @@ class CenterPage(Traversable):
                 form = zeit.web.site.module.search_form.Form(tdict['context'])
 
             form['page'] = tdict['request'].GET.get('p')
+
+            # Validate page number
+            try:
+                page_num = int(form['page'])
+            except ValueError:
+                raise pyramid.httpexceptions.HTTPNotFound()
+            if page_num > area.total_pages or page_num <= 0:
+                raise pyramid.httpexceptions.HTTPNotFound()
             area.page = form.page
 
 

@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2115: Add Meta Title, Description Ruleset for Keywordpages
 
+- ZON-2181: Validate page number from GET parameter
+
 
 1.64 (2015-09-09)
 -----------------
