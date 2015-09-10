@@ -1,11 +1,14 @@
 .storystream-summary
-	padding: 0 $cp-padding
-	font-size: em(18px)
-	line-height: 1.4
-	margin-bottom: remify(20px)
+	padding: 0 $storystream-padding-mobile
+	&__container
+		max-width: remify(640px)
+		font-size: em(18px)
+		line-height: 1.4
+		margin: 0 auto remify(20px)
+
 	+respond-min($break-tablet-min)
 		line-height: 1.5
-		padding: 0 remify(55px)
+		padding: 0 $storystream-padding-tablet
 	+respond-min($break-desktop-min)
 		font-size: em(20px)
-		padding: 0 remify(90px)
+		padding: 0 $storystream-padding-desktop-outer

@@ -1,6 +1,10 @@
 .storystream-markup
 	background-color: $zon_lighter_grey
-	padding: $vertical-space $cp-padding
+	padding: $vertical-space $storystream-padding-mobile
+
+	&__content
+		max-width: remify(640px)
+		margin: 0 auto
 
 	&__title
 		font-size: em(18px)
@@ -18,7 +22,7 @@
 
 +respond-min($break-tablet-min)
 	.storystream-markup
-		padding: $vertical-space remify(55px)
+		padding: $vertical-space $storystream-padding-tablet
 
 		&__title
 			font-size: em(21px)
@@ -38,4 +42,4 @@
 
 +respond-min($break-desktop-min)
 	.storystream-markup
-		padding: $vertical-space remify(180px) $vertical-space remify(160px)
+		padding: $vertical-space $storystream-padding-desktop-outer

@@ -1,12 +1,24 @@
 .storystream-sharing
 	background-color: #41434D
-	position: relative
+	padding: 0 $storystream-padding-mobile
 
 	&__container
-		border-left: 1px #777 solid
-		height: remify(65px)
-		margin: 0 $storystream-padding-mobile
-		padding: remify(13px) $storystream-padding-mobile
+		padding: 0 $storystream-padding-mobile
+
+	&__content
+		margin: 0 auto
+		max-width: remify(640px)
+		padding: remify(13px 0)
+		position: relative
+		&:after
+			content: ''
+			position: absolute
+			width: 1px
+			height: 100%
+			background-color: $color-storystream-border
+			left: -$storystream-padding-mobile
+			top: 0
+			z-index: 1
 
 	// &__button
 	// 	background-color: rgba(0, 0, 0, 0.2)
@@ -38,16 +50,14 @@
 
 +respond-min($break-tablet-min)
 	.storystream-sharing
-		&__container
-			margin: 0 $storystream-padding-tablet
-			padding: $vertical-space $storystream-padding-tablet
-			// TODO: this is obsolete if the content is present
-			height: remify(75px)
+		padding: 0 $storystream-padding-tablet
+		&__content:after
+			left: -$storystream-padding-tablet
 		&__link--whatsapp
 			display: none
 
 +respond-min($break-desktop-min)
 	.storystream-sharing
-		&__container
-			margin: 0 remify(90px)
-			padding: $vertical-space remify(70px)
+		padding: 0 $storystream-padding-desktop-outer
+		&__content:after
+			left: -$storystream-padding-desktop-inner

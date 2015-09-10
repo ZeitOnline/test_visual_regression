@@ -1,14 +1,29 @@
 .storystream-scope
 	background-color: #f6f6f6
+	padding: 0 $storystream-padding-mobile
+
 	&__container
-		border-left: 1px $color-storystream-border solid
+		padding: 0 $storystream-padding-mobile
+
+	&__content
 		color: #999
 		font-size: em(13px)
 		letter-spacing: $zon-letter-spacing-l
-		line-height: 170%
-		margin: 0 $storystream-padding-mobile
-		padding: $vertical-space $storystream-padding-mobile
+		line-height: 1.70%
+		margin: 0 auto
+		max-width: remify(640px)
+		padding: $vertical-space 0
+		position: relative
 		text-transform: uppercase
+		&:after
+			content: ''
+			position: absolute
+			width: 1px
+			height: 100%
+			background-color: $color-storystream-border
+			left: -$storystream-padding-mobile
+			top: 0
+			z-index: 1
 	&__link,
 	&__number
 		color: #444
@@ -32,12 +47,12 @@
 
 +respond-min($break-tablet-min)
 	.storystream-scope
-		&__container
-			margin: 0 $storystream-padding-tablet
-			padding: $vertical-space $storystream-padding-tablet
+		padding: 0 $storystream-padding-tablet
+		&__content:after
+			left: -$storystream-padding-tablet
 
 +respond-min($break-desktop-min)
 	.storystream-scope
-		&__container
-			margin: 0 remify(90px)
-			padding: $vertical-space remify(70px)
+		padding: 0 $storystream-padding-desktop-outer
+		&__content:after
+			left: -$storystream-padding-desktop-inner

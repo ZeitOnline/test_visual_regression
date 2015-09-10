@@ -8,14 +8,38 @@
 	&__media-container
 		+teaser-image-dark-overlay($angle: 0deg)
 
+	&__wrapper
+		padding: 0 $storystream-padding-mobile
+		position: absolute
+		bottom: 0
+		width: 100%
+
 	&__container
+		padding: 0 $storystream-padding-mobile
+
+	&__content
 		+font-smoothing
 		+teaser-image-text-shadow
-		border-left: 1px #777 solid
-		bottom: 0
-		margin: remify(26px) $storystream-padding-mobile 0 $storystream-padding-mobile
-		padding: 0 $storystream-padding-mobile $vertical-space $storystream-padding-mobile
-		position: absolute
+		margin: 0 auto
+		max-width: remify(640px)
+		position: relative
+		&:before
+			color: #eee
+			content: '\2B24' // ⬤ = Black large circle
+			display: block
+			font-size: remify(9px)
+			left: -$storystream-padding-mobile
+			margin: remify(-5px 0 0 -5px)
+			position: absolute
+		&:after
+			content: ''
+			position: absolute
+			width: 1px
+			height: 100%
+			background-color: $color-storystream-border
+			left: -$storystream-padding-mobile
+			top: 0
+			z-index: 1
 
 	&__kicker
 		color: $zon_lighter_grey
@@ -24,13 +48,13 @@
 		line-height: remify(17px)
 		position: absolute
 		top: remify(-6px)
-		&:before
-			color: #eee
-			content: '\2B24' // ⬤ = Black large circle
-			display: block
-			font-size: remify(9px)
-			left: remify(-16px)
-			position: absolute
+		// &:before
+		// 	color: #eee
+		// 	content: '\2B24' // ⬤ = Black large circle
+		// 	display: block
+		// 	font-size: remify(9px)
+		// 	left: -$storystream-padding-mobile
+		// 	position: absolute
 
 	&__title
 		color: $white
@@ -38,15 +62,16 @@
 		font-style: italic
 		font-size: remify(28px)
 		line-height: remify(34px)
-		margin: remify(16px 0 12px 0)
-		+respond-min($break-tablet-min)
-			font-size: remify(32px)
+		margin: remify(16px 0 0)
+		padding: remify(20px 0)
 
 	&__update
 		color: $zon_light_grey
+		display: inline-block
 		font-size: remify(15px)
 		letter-spacing: $zon-letter-spacing-s
 		line-height: remify(17px)
+		padding-bottom: 1em
 	&__updateicon
 		color: inherit
 		height: remify(16px)
@@ -56,28 +81,29 @@
 
 +respond-min($break-tablet-min)
 	.storystream-headerimage
-		&__container
-			margin: $storystream-padding-tablet $storystream-padding-tablet 0 $storystream-padding-tablet
-			padding: 0 $storystream-padding-tablet $vertical-space $storystream-padding-tablet
+		&__wrapper
+			padding: 0 $storystream-padding-tablet
+		&__content:before,
+		&__content:after
+			left: -$storystream-padding-tablet
+		&__text
+			padding: 0 $storystream-padding-tablet
 		&__kicker
 			font-size: remify(16px)
 			line-height: remify(20px)
-			&:before
-				font-size: remify(11px)
-				left: remify(-33px)
-				top: remify(-1px)
 		&__title
 			font-size: remify(48px)
 			line-height: remify(58px)
 
 +respond-min($break-desktop-min)
 	.storystream-headerimage
-		&__container
-			margin: $storystream-padding-tablet remify(90px) 0 remify(90px)
-			padding: 0 remify(70px) $vertical-space remify(70px)
+		&__wrapper:after
+			padding: 0 $storystream-padding-desktop-outer
+		&__content:before,
+		&__content:after
+			left: -$storystream-padding-desktop-inner
+		&__text
+			padding: 0 $storystream-padding-desktop-inner
 		&__title
 			font-size: remify(54px)
 			line-height: remify(65px)
-		&__kicker
-			&:before
-				left: remify(-77px)
