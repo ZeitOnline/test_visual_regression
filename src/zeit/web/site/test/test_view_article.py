@@ -729,10 +729,11 @@ def test_video_in_article_is_there(testbrowser):
 
 def test_advertorial_marker_is_returned_correctly():
     content = mock.Mock()
-    content.cap_title = 'YYY'
-    content.byline = 'XXX'
+    content.advertisement_title = 'YYY'
+    content.advertisement_text = 'XXX'
+    content.cap_title = 'ZZZ'
     view = zeit.web.site.view_article.Article(content, mock.Mock())
-    assert view.advertorial_marker == ('YYY', 'XXX')
+    assert view.advertorial_marker == ('YYY', 'XXX', 'Zzz')
 
 
 def test_advertorial_marker_is_present(testbrowser):
@@ -740,3 +741,4 @@ def test_advertorial_marker_is_present(testbrowser):
     assert len(browser.cssselect('.advertorial-marker')) == 1
     assert len(browser.cssselect('.advertorial-marker__title')) == 1
     assert len(browser.cssselect('.advertorial-marker__text')) == 1
+    assert len(browser.cssselect('.advertorial-marker__label')) == 1

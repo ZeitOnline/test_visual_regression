@@ -33,6 +33,8 @@ def mock_ad_view(application):
             self.serie = serienname
             context = mock.Mock()
             context.banner_id = banner_id
+            request = mock.Mock()
+            self.request = request
             self.context = context
 
     return MockAdView
@@ -217,10 +219,7 @@ def test_banner_channel_mapping_should_apply_first_rule(mock_ad_view):
 def test_banner_channel_mapping_should_apply_second_rule(mock_ad_view):
     assert mock_ad_view(
         'centerpage', 'angebote', '', serienname='meh').banner_channel == (
-            'angebote/meh/centerpage')
-    assert mock_ad_view(
-        'centerpage', 'angebote', '', serienname='a k').banner_channel == (
-            'angebote/a_k/centerpage')
+        'angebote/adv/centerpage')
 
 
 def test_banner_channel_mapping_should_apply_third_rule(mock_ad_view):

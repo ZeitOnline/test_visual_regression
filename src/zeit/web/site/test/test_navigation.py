@@ -21,6 +21,7 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     mock_request.route_url.return_value = 'http://www.zeit.de/'
     mock_view.request = mock_request
     mock_request.registry.settings.sso_activate = False
+    mock_view.is_advertorial = False
     html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect
 
