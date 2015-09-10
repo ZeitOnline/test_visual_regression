@@ -18,7 +18,7 @@
 		(which would happen if a was the child which gets a slash as :after-content)
 	#}
 	<span>
-		{% set comments_string = view.comments.comment_count | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
+		{% set comments_string = view.comments.comment_count | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
 		<a class="metadata__commentcount js-update-commentcount" href="#comments" title="Kommentare anzeigen">{{ comments_string }}</a>
 	</span>
 {% endif %}
