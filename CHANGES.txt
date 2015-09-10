@@ -4,6 +4,8 @@ Change log for zeit.web
 1.65 (unreleased)
 -----------------
 
+- ZON-1340: Advertorial Article
+
 - ZON-2115: Add Meta Title, Description Ruleset for Keywordpages
 
 
