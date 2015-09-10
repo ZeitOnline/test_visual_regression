@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <centerpage type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <head>
         <header_image/>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
         <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-        <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner_id">adv/randomhouse_buchtipp</attribute>
         <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
         <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
         <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-        <attribute ns="http://namespaces.zeit.de/CMS/document" name="cap_title">VERLAGSANGEBOT</attribute>
         <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:03.346120+00:00</attribute>
         <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:09:09.014473+00:00</attribute>
         <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:08:09.170784+00:00</attribute>
@@ -24,11 +22,10 @@
         <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
         <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
-        <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Advertorial</attribute>
+        <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
         <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
         <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Angebote</attribute>
-        <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">IWC Schaffhausen</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Politik</attribute>
         <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
         <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
@@ -37,8 +34,6 @@
         <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
         <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
         <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
-        <attribute ns="http://namespaces.zeit.de/CMS/document" name="advertisement_title">Buchtipp</attribute>
-        <attribute ns="http://namespaces.zeit.de/CMS/document" name="advertisement_text">Dies ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</attribute>
         <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
@@ -69,12 +64,19 @@
     </head>
     <body>
         <title>CP-Editor 0.4</title>
-        <cluster visible="True" visible_mobile="True" area="id-8458d4a8-7cee-4b15-be25-0e0e36e327cd" kind="solo">
-          <region visible="True" visible_mobile="True" hide-dupes="True" area="id-0b68c298-c9de-4a92-b0f4-d1ac839b2ae9" kind="solo">
-            <container cp:type="headerimage" module="headerimage" visible="True" visible_mobile="True" cp:__name__="id-3e6bf101-bd4b-49a7-a27e-82e2df102cd2" supertitle="Dies ist ein Angebot von IWC Schaffhausen. Für den Inhalt ist IWC Schaffhausen verantwortlich" title="IWC Schaffhausen">
-              <image>http://xml.zeit.de/zeit-online/cp-content/ig-1/</image>
-            </container>
-          </region>
+        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="True">
+            <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
+                <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008"></block>
+                </container>
+            </region>
+        </cluster>
+        <cluster visible="True" area="id-d976a64d-1589-4b49-a765-12bdcdf94d1d" kind="solo" title="AdPlace_12">
+            <region visible="True" area="id-d976a64d-1589-4b49-a765-12bdcdf94d1e" kind="solo" title="AdPlace_12">
+                <container cp:__name__="id-d976a64d-1589-4b49-a765-12bdcdf94d1f" cp:type="cpextra" module="adplace12" visible="True">
+                    <cp_extra for="zeit.content.cp.interfaces.IArea" id="adplace12" />
+                </container>
+            </region>
         </cluster>
         <cluster area="feature" visible="True">
             <region area="lead" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 1" visible="True">

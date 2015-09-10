@@ -722,6 +722,29 @@ def test_imported_article_has_special_meta_robots(
         'wrong robots for none product article')
 
 
+def test_article_doesnt_show_modified_date(testbrowser):
+    select = testbrowser('/zeit-online/article/01').cssselect
+    date_string = select('.metadata__date')[0].text
+    assert date_string == '27. Mai 2015, 19:11 Uhr'
+
+
 def test_video_in_article_is_there(testbrowser):
     article = testbrowser('/zeit-online/article/zeit')
     assert len(article.cssselect('.video-player__iframe')) == 1
+
+
+def test_advertorial_marker_is_returned_correctly():
+    content = mock.Mock()
+    content.advertisement_title = 'YYY'
+    content.advertisement_text = 'XXX'
+    content.cap_title = 'ZZZ'
+    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    assert view.advertorial_marker == ('YYY', 'XXX', 'Zzz')
+
+
+def test_advertorial_marker_is_present(testbrowser):
+    browser = testbrowser('zeit-online/article/angebot')
+    assert len(browser.cssselect('.advertorial-marker')) == 1
+    assert len(browser.cssselect('.advertorial-marker__title')) == 1
+    assert len(browser.cssselect('.advertorial-marker__text')) == 1
+    assert len(browser.cssselect('.advertorial-marker__label')) == 1

@@ -21,7 +21,11 @@
 
 	<!-- special teaser -->
 	{% block special_teaser %}
-	<div class="main_nav__teaser">{# planned special teaser #}</div>
+		{% if view.is_advertorial %}
+		<div class="main_nav__ad-label advertorial__ad-label">{{ view.cap_title | default('Anzeige') }}</div>
+		{% else %}
+		<div class="main_nav__teaser">{# planned special teaser #}</div>
+		{% endif %}
 	{% endblock special_teaser %}
 	
 	<!-- wrap start -->
