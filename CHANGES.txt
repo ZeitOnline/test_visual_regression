@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2115: Add Meta Title, Description Ruleset for Keywordpages
 
+- FIX: Inherit from newsfeed for all classes in view_feed
+
 
 1.64 (2015-09-09)
 -----------------
