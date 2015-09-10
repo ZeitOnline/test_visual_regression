@@ -119,8 +119,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     @zeit.web.reify
     def advertorial_marker(self):
         try:
-            return (self.context.cap_title, self.context.byline)
-        except:
+            return (
+                self.context.advertisement_title,
+                self.context.advertisement_text,
+                self.cap_title)
+        except AttributeError:
             return None
 
 
