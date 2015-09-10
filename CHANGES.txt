@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2176: Fix modified date
 
+- ZON-1340: Advertorial Article
+
 - ZON-2125: Assemble identical byline
 
 - QUICKFIX: Swap font files for Tablet Gothic
