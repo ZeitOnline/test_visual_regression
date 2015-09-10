@@ -155,7 +155,7 @@ class Newsfeed(Base):
     context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-spektrum-flavoured',
     renderer='string')
-class SpektrumFeed(zeit.web.site.view.Base):
+class SpektrumFeed(Base):
 
     def __call__(self):
         super(SpektrumFeed, self).__call__()
@@ -227,7 +227,7 @@ class SpektrumFeed(zeit.web.site.view.Base):
 
 # XXX This is a copy&paste&tweak of the above SpektrumFeed.
 # Could we extract common functionality somehow?
-class SocialFeed(zeit.web.site.view.Base):
+class SocialFeed(Base):
 
     social_field = NotImplemented
 
