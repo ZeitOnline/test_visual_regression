@@ -9,7 +9,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="{{ view.title or 'ZEIT ONLINE' }}">
 <meta property="og:description" content="{{ view.subtitle or '' }}">
-<meta property="og:url" content="{{ view.content_url }}">
+<meta property="og:url" content="{{ view.og_url }}">
 {% set image = get_image(view, view.context, fallback=False, default='wide') %}
 {% if image -%}
 {% set source = request.route_url('home') + image.path %}
