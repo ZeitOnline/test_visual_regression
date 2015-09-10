@@ -4,6 +4,8 @@ Change log for zeit.web
 1.66 (unreleased)
 -----------------
 
+- ZON-1892: Add Buzz-Board
+
 - ZON-1340: Advertorial Article
 
 - ZON-2125: Assemble identical byline
