@@ -208,9 +208,16 @@ def test_centerpage_markdown_module_is_rendered(jinja2_env):
     assert len(html.cssselect('.markup__text li')) == 4
 
 
-def test_verlagsangebot_label_should_be_displayed(testbrowser):
+def test_inhouse_label_should_be_displayed(testbrowser):
     select = testbrowser('/zeit-online/teaser-inhouse-setup').cssselect
     labels = select('.teaser-small--inhouse .teaser-small__label')
     assert len(labels) == 2
-    labels = select('.teaser-small-minor--inhouse .teaser-small-minor__label')
+    assert map(lambda x: x.text, labels) == (
+        ['Verlagsangebot', 'Verlagsangebot'])
+
+
+def test_ad_label_should_be_displayed(testbrowser):
+    select = testbrowser('/zeit-online/teaser-inhouse-setup').cssselect
+    labels = select('.teaser-small-minor--ad .teaser-small-minor__label')
     assert len(labels) == 1
+    assert labels[0].text == 'Anzeige'
