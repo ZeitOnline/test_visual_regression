@@ -175,17 +175,19 @@ def test_spektrum_teasers_should_produce_correct_tracking_slugs(
     assert title.get('id').startswith(title_slug)
 
 
-def test_rss_feed_of_cp_has_requested_format(testbrowser, testserver):
-    feed_url = '%s/centerpage/index/rss-spektrum-flavoured' % testserver.url
-    browser = testbrowser(feed_url)
-    assert browser.headers['Content-Type'].startswith('application/rss+xml')
-    feed = browser.contents
-    assert '<atom:link href="%s"' % feed_url in feed
+def test_rss_feed_of_cp_has_requested_format(testserver):
+    feed_path = '/centerpage/index/rss-spektrum-flavoured'
+    res = requests.get(
+        testserver.url + feed_path, headers={'Host': 'newsfeed.zeit.de'})
+    assert res.headers['Content-Type'].startswith('application/rss+xml')
+    feed = res.text
+    assert '<atom:link href="http://newsfeed.zeit.de%s"' % feed_path in feed
     assert '<link>http://www.zeit.de/centerpage/article_image_asset?' in feed
     assert ('wt_zmc=koop.ext.zonaudev.spektrumde.feed.'
             'article-image-asset.bildtext.link.x' in feed)
-    assert re.search('<enclosure .* url="%s/centerpage/katzencontent/'
-                     % testserver.url, feed)
+    assert re.search(
+        '<enclosure .* url="http://newsfeed.zeit.de/centerpage/katzencontent/',
+        feed)
 
 
 def test_spektrum_also_renders_on_ng_centerpages(testbrowser, testserver):
