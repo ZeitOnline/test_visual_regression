@@ -9,7 +9,7 @@
 {% block module_list %}
 	{%- set modules = area.values() | map('get_module') | list %}
 
-	<table class="buzzboard__table">
+	<table class="buzzboard__table buzzboard__table--col{{ modules | length }}">
 		<thead>
 			{% for module in modules -%}
 			<th>
