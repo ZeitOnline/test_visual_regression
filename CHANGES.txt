@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2125: Assemble identical byline
 
+- ZON-2199: Make link objects work everywhere, not just for ZMO
+
 - QUICKFIX: Swap font files for Tablet Gothic
 
 

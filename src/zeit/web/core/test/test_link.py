@@ -5,9 +5,12 @@ import zeit.web.core.template
 
 
 def test_link_object_should_redirect_permanently(testserver, testbrowser):
-    path = 'zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview'
-    browser = testbrowser('%s/%s-2' % (testserver.url, path))
-    assert 'http://www.zeit.de/%s' % path == browser.url
+    path = 'blogs/nsu-blog-bouffier'
+    browser = testbrowser('%s/%s' % (testserver.url, path))
+    assert (
+        'http://blog.zeit.de/nsu-prozess-blog/2015/02/25'
+        '/medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/' ==
+        browser.url)
 
 
 def test_link_object_teaser_should_lead_directly_to_destination(
