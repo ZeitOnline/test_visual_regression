@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2115: Add Meta Title, Description Ruleset for Keywordpages
 
+- QUICKFIX: Swap font files for Tablet Gothic
+
 
 1.64 (2015-09-09)
 -----------------
