@@ -100,7 +100,7 @@ class Newsfeed(Base):
             E.webMaster('webmaster@zeit.de (Technik ZEIT ONLINE)'),
             E.image(
                 E.url(('http://images.zeit.de/bilder/elemente_01_'
-                                   '06/logos/homepage_top.gif')),
+                       '06/logos/homepage_top.gif')),
                 E.title(self.pagetitle),
                 E.link(self.request.route_url('home'))
                 )
@@ -126,13 +126,14 @@ class Newsfeed(Base):
                 teaser_image) else ''
 
             if variant:
-                description = (u'<a href="{}"><img style="float:left; '
-                               'margin-right:5px" src="{}"></a> {}').format(
-                                    content_url,
-                                    '{}{}'.format(
-                                        self.request.asset_url('/'),
-                                        variant.lstrip('/')),
-                                    content.teaserText)
+                description = (
+                    u'<a href="{}"><img style="float:left; '
+                    'margin-right:5px" src="{}"></a> {}').format(
+                        content_url,
+                        '{}{}'.format(
+                            self.request.asset_url('/'),
+                            variant.lstrip('/')),
+                        content.teaserText)
 
             item = E.item(
                 E.title(content.title),
@@ -154,7 +155,7 @@ class Newsfeed(Base):
     context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-spektrum-flavoured',
     renderer='string')
-class SpektrumFeed(zeit.web.site.view.Base):
+class SpektrumFeed(Base):
 
     def __call__(self):
         super(SpektrumFeed, self).__call__()
@@ -226,7 +227,7 @@ class SpektrumFeed(zeit.web.site.view.Base):
 
 # XXX This is a copy&paste&tweak of the above SpektrumFeed.
 # Could we extract common functionality somehow?
-class SocialFeed(zeit.web.site.view.Base):
+class SocialFeed(Base):
 
     social_field = NotImplemented
 

@@ -8,13 +8,13 @@
 
 	{# OPTIMIZE: Figcaption would be better than this wrapper.
 	   But JS fills the whole <figure> when loading an image.#}
-	<div class="{{ self.layout() }}__figurewrapper">
+	<div class="{{ self.layout() }}__figurewrapper">
 		{% include "zeit.web.site:templates/inc/teaser_asset/imagegroup.tpl" %}
 
 		{{ lama.use_svg_icon('gallery', '{}__icon'.format(self.layout()), request) }}
 
-		<small class="{{ self.layout() }}__counter">
-			{{ teaser.keys() | list | length | pluralize('Keine Fotos', 'Ein Foto', '{} Fotos') }}
+		<small class="{{ self.layout() }}__counter">
+			{{ teaser.keys() | list | length | pluralize('Keine Fotos', 'Ein Foto', '{} Fotos') }}
 		</small>
 	</div>
 {% endblock %}

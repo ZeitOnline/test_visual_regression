@@ -42,13 +42,13 @@
         {% block teaser_container %}
             {% block teaser_text %}
                 {# TODO: Extract teaser-length text snippet from articles that don't have a teaser text. #}
-                <p class="{{ self.layout() }}__text">{{ teaser.teaserText | hide_none }}</p>
+                <p class="{{ self.layout() }}__text">{{ teaser.teaserText | hide_none }}</p>
             {% endblock %}
             {% block teaser_metadata_default %}
             <div class="{{ self.layout() }}__metadata">
                 {% block teaser_byline %}
                     <span class="{{ self.layout() }}__byline">
-                        {%- set byline = teaser | get_byline -%}
+                        {%- set byline = teaser | get_byline -%}
                         {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
                     </span>
                 {% endblock %}
@@ -58,7 +58,7 @@
                 {% block teaser_commentcount %}
                     {% set comments = view.comment_counts[teaser.uniqueId] %}
                     {% if comments %}
-                        {% set comments_string = comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
+                        {% set comments_string = comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
                         <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser.uniqueId | create_url }}#comments" title="Kommentare anzeigen">{{ comments_string }}</a>
                     {% endif %}
                 {% endblock %}

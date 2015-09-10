@@ -3,7 +3,7 @@
 {% if user %}
 {% set username = user.name or 'Angemeldet' %}
 <div class="login-state" data-feature="dropdown">
-    <a href="{{ profile }}" class="login-state__name">{{ username }}</a>
+    <a href="{{ profile }}" class="login-state__name">{{ username }}</a>
     <ul class="dropdown">
         <li class="dropdown__item">
             <a href="{{ profile }}" class="dropdown__link">Profil</a>
@@ -13,9 +13,9 @@
 </div>
 <div class="login-state-mobile">
     {% if user.picture -%}
-        <img class="login-state-mobile__avatar" alt="Avatarbild von {{ user.name }}" src="{{ user.picture }}">
+        <img class="login-state-mobile__avatar" alt="Avatarbild von {{ user.name }}" src="{{ user.picture }}">
     {% endif %}
-    <span class="login-state-mobile__name">{{ username }}</span>
+    <span class="login-state-mobile__name">{{ username }}</span>
     <a href="{{ logout }}" class="login-state-mobile__logoff">
         Abmelden
         {{ lama.use_svg_icon('navigation-login', 'login-state-mobile__icon', request) }}

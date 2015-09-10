@@ -74,6 +74,7 @@ class Application(object):
         self.configure_pyramid()
         self.configure_banner()
         self.configure_series()
+        self.configure_whitelist_meta()
         self.configure_navigation()
         self.configure_bugsnag()
 
@@ -96,6 +97,12 @@ class Application(object):
             self.settings.get('vivi_zeit.web_series-source', ''))
         zeit.web.core.sources.video_series = (
             zeit.web.core.sources.get_video_series(series_source))
+
+    def configure_whitelist_meta(self):
+        whitelist_meta_source = maybe_convert_egg_url(
+            self.settings.get('vivi_zeit.web_whitelist-meta-source', ''))
+        zeit.web.core.sources.whitelist_meta = (
+            zeit.web.core.sources.get_whitelist_meta(whitelist_meta_source))
 
     def configure_navigation(self):
         navigation_config = maybe_convert_egg_url(
