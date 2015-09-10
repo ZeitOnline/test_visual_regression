@@ -17,7 +17,10 @@ class Buzzbox(zeit.web.site.module.Module, list):
 
     header = None
     score_factor = 1
-    image_pattern = 'wide'
+
+    def __init__(self, context):
+        super(Buzzbox, self).__init__(context)
+        self.layout = 'buzzbox'
 
     @zeit.web.reify
     def reach(self):
@@ -43,7 +46,6 @@ class MostreadBuzzbox(Buzzbox):
     def __init__(self, context):
         super(MostreadBuzzbox, self).__init__(context)
         self += self.reach.get_views(section=self.ressort)
-        self.layout = 'buzzbox'
         self.identification = 'buzz-mostread'
         self.icon = 'buzz-read'
         self.score_pattern = ['Keine Leser', '{} Leser']
@@ -58,7 +60,6 @@ class CommentsBuzzbox(Buzzbox):
     def __init__(self, context):
         super(CommentsBuzzbox, self).__init__(context)
         self += self.reach.get_comments(section=self.ressort)
-        self.layout = 'buzzbox'
         self.identification = 'buzz-comments'
         self.icon = 'buzz-comment'
         self.score_pattern = [
@@ -74,7 +75,6 @@ class SharingBuzzbox(Buzzbox):
     def __init__(self, context):
         super(SharingBuzzbox, self).__init__(context)
         self += self.reach.get_social(section=self.ressort)
-        self.layout = 'buzzbox'
         self.identification = 'buzz-shared'
         self.icon = 'buzz-shared'
         self.score_pattern = ['Nie geteilt', '{} mal geteilt']
@@ -89,7 +89,6 @@ class FacebookBuzzbox(Buzzbox):
     def __init__(self, context):
         super(FacebookBuzzbox, self).__init__(context)
         self += self.reach.get_social(facet='facebook', section=self.ressort)
-        self.layout = 'buzzbox'
         self.identification = 'buzz-facebook'
         self.icon = 'buzz-facebook'
         self.score_pattern = ['Nie geliked', '{} mal geliked']
@@ -104,7 +103,6 @@ class TrendingBuzzbox(Buzzbox):
     def __init__(self, context):
         super(TrendingBuzzbox, self).__init__(context)
         self += self.reach.get_trend(section=self.ressort)
-        self.layout = 'buzzbox'
         self.identification = 'buzz-trend'
         self.icon = 'buzz-trend'
         self.score_pattern = ['+ {0}']
