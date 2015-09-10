@@ -42,7 +42,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     def canonical_url(self):
         """ Canonical for komplettansicht is first page """
         if not self.is_all_pages_view:
-            return self.request.url
+            return super(Article, self).canonical_url
         else:
             return self.resource_url
 
