@@ -9,9 +9,10 @@
     </author>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner_id">adv/randomhouse_buchtipp</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="cap_title">Buchtipp</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="cap_title">ANZEIGE</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels">Angebote buchtipp</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Verlag</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
@@ -50,6 +51,8 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="advertisement_title">IWC Schaffhausen</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="advertisement_text">Dies ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:16ab17d0-b75c-4f86-ba57-aa8e64c9b84c}</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
@@ -73,8 +76,9 @@
     <title>Der begrabene Riese</title>
     <subtitle>Drachen und Geister, Menschenfresser und Höllenhunde – in seinem neuen Roman nimmt Kazuo Ishiguro uns mit in das Britannien des frühen Mittelalters.</subtitle>
     <division type="page">
-      <image base-id="http://xml.zeit.de/angebote/buchtipp/ishiguro/aufmacher-ishiguro/" type="jpg" align="left" publication-date="" expires="" layout="large" is_empty="False">
-        <bu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/gesellschaft/2015-02/crystal-meth-nancy-schmidt/" type="jpg" alt="Crystal Meth: Gesellschaft, Crystal Meth, Drogensucht, Drogenkonsum" align="left" publication-date="" expires="2015-05-13T11:46:39+00:00" layout="large" is_empty="False" title_local="Crystal Meth: Nancy braucht was Schnelles" alt_local="Crystal Meth: Gesellschaft, Crystal Meth, Drogensucht, Drogenkonsum" title="Crystal Meth: Nancy braucht was Schnelles">
+        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Nancy Schmidt auf einem Feld in ihrem Heimatort zwischen Gera und Jena</bu>
+        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" link="http://www.milosdjuric.com/">© Milos Djuric </copyright>
       </image>
       <p>Zwischen
 dem Bestseller "Was vom Tage übrig blieb" und dem neuen Roman von Kazuo Ishiguro

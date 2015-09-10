@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<centerpage type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <head>
         <header_image/>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
-        <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner_id">adv/randomhouse_buchtipp</attribute>
         <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
         <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
         <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="cap_title">VERLAGSANGEBOT</attribute>
         <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:03.346120+00:00</attribute>
         <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:09:09.014473+00:00</attribute>
         <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:08:09.170784+00:00</attribute>
@@ -25,7 +27,8 @@
         <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Advertorial</attribute>
         <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
         <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Politik</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Angebote</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">IWC Schaffhausen</attribute>
         <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
         <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
@@ -34,6 +37,8 @@
         <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
         <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
         <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="advertisement_title">Buchtipp</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="advertisement_text">Dies ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</attribute>
         <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
