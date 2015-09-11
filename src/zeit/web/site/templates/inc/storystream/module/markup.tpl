@@ -1,9 +1,16 @@
 {% set blockname = 'storystream-markup' %}
-<div class="{{ blockname }}">
-	<div class="{{ blockname }}__content">
-	    <h2 class="{{ blockname }}__title">{{ module.title | hide_none }}</h2>
-	    <div class="{{ blockname }}__text">
-	        {{ module.text | hide_none | safe }}
-	    </div>
+{% if module_loop.first %}
+	{% set blockname_modifier = 'first' %}
+{% elif module_loop.last %}
+	{% set blockname_modifier = 'last' %}
+{% endif %}
+<div class="{{ blockname | with_mods(blockname_modifier) }}">
+	<div class="{{ blockname }}__container">
+		<div class="{{ '{}__content'.format(blockname) | with_mods(blockname_modifier) }}">
+		    <h2 class="{{ blockname }}__title">{{ module.title | hide_none }}</h2>
+		    <div class="{{ '{}__text'.format(blockname) | with_mods(blockname_modifier) }}">
+		        {{ module.text | hide_none | safe }}
+		    </div>
+		</div>
 	</div>
 </div>

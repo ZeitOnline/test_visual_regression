@@ -1,10 +1,39 @@
 .storystream-markup
-	background-color: $zon_lighter_grey
-	padding: $vertical-space $storystream-padding-mobile
+	padding: 0 $storystream-padding-mobile
+
+	&--first
+		background-color: $zon_lighter_grey
+
+	&__container
+		padding: 0 $storystream-padding-mobile
 
 	&__content
 		max-width: remify(640px)
 		margin: 0 auto
+		padding: $vertical-space 0
+		&--last
+			position: relative
+			&:before
+				color: $white
+				content: '\2B24' // ⬤ = Black large circle
+				display: block
+				font-size: remify(9px)
+				left: -$storystream-padding-mobile
+				top: $vertical-space*1.7
+				margin: remify(-5px 0 0 -5px)
+				position: absolute
+				z-index: 2
+				-webkit-text-stroke: 2px $zon_mid_grey
+				text-shadow: -1px -1px 0 $zon_mid_grey, 1px -1px 0 $zon_mid_grey, -1px 1px 0 $zon_mid_grey, 1px 1px 0 $zon_mid_grey
+			&:after
+				content: ''
+				position: absolute
+				width: 1px
+				height: $vertical-space*1.7
+				background-color: $color-storystream-border
+				left: -$storystream-padding-mobile
+				top: 0
+				z-index: 1
 
 	&__title
 		font-size: em(18px)
@@ -13,16 +42,22 @@
 		margin: 0
 
 	&__text
-		color: #777
+		color: $zon_dark_grey
 		font-size: em(16px)
 		line-height: em(21px)
+		&--first
+			color: #777
 
 	ul
 		@extend %markup-ul
 
 +respond-min($break-tablet-min)
 	.storystream-markup
-		padding: $vertical-space $storystream-padding-tablet
+		padding: 0 $storystream-padding-tablet
+
+		&__content:before,
+		&__content:after
+			left: -$storystream-padding-tablet
 
 		&__title
 			font-size: em(21px)
@@ -42,4 +77,8 @@
 
 +respond-min($break-desktop-min)
 	.storystream-markup
-		padding: $vertical-space $storystream-padding-desktop-outer
+		padding: 0 $storystream-padding-desktop-outer
+
+		&__content:before,
+		&__content:after
+			left: -$storystream-padding-desktop-inner
