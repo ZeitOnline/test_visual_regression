@@ -4,6 +4,8 @@ Change log for zeit.web
 1.67 (unreleased)
 -----------------
 
+- ZON-2114: Add cp_extra place 13 for manual addition
+
 - ZON-2199: Make link objects work everywhere, not just for ZMO
 
 
