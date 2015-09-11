@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.66 (unreleased)
+1.67 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+1.66 (2015-09-10)
+-----------------
+
+- ZON-2164: Place12 before video on hp and cp_extra for AdPlace12
 
 - ZON-2176: Fix modified date
 
@@ -19,6 +27,8 @@ Change log for zeit.web
 - ZON-1592: Label "Anzeige" according to "Verlagsangebot"
 
 - ZON-2115: Add Meta Title, Description Ruleset for Keywordpages
+
+- ZON-2181: Validate page number from GET parameter
 
 - FIX: Inherit from newsfeed for all classes in view_feed
 
