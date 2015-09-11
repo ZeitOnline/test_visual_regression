@@ -58,12 +58,12 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
      * @function scaleImage
      * @param  {object} image HTMLImageElement
      */
-    function scaleImage( image ) {
+    function scaleImage( image, container ) {
         var $img = $( image ),
-            $parent = $img.closest( '.scaled-image' ),
-            useMobileVariant = isMobile && typeof $img.data( 'mobile-ratio' ) !== 'undefined' &&
-                typeof $img.data( 'mobile-src' ) !== 'undefined',
-            ratio = useMobileVariant ? $img.data( 'mobile-ratio' ) : $img.data( 'ratio' ),
+            $parent = container || $img.closest( '.scaled-image' ),
+            imageData = $img.data(),
+            useMobileVariant = isMobile && imageData.mobileRatio && imageData.mobileSrc,
+            ratio = useMobileVariant ? imageData.mobileRatio : imageData.ratio,
             msieWidth = false,
             width, height, token, source, subject,
             styles, minHeight, maxHeight;
@@ -136,7 +136,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
             }
         }
 
-        source = useMobileVariant ? $img.data( 'mobile-src' ) : $img.data( 'src' );
+        source = useMobileVariant ? imageData.mobileSrc : imageData.src;
         width = Math.round( width );
         height = Math.round( height );
 
@@ -159,32 +159,29 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
         $( '.scaled-image > noscript', container ).each( function() {
             var $noscript = $( this ),
                 $parent = $noscript.parent(),
+                source = $noscript.data( 'src' ),
                 markup = $noscript.text();
 
             if ( markup.trim() !== '' ) {
 
                 markup = markup.replace( 'src="', 'data-src="' );
                 $parent.html( markup );
-                var $imgs = $parent.find( 'img' ),
-                    width = 0,
-                    height = 0;
+                var $img = $parent.find( 'img' ).first();
 
-                $imgs.each( function() {
-                    var $img = $( this );
+                // replace possible fallback source with responsive source
+                $img.attr( 'data-src', source );
 
-                    // add event triggering to tell the world
-                    $img.on( 'load', function( e ) {
-                        $img.trigger( 'scaling_ready' );
-                    });
-                    scaleImage( this );
-
-                    images.push( this );
+                // add event triggering to tell the world
+                $img.on( 'load', function( e ) {
+                    $img.trigger( 'scaling_ready' );
                 });
 
+                scaleImage( $img.get( 0 ), $parent );
+                images.push( $img.get( 0 ) );
             } else {
                 // noscript tag contains no readable content (might happen in older browsers)
                 // therefore we have to hide allocated image spaces
-                hideImage( $parent, $noscript.attr( 'data-src' ));
+                hideImage( $parent, source );
             }
         });
     }
