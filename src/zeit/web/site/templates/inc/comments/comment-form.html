@@ -21,8 +21,10 @@
 
 <div class="comment-section__form comment-section__item">
 {%- if request.authenticated_userid %}
+    {% set is_mod = 'admin-tech' in request.session.user.roles or 'admin-editor' in request.session.user.roles %}
     {%- block comment_form %}
-    <form class="comment-form  js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.session.user.uid }}">
+    <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.session.user.uid }}"
+        {%- if is_mod %} data-mod="mod"{% endif %}>
         {% if view.comments_allowed -%}
         <div class="comment-form__text">
             {% if request.session.user.picture %}
