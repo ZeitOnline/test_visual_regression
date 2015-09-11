@@ -4,7 +4,7 @@ Change log for zeit.web
 1.67 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2199: Make link objects work everywhere, not just for ZMO
 
 
 1.66 (2015-09-10)
@@ -17,8 +17,6 @@ Change log for zeit.web
 - ZON-1340: Advertorial Article
 
 - ZON-2125: Assemble identical byline
-
-- ZON-2199: Make link objects work everywhere, not just for ZMO
 
 - QUICKFIX: Swap font files for Tablet Gothic
 
