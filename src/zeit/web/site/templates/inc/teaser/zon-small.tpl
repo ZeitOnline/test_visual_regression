@@ -2,6 +2,8 @@
 
 {% block layout %}teaser-small{% endblock %}
 
+{% block meetrics %}{{ area.kind }}{% endblock %}
+
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
 

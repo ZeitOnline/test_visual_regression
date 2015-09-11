@@ -37,7 +37,7 @@ define( [ 'jquery' ], function( $ ) {
             } else if ( $element.closest( 'figure' ).length ) {
                 type = 'image';
             }
-            teasertype += $article.data( 'meetrics' ) ? $article.data( 'meetrics' ) + '-' : '';
+            teasertype += $article.data( 'clicktracking' ) ? $article.data( 'clicktracking' ) + '-' : '';
             teasertype += articleClasses[0];
             data = [
                 getBreakpoint(),
@@ -121,7 +121,6 @@ define( [ 'jquery' ], function( $ ) {
         var trackingData = trackElement[ event.data.funcName ]( $( event.target ).closest( 'a' ) );
         if ( event.data.debug ) {
             event.preventDefault();
-            console.debug( trackingData );
         }
         if ( trackingData ) {
             window.wt.sendinfo({

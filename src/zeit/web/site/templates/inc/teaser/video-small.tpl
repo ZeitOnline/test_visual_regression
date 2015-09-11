@@ -2,6 +2,8 @@
 
 {% block layout %}video-small{% endblock %}
 
+{% block meetrics %}{{ area.kind }}{% endblock %}
+
 {% block playbutton_modifier %}inline{% endblock %}
 
 {% block playbutton %}{% endblock %}

@@ -9,6 +9,7 @@
 {% set readmore_text = area.read_more or 'Alles zum Thema' %}
 
 {% block layout %}teaser-topic-main{% endblock %}
+{% block meetrics %}{{ area.kind }}{% endblock %}
 
 {% block teaser_media_position_before_title %}
     {% include "zeit.web.site:templates/inc/teaser_asset/{}_zop-topic.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}

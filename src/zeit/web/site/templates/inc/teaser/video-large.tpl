@@ -2,6 +2,8 @@
 
 {% block layout %}video-large{% endblock %}
 
+{% block meetrics %}{{ area.kind }}{% endblock %}
+
 {% block playbutton_modifier %}block{% endblock %}
 
 {% block description %}<p class="{{ self.layout() }}__description">{{ teaser.teaserText }}</p>{% endblock %}
