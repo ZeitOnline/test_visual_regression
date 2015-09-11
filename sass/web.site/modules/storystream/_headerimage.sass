@@ -68,12 +68,15 @@
 		font-size: remify(15px)
 		letter-spacing: $zon-letter-spacing-s
 		line-height: 1.7
-		padding-bottom: 1em
+		// make the text align nicely beside the icon if it linebreaks on small screens
+		padding: remify(0 0 16px 20px)
+		position: relative
 
 	&__updateicon
 		color: inherit
 		height: remify(15px)
-		margin-right: 0.08rem
+		margin: remify(5px 0 0 -20px)
+		position: absolute
 		width: remify(15px)
 
 +respond-min($break-tablet-min)
