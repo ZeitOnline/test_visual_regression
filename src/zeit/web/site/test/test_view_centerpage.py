@@ -1282,7 +1282,7 @@ def test_advertorial_page_has_advertorial_label(testbrowser):
     assert browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
 
 
-def test_standart_teasers_have_meetrics_attribute(testserver, testbrowser):
+def test_standart_teasers_have_meetrics_attribute(testbrowser):
     browser = testbrowser('/index')
 
     fullwidth = browser.cssselect('.teaser-fullwidth')
@@ -1296,8 +1296,8 @@ def test_standart_teasers_have_meetrics_attribute(testserver, testbrowser):
     assert square[0].attrib['data-meetrics'] == 'minor'
 
 
-def test_video_teasers_have_meetrics_attribute(testserver, testbrowser):
-    browser = testbrowser('/index')
+def test_video_teasers_have_meetrics_attribute(testbrowser):
+    browser = testbrowser('/zeit-online/video-stage')
 
     large = browser.cssselect('.video-large')
     small = browser.cssselect('.video-small')
@@ -1306,7 +1306,7 @@ def test_video_teasers_have_meetrics_attribute(testserver, testbrowser):
     assert small[0].attrib['data-meetrics'] == 'solo'
 
 
-def test_topic_teasers_have_meetrics_attribute(testserver, testbrowser):
+def test_topic_teasers_have_meetrics_attribute(testbrowser):
     browser = testbrowser('/zeit-online/topic-teaser')
 
     large = browser.cssselect('.teaser-topic-main')
@@ -1316,14 +1316,18 @@ def test_topic_teasers_have_meetrics_attribute(testserver, testbrowser):
     assert small[0].attrib['data-meetrics'] == 'topic'
 
 
-def test_all_teasers_have_clicktrack_attribute(testserver, testbrowser):
+def test_all_teasers_have_clicktrack_attribute(testbrowser):
     browser = testbrowser('/index')
 
-    teasers = browser.cssselect('article[data-unique-id]')
+    # exclude spektrum teasers
+    # selector = '.cp-area:not(.cp-area--spektrum) article[data-unique-id]'
+    # simple version
+    selector = 'article[data-unique-id]'
+    teasers = browser.cssselect(selector)
+    assert len(teasers)
+
     for teaser in teasers:
-        # exclude spektrum teasers
-        if teaser.getparent().attrib['class'] != 'parquet-teasers':
-            assert teaser.attrib['data-clicktracking'] != ''
+        assert teaser.attrib['data-clicktracking'] != ''
 
 
 def test_adtile12_from_cp_extra_is_there(testbrowser):
