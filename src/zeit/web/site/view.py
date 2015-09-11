@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import urlparse
+
 import pyramid.view
 
 import zeit.content.article.interfaces
@@ -69,13 +71,21 @@ class Base(zeit.web.core.view.Base):
         if self.seo_robot_override:
             return self.seo_robot_override
 
+        url = self.request.url
+        query = urlparse.parse_qs(urlparse.urlparse(url).query)
+
         # Exclude certain paths from being indexed
         path = self.request.path.startswith
 
         if path('/angebote') and not path('/angebote/partnersuche'):
             return 'index,nofollow,noodp,noydir,noarchive'
-        elif path('/banner') or path('/test') or path('/templates'):
-            return 'noindex,follow,noodp,noydir,noarchive'
+        elif path('/thema') and ('p' not in query or query['p'] == ['1']):
+            return 'follow,noarchive'
+        elif path('/banner') or path('/test') or path('/templates') \
+                or path('/thema'):
+                return 'noindex,follow,noodp,noydir,noarchive'
+        elif path('/autoren/index'):
+            return 'noindex,follow'
         else:
             return 'index,follow,noodp,noydir,noarchive'
 
