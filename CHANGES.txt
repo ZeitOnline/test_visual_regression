@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.67 (unreleased)
+1.67 (2015-09-11)
 -----------------
 
 - ZON-2056: Add links in comments for community moderators
