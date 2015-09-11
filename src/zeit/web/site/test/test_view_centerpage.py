@@ -11,6 +11,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
+import pyramid.testing
 
 import zeit.content.cp.centerpage
 
@@ -760,10 +761,41 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     assert link[0].get('href') == url + '?p=2'
 
 
+def test_robots_rules_for_thema_paths(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = pyramid.testing.DummyRequest()
+    request.path = '/thema/'
+
+    # paginated page
+    request.url = 'http://localhost/thema/test?p=2'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for paginated thema page')
+
+    # paginated page starting with 1
+    request.url = 'http://localhost/thema/test?p=10'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for paginated thema page starting with 1')
+
+    # first page with param
+    request.url = 'http://localhost/thema/test?p=1'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'follow,noarchive', (
+        'wrong robots for first thema page with param')
+
+    # first page without param
+    request.url = 'http://localhost/thema/test'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'follow,noarchive', (
+        'wrong robots for first thema page without param')
+
+
 def test_robots_rules_for_angebote_paths(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    request = mock.Mock()
+    request = pyramid.testing.DummyRequest()
 
     # usual angebot
     request.path = '/angebote/immobilien/test'
@@ -807,6 +839,12 @@ def test_robots_rules_for_diverse_paths(application):
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
     assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
         'wrong robots for any other folder')
+
+    # autoren folder
+    request.path = '/autoren/index'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow', (
+        'wrong robots for autoren folder')
 
 
 def test_meta_rules_for_keyword_paths(application):
@@ -1063,10 +1101,11 @@ def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
         assert False, 'Timeout accordion script'
     else:
         slides = driver.find_elements_by_css_selector('.buzz-box__teasers')
-        assert len(slides) == 3
+        assert len(slides) == 4
         assert slides[0].is_displayed()
         assert not slides[1].is_displayed()
         assert not slides[2].is_displayed()
+        assert not slides[3].is_displayed()
 
 
 def test_non_navigation_centerpage_should_have_minimal_breadcrumbs(
@@ -1111,12 +1150,6 @@ def test_mobile_invisibility(testbrowser):
 
 def test_breakpoint_sniffer_script(
         selenium_driver, testserver, monkeypatch, screen_size):
-
-    def tpm(me):
-        return True
-
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
 
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
@@ -1247,3 +1280,13 @@ def test_wrapped_features_are_triggered(testbrowser):
 def test_advertorial_page_has_advertorial_label(testbrowser):
     browser = testbrowser('/zeit-online/advertorial-index')
     assert browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
+
+
+def test_adtile12_from_cp_extra_is_there(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-centerpage')
+    assert browser.cssselect('#ad-desktop-12')
+
+
+def test_adtile13_from_cp_extra_is_there(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+    assert browser.cssselect('#ad-desktop-13')

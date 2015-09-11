@@ -23,15 +23,10 @@
 {% endblock metadata %}
 
 {% block main %}
-    {% set first_region_duo_found = false %}
     {% for region in view.regions %}
         {% set region_loop = loop %}
         {%- include ["zeit.web.site:templates/inc/region/{}.html".format(region.kind),
                      "zeit.web.site:templates/inc/region/default.html"] ignore missing -%}
-        {% if (first_region_duo_found == false) and (region.kind == 'duo') and view.context.advertising_enabled %}
-            {{ lama.adplace(view.banner(10), view) }}
-            {% set first_region_duo_found = true %}
-        {% endif %}
     {% endfor %}
 {% endblock main %}
 

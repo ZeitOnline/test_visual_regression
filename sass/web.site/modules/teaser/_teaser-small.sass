@@ -2,6 +2,11 @@
 	@extend %teaser
 	&__media
 		@extend %teaser-small-media
+		&--force-mobile
+			display: table-cell
+			padding-bottom: remify(20px) 
+			+respond-min($break-phablet-min)
+				padding-bottom: 0
 	&__media-item
 		@extend %teaser-media-item !optional
 	&__container

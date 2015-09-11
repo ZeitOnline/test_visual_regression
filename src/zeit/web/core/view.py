@@ -9,6 +9,7 @@ import re
 import babel.dates
 import bugsnag
 import pyramid.response
+import pyramid.settings
 import pyramid.view
 import werkzeug.http
 
@@ -81,7 +82,11 @@ class Base(object):
             raise pyramid.httpexceptions.HTTPNotFound()
 
         redirect_on_trailing_slash(self.request)
-        redirect_on_cp2015_suffix(self.request)
+        # Don't redirect for preview (since the workingcopy does not contain
+        # the suffix-less version)
+        if pyramid.settings.asbool(self.request.registry.settings.get(
+                'redirect_from_cp2015', True)):
+            redirect_on_cp2015_suffix(self.request)
         time = zeit.web.core.cache.ICachingTime(self.context)
         self.request.response.cache_expires(time)
         self._set_response_headers()
@@ -189,10 +194,18 @@ class Base(object):
             return ''
 
     @zeit.web.reify
+    def is_advertorial(self):
+        return is_advertorial(self.context, self.request)
+
+    @zeit.web.reify
     def serie(self):
         if self.context.serie is None:
             return ''
         return self.context.serie.serienname
+
+    @zeit.web.reify
+    def cap_title(self):
+        return self.context.cap_title.title()
 
     @zeit.web.reify
     def banner_channel(self):
@@ -201,8 +214,7 @@ class Base(object):
             return u'{}/{}'.format(self.context.banner_id, self.banner_type)
         # second rule: angebote are mapped with two levels
         if self.ressort == 'angebote':
-            _serie = self.serie.replace(' ', '_')
-            return u'{}/{}/{}'.format(self.ressort, _serie, self.banner_type)
+            return u'{}/{}/{}'.format(self.ressort, 'adv', self.banner_type)
         # third: do the mapping
         mappings = zeit.web.core.banner.banner_id_mappings
         for mapping in mappings:
@@ -247,10 +259,11 @@ class Base(object):
             'video': 'video_artikel'}
         if self.is_hp:
             return 'homepage'
-        else:
-            return 'index' if self.type == 'centerpage' and (
-                self.sub_ressort == '' or self.ressort ==
-                'zeit-magazin') else replacements[self.type]
+        if self.is_advertorial:
+            return 'adv_index' if self.type == 'centerpage' else 'adv_artikel'
+        return 'index' if self.type == 'centerpage' and (
+            self.sub_ressort == '' or self.ressort ==
+            'zeit-magazin') else replacements[self.type]
 
     @zeit.web.reify
     def adcontroller_values(self):

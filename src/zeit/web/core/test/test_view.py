@@ -33,6 +33,8 @@ def mock_ad_view(application):
             self.serie = serienname
             context = mock.Mock()
             context.banner_id = banner_id
+            request = mock.Mock()
+            self.request = request
             self.context = context
 
     return MockAdView
@@ -217,10 +219,7 @@ def test_banner_channel_mapping_should_apply_first_rule(mock_ad_view):
 def test_banner_channel_mapping_should_apply_second_rule(mock_ad_view):
     assert mock_ad_view(
         'centerpage', 'angebote', '', serienname='meh').banner_channel == (
-            'angebote/meh/centerpage')
-    assert mock_ad_view(
-        'centerpage', 'angebote', '', serienname='a k').banner_channel == (
-            'angebote/a_k/centerpage')
+        'angebote/adv/centerpage')
 
 
 def test_banner_channel_mapping_should_apply_third_rule(mock_ad_view):
@@ -462,3 +461,16 @@ def test_cp2015_suffix_should_lead_to_redirect():
     request.path = '/foo/baa'
     request.url = 'http://foo.xyz.de/foo/baa'
     assert zeit.web.core.view.redirect_on_cp2015_suffix(request) == None
+
+
+def test_cp2015_redirect_can_be_disabled(application):
+    # The context doesn't matter for this test, just needs to be ICMSContent.
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/slenderized-index')
+    request = pyramid.testing.DummyRequest(path='/index.cp2015')
+    request.registry = application.zeit_app.config.registry
+    view = zeit.web.core.view.Base(context, request)
+    with mock.patch.dict(
+            request.registry.settings, {'redirect_from_cp2015': 'False'}):
+        # assert: no HTTPFound is raised.
+        view()

@@ -1,5 +1,26 @@
 $markup-list-offset: em(18px)
 
+%markup-ul
+	list-style: none
+	margin: .75em 0
+	padding: 0
+	li
+		margin: .75em 0 .75em $markup-list-offset
+		padding: 0
+		position: relative
+		&:before
+			background-color: $zon_mid_grey
+			border-radius: .1em
+			content: ""
+			height: remify(6px)
+			left: -$markup-list-offset
+			position: absolute
+			top: .54em
+			width: remify(6px)
+	&:last-child,
+	li:last-child
+		margin-bottom: 0
+
 .markup
 	@extend %teaser
 	border-bottom-width: 1px
@@ -16,22 +37,4 @@ $markup-list-offset: em(18px)
 			font-size: em(16px)
 			line-height: 1.5
 	ul
-		list-style: none
-		margin: .75em 0
-		padding: 0
-		li
-			margin: .75em 0 .75em $markup-list-offset
-			padding: 0
-			position: relative
-			&:before
-				background-color: $zon_mid_grey
-				border-radius: .1em
-				content: ""
-				height: remify(6px)
-				left: -$markup-list-offset
-				position: absolute
-				top: .54em
-				width: remify(6px)
-	ul:last-child,
-	ul li:last-child
-		margin-bottom: 0
+		@extend %markup-ul

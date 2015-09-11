@@ -1,0 +1,130 @@
+.storystream-markup
+	padding: 0 $storystream-padding-mobile
+
+	&--first
+		background-color: $zon_lighter_grey
+
+	&__container
+		padding: $vertical-space $storystream-padding-mobile
+		&--first
+			padding: $vertical-space*1.5 $storystream-padding-mobile
+		&--last
+			padding: 0 $vertical-space $vertical-space
+
+	&__content
+		max-width: remify(640px)
+		margin: 0 auto
+		&--last
+			padding-top: $vertical-space
+			position: relative
+			&:before
+				color: $white
+				content: '\2B24' // ⬤ = Black large circle
+				display: block
+				font-size: remify(9px)
+				left: -$storystream-padding-mobile
+				top: $vertical-space*1.5
+				margin: remify(-5px 0 0 -5px)
+				position: absolute
+				z-index: 2
+				-webkit-text-stroke: 2px $zon_mid_grey
+				text-shadow: -1px -1px 0 $zon_mid_grey, 1px -1px 0 $zon_mid_grey, -1px 1px 0 $zon_mid_grey, 1px 1px 0 $zon_mid_grey
+			&:after
+				content: ''
+				position: absolute
+				width: 1px
+				height: $vertical-space*1.5
+				background-color: $color-storystream-border
+				left: -$storystream-padding-mobile
+				top: 0
+				z-index: 1
+
+	&__title
+		font-size: remify(18px)
+		font-weight: bold
+		line-height: remify(22px)
+		margin: 0
+
+	&__text
+		color: $zon_dark_grey
+		font-size: remify(16px)
+		line-height: remify(21px)
+		&--first
+			color: #777
+
+	ul
+		@extend %markup-ul
+
++respond-min($break-tablet-min)
+	.storystream-markup
+		padding: 0 $storystream-padding-tablet
+
+		&__content--last:before,
+		&__content--last:after
+			left: -$storystream-padding-tablet
+
+		&__title
+			font-size: remify(21px)
+			line-height: remify(24px)
+
+		&__text
+			font-size: remify(17px)
+			line-height: remify(25px)
+
+		ul li
+			margin-left: 0
+			&:before
+				border-radius: 50%
+				height: remify(5px)
+				left: remify(-15px)
+				width: remify(5px)
+
++respond-min($break-desktop-min)
+	.storystream-markup
+		padding: 0 $storystream-padding-desktop-outer
+
+		&__content--last:before,
+		&__content--last:after
+			left: -$storystream-padding-desktop-inner
+
+.storystream-markup-wrapper
+	+transition(max-height .5s)
+	overflow: hidden
+	position: relative
+
+.storystream-markup-wrapper--wrapped
+	cursor: pointer
+	margin: 0 auto
+	max-width: remify(640px)
+	max-height: 7 * 1.4 * em(18px) // 5 lines paragraph text
+	+respond-min($break-desktop-min)
+		max-height: 7 * 1.5 * em(20px) // 5 lines paragraph text
+
+	&:before
+		content: ""
+		position: absolute
+		left: 0
+		right: 0
+		bottom: 0
+		height: 5 * 1.5 * em(20px) // 3 lines paragraph text
+		+background-image(linear-gradient(0deg, rgba($zon_lighter_grey, 1) 1.5em, rgba($zon_lighter_grey, 0) 100%))
+		z-index: 1
+
+	&:after
+		color: #777
+		content: "+ Mehr lesen"
+		font-size: 0.9em // em by purpose
+		position: absolute
+		bottom: 0
+		left: 0
+		text-align: center
+		letter-spacing: $zon-letter-spacing-s
+		border-bottom: 1px solid rgba($color-link--default, .5)
+		+transition-property(border-bottom-color, color)
+		+transition-duration(.2s)
+		z-index: 2
+
+	&:hover:after
+		color: $color-link--hover
+		border-bottom-color: rgba($color-link--hover, .5)
+
