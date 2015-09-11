@@ -121,6 +121,7 @@ define( [ 'jquery' ], function( $ ) {
         var trackingData = trackElement[ event.data.funcName ]( $( event.target ).closest( 'a' ) );
         if ( event.data.debug ) {
             event.preventDefault();
+            console.debug( trackingData );
         }
         if ( trackingData ) {
             window.wt.sendinfo({
