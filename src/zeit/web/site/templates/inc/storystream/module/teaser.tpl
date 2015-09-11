@@ -13,8 +13,7 @@
 			</div>
 			<div class="{{ blockname }}__text">
 				<p class="{{ 'storystream-teaser__description' | with_mods(teaser_modifier) }}">
-					{{ atom.tldr_text }}
-					<a class="{{ blockname }}__link" href="{{ atom.uniqueId | create_url }}">mehr lesen</a>
+					{{ atom.tldr_text }}&nbsp;<a class="{{ blockname }}__link" href="{{ atom.uniqueId | create_url }}">mehr lesen</a>
 				</p>
 
 				{% set image = get_image(module) %}
