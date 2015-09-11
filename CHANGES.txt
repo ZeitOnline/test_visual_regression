@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2143: Canonical-URL should omit params & hashes
 
+- ZON-2199: Make link objects work everywhere, not just for ZMO
+
 
 1.66 (2015-09-10)
 -----------------
