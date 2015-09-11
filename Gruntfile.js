@@ -20,10 +20,10 @@ module.exports = function(grunt) {
         codeDir: './src/zeit/web/static/',
         rubyVersion: '1.9.3',
         tasks: {
-            production: [ 'bower', 'modernizr', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'svg' ],
-            development: [ 'bower', 'modernizr', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
+            production: [ 'clean', 'bower', 'modernizr', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'svg' ],
+            development: [ 'clean', 'bower', 'modernizr', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
-            svg: [ 'clean', 'svgmin', 'grunticon', 'svgstore' ],
+            svg: [ 'clean:icons', 'clean:symbols', 'svgmin', 'grunticon', 'svgstore' ],
             icons: [ 'clean:icons', 'svgmin', 'grunticon' ],
             symbols: [ 'clean:symbols', 'svgmin:symbols', 'svgstore' ],
             lint: [ 'jshint', 'jscs' ]
@@ -224,6 +224,8 @@ module.exports = function(grunt) {
             // cleanup minified SVGs, remove orphaned files
             icons: [ '<%= svgmin.magazin.dest %>', '<%= svgmin.website.dest %>' ],
             symbols: [ '<%= svgmin.symbols.dest %>' ],
+            // delete old vendor scripts
+            scripts: [ project.sourceDir + 'javascript/vendor' ],
             // delete unused directories
             legacy: [ project.sourceDir + 'sass/web.*/icons-minified' ]
         },

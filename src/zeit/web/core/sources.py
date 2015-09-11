@@ -22,6 +22,7 @@ import zeit.web.core.view
 
 
 video_series = None
+whitelist_meta = None
 log = logging.getLogger(__name__)
 
 
@@ -37,6 +38,25 @@ def get_video_series(series_source):
         title = video.xpath('@title')[0]
         videoseries_list.append(dict(url=url, title=title))
     return videoseries_list
+
+
+def get_whitelist_meta(whitelist_meta_source):
+    try:
+        meta_xml = lxml.etree.parse(whitelist_meta_source)
+    except (TypeError, IOError):
+        return list()
+    tags = meta_xml.xpath('/tagReferences/categoryReference')
+    meta_list = list()
+    for tag in tags:
+        post_title = tag.xpath('postTitle')[0].text
+        pre_desc = tag.xpath('preDescription')[0].text
+        post_desc = tag.xpath('postDescription')[0].text
+        category = tag.xpath('@for_type_value')[0]
+        meta_list.append(dict(post_title=post_title,
+                         pre_desc=pre_desc,
+                         post_desc=post_desc,
+                         category=category))
+    return meta_list
 
 
 class ScaleSource(zeit.imp.source.ScaleSource):

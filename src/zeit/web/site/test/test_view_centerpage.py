@@ -19,6 +19,7 @@ import zeit.web.core.interfaces
 import zeit.web.core.utils
 import zeit.web.site.module.playlist
 import zeit.web.site.view_centerpage
+import zeit.web.core.sources
 
 
 screen_sizes = ((320, 480, True), (520, 960, True),
@@ -808,6 +809,63 @@ def test_robots_rules_for_diverse_paths(application):
         'wrong robots for any other folder')
 
 
+def test_meta_rules_for_keyword_paths(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/thema')
+    request = mock.Mock()
+
+    # person
+    request.path = '/thema/mahmud-abbas'
+    view = zeit.web.core.view_centerpage.Centerpage(cp, request)
+    view.title = 'Mahmud Abbas'
+    assert view.pagetitle == 'Mahmud Abbas - News und Infos', (
+        'wrong pagetitle for person')
+    assert view.pagedescription == 'Hier finden Sie alle News ' \
+        'und Hintergrund-Informationen von ZEIT ONLINE zu Mahmud Abbas.', (
+            'wrong pagedescription for person')
+
+    # location
+    request.path = '/thema/aachen'
+    view = zeit.web.core.view_centerpage.Centerpage(cp, request)
+    view.title = 'Aachen'
+    assert view.pagetitle == 'Aachen - News und Infos', (
+        'wrong pagetitle for location')
+    assert view.pagedescription == 'Hier finden Sie alle News ' \
+        'und Hintergrund-Informationen von ZEIT ONLINE zu Aachen.', (
+            'wrong pagedescription for location')
+
+    # organisation
+    request.path = '/thema/abn-amro'
+    view = zeit.web.core.view_centerpage.Centerpage(cp, request)
+    view.title = 'Abn Amro'
+    assert view.pagetitle == 'Abn Amro - News und Infos', (
+        'wrong pagetitle for organisation')
+    assert view.pagedescription == 'Hier finden Sie alle News ' \
+        'und Hintergrund-Informationen von ZEIT ONLINE zu dem ' \
+        'Thema Abn Amro.', (
+            'wrong pagedescription for organisation')
+
+    # subject
+    request.path = '/thema/agrarmarkt'
+    view = zeit.web.core.view_centerpage.Centerpage(cp, request)
+    view.title = 'Agrarmarkt'
+    assert view.pagetitle == 'Agrarmarkt - News und Infos', (
+        'wrong pagetitle for subject')
+    assert view.pagedescription == 'Hier finden Sie alle News ' \
+        'und Hintergrund-Informationen von ZEIT ONLINE zu dem ' \
+        'Thema Agrarmarkt.', (
+            'wrong pagedescription for subject')
+
+    # not valid fallback
+    request.path = '/thema/justmurcks'
+    view = zeit.web.core.view_centerpage.Centerpage(cp, request)
+    view.title = 'Just Murcks'
+    assert view.pagetitle == 'Just Murcks - News und Infos', (
+        'wrong pagetitle for subject')
+    assert view.pagedescription == 'Just Murcks.', (
+        'wrong pagedescription for not valid keyword')
+
+
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
     browser = testbrowser('/zeit-online/news-teaser')
 
@@ -1054,12 +1112,6 @@ def test_mobile_invisibility(testbrowser):
 def test_breakpoint_sniffer_script(
         selenium_driver, testserver, monkeypatch, screen_size):
 
-    def tpm(me):
-        return True
-
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
-
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('{}/zeit-online/slenderized-index'.format(testserver.url))
@@ -1184,3 +1236,13 @@ def test_wrapped_features_are_triggered(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index?app-content')
     assert not browser.cssselect('header.header')
     assert browser.cssselect('body[data-is-wrapped="true"]')
+
+
+def test_advertorial_page_has_advertorial_label(testbrowser):
+    browser = testbrowser('/zeit-online/advertorial-index')
+    assert browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
+
+
+def test_adtile12_from_cp_extra_is_there(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-centerpage')
+    assert browser.cssselect('#ad-desktop-12')

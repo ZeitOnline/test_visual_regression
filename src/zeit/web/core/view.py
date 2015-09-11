@@ -3,6 +3,7 @@ import base64
 import datetime
 import logging
 import lxml.etree
+import urlparse
 import re
 
 import babel.dates
@@ -18,6 +19,7 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.content.text.interfaces
+import zeit.cms.tagging.interfaces
 
 import zeit.web
 import zeit.web.core.article
@@ -35,6 +37,30 @@ def known_content(resource):
             zeit.content.video.interfaces.IVideo.providedBy(resource))
 
 
+def is_advertorial(context, request):
+    return getattr(context, 'product_text', None) == 'Advertorial'
+
+
+def redirect_on_trailing_slash(request):
+    if request.path.endswith('/') and not len(request.path) == 1:
+        scheme, netloc, path, params, query, fragment = urlparse.urlparse(
+            request.url)
+        url = '{}://{}{}'.format(scheme, netloc, path[:-1])
+        url = url if query == '' else '{}?{}'.format(url, query)
+        raise pyramid.httpexceptions.HTTPMovedPermanently(
+            location=url)
+
+
+def redirect_on_cp2015_suffix(request):
+    if request.path.endswith('.cp2015') and not len(request.path) == 7:
+        scheme, netloc, path, params, query, fragment = urlparse.urlparse(
+            request.url)
+        url = '{}://{}{}'.format(scheme, netloc, path[:-7])
+        url = url if query == '' else '{}?{}'.format(url, query)
+        raise pyramid.httpexceptions.HTTPMovedPermanently(
+            location=url)
+
+
 class Base(object):
     """Base class for all views."""
 
@@ -42,6 +68,20 @@ class Base(object):
     pagetitle_suffix = u''
 
     def __call__(self):
+        # to avoid circular imports
+        import zeit.web.site.view_feed
+
+        # XXX: Since we do not have a configuration based on containments
+        # for our views, this is necessary to control, that only explicitly
+        # configured views, will render an RSS feed on newsfeed.zeit.de
+        # host header (RD, 2015-09)
+        host = self.request.headers.get('host', '')
+        if re.match('newsfeed(\.staging)?\.zeit\.de', host) and not (
+                issubclass(type(self), zeit.web.site.view_feed.Base)):
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+        redirect_on_trailing_slash(self.request)
+        redirect_on_cp2015_suffix(self.request)
         time = zeit.web.core.cache.ICachingTime(self.context)
         self.request.response.cache_expires(time)
         self._set_response_headers()
@@ -149,10 +189,18 @@ class Base(object):
             return ''
 
     @zeit.web.reify
+    def is_advertorial(self):
+        return is_advertorial(self.context, self.request)
+
+    @zeit.web.reify
     def serie(self):
         if self.context.serie is None:
             return ''
         return self.context.serie.serienname
+
+    @zeit.web.reify
+    def cap_title(self):
+        return self.context.cap_title.title()
 
     @zeit.web.reify
     def banner_channel(self):
@@ -161,8 +209,7 @@ class Base(object):
             return u'{}/{}'.format(self.context.banner_id, self.banner_type)
         # second rule: angebote are mapped with two levels
         if self.ressort == 'angebote':
-            _serie = self.serie.replace(' ', '_')
-            return u'{}/{}/{}'.format(self.ressort, _serie, self.banner_type)
+            return u'{}/{}/{}'.format(self.ressort, 'adv', self.banner_type)
         # third: do the mapping
         mappings = zeit.web.core.banner.banner_id_mappings
         for mapping in mappings:
@@ -207,10 +254,11 @@ class Base(object):
             'video': 'video_artikel'}
         if self.is_hp:
             return 'homepage'
-        else:
-            return 'index' if self.type == 'centerpage' and (
-                self.sub_ressort == '' or self.ressort ==
-                'zeit-magazin') else replacements[self.type]
+        if self.is_advertorial:
+            return 'adv_index' if self.type == 'centerpage' else 'adv_artikel'
+        return 'index' if self.type == 'centerpage' and (
+            self.sub_ressort == '' or self.ressort ==
+            'zeit-magazin') else replacements[self.type]
 
     @zeit.web.reify
     def adcontroller_values(self):
@@ -292,6 +340,29 @@ class Base(object):
     def supertitle(self):
         return self.context.supertitle
 
+    def get_topic_meta(self, data_type):
+
+        title = self.title
+        whitelist_data = zeit.web.core.sources.whitelist_meta
+
+        try:
+            url_value = self.request.path.split('/').pop()
+            entity_type = zeit.web.core.utils.tag_by_url_value(
+                url_value).entity_type
+            if entity_type == 'free':
+                entity_type = 'Subject'
+        except:
+            return title + whitelist_data[0]['post_' + data_type]
+
+        for data in whitelist_data:
+            if data['category'] == entity_type and title:
+                post = data['post_' + data_type]
+                try:
+                    return data['pre_' + data_type] + title + post
+                except:
+                    return title + post
+        return title + whitelist_data[0]['post_' + data_type]
+
     @zeit.web.reify
     def pagetitle(self):
         try:
@@ -300,6 +371,9 @@ class Base(object):
         except (AssertionError, TypeError):
             title = ': '.join([t for t in (self.supertitle, self.title) if t])
         if title:
+            if self._is_keyword_page:
+                # special rules for keywordpages
+                return self.get_topic_meta('title')
             return title + (u'' if self.is_hp else self.pagetitle_suffix)
         return self.seo_title_default
 
@@ -310,7 +384,16 @@ class Base(object):
             assert desc
         except (AssertionError, TypeError):
             desc = self.context.subtitle
+            if self._is_keyword_page:
+                # special rules for keywordpages
+                return self.get_topic_meta('desc')
         return desc or self.seo_title_default
+
+    @property
+    def _is_keyword_page(self):
+        # XXX Make types configurable?
+        return zeit.content.cp.interfaces.ICenterPage.providedBy(
+            self.context) and self.context.type in ['keywordpage', 'topicpage']
 
     @zeit.web.reify
     def ranked_tags(self):
@@ -512,7 +595,8 @@ class Content(Base):
         if self.context.product and self.context.product.show == 'issue':
             date = u'ver\u00F6ffentlicht am '
         date += first_released
-        if self.date_last_published_semantic:
+        if self.date_last_published_semantic and (
+                self.date_last_published_semantic != self.date_first_released):
             date = u'{} ({} am {})'.format(
                 date,
                 self.last_modified_wording,

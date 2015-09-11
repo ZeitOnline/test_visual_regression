@@ -30,6 +30,9 @@ log = logging.getLogger(__name__)
 @view_defaults(context=zeit.content.article.interfaces.IArticle,
                custom_predicates=(zeit.web.site.view.is_zon_content,),
                request_method='GET')
+@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
+             zeit.web.core.view.is_advertorial),
+             renderer='templates/article_advertorial.html')
 @view_config(renderer='templates/article.html')
 @view_config(name='komplettansicht',
              renderer='templates/article_komplett.html')
@@ -68,10 +71,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return self.seo_robot_override
 
         # Exclude certain products and ressorts from being followed
-        exclude_products = ('ZEAR', 'TGS', 'HaBl', 'WIWO', 'GOLEM')
+        exclude_products = ('TGS', 'HaBl', 'WIWO', 'GOLEM')
 
-        if self.product_id in exclude_products or self.ressort == 'Fehler':
-            return 'noindex,follow'
+        if self.product_id in exclude_products or (
+                self.ressort == 'Fehler' and self.product_id == 'ZEAR'):
+                return 'noindex,follow'
         else:
             return 'index,follow,noodp,noydir,noarchive'
 
@@ -111,6 +115,16 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     @zeit.web.reify
     def has_cardstack(self):
         return len(self.context.xml.xpath('/article/body//cardstack')) > 0
+
+    @zeit.web.reify
+    def advertorial_marker(self):
+        try:
+            return (
+                self.context.advertisement_title,
+                self.context.advertisement_text,
+                self.cap_title)
+        except AttributeError:
+            return None
 
 
 @view_config(name='seite',

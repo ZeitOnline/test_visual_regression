@@ -8,6 +8,7 @@ import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
+import pyramid
 import requests
 import requests.exceptions
 import urlparse
@@ -498,7 +499,16 @@ def _raw_html(xml):
 
 
 def _inline_html(xml, elements=None):
-    allowed_elements = 'a|span|strong|img|em|sup|sub|caption|br'
+
+    home_url = "http://www.zeit.de/"
+
+    try:
+        request = pyramid.threadlocal.get_current_request()
+        home_url = request.route_url('home')
+    except:
+        pass
+
+    allowed_elements = 'a|span|strong|img|em|sup|sub|caption|br|entity'
     if elements:
         elements.append(allowed_elements)
         allowed_elements = '|'.join(elements)
@@ -570,7 +580,17 @@ def _inline_html(xml, elements=None):
               </xsl:attribute>
             </xsl:template>
           <xsl:template match="@*" />
-        </xsl:stylesheet>""" % (allowed_elements))
+          <xsl:template match="entity">
+                <a>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="concat(
+                            '%sthema/',
+                            substring-after(@url_value, '/'))" />
+                    </xsl:attribute>
+                    <xsl:apply-templates />
+                </a>
+          </xsl:template>
+        </xsl:stylesheet>""" % (allowed_elements, home_url))
     try:
         transform = lxml.etree.XSLT(filter_xslt)
         return transform(xml)

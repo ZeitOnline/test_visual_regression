@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import urllib2
 
 import lxml.html
 import mock
@@ -193,6 +194,18 @@ def test_dynamic_centerpage_should_be_paginatable(testserver, testbrowser):
     assert text == '2'
 
 
+def test_pagination_should_be_validated(testserver, testbrowser):
+    with pytest.raises(urllib2.HTTPError):
+        assert '404 Not Found' in testbrowser(
+            '{}/dynamic/angela-merkel?p=-1'.format(testserver.url)).headers
+    with pytest.raises(urllib2.HTTPError):
+        assert '404 Not Found' in testbrowser(
+            '{}/dynamic/angela-merkel?p=123'.format(testserver.url)).headers
+    with pytest.raises(urllib2.HTTPError):
+        assert '404 Not Found' in testbrowser(
+            '{}/dynamic/angela-merkel?p=1moep'.format(testserver.url)).headers
+
+
 def test_centerpage_markdown_module_is_rendered(jinja2_env):
     tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
     content = zeit.cms.interfaces.ICMSContent(
@@ -208,9 +221,16 @@ def test_centerpage_markdown_module_is_rendered(jinja2_env):
     assert len(html.cssselect('.markup__text li')) == 4
 
 
-def test_verlagsangebot_label_should_be_displayed(testbrowser):
+def test_inhouse_label_should_be_displayed(testbrowser):
     select = testbrowser('/zeit-online/teaser-inhouse-setup').cssselect
     labels = select('.teaser-small--inhouse .teaser-small__label')
     assert len(labels) == 2
-    labels = select('.teaser-small-minor--inhouse .teaser-small-minor__label')
+    assert map(lambda x: x.text, labels) == (
+        ['Verlagsangebot', 'Verlagsangebot'])
+
+
+def test_ad_label_should_be_displayed(testbrowser):
+    select = testbrowser('/zeit-online/teaser-inhouse-setup').cssselect
+    labels = select('.teaser-small-minor--ad .teaser-small-minor__label')
     assert len(labels) == 1
+    assert labels[0].text == 'Anzeige'

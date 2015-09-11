@@ -116,6 +116,11 @@ class RenderedLegacyArea(LegacyArea):
 
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       zeit.web.core.view.is_advertorial),
+    renderer='templates/centerpage_advertorial.html')
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICP2015,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
 class Centerpage(
@@ -269,6 +274,66 @@ class CenterpageArea(Centerpage):
         }
 
 
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.IStoryStream,
+    custom_predicates=(zeit.web.site.view.is_zon_content,),
+    renderer='templates/storystream.html')
+class Storystream(Centerpage):
+    """Main view class for ZEIT ONLINE storystreams."""
+
+    atom_meta = {
+        'count': None,
+        'oldest_date': None,
+        'latest_date': None
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(Centerpage, self).__init__(*args, **kwargs)
+        self.prepare_atom_meta()
+
+    def prepare_atom_meta(self):
+        regions = self.regions
+        if (len(regions) == 0):
+            return None
+        last_region = self.regions[len(regions)-1]
+
+        areas = last_region.values()
+        if (len(areas) == 0):
+            return None
+        area = areas[0]
+
+        modules = area.values()
+        if (len(modules) == 0):
+            return None
+
+        atom_counter = 0
+        oldest_atom = None
+        latest_atom = None
+
+        for module in modules:
+            print(module.type)
+            if module.type != 'markup':
+                atom_counter += 1
+
+                # OPTIMIZE: this is redundant (also done inside the template).
+                # Maybe we should store the teaser object into the mdule?
+                teaser = zeit.web.core.template.first_child(module)
+                if oldest_atom is None or oldest_atom > teaser.tldr_date:
+                    oldest_atom = teaser.tldr_date
+
+                if latest_atom is None or latest_atom < teaser.tldr_date:
+                    latest_atom = teaser.tldr_date
+
+        self.atom_meta['count'] = atom_counter
+        self.atom_meta['oldest_date'] = oldest_atom
+        self.atom_meta['latest_date'] = latest_atom
+
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       zeit.web.core.view.is_advertorial),
+    renderer='templates/centerpage_advertorial.html')
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
