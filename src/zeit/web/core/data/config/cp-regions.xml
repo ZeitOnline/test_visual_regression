@@ -38,4 +38,7 @@
     <region kind="gallery" title="Galerie">
         <area kind="gallery"/>
     </region>
+    <region kind="solo" title="Buzz-Board">
+        <area kind="buzzboard"/>
+    </region>
 </regions>
