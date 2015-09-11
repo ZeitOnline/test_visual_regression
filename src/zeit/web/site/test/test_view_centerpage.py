@@ -1246,3 +1246,8 @@ def test_advertorial_page_has_advertorial_label(testbrowser):
 def test_adtile12_from_cp_extra_is_there(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-centerpage')
     assert browser.cssselect('#ad-desktop-12')
+
+
+def test_adtile13_from_cp_extra_is_there(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+    assert browser.cssselect('#ad-desktop-13')

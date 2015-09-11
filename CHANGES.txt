@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2199: Make link objects work everywhere, not just for ZMO
 
+- ZON-2114: Add cp_extra place 13 for manual addition
+
 
 1.66 (2015-09-10)
 -----------------
