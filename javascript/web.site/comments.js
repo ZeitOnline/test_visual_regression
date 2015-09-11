@@ -13,6 +13,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         $commentForm = $( '#comment-form' ),
         slideDuration = 300,
         inputEvent = ( 'oninput' in document.createElement( 'input' )) ? 'input' : 'keypress',
+        sendurl = window.location.href,
 
     /**
      * comments.js: reply to comment
@@ -87,7 +88,6 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         var cid  = this.getAttribute( 'data-cid' ),
             link = $( this ),
             comment = link.closest( '.comment__container' ),
-            sendurl = window.location.href,
             authenticated = $commentForm.hasClass( 'comment-form' ),
             form,
             template;
@@ -150,7 +150,6 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
             action = link.data( 'action' ),
             cid  = link.data( 'cid' ),
             comment = link.closest( '.comment__container' ),
-            sendurl = window.location.href,
             failText = 'Empfehlung fehlgeschlagen, bitte Seite neu laden.';
 
         e.preventDefault();
@@ -251,8 +250,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
     submitReport = function( e ) {
         e.preventDefault();
 
-        var sendurl = window.location.href,
-            form = this.form,
+        var form = this.form,
             input = this.form.elements;
 
         // avoid repeated submits
@@ -302,8 +300,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         e.preventDefault();
 
         var $form = $( this ),
-            input = this.elements,
-            sendurl = window.location.href;
+            input = this.elements;
 
         $form.find( '.comment-form__hint' ).removeClass( 'comment-form__hint--error' );
         $form.find( '.comment-form__input' ).removeClass( 'error' );
