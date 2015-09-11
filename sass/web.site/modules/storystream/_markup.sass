@@ -5,14 +5,13 @@
 		background-color: $zon_lighter_grey
 
 	&__container
-		padding: 0 $storystream-padding-mobile
+		padding: $vertical-space $storystream-padding-mobile
+		&--first
+			padding: $vertical-space*1.5 $storystream-padding-mobile
 
 	&__content
 		max-width: remify(640px)
 		margin: 0 auto
-		padding: $vertical-space 0
-		&--first
-			padding: $vertical-space*1.5 0
 		&--last
 			position: relative
 			&:before
@@ -84,3 +83,45 @@
 		&__content--last:before,
 		&__content--last:after
 			left: -$storystream-padding-desktop-inner
+
+.storystream-markup-wrapper
+	+transition(max-height .5s)
+	overflow: hidden
+	position: relative
+
+.storystream-markup-wrapper--wrapped
+	cursor: pointer
+	margin: 0 auto
+	max-width: remify(640px)
+	max-height: 7 * 1.4 * em(18px) // 5 lines paragraph text
+	+respond-min($break-desktop-min)
+		max-height: 7 * 1.5 * em(20px) // 5 lines paragraph text
+
+	&:before
+		content: ""
+		position: absolute
+		left: 0
+		right: 0
+		bottom: 0
+		height: 5 * 1.5 * em(20px) // 3 lines paragraph text
+		+background-image(linear-gradient(0deg, rgba($zon_lighter_grey, 1) 1.5em, rgba($zon_lighter_grey, 0) 100%))
+		z-index: 1
+
+	&:after
+		color: #777
+		content: "+ Mehr lesen"
+		font-size: 0.9em // em by purpose
+		position: absolute
+		bottom: 0
+		left: 0
+		text-align: center
+		letter-spacing: $zon-letter-spacing-s
+		border-bottom: 1px solid rgba($color-link--default, .5)
+		+transition-property(border-bottom-color, color)
+		+transition-duration(.2s)
+		z-index: 2
+
+	&:hover:after
+		color: $color-link--hover
+		border-bottom-color: rgba($color-link--hover, .5)
+
