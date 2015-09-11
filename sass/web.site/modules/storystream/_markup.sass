@@ -8,11 +8,14 @@
 		padding: $vertical-space $storystream-padding-mobile
 		&--first
 			padding: $vertical-space*1.5 $storystream-padding-mobile
+		&--last
+			padding: 0 $vertical-space $vertical-space
 
 	&__content
 		max-width: remify(640px)
 		margin: 0 auto
 		&--last
+			padding-top: $vertical-space
 			position: relative
 			&:before
 				color: $white
