@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1892: Add Buzz-Board
 
+- ZON-2014: Enforce mobile image display
+
 
 1.67 (2015-09-11)
 -----------------
@@ -17,6 +19,8 @@ Change log for zeit.web
 - ZON-2199: Make link objects work everywhere, not just for ZMO
 
 - ZON-2114: Add cp_extra place 13 for manual addition
+
+- ZON-2077 - Part 2: Put in thema and authoren noindex again
 
 - FIX: Make redirect of cp2015->without configurable, so preview doesn't break
 

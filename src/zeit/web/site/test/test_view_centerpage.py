@@ -11,6 +11,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
+import pyramid.testing
 
 import zeit.content.cp.centerpage
 
@@ -760,10 +761,41 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     assert link[0].get('href') == url + '?p=2'
 
 
+def test_robots_rules_for_thema_paths(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = pyramid.testing.DummyRequest()
+    request.path = '/thema/'
+
+    # paginated page
+    request.url = 'http://localhost/thema/test?p=2'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for paginated thema page')
+
+    # paginated page starting with 1
+    request.url = 'http://localhost/thema/test?p=10'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for paginated thema page starting with 1')
+
+    # first page with param
+    request.url = 'http://localhost/thema/test?p=1'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'follow,noarchive', (
+        'wrong robots for first thema page with param')
+
+    # first page without param
+    request.url = 'http://localhost/thema/test'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'follow,noarchive', (
+        'wrong robots for first thema page without param')
+
+
 def test_robots_rules_for_angebote_paths(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    request = mock.Mock()
+    request = pyramid.testing.DummyRequest()
 
     # usual angebot
     request.path = '/angebote/immobilien/test'
@@ -807,6 +839,12 @@ def test_robots_rules_for_diverse_paths(application):
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
     assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
         'wrong robots for any other folder')
+
+    # autoren folder
+    request.path = '/autoren/index'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow', (
+        'wrong robots for autoren folder')
 
 
 def test_meta_rules_for_keyword_paths(application):
