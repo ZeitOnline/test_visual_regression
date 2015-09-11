@@ -4,7 +4,7 @@ Change log for zeit.web
 1.68 (unreleased)
 -----------------
 
-- ZON-2109: Add SEO meta links
+- ZON-2109: Add SEO meta links for dynamic cps
 
 - ZON-2014: Enforce mobile image display
 
