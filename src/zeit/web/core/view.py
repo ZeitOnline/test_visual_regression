@@ -9,6 +9,7 @@ import re
 import babel.dates
 import bugsnag
 import pyramid.response
+import pyramid.settings
 import pyramid.view
 import werkzeug.http
 
@@ -81,7 +82,11 @@ class Base(object):
             raise pyramid.httpexceptions.HTTPNotFound()
 
         redirect_on_trailing_slash(self.request)
-        redirect_on_cp2015_suffix(self.request)
+        # Don't redirect for preview (since the workingcopy does not contain
+        # the suffix-less version)
+        if pyramid.settings.asbool(self.request.registry.settings.get(
+                'redirect_from_cp2015', True)):
+            redirect_on_cp2015_suffix(self.request)
         time = zeit.web.core.cache.ICachingTime(self.context)
         self.request.response.cache_expires(time)
         self._set_response_headers()
@@ -595,8 +600,7 @@ class Content(Base):
         if self.context.product and self.context.product.show == 'issue':
             date = u'ver\u00F6ffentlicht am '
         date += first_released
-        if self.date_last_published_semantic and (
-                self.date_last_published_semantic != self.date_first_released):
+        if self.date_last_published_semantic:
             date = u'{} ({} am {})'.format(
                 date,
                 self.last_modified_wording,

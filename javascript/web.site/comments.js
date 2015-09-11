@@ -12,8 +12,8 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         $commentsBody = $( '#js-comments-body' ),
         $commentForm = $( '#comment-form' ),
         slideDuration = 300,
-        startEvent = ( 'ontouchstart' in window ) ? 'touchstart' : 'click',
         inputEvent = ( 'oninput' in document.createElement( 'input' )) ? 'input' : 'keypress',
+        sendurl = window.location.href,
 
     /**
      * comments.js: reply to comment
@@ -88,7 +88,6 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         var cid  = this.getAttribute( 'data-cid' ),
             link = $( this ),
             comment = link.closest( '.comment__container' ),
-            sendurl = window.location.href,
             authenticated = $commentForm.hasClass( 'comment-form' ),
             form,
             template;
@@ -144,6 +143,55 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
             }
         });
 
+    },
+
+    promoteComment = function( e ) {
+        var link = $( this ),
+            action = link.data( 'action' ),
+            cid  = link.data( 'cid' ),
+            comment = link.closest( '.comment__container' ),
+            failText = 'Empfehlung fehlgeschlagen, bitte Seite neu laden.';
+
+        e.preventDefault();
+        this.blur();
+
+        if ( link.hasClass( 'comment__moderation--sending' ) ) {
+            return false;
+        }
+
+        link.addClass( 'comment__moderation--sending' );
+
+        $.ajax({
+            url: sendurl,
+            data: {
+                'ajax':     'true',
+                'action':   action,
+                'pid':      cid
+            },
+            dataType: 'json',
+            method: 'POST'
+        })
+        .done( function( response ) {
+            if ( response ) {
+                if ( response.response.error === false ) {
+                    link.removeClass( 'comment__moderation--sending' );
+
+                    if ( action === 'promote' ) {
+                        link.text( 'Redaktionsempfehlung entfernen' )
+                            .data( 'action', 'demote' );
+                    }
+                    if ( action === 'demote' ) {
+                        link.text( 'Redaktionsempfehlung' )
+                            .data( 'action', 'promote' );
+                    }
+                } else {
+                    link.text( failText );
+                }
+            }
+        })
+        .fail( function() {
+            link.text( failText );
+        });
     },
 
     /**
@@ -202,8 +250,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
     submitReport = function( e ) {
         e.preventDefault();
 
-        var sendurl = window.location.href,
-            form = this.form,
+        var form = this.form,
             input = this.form.elements;
 
         // avoid repeated submits
@@ -253,8 +300,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         e.preventDefault();
 
         var $form = $( this ),
-            input = this.elements,
-            sendurl = window.location.href;
+            input = this.elements;
 
         $form.find( '.comment-form__hint' ).removeClass( 'comment-form__hint--error' );
         $form.find( '.comment-form__input' ).removeClass( 'error' );
@@ -364,9 +410,35 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
     showReplies = function( e ) {
         e.preventDefault();
         $( this ).removeClass( 'comment--wrapped' )
-            .nextUntil( '.js-comment-toplevel' ) // get other replies
-            .filter( '.comment--indented' ) // filter to remove ads from result
+            .nextUntil( '.js-comment-toplevel', '.comment--indented' ) // get other replies, filter to remove ads from result
             .velocity( 'slideDown', slideDuration );
+    },
+
+    addModeration = function() {
+        var $comment = $( this ),
+            promoted = $comment.find( '.comment-meta__badge--promoted' ).length,
+            action = promoted ? 'demote' : 'promote',
+            actionLabel = promoted ? 'Redaktionsempfehlung entfernen' : 'Redaktionsempfehlung',
+            cid = this.id.substr( 4 ),
+            modHTML = '' +
+            '<ul class="comment__moderations">' +
+                '<li>' +
+                    '<a class="comment__moderation" href="%ch%/comment/edit/%cid%">' +
+                        'Kommentar bearbeiten' +
+                    '</a>' +
+                '</li>' +
+                '<li>' +
+                    '<a class="comment__moderation js-promote-comment" data-action="%action%" data-cid="%cid%" href="#' + this.id + '">' +
+                        actionLabel +
+                    '</a>' +
+                '</li>' +
+            '</ul>';
+
+        modHTML = modHTML.replace( /%cid%/g, cid )
+            .replace( '%action%', action )
+            .replace( '%ch%', window.ZMO.communityHost );
+        $comment.find( '.comment__reactions' )
+            .append( modHTML );
     },
 
     /**
@@ -392,6 +464,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                     toggleRecommendationLink( $( this ) );
                 }
             });
+            $commentsBody.find( '.comment' ).each( addModeration );
         }
 
         // disable submit buttons of required fields
@@ -402,13 +475,14 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
         // register event handlers
         $comments.on( 'submit', '.js-submit-comment', submitComment );
-        $commentsBody.on( startEvent, '.js-reply-to-comment', replyToComment );
-        $commentsBody.on( startEvent, '.js-cancel-reply', cancelReply );
-        $commentsBody.on( startEvent, '.js-report-comment', reportComment );
-        $commentsBody.on( startEvent, '.js-cancel-report', cancelReport );
-        $commentsBody.on( startEvent, '.js-submit-report', submitReport );
-        $commentsBody.on( startEvent, '.js-recommend-comment', recommendComment );
-        $commentsBody.on( startEvent, '.comment--wrapped', showReplies );
+        $commentsBody.on( 'click', '.js-reply-to-comment', replyToComment );
+        $commentsBody.on( 'click', '.js-cancel-reply', cancelReply );
+        $commentsBody.on( 'click', '.js-report-comment', reportComment );
+        $commentsBody.on( 'click', '.js-cancel-report', cancelReport );
+        $commentsBody.on( 'click', '.js-submit-report', submitReport );
+        $commentsBody.on( 'click', '.js-recommend-comment', recommendComment );
+        $commentsBody.on( 'click', '.comment--wrapped', showReplies );
+        $commentsBody.on( 'click', '.js-promote-comment', promoteComment );
         $comments.on( inputEvent, '.js-required', enableForm );
     };
 

@@ -43,6 +43,7 @@
 	// EXPERIMENT: We're trying to get rid of the 'padding/margin breakout kerfuffle'.
 	// 			   Seems like we started with the desktop and retrofitted.
 	// 			   This is an atempt to do it *mobile first*.
+	&--buzzboard,
 	&--parquet,
 	&--solo,
 	&--spektrum,
@@ -54,6 +55,10 @@
 		padding-left: $page-padding
 		padding-right: $page-padding
 
+	&--buzzboard
+		display: none
+		+respond-min($break-tablet-min)
+			display: block
 	&--spektrum
 		padding-top: remify(60px)
 	+respond-min($break-areas)
