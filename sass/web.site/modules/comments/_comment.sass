@@ -30,9 +30,10 @@ $color-comment-border: $zon_light_grey
 				color: $zon_dark_grey
 				border-bottom: 1px solid $zon_mid_grey
 		.comment__body
-			margin-bottom: 0
 			max-height: 7em // em-tentional :D
 			overflow: hidden
+		.comment__reactions
+			display: none
 		.comment-overlay
 			display: block
 
@@ -84,6 +85,7 @@ $color-comment-border: $zon_light_grey
 				vertical-align: text-top
 
 	&__reactions
+		+clearfix
 		text-align: right
 
 	&__reaction,
@@ -111,23 +113,21 @@ $color-comment-border: $zon_light_grey
 			padding-left: remify(4px)
 
 	&__moderations
+		float: left
 		list-style: none
+		margin: 0
 		padding: 0
 		text-align: left
 	&__moderation
-		+transition(0.2s)
+		color: $zon-red
 		font-size: remify(15px)
 		letter-spacing: $zon-letter-spacing-s
-		line-height: 2.333
-		+link
-			border-bottom: 1px solid rgba(204, 204, 204, 0.4)
-			color: $zon-red
+		line-height: 2
 		+on-interaction
-			border-bottom: 1px solid rgba(204, 204, 204, 1)
-			color: $zon-red
+			border-bottom: 1px solid currentColor
 
-		@at-root #{&}#{&}--sending // generates: .comment__moderation.comment__moderation--sending
-			color: $zon_light_grey
+		&--sending
+			color: $zon_light_grey !important
 
 
 .comment--indented
