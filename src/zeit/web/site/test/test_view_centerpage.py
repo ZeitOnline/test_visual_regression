@@ -1101,10 +1101,11 @@ def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
         assert False, 'Timeout accordion script'
     else:
         slides = driver.find_elements_by_css_selector('.buzz-box__teasers')
-        assert len(slides) == 3
+        assert len(slides) == 4
         assert slides[0].is_displayed()
         assert not slides[1].is_displayed()
         assert not slides[2].is_displayed()
+        assert not slides[3].is_displayed()
 
 
 def test_non_navigation_centerpage_should_have_minimal_breadcrumbs(

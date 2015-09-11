@@ -186,6 +186,9 @@ class IReach(zope.interface.Interface):
     def get_score():
         """Return a ranking of highest buzz-scoring articles"""
 
+    def get_trend():
+        """Return a ranking of highest buzz-trending articles"""
+
     def get_social():
         """Get a ranking of articles trending on social platforms"""
 
