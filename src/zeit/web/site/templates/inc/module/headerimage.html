@@ -2,7 +2,7 @@
     {# get the image directy from the supplied image group #}
     {% set image = get_image(module, default='panorama') %}
     {% set tag = 'div' if view.is_advertorial else 'h1' %}
-    {# we need to explecitly pass the layout aka block class name #}
+    {# we need to explicitly pass the layout aka block class name #}
     {% set module_layout = "header-image" %}
     {% include "zeit.web.site:templates/inc/module/headerimage_image.tpl" ignore missing %}
     <{{tag}} class="header-image__heading">
