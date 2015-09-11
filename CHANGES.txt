@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2014: Enforce mobile image display
 
+- MAINT: Update x-styles
+
 
 1.67 (2015-09-11)
 -----------------
