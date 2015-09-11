@@ -1319,7 +1319,7 @@ def test_topic_teasers_have_meetrics_attribute(testserver, testbrowser):
 def test_all_teasers_have_clicktrack_attribute(testserver, testbrowser):
     browser = testbrowser('/index')
 
-    teasers = browser.cssselect('article[data-block-type="teaser"]')
+    teasers = browser.cssselect('article[data-unique-id]')
     for teaser in teasers:
         # exclude spektrum teasers
         if teaser.getparent().attrib['class'] != 'parquet-teasers':
