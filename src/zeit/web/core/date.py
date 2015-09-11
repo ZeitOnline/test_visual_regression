@@ -33,7 +33,7 @@ def mod_date(resource):
     try:
         pub_info = zeit.cms.workflow.interfaces.IPublishInfo(resource)
         return (pub_info.date_last_published_semantic or
-                pub_info.date_last_published)
+                pub_info.date_first_released)
     except TypeError:
         return
 

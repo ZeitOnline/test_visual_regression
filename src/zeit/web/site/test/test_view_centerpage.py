@@ -1285,3 +1285,13 @@ def test_all_teasers_have_clicktrack_attribute(testserver, testbrowser):
         # exclude spektrum teasers
         if teaser.getparent().attrib['class'] != 'parquet-teasers':
             assert teaser.attrib['data-clicktracking'] != ''
+
+
+def test_adtile12_from_cp_extra_is_there(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-centerpage')
+    assert browser.cssselect('#ad-desktop-12')
+
+
+def test_adtile13_from_cp_extra_is_there(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+    assert browser.cssselect('#ad-desktop-13')

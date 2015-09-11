@@ -722,6 +722,12 @@ def test_imported_article_has_special_meta_robots(
         'wrong robots for none product article')
 
 
+def test_article_doesnt_show_modified_date(testbrowser):
+    select = testbrowser('/zeit-online/article/01').cssselect
+    date_string = select('.metadata__date')[0].text
+    assert date_string == '27. Mai 2015, 19:11 Uhr'
+
+
 def test_video_in_article_is_there(testbrowser):
     article = testbrowser('/zeit-online/article/zeit')
     assert len(article.cssselect('.video-player__iframe')) == 1
@@ -742,3 +748,9 @@ def test_advertorial_marker_is_present(testbrowser):
     assert len(browser.cssselect('.advertorial-marker__title')) == 1
     assert len(browser.cssselect('.advertorial-marker__text')) == 1
     assert len(browser.cssselect('.advertorial-marker__label')) == 1
+
+
+def test_canonical_url_should_omit_queries_and_hashes(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit/seite-3?cid=123#comments')
+    canonical_url = browser.cssselect('link[rel=canonical]')[0].attrib['href']
+    assert canonical_url.endswith('zeit-online/article/zeit/seite-3')
