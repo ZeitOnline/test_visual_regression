@@ -11,8 +11,8 @@
     <div class="{{ blockname }}__wrapper">
         <div class="{{ blockname }}__container">
         	<div class="{{ blockname }}__content">
-            	<span class="{{ blockname }}__kicker">{{ view.context.supertitle }}</span>
-            	<h1 class="{{ blockname }}__title">{{ view.context.title }}</h1>
+            	<span class="{{ blockname }}__kicker">{{ module.supertitle }}</span>
+            	<h1 class="{{ blockname }}__title">{{ module.title }}</h1>
                 {% if view.date_last_modified %}
                 	<span class="{{ blockname }}__update">
                         {{ lama.use_svg_icon('storystream-updated', 'storystream-headerimage__updateicon', request) }}
