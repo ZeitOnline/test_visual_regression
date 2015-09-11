@@ -4,6 +4,8 @@ Change log for zeit.web
 1.68 (unreleased)
 -----------------
 
+- ZON-2197: Allow specifying a host, not just a path, for ``asset_prefix``
+
 - ZON-2014: Enforce mobile image display
 
 - QUICKFIX: Make Keywordpage Titel to h1
