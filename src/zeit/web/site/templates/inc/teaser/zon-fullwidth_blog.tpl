@@ -1,6 +1,7 @@
 {%- extends "zeit.web.site:templates/inc/teaser/zon-fullwidth.tpl" -%}
 
 {% block teaser_modifier %}{{ self.layout()}}--blog{% endblock %}
+{% block meetrics %}{% endblock %}
 
 {% block teaser_media_position_before_title %}
 	{{ super() }}

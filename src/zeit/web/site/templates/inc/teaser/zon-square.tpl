@@ -1,7 +1,6 @@
 {%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
 {% block layout %}teaser-square{% endblock %}
-{% block meetrics %}{{ area.kind }}{% endblock %}
 {% block teaser_modifier %}{{ self.layout() }}--graphic{% endblock %}
 {% block teaser_journalistic_format %}{% endblock %}
 

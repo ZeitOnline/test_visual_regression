@@ -2,8 +2,6 @@
 
 {% block layout %}teaser-large{% endblock %}
 
-{% block meetrics %}{{ area.kind }}{% endblock %}
-
 {% block teaser_media_position_after_title %}
     {% set module_layout = self.layout() %}
     {% if teaser | is_video %}
