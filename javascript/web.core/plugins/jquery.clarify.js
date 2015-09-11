@@ -77,6 +77,7 @@
 
     $.fn.clarify = function() {
         return this.each( function() {
+            console.debug( atob( this.getAttribute( 'data-obfuscated' ) ) );
             $( this ).html( atob( this.getAttribute( 'data-obfuscated' ) ) );
         });
     };

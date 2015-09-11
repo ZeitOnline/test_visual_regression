@@ -601,7 +601,7 @@ class Content(Base):
             date = u'ver\u00F6ffentlicht am '
         date += first_released
         if self.date_last_published_semantic:
-            date = u'{} ({} am {})'.format(
+            date = u'{} <span class="metadata__seperator"> / </span> {} am {} '.format(
                 date,
                 self.last_modified_wording,
                 babel.dates.format_datetime(
@@ -617,7 +617,7 @@ class Content(Base):
     def last_modified_wording(self):
         if self.context.product and self.context.product.show == 'issue':
             return 'Editiert'
-        return 'Zuletzt aktualisiert'
+        return 'Aktualisiert'
 
     @zeit.web.reify
     def source_label(self):
