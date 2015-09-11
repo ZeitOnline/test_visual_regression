@@ -13,7 +13,7 @@
 					{% if oldest_date == latest_date %}
 						{{ oldest_date }}
 					{% else %}
-						<a href="#" class="{{ blockname }}__link">{{ oldest_date }}</a> bis <a href="#" class="{{ blockname }}__link">{{ latest_date }}</a>
+						<a href="#first_atom" class="{{ blockname }}__link">{{ oldest_date }}</a> bis <a href="#latest_atom" class="{{ blockname }}__link">{{ latest_date }}</a>
 					{% endif %}
 				</span>
 			{% endif %}
