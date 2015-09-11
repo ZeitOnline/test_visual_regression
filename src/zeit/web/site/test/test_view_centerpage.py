@@ -1241,3 +1241,47 @@ def test_wrapped_features_are_triggered(testbrowser):
 def test_advertorial_page_has_advertorial_label(testbrowser):
     browser = testbrowser('/zeit-online/advertorial-index')
     assert browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
+
+
+def test_standart_teasers_have_meetrics_attribute(testserver, testbrowser):
+    browser = testbrowser('/index')
+
+    fullwidth = browser.cssselect('.teaser-fullwidth')
+    large = browser.cssselect('.teaser-large')
+    small = browser.cssselect('.teaser-small')
+    square = browser.cssselect('.teaser-square')
+
+    assert fullwidth[0].attrib['data-meetrics'] == 'solo'
+    assert large[0].attrib['data-meetrics'] == 'major'
+    assert small[0].attrib['data-meetrics'] == 'major'
+    assert square[0].attrib['data-meetrics'] == 'minor'
+
+
+def test_video_teasers_have_meetrics_attribute(testserver, testbrowser):
+    browser = testbrowser('/index')
+
+    large = browser.cssselect('.video-large')
+    small = browser.cssselect('.video-small')
+
+    assert large[0].attrib['data-meetrics'] == 'solo'
+    assert small[0].attrib['data-meetrics'] == 'solo'
+
+
+def test_topic_teasers_have_meetrics_attribute(testserver, testbrowser):
+    browser = testbrowser('/zeit-online/topic-teaser')
+
+    large = browser.cssselect('.teaser-topic-main')
+    small = browser.cssselect('.teaser-topic-item')
+
+    assert large[0].attrib['data-meetrics'] == 'topic'
+    assert small[0].attrib['data-meetrics'] == 'topic'
+
+
+def test_all_teasers_have_clicktrack_attribute(testserver, testbrowser):
+    browser = testbrowser('/index')
+
+    teasers = browser.cssselect('article[data-block-type="teaser"]')
+    for teaser in teasers:
+        # exclude spektrum teasers
+        if teaser.getparent().attrib['class'] != 'parquet-teasers':
+            assert teaser.attrib['data-clicktracking'] != ''
