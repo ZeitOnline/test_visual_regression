@@ -11,6 +11,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
+import pyramid.testing
 
 import zeit.content.cp.centerpage
 
@@ -763,7 +764,7 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
 def test_robots_rules_for_thema_paths(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    request = mock.Mock()
+    request = pyramid.testing.DummyRequest()
     request.path = '/thema/'
 
     # paginated page
@@ -794,7 +795,7 @@ def test_robots_rules_for_thema_paths(application):
 def test_robots_rules_for_angebote_paths(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    request = mock.Mock()
+    request = pyramid.testing.DummyRequest()
 
     # usual angebot
     request.path = '/angebote/immobilien/test'
