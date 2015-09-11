@@ -1,13 +1,13 @@
 /**
- * @fileOverview jQuery plugin to pimp liveblog articles
+ * @fileOverview jQuery plugin to pimp storystream CPs
  * @author moritz.stoltenburg@zeit.de
+ * @author thomas.puppe@zeit.de
  * @version  0.1
  */
 (function( $, window, document ) {
     function Storystream( element ) {
         this.node = element;
         this.element = $( element );
-        console.log( this.element );
         this.init();
     }
 
