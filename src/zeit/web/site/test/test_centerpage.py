@@ -238,8 +238,8 @@ def test_ad_label_should_be_displayed(testbrowser):
 
 def test_link_rel_should_be_set_according_to_pagination(testbrowser):
     select = testbrowser('/dynamic/angela-merkel?p=3').cssselect
-    rel_next = select('meta[rel="next"]')
-    rel_prev = select('meta[rel="prev"]')
+    rel_next = select('link[rel="next"]')
+    rel_prev = select('link[rel="prev"]')
     assert len(rel_next) == 1
     assert len(rel_prev) == 1
     assert '/dynamic/angela-merkel?p=4' in rel_next[0].attrib['href']
@@ -248,8 +248,8 @@ def test_link_rel_should_be_set_according_to_pagination(testbrowser):
 
 def test_link_rel_to_prev_page_should_not_exist_on_first_page(testbrowser):
     select = testbrowser('/dynamic/angela-merkel').cssselect
-    rel_next = select('meta[rel="next"]')
-    rel_prev = select('meta[rel="prev"]')
+    rel_next = select('link[rel="next"]')
+    rel_prev = select('link[rel="prev"]')
     assert len(rel_next) == 1
     assert len(rel_prev) == 0
     assert '/dynamic/angela-merkel?p=2' in rel_next[0].attrib['href']
