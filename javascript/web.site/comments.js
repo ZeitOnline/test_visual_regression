@@ -410,16 +410,15 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
     showReplies = function( e ) {
         e.preventDefault();
         $( this ).removeClass( 'comment--wrapped' )
-            .nextUntil( '.js-comment-toplevel' ) // get other replies
-            .filter( '.comment--indented' ) // filter to remove ads from result
+            .nextUntil( '.js-comment-toplevel', '.comment--indented' ) // get other replies, filter to remove ads from result
             .velocity( 'slideDown', slideDuration );
     },
 
     addModeration = function() {
         var $comment = $( this ),
-            action = $comment.find( '.comment-meta__badge--promoted' ).length ? 'demote' : 'promote',
-            actionLabel = $comment.find( '.comment-meta__badge--promoted' ).length ?
-                'Redaktionsempfehlung entfernen' : 'Redaktionsempfehlung',
+            promoted = $comment.find( '.comment-meta__badge--promoted' ).length,
+            action = promoted ? 'demote' : 'promote',
+            actionLabel = promoted ? 'Redaktionsempfehlung entfernen' : 'Redaktionsempfehlung',
             cid = this.id.substr( 4 ),
             modHTML = '' +
             '<ul class="comment__moderations">' +
@@ -429,7 +428,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                     '</a>' +
                 '</li>' +
                 '<li>' +
-                    '<a class="comment__moderation js-promote-comment" data-action="%action%" data-cid="%cid%" href="#">' +
+                    '<a class="comment__moderation js-promote-comment" data-action="%action%" data-cid="%cid%" href="#' + this.id + '">' +
                         actionLabel +
                     '</a>' +
                 '</li>' +
