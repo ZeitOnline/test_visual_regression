@@ -89,7 +89,7 @@
 				<div class="comment-meta">
 					{% if comment.img_url %}
 					<div class="comment-meta__avatar">
-						<img alt="Avatarbild von {{ comment.name }}" src="{{ comment.img_url }}">
+						<img alt="Avatarbild von {{ comment.name }}" src="{{ comment.img_url }}">
 					</div>
 					{% endif %}
 					<div class="comment-meta__name">

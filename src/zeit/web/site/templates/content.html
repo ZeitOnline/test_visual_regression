@@ -7,6 +7,7 @@
 {% set is_column = view and view.context and view.context.serie and view.context.serie.column %}
 
 {% block main %}
+    {% block advertorial_marker %}{% endblock advertorial_marker %}
     {% block content %}
     <article class="article article--{{ view | block_type }}" id="js-article" itemtype="http://schema.org/Article" itemscope>
     {% profile %}
@@ -63,7 +64,7 @@
                     {{ view.subtitle | hide_none }}
                 </div>
                 <div class="byline" itemscope itemtype="http://schema.org/Person" itemprop="author">
-                    {% set byline = view.context | get_byline %}
+                    {% set byline = view.context | get_byline %}
                     {% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
                 </div>
                 <div class="metadata">

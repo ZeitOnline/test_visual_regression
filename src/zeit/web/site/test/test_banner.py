@@ -107,7 +107,7 @@ def test_adplaces_present_on_pages(testbrowser, monkeypatch):
 
 
 def test_adplaces_present_on_home_page(testbrowser):
-    browser = testbrowser('/zeit-online/buzz-box')
+    browser = testbrowser('/zeit-online/video-stage')
     assert len(browser.cssselect('#ad-desktop-12')) == 1
 
 

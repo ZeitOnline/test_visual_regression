@@ -28,7 +28,7 @@
         {% if view.comments_allowed -%}
         <div class="comment-form__text">
             {% if request.session.user.picture %}
-                <img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name }}" src="{{ request.session.user.picture }}">
+                <img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name }}" src="{{ request.session.user.picture }}">
             {% endif %}
             {% if not request.session.user.name %}
                 Angemeldet, noch kein Benutzername

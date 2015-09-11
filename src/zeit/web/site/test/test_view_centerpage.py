@@ -1112,12 +1112,6 @@ def test_mobile_invisibility(testbrowser):
 def test_breakpoint_sniffer_script(
         selenium_driver, testserver, monkeypatch, screen_size):
 
-    def tpm(me):
-        return True
-
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
-
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('{}/zeit-online/slenderized-index'.format(testserver.url))
@@ -1247,3 +1241,13 @@ def test_wrapped_features_are_triggered(testbrowser):
 def test_advertorial_page_has_advertorial_label(testbrowser):
     browser = testbrowser('/zeit-online/advertorial-index')
     assert browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
+
+
+def test_adtile12_from_cp_extra_is_there(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-centerpage')
+    assert browser.cssselect('#ad-desktop-12')
+
+
+def test_adtile13_from_cp_extra_is_there(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+    assert browser.cssselect('#ad-desktop-13')
