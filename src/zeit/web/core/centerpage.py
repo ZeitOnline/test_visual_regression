@@ -267,6 +267,10 @@ class VariantImage(object):
         if group:
             self.image_group = group.uniqueId
             self.path = group.variant_url(self.image_pattern).lstrip('/')
+            self.fallback_path = group.variant_url(
+                self.image_pattern,
+                variant.fallback_width,
+                variant.fallback_height).lstrip('/')
         else:
             self.image_group = None
 

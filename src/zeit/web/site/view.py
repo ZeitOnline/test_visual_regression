@@ -131,6 +131,13 @@ def login_state(request):
     return info
 
 
+@pyramid.view.view_config(route_name='schlagworte')
+def schlagworte(request):
+    raise pyramid.httpexceptions.HTTPMovedPermanently(
+        'http://{}/thema/{}'.format(
+            request.host, request.matchdict['item'].lower()))
+
+
 # XXX We should be a little more specific here, ie ICommentableContent
 @pyramid.view.view_defaults(
     custom_predicates=(is_zon_content,),

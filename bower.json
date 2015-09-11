@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bx-slider.js": "~4.2.4",
+    "bx-slider.js": "~4.2.5",
     "freewall": "1.0.5",
     "jquery": "1.11.3",
+    "jquery.inview": "1.0.0",
     "modernizr": "2.8.3",
     "normalize.css": "3.0.3",
-    "requirejs": "2.1.18",
+    "picturefill": "3.0.0-rc1",
+    "requirejs": "2.1.20",
     "sjcl": "1.0.3",
-    "jquery.inview": "1.0.0",
-    "svg4everybody": "1.0.0",
+    "svg4everybody": "2.0.0",
     "velocity": "~1.2.2"
   },
   "exportsOverride": {

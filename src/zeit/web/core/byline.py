@@ -135,8 +135,6 @@ class ContentByline(Byline):
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 class ArticleContentByline(ContentByline):
 
-    genres = {'leserartikel': 'ein'}
-
     @staticmethod
     def expand_authors(authors):
         for author in authors:

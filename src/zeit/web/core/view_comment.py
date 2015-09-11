@@ -2,6 +2,7 @@
 import json
 import logging
 import md5
+import urllib
 import urlparse
 
 import beaker.cache
@@ -381,6 +382,19 @@ class PostCommentResource(PostComment):
 @pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 class RecommendCommentResource(PostCommentResource):
     def __init__(self, context, request):
+        # redirect unauthorized recommendation request
+        # prevent 403 HTTPForbidden response in PostComment
+        if not request.authenticated_userid:
+            if request.registry.settings.sso_activate:
+                pattern = '{}/anmelden?url={}'
+                host = request.registry.settings.get('sso_url')
+            else:
+                pattern = '{}/user/login?destination={}'
+                host = request.registry.settings.get('community_host')
+
+            location = pattern.format(host, urllib.quote_plus(request.url))
+            raise pyramid.httpexceptions.HTTPSeeOther(location=location)
+
         super(RecommendCommentResource, self).__init__(context, request)
         self.request_method = 'GET'
 

@@ -83,7 +83,7 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-12-09T09:23:57.105802+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-12-05T17:12:24.668544+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-05-27T17:11:30.179510+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-12-09T09:32:11.073684+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-05-27T09:24:56.823418+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-05-27T17:11:30.179510+00:00</attribute>
@@ -143,6 +143,33 @@
       </image>
       <p>Ja, der WAHNSINN! Diese Berge! Wären sie Wellen, hätte Christopher Nolan sie für <em><a class="" href="http://www.zeit.de/kultur/film/2014-11/interstellar-christopher-nolan-film" target="_blank">Interstellar</a></em> gecastet. Diese Weiten, gegen die selbst die nordamerikanischen Plains wie eine staubige Verkehrsinsel wirken. Und erst die Schlachten! Mal schauen, was Ridley Scott denen nach Weihnachten mit Moses und Ramses entgegensetzen wird. "<a class="" href="http://www.exodus-derfilm.de/#home" target="_blank">Episches</a>", verspricht er bereits. Das alles dank 3D-Kameras und einer Kunststoffbrille zum Greifen plastisch. Doch doch, für <em>Der Hobbit, Teil III, Die Schlacht der fünf Heere</em> kann man den Wahnsinn schon mal großschreiben. </p>
       <cardstack xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ns0:__name__="id-1e4ffa7e-9bea-4a8a-bd48-92c9d5030b59" card_id="kekse-rezept-pecorino-haselnuss-cantucci"/>
+      <raw alldevices="true">
+        <div class="x-content-column">
+          <h2 class="x-headline">Freie Wohnungen</h2>
+          <div class="x-spacing x-picturefill">
+            <picture>
+              <source srcset="http://placehold.it/980x420" media="(min-width: 980px)" />
+              <source srcset="http://placehold.it/768x330" media="(min-width: 768px)" />
+              <img srcset="http://placehold.it/480x320" alt="…" />
+            </picture>
+          </div>
+          <h3 class="x-subheadline">Asylbewerber pro 1.000 Einwohner</h3>
+          <p class="x-copytext x-spacing--paragraph">
+              Diese Karte zeigt, wie viele Flüchtlinge die Kreise aufnehmen. Je kräftiger ein Landkreis eingefärbt ist, desto mehr Flüchtlinge kommen auf 1.000 Einwohner. Den schraffierten Ländern liegen unsere eigenen Berechnungen zugrunde.
+          </p>
+          <p class="x-copytext x-spacing--large">
+              <strong>Schraffierte Flächen</strong> wurden von uns berechnet: Sachsen, Hessen, Bayern und Rheinland-Pfalz haben uns dazu den Verteilerschlüssel zur Verfügung gestellt. Niedersachsen stellte uns anhand ihres Verteilerschüssels berechnete Daten zur Verfügung. Baden-Württemberg verteilt laut eigenen Angaben streng nach Einwohnern.
+          </p>
+          <div class="x-footer">
+              <span class="x-footer__copyright">
+                  © 2015 ZEIT ONLINE
+              </span>
+              <span>
+                  Quelle: eigene Recherche (Stand: August 2015). Grafik: <a href="http://community.zeit.de/user/julian-stahnke">Julian Stahnke</a>
+              </span>
+          </div>
+        </div>
+      </raw>
       <p>Nicht nur CGI-mäßig betrachtet. Die Produktion von <em>Der Herr der Ringe, Teil I, Die Gefährten </em>kostete seinerzeit (das war 2001) 93 Millionen Dollar und spielte 872 Millionen Dollar ein. <em>Der Herr der Ringe, Teil II, Die zwei Türme</em> kostete 94 Millionen Dollar und spielte 926 Millionen ein. <em>Der Herr der Ringe, Teil III, Die Rückkehr des Königs</em> – bleiben Sie dran, es lohnt sich – machte aus 94 Millionen 1,12 Milliarden. <em>Teil IV</em> alias <em><a class="" href="http://www.zeit.de/2012/51/Film-Hobbit-Peter-Jackson-Tolkien" target="_blank">Der Hobbit, I, Eine unerwartete Reise</a></em> machte 1,02 Milliarden Dollar, <em>Teil V</em> (<a class="" href="http://www.zeit.de/kultur/film/2013-12/film-hobbit-smaugs-einoede" target="_blank"><em>Der Hobbit, II, Smaugs Einöde</em></a>) 958 Millionen. Zusammen mit dem jüngsten und letzten Giganten, <em>Der Hobbit, III, Die Schlacht der fünf Heere</em>, kostete die <em>Hobbit</em>-Trilogie 561 Millionen Dollar, mithin mehr als doppelt so viel wie die drei <em>Herr-der-Ringe</em>-Filme. Die Hobbits gelten seitdem als die teuerste Filmproduktion aller Zeiten. Extrapoliert man die Kosten-Nutzen-Rechnung wird man am Ende zusammenfassen können: sechs Milliarden verdient. Hier rettet eine Bande kleinwüchsiger Barfußläufer das Big Business.</p>
       <p>Alles ganz großartig. Fühlte man sich danach nicht so entsetzlich übersättigt. Das ganze <em>Herr-der-Ringe-Hobbit</em>-Konglomerat ist so bekömmlich wie ein Great-Deal-XXL-Burger-Menü an der Autobahnraststätte. Im vorletzten Teil hatte ich zwischendurch Mails abgearbeitet, weil ich nicht mehr konnte: dieses Heroisieren unter Horngeblase, dieses Aufbäumen, Widerstehen, Beistehen und Wiederauferstehen von mehrfach Durchstochenen zu Monumentalmusik. Ist sicherlich Typ-Sache. In jugendlicheren Jahren hat man sich schließlich auch ganze Nächte lang vor übersteuerten Basslautsprechern den Hörsinn weggedröhnt. Fand ich super. Aber damals fand ich auch McDonalds super.</p>
       <p>Die Frage drängt sich auf: Geht es eigentlich noch größer? Was machen diese Monumentalfilmer wohl, sagen wir, als übernächstes? Ein Vorgeschmack: <em>Odysseus</em>, <em>Jurassic Park</em>, <em>Fluch der Karibik 5</em> und natürlich <em><a class="" href="https://www.youtube.com/watch?v=erLk59H86ww" target="_blank">Star Wars, Episode VII: The Force Awakens</a></em>. Mal abgesehen von Unterschieden im Faltenwurf der Kostüme und Gesichter ist dieses Megalomanie-Kino kaum noch unterscheidbar. Score, Cast, Schnitt, Plot – da müsste man jetzt plötzlich auf Feinheiten achten. Aber wer ist dazu so sinnesüberreizt in den Tiefen seines iSense-Sessels des Multiplex noch in der Lage?</p>

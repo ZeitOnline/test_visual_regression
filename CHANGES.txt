@@ -1,8 +1,105 @@
 Change log for zeit.web
 =======================
 
-1.63 (unreleased)
+1.67 (unreleased)
 -----------------
+
+- ZON-2143: Canonical-URL should omit params & hashes
+
+- ZON-2199: Make link objects work everywhere, not just for ZMO
+
+- ZON-2114: Add cp_extra place 13 for manual addition
+
+- FIX: Make redirect of cp2015->without configurable, so preview doesn't break
+
+
+1.66 (2015-09-10)
+-----------------
+
+- ZON-2164: Place12 before video on hp and cp_extra for AdPlace12
+
+- ZON-2176: Fix modified date
+
+- ZON-1340: Advertorial Article
+
+- ZON-2125: Assemble identical byline
+
+- QUICKFIX: Swap font files for Tablet Gothic
+
+
+1.65 (2015-09-10)
+-----------------
+
+- ZON-1592: Label "Anzeige" according to "Verlagsangebot"
+
+- ZON-2115: Add Meta Title, Description Ruleset for Keywordpages
+
+- ZON-2181: Validate page number from GET parameter
+
+- FIX: Inherit from newsfeed for all classes in view_feed
+
+
+1.64 (2015-09-09)
+-----------------
+
+- ZON-1901: Verlagsnextread
+
+- ZON-2121: Add styles and scripts for Datenjournalismus
+
+- ZON-2180: Add routes for keyword pages
+
+- ZON-2015: Videos in articles
+
+- ZON-1341: Advertorial CP
+
+- ZON-2013: Make tile12 max wide with ad centered
+
+- ZON-2075: Redirect unauthorized comment recommendation requests
+
+- ZON-2179: Redirect on cp2015 suffix
+
+- ZON-2073: Redirect on trailing slash.
+
+- ZON-2145: Use new fallback_size setting to restrict image sizes for noscript,
+  so we don't have to restrict the largest available variant via max_size.
+
+- ZON-1984: Storystream CP
+
+- DEV-935: Quickfix for Community-Redaktions-Auszeichnung
+
+- MAINT: Polish headline of following pages
+
+- FIX: Fix wrong ZEAR rule at noindex setting
+
+- ZON-1990: Render feeds for newsfeed.zeit.de
+
+
+1.63.3 (2015-09-04)
+-------------------
+
+- ZON-2160: Render links from entity tag
+
+
+1.63.2 (2015-09-04)
+-------------------
+
+- DEV-923: Use image variant specified on the layout for article images
+
+- MAINT: Polish comment count styles
+
+- FIX: Fix another layout breaking banner between 720 and 768px in ZMO
+
+
+1.63.1 (2015-09-03)
+-------------------
+
+- FIX: Fix wrong layout for MR7 and 8 in ZMO
+
+
+1.63 (2015-09-03)
+-----------------
+
+- ZON-2053: Resort and collapse comment replies
 
 - ZON-1960: Adcontroller for ZMO
 
@@ -11,6 +108,10 @@ Change log for zeit.web
 - ZON-2077 - Part 2: Put in thema and authoren noindex again
 
 - ZON-2053: Resort and collapse comment replies
+
+- MAINT: Polish comments preferences and parquet topic links
+
+- FIX: Provide additional fallback for teaser images
 
 
 1.62 (2015-09-02)

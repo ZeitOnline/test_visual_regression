@@ -59,6 +59,12 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
     except (TypeError, AttributeError):
         group = None
 
+    try:
+        if group is None:
+            group = module.image
+    except (TypeError, AttributeError):
+        pass
+
     if not zeit.content.image.interfaces.IImageGroup.providedBy(group):
         if not fallback:
             return None
@@ -134,7 +140,8 @@ def format_date(date, type='short', pattern=None):
         return ''
     formats = {'long': "d. MMMM yyyy, H:mm 'Uhr'",
                'regular': "d. MMMM yyyy, H:mm",
-               'short': "d. MMMM yyyy", 'short_num': "yyyy-MM-dd",
+               'short': "d. MMMM yyyy",
+               'short_num': "yyyy-MM-dd",
                'iso8601': "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
                'time_only': "HH:mm 'Uhr'"}
     # workaround for inadequate format_datetime() parsing

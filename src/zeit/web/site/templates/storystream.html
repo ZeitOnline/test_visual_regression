@@ -1,0 +1,8 @@
+{% extends "zeit.web.site:templates/layout.html" %}
+
+{% block main %}
+    {% for region in view.regions %}
+        {% set region_loop = loop %}
+        {% include "zeit.web.site:templates/inc/storystream/region.tpl" %}
+    {% endfor %}
+{% endblock main %}
