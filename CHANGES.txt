@@ -4,7 +4,7 @@ Change log for zeit.web
 1.68 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2197: Allow specifying a host, not just a path, for ``asset_prefix``
 
 
 1.67 (2015-09-11)
