@@ -4,7 +4,10 @@
 		background-color: rgb(0, 15, 20) // placeholder for image, same as default for +teaser-image-dark-overlay
 		height: 0
 		margin: 0
-		padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+		padding-bottom: 100% / 16 * 9 // image variant 'wide'
+		overflow: hidden
+		+respond-min($break-tablet-min)
+			padding-bottom: 100% / 7 * 3 // image variant 'cinema'
 	&__media-container
 		+teaser-image-dark-overlay($angle: 0deg)
 
