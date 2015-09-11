@@ -2,7 +2,7 @@
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
 {% block teaser %}
-<article class="{% block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}{% if module.visible_mobile == False %} mobile-hidden{% endif %}"{% if module %} data-block-type="{{ module.type | hide_none }}"{% endif %} data-unique-id="{{ teaser.uniqueId }}" {% block meetrics %}data-meetrics="{{ area.kind }}"{% endblock %} data-clicktracking="{{ area.kind }}">
+<article class="{% block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}{% if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="{{ teaser.uniqueId }}"{% block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %} data-clicktracking="{{ area.kind }}">
 
     {% block teaser_label %}{% endblock %}
     {% block teaser_media_position_before_title %}{% endblock %}

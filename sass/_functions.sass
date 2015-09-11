@@ -56,8 +56,23 @@
 
 	@return $direction, $opposite-direction
 
+// Round a value to specified precision
+//
+// @example
+//     round-to-precision(0.123456)   => 0.123
+//     round-to-precision(0.123, 0)   => 0
+//     round-to-precision(0.123, 2)   => 0.12
+//     round-to-precision(0.666666em) => 0.667em
+//     round-to-precision(0.666em, 0) => 1em
+//     round-to-precision(0.666em, 1) => 0.7em
+@function round-to-precision($value, $precision: 3)
+	$n: 1
 
+	@if $precision > 0
+		@for $i from 1 through $precision
+			$n: $n * 10
 
+	@return round($value * $n) / $n
 
 /**
  * BLOCK: convert rem to pixels for older browsers
