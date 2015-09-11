@@ -4,7 +4,7 @@ Change log for zeit.web
 1.67 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2143: Canonical-URL should omit params & hashes
 
 
 1.66 (2015-09-10)
