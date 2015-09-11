@@ -103,6 +103,9 @@
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-2f58b6f6-f83a-4c9d-a87a-4a0d10da054f">
 					<block href="http://xml.zeit.de/zeit-online/article/02"/>
 				</container>
+				<container cp:__name__="id-d976a64d-1589-4b49-a765-12bdcdf94d1g" cp:type="cpextra" module="adplace13" visible="True">
+				    <cp_extra for="zeit.content.cp.interfaces.IArea" id="adplace13" />
+				</container>
 			</region>
 		</cluster>
 		<cluster area="id-e2f9e2c4-2700-4c62-8701-9f914e653435" kind="parquet" title="Parkett">
