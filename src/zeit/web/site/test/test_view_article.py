@@ -748,3 +748,9 @@ def test_advertorial_marker_is_present(testbrowser):
     assert len(browser.cssselect('.advertorial-marker__title')) == 1
     assert len(browser.cssselect('.advertorial-marker__text')) == 1
     assert len(browser.cssselect('.advertorial-marker__label')) == 1
+
+
+def test_canonical_url_should_omit_queries_and_hashes(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit/seite-3?cid=123#comments')
+    canonical_url = browser.cssselect('link[rel=canonical]')[0].attrib['href']
+    assert canonical_url.endswith('zeit-online/article/zeit/seite-3')
