@@ -12,7 +12,6 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         $commentsBody = $( '#js-comments-body' ),
         $commentForm = $( '#comment-form' ),
         slideDuration = 300,
-        startEvent = ( 'ontouchstart' in window ) ? 'touchstart' : 'click',
         inputEvent = ( 'oninput' in document.createElement( 'input' )) ? 'input' : 'keypress',
 
     /**
@@ -480,14 +479,14 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
         // register event handlers
         $comments.on( 'submit', '.js-submit-comment', submitComment );
-        $commentsBody.on( startEvent, '.js-reply-to-comment', replyToComment );
-        $commentsBody.on( startEvent, '.js-cancel-reply', cancelReply );
-        $commentsBody.on( startEvent, '.js-report-comment', reportComment );
-        $commentsBody.on( startEvent, '.js-cancel-report', cancelReport );
-        $commentsBody.on( startEvent, '.js-submit-report', submitReport );
-        $commentsBody.on( startEvent, '.js-recommend-comment', recommendComment );
-        $commentsBody.on( startEvent, '.comment--wrapped', showReplies );
-        $commentsBody.on( startEvent, '.js-promote-comment', promoteComment );
+        $commentsBody.on( 'click', '.js-reply-to-comment', replyToComment );
+        $commentsBody.on( 'click', '.js-cancel-reply', cancelReply );
+        $commentsBody.on( 'click', '.js-report-comment', reportComment );
+        $commentsBody.on( 'click', '.js-cancel-report', cancelReport );
+        $commentsBody.on( 'click', '.js-submit-report', submitReport );
+        $commentsBody.on( 'click', '.js-recommend-comment', recommendComment );
+        $commentsBody.on( 'click', '.comment--wrapped', showReplies );
+        $commentsBody.on( 'click', '.js-promote-comment', promoteComment );
         $comments.on( inputEvent, '.js-required', enableForm );
     };
 
