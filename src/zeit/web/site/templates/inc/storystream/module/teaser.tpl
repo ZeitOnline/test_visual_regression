@@ -1,6 +1,6 @@
 {% set atom = module | first_child %}
 {% set blockname = 'storystream-teaser' %}
-<article class="{{ blockname }}">
+<{{ teaser_tag or 'div' }} class="{{ blockname }}">
 	<div class="{{ blockname }}__container">
 		<div class="{{ blockname }}__content">
 			<div class="{{ blockname }}__header">
@@ -26,4 +26,4 @@
 			</div>
 		</div>
 	</div>
-</article>
+</{{ teaser_tag or 'div' }}>
