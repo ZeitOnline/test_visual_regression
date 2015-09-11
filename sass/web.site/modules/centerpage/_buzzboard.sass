@@ -1,0 +1,68 @@
+$buzzboard-label-font-size: 14px
+$buzzboard-icon-height: em(12px, $buzzboard-label-font-size)
+
+.buzzboard
+	&__headline
+		color: $zon_dark_grey
+		font-family: $font-franziska
+		font-size: em(32px)
+		font-style: italic
+		font-weight: normal
+		margin: remify(20px 0 40px)
+		text-align: center
+	&__table
+		border-collapse: separate
+		border-spacing: em(30px 0)
+		padding-left: em(30px)
+		table-layout: fixed
+		width: 100% // needed in conjunction with table-layout: fixed
+		tbody
+			counter-reset: buzz-board
+		tr
+			counter-increment: buzz-board
+		td:first-child
+			position: relative
+			&:before
+				content: counter(buzz-board)
+				font-family: $font-franziska
+				font-size: em(36px)
+				font-style: italic
+				left: remify(-60px)
+				line-height: 1
+				position: absolute
+				text-align: center
+				width: remify(60px)
+		th, td
+			text-align: left
+			vertical-align: top
+			width: 25%
+		&--col2
+			th, td
+				width: 50%
+		&--col3
+			th, td
+				width: 33.33%
+		th
+			font-size: em($buzzboard-label-font-size)
+			font-weight: bold
+			letter-spacing: $zon-letter-spacing-m
+			padding-left: 1.5em
+			text-indent: -1.5em
+			text-transform: uppercase
+		td
+			border-bottom: 1px solid $color-border
+			padding: em(20px) 0
+			// word-wrap: break-word
+	&__icon
+		height: round-to-precision($buzzboard-icon-height)
+		margin-right: em(3px, $buzzboard-label-font-size)
+		vertical-align: em(-1px, $buzzboard-label-font-size)
+		width: em(21px, $buzzboard-label-font-size)
+		&--comment
+			width: round-to-precision(14 / 12 * $buzzboard-icon-height)
+		&--read
+			width: round-to-precision(22 / 11 * $buzzboard-icon-height)
+		&--shared
+			width: round-to-precision(17 / 12 * $buzzboard-icon-height)
+		&--trend
+			width: round-to-precision(19 / 12 * $buzzboard-icon-height)
