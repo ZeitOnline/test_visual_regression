@@ -11,6 +11,8 @@
 		max-width: remify(640px)
 		margin: 0 auto
 		padding: $vertical-space 0
+		&--first
+			padding: $vertical-space*1.5 0
 		&--last
 			position: relative
 			&:before
@@ -19,7 +21,7 @@
 				display: block
 				font-size: remify(9px)
 				left: -$storystream-padding-mobile
-				top: $vertical-space*1.7
+				top: $vertical-space*1.5
 				margin: remify(-5px 0 0 -5px)
 				position: absolute
 				z-index: 2
@@ -29,7 +31,7 @@
 				content: ''
 				position: absolute
 				width: 1px
-				height: $vertical-space*1.7
+				height: $vertical-space*1.5
 				background-color: $color-storystream-border
 				left: -$storystream-padding-mobile
 				top: 0
@@ -55,8 +57,8 @@
 	.storystream-markup
 		padding: 0 $storystream-padding-tablet
 
-		&__content:before,
-		&__content:after
+		&__content--last:before,
+		&__content--last:after
 			left: -$storystream-padding-tablet
 
 		&__title
@@ -79,6 +81,6 @@
 	.storystream-markup
 		padding: 0 $storystream-padding-desktop-outer
 
-		&__content:before,
-		&__content:after
+		&__content--last:before,
+		&__content--last:after
 			left: -$storystream-padding-desktop-inner

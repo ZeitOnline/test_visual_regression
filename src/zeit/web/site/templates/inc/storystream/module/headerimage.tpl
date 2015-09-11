@@ -16,7 +16,7 @@
                 {% if view.date_last_modified %}
                 	<span class="{{ blockname }}__update">
                         {{ lama.use_svg_icon('storystream-updated', 'storystream-headerimage__updateicon', request) }}
-                        Zuletzt aktualisiert am {{ view.date_last_modified | format_date('short') }}
+                        Zuletzt aktualisiert am <nobr>{{ view.date_last_modified | format_date('short') }}</nobr>
                     </span>
                 {% endif %}
             </div>

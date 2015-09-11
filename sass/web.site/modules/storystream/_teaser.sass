@@ -65,6 +65,9 @@
 		margin: 1em 0
 		width: remify(140px)
 
+.storystream-teaser:first-of-type .storystream-teaser__content
+	padding: 3*$vertical-space 0 $vertical-space
+
 +respond-min($break-tablet-min)
 	.storystream-teaser
 		padding: 0 $storystream-padding-tablet
@@ -89,7 +92,7 @@
 		padding: 0 $storystream-padding-desktop-outer
 
 		&__content
-			padding-top: $vertical-space
+			padding-top: 1.5*$vertical-space
 			&:after
 				left: -$storystream-padding-desktop-inner
 

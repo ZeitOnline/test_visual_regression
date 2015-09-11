@@ -52,13 +52,6 @@
 		line-height: remify(17px)
 		position: absolute
 		top: remify(-6px)
-		// &:before
-		// 	color: #eee
-		// 	content: '\2B24' // ⬤ = Black large circle
-		// 	display: block
-		// 	font-size: remify(9px)
-		// 	left: -$storystream-padding-mobile
-		// 	position: absolute
 
 	&__title
 		color: $white
@@ -74,14 +67,14 @@
 		display: inline-block
 		font-size: remify(15px)
 		letter-spacing: $zon-letter-spacing-s
-		line-height: remify(17px)
+		line-height: 1.7
 		padding-bottom: 1em
+
 	&__updateicon
 		color: inherit
-		height: remify(16px)
-		margin-right: 0.1rem
-		vertical-align: baseline
-		width: remify(16px)
+		height: remify(15px)
+		margin-right: 0.08rem
+		width: remify(15px)
 
 +respond-min($break-tablet-min)
 	.storystream-headerimage
