@@ -4,6 +4,8 @@ Change log for zeit.web
 1.69 (unreleased)
 -----------------
 
+- MAINT: Update modernizr to v3.0.0
+
 - ZON-2083: Larger article images for twitter & facebook meta
 
 - ZON-2205: Change URL to cached version of adcontroller
