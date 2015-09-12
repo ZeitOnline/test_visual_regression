@@ -464,7 +464,9 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                     toggleRecommendationLink( $( this ) );
                 }
             });
-            $commentsBody.find( '.comment' ).each( addModeration );
+            if ( $commentForm.data( 'mod' ) === 'mod' ) {
+                $commentsBody.find( '.comment' ).each( addModeration );
+            }
         }
 
         // disable submit buttons of required fields
