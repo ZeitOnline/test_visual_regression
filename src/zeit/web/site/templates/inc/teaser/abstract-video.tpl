@@ -4,7 +4,7 @@
     {% if teaser.serie and teaser.serie.serienname %} data-video-series="{{ teaser.serie.serienname | attr_safe }}"{% endif %}
     {% block data_video_size %}{% endblock %}
     data-video-provider="brightcove" {# only brightcove is used currently #}
-    data-video-page-url="{{ teaser_url }}">
+    data-video-page-url="{{ teaser_url }}" data-meetrics="{{ area.kind }}" data-clicktracking="{{ area.kind }}">
     <a class="{{ self.layout() }}__combined-link" href="{{ teaser_url }}">
         <div class="{{ self.layout() }}__container">
             {% block teaser_media_position_before_title %}
