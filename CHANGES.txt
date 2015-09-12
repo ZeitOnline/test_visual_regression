@@ -4,6 +4,12 @@ Change log for zeit.web
 1.69 (unreleased)
 -----------------
 
+- ZON-2083: Larger article images for twitter & facebook meta
+
+- ZON-2205: Change URL to cached version of adcontroller
+
+- ZON-2177: Rework Meetrics structure for teasers
+
 - QUICKFIX: Fix images to endure new fallback image URL
 
 - ZON-2123: Show topic links on homepage exclusively
