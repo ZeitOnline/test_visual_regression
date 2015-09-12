@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2014: Enforce mobile image display
 
+- MAINT: Update x-styles
+
 - QUICKFIX: Make Keywordpage Titel to h1
 
 
