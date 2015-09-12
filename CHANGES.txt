@@ -10,6 +10,8 @@ Change log for zeit.web
 1.68 (2015-09-12)
 -----------------
 
+- ZON-2109: Add SEO meta links for dynamic cps
+
 - MAINT: Polish portraitbox, large teaser headlines on mobile,
          advertising background-color and servicebox link styles
 
