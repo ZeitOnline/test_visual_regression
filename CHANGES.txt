@@ -1,14 +1,31 @@
 Change log for zeit.web
 =======================
 
-1.68 (unreleased)
+1.69 (unreleased)
 -----------------
+
+- ZON-2177: Rework Meetrics structure for teasers
+
+
+1.68 (2015-09-12)
+-----------------
+
+- ZON-2109: Add SEO meta links for dynamic cps
+
+- MAINT: Polish portraitbox, large teaser headlines on mobile,
+         advertising background-color and servicebox link styles
+
+- ZON-1892: Add Buzz-Board
 
 - ZON-2197: Allow specifying a host, not just a path, for ``asset_prefix``
 
 - ZON-2014: Enforce mobile image display
 
+- MAINT: Update x-styles
+
 - QUICKFIX: Make Keywordpage Titel to h1
+
+- HOTFIX: Show comment moderation only for moderators
 
 
 1.67 (2015-09-11)
@@ -39,8 +56,6 @@ Change log for zeit.web
 - ZON-2125: Assemble identical byline
 
 - QUICKFIX: Swap font files for Tablet Gothic
-
-- ZON-2177: Rework Meetrics structure for teasers
 
 
 1.65 (2015-09-10)
