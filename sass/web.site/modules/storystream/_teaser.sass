@@ -1,7 +1,23 @@
 .storystream-teaser
-	border-left: 1px $color-storystream-border solid
-	margin: 0 $cp-padding
-	padding: $vertical-space $cp-padding
+	padding: 0 $storystream-padding-mobile
+
+	&__container
+		padding: 0 $storystream-padding-mobile
+
+	&__content
+		margin: 0 auto
+		max-width: remify(640px)
+		padding: 2*$vertical-space 0 $vertical-space
+		position: relative
+		&:after
+			content: ''
+			position: absolute
+			width: 1px
+			height: 100%
+			background-color: $color-storystream-border
+			left: -$storystream-padding-mobile
+			top: 0
+			z-index: 1
 
 	&__title
 		font-size: remify(16px)
@@ -9,7 +25,7 @@
 			font-size: remify(16px)
 			line-height: remify(18px)
 
-	&__text
+	&__description
 		font-family: $font-franziska
 		font-size: remify(17px)
 		line-height: remify(24px)
@@ -20,10 +36,14 @@
 	&__date
 		background: $white
 		border-radius: em(4px)
-		font-size: em(13px)
+		font-size: remify(13px)
 		letter-spacing: $zon-letter-spacing-m
-		margin-left: remify(-15px)
-		padding: remify(8px 10px 8px 3px)
+		margin-left: remify(-30px)
+		// move up to make space for the headline
+		margin-top: remify(-42px)
+		padding: remify(6px 10px 6px 3px)
+		position: absolute
+		z-index: 2
 		&--milestone
 			background: #4c4f5f
 			color: $white
@@ -32,7 +52,8 @@
 	&__link
 		color: $zon-red
 		font-family: $font-tabletgothic
-		font-size: 80%
+		font-size: remify(12px)
+		margin-left: 0.5rem
 		text-transform: uppercase
 		white-space: nowrap
 		+link
@@ -44,32 +65,41 @@
 		margin: 1em 0
 		width: remify(140px)
 
+.storystream-teaser:first-of-type .storystream-teaser__content
+	padding: 3*$vertical-space 0 $vertical-space
+
 +respond-min($break-tablet-min)
 	.storystream-teaser
-		margin: 0 $storystream-padding-tablet
-		padding: $vertical-space $storystream-padding-tablet
+		padding: 0 $storystream-padding-tablet
+
+		&__content:after
+			left: -$storystream-padding-tablet
 
 		&__date
-			margin-left: remify(-35px)
+			margin-left: remify(-37px)
 
 		&__title
-			font-size: em(20px)
-			line-height: em(26px)
+			font-size: remify(20px)
+			line-height: remify(26px)
 
-		&__text
+		&__description
 			line-height: remify(25px)
 			&--milestone
 				line-height: 1.5
 
 +respond-min($break-desktop-min)
 	.storystream-teaser
-		margin: 0 remify(90px)
-		padding: $vertical-space remify(90px)
+		padding: 0 $storystream-padding-desktop-outer
+
+		&__content
+			padding-top: 1.5*$vertical-space
+			&:after
+				left: -$storystream-padding-desktop-inner
 
 		&__title
 			margin: 0
 
-		&__text
+		&__description
 			font-size: remify(18px)
 			line-height: remify(26px)
 			margin: remify(5px 0 1em 0)
@@ -78,18 +108,17 @@
 				margin: 1em 0
 
 		&__date
-			display: inline-block
-			float: left
 			margin-left: remify(-115px)
+			margin-top: 0
 			padding: 0.4rem
 			text-align: center
 			width: remify(90px)
 
-		&__content
+		&__text
 			position: relative
 
 		&__media
 			margin-top: 0
 			position: absolute
-			right: remify(-160px)
+			right: remify(-150px)
 			top: 0

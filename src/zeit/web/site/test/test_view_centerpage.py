@@ -11,6 +11,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
+import pyramid.testing
 
 import zeit.content.cp.centerpage
 
@@ -760,10 +761,41 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     assert link[0].get('href') == url + '?p=2'
 
 
+def test_robots_rules_for_thema_paths(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = pyramid.testing.DummyRequest()
+    request.path = '/thema/'
+
+    # paginated page
+    request.url = 'http://localhost/thema/test?p=2'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for paginated thema page')
+
+    # paginated page starting with 1
+    request.url = 'http://localhost/thema/test?p=10'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for paginated thema page starting with 1')
+
+    # first page with param
+    request.url = 'http://localhost/thema/test?p=1'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'follow,noarchive', (
+        'wrong robots for first thema page with param')
+
+    # first page without param
+    request.url = 'http://localhost/thema/test'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'follow,noarchive', (
+        'wrong robots for first thema page without param')
+
+
 def test_robots_rules_for_angebote_paths(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    request = mock.Mock()
+    request = pyramid.testing.DummyRequest()
 
     # usual angebot
     request.path = '/angebote/immobilien/test'
@@ -807,6 +839,12 @@ def test_robots_rules_for_diverse_paths(application):
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
     assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
         'wrong robots for any other folder')
+
+    # autoren folder
+    request.path = '/autoren/index'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow', (
+        'wrong robots for autoren folder')
 
 
 def test_meta_rules_for_keyword_paths(application):
@@ -1063,10 +1101,11 @@ def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
         assert False, 'Timeout accordion script'
     else:
         slides = driver.find_elements_by_css_selector('.buzz-box__teasers')
-        assert len(slides) == 3
+        assert len(slides) == 4
         assert slides[0].is_displayed()
         assert not slides[1].is_displayed()
         assert not slides[2].is_displayed()
+        assert not slides[3].is_displayed()
 
 
 def test_non_navigation_centerpage_should_have_minimal_breadcrumbs(
@@ -1243,7 +1282,7 @@ def test_advertorial_page_has_advertorial_label(testbrowser):
     assert browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
 
 
-def test_standart_teasers_have_meetrics_attribute(testserver, testbrowser):
+def test_standart_teasers_have_meetrics_attribute(testbrowser):
     browser = testbrowser('/index')
 
     fullwidth = browser.cssselect('.teaser-fullwidth')
@@ -1257,8 +1296,8 @@ def test_standart_teasers_have_meetrics_attribute(testserver, testbrowser):
     assert square[0].attrib['data-meetrics'] == 'minor'
 
 
-def test_video_teasers_have_meetrics_attribute(testserver, testbrowser):
-    browser = testbrowser('/index')
+def test_video_teasers_have_meetrics_attribute(testbrowser):
+    browser = testbrowser('/zeit-online/video-stage')
 
     large = browser.cssselect('.video-large')
     small = browser.cssselect('.video-small')
@@ -1267,7 +1306,7 @@ def test_video_teasers_have_meetrics_attribute(testserver, testbrowser):
     assert small[0].attrib['data-meetrics'] == 'solo'
 
 
-def test_topic_teasers_have_meetrics_attribute(testserver, testbrowser):
+def test_topic_teasers_have_meetrics_attribute(testbrowser):
     browser = testbrowser('/zeit-online/topic-teaser')
 
     large = browser.cssselect('.teaser-topic-main')
@@ -1277,14 +1316,18 @@ def test_topic_teasers_have_meetrics_attribute(testserver, testbrowser):
     assert small[0].attrib['data-meetrics'] == 'topic'
 
 
-def test_all_teasers_have_clicktrack_attribute(testserver, testbrowser):
+def test_all_teasers_have_clicktrack_attribute(testbrowser):
     browser = testbrowser('/index')
 
-    teasers = browser.cssselect('article[data-block-type="teaser"]')
+    # exclude spektrum teasers
+    # selector = '.cp-area:not(.cp-area--spektrum) article[data-unique-id]'
+    # simple version
+    selector = 'article[data-unique-id]'
+    teasers = browser.cssselect(selector)
+    assert len(teasers)
+
     for teaser in teasers:
-        # exclude spektrum teasers
-        if teaser.getparent().attrib['class'] != 'parquet-teasers':
-            assert teaser.attrib['data-clicktracking'] != ''
+        assert teaser.attrib['data-clicktracking'] != ''
 
 
 def test_adtile12_from_cp_extra_is_there(testbrowser):
