@@ -37,7 +37,7 @@ define( [ 'jquery' ], function( $ ) {
             } else if ( $element.closest( 'figure' ).length ) {
                 type = 'image';
             }
-            teasertype += $article.data( 'meetrics' ) ? $article.data( 'meetrics' ) + '-' : '';
+            teasertype += $article.data( 'clicktracking' ) ? $article.data( 'clicktracking' ) + '-' : '';
             teasertype += articleClasses[0];
             data = [
                 getBreakpoint(),
