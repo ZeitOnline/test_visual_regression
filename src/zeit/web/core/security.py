@@ -18,11 +18,10 @@ class AuthenticationPolicy(
     """
 
     def authenticated_userid(self, request):
+        import pdb; pdb.set_trace()  # XXX BREAKPOINT
+
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
-        # For now it is sufficient to just have an sso_cookie, because
-        # zeit.web is only a proxy for the community, which will validate the
-        # cookie itself.
         login_id = request.cookies.get(conf.get('sso_cookie'))
 
         # If no sso cookie is present, bail out straight away:
@@ -31,6 +30,8 @@ class AuthenticationPolicy(
                 del request.session['user']
             return
 
+        # Make sure sso_verification in the user session matches the one send
+        # via request
         if login_id and request.session.get('user') and (
                 request.session['user'].get('sso_verification') != login_id):
             del request.session['user']
