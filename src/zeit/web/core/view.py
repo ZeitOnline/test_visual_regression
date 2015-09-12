@@ -598,14 +598,17 @@ class Content(Base):
         first_released = babel.dates.format_datetime(
             self.date_first_released, format, locale='de_De')
         if self.context.product and self.context.product.show == 'issue':
-            date = u'ver\u00F6ffentlicht am '
+            # do a bit of trickery here, so we see the time for ZEIT
+            date = u' '
         date += first_released
         if self.date_last_published_semantic:
-            date = u'{} <span class="metadata__seperator"> / </span> {} am {} '.format(
-                date,
-                self.last_modified_wording,
-                babel.dates.format_datetime(
-                    self.date_last_published_semantic, format, locale='de_De'))
+            date = (u'{} <span class="metadata__seperator">'
+                    ' / </span> {} am {} ').format(
+                        date,
+                        self.last_modified_wording,
+                        babel.dates.format_datetime(
+                            self.date_last_published_semantic,
+                            format, locale='de_De'))
         if date is not first_released:
             return base64.b64encode(date.encode('latin-1'))
 
@@ -622,10 +625,12 @@ class Content(Base):
     @zeit.web.reify
     def source_label(self):
         if self.context.product and self.context.product.show:
-            label = self.context.product.label or self.context.product.title
+            label = self.context.product.title
             if self.context.product.show == 'issue' and self.context.volume:
                 label += self.issue_format.format(self.context.volume,
                                                   self.context.year)
+            else:
+                label = 'Quelle: ' + label
             return label
 
     @zeit.web.reify
