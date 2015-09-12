@@ -56,6 +56,13 @@ def test_asset_url_appends_version_hash_where_needed(app_request):
             request.asset_url('img/favicon.ico'))
 
 
+def test_asset_url_allows_specifying_full_host(app_request):
+    app, request = app_request
+    app.config.registry.settings['asset_prefix'] = 'http://assets.example.com'
+    assert ('http://assets.example.com/css/main.css' in
+            request.asset_url('css/main.css'))
+
+
 def test_acceptable_pagination_should_not_redirect(testserver):
     resp = requests.get('%s/artikel/03/seite-3' % testserver.url,
                         allow_redirects=False)

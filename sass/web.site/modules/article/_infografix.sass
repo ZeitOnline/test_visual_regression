@@ -52,22 +52,29 @@
 	+respond-min($break-desktop-min)
 		font-size: em(20px)
 
-.x-copytext
+.x-copytext,
+.x-copytext--size
 	font-size: em(15px)
 	+respond-min($break-desktop-min)
 		font-size: em(16px)
+		line-height: 1.5
 
 .x-caption
-	color: $zon_dark_grey
-	font-size: em(15px)
-	font-style: italic
-	line-height: 1.5
-	+respond-min($break-desktop-min)
-		font-size: em(16px)
+	&,
+	&--sans,
+	&--serif
+		+clearfix
+		font-size: em(15px)
+		line-height: 1.5
+		+respond-min($break-desktop-min)
+			font-size: em(16px)
 	&--sans
+		color: $zon_grey
 		font-family: $font-tabletgothic
 	&--serif
+		color: $zon_dark_grey
 		font-family: $font-franziska
+		font-style: italic
 
 .x-footer,
 .x-footer--borderless
@@ -80,8 +87,9 @@
 .x-footer
 	border-top: 1px solid $color-border
 	padding-top: .5rem
-	&__copyright
-		float: right
+
+.x-copyright
+	float: right
 
 // vertical space
 .x-spacing
