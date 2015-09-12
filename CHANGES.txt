@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - QUICKFIX: Fix images to endure new fallback image URL
 
+- ZON-2123: Show topic links on homepage exclusively
+
 
 1.68 (2015-09-12)
 -----------------
