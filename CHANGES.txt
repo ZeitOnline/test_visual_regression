@@ -4,6 +4,9 @@ Change log for zeit.web
 1.68 (unreleased)
 -----------------
 
+- MAINT: Polish portraitbox, large teaser headlines on mobile,
+         advertising background-color and servicebox link styles
+
 - ZON-1892: Add Buzz-Board
 
 - ZON-2197: Allow specifying a host, not just a path, for ``asset_prefix``
