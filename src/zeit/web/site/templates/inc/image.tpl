@@ -5,11 +5,11 @@
 
 <figure class="{% block mediablock %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class | hide_none }} scaled-image">
     <!--[if gt IE 8]><!-->
-    <noscript data-src="{{ source }}">
+    <noscript data-src="{{ fallback_source }}">
     <!--<![endif]-->
         <div class="{% block mediablock_helper %}{{ module_layout }}__media-container{% endblock %} {{ media_container_additional_class | hide_none }}">
             {% block mediablock_wrapper %}
-            <img class="{% block mediablock_item %}{{ module_layout }}__media-item{% endblock %}" alt="{{ image.attr_title | hide_none }}" src="{{ fallback_source }}" data-ratio="{{ image.ratio | hide_none }}" data-variant="{{ image.image_pattern | hide_none }}" {% block mediablock_additional_data_attributes %}{% endblock %}>
+            <img class="{% block mediablock_item %}{{ module_layout }}__media-item{% endblock %}" alt="{{ image.attr_title | hide_none }}" src="{{ fallback_source }}" data-src="{{ source }}" data-ratio="{{ image.ratio | hide_none }}" data-variant="{{ image.image_pattern | hide_none }}" {% block mediablock_additional_data_attributes %}{% endblock %}>
             {% endblock %}
             {{ media_container_after | hide_none }}
         </div>

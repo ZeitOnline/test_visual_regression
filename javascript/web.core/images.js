@@ -159,17 +159,18 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
         $( '.scaled-image > noscript', container ).each( function() {
             var $noscript = $( this ),
                 $parent = $noscript.parent(),
-                source = $noscript.data( 'src' ),
                 markup = $noscript.text();
 
             if ( markup.trim() !== '' ) {
 
-                markup = markup.replace( 'src="', 'data-src="' );
+                // get rid of src attribute
+                // markup = markup.replace( / src=("|')[^"']+\1/g, '' );
+                markup = markup.replace( 'src="', 'data-dev-null="' );
                 $parent.html( markup );
-                var $img = $parent.find( 'img' ).first();
+                var $img = $parent.find( 'img' );
 
-                // replace possible fallback source with responsive source
-                $img.attr( 'data-src', source );
+                // remove possible fallback source information
+                $img.removeAttr( 'data-dev-null' );
 
                 // add event triggering to tell the world
                 $img.on( 'load', function( e ) {
@@ -181,7 +182,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
             } else {
                 // noscript tag contains no readable content (might happen in older browsers)
                 // therefore we have to hide allocated image spaces
-                hideImage( $parent, source );
+                hideImage( $parent, $noscript.attr( 'data-src' ));
             }
         });
     }
