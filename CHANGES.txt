@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - QUICKFIX: Fix images to endure new fallback image URL
 
+- ZON-1892: Add Buzz-Board
+
 - ZON-2197: Allow specifying a host, not just a path, for ``asset_prefix``
 
 - ZON-2014: Enforce mobile image display
