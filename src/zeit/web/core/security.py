@@ -19,49 +19,37 @@ class AuthenticationPolicy(
     def authenticated_userid(self, request):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
-        login_id = None
-        if conf.get("sso_activate"):
-            login_id = request.cookies.get(conf.get('sso_cookie'))
-            sso_id = login_id
-        else:
-            login_id = request.cookies.get('drupal-userid')
-            sso_id = None
-
         # For now it is sufficient to just have an sso_cookie, because
         # zeit.web is only a proxy for the community, which will validate the
         # cookie itself.
+        login_id = request.cookies.get(conf.get('sso_cookie'))
 
-        # If no community cookie is present, bail out straight away:
-        if login_id is None:
-            # Avoid stale session data by making sure it's deleted
+
+        # If no sso cookie is present, bail out straight away:
+        if not login_id:
             if 'user' in request.session:
                 del request.session['user']
             return
 
-        if sso_id and request.session.get('user') and (
-                request.session['user'].get('sso_verification') != sso_id):
+        if login_id and request.session.get('user') and (
+                request.session['user'].get('sso_verification') != login_id):
             del request.session['user']
 
-        drupal_id = request.cookies.get('drupal-userid')
-
-        # We might never get a drupal cookie, if we are just using the
-        # sso cookie and never actually visit the drupal backend
-        if conf.get("sso_activate") and not drupal_id and (
-                request.session.get('user')) and (
+        drupal_id = None
+        if request.session.get('user') and (
                 request.session['user'].get('uid')):
             drupal_id = request.session['user'].get('uid')
 
         # If we have a community cookie for the current user, store/retrieve
         # the user info in/from the session
-        if drupal_id is not None and (
-            'user' in request.session) and drupal_id == (
+        if drupal_id and ('user' in request.session) and drupal_id == (
                 request.session['user'].get('uid')):
             user_info = request.session['user']
         else:
             log.debug("Request user_info")
             user_info = get_community_user_info(request)
-            if sso_id:
-                user_info['sso_verification'] = sso_id
+            if login_id:
+                user_info['sso_verification'] = login_id
             request.session['user'] = user_info
 
         # Drupal 6 gives anonymous users a session and uid==0
@@ -87,6 +75,8 @@ def get_community_user_info(request):
     the Cookie that Community has set when the user logged in there.
     """
 
+    print "called"
+
     user_info = dict(uid=0, name=None, mail=None, picture=None, roles=[])
     community_host = request.registry.settings['community_host']
 
@@ -96,7 +86,7 @@ def get_community_user_info(request):
                  'Cookie': request.headers.get('Cookie', '')})
 
     try:
-        community_response = urllib2.urlopen(community_request, timeout=3)
+        community_response = urllib2.urlopen(community_request, timeout=6)
     except Exception:
         # Catch any possible socket error occuring through community requests.
         return user_info

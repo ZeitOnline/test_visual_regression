@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import urlparse
+import logging
 
 import pyramid.view
 
@@ -11,6 +12,9 @@ import zeit.web.core.gallery
 import zeit.web.core.view
 import zeit.web.magazin.view
 import zeit.web.site.area.spektrum
+
+
+log = logging.getLogger(__name__)
 
 
 def is_zon_content(context, request):
@@ -113,6 +117,10 @@ def login_state(request):
     destination = request.params['context-uri'] if request.params.get(
         'context-uri') else 'http://{}'.format(request.host)
     info = {}
+
+    if not request.authenticated_userid and request.cookies.get(
+            settings.get('sso_cookie')):
+        log.warn("SSO Cookie present, but noch authenticated")
 
     if settings['sso_activate']:
         info['login'] = u"{}/anmelden?url={}".format(
