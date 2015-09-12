@@ -299,6 +299,8 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
                   '<!--<!\\[endif\\]--><img alt="%s" title="%s" '
                   'class=" figure__media" '
                   'src="/img/artikel/01/bitblt-\\d+x\\d+-[a-z0-9]+/01.jpg" '
+                  'data-src='
+                  '"/img/artikel/01/bitblt-\\d+x\\d+-[a-z0-9]+/01.jpg" '
                   'data-ratio=""><!--\\[if gt IE 8\\]><!--></noscript>'
                   '<!--<!\\[endif\\]--></div><figcaption '
                   'class="figure__caption"><span '
