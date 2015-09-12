@@ -754,3 +754,11 @@ def test_canonical_url_should_omit_queries_and_hashes(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit/seite-3?cid=123#comments')
     canonical_url = browser.cssselect('link[rel=canonical]')[0].attrib['href']
     assert canonical_url.endswith('zeit-online/article/zeit/seite-3')
+
+
+def test_article_should_have_large_facebook_and_twitter_images(testbrowser):
+    doc = testbrowser('/zeit-online/article/01').document
+    assert doc.xpath('//meta[@property="og:image"]/@content')[0].endswith(
+        'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+    assert doc.xpath('//meta[@name="twitter:image"]/@content')[0].endswith(
+        'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
