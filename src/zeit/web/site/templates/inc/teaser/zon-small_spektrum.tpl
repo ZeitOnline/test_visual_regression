@@ -14,13 +14,14 @@
         {% set module_layout = 'teaser-small' %}
         {% set image = teaser.image %}
         {% if image %}
+            {% set source = image | default_image_url %}
         <figure class="teaser-small__media scaled-image">
             <!--[if gt IE 8]><!-->
-            <noscript data-src="{{ image | default_image_url }}">
+            <noscript data-src="{{ source }}">
             <!--<![endif]-->
                 <div class="teaser-small__media-container">
                     <a class="teaser-small__media-link" title="{{ teaser.teaserTitle }}" href="{{ teaser.url }}">
-                        <img class="teaser-small__media-item" alt="{{ image.attr_title }}" src="{{ image | default_image_url }}" data-ratio="{{ image.ratio }}">
+                        <img class="teaser-small__media-item" alt="{{ image.attr_title }}" src="{{ source }}" data-src="{{ source }}" data-ratio="{{ image.ratio }}">
                     </a>
                 </div>
             <!--[if gt IE 8]><!-->
