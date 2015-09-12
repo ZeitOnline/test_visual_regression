@@ -1,8 +1,19 @@
 Change log for zeit.web
 =======================
 
-1.68 (unreleased)
+1.69 (unreleased)
 -----------------
+
+- QUICKFIX: Fix images to endure new fallback image URL
+
+
+1.68 (2015-09-12)
+-----------------
+
+- ZON-2109: Add SEO meta links for dynamic cps
+
+- MAINT: Polish portraitbox, large teaser headlines on mobile,
+         advertising background-color and servicebox link styles
 
 - ZON-1892: Add Buzz-Board
 
@@ -10,16 +21,11 @@ Change log for zeit.web
 
 - ZON-2014: Enforce mobile image display
 
+- MAINT: Update x-styles
+
 - QUICKFIX: Make Keywordpage Titel to h1
 
-- QUICKFIX: Fix images to endure new fallback image URL
-
 - HOTFIX: Show comment moderation only for moderators
-
-- MAINT: Polish portraitbox, large teaser headlines on mobile,
-         advertising background-color and servicebox link styles
-
-- MAINT: Update x-styles
 
 
 1.67 (2015-09-11)
