@@ -50,6 +50,9 @@ class Reach(object):
     def get_score(self, **kw):
         return self._get_ranking('score', **kw)
 
+    def get_trend(self, **kw):
+        return self._get_ranking('trend', **kw)
+
     def get_social(self, **kw):
         return self._get_ranking('social', **kw)
 

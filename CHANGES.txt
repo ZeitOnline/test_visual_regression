@@ -4,9 +4,13 @@ Change log for zeit.web
 1.68 (unreleased)
 -----------------
 
+- ZON-2197: Allow specifying a host, not just a path, for ``asset_prefix``
+
 - ZON-2014: Enforce mobile image display
 
 - MAINT: Update x-styles
+
+- QUICKFIX: Make Keywordpage Titel to h1
 
 
 1.67 (2015-09-11)
@@ -46,6 +50,8 @@ Change log for zeit.web
 
 - ZON-2115: Add Meta Title, Description Ruleset for Keywordpages
 
+- ZON-1984: Storystream CP
+
 - ZON-2181: Validate page number from GET parameter
 
 - FIX: Inherit from newsfeed for all classes in view_feed
@@ -74,8 +80,6 @@ Change log for zeit.web
 
 - ZON-2145: Use new fallback_size setting to restrict image sizes for noscript,
   so we don't have to restrict the largest available variant via max_size.
-
-- ZON-1984: Storystream CP
 
 - DEV-935: Quickfix for Community-Redaktions-Auszeichnung
 
