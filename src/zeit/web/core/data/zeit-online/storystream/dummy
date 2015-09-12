@@ -1,0 +1,593 @@
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="storystream">
+<head>
+	<header_image src="http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/30921833.jpg" type="jpg" title="Griechenland Tsipras" align="left" publication-date="" expires="">
+		<bu>Wahlkampfplakat von Alexis Tsipras in Athen</bu>
+		<copyright>© Alkis Konstantinidis/Reuters</copyright>
+	</header_image>
+	<author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+		<display_name py:pytype="str">Zacharias Zacharakis</display_name>
+	</author>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Zacharias Zacharakis</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-09-11T14:38:21.144991+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-09-11T10:09:57.052739+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-12T10:11:42.316515+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-09-11T10:09:57.052739+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-09-11T10:08:56.863347+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-09-11T10:09:05.303304+00:00</attribute>
+	<attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-09-09T16:28:23.916448+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.strothjohann</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">storystream</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:46072ab5-1d53-4d5b-bb25-54a2837b623c}</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">36</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+	    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IStoryStream" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+</head>
+<body>
+	<supertitle>Griechenland</supertitle>
+	<title>Das linke Experiment</title>
+	<subtitle>
+		Anfang des Jahres übernahm in Griechenland erstmals eine linke Regierung. Ihr Versprechen: das Sparen beenden. Nun gibt es trotzdem harte Reformen und neue Kredite. Wie kam es dazu?
+	</subtitle>
+	<region visible="True" visible_mobile="True" area="id-c80297d3-5680-4259-aa90-9e828f7d2d3e" kind="solo" kind_title="Solo-Region">
+		<area visible="True" visible_mobile="True" hide-dupes="True" area="id-24f9af13-ba8a-4cdc-9e5d-4961e1dd464f" kind="solo">
+			<image xsi:nil="true"/>
+			<module cp:type="headerimage" module="headerimage" visible="True" visible_mobile="True" cp:__name__="id-6a1f4359-85a3-4a18-986f-2be47536bf15" supertitle="Griechenland" title="Das linke Experiment">
+				<image>
+				http://xml.zeit.de/politik/ausland/2015-08/griechenland-themenseite/
+				</image>
+			</module>
+		</area>
+	</region>
+	<region visible="True" visible_mobile="True" area="id-00a14862-b1c6-4146-bf60-f2f4e11cae17" kind="storystream" kind_title="Storystream">
+	<area visible="True" visible_mobile="True" hide-dupes="True" area="id-262cd66c-e9a6-4d34-8b46-c1ffcd1c7c13" kind="storystream">
+	<module cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-9cdba876-5637-4d65-be33-48460c79a375" title="Was wir jetzt wissen">
+	<text>
+	<ul>
+	<li>
+	Am 20. September soll zum zweiten Mal in diesem Jahr ein neues Parlament in Griechenland gewählt werden. Der bisherige Premier Alexis Tsipras hatte die Neuwahl eingeleitet, weil die eigene Syriza-Partei ihm die Unterstützung entzieht. Tsipras soll das von der EU geforderte Sparprogramm umsetzen.
+	<br/>
+	</li>
+	<li>
+	Am 13. Juli wurde Griechenland ein drittes Hilfspaket bewilligt. Ein Euro-Austritt des Staates gilt damit als abgewendet. Doch grundsätzlich herrschen Zweifel am Erfolg des neuen Programms.
+	</li>
+	<li>
+	Viele Griechen hofften, mit Syriza käme der Neubeginn. Doch seit Tsipras im Januar dieses Jahres an die Macht kam, stritt seine Regierung mit den Gläubigern um mildere Bedingungen für die gewährten Kredite. Der Konflikt eskalierte und führte zur Schließung der Banken und zur Einführung von Kapitalverkehrskontrollen.
+	</li>
+	</ul>
+	</text>
+	</module>
+	</area>
+	</region>
+	<region visible="True" visible_mobile="True" area="id-31cf839f-c587-4b18-9084-1cc457ab02a0" kind="storystream" kind_title="Storystream">
+	<area visible="True" visible_mobile="True" hide-dupes="True" area="id-c847b3f5-a566-4536-8341-aa73472392ba" kind="storystream">
+	<module cp:type="teaser" module="zon-milestone" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-5a7a3f3c-d507-473e-831e-6a3b3bf63b12">
+	<block href="http://xml.zeit.de/wirtschaft/2015-09/griechenland-evangelos-meimarakis-alexis-tsipras-neuwahl" uniqueId="http://xml.zeit.de/wirtschaft/2015-09/griechenland-evangelos-meimarakis-alexis-tsipras-neuwahl" year="2015" issue="36" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" genre="analyse" date-last-modified="2015-09-11T13:03:17+00:00" date-first-released="2015-09-08T17:16:01.502465+00:00" date-last-published="2015-09-11T13:04:17.340959+00:00" last-semantic-change="2015-09-08T17:14:57.112855+00:00" author="Zacharias Zacharakis">
+	<supertitle py:pytype="str">Griechenland</supertitle>
+	<title py:pytype="str">Die alte Elite ist zurück</title>
+	<text py:pytype="str">
+	Ausgerechnet Evangelos Meimarakis hat es geschafft, im Wahlkampf mit Alexis Tsipras gleichauf zu ziehen. Der Konservative verspricht: keine Spielchen mehr.
+	</text>
+	<description py:pytype="str">
+	Ausgerechnet Evangelos Meimarakis hat es geschafft, im Wahlkampf mit Alexis Tsipras gleichauf zu ziehen. Der Konservative verspricht: keine Spielchen mehr.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/politik/ausland/2015-09/evangelos-vassilios-meimarakis/" type="jpg" title="Evangelos-Vassilios Meimarakis" align="left" publication-date="" expires="">
+	<bu py:pytype="str">
+	Evangelos Meimarakis, der Parteivorsitzende der Nea Dimokratia
+	</bu>
+	<copyright py:pytype="str">© Kostas Tsironis/Getty Images</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Zacharias Zacharakis</display_name>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-milestone" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-cc6a25c9-9277-4a0d-9d10-dec63a11717e">
+	<block href="http://xml.zeit.de/wirtschaft/2015-08/griechenland-paket-86-milliarden-verteilung-schulden" uniqueId="http://xml.zeit.de/wirtschaft/2015-08/griechenland-paket-86-milliarden-verteilung-schulden" year="2015" issue="33" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" genre="analyse" date-last-modified="2015-09-11T10:56:04+00:00" date-first-released="2015-08-18T10:43:28.797232+00:00" date-last-published="2015-09-11T10:57:03.486746+00:00" last-semantic-change="2015-08-19T09:38:46.029913+00:00" author="Zacharias Zacharakis">
+	<supertitle py:pytype="str">Hilfspaket</supertitle>
+	<title py:pytype="str">Wohin fließen die Griechenland-Milliarden?</title>
+	<text py:pytype="str">
+	86 Milliarden Euro bekommt Griechenland in den kommenden drei Jahren. Wie schon bei den ersten Rettungspaketen gilt: Die griechische Bevölkerung erhält davon fast nichts.
+	</text>
+	<description py:pytype="str">
+	86 Milliarden Euro bekommt Griechenland in den kommenden drei Jahren. Wie schon bei den ersten Rettungspaketen gilt: Die griechische Bevölkerung erhält davon fast nichts.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/wirtschaft/2015-08/griechenland-euro/" type="jpg" title="Griechenland Euro" align="left" publication-date="" expires="">
+	<bu py:pytype="str">Straßenszene in Athen</bu>
+	<copyright py:pytype="str">© Alkis Konstantinidis/Reuters</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Zacharias Zacharakis</display_name>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-ba101875-cc26-446d-88bf-a686a14629e4">
+	<block href="http://xml.zeit.de/wirtschaft/2015-07/griechenland-banken-oeffnung-leben-alltag-bargeld" uniqueId="http://xml.zeit.de/wirtschaft/2015-07/griechenland-banken-oeffnung-leben-alltag-bargeld" year="2015" issue="29" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-11T10:56:59+00:00" date-first-released="2015-07-20T18:39:26.328853+00:00" date-last-published="2015-09-11T10:57:59.381220+00:00" last-semantic-change="2015-07-20T18:38:19.468899+00:00" author="Efthymis Angeloudis;Nadine Oberhuber">
+	<supertitle py:pytype="str">Griechenland</supertitle>
+	<title py:pytype="str">Offene Banken, aber trotzdem kein Geld</title>
+	<text py:pytype="str">
+	Die Zwangspause griechischer Banken ist vorbei. Mehr als 60 Euro pro Tag können die Bürger trotzdem nicht abheben. Was heißt das für ein Land, in dem das Bargeld regiert?
+	</text>
+	<description py:pytype="str">
+	Die Zwangspause griechischer Banken ist vorbei. Mehr als 60 Euro pro Tag können die Bürger trotzdem nicht abheben. Was heißt das für ein Land, in dem das Bargeld regiert?
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title py:pytype="str">
+	Griechenlands Banken öffnen. Das 60-Euro-Limit bleibt.
+	</breadcrumb_title>
+	<image base-id="http://xml.zeit.de/wirtschaft/2015-07/griechenland-banken-2/" type="jpg" title="Griechenland Banken" align="left" publication-date="" expires="">
+	<bu py:pytype="str">
+	Eine Menschentraube drängt sich am Eingang der griechischen Nationalbank bei deren Wiederöffnung.
+	</bu>
+	<copyright py:pytype="str">© Thanassis Stavrakis / dpa</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/A/Efthymis_Angeloudis/index" publication-date="" expires="">
+	<display_name py:pytype="str">Efthymis Angeloudis</display_name>
+	<location>Athen</location>
+	</author>
+	<author href="http://xml.zeit.de/autoren/O/Nadine_Oberhuber/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Nadine Oberhuber</display_name>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-e24a774b-6a2f-4d2c-8067-a6345022d1d6">
+	<block href="http://xml.zeit.de/politik/deutschland/2015-07/griechenland-bundestag-hilfspaket" uniqueId="http://xml.zeit.de/politik/deutschland/2015-07/griechenland-bundestag-hilfspaket" year="2015" issue="29" ressort="Politik" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-11T10:58:20+00:00" date-first-released="2015-07-17T14:22:14.037749+00:00" date-last-published="2015-09-11T10:59:19.924996+00:00" last-semantic-change="2015-07-17T14:21:11.133604+00:00" author="Lisa Caspari">
+	<supertitle py:pytype="str">Griechenland-Sondersitzung</supertitle>
+	<title py:pytype="str">"Es ist noch nicht vorbei"</title>
+	<text py:pytype="str">
+	Ein bitterer Schäuble, versöhnliche SPD: Der Bundestag billigt neue Verhandlungen mit Griechenland. Aber die Zweifel sind groß, viele erwarten einen schwierigen Sommer.
+	</text>
+	<description py:pytype="str">
+	Ein bitterer Schäuble, versöhnliche SPD: Der Bundestag billigt neue Verhandlungen mit Griechenland. Aber die Zweifel sind groß, viele erwarten einen schwierigen Sommer.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/politik/2015-07/bundestagsdebatte-griechenland-3/" type="jpg" title="Bundestagsdebatte Griechenland" alt="Bundestagsdebatte Griechenland" align="left" publication-date="" expires="">
+	<bu py:pytype="str">
+	Bundeskanzlerin Angela Merkel und Finanzminister Wolfgang Schäuble während der Debatte im Bundestag
+	</bu>
+	<copyright py:pytype="str">© Tobias Schwarz/AFP/Getty Images</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/C/Lisa_Caspari/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Lisa Caspari</display_name>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-d79040c0-8103-4c47-88b0-fef03dd319d3">
+	<block href="http://xml.zeit.de/wirtschaft/2015-07/alexis-tsipras-parlament-demonstrationen" uniqueId="http://xml.zeit.de/wirtschaft/2015-07/alexis-tsipras-parlament-demonstrationen" year="2015" issue="28" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" genre="reportage" date-last-modified="2015-09-11T10:59:25+00:00" date-first-released="2015-07-16T04:52:30.169340+00:00" date-last-published="2015-09-11T11:00:24.723717+00:00" last-semantic-change="2015-07-16T04:51:25.808415+00:00" author="Lenz Jacobsen;Khuê Pham">
+	<supertitle py:pytype="str">Griechenland</supertitle>
+	<title py:pytype="str">Tsipras' neue Feinde</title>
+	<text py:pytype="str">
+	Gewalttätige Proteste und Anfeindungen aus der eigenen Partei: Griechenlands Regierungschef Tsipras setzt sich im Parlament durch – zahlt dafür aber einen hohen Preis.
+	</text>
+	<description py:pytype="str">
+	Gewalttätige Proteste und Anfeindungen aus der eigenen Partei: Griechenlands Regierungschef Tsipras setzt sich im Parlament durch – zahlt dafür aber einen hohen Preis.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/wirtschaft/2015-07/demonstration-athen/" type="jpg" title="Demonstration Athen" align="left" publication-date="" expires="">
+	<bu py:pytype="str">
+	Bei einer Kundgebung in Athen kommt es zu Straßenschlachten zwischen Polizei und Demonstranten.
+	</bu>
+	<copyright py:pytype="str">© Yannis Behrakis/Reuters</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/J/Lenz_Jacobsen/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Lenz Jacobsen</display_name>
+	<location xsi:nil="true"/>
+	</author>
+	<author href="http://xml.zeit.de/autoren/P/Khue_Pham/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Khuê Pham</display_name>
+	<location>Athen</location>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-2d302111-8880-4c30-89ba-0548d003f272">
+	<block href="http://xml.zeit.de/wirtschaft/2015-07/tsipras-grexit-griechenland-merkel" uniqueId="http://xml.zeit.de/wirtschaft/2015-07/tsipras-grexit-griechenland-merkel" year="2015" issue="28" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-11T11:00:30+00:00" date-first-released="2015-07-13T10:57:54.157871+00:00" date-last-published="2015-09-11T11:01:30.469868+00:00" last-semantic-change="2015-07-13T11:07:15.977023+00:00" author="Marlies Uken">
+	<supertitle py:pytype="str">Griechenland</supertitle>
+	<title py:pytype="str">Alles für den Euro</title>
+	<text py:pytype="str">
+	Alexis Tsipras hat kapituliert: Um Griechenland im Euro zu halten, stimmt er einem Reformpaket mit harten Auflagen zu. Nur winzige Erfolge kann er für sich verbuchen.
+	</text>
+	<description py:pytype="str">
+	Alexis Tsipras hat kapituliert: Um Griechenland im Euro zu halten, stimmt er einem Reformpaket mit harten Auflagen zu. Nur winzige Erfolge kann er für sich verbuchen.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/wirtschaft/2015-07/tsipras-einigung/" type="jpg" title="Tsipras Einigung" align="left" publication-date="" expires="">
+	<bu py:pytype="str">
+	Der griechische Premier Alexis Tsipras nach der Einigung
+	</bu>
+	<copyright py:pytype="str">© Laurent Dubrule / dpa</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/U/Marlies_Uken/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Marlies Uken</display_name>
+	<location>Brüssel</location>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-8e6b3e4f-2563-4cf6-8fa3-6a21e0c1a36e">
+	<block href="http://xml.zeit.de/wirtschaft/2015-07/yanis-varoufakis-griechenland-alexis-tsipras" uniqueId="http://xml.zeit.de/wirtschaft/2015-07/yanis-varoufakis-griechenland-alexis-tsipras" year="2015" issue="25" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-11T11:02:20+00:00" date-first-released="2015-07-06T14:32:44.191876+00:00" date-last-published="2015-09-11T11:03:19.403179+00:00" last-semantic-change="2015-07-06T14:31:36.671315+00:00" author="Marcus Gatzke;Zacharias Zacharakis;Steffen Dobbert">
+	<supertitle py:pytype="str">Yanis Varoufakis</supertitle>
+	<title py:pytype="str">Varoufakis, der Märtyrer</title>
+	<text py:pytype="str">
+	Als Finanzminister hat Yanis Varoufakis den Bankrott seines Landes nicht verhindert. Für viele Griechen ist er trotzdem kein gescheiterter Politiker, sondern ein Held.
+	</text>
+	<description py:pytype="str">
+	Als Finanzminister hat Yanis Varoufakis den Bankrott seines Landes nicht verhindert. Für viele Griechen ist er trotzdem kein gescheiterter Politiker, sondern ein Held.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/politik/ausland/2015-07/varoufakis/" type="jpg" title="Varoufakis" align="left" publication-date="" expires="2015-10-02T09:29:11+00:00">
+	<bu py:pytype="str">Yanis Varoufakis</bu>
+	<copyright py:pytype="str">© Daniel Ochoa de Olza/AP/dpa</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/G/Marcus_Gatzke/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Marcus Gatzke</display_name>
+	</author>
+	<author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Zacharias Zacharakis</display_name>
+	<location>Athen</location>
+	</author>
+	<author href="http://xml.zeit.de/autoren/D/Steffen_Dobbert/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Steffen Dobbert</display_name>
+	<location>Athen</location>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-milestone" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-9ff6a5f7-dfa5-4711-b461-61c52ec03bef">
+	<block href="http://xml.zeit.de/politik/ausland/2015-07/griechenland-referendum-oxi-kommentar" uniqueId="http://xml.zeit.de/politik/ausland/2015-07/griechenland-referendum-oxi-kommentar" year="2015" issue="25" ressort="Politik" contenttype="article" publication-date="" expires="" genre="kommentar" date-last-modified="2015-09-11T11:05:41+00:00" date-first-released="2015-07-05T19:16:35.981132+00:00" date-last-published="2015-09-11T11:06:39.773727+00:00" last-semantic-change="2015-07-06T07:20:16.771890+00:00" author="Zacharias Zacharakis">
+	<supertitle py:pytype="str">Eurokrise</supertitle>
+	<title py:pytype="str">Ein lautes Nein aus Griechenland</title>
+	<text py:pytype="str">
+	Die Griechen stellen Europa mit ihrem klaren Votum gegen die Sparpolitik vor die Wahl: Verbessert die Bedingungen oder schmeißt uns aus dem Euro, mit allen Konsequenzen.
+	</text>
+	<description py:pytype="str">
+	Die Griechen stellen Europa mit ihrem klaren Votum gegen die Sparpolitik vor die Wahl: Verbessert die Bedingungen oder schmeißt uns aus dem Euro, mit allen Konsequenzen.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/politik/ausland/2015-07/griechenland-referendum-tsipras/" type="jpg" title="Griechenland Referendum Tsipras" align="left" publication-date="" expires="">
+	<bu py:pytype="str">Alexis Tsipras</bu>
+	<copyright py:pytype="str">© Milos Bicanski/Getty Images</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Zacharias Zacharakis</display_name>
+	<location>Athen</location>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f77ec47b-26a1-405c-b6eb-2ca6bedc6fc7">
+	<block href="http://xml.zeit.de/wirtschaft/2015-06/griechenland-kapitalverkehrskontrollen-reportage-athen" uniqueId="http://xml.zeit.de/wirtschaft/2015-06/griechenland-kapitalverkehrskontrollen-reportage-athen" year="2015" issue="25" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-11T11:08:17+00:00" date-first-released="2015-06-29T13:59:14.522187+00:00" date-last-published="2015-09-11T11:08:24.142828+00:00" last-semantic-change="2015-06-29T13:58:11.507220+00:00" author="Zacharias Zacharakis">
+	<supertitle py:pytype="str">Griechenland-Krise</supertitle>
+	<title py:pytype="str">Ein Land im 60-Euro-Zustand</title>
+	<text py:pytype="str">
+	Rentner kommen nicht an ihr Geld, Autofahrer legen Spritvorräte an, Menschen horten Lebensmittel: Griechenland am Tag eins nach dem Aus der Verhandlungen
+	</text>
+	<description py:pytype="str">
+	Rentner kommen nicht an ihr Geld, Autofahrer legen Spritvorräte an, Menschen horten Lebensmittel: Griechenland am Tag eins nach dem Aus der Verhandlungen
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/wirtschaft/2015-06/griechenland-8/" type="jpg" title="Griechenland" align="left" publication-date="" expires="">
+	<bu py:pytype="str">
+	Eine aufgelöste Rentnerin in Athen, die mit anderen Rentnern vergebens vor einer geschlossenen Bankfiliale auf die Auszahlung ihrer Rente gewartet hatte.
+	</bu>
+	<copyright py:pytype="str">© Yannis Behrakis/Reuters</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Zacharias Zacharakis</display_name>
+	<location>Athen</location>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f8672ddc-df20-42e0-9e99-d2678049279e">
+	<block href="http://xml.zeit.de/wirtschaft/2015-06/griechenland-banken-griechischer-bankenverband" uniqueId="http://xml.zeit.de/wirtschaft/2015-06/griechenland-banken-griechischer-bankenverband" year="2015" issue="25" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-11T11:06:14+00:00" date-first-released="2015-06-30T17:13:25.600491+00:00" date-last-published="2015-09-11T11:07:13.315978+00:00" last-semantic-change="2015-06-30T17:28:43.066264+00:00" author="Zacharias Zacharakis">
+	<supertitle py:pytype="str">Banken in Griechenland</supertitle>
+	<title py:pytype="str">"Bald bricht hier alles zusammen"</title>
+	<text py:pytype="str">
+	Besorgte Unternehmer, aufgelöste Banker: Die wichtigsten Wirtschaftsvertreter Griechenlands zeichnen ein düsteres Bild und drängen ihre Regierung zu einem Deal.
+	</text>
+	<description py:pytype="str">
+	Besorgte Unternehmer, aufgelöste Banker: Die wichtigsten Wirtschaftsvertreter Griechenlands zeichnen ein düsteres Bild und drängen ihre Regierung zu einem Deal.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/wirtschaft/2015-06/banken-griechenland-2/" type="jpg" title="Banken Griechenland" align="left" publication-date="" expires="">
+	<bu py:pytype="str">
+	Ein Mann sitzt vor der geschlossenen Bank von Griechenland in Athen.
+	</bu>
+	<copyright py:pytype="str">© Marko Djurica/Reuters</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Zacharias Zacharakis</display_name>
+	<location>Athen</location>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-milestone" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-d16fc1f6-3caa-41cd-a33a-968d4a84d2bb">
+	<block href="http://xml.zeit.de/wirtschaft/2015-06/griechenland-lage-bankrun-banken-kapitalverkehrskontrollen" uniqueId="http://xml.zeit.de/wirtschaft/2015-06/griechenland-lage-bankrun-banken-kapitalverkehrskontrollen" year="2015" issue="25" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-11T11:08:19+00:00" date-first-released="2015-06-28T21:54:48.980297+00:00" date-last-published="2015-09-11T11:09:18.744041+00:00" last-semantic-change="2015-06-28T21:53:20.675078+00:00" author="Zacharias Zacharakis">
+	<supertitle py:pytype="str">Griechenland</supertitle>
+	<title py:pytype="str">Bankensturm des Volkes</title>
+	<text py:pytype="str">
+	Nie zuvor war der Andrang an den Geldautomaten so sichtbar wie in den Stunden, bevor die Banken geschlossen wurden. Viele befürchten als Nächstes Hamsterkäufe.
+	</text>
+	<description py:pytype="str">
+	Nie zuvor war der Andrang an den Geldautomaten so sichtbar wie in den Stunden, bevor die Banken geschlossen wurden. Viele befürchten als Nächstes Hamsterkäufe.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/wirtschaft/2015-06/griechenland-banken-2/" type="jpg" title="Griechenland Banken Bankrun" alt="Griechenland Banken Bankrun" align="left" publication-date="" expires="">
+	<bu py:pytype="str">
+	In Athen warten Menschen darauf, Bargeld vom Automaten abheben zu können.
+	</bu>
+	<copyright py:pytype="str">© ANGELOS TZORTZINIS/AFP/Getty Images</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Zacharias Zacharakis</display_name>
+	<location>Athen</location>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-8e27ae45-08e0-407b-bb57-006456d5a107">
+	<block href="http://xml.zeit.de/wirtschaft/2015-06/griechenland-eurogruppe-tsipras-dijsselbloem-verhandlungen" uniqueId="http://xml.zeit.de/wirtschaft/2015-06/griechenland-eurogruppe-tsipras-dijsselbloem-verhandlungen" year="2015" issue="25" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-11T11:09:28+00:00" date-first-released="2015-06-27T17:44:46.652395+00:00" date-last-published="2015-09-11T11:10:28.346852+00:00" last-semantic-change="2015-06-27T17:43:02.746096+00:00" author="Marlies Uken">
+	<supertitle py:pytype="str">Griechenland</supertitle>
+	<title py:pytype="str">Ein großer Schritt Richtung Grexit</title>
+	<text py:pytype="str">
+	Das Rettungsprogramm wird nicht verlängert: Gläubiger und die griechische Regierung schieben sich nach einer historischen Eurogruppen-Sitzung gegenseitig die Schuld zu.
+	</text>
+	<description py:pytype="str">
+	Das Rettungsprogramm wird nicht verlängert: Gläubiger und die griechische Regierung schieben sich nach einer historischen Eurogruppen-Sitzung gegenseitig die Schuld zu.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/wirtschaft/2015-06/jeroen-dijsselbloem-2/" type="jpg" align="left" publication-date="" expires="">
+	<bu py:pytype="str">Eurogruppenchef Jeroen Dijsselbloem</bu>
+	<copyright py:pytype="str">© Yves Herman / Reuters</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/U/Marlies_Uken/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Marlies Uken</display_name>
+	<location>Brüssel</location>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-milestone" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-b188017a-cf2f-4c02-84b3-4cbf11ac784d">
+	<block href="http://xml.zeit.de/politik/ausland/2015-06/griechenland-tsipras-referendum" uniqueId="http://xml.zeit.de/politik/ausland/2015-06/griechenland-tsipras-referendum" year="2015" issue="25" ressort="Politik" contenttype="article" publication-date="" expires="" genre="nachricht" date-last-modified="2015-09-11T11:10:13+00:00" date-first-released="2015-06-26T22:58:35.634672+00:00" date-last-published="2015-09-11T11:11:13.396469+00:00" last-semantic-change="2015-06-26T22:39:37.095444+00:00">
+	<supertitle py:pytype="str">Schuldenkrise</supertitle>
+	<title py:pytype="str">
+	Tsipras will Griechen über Sparprogramm abstimmen lassen
+	</title>
+	<text py:pytype="str">
+	Griechenlands Regierungschef wirft den Gläubigern vor, sein Land zu demütigen. Jetzt sollen die Griechen in einem Referendum selbst über die Vorschläge entscheiden.
+	</text>
+	<description py:pytype="str">
+	Griechenlands Regierungschef wirft den Gläubigern vor, sein Land zu demütigen. Jetzt sollen die Griechen in einem Referendum selbst über die Vorschläge entscheiden.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/politik/ausland/2015-06/tsipras-referendum/" type="jpg" title="Tsipras Griechenland" align="left" publication-date="" expires="">
+	<bu py:pytype="str">
+	Griechenlands Regierungschef Alexis Tsipras während der Verhandlungen in Brüssel
+	</bu>
+	<copyright py:pytype="str">© Yves Herman/Reuters</copyright>
+	</image>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-2622632a-137a-4973-aa23-88d7ce2df394">
+	<block href="http://xml.zeit.de/wirtschaft/2015-06/grexit-griechenland-euro-zone" uniqueId="http://xml.zeit.de/wirtschaft/2015-06/grexit-griechenland-euro-zone" year="2015" issue="24" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-11T11:11:27+00:00" date-first-released="2015-06-17T14:50:42.630855+00:00" date-last-published="2015-09-11T11:12:27.387433+00:00" last-semantic-change="2015-06-17T14:35:52.305118+00:00" author="Georg Blume;Thomas Roser;Pablo Rodríguez Suanzes;Derek Scally;Michael Braun ">
+	<supertitle py:pytype="str">Europa und der Grexit</supertitle>
+	<title py:pytype="str">Die Griechen der Anderen</title>
+	<text py:pytype="str">
+	Wie nehmen die Menschen in Europa die Griechenland-Krise wahr? In manchen Staaten gibt es kein Verständnis für Athen. In anderen kein Boulevardblatt mit Griechen-Phobie.
+	</text>
+	<description py:pytype="str">
+	Wie nehmen die Menschen in Europa die Griechenland-Krise wahr? In manchen Staaten gibt es kein Verständnis für Athen. In anderen kein Boulevardblatt mit Griechen-Phobie.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/politik/ausland/2015-06/griechenland-grexit-euro-exit-graffito/" type="jpg" title="Griechenland Grexit Euro Exit Graffito" alt="Ein Graffito in Athen" align="left" publication-date="" expires="">
+	<bu py:pytype="str">Ein Graffito in Athen</bu>
+	<copyright py:pytype="str">© Louisa Gouliamaki/AFP/Getty Images</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/B/Georg_Blume/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Georg Blume</display_name>
+	</author>
+	<author href="http://xml.zeit.de/autoren/R/Thomas_Roser/index" publication-date="" expires="">
+	<display_name py:pytype="str">Thomas Roser</display_name>
+	</author>
+	<author href="http://xml.zeit.de/autoren/S/Pablo_Rodriguez_Suanzes" publication-date="" expires="">
+	<display_name py:pytype="str">Pablo Rodríguez Suanzes</display_name>
+	</author>
+	<author href="http://xml.zeit.de/autoren/S/Derek_Scally" publication-date="" expires="">
+	<display_name py:pytype="str">Derek Scally</display_name>
+	</author>
+	<author href="http://xml.zeit.de/autoren/B/Michael-_Braun-/index" publication-date="" expires="">
+	<display_name py:pytype="str">Michael Braun</display_name>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-3a7873cf-1d2e-4cc3-85ef-bbad7d808c94">
+	<block href="http://xml.zeit.de/wirtschaft/2015-05/griechenland-eurokrise-eurogruppe" uniqueId="http://xml.zeit.de/wirtschaft/2015-05/griechenland-eurokrise-eurogruppe" year="2015" issue="19" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-11T11:13:37+00:00" date-first-released="2015-05-11T20:22:52.364547+00:00" date-last-published="2015-09-11T11:14:37.660854+00:00" last-semantic-change="2015-05-11T20:21:44.007339+00:00" author="Marlies Uken">
+	<supertitle py:pytype="str">Griechenland</supertitle>
+	<title py:pytype="str">Zwei Minuten müssen reichen</title>
+	<text py:pytype="str">
+	Griechenland tilgt sogar schneller als nötig einen IWF-Kredit. Und die Euro-Finanzminister sind ganz angetan von den jüngsten Reformbemühungen. Alles gut? Von wegen.
+	</text>
+	<description py:pytype="str">
+	Griechenland tilgt sogar schneller als nötig einen IWF-Kredit. Und die Euro-Finanzminister sind ganz angetan von den jüngsten Reformbemühungen. Alles gut? Von wegen.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/wirtschaft/2015-05/varoufakis-eurogruppe-griechenland/" type="jpg" title="Varoufakis Eurogruppe Griechenland" alt="Varoufakis Eurogruppe Griechenland" align="left" publication-date="" expires="2015-08-11T20:17:50+00:00">
+	<bu py:pytype="str">
+	Der griechische Finanzminister Yanis Varoufakis auf der Pressekonferenz nach dem Eurogruppen-Treffen in Brüssel
+	</bu>
+	<copyright py:pytype="str">© EPA/JULIEN WARNAND</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/U/Marlies_Uken/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Marlies Uken</display_name>
+	<location>Brüssel</location>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-76dfd308-96e1-4dd2-ab00-17d79c580b62">
+	<block href="http://xml.zeit.de/wirtschaft/2015-04/iwf-griechenland-euro-pleite" uniqueId="http://xml.zeit.de/wirtschaft/2015-04/iwf-griechenland-euro-pleite" year="2015" issue="15" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-11T11:15:49+00:00" date-first-released="2015-04-09T14:32:55.784287+00:00" date-last-published="2015-09-11T11:16:48.946102+00:00" last-semantic-change="2015-04-09T14:31:53.804580+00:00" author="Nick Malkoutzis">
+	<supertitle py:pytype="str">Griechenland</supertitle>
+	<title py:pytype="str">Athen steht mit dem Rücken zur Wand</title>
+	<text py:pytype="str">
+	Griechenland hat den IWF-Kredit bezahlt und eine Pleite abgewendet. Und jetzt? Die Hängepartie geht weiter, die Hauptleidtragende ist die griechische Wirtschaft.
+	</text>
+	<description py:pytype="str">
+	Griechenland hat den IWF-Kredit bezahlt und eine Pleite abgewendet. Und jetzt? Die Hängepartie geht weiter, die Hauptleidtragende ist die griechische Wirtschaft.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/wirtschaft/2015-04/tsipras-griechenland/" type="jpg" title="Alexis Tsipras" alt="Alexis Tsipras" align="left" publication-date="" expires="">
+	<bu py:pytype="str">Alexis Tsipras</bu>
+	<copyright py:pytype="str">© Reuters</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/M/Nick_Malkoutzis" publication-date="" expires="">
+	<display_name py:pytype="str">Nick Malkoutzis</display_name>
+	<location>Athen</location>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-milestone" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f415380a-300f-497f-95d4-bbf9dc13cba4">
+	<block href="http://xml.zeit.de/wirtschaft/2015-02/griechenland-reformen-verhandlungen" uniqueId="http://xml.zeit.de/wirtschaft/2015-02/griechenland-reformen-verhandlungen" year="2015" issue="8" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" genre="gastbeitrag" date-last-modified="2015-09-11T11:16:34+00:00" date-first-released="2015-02-21T18:33:48.494356+00:00" date-last-published="2015-09-11T11:17:33.809820+00:00" last-semantic-change="2015-02-21T18:32:45.569560+00:00" author="Marcel Fratzscher">
+	<supertitle py:pytype="str">Griechenland</supertitle>
+	<title py:pytype="str">Das Gesicht wahren, Reformen ernst nehmen</title>
+	<text py:pytype="str">
+	Für die griechische Regierung geht es jetzt um Schadensbegrenzung: Die Finanzmärkte und die Bürger müssen von der Handlungsfähigkeit des Staates überzeugt werden.
+	</text>
+	<description py:pytype="str">
+	Für die griechische Regierung geht es jetzt um Schadensbegrenzung: Die Finanzmärkte und die Bürger müssen von der Handlungsfähigkeit des Staates überzeugt werden.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/politik/ausland/2015-02/griechenland-eu-5/" type="jpg" title="Griechenland EU" alt="Griechenland EU" align="left" publication-date="" expires="">
+	<bu py:pytype="str">
+	Griechenlands Finanzminister Yanis Varoufakis in Brüssel
+	</bu>
+	<copyright py:pytype="str">© Yves Herman/Reuters</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/F/Marcel_Fratzscher/index" publication-date="" expires="">
+	<display_name py:pytype="str">Marcel Fratzscher</display_name>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-4a22aca3-242a-4a6f-a2d6-f20cd439d2aa">
+	<block href="http://xml.zeit.de/politik/ausland/2015-01/griechenland-tsipras-russland-linke-che-guevara" uniqueId="http://xml.zeit.de/politik/ausland/2015-01/griechenland-tsipras-russland-linke-che-guevara" year="2015" issue="5" ressort="Politik" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-11T11:17:31+00:00" date-first-released="2015-01-29T17:59:45.400767+00:00" date-last-published="2015-09-11T11:18:30.702770+00:00" last-semantic-change="2015-01-29T17:58:43.229440+00:00" author="Zacharias Zacharakis">
+	<supertitle py:pytype="str">Griechenland</supertitle>
+	<title py:pytype="str">Wie radikal ist Tsipras?</title>
+	<text py:pytype="str">
+	Weg von Europa, hin zu Russland: Kaum im Amt, verschreckt der neue griechische Ministerpräsident Europa. Dabei war er im Wahlkampf so zahm. Alles nur vorgetäuscht?
+	</text>
+	<description py:pytype="str">
+	Weg von Europa, hin zu Russland: Kaum im Amt, verschreckt der neue griechische Ministerpräsident Europa. Dabei war er im Wahlkampf so zahm. Alles nur vorgetäuscht?
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/politik/2015-01/tsirpas-guevara/" type="jpg" title="Tsirpas Che Guevara Style" align="left" publication-date="" expires="">
+	<bu xsi:nil="true"/>
+	<copyright py:pytype="str">© ZEIT ONLINE</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Zacharias Zacharakis</display_name>
+	</author>
+	</block>
+	</module>
+	<module cp:type="teaser" module="zon-milestone" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-cedc546f-3936-4302-8acc-55602c32c794">
+	<block href="http://xml.zeit.de/politik/ausland/2015-01/alexis-tsipras-griechenland-kommentar-wahl" uniqueId="http://xml.zeit.de/politik/ausland/2015-01/alexis-tsipras-griechenland-kommentar-wahl" year="2015" issue="4" ressort="Politik" contenttype="article" publication-date="" expires="" genre="kommentar" date-last-modified="2015-09-11T11:18:27+00:00" date-first-released="2015-01-25T20:16:15.275666+00:00" date-last-published="2015-09-11T11:19:27.194177+00:00" last-semantic-change="2015-01-25T20:15:07.141628+00:00" author="Zacharias Zacharakis">
+	<supertitle py:pytype="str">Griechenland</supertitle>
+	<title py:pytype="str">Gebt Tsipras eine Chance!</title>
+	<text py:pytype="str">
+	Geht Europa jetzt unter, weil ein Linker in Griechenland die Macht übernimmt? Zu erwarten ist das nicht, vielleicht bringt er sogar endlich den nötigen Wandel.
+	</text>
+	<description py:pytype="str">
+	Geht Europa jetzt unter, weil ein Linker in Griechenland die Macht übernimmt? Zu erwarten ist das nicht, vielleicht bringt er sogar endlich den nötigen Wandel.
+	</description>
+	<byline xsi:nil="true"/>
+	<breadcrumb_title xsi:nil="true"/>
+	<image base-id="http://xml.zeit.de/politik/2015-01/griechenland-wahl-tsipras-3/" type="jpg" title="Griechenland Wahl Tsipras" alt="Griechenland Wahl Tsipras" align="left" publication-date="" expires="">
+	<bu py:pytype="str">
+	Alexis Tsipras, Chef der radikal-linken Partei Syriza
+	</bu>
+	<copyright py:pytype="str">© Alessandro Bianchi/Reuters</copyright>
+	</image>
+	<author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+	<display_name py:pytype="str">Zacharias Zacharakis</display_name>
+	<location>Athen</location>
+	</author>
+	</block>
+	</module>
+	</area>
+	</region>
+	<region visible="True" visible_mobile="True" area="id-b27b12d5-7901-4221-9634-e14dab2e88ae" kind="storystream" kind_title="Storystream">
+	<area visible="True" visible_mobile="True" hide-dupes="True" area="id-75eba1c5-baf4-4b65-bae4-6e10bde59eaa" kind="storystream">
+	<module cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-830f7f2c-f5ee-4ad9-9d48-b70b7c7df8f4" title="Vorgeschichte">
+	<text>
+	<ul>
+	<li>Im Juni 2000 tritt Griechenland dem Euro bei.</li>
+	<li>
+	Mit der Einführung der neuen Währung sinken die Zinsen, das billige Geld lässt die Wirtschaft florieren. Die Arbeitslosigkeit geht zurück, die Löhne steigen. Im Jahr 2004 richtet das Land die Olympischen Sommerspiele aus. Im Jahr 2009 muss Regierungschef Giorgos Papandreou gegenüber Brüssel und der Finanzwelt einräumen, dass die Haushaltslücke doppelt so hoch ist wie angegeben.
+	</li>
+	<li>
+	Es droht ein Staatsbankrott. Im Mai 2010 bewilligten Vertreter der schwarz-gelben Koalition deshalb ein erstes Rettungspaket. Das Geld reicht nicht aus, 2011 folgt ein zweites.
+	</li>
+	<li>
+	Griechenland kann die Schuldenlast nicht mehr tragen. Im März 2012 wird dem Land die Hälfte erlassen. Die Lage stabilisiert sich ökonomisch und politisch in den folgenden zwei Jahren etwas.
+	</li>
+	<li>
+	Warum kam es im Januar 2015 überhaupt zur Neuwahl? Formal betrachtet sieht es so aus, als seien vorgezogene Neuwahlen in Griechenland aus verfassungsrechtlichen Gründen schon im Januar 2015 unausweichlich gewesen, weil das Parlament sich nicht auf einen neuen Staatspräsidenten einigen konnte. Premier Antonis Samaras hätte die Präsidentenwahl aber durchaus auf einen späteren Zeitpunkt legen können. Wie Recherchen griechischer Medien zeigen, wollte Samaras dies nur nicht, weil die Gläubiger neue, umstrittene Reformen von ihm verlangten. Die hätte er zunächst umsetzen und dann vor einer Neuwahl der Bevölkerung erklären müssen. Ein machtpolitisches Risiko, dem er auswich.
+	</li>
+	</ul>
+	</text>
+	</module>
+	</area>
+	</region>
+</body>
+<teaser>
+	<title>Das linke Experiment</title>
+	<text>
+		Anfang des Jahres übernahm in Griechenland eine linke Regierung. Ihr Versprechen: das Sparen beenden. Nun gibt es harte Reformen und neue Kredite. Wie kam es dazu?
+	</text>
+</teaser>
+</centerpage>
