@@ -4,6 +4,8 @@ Change log for zeit.web
 1.69 (unreleased)
 -----------------
 
+- ZON-2177: Rework Meetrics structure for teasers
+
 - QUICKFIX: Fix images to endure new fallback image URL
 
 
