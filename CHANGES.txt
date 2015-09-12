@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.68 (unreleased)
+1.68 (2015-09-12)
 -----------------
 
 - MAINT: Polish portraitbox, large teaser headlines on mobile,
