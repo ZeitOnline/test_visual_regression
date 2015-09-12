@@ -4,7 +4,7 @@
 <script type="text/javascript">
     var gzipEnabled = false;
 </script>
-<script type="text/javascript" src="https://s3-eu-central-1.amazonaws.com/prod.iqdcontroller.iqdigital/iqd_gzip_test.js.gz"></script>
+<script type="text/javascript" src="http://scripts.zeit.de/iqd/iqd_gzip_test.js.gz"></script>
 
 
 <!-- adcontroller load -->
@@ -20,7 +20,7 @@
         // conditionalize output of cdn directory for mobile, to prevent code replication
         mob_suffix = ZMO.isMobileView() ? '_mob' : '';
 
-    document.write('<scr' + 'ipt src="https://s3-eu-central-1.amazonaws.com/prod.iqdcontroller.iqdigital/cdn_zeit' + mob_suffix + '/' + iqd_mode + '/iqadcontroller.js' + gz_suffix + '"></scr' + 'ipt>');
+    document.write('<scr' + 'ipt src="http://scripts.zeit.de/iqd/cdn_zeit' + mob_suffix + '/' + iqd_mode + '/iqadcontroller.js' + gz_suffix + '"></scr' + 'ipt>');
 </script>
 
 <!-- mandanten object -->
