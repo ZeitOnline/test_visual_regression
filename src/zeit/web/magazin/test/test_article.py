@@ -36,8 +36,8 @@ def test_ipages_contains_blocks(application):
     assert 'Zweite' == pages[1].teaser
 
 
-def test_article_has_valid_twitter_meta_tags(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/01' % testserver.url)
+def test_article_has_valid_twitter_meta_tags(testbrowser):
+    browser = testbrowser('/artikel/01')
     assert (
         '<meta name="twitter:card" content="summary_large_image">'
         in browser.contents)
@@ -51,11 +51,11 @@ def test_article_has_valid_twitter_meta_tags(testserver, testbrowser):
         ' content="Die Münchner Schoppenstube hat dichtgemacht.'\
         ' Was erzählt uns das über die Gentrifizierung?'\
         ' Ein Erklärungsversuch.">' in browser.contents
-    assert '<meta name="twitter:image:src"' in browser.contents
+    assert '<meta name="twitter:image"' in browser.contents
 
 
-def test_article_has_valid_facebook_meta_tags(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/01' % testserver.url)
+def test_article_has_valid_facebook_meta_tags(testbrowser):
+    browser = testbrowser('/artikel/01')
     assert '<meta property="og:site_name" '\
         'content="ZEITmagazin">' in browser.contents
     assert '<meta property="fb:admins"'\
