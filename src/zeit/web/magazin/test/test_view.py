@@ -412,7 +412,7 @@ def test_article10_has_correct_source_label(testserver, testbrowser):
     # online source
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.source_label == 'Quelle: golem.de'
+    assert article_view.source_label == 'Erschienen bei golem.de'
 
 
 def test_article03_has_empty_source_label(application):

@@ -247,6 +247,7 @@ def test_article_obfuscated_source_without_date_print_published():
     content = mock.Mock()
     content.product.label = content.product.title = 'DIE ZEIT'
     content.product.show = 'issue'
+    content.copyrights = ''
     content.volume = 1
     content.year = 2011
     view = zeit.web.site.view_article.Article(content, mock.Mock())
@@ -784,7 +785,7 @@ def test_tgs_article_has_correct_meta_line(
 
     assert date.text == (u'15. Februar 2015, 0:00 Uhr /'
                          ' Aktualisiert am 16. Februar 2015, 11:59 Uhr')
-    assert source.text == (u'Quelle: Tagesspiegel')
+    assert source.text == (u'Erschienen im Tagesspiegel')
 
 
 def test_zon_article_has_correct_meta_line(
@@ -798,3 +799,35 @@ def test_zon_article_has_correct_meta_line(
 
     assert date.text == (u'1. Juni 2015, 17:12 Uhr /'
                          ' Aktualisiert am 1. Juni 2015, 17:12 Uhr')
+
+
+def test_freeform_article_has_correct_meta_line(
+        testserver, selenium_driver):
+
+    selenium_driver.get(
+        '{}/zeit-online/article/copyrights'.format(testserver.url))
+
+    date = selenium_driver.find_element_by_css_selector(
+        '.metadata__date')
+    source = selenium_driver.find_element_by_css_selector(
+        '.metadata__source')
+
+    assert date.text == (u'15. Februar 2015, 0:00 Uhr /'
+                         ' Aktualisiert am 16. Februar 2015, 11:59 Uhr')
+    assert source.text == (u'Quelle: ZEIT ONLINE, dpa, Reuters, rav')
+
+
+def test_afp_article_has_correct_meta_line(
+        testserver, selenium_driver):
+
+    selenium_driver.get(
+        '{}/zeit-online/article/afp'.format(testserver.url))
+
+    date = selenium_driver.find_element_by_css_selector(
+        '.metadata__date')
+    source = selenium_driver.find_element_by_css_selector(
+        '.metadata__source')
+
+    assert date.text == (u'15. Februar 2015, 0:00 Uhr /'
+                         ' Aktualisiert am 16. Februar 2015, 11:59 Uhr')
+    assert source.text == (u'Quelle: afp')

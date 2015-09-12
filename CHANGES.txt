@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2014: Enforce mobile image display
 
+- ZON-2090: Rearrange sources on article meta line
+
 
 1.67 (2015-09-11)
 -----------------
