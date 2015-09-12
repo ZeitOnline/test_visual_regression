@@ -120,7 +120,7 @@ def login_state(request):
 
     if not request.authenticated_userid and request.cookies.get(
             settings.get('sso_cookie')):
-        log.warn("SSO Cookie present, but noch authenticated")
+        log.warn("SSO Cookie present, but not authenticated")
 
     if settings['sso_activate']:
         info['login'] = u"{}/anmelden?url={}".format(
