@@ -1,58 +1,39 @@
 %teaser-kicker-topic
 	color: $zon_lighter_grey
-	display: block
-	font-size: remify(14px)
+	display: inline-block
+	font-size: em(14px)
 	font-weight: normal
 	letter-spacing: $zon-letter-spacing-l
 	line-height: 1.2
-	margin-bottom: 1em
 	text-transform: uppercase
 
-.teaser-topic-main
-	@extend %teaser
+.teaser-topic
+	+clearfix
 	+font-smoothing
-	margin: 0 0 $petite
-	padding: 0
+	padding: remify(24px $page-padding 32px)
 	position: relative
-	&__heading
-		@extend %teaser-heading
-		margin: 0 0 remify(24px)
-		position: relative
-		+respond-min($break-tablet-min)
-			margin-bottom: remify(34px)
-		+respond-min($break-desktop-min)
-			margin-bottom: remify(45px)
-	&__inner-helper
-		left: 0
-		position: absolute
-		text-align: center
-		top: 50%
-		+transform(translateY(-50%))
-		width: 100%
-		z-index: 1
-		+respond-min($break-tablet-min)
-			padding-left: remify(50px)
-			padding-right: remify(24px)
-			text-align: left
-			+transform(none)
-			top: remify(60px)
-			width: 57%
-		+respond-min($break-desktop-min)
-			padding-right: remify(42px)
-			width: 66.66%
-	&__kicker
-		@extend %teaser-kicker-topic
+	text-align: center
 	&__media
-		float: left
+		bottom: 0
+		left: 0
 		margin: 0
-		overflow: hidden
-		width: 100%
-		z-index: 1
+		min-height: 100%
+		min-width: 100%
+		position: absolute
+		right: 0
+		top: 0
+		&.is-pixelperfect
+			a
+				height: 100%
+			img
+				min-height: 100%
+				min-width: 100%
+				width: auto
 	&__media-container
 		background-color: $black
-		position: relative
-		min-height: 160px
+		height: 100%
 		&:after
+			background-color: rgba(0, 0, 0, .5)
 			bottom: 0
 			content: ''
 			left: 0
@@ -61,12 +42,21 @@
 			position: absolute
 			right: 0
 			top: 0
-			+background(rgba(0, 0, 0, 0.5))
-			+respond-min($break-tablet-min)
-				+background(rgba(0, 0, 0, 0.5))
-	&__readmore
-		+zon-button-dark($margin: 0)
 
+.teaser-topic-main
+	position: relative
+	&__heading
+		@extend %teaser-heading
+		margin-bottom: remify(24px)
+		+respond-min($break-tablet-min)
+			margin-bottom: remify(34px)
+		+respond-min($break-desktop-min)
+			margin-bottom: remify(45px)
+	&__combined-link
+		@extend %teaser-combined-link
+	&__kicker
+		@extend %teaser-kicker-topic
+		margin-bottom: remify(10px)
 	&__title
 		@extend %teaser-title
 		color: $white
@@ -77,56 +67,77 @@
 		+respond-min($break-desktop-min)
 			font-size: em(40px)
 			line-height: 1.28
+	&__button
+		+zon-button-dark($margin: remify(0 0 30px))
 
-img.teaser-topic-main__media-item
-	height: auto
-	left: -35%
-	position: absolute
-	width: 165vw // !important // please shoot me
-	+respond-min($break-tablet-min)
-		width: 100%
-		position: static
+.teaser-topic-list
+	position: relative
 
 .teaser-topic-item
+	margin: auto
+	max-width: remify(450px)
 	&:after
-		border-bottom: 1px solid $zon_mid_grey
-		content: none
+		border-bottom: 1px solid rgba($white, .4)
+		content: ""
 		display: block
 		height: 0
-		margin: remify(20px) 0
-		margin-bottom: $petite
-		width: 15%
-	&:first-child:after
-		content: ""
+		margin: remify(20px) auto remify(12px)
 	&:last-child:after
 		content: none
-	+respond-min($break-desktop-min)
-		&:after
-			content: ""
-	&__heading
+	&__series-label
+		@extend %teaser-kicker-topic
 		margin: 0
+		&:after
+			content: " -"
+	&__heading
+		@extend %teaser-heading
+		margin: 0
+		display: inline
+	&__combined-link
+		@extend %teaser-combined-link
 	&__kicker
 		@extend %teaser-kicker-topic
+		display: inline-block
+		margin-bottom: remify(4px)
 	&__title
 		@extend %teaser-title
 		color: $white
-		font-size: remify(18px)
+		font-size: em(18px)
 
-.teaser-topic-item:last-of-type
-	+respond-min($break-tablet-min)
-		display: none
-	+respond-min($break-desktop-min)
-		display: block
 
-.teaser-topic-list
-	+font-smoothing
-	display: none
-	+respond-min($break-tablet-min)
-		display: block
-		padding-right: remify(20px)
-		position: absolute
-		right: 0
-		top: remify(60px)
-		width: 43%
-	+respond-min($break-desktop-min)
++respond-min($break-tablet-min)
+	.teaser-topic
+		padding: remify(40px 0)
+		text-align: inherit
+	.teaser-topic-main
+		float: left
+		padding: remify(0 20px 0 32px) // mimics fullwidth teaser
+		width: 60%
+	.teaser-topic-list
+		float: right
+		padding: remify(0 32px 0 0)
+		width: 40%
+	.teaser-topic-item
+		&:after
+			margin: remify(20px) 0 remify(16px)
+			width: 24%
+		&__series-label
+			float: left
+			margin-top: remify(5px)
+			&:after
+				content: "-"
+				margin: 0 .25em
+		&__kicker
+			margin-bottom: remify(10px)
+		&__title
+			font-size: em(20px)
+
++respond-min($break-desktop-min)
+	.teaser-topic
+		padding: remify(50px 0)
+	.teaser-topic-main
+		padding: remify(0 20px 0 36px) // mimics fullwidth teaser
+		width: 66.66%
+	.teaser-topic-list
+		padding: remify(0 36px 0 5px)
 		width: 33.33%
