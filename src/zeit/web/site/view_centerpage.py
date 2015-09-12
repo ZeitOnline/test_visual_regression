@@ -311,7 +311,7 @@ class Storystream(Centerpage):
         latest_atom = None
 
         for module in modules:
-            print(module.type)
+
             if module.type != 'markup':
                 atom_counter += 1
 
