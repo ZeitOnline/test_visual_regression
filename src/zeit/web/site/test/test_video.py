@@ -52,7 +52,7 @@ def test_video_page_should_feature_sharing_images(testserver, testbrowser):
         '/video/2015-01/3537342483001/imagegroup/wide')
 
 
-def test_video_page_should_feature_schema_org_props(testserver, testbrowser):
+def test_video_page_should_feature_schema_org_props(testbrowser):
     doc = testbrowser('/video/2015-01/3537342483001').document
     assert doc.xpath('//meta[@itemprop="duration" and @content="PT436S"]')
     assert doc.xpath('//meta[@itemprop="thumbnailUrl"]/@content')[0].endswith(
@@ -76,20 +76,20 @@ def test_video_page_should_print_out_video_headline(testbrowser):
     assert headline[2].strip() == u'Roboter Myon übernimmt Opernrolle'
 
 
-def test_video_page_should_render_video_description(testserver, testbrowser):
+def test_video_page_should_render_video_description(testbrowser):
     doc = testbrowser('/video/2015-01/3537342483001').document
     assert u'Er ist so groß wie ein siebenjähriges Kind und lernt noch' in (
         doc.xpath('//div[@itemprop="description"]/text()')[0])
 
 
-def test_video_page_should_display_modified_date(testserver, testbrowser):
+def test_video_page_should_display_modified_date(testbrowser):
     doc = testbrowser('/video/2015-01/3537342483001').document
     assert '22. Januar 2015, 10:27' in doc.xpath(
         '//time[@datetime]/text()')[0]
 
 
 @pytest.mark.xfail(reason='Comment module is to be included on video pages.')
-def test_video_page_should_output_zero_comment_count(testserver, testbrowser):
+def test_video_page_should_output_zero_comment_count(testbrowser):
     doc = testbrowser('/video/2015-01/3537342483001').document
     assert 'Noch keine Kommentare.' in doc.xpath(
         '//span[@itemprop="commentCount"]/text()')[0]
@@ -105,22 +105,22 @@ def test_video_page_should_output_comment_count_number(
     assert 'bar' in doc.xpath('//span[@itemprop="commentCount"]/text()')[0]
 
 
-def test_video_page_should_include_comment_section(testserver, testbrowser):
+def test_video_page_should_include_comment_section(testbrowser):
     doc = testbrowser('/video/2015-01/3537342483001').document
     assert doc.xpath('//section[@class="comment-section" and @id="comments"]')
 
 
-def test_video_comment_form_should_be_rendered(testserver, testbrowser):
+def test_video_comment_form_should_be_rendered(testbrowser):
     browser = testbrowser('/video/2015-01/3537342483001/comment-form')
     assert len(browser.cssselect('#comment-form')) == 1
 
 
-def test_video_report_form_should_be_rendered(testserver, testbrowser):
+def test_video_report_form_should_be_rendered(testbrowser):
     browser = testbrowser('/video/2015-01/3537342483001/report-form')
     assert len(browser.cssselect('#comment-form')) == 1
 
 
-def test_video_page_should_embed_sharing_menu(testserver, testbrowser):
+def test_video_page_should_embed_sharing_menu(testbrowser):
     browser = testbrowser('/video/2015-01/3537342483001')
     assert len(browser.cssselect('.sharing-menu .sharing-menu__title')) > 0
     assert len(browser.cssselect('.sharing-menu a.sharing-menu__link')) > 0
