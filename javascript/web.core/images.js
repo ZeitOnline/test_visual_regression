@@ -164,6 +164,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
             if ( markup.trim() !== '' ) {
 
                 // get rid of src attribute
+                // otherwise the browser would load it when put into the DOM
                 // markup = markup.replace( / src=("|')[^"']+\1/g, '' );
                 markup = markup.replace( 'src="', 'data-dev-null="' );
                 $parent.html( markup );
