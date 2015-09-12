@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.69 (unreleased)
+1.69 (2015-09-12)
 -----------------
 
 - MAINT: Update modernizr to v3.0.0
