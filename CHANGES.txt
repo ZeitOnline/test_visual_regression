@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2123: Show topic links on homepage exclusively
 
+- QUCIKFIX: Don't show nextread on video pages
+
 
 1.68 (2015-09-12)
 -----------------
