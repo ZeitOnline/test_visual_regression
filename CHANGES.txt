@@ -4,6 +4,8 @@ Change log for zeit.web
 1.69 (unreleased)
 -----------------
 
+- ZON-2083: Larger article images for twitter & facebook meta
+
 - QUICKFIX: Fix images to endure new fallback image URL
 
 
