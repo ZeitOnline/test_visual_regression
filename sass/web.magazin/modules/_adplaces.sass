@@ -16,9 +16,9 @@ div[id*="__container__"]
 
 
 .ad-mobile
-    background: $zon-ad-grey
-    border-bottom: 1px solid $zon_light_grey
-    border-top: 1px solid $zon_light_grey
+    background-color: $color-advertising-bg
+    border-bottom: 1px solid $color-border
+    border-top: 1px solid $color-border
     display: block // generally visible on mobile
     margin: -1px 0 // prevent border overlapping
     .cp-area &
@@ -49,8 +49,8 @@ div[id*="__container__"]
         padding: $little 0
     &--7-on-centerpage,
     &--8-on-centerpage
-        background-color: $white
-        color: $zon-charcoal
+        background-color: $color-page-bg
+        color: $color-text
         margin: 0 auto $compact auto
         width: 300px
     &--7-on-article,
@@ -95,7 +95,7 @@ div[id*="__container__"]
                 padding-top: 0
                 margin: 0
                 max-width: 100%
-                        
+
 // Fix hillarious unusable ad extras by iqd
 +respond-max($break-mobile-ad-width)
     body > #iqdSitebar
