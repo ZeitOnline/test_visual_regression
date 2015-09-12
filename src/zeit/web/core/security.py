@@ -1,4 +1,5 @@
 import urllib2
+import jwt
 
 import lxml.etree
 import zope.component
@@ -23,7 +24,6 @@ class AuthenticationPolicy(
         # zeit.web is only a proxy for the community, which will validate the
         # cookie itself.
         login_id = request.cookies.get(conf.get('sso_cookie'))
-
 
         # If no sso cookie is present, bail out straight away:
         if not login_id:
@@ -70,14 +70,41 @@ def reload_user_info(request):
         return False
 
 
+def get_user_info_from_sso_cookie(cookie, key):
+    try:
+        return jwt.decode(cookie, key, 'RS256')
+    except Exception:
+        return
+
+
+def recursively_call_community(req, tries):
+    if tries > 0:
+        try:
+            return urllib2.urlopen(req, timeout=6)
+        except Exception:
+            return recursively_call_community(req, tries-1)
+    else:
+        return
+
+
 def get_community_user_info(request):
     """Returns additional information from the Community backend by injecting
     the Cookie that Community has set when the user logged in there.
     """
 
-    print "called"
-
     user_info = dict(uid=0, name=None, mail=None, picture=None, roles=[])
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    cookie = request.cookies.get(conf.get('sso_cookie'))
+    sso_info = get_user_info_from_sso_cookie(cookie, conf.get('sso_key'))
+
+    if sso_info:
+        user_info['name'] = sso_info['name']
+        user_info['mail'] = sso_info['email']
+        user_info['uid'] = sso_info['id']
+
+    # We still get the users avatar from the community. So we need to call the
+    # community.
     community_host = request.registry.settings['community_host']
 
     community_request = urllib2.Request(
@@ -85,10 +112,9 @@ def get_community_user_info(request):
         headers={'Accept': 'application/xml',
                  'Cookie': request.headers.get('Cookie', '')})
 
-    try:
-        community_response = urllib2.urlopen(community_request, timeout=6)
-    except Exception:
-        # Catch any possible socket error occuring through community requests.
+    community_response = recursively_call_community(community_request, 2)
+
+    if not community_response:
         return user_info
 
     try:
