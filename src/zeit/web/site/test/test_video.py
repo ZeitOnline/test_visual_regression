@@ -44,12 +44,12 @@ def test_video_imagegroup_should_set_local_image_fileobj(
     assert image.getImageSize() == res
 
 
-def test_video_page_should_feature_sharing_images(testserver, testbrowser):
+def test_video_page_should_feature_sharing_images(testbrowser):
     doc = testbrowser('/video/2015-01/3537342483001').document
     assert doc.xpath('//meta[@property="og:image"]/@content')[0].endswith(
-        '/video/2015-01/3537342483001/imagegroup/wide')
-    assert doc.xpath('//meta[@name="twitter:image:src"]/@content')[0].endswith(
-        '/video/2015-01/3537342483001/imagegroup/wide')
+        '/video/2015-01/3537342483001/imagegroup/wide__1300x731')
+    assert doc.xpath('//meta[@name="twitter:image"]/@content')[0].endswith(
+        '/video/2015-01/3537342483001/imagegroup/wide__1300x731')
 
 
 def test_video_page_should_feature_schema_org_props(testbrowser):

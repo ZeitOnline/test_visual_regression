@@ -509,7 +509,7 @@ def test_macro_sharing_meta_should_produce_markup(testbrowser):
     assert browser.cssselect('meta[property="og:url"]')
     assert browser.cssselect('meta[property="og:image"]')
     assert browser.cssselect('link[itemprop="image"][rel="image_src"]')
-    assert browser.cssselect('meta[name="twitter:image:src"]')
+    assert browser.cssselect('meta[name="twitter:image"]')
 
 
 def test_add_publish_date_generates_script(jinja2_env):
