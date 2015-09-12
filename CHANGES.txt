@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.69 (unreleased)
+1.70 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+1.69 (2015-09-12)
+-----------------
+
+- MAINT: Update modernizr to v3.0.0
 
 - ZON-2083: Larger article images for twitter & facebook meta
 
@@ -15,6 +23,8 @@ Change log for zeit.web
 - QUICKFIX: Fix images to endure new fallback image URL
 
 - FIX: Decode sso cookie from API
+
+- QUCIKFIX: Don't show nextread on video pages
 
 
 1.68 (2015-09-12)
