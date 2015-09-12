@@ -4,7 +4,7 @@ Change log for zeit.web
 1.69 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- QUICKFIX: Fix images to endure new fallback image URL
 
 
 1.68 (2015-09-12)
