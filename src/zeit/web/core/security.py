@@ -18,8 +18,6 @@ class AuthenticationPolicy(
     """
 
     def authenticated_userid(self, request):
-        import pdb; pdb.set_trace()  # XXX BREAKPOINT
-
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
         login_id = request.cookies.get(conf.get('sso_cookie'))
