@@ -1,7 +1,6 @@
 {%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
 {% block layout %}teaser-column{% endblock %}
-{% block meetrics %}{% endblock %}
 
 {# TODO: "get_column_image(teaser)" is also used in columnpic_zon-column.tpl . Should not be redundant. #}
 {% block teaser_modifier %}{% if get_column_image(teaser) %}{{ self.layout() }}--has-media{% endif %}{% endblock %}

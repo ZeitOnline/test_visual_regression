@@ -1,7 +1,7 @@
 {% extends "zeit.web.site:templates/inc/teaser/default.tpl" %}
 
 {% block layout %}teaser-short{% endblock %}
-{% block meetrics %}{% endblock %}
+{% block meetrics %}{% endblock %} {# prevent tracking #}
 {% block teaser_time %}
    {{ cp.include_teaser_time(teaser, self.layout()) }}
 {% endblock %}

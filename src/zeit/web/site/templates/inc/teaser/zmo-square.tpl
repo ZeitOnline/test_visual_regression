@@ -1,7 +1,6 @@
 {%- extends "zeit.web.site:templates/inc/teaser/zon-square.tpl" -%}
 
 {% block teaser_modifier %}{{ self.layout() }}--zmo{% endblock %}
-{% block meetrics %}{% endblock %}
 
 {% block teaser_container %}
     <div class="teaser-square__product">
