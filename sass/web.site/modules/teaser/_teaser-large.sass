@@ -15,7 +15,9 @@
 			@extend %teaser-kicker--blog
 	&__title
 		@extend %teaser-title
-		font-size: remify(28px)
+		font-size: remify(24px)
+		+respond-min($break-tablet-min)
+			font-size: em(28px)
 	&__media
 		@extend %teaser-media
 	&__media-item

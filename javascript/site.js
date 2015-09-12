@@ -44,6 +44,7 @@ require([
     'web.site/plugins/jquery.extendfooter',
     'web.site/plugins/jquery.infobox',
     'web.site/plugins/jquery.liveblog',
+    'web.site/plugins/jquery.storystream',
     'web.site/plugins/jquery.searchTools',
     'web.site/plugins/jquery.selectNav',
     'web.site/plugins/jquery.shuffleTeasers',
@@ -72,6 +73,7 @@ require([
         $( '#series_select' ).selectNav();
         $( '.js-gallery-teaser-shuffle' ).shuffleTeasers();
         $( '.js-accordion' ).accordion();
+        $( '.storystream-markup__content--first' ).storystream();
     } else if ( article.length ) {
         // article, gallery etc.
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
