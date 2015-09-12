@@ -4,6 +4,8 @@ Change log for zeit.web
 1.69 (unreleased)
 -----------------
 
+- MAINT: Update modernizr to v3.0.0
+
 - ZON-2083: Larger article images for twitter & facebook meta
 
 - ZON-2205: Change URL to cached version of adcontroller
@@ -15,6 +17,8 @@ Change log for zeit.web
 - ZON-2123: Show topic links on homepage exclusively
 
 - ZON-2203: Add static cardstack parameter on CPs
+
+- QUCIKFIX: Don't show nextread on video pages
 
 
 1.68 (2015-09-12)

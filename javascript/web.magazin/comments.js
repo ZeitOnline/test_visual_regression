@@ -282,7 +282,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
 
         // attach event handler function on page, but only for devices without touch support
         // we can not check reliably for real mouse events here, because e.g. Mobile Safari emulates mouse events
-        if ( !Modernizr.touch ) {
+        if ( !Modernizr.touchevents ) {
             // and only if comments are shown
             if ($body.hasClass('show-comments')) {
                 $page.on('mousedown', hideComments);
