@@ -56,15 +56,21 @@
 	+respond-min($break-3)
 		font-size: em(20px)
 
-.x-copytext
+.x-copytext,
+.x-copytext--size
 	font-size: em(15px)
 	+respond-min($break-3)
 		font-size: em(16px)
+		line-height: 1.5
 
 .x-caption
-	color: $grey--mid
-	font-size: em(14px)
-	line-height: 1.5
+	&,
+	&--sans,
+	&--serif
+		+clearfix
+		color: $grey--mid
+		font-size: em(14px)
+		line-height: 1.5
 	&--sans
 		font-family: $sans-serif-base-font
 	&--serif
@@ -81,8 +87,9 @@
 .x-footer
 	border-top: 1px solid $grey--light
 	padding-top: .5rem
-	&__copyright
-		float: right
+
+.x-copyright
+	float: right
 
 // vertical space
 .x-spacing

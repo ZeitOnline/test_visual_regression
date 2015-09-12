@@ -2,7 +2,9 @@
 	+default-article-textlink
 	font-family: $font-tabletgothic
 	font-size: remify(14px)
-	line-height: 1.2
+	line-height: 1.5
+	+respond-min($break-tablet-min)
+		line-height: 1.4
 	+respond-min($break-desktop-min)
 		font-size: remify(15px)
 	&__heading

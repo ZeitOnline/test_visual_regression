@@ -205,30 +205,30 @@ def test_schema_org_image(testbrowser):
 
 def test_multipage_article_should_designate_meta_pagination(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
-    assert not browser.xpath('//head/meta[@rel="prev"]')
-    href = browser.xpath('//head/meta[@rel="next"]')[0].attrib.get('href')
+    assert not browser.xpath('//head/link[@rel="prev"]')
+    href = browser.xpath('//head/link[@rel="next"]')[0].attrib.get('href')
     assert href.endswith('zeit-online/article/zeit/seite-2')
 
     browser = testbrowser('/zeit-online/article/zeit/seite-2')
-    href = browser.xpath('//head/meta[@rel="prev"]')[0].attrib.get('href')
+    href = browser.xpath('//head/link[@rel="prev"]')[0].attrib.get('href')
     assert href.endswith('zeit-online/article/zeit')
-    href = browser.xpath('//head/meta[@rel="next"]')[0].attrib.get('href')
+    href = browser.xpath('//head/link[@rel="next"]')[0].attrib.get('href')
     assert href.endswith('zeit-online/article/zeit/seite-3')
 
     browser = testbrowser('/zeit-online/article/zeit/seite-5')
-    href = browser.xpath('//head/meta[@rel="prev"]')[0].attrib.get('href')
+    href = browser.xpath('//head/link[@rel="prev"]')[0].attrib.get('href')
     assert href.endswith('zeit-online/article/zeit/seite-4')
-    assert not browser.xpath('//head/meta[@rel="next"]')
+    assert not browser.xpath('//head/link[@rel="next"]')
 
 
 def test_other_page_types_should_not_designate_meta_pagination(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    assert not browser.xpath('//head/meta[@rel="prev"]')
-    assert not browser.xpath('//head/meta[@rel="next"]')
+    assert not browser.xpath('//head/link[@rel="prev"]')
+    assert not browser.xpath('//head/link[@rel="next"]')
 
     browser = testbrowser('/zeit-online/index')
-    assert not browser.xpath('//head/meta[@rel="prev"]')
-    assert not browser.xpath('//head/meta[@rel="next"]')
+    assert not browser.xpath('//head/link[@rel="prev"]')
+    assert not browser.xpath('//head/link[@rel="next"]')
 
 
 def test_article_meta_should_show_comment_count(testbrowser):

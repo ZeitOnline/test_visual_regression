@@ -214,14 +214,18 @@ class Application(object):
                             context=Exception)
 
         def asset_url(request, path, **kw):
-            kw['_app_url'] = join_url_path(
-                request.application_url, request.registry.settings.get(
-                    'asset_prefix', ''))
+            asset_prefix = request.registry.settings.get('asset_prefix', '')
+            if not asset_prefix.startswith('http'):
+                asset_prefix = join_url_path(
+                    request.application_url, asset_prefix)
+            kw['_app_url'] = asset_prefix
+
             if path == '/':
                 url = request.route_url('home', **kw)
             else:
                 prefix = '' if ':' in path else 'zeit.web.static:'
                 url = request.static_url(prefix + path, **kw)
+
             if url.rsplit('.', 1)[-1] in ('css', 'js'):
                 url += '?' + request.registry.settings.get('version_hash', '')
             else:
@@ -229,6 +233,7 @@ class Application(object):
                 if len(svg_sprite) == 2:
                     version = request.registry.settings.get('version_hash', '')
                     url = '/icons.svg?{}'.format(version).join(svg_sprite)
+
             return url
 
         config.add_request_method(asset_url)

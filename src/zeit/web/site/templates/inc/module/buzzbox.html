@@ -1,12 +1,12 @@
-{% set modifier = module.layout.id.strip('buzz-') %}
+{% set modifier = module.identification.strip('buzz-') %}
 {% set template = module | get_layout %}
-{% set id = template %}
+{% set id = module.identification %}
 <div class="{{ 'buzz-box' | with_mods(modifier) }} js-accordion" id="{{ id }}">
 	<a class="buzz-box__heading" href="#{{ id }}">
 		{{ module.header }}
 	</a>
 	<ol class="buzz-box__teasers">
-		{% for teaser in module -%}
+		{% for teaser in module[:3] -%}
 		<li>
 			{% include "zeit.web.site:templates/inc/teaser/{}.tpl".format(template) %}
 		</li>

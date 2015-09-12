@@ -1,12 +1,37 @@
 Change log for zeit.web
 =======================
 
-1.68 (unreleased)
+1.69 (unreleased)
 -----------------
+
+- ZON-2205: Change URL to cached version of adcontroller
+
+- ZON-2177: Rework Meetrics structure for teasers
+
+- QUICKFIX: Fix images to endure new fallback image URL
+
+- ZON-2090: Rearrange sources on article meta line
+
+
+1.68 (2015-09-12)
+-----------------
+
+- ZON-2109: Add SEO meta links for dynamic cps
+
+- MAINT: Polish portraitbox, large teaser headlines on mobile,
+         advertising background-color and servicebox link styles
+
+- ZON-1892: Add Buzz-Board
+
+- ZON-2197: Allow specifying a host, not just a path, for ``asset_prefix``
 
 - ZON-2014: Enforce mobile image display
 
-- ZON-2090: Rearrange sources on article meta line
+- MAINT: Update x-styles
+
+- QUICKFIX: Make Keywordpage Titel to h1
+
+- HOTFIX: Show comment moderation only for moderators
 
 
 1.67 (2015-09-11)
@@ -46,6 +71,8 @@ Change log for zeit.web
 
 - ZON-2115: Add Meta Title, Description Ruleset for Keywordpages
 
+- ZON-1984: Storystream CP
+
 - ZON-2181: Validate page number from GET parameter
 
 - FIX: Inherit from newsfeed for all classes in view_feed
@@ -74,8 +101,6 @@ Change log for zeit.web
 
 - ZON-2145: Use new fallback_size setting to restrict image sizes for noscript,
   so we don't have to restrict the largest available variant via max_size.
-
-- ZON-1984: Storystream CP
 
 - DEV-935: Quickfix for Community-Redaktions-Auszeichnung
 
