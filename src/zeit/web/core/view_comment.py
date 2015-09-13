@@ -181,7 +181,8 @@ class PostComment(zeit.web.core.view.Base):
             data['content_id'] = pid
             data['method'] = 'flag.flag'
             data['flag_name'] = 'kommentar_empfohlen'
-            data['action'] = 'unflag'
+            if action == 'demote':
+                data['action'] = 'unflag'
 
         # GET/POST the request to the community
         response = getattr(requests, method)(
