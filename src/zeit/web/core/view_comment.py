@@ -4,6 +4,8 @@ import logging
 import md5
 import urllib
 import urlparse
+import datetime
+import time
 
 import beaker.cache
 import lxml
@@ -33,6 +35,7 @@ class PostComment(zeit.web.core.view.Base):
     """
 
     def __init__(self, context, request, path=None):
+
         if not request.authenticated_userid:
             raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
@@ -52,10 +55,30 @@ class PostComment(zeit.web.core.view.Base):
         zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         self.community_host = zwcs.get('community_host')
         self.status = []
+        self.lock_duration = datetime.timedelta(0, 20)
 
     def __call__(self):
         self.request.response.cache_expires(0)
         return {}
+
+    def handle_comment_locking(self, request, action):
+        if action in ('recommend', 'promote', 'demote'):
+            return
+
+        if request.session.get('lock_commenting'):
+            ts = request.session['lock_commenting_ts']
+            if datetime.datetime.utcnow()-ts > self.lock_duration:
+                log.debug("remove comment lock!")
+                request.session['lock_commenting'] = False
+                request.session['lock_commenting_ts'] = (
+                    datetime.datetime.utcnow())
+            else:
+                log.debug("commenting is locked!")
+                raise pyramid.httpexceptions.HTTPForbidden()
+
+        log.debug("set comment lock!")
+        request.session['lock_commenting'] = True
+        request.session['lock_commenting_ts'] = datetime.datetime.utcnow()
 
     def post_comment(self):
         request = self.request
@@ -66,6 +89,8 @@ class PostComment(zeit.web.core.view.Base):
         comment = params.get('comment')
         action = params.get('action')
         user_name = params.get('username')
+
+        self.handle_comment_locking(request, action)
 
         try:
             pid = int(params.get('pid'))
@@ -156,7 +181,8 @@ class PostComment(zeit.web.core.view.Base):
             data['content_id'] = pid
             data['method'] = 'flag.flag'
             data['flag_name'] = 'kommentar_empfohlen'
-            data['action'] = 'unflag'
+            if action == 'demote':
+                data['action'] = 'unflag'
 
         # GET/POST the request to the community
         response = getattr(requests, method)(
@@ -190,6 +216,11 @@ class PostComment(zeit.web.core.view.Base):
             elif response.status_code == 303:
                 url = urlparse.urlparse(response.headers.get('location'))
                 self.new_cid = url[5][4:]
+                request.session['last_cid'] = self.new_cid
+                request.session['last_commented_uniqueId'] = (
+                    self.context.uniqueId)
+                request.session['last_commented_time'] = (
+                    datetime.datetime.utcnow())
 
             return {
                 'request': {

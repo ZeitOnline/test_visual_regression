@@ -12,7 +12,7 @@
 			{% endif %}
 		</span>
 		{% if view.comments_allowed %}
-		<a href="#comment-form js-scroll" class="comment-section__button button">
+		<a href="#comment-form" class="comment-section__button button js-scroll">
 			Kommentieren
 		</a>
 		{% endif %}

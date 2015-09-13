@@ -11,6 +11,8 @@ import zope
 import requests
 import operator
 import beaker
+import datetime
+import time
 
 
 def test_comment_count_should_handle_missing_uid_param(comment_counter):
@@ -391,7 +393,7 @@ endpoint_recommend = (
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', 'my comment', None, 'comment', endpoint_agatho)])
 def test_post_comment_should_post_with_correct_arguments(
-        monkeypatch, path, comment, pid, result, action):
+        application, monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
     poster.request.params['comment'] = comment
@@ -417,7 +419,7 @@ def test_post_comment_should_post_with_correct_arguments(
     ('my/path', None, '1', 'recommend', endpoint_recommend),
     ('my/path', 'my comment', '1', 'report', endpoint_report)])
 def test_post_comment_should_get_with_correct_arguments(
-        monkeypatch, path, comment, pid, result, action):
+        application, monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
     poster.request.params['comment'] = comment
@@ -470,3 +472,36 @@ def test_action_url_should_be_created_correctly(
         monkeypatch, action, path, service):
     poster = _create_poster(monkeypatch)
     assert poster._action_url(action, path) == service
+
+
+@pytest.mark.parametrize("action", ['comment', 'report'])
+def test_post_comment_should_set_lock(application, action):
+    request = mock.Mock()
+    request.session = {'user': {'name': 'foo'}}
+    pc = zeit.web.core.view_comment.PostComment(mock.Mock(), request)
+    pc.lock_duration = datetime.timedelta(0, 0.5)
+    locker = pc.handle_comment_locking
+
+    locker(request, action)
+
+    assert request.session['lock_commenting'] is True
+
+    with pytest.raises(pyramid.httpexceptions.HTTPForbidden):
+        locker(request, action)
+
+    time.sleep(0.5)
+
+    locker(request, action)
+    assert request.session['lock_commenting'] is True
+
+
+@pytest.mark.parametrize("action", ['recommend', 'promote', 'demote'])
+def test_post_comment_should_not_set_lock(application, action):
+    request = mock.Mock()
+    request.session = {'user': {'name': 'foo'}}
+    pc = zeit.web.core.view_comment.PostComment(mock.Mock(), request)
+    pc.lock_duration = datetime.timedelta(0, 0.5)
+    locker = pc.handle_comment_locking
+    locker(request, action)
+
+    assert request.session.get('lock_commenting') is None
