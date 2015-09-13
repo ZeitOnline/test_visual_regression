@@ -4,6 +4,8 @@ Change log for zeit.web
 1.72 (unreleased)
 -----------------
 
+- MAINT: Polish buzzboard and video icon
+
 - HOTFIX: Make legacy areas work with `select_modules` API
 
 
