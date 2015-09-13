@@ -247,6 +247,34 @@ class Centerpage(
         module = LegacyModule([snapshot], layout='snapshot')
         return LegacyRegion([LegacyArea([module])])
 
+    @zeit.web.reify
+    def area_ranking(self):
+        try:
+            return zeit.web.site.area.ranking.Ranking(
+                zeit.web.core.utils.find_block(
+                    self.context, attrib='area', kind='ranking'))
+        except AttributeError:
+            return None
+
+    @zeit.web.reify
+    def next_page_url(self):
+        ranking = self.area_ranking
+        if ranking is None:
+            return None
+        if ranking.current_page < len(ranking.pagination):
+            return zeit.web.core.template.append_get_params(
+                self.request, p=ranking.current_page + 1)
+
+    @zeit.web.reify
+    def prev_page_url(self):
+        ranking = self.area_ranking
+        if ranking is None:
+            return None
+        actual_index = ranking.current_page - 1
+        if actual_index - 1 >= 0:
+            return zeit.web.core.template.append_get_params(
+                self.request, p=actual_index)
+
 
 @pyramid.view.view_config(
     name='area',

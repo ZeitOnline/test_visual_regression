@@ -84,7 +84,6 @@
 	&__commentcount
 		@extend %teaser-commentcount
 		+respond-min($break-tablet-min)
-			&:link, &:visited
-				border-bottom: 1px solid $zon_dark_grey
-			&:hover
-				border-bottom: 1px solid $zon_mid_grey
+			border-bottom: 1px solid rgba($zon_lighter_grey, .4)
+			+on-interaction
+				border-bottom-color: rgba($zon_lighter_grey, .8)

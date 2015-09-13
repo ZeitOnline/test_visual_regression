@@ -22,7 +22,7 @@
 
     $.fn.autoclick = function() {
         return this.each( function() {
-            var hasTouch = Modernizr.touch || location.search === '?touch';
+            var hasTouch = Modernizr.touchevents || location.search === '?touch';
 
             if ( hasTouch ) {
                 $( this ).on( 'click', 'article[data-unique-id]', autoclick );
