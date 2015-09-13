@@ -40,6 +40,27 @@ class StoryStreamTeaserBlock(
         self.storystream = content
         # NOTE: This means we ignore the teaser layout set by the user!
         self.layout = 'storystreamteaser'
+        self.article_modules = self.get_articles(3, ['teaser'])
 
     def __iter__(self):
         return iter(self.context)
+
+    def get_articles(self, article_number, teaserable_atom_types):
+
+        articles = []
+
+        regions = self.storystream.values()
+        for region in regions:
+
+            areas = region.values()
+            for area in areas:
+
+                modules = area.values()
+                for module in modules:
+
+                    if module.type and module.type in teaserable_atom_types:
+                        articles.append(module)
+                        if (len(articles) >= article_number):
+                            return articles
+
+        return articles

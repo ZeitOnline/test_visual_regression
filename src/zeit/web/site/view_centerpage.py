@@ -301,15 +301,12 @@ class Storystream(Centerpage):
 
         regions = self.regions
         for region in regions:
-            print('- in region')
+
             areas = region.values()
             for area in areas:
-                print('-- in area')
 
                 modules = area.values()
                 for module in modules:
-                    print('--- in module')
-                    print('____ {}'.format(module.type))
 
                     if module.type and module.type in countable_atom_types:
                         atom_counter += 1

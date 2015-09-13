@@ -1,19 +1,26 @@
-$teaser-storystream-border-color: $zon_mid_grey
+$teaser-storystream-background-color: #41434d
+$teaser-storystream-line-color: $zon_mid_grey
 $teaser-storystream-left-inner-mobile: 15px
 $teaser-storystream-left-outer-mobile: 15px
 
 .teaser-storystream
-	background-color: $color-body-bg
+	background-color: $teaser-storystream-background-color
 	+font-smoothing
 	&__media
 		background-color: $zon-trout // placeholder for image
 		height: 0
+		margin: 0
+		overflow: hidden
 		padding-bottom: 100% / 16 * 9 // image variant 'wide'
 		position: relative
+		//+respond-min($break-tablet-min)
+		//	padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+	&__media-container
+		+teaser-image-dark-overlay($angle: 0deg)
 
 	&__headercontent
 		+teaser-image-text-shadow
-		border-left: 1px $teaser-storystream-border-color solid
+		border-left: 1px $teaser-storystream-line-color solid
 		bottom: 0
 		margin: remify(20px $teaser-storystream-left-outer-mobile 0)
 		padding: remify(0 $teaser-storystream-left-inner-mobile 13px)
@@ -26,8 +33,8 @@ $teaser-storystream-left-outer-mobile: 15px
 			left: 0
 			margin: remify(-2px 0 0 -6px)
 			position: absolute
-			-webkit-text-stroke: 2px $teaser-storystream-border-color
-			text-shadow: -1px -1px 0 $teaser-storystream-border-color, 1px -1px 0 $teaser-storystream-border-color, -1px 1px 0 $teaser-storystream-border-color, 1px 1px 0 $teaser-storystream-border-color
+			-webkit-text-stroke: 2px $teaser-storystream-line-color
+			text-shadow: -1px -1px 0 $teaser-storystream-line-color, 1px -1px 0 $teaser-storystream-line-color, -1px 1px 0 $teaser-storystream-line-color, 1px 1px 0 $teaser-storystream-line-color
 
 	&__link
 		display: block
@@ -52,7 +59,7 @@ $teaser-storystream-left-outer-mobile: 15px
 		@extend %teaser-combined-link
 
 	&__content
-		border-left: 1px $teaser-storystream-border-color solid
+		border-left: 1px $teaser-storystream-line-color solid
 		font-family: $font-tabletgothic
 		margin: remify(0 15px)
 		padding: remify(20px 15px 20px)
@@ -69,7 +76,7 @@ $teaser-storystream-left-outer-mobile: 15px
 			line-height: remify(20px)
 			letter-spacing: $zon-letter-spacing-s
 			&:before
-				background-color: $teaser-storystream-border-color
+				background-color: $teaser-storystream-line-color
 				border-radius: 50%
 				content: ""
 				height: remify(9px)
