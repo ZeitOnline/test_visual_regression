@@ -41,8 +41,6 @@ class PostComment(zeit.web.core.view.Base):
                 title='No User',
                 explanation='Please log in in order to comment')
 
-        self.handle_comment_locking(request)
-
         if request.session.get('user') and not (
                 request.session['user'].get('name')):
             self.user_name = ''
@@ -57,16 +55,19 @@ class PostComment(zeit.web.core.view.Base):
         zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         self.community_host = zwcs.get('community_host')
         self.status = []
+        self.lock_duration = datetime.timedelta(0,20)
 
     def __call__(self):
         self.request.response.cache_expires(0)
         return {}
 
-    def handle_comment_locking(self, request):
+    def handle_comment_locking(self, request, action):
+        if action in ('recommend', 'promote', 'demote'):
+            return
+
         if request.session.get('lock_commenting'):
             ts = request.session['lock_commenting_ts']
-            if datetime.datetime.utcnow()-ts > (
-                    datetime.timedelta(0,20)):
+            if datetime.datetime.utcnow()-ts > self.lock_duration:
                 log.debug("remove comment lock!")
                 request.session['lock_commenting'] = False
                 request.session['lock_commenting_ts'] = (
@@ -88,6 +89,8 @@ class PostComment(zeit.web.core.view.Base):
         comment = params.get('comment')
         action = params.get('action')
         user_name = params.get('username')
+
+        self.handle_comment_locking(request, action)
 
         try:
             pid = int(params.get('pid'))
