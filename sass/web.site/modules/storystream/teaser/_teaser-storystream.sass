@@ -13,8 +13,6 @@ $teaser-storystream-left-outer-mobile: 15px
 		overflow: hidden
 		padding-bottom: 100% / 16 * 9 // image variant 'wide'
 		position: relative
-		//+respond-min($break-tablet-min)
-		//	padding-bottom: 100% / 7 * 3 // image variant 'cinema'
 	&__media-container
 		+teaser-image-dark-overlay($angle: 0deg)
 
@@ -114,3 +112,31 @@ $teaser-storystream-left-outer-mobile: 15px
 			background-color: rgba(0, 0, 0, 0.5)
 			border-color: #ccc
 			color: #fff
+
++respond-min($break-tablet-min)
+	.teaser-storystream.teaser-storystream--in-area-minor
+		background-color: $color-page-bg
+		.teaser-storystream__kicker
+			font-size: remify(14px)
+			line-height: remify(16px)
+		.teaser-storystream__title
+			font-size: remify(18px)
+			line-height: remify(22px)
+		.teaser-storystream__list
+			color: #444
+			font-size: remify(15px)
+			line-height: remify(20px)
+			letter-spacing: $zon-letter-spacing-s
+		.teaser-storystream__listitem:last-child
+			display: none
+		.teaser-storystream__updated
+			display: none
++respond-min($break-desktop-min)
+	.teaser-storystream.teaser-storystream--in-area-minor
+		.teaser-storystream__media
+			padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+		.teaser-storystream__title
+			font-size: remify(22px)
+			line-height: remify(27px)
+		.teaser-storystream__listitem:last-child
+			display: list-item

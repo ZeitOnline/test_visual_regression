@@ -3,7 +3,7 @@
 {# the blockname is also used by clicktracking.js for tracking/reporting stuff #}
 {% set blockname = 'teaser-storystream' %}
 
-<article class="{{ blockname }}">
+<article class="{{ blockname }} {{ blockname }}--in-area-{{ area.kind }}">
     <header class="{{ blockname }}__media">
         {# get the image directy from the supplied image group #}
         {% set image = get_image(module, default='wide') %}
@@ -22,7 +22,7 @@
         <ul class="{{ blockname }}__list">
             {% for article_module in module.article_modules %}
                 {% set article_teaser = article_module | first_child %}
-                <li>{{ article_teaser.teaserTitle or article_teaser.title }}</li>
+                <li class="{{ blockname }}__listitem">{{ article_teaser.teaserTitle or article_teaser.title }}</li>
             {% endfor %}
         </ul>
         <span class="{{ blockname }}__update">
