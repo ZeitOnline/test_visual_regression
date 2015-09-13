@@ -288,7 +288,8 @@ define( [ 'jquery' ], function( $ ) {
                          '.section-heading',
                          '.snapshot__media',
                          '#servicebox',
-                         '.print-box'
+                         '.print-box',
+                         '.breaking-news-banner'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],
@@ -297,7 +298,7 @@ define( [ 'jquery' ], function( $ ) {
                         'a:not([data-wt-click])'
                     ]
                 },
-                debugMode = document.location.search.indexOf( '?webtrekk-clicktracking-debug' ) === 0;
+                debugMode = document.location.search.indexOf( 'webtrekk-clicktracking-debug' ) > -1;
 
             // The key name is used for calling the corresponding function in trackElement
             for ( var key in trackingLinks ) {
