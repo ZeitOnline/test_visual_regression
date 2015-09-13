@@ -20,7 +20,6 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
         scrollDuration = 1000, // in sync with CSS animation speed
         paginated = false,
         cache = {},
-        startEvent = ('ontouchstart' in window) ? 'touchstart' : 'click',
         inputEvent = ('oninput' in document.createElement('input')) ? 'input' : 'keypress';
 
     /**
@@ -583,16 +582,16 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
         initLayout();
 
         // register event handlers
-        $socialServices.on(startEvent, '.js-comments-trigger', toggleComments);
+        $socialServices.on( 'click', '.js-comments-trigger', toggleComments );
         $comments.on( 'submit', '.js-submit-comment', submitComment );
-        $commentsBody.on(startEvent, '.js-reply-to-comment', replyToComment);
-        $commentsBody.on(startEvent, '.js-report-comment', reportComment);
-        $commentsBody.on(startEvent, '.js-cancel-report', cancelReport);
-        $commentsBody.on(startEvent, '.js-submit-report', submitReport);
-        $comments.on(startEvent, '.js-scroll-comments', scrollComments);
-        $comments.on(inputEvent, '.js-required', enableForm);
-        $(window).on('resize', updateLayout);
-        $(window).on('hashchange', showComment);
+        $commentsBody.on( 'click', '.js-reply-to-comment', replyToComment );
+        $commentsBody.on( 'click', '.js-report-comment', reportComment );
+        $commentsBody.on( 'click', '.js-cancel-report', cancelReport );
+        $commentsBody.on( 'click', '.js-submit-report', submitReport );
+        $comments.on( 'click', '.js-scroll-comments', scrollComments );
+        $comments.on( inputEvent, '.js-required', enableForm );
+        $( window ).on( 'resize', updateLayout );
+        $( window ).on( 'hashchange', showComment );
 
         // on document ready: check for url hash to enable anchor links and return urls
         $(function(e) {
