@@ -2,13 +2,14 @@ $buzzboard-label-font-size: 14px
 $buzzboard-icon-height: em(12px, $buzzboard-label-font-size)
 
 .buzzboard
+	margin: remify(60px 0 20px)
 	&__headline
 		color: $zon_dark_grey
 		font-family: $font-franziska
 		font-size: em(32px)
 		font-style: italic
 		font-weight: normal
-		margin: remify(20px 0 40px)
+		margin: remify(0 0 28px)
 		text-align: center
 	&__table
 		border-collapse: separate
@@ -50,8 +51,9 @@ $buzzboard-icon-height: em(12px, $buzzboard-label-font-size)
 			text-indent: -1.5em
 			text-transform: uppercase
 		td
-			border-bottom: 1px solid $color-border
 			padding: em(20px) 0
+		tr + tr td
+			border-top: 1px solid $color-border
 			// word-wrap: break-word
 	&__icon
 		height: round-to-precision($buzzboard-icon-height)
