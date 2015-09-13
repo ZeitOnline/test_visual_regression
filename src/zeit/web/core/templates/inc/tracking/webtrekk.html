@@ -1,3 +1,5 @@
+<pre>{{ view.is_breaking }}</pre>
+
 <script type="text/javascript" src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js"></script>
 <script type="text/javascript">
     {# XXX: Please, only set variables in jinja where absolutely needed. #}
@@ -5,6 +7,11 @@
     {% set date = '' -%}
     {% set pagination = '' -%}
     {% set serie = view.serie | replace(' ', '') | lower %}
+    {% set push = '' %}
+
+    {% if view.is_breaking or view.is_push_news -%}
+        {% set push = 'wichtigenachrichten.push' if view.is_push_news else 'eilmeldung.push' %}
+    {% endif -%}
 
     {% if view.date_first_released -%}
         {% set date = view.date_first_released | format_date('short_num') -%}
@@ -59,6 +66,7 @@
             12: window.ZMO.getSiteParam('.site'),
             13: window.ZMO.breakpoint.getTrackingBreakpoint(),
             14: "{{ 'alt' if 'zeitmz' in view.banner_channel else 'neu'  }}"
+            15: "{{ push }}"
         };
 
         {% if view.is_wrapped %}
@@ -95,7 +103,7 @@
                 view.banner_channel | lower,
                 date
             )
-        }}{{ "&cp1=%s&cp2=%s&cp3=%s&cp4=%s&cp5=%s&cp6=%s&cp7=%s&cp8=%s&cp9=%s&cp10=%s&cp11=%s&cp12=%s&cp13=%s" | format(
+        }}{{ "&cp1=%s&cp2=%s&cp3=%s&cp4=%s&cp5=%s&cp6=%s&cp7=%s&cp8=%s&cp9=%s&cp10=%s&cp11=%s&cp12=%s&cp13=%s&cp15=%s" | format(
             view.authors_list | lower | hide_none,
             ivw_code,
             pagination,
@@ -108,7 +116,8 @@
             "",
             "",
             "desktop.site",
-            "stationaer"
+            "stationaer",
+            push
         ) }}" />
     </div>
 </noscript>
