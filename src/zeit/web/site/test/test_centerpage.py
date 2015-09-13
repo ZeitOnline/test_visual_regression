@@ -201,12 +201,29 @@ def test_centerpage_markdown_module_is_rendered(jinja2_env):
     request = mock.MagicMock()
     request.route_url.return_value = 'http://foo.bar/'
     view = zeit.web.site.view_centerpage.Centerpage(content, request)
+    view.meta_robots = ''
     html_str = tpl.render(view=view, request=request)
     html = lxml.html.fromstring(html_str)
 
     assert len(html.cssselect('.markup')) == 1
     assert len(html.cssselect('.markup__title')) == 1
     assert len(html.cssselect('.markup__text li')) == 4
+
+
+def test_centerpage_teaser_topic_is_rendered(jinja2_env):
+    tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/topic-teaser')
+    request = mock.MagicMock()
+    request.route_url.return_value = 'http://foo.bar/'
+    view = zeit.web.site.view_centerpage.Centerpage(content, request)
+    view.meta_robots = ''
+    html_str = tpl.render(view=view, request=request)
+    html = lxml.html.fromstring(html_str)
+
+    assert len(html.cssselect('.teaser-topic')) == 1
+    assert len(html.cssselect('.teaser-topic-main')) == 1
+    assert len(html.cssselect('.teaser-topic-item')) == 3
 
 
 def test_inhouse_label_should_be_displayed(testbrowser):
