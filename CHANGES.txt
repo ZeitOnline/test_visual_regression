@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-1.71 (unreleased)
+1.71 (2015-09-13)
 -----------------
 
 - ZON-2126: Debounce certain action on comment interface
