@@ -2,7 +2,7 @@
 
 {% block metadata %}
     <div class="header__metadata">
-    {%- if view.topic_links | length -%}
+    {%- if view.is_hp and view.topic_links | length -%}
         <div class="header__tags">
             <span class="header__tags__label">{{ view.topic_links.title | hide_none }}</span>
             {% for label, link in view.topic_links %}

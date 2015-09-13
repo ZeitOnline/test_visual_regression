@@ -1,14 +1,55 @@
 Change log for zeit.web
 =======================
 
-1.68 (unreleased)
+1.71 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+1.70 (2015-09-13)
+-----------------
+
+- FIX: Decode sso cookie from API
+
+
+1.69 (2015-09-12)
+-----------------
+
+- MAINT: Update modernizr to v3.0.0
+
+- ZON-2083: Larger article images for twitter & facebook meta
+
+- ZON-2205: Change URL to cached version of adcontroller
+
+- ZON-2177: Rework Meetrics structure for teasers
+
+- ZON-2123: Show topic links on homepage exclusively
+
+- QUICKFIX: Fix images to endure new fallback image URL
+
+- QUCIKFIX: Don't show nextread on video pages
+
+
+1.68 (2015-09-12)
+-----------------
+
+- ZON-2109: Add SEO meta links for dynamic cps
+
+- MAINT: Polish portraitbox, large teaser headlines on mobile,
+         advertising background-color and servicebox link styles
+
+- ZON-1892: Add Buzz-Board
 
 - ZON-2197: Allow specifying a host, not just a path, for ``asset_prefix``
 
 - ZON-2014: Enforce mobile image display
 
+- MAINT: Update x-styles
+
 - QUICKFIX: Make Keywordpage Titel to h1
+
+- HOTFIX: Show comment moderation only for moderators
 
 
 1.67 (2015-09-11)

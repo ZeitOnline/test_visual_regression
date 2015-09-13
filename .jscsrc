@@ -4,6 +4,10 @@
 	// disable preset rule
 	"requirePaddingNewLinesBeforeLineComments": null,
 
+	"requireCapitalizedComments": false,
+	"requireSpacesInsideArrayBrackets": false,
+	"requireSpacesInsideBrackets": false,
+
 	// "\"": all strings require double quotes
 	// "'": all strings require single quotes
 	// true: all strings require the quote mark first encountered in the source code
