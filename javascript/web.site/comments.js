@@ -347,7 +347,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                         input.addClass( 'error' );
 
                         // enable submit button again
-                        $form.find( '.button' ).prop( 'disabled', true );
+                        $form.find( '.button' ).prop( 'disabled', false );
                     } else {
                         window.location.href = response.location;
                     }
