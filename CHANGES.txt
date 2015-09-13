@@ -4,6 +4,10 @@ Change log for zeit.web
 1.71 (unreleased)
 -----------------
 
+- ZON-2215: Display article images according to `display_mode` of their layout
+
+- ZON-2069: Refactor topic teaser
+
 - FIX: Position of adtile #2
 
 - FIX: Defected keyword page header
@@ -13,6 +17,10 @@ Change log for zeit.web
 - MAINT: Polish search submit button, breadcrumb and metadata separator
 
 - ZON-2203: Add static cardstack parameter on CPs
+
+- ZON-2090: Rearrange sources on article meta line
+
+- ZON-2118: First stab at teaser for storystreams on CPs
 
 
 1.70 (2015-09-13)
