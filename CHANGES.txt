@@ -4,7 +4,7 @@ Change log for zeit.web
 1.71 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2203: Add static cardstack parameter on CPs
 
 
 1.70 (2015-09-13)
