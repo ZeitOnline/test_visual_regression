@@ -1,15 +1,35 @@
+%article-interactions__item
+	color: $zon_grey
+	cursor: pointer
+	letter-spacing: 0.04em
+	font-size: remify(14px)
+	+on-interaction
+		color: $zon_dark_grey
+
 .article-interactions
 	border-top: 2px solid $zon_lighter_grey
 	padding: remify(20px 0 10px)
+	position: relative
+
+.print-menu
+	position: absolute
+	top: remify(18px)
+	display: inline-block
+	left: remify(55px)
+	&__print,
+	&__pdf
+		@extend %article-interactions__item
+		&:before
+			content: ' / '
+			opacity: .71
+			margin: 0 remify(4px)
+			color: $zon_grey
 
 .sharing-menu
 	font-size: remify(14px)
+	display: inline-block
 	&__title
-		color: $zon_grey
-		cursor: pointer
-		letter-spacing: 0.04em
-		+on-interaction
-			color: $zon_dark_grey
+		@extend %article-interactions__item
 		&:after
 			+drop_icon()
 	&__items
@@ -69,3 +89,4 @@
 	display: inline
 	&.sharing-menu--active > .sharing-menu__title
 		color: $zon_light_grey
+
