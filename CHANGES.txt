@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-2069: Refactor topic teaser
 
+- MAINT: Polish search submit button, breadcrumb and metadata separator
+
+- ZON-2203: Add static cardstack parameter on CPs
+
 
 1.70 (2015-09-13)
 -----------------
