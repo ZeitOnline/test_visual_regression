@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - ZON-2203: Add static cardstack parameter on CPs
 
+- ZON-2090: Rearrange sources on article meta line
+
 - ZON-2118: First stab at teaser for storystreams on CPs
 
 

@@ -247,6 +247,7 @@ def test_article_obfuscated_source_without_date_print_published():
     content = mock.Mock()
     content.product.label = content.product.title = 'DIE ZEIT'
     content.product.show = 'issue'
+    content.copyrights = ''
     content.volume = 1
     content.year = 2011
     view = zeit.web.site.view_article.Article(content, mock.Mock())
@@ -754,6 +755,82 @@ def test_canonical_url_should_omit_queries_and_hashes(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit/seite-3?cid=123#comments')
     canonical_url = browser.cssselect('link[rel=canonical]')[0].attrib['href']
     assert canonical_url.endswith('zeit-online/article/zeit/seite-3')
+
+
+def test_zeit_article_has_correct_meta_line(
+        testserver, selenium_driver):
+
+    selenium_driver.get('{}/zeit-online/article/zeit'.format(testserver.url))
+
+    date = selenium_driver.find_element_by_css_selector(
+        '.metadata__date')
+    source = selenium_driver.find_element_by_css_selector(
+        '.metadata__source')
+
+    assert date.text == (u'12. Februar 2015, 4:32 Uhr /'
+                         ' Editiert am 15. Februar 2015, 18:18 Uhr')
+    assert source.text == (u'DIE ZEIT Nr. 5/2015, 29. Januar 2015')
+
+
+def test_tgs_article_has_correct_meta_line(
+        testserver, selenium_driver):
+
+    selenium_driver.get(
+        '{}/zeit-online/article/tagesspiegel'.format(testserver.url))
+
+    date = selenium_driver.find_element_by_css_selector(
+        '.metadata__date')
+    source = selenium_driver.find_element_by_css_selector(
+        '.metadata__source')
+
+    assert date.text == (u'15. Februar 2015, 0:00 Uhr /'
+                         ' Aktualisiert am 16. Februar 2015, 11:59 Uhr')
+    assert source.text == (u'Erschienen im Tagesspiegel')
+
+
+def test_zon_article_has_correct_meta_line(
+        testserver, selenium_driver):
+
+    selenium_driver.get(
+        '{}/zeit-online/article/simple'.format(testserver.url))
+
+    date = selenium_driver.find_element_by_css_selector(
+        '.metadata__date')
+
+    assert date.text == (u'1. Juni 2015, 17:12 Uhr /'
+                         ' Aktualisiert am 1. Juni 2015, 17:12 Uhr')
+
+
+def test_freeform_article_has_correct_meta_line(
+        testserver, selenium_driver):
+
+    selenium_driver.get(
+        '{}/zeit-online/article/copyrights'.format(testserver.url))
+
+    date = selenium_driver.find_element_by_css_selector(
+        '.metadata__date')
+    source = selenium_driver.find_element_by_css_selector(
+        '.metadata__source')
+
+    assert date.text == (u'15. Februar 2015, 0:00 Uhr /'
+                         ' Aktualisiert am 16. Februar 2015, 11:59 Uhr')
+    assert source.text == (u'Quelle: ZEIT ONLINE, dpa, Reuters, rav')
+
+
+def test_afp_article_has_correct_meta_line(
+        testserver, selenium_driver):
+
+    selenium_driver.get(
+        '{}/zeit-online/article/afp'.format(testserver.url))
+
+    date = selenium_driver.find_element_by_css_selector(
+        '.metadata__date')
+    source = selenium_driver.find_element_by_css_selector(
+        '.metadata__source')
+
+    assert date.text == (u'15. Februar 2015, 0:00 Uhr /'
+                         ' Aktualisiert am 16. Februar 2015, 11:59 Uhr')
+    assert source.text == (u'Quelle: afp')
 
 
 def test_article_should_have_large_facebook_and_twitter_images(testbrowser):
