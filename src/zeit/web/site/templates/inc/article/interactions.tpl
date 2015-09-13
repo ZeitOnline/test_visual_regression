@@ -3,6 +3,3 @@
     {% include "zeit.web.site:templates/inc/article/sharing-menu-items.tpl" %}
 </div>
 
-{% block print %}
-{% endblock %}
-

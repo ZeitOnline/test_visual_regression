@@ -846,3 +846,12 @@ def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
     main_image = browser.cssselect('.article-body img')[0]
     figure = main_image.xpath('./ancestor::figure')[0]
     assert 'article__item--wide' in figure.get('class')
+
+
+def test_article_has_print_pdf_function(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    print_m = browser.cssselect('.print-menu__print')
+    pdf_m = browser.cssselect('.print-menu__pdf')
+    assert print_m[0].attrib['href'].endswith('/zeit-online/article/01/komplettansicht?print=true')
+    assert pdf_m[0].attrib['href'] == 'http://pdf.zeit.de/zeit-online/article/01.pdf'
+

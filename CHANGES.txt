@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - ZON-2118: First stab at teaser for storystreams on CPs
 
+- ZON-1602: Integrate Print and PDF
+
 
 1.70 (2015-09-13)
 -----------------

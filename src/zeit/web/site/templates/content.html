@@ -90,13 +90,13 @@
     {% endprofile %}
     </article>
     {% endblock content %}
-    {% block article_interactions %}
-        <div class="article-interactions article__item">
-            {% include "zeit.web.site:templates/inc/article/interactions.tpl" %}
-            {% block print %}
-            {% endblock %}
-        </div>
-    {% endblock %}
+    <div class="article-interactions article__item">
+        {% block article_interactions %}
+                {% include "zeit.web.site:templates/inc/article/interactions.tpl" %}
+        {% endblock %}
+        {% block print %}
+        {% endblock %}
+    </div>
     {% block article_tags %}
         {% include "zeit.web.site:templates/inc/article/tags.tpl" %}
     {% endblock %}
