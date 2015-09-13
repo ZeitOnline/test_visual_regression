@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 import base64
 import datetime
-import lxml.etree
-import mock
-import pytest
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait
+import lxml.etree
+import mock
+import pytest
+import requests
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.web.site.view_article
