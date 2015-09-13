@@ -51,7 +51,7 @@ setup(
         'zeit.cms',
         'zeit.content.advertisement',
         'zeit.connector>=2.6.6.dev0',
-        'zeit.content.article>3.9.0',
+        'zeit.content.article>=3.10.0.dev0',
         'zeit.content.author',
         'zeit.content.cp',
         'zeit.content.dynamicfolder',

@@ -4,7 +4,7 @@ Change log for zeit.web
 1.70 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2215: Display article images according to `display_mode` of their layout
 
 
 1.69 (2015-09-12)

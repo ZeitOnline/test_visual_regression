@@ -7,10 +7,13 @@
         <figure class="
             {%- if loop -%}
                 slide
-            {%- elif obj.layout == 'large' -%}
+            {# XXX We should move this mapping somewhere else than the template. #}
+            {%- elif obj.layout.display_mode == 'large' -%}
                 article__item article__item--wide
-            {%- elif obj.layout == 'small' -%}
+            {%- elif obj.layout.display_mode == 'float' -%}
                 article__item article__item--marginalia
+            {%- elif obj.layout.display_mode == 'column-width' -%}
+                article__item article__item
             {%- endif -%}
             ">
             <div class="scaled-image">
