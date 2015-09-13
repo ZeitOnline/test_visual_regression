@@ -15,15 +15,22 @@ define( [ 'jquery' ], function( $ ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         main: function( $element ) {
+
             // in case we already have a complete ID, we do not need to calculate it
             if ( $element.data( 'id' ) ) {
                 return this.useDataId( $element );
             }
 
             // is this a link inside an article text? track this specific case.
-            var $page = $element.closest( '.article-page' );
+            var $page = $element.closest( '.main--article .article-page' );
             if ( $page.length ) {
                 return this.linkInArticleContent( $element, $page );
+            }
+
+            // is this a link inside a gallery? track this specific case.
+            var $gallery = $element.closest( '.main--gallery .article-page' );
+            if ( $gallery.length ) {
+                return this.linkInGalleryContent( $element, $gallery );
             }
 
             var data = [],
@@ -114,6 +121,20 @@ define( [ 'jquery' ], function( $ ) {
                     $element.attr( 'href' ) // url
                 ];
 
+            return formatTrackingData( data );
+        },
+
+        linkInGalleryContent: function( $element, $gallery ) {
+            var imgnumber = $gallery.find( '.bx-pager' ).text().split( ' / ' )[0],
+                data = [
+                    getBreakpoint(),
+                    'gallery', // [verortung]
+                    $element[ 0 ].className.indexOf( 'overlay' ) < 0 ? '1' : '2',
+                    $element[ 0 ].className.indexOf( 'links' ) < 0 ? '2' : '1', // [spalte] leer lassen
+                    imgnumber, // [subreihe] leer lassen
+                    sanitizeString( $element.text() ), // [bezeichner]
+                    window.location.href // url
+                ];
             return formatTrackingData( data );
         }
     },
