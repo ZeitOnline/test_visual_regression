@@ -10,7 +10,7 @@ Change log for zeit.web
 1.70 (2015-09-13)
 -----------------
 
-- Nothing changed yet.
+- FIX: Decode sso cookie from API
 
 
 1.69 (2015-09-12)
@@ -27,8 +27,6 @@ Change log for zeit.web
 - ZON-2123: Show topic links on homepage exclusively
 
 - QUICKFIX: Fix images to endure new fallback image URL
-
-- FIX: Decode sso cookie from API
 
 - QUCIKFIX: Don't show nextread on video pages
 
