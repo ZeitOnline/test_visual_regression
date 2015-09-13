@@ -10,6 +10,10 @@ Change log for zeit.web
 
 - FIX: Wrong font in advertorial footer
 
+- MAINT: Polish search submit button, breadcrumb and metadata separator
+
+- ZON-2203: Add static cardstack parameter on CPs
+
 
 1.70 (2015-09-13)
 -----------------
