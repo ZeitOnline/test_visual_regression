@@ -2,6 +2,9 @@ $teaser-storystream-background-color: #41434d
 $teaser-storystream-line-color: $zon_mid_grey
 $teaser-storystream-left-inner-mobile: 15px
 $teaser-storystream-left-outer-mobile: 15px
+$teaser-storystream-left-inner-tablet: 42px
+$teaser-storystream-left-outer-tablet: 42px
+$teaser-storystream-left-outer-desktop: 20px
 
 .teaser-storystream
 	background-color: $teaser-storystream-background-color
@@ -65,23 +68,23 @@ $teaser-storystream-left-outer-mobile: 15px
 	&__list
 		list-style: none
 		padding: 0
-		li
-			margin: .75em 0
-			padding: 0
-			position: relative
-			color: #d6d6d6
-			font-size: remify(16px)
-			line-height: remify(20px)
-			letter-spacing: $zon-letter-spacing-s
-			&:before
-				background-color: $teaser-storystream-line-color
-				border-radius: 50%
-				content: ""
-				height: remify(9px)
-				left: remify(-20px)
-				position: absolute
-				top: .3em
-				width: remify(9px)
+	&__listitem
+		margin: .75em 0
+		padding: 0
+		position: relative
+		color: #d6d6d6
+		font-size: remify(16px)
+		line-height: remify(20px)
+		letter-spacing: $zon-letter-spacing-s
+		&:before
+			background-color: $teaser-storystream-line-color
+			border-radius: 50%
+			content: ""
+			height: remify(9px)
+			left: remify(-20px)
+			position: absolute
+			top: .3em
+			width: remify(9px)
 
 	&__update
 		color: $zon_light_grey
@@ -102,41 +105,78 @@ $teaser-storystream-left-outer-mobile: 15px
 
 	// TODO: Standard-CTA-Dark benutzen (ggf vorher anlegen)
 	&__button
-		background-color: rgba(0, 0, 0, 0.2)
-		border-color: #999
-		display: inline-block
-		vertical-align: top
-		+link
-			color: #eee
-		&:hover
-			background-color: rgba(0, 0, 0, 0.5)
-			border-color: #ccc
-			color: #fff
+		+zon-button-dark
 
 +respond-min($break-tablet-min)
-	.teaser-storystream.teaser-storystream--in-area-minor
-		background-color: $color-page-bg
-		.teaser-storystream__kicker
-			font-size: remify(14px)
-			line-height: remify(16px)
-		.teaser-storystream__title
-			font-size: remify(18px)
-			line-height: remify(22px)
-		.teaser-storystream__list
-			color: #444
-			font-size: remify(15px)
-			line-height: remify(20px)
-			letter-spacing: $zon-letter-spacing-s
-		.teaser-storystream__listitem:last-child
-			display: none
-		.teaser-storystream__updated
-			display: none
+	.teaser-storystream__media
+		padding-bottom: 100% / 7 * 2 // image variant 'panorama'
+	.teaser-storystream__headercontent
+		margin-left: remify($teaser-storystream-left-outer-tablet)
+		padding-left: remify($teaser-storystream-left-inner-tablet)
+		padding-bottom: remify(25px)
+	.teaser-storystream__content
+		margin-left: remify($teaser-storystream-left-outer-tablet)
+		padding-left: remify($teaser-storystream-left-inner-tablet)
+	// dirty dirty specifity hack
+	.cp-area--minor
+		.teaser-storystream.teaser-storystream--in-area-minor
+			background-color: $color-page-bg
+			.teaser-storystream__headercontent
+				margin: remify(20px $teaser-storystream-left-outer-mobile 0)
+				padding: remify(0 $teaser-storystream-left-inner-mobile 13px)
+			.teaser-storystream__kicker
+				font-size: remify(14px)
+				line-height: remify(16px)
+			.teaser-storystream__title
+				font-size: remify(18px)
+				line-height: remify(22px)
+			.teaser-storystream__content
+				position: relative
+				margin-left: remify($teaser-storystream-left-outer-mobile)
+				padding-left: remify($teaser-storystream-left-inner-mobile)
+				padding-bottom: 0
+				margin-bottom: remify(80px)
+			.teaser-storystream__list
+				margin: 0
+			.teaser-storystream__listitem
+				color: #444
+				font-size: remify(15px)
+				line-height: remify(20px)
+				letter-spacing: $zon-letter-spacing-s
+				&:before
+					border: 2px $white solid
+					left: remify(-22px)
+			.teaser-storystream__listitem:last-child
+				display: none
+			.teaser-storystream__update
+				display: none
+			.teaser-storystream__button
+				position: absolute
+				bottom: remify(-60px)
+				+zon-button-light
+
 +respond-min($break-desktop-min)
-	.teaser-storystream.teaser-storystream--in-area-minor
-		.teaser-storystream__media
-			padding-bottom: 100% / 7 * 3 // image variant 'cinema'
-		.teaser-storystream__title
-			font-size: remify(22px)
-			line-height: remify(27px)
-		.teaser-storystream__listitem:last-child
-			display: list-item
+	// dirty dirty specifity hack
+	.cp-area--minor
+		.teaser-storystream.teaser-storystream--in-area-minor
+			.teaser-storystream__media
+				padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+			.teaser-storystream__headercontent,
+			.teaser-storystream__content
+				margin-left: remify($teaser-storystream-left-outer-desktop)
+			.teaser-storystream__title
+				font-size: remify(22px)
+				line-height: remify(27px)
+			.teaser-storystream__listitem:last-child
+				display: list-item
+
+// +respond-min($break-desktop-min)
+// 	// dirty dirty specifity hack
+// 	.cp-area--solo
+// 		.teaser-storystream.teaser-storystream--in-area-solo
+// 			height: remify(360px)
+// 			.teaser-storystream__media
+// 				width: remify(480px)
+// 				height: remify(360px)
+// 				padding-bottom: 100% / 4 * 3 // image variant 'standard'
+// 			.teaser
