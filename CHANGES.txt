@@ -4,7 +4,7 @@ Change log for zeit.web
 1.72 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Make legacy areas work with `select_modules` API
 
 
 1.71 (2015-09-13)
