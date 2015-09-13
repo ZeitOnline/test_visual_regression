@@ -831,3 +831,11 @@ def test_afp_article_has_correct_meta_line(
     assert date.text == (u'15. Februar 2015, 0:00 Uhr /'
                          ' Aktualisiert am 16. Februar 2015, 11:59 Uhr')
     assert source.text == (u'Quelle: afp')
+
+
+def test_article_should_have_large_facebook_and_twitter_images(testbrowser):
+    doc = testbrowser('/zeit-online/article/01').document
+    assert doc.xpath('//meta[@property="og:image"]/@content')[0].endswith(
+        'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+    assert doc.xpath('//meta[@name="twitter:image"]/@content')[0].endswith(
+        'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')

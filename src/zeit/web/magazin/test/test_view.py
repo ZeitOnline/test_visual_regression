@@ -436,10 +436,11 @@ def test_longform_has_correct_twitter_card_type(testserver, testbrowser):
 
 def test_article_has_correct_sharing_image(testserver, testbrowser):
     xpath = testbrowser('/artikel/01').document.xpath
-    source = testserver.url + '/exampleimages/artikel/01/schoppenstube/wide'
+    source = testserver.url + '/exampleimages/artikel/01/schoppenstube/'\
+        'wide__1300x731'
     assert xpath('//link[@itemprop="image"]/@href')[0] == source
     assert xpath('//meta[@property="og:image"]/@content')[0] == source
-    assert xpath('//meta[@name="twitter:image:src"]/@content')[0] == source
+    assert xpath('//meta[@name="twitter:image"]/@content')[0] == source
 
 
 def test_article_has_correct_product_id(testserver):

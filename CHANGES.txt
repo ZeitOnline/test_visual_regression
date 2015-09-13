@@ -1,16 +1,36 @@
 Change log for zeit.web
 =======================
 
-1.69 (unreleased)
+1.71 (unreleased)
 -----------------
+
+- ZON-2203: Add static cardstack parameter on CPs
+
+- ZON-2090: Rearrange sources on article meta line
+
+
+1.70 (2015-09-13)
+-----------------
+
+- FIX: Decode sso cookie from API
+
+
+1.69 (2015-09-12)
+-----------------
+
+- MAINT: Update modernizr to v3.0.0
+
+- ZON-2083: Larger article images for twitter & facebook meta
 
 - ZON-2205: Change URL to cached version of adcontroller
 
 - ZON-2177: Rework Meetrics structure for teasers
 
+- ZON-2123: Show topic links on homepage exclusively
+
 - QUICKFIX: Fix images to endure new fallback image URL
 
-- ZON-2090: Rearrange sources on article meta line
+- QUCIKFIX: Don't show nextread on video pages
 
 
 1.68 (2015-09-12)
