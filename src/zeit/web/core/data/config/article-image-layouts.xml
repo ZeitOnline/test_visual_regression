@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <image-layouts>
-  <layout id="small" available="zeit.cms.interfaces.ICMSContent">schmal</layout>
+  <layout id="small" display_mode="float" available="zeit.cms.interfaces.ICMSContent">schmal</layout>
   <!-- default value must not use available -->
-  <layout id="large">vollbreit</layout>
-  <layout id="upright" available="zeit.cms.interfaces.ICMSContent">hochkant</layout>
-  <layout id="large-original" variant_name="original" available="zeit.cms.interfaces.ICMSContent">hochkant</layout>
+  <layout id="large" display_mode="large">vollbreit</layout>
+  <layout id="upright" display_mode="float" available="zeit.cms.interfaces.ICMSContent">hochkant</layout>
+  <layout id="large-original" variant_name="original" display_mode="column-width" available="zeit.cms.interfaces.ICMSContent">hochkant</layout>
   <layout id="zmo-xl-header" available="zeit.magazin.interfaces.IZMOContent">ZMO - XL-Header</layout>
 
   <layout id="zmo-xl" available="zeit.magazin.interfaces.IZMOContent">ZMO - XL</layout>

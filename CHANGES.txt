@@ -1,12 +1,33 @@
 Change log for zeit.web
 =======================
 
-1.71 (unreleased)
+1.72 (unreleased)
 -----------------
 
 - ZON-2203: Add static cardstack parameter on CPs
 
 - ZON-2074: Whole lotta SEO redirects
+
+- ZON-1848: Repair Netiquette link
+
+- HOTFIX: Make zeit.web modules work with `select_modules` API
+
+
+1.71.1 (2015-09-13)
+-------------------
+
+- HOTFIX: Make legacy areas work with `select_modules` API
+
+
+1.71 (2015-09-13)
+-----------------
+
+- ZON-2126: Debounce certain action on comment interface
+
+- ZON-2215: Display article images according to `display_mode` of their layout
+
+- ZON-2069: Refactor topic teaser
+>>>>>>> master
 
 - FIX: Position of adtile #2
 
@@ -16,6 +37,15 @@ Change log for zeit.web
 
 - MAINT: Polish search submit button, breadcrumb and metadata separator
 
+<<<<<<< HEAD
+=======
+- ZON-2203: Add static cardstack parameter on CPs
+
+- ZON-2090: Rearrange sources on article meta line
+
+- ZON-2118: First stab at teaser for storystreams on CPs
+
+>>>>>>> master
 
 1.70 (2015-09-13)
 -----------------
