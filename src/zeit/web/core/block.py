@@ -237,7 +237,7 @@ class Image(BaseImage):
         return super(Image, cls).__new__(cls, model_block)
 
     def __init__(self, model_block):
-        self.layout = getattr(model_block.layout, 'id', None)
+        self.layout = model_block.layout
 
         # TODO: don't use XML but adapt an Image and use it's metadata
         if model_block.xml is not None:
