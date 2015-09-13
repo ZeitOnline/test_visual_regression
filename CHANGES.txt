@@ -4,6 +4,8 @@ Change log for zeit.web
 1.72 (unreleased)
 -----------------
 
+- ZON-2010: Goodbye, Beta badges & links
+
 - HOTFIX: Make community moderation's 'Redaktionsempfehlung' work
 
 - HOTFIX: Make zeit.web modules work with `select_modules` API
