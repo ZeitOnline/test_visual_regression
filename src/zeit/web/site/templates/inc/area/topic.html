@@ -1,15 +1,22 @@
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 
+{% block before_module_list %}{% endblock %}
+
 {% block module_list %}
-    {% set module = area.values()[:1][0] %}
-    {% set teaser = module | first_child %}
-    {% set module_layout = 'teaser-topic-main' %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/imagegroup_zon-topic.tpl" %}
-    {% include "zeit.web.site:templates/inc/teaser/zon-topic-main.tpl" %}
-    <div class="teaser-topic-list">
-    {% for module in area.values()[0:3] -%}
-        {% set teaser = module | first_child %}
-        {% include "zeit.web.site:templates/inc/teaser/zon-topic-list.tpl" %}
-    {% endfor %}
-    </div>
+	<section class="teaser-topic">
+		{% set module = area.values()[:1][0] %}
+		{% set teaser = module | first_child %}
+		{% set module_layout = 'teaser-topic' %}
+
+		{% include "zeit.web.site:templates/inc/teaser_asset/imagegroup_zon-topic.tpl" %}
+		{% include "zeit.web.site:templates/inc/teaser/zon-topic-main.tpl" %}
+		<aside class="teaser-topic-list">
+		{% for module in area.values()[0:3] -%}
+			{% set teaser = module | first_child %}
+			{% include "zeit.web.site:templates/inc/teaser/zon-topic-list.tpl" %}
+		{% endfor %}
+		</aside>
+	</section>
 {% endblock %}
+
+{% block after_module_list %}{% endblock %}
