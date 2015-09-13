@@ -1,0 +1,34 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+
+{# the blockname is also used by clicktracking.js for tracking/reporting stuff #}
+{% set blockname = 'teaser-storystream' %}
+
+<article class="{{ blockname }}">
+    <header class="{{ blockname }}__media">
+        {# get the image directly from the supplied image group #}
+        {% set image = get_image(module, default='wide') %}
+        {# we need to explicitly pass the layout aka block class name #}
+        {% set module_layout = blockname %}
+        {% include "zeit.web.site:templates/inc/storystream/inc/headerimage_image.tpl" ignore missing %}
+
+        <div class="{{ blockname }}__headercontent">
+            <a class="{{ blockname }}__link" href="#">
+                <span class="{{ blockname }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
+                <h2 class="{{ blockname }}__title">{{ teaser.teaserTitle or teaser.title }}</h2>
+            </a>
+        </div>
+    </header>
+    <div class="{{ blockname }}__content">
+        <ul class="{{ blockname }}__list">
+            {% for article_module in module.article_modules %}
+                {% set article_teaser = article_module | first_child %}
+                <li>{{ article_teaser.teaserTitle or article_teaser.title }}</li>
+            {% endfor %}
+        </ul>
+        <span class="{{ blockname }}__update">
+            {{ lama.use_svg_icon('storystream-updated', 'teaser-storystream__updateicon', request) }}
+            Zuletzt aktualisiert vor 2 Stunden
+        </span>
+        <a class="button {{ blockname }}__button" href="#">zum Live-Dossier</a>
+    </div>
+</article>
