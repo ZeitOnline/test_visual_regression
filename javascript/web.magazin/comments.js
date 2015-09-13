@@ -6,7 +6,7 @@
  * comments.js: module for comments
  * @module comments
  */
-define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], function( $, Modernizr ) {
+define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], function( $, Velocity, Modernizr ) {
 
     var $socialServices = $('#js-social-services'),
         $comments = $('#js-comments'),
@@ -20,8 +20,8 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
         scrollDuration = 1000, // in sync with CSS animation speed
         paginated = false,
         cache = {},
-        startEvent = ('ontouchstart' in window) ? 'touchstart' : 'click',
-        inputEvent = ('oninput' in document.createElement('input')) ? 'input' : 'keypress';
+        inputEvent = ('oninput' in document.createElement('input')) ? 'input' : 'keypress',
+        sendurl = window.location.href;
 
     /**
      * comments.js: handles comment pagination
@@ -148,8 +148,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
     var submitReport = function(e) {
         e.preventDefault();
 
-        var sendurl = window.location.href,
-            form = this.form,
+        var form = this.form,
             input = this.form.elements;
 
         // avoid repeated submits
@@ -199,8 +198,7 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
         e.preventDefault();
 
         var $form = $( this ),
-            input = this.elements,
-            sendurl = window.location.href;
+            input = this.elements;
 
         $form.find( '.comments__hint' ).removeClass( 'comments__hint--error' );
         $form.find( '.comments__input' ).removeClass( 'comments__input--error' );
@@ -211,6 +209,9 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
             input.username.focus();
             return false;
         }
+
+        // avoid repeated submits
+        $form.find( '.button' ).prop( 'disabled', true );
 
         var data = {
             'ajax':      'true',
@@ -242,6 +243,9 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
 
                         error.addClass( 'comments__error--visible' );
                         input.addClass( 'comments__input--error' );
+
+                        // enable submit button again
+                        $form.find( '.button' ).prop( 'disabled', false );
                     } else {
                         window.location.href = response.location;
                     }
@@ -583,16 +587,16 @@ define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], functio
         initLayout();
 
         // register event handlers
-        $socialServices.on(startEvent, '.js-comments-trigger', toggleComments);
+        $socialServices.on( 'click', '.js-comments-trigger', toggleComments );
         $comments.on( 'submit', '.js-submit-comment', submitComment );
-        $commentsBody.on(startEvent, '.js-reply-to-comment', replyToComment);
-        $commentsBody.on(startEvent, '.js-report-comment', reportComment);
-        $commentsBody.on(startEvent, '.js-cancel-report', cancelReport);
-        $commentsBody.on(startEvent, '.js-submit-report', submitReport);
-        $comments.on(startEvent, '.js-scroll-comments', scrollComments);
-        $comments.on(inputEvent, '.js-required', enableForm);
-        $(window).on('resize', updateLayout);
-        $(window).on('hashchange', showComment);
+        $commentsBody.on( 'click', '.js-reply-to-comment', replyToComment );
+        $commentsBody.on( 'click', '.js-report-comment', reportComment );
+        $commentsBody.on( 'click', '.js-cancel-report', cancelReport );
+        $commentsBody.on( 'click', '.js-submit-report', submitReport );
+        $comments.on( 'click', '.js-scroll-comments', scrollComments );
+        $comments.on( inputEvent, '.js-required', enableForm );
+        $( window ).on( 'resize', updateLayout );
+        $( window ).on( 'hashchange', showComment );
 
         // on document ready: check for url hash to enable anchor links and return urls
         $(function(e) {
