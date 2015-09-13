@@ -1,0 +1,28 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+
+{# the blockname is also used by clicktracking.js for tracking/reporting stuff #}
+{% set blockname = 'teaser-storystream' %}
+
+<article class="{{ blockname }}">
+    <header class="{{ blockname }}__media">
+
+        <div class="{{ blockname }}__headercontent">
+            <a class="{{ blockname }}__link" href="#">
+                <span class="{{ blockname }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
+                <h2 class="{{ blockname }}__title">{{ teaser.teaserTitle or teaser.title }}</h2>
+            </a>
+        </div>
+    </header>
+    <div class="{{ blockname }}__content">
+        <ul class="{{ blockname }}__list">
+            <li>Andreas Lubitz sei fluguntauglich gewesen, sagt Staatsanwalt</li>
+            <li>Lubitz probte Sinkflug bereits auf dem Hinflug</li>
+            <li>Deutsche Politiker erwägen berufsverbot für Depressive</li>
+        </ul>
+        <span class="{{ blockname }}__update">
+            {{ lama.use_svg_icon('storystream-updated', 'teaser-storystream__updateicon', request) }}
+            Zuletzt aktualisiert vor 2 Stunden
+        </span>
+        <a class="button {{ blockname }}__button" href="#">zum Live-Dossier</a>
+    </div>
+</article>

@@ -39,7 +39,7 @@ class StoryStreamTeaserBlock(
         self.context = module
         self.storystream = content
         # NOTE: This means we ignore the teaser layout set by the user!
-        self.layout = 'storystream'
+        self.layout = 'storystreamteaser'
 
     def __iter__(self):
         return iter(self.context)
