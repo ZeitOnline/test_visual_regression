@@ -443,3 +443,28 @@ def invalidate_comment_thread(unique_id):
         None,
         'comment_thread',
         unique_id)
+
+
+@pyramid.view.view_config(route_name='invalidate_comment_thread')
+def invalidate(request):
+    if not request.headers.get('X-Watchword', None) == 'g@ldf1nch':
+        raise pyramid.httpexceptions.HTTPForbidden(
+            title='Wrong password',
+            explanation='Use correct password to work with me.')
+
+    path = request.params.get('path', None)
+    unique_id = 'http://xml.zeit.de/{}'.format(path)
+
+    if not path:
+        raise pyramid.httpexceptions.HTTPBadRequest(
+            title='No path given',
+            explanation='A path must be set in order to make me happy.')
+
+    try:
+        if unique_id and zeit.cms.interfaces.ICMSContent(unique_id):
+            invalidate_comment_thread(unique_id)
+            return pyramid.response.Response('OK', 200)
+    except TypeError, err:
+        raise pyramid.httpexceptions.HTTPBadRequest(
+            title='Type error',
+            explanation='Error: {}'.format(err))
