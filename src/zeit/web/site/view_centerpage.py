@@ -247,6 +247,34 @@ class Centerpage(
         module = LegacyModule([snapshot], layout='snapshot')
         return LegacyRegion([LegacyArea([module])])
 
+    @zeit.web.reify
+    def area_ranking(self):
+        try:
+            return zeit.web.site.area.ranking.Ranking(
+                zeit.web.core.utils.find_block(
+                    self.context, attrib='area', kind='ranking'))
+        except AttributeError:
+            return None
+
+    @zeit.web.reify
+    def next_page_url(self):
+        ranking = self.area_ranking
+        if ranking is None:
+            return None
+        if ranking.current_page < len(ranking.pagination):
+            return zeit.web.core.template.append_get_params(
+                self.request, p=ranking.current_page + 1)
+
+    @zeit.web.reify
+    def prev_page_url(self):
+        ranking = self.area_ranking
+        if ranking is None:
+            return None
+        actual_index = ranking.current_page - 1
+        if actual_index - 1 >= 0:
+            return zeit.web.core.template.append_get_params(
+                self.request, p=actual_index)
+
 
 @pyramid.view.view_config(
     name='area',
@@ -285,7 +313,9 @@ class Storystream(Centerpage):
         'count': None,
         'oldest_date': None,
         'latest_date': None
-        }
+    }
+
+    countable_atom_types = [zeit.content.cp.interfaces.ITeaserBlock]
 
     def __init__(self, *args, **kwargs):
         super(Centerpage, self).__init__(*args, **kwargs)
@@ -297,31 +327,24 @@ class Storystream(Centerpage):
         oldest_atom = None
         latest_atom = None
 
-        countable_atom_types = ['teaser']
-
         regions = self.regions
         for region in regions:
-
             areas = region.values()
             for area in areas:
+                for module in area.select_modules(*self.countable_atom_types):
+                    atom_counter += 1
 
-                modules = area.values()
-                for module in modules:
+                    # OPTIMIZE: this is redundant (also done inside
+                    # the template). Maybe we should store the teaser
+                    # object into the module?
+                    teaser = zeit.web.core.template.first_child(module)
+                    if ((oldest_atom is None) or
+                            (oldest_atom > teaser.tldr_date)):
+                        oldest_atom = teaser.tldr_date
 
-                    if module.type and module.type in countable_atom_types:
-                        atom_counter += 1
-
-                        # OPTIMIZE: this is redundant (also done inside
-                        # the template). Maybe we should store the teaser
-                        # object into the module?
-                        teaser = zeit.web.core.template.first_child(module)
-                        if ((oldest_atom is None) or
-                                (oldest_atom > teaser.tldr_date)):
-                            oldest_atom = teaser.tldr_date
-
-                        if ((latest_atom is None) or
-                                (latest_atom < teaser.tldr_date)):
-                            latest_atom = teaser.tldr_date
+                    if ((latest_atom is None) or
+                            (latest_atom < teaser.tldr_date)):
+                        latest_atom = teaser.tldr_date
 
         self.atom_meta['count'] = atom_counter
         self.atom_meta['oldest_date'] = oldest_atom

@@ -299,6 +299,8 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
                   '<!--<!\\[endif\\]--><img alt="%s" title="%s" '
                   'class=" figure__media" '
                   'src="/img/artikel/01/bitblt-\\d+x\\d+-[a-z0-9]+/01.jpg" '
+                  'data-src='
+                  '"/img/artikel/01/bitblt-\\d+x\\d+-[a-z0-9]+/01.jpg" '
                   'data-ratio=""><!--\\[if gt IE 8\\]><!--></noscript>'
                   '<!--<!\\[endif\\]--></div><figcaption '
                   'class="figure__caption"><span '
@@ -509,7 +511,7 @@ def test_macro_sharing_meta_should_produce_markup(testbrowser):
     assert browser.cssselect('meta[property="og:url"]')
     assert browser.cssselect('meta[property="og:image"]')
     assert browser.cssselect('link[itemprop="image"][rel="image_src"]')
-    assert browser.cssselect('meta[name="twitter:image:src"]')
+    assert browser.cssselect('meta[name="twitter:image"]')
 
 
 def test_add_publish_date_generates_script(jinja2_env):

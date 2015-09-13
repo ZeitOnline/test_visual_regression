@@ -20,8 +20,8 @@ module.exports = function(grunt) {
         codeDir: './src/zeit/web/static/',
         rubyVersion: '1.9.3',
         tasks: {
-            production: [ 'clean', 'bower', 'modernizr', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'svg' ],
-            development: [ 'clean', 'bower', 'modernizr', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
+            production: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'svg' ],
+            development: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:icons', 'clean:symbols', 'svgmin', 'grunticon', 'svgstore' ],
             icons: [ 'clean:icons', 'svgmin', 'grunticon' ],
@@ -310,60 +310,13 @@ module.exports = function(grunt) {
             }
         },
 
-        modernizr: {
-
-            dist: {
-                // [REQUIRED] Path to the build you're using for development.
-                'devFile': project.sourceDir + 'javascript/vendor/modernizr.js',
-
-                // [REQUIRED] Path to save out the built file.
-                'outputFile': project.sourceDir + 'javascript/vendor/modernizr-custom.js',
-
-                // Based on default settings on http://modernizr.com/download/
-                'extra': {
-                    'shiv': true,
-                    'printshiv': false,
-                    'load': false, // was true
-                    'mq': false,
-                    'cssclasses': true
-                },
-
-                // Based on default settings on http://modernizr.com/download/
-                'extensibility': {
-                    'addtest': false,
-                    'prefixed': false,
-                    'teststyles': false,
-                    'testprop': false,
-                    'testallprops': false,
-                    'hasevents': false,
-                    'prefixes': false,
-                    'domprefixes': false
-                },
-
-                // By default, source is uglified before saving
-                'uglify': true,
-
-                // Define any tests you want to implicitly include.
-                'tests': [ 'video', 'touch', 'csstransforms', 'csstransforms3d' ],
-
-                // By default, this task will crawl your project for references to Modernizr tests.
-                // Set to false to disable.
-                'parseFiles': true,
-
-                // When parseFiles = true, this task will crawl all *.js, *.css, *.scss files, except files that are in node_modules/.
-                // You can override this by defining a 'files' array below.
-                'files': {
-                    'src': []
-                },
-
-                // When parseFiles = true, matchCommunityTests = true will attempt to
-                // match user-contributed tests.
-                'matchCommunityTests': false,
-
-                // Have custom Modernizr tests? Add paths to their location here.
-                'customTests': []
+        modernizr_builder: {
+            build: {
+                options: {
+                    config: project.sourceDir + 'modernizr-config.json',
+                    dest: project.sourceDir + 'javascript/vendor/modernizr-custom.js'
+                }
             }
-
         },
 
         // watch dog
@@ -424,7 +377,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-grunticon');
     grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-jsdoc');
-    grunt.loadNpmTasks('grunt-modernizr');
+    grunt.loadNpmTasks('grunt-modernizr-builder');
     grunt.loadNpmTasks('grunt-sftp-deploy');
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-svgstore');

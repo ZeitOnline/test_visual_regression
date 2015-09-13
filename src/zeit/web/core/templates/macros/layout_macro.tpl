@@ -155,8 +155,9 @@
 
 {% macro insert_responsive_image(image, image_class, page_type) %}
 
-    {% set alt = ''%}
-    {% set title = ''%}
+    {% set alt = '' %}
+    {% set title = '' %}
+    {% set source = image | default_image_url %}
 
     {% if image.alt %}
         {% set alt = image.alt %}
@@ -168,12 +169,12 @@
 
     {% if image %}
         <!--[if gt IE 8]><!-->
-            <noscript data-src="{{ image | default_image_url }}">
+            <noscript data-src="{{ source }}">
         <!--<![endif]-->
         {% if page_type == 'article' and image.href %}
             <a href="{{ image.href }}">
         {% endif %}
-                <img alt="{{ alt }}" {% if title %}title="{{ title }}" {% endif %}class="{{ image_class | default('', true) }} figure__media" src="{{ image | default_image_url }}" data-ratio="{{ image.ratio }}">
+                <img alt="{{ alt }}" {% if title %}title="{{ title }}" {% endif %}class="{{ image_class | default('', true) }} figure__media" src="{{ source }}" data-src="{{ source }}" data-ratio="{{ image.ratio }}">
         {% if page_type == 'article' and image.href %}
             </a>
         {% endif %}
