@@ -4,7 +4,7 @@ Change log for zeit.web
 1.72 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Make zeit.web modules work with `select_modules` API
 
 
 1.71.1 (2015-09-13)
