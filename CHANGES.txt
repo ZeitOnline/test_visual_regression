@@ -4,7 +4,7 @@ Change log for zeit.web
 1.72 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1602: Integrate Print and PDF
 
 
 1.71.1 (2015-09-13)
@@ -35,8 +35,6 @@ Change log for zeit.web
 - ZON-2090: Rearrange sources on article meta line
 
 - ZON-2118: First stab at teaser for storystreams on CPs
-
-- ZON-1602: Integrate Print and PDF
 
 
 1.70 (2015-09-13)
