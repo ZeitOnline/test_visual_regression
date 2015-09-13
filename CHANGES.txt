@@ -4,7 +4,13 @@ Change log for zeit.web
 1.72 (unreleased)
 -----------------
 
+- MAINT: Polish buzzboard, square teaser and video icon
+
+- HOTFIX: Make community moderation's 'Redaktionsempfehlung' work
+
 - HOTFIX: Make zeit.web modules work with `select_modules` API
+
+- ZON-1848: Repair Netiquette link
 
 
 1.71.1 (2015-09-13)

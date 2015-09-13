@@ -2,12 +2,23 @@
 
 {% block layout %}teaser-square{% endblock %}
 {% block teaser_modifier %}{{ self.layout() }}--graphic{% endblock %}
-{% block teaser_journalistic_format %}{% endblock %}
 
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
     {% include "zeit.web.site:templates/inc/teaser_asset/{}_zon-square.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
 {% endblock %}
+
+{% block teaser_journalistic_format %}
+    {%- if teaser.serie %}
+        {%- if teaser.serie.column %}
+           <span class="{{ self.layout() }}__series-label">{{ teaser.serie.serienname }}</span>
+        {%- else %}
+            <span class="{{ self.layout() }}__series-label">Serie: {{ teaser.serie.serienname }}</span>
+        {%- endif %}
+    {%- elif teaser.blog %}
+        <span class="{{ self.layout() }}__series-label">Blog: {{ teaser.blog.name | hide_none }}</span>
+    {%- endif %}
+{% endblock teaser_journalistic_format %}
 
 {% block teaser_container %}
     {{ super() }}
