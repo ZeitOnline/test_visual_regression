@@ -37,7 +37,7 @@ def test_cardstack_should_have_static_param_on_cps(
     assert re.search(esihead, browser.contents)
 
 
-def test_cardstack_should_have_static_param_on_articles(testbrowser):
+def test_cardstack_should_not_have_static_param_on_articles(testbrowser):
     url = '/zeit-online/article/01'
     browser = testbrowser(url)
 
