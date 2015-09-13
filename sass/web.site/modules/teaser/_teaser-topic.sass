@@ -60,10 +60,10 @@
 	&__title
 		@extend %teaser-title
 		color: $white
-		font-size: em(22px)
+		font-size: em(24px)
 		line-height: 1.12
 		+respond-min($break-tablet-min)
-			font-size: em(26px)
+			font-size: em(28px)
 		+respond-min($break-desktop-min)
 			font-size: em(40px)
 			line-height: 1.28
@@ -88,7 +88,7 @@
 		@extend %teaser-kicker-topic
 		margin: 0
 		&:after
-			content: " -"
+			content: " –" // attention: mdash
 	&__heading
 		@extend %teaser-heading
 		margin: 0
@@ -125,7 +125,7 @@
 			float: left
 			margin-top: remify(5px)
 			&:after
-				content: "-"
+				content: "–" // attention: mdash
 				margin: 0 .25em
 		&__kicker
 			margin-bottom: remify(10px)
