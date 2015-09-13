@@ -8,6 +8,7 @@
 {% endif %}
 
 {% block layout %}teaser-topic-main{% endblock %}
+{% block teaser_journalistic_format %}{% endblock %}
 
 {% block teaser_link %}
 	{% if readmore_url %}
