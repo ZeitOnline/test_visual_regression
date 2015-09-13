@@ -473,12 +473,12 @@ def test_action_url_should_be_created_correctly(
     poster = _create_poster(monkeypatch)
     assert poster._action_url(action, path) == service
 
-@pytest.mark.parametrize("action" , ['comment', 'report'])
+@pytest.mark.parametrize("action", ['comment', 'report'])
 def test_post_comment_should_set_lock(application, action):
     request = mock.Mock()
     request.session = {'user': {'name': 'foo'}}
     pc = zeit.web.core.view_comment.PostComment(mock.Mock(), request)
-    pc.lock_duration = datetime.timedelta(0,0.5)
+    pc.lock_duration = datetime.timedelta(0, 0.5)
     locker = pc.handle_comment_locking
 
     locker(request, action)
@@ -494,7 +494,7 @@ def test_post_comment_should_set_lock(application, action):
     assert request.session['lock_commenting'] == True
 
 
-@pytest.mark.parametrize("action" , ['recommend', 'promote', 'demote'])
+@pytest.mark.parametrize("action", ['recommend', 'promote', 'demote'])
 def test_post_comment_should_not_set_lock(application, action):
     request = mock.Mock()
     request.session = {'user': {'name': 'foo'}}

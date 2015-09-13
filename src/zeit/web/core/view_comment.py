@@ -55,7 +55,7 @@ class PostComment(zeit.web.core.view.Base):
         zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         self.community_host = zwcs.get('community_host')
         self.status = []
-        self.lock_duration = datetime.timedelta(0,20)
+        self.lock_duration = datetime.timedelta(0, 20)
 
     def __call__(self):
         self.request.response.cache_expires(0)
