@@ -210,6 +210,9 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
             return false;
         }
 
+        // avoid repeated submits
+        $form.find( '.button' ).prop( 'disabled', true );
+
         var data = {
             'ajax':      'true',
             'action':    'comment',
@@ -240,6 +243,9 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
 
                         error.addClass( 'comments__error--visible' );
                         input.addClass( 'comments__input--error' );
+
+                        // enable submit button again
+                        $form.find( '.button' ).prop( 'disabled', false );
                     } else {
                         window.location.href = response.location;
                     }

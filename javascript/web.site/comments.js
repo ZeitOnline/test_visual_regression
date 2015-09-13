@@ -312,6 +312,9 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
             return false;
         }
 
+        // avoid repeated submits
+        $form.find( '.button' ).prop( 'disabled', true );
+
         var data = {
             'ajax':      'true',
             'action':    'comment',
@@ -342,6 +345,9 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
                         error.addClass( 'comment-form__error--visible' );
                         input.addClass( 'error' );
+
+                        // enable submit button again
+                        $form.find( '.button' ).prop( 'disabled', true );
                     } else {
                         window.location.href = response.location;
                     }
