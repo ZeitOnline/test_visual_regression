@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2084: Add comment cache invalidation
 
+- ZON-2010: Goodbye, Beta badges & links
+
 - MAINT: Polish buzzboard, square teaser and video icon
 
 - HOTFIX: Make community moderation's 'Redaktionsempfehlung' work
