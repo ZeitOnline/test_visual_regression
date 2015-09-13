@@ -1,8 +1,22 @@
 Change log for zeit.web
 =======================
 
-1.71 (unreleased)
+1.72 (unreleased)
 -----------------
+
+- HOTFIX: Make zeit.web modules work with `select_modules` API
+
+
+1.71.1 (2015-09-13)
+-------------------
+
+- HOTFIX: Make legacy areas work with `select_modules` API
+
+
+1.71 (2015-09-13)
+-----------------
+
+- ZON-2126: Debounce certain action on comment interface
 
 - ZON-2215: Display article images according to `display_mode` of their layout
 
@@ -17,6 +31,8 @@ Change log for zeit.web
 - MAINT: Polish search submit button, breadcrumb and metadata separator
 
 - ZON-2203: Add static cardstack parameter on CPs
+
+- ZON-2090: Rearrange sources on article meta line
 
 - ZON-2118: First stab at teaser for storystreams on CPs
 
