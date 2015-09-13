@@ -4,7 +4,11 @@ Change log for zeit.web
 1.71 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Position of adtile #2
+
+- FIX: Defected keyword page header
+
+- FIX: Wrong font in advertorial footer
 
 
 1.70 (2015-09-13)
