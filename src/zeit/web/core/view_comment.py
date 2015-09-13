@@ -318,7 +318,6 @@ class PostComment(zeit.web.core.view.Base):
             unique_id))
 
         # invalidate comment thread to get the newly created comment section ID
-        # only the thread of the current app server gets invalidated here
         invalidate_comment_thread(unique_id)
 
         return zeit.web.core.comments.get_cacheable_thread(unique_id)
