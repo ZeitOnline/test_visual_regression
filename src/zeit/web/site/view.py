@@ -56,6 +56,11 @@ class Base(zeit.web.core.view.Base):
                 target_url = "{}/seite-{}".format(self.content_url, page_param)
                 raise pyramid.httpexceptions.HTTPMovedPermanently(
                     location=target_url)
+        if self.request.params.get('base_date'):
+            target_url = zeit.web.core.template.remove_get_params(
+                self.request.url, 'base_date')
+            raise pyramid.httpexceptions.HTTPMovedPermanently(
+                location=target_url)
 
     def banner_toggles(self, name):
         cases = {
