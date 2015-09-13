@@ -25,6 +25,13 @@ def tag_by_url_value(tag_url_value):
     return _whitelist_by_url_value().get(tag_url_value, None)
 
 
+@beaker.cache.cache_region('short_term', 'whitelist')
+def tag_by_uuid_value(tag_uuid_value):
+    whitelist = zope.component.getUtility(
+        zeit.cms.tagging.interfaces.IWhitelist)
+    return whitelist[tag_uuid_value]
+
+
 def fix_misrepresented_latin(val):
     """Fix misrepresentation of latin-1 chars in unicode strings."""
 

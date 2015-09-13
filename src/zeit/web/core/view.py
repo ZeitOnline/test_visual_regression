@@ -402,8 +402,17 @@ class Base(object):
 
     @zeit.web.reify
     def ranked_tags(self):
-        return sorted([t for t in self.context.keywords if t.label],
-                      key=lambda t: not t.url_value)
+        sorted_list = sorted([t for t in self.context.keywords if t.label],
+                             key=lambda t: not t.url_value)
+        try:
+            for keyword in sorted_list:
+                if keyword.url_value == '':
+                    uuid = keyword.uniqueId.replace('tag://', '')
+                    keyword.url_value = zeit.web.core.utils.tag_by_uuid_value(
+                        uuid).url_value
+        except:
+            pass
+        return sorted_list
 
     @zeit.web.reify
     def ranked_tags_list(self):
