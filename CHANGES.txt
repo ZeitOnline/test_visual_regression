@@ -4,6 +4,8 @@ Change log for zeit.web
 1.71 (unreleased)
 -----------------
 
+- MAINT: Polish search submit button, breadcrumb and metadata separator
+
 - ZON-2203: Add static cardstack parameter on CPs
 
 
