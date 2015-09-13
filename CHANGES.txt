@@ -4,7 +4,14 @@ Change log for zeit.web
 1.71 (unreleased)
 -----------------
 
+
 - ZON-2069: Refactor topic teaser
+
+- FIX: Position of adtile #2
+
+- FIX: Defected keyword page header
+
+- FIX: Wrong font in advertorial footer
 
 - MAINT: Polish search submit button, breadcrumb and metadata separator
 
