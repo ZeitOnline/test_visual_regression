@@ -1,10 +1,26 @@
 Change log for zeit.web
 =======================
 
-1.70 (unreleased)
+1.71 (unreleased)
 -----------------
 
 - ZON-2215: Display article images according to `display_mode` of their layout
+
+- FIX: Position of adtile #2
+
+- FIX: Defected keyword page header
+
+- FIX: Wrong font in advertorial footer
+
+- MAINT: Polish search submit button, breadcrumb and metadata separator
+
+- ZON-2203: Add static cardstack parameter on CPs
+
+
+1.70 (2015-09-13)
+-----------------
+
+- FIX: Decode sso cookie from API
 
 
 1.69 (2015-09-12)
@@ -18,9 +34,9 @@ Change log for zeit.web
 
 - ZON-2177: Rework Meetrics structure for teasers
 
-- QUICKFIX: Fix images to endure new fallback image URL
-
 - ZON-2123: Show topic links on homepage exclusively
+
+- QUICKFIX: Fix images to endure new fallback image URL
 
 - QUCIKFIX: Don't show nextread on video pages
 
