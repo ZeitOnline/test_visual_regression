@@ -4,6 +4,8 @@ Change log for zeit.web
 1.72 (unreleased)
 -----------------
 
+- ZON-2070: Tracking follow up
+
 - MAINT: Polish buzzboard, square teaser and video icon
 
 - HOTFIX: Make community moderation's 'Redaktionsempfehlung' work
