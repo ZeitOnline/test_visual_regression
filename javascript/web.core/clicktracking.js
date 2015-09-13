@@ -58,7 +58,7 @@ define( [ 'jquery' ], function( $ ) {
             return formatTrackingData( data );
         },
         /**
-         * track links with data-id attribute that contains the complete webtrekk id
+         * track links with data-id attribute that contains the complete webtrekk id without href
          * @param  {object} $element jQuery collection with the link that was clicked
          * @return {string}          formatted linkId-string for webtrekk call
          */
@@ -68,6 +68,20 @@ define( [ 'jquery' ], function( $ ) {
                 $element.data( 'id' ),
                 $element.attr( 'href' ) // url
             ];
+            return formatTrackingData( data );
+        },
+        /**
+         * track links with data-tracking attribute that contains the complete webtrekk id plus href
+         * @param  {object} $element jQuery collection with the link that was clicked
+         * @return {string}          formatted linkId-string for webtrekk call
+         */
+        useDataTracking: function( $element ) {
+            var trackingData = $element.data( 'tracking' ).split( '|' ),
+                data = [
+                    getBreakpoint(),
+                    trackingData[0],
+                    trackingData[1] // url
+                ];
             return formatTrackingData( data );
         },
         /**
@@ -313,6 +327,12 @@ define( [ 'jquery' ], function( $ ) {
                     }, clickTrack );
                 }
             }
+
+            // exceptions and extra cases
+            $( '*[data-tracking]' ).on( 'click', {
+                funcName: 'useDataTracking',
+                debug: debugMode
+            }, clickTrack );
 
             registerGlobalTrackingMessageEndpointForVideoPlayer();
         }
