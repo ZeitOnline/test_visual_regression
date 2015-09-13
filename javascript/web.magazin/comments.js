@@ -6,7 +6,7 @@
  * comments.js: module for comments
  * @module comments
  */
-define([ 'jquery', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], function( $, Modernizr ) {
+define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/tabs' ], function( $, Velocity, Modernizr ) {
 
     var $socialServices = $('#js-social-services'),
         $comments = $('#js-comments'),
