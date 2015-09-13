@@ -313,44 +313,38 @@ class Storystream(Centerpage):
         'count': None,
         'oldest_date': None,
         'latest_date': None
-        }
+    }
+
+    countable_atom_types = [zeit.content.cp.interfaces.ITeaserBlock]
 
     def __init__(self, *args, **kwargs):
         super(Centerpage, self).__init__(*args, **kwargs)
         self.prepare_atom_meta()
 
     def prepare_atom_meta(self):
-        regions = self.regions
-        if (len(regions) == 0):
-            return None
-        last_region = self.regions[len(regions)-1]
-
-        areas = last_region.values()
-        if (len(areas) == 0):
-            return None
-        area = areas[0]
-
-        modules = area.values()
-        if (len(modules) == 0):
-            return None
 
         atom_counter = 0
         oldest_atom = None
         latest_atom = None
 
-        for module in modules:
+        regions = self.regions
+        for region in regions:
+            areas = region.values()
+            for area in areas:
+                for module in area.select_modules(*self.countable_atom_types):
+                    atom_counter += 1
 
-            if module.type != 'markup':
-                atom_counter += 1
+                    # OPTIMIZE: this is redundant (also done inside
+                    # the template). Maybe we should store the teaser
+                    # object into the module?
+                    teaser = zeit.web.core.template.first_child(module)
+                    if ((oldest_atom is None) or
+                            (oldest_atom > teaser.tldr_date)):
+                        oldest_atom = teaser.tldr_date
 
-                # OPTIMIZE: this is redundant (also done inside the template).
-                # Maybe we should store the teaser object into the mdule?
-                teaser = zeit.web.core.template.first_child(module)
-                if oldest_atom is None or oldest_atom > teaser.tldr_date:
-                    oldest_atom = teaser.tldr_date
-
-                if latest_atom is None or latest_atom < teaser.tldr_date:
-                    latest_atom = teaser.tldr_date
+                    if ((latest_atom is None) or
+                            (latest_atom < teaser.tldr_date)):
+                        latest_atom = teaser.tldr_date
 
         self.atom_meta['count'] = atom_counter
         self.atom_meta['oldest_date'] = oldest_atom

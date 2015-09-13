@@ -1,0 +1,116 @@
+$teaser-storystream-background-color: #41434d
+$teaser-storystream-line-color: $zon_mid_grey
+$teaser-storystream-left-inner-mobile: 15px
+$teaser-storystream-left-outer-mobile: 15px
+
+.teaser-storystream
+	background-color: $teaser-storystream-background-color
+	+font-smoothing
+	&__media
+		background-color: $zon-trout // placeholder for image
+		height: 0
+		margin: 0
+		overflow: hidden
+		padding-bottom: 100% / 16 * 9 // image variant 'wide'
+		position: relative
+		//+respond-min($break-tablet-min)
+		//	padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+	&__media-container
+		+teaser-image-dark-overlay($angle: 0deg)
+
+	&__headercontent
+		+teaser-image-text-shadow
+		border-left: 1px $teaser-storystream-line-color solid
+		bottom: 0
+		margin: remify(20px $teaser-storystream-left-outer-mobile 0)
+		padding: remify(0 $teaser-storystream-left-inner-mobile 13px)
+		position: absolute
+		&:before
+			color: $color-body-bg
+			content: '\2B24' // ⬤ = Black large circle
+			display: block
+			font-size: remify(9px)
+			left: 0
+			margin: remify(-2px 0 0 -6px)
+			position: absolute
+			-webkit-text-stroke: 2px $teaser-storystream-line-color
+			text-shadow: -1px -1px 0 $teaser-storystream-line-color, 1px -1px 0 $teaser-storystream-line-color, -1px 1px 0 $teaser-storystream-line-color, 1px 1px 0 $teaser-storystream-line-color
+
+	&__link
+		display: block
+		margin-top: -7px
+
+	&__kicker
+		color: $zon_lighter_grey
+		font-family: $font-tabletgothic
+		font-size: remify(16px)
+		line-height: remify(18px)
+		letter-spacing: $zon-letter-spacing-m
+
+	&__title
+		color: $white
+		font-family: $font-franziska
+		font-size: remify(28px)
+		font-style: italic
+		line-height: remify(34px)
+		margin: 0
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__content
+		border-left: 1px $teaser-storystream-line-color solid
+		font-family: $font-tabletgothic
+		margin: remify(0 15px)
+		padding: remify(20px 15px 20px)
+
+	&__list
+		list-style: none
+		padding: 0
+		li
+			margin: .75em 0
+			padding: 0
+			position: relative
+			color: #d6d6d6
+			font-size: remify(16px)
+			line-height: remify(20px)
+			letter-spacing: $zon-letter-spacing-s
+			&:before
+				background-color: $teaser-storystream-line-color
+				border-radius: 50%
+				content: ""
+				height: remify(9px)
+				left: remify(-20px)
+				position: absolute
+				top: .3em
+				width: remify(9px)
+
+	&__update
+		color: $zon_light_grey
+		display: block
+		font-size: remify(13px)
+		letter-spacing: $zon-letter-spacing-s
+		line-height: remify(16px)
+		// make the text align nicely beside the icon if it linebreaks on small screens
+		padding: remify(0 0 16px 20px)
+		position: relative
+
+	&__updateicon
+		color: inherit
+		height: remify(13px)
+		margin: remify(0 0 0 -20px)
+		position: absolute
+		width: remify(13px)
+
+	// TODO: Standard-CTA-Dark benutzen (ggf vorher anlegen)
+	&__button
+		background-color: rgba(0, 0, 0, 0.2)
+		border-color: #999
+		display: inline-block
+		vertical-align: top
+		+link
+			color: #eee
+		&:hover
+			background-color: rgba(0, 0, 0, 0.5)
+			border-color: #ccc
+			color: #fff
