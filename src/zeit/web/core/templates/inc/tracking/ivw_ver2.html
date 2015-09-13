@@ -6,7 +6,7 @@
         IVW = "http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{ view.banner_channel }}",
         iam_data = {
             "st" : "", // dynamicallly set mobile|desktop
-            "cp" : "{% if view.ressort %}{{ view.ressort }}/{% endif %}{% if view.sub_ressort %}{{ view.sub_ressort }}/{% endif %}bild-text",
+            "cp" : "{{ view.ressort if view.ressort else 'administratives' }}/{% if view.sub_ressort %}{{ view.sub_ressort }}/{% endif %}bild-text",
             "sv" : "{% if view.is_hp %}ke{% else %}i2{% endif %}", // 'mo' on mobile, see below
             "co" : "URL: {{ request.path_info }}"
         };
