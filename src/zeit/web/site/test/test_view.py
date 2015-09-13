@@ -82,3 +82,12 @@ def test_keyword_pages_should_send_redirect(testserver, testbrowser):
         allow_redirects=False)
     assert resp.status_code == 301
     assert resp.headers['Location'] == '%s/thema/xy' % testserver.url
+
+
+def test_commentstart_param_should_trigger_redirect(testserver):
+    resp = requests.get(
+        '%s/zeit-online/article/zeit?commentstart=2' % testserver.url,
+        allow_redirects=False)
+    assert resp.status_code == 301
+    assert (resp.headers['location'] == (
+            '%s/zeit-online/article/zeit' % testserver.url))

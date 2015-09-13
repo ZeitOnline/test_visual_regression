@@ -8,7 +8,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 import lxml.etree
 import mock
 import pytest
-import requests
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.web.site.view_article
@@ -763,12 +762,3 @@ def test_article_should_have_large_facebook_and_twitter_images(testbrowser):
         'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
     assert doc.xpath('//meta[@name="twitter:image"]/@content')[0].endswith(
         'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
-
-
-def test_commentstart_param_should_trigger_redirect(testserver):
-    resp = requests.get(
-        '%s/zeit-online/article/zeit?commentstart=2' % testserver.url,
-        allow_redirects=False)
-    assert resp.status_code == 301
-    assert (resp.headers['location'] == (
-            '%s/zeit-online/article/zeit' % testserver.url))
