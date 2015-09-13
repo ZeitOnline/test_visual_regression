@@ -17,7 +17,7 @@ $teaser-storystream-left-outer-desktop: 20px
 		padding-bottom: 100% / 16 * 9 // image variant 'wide'
 		position: relative
 	&__media-container
-		+teaser-image-dark-overlay($angle: 0deg)
+		+teaser-image-dark-overlay($color: rgba(0, 0, 0, 0.2), $angle: 0deg)
 
 	&__headercontent
 		+teaser-image-text-shadow
@@ -133,8 +133,7 @@ $teaser-storystream-left-outer-desktop: 20px
 			.teaser-storystream__content
 				position: relative
 				margin-left: remify($teaser-storystream-left-outer-mobile)
-				padding-left: remify($teaser-storystream-left-inner-mobile)
-				padding-bottom: 0
+				padding: remify(10px $teaser-storystream-left-inner-mobile 0)
 				margin-bottom: remify(80px)
 			.teaser-storystream__list
 				margin: 0
