@@ -91,3 +91,21 @@ def test_commentstart_param_should_trigger_redirect(testserver):
     assert resp.status_code == 301
     assert (resp.headers['location'] == (
             '%s/zeit-online/article/zeit' % testserver.url))
+
+
+def test_page_all_get_param_should_trigger_redirect(testserver):
+    resp = requests.get(
+        '%s/zeit-online/article/zeit?page=all' % testserver.url,
+        allow_redirects=False)
+    assert resp.status_code == 301
+    assert (resp.headers['location'] == (
+            '%s/zeit-online/article/zeit/komplettansicht' % testserver.url))
+
+
+def test_page_number_get_param_should_trigger_redirect(testserver):
+    resp = requests.get(
+        '%s/zeit-online/article/zeit?page=3' % testserver.url,
+        allow_redirects=False)
+    assert resp.status_code == 301
+    assert (resp.headers['location'] == (
+            '%s/zeit-online/article/zeit/seite-3' % testserver.url))

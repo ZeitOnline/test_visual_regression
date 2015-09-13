@@ -43,6 +43,19 @@ class Base(zeit.web.core.view.Base):
                 self.request.url, 'commentstart')
             raise pyramid.httpexceptions.HTTPMovedPermanently(
                 location=target_url)
+        page_param = self.request.params.get('page')
+        if page_param:
+            if page_param == 'all':
+                target_url = "{}/komplettansicht".format(self.content_url)
+                raise pyramid.httpexceptions.HTTPMovedPermanently(
+                    location=target_url)
+            else:
+                # TODO: Once sitemaps are rendered through zeit.web, we have to
+                # make ensure, that page parameters are preserved for that kind
+                # of centerpages.
+                target_url = "{}/seite-{}".format(self.content_url, page_param)
+                raise pyramid.httpexceptions.HTTPMovedPermanently(
+                    location=target_url)
 
     def banner_toggles(self, name):
         cases = {
