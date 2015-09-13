@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-1.70 (unreleased)
+1.71 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+1.70 (2015-09-13)
 -----------------
 
 - Nothing changed yet.
@@ -18,9 +24,11 @@ Change log for zeit.web
 
 - ZON-2177: Rework Meetrics structure for teasers
 
+- ZON-2123: Show topic links on homepage exclusively
+
 - QUICKFIX: Fix images to endure new fallback image URL
 
-- ZON-2123: Show topic links on homepage exclusively
+- FIX: Decode sso cookie from API
 
 - QUCIKFIX: Don't show nextread on video pages
 
