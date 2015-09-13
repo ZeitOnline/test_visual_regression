@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - MAINT: Polish buzzboard and video icon
 
+
+1.71.1 (2015-09-13)
+-------------------
+
 - HOTFIX: Make legacy areas work with `select_modules` API
 
 
