@@ -13,7 +13,7 @@
             {%- elif obj.layout.display_mode == 'float' -%}
                 article__item article__item--marginalia
             {%- elif obj.layout.display_mode == 'column-width' -%}
-                article__item article__item
+                article__item
             {%- endif -%}
             ">
             <div class="scaled-image">
