@@ -4,6 +4,8 @@ import logging
 import md5
 import urllib
 import urlparse
+import datetime
+import time
 
 import beaker.cache
 import lxml
@@ -33,10 +35,13 @@ class PostComment(zeit.web.core.view.Base):
     """
 
     def __init__(self, context, request, path=None):
+
         if not request.authenticated_userid:
             raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
                 explanation='Please log in in order to comment')
+
+        self.handle_comment_locking(request)
 
         if request.session.get('user') and not (
                 request.session['user'].get('name')):
@@ -56,6 +61,23 @@ class PostComment(zeit.web.core.view.Base):
     def __call__(self):
         self.request.response.cache_expires(0)
         return {}
+
+    def handle_comment_locking(self, request):
+        if request.session.get('lock_commenting'):
+            ts = request.session['lock_commenting_ts']
+            if datetime.datetime.utcnow()-ts > (
+                    datetime.timedelta(0,20)):
+                log.debug("remove comment lock!")
+                request.session['lock_commenting'] = False
+                request.session['lock_commenting_ts'] = (
+                    datetime.datetime.utcnow())
+            else:
+                log.debug("commenting is locked!")
+                raise pyramid.httpexceptions.HTTPForbidden()
+
+        log.debug("set comment lock!")
+        request.session['lock_commenting'] = True
+        request.session['lock_commenting_ts'] = datetime.datetime.utcnow()
 
     def post_comment(self):
         request = self.request
@@ -190,6 +212,11 @@ class PostComment(zeit.web.core.view.Base):
             elif response.status_code == 303:
                 url = urlparse.urlparse(response.headers.get('location'))
                 self.new_cid = url[5][4:]
+                request.session['last_cid'] = self.new_cid
+                request.session['last_commented_uniqueId'] = (
+                    self.context.uniqueId)
+                request.session['last_commented_time'] = (
+                    datetime.datetime.utcnow())
 
             return {
                 'request': {
