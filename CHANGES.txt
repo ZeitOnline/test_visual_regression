@@ -4,6 +4,8 @@ Change log for zeit.web
 1.72 (unreleased)
 -----------------
 
+- ZON-2084: Add comment cache invalidation
+
 - ZON-2010: Goodbye, Beta badges & links
 
 - MAINT: Polish buzzboard, square teaser and video icon
