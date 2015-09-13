@@ -78,6 +78,16 @@ class LegacyArea(collections.OrderedDict, zeit.content.cp.area.AreaFactory):
     def __repr__(self):
         return object.__repr__(self)
 
+    # XXX This is really crude, but since these Legacy-classes throw away
+    # their vivi-side objects, we can't get to the interfaces anymore,
+    # so a full re-implementation is just plain impossible.
+    # So we hard-code the only use-case that this should ever be called for,
+    # which is ITeaseredContent.
+    def select_modules(self, *interfaces):
+        for module in zeit.content.cp.interfaces.IRenderedArea(self).values():
+            if module.type == 'teaser':
+                yield module
+
 
 @zope.interface.implementer(zeit.content.cp.interfaces.IRegion)
 class LegacyRegion(LegacyArea, zeit.content.cp.area.RegionFactory):
