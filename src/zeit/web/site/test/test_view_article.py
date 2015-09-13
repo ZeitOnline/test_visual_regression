@@ -762,3 +762,10 @@ def test_article_should_have_large_facebook_and_twitter_images(testbrowser):
         'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
     assert doc.xpath('//meta[@name="twitter:image"]/@content')[0].endswith(
         'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+
+
+def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    main_image = browser.cssselect('.article-body img')[0]
+    figure = main_image.xpath('./ancestor::figure')[0]
+    assert 'article__item--wide' in figure.get('class')
