@@ -406,7 +406,7 @@ class Base(object):
                              key=lambda t: not t.url_value)
         try:
             for keyword in sorted_list:
-                if keyword.url_value == '':
+                if not keyword.url_value:
                     uuid = keyword.uniqueId.replace('tag://', '')
                     keyword.url_value = zeit.web.core.utils.tag_by_uuid_value(
                         uuid).url_value
