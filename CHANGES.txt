@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - ZON-2217: Repair missing keyword links
 
+- QUICKFIX: Add test for missing keyword links
+
 
 1.71.1 (2015-09-13)
 -------------------

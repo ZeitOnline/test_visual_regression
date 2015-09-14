@@ -846,3 +846,9 @@ def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
     main_image = browser.cssselect('.article-body img')[0]
     figure = main_image.xpath('./ancestor::figure')[0]
     assert 'article__item--wide' in figure.get('class')
+
+
+def test_missing_keyword_links_are_replaced(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    keyword = browser.cssselect('.article-tags__link')[5]
+    assert keyword.attrib['href'].endswith('/thema/wein')
