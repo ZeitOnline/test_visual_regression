@@ -6,6 +6,7 @@ import re
 import pyramid.httpexceptions
 import zope.component
 
+import zeit.content.article.interfaces
 import zeit.content.article.edit.interfaces
 import zeit.content.author.interfaces
 import zeit.magazin.interfaces
@@ -206,6 +207,15 @@ class Article(zeit.web.core.view.Content):
                     ',', ';').replace(' ', '')
             except(AttributeError):
                 return ""
+
+    @zeit.web.reify
+    def is_breaking(self):
+        return zeit.content.article.interfaces.IBreakingNews(
+            self.context).is_breaking
+
+    @zeit.web.reify
+    def is_push_news(self):
+        return self.context.push_news
 
     @property
     def copyrights(self):

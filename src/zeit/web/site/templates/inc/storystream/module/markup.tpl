@@ -1,7 +1,7 @@
 {% set blockname = 'storystream-markup' %}
-{% if module_loop.first %}
+{% if region_loop.index <= 2 and area_loop.first and module_loop.first %}
 	{% set blockname_modifier = 'first' %}
-{% elif module_loop.last %}
+{% elif region_loop.last and area_loop.last and module_loop.last %}
 	{% set blockname_modifier = 'last' %}
 {% endif %}
 <div class="{{ blockname | with_mods(blockname_modifier) }}">

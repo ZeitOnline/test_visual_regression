@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-1.72 (unreleased)
------------------
+2.1 (unreleased)
+----------------
+
+- Nothing changed yet.
+
+
+2.0 (2015-09-14)
+----------------
+
+- ZON-2070: Tracking follow up
 
 - ZON-1602: Integrate Print and PDF
 
