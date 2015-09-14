@@ -3,6 +3,7 @@ import logging
 import math
 
 import pysolr
+import zc.iso8601.parse
 import zope.component
 import zope.schema
 
@@ -24,19 +25,24 @@ log = logging.getLogger(__name__)
 
 FIELDS = ' '.join([
     'date_last_published',
+    'date_last_published_semantic',
+    'date_first_released',
     'image-base-id',
     'last-semantic-change',
     'product_id',
+    'serie',
     'supertitle',
     'title',
     'uniqueId',
+    'teaser_text',
     'type'
 ])
 
 
 FIELD_MAP = [
     (u'supertitle', u'teaserSupertitle'),
-    (u'title', u'teaserTitle')
+    (u'title', u'teaserTitle'),
+    (u'teaser_text', u'teaserText'),
 ]
 
 
@@ -127,6 +133,34 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                 doc[target] = doc[source]
             except KeyError:
                 continue
+
+        lsp = doc.get('date_last_published_semantic')
+        if lsp:
+            try:
+                doc['date_last_published_semantic'] = (
+                    zc.iso8601.parse.datetimetz(lsp))
+            except:
+                doc['date_last_published_semantic'] = None
+        else:
+            doc['date_last_published_semantic'] = None
+            first = doc.get('date_first_released')
+            if first:
+                try:
+                    doc['date_first_released'] = (
+                        zc.iso8601.parse.datetimetz(lsp))
+                except:
+                    doc['date_first_released'] = None
+            else:
+                doc['date_first_released'] = None
+
+        serie = doc.get('serie')
+        if serie:
+            source = zeit.cms.content.interfaces.ICommonMetadata[
+                'serie'].source.factory
+            doc['serie'] = source.values.get(serie, serie)
+        else:
+            doc['serie'] = None
+
         return doc
 
     @property
