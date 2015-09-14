@@ -4,7 +4,8 @@ Change log for zeit.web
 2.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- PERF: Re-Enable LazyProxy for ranking areas and try to answer everything
+  from the solr result, without resolving ICMSContent
 
 
 2.0 (2015-09-14)

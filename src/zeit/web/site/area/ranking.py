@@ -24,6 +24,7 @@ log = logging.getLogger(__name__)
 
 FIELDS = ' '.join([
     'date_last_published',
+    'image-base-id',
     'last-semantic-change',
     'product_id',
     'supertitle',
