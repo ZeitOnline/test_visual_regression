@@ -27,7 +27,7 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
 
     assert len(html('.main_nav')) == 1, 'just one .main_nav should be present'
 
-    assert len(html('.main_nav > div')) == 8, 'seven divs within .main_nav'
+    assert len(html('.main_nav > div')) == 7, 'seven divs within .main_nav'
 
     assert len(html('.main_nav > div.logo_bar >'
                     'h1.logo_bar__image')) == 1, 'just one .logo_bar__image'
