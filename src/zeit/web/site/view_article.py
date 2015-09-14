@@ -80,6 +80,18 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return 'index,follow,noodp,noydir,noarchive'
 
     @zeit.web.reify
+    def pdf_link(self):
+        server = 'http://pdf.zeit.de/'
+        path = '/'.join(self.request.traversed)
+        return server + path + '.pdf'
+
+    @zeit.web.reify
+    def print_link(self):
+        url = self.content_url
+        path = '/komplettansicht?print=true'
+        return url + path
+
+    @zeit.web.reify
     def breadcrumbs(self):
         breadcrumbs = super(Article, self).breadcrumbs
         # News

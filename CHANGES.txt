@@ -4,15 +4,15 @@ Change log for zeit.web
 2.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-1602: Integrate Print and PDF
+
+- ZON-2219: Fix image size in force-mobile
 
 
 2.0 (2015-09-14)
 ----------------
 
 - ZON-2070: Tracking follow up
-
-- ZON-2219: Fix image size in force-mobile
 
 - ZON-2048: Sort'n' paginate gallery area on CPs according to photo CP
 

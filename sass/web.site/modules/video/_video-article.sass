@@ -28,11 +28,16 @@
 		color: $zon_mid_grey
 		margin-bottom: 0
 
-		&__link
+		.sharing-menu__title
 			color: inherit
 			white-space: nowrap
 			+on-interaction
 				color: $zon_light_grey
+
+		// sharing menu on dark background
+		.sharing-menu--active .sharing-menu__title
+			color: $zon_light_grey
+
 
 	// TODO: ad-div should have ".ad-desktop--7-on-video" and then we could
 	// apply the styles to this class.
