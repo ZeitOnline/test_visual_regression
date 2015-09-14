@@ -1,8 +1,17 @@
 Change log for zeit.web
 =======================
 
-2.1 (unreleased)
+2.2 (unreleased)
 ----------------
+
+- Nothing changed yet.
+
+
+2.1 (2015-09-14)
+----------------
+
+- PERF: Re-Enable LazyProxy for ranking areas and try to answer everything
+  from the solr result, without resolving ICMSContent
 
 - ZON-1602: Integrate Print and PDF
 
