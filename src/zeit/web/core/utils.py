@@ -350,3 +350,12 @@ class LazyProxy(object):
         if not image_ids:
             raise AttributeError('image')
         return zeit.cms.interfaces.ICMSContent(image_ids[0])
+
+    # Proxy zeit.content.link.interfaces.ILink.blog.
+    # (Note: templates try to access this directly without adapting first.)
+    @property
+    def blog(self):
+        context = self.__proxy__
+        if context.get('type') != 'link':
+            return False
+        raise AttributeError('blog')
