@@ -15,15 +15,22 @@ define( [ 'jquery' ], function( $ ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         main: function( $element ) {
+
             // in case we already have a complete ID, we do not need to calculate it
             if ( $element.data( 'id' ) ) {
                 return this.useDataId( $element );
             }
 
             // is this a link inside an article text? track this specific case.
-            var $page = $element.closest( '.article-page' );
+            var $page = $element.closest( '.main--article .article-page' );
             if ( $page.length ) {
                 return this.linkInArticleContent( $element, $page );
+            }
+
+            // is this a link inside a gallery? track this specific case.
+            var $gallery = $element.closest( '.main--gallery .article-page' );
+            if ( $gallery.length ) {
+                return this.linkInGalleryContent( $element, $gallery );
             }
 
             var data = [],
@@ -51,7 +58,7 @@ define( [ 'jquery' ], function( $ ) {
             return formatTrackingData( data );
         },
         /**
-         * track links with data-id attribute that contains the complete webtrekk id
+         * track links with data-id attribute that contains the complete webtrekk id without href
          * @param  {object} $element jQuery collection with the link that was clicked
          * @return {string}          formatted linkId-string for webtrekk call
          */
@@ -61,6 +68,20 @@ define( [ 'jquery' ], function( $ ) {
                 $element.data( 'id' ),
                 $element.attr( 'href' ) // url
             ];
+            return formatTrackingData( data );
+        },
+        /**
+         * track links with data-tracking attribute that contains the complete webtrekk id plus href
+         * @param  {object} $element jQuery collection with the link that was clicked
+         * @return {string}          formatted linkId-string for webtrekk call
+         */
+        useDataTracking: function( $element ) {
+            var trackingData = $element.data( 'tracking' ).split( '|' ),
+                data = [
+                    getBreakpoint(),
+                    trackingData[0],
+                    trackingData[1] // url
+                ];
             return formatTrackingData( data );
         },
         /**
@@ -114,6 +135,20 @@ define( [ 'jquery' ], function( $ ) {
                     $element.attr( 'href' ) // url
                 ];
 
+            return formatTrackingData( data );
+        },
+
+        linkInGalleryContent: function( $element, $gallery ) {
+            var imgnumber = $gallery.find( '.bx-pager' ).text().split( ' / ' )[0],
+                data = [
+                    getBreakpoint(),
+                    'gallery', // [verortung]
+                    $element[ 0 ].className.indexOf( 'overlay' ) < 0 ? '1' : '2',
+                    $element[ 0 ].className.indexOf( 'links' ) < 0 ? '2' : '1', // [spalte] leer lassen
+                    imgnumber, // [subreihe] leer lassen
+                    sanitizeString( $element.text() ), // [bezeichner]
+                    window.location.href // url
+                ];
             return formatTrackingData( data );
         }
     },
@@ -267,7 +302,8 @@ define( [ 'jquery' ], function( $ ) {
                          '.section-heading',
                          '.snapshot__media',
                          '#servicebox',
-                         '.print-box'
+                         '.print-box',
+                         '.breaking-news-banner'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],
@@ -276,7 +312,7 @@ define( [ 'jquery' ], function( $ ) {
                         'a:not([data-wt-click])'
                     ]
                 },
-                debugMode = document.location.search.indexOf( '?webtrekk-clicktracking-debug' ) === 0;
+                debugMode = document.location.search.indexOf( 'webtrekk-clicktracking-debug' ) > -1;
 
             // The key name is used for calling the corresponding function in trackElement
             for ( var key in trackingLinks ) {
@@ -291,6 +327,12 @@ define( [ 'jquery' ], function( $ ) {
                     }, clickTrack );
                 }
             }
+
+            // exceptions and extra cases
+            $( '*[data-tracking]' ).on( 'click', {
+                funcName: 'useDataTracking',
+                debug: debugMode
+            }, clickTrack );
 
             registerGlobalTrackingMessageEndpointForVideoPlayer();
         }
