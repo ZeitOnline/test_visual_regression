@@ -4,7 +4,7 @@ Change log for zeit.web
 2.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- MAINT: Make host for image urls configurable
 
 
 2.1 (2015-09-14)
