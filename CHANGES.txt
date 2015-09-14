@@ -7,6 +7,10 @@ Change log for zeit.web
 - PERF: Re-Enable LazyProxy for ranking areas and try to answer everything
   from the solr result, without resolving ICMSContent
 
+- ZON-1602: Integrate Print and PDF
+
+- ZON-2219: Fix image size in force-mobile
+
 
 2.0 (2015-09-14)
 ----------------
