@@ -1,0 +1,182 @@
+$teaser-storystream-background-color: #41434d
+$teaser-storystream-line-color: $zon_mid_grey
+$teaser-storystream-left-inner-mobile: 15px
+$teaser-storystream-left-outer-mobile: 15px
+$teaser-storystream-left-inner-tablet: 42px
+$teaser-storystream-left-outer-tablet: 42px
+$teaser-storystream-left-outer-desktop: 20px
+
+.teaser-storystream
+	background-color: $teaser-storystream-background-color
+	+font-smoothing
+	&__media
+		background-color: $zon-trout // placeholder for image
+		height: 0
+		margin: 0
+		overflow: hidden
+		padding-bottom: 100% / 16 * 9 // image variant 'wide'
+		position: relative
+	&__media-container
+		+teaser-image-dark-overlay($color: rgba(0, 0, 0, 0.2), $angle: 0deg)
+
+	&__headercontent
+		+teaser-image-text-shadow
+		border-left: 1px $teaser-storystream-line-color solid
+		bottom: 0
+		margin: remify(20px $teaser-storystream-left-outer-mobile 0)
+		padding: remify(0 $teaser-storystream-left-inner-mobile 13px)
+		position: absolute
+		&:before
+			color: $color-body-bg
+			content: '\2B24' // ⬤ = Black large circle
+			display: block
+			font-size: remify(9px)
+			left: 0
+			margin: remify(-2px 0 0 -6px)
+			position: absolute
+			-webkit-text-stroke: 2px $teaser-storystream-line-color
+			text-shadow: -1px -1px 0 $teaser-storystream-line-color, 1px -1px 0 $teaser-storystream-line-color, -1px 1px 0 $teaser-storystream-line-color, 1px 1px 0 $teaser-storystream-line-color
+
+	&__link
+		display: block
+		margin-top: -7px
+
+	&__kicker
+		color: $zon_lighter_grey
+		font-family: $font-tabletgothic
+		font-size: remify(16px)
+		line-height: remify(18px)
+		letter-spacing: $zon-letter-spacing-m
+
+	&__title
+		color: $white
+		font-family: $font-franziska
+		font-size: remify(28px)
+		font-style: italic
+		line-height: remify(34px)
+		margin: 0
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__content
+		border-left: 1px $teaser-storystream-line-color solid
+		font-family: $font-tabletgothic
+		margin: remify(0 15px)
+		padding: remify(20px 15px 20px)
+
+	&__list
+		list-style: none
+		padding: 0
+	&__listitem
+		margin: .75em 0
+		padding: 0
+		position: relative
+		color: #d6d6d6
+		font-size: remify(16px)
+		line-height: remify(20px)
+		letter-spacing: $zon-letter-spacing-s
+		&:before
+			background-color: $teaser-storystream-line-color
+			border-radius: 50%
+			content: ""
+			height: remify(9px)
+			left: remify(-20px)
+			position: absolute
+			top: .3em
+			width: remify(9px)
+
+	&__update
+		color: $zon_light_grey
+		display: block
+		font-size: remify(13px)
+		letter-spacing: $zon-letter-spacing-s
+		line-height: remify(16px)
+		// make the text align nicely beside the icon if it linebreaks on small screens
+		padding: remify(0 0 16px 20px)
+		position: relative
+
+	&__updateicon
+		color: inherit
+		height: remify(13px)
+		margin: remify(0 0 0 -20px)
+		position: absolute
+		width: remify(13px)
+
+	// TODO: Standard-CTA-Dark benutzen (ggf vorher anlegen)
+	&__button
+		+zon-button-dark
+
++respond-min($break-tablet-min)
+	.teaser-storystream__media
+		padding-bottom: 100% / 7 * 2 // image variant 'panorama'
+	.teaser-storystream__headercontent
+		margin-left: remify($teaser-storystream-left-outer-tablet)
+		padding-left: remify($teaser-storystream-left-inner-tablet)
+		padding-bottom: remify(25px)
+	.teaser-storystream__content
+		margin-left: remify($teaser-storystream-left-outer-tablet)
+		padding-left: remify($teaser-storystream-left-inner-tablet)
+	// dirty dirty specifity hack
+	.cp-area--minor
+		.teaser-storystream.teaser-storystream--in-area-minor
+			background-color: $color-page-bg
+			.teaser-storystream__headercontent
+				margin: remify(20px $teaser-storystream-left-outer-mobile 0)
+				padding: remify(0 $teaser-storystream-left-inner-mobile 13px)
+			.teaser-storystream__kicker
+				font-size: remify(14px)
+				line-height: remify(16px)
+			.teaser-storystream__title
+				font-size: remify(18px)
+				line-height: remify(22px)
+			.teaser-storystream__content
+				position: relative
+				margin-left: remify($teaser-storystream-left-outer-mobile)
+				padding: remify(10px $teaser-storystream-left-inner-mobile 0)
+				margin-bottom: remify(80px)
+			.teaser-storystream__list
+				margin: 0
+			.teaser-storystream__listitem
+				color: #444
+				font-size: remify(15px)
+				line-height: remify(20px)
+				letter-spacing: $zon-letter-spacing-s
+				&:before
+					border: 2px $white solid
+					left: remify(-22px)
+			.teaser-storystream__listitem:last-child
+				display: none
+			.teaser-storystream__update
+				display: none
+			.teaser-storystream__button
+				position: absolute
+				bottom: remify(-60px)
+				+zon-button-light
+
++respond-min($break-desktop-min)
+	// dirty dirty specifity hack
+	.cp-area--minor
+		.teaser-storystream.teaser-storystream--in-area-minor
+			padding-bottom: remify(1px)
+			.teaser-storystream__media
+				padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+			.teaser-storystream__headercontent,
+			.teaser-storystream__content
+				margin-left: remify($teaser-storystream-left-outer-desktop)
+			.teaser-storystream__title
+				font-size: remify(22px)
+				line-height: remify(27px)
+			.teaser-storystream__listitem:last-child
+				display: list-item
+
+// +respond-min($break-desktop-min)
+// 	// dirty dirty specifity hack
+// 	.cp-area--solo
+// 		.teaser-storystream.teaser-storystream--in-area-solo
+// 			height: remify(360px)
+// 			.teaser-storystream__media
+// 				width: remify(480px)
+// 				height: remify(360px)
+// 				padding-bottom: 100% / 4 * 3 // image variant 'standard'
+// 			.teaser

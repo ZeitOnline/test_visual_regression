@@ -62,12 +62,20 @@ class Application(object):
         settings['linkreach_host'] = maybe_convert_egg_url(
             settings.get('linkreach_host', ''))
 
+        settings['sso_key'] = self.load_sso_key(
+            settings.get('sso_key', None))
+
         interface = zeit.web.core.interfaces.ISettings
         zope.interface.declarations.alsoProvides(settings, interface)
         zope.component.provideUtility(settings, interface)
         self.settings.update(settings)
         self.configure()
         return self.make_wsgi_app(global_config)
+
+    def load_sso_key(self, keyfile):
+        if keyfile:
+            with open(keyfile[7:], "r") as myfile:
+                return myfile.read()
 
     def configure(self):
         self.configure_zca()
@@ -172,6 +180,7 @@ class Application(object):
         config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
         config.add_route('comments', '/-comments/collection/*traverse')
+        config.add_route('invalidate_comment_thread', '/-comments/invalidate')
         config.add_route('newsfeed', '/newsfeed/*traverse')
         config.add_route('home', '/')
         config.add_route('beta_toggle', '/beta')

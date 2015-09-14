@@ -68,65 +68,44 @@
     <cluster area="id-6a3c9692-f2bd-4234-8890-a84f1924ef84" kind="duo">
       <region kind="major" area="id-74baeca3-7dbb-437d-8e70-3a3d07969d50">
         <container cp:type="teaser" module="zon-large" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-          </block>
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
         </container>
         <container cp:type="teaser" module="zon-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/article-02" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-          </block>
-        </container>
-        <container cp:type="teaser" module="zon-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/article-02" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-          </block>
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-02" />
         </container>
       </region>
       <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d51" kind="minor">
         <container cp:type="teaser" module="zon-small" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
-          <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-          </block>
-        </container>
-        <container cp:type="teaser" module="zon-small" hide-dupes="True" visible="True" cp:__name__="id-f97095a8-6424-47b0-ba51-cfb9596a936a">
-          <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-          </block>
+          <block href="http://xml.zeit.de/centerpage/article_image_asset" />
         </container>
       </region>
     </cluster>
     <cluster area="id-6a3c9692-f2bd-4234-8890-a84f1924ef86" kind="topic">
-      <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d52" kind="topic" title="Dossierteaser Titel">
+      <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d52" kind="topic" title="Dossierteaser Titel" supertitle="Dossier" xread_more_url="http://xml.zeit.de/zeit-online/index">
         <referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
         <container cp:type="teaser" module="zon-topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e6">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/article-03" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-03" year="2014" issue="46" contenttype="article" publication-date="" expires="" date-last-modified="2014-10-31T07:08:11+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-11-06T06:00:00+00:00">
-          </block>
+          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-julia-zange" />
         </container>
         <container cp:type="teaser" module="zon-topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e7">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2014" issue="46" contenttype="article" publication-date="" expires="" date-last-modified="2014-10-31T07:08:11+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-11-06T06:00:00+00:00">
-          </block>
+          <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
         </container>
         <container cp:type="teaser" module="zon-topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/article-02" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2014" issue="46" contenttype="article" publication-date="" expires="" date-last-modified="2014-10-31T07:08:11+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-11-06T06:00:00+00:00">
-          </block>
-        </container>
-        <container cp:type="teaser" module="zon-topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e11">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2014" issue="46" contenttype="article" publication-date="" expires="" date-last-modified="2014-10-31T07:08:11+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-11-06T06:00:00+00:00">
-          </block>
+          <block href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
         </container>
       </region>
     </cluster>
     <cluster area="id-6a3c9692-f2bd-4234-8890-a87f1924ef86" kind="duo">
       <region kind="major" area="id-74baeca3-7dbb-437d-8e70-3a5d07969d50">
         <container cp:type="teaser" module="zon-small" cp:__name__="id-7194a8a7-401e-479e-aad2-ca6e5926def6">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-          </block>
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
         </container>
         <container cp:type="teaser" module="zon-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e16">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/article-02" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-          </block>
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-02" />
         </container>
       </region>
       <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d51" kind="minor">
-        <container cp:type="teaser" module="zon-small" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
-          <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-          </block>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
+          <block href="http://xml.zeit.de/centerpage/article_image_asset" />
         </container>
       </region>
     </cluster>

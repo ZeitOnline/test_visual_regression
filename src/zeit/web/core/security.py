@@ -1,4 +1,5 @@
 import urllib2
+import jwt
 
 import lxml.etree
 import zope.component
@@ -19,49 +20,35 @@ class AuthenticationPolicy(
     def authenticated_userid(self, request):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
-        login_id = None
-        if conf.get("sso_activate"):
-            login_id = request.cookies.get(conf.get('sso_cookie'))
-            sso_id = login_id
-        else:
-            login_id = request.cookies.get('drupal-userid')
-            sso_id = None
+        login_id = request.cookies.get(conf.get('sso_cookie'))
 
-        # For now it is sufficient to just have an sso_cookie, because
-        # zeit.web is only a proxy for the community, which will validate the
-        # cookie itself.
-
-        # If no community cookie is present, bail out straight away:
-        if login_id is None:
-            # Avoid stale session data by making sure it's deleted
+        # If no sso cookie is present, bail out straight away:
+        if not login_id:
             if 'user' in request.session:
                 del request.session['user']
             return
 
-        if sso_id and request.session.get('user') and (
-                request.session['user'].get('sso_verification') != sso_id):
+        # Make sure sso_verification in the user session matches the one send
+        # via request
+        if login_id and request.session.get('user') and (
+                request.session['user'].get('sso_verification') != login_id):
             del request.session['user']
 
-        drupal_id = request.cookies.get('drupal-userid')
-
-        # We might never get a drupal cookie, if we are just using the
-        # sso cookie and never actually visit the drupal backend
-        if conf.get("sso_activate") and not drupal_id and (
-                request.session.get('user')) and (
+        drupal_id = None
+        if request.session.get('user') and (
                 request.session['user'].get('uid')):
             drupal_id = request.session['user'].get('uid')
 
         # If we have a community cookie for the current user, store/retrieve
         # the user info in/from the session
-        if drupal_id is not None and (
-            'user' in request.session) and drupal_id == (
+        if drupal_id and ('user' in request.session) and drupal_id == (
                 request.session['user'].get('uid')):
             user_info = request.session['user']
         else:
             log.debug("Request user_info")
             user_info = get_community_user_info(request)
-            if sso_id:
-                user_info['sso_verification'] = sso_id
+            if login_id:
+                user_info['sso_verification'] = login_id
             request.session['user'] = user_info
 
         # Drupal 6 gives anonymous users a session and uid==0
@@ -82,12 +69,41 @@ def reload_user_info(request):
         return False
 
 
+def get_user_info_from_sso_cookie(cookie, key):
+    try:
+        return jwt.decode(cookie, key, 'RS256')
+    except Exception:
+        return
+
+
+def recursively_call_community(req, tries):
+    if tries > 0:
+        try:
+            return urllib2.urlopen(req, timeout=6)
+        except Exception:
+            return recursively_call_community(req, tries-1)
+    else:
+        return
+
+
 def get_community_user_info(request):
     """Returns additional information from the Community backend by injecting
     the Cookie that Community has set when the user logged in there.
     """
 
     user_info = dict(uid=0, name=None, mail=None, picture=None, roles=[])
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    cookie = request.cookies.get(conf.get('sso_cookie'))
+    sso_info = get_user_info_from_sso_cookie(cookie, conf.get('sso_key'))
+
+    if sso_info:
+        user_info['name'] = sso_info['name']
+        user_info['mail'] = sso_info['email']
+        user_info['uid'] = sso_info['id']
+
+    # We still get the users avatar from the community. So we need to call the
+    # community.
     community_host = request.registry.settings['community_host']
 
     community_request = urllib2.Request(
@@ -95,10 +111,9 @@ def get_community_user_info(request):
         headers={'Accept': 'application/xml',
                  'Cookie': request.headers.get('Cookie', '')})
 
-    try:
-        community_response = urllib2.urlopen(community_request, timeout=3)
-    except Exception:
-        # Catch any possible socket error occuring through community requests.
+    community_response = recursively_call_community(community_request, 2)
+
+    if not community_response:
         return user_info
 
     try:

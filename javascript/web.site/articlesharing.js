@@ -15,6 +15,7 @@ define([ 'jquery' ], function( $ ) {
      * @function toggleSharing
      */
     var toggleSharing = function( event ) {
+        event.preventDefault();
         $( this ).parent().toggleClass( 'sharing-menu--active' );
     },
 

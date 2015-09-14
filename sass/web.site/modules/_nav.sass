@@ -17,16 +17,6 @@ $user-picture-diameter: remify(45px)
 $icon-color: $zon_dark_grey
 $icon-color--hover: $zon-charcoal
 
-%beta-badge
-	+inline-block
-	+link-colors($white, $white, $white, $white, $white)
-	+font-smoothing
-	background-color: $zon_grey
-	border-radius: 2px
-	color: $white
-	line-height: 1
-	padding: 4px 4px 3px 4px
-
 // basic style for nav box
 // important is important here, as we have to overwrite js toggling
 .main_nav
@@ -115,19 +105,6 @@ $icon-color--hover: $zon-charcoal
 			margin: 0
 			width: $zon-logo-width
 			height: $zon-logo-height
-	&:after
-		@extend %beta-badge
-		+inline-block
-		content: 'Beta'
-		font-size: remify(9px)
-		font-weight: normal
-		position: absolute
-		right: remify(-40px)
-		text-transform: uppercase
-		top: calc(50% - 8.5px)
-		+respond-min($break-tablet-min)
-			display: none
-
 
 
 //box 2: community
@@ -158,9 +135,6 @@ $icon-color--hover: $zon-charcoal
 		+inline-block
 		+link-colors($black, $zon_dark_grey, $zon_dark_grey, $black, $zon_dark_grey)
 		margin-right: remify(5px)
-
-.beta-badge
-	@extend %beta-badge
 
 .main_nav__community__icon
 	width: $login-icon-width
@@ -345,21 +319,6 @@ $icon-color--hover: $zon-charcoal
 		+flex-grow(1)
 		margin: $petite
 
-
-//box 10: beta notice
-.beta-notice
-	+font-smoothing
-	+flex-grow(1)
-	+order(25)
-	background: $color-body-bg
-	color: $zon_mid_grey
-	padding: remify(16px)
-	text-align: center
-	+respond-min($break-tablet-min)
-		display: none !important
-	&__link
-		+link-colors($white, $white, $white, $white)
-		border-bottom: 1px solid $zon_mid_grey
 
 .login-state
 	display: none

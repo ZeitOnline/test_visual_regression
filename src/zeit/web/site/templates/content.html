@@ -91,7 +91,11 @@
     </article>
     {% endblock content %}
     {% block article_interactions %}
-        {% include "zeit.web.site:templates/inc/article/interactions.tpl" %}
+    <div class="article-interactions article__item">
+        {% include "zeit.web.site:templates/inc/article/sharing-menu.tpl" %}
+        {% block print %}
+        {% endblock %}
+    </div>
     {% endblock %}
     {% block article_tags %}
         {% include "zeit.web.site:templates/inc/article/tags.tpl" %}

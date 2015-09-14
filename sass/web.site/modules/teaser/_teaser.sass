@@ -67,17 +67,8 @@
 	font-weight: normal
 
 %teaser-combined-link
-	color: $color-text
+	color: inherit
 	display: block
-	text-decoration: none
-	&:link,
-	&:visited
-		color: inherit
-	&:hover
-		span
-			text-decoration: none
-		span:first-child
-			text-decoration: none
 
 %teaser-title
 	display: block
@@ -108,9 +99,9 @@
 	+respond-min($break-tablet-min)
 		font-size: em(13px)
 	*:not(:last-child):not(:empty):after
-		content: ' / '
-		opacity: .71
-		margin: 0 $micro
+		content: " / "
+		margin: 0 .2em
+		opacity: $color-separator-opacity
 
 %teaser-byline
 
