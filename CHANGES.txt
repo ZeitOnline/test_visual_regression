@@ -4,7 +4,7 @@ Change log for zeit.web
 2.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- FIX: Update liveblog article template name
 
 
 2.1 (2015-09-14)
