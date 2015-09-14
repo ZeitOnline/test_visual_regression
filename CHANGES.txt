@@ -6,6 +6,12 @@ Change log for zeit.web
 
 - ZON-1602: Integrate Print and PDF
 
+- ZON-2048: Sort'n' paginate gallery area on CPs according to photo CP
+
+- ZON-2084: Add comment cache invalidation
+
+- ZON-2010: Goodbye, Beta badges & links
+
 - MAINT: Polish buzzboard, square teaser and video icon
 
 - HOTFIX: Make community moderation's 'Redaktionsempfehlung' work
@@ -13,6 +19,10 @@ Change log for zeit.web
 - HOTFIX: Make zeit.web modules work with `select_modules` API
 
 - ZON-1848: Repair Netiquette link
+
+- ZON-2217: Repair missing keyword links
+
+- QUICKFIX: Add test for missing keyword links
 
 
 1.71.1 (2015-09-13)
