@@ -13,8 +13,7 @@
 
 .print-menu
 	position: absolute
-	top: remify(18px)
-	display: inline-block
+	top: remify(20px)
 	left: remify(55px)
 	&__print,
 	&__pdf
@@ -27,7 +26,6 @@
 
 .sharing-menu
 	font-size: remify(14px)
-	display: inline-block
 	&__title
 		@extend %article-interactions__item
 		&:after
@@ -74,19 +72,13 @@
 				color: $zon_grey
 
 // js-induced state modifications
-.sharing-menu--active > .sharing-menu__title
+.sharing-menu--active .sharing-menu__title
 	color: $zon_dark_grey
 	&:after
 		+drop_icon($open: true)
 
-.sharing-menu--active > .sharing-menu__items,
+.sharing-menu--active .sharing-menu__items,
 .no-js .sharing-menu__items // no-js fallback
 	margin:  remify(14px 0) // animated
 	max-height: remify(64px) // animated
-
-// The sharing menu appears on pages with dark background (video single page)
-.sharing-menu--video
-	display: inline
-	&.sharing-menu--active > .sharing-menu__title
-		color: $zon_light_grey
 
