@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-1.72 (unreleased)
------------------
+2.0 (2015-09-14)
+----------------
 
 - ZON-2070: Tracking follow up
 
