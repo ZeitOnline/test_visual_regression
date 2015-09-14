@@ -4,6 +4,8 @@ Change log for zeit.web
 1.72 (unreleased)
 -----------------
 
+- ZON-2219: Fix image size in force-mobile
+
 - ZON-2048: Sort'n' paginate gallery area on CPs according to photo CP
 
 - ZON-2084: Add comment cache invalidation
