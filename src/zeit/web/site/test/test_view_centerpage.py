@@ -937,12 +937,20 @@ def test_servicebox_present_in_wide_breakpoints(
         assert servicebox.is_displayed() is True, 'Servicebox not displayed'
 
 
-def test_centerpage_area_should_render_in_isolation(testbrowser, testserver):
+def test_centerpage_area_should_render_in_isolation(testbrowser):
     browser = testbrowser('/index/area/id-5fe59e73-e388-42a4-a8d4-'
                           '750b0bf96812')
     select = browser.cssselect
     assert len(select('div.cp-area.cp-area--gallery')) == 1
     assert len(select('article.teaser-gallery')) == 2
+
+
+def test_centerpage_biga_area_should_render_in_isolation_with_page_param(
+        testbrowser):
+    browser = testbrowser('/index/area/id-5fe59e73-e388-42a4-a8d4-'
+                          '750b0bf96812?p=2')
+    teaserOnPage2 = browser.cssselect('.teaser-gallery__title')[0]
+    assert teaserOnPage2.text == 'Das hab ich auf dem Schirm'
 
 
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
@@ -1051,26 +1059,27 @@ def test_gallery_teaser_hides_elements_on_mobile(selenium_driver, testserver):
         'Gallery description text must be displayed on desktop.')
 
 
-@pytest.mark.xfail(reason='Fortune favours the fail')
-def test_gallery_teaser_shuffles_on_click(selenium_driver, testserver):
+# @pytest.mark.xfail(reason='Fortune favours the fail')
+def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
     teaserbutton = driver.find_element_by_css_selector(
         '.js-gallery-teaser-shuffle')
-    teasertext1 = driver.find_element_by_css_selector(
-        '.teaser-gallery__heading').text
     teaserbutton.click()
 
-    try:
-        WebDriverWait(driver, 2).until(
-            expected_conditions.presence_of_element_located(
-                (By.CSS_SELECTOR, '.teaser-gallery__heading')))
-    except TimeoutException:
-        assert False, 'New teasers not loaded within 2 seconds'
-    else:
-        teasertext2 = driver.find_element_by_css_selector(
-            '.teaser-gallery__heading').text
-        assert teasertext1 != teasertext2
+    condition = expected_conditions.text_to_be_present_in_element((
+        By.CSS_SELECTOR, '.teaser-gallery__title'),
+        'Das hab ich auf dem Schirm')
+    assert WebDriverWait(driver, 5).until(condition), (
+        'New teasers not loaded within 5 seconds')
+
+    newTeaserLinks = driver.find_elements_by_css_selector(
+        '.teaser-gallery__combined-link')
+    assert newTeaserLinks[0].get_attribute('href').endswith(
+        '/galerien/fs-desktop-schreibtisch-computer')
+    assert newTeaserLinks[1].get_attribute('href').endswith(
+        '/galerien/bg-automesse-detroit-2014-usa')
+    assert teaserbutton.get_attribute('data-sourceurl').endswith('?p=2')
 
 
 def test_homepage_should_have_proper_meetrics_integration(
