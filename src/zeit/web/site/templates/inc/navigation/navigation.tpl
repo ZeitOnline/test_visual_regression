@@ -32,7 +32,6 @@
 	<div class="main_nav__community" data-dropdown="true">
 		<esi:include src="http://{{ view.request.host
 		}}/login-state?context-uri={{ request.url }}" onerror="continue" />
-		<a href="http://{{ view.request.host }}/beta" class="beta-badge beta-badge--navigation">Beta</a>
 	</div>
 	<div class="main_nav__ressorts" data-dropdown="true">
 		<nav role="navigation" id="primary_nav">
@@ -52,9 +51,5 @@
 		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
 	</div>
 	<div class="main_nav__search" data-dropdown="true">{% include "zeit.web.site:templates/inc/navigation/navigation-search.tpl" %}</div>
-	<div class="beta-notice" data-dropdown="true">
-		<div>Sie benutzen die neue ZEIT ONLINE Beta.</div>
-		<div><a class="beta-notice__link" href="http://www.zeit.de/beta">Zurück zur klassischen Version?</a></div>
-	</div>
 	<!-- wrap end -->
 </div>
