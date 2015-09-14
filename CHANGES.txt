@@ -4,6 +4,8 @@ Change log for zeit.web
 2.1 (unreleased)
 ----------------
 
+- MAINT: Embed liveblogs
+
 - PERF: Re-Enable LazyProxy for ranking areas and try to answer everything
   from the solr result, without resolving ICMSContent
 
