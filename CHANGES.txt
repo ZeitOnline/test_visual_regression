@@ -6,6 +6,22 @@ Change log for zeit.web
 
 - ZON-2048: Sort'n' paginate gallery area on CPs according to photo CP
 
+- ZON-2084: Add comment cache invalidation
+
+- ZON-2010: Goodbye, Beta badges & links
+
+- MAINT: Polish buzzboard, square teaser and video icon
+
+- HOTFIX: Make community moderation's 'Redaktionsempfehlung' work
+
+- HOTFIX: Make zeit.web modules work with `select_modules` API
+
+- ZON-1848: Repair Netiquette link
+
+
+1.71.1 (2015-09-13)
+-------------------
+
 - HOTFIX: Make legacy areas work with `select_modules` API
 
 

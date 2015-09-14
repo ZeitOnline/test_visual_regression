@@ -85,7 +85,7 @@ class LegacyArea(collections.OrderedDict, zeit.content.cp.area.AreaFactory):
     # which is ITeaseredContent.
     def select_modules(self, *interfaces):
         for module in zeit.content.cp.interfaces.IRenderedArea(self).values():
-            if module.type == 'teaser':
+            if getattr(module, 'type', None) == 'teaser':
                 yield module
 
 

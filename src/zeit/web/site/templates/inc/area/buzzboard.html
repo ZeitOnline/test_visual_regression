@@ -3,7 +3,8 @@
 {% set module_layout = 'buzzboard' %}
 
 {% block before_module_list %}
-	<h3 class="buzzboard__headline">{{ area.title | default('Beliebte Artikel', true) }}</h3>
+	<section class="buzzboard">
+		<h3 class="buzzboard__headline">{{ area.title | default('Beliebte Artikel', true) }}</h3>
 {% endblock %}
 
 {% block module_list %}
@@ -38,4 +39,5 @@
 {% endblock module_list %}
 
 {% block after_module_list %}
+	</section>
 {% endblock %}
