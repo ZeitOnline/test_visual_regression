@@ -165,6 +165,18 @@ class CenterPage(Traversable):
                 if page_num > area.total_pages or page_num <= 0:
                     raise pyramid.httpexceptions.HTTPNotFound()
             area.page = form.page
+        # XXX block-sensitive shenanigans continue
+        region = zeit.web.core.utils.find_block(
+            self.context, attrib='area', kind='gallery')
+        # XXX Galleries are included via both a region and an area with
+        # kind=gallery; find_block() unfortunately does not allow us to
+        # express this in a query...
+        if region:
+            area = zeit.web.core.utils.find_block(
+                region, attrib='area', kind='gallery')
+            if area:
+                area = zeit.web.core.centerpage.get_area(area)
+                area.page = tdict['request'].GET.get('p')
 
 
 @traverser(zeit.content.cp.interfaces.ICenterPage)
