@@ -161,6 +161,11 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         else:
             doc['serie'] = None
 
+        # XXX The asset badges are not indexed in solr, so we lie about them
+        doc['gallery'] = None
+        doc['video'] = None
+        doc['video_2'] = None
+
         return doc
 
     @property
