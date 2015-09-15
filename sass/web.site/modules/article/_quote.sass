@@ -1,0 +1,25 @@
+.quote
+	&__text
+		color: $zon-charcoal
+		font-size: remify(17px)
+		font-weight: bold
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1.3
+		margin: 0
+		&:before
+			content: "»"
+		&:after
+			content: "«"
+	&__source
+		color: $zon_grey
+		font-family: $font-franziska
+		font-size: remify(15px)
+		font-style: italic
+		line-height: 1.5
+		margin-top: remify(14px)
+		&:before
+			content: "\2014" // — = em dash
+	&__link
+		color: inherit
+		+on-interaction
+			color: $zon-red
