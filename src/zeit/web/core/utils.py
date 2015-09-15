@@ -9,6 +9,7 @@ import zope.component
 import beaker.cache
 
 import zeit.cms.interfaces
+import zeit.content.image.interfaces
 
 
 log = logging.getLogger(__name__)
@@ -339,3 +340,22 @@ class LazyProxy(object):
 
     def __conform__(self, iface):
         return LazyProxy(self.__proxy__, self.__istack__ + [iface])
+
+    # Proxy zeit.content.image.interfaces.IImages. Since we bypass ZCA
+    # in __conform__ above, we cannot use an adapter to do this. ;-)
+    @property
+    def image(self):
+        context = self.__proxy__
+        image_ids = context.get('image-base-id', [])
+        if not image_ids:
+            raise AttributeError('image')
+        return zeit.cms.interfaces.ICMSContent(image_ids[0])
+
+    # Proxy zeit.content.link.interfaces.ILink.blog.
+    # (Note: templates try to access this directly without adapting first.)
+    @property
+    def blog(self):
+        context = self.__proxy__
+        if context.get('type') != 'link':
+            return False
+        raise AttributeError('blog')
