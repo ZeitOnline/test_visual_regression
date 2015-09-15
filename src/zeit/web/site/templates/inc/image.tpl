@@ -1,7 +1,7 @@
 {% if image %}
 {# TRASHME Rather crude bitblt/zci image api switch #}
-{% set source = view.request.route_url('home') + image.path if image is variant else image | default_image_url %}
-{% set fallback_source = view.request.route_url('home') + image.fallback_path if image is variant else source %}
+{% set source = request.image_host + image.path if image is variant else image | default_image_url %}
+{% set fallback_source = request.image_host + image.fallback_path if image is variant else source %}
 
 <figure class="{% block mediablock %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class | hide_none }} scaled-image">
     <!--[if gt IE 8]><!-->

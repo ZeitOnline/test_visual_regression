@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Repair css on eilmeldungs article
 
+- MAINT: Make host for image urls configurable
+
 
 2.1 (2015-09-14)
 ----------------
