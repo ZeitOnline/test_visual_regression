@@ -4,6 +4,8 @@ Change log for zeit.web
 2.2 (unreleased)
 ----------------
 
+- ZON-2227: Mask nextread date for google
+
 - FIX: Repair css on eilmeldungs article
 
 - MAINT: Make host for image urls configurable
