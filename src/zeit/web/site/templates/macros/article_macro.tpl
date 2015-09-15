@@ -213,3 +213,22 @@
     {% set playerId = 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9' %}
     {{ vima.brightcove_video_tag(video.id, iframe=True, brightcove_player=playerId) }}
 {% endmacro -%}
+
+{% macro citation(obj) -%}
+    <figure class="quote article__item article__item--marginalia">
+        <blockquote class="quote__text">
+            {{ obj.text }}
+        </blockquote>
+        {% if obj.attribution %}
+            <figcaption class="quote__source">
+                {% if obj.url %}
+                    <a href="{{ obj.url }}">
+                        {{ obj.attribution }}
+                    </a>
+                {% else %}
+                    {{ obj.attribution }}
+                {% endif %}
+            </figcaption>
+        {% endif %}
+    </figure>
+{%- endmacro %}
