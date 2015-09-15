@@ -215,7 +215,7 @@
 {% endmacro -%}
 
 {% macro citation(obj) -%}
-    <figure class="quote article__item article__item--marginalia">
+    <figure class="quote article__item">
         <blockquote class="quote__text">
             {{- obj.text -}}
         </blockquote>
