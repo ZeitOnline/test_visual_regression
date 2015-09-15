@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags>
+      <tag url_value="cadillac" uuid="75891846-404c-4b7b-aad6-e9920bc35d23" score="4" type="Organization">Cadillac</tag>
+      <tag url_value="musical" uuid="7aa123ca-ce5e-4677-ab78-63d6b2b7be9c" score="4" type="free">Musical</tag>
+      <tag url_value="quentin-tarantino" uuid="1263ca2f-0161-41e0-a19b-53857549ce86" score="4" type="Person">Quentin Tarantino</tag>
+      <tag url_value="zuerich" uuid="c1b7ab4c-6079-48c8-9104-2b605dfd4ecc" score="1" type="Location">Zürich</tag>
+    </rankedTags>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="AID">380</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Elke Schmitter</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comment-id">/cms/work/1999/23/Pulp_Fiction_ohne_Vorsatz</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">DIE ZEIT, 23/1999</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-12-20T01:57:06.687334+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">1999-06-02T12:00:00Z</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-12-20T01:58:23.485118+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">1999-06-02T12:00:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">1999-06-02T12:00Z</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">1999-06-02T12:00:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">systemnewspublish</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="page">54</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">e7cfcf952f9b4a5fa022cb0a66a040aa</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Kultur</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">Literatur</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="revision">1</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="status">importedCD</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="title">"Pulp Fiction" ohne Vorsatz</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:8aa91abd-e4d9-494b-afe2-bc820eb68a14}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">1999</attribute>
+  </head>
+  <body>
+    <title>"Pulp Fiction" ohne Vorsatz</title>
+    <byline>Von Elke Schmitter</byline>
+    <division type="page">
+      <p>Jackson auf der Flucht. Farbige und Schwierigkeiten, denkt er: "Zwei Esel, die vor denselben Karren gespannt sind." Sonst denkt er nicht viel, ihm fehlt es an Zeit und Verstand. Beten und arbeiten hieß bisher seine Devise; sie hat ihn nicht weit gebracht. Er ist schwarz wie die Nacht, er ist fett und schwitzt, aber er hat eine Seele aus goldenem Erz: Das gibt es nicht, aber er transportiert dennoch eine Kiste, die eben das enthalten soll, für seine Freundin Isabell. Sie ist hellmilchkaffeebraun, will aufs Höhere hinaus (das heißt in ihren Kreisen: Geld), nutzt seine gute tiefe Seele aus - aber er liebt sie.</p>
+      <citation text="Say 'what' again. Say 'what' again, I dare you, I double dare you motherfucker, say what one more Goddamn time! " attribution="Jules Winnfield" url="http://www.imdb.com/title/tt0110912/quotes?item=qt0447099"/>
+      <p>Aber er liebt sie: Dieser Logik folgt der Roman von Chester Himes, den der Unionsverlag nun ungekürzt und ungeschlichtet herausgegeben hat. Jackson liebt Isabell und ist auf der Flucht, weil er sich für diese so aussichtslose Liebe auf ein Abenteuer eingelassen hat, das ihn in jeder Hinsicht überfordert. Er hat die Nerven fürs Verbrechen nicht, seine Menschenkenntnis ist von Irrtümern befleckt, und seine schwache Intelligenz macht ihn der Hilfe bedürftig. Die gibt es, wo er zu Hause ist, bei Verbrechern oder Klerikalen; gelegentlich fällt das zusammen. "Dort oben in Harlem ist die Park Avenue von schäbigen Wohnhäusern gesäumt, in denen es nur kaltes Wasser gibt. Sie brüten zwischen Müllhalden, schmierigen Lagerhäusern, Fabriken, Garagen und Abfallhaufen, auf denen clevere junge Burschen Gras anbauen. Es ist eine von Lastwagen ausgefahrene Straße voller Gewalt und Gefahren, die in der Unterwelt als ,Bluteimer' bekannt ist."</p>
+      <citation text="Just because you are a character doesn't mean that you have character." attribution="The Wolf"/>
+      <p>Chester Himes schrieb seine Harlem-Krimis vor knapp fünfzig Jahren; sie lesen sich heute nicht nur wie gute Romane, sondern auch wie exquisite Drehbücher für <entity idref="Quentin+Tarantino" entity_type="Person" url_value="personen/quentin-tarantino">Quentin Tarantino</entity>, Pulp Fiction ohne Vorsatz. Eine männliche Leiche mit Frauenperücke im Nonnenkostüm, die Kehle glatt durchgeschnitten; Verfolgungsjagden im <entity idref="Cadillac" entity_type="Organization" url_value="organisationen/cadillac">Cadillac</entity> durch heimische Gemüsemärkte, ein lahmer Gaul vor einem Kohlenkarren und dessen betrunkener Kutscher. Himes erzählt von einer untergegangenen Welt, rührend in ihren Schrecken, gemütlich in ihrem Elend, romantisch in ihren Untergangsmythen: "My mama told me when I was a chile / Dat mens and whiskey would kill me after a while." Ihre Figuren chargieren hemmungslos, ihr Treibstoff ist die Flucht, ihre Komik ist hinreißend schlicht und immer milieuspezifisch. ",Wer hat Ihnen denn ins Gesicht geschlagen?' ,Zwei junge Burschen wollten mich ausrauben. Aber das war kurz nachdem's dunkel wurde.' Der Polizist war gereizt. Farbige zu verhören brachte ihn jedesmal aus der Fassung." Daß die Geschichte selbst Echtzeit und Lesezeit beinahe in eins zusammenbringt, erhöht den Reiz der Lektüre, die wachsende Ergebenheit in Turbulenz und Zufall, in Atemlosigkeit und Schlagerseligkeit. (Denn schließlich liebt er sie.) Die Sympathie des Lesers liegt bei dem tumben Tor, dem - schließlich glücklichen - Helden Jackson; die bekannten schwarzen Ermittler Grave Digger und Coffin Ed tauchen hier nur am Rande auf. Aber alles ist drin, was Chester Himes' Erfolg schon bei ihrem ersten Erscheinen ausmachte - neben dem bereits Erwähnten vor allem eine Atmosphäre wie Porgy and Bess als Musical. Unter nicht nur historischer Rücksicht sehr zu empfehlen.</p>
+      <citation text="It's the little differences. I mean they got the same shit over there that they got here, but it's just -- it's just there it's a little different."/>
+      <p>Chester Himes: Die Geldmacher von Harlem</p>
+      <p>Aus dem Amerikanischen von Manfred Görgens; Unionsverlag, <entity idref="Z%C3%BCrich" entity_type="Location" url_value="orte/zuerich">Zürich</entity> 1999; 222 S., 16,90 DM</p>
+    </division>
+  </body>
+  <teaser>
+    <title>"Pulp Fiction" ohne Vorsatz</title>
+  </teaser>
+  <indexteaser>
+    <title>"Pulp Fiction" ohne Vorsatz</title>
+  </indexteaser>
+</article>
