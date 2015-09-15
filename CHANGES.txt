@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: Make host for image urls configurable
 
+- ZON-2228: Add only p param to canonical
+
 
 2.1 (2015-09-14)
 ----------------
