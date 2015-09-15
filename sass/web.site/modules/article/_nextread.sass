@@ -27,6 +27,8 @@
 		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
+		&:hover
+			border-bottom: none // disable hover effect as long as comment count is not linked
 
 	&--with-image &__container
 		padding-bottom: remify(64px)

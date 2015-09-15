@@ -83,3 +83,7 @@
 		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
+		+respond-min($break-tablet-min)
+			border-bottom: 1px solid rgba($zon_lighter_grey, .4)
+			+on-interaction
+				border-bottom-color: rgba($zon_lighter_grey, .8)
