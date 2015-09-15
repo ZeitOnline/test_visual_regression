@@ -10,5 +10,5 @@
 {% include [
 	"zeit.web.site:templates/inc/storystream/module/{}_{}.tpl".format(module_type, module_layout),
 	"zeit.web.site:templates/inc/storystream/module/{}.tpl".format(module_type),
-    "zeit.web.site:templates/inc/storystream/module/default.tpl"
+    "zeit.web.site:templates/inc/storystream/module/atom.tpl"
     ] ignore missing %}

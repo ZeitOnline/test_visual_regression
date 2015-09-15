@@ -1,5 +1,5 @@
 {% set atom = module | first_child %}
-{% set blockname = 'storystream-teaser' %}
+{% set blockname = 'storystream-atom' %}
 <{{ teaser_tag or 'div' }} class="{{ blockname }}">
 	<div class="{{ blockname }}__container">
 		<div class="{{ blockname }}__content">
@@ -15,7 +15,6 @@
 				<p class="{{ 'storystream-teaser__description' | with_mods(teaser_modifier) }}">
 					{{ atom.tldr_text or atom.teaserText }}&nbsp;<a class="{{ blockname }}__link" href="{{ atom.uniqueId | create_url }}">mehr lesen</a>
 				</p>
-				<pre style="background:#c0ff33;">DEBUGtpuppe: {{ atom | obj_debug }}</pre>
 				{% set image = get_image(module) %}
 				{% if image %}
 					{% set href = atom.uniqueId | create_url %}
