@@ -88,7 +88,15 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     @zeit.web.reify
     def print_link(self):
         url = self.content_url
-        path = '/komplettansicht?print=true'
+        prefix = '/komplettansicht'
+
+        try:
+            if len(self.pages) == 1:
+                prefix = ''
+        except:
+            pass
+
+        path = prefix + '?print=true'
         return url + path
 
     @zeit.web.reify

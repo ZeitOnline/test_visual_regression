@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - FIX: Update liveblog article template name
 
+- FIX: Repair css on eilmeldungs article
+
+- MAINT: Make host for image urls configurable
+
 
 2.1 (2015-09-14)
 ----------------
@@ -16,6 +20,8 @@ Change log for zeit.web
 - ZON-1602: Integrate Print and PDF
 
 - ZON-2219: Fix image size in force-mobile
+
+- QUICKFIX: Show correct print link for one page articles
 
 
 2.0 (2015-09-14)
