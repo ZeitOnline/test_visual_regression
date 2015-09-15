@@ -217,12 +217,12 @@
 {% macro citation(obj) -%}
     <figure class="quote article__item article__item--marginalia">
         <blockquote class="quote__text">
-            {{ obj.text }}
+            {{- obj.text -}}
         </blockquote>
         {% if obj.attribution %}
             <figcaption class="quote__source">
                 {% if obj.url %}
-                    <a href="{{ obj.url }}">
+                    <a class="quote__link" href="{{ obj.url }}">
                         {{ obj.attribution }}
                     </a>
                 {% else %}
