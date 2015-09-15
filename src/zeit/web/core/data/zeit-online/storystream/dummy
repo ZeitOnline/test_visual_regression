@@ -1,0 +1,128 @@
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="storystream">
+<head>
+	<header_image src="http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/30921833.jpg" type="jpg" title="Griechenland Tsipras" align="left" publication-date="" expires="">
+		<bu>Wahlkampfplakat von Alexis Tsipras in Athen</bu>
+		<copyright>© Alkis Konstantinidis/Reuters</copyright>
+	</header_image>
+	<author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+		<display_name py:pytype="str">Zacharias Zacharakis</display_name>
+	</author>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Zacharias Zacharakis</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-09-11T14:38:21.144991+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-09-11T10:09:57.052739+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-12T10:11:42.316515+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-09-11T10:09:57.052739+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-09-11T10:08:56.863347+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-09-11T10:09:05.303304+00:00</attribute>
+	<attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-09-09T16:28:23.916448+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.strothjohann</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">storystream</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:46072ab5-1d53-4d5b-bb25-54a2837b623c}</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">36</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+	    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IStoryStream" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+</head>
+<body>
+	<supertitle>Griechenland</supertitle>
+	<title>Das linke Experiment</title>
+	<subtitle>
+		Anfang des Jahres übernahm in Griechenland erstmals eine linke Regierung. Ihr Versprechen: das Sparen beenden. Nun gibt es trotzdem harte Reformen und neue Kredite. Wie kam es dazu?
+	</subtitle>
+	<region visible="True" visible_mobile="True" area="id-c80297d3-5680-4259-aa90-9e828f7d2d3e" kind="solo" kind_title="Solo-Region">
+		<area visible="True" visible_mobile="True" hide-dupes="True" area="id-24f9af13-ba8a-4cdc-9e5d-4961e1dd464f" kind="solo">
+			<image xsi:nil="true"/>
+			<module cp:type="headerimage" module="headerimage" visible="True" visible_mobile="True" cp:__name__="id-6a1f4359-85a3-4a18-986f-2be47536bf15" supertitle="Griechenland" title="Das linke Experiment">
+				<image>
+				http://xml.zeit.de/politik/ausland/2015-08/griechenland-themenseite/
+				</image>
+			</module>
+		</area>
+	</region>
+	<region visible="True" visible_mobile="True" area="id-00a14862-b1c6-4146-bf60-f2f4e11cae17" kind="storystream" kind_title="Storystream">
+	<area visible="True" visible_mobile="True" hide-dupes="True" area="id-262cd66c-e9a6-4d34-8b46-c1ffcd1c7c13" kind="storystream">
+	<module cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-9cdba876-5637-4d65-be33-48460c79a375" title="Was wir jetzt wissen">
+	<text>
+	<ul>
+	<li>
+	Am 20. September soll zum zweiten Mal in diesem Jahr ein neues Parlament in Griechenland gewählt werden. Der bisherige Premier Alexis Tsipras hatte die Neuwahl eingeleitet, weil die eigene Syriza-Partei ihm die Unterstützung entzieht. Tsipras soll das von der EU geforderte Sparprogramm umsetzen.
+	<br/>
+	</li>
+	<li>
+	Am 13. Juli wurde Griechenland ein drittes Hilfspaket bewilligt. Ein Euro-Austritt des Staates gilt damit als abgewendet. Doch grundsätzlich herrschen Zweifel am Erfolg des neuen Programms.
+	</li>
+	<li>
+	Viele Griechen hofften, mit Syriza käme der Neubeginn. Doch seit Tsipras im Januar dieses Jahres an die Macht kam, stritt seine Regierung mit den Gläubigern um mildere Bedingungen für die gewährten Kredite. Der Konflikt eskalierte und führte zur Schließung der Banken und zur Einführung von Kapitalverkehrskontrollen.
+	</li>
+	</ul>
+	</text>
+	</module>
+	</area>
+	</region>
+	<region visible="True" visible_mobile="True" area="id-31cf839f-c587-4b18-9084-1cc457ab02a0" kind="storystream" kind_title="Storystream">
+	<area visible="True" visible_mobile="True" hide-dupes="True" area="id-c847b3f5-a566-4536-8341-aa73472392ba" kind="storystream">
+		<module cp:type="teaser" module="zon-milestone" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-5a7a3f3c-d507-473e-831e-6a3b3bf63b12">
+			<block href="http://xml.zeit.de/zeit-online/article/zeit" uniqueId="http://xml.zeit.de/zeit-online/article/zeit" contenttype="article" />
+		</module>
+	</area>
+	</region>
+	<region visible="True" visible_mobile="True" area="id-b27b12d5-7901-4221-9634-e14dab2e88ae" kind="storystream" kind_title="Storystream">
+	<area visible="True" visible_mobile="True" hide-dupes="True" area="id-75eba1c5-baf4-4b65-bae4-6e10bde59eaa" kind="storystream">
+	<module cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-830f7f2c-f5ee-4ad9-9d48-b70b7c7df8f4" title="Vorgeschichte">
+	<text>
+	<ul>
+	<li>Im Juni 2000 tritt Griechenland dem Euro bei.</li>
+	<li>
+	Griechenland kann die Schuldenlast nicht mehr tragen. Im März 2012 wird dem Land die Hälfte erlassen. Die Lage stabilisiert sich ökonomisch und politisch in den folgenden zwei Jahren etwas.
+	</li>
+	<li>
+	Warum kam es im Januar 2015 überhaupt zur Neuwahl? Formal betrachtet sieht es so aus, als seien vorgezogene Neuwahlen in Griechenland aus verfassungsrechtlichen Gründen schon im Januar 2015 unausweichlich gewesen, weil das Parlament sich nicht auf einen neuen Staatspräsidenten einigen konnte. Premier Antonis Samaras hätte die Präsidentenwahl aber durchaus auf einen späteren Zeitpunkt legen können. Wie Recherchen griechischer Medien zeigen, wollte Samaras dies nur nicht, weil die Gläubiger neue, umstrittene Reformen von ihm verlangten. Die hätte er zunächst umsetzen und dann vor einer Neuwahl der Bevölkerung erklären müssen. Ein machtpolitisches Risiko, dem er auswich.
+	</li>
+	</ul>
+	</text>
+	</module>
+	</area>
+	</region>
+</body>
+<teaser>
+	<title>Das linke Experiment</title>
+	<text>
+		Anfang des Jahres übernahm in Griechenland eine linke Regierung. Ihr Versprechen: das Sparen beenden. Nun gibt es harte Reformen und neue Kredite. Wie kam es dazu?
+	</text>
+</teaser>
+</centerpage>
