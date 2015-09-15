@@ -4,6 +4,8 @@ Change log for zeit.web
 2.2 (unreleased)
 ----------------
 
+- MAINT: Polish sharing icon, linked comment count and large teaser image
+
 - FIX: Repair css on eilmeldungs article
 
 - MAINT: Make host for image urls configurable
