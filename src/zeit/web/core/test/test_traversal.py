@@ -80,9 +80,10 @@ def test_dynamic_folder_traversal_should_allow_for_ranking_pagination(
 
 
 def test_preview_can_traverse_workingcopy_directly(my_traverser, workingcopy):
-    content = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     with checked_out(content, temporary=False):
-        req = pyramid.request.Request.blank('/wcpreview/zope.user/10')
+        req = pyramid.request.Request.blank('/wcpreview/zope.user/01')
         tdict = my_traverser(req)
         assert zeit.content.article.interfaces.IArticle.providedBy(
             tdict['context'])
