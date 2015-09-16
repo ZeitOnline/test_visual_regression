@@ -1,4 +1,7 @@
+import urllib2
+
 import pyramid.request
+import pytest
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.content.cp.interfaces
@@ -91,5 +94,8 @@ def test_preview_can_traverse_workingcopy_directly(my_traverser, workingcopy):
 
 def test_route_config_should_make_friedbert_surrender_to_blacklisted_routes(
         testbrowser):
-    browser = testbrowser('/studium/rankings/index')
-    assert browser.headers.get('X-Render-With')
+    with pytest.raises(urllib2.HTTPError) as info:
+        browser = testbrowser('/studium/rankings/index')
+        assert browser.headers.get('X-Render-With')
+    error = info.value
+    assert error.getcode() == 303
