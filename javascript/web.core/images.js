@@ -10,7 +10,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
 
     var images = [],
         isMobile,
-        isMobileOrTablet;
+        isDesktop;
 
     /**
      * images.js: create prefix
@@ -51,8 +51,10 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
      * @function prepareScaling
      */
     function prepareScaling () {
-        isMobile = /mobile|phablet/.test( window.ZMO.breakpoint.get() );
-        isMobileOrTablet = /mobile|phablet|tablet/.test( window.ZMO.breakpoint.get() );
+        var breakpoint = window.ZMO.breakpoint.get();
+
+        isMobile = /mobile|phablet/.test( breakpoint );
+        isDesktop = breakpoint === 'desktop';
     }
 
     /**
@@ -122,7 +124,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
 
             // to decrease the number of variants which are fetched from the
             // server, we use image width in steps of 50px on mobile
-            if ( isMobileOrTablet ) {
+            if ( !isDesktop ) {
                 width = Math.ceil( width / 50 ) * 50;
             }
 
