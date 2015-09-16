@@ -208,6 +208,10 @@ class Base(object):
         return self.context.cap_title.title()
 
     @zeit.web.reify
+    def path_info(self):
+        return self.request.path_info
+
+    @zeit.web.reify
     def banner_channel(self):
         # manually banner_id rules first
         if self.context.banner_id is not None:
