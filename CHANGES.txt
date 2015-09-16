@@ -4,6 +4,8 @@ Change log for zeit.web
 2.2 (unreleased)
 ----------------
 
+- MAINT: Add ESI capabilites for esi:remove
+
 - FIX: Add path_info as query for banner mappings
 
 - ZON-2228: Add only p param to canonical
