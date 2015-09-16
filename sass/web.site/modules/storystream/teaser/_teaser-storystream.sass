@@ -26,16 +26,12 @@ $teaser-storystream-left-outer-desktop: 20px
 		margin: remify(20px $teaser-storystream-left-outer-mobile 0)
 		padding: remify(0 $teaser-storystream-left-inner-mobile 13px)
 		position: absolute
+		+make-a-circle($color: $teaser-storystream-line-color, $radius: 9px)
 		&:before
-			color: $color-body-bg
-			content: '\2B24' // ⬤ = Black large circle
-			display: block
-			font-size: remify(9px)
 			left: 0
-			margin: remify(-2px 0 0 -6px)
-			position: absolute
-			-webkit-text-stroke: 2px $teaser-storystream-line-color
-			text-shadow: -1px -1px 0 $teaser-storystream-line-color, 1px -1px 0 $teaser-storystream-line-color, -1px 1px 0 $teaser-storystream-line-color, 1px 1px 0 $teaser-storystream-line-color
+			margin: remify(-2px 0 0 -5px)
+			// TODO: compare CSS of this version and the one with a combined
+			// "+respond-min($break-desktop-min)" at the end of this file
 
 	&__link
 		display: block
@@ -124,6 +120,8 @@ $teaser-storystream-left-outer-desktop: 20px
 			.teaser-storystream__headercontent
 				margin: remify(20px $teaser-storystream-left-outer-mobile 0)
 				padding: remify(0 $teaser-storystream-left-inner-mobile 13px)
+				&:before
+					margin-left: remify(-$teaser-storystream-left-inner-tablet)
 			.teaser-storystream__kicker
 				font-size: remify(14px)
 				line-height: remify(16px)
