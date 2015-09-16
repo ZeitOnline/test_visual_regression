@@ -24,6 +24,8 @@ Change log for zeit.web
 
 - FIX: Join rules for robots in view.py otherwise articles don't get correct rules
 
+- MAINT: round requested image sizes to reduce the number of possibly requested image URLs
+
 
 2.1 (2015-09-14)
 ----------------

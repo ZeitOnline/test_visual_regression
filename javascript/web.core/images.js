@@ -118,6 +118,12 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
                 $img.width( '' );
             }
 
+            // to decrease the number of variants which are fetched from the
+            // server, we use image width in steps of 100px on mobile
+            if ( isMobile ) {
+                width = Math.ceil( width / 50 ) * 50;
+            }
+
             height = width / ratio;
 
             // be carefull, this would give 'dd%' for invisible elements
