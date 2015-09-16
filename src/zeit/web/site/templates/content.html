@@ -9,7 +9,7 @@
 {% block main %}
     {% block advertorial_marker %}{% endblock advertorial_marker %}
     {% block content %}
-    <article class="article article--{{ view | block_type }}" id="js-article" itemtype="http://schema.org/Article" itemid="{{ view.canonical_url }}" itemscope>
+    <article class="article article--{{ view | block_type }}" id="js-article" itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemscope>
     {% profile %}
         {% block article_heading %}
             <div class="article__item">

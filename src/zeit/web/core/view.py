@@ -518,6 +518,10 @@ class Content(Base):
     is_longform = False
 
     @zeit.web.reify
+    def basename(self):
+        return self.request.path_url.rstrip('/').split('/')[-1]
+
+    @zeit.web.reify
     def subtitle(self):
         return self.context.subtitle
 
