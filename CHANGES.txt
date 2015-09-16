@@ -4,6 +4,10 @@ Change log for zeit.web
 2.2 (unreleased)
 ----------------
 
+- FIX: Add path_info as query for banner mappings
+
+- FIX: Update liveblog article template name
+
 - MAINT: Polish sharing icon, linked comment count and large teaser image
 
 - ZON-2231: Complete schema.org mark-up for articles
@@ -25,6 +29,8 @@ Change log for zeit.web
 - FIX: Join rules for robots in view.py otherwise articles don't get correct rules
 
 - MAINT: round requested image sizes to reduce the number of possibly requested image URLs
+
+- MAINT: Use 303 instead of 200 for blacklist view
 
 
 2.1 (2015-09-14)
