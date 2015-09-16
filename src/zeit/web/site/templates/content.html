@@ -11,18 +11,6 @@
     {% block content %}
     <article class="article article--{{ view | block_type }}" id="js-article" itemtype="http://schema.org/Article" itemscope>
     {% profile %}
-        {% block schema_org_image_info %}
-            {% set image = get_image(view, view.context, default='wide') %}
-            {%- if image -%}
-            <script type="application/ld+json">
-            {
-                "@context": "http://schema.org",
-                "@type": "ImageObject",
-                "contentUrl": "{{ view.request.route_url('home') + image.path }}"
-            }
-            </script>
-            {%- endif -%}
-        {% endblock schema_org_image_info %}
         {% block article_heading %}
             <div class="article__item">
 
