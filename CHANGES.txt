@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - MAINT: Make host for image urls configurable
 
+- MAINT: Set cache max age for assets
+
 - ZON-1873: Dont make pagination headlines break
 
 - FIX: Prevent Next Read from Jumping
