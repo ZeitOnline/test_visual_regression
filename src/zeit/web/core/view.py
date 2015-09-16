@@ -3,6 +3,7 @@ import base64
 import datetime
 import logging
 import lxml.etree
+import os.path
 import urlparse
 import re
 
@@ -519,7 +520,7 @@ class Content(Base):
 
     @zeit.web.reify
     def basename(self):
-        return self.request.path_url.rstrip('/').split('/')[-1]
+        return os.path.basename(self.request.path.rstrip('/'))
 
     @zeit.web.reify
     def subtitle(self):
