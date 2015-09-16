@@ -26,7 +26,5 @@
   <mapping target="serie" value="reise" banner_code="reisen" />  
   <mapping target="sub_ressort" value="computer" banner_code="digital" />
   <mapping target="ressort" value="technik" banner_code="digital" />
-  <!--mapping target="topic" value="technik" banner_code="digital" /-->
-  <!--mapping target="topic" value="reisen" banner_code="reisen" /-->
-  <!--mapping target="topic" value="sport" banner_code="sport" /-->
+  <mapping target="path_info" value="/serie/krimizeit-bestenliste" banner_code="literatur/krimi-bestenliste" />
 </banner_id_mappings>
