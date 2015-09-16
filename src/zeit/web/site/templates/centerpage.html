@@ -39,6 +39,7 @@
 
 {% block cardstack_head %}
     {% if view.has_cardstack %}
-        <esi:include src="http://www.zeit.de/cardstack-backend/stacks/esi/head?shareUrl={{ request.url }}&static=true" onerror="continue" />
+        {% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/esi/head?shareUrl=' + request.url + '&static=true' %}
+        {{ lama.insert_esi(esi_source, view) }}
     {% endif %}
 {% endblock %}

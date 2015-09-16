@@ -1,1 +1,2 @@
-<esi:include src="http://www.zeit.de/cardstack-backend/stacks/{{ module.id }}/esi/body?shareUrl={{ request.url }}" onerror="continue" />
+{% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/' + module.id + '/esi/body?shareUrl=' + request.url %}
+{{ lama.insert_esi(esi_source, view) }}

@@ -97,12 +97,13 @@
         {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
     {% if view.is_dev_environment %}
-    <script src="//localhost:35729/livereload.js"></script>
+        <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
 
     {% block cardstack_head %}
         {% if view.has_cardstack %}
-            <esi:include src="http://www.zeit.de/cardstack-backend/stacks/esi/head?shareUrl={{ request.url }}" onerror="continue" />
+            {% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/esi/head?shareUrl=' + request.url %}
+            {{ lama.insert_esi(esi_source, view) }}
         {% endif %}
     {% endblock %}
 </head>
@@ -185,7 +186,8 @@
     {% endif %}
     {% block cardstack_bottom %}
         {% if view.has_cardstack %}
-            <esi:include src="http://www.zeit.de/cardstack-backend/stacks/esi/scripts?shareUrl={{ request.url }}" onerror="continue" />
+            {% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/esi/scripts?shareUrl=' + request.url %}
+            {{ lama.insert_esi(esi_source, view) }}
         {% endif %}
     {% endblock %}
 </body>

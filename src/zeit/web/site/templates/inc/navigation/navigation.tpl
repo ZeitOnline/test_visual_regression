@@ -27,11 +27,11 @@
 		<div class="main_nav__teaser">{# planned special teaser #}</div>
 		{% endif %}
 	{% endblock special_teaser %}
-	
+
 	<!-- wrap start -->
 	<div class="main_nav__community" data-dropdown="true">
-		<esi:include src="http://{{ view.request.host
-		}}/login-state?context-uri={{ request.url }}" onerror="continue" />
+		{% set esi_source = 'http://' + view.request.host + '/login-state?context-uri=' + request.url %}
+		{{ lama.insert_esi(esi_source, view) }}
 	</div>
 	<div class="main_nav__ressorts" data-dropdown="true">
 		<nav role="navigation" id="primary_nav">
