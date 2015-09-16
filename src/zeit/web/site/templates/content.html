@@ -9,20 +9,8 @@
 {% block main %}
     {% block advertorial_marker %}{% endblock advertorial_marker %}
     {% block content %}
-    <article class="article article--{{ view | block_type }}" id="js-article" itemtype="http://schema.org/Article" itemscope>
+    <article class="article article--{{ view | block_type }}" id="js-article" itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemscope>
     {% profile %}
-        {% block schema_org_image_info %}
-            {% set image = get_image(view, view.context, default='wide') %}
-            {%- if image -%}
-            <script type="application/ld+json">
-            {
-                "@context": "http://schema.org",
-                "@type": "ImageObject",
-                "contentUrl": "{{ view.request.route_url('home') + image.path }}"
-            }
-            </script>
-            {%- endif -%}
-        {% endblock schema_org_image_info %}
         {% block article_heading %}
             <div class="article__item">
 
@@ -52,25 +40,27 @@
         {% endblock article_heading %}
         {% block article_meta %}
             <div class="article__item">
-                {% if view.pagination and view.pagination.current > 1 %}
+            {% if view.pagination and view.pagination.current > 1 %}
                 <div class="article__page-teaser">
                     Seite {{ view.pagination.current }}/{{ view.pagination.total }}
                     {%- if view.current_page.teaser -%}
                         : <h1>{{ view.current_page.teaser }}</h1>
                     {% endif %}
                 </div>
-                {% else %}
+            {% else %}
                 <div class="summary" itemprop="description">
                     {{ view.subtitle | hide_none }}
                 </div>
+                {%- set byline = view.context | get_byline %}
+                {% if byline | length -%}
                 <div class="byline" itemscope itemtype="http://schema.org/Person" itemprop="author">
-                    {% set byline = view.context | get_byline %}
                     {% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
                 </div>
+                {% endif -%}
                 <div class="metadata">
                     {% include "zeit.web.site:templates/inc/article/metadata.tpl" %}
                 </div>
-                {% endif %}
+            {% endif %}
             </div>
         {% endblock article_meta %}
     {% endprofile %}

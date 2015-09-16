@@ -4,6 +4,7 @@ import datetime
 import lxml.etree
 import mock
 import pytest
+import pyramid.testing
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
@@ -162,45 +163,40 @@ def test_schema_org_main_content_of_page(testbrowser):
     assert len(select('main[itemprop="mainContentOfPage"]')) == 1
 
 
-def test_schema_org_article(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
+def test_schema_org_article_mark_up(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    selector = 'article[itemtype="http://schema.org/Article"][itemscope]'
+    article = browser.cssselect(selector)
+    assert len(article) == 1
+    select = article[0].cssselect
 
-    assert len(select(
-        'article[itemtype="http://schema.org/Article"][itemscope]')) == 1
+    # articleBody
+    assert len(select('div[itemprop="articleBody"]')) == 1
 
-
-def test_schema_org_headline(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
+    # headline
     headline = select('h1[itemprop="headline"]')
-    text = u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?'
     assert len(headline) == 1
-    assert text in headline[0].text_content()
+    assert headline[0].text_content().strip() == (
+        u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?')
 
-
-def test_schema_org_description(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-
+    # description
     assert len(select('div[itemprop="description"]')) == 1
 
+    # author
+    selector = (
+        '*[itemtype="http://schema.org/Person"][itemprop="author"][itemscope]')
+    author = select(selector)
+    assert len(author) == 1
+    assert len(author[0].cssselect('a[itemprop="url"]')) == 1
+    name = author[0].cssselect('span[itemprop="name"]')
+    assert len(name) == 1
+    assert name[0].text == 'Wenke Husmann'
 
-def test_schema_org_author(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
+    # image
+    assert len(select('img[itemprop="image"]')) == 1
 
-    assert len(select('.byline[itemprop="author"]')) == 1
-    assert len(select('.byline a[itemprop="url"]')) == 1
-    assert len(select('.byline span[itemprop="name"]')) == 1
-
-
-def test_schema_org_article_body(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-
-    assert len(select('.article-body[itemprop="articleBody"]')) == 1
-
-
-def test_schema_org_image(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-    json = 'article > script[type="application/ld+json"]'
-    assert len(select(json)) == 1
+    # datePublished
+    assert len(select('time[itemprop="datePublished"]')) == 1
 
 
 def test_multipage_article_should_designate_meta_pagination(testbrowser):
@@ -670,57 +666,107 @@ def test_imported_article_has_special_meta_robots(
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
 
     # test ZEAR
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'ZEAR')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'ressort', u'Fehler')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for ZEAR')
 
     # test TGS
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'TGS')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for TGS')
 
     # test HaBl
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'HaBl')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for HaBl')
 
     # test WIWO
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'WIWO')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for WIWO')
 
     # test GOLEM
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'GOLEM')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for GOLEM')
 
     # test ZEI
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'ZEI')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
         'wrong robots for ZEI')
 
     # test no product id
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', None)
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
         'wrong robots for none product article')
+
+
+def test_robots_rules_for_angebote_articles(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+
+    # usual angebot
+    request.path = '/angebote/buchtipp/ishiguro/index'
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.meta_robots == 'index,nofollow,noodp,noydir,noarchive', (
+        'wrong robots for usual angebot')
+
+    # partnersuche
+    request.path = '/angebote/partnersuche/test'
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for partnersuche')
+
+
+def test_robots_rules_for_diverse_articles(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = mock.Mock()
+    request.url = 'http://localhost'
+
+    # test folder
+    request.path = '/test/article'
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for test folder')
+
+    # templates folder
+    request.path = '/templates/article'
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for templates folder')
+
+    # banner folder
+    request.path = '/banner/article'
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for banner folder')
+
+    # any folder
+    request.path = '/any/article'
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for any other folder')
 
 
 def test_article_doesnt_show_modified_date(testbrowser):

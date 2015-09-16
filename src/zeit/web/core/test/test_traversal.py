@@ -67,7 +67,7 @@ def test_dynamic_folder_traversal_should_rewrite_traversal_dictionary(
 def test_dynamic_folder_traversal_should_allow_for_ranking_pagination(
         application, dummy_request):
     request = dummy_request
-    request.GET['p'] = '7'
+    request.GET['p'] = '2'
 
     tdict = zeit.web.core.traversal.RepositoryTraverser.invoke(
         context=zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic'),
@@ -76,13 +76,14 @@ def test_dynamic_folder_traversal_should_allow_for_ranking_pagination(
         request=request)
 
     area = tdict['context'].values()[0].values()[1]
-    assert zeit.web.core.centerpage.get_area(area).page == 7
+    assert zeit.web.core.centerpage.get_area(area).page == 2
 
 
 def test_preview_can_traverse_workingcopy_directly(my_traverser, workingcopy):
-    content = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     with checked_out(content, temporary=False):
-        req = pyramid.request.Request.blank('/wcpreview/zope.user/10')
+        req = pyramid.request.Request.blank('/wcpreview/zope.user/01')
         tdict = my_traverser(req)
         assert zeit.content.article.interfaces.IArticle.providedBy(
             tdict['context'])

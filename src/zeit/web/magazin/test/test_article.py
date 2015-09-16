@@ -273,39 +273,39 @@ def test_article_has_correct_page_meta_keywords(testserver, testbrowser):
         ' Toskana, Bologna, Bozen, Florenz, Tübingen">' in browser.contents
 
 
-def test_article08_has_correct_date(testserver, testbrowser):
+def test_article08_has_correct_date(testbrowser):
     # not updated print article
-    browser = testbrowser('%s/artikel/08' % testserver.url)
-    assert '<span class="article__head__meta__date">'\
-        '19. Februar 2014</span>' in browser.contents
+    browser = testbrowser('/artikel/08')
+    date = browser.cssselect('.article__head__meta__date')[0].text
+    assert date == '19. Februar 2014'
 
 
-def test_article09_has_correct_date(testserver, testbrowser):
+def test_article09_has_correct_date(testbrowser):
     # updated print article
-    browser = testbrowser('%s/artikel/09' % testserver.url)
-    assert '<span class="article__head__meta__date">'\
-        '4. März 2014, 14:35 Uhr</span>' in browser.contents
+    browser = testbrowser('/artikel/09')
+    date = browser.cssselect('.article__head__meta__date')[0].text
+    assert date == u'4. März 2014, 14:35 Uhr'
 
 
-def test_article03_has_correct_date(testserver, testbrowser):
+def test_article03_has_correct_date(testbrowser):
     # not updated online article
-    browser = testbrowser('%s/artikel/03' % testserver.url)
-    assert '<span class="article__head__meta__date">'\
-        '30. Juli 2013, 17:20 Uhr</span>' in browser.contents
+    browser = testbrowser('/artikel/03')
+    date = browser.cssselect('.article__head__meta__date')[0].text
+    assert date == '30. Juli 2013, 17:20 Uhr'
 
 
-def test_article10_has_correct_date(testserver, testbrowser):
+def test_article10_has_correct_date(testbrowser):
     # updated online article
-    browser = testbrowser('%s/artikel/10' % testserver.url)
-    assert '<span class="article__head__meta__date">'\
-        '20. Februar 2014, 17:59 Uhr</span>' in browser.contents
+    browser = testbrowser('/artikel/10')
+    date = browser.cssselect('.article__head__meta__date')[0].text
+    assert date == '20. Februar 2014, 17:59 Uhr'
 
 
-def test_article05_has_correct_date(testserver, testbrowser):
+def test_article05_has_correct_date(testbrowser):
     # longform
-    browser = testbrowser('%s/artikel/05' % testserver.url)
-    assert '<span class="article__head__meta__date">'\
-        '3. November 2013</span>' in browser.contents
+    browser = testbrowser('/artikel/05')
+    date = browser.cssselect('.article__head__meta__date')[0].text
+    assert date == '3. November 2013'
 
 
 def test_print_article_has_no_last_changed_date(testserver, testbrowser):

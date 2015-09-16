@@ -174,7 +174,7 @@
         {% if page_type == 'article' and image.href %}
             <a href="{{ image.href }}">
         {% endif %}
-                <img alt="{{ alt }}" {% if title %}title="{{ title }}" {% endif %}class="{{ image_class | default('', true) }} figure__media" src="{{ source }}" data-src="{{ source }}" data-ratio="{{ image.ratio }}">
+                <img alt="{{ alt }}"{% if title %} title="{{ title }}"{% endif %} class="{{ image_class | default('', true) }} figure__media" src="{{ source }}" data-src="{{ source }}" data-ratio="{{ image.ratio }}"{% if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %}>
         {% if page_type == 'article' and image.href %}
             </a>
         {% endif %}
