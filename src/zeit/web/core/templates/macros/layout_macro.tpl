@@ -183,3 +183,17 @@
         <!--<![endif]-->
     {% endif %}
 {% endmacro %}
+
+
+{% macro insert_esi(src, view) %}
+    {% if view.is_dev_environment %}
+        <esi:include src="{{ src }}" onerror="continue" />
+    {% else %}
+        <esi:remove>
+            <span> Anmeldung nicht möglich </span>
+        </esi:remove>
+        <!--esi
+        <esi:include src="{{ src }}" />
+        -->
+    {% endif %}
+{% endmacro %}
