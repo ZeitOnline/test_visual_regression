@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Add path_info as query for banner mappings
 
+- ZON-2228: Add only p param to canonical
+
 - FIX: Update liveblog article template name
 
 - MAINT: Polish sharing icon, linked comment count and large teaser image
