@@ -30,6 +30,8 @@ Change log for zeit.web
 
 - FIX: Join rules for robots in view.py otherwise articles don't get correct rules
 
+- MAINT: round requested image sizes to reduce the number of possibly requested image URLs
+
 - MAINT: Use 303 instead of 200 for blacklist view
 
 
