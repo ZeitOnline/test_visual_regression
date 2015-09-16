@@ -10,6 +10,10 @@ Change log for zeit.web
 
 - MAINT: Make host for image urls configurable
 
+- ZON-1873: Dont make pagination headlines break
+
+- FIX: Prevent Next Read from Jumping
+
 - QUICKFIX: Show correct print link for one page articles
 
 - ZON-2219: Fix image size in force-mobile
