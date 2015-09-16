@@ -28,6 +28,8 @@ Change log for zeit.web
 
 - FIX: Join rules for robots in view.py otherwise articles don't get correct rules
 
+- MAINT: Use 303 instead of 200 for blacklist view
+
 
 2.1 (2015-09-14)
 ----------------
