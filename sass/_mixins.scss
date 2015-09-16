@@ -211,8 +211,14 @@
 @mixin drop_icon($open: false, $cross: true) {
 	@if $open {
 		@if $cross {
-			content: "\2573";
-			@include transform(rotate(-90deg));
+			content: "+";
+			font-size: 1.5em;
+			line-height: 0;
+			margin-left: remify(1px);
+			position: relative;
+			top: remify(2px);
+			@include transform(rotate(-45deg));
+			@include transform-origin(50% 50%);
 		}
 		@else {
 			@include transform(rotate(-180deg));
@@ -221,7 +227,7 @@
 	@else {
 		content: "▾";
 		display: inline-block; // needed for working transformation
-		margin: remify(0 0 0 2.5px);
+		margin: remify(0 0 0 3px);
 		@include transition(transform .5s);
 		@include transform-origin(50% 55%);
 	}
