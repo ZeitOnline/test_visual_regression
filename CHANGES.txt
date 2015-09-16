@@ -4,6 +4,8 @@ Change log for zeit.web
 2.2 (unreleased)
 ----------------
 
+- ZON-2231: Complete schema.org mark-up for articles
+
 - FIX: Repair css on eilmeldungs article
 
 - MAINT: Make host for image urls configurable

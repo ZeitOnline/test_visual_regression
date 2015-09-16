@@ -162,45 +162,40 @@ def test_schema_org_main_content_of_page(testbrowser):
     assert len(select('main[itemprop="mainContentOfPage"]')) == 1
 
 
-def test_schema_org_article(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
+def test_schema_org_article_mark_up(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    selector = 'article[itemtype="http://schema.org/Article"][itemscope]'
+    article = browser.cssselect(selector)
+    assert len(article) == 1
+    select = article[0].cssselect
 
-    assert len(select(
-        'article[itemtype="http://schema.org/Article"][itemscope]')) == 1
+    # articleBody
+    assert len(select('div[itemprop="articleBody"]')) == 1
 
-
-def test_schema_org_headline(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
+    # headline
     headline = select('h1[itemprop="headline"]')
-    text = u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?'
     assert len(headline) == 1
-    assert text in headline[0].text_content()
+    assert headline[0].text_content().strip() == (
+        u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?')
 
-
-def test_schema_org_description(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-
+    # description
     assert len(select('div[itemprop="description"]')) == 1
 
+    # author
+    selector = (
+        '*[itemtype="http://schema.org/Person"][itemprop="author"][itemscope]')
+    author = select(selector)
+    assert len(author) == 1
+    assert len(author[0].cssselect('a[itemprop="url"]')) == 1
+    name = author[0].cssselect('span[itemprop="name"]')
+    assert len(name) == 1
+    assert name[0].text == 'Wenke Husmann'
 
-def test_schema_org_author(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
+    # image
+    assert len(select('img[itemprop="image"]')) == 1
 
-    assert len(select('.byline[itemprop="author"]')) == 1
-    assert len(select('.byline a[itemprop="url"]')) == 1
-    assert len(select('.byline span[itemprop="name"]')) == 1
-
-
-def test_schema_org_article_body(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-
-    assert len(select('.article-body[itemprop="articleBody"]')) == 1
-
-
-def test_schema_org_image(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-    json = 'article > script[type="application/ld+json"]'
-    assert len(select(json)) == 1
+    # datePublished
+    assert len(select('time[itemprop="datePublished"]')) == 1
 
 
 def test_multipage_article_should_designate_meta_pagination(testbrowser):
