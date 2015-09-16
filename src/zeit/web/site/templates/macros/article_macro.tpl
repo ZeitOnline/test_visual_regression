@@ -83,7 +83,7 @@
     {# % if liveblog.blog_id -%}
     <div class="liveblog article__item">
         {% set esi_source = 'http://www.zeit.de/liveblog-backend/' + liveblog.blog_id + '.html' %}
-        {{ lama.insert_esi(esi_source, view) }}
+        {{ lama.insert_esi(esi_source, view, 'Liveblog konnte nicht geladen werden') }}
     </div>
     {%- endif % #}
 {%- endmacro %}

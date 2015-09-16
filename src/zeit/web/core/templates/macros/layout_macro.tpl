@@ -185,12 +185,12 @@
 {% endmacro %}
 
 
-{% macro insert_esi(src, view) %}
+{% macro insert_esi(src, view, error_text='') %}
     {% if view.is_dev_environment %}
         <esi:include src="{{ src }}" onerror="continue" />
     {% else %}
         <esi:remove>
-            <span> Anmeldung nicht möglich </span>
+            <!-- [esi-remove] {{ error_text }} -->
         </esi:remove>
         <!--esi
         <esi:include src="{{ src }}" />

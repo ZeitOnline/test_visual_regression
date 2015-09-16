@@ -159,7 +159,7 @@
 		    {% set esi_source = view.content_url + '/comment-form?pid=' + view.request.GET.pid | default() %}
 		{% endif %}
 	{% endif %}
-	{ lama.insert_esi(esi_source, view) }
+	{{ lama.insert_esi(esi_source, view, 'Kommentarformular konnte nicht geladen werden') }}
 
 	<script type="text/template" id="js-report-success-template">
 		<div class="comment-form__response--success">

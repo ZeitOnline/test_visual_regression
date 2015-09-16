@@ -1,2 +1,2 @@
 {% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/' + module.id + '/esi/body?shareUrl=' + request.url %}
-{{ lama.insert_esi(esi_source, view) }}
+{{ lama.insert_esi(esi_source, view, 'Cardstack konnte nicht geladen werden') }}
