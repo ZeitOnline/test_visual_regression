@@ -10,6 +10,10 @@ Change log for zeit.web
 
 - MAINT: Make host for image urls configurable
 
+- QUICKFIX: Show correct print link for one page articles
+
+- ZON-2219: Fix image size in force-mobile
+
 
 2.1 (2015-09-14)
 ----------------
@@ -18,10 +22,6 @@ Change log for zeit.web
   from the solr result, without resolving ICMSContent
 
 - ZON-1602: Integrate Print and PDF
-
-- ZON-2219: Fix image size in force-mobile
-
-- QUICKFIX: Show correct print link for one page articles
 
 
 2.0 (2015-09-14)
