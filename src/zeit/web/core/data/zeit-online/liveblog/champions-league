@@ -104,7 +104,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Messi war verboten gut. #FCBFCB</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">liveblog</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-liveblog</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">2616</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>

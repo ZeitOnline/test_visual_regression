@@ -41,7 +41,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Sport</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">liveblog</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-liveblog</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">2616</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/sport/2015-05/b09d29a0-0e09-478a-9a1c-d34ed8ff7607.tmp</attribute>
