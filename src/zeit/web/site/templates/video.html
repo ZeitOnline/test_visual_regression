@@ -22,8 +22,6 @@
 
         {{ vima.brightcove_video_tag(view.context.__name__, iframe=True) }}
 
-        {{ self.schema_org_image_info() }}
-
         {% if view.context.advertising_enabled %}
             {{ lama.adplace(view.banner(7), view) }}
         {% endif %}
