@@ -35,10 +35,9 @@ def test_esi_macro_should_produce_different_directives(jinja2_env):
     view.is_dev_environment = True
     assert tpl.module.insert_esi(src, view).strip() == html_for_wesgi
 
-    html_for_varnish =  '<esi:remove><!-- [esi-remove] esi failed -->'\
+    html_for_varnish = '<esi:remove><!-- [esi-remove] esi failed -->'\
         '</esi:remove><!--esi<esi:include src="' + src + '" />-->'
     view.is_dev_environment = False
-    __import__("pdb").set_trace()
     markup = tpl.module.insert_esi(src, view, 'esi failed')
     string = ''
     for line in markup.splitlines():
