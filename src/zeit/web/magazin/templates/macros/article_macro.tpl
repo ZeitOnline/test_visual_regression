@@ -304,15 +304,17 @@
     {% if lm_date %}
         <!--[if gt IE 8]><!-->
         <script type="text/javascript">
-        //due to seo reasons, original publish date is added later
-            var el = document.getElementsByClassName('article__head__meta__date');
-            var content = el[0].textContent != undefined ? el[0].textContent : el[0].innerText;
-            if( content != undefined ){
-                if( '{{ format }}' === 'long' ){
-                    el[0].innerHTML = '{{ publish_date }} —<br><span>zuletzt aktualisiert am ' + content + '</span>';
-                }else{
-                    el[0].innerHTML = '{{ publish_date }} —<br><span>editiert: ' + content + '</span>';
-                }
+        // due to seo reasons, original publish date is added later
+            var time = document.querySelector('.article__head__meta__date'),
+                content = time.textContent != undefined ? time.textContent : time.innerText,
+                published = document.createTextNode('{{ publish_date }} — '),
+                linebreak = document.createElement('br'),
+                text = "{% if format == 'long' %}zuletzt aktualisiert am {% else %}editiert: {% endif %}" + content;
+
+            if ( content != undefined ) {
+                time.parentNode.insertBefore(published, time);
+                time.parentNode.insertBefore(linebreak, time);
+                time.firstChild.nodeValue = text;
             }
         </script>
         <!--<![endif]-->

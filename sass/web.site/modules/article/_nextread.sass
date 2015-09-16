@@ -13,6 +13,9 @@
 		padding: remify(12px $page-padding 32px)
 	&__media
 		margin: 0
+		height: 0
+		padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+		background-color: $black
 	&__heading
 		@extend %teaser-heading
 		margin-bottom: remify(10px)
@@ -27,8 +30,6 @@
 		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
-		&:hover
-			border-bottom: none // disable hover effect as long as comment count is not linked
 
 	&--with-image &__container
 		padding-bottom: remify(64px)

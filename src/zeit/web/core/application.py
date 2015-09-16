@@ -1,3 +1,4 @@
+import ast
 import base64
 import logging
 import os.path
@@ -199,10 +200,16 @@ class Application(object):
         config.add_route('post_test_comments', '/admin/test-comments')
         config.add_route('toggle_third_party_modules', '/admin/toggle-tpm')
 
-        config.add_static_view(name='css', path='zeit.web.static:css/')
-        config.add_static_view(name='js', path='zeit.web.static:js/')
-        config.add_static_view(name='img', path='zeit.web.static:img/')
-        config.add_static_view(name='fonts', path='zeit.web.static:fonts/')
+        def add_static_view(config, name):
+            max_age = ast.literal_eval(self.settings['assets_max_age'])
+            config.add_static_view(
+                name=name, path='zeit.web.static:{}/'.format(name),
+                cache_max_age=max_age)
+
+        add_static_view(config, 'css')
+        add_static_view(config, 'js')
+        add_static_view(config, 'img')
+        add_static_view(config, 'fonts')
         config.add_renderer('jsonp', pyramid.renderers.JSONP(
             param_name='callback'))
 
