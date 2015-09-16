@@ -6,9 +6,13 @@ Change log for zeit.web
 
 - MAINT: Polish sharing icon, linked comment count and large teaser image
 
+- ZON-2231: Complete schema.org mark-up for articles
+
 - FIX: Repair css on eilmeldungs article
 
 - MAINT: Make host for image urls configurable
+
+- MAINT: Set cache max age for assets
 
 - ZON-1873: Dont make pagination headlines break
 
