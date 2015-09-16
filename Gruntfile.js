@@ -95,6 +95,7 @@ module.exports = function(grunt) {
                 options: {
                     specify: [
                         project.sourceDir + 'sass/**/*.s{a,c}ss',
+                        '!' + project.sourceDir + 'sass/**/advertorial.*',
                         '!' + project.sourceDir + 'sass/**/all-old-ie.*',
                         '!' + project.sourceDir + 'sass/**/ie-navi.*'
                     ],
@@ -103,7 +104,7 @@ module.exports = function(grunt) {
                     outputStyle: 'expanded'
                 }
             },
-            'dev-with-ie': {
+            'dev-all': {
                 options: {
                     sourcemap: true,
                     environment: 'development',
