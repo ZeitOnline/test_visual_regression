@@ -119,7 +119,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
             }
 
             // to decrease the number of variants which are fetched from the
-            // server, we use image width in steps of 100px on mobile
+            // server, we use image width in steps of 50px on mobile
             if ( isMobile ) {
                 width = Math.ceil( width / 50 ) * 50;
             }
