@@ -74,7 +74,15 @@
     <script src="{{ request.asset_url('js/vendor/modernizr-custom.js') }}"></script>
     {# SVG4everybody TODO: replace Grunticon completely, check IE8 Fallback -#}
     <script src="{{ request.asset_url('js/vendor/svg4everybody.legacy.js') }}"></script>
-    <script>svg4everybody();</script>
+    <script>
+        {# needed for styling SVG in IE8 #}
+        document.createElement( 'svg' );
+        svg4everybody({
+            fallback: function ( src, svg, use ) {
+                return src.replace( /web\.site\/icons\.svg(\?.+)?#svg-(.+)/ , 'icons/site/$2.png$1');
+            }
+        });
+    </script>
     {# Grunticon SVG -#}
     <script>
         {%- include "zeit.web.static:css/icons/grunticon.loader.js" ignore missing -%}
