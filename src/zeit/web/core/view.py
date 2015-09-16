@@ -3,6 +3,7 @@ import base64
 import datetime
 import logging
 import lxml.etree
+import os.path
 import urlparse
 import re
 
@@ -520,6 +521,10 @@ class Base(object):
 class Content(Base):
 
     is_longform = False
+
+    @zeit.web.reify
+    def basename(self):
+        return os.path.basename(self.request.path.rstrip('/'))
 
     @zeit.web.reify
     def subtitle(self):
