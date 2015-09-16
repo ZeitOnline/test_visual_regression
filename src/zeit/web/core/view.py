@@ -209,6 +209,10 @@ class Base(object):
         return self.context.cap_title.title()
 
     @zeit.web.reify
+    def path_info(self):
+        return self.request.path_info
+
+    @zeit.web.reify
     def banner_channel(self):
         # manually banner_id rules first
         if self.context.banner_id is not None:
@@ -728,7 +732,7 @@ def not_found(request):
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
 def surrender(context, request):
     return pyramid.response.Response(
-        'OK', 200, headerlist=[('X-Render-With', 'default')])
+        'OK', 303, headerlist=[('X-Render-With', 'default')])
 
 
 @pyramid.view.view_config(route_name='json_delta_time', renderer='json')
