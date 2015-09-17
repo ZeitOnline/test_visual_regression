@@ -4,6 +4,8 @@ Change log for zeit.web
 2.3 (unreleased)
 ----------------
 
+- HOTFIX: Don't break in auto areas when videos are teasered on a CP
+
 - MAINT: Clean up tests
 
 
