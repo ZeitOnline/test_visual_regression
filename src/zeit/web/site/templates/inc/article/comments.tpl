@@ -151,12 +151,12 @@
 	{% endif %}
 
 	{% if view.request.GET.action == 'report' %}
-		{% set esi_source = view.content_url + '/report-form?pid=' + view.request.GET.pid %}
+		{% set esi_source = '{}/report-form?pid={}'.format(view.content_url, view.request.GET.pid)  %}
 	{% else %}
 		{% if view.request.GET.error %}
-		    {% set esi_source = view.content_url + '/comment-form?error=' + view.request.GET.error %}
+		    {% set esi_source = '{}/comment-form?error={}'.format(view.content_url, view.request.GET.error) %}
 		{% else %}
-		    {% set esi_source = view.content_url + '/comment-form?pid=' + view.request.GET.pid | default() %}
+		    {% set esi_source = '{}/comment-form?pid={}'.format(view.content_url, view.request.GET.pid) %}
 		{% endif %}
 	{% endif %}
 	{{ lama.insert_esi(esi_source, view, 'Kommentarformular konnte nicht geladen werden') }}

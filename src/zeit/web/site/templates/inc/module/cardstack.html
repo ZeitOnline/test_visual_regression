@@ -1,2 +1,3 @@
-{% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/' + module.id + '/esi/body?shareUrl=' + request.url %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
+{% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/{}/esi/body?shareUrl={}'.format(module.id, request.url) %}
 {{ lama.insert_esi(esi_source, view, 'Cardstack konnte nicht geladen werden') }}

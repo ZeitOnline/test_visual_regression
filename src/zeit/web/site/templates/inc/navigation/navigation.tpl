@@ -30,7 +30,7 @@
 
 	<!-- wrap start -->
 	<div class="main_nav__community" data-dropdown="true">
-		{% set esi_source = 'http://' + view.request.host + '/login-state?context-uri=' + request.url %}
+		{% set esi_source = 'http://{}/login-state?context-uri={}'.format(request.host, request.url) %}
 		{{ lama.insert_esi(esi_source, view, 'Anmeldung nicht möglich') }}
 	</div>
 	<div class="main_nav__ressorts" data-dropdown="true">

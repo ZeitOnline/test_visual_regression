@@ -59,7 +59,7 @@
     {% if obj.blog_id -%}
         <div class="is-constrained is-centered">
             {# TODO: We should mock the liveblog backend for local testing. #}
-            {% set esi_source = 'http://www.zeit.de/liveblog-backend/' + obj.blog_id + '.html' %}
+            {% set esi_source = 'http://www.zeit.de/liveblog-backend/{}.html'.format(obj.blog_id) %}
             {{ lama_core.insert_esi(esi_source, view, 'Liveblog konnte nicht geladen werden') }}
         </div>
     {%- endif %}
