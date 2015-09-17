@@ -17,7 +17,7 @@
       <tag score="4" type="Person" url_value="ridley-scott" uuid="096c6141-d20c-4b14-9ee1-3824560be7d0">Ridley Scott</tag>
     </rankedTags>
     <references>
-      <reference type="intern" href="http://xml.zeit.de/zeit-online/article/01" contenttype="article" />
+      <reference author="Wenke Husmann" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/article/01" contenttype="article" publication-date="" expires=""></reference>
     </references>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
     <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
@@ -89,6 +89,12 @@
         <copyright py:pytype="str">© Warner Bros.</copyright>
       </image>
       <p>Es fällt auf, dass in Barcelona das Dribbling ein wichtiges Stilmittel ist (189 erfolgreiche). Mit großem Abstand gewinnt übrigens Lionel Messi diese Einzelwertung (71). Seine Alleingänge schaffen Raum für die Mitspieler. Weil sie trotzdem oft den Ball besitzen, zeigt das: Sie passen öfter, spielen lieber ab.</p>
+      <raw py:pytype="str">
+        <img style="padding:5% 25%;width:100%;" src="http://i.giphy.com/cYhaIIyjjxg1W.gif"/>
+      </raw>
+      <raw alldevices="true" py:pytype="str">
+        <img style="padding:5% 25%;width:100%;" src="http://i.giphy.com/fVwQok9xnLGOA.gif"/>
+      </raw>
       <p>Es fällt auf, dass in Barcelona das Dribbling ein wichtiges Stilmittel ist (189 erfolgreiche). Mit großem Abstand gewinnt übrigens Lionel Messi diese Einzelwertung (71). Seine Alleingänge schaffen Raum für die Mitspieler. Weil sie trotzdem oft den Ball besitzen, zeigt das: Sie passen öfter, spielen lieber ab.</p>
     </division>
   </body>

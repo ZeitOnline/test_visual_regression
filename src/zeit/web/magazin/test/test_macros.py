@@ -277,6 +277,7 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
     def get_current_request():
         request = mock.Mock()
         request.route_url.return_value = 'http://localhost/'
+        request.image_host = 'http://localhost/'
         return request
 
     monkeypatch.setattr(

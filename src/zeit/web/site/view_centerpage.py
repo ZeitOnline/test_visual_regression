@@ -139,7 +139,11 @@ class Centerpage(
 
     @zeit.web.reify
     def canonical_url(self):
-        return self.request.url
+        url = super(Centerpage, self).canonical_url.replace(
+            'index.cp2015', 'index')  # XXX: remove soon (aps)
+        page = self.request.params.get('p', None)
+        param_str = '?p=' + page if page else ''
+        return url + param_str
 
     @zeit.web.reify
     def has_cardstack(self):

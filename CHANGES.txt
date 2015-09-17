@@ -1,7 +1,60 @@
 Change log for zeit.web
 =======================
 
-2.1 (unreleased)
+2.4 (unreleased)
+----------------
+
+- Nothing changed yet.
+
+
+2.3 (2015-09-17)
+----------------
+
+- HOTFIX: Don't break in auto areas when videos are teasered on a CP
+
+- MAINT: Clean up tests
+
+
+2.2 (2015-09-17)
+----------------
+
+
+- QUICKFIX: Show correct print link for one page articles
+
+- ZON-1873: Dont make pagination headlines break
+
+- ZON-2219: Fix image size in force-mobile
+
+- ZON-2220: Correct Servicebox links (configuration via batou, no change in zeit.web)
+
+- ZON-2228: Add only p param to canonical
+
+- ZON-2231: Complete schema.org mark-up for articles
+
+- FIX: Add path_info as query for banner mappings
+
+- FIX: Generate PNG icons for svg4everybody fallback images
+
+- FIX: Join rules for robots in view.py otherwise articles don't get correct rules
+
+- FIX: Prevent Next Read from Jumping
+
+- FIX: Repair css on eilmeldungs article
+
+- FIX: Update liveblog article template name
+
+- MAINT: Make host for image urls configurable
+
+- MAINT: Polish sharing icon, linked comment count and large teaser image
+
+- MAINT: Set cache max age for assets
+
+- MAINT: Use 303 instead of 200 for blacklist view
+
+- MAINT: round requested image sizes to reduce the number of possibly requested image URLs
+
+
+2.1 (2015-09-14)
 ----------------
 
 - MAINT: Embed liveblogs
@@ -10,8 +63,6 @@ Change log for zeit.web
   from the solr result, without resolving ICMSContent
 
 - ZON-1602: Integrate Print and PDF
-
-- ZON-2219: Fix image size in force-mobile
 
 
 2.0 (2015-09-14)

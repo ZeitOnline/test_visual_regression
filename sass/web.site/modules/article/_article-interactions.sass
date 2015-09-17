@@ -15,6 +15,7 @@
 	position: absolute
 	top: remify(20px)
 	left: remify(55px)
+	display: none
 	&__print,
 	&__pdf
 		@extend %article-interactions__item
@@ -22,6 +23,8 @@
 			content: " / "
 			color: $color-separator
 			margin: remify(0 4px)
+	+respond-min($break-desktop-min)
+		display: inline
 
 .sharing-menu
 	font-size: remify(14px)

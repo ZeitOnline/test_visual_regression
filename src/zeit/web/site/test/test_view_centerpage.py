@@ -705,13 +705,23 @@ def test_adcontroller_values_return_values_on_cp(application):
     assert adcv == view.adcontroller_values
 
 
-def test_canonical_url_returns_correct_value_on_cp(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/index')
-    request = mock.Mock()
-    request.url = 'http://localhorst/centerpage/index'
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, request)
-    assert view.canonical_url == 'http://localhorst/centerpage/index'
+def test_canonical_ruleset_on_cps(testserver, testbrowser):
+    url = '%s/dynamic/ukraine' % testserver.url
+    browser = testbrowser(url)
+
+    # no param
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
+
+    # p param
+    browser = testbrowser(url + '?p=2')
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url + '?p=2'
+
+    # several params
+    browser = testbrowser(url + '?p=2&a=0#comment')
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url + '?p=2'
 
 
 def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
@@ -1291,18 +1301,23 @@ def test_advertorial_page_has_advertorial_label(testbrowser):
     assert browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
 
 
-def test_standart_teasers_have_meetrics_attribute(testbrowser):
-    browser = testbrowser('/index')
+def test_standard_teasers_have_meetrics_attribute(testbrowser):
+    browser = testbrowser('/zeit-online/basic-teasers-setup')
 
     fullwidth = browser.cssselect('.teaser-fullwidth')
     large = browser.cssselect('.teaser-large')
     small = browser.cssselect('.teaser-small')
     square = browser.cssselect('.teaser-square')
+    buzz = browser.cssselect('.teaser-buzz')
 
     assert fullwidth[0].attrib['data-meetrics'] == 'solo'
     assert large[0].attrib['data-meetrics'] == 'major'
+    assert large[1].attrib['data-meetrics'] == 'parquet'
     assert small[0].attrib['data-meetrics'] == 'major'
+    assert small[4].attrib['data-meetrics'] == 'parquet'
     assert square[0].attrib['data-meetrics'] == 'minor'
+    assert square[1].attrib['data-meetrics'] == 'duo'
+    assert not buzz[0].get('data-meetrics')
 
 
 def test_video_teasers_have_meetrics_attribute(testbrowser):
@@ -1326,11 +1341,7 @@ def test_topic_teasers_have_meetrics_attribute(testbrowser):
 
 
 def test_all_teasers_have_clicktrack_attribute(testbrowser):
-    browser = testbrowser('/index')
-
-    # exclude spektrum teasers
-    # selector = '.cp-area:not(.cp-area--spektrum) article[data-unique-id]'
-    # simple version
+    browser = testbrowser('/zeit-online/basic-teasers-setup')
     selector = 'article[data-unique-id]'
     teasers = browser.cssselect(selector)
     assert len(teasers)

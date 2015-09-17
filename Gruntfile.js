@@ -25,7 +25,7 @@ module.exports = function(grunt) {
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:icons', 'clean:symbols', 'svgmin', 'grunticon', 'svgstore' ],
             icons: [ 'clean:icons', 'svgmin', 'grunticon' ],
-            symbols: [ 'clean:symbols', 'svgmin:symbols', 'svgstore' ],
+            symbols: [ 'clean:symbols', 'svgmin:symbols', 'svgstore', 'grunticon:symbols' ],
             lint: [ 'jshint', 'jscs' ]
         }
     };
@@ -95,6 +95,7 @@ module.exports = function(grunt) {
                 options: {
                     specify: [
                         project.sourceDir + 'sass/**/*.s{a,c}ss',
+                        '!' + project.sourceDir + 'sass/**/advertorial.*',
                         '!' + project.sourceDir + 'sass/**/all-old-ie.*',
                         '!' + project.sourceDir + 'sass/**/ie-navi.*'
                     ],
@@ -103,7 +104,7 @@ module.exports = function(grunt) {
                     outputStyle: 'expanded'
                 }
             },
-            'dev-with-ie': {
+            'dev-all': {
                 options: {
                     sourcemap: true,
                     environment: 'development',
@@ -284,6 +285,21 @@ module.exports = function(grunt) {
                     datapngcss: 'site.data.png.css',
                     urlpngcss: 'site.fallback.css',
                     previewhtml: 'site.preview.html',
+                    pngfolder: 'site'
+                }
+            },
+            symbols: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= svgmin.symbols.dest %>',
+                    src: [ '*.svg' ],
+                    dest: project.codeDir + 'css/icons'
+                }],
+                options: {
+                    datasvgcss: 'symbols.data.svg.css',
+                    datapngcss: 'symbols.data.png.css',
+                    urlpngcss: 'symbols.fallback.css',
+                    previewhtml: 'symbols.preview.html',
                     pngfolder: 'site'
                 }
             }

@@ -1,7 +1,7 @@
 {% extends "zeit.web.site:templates/article_komplett.html" %}
 
 {% block breaking_news %}
-	<div class="breaking-news-banner">
+	<div class="breaking-news-banner breaking-news-banner--article">
 		<strong class="breaking-news-banner__label">Eilmeldung</strong> <span class="breaking-news-banner__time">{{ view.date_first_released | format_date('time_only') }}</span>
 	</div>
 {% endblock breaking_news %}
