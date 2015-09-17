@@ -36,6 +36,8 @@ Change log for zeit.web
 
 - MAINT: Use 303 instead of 200 for blacklist view
 
+- ZON-2220: Correct Servicebox links (configuration via batou, no change in zeit.web)
+
 
 2.1 (2015-09-14)
 ----------------
