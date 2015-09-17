@@ -415,6 +415,7 @@
 	@if $border_width > 0 {
 		border-width: $border_width;
 		border-color: $border_color;
+		border-style: solid;
 	}
 }
 
