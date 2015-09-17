@@ -4,7 +4,7 @@ Change log for zeit.web
 2.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- MAINT: Embed liveblogs using ESI
 
 
 2.3 (2015-09-17)
@@ -57,7 +57,6 @@ Change log for zeit.web
 2.1 (2015-09-14)
 ----------------
 
-- MAINT: Embed liveblogs
 
 - PERF: Re-Enable LazyProxy for ranking areas and try to answer everything
   from the solr result, without resolving ICMSContent
