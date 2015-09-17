@@ -133,14 +133,10 @@
         </container>
       </region>
     </cluster>
-    <cluster area="teaser-mosaic"/>
-    <supertitle>ZON CP</supertitle>
-    <title>ZON</title>
-    <subtitle>ZON CP</subtitle>
+    <title>Serien Teaser</title>
   </body>
   <feed/>
   <teaser>
-    <title>ZON</title>
-    <text>ZON CP</text>
+    <title>Serien Teaser</title>
   </teaser>
 </centerpage>
