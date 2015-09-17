@@ -26,16 +26,14 @@ $teaser-storystream-left-outer-desktop: 20px
 		margin: remify(20px $teaser-storystream-left-outer-mobile 0)
 		padding: remify(0 $teaser-storystream-left-inner-mobile 13px)
 		position: absolute
-		+make-a-circle($color: $teaser-storystream-line-color, $radius: 9px)
 		&:before
+			+make-a-circle($color: $teaser-storystream-line-color, $radius: 9px)
 			left: 0
 			margin: remify(-2px 0 0 -5px)
-			// TODO: compare CSS of this version and the one with a combined
-			// "+respond-min($break-desktop-min)" at the end of this file
 
 	&__link
 		display: block
-		margin-top: -7px
+		margin-top: remify(-9px)
 
 	&__kicker
 		color: $zon_lighter_grey
@@ -73,14 +71,13 @@ $teaser-storystream-left-outer-desktop: 20px
 		line-height: remify(20px)
 		letter-spacing: $zon-letter-spacing-s
 		&:before
-			background-color: $teaser-storystream-line-color
-			border-radius: 50%
-			content: ""
-			height: remify(9px)
-			left: remify(-20px)
-			position: absolute
-			top: .3em
-			width: remify(9px)
+			+make-a-circle($color: $teaser-storystream-line-color, $radius: 9px)
+			left: remify(-$teaser-storystream-left-inner-mobile)
+			margin: remify(5px 0 0 -5px)
+			// TODO: compare CSS of this version and the one with a combined
+			// "+respond-min($break-desktop-min)" at the end of this file
+			+respond-min($break-tablet-min)
+				left: remify(-$teaser-storystream-left-inner-tablet)
 
 	&__update
 		color: $zon_light_grey
@@ -120,8 +117,6 @@ $teaser-storystream-left-outer-desktop: 20px
 			.teaser-storystream__headercontent
 				margin: remify(20px $teaser-storystream-left-outer-mobile 0)
 				padding: remify(0 $teaser-storystream-left-inner-mobile 13px)
-				&:before
-					margin-left: remify(-$teaser-storystream-left-inner-tablet)
 			.teaser-storystream__kicker
 				font-size: remify(14px)
 				line-height: remify(16px)
@@ -142,7 +137,8 @@ $teaser-storystream-left-outer-desktop: 20px
 				letter-spacing: $zon-letter-spacing-s
 				&:before
 					border: 2px $white solid
-					left: remify(-22px)
+					left: remify(-$teaser-storystream-left-inner-mobile)
+					margin-left: remify(-7px) // Border ausgleichen
 			.teaser-storystream__listitem:last-child
 				display: none
 			.teaser-storystream__update
