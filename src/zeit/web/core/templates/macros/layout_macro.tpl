@@ -97,7 +97,7 @@
             if (
                 typeof AdController !== 'undefined'
                 {% if type == 'desktop' and banner.tile == 2 %}
-                && ZMO.clientWidth > ZMO.sideAdMinWidth 
+                && ZMO.clientWidth > ZMO.sideAdMinWidth
                 {% endif %}
                 && ZMO.clientWidth {{ operator | safe }} ZMO.mobileWidth
                 ) {
@@ -187,10 +187,15 @@
 
 {% macro insert_esi(src, view, error_text='') %}
     {% if view.is_dev_environment %}
+        <!-- [esi-debug: start]
+             src="{{ src }}"
+             error_text="{{ error_text }}" -->
         <esi:include src="{{ src }}" onerror="continue" />
+        <!-- [esi-debug: end] -->
     {% else %}
         <esi:remove>
-            <!-- [esi-remove] {{ error_text }} -->
+            <!-- [esi-remove] src="{{ src }}"
+             error_text="{{ error_text }}" -->
         </esi:remove>
         <!--esi
         <esi:include src="{{ src }}" />
