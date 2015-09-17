@@ -72,7 +72,7 @@ def test_keyword_index_pages_should_fall_back_to_xslt(testserver, testbrowser):
     resp = requests.get(
         '%s/schlagworte/index/A/index' % testserver.url,
         allow_redirects=False)
-    assert resp.status_code == 200
+    assert resp.status_code == 303
     assert resp.headers['x-render-with'] == 'default'
 
 

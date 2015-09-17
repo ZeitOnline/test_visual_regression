@@ -202,6 +202,7 @@ def test_centerpage_markdown_module_is_rendered(jinja2_env):
     request.route_url.return_value = 'http://foo.bar/'
     view = zeit.web.site.view_centerpage.Centerpage(content, request)
     view.meta_robots = ''
+    view.canonical_url = ''
     html_str = tpl.render(view=view, request=request)
     html = lxml.html.fromstring(html_str)
 
@@ -218,6 +219,7 @@ def test_centerpage_teaser_topic_is_rendered(jinja2_env):
     request.route_url.return_value = 'http://foo.bar/'
     view = zeit.web.site.view_centerpage.Centerpage(content, request)
     view.meta_robots = ''
+    view.canonical_url = ''
     html_str = tpl.render(view=view, request=request)
     html = lxml.html.fromstring(html_str)
 

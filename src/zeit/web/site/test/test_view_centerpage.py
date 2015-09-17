@@ -705,13 +705,23 @@ def test_adcontroller_values_return_values_on_cp(application):
     assert adcv == view.adcontroller_values
 
 
-def test_canonical_url_returns_correct_value_on_cp(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/index')
-    request = mock.Mock()
-    request.url = 'http://localhorst/centerpage/index'
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, request)
-    assert view.canonical_url == 'http://localhorst/centerpage/index'
+def test_canonical_ruleset_on_cps(testserver, testbrowser):
+    url = '%s/dynamic/ukraine' % testserver.url
+    browser = testbrowser(url)
+
+    # no param
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url
+
+    # p param
+    browser = testbrowser(url + '?p=2')
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url + '?p=2'
+
+    # several params
+    browser = testbrowser(url + '?p=2&a=0#comment')
+    link = browser.cssselect('link[rel="canonical"]')
+    assert link[0].get('href') == url + '?p=2'
 
 
 def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):

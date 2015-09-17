@@ -3,6 +3,7 @@ import base64
 import datetime
 import logging
 import lxml.etree
+import os.path
 import urlparse
 import re
 
@@ -206,6 +207,10 @@ class Base(object):
     @zeit.web.reify
     def cap_title(self):
         return self.context.cap_title.title()
+
+    @zeit.web.reify
+    def path_info(self):
+        return self.request.path_info
 
     @zeit.web.reify
     def banner_channel(self):
@@ -518,6 +523,10 @@ class Content(Base):
     is_longform = False
 
     @zeit.web.reify
+    def basename(self):
+        return os.path.basename(self.request.path.rstrip('/'))
+
+    @zeit.web.reify
     def subtitle(self):
         return self.context.subtitle
 
@@ -723,7 +732,7 @@ def not_found(request):
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
 def surrender(context, request):
     return pyramid.response.Response(
-        'OK', 200, headerlist=[('X-Render-With', 'default')])
+        'OK', 303, headerlist=[('X-Render-With', 'default')])
 
 
 @pyramid.view.view_config(route_name='json_delta_time', renderer='json')
