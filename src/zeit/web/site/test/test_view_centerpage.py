@@ -1301,18 +1301,23 @@ def test_advertorial_page_has_advertorial_label(testbrowser):
     assert browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
 
 
-def test_standart_teasers_have_meetrics_attribute(testbrowser):
-    browser = testbrowser('/index')
+def test_standard_teasers_have_meetrics_attribute(testbrowser):
+    browser = testbrowser('/zeit-online/basic-teasers-setup')
 
     fullwidth = browser.cssselect('.teaser-fullwidth')
     large = browser.cssselect('.teaser-large')
     small = browser.cssselect('.teaser-small')
     square = browser.cssselect('.teaser-square')
+    buzz = browser.cssselect('.teaser-buzz')
 
     assert fullwidth[0].attrib['data-meetrics'] == 'solo'
     assert large[0].attrib['data-meetrics'] == 'major'
+    assert large[1].attrib['data-meetrics'] == 'parquet'
     assert small[0].attrib['data-meetrics'] == 'major'
+    assert small[4].attrib['data-meetrics'] == 'parquet'
     assert square[0].attrib['data-meetrics'] == 'minor'
+    assert square[1].attrib['data-meetrics'] == 'duo'
+    assert not buzz[0].get('data-meetrics')
 
 
 def test_video_teasers_have_meetrics_attribute(testbrowser):
@@ -1336,11 +1341,7 @@ def test_topic_teasers_have_meetrics_attribute(testbrowser):
 
 
 def test_all_teasers_have_clicktrack_attribute(testbrowser):
-    browser = testbrowser('/index')
-
-    # exclude spektrum teasers
-    # selector = '.cp-area:not(.cp-area--spektrum) article[data-unique-id]'
-    # simple version
+    browser = testbrowser('/zeit-online/basic-teasers-setup')
     selector = 'article[data-unique-id]'
     teasers = browser.cssselect(selector)
     assert len(teasers)
