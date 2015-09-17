@@ -3,7 +3,7 @@ import pytest
 import re
 
 
-@pytest.mark.parametrize('url', ['/index', '/zeit-online/article/01'])
+@pytest.mark.parametrize('url', ['/index', '/zeit-online/article/cardstack'])
 def test_cardstack_should_be_included_in_content_objects(
         testbrowser, url):
     browser = testbrowser(url)
@@ -38,7 +38,7 @@ def test_cardstack_should_have_static_param_on_cps(
 
 
 def test_cardstack_should_not_have_static_param_on_articles(testbrowser):
-    url = '/zeit-online/article/01'
+    url = '/zeit-online/article/cardstack'
     browser = testbrowser(url)
 
     esihead = ('<esi:include src="http://www.zeit.de'

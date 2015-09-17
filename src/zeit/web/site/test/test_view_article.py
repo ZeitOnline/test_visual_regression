@@ -115,11 +115,11 @@ def test_article_complete_has_correct_h1(testbrowser):
 
 
 def test_article_plain_has_correct_h1(testbrowser):
-    select = testbrowser('/zeit-online/article/02').cssselect
+    select = testbrowser('/zeit-online/article/simple').cssselect
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
-        u'Zwei Baguettes und ein Zimmer bitte'), (
-        'article headline is not h1')
+        u'Williams wackelt weiter, steht aber im Viertelfinale'), (
+        'article headline must be h1')
 
 
 def test_article_page_1_has_correct_title(testbrowser):
@@ -250,7 +250,7 @@ def test_article_meta_should_show_comment_count(testbrowser):
 
 def test_article_meta_should_omit_comment_count_if_no_comments_present(
         testbrowser):
-    browser = testbrowser('/zeit-online/article/zeit')
+    browser = testbrowser('/zeit-online/article/simple')
     assert len(browser.cssselect('.metadata__commentcount')) == 0
 
 
@@ -458,23 +458,24 @@ def test_adcontroller_values_return_values_on_article(application):
 
 
 def test_article_view_renders_alldevices_raw_box(testbrowser):
-    browser = testbrowser('/zeit-online/article/02')
+    browser = testbrowser('/zeit-online/article/raw-box')
     assert 'fVwQok9xnLGOA' in browser.contents
 
 
 def test_article_skips_raw_box_not_suitable_for_alldevices(testbrowser):
-    browser = testbrowser('/zeit-online/article/02')
+    browser = testbrowser('/zeit-online/article/raw-box')
     assert 'cYhaIIyjjxg1W' not in browser.contents
 
 
-def test_nextread_is_placed_on_article_02(testbrowser):
-    browser = testbrowser('/zeit-online/article/02')
+def test_nextread_is_placed_on_article(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread')
     assert len(browser.cssselect('#nextread')) == 1
 
 
 def test_nextread_is_responsive(testserver, selenium_driver, screen_size):
+    url = '{}/zeit-online/article/simple-nextread'.format(testserver.url)
     selenium_driver.set_window_size(screen_size[0], screen_size[1])
-    selenium_driver.get('{}/zeit-online/article/02'.format(testserver.url))
+    selenium_driver.get(url)
     nextread = selenium_driver.find_element_by_id('nextread')
 
     assert nextread.is_displayed(), 'Nextread missing'
@@ -499,11 +500,11 @@ def test_publisher_nextread_on_article_has_own_template(testbrowser):
 
 def test_zon_nextread_teaser_block_has_teasers_available(application):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/02')
+        'http://xml.zeit.de/zeit-online/article/simple-nextread')
     nextread = zeit.web.core.interfaces.INextread(context)
     assert hasattr(nextread, '__iter__')
     assert len(nextread) == 1
-    assert nextread[0].uniqueId.endswith('/zeit-online/article/01')
+    assert nextread[0].uniqueId.endswith('/zeit-online/article/zeit')
 
 
 def test_article_column_should_have_no_body_image(testbrowser):

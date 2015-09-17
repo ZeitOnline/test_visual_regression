@@ -3,6 +3,7 @@ from hashlib import sha1
 from StringIO import StringIO
 
 from PIL import Image
+import lxml.objectify
 import mock
 import pyramid.httpexceptions
 import pytest
@@ -72,6 +73,15 @@ def test_scaled_image_download_from_brightcove_assets(appbrowser):
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
         'inline; filename="imagegroup.jpeg"')
+
+
+def test_video_claiming_to_be_imagegroup_works_with_xmlreference(application):
+    video = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2014-01/3035864892001')
+    node = lxml.objectify.XML('<dummy/>')
+    updater = zeit.cms.content.interfaces.IXMLReferenceUpdater(video)
+    # assert nothing raised
+    updater.update(node, suppress_errors=True)
 
 
 def test_brightcove_images_should_set_cache_headers(testserver, app_settings):
