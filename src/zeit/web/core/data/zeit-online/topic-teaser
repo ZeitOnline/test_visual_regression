@@ -109,13 +109,10 @@
         </container>
       </region>
     </cluster>
-    <supertitle>Topic Teaser</supertitle>
-    <title>Topic Teaser</title>
-    <subtitle>Topic Teaser</subtitle>
+    <title>Themen Teaser</title>
   </body>
   <feed/>
   <teaser>
-    <title>Topic Teaser</title>
-    <text>Topic Teaser</text>
+    <title>Themen Teaser</title>
   </teaser>
 </centerpage>

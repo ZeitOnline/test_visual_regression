@@ -44,6 +44,8 @@ class Article(zeit.web.core.view.Content):
     def main_image_block(self):
         img = zeit.web.core.interfaces.IFrontendBlock(
             self.context.main_image_block, None)
+        if img is not None:
+            img.itemprop = 'image'
         try:
             self._copyrights.setdefault(img.uniqueId, img)
         except AttributeError:
