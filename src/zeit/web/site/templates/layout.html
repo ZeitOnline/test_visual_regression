@@ -111,7 +111,7 @@
     {% block cardstack_head %}
         {% if view.has_cardstack %}
             {% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/esi/head?shareUrl={}'.format(request.url) %}
-            {{ lama.insert_esi(esi_source, view, 'Cards Ressourcen konnten nicht geladen werden') }}
+            {{ lama.insert_esi(esi_source, 'Cardstack Ressourcen konnten nicht geladen werden', view.is_dev_environment) }}
         {% endif %}
     {% endblock %}
 </head>
@@ -195,7 +195,7 @@
     {% block cardstack_bottom %}
         {% if view.has_cardstack %}
             {% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/esi/scripts?shareUrl={}'.format(request.url) %}
-            {{ lama.insert_esi(esi_source, view, 'Cardstack konnte nicht geladen werden') }}
+            {{ lama.insert_esi(esi_source, 'Cardstack konnte nicht eingebunden werden', view.is_dev_environment) }}
         {% endif %}
     {% endblock %}
 </body>

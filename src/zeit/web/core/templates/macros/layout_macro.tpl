@@ -185,8 +185,8 @@
 {% endmacro %}
 
 
-{% macro insert_esi(src, view, error_text='') %}
-    {% if view.is_dev_environment %}
+{% macro insert_esi(src, error_text='', is_dev=False) %}
+    {% if is_dev %}
         <!-- [esi-debug: start]
              src="{{ src }}"
              error_text="{{ error_text }}" -->

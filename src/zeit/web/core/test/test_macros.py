@@ -36,8 +36,7 @@ def test_esi_macro_should_produce_directive_depending_on_environment(
     html_for_wesgi = '<!-- [esi-debug: start]src="{}"error_text="" -->'\
         '<esi:include src="{}" onerror="continue" />'\
         '<!-- [esi-debug: end] -->'.format(src, src)
-    view.is_dev_environment = True
-    markup = tpl.module.insert_esi(src, view)
+    markup = tpl.module.insert_esi(src, is_dev=True)
     wesgi_string = ''
     for line in markup.splitlines():
         wesgi_string += line.strip()
@@ -46,8 +45,7 @@ def test_esi_macro_should_produce_directive_depending_on_environment(
     html_for_varnish = '<esi:remove><!-- [esi-remove] src="{}"error_text="{}"'\
         ' --></esi:remove><!--esi<esi:include src="{}" />-->'.format(
             src, error_text, src)
-    view.is_dev_environment = False
-    markup = tpl.module.insert_esi(src, view, error_text)
+    markup = tpl.module.insert_esi(src, error_text)
     varnish_string = ''
     for line in markup.splitlines():
         varnish_string += line.strip()
