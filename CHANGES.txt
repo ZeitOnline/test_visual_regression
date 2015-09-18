@@ -4,7 +4,7 @@ Change log for zeit.web
 2.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- FIX: Don't break feed generation on imagegroups whose meta files are missing
 
 
 2.3 (2015-09-17)

@@ -12,6 +12,7 @@ import lxml.etree
 import lxml.objectify
 
 import zeit.content.cp.interfaces
+import zeit.content.image.interfaces
 import zeit.cms.interfaces
 import zeit.push.interfaces
 
@@ -123,7 +124,10 @@ class Newsfeed(Base):
             description = content.teaserText
             teaser_image = zeit.content.image.interfaces.IImages(content).image
             variant = teaser_image.variant_url('wide', 148, 84) if (
-                teaser_image) else ''
+                # Missing meta files break this, since "Folder has no attribute
+                # variant_url".
+                zeit.content.image.interfaces.IImageGroup.providedBy(
+                    teaser_image)) else ''
 
             if variant:
                 description = (
