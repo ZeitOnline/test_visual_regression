@@ -46,10 +46,14 @@ def last_published_semantic(context):
         context).date_last_published_semantic
 
 
+DATE_MIN = datetime.datetime(datetime.MINYEAR, 1, 1, tzinfo=pytz.UTC)
+
+
 def lps_sort(context):
-    return zeit.cms.workflow.interfaces.IPublishInfo(
-        context).date_last_published_semantic or datetime.datetime(
-            datetime.MINYEAR, 1, 1, tzinfo=pytz.UTC)
+    info = zeit.cms.workflow.interfaces.IPublishInfo(context, None)
+    if info is None:
+        return DATE_MIN
+    return info.date_last_published_semantic or DATE_MIN
 
 
 def filter_and_sort_entries(context):
