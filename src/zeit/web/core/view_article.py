@@ -78,6 +78,16 @@ class Article(zeit.web.core.view.Content):
             return self.pages[self.page_nr].teaser
 
     @zeit.web.reify
+    def pages_titles(self):
+        titles = []
+        for number in range(0, len(self.pages)):
+            title = self.title
+            if number > 0:
+                title = self.pages[number].teaser
+            titles.append(title)
+        return titles
+
+    @zeit.web.reify
     def pages_urls(self):
         urls = []
         for number in range(0, len(self.pages)):
@@ -113,6 +123,7 @@ class Article(zeit.web.core.view.Content):
             'pager': pager,
             'next_page_title': self.next_title,
             'content_url': self.content_url,
+            'pages_titles': self.pages_titles,
             'pages_urls': self.pages_urls,
             'next_page_url': self.next_page_url,
             'prev_page_url': self.prev_page_url

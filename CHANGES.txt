@@ -4,6 +4,8 @@ Change log for zeit.web
 2.4 (unreleased)
 ----------------
 
+- ZON-1489: Add table of contents for articles with pagination
+
 - FIX: Don't break feed generation on imagegroups whose meta files are missing
 
 - FIX: Ignore old-style video.zeit.de uniqueIds since we cannot resolve them
