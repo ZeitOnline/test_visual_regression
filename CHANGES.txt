@@ -4,7 +4,7 @@ Change log for zeit.web
 2.4 (unreleased)
 ----------------
 
-- ZON-1489: Add table of content for articles with pagination
+- ZON-1489: Add table of contents for articles with pagination
 
 
 2.3 (2015-09-17)

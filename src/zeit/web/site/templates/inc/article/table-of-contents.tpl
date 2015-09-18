@@ -7,7 +7,7 @@
 {% if view.pagination and view.pagination.total > 1 %}
 <aside class="article-toc article__item article__item--wide">
 	<div class="article-toc__container">
-		<h3 class="article-toc__headline">Inhalt {{ view.name }}</h3>
+		<h3 class="article-toc__headline">Inhalt</h3>
 		<ol class="article-toc__list">
 		{%- if view.is_all_pages_view %}
 			{%- set current = loop.index %}
