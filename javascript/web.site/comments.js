@@ -494,12 +494,18 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         if ( uid ) {
             // highlight recommended comments for logged in user
             $commentsBody.find( '.js-recommend-comment' ).each( function() {
-                var fans = this.getAttribute( 'data-fans' );
+                if ( uid === this.getAttribute( 'data-uid' ) ) {
+                    // hide recommendation link for user's own comments
+                    this.style.display = 'none';
+                } else {
+                    // highlight recommended comments for logged in user
+                    var fans = this.getAttribute( 'data-fans' );
 
-                fans = fans.length ? fans.split( ',' ) : [];
+                    fans = fans.length ? fans.split( ',' ) : [];
 
-                if ( fans.indexOf( uid ) !== -1 ) {
-                    toggleRecommendationLink( $( this ) );
+                    if ( fans.indexOf( uid ) !== -1 ) {
+                        toggleRecommendationLink( $( this ) );
+                    }
                 }
             });
 
