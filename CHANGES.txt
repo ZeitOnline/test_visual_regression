@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Ignore old-style video.zeit.de uniqueIds since we cannot resolve them
 
+- FIX: Handle non-ascii in keyword redirects (encode as utf-8)
+
 
 2.3 (2015-09-17)
 ----------------
