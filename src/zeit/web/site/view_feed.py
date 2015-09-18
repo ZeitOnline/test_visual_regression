@@ -12,6 +12,7 @@ import lxml.etree
 import lxml.objectify
 
 import zeit.content.cp.interfaces
+import zeit.content.image.interfaces
 import zeit.cms.interfaces
 import zeit.push.interfaces
 
@@ -45,10 +46,14 @@ def last_published_semantic(context):
         context).date_last_published_semantic
 
 
+DATE_MIN = datetime.datetime(datetime.MINYEAR, 1, 1, tzinfo=pytz.UTC)
+
+
 def lps_sort(context):
-    return zeit.cms.workflow.interfaces.IPublishInfo(
-        context).date_last_published_semantic or datetime.datetime(
-            datetime.MINYEAR, 1, 1, tzinfo=pytz.UTC)
+    info = zeit.cms.workflow.interfaces.IPublishInfo(context, None)
+    if info is None:
+        return DATE_MIN
+    return info.date_last_published_semantic or DATE_MIN
 
 
 def filter_and_sort_entries(context):
@@ -116,14 +121,19 @@ class Newsfeed(Base):
             content_url = content_url.replace(
                 self.request.route_url('home'), 'http://www.zeit.de/', 1)
 
-            authors = [getattr(author.target, 'display_name') for author in (
-                content.authorships)] if getattr(
-                    content, 'authorships') else []
+            authors = []
+            if getattr(content, 'authorships', None):
+                authors = [getattr(author.target, 'display_name', None)
+                           for author in content.authorships]
+                authors = [x for x in authors if x]
 
             description = content.teaserText
             teaser_image = zeit.content.image.interfaces.IImages(content).image
             variant = teaser_image.variant_url('wide', 148, 84) if (
-                teaser_image) else ''
+                # Missing meta files break this, since "Folder has no attribute
+                # variant_url".
+                zeit.content.image.interfaces.IImageGroup.providedBy(
+                    teaser_image)) else ''
 
             if variant:
                 description = (

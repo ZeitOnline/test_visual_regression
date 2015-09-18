@@ -65,9 +65,9 @@
 <body>
     <title>Test Pages Overview</title>
 
-    <cluster area="id-a2dff7f3-9876-4a6f-b88d-143fdfc5cff7" visible="True">
-        <region area="id-8152c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
-            <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-234eb191f212" title="">
+    <cluster area="id-a2dff7f3-9876-4a6f-b88d-143fdfc5cff7">
+        <region area="id-8152c8ee-b68e-40dd-a117-4d676e282599" kind="solo">
+            <container cp:type="markup" module="markup" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-234eb191f212" title="">
                 <text>
                     <h1>Test-Overview-Page</h1>
                     <blockquote><em>Wo finde ich Video-Teaser?<br/>Wie teste ich die Webtrekk-Verpixelung?<br/>Gibt es eine Übersicht über alle Journalistischen Formate?</em></blockquote>
@@ -77,75 +77,143 @@
         </region>
     </cluster>
 
-    <cluster visible="True" area="id-01aa0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet">
-        <region visible="True" hide-dupes="True" area="id-0100a3c0-fe49-6291-baac-453cc2a213ee" kind="parquet" title="Mehrseitige Artikel">
-            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf4caee">
-                <block contenttype="article" uniqueId="http://xml.zeit.de/zeit-online/article/zeit" />
+    <cluster area="id-01aa0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet">
+        <region area="id-0100a3c0-fe49-6291-baac-453cc2a213ee" kind="parquet" title="Mehrseitige Artikel">
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf4caee">
+                <block href="http://xml.zeit.de/zeit-online/article/zeit" />
             </container>
         </region>
     </cluster>
 
-    <cluster visible="True" area="id-01aa0739-4df4-4cbd-bf1e-86809ef1a020" kind="parquet">
-        <region visible="True" hide-dupes="True" area="id-0100a3c0-fe49-6291-baac-453cc2a213ef" kind="parquet" title="Nextreads">
-            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf4caef">
-                <block contenttype="article" uniqueId="http://xml.zeit.de/zeit-online/article/zeit" />
+    <cluster area="id-01aa0739-4df4-4cbd-bf1e-86809ef1a020" kind="parquet">
+        <region area="id-0100a3c0-fe49-6291-baac-453cc2a213ef" kind="parquet" title="Nextreads">
+            <referenced_cp>http://xml.zeit.de/zeit-online/basic-teasers-setup</referenced_cp>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf4caef">
+                <block href="http://xml.zeit.de/zeit-online/article/zeit" />
             </container>
-            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf5caef">
-                <block contenttype="article" uniqueId="http://xml.zeit.de/zeit-online/article/01" />
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf5caef">
+                <block href="http://xml.zeit.de/zeit-online/article/01" />
             </container>
-            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf6caef">
-                <block contenttype="article" uniqueId="http://xml.zeit.de/zeit-online/article/simple-verlagsnextread" />
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf6caeg">
+                <block href="http://xml.zeit.de/zeit-online/article/simple-nextread" />
             </container>
-        </region>
-    </cluster>
-
-    <cluster visible="True" area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet">
-        <region visible="True" hide-dupes="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213ee" kind="parquet" title="Video-CPs">
-            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5aaf4caee">
-                <block contenttype="video" uniqueId="http://xml.zeit.de/zeit-online/video-teaser" />
-            </container>
-            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e5d7">
-                <block contenttype="video" uniqueId="http://xml.zeit.de/zeit-online/video-stage" />
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-010115f1-a7c8-4d87-a710-70f5aaf6caef">
+                <block href="http://xml.zeit.de/zeit-online/article/simple-verlagsnextread" />
             </container>
         </region>
     </cluster>
 
-    <cluster visible="True" area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a020" kind="parquet">
-        <region visible="True" hide-dupes="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213dd" kind="parquet" title="Test-Modi">
-            <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-287eb191f252" title="Webtrekk-Debug-Modus">
+    <cluster area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet">
+        <region area="id-1ca0a3c0-fe49-6291-baac-453cc2a213ee" kind="parquet" title="Video-CPs">
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5aaf4caef">
+                <block href="http://xml.zeit.de/zeit-online/video-teaser" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e5d7">
+                <block href="http://xml.zeit.de/zeit-online/video-stage" />
+            </container>
+        </region>
+    </cluster>
+
+    <cluster area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a010" kind="parquet">
+        <region area="id-1ca0a3c0-fe49-6291-baac-453cc2a213ef" kind="parquet" title="Index Seiten">
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-1d4115f1-a7c8-4d87-a710-70f5aaf4caeg">
+                <block href="http://xml.zeit.de/zeit-online/advertorial-index" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e510">
+                <block href="http://xml.zeit.de/zeit-online/basic-teasers-setup" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e511">
+                <block href="http://xml.zeit.de/zeit-online/buzz-box" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e512">
+                <block href="http://xml.zeit.de/zeit-online/classic-teaser" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e513">
+                <block href="http://xml.zeit.de/zeit-online/fullwidth-teaser" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e514">
+                <block href="http://xml.zeit.de/zeit-online/journalistic-formats" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e515">
+                <block href="http://xml.zeit.de/zeit-online/large-teaser" />
+            </container>
+<!--
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e516">
+                <block href="http://xml.zeit.de/zeit-online/main-teaser-setup" />
+            </container>
+ -->
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e517">
+                <block href="http://xml.zeit.de/zeit-online/mobile-visible-index" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e518">
+                <block href="http://xml.zeit.de/zeit-online/news-teaser" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e519">
+                <block href="http://xml.zeit.de/zeit-online/parquet" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e520">
+                <block href="http://xml.zeit.de/zeit-online/parquet-teaser-setup" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e521">
+                <block href="http://xml.zeit.de/zeit-online/printbox" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e522">
+                <block href="http://xml.zeit.de/zeit-online/teaser-columns-without-authorimage" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e523">
+                <block href="http://xml.zeit.de/zeit-online/teaser-gallery-setup" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e524">
+                <block href="http://xml.zeit.de/zeit-online/teaser-inhouse-setup" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e525">
+                <block href="http://xml.zeit.de/zeit-online/teaser-serie-setup" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e526">
+                <block href="http://xml.zeit.de/zeit-online/teaser-square-setup" />
+            </container>
+            <container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-ee8e4a05e527">
+                <block href="http://xml.zeit.de/zeit-online/topic-teaser" />
+            </container>
+        </region>
+    </cluster>
+
+    <cluster area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a020" kind="parquet">
+        <region area="id-1ca0a3c0-fe49-6291-baac-453cc2a213dd" kind="parquet" title="Test-Modi">
+            <container cp:type="markup" module="markup" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-287eb191f252" title="Webtrekk-Debug-Modus">
                 <text>
-                <p>Im Webtrekk-Debug-Modus wird das Klicktracking <strong>nicht</strong> an Webtrekk gesendet (und der Klick ausgeführt), <strong>sondern</strong> der String wird über `console.log` ausgegeben.</p>
-                <strong>Wie wird der Modus ausgelöst?</strong>
-                <ul>
-                    <li>Über den Query Parameter <a href="/index?webtrekk-clicktracking-debug">?webtrekk-clicktracking-debug</a>.</li>
-                </ul>
+                    <p>Im Webtrekk-Debug-Modus wird das Klicktracking <strong>nicht</strong> an Webtrekk gesendet (und der Klick ausgeführt), <strong>sondern</strong> der String wird über `console.log` ausgegeben.</p>
+                    <strong>Wie wird der Modus ausgelöst?</strong>
+                    <ul>
+                        <li>Über den Query Parameter <a href="/index?webtrekk-clicktracking-debug">?webtrekk-clicktracking-debug</a>.</li>
+                    </ul>
                 </text>
             </container>
-            <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-287eb191f251" title="Wrapper-App">
+            <container cp:type="markup" module="markup" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-287eb191f251" title="Wrapper-App">
                 <text>
-                <strong>Wie wird der Modus ausgelöst?</strong>
-                <ul>
-                    <li>if the pages are requested from a host with the URL app-content.zeit.de</li>
-                    <li>if the dev environment and the query parameter <a href="/zeit-online/article/01?app-content">?app-content</a> is present.</li>
-                </ul>
+                    <strong>Wie wird der Modus ausgelöst?</strong>
+                    <ul>
+                        <li>if the pages are requested from a host with the URL app-content.zeit.de</li>
+                        <li>if the dev environment and the query parameter <a href="/zeit-online/article/01?app-content">?app-content</a> is present.</li>
+                    </ul>
                 </text>
             </container>
             <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a59c-287eb191f252" title="iqdAd-Markierung">
                 <text>
-                <p>AdPlaces (aus dem AdController) werden auf der Seite markiert, auch wenn keine Werbung darauf gebucht ist.</p>
-                <strong>Wie wird der Modus ausgelöst?</strong>
-                <ul>
-                    <li>Über den Query Parameter <a href="/index?iqadtest=iqadview">?iqadtest=iqadview</a>.</li>
-                </ul>
+                    <p>AdPlaces (aus dem AdController) werden auf der Seite markiert, auch wenn keine Werbung darauf gebucht ist.</p>
+                    <strong>Wie wird der Modus ausgelöst?</strong>
+                    <ul>
+                        <li>Über den Query Parameter <a href="/index?iqadtest=iqadview">?iqadtest=iqadview</a>.</li>
+                    </ul>
                 </text>
             </container>
             <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8bc1e86c-bcf7-4d07-a59c-287eb191f252" title="Eilmeldungsbanner">
                 <text>
-                <p>Auf jeder Seite lässt sich ein Eilmeldungs-Banner auslösen.</p>
-                <strong>Wie wird der Modus ausgelöst?</strong>
-                <ul>
-                    <li>Über den Query Parameter <a href="/zeit-online/storystream/dummy?debug=eilmeldung">?debug=eilmeldung</a>.</li>
-                </ul>
+                    <p>Auf jeder Seite lässt sich ein Eilmeldungs-Banner auslösen.</p>
+                    <strong>Wie wird der Modus ausgelöst?</strong>
+                    <ul>
+                        <li>Über den Query Parameter <a href="/zeit-online/storystream/dummy?debug=eilmeldung">?debug=eilmeldung</a>.</li>
+                    </ul>
                 </text>
             </container>
 
