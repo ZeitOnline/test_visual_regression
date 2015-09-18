@@ -59,9 +59,10 @@ class OrderedList(UnorderedList):
 class Portraitbox(object):
 
     def __init__(self, model_block):
-        if model_block.references is not None:
-            self.text = self._author_text(model_block.references.text)
-            self.name = model_block.references.name
+        pbox = model_block.references
+        if zeit.content.portraitbox.interfaces.IPortraitbox.providedBy(pbox):
+            self.text = self._author_text(pbox.text)
+            self.name = pbox.name
 
     def _author_text(self, pbox):
         # not the most elegant solution, but it gets sh*t done
@@ -102,16 +103,17 @@ class Infobox(object):
 
     def __init__(self, model_block):
         self.contents = []
-        if model_block.references is None:
+        infobox = model_block.references
+        if not zeit.content.infobox.interfaces.IInfobox.providedBy(infobox):
             return
         try:
-            self.title = model_block.references.supertitle
+            self.title = infobox.supertitle
         except:
             self.title = 'infobox'
-        for block in model_block.references.xml.xpath('block'):
+        for block in infobox.xml.xpath('block'):
             text = block.find('text')
             title = block.find('title')
-            division = InfoboxDivision(model_block.references, text)
+            division = InfoboxDivision(infobox, text)
             self.contents.append(
                 (title, [zeit.web.core.interfaces.IFrontendBlock(
                     b, None) for b in division.values()]))
@@ -338,7 +340,7 @@ class BaseVideo(object):
             video = getattr(model_block, 'video')
         except:
             pass
-        if video is None:
+        if not zeit.content.video.interfaces.IVideo.providedBy(video):
             return
         self.renditions = video.renditions
         self.video_still = video.video_still
