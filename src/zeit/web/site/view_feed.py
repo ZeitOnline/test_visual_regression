@@ -117,9 +117,11 @@ class Newsfeed(Base):
             content_url = content_url.replace(
                 self.request.route_url('home'), 'http://www.zeit.de/', 1)
 
-            authors = [getattr(author.target, 'display_name') for author in (
-                content.authorships)] if getattr(
-                    content, 'authorships') else []
+            authors = []
+            if getattr(content, 'authorships', None):
+                authors = [getattr(author.target, 'display_name', None)
+                           for author in content.authorships]
+                authors = [x for x in authors if x]
 
             description = content.teaserText
             teaser_image = zeit.content.image.interfaces.IImages(content).image
