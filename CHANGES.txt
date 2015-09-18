@@ -4,6 +4,8 @@ Change log for zeit.web
 2.4 (unreleased)
 ----------------
 
+- ZON-2204: Pin version of bxslider to 4.2.3 to prevent bug in 4.2.4+
+
 - FIX: Don't break feed generation on imagegroups whose meta files are missing
 
 - FIX: Ignore old-style video.zeit.de uniqueIds since we cannot resolve them
