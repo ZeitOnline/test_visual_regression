@@ -10,7 +10,7 @@
 		<h3 class="article-toc__headline">Inhalt</h3>
 		<ol class="article-toc__list">
 		{%- if view.is_all_pages_view %}
-			{%- set current = loop.index %}
+			{%- set current = page.number+1 %}
 		{%- else %}
 			{%- set current = view.pagination.current %}
 		{%- endif %}
