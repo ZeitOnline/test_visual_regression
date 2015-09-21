@@ -158,6 +158,10 @@ def format_date(date, type='short', pattern=None):
         return text[:1].lower() + text[1:] if text else ''
     if pattern is None:
         pattern = formats[type]
+    # adjust UTC dates to local time
+    if date.tzinfo:
+        tz = babel.dates.get_timezone('Europe/Berlin')
+        date = date.astimezone(tz)
     return babel.dates.format_datetime(date, pattern, locale="de_DE")
 
 
