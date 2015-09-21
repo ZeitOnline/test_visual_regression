@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2204: Pin version of bxslider to 4.2.3 to prevent bug in 4.2.4+
 
+- FIX: Ignore missing meta files for content linked from articles
+
 - FIX: Print table of contents before the first paragraph only
 
 - FIX: Generate PNG icons for svg4everybody fallback images
