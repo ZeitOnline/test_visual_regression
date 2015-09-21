@@ -31,20 +31,20 @@ def test_esi_macro_should_produce_directive_depending_on_environment(
         'zeit.web.core:templates/macros/layout_macro.tpl')
     src = 'http://foo.com/bar'
     error_text = 'esi failed'
-    view = mock.Mock()
-
-    html_for_wesgi = '<!-- [esi-debug: start]src="{}"error_text="" -->'\
-        '<esi:include src="{}" onerror="continue" />'\
-        '<!-- [esi-debug: end] -->'.format(src, src)
+    html_for_wesgi = ('<!-- [esi-debug] src="{}" error_text="" -->'
+                      '<esi:include src="{}" onerror="continue" />'
+                      ).format(src, src)
     markup = tpl.module.insert_esi(src, is_dev=True)
     wesgi_string = ''
     for line in markup.splitlines():
         wesgi_string += line.strip()
     assert wesgi_string == html_for_wesgi
 
-    html_for_varnish = '<esi:remove><!-- [esi-remove] src="{}"error_text="{}"'\
-        ' --></esi:remove><!--esi<esi:include src="{}" />-->'.format(
-            src, error_text, src)
+    html_for_varnish = ('<esi:remove>'
+                        '<!-- [esi-debug] src="{}" error_text="{}" -->'
+                        '</esi:remove>'
+                        '<!--esi<esi:include src="{}" />-->'
+                        ).format(src, error_text, src)
     markup = tpl.module.insert_esi(src, error_text)
     varnish_string = ''
     for line in markup.splitlines():

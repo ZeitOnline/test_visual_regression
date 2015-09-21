@@ -187,15 +187,11 @@
 
 {% macro insert_esi(src, error_text='', is_dev=False) %}
     {% if is_dev %}
-        <!-- [esi-debug: start]
-             src="{{ src }}"
-             error_text="{{ error_text }}" -->
+        <!-- [esi-debug] src="{{ src }}" error_text="{{ error_text }}" -->
         <esi:include src="{{ src }}" onerror="continue" />
-        <!-- [esi-debug: end] -->
     {% else %}
         <esi:remove>
-            <!-- [esi-remove] src="{{ src }}"
-             error_text="{{ error_text }}" -->
+        <!-- [esi-debug] src="{{ src }}" error_text="{{ error_text }}" -->
         </esi:remove>
         <!--esi
         <esi:include src="{{ src }}" />
