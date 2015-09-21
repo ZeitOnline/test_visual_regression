@@ -1,3 +1,4 @@
+# coding: utf-8
 import mock
 import requests
 
@@ -82,3 +83,12 @@ def test_keyword_pages_should_send_redirect(testserver, testbrowser):
         allow_redirects=False)
     assert resp.status_code == 301
     assert resp.headers['Location'] == '%s/thema/xy' % testserver.url
+
+
+def test_keyword_redirect_should_handle_unicode(testserver, testbrowser):
+    resp = requests.get(
+        testserver.url + '/schlagworte/orte/istv%C3%A1n-szab%C3%B3/index',
+        allow_redirects=False)
+    assert resp.status_code == 301
+    assert resp.headers['Location'] == (
+        u'%s/thema/istván-szabó' % testserver.url).encode('utf-8')

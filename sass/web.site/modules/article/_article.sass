@@ -5,11 +5,13 @@
 
 		width: 100%
 
-		&--wide
-			margin-bottom: remify(40px)
+		&--rimless
 			margin-left: -$page-padding
 			margin-right: -$page-padding
 			width: auto
+
+		&--apart
+			margin-bottom: remify(40px)
 
 		&--marginalia
 			clear: both
@@ -21,14 +23,16 @@
 			margin-left: auto
 			margin-right: auto
 
+			&--wide
+				max-width: remify(820px)
+
 			&--marginalia
 				float: left
 				margin: remify(14px 25px 14px 0)
 				width: remify(205px)
 
 		+respond-min($break-desktop-min)
-			&--wide
-				max-width: remify(820px)
+			&--apart
 				margin-top: remify(40px)
 
 			&--full
