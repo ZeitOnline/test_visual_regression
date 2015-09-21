@@ -813,6 +813,7 @@ def test_macro_include_cp_ad_produces_markup(jinja2_env):
 def test_macro_liveblog_produces_html(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl.globals['view'] = mock.Mock()
     liveblog = mock.Mock()
     liveblog.blog_id = '999'
     lines = tpl.module.liveblog(liveblog).splitlines()
