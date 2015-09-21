@@ -2,8 +2,9 @@
   "name": "ZEIT Web Components",
   "version": "0.1.0",
   "private": true,
+  "//": "NOTE: bx-slider-js ist pinned due to a bug in 4.2.4+",
   "dependencies": {
-    "bx-slider.js": "4.2.3", // pinned in cause of bug in 4.2.4+
+    "bx-slider.js": "4.2.3",
     "freewall": "1.0.5",
     "jquery": "1.11.3",
     "jquery.inview": "1.0.0",
