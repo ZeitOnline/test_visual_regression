@@ -4,7 +4,8 @@
     {% set contents_printed = False %}
     {% for item in page %}
         {% set type = item | block_type %}
-        {% if type in ['place', 'contentadblock', 'cardstack'] %}
+        {# XXX Urghs this is nasty #}
+        {% if type in ['place', 'contentadblock', 'cardstack', 'liveblog'] %}
             {{ blocks[type](item, view) }}
         {% else %}
             {% if not (contents_printed or view.is_all_pages_view) and type in ['paragraph'] %}
