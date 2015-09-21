@@ -4,6 +4,8 @@ Change log for zeit.web
 2.5 (unreleased)
 ----------------
 
+- FIX: Add force-mobile to teaser-small-minor
+
 - ZON-2227: Mask nextread date for google
 
 - ZON-2204: Pin version of bxslider to 4.2.3 to prevent bug in 4.2.4+
