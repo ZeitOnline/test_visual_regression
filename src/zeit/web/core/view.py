@@ -508,10 +508,11 @@ class Base(object):
 
     @zeit.web.reify
     def date_last_published_semantic(self):
-        date = self.publish_info.date_last_published_semantic
-        if (self.date_first_released is not None and date is not None and
-                date > self.date_first_released):
-            return date.astimezone(self.timezone)
+        modified = self.publish_info.date_last_published_semantic
+        released = self.date_first_released
+        if (released is not None and modified is not None and
+                modified - released > datetime.timedelta(seconds=60)):
+            return modified.astimezone(self.timezone)
 
     @zeit.web.reify
     def has_cardstack(self):
