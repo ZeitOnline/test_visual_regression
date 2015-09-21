@@ -149,8 +149,8 @@ def login_state(request):
 @pyramid.view.view_config(route_name='schlagworte')
 def schlagworte(request):
     raise pyramid.httpexceptions.HTTPMovedPermanently(
-        'http://{}/thema/{}'.format(
-            request.host, request.matchdict['item'].lower()))
+        u'http://{}/thema/{}'.format(
+            request.host, request.matchdict['item'].lower()).encode('utf-8'))
 
 
 # XXX We should be a little more specific here, ie ICommentableContent

@@ -9,7 +9,7 @@
                 slide
             {# XXX We should move this mapping somewhere else than the template. #}
             {%- elif obj.layout.display_mode == 'large' -%}
-                article__item article__item--wide
+                article__item article__item--wide article__item--rimless article__item--apart
             {%- elif obj.layout.display_mode == 'float' -%}
                 article__item article__item--marginalia
             {%- elif obj.layout.display_mode == 'column-width' -%}
