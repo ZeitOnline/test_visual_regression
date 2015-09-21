@@ -2,7 +2,7 @@
 <article>
   <head>
     <references>
-      <reference href="http://xml.zeit.de/zeit-online/article/zeit" type="intern" contenttype="article" />
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/article/zeit" contenttype="article" />
     </references>
   </head>
   <body>
