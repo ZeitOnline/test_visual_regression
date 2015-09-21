@@ -1,10 +1,23 @@
 Change log for zeit.web
 =======================
 
-2.4 (unreleased)
+
+2.5 (unreleased)
 ----------------
 
+- MAINT: Change `image_host` to `image_prefix` setting, which allows both a
+  path and a full URL prefix like ``http://image.example.com``, and doesn't
+  get confused by appserver ports.
+
+- FIX: Print table of contents before the first paragraph only
+
 - ZON-2204: Pin version of bxslider to 4.2.3 to prevent bug in 4.2.4+
+
+
+2.4 (2015-09-18)
+----------------
+
+- ZON-1489: Add table of contents for articles with pagination
 
 - FIX: Don't break feed generation on imagegroups whose meta files are missing
 
