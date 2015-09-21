@@ -242,7 +242,6 @@ def test_block_liveblog_instance_causing_timeouts(application, mockserver,
         liveblog = zeit.web.core.block.Liveblog(model_block)
         assert liveblog.id == '166'
         assert liveblog.seo_id == '201'
-        assert liveblog.theme == 'zeit-online-solo'
         assert liveblog.last_modified.isoformat() == (
             '2015-05-06T22:46:00+02:00')
 
@@ -253,8 +252,7 @@ def test_block_liveblog_instance_causing_timeouts(application, mockserver,
         model_block = mock.Mock()
         model_block.blog_id = '166-201'
         liveblog = zeit.web.core.block.Liveblog(model_block)
-        # requests failed, default theme applied
-        assert liveblog.theme == 'zeit-online'
+        # requests failed, last_modified is not set
         assert liveblog.last_modified is None
 
 

@@ -163,10 +163,6 @@ class Liveblog(object):
                 if delta.days == 0:
                     self.is_live = True
 
-        # only needed for beta testing with liveblog embed code
-        # ToDo: remove after finished relaunch
-        self.theme = self.get_theme(self.id)
-
     def prepare_ref(self, url):
         return 'http:{}'.format(url).replace(
             'http://zeit.superdesk.pro/resources/LiveDesk', self.status_url, 1)
@@ -176,37 +172,6 @@ class Liveblog(object):
             return requests.get(url, timeout=self.timeout).json()
         except (requests.exceptions.RequestException, ValueError):
             pass
-
-    @beaker.cache.cache_region('long_term', 'liveblog_theme')
-    def get_theme(self, blog_id):
-        href = None
-        blog_theme_id = None
-
-        if self.seo_id is None:
-            url = '{}/Blog/{}/Seo'
-            content = self.get_restful(url.format(self.status_url, self.id))
-            if (content and 'SeoList' in content and len(
-                    content['SeoList']) and 'href' in content['SeoList'][0]):
-                href = content['SeoList'][0]['href']
-        else:
-            href = '//zeit.superdesk.pro/resources/LiveDesk/Seo/{}'.format(
-                self.seo_id)
-
-        if href:
-            content = self.get_restful(self.prepare_ref(href))
-            if content and 'BlogTheme' in content:
-                try:
-                    blog_theme_id = int(content['BlogTheme']['Id'])
-                except (KeyError, ValueError):
-                    pass
-
-        # return new theme names
-        # 23 = zeit      => zeit-online
-        # 24 = zeit-solo => zeit-online-solo
-        if blog_theme_id == 24:
-            return 'zeit-online-solo'
-
-        return 'zeit-online'
 
 
 class BaseImage(object):
