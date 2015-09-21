@@ -82,7 +82,8 @@
     {# use liveblog SEO plugin after official relaunch #}
     {# % if liveblog.blog_id -%}
     <div class="liveblog article__item">
-        <esi:include src="http://www.zeit.de/liveblog-backend/{{ liveblog.blog_id }}.html" onerror="continue" />
+        {% set esi_source = 'http://www.zeit.de/liveblog-backend/{}.html'.format(liveblog.blog_id) %}
+        {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden', view.is_dev_environment) }}
     </div>
     {%- endif % #}
 {%- endmacro %}

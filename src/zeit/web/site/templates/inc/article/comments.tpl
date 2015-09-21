@@ -151,14 +151,15 @@
 	{% endif %}
 
 	{% if view.request.GET.action == 'report' %}
-		<esi:include src="{{ view.content_url }}/report-form?pid={{ view.request.GET.pid }}" onerror="continue" />
+		{% set esi_source = '{}/report-form?pid={}'.format(view.content_url, view.request.GET.pid)  %}
 	{% else %}
 		{% if view.request.GET.error %}
-		    <esi:include src="{{ view.content_url }}/comment-form?error={{ view.request.GET.error }}" onerror="continue" />
+		    {% set esi_source = '{}/comment-form?error={}'.format(view.content_url, view.request.GET.error) %}
 		{% else %}
-		    <esi:include src="{{ view.content_url }}/comment-form?pid={{ view.request.GET.pid }}" onerror="continue" />
+		    {% set esi_source = '{}/comment-form?pid={}'.format(view.content_url, view.request.GET.pid) %}
 		{% endif %}
 	{% endif %}
+	{{ lama.insert_esi(esi_source, 'Kommentarformular konnte nicht geladen werden', view.is_dev_environment) }}
 
 	<script type="text/template" id="js-report-success-template">
 		<div class="comment-form__response--success">
