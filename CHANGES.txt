@@ -4,6 +4,8 @@ Change log for zeit.web
 2.5 (unreleased)
 ----------------
 
+- ZON-2227: Mask nextread date for google
+
 - FIX: Print table of contents before the first paragraph only
 
 - MAINT: Change `image_host` to `image_prefix` setting, which allows both a

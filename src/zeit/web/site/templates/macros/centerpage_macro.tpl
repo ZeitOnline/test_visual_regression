@@ -4,10 +4,16 @@
     {%- else -%}
         {%- set time = get_delta_time_from_article(teaser) | hide_none -%}
     {%- endif -%}
-    {% if time -%}
-    <time class="{{ layout }}__datetime js-update-datetime" datetime="{{ teaser | mod_date | format_date('iso8601') }}">
-        {{- time -}}
-    </time>
+    {%- if time -%}
+        {% if kind == 'nextread' %}
+            <span class="{{ layout }}__dt">
+                {{- time -}}
+            </span>
+        {% else %}
+            <time class="{{ layout }}__datetime js-update-datetime" datetime="{{ teaser | mod_date | format_date('iso8601') }}">
+                {{- time -}}
+            </time>
+        {% endif %}
     {%- endif %}
 {%- endmacro %}
 
