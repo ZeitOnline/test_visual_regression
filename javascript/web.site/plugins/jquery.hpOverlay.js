@@ -38,7 +38,6 @@
                 }
                 $( '.overlay' ).fadeIn();
                 $( '.lightbox' ).show();
-                this.trackEvent( 'appear' );
             },
             clickCancel: function() {
                 // action when cancel was clicked
@@ -57,20 +56,17 @@
             },
             bindClickEvents: function() {
                 // bind click event for lightbox
-                var that = this,
-                    trackingCode = '';
+                var that = this;
 
                 // cancel button
                 $( '.lightbox-cancel' ).on( 'click', function( event ) {
                     event.preventDefault();
-                    that.trackEvent( event.target );
                     that.clickCancel();
                 });
 
                 // reload
                 $( '.overlay, .lightbox-button' ).on( 'click', function( event ) {
                     event.preventDefault();
-                    that.trackEvent( event.target );
                     that.clickReload();
                 });
 
@@ -115,25 +111,12 @@
 
                 request.done( function( data ) {
                     // json anfrage ist fertig
-                    defaults.timestamp = data.last_published_semantic;
+                    defaults.timestamp = data.lastPublishedSemantic;
                     that.addTimer( defaults.minutes );
                 } );
             },
             isLiveServer: function() {
                 return !window.location.hostname.search( /(www.)?zeit\.de/ );
-            },
-            trackEvent: function( track ) {
-                trackingCode = $( track ).data( 'tracking' );
-
-                if( trackingCode !== '' ) {
-                    var garray = [ '_trackEvent', defaults.countingPrefix ];
-                    if ( typeof track !== 'undefined' ) {
-                        // ZEIT.clickWebtrekkOnly( defaults.countingPrefix + '.' + track);
-                        // garray.push( track );
-                        // garray.push( defaults.homepage );
-                        // ZEIT.clickGA( garray );
-                    }
-                }
             }
         };
 
@@ -143,11 +126,11 @@
 
             request.done( function( data ) {
                 if ( defaults.debug ) {
-                    console.info( defaults.timestamp, data.last_published_semantic );
+                    console.info( defaults.timestamp, data.lastPublishedSemantic );
                 }
 
-                //if ( defaults.timestamp !== data.last_published_semantic ) {
-                if ( defaults.timestamp == data.last_published_semantic ) {
+                //if ( defaults.timestamp !== data.lastPublishedSemantic ) {
+                if ( defaults.timestamp == data.lastPublishedSemantic ) {
                     if ( defaults.debug ) {
                         console.info( 'Page was updated.' );
                     }
@@ -163,12 +146,18 @@
         }
 
         return this.each( function() {
-            // if ( !overlay.isLiveServer() && !defaults.debug ) {
-            //     console.warn( 'AktPopup cancelled because not on live server.' );
-            //     return this;
-            // }
-            //
+            if ( !overlay.isLiveServer() && !defaults.debug ) {
+                console.warn( 'AktPopup cancelled because not on live server.' );
+                return this;
+            }
+
+            // overwrite settings with external config file
+            if ( overlayConf ) {
+               defaults = $.extend( defaults, overlayConf );
+            }
+
             var cookie = ZMO.cookieRead( 'overlaycanceled' );
+
             // only start timer if there's no mobile view, cookie wasn't set and it is switched on
             if ( !ZMO.isMobileView() && cookie != 1 && defaults.isOn ) {
                 if ( defaults.debug ) {

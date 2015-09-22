@@ -77,7 +77,7 @@ def json_update_time(request):
     except (AttributeError, KeyError, TypeError):
         dlps = dlp = None
     request.response.cache_expires(5)
-    return {'last_published': dlp, 'last_published_semantic': dlps}
+    return {'lastPublished': dlp, 'lastPublishedSemantic': dlps}
 
 
 @pyramid.view.view_config(
