@@ -1,8 +1,14 @@
 Change log for zeit.web
 =======================
 
-2.6 (unreleased)
-----------------
+2.5.2 (unreleased)
+------------------
+
+- ZON-2224: Redirect repository root and folders to ~/index
+
+
+2.5.1 (2015-09-22)
+------------------
 
 - ZON-2098: Add quotes to article
 
