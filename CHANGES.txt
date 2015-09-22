@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Compute proper liveblog status
 
+- FIX: Redirect legacy keyword urls regardless of ~/index postfix
+
 
 2.5 (2015-09-21)
 ----------------
