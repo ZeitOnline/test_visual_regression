@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2224: Redirect repository root and folders to ~/index
 
+- ZON-2098: Add quotes to article 
+
 
 2.5.1 (2015-09-22)
 ------------------
@@ -130,6 +132,8 @@ Change log for zeit.web
 
 1.71.1 (2015-09-13)
 -------------------
+
+- ZON-2098: Display quotes inside of the article
 
 - HOTFIX: Make legacy areas work with `select_modules` API
 
