@@ -10,9 +10,9 @@
 		{% set media_container_after = lama.use_svg_icon('video', 'teaser-image-icon teaser-image-icon--on-{}'.format(module_layout), request) %}
 	{% endif %}
 
-	{% if module.force_mobile_image and not(media_block_additional_class) %}
-		{% set media_block_additional_class = 'teaser-small__media--force-mobile' %}
-	{% endif %}	
+    {% if module.force_mobile_image %}
+        {% set media_block_additional_class = '{}__media--force-mobile'.format(module_layout) %}
+    {% endif %}
 
     {% include "zeit.web.site:templates/inc/teaser_asset/{}.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
 {% endblock %}
