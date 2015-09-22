@@ -208,6 +208,9 @@ class Folder(Traversable):
         suffixed by `/index`.
         """
 
+        if tdict['view_name']:
+            # We're not at the end of the URL yet.
+            return
         if getattr(tdict['request'].matched_route, 'name', '') == 'home' or (
                 type(tdict['context']) == zeit.cms.repository.folder.Folder):
             url = '{}/index'.format(tdict['request'].url.rstrip('/'))
