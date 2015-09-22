@@ -11,7 +11,6 @@ import pytest
 import zeit.cms.interfaces
 from zeit.cms.checkout.helper import checked_out
 
-from zeit.web.core.utils import to_int
 import zeit.web.site.view_centerpage
 
 
@@ -171,7 +170,7 @@ def test_dynamic_centerpage_collection_should_output_teasers(
             for area in region.values():
                 for teaser in zeit.content.cp.interfaces.ITeaseredContent(
                         area):
-                    counter = counter+1
+                    counter = counter + 1
     assert counter == 8
 
 
