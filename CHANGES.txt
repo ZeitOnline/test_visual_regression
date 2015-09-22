@@ -4,7 +4,7 @@ Change log for zeit.web
 2.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- MAINT: Add modernizr tests for CSS support of vh + vw unit
 
 
 2.5 (2015-09-21)
