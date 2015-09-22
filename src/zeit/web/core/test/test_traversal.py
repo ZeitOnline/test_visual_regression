@@ -98,3 +98,25 @@ def test_route_config_should_make_friedbert_surrender_to_blacklisted_routes(
         assert browser.headers.get('X-Render-With')
     error = info.value
     assert error.getcode() == 303
+
+
+@pytest.mark.parametrize('path, moved', [
+    ('', '/index'),
+    ('/', '/index'),
+    ('/zeit-online', '/zeit-online/index'),
+    ('/zeit-online/', '/zeit-online/index')])
+def test_plain_folder_traversal_should_trigger_redirect_to_index(
+        path, moved, application):
+
+    tdict = dict(
+        context=zeit.cms.interfaces.ICMSContent(
+            'http://xml.zeit.de/' + path.lstrip('/')),
+        traversed=tuple(path.split('/')),
+        view_name='',
+        request=pyramid.request.Request.blank(path))
+
+    with pytest.raises(
+            pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
+        zeit.web.core.traversal.RepositoryTraverser.invoke(**tdict)
+
+    assert redirect.value.location.endswith(moved)
