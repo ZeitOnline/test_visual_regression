@@ -4,7 +4,7 @@ Change log for zeit.web
 2.5.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-2224: Redirect repository root and folders to ~/index
 
 
 2.5.1 (2015-09-22)
