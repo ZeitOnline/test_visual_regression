@@ -114,7 +114,7 @@
         {% endif %}
     {% endblock %}
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
+<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp|lower }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
 
@@ -196,5 +196,8 @@
             <esi:include src="http://www.zeit.de/cardstack-backend/stacks/esi/scripts?shareUrl={{ request.url }}" onerror="continue" />
         {% endif %}
     {% endblock %}
+
+    <!-- Popover -->
+    {%- include "zeit.web.site:templates/inc/overlay.html" ignore missing -%}
 </body>
 </html>

@@ -1,0 +1,55 @@
+
+.overlay
+  display: none
+  position: fixed
+  top: 0
+  bottom: 0
+  right: 0
+  left: 0
+  width: 100%
+  height: 100%
+  overflow: hidden
+  background: $color-overlay
+  z-index: 99998
+  +opacity(0.7)
+
+.lightbox
+  display: none
+  position: fixed
+  background-color: $white
+  padding: remify(30px)
+  width: remify(450px)
+  top: 50%
+  left: 50%
+  margin: -90px auto auto -270px
+  z-index: 99999
+  border-radius: remify(3px)
+  +single-box-shadow(0px,2px,10px,0px,rgba(0,0,0,0.2))
+
+.lightbox-content
+  text-align: center
+  &__headline
+    color: $zon-charcoal
+    font-size: remify(20px)
+    line-height: remify(24px)
+    margin-bottom: remify(6px)
+    display: block
+    font-weight: bold
+  &__text
+    color: $zon_grey
+    font-size: remify(16px)
+    display: block
+    margin-bottom: remify(20px)
+
+.lightbox-button
+  +zon-button-light()
+
+.lightbox-cancel
+  color: $zon_light_grey
+  cursor: pointer
+  display: block
+  font-size: remify(14px)
+  margin-top: remify(10px)
+  &:hover
+    color: $zon_mid_grey
+

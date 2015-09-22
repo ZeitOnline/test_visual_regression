@@ -1,5 +1,6 @@
 {
 	"browser": true, // set browser enviroment
+	"camelcase": false, // no enforcement of camelcase
 	"curly": true, // require curly braces around control structure
 	"eqeqeq": true, // prohibits the use of == and != in favor of === and !==
 	"forin": true, // requires all for in loops to filter object's items
