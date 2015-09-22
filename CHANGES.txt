@@ -4,7 +4,7 @@ Change log for zeit.web
 2.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- FIX: Compute proper liveblog status
 
 
 2.5 (2015-09-21)
