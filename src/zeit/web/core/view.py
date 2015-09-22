@@ -510,6 +510,7 @@ class Base(object):
     def date_last_published_semantic(self):
         modified = self.publish_info.date_last_published_semantic
         released = self.date_first_released
+        # use 60s of tolerance before displaying a modification date
         if (released is not None and modified is not None and
                 modified - released > datetime.timedelta(seconds=60)):
             return modified.astimezone(self.timezone)
