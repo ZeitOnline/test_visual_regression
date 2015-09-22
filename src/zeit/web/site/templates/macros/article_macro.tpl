@@ -46,46 +46,13 @@
     </h2>
 {%- endmacro %}
 
-{% macro liveblog(liveblog) -%}
-    {# use liveblog embed code to request an alternative theme for beta testing #}
-    {% if liveblog.id -%}
-    <div class="liveblog" data-gimme="liveblog-embed-code"></div>
-    <script type="text/javascript">
-    /* <![CDATA[ */
-    var liveblog = (function(d) {
-        var config = {
-            id: {{ liveblog.id }},
-            theme: '{{ liveblog.theme }}',
-            el: '[data-gimme="liveblog-embed-code"]',
-            servers: {frontend: '//zeit.superdesk.pro'},
-            paths: {scripts: '/content/lib/embed/scripts/js/', css: '/'},
-            fallback: {'language': 'de'}
-        };
-        config.baseUrl = config.servers.frontend + config.paths.scripts;
-        config.loadJs = function(path) {
-            var ls = d.createElement('script'),
-                s = d.getElementsByTagName('script')[0];
-            ls.type = "text/javascript";
-            s.async = true;
-            ls.src = path.indexOf('//') === -1 ? config.baseUrl + path + '.js?' + (config.urlArgs || 'version=' + parseInt((new Date()).getTime()/600000)) : path;
-            s.parentNode.insertBefore( ls, s );
-            return ls;
-        };
-        config.loadJs('loader');
-        return config;
-    })(document);
-    /* ]]> */
-    </script>
-
+{% macro liveblog(liveblog, view) -%}
+    {% if liveblog.blog_id -%}
+        <div class="liveblog">
+            {% set esi_source = 'http://www.zeit.de/liveblog-backend/{}.html'.format(liveblog.blog_id) %}
+            {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden', view.is_dev_environment) }}
+        </div>
     {%- endif %}
-
-    {# use liveblog SEO plugin after official relaunch #}
-    {# % if liveblog.blog_id -%}
-    <div class="liveblog article__item">
-        {% set esi_source = 'http://www.zeit.de/liveblog-backend/{}.html'.format(liveblog.blog_id) %}
-        {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden', view.is_dev_environment) }}
-    </div>
-    {%- endif % #}
 {%- endmacro %}
 
 {% macro paragraph(html) -%}
