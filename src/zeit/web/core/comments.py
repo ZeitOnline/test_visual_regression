@@ -36,6 +36,9 @@ def comment_to_dict(comment):
     :rtype: dict
     """
 
+    author_name = ''
+    if comment.xpath('author/name/text()'):
+        author_name = comment.xpath('author/name/text()')[0]
     # TODO: Avoid repeatedly evaluating xpaths.
     if comment.xpath('author/@roles'):
         roles = comment.xpath('author/@roles')[0]
@@ -120,7 +123,7 @@ def comment_to_dict(comment):
         in_reply=in_reply,
         img_url=picture_url,
         userprofile_url=profile_url,
-        name=comment.xpath('author/name/text()')[0],
+        name=author_name,
         created=created,
         text=content,
         role=', '.join(roles),
