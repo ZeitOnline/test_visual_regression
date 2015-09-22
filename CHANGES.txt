@@ -4,7 +4,9 @@ Change log for zeit.web
 2.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- FIX: Switch adcontroller level2 and 3 in advertorials
+
+- MAINT: Make microsites per banner_id value possible 
 
 
 2.5 (2015-09-21)
