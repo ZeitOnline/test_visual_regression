@@ -4,7 +4,6 @@ import logging
 import os.path
 
 import babel.dates
-import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
