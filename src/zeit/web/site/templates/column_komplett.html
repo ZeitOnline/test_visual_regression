@@ -1,0 +1,18 @@
+{% extends "zeit.web.site:templates/column.html" %}
+
+{% block article_pages %}
+    {% for page in view.pages %}
+        <section class="article-page" data-page-number="{{ page.number+1 }}" id="seite-{{ page.number+1 }}">
+            {% if not loop.first %}
+                <h3 class="article-page__page-teaser article__item">{{ page.teaser | hide_none }}</h3>
+            {% endif %}
+
+            {#% include "zeit.web.site:templates/inc/article/table-of-contents.tpl" %#}
+
+            {{ render_page(page) }}
+        </section>
+    {% endfor %}
+{% endblock article_pages %}
+
+{% block article_pagination %}
+{% endblock article_pagination %}
