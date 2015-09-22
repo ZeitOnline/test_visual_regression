@@ -200,6 +200,20 @@ class CenterPage2015(Traversable):
             raise Retraverse(tdict['request'])
 
 
+@traverser(zeit.cms.repository.interfaces.IFolder)
+class Folder(Traversable):
+
+    def __call__(self, tdict):
+        """Redirect traversed folders and the repository root to a location
+        suffixed by `/index`.
+        """
+
+        if getattr(tdict['request'].matched_route, 'name', '') == 'home' or (
+                type(tdict['context']) == zeit.cms.repository.folder.Folder):
+            url = '{}/index'.format(tdict['request'].url.rstrip('/'))
+            raise pyramid.httpexceptions.HTTPMovedPermanently(location=url)
+
+
 @traverser(zeit.content.dynamicfolder.interfaces.IRepositoryDynamicFolder)
 class DynamicFolder(CenterPage):
 
