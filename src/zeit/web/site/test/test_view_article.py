@@ -962,4 +962,3 @@ def test_article_renders_quotes_correctly(testbrowser):
         'tt0110912/quotes?item=qt0447099"]')
     assert not quote_with_source.cssselect('.quote__source > *')
     assert not quote_without_source.cssselect('.quote__source')
-
