@@ -51,31 +51,35 @@ def test_inline_html_should_not_render_empty_tags():
         '<em></em>'))).strip() == '<em></em>'
 
 
-def test_video_block_should_be_fault_tolerant_if_video_is_none():
+def test_video_block_should_be_fault_tolerant_if_video_is_none(application):
     model_block = mock.Mock()
     model_block.video = None
     video = zeit.web.core.block.Video(model_block)
     assert not hasattr(video, 'video_still')
 
     model_block = mock.Mock()
-    model_block.video.uniqueId = 'foo'
+    model_block.video = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2015-01/3537342483001')
     video = zeit.web.core.block.Video(model_block)
     assert hasattr(video, 'video_still')
 
 
-def test_header_video_should_be_created_if_layout_is_zmo_header():
+def test_header_video_should_be_created_if_layout_is_zmo_header(application):
     model_block = mock.Mock()
     model_block.layout = 'zmo-xl-header'
-    model_block.video.uniqueId = 'foo'
+    model_block.video = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2015-01/3537342483001')
     h_video = zeit.web.core.block.HeaderVideo(model_block)
     assert type(h_video) == zeit.web.core.block.HeaderVideo
     assert h_video.format == 'zmo-xl-header'
 
 
-def test_header_video_should_not_be_created_if_layout_does_not_fit():
+def test_header_video_should_not_be_created_if_layout_does_not_fit(
+        application):
     model_block = mock.Mock()
     model_block.layout = 'zmo-xl-noheader'
-    model_block.video.uniqueId = 'foo'
+    model_block.video = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2015-01/3537342483001')
 
     h_video = zeit.web.core.block.HeaderVideo(model_block)
     assert h_video is None
@@ -238,7 +242,6 @@ def test_block_liveblog_instance_causing_timeouts(application, mockserver,
         liveblog = zeit.web.core.block.Liveblog(model_block)
         assert liveblog.id == '166'
         assert liveblog.seo_id == '201'
-        assert liveblog.theme == 'zeit-online-solo'
         assert liveblog.last_modified.isoformat() == (
             '2015-05-06T22:46:00+02:00')
 
@@ -249,8 +252,7 @@ def test_block_liveblog_instance_causing_timeouts(application, mockserver,
         model_block = mock.Mock()
         model_block.blog_id = '166-201'
         liveblog = zeit.web.core.block.Liveblog(model_block)
-        # requests failed, default theme applied
-        assert liveblog.theme == 'zeit-online'
+        # requests failed, last_modified is not set
         assert liveblog.last_modified is None
 
 

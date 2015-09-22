@@ -472,7 +472,7 @@ def test_img_src_should_contain_fallback_size(testbrowser):
 def test_image_host_is_configurable_for_variant_images(
         application, testbrowser):
     settings = application.zeit_app.config.registry.settings
-    with mock.patch.dict(settings, {'image_host': 'img.example.com'}):
+    with mock.patch.dict(settings, {'image_prefix': 'http://img.example.com'}):
         b = testbrowser('/zeit-online/slenderized-index')
     assert b.cssselect('img[data-src^="http://img.example.com"]')
     assert b.cssselect('img[src^="http://img.example.com"]')
@@ -481,6 +481,6 @@ def test_image_host_is_configurable_for_variant_images(
 def test_image_host_is_configurable_for_legacy_images(
         application, testbrowser):
     settings = application.zeit_app.config.registry.settings
-    with mock.patch.dict(settings, {'image_host': 'img.example.com'}):
+    with mock.patch.dict(settings, {'image_prefix': 'http://img.example.com'}):
         b = testbrowser('/zeit-magazin/index')
     assert b.cssselect('img[src^="http://img.example.com"]')

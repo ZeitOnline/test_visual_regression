@@ -32,14 +32,23 @@ def test_article_should_render_full_view(testbrowser):
         '.article-page > p.paragraph')) == article.paragraphs
 
 
+def test_article_single_page_has_no_pagination(testbrowser):
+    select = testbrowser('/zeit-online/article/simple').cssselect
+
+    assert len(select('.summary, .byline, .metadata')) == 3
+    assert len(select('.article-pagination')) == 0
+    assert len(select('.article-toc')) == 0
+
+
 def test_article_full_view_has_no_pagination(testbrowser):
     select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
 
     assert len(select('.summary, .byline, .metadata')) == 3
     assert len(select('.article-pagination')) == 0
+    assert len(select('.article-toc')) == 0
 
 
-def test_article_with_pagination(testbrowser):
+def test_article_pagination(testbrowser):
     select = testbrowser('/zeit-online/article/zeit').cssselect
     nexttitle = select('.article-pagination__nexttitle')
     numbers = select('.article-pager__number')
@@ -51,7 +60,10 @@ def test_article_with_pagination(testbrowser):
     assert nexttitle[0].text.strip() == (
         u'Der Horror von Crystal wurzelt in der Normalität')
     assert len(numbers) == 5
-    assert '--current' in (numbers[0].get('class'))
+    assert '--current' in numbers[0].get('class')
+    assert len(select('.article-toc')) == 1
+    assert len(select('.article-toc__item')) == 5
+    assert '--current' in select('.article-toc__item')[0].get('class')
 
 
 def test_article_pagination_active_state(testbrowser):
@@ -64,7 +76,10 @@ def test_article_pagination_active_state(testbrowser):
         u'Man wird schlank und lüstern')
     assert select('.article-pagination__nexttitle')[0].text.strip() == (
         u'Aus dem abenteuerlustigen Mädchen vom Dorf wurde ein Junkie')
-    assert '--current' in (select('.article-pager__number')[2].get('class'))
+    assert '--current' in select('.article-pager__number')[2].get('class')
+    assert len(select('.article-toc')) == 1
+    assert len(select('.article-toc__item')) == 5
+    assert '--current' in select('.article-toc__item')[2].get('class')
 
 
 def test_article_page_1_has_correct_h1(testbrowser):
@@ -455,6 +470,21 @@ def test_article_skips_raw_box_not_suitable_for_alldevices(testbrowser):
 def test_nextread_is_placed_on_article(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread')
     assert len(browser.cssselect('#nextread')) == 1
+
+
+def test_nextread_date_looks_less_like_a_date_for_google(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.site:templates/inc/article/nextread.tpl')
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple-nextread')
+    request = mock.MagicMock()
+    request.route_url.return_value = 'http://foo.bar/'
+    view = zeit.web.site.view_article.Article(content, request)
+    html_str = tpl.render(view=view, request=request)
+    html = lxml.html.fromstring(html_str)
+    datetime = html.cssselect('.nextread__dt')
+    assert datetime[0].tag == 'span'
+    assert not any(x in datetime[0].get('class') for x in ['date', 'time'])
 
 
 def test_nextread_is_responsive(testserver, selenium_driver, screen_size):

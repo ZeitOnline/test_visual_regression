@@ -1,8 +1,38 @@
 Change log for zeit.web
 =======================
 
-2.4 (unreleased)
+2.6 (unreleased)
 ----------------
+
+- Nothing changed yet.
+
+
+2.5 (2015-09-21)
+----------------
+
+- MAINT: Embed liveblogs using ESI
+
+- ZON-2227: Mask nextread date for google
+
+- ZON-2204: Pin version of bxslider to 4.2.3 to prevent bug in 4.2.4+
+
+- FIX: Ignore missing meta files for content linked from articles
+
+- FIX: Print table of contents before the first paragraph only
+
+- FIX: Generate PNG icons for svg4everybody fallback images
+
+- MAINT: Add ESI capabilites for esi:remove
+
+- MAINT: Change `image_host` to `image_prefix` setting, which allows both a
+  path and a full URL prefix like ``http://image.example.com``, and doesn't
+  get confused by appserver ports.
+
+
+2.4 (2015-09-18)
+----------------
+
+- ZON-1489: Add table of contents for articles with pagination
 
 - FIX: Don't break feed generation on imagegroups whose meta files are missing
 
@@ -60,6 +90,7 @@ Change log for zeit.web
 
 2.1 (2015-09-14)
 ----------------
+
 
 - PERF: Re-Enable LazyProxy for ranking areas and try to answer everything
   from the solr result, without resolving ICMSContent
