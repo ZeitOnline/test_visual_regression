@@ -4,6 +4,8 @@ Change log for zeit.web
 2.5.2 (unreleased)
 ------------------
 
+- FIX: Add force-mobile to teaser-small-minor
+
 - ZON-2224: Redirect repository root and folders to ~/index
 
 - ZON-2098: Add quotes to article 
