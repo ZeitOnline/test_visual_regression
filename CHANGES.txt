@@ -6,11 +6,11 @@ Change log for zeit.web
 
 - ZON-2224: Redirect repository root and folders to ~/index
 
+- ZON-2098: Add quotes to article 
+
 
 2.5.1 (2015-09-22)
 ------------------
-
-- ZON-2098: Add quotes to article
 
 - FIX: Compute proper liveblog status
 
