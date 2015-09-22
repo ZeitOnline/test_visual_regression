@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2098: Add quotes to article
 
+- FIX: Compute proper liveblog status
+
 
 2.5 (2015-09-21)
 ----------------
