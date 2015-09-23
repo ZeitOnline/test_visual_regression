@@ -4,7 +4,11 @@ Change log for zeit.web
 2.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-2252: Use product name instead of product id for indication of source
+
+- ZON-2244: Fix indication of source in articles
+
+- ZON-2218: Adjust timezone of displayed dates and fix indication of source
 
 
 2.6 (2015-09-23)
@@ -17,12 +21,6 @@ Change log for zeit.web
 - ZON-2258: Show only 5 top-level comments per page
 
 - ZON-2251: Make columns paginate
-
-- ZON-2252: Use product name instead of product id for indication of source
-
-- ZON-2244: Fix indication of source in articles
-
-- ZON-2218: Adjust timezone of displayed dates and fix indication of source
 
 - ZON-2098: Add quotes to article
 
