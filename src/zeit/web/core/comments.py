@@ -148,9 +148,10 @@ def request_thread(path):
         conf.get('agatho_host', ''), path.encode('utf-8'))
     try:
         response = requests.get(uri, timeout=timeout)
-        return response.ok and response.content or None
+        return (200 <= response.status_code < 300) and response.content or (
+            {"request_failed": datetime.datetime.utcnow()})
     except (AttributeError, requests.exceptions.RequestException):
-        return
+        return {"request_failed": datetime.datetime.utcnow()}
 
 
 def get_thread(unique_id, sort='asc', page=None, cid=None):
@@ -164,6 +165,13 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
     """
 
     thread = get_cacheable_thread(unique_id)
+
+    if thread.get('request_failed'):
+        td = datetime.datetime.utcnow()-thread.get('request_failed')
+        if td >= datetime.timedelta(0, 5):
+            zeit.web.core.view_comment.invalidate_comment_thread(unique_id)
+            thread = get_cacheable_thread(unique_id)
+
     if thread is None or thread['comment_count'] == 0:
         return
 
@@ -254,6 +262,9 @@ def get_cacheable_thread(unique_id):
 
     if thread is None:
         return
+
+    if thread.get('request_failed'):
+        return thread
 
     try:
         document = lxml.etree.fromstring(thread)
