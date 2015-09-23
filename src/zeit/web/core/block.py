@@ -395,9 +395,6 @@ class NewsletterTeaser(object):
 
     @property
     def imagegroup(self):
-        if zeit.content.video.interfaces.IVideoContent.providedBy(
-                self.context.reference):
-            return self.context.reference.thumbnail
         images = zeit.content.image.interfaces.IImages(
             self.context.reference, None)
         return images.image if images is not None else None
