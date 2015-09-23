@@ -33,8 +33,8 @@
             overlay = {
             prependHtml: function() {
                 // prepend html to body
-                if ( $( '.overlay_wrapper' ).not( ':visible' ) ) {
-                    $( '.overlay_wrapper' ).show();
+                if ( $( '#overlay_wrapper' ).not( ':visible' ) ) {
+                    $( '#overlay_wrapper' ).show();
                 }
                 $( '.overlay' ).fadeIn();
                 $( '.lightbox' ).show();
@@ -43,6 +43,7 @@
                 // action when cancel was clicked
                 $( '.lightbox' ).hide();
                 $( '.overlay' ).hide();
+                $( '#overlay_wrapper' ).hide();
                 ZMO.cookieCreate( 'overlaycanceled', 1, defaults.cookieTimeInDays, '' );
                 window.clearTimeout( timer );
                 $( document ).off( 'keypress scroll click mousemove' );
