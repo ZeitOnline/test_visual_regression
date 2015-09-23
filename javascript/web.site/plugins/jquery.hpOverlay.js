@@ -26,7 +26,7 @@
             isOn: true,
             timestamp: '',
             updateTime: 1,
-            debug: ( ZMO.getQueryVar( 'aktPopDebug' ) && console && console.info && console.warn ) || false
+            debug: location.search === '?debug-popover'
         }, options ),
             // global timer
             timer = false,
@@ -145,6 +145,7 @@
         }
 
         return this.each( function() {
+
             if ( !overlay.isLiveServer() && !defaults.debug ) {
                 console.warn( 'AktPopup cancelled because not on live server.' );
                 return;
