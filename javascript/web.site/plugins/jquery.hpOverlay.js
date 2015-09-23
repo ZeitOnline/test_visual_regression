@@ -1,3 +1,4 @@
+// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 /*
 * Zeit Online HP Overlay
 *
@@ -27,9 +28,9 @@
             updateTime: 1,
             debug: ( ZMO.getQueryVar( 'aktPopDebug' ) && console && console.info && console.warn ) || false
         }, options ),
-        //global timer
+            // global timer
             timer = false,
-        //define overlay functions
+            // define overlay functions
             overlay = {
             prependHtml: function() {
                 // prepend html to body
@@ -146,7 +147,7 @@
         return this.each( function() {
             if ( !overlay.isLiveServer() && !defaults.debug ) {
                 console.warn( 'AktPopup cancelled because not on live server.' );
-                return this;
+                return;
             }
 
             // overwrite settings with external config file
@@ -167,7 +168,6 @@
                 if ( defaults.debug ) {
                     console.warn( 'Cookie present, mobile view or switched off, action stopped.' );
                 }
-                return this;
             }
 
         });
