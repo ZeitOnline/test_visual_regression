@@ -69,14 +69,13 @@ def test_dynamic_folder_traversal_should_rewrite_traversal_dictionary(
 
 def test_dynamic_folder_traversal_should_allow_for_ranking_pagination(
         application, dummy_request):
-    request = dummy_request
-    request.GET['p'] = '2'
+    dummy_request.GET['p'] = '2'
 
     tdict = zeit.web.core.traversal.RepositoryTraverser.invoke(
         context=zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic'),
         traversed=('dynamic',),
         view_name='adel-tawil',
-        request=request)
+        request=dummy_request)
 
     area = tdict['context'].values()[0].values()[1]
     assert zeit.web.core.centerpage.get_area(area).page == 2
@@ -99,3 +98,25 @@ def test_route_config_should_make_friedbert_surrender_to_blacklisted_routes(
         assert browser.headers.get('X-Render-With')
     error = info.value
     assert error.getcode() == 303
+
+
+@pytest.mark.parametrize('path, moved', [
+    ('', '/index'),
+    ('/', '/index'),
+    ('/zeit-online', '/zeit-online/index'),
+    ('/zeit-online/', '/zeit-online/index')])
+def test_plain_folder_traversal_should_trigger_redirect_to_index(
+        path, moved, application):
+
+    tdict = dict(
+        context=zeit.cms.interfaces.ICMSContent(
+            'http://xml.zeit.de/' + path.lstrip('/')),
+        traversed=tuple(path.split('/')),
+        view_name='',
+        request=pyramid.request.Request.blank(path))
+
+    with pytest.raises(
+            pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
+        zeit.web.core.traversal.RepositoryTraverser.invoke(**tdict)
+
+    assert redirect.value.location.endswith(moved)

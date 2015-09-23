@@ -4,7 +4,6 @@ import logging
 import os.path
 
 import babel.dates
-import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
@@ -158,9 +157,10 @@ class Liveblog(object):
                 self.last_modified = datetime.datetime.strptime(
                     content['PublishedOn'], date_format).replace(
                         tzinfo=utc).astimezone(tz)
-                delta = self.last_modified - datetime.datetime.now(
-                    self.last_modified.tzinfo)
-                if delta.days == 0:
+                delta = datetime.datetime.now(
+                    self.last_modified.tzinfo) - self.last_modified
+                # considered live if last post was within given timedelta
+                if delta < datetime.timedelta(hours=6):
                     self.is_live = True
 
     def prepare_ref(self, url):
