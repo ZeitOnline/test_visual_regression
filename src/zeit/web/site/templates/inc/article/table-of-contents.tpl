@@ -14,27 +14,32 @@
 		{%- else %}
 			{%- set current = view.pagination.current %}
 		{%- endif %}
-		{%- for page in view.pagination.pager %}
+		{%- if view.pagination.total < 10 %}
+			{%- for page in range(1, view.pagination.total + 1) %}
 
-			{% if page == current -%}
-			<li class="article-toc__item article-toc__item--current">
-				{{ render_toc_label(view, page) }}
-			</li>
-			{%- else -%}
-			<li class="article-toc__item">
-				<a class="article-toc__link js-scroll" href="
-					{%- if view.is_all_pages_view -%}
-						#seite-{{ page }}
-					{%- else -%}
-						{{ view.pagination.pages_urls[page - 1] }}
-					{%- endif -%}
-					" data-id="article-toc....{{ page }}">
+				{% if page == current -%}
+				<li class="article-toc__item article-toc__item--current">
 					{{ render_toc_label(view, page) }}
-				</a>
-			</li>
-			{%- endif -%}
+				</li>
+				{%- else -%}
+				<li class="article-toc__item">
+					<a class="article-toc__link js-scroll" href="
+						{%- if view.is_all_pages_view -%}
+							#seite-{{ page }}
+						{%- else -%}
+							{{ view.pagination.pages_urls[page - 1] }}
+						{%- endif -%}
+						" data-id="article-toc....{{ page }}">
+						{{ render_toc_label(view, page) }}
+					</a>
+				</li>
+				{%- endif -%}
 
-		{% endfor %}
+			{% endfor %}
+		{%- else %}
+
+			<li class="article-toc__item">{{ view.pagination.total }} Seiten</li>
+		{%- endif %}
 
 		</ol>
 		{% if not view.is_all_pages_view -%}
