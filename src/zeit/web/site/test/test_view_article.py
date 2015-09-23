@@ -573,6 +573,13 @@ def test_article_column_should_be_identifiable_by_suitable_css_class(
     assert browser.cssselect('.article-body.article-body--columnarticle')
 
 
+def test_article_column_pages_should_render_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/article/fischer/seite-2')
+    assert browser.cssselect('.column-heading__upper')
+    assert len(browser.cssselect('.column-heading__lower')) == 0
+    assert browser.cssselect('.article__page-teaser--column')
+
+
 def test_article_should_show_main_image_from_imagegroup(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     images = browser.cssselect('.article-body img')

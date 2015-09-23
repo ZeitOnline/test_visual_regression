@@ -16,7 +16,11 @@
 		{%- endif %}
 		{%- for page in view.pagination.pager %}
 
-			{% if page == current -%}
+			{% if not page -%}
+			<li class="article-toc__item">
+				⋮
+			</li>
+			{% elif page == current -%}
 			<li class="article-toc__item article-toc__item--current">
 				{{ render_toc_label(view, page) }}
 			</li>

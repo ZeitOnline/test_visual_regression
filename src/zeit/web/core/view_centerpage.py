@@ -64,10 +64,16 @@ class Centerpage(zeit.web.core.view.Base):
 def json_update_time(request):
     try:
         resource = zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/{}'.format(request.matchdict['path']))
+            'http://xml.zeit.de/{}.cp2015'.format(
+                request.matchdict['path']), None)
+        if resource is None:
+            resource = zeit.cms.interfaces.ICMSContent(
+                'http://xml.zeit.de/{}'.format(request.matchdict['path']))
+
         info = zeit.cms.workflow.interfaces.IPublishInfo(resource)
         dlps = info.date_last_published_semantic.isoformat()
         dlp = info.date_last_published.isoformat()
+
     except (AttributeError, KeyError, TypeError):
         dlps = dlp = None
     request.response.cache_expires(5)

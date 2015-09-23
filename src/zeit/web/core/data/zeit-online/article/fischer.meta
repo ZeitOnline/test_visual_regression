@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/gesellschaft/zeitgeschehen/2015-09/strafprozess-wirklichkeit-wahrheit-fischer-im-recht</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-09-11T13:23:42.053407+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.cruz</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Fischer im Recht</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Ins Wasser mit der Hexe! Wenn die Verd&#xE4;chtige wirklich eine Hexe ist, schwimmt sie &#x2013; dann wird sie verbrannt. Wenn sie keine Hexe ist, ers&#xE4;uft sie unschuldig und kommt ohne Umwege ins Paradies. So kann man es machen; allerdings braucht man zur Durchsetzung solcher Regeln eine wirklich m&#xE4;chtige, knochenbrechende Gewalt: Den Teufel und die Heilige Katholische Kirche, und Aguirre, den Zorn Gottes. Wie machen wir es also heutzutage ohne diese Kr&#xE4;fte? (sd)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">36</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-11T13:22:42.219235+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">10633</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Thomas Fischer</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:b0ad8e79-197f-43c9-8062-d358815568c9}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-09-11T13:22:46.257956+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Gesellschaft</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Zeitgeschehen</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Wer definiert, was die wahre Wirklichkeit ist? Die Fischer-im-Recht-Kolumne &#xFC;ber nichts als die Wahrheit (sd)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_error"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/gesellschaft/zeitgeschehen/2015-09/8c81f615-c728-45a9-b2c7-a444076c1b55.tmp</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-09-11T13:22:42.421982+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="disabled"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-09-08T14:24:58.069121+00:00</attribute>
+  <rankedTags>
+    <tag uuid="5aede955-74ef-4141-a791-64c4c0f6075c" url_value="karl-marx" type="Person">Karl Marx</tag>
+    <tag uuid="3b2d448a-00a7-4b1b-9235-8503207e01d9" url_value="film" type="topic">Film</tag>
+    <tag uuid="d33c5de8-08ed-40fb-ae9a-ff1fcc9cffe8" url_value="finanzamt" type="free">Finanzamt</tag>
+    <tag uuid="07f0f810-f6b4-4dd2-a56e-68e22897cf81" url_value="gewalt" type="free">Gewalt</tag>
+    <tag uuid="e793c7e7-f3ae-4e1f-9e0e-d093a5899cb0" url_value="landgericht" type="free">Landgericht</tag>
+    <tag uuid="a292e2d3-728d-4da0-a741-7e7ee59be5c1" url_value="loewe" type="free">Loewe</tag>
+    <tag uuid="9c399a2c-b1ae-4fda-b9b2-717623cd5b49" url_value="thomas-fischer" type="Person">Thomas Fischer</tag>
+    <tag uuid="732d6f8a-424a-4024-812b-5ce94eee1bc9" url_value="elbe" type="Location">Elbe</tag>
+    <tag uuid="1c8b0c32-1a49-4370-9818-7af636e4b30b" url_value="europa" type="Location">Europa</tag>
+    <tag uuid="e76cdf1d-ee47-4c43-85f9-acbb04ee8586" url_value="karlsruhe" type="Location">Karlsruhe</tag>
+  </rankedTags>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt; &lt;list&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitmagazin&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;unicode&gt;zeitonline_pol&lt;/unicode&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="channels"&gt; &lt;string&gt;parse-channel-news&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;none/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;parse&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/list&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-09-08T14:24:13.164100+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">6a4eb53d707649f3b68ade96f664323e</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Gesellschaft Zeitgeschehen</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">4dcce76cb5ae4672b4e4bec68854f211</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-09-08T14:23:50.944894+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="pinned">9c399a2c-b1ae-4fda-b9b2-717623cd5b49</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2015-09-11T13:22:42Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">25128</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Fri, 11 Sep 2015 13:22:42 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"122ae79-6228-51f789c4f525c"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>

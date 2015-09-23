@@ -53,7 +53,8 @@ require([
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
-    'web.site/plugins/jquery.countFormchars'
+    'web.site/plugins/jquery.countFormchars',
+    'web.site/plugins/jquery.hpOverlay'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         article = $( '#js-article' );
@@ -67,6 +68,7 @@ require([
     if ( pageType === 'centerpage' ) {
         // homepage
         $( '#snapshot' ).snapshot();
+        $( '[data-is-hp="true"]' ).hpOverlay();
         // centerpage
         $.updateSignals();
         $( '#main' ).autoclick();
