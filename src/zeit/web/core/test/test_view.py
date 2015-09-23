@@ -457,7 +457,7 @@ def test_trailing_slash_should_lead_to_redirect():
 
     request.path = '/foo/baa'
     request.url = 'http://foo.xyz.de/foo/baa'
-    assert zeit.web.core.view.redirect_on_trailing_slash(request) == None
+    assert zeit.web.core.view.redirect_on_trailing_slash(request) is None
 
 
 def test_cp2015_suffix_should_lead_to_redirect():
@@ -481,7 +481,7 @@ def test_cp2015_suffix_should_lead_to_redirect():
 
     request.path = '/foo/baa'
     request.url = 'http://foo.xyz.de/foo/baa'
-    assert zeit.web.core.view.redirect_on_cp2015_suffix(request) == None
+    assert zeit.web.core.view.redirect_on_cp2015_suffix(request) is None
 
 
 def test_cp2015_redirect_can_be_disabled(application):
