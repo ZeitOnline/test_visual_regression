@@ -101,8 +101,7 @@
                     console.info( 'mins: ', min );
                 }
                 var timeout = min * 60 * 1000;
-                initPopup();
-                //timer = window.setTimeout( initPopup, timeout );
+                timer = window.setTimeout( initPopup, timeout );
             },
             updateTime: function() {
                 var that = this,
@@ -128,8 +127,7 @@
                     console.info( defaults.timestamp, data.last_published_semantic );
                 }
 
-                if ( defaults.timestamp === data.last_published_semantic ) {
-                    // if ( defaults.timestamp !== data.last_published_semantic ) {
+                if ( defaults.timestamp !== data.last_published_semantic ) {
                     if ( defaults.debug ) {
                         console.info( 'Page was updated.' );
                     }
