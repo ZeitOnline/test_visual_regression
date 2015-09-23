@@ -4,7 +4,7 @@ Change log for zeit.web
 2.5.2 (unreleased)
 ------------------
 
-- FIX: handle empty commenter name gracefully
+- FIX: Handle empty commenter name gracefully
 
 - FIX: Add force-mobile to teaser-small-minor
 

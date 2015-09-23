@@ -36,10 +36,12 @@ def comment_to_dict(comment):
     :rtype: dict
     """
 
+    # TODO: Avoid repeatedly evaluating xpaths.
+
     author_name = ''
     if comment.xpath('author/name/text()'):
         author_name = comment.xpath('author/name/text()')[0]
-    # TODO: Avoid repeatedly evaluating xpaths.
+
     if comment.xpath('author/@roles'):
         roles = comment.xpath('author/@roles')[0]
         is_author = 'author' in roles
