@@ -10,6 +10,8 @@
     "test/video",
     "test/css/transforms",
     "test/css/transforms3d",
-    "test/css/transformstylepreserve3d"
+    "test/css/transformstylepreserve3d",
+    "test/css/vhunit",
+    "test/css/vwunit"
   ]
 }

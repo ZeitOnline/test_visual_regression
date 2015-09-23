@@ -85,6 +85,18 @@ def test_keyword_pages_should_send_redirect(testserver, testbrowser):
     assert resp.headers['Location'] == '%s/thema/xy' % testserver.url
 
 
+def test_keyword_redirect_should_handle_nonindex_urls(testserver, testbrowser):
+    resp = requests.get(
+        '%s/schlagworte/personen/Santa-Klaus' % testserver.url,
+        allow_redirects=False)
+    assert resp.headers['Location'] == '%s/thema/santa-klaus' % testserver.url
+
+    resp = requests.get(
+        '%s/schlagworte/personen/Klaus-Kleber/' % testserver.url,
+        allow_redirects=False)
+    assert resp.headers['Location'] == '%s/thema/klaus-kleber' % testserver.url
+
+
 def test_keyword_redirect_should_handle_unicode(testserver, testbrowser):
     resp = requests.get(
         testserver.url + '/schlagworte/orte/istv%C3%A1n-szab%C3%B3/index',

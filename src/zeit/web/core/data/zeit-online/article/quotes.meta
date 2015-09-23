@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/1999/23/Pulp_Fiction_ohne_Vorsatz</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">e7cfcf952f9b4a5fa022cb0a66a040aa</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Elke Schmitter</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="status">importedCD</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on">2013-12-20T02:00:40.322759+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <rankedTags>
+    <tag uuid="75891846-404c-4b7b-aad6-e9920bc35d23" url_value="cadillac" type="Organization">Cadillac</tag>
+    <tag uuid="7aa123ca-ce5e-4677-ab78-63d6b2b7be9c" url_value="musical" type="free">Musical</tag>
+    <tag uuid="1263ca2f-0161-41e0-a19b-53857549ce86" url_value="quentin-tarantino" type="Person">Quentin Tarantino</tag>
+    <tag uuid="c1b7ab4c-6079-48c8-9104-2b605dfd4ecc" url_value="zuerich" type="Location">Z&#xFC;rich</tag>
+  </rankedTags>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:8aa91abd-e4d9-494b-afe2-bc820eb68a14}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">1999-06-02T12:00:00Z</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">"Pulp Fiction" ohne Vorsatz</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">1999</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-12-20T01:58:23.485118+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comment-id">/cms/work/1999/23/Pulp_Fiction_ohne_Vorsatz</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">1999-06-02T12:00Z</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">1999-06-02T12:00:00+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-12-20T01:57:23.581871+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="revision">1</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_error"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">systemnewspublish</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">Literatur</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">DIE ZEIT, 23/1999</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">a56cbb8103364717bf0f2a7afd3157ec</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="AID">380</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">54</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">1999-06-02T12:00:00+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Kultur</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2013-12-20T01:57:23Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">11622</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Fri, 20 Dec 2013 01:57:23 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"ec210a-2d66-4eded9968971e"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>
