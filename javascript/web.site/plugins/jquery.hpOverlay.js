@@ -25,7 +25,8 @@
             isOn: true,
             timestamp: '',
             updateTime: 1,
-            debug: location.search === '?debug-popover'
+            debug: location.search === '?debug-popover',
+            force: location.search === '?debug-popover-force'
         }, options ),
             // global timer
             timer = false,
@@ -101,6 +102,12 @@
                 if ( defaults.debug ) {
                     console.info( 'mins: ', min );
                 }
+
+                if ( defaults.force ) {
+                    initPopup();
+                    return;
+                }
+
                 var timeout = min * 60 * 1000;
                 timer = window.setTimeout( initPopup, timeout );
             },
@@ -128,7 +135,7 @@
                     console.info( defaults.timestamp, data.last_published_semantic );
                 }
 
-                if ( defaults.timestamp !== data.last_published_semantic ) {
+                if ( ( defaults.timestamp !== data.last_published_semantic ) || defaults.force ) {
                     if ( defaults.debug ) {
                         console.info( 'Page was updated.' );
                     }
@@ -145,7 +152,7 @@
 
         return this.each( function() {
 
-            if ( !overlay.isLiveServer() && !defaults.debug ) {
+            if ( !overlay.isLiveServer() && !defaults.debug && !defaults.force ) {
                 console.warn( 'AktPopup cancelled because not on live server.' );
                 return;
             }
@@ -158,7 +165,7 @@
             var cookie = ZMO.cookieRead( 'overlaycanceled' );
 
             // only start timer if there's no mobile view, cookie wasn't set and it is switched on
-            if ( !ZMO.isMobileView() && cookie !== 1 && defaults.isOn ) {
+            if ( ( !ZMO.isMobileView() && cookie !== 1 && defaults.isOn ) || defaults.force ) {
                 if ( defaults.debug ) {
                     console.info( 'AktPop started w/ minutes: ', defaults.minutes, ' and updateTime: ', defaults.updateTime );
                 }
