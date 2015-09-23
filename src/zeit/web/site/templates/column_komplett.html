@@ -6,9 +6,6 @@
             {% if not loop.first %}
                 <h3 class="article-page__page-teaser article__item">{{ page.teaser | hide_none }}</h3>
             {% endif %}
-
-            {#% include "zeit.web.site:templates/inc/article/table-of-contents.tpl" %#}
-
             {{ render_page(page) }}
         </section>
     {% endfor %}
