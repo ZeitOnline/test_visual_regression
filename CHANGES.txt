@@ -23,7 +23,6 @@ Change log for zeit.web
 ------------------
 
 - FIX: Compute proper liveblog status
->>>>>>> 658695a4fad869d4919dd83bad02b1aafc7085ec
 
 
 2.5 (2015-09-21)
