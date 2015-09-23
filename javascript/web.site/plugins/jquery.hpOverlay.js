@@ -20,8 +20,7 @@
         var defaults = $.extend( {
             cookieTimeInDays: 1.5,
             countingPrefix: 'refreshbox',
-            endpoint: location.origin + '/json_update_time/index',
-            homepage: 'http://www.zeit.de/index',
+            endpoint: location.protocol + '//' + location.host + '/json_update_time/index',
             minutes: 5,
             isOn: true,
             timestamp: '',
