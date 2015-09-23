@@ -334,11 +334,6 @@ define( [ 'jquery' ], function( $ ) {
                 debug: debugMode
             }, clickTrack );
 
-            $( '*[data-tracking-appear]' ).on( 'appear', {
-                funcName: 'useDataTracking',
-                debug: debugMode
-            }, clickTrack );
-
             registerGlobalTrackingMessageEndpointForVideoPlayer();
         }
     };
