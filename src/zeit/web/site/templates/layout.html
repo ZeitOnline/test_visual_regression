@@ -74,7 +74,15 @@
     <script src="{{ request.asset_url('js/vendor/modernizr-custom.js') }}"></script>
     {# SVG4everybody TODO: replace Grunticon completely, check IE8 Fallback -#}
     <script src="{{ request.asset_url('js/vendor/svg4everybody.legacy.js') }}"></script>
-    <script>svg4everybody();</script>
+    <script>
+        {# needed for styling SVG in IE8 #}
+        document.createElement( 'svg' );
+        svg4everybody({
+            fallback: function ( src, svg, use ) {
+                return src.replace( /web\.site\/icons\.svg(\?.+)?#svg-(.+)/ , 'icons/site/$2.png$1');
+            }
+        });
+    </script>
     {# Grunticon SVG -#}
     <script>
         {%- include "zeit.web.static:css/icons/grunticon.loader.js" ignore missing -%}
@@ -97,12 +105,13 @@
         {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
     {% if view.is_dev_environment %}
-    <script src="//localhost:35729/livereload.js"></script>
+        <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
 
     {% block cardstack_head %}
         {% if view.has_cardstack %}
-            <esi:include src="http://www.zeit.de/cardstack-backend/stacks/esi/head?shareUrl={{ request.url }}" onerror="continue" />
+            {% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/esi/head?shareUrl={}'.format(request.url) %}
+            {{ lama.insert_esi(esi_source, 'Cardstack Ressourcen konnten nicht geladen werden', view.is_dev_environment) }}
         {% endif %}
     {% endblock %}
 </head>
@@ -185,7 +194,8 @@
     {% endif %}
     {% block cardstack_bottom %}
         {% if view.has_cardstack %}
-            <esi:include src="http://www.zeit.de/cardstack-backend/stacks/esi/scripts?shareUrl={{ request.url }}" onerror="continue" />
+            {% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/esi/scripts?shareUrl={}'.format(request.url) %}
+            {{ lama.insert_esi(esi_source, 'Cardstack konnte nicht eingebunden werden', view.is_dev_environment) }}
         {% endif %}
     {% endblock %}
 </body>

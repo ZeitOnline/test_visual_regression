@@ -22,8 +22,6 @@
 
         {{ vima.brightcove_video_tag(view.context.__name__, iframe=True) }}
 
-        {{ self.schema_org_image_info() }}
-
         {% if view.context.advertising_enabled %}
             {{ lama.adplace(view.banner(7), view) }}
         {% endif %}
@@ -36,12 +34,7 @@
             </div>
             <div class="metadata">
                 {% include "zeit.web.site:templates/inc/article/metadata.tpl" %}
-
-                <div class="sharing-menu sharing-menu--video">
-                    <span class="sharing-menu__title metadata__link js-sharing-menu">Teilen</span>
-                    {% include "zeit.web.site:templates/inc/article/sharing-menu-items.tpl" %}
-                </div>
-
+                {% include "zeit.web.site:templates/inc/article/sharing-menu.tpl" %}
             </div>
         </div>
         {% endprofile %}

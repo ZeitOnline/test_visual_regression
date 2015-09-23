@@ -404,6 +404,9 @@ class ImageGroup(zeit.content.image.imagegroup.ImageGroup,
     def __contains__(self, key):
         return False  # Video imagegroups *only* contain master images.
 
+    def keys(self):
+        return ()  # Video imagegroups *only* contain master images.
+
     @property
     def master_image(self):
         return self._master_image
@@ -437,6 +440,8 @@ class VideoImages(object):
 class VideoImageMetaData(object):
 
     def __init__(self, group):
+        for field in zeit.content.image.interfaces.IImageMetadata:
+            setattr(self, field, None)
         self.alt = group.title
         self.caption = group.teaserText
         self.title = group.teaserTitle

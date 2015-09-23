@@ -66,19 +66,24 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return self.seo_title_default
 
     @zeit.web.reify
-    def meta_robots(self):
-        # Try seo presets first
-        if self.seo_robot_override:
-            return self.seo_robot_override
+    def pdf_link(self):
+        server = 'http://pdf.zeit.de/'
+        path = '/'.join(self.request.traversed)
+        return server + path + '.pdf'
 
-        # Exclude certain products and ressorts from being followed
-        exclude_products = ('TGS', 'HaBl', 'WIWO', 'GOLEM')
+    @zeit.web.reify
+    def print_link(self):
+        url = self.content_url
+        prefix = '/komplettansicht'
 
-        if self.product_id in exclude_products or (
-                self.ressort == 'Fehler' and self.product_id == 'ZEAR'):
-                return 'noindex,follow'
-        else:
-            return 'index,follow,noodp,noydir,noarchive'
+        try:
+            if len(self.pages) == 1:
+                prefix = ''
+        except:
+            pass
+
+        path = prefix + '?print=true'
+        return url + path
 
     @zeit.web.reify
     def breadcrumbs(self):

@@ -1,19 +1,21 @@
 .breaking-news-banner
-	background: #ffe246
-	color: $black
-	display: block
-	font-size: remify(14px)
-	letter-spacing: $zon-letter-spacing-m
-	padding: remify(15px) $page-padding
-	text-align: center
-	+respond-min($break-tablet-min)
-		// dirty trick to hide the main navigation border
-		// hopefully harmless
-		position: relative
-		top: -1px
-	+respond-min($break-desktop-min)
-		padding-top: remify(20px)
-		padding-bottom: remify(20px)
+	&--article,
+	&__link
+		background: #ffe246
+		color: $black
+		display: block
+		font-size: remify(14px)
+		letter-spacing: $zon-letter-spacing-m
+		padding: remify(15px) $page-padding
+		text-align: center
+		+respond-min($break-tablet-min)
+			// dirty trick to hide the main navigation border
+			// hopefully harmless
+			position: relative
+			top: -1px
+		+respond-min($break-desktop-min)
+			padding-top: remify(20px)
+			padding-bottom: remify(20px)
 	&__label
 		text-transform: uppercase
 	&__time
@@ -35,7 +37,7 @@
 			width: 40px
 			margin: remify(0 10px 0 5px)
 
-a.breaking-news-banner
+a.breaking-news-banner__link
 	// normal, hover, active, visited, focus
 	+link-colors($black, $black, $color-link--active, $black, $color-link--focus)
 	+respond-min($break-tablet-min)

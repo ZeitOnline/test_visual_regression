@@ -3,7 +3,7 @@
 {% block before_module_list %}
 {% if area.query %}
 <div class="search-counter">
-    <div class="search-counter__hits">
+    <div class="search-counter__hits"{% if area.hits %} id="search-area-has-hits"{% endif %}>
         {{ area.hits | default(0) | pluralize('Keine Suchergebnisse', '{} Suchergebnis', '{} Suchergebnisse') }}
         {% if area.query %}für &raquo;{{ area.query }}&laquo;{% endif %}
     </div>

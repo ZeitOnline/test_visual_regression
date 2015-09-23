@@ -6,6 +6,7 @@ import re
 import pyramid.httpexceptions
 import zope.component
 
+import zeit.content.article.interfaces
 import zeit.content.article.edit.interfaces
 import zeit.content.author.interfaces
 import zeit.magazin.interfaces
@@ -43,6 +44,8 @@ class Article(zeit.web.core.view.Content):
     def main_image_block(self):
         img = zeit.web.core.interfaces.IFrontendBlock(
             self.context.main_image_block, None)
+        if img is not None:
+            img.itemprop = 'image'
         try:
             self._copyrights.setdefault(img.uniqueId, img)
         except AttributeError:
@@ -73,6 +76,16 @@ class Article(zeit.web.core.view.Content):
     def next_title(self):
         if self.page_nr < len(self.pages):
             return self.pages[self.page_nr].teaser
+
+    @zeit.web.reify
+    def pages_titles(self):
+        titles = []
+        for number in range(0, len(self.pages)):
+            title = self.title
+            if number > 0:
+                title = self.pages[number].teaser
+            titles.append(title)
+        return titles
 
     @zeit.web.reify
     def pages_urls(self):
@@ -110,6 +123,7 @@ class Article(zeit.web.core.view.Content):
             'pager': pager,
             'next_page_title': self.next_title,
             'content_url': self.content_url,
+            'pages_titles': self.pages_titles,
             'pages_urls': self.pages_urls,
             'next_page_url': self.next_page_url,
             'prev_page_url': self.prev_page_url
@@ -206,6 +220,15 @@ class Article(zeit.web.core.view.Content):
                     ',', ';').replace(' ', '')
             except(AttributeError):
                 return ""
+
+    @zeit.web.reify
+    def is_breaking(self):
+        return zeit.content.article.interfaces.IBreakingNews(
+            self.context).is_breaking
+
+    @zeit.web.reify
+    def is_push_news(self):
+        return self.context.push_news
 
     @property
     def copyrights(self):

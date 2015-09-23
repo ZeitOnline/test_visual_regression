@@ -1,15 +1,36 @@
+%article-interactions__item
+	color: $zon_grey
+	cursor: pointer
+	letter-spacing: 0.04em
+	font-size: remify(14px)
+	+on-interaction
+		color: $zon_dark_grey
+
 .article-interactions
 	border-top: 2px solid $zon_lighter_grey
+	clear: both
 	padding: remify(20px 0 10px)
+	position: relative
+
+.print-menu
+	position: absolute
+	top: remify(20px)
+	left: remify(55px)
+	display: none
+	&__print,
+	&__pdf
+		@extend %article-interactions__item
+		&:before
+			content: " / "
+			color: $color-separator
+			margin: remify(0 4px)
+	+respond-min($break-desktop-min)
+		display: inline
 
 .sharing-menu
 	font-size: remify(14px)
 	&__title
-		color: $zon_grey
-		cursor: pointer
-		letter-spacing: 0.04em
-		+on-interaction
-			color: $zon_dark_grey
+		@extend %article-interactions__item
 		&:after
 			+drop_icon()
 	&__items
@@ -54,18 +75,13 @@
 				color: $zon_grey
 
 // js-induced state modifications
-.sharing-menu--active > .sharing-menu__title
+.sharing-menu--active .sharing-menu__title
 	color: $zon_dark_grey
 	&:after
 		+drop_icon($open: true)
 
-.sharing-menu--active > .sharing-menu__items,
+.sharing-menu--active .sharing-menu__items,
 .no-js .sharing-menu__items // no-js fallback
 	margin:  remify(14px 0) // animated
 	max-height: remify(64px) // animated
 
-// The sharing menu appears on pages with dark background (video single page)
-.sharing-menu--video
-	display: inline
-	&.sharing-menu--active > .sharing-menu__title
-		color: $zon_light_grey

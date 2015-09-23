@@ -2,7 +2,7 @@
 {% set template = module | get_layout %}
 {% set id = module.identification %}
 <div class="{{ 'buzz-box' | with_mods(modifier) }} js-accordion" id="{{ id }}">
-	<a class="buzz-box__heading" href="#{{ id }}">
+	<a class="buzz-box__heading" href="#{{ id }}" data-tracking="....buzz-box__heading.{{ module.header | lower }}|{{view.og_url|replace('http://','')}}#{{ id }}">
 		{{ module.header }}
 	</a>
 	<ol class="buzz-box__teasers">

@@ -1,3 +1,4 @@
+import ast
 import base64
 import logging
 import os.path
@@ -191,18 +192,26 @@ class Application(object):
         config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_route(
             'schlagworte_index',
-            '/schlagworte/{entity}/{item:[A-Z]}/index',
+            '/schlagworte/{category}/{item:[A-Z]($|/$|/index$)}',
             zeit.web.core.view.surrender)
-        config.add_route('schlagworte', '/schlagworte/{entity}/{item}/index')
+        config.add_route(
+            'schlagworte',
+            '/schlagworte/{category}/{item}{subpath:($|/$|/index$)}')
 
         # Route to post comments to a communit service
         config.add_route('post_test_comments', '/admin/test-comments')
         config.add_route('toggle_third_party_modules', '/admin/toggle-tpm')
 
-        config.add_static_view(name='css', path='zeit.web.static:css/')
-        config.add_static_view(name='js', path='zeit.web.static:js/')
-        config.add_static_view(name='img', path='zeit.web.static:img/')
-        config.add_static_view(name='fonts', path='zeit.web.static:fonts/')
+        def add_static_view(config, name):
+            max_age = ast.literal_eval(self.settings['assets_max_age'])
+            config.add_static_view(
+                name=name, path='zeit.web.static:{}/'.format(name),
+                cache_max_age=max_age)
+
+        add_static_view(config, 'css')
+        add_static_view(config, 'js')
+        add_static_view(config, 'img')
+        add_static_view(config, 'fonts')
         config.add_renderer('jsonp', pyramid.renderers.JSONP(
             param_name='callback'))
 
@@ -246,6 +255,14 @@ class Application(object):
             return url
 
         config.add_request_method(asset_url)
+
+        def image_host(request):
+            image_prefix = request.registry.settings.get('image_prefix', '')
+            if not image_prefix.startswith('http'):
+                image_prefix = join_url_path(
+                    request.application_url, image_prefix)
+            return request.route_url('home', _app_url=image_prefix)
+        config.add_request_method(image_host, reify=True)
 
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.web, ignore=self.DONT_SCAN)

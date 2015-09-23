@@ -1,19 +1,23 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
 {# the blockname is also used by clicktracking.js for tracking/reporting stuff #}
 {% set blockname = 'teaser-storystream' %}
 
-<article class="{{ blockname }}">
+{% set target_url = teaser.uniqueId | create_url %}
+
+<article class="{{ blockname }} {{ blockname }}--in-area-{{ area.kind }}">
     <header class="{{ blockname }}__media">
         {# get the image directly from the supplied image group #}
-        {% set image = get_image(module, default='wide') %}
+        {% set image = get_image(module, default='cinema') %}
         {# we need to explicitly pass the layout aka block class name #}
         {% set module_layout = blockname %}
         {% include "zeit.web.site:templates/inc/storystream/inc/headerimage_image.tpl" ignore missing %}
 
         <div class="{{ blockname }}__headercontent">
-            <a class="{{ blockname }}__link" href="#">
+            <a class="{{ blockname }}__link" href="{{ target_url }}">
                 <span class="{{ blockname }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
+                <span class="visually-hidden">:</span>
                 <h2 class="{{ blockname }}__title">{{ teaser.teaserTitle or teaser.title }}</h2>
             </a>
         </div>
@@ -22,13 +26,15 @@
         <ul class="{{ blockname }}__list">
             {% for article_module in module.article_modules %}
                 {% set article_teaser = article_module | first_child %}
-                <li>{{ article_teaser.teaserTitle or article_teaser.title }}</li>
+                <li class="{{ blockname }}__listitem">{{ article_teaser.teaserTitle or article_teaser.title }}</li>
             {% endfor %}
         </ul>
+        {# TODO: "Zuletzt aktualisiert vor 2 Stunden"
         <span class="{{ blockname }}__update">
             {{ lama.use_svg_icon('storystream-updated', 'teaser-storystream__updateicon', request) }}
-            Zuletzt aktualisiert vor 2 Stunden
+            {{ cp.include_teaser_datetime(teaser) }}
         </span>
-        <a class="button {{ blockname }}__button" href="#">zum Live-Dossier</a>
+        #}
+        <a class="button {{ blockname }}__button" href="{{ target_url }}">zum Live-Dossier</a>
     </div>
 </article>

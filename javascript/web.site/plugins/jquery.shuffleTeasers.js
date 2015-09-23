@@ -19,16 +19,22 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
             return true;
         }
 
-        sourceUrl = sourceUrl.replace( '___JS-RANDOM___', Math.floor( Math.random() * 10 ) );
-
         $.get( sourceUrl, function( data ) {
             var selector = '.teaser-gallery',
                 $data = $( data ),
                 $teasers = $data.find( selector ),
-                duration = 400;
+                $shuffleButton = $galleryArea.find( '.js-gallery-teaser-shuffle' ),
+                duration = 400,
+                nextPageSource = $data.find( '.js-gallery-teaser-shuffle' ).data( 'sourceurl' );
 
             if ( $galleryArea.offset().top < document.documentElement.scrollTop ) {
                 $galleryArea.velocity( 'scroll', duration );
+            }
+
+            if ( nextPageSource ) {
+                $shuffleButton.data( 'sourceurl', nextPageSource );
+            } else {
+                $shuffleButton.velocity( { opacity: 0 } );
             }
 
             $galleryArea.find( selector ).velocity( 'transition.slideLeftBigOut', {

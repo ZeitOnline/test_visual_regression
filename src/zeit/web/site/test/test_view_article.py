@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait
 import lxml.etree
 import mock
+import pyramid.testing
 import pytest
 
 from zeit.cms.checkout.helper import checked_out
@@ -31,14 +32,23 @@ def test_article_should_render_full_view(testbrowser):
         '.article-page > p.paragraph')) == article.paragraphs
 
 
+def test_article_single_page_has_no_pagination(testbrowser):
+    select = testbrowser('/zeit-online/article/simple').cssselect
+
+    assert len(select('.summary, .byline, .metadata')) == 3
+    assert len(select('.article-pagination')) == 0
+    assert len(select('.article-toc')) == 0
+
+
 def test_article_full_view_has_no_pagination(testbrowser):
     select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
 
     assert len(select('.summary, .byline, .metadata')) == 3
     assert len(select('.article-pagination')) == 0
+    assert len(select('.article-toc')) == 0
 
 
-def test_article_with_pagination(testbrowser):
+def test_article_pagination(testbrowser):
     select = testbrowser('/zeit-online/article/zeit').cssselect
     nexttitle = select('.article-pagination__nexttitle')
     numbers = select('.article-pager__number')
@@ -50,7 +60,10 @@ def test_article_with_pagination(testbrowser):
     assert nexttitle[0].text.strip() == (
         u'Der Horror von Crystal wurzelt in der Normalität')
     assert len(numbers) == 5
-    assert '--current' in (numbers[0].get('class'))
+    assert '--current' in numbers[0].get('class')
+    assert len(select('.article-toc')) == 1
+    assert len(select('.article-toc__item')) == 5
+    assert '--current' in select('.article-toc__item')[0].get('class')
 
 
 def test_article_pagination_active_state(testbrowser):
@@ -63,7 +76,10 @@ def test_article_pagination_active_state(testbrowser):
         u'Man wird schlank und lüstern')
     assert select('.article-pagination__nexttitle')[0].text.strip() == (
         u'Aus dem abenteuerlustigen Mädchen vom Dorf wurde ein Junkie')
-    assert '--current' in (select('.article-pager__number')[2].get('class'))
+    assert '--current' in select('.article-pager__number')[2].get('class')
+    assert len(select('.article-toc')) == 1
+    assert len(select('.article-toc__item')) == 5
+    assert '--current' in select('.article-toc__item')[2].get('class')
 
 
 def test_article_page_1_has_correct_h1(testbrowser):
@@ -99,11 +115,11 @@ def test_article_complete_has_correct_h1(testbrowser):
 
 
 def test_article_plain_has_correct_h1(testbrowser):
-    select = testbrowser('/zeit-online/article/02').cssselect
+    select = testbrowser('/zeit-online/article/simple').cssselect
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
-        u'Zwei Baguettes und ein Zimmer bitte'), (
-        'article headline is not h1')
+        u'Williams wackelt weiter, steht aber im Viertelfinale'), (
+        'article headline must be h1')
 
 
 def test_article_page_1_has_correct_title(testbrowser):
@@ -162,45 +178,40 @@ def test_schema_org_main_content_of_page(testbrowser):
     assert len(select('main[itemprop="mainContentOfPage"]')) == 1
 
 
-def test_schema_org_article(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
+def test_schema_org_article_mark_up(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    selector = 'article[itemtype="http://schema.org/Article"][itemscope]'
+    article = browser.cssselect(selector)
+    assert len(article) == 1
+    select = article[0].cssselect
 
-    assert len(select(
-        'article[itemtype="http://schema.org/Article"][itemscope]')) == 1
+    # articleBody
+    assert len(select('div[itemprop="articleBody"]')) == 1
 
-
-def test_schema_org_headline(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
+    # headline
     headline = select('h1[itemprop="headline"]')
-    text = u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?'
     assert len(headline) == 1
-    assert text in headline[0].text_content()
+    assert headline[0].text_content().strip() == (
+        u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?')
 
-
-def test_schema_org_description(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-
+    # description
     assert len(select('div[itemprop="description"]')) == 1
 
+    # author
+    selector = (
+        '*[itemtype="http://schema.org/Person"][itemprop="author"][itemscope]')
+    author = select(selector)
+    assert len(author) == 1
+    assert len(author[0].cssselect('a[itemprop="url"]')) == 1
+    name = author[0].cssselect('span[itemprop="name"]')
+    assert len(name) == 1
+    assert name[0].text == 'Wenke Husmann'
 
-def test_schema_org_author(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
+    # image
+    assert len(select('img[itemprop="image"]')) == 1
 
-    assert len(select('.byline[itemprop="author"]')) == 1
-    assert len(select('.byline a[itemprop="url"]')) == 1
-    assert len(select('.byline span[itemprop="name"]')) == 1
-
-
-def test_schema_org_article_body(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-
-    assert len(select('.article-body[itemprop="articleBody"]')) == 1
-
-
-def test_schema_org_image(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-    json = 'article > script[type="application/ld+json"]'
-    assert len(select(json)) == 1
+    # datePublished
+    assert len(select('time[itemprop="datePublished"]')) == 1
 
 
 def test_multipage_article_should_designate_meta_pagination(testbrowser):
@@ -239,7 +250,7 @@ def test_article_meta_should_show_comment_count(testbrowser):
 
 def test_article_meta_should_omit_comment_count_if_no_comments_present(
         testbrowser):
-    browser = testbrowser('/zeit-online/article/zeit')
+    browser = testbrowser('/zeit-online/article/simple')
     assert len(browser.cssselect('.metadata__commentcount')) == 0
 
 
@@ -447,23 +458,39 @@ def test_adcontroller_values_return_values_on_article(application):
 
 
 def test_article_view_renders_alldevices_raw_box(testbrowser):
-    browser = testbrowser('/zeit-online/article/02')
+    browser = testbrowser('/zeit-online/article/raw-box')
     assert 'fVwQok9xnLGOA' in browser.contents
 
 
 def test_article_skips_raw_box_not_suitable_for_alldevices(testbrowser):
-    browser = testbrowser('/zeit-online/article/02')
+    browser = testbrowser('/zeit-online/article/raw-box')
     assert 'cYhaIIyjjxg1W' not in browser.contents
 
 
-def test_nextread_is_placed_on_article_02(testbrowser):
-    browser = testbrowser('/zeit-online/article/02')
+def test_nextread_is_placed_on_article(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread')
     assert len(browser.cssselect('#nextread')) == 1
 
 
+def test_nextread_date_looks_less_like_a_date_for_google(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.site:templates/inc/article/nextread.tpl')
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple-nextread')
+    request = mock.MagicMock()
+    request.route_url.return_value = 'http://foo.bar/'
+    view = zeit.web.site.view_article.Article(content, request)
+    html_str = tpl.render(view=view, request=request)
+    html = lxml.html.fromstring(html_str)
+    datetime = html.cssselect('.nextread__dt')
+    assert datetime[0].tag == 'span'
+    assert not any(x in datetime[0].get('class') for x in ['date', 'time'])
+
+
 def test_nextread_is_responsive(testserver, selenium_driver, screen_size):
+    url = '{}/zeit-online/article/simple-nextread'.format(testserver.url)
     selenium_driver.set_window_size(screen_size[0], screen_size[1])
-    selenium_driver.get('{}/zeit-online/article/02'.format(testserver.url))
+    selenium_driver.get(url)
     nextread = selenium_driver.find_element_by_id('nextread')
 
     assert nextread.is_displayed(), 'Nextread missing'
@@ -488,11 +515,11 @@ def test_publisher_nextread_on_article_has_own_template(testbrowser):
 
 def test_zon_nextread_teaser_block_has_teasers_available(application):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/02')
+        'http://xml.zeit.de/zeit-online/article/simple-nextread')
     nextread = zeit.web.core.interfaces.INextread(context)
     assert hasattr(nextread, '__iter__')
     assert len(nextread) == 1
-    assert nextread[0].uniqueId.endswith('/zeit-online/article/01')
+    assert nextread[0].uniqueId.endswith('/zeit-online/article/zeit')
 
 
 def test_article_column_should_have_no_body_image(testbrowser):
@@ -670,57 +697,107 @@ def test_imported_article_has_special_meta_robots(
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
 
     # test ZEAR
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'ZEAR')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'ressort', u'Fehler')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for ZEAR')
 
     # test TGS
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'TGS')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for TGS')
 
     # test HaBl
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'HaBl')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for HaBl')
 
     # test WIWO
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'WIWO')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for WIWO')
 
     # test GOLEM
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'GOLEM')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'noindex,follow', (
         'wrong robots for GOLEM')
 
     # test ZEI
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'ZEI')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
         'wrong robots for ZEI')
 
     # test no product id
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', None)
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
         'wrong robots for none product article')
+
+
+def test_robots_rules_for_angebote_articles(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+
+    # usual angebot
+    request.path = '/angebote/buchtipp/ishiguro/index'
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.meta_robots == 'index,nofollow,noodp,noydir,noarchive', (
+        'wrong robots for usual angebot')
+
+    # partnersuche
+    request.path = '/angebote/partnersuche/test'
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for partnersuche')
+
+
+def test_robots_rules_for_diverse_articles(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = mock.Mock()
+    request.url = 'http://localhost'
+
+    # test folder
+    request.path = '/test/article'
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for test folder')
+
+    # templates folder
+    request.path = '/templates/article'
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for templates folder')
+
+    # banner folder
+    request.path = '/banner/article'
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+        'wrong robots for banner folder')
+
+    # any folder
+    request.path = '/any/article'
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+        'wrong robots for any other folder')
 
 
 def test_article_doesnt_show_modified_date(testbrowser):
@@ -846,3 +923,42 @@ def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
     main_image = browser.cssselect('.article-body img')[0]
     figure = main_image.xpath('./ancestor::figure')[0]
     assert 'article__item--wide' in figure.get('class')
+
+
+def test_missing_keyword_links_are_replaced(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    keyword = browser.cssselect('.article-tags__link')[5]
+    assert keyword.attrib['href'].endswith('/thema/wein')
+
+
+def test_article_has_print_pdf_function(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    print_m = browser.cssselect('.print-menu__print')
+    pdf_m = browser.cssselect('.print-menu__pdf')
+    assert (print_m[0].attrib['href'].endswith(
+        '/zeit-online/article/01?print=true'))
+    assert (pdf_m[0].attrib['href'] ==
+            'http://pdf.zeit.de/zeit-online/article/01.pdf')
+
+
+def test_multi_page_article_has_print_link(testbrowser):
+    browser = testbrowser('/zeit-online/article/tagesspiegel')
+    print_m = browser.cssselect('.print-menu__print')
+    assert (print_m[0].attrib['href'].endswith(
+        '/zeit-online/article/tagesspiegel/komplettansicht?print=true'))
+
+
+def test_article_renders_quotes_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/article/quotes')
+    quotes = browser.cssselect('.quote')
+    assert len(quotes) == 3
+
+    quote_with_linked_source = quotes[0]
+    quote_with_source = quotes[1]
+    quote_without_source = quotes[2]
+
+    assert quote_with_linked_source.cssselect(
+        '.quote__source > .quote__link[href="http://www.imdb.com/title/'
+        'tt0110912/quotes?item=qt0447099"]')
+    assert not quote_with_source.cssselect('.quote__source > *')
+    assert not quote_without_source.cssselect('.quote__source')

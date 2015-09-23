@@ -55,11 +55,12 @@
     </div>
 {%- endmacro %}
 
-{% macro liveblog(obj) -%}
-    {% if obj.blog_id -%}
+{% macro liveblog(liveblog) -%}
+    {% if liveblog.blog_id -%}
         <div class="is-constrained is-centered">
             {# TODO: We should mock the liveblog backend for local testing. #}
-            <esi:include src="http://www.zeit.de/liveblog-backend/{{ obj.blog_id }}.html" onerror="continue" />
+            {% set esi_source = 'http://www.zeit.de/liveblog-backend/{}.html'.format(liveblog.blog_id) %}
+            {{ lama_core.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden', view.is_dev_environment) }}
         </div>
     {%- endif %}
 {%- endmacro %}
@@ -304,15 +305,17 @@
     {% if lm_date %}
         <!--[if gt IE 8]><!-->
         <script type="text/javascript">
-        //due to seo reasons, original publish date is added later
-            var el = document.getElementsByClassName('article__head__meta__date');
-            var content = el[0].textContent != undefined ? el[0].textContent : el[0].innerText;
-            if( content != undefined ){
-                if( '{{ format }}' === 'long' ){
-                    el[0].innerHTML = '{{ publish_date }} —<br><span>zuletzt aktualisiert am ' + content + '</span>';
-                }else{
-                    el[0].innerHTML = '{{ publish_date }} —<br><span>editiert: ' + content + '</span>';
-                }
+        // due to seo reasons, original publish date is added later
+            var time = document.querySelector('.article__head__meta__date'),
+                content = time.textContent != undefined ? time.textContent : time.innerText,
+                published = document.createTextNode('{{ publish_date }} — '),
+                linebreak = document.createElement('br'),
+                text = "{% if format == 'long' %}zuletzt aktualisiert am {% else %}editiert: {% endif %}" + content;
+
+            if ( content != undefined ) {
+                time.parentNode.insertBefore(published, time);
+                time.parentNode.insertBefore(linebreak, time);
+                time.firstChild.nodeValue = text;
             }
         </script>
         <!--<![endif]-->

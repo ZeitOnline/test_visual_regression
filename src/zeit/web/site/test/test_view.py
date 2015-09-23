@@ -1,3 +1,4 @@
+# coding: utf-8
 import mock
 import requests
 
@@ -72,7 +73,7 @@ def test_keyword_index_pages_should_fall_back_to_xslt(testserver, testbrowser):
     resp = requests.get(
         '%s/schlagworte/index/A/index' % testserver.url,
         allow_redirects=False)
-    assert resp.status_code == 200
+    assert resp.status_code == 303
     assert resp.headers['x-render-with'] == 'default'
 
 
@@ -118,3 +119,24 @@ def test_base_date_get_param_should_trigger_redirect(testserver):
     assert resp.status_code == 301
     assert (resp.headers['location'] == (
             '%s/zeit-online/article/zeit' % testserver.url))
+
+
+def test_keyword_redirect_should_handle_nonindex_urls(testserver, testbrowser):
+    resp = requests.get(
+        '%s/schlagworte/personen/Santa-Klaus' % testserver.url,
+        allow_redirects=False)
+    assert resp.headers['Location'] == '%s/thema/santa-klaus' % testserver.url
+
+    resp = requests.get(
+        '%s/schlagworte/personen/Klaus-Kleber/' % testserver.url,
+        allow_redirects=False)
+    assert resp.headers['Location'] == '%s/thema/klaus-kleber' % testserver.url
+
+
+def test_keyword_redirect_should_handle_unicode(testserver, testbrowser):
+    resp = requests.get(
+        testserver.url + '/schlagworte/orte/istv%C3%A1n-szab%C3%B3/index',
+        allow_redirects=False)
+    assert resp.status_code == 301
+    assert resp.headers['Location'] == (
+        u'%s/thema/istván-szabó' % testserver.url).encode('utf-8')

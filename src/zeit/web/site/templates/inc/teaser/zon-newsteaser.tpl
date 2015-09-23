@@ -1,3 +1,5 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+
 <article class="newsteaser">
     <time class="newsteaser__time">
         {{ teaser | mod_date | format_date(pattern='HH:mm') }}

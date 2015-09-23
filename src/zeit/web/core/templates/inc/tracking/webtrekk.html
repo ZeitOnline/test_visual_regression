@@ -5,6 +5,11 @@
     {% set date = '' -%}
     {% set pagination = '' -%}
     {% set serie = view.serie | replace(' ', '') | lower %}
+    {% set push = '' %}
+
+    {% if view.is_breaking or view.is_push_news -%}
+        {% set push = 'wichtigenachrichten.push' if view.is_push_news else 'eilmeldung.push' %}
+    {% endif -%}
 
     {% if view.date_first_released -%}
         {% set date = view.date_first_released | format_date('short_num') -%}
@@ -16,8 +21,7 @@
         {% set pagination = '1/1' -%}
     {% endif -%}
 
-    {% set wt_kennung_part = 'redaktion.' + view.ressort | lower + '.' + view.sub_ressort | lower + '.' + serie + '.' + view.type | lower + '.online' %}
-    {% set wt_kennung = "%s|%s%s" | format(wt_kennung_part, request.host, request.path) %}
+    {% set wt_kennung = 'redaktion.' + view.ressort | lower + '.' + view.sub_ressort | lower + '.' + serie + '.' + view.type | lower + '.online|' + view.content_url.replace('http://', '') %}
 
     {% set ivw_code = '%s%sbild-text' | format(view.ressort | lower + '/' if view.ressort, view.sub_ressort | lower + '/' if view.sub_ressort) %}
 
@@ -58,7 +62,8 @@
             11: "", // Fehler
             12: window.ZMO.getSiteParam('.site'),
             13: window.ZMO.breakpoint.getTrackingBreakpoint(),
-            14: "{{ 'alt' if 'zeitmz' in view.banner_channel else 'neu'  }}"
+            14: "{{ 'alt' if 'zeitmz' in view.banner_channel else 'neu'  }}",
+            15: "{{ push }}"
         };
 
         {% if view.is_wrapped %}
@@ -66,6 +71,14 @@
             1: window.ZMO.wrapped.client
         };
         {% endif %}
+
+        if( window.location.href.indexOf('/suche/') > -1 && typeof Z_WT_KENNUNG !== 'undefined' ) {
+            if( document.getElementById('search-area-has-hits') ) {
+                Z_WT_KENNUNG = Z_WT_KENNUNG.replace('/index', '/treffer');
+            } else {
+                Z_WT_KENNUNG = Z_WT_KENNUNG.replace('/index', '/keine_treffer');
+            }
+        }
 
         wt.contentId = Z_WT_KENNUNG;
         wt.sendinfo();
@@ -87,7 +100,7 @@
                 view.banner_channel | lower,
                 date
             )
-        }}{{ "&cp1=%s&cp2=%s&cp3=%s&cp4=%s&cp5=%s&cp6=%s&cp7=%s&cp8=%s&cp9=%s&cp10=%s&cp11=%s&cp12=%s&cp13=%s" | format(
+        }}{{ "&cp1=%s&cp2=%s&cp3=%s&cp4=%s&cp5=%s&cp6=%s&cp7=%s&cp8=%s&cp9=%s&cp10=%s&cp11=%s&cp12=%s&cp13=%s&cp15=%s" | format(
             view.authors_list | lower | hide_none,
             ivw_code,
             pagination,
@@ -100,7 +113,8 @@
             "",
             "",
             "desktop.site",
-            "stationaer"
+            "stationaer",
+            push
         ) }}" />
     </div>
 </noscript>

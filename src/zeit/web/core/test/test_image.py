@@ -3,6 +3,7 @@ from hashlib import sha1
 from StringIO import StringIO
 
 from PIL import Image
+import lxml.objectify
 import mock
 import pyramid.httpexceptions
 import pytest
@@ -72,6 +73,15 @@ def test_scaled_image_download_from_brightcove_assets(appbrowser):
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
         'inline; filename="imagegroup.jpeg"')
+
+
+def test_video_claiming_to_be_imagegroup_works_with_xmlreference(application):
+    video = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2014-01/3035864892001')
+    node = lxml.objectify.XML('<dummy/>')
+    updater = zeit.cms.content.interfaces.IXMLReferenceUpdater(video)
+    # assert nothing raised
+    updater.update(node, suppress_errors=True)
 
 
 def test_brightcove_images_should_set_cache_headers(testserver, app_settings):
@@ -457,3 +467,20 @@ def test_img_src_should_contain_fallback_size(testbrowser):
     b = testbrowser('/zeit-online/slenderized-index')
     assert b.cssselect(
         'img[src$="/filmstill-hobbit-schlacht-fuenf-hee/wide__822x462"]')
+
+
+def test_image_host_is_configurable_for_variant_images(
+        application, testbrowser):
+    settings = application.zeit_app.config.registry.settings
+    with mock.patch.dict(settings, {'image_prefix': 'http://img.example.com'}):
+        b = testbrowser('/zeit-online/slenderized-index')
+    assert b.cssselect('img[data-src^="http://img.example.com"]')
+    assert b.cssselect('img[src^="http://img.example.com"]')
+
+
+def test_image_host_is_configurable_for_legacy_images(
+        application, testbrowser):
+    settings = application.zeit_app.config.registry.settings
+    with mock.patch.dict(settings, {'image_prefix': 'http://img.example.com'}):
+        b = testbrowser('/zeit-magazin/index')
+    assert b.cssselect('img[src^="http://img.example.com"]')

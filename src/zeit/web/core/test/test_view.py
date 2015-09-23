@@ -24,7 +24,7 @@ def mock_ad_view(application):
         def __init__(
                 self, type, ressort,
                 sub_ressort, is_hp=False, banner_id=None, serienname='',
-                product_id=None):
+                product_id=None, path_info=None, adv_title=''):
             self.type = type
             self.ressort = ressort
             self.sub_ressort = sub_ressort
@@ -33,7 +33,9 @@ def mock_ad_view(application):
             self.serie = serienname
             context = mock.Mock()
             context.banner_id = banner_id
+            context.advertisement_title = adv_title
             request = mock.Mock()
+            request.path_info = path_info
             self.request = request
             self.context = context
 
@@ -219,7 +221,20 @@ def test_banner_channel_mapping_should_apply_first_rule(mock_ad_view):
 def test_banner_channel_mapping_should_apply_second_rule(mock_ad_view):
     assert mock_ad_view(
         'centerpage', 'angebote', '', serienname='meh').banner_channel == (
-        'angebote/adv/centerpage')
+        'adv/angebote/centerpage')
+    assert mock_ad_view(
+        'centerpage', 'angebote', '', adv_title='Foo Bar').banner_channel == (
+        'adv/foobar/centerpage')
+    assert mock_ad_view(
+        'centerpage', 'angebote', '',
+        banner_id='mcs/xx/yy').banner_channel == ('mcs/xx/yy/centerpage')
+
+
+def test_banner_channel_mapping_by_path_info(mock_ad_view):
+    assert mock_ad_view(
+        'centerpage', '', '',
+        path_info='/serie/krimizeit-bestenliste').banner_channel == (
+        'literatur/krimi-bestenliste/centerpage')
 
 
 def test_banner_channel_mapping_should_apply_third_rule(mock_ad_view):

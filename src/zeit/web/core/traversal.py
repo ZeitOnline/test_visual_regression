@@ -100,7 +100,7 @@ class Article(Traversable):
         elif self.context.template == 'column':
             zope.interface.alsoProvides(
                 self.context, zeit.web.core.article.IColumnArticle)
-        elif self.context.template == 'liveblog':
+        elif self.context.template == 'zon-liveblog':
             zope.interface.alsoProvides(
                 self.context, zeit.web.core.article.ILiveblogArticle)
         elif self.context.template == 'photocluster':
@@ -165,6 +165,18 @@ class CenterPage(Traversable):
                 if page_num > area.total_pages or page_num <= 0:
                     raise pyramid.httpexceptions.HTTPNotFound()
             area.page = form.page
+        # XXX block-sensitive shenanigans continue
+        region = zeit.web.core.utils.find_block(
+            self.context, attrib='area', kind='gallery')
+        # XXX Galleries are included via both a region and an area with
+        # kind=gallery; find_block() unfortunately does not allow us to
+        # express this in a query...
+        if region:
+            area = zeit.web.core.utils.find_block(
+                region, attrib='area', kind='gallery')
+            if area:
+                area = zeit.web.core.centerpage.get_area(area)
+                area.page = tdict['request'].GET.get('p')
 
 
 @traverser(zeit.content.cp.interfaces.ICenterPage)
@@ -186,6 +198,23 @@ class CenterPage2015(Traversable):
             travd = tdict['traversed']
             tdict['traversed'] = travd[:pos] + (name,) + travd[pos + 1:]
             raise Retraverse(tdict['request'])
+
+
+@traverser(zeit.cms.repository.interfaces.IFolder)
+class Folder(Traversable):
+
+    def __call__(self, tdict):
+        """Redirect traversed folders and the repository root to a location
+        suffixed by `/index`.
+        """
+
+        if tdict['view_name']:
+            # We're not at the end of the URL yet.
+            return
+        if getattr(tdict['request'].matched_route, 'name', '') == 'home' or (
+                type(tdict['context']) == zeit.cms.repository.folder.Folder):
+            url = '{}/index'.format(tdict['request'].url.rstrip('/'))
+            raise pyramid.httpexceptions.HTTPMovedPermanently(location=url)
 
 
 @traverser(zeit.content.dynamicfolder.interfaces.IRepositoryDynamicFolder)

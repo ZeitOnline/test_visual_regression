@@ -277,6 +277,7 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
     def get_current_request():
         request = mock.Mock()
         request.route_url.return_value = 'http://localhost/'
+        request.image_host = 'http://localhost/'
         return request
 
     monkeypatch.setattr(
@@ -812,9 +813,10 @@ def test_macro_include_cp_ad_produces_markup(jinja2_env):
 def test_macro_liveblog_produces_html(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
+    tpl_module = tpl.make_module({'view': mock.Mock()})
     liveblog = mock.Mock()
     liveblog.blog_id = '999'
-    lines = tpl.module.liveblog(liveblog).splitlines()
+    lines = tpl_module.liveblog(liveblog).splitlines()
     output = ''
     for line in lines:
         output += line.strip()

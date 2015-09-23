@@ -16,7 +16,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">liveblog</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-liveblog</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">749</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="total_hits">62</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">11</attribute>
