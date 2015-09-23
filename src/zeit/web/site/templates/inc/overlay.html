@@ -14,9 +14,9 @@
             <span class="lightbox-content__text">
                 Laden Sie die Seite neu, um Zugriff auf alle aktuellen Beiträge zu haben.
             </span>
-            <button type="button" class="lightbox-button">
+            <button type="button" class="lightbox-button" data-tracking="refreshbox.refreshButton">
                 {{ lama.use_svg_icon('reload', 'lightbox-button__icon', view.request) }}
-                <span class="lightbox-button__text" data-tracking="refreshbox.refreshButton">NEU LADEN</span>
+                <span class="lightbox-button__text">NEU LADEN</span>
             </button>
             <span class="lightbox-cancel" data-tracking="refreshbox.cancel">
                 Abbrechen

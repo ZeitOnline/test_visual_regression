@@ -101,7 +101,8 @@
                     console.info( 'mins: ', min );
                 }
                 var timeout = min * 60 * 1000;
-                timer = window.setTimeout( initPopup, timeout );
+                initPopup();
+                //timer = window.setTimeout( initPopup, timeout );
             },
             updateTime: function() {
                 var that = this,

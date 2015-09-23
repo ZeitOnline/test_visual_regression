@@ -76,7 +76,7 @@ define( [ 'jquery' ], function( $ ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         useDataTracking: function( $element ) {
-            console.debug( 'tracked' );
+            console.debug( $element );
             var trackingData = $element.data( 'tracking' ).split( '|' ),
                 data = [
                     getBreakpoint(),
