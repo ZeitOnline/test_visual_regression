@@ -33,8 +33,8 @@
             overlay = {
             prependHtml: function() {
                 // prepend html to body
-                if ( $( '.overlay' ).size() < 1 ) {
-                    $( 'body' ).prepend( $( '#overlay' ).html() );
+                if ( $( '.overlay_wrapper' ).not( ':visible' ) ) {
+                    $( '.overlay_wrapper' ).show();
                 }
                 $( '.overlay' ).fadeIn();
                 $( '.lightbox' ).show();
@@ -109,7 +109,7 @@
 
                 request.done( function( data ) {
                     // json anfrage ist fertig
-                    defaults.timestamp = data.lastPublishedSemantic;
+                    defaults.timestamp = data.last_published_semantic;
                     that.addTimer( defaults.minutes );
                 } );
             },
@@ -124,10 +124,11 @@
 
             request.done( function( data ) {
                 if ( defaults.debug ) {
-                    console.info( defaults.timestamp, data.lastPublishedSemantic );
+                    console.info( defaults.timestamp, data.last_published_semantic );
                 }
 
-                if ( defaults.timestamp !== data.lastPublishedSemantic ) {
+                if ( defaults.timestamp === data.last_published_semantic ) {
+                    // if ( defaults.timestamp !== data.last_published_semantic ) {
                     if ( defaults.debug ) {
                         console.info( 'Page was updated.' );
                     }
@@ -164,7 +165,7 @@
                 overlay.updateTime();
             } else {
                 if ( defaults.debug ) {
-                    console.warn( 'Cookie present or mobile view, action stopped.' );
+                    console.warn( 'Cookie present, mobile view or switched off, action stopped.' );
                 }
                 return this;
             }

@@ -184,6 +184,10 @@
             urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"
         };
     </script>
+
+    <!-- Popover -->
+    {%- include "zeit.web.site:templates/inc/overlay.html" ignore missing -%}
+
     <script src="{{ request.asset_url('js/site.js') }}"></script>
 
     {% if view.vgwort_url %}
@@ -196,8 +200,5 @@
             <esi:include src="http://www.zeit.de/cardstack-backend/stacks/esi/scripts?shareUrl={{ request.url }}" onerror="continue" />
         {% endif %}
     {% endblock %}
-
-    <!-- Popover -->
-    {%- include "zeit.web.site:templates/inc/overlay.html" ignore missing -%}
 </body>
 </html>
