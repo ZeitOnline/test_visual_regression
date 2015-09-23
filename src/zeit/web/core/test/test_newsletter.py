@@ -9,8 +9,8 @@ def test_renders_image(application):
     b.open('http://localhost/newsletter/februar')
     assert 'http://www.zeit.de/artikel/01' in b.contents
     assert 'http://www.zeit.de/artikel/02' in b.contents
-    assert ('http://images.zeit.de/exampleimages/artikel/01'
-            '/schoppenstube/schoppenstube-148x84.jpg' in b.contents)
+    assert ('http://www.zeit.de/exampleimages/artikel/01'
+            '/schoppenstube/wide__148x84' in b.contents)
 
 
 def test_renders_videos(application):
