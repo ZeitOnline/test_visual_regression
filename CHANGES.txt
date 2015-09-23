@@ -4,6 +4,12 @@ Change log for zeit.web
 2.5.2 (unreleased)
 ------------------
 
+- ZON-2252: Use product name instead of product id for indication of source
+
+- ZON-2244: Fix indication of source in articles
+
+- ZON-2218: Adjust timezone of displayed dates and fix indication of source
+
 - ZON-2098: Add quotes to article
 
 - ZON-2224: Redirect repository root and folders to ~/index
