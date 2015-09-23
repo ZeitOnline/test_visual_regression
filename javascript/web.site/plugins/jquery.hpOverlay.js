@@ -20,7 +20,7 @@
         var defaults = $.extend( {
             cookieTimeInDays: 1.5,
             countingPrefix: 'refreshbox',
-            endpoint: 'http://www.zeit.de/json_update_time/index?callback=?',
+            endpoint: location.origin + '/json_update_time/index',
             homepage: 'http://www.zeit.de/index',
             minutes: 5,
             isOn: true,
@@ -107,7 +107,7 @@
             },
             updateTime: function() {
                 var that = this,
-                    request = $.ajax( defaults.endpoint, { dataType: 'jsonp' } );
+                    request = $.ajax( defaults.endpoint, { dataType: 'jsonp', jsonpCallback: 'askForNicolas' } );
 
                 request.done( function( data ) {
                     // json anfrage ist fertig
@@ -122,7 +122,7 @@
 
         //initialise popover
         function initPopup() {
-            var request = $.ajax( defaults.endpoint, { dataType: 'jsonp' } );
+            var request = $.ajax( defaults.endpoint, { dataType: 'jsonp', jsonpCallback: 'askForNicolas' } );
 
             request.done( function( data ) {
                 if ( defaults.debug ) {
