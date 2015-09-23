@@ -32,6 +32,8 @@ Change log for zeit.web
 
 - FIX: Suppress `.cp2015` suffix in some more URLs
 
+- FIX: Check for ICommonMetadata when building feed
+
 
 2.6 (2015-09-23)
 ----------------
