@@ -515,6 +515,9 @@ class Base(object):
         modified = self.publish_info.date_last_published_semantic
         released = self.date_first_released
         # use 60s of tolerance before displaying a modification date
+        # whould be unnecessary if date_last_published_semantic is never before
+        # first_released and initially undefined or equal first_released
+        # but it's not like that [ms]
         if (released is not None and modified is not None and
                 modified - released > datetime.timedelta(seconds=60)):
             return modified.astimezone(self.timezone)
@@ -650,7 +653,8 @@ class Content(Base):
     def source_label(self):
         src_str = 'Quelle: '
         # freeform sources
-        if self.context.copyrights:
+        # XXX I'm None, please fix me [mx]
+        if self.context.copyrights and self.context.copyrights != u'None':
             return src_str + self.context.copyrights
         # xml show option
         if self.context.product and self.context.product.show:
