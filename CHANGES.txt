@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - FIX: Add force-mobile to teaser-small-minor
 
+- FIX: Redirect legacy keyword urls regardless of ~/index postfix
+
 - MAINT: Make microsites per banner_id value possible
 
 
