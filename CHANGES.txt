@@ -10,7 +10,9 @@ Change log for zeit.web
 
 - ZON-2224: Redirect repository root and folders to ~/index
 
-- ZON-2098: Add quotes to article 
+- ZON-2098: Add quotes to article
+
+- ZON-2257: Update newsletter to use variant_url for images
 
 
 2.5.1 (2015-09-22)
