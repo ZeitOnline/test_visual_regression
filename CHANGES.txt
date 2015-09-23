@@ -4,6 +4,8 @@ Change log for zeit.web
 2.5.2 (unreleased)
 ------------------
 
+- ZON-2251: Make columns paginate
+
 - ZON-2098: Add quotes to article
 
 - ZON-2224: Redirect repository root and folders to ~/index
