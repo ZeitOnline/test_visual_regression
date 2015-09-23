@@ -17,6 +17,9 @@
 			display: block
 			padding-right: 0
 			width: auto
+		&--force-mobile
+			+respond-max($break-phablet-min)
+				display: block
 	&__media-item
 		@extend %teaser-media-item !optional
 	&__combined-link
