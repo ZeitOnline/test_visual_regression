@@ -121,6 +121,11 @@ def test_comment_to_dict_should_parse_correctly(application, testserver):
                                "dass die Deutschen zu wenig meckern..."
                                "^^</p>\n")
 
+    # Handle empty commenter names gracefully
+    comment_xml = lxml.etree.fromstring(thread).xpath('//comment')[1]
+    comment = zeit.web.core.comments.comment_to_dict(comment_xml)
+    assert comment['name'] == ''
+
 
 def test_entire_thread_should_be_parsed(application, testserver):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
