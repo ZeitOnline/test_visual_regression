@@ -46,7 +46,7 @@
                 $( '#overlay_wrapper' ).hide();
                 ZMO.cookieCreate( 'overlaycanceled', 1, defaults.cookieTimeInDays, '' );
                 window.clearTimeout( timer );
-                $( document ).off( 'keypress scroll click mousemove' );
+                $( document ).off( '.modal' );
                 if ( defaults.debug ) {
                     console.info( 'AktPop cancelled.' );
                 }
@@ -92,7 +92,7 @@
             bindResetEvents: function() {
                 // bind events to reset timer
                 var that = this;
-                $( document ).on( 'keypress scroll click mousemove', function() {
+                $( document ).on( 'keypress.modal scroll.modal click.modal mousemove.modal', function() {
                     that.restartTimer();
                 });
             },
