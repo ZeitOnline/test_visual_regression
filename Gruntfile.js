@@ -138,9 +138,7 @@ module.exports = function(grunt) {
                 ignores: [
                     project.sourceDir + 'javascript/libs/**/*',
                     project.sourceDir + 'javascript/vendor/**/*',
-                    project.sourceDir + 'javascript/documentation/**/*',
-                    // couldnt switch of camelcase in jshint, cant be used here :( (as)
-                    project.sourceDir + 'javascript/web.site/plugins/jquery.hpOverlay.js'
+                    project.sourceDir + 'javascript/documentation/**/*'
                 ]
             },
             dist: {

@@ -27,9 +27,11 @@
             updateTime: 1,
             debug: ( ZMO.getQueryVar( 'aktPopDebug' ) && console && console.info && console.warn ) || false
         }, options ),
-        //global timer
+            // global timer
             timer = false,
-        //define overlay functions
+            // trick JSCS to tolerate unCamelCased keys
+            publishedKey = 'last_published_semantic',
+            // define overlay functions
             overlay = {
             prependHtml: function() {
                 // prepend html to body
@@ -110,7 +112,7 @@
 
                 request.done( function( data ) {
                     // json anfrage ist fertig
-                    defaults.timestamp = data.last_published_semantic;
+                    defaults.timestamp = data[publishedKey];
                     that.addTimer( defaults.minutes );
                 } );
             },
@@ -125,10 +127,10 @@
 
             request.done( function( data ) {
                 if ( defaults.debug ) {
-                    console.info( defaults.timestamp, data.last_published_semantic );
+                    console.info( defaults.timestamp, data[publishedKey] );
                 }
 
-                if ( defaults.timestamp !== data.last_published_semantic ) {
+                if ( defaults.timestamp !== data[publishedKey] ) {
                     if ( defaults.debug ) {
                         console.info( 'Page was updated.' );
                     }
