@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
-import os.path
 
 import babel.dates
-import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
@@ -395,25 +393,16 @@ class NewsletterTeaser(object):
             self.more = 'weiterlesen'
 
     @property
-    def imagegroup(self):
-        if zeit.content.video.interfaces.IVideoContent.providedBy(
-                self.context.reference):
-            return self.context.reference.thumbnail
+    def image(self):
         images = zeit.content.image.interfaces.IImages(
             self.context.reference, None)
-        return images.image if images is not None else None
-
-    @property
-    def image(self):
-        # XXX An actual API for selecting a size would be nice.
-        if self.imagegroup is None:
+        image = images.image if images is not None else None
+        if not zeit.content.image.interfaces.IImageGroup.providedBy(image):
             return
-        for name in self.imagegroup:
-            basename, ext = os.path.splitext(name)
-            if basename.endswith('148x84'):
-                image = self.imagegroup[name]
-                return image.uniqueId.replace(
-                    'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
+        # XXX We should not hardcode the host, but newsletter is rendered on
+        # friedbert-preview, which can't use `image_host`. Should we introduce
+        # a separate setting?
+        return 'http://www.zeit.de' + image.variant_url('wide', 148, 84)
 
     @property
     def videos(self):
