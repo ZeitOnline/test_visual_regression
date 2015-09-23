@@ -158,6 +158,8 @@ def request_thread(path):
     except (AttributeError, requests.exceptions.RequestException):
         return {"request_failed": datetime.datetime.utcnow()}
 
+class ThreadNotLoadable(Exception):
+    pass
 
 def get_thread(unique_id, sort='asc', page=None, cid=None):
     """Return a dict representation of the comment thread of the given
@@ -171,11 +173,13 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
 
     thread = get_cacheable_thread(unique_id)
 
-    if thread.get('request_failed'):
+    if thread is not None and thread.get('request_failed'):
         td = datetime.datetime.utcnow()-thread.get('request_failed')
         if td >= datetime.timedelta(0, 5):
             zeit.web.core.view_comment.invalidate_comment_thread(unique_id)
             thread = get_cacheable_thread(unique_id)
+        if thread is not None and thread.get('request_failed'):
+            raise ThreadNotLoadable()
 
     if thread is None or thread['comment_count'] == 0:
         return

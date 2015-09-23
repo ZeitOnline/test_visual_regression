@@ -16,6 +16,11 @@
 			Kommentieren
 		</a>
 		{% endif %}
+	{% elif not view.comments_loadable %}
+		<span class="comment-section__headline">
+			<span class="nowrap">Kommentare konnten nicht geladen werden.</span>
+			<span class="nowrap">Bitte versuchen Sie es in ein paar Sekunden noch einmal.</span>
+		</span>
 	{% else %}
 		<span class="comment-section__headline">
 			<span class="nowrap">Noch keine Kommentare.</span>
