@@ -1,3 +1,4 @@
+// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 /*
 * Zeit Online HP Overlay
 *
@@ -29,8 +30,6 @@
         }, options ),
             // global timer
             timer = false,
-            // trick JSCS to tolerate unCamelCased keys
-            publishedKey = 'last_published_semantic',
             // define overlay functions
             overlay = {
             prependHtml: function() {
@@ -112,7 +111,7 @@
 
                 request.done( function( data ) {
                     // json anfrage ist fertig
-                    defaults.timestamp = data[publishedKey];
+                    defaults.timestamp = data.last_published_semantic;
                     that.addTimer( defaults.minutes );
                 } );
             },
@@ -127,10 +126,10 @@
 
             request.done( function( data ) {
                 if ( defaults.debug ) {
-                    console.info( defaults.timestamp, data[publishedKey] );
+                    console.info( defaults.timestamp, data.last_published_semantic );
                 }
 
-                if ( defaults.timestamp !== data[publishedKey] ) {
+                if ( defaults.timestamp !== data.last_published_semantic ) {
                     if ( defaults.debug ) {
                         console.info( 'Page was updated.' );
                     }
