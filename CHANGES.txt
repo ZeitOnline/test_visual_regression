@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2257: Update newsletter to use variant_url for images
 
+- ZON-2074: Whole lotta SEO redirects
+
 - FIX: Add force-mobile to teaser-small-minor
 
 - FIX: Handle empty commenter name gracefully
@@ -130,8 +132,6 @@ Change log for zeit.web
 - ZON-2048: Sort'n' paginate gallery area on CPs according to photo CP
 
 - ZON-2203: Add static cardstack parameter on CPs
-
-- ZON-2074: Whole lotta SEO redirects
 
 - ZON-1848: Repair Netiquette link
 
