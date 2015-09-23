@@ -146,7 +146,7 @@
         return this.each( function() {
             if ( !overlay.isLiveServer() && !defaults.debug ) {
                 console.warn( 'AktPopup cancelled because not on live server.' );
-                return this;
+                return;
             }
 
             // overwrite settings with external config file
@@ -167,7 +167,6 @@
                 if ( defaults.debug ) {
                     console.warn( 'Cookie present, mobile view or switched off, action stopped.' );
                 }
-                return this;
             }
 
         });
