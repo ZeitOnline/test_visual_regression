@@ -30,6 +30,8 @@ Change log for zeit.web
 
 - MAINT: Make microsites per banner_id value possible
 
+- ZON-1611: Popover
+
 
 2.5.1 (2015-09-22)
 ------------------
