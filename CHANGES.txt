@@ -4,11 +4,25 @@ Change log for zeit.web
 2.5.2 (unreleased)
 ------------------
 
-- FIX: Add force-mobile to teaser-small-minor
+- ZON-2098: Add quotes to article
 
 - ZON-2224: Redirect repository root and folders to ~/index
 
-- ZON-2098: Add quotes to article 
+- ZON-2255: Omit pagination postfix from wt content id
+
+- ZON-2257: Update newsletter to use variant_url for images
+
+- FIX: Add force-mobile to teaser-small-minor
+
+- FIX: Handle empty commenter name gracefully
+
+- FIX: Switch adcontroller level2 and 3 in advertorials
+
+- MAINT: Add modernizr tests for CSS support of vh + vw unit
+
+- FIX: Redirect legacy keyword urls regardless of ~/index postfix
+
+- MAINT: Make microsites per banner_id value possible
 
 
 2.5.1 (2015-09-22)
