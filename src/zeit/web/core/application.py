@@ -192,9 +192,11 @@ class Application(object):
         config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_route(
             'schlagworte_index',
-            '/schlagworte/{entity}/{item:[A-Z]}/index',
+            '/schlagworte/{category}/{item:[A-Z]($|/$|/index$)}',
             zeit.web.core.view.surrender)
-        config.add_route('schlagworte', '/schlagworte/{entity}/{item}/index')
+        config.add_route(
+            'schlagworte',
+            '/schlagworte/{category}/{item}{subpath:($|/$|/index$)}')
 
         # Route to post comments to a communit service
         config.add_route('post_test_comments', '/admin/test-comments')
@@ -255,10 +257,11 @@ class Application(object):
         config.add_request_method(asset_url)
 
         def image_host(request):
-            image_host = request.registry.settings.get('image_host')
-            if image_host == '':
-                image_host = None
-            return request.route_url('home', _host=image_host)
+            image_prefix = request.registry.settings.get('image_prefix', '')
+            if not image_prefix.startswith('http'):
+                image_prefix = join_url_path(
+                    request.application_url, image_prefix)
+            return request.route_url('home', _app_url=image_prefix)
         config.add_request_method(image_host, reify=True)
 
         config.set_root_factory(self.get_repository)

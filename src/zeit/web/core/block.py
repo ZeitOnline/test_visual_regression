@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
-import os.path
 
 import babel.dates
-import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
@@ -59,9 +57,10 @@ class OrderedList(UnorderedList):
 class Portraitbox(object):
 
     def __init__(self, model_block):
-        if model_block.references is not None:
-            self.text = self._author_text(model_block.references.text)
-            self.name = model_block.references.name
+        pbox = model_block.references
+        if zeit.content.portraitbox.interfaces.IPortraitbox.providedBy(pbox):
+            self.text = self._author_text(pbox.text)
+            self.name = pbox.name
 
     def _author_text(self, pbox):
         # not the most elegant solution, but it gets sh*t done
@@ -102,16 +101,17 @@ class Infobox(object):
 
     def __init__(self, model_block):
         self.contents = []
-        if model_block.references is None:
+        infobox = model_block.references
+        if not zeit.content.infobox.interfaces.IInfobox.providedBy(infobox):
             return
         try:
-            self.title = model_block.references.supertitle
+            self.title = infobox.supertitle
         except:
             self.title = 'infobox'
-        for block in model_block.references.xml.xpath('block'):
+        for block in infobox.xml.xpath('block'):
             text = block.find('text')
             title = block.find('title')
-            division = InfoboxDivision(model_block.references, text)
+            division = InfoboxDivision(infobox, text)
             self.contents.append(
                 (title, [zeit.web.core.interfaces.IFrontendBlock(
                     b, None) for b in division.values()]))
@@ -156,14 +156,11 @@ class Liveblog(object):
                 self.last_modified = datetime.datetime.strptime(
                     content['PublishedOn'], date_format).replace(
                         tzinfo=utc).astimezone(tz)
-                delta = self.last_modified - datetime.datetime.now(
-                    self.last_modified.tzinfo)
-                if delta.days == 0:
+                delta = datetime.datetime.now(
+                    self.last_modified.tzinfo) - self.last_modified
+                # considered live if last post was within given timedelta
+                if delta < datetime.timedelta(hours=6):
                     self.is_live = True
-
-        # only needed for beta testing with liveblog embed code
-        # ToDo: remove after finished relaunch
-        self.theme = self.get_theme(self.id)
 
     def prepare_ref(self, url):
         return 'http:{}'.format(url).replace(
@@ -174,37 +171,6 @@ class Liveblog(object):
             return requests.get(url, timeout=self.timeout).json()
         except (requests.exceptions.RequestException, ValueError):
             pass
-
-    @beaker.cache.cache_region('long_term', 'liveblog_theme')
-    def get_theme(self, blog_id):
-        href = None
-        blog_theme_id = None
-
-        if self.seo_id is None:
-            url = '{}/Blog/{}/Seo'
-            content = self.get_restful(url.format(self.status_url, self.id))
-            if (content and 'SeoList' in content and len(
-                    content['SeoList']) and 'href' in content['SeoList'][0]):
-                href = content['SeoList'][0]['href']
-        else:
-            href = '//zeit.superdesk.pro/resources/LiveDesk/Seo/{}'.format(
-                self.seo_id)
-
-        if href:
-            content = self.get_restful(self.prepare_ref(href))
-            if content and 'BlogTheme' in content:
-                try:
-                    blog_theme_id = int(content['BlogTheme']['Id'])
-                except (KeyError, ValueError):
-                    pass
-
-        # return new theme names
-        # 23 = zeit      => zeit-online
-        # 24 = zeit-solo => zeit-online-solo
-        if blog_theme_id == 24:
-            return 'zeit-online-solo'
-
-        return 'zeit-online'
 
 
 class BaseImage(object):
@@ -338,7 +304,7 @@ class BaseVideo(object):
             video = getattr(model_block, 'video')
         except:
             pass
-        if video is None:
+        if not zeit.content.video.interfaces.IVideo.providedBy(video):
             return
         self.renditions = video.renditions
         self.video_still = video.video_still
@@ -427,25 +393,16 @@ class NewsletterTeaser(object):
             self.more = 'weiterlesen'
 
     @property
-    def imagegroup(self):
-        if zeit.content.video.interfaces.IVideoContent.providedBy(
-                self.context.reference):
-            return self.context.reference.thumbnail
+    def image(self):
         images = zeit.content.image.interfaces.IImages(
             self.context.reference, None)
-        return images.image if images is not None else None
-
-    @property
-    def image(self):
-        # XXX An actual API for selecting a size would be nice.
-        if self.imagegroup is None:
+        image = images.image if images is not None else None
+        if not zeit.content.image.interfaces.IImageGroup.providedBy(image):
             return
-        for name in self.imagegroup:
-            basename, ext = os.path.splitext(name)
-            if basename.endswith('148x84'):
-                image = self.imagegroup[name]
-                return image.uniqueId.replace(
-                    'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
+        # XXX We should not hardcode the host, but newsletter is rendered on
+        # friedbert-preview, which can't use `image_host`. Should we introduce
+        # a separate setting?
+        return 'http://www.zeit.de' + image.variant_url('wide', 148, 84)
 
     @property
     def videos(self):

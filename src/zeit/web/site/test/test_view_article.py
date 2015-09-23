@@ -472,6 +472,21 @@ def test_nextread_is_placed_on_article(testbrowser):
     assert len(browser.cssselect('#nextread')) == 1
 
 
+def test_nextread_date_looks_less_like_a_date_for_google(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.site:templates/inc/article/nextread.tpl')
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple-nextread')
+    request = mock.MagicMock()
+    request.route_url.return_value = 'http://foo.bar/'
+    view = zeit.web.site.view_article.Article(content, request)
+    html_str = tpl.render(view=view, request=request)
+    html = lxml.html.fromstring(html_str)
+    datetime = html.cssselect('.nextread__dt')
+    assert datetime[0].tag == 'span'
+    assert not any(x in datetime[0].get('class') for x in ['date', 'time'])
+
+
 def test_nextread_is_responsive(testserver, selenium_driver, screen_size):
     url = '{}/zeit-online/article/simple-nextread'.format(testserver.url)
     selenium_driver.set_window_size(screen_size[0], screen_size[1])
@@ -931,3 +946,19 @@ def test_multi_page_article_has_print_link(testbrowser):
     print_m = browser.cssselect('.print-menu__print')
     assert (print_m[0].attrib['href'].endswith(
         '/zeit-online/article/tagesspiegel/komplettansicht?print=true'))
+
+
+def test_article_renders_quotes_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/article/quotes')
+    quotes = browser.cssselect('.quote')
+    assert len(quotes) == 3
+
+    quote_with_linked_source = quotes[0]
+    quote_with_source = quotes[1]
+    quote_without_source = quotes[2]
+
+    assert quote_with_linked_source.cssselect(
+        '.quote__source > .quote__link[href="http://www.imdb.com/title/'
+        'tt0110912/quotes?item=qt0447099"]')
+    assert not quote_with_source.cssselect('.quote__source > *')
+    assert not quote_without_source.cssselect('.quote__source')

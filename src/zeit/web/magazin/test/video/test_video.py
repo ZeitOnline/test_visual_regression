@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 from mock import Mock
+
+from zeit.content.video.video import VideoRendition
+import zeit.cms.interfaces
+
 from zeit.web.core.block import HeaderVideo
 from zeit.web.core.block import Video
 
@@ -35,35 +39,37 @@ def test_video_html(selenium_driver, testserver):
                 "data-video") == video.get_attribute("data-video")
 
 
-def test_video_source_should_be_highest_rendition_url():
+def test_video_source_should_be_highest_rendition_url(application):
     model_block = Mock()
-    rend_1 = Mock()
+    rend_1 = VideoRendition()
     rend_1.frame_width = 460
     rend_1.url = "http://rend_1"
 
-    rend_2 = Mock()
+    rend_2 = VideoRendition()
     rend_2.frame_width = 1860
     rend_2.url = "http://rend_2"
 
-    rend_3 = Mock()
+    rend_3 = VideoRendition()
     rend_3.frame_width = 1260
     rend_3.url = "http://rend_3"
-    model_block.video.uniqueId = 'foo'
+    model_block.video = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2015-01/3537342483001')
 
     model_block.video.renditions = [rend_1, rend_2, rend_3]
     video = Video(model_block)
 
     assert video.highest_rendition == "http://rend_2"
 
-    model_block.video.renditions = None
+    model_block.video.renditions = ()
     video = Video(model_block)
     assert video.highest_rendition is None
 
 
-def test_header_video_should_be_created_if_layout_is_zmo_header():
+def test_header_video_should_be_created_if_layout_is_zmo_header(application):
     model_block = Mock()
     model_block.layout = 'zmo-xl-header'
-    model_block.video.uniqueId = 'foo'
+    model_block.video = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2015-01/3537342483001')
     h_video = HeaderVideo(model_block)
     assert type(h_video) == HeaderVideo
     assert h_video.format == 'zmo-xl-header'

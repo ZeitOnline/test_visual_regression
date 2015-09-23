@@ -325,6 +325,7 @@ def dummy_request(request, config, app_settings):
     req = pyramid.testing.DummyRequest(is_xhr=False)
     req.response.headers = set()
     req.registry.settings = app_settings
+    req.matched_route = None
     config.manager.get()['request'] = req
     return req
 

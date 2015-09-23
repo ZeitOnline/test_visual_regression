@@ -97,7 +97,7 @@
             if (
                 typeof AdController !== 'undefined'
                 {% if type == 'desktop' and banner.tile == 2 %}
-                && ZMO.clientWidth > ZMO.sideAdMinWidth 
+                && ZMO.clientWidth > ZMO.sideAdMinWidth
                 {% endif %}
                 && ZMO.clientWidth {{ operator | safe }} ZMO.mobileWidth
                 ) {
@@ -181,5 +181,20 @@
         <!--[if gt IE 8]><!-->
             </noscript>
         <!--<![endif]-->
+    {% endif %}
+{% endmacro %}
+
+
+{% macro insert_esi(src, error_text='', is_dev=False) %}
+    {% if is_dev %}
+        <!-- [esi-debug] src="{{ src }}" error_text="{{ error_text }}" -->
+        <esi:include src="{{ src }}" onerror="continue" />
+    {% else %}
+        <esi:remove>
+        <!-- [esi-debug] src="{{ src }}" error_text="{{ error_text }}" -->
+        </esi:remove>
+        <!--esi
+        <esi:include src="{{ src }}" />
+        -->
     {% endif %}
 {% endmacro %}
