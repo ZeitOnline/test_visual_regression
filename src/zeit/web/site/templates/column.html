@@ -35,6 +35,7 @@
 				</div>
 			</div>
 		</div>
+		{% if view.pagination and view.pagination.current < 2 %}
 		<div class="column-heading__lower">
 			<div class="article__item">
 				<div class="summary" itemprop="description">
@@ -45,10 +46,19 @@
 				</div>
 			</div>
 		</div>
+		{% endif %}
 	</div>
 {% endblock article_heading %}
 
 {% block article_meta %}
+	{% if view.pagination and view.pagination.current > 1 %}
+	    <div class="article__page-teaser article__page-teaser--column article__item">
+	        Seite {{ view.pagination.current }}/{{ view.pagination.total }}
+	        {%- if view.current_page.teaser -%}
+	            : <h1>{{ view.current_page.teaser }}</h1>
+	        {% endif %}
+	    </div>
+	{% endif %}
 {% endblock article_meta %}
 
 {% block article_main_image %}
