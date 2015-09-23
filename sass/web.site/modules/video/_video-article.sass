@@ -12,11 +12,13 @@
 
 	.article-heading
 		margin-top: remify(20px)
+		+respond_min($break-tablet-min)
+			margin-top: remify(40px)
 		&__kicker
 			color: $zon_mid_grey
 		&__title
 			color: $zon_lighter_grey
-			+respond-min($break-tablet-min)
+			+respond-min($break-desktop-min)
 				font-size: remify(30px)
 
 	.summary
@@ -41,19 +43,17 @@
 
 	// TODO: ad-div should have ".ad-desktop--7-on-video" and then we could
 	// apply the styles to this class.
-	.ad-desktop--7,
-	.ad-mobile--7
+	.ad-desktop--7
 		background-color: $color-video-background
+		margin: remify(40px 0 20px 40px) // 'top' should be not less than .article-heading, 'left' makes room for the fake border
+		position: relative
 
-		+respond_min($break-tablet-min)
-			border-left: 1px $zon_grey solid
-			float: right
-			margin-left: remify(24px)
-			padding-left: remify(18px)
-			padding-bottom: remify(18px)
-			max-width: 318px
-			width: 318px
-
+		&:before
+			border-left: 1px solid $zon_grey
+			content: ""
+			height: 100%
+			left: remify(-20px)
+			position: absolute
 
 		// sometimes, ads have transparency and rely on a white background
 		iframe

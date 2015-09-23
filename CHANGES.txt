@@ -4,6 +4,8 @@ Change log for zeit.web
 2.5.2 (unreleased)
 ------------------
 
+- FIX: Repair video container and promote "separation of concerns"
+
 - HOTFIX: Repair table of contents for more than 7 pages
 
 - ZON-2258: Show only 5 top-level comments per page
