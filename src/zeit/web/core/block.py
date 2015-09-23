@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
-import os.path
 
 import babel.dates
 import grokcore.component

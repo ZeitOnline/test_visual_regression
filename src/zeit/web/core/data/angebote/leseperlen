@@ -1,0 +1,510 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="template">
+  <head>
+    <header_image xsi:nil="true"/>
+    <snapshot xsi:nil="true"/>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="cap_title">ANZEIGE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Verlag</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-09-10T08:18:12.010145+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2011-11-28T17:12:01.546504+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-14T08:49:53.005649+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-09-10T08:14:29.552960+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-08-27T07:30:34.560014+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-09-10T08:13:40.209579+00:00</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Die Buchtipps präsentieren wöchentlich exklusiv für ZEIT ONLINE-Leser ausgewählte Leseperlen der Verlagsgruppe Random House aus diversen Genres.</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Buchtipps: wöchentliche Leseperlen | ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-08-27T07:30:09.293992+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.cruz</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mobile_alternative">http://marktplatz.zeit.de/advertorial/buchtipp/index</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ADV</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Advertorial</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="publish_job_id">900702022</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="advertisement_title">Leseperlen</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="advertisement_text">Dies ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2013-12-26T07:03:00+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Angebote</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">buchtipp</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">template</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:066c7e3b-701a-4cfd-91f5-dc97eaddbb7d}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2011</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2009" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <cluster area="feature">
+      <region area="lead">
+        <container cp:type="teaser" module="leader" cp:__name__="id-f24908b6-8a20-4360-b7b5-0ce2acef9154">
+          <block href="http://xml.zeit.de/angebote/buchtipp/lee/index" uniqueId="http://xml.zeit.de/angebote/buchtipp/lee/index" year="2015" issue="36" ressort="Angebote" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-14T08:00:01+00:00" date-first-released="2015-09-08T13:27:32.688033+00:00" date-last-published="2015-09-09T09:50:07.804826+00:00" last-semantic-change="2015-09-08T12:38:15.977674+00:00">
+            <supertitle py:pytype="str">Harper Lee</supertitle>
+            <title py:pytype="str">Die Nachtigall wird gestört</title>
+            <text py:pytype="str">Es gibt sie noch, die literarische Sensation. Die 89-Jährige US-Schriftstellerin Harper Lee hat es in diesem Sommer geschafft, die Buchbranche zu erschüttern.</text>
+            <description py:pytype="str">Es gibt sie noch, die literarische Sensation. Die 89-Jährige US-Schriftstellerin Harper Lee hat es in diesem Sommer geschafft, die Buchbranche zu erschüttern.</description>
+            <byline py:pytype="str">Buchtipp: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/angebote/buchtipp/lee/aufmacher-lee-2/" type="jpg" align="left" publication-date="" expires="">
+              <bu xsi:nil="true"/>
+            </image>
+          </block>
+        </container>
+        <container cp:type="teaser" module="buttons" cp:__name__="id-f35a0c5b-3a4b-48ec-ae98-6e985a41c23c">
+          <block href="http://xml.zeit.de/angebote/buchtipp/ishiguro/index" uniqueId="http://xml.zeit.de/angebote/buchtipp/ishiguro/index" year="2015" ressort="Angebote" contenttype="article" publication-date="" expires="" date-last-modified="2015-09-01T10:01:01+00:00" date-first-released="2015-09-01T10:02:01.344677+00:00" date-last-published="2015-09-01T10:02:01.344677+00:00" last-semantic-change="2015-09-01T09:53:24.281402+00:00">
+            <supertitle py:pytype="str">Kazuo Ishiguro</supertitle>
+            <title py:pytype="str">Der begrabene Riese</title>
+            <text py:pytype="str">Drachen und Geister, Menschenfresser und Höllenhunde – in seinem neuen Roman nimmt Kazuo Ishiguro uns mit in das Britannien des frühen Mittelalters.</text>
+            <description py:pytype="str">Drachen und Geister, Menschenfresser und Höllenhunde – in seinem neuen Roman nimmt Kazuo Ishiguro uns mit in das Britannien des frühen Mittelalters.</description>
+            <byline py:pytype="str">Buchtipp: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/angebote/buchtipp/ishiguro/aufmacher-ishiguro/" type="jpg" align="left" publication-date="" expires="">
+              <bu xsi:nil="true"/>
+            </image>
+          </block>
+        </container>
+        <container cp:type="teaser" module="buttons" cp:__name__="id-07682152-bcbc-4200-870d-e8cf35e3eeed">
+          <block href="http://xml.zeit.de/angebote/buchtipp/foenkinos/index" uniqueId="http://xml.zeit.de/angebote/buchtipp/foenkinos/index" year="2015" issue="34" ressort="Angebote" contenttype="article" publication-date="" expires="" date-last-modified="2015-08-25T10:58:36+00:00" date-first-released="2015-08-25T10:23:24.049987+00:00" date-last-published="2015-08-25T10:59:35.882279+00:00" last-semantic-change="2015-08-25T10:03:07.903939+00:00">
+            <supertitle py:pytype="str">David Foenkinos</supertitle>
+            <title py:pytype="str">Wer ist Charlotte?</title>
+            <text py:pytype="str">Sie ist nicht so bekannt wie Paula Modersohn-Becker oder Marc Chagall – doch was wäre aus Charlotte Salomon geworden, wenn die Nazis sie nicht ermordet hätten? </text>
+            <description py:pytype="str">Sie ist nicht so bekannt wie Paula Modersohn-Becker oder Marc Chagall – doch was wäre aus Charlotte Salomon geworden, wenn die Nazis sie nicht ermordet hätten? </description>
+            <byline py:pytype="str">Buchtipp: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/angebote/buchtipp/foenkinos/aufmacher-charlotte/" type="jpg" align="left" publication-date="" expires="">
+              <bu xsi:nil="true"/>
+            </image>
+          </block>
+        </container>
+        <container cp:type="teaser" module="buttons" cp:__name__="id-a0cb14b5-c974-462d-bb63-efc28c6f93ee">
+          <block href="http://xml.zeit.de/angebote/buchtipp/moritz/index" uniqueId="http://xml.zeit.de/angebote/buchtipp/moritz/index" year="2015" ressort="Angebote" contenttype="article" publication-date="" expires="" date-last-modified="2015-06-17T09:39:21+00:00" date-first-released="2015-05-20T07:34:02.394639+00:00" date-last-published="2015-05-20T07:34:02.394639+00:00" last-semantic-change="2015-06-17T09:38:55.620960+00:00">
+            <supertitle py:pytype="str">Rainer Moritz</supertitle>
+            <title py:pytype="str">Wer hat den schlechtesten Sex?</title>
+            <text py:pytype="str">Der Literaturkritiker Rainer Moritz hat die peinlichsten Sex-Szenen der Literaturgeschichte gesammelt und darüber ein sehr amüsantes Buch geschrieben.</text>
+            <description py:pytype="str">Der Literaturkritiker Rainer Moritz hat die peinlichsten Sex-Szenen der Literaturgeschichte gesammelt und darüber ein sehr amüsantes Buch geschrieben.</description>
+            <byline py:pytype="str">Buchtipp: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/angebote/buchtipp/moritz/aufmacher-moritz/" type="jpg" align="left" publication-date="" expires="">
+              <bu xsi:nil="true"/>
+            </image>
+          </block>
+        </container>
+      </region>
+      <region area="informatives">
+        <container cp:type="cpextra" module="blindblock" cp:__name__="cd869660-1ebd-41d4-9098-00c673337ee1">
+          <cp_extra id="blindblock"/>
+        </container>
+        <container cp:type="fullgraphical" module="fullgraphical" cp:__name__="5529c9d6-f2c5-4eab-8fb9-d1ccff026cf9" layout="368x220">
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/angebote/buchtipp/newsletter/newsletter" year="2011" ressort="Angebote" publication-date="" expires="" ns0:href="http://www.randomhouse.de/newsletter/newsletter.jsp?zone=3" ns0:target="_blank" date-last-modified="2015-09-14T07:32:45+00:00" date-first-released="2011-11-18T14:36:16.753411+00:00" date-last-published="2015-09-14T07:33:45.145110+00:00" last-semantic-change="2014-09-05T12:40:10.937730+00:00" contenttype="link" ns0:rel="nofollow" uniqueId="http://xml.zeit.de/angebote/buchtipp/newsletter/newsletter">
+            <supertitle xsi:nil="true"/>
+            <title py:pytype="str"> </title>
+            <text xsi:nil="true"/>
+            <description xsi:nil="true"/>
+            <byline xsi:nil="true"/>
+            <teaser_supertitle xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/angebote/buchtipp/newsletter/buecher-newsletter/" type="jpg" align="left" publication-date="" expires="">
+              <bu xsi:nil="true"/>
+            </image>
+          </block>
+          <image type="intern" href="http://xml.zeit.de/angebote/buchtipp/newsletter/buecher-newsletter/buecher-newsletter-368x220.jpg" align="left" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+          </image>
+        </container>
+        <container cp:type="fullgraphical" module="fullgraphical" cp:__name__="id-97a00ee4-e4e9-454b-974c-65d3ebdd8c17" title="Zum Leseperlen-Archiv" layout="368x220">
+          <block type="intern" href="http://xml.zeit.de/angebote/buchtipp/archiv/index" year="2012" ressort="Angebote" contenttype="centerpage-2009" publication-date="2013-12-26T07:02:00+00:00" expires="" date-last-modified="2015-09-14T08:49:28+00:00" date-first-released="2012-01-05T16:01:44.033968+00:00" date-last-published="2015-09-10T08:16:32.139723+00:00" last-semantic-change="2015-08-27T07:27:26.357548+00:00" uniqueId="http://xml.zeit.de/angebote/buchtipp/archiv/index">
+            <supertitle xsi:nil="true"/>
+            <teaser_supertitle xsi:nil="true"/>
+            <title py:pytype="str">Leseperlen - Archiv</title>
+            <text py:pytype="str">Stöbern Sie hier in den Buchtipps der vergangenen Wochen!</text>
+            <description py:pytype="str">Stöbern Sie hier in den Buchtipps der vergangenen Wochen!</description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/angebote/buchtipp/archiv/leseperlen-archiv/" type="jpg" align="left" publication-date="" expires="">
+              <bu xsi:nil="true"/>
+            </image>
+          </block>
+          <image type="intern" href="http://xml.zeit.de/angebote/buchtipp/archiv/leseperlen-archiv/leseperlen-archiv-368x220.jpg" align="left" publication-date="" expires="">
+            <bu xsi:nil="true"/>
+          </image>
+        </container>
+        <container cp:type="xml" module="xml" cp:__name__="cdb094df-8adc-46d7-b77f-8feb3aabd9e3">
+          <raw>
+            <iframe width="320" height="180" src="http://www.youtube.com/embed/videoseries?list=PL8E676C3D75D9CF7A&amp;hl=de_DE" frameborder="0"/>
+          </raw>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="teaser-mosaic"/>
+    <byline>Buchtipp - Leseperlen: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+    <title>Advertorial Random House</title>
+    <subtitle>Buchtipp - Leseperlen: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</subtitle>
+  </body>
+  <feed>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/lee/index" year="2015" issue="36" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Harper Lee</supertitle>
+      <title py:pytype="str">Die Nachtigall wird gestört</title>
+      <text py:pytype="str">Es gibt sie noch, die literarische Sensation. Die 89-Jährige US-Schriftstellerin Harper Lee hat es in diesem Sommer geschafft, die Buchbranche zu erschüttern.</text>
+      <description py:pytype="str">Es gibt sie noch, die literarische Sensation. Die 89-Jährige US-Schriftstellerin Harper Lee hat es in diesem Sommer geschafft, die Buchbranche zu erschüttern.</description>
+      <byline py:pytype="str">Buchtipp: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/lee/aufmacher-lee-2/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/ishiguro/index" year="2015" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Kazuo Ishiguro</supertitle>
+      <title py:pytype="str">Der begrabene Riese</title>
+      <text py:pytype="str">Drachen und Geister, Menschenfresser und Höllenhunde – in seinem neuen Roman nimmt Kazuo Ishiguro uns mit in das Britannien des frühen Mittelalters.</text>
+      <description py:pytype="str">Drachen und Geister, Menschenfresser und Höllenhunde – in seinem neuen Roman nimmt Kazuo Ishiguro uns mit in das Britannien des frühen Mittelalters.</description>
+      <byline py:pytype="str">Buchtipp: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/ishiguro/aufmacher-ishiguro/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/foenkinos/index" year="2015" issue="34" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">David Foenkinos</supertitle>
+      <title py:pytype="str">Wer ist Charlotte?</title>
+      <text py:pytype="str">Sie ist nicht so bekannt wie Paula Modersohn-Becker oder Marc Chagall – doch was wäre aus Charlotte Salomon geworden, wenn die Nazis sie nicht ermordet hätten? </text>
+      <description py:pytype="str">Sie ist nicht so bekannt wie Paula Modersohn-Becker oder Marc Chagall – doch was wäre aus Charlotte Salomon geworden, wenn die Nazis sie nicht ermordet hätten? </description>
+      <byline py:pytype="str">Buchtipp: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/foenkinos/aufmacher-charlotte/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/moritz/index" year="2015" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Rainer Moritz</supertitle>
+      <title py:pytype="str">Wer hat den schlechtesten Sex?</title>
+      <text py:pytype="str">Der Literaturkritiker Rainer Moritz hat die peinlichsten Sex-Szenen der Literaturgeschichte gesammelt und darüber ein sehr amüsantes Buch geschrieben.</text>
+      <description py:pytype="str">Der Literaturkritiker Rainer Moritz hat die peinlichsten Sex-Szenen der Literaturgeschichte gesammelt und darüber ein sehr amüsantes Buch geschrieben.</description>
+      <byline py:pytype="str">Buchtipp: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/moritz/aufmacher-moritz/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/juergs/index" year="2015" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Michael Jürgs</supertitle>
+      <title py:pytype="str">Bürger Grass</title>
+      <text py:pytype="str">In der Biografie Bürger Grass erzählt Michael Jürgs das bewegte Leben des Schriftstellers, der zugleich politisch engagierter Zeitgenosse und Dichter der Nation war.</text>
+      <description py:pytype="str">In der Biografie Bürger Grass erzählt Michael Jürgs das bewegte Leben des Schriftstellers, der zugleich politisch engagierter Zeitgenosse und Dichter der Nation war.</description>
+      <byline py:pytype="str"> Buchtipp: Leseperlen  ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/juergs/aufmacher-juergs/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/prevost/index" year="2015" issue="18" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Jean Prévost</supertitle>
+      <title py:pytype="str">Kennst du dich eigentlich?</title>
+      <text py:pytype="str">Ein Klassiker der französischen Moderne erscheint erstmals auf Deutsch: „Das Salz in der Wunde“ von Jean Prévost ist eine bewegende Lebensgeschichte aus den 20er- Jahren.</text>
+      <description py:pytype="str">Ein Klassiker der französischen Moderne erscheint erstmals auf Deutsch: „Das Salz in der Wunde“ von Jean Prévost ist eine bewegende Lebensgeschichte aus den 20er- Jahren.</description>
+      <byline py:pytype="str"> Buchtipp: Leseperlen  ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/prevost/aufmacher-prevost/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/yalom-2/index" year="2015" issue="18" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Irvin D. Yalom</supertitle>
+      <title py:pytype="str">Tiefe Einblicke in die menschliche Seele</title>
+      <text py:pytype="str">„Denn alles ist vergänglich“ heißt das neue Buch von Irvin D. Yalom, in dem der Analytiker klug und mitreißend aus dem Nähkästchen der Psychotherapie plaudert.</text>
+      <description py:pytype="str">„Denn alles ist vergänglich“ heißt das neue Buch von Irvin D. Yalom, in dem der Analytiker klug und mitreißend aus dem Nähkästchen der Psychotherapie plaudert.</description>
+      <byline py:pytype="str"> Buchtipp: Leseperlen  ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/yalom-2/aufmacher-yalom-2.jpg/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/ali/index" year="2015" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Ayaan Hirsi Ali</supertitle>
+      <title py:pytype="str">Die Reformation des Islam</title>
+      <text py:pytype="str">Ayaan Hirsi Ali machte sich als Kritikerin des Islam einen Namen. Mit ihrem neuen Buch appelliert sie an alle Muslime, ihre Religion endlich zu reformieren.</text>
+      <description py:pytype="str">Ayaan Hirsi Ali machte sich als Kritikerin des Islam einen Namen. Mit ihrem neuen Buch appelliert sie an alle Muslime, ihre Religion endlich zu reformieren.</description>
+      <byline py:pytype="str"> Buchtipp: Leseperlen  ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich. </byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/ali/aufmacher-ali/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/joffe/index" year="2015" issue="15" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Josef Joffe</supertitle>
+      <title py:pytype="str">Weisheit, Witz und Waffe</title>
+      <text py:pytype="str">In seinem neuen Buch „Mach dich nicht so klein, du bist nicht so groß!“ erklärt Josef Joffe den jüdischen Humor und seine Entwicklung bis heute.</text>
+      <description py:pytype="str">In seinem neuen Buch „Mach dich nicht so klein, du bist nicht so groß!“ erklärt Josef Joffe den jüdischen Humor und seine Entwicklung bis heute.</description>
+      <byline py:pytype="str">Buchtipp - Leseperlen : ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/joffe/aufmacher-joffe/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/strohschein/index" year="2015" issue="13" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Barbara Strohstein</supertitle>
+      <title py:pytype="str">Sehnsucht nach Anerkennung </title>
+      <text py:pytype="str">Die Philosophin Barbara Strohschein untersucht in „Die gekränkte Gesellschaft“, warum wir aktuell so viel Missgunst, Kränkungen und Gewalt zu verzeichnen haben.</text>
+      <description py:pytype="str">Die Philosophin Barbara Strohschein untersucht in „Die gekränkte Gesellschaft“, warum wir aktuell so viel Missgunst, Kränkungen und Gewalt zu verzeichnen haben.</description>
+      <byline py:pytype="str">Buchtipp - Leseperlen : ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/strohschein/aufmacher-strohschein/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/nuernberger/index" year="2015" issue="13" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Christian Nürnberger</supertitle>
+      <title py:pytype="str">Die verkaufte Demokratie</title>
+      <text py:pytype="str">Christian Nürnberger wird die Welt vielleicht nicht retten können, doch er analysiert schonungslos, warum wir verunsichert sind und was sich ändern muss.</text>
+      <description py:pytype="str">Christian Nürnberger wird die Welt vielleicht nicht retten können, doch er analysiert schonungslos, warum wir verunsichert sind und was sich ändern muss.</description>
+      <byline py:pytype="str"> Buchtipp - Leseperlen: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/nuernberger/aufmacher-nuernberger/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/shavit/index" year="2015" issue="12" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Ari Shavit</supertitle>
+      <title py:pytype="str">Mein gelobtes Land</title>
+      <text py:pytype="str">Wer verstehen will, warum Israelis und Palästinenser verfeindet sind und ob es in diesem Konflikt Hoffnung gibt, sollte „Mein gelobtes Land“ von Ari Shavit lesen.</text>
+      <description py:pytype="str">Wer verstehen will, warum Israelis und Palästinenser verfeindet sind und ob es in diesem Konflikt Hoffnung gibt, sollte „Mein gelobtes Land“ von Ari Shavit lesen.</description>
+      <byline py:pytype="str"> Buchtipp - Leseperlen: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/shavit/aufmacher-shavit/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/james/index" year="2015" issue="11" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Henry James</supertitle>
+      <title py:pytype="str">Henry James ist zurück</title>
+      <text py:pytype="str">Verpasste Leidenschaften sind das Lebensthema des Schriftstellers Henry James, der in Amerika und Europa gleichermaßen zu Hause war.</text>
+      <description py:pytype="str">Verpasste Leidenschaften sind das Lebensthema des Schriftstellers Henry James, der in Amerika und Europa gleichermaßen zu Hause war.</description>
+      <byline py:pytype="str">Buchtipp - Leseperlen: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/james/aufmacher-neu-james/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/bode/index" year="2015" issue="10" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Thilo Bode</supertitle>
+      <title py:pytype="str">Die Freihandelslüge</title>
+      <text py:pytype="str">Das geplante Freihandelsabkommen TTIP schadet sowohl Verbrauchern als auch der Umwelt und nutzt lediglich den großen Konzernen, erklärt Thilo Bode in seinem neuen Buch.</text>
+      <description py:pytype="str">Das geplante Freihandelsabkommen TTIP schadet sowohl Verbrauchern als auch der Umwelt und nutzt lediglich den großen Konzernen, erklärt Thilo Bode in seinem neuen Buch.</description>
+      <byline py:pytype="str">Buchtipp: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/bode/aufmacher-bode/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/grisham/index" year="2015" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">John Grisham</supertitle>
+      <title py:pytype="str">Nur mal kurz die Welt retten</title>
+      <text py:pytype="str">Der neue „Grisham“ ist da: „Anklage“ erzählt von einer New Yorker Anwältin, die plötzlich für die Rechte der Bergarbeiter in Virginia kämpfen muss.</text>
+      <description py:pytype="str">Der neue „Grisham“ ist da: „Anklage“ erzählt von einer New Yorker Anwältin, die plötzlich für die Rechte der Bergarbeiter in Virginia kämpfen muss.</description>
+      <byline py:pytype="str">Buchtipp: Leseperlen ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/grisham/aufmacher-johngrisha/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/steinert/index" year="2015" issue="8" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Hajo Steinert</supertitle>
+      <title py:pytype="str">Der Liebesidiot</title>
+      <text py:pytype="str">“Der Liebesidiot“ ist eine „unerhörte Liebesgeschichte, die wie jede Liebesgeschichte auch eine Krankengeschichte ist“, erklärt der Protagonist dem Leser.</text>
+      <description py:pytype="str">“Der Liebesidiot“ ist eine „unerhörte Liebesgeschichte, die wie jede Liebesgeschichte auch eine Krankengeschichte ist“, erklärt der Protagonist dem Leser.</description>
+      <byline py:pytype="str"> Buchtipp - Leseperlen : ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/steinert/aufmacher/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/hansen/index" year="2015" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Dörte Hansen</supertitle>
+      <title py:pytype="str">Land und Leben</title>
+      <text py:pytype="str">Was wissen wir wirklich vom Land und seinen Einheimischen? Wer offen für eine neue Perspektive ist, darf sich auf Dörte Hansens Roman „Altes Land“ freuen. </text>
+      <description py:pytype="str">Was wissen wir wirklich vom Land und seinen Einheimischen? Wer offen für eine neue Perspektive ist, darf sich auf Dörte Hansens Roman „Altes Land“ freuen. </description>
+      <byline py:pytype="str"> Buchtipp - Leseperlen : ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/hansen/aufmacher/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/keen/index" year="2015" issue="6" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Andrew Keen</supertitle>
+      <title py:pytype="str">Das digitale Debakel</title>
+      <text py:pytype="str">Andrew Keen, Silicon-Valley-Insider und schärfster Internet-Kritiker, erklärt in seinem neuen Buch „Das digitale Debakel“, warum das Internet versagt hat.</text>
+      <description py:pytype="str">Andrew Keen, Silicon-Valley-Insider und schärfster Internet-Kritiker, erklärt in seinem neuen Buch „Das digitale Debakel“, warum das Internet versagt hat.</description>
+      <byline py:pytype="str"> Buchtipp - Leseperlen : ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/keen/aufmacher-keen/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/baldacci/index" year="2015" issue="5" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">David Baldacci</supertitle>
+      <title py:pytype="str">Am Limit</title>
+      <text py:pytype="str">Sobald David Baldacci zu schreiben beginnt, stehen alle Zeichen auf Bestseller. Wird ihm das mit seinem neuen Thriller „Am Limit“ wieder gelingen?</text>
+      <description py:pytype="str">Sobald David Baldacci zu schreiben beginnt, stehen alle Zeichen auf Bestseller. Wird ihm das mit seinem neuen Thriller „Am Limit“ wieder gelingen?</description>
+      <byline py:pytype="str">Buchtipp - Leseperlen ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/baldacci/aufmacher-amlimit/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/semple/index" year="2015" issue="4" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Maria Semple</supertitle>
+      <title py:pytype="str">Wo steckst du, Bernadette?</title>
+      <text py:pytype="str">In dieser grauen Jahreszeit kann es gar nicht genug witzige und erfrischende Bücher geben. Der größte Coup ist Maria Semple gelungen mit „Wo steckst du, Bernadette?“</text>
+      <description py:pytype="str">In dieser grauen Jahreszeit kann es gar nicht genug witzige und erfrischende Bücher geben. Der größte Coup ist Maria Semple gelungen mit „Wo steckst du, Bernadette?“</description>
+      <byline py:pytype="str"> Buchtipp - Leseperlen  ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/semple/aufmacher-wosteckstdubernadette/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/french-3/index" year="2014" issue="51" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">NICCI FRENCH</supertitle>
+      <title py:pytype="str">Dunkler Donnerstag</title>
+      <text py:pytype="str">Frieda Klein ist wieder da! Die Psychotherapeutin muss ihren schwersten Fall lösen, denn diesmal ist sie Ermittlerin und Opfer zugleich.</text>
+      <description py:pytype="str">Frieda Klein ist wieder da! Die Psychotherapeutin muss ihren schwersten Fall lösen, denn diesmal ist sie Ermittlerin und Opfer zugleich.</description>
+      <byline py:pytype="str"> Buchtipp - Leseperlen : ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/french-3/aufmacher-dunkler-donnerstag/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/huffington/index" year="2014" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Ariane Huffington</supertitle>
+      <title py:pytype="str">Was ist Erfolg?</title>
+      <text py:pytype="str">Ihr Leben besteht fast nur aus Arbeit und Sie stehen ständig unter Strom? Arianna Huffington erklärt Ihnen in „Die Neuerfindung des Erfolgs“, worauf es wirklich ankommt.
+</text>
+      <description py:pytype="str">Ihr Leben besteht fast nur aus Arbeit und Sie stehen ständig unter Strom? Arianna Huffington erklärt Ihnen in „Die Neuerfindung des Erfolgs“, worauf es wirklich ankommt.
+</description>
+      <byline py:pytype="str"> Buchtipp - Leseperlen : ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/huffington/aufmacher-erfolg/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/boerjlind/index" year="2014" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Börjlind</supertitle>
+      <title py:pytype="str">Höchstspannung aus Schweden</title>
+      <text py:pytype="str">Das Autoren-Duo Cilla und Rolf Börjlind hat wieder zugeschlagen. Echte Fans von schwedischer Kriminalliteratur können sich in diesem Winter besonders warm anziehen.</text>
+      <description py:pytype="str">Das Autoren-Duo Cilla und Rolf Börjlind hat wieder zugeschlagen. Echte Fans von schwedischer Kriminalliteratur können sich in diesem Winter besonders warm anziehen.</description>
+      <byline py:pytype="str"> Buchtipp - Leseperlen: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/boerjlind/aufmacher-01-bo-rjlind/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/reich-ranicki/index" year="2014" issue="49" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Marcel Reich-Ranicki</supertitle>
+      <title py:pytype="str">Reich-Ranickis Geschichte der deutschen Literatur</title>
+      <text py:pytype="str">Für Marcel Reich-Ranicki war die deutsche Literatur nicht nur eine Leidenschaft, sie war viel mehr: Seine Liebe und seine Heimat. </text>
+      <description py:pytype="str">Für Marcel Reich-Ranicki war die deutsche Literatur nicht nur eine Leidenschaft, sie war viel mehr: Seine Liebe und seine Heimat. </description>
+      <byline py:pytype="str"> Buchtipp - Leseperlen : ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/reich-ranicki/aufmacher-meine-geschichte-der-deutschen-literatur/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/buber/index" year="2014" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Martin Buber</supertitle>
+      <title py:pytype="str">Humor trifft Lebensweisheit</title>
+      <text py:pytype="str">Zum fünfzigsten Todestag des Religionsphilosophen Martin Buber erscheinen seine „Erzählungen der Chassidim“ in einer neuen Jubiläumsausgabe.</text>
+      <description py:pytype="str">Zum fünfzigsten Todestag des Religionsphilosophen Martin Buber erscheinen seine „Erzählungen der Chassidim“ in einer neuen Jubiläumsausgabe.</description>
+      <byline py:pytype="str"> Buchtipp - Leseperlen : ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/buber/aufmacher-chasidim/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/munroe/index" year="2014" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Randall Munroe</supertitle>
+      <title py:pytype="str">Was wäre wenn?</title>
+      <text py:pytype="str">Es gibt Fragen, die kein Mensch beantworten kann - mit einer Ausnahme: Randall Munroe, Physiker und Comicautor, Nerd und Genie.</text>
+      <description py:pytype="str">Es gibt Fragen, die kein Mensch beantworten kann - mit einer Ausnahme: Randall Munroe, Physiker und Comicautor, Nerd und Genie.</description>
+      <byline py:pytype="str"> Buchtipp - Leseperlen : ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/munroe/aufmacher-whatif/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/dubner-levitt/index" year="2014" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Levitt / Dubner</supertitle>
+      <title py:pytype="str">Wie viel Freak steckt in Ihnen?</title>
+      <text py:pytype="str">„Think like a Freak!“ Damit sollten Sie sofort anfangen, wenn Sie auf der Suche nach innovativen Ideen und kreativen Lösungen sind.</text>
+      <description py:pytype="str">„Think like a Freak!“ Damit sollten Sie sofort anfangen, wenn Sie auf der Suche nach innovativen Ideen und kreativen Lösungen sind.</description>
+      <byline py:pytype="str">Buchtipp - Leseperlen: ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/dubner-levitt/think-like-a-freak-aufmacher/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/hahn/index" year="2014" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Ulla Hahn</supertitle>
+      <title py:pytype="str">Spiel der Zeit</title>
+      <text py:pytype="str">Die dunkle Jahreszeit kann kommen, denn endlich ist er da, der lang ersehnte neue Roman von Ulla Hahn: „Spiel der Zeit“.</text>
+      <description py:pytype="str">Die dunkle Jahreszeit kann kommen, denn endlich ist er da, der lang ersehnte neue Roman von Ulla Hahn: „Spiel der Zeit“.</description>
+      <byline py:pytype="str"> Leseperlen : ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/hahn/spiel-der-zeit-aufmacher/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/maxeiner-miersch/index" year="2014" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Maxeiner / Miersch</supertitle>
+      <title py:pytype="str">Alles grün und gut?</title>
+      <text py:pytype="str">Möchten Sie Umwelt und Natur schützen? Vermutlich. Denken Sie, dass ökologisches Denken in unserem Alltag angekommen ist? Vermutlich. Ist also alles grün und gut?  </text>
+      <description py:pytype="str">Möchten Sie Umwelt und Natur schützen? Vermutlich. Denken Sie, dass ökologisches Denken in unserem Alltag angekommen ist? Vermutlich. Ist also alles grün und gut?  </description>
+      <byline py:pytype="str"> Leseperlen : ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/maxeiner-miersch/alles-gruen-und-gut-aufmacher/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/angebote/buchtipp/seiwert/index" year="2014" ressort="Angebote" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Lothar Seiwert</supertitle>
+      <title py:pytype="str">Hurra, wir werden alt?</title>
+      <text py:pytype="str">„Das neue Zeit-Alter“ von Lothar Seiwert ist ein Plädoyer für das Altwerden: Es kann eine Chance für den Einzelnen und eine Bereicherung für die Gemeinschaft sein.</text>
+      <description py:pytype="str">„Das neue Zeit-Alter“ von Lothar Seiwert ist ein Plädoyer für das Altwerden: Es kann eine Chance für den Einzelnen und eine Bereicherung für die Gemeinschaft sein.</description>
+      <byline py:pytype="str"> Leseperlen :  ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/angebote/buchtipp/seiwert/das-neue-zeit-alter/" type="jpg" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+      </image>
+    </reference>
+  </feed>
+  <teaser>
+    <title py:pytype="str">Advertorial Random House</title>
+    <text>Buchtipp - Leseperlen: ist ein Angebot der Verlagsgruppe Random House GmbH, die für diesen Inhalt verantwortlich ist.</text>
+  </teaser>
+</centerpage>
