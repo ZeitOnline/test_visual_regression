@@ -21,8 +21,7 @@
         {% set pagination = '1/1' -%}
     {% endif -%}
 
-    {% set wt_kennung_part = 'redaktion.' + view.ressort | lower + '.' + view.sub_ressort | lower + '.' + serie + '.' + view.type | lower + '.online' %}
-    {% set wt_kennung = "%s|%s%s" | format(wt_kennung_part, request.host, request.path) %}
+    {% set wt_kennung = 'redaktion.' + view.ressort | lower + '.' + view.sub_ressort | lower + '.' + serie + '.' + view.type | lower + '.online|' + view.content_url.replace('http://', '') %}
 
     {% set ivw_code = '%s%sbild-text' | format(view.ressort | lower + '/' if view.ressort, view.sub_ressort | lower + '/' if view.sub_ressort) %}
 

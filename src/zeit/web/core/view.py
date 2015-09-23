@@ -484,10 +484,8 @@ class Base(object):
 
     @zeit.web.reify
     def og_url(self):
-        # for og url, hide cp2015 ending
-        path = '/'.join(self.request.traversed)
-        return self.request.route_url('home') + path.replace(
-            'index.cp2015', 'index')
+        # Hide cp2015 ending for og url
+        return self.content_url.replace('.cp2015', '')
 
     @zeit.web.reify
     def is_dev_environment(self):

@@ -163,7 +163,7 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, testbrowser):
     # noscript
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.'
-            'online|%s:%s/artikel/03/seite-2,0,0,0,0,0,0,0,0&amp;cg1=redaktion'
+            'online|%s:%s/artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion'
             '&amp;cg2=article&amp;cg3=lebensart&amp;cg4=online&amp;cg5=essen-'
             'trinken&amp;cg6=weinkolumne&amp;cg7=seite-2&amp;cg8=zeitmz/'
             'essenundtrinken/article&amp;cg9=2013-07-30&amp;cp1=anne '
