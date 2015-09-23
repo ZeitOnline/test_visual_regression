@@ -68,7 +68,7 @@ def test_area_major_should_correctly_process_teasers(application):
     context.values = val
     context.ressort = 'ressort'
 
-    request = mock.Mock()
+    request = pyramid.testing.DummyRequest()
     cp = zeit.web.site.view_centerpage.LegacyCenterpage(context, request)
 
     assert len(cp.area_major) == 4
@@ -455,7 +455,8 @@ def test_small_teaser_without_image_has_no_padding_left(
 def test_parquet_region_list_should_have_regions(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+        cp, pyramid.testing.DummyRequest())
     assert len(view.region_list_parquet) == 4, (
         'View contains %s parquet regions instead of 4' % len(
             view.region_list_parquet))
@@ -464,14 +465,16 @@ def test_parquet_region_list_should_have_regions(application):
 def test_parquet_regions_should_have_one_area_each(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+        cp, pyramid.testing.DummyRequest())
     assert all([len(region) == 1 for region in view.region_list_parquet])
 
 
 def test_parquet_region_areas_should_have_multiple_modules_each(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+        cp, pyramid.testing.DummyRequest())
     assert all([len(area.values()) > 1 for region in view.region_list_parquet
                 for area in region.values()])
 
@@ -516,7 +519,8 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
 
 
 def test_playlist_video_series_should_be_available(application):
-    playlist = zeit.web.site.module.playlist.Playlist(mock.Mock())
+    playlist = zeit.web.site.module.playlist.Playlist(
+        pyramid.testing.DummyRequest())
     assert len(playlist.video_series_list) == 24
 
 
@@ -569,7 +573,8 @@ def test_videostage_video_should_play(selenium_driver, testserver):
 
 def test_module_printbox_should_contain_teaser_image(application):
     mycp = mock.Mock()
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(mycp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+        mycp, pyramid.testing.DummyRequest())
     image = view.module_printbox.image
     assert isinstance(image, zeit.content.image.image.RepositoryImage)
 
@@ -577,18 +582,20 @@ def test_module_printbox_should_contain_teaser_image(application):
 def test_homepage_indentifies_itself_as_homepage(testserver):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    request = pyramid.testing.DummyRequest()
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
     assert view.is_hp is True
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/main-teaser-setup')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
     assert view.is_hp is False
 
 
 def test_homepage_ressort_is_homepage(testserver):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(
+        cp, pyramid.testing.DummyRequest())
     assert view.ressort == 'homepage'
 
 
@@ -686,7 +693,8 @@ def test_adcontroller_values_return_values_on_hp(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline'),
         ('tma', '')]
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+        cp, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
 
 
@@ -701,7 +709,8 @@ def test_adcontroller_values_return_values_on_cp(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline'),
         ('tma', '')]
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+        cp, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
 
 
@@ -823,7 +832,7 @@ def test_robots_rules_for_angebote_paths(application):
 def test_robots_rules_for_diverse_paths(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    request = mock.Mock()
+    request = pyramid.testing.DummyRequest()
     request.url = 'http://localhost'
 
     # test folder
@@ -860,7 +869,7 @@ def test_robots_rules_for_diverse_paths(application):
 def test_meta_rules_for_keyword_paths(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/thema')
-    request = mock.Mock()
+    request = pyramid.testing.DummyRequest()
 
     # person
     request.path = '/thema/mahmud-abbas'
@@ -1133,7 +1142,8 @@ def test_non_navigation_centerpage_should_have_minimal_breadcrumbs(
         'http://xml.zeit.de/zeit-online/main-teaser-setup')
     monkeypatch.setattr(
         zeit.web.site.view_centerpage.Centerpage, u'ressort', u'moep')
-    view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(
+        context, pyramid.testing.DummyRequest())
     assert view.breadcrumbs == [
         ('Start', 'http://xml.zeit.de/index', 'ZEIT ONLINE')]
 
@@ -1141,7 +1151,8 @@ def test_non_navigation_centerpage_should_have_minimal_breadcrumbs(
 def test_homepage_should_have_no_breadcrumbs(
         application, monkeypatch):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
-    view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(
+        context, pyramid.testing.DummyRequest())
     assert view.breadcrumbs == []
 
 
@@ -1152,7 +1163,8 @@ def test_breadcrumbs_should_handle_non_ascii(application, monkeypatch):
         zeit.content.cp.centerpage.CenterPage, u'title', u'umläut')
     monkeypatch.setattr(
         zeit.content.cp.centerpage.CenterPage, u'type', u'topicpage')
-    view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(
+        context, pyramid.testing.DummyRequest())
     assert (u'Thema: umläut', None) in view.breadcrumbs
 
 

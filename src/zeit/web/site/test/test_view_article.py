@@ -261,7 +261,8 @@ def test_article_obfuscated_source_without_date_print_published():
     content.copyrights = ''
     content.volume = 1
     content.year = 2011
-    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    view = zeit.web.site.view_article.Article(
+        content, pyramid.testing.DummyRequest())
     view.date_print_published = None
     source = u'DIE ZEIT Nr.\u00A01/2011'
     assert view.obfuscated_source == base64.b64encode(source.encode('latin-1'))
@@ -403,7 +404,8 @@ def test_article_has_news_source_as_list():
     content = mock.Mock()
     content.copyrights = 'ZEIT ONLINE, Reuters'
 
-    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    view = zeit.web.site.view_article.Article(
+        content, pyramid.testing.DummyRequest())
     assert view.news_source == 'ZEITONLINE;Reuters'
 
 
@@ -411,14 +413,16 @@ def test_article_has_news_source_dpa():
     content = mock.Mock()
     content.ressort = 'News'
     content.product.id = 'News'
-    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    view = zeit.web.site.view_article.Article(
+        content, pyramid.testing.DummyRequest())
     assert view.news_source == "dpa"
 
 
 def test_article_has_news_source_sid():
     content = mock.Mock()
     content.product.id = 'SID'
-    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    view = zeit.web.site.view_article.Article(
+        content, pyramid.testing.DummyRequest())
     assert view.news_source == "Sport-Informations-Dienst"
 
 
@@ -426,7 +430,8 @@ def test_article_has_news_source_empty():
     content = mock.Mock()
     content.copyrights = None
 
-    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    view = zeit.web.site.view_article.Article(
+        content, pyramid.testing.DummyRequest())
     assert view.news_source == ''
 
 
@@ -438,7 +443,8 @@ def test_article_news_source_should_not_break_without_product():
     content.ressort = 'News'
     content.product = None
 
-    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    view = zeit.web.site.view_article.Article(
+        content, pyramid.testing.DummyRequest())
     assert view.news_source == ''
 
 
@@ -453,7 +459,8 @@ def test_adcontroller_values_return_values_on_article(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline'),
         ('tma', '')]
-    view = view = zeit.web.site.view_article.Article(content, mock.Mock())
+    view = view = zeit.web.site.view_article.Article(
+        content, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
 
 
@@ -477,8 +484,10 @@ def test_nextread_date_looks_less_like_a_date_for_google(jinja2_env):
         'zeit.web.site:templates/inc/article/nextread.tpl')
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/simple-nextread')
-    request = mock.MagicMock()
-    request.route_url.return_value = 'http://foo.bar/'
+    request = pyramid.testing.DummyRequest(
+        route_url=lambda x: 'http://foo.bar/',
+        asset_url=lambda x: '',
+        image_host='')
     view = zeit.web.site.view_article.Article(content, request)
     html_str = tpl.render(view=view, request=request)
     html = lxml.html.fromstring(html_str)
@@ -645,7 +654,8 @@ def test_article_ads_should_have_pagetype_modifier(testbrowser):
 def test_does_not_break_when_author_has_no_display_name(
         testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.magazin.view_article.Article(
+        context, pyramid.testing.DummyRequest())
     with mock.patch('zeit.content.author.author.Author.display_name', None):
         assert article_view.authors_list == ''
 
@@ -680,7 +690,8 @@ def test_messy_archive_metadata_should_have_minimal_breadcrumbs(
         zeit.content.article.article.Article, u'year', None)
     monkeypatch.setattr(
         zeit.content.article.article.Article, u'volume', u'xx')
-    article_view = zeit.web.site.view_article.Article(context, mock.Mock())
+    article_view = zeit.web.site.view_article.Article(
+        context, pyramid.testing.DummyRequest())
     # Fallback to default breadcrumbs, including the article title
     assert article_view.title in article_view.breadcrumbs[1][0]
 
@@ -772,7 +783,7 @@ def test_robots_rules_for_angebote_articles(application):
 def test_robots_rules_for_diverse_articles(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
-    request = mock.Mock()
+    request = pyramid.testing.DummyRequest()
     request.url = 'http://localhost'
 
     # test folder
@@ -816,7 +827,8 @@ def test_advertorial_marker_is_returned_correctly():
     content.advertisement_title = 'YYY'
     content.advertisement_text = 'XXX'
     content.cap_title = 'ZZZ'
-    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    view = zeit.web.site.view_article.Article(
+        content, pyramid.testing.DummyRequest())
     assert view.advertorial_marker == ('YYY', 'XXX', 'Zzz')
 
 
