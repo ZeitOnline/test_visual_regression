@@ -187,7 +187,9 @@
     </script>
 
     <!-- Popover -->
-    {%- include "zeit.web.site:templates/inc/overlay.html" ignore missing -%}
+    {% if view.is_hp %}
+        {%- include "zeit.web.site:templates/inc/overlay.html" ignore missing -%}
+    {% endif %}
 
     <script src="{{ request.asset_url('js/site.js') }}"></script>
 
