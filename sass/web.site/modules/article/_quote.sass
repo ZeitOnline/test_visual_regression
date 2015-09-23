@@ -1,0 +1,43 @@
+.quote
+	margin: remify(40px) auto
+	width: 90%
+	+respond-min($break-tablet-min)
+		width: remify(518px)
+	+respond-min($break-desktop-min)
+		width: remify(560px)
+		margin-left: remify(80px) - $page-padding // visual 80px
+
+	&__text
+		color: $zon-charcoal
+		font-size: remify(17px)
+		font-weight: bold
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1.3
+		margin: 0
+		&:before
+			content: "»"
+		&:after
+			content: "«"
+
+		+respond-min($break-tablet-min)
+			font-size: remify(22px)
+			line-height: 1.2
+
+	&__source
+		color: $zon_grey
+		font-family: $font-franziska
+		font-size: remify(15px)
+		font-style: italic
+		line-height: 1.5
+		margin-top: remify(14px)
+		&:before
+			content: "\2014" // — = em dash
+
+		+respond-min($break-tablet-min)
+			font-size: remify(16px)
+			line-height: 1.2
+
+	&__link
+		color: inherit
+		+on-interaction
+			color: $zon-red

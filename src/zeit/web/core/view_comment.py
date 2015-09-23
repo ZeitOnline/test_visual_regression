@@ -5,7 +5,6 @@ import md5
 import urllib
 import urlparse
 import datetime
-import time
 
 import beaker.cache
 import lxml
@@ -67,7 +66,7 @@ class PostComment(zeit.web.core.view.Base):
 
         if request.session.get('lock_commenting'):
             ts = request.session['lock_commenting_ts']
-            if datetime.datetime.utcnow()-ts > self.lock_duration:
+            if datetime.datetime.utcnow() - ts > self.lock_duration:
                 log.debug("remove comment lock!")
                 request.session['lock_commenting'] = False
                 request.session['lock_commenting_ts'] = (

@@ -946,3 +946,19 @@ def test_multi_page_article_has_print_link(testbrowser):
     print_m = browser.cssselect('.print-menu__print')
     assert (print_m[0].attrib['href'].endswith(
         '/zeit-online/article/tagesspiegel/komplettansicht?print=true'))
+
+
+def test_article_renders_quotes_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/article/quotes')
+    quotes = browser.cssselect('.quote')
+    assert len(quotes) == 3
+
+    quote_with_linked_source = quotes[0]
+    quote_with_source = quotes[1]
+    quote_without_source = quotes[2]
+
+    assert quote_with_linked_source.cssselect(
+        '.quote__source > .quote__link[href="http://www.imdb.com/title/'
+        'tt0110912/quotes?item=qt0447099"]')
+    assert not quote_with_source.cssselect('.quote__source > *')
+    assert not quote_without_source.cssselect('.quote__source')
