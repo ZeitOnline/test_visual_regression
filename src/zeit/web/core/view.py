@@ -653,8 +653,7 @@ class Content(Base):
     def source_label(self):
         src_str = 'Quelle: '
         # freeform sources
-        # XXX I'm None, please fix me [mx]
-        if self.context.copyrights and self.context.copyrights != u'None':
+        if self.context.copyrights:
             return src_str + self.context.copyrights
         # xml show option
         if self.context.product and self.context.product.show:
