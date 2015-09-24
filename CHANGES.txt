@@ -4,7 +4,7 @@ Change log for zeit.web
 2.7 (unreleased)
 ----------------
 
-- FIX: Do not show article age on advertorial CP teasers
+- ZON-2074: Redirect `?commentstart` and `?page=all` to their proper locations
 
 - FIX: Suppress `.cp2015` suffix in some more URLs
 
@@ -27,8 +27,6 @@ Change log for zeit.web
 - ZON-2255: Omit pagination postfix from wt content id
 
 - ZON-2257: Update newsletter to use variant_url for images
-
-- ZON-2074: Whole lotta SEO redirects
 
 - FIX: Add force-mobile to teaser-small-minor
 
@@ -148,12 +146,6 @@ Change log for zeit.web
 - ZON-2070: Tracking follow up
 
 - ZON-2048: Sort'n' paginate gallery area on CPs according to photo CP
-
-- ZON-2203: Add static cardstack parameter on CPs
-
-- ZON-1848: Repair Netiquette link
-
-- HOTFIX: Make zeit.web modules work with `select_modules` API
 
 - ZON-2084: Add comment cache invalidation
 
