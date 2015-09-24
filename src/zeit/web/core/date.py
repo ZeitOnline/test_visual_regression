@@ -40,7 +40,7 @@ def mod_date(resource):
         released = pub_info.date_first_released
         # use 60s of tolerance before displaying a modification date
         if (released and modified and
-            modified - released > datetime.timedelta(seconds=60)):
+                modified - released > datetime.timedelta(seconds=60)):
             return modified
         return released
     except TypeError:
