@@ -178,8 +178,10 @@
 {% endmacro -%}
 
 {% macro video(video) -%}
-    {% set playerId = 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9' %}
-    {{ vima.brightcove_video_tag(video.id, iframe=True, brightcove_player=playerId) }}
+    <div class="article__item article__item--wide article__item--rimless article__item--apart">
+        {% set playerId = 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9' %}
+        {{ vima.brightcove_video_tag(video.id, iframe=True, brightcove_player=playerId) }}
+    </div>
 {% endmacro -%}
 
 {% macro citation(obj) -%}
