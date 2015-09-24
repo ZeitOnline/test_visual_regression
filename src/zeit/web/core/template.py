@@ -120,7 +120,8 @@ def create_url(context, obj, request=None):
         host = '/'
 
     if isinstance(obj, basestring):
-        return obj.replace(zeit.cms.interfaces.ID_NAMESPACE, host, 1)
+        return obj.replace(
+            zeit.cms.interfaces.ID_NAMESPACE, host, 1).replace('.cp2015', '')
     elif zeit.content.link.interfaces.ILink.providedBy(obj):
         return obj.url
     elif zeit.content.video.interfaces.IVideo.providedBy(obj):
