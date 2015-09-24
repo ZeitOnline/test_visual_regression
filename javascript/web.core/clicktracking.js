@@ -76,8 +76,16 @@ define( [ 'jquery' ], function( $ ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         useDataTracking: function( $element ) {
-            var trackingData = $element.data( 'tracking' ).split( '|' ),
-                data = [
+
+            var trackingData = false;
+
+            try {
+                trackingData = $element.data( 'tracking' ).split( '|' );
+            } catch ( err ) {
+                trackingData = $element.data( 'tracking-appear' ).split( '|' );
+            }
+
+            var data = [
                     getBreakpoint(),
                     trackingData[0],
                     trackingData[1] // url
@@ -164,6 +172,7 @@ define( [ 'jquery' ], function( $ ) {
         var trackingData = trackElement[ event.data.funcName ]( element );
         if ( event.data.debug ) {
             event.preventDefault();
+            console.debug( trackingData );
         }
         if ( trackingData ) {
             window.wt.sendinfo({
