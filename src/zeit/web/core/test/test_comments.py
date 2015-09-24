@@ -511,6 +511,7 @@ def test_post_comment_should_not_set_lock(application, action):
 
     assert request.session.get('lock_commenting') is None
 
+
 def test_request_thread_should_fail_on_certain_status_codes(
         application, monkeypatch):
     def get(action_url, timeout=1):
@@ -521,6 +522,7 @@ def test_request_thread_should_fail_on_certain_status_codes(
 
     assert 'request_failed' in zeit.web.core.comments.request_thread(
         'http://community/foo')
+
 
 def test_request_thread_should_fail_on_timeouts(application, monkeypatch):
 
@@ -561,6 +563,7 @@ def test_get_thread_should_invalidate_on_unloaded_threads(application,
     except:
         pass
     assert mock_method.call_args_list == [(('http://unique_id',), {})]
+
 
 def test_get_thread_should_not_invalidate_on_unloaded_threads(application,
                                                               monkeypatch):
@@ -604,6 +607,7 @@ def test_article_view_should_set_comments_not_loadable_prop(application):
     article.comments
 
     assert not article.comments_loadable
+
 
 def test_article_view_should_have_short_caching_time_on_unloadable_thread(
         application, testbrowser, testserver, monkeypatch):

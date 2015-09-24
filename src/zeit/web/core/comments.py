@@ -160,8 +160,10 @@ def request_thread(path):
     except (AttributeError, requests.exceptions.RequestException):
         return {'request_failed': datetime.datetime.utcnow()}
 
+
 class ThreadNotLoadable(Exception):
     pass
+
 
 def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
     """Return a dict representation of the comment thread of the given

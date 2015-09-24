@@ -90,7 +90,10 @@ class Base(object):
             redirect_on_cp2015_suffix(self.request)
         time = zeit.web.core.cache.ICachingTime(self.context)
 
-        self.comments
+        # Make sure comments are loaded
+        if hasattr(self, 'comments'):
+            self.comments
+
         if not self.comments_loadable:
             time = 5
         self.request.response.cache_expires(time)
