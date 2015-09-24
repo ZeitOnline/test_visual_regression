@@ -4,6 +4,8 @@ Change log for zeit.web
 2.7 (unreleased)
 ----------------
 
+- FIX: Do not show article age on advertorial CP teasers
+
 - FIX: Suppress `.cp2015` suffix in some more URLs
 
 
