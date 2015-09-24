@@ -621,7 +621,7 @@ def test_article_view_should_have_short_caching_time_on_unloadable_thread(
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
     assert browser.headers.get('cache-control') == 'max-age=5'
     assert browser.cssselect('.comment-section__headline .nowrap')[0].text == (
-        'Kommentare konnten nicht geladen werden.')
+        'Ein technischer Fehler ist aufgetreten:')
 
     browser = testbrowser('%s/artikel/01' % testserver.url)
     assert browser.headers.get('cache-control') == 'max-age=5'
