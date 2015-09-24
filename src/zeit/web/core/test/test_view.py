@@ -34,7 +34,7 @@ def mock_ad_view(application):
             context = mock.Mock()
             context.banner_id = banner_id
             context.advertisement_title = adv_title
-            request = mock.Mock()
+            request = pyramid.testing.DummyRequest()
             request.path_info = path_info
             self.request = request
             self.context = context
@@ -330,21 +330,24 @@ def test_adcontroller_values_are_correctly_returned(mock_ad_view):
 def test_centerpage_should_have_manual_seo_pagetitle(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/index')
-    view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.Centerpage(
+        context, pyramid.testing.DummyRequest())
     assert view.pagetitle == u'My Test SEO - ZEITmagazin ONLINE'
 
 
 def test_centerpage_should_have_generated_seo_pagetitle(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/lebensart-3')
-    view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.Centerpage(
+        context, pyramid.testing.DummyRequest())
     assert view.pagetitle == u'ZMO CP: ZMO | ZEITmagazin'
 
 
 def test_article_should_have_postfixed_seo_pagetitle(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/artikel/06')
-    view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    view = zeit.web.magazin.view_article.Article(
+        context, pyramid.testing.DummyRequest())
     assert view.pagetitle == (u'Friedhof Hamburg-Ohlsdorf: '
                               'Im Schnabel des Graureihers | ZEITmagazin')
 
@@ -352,14 +355,16 @@ def test_article_should_have_postfixed_seo_pagetitle(application):
 def test_homepage_should_have_unpostfixed_seo_pagetitle(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(
+        context, pyramid.testing.DummyRequest())
     assert view.pagetitle == u'ZON title'
 
 
 def test_centerpage_should_have_manual_seo_pagedescription(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/index')
-    view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.Centerpage(
+        context, pyramid.testing.DummyRequest())
     assert view.pagedescription == (u'My Test SEO - ZEITmagazin ONLINE ist '
                                     'die emotionale Seite von ZEIT ONLINE.')
 
@@ -367,14 +372,16 @@ def test_centerpage_should_have_manual_seo_pagedescription(application):
 def test_centerpage_should_have_subtitle_seo_pagedesciption(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/lebensart-3')
-    view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.Centerpage(
+        context, pyramid.testing.DummyRequest())
     assert view.pagedescription == u'ZMO CP'
 
 
 def test_centerpage_should_have_default_seo_pagedescription(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/index')
-    view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.Centerpage(
+        context, pyramid.testing.DummyRequest())
     assert view.pagedescription == zeit.web.magazin.view.Base.seo_title_default
 
 
@@ -408,8 +415,7 @@ def test_unavailable_handles_broken_unicode():
 def test_og_url_is_set_correctly(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
-    request = mock.Mock()
-    request.route_url.return_value = 'foo/'
+    request = pyramid.testing.DummyRequest(route_url=lambda x: 'foo/')
     view = zeit.web.site.view_centerpage.Centerpage(context, request)
     view.request.traversed = ('politik', 'index.cp2015')
     assert view.og_url == 'foo/politik/index'
@@ -418,12 +424,12 @@ def test_og_url_is_set_correctly(application):
 def test_wrapped_page_has_wrapped_property(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/slenderized-index')
-    request = mock.Mock()
+    request = pyramid.testing.DummyRequest()
     request.host_url = 'http://app-content.zeit.de'
     view = zeit.web.site.view_centerpage.Centerpage(context, request)
     assert view.is_wrapped
 
-    request = mock.Mock()
+    request = pyramid.testing.DummyRequest()
     request.query_string = "app-content"
     request.host_url = 'http://www.zeit.de'
     view = zeit.web.site.view_centerpage.Centerpage(context, request)
@@ -431,7 +437,7 @@ def test_wrapped_page_has_wrapped_property(application):
 
 
 def test_trailing_slash_should_lead_to_redirect():
-    request = mock.Mock
+    request = pyramid.testing.DummyRequest()
     request.path = '/foo/baa/'
     request.url = 'http://foo.xyz.de/foo/baa/?batz'
     with pytest.raises(
@@ -451,11 +457,11 @@ def test_trailing_slash_should_lead_to_redirect():
 
     request.path = '/foo/baa'
     request.url = 'http://foo.xyz.de/foo/baa'
-    assert zeit.web.core.view.redirect_on_trailing_slash(request) == None
+    assert zeit.web.core.view.redirect_on_trailing_slash(request) is None
 
 
 def test_cp2015_suffix_should_lead_to_redirect():
-    request = mock.Mock
+    request = pyramid.testing.DummyRequest()
     request.path = '/foo/baa.cp2015'
     request.url = 'http://foo.xyz.de/foo/baa.cp2015'
     with pytest.raises(
@@ -475,7 +481,7 @@ def test_cp2015_suffix_should_lead_to_redirect():
 
     request.path = '/foo/baa'
     request.url = 'http://foo.xyz.de/foo/baa'
-    assert zeit.web.core.view.redirect_on_cp2015_suffix(request) == None
+    assert zeit.web.core.view.redirect_on_cp2015_suffix(request) is None
 
 
 def test_cp2015_redirect_can_be_disabled(application):

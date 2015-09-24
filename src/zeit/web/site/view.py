@@ -36,6 +36,18 @@ class Base(zeit.web.core.view.Base):
         u'ZEIT ONLINE | Nachrichten, Hintergründe und Debatten')
     pagetitle_suffix = u' | ZEIT ONLINE'
 
+    def __init__(self, *args, **kwargs):
+        super(Base, self).__init__(*args, **kwargs)
+        if self.request.params.get('commentstart'):
+            target_url = zeit.web.core.template.remove_get_params(
+                self.request.url, 'commentstart')
+            raise pyramid.httpexceptions.HTTPMovedPermanently(
+                location=target_url)
+        if self.request.params.get('page') == 'all':
+            target_url = "{}/komplettansicht".format(self.content_url)
+            raise pyramid.httpexceptions.HTTPMovedPermanently(
+                location=target_url)
+
     def banner_toggles(self, name):
         cases = {
             'viewport_zoom': 'tablet',

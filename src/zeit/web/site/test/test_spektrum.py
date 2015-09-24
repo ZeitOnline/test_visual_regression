@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-import mock
 import pkg_resources
 import pytest
 import re
 
 import lxml.etree
 import requests
+import pyramid.testing
 
 import zeit.web.site.area.spektrum
 import zeit.web.site.view_centerpage
@@ -92,7 +92,8 @@ def test_spektrum_image_should_have_expected_attributes(application):
 def test_centerpage_recognizes_spektrum_cpextra(testserver):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+        cp, pyramid.testing.DummyRequest())
     mods = view.region_list_parquet[1].values()[0].values()
     assert all(isinstance(
         t[0], zeit.web.site.area.spektrum.Teaser) for t in mods)

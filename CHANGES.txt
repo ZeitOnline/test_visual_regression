@@ -4,6 +4,8 @@ Change log for zeit.web
 2.7 (unreleased)
 ----------------
 
+- ZON-2074: Redirect `?commentstart` and `?page=all` to their proper locations
+
 - FIX: Do not show article age on advertorial CP teasers
 
 - FIX: Suppress `.cp2015` suffix in some more URLs
