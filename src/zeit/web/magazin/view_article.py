@@ -42,7 +42,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
         try:
             return zeit.web.core.comments.get_thread(
                 self.context.uniqueId, sort='desc')
-        except zeit.web.core.comments.ThreadNotLoadable():
+        except zeit.web.core.comments.ThreadNotLoadable:
             self.comments_loadable = False
             return
 

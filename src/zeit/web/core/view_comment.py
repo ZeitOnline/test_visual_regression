@@ -438,6 +438,8 @@ class RecommendCommentResource(PostCommentResource):
 
 
 def invalidate_comment_thread(unique_id):
+    import pdb; pdb.set_trace()  # XXX BREAKPOINT
+
     beaker.cache.region_invalidate(
         zeit.web.core.comments.get_cacheable_thread,
         None,

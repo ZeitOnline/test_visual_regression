@@ -153,15 +153,17 @@ def request_thread(path):
         conf.get('agatho_host', ''), path.encode('utf-8'))
     try:
         response = requests.get(uri, timeout=timeout)
+        if response.status_code == 404:
+            return
         return (200 <= response.status_code < 300) and response.content or (
-            {"request_failed": datetime.datetime.utcnow()})
+            {'request_failed': datetime.datetime.utcnow()})
     except (AttributeError, requests.exceptions.RequestException):
-        return {"request_failed": datetime.datetime.utcnow()}
+        return {'request_failed': datetime.datetime.utcnow()}
 
 class ThreadNotLoadable(Exception):
     pass
 
-def get_thread(unique_id, sort='asc', page=None, cid=None):
+def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
     """Return a dict representation of the comment thread of the given
     article.
 
@@ -175,7 +177,7 @@ def get_thread(unique_id, sort='asc', page=None, cid=None):
 
     if thread is not None and thread.get('request_failed'):
         td = datetime.datetime.utcnow()-thread.get('request_failed')
-        if td >= datetime.timedelta(0, 5):
+        if td >= datetime.timedelta(0, invalidate_delta):
             zeit.web.core.view_comment.invalidate_comment_thread(unique_id)
             thread = get_cacheable_thread(unique_id)
         if thread is not None and thread.get('request_failed'):
@@ -272,7 +274,7 @@ def get_cacheable_thread(unique_id):
     if thread is None:
         return
 
-    if thread.get('request_failed'):
+    if type(thread) == dict and thread.get('request_failed'):
         return thread
 
     try:

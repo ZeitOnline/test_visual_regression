@@ -89,6 +89,8 @@ class Base(object):
                 'redirect_from_cp2015', True)):
             redirect_on_cp2015_suffix(self.request)
         time = zeit.web.core.cache.ICachingTime(self.context)
+
+        self.comments
         if not self.comments_loadable:
             time = 5
         self.request.response.cache_expires(time)
@@ -619,8 +621,6 @@ class Content(Base):
         except zeit.web.core.comments.ThreadNotLoadable:
             self.comments_loadable = False
             return
-
-
 
     @zeit.web.reify
     def obfuscated_date(self):
