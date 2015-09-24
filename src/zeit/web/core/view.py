@@ -219,7 +219,11 @@ class Base(object):
             return u'{}/{}'.format(self.context.banner_id, self.banner_type)
         # second rule: angebote are mapped with two levels
         if self.ressort == 'angebote':
-            return u'{}/{}/{}'.format(self.ressort, 'adv', self.banner_type)
+            adv_title = self.context.advertisement_title or self.ressort
+            return u'{}/{}/{}'.format(
+                'adv',
+                "".join(re.findall(r"[A-Za-z0-9_]*", adv_title)).lower(),
+                self.banner_type)
         # third: do the mapping
         mappings = zeit.web.core.banner.banner_id_mappings
         for mapping in mappings:
@@ -265,7 +269,9 @@ class Base(object):
         if self.is_hp:
             return 'homepage'
         if self.is_advertorial:
-            return 'adv_index' if self.type == 'centerpage' else 'adv_artikel'
+            return '{}_{}'.format(
+                'mcs' if 'mcs/' in self.banner_channel else 'adv',
+                'index' if self.type == 'centerpage' else 'artikel')
         return 'index' if self.type == 'centerpage' and (
             self.sub_ressort == '' or self.ressort ==
             'zeit-magazin') else replacements[self.type]
@@ -474,14 +480,11 @@ class Base(object):
     @zeit.web.reify
     def content_url(self):
         path = '/'.join(self.request.traversed)
-        return self.request.route_url('home') + path
+        return self.request.route_url('home') + path.replace('.cp2015', '')
 
     @zeit.web.reify
     def og_url(self):
-        # for og url, hide cp2015 ending
-        path = '/'.join(self.request.traversed)
-        return self.request.route_url('home') + path.replace(
-            'index.cp2015', 'index')
+        return self.content_url
 
     @zeit.web.reify
     def is_dev_environment(self):
