@@ -10,6 +10,10 @@ Change log for zeit.web
 
 - ZON-2218: Adjust timezone of displayed dates and fix indication of source
 
+- FIX: Do not show article age on advertorial CP teasers
+
+- FIX: Suppress `.cp2015` suffix in some more URLs
+
 
 2.6 (2015-09-23)
 ----------------
