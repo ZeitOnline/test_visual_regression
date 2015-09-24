@@ -170,6 +170,7 @@ define( [ 'jquery' ], function( $ ) {
         }
 
         var trackingData = trackElement[ event.data.funcName ]( element );
+
         if ( event.data.debug ) {
             event.preventDefault();
             console.debug( trackingData );
