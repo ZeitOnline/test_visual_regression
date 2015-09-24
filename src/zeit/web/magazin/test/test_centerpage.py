@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.ui import WebDriverWait
 from zope.component import getMultiAdapter
 import mock
 import pyramid.threadlocal
