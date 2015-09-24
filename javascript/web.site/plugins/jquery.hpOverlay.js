@@ -122,6 +122,10 @@
                     that.addTimer( defaults.minutes );
                 } );
 
+                request.fail( function() {
+                   that.addTimer( defaults.minutes );
+                } );
+
             },
             isLiveServer: function() {
                 return !window.location.hostname.search( /(www.)?zeit\.de/ );
