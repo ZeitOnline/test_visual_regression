@@ -115,7 +115,7 @@
         {% endif %}
     {% endblock %}
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
+<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp|lower }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
 
@@ -185,6 +185,12 @@
             urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"
         };
     </script>
+
+    <!-- Popover -->
+    {% if view.is_hp %}
+        {%- include "zeit.web.site:templates/inc/overlay.html" ignore missing -%}
+    {% endif %}
+
     <script src="{{ request.asset_url('js/site.js') }}"></script>
 
     {% if view.vgwort_url %}

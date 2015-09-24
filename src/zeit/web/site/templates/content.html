@@ -13,29 +13,18 @@
     {% profile %}
         {% block article_heading %}
             <div class="article__item">
-
-                {% if view.pagination and view.pagination.current > 1 and view.current_page.teaser %}
-                    <div class="article-heading" itemprop="headline">
-                {% else %}
-                    <h1 class="article-heading" itemprop="headline">
-                {% endif %}
-
-                        <span class="article-heading__kicker">
-                            {% if is_column == True %}
-                                {{ view.serie + ' / ' }}
-                            {% endif %}
-                            {{- view.supertitle | hide_none -}}
-                        </span>{%- if view.title -%}<span class="article-heading__colon">: </span>{%- endif -%}
-                        <span class="article-heading__title">
-                            {{- view.title | hide_none -}}
-                        </span>
-
-                {% if view.pagination and view.pagination.current > 1 and view.current_page.teaser %}
-                    </div>
-                {% else %}
-                    </h1>
-                {% endif %}
-
+                {% set headertag = 'div' if view.pagination and view.pagination.current > 1 and view.current_page.teaser else 'h1' %}
+                <{{ headertag }} class="article-heading" itemprop="headline">
+                    <span class="article-heading__kicker">
+                        {% if is_column == True %}
+                            {{ view.serie + ' / ' }}
+                        {% endif %}
+                        {{- view.supertitle | hide_none -}}
+                    </span>{%- if view.title -%}<span class="article-heading__colon">: </span>{%- endif -%}
+                    <span class="article-heading__title">
+                        {{- view.title | hide_none -}}
+                    </span>
+                </{{ headertag }}>
             </div>
         {% endblock article_heading %}
         {% block article_meta %}

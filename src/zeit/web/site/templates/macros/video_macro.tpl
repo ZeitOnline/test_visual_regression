@@ -7,7 +7,7 @@
     brightcove_embed="default"
     ) %}
 
-<div class="article__item article__item--wide video-player" id="video-player-{{ videoId }}">
+<div class="video-player" id="video-player-{{ videoId }}">
     {% if iframe %}
         <iframe
             class="video-player__iframe"

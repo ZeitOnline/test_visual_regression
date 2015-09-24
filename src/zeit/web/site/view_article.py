@@ -175,6 +175,11 @@ def has_author_image(context, request):
                                 is_column_article,
                                 has_author_image),
              renderer='templates/column.html')
+@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
+                                is_column_article,
+                                has_author_image),
+             name='komplettansicht',
+             renderer='templates/column_komplett.html')
 class ColumnArticle(Article):
 
     @zeit.web.reify
@@ -183,6 +188,16 @@ class ColumnArticle(Article):
             return
         return zeit.web.core.template.closest_substitute_image(
             self.authors[0]['image_group'], 'zon-column')
+
+
+@view_config(name='seite',
+             custom_predicates=(zeit.web.site.view.is_zon_content,
+                                is_column_article,
+                                has_author_image),
+             path_info='.*seite-(.*)',
+             renderer='templates/column.html')
+class ColumnPage(zeit.web.core.view_article.ArticlePage, ColumnArticle):
+    pass
 
 
 @view_config(context=zeit.web.core.article.ILiveblogArticle,

@@ -1,8 +1,24 @@
 Change log for zeit.web
 =======================
 
-2.5.2 (unreleased)
-------------------
+2.7 (unreleased)
+----------------
+
+- FIX: Do not show article age on advertorial CP teasers
+
+- FIX: Suppress `.cp2015` suffix in some more URLs
+
+
+2.6 (2015-09-23)
+----------------
+
+- FIX: Repair video container and promote "separation of concerns"
+
+- HOTFIX: Repair table of contents for more than 7 pages
+
+- ZON-2258: Show only 5 top-level comments per page
+
+- ZON-2251: Make columns paginate
 
 - ZON-2098: Add quotes to article
 
@@ -25,6 +41,8 @@ Change log for zeit.web
 - FIX: Redirect legacy keyword urls regardless of ~/index postfix
 
 - MAINT: Make microsites per banner_id value possible
+
+- ZON-1611: Popover
 
 
 2.5.1 (2015-09-22)
