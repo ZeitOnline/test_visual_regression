@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
   <attribute ns="DAV:" name="href">/cms/work/kultur/film/2014-12/hobbit-monumentalfilm</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-05-27T09:24:56.823418+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-05-27T17:11:30.179510+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-09-24T13:24:56.823418+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-09-24T14:11:30.179510+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">5010</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
@@ -20,7 +20,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Kultur Film</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">49</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-12-05T17:11:22.109311+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-09-24T14:11:22.109311+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.lavrov</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>

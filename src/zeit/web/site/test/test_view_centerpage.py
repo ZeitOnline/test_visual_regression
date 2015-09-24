@@ -1301,6 +1301,11 @@ def test_advertorial_page_has_advertorial_label(testbrowser):
     assert browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
 
 
+def test_advertorial_page_has_no_datetime_on_teasers(testbrowser):
+    browser = testbrowser('/zeit-online/advertorial-index')
+    assert not browser.cssselect('.teaser-small__datetime')
+
+
 def test_standard_teasers_have_meetrics_attribute(testbrowser):
     browser = testbrowser('/zeit-online/basic-teasers-setup')
 
