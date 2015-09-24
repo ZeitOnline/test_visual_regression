@@ -203,7 +203,16 @@
                 <p>AdPlaces (aus dem AdController) werden auf der Seite markiert, auch wenn keine Werbung darauf gebucht ist.</p>
                 <h3>Wie wird der Modus ausgelöst?</h3>
                 <ul>
-                    <li>Über den Query Parameter <a href="127.0.0.1:9090/index?iqadtest=iqadview">?iqadtest=iqadview</a>.</li>
+                    <li>Über den Query Parameter <a href="http://127.0.0.1:9090/index?iqadtest=iqadview">?iqadtest=iqadview</a>.</li>
+                </ul>
+                </text>
+            </container>
+            <container cp:type="markup" module="markup" visible_mobile="True" cp:__name__="id-8ae1e86c-dbcf7-4d07-a59c-287eb191f252" title="HP Popover">
+                <text>
+                <p>Die Anzeige des Popovers auf der HP kann erzwungen oder im Debug Modus auf normalem Weg gestartet werden.</p>
+                <h3>Wie wird der Modus ausgelöst?</h3>
+                <ul>
+                    <li>Über den Query Parameter <a href="http://127.0.0.1:9090/index?debug-popover-force">?debug-popover-force</a> oder <a href="http://127.0.0.1:9090/index?debug-popover">?debug-popover</a>.</li>
                 </ul>
                 </text>
             </container>
