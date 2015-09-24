@@ -34,8 +34,9 @@
             overlay = {
             prependHtml: function() {
                 // prepend html to body
-                if ( $( '#overlay_wrapper' ).not( ':visible' ) ) {
-                    $( '#overlay_wrapper' ).show();
+                if ( $( '#overlay-wrapper' ).not( ':visible' ) ) {
+                    $( '#overlay-wrapper' ).show();
+                    $( '#overlay-wrapper' ).trigger( 'appear' );
                 }
                 $( '.overlay' ).fadeIn();
                 $( '.lightbox' ).show();
@@ -44,7 +45,7 @@
                 // action when cancel was clicked
                 $( '.lightbox' ).hide();
                 $( '.overlay' ).hide();
-                $( '#overlay_wrapper' ).hide();
+                $( '#overlay-wrapper' ).hide();
                 ZMO.cookieCreate( 'overlaycanceled', 1, defaults.cookieTimeInDays, '' );
                 window.clearTimeout( timer );
                 $( document ).off( '.modal' );
@@ -120,6 +121,7 @@
                     defaults.timestamp = data.last_published_semantic;
                     that.addTimer( defaults.minutes );
                 } );
+
             },
             isLiveServer: function() {
                 return !window.location.hostname.search( /(www.)?zeit\.de/ );
@@ -148,6 +150,10 @@
                     overlay.restartTimer( defaults.updateTime );
                 }
             });
+
+            request.fail( function() {
+               overlay.restartTimer( defaults.updateTime );
+            } );
         }
 
         return this.each( function() {

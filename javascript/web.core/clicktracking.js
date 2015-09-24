@@ -153,10 +153,17 @@ define( [ 'jquery' ], function( $ ) {
         }
     },
     clickTrack = function( event ) {
-        var trackingData = trackElement[ event.data.funcName ]( $( event.target ).closest( 'a' ) );
+
+        var element = $( event.target ).closest( 'a' );
+
+        // if we dont want to track a link, but a div
+        if ( $( event.target ).data( 'track-div' ) ) {
+            element = $( event.target ).closest( 'div' );
+        }
+
+        var trackingData = trackElement[ event.data.funcName ]( element );
         if ( event.data.debug ) {
             event.preventDefault();
-            console.debug( trackingData );
         }
         if ( trackingData ) {
             window.wt.sendinfo({
@@ -330,6 +337,11 @@ define( [ 'jquery' ], function( $ ) {
 
             // exceptions and extra cases
             $( '*[data-tracking]' ).on( 'click', {
+                funcName: 'useDataTracking',
+                debug: debugMode
+            }, clickTrack );
+
+            $( '*[data-tracking-appear]' ).on( 'appear', {
                 funcName: 'useDataTracking',
                 debug: debugMode
             }, clickTrack );
