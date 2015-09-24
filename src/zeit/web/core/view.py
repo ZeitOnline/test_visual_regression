@@ -484,7 +484,6 @@ class Base(object):
 
     @zeit.web.reify
     def og_url(self):
-        # Hide cp2015 ending for og url
         return self.content_url
 
     @zeit.web.reify
