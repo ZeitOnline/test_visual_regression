@@ -53,7 +53,9 @@
                     </span>
                 {% endblock %}
                 {% block teaser_datetime %}
-                    {{ cp.include_teaser_datetime(teaser, self.layout(), area.kind) }}
+                    {% if not view.is_advertorial %}
+                        {{ cp.include_teaser_datetime(teaser, self.layout(), area.kind) }}
+                    {% endif %}
                 {% endblock %}
                 {% block teaser_commentcount %}
                     {% set comments = view.comment_counts[teaser.uniqueId] %}
