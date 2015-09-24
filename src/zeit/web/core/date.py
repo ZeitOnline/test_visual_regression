@@ -42,7 +42,9 @@ def mod_date(resource):
         if (released and modified and
                 modified - released > datetime.timedelta(seconds=60)):
             return modified
-        return released
+        # fall back to date_last_published_semantic needed at least for
+        # test files without date_first_released
+        return released or modified
     except TypeError:
         return
 
