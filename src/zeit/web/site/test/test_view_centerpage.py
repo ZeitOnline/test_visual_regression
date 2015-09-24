@@ -1396,5 +1396,5 @@ def test_news_teaser_date_and_reference(jinja2_env):
     datetime = html.cssselect('.newsteaser__time')
     product = html.cssselect('.newsteaser__product')
 
-    assert datetime[0].text.strip() == '17:28'
+    assert datetime[0].text.strip() == '22:46'
     assert product[0].text == 'DPA'

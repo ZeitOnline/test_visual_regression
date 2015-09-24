@@ -897,7 +897,7 @@ def test_dpa_article_has_correct_meta_line(testbrowser):
     date = browser.cssselect('.metadata__date')[0]
     source = browser.cssselect('.metadata__source')[0]
 
-    assert date.text == u'23. September 2015, 17:28 Uhr'
+    assert date.text == u'23. September 2015, 22:46 Uhr'
     assert source.text == u'Quelle: DPA'
 
 
