@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.7 (unreleased)
+2.7 (2015-09-25)
 ----------------
 
 - ZON-2074: Redirect `?commentstart` and `?page=all` to their proper locations
