@@ -26,7 +26,7 @@
         <ul class="{{ blockname }}__list">
             {% for article_module in module.article_modules %}
                 {% set article_teaser = article_module | first_child %}
-                <li class="{{ blockname }}__listitem">{{ article_teaser.teaserTitle or article_teaser.title }}</li>
+                <li class="{{ blockname }}__listitem">{{ article_teaser.tldr_title or article_teaser.teaserTitle or article_teaser.title }}</li>
             {% endfor %}
         </ul>
         {# TODO: "Zuletzt aktualisiert vor 2 Stunden"
