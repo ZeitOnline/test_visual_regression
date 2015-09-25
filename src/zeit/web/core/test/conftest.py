@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from StringIO import StringIO
 import copy
 import json
 import os.path
@@ -10,6 +11,8 @@ import lxml.etree
 import lxml.html
 import plone.testing.zca
 import plone.testing.zodb
+import pyramid.response
+import pyramid.static
 import pyramid.testing
 import pytest
 import repoze.bitblt.processor
@@ -260,7 +263,19 @@ def application_session(request):
 
 
 @pytest.fixture
-def application(application_session, zodb, request):
+def preserve_settings(request):
+    def restore_settings():
+        settings = zope.component.getUtility(
+            zeit.web.core.interfaces.ISettings)
+        settings.__init__(settings_orig)
+    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
+    if settings is not None:
+        request.addfinalizer(restore_settings)
+        settings_orig = copy.copy(settings)
+
+
+@pytest.fixture
+def application(application_session, preserve_settings, zodb, request):
     # This application_session/application split is a bit clumsy, but some
     # things (e.g. reset connector, teardown zodb) needs to be called after
     # each test (i.e. in 'function' scope). The many diverse fixtures make this
@@ -268,15 +283,6 @@ def application(application_session, zodb, request):
     # ``application``, ``testbrowser``), but if it's needed elsewhere, it has
     # to be integrated explicitly.
     request.addfinalizer(reset_connector)
-
-    def restore_settings():
-        settings = zope.component.getUtility(
-            zeit.web.core.interfaces.ISettings)
-        settings.__init__(settings_orig)
-    request.addfinalizer(restore_settings)
-    settings_orig = copy.copy(zope.component.getUtility(
-        zeit.web.core.interfaces.ISettings))
-
     return application_session
 
 
@@ -331,17 +337,23 @@ def dummy_request(request, config, app_settings):
 
 
 @pytest.fixture(scope='function')
-def mockserver_factory(request):
-    def factory(response=None):
-        def mock_app(env, start_response):
-            start_response('200 OK', [])
-            return [response]
-        server = gocept.httpserverlayer.wsgi.Layer()
-        server.port = 6551
-        server.wsgi_app = mock_app
-        server.setUp()
-        server.url = 'http://%s' % server['http_address']
-        request.addfinalizer(server.tearDown)
+def mockserver_factory(preserve_settings, request):
+    def mock_app(env, start_response):
+        start_response('200 OK', [])
+        return [mock_response[0].format(server=server.url)]
+    mock_response = ['']
+
+    server = gocept.httpserverlayer.wsgi.Layer()
+    server.wsgi_app = mock_app
+    server.setUp()
+    server.url = 'http://%s' % server['http_address']
+    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
+    if settings is not None:
+        settings['community_host'] = server.url
+    request.addfinalizer(server.tearDown)
+
+    def factory(response=''):
+        mock_response[0] = response
         return server
     return factory
 
@@ -369,13 +381,36 @@ def sleep_tween(handler, registry):
     return timeout
 
 
+class StaticViewMaybeReplaceHostURL(pyramid.static.static_view):
+
+    def __call__(self, context, request):
+        response = super(StaticViewMaybeReplaceHostURL, self).__call__(
+            context, request)
+        if response.content_type in ['application/xml']:
+            # Dear pyramid.response.FileResponse, would it kill you to
+            # *remember* the path you are passed? Now we have to copy&paste
+            # from the superclass and determine the path again.
+            path_tuple = pyramid.traversal.traversal_path_info(
+                request.environ['PATH_INFO'])
+            path = pyramid.static._secure_path(path_tuple)
+            filepath = os.path.normcase(os.path.normpath(os.path.join(
+                self.norm_docroot, path)))
+            contents = open(filepath).read().replace(
+                '%HOST%', request.route_url('static', subpath=''))
+            response.app_iter = pyramid.response.FileIter(StringIO(contents))
+        return response
+
+
 @pytest.fixture(scope='session')
 def mockserver(request):
     """Used for mocking external HTTP dependencies like agatho or spektrum."""
     from pyramid.config import Configurator
 
     config = Configurator()
-    config.add_static_view('/', 'zeit.web.core:data/')
+    config.add_route('static', '/*subpath')
+    config.add_view(StaticViewMaybeReplaceHostURL(
+        pkg_resources.resource_filename('zeit.web.core', 'data')),
+        route_name='static')
     settings = {'sleep': 0}
     settings = pyramid.config.settings.Settings(d=settings)
     interface = ISettings
@@ -384,7 +419,6 @@ def mockserver(request):
     config.add_tween('zeit.web.core.test.conftest.sleep_tween')
     app = config.make_wsgi_app()
     server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 6552
     server.wsgi_app = app
     server.setUp()
     server.settings = settings
@@ -395,8 +429,18 @@ def mockserver(request):
 
 @pytest.fixture(scope='session')
 def testserver(application_session, request, mockserver):
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['agatho_host'] = mockserver.url + '/comments'
+    settings['spektrum_hp_feed'] = mockserver.url + '/spektrum/feed.xml'
+    settings['spektrum_img_host'] = mockserver.url + '/spektrum'
+    settings['liveblog_backend_url'] = mockserver.url + '/liveblog/backend'
+    settings['liveblog_status_url'] = mockserver.url + '/liveblog/status'
+    settings[
+        'vivi_zeit.brightcove_read-url'] = mockserver.url + '/video/bc.json'
+    settings[
+        'vivi_zeit.brightcove_write-url'] = mockserver.url + '/video/bc.json'
+
     server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 6543
     server.wsgi_app = application_session
     server.setUp()
     server.url = 'http://%s' % server['http_address']
@@ -419,7 +463,7 @@ def http_testserver(request):
     app = config.make_wsgi_app()
 
     server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 8889  # XXX Why not use the default (random) port?
+    server.url = 'http://%s' % server['http_address']
     server.wsgi_app = app
     server.setUp()
     request.addfinalizer(server.tearDown)
