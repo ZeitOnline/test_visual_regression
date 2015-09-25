@@ -202,12 +202,6 @@ def test_asset(path):
 
 
 @pytest.fixture
-def app_settings():
-    return zeit.web.core.utils.defaultattrdict(
-        lambda *_: None, settings.iteritems())
-
-
-@pytest.fixture
 def jinja2_env(application):
     return application.zeit_app.jinja_env
 
@@ -327,10 +321,10 @@ def config(application, request):
 
 
 @pytest.fixture
-def dummy_request(request, config, app_settings):
+def dummy_request(request, config):
     req = pyramid.testing.DummyRequest(is_xhr=False)
     req.response.headers = set()
-    req.registry.settings = app_settings
+    req.registry.settings = settings.copy()
     req.matched_route = None
     config.manager.get()['request'] = req
     return req
@@ -542,10 +536,12 @@ def css_selector(request):
 
 
 @pytest.fixture
-def comment_counter(app_settings, application):
+def comment_counter(application):
     def get_count(**kwargs):
+        settings = zope.component.queryUtility(
+            zeit.web.core.interfaces.ISettings)
         request = pyramid.testing.DummyRequest()
-        request.registry.settings = app_settings
+        request.registry.settings = settings
         request.GET = kwargs
         return zeit.web.core.view.json_comment_count(request)
     return get_count

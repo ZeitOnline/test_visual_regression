@@ -84,27 +84,30 @@ def test_video_claiming_to_be_imagegroup_works_with_xmlreference(application):
     updater.update(node, suppress_errors=True)
 
 
-def test_brightcove_images_should_set_cache_headers(testserver, app_settings):
+def test_brightcove_images_should_set_cache_headers(testserver):
     resp = requests.get(
         '{}/video/2014-01/3089721834001/imagegroup/wide'.format(
             testserver.url))
+    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
     assert resp.headers.get('Cache-Control') == 'max-age={}'.format(
-        app_settings.get('caching_time_image'))
+        settings.get('caching_time_image'))
 
 
-def test_native_images_should_set_cache_headers(testserver, app_settings):
+def test_native_images_should_set_cache_headers(testserver):
     resp = requests.get(
         '{}/zeit-online/cp-content/ig-1/ig-1-zon-fullwidth.jpg'.format(
             testserver.url))
+    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
     assert resp.headers.get('Cache-Control') == 'max-age={}'.format(
-        app_settings.get('caching_time_image'))
+        settings.get('caching_time_image'))
 
 
-def test_spektrum_images_should_set_cache_headers(testserver, app_settings):
+def test_spektrum_images_should_set_cache_headers(testserver):
     resp = requests.get('{}/spektrum-image/images/img1.jpg'.format(
         testserver.url))
+    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
     assert resp.headers.get('Cache-Control') == 'max-age={}'.format(
-        app_settings.get('caching_time_external'))
+        settings.get('caching_time_external'))
 
 
 def test_spektrum_images_should_handle_non_ascii(testserver):
@@ -469,8 +472,7 @@ def test_img_src_should_contain_fallback_size(testbrowser):
         'img[src$="/filmstill-hobbit-schlacht-fuenf-hee/wide__822x462"]')
 
 
-def test_image_host_is_configurable_for_variant_images(
-        application, testbrowser):
+def test_image_host_is_configurable_for_variant_images(testbrowser):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings['image_prefix'] = 'http://img.example.com'
     b = testbrowser('/zeit-online/slenderized-index')
@@ -478,8 +480,7 @@ def test_image_host_is_configurable_for_variant_images(
     assert b.cssselect('img[src^="http://img.example.com"]')
 
 
-def test_image_host_is_configurable_for_legacy_images(
-        application, testbrowser):
+def test_image_host_is_configurable_for_legacy_images(testbrowser):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings['image_prefix'] = 'http://img.example.com'
     b = testbrowser('/zeit-magazin/index')

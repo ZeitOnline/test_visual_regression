@@ -5,6 +5,7 @@ from zope.component import getMultiAdapter
 import mock
 import pyramid.threadlocal
 import pytest
+import zope.component
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
@@ -560,11 +561,12 @@ def test_teaser_image_should_be_created_from_image_group_and_image(
     assert teaser_image.attr_title == 'Katze!'
 
 
-def test_get_reaches_from_centerpage_view(application, app_settings):
+def test_get_reaches_from_centerpage_view(application):
+    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
     request = mock.Mock()
-    request.registry.settings.community_host = app_settings['community_host']
-    request.registry.settings.linkreach_host = app_settings['linkreach_host']
-    request.registry.settings.node_comment_statistics = app_settings[
+    request.registry.settings.community_host = settings['community_host']
+    request.registry.settings.linkreach_host = settings['linkreach_host']
+    request.registry.settings.node_comment_statistics = settings[
         'node_comment_statistics']
 
     cp = zeit.cms.interfaces.ICMSContent(
