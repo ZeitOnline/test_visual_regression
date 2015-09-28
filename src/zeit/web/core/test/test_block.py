@@ -4,6 +4,7 @@ import lxml.etree
 import mock
 import copy
 
+import pyramid.testing
 import zope.interface.declarations
 
 import zeit.cms.interfaces
@@ -259,7 +260,8 @@ def test_block_liveblog_instance_causing_timeouts(application, mockserver,
 def test_block_breaking_news_has_correct_date(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
-    view = zeit.web.site.view_article.Article(content, mock.Mock())
+    view = zeit.web.site.view_article.Article(
+        content, pyramid.testing.DummyRequest())
 
     breaking_news = zeit.web.core.block.BreakingNews()
     assert breaking_news.date_first_released == view.date_first_released

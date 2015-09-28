@@ -4,7 +4,7 @@ import datetime
 import urllib2
 
 import lxml.html
-import mock
+import pyramid.testing
 import pysolr
 import pytest
 
@@ -21,7 +21,8 @@ def get_num(x):
 def test_centerpage_has_last_semantic_change_property(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/zeitonline')
-    view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(
+        context, pyramid.testing.DummyRequest())
 
     assert isinstance(view.last_semantic_change, datetime.datetime)
     assert view.last_semantic_change.strftime('%d %b %y') == '21 May 14'
@@ -164,7 +165,8 @@ def test_dynamic_centerpage_collection_should_output_teasers(
 
     monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
-    view = zeit.web.site.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(
+        cp, pyramid.testing.DummyRequest())
     counter = 0
     for region in view.regions:
             for area in region.values():
@@ -197,8 +199,10 @@ def test_centerpage_markdown_module_is_rendered(jinja2_env):
     tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/thema')
-    request = mock.MagicMock()
-    request.route_url.return_value = 'http://foo.bar/'
+    request = pyramid.testing.DummyRequest(
+        route_url=lambda x: 'http://foo.bar/',
+        asset_url=lambda x: '',
+        image_host='')
     view = zeit.web.site.view_centerpage.Centerpage(content, request)
     view.meta_robots = ''
     view.canonical_url = ''
@@ -214,7 +218,10 @@ def test_centerpage_teaser_topic_is_rendered(jinja2_env):
     tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/topic-teaser')
-    request = mock.MagicMock()
+    request = pyramid.testing.DummyRequest(
+        route_url=lambda x: 'http://foo.bar/',
+        asset_url=lambda x: '',
+        image_host='')
     request.route_url.return_value = 'http://foo.bar/'
     view = zeit.web.site.view_centerpage.Centerpage(content, request)
     view.meta_robots = ''
