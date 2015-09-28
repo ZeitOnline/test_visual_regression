@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from StringIO import StringIO
 import copy
 import json
 import os.path
@@ -6,10 +7,11 @@ import pkg_resources
 
 import cssselect
 import gocept.httpserverlayer.wsgi
-import lxml.etree
 import lxml.html
 import plone.testing.zca
 import plone.testing.zodb
+import pyramid.response
+import pyramid.static
 import pyramid.testing
 import pytest
 import repoze.bitblt.processor
@@ -23,161 +25,160 @@ import zope.processlifetime
 import zope.testbrowser.browser
 
 import zeit.content.image.interfaces
-import zeit.cms.interfaces
 
 import zeit.web.core
 import zeit.web.core.application
-import zeit.web.core.comments
 import zeit.web.core.traversal
-import zeit.web.core.utils
 import zeit.web.core.view
 
 
-settings = {
-    'pyramid.reload_templates': 'false',
-    'pyramid.debug_authorization': 'false',
-    'pyramid.debug_notfound': 'false',
-    'pyramid.debug_routematch': 'false',
-    'pyramid.debug_templates': 'false',
-    'cache.type': 'memory',
-    'cache.lock_file': '/tmp/test_lock',
-    'cache.regions': 'default_term, second, short_term, long_term',
-    'cache.second.expire': '1',
-    'cache.short_term.expire': '60',
-    'cache.default_term.expire': '300',
-    'cache.long_term.expire': '3600',
-    'scripts_url': '/js/static',
-    'liveblog_backend_url': 'http://localhost:6552/liveblog/backend',
-    'liveblog_status_url': 'http://localhost:6552/liveblog/status',
-    # XXX I'd rather put None here and change the settings for a specific test,
-    # but then I'd need to re-create an Application since assets_max_age
-    # is only evaluated once during configuration.
-    'assets_max_age': '1',
-    'caching_time_content': '5',
-    'caching_time_article': '10',
-    'caching_time_centerpage': '20',
-    'caching_time_gallery': '40',
-    'caching_time_image': '30',
-    'caching_time_videostill': '35',
-    'caching_time_external': '15',
-    'community_host': 'http://localhost:6551',
-    'community_static_host': 'http://static_community/foo',
-    'agatho_host': 'http://localhost:6552/comments',
-    'linkreach_host': 'egg://zeit.web.core/data/linkreach/api',
-    'google_tag_manager_host': 'foo.baz',
-    'app_servers': '',
-    'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
-    'community_host_timeout_secs': '10',
-    'spektrum_hp_feed': 'http://localhost:6552/spektrum/feed.xml',
-    'spektrum_img_host': 'http://localhost:6552/spektrum',
-    'node_comment_statistics': 'community/node-comment-statistics.xml',
-    'default_teaser_images': (
-        'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
-    'connector_type': 'mock',
-    'vgwort_url': 'http://example.com/vgwort',
-    'breaking_news_config': (
-        'http://xml.zeit.de/eilmeldung/homepage-banner'),
-    'breaking_news_timeout': 2 * 60 * 60,
-    'enable_third_party_modules': '',
-    'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
-    'vivi_zeit.cms_keyword-configuration': (
-        'egg://zeit.cms.tagging.tests/keywords_config.xml'),
-    'vivi_zeit.cms_source-badges': 'egg://zeit.cms.asset/badges.xml',
-    'vivi_zeit.cms_source-banners': 'egg://zeit.cms.content/banners.xml',
-    'vivi_zeit.cms_source-keyword': (
-        'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
-    'vivi_zeit.cms_source-navigation': (
-        'egg://zeit.cms.content/navigation.xml'),
-    'vivi_zeit.cms_source-channels': (
-        'egg://zeit.cms.content/navigation.xml'),
-    'vivi_zeit.cms_source-products': (
-        'egg://zeit.web.core/data/config/products.xml'),
-    'vivi_zeit.cms_source-serie': (
-        'egg://zeit.web.core/data/config/series.xml'),
-    'vivi_zeit.cms_task-queue-async': 'not-applicable',
-    'vivi_zeit.cms_whitelist-url': (
-        'egg://zeit.web.core/data/config/whitelist.xml'),
-    'vivi_zeit.web_iqd-mobile-ids': (
-        'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
-    'vivi_zeit.web_image-scales': (
-        'egg://zeit.web.core/data/config/scales.xml'),
-    'vivi_zeit.content.article_genre-url': (
-        'egg://zeit.web.core/data/config/article-genres.xml'),
-    'vivi_zeit.content.article_image-layout-source': (
-        'egg://zeit.web.core/data/config/article-image-layouts.xml'),
-    'vivi_zeit.content.article_video-layout-source': (
-        'egg://zeit.web.core/data/config/article-video-layouts.xml'),
-    'vivi_zeit.content.article_htmlblock-layout-source': (
-        'egg://zeit.web.core/data/config/article-htmlblock-layouts.xml'),
-    'vivi_zeit.content.article_template-source': (
-        'egg://zeit.web.core/data/config/article-templates.xml'),
-    'vivi_zeit.magazin_article-related-layout-source': (
-        'egg://zeit.web.core/data/config/article-related-layouts.xml'),
-    'vivi_zeit.content.cp_block-layout-source': (
-        'egg://zeit.web.core/data/config/cp-layouts.xml'),
-    'vivi_zeit.content.cp_bar-layout-source': (
-        'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
-    'vivi_zeit.content.cp_area-config-source': (
-        'egg://zeit.web.core/data/config/cp-areas.xml'),
-    'vivi_zeit.content.cp_region-config-source': (
-        'egg://zeit.web.core/data/config/cp-regions.xml'),
-    'vivi_zeit.content.cp_cp-types-url': (
-        'egg://zeit.web.core/data/config/cp-types.xml'),
-    'vivi_zeit.content.cp_cp-feed-max-items': '30',
-    'vivi_zeit.content.image_variant-source': (
-        'egg://zeit.web.core/data/config/image-variants.xml'),
-    'vivi_zeit.content.image_legacy-variant-source': (
-        'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
-    'vivi_zeit.web_banner-source': (
-        'egg://zeit.web.core/data/config/banner.xml'),
-    'vivi_zeit.web_banner-id-mappings': (
-        'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
-    'vivi_zeit.web_navigation': (
-        'egg://zeit.web.core/data/config/navigation.xml'),
-    'vivi_zeit.web_navigation-services': (
-        'egg://zeit.web.core/data/config/navigation-services.xml'),
-    'vivi_zeit.web_navigation-classifieds': (
-        'egg://zeit.web.core/data/config/navigation-classifieds.xml'),
-    'vivi_zeit.web_navigation-footer-publisher': (
-        'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
-    'vivi_zeit.web_navigation-footer-links': (
-        'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
-    'vivi_zeit.web_servicebox-source': (
-        'egg://zeit.web.core/data/config/servicebox.xml'),
-    'vivi_zeit.content.gallery_gallery-types-url': (
-        'egg://zeit.web.core/data/config/gallery-types.xml'),
-    'vivi_zeit.web_series-source': (
-        'egg://zeit.web.core/data/config/series.xml'),
-    'vivi_zeit.web_whitelist-meta-source': (
-        'egg://zeit.web.core/data/config/whitelist_meta.xml'),
-    'vivi_zeit.web_blacklist-url': (
-        'egg://zeit.web.core/data/config/blacklist.xml'),
-    'vivi_zeit.imp_scale-source': 'egg://zeit.web.core/data/config/scales.xml',
-    'vivi_zeit.content.link_source-blogs': (
-        'egg://zeit.web.core/data/config/blogs_meta.xml'),
-    'vivi_zeit.brightcove_read-url': 'http://localhost:6552/video/bc.json',
-    'vivi_zeit.brightcove_write-url': 'http://localhost:6552/video/bc.json',
-    'vivi_zeit.brightcove_read-token': 'foo',
-    'vivi_zeit.brightcove_write-token': 'bar',
-    'vivi_zeit.brightcove_index-principal': 'zope.brightcove',
-    'vivi_zeit.brightcove_timeout': '300',
-    'vivi_zeit.brightcove_video-folder': 'video',
-    'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
-    'vivi_zeit.content.video_source-serie': (
-        'egg://zeit.web.core/data/config/video-serie.xml'),
-    'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
-
-    'vivi_zeit.solr_solr-url': 'http://mock.solr',
-    'vivi_zeit.content.cp_cp-types-url': (
-        'egg://zeit.web.core/data/config/cp-types.xml'),
-    'sso_activate': '',
-    'sso_url': 'http://my_sso',
-    'sso_cookie': 'http://my_sso_cookie',
-    'debug.show_exceptions': True,
-    'debug.propagate_jinja_errors': True,
-    'debug.enable_profiler': False,
-    'dev_environment': True
-}
+@pytest.fixture(scope='session')
+def app_settings(mockserver):
+    return {
+        'pyramid.reload_templates': 'false',
+        'pyramid.debug_authorization': 'false',
+        'pyramid.debug_notfound': 'false',
+        'pyramid.debug_routematch': 'false',
+        'pyramid.debug_templates': 'false',
+        'cache.type': 'memory',
+        'cache.lock_file': '/tmp/test_lock',
+        'cache.regions': 'default_term, second, short_term, long_term',
+        'cache.second.expire': '1',
+        'cache.short_term.expire': '60',
+        'cache.default_term.expire': '300',
+        'cache.long_term.expire': '3600',
+        'scripts_url': '/js/static',
+        'liveblog_backend_url': mockserver.url + '/liveblog/backend',
+        'liveblog_status_url': mockserver.url + '/liveblog/status',
+        # XXX I'd rather put None here and change the settings for a specific
+        # test, but then I'd need to re-create an Application since
+        # assets_max_age is only evaluated once during configuration.
+        'assets_max_age': '1',
+        'caching_time_content': '5',
+        'caching_time_article': '10',
+        'caching_time_centerpage': '20',
+        'caching_time_gallery': '40',
+        'caching_time_image': '30',
+        'caching_time_videostill': '35',
+        'caching_time_external': '15',
+        'community_host': 'http://localhost:6551',
+        'community_static_host': 'http://static_community/foo',
+        'agatho_host': mockserver.url + '/comments',
+        'linkreach_host': 'egg://zeit.web.core/data/linkreach/api',
+        'google_tag_manager_host': 'foo.baz',
+        'app_servers': '',
+        'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
+        'community_host_timeout_secs': '10',
+        'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
+        'spektrum_img_host': mockserver.url + '/spektrum',
+        'node_comment_statistics': 'community/node-comment-statistics.xml',
+        'default_teaser_images': (
+            'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
+        'connector_type': 'mock',
+        'vgwort_url': 'http://example.com/vgwort',
+        'breaking_news_config': (
+            'http://xml.zeit.de/eilmeldung/homepage-banner'),
+        'breaking_news_timeout': 2 * 60 * 60,
+        'enable_third_party_modules': '',
+        'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
+        'vivi_zeit.cms_keyword-configuration': (
+            'egg://zeit.cms.tagging.tests/keywords_config.xml'),
+        'vivi_zeit.cms_source-badges': 'egg://zeit.cms.asset/badges.xml',
+        'vivi_zeit.cms_source-banners': 'egg://zeit.cms.content/banners.xml',
+        'vivi_zeit.cms_source-keyword': (
+            'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
+        'vivi_zeit.cms_source-navigation': (
+            'egg://zeit.cms.content/navigation.xml'),
+        'vivi_zeit.cms_source-channels': (
+            'egg://zeit.cms.content/navigation.xml'),
+        'vivi_zeit.cms_source-products': (
+            'egg://zeit.web.core/data/config/products.xml'),
+        'vivi_zeit.cms_source-serie': (
+            'egg://zeit.web.core/data/config/series.xml'),
+        'vivi_zeit.cms_task-queue-async': 'not-applicable',
+        'vivi_zeit.cms_whitelist-url': (
+            'egg://zeit.web.core/data/config/whitelist.xml'),
+        'vivi_zeit.web_iqd-mobile-ids': (
+            'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
+        'vivi_zeit.web_image-scales': (
+            'egg://zeit.web.core/data/config/scales.xml'),
+        'vivi_zeit.content.article_genre-url': (
+            'egg://zeit.web.core/data/config/article-genres.xml'),
+        'vivi_zeit.content.article_image-layout-source': (
+            'egg://zeit.web.core/data/config/article-image-layouts.xml'),
+        'vivi_zeit.content.article_video-layout-source': (
+            'egg://zeit.web.core/data/config/article-video-layouts.xml'),
+        'vivi_zeit.content.article_htmlblock-layout-source': (
+            'egg://zeit.web.core/data/config/article-htmlblock-layouts.xml'),
+        'vivi_zeit.content.article_template-source': (
+            'egg://zeit.web.core/data/config/article-templates.xml'),
+        'vivi_zeit.magazin_article-related-layout-source': (
+            'egg://zeit.web.core/data/config/article-related-layouts.xml'),
+        'vivi_zeit.content.cp_block-layout-source': (
+            'egg://zeit.web.core/data/config/cp-layouts.xml'),
+        'vivi_zeit.content.cp_bar-layout-source': (
+            'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
+        'vivi_zeit.content.cp_area-config-source': (
+            'egg://zeit.web.core/data/config/cp-areas.xml'),
+        'vivi_zeit.content.cp_region-config-source': (
+            'egg://zeit.web.core/data/config/cp-regions.xml'),
+        'vivi_zeit.content.cp_cp-types-url': (
+            'egg://zeit.web.core/data/config/cp-types.xml'),
+        'vivi_zeit.content.cp_cp-feed-max-items': '30',
+        'vivi_zeit.content.image_variant-source': (
+            'egg://zeit.web.core/data/config/image-variants.xml'),
+        'vivi_zeit.content.image_legacy-variant-source': (
+            'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
+        'vivi_zeit.web_banner-source': (
+            'egg://zeit.web.core/data/config/banner.xml'),
+        'vivi_zeit.web_banner-id-mappings': (
+            'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
+        'vivi_zeit.web_navigation': (
+            'egg://zeit.web.core/data/config/navigation.xml'),
+        'vivi_zeit.web_navigation-services': (
+            'egg://zeit.web.core/data/config/navigation-services.xml'),
+        'vivi_zeit.web_navigation-classifieds': (
+            'egg://zeit.web.core/data/config/navigation-classifieds.xml'),
+        'vivi_zeit.web_navigation-footer-publisher': (
+            'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
+        'vivi_zeit.web_navigation-footer-links': (
+            'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
+        'vivi_zeit.web_servicebox-source': (
+            'egg://zeit.web.core/data/config/servicebox.xml'),
+        'vivi_zeit.content.gallery_gallery-types-url': (
+            'egg://zeit.web.core/data/config/gallery-types.xml'),
+        'vivi_zeit.web_series-source': (
+            'egg://zeit.web.core/data/config/series.xml'),
+        'vivi_zeit.web_whitelist-meta-source': (
+            'egg://zeit.web.core/data/config/whitelist_meta.xml'),
+        'vivi_zeit.web_blacklist-url': (
+            'egg://zeit.web.core/data/config/blacklist.xml'),
+        'vivi_zeit.imp_scale-source':
+            'egg://zeit.web.core/data/config/scales.xml',
+        'vivi_zeit.content.link_source-blogs': (
+            'egg://zeit.web.core/data/config/blogs_meta.xml'),
+        'vivi_zeit.brightcove_read-url': mockserver.url + '/video/bc.json',
+        'vivi_zeit.brightcove_write-url': mockserver.url + '/video/bc.json',
+        'vivi_zeit.brightcove_read-token': 'foo',
+        'vivi_zeit.brightcove_write-token': 'bar',
+        'vivi_zeit.brightcove_index-principal': 'zope.brightcove',
+        'vivi_zeit.brightcove_timeout': '300',
+        'vivi_zeit.brightcove_video-folder': 'video',
+        'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
+        'vivi_zeit.content.video_source-serie': (
+            'egg://zeit.web.core/data/config/video-serie.xml'),
+        'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
+        'vivi_zeit.solr_solr-url': 'http://mock.solr',
+        'vivi_zeit.content.cp_cp-types-url': (
+            'egg://zeit.web.core/data/config/cp-types.xml'),
+        'sso_activate': '',
+        'sso_url': 'http://my_sso',
+        'sso_cookie': 'http://my_sso_cookie',
+        'debug.show_exceptions': True,
+        'debug.propagate_jinja_errors': True,
+        'debug.enable_profiler': False,
+        'dev_environment': True,
+    }
 
 
 browsers = {
@@ -196,12 +197,6 @@ def test_asset(path):
     """Return file-object for given test asset path."""
     return open(pkg_resources.resource_filename(
         'zeit.web.core', 'data' + path), 'rb')
-
-
-@pytest.fixture
-def app_settings():
-    return zeit.web.core.utils.defaultattrdict(
-        lambda *_: None, settings.iteritems())
 
 
 @pytest.fixture
@@ -243,12 +238,12 @@ def zodb(application_session, request):
 
 
 @pytest.fixture(scope='session')
-def application_session(request):
+def application_session(app_settings, request):
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     factory = zeit.web.core.application.Application()
-    app = factory({}, **settings)
+    app = factory({}, **app_settings)
     # ZODB needs to come after ZCML is set up by the Application.
     # Putting it in here is simpler than adding yet another fixture.
     ZODB_LAYER.setUp()
@@ -260,7 +255,25 @@ def application_session(request):
 
 
 @pytest.fixture
-def application(application_session, zodb, request):
+def preserve_settings(application_session, request):
+    def restore_settings():
+        settings = zope.component.queryUtility(
+            zeit.web.core.interfaces.ISettings)
+        if settings is not None and settings_orig is not None:
+            for key, value in settings_orig.items():
+                settings[key] = value
+            for key in list(settings):
+                if key not in settings_orig:
+                    del settings[key]
+    settings_orig = None
+    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
+    if settings is not None:
+        request.addfinalizer(restore_settings)
+        settings_orig = copy.copy(settings)
+
+
+@pytest.fixture
+def application(application_session, preserve_settings, zodb, request):
     # This application_session/application split is a bit clumsy, but some
     # things (e.g. reset connector, teardown zodb) needs to be called after
     # each test (i.e. in 'function' scope). The many diverse fixtures make this
@@ -268,15 +281,6 @@ def application(application_session, zodb, request):
     # ``application``, ``testbrowser``), but if it's needed elsewhere, it has
     # to be integrated explicitly.
     request.addfinalizer(reset_connector)
-
-    def restore_settings():
-        settings = zope.component.getUtility(
-            zeit.web.core.interfaces.ISettings)
-        settings.__init__(settings_orig)
-    request.addfinalizer(restore_settings)
-    settings_orig = copy.copy(zope.component.getUtility(
-        zeit.web.core.interfaces.ISettings))
-
     return application_session
 
 
@@ -300,11 +304,11 @@ def workingcopy(application, zodb, request):
 # convenient than having to create an entirely new one just for that purpose,
 # but I can't find a way to temporarily de-register a pyramid view.
 @pytest.fixture
-def debug_application(request):
+def debug_application(app_settings, request):
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
-    app_settings = settings.copy()
+    app_settings = app_settings.copy()
     app_settings['debug.show_exceptions'] = ''
     app_settings['debug.propagate_jinja_errors'] = ''
     return repoze.bitblt.processor.ImageTransformationMiddleware(
@@ -315,33 +319,40 @@ def debug_application(request):
 
 @pytest.fixture
 def config(application, request):
-    config = pyramid.testing.setUp(settings=settings, hook_zca=False)
+    config = pyramid.testing.setUp(
+        settings=application.zeit_app.config.registry.settings, hook_zca=False)
     request.addfinalizer(lambda: pyramid.testing.tearDown(unhook_zca=False))
     return config
 
 
 @pytest.fixture
-def dummy_request(request, config, app_settings):
+def dummy_request(request, config):
     req = pyramid.testing.DummyRequest(is_xhr=False)
     req.response.headers = set()
-    req.registry.settings = app_settings
+    req.registry.settings = config.registry.settings
     req.matched_route = None
     config.manager.get()['request'] = req
     return req
 
 
 @pytest.fixture(scope='function')
-def mockserver_factory(request):
-    def factory(response=None):
-        def mock_app(env, start_response):
-            start_response('200 OK', [])
-            return [response]
-        server = gocept.httpserverlayer.wsgi.Layer()
-        server.port = 6551
-        server.wsgi_app = mock_app
-        server.setUp()
-        server.url = 'http://%s' % server['http_address']
-        request.addfinalizer(server.tearDown)
+def mockserver_factory(preserve_settings, request):
+    def mock_app(env, start_response):
+        start_response('200 OK', [])
+        return [mock_response[0].format(server=server.url)]
+    mock_response = ['']
+
+    server = gocept.httpserverlayer.wsgi.Layer()
+    server.wsgi_app = mock_app
+    server.setUp()
+    server.url = 'http://%s' % server['http_address']
+    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
+    if settings is not None:
+        settings['community_host'] = server.url
+    request.addfinalizer(server.tearDown)
+
+    def factory(response=''):
+        mock_response[0] = response
         return server
     return factory
 
@@ -369,13 +380,36 @@ def sleep_tween(handler, registry):
     return timeout
 
 
+class StaticViewMaybeReplaceHostURL(pyramid.static.static_view):
+
+    def __call__(self, context, request):
+        response = super(StaticViewMaybeReplaceHostURL, self).__call__(
+            context, request)
+        if response.content_type in ['application/xml']:
+            # Dear pyramid.response.FileResponse, would it kill you to
+            # *remember* the path you are passed? Now we have to copy&paste
+            # from the superclass and determine the path again.
+            path_tuple = pyramid.traversal.traversal_path_info(
+                request.environ['PATH_INFO'])
+            path = pyramid.static._secure_path(path_tuple)
+            filepath = os.path.normcase(os.path.normpath(os.path.join(
+                self.norm_docroot, path)))
+            contents = open(filepath).read().replace(
+                '%HOST%', request.route_url('static', subpath=''))
+            response.app_iter = pyramid.response.FileIter(StringIO(contents))
+        return response
+
+
 @pytest.fixture(scope='session')
 def mockserver(request):
     """Used for mocking external HTTP dependencies like agatho or spektrum."""
     from pyramid.config import Configurator
 
     config = Configurator()
-    config.add_static_view('/', 'zeit.web.core:data/')
+    config.add_route('static', '/*subpath')
+    config.add_view(StaticViewMaybeReplaceHostURL(
+        pkg_resources.resource_filename('zeit.web.core', 'data')),
+        route_name='static')
     settings = {'sleep': 0}
     settings = pyramid.config.settings.Settings(d=settings)
     interface = ISettings
@@ -384,7 +418,6 @@ def mockserver(request):
     config.add_tween('zeit.web.core.test.conftest.sleep_tween')
     app = config.make_wsgi_app()
     server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 6552
     server.wsgi_app = app
     server.setUp()
     server.settings = settings
@@ -394,9 +427,8 @@ def mockserver(request):
 
 
 @pytest.fixture(scope='session')
-def testserver(application_session, request, mockserver):
+def testserver(application_session, request):
     server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 6543
     server.wsgi_app = application_session
     server.setUp()
     server.url = 'http://%s' % server['http_address']
@@ -419,7 +451,7 @@ def http_testserver(request):
     app = config.make_wsgi_app()
 
     server = gocept.httpserverlayer.wsgi.Layer()
-    server.port = 8889  # XXX Why not use the default (random) port?
+    server.url = 'http://%s' % server['http_address']
     server.wsgi_app = app
     server.setUp()
     request.addfinalizer(server.tearDown)
@@ -498,10 +530,12 @@ def css_selector(request):
 
 
 @pytest.fixture
-def comment_counter(app_settings, application):
+def comment_counter(application):
     def get_count(**kwargs):
+        settings = zope.component.queryUtility(
+            zeit.web.core.interfaces.ISettings)
         request = pyramid.testing.DummyRequest()
-        request.registry.settings = app_settings
+        request.registry.settings = settings
         request.GET = kwargs
         return zeit.web.core.view.json_comment_count(request)
     return get_count
