@@ -4,6 +4,10 @@ Change log for zeit.web
 2.8 (unreleased)
 ----------------
 
+- ZON-2266: Show empty buzzbox, if reach is down
+
+- FIX: total_pages TypeError (Bugsnag)
+
 - CONFIG [hg only]: Change number of top-level-comments in config to 4 
 
 
