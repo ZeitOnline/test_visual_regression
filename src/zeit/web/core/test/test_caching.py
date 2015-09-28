@@ -38,7 +38,7 @@ def test_caching_time_for_image_should_respect_group_expires(application):
     expires = now + timedelta(seconds=5)
     workflow = zeit.cms.workflow.interfaces.IPublishInfo(group)
     workflow.released_to = expires
-    with mock.patch('zeit.web.core.cache.datetime') as mock_datetime:
+    with mock.patch('zeit.web.core.image.datetime') as mock_datetime:
         mock_datetime.now.return_value = now
         assert zeit.web.core.cache.ICachingTime(group['wide']) == 5
 
@@ -52,7 +52,7 @@ def test_already_expired_image_should_have_caching_time_zero(application):
     expires = now - timedelta(seconds=5)
     workflow = zeit.cms.workflow.interfaces.IPublishInfo(group)
     workflow.released_to = expires
-    with mock.patch('zeit.web.core.cache.datetime') as mock_datetime:
+    with mock.patch('zeit.web.core.image.datetime') as mock_datetime:
         mock_datetime.now.return_value = now
         assert zeit.web.core.cache.ICachingTime(group['wide']) == 0
 
