@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.7 (unreleased)
+2.8 (unreleased)
+----------------
+
+- Nothing changed yet.
+
+
+2.7 (2015-09-25)
 ----------------
 
 - ZON-2259: Shorter caching for articles with unloadable comment thread
