@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import mock
+import pyramid.testing
 import pytest
 
 import zeit.cms.interfaces
@@ -20,7 +20,8 @@ def tpm(me):
 def test_banner_toggles_viewport_zoom(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/zeitonline')
-    view = zeit.web.site.view_centerpage.Centerpage(context, mock.Mock())
+    view = zeit.web.site.view_centerpage.Centerpage(
+        context, pyramid.testing.DummyRequest())
     assert view.banner_toggles('viewport_zoom') == 'tablet'
 
 
