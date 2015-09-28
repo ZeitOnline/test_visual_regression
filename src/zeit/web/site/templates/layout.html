@@ -191,6 +191,10 @@
         {%- include "zeit.web.site:templates/inc/overlay.html" ignore missing -%}
     {% endif %}
 
+    {% block adblocker_count %}
+        <div class="ad" id="iqadtile3999" data-banner-hide="desktop"></div>
+    {% endblock %}
+
     <script src="{{ request.asset_url('js/site.js') }}"></script>
 
     {% if view.vgwort_url %}
