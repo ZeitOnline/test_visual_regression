@@ -262,7 +262,11 @@ def preserve_settings(application_session, request):
         settings = zope.component.queryUtility(
             zeit.web.core.interfaces.ISettings)
         if settings is not None and settings_orig is not None:
-            settings.__init__(settings_orig)
+            for key, value in settings_orig.items():
+                settings[key] = value
+            for key in list(settings):
+                if key not in settings_orig:
+                    del settings[key]
     settings_orig = None
     settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
     if settings is not None:
