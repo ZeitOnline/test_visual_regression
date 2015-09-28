@@ -17,11 +17,11 @@ import zeit.web.core.interfaces
 
 
 @pytest.fixture
-def app_request(application, request):
+def app_request(application, app_settings, request):
     plone.testing.zca.pushGlobalRegistry()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     app = zeit.web.core.application.Application()
-    app.settings = zeit.web.core.test.conftest.settings.copy()
+    app.settings = app_settings.copy()
     app.settings['asset_prefix'] = '/assets'
     config = app.configure_pyramid()
     config.commit()

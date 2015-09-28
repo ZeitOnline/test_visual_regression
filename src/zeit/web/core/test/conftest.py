@@ -36,7 +36,9 @@ import zeit.web.core.utils
 import zeit.web.core.view
 
 
-settings = {
+@pytest.fixture(scope='session')
+def app_settings(mockserver):
+    return {
     'pyramid.reload_templates': 'false',
     'pyramid.debug_authorization': 'false',
     'pyramid.debug_notfound': 'false',
@@ -50,8 +52,8 @@ settings = {
     'cache.default_term.expire': '300',
     'cache.long_term.expire': '3600',
     'scripts_url': '/js/static',
-    'liveblog_backend_url': 'http://localhost:6552/liveblog/backend',
-    'liveblog_status_url': 'http://localhost:6552/liveblog/status',
+    'liveblog_backend_url': mockserver.url + '/liveblog/backend',
+    'liveblog_status_url': mockserver.url + '/liveblog/status',
     # XXX I'd rather put None here and change the settings for a specific test,
     # but then I'd need to re-create an Application since assets_max_age
     # is only evaluated once during configuration.
@@ -65,14 +67,14 @@ settings = {
     'caching_time_external': '15',
     'community_host': 'http://localhost:6551',
     'community_static_host': 'http://static_community/foo',
-    'agatho_host': 'http://localhost:6552/comments',
+    'agatho_host': mockserver.url + '/comments',
     'linkreach_host': 'egg://zeit.web.core/data/linkreach/api',
     'google_tag_manager_host': 'foo.baz',
     'app_servers': '',
     'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
     'community_host_timeout_secs': '10',
-    'spektrum_hp_feed': 'http://localhost:6552/spektrum/feed.xml',
-    'spektrum_img_host': 'http://localhost:6552/spektrum',
+    'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
+    'spektrum_img_host': mockserver.url + '/spektrum',
     'node_comment_statistics': 'community/node-comment-statistics.xml',
     'default_teaser_images': (
         'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
@@ -158,8 +160,8 @@ settings = {
     'vivi_zeit.imp_scale-source': 'egg://zeit.web.core/data/config/scales.xml',
     'vivi_zeit.content.link_source-blogs': (
         'egg://zeit.web.core/data/config/blogs_meta.xml'),
-    'vivi_zeit.brightcove_read-url': 'http://localhost:6552/video/bc.json',
-    'vivi_zeit.brightcove_write-url': 'http://localhost:6552/video/bc.json',
+    'vivi_zeit.brightcove_read-url': mockserver.url + '/video/bc.json',
+    'vivi_zeit.brightcove_write-url': mockserver.url + '/video/bc.json',
     'vivi_zeit.brightcove_read-token': 'foo',
     'vivi_zeit.brightcove_write-token': 'bar',
     'vivi_zeit.brightcove_index-principal': 'zope.brightcove',
@@ -240,12 +242,12 @@ def zodb(application_session, request):
 
 
 @pytest.fixture(scope='session')
-def application_session(request):
+def application_session(app_settings, request):
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     factory = zeit.web.core.application.Application()
-    app = factory({}, **settings)
+    app = factory({}, **app_settings)
     # ZODB needs to come after ZCML is set up by the Application.
     # Putting it in here is simpler than adding yet another fixture.
     ZODB_LAYER.setUp()
@@ -306,11 +308,11 @@ def workingcopy(application, zodb, request):
 # convenient than having to create an entirely new one just for that purpose,
 # but I can't find a way to temporarily de-register a pyramid view.
 @pytest.fixture
-def debug_application(request):
+def debug_application(app_settings, request):
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
-    app_settings = settings.copy()
+    app_settings = app_settings.copy()
     app_settings['debug.show_exceptions'] = ''
     app_settings['debug.propagate_jinja_errors'] = ''
     return repoze.bitblt.processor.ImageTransformationMiddleware(
@@ -321,7 +323,8 @@ def debug_application(request):
 
 @pytest.fixture
 def config(application, request):
-    config = pyramid.testing.setUp(settings=settings, hook_zca=False)
+    config = pyramid.testing.setUp(
+        settings=application.zeit_app.config.registry.settings, hook_zca=False)
     request.addfinalizer(lambda: pyramid.testing.tearDown(unhook_zca=False))
     return config
 
@@ -330,7 +333,7 @@ def config(application, request):
 def dummy_request(request, config):
     req = pyramid.testing.DummyRequest(is_xhr=False)
     req.response.headers = set()
-    req.registry.settings = settings.copy()
+    req.registry.settings = config.registry.settings
     req.matched_route = None
     config.manager.get()['request'] = req
     return req
@@ -428,18 +431,7 @@ def mockserver(request):
 
 
 @pytest.fixture(scope='session')
-def testserver(application_session, request, mockserver):
-    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings['agatho_host'] = mockserver.url + '/comments'
-    settings['spektrum_hp_feed'] = mockserver.url + '/spektrum/feed.xml'
-    settings['spektrum_img_host'] = mockserver.url + '/spektrum'
-    settings['liveblog_backend_url'] = mockserver.url + '/liveblog/backend'
-    settings['liveblog_status_url'] = mockserver.url + '/liveblog/status'
-    settings[
-        'vivi_zeit.brightcove_read-url'] = mockserver.url + '/video/bc.json'
-    settings[
-        'vivi_zeit.brightcove_write-url'] = mockserver.url + '/video/bc.json'
-
+def testserver(application_session, request):
     server = gocept.httpserverlayer.wsgi.Layer()
     server.wsgi_app = application_session
     server.setUp()
