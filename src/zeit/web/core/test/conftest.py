@@ -7,7 +7,6 @@ import pkg_resources
 
 import cssselect
 import gocept.httpserverlayer.wsgi
-import lxml.etree
 import lxml.html
 import plone.testing.zca
 import plone.testing.zodb
@@ -26,163 +25,160 @@ import zope.processlifetime
 import zope.testbrowser.browser
 
 import zeit.content.image.interfaces
-import zeit.cms.interfaces
 
 import zeit.web.core
 import zeit.web.core.application
-import zeit.web.core.comments
 import zeit.web.core.traversal
-import zeit.web.core.utils
 import zeit.web.core.view
 
 
 @pytest.fixture(scope='session')
 def app_settings(mockserver):
     return {
-    'pyramid.reload_templates': 'false',
-    'pyramid.debug_authorization': 'false',
-    'pyramid.debug_notfound': 'false',
-    'pyramid.debug_routematch': 'false',
-    'pyramid.debug_templates': 'false',
-    'cache.type': 'memory',
-    'cache.lock_file': '/tmp/test_lock',
-    'cache.regions': 'default_term, second, short_term, long_term',
-    'cache.second.expire': '1',
-    'cache.short_term.expire': '60',
-    'cache.default_term.expire': '300',
-    'cache.long_term.expire': '3600',
-    'scripts_url': '/js/static',
-    'liveblog_backend_url': mockserver.url + '/liveblog/backend',
-    'liveblog_status_url': mockserver.url + '/liveblog/status',
-    # XXX I'd rather put None here and change the settings for a specific test,
-    # but then I'd need to re-create an Application since assets_max_age
-    # is only evaluated once during configuration.
-    'assets_max_age': '1',
-    'caching_time_content': '5',
-    'caching_time_article': '10',
-    'caching_time_centerpage': '20',
-    'caching_time_gallery': '40',
-    'caching_time_image': '30',
-    'caching_time_videostill': '35',
-    'caching_time_external': '15',
-    'community_host': 'http://localhost:6551',
-    'community_static_host': 'http://static_community/foo',
-    'agatho_host': mockserver.url + '/comments',
-    'linkreach_host': 'egg://zeit.web.core/data/linkreach/api',
-    'google_tag_manager_host': 'foo.baz',
-    'app_servers': '',
-    'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
-    'community_host_timeout_secs': '10',
-    'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
-    'spektrum_img_host': mockserver.url + '/spektrum',
-    'node_comment_statistics': 'community/node-comment-statistics.xml',
-    'default_teaser_images': (
-        'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
-    'connector_type': 'mock',
-    'vgwort_url': 'http://example.com/vgwort',
-    'breaking_news_config': (
-        'http://xml.zeit.de/eilmeldung/homepage-banner'),
-    'breaking_news_timeout': 2 * 60 * 60,
-    'enable_third_party_modules': '',
-    'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
-    'vivi_zeit.cms_keyword-configuration': (
-        'egg://zeit.cms.tagging.tests/keywords_config.xml'),
-    'vivi_zeit.cms_source-badges': 'egg://zeit.cms.asset/badges.xml',
-    'vivi_zeit.cms_source-banners': 'egg://zeit.cms.content/banners.xml',
-    'vivi_zeit.cms_source-keyword': (
-        'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
-    'vivi_zeit.cms_source-navigation': (
-        'egg://zeit.cms.content/navigation.xml'),
-    'vivi_zeit.cms_source-channels': (
-        'egg://zeit.cms.content/navigation.xml'),
-    'vivi_zeit.cms_source-products': (
-        'egg://zeit.web.core/data/config/products.xml'),
-    'vivi_zeit.cms_source-serie': (
-        'egg://zeit.web.core/data/config/series.xml'),
-    'vivi_zeit.cms_task-queue-async': 'not-applicable',
-    'vivi_zeit.cms_whitelist-url': (
-        'egg://zeit.web.core/data/config/whitelist.xml'),
-    'vivi_zeit.web_iqd-mobile-ids': (
-        'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
-    'vivi_zeit.web_image-scales': (
-        'egg://zeit.web.core/data/config/scales.xml'),
-    'vivi_zeit.content.article_genre-url': (
-        'egg://zeit.web.core/data/config/article-genres.xml'),
-    'vivi_zeit.content.article_image-layout-source': (
-        'egg://zeit.web.core/data/config/article-image-layouts.xml'),
-    'vivi_zeit.content.article_video-layout-source': (
-        'egg://zeit.web.core/data/config/article-video-layouts.xml'),
-    'vivi_zeit.content.article_htmlblock-layout-source': (
-        'egg://zeit.web.core/data/config/article-htmlblock-layouts.xml'),
-    'vivi_zeit.content.article_template-source': (
-        'egg://zeit.web.core/data/config/article-templates.xml'),
-    'vivi_zeit.magazin_article-related-layout-source': (
-        'egg://zeit.web.core/data/config/article-related-layouts.xml'),
-    'vivi_zeit.content.cp_block-layout-source': (
-        'egg://zeit.web.core/data/config/cp-layouts.xml'),
-    'vivi_zeit.content.cp_bar-layout-source': (
-        'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
-    'vivi_zeit.content.cp_area-config-source': (
-        'egg://zeit.web.core/data/config/cp-areas.xml'),
-    'vivi_zeit.content.cp_region-config-source': (
-        'egg://zeit.web.core/data/config/cp-regions.xml'),
-    'vivi_zeit.content.cp_cp-types-url': (
-        'egg://zeit.web.core/data/config/cp-types.xml'),
-    'vivi_zeit.content.cp_cp-feed-max-items': '30',
-    'vivi_zeit.content.image_variant-source': (
-        'egg://zeit.web.core/data/config/image-variants.xml'),
-    'vivi_zeit.content.image_legacy-variant-source': (
-        'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
-    'vivi_zeit.web_banner-source': (
-        'egg://zeit.web.core/data/config/banner.xml'),
-    'vivi_zeit.web_banner-id-mappings': (
-        'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
-    'vivi_zeit.web_navigation': (
-        'egg://zeit.web.core/data/config/navigation.xml'),
-    'vivi_zeit.web_navigation-services': (
-        'egg://zeit.web.core/data/config/navigation-services.xml'),
-    'vivi_zeit.web_navigation-classifieds': (
-        'egg://zeit.web.core/data/config/navigation-classifieds.xml'),
-    'vivi_zeit.web_navigation-footer-publisher': (
-        'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
-    'vivi_zeit.web_navigation-footer-links': (
-        'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
-    'vivi_zeit.web_servicebox-source': (
-        'egg://zeit.web.core/data/config/servicebox.xml'),
-    'vivi_zeit.content.gallery_gallery-types-url': (
-        'egg://zeit.web.core/data/config/gallery-types.xml'),
-    'vivi_zeit.web_series-source': (
-        'egg://zeit.web.core/data/config/series.xml'),
-    'vivi_zeit.web_whitelist-meta-source': (
-        'egg://zeit.web.core/data/config/whitelist_meta.xml'),
-    'vivi_zeit.web_blacklist-url': (
-        'egg://zeit.web.core/data/config/blacklist.xml'),
-    'vivi_zeit.imp_scale-source': 'egg://zeit.web.core/data/config/scales.xml',
-    'vivi_zeit.content.link_source-blogs': (
-        'egg://zeit.web.core/data/config/blogs_meta.xml'),
-    'vivi_zeit.brightcove_read-url': mockserver.url + '/video/bc.json',
-    'vivi_zeit.brightcove_write-url': mockserver.url + '/video/bc.json',
-    'vivi_zeit.brightcove_read-token': 'foo',
-    'vivi_zeit.brightcove_write-token': 'bar',
-    'vivi_zeit.brightcove_index-principal': 'zope.brightcove',
-    'vivi_zeit.brightcove_timeout': '300',
-    'vivi_zeit.brightcove_video-folder': 'video',
-    'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
-    'vivi_zeit.content.video_source-serie': (
-        'egg://zeit.web.core/data/config/video-serie.xml'),
-    'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
-
-    'vivi_zeit.solr_solr-url': 'http://mock.solr',
-    'vivi_zeit.content.cp_cp-types-url': (
-        'egg://zeit.web.core/data/config/cp-types.xml'),
-    'sso_activate': '',
-    'sso_url': 'http://my_sso',
-    'sso_cookie': 'http://my_sso_cookie',
-    'debug.show_exceptions': True,
-    'debug.propagate_jinja_errors': True,
-    'debug.enable_profiler': False,
-    'dev_environment': True
-}
+        'pyramid.reload_templates': 'false',
+        'pyramid.debug_authorization': 'false',
+        'pyramid.debug_notfound': 'false',
+        'pyramid.debug_routematch': 'false',
+        'pyramid.debug_templates': 'false',
+        'cache.type': 'memory',
+        'cache.lock_file': '/tmp/test_lock',
+        'cache.regions': 'default_term, second, short_term, long_term',
+        'cache.second.expire': '1',
+        'cache.short_term.expire': '60',
+        'cache.default_term.expire': '300',
+        'cache.long_term.expire': '3600',
+        'scripts_url': '/js/static',
+        'liveblog_backend_url': mockserver.url + '/liveblog/backend',
+        'liveblog_status_url': mockserver.url + '/liveblog/status',
+        # XXX I'd rather put None here and change the settings for a specific
+        # test, but then I'd need to re-create an Application since
+        # assets_max_age is only evaluated once during configuration.
+        'assets_max_age': '1',
+        'caching_time_content': '5',
+        'caching_time_article': '10',
+        'caching_time_centerpage': '20',
+        'caching_time_gallery': '40',
+        'caching_time_image': '30',
+        'caching_time_videostill': '35',
+        'caching_time_external': '15',
+        'community_host': 'http://localhost:6551',
+        'community_static_host': 'http://static_community/foo',
+        'agatho_host': mockserver.url + '/comments',
+        'linkreach_host': 'egg://zeit.web.core/data/linkreach/api',
+        'google_tag_manager_host': 'foo.baz',
+        'app_servers': '',
+        'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
+        'community_host_timeout_secs': '10',
+        'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
+        'spektrum_img_host': mockserver.url + '/spektrum',
+        'node_comment_statistics': 'community/node-comment-statistics.xml',
+        'default_teaser_images': (
+            'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
+        'connector_type': 'mock',
+        'vgwort_url': 'http://example.com/vgwort',
+        'breaking_news_config': (
+            'http://xml.zeit.de/eilmeldung/homepage-banner'),
+        'breaking_news_timeout': 2 * 60 * 60,
+        'enable_third_party_modules': '',
+        'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
+        'vivi_zeit.cms_keyword-configuration': (
+            'egg://zeit.cms.tagging.tests/keywords_config.xml'),
+        'vivi_zeit.cms_source-badges': 'egg://zeit.cms.asset/badges.xml',
+        'vivi_zeit.cms_source-banners': 'egg://zeit.cms.content/banners.xml',
+        'vivi_zeit.cms_source-keyword': (
+            'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
+        'vivi_zeit.cms_source-navigation': (
+            'egg://zeit.cms.content/navigation.xml'),
+        'vivi_zeit.cms_source-channels': (
+            'egg://zeit.cms.content/navigation.xml'),
+        'vivi_zeit.cms_source-products': (
+            'egg://zeit.web.core/data/config/products.xml'),
+        'vivi_zeit.cms_source-serie': (
+            'egg://zeit.web.core/data/config/series.xml'),
+        'vivi_zeit.cms_task-queue-async': 'not-applicable',
+        'vivi_zeit.cms_whitelist-url': (
+            'egg://zeit.web.core/data/config/whitelist.xml'),
+        'vivi_zeit.web_iqd-mobile-ids': (
+            'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
+        'vivi_zeit.web_image-scales': (
+            'egg://zeit.web.core/data/config/scales.xml'),
+        'vivi_zeit.content.article_genre-url': (
+            'egg://zeit.web.core/data/config/article-genres.xml'),
+        'vivi_zeit.content.article_image-layout-source': (
+            'egg://zeit.web.core/data/config/article-image-layouts.xml'),
+        'vivi_zeit.content.article_video-layout-source': (
+            'egg://zeit.web.core/data/config/article-video-layouts.xml'),
+        'vivi_zeit.content.article_htmlblock-layout-source': (
+            'egg://zeit.web.core/data/config/article-htmlblock-layouts.xml'),
+        'vivi_zeit.content.article_template-source': (
+            'egg://zeit.web.core/data/config/article-templates.xml'),
+        'vivi_zeit.magazin_article-related-layout-source': (
+            'egg://zeit.web.core/data/config/article-related-layouts.xml'),
+        'vivi_zeit.content.cp_block-layout-source': (
+            'egg://zeit.web.core/data/config/cp-layouts.xml'),
+        'vivi_zeit.content.cp_bar-layout-source': (
+            'egg://zeit.web.core/data/config/cp-bar-layouts.xml'),
+        'vivi_zeit.content.cp_area-config-source': (
+            'egg://zeit.web.core/data/config/cp-areas.xml'),
+        'vivi_zeit.content.cp_region-config-source': (
+            'egg://zeit.web.core/data/config/cp-regions.xml'),
+        'vivi_zeit.content.cp_cp-types-url': (
+            'egg://zeit.web.core/data/config/cp-types.xml'),
+        'vivi_zeit.content.cp_cp-feed-max-items': '30',
+        'vivi_zeit.content.image_variant-source': (
+            'egg://zeit.web.core/data/config/image-variants.xml'),
+        'vivi_zeit.content.image_legacy-variant-source': (
+            'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
+        'vivi_zeit.web_banner-source': (
+            'egg://zeit.web.core/data/config/banner.xml'),
+        'vivi_zeit.web_banner-id-mappings': (
+            'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
+        'vivi_zeit.web_navigation': (
+            'egg://zeit.web.core/data/config/navigation.xml'),
+        'vivi_zeit.web_navigation-services': (
+            'egg://zeit.web.core/data/config/navigation-services.xml'),
+        'vivi_zeit.web_navigation-classifieds': (
+            'egg://zeit.web.core/data/config/navigation-classifieds.xml'),
+        'vivi_zeit.web_navigation-footer-publisher': (
+            'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
+        'vivi_zeit.web_navigation-footer-links': (
+            'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
+        'vivi_zeit.web_servicebox-source': (
+            'egg://zeit.web.core/data/config/servicebox.xml'),
+        'vivi_zeit.content.gallery_gallery-types-url': (
+            'egg://zeit.web.core/data/config/gallery-types.xml'),
+        'vivi_zeit.web_series-source': (
+            'egg://zeit.web.core/data/config/series.xml'),
+        'vivi_zeit.web_whitelist-meta-source': (
+            'egg://zeit.web.core/data/config/whitelist_meta.xml'),
+        'vivi_zeit.web_blacklist-url': (
+            'egg://zeit.web.core/data/config/blacklist.xml'),
+        'vivi_zeit.imp_scale-source':
+            'egg://zeit.web.core/data/config/scales.xml',
+        'vivi_zeit.content.link_source-blogs': (
+            'egg://zeit.web.core/data/config/blogs_meta.xml'),
+        'vivi_zeit.brightcove_read-url': mockserver.url + '/video/bc.json',
+        'vivi_zeit.brightcove_write-url': mockserver.url + '/video/bc.json',
+        'vivi_zeit.brightcove_read-token': 'foo',
+        'vivi_zeit.brightcove_write-token': 'bar',
+        'vivi_zeit.brightcove_index-principal': 'zope.brightcove',
+        'vivi_zeit.brightcove_timeout': '300',
+        'vivi_zeit.brightcove_video-folder': 'video',
+        'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
+        'vivi_zeit.content.video_source-serie': (
+            'egg://zeit.web.core/data/config/video-serie.xml'),
+        'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
+        'vivi_zeit.solr_solr-url': 'http://mock.solr',
+        'vivi_zeit.content.cp_cp-types-url': (
+            'egg://zeit.web.core/data/config/cp-types.xml'),
+        'sso_activate': '',
+        'sso_url': 'http://my_sso',
+        'sso_cookie': 'http://my_sso_cookie',
+        'debug.show_exceptions': True,
+        'debug.propagate_jinja_errors': True,
+        'debug.enable_profiler': False,
+        'dev_environment': True,
+    }
 
 
 browsers = {
