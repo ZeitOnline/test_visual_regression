@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - MAINT: Add tests and more tracking to popover
 
+- CONFIG [hg only]: Change number of top-level-comments in config to 4 
+
 
 2.7 (2015-09-25)
 ----------------
