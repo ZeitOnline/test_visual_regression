@@ -257,11 +257,13 @@ def application_session(request):
 
 
 @pytest.fixture
-def preserve_settings(request):
+def preserve_settings(application_session, request):
     def restore_settings():
-        settings = zope.component.getUtility(
+        settings = zope.component.queryUtility(
             zeit.web.core.interfaces.ISettings)
-        settings.__init__(settings_orig)
+        if settings is not None and settings_orig is not None:
+            settings.__init__(settings_orig)
+    settings_orig = None
     settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
     if settings is not None:
         request.addfinalizer(restore_settings)
