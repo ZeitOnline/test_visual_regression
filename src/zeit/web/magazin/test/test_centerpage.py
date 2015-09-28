@@ -5,6 +5,7 @@ from zope.component import getMultiAdapter
 import mock
 import pyramid.threadlocal
 import pytest
+import zope.component
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
@@ -190,7 +191,7 @@ def test_cp_leadteaser_has_expected_img_content(testbrowser):
         assert img.get('title') == 'Katze!'
 
 
-def test_cp_leadteaser_has_expected_links(testbrowser):
+def test_cp_leadteaser_has_expected_links(testbrowser, testserver):
     browser = testbrowser('/centerpage/lebensart')
     wrap = browser.cssselect('.cp_leader')
     assert len(wrap) != 0
@@ -198,8 +199,8 @@ def test_cp_leadteaser_has_expected_links(testbrowser):
         link_wrap = element.cssselect('a')
         assert len(link_wrap) == 2
         for link in link_wrap:
-            assert link.get('href') in 'http://'\
-                'localhost:6543/centerpage/article_image_asset#show_comments'
+            assert link.get('href') == (
+                testserver.url + '/centerpage/article_image_asset')
 
 
 def test_cp_img_button_has_expected_structure(testbrowser):
@@ -258,7 +259,7 @@ def test_cp_button_has_expected_text_content(testbrowser):
             ' zum Katzenbild passen.'
 
 
-def test_cp_button_has_expected_links(testbrowser):
+def test_cp_button_has_expected_links(testbrowser, testserver):
     browser = testbrowser('/centerpage/lebensart')
     wrap = browser.cssselect('.cp_button--small')
     assert len(wrap) != 0
@@ -266,8 +267,8 @@ def test_cp_button_has_expected_links(testbrowser):
         link_wrap = element.cssselect('a')
         assert len(link_wrap) != 0
         for link in link_wrap:
-            assert link.get('href') in 'http://'\
-                'localhost:6543/centerpage/article_image_asset#show_comments'
+            assert link.get('href') == (
+                testserver.url + '/centerpage/article_image_asset')
 
 
 def test_cp_large_photo_button_has_expected_structure(testbrowser):
@@ -325,7 +326,7 @@ def test_cp_should_have_informatives_ad_at_3rd_place(testbrowser):
     assert len(elements[2].cssselect('#ad-desktop-7')) == 1
 
 
-def test_cp_with_video_lead_has_correct_markup(testbrowser):
+def test_cp_with_video_lead_has_correct_markup(testbrowser, testserver):
     browser = testbrowser('/centerpage/cp_with_video_lead')
     wrap = browser.cssselect('.cp_leader--full')
     assert len(wrap) != 0
@@ -368,11 +369,11 @@ def test_cp_with_video_lead_has_correct_markup(testbrowser):
         # links
         assert len(a) == 2
         for link in a:
-            assert link.get('href') == 'http://localhost'\
-                ':6543/centerpage/article_video_asset'
+            assert link.get('href') == (
+                testserver.url + '/centerpage/article_video_asset')
 
 
-def test_cp_with_video_lead_light_has_correct_markup(testbrowser):
+def test_cp_with_video_lead_light_has_correct_markup(testbrowser, testserver):
     browser = testbrowser('/centerpage/cp_with_video_lead-2')
     wrap = browser.cssselect('.cp_leader--full')
     assert len(wrap) != 0
@@ -414,11 +415,11 @@ def test_cp_with_video_lead_light_has_correct_markup(testbrowser):
         # links
         assert len(a) == 2
         for link in a:
-            assert link.get('href') == 'http://localhost'\
-                ':6543/centerpage/article_video_asset'
+            assert link.get('href') == (
+                testserver.url + '/centerpage/article_video_asset')
 
 
-def test_cp_with_image_lead_has_correct_markup(testbrowser):
+def test_cp_with_image_lead_has_correct_markup(testbrowser, testserver):
     browser = testbrowser('/centerpage/cp_with_image_lead')
     wrap = browser.cssselect('.cp_leader--full')
     assert len(wrap) != 0
@@ -450,8 +451,8 @@ def test_cp_with_image_lead_has_correct_markup(testbrowser):
         # links
         assert len(a) == 2
         for link in a:
-            assert link.get('href') == 'http://localhost'\
-                ':6543/centerpage/article_image_asset'
+            assert link.get('href') == (
+                testserver.url + '/centerpage/article_image_asset')
 
 
 def test_lead_full_light_version_is_working(testserver, testbrowser):
@@ -560,11 +561,12 @@ def test_teaser_image_should_be_created_from_image_group_and_image(
     assert teaser_image.attr_title == 'Katze!'
 
 
-def test_get_reaches_from_centerpage_view(application, app_settings):
+def test_get_reaches_from_centerpage_view(application):
+    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
     request = mock.Mock()
-    request.registry.settings.community_host = app_settings['community_host']
-    request.registry.settings.linkreach_host = app_settings['linkreach_host']
-    request.registry.settings.node_comment_statistics = app_settings[
+    request.registry.settings.community_host = settings['community_host']
+    request.registry.settings.linkreach_host = settings['linkreach_host']
+    request.registry.settings.node_comment_statistics = settings[
         'node_comment_statistics']
 
     cp = zeit.cms.interfaces.ICMSContent(
