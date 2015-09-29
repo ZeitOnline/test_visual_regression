@@ -32,8 +32,19 @@ def parse_date(date,
 def mod_date(resource):
     try:
         pub_info = zeit.cms.workflow.interfaces.IPublishInfo(resource)
-        return (pub_info.date_last_published_semantic or
-                pub_info.date_first_released)
+        # mimic zeit.web.core.view.date_last_published_semantic
+        # whould be unnecessary if date_last_published_semantic is never before
+        # first_released and initially undefined or equal first_released
+        # but it's not like that [ms]
+        modified = pub_info.date_last_published_semantic
+        released = pub_info.date_first_released
+        # use 60s of tolerance before displaying a modification date
+        if (released and modified and
+                modified - released > datetime.timedelta(seconds=60)):
+            return modified
+        # fall back to date_last_published_semantic needed at least for
+        # test files without date_first_released
+        return released or modified
     except TypeError:
         return
 
