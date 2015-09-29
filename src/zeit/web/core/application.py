@@ -157,9 +157,8 @@ class Application(object):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
 
-        version = pkg_resources.get_distribution('zeit.web').version
-        self.settings['version'] = version
-        self.settings['version_hash'] = base64.b16encode(version).lower()
+        self.settings['version'] = pkg_resources.get_distribution(
+            'zeit.web').version
 
         self.config = config = pyramid.config.Configurator(
             settings=self.settings,

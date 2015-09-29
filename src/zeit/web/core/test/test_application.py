@@ -27,30 +27,9 @@ def app_request(app_settings, application):
 
 
 def test_asset_url_includes_configured_prefix(app_request):
-    _, request = app_request
-    assert ('http://example.com/assets/css/main.css' in
-            request.asset_url('css/main.css'))
-
-    assert ('http://example.com/assets/' in
-            request.asset_url('/'))
-
-
-def test_application_settings_contain_version_hash(app_request):
-    app, _ = app_request
-    version_hash = app.settings.get('version_hash', '').upper()
-    actual_version = pkg_resources.get_distribution('zeit.web').version
-    assert actual_version == base64.b16decode(version_hash)
-
-
-def test_asset_url_appends_version_hash_where_needed(app_request):
     app, request = app_request
-    version_hash = app.settings['version_hash']
-    assert ('http://example.com/assets/css/main.css?' + version_hash ==
-            request.asset_url('css/main.css'))
-    assert ('http://example.com/assets/js/app.js?' + version_hash ==
-            request.asset_url('js/app.js'))
-    assert ('http://example.com/assets/img/favicon.ico' ==
-            request.asset_url('img/favicon.ico'))
+    app.config.registry.settings['asset_prefix'] = '/assets'
+    assert request.asset_host == 'http://example.com/assets'
 
 
 def test_asset_url_allows_specifying_full_host(app_request):
