@@ -276,7 +276,7 @@ def get_cacheable_thread(unique_id):
     if thread is None:
         return
 
-    if type(thread) == dict and thread.get('request_failed'):
+    if isinstance(thread, dict) and thread.get('request_failed'):
         return thread
 
     try:
