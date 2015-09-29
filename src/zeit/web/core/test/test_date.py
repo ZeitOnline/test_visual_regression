@@ -178,6 +178,7 @@ def test_frozen_datetime_now(clock):
     clock.freeze(datetime.datetime(2015, 1, 1))
     tz = babel.dates.get_timezone('Europe/Berlin')
     assert datetime.datetime.now().isoformat() == '2015-01-01T00:00:00'
+    # Shifts naive frozen point from UTC to given timezone, like now() does.
     assert datetime.datetime.now(tz).isoformat() == '2015-01-01T01:00:00+01:00'
     now = datetime.datetime.now()
     clock.delta(days=1, hours=7, seconds=2)
@@ -186,17 +187,3 @@ def test_frozen_datetime_now(clock):
     assert datetime.datetime.now().isoformat() == '2015-01-02T07:00:02'
     assert delta.seconds == 7 * 60 * 60 + 2
     assert delta.days == 1
-
-
-def test_frozen_datetime_is_working_with_timezones(clock):
-    seconds = time.time()
-    real_now = datetime.datetime.fromtimestamp(seconds)
-    clock.freeze(real_now)
-
-    assert real_now.tzinfo is None
-
-    utc = babel.dates.get_timezone('UTC')
-    tz = babel.dates.get_timezone('Europe/Berlin')
-
-    # tz.fromutc(datetime.utcnow().replace(tzinfo=tz))
-    assert datetime.datetime.now(tz).isoformat() == tz.fromutc(datetime.datetime.utcnow().replace(tzinfo=tz)).isoformat()

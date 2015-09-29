@@ -548,7 +548,6 @@ def clock(monkeypatch):
         (freezes time)
     """
     import datetime
-    # import pytz
     original = datetime.datetime
 
     class FreezeMeta(type):
@@ -567,9 +566,10 @@ def clock(monkeypatch):
         def now(self, tz=None):
             if tz is not None:
                 if self.frozen.tzinfo is None:
-                    # return self.frozen.replace(tzinfo=pytz.utc).astimezone(tz)
+                    # https://docs.python.org/2/library/datetime.html says,
+                    # the result is equivalent to tz.fromutc(
+                    #   datetime.utcnow().replace(tzinfo=tz)).
                     return tz.fromutc(self.frozen.replace(tzinfo=tz))
-                    # return self.frozen.replace(tzinfo=tz)
                 else:
                     return self.frozen.astimezone(tz)
             return self.frozen
