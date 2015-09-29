@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.8 (unreleased)
+2.8 (2015-09-29)
 ----------------
 
 - ZON-2281: Add full link to TOP link
