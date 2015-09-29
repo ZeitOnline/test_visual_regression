@@ -33,9 +33,9 @@ def test_navigation_items_should_be_addable_to_navigation():
 
 
 # This may break on config changes, so we might add some dummy data.
-def test_make_navigation_should_register_navigation_items(app_settings):
+def test_make_navigation_should_register_navigation_items():
     navigation_config = zeit.web.core.application.maybe_convert_egg_url(
-        app_settings['vivi_zeit.web_navigation'])
+        'egg://zeit.web.core/data/config/navigation.xml')
     navigation = zeit.web.core.navigation.make_navigation(navigation_config)
     assert (navigation['topnav.mainnav.4..kultur'].href ==
             'http://xml.zeit.de/kultur/index')

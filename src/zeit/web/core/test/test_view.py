@@ -491,7 +491,7 @@ def test_cp2015_redirect_can_be_disabled(application):
     request = pyramid.testing.DummyRequest(path='/index.cp2015')
     request.registry = application.zeit_app.config.registry
     view = zeit.web.core.view.Base(context, request)
-    with mock.patch.dict(
-            request.registry.settings, {'redirect_from_cp2015': 'False'}):
-        # assert: no HTTPFound is raised.
-        view()
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['redirect_from_cp2015'] = 'False'
+    # assert: no HTTPFound is raised.
+    view()

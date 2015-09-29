@@ -286,7 +286,7 @@ def test_cp_has_valid_logo_structure(testserver, testbrowser):
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
     link = html('.logo_bar a.icon-zon-logo-desktop')[0]
-    assert link.get('href') == 'http://localhost:6543/index'
+    assert link.get('href') == testserver.url + '/index'
     assert link.get('title') == 'Nachrichten auf ZEIT ONLINE'
     assert link.get('id') == 'hp.global.topnav.centerpages.logo'
 

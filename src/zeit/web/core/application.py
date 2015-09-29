@@ -65,11 +65,10 @@ class Application(object):
 
         settings['sso_key'] = self.load_sso_key(
             settings.get('sso_key', None))
-
-        interface = zeit.web.core.interfaces.ISettings
-        zope.interface.declarations.alsoProvides(settings, interface)
-        zope.component.provideUtility(settings, interface)
         self.settings.update(settings)
+        # Temporarily provide settings for our non-pyramid utilities.
+        zope.component.provideUtility(
+            self.settings, zeit.web.core.interfaces.ISettings)
         self.configure()
         return self.make_wsgi_app(global_config)
 
@@ -161,10 +160,12 @@ class Application(object):
         self.settings['version'] = version
         self.settings['version_hash'] = base64.b16encode(version).lower()
 
-        self.config = config = pyramid.config.Configurator(
-            settings=self.settings,
-            registry=registry)
+        self.config = config = pyramid.config.Configurator(registry=registry)
         config.setup_registry(settings=self.settings)
+        zope.component.getSiteManager().unregisterUtility(
+            self.settings, zeit.web.core.interfaces.ISettings)
+        zope.component.provideUtility(
+            config.registry.settings, zeit.web.core.interfaces.ISettings)
 
         # Never commit, always abort. zeit.web should never write anything,
         # anyway, and at least when running in preview mode, not committing

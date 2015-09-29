@@ -10,6 +10,12 @@ Change log for zeit.web
 
 - ZON-2218: Adjust timezone of displayed dates and fix indication of source
 
+- ZON-2266: Show empty buzzbox, if reach is down
+
+- FIX: total_pages TypeError (Bugsnag)
+
+- CONFIG [hg only]: Change number of top-level-comments in config to 4 
+
 
 2.7 (2015-09-25)
 ----------------

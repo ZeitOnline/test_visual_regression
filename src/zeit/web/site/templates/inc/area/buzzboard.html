@@ -26,10 +26,12 @@
 				{% for column in range(modules | length) -%}
 				<td>
 					{%- set module = modules[column] %}
-					{%- set teaser = modules[column][row] %}
-					{%- set layout = module | get_layout %}
-					{%- set journalistic_format = module | get_journalistic_format %}
-					{% include "zeit.web.site:templates/inc/teaser/buzzboard.tpl" %}
+					{% if row < (module | length) %}
+					    {%- set teaser = modules[column][row] %}
+					    {%- set layout = module | get_layout %}
+					    {%- set journalistic_format = module | get_journalistic_format %}
+					    {% include "zeit.web.site:templates/inc/teaser/buzzboard.tpl" %}
+					{% endif %}
 				</td>
 				{% endfor %}
 			</tr>
