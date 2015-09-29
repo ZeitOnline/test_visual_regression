@@ -4,6 +4,8 @@ Change log for zeit.web
 2.8 (unreleased)
 ----------------
 
+- ZON-2281: Add full link to TOP link
+
 - ZON-2263: Add Adcontroller tarpit/honeypot tracking script
 
 - ZON-2252: Use product name instead of product id for indication of source
