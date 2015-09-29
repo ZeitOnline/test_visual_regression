@@ -176,7 +176,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     def hits(self):
         if self._hits is None:
             self.values()
-        return self._hits
+        return self._hits or 0
 
     @hits.setter
     def hits(self, value):
