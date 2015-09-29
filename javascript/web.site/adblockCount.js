@@ -1,6 +1,6 @@
 // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 /**
- * @fileOverview Module for losely counting adblocker user (just trends not excact counts)
+ * @fileOverview Module for losely counting adblocker user (just trends; not excact counts)
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
@@ -15,18 +15,14 @@ define([ 'jquery' ], function( $ ) {
     },
     /**
      * Adcoltrollerblocked
-     * checks if the adcontroller is linked but blocked by user
+     * checks if the adcontroller is linked, but blocked by user
      * @return {bool}
      */
     adcontrollerblocked = function() {
-        var $scripts = $( 'head script' ),
-            value = false;
-        $scripts.each( function() {
-            if ( typeof $( this ).attr( 'src' ) !== 'undefined' && $( this ).attr( 'src' ).indexOf( 'iqadcontroller' ) > -1 ) {
-                value = typeof window.AdController === 'undefined';
-            }
-        });
-        return value;
+        if ( $( 'head script[src*="iqadcontroller"]' ).length > 0 ) {
+            return typeof window.AdController === 'undefined';
+        }
+        return false;
     };
     return {
         /**
@@ -49,15 +45,15 @@ define([ 'jquery' ], function( $ ) {
                         track.action = true;
                         track.opt_label = 'adcontrollerblocked';
                     }
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push( track );
+                    if ( debug ) {
+                        console.debug( track );
+                    }
                 } else {
                     if ( debug ) {
-                        console.info( 'Not abb tracked, Ads disabled.' );
+                        console.info( 'Not adb tracked, ads disabled.' );
                     }
-                }
-                window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push( track );
-                if ( debug ) {
-                    console.debug( track );
                 }
             });
         }
