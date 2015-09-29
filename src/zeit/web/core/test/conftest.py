@@ -46,13 +46,8 @@ settings = {
     'cache.short_term.expire': '60',
     'cache.default_term.expire': '300',
     'cache.long_term.expire': '3600',
-    'scripts_url': '/js/static',
     'liveblog_backend_url': 'http://localhost:6552/liveblog/backend',
     'liveblog_status_url': 'http://localhost:6552/liveblog/status',
-    # XXX I'd rather put None here and change the settings for a specific test,
-    # but then I'd need to re-create an Application since assets_max_age
-    # is only evaluated once during configuration.
-    'assets_max_age': '1',
     'caching_time_content': '5',
     'caching_time_article': '10',
     'caching_time_centerpage': '20',

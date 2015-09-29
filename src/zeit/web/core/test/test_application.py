@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import base64
-import pkg_resources
-
 import mock
 import pyramid.interfaces
 import pyramid.request
@@ -148,9 +145,3 @@ def test_transaction_aborts_after_request(testserver, testbrowser):
     with mock.patch('transaction.TransactionManager.commit') as commit:
         testbrowser('{}/artikel/01'.format(testserver.url))
         assert not commit.called
-
-
-def test_assets_have_configurable_cache_control_header(
-        testbrowser, application):
-    b = testbrowser('/css/web.site/screen.css')
-    assert b.headers['Cache-control'] == 'max-age=1'

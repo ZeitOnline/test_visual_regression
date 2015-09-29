@@ -1,5 +1,3 @@
-import ast
-import base64
 import logging
 import os.path
 import pkg_resources
@@ -71,7 +69,9 @@ class Application(object):
         zope.component.provideUtility(settings, interface)
         self.settings.update(settings)
         self.configure()
-        return self.make_wsgi_app(global_config)
+        app = self.config.make_wsgi_app()
+        # TODO: Try to move bugsnag middleware config to web.ini
+        return bugsnag.wsgi.middleware.BugsnagMiddleware(app)
 
     def load_sso_key(self, keyfile):
         if keyfile:
@@ -401,65 +401,7 @@ class Application(object):
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
 
-    @property
-    def pipeline(self):
-        """Configuration of a WSGI pipeline.
-
-        Our WSGI application is wrapped in each filter in turn,
-        so the first entry in this list is closest to the application,
-        and the last entry is closest to the WSGI server.
-
-        Each entry is a tuple (spec, protocol, name, arguments).
-        The default meaning is to load an entry point called `name` of type
-        `protocol` from the package `spec` and load it, passing
-        `arguments` as kw parameters (thus, arguments must be a dict).
-
-        If `protocol` is 'factory', then instead of an entry point the method
-        of this object with the name `spec` is called, passing `arguments`
-        as kw parameters.
-        """
-        return [
-            ('remove_asset_prefix', 'factory', '', {}),
-            ('bugsnag_notifier', 'factory', '', {})]
-
-    def remove_asset_prefix(self, app):
-        return URLPrefixMiddleware(
-            app, prefix=self.settings.get('asset_prefix', ''))
-
-    def bugsnag_notifier(self, app):
-        return bugsnag.wsgi.middleware.BugsnagMiddleware(app)
-
-    def make_wsgi_app(self, global_config):
-        app = self.config.make_wsgi_app()
-        for spec, protocol, name, extra in self.pipeline:
-            if protocol == 'factory':
-                factory = getattr(self, spec)
-                app = factory(app, **extra)
-                continue
-            entrypoint = pkg_resources.get_entry_info(spec, protocol, name)
-            app = entrypoint.load()(app, global_config, **extra)
-        return app
-
 factory = Application()
-
-
-class URLPrefixMiddleware(object):
-    """Removes a path prefix from the PATH_INFO if it is present.
-    We use this so that if an `asset_prefix` is configured, we respond
-    correctly for URLs both with and without the asset_prefix -- otherwise
-    the reverse proxy in front of us would need to rewrite URLs with
-    `asset_prefix` to strip it.
-    """
-
-    def __init__(self, app, prefix):
-        self.app = app
-        self.prefix = prefix
-
-    def __call__(self, environ, start_response):
-        path = environ['PATH_INFO']
-        if path.startswith(self.prefix):
-            environ['PATH_INFO'] = path.replace(self.prefix, '', 1)
-        return self.app(environ, start_response)
 
 
 def maybe_convert_egg_url(url):
