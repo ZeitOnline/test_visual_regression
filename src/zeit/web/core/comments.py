@@ -178,7 +178,7 @@ def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
     thread = get_cacheable_thread(unique_id)
 
     if thread is not None and thread.get('request_failed'):
-        td = datetime.datetime.utcnow()-thread.get('request_failed')
+        td = datetime.datetime.utcnow() - thread.get('request_failed')
         if td >= datetime.timedelta(seconds=invalidate_delta):
             zeit.web.core.view_comment.invalidate_comment_thread(unique_id)
             thread = get_cacheable_thread(unique_id)
