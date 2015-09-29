@@ -16,9 +16,9 @@
             </span>
             <button type="button" class="lightbox-button">
                 {{ lama.use_svg_icon('reload', 'lightbox-button__icon', view.request) }}
-                <a class="lightbox-button__text" data-tracking="refreshbox.refreshButton|{{view.og_url|replace('http://','')}}">NEU LADEN</a>
+                <a class="lightbox-button__text" data-tracking="refreshbox.refreshButton|{{ view.og_url | replace('http://','') }}">NEU LADEN</a>
             </button>
-            <a class="lightbox-cancel" data-tracking="refreshbox.cancel|{{view.og_url|replace('http://','')}}">
+            <a class="lightbox-cancel" data-tracking="refreshbox.cancel|{{ view.og_url | replace('http://', '') }}">
                 Abbrechen
             </a>
         </div>

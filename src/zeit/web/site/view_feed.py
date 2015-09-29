@@ -108,8 +108,8 @@ class Newsfeed(Base):
                        '06/logos/homepage_top.gif')),
                 E.title(self.pagetitle),
                 E.link(self.request.route_url('home'))
-                )
             )
+        )
         root.append(channel)
         for content in filter_and_sort_entries(self.context)[1:15]:
             content_url = zeit.web.core.template.create_url(

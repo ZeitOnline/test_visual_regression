@@ -29,7 +29,7 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
     def hits(self):
         if self._hits is None:
             self.values()
-        return self._hits
+        return self._hits or 0
 
     @hits.setter
     def hits(self, value):
@@ -62,4 +62,4 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
         teasers = list(zeit.content.cp.interfaces.ITeaseredContent(
             self.referenced_cp, []))
         self._hits = len(teasers)
-        return teasers[(self.page-1)*self.count:self.page*self.count]
+        return teasers[(self.page - 1) * self.count:self.page * self.count]
