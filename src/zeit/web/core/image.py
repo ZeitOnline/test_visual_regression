@@ -5,6 +5,8 @@ import pytz
 import zeit.cms.workflow.interfaces
 import zeit.content.image.interfaces
 
+import zeit.web
+
 
 # XXX Should this be a method of Image/ImageGroup?
 def image_expires(image):
@@ -24,6 +26,7 @@ def image_expires(image):
         return int((workflow.released_to - now).total_seconds())
 
 
+@zeit.web.register_global
 def is_image_expired(image):
     expires = image_expires(image)
     if expires is None:

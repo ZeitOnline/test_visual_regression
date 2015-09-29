@@ -7,7 +7,6 @@
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">HTBOTFA-FP-0011.jpg</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Warner Bros.&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_to">2015-03-03T12:43:31+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>

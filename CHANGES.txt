@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - ZON-2259: Shorter caching for articles with unloadable comment thread
 
+- ZON-2262: Do not include expired images in rendered pages
+
 - FIX: total_pages TypeError (Bugsnag)
 
 - CONFIG [hg only]: Change number of top-level-comments in config to 4

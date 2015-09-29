@@ -135,7 +135,8 @@ class Newsfeed(Base):
                 zeit.content.image.interfaces.IImageGroup.providedBy(
                     teaser_image)) else ''
 
-            if variant:
+            if variant and not zeit.web.core.image.is_image_expired(
+                    teaser_image):
                 description = (
                     u'<a href="{}"><img style="float:left; '
                     'margin-right:5px" src="{}"></a> {}').format(
