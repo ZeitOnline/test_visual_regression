@@ -600,7 +600,7 @@ def test_article_view_should_set_comments_not_loadable_prop(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     request = pyramid.testing.DummyRequest()
-    article = zeit.web.magazin.view_article.Article(context, request)
+    article = zeit.web.site.view_article.Article(context, request)
 
     assert article.comments_loadable
 
