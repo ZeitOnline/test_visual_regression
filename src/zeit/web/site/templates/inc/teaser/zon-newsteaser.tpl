@@ -9,7 +9,7 @@
             <span class="newsteaser__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
             <span class="newsteaser__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
         </a>
-        <span class="newsteaser__product">{{ teaser.product_id or teaser.product.id | hide_none }}</span>
+        <span class="newsteaser__product">{{ teaser.product.title | hide_none }}</span>
     </div>
 </article>
 
