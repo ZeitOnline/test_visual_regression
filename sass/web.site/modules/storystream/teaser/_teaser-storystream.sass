@@ -9,13 +9,17 @@ $teaser-storystream-left-outer-desktop: 20px
 .teaser-storystream
 	background-color: $teaser-storystream-background-color
 	+font-smoothing
+
+	&__header
+		position: relative
+
 	&__media
 		background-color: $zon-trout // placeholder for image
 		height: 0
 		margin: 0
 		overflow: hidden
 		padding-bottom: 100% / 16 * 9 // image variant 'wide'
-		position: relative
+
 	&__media-container
 		+teaser-image-dark-overlay($color: rgba(0, 0, 0, 0.2), $angle: 0deg)
 
@@ -50,9 +54,6 @@ $teaser-storystream-left-outer-desktop: 20px
 		line-height: remify(34px)
 		margin: 0
 
-	&__combined-link
-		@extend %teaser-combined-link
-
 	&__content
 		border-left: 1px $teaser-storystream-line-color solid
 		font-family: $font-tabletgothic
@@ -62,6 +63,7 @@ $teaser-storystream-left-outer-desktop: 20px
 	&__list
 		list-style: none
 		padding: 0
+
 	&__listitem
 		margin: .75em 0
 		padding: 0
@@ -86,7 +88,7 @@ $teaser-storystream-left-outer-desktop: 20px
 		letter-spacing: $zon-letter-spacing-s
 		line-height: remify(16px)
 		// make the text align nicely beside the icon if it linebreaks on small screens
-		padding: remify(0 0 16px 20px)
+		padding: remify(16px 0 0 20px)
 		position: relative
 
 	&__updateicon
@@ -96,9 +98,9 @@ $teaser-storystream-left-outer-desktop: 20px
 		position: absolute
 		width: remify(13px)
 
-	// TODO: Standard-CTA-Dark benutzen (ggf vorher anlegen)
 	&__button
 		+zon-button-dark
+		margin-left: 0
 
 +respond-min($break-tablet-min)
 	.teaser-storystream__media
@@ -110,60 +112,59 @@ $teaser-storystream-left-outer-desktop: 20px
 	.teaser-storystream__content
 		margin-left: remify($teaser-storystream-left-outer-tablet)
 		padding-left: remify($teaser-storystream-left-inner-tablet)
-	// dirty dirty specifity hack
-	.cp-area--minor
-		.teaser-storystream.teaser-storystream--in-area-minor
-			background-color: $color-page-bg
-			.teaser-storystream__headercontent
-				margin: remify(20px $teaser-storystream-left-outer-mobile 0)
-				padding: remify(0 $teaser-storystream-left-inner-mobile 13px)
-			.teaser-storystream__kicker
-				font-size: remify(14px)
-				line-height: remify(16px)
-			.teaser-storystream__title
-				font-size: remify(18px)
-				line-height: remify(22px)
-			.teaser-storystream__content
-				position: relative
-				margin-left: remify($teaser-storystream-left-outer-mobile)
-				padding: remify(10px $teaser-storystream-left-inner-mobile 0)
-				margin-bottom: remify(80px)
-			.teaser-storystream__list
-				margin: 0
-			.teaser-storystream__listitem
-				color: #444
-				font-size: remify(15px)
-				line-height: remify(20px)
-				letter-spacing: $zon-letter-spacing-s
-				&:before
-					border: 2px $white solid
-					left: remify(-$teaser-storystream-left-inner-mobile)
-					margin-left: remify(-7px) // Border ausgleichen
-			.teaser-storystream__listitem:last-child
-				display: none
-			.teaser-storystream__update
-				display: none
-			.teaser-storystream__button
-				position: absolute
-				bottom: remify(-60px)
-				+zon-button-light
+	.teaser-storystream--in-area-minor
+		background-color: $color-page-bg
+	.teaser-storystream__headercontent--in-area-minor
+		margin: remify(20px $teaser-storystream-left-outer-mobile 0)
+		padding: remify(0 $teaser-storystream-left-inner-mobile 13px)
+	.teaser-storystream__kicker--in-area-minor
+		font-size: remify(14px)
+		line-height: remify(16px)
+	.teaser-storystream__title--in-area-minor
+		font-size: remify(18px)
+		line-height: remify(22px)
+	.teaser-storystream__content--in-area-minor
+		position: relative
+		margin-left: remify($teaser-storystream-left-outer-mobile)
+		padding: remify(10px $teaser-storystream-left-inner-mobile 0)
+		margin-bottom: remify(80px)
+	.teaser-storystream__list--in-area-minor
+		margin: 0
+		max-width: remify(500px)
+	.teaser-storystream__listitem--in-area-minor
+		color: #444
+		font-size: remify(15px)
+		line-height: remify(20px)
+		letter-spacing: $zon-letter-spacing-s
+		&:before
+			border: 2px $white solid
+			left: remify(-$teaser-storystream-left-inner-mobile)
+			margin-left: remify(-7px) // Border ausgleichen
+	.teaser-storystream__listitem--in-area-minor:last-child
+		display: none
+	.teaser-storystream__update--in-area-minor
+		display: none
+	.teaser-storystream__button--in-area-minor
+		position: absolute
+		bottom: remify(-60px)
+		+zon-button-light
 
 +respond-min($break-desktop-min)
-	// dirty dirty specifity hack
-	.cp-area--minor
-		.teaser-storystream.teaser-storystream--in-area-minor
-			padding-bottom: remify(1px)
-			.teaser-storystream__media
-				padding-bottom: 100% / 7 * 3 // image variant 'cinema'
-			.teaser-storystream__headercontent,
-			.teaser-storystream__content
-				margin-left: remify($teaser-storystream-left-outer-desktop)
-			.teaser-storystream__title
-				font-size: remify(22px)
-				line-height: remify(27px)
-			.teaser-storystream__listitem:last-child
-				display: list-item
+	.teaser-storystream.teaser-storystream--in-area-minor
+		padding-bottom: remify(1px)
+	// dirty specifity hack
+	.teaser-storystream__header--in-area-minor .teaser-storystream__media
+		padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+	.teaser-storystream__headercontent--in-area-minor,
+	.teaser-storystream__content--in-area-minor
+		margin-left: remify($teaser-storystream-left-outer-desktop)
+	.teaser-storystream__title--in-area-minor
+		font-size: remify(22px)
+		line-height: remify(27px)
+	.teaser-storystream__listitem--in-area-minor:last-child
+		display: list-item
 
+// this does not work as long as image.js can only distinguish between mobile and desktop
 // +respond-min($break-desktop-min)
 // 	// dirty dirty specifity hack
 // 	.cp-area--solo

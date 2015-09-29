@@ -18,7 +18,7 @@
 	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-09-11T10:09:57.052739+00:00</attribute>
 	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-12T10:11:42.316515+00:00</attribute>
 	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-09-11T10:09:57.052739+00:00</attribute>
-	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-09-11T10:08:56.863347+00:00</attribute>
+	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-09-28T10:08:56.863347+00:00</attribute>
 	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-09-11T10:09:05.303304+00:00</attribute>
 	<attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
 	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
@@ -75,48 +75,43 @@
 		</area>
 	</region>
 	<region visible="True" visible_mobile="True" area="id-00a14862-b1c6-4146-bf60-f2f4e11cae17" kind="storystream" kind_title="Storystream">
-	<area visible="True" visible_mobile="True" hide-dupes="True" area="id-262cd66c-e9a6-4d34-8b46-c1ffcd1c7c13" kind="storystream">
-	<module cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-9cdba876-5637-4d65-be33-48460c79a375" title="Was wir jetzt wissen">
-	<text>
-	<ul>
-	<li>
-	Am 20. September soll zum zweiten Mal in diesem Jahr ein neues Parlament in Griechenland gewählt werden. Der bisherige Premier Alexis Tsipras hatte die Neuwahl eingeleitet, weil die eigene Syriza-Partei ihm die Unterstützung entzieht. Tsipras soll das von der EU geforderte Sparprogramm umsetzen.
-	<br/>
-	</li>
-	<li>
-	Am 13. Juli wurde Griechenland ein drittes Hilfspaket bewilligt. Ein Euro-Austritt des Staates gilt damit als abgewendet. Doch grundsätzlich herrschen Zweifel am Erfolg des neuen Programms.
-	</li>
-	<li>
-	Viele Griechen hofften, mit Syriza käme der Neubeginn. Doch seit Tsipras im Januar dieses Jahres an die Macht kam, stritt seine Regierung mit den Gläubigern um mildere Bedingungen für die gewährten Kredite. Der Konflikt eskalierte und führte zur Schließung der Banken und zur Einführung von Kapitalverkehrskontrollen.
-	</li>
-	</ul>
-	</text>
-	</module>
-	</area>
+		<area visible="True" visible_mobile="True" hide-dupes="True" area="id-262cd66c-e9a6-4d34-8b46-c1ffcd1c7c13" kind="storystream">
+			<module cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-9cdba876-5637-4d65-be33-48460c79a375" title="Was wir jetzt wissen">
+				<text>
+					<ul>
+						<li>Am 20. September soll zum zweiten Mal in diesem Jahr ein neues Parlament in Griechenland gewählt werden. Der bisherige Premier Alexis Tsipras hatte die Neuwahl eingeleitet, weil die eigene Syriza-Partei ihm die Unterstützung entzieht. Tsipras soll das von der EU geforderte Sparprogramm umsetzen.</li>
+						<li>Am 13. Juli wurde Griechenland ein drittes Hilfspaket bewilligt. Ein Euro-Austritt des Staates gilt damit als abgewendet. Doch grundsätzlich herrschen Zweifel am Erfolg des neuen Programms.</li>
+						<li>Viele Griechen hofften, mit Syriza käme der Neubeginn. Doch seit Tsipras im Januar dieses Jahres an die Macht kam, stritt seine Regierung mit den Gläubigern um mildere Bedingungen für die gewährten Kredite. Der Konflikt eskalierte und führte zur Schließung der Banken und zur Einführung von Kapitalverkehrskontrollen.</li>
+					</ul>
+				</text>
+			</module>
+		</area>
 	</region>
 	<region visible="True" visible_mobile="True" area="id-31cf839f-c587-4b18-9084-1cc457ab02a0" kind="storystream" kind_title="Storystream">
-	<area visible="True" visible_mobile="True" hide-dupes="True" area="id-c847b3f5-a566-4536-8341-aa73472392ba" kind="storystream">
-		<module cp:type="teaser" module="zon-milestone" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-5a7a3f3c-d507-473e-831e-6a3b3bf63b12">
-			<block href="http://xml.zeit.de/zeit-online/article/zeit" uniqueId="http://xml.zeit.de/zeit-online/article/zeit" contenttype="article" />
-		</module>
-	</area>
+		<area visible="True" visible_mobile="True" hide-dupes="True" area="id-c847b3f5-a566-4536-8341-aa73472392ba" kind="storystream">
+			<module cp:type="teaser" module="zon-milestone" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-5a7a3f3c-d507-473e-831e-6a3b3bf63b12">
+				<block href="http://xml.zeit.de/zeit-online/article/zeit" uniqueId="http://xml.zeit.de/zeit-online/article/zeit" contenttype="article" />
+			</module>
+			<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-5a7a3f3c-d507-473e-831e-6c3d3bf63b12">
+				<block uniqueId="http://xml.zeit.de/zeit-online/article/01" contenttype="article" />
+			</module>
+			<module cp:type="teaser" module="zon-milestone" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-5a7a3f3c-d507-473e-831e-6e3f3bf64b12">
+				<block uniqueId="http://xml.zeit.de/zeit-online/article/02" contenttype="article" />
+			</module>
+		</area>
 	</region>
 	<region visible="True" visible_mobile="True" area="id-b27b12d5-7901-4221-9634-e14dab2e88ae" kind="storystream" kind_title="Storystream">
-	<area visible="True" visible_mobile="True" hide-dupes="True" area="id-75eba1c5-baf4-4b65-bae4-6e10bde59eaa" kind="storystream">
-	<module cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-830f7f2c-f5ee-4ad9-9d48-b70b7c7df8f4" title="Vorgeschichte">
-	<text>
-	<ul>
-	<li>Im Juni 2000 tritt Griechenland dem Euro bei.</li>
-	<li>
-	Griechenland kann die Schuldenlast nicht mehr tragen. Im März 2012 wird dem Land die Hälfte erlassen. Die Lage stabilisiert sich ökonomisch und politisch in den folgenden zwei Jahren etwas.
-	</li>
-	<li>
-	Warum kam es im Januar 2015 überhaupt zur Neuwahl? Formal betrachtet sieht es so aus, als seien vorgezogene Neuwahlen in Griechenland aus verfassungsrechtlichen Gründen schon im Januar 2015 unausweichlich gewesen, weil das Parlament sich nicht auf einen neuen Staatspräsidenten einigen konnte. Premier Antonis Samaras hätte die Präsidentenwahl aber durchaus auf einen späteren Zeitpunkt legen können. Wie Recherchen griechischer Medien zeigen, wollte Samaras dies nur nicht, weil die Gläubiger neue, umstrittene Reformen von ihm verlangten. Die hätte er zunächst umsetzen und dann vor einer Neuwahl der Bevölkerung erklären müssen. Ein machtpolitisches Risiko, dem er auswich.
-	</li>
-	</ul>
-	</text>
-	</module>
-	</area>
+		<area visible="True" visible_mobile="True" hide-dupes="True" area="id-75eba1c5-baf4-4b65-bae4-6e10bde59eaa" kind="storystream">
+			<module cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-830f7f2c-f5ee-4ad9-9d48-b70b7c7df8f4" title="Vorgeschichte">
+				<text>
+					<ul>
+						<li>Im Juni 2000 tritt Griechenland dem Euro bei.</li>
+						<li>Griechenland kann die Schuldenlast nicht mehr tragen. Im März 2012 wird dem Land die Hälfte erlassen. Die Lage stabilisiert sich ökonomisch und politisch in den folgenden zwei Jahren etwas.</li>
+						<li>Warum kam es im Januar 2015 überhaupt zur Neuwahl? Formal betrachtet sieht es so aus, als seien vorgezogene Neuwahlen in Griechenland aus verfassungsrechtlichen Gründen schon im Januar 2015 unausweichlich gewesen, weil das Parlament sich nicht auf einen neuen Staatspräsidenten einigen konnte. Premier Antonis Samaras hätte die Präsidentenwahl aber durchaus auf einen späteren Zeitpunkt legen können. Wie Recherchen griechischer Medien zeigen, wollte Samaras dies nur nicht, weil die Gläubiger neue, umstrittene Reformen von ihm verlangten. Die hätte er zunächst umsetzen und dann vor einer Neuwahl der Bevölkerung erklären müssen. Ein machtpolitisches Risiko, dem er auswich.</li>
+					</ul>
+				</text>
+			</module>
+		</area>
 	</region>
 </body>
 <teaser>
