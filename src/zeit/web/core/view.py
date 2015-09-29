@@ -521,10 +521,15 @@ class Base(object):
 
     @zeit.web.reify
     def date_last_published_semantic(self):
-        date = self.publish_info.date_last_published_semantic
-        if (self.date_first_released is not None and date is not None and
-                date > self.date_first_released):
-            return date.astimezone(self.timezone)
+        modified = self.publish_info.date_last_published_semantic
+        released = self.date_first_released
+        # use 60s of tolerance before displaying a modification date
+        # whould be unnecessary if date_last_published_semantic is never before
+        # first_released and initially undefined or equal first_released
+        # but it's not like that [ms]
+        if (released is not None and modified is not None and
+                modified - released > datetime.timedelta(seconds=60)):
+            return modified.astimezone(self.timezone)
 
     @zeit.web.reify
     def has_cardstack(self):
@@ -655,21 +660,18 @@ class Content(Base):
 
     @zeit.web.reify
     def source_label(self):
-        sources = ['dpa', 'afp', 'sid']
         src_str = 'Quelle: '
         # freeform sources
         if self.context.copyrights:
             return src_str + self.context.copyrights
-        # rebuild this with xml later(?)
-        if self.context.product:
-            if self.context.product.id in sources:
-                return src_str + self.context.product.id
         # xml show option
         if self.context.product and self.context.product.show:
             label = self.context.product.label or self.context.product.title
             if self.context.product.show == 'issue' and self.context.volume:
                 label += self.issue_format.format(self.context.volume,
                                                   self.context.year)
+            elif self.context.product.show == 'source':
+                label = src_str + label
             return label
 
     @zeit.web.reify

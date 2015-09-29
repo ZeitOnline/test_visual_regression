@@ -6,12 +6,15 @@
 	&__seperator,
 	>*:not(:last-child):not(:empty):after
 		color: $color-separator
-		content: "/"
+		content: " / "
 		margin: 0 .25em
 	&--column
 		margin-bottom: 0
 	&__commentcount
 		@extend %commentcount
-	&__source > a
-		color: $zon_grey
-
+	&__source a
+		color: inherit
+		border-bottom: 1px solid rgba($zon_grey, .4)
+		+on-interaction
+			color: inherit
+			border-bottom-color: rgba($zon_grey, .8)

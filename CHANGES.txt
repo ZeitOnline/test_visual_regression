@@ -4,6 +4,12 @@ Change log for zeit.web
 2.8 (unreleased)
 ----------------
 
+- ZON-2252: Use product name instead of product id for indication of source
+
+- ZON-2244: Fix indication of source in articles
+
+- ZON-2218: Adjust timezone of displayed dates and fix indication of source
+
 - ZON-2267: SEO pagetitle & -description shall trump anything else
 
 - ZON-2266: Show empty buzzbox, if reach is down
