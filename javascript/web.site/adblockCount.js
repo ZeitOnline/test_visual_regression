@@ -5,47 +5,61 @@
  * @version  0.1
  */
 define([ 'jquery' ], function( $ ) {
+    /**
+     * Oldadblocktest
+     * checks if the old adblocker honeypotdiv is blocked
+     * @return {bool}
+     */
+    var oldadblocktest = function( $elem ) {
+        return $elem.length > 0 && $elem.is( ':hidden' );
+    },
+    /**
+     * Adcoltrollerblocked
+     * checks if the adcontroller is linked but blocked by user
+     * @return {bool}
+     */
+    adcontrollerblocked = function() {
+        var $scripts = $( 'head script' ),
+            value = false;
+        $scripts.each( function() {
+            if ( typeof $( this ).attr( 'src' ) !== 'undefined' && $( this ).attr( 'src' ).indexOf( 'iqadcontroller' ) > -1 ) {
+                value = typeof window.AdController === 'undefined';
+            }
+        });
+        return value;
+    };
     return {
+        /**
+         * Init
+         * prepare Adblockertest and start them on load
+         */
         init: function() {
             var track = {
                 category: 'adb',
                 action: false
-            }, container, test1, test2;
+            },
+            debug = window.location.search.indexOf( 'ablocktestdebug' );
             $( window ).on( 'load', function( evt ) {
-                if ( $( '#iqadtile3999:hidden' ).length > 0  ) {
-                    track.action = true;
-                    track.opt_label = 'adblockdesktop';
+                var $elem = $( '#ad3999' );
+                if ( $elem.length > 0 ) {
+                    if ( oldadblocktest( $elem ) ) {
+                        track.action = true;
+                        track.opt_label = 'adblockdesktop';
+                    } else if ( adcontrollerblocked() ) {
+                        track.action = true;
+                        track.opt_label = 'adcontrollerblocked';
+                    }
+                } else {
+                    if ( debug ) {
+                        console.info( 'Not abb tracked, Ads disabled.' );
+                    }
                 }
                 window.dataLayer = window.dataLayer || [];
                 window.dataLayer.push( track );
+                if ( debug ) {
+                    console.debug( track );
+                }
             });
-            // planned feature
-            // $( window ).load( function( evt ) {
-            //     container = $( '<div>' ).css({
-            //         position: 'absolute',
-            //         top: '-9999px',
-            //         left: '-9999px',
-            //         visibilty: 'hidden'
-            //     });
-            //     container.appendTo( 'body' );
-            //     test1 = $( '<div id="fonttest--1">ABC</div>' ).css({
-            //         'font-family': 'TabletGothic',
-            //         'font-size': '100px',
-            //         'display': 'inline'
-            //     });
-            //     test2 = $( '<div id="fonttest--2">ABC</div>' ).css({
-            //         'font-family': 'sans-serif',
-            //         'font-size': '100px',
-            //         'display': 'inline'
-            //     });
-            //     test1.appendTo( container );
-            //     test2.appendTo( container );
-            //     console.debug( 'clone width before: ', test1.width() );
-            //     console.debug( 'clone width after: ', test2.width() );
-            // });
-            // if ( window.navigator.doNotTrack > 0 ) {
-            //     track.doNotTrack = true;
-            // }
         }
     };
 });
