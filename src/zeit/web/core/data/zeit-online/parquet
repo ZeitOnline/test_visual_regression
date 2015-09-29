@@ -72,7 +72,7 @@
 			</region>
 		</cluster>
 		<cluster area="id-9e096c63-ca17-45f8-832c-867a6ad78505" kind="parquet" title="Parkett">
-			<region hide-dupes="True" area="id-d1ac1fc9-8640-4f32-96d8-8f956f04a7fb" kind="parquet" read_more="mehr Lametta" read_more_url="http://www.zeit.de/politik/index">
+			<region hide-dupes="True" area="id-d1ac1fc9-8640-4f32-96d8-8f956f04a7fb" kind="parquet" title="Titel" read_more="mehr Lametta" read_more_url="http://www.zeit.de/politik/index">
 				<referenced_cp>http://xml.zeit.de/zeit-online/parquet</referenced_cp>
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-9644ea40-0b1a-415f-9be9-38310b9bbdd2">
 					<block href="http://xml.zeit.de/blogs/nsu-blog-bouffier"/>
@@ -92,7 +92,7 @@
 			</region>
 		</cluster>
 		<cluster area="id-d4af0585-6430-416c-8365-20cfed3c5b15" kind="parquet" title="Parkett">
-			<region hide-dupes="True" area="id-ccad0132-fcf1-4062-ae78-dde95d7f716d" kind="parquet" read_more="mehr Schlagzeilen" read_more_url="http://www.zeit.de/wirtschaft/index">
+			<region hide-dupes="True" area="id-ccad0132-fcf1-4062-ae78-dde95d7f716d" kind="parquet" title="Titel" read_more="mehr Schlagzeilen" read_more_url="http://www.zeit.de/wirtschaft/index">
 				<referenced_cp>http://xml.zeit.de/zeit-online/news-teaser</referenced_cp>
 				<container cp:type="teaser" module="zon-large" cp:__name__="id-b2f737ac-eb65-4dc3-b31c-fbd8986270e9">
 					<block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
@@ -112,7 +112,7 @@
 			<region hide-dupes="True" area="id-663bd0f8-dab4-4388-97d4-e83a9d1774eb" kind="spektrum" title="Spektrum"/>
 		</cluster>
 		<cluster area="id-db3160e7-782c-494a-81f4-ba9d4e4f9f7c" kind="parquet" title="Parkett">
-			<region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="parquet" read_more="mehr davon" read_more_url="http://www.zeit.de/karriere/index">
+			<region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="parquet" title="Titel" read_more="mehr davon" read_more_url="http://www.zeit.de/karriere/index">
 				<referenced_cp>http://xml.zeit.de/zeit-magazin/index</referenced_cp>
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
 					<block href="http://xml.zeit.de/zeit-online/article/tagesspiegel"/>
