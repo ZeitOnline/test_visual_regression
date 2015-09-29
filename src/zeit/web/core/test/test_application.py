@@ -14,7 +14,6 @@ import zeit.web.core.interfaces
 
 @pytest.fixture
 def app_request(app_settings, application):
-    app_settings['asset_prefix'] = '/assets'
     app = zeit.web.core.application.Application()
     app.settings = app_settings
     config = app.configure_pyramid()
@@ -34,9 +33,8 @@ def test_asset_url_includes_configured_prefix(app_request):
 
 def test_asset_url_allows_specifying_full_host(app_request):
     app, request = app_request
-    app.config.registry.settings['asset_prefix'] = 'http://assets.example.com'
-    assert ('http://assets.example.com/css/main.css' in
-            request.asset_url('css/main.css'))
+    app.config.registry.settings['asset_prefix'] = 'http://assets.example.com/'
+    assert request.asset_host == 'http://assets.example.com'
 
 
 def test_acceptable_pagination_should_not_redirect(testserver):

@@ -201,16 +201,12 @@ class Application(object):
         config.add_route('post_test_comments', '/admin/test-comments')
         config.add_route('toggle_third_party_modules', '/admin/toggle-tpm')
 
-        def add_static_view(config, name):
-            max_age = ast.literal_eval(self.settings['assets_max_age'])
-            config.add_static_view(
-                name=name, path='zeit.web.static:{}/'.format(name),
-                cache_max_age=max_age)
+        config.add_static_view(name=self.settings.get(
+            'asset_prefix', '/static'), path='zeit.web.static:')
 
-        add_static_view(config, 'css')
-        add_static_view(config, 'js')
-        add_static_view(config, 'img')
-        add_static_view(config, 'fonts')
+        config.add_static_view(name=self.settings.get(
+            'jsconf_prefix', '/jsconf'), path='zeit.web.core:data/config')
+
         config.add_renderer('jsonp', pyramid.renderers.JSONP(
             param_name='callback'))
 
@@ -230,38 +226,9 @@ class Application(object):
             config.add_view(view=zeit.web.core.view.service_unavailable,
                             context=Exception)
 
-        def asset_url(request, path, **kw):
-            asset_prefix = request.registry.settings.get('asset_prefix', '')
-            if not asset_prefix.startswith('http'):
-                asset_prefix = join_url_path(
-                    request.application_url, asset_prefix)
-            kw['_app_url'] = asset_prefix
-
-            if path == '/':
-                url = request.route_url('home', **kw)
-            else:
-                prefix = '' if ':' in path else 'zeit.web.static:'
-                url = request.static_url(prefix + path, **kw)
-
-            if url.rsplit('.', 1)[-1] in ('css', 'js'):
-                url += '?' + request.registry.settings.get('version_hash', '')
-            else:
-                svg_sprite = url.split('/icons.svg', 1)
-                if len(svg_sprite) == 2:
-                    version = request.registry.settings.get('version_hash', '')
-                    url = '/icons.svg?{}'.format(version).join(svg_sprite)
-
-            return url
-
-        config.add_request_method(asset_url)
-
-        def image_host(request):
-            image_prefix = request.registry.settings.get('image_prefix', '')
-            if not image_prefix.startswith('http'):
-                image_prefix = join_url_path(
-                    request.application_url, image_prefix)
-            return request.route_url('home', _app_url=image_prefix)
-        config.add_request_method(image_host, reify=True)
+        config.set_request_property(configure_host('asset'), reify=True)
+        config.set_request_property(configure_host('image'), reify=True)
+        config.set_request_property(configure_host('jsconf'), reify=True)
 
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.web, ignore=self.DONT_SCAN)
@@ -417,6 +384,17 @@ def join_url_path(base, path):
     path = os.path.join(parts.path, path)
     return urlparse.urlunsplit(
         (parts[0], parts[1], path, parts[3], parts[4]))
+
+
+def configure_host(key):
+    def wrapped(request):
+        prefix = request.registry.settings.get(key + '_prefix', '')
+        if not prefix.startswith('http'):
+            prefix = join_url_path(
+                request.application_url, '/' + prefix.strip('/'))
+        return request.route_url('home', _app_url=prefix).rstrip('/')
+    wrapped.__name__ = key + '_host'
+    return wrapped
 
 
 # Monkey-patch so our content provides a marker interface,

@@ -140,9 +140,8 @@ class Newsfeed(Base):
                     u'<a href="{}"><img style="float:left; '
                     'margin-right:5px" src="{}"></a> {}').format(
                         content_url,
-                        '{}{}'.format(
-                            self.request.asset_url('/'),
-                            variant.lstrip('/')),
+                        '{}/{}'.format(
+                            self.request.asset_host, variant.lstrip('/')),
                         content.teaserText)
 
             item = E.item(

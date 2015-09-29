@@ -52,17 +52,17 @@
 
     {% block css_lte_8_link %}
     <!--[if lte IE 8]>
-        <link href="{{ request.asset_url('css/web.site/all-old-ie.css') }}" media="screen" rel="stylesheet" type="text/css">
+        <link href="{{ request.asset_host }}/css/web.site/all-old-ie.cs media="screen" rel="stylesheet" type="text/css">
     <![endif]-->
     {% endblock css_lte_8_link %}
     {% block css_link %}
     <!--[if gt IE 8]><!-->
-        <link href="{{ request.asset_url('css/web.site/screen.css') }}" media="screen" rel="stylesheet" type="text/css">
+        <link href="{{ request.asset_host }}/css/web.site/screen.css" media="screen" rel="stylesheet" type="text/css">
     <!--<![endif]-->
     {% endblock css_link %}
     {% block css_lte9_navi_link %}
     <!--[if lte IE 9]>
-        <link href="{{ request.asset_url('css/web.site/ie-navi.css') }}" media="screen" rel="stylesheet" type="text/css">
+        <link href="{{ request.asset_host }}/css/web.site/ie-navi.css" media="screen" rel="stylesheet" type="text/css">
     <![endif]-->
     {% endblock css_lte9_navi_link %}
 
@@ -71,9 +71,9 @@
     {%- include "zeit.web.site:templates/inc/meta/sharing.html" ignore missing -%}
 
     {# Modernizr -#}
-    <script src="{{ request.asset_url('js/vendor/modernizr-custom.js') }}"></script>
+    <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
     {# SVG4everybody TODO: replace Grunticon completely, check IE8 Fallback -#}
-    <script src="{{ request.asset_url('js/vendor/svg4everybody.legacy.js') }}"></script>
+    <script src="{{ request.asset_host }}/js/vendor/svg4everybody.legacy.js"></script>
     <script>
         {# needed for styling SVG in IE8 #}
         document.createElement( 'svg' );
@@ -88,13 +88,13 @@
         {%- include "zeit.web.static:css/icons/grunticon.loader.js" ignore missing -%}
 
         grunticon([
-            "{{ request.asset_url('css/icons/site.data.svg.css') }}",
-            "{{ request.asset_url('css/icons/site.data.png.css') }}",
-            "{{ request.asset_url('css/icons/site.fallback.css') }}"
+            "{{ request.asset_host }}/css/icons/site.data.svg.css",
+            "{{ request.asset_host }}/css/icons/site.data.png.css",
+            "{{ request.asset_host }}/css/icons/site.fallback.css"
         ]);
     </script>
     <noscript>
-        <link href="{{ request.asset_url('css/icons/site.fallback.css') }}" rel="stylesheet">
+        <link href="{{ request.asset_host }}/css/icons/site.fallback.css" rel="stylesheet">
     </noscript>
     {% if view.enable_third_party_modules %}
         <!-- IVW -->
@@ -180,18 +180,15 @@
         {% include "zeit.web.core:templates/inc/tracking/meetrics_relaunch.html" ignore missing %}
     {% endblock %}
     <script>
-        var require = {
-            baseUrl: '{{ request.asset_url("js/") }}',
-            urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"
-        };
+        var require = { baseUrl: '{{ request.asset_host }}/js/' };
     </script>
 
-    <!-- Popover -->
+    <!-- popover -->
     {% if view.is_hp %}
         {%- include "zeit.web.site:templates/inc/overlay.html" ignore missing -%}
     {% endif %}
 
-    <script src="{{ request.asset_url('js/site.js') }}"></script>
+    <script src="{{ request.asset_host }}/js/site.js"></script>
 
     {% if view.vgwort_url %}
     <!--start: vgwort-->
