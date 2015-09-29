@@ -4,7 +4,7 @@ Change log for zeit.web
 2.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-1936: Change bottom separator color in Spektrum parquet area
 
 
 2.8 (2015-09-29)
