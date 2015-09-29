@@ -126,7 +126,7 @@ def test_variant_image_should_provide_desired_attributes(application):
     assert img.copyright == meta.copyrights
     assert img.image_pattern == img.variant == variant.name
     assert img.ratio == variant.ratio
-    assert img.path == 'zeit-online/cp-content/ig-4/default'
+    assert img.path == '/zeit-online/cp-content/ig-4/default'
 
 
 def test_variant_jinja_test_should_recognize_variants(application):
@@ -467,20 +467,3 @@ def test_img_src_should_contain_fallback_size(testbrowser):
     b = testbrowser('/zeit-online/slenderized-index')
     assert b.cssselect(
         'img[src$="/filmstill-hobbit-schlacht-fuenf-hee/wide__822x462"]')
-
-
-def test_image_host_is_configurable_for_variant_images(
-        application, testbrowser):
-    settings = application.zeit_app.config.registry.settings
-    with mock.patch.dict(settings, {'image_prefix': 'http://img.example.com'}):
-        b = testbrowser('/zeit-online/slenderized-index')
-    assert b.cssselect('img[data-src^="http://img.example.com"]')
-    assert b.cssselect('img[src^="http://img.example.com"]')
-
-
-def test_image_host_is_configurable_for_legacy_images(
-        application, testbrowser):
-    settings = application.zeit_app.config.registry.settings
-    with mock.patch.dict(settings, {'image_prefix': 'http://img.example.com'}):
-        b = testbrowser('/zeit-magazin/index')
-    assert b.cssselect('img[src^="http://img.example.com"]')
