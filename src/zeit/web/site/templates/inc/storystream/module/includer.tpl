@@ -2,6 +2,8 @@
 
 {# get_layout is expensive (does its comment say). So we only use it if needed. #}
 {% if module_type == 'teaser' %}
+	{# rename the module_type: we use the wording "atom" everywhere. #}
+	{% set module_type = 'atom' %}
 	{% set module_layout = module | get_layout %}
 {% else %}
 	{% set module_layout = None %}
