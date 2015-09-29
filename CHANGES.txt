@@ -4,6 +4,8 @@ Change log for zeit.web
 2.8 (unreleased)
 ----------------
 
+- ZON-2263: Add Adcontroller tarpit/honeypot tracking script
+
 - ZON-2252: Use product name instead of product id for indication of source
 
 - ZON-2244: Fix indication of source in articles
