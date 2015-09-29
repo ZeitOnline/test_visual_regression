@@ -45,7 +45,7 @@ def test_ab_test_user_should_see_toggle_form_on_beta_page(
 
 
 def test_beta_view_should_identify_community_user(
-        app_settings, mockserver_factory):
+        application, mockserver_factory):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>457322</uid>
@@ -56,13 +56,13 @@ def test_beta_view_should_identify_community_user(
     """
     mockserver_factory(user_xml)
     request = mock.MagicMock()
-    request.registry.settings = app_settings
+    request.registry.settings = application.zeit_app.config.registry.settings
     view = zeit.web.site.view_beta.Beta(None, request)
     assert view.community_user.get('uid') == '457322'
 
 
 def test_beta_view_should_lookup_beta_role_correctly(
-        app_settings, mockserver_factory):
+        application, mockserver_factory):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>457322</uid>
@@ -74,7 +74,7 @@ def test_beta_view_should_lookup_beta_role_correctly(
     """
     mockserver_factory(user_xml)
     request = mock.MagicMock()
-    request.registry.settings = app_settings
+    request.registry.settings = application.zeit_app.config.registry.settings
     view = zeit.web.site.view_beta.Beta(None, request)
     assert view.beta_user is True
 

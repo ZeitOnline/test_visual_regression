@@ -1,8 +1,20 @@
 Change log for zeit.web
 =======================
 
-2.7 (unreleased)
+2.8 (unreleased)
 ----------------
+
+- ZON-2266: Show empty buzzbox, if reach is down
+
+- FIX: total_pages TypeError (Bugsnag)
+
+- CONFIG [hg only]: Change number of top-level-comments in config to 4 
+
+
+2.7 (2015-09-25)
+----------------
+
+- ZON-2074: Redirect `?commentstart` and `?page=all` to their proper locations
 
 - FIX: Do not show article age on advertorial CP teasers
 
