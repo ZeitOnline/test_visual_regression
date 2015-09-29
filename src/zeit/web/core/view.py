@@ -381,13 +381,18 @@ class Base(object):
 
     @zeit.web.reify
     def pagetitle(self):
+        # XXX: Remove this workaround & move all the keywordpage-related logic
+        #      from this PR https://github.com/ZeitOnline/zeit.web/pull/1109
+        #      into the thema/template.xml
+        seo_override = False
         try:
             title = zeit.seo.interfaces.ISEO(self.context).html_title
             assert title
+            seo_override = True
         except (AssertionError, TypeError):
             title = ': '.join([t for t in (self.supertitle, self.title) if t])
         if title:
-            if self._is_keyword_page:
+            if self._is_keyword_page and not seo_override:
                 # special rules for keywordpages
                 return self.get_topic_meta('title')
             return title + (u'' if self.is_hp else self.pagetitle_suffix)
@@ -395,12 +400,17 @@ class Base(object):
 
     @zeit.web.reify
     def pagedescription(self):
+        # XXX: Remove this workaround & move all the keywordpage-related logic
+        #      from this PR https://github.com/ZeitOnline/zeit.web/pull/1109
+        #      into the thema/template.xml
+        seo_override = False
         try:
             desc = zeit.seo.interfaces.ISEO(self.context).html_description
             assert desc
+            seo_override = True
         except (AssertionError, TypeError):
             desc = self.context.subtitle
-            if self._is_keyword_page:
+            if self._is_keyword_page and not seo_override:
                 # special rules for keywordpages
                 return self.get_topic_meta('desc')
         return desc or self.seo_title_default
@@ -480,12 +490,11 @@ class Base(object):
     @zeit.web.reify
     def content_url(self):
         path = '/'.join(self.request.traversed)
-        return self.request.route_url('home') + path
+        return self.request.route_url('home') + path.replace('.cp2015', '')
 
     @zeit.web.reify
     def og_url(self):
-        # Hide cp2015 ending for og url
-        return self.content_url.replace('.cp2015', '')
+        return self.content_url
 
     @zeit.web.reify
     def is_dev_environment(self):

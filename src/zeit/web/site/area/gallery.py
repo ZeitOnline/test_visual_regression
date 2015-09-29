@@ -48,9 +48,12 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
 
     @zeit.web.reify
     def total_pages(self):
-        if self.hits + self.count > 0:
-            return int(math.ceil(float(self.hits) / float(self.count)))
-        else:
+        try:
+            if self.hits + self.count > 0:
+                return int(math.ceil(float(self.hits) / float(self.count)))
+            else:
+                return 0
+        except TypeError:
             return 0
 
     @zeit.web.reify

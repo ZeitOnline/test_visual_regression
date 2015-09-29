@@ -85,6 +85,24 @@ def test_keyword_pages_should_send_redirect(testserver, testbrowser):
     assert resp.headers['Location'] == '%s/thema/xy' % testserver.url
 
 
+def test_commentstart_param_should_trigger_redirect(testserver):
+    resp = requests.get(
+        '%s/zeit-online/article/zeit?commentstart=2' % testserver.url,
+        allow_redirects=False)
+    assert resp.status_code == 301
+    assert (resp.headers['location'] == (
+            '%s/zeit-online/article/zeit' % testserver.url))
+
+
+def test_page_all_get_param_should_trigger_redirect(testserver):
+    resp = requests.get(
+        '%s/zeit-online/article/zeit?page=all' % testserver.url,
+        allow_redirects=False)
+    assert resp.status_code == 301
+    assert (resp.headers['location'] == (
+            '%s/zeit-online/article/zeit/komplettansicht' % testserver.url))
+
+
 def test_keyword_redirect_should_handle_nonindex_urls(testserver, testbrowser):
     resp = requests.get(
         '%s/schlagworte/personen/Santa-Klaus' % testserver.url,

@@ -32,7 +32,8 @@ def test_session_cache_cleared_when_id_changes(
         </roles>
     </user>
     """
-    mockserver_factory(user_xml)
+    server = mockserver_factory(user_xml)
+    dummy_request.registry.settings['community_host'] = server.url
     dummy_request.cookies['http://my_sso_cookie'] = 'foo'
     # Session still contains old user id and sensitive information
     dummy_request.session['user'] = dict(uid=42, name='s3crit')
@@ -53,7 +54,8 @@ def test_empty_cache_triggers_backend_fills_cache(
         </roles>
     </user>
     """
-    mockserver_factory(user_xml)
+    server = mockserver_factory(user_xml)
+    dummy_request.registry.settings['community_host'] = server.url
     dummy_request.cookies['http://my_sso_cookie'] = 'foo'
     dummy_request.headers['Cookie'] = ''
     assert 'user' not in dummy_request.session
@@ -82,16 +84,14 @@ def test_unreachable_community_should_not_produce_error(dummy_request):
 @pytest.mark.xfail(reason='Testing broken dependencies is an unsolved issue.')
 def test_malformed_agatho_response_should_not_produce_error(http_testserver):
     mocked_request = MagicMock()
-    mocked_request.registry.settings['agatho_host'] = (
-        'http://localhost:8889')
+    mocked_request.registry.settings['agatho_host'] = http_testserver.url
     assert get_thread('http://xml.zeit.de/artikel/01', mocked_request) is None
 
 
 @pytest.mark.xfail(reason='Testing broken dependencies is an unsolved issue.')
 def test_malformed_community_response_should_not_produce_error(
         dummy_request, http_testserver):
-    dummy_request.registry.settings['community_host'] = (
-        'http://localhost:8889')
+    dummy_request.registry.settings['community_host'] = http_testserver.url
     dummy_request.cookies['drupal-userid'] = 23
     dummy_request.headers['Cookie'] = ''
     user_info = dict(uid=0, name=None, picture=None, roles=[], mail=None)
@@ -105,7 +105,8 @@ def test_get_community_user_info_strips_malformed_picture_value(
         <picture>0</picture>
     </user>
     """
-    mockserver_factory(user_xml)
+    server = mockserver_factory(user_xml)
+    dummy_request.registry.settings['community_host'] = server.url
     user_info = get_community_user_info(dummy_request)
     assert user_info['picture'] is None
 
@@ -114,9 +115,10 @@ def test_get_community_user_info_replaces_community_host(
         dummy_request, mockserver_factory):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
-        <picture>http://localhost:6551/picture.png</picture>
+        <picture>{server}/picture.png</picture>
     </user>
     """
-    mockserver_factory(user_xml)
+    server = mockserver_factory(user_xml)
+    dummy_request.registry.settings['community_host'] = server.url
     user_info = get_community_user_info(dummy_request)
     assert user_info['picture'] == 'http://static_community/foo/picture.png'
