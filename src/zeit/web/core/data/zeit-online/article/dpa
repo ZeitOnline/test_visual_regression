@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <keywordset>
+      <keyword src="manual">Auto</keyword>
+      <keyword src="manual">Umweltverschmutzung</keyword>
+      <keyword src="manual">VW</keyword>
+      <keyword src="manual">USA</keyword>
+      <keyword src="manual">Deutschland</keyword>
+    </keywordset>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="copyrights"></attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-09-23T20:46:10+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-09-23T20:46:10+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-23T20:46:12.681338+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-09-23T20:47:12.599963+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-09-23T20:46:12.425817+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-09-23T16:56:15.849890+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="fixture">/infoline/thema/mittwoch/</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-09-23T20:46:10+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">system.newspublish</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/import" name="nitf-id">urn-newsml-dpa-com-20090101-150923-99-09277</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/import" name="nitf-version">1443027055000</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">500</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">News</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">News</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">db506c5b1c034d8397b571b48e9d2a55</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">News</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="title">Winterkorn tritt zurück - VW setzt Sonderausschuss ein</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:716933d4-bab5-4af5-b02f-c9a7ed1953fd}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">1900</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Auto</supertitle>
+    <title>Winterkorn tritt zurück - VW setzt Sonderausschuss ein</title>
+    <division type="page">
+      <p>Wolfsburg (dpa) - Die schwere Vertrauenskrise nach dem Abgas-Skandal in den USA hat VW-Chef Martin Winterkorn zum Rücktritt gezwungen. Der Autobauer prüft rechtliche Schritte gegen die Verantwortlichen.</p>
+      <p>Nach einer Krisensitzung der obersten Aufseher in Wolfsburg teilte der Schwabe in einer Erklärung mit: "Ich bin bestürzt über das, was in den vergangenen Tagen geschehen ist. Vor allem bin ich fassungslos, dass Verfehlungen dieser Tragweite im Volkswagen Konzern möglich waren." Als Vorstandschef übernehme er die Verantwortung. Er habe daher den Aufsichtsrat um seine Ablösung gebeten: "Ich tue dies im Interesse des Unternehmens, obwohl ich mir keines Fehlverhaltens bewusst bin."</p>
+      <p>Der Interimsvorsitzende Berthold Huber drückte Betroffenheit über den Skandal um manipulierte Messungen beim Schadstoffausstoß von Dieselmotoren aus, der zu einem schweren Vertrauensverlust geführt habe. Das Präsidium sei entschlossen, "einen glaubwürdigen Neuanfang" zu machen. Winterkorn habe keine Kenntnis von den Machenschaften gehabt, aber die Verantwortung übernommen. Vorschläge zur personellen Neubesetzung würden am Freitag in der Aufsichtsratsitzung besprochen.</p>
+      <p>Auch Niedersachsens Ministerpräsident Stephan Weil (SPD) würdigte die Verdienste Winterkorns. Er habe dessen Entscheidung mit größter Betroffenheit zur Kenntnis genommen. Die Tragweite des Schadens sei groß. Weil kündigte gegen die Verantwortlichen strafrechtliche Schritte an. "Wir werden durch das Unternehmen auch Strafanzeige erstatten", sagte der SPD-Politiker. Ein Sonderausschuss werde die Aufklärung vorantreiben und sich dabei auf externe Berater stützen.</p>
+      <p>Für die Grünen ist der Rücktritt von VW-Chef Martin Winterkorn ein folgerichtiger Schritt. "Damit hat der VW-Konzern die Chance auf einen Neuanfang. Sein Nachfolger muss beweisen, dass Anspruch und Wirklichkeit bei VW zusammenpassen", sagte Grünen-Fraktionsvize Oliver Krischer in Berlin.</p>
+      <p>Der Konzern gerät unterdessen auch in Deutschland ins Visier der Justiz. Die Staatsanwaltschaft Braunschweig gab den Beginn von Vorermittlungen gegen VW bekannt. Mögliche rechtliche Schritte gegen verantwortliche Mitarbeiter der Volkswagen AG stünden dabei im Mittelpunkt, hieß es. Eine von Bundesverkehrsminister Alexander Dobrindt (CSU) eingesetzte Kommission hat mittlerweile in Wolfsburg mit der Prüfung begonnen, ob elf Millionen Dieselautos deutschen und europäischen Regeln entsprochen haben.</p>
+      <p>Noch unklar sind die Umstände einer möglichen Rückruf-Aktion. "Soweit sind wir noch nicht, wir kennen ja erst seit gestern die Zahl", sagte ein Konzernsprecher und wies auf die sehr komplexe Organisation einer derartigen Aktion hin. Fragen nach den im Einzelnen betroffenen Modellen blieben zunächst unbeantwortet.</p>
+      <p>In den USA drohen Volkswagen sowohl wegen möglicher Straftaten wie Betrug als auch wegen mutmaßlicher Verstöße gegen Umweltgesetze hohe Strafen und Bußgelder. Der Skandal betrifft nach Konzernangaben weltweit rund elf Millionen Fahrzeuge mit Motoren vom Typ EA 189.</p>
+      <p>Einen kleinen Hoffnungsschimmer für den Konzern gab es an der Frankfurter Börse. Dort stieg der Kurs der VW-Aktie nach einem zweitägigen dramatischen Kursverfall allmählich wieder.</p>
+      <p>Grünen-Fraktionschef Anton Hofreiter forderte VW auf, alle Autos zurückzurufen und umzurüsten, die mit der Manipulations-Software ausgerüstet sind. "Wenn das nicht freiwillig geschieht, muss Verkehrsminister Dobrindt Druck machen und Rückruf und Nachrüstung durchsetzen", sagte er der "Bild"-Zeitung. Künftig müsse das Kraftfahrtbundesamt selbst Abgastests auf Prüfstrecken durchführen.</p>
+      <p>Es mehren sich zudem Stimmen, die vor einer Ausweitung des Image-Schadens bei VW auf die gesamte deutsche Exportindustrie warnen. Der Präsident des Autoverbands VDA, Matthias Wissmann, sagte in Frankfurt, man dürfe nicht Hunderte von Zulieferern und Herstellern unter Generalverdacht stellen.</p>
+      <p>Der Skandal stelle die Abgas-Nachbehandlung und -Reinigung beim Diesel nicht generell infrage. Die deutschen Maschinenbauer fürchten derweil um den guten Ruf des Standorts Deutschland. Der Branchenverband VDMA sieht mit Sorge, dass ein Fehlverhalten auf die gesamte Industrie übertragen werden könnte.</p>
+    </division>
+  </body>
+</article>

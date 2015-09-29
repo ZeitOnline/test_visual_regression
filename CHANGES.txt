@@ -1,10 +1,28 @@
 Change log for zeit.web
 =======================
 
-2.7 (unreleased)
+2.8 (unreleased)
 ----------------
 
+- ZON-2252: Use product name instead of product id for indication of source
+
+- ZON-2244: Fix indication of source in articles
+
+- ZON-2218: Adjust timezone of displayed dates and fix indication of source
+
+- ZON-2267: SEO pagetitle & -description shall trump anything else
+
+- ZON-2266: Show empty buzzbox, if reach is down
+
 - ZON-2259: Shorter caching for articles with unloadable comment thread
+
+- FIX: total_pages TypeError (Bugsnag)
+
+- CONFIG [hg only]: Change number of top-level-comments in config to 4 
+
+
+2.7 (2015-09-25)
+----------------
 
 - ZON-2074: Redirect `?commentstart` and `?page=all` to their proper locations
 

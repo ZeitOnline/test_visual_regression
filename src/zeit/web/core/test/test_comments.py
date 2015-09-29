@@ -585,7 +585,12 @@ def test_get_thread_should_not_invalidate_on_unloaded_threads(application,
     assert mock_method.call_args_list == []
 
 
-def test_article_view_should_set_comments_not_loadable_prop(application):
+def test_article_view_should_set_comments_not_loadable_prop(
+        application, monkeypatch):
+    def get_thread(
+            unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
+        raise zeit.web.core.comments.ThreadNotLoadable()
+    monkeypatch.setattr(zeit.web.core.comments, 'get_thread', get_thread)
 
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     request = pyramid.testing.DummyRequest()

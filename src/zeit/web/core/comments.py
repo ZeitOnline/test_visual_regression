@@ -155,7 +155,7 @@ def request_thread(path):
         response = requests.get(uri, timeout=timeout)
         if response.status_code == 404:
             return
-        return (200 <= response.status_code < 300) and response.content or (
+        return response.content if (200 <= response.status_code < 300) else (
             {'request_failed': datetime.datetime.utcnow()})
     except (AttributeError, requests.exceptions.RequestException):
         return {'request_failed': datetime.datetime.utcnow()}
@@ -178,8 +178,8 @@ def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
     thread = get_cacheable_thread(unique_id)
 
     if thread is not None and thread.get('request_failed'):
-        td = datetime.datetime.utcnow()-thread.get('request_failed')
-        if td >= datetime.timedelta(0, invalidate_delta):
+        td = datetime.datetime.utcnow() - thread.get('request_failed')
+        if td >= datetime.timedelta(seconds=invalidate_delta):
             zeit.web.core.view_comment.invalidate_comment_thread(unique_id)
             thread = get_cacheable_thread(unique_id)
         if thread is not None and thread.get('request_failed'):
@@ -276,7 +276,7 @@ def get_cacheable_thread(unique_id):
     if thread is None:
         return
 
-    if type(thread) == dict and thread.get('request_failed'):
+    if isinstance(thread, dict) and thread.get('request_failed'):
         return thread
 
     try:
