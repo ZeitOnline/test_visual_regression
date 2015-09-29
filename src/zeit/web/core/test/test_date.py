@@ -174,13 +174,13 @@ def test_filter_delta_time_should_strip_seconds_after_one_minute():
     assert interval._stringify_delta_time() == 'vor 1 Minute'
 
 
-def test_frozen_datetime_now(testdatetime):
-    testdatetime.freeze(datetime.datetime(2015, 1, 1))
+def test_frozen_datetime_now(clock):
+    clock.freeze(datetime.datetime(2015, 1, 1))
     tz = babel.dates.get_timezone('Europe/Berlin')
     assert datetime.datetime.now().isoformat() == '2015-01-01T00:00:00'
     assert datetime.datetime.now(tz).isoformat() == '2015-01-01T01:00:00+01:00'
     now = datetime.datetime.now()
-    testdatetime.delta(days=1, hours=7, seconds=2)
+    clock.delta(days=1, hours=7, seconds=2)
     later = datetime.datetime.now()
     delta = later - now
     assert datetime.datetime.now().isoformat() == '2015-01-02T07:00:02'
@@ -188,10 +188,10 @@ def test_frozen_datetime_now(testdatetime):
     assert delta.days == 1
 
 
-def test_frozen_datetime_is_working_with_timezones(testdatetime):
+def test_frozen_datetime_is_working_with_timezones(clock):
     seconds = time.time()
     real_now = datetime.datetime.fromtimestamp(seconds)
-    testdatetime.freeze(real_now)
+    clock.freeze(real_now)
 
     assert real_now.tzinfo is None
 

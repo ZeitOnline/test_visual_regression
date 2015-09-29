@@ -543,7 +543,7 @@ def comment_counter(application):
 
 # inspired by http://stackoverflow.com/a/28073449
 @pytest.fixture(scope='function')
-def testdatetime(monkeypatch):
+def clock(monkeypatch):
     """ Now() manager patches datetime return a fixed, settable, value
         (freezes time)
     """
