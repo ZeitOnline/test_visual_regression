@@ -89,6 +89,13 @@ class Base(object):
                 'redirect_from_cp2015', True)):
             redirect_on_cp2015_suffix(self.request)
         time = zeit.web.core.cache.ICachingTime(self.context)
+
+        # Make sure comments are loaded
+        if hasattr(self, 'comments'):
+            self.comments
+
+        if not self.comments_loadable:
+            time = 5
         self.request.response.cache_expires(time)
         self._set_response_headers()
         return {}
@@ -96,6 +103,7 @@ class Base(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
+        self.comments_loadable = True
 
     @zeit.web.reify
     def vgwort_url(self):
@@ -621,11 +629,15 @@ class Content(Base):
         sort = self.request.params.get('sort', 'asc')
         page = self.request.params.get('page', 1)
         cid = self.request.params.get('cid', None)
-        return zeit.web.core.comments.get_thread(
-            self.context.uniqueId,
-            sort=sort,
-            page=page,
-            cid=cid)
+        try:
+            return zeit.web.core.comments.get_thread(
+                self.context.uniqueId,
+                sort=sort,
+                page=page,
+                cid=cid)
+        except zeit.web.core.comments.ThreadNotLoadable:
+            self.comments_loadable = False
+            return
 
     @zeit.web.reify
     def obfuscated_date(self):
