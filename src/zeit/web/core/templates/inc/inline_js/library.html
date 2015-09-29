@@ -3,7 +3,7 @@
     document.createElement( 'picture' );
 
     window.ZMO = {
-        scriptsURL: '{{ request.registry.settings.scripts_url | hide_none }}',
+        jsconfHost: '{{ request.jsconf_host }}',
         view: {
             {% for key, value in view.js_vars -%}
                 '{{ key }}': '{{ value | remove_break }}',
