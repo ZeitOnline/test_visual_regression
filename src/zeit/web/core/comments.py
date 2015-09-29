@@ -155,7 +155,7 @@ def request_thread(path):
         response = requests.get(uri, timeout=timeout)
         if response.status_code == 404:
             return
-        return (200 <= response.status_code < 300) and response.content or (
+        return response.content if (200 <= response.status_code < 300) else (
             {'request_failed': datetime.datetime.utcnow()})
     except (AttributeError, requests.exceptions.RequestException):
         return {'request_failed': datetime.datetime.utcnow()}
