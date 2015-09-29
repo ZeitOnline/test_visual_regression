@@ -274,7 +274,7 @@ class LazyProxy(object):
             try:
                 return self.__proxy__[key]
             except KeyError:
-                log.debug("ProxyExposed: '{}' has no attribute '{}'".format(
+                log.debug(u"ProxyExposed: '{}' has no attribute '{}'".format(
                     self, key))
         return getattr(self.__origin__, key)
 
@@ -294,10 +294,10 @@ class LazyProxy(object):
         else:
             cls = self.__istack__[-1]
         if 'uniqueId' in self.__proxy__:
-            location = 'for {}'.format(self.__proxy__['uniqueId'])
+            location = u'for {}'.format(self.__proxy__['uniqueId'])
         else:
-            location = 'at {}>'.format(hex(id(self)))
-        return '<{}.{} proxy {}>'.format(
+            location = u'at {}>'.format(hex(id(self)))
+        return u'<{}.{} proxy {}>'.format(
             cls.__module__, cls.__name__, location)
 
     def __getitem__(self, key):
@@ -305,7 +305,7 @@ class LazyProxy(object):
             try:
                 return self.__proxy__[key]
             except KeyError:
-                log.debug("ProxyExposed: '{}' has no key '{}'".format(
+                log.debug(u"ProxyExposed: '{}' has no key '{}'".format(
                     self, key))
         return self.__origin__[key]
 
