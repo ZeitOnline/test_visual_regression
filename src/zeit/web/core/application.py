@@ -203,7 +203,7 @@ class Application(object):
         config.add_route('toggle_third_party_modules', '/admin/toggle-tpm')
 
         config.add_static_view(name=self.settings.get(
-            'asset_prefix', '/static'), path='zeit.web.static:')
+            'asset_prefix', '/{version}/static'), path='zeit.web.static:')
 
         config.add_static_view(name=self.settings.get(
             'jsconf_prefix', '/jsconf'), path='zeit.web.core:data/config')
@@ -390,6 +390,8 @@ def join_url_path(base, path):
 def configure_host(key):
     def wrapped(request):
         prefix = request.registry.settings.get(key + '_prefix', '')
+        version = request.registry.settings.get('version', 'latest')
+        prefix = prefix.format(version=version)
         if not prefix.startswith('http'):
             prefix = join_url_path(
                 request.application_url, '/' + prefix.strip('/'))
