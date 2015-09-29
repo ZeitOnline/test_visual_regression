@@ -200,6 +200,3 @@ def test_frozen_datetime_is_working_with_timezones(clock):
 
     # tz.fromutc(datetime.utcnow().replace(tzinfo=tz))
     assert datetime.datetime.now(tz).isoformat() == tz.fromutc(datetime.datetime.utcnow().replace(tzinfo=tz)).isoformat()
-
-def test_frozen_datetime_prerequisites():
-    assert datetime.datetime.now().isoformat() == datetime.datetime.utcnow().isoformat()
