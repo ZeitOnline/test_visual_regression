@@ -102,11 +102,11 @@
                 this.initialized = true;
             },
             bindResetEvents: function() {
-                // bind events to reset timer
+                // bind events to reset timer, need to debounce at least scroll and mousemove event
                 var that = this;
                 $( document ).on( 'keypress.modal scroll.modal click.modal mousemove.modal', $.debounce( function() {
                     that.setTimeout();
-                }, 200 ));
+                }, 1000 ));
             },
             setTimeout: function( time ) {
                 var that = this,
