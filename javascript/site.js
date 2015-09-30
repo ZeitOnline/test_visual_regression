@@ -57,6 +57,7 @@ require([
     'web.site/plugins/jquery.hpOverlay'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
+        isHp = document.body.getAttribute( 'data-is-hp' ),
         article = $( '#js-article' );
 
     $( window ).referrerCount();
@@ -67,8 +68,10 @@ require([
 
     if ( pageType === 'centerpage' ) {
         // homepage
-        $( '#snapshot' ).snapshot();
-        $( '[data-is-hp="true"]' ).hpOverlay();
+        if ( isHp === 'true' ) {
+            $( '#snapshot' ).snapshot();
+            $.hpOverlay();
+        }
         // centerpage
         $.updateSignals();
         $( '#main' ).autoclick();
