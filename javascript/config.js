@@ -31,6 +31,7 @@ require.config({
         'web.core/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery', 'modernizr' ],
         'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],
         'web.site/plugins/jquery.autoclick': [ 'jquery', 'modernizr' ],
+        'web.site/plugins/jquery.hpOverlay': [ 'jquery', 'jquery.debounce' ],
         'web.site/plugins/jquery.snapshot': [ 'jquery', 'jquery.inview' ],
         'freewall': {
             deps: [ 'jquery' ],

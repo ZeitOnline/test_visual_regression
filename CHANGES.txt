@@ -4,7 +4,7 @@ Change log for zeit.web
 2.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- MAINT: Add tests and more tracking to popover
 
 
 2.8.2 (2015-09-30)
