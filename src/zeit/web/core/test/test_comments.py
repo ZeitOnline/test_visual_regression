@@ -510,3 +510,123 @@ def test_post_comment_should_not_set_lock(application, action):
     locker(request, action)
 
     assert request.session.get('lock_commenting') is None
+
+
+def test_request_thread_should_fail_on_certain_status_codes(
+        application, monkeypatch):
+    def get(action_url, timeout=1):
+        response = mock.Mock
+        response.status_code = 300
+        return response
+    monkeypatch.setattr(requests, 'get', get)
+
+    assert 'request_failed' in zeit.web.core.comments.request_thread(
+        'http://community/foo')
+
+
+def test_request_thread_should_fail_on_timeouts(application, monkeypatch):
+
+    def get(action_url, timeout=1):
+        raise requests.exceptions.Timeout()
+    monkeypatch.setattr(requests, 'get', get)
+
+    assert 'request_failed' in zeit.web.core.comments.request_thread(
+        'http://community/foo')
+
+
+def test_get_thread_should_raise_exception_on_unloaded_threads(application,
+                                                               monkeypatch):
+
+    def request_thread(unique_id, sort="asc", page=None, cid=None):
+        return {'request_failed': datetime.datetime.utcnow()}
+    monkeypatch.setattr(
+        zeit.web.core.comments, 'request_thread', request_thread)
+
+    with pytest.raises(zeit.web.core.comments.ThreadNotLoadable):
+        zeit.web.core.comments.get_thread('http://unique_id')
+
+
+def test_get_thread_should_invalidate_on_unloaded_threads(application,
+                                                          monkeypatch):
+
+    def request_thread(unique_id, sort="asc", page=None, cid=None):
+        return {'request_failed': datetime.datetime.utcnow()}
+    monkeypatch.setattr(
+        zeit.web.core.comments, 'request_thread', request_thread)
+
+    try:
+        with patch.object(
+                zeit.web.core.view_comment,
+                'invalidate_comment_thread') as mock_method:
+            zeit.web.core.comments.get_thread(
+                'http://unique_id', invalidate_delta=0)
+    except:
+        pass
+    assert mock_method.call_args_list == [(('http://unique_id',), {})]
+
+
+def test_get_thread_should_not_invalidate_on_unloaded_threads(application,
+                                                              monkeypatch):
+
+    def request_thread(unique_id, sort="asc", page=None, cid=None):
+        return {'request_failed': datetime.datetime.utcnow()}
+    monkeypatch.setattr(
+        zeit.web.core.comments, 'request_thread', request_thread)
+
+    try:
+        with patch.object(
+                zeit.web.core.view_comment,
+                'invalidate_comment_thread') as mock_method:
+            zeit.web.core.comments.get_thread(
+                'http://unique_id', invalidate_delta=5)
+    except:
+        pass
+
+    assert mock_method.call_args_list == []
+
+
+def test_article_view_should_set_comments_not_loadable_prop(
+        application, monkeypatch):
+    def get_thread(
+            unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
+        raise zeit.web.core.comments.ThreadNotLoadable()
+    monkeypatch.setattr(zeit.web.core.comments, 'get_thread', get_thread)
+
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    request = pyramid.testing.DummyRequest()
+    article = zeit.web.magazin.view_article.Article(context, request)
+
+    assert article.comments_loadable
+
+    article.comments
+
+    assert not article.comments_loadable
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+    article = zeit.web.site.view_article.Article(context, request)
+
+    assert article.comments_loadable
+
+    article.comments
+
+    assert not article.comments_loadable
+
+
+def test_article_view_should_have_short_caching_time_on_unloadable_thread(
+        application, testbrowser, testserver, monkeypatch):
+    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+    assert browser.headers.get('cache-control') == 'max-age=10'
+
+    def get_thread(
+            unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
+        raise zeit.web.core.comments.ThreadNotLoadable()
+    monkeypatch.setattr(zeit.web.core.comments, 'get_thread', get_thread)
+    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+    assert browser.headers.get('cache-control') == 'max-age=5'
+    assert browser.cssselect('.comment-section__headline .nowrap')[0].text == (
+        'Ein technischer Fehler ist aufgetreten:')
+
+    browser = testbrowser('%s/artikel/01' % testserver.url)
+    assert browser.headers.get('cache-control') == 'max-age=5'

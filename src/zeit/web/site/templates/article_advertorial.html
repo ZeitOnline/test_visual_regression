@@ -1,4 +1,4 @@
-{% extends "zeit.web.site:templates/article_komplett.html" %}
+{% extends "zeit.web.site:templates/article.html" %}
 
 {% block css_link %}
 <!--[if gt IE 8]><!-->
@@ -7,11 +7,12 @@
 {% endblock css_link %}
 
 {% block advertorial_marker %}
-	{% if view.advertorial_marker %}
-	<div class="advertorial-marker ">
-		<div class="advertorial-marker__title">{{ view.advertorial_marker[0] }}</div>
-		<div class="advertorial-marker__text">{{ view.advertorial_marker[1] }}</div>
-		<div class="advertorial-marker__label">{{ view.advertorial_marker[2] }}</div>
-	</div>
-	{% endif %}
+    {% if view.advertorial_marker %}
+    <div class="advertorial-marker ">
+        <div class="advertorial-marker__title">{{ view.advertorial_marker[0] }}</div>
+        <div class="advertorial-marker__text">{{ view.advertorial_marker[1] }}</div>
+        <div class="advertorial-marker__label">{{ view.advertorial_marker[2] }}</div>
+    </div>
+    {% endif %}
 {% endblock advertorial_marker %}
+

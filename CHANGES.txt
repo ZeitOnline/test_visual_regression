@@ -1,10 +1,37 @@
 Change log for zeit.web
 =======================
 
-2.8 (unreleased)
+2.9 (unreleased)
 ----------------
 
 - MAINT: Add tests and more tracking to popover
+
+
+2.8.2 (2015-09-30)
+------------------
+
+- FIX: Be more defensive in several places (byline, missing meta files, broken
+  references etc.)
+
+
+2.8.1 (2015-09-30)
+------------------
+
+- ZON-2262: Respect image expiration dates in cache-control headers
+
+- ZON-2262: Do not include expired images in rendered pages
+
+- FIX: Check for ICommonMetadata when building feed
+
+- FIX: Add pagination to Advertorials
+
+
+2.8 (2015-09-29)
+----------------
+
+- ZON-2281: Add full link to TOP link
+
+- ZON-2263: Add Adcontroller tarpit/honeypot tracking script
 
 - ZON-2252: Use product name instead of product id for indication of source
 
@@ -16,9 +43,11 @@ Change log for zeit.web
 
 - ZON-2266: Show empty buzzbox, if reach is down
 
+- ZON-2259: Shorter caching for articles with unloadable comment thread
+
 - FIX: total_pages TypeError (Bugsnag)
 
-- CONFIG [hg only]: Change number of top-level-comments in config to 4 
+- CONFIG [hg only]: Change number of top-level-comments in config to 4
 
 
 2.7 (2015-09-25)

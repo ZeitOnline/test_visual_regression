@@ -17,14 +17,16 @@ require([
     'web.site/video/videoStage',
     'web.site/articledate',
     'web.site/articlesharing',
-    'web.site/comments'
-], function( images, clicktracking, videoStage, articledate, articlesharing, comments ) {
+    'web.site/comments',
+    'web.site/adblockCount.js'
+], function( images, clicktracking, videoStage, articledate, articlesharing, comments, adblockCount ) {
     images.init();
     clicktracking.init();
     videoStage.init();
     articledate.init();
     articlesharing.init();
     comments.init();
+    adblockCount.init();
 });
 
 // add required jQuery plugins
