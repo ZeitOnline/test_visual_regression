@@ -52,6 +52,8 @@
                 wrapper.find( '.lightbox' ).show();
                 wrapper.find( 'button' ).focus();
                 this.bindEvents();
+
+                $( document ).off( '.modal' );
             },
             cancel: function() {
                 // action when cancel was clicked
@@ -61,7 +63,6 @@
                 $( '#overlay-wrapper' ).hide();
                 this.visible = false;
                 ZMO.cookieCreate( 'overlaycanceled', 1, options.cookieTimeInDays, '' );
-                $( document ).off( '.modal' );
 
                 // restore last focused element
                 if ( this.activeElement ) {
