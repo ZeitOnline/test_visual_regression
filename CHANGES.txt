@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.8.2 (unreleased)
+2.8.2 (2015-09-30)
 ------------------
 
 - FIX: Be more defensive in several places (byline, missing meta files, broken
