@@ -49,6 +49,10 @@ def app_settings(mockserver):
         'cache.long_term.expire': '3600',
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
+        # XXX I'd rather put None here and change the settings for a specific
+        # test, but then I'd need to re-create an Application since
+        # assets_max_age is only evaluated once during configuration.
+        'assets_max_age': '1',
         'caching_time_content': '5',
         'caching_time_article': '10',
         'caching_time_centerpage': '20',

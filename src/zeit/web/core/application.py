@@ -1,3 +1,4 @@
+import ast
 import logging
 import os.path
 import pkg_resources
@@ -202,8 +203,10 @@ class Application(object):
         config.add_route('post_test_comments', '/admin/test-comments')
         config.add_route('toggle_third_party_modules', '/admin/toggle-tpm')
 
-        config.add_static_view(name=self.settings.get(
-            'asset_prefix', '/{version}/static'), path='zeit.web.static:')
+        config.add_static_view(
+            name=self.settings.get('asset_prefix', '/{version}/static'),
+            path='zeit.web.static:',
+            cache_max_age=ast.literal_eval(self.settings['assets_max_age']))
 
         config.add_static_view(name=self.settings.get(
             'jsconf_prefix', '/jsconf'), path='zeit.web.core:data/config')
