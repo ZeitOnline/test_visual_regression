@@ -13,6 +13,8 @@ Change log for zeit.web
 - FIX: Be more defensive in several places (byline, missing meta files, broken
   references etc.)
 
+- FIX: Add pagination to Advertorials
+
 
 2.8 (2015-09-29)
 ----------------

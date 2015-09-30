@@ -965,3 +965,12 @@ def test_article_renders_quotes_correctly(testbrowser):
         'tt0110912/quotes?item=qt0447099"]')
     assert not quote_with_source.cssselect('.quote__source > *')
     assert not quote_without_source.cssselect('.quote__source')
+
+
+def test_article_advertorial_pages_should_render_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/article/angebot')
+    assert browser.cssselect('.advertorial-marker')
+    browser = testbrowser('/zeit-online/article/angebot/seite-2')
+    assert browser.cssselect('.advertorial-marker')
+    browser = testbrowser('/zeit-online/article/angebot/komplettansicht')
+    assert browser.cssselect('.advertorial-marker ')
