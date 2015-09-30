@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 
 import pytz
 
@@ -22,7 +22,7 @@ def image_expires(image):
 
     workflow = zeit.cms.workflow.interfaces.IPublishInfo(group)
     if workflow.released_to:
-        now = datetime.now(pytz.UTC)
+        now = datetime.datetime.now(pytz.UTC)
         return int((workflow.released_to - now).total_seconds())
 
 

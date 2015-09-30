@@ -31,30 +31,30 @@ def test_response_should_have_intended_caching_time(testserver, testbrowser):
     assert browser.headers['cache-control'] == 'max-age=20'
 
 
-def test_caching_time_for_image_should_respect_group_expires(application):
+def test_caching_time_for_image_should_respect_group_expires(
+        application, clock):
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube')
-    now = datetime.now(pytz.UTC)
+    now = datetime(2015, 1, 1, 10, 0, tzinfo=pytz.UTC)
+    clock.freeze(now)
     expires = now + timedelta(seconds=5)
     workflow = zeit.cms.workflow.interfaces.IPublishInfo(group)
     workflow.released_to = expires
-    with mock.patch('zeit.web.core.image.datetime') as mock_datetime:
-        mock_datetime.now.return_value = now
-        assert zeit.web.core.cache.ICachingTime(group['wide']) == 5
+    assert zeit.web.core.cache.ICachingTime(group['wide']) == 5
 
 
-def test_already_expired_image_should_have_caching_time_zero(application):
+def test_already_expired_image_should_have_caching_time_zero(
+        application, clock):
     # Actually we probably never want to _serve_ such images in the first
     # place, so the caching time is more for completeness' sake.
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube')
-    now = datetime.now(pytz.UTC)
+    now = datetime(2015, 1, 1, 10, 0, tzinfo=pytz.UTC)
+    clock.freeze(now)
     expires = now - timedelta(seconds=5)
     workflow = zeit.cms.workflow.interfaces.IPublishInfo(group)
     workflow.released_to = expires
-    with mock.patch('zeit.web.core.image.datetime') as mock_datetime:
-        mock_datetime.now.return_value = now
-        assert zeit.web.core.cache.ICachingTime(group['wide']) == 0
+    assert zeit.web.core.cache.ICachingTime(group['wide']) == 0
 
 
 @pytest.mark.xfail(reason='Pylibmc might not be installed on all machines')
