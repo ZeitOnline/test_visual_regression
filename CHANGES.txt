@@ -4,6 +4,10 @@ Change log for zeit.web
 2.9 (unreleased)
 ----------------
 
+- ZON-2262: Respect image expiration dates in cache-control headers
+
+- ZON-2262: Do not include expired images in rendered pages
+
 - FIX: Check for ICommonMetadata when building feed
 
 
