@@ -2,14 +2,16 @@
 import logging
 
 import beaker.ext.memcached
+import grokcore.component
 import zope.interface
 import zope.component
-import grokcore.component
 
 import zeit.cms.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
+
+import zeit.web.core.image
 
 
 log = logging.getLogger(__name__)
@@ -53,6 +55,9 @@ def caching_time_gallery(context):
 @grokcore.component.implementer(ICachingTime)
 @grokcore.component.adapter(zeit.content.image.interfaces.IImage)
 def caching_time_image(context):
+    expires = zeit.web.core.image.image_expires(context)
+    if expires is not None:
+        return max(expires, 0)
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return int(conf.get('caching_time_image', '0'))
 

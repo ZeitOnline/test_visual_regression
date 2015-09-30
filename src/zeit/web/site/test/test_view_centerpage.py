@@ -1370,3 +1370,50 @@ def test_adtile12_from_cp_extra_is_there(testbrowser):
 def test_adtile13_from_cp_extra_is_there(testbrowser):
     browser = testbrowser('/zeit-online/parquet')
     assert browser.cssselect('#ad-desktop-13')
+
+
+def test_news_teaser_date_and_reference(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.site:templates/inc/teaser/zon-newsteaser.tpl')
+    request = pyramid.testing.DummyRequest()
+    view = mock.Mock()
+    view.request = request
+    area = mock.Mock()
+    area.kind = 'solo'
+
+    url = 'http://xml.zeit.de/zeit-online/article/eilmeldungsartikel'
+    teaser = zeit.cms.interfaces.ICMSContent(url)
+    html_str = tpl.render(teaser=teaser, view=view, area=area)
+    html = lxml.html.fromstring(html_str)
+    datetime = html.cssselect('.newsteaser__time')
+    product = html.cssselect('.newsteaser__product')
+
+    assert datetime[0].text.strip() == '19:17'
+    assert product[0].text == 'ZEIT ONLINE'
+
+    url = 'http://xml.zeit.de/zeit-online/article/afp'
+    teaser = zeit.cms.interfaces.ICMSContent(url)
+    html_str = tpl.render(teaser=teaser, view=view, area=area)
+    html = lxml.html.fromstring(html_str)
+    datetime = html.cssselect('.newsteaser__time')
+    product = html.cssselect('.newsteaser__product')
+
+    assert datetime[0].text.strip() == '11:59'
+    assert product[0].text == 'AFP'
+
+    url = 'http://xml.zeit.de/zeit-online/article/dpa'
+    teaser = zeit.cms.interfaces.ICMSContent(url)
+    html_str = tpl.render(teaser=teaser, view=view, area=area)
+    html = lxml.html.fromstring(html_str)
+    datetime = html.cssselect('.newsteaser__time')
+    product = html.cssselect('.newsteaser__product')
+
+    assert datetime[0].text.strip() == '22:46'
+    assert product[0].text == 'DPA'
+
+
+def test_cp_does_not_render_image_if_expired(testbrowser):
+    with mock.patch('zeit.web.core.image.image_expires') as expired:
+        expired.return_value = -1
+        browser = testbrowser('/zeit-online/basic-teasers-setup')
+        assert '/zeit-online/cp-content/ig-2' not in browser.contents

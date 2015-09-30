@@ -17,7 +17,6 @@
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.hoepfner</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-10-31T12:29:57.869654+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_to">2014-01-24T13:50:43+00:00</attribute>
   <attribute ns="DAV:" name="resourcetype"/>
   <attribute ns="DAV:" name="creationdate">2014-01-24T13:51:25Z</attribute>
   <attribute ns="DAV:" name="getlastmodified">Fri, 24 Jan 2014 13:51:25 GMT</attribute>

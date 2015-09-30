@@ -543,12 +543,11 @@ def comment_counter(application):
 
 # inspired by http://stackoverflow.com/a/28073449
 @pytest.fixture(scope='function')
-def testdatetime(monkeypatch):
+def clock(monkeypatch):
     """ Now() manager patches datetime return a fixed, settable, value
         (freezes time)
     """
     import datetime
-    # import pytz
     original = datetime.datetime
 
     class FreezeMeta(type):
@@ -567,9 +566,10 @@ def testdatetime(monkeypatch):
         def now(self, tz=None):
             if tz is not None:
                 if self.frozen.tzinfo is None:
-                    # return self.frozen.replace(tzinfo=pytz.utc).astimezone(tz)
+                    # https://docs.python.org/2/library/datetime.html says,
+                    # the result is equivalent to tz.fromutc(
+                    #   datetime.utcnow().replace(tzinfo=tz)).
                     return tz.fromutc(self.frozen.replace(tzinfo=tz))
-                    # return self.frozen.replace(tzinfo=tz)
                 else:
                     return self.frozen.astimezone(tz)
             return self.frozen

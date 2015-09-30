@@ -1,14 +1,38 @@
 Change log for zeit.web
 =======================
 
-2.8 (unreleased)
+2.9 (unreleased)
 ----------------
+
+- ZON-2262: Respect image expiration dates in cache-control headers
+
+- ZON-2262: Do not include expired images in rendered pages
+
+- FIX: Check for ICommonMetadata when building feed
+
+
+2.8 (2015-09-29)
+----------------
+
+- ZON-2281: Add full link to TOP link
+
+- ZON-2263: Add Adcontroller tarpit/honeypot tracking script
+
+- ZON-2252: Use product name instead of product id for indication of source
+
+- ZON-2244: Fix indication of source in articles
+
+- ZON-2218: Adjust timezone of displayed dates and fix indication of source
+
+- ZON-2267: SEO pagetitle & -description shall trump anything else
 
 - ZON-2266: Show empty buzzbox, if reach is down
 
+- ZON-2259: Shorter caching for articles with unloadable comment thread
+
 - FIX: total_pages TypeError (Bugsnag)
 
-- CONFIG [hg only]: Change number of top-level-comments in config to 4 
+- CONFIG [hg only]: Change number of top-level-comments in config to 4
 
 
 2.7 (2015-09-25)
