@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2266: Show empty buzzbox, if reach is down
 
+- ZON-2242: Globally configure image, asset and jsconf hosts
+
 - FIX: total_pages TypeError (Bugsnag)
 
 - CONFIG [hg only]: Change number of top-level-comments in config to 4 
