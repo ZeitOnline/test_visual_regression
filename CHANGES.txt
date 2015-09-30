@@ -6,7 +6,26 @@ Change log for zeit.web
 
 - ZON-1936: Change bottom separator color in Spektrum parquet area
 
+- Nothing changed yet.
+
+
+2.8.2 (2015-09-30)
+------------------
+
+- FIX: Be more defensive in several places (byline, missing meta files, broken
+  references etc.)
+
+
+2.8.1 (2015-09-30)
+------------------
+
+- ZON-2262: Respect image expiration dates in cache-control headers
+
+- ZON-2262: Do not include expired images in rendered pages
+
 - FIX: Check for ICommonMetadata when building feed
+
+- FIX: Add pagination to Advertorials
 
 
 2.8 (2015-09-29)

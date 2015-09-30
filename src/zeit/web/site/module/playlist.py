@@ -1,5 +1,7 @@
 import logging
 
+import zeit.content.video.interfaces
+
 import zeit.web
 import zeit.web.site.module
 
@@ -13,6 +15,9 @@ class Playlist(zeit.web.site.module.Module):
 
     @zeit.web.reify
     def videos(self):
+        if not zeit.content.video.interfaces.IPlaylist.providedBy(
+                self.context.referenced_playlist):
+            return []
         return self.context.referenced_playlist.videos
 
     @zeit.web.reify

@@ -43,7 +43,6 @@
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_to">2015-10-02T11:42:34+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Gesellschaft</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="retract_job_id">2061898763</attribute>

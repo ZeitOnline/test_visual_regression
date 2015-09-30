@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import babel.dates
 import datetime
-import time
 
 import pytest
 
