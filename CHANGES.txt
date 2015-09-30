@@ -4,7 +4,7 @@ Change log for zeit.web
 2.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-2115: Antidote for keyword and topicpage special rules
 
 
 2.8.2 (2015-09-30)

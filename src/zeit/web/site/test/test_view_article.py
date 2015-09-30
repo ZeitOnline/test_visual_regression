@@ -930,7 +930,7 @@ def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
 
 def test_missing_keyword_links_are_replaced(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    keyword = browser.cssselect('.article-tags__link')[5]
+    keyword = browser.cssselect('.article-tags__link')[0]
     assert keyword.attrib['href'].endswith('/thema/wein')
 
 
