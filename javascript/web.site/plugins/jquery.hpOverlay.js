@@ -62,7 +62,7 @@
                 $( '.overlay' ).hide();
                 $( '#overlay-wrapper' ).hide();
                 this.visible = false;
-                ZMO.cookieCreate( 'overlaycanceled', 1, options.cookieTimeInDays, '' );
+                ZMO.cookieCreate( 'overlaycanceled', 'canceled', options.cookieTimeInDays, '' );
 
                 // restore last focused element
                 if ( this.activeElement ) {
@@ -115,8 +115,8 @@
                 var that = this,
                     minutes = time || options.minutes;
 
+                // clear timer
                 if ( this.timer ) {
-                    // clear timer
                     window.clearTimeout( this.timer );
                 }
 
@@ -190,7 +190,7 @@
 
             if ( options.force ) {
                 overlay.show();
-            } else if ( !ZMO.isMobileView() && cookie !== 1 ) {
+            } else if ( !ZMO.isMobileView() && cookie !== 'canceled' ) {
                 // only get config if there's no mobile view and cookie wasn't set
                 overlay.log( 'Configure popup' );
                 overlay.config();
