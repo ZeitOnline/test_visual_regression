@@ -30,6 +30,9 @@
     {%- endfor %}
 {%- endmacro -%}
 
+{% if (provides(byline, 'zeit.web.core.byline.IContentByline')
+       or provides(byline, 'zeit.web.core.byline.ITeaserByline')) %}
 {% for type, obj in byline -%}
     {{ type | macro(obj) }}
 {%- endfor %}
+{% endif %}

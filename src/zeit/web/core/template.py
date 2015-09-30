@@ -862,3 +862,12 @@ def remove_get_params(url, *args):
     else:
         return '{}://{}{}?{}'.format(
             scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
+
+
+@zeit.web.register_global
+def provides(obj, iface):
+    try:
+        iface = pyramid.path.DottedNameResolver().resolve(iface)
+    except ValueError:
+        return False
+    return iface.providedBy(obj)
