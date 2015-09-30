@@ -4,7 +4,8 @@ Change log for zeit.web
 2.8.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FIX: Be more defensive in several places (byline, missing meta files, broken
+  references etc.)
 
 
 2.8.1 (2015-09-30)
@@ -15,9 +16,6 @@ Change log for zeit.web
 - ZON-2262: Do not include expired images in rendered pages
 
 - FIX: Check for ICommonMetadata when building feed
-
-- FIX: Be more defensive in several places (byline, missing meta files, broken
-  references etc.)
 
 - FIX: Add pagination to Advertorials
 
