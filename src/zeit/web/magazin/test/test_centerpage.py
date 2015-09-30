@@ -840,3 +840,10 @@ def test_wrapped_features_are_triggered(testbrowser):
     browser = testbrowser('/zeit-magazin/index?app-content')
     assert not browser.cssselect('nav.main-nav')
     assert browser.cssselect('body[data-is-wrapped="true"]')
+
+
+def test_cp_does_not_render_image_if_expired(testbrowser):
+    with mock.patch('zeit.web.core.image.is_image_expired') as expired:
+        expired.return_value = True
+        browser = testbrowser('/centerpage/lebensart')
+    assert not browser.cssselect('.cp_leader__asset--dark')

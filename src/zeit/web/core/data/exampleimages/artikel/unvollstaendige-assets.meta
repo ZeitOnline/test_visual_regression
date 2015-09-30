@@ -16,7 +16,6 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:2d9af45a-9d62-48c6-871a-47d98e29459e}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">Eine Frau isst Paprikasuppe</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-04-15T07:52:46.449850+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_to">2014-05-18T07:51:24+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">lowe.jpg</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="retract_job_id">1323633460</attribute>
   <attribute ns="DAV:" name="resourcetype"/>

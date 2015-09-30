@@ -4,7 +4,6 @@ import logging
 from pyramid.view import view_config
 from pyramid.view import view_defaults
 import babel.dates
-import pyramid.response
 import zope.component
 
 import zeit.cms.workflow.interfaces
@@ -31,12 +30,16 @@ log = logging.getLogger(__name__)
 @view_defaults(context=zeit.content.article.interfaces.IArticle,
                custom_predicates=(zeit.web.site.view.is_zon_content,),
                request_method='GET')
+@view_config(renderer='templates/article.html')
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
              zeit.web.core.view.is_advertorial),
              renderer='templates/article_advertorial.html')
-@view_config(renderer='templates/article.html')
 @view_config(name='komplettansicht',
              renderer='templates/article_komplett.html')
+@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
+             zeit.web.core.view.is_advertorial),
+             name='komplettansicht',
+             renderer='templates/article_advertorial_komplett.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
@@ -136,6 +139,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 @view_config(name='seite',
              path_info='.*seite-(.*)',
              renderer='templates/article.html')
+@view_config(name='seite',
+             custom_predicates=(zeit.web.site.view.is_zon_content,
+                                zeit.web.core.view.is_advertorial),
+             path_info='.*seite-(.*)',
+             renderer='templates/article_advertorial.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 

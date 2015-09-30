@@ -11,12 +11,6 @@ import zeit.web.core.template
 locale = 'de_DE'
 
 
-def get_base_date(date):
-    # XXX Wrapper function needed on module level, because we need to patch
-    #     it in tests.
-    return datetime.datetime.now(date.tzinfo)
-
-
 @zeit.web.register_filter
 def parse_date(date,
                date_format='%Y-%m-%dT%H:%M:%S.%f+00:00'):
@@ -32,8 +26,19 @@ def parse_date(date,
 def mod_date(resource):
     try:
         pub_info = zeit.cms.workflow.interfaces.IPublishInfo(resource)
-        return (pub_info.date_last_published_semantic or
-                pub_info.date_first_released)
+        # mimic zeit.web.core.view.date_last_published_semantic
+        # whould be unnecessary if date_last_published_semantic is never before
+        # first_released and initially undefined or equal first_released
+        # but it's not like that [ms]
+        modified = pub_info.date_last_published_semantic
+        released = pub_info.date_first_released
+        # use 60s of tolerance before displaying a modification date
+        if (released and modified and
+                modified - released > datetime.timedelta(seconds=60)):
+            return modified
+        # fall back to date_last_published_semantic needed at least for
+        # test files without date_first_released
+        return released or modified
     except TypeError:
         return
 
@@ -137,7 +142,7 @@ class DeltaTime(object):
 
     def __init__(self, date, base_date=None):
         self.date = date
-        self.base_date = base_date or get_base_date(date)
+        self.base_date = base_date or datetime.datetime.now(date.tzinfo)
         self.delta = self.base_date - self.date
         # configuration for display
         self.limit = {

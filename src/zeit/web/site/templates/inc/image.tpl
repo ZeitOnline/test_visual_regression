@@ -1,4 +1,4 @@
-{% if image %}
+{% if image and not is_image_expired(image) %}
 {# TRASHME Rather crude bitblt/zci image api switch #}
 {% set source = (request.image_host + image.path) if image is variant else image | default_image_url %}
 {% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source %}

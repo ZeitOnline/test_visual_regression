@@ -543,6 +543,51 @@ def comment_counter(application):
     return get_count
 
 
+# inspired by http://stackoverflow.com/a/28073449
+@pytest.fixture(scope='function')
+def clock(monkeypatch):
+    """ Now() manager patches datetime return a fixed, settable, value
+        (freezes time)
+    """
+    import datetime
+    original = datetime.datetime
+
+    class FreezeMeta(type):
+        def __instancecheck__(self, instance):
+            if type(instance) == original or type(instance) == Freeze:
+                return True
+
+    class Freeze(datetime.datetime):
+        __metaclass__ = FreezeMeta
+
+        @classmethod
+        def freeze(self, val):
+            self.frozen = val
+
+        @classmethod
+        def now(self, tz=None):
+            if tz is not None:
+                if self.frozen.tzinfo is None:
+                    # https://docs.python.org/2/library/datetime.html says,
+                    # the result is equivalent to tz.fromutc(
+                    #   datetime.utcnow().replace(tzinfo=tz)).
+                    return tz.fromutc(self.frozen.replace(tzinfo=tz))
+                else:
+                    return self.frozen.astimezone(tz)
+            return self.frozen
+
+        @classmethod
+        def delta(self, timedelta=None, **kwargs):
+            """ Moves time fwd/bwd by the delta"""
+            if not timedelta:
+                timedelta = datetime.timedelta(**kwargs)
+            self.frozen += timedelta
+
+    monkeypatch.setattr(datetime, 'datetime', Freeze)
+    Freeze.freeze(original.utcnow())
+    return Freeze
+
+
 class TestApp(webtest.TestApp):
 
     def get_json(self, url, params=None, headers=None, *args, **kw):

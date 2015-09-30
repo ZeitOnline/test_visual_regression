@@ -223,14 +223,24 @@ class Image(BaseImage):
                 rel = cr.attrib.get('rel', '') == 'nofollow'
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
-        target = model_block.references and model_block.references.target
-        if zeit.content.image.interfaces.IImageGroup.providedBy(target):
+        target = None
+        referenced = None
+        if model_block.references:
+            try:
+                referenced = model_block.references.target
+            except TypeError:
+                pass  # Unresolveable uniqueId
+        if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
             variant = getattr(model_block.layout, 'variant', None) or (
                 self.DEFAULT_VARIANT)
             try:
-                target = target[variant]
+                target = referenced[variant]
             except KeyError:
                 target = None
+        else:
+            target = referenced
+        if zeit.web.core.image.is_image_expired(target):
+            target = None
 
         if target:
             self.image = target
@@ -398,6 +408,8 @@ class NewsletterTeaser(object):
             self.context.reference, None)
         image = images.image if images is not None else None
         if not zeit.content.image.interfaces.IImageGroup.providedBy(image):
+            return
+        if zeit.web.core.image.is_image_expired(image):
             return
         # XXX We should not hardcode the host, but newsletter is rendered on
         # friedbert-preview, which can't use `image_host`. Should we introduce

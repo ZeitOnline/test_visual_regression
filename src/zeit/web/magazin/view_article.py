@@ -38,8 +38,13 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
     def comments(self):
         if not self.show_commentthread:
             return
-        return zeit.web.core.comments.get_thread(
-            self.context.uniqueId, sort='desc')
+
+        try:
+            return zeit.web.core.comments.get_thread(
+                self.context.uniqueId, sort='desc')
+        except zeit.web.core.comments.ThreadNotLoadable:
+            self.comments_loadable = False
+            return
 
     @zeit.web.reify
     def nextread(self):

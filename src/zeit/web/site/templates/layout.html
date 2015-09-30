@@ -188,6 +188,10 @@
         {%- include "zeit.web.site:templates/inc/overlay.html" ignore missing -%}
     {% endif %}
 
+    {% block adblocker_count %}
+        {%- include "zeit.web.core:templates/inc/tracking/adblocker_count.html" ignore missing -%}
+    {% endblock %}
+
     <script src="{{ request.asset_host }}/js/site.js"></script>
 
     {% if view.vgwort_url %}
