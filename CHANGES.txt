@@ -4,7 +4,7 @@ Change log for zeit.web
 2.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- OPS-239: Make newsfeed caching header configurable
 
 
 2.8.2 (2015-09-30)

@@ -16,6 +16,7 @@ import zeit.content.image.interfaces
 import zeit.cms.interfaces
 import zeit.push.interfaces
 
+import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.template
 import zeit.web.core.view_centerpage
@@ -80,6 +81,8 @@ class Newsfeed(Base):
     def __call__(self):
         super(Newsfeed, self).__call__()
         self.request.response.content_type = 'application/rss+xml'
+        self.request.response.cache_expires(
+            zeit.web.core.cache.caching_time_feed(self.context))
         return lxml.etree.tostring(
             self.build_feed(), pretty_print=True, xml_declaration=True,
             encoding='UTF-8')

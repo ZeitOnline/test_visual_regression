@@ -57,6 +57,7 @@ def app_settings(mockserver):
         'caching_time_content': '5',
         'caching_time_article': '10',
         'caching_time_centerpage': '20',
+        'caching_time_feed': '25',
         'caching_time_gallery': '40',
         'caching_time_image': '30',
         'caching_time_videostill': '35',
