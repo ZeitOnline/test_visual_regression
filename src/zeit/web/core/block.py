@@ -224,7 +224,12 @@ class Image(BaseImage):
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
         target = None
-        referenced = model_block.references and model_block.references.target
+        referenced = None
+        if model_block.references:
+            try:
+                referenced = model_block.references.target
+            except TypeError:
+                pass  # Unresolveable uniqueId
         if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
             variant = getattr(model_block.layout, 'variant', None) or (
                 self.DEFAULT_VARIANT)
