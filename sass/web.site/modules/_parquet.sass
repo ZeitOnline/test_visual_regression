@@ -56,12 +56,10 @@
 				text-decoration: none
 			background: $spektrum_de_blue
 			color: $white
-			left: 0
 			line-height: 1
 			padding: remify(17px) $page-padding
-			position: absolute
-			top: 0
-			width: 100%
+			+respond-min($break-tablet-min)
+				margin: (-$page-padding) (-$page-padding) remify(20px) (-$page-padding)
 			&:after
 				color: $white
 
