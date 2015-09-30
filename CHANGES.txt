@@ -4,7 +4,7 @@ Change log for zeit.web
 2.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- FIX: Check for ICommonMetadata when building feed
 
 
 2.8 (2015-09-29)
@@ -39,8 +39,6 @@ Change log for zeit.web
 - FIX: Do not show article age on advertorial CP teasers
 
 - FIX: Suppress `.cp2015` suffix in some more URLs
-
-- FIX: Check for ICommonMetadata when building feed
 
 
 2.6 (2015-09-23)
