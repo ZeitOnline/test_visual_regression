@@ -112,6 +112,11 @@ class Newsfeed(Base):
             )
         root.append(channel)
         for content in filter_and_sort_entries(self.context)[1:15]:
+            metadata = zeit.cms.content.interfaces.ICommonMetadata(
+                content, None)
+            if metadata is None:
+                continue
+
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
             # XXX Since this view will be accessed via newsfeed.zeit.de, we
@@ -127,7 +132,7 @@ class Newsfeed(Base):
                            for author in content.authorships]
                 authors = [x for x in authors if x]
 
-            description = content.teaserText
+            description = metadata.teaserText
             teaser_image = zeit.content.image.interfaces.IImages(content).image
             variant = teaser_image.variant_url('wide', 148, 84) if (
                 # Missing meta files break this, since "Folder has no attribute
@@ -143,15 +148,15 @@ class Newsfeed(Base):
                         '{}{}'.format(
                             self.request.asset_url('/'),
                             variant.lstrip('/')),
-                        content.teaserText)
+                        metadata.teaserText)
 
             item = E.item(
-                E.title(content.title),
+                E.title(metadata.title),
                 E.link(content_url),
                 E.description(description),
-                E.category(content.sub_ressort or content.ressort),
+                E.category(metadata.sub_ressort or metadata.ressort),
                 DC_MAKER(u'ZEIT ONLINE: {} - {}'.format(
-                    (content.sub_ressort or content.ressort),
+                    (metadata.sub_ressort or metadata.ressort),
                     u', '.join(authors))),
                 E.pubDate(format_rfc822_date(
                     last_published_semantic(content))),
