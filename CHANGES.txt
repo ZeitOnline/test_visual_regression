@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - FIX: Check for ICommonMetadata when building feed
 
+- FIX: Add pagination to Advertorials
+
 
 2.8 (2015-09-29)
 ----------------
