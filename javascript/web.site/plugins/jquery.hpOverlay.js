@@ -15,6 +15,8 @@
  */
 
 (function( $, window, document, ZMO ) {
+    'use strict';
+
     // options may be overwritten by hpoverlay.config.js
     var options = {
             cookieTimeInDays: 1.5,
