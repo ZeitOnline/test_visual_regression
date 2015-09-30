@@ -10,6 +10,9 @@ Change log for zeit.web
 
 - FIX: Check for ICommonMetadata when building feed
 
+- FIX: Be more defensive in several places (byline, missing meta files, broken
+  references etc.)
+
 
 2.8 (2015-09-29)
 ----------------
