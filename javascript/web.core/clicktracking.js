@@ -76,16 +76,8 @@ define( [ 'jquery' ], function( $ ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         useDataTracking: function( $element ) {
-
-            var trackingData = false;
-
-            try {
-                trackingData = $element.data( 'tracking' ).split( '|' );
-            } catch ( err ) {
-                trackingData = $element.data( 'tracking-appear' ).split( '|' );
-            }
-
-            var data = [
+            var trackingData = $element.data( 'tracking' ).split( '|' ),
+                data = [
                     getBreakpoint(),
                     trackingData[0],
                     trackingData[1] // url
@@ -161,18 +153,11 @@ define( [ 'jquery' ], function( $ ) {
         }
     },
     clickTrack = function( event ) {
+        var trackingData = trackElement[ event.data.funcName ]( $( this ) );
 
-        var element = $( event.target ).closest( 'a' );
-
-        // if we dont want to track a link, but a div
-        if ( $( event.target ).data( 'track-div' ) ) {
-            element = $( event.target ).closest( 'div' );
-        }
-
-        var trackingData = trackElement[ event.data.funcName ]( element );
-
-        if ( event.data.debug ) {
+        if ( debugMode ) {
             event.preventDefault();
+            event.stopImmediatePropagation();
             console.debug( trackingData );
         }
         if ( trackingData ) {
@@ -289,7 +274,8 @@ define( [ 'jquery' ], function( $ ) {
             });
 
         });
-    };
+    },
+    debugMode = document.location.search.indexOf( 'webtrekk-clicktracking-debug' ) > -1;
 
     return {
         init: function() {
@@ -328,8 +314,7 @@ define( [ 'jquery' ], function( $ ) {
                         '.parquet-meta',
                         'a:not([data-wt-click])'
                     ]
-                },
-                debugMode = document.location.search.indexOf( 'webtrekk-clicktracking-debug' ) > -1;
+                };
 
             // The key name is used for calling the corresponding function in trackElement
             for ( var key in trackingLinks ) {
@@ -339,21 +324,14 @@ define( [ 'jquery' ], function( $ ) {
                         filter = selectors.shift() || null;
 
                     $( delegate ).on( 'click', filter, {
-                        funcName: key,
-                        debug: debugMode
+                        funcName: key
                     }, clickTrack );
                 }
             }
 
             // exceptions and extra cases
             $( '*[data-tracking]' ).on( 'click', {
-                funcName: 'useDataTracking',
-                debug: debugMode
-            }, clickTrack );
-
-            $( '*[data-tracking-appear]' ).on( 'appear', {
-                funcName: 'useDataTracking',
-                debug: debugMode
+                funcName: 'useDataTracking'
             }, clickTrack );
 
             registerGlobalTrackingMessageEndpointForVideoPlayer();
