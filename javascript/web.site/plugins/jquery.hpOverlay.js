@@ -166,7 +166,7 @@
             },
             log: function() {
                 if ( options.debug || options.force ) {
-                    console.info.apply( this, arguments );
+                    console.info.apply( console, arguments );
                 }
             }
         };
