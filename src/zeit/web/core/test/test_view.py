@@ -80,16 +80,14 @@ def test_json_delta_time_from_date_should_return_http_error_on_missing_params(
         testbrowser('{}/json/delta_time'.format(testserver.url))
 
 
-def test_json_delta_time_from_unique_id_should_return_delta_time(testserver,
-                                                                 testbrowser,
-                                                                 monkeypatch):
-    now = zeit.web.core.date.parse_date('2014-10-15T16:23:59.780412+00:00')
-    monkeypatch.setattr(zeit.web.core.date, 'get_base_date', lambda *_: now)
+def test_json_delta_time_from_unique_id_should_return_delta_time(
+        testbrowser, clock):
+    clock.freeze(zeit.web.core.date.parse_date(
+        '2014-10-15T16:23:59.780412+00:00'))
 
     browser = testbrowser(
-        '{}/json/delta_time?'
-        'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'.format(
-            testserver.url))
+        '/json/delta_time?'
+        'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup')
     content = json.loads(browser.contents)
     a1 = 'http://xml.zeit.de/zeit-online/cp-content/article-01'
     a2 = 'http://xml.zeit.de/zeit-online/cp-content/article-02'

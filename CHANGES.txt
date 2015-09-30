@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-2.8 (unreleased)
+2.9 (unreleased)
 ----------------
+
+- Nothing changed yet.
+
+
+2.8 (2015-09-29)
+----------------
+
+- ZON-2281: Add full link to TOP link
 
 - ZON-2263: Add Adcontroller tarpit/honeypot tracking script
 
