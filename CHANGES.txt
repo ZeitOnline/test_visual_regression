@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-2.9 (unreleased)
-----------------
+2.8.1 (2015-09-30)
+------------------
 
 - ZON-2262: Respect image expiration dates in cache-control headers
 
