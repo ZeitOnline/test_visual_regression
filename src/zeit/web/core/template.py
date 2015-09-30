@@ -300,6 +300,21 @@ def first_child(iterable):
 
 
 @zeit.web.register_filter
+def first_ancestor(iterable):
+    child = first_child(iterable)
+    if child is None:
+        return iterable
+    return first_ancestor(child)
+
+
+@zeit.web.register_filter
+def startswith(string, value):
+    if not isinstance(string, basestring):
+        return False
+    return string.startswith(value)
+
+
+@zeit.web.register_filter
 def remove_break(string):
     return re.sub('\n', '', string)
 
@@ -862,3 +877,12 @@ def remove_get_params(url, *args):
     else:
         return '{}://{}{}?{}'.format(
             scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
+
+
+@zeit.web.register_global
+def provides(obj, iface):
+    try:
+        iface = pyramid.path.DottedNameResolver().resolve(iface)
+    except ValueError:
+        return False
+    return iface.providedBy(obj)
