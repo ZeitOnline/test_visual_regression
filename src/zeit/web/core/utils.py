@@ -330,7 +330,10 @@ class LazyProxy(object):
         return len(self.__origin__)
 
     def __iter__(self):
-        return iter(self.__origin__)
+        try:
+            return iter(self.__origin__)
+        except TypeError:
+            return iter(())
 
     def __contains__(self, item):
         return item in self.__origin__

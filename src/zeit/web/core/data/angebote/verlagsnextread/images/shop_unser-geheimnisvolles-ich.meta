@@ -15,7 +15,6 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">5</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_to">2015-05-13T11:46:39+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="retract_job_id">1249187618</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">shop_unser-geheimnisvolles-ich.png</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-02-13T13:29:44.031951+00:00</attribute>

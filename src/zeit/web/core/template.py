@@ -392,6 +392,8 @@ def default_image_url(image, image_pattern='default'):
 
         if getattr(image, 'uniqueId', None) is None:
             return
+        if zeit.web.core.image.is_image_expired(image):
+            return
 
         scheme, netloc, path, query, fragment = urlparse.urlsplit(
             image.uniqueId)
@@ -445,6 +447,8 @@ def closest_substitute_image(image_group,
 
     # make sure it's an Image Group
     if not zeit.content.image.interfaces.IImageGroup.providedBy(image_group):
+        return
+    if zeit.web.core.image.is_image_expired(image_group):
         return
     elif image_pattern in image_group:
         # return happily if image_pattern is present
@@ -668,6 +672,8 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
             image_id = set_image_id(asset_id, image_base_name,
                                     image_pattern, ext)
             image = zeit.cms.interfaces.ICMSContent(image_id)
+        if zeit.web.core.image.is_image_expired(image):
+            return None
 
         teaser_image = zope.component.getMultiAdapter(
             (asset, image),
@@ -856,3 +862,12 @@ def remove_get_params(url, *args):
     else:
         return '{}://{}{}?{}'.format(
             scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
+
+
+@zeit.web.register_global
+def provides(obj, iface):
+    try:
+        iface = pyramid.path.DottedNameResolver().resolve(iface)
+    except ValueError:
+        return False
+    return iface.providedBy(obj)

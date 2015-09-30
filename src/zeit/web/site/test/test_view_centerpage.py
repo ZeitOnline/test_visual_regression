@@ -1410,3 +1410,10 @@ def test_news_teaser_date_and_reference(jinja2_env):
 
     assert datetime[0].text.strip() == '22:46'
     assert product[0].text == 'DPA'
+
+
+def test_cp_does_not_render_image_if_expired(testbrowser):
+    with mock.patch('zeit.web.core.image.image_expires') as expired:
+        expired.return_value = -1
+        browser = testbrowser('/zeit-online/basic-teasers-setup')
+        assert '/zeit-online/cp-content/ig-2' not in browser.contents

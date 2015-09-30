@@ -1,8 +1,20 @@
 Change log for zeit.web
 =======================
 
-2.8 (unreleased)
+2.9 (unreleased)
 ----------------
+
+- ZON-2262: Respect image expiration dates in cache-control headers
+
+- ZON-2262: Do not include expired images in rendered pages
+
+- FIX: Check for ICommonMetadata when building feed
+
+
+2.8 (2015-09-29)
+----------------
+
+- ZON-2281: Add full link to TOP link
 
 - ZON-2263: Add Adcontroller tarpit/honeypot tracking script
 

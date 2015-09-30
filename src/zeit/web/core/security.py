@@ -98,8 +98,8 @@ def get_community_user_info(request):
     sso_info = get_user_info_from_sso_cookie(cookie, conf.get('sso_key'))
 
     if sso_info:
-        user_info['name'] = sso_info['name']
-        user_info['mail'] = sso_info['email']
+        user_info['name'] = sso_info.get('name')
+        user_info['mail'] = sso_info.get('email')
         user_info['uid'] = sso_info['id']
 
     # We still get the users avatar from the community. So we need to call the

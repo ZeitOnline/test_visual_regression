@@ -11,12 +11,6 @@ import zeit.web.core.template
 locale = 'de_DE'
 
 
-def get_base_date(date):
-    # XXX Wrapper function needed on module level, because we need to patch
-    #     it in tests.
-    return datetime.datetime.now(date.tzinfo)
-
-
 @zeit.web.register_filter
 def parse_date(date,
                date_format='%Y-%m-%dT%H:%M:%S.%f+00:00'):
@@ -148,7 +142,7 @@ class DeltaTime(object):
 
     def __init__(self, date, base_date=None):
         self.date = date
-        self.base_date = base_date or get_base_date(date)
+        self.base_date = base_date or datetime.datetime.now(date.tzinfo)
         self.delta = self.base_date - self.date
         # configuration for display
         self.limit = {
