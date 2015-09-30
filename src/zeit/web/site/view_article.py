@@ -4,7 +4,6 @@ import logging
 from pyramid.view import view_config
 from pyramid.view import view_defaults
 import babel.dates
-import pyramid.response
 import zope.component
 
 import zeit.cms.workflow.interfaces

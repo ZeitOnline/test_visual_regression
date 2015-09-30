@@ -199,6 +199,15 @@ def test_image_should_use_variant_given_on_layout(application):
     assert 'original' == image.image.__name__
 
 
+def test_image_should_be_none_if_expired():
+    model_block = mock.Mock()
+    model_block.is_empty = False
+    with mock.patch('zeit.web.core.image.is_image_expired') as expired:
+        expired.return_value = True
+        image = zeit.web.core.block.Image(model_block)
+        assert image.image is None
+
+
 def test_module_class_should_hash_as_expected():
     context = mock.Mock()
     context.xml.attrib = {'{http://namespaces.zeit.de/CMS/cp}__name__': 42}
