@@ -79,7 +79,7 @@ def get_user_info_from_sso_cookie(cookie, key):
 def recursively_call_community(req, tries):
     if tries > 0:
         try:
-            return urllib2.urlopen(req, timeout=6)
+            return urllib2.urlopen(req, timeout=2)
         except Exception:
             return recursively_call_community(req, tries-1)
     else:
@@ -111,7 +111,7 @@ def get_community_user_info(request):
         headers={'Accept': 'application/xml',
                  'Cookie': request.headers.get('Cookie', '')})
 
-    community_response = recursively_call_community(community_request, 2)
+    community_response = recursively_call_community(community_request, 1)
 
     if not community_response:
         return user_info

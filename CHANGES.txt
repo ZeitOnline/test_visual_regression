@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - OPS-239: Make newsfeed caching header configurable
 
+- MAINT: Decrease timeout for login requests
+
 
 2.9 (2015-10-01)
 ----------------
