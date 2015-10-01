@@ -152,8 +152,6 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/gallery-types.xml'),
         'vivi_zeit.web_series-source': (
             'egg://zeit.web.core/data/config/series.xml'),
-        'vivi_zeit.web_whitelist-meta-source': (
-            'egg://zeit.web.core/data/config/whitelist_meta.xml'),
         'vivi_zeit.web_blacklist-url': (
             'egg://zeit.web.core/data/config/blacklist.xml'),
         'vivi_zeit.imp_scale-source':
@@ -562,27 +560,27 @@ def clock(monkeypatch):
         __metaclass__ = FreezeMeta
 
         @classmethod
-        def freeze(self, val):
-            self.frozen = val
+        def freeze(cls, val):
+            cls.frozen = val
 
         @classmethod
-        def now(self, tz=None):
+        def now(cls, tz=None):
             if tz is not None:
-                if self.frozen.tzinfo is None:
+                if cls.frozen.tzinfo is None:
                     # https://docs.python.org/2/library/datetime.html says,
                     # the result is equivalent to tz.fromutc(
                     #   datetime.utcnow().replace(tzinfo=tz)).
-                    return tz.fromutc(self.frozen.replace(tzinfo=tz))
+                    return tz.fromutc(cls.frozen.replace(tzinfo=tz))
                 else:
-                    return self.frozen.astimezone(tz)
-            return self.frozen
+                    return cls.frozen.astimezone(tz)
+            return cls.frozen
 
         @classmethod
-        def delta(self, timedelta=None, **kwargs):
+        def delta(cls, timedelta=None, **kwargs):
             """ Moves time fwd/bwd by the delta"""
             if not timedelta:
                 timedelta = datetime.timedelta(**kwargs)
-            self.frozen += timedelta
+            cls.frozen += timedelta
 
     monkeypatch.setattr(datetime, 'datetime', Freeze)
     Freeze.freeze(original.utcnow())

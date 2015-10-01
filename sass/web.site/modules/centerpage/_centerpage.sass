@@ -60,7 +60,11 @@
 		+respond-min($break-tablet-min)
 			display: block
 	&--spektrum
-		padding-top: remify(60px)
+		+respond-min($break-tablet-min)
+			border-bottom: 1px solid $spektrum_de_blue
+			border-top: 1px solid $spektrum_de_blue
+			margin-bottom: -1px
+			margin-top: -1px
 	+respond-min($break-areas)
 		float: left
 		&--ranking
