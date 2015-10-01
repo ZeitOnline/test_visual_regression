@@ -68,6 +68,24 @@
         {% endblock article_body %}
     {% endprofile %}
     </article>
+
+    {# TODO: block and subtemplate #}
+    <div class="article-lineage">
+        {% set predecessor, successor = view.lineage %}
+        <a href="{{ predecessor.href }}" class="article-lineage__link article-lineage__link--prev">
+            <span class="article-lineage__link-text article-lineage__link-text--prev">
+                <span class="article-lineage__link-kicker">TODO: Kicker</span>
+                <span class="article-lineage__link-title">{{ predecessor.title }}</span>
+            </span>
+        </a>
+        <a href="{{ successor.href }}" class="article-lineage__link article-lineage__link--next">
+            <span class="article-lineage__link-text article-lineage__link-text--next">
+                <span class="article-lineage__link-kicker">TODO: Kicker</span>
+                <span class="article-lineage__link-title">{{ successor.title }}</span>
+            </span>
+        </a>
+    </div>
+
     {% endblock content %}
     {% block article_interactions %}
     <div class="article-interactions article__item">

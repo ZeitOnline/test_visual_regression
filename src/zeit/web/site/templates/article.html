@@ -32,15 +32,6 @@
 {%- endblock %}
 
 {% block article_pages %}
-    <div class="article-lineage">
-        {% set predecessor, successor = view.lineage %}
-        <a href="{{ predecessor.uniqueId | create_url }}" class="article-predecessor">
-            {{ predecessor.title }}
-        </a>
-        <a href="{{ successor.uniqueId | create_url }}" class="article-successor">
-            {{ successor.title }}
-        </a>
-    </div>
     <section class="article-page" data-page-number="{{ view.current_page.number + 1 }}">
         {{ render_page(view.current_page) }}
     </section>
