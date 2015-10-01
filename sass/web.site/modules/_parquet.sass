@@ -8,11 +8,6 @@
 	+respond-min($break-desktop-min)
 		width: 25%
 
-	&__links
-		display: none
-		padding: remify(20px) $page-padding
-		+respond-min($break-tablet-min)
-			display: block
 	&__logo
 		&--spektrum
 			+background-size(contain)
@@ -42,9 +37,9 @@
 			line-height: remify(12px)
 		+respond-min($break-tablet-min)
 			line-height: normal
-			margin: 0
 			overflow: hidden
-			padding: remify(20px) $page-padding 0
+			padding-bottom: 0
+			padding-top: remify(20px)
 			text-overflow: ellipsis
 			&:after
 				content: none
@@ -60,29 +55,34 @@
 			background: $spektrum_de_blue
 			color: $white
 			line-height: 1
-			padding: remify(17px) $page-padding
+			padding-bottom: remify(17px)
+			padding-top: remify(17px)
 			&:after
 				color: $white
 
+	&__links
+		display: none
+		padding: remify(20px) $page-padding
+		+respond-min($break-tablet-min)
+			display: block
+
 	&__topic-links
 		margin: 0 0 1em
-		+respond-min($break-tablet-min)
-			list-style: none
-			padding: 0
-			width: 100%
+		list-style: none
+		padding: 0
+		width: 100%
 
 	&__topic-link,
 	&__more-link
-		+respond-min($break-tablet-min)
-			+link
-				color: $zon_grey
-			+on-interaction
-				color: $zon_dark_grey
-			display: inline-block
-			font-size: remify(14px)
-			letter-spacing: $zon-letter-spacing-s
-			text-overflow: ellipsis
-			overflow: hidden
+		+link
+			color: $zon_grey
+		+on-interaction
+			color: $zon_dark_grey
+		display: inline-block
+		font-size: remify(14px)
+		letter-spacing: $zon-letter-spacing-s
+		text-overflow: ellipsis
+		overflow: hidden
 
 	&__topic-link
 		border-bottom: 1px solid rgba($zon_mid_grey, .4)
