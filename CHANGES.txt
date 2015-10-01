@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.9 (unreleased)
+2.9 (2015-10-01)
 ----------------
 
 - ZON-2242: Globally configure image, asset and jsconf hosts
