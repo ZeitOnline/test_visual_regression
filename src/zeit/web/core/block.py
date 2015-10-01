@@ -231,11 +231,11 @@ class Image(BaseImage):
 
         target = None
         referenced = None
-        if model_block.references:
-            try:
+        try:
+            if model_block.references:
                 referenced = model_block.references.target
-            except TypeError:
-                pass  # Unresolveable uniqueId
+        except TypeError:
+            pass  # Unresolveable uniqueId
         if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
             variant = getattr(model_block.layout, 'variant', None) or (
                 self.DEFAULT_VARIANT)
