@@ -2,6 +2,7 @@
 
 {% block before_module_list %}
     <div class="parquet-meta">
+
         {% if area.referenced_cp is none %}
             <span class="parquet-meta__title">
                 {{ area.title | hide_none }}
@@ -10,6 +11,10 @@
             <a class="parquet-meta__title" href="{{ area.referenced_cp.uniqueId | create_url }}">
                 {{ area.title | hide_none }}
             </a>
+        {% endif %}
+
+        <div class="parquet-meta__links">
+        {% if area.referenced_cp is not none and area.referenced_cp | topic_links | length %}
             <ul class="parquet-meta__topic-links">
                 {% for label, link in area.referenced_cp | topic_links %}
                     <li>
@@ -20,12 +25,13 @@
                 {% endfor %}
             </ul>
         {% endif %}
-
         {% if area.read_more and area.read_more_url %}
             <a href="{{ area.read_more_url }}" class="parquet-meta__more-link">
                 {{ area.read_more }}
             </a>
         {% endif %}
+        </div>
+
     </div>
     <div class="parquet-teasers">
     {# XXX Do we really need the parquet-teasers divs? (ND) #}

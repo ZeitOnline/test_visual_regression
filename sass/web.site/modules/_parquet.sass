@@ -1,10 +1,8 @@
 .parquet-meta
-	display: block
 	vertical-align: top
 	background-color: $zon_lighter_grey
 	+respond-min($break-tablet-min)
 		display: table-cell
-		padding: $page-padding
 		width: 27%
 		max-width: remify(200px) // looks like nonsense, but works to suppress overflowing table-cell
 	+respond-min($break-desktop-min)
@@ -39,9 +37,9 @@
 			line-height: remify(12px)
 		+respond-min($break-tablet-min)
 			line-height: normal
-			margin: 0
 			overflow: hidden
-			padding: 0
+			padding-bottom: 0
+			padding-top: remify(20px)
 			text-overflow: ellipsis
 			&:after
 				content: none
@@ -56,40 +54,35 @@
 				text-decoration: none
 			background: $spektrum_de_blue
 			color: $white
-			left: 0
 			line-height: 1
-			padding: remify(17px) $page-padding
-			position: absolute
-			top: 0
-			width: 100%
+			padding-bottom: remify(17px)
+			padding-top: remify(17px)
 			&:after
 				color: $white
 
-	&__topic-links
+	&__links
 		display: none
-		margin: 1em 0
+		padding: remify(20px) $page-padding
 		+respond-min($break-tablet-min)
 			display: block
-			list-style: none
-			padding: 0
-			width: 100%
 
-		&--spektrum
-			margin-top: 0
+	&__topic-links
+		margin: 0 0 1em
+		list-style: none
+		padding: 0
+		width: 100%
 
 	&__topic-link,
 	&__more-link
-		display: none
-		+respond-min($break-tablet-min)
-			+link
-				color: $zon_grey
-			+on-interaction
-				color: $zon_dark_grey
-			display: inline-block
-			font-size: remify(14px)
-			letter-spacing: $zon-letter-spacing-s
-			text-overflow: ellipsis
-			overflow: hidden
+		+link
+			color: $zon_grey
+		+on-interaction
+			color: $zon_dark_grey
+		display: inline-block
+		font-size: remify(14px)
+		letter-spacing: $zon-letter-spacing-s
+		text-overflow: ellipsis
+		overflow: hidden
 
 	&__topic-link
 		border-bottom: 1px solid rgba($zon_mid_grey, .4)
@@ -103,14 +96,12 @@
 		&--spektrum
 			+link
 				color: $spektrum_de_blue
+			display: block
 			font-weight: normal
 
 	&__more
 		&--spektrum
-			display: none
-			+respond-min($break-tablet-min)
-				display: block
-				font-size: remify(14px)
+			font-size: remify(14px)
 
 .parquet-teasers
 	display: table-cell

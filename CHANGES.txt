@@ -4,6 +4,8 @@ Change log for zeit.web
 2.10 (unreleased)
 -----------------
 
+- ZON-1936: Change bottom separator color in Spektrum parquet area
+
 - HOTFIX: Repair old IE css reference
 
 - ZON-2115: Antidote for keyword and topicpage special rules
