@@ -36,10 +36,10 @@
 
         {% set updated = cp.include_teaser_datetime(teaser, blockname, blockname) | hide_none %}
         {% if updated %}
-        <span class="{{ '{}__update'.format(blockname) | with_mods(blockname_modifier) }}">
-            {{ lama.use_svg_icon('storystream-updated', 'teaser-storystream__updateicon', request) }}
-            Aktualisiert {{ updated }}
-        </span>
+            <span class="{{ '{}__update'.format(blockname) | with_mods(blockname_modifier) }}">
+                {{ lama.use_svg_icon('storystream-updated', 'teaser-storystream__updateicon', request) }}
+                Aktualisiert {{ updated }}
+            </span>
         {% endif %}
 
         <a class="button {{ '{}__button'.format(blockname) | with_mods(blockname_modifier) }}" href="{{ target_url }}">zum Live-Dossier</a>
