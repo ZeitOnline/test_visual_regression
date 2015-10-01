@@ -182,8 +182,11 @@
         <region area="id-1ca0a3c0-fe49-6291-baac-453cc2a213dd" kind="parquet" title="Test-Modi">
             <container cp:type="markup" module="markup" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-287eb191f252" title="Webtrekk-Debug-Modus">
                 <text>
-                <p>Im Webtrekk-Debug-Modus wird das Klicktracking <strong>nicht</strong> an Webtrekk gesendet (und der Klick ausgeführt), <strong>sondern</strong> der String wird über `console.log` ausgegeben.</p>
-                <h3>Wie wird der Modus ausgelöst?</h3>
+                <p>
+                    Im Webtrekk-Debug-Modus wird das Klicktracking <strong>nicht</strong> an Webtrekk gesendet (und der Klick ausgeführt),
+                    <strong>sondern</strong> der String wird über <code>console.log</code> ausgegeben.
+                </p>
+                <h4>Wie wird der Modus ausgelöst?</h4>
                 <ul>
                     <li>Über den Query Parameter <a href="127.0.0.1:9090/index?webtrekk-clicktracking-debug">?webtrekk-clicktracking-debug</a>.</li>
                 </ul>
@@ -191,19 +194,31 @@
             </container>
             <container cp:type="markup" module="markup" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a29c-287eb191f251" title="Wrapper-App">
                 <text>
-                <h3>Wie wird der Modus ausgelöst?</h3>
+                <h4>Wie wird der Modus ausgelöst?</h4>
                 <ul>
-                    <li>if the pages are requested from a host with the URL app-content.zeit.de</li>
-                    <li>if the dev environment and the query parameter <a href="http://127.0.0.1:9090/zeit-online/article/01?app-content">?app-content</a> is present.</li>
+                    <li>if the pages are requested from a host with the URL <a href="http://app-content.zeit.de">app-content.zeit.de</a></li>
+                    <li>if the dev environment and the query parameter <a href="/zeit-online/article/01?app-content">?app-content</a> is present.</li>
                 </ul>
                 </text>
             </container>
             <container cp:type="markup" module="markup" visible_mobile="True" cp:__name__="id-8ae1e86c-bcf7-4d07-a59c-287eb191f252" title="aqdAd-Markierung">
                 <text>
                 <p>AdPlaces (aus dem AdController) werden auf der Seite markiert, auch wenn keine Werbung darauf gebucht ist.</p>
-                <h3>Wie wird der Modus ausgelöst?</h3>
+                <h4>Wie wird der Modus ausgelöst?</h4>
                 <ul>
-                    <li>Über den Query Parameter <a href="127.0.0.1:9090/index?iqadtest=iqadview">?iqadtest=iqadview</a>.</li>
+                    <li>Über den Query Parameter <a href="/index?iqadtest=iqadview">?iqadtest=iqadview</a>.</li>
+                </ul>
+                </text>
+            </container>
+            <container cp:type="markup" module="markup" visible_mobile="True" cp:__name__="id-8ae1e86c-dbcf7-4d07-a59c-287eb191f252" title="HP Popover">
+                <text>
+                <p>Die Anzeige des Popovers auf der HP kann erzwungen oder im Debug Modus auf normalem Weg gestartet werden.</p>
+                <h4>Wie wird der Modus ausgelöst?</h4>
+                <ul>
+                    <li>
+                        Über den Query Parameter <a href="/index?debug-popover">?debug-popover</a>
+                        oder <a href="/index?force-popover">?force-popover</a>.
+                    </li>
                 </ul>
                 </text>
             </container>
