@@ -34,10 +34,10 @@
 {% block article_pages %}
     <div class="article-lineage">
         {% set predecessor, successor = view.lineage %}
-        <a href="{{ predecessor.href }}" class="article-predecessor">
+        <a href="{{ predecessor.uniqueId | create_url }}" class="article-predecessor">
             {{ predecessor.title }}
         </a>
-        <a href="{{ successor.href }}" class="article-successor">
+        <a href="{{ successor.uniqueId | create_url }}" class="article-successor">
             {{ successor.title }}
         </a>
     </div>

@@ -13,7 +13,10 @@ import pyramid.response
 import pyramid.settings
 import pyramid.view
 import werkzeug.http
+import zope.component
 
+from zeit.solr import query as lq
+import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.connector.connector
 import zeit.connector.interfaces
@@ -21,14 +24,13 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.content.text.interfaces
-import zeit.cms.tagging.interfaces
+import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.date
 
-import zope.component
 
 log = logging.getLogger(__name__)
 
@@ -703,6 +705,36 @@ class Content(Base):
                         self.date_print_published,
                         "d. MMMM yyyy", locale="de_De")
                 return base64.b64encode(label.encode('latin-1'))
+
+    @zeit.web.reify
+    def lineage(self):
+        conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+
+        def next(from_, to, sort):
+            query = lq.and_(
+                lq.datetime_range(
+                    'date_first_released', from_, to),
+                lq.bool_field(
+                    'breaking_news', False),
+                lq.field_raw(
+                    'type', lq.or_('article', 'link', 'gallery')),
+                lq.not_(
+                    lq.field('ressort', 'News')),
+                lq.not_(
+                    lq.field('product_text', 'News')),
+                lq.not_(
+                    lq.field('uniqueId', self.context.uniqueId)),
+                lq.not_(
+                    lq.field_raw('product_id', lq.or_(
+                        'SID', 'TGS', 'GOLEM', 'HaBl', 'WIWO', 'ADV'))),
+                lq.field(
+                    'published', 'published'))
+            return conn.search(query, sort='date_first_released ' + sort,
+                               fl='title uniqueId', rows=1).docs
+
+        date = zeit.cms.workflow.interfaces.IPublishInfo(
+            self.context).date_first_released
+        return next(None, date, 'desc') + next(date, None, 'asc')
 
     @zeit.web.reify
     def comments_allowed(self):
