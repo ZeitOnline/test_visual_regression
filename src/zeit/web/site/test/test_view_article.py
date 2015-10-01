@@ -486,7 +486,7 @@ def test_nextread_date_looks_less_like_a_date_for_google(jinja2_env):
         'http://xml.zeit.de/zeit-online/article/simple-nextread')
     request = pyramid.testing.DummyRequest(
         route_url=lambda x: 'http://foo.bar/',
-        asset_url=lambda x: '',
+        asset_host='',
         image_host='')
     view = zeit.web.site.view_article.Article(content, request)
     html_str = tpl.render(view=view, request=request)

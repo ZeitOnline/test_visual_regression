@@ -108,8 +108,8 @@ class Newsfeed(Base):
                        '06/logos/homepage_top.gif')),
                 E.title(self.pagetitle),
                 E.link(self.request.route_url('home'))
-                )
             )
+        )
         root.append(channel)
         for content in filter_and_sort_entries(self.context)[1:15]:
             metadata = zeit.cms.content.interfaces.ICommonMetadata(
@@ -146,9 +146,8 @@ class Newsfeed(Base):
                     u'<a href="{}"><img style="float:left; '
                     'margin-right:5px" src="{}"></a> {}').format(
                         content_url,
-                        '{}{}'.format(
-                            self.request.asset_url('/'),
-                            variant.lstrip('/')),
+                        '{}/{}'.format(
+                            self.request.asset_host, variant.lstrip('/')),
                         metadata.teaserText)
 
             item = E.item(
@@ -228,8 +227,8 @@ class SpektrumFeed(Base):
                 image_url = zeit.web.core.template.default_image_url(
                     image, 'spektrum')
                 image_url = image_url.replace(
-                    self.request.route_url('home'),
-                    self.request.asset_url('/'), 1)
+                    self.request.route_url('home').strip('/'),
+                    self.request.image_host, 1)
                 item.append(E.enclosure(
                     url=image_url,
                     # XXX Incorrect length, since bitblt will resize the image,

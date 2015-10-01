@@ -4,6 +4,8 @@ Change log for zeit.web
 2.9 (unreleased)
 ----------------
 
+- ZON-2242: Globally configure image, asset and jsconf hosts
+
 - MAINT: Add tests and more tracking to popover
 
 

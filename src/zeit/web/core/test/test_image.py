@@ -129,7 +129,7 @@ def test_variant_image_should_provide_desired_attributes(application):
     assert img.copyright == meta.copyrights
     assert img.image_pattern == img.variant == variant.name
     assert img.ratio == variant.ratio
-    assert img.path == 'zeit-online/cp-content/ig-4/default'
+    assert img.path == '/zeit-online/cp-content/ig-4/default'
 
 
 def test_variant_jinja_test_should_recognize_variants(application):

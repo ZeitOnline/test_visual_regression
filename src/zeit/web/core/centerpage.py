@@ -266,11 +266,11 @@ class VariantImage(object):
         group = zeit.content.image.interfaces.IImageGroup(variant, None)
         if group:
             self.image_group = group.uniqueId
-            self.path = group.variant_url(self.image_pattern).lstrip('/')
+            self.path = group.variant_url(self.image_pattern)
             self.fallback_path = group.variant_url(
                 self.image_pattern,
                 variant.fallback_width,
-                variant.fallback_height).lstrip('/')
+                variant.fallback_height)
         else:
             self.image_group = None
 

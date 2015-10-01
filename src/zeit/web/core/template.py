@@ -418,7 +418,7 @@ def default_image_url(image, image_pattern='default'):
         url = urlparse.urlunsplit((scheme, netloc, path, query, fragment))
         request = pyramid.threadlocal.get_current_request()
 
-        return url.replace('http://xml.zeit.de/', request.image_host, 1)
+        return url.replace('http://xml.zeit.de', request.image_host, 1)
     except Exception, e:
         # XXX: Surely we do not want to try-except on a function scope.
         log.debug('Cannot produce a default URL for {}. Reason {}'.format(
