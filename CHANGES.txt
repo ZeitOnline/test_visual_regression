@@ -1,10 +1,20 @@
 Change log for zeit.web
 =======================
 
-2.9 (unreleased)
-----------------
+2.10 (unreleased)
+-----------------
+
+- OPS-239: Make newsfeed caching header configurable
 
 - ZON-2115: Antidote for keyword and topicpage special rules
+
+
+2.9 (2015-10-01)
+----------------
+
+- ZON-2242: Globally configure image, asset and jsconf hosts
+
+- MAINT: Add tests and more tracking to popover
 
 
 2.8.2 (2015-09-30)

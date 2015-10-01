@@ -68,7 +68,7 @@
 
         if ( this.length && !window.ZMO.isMobileView() && galleryType !== 'dynamic' ) {
             $.ajax({
-                url: window.ZMO.scriptsURL + '/gallery.blocked.ressorts.js',
+                url: window.ZMO.jsconfHost + '/gallery.blocked.ressorts.js',
                 dataType: 'script',
                 success: function() {
                     var queryString = location.search.slice( 1 ).replace( /&*\bslide=(\d+)/g, '' ),

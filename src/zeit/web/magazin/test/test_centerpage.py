@@ -24,7 +24,7 @@ def monkeyreq(monkeypatch):
     def request():
         m = mock.Mock()
         m.route_url = lambda x: "http://example.com/"
-        m.image_host = 'http://example.com/'
+        m.image_host = 'http://example.com'
         return m
 
     monkeypatch.setattr(pyramid.threadlocal, "get_current_request", request)

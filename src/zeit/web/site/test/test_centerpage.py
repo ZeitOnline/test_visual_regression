@@ -201,7 +201,7 @@ def test_centerpage_markdown_module_is_rendered(jinja2_env):
         'http://xml.zeit.de/zeit-online/thema')
     request = pyramid.testing.DummyRequest(
         route_url=lambda x: 'http://foo.bar/',
-        asset_url=lambda x: '',
+        asset_host='',
         image_host='')
     view = zeit.web.site.view_centerpage.Centerpage(content, request)
     view.meta_robots = ''
@@ -220,7 +220,7 @@ def test_centerpage_teaser_topic_is_rendered(jinja2_env):
         'http://xml.zeit.de/zeit-online/topic-teaser')
     request = pyramid.testing.DummyRequest(
         route_url=lambda x: 'http://foo.bar/',
-        asset_url=lambda x: '',
+        asset_host='',
         image_host='')
     request.route_url.return_value = 'http://foo.bar/'
     view = zeit.web.site.view_centerpage.Centerpage(content, request)
@@ -266,3 +266,33 @@ def test_link_rel_to_prev_page_should_not_exist_on_first_page(testbrowser):
     assert len(rel_next) == 1
     assert len(rel_prev) == 0
     assert '/dynamic/angela-merkel?p=2' in rel_next[0].attrib['href']
+
+
+def test_hp_hides_popover_per_default(selenium_driver, testserver):
+    driver = selenium_driver
+
+    # default
+    driver.get('%s/index?debug-popover' % testserver.url)
+
+    wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
+    bg = driver.find_elements_by_css_selector(".overlay")[0]
+    box = driver.find_elements_by_css_selector(".lightbox")[0]
+
+    assert not wrap.is_displayed()
+    assert not bg.is_displayed()
+    assert not box.is_displayed()
+
+
+def test_hp_shows_popover(selenium_driver, testserver):
+    driver = selenium_driver
+
+    # default
+    driver.get('%s/index?force-popover' % testserver.url)
+
+    wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
+    bg = driver.find_elements_by_css_selector(".overlay")[0]
+    box = driver.find_elements_by_css_selector(".lightbox")[0]
+
+    assert wrap.is_displayed()
+    assert bg.is_displayed()
+    assert box.is_displayed()
