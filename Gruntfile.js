@@ -80,6 +80,7 @@ module.exports = function(grunt) {
         compass: {
             // general options
             options: {
+                assetCacheBuster: false,
                 bundleExec: true,
                 cssDir: project.codeDir + 'css',
                 fontsDir: project.codeDir + 'fonts',
