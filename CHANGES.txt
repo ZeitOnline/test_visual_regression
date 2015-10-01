@@ -4,9 +4,25 @@ Change log for zeit.web
 2.10 (unreleased)
 -----------------
 
-- OPS-239: Make newsfeed caching header configurable
+- HOTFIX: Repair old IE css reference
 
 - ZON-2115: Antidote for keyword and topicpage special rules
+
+
+2.9.2 (2015-10-01)
+------------------
+
+- HOTFIX: Fix annoying updated homepage refresh popover
+
+
+2.9.1 (2015-10-01)
+------------------
+
+- ZON-2242: Remove cache-busting slug from font URLs
+
+- OPS-239: Make newsfeed caching header configurable
+
+- MAINT: Decrease timeout for login requests
 
 
 2.9 (2015-10-01)
