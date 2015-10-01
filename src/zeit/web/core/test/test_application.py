@@ -28,13 +28,13 @@ def app_request(application, app_settings, request):
     return app, request
 
 
-def test_asset_url_includes_configured_prefix(app_request):
+def test_asset_host_includes_configured_prefix(app_request):
     app, request = app_request
     app.config.registry.settings['asset_prefix'] = '/assets'
     assert request.asset_host == 'http://example.com/assets'
 
 
-def test_asset_url_allows_specifying_full_host(app_request):
+def test_asset_host_allows_specifying_full_host(app_request):
     app, request = app_request
     app.config.registry.settings['asset_prefix'] = 'http://assets.example.com/'
     assert request.asset_host == 'http://assets.example.com'

@@ -201,7 +201,7 @@ def test_centerpage_markdown_module_is_rendered(jinja2_env):
         'http://xml.zeit.de/zeit-online/thema')
     request = pyramid.testing.DummyRequest(
         route_url=lambda x: 'http://foo.bar/',
-        asset_url=lambda x: '',
+        asset_host='',
         image_host='')
     view = zeit.web.site.view_centerpage.Centerpage(content, request)
     view.meta_robots = ''
@@ -220,7 +220,7 @@ def test_centerpage_teaser_topic_is_rendered(jinja2_env):
         'http://xml.zeit.de/zeit-online/topic-teaser')
     request = pyramid.testing.DummyRequest(
         route_url=lambda x: 'http://foo.bar/',
-        asset_url=lambda x: '',
+        asset_host='',
         image_host='')
     request.route_url.return_value = 'http://foo.bar/'
     view = zeit.web.site.view_centerpage.Centerpage(content, request)
