@@ -33,7 +33,7 @@
     <meta property="og:url" content="{{obj.content_url or 'http://' + request.host + request.path_info}}">
     {% set image = get_image(content=obj.context, fallback=False, default='wide') %}
     {% if image -%}
-        {% set source = request.route_url('home') + image.path + '__1300x731' %}
+        {% set source = request.image_host + image.path + '__1300x731' %}
         <meta property="og:image" content="{{ source }}">
         <meta name="twitter:image" content="{{ source }}">
         <link itemprop="image" rel="image_src" href="{{ source }}">

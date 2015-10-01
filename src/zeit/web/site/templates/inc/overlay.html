@@ -1,26 +1,24 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-<!-- config script -->
-<script src="http://scripts.zeit.de/static/js/hpoverlay.config.js"></script>
-
 <!-- config template -->
 <div id="overlay-wrapper">
-    <div class="overlay" data-tracking-appear="refreshbox.refreshOverlay"></div>
-    <div class="lightbox">
-        <div class="lightbox-content">
-            <span class="lightbox-content__headline">
-                ZEIT ONLINE wurde aktualisiert.
-            </span>
-            <span class="lightbox-content__text">
-                Laden Sie die Seite neu, um Zugriff auf alle aktuellen Beiträge zu haben.
-            </span>
-            <button type="button" class="lightbox-button">
-                {{ lama.use_svg_icon('reload', 'lightbox-button__icon', view.request) }}
-                <a class="lightbox-button__text" data-tracking="refreshbox.refreshButton|{{view.og_url|replace('http://','')}}">NEU LADEN</a>
-            </button>
-            <a class="lightbox-cancel" data-tracking="refreshbox.cancel|{{view.og_url|replace('http://','')}}">
-                Abbrechen
-            </a>
-        </div>
-    </div>
+	<div class="overlay-tracker" data-tracking="refreshbox.appear|{{view.og_url|replace('http://','')}}"></div>
+	<div class="overlay" data-tracking="refreshbox.refreshOverlay|{{view.og_url|replace('http://','')}}"></div>
+	<div class="lightbox" role="dialog" aria-labelledby="refreshbox-title" aria-describedby="refreshbox-text">
+		<div class="lightbox-content">
+			<span class="lightbox-content__headline" id="refreshbox-title">
+				ZEIT ONLINE wurde aktualisiert.
+			</span>
+			<span class="lightbox-content__text" id="refreshbox-text">
+				Laden Sie die Seite neu, um Zugriff auf alle aktuellen Beiträge zu haben.
+			</span>
+			<button type="button" class="lightbox-button" data-tracking="refreshbox.refreshButton|{{view.og_url|replace('http://','')}}">
+				{{ lama.use_svg_icon('reload', 'lightbox-button__icon', view.request) }}
+				Neu laden
+			</button>
+			<a href="{{ view.canonical_url }}" class="lightbox-cancel" data-tracking="refreshbox.cancel|{{view.og_url|replace('http://','')}}">
+				Abbrechen
+			</a>
+		</div>
+	</div>
 </div>

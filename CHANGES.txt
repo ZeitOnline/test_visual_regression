@@ -1,10 +1,28 @@
 Change log for zeit.web
 =======================
 
-2.9 (unreleased)
-----------------
+2.10 (unreleased)
+-----------------
 
 - ZON-1936: Change bottom separator color in Spektrum parquet area
+
+
+2.9.1 (2015-10-01)
+------------------
+
+- ZON-2242: Remove cache-busting slug from font URLs
+
+- OPS-239: Make newsfeed caching header configurable
+
+- MAINT: Decrease timeout for login requests
+
+
+2.9 (2015-10-01)
+----------------
+
+- ZON-2242: Globally configure image, asset and jsconf hosts
+
+- MAINT: Add tests and more tracking to popover
 
 
 2.8.2 (2015-09-30)

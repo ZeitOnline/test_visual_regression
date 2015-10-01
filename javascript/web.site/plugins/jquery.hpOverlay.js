@@ -1,183 +1,203 @@
 // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-/*
-* Zeit Online HP Overlay
-*
-* Copyright (c) 2014 ZEIT ONLINE, http://www.zeit.de
-* Dual licensed under the MIT and GPL licenses:
-* http://www.opensource.org/licenses/mit-license.php
-* http://www.gnu.org/licenses/gpl.html
-*
-* @author Anika Szuppa
-* @author Nico Brünjes
-*
-* @requires ZEIT-Lib
-*/
+/* global overlayConf */
+/**
+ * Zeit Online HP Overlay
+ *
+ * Copyright (c) 2014 ZEIT ONLINE, http://www.zeit.de
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ *
+ * @author Anika Szuppa
+ * @author Nico Brünjes
+ *
+ * @requires ZEIT-Lib
+ */
 
-(function( $, ZMO, console, overlayConf ) {
-    $.fn.hpOverlay = function( options ) {
-        // defaults are overwritten by
-        // http://scripts.zeit.de/static/js/hpoverlay.config.js
-        var defaults = $.extend( {
+(function( $, window, document, ZMO ) {
+    'use strict';
+
+    // options may be overwritten by hpoverlay.config.js
+    var options = {
             cookieTimeInDays: 1.5,
-            countingPrefix: 'refreshbox',
             endpoint: location.protocol + '//' + location.host + '/json_update_time/index',
+            config: ZMO.scriptsURL + '/hpoverlay.config.js',
             minutes: 5,
             isOn: true,
-            timestamp: '',
             updateTime: 1,
-            debug: location.search === '?debug-popover',
-            force: location.search === '?debug-popover-force'
-        }, options ),
-            // global timer
-            timer = false,
-            // define overlay functions
-            overlay = {
-            prependHtml: function() {
-                // prepend html to body
-                if ( $( '#overlay_wrapper' ).not( ':visible' ) ) {
-                    $( '#overlay_wrapper' ).show();
+            debug: location.search.indexOf( 'debug-popover' ) !== -1,
+            force: location.search.indexOf( 'force-popover' ) !== -1
+        },
+        // define overlay object
+        overlay = {
+            activeElement: null,
+            initialized: false,
+            timer: false,
+            timestamp: null,
+            visible: false,
+            show: function() {
+                // show overlay
+                var wrapper = $( '#overlay-wrapper' );
+
+                if ( wrapper.not( ':visible' ) ) {
+                    wrapper.show();
+                    // fake "appear" event
+                    wrapper.find( '.overlay-tracker' ).trigger( 'click' );
                 }
-                $( '.overlay' ).fadeIn();
-                $( '.lightbox' ).show();
+
+                this.visible = true;
+                // save focused element
+                this.activeElement = document.activeElement;
+                wrapper.find( '.overlay' ).fadeIn();
+                wrapper.find( '.lightbox' ).show();
+                wrapper.find( 'button' ).focus();
+                this.bindEvents();
+
+                $( document ).off( '.modal' );
             },
-            clickCancel: function() {
+            cancel: function() {
                 // action when cancel was clicked
+                window.clearTimeout( this.timer );
                 $( '.lightbox' ).hide();
                 $( '.overlay' ).hide();
-                $( '#overlay_wrapper' ).hide();
-                ZMO.cookieCreate( 'overlaycanceled', 1, defaults.cookieTimeInDays, '' );
-                window.clearTimeout( timer );
-                $( document ).off( '.modal' );
-                if ( defaults.debug ) {
-                    console.info( 'AktPop cancelled.' );
+                $( '#overlay-wrapper' ).hide();
+                this.visible = false;
+                ZMO.cookieCreate( 'overlaycanceled', 'canceled', options.cookieTimeInDays, '' );
+
+                // restore last focused element
+                if ( this.activeElement ) {
+                    this.activeElement.focus();
                 }
+
+                this.log( 'Refresh page cancelled' );
             },
-            clickReload: function() {
+            reload: function() {
                 // action when reload button or overlay was clicked
                 location.reload();
             },
-            bindClickEvents: function() {
-                // bind click event for lightbox
+            bindEvents: function() {
+                if ( this.initialized ) {
+                    return;
+                }
+
+                // bind events for lightbox
                 var that = this;
 
                 // cancel button
                 $( '.lightbox-cancel' ).on( 'click', function( event ) {
                     event.preventDefault();
-                    that.clickCancel();
+                    that.cancel();
                 });
 
                 // reload
                 $( '.overlay, .lightbox-button' ).on( 'click', function( event ) {
                     event.preventDefault();
-                    that.clickReload();
+                    that.reload();
                 });
 
                 // escape key
                 $( window ).on( 'keyup', function( event ) {
                     if ( event.keyCode === 27 ) {
-                        that.clickReload();
+                        that.reload();
                     }
                 });
-            },
-            restartTimer: function( time ) {
-                time = time || defaults.minutes;
-                // clear and restart timer
-                if ( !$( '.overlay' ).is( ':visible' ) ) {
-                    window.clearTimeout( timer );
-                    overlay.addTimer( time );
-                    if ( defaults.debug ) {
-                        console.info( 'Timer restarted.' );
-                    }
-                }
+
+                this.initialized = true;
             },
             bindResetEvents: function() {
-                // bind events to reset timer
+                // bind events to reset timer, need to debounce at least scroll and mousemove event
                 var that = this;
-                $( document ).on( 'keypress.modal scroll.modal click.modal mousemove.modal', function() {
-                    that.restartTimer();
-                });
+                $( document ).on( 'keypress.modal scroll.modal click.modal mousemove.modal', $.debounce( function() {
+                    that.setTimeout();
+                }, 1000 ));
             },
-            addTimer: function( min ) {
-                // add timer
-                if ( defaults.debug ) {
-                    console.info( 'mins: ', min );
-                }
-
-                if ( defaults.force ) {
-                    initPopup();
-                    return;
-                }
-
-                var timeout = min * 60 * 1000;
-                timer = window.setTimeout( initPopup, timeout );
-            },
-            updateTime: function() {
+            setTimeout: function( time ) {
                 var that = this,
-                    request = $.ajax( defaults.endpoint, { dataType: 'jsonp', jsonpCallback: 'askForNicolas' } );
+                    minutes = time || options.minutes;
 
-                request.done( function( data ) {
-                    // json anfrage ist fertig
-                    defaults.timestamp = data.last_published_semantic;
-                    that.addTimer( defaults.minutes );
-                } );
+                // clear timer
+                if ( this.timer ) {
+                    window.clearTimeout( this.timer );
+                }
+
+                // start new timer
+                if ( !this.visible ) {
+                    this.timer = window.setTimeout( function() { that.init(); }, minutes * 60 * 1000 );
+                    this.log( 'New timer started for ' + minutes + ' minutes' );
+                }
+            },
+            init: function() {
+                var that = this;
+
+                $.ajax( options.endpoint, { dataType: 'json' } )
+                    .done( function( data ) {
+                        that.log( 'timestamp:', that.timestamp, 'modified:', data.last_published_semantic );
+
+                        if ( !that.timestamp ) {
+                            that.log( 'No timestamp stored, initializing popover.' );
+                            that.timestamp = data.last_published_semantic;
+                            that.setTimeout();
+                        } else if ( data.last_published_semantic && that.timestamp !== data.last_published_semantic ) {
+                            that.log( 'Page was updated' );
+                            that.show();
+                        } else {
+                            that.log( 'JSON call found no page update' );
+                            that.setTimeout( options.updateTime );
+                        }
+                    })
+                    .fail( function() {
+                        that.setTimeout( options.updateTime );
+                    });
             },
             isLiveServer: function() {
-                return !window.location.hostname.search( /(www.)?zeit\.de/ );
+                return /^(www\.)?zeit\.de$/.test( location.hostname );
+            },
+            config: function() {
+                var that = this;
+
+                $.ajax( options.config, { dataType: 'script', cache: true } )
+                    .done( function() {
+                        $.extend( options, overlayConf );
+
+                        // check if popup is switched on
+                        if ( options.isOn  ) {
+                            that.log( 'Initialize popup w/ minutes:', options.minutes, 'and updateTime:', options.updateTime );
+                            that.bindResetEvents();
+                            that.init();
+                        }
+                    });
+            },
+            log: function() {
+                if ( options.debug || options.force ) {
+                    console.info.apply( console, arguments );
+                }
             }
         };
 
-        //initialise popover
-        function initPopup() {
-            var request = $.ajax( defaults.endpoint, { dataType: 'jsonp', jsonpCallback: 'askForNicolas' } );
-
-            request.done( function( data ) {
-                if ( defaults.debug ) {
-                    console.info( defaults.timestamp, data.last_published_semantic );
-                }
-
-                if ( ( defaults.timestamp !== data.last_published_semantic ) || defaults.force ) {
-                    if ( defaults.debug ) {
-                        console.info( 'Page was updated.' );
-                    }
-                    overlay.prependHtml();
-                    overlay.bindClickEvents();
-                } else {
-                    if ( defaults.debug ) {
-                        console.info( 'JSON call found no page update.' );
-                    }
-                    overlay.restartTimer( defaults.updateTime );
-                }
-            });
-        }
-
-        return this.each( function() {
-
-            if ( !overlay.isLiveServer() && !defaults.debug && !defaults.force ) {
-                console.warn( 'AktPopup cancelled because not on live server.' );
+    $.extend({
+        /**
+         * Show overlay for updated homepage
+         * @memberOf jQuery
+         * @category Function
+         */
+        hpOverlay: function() {
+            if ( !overlay.isLiveServer() && !options.debug && !options.force ) {
+                overlay.log( 'Popup cancelled because not on live server.' );
                 return;
-            }
-
-            // overwrite settings with external config file
-            if ( overlayConf ) {
-                defaults = $.extend( defaults, overlayConf );
             }
 
             var cookie = ZMO.cookieRead( 'overlaycanceled' );
 
-            // only start timer if there's no mobile view, cookie wasn't set and it is switched on
-            if ( ( !ZMO.isMobileView() && cookie !== 1 && defaults.isOn ) || defaults.force ) {
-                if ( defaults.debug ) {
-                    console.info( 'AktPop started w/ minutes: ', defaults.minutes, ' and updateTime: ', defaults.updateTime );
-                }
-                overlay.bindResetEvents();
-                overlay.updateTime();
+            if ( options.force ) {
+                overlay.show();
+            } else if ( !ZMO.isMobileView() && cookie !== 'canceled' ) {
+                // only get config if there's no mobile view and cookie wasn't set
+                overlay.log( 'Configure popup' );
+                overlay.config();
             } else {
-                if ( defaults.debug ) {
-                    console.warn( 'Cookie present, mobile view or switched off, action stopped.' );
-                }
+                overlay.log( 'Cookie present or mobile view, dropout.' );
             }
+        }
+    });
 
-        });
-
-    };//end of plugin
-})( jQuery, window.ZMO, window.console, window.overlayConf );
+})( jQuery, window, document, window.ZMO );

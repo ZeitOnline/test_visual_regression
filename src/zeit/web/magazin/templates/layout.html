@@ -36,12 +36,12 @@
         {% endif -%}
         {% block css_lte8_link %}
         <!--[if lte IE 8]>
-            <link href="{{ request.asset_url('css/web.magazin/all-old-ie.css') }}" media="screen" rel="stylesheet" type="text/css" />
+            <link href="{{ request.asset_host }}/css/web.magazin/all-old-ie.css" media="screen" rel="stylesheet" type="text/css" />
         <![endif]-->
         {% endblock css_lte8_link %}
         {% block css_link %}
         <!--[if gt IE 8]><!-->
-            <link href="{{ request.asset_url('css/web.magazin/screen.css') }}" media="screen" rel="stylesheet" type="text/css" />
+            <link href="{{ request.asset_host }}/css/web.magazin/screen.css" media="screen" rel="stylesheet" type="text/css" />
         <!--<![endif]-->
         {% endblock css_link %}
         <!-- iqd css code integrated in screen.css via modules/_iqd_adcode.sass -->
@@ -54,19 +54,19 @@
         {{ lama.sharing_meta(view,request) }}
         {%- endblock sharing_meta %}
 
-        <script src="{{ request.asset_url('js/vendor/modernizr-custom.js') }}"></script>
+        <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
 
         <script>
             /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
             window.grunticon=function(e){if(e&&3===e.length){var t=window,n=!(!t.document.createElementNS||!t.document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||window.opera&&-1===navigator.userAgent.indexOf("Chrome")),o=function(o){var r=t.document.createElement("link"),a=t.document.getElementsByTagName("script")[0];r.rel="stylesheet",r.href=e[o&&n?0:o?1:2],a.parentNode.insertBefore(r,a)},r=new t.Image;r.onerror=function(){o(!1)},r.onload=function(){o(1===r.width&&1===r.height)},r.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="}};
-            grunticon( [ "{{ request.asset_url('css/icons/magazin.data.svg.css') }}", "{{ request.asset_url('css/icons/magazin.data.png.css') }}", "{{ request.asset_url('css/icons/magazin.fallback.css') }}" ] );
+            grunticon( [ "{{ request.asset_host }}/css/icons/magazin.data.svg.css", "{{ request.asset_host }}/css/icons/magazin.data.png.css", "{{ request.asset_host }}/css/icons/magazin.fallback.css" ] );
         </script>
         <noscript>
-            <link href="{{ request.asset_url('css/icons/magazin.fallback.css') }}" rel="stylesheet">
+            <link href="{{ request.asset_host }}/css/icons/magazin.fallback.css" rel="stylesheet">
         </noscript>
         {% if view.enable_third_party_modules and view.enable_iqd%}
             <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
-            <script type="text/javascript" src="{{ request.asset_url('js/libs/iqd/adam.js') }}"></script>
+            <script type="text/javascript" src="{{ request.asset_host }}/js/libs/iqd/adam.js"></script>
 
             <script type="text/javascript" src="http://c.t4ft.de/c/ftg_iq.min.js"></script>
             {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
@@ -185,12 +185,9 @@
         {% include "zeit.web.core:templates/inc/tracking/clickcount.html" ignore missing %}
 
         <script type="text/javascript">
-            var require = {
-                baseUrl: '{{ request.asset_url("js/") }}',
-                urlArgs: "v={{ request.registry.settings.version_hash | hide_none }}"
-            };
+            var require = { baseUrl: '{{ request.asset_host }}/js/' };
         </script>
-        <script type="text/javascript" src="{{ request.asset_url('js/magazin.js') }}"></script>
+        <script type="text/javascript" src="{{ request.asset_host }}/js/magazin.js"></script>
         <script type="text/javascript">
             if( typeof window.sasmobile === 'function' && window.ZMO.isMobileView() ) {
                 iqd.callAds();
