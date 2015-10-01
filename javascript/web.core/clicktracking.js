@@ -153,9 +153,11 @@ define( [ 'jquery' ], function( $ ) {
         }
     },
     clickTrack = function( event ) {
-        var trackingData = trackElement[ event.data.funcName ]( $( event.target ).closest( 'a' ) );
-        if ( event.data.debug ) {
+        var trackingData = trackElement[ event.data.funcName ]( $( this ) );
+
+        if ( debugMode ) {
             event.preventDefault();
+            event.stopImmediatePropagation();
             console.debug( trackingData );
         }
         if ( trackingData ) {
@@ -272,7 +274,8 @@ define( [ 'jquery' ], function( $ ) {
             });
 
         });
-    };
+    },
+    debugMode = document.location.search.indexOf( 'webtrekk-clicktracking-debug' ) > -1;
 
     return {
         init: function() {
@@ -311,8 +314,7 @@ define( [ 'jquery' ], function( $ ) {
                         '.parquet-meta',
                         'a:not([data-wt-click])'
                     ]
-                },
-                debugMode = document.location.search.indexOf( 'webtrekk-clicktracking-debug' ) > -1;
+                };
 
             // The key name is used for calling the corresponding function in trackElement
             for ( var key in trackingLinks ) {
@@ -322,16 +324,14 @@ define( [ 'jquery' ], function( $ ) {
                         filter = selectors.shift() || null;
 
                     $( delegate ).on( 'click', filter, {
-                        funcName: key,
-                        debug: debugMode
+                        funcName: key
                     }, clickTrack );
                 }
             }
 
             // exceptions and extra cases
             $( '*[data-tracking]' ).on( 'click', {
-                funcName: 'useDataTracking',
-                debug: debugMode
+                funcName: 'useDataTracking'
             }, clickTrack );
 
             registerGlobalTrackingMessageEndpointForVideoPlayer();

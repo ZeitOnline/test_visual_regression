@@ -34,7 +34,7 @@ define([ 'jquery' ], function( $ ) {
                 category: 'adb',
                 action: false
             },
-            debug = window.location.search.indexOf( 'ablocktestdebug' );
+            debug = window.location.search.indexOf( 'ablocktestdebug' ) !== -1;
             $( window ).on( 'load', function( evt ) {
                 var $elem = $( '#ad3999' );
                 if ( $elem.length > 0 ) {

@@ -1,14 +1,37 @@
 Change log for zeit.web
 =======================
 
-2.9 (unreleased)
+2.10 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.9 (2015-10-01)
 ----------------
+
+- ZON-2242: Globally configure image, asset and jsconf hosts
+
+- MAINT: Add tests and more tracking to popover
+
+
+2.8.2 (2015-09-30)
+------------------
+
+- FIX: Be more defensive in several places (byline, missing meta files, broken
+  references etc.)
+
+
+2.8.1 (2015-09-30)
+------------------
 
 - ZON-2262: Respect image expiration dates in cache-control headers
 
 - ZON-2262: Do not include expired images in rendered pages
 
 - FIX: Check for ICommonMetadata when building feed
+
+- FIX: Add pagination to Advertorials
 
 
 2.8 (2015-09-29)

@@ -47,7 +47,6 @@ def app_settings(mockserver):
         'cache.short_term.expire': '60',
         'cache.default_term.expire': '300',
         'cache.long_term.expire': '3600',
-        'scripts_url': '/js/static',
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
         # XXX I'd rather put None here and change the settings for a specific
@@ -61,6 +60,9 @@ def app_settings(mockserver):
         'caching_time_image': '30',
         'caching_time_videostill': '35',
         'caching_time_external': '15',
+        'asset_prefix': '/static',
+        'image_prefix': '',
+        'jsconf_prefix': '/jsconf',
         'community_host': 'http://localhost:6551',
         'community_static_host': 'http://static_community/foo',
         'agatho_host': mockserver.url + '/comments',
