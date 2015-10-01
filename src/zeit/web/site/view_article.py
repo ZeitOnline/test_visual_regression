@@ -6,6 +6,7 @@ from pyramid.view import view_defaults
 import babel.dates
 import zope.component
 
+from zeit.solr import query as lq
 import zeit.cms.workflow.interfaces
 import zeit.connector.connector
 import zeit.connector.interfaces
@@ -134,6 +135,23 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
                 self.cap_title)
         except AttributeError:
             return None
+
+    @zeit.web.reify
+    def lineage(self):
+        terms = []
+        conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+
+        date = zeit.cms.workflow.interfaces.IPublishInfo(
+            self.context).date_first_released
+        delta = datetime.timedelta(hours=12)
+
+        terms.append(lq.datetime_range(
+            'date-last-published', date - delta, date + delta))
+
+        return {'title': u'Die zehn besten Krimis im Oktober 2015',
+                'href': 'localhost:9090/zeit-online/article/01'}, {
+                    'title': u'Entreißt den Technokraten die Herrschaft',
+            'href': 'localhost:9090/zeit-online/article/01'}
 
 
 @view_config(name='seite',
