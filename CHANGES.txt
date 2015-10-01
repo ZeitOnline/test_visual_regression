@@ -4,7 +4,7 @@ Change log for zeit.web
 2.10 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Decrease timeout for login requests
 
 
 2.9 (2015-10-01)
