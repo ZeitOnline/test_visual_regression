@@ -70,6 +70,13 @@ def caching_time_videostill(context):
 
 
 @grokcore.component.implementer(ICachingTime)
+@grokcore.component.adapter(zeit.content.cp.interfaces.IFeed)
+def caching_time_feed(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('caching_time_feed', '0'))
+
+
+@grokcore.component.implementer(ICachingTime)
 @grokcore.component.adapter(basestring)
 def caching_time_external(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
