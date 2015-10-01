@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import datetime
 import logging
 
@@ -139,7 +140,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     @zeit.web.reify
     def lineage(self):
         terms = []
-        conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+        zope.component.getUtility(zeit.solr.interfaces.ISolr)
 
         date = zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_first_released
