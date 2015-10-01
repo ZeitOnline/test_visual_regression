@@ -4,7 +4,8 @@ Change log for zeit.web
 2.10 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Be more defensive in several places (resolving uniqueIds, empty
+  properties etc.)
 
 
 2.9.2 (2015-10-01)
