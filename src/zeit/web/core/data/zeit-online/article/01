@@ -8,14 +8,6 @@
       <bu py:pytype="str">Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil "Die Schlacht der fünf Heere"</bu>
       <copyright py:pytype="str">© Warner Bros.</copyright>
     </image>
-    <rankedTags>
-      <tag type="topic" score="5" uuid="3b2d448a-00a7-4b1b-9235-8503207e01d9" url_value="film">Film</tag>
-      <tag type="Person" score="6" uuid="ddca42b6-dc03-48ce-9c80-26678846b591" url_value="peter-jackson">Peter Jackson</tag>
-      <tag type="Location" score="3" uuid="423373fa-835a-49a0-96e0-c94318a5b0ad" url_value="neuseeland">Neuseeland</tag>
-      <tag type="Person" score="5" uuid="47df43f9-b803-43dc-b2e1-475886cddeb7" url_value="steven-spielberg">Steven Spielberg</tag>
-      <tag type="Person" score="4" uuid="4bee0550-8a49-4070-add5-a7069f5df2c6" url_value="christopher-nolan">Christopher Nolan</tag>
-      <tag type="Person" score="4" uuid="096c6141-d20c-4b14-9ee1-3824560be7d0" url_value="ridley-scott">Ridley Scott</tag>
-    </rankedTags>
     <references>
       <reference type="intern" href="http://xml.zeit.de/zeit-online/article/zeit" contenttype="article" />
     </references>
