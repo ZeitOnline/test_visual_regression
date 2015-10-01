@@ -4,6 +4,8 @@ Change log for zeit.web
 2.10 (unreleased)
 -----------------
 
+- ZON-2242: Remove cache-busting slug from font URLs
+
 - OPS-239: Make newsfeed caching header configurable
 
 - MAINT: Decrease timeout for login requests
