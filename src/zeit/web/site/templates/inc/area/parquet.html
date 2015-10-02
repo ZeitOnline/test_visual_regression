@@ -8,7 +8,8 @@
                 {{ area.title | hide_none }}
             </span>
         {% else %}
-            <a class="parquet-meta__title" href="{{ area.referenced_cp.uniqueId | create_url }}">
+            <a class="parquet-meta__title
+            {% if '/zeit-magazin/' in area.referenced_cp.uniqueId %} parquet-meta__title--zmo{% endif %}" href="{{ area.referenced_cp.uniqueId | create_url }}">
                 {{ area.title | hide_none }}
             </a>
         {% endif %}
