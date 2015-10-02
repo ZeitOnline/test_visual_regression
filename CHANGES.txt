@@ -1,7 +1,19 @@
 Change log for zeit.web
 =======================
 
-2.10 (unreleased)
+2.11 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.10.1 (2015-10-02)
+-------------------
+
+- HOTFIX: Use image_host for newsfeed image URLs
+
+
+2.10 (2015-10-02)
 -----------------
 
 - ZON-1936: Change bottom separator color in Spektrum parquet area
