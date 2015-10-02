@@ -4,7 +4,7 @@ Change log for zeit.web
 2.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2286: Add back to home button to articles
 
 
 2.10 (2015-10-02)
