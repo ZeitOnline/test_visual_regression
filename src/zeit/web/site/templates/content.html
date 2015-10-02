@@ -74,14 +74,15 @@
         {% set predecessor, successor = view.lineage %}
         <a href="{{ predecessor.href }}" class="article-lineage__link article-lineage__link--prev">
             <span class="article-lineage__link-text article-lineage__link-text--prev">
-                <span class="article-lineage__link-kicker">TODO: Kicker</span>
+                {# TODO: was ist, wenn es keinen supertitle gibt? Muss das hier oder in der view abgefangen werden? #}
+                <span class="article-lineage__link-kicker">{{ predecessor.supertitle }}</span>
                 <span class="article-lineage__link-title">{{ predecessor.title }}</span>
             </span>
         </a>
         <a href="{{ successor.href }}" class="article-lineage__link article-lineage__link--next">
             <span class="article-lineage__link-text article-lineage__link-text--next">
-                <span class="article-lineage__link-kicker">TODO: Kicker</span>
-                <span class="article-lineage__link-title">{{ successor.title }}</span>
+                <span class="article-lineage__link-kicker">{{ successor.supertitle }}</span>
+                <span class="article-lineage__link-title">{{ successor.title }} {{ successor.title }} {{ successor.title }} (TODO: Duplikat entfernen)</span>
             </span>
         </a>
     </div>
