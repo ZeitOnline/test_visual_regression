@@ -84,7 +84,7 @@ module.exports = function(grunt) {
                 bundleExec: true,
                 cssDir: project.codeDir + 'css',
                 fontsDir: project.codeDir + 'fonts',
-                httpFontsPath: '../../fonts',
+                httpFontsPath: '../../../latest/fonts',
                 httpPath: '/',
                 imagesPath: project.codeDir + 'img',
                 javascriptsPath: project.codeDir + 'js',

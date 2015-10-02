@@ -4,7 +4,8 @@ Change log for zeit.web
 2.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2242: Change fonts URL to something like ``/.../latest/fonts`` instead of
+  ``/.../2.9/fonts`` for better client cacheability
 
 
 2.10 (2015-10-02)
