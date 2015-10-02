@@ -4,6 +4,6 @@
 
 {% block teaser_container %}
     <div class="teaser-square__product">
-        <div class="teaser-square__zmo-logo icon-logo-zmo-large"></div>
+        {{ lama.use_svg_icon('logo-zmo', 'teaser-square__zmo-logo', view.request) }}
     </div>
 {% endblock %}
