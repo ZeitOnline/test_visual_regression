@@ -1,46 +1,67 @@
 .article-lineage
-	margin: remify(0 -$page-padding)
-	max-width: remify(980px)
-	position: fixed
-	top: 50%
-	width: 100%
-	&__link
-		background: $zon_lighter_grey
-		height: remify(80px)
+	display: none
+
++respond-min($break-desktop-min)
+	.article-lineage
+		display: block
+		margin: remify(0 -$page-padding)
+		max-width: remify(980px)
 		position: absolute
-		width: remify(60px)
-		&--prev
-			left: 0
-		&--next
-			right: 0
-		&:hover
-			// TODO: box-shadof
-			// TODO: color specifity (vs "a:hover), color value
-			color: #000
-			max-width: 51.25em
-			width: auto
-			// TODO: eleganter. Vielleicht den Text allgemein stylen (nicht hinter :hover)
-			// TODO: transition
-			// TODO: vertikal zentrieren (wenn feste Höhe und Ellipses?)
-			.article-lineage__link-text
-				display: block
-				padding: 0 1.5em
-				&--prev
-					margin-left: remify(60px)
-				&--next
-					margin-right: remify(60px)
-	&__link-text
-		display: none
-	// TODO: zusammen mit link-text stylen, hinter :hover oder hier
-	// TODO: rem (aus Screendesign) hier nochmal in Px?
-	// TODO: lädt ist der font-style hier tatsächlich den richtigen Schriftschnitt?
-	&__link-kicker
-		display: block
-		font-family: $font-franziska
-		font-size: 0.875rem
-		font-style: italic
-	&__link-title
-		display: block
-		font-family: $font-tabletgothic
-		font-size: 1rem
-		font-style: bold
+		width: 100%
+		// must outplay absolutely positioned elements futher down the DOM (share + print)
+		z-index: 1
+		&--fixed
+			position: fixed
+			top: 50%
+		&__link
+			background: $zon_lighter_grey
+			height: remify(80px)
+			position: absolute
+			width: remify(60px)
+			&--prev
+				left: 0
+			&--next
+				right: 0
+			&:hover
+				// TODO: box-shadof
+				// TODO: color specifity (vs "a:hover), color value
+				color: #000
+				max-width: 51.25em
+				width: auto
+				// TODO: eleganter. Vielleicht den Text allgemein stylen (nicht hinter :hover)
+				// TODO: transition
+				// TODO: vertikal zentrieren (wenn feste Höhe und Ellipses?)
+				.article-lineage__link-text
+					display: block
+					padding: 0 1.5em
+					&--prev
+						margin-left: remify(60px)
+					&--next
+						margin-right: remify(60px)
+		&__link-icon
+			width: remify(60px)
+			height: remify(60px)
+			color: $zon_lighter_grey
+			fill: $zon_lighter_grey
+			&--prev
+				float: left
+				// TODO: solution for IE8 (Unicode Fallback?)
+				// OPTIMIZE: compass function/mixin ?
+				transform: rotate(180deg)
+			&--next
+				float: right
+		&__link-text
+			display: none
+		// TODO: zusammen mit link-text stylen, hinter :hover oder hier
+		// TODO: rem (aus Screendesign) hier nochmal in Px?
+		// TODO: lädt ist der font-style hier tatsächlich den richtigen Schriftschnitt?
+		&__link-kicker
+			display: block
+			font-family: $font-franziska
+			font-size: 0.875rem
+			font-style: italic
+		&__link-title
+			display: block
+			font-family: $font-tabletgothic
+			font-size: 1rem
+			font-style: bold
