@@ -4,7 +4,7 @@ Change log for zeit.web
 2.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Use image_host for newsfeed image URLs
 
 
 2.10 (2015-10-02)
