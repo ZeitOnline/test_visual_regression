@@ -4,7 +4,7 @@ Change log for zeit.web
 2.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2246: Chronologische Artikel-Navigation
 
 
 2.10.1 (2015-10-02)
