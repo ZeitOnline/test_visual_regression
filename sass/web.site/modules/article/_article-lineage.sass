@@ -23,24 +23,25 @@
 			&--next
 				right: 0
 			&:hover
-				// TODO: box-shadof
+				// TODO: box-shadow
 				// TODO: color specifity (vs "a:hover), color value
 				color: #000
 				max-width: 51.25em
 				width: auto
 				// TODO: eleganter. Vielleicht den Text allgemein stylen (nicht hinter :hover)
-				// TODO: transition
-				// TODO: vertikal zentrieren (wenn feste Höhe und Ellipses?)
+				// TODO: transition?
 				.article-lineage__link-text
 					display: block
-					padding: 0 1.5em
 					&--prev
 						margin-left: remify(60px)
+						padding: remify(18px) 1.5em 0 0.5em
 					&--next
 						margin-right: remify(60px)
+						padding: remify(18px) 0.5em 0 1.5em
 		&__link-icon
-			width: remify(60px)
-			height: remify(60px)
+			width: remify(22px)
+			height: remify(30px)
+			margin: remify(25px 20px)
 			color: $zon_lighter_grey
 			fill: $zon_lighter_grey
 			&--prev
@@ -64,4 +65,7 @@
 			display: block
 			font-family: $font-tabletgothic
 			font-size: 1rem
-			font-style: bold
+			font-weight: bold
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis
