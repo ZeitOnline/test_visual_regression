@@ -69,27 +69,9 @@
     {% endprofile %}
     </article>
 
-    {# TODO: block and subtemplate #}
-    <div class="article-lineage js-fix-position">
-        {% set predecessor, successor = view.lineage %}
-        <a href="{{ predecessor.uniqueId | create_url }}" class="article-lineage__link article-lineage__link--prev">
-            {# TODO: use Icon as background image via CSS ? #}
-            {{ lama.use_svg_icon('arrow', 'article-lineage__link-icon article-lineage__link-icon--prev', request) }}
-            <span class="article-lineage__link-text article-lineage__link-text--prev">
-                {# TODO: was ist, wenn es keinen supertitle gibt? Muss das hier oder in der view abgefangen werden? #}
-                <span class="article-lineage__link-kicker">{{ predecessor.supertitle }}</span>
-                <span class="article-lineage__link-title">{{ predecessor.title }}</span>
-            </span>
-        </a>
-        <a href="{{ successor.uniqueId | create_url }}" class="article-lineage__link article-lineage__link--next">
-            {# TODO: use Icon as background image via CSS ? #}
-            {{ lama.use_svg_icon('arrow', 'article-lineage__link-icon article-lineage__link-icon--next', request) }}
-            <span class="article-lineage__link-text article-lineage__link-text--next">
-                <span class="article-lineage__link-kicker">{{ successor.supertitle }}</span>
-                <span class="article-lineage__link-title">{{ successor.title }} (TODO: Diesen Dummytext entfernen, dessen einziger Zweck es ist, die Zeile besonders lang zu machen.)</span>
-            </span>
-        </a>
-    </div>
+    {% block lineage %}
+        {% include "zeit.web.site:templates/inc/article/lineage.tpl" %}
+    {% endblock %}
 
     {% endblock content %}
     {% block article_interactions %}

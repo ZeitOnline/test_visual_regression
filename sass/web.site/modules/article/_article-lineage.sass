@@ -23,21 +23,12 @@
 			&--next
 				right: 0
 			&:hover
-				// TODO: box-shadow
-				// TODO: color specifity (vs "a:hover), color value
+				box-shadow: 0px 1px 3px #999
 				color: #000
 				max-width: 51.25em
 				width: auto
-				// TODO: eleganter. Vielleicht den Text allgemein stylen (nicht hinter :hover)
-				// TODO: transition?
 				.article-lineage__link-text
 					display: block
-					&--prev
-						margin-left: remify(60px)
-						padding: remify(18px) 1.5em 0 0.5em
-					&--next
-						margin-right: remify(60px)
-						padding: remify(18px) 0.5em 0 1.5em
 		&__link-icon
 			width: remify(22px)
 			height: remify(30px)
@@ -46,16 +37,18 @@
 			fill: $zon_lighter_grey
 			&--prev
 				float: left
-				// TODO: solution for IE8 (Unicode Fallback?)
-				// OPTIMIZE: compass function/mixin ?
-				transform: rotate(180deg)
+				// TODO: solution for IE8 (Unicode Fallback? Dont show?)
+				+transform(rotate(180deg))
 			&--next
 				float: right
 		&__link-text
 			display: none
-		// TODO: zusammen mit link-text stylen, hinter :hover oder hier
-		// TODO: rem (aus Screendesign) hier nochmal in Px?
-		// TODO: lädt ist der font-style hier tatsächlich den richtigen Schriftschnitt?
+			&--prev
+				margin-left: remify(60px)
+				padding: remify(18px) 1.5em 0 0.5em
+			&--next
+				margin-right: remify(60px)
+				padding: remify(18px) 0.5em 0 1.5em
 		&__link-kicker
 			display: block
 			font-family: $font-franziska

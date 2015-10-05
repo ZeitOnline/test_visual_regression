@@ -95,8 +95,7 @@
                 return;
             }
 
-            // TODO: optimize and fail-safe
-            // TODO: cache winHeight, recalculate only on window.resize!
+            // OPTIMIZE: cache winHeight, recalculate only on window.resize!
             winHeight = $( window ).height();
 
             articleBodyOffset = this.$articleBody.offset();
@@ -126,7 +125,7 @@
                 window.pageYOffset : this.isCSS1Compat ?
                     document.documentElement.scrollTop : document.body.scrollTop;
 
-            // TODO only update the DOM if the status changes. save the current status internally.
+            // OPTIMIZE: only update the DOM if the status changes. save the current status internally.
             if ( this.currentPosition > this.minFixedPos && this.currentPosition < this.maxFixedPos ) {
                 // OPTIMIZE: not hardcoded! Read the base-class on init
                 this.element.addClass( 'article-lineage--fixed' );
