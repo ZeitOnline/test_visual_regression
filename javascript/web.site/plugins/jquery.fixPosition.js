@@ -17,7 +17,7 @@
         this.node = element;
         this.element = $( element );
 
-        this.currentPositioning = 'absolute';
+        this.scrollThrottlingBlocked = false;
 
         this.unchangedCalculationCounter = 0;
         this.lastCalculationTime = 0;
@@ -26,14 +26,21 @@
         this.minFixedPos = 500;
         this.maxFixedPos = 2000;
 
-        this.init();
+        this.$articleBody = undefined;
 
-        // TODO: return this?
+        // In 2015, we need multiple lines of code to detect the scrolling position
+        // (// https://developer.mozilla.org/de/docs/Web/API/Window/scrollY)
+        this.supportPageOffset = window.pageXOffset !== undefined;
+        this.isCSS1Compat = ( ( document.compatMode || '' ) === 'CSS1Compat' );
+
+        this.init();
     }
 
     FixPosition.prototype = {
 
         init: function() {
+
+            var that = this;
 
             // only use this on Desktop.
             // OPTIMIZE: move this to site.js, so we dont have to check on every instance?
@@ -41,11 +48,19 @@
                 return false;
             }
 
+            // calculate/select the things that will remain unchanged
+            this.$articleBody = $( '.article-body' ).eq( 0 );
+
+            // no article found? stop everything.
+            if ( !this.$articleBody.length ) {
+                return;
+            }
+
             this.calculateArticlePositions();
 
             // OPTIMIZE: do we have the $window already available? Is it cached by jQuery?
             // OPTIMIZE: namespace for event handler ?
-            var that = this;
+
             $( window ).on( 'scroll', function() {
                 that.scrollThrottling();
             } );
@@ -63,7 +78,6 @@
 
             // If the calculation was done too often and nothing changed, stop it!
             if ( this.unchangedCalculationCounter > 5 ) {
-                console.log( 'calculation stopped (because of too often).' );
                 return;
             }
 
@@ -78,20 +92,15 @@
 
             // If the calculation was done too recently, stop it!
             if ( this.lastCalculationTime > 0 && ( currentTimestamp - this.lastCalculationTime ) < 500 ) {
-                console.log( 'calculation stopped (because of too recently).' );
                 return;
             }
-
-            // TODO: cache this calculation if the values were stable for several seconds
-            // TODO: throttle this calculation
 
             // TODO: optimize and fail-safe
             // TODO: cache winHeight, recalculate only on window.resize!
             winHeight = $( window ).height();
-            // TODO: cache it!
-            $articleBody = $( '.article-body' ).eq( 0 );
-            articleBodyOffset = $articleBody.offset();
-            articleBodyHeight = $articleBody.height();
+
+            articleBodyOffset = this.$articleBody.offset();
+            articleBodyHeight = this.$articleBody.height();
 
             currentMinFixedPos = parseInt( articleBodyOffset.top - ( winHeight / 2 ), 10 );
             currentMaxFixedPos = parseInt( articleBodyOffset.top + articleBodyHeight - ( winHeight / 2 ), 10 );
@@ -106,14 +115,16 @@
 
             this.lastCalculationTime = currentTimestamp;
 
-            console.log( 'calculation done.' );
         },
 
-        scrollHandler: function() {
+        handleScrolling: function() {
 
             this.calculateArticlePositions();
-            // TODO: available in every browser?
-            this.currentPosition = window.scrollY;
+            // In 2015, we need multiple lines of code to detect the scrolling position
+            // (// https://developer.mozilla.org/de/docs/Web/API/Window/scrollY)
+            this.currentPosition = this.supportPageOffset ?
+                window.pageYOffset : this.isCSS1Compat ?
+                    document.documentElement.scrollTop : document.body.scrollTop;
 
             // TODO only update the DOM if the status changes. save the current status internally.
             if ( this.currentPosition > this.minFixedPos && this.currentPosition < this.maxFixedPos ) {
@@ -123,16 +134,34 @@
                 // OPTIMIZE: not hardcoded! Read the base-class on init
                 this.element.removeClass( 'article-lineage--fixed' );
             }
-
-            console.log( 'scrolled.' );
         },
 
-        // OPTIMIZE: this could be reused globally
+        /*  This is Throttling! The Scroll Event is thrown very often.
+            But there is no need to do all our calculations on every call.
+            That's why the event handler is only called every 100ms.
+
+            OPTIMIZE: this could be reused globally.
+            OPTIMIZE: After IE9 we can use requestAnimationFrame
+                (https://developer.mozilla.org/en-US/docs/Web/Events/scroll)
+        */
         scrollThrottling: function() {
-            // TODO: Throttling!
-            //    - https://developer.mozilla.org/en-US/docs/Web/Events/scroll
-            //    - good old window.timeout version
-            this.scrollHandler();
+
+            var that = this,
+                throttlingTime = 100;
+
+            // The handler is still blocked. So we do not call the actual event handler.
+            if ( this.scrollThrottlingBlocked === true ) {
+                return;
+            }
+
+            // Not blocked. Set a timeout to block for 100ms, and call the actual event handler
+            this.scrollThrottlingBlocked = true;
+            window.setTimeout( function() {
+                that.scrollThrottlingBlocked = false;
+            }, throttlingTime );
+
+            this.handleScrolling();
+
         }
     };
 
