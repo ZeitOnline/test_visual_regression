@@ -673,16 +673,13 @@ class Content(Base):
                 lq.bool_field(
                     'breaking_news', False),
                 lq.field_raw(
-                    'type', lq.or_('article', 'link', 'gallery')),
-                lq.not_(
-                    lq.field('ressort', 'News')),
-                lq.not_(
-                    lq.field('product_text', 'News')),
+                    'type', lq.or_('article', 'gallery')),
                 lq.not_(
                     lq.field('uniqueId', self.context.uniqueId)),
-                lq.not_(
-                    lq.field_raw('product_id', lq.or_(
-                        'SID', 'TGS', 'GOLEM', 'HaBl', 'WIWO', 'ADV'))),
+                lq.field_raw(
+                    'product_id', lq.or_(
+                        'ZEDE', 'ZEI', 'ZECH', 'ZEC', 'ZEOE', 'ZES', 'ZTWI',
+                        'ZTGS', 'ZTCS', 'CSRG', 'ZSF', 'KINZ')),
                 lq.field(
                     'published', 'published'))
             return conn.search(query, sort='date_first_released ' + sort,
@@ -690,7 +687,15 @@ class Content(Base):
 
         date = zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_first_released
-        return next(None, date, 'desc') + next(date, None, 'asc')
+
+        default = [{
+            'supertitle': 'ZEIT ONLINE',
+            'title': 'Startseite',
+            'uniqueId': 'http://xml.zeit.de/index'}]
+        predecessor = next(None, date, 'desc') or default
+        successor = next(date, None, 'asc') or default
+
+        return predecessor + successor
 
     @zeit.web.reify
     def comments_allowed(self):
