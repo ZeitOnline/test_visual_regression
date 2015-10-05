@@ -683,13 +683,12 @@ class Content(Base):
                 lq.field(
                     'published', 'published'))
             return conn.search(query, sort='date_first_released ' + sort,
-                               fl='supertitle title uniqueId', rows=1).docs
+                               fl='title uniqueId', rows=1).docs
 
         date = zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_first_released
 
         default = [{
-            'supertitle': 'ZEIT ONLINE',
             'title': 'Startseite',
             'uniqueId': 'http://xml.zeit.de/index'}]
         predecessor = next(None, date, 'desc') or default

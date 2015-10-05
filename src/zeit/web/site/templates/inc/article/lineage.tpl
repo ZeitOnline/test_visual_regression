@@ -6,7 +6,7 @@
         {# TODO: use Icon as background image via CSS ? #}
         {{ lama.use_svg_icon('arrow', 'article-lineage__link-icon article-lineage__link-icon--prev', request) }}
         <span class="article-lineage__link-text article-lineage__link-text--prev">
-            <span class="article-lineage__link-kicker">{{ predecessor.supertitle | hide_none }}</span>
+            <span class="article-lineage__link-kicker">{% if successor.uniqueId == 'http://xml.zeit.de/index' %}ZEIT ONLINE{% else %}Voriger Artikel{% endif %}</span>
             <span class="article-lineage__link-title">{{ predecessor.title | hide_none }}</span>
         </span>
     </a>
@@ -14,7 +14,7 @@
         {# TODO: use Icon as background image via CSS ? #}
         {{ lama.use_svg_icon('arrow', 'article-lineage__link-icon article-lineage__link-icon--next', request) }}
         <span class="article-lineage__link-text article-lineage__link-text--next">
-            <span class="article-lineage__link-kicker">{{ successor.supertitle | hide_none }}</span>
+            <span class="article-lineage__link-kicker">{% if successor.uniqueId == 'http://xml.zeit.de/index' %}ZEIT ONLINE{% else %}Nächster Artikel{% endif %}</span>
             <span class="article-lineage__link-title">{{ successor.title | hide_none }}</span>
         </span>
     </a>

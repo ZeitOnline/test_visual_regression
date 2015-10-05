@@ -8,8 +8,10 @@
 		max-width: remify(980px)
 		position: absolute
 		width: 100%
-		// must outplay absolutely positioned elements futher down the DOM (share + print)
-		z-index: 1
+		// must outplay absolutely positioned elements futher down the DOM
+		// - share + print (abs pos. z-index=1 would be enough)
+		// - embedded videos (z-index=4 needed) e.g. http://127.0.0.1:9090/politik/deutschland/2015-10/cannabis-verkauf-kreuzberg-monika-herrmann
+		z-index: 4
 		&--fixed
 			position: fixed
 			top: 50%
