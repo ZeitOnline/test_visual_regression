@@ -4,11 +4,13 @@ Change log for zeit.web
 2.11 (unreleased)
 -----------------
 
+- ZON-2242: Change fonts URL to something like ``/.../latest/fonts`` instead of
+  ``/.../2.9/fonts`` for better client cacheability
+
 - ZON-2138: Change servicebox link headhunter (main part was mercurial commit)
 
 
 2.10.1 (2015-10-02)
--------------------
 
 - HOTFIX: Use image_host for newsfeed image URLs
 
