@@ -213,6 +213,8 @@ class Base(object):
 
     @zeit.web.reify
     def cap_title(self):
+        if not self.context.cap_title:
+            return ''
         return self.context.cap_title.title()
 
     @zeit.web.reify
@@ -357,6 +359,8 @@ class Base(object):
 
     @zeit.web.reify
     def title(self):
+        if not self.context.title:
+            return ''
         return self.context.title.strip()
 
     @zeit.web.reify

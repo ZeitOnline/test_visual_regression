@@ -203,6 +203,12 @@ class Image(BaseImage):
         return super(Image, cls).__new__(cls, model_block)
 
     def __init__(self, model_block):
+        self.image = None
+        self.src = None
+        self.uniqueId = None
+        self.attr_title = None
+        self.attr_alt = None
+
         self.layout = model_block.layout
 
         # TODO: don't use XML but adapt an Image and use it's metadata
@@ -225,11 +231,11 @@ class Image(BaseImage):
 
         target = None
         referenced = None
-        if model_block.references:
-            try:
+        try:
+            if model_block.references:
                 referenced = model_block.references.target
-            except TypeError:
-                pass  # Unresolveable uniqueId
+        except TypeError:
+            pass  # Unresolveable uniqueId
         if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
             variant = getattr(model_block.layout, 'variant', None) or (
                 self.DEFAULT_VARIANT)
@@ -250,9 +256,6 @@ class Image(BaseImage):
                 self.attr_title = model_block.references.title
             if model_block.references.alt:
                 self.attr_alt = model_block.references.alt
-        else:
-            self.image = None
-            self.src = None
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
