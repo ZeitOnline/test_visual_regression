@@ -21,7 +21,7 @@
     var options = {
             cookieTimeInDays: 1.5,
             endpoint: location.protocol + '//' + location.host + '/json_update_time/index',
-            config: ZMO.scriptsURL + '/hpoverlay.config.js',
+            config: ZMO.jsconfHost + '/hpoverlay.config.js',
             minutes: 5,
             isOn: true,
             updateTime: 1,
