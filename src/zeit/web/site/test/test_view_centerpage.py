@@ -20,7 +20,6 @@ import zeit.web.core.interfaces
 import zeit.web.core.utils
 import zeit.web.site.module.playlist
 import zeit.web.site.view_centerpage
-import zeit.web.core.sources
 
 
 screen_sizes = ((320, 480, True), (520, 960, True),
@@ -789,26 +788,22 @@ def test_robots_rules_for_thema_paths(application):
     # paginated page
     request.url = 'http://localhost/thema/test?p=2'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
-        'wrong robots for paginated thema page')
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
     # paginated page starting with 1
     request.url = 'http://localhost/thema/test?p=10'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
-        'wrong robots for paginated thema page starting with 1')
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
     # first page with param
     request.url = 'http://localhost/thema/test?p=1'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'follow,noarchive', (
-        'wrong robots for first thema page with param')
+    assert view.meta_robots == 'follow,noarchive'
 
     # first page without param
     request.url = 'http://localhost/thema/test'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'follow,noarchive', (
-        'wrong robots for first thema page without param')
+    assert view.meta_robots == 'follow,noarchive'
 
 
 def test_robots_rules_for_angebote_paths(application):
@@ -819,14 +814,12 @@ def test_robots_rules_for_angebote_paths(application):
     # usual angebot
     request.path = '/angebote/immobilien/test'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,nofollow,noodp,noydir,noarchive', (
-        'wrong robots for usual angebot')
+    assert view.meta_robots == 'index,nofollow,noodp,noydir,noarchive'
 
     # partnersuche
     request.path = '/angebote/partnersuche/test'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
-        'wrong robots for partnersuche')
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
 
 
 def test_robots_rules_for_diverse_paths(application):
@@ -838,89 +831,68 @@ def test_robots_rules_for_diverse_paths(application):
     # test folder
     request.path = '/test/'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
-        'wrong robots for test folder')
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
     # templates folder
     request.path = '/templates/'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
-        'wrong robots for templates folder')
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
     # banner folder
     request.path = '/banner/'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
-        'wrong robots for banner folder')
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
     # any folder
     request.path = '/any/'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
-        'wrong robots for any other folder')
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
 
     # autoren folder
     request.path = '/autoren/index'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow', (
-        'wrong robots for autoren folder')
+    assert view.meta_robots == 'noindex,follow'
 
 
 def test_meta_rules_for_keyword_paths(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/thema')
     request = pyramid.testing.DummyRequest()
 
     # person
-    request.path = '/thema/mahmud-abbas'
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/dynamic/paul-auster')
     view = zeit.web.core.view_centerpage.Centerpage(cp, request)
-    view.title = 'Mahmud Abbas'
-    assert view.pagetitle == 'Mahmud Abbas - News und Infos', (
-        'wrong pagetitle for person')
-    assert view.pagedescription == 'Hier finden Sie alle News ' \
-        'und Hintergrund-Informationen von ZEIT ONLINE zu Mahmud Abbas.', (
-            'wrong pagedescription for person')
+    assert view.pagetitle == 'Paul Auster - News und Infos | ZEIT ONLINE'
+    assert view.pagedescription == (
+        'Hier finden Sie alle News und Hintergrund-Informationen '
+        'von ZEIT ONLINE zu Paul Auster.')
 
     # location
-    request.path = '/thema/aachen'
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/dynamic/umbrien')
     view = zeit.web.core.view_centerpage.Centerpage(cp, request)
-    view.title = 'Aachen'
-    assert view.pagetitle == 'Aachen - News und Infos', (
-        'wrong pagetitle for location')
-    assert view.pagedescription == 'Hier finden Sie alle News ' \
-        'und Hintergrund-Informationen von ZEIT ONLINE zu Aachen.', (
-            'wrong pagedescription for location')
+    assert view.pagetitle == 'Umbrien - News und Infos | ZEIT ONLINE'
+    assert view.pagedescription == (
+        'Hier finden Sie alle News und Hintergrund-Informationen '
+        'von ZEIT ONLINE zu Umbrien.')
 
     # organisation
-    request.path = '/thema/abn-amro'
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/dynamic/bayerische-landesbank')
     view = zeit.web.core.view_centerpage.Centerpage(cp, request)
-    view.title = 'Abn Amro'
-    assert view.pagetitle == 'Abn Amro - News und Infos', (
-        'wrong pagetitle for organisation')
-    assert view.pagedescription == 'Hier finden Sie alle News ' \
-        'und Hintergrund-Informationen von ZEIT ONLINE zu dem ' \
-        'Thema Abn Amro.', (
-            'wrong pagedescription for organisation')
+    assert view.pagetitle == (
+        'Bayerische Landesbank - News und Infos | ZEIT ONLINE')
+    assert view.pagedescription == (
+        'Hier finden Sie alle News und Hintergrund-Informationen '
+        'von ZEIT ONLINE zu dem Thema Bayerische Landesbank.')
 
     # subject
-    request.path = '/thema/agrarmarkt'
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/dynamic/ausdauersport')
     view = zeit.web.core.view_centerpage.Centerpage(cp, request)
-    view.title = 'Agrarmarkt'
-    assert view.pagetitle == 'Agrarmarkt - News und Infos', (
-        'wrong pagetitle for subject')
-    assert view.pagedescription == 'Hier finden Sie alle News ' \
-        'und Hintergrund-Informationen von ZEIT ONLINE zu dem ' \
-        'Thema Agrarmarkt.', (
-            'wrong pagedescription for subject')
-
-    # not valid fallback
-    request.path = '/thema/justmurcks'
-    view = zeit.web.core.view_centerpage.Centerpage(cp, request)
-    view.title = 'Just Murcks'
-    assert view.pagetitle == 'Just Murcks - News und Infos', (
-        'wrong pagetitle for subject')
-    assert view.pagedescription == 'Just Murcks.', (
-        'wrong pagedescription for not valid keyword')
+    assert view.pagetitle == 'Ausdauersport - News und Infos | ZEIT ONLINE'
+    assert view.pagedescription == (
+        'Hier finden Sie alle News und Hintergrund-Informationen '
+        'von ZEIT ONLINE zu dem Thema Ausdauersport.')
 
 
 def test_newsticker_should_have_expected_dom(testserver, testbrowser):
@@ -968,8 +940,8 @@ def test_centerpage_biga_area_should_render_in_isolation_with_page_param(
         testbrowser):
     browser = testbrowser('/index/area/id-5fe59e73-e388-42a4-a8d4-'
                           '750b0bf96812?p=2')
-    teaserOnPage2 = browser.cssselect('.teaser-gallery__title')[0]
-    assert teaserOnPage2.text == 'Das hab ich auf dem Schirm'
+    teaser_second_page = browser.cssselect('.teaser-gallery__title')[0]
+    assert teaser_second_page.text == 'Das hab ich auf dem Schirm'
 
 
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
@@ -1092,11 +1064,11 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
     assert WebDriverWait(driver, 5).until(condition), (
         'New teasers not loaded within 5 seconds')
 
-    newTeaserLinks = driver.find_elements_by_css_selector(
+    new_teaser_links = driver.find_elements_by_css_selector(
         '.teaser-gallery__combined-link')
-    assert newTeaserLinks[0].get_attribute('href').endswith(
+    assert new_teaser_links[0].get_attribute('href').endswith(
         '/galerien/fs-desktop-schreibtisch-computer')
-    assert newTeaserLinks[1].get_attribute('href').endswith(
+    assert new_teaser_links[1].get_attribute('href').endswith(
         '/galerien/bg-automesse-detroit-2014-usa')
     assert teaserbutton.get_attribute('data-sourceurl').endswith('?p=2')
 

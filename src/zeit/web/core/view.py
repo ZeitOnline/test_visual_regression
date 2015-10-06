@@ -21,7 +21,6 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.content.text.interfaces
-import zeit.cms.tagging.interfaces
 
 import zeit.web
 import zeit.web.core.article
@@ -368,84 +367,40 @@ class Base(object):
     def supertitle(self):
         return self.context.supertitle
 
-    def get_topic_meta(self, data_type):
-
-        title = self.title
-        whitelist_data = zeit.web.core.sources.whitelist_meta
-
-        try:
-            url_value = self.request.path.split('/').pop()
-            entity_type = zeit.web.core.utils.tag_by_url_value(
-                url_value).entity_type
-            if entity_type == 'free':
-                entity_type = 'Subject'
-        except:
-            return title + whitelist_data[0]['post_' + data_type]
-
-        for data in whitelist_data:
-            if data['category'] == entity_type and title:
-                post = data['post_' + data_type]
-                try:
-                    return data['pre_' + data_type] + title + post
-                except:
-                    return title + post
-        return title + whitelist_data[0]['post_' + data_type]
-
     @zeit.web.reify
     def pagetitle(self):
-        # XXX: Remove this workaround & move all the keywordpage-related logic
-        #      from this PR https://github.com/ZeitOnline/zeit.web/pull/1109
-        #      into the thema/template.xml
-        seo_override = False
         try:
             title = zeit.seo.interfaces.ISEO(self.context).html_title
             assert title
-            seo_override = True
         except (AssertionError, TypeError):
             title = ': '.join([t for t in (self.supertitle, self.title) if t])
         if title:
-            if self._is_keyword_page and not seo_override:
-                # special rules for keywordpages
-                return self.get_topic_meta('title')
             return title + (u'' if self.is_hp else self.pagetitle_suffix)
         return self.seo_title_default
 
     @zeit.web.reify
     def pagedescription(self):
-        # XXX: Remove this workaround & move all the keywordpage-related logic
-        #      from this PR https://github.com/ZeitOnline/zeit.web/pull/1109
-        #      into the thema/template.xml
-        seo_override = False
         try:
             desc = zeit.seo.interfaces.ISEO(self.context).html_description
             assert desc
-            seo_override = True
         except (AssertionError, TypeError):
             desc = self.context.subtitle
-            if self._is_keyword_page and not seo_override:
-                # special rules for keywordpages
-                return self.get_topic_meta('desc')
         return desc or self.seo_title_default
-
-    @property
-    def _is_keyword_page(self):
-        # XXX Make types configurable?
-        return zeit.content.cp.interfaces.ICenterPage.providedBy(
-            self.context) and self.context.type in ['keywordpage', 'topicpage']
 
     @zeit.web.reify
     def ranked_tags(self):
-        sorted_list = sorted([t for t in self.context.keywords if t.label],
-                             key=lambda t: not t.url_value)
-        try:
-            for keyword in sorted_list:
-                if not keyword.url_value:
-                    uuid = keyword.uniqueId.replace('tag://', '')
-                    keyword.url_value = zeit.web.core.utils.tag_by_uuid_value(
-                        uuid).url_value
-        except:
-            pass
-        return sorted_list
+        tags = []
+        for keyword in self.context.keywords:
+            if not keyword.label:
+                continue
+            elif not keyword.url_value:
+                uuid = keyword.uniqueId.replace('tag://', '')
+                keyword = zope.component.getUtility(
+                    zeit.cms.tagging.interfaces.IWhitelist).get(uuid, None)
+                if not keyword:
+                    continue
+            tags.append(keyword)
+        return tags
 
     @zeit.web.reify
     def ranked_tags_list(self):

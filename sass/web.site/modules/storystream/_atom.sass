@@ -1,4 +1,6 @@
-.storystream-teaser
+$blockname: ".storystream-atom"
+
+#{$blockname}
 	padding: 0 $storystream-padding-mobile
 
 	&__container
@@ -65,11 +67,11 @@
 		margin: 1em 0
 		width: remify(140px)
 
-.storystream-teaser:first-of-type .storystream-teaser__content
+#{$blockname}:first-of-type #{$blockname}__content
 	padding: 3*$vertical-space 0 $vertical-space
 
 +respond-min($break-tablet-min)
-	.storystream-teaser
+	#{$blockname}
 		padding: 0 $storystream-padding-tablet
 
 		&__content:after
@@ -88,7 +90,7 @@
 				line-height: 1.5
 
 +respond-min($break-desktop-min)
-	.storystream-teaser
+	#{$blockname}
 		padding: 0 $storystream-padding-desktop-outer
 
 		&__content

@@ -3,7 +3,6 @@
     <type name="homepage">Homepage</type>
     <type name="ressort">Ressort-CP</type>
 	<type name="centerpage">Centerpage</type>
-	<type name="keywordpage">Schlagwortseite</type>
 	<type name="topicpage">Themenseite</type>
 	<type name="arena">Arena</type>
 	<type name="frame">Rahmen</type>
@@ -12,4 +11,5 @@
     <type name="archive-print-volume">Archiv-Print-Volume</type>
     <type name="archive-print-year">Archiv-Print-Year</type>
     <type name="ZMO">ZMO-Homepage</type>
+	<type name="storystream">Storystream</type>
 </centerpage-types>
