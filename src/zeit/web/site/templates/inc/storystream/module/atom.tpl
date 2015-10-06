@@ -12,7 +12,7 @@
 				{%- endblock atom_title %}
 			</div>
 			<div class="{{ blockname }}__text">
-				<p class="{{ '{}__description.format(blockname)' | with_mods(atom_modifier) }}">
+				<p class="{{ '{}__description'.format(blockname) | with_mods(atom_modifier) }}">
 					{{ atom.tldr_text or atom.teaserText }}&nbsp;<a class="{{ blockname }}__link" href="{{ atom.uniqueId | create_url }}">mehr lesen</a>
 				</p>
 				{% set image = get_image(module) %}
