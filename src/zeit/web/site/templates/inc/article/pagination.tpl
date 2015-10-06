@@ -1,5 +1,5 @@
 {% if view.pagination and view.pagination.total > 1 -%}
-<div class="article-pagination article__item{% if view.request.view_name == 'komplettansicht' %} article-pagination--komplettansicht{% endif %}" role="navigation" aria-labeledby="article-pagination-title">
+<div class="article-pagination article__item {% block pagination_modifier %}{% endblock %}role="navigation" aria-labeledby="article-pagination-title">
 	<div class="visually-hidden" id="article-pagination-title">Seitennavigation</div>
 
 	{% if view.pagination.next_page_url -%}
