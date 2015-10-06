@@ -413,9 +413,7 @@
 	height: remify($radius);
 	width: remify($radius);
 	@if $border_width > 0 {
-		border-width: $border_width;
-		border-color: $border_color;
-		border-style: solid;
+		border: $border_width solid $border_color;
 	}
 }
 
