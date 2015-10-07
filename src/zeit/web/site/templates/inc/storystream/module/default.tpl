@@ -1,2 +1,0 @@
-<pre>	default.tpl</pre
-
