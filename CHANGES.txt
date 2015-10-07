@@ -4,6 +4,8 @@ Change log for zeit.web
 2.11 (unreleased)
 -----------------
 
+- ZON-2286: Add back to home button to articles
+
 - FIX: Be more defensive in several places (resolving uniqueIds, empty
   properties etc.)
 
