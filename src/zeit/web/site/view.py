@@ -115,21 +115,6 @@ class Base(zeit.web.core.view.Base):
 
 
 @pyramid.view.view_config(
-    route_name='spektrum-kooperation',
-    renderer='templates/inc/area/spektrum.html')
-def spektrum_hp_feed(request):
-    # add CORS header to allow ESI JS drop-in
-    request.response.headers.add(
-        'Access-Control-Allow-Origin', '*')
-    request.response.cache_expires(60)
-    return {
-        'esi_toggle': True,
-        'area': zeit.web.site.area.spektrum.HPFeed(),
-        'parquet_position': request.params.get('parquet-position')
-    }
-
-
-@pyramid.view.view_config(
     route_name='login_state',
     renderer='templates/inc/navigation/login-state.html')
 def login_state(request):
