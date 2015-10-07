@@ -1,9 +1,9 @@
+import hashlib
 import logging
-import urllib2
-import md5
-import tempfile
-import PIL
 import os
+import PIL
+import tempfile
+import urllib2
 
 import grokcore.component
 import zope.component
@@ -20,6 +20,7 @@ import zeit.web
 import zeit.web.core.block
 import zeit.web.core.interfaces
 import zeit.web.core.utils
+import zeit.web.site.area.spektrum
 
 
 log = logging.getLogger(__name__)
@@ -284,26 +285,17 @@ class VariantImage(object):
             self.title = meta.title
 
 
-class LocalVideoImage(object):
+class LocalImage(object):
 
-    def __new__(cls, video_url, video_id):
-        instance = object.__new__(cls)
-        instance.__init__(video_url, video_id)
-        try:
-            instance.fetch()
-        except VideoImageNotFound:
-            return cls.fallback_image()
-        return instance
-
-    def __init__(self, video_url, video_id):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        self.url = video_url or ''
-        self.video_id = video_id
+    def __init__(self, url):
+        self.url = url
         self.mimeType = 'image/jpeg'
         self.format = 'jpeg'
-        self.__name__ = '{}/{}'.format(
-            conf.get('brightcove_image_cache', tempfile.gettempdir()),
-            md5.new(self.url).hexdigest())
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        tempdir = conf.get('brightcove_image_cache', tempfile.gettempdir())
+        hashkey = hashlib.md5(self.url.encode('ascii', errors='ignore'))
+        self.__name__ = '{}/{}'.format(tempdir, hashkey.hexdigest())
+        self.fetch()
 
     def isfile(self):
         return os.path.isfile(self.__name__)
@@ -311,36 +303,17 @@ class LocalVideoImage(object):
     def fetch(self):
         if self.isfile():
             return
-        if not self.url:
-            # Even though video_still and thumbnail should always be set,
-            # especially in some older videos they are empty for unknown
-            # reasons.
-            raise VideoImageNotFound()
         try:
-            resp = urllib2.urlopen(self.url, timeout=1.5)
+            # XXX: Switch to requests to leverage urllib3 connection pooling.
+            resp = urllib2.urlopen(self.url, timeout=2)
             content = resp.read()
-            if len(content) <= 20:
-                raise ContentTooShort()
-
-            with self.open('w+') as fh:
+            assert len(content) > 1024
+            with self.open(mode='w+') as fh:
                 fh.write(content)
-                log.debug(
-                    'Save brightcove image {} for {} to local file {}'.format(
-                        self.url, self.video_id, self.__name__))
-        except (IOError, AttributeError, ContentTooShort):
-            raise VideoImageNotFound()
-
-    @classmethod
-    def fallback_image(cls):
-        try:
-            conf = zope.component.getUtility(
-                zeit.web.core.interfaces.ISettings)
-            return zeit.cms.interfaces.ICMSContent(
-                '{}/{}'.format(
-                    conf.get('default_teaser_images'),
-                    'teaser_image-default.jpg'))
-        except:
-            raise VideoImageNotFound()
+        except (AssertionError, IOError, ValueError):
+            log.debug('Remote image {} could not be downloaded to {}.'.format(
+                      self.url, self.__name__))
+            raise TypeError('Could not adapt {}'.format(self.url))
 
     def open(self, mode='r'):
         return open(self.__name__, mode)
@@ -353,44 +326,17 @@ class LocalVideoImage(object):
 
     def getImageSize(self):  # NOQA
         if self.isfile():
-            return PIL.Image.open(self.open()).size
+            with self.open() as fh:
+                return PIL.Image.open(fh).size
         return (0, 0)
 
 
-class ContentTooShort(Exception):
-    pass
+class LocalImageGroup(zeit.content.image.imagegroup.ImageGroup,
+                      zeit.web.core.utils.nsdict):
 
-
-class VideoImageNotFound(Exception):
-    pass
-
-
-@grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
-@grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
-class ImageGroup(zeit.content.image.imagegroup.ImageGroup,
-                 zeit.web.core.utils.nsdict):
-
-    def __init__(self, video):
-        super(ImageGroup, self).__init__()
-        self.uniqueId = '{}/imagegroup/'.format(video.uniqueId)
-        self.copyrights = copyrights = (video.copyrights or '').strip('\n')
-        self.teaserText = teaserText = (video.teaserText or '').strip('\n')
-        self.teaserTitle = teaserTitle = (video.teaserTitle or '').strip('\n')
-        self.title = title = (video.title or '').strip('\n')
-        try:
-            image = LocalVideoImage(video.video_still, video.uniqueId)
-        except VideoImageNotFound:
-            image = None
-        else:
-            image.src = video.video_still
-            image.mimeType = 'image/jpeg'
-            image.image_pattern = 'wide-large'
-            image.copyright = copyrights
-            image.caption = teaserText
-            image.title = teaserTitle
-            image.alt = title
-            image.uniqueId = '{}{}'.format(self.uniqueId, 'still.jpg')
-        self.master_image = image
+    def __init__(self, context):
+        super(LocalImageGroup, self).__init__()
+        self.context = context
 
     def __getitem__(self, key):
         return self.create_variant_image(key)
@@ -402,10 +348,12 @@ class ImageGroup(zeit.content.image.imagegroup.ImageGroup,
         return int(bool(self.master_image))
 
     def __contains__(self, key):
-        return False  # Video imagegroups *only* contain master images.
+        # Local image groups *only* contain master images.
+        return False
 
     def keys(self):
-        return ()  # Video imagegroups *only* contain master images.
+        # Local image groups *only* contain master images.
+        return ()
 
     @property
     def master_image(self):
@@ -416,28 +364,79 @@ class ImageGroup(zeit.content.image.imagegroup.ImageGroup,
         self._master_image = value
 
 
-VideoImageGroup = ImageGroup  # XXX This should move out of centerpage.py
+@grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
+class VideoImageGroup(LocalImageGroup):
+
+    def __init__(self, context):
+        super(VideoImageGroup, self).__init__(context)
+        self.uniqueId = '{}/imagegroup/'.format(context.uniqueId)
+        self.master_image = image = LocalImage(context.video_still)
+
+        self.copyrights = (context.copyrights or '').strip('\n')
+        self.teaserText = (context.teaserText or '').strip('\n')
+        self.teaserTitle = (context.teaserTitle or '').strip('\n')
+        self.title = (context.title or '').strip('\n')
+
+        image.src = context.video_still
+        image.mimeType = 'image/jpeg'
+        image.image_pattern = 'widelarge'
+        image.copyright = self.copyrights
+        image.caption = self.teaserText
+        image.title = self.teaserTitle
+        image.alt = self.title
+        image.uniqueId = '{}still.jpg'.format(self.uniqueId)
 
 
-@grokcore.component.implementer(
-    zeit.content.image.interfaces.IRepositoryImageGroup)
-@grokcore.component.adapter(VideoImageGroup)
-def videoimagegroup_to_repositoryimagegroup(group):
-    return group
+# VideoImageGroup = ImageGroup  # XXX This should move out of centerpage.py
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
+@grokcore.component.adapter(zeit.web.site.area.spektrum.Teaser)
+class SpektrumImageGroup(LocalImageGroup):
+
+    def __init__(self, context):
+        super(SpektrumImageGroup, self).__init__(context)
+        self.master_image = image = LocalImage(context.image_url)
+        self.uniqueId = 'http://xml.zeit.de/spektrum-image{}'.format(
+            context.image_url.replace('http://www.spektrum.de', ''))
+
+        self.copyrights = (context.copyrights or '').strip('\n')
+        self.teaserText = (context.teaserText or '').strip('\n')
+        self.teaserTitle = (context.teaserTitle or '').strip('\n')
+        self.title = (context.title or '').strip('\n')
+
+        image.src = context.image_url
+        image.mimeType = 'image/jpeg'
+        image.image_pattern = 'widelarge'
+        image.copyright = self.copyrights
+        image.caption = self.teaserText
+        image.title = self.teaserTitle
+        image.alt = self.title
+        image.uniqueId = '{}/wide'.format(self.uniqueId)
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
 class VideoImages(object):
 
-    def __init__(self, video):
-        self.context = video
-        self.image = zeit.content.image.interfaces.IImageGroup(video)
+    def __init__(self, context):
+        self.context = context
+        self.image = zeit.content.image.interfaces.IImageGroup(context)
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(zeit.web.site.area.spektrum.Teaser)
+class SpektrumImages(object):
+
+    def __init__(self, context):
+        # XXX combine with VideoImages?
+        self.context = context
+        self.image = zeit.content.image.interfaces.IImageGroup(context)
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageMetadata)
-@grokcore.component.adapter(VideoImageGroup)
-class VideoImageMetaData(object):
+@grokcore.component.adapter(LocalImageGroup)
+class LocalImageMetaData(object):
 
     def __init__(self, group):
         for field in zeit.content.image.interfaces.IImageMetadata:
@@ -449,14 +448,21 @@ class VideoImageMetaData(object):
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IMasterImage)
-@grokcore.component.adapter(VideoImageGroup)
-def videoimagegroup_to_masterimage(group):
+@grokcore.component.adapter(LocalImageGroup)
+def localimagegroup_to_masterimage(group):
     return group.master_image
 
 
+@grokcore.component.implementer(
+    zeit.content.image.interfaces.IRepositoryImageGroup)
+@grokcore.component.adapter(LocalImageGroup)
+def localimagegroup_to_repositoryimagegroup(group):
+    return group
+
+
 @grokcore.component.implementer(zeit.content.image.interfaces.ITransform)
-@grokcore.component.adapter(LocalVideoImage)
-def videoimage_to_imagetransform(image):
+@grokcore.component.adapter(LocalImage)
+def localimage_to_imagetransform(image):
     return zeit.content.image.transform.ImageTransform(image)
 
 
