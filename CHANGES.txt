@@ -6,9 +6,6 @@ Change log for zeit.web
 
 - ZON-2286: Add back to home button to articles
 
-- FIX: Be more defensive in several places (resolving uniqueIds, empty
-  properties etc.)
-
 - ZON-2242: Change fonts URL to something like ``/.../latest/fonts`` instead of
   ``/.../2.9/fonts`` for better client cacheability
 
@@ -16,7 +13,10 @@ Change log for zeit.web
 
 - ZON-2301: fix/adjust date_last_modified for HP
 
-- MAINT: storystream follow-up/cleanup
+- ZON-1984: Storystream follow-up/cleanup
+
+- FIX: Be more defensive in several places (resolving uniqueIds, empty
+  properties etc.)
 
 
 2.10.1 (2015-10-02)
