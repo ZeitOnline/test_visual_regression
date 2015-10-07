@@ -88,20 +88,10 @@ def test_spektrum_image_should_have_expected_attributes(application):
     assert image.image.getImageSize() == (180, 120)
 
 
-def test_centerpage_recognizes_spektrum_cpextra(testserver):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
-        cp, pyramid.testing.DummyRequest())
-    mods = view.region_list_parquet[1].values()[0].values()
-    assert all(isinstance(
-        t[0], zeit.web.site.area.spektrum.Teaser) for t in mods)
-
-
 def test_spektrum_parquet_should_render_special_parquet_link(
         testbrowser, testserver):
     browser = testbrowser(
-        '%s/zeit-online/parquet-teaser-setup' % testserver.url)
+        '%s/zeit-online/parquet-feeds' % testserver.url)
     teasers = browser.cssselect(
         '.parquet-meta__more.parquet-meta__more--spektrum')
     actual_amount = len(teasers)
@@ -115,7 +105,7 @@ def test_spektrum_parquet_should_render_special_parquet_link(
 def test_sprektrum_parquet_should_display_meta_more(
         selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/zeit-online/parquet-teaser-setup' % testserver.url)
+    driver.get('%s/zeit-online/parquet-feeds' % testserver.url)
 
     more_link = driver.find_element_by_css_selector(
         '.parquet-meta__more--spektrum')
@@ -133,7 +123,7 @@ def test_spektrum_area_should_render_empty_if_feed_unavailable(
         testbrowser, testserver, monkeypatch):
     monkeypatch.setattr(zeit.web.site.area.spektrum, 'HPFeed', list)
     browser = testbrowser(
-        '%s/zeit-online/parquet-teaser-setup' % testserver.url)
+        '%s/zeit-online/parquet-feeds' % testserver.url)
     assert not browser.cssselect('.cp-area--spektrum')
 
 
