@@ -2,6 +2,7 @@ import contextlib
 import logging
 import resource
 import socket
+import time
 
 import mock
 import pyramid.events
@@ -71,15 +72,34 @@ def timer(identifier):
 
 @pyramid.events.subscriber(pyramid.events.NewRequest)
 def view_timer_start(event):
-    metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
-    event.request.view_timer = metrics.timer('zeit.web.core.view.pyramid')
-    event.request.view_timer.start()
+    event.request.view_timer_start = time.time()
     event.request.memory = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
 
 
 @pyramid.events.subscriber(pyramid.events.ContextFound)
 def view_timer_traversal(event):
-    event.request.view_timer.intermediate('traversal')
+    request = event.request
+
+    if request.matched_route:
+        # Detect static_view, see pyramid.config.view.StaticURLInfo.add().
+        if request.matched_route.name.startswith('__'):
+            view_name = 'static'
+        else:
+            view_name = request.matched_route.name
+    else:
+        view_name = request.view_name or 'default'
+
+    metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
+    timer = metrics.timer(
+        'zeit.web.core.view.pyramid.{context}-{view}'.format(
+            context=request.context.__class__.__name__.lower(),
+            view=view_name))
+    # Since we can decide the timer name only now, after we have the context,
+    # we have to re-implement timer.start() ourselves here.
+    timer._last = timer._start = request.view_timer_start
+
+    request.view_timer = timer
+    request.view_timer.intermediate('traversal')
 
 
 @pyramid.events.subscriber(pyramid.events.NewResponse)

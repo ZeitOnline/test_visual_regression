@@ -4,7 +4,7 @@ Change log for zeit.web
 2.12 (unreleased)
 -----------------
 
-- MAINT: Add hostname to statsd metric names.
+- MAINT: Add hostname and content-type+view-name to request timing metric names
 
 
 2.11 (2015-10-07)
