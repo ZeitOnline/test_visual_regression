@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - MAINT: Add hostname and content-type+view-name to request timing metric names
 
+- MAINT: Add timing metrics to our external HTTP requests
+
 
 2.11 (2015-10-07)
 -----------------

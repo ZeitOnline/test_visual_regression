@@ -104,7 +104,8 @@ class SpektrumImage(zeit.web.core.view.Base):
         file_name = path.rsplit('/', 1).pop()
 
         try:
-            fileobj = urllib2.urlopen(image_url, timeout=4)
+            with zeit.web.core.metrics.timer('spektrum.reponse_time'):
+                fileobj = urllib2.urlopen(image_url, timeout=4)
         except IOError:
             raise pyramid.httpexceptions.HTTPNotFound()
 

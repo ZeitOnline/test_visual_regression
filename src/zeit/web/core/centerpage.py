@@ -19,6 +19,7 @@ import zeit.content.video.interfaces
 import zeit.web
 import zeit.web.core.block
 import zeit.web.core.interfaces
+import zeit.web.core.metrics
 import zeit.web.core.utils
 
 
@@ -317,8 +318,10 @@ class LocalVideoImage(object):
             # reasons.
             raise VideoImageNotFound()
         try:
-            resp = urllib2.urlopen(self.url, timeout=1.5)
-            content = resp.read()
+            with zeit.web.core.metrics.timer(
+                    'zeit.web.core.video.thumbnail.brightcove.response_time'):
+                resp = urllib2.urlopen(self.url, timeout=1.5)
+                content = resp.read()
             if len(content) <= 20:
                 raise ContentTooShort()
 
