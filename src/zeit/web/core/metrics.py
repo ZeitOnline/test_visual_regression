@@ -35,13 +35,19 @@ class Metrics(object):
         self.gauge().send(self.prefix + identifier, value)
 
     def timer(self, identifier=None):
-        return statsd.Timer(self.prefix + identifier, self.statsd)
+        if identifier is not None:
+            identifier = self.prefix + identifier
+        return statsd.Timer(identifier, self.statsd)
 
     def counter(self, identifier=None):
-        return statsd.Counter(self.prefix + identifier, self.statsd)
+        if identifier is not None:
+            identifier = self.prefix + identifier
+        return statsd.Counter(identifier, self.statsd)
 
     def gauge(self, identifier=None):
-        return statsd.Gauge(self.prefix + identifier, self.statsd)
+        if identifier is not None:
+            identifier = self.prefix + identifier
+        return statsd.Gauge(identifier, self.statsd)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IMetrics)
