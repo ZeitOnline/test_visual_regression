@@ -673,7 +673,7 @@ class Content(Base):
                 lq.bool_field(
                     'breaking_news', False),
                 lq.field_raw(
-                    'type', lq.or_('article', 'gallery')),
+                    'type', 'article'),
                 lq.not_(
                     lq.field('uniqueId', self.context.uniqueId)),
                 lq.field_raw(
