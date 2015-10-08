@@ -82,8 +82,8 @@
     <cluster visible="True" area="id-c7f6e25c-f7e8-4d0e-876d-f47e88be2918" kind="gallery" visible_mobile="True" title="ZEIT Shop">
       <region visible="True" hide-dupes="True" area="id-f103fa99-95e2-4094-8bb9-d56b482325f7" kind="shop" title="ZEIT Shop" count="2" automatic="True" automatic_type="centerpage" visible_mobile="True" supertitle="Alle Angebote im Shop" read_more_url="http://shop.zeit.de">
         <referenced_cp>http://xml.zeit.de/angebote/zeit-shop-buehne/inhaltstemplate</referenced_cp>
-        <container cp:type="auto-teaser" module="zon-gallery" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-3f666f47-4cf7-43a7-97c1-305a8665d8b7"/>
-        <container cp:type="auto-teaser" module="zon-gallery" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-cdd6d281-49de-4d2c-af3b-a5817e6547a2"/>
+        <container cp:type="auto-teaser" module="zon-shop" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-3f666f47-4cf7-43a7-97c1-305a8665d8b7"/>
+        <container cp:type="auto-teaser" module="zon-shop" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-cdd6d281-49de-4d2c-af3b-a5817e6547a2"/>
       </region>
     </cluster>
   </body>

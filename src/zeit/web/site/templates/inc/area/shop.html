@@ -1,0 +1,24 @@
+{% extends "zeit.web.site:templates/inc/area/default.html" %}
+
+{% set module_layout = 'teaser-gallery' %}
+
+{% block before_module_list %}
+    {% set tracking_slug = '{}...{}.{}'.format(region_loop.index, '-'.join([area.kind, module_layout]), 'alle_shopangebote') %}
+	{{ cp.section_heading('ZEIT Shop', 'Alle Angebote im Shop', 'foto/index', view, tracking_slug, unpadded=True) }}
+{% endblock %}
+
+{% block module_list %}
+	<div class="{{ module_layout }}-group__container {{ module_layout }}-group__container--shop ">
+		{{ super() }}
+	</div>
+{% endblock %}
+
+{% block after_module_list %}
+	{% if area.next_page %}
+		<a href="{{ view.request.route_url('home') }}foto/index"
+			class="button {{ module_layout }}-group__button js-gallery-teaser-shuffle"
+			data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p={{ area.next_page }}">
+			{{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), request) }}Weitere laden
+		</a>
+	{% endif %}
+{% endblock %}
