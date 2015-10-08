@@ -306,7 +306,8 @@ define( [ 'jquery' ], function( $ ) {
                          '.snapshot__media',
                          '#servicebox',
                          '.print-box',
-                         '.breaking-news-banner'
+                         '.breaking-news-banner',
+                         '.article-lineage'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],

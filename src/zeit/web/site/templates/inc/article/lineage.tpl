@@ -2,7 +2,7 @@
 
 <div class="article-lineage js-fix-position">
     {% set predecessor, successor = view.lineage %}
-    <a href="{{ predecessor.uniqueId | create_url }}" class="article-lineage__link article-lineage__link--prev">
+    <a href="{{ predecessor.uniqueId | create_url }}" class="article-lineage__link article-lineage__link--prev" data-id="articlebottom.article-lineage.prev..{{ predecessor.title | format_webtrekk }}">
         {# TODO: use Icon as background image via CSS ? #}
         {{ lama.use_svg_icon('arrow', 'article-lineage__link-icon article-lineage__link-icon--prev', request) }}
         <span class="article-lineage__link-text article-lineage__link-text--prev">
@@ -10,7 +10,7 @@
             <span class="article-lineage__link-title">{{ predecessor.title | hide_none }}</span>
         </span>
     </a>
-    <a href="{{ successor.uniqueId | create_url }}" class="article-lineage__link article-lineage__link--next">
+    <a href="{{ successor.uniqueId | create_url }}" class="article-lineage__link article-lineage__link--next"data-id="articlebottom.article-lineage.next..{{ successor.title | format_webtrekk }}">
         {# TODO: use Icon as background image via CSS ? #}
         {{ lama.use_svg_icon('arrow', 'article-lineage__link-icon article-lineage__link-icon--next', request) }}
         <span class="article-lineage__link-text article-lineage__link-text--next">
