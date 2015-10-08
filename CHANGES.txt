@@ -4,9 +4,10 @@ Change log for zeit.web
 2.12 (unreleased)
 -----------------
 
-- MAINT: Add hostname and content-type+view-name to request timing metric names
-
-- MAINT: Add timing metrics to our external HTTP requests
+- ZON-2304: More metrics
+  * Add hostname and content-type+view-name to request timing metric names
+  * Add timing metrics to our external HTTP requests
+  * Add timing metrics for solr
 
 
 2.11 (2015-10-07)

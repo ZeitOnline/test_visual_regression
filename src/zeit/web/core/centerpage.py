@@ -15,6 +15,7 @@ import zeit.content.gallery.interfaces
 import zeit.content.image.imagegroup
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
+import zeit.find.search
 
 import zeit.web
 import zeit.web.core.block
@@ -484,3 +485,12 @@ class TopicLink(zeit.web.core.utils.nslist):
 @grokcore.component.adapter(zeit.web.core.interfaces.INextread)
 class Nextread(TeaserBlock):
     pass
+
+
+# Add timing metrics for solr to zeit.content.cp.interfaces.IRenderedArea
+def search_with_timing_metrics(*args, **kw):
+    with zeit.web.core.metrics.timer(
+            'zeit.web.site.area.default.solr.reponse_time'):
+        return original_search(*args, **kw)
+original_search = zeit.find.search.search
+zeit.find.search.search = search_with_timing_metrics
