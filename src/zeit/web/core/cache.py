@@ -12,6 +12,7 @@ import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
 
 import zeit.web.core.image
+import zeit.web.core.metrics
 
 
 log = logging.getLogger(__name__)
@@ -85,7 +86,8 @@ def caching_time_external(context):
 
 def contains_ignore_server_error(self, *args, **kw):
     try:
-        return original_contains(self, *args, **kw)
+        with zeit.web.core.metrics.timer('contains.memcache.response_time'):
+            return original_contains(self, *args, **kw)
     except:
         log.warning(
             'Error connecting to memcache at %s', self.mc.addresses)
@@ -97,7 +99,8 @@ beaker.ext.memcached.PyLibMCNamespaceManager.__contains__ = (
 
 def getitem_ignore_server_error(self, *args, **kw):
     try:
-        return original_getitem(self, *args, **kw)
+        with zeit.web.core.metrics.timer('getitem.memcache.response_time'):
+            return original_getitem(self, *args, **kw)
     except:
         log.warning(
             'Error connecting to memcache at %s', self.mc.addresses)
@@ -109,7 +112,8 @@ beaker.ext.memcached.PyLibMCNamespaceManager.__getitem__ = (
 
 def setvalue_ignore_server_error(self, *args, **kw):
     try:
-        return original_setvalue(self, *args, **kw)
+        with zeit.web.core.metrics.timer('setvalue.memcache.response_time'):
+            return original_setvalue(self, *args, **kw)
     except:
         log.warning(
             'Error connecting to memcache at %s', self.mc.addresses)
