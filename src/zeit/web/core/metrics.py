@@ -1,6 +1,7 @@
 import contextlib
 import logging
 import resource
+import socket
 
 import mock
 import pyramid.events
@@ -19,26 +20,27 @@ class Metrics(object):
 
     zope.interface.implements(zeit.web.core.interfaces.IMetrics)
 
-    def __init__(self, hostname, port):
+    def __init__(self, prefix, hostname, port):
+        self.prefix = prefix
         self.statsd = statsd.Connection(hostname, port)
 
     def time(self, identifier):
-        return self.timer().time(identifier)
+        return self.timer().time(self.prefix + identifier)
 
     def increment(self, identifier, delta=1):
-        self.counter().increment(identifier, delta)
+        self.counter().increment(self.prefix + identifier, delta)
 
     def set_gauge(self, identifier, value):
-        self.gauge().send(identifier, value)
+        self.gauge().send(self.prefix + identifier, value)
 
     def timer(self, identifier=None):
-        return statsd.Timer(identifier, self.statsd)
+        return statsd.Timer(self.prefix + identifier, self.statsd)
 
     def counter(self, identifier=None):
-        return statsd.Counter(identifier, self.statsd)
+        return statsd.Counter(self.prefix + identifier, self.statsd)
 
     def gauge(self, identifier=None):
-        return statsd.Gauge(identifier, self.statsd)
+        return statsd.Gauge(self.prefix + identifier, self.statsd)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IMetrics)
@@ -47,7 +49,9 @@ def from_settings():
     if settings.get('statsd_address'):
         log.info('Initializing metrics collection to statsd at %s',
                  settings['statsd_address'])
-        return Metrics(*settings['statsd_address'].split(':'))
+        return Metrics(
+            'friedbert.%s.' % socket.gethostname(),
+            *settings['statsd_address'].split(':'))
     else:
         log.info(
             'Not initializing metrics collection, no statsd_address setting')

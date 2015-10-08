@@ -4,7 +4,7 @@ Change log for zeit.web
 2.12 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Add hostname to statsd metric names.
 
 
 2.11 (2015-10-07)
