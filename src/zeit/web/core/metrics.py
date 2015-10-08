@@ -2,6 +2,7 @@ import contextlib
 import logging
 import resource
 import socket
+import sys
 import time
 
 import mock
@@ -72,6 +73,9 @@ def from_settings():
 
 
 def timer(identifier):
+    if not identifier.startswith('zeit.'):
+        module = sys._getframe(1).f_globals['__name__']
+        identifier = '%s.%s' % (module, identifier)
     metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
     return metrics.time(identifier)
 
