@@ -10,7 +10,9 @@ Change log for zeit.web
   * Add timing metrics for solr
   * Add timing metrics for memcache
 
-- FIX: Be more defensive about unresolveable entries and their images in feeds
+- FIX: Be more defensive in several places:
+  * unresolveable entries and their images in feeds
+  * missing cid infos in community response
 
 
 2.11 (2015-10-07)

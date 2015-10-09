@@ -233,10 +233,13 @@ def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
     # compute page if comment id is supplied, effectively ignoring page param
     if cid is not None:
         comment_index = thread['index']
-        root_index = comment_index[int(cid)]['root_index']
-        if sort == 'desc':
-            root_index = abs(root_index - top_level_comment_count)
-        page = int(math.ceil(float(root_index) / float(page_size)))
+        try:
+            root_index = comment_index[int(cid)]['root_index']
+            if sort == 'desc':
+                root_index = abs(root_index - top_level_comment_count)
+            page = int(math.ceil(float(root_index) / float(page_size)))
+        except (ValueError, KeyError):
+            pass
 
     # slice comment tree when there's more than one page
     if page and pages > 1:
