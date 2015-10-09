@@ -11,4 +11,5 @@
     <type name="archive-print-volume">Archiv-Print-Volume</type>
     <type name="archive-print-year">Archiv-Print-Year</type>
     <type name="ZMO">ZMO-Homepage</type>
+	<type name="storystream">Storystream</type>
 </centerpage-types>

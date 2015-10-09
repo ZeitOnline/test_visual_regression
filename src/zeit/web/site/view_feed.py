@@ -136,12 +136,17 @@ class Newsfeed(Base):
                 authors = [x for x in authors if x]
 
             description = metadata.teaserText
-            teaser_image = zeit.content.image.interfaces.IImages(content).image
-            variant = teaser_image.variant_url('wide', 148, 84) if (
+
+            variant = None
+            teaser_image = None
+            images = zeit.content.image.interfaces.IImages(content, None)
+            if images is not None:
+                teaser_image = images.image
                 # Missing meta files break this, since "Folder has no attribute
                 # variant_url".
-                zeit.content.image.interfaces.IImageGroup.providedBy(
-                    teaser_image)) else ''
+                if zeit.content.image.interfaces.IImageGroup.providedBy(
+                        teaser_image):
+                    variant = images.image.variant_url('wide', 148, 84)
 
             if variant and not zeit.web.core.image.is_image_expired(
                     teaser_image):

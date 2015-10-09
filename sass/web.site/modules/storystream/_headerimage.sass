@@ -27,14 +27,10 @@
 		max-width: remify(640px)
 		position: relative
 		&:before
-			color: $color-storystream-border
-			content: '\2B24' // ⬤ = Black large circle
-			display: block
-			font-size: remify(9px)
+			+make-a-circle($color: $color-storystream-border, $radius: 9px)
 			left: -$storystream-padding-mobile
-			margin: remify(-5px 0 0 -5px)
-			position: absolute
-			z-index: 2
+			margin: remify(-2px 0 0 -4px)
+
 		&:after
 			content: ''
 			position: absolute

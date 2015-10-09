@@ -1,11 +1,14 @@
 {% macro include_teaser_datetime(teaser, layout='', kind='') -%}
     {%- if kind == 'ranking' or kind == 'nextread' -%}
         {%- set time = teaser | mod_date | format_timedelta(days=3, absolute=True) | title -%}
+    {%- elif kind == 'teaser-storystream' -%}
+        {%- set time = teaser | mod_date | format_timedelta(days=3) -%}
     {%- else -%}
         {%- set time = get_delta_time_from_article(teaser) | hide_none -%}
     {%- endif -%}
+
     {%- if time -%}
-        {% if kind == 'nextread' %}
+        {% if kind == 'nextread' or kind == 'teaser-storystream' %}
             <span class="{{ layout }}__dt">
                 {{- time -}}
             </span>

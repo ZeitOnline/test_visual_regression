@@ -1,6 +1,9 @@
 import contextlib
 import logging
 import resource
+import socket
+import sys
+import time
 
 import mock
 import pyramid.events
@@ -19,25 +22,32 @@ class Metrics(object):
 
     zope.interface.implements(zeit.web.core.interfaces.IMetrics)
 
-    def __init__(self, hostname, port):
+    def __init__(self, prefix, hostname, port):
+        self.prefix = prefix
         self.statsd = statsd.Connection(hostname, port)
 
     def time(self, identifier):
-        return self.timer().time(identifier)
+        return self.timer().time(self.prefix + identifier)
 
     def increment(self, identifier, delta=1):
-        self.counter().increment(identifier, delta)
+        self.counter().increment(self.prefix + identifier, delta)
 
     def set_gauge(self, identifier, value):
-        self.gauge().send(identifier, value)
+        self.gauge().send(self.prefix + identifier, value)
 
     def timer(self, identifier=None):
+        if identifier is not None:
+            identifier = self.prefix + identifier
         return statsd.Timer(identifier, self.statsd)
 
     def counter(self, identifier=None):
+        if identifier is not None:
+            identifier = self.prefix + identifier
         return statsd.Counter(identifier, self.statsd)
 
     def gauge(self, identifier=None):
+        if identifier is not None:
+            identifier = self.prefix + identifier
         return statsd.Gauge(identifier, self.statsd)
 
 
@@ -47,7 +57,9 @@ def from_settings():
     if settings.get('statsd_address'):
         log.info('Initializing metrics collection to statsd at %s',
                  settings['statsd_address'])
-        return Metrics(*settings['statsd_address'].split(':'))
+        return Metrics(
+            'friedbert.%s.' % socket.gethostname(),
+            *settings['statsd_address'].split(':'))
     else:
         log.info(
             'Not initializing metrics collection, no statsd_address setting')
@@ -61,21 +73,43 @@ def from_settings():
 
 
 def timer(identifier):
+    if not identifier.startswith('zeit.'):
+        module = sys._getframe(1).f_globals['__name__']
+        identifier = '%s.%s' % (module, identifier)
     metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
     return metrics.time(identifier)
 
 
 @pyramid.events.subscriber(pyramid.events.NewRequest)
 def view_timer_start(event):
-    metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
-    event.request.view_timer = metrics.timer('zeit.web.core.view.pyramid')
-    event.request.view_timer.start()
+    event.request.view_timer_start = time.time()
     event.request.memory = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
 
 
 @pyramid.events.subscriber(pyramid.events.ContextFound)
 def view_timer_traversal(event):
-    event.request.view_timer.intermediate('traversal')
+    request = event.request
+
+    if request.matched_route:
+        # Detect static_view, see pyramid.config.view.StaticURLInfo.add().
+        if request.matched_route.name.startswith('__'):
+            view_name = 'static'
+        else:
+            view_name = request.matched_route.name
+    else:
+        view_name = request.view_name or 'default'
+
+    metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
+    timer = metrics.timer(
+        'zeit.web.core.view.pyramid.{context}-{view}'.format(
+            context=request.context.__class__.__name__.lower(),
+            view=view_name))
+    # Since we can decide the timer name only now, after we have the context,
+    # we have to re-implement timer.start() ourselves here.
+    timer._last = timer._start = request.view_timer_start
+
+    request.view_timer = timer
+    request.view_timer.intermediate('traversal')
 
 
 @pyramid.events.subscriber(pyramid.events.NewResponse)

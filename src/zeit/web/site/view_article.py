@@ -36,7 +36,7 @@ log = logging.getLogger(__name__)
              zeit.web.core.view.is_advertorial),
              renderer='templates/article_advertorial.html')
 @view_config(name='komplettansicht',
-             renderer='templates/article_komplett.html')
+             renderer='templates/komplett.html')
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
              zeit.web.core.view.is_advertorial),
              name='komplettansicht',
@@ -50,6 +50,10 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return super(Article, self).canonical_url
         else:
             return self.resource_url
+
+    @zeit.web.reify
+    def extend_from_template(self):
+        return "zeit.web.site:templates/article.html"
 
     @zeit.web.reify
     def pagetitle(self):
@@ -188,8 +192,12 @@ def has_author_image(context, request):
                                 is_column_article,
                                 has_author_image),
              name='komplettansicht',
-             renderer='templates/column_komplett.html')
+             renderer='templates/komplett.html')
 class ColumnArticle(Article):
+
+    @zeit.web.reify
+    def extend_from_template(self):
+        return "zeit.web.site:templates/column.html"
 
     @zeit.web.reify
     def author_img(self):

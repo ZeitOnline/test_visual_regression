@@ -1,4 +1,4 @@
-{% extends "zeit.web.site:templates/column.html" %}
+{% extends view.extend_from_template %}
 
 {% block article_pages %}
     {% for page in view.pages %}
@@ -11,5 +11,6 @@
     {% endfor %}
 {% endblock article_pages %}
 
-{% block article_pagination %}
-{% endblock article_pagination %}
+{% block pagination_modifier %}article-pagination--komplettansicht{% endblock %}
+
+{% block article_pager %}{% endblock article_pager %}
