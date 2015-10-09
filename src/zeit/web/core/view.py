@@ -213,6 +213,8 @@ class Base(object):
 
     @zeit.web.reify
     def cap_title(self):
+        if not self.context.cap_title:
+            return ''
         return self.context.cap_title.title()
 
     @zeit.web.reify
@@ -357,6 +359,8 @@ class Base(object):
 
     @zeit.web.reify
     def title(self):
+        if not self.context.title:
+            return ''
         return self.context.title.strip()
 
     @zeit.web.reify
@@ -474,7 +478,14 @@ class Base(object):
 
     @zeit.web.reify
     def date_last_modified(self):
-        return self.date_last_published_semantic or self.date_first_released
+        date = self.date_last_published_semantic or self.date_first_released
+        # In Vivi, we add 1 minute because the publishing takes time.
+        # But in case it gets published fast, we have a future date.
+        # And that destroys our "Aktualisiert vor 47 Sekunden" header.
+        # That's why we subtract 1 minute.
+        if self.is_hp and isinstance(date, datetime.datetime):
+            date -= datetime.timedelta(minutes=1)
+        return date
 
     @zeit.web.reify
     def date_first_released(self):
@@ -768,7 +779,10 @@ def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
 
 @pyramid.view.view_config(route_name='json_comment_count', renderer='json')
 def json_comment_count(request):
-    unique_id = request.GET.get('unique_id', None)
+    try:
+        unique_id = request.GET.get('unique_id', None)
+    except UnicodeDecodeError:
+        unique_id = None
     if unique_id is None:
         return pyramid.response.Response(
             'Missing value for parameter: unique_id', 412)

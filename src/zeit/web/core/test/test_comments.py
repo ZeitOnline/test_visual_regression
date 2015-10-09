@@ -259,12 +259,9 @@ def _create_poster(monkeypatch):
     request.cookies = {}
     context = mock.Mock()
 
-    def util(arg):
-        return {
-            'community_host': 'http://foo',
-            'app_servers': ['http://foo', 'http://baa']}
-
-    monkeypatch.setattr(zope.component, 'getUtility', util)
+    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
+    settings['community_host'] = 'http://foo'
+    settings['app_servers'] = ['http://foo', 'http://baa']
 
     def post(action_url, data=None, cookies=None):
         return None

@@ -189,7 +189,7 @@ def test_copyright_entry_has_correct_nofollow_attr(testserver, testbrowser):
 def test_inline_images_in_longform_show_up_in_copyrights(
         testserver, testbrowser):
     browser = testbrowser('%s/artikel/06' % testserver.url)
-    assert len(browser.cssselect('div.copyrights__entry__image')) == 2
+    assert len(browser.cssselect('div.copyrights__entry__image')) == 3
     browser = testbrowser('%s/artikel/05' % testserver.url)
     assert len(browser.cssselect('div.copyrights__entry__image')) == 7
 
