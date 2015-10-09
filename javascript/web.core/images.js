@@ -195,7 +195,11 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
      */
     function showImages( imageArray ) {
         imageArray = imageArray || $( images ).filter( function() {
-            return $( this ).data( 'tolazyload' ) !== true;
+            var $parent = $( this ).closest( '.scaled-image' );
+            // if lazyload or hidden filter out
+            if ( $( this ).data( 'tolazyload' ) === true || $parent.css( 'display' ) !== 'none' ) {
+                return false;
+            }
         });
         $( imageArray ).each( function() {
             var $img = $( this );
