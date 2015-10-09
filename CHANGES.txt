@@ -4,7 +4,7 @@ Change log for zeit.web
 2.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2292: Add lazyloading for centerpages
 
 
 2.12 (2015-10-09)
