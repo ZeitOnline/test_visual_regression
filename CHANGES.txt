@@ -74,6 +74,8 @@ Change log for zeit.web
 2.12 (2015-10-09)
 -----------------
 
+- FIX: Fix display of future dates
+
 - ZON-2304: More metrics
   * Add hostname and content-type+view-name to request timing metric names
   * Add timing metrics for our external HTTP requests
