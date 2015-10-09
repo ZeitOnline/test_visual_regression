@@ -39,10 +39,9 @@
 			fill: $zon_lighter_grey
 			&--prev
 				float: left
-				// TODO: solution for IE8 (Unicode Fallback? Dont show?)
-				+transform(rotate(180deg))
 			&--next
 				float: right
+				// rotation is not done via CSS because of IE8
 		&__link-text
 			display: none
 			&--prev

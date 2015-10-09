@@ -29,7 +29,7 @@
         this.$articleBody = undefined;
 
         // In 2015, we need multiple lines of code to detect the scrolling position
-        // (// https://developer.mozilla.org/de/docs/Web/API/Window/scrollY)
+        // (https://developer.mozilla.org/de/docs/Web/API/Window/scrollY)
         this.supportPageOffset = window.pageXOffset !== undefined;
         this.isCSS1Compat = ( ( document.compatMode || '' ) === 'CSS1Compat' );
 
@@ -60,6 +60,9 @@
 
             // OPTIMIZE: do we have the $window already available? Is it cached by jQuery?
             // OPTIMIZE: namespace for event handler ?
+
+            // debounce does not work. That's why I use my own throttling.
+            // $( window ).on( 'scroll', $.debounce( that.handleScrolling, 100 ) );
 
             $( window ).on( 'scroll', function() {
                 that.scrollThrottling();
@@ -120,7 +123,7 @@
 
             this.calculateArticlePositions();
             // In 2015, we need multiple lines of code to detect the scrolling position
-            // (// https://developer.mozilla.org/de/docs/Web/API/Window/scrollY)
+            // (https://developer.mozilla.org/de/docs/Web/API/Window/scrollY)
             this.currentPosition = this.supportPageOffset ?
                 window.pageYOffset : this.isCSS1Compat ?
                     document.documentElement.scrollTop : document.body.scrollTop;
