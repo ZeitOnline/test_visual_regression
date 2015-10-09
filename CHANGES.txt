@@ -4,7 +4,11 @@ Change log for zeit.web
 2.12 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2304: More metrics
+  * Add hostname and content-type+view-name to request timing metric names
+  * Add timing metrics for our external HTTP requests
+  * Add timing metrics for solr
+  * Add timing metrics for memcache
 
 
 2.11 (2015-10-07)
