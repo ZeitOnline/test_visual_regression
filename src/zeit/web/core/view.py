@@ -779,7 +779,10 @@ def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
 
 @pyramid.view.view_config(route_name='json_comment_count', renderer='json')
 def json_comment_count(request):
-    unique_id = request.GET.get('unique_id', None)
+    try:
+        unique_id = request.GET.get('unique_id', None)
+    except UnicodeDecodeError:
+        unique_id = None
     if unique_id is None:
         return pyramid.response.Response(
             'Missing value for parameter: unique_id', 412)
