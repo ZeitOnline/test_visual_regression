@@ -472,6 +472,11 @@ class Base(object):
         return conf.get('dev_environment', '')
 
     @zeit.web.reify
+    def featuretoggle_articlelineage(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('enable_article_lineage', '')
+
+    @zeit.web.reify
     def timezone(self):
         return babel.dates.get_timezone('Europe/Berlin')
 
