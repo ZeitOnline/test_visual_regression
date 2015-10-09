@@ -107,7 +107,7 @@ class DeltaHoursEntity(DeltaTimeEntity):
         super(DeltaHoursEntity, self).__init__(delta)
         hours = self.delta.seconds / 3600
         if (self.delta.days < 0):
-            hours = (60 * 60 * 24 - self.delta.seconds) / 3600
+            hours = (3600 * 24 - self.delta.seconds) / 3600
         self.number = hours
         self.text = babel.dates.format_timedelta(
             babel.dates.timedelta(hours=hours),
@@ -123,7 +123,7 @@ class DeltaMinutesEntity(DeltaTimeEntity):
         super(DeltaMinutesEntity, self).__init__(delta)
         minutes = (self.delta.seconds % 3600) / 60
         if (self.delta.days < 0):
-            minutes = ((60 * 60 * 24 - self.delta.seconds) % 3600) / 60
+            minutes = ((3600 * 24 - self.delta.seconds) % 3600) / 60
         self.number = minutes
         self.text = babel.dates.format_timedelta(
             babel.dates.timedelta(minutes=minutes),
@@ -139,7 +139,7 @@ class DeltaSecondsEntity(DeltaTimeEntity):
         super(DeltaSecondsEntity, self).__init__(delta)
         seconds = self.delta.seconds % 60
         if (self.delta.days < 0):
-            seconds = (60 * 60 * 24 - self.delta.seconds) % 60
+            seconds = (3600 * 24 - self.delta.seconds) % 60
         self.number = seconds
         self.text = babel.dates.format_timedelta(
             babel.dates.timedelta(seconds=seconds),
