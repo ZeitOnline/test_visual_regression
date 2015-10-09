@@ -4,7 +4,7 @@ Change log for zeit.web
 2.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: adjust adBlocker Tracking to GTM dataLayer conventions
 
 
 2.12 (2015-10-09)
