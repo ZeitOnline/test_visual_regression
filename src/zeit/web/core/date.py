@@ -169,7 +169,7 @@ class DeltaTime(object):
         self.seconds = zeit.web.core.date.DeltaSecondsEntity(self.delta)
 
     def _filter_delta_time(self):
-        if (self.hide and self.delta >= datetime.timedelta(**self.hide)):
+        if (self.hide and abs(self.delta) >= datetime.timedelta(**self.hide)):
             self.days = None
             self.hours = None
             self.minutes = None
