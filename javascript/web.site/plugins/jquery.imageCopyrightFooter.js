@@ -1,5 +1,5 @@
 /**
- * @fileOverview jQuery Plugin for extending footer
+ * @fileOverview jQuery Plugin for displaying image copyrights in footer
  * @author thomas.puppe@zeit.de
  * @version  0.1
  */
@@ -28,18 +28,26 @@
     */
     $.fn.imageCopyrightFooter = function() {
 
-        var template = '<p>' +
-            '<img class="image-copyright-footer__item-image" src="___image___" />' +
-            '<span class="image-copyright-footer__item-text">___name___</span>' +
-            '</p>';
+        var containerTemplate = '<div class="image-copyright-footer">' +
+                '<div class="image-copyright-footer__container">' +
+                '<h2 class="image-copyright-footer__headline">' +
+                    'Bildrechte auf dieser Seite' +
+                    '<span class="image-copyright-footer__close">schließen</span>' +
+                '</h2>' +
+                '___items___</div></div>',
+            itemTemplate = '<div class="image-copyright-footer__item">' +
+                '<img class="image-copyright-footer__item-image" src="___image___" />' +
+                '<span class="image-copyright-footer__item-text">___name___</span>' +
+                '</div>',
+            initialized = false;
 
-        // TODO:
-        // Alle Kommentare anpassen
+        function showImageCopyrightFooter( ) {
 
-        // toggle footer display
-        function toggleImageCopyrightFooter( $button ) {
+            if ( this.initialized ) {
+                $( '.image-copyright-footer' ).show();
+                return;
+            }
 
-            // TODO: Performance
             var $imagesWithCopyright = $( 'figure' ),
                 imagesWithCopyrightLength = $imagesWithCopyright.length,
                 i,
@@ -63,35 +71,28 @@
                 }
 
                 currentImageUrl = $currentImage.find( 'img' ).eq( 0 ).attr( 'src' );
-                wholeString += template
-                    .replace( '___name___', currentName )
+                wholeString += itemTemplate
+                    .replace( '___name___', $currentCopyrightHolder.html() )
                     .replace( '___image___', currentImageUrl );
             }
 
-            $button.append( wholeString );
+            $( '.footer-links__button' ).eq( 0 ).before( containerTemplate.replace( '___items___', wholeString ) );
 
-            /*
-            var $slides = $button.parent().nextAll( '.footer-publisher__row' ).add( '.footer-links__row' );
+            $( '.image-copyright-footer__close' ).on( 'click', function( e ) {
+                e.preventDefault();
+                $( '.image-copyright-footer' ).hide();
+            } );
 
-            $button.toggleClass( 'footer-publisher__more--expanded' );
+            this.initialized = true;
 
-            if ( $button.hasClass( 'footer-publisher__more--expanded' ) ) {
-                $slides.slideDown({ duration: animationDuration });
-                $button.text( 'Schließen' ).scrollIntoView({ duration: scrollDuration });
-            } else {
-                $slides.slideUp({ duration: animationDuration });
-                $button.text( 'Mehr' );
-            }
-            */
         }
 
         return this.each( function() {
-            var $button = $( this );
-
-            $button.on( 'click', function( e ) {
+            $( this ).on( 'click', function( e ) {
                 e.preventDefault();
-                toggleImageCopyrightFooter( $button );
+                showImageCopyrightFooter( );
             } );
+
         });
     };
 })( jQuery );

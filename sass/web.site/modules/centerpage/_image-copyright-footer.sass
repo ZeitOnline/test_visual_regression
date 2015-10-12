@@ -1,12 +1,34 @@
+.figureCopyrightHidden
+	display: none
+
 .image-copyright-footer
-	margin: auto
-	max-width: remify(640px)
-	padding: $vertical-space $page-padding
-	text-align: left
+	background-color: #333
+	&__container
+		margin: auto
+		max-width: remify(640px)
+		padding: $vertical-space $page-padding
+		text-align: left
 	&__button
 		color: $white
+	&__headline
+		+font-smoothing
+		color: $zon-seashell
+		font-size: remify(16px)
+	&__close
+		cursor: pointer
+		float: right
+		font-size: remify(12px)
+		font-weight: normal
+		&:hover
+			color: $zon_mid_grey
 	&__item
+		clear: both
+		margin: 0
 		&-image
+			float: left
+			margin: 0 $page-padding $vertical-space 0
 			width: remify(100px)
 		&-text
 			color: $zon_mid_grey
+			a
+				color: inherit
