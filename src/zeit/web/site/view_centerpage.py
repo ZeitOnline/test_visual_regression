@@ -348,16 +348,18 @@ class Storystream(Centerpage):
                 for module in area.select_modules(*self.countable_atom_types):
                     atom_counter += 1
 
-                    # OPTIMIZE: this is redundant (also done inside
+                    # OPTIMIZE: this traversal is redundant (also done inside
                     # the template). Maybe we should store the teaser
                     # object into the module?
                     teaser = zeit.web.core.template.first_child(module)
                     if ((oldest_atom is None) or
-                            (oldest_atom > teaser.tldr_date)):
+                            (teaser.tldr_date is not None and
+                                oldest_atom > teaser.tldr_date)):
                         oldest_atom = teaser.tldr_date
 
                     if ((latest_atom is None) or
-                            (latest_atom < teaser.tldr_date)):
+                            (teaser.tldr_date is not None and
+                                latest_atom < teaser.tldr_date)):
                         latest_atom = teaser.tldr_date
 
         self.atom_meta['count'] = atom_counter

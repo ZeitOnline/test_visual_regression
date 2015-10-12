@@ -14,6 +14,7 @@ import zeit.content.image.interfaces
 import zeit.content.link.interfaces
 
 import zeit.web
+import zeit.web.core.metrics
 
 
 log = logging.getLogger(__name__)
@@ -117,7 +118,8 @@ class RSSArea(zeit.content.cp.automatic.AutomaticArea):
         feed_url = conf.get(self.feed_key)
         values = []
         try:
-            resp = requests.get(feed_url, timeout=2.0)
+            with zeit.web.core.metrics.timer('feed.rss.reponse_time'):
+                resp = requests.get(feed_url, timeout=2.0)
             xml = lxml.etree.fromstring(resp.content)
         except (requests.exceptions.RequestException,
                 lxml.etree.XMLSyntaxError), e:

@@ -107,6 +107,26 @@
         areas="solo major minor ranking parquet"
         />
 
+    <!--   Teaser formats for Storystreams   -->
+    <layout
+        id="zon-tldr"
+        title="tl;dr"
+        areas="storystream"
+        default="storystream"
+        type="storystream"/>
+    <layout
+        id="zon-milestone"
+        title="Milestone"
+        image_pattern="zon-large"
+        areas="storystream"
+        type="storystream"/>
+    <layout
+        id="zon-feature"
+        title="Grafischer Teaser"
+        image_pattern="zon-large"
+        areas="storystream"
+        type="storystream"/>
+
     <!-- Legacy teaser formats -->
     <layout
         id="leader"

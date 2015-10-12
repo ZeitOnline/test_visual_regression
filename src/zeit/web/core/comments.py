@@ -15,6 +15,7 @@ import zope.component
 import zeit.cms.interfaces
 
 import zeit.web.core.interfaces
+import zeit.web.core.metrics
 import zeit.web.core.template
 
 
@@ -152,7 +153,9 @@ def request_thread(path):
     uri = '{}/agatho/thread{}'.format(
         conf.get('agatho_host', ''), path.encode('utf-8'))
     try:
-        response = requests.get(uri, timeout=timeout)
+        with zeit.web.core.metrics.timer(
+                'request_thread.community.reponse_time'):
+            response = requests.get(uri, timeout=timeout)
         if response.status_code == 404:
             return
         return response.content if (200 <= response.status_code < 300) else (
@@ -230,10 +233,13 @@ def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
     # compute page if comment id is supplied, effectively ignoring page param
     if cid is not None:
         comment_index = thread['index']
-        root_index = comment_index[int(cid)]['root_index']
-        if sort == 'desc':
-            root_index = abs(root_index - top_level_comment_count)
-        page = int(math.ceil(float(root_index) / float(page_size)))
+        try:
+            root_index = comment_index[int(cid)]['root_index']
+            if sort == 'desc':
+                root_index = abs(root_index - top_level_comment_count)
+            page = int(math.ceil(float(root_index) / float(page_size)))
+        except (ValueError, KeyError):
+            pass
 
     # slice comment tree when there's more than one page
     if page and pages > 1:
@@ -360,8 +366,10 @@ def request_counts(*unique_ids):
     uri = '{}/agatho/node-comment-statistics'.format(
         conf.get('community_host', '').rstrip('/'))
     try:
-        response = requests.post(uri, data=[('unique_ids[]', uid) for uid in
-                                            unique_ids], timeout=timeout)
+        with zeit.web.core.metrics.timer(
+                'request_counts.community.reponse_time'):
+            response = requests.post(uri, data=[
+                ('unique_ids[]', uid) for uid in unique_ids], timeout=timeout)
         return response.ok and response.content or None
     except (AttributeError, requests.exceptions.RequestException):
         return

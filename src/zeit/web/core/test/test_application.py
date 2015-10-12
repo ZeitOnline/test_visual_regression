@@ -128,5 +128,5 @@ def test_transaction_aborts_after_request(testserver, testbrowser):
 
 
 def test_assets_have_configurable_cache_control_header(testbrowser):
-    b = testbrowser('/static/css/web.site/screen.css')
+    b = testbrowser('/static/latest/css/web.site/screen.css')
     assert b.headers['Cache-control'] == 'max-age=1'

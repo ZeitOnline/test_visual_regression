@@ -20,6 +20,7 @@ import zeit.content.image.interfaces
 import zeit.content.video.interfaces
 
 import zeit.web
+import zeit.web.core.metrics
 
 
 log = logging.getLogger(__name__)
@@ -145,8 +146,10 @@ class LocalImage(object):
             return
         try:
             # TODO: Switch to requests to leverage urllib3 connection pooling.
-            resp = urllib2.urlopen(self.url, timeout=2)
-            content = resp.read()
+            with zeit.web.core.metrics.timer(
+                    'zeit.web.core.video.thumbnail.brightcove.response_time'):
+                resp = urllib2.urlopen(self.url, timeout=2)
+                content = resp.read()
             assert len(content) > 1024
             with self.open(mode='w+') as fh:
                 fh.write(content)

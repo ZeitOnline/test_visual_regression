@@ -1,14 +1,46 @@
 Change log for zeit.web
 =======================
 
-2.11 (unreleased)
+2.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Revert "ZON-2301: fix/adjust date_last_modified for HP"
+
+
+2.12 (2015-10-09)
+-----------------
+
+- ZON-2304: More metrics
+  * Add hostname and content-type+view-name to request timing metric names
+  * Add timing metrics for our external HTTP requests
+  * Add timing metrics for solr
+  * Add timing metrics for memcache
+
+- FIX: Be more defensive in several places:
+  * unresolveable entries and their images in feeds
+  * missing cid infos in community response
+
+
+2.11 (2015-10-07)
+-----------------
+
+- ZON-2286: Add back to home button to articles
+
+- ZON-2242: Change fonts URL to something like ``/.../latest/fonts`` instead of
+  ``/.../2.9/fonts`` for better client cacheability
+
+- ZON-2138: Change servicebox link headhunter (main part was mercurial commit)
+
+- ZON-2301: fix/adjust date_last_modified for HP
+
+- ZON-1984: Storystream follow-up/cleanup
+
+- FIX: Be more defensive in several places (resolving uniqueIds, empty
+  properties etc.)
 
 
 2.10.1 (2015-10-02)
--------------------
+-----------------
 
 - HOTFIX: Use image_host for newsfeed image URLs
 

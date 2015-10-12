@@ -197,7 +197,7 @@ class Application(object):
         config.add_route('toggle_third_party_modules', '/admin/toggle-tpm')
 
         config.add_static_view(
-            name=self.settings.get('asset_prefix', '/{version}/static'),
+            name=self.settings.get('asset_prefix', '/static/latest'),
             path='zeit.web.static:',
             cache_max_age=ast.literal_eval(self.settings['assets_max_age']))
 

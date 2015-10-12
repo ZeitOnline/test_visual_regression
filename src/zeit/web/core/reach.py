@@ -11,6 +11,7 @@ import zeit.cms.interfaces
 
 import zeit.web
 import zeit.web.core.interfaces
+import zeit.web.core.metrics
 
 
 log = logging.getLogger(__name__)
@@ -30,7 +31,8 @@ class Reach(object):
     def _get(self, location, **kw):
         url = u'{}/{}'.format(self.host, location.encode('utf-8'))
         try:
-            return self.session.get(url, params=kw, timeout=3.0).json()
+            with zeit.web.core.metrics.timer('http.reponse_time'):
+                return self.session.get(url, params=kw, timeout=3.0).json()
         except (requests.exceptions.RequestException, ValueError), err:
             log.debug('Reach connection failed: {}'.format(err))
 

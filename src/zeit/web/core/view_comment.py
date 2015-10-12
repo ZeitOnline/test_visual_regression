@@ -17,6 +17,7 @@ import zeit.cms.interfaces
 
 import zeit.web.core
 import zeit.web.core.comments
+import zeit.web.core.metrics
 import zeit.web.core.security
 import zeit.web.core.template
 import zeit.web.core.view
@@ -184,12 +185,14 @@ class PostComment(zeit.web.core.view.Base):
                 data['action'] = 'unflag'
 
         # GET/POST the request to the community
-        response = getattr(requests, method)(
-            action_url,
-            data=data,
-            params=data,
-            cookies=dict(request.cookies),
-            allow_redirects=False)
+        with zeit.web.core.metrics.timer(
+                'post_comment.community.reponse_time'):
+            response = getattr(requests, method)(
+                action_url,
+                data=data,
+                params=data,
+                cookies=dict(request.cookies),
+                allow_redirects=False)
 
         if response.status_code >= 200 and response.status_code <= 303:
             self.status.append('Action {} was performed for {}'
@@ -303,10 +306,12 @@ class PostComment(zeit.web.core.view.Base):
                 self.request.host, urlparse.urlparse(unique_id)[2]),
             'Content-Type': 'text/xml'}
 
-        response = requests.post(
-            '{}/agatho/commentsection'.format(self.community_host),
-            headers=headers,
-            data=xml_str)
+        with zeit.web.core.metrics.timer(
+                'create_thread.community.reponse_time'):
+            response = requests.post(
+                '{}/agatho/commentsection'.format(self.community_host),
+                headers=headers,
+                data=xml_str)
 
         if not response.status_code >= 200 and not response.status_code < 300:
             raise pyramid.httpexceptions.HTTPInternalServerError(

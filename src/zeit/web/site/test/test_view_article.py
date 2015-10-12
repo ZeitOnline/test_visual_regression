@@ -36,7 +36,8 @@ def test_article_single_page_has_no_pagination(testbrowser):
     select = testbrowser('/zeit-online/article/simple').cssselect
 
     assert len(select('.summary, .byline, .metadata')) == 3
-    assert len(select('.article-pagination')) == 0
+    assert len(select('.article-pagination')) == 1
+    assert len(select('.article-pager')) == 0
     assert len(select('.article-toc')) == 0
 
 
@@ -44,8 +45,21 @@ def test_article_full_view_has_no_pagination(testbrowser):
     select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
 
     assert len(select('.summary, .byline, .metadata')) == 3
-    assert len(select('.article-pagination')) == 0
+    assert len(select('.article-pagination')) == 1
+    assert len(select('.article-pager')) == 0
     assert len(select('.article-toc')) == 0
+
+
+def test_article_types_have_back_to_home_button(testbrowser):
+    select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
+    button = select('.article-pagination .article-pagination__button')
+    assert button[0].text == 'Startseite'
+    select = testbrowser('/zeit-online/article/simple').cssselect
+    button = select('.article-pagination .article-pagination__button')
+    assert button[0].text == 'Startseite'
+    select = testbrowser('/zeit-online/article/zeit/seite-5').cssselect
+    button = select('.article-pagination .article-pagination__button')
+    assert button[0].text == 'Startseite'
 
 
 def test_article_pagination(testbrowser):
