@@ -22,6 +22,7 @@ import zeit.newsletter.interfaces
 
 import zeit.web
 import zeit.web.core.interfaces
+import zeit.web.core.metrics
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
@@ -168,7 +169,8 @@ class Liveblog(object):
 
     def get_restful(self, url):
         try:
-            return requests.get(url, timeout=self.timeout).json()
+            with zeit.web.core.metrics.timer('liveblog.reponse_time'):
+                return requests.get(url, timeout=self.timeout).json()
         except (requests.exceptions.RequestException, ValueError):
             pass
 

@@ -6,6 +6,7 @@ import zope.component
 import pyramid.authentication
 
 import zeit.web.core.comments
+import zeit.web.core.metrics
 import logging
 
 log = logging.getLogger(__name__)
@@ -79,7 +80,9 @@ def get_user_info_from_sso_cookie(cookie, key):
 def recursively_call_community(req, tries):
     if tries > 0:
         try:
-            return urllib2.urlopen(req, timeout=2)
+            with zeit.web.core.metrics.timer(
+                    'community_user_info.community.reponse_time'):
+                return urllib2.urlopen(req, timeout=2)
         except Exception:
             return recursively_call_community(req, tries-1)
     else:
