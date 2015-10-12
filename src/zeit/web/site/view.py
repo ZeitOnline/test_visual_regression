@@ -11,7 +11,6 @@ import zeit.cms.content.interfaces
 import zeit.web.core.gallery
 import zeit.web.core.view
 import zeit.web.magazin.view
-import zeit.web.site.area.spektrum
 
 
 log = logging.getLogger(__name__)
