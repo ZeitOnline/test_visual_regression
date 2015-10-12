@@ -1,25 +1,24 @@
 # -*- coding: utf-8 -*-
+import mock
 import pkg_resources
-import pytest
 import re
 
 import lxml.etree
 import requests
 
-import zeit.web.site.area.spektrum
-import zeit.web.site.view_centerpage
 import zeit.web.core.centerpage
+import zeit.web.site.area.rss
+import zeit.web.site.area.spektrum
+import zeit.web.site.area.zett
+import zeit.web.site.view_centerpage
 
 
 def test_spektrum_teaser_object_should_have_expected_attributes():
     url = pkg_resources.resource_filename(
         'zeit.web.core', 'data/spektrum/feed.xml')
     xml = lxml.etree.parse(url)
-
-    iterator = iter(xml.xpath('/rss/channel/item'))
-    item = next(iterator)
-
-    teaser = zeit.web.site.area.spektrum.Teaser(item)
+    item = next(iter(xml.xpath('/rss/channel/item')))
+    teaser = zeit.web.site.area.spektrum.Link(item)
 
     assert teaser.teaserTitle == (
         'Ein Dinosaurier mit einem Hals wie ein Baukran')
@@ -27,10 +26,10 @@ def test_spektrum_teaser_object_should_have_expected_attributes():
     assert teaser.teaserText == (
         u'Forscher entdecken ein China die \xc3\x9cberreste eines bisher '
         u'unbekannten, langhalsigen Dinosauriers.')
-    assert teaser.feed_image.endswith('spektrum/images/img1.jpg')
+    assert teaser.image_url.endswith('spektrum/images/img1.jpg')
 
 
-def test_spektrum_teaser_object_with_empty_values_should_not_break():
+def test_rss_link_object_with_empty_values_should_not_break():
     xml_str = """
         <item>
             <title><![CDATA[]]></title>
@@ -39,29 +38,24 @@ def test_spektrum_teaser_object_with_empty_values_should_not_break():
         </item>"""
 
     xml = lxml.etree.fromstring(xml_str)
-    teaser = zeit.web.site.area.spektrum.Teaser(xml)
+    teaser = zeit.web.site.area.rss.RSSLink(xml)
 
-    assert teaser.teaserSupertitle == ''
-    assert teaser.teaserTitle == ''
-    assert teaser.teaserText == ''
-    assert teaser.image is None
+    assert teaser.teaserSupertitle is None
+    assert teaser.teaserTitle is ''
+    assert teaser.teaserText is ''
+    assert teaser.image_url is None
 
 
 def test_spektrum_title_should_be_colon_splitted():
     xml_str = """
         <item>
-            <title><![CDATA[]]></title>
-            <link><![CDATA[]]></link>
-            <description><![CDATA[]]></description>
+            <title><![CDATA[supertitle: title]]></title>
         </item>"""
 
-    teaser = zeit.web.site.area.spektrum.Teaser(
+    teaser = zeit.web.site.area.spektrum.Link(
         lxml.etree.fromstring(xml_str))
-    assert teaser._split('supertitle: title') == ('supertitle', 'title')
-    assert teaser._split('') == ('', '')
-    assert teaser._split('title') == ('', 'title')
-    assert teaser._split('supertitle:') == ('supertitle', '')
-    assert teaser._split(':title') == ('', 'title')
+    assert teaser.title == 'title'
+    assert teaser.supertitle == 'supertitle'
 
 
 def test_spektrum_image_should_have_expected_attributes(application):
@@ -75,16 +69,23 @@ def test_spektrum_image_should_have_expected_attributes(application):
             <enclosure url="file://{}" length="18805" type="image/png"/>
         </item>""".format(enclosure)
 
+    area = mock.Mock()
+    area.kind = 'spektrum'
     xml = lxml.etree.fromstring(xml_str)
-    image = zeit.web.site.area.spektrum.Teaser(xml).image
-    assert image.mimeType == 'image/png'
-    assert image.image_pattern == 'spektrum'
-    assert image.caption == 'Puzzle puzzle puzzle'
-    assert image.title == 'Puzzle'
-    assert image.alt == 'Puzzle'
-    assert image.uniqueId.endswith(path)
-    assert image.image.size == 18805
-    assert image.image.getImageSize() == (180, 120)
+    link = zeit.web.site.area.spektrum.Link(xml)
+    link.__parent__ = area
+
+    group = zeit.content.image.interfaces.IImages(link).image
+    image = group['wide__180x120']
+    assert image.mimeType == 'image/jpeg'
+    assert group.uniqueId.endswith(path)
+    assert image.size == 19599
+    assert image.getImageSize() == (180, 120)
+
+    meta = zeit.content.image.interfaces.IImageMetadata(group)
+    assert meta.caption == 'Puzzle puzzle puzzle'
+    assert meta.title == 'Puzzle'
+    assert meta.alt == 'Puzzle'
 
 
 def test_spektrum_parquet_should_render_special_parquet_link(
@@ -120,48 +121,10 @@ def test_sprektrum_parquet_should_display_meta_more(
 
 def test_spektrum_area_should_render_empty_if_feed_unavailable(
         testbrowser, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.site.area.spektrum, 'HPFeed', list)
+    monkeypatch.setattr(zeit.web.site.area.rss.RSSArea, 'values', list)
     browser = testbrowser(
         '%s/zeit-online/parquet-feeds' % testserver.url)
-    assert not browser.cssselect('.cp-area--spektrum')
-
-
-def test_spektrum_cooperation_route_should_be_configured(testserver):
-    assert requests.get('%s/spektrum-kooperation' % testserver.url).ok
-
-
-@pytest.mark.parametrize('index,slug', [
-    (0, ('hp.centerpage.teaser.parquet.42.1.a|'
-         'http://www.spektrum.de/astronomie')),
-    (1, ('hp.centerpage.teaser.parquet.42.1.b|'
-         'http://www.spektrum.de/biologie')),
-    (2, ('hp.centerpage.teaser.parquet.42.1.c|'
-         'http://www.spektrum.de/psychologie-hirnforschung'))
-])
-def test_spektrum_topic_links_should_produce_correct_tracking_slugs(
-        index, slug, testbrowser, testserver):
-    browser = testbrowser(
-        '%s/spektrum-kooperation?parquet-position=42' % testserver.url)
-    topiclink = browser.cssselect('.parquet-meta__topic-link')[index]
-    assert topiclink.get('id') == slug
-
-
-@pytest.mark.parametrize('index,img_slug,title_slug', [
-    (0, 'hp.centerpage.teaser.parquet.43.3.a.image',
-        'hp.centerpage.teaser.parquet.43.3.a.title'),
-    (1, 'hp.centerpage.teaser.parquet.43.3.b.image',
-        'hp.centerpage.teaser.parquet.43.3.b.title'),
-    (2, 'hp.centerpage.teaser.parquet.43.3.c.image',
-        'hp.centerpage.teaser.parquet.43.3.c.title')
-])
-def test_spektrum_teasers_should_produce_correct_tracking_slugs(
-        index, img_slug, title_slug, testbrowser, testserver):
-    browser = testbrowser(
-        '%s/spektrum-kooperation?parquet-position=43' % testserver.url)
-    img = browser.cssselect('.teaser-small__media-link')[index]
-    assert img.get('id').startswith(img_slug)
-    title = browser.cssselect('.teaser-small__combined-link')[index]
-    assert title.get('id').startswith(title_slug)
+    assert not browser.cssselect('.teaser-small')
 
 
 def test_rss_feed_of_cp_has_requested_format(testserver):

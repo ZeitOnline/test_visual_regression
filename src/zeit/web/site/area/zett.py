@@ -22,6 +22,13 @@ class ImageGroup(zeit.web.core.image.LocalImageGroup):
             context.image_url.replace('http://ze.tt', ''))
 
 
+@grokcore.component.implementer(zeit.web.site.area.rss.IRSSLink)
+@grokcore.component.adapter(None, name='zett')
+class Link(zeit.web.site.area.rss.RSSLink):
+
+    pass
+
+
 @zeit.web.register_area('zett')
 class Zett(zeit.web.site.area.rss.RSSArea):
 

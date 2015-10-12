@@ -126,7 +126,7 @@ class RSSArea(zeit.content.cp.automatic.AutomaticArea):
             log.debug('Could not collect {}: {}'.format(self.feed_key, e))
             return
         for i in xml.xpath('/rss/channel/item'):
-            content = RSSLink(i)
+            content = zope.component.getAdapter(i, IRSSLink, self.kind)
             module = zeit.web.site.view_centerpage.LegacyModule(
                 [content], layout=self.module_layout)
             content.__parent__ = self

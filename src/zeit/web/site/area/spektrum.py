@@ -23,10 +23,9 @@ class ImageGroup(zeit.web.core.image.LocalImageGroup):
             context.image_url.replace('http://www.spektrum.de', ''))
 
 
-@zeit.web.register_area('spektrum')
-class Spektrum(zeit.web.site.area.rss.RSSArea):
-
-    feed_key = 'spektrum_hp_feed'
+@grokcore.component.implementer(zeit.web.site.area.rss.IRSSLink)
+@grokcore.component.adapter(None, name='spektrum')
+class Link(zeit.web.site.area.rss.RSSLink):
 
     @zeit.web.reify
     def title(self):
@@ -41,3 +40,9 @@ class Spektrum(zeit.web.site.area.rss.RSSArea):
         if title and ': ' in title:
             return title.split(': ', 1)[0]
         return ''
+
+
+@zeit.web.register_area('spektrum')
+class Spektrum(zeit.web.site.area.rss.RSSArea):
+
+    feed_key = 'spektrum_hp_feed'
