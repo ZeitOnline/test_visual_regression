@@ -5,7 +5,6 @@ import re
 
 import lxml.etree
 import requests
-import pyramid.testing
 
 import zeit.web.site.area.spektrum
 import zeit.web.site.view_centerpage

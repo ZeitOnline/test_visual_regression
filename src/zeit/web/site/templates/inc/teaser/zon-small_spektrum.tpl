@@ -1,5 +1,4 @@
 <article class="teaser-small">
-    {% set module_layout = 'teaser-small' %}
     {% set image = get_image(module, teaser, fallback=False) %}
     {% if image %}
         {% set source = request.image_host + image.path %}

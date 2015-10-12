@@ -182,8 +182,8 @@ class Application(object):
         config.add_route('login_state', '/login-state')
         config.add_route('beta_toggle_json', '/beta/json')
         config.add_route('health_check', '/health_check')
-        config.add_route('spektrum-kooperation', '/spektrum-kooperation')
         config.add_route('spektrum-image', '/spektrum-image/*path')
+        config.add_route('zett-image', '/zett-image/*path')
         config.add_route(
             'schlagworte_index',
             '/schlagworte/{category}/{item:[A-Z]($|/$|/index$)}',
