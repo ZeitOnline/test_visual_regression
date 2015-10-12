@@ -115,7 +115,6 @@ class RSSImage(Image):
 
         group = zeit.web.core.image.LocalImageGroup(context)
         group.image_url = image_url
-        self.context = group[variant]
         try:
             self.context = group[variant]
         except Exception, err:

@@ -78,7 +78,7 @@ def caching_time_feed(context):
 
 
 @grokcore.component.implementer(ICachingTime)
-@grokcore.component.adapter(basestring)
+@grokcore.component.adapter(zeit.content.image.image.TemporaryImage)
 def caching_time_external(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return int(conf.get('caching_time_external', '0'))
