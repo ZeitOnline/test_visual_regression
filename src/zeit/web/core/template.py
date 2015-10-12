@@ -24,6 +24,7 @@ import zeit.magazin.interfaces
 
 import zeit.web
 import zeit.web.core.comments
+import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.utils
 
@@ -90,7 +91,7 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
 @zeit.web.register_test
 def variant(image):
     # TRASHME: Jinja test to distinguish between bitblt/zci images.
-    return isinstance(image, zeit.web.core.centerpage.VariantImage)
+    return isinstance(image, zeit.web.core.image.VariantImage)
 
 
 @zeit.web.register_filter
@@ -107,7 +108,7 @@ def block_type(obj):
     elif isinstance(obj, list) or isinstance(obj, tuple):
         return obj.__class__(block_type(o) for o in obj)
     else:
-        return type(obj).__name__.lower()
+        return getattr(obj, '__block__', type(obj).__name__.lower())
 
 
 @zeit.web.register_ctxfilter
@@ -713,7 +714,7 @@ def get_default_image_id():
 @zeit.web.register_filter
 def get_repository_image(image):
     # TRASHME: Should be solved by using get_image on fullgraphical teaser
-    base_image = zeit.web.core.block.BaseImage()
+    base_image = zeit.web.core.image.BaseImage()
     base_image.image = image
     base_image.uniqueId = image.uniqueId
     return base_image
