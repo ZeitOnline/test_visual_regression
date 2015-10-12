@@ -91,10 +91,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         '.hits', IRanking['hits'])
 
     def values(self):
-        return self._values
-
-    @zeit.web.reify
-    def _values(self):
         result = []
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
         query = self._build_query()
