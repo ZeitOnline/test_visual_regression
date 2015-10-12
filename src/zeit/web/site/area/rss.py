@@ -8,6 +8,8 @@ import zope.component
 import zope.interface
 
 import zeit.content.cp.automatic
+import zeit.content.cp.interfaces
+import zeit.content.cp.layout
 import zeit.content.image.interfaces
 import zeit.content.link.interfaces
 
@@ -43,35 +45,29 @@ class RSSLink(object):
         if self.__parent__ is not None:
             return self.__parent__.xml.findtext('copyright')
 
-    @property
+    @zeit.web.reify
     def title(self):
-        return self.teaserTitle
+        return self.xml.findtext('title')
 
-    @zeit.web.reify
+    @property
     def teaserTitle(self):  # NOQA
-        title = self.xml.findtext('title')
-        if title and ': ' in title:
-            return title.split(': ', 1)[1]
-        return title
+        return self.title
 
-    @property
+    @zeit.web.reify
     def supertitle(self):
-        return self.teaserSupertitle
-
-    @zeit.web.reify
-    def teaserSupertitle(self):  # NOQA
-        title = self.xml.findtext('title')
-        if title and ': ' in title:
-            return title.split(': ', 1)[0]
-        return ''
+        return self.xml.findtext('category')
 
     @property
-    def text(self):
-        return self.teaserText
+    def teaserSupertitle(self):  # NOQA
+        return self.supertitle
 
     @zeit.web.reify
-    def teaserText(self):  # NOQA
+    def text(self):
         return self.xml.findtext('description')
+
+    @property
+    def teaserText(self):  # NOQA
+        return self.text
 
     @zeit.web.reify
     def url(self):
@@ -84,6 +80,15 @@ class RSSLink(object):
             return enclosure.attrib.get('url')
 
 
+@grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
+@grokcore.component.adapter(IRSSLink)
+def rsslink_to_imagegroup(context):
+    return zope.component.getAdapter(
+        context,
+        zeit.content.image.interfaces.IImageGroup,
+        IRSSArea(context).kind)
+
+
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(IRSSLink)
 class RSSImages(object):
@@ -93,28 +98,19 @@ class RSSImages(object):
         self.image = zeit.content.image.interfaces.IImageGroup(context)
 
 
-@grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
-@grokcore.component.adapter(RSSLink)
-def rsslink_to_imagegroup(context):
-    # XXX: Okay this is still some nasty nasty no-no.
-    return zope.component.getAdapter(
-        context,
-        zeit.content.image.interfaces.IImageGroup,
-        context.__parent__.__class__.lower())
+class IRSSArea(zeit.content.cp.interfaces.IArea):
+
+    feed_key = zope.interface.Attribute('feed_key')
 
 
 class RSSArea(zeit.content.cp.automatic.AutomaticArea):
 
+    zope.interface.implements(IRSSArea)
+
     feed_key = NotImplemented
-    module_layout = NotImplemented
-    link_class = RSSLink
 
     def values(self):
-        return self._values
-
-    @zeit.web.reify
-    def _values(self):
-        import zeit.web.core.interfaces
+        import zeit.web.core.interfaces  # Prevent circular imports
         import zeit.web.site.view_centerpage
 
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
@@ -128,10 +124,24 @@ class RSSArea(zeit.content.cp.automatic.AutomaticArea):
             log.debug('Could not collect {}: {}'.format(self.feed_key, e))
             return
         for i in xml.xpath('/rss/channel/item'):
-            content = self.link_class(i)
+            content = RSSLink(i)
             module = zeit.web.site.view_centerpage.LegacyModule(
                 [content], layout=self.module_layout)
             content.__parent__ = self
             module.type = 'teaser'
             values.append(module)
         return values
+
+    @zeit.web.reify
+    def module_layout(self):
+        xpath = '//layout[contains(@default, "{}")]/@id'.format(self.kind)
+        source = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS
+        layout = source.factory._get_tree().xpath(xpath)
+        if len(layout) > 0:
+            return layout[0]
+
+
+@grokcore.component.implementer(IRSSArea)
+@grokcore.component.adapter(IRSSLink)
+def rsslink_to_rssarea(context):
+    return context.__parent__
