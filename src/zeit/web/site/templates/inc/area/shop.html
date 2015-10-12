@@ -4,14 +4,14 @@
 
 {% block before_module_list %}
     {% set tracking_slug = '{}...{}.{}'.format(region_loop.index, '-'.join([area.kind, module_layout]), 'alle_shopangebote') %}
-	<div class="section-heading section-heading--unpadded">
+	<div class="section-heading section-heading--unpadded section-heading--zeitshop">
 	    <h3 class="section-heading__title">
 	    	<a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=Logo&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.logo.zeitshop.1">
 	    	{{ lama.use_svg_icon('logo-zeitshop', 'section-heading__logo--zeitshop', request) }}
 	    	</a>
 	    </h3>
 	    <a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=Logo&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.logo.zeitshop.1"
-	       class="section-heading__link section-heading__link--unpadded"
+	       class="section-heading__link section-heading__link--unpadded section-heading__link--zeitshop"
 	        {#- if tracking_slug %} data-id="{{ tracking_slug }}"{% endif #}>
 	        <span class="section-heading__text">Alle Angebote im Shop</span>
 	    </a>

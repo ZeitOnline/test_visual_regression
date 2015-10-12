@@ -2,8 +2,12 @@
 	margin: 0 $page-padding
 	padding: remify(24px) 0
 	position: relative
+
 	&--unpadded
 		margin: 0
+	&--zeitshop
+		text-align: center
+
 	&__title
 		font-size: remify(21px)
 		font-weight: 700
@@ -12,6 +16,7 @@
 		margin: 0
 		+respond-min($break-desktop-min)
 			font-size: remify(24px)
+
 	&__link
 		bottom: remify(24px)
 		color: $zon_dark_grey
@@ -25,6 +30,9 @@
 		&--unpadded
 			right: 0
 
+		&--zeitshop
+			display: none
+
 		+link
 			color: $zon_dark_grey
 		+on-interaction
@@ -35,6 +43,7 @@
 			+respond-min($break-phablet-min)
 				// content: "\25B8" // ▸ = Black Right-Pointing Small Triangle
 				font-size: 1em
+
 	&__text
 		+respond-max($break-phablet-min)
 			display: none
