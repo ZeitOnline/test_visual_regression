@@ -4,7 +4,10 @@ Change log for zeit.web
 2.13 (unreleased)
 -----------------
 
+- ZON-2246: Chronologische Artikel-Navigation
+
 - MAINT: Revert "ZON-2301: fix/adjust date_last_modified for HP"
+  (This is fixed in vivi now)
 
 
 2.12 (2015-10-09)

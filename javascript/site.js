@@ -56,7 +56,8 @@ require([
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
     'web.site/plugins/jquery.countFormchars',
-    'web.site/plugins/jquery.hpOverlay'
+    'web.site/plugins/jquery.hpOverlay',
+    'web.site/plugins/jquery.fixPosition'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         isHp = document.body.getAttribute( 'data-is-hp' ),
@@ -88,6 +89,7 @@ require([
         article.find( '.liveblog' ).liveblog();
         $.picturefill();
         $( '.js-count-formchars' ).countFormchars();
+        $( '.js-fix-position' ).fixPosition();
     }
 
     // more ("non critical") global stuff
