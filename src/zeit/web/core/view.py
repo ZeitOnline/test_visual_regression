@@ -486,14 +486,7 @@ class Base(object):
 
     @zeit.web.reify
     def date_last_modified(self):
-        date = self.date_last_published_semantic or self.date_first_released
-        # In Vivi, we add 1 minute because the publishing takes time.
-        # But in case it gets published fast, we have a future date.
-        # And that destroys our "Aktualisiert vor 47 Sekunden" header.
-        # That's why we subtract 1 minute.
-        if self.is_hp and isinstance(date, datetime.datetime):
-            date -= datetime.timedelta(minutes=1)
-        return date
+        return self.date_last_published_semantic or self.date_first_released
 
     @zeit.web.reify
     def date_first_released(self):
