@@ -87,7 +87,6 @@
             var currentDate = new Date(),
                 currentTimestamp = currentDate.getTime(),
                 winHeight,
-                $articleBody,
                 articleBodyOffset,
                 articleBodyHeight,
                 currentMinFixedPos,
