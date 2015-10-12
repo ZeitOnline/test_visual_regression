@@ -86,8 +86,15 @@
         <container cp:type="auto-teaser" module="zon-shop" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-cdd6d281-49de-4d2c-af3b-a5817e6547a2"/>
       </region>
     </cluster>
+    <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa993" title="Fotostrecken" kind="gallery">
+        <region visible="True" hide-dupes="False" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96812" kind="gallery" title="Fotostrecken" count="2" automatic="True" automatic_type="centerpage">
+            <referenced_cp>http://xml.zeit.de/foto/index</referenced_cp>
+            <container cp:type="auto-teaser" module="zon-gallery" visible="True" cp:__name__="id-7b76790b-cf36-b49f-8343-0069411a8c5b"/>
+            <container cp:type="auto-teaser" module="zon-gallery" visible="True" cp:__name__="id-a9cb1735-6a36-2401-afef-6e19baf544e3"/>
+        </region>
+    </cluster>
   </body>
-  <feed>  </feed>
+  <feed></feed>
   <teaser>
     <title>VORSCHAU: Shop-Bühne</title>
   </teaser>
