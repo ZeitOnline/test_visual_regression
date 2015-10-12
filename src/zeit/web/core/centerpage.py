@@ -44,17 +44,19 @@ def get_video_asset(teaser):
 
     try:
         asset = zeit.content.video.interfaces.IVideoAsset(teaser)
+        primary = asset.video
+        secondary = asset.video_2
     except TypeError:
         return
 
-    if asset.video is not None:
-        asset.video.highest_rendition = get_video_source(asset.video)
+    if primary is not None:
+        primary.highest_rendition = get_video_source(primary)
 
-    if asset.video_2 is not None and asset.video is not None:
-        asset.video_2.highest_rendition = get_video_source(asset.video_2)
-        return [asset.video, asset.video_2]
+    if secondary is not None and primary is not None:
+        secondary.highest_rendition = get_video_source(secondary)
+        return [primary, secondary]
 
-    return asset.video
+    return primary
 
 
 @zeit.web.register_filter
