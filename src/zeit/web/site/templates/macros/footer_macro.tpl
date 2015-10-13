@@ -5,14 +5,14 @@
 {%- endmacro %}
 
 {% macro footer_publisher(view) -%}
-    {{ build_footer_bar(view.navigation_footer_publisher, 'publisher', True) }}
+    {{ build_footer_bar(view, view.navigation_footer_publisher, 'publisher', True) }}
 {%- endmacro %}
 
 {% macro footer_links(view) -%}
-    {{ build_footer_bar(view.navigation_footer_links, 'links') }}
+    {{ build_footer_bar(view, view.navigation_footer_links, 'links') }}
 {%- endmacro %}
 
-{% macro build_footer_bar(navigation, class, publisher=False) -%}
+{% macro build_footer_bar(view, navigation, class, publisher=False) -%}
     {% for i in navigation -%}
         {% set section = navigation[i] %}
         {% set row_loop = loop %}
@@ -34,7 +34,7 @@
 
                         {# "Bildrechte" is done manually ...
                             /zeit.web/src/zeit/web/core/data/config/navigation-footer-links.xml does not work !? #}
-                        {% if class == 'links' and row_loop.index == 2 and loop.index == 1 %}
+                        {% if view.type == 'centerpage' and class == 'links' and row_loop.index == 2 and loop.index == 1 %}
                             <li class="footer-{{ class }}__item">
                                 <a class="footer-{{ class }}__link js-image-copyright-footer" href="#" data-id="footernav.bottom.2.0.bildrechte">Bildrechte</a>
                             </li>

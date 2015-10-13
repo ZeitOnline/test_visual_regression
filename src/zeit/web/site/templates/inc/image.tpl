@@ -3,21 +3,24 @@
 {% set source = (request.image_host + image.path) if image is variant else image | default_image_url %}
 {% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source %}
 
-{% set copyright_itemscope = 'itemscope itemtype="http://schema.org/Photograph"' | safe %}
-{% set copyright_item = image.copyright[0] %}
-{#
-TODO: zwei Items aus nem Tuple auslesen kann doch nicht so schwer sein !!!
-Oder machen wir das lieber im Python-Code? `(name, url) = tuple`
-#}
-{% set copyright_item_values = [] %}
-{% for el in copyright_item %}
-    {% if loop.index == 1 %}
-        {% if copyright_item_values.append( el ) %}{% endif %}
-    {% endif %}
-    {% if loop.index == 2 %}
-        {% if copyright_item_values.append( el ) %}{% endif %}
-    {% endif %}
-{% endfor %}
+
+{% if view.type == 'centerpage' and image.copyright %}
+    {% set copyright_itemscope = 'itemscope itemtype="http://schema.org/Photograph"' | safe %}
+    {% set copyright_item = image.copyright[0] %}
+    {#
+    TODO: zwei Items aus nem Tuple auslesen kann doch nicht so schwer sein !!!
+    Oder machen wir das lieber im Python-Code? `(name, url) = tuple`
+    #}
+    {% set copyright_item_values = [] %}
+    {% for el in copyright_item %}
+        {% if loop.index == 1 %}
+            {% if copyright_item_values.append( el ) %}{% endif %}
+        {% endif %}
+        {% if loop.index == 2 %}
+            {% if copyright_item_values.append( el ) %}{% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
 
 <figure class="{% block mediablock %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class | hide_none }} scaled-image" {{ copyright_itemscope | hide_none}}>
     <!--[if gt IE 8]><!-->
@@ -29,7 +32,7 @@ Oder machen wir das lieber im Python-Code? `(name, url) = tuple`
             {% endblock %}
             {{ media_container_after | hide_none }}
 
-            {% if copyright_item_values[0] %}
+            {% if copyright_item_values and copyright_item_values[0] %}
                 <span itemprop="copyrightHolder" class="figureCopyrightHidden">
                     {% if copyright_item_values[1] %}<a itemprop="url" href="{{ copyright_item_values[1] }}"><span itemprop="name">{% endif %}
                         {{ copyright_item_values[0] }}
