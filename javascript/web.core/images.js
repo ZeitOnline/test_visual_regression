@@ -280,10 +280,10 @@ define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjc
      * @function prepareImages
      * @return {array}           Array of images
      */
-    function prepareImages() {
+    function prepareImages( container ) {
         var images = [];
         prepareScaling();
-        $( '.scaled-image > noscript' ).each( function() {
+        $( '.scaled-image > noscript', container ).each( function() {
             var $noscript = $( this ),
                 $parent = $noscript.parent(),
                 markup = $noscript.text(),
@@ -336,6 +336,16 @@ define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjc
     }
 
     /**
+     * images.js: rescale a bunch of images, to be backwards compatible with old images.js
+     * @function scaleImages
+     * @param {object} [container] DOM node with images to scale
+     */
+    function scaleImages( container ) {
+        prepareScaling();
+        showImages( prepareImages( container ) );
+    }
+
+    /**
      * images.js: initialize images
      * @function init
      * @param  {object} options jQuery styled preferences object
@@ -358,7 +368,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjc
     }
 
     return {
-        scale: showImages,
+        scale: scaleImages,
         init: init
     };
 
