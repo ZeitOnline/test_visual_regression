@@ -4,7 +4,7 @@ Change log for zeit.web
 2.14 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: update DNS Prefetch to actually used hosts
 
 
 2.13 (2015-10-13)
