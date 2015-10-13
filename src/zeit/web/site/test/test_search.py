@@ -2,6 +2,7 @@ import datetime
 
 import pytest
 import pysolr
+import zope.component
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
@@ -169,18 +170,14 @@ def test_empty_search_result_should_produce_zero_hit_counter(
 
 
 def test_successful_search_result_should_produce_nonzero_hit_counter(
-        monkeypatch, search_area):
-    def search(self, q, **kw):
-        return pysolr.Results([], 73)
-    monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
+        search_area):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/0%s' % i}
+                    for i in range(1, 74)]
     assert search_area.hits == 73
 
 
-def test_empty_search_result_should_produce_valid_resultset(
-        monkeypatch, search_area):
-    def search(self, q, **kw):
-        return pysolr.Results([], 0)
-    monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
+def test_empty_search_result_should_produce_valid_resultset(search_area):
     assert len([a for b in search_area.values() for a in b if b]) == 0
 
 
@@ -193,13 +190,10 @@ def get_result_dict(unique_id):
         'uniqueId': unique_id}
 
 
-def test_successful_search_result_should_produce_valid_resultset(
-        monkeypatch, search_area):
-    def search(self, q, **kw):
-        return pysolr.Results([
-            get_result_dict('http://xml.zeit.de/artikel/0%s' % i)
-            for i in range(1, 9)], 8)
-    monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
+def test_successful_search_result_should_produce_valid_resultset(search_area):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/0%s' % i}
+                    for i in range(1, 9)]
     assert len([a for b in search_area.values() for a in b if b]) == 8
 
     block = iter(search_area.values()).next()
@@ -208,15 +202,13 @@ def test_successful_search_result_should_produce_valid_resultset(
 
 
 def test_successful_search_result_should_render_in_browser(
-        monkeypatch, testserver, testbrowser):
-    def search(self, q, **kw):
-        return pysolr.Results([
-            get_result_dict('http://xml.zeit.de/zeit-online/article/01'),
-            get_result_dict('http://xml.zeit.de/zeit-online/article/zeit'),
-            get_result_dict('http://xml.zeit.de/artikel/artikel-ohne-assets')
-        ], 3)
-    monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
-
+        testserver, testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        get_result_dict('http://xml.zeit.de/zeit-online/article/01'),
+        get_result_dict('http://xml.zeit.de/zeit-online/article/zeit'),
+        get_result_dict('http://xml.zeit.de/artikel/artikel-ohne-assets')
+    ]
     browser = testbrowser('{}/suche/index'.format(testserver.url))
     assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 3
 
