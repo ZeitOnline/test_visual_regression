@@ -32,7 +32,7 @@
                 '<div class="image-copyright-footer__container">' +
                 '<h2 class="image-copyright-footer__headline">' +
                     'Bildrechte auf dieser Seite' +
-                    '<span class="image-copyright-footer__close">schließen</span>' +
+                    '<span class="js-image-copyright-footer-close image-copyright-footer__close">schließen</span>' +
                 '</h2>' +
                 '___items___</div></div>',
             itemTemplate = '<div class="image-copyright-footer__item">' +
@@ -78,7 +78,7 @@
 
             $( '.footer-links__button' ).eq( 0 ).before( containerTemplate.replace( '___items___', wholeString ) );
 
-            $( '.image-copyright-footer__close' ).on( 'click', function( e ) {
+            $( '.js-image-copyright-footer-close' ).on( 'click', function( e ) {
                 e.preventDefault();
                 $( '.image-copyright-footer' ).hide();
             } );

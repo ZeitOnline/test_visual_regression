@@ -1389,3 +1389,58 @@ def test_cp_does_not_render_image_if_expired(testbrowser):
         expired.return_value = -1
         browser = testbrowser('/zeit-online/basic-teasers-setup')
         assert '/zeit-online/cp-content/ig-2' not in browser.contents
+
+
+def test_imagecopyright_tags_are_present_on_centerpages(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    figures = browser.cssselect('figure *[itemprop=copyrightHolder]')
+    assert len(figures) == 3
+
+
+def test_imagecopyright_tags_are_not_displayed_on_centerpages(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+    copyright = driver.find_elements_by_class_name('figureCopyrightHidden')
+    assert copyright[0].is_displayed() is False, 'copyright is not displayed'
+    assert copyright[1].is_displayed() is False, 'copyright is not displayed'
+    assert copyright[2].is_displayed() is False, 'copyright is not displayed'
+
+
+def test_imagecopyright_link_is_present_on_centerpages(testbrowser):
+    browser = testbrowser('/zeit-online/index')
+    link = browser.cssselect('.footer-links__link.js-image-copyright-footer')
+    assert len(link) == 1
+
+
+def test_imagecopyright_link_is_not_present_on_articles(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
+    link = browser.cssselect('.footer-links__link.js-image-copyright-footer')
+    assert len(link) == 0
+
+
+def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+    link = driver.find_element_by_css_selector('.js-image-copyright-footer')
+    link.click()
+    try:
+        WebDriverWait(driver, 5).until(
+            expected_conditions.presence_of_element_located(
+                (By.CLASS_NAME, 'image-copyright-footer')))
+    except TimeoutException:
+        assert False, 'Image Copyright in Footer not visible within 10 seconds'
+    else:
+        copyrights = driver.find_elements_by_css_selector(
+            '.image-copyright-footer__item')
+        assert len(copyrights) == 3
+
+        linked_copyrights = driver.find_elements_by_css_selector(
+            '.image-copyright-footer__item a')
+        assert len(linked_copyrights) == 1
+
+    closelink = driver.find_element_by_class_name(
+        'js-image-copyright-footer-close')
+    closelink.click()
+    copyright = driver.find_element_by_class_name('image-copyright-footer')
+    assert copyright.is_displayed() is False, 'copyright is not displayed'
