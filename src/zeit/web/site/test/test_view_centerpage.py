@@ -1389,3 +1389,18 @@ def test_cp_does_not_render_image_if_expired(testbrowser):
         expired.return_value = -1
         browser = testbrowser('/zeit-online/basic-teasers-setup')
         assert '/zeit-online/cp-content/ig-2' not in browser.contents
+
+
+def test_zmo_parquet_has_zmo_styles(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+
+    regions = browser.cssselect('.cp-region--parquet')
+    zmo_region = regions[3]
+    zmo_title = zmo_region.cssselect('.parquet-meta__title--zmo')
+    zmo_logo = zmo_region.cssselect('.parquet-meta__logo--zmo')
+    zmo_kicker = zmo_region.cssselect('.teaser-small__kicker--zmo')
+
+    assert len(zmo_title)
+    assert len(zmo_logo)
+    assert len(zmo_kicker) == 2
+
