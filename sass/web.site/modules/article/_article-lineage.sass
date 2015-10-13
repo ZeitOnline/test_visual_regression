@@ -1,0 +1,63 @@
+.article-lineage
+	display: none
+	+respond-min($break-desktop-min)
+		display: block
+		margin: remify(0 -$page-padding)
+		max-width: remify(980px)
+		position: absolute
+		width: 100%
+		// must outplay absolutely positioned elements futher down the DOM
+		// - share + print (abs pos. z-index=1 would be enough)
+		// - embedded videos (z-index=4 needed) e.g. http://127.0.0.1:9090/politik/deutschland/2015-10/cannabis-verkauf-kreuzberg-monika-herrmann
+		z-index: 4
+		&--fixed
+			position: fixed
+			top: 50%
+		&__link
+			background: $zon_lighter_grey
+			height: remify(80px)
+			position: absolute
+			width: remify(60px)
+			&--prev
+				left: 0
+			&--next
+				right: 0
+			&:hover
+				box-shadow: 0px 1px 3px #999
+				color: #000
+				max-width: 51.25em
+				width: auto
+				.article-lineage__link-text
+					display: block
+		&__link-icon
+			width: remify(22px)
+			height: remify(30px)
+			margin: remify(25px 20px)
+			color: $zon_lighter_grey
+			fill: $zon_lighter_grey
+			&--prev
+				float: left
+			&--next
+				float: right
+				// rotation is not done via CSS because of IE8
+		&__link-text
+			display: none
+			&--prev
+				margin-left: remify(60px)
+				padding: remify(18px) 1.5em 0 0.5em
+			&--next
+				margin-right: remify(60px)
+				padding: remify(18px) 0.5em 0 1.5em
+		&__link-kicker
+			display: block
+			font-family: $font-franziska
+			font-size: 0.875rem
+			font-style: italic
+		&__link-title
+			display: block
+			font-family: $font-tabletgothic
+			font-size: 1rem
+			font-weight: bold
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis

@@ -144,8 +144,8 @@ define( [ 'jquery' ], function( $ ) {
                     getBreakpoint(),
                     'gallery', // [verortung]
                     $element[ 0 ].className.indexOf( 'overlay' ) < 0 ? '1' : '2',
-                    $element[ 0 ].className.indexOf( 'links' ) < 0 ? '2' : '1', // [spalte] leer lassen
-                    imgnumber, // [subreihe] leer lassen
+                    $element[ 0 ].className.indexOf( 'links' ) < 0 ? '2' : '1', // [spalte]
+                    imgnumber, // [subreihe]
                     sanitizeString( $element.text() ), // [bezeichner]
                     window.location.href // url
                 ];
@@ -306,7 +306,8 @@ define( [ 'jquery' ], function( $ ) {
                          '.snapshot__media',
                          '#servicebox',
                          '.print-box',
-                         '.breaking-news-banner'
+                         '.breaking-news-banner',
+                         '.article-lineage'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],

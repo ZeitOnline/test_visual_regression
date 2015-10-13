@@ -404,6 +404,19 @@
 	}
 }
 
+// draws a circle via pseudo-content with border-radius
+@mixin make-a-circle($color: $black, $radius: 20px, $border_color: $white, $border_width: 0) {
+	position: absolute;
+	background-color: $color;
+	border-radius: 50%;
+	content: "";
+	height: remify($radius);
+	width: remify($radius);
+	@if $border_width > 0 {
+		border: $border_width solid $border_color;
+	}
+}
+
 // pseudo classes
 %off-screen {
 	height: 1px;

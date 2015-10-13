@@ -61,7 +61,7 @@ def app_settings(mockserver):
         'caching_time_image': '30',
         'caching_time_videostill': '35',
         'caching_time_external': '15',
-        'asset_prefix': '/static',
+        'asset_prefix': '/static/latest',
         'image_prefix': '',
         'jsconf_prefix': '/jsconf',
         'community_host': 'http://localhost:6551',
@@ -179,6 +179,7 @@ def app_settings(mockserver):
         'debug.propagate_jinja_errors': True,
         'debug.enable_profiler': False,
         'dev_environment': True,
+        'enable_article_lineage': True
     }
 
 

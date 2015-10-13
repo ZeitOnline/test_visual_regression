@@ -13,6 +13,7 @@ import zeit.content.image.image
 
 import zeit.web.core.block
 import zeit.web.core.interfaces
+import zeit.web.core.metrics
 
 
 log = logging.getLogger(__name__)
@@ -69,7 +70,8 @@ class HPFeed(object):
         area = zeit.web.site.view_centerpage.LegacyArea(
             [], kind='spektrum')
         try:
-            resp = requests.get(feed_url, timeout=2.0)
+            with zeit.web.core.metrics.timer('feed.spektrum.reponse_time'):
+                resp = requests.get(feed_url, timeout=2.0)
             xml = lxml.etree.fromstring(resp.content)
             for i in xml.xpath('/rss/channel/item'):
                 module = zeit.web.site.view_centerpage.LegacyModule(

@@ -18,17 +18,11 @@
 			padding-top: $vertical-space
 			position: relative
 			&:before
-				color: $white
-				content: '\2B24' // ⬤ = Black large circle
-				display: block
-				font-size: remify(9px)
+				+make-a-circle($color: $white, $radius: 9px, $border_color: $zon_mid_grey, $border_width: 2px)
 				left: -$storystream-padding-mobile
+				margin: remify(-5px 0 0 -6px)
 				top: $vertical-space*1.5
-				margin: remify(-5px 0 0 -5px)
-				position: absolute
 				z-index: 2
-				-webkit-text-stroke: 2px $zon_mid_grey
-				text-shadow: -1px -1px 0 $zon_mid_grey, 1px -1px 0 $zon_mid_grey, -1px 1px 0 $zon_mid_grey, 1px 1px 0 $zon_mid_grey
 			&:after
 				content: ''
 				position: absolute
