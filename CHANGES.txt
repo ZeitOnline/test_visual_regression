@@ -9,6 +9,8 @@ Change log for zeit.web
 - MAINT: Revert "ZON-2301: fix/adjust date_last_modified for HP"
   (This is fixed in vivi now)
 
+- ZON-2036: Bildrechte im Footer von CPs
+
 
 2.12 (2015-10-09)
 -----------------
