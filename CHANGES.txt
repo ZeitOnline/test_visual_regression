@@ -4,7 +4,7 @@ Change log for zeit.web
 2.14 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Normalize hostnames in metric names
 
 
 2.13 (2015-10-13)
