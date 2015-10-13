@@ -94,16 +94,20 @@ def view_timer_traversal(event):
         # Detect static_view, see pyramid.config.view.StaticURLInfo.add().
         if request.matched_route.name.startswith('__'):
             view_name = 'static'
+        # Detect dynamic blacklist routes, see zeit.web.core.application.
+        elif request.matched_route.name.startswith('blacklist_'):
+            view_name = 'blacklist'
         else:
             view_name = request.matched_route.name
     else:
-        view_name = request.view_name or 'default'
+        # It might be interesting to do something like context-view_name,
+        # however e.g. for 404s the context is the folder and the view_name
+        # the name of the thing that was not found, which is rather unhelpful.
+        view_name = request.context.__class__.__name__.lower()
 
     metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
     timer = metrics.timer(
-        'zeit.web.core.view.pyramid.{context}-{view}'.format(
-            context=request.context.__class__.__name__.lower(),
-            view=view_name))
+        'zeit.web.core.view.pyramid.{view}'.format(view=view_name))
     # Since we can decide the timer name only now, after we have the context,
     # we have to re-implement timer.start() ourselves here.
     timer._last = timer._start = request.view_timer_start

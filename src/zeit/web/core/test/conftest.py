@@ -179,6 +179,7 @@ def app_settings(mockserver):
         'debug.propagate_jinja_errors': True,
         'debug.enable_profiler': False,
         'dev_environment': True,
+        'enable_article_lineage': True
     }
 
 
