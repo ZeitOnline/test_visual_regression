@@ -122,8 +122,9 @@ def view_timer_traversal(event):
 
 @pyramid.events.subscriber(pyramid.events.NewResponse)
 def view_timer_rendering(event):
-    event.request.view_timer.intermediate('rendering')
-    event.request.view_timer.stop('total')
+    if hasattr(event.request, 'view_timer'):
+        event.request.view_timer.intermediate('rendering')
+        event.request.view_timer.stop('total')
     memory = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     memory_delta = memory - event.request.memory
     memory_log.debug(
