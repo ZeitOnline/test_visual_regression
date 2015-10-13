@@ -1,0 +1,69 @@
+
+.jobbox
+    &__label
+        @extend %ad-label
+    &--padded
+        padding: remify(20px) 0 remify(20px) 0
+
+.jb-box
+    background-color: $seashell
+    padding: remify(20px)
+    +respond-min($break-desktop-min)
+        display: table
+
+.jb-content
+    display: block
+    +respond-min($break-desktop-min)
+        display: table-cell
+        vertical-align: middle
+        width: 65%
+    &__kicker
+        color: $red
+        font-size: em(13px)
+        font-weight: bold
+        letter-spacing: $letter-spacing-l
+        margin-bottom: remify(5px)
+        +respond-min($break-desktop-min)
+            font-size: em(15px)
+    &__title
+        font-weight: bold
+        font-size: em(18px)
+        color: $mine-shaft
+        margin-bottom: remify(5px)
+        +respond-min($break-desktop-min)
+            font-size: em(22px)
+    &__byline
+        color: $dove
+        font-size: em(14px)
+        letter-spacing: $letter-spacing-s
+        +respond-min($break-desktop-min)
+            font-size: em(17px)
+
+.jb-action
+    display: block
+    text-align: center
+    +respond-min($break-desktop-min)
+        display: table-cell
+        vertical-align: middle
+        width: 30%
+
+.jb-button
+    &__text
+        +zon-button-dark()
+        border: none
+        color: $white
+        background-color: rgba(22, 135, 80, .8)
+        &:hover,
+        &:focus
+            background-color: rgba(22, 135, 80, 1)
+
+.jb-link
+    &__text
+        color: $dove
+        font-size: em(14px)
+        border-bottom: 1px solid rgba(112, 112, 112, 0.5)
+        letter-spacing: $letter-spacing-s
+        +respond-min($break-desktop-min)
+            font-size: em(17px)
+        +on-interaction
+            border-bottom: 1px solid rgba(112, 112, 112, 1)
