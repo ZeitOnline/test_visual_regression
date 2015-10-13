@@ -183,8 +183,8 @@ define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjc
                     .removeClass( 'image--processing' )
                     .data( 'loading', false )
                     .data( 'loaded', true )
-                    .attr( 'width', '' )
-                    .attr( 'height', '' );
+                    .removeAttr( 'width' )
+                    .removeAttr( 'height' );
             });
     }
 
