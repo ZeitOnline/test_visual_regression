@@ -68,6 +68,11 @@
         {% endblock article_body %}
     {% endprofile %}
     </article>
+
+    {% block lineage %}
+        {% include "zeit.web.site:templates/inc/article/lineage.tpl" %}
+    {% endblock %}
+
     {% endblock content %}
     {% block article_interactions %}
     <div class="article-interactions article__item">
