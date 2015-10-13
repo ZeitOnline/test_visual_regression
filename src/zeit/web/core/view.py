@@ -691,8 +691,9 @@ class Content(Base):
                         'ZTGS', 'ZTCS', 'CSRG', 'ZSF', 'KINZ')),
                 lq.field(
                     'published', 'published'))
-            return conn.search(query, sort='date_first_released ' + sort,
-                               fl='title uniqueId', rows=1).docs
+            with zeit.web.core.metrics.timer('lineage.solr.reponse_time'):
+                return conn.search(query, sort='date_first_released ' + sort,
+                                   fl='title uniqueId', rows=1).docs
 
         date = zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_first_released

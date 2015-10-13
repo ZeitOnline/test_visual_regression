@@ -1,11 +1,18 @@
 Change log for zeit.web
 =======================
 
-2.13 (unreleased)
+2.14 (unreleased)
 -----------------
 
 - ZON-2292: Add lazyloading for centerpages
- 
+
+
+2.13 (2015-10-13)
+-----------------
+
+- HOTFIX: Don't include view_name in the request timing metric names, since
+  that caused an explosion of metric names.
+
 - ZON-2246: Chronologische Artikel-Navigation
 
 - MAINT: Revert "ZON-2301: fix/adjust date_last_modified for HP"
