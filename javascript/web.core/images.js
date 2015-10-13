@@ -224,13 +224,13 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
         if ( $( this ).data( 'loaded' ) === true || $( this ).data( 'loading' ) === true || $parent.css( 'display' ) === 'none' ) {
             return false;
         }
-        var $e = $( this ),
-            wt = $w.scrollTop(),
-            wb = wt + $w.height(),
-            et = $e.offset().top,
-            eb = et + $e.height();
+        var $element = $( this ),
+            windowTop = $w.scrollTop(),
+            windowBottom = windowTop + $w.height(),
+            elementTop = $element.offset().top,
+            elementBottom = elementTop + $element.height();
 
-        return eb >= wt - threshold && et <= wb + threshold;
+        return elementBottom >= windowTop - threshold && elementTop <= windowBottom + threshold;
     }
 
     /**
