@@ -57,8 +57,12 @@ def from_settings():
     if settings.get('statsd_address'):
         log.info('Initializing metrics collection to statsd at %s',
                  settings['statsd_address'])
+        hostname = socket.gethostname()
+        # Hostname might be the FQDN, which we don't want in the metric name.
+        hostname = hostname.replace('.zeit.de', '')
+        hostname = hostname.replace('.', '-')
         return Metrics(
-            'friedbert.%s.' % socket.gethostname(),
+            'friedbert.%s.' % hostname,
             *settings['statsd_address'].split(':'))
     else:
         log.info(
