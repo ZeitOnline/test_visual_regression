@@ -6,7 +6,7 @@
  * images.js: module for images
  * @module images
  */
-define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
+define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjcl, $ ) {
 
     var images = [],
         $w = $( window ),
@@ -352,8 +352,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce' ], function( sjcl, $ ) {
         }
         images = prepareImages();
         showImages();
-        // @todo: find a way to check if all images are unveiled and unbind event
-        $w.on( 'scroll.lazy', showLazyImages );
+        $w.on( 'scroll.lazy', $.throttle( showLazyImages, 50 ) );
         showLazyImages();
         $w.on( 'resize.rescale', $.debounce( rescaleAll, 1000 ) );
     }
