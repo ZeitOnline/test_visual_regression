@@ -61,8 +61,6 @@
                 return;
             }
 
-            // this.calculateArticlePositions();
-
             // OPTIMIZE: do we have the $window already available? Is it cached by jQuery?
             // OPTIMIZE: namespace for event handler ?
 
