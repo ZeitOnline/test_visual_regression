@@ -13,8 +13,9 @@
 {% endblock %}
 
 {# Eliminate many default teaser blocks #}
-{% block teaser_link %}{% endblock %}
-{% block teaser_metadata_default %}{% endblock %}
-{% block teaser_byline %}{% endblock %}
 {% block teaser_journalistic_format %}{% endblock %}
+{% block teaser_heading %}{% endblock %}
+{% block teaser_metadata_default %}{% endblock %}
 
+{# Disable Meetrics tracking #}
+{% block meetrics %}{% endblock %}

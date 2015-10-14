@@ -20,22 +20,24 @@
             {% endif %}
         {% endblock teaser_journalistic_format %}
 
-        <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
-            {% block teaser_link %}
-            <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | create_url }}">
-                {% block teaser_kicker %}
-                <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, 'zmo' if area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent')) }}">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
-                {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">:</span>{% endif %}
-                {% endblock %}
-                {% block teaser_title %}
-                <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
-                {% endblock %}
-                {% block teaser_product %}
-                   {# Use this for short teaser #}
-                {% endblock %}
-            </a>
-            {% endblock %}
-        </h2>
+        {% block teaser_heading %}
+            <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
+                {% block teaser_link %}
+                <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | create_url }}">
+                    {% block teaser_kicker %}
+                    <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, 'zmo' if area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent')) }}">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
+                    {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">:</span>{% endif %}
+                    {% endblock %}
+                    {% block teaser_title %}
+                    <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
+                    {% endblock %}
+                    {% block teaser_product %}
+                       {# Use this for short teaser #}
+                    {% endblock %}
+                </a>
+                {% endblock teaser_link %}
+            </h2>
+        {% endblock teaser_heading %}
 
         {% block teaser_media_position_after_title %}{% endblock %}
 
