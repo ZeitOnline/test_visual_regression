@@ -4,7 +4,7 @@ Change log for zeit.web
 2.13.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- FIX: Fix display of future dates
 
 
 2.13.2 (2015-10-14)
@@ -33,8 +33,6 @@ Change log for zeit.web
 
 2.12 (2015-10-09)
 -----------------
-
-- FIX: Fix display of future dates
 
 - ZON-2304: More metrics
   * Add hostname and content-type+view-name to request timing metric names
