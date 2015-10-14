@@ -196,6 +196,10 @@ define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjc
     function showImages( imageArray ) {
         imageArray = imageArray || $( images ).filter( function() {
             var $parent = $( this ).closest( '.scaled-image' );
+            // fix for galleries, remove, if we want img galleries lazy
+            if ( $( this ).closest( '.slide' ).length > 0 ) {
+                return true;
+            }
             // if lazyload or hidden filter out
             if ( $( this ).data( 'tolazyload' ) === true || $parent.css( 'display' ) !== 'none' ) {
                 return false;

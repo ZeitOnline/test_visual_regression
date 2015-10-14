@@ -256,10 +256,6 @@
                 // fix ad columns
                 $( '#iqdBackgroundLeft, #iqdBackgroundRight' ).css( { height: document.body.offsetHeight + 'px' } );
 
-                // fix for sometimes not completely loaded/scaled gallery images
-                if ( slider.find( 'img[src^=data]' ).length > 0 ) {
-                    slider.reloadSlider();
-                }
             };
 
             options.onSliderResize = function() {
