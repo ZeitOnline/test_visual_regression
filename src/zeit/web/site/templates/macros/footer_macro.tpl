@@ -32,17 +32,19 @@
                     {% for j in section -%}
                         {% set item = section[j] -%}
 
-                        {# "Bildrechte" is done manually ...
-                            /zeit.web/src/zeit/web/core/data/config/navigation-footer-links.xml does not work !? #}
-                        {% if view.type == 'centerpage' and class == 'links' and row_loop.index == 2 and loop.index == 1 %}
+                        {# "Bildrechte" is not semantically marked, but has a JS Event Trigger #}
+                        {% if item.href == '#bildrechte' %}
+                            {% if view.type == 'centerpage' %}
+                                <li class="footer-{{ class }}__item">
+                                    <a class="footer-{{ class }}__link js-image-copyright-footer" href="{{ item.href }}" data-id="{{ item.item_id if item.item_id }}">{{ item.text }}</a>
+                                </li>
+                            {% endif %}
+                        {% else %}
                             <li class="footer-{{ class }}__item">
-                                <a class="footer-{{ class }}__link js-image-copyright-footer" href="#" data-id="footernav.bottom.2.0.bildrechte">Bildrechte</a>
+                                <a class="footer-{{ class }}__link" href="{{ item.href }}" itemprop="url" data-id="{{ item.item_id if item.item_id }}"><span itemprop="name">{{ item.text }}</span></a>
                             </li>
                         {% endif %}
 
-                        <li class="footer-{{ class }}__item">
-                            <a class="footer-{{ class }}__link" href="{{ item.href }}"  itemprop="url" data-id="{{ item.item_id if item.item_id }}"><span itemprop="name">{{ item.text }}</span></a>
-                        </li>
                     {%- endfor %}
                 {%- endif %}
             </ul>
