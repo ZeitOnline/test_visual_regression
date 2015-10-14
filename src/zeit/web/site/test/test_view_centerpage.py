@@ -1406,4 +1406,3 @@ def test_zmo_parquet_has_zmo_styles(testbrowser):
     assert len(zmo_title)
     assert len(zmo_logo)
     assert len(zmo_kicker) == 2
-
