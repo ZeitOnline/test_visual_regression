@@ -1,63 +1,79 @@
+$article-lineage-transition-duration: .5s
+
 .article-lineage
+	+transition(opacity .5s)
 	display: none
 	+respond-min($break-desktop-min)
 		display: block
 		margin: 0 (-$page-padding)
 		max-width: remify(980px)
-		position: absolute
+		opacity: 0
+		position: fixed
+		top: 50%
 		width: 100%
 		// must outplay absolutely positioned elements futher down the DOM
 		// - share + print (abs pos. z-index=1 would be enough)
 		// - embedded videos (z-index=4 needed) e.g. http://127.0.0.1:9090/politik/deutschland/2015-10/cannabis-verkauf-kreuzberg-monika-herrmann
 		z-index: 4
+		&--absolute,
 		&--fixed
-			position: fixed
-			top: 50%
-		&__link
-			background: $zon_lighter_grey
-			height: remify(80px)
+			opacity: 1
+		&--absolute
 			position: absolute
-			width: remify(60px)
+			top: auto
+		&__link
+			+transition(max-width $article-lineage-transition-duration, box-shadow .1s ($article-lineage-transition-duration - 0.1s)) // remove box-shadow at transition end
+			background: $zon_lighter_grey
+			box-shadow: none
+			color: $zon-charcoal
+			height: remify(80px)
+			max-width: remify(60px)
+			padding: remify(0 20px)
+			position: absolute
 			&--prev
 				left: 0
 			&--next
 				right: 0
+			&:focus,
 			&:hover
-				box-shadow: 0px 1px 3px #999
-				color: #000
-				max-width: 51.25em
-				width: auto
+				+transition-delay(0s) // needed to show box-shadow at transition start
+				box-shadow: 0px 1px 3px $zon_mid_grey
+				color: $zon-charcoal
+				max-width: em(820px)
 				.article-lineage__link-text
-					display: block
+					opacity: 1
 		&__link-icon
-			width: remify(22px)
+			width: remify(20px)
 			height: remify(30px)
-			margin: remify(25px 20px)
+			margin: remify(25px 0)
 			color: $zon_lighter_grey
-			fill: $zon_lighter_grey
 			&--prev
 				float: left
 			&--next
 				float: right
 				// rotation is not done via CSS because of IE8
 		&__link-text
-			display: none
+			+transition(opacity $article-lineage-transition-duration)
+			display: block
+			opacity: 0
+			overflow: hidden
+			padding-top: remify(16px)
 			&--prev
-				margin-left: remify(60px)
-				padding: remify(18px) 1.5em 0 0.5em
+				margin: remify(0 5px 0 45px)
 			&--next
-				margin-right: remify(60px)
-				padding: remify(18px) 0.5em 0 1.5em
+				margin: remify(0 45px 0 5px)
 		&__link-kicker
+			color: $zon_dark_grey
 			display: block
 			font-family: $font-franziska
 			font-size: remify(14px)
 			font-style: italic
+			white-space: nowrap
 		&__link-title
 			display: block
 			font-family: $font-tabletgothic
 			font-size: remify(16px)
 			font-weight: bold
-			white-space: nowrap
 			overflow: hidden
 			text-overflow: ellipsis
+			white-space: nowrap

@@ -22,6 +22,11 @@
         this.unchangedCalculationCounter = 0;
         this.lastCalculationTime = 0;
 
+        // OPTIMIZE: not hardcoded! Read the base-class on init
+        this.baseClass = 'article-lineage';
+        this.absolute = false;
+        this.fixed = false;
+
         // on what scrolling positions should the element be positioned fix
         this.minFixedPos = 500;
         this.maxFixedPos = 2000;
@@ -56,7 +61,7 @@
                 return;
             }
 
-            this.calculateArticlePositions();
+            // this.calculateArticlePositions();
 
             // OPTIMIZE: do we have the $window already available? Is it cached by jQuery?
             // OPTIMIZE: namespace for event handler ?
@@ -78,6 +83,7 @@
             remained unchanged for multiple calls, the recalculation will be no
             longer done. */
         calculateArticlePositions: function() {
+            console.debug( 'calc' );
 
             // If the calculation was done too often and nothing changed, stop it!
             if ( this.unchangedCalculationCounter > 5 ) {
@@ -127,14 +133,13 @@
                 window.pageYOffset : this.isCSS1Compat ?
                     document.documentElement.scrollTop : document.body.scrollTop;
 
-            // OPTIMIZE: only update the DOM if the status changes. save the current status internally.
-            if ( this.currentPosition > this.minFixedPos && this.currentPosition < this.maxFixedPos ) {
-                // OPTIMIZE: not hardcoded! Read the base-class on init
-                this.element.addClass( 'article-lineage--fixed' );
-            } else {
-                // OPTIMIZE: not hardcoded! Read the base-class on init
-                this.element.removeClass( 'article-lineage--fixed' );
-            }
+            this.absolute = this.currentPosition > this.maxFixedPos;
+            this.fixed = this.currentPosition >= this.minFixedPos && !this.absolute;
+
+            // luckily, jQuery is only changing the DOM if needed
+            this.element
+                .toggleClass( this.baseClass + '--fixed', this.fixed )
+                .toggleClass( this.baseClass + '--absolute', this.absolute );
         },
 
         /*  This is Throttling! The Scroll Event is thrown very often.
