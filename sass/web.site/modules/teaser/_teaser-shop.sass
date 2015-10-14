@@ -1,3 +1,12 @@
+.teaser-shop-group
+	&__container
+		+respond-min($break-tablet-min)
+			+justify-children-horizontally('.teaser-shop') // more old-skool
+			margin: auto
+			width: remify(620px) // 2 * teaser à 300px + margin
+		+respond-min($break-desktop-min)
+			width: 100%
+
 	&__button
 		@extend %teaser-bar-group__button
 
@@ -5,16 +14,17 @@
 		@extend %teaser-bar-group__shuffle-icon
 		display: none
 
-.teaser-shop-group
 .teaser-shop
 	@extend %teaser-bar
-	width: remify(300px)
-		// substitute for :nth-child(even)
-		// & + &
-		// 	margin-left: remify(20px)
+	margin-left: auto
+	margin-right: auto
+	max-width: remify(300px)
+	box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.07)
 
-	&__text
-		@extend %teaser-text
+	// don't display the third item on smaller screens evarrrrr
+	& + & + &
+		+respond-max($break-desktop-min)
+			display: none
 
 	&__media
 		@extend %teaser-bar__media
@@ -26,3 +36,13 @@
 	&__figurewrapper
 		@extend %teaser-bar__figurewrapper
 
+	&__text
+		border-top: 1px solid $zon_light_grey
+		color: $zon-charcoal
+		font-size: remify(16px)
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1.2
+		margin: 0
+		padding-top: remify(10px)
+		&:after
+			content: "\0020\25B8" // No-Break Space and ▸ = Black Right-Pointing Small Triangle

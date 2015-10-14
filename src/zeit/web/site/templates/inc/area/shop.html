@@ -29,7 +29,8 @@
 		<a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=Logo&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.logo.zeitshop.1"
 			class="button {{ module_layout }}-group__button js-gallery-teaser-shuffle"
 			data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p={{ area.next_page }}">
-			{{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), request) }}Weitere laden
+			{{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), request) }}
+			Alle Angebote <span>im Shop</span>
 		</a>
 	{% endif %}
 {% endblock %}
