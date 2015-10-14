@@ -201,7 +201,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjc
                 return true;
             }
             // if lazyload or hidden filter out
-            if ( $( this ).data( 'tolazyload' ) === true || $parent.css( 'display' ) !== 'none' ) {
+            if ( $( this ).data( 'tolazyload' ) === true || $parent.css( 'display' ) === 'none' ) {
                 return false;
             }
         });
