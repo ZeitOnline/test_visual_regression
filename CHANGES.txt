@@ -1,10 +1,18 @@
 Change log for zeit.web
 =======================
 
-2.13.2 (unreleased)
+2.13.3 (unreleased)
 -------------------
 
 - MAINT: Exclude ZMO from article lineage query
+
+- MAINT: adjust adBlocker Tracking to GTM dataLayer conventions
+
+
+2.13.2 (2015-10-14)
+-------------------
+
+- MAINT: Bring back timing metric for all content types combined
 
 
 2.13.1 (2015-10-13)
