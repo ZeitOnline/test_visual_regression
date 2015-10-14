@@ -112,19 +112,26 @@ def view_timer_traversal(event):
     metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
     timer = metrics.timer(
         'zeit.web.core.view.pyramid.{view}'.format(view=view_name))
+    all_timer = metrics.timer('zeit.web.core.view.pyramid.all')
     # Since we can decide the timer name only now, after we have the context,
     # we have to re-implement timer.start() ourselves here.
     timer._last = timer._start = request.view_timer_start
+    all_timer._last = all_timer._start = request.view_timer_start
+
+    timer.intermediate('traversal')
+    all_timer.intermediate('traversal')
 
     request.view_timer = timer
-    request.view_timer.intermediate('traversal')
+    request.view_timer_all = all_timer
 
 
 @pyramid.events.subscriber(pyramid.events.NewResponse)
 def view_timer_rendering(event):
-    if hasattr(event.request, 'view_timer'):
+    if getattr(event.request, 'view_timer', None):
         event.request.view_timer.intermediate('rendering')
         event.request.view_timer.stop('total')
+        event.request.view_timer_all.intermediate('rendering')
+        event.request.view_timer_all.stop('total')
     memory = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     memory_delta = memory - event.request.memory
     memory_log.debug(
