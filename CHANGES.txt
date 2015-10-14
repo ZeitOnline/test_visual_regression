@@ -1,7 +1,37 @@
 Change log for zeit.web
 =======================
 
-2.12 (unreleased)
+2.13.3 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+2.13.2 (2015-10-14)
+-------------------
+
+- MAINT: Bring back timing metric for all content types combined
+
+
+2.13.1 (2015-10-13)
+-------------------
+
+- MAINT: Normalize hostnames in metric names
+
+
+2.13 (2015-10-13)
+-----------------
+
+- HOTFIX: Don't include view_name in the request timing metric names, since
+  that caused an explosion of metric names.
+
+- ZON-2246: Chronologische Artikel-Navigation
+
+- MAINT: Revert "ZON-2301: fix/adjust date_last_modified for HP"
+  (This is fixed in vivi now)
+
+
+2.12 (2015-10-09)
 -----------------
 
 - FIX: Fix display of future dates
@@ -11,6 +41,10 @@ Change log for zeit.web
   * Add timing metrics for our external HTTP requests
   * Add timing metrics for solr
   * Add timing metrics for memcache
+
+- FIX: Be more defensive in several places:
+  * unresolveable entries and their images in feeds
+  * missing cid infos in community response
 
 
 2.11 (2015-10-07)
