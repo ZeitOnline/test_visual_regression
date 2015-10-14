@@ -7,9 +7,11 @@ import lxml.html
 import pyramid.testing
 import pysolr
 import pytest
+import zope.component
 
-import zeit.cms.interfaces
 from zeit.cms.checkout.helper import checked_out
+import zeit.cms.interfaces
+import zeit.solr.interfaces
 
 import zeit.web.site.view_centerpage
 
@@ -156,14 +158,10 @@ def test_centerpage_should_gracefully_skip_all_broken_references(
     assert not browser.cssselect('.main__snapshot *')
 
 
-def test_dynamic_centerpage_collection_should_output_teasers(
-        monkeypatch, application):
-    def search(self, q, **kw):
-        return pysolr.Results(
-            [{'uniqueId': 'http://xml.zeit.de/artikel/0%s' % i}
-                for i in range(1, 9)], 8)
-
-    monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
+def test_dynamic_centerpage_collection_should_output_teasers(application):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/0%s' % i}
+                    for i in range(1, 9)]
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
     view = zeit.web.site.view_centerpage.Centerpage(
         cp, pyramid.testing.DummyRequest())
@@ -176,7 +174,8 @@ def test_dynamic_centerpage_collection_should_output_teasers(
     assert counter == 8
 
 
-def test_dynamic_centerpage_should_be_paginatable(testserver, testbrowser):
+def test_dynamic_centerpage_should_be_paginatable(
+        testserver, testbrowser, datasolr):
     browser = testbrowser(
         '{}/dynamic/angela-merkel?p=2'.format(testserver.url))
     text = browser.cssselect('.pager__page.pager__page--current span')[0].text
@@ -249,7 +248,7 @@ def test_ad_label_should_be_displayed(testbrowser):
     assert labels[0].text == 'Anzeige'
 
 
-def test_link_rel_should_be_set_according_to_pagination(testbrowser):
+def test_link_rel_should_be_set_according_to_pagination(testbrowser, datasolr):
     select = testbrowser('/dynamic/angela-merkel?p=3').cssselect
     rel_next = select('link[rel="next"]')
     rel_prev = select('link[rel="prev"]')
@@ -259,7 +258,8 @@ def test_link_rel_should_be_set_according_to_pagination(testbrowser):
     assert '/dynamic/angela-merkel?p=2' in rel_prev[0].attrib['href']
 
 
-def test_link_rel_to_prev_page_should_not_exist_on_first_page(testbrowser):
+def test_link_rel_to_prev_page_should_not_exist_on_first_page(
+        testbrowser, datasolr):
     select = testbrowser('/dynamic/angela-merkel').cssselect
     rel_next = select('link[rel="next"]')
     rel_prev = select('link[rel="prev"]')
