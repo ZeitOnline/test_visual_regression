@@ -31,19 +31,20 @@ define([ 'jquery' ], function( $ ) {
          */
         init: function() {
             var track = {
-                category: 'adb',
-                action: false
+                event: 'dataLayerEvent',
+                dataLayerEventCategory: 'AdBlockerDetection',
+                dataLayerEventAction: false
             },
             debug = window.location.search.indexOf( 'ablocktestdebug' ) !== -1;
             $( window ).on( 'load', function( evt ) {
                 var $elem = $( '#ad3999' );
                 if ( $elem.length > 0 ) {
                     if ( oldadblocktest( $elem ) ) {
-                        track.action = true;
-                        track.opt_label = 'adblockdesktop';
+                        track.dataLayerEventAction = true;
+                        track.dataLayerEventLabel = 'adblockdesktop';
                     } else if ( adcontrollerblocked() ) {
-                        track.action = true;
-                        track.opt_label = 'adcontrollerblocked';
+                        track.dataLayerEventAction = true;
+                        track.dataLayerEventLabel = 'adcontrollerblocked';
                     }
                     window.dataLayer = window.dataLayer || [];
                     window.dataLayer.push( track );
@@ -52,7 +53,7 @@ define([ 'jquery' ], function( $ ) {
                     }
                 } else {
                     if ( debug ) {
-                        console.info( 'Not adb tracked, ads disabled.' );
+                        console.info( 'Not AdBlockerDetection tracked, ads disabled.' );
                     }
                 }
             });

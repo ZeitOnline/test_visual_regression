@@ -713,7 +713,7 @@ def test_adcontroller_values_return_values_on_cp(application):
     assert adcv == view.adcontroller_values
 
 
-def test_canonical_ruleset_on_cps(testserver, testbrowser):
+def test_canonical_ruleset_on_cps(testserver, testbrowser, datasolr):
     url = '%s/dynamic/ukraine' % testserver.url
     browser = testbrowser(url)
 
@@ -732,63 +732,29 @@ def test_canonical_ruleset_on_cps(testserver, testbrowser):
     assert link[0].get('href') == url + '?p=2'
 
 
-def test_canonical_ruleset_on_diverse_pages_1(testserver, testbrowser):
+def test_canonical_ruleset_on_article_pages(testserver, testbrowser):
     url = '%s/zeit-online/index' % testserver.url
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
 
-def test_canonical_ruleset_on_diverse_pages_2(testserver, testbrowser):
-    url = '%s/zeit-online/article/01' % testserver.url
-    browser = testbrowser(url)
-    link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == url
-
-
-def test_canonical_ruleset_on_diverse_pages_3(testserver, testbrowser):
-    url = '%s/zeit-online/article/zeit' % testserver.url
-    browser = testbrowser(url)
-    link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == url
-
-
-def test_canonical_ruleset_on_diverse_pages_4(testserver, testbrowser):
-    url = '%s/zeit-online/article/zeit' % testserver.url
-    browser = testbrowser("{}/komplettansicht".format(url))
-    link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == url
-
-
-def test_canonical_ruleset_on_diverse_pages_5(testserver, testbrowser):
-    url = '%s/zeit-online/article/zeit' % testserver.url
-    browser = testbrowser("{}/seite-2".format(url))
-    link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == url + '/seite-2'
-
-
-def test_canonical_ruleset_on_diverse_pages_6(testserver, testbrowser):
+def test_canonical_ruleset_on_ranking_pages(testserver, testbrowser, datasolr):
     url = '%s/suche/index' % testserver.url
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
-
-def test_canonical_ruleset_on_diverse_pages_7(testserver, testbrowser):
     url = '%s/suche/index' % testserver.url
     browser = testbrowser("{}?p=2".format(url))
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url + '?p=2'
 
-
-def test_canonical_ruleset_on_diverse_pages_8(testserver, testbrowser):
     url = '%s/dynamic/ukraine' % testserver.url
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url
 
-
-def test_canonical_ruleset_on_diverse_pages_9(testserver, testbrowser):
     url = '%s/dynamic/ukraine' % testserver.url
     browser = testbrowser("{}?p=2".format(url))
     link = browser.cssselect('link[rel="canonical"]')
@@ -911,7 +877,8 @@ def test_meta_rules_for_keyword_paths(application):
         'von ZEIT ONLINE zu dem Thema Ausdauersport.')
 
 
-def test_newsticker_should_have_expected_dom(testserver, testbrowser):
+def test_newsticker_should_have_expected_dom(
+        testserver, testbrowser, datasolr):
     browser = testbrowser('/zeit-online/news-teaser')
 
     cols = browser.cssselect('.cp-area--newsticker .newsticker__column')

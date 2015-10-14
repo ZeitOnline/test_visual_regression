@@ -685,14 +685,17 @@ class Content(Base):
                     'type', 'article'),
                 lq.not_(
                     lq.field('uniqueId', self.context.uniqueId)),
+                lq.not_(
+                    lq.field('ressort', 'zeit-magazin')),
                 lq.field_raw(
                     'product_id', lq.or_(
                         'ZEDE', 'ZEI', 'ZECH', 'ZEC', 'ZEOE', 'ZES', 'ZTWI',
                         'ZTGS', 'ZTCS', 'CSRG', 'ZSF', 'KINZ')),
                 lq.field(
                     'published', 'published'))
-            return conn.search(query, sort='date_first_released ' + sort,
-                               fl='title uniqueId', rows=1).docs
+            with zeit.web.core.metrics.timer('lineage.solr.reponse_time'):
+                return conn.search(query, sort='date_first_released ' + sort,
+                                   fl='title uniqueId', rows=1).docs
 
         date = zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_first_released
