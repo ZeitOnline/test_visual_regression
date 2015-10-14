@@ -81,7 +81,6 @@
             remained unchanged for multiple calls, the recalculation will be no
             longer done. */
         calculateArticlePositions: function() {
-            console.debug( 'calc' );
 
             // If the calculation was done too often and nothing changed, stop it!
             if ( this.unchangedCalculationCounter > 5 ) {
