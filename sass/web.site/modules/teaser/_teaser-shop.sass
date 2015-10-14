@@ -1,3 +1,11 @@
+	&__button
+		@extend %teaser-bar-group__button
+
+	&__shuffle-icon
+		@extend %teaser-bar-group__shuffle-icon
+		display: none
+
+.teaser-shop-group
 .teaser-shop
 	@extend %teaser-bar
 	width: remify(300px)
@@ -7,4 +15,14 @@
 
 	&__text
 		@extend %teaser-text
+
+	&__media
+		@extend %teaser-bar__media
+
+	&__container
+		@extend %teaser-bar__container
+		padding-top: 10px
+
+	&__figurewrapper
+		@extend %teaser-bar__figurewrapper
 
