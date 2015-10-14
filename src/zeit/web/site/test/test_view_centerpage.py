@@ -1190,9 +1190,9 @@ def test_hidden_images_must_not_be_loaded_via_js(
         assert False, 'Fullsize Image not loaded within 2 seconds'
     else:
         largeimage = driver.find_elements_by_css_selector(
-            'figure.teaser-fullwidth__media img[src]')
+            'figure.teaser-fullwidth__media img[src^="http"]')
         smallimage = driver.find_elements_by_css_selector(
-            'figure.teaser-small__media img[src]')
+            'figure.teaser-small__media img[src^="http"]')
 
         if screen_size[0] == 320:
             assert len(smallimage) == 0

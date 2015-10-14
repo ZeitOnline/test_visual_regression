@@ -20,6 +20,7 @@ require.config({
         'freewall': 'vendor/freewall',
         'jquery.clarify': 'web.core/plugins/jquery.clarify',
         'jquery.debounce': 'web.core/plugins/jquery.debounce',
+        'jquery.throttle': 'web.core/plugins/jquery.throttle',
         'jquery.inview': 'vendor/jquery.inview'
     },
     // a shim is needed for jQuery Plugins to load
@@ -28,6 +29,7 @@ require.config({
         'bxSlider': [ 'jquery' ],
         'jquery.clarify': [ 'jquery' ],
         'jquery.debounce': [ 'jquery' ],
+        'jquery.throttle': [ 'jquery' ],
         'web.core/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery', 'modernizr' ],
         'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],
         'web.site/plugins/jquery.autoclick': [ 'jquery', 'modernizr' ],

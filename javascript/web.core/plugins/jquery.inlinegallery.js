@@ -255,6 +255,7 @@
 
                 // fix ad columns
                 $( '#iqdBackgroundLeft, #iqdBackgroundRight' ).css( { height: document.body.offsetHeight + 'px' } );
+
             };
 
             options.onSliderResize = function() {
