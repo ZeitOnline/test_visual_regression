@@ -28,23 +28,13 @@ $break-gallery-teasers: $break-phablet-min
 	display: none
 
 .teaser-gallery
-	background-color: $white
-	margin-bottom: remify(20px)
+	@extend %teaser-bar
 	+respond-min($break-gallery-teasers)
 		width: 50%
 
 		// substitute for :nth-child(even)
 		& + &
 			margin-left: remify(20px)
-
-	&:hover
-		box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.05)
-
-	&__media
-		margin: 0
-
-	&__container
-		padding: remify(20px 18px)
 
 	&__heading
 		@extend %teaser-heading
@@ -65,11 +55,6 @@ $break-gallery-teasers: $break-phablet-min
 
 	&__text
 		@extend %teaser-text
-
-	&__figurewrapper
-		position: relative
-		height: 0
-		padding-bottom: 100% / 16 * 9
 
 	&__icon
 		position: absolute

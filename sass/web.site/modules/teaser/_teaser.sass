@@ -119,3 +119,20 @@
 
 %teaser-label
 	@extend %ad-label
+
+/**
+ * Abstract teaser for the so called 'Biga-Riegel' or 'Shop-Riegel'
+ */
+%teaser-bar
+	background-color: $white
+	margin-bottom: remify(20px)
+	&:hover
+		box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.05)
+	&__media
+		margin: 0
+	&__container
+		padding: remify(20px 18px)
+	&__figurewrapper
+		position: relative
+		height: 0
+		padding-bottom: 100% / 16 * 9
