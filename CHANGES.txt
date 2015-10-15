@@ -4,7 +4,7 @@ Change log for zeit.web
 2.15 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2036: Bildrechte im Footer von CPs
 
 
 2.14 (2015-10-15)
@@ -31,8 +31,6 @@ Change log for zeit.web
 - MAINT: Exclude ZMO from article lineage query
 
 - MAINT: adjust adBlocker Tracking to GTM dataLayer conventions
-
-- ZON-2036: Bildrechte im Footer von CPs
 
 
 2.13.2 (2015-10-14)
