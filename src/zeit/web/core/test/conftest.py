@@ -277,7 +277,15 @@ def preserve_settings(application_session, request):
 
 
 @pytest.fixture
-def application(application_session, preserve_settings, zodb, request):
+def reset_solr(application_session, request):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    if isinstance(solr, MockSolr):
+        solr.reset()
+
+
+@pytest.fixture
+def application(
+        application_session, preserve_settings, reset_solr, zodb, request):
     # This application_session/application split is a bit clumsy, but some
     # things (e.g. reset connector, teardown zodb) needs to be called after
     # each test (i.e. in 'function' scope). The many diverse fixtures make this
@@ -664,6 +672,9 @@ class MockSolr(object):
     zope.interface.implements(zeit.solr.interfaces.ISolr)
 
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.results = []
 
     def search(self, q, rows=10, **kw):
