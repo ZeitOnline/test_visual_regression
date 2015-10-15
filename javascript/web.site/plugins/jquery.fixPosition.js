@@ -61,10 +61,8 @@
                 return;
             }
 
-            // TODO: use the new jQuery.throttle Plugin.
-            $( window ).on( 'scroll', function() {
-                that.scrollThrottling();
-            } );
+            // OPTIMIZE: wieso geht das nicht ohne die explizite Übergabe von that in handleScrolling?
+            $( window ).on( 'scroll', $.throttle( function() { that.handleScrolling( that ); }, 100 ) );
 
         },
 
@@ -116,9 +114,9 @@
 
         },
 
-        handleScrolling: function() {
+        handleScrolling: function( that ) {
 
-            this.calculateArticlePositions();
+            that.calculateArticlePositions();
             // In 2015, we need multiple lines of code to detect the scrolling position
             // (https://developer.mozilla.org/de/docs/Web/API/Window/scrollY)
             this.currentPosition = this.supportPageOffset ?
@@ -132,34 +130,6 @@
             this.element
                 .toggleClass( this.baseClass + '--fixed', this.fixed )
                 .toggleClass( this.baseClass + '--absolute', this.absolute );
-        },
-
-        /*  This is Throttling! The Scroll Event is thrown very often.
-            But there is no need to do all our calculations on every call.
-            That's why the event handler is only called every 100ms.
-
-            OPTIMIZE: this could be reused globally.
-            OPTIMIZE: After IE9 we can use requestAnimationFrame
-                (https://developer.mozilla.org/en-US/docs/Web/Events/scroll)
-        */
-        scrollThrottling: function() {
-
-            var that = this,
-                throttlingTime = 100;
-
-            // The handler is still blocked. So we do not call the actual event handler.
-            if ( this.scrollThrottlingBlocked === true ) {
-                return;
-            }
-
-            // Not blocked. Set a timeout to block for 100ms, and call the actual event handler
-            this.scrollThrottlingBlocked = true;
-            window.setTimeout( function() {
-                that.scrollThrottlingBlocked = false;
-            }, throttlingTime );
-
-            this.handleScrolling();
-
         }
     };
 
