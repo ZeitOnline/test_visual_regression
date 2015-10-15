@@ -61,12 +61,7 @@
                 return;
             }
 
-            // OPTIMIZE: do we have the $window already available? Is it cached by jQuery?
-            // OPTIMIZE: namespace for event handler ?
-
-            // debounce does not work. That's why I use my own throttling.
-            // $( window ).on( 'scroll', $.debounce( that.handleScrolling, 100 ) );
-
+            // TODO: use the new jQuery.throttle Plugin.
             $( window ).on( 'scroll', function() {
                 that.scrollThrottling();
             } );
