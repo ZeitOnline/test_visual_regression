@@ -23,7 +23,9 @@
         {% block teaser_heading %}
             <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
                 {% block teaser_link %}
-                <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | create_url }}">
+                <a class="{{ self.layout() }}__combined-link"
+                   title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}"
+                   href="{{ teaser | create_url }}">
                     {% block teaser_kicker %}
                     <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, 'zmo' if area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent')) }}">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
                     {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">:</span>{% endif %}
@@ -63,7 +65,7 @@
                     {% set comments = view.comment_counts[teaser.uniqueId] %}
                     {% if comments %}
                         {% set comments_string = comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
-                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser.uniqueId | create_url }}#comments" title="Kommentare anzeigen">{{ comments_string }}</a>
+                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser | create_url }}#comments" title="Kommentare anzeigen">{{ comments_string }}</a>
                     {% endif %}
                 {% endblock %}
             </div>
