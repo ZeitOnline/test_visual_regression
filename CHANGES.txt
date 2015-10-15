@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Fix lazy loading images initial
 
+- ZON-2321: Nächster-Artikel-Pfeile von Advertorials ausschließen
+
 
 2.14 (2015-10-15)
 -----------------
@@ -19,8 +21,6 @@ Change log for zeit.web
 - MAINT: Fix adcontroller handle in ZMO galleries
 
 - ZON-2292: Add lazyloading for centerpages
-
-- ZON-2321: Nächster-Artikel-Pfeile von Advertorials ausschließen
 
 - ZON-2318: Fallback für Related mit unveröffentlichtem/fehlendem Bild
 
