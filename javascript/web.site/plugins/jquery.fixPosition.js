@@ -22,6 +22,11 @@
         this.unchangedCalculationCounter = 0;
         this.lastCalculationTime = 0;
 
+        // OPTIMIZE: not hardcoded! Read the base-class on init
+        this.baseClass = 'article-lineage';
+        this.absolute = false;
+        this.fixed = false;
+
         // on what scrolling positions should the element be positioned fix
         this.minFixedPos = 500;
         this.maxFixedPos = 2000;
@@ -56,17 +61,7 @@
                 return;
             }
 
-            this.calculateArticlePositions();
-
-            // OPTIMIZE: do we have the $window already available? Is it cached by jQuery?
-            // OPTIMIZE: namespace for event handler ?
-
-            // debounce does not work. That's why I use my own throttling.
-            // $( window ).on( 'scroll', $.debounce( that.handleScrolling, 100 ) );
-
-            $( window ).on( 'scroll', function() {
-                that.scrollThrottling();
-            } );
+            $( window ).on( 'scroll', $.throttle( function() { that.handleScrolling(); }, 100 ) );
 
         },
 
@@ -127,42 +122,13 @@
                 window.pageYOffset : this.isCSS1Compat ?
                     document.documentElement.scrollTop : document.body.scrollTop;
 
-            // OPTIMIZE: only update the DOM if the status changes. save the current status internally.
-            if ( this.currentPosition > this.minFixedPos && this.currentPosition < this.maxFixedPos ) {
-                // OPTIMIZE: not hardcoded! Read the base-class on init
-                this.element.addClass( 'article-lineage--fixed' );
-            } else {
-                // OPTIMIZE: not hardcoded! Read the base-class on init
-                this.element.removeClass( 'article-lineage--fixed' );
-            }
-        },
+            this.absolute = this.currentPosition > this.maxFixedPos;
+            this.fixed = this.currentPosition >= this.minFixedPos && !this.absolute;
 
-        /*  This is Throttling! The Scroll Event is thrown very often.
-            But there is no need to do all our calculations on every call.
-            That's why the event handler is only called every 100ms.
-
-            OPTIMIZE: this could be reused globally.
-            OPTIMIZE: After IE9 we can use requestAnimationFrame
-                (https://developer.mozilla.org/en-US/docs/Web/Events/scroll)
-        */
-        scrollThrottling: function() {
-
-            var that = this,
-                throttlingTime = 100;
-
-            // The handler is still blocked. So we do not call the actual event handler.
-            if ( this.scrollThrottlingBlocked === true ) {
-                return;
-            }
-
-            // Not blocked. Set a timeout to block for 100ms, and call the actual event handler
-            this.scrollThrottlingBlocked = true;
-            window.setTimeout( function() {
-                that.scrollThrottlingBlocked = false;
-            }, throttlingTime );
-
-            this.handleScrolling();
-
+            // luckily, jQuery is only changing the DOM if needed
+            this.element
+                .toggleClass( this.baseClass + '--fixed', this.fixed )
+                .toggleClass( this.baseClass + '--absolute', this.absolute );
         }
     };
 

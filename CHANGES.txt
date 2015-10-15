@@ -1,14 +1,26 @@
 Change log for zeit.web
 =======================
 
-2.13.4 (unreleased)
--------------------
+2.15 (unreleased)
+-----------------
+
+- FIX: Fix display of future dates
+
+
+2.14 (2015-10-15)
+-----------------
+
+- MAINT: Animate chronological article navigation
+
+- ZON-1975: Update ZMO parquet style
+
+- MAINT: Fix video preloading (because it costs too much money)
 
 - MAINT: Fix adcontroller handle in ZMO galleries
 
 - ZON-2292: Add lazyloading for centerpages
 
-- FIX: Fix display of future dates
+- ZON-2318: Fallback für Related mit unveröffentlichtem/fehlendem Bild
 
 
 2.13.3 (2015-10-14)
