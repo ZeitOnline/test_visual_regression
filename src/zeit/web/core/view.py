@@ -13,7 +13,10 @@ import pyramid.response
 import pyramid.settings
 import pyramid.view
 import werkzeug.http
+import zope.component
 
+from zeit.solr import query as lq
+import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.connector.connector
 import zeit.connector.interfaces
@@ -21,13 +24,13 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.content.text.interfaces
+import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.date
 
-import zope.component
 
 log = logging.getLogger(__name__)
 
@@ -469,6 +472,11 @@ class Base(object):
         return conf.get('dev_environment', '')
 
     @zeit.web.reify
+    def featuretoggle_articlelineage(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('enable_article_lineage', '')
+
+    @zeit.web.reify
     def timezone(self):
         return babel.dates.get_timezone('Europe/Berlin')
 
@@ -662,6 +670,43 @@ class Content(Base):
                         self.date_print_published,
                         "d. MMMM yyyy", locale="de_De")
                 return base64.b64encode(label.encode('latin-1'))
+
+    @zeit.web.reify
+    def lineage(self):
+        conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+
+        def next(from_, to, sort):
+            query = lq.and_(
+                lq.datetime_range(
+                    'date_first_released', from_, to),
+                lq.bool_field(
+                    'breaking_news', False),
+                lq.field_raw(
+                    'type', 'article'),
+                lq.not_(
+                    lq.field('uniqueId', self.context.uniqueId)),
+                lq.not_(
+                    lq.field('ressort', 'zeit-magazin')),
+                lq.field_raw(
+                    'product_id', lq.or_(
+                        'ZEDE', 'ZEI', 'ZECH', 'ZEC', 'ZEOE', 'ZES', 'ZTWI',
+                        'ZTGS', 'ZTCS', 'CSRG', 'ZSF', 'KINZ')),
+                lq.field(
+                    'published', 'published'))
+            with zeit.web.core.metrics.timer('lineage.solr.reponse_time'):
+                return conn.search(query, sort='date_first_released ' + sort,
+                                   fl='title uniqueId', rows=1).docs
+
+        date = zeit.cms.workflow.interfaces.IPublishInfo(
+            self.context).date_first_released
+
+        default = [{
+            'title': 'Startseite',
+            'uniqueId': 'http://xml.zeit.de/index'}]
+        predecessor = next(None, date, 'desc') or default
+        successor = next(date, None, 'asc') or default
+
+        return predecessor + successor
 
     @zeit.web.reify
     def comments_allowed(self):

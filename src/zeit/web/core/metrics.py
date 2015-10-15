@@ -57,8 +57,12 @@ def from_settings():
     if settings.get('statsd_address'):
         log.info('Initializing metrics collection to statsd at %s',
                  settings['statsd_address'])
+        hostname = socket.gethostname()
+        # Hostname might be the FQDN, which we don't want in the metric name.
+        hostname = hostname.replace('.zeit.de', '')
+        hostname = hostname.replace('.', '-')
         return Metrics(
-            'friedbert.%s.' % socket.gethostname(),
+            'friedbert.%s.' % hostname,
             *settings['statsd_address'].split(':'))
     else:
         log.info(
@@ -94,28 +98,40 @@ def view_timer_traversal(event):
         # Detect static_view, see pyramid.config.view.StaticURLInfo.add().
         if request.matched_route.name.startswith('__'):
             view_name = 'static'
+        # Detect dynamic blacklist routes, see zeit.web.core.application.
+        elif request.matched_route.name.startswith('blacklist_'):
+            view_name = 'blacklist'
         else:
             view_name = request.matched_route.name
     else:
-        view_name = request.view_name or 'default'
+        # It might be interesting to do something like context-view_name,
+        # however e.g. for 404s the context is the folder and the view_name
+        # the name of the thing that was not found, which is rather unhelpful.
+        view_name = request.context.__class__.__name__.lower()
 
     metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
     timer = metrics.timer(
-        'zeit.web.core.view.pyramid.{context}-{view}'.format(
-            context=request.context.__class__.__name__.lower(),
-            view=view_name))
+        'zeit.web.core.view.pyramid.{view}'.format(view=view_name))
+    all_timer = metrics.timer('zeit.web.core.view.pyramid.all')
     # Since we can decide the timer name only now, after we have the context,
     # we have to re-implement timer.start() ourselves here.
     timer._last = timer._start = request.view_timer_start
+    all_timer._last = all_timer._start = request.view_timer_start
+
+    timer.intermediate('traversal')
+    all_timer.intermediate('traversal')
 
     request.view_timer = timer
-    request.view_timer.intermediate('traversal')
+    request.view_timer_all = all_timer
 
 
 @pyramid.events.subscriber(pyramid.events.NewResponse)
 def view_timer_rendering(event):
-    event.request.view_timer.intermediate('rendering')
-    event.request.view_timer.stop('total')
+    if getattr(event.request, 'view_timer', None):
+        event.request.view_timer.intermediate('rendering')
+        event.request.view_timer.stop('total')
+        event.request.view_timer_all.intermediate('rendering')
+        event.request.view_timer_all.stop('total')
     memory = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     memory_delta = memory - event.request.memory
     memory_log.debug(

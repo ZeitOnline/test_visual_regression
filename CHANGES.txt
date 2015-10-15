@@ -1,10 +1,50 @@
 Change log for zeit.web
 =======================
 
-2.13 (unreleased)
+2.13.4 (unreleased)
+-------------------
+
+- MAINT: Fix video preloading (because it costs too much money)
+
+- MAINT: Fix adcontroller handle in ZMO galleries
+
+- ZON-2292: Add lazyloading for centerpages
+
+- ZON-2318: Fallback für Related mit unveröffentlichtem/fehlendem Bild
+
+
+2.13.3 (2015-10-14)
+-------------------
+
+- MAINT: update DNS Prefetch to actually used hosts
+
+- MAINT: Exclude ZMO from article lineage query
+
+- MAINT: adjust adBlocker Tracking to GTM dataLayer conventions
+
+
+2.13.2 (2015-10-14)
+-------------------
+
+- MAINT: Bring back timing metric for all content types combined
+
+
+2.13.1 (2015-10-13)
+-------------------
+
+- MAINT: Normalize hostnames in metric names
+
+
+2.13 (2015-10-13)
 -----------------
 
+- HOTFIX: Don't include view_name in the request timing metric names, since
+  that caused an explosion of metric names.
+
+- ZON-2246: Chronologische Artikel-Navigation
+
 - MAINT: Revert "ZON-2301: fix/adjust date_last_modified for HP"
+  (This is fixed in vivi now)
 
 
 2.12 (2015-10-09)
