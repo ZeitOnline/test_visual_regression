@@ -1,1 +1,19 @@
-{% extends "zeit.web.site:templates/inc/area/parquet.html" %}
+{% extends "zeit.web.site:templates/inc/area/default.html" %}
+
+{% block before_module_list %}
+    <div class="parquet-zett__head">
+        <div class="parquet-zett__logo">
+            <img href="zett-logo-pfad">
+
+            <!-- placeholder bis SVG da ist -->
+            <p>ze.tt</p>
+
+        </div>
+    </div>
+
+    <div class="parquet-zett-teasers">
+{% endblock %}
+{% block after_module_list %}
+    </div>
+{% endblock %}
+
