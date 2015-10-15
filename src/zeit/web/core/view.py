@@ -673,6 +673,10 @@ class Content(Base):
 
     @zeit.web.reify
     def lineage(self):
+
+        if self.is_advertorial:
+            return None
+
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
 
         def next(from_, to, sort):
