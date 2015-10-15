@@ -456,7 +456,7 @@ def test_parquet_region_list_should_have_regions(application):
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         cp, pyramid.testing.DummyRequest())
-    assert len(view.region_list_parquet) == 4, (
+    assert len(view.region_list_parquet) == 3, (
         'View contains %s parquet regions instead of 4' % len(
             view.region_list_parquet))
 

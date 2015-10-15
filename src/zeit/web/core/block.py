@@ -175,26 +175,9 @@ class Liveblog(object):
             pass
 
 
-class BaseImage(object):
-
-    @property
-    def ratio(self):
-        try:
-            width, height = self.image.getImageSize()
-            return float(width) / float(height)
-        except (TypeError, ZeroDivisionError):
-            return
-
-    def getImageSize(self):  # NOQA
-        try:
-            return self.image.getImageSize()
-        except AttributeError:
-            return
-
-
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
-class Image(BaseImage):
+class Image(zeit.web.core.image.BaseImage):
 
     DEFAULT_VARIANT = 'wide'
 

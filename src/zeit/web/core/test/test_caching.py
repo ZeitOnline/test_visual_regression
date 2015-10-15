@@ -40,7 +40,7 @@ def test_caching_time_for_image_should_respect_group_expires(
     expires = now + timedelta(seconds=5)
     workflow = zeit.cms.workflow.interfaces.IPublishInfo(group)
     workflow.released_to = expires
-    assert zeit.web.core.cache.ICachingTime(group['wide']) == 5
+    assert zeit.web.core.cache.ICachingTime(group['wide']) == 15
 
 
 def test_already_expired_image_should_have_caching_time_zero(
