@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-2.15 (unreleased)
------------------
+2.14.1 (2015-10-15)
+-------------------
 
 - FIX: Fix lazy loading images initial
 
