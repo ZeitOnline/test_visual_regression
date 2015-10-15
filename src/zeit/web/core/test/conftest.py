@@ -77,6 +77,8 @@ def app_settings(mockserver):
         'spektrum_img_host': mockserver.url + '/spektrum',
         'zett_hp_feed': mockserver.url + '/zett/feed.xml',
         'zett_img_host': mockserver.url + '/zett',
+        'academics_hp_feed': mockserver.url + '/academics/feed.xml',
+        'academics_img_host': mockserver.url + '/academics',
         'node_comment_statistics': 'community/node-comment-statistics.xml',
         'default_teaser_images': (
             'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
