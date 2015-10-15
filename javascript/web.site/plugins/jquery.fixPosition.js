@@ -45,6 +45,8 @@
 
         init: function() {
 
+            var that = this;
+
             // only use this on Desktop.
             // OPTIMIZE: move this to site.js, so we dont have to check on every instance?
             if ( window.ZMO.breakpoint.get() !== 'desktop' ) {
@@ -59,7 +61,7 @@
                 return;
             }
 
-            $( window ).on( 'scroll', $.throttle( this.handleScrolling, 100 ) );
+            $( window ).on( 'scroll', $.throttle( function() { that.handleScrolling(); }, 100 ) );
 
         },
 
