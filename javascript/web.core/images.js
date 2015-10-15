@@ -204,6 +204,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjc
             if ( $( this ).data( 'tolazyload' ) === true || $parent.css( 'display' ) === 'none' ) {
                 return false;
             }
+            return true;
         });
         $( imageArray ).each( function() {
             var $img = $( this );
