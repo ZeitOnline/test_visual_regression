@@ -131,7 +131,8 @@ def spektrum_hp_feed(request):
 
 @pyramid.view.view_config(
     route_name='login_state',
-    renderer='templates/inc/navigation/login-state.html')
+    renderer='templates/inc/navigation/login-state.html',
+    http_cache=60)
 def login_state(request):
     settings = request.registry.settings
     destination = request.params['context-uri'] if request.params.get(
