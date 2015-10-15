@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <link xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
-    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/ueberlaufer-literaturklassiker/" type="jpg" align="left" publication-date="" expires="">
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/tablett/" type="jpg" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
     </image>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
@@ -11,19 +11,19 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-04-23T14:20:10.742489+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-01-21T14:14:46.441656+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-10-01T14:32:32.583261+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-04-23T14:21:10.496976+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-04-23T14:20:25.753734+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-04-23T14:20:25.796379+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-04-23T14:25:42.860696+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-01-21T14:05:55.806529+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-30T15:15:44.834965+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-04-23T14:26:42.672330+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-04-23T14:25:57.911508+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-04-23T14:25:57.953243+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
     <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-04-23T14:20:06.341720+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-04-23T14:25:37.981683+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.seemann</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
@@ -38,7 +38,7 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">link</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:e6ad0c93-d9e5-42e0-82cd-c575cad0e206}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:72851ee6-a44a-4272-9ec8-00a106ea0109}</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">3</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
@@ -57,14 +57,13 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <byline>http://shop.zeit.de/sortiment/musik-und-film/musik/1302/die-zeit-literaturklassiker-fuer-kinder?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=LiteraturklassikerFuerKinder&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.ueberlaeufer.bildtext.literaturklassikerfuerkinder.3346</byline>
-    <title>DIE ZEIT »Literaturklassiker für Kinder«</title>
-    <url>http://shop.zeit.de/sortiment/musik-und-film/musik/1302/die-zeit-literaturklassiker-fuer-kinder?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=LiteraturklassikerFuerKinder&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.ueberlaeufer.bildtext.literaturklassikerfuerkinder.3346</url>
+    <byline>http://shop.zeit.de/sortiment/taschen/maenner/215/exklusive-zeit-tasche-kasten?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=ZirkeltrainingKasten&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.accessoires.bildtext.zirkeltrainingkasten.1550</byline>
+    <title>Tablett `Basic´</title>
+    <url>http://shop.zeit.de/sortiment/taschen/maenner/215/exklusive-zeit-tasche-kasten?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=ZirkeltrainingKasten&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.accessoires.bildtext.zirkeltrainingkasten.1550</url>
     <nofollow>false</nofollow>
   </body>
   <teaser>
-    <title>DIE ZEIT »Literaturklassiker für Kinder«</title>
-    <text>Kinderleicht Literatur erleben – 6 Hörspiele mit Orchesterbegleitung
-</text>
+    <title>Tablett Basic´</title>
+    <text>Elegantes Design aus der Manufaktur side by side</text>
   </teaser>
 </link>

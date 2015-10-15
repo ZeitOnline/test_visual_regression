@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <link xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
-    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/editionen-weltliteratur/" type="jpg" align="left" publication-date="" expires="">
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/jazz/" type="jpg" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
     </image>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
@@ -57,12 +57,12 @@
   </head>
   <body>
     <byline>http://shop.zeit.de/sortiment/buecher/zeit-editionen/1407/zeit-edition-weltliteratur?et=l6VVNm&amp;et_cid=13&amp;et_lid=211&amp;et_sub=Weltliteratur&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.editionen.bildtext.weltliteratur.3999</byline>
-    <title>ZEIT-Edition »Weltliteratur«</title>
+    <title>ZEIT-Edition `Legenden des Jazz´</title>
     <url>http://shop.zeit.de/sortiment/buecher/zeit-editionen/1407/zeit-edition-weltliteratur?et=l6VVNm&amp;et_cid=13&amp;et_lid=211&amp;et_sub=Weltliteratur&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.editionen.bildtext.weltliteratur.3999</url>
     <nofollow>false</nofollow>
   </body>
   <teaser>
-    <title>ZEIT-Edition »Weltliteratur«</title>
-    <text>15 bedeutende Literaturklassiker neu herausgegeben von der ZEIT</text>
+    <title>ZEIT-Edition `Legenden des Jazz´</title>
+    <text>15 einzigartige Jazz-Musiker in einer exklusiven ZEIT-Edition</text>
   </teaser>
 </link>

@@ -53,83 +53,27 @@
     <cluster area="feature" visible="True" visible_mobile="True">
       <region area="lead" visible="True" visible_mobile="True" hide-dupes="True">
         <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-6b49ac7b-9cf6-4996-9f77-07b8f7fde1f9">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/januar-2015/2015-01-21-accessoires-zirkeltrainingkasten" uniqueId="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/januar-2015/2015-01-21-accessoires-zirkeltrainingkasten" year="2015" issue="3" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="http://shop.zeit.de/sortiment/taschen/maenner/215/exklusive-zeit-tasche-kasten?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=ZirkeltrainingKasten&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.accessoires.bildtext.zirkeltrainingkasten.1550" date-last-modified="2015-09-30T15:21:19+00:00" date-first-released="2015-01-21T14:05:55.806529+00:00" date-last-published="2015-04-23T14:26:42.672330+00:00" last-semantic-change="2015-04-23T14:25:37.981683+00:00">
-            <supertitle xsi:nil="true"/>
-            <title py:pytype="str">Zirkeltraining »Kasten«</title>
-            <text py:pytype="str">Unikate von Zirkeltraining aus recyceltem Sportgeräte-Leder</text>
-            <description py:pytype="str">Unikate von Zirkeltraining aus recyceltem Sportgeräte-Leder</description>
-            <byline py:pytype="str">http://shop.zeit.de/sortiment/taschen/maenner/215/exklusive-zeit-tasche-kasten?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=ZirkeltrainingKasten&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.accessoires.bildtext.zirkeltrainingkasten.1550</byline>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/accessoires-zirkeltraining/" type="jpg" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-            </image>
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/bree-weekender" uniqueId="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/bree-weekender" year="2015" issue="3" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="http://shop.zeit.de/sortiment/taschen/maenner/215/exklusive-zeit-tasche-kasten?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=ZirkeltrainingKasten&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.accessoires.bildtext.zirkeltrainingkasten.1550" date-last-modified="2015-09-30T15:21:19+00:00" date-first-released="2015-01-21T14:05:55.806529+00:00" date-last-published="2015-04-23T14:26:42.672330+00:00" last-semantic-change="2015-04-23T14:25:37.981683+00:00">
           </block>
         </container>
         <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f97cc504-3be9-420c-849d-d44c0cead4d5">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/januar-2015/2015-01-08_Ueberlaeufer_Literaturklassiker" uniqueId="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/januar-2015/2015-01-08_Ueberlaeufer_Literaturklassiker" year="2015" issue="3" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="http://shop.zeit.de/sortiment/musik-und-film/musik/1302/die-zeit-literaturklassiker-fuer-kinder?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=LiteraturklassikerFuerKinder&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.ueberlaeufer.bildtext.literaturklassikerfuerkinder.3346" date-last-modified="2015-10-01T14:32:48+00:00" date-first-released="2015-01-21T14:14:46.441656+00:00" date-last-published="2015-04-23T14:21:10.496976+00:00" last-semantic-change="2015-04-23T14:20:06.341720+00:00">
-            <supertitle xsi:nil="true"/>
-            <title py:pytype="str">DIE ZEIT »Literaturklassiker für Kinder«</title>
-            <text py:pytype="str">Kinderleicht Literatur erleben – 6 Hörspiele mit Orchesterbegleitung
-</text>
-            <description py:pytype="str">Kinderleicht Literatur erleben – 6 Hörspiele mit Orchesterbegleitung
-</description>
-            <byline py:pytype="str">http://shop.zeit.de/sortiment/musik-und-film/musik/1302/die-zeit-literaturklassiker-fuer-kinder?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=LiteraturklassikerFuerKinder&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.ueberlaeufer.bildtext.literaturklassikerfuerkinder.3346</byline>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/ueberlaufer-literaturklassiker/" type="jpg" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-            </image>
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/ledernotizbuch" uniqueId="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/ledernotizbuch" year="2015" issue="3" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="http://shop.zeit.de/sortiment/musik-und-film/musik/1302/die-zeit-literaturklassiker-fuer-kinder?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=LiteraturklassikerFuerKinder&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.ueberlaeufer.bildtext.literaturklassikerfuerkinder.3346" date-last-modified="2015-10-01T14:32:48+00:00" date-first-released="2015-01-21T14:14:46.441656+00:00" date-last-published="2015-04-23T14:21:10.496976+00:00" last-semantic-change="2015-04-23T14:20:06.341720+00:00">
           </block>
         </container>
         <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-3bf8b30f-8578-4e8e-be49-87192283a7b6">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/muttertag-2015/muttertag-wein-rheinhessen" uniqueId="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/muttertag-2015/muttertag-wein-rheinhessen" year="2015" issue="18" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="http://shop.zeit.de/sortiment/wein-und-genuss/die-zeit-editionen/2205/zeit-weinedition-rheinhessen?c=2787?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=WeineditionRheinhessen_Muttertag&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.wein.bildtext.weineditionrheinhessenmuttertag.33000" date-last-modified="2015-10-01T14:34:46+00:00" date-first-released="2015-04-29T07:18:13.414530+00:00" date-last-published="2015-04-29T07:18:43.732093+00:00" last-semantic-change="2015-04-29T07:17:39.389638+00:00">
-            <supertitle xsi:nil="true"/>
-            <title py:pytype="str">ZEIT Weinedition »Rheinhessen«</title>
-            <text py:pytype="str">6 herausragende Weine, ausgewählt von der ZEIT</text>
-            <description py:pytype="str">6 herausragende Weine, ausgewählt von der ZEIT</description>
-            <byline py:pytype="str">http://shop.zeit.de/sortiment/wein-und-genuss/die-zeit-editionen/2205/zeit-weinedition-rheinhessen?c=2787?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=WeineditionRheinhessen_Muttertag&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.wein.bildtext.weineditionrheinhessenmuttertag.33000</byline>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/wein-weintrifftfisch/" type="jpg" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-            </image>
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/wein" uniqueId="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/wein" year="2015" issue="18" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="http://shop.zeit.de/sortiment/wein-und-genuss/die-zeit-editionen/2205/zeit-weinedition-rheinhessen?c=2787?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=WeineditionRheinhessen_Muttertag&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.wein.bildtext.weineditionrheinhessenmuttertag.33000" date-last-modified="2015-10-01T14:34:46+00:00" date-first-released="2015-04-29T07:18:13.414530+00:00" date-last-published="2015-04-29T07:18:43.732093+00:00" last-semantic-change="2015-04-29T07:17:39.389638+00:00">
           </block>
         </container>
         <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-4bcac139-0528-4693-827b-c6caffa53978">
-          <block xmlns:ns1="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/januar-2015/2015-01-08_Ueberlaeufer_Duden" uniqueId="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/januar-2015/2015-01-08_Ueberlaeufer_Duden" year="2015" ressort="Angebote" contenttype="link" publication-date="" expires="" ns1:href="http://shop.zeit.de/sortiment/buecher/zeit-editionen/910/zeit-edition-duden?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=ZeitEditionDuden&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.ueberlaeufer.bildtext.zeiteditionduden.5969" date-last-modified="2015-10-01T14:51:05+00:00" date-first-released="2015-01-21T14:17:05.703990+00:00" date-last-published="2015-04-23T14:22:02.638771+00:00" last-semantic-change="2015-04-23T14:20:58.953671+00:00">
-            <supertitle xsi:nil="true"/>
-            <title py:pytype="str">ZEIT-Edition »Duden«</title>
-            <text py:pytype="str">Bibliophile ZEIT-Sonderausgabe des erfolgreichsten deutschen Wörterbuchs</text>
-            <description py:pytype="str">Bibliophile ZEIT-Sonderausgabe des erfolgreichsten deutschen Wörterbuchs</description>
-            <byline py:pytype="str">http://shop.zeit.de/sortiment/buecher/zeit-editionen/910/zeit-edition-duden?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=ZeitEditionDuden&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.ueberlaeufer.bildtext.zeiteditionduden.5969</byline>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/ueberlauefer-duden/" type="jpg" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-            </image>
+          <block xmlns:ns1="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/kinderauto" uniqueId="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/kinderauto" year="2015" ressort="Angebote" contenttype="link" publication-date="" expires="" ns1:href="http://shop.zeit.de/sortiment/buecher/zeit-editionen/910/zeit-edition-duden?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=ZeitEditionDuden&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.ueberlaeufer.bildtext.zeiteditionduden.5969" date-last-modified="2015-10-01T14:51:05+00:00" date-first-released="2015-01-21T14:17:05.703990+00:00" date-last-published="2015-04-23T14:22:02.638771+00:00" last-semantic-change="2015-04-23T14:20:58.953671+00:00">
           </block>
         </container>
         <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-25e87354-c47d-4a22-b0fb-0b017c03dee4">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/muttertag-2015/muttertag-accessoires-tasche-cep" uniqueId="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/muttertag-2015/muttertag-accessoires-tasche-cep" year="2015" issue="18" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="http://shop.zeit.de/geschenkefinder/zum-geburtstag/1606/zeit-cep?c=2856?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=TascheCep_Muttertag&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.accessoires.bildtext.taschecep_muttertag.6277" date-last-modified="2015-10-01T14:53:28+00:00" date-first-released="2015-04-29T07:07:25.792770+00:00" date-last-published="2015-04-29T07:07:59.722967+00:00" last-semantic-change="2015-04-29T07:06:51.053754+00:00">
-            <supertitle xsi:nil="true"/>
-            <title py:pytype="str">Muttertag Tasche »Cep«</title>
-            <text py:pytype="str">Höchste Lederqualität und per Hand für Sie gefertigt</text>
-            <description py:pytype="str">Höchste Lederqualität und per Hand für Sie gefertigt</description>
-            <byline py:pytype="str">http://shop.zeit.de/geschenkefinder/zum-geburtstag/1606/zeit-cep?c=2856?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=TascheCep_Muttertag&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.accessoires.bildtext.taschecep_muttertag.6277</byline>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/accessoires-taschecep/" type="jpg" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-            </image>
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/jazz" uniqueId="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/jazz" year="2015" issue="18" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="http://shop.zeit.de/geschenkefinder/zum-geburtstag/1606/zeit-cep?c=2856?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=TascheCep_Muttertag&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.accessoires.bildtext.taschecep_muttertag.6277" date-last-modified="2015-10-01T14:53:28+00:00" date-first-released="2015-04-29T07:07:25.792770+00:00" date-last-published="2015-04-29T07:07:59.722967+00:00" last-semantic-change="2015-04-29T07:06:51.053754+00:00">
           </block>
         </container>
         <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-935e7a91-0afe-4ec0-aeab-b35461353629">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/januar-2015/2015-01-08_Edition_Weltliteratur" uniqueId="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/januar-2015/2015-01-08_Edition_Weltliteratur" year="2015" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="http://shop.zeit.de/sortiment/buecher/zeit-editionen/1407/zeit-edition-weltliteratur?et=l6VVNm&amp;et_cid=13&amp;et_lid=211&amp;et_sub=Weltliteratur&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.editionen.bildtext.weltliteratur.3999" date-last-modified="2015-10-07T11:07:10+00:00" date-first-released="2015-01-21T14:18:46.064829+00:00" date-last-published="2015-04-23T12:31:29.228155+00:00" last-semantic-change="2015-04-23T12:30:22.833713+00:00">
-            <supertitle xsi:nil="true"/>
-            <title py:pytype="str">ZEIT-Edition »Weltliteratur«</title>
-            <text py:pytype="str">15 bedeutende Literaturklassiker neu herausgegeben von der ZEIT</text>
-            <description py:pytype="str">15 bedeutende Literaturklassiker neu herausgegeben von der ZEIT</description>
-            <byline py:pytype="str">http://shop.zeit.de/sortiment/buecher/zeit-editionen/1407/zeit-edition-weltliteratur?et=l6VVNm&amp;et_cid=13&amp;et_lid=211&amp;et_sub=Weltliteratur&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.editionen.bildtext.weltliteratur.3999</byline>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/editionen-weltliteratur/" type="jpg" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-            </image>
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/tablett" uniqueId="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/tablett" year="2015" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="http://shop.zeit.de/sortiment/buecher/zeit-editionen/1407/zeit-edition-weltliteratur?et=l6VVNm&amp;et_cid=13&amp;et_lid=211&amp;et_sub=Weltliteratur&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.editionen.bildtext.weltliteratur.3999" date-last-modified="2015-10-07T11:07:10+00:00" date-first-released="2015-01-21T14:18:46.064829+00:00" date-last-published="2015-04-23T12:31:29.228155+00:00" last-semantic-change="2015-04-23T12:30:22.833713+00:00">
           </block>
         </container>
       </region>

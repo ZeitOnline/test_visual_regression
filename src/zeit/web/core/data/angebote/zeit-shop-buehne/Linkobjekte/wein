@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <link xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
-    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/wein-weintrifftfisch/" type="jpg" align="left" publication-date="" expires="">
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/wein/" type="jpg" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
     </image>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
@@ -59,13 +59,13 @@
   </head>
   <body>
     <byline>http://shop.zeit.de/sortiment/wein-und-genuss/die-zeit-editionen/2205/zeit-weinedition-rheinhessen?c=2787?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=WeineditionRheinhessen_Muttertag&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.wein.bildtext.weineditionrheinhessenmuttertag.33000</byline>
-    <title>Muttertag ZEIT Weinedition »Rheinhessen«</title>
-    <subtitle>6 herausragende Weine, ausgewählt von der ZEIT</subtitle>
+    <title>ZEIT Weinedition `Württemberg´</title>
+    <subtitle>6 Spitzenweine exklusiv zusammengestellt von der ZEIT</subtitle>
     <url>http://shop.zeit.de/sortiment/wein-und-genuss/die-zeit-editionen/2205/zeit-weinedition-rheinhessen?c=2787?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=WeineditionRheinhessen_Muttertag&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.wein.bildtext.weineditionrheinhessenmuttertag.33000</url>
     <nofollow>false</nofollow>
   </body>
   <teaser>
-    <title>ZEIT Weinedition »Rheinhessen«</title>
-    <text>6 herausragende Weine, ausgewählt von der ZEIT</text>
+    <title>ZEIT Weinedition `Württemberg´</title>
+    <text>6 Spitzenweine exklusiv zusammengestellt von der ZEIT</text>
   </teaser>
 </link>

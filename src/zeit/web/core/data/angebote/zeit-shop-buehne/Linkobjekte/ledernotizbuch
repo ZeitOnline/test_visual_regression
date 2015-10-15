@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <link xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
-    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/accessoires-taschecep/" type="jpg" align="left" publication-date="" expires="">
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/ledernotizbuch/" type="jpg" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
     </image>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
@@ -59,13 +59,13 @@
   </head>
   <body>
     <byline>http://shop.zeit.de/geschenkefinder/zum-geburtstag/1606/zeit-cep?c=2856?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=TascheCep_Muttertag&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.accessoires.bildtext.taschecep_muttertag.6277</byline>
-    <title>Muttertag Tasche »Cep«</title>
-    <subtitle>Höchste Lederqualität und per Hand für Sie gefertigt</subtitle>
+    <title>Ledernotizbuch</title>
+    <subtitle>Das originelle Wickelbuch wird aus edlem Leder per Hand gefertigt.</subtitle>
     <url>http://shop.zeit.de/geschenkefinder/zum-geburtstag/1606/zeit-cep?c=2856?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=TascheCep_Muttertag&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.accessoires.bildtext.taschecep_muttertag.6277</url>
     <nofollow>false</nofollow>
   </body>
   <teaser>
-    <title>Muttertag Tasche »Cep«</title>
-    <text>Höchste Lederqualität und per Hand für Sie gefertigt</text>
+    <title>Ledernotizbuch</title>
+    <text>Das originelle Wickelbuch wird aus edlem Leder per Hand gefertigt.</text>
   </teaser>
 </link>

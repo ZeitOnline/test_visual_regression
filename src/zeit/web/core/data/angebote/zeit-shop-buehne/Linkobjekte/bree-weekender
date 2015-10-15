@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <link xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
-    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/accessoires-zirkeltraining/" type="jpg" align="left" publication-date="" expires="">
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/bree-weekender/" type="jpg" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
     </image>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
@@ -63,7 +63,7 @@
     <nofollow>false</nofollow>
   </body>
   <teaser>
-    <title>Zirkeltraining »Kasten«</title>
-    <text>Unikate von Zirkeltraining aus recyceltem Sportgeräte-Leder</text>
+    <title>BREE Weekender `DIE ZEIT 7´</title>
+    <text>Aus feinem Rindsleder – Exklusiv gefertigt für DIE ZEIT</text>
   </teaser>
 </link>

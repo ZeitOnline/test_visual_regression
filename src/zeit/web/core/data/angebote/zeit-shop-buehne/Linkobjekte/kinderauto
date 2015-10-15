@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <link xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
-    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/ueberlauefer-duden/" type="jpg" align="left" publication-date="" expires="">
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/zeit-shop-buehne/bildergruppen/kinderauto/" type="jpg" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
     </image>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
@@ -57,12 +57,12 @@
   </head>
   <body>
     <byline>http://shop.zeit.de/sortiment/buecher/zeit-editionen/910/zeit-edition-duden?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=ZeitEditionDuden&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.ueberlaeufer.bildtext.zeiteditionduden.5969</byline>
-    <title>ZEIT-Edition »Duden«</title>
+    <title>Kinderauto `Max´</title>
     <url>http://shop.zeit.de/sortiment/buecher/zeit-editionen/910/zeit-edition-duden?et=l6VVNm&amp;et_cid=13&amp;et_lid=210&amp;et_sub=ZeitEditionDuden&amp;wt_zmc=fix.int.zshop.zeitde.produktbuehne.ueberlaeufer.bildtext.zeiteditionduden.5969</url>
     <nofollow>false</nofollow>
   </body>
   <teaser>
-    <title>ZEIT-Edition »Duden«</title>
-    <text>Bibliophile ZEIT-Sonderausgabe des erfolgreichsten deutschen Wörterbuchs</text>
+    <title>Kinderauto `Max´</title>
+    <text>Unterstützt den Gleichgewichtssinn und hilft beim Laufen lernen</text>
   </teaser>
 </link>
