@@ -1,0 +1,46 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+
+<aside class="jobbox {% block modifier %}{% endblock %}">
+    <span class="jobbox__label">Verlagsangebot</span>
+    <div class="jb-box">
+        <div class="jb-box__kicker">
+            {% block kicker %}Aktuelle Jobs im ZEIT Stellenmarkt{% endblock %}
+        </div>
+        <a class="jb-content jb-content--first" href="#">
+                <div class="jb-icon">
+                    <span class="jb-icon__bullet"></span>
+                </div>
+                <div class="jb-text">
+                    <div class="jb-text__title">
+                        Academic positions - Faculty of Kinesiology and Rehabilitation Sciences
+                    </div>
+                    <div class="jb-text__byline">
+                        University of Leuven. Löwen (Belgien)
+                    </div>
+                </div>
+        </a>
+        <a class="jb-content" href="#">
+            <div class="jb-icon">
+                <span class="jb-icon__bullet"></span>
+            </div>
+            <div class="jb-text">
+                <div class="jb-text__title">
+                    Professur - Marketing
+                </div>
+                <div class="jb-text__byline">
+                    Fachhochschule Wedel
+                </div>
+            </div>
+        </a>
+        <span class="jb-action">
+            <div class="jb-button">
+                <span class="jb-button__text">{% block button %}mehr erfahren{% endblock %}</span>
+            </div>
+            {% block link %}
+                <div class="jb-link">
+                    <a class="jb-link__text" href="http://jobs.zeit.de/?wt_mc=zeit_de.intern.zeit_stellenmarkt.zon_hp.ticker.stellenmarkt_startseite.textlink">Zum Stellenmarkt</a>
+                </div>
+            {% endblock %}
+        </span>
+    </div>
+</aside>

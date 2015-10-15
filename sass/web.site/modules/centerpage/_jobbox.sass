@@ -1,43 +1,95 @@
+$bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
 
 .jobbox
     &__label
         @extend %ad-label
-    &--padded
+    &--parquet
         padding: remify(20px) 0 remify(20px) 0
+    /* jobbox in minor is different */
+    &--minor
+        .jb-box
+            background-color: $white
+            padding: remify(10px)
+            border: 1px solid $silver
+            &__kicker
+                line-height: remify(84px)
+                color: $grey--mid-dark
+                font-size: em(22px)
+                text-align: center
+                letter-spacing: $letter-spacing-s
+                background: $silver url($bg_kicker) no-repeat right
+                background-size: cover
+        .jb-content
+            display: block
+            width: 100%
+        .jb-icon
+            display: table-cell
+            &__bullet
+                width: remify(30px)
+                height: remify(30px)
+                top: remify(20px)
+                display: block
+                background-color: rgba(22, 135, 80, .8)
+                position: relative
+                +border-radius(20px)
+                +on-interaction
+                    background-color: rgba(22, 135, 80, 1)
+                    cursor: pointer
+                &:after
+                    content: '\203A'
+                    color: $white
+                    font-size: remify(30px)
+                    position: absolute
+                    top: remify(-9px)
+                    left: remify(11px)
+        .jb-text
+            display: table-cell
+            padding-left: remify(15px)
+            &__title
+                font-size: em(15px)
+                line-height: em(18px)
+                color: $grey--mid
+                margin-bottom: remify(3px)
+            &__byline
+                color: $zon_grey
+                font-size: em(14px)
+                line-height: em(17px)
+                margin-bottom: remify(10px)
+                text-overflow: ellipsis
 
 .jb-box
-    background-color: $seashell
+    background-color: $zon-seashell
     padding: remify(20px)
-    +respond-min($break-desktop-min)
-        display: table
-
-.jb-content
-    display: block
-    +respond-min($break-desktop-min)
-        display: table-cell
-        vertical-align: middle
-        width: 65%
     &__kicker
         color: $red
         font-size: em(13px)
+        line-height: em(15px)
         font-weight: bold
         letter-spacing: $letter-spacing-l
         margin-bottom: remify(5px)
+
+.jb-content
+    display: none
+    &--first
+        display: block
         +respond-min($break-desktop-min)
-            font-size: em(15px)
+            display: table-cell
+    +respond-min($break-desktop-min)
+        vertical-align: middle
+        width: 65%
+
+.jb-text
     &__title
         font-weight: bold
         font-size: em(18px)
-        color: $mine-shaft
+        line-height: em(22px)
+        color: $zon-charcoal
         margin-bottom: remify(5px)
-        +respond-min($break-desktop-min)
-            font-size: em(22px)
     &__byline
-        color: $dove
+        color: $zon_grey
         font-size: em(14px)
+        line-height: em(17px)
         letter-spacing: $letter-spacing-s
-        +respond-min($break-desktop-min)
-            font-size: em(17px)
 
 .jb-action
     display: block
@@ -59,11 +111,11 @@
 
 .jb-link
     &__text
-        color: $dove
+        color: $zon_grey
         font-size: em(14px)
+        line-height: em(17px)
         border-bottom: 1px solid rgba(112, 112, 112, 0.5)
         letter-spacing: $letter-spacing-s
-        +respond-min($break-desktop-min)
-            font-size: em(17px)
         +on-interaction
             border-bottom: 1px solid rgba(112, 112, 112, 1)
+
