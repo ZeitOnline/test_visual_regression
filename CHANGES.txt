@@ -1,10 +1,24 @@
 Change log for zeit.web
 =======================
 
-2.13.3 (unreleased)
+2.13.4 (unreleased)
 -------------------
 
+- MAINT: Fix adcontroller handle in ZMO galleries
+
+- ZON-2292: Add lazyloading for centerpages
+
 - FIX: Fix display of future dates
+
+
+2.13.3 (2015-10-14)
+-------------------
+
+- MAINT: update DNS Prefetch to actually used hosts
+
+- MAINT: Exclude ZMO from article lineage query
+
+- MAINT: adjust adBlocker Tracking to GTM dataLayer conventions
 
 
 2.13.2 (2015-10-14)

@@ -685,6 +685,8 @@ class Content(Base):
                     'type', 'article'),
                 lq.not_(
                     lq.field('uniqueId', self.context.uniqueId)),
+                lq.not_(
+                    lq.field('ressort', 'zeit-magazin')),
                 lq.field_raw(
                     'product_id', lq.or_(
                         'ZEDE', 'ZEI', 'ZECH', 'ZEC', 'ZEOE', 'ZES', 'ZTWI',

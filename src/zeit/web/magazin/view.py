@@ -63,6 +63,8 @@ class Base(zeit.web.core.view.Base):
             return 'zm_index'
         if self.type == 'centerpage':
             return 'zm_centerpage'
+        if self.type == 'gallery':
+            return 'zm_galerie'
         return 'zm_artikel'
 
     @zeit.web.reify
