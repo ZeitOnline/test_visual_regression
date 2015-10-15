@@ -10,9 +10,13 @@ Change log for zeit.web
 
 - ZON-2321: Nächster-Artikel-Pfeile von Advertorials ausschließen
 
+- ZON-2318: Fallback für Related mit unveröffentlichtem/fehlendem Bild
+
 
 2.13.3 (2015-10-14)
 -------------------
+
+- MAINT: update DNS Prefetch to actually used hosts
 
 - MAINT: Exclude ZMO from article lineage query
 
