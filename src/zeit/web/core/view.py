@@ -723,11 +723,7 @@ class Content(Base):
 
     @zeit.web.reify
     def nextreads(self):
-        nextread = zeit.web.core.interfaces.INextread(self.context)
-        if nextread:
-            return [nextread]
-        else:
-            return []
+        return zeit.web.core.interfaces.INextreadlist(self.context)
 
     @zeit.web.reify
     def comment_counts(self):

@@ -638,6 +638,27 @@ class ZONNextread(Nextread):
         super(ZONNextread, self).__init__(context, args)
 
 
+@grokcore.component.implementer(zeit.web.core.interfaces.INextreadlist)
+@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
+def nextreadlist(context):
+    result = []
+    for name, nextread in sorted(zope.component.getAdapters(
+            (context,), zeit.web.core.interfaces.INextread)):
+        if nextread:
+            result.append(nextread)
+    return result
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.INextreadlist)
+@grokcore.component.adapter(zeit.magazin.interfaces.IZMOContent)
+def zmo_nextreadlist(context):
+    nextread = zeit.web.core.interfaces.INextread(context)
+    if nextread:
+        return [nextread]
+    else:
+        return []
+
+
 @grokcore.component.implementer(zeit.web.core.interfaces.IBreakingNews)
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 class BreakingNews(object):
