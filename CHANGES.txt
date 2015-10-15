@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2292: Add lazyloading for centerpages
 
+- ZON-2321: Nächster-Artikel-Pfeile von Advertorials ausschließen
+
 
 2.13.3 (2015-10-14)
 -------------------

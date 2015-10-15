@@ -1,6 +1,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-{% if view.featuretoggle_articlelineage %}
+{% if view.featuretoggle_articlelineage and view.lineage %}
 <div class="article-lineage js-fix-position">
     {% set predecessor, successor = view.lineage %}
     <a href="{{ predecessor.uniqueId | create_url }}" class="article-lineage__link article-lineage__link--prev" data-id="articlebottom.article-lineage.prev..{{ predecessor.title | format_webtrekk }}">

@@ -1033,3 +1033,8 @@ def test_article_lineage_should_be_fixed_after_scrolling(
                    (By.CSS_SELECTOR, '.article-lineage--fixed')))
     except TimeoutException:
         assert False, 'Fixed Lineage not visible after scrolled into view'
+
+
+def test_article_lineage_should_not_render_on_advertorials(testbrowser):
+    browser = testbrowser('/zeit-online/article/angebot')
+    assert len(browser.cssselect('.article-lineage')) == 0
