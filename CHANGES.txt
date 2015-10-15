@@ -4,6 +4,8 @@ Change log for zeit.web
 2.13.4 (unreleased)
 -------------------
 
+- MAINT: Fix adcontroller handle in ZMO galleries
+
 - ZON-2292: Add lazyloading for centerpages
 
 
