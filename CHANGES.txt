@@ -4,6 +4,8 @@ Change log for zeit.web
 2.13.4 (unreleased)
 -------------------
 
+- ZON-1975: Update ZMO parquet style
+
 - MAINT: Fix video preloading (because it costs too much money)
 
 - MAINT: Fix adcontroller handle in ZMO galleries
