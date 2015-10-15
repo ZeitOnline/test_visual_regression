@@ -44,6 +44,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
                         $( elements ).parent().replaceWith( $teasers.parent() );
                         images.scale( $teasers );
                         $teasers.velocity( 'transition.slideRightBigIn', {
+                            display: '', // remove the property altogether and return to previous display value from CSS
                             duration: duration,
                             stagger: 50
                         });
