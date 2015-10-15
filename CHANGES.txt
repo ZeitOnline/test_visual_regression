@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-2.13.4 (unreleased)
--------------------
+2.14 (2015-10-15)
+-----------------
 
 - MAINT: Animate chronological article navigation
 
