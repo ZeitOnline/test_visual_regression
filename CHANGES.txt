@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - MAINT: Animate chronological article navigation
 
+- ZON-1975: Update ZMO parquet style
+
 - MAINT: Fix video preloading (because it costs too much money)
 
 - MAINT: Fix adcontroller handle in ZMO galleries

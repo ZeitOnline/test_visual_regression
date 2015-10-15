@@ -8,8 +8,12 @@
                 {{ area.title | hide_none }}
             </span>
         {% else %}
-            <a class="parquet-meta__title" href="{{ area.referenced_cp.uniqueId | create_url }}">
+            <a class="parquet-meta__title{% if provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent') %} parquet-meta__title--zmo{% endif %}" href="{{ area.referenced_cp.uniqueId | create_url }}">
+            {% if provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent') %}
+                {{ lama.use_svg_icon('logo-zmo', 'parquet-meta__logo parquet-meta__logo--zmo', request) }}
+            {% else %}
                 {{ area.title | hide_none }}
+            {% endif %}
             </a>
         {% endif %}
 
