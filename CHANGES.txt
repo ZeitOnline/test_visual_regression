@@ -14,6 +14,8 @@ Change log for zeit.web
 2.13.3 (2015-10-14)
 -------------------
 
+- MAINT: update DNS Prefetch to actually used hosts
+
 - MAINT: Exclude ZMO from article lineage query
 
 - MAINT: adjust adBlocker Tracking to GTM dataLayer conventions
