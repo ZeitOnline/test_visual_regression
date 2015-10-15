@@ -1,4 +1,4 @@
-$article-lineage-transition-duration: .5s
+$article-lineage-transition-duration: .4s
 
 .article-lineage
 	+transition(opacity .5s)
@@ -22,7 +22,7 @@ $article-lineage-transition-duration: .5s
 		position: absolute
 		top: auto
 	&__link
-		+transition(max-width $article-lineage-transition-duration, box-shadow .1s ($article-lineage-transition-duration - 0.1s)) // remove box-shadow at transition end
+		+transition(max-width $article-lineage-transition-duration ease-out, box-shadow .1s ($article-lineage-transition-duration - 0.1s)) // remove box-shadow at transition end
 		background: $zon_lighter_grey
 		box-shadow: none
 		color: $zon-charcoal
