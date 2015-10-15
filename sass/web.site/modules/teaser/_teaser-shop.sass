@@ -12,9 +12,20 @@
 	&__button
 		@extend %teaser-bar-group__button
 
+		&--default
+			.js &
+				+respond-min($break-desktop-min)
+					display: none
+		&--jsdesktop
+			.js &
+				+respond-max($break-desktop-min)
+					display: none
+			.no-js &
+				display: none
+
 	&__shuffle-icon
 		@extend %teaser-bar-group__shuffle-icon
-		display: none
+
 
 .teaser-shop
 	@extend %teaser-bar
