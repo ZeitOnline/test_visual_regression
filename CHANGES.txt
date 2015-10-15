@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - MAINT: Animate chronological article navigation
 
+- MAINT: Fix video preloading (because it costs too much money)
+
 - MAINT: Fix adcontroller handle in ZMO galleries
 
 - ZON-2292: Add lazyloading for centerpages
