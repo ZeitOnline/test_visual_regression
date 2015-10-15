@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
+import random
 
 import babel.dates
 import grokcore.component
@@ -23,6 +24,7 @@ import zeit.newsletter.interfaces
 import zeit.web
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
+import zeit.web.core.sources
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
@@ -636,6 +638,50 @@ class ZONNextread(Nextread):
         rel = zeit.cms.related.interfaces.IRelatedContent(context, None)
         args = rel.related if rel and rel.related else ()
         super(ZONNextread, self).__init__(context, args)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.INextread)
+@grokcore.component.adapter(
+    zeit.cms.interfaces.ICMSContent, name="advertisement")
+class AdvertisementNextread(Nextread):
+
+    image_pattern = '940x400'
+    layout_id = 'advertisement'
+
+    def __init__(self, context):
+        super(AdvertisementNextread, self).__init__(context)
+        metadata = zeit.cms.content.interfaces.ICommonMetadata(context, None)
+        if metadata is None:
+            return
+        nextread = self.find_nextread(metadata.ressort, metadata.sub_ressort)
+        if nextread is not None:
+            self.append(nextread)
+
+    def find_nextread(self, ressort, subressort):
+        nextread = self.random_item(
+            zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(
+                ressort, subressort))
+        if nextread is None:
+            nextread = self.random_item(
+                zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(ressort, None))
+        return nextread
+
+    def random_item(self, folder):
+        if not folder:
+            return None
+        if self.advertisement_nextread_folder not in folder:
+            return None
+        folder = folder[self.advertisement_nextread_folder]
+        key = random.sample(folder.keys(), 1)
+        if not key:
+            return None
+        return folder[key[0]]
+
+    @property
+    def advertisement_nextread_folder(self):
+        return zope.component.getUtility(
+            zeit.web.core.interfaces.ISettings).get(
+                'advertisement_nextread_folder', '')
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.INextreadlist)
