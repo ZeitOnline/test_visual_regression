@@ -45,8 +45,6 @@
 
         init: function() {
 
-            var that = this;
-
             // only use this on Desktop.
             // OPTIMIZE: move this to site.js, so we dont have to check on every instance?
             if ( window.ZMO.breakpoint.get() !== 'desktop' ) {
@@ -61,8 +59,7 @@
                 return;
             }
 
-            // OPTIMIZE: wieso geht das nicht ohne die explizite Übergabe von that in handleScrolling?
-            $( window ).on( 'scroll', $.throttle( function() { that.handleScrolling( that ); }, 100 ) );
+            $( window ).on( 'scroll', $.throttle( this.handleScrolling, 100 ) );
 
         },
 
@@ -114,9 +111,9 @@
 
         },
 
-        handleScrolling: function( that ) {
+        handleScrolling: function() {
 
-            that.calculateArticlePositions();
+            this.calculateArticlePositions();
             // In 2015, we need multiple lines of code to detect the scrolling position
             // (https://developer.mozilla.org/de/docs/Web/API/Window/scrollY)
             this.currentPosition = this.supportPageOffset ?
