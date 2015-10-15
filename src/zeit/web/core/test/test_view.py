@@ -493,3 +493,12 @@ def test_cp2015_redirect_can_be_disabled(application):
     settings['redirect_from_cp2015'] = 'False'
     # assert: no HTTPFound is raised.
     view()
+
+
+def test_content_view_should_provide_lineage_property(
+        application, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    content = zeit.web.core.view.Content(context, dummy_request)
+    assert len(content.lineage) == 2
+    assert all(isinstance(l, dict) for l in content.lineage)

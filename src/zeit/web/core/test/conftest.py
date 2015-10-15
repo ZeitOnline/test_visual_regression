@@ -13,6 +13,7 @@ import plone.testing.zodb
 import pyramid.response
 import pyramid.static
 import pyramid.testing
+import pysolr
 import pytest
 import repoze.bitblt.processor
 import selenium.webdriver
@@ -181,6 +182,7 @@ def app_settings(mockserver):
         'debug.propagate_jinja_errors': True,
         'debug.enable_profiler': False,
         'dev_environment': True,
+        'enable_article_lineage': True
     }
 
 
@@ -247,6 +249,7 @@ def application_session(app_settings, request):
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     factory = zeit.web.core.application.Application()
     app = factory({}, **app_settings)
+    zope.component.provideUtility(MockSolr())
     # ZODB needs to come after ZCML is set up by the Application.
     # Putting it in here is simpler than adding yet another fixture.
     ZODB_LAYER.setUp()
@@ -656,3 +659,25 @@ class Browser(zope.testbrowser.browser.Browser):
         """Return a dictionary of the parsed json body if available."""
         if self.contents is not None:
             return json.loads(self.contents)
+
+
+class MockSolr(object):
+
+    zope.interface.implements(zeit.solr.interfaces.ISolr)
+
+    def __init__(self):
+        self.results = []
+
+    def search(self, q, rows=10, **kw):
+        return pysolr.Results(self.results, len(self.results))
+
+    def update_raw(self, xml, **kw):
+        pass
+
+
+@pytest.fixture
+def datasolr(request):
+    previous = zope.component.queryUtility(zeit.solr.interfaces.ISolr)
+    if previous is not None:
+        request.addfinalizer(lambda: zope.component.provideUtility(previous))
+    zope.component.provideUtility(zeit.web.core.sources.Solr())
