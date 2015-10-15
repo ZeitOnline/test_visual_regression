@@ -1,8 +1,32 @@
 Change log for zeit.web
 =======================
 
-2.13.3 (unreleased)
+2.15 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.14 (2015-10-15)
+-----------------
+
+- MAINT: Animate chronological article navigation
+
+- ZON-1975: Update ZMO parquet style
+
+- MAINT: Fix video preloading (because it costs too much money)
+
+- MAINT: Fix adcontroller handle in ZMO galleries
+
+- ZON-2292: Add lazyloading for centerpages
+
+- ZON-2318: Fallback für Related mit unveröffentlichtem/fehlendem Bild
+
+
+2.13.3 (2015-10-14)
 -------------------
+
+- MAINT: update DNS Prefetch to actually used hosts
 
 - MAINT: Exclude ZMO from article lineage query
 

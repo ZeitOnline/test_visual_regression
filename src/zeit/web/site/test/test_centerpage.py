@@ -5,7 +5,6 @@ import urllib2
 
 import lxml.html
 import pyramid.testing
-import pysolr
 import pytest
 import zope.component
 
