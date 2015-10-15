@@ -142,16 +142,11 @@ def login_state(request):
             settings.get('sso_cookie')):
         log.warn("SSO Cookie present, but not authenticated")
 
-    if settings['sso_activate']:
-        info['login'] = u"{}/anmelden?url={}".format(
+    info['login'] = u"{}/anmelden?url={}".format(
+        settings['sso_url'], destination)
+    info['logout'] = u"{}/abmelden?url={}".format(
             settings['sso_url'], destination)
-        info['logout'] = u"{}/abmelden?url={}".format(
-            settings['sso_url'], destination)
-    else:
-        info['login'] = u"{}/user/login?destination={}".format(
-            settings['community_host'], destination)
-        info['logout'] = u"{}/user/logout?destination={}".format(
-            settings['community_host'], destination)
+
     if request.authenticated_userid and 'user' in request.session:
         info['user'] = request.session['user']
         info['profile'] = "{}/user".format(settings['community_host'])
