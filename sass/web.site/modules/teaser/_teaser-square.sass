@@ -111,6 +111,8 @@ $layout: ".teaser-square"
 		margin-top: em(26px)
 		width: em(183px)
 		fill: $white // IE 9,10 fix
+		+old-ie
+			display: block
 
 	&--graphic
 		#{$layout}__container
