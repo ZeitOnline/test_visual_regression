@@ -34,7 +34,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
             if ( nextPageSource ) {
                 $shuffleButton.data( 'sourceurl', nextPageSource );
             } else {
-                $shuffleButton.velocity( { opacity: 0 } );
+                $shuffleButton.velocity( { opacity: 0 }, { visibility: 'hidden' } );
             }
 
             $galleryArea.find( selector ).velocity( 'transition.slideLeftBigOut', {
