@@ -9,17 +9,35 @@
     $.fn.animateJobs = function() {
 
         var box = {
-            animateJobs: function( $jobs ) {
-                window.console.debug( 'yes2' );
+            $jobs: false,
+            maxJobs: 0,
+            current: 0,
+            getJobList: function( $box ) {
+                return ( $box.find( '.jb-content' ) );
             }
         };
 
+        function animateJobs() {
+
+            console.debug( box.$jobs[box.current] );
+
+            $( box.$jobs[box.current] ).hide();
+
+            if ( box.current !== box.maxJobs ) {
+                box.current++;
+            } else {
+                box.current = 0;
+            }
+
+            $( box.$jobs[box.current] ).show();
+
+        }
+
         //run through search element and return object
         return this.each( function() {
-
-            var jobs = $( this ).find( '.jb-content' );
-            setInterval( box.animateJobs( jobs ), 100 );
-
+            box.$jobs = box.getJobList( $( this ) );
+            box.maxJobs = box.$jobs.length - 1;
+            setInterval( animateJobs, 5000 );
         });
     };
 
