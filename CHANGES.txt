@@ -6,11 +6,15 @@ Change log for zeit.web
 
 - MAINT: Animate chronological article navigation
 
+- MAINT: Fix adcontroller handle in ZMO galleries
+
 - ZON-2292: Add lazyloading for centerpages
 
 
 2.13.3 (2015-10-14)
 -------------------
+
+- MAINT: update DNS Prefetch to actually used hosts
 
 - MAINT: Exclude ZMO from article lineage query
 
