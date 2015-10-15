@@ -1,7 +1,9 @@
 .teaser-shop-group
 	&__container
+		padding-bottom: remify(10px)
 		+respond-min($break-tablet-min)
-			+justify-children-horizontally('.teaser-shop') // more old-skool
+			padding-bottom: 0
+			+justify-children-horizontally('.teaser-shop')
 			margin: auto
 			width: remify(620px) // 2 * teaser à 300px + margin
 		+respond-min($break-desktop-min)

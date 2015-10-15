@@ -7,6 +7,8 @@
 		margin: 0
 	&--zeitshop
 		text-align: center
+		+respond-min($break-tablet-min)
+			text-align: left
 
 	&__title
 		font-size: remify(21px)
@@ -16,6 +18,11 @@
 		margin: 0
 		+respond-min($break-desktop-min)
 			font-size: remify(24px)
+
+		&--zeitshop
+			display: block
+			+on-interaction
+				color: $zon_grey
 
 	&__link
 		bottom: remify(24px)
@@ -32,6 +39,8 @@
 
 		&--zeitshop
 			display: none
+			+respond-min($break-tablet-min)
+				display: inline
 
 		+link
 			color: $zon_dark_grey

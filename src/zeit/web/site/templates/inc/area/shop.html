@@ -3,18 +3,18 @@
 {% set module_layout = 'teaser-shop' %}
 
 {% block before_module_list %}
-    {% set tracking_slug = '{}...{}.{}'.format(region_loop.index, '-'.join([area.kind, module_layout]), 'alle_shopangebote') %}
+	{% set tracking_slug = '{}...{}'.format(region_loop.index, '-'.join([area.kind, module_layout])) %}
 	<div class="section-heading section-heading--unpadded section-heading--zeitshop">
-	    <h3 class="section-heading__title">
-	    	<a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=Logo&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.logo.zeitshop.1">
-	    	{{ lama.use_svg_icon('logo-zeitshop', 'section-heading__logo--zeitshop', request) }}
-	    	</a>
-	    </h3>
-	    <a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=Logo&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.logo.zeitshop.1"
-	       class="section-heading__link section-heading__link--unpadded section-heading__link--zeitshop"
-	        {#- if tracking_slug %} data-id="{{ tracking_slug }}"{% endif #}>
-	        <span class="section-heading__text">Alle Angebote im Shop</span>
-	    </a>
+		<a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=Logo&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.logo.zeitshop.1"
+		   class="section-heading__title section-heading__title--zeitshop"
+		   data-id="{{ tracking_slug }}.logo">
+		{{ lama.use_svg_icon('logo-zeitshop', 'section-heading__logo--zeitshop', request) }}
+		</a>
+		<a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=zumShop&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.link.zeitshop.1"
+		   class="section-heading__link section-heading__link--unpadded section-heading__link--zeitshop"
+		   data-id="{{ tracking_slug }}.alleangebote">
+			<span class="section-heading__text">Alle Angebote im Shop</span>
+		</a>
 	</div>
 {% endblock %}
 
@@ -25,12 +25,10 @@
 {% endblock %}
 
 {% block after_module_list %}
-	{% if area.next_page %}
-		<a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=Logo&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.logo.zeitshop.1"
-			class="button {{ module_layout }}-group__button js-gallery-teaser-shuffle"
-			data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p={{ area.next_page }}">
-			{{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), request) }}
-			Alle Angebote <span>im Shop</span>
-		</a>
-	{% endif %}
+	<a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=Logo&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.logo.zeitshop.1"
+		class="button {{ module_layout }}-group__button {% if area.next_page %}js-gallery-teaser-shuffle{% endif %}"
+		data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p={{ area.next_page }}">
+		{{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), request) }}
+		Alle Angebote
+	</a>
 {% endblock %}
