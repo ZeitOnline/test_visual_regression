@@ -7,7 +7,7 @@
         {# TODO: use Icon as background image via CSS ? #}
         {{ lama.use_svg_icon('arrow-articlelineage-left', 'article-lineage__link-icon article-lineage__link-icon--prev', request) }}
         <span class="article-lineage__link-text article-lineage__link-text--prev">
-            <span class="article-lineage__link-kicker">{% if successor.uniqueId == 'http://xml.zeit.de/index' %}ZEIT ONLINE{% else %}Voriger Artikel{% endif %}</span>
+            <span class="article-lineage__link-kicker">{% if predecessor.uniqueId == 'http://xml.zeit.de/index' %}ZEIT ONLINE{% else %}Voriger Artikel{% endif %}</span>
             <span class="article-lineage__link-title">{{ predecessor.title | hide_none }}</span>
         </span>
     </a>
