@@ -27,6 +27,10 @@
 	& + & + &
 		+respond-max($break-desktop-min)
 			display: none
+	+respond-min($break-desktop-min)
+		box-shadow: none
+		+on-interaction
+			box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.07)
 
 	&__media
 		@extend %teaser-bar__media
@@ -48,3 +52,9 @@
 		padding-top: remify(10px)
 		&:after
 			content: "\0020\25B8" // No-Break Space and ▸ = Black Right-Pointing Small Triangle
+
+		+respond-min($break-desktop-min)
+			color: $zon_grey
+			.teaser-shop &
+				+on-interaction
+					color: $zon-charcoal
