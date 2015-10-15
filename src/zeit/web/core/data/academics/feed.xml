@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+  <channel>
+    <title>jobs.zeit.de - Stellenmarkt</title>
+    <link>http://jobs.zeit.de</link>
+    <description>jobs.zeit.de</description>
+    <pubDate>Thu, 15 Oct 2015 12:57:04 GMT</pubDate>
+    <dc:date>2015-10-15T12:57:04Z</dc:date>
+    <image>
+      <title>jobs.zeit.de - Stellenmarkt</title>
+      <url>http://jobs.zeit.de/images/zeit_logo.gif</url>
+      <link>http://jobs.zeit.de</link>
+    </image>
+    <item>
+      <title>Referent Gesundheitsschutz (m/w)</title>
+      <link>http://jobs.zeit.de/jobs/sankt_augustin_referent_gesundheitsschutz_m_w_118203.html</link>
+      <description>Deutsche Gesetzliche Unfallversicherung (DGUV)</description>
+      <enclosure url="%HOST%academics/images/dguv.png" type="image/png" />
+      <pubDate>Thu, 17 Sep 2015 10:00:00 GMT</pubDate>
+      <guid>http://jobs.zeit.de/jobs/sankt_augustin_referent_gesundheitsschutz_m_w_118203.html</guid>
+      <dc:creator>Deutsche Gesetzliche Unfallversicherung (DGUV)</dc:creator>
+      <dc:date>2015-09-17T10:00:00Z</dc:date>
+      <g:condition>new</g:condition>
+      <g:availability>in stock</g:availability>
+      <g:price>0.0</g:price>
+    </item>
+    <item>
+      <title>Academic positions - Faculty of Kinesiology and Rehabilitation Sciences</title>
+      <link>http://jobs.zeit.de/jobs/loewen_belgien_academic_positions_-_faculty_of_kinesiology_and_rehabilitation_sciences_118736.html</link>
+      <description>University of Leuven</description>
+      <enclosure url="%HOST%academics/images/aarhus.png" type="image/png" />
+      <pubDate>Tue, 06 Oct 2015 16:00:00 GMT</pubDate>
+      <guid>http://jobs.zeit.de/jobs/loewen_belgien_academic_positions_-_faculty_of_kinesiology_and_rehabilitation_sciences_118736.html</guid>
+      <dc:creator>University of Leuven</dc:creator>
+      <dc:date>2015-10-06T16:00:00Z</dc:date>
+      <g:condition>new</g:condition>
+      <g:availability>in stock</g:availability>
+      <g:price>0.0</g:price>
+    </item>
+    <item>
+      <title>Vorstandssprecher (m/w)</title>
+      <link>http://jobs.zeit.de/jobs/bad_waldsee_vorstandssprecher_m_w_118098.html</link>
+      <description>St. Elisabeth-Stiftung über Dr. Heimeier &amp; Partner, Management- und Personalberatung GmbH</description>
+      <enclosure url="%HOST%academics/images/zuerich.png" type="image/png" />
+      <pubDate>Thu, 17 Sep 2015 10:00:00 GMT</pubDate>
+      <guid>http://jobs.zeit.de/jobs/bad_waldsee_vorstandssprecher_m_w_118098.html</guid>
+      <dc:creator>St. Elisabeth-Stiftung über Dr. Heimeier &amp; Partner, Management- und Personalberatung GmbH</dc:creator>
+      <dc:date>2015-09-17T10:00:00Z</dc:date>
+      <g:condition>new</g:condition>
+      <g:availability>in stock</g:availability>
+      <g:price>0.0</g:price>
+    </item>
+  </channel>
+</rss>
