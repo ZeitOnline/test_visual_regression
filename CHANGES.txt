@@ -7,6 +7,14 @@ Change log for zeit.web
 - Nothing changed yet.
 
 
+2.14.1 (2015-10-15)
+-------------------
+
+- FIX: Fix lazy loading images initial
+
+- ZON-2321: Nächster-Artikel-Pfeile von Advertorials ausschließen
+
+
 2.14 (2015-10-15)
 -----------------
 
