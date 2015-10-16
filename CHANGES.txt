@@ -4,6 +4,8 @@ Change log for zeit.web
 2.15 (unreleased)
 -----------------
 
+- ZON-1937: Add ze.tt parquet
+
 - ZON-2036: Bildrechte im Footer von CPs
 
 - FIX: Fix display of future dates
