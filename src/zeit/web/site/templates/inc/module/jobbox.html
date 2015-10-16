@@ -6,45 +6,17 @@
         <div class="jb-box__kicker">
             {% block kicker %}Aktuelle Jobs im ZEIT Stellenmarkt{% endblock %}
         </div>
-        <a class="jb-content" href="#">
-                <div class="jb-icon">
-                    <span class="jb-icon__bullet"></span>
-                </div>
-                <div class="jb-text">
-                    <div class="jb-text__title">
-                        Academic positions - Faculty of Kinesiology and Rehabilitation Sciences
-                    </div>
-                    <div class="jb-text__byline">
-                        University of Leuven. Löwen (Belgien)
-                    </div>
-                </div>
-        </a>
-        <a class="jb-content jb-content--show" href="#">
+        {% for teaser in module[:3] %}
+        <a class="jb-content{% if loop.first %} jb-content--first{% endif %}" href="{{ teaser.url }}">
             <div class="jb-icon">
                 <span class="jb-icon__bullet"></span>
             </div>
             <div class="jb-text">
-                <div class="jb-text__title">
-                    Professur - Marketing
-                </div>
-                <div class="jb-text__byline">
-                    Fachhochschule Wedel
-                </div>
+                <div class="jb-text__title">{{ teaser.title }}</div>
+                <div class="jb-text__byline">{{ teaser.text }}</div>
             </div>
         </a>
-        <a class="jb-content" href="#">
-            <div class="jb-icon">
-                <span class="jb-icon__bullet"></span>
-            </div>
-            <div class="jb-text">
-                <div class="jb-text__title">
-                    Research Assistant (f/m) Waste Management
-                </div>
-                <div class="jb-text__byline">
-                    United Nations University (UNU)
-                </div>
-            </div>
-        </a>
+        {% endfor %}
         <span class="jb-action">
             <div class="jb-button">
                 <span class="jb-button__text">{% block button %}mehr erfahren{% endblock %}</span>
@@ -57,3 +29,18 @@
         </span>
     </div>
 </aside>
+
+<!--
+<a class="jb-content" href="#">
+                <div class="jb-icon">
+                    <span class="jb-icon__bullet"></span>
+                </div>
+                <div class="jb-text">
+                    <div class="jb-text__title">
+                        Academic positions - Faculty of Kinesiology and Rehabilitation Sciences
+                    </div>
+                    <div class="jb-text__byline">
+                        University of Leuven. Löwen (Belgien)
+                    </div>
+                </div>
+        </a>-->

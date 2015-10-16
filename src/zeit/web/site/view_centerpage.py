@@ -448,18 +448,13 @@ class LegacyCenterpage(Centerpage):
             if area.kind != 'parquet':
                 continue
             for block in area.values():
-                if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(block):
-                    if block.cpextra != 'parquet-spektrum':
-                        continue
-                    legacy = zeit.web.site.area.spektrum.HPFeed()
-                else:
-                    try:
-                        legacy = zope.component.getMultiAdapter(
-                            (area, block),
-                            zeit.content.cp.interfaces.IRenderedArea)
-                    except (zope.component.interfaces.ComponentLookupError,
-                            AttributeError, TypeError):
-                        continue
+                try:
+                    legacy = zope.component.getMultiAdapter(
+                        (area, block),
+                        zeit.content.cp.interfaces.IRenderedArea)
+                except (zope.component.interfaces.ComponentLookupError,
+                        AttributeError, TypeError):
+                    continue
                 regions.append(LegacyRegion([legacy], kind='parquet'))
 
         return regions

@@ -4,7 +4,9 @@ import datetime
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
 import lxml.etree
 import mock
 import pyramid.testing
@@ -988,3 +990,47 @@ def test_article_advertorial_pages_should_render_correctly(testbrowser):
     assert browser.cssselect('.advertorial-marker')
     browser = testbrowser('/zeit-online/article/angebot/komplettansicht')
     assert browser.cssselect('.advertorial-marker ')
+
+
+def test_article_lineage_should_render_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect('.article-lineage__link-text--prev')) == 1
+    assert len(browser.cssselect('.article-lineage__link-text--next')) == 1
+
+
+def test_article_lineage_should_be_hidden_on_small_screens(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/article/zeit' % testserver.url)
+    driver.execute_script("window.scrollTo(0, 500)")
+    lineage_links = driver.find_elements_by_css_selector(
+        '.article-lineage__link')
+    lineage_linktexts = driver.find_elements_by_css_selector(
+        '.article-lineage__link-text')
+
+    if screen_size[0] < 980:
+        assert not lineage_links[0].is_displayed()
+        assert not lineage_links[1].is_displayed()
+        assert not lineage_linktexts[0].is_displayed()
+        assert not lineage_linktexts[1].is_displayed()
+
+    if screen_size[0] >= 980:
+        assert lineage_links[0].is_displayed()
+        assert lineage_links[1].is_displayed()
+        assert not lineage_linktexts[0].is_displayed()
+        assert not lineage_linktexts[1].is_displayed()
+
+
+def test_article_lineage_should_be_fixed_after_scrolling(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(980, 1024)
+    driver.get('%s/zeit-online/article/zeit' % testserver.url)
+    driver.execute_script("window.scrollTo(0, 1200)")
+    try:
+        wait = WebDriverWait(driver, 10)
+        wait.until(expected_conditions.visibility_of_element_located(
+                   (By.CSS_SELECTOR, '.article-lineage--fixed')))
+    except TimeoutException:
+        assert False, 'Fixed Lineage not visible after scrolled into view'

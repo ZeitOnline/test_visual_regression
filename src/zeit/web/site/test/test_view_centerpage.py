@@ -456,7 +456,7 @@ def test_parquet_region_list_should_have_regions(application):
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         cp, pyramid.testing.DummyRequest())
-    assert len(view.region_list_parquet) == 4, (
+    assert len(view.region_list_parquet) == 3, (
         'View contains %s parquet regions instead of 4' % len(
             view.region_list_parquet))
 
@@ -713,7 +713,7 @@ def test_adcontroller_values_return_values_on_cp(application):
     assert adcv == view.adcontroller_values
 
 
-def test_canonical_ruleset_on_cps(testserver, testbrowser):
+def test_canonical_ruleset_on_cps(testserver, testbrowser, datasolr):
     url = '%s/dynamic/ukraine' % testserver.url
     browser = testbrowser(url)
 
@@ -732,7 +732,7 @@ def test_canonical_ruleset_on_cps(testserver, testbrowser):
     assert link[0].get('href') == url + '?p=2'
 
 
-def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
+def test_canonical_ruleset_on_article_pages(testserver, testbrowser):
     url = '%s/zeit-online/index' % testserver.url
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
@@ -758,6 +758,8 @@ def test_canonical_ruleset_on_diverse_pages(testserver, testbrowser):
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == url + '/seite-2'
 
+
+def test_canonical_ruleset_on_ranking_pages(testserver, testbrowser, datasolr):
     url = '%s/suche/index' % testserver.url
     browser = testbrowser(url)
     link = browser.cssselect('link[rel="canonical"]')
@@ -895,7 +897,8 @@ def test_meta_rules_for_keyword_paths(application):
         'von ZEIT ONLINE zu dem Thema Ausdauersport.')
 
 
-def test_newsticker_should_have_expected_dom(testserver, testbrowser):
+def test_newsticker_should_have_expected_dom(
+        testserver, testbrowser, datasolr):
     browser = testbrowser('/zeit-online/news-teaser')
 
     cols = browser.cssselect('.cp-area--newsticker .newsticker__column')
@@ -1187,9 +1190,9 @@ def test_hidden_images_must_not_be_loaded_via_js(
         assert False, 'Fullsize Image not loaded within 2 seconds'
     else:
         largeimage = driver.find_elements_by_css_selector(
-            'figure.teaser-fullwidth__media img[src]')
+            'figure.teaser-fullwidth__media img[src^="http"]')
         smallimage = driver.find_elements_by_css_selector(
-            'figure.teaser-small__media img[src]')
+            'figure.teaser-small__media img[src^="http"]')
 
         if screen_size[0] == 320:
             assert len(smallimage) == 0
@@ -1389,3 +1392,17 @@ def test_cp_does_not_render_image_if_expired(testbrowser):
         expired.return_value = -1
         browser = testbrowser('/zeit-online/basic-teasers-setup')
         assert '/zeit-online/cp-content/ig-2' not in browser.contents
+
+
+def test_zmo_parquet_has_zmo_styles(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+
+    regions = browser.cssselect('.cp-region--parquet')
+    zmo_region = regions[3]
+    zmo_title = zmo_region.cssselect('.parquet-meta__title--zmo')
+    zmo_logo = zmo_region.cssselect('.parquet-meta__logo--zmo')
+    zmo_kicker = zmo_region.cssselect('.teaser-small__kicker--zmo')
+
+    assert len(zmo_title)
+    assert len(zmo_logo)
+    assert len(zmo_kicker) == 2

@@ -11,7 +11,7 @@
     {% if iframe %}
         <iframe
             class="video-player__iframe"
-            src='{{ brightcove_host }}/{{ brightcove_account }}/{{ brightcove_player }}_{{ brightcove_embed }}/index.html?videoId={{ videoId }}&wmode=transparent&preload=auto'
+            src='{{ brightcove_host }}/{{ brightcove_account }}/{{ brightcove_player }}_{{ brightcove_embed }}/index.html?videoId={{ videoId }}&wmode=transparent&preload=none'
             allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
     {% else %}
         <video
@@ -20,7 +20,7 @@
             data-embed="{{ brightcove_embed }}"
             data-video-id="{{ videoId }}"
             class="video-js video-player__videotag"
-            preload controls></video>
+            controls></video>
             <script src="{{ brightcove_host }}/{{ brightcove_account }}/{{ brightcove_player }}_{{ brightcove_embed }}/index.min.js"></script>
     {% endif %}
 </div>
