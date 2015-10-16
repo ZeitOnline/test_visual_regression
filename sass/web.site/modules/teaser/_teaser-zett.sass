@@ -5,8 +5,6 @@
 
     &:last-child
         display: none
-        &__media
-            display: none // nötig, damit responsive image nicht geladen wird
 
     +respond-min($break-phablet-min)
         display: table-cell
@@ -21,14 +19,12 @@
             display: table-cell
 
     &__media
-        @extend %teaser-media
-
-    &__container
-        padding: remify(0 10px 20px)
+        margin: 0
 
     &__heading
         font-size: 1em
         margin: 0
+        padding: remify(20px 10px)
 
     &__title
         @extend %teaser-title
