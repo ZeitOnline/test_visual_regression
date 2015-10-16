@@ -129,6 +129,28 @@ def test_stringify_delta_time_should_ignore_values_of_zero():
     assert stringified_dt == 'vor 1 Tag 40 Minuten'
 
 
+def test_stringify_delta_time_should_handle_future_dates_correctly():
+    timedelta = zeit.web.core.date.DeltaTime(
+        datetime.datetime.now() + datetime.timedelta(minutes=3, seconds=21)
+    )
+    timedelta._get_babelfied_delta_time()
+    assert timedelta._stringify_delta_time() == 'in 3 Minuten 21 Sekunden'
+
+
+def test_get_time_since_modification_handle_future_dates_correctly():
+    timedelta = zeit.web.core.date.DeltaTime(
+        datetime.datetime.now() + datetime.timedelta(minutes=3, seconds=45)
+    )
+    assert timedelta.get_time_since_modification() == 'in 3 Minuten'
+
+
+def test_get_time_since_modification_should_hide_far_future_dates():
+    timedelta = zeit.web.core.date.DeltaTime(
+        datetime.datetime.now() + datetime.timedelta(hours=5, minutes=45)
+    )
+    assert timedelta.get_time_since_modification() is None
+
+
 def test_get_time_since_modification_should_return_none_for_older_dates():
     stringified_dt = delta_time.get_time_since_modification()
     assert stringified_dt is None

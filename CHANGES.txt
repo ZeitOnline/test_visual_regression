@@ -4,7 +4,9 @@ Change log for zeit.web
 2.15 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2036: Bildrechte im Footer von CPs
+
+- FIX: Fix display of future dates
 
 
 2.14.1 (2015-10-15)
