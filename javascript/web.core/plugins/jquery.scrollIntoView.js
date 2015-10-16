@@ -36,7 +36,7 @@
 
         options = $.extend( {}, defaults, options );
 
-        this.eq( 0 ).velocity( 'scroll', { duration: options.duration } );
+        this.eq( 0 ).velocity( 'scroll', options );
 
         return this;
     };
