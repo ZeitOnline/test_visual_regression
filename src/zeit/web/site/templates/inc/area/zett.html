@@ -2,13 +2,9 @@
 
 {% block before_module_list %}
     <div class="parquet-zett__head">
-        <div class="parquet-zett__logo">
-            <img href="zett-logo-pfad">
-
-            <!-- placeholder bis SVG da ist -->
-            <p>ze.tt</p>
-
-        </div>
+        <a class="parquet-zett__title" href="http://ze.tt/">
+            {{ lama.use_svg_icon('logo-zett', 'parquet-zett__icon', request) }}
+        </a>
     </div>
 
     <div class="parquet-zett-teasers">

@@ -8,6 +8,7 @@
     {% include "zeit.web.site:templates/inc/teaser_asset/{}.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
 {% endblock %}
 
+{% block teaser_kicker %}{% endblock %}
 {% block teaser_container %}{% endblock %}
 {# Eliminate default teaser metadata #}
 {% block teaser_metadata_default %}{% endblock %}
