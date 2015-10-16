@@ -121,6 +121,9 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
         right: remify(20px)
 
 .jb-button
+    display: inline-block
+    +respond-min($break-desktop-min)
+        display: block
     &__text
         +zon-button-dark()
         border: none
@@ -133,6 +136,11 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
             color: $white
 
 .jb-link
+    display: inline-block
+    margin-left: remify(10px)
+    +respond-min($break-desktop-min)
+        display: block
+        margin-left: 0
     &__text
         color: $zon_grey
         font-size: em(14px)
