@@ -2,46 +2,44 @@
 
 {% block main %}
     <div class="main__fullwidth">
-        <div class="beta-teaser">
-            {% if view.status %}
-            <div>
-                <h4>POST result</h4>
-                <ul>
-                {% for status in view.status %}
-                    <li>{{ status }}</li>
-                {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-            <form method="POST">
-                <p>
-                    <label>Kommentar:</label>
-                    <textarea rows="5" cols="70" name="comment"></textarea>
-                </p>
-                <p>
-                    <input id="path" type="text" name="path"/>
-                    <label for="path"> für Pfad (z.B.: artikel/01)</label>
-                </p>
-                <p>
-                    <input id="pid" type="text" name="pid"/>
-                    <label for="pid">bezieht sich auf (pid)</label>
-                </p>
-                {% if not view.user_name %}
-                    <p>
-                        <input id="user_name" type="text" name="user_name"/>
-                        <label for="user_name">Nutzername bitte setzen</label>
-                    </p>
-                {% endif %}
-                <p>
-                    <select id="action" name="action">
-                        <option value="comment">Kommentieren</option>
-                        <option value="report">Bedenklich melden</option>
-                        <option value="recommend">Empfehlen</option>
-                    </select>
-                    <label for="action">Action</label>
-                </p>
-                <input type="submit" class="button"/>
-            <form>
+        {% if view.status %}
+        <div>
+            <h4>POST result</h4>
+            <ul>
+            {% for status in view.status %}
+                <li>{{ status }}</li>
+            {% endfor %}
+            </ul>
         </div>
+        {% endif %}
+        <form method="POST">
+            <p>
+                <label>Kommentar:</label>
+                <textarea rows="5" cols="70" name="comment"></textarea>
+            </p>
+            <p>
+                <input id="path" type="text" name="path"/>
+                <label for="path"> für Pfad (z.B.: artikel/01)</label>
+            </p>
+            <p>
+                <input id="pid" type="text" name="pid"/>
+                <label for="pid">bezieht sich auf (pid)</label>
+            </p>
+            {% if not view.user_name %}
+                <p>
+                    <input id="user_name" type="text" name="user_name"/>
+                    <label for="user_name">Nutzername bitte setzen</label>
+                </p>
+            {% endif %}
+            <p>
+                <select id="action" name="action">
+                    <option value="comment">Kommentieren</option>
+                    <option value="report">Bedenklich melden</option>
+                    <option value="recommend">Empfehlen</option>
+                </select>
+                <label for="action">Action</label>
+            </p>
+            <input type="submit" class="button"/>
+        <form>
     </div>
 {% endblock main %}

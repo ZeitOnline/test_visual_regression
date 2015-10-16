@@ -51,7 +51,6 @@ require([
     'web.site/plugins/jquery.selectNav',
     'web.site/plugins/jquery.shuffleTeasers',
     'web.site/plugins/jquery.snapshot',
-    'web.site/plugins/jquery.toggleBeta',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
@@ -99,6 +98,4 @@ require([
     $( '.js-scroll' ).animateScroll();
     // search
     $( '.search-form' ).searchTools();
-    // beta
-    $( '#beta-toggle' ).toggleBeta();
 });
