@@ -34,7 +34,7 @@
             },
             hideJob: function( $jobs ) {
 
-                $( box.jobs[box.current] ).find( '.jb-text' ).delay( 5000 ).velocity( 'fadeOut', 3000, function() {
+                $( box.jobs[box.current] ).find( '.jb-text' ).delay( 10000 ).velocity( 'fadeOut', 3000, function() {
                     $( box.jobs[box.current] ).removeClass( 'jb-content--show' );
                     box.setCurrentJob();
                     box.showJob();

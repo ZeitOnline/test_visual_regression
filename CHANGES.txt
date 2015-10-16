@@ -4,7 +4,7 @@ Change log for zeit.web
 2.15 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1944: Implement Jobbox
 
 
 2.14.1 (2015-10-15)

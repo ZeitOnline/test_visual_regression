@@ -21,6 +21,7 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
                 background-size: cover
         .jb-content
             display: block
+            min-height: 0
             width: 100%
             +on-interaction
                 .jb-icon__bullet
@@ -77,9 +78,9 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
 
 .jb-content
     display: none
+    min-height: remify(100px)
     &--show
         display: block
-        min-height: remify(100px)
         +respond-min($break-desktop-min)
             display: inline-block
     &--first
