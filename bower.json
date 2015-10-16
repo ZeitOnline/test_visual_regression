@@ -9,11 +9,11 @@
     "jquery": "1.11.3",
     "jquery.inview": "1.0.0",
     "normalize.css": "3.0.3",
-    "picturefill": "3.0.0-rc1",
+    "picturefill": "3.0.1",
     "requirejs": "2.1.20",
     "sjcl": "1.0.3",
     "svg4everybody": "2.0.0",
-    "velocity": "~1.2.2"
+    "velocity": "1.2.3"
   },
   "exportsOverride": {
     "bx-slider.js": {
