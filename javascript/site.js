@@ -82,7 +82,7 @@ require([
         $( '.js-gallery-teaser-shuffle' ).shuffleTeasers();
         $( '.js-accordion' ).accordion();
         $( '.storystream-markup__content--first' ).storystream();
-        $( '.jobbox' ).animateJobs();
+        $( '.jobbox--animate' ).animateJobs();
     } else if ( article.length ) {
         // article, gallery etc.
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });

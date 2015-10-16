@@ -1,12 +1,12 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-<aside class="jobbox {% block modifier %}{% endblock %}">
+<aside class="jobbox {% block modifier %}jobbox--animate{% endblock %}">
     <span class="jobbox__label">Verlagsangebot</span>
     <div class="jb-box">
         <div class="jb-box__kicker">
             {% block kicker %}Aktuelle Jobs im ZEIT Stellenmarkt{% endblock %}
         </div>
-        <a class="jb-content jb-content--first" href="#">
+        <a class="jb-content" href="#">
                 <div class="jb-icon">
                     <span class="jb-icon__bullet"></span>
                 </div>
@@ -19,7 +19,7 @@
                     </div>
                 </div>
         </a>
-        <a class="jb-content" href="#">
+        <a class="jb-content jb-content--show" href="#">
             <div class="jb-icon">
                 <span class="jb-icon__bullet"></span>
             </div>

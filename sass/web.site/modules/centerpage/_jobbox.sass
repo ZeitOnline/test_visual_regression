@@ -56,10 +56,17 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
                 line-height: em(17px)
                 margin-bottom: remify(10px)
                 text-overflow: ellipsis
+        .jb-action
+            position: relative
+            display: inline
+            top: 0
+            right: 0
 
 .jb-box
     background-color: $zon-seashell
     padding: remify(20px)
+    position: relative
+    min-height: remify(150px)
     &__kicker
         color: $red
         font-size: em(13px)
@@ -70,10 +77,10 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
 
 .jb-content
     display: none
-    &--first
+    &--show
         display: block
         +respond-min($break-desktop-min)
-            display: table-cell
+            display: inline-block
     +respond-min($break-desktop-min)
         vertical-align: middle
         width: 65%
@@ -95,9 +102,12 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
     display: block
     text-align: center
     +respond-min($break-desktop-min)
-        display: table-cell
+        display: inline-block
         vertical-align: middle
         width: 30%
+        position: absolute
+        top: remify(20px)
+        right: remify(20px)
 
 .jb-button
     &__text

@@ -9,35 +9,37 @@
     $.fn.animateJobs = function() {
 
         var box = {
-            $jobs: false,
-            maxJobs: 0,
             current: 0,
+            maxJobs: 0,
             getJobList: function( $box ) {
                 return ( $box.find( '.jb-content' ) );
+            },
+            toggleJob: function( $jobs ) {
+
+                $( $jobs[box.current] ).velocity( 'fadeOut', { delay: 2000, display: 'none', duration: 2000 } );
+
+                if ( box.current !== box.maxJobs ) {
+                    box.current++;
+                } else {
+                    box.current = 0;
+                }
+
+                $( $jobs[box.current] ).velocity( 'fadeIn', { delay: 3500, display: 'inline-block', duration: 2000 } );
+
+                box.toggleJob( $jobs );
             }
         };
 
-        function animateJobs() {
-
-            console.debug( box.$jobs[box.current] );
-
-            $( box.$jobs[box.current] ).hide();
-
-            if ( box.current !== box.maxJobs ) {
-                box.current++;
-            } else {
-                box.current = 0;
-            }
-
-            $( box.$jobs[box.current] ).show();
-
+        function animateJobs( $box ) {
+            var $jobs = box.getJobList( $box );
+            box.maxJobs = $jobs.length - 1;
+            box.toggleJob( $jobs );
         }
 
         //run through search element and return object
         return this.each( function() {
-            box.$jobs = box.getJobList( $( this ) );
-            box.maxJobs = box.$jobs.length - 1;
-            setInterval( animateJobs, 5000 );
+            var that = $( this );
+            animateJobs( that );
         });
     };
 
