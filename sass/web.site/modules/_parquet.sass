@@ -35,7 +35,7 @@
 			content: "\203A" // › = single right-pointing angle quotation mark
 			float: right
 			font-size: remify(32px)
-			line-height: remify(12px)
+			line-height: 0.375 // IE fix (http://caniuse.com/#feat=rem)
 		+respond-min($break-tablet-min)
 			line-height: normal
 			overflow: hidden
