@@ -1003,6 +1003,7 @@ def test_article_lineage_should_be_hidden_on_small_screens(
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/article/zeit' % testserver.url)
+    driver.execute_script("window.scrollTo(0, 500)")
     lineage_links = driver.find_elements_by_css_selector(
         '.article-lineage__link')
     lineage_linktexts = driver.find_elements_by_css_selector(
@@ -1033,3 +1034,8 @@ def test_article_lineage_should_be_fixed_after_scrolling(
                    (By.CSS_SELECTOR, '.article-lineage--fixed')))
     except TimeoutException:
         assert False, 'Fixed Lineage not visible after scrolled into view'
+
+
+def test_article_lineage_should_not_render_on_advertorials(testbrowser):
+    browser = testbrowser('/zeit-online/article/angebot')
+    assert len(browser.cssselect('.article-lineage')) == 0

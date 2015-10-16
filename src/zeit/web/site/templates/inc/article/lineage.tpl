@@ -1,10 +1,12 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-{% if view.featuretoggle_articlelineage %}
+{% if view.featuretoggle_articlelineage and view.lineage %}
 <div class="article-lineage js-fix-position">
     {% set predecessor, successor = view.lineage %}
     <a href="{{ predecessor.uniqueId | create_url }}" class="article-lineage__link article-lineage__link--prev" data-id="articlebottom.article-lineage.prev..{{ predecessor.title | format_webtrekk }}">
         {# TODO: use Icon as background image via CSS ? #}
+        {# Rotation of the icon is not done via CSS because of IE8.
+           We use 2 different SVGs instead. Could be improved after IE8 is gone. #}
         {{ lama.use_svg_icon('arrow-articlelineage-left', 'article-lineage__link-icon article-lineage__link-icon--prev', request) }}
         <span class="article-lineage__link-text article-lineage__link-text--prev">
             <span class="article-lineage__link-kicker">{% if predecessor.uniqueId == 'http://xml.zeit.de/index' %}ZEIT ONLINE{% else %}Voriger Artikel{% endif %}</span>

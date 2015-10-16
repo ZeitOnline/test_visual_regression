@@ -147,7 +147,7 @@
 
 
 {% macro use_svg_icon(name, class, request) -%}
-    <svg class="{{ class }}" role="img" aria-labelledby="title">
+    <svg class="svg-symbol {{ class }}" role="img" aria-labelledby="title">
         <use xlink:href="{{ request.asset_host }}/css/web.site/icons.svg#svg-{{ name }}"></use>
     </svg>
 {%- endmacro %}

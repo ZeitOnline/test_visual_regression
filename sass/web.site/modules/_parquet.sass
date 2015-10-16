@@ -10,12 +10,13 @@
 
 	&__logo
 		&--spektrum
-			+background-size(contain)
-			display: inline-block
 			height: remify(26px)
-			text-indent: -50000em
 			width: remify(125px)
-
+		&--zmo
+			color: $white
+			height: remify(20px)
+			max-width: remify(205px)
+			width: 100%
 	&__title
 		+link
 			color: inherit
@@ -52,13 +53,20 @@
 			+on-interaction
 				color: $white
 				text-decoration: none
-			background: $spektrum_de_blue
+			background-color: $spektrum_de_blue
 			color: $white
 			line-height: 1
-			padding-bottom: remify(17px)
+			padding-bottom: remify(15px) // fix inline bottom gap
 			padding-top: remify(17px)
 			&:after
 				color: $white
+		&--zmo
+			padding-bottom: remify(13px) // fix inline bottom gap
+			padding-top: remify(15px)
+			background-color: $zmo_black
+			color: $white
+			&:after
+				color: $zon_light_grey
 
 	&__links
 		display: none
