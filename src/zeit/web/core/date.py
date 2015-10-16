@@ -89,9 +89,12 @@ class DeltaDaysEntity(DeltaTimeEntity):
 
     def __init__(self, delta):
         super(DeltaDaysEntity, self).__init__(delta)
-        self.number = self.delta.days
+        days = self.delta.days
+        if (self.delta.days < 0):
+            days = int(self.delta.days + float(self.delta.seconds) / 3600 / 24)
+        self.number = days
         self.text = babel.dates.format_timedelta(
-            babel.dates.timedelta(days=self.delta.days),
+            babel.dates.timedelta(days=days),
             threshold=1, locale=locale)
 
 
@@ -103,6 +106,8 @@ class DeltaHoursEntity(DeltaTimeEntity):
         # we need to perform some calculations manually.
         super(DeltaHoursEntity, self).__init__(delta)
         hours = self.delta.seconds / 3600
+        if (self.delta.days < 0):
+            hours = (3600 * 24 - self.delta.seconds) / 3600
         self.number = hours
         self.text = babel.dates.format_timedelta(
             babel.dates.timedelta(hours=hours),
@@ -117,6 +122,8 @@ class DeltaMinutesEntity(DeltaTimeEntity):
         # we need to perform some calculations manually.
         super(DeltaMinutesEntity, self).__init__(delta)
         minutes = (self.delta.seconds % 3600) / 60
+        if (self.delta.days < 0):
+            minutes = ((3600 * 24 - self.delta.seconds) % 3600) / 60
         self.number = minutes
         self.text = babel.dates.format_timedelta(
             babel.dates.timedelta(minutes=minutes),
@@ -131,6 +138,8 @@ class DeltaSecondsEntity(DeltaTimeEntity):
         # we need to perform some calculations manually.
         super(DeltaSecondsEntity, self).__init__(delta)
         seconds = self.delta.seconds % 60
+        if (self.delta.days < 0):
+            seconds = (3600 * 24 - self.delta.seconds) % 60
         self.number = seconds
         self.text = babel.dates.format_timedelta(
             babel.dates.timedelta(seconds=seconds),
@@ -160,7 +169,7 @@ class DeltaTime(object):
         self.seconds = zeit.web.core.date.DeltaSecondsEntity(self.delta)
 
     def _filter_delta_time(self):
-        if (self.hide and self.delta >= datetime.timedelta(**self.hide)):
+        if (self.hide and abs(self.delta) >= datetime.timedelta(**self.hide)):
             self.days = None
             self.hours = None
             self.minutes = None

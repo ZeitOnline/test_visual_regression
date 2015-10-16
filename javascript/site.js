@@ -56,6 +56,7 @@ require([
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
     'web.site/plugins/jquery.countFormchars',
+    'web.site/plugins/jquery.imageCopyrightFooter',
     'web.site/plugins/jquery.hpOverlay',
     'web.site/plugins/jquery.animateJobs',
     'web.site/plugins/jquery.fixPosition'
@@ -84,6 +85,7 @@ require([
         $( '.js-accordion' ).accordion();
         $( '.storystream-markup__content--first' ).storystream();
         $( '.jobbox--animate' ).animateJobs();
+        $( '.js-image-copyright-footer' ).imageCopyrightFooter();
     } else if ( article.length ) {
         // article, gallery etc.
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
