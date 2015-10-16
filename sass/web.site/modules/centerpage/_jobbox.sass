@@ -22,6 +22,9 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
         .jb-content
             display: block
             width: 100%
+            +on-interaction
+                .jb-icon__bullet
+                    background-color: rgba(22, 135, 80, 1)
         .jb-icon
             display: table-cell
             &__bullet
@@ -32,9 +35,6 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
                 background-color: rgba(22, 135, 80, .8)
                 position: relative
                 +border-radius(20px)
-                +on-interaction
-                    background-color: rgba(22, 135, 80, 1)
-                    cursor: pointer
                 &:after
                     content: '\203A'
                     color: $white
@@ -43,6 +43,7 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
                     top: remify(-9px)
                     left: remify(11px)
         .jb-text
+            opacity: 1
             display: table-cell
             padding-left: remify(15px)
             &__title
@@ -55,7 +56,7 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
                 font-size: em(14px)
                 line-height: em(17px)
                 margin-bottom: remify(10px)
-                text-overflow: ellipsis
+                max-width: remify(220px)
         .jb-action
             position: relative
             display: inline
@@ -66,37 +67,46 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
     background-color: $zon-seashell
     padding: remify(20px)
     position: relative
-    min-height: remify(150px)
     &__kicker
         color: $red
         font-size: em(13px)
         line-height: em(15px)
         font-weight: bold
         letter-spacing: $letter-spacing-l
-        margin-bottom: remify(5px)
+        margin-bottom: remify(10px)
 
 .jb-content
     display: none
     &--show
         display: block
+        min-height: remify(100px)
         +respond-min($break-desktop-min)
             display: inline-block
+    &--first
+        .jb-text
+            opacity: 1
     +respond-min($break-desktop-min)
         vertical-align: middle
         width: 65%
 
 .jb-text
+    opacity: 0
     &__title
         font-weight: bold
         font-size: em(18px)
         line-height: em(22px)
         color: $zon-charcoal
         margin-bottom: remify(5px)
+        max-height: 4em
+        overflow: hidden
     &__byline
         color: $zon_grey
         font-size: em(14px)
         line-height: em(17px)
         letter-spacing: $letter-spacing-s
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
 
 .jb-action
     display: block
@@ -106,7 +116,7 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
         vertical-align: middle
         width: 30%
         position: absolute
-        top: remify(20px)
+        top: remify(30px)
         right: remify(20px)
 
 .jb-button
@@ -129,5 +139,6 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
         border-bottom: 1px solid rgba(112, 112, 112, 0.5)
         letter-spacing: $letter-spacing-s
         +on-interaction
+            color: $zon_grey
             border-bottom: 1px solid rgba(112, 112, 112, 1)
 

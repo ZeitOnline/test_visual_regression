@@ -8,15 +8,22 @@
 
     $.fn.animateJobs = function() {
 
+        $.each( ['show', 'hide'], function( i, ev ) {
+            var el = $.fn[ev];
+            $.fn[ev] = function() {
+                this.trigger( ev );
+                return el.apply( this, arguments );
+            };
+        }) ;
+
         var box = {
             current: 0,
             maxJobs: 0,
+            jobs: false,
             getJobList: function( $box ) {
                 return ( $box.find( '.jb-content' ) );
             },
-            toggleJob: function( $jobs ) {
-
-                $( $jobs[box.current] ).velocity( 'fadeOut', { delay: 2000, display: 'none', duration: 2000 } );
+            setCurrentJob: function() {
 
                 if ( box.current !== box.maxJobs ) {
                     box.current++;
@@ -24,22 +31,30 @@
                     box.current = 0;
                 }
 
-                $( $jobs[box.current] ).velocity( 'fadeIn', { delay: 3500, display: 'inline-block', duration: 2000 } );
+            },
+            hideJob: function( $jobs ) {
 
-                box.toggleJob( $jobs );
+                $( box.jobs[box.current] ).find( '.jb-text' ).delay( 5000 ).velocity( 'fadeOut', 3000, function() {
+                    $( box.jobs[box.current] ).removeClass( 'jb-content--show' );
+                    box.setCurrentJob();
+                    box.showJob();
+                });
+
+            },
+            showJob: function() {
+                $( box.jobs[box.current] ).addClass( 'jb-content--show' );
+                $( box.jobs[box.current] ).find( '.jb-text' ).velocity( 'fadeIn', 3000, function() {
+                    box.hideJob();
+                });
+
             }
         };
 
-        function animateJobs( $box ) {
-            var $jobs = box.getJobList( $box );
-            box.maxJobs = $jobs.length - 1;
-            box.toggleJob( $jobs );
-        }
-
         //run through search element and return object
         return this.each( function() {
-            var that = $( this );
-            animateJobs( that );
+            box.jobs = box.getJobList( $( this ) );
+            box.maxJobs = box.jobs.length - 1;
+            box.hideJob();
         });
     };
 

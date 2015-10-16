@@ -7,7 +7,7 @@
             {% block kicker %}Aktuelle Jobs im ZEIT Stellenmarkt{% endblock %}
         </div>
         {% for teaser in module[:3] %}
-        <a class="jb-content{% if loop.first %} jb-content--first{% endif %}" href="{{ teaser.url }}">
+        <a class="jb-content {% if loop.first %}jb-content--show jb-content--first{% endif %}" href="{{ teaser.url }}">
             <div class="jb-icon">
                 <span class="jb-icon__bullet"></span>
             </div>
@@ -29,18 +29,3 @@
         </span>
     </div>
 </aside>
-
-<!--
-<a class="jb-content" href="#">
-                <div class="jb-icon">
-                    <span class="jb-icon__bullet"></span>
-                </div>
-                <div class="jb-text">
-                    <div class="jb-text__title">
-                        Academic positions - Faculty of Kinesiology and Rehabilitation Sciences
-                    </div>
-                    <div class="jb-text__byline">
-                        University of Leuven. Löwen (Belgien)
-                    </div>
-                </div>
-        </a>-->
