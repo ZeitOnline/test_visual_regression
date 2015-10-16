@@ -1,29 +1,29 @@
 .parquet-zett
-    position: relative
 
-    &__title
-        background-color: $zon-charcoal
-        display: block
-        height: remify(50px)
-        padding: remify(14px) $page-padding
-        &:after
-            color: $zett-orange
-            content: "\203A" // › = single right-pointing angle quotation mark
-            float: right
-            font-size: remify(32px)
-            line-height: 0.375 // IE fix (http://caniuse.com/#feat=rem)
+	&__title
+		background-color: $zon-charcoal
+		display: block
+		height: remify(50px)
+		padding: remify(14px) $page-padding
+		position: relative
+		&:after
+			color: $primary-color-zett
+			content: "\203A" // › = single right-pointing angle quotation mark
+			float: right
+			font-size: remify(32px)
+			line-height: 0.375 // IE fix (http://caniuse.com/#feat=rem)
 
-    &__icon
-        background-color: $zett-orange
-        color: $white
-        height: remify(63px)
-        left: remify($page-padding)
-        position: absolute
-        text-align: center
-        top: 0
-        width: remify(86px)
+	&__icon
+		background-color: $primary-color-zett
+		color: $white
+		height: remify(63px)
+		left: remify($page-padding)
+		position: absolute
+		text-align: center
+		top: 0
+		width: remify(86px)
 
 .parquet-zett-teasers
-    border-spacing: remify($page-padding) ($vertical-space + remify(13px)) // 13px = Abstand den das Logo von oben hineinragt
-    display: table
-    width: 100%
+	border-spacing: remify($page-padding) ($vertical-space + remify(13px)) // 13px = Abstand den das Logo von oben hineinragt
+	display: table
+	width: 100%
