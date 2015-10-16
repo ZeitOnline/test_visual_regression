@@ -28,71 +28,90 @@
     */
     $.fn.imageCopyrightFooter = function() {
 
-        var containerTemplate = '<div class="image-copyright-footer">' +
-                '<div class="image-copyright-footer__container">' +
-                '<h2 class="image-copyright-footer__headline">' +
-                    'Bildrechte auf dieser Seite' +
-                    '<span class="js-image-copyright-footer-close image-copyright-footer__close">schließen</span>' +
-                '</h2>' +
-                '___items___</div></div>',
-            itemTemplate = '<div class="image-copyright-footer__item">' +
+        var containerTemplate = $( '#image-copyright-template' ).html(),
+            itemTemplate = '<li class="image-copyright-footer__item">' +
                 '<img class="image-copyright-footer__item-image" src="___image___" />' +
-                '<span class="image-copyright-footer__item-text">___name___</span>' +
-                '</div>',
-            initialized = false;
+                '___name___' +
+                '</li>',
+            slideDuration = 300,
+            scrollDuration = 500,
+            copyrights = {
+                container: null,
+                initialized: false,
+                open: false,
 
-        function showImageCopyrightFooter( ) {
+                toggle: function() {
+                    if ( !this.initialized ) {
+                        this.init();
+                    }
 
-            if ( this.initialized ) {
-                $( '.image-copyright-footer' ).show();
-                return;
-            }
+                    if ( this.open ) {
+                        this.hide();
+                    } else {
+                        this.show();
+                    }
+                },
 
-            var $imagesWithCopyright = $( 'figure' ),
-                imagesWithCopyrightLength = $imagesWithCopyright.length,
-                i,
-                wholeString,
-                $currentImage,
-                $currentCopyrightHolder,
-                currentName,
-                currentImageUrl;
+                show: function() {
+                    this.container
+                        .slideDown({ duration: slideDuration });
+                    // there is a strange unresolved bug that it's only scrolling on the first click
+                    // when using Velocity for the sliding animation, so use jQuery instead
+                    //  .velocity( 'slideDown', slideDuration );
+                    this.container.children().eq( 0 )
+                        .scrollIntoView({ duration: scrollDuration });
+                    this.open = true;
+                },
 
-            // TODO: This is too holprig!!
-            for ( i = 0; i < imagesWithCopyrightLength; i++ ) {
-                $currentImage = $imagesWithCopyright.eq( i );
-                $currentCopyrightHolder = $currentImage.find( '*[itemprop=copyrightHolder]' );
-                if ( $currentCopyrightHolder.length === 0 ) {
-                    continue;
+                hide: function() {
+                    this.container
+                        .velocity( 'slideUp', slideDuration );
+                    this.open = false;
+                },
+
+                init: function() {
+                    var $imagesWithCopyright = $( 'figure' ),
+                        i, l,
+                        wholeString = '',
+                        $currentImage,
+                        $currentImageTag,
+                        $currentCopyrightHolder,
+                        currentImageUrl;
+
+                    // TODO: This is too holprig!!
+                    for ( i = 0, l = $imagesWithCopyright.length; i < l; i++ ) {
+                        $currentImage = $imagesWithCopyright.eq( i );
+                        $currentCopyrightHolder = $currentImage.find( '*[itemprop=copyrightHolder]' );
+
+                        if ( !$currentCopyrightHolder.text() ) {
+                            continue;
+                        }
+
+                        // Get image source URL. Consider unfetched lazy loading images.
+                        $currentImageTag = $currentImage.find( 'img' ).eq( 0 );
+                        currentImageUrl = $currentImageTag.data( 'source' ) || $currentImageTag.attr( 'src' );
+                        wholeString += itemTemplate
+                            .replace( '___name___', $currentCopyrightHolder.html() )
+                            .replace( '___image___', currentImageUrl );
+                    }
+
+                    $( '.footer-links__button' ).eq( 0 ).before( containerTemplate.replace( '___items___', wholeString ) );
+
+                    $( '.js-image-copyright-footer-close' ).on( 'click', function( e ) {
+                        e.preventDefault();
+                        copyrights.hide();
+                    } );
+
+                    this.container = $( '#bildrechte' );
+                    this.initialized = true;
                 }
-
-                currentName = $currentCopyrightHolder.eq( 0 ).text();
-                if ( currentName === '' ) {
-                    continue;
-                }
-
-                currentImageUrl = $currentImage.find( 'img' ).eq( 0 ).attr( 'src' );
-                wholeString += itemTemplate
-                    .replace( '___name___', $currentCopyrightHolder.html() )
-                    .replace( '___image___', currentImageUrl );
-            }
-
-            $( '.footer-links__button' ).eq( 0 ).before( containerTemplate.replace( '___items___', wholeString ) );
-
-            $( '.js-image-copyright-footer-close' ).on( 'click', function( e ) {
-                e.preventDefault();
-                $( '.image-copyright-footer' ).hide();
-            } );
-
-            this.initialized = true;
-
-        }
+            };
 
         return this.each( function() {
             $( this ).on( 'click', function( e ) {
                 e.preventDefault();
-                showImageCopyrightFooter( );
+                copyrights.toggle();
             } );
-
         });
     };
 })( jQuery );
