@@ -27,19 +27,22 @@
     <link id="last"></link>
     <sub_sections>
       <sub_section>
-        <link id="footernav.bottom.2.1.agb" href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</link>
+        <link id="footernav.bottom.2.1.bildrechte" href="#bildrechte">Bildrechte</link>
       </sub_section>
       <sub_section>
-        <link id="footernav.bottom.2.2.cookie" href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</link>
+        <link id="footernav.bottom.2.2.agb" href="http://www.zeit.de/administratives/agb-kommentare-artikel">AGB</link>
       </sub_section>
       <sub_section>
-        <link id="footernav.bottom.2.3.hilfekontakt" href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</link>
+        <link id="footernav.bottom.2.3.cookie" href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Cookies</link>
       </sub_section>
       <sub_section>
-        <link id="footernav.bottom.2.4.newsletter" href="http://community.zeit.de/newsletter">Newsletter</link>
+        <link id="footernav.bottom.2.4.hilfekontakt" href="http://www.zeit.de/hilfe/hilfe">Hilfe/ Kontakt</link>
       </sub_section>
       <sub_section>
-        <link id="footernav.bottom.2.5.RSS" href="http://www.zeit.de/hilfe/hilfe#rss">RSS</link>
+        <link id="footernav.bottom.2.5.newsletter" href="http://community.zeit.de/newsletter">Newsletter</link>
+      </sub_section>
+      <sub_section>
+        <link id="footernav.bottom.2.6.RSS" href="http://www.zeit.de/hilfe/hilfe#rss">RSS</link>
       </sub_section>
     </sub_sections>
   </section>
