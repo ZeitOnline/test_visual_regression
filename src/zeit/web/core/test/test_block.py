@@ -277,27 +277,25 @@ def test_block_breaking_news_has_correct_date(application):
 
 
 def test_find_nextread_returns_none_if_nonexistent(application):
-    adv = zeit.web.core.block.AdvertisementNextread(None)
-    assert adv.find_nextread_folder('Wissen', None) is None
+    assert zeit.web.core.block.find_nextread_folder('Wissen', None) is None
 
 
 def test_find_nextread_from_ressort_without_subressort(application):
-    adv = zeit.web.core.block.AdvertisementNextread(None)
-    assert adv.find_nextread_folder('Wirtschaft', None) is not None
+    assert zeit.web.core.block.find_nextread_folder(
+        'Wirtschaft', None) is not None
 
 
 def test_find_nextread_from_subressort(application):
-    adv = zeit.web.core.block.AdvertisementNextread(None)
-    assert adv.find_nextread_folder('Deutschland', 'Datenschutz') is not None
+    assert zeit.web.core.block.find_nextread_folder(
+        'Deutschland', 'Datenschutz') is not None
 
 
 def test_find_nextread_from_ressort_if_subressort_has_none(application):
-    adv = zeit.web.core.block.AdvertisementNextread(None)
-    assert adv.find_nextread_folder('Deutschland', 'Integration') is not None
+    assert zeit.web.core.block.find_nextread_folder(
+        'Deutschland', 'Integration') is not None
 
 
 def test_find_nextread_from_correct_ressort_if_subressort_has_same_name(
         application):
-    adv = zeit.web.core.block.AdvertisementNextread(None)
-    folder = adv.find_nextread_folder('Deutschland', 'Meinung')
+    folder = zeit.web.core.block.find_nextread_folder('Deutschland', 'Meinung')
     assert 'deutsch' in list(folder.values())[0].title

@@ -4,6 +4,7 @@ import logging
 import random
 
 import babel.dates
+import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
@@ -653,20 +654,10 @@ class AdvertisementNextread(Nextread):
         metadata = zeit.cms.content.interfaces.ICommonMetadata(context, None)
         if metadata is None:
             return
-        nextread = self.random_item(self.find_nextread_folder(
+        nextread = self.random_item(find_nextread_folder(
             metadata.ressort, metadata.sub_ressort))
         if nextread is not None:
             self.append(nextread)
-
-    def find_nextread_folder(self, ressort, subressort):
-        folder = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(
-            ressort, subressort)
-        if not folder:
-            folder = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(
-                ressort, None)
-        if self.advertisement_nextread_folder not in folder:
-            return None
-        return folder[self.advertisement_nextread_folder]
 
     def random_item(self, folder):
         if not folder:
@@ -676,11 +667,19 @@ class AdvertisementNextread(Nextread):
             return None
         return folder[key[0]]
 
-    @property
-    def advertisement_nextread_folder(self):
-        return zope.component.getUtility(
-            zeit.web.core.interfaces.ISettings).get(
-                'advertisement_nextread_folder', '')
+
+@beaker.cache.cache_region('default_term', 'nextread_folder')
+def find_nextread_folder(ressort, subressort):
+    folder = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(
+        ressort, subressort)
+    if not folder:
+        folder = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(ressort, None)
+    advertisement_nextread_folder = zope.component.getUtility(
+        zeit.web.core.interfaces.ISettings).get(
+            'advertisement_nextread_folder', '')
+    if advertisement_nextread_folder not in folder:
+        return None
+    return folder[advertisement_nextread_folder]
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.INextreadlist)
