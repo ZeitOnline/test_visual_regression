@@ -6,7 +6,6 @@
     <picture>0</picture>
     <roles>
         <role>authenticated user</role>
-        <role>beta</role>
     </roles>
     <profile>
         <firstname/>
