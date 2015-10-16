@@ -7,6 +7,9 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
         padding: remify(20px) 0 remify(20px) 0
     /* jobbox in minor is different */
     &--minor
+        display: none
+        +respond-min($break-tablet-min)
+            display: block
         .jb-box
             background-color: $white
             padding: remify(10px)
@@ -14,11 +17,16 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
             &__kicker
                 line-height: remify(84px)
                 color: $grey--mid-dark
-                font-size: em(22px)
+                font-size: em(18px)
                 text-align: center
                 letter-spacing: $letter-spacing-s
                 background: $silver url($bg_kicker) no-repeat right
                 background-size: cover
+                +respond-min($break-desktop-min)
+                    font-size: em(22px)
+            +respond-max($break-desktop-min)
+                & > a:last-of-type
+                    display: none
         .jb-content
             display: block
             min-height: 0
@@ -52,15 +60,18 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
                 line-height: em(18px)
                 color: $grey--mid
                 margin-bottom: remify(3px)
+                max-height: none
             &__byline
                 color: $zon_grey
                 font-size: em(14px)
                 line-height: em(17px)
                 margin-bottom: remify(10px)
-                max-width: remify(220px)
+                max-width: remify(180px)
+                +respond-min($break-desktop-min)
+                    max-width: remify(220px)
         .jb-action
             position: relative
-            display: inline
+            display: block
             top: 0
             right: 0
 
@@ -114,8 +125,6 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
     text-align: center
     +respond-min($break-desktop-min)
         display: inline-block
-        vertical-align: middle
-        width: 30%
         position: absolute
         top: remify(30px)
         right: remify(20px)
