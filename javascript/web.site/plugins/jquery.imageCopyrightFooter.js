@@ -28,7 +28,8 @@
     */
     $.fn.imageCopyrightFooter = function() {
 
-        var itemTemplate = '<li class="image-copyright-footer__item">' +
+        var containerTemplate = $( '#image-copyright-template' ),
+            itemTemplate = '<li class="image-copyright-footer__item">' +
                 '<img class="image-copyright-footer__item-image" src="___image___" />' +
                 '___name___' +
                 '</li>',
@@ -94,6 +95,7 @@
                             .replace( '___image___', currentImageUrl );
                     }
 
+                    containerTemplate.before( containerTemplate.html() );
                     $( '#image-copyright-items' ).html( wholeString );
 
                     $( '.js-image-copyright-footer-close' ).on( 'click', function( e ) {
