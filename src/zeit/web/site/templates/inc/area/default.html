@@ -15,11 +15,6 @@
                 {% set journalistic_format = None %}
             {% endif %}
 
-            <!-- cheat to get jobbox in -->
-            {% if layout == 'hide' %}
-                {% set layout = 'jobbox' %}
-            {% endif %}
-
             {% set module_loop = loop %}
             {% block before_module_include scoped %}{% endblock %}
             {% include [
