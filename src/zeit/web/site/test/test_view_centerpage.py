@@ -1388,6 +1388,19 @@ def test_zmo_parquet_has_zmo_styles(testbrowser):
     assert len(zmo_kicker) == 2
 
 
+def test_zett_parquet_is_rendering(testbrowser):
+    browser = testbrowser('/zeit-online/parquet-feeds')
+
+    zett_parquet = browser.cssselect('.cp-area--zett')[0]
+    title = zett_parquet.cssselect('.parquet-zett__title')
+    logo = zett_parquet.cssselect('.parquet-zett__logo')
+    teaser = zett_parquet.cssselect('.teaser-zett')
+
+    assert len(title)
+    assert len(logo)
+    assert len(teaser) == 3
+
+
 def test_imagecopyright_tags_are_present_on_centerpages(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     figures = browser.cssselect('figure *[itemprop=copyrightHolder]')
