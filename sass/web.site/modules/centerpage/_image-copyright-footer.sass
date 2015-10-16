@@ -4,6 +4,7 @@
 .image-copyright-footer
 	background-color: $zon_dark_grey
 	color: $zon_mid_grey
+	display: none
 	&__container
 		+clearfix
 		padding: $vertical-space $page-padding
@@ -11,7 +12,7 @@
 	&__headline
 		+font-smoothing
 		color: $zon-seashell
-		margin: remify(0 0 20px)
+		margin: 0
 		font-size: remify(16px)
 	&__button
 		background-color: transparent
@@ -20,7 +21,6 @@
 		padding: 0
 		&:hover
 			color: $zon_light_grey
-			text-decoration: underline
 	&__icon
 		height: remify(18px)
 		width: remify(18px)
@@ -30,14 +30,15 @@
 		padding: 0
 	&__item
 		+clearfix
+		margin-top: remify(20px)
 		&-image
 			background-color: $zon-charcoal // support column author images
 			float: left
-			margin: remify(0 20px 20px 0)
+			margin-right: remify(20px)
 			width: 30%
 		a
 			color: inherit
-			text-decoration: underline
+			border-bottom: 1px solid currentColor
 			&:hover
 				color: $zon_light_grey
 

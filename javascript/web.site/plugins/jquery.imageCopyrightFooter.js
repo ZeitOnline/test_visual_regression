@@ -28,8 +28,7 @@
     */
     $.fn.imageCopyrightFooter = function() {
 
-        var containerTemplate = $( '#image-copyright-template' ).html(),
-            itemTemplate = '<li class="image-copyright-footer__item">' +
+        var itemTemplate = '<li class="image-copyright-footer__item">' +
                 '<img class="image-copyright-footer__item-image" src="___image___" />' +
                 '___name___' +
                 '</li>',
@@ -53,10 +52,10 @@
                 },
 
                 show: function() {
+                    // there is a strange unresolvable bug that it's only scrolling on the first click
+                    // or never at all when using Velocity for the sliding animation, so use jQuery instead
                     this.container
                         .slideDown({ duration: slideDuration });
-                    // there is a strange unresolved bug that it's only scrolling on the first click
-                    // when using Velocity for the sliding animation, so use jQuery instead
                     //  .velocity( 'slideDown', slideDuration );
                     this.container.children().eq( 0 )
                         .scrollIntoView({ duration: scrollDuration });
@@ -95,7 +94,7 @@
                             .replace( '___image___', currentImageUrl );
                     }
 
-                    $( '.footer-links__button' ).eq( 0 ).before( containerTemplate.replace( '___items___', wholeString ) );
+                    $( '#image-copyright-items' ).html( wholeString );
 
                     $( '.js-image-copyright-footer-close' ).on( 'click', function( e ) {
                         e.preventDefault();

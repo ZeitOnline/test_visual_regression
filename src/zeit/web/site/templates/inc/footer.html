@@ -1,4 +1,5 @@
 {% import 'zeit.web.site:templates/macros/footer_macro.tpl' as foma %}
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 <div class="footer-logo">
     <div class="footer-logo__image">
@@ -11,6 +12,22 @@
 </div>
 <div class="footer-links">
     {{ foma.footer_links(view) }}
+    <div class="image-copyright-footer" id="bildrechte">
+        <div class="image-copyright-footer__container">
+            <button class="image-copyright-footer__button js-image-copyright-footer-close" title="schließen">
+                {{ lama.use_svg_icon('close', 'image-copyright-footer__icon', request) }}
+            </button>
+            <h2 class="image-copyright-footer__headline">
+                Bildrechte auf dieser Seite
+            </h2>
+            <ul class="image-copyright-footer__items" id="image-copyright-items">
+
+            </ul>
+            <button class="image-copyright-footer__button js-image-copyright-footer-close">
+                Bereich schließen
+            </button>
+        </div>
+    </div>
     <div class="footer-links__button">
         <a href="{{ view.canonical_url }}" class="footer-links__linkbutton js-scroll" title="Zurück nach oben" data-id="footernav.4.1..pfeil">Nach oben</a>
     </div>
