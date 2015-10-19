@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - FIX: Fix display of future dates
 
+- ZON-2329: do not show article-lineage on iPad
+
 
 2.14.1 (2015-10-15)
 -------------------
