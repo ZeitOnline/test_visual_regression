@@ -5,11 +5,9 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
         @extend %ad-label
     &--parquet
         padding: remify(20px) 0 remify(20px) 0
-    /* jobbox in minor is different */
-    &--minor
-        display: none
-        +respond-min($break-tablet-min)
-            display: block
+    /* jobbox in duo is different */
+    &--duo
+        display: block
         .jb-box
             background-color: $white
             padding: remify(10px)
@@ -17,13 +15,11 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
             &__kicker
                 line-height: remify(84px)
                 color: $grey--mid-dark
-                font-size: em(18px)
+                font-size: em(22px)
                 text-align: center
                 letter-spacing: $letter-spacing-s
                 background: $silver url($bg_kicker) no-repeat right
                 background-size: cover
-                +respond-min($break-desktop-min)
-                    font-size: em(22px)
             +respond-max($break-desktop-min)
                 & > a:last-of-type
                     display: none
@@ -81,11 +77,13 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
     position: relative
     &__kicker
         color: $red
-        font-size: em(13px)
+        font-size: em(12px)
         line-height: em(15px)
         font-weight: bold
         letter-spacing: $letter-spacing-l
         margin-bottom: remify(10px)
+        +respond-min($break-tablet-min)
+            font-size: em(13px)
 
 .jb-content
     display: none
