@@ -61,11 +61,13 @@
 		line-height: 1.2
 		margin: 0
 		padding-top: remify(10px)
-		&:after
-			content: "\0020\25B8" // No-Break Space and ▸ = Black Right-Pointing Small Triangle
-
+		// thomaspuppe during the PR of this feature:
+		// since there is no link, we do not show the arrow and hoverState.
+		//&:after
+		//	content: "\0020\25B8" // No-Break Space and ▸ = Black Right-Pointing Small Triangle
+		//
 		+respond-min($break-desktop-min)
 			color: $zon_grey
 			.teaser-shop &
-				+on-interaction
-					color: $zon-charcoal
+		//		+on-interaction
+		//			color: $zon-charcoal
