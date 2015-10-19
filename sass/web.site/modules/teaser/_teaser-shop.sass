@@ -1,0 +1,73 @@
+.teaser-shop-group
+	&__container
+		padding-bottom: remify(10px)
+		+respond-min($break-tablet-min)
+			padding-bottom: 0
+			+justify-children-horizontally('.teaser-shop')
+			margin: auto
+			width: remify(620px) // 2 * teaser à 300px + margin
+		+respond-min($break-desktop-min)
+			width: 100%
+
+	&__button
+		@extend %teaser-bar-group__button
+
+		&--default
+			.js &
+				+respond-min($break-desktop-min)
+					display: none
+		&--jsdesktop
+			.js &
+				+respond-max($break-desktop-min)
+					display: none
+			.no-js &
+				display: none
+
+	&__shuffle-icon
+		@extend %teaser-bar-group__shuffle-icon
+
+
+.teaser-shop
+	@extend %teaser-bar
+	margin-left: auto
+	margin-right: auto
+	max-width: remify(300px)
+	box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.07)
+
+	// don't display the third item on smaller screens evarrrrr
+	& + & + &
+		+respond-max($break-desktop-min)
+			display: none
+	+respond-min($break-desktop-min)
+		box-shadow: none
+		+on-interaction
+			box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.07)
+
+	&__media
+		@extend %teaser-bar__media
+
+	&__container
+		@extend %teaser-bar__container
+		padding-top: 10px
+
+	&__figurewrapper
+		@extend %teaser-bar__figurewrapper
+
+	&__text
+		border-top: 1px solid $zon_light_grey
+		color: $zon-charcoal
+		font-size: remify(16px)
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1.2
+		margin: 0
+		padding-top: remify(10px)
+		// thomaspuppe during the PR of this feature:
+		// since there is no link, we do not show the arrow and hoverState.
+		//&:after
+		//	content: "\0020\25B8" // No-Break Space and ▸ = Black Right-Pointing Small Triangle
+		//
+		+respond-min($break-desktop-min)
+			color: $zon_grey
+			.teaser-shop &
+		//		+on-interaction
+		//			color: $zon-charcoal

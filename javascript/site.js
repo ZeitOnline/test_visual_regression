@@ -79,7 +79,7 @@ require([
         $.updateSignals();
         $( '#main' ).autoclick();
         $( '#series_select' ).selectNav();
-        $( '.js-gallery-teaser-shuffle' ).shuffleTeasers();
+        $( '.js-bar-teaser-shuffle' ).shuffleTeasers();
         $( '.js-accordion' ).accordion();
         $( '.storystream-markup__content--first' ).storystream();
         $( '.js-image-copyright-footer' ).imageCopyrightFooter();

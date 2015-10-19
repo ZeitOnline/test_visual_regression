@@ -4,6 +4,8 @@ Change log for zeit.web
 2.15 (unreleased)
 -----------------
 
+- ZON-1191: Implement the mighty ZEIT Shop Homepage area
+
 - ZON-2273: Turn off zeit.de/beta
 
 - ZON-2036: Bildrechte im Footer von CPs
