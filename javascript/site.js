@@ -51,11 +51,11 @@ require([
     'web.site/plugins/jquery.selectNav',
     'web.site/plugins/jquery.shuffleTeasers',
     'web.site/plugins/jquery.snapshot',
-    'web.site/plugins/jquery.toggleBeta',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
     'web.site/plugins/jquery.countFormchars',
+    'web.site/plugins/jquery.imageCopyrightFooter',
     'web.site/plugins/jquery.hpOverlay',
     'web.site/plugins/jquery.fixPosition'
 ], function( $, Velocity ) {
@@ -82,6 +82,7 @@ require([
         $( '.js-bar-teaser-shuffle' ).shuffleTeasers();
         $( '.js-accordion' ).accordion();
         $( '.storystream-markup__content--first' ).storystream();
+        $( '.js-image-copyright-footer' ).imageCopyrightFooter();
     } else if ( article.length ) {
         // article, gallery etc.
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
@@ -97,6 +98,4 @@ require([
     $( '.js-scroll' ).animateScroll();
     // search
     $( '.search-form' ).searchTools();
-    // beta
-    $( '#beta-toggle' ).toggleBeta();
 });

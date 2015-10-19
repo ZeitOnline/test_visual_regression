@@ -33,7 +33,7 @@ $footer_logo_width_small: em(280px)
 %footer_list
 	list-style: none
 	margin: 0
-	padding: $petite $page-padding
+	padding: remify(20px) $page-padding
 
 %footer_column_list
 	float: left
@@ -68,13 +68,13 @@ $footer_logo_width_small: em(280px)
 
 .footer
 	font-size: remify(14px)
-	margin-top: $wide
+	margin-top: remify(60px)
 	text-align: center
 
 .footer-logo
 	&__image
 		display: inline-block
-		margin-bottom: $petite
+		margin-bottom: remify(20px)
 		a
 			+hide-text
 			+background-size(contain)
@@ -92,7 +92,7 @@ $footer_logo_width_small: em(280px)
 	+respond-min($break-tablet-min)
 		background-color: $zon_lighter_grey
 		color: $zon_dark_grey
-		padding-bottom: $petite
+		padding-bottom: remify(20px)
 	&__row
 		&--extra
 			@extend %footer_column_row
@@ -148,7 +148,7 @@ $footer_logo_width_small: em(280px)
 	padding-bottom: $junior
 	+respond-min($break-tablet-min)
 		border-top: none
-		padding-top: $petite
+		padding-top: remify(20px)
 	&__row
 		@extend %footer_column_row
 		@extend %footer_dark

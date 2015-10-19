@@ -8,14 +8,11 @@ import mock
 def test_footer_should_have_basic_structure(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/footer.html')
-    html_str = tpl.render(view=mock.MagicMock())
+    html_str = tpl.render(view=mock.MagicMock(), request=mock.Mock())
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('.footer-logo')) == 1, (
         'just one .footer-logo')
-
-    assert len(html('.footer-logo__image')) == 1, (
-        'just one .footer-logo__image')
 
     assert len(html('.footer-logo__image')) == 1, (
         'just one .footer-logo__image')
