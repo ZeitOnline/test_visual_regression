@@ -11,7 +11,6 @@ import zeit.cms.content.interfaces
 import zeit.web.core.gallery
 import zeit.web.core.view
 import zeit.web.magazin.view
-import zeit.web.site.area.spektrum
 
 
 log = logging.getLogger(__name__)
@@ -112,21 +111,6 @@ class Base(zeit.web.core.view.Base):
                 return 'noindex,follow'
         else:
             return 'index,follow,noodp,noydir,noarchive'
-
-
-@pyramid.view.view_config(
-    route_name='spektrum-kooperation',
-    renderer='templates/inc/area/spektrum.html')
-def spektrum_hp_feed(request):
-    # add CORS header to allow ESI JS drop-in
-    request.response.headers.add(
-        'Access-Control-Allow-Origin', '*')
-    request.response.cache_expires(60)
-    return {
-        'esi_toggle': True,
-        'area': zeit.web.site.area.spektrum.HPFeed(),
-        'parquet_position': request.params.get('parquet-position')
-    }
 
 
 @pyramid.view.view_config(
