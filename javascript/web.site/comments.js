@@ -447,6 +447,15 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
             .append( modHTML );
     },
 
+    jumpToComment = function() {
+        var comment = $( this.hash );
+
+        if ( comment.length ) {
+            comment.scrollIntoView();
+            return false;
+        }
+    },
+
     /**
      * comments.js: initialize
      * @function init
@@ -491,6 +500,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         $commentsBody.on( 'click', '.js-recommend-comment', recommendComment );
         $commentsBody.on( 'click', '.comment--wrapped', showReplies );
         $commentsBody.on( 'click', '.js-promote-comment', promoteComment );
+        $commentsBody.on( 'click', '.js-jump-to-comment', jumpToComment );
         $comments.on( inputEvent, '.js-required', enableForm );
     };
 

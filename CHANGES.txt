@@ -4,6 +4,8 @@ Change log for zeit.web
 2.15 (unreleased)
 -----------------
 
+- ZON-2277: Show origin for answer comments
+
 - ZON-1937: Add ze.tt parquet
 
 - ZON-2288: Generalize RSS content sources for ze.tt and spektrum

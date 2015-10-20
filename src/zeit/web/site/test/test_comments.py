@@ -114,6 +114,15 @@ def test_comment_filter_works_as_expected(testbrowser):
     assert len(comments) == 10
 
 
+def test_comment_in_reply_to_shows_origin(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    answers = browser.cssselect('.comment--indented')
+    origins = browser.cssselect('.comment__origin')
+    link = browser.cssselect('#cid-2968920 .comment__origin')[0]
+    assert len(answers) == len(origins)
+    assert link.text_content().strip() == 'Antwort auf #1 von Skarsgard'
+
+
 def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
     comments = jinja2_env.get_template(
         'zeit.web.site:templates/inc/article/comments.tpl')
