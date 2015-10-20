@@ -94,9 +94,9 @@ def app_settings(mockserver):
         'vivi_zeit.cms_source-keyword': (
             'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
         'vivi_zeit.cms_source-navigation': (
-            'egg://zeit.cms.content/navigation.xml'),
+            'egg://zeit.web.core/data/config/ressorts.xml'),
         'vivi_zeit.cms_source-channels': (
-            'egg://zeit.cms.content/navigation.xml'),
+            'egg://zeit.web.core/data/config/ressorts.xml'),
         'vivi_zeit.cms_source-products': (
             'egg://zeit.web.core/data/config/products.xml'),
         'vivi_zeit.cms_source-serie': (
@@ -182,7 +182,8 @@ def app_settings(mockserver):
         'debug.propagate_jinja_errors': True,
         'debug.enable_profiler': False,
         'dev_environment': True,
-        'enable_article_lineage': True
+        'enable_article_lineage': True,
+        'advertisement_nextread_folder': 'verlagsangebote',
     }
 
 

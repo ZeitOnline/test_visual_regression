@@ -47,13 +47,15 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
             return
 
     @zeit.web.reify
-    def nextread(self):
-        nextread = super(Article, self).nextread
-        if nextread.layout.id != 'minimal':  # XXX Ugly hack to register CRs.
-            for i in zeit.web.core.interfaces.ITeaserSequence(nextread):
-                i.image and self._copyrights.setdefault(
-                    i.image.image_group, i.image)
-        return nextread
+    def nextreads(self):
+        nextreads = super(Article, self).nextreads
+        for nextread in nextreads:
+            # XXX Ugly hack to register CRs.
+            if nextread.layout.id != 'minimal':
+                for i in zeit.web.core.interfaces.ITeaserSequence(nextread):
+                    i.image and self._copyrights.setdefault(
+                        i.image.image_group, i.image)
+        return nextreads
 
     @zeit.web.reify
     def genre(self):
