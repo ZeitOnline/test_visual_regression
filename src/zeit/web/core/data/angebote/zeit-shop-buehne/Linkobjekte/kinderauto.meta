@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/angebote/zeit-shop-buehne/Linkobjekte/januar-2015/2015-01-08_Ueberlaeufer_Duden</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-01-21T14:17:05.703990+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-04-23T14:21:25.620827+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-04-23T14:21:25.670984+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.seemann</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Angebote</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-10-01T14:51:05.572987+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-04-23T14:22:02.638771+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt; &lt;list&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/list&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:bd51561b-316c-4ad0-be41-fdc3e50730e7}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-10-01T14:49:53.911137+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">link</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Link" module="zeit.content.link.link"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-04-23T14:20:58.953671+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2015-10-01T14:51:05Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">5997</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Thu, 01 Oct 2015 14:51:05 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"1189de0-176d-5210c2d39dd97"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>
