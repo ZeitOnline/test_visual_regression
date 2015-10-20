@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1944: Implement Jobbox
 
+- Fix: Change number of jobs to be displayed in Jobbox
+
 
 2.15 (2015-10-20)
 -----------------
