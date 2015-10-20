@@ -111,6 +111,9 @@
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
                     </block>
                 </container>
+                <container cp:type="cpextra" module="jobbox" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c">
+                    <cp_extra id="jobbox"/>
+                </container>
             </region>
             <region area="id-da65a250-0482-4ce8-b662-5ca24af05061" visible="True" kind="minor">
                 <container cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe1b7" cp:type="teaser" hide-dupes="True" module="zon-square" visible="True">
@@ -145,6 +148,14 @@
                 </container>
             </region>
         </cluster>
+        <cluster area="id-a2dff7f3-9042-4a6f-b77d-143fdfc5cff7" visible="True" kind="solo">
+            <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
+                <container cp:type="playlist" module="playlist" visible="True" cp:__name__="id-7b4d43b7-5434-47b6-8a15-dfd1f4f45a2d">
+                  <block type="intern" href="http://xml.zeit.de/video/playlist/36516804001" contenttype="playlist" publication-date="" expires="" uniqueId="http://xml.zeit.de/video/playlist/36516804001" date-last-modified="2015-06-08T11:20:18+00:00" date-first-released="2015-03-19T01:32:12.609203+00:00" date-last-published="2015-06-08T11:21:18.553021+00:00" last-semantic-change="2015-06-08T11:17:11+00:00">
+                  </block>
+                </container>
+            </region>
+        </cluster>
         <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff4" visible="True">
             <region area="id-c1a352a2-5e54-4ab1-86f3-bbf565666083" visible="True" kind="duo">
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
@@ -153,9 +164,8 @@
                 </container>
             </region>
             <region area="id-76a16784-b3f0-487f-a2cb-b5cecf4daf9e" visible="True" kind="duo">
-                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
-                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
-                    </block>
+                <container cp:type="cpextra" module="jobbox" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c">
+                    <cp_extra id="jobbox"/>
                 </container>
             </region>
         </cluster>
@@ -164,14 +174,6 @@
                 <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
                     </block>
-                </container>
-            </region>
-        </cluster>
-        <cluster area="id-a2dff7f3-9042-4a6f-b77d-143fdfc5cff7" visible="True" kind="solo">
-            <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
-                <container cp:type="playlist" module="playlist" visible="True" cp:__name__="id-7b4d43b7-5434-47b6-8a15-dfd1f4f45a2d">
-                  <block type="intern" href="http://xml.zeit.de/video/playlist/36516804001" contenttype="playlist" publication-date="" expires="" uniqueId="http://xml.zeit.de/video/playlist/36516804001" date-last-modified="2015-06-08T11:20:18+00:00" date-first-released="2015-03-19T01:32:12.609203+00:00" date-last-published="2015-06-08T11:21:18.553021+00:00" last-semantic-change="2015-06-08T11:17:11+00:00">
-                  </block>
                 </container>
             </region>
         </cluster>

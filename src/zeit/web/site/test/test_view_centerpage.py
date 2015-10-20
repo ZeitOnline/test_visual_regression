@@ -1388,6 +1388,60 @@ def test_zmo_parquet_has_zmo_styles(testbrowser):
     assert len(zmo_kicker) == 2
 
 
+def test_jobbox_is_displayed_correctly(testbrowser):
+    browser = testbrowser('/index')
+
+    # in main area
+    box = browser.cssselect('.cp-area--major > .jobbox')
+    box_label = box[0].cssselect('.jobbox__label')
+    box_content = box[0].cssselect('.jb-content')
+    box_action = box[0].cssselect('.jb-action')
+    job_title = box_content[0].cssselect('.jb-text__title')
+    job_text = box_content[0].cssselect('.jb-text__byline')
+
+    assert len(box)
+    assert len(box_label)
+    assert len(box_content) == 3
+    assert len(box_action)
+    assert len(job_title)
+    assert len(job_text)
+
+    # in minor area
+    box = browser.cssselect('.cp-area--minor > .jobbox')
+    box_label = box[0].cssselect('.jobbox__label')
+    box_content = box[0].cssselect('.jb-content')
+    box_action = box[0].cssselect('.jb-action')
+    job_title = box_content[0].cssselect('.jb-text__title')
+    job_text = box_content[0].cssselect('.jb-text__byline')
+
+    assert len(box)
+    assert len(box_label)
+    assert len(box_content) == 3
+    assert len(box_action)
+    assert len(job_title)
+    assert len(job_text)
+
+
+def test_jobbox_parquet_is_displayed_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+
+    # in main area
+    parquet = browser.cssselect('.cp-area--parquet')
+    box = parquet[0].cssselect('.jobbox')
+    box_label = box[0].cssselect('.jobbox__label')
+    box_content = box[0].cssselect('.jb-content')
+    box_action = box[0].cssselect('.jb-action')
+    job_title = box_content[0].cssselect('.jb-text__title')
+    job_text = box_content[0].cssselect('.jb-text__byline')
+
+    assert len(box)
+    assert len(box_label)
+    assert len(box_content) == 3
+    assert len(box_action)
+    assert len(job_title)
+    assert len(job_text)
+
+
 def test_zett_parquet_is_rendering(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
 

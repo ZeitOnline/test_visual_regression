@@ -7,6 +7,8 @@ Change log for zeit.web
 - ZON-2334: Unbearbeitete Printartikel von der chronologischen Navigation
   ausschliessen
 
+- ZON-1944: Implement Jobbox
+
 
 2.15 (2015-10-20)
 -----------------
