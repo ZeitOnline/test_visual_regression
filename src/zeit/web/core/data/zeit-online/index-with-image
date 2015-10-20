@@ -90,6 +90,45 @@
             <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60598" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                 <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008"></block>
             </container>
+            <container cp:type="xml" module="xml" cp:__name__="cdb094df-8adc-46d7-b77f-8feb3aabd9e3">
+                <raw alldevices="true">
+                    <section class="servicelinks">
+                        <h2 class="servicelinks__title">Service</h2>
+                        <ul class="servicelinks__list">
+                            <li class="servicelinks__item">
+                                <a class="servicelinks_link" rel="nofollow" href="http://services.zeit.de/toptarif/vergleichsrechner.php">
+                                    Tarifrechner (Strom etc.)
+                                </a>
+                            </li>
+                            <li class="servicelinks__item">
+                                <a class="servicelinks_link" rel="nofollow" href="http://marktplatz.zeit.de/angebote/job-und-karriere">
+                                    Stellenmarkt
+                                </a>
+                            </li>
+                            <li class="servicelinks__item">
+                                <a class="servicelinks_link" rel="nofollow" href="http://www.bellevue-ferienhaus.de/zeit/">
+                                    Ferienhäuser
+                                </a>
+                            </li>
+                            <li class="servicelinks__item">
+                                <a class="servicelinks_link" rel="nofollow" href="http://ad-emea.doubleclick.net/clk;265976593;91267048;c">
+                                    Experteer Karrieredienst
+                                </a>
+                            </li>
+                            <li class="servicelinks__item">
+                                <a class="servicelinks_link" rel="nofollow" href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.serviceangeb.digipak.text.digitalpaket">
+                                    ZEIT Digital-Paket
+                                </a>
+                            </li>
+                            <li class="servicelinks__item">
+                                <a class="servicelinks_link" rel="nofollow" href="https://premium.zeit.de/abo/digitalpaket">
+                                    ZEIT Audio
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                </raw>
+            </container>
         </region>
     </cluster>
     <cluster visible="True" area="gnnpf" title="Servicebox">
