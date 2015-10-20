@@ -1,1 +1,3 @@
-{{module.xml | safe}}
+{% if module.alldevices %}
+	{{module.xml | safe}}
+{% endif %}
