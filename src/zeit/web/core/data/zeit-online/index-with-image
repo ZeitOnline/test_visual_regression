@@ -96,32 +96,32 @@
                         <h2 class="servicelinks__title">Service</h2>
                         <ul class="servicelinks__list">
                             <li class="servicelinks__item">
-                                <a class="servicelinks_link" rel="nofollow" href="http://services.zeit.de/toptarif/vergleichsrechner.php">
+                                <a class="servicelinks__link" rel="nofollow" href="http://services.zeit.de/toptarif/vergleichsrechner.php">
                                     Tarifrechner (Strom etc.)
                                 </a>
                             </li>
                             <li class="servicelinks__item">
-                                <a class="servicelinks_link" rel="nofollow" href="http://marktplatz.zeit.de/angebote/job-und-karriere">
+                                <a class="servicelinks__link" rel="nofollow" href="http://marktplatz.zeit.de/angebote/job-und-karriere">
                                     Stellenmarkt
                                 </a>
                             </li>
                             <li class="servicelinks__item">
-                                <a class="servicelinks_link" rel="nofollow" href="http://www.bellevue-ferienhaus.de/zeit/">
+                                <a class="servicelinks__link" rel="nofollow" href="http://www.bellevue-ferienhaus.de/zeit/">
                                     Ferienhäuser
                                 </a>
                             </li>
                             <li class="servicelinks__item">
-                                <a class="servicelinks_link" rel="nofollow" href="http://ad-emea.doubleclick.net/clk;265976593;91267048;c">
+                                <a class="servicelinks__link" rel="nofollow" href="http://ad-emea.doubleclick.net/clk;265976593;91267048;c">
                                     Experteer Karrieredienst
                                 </a>
                             </li>
                             <li class="servicelinks__item">
-                                <a class="servicelinks_link" rel="nofollow" href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.serviceangeb.digipak.text.digitalpaket">
+                                <a class="servicelinks__link" rel="nofollow" href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.serviceangeb.digipak.text.digitalpaket">
                                     ZEIT Digital-Paket
                                 </a>
                             </li>
                             <li class="servicelinks__item">
-                                <a class="servicelinks_link" rel="nofollow" href="https://premium.zeit.de/abo/digitalpaket">
+                                <a class="servicelinks__link" rel="nofollow" href="https://premium.zeit.de/abo/digitalpaket">
                                     ZEIT Audio
                                 </a>
                             </li>
