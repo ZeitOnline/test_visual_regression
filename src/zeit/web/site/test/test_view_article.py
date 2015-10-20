@@ -1039,3 +1039,9 @@ def test_article_lineage_should_be_fixed_after_scrolling(
 def test_article_lineage_should_not_render_on_advertorials(testbrowser):
     browser = testbrowser('/zeit-online/article/angebot')
     assert len(browser.cssselect('.article-lineage')) == 0
+
+
+def test_article_lineage_should_not_render_on_articles_without_channels(
+        testbrowser):
+    browser = testbrowser('/zeit-online/article/dpa')
+    assert len(browser.cssselect('.article-lineage')) == 0
