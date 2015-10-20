@@ -1,5 +1,7 @@
 import math
 
+import pyramid.threadlocal
+
 import zope.schema
 
 import zeit.cms.content.property
@@ -13,17 +15,8 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
     # XXX: this is all very boilerplate-y, but it's get sh*t done
     #      nevertheless: refactoring would be great (aps)
 
-    _page = zeit.cms.content.property.ObjectPathProperty(
-        '.page', zope.schema.Int(required=False))
     _hits = zeit.cms.content.property.ObjectPathProperty(
         '.hits', zope.schema.Int(required=False))
-
-    def values(self):
-        return self._values
-
-    @zeit.web.reify
-    def _values(self):
-        return super(Gallery, self).values()
 
     @property
     def hits(self):
@@ -38,13 +31,7 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
 
     @property
     def page(self):
-        if self._page is None:
-            return 1
-        return self._page
-
-    @page.setter
-    def page(self, value):
-        self._page = value
+        return int(pyramid.threadlocal.get_current_request().GET.get('p', 1))
 
     @zeit.web.reify
     def total_pages(self):

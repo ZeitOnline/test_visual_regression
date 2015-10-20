@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="homepage">
+  <head>
+    <topiclinks>
+      <topiclink>
+        <topiclink_label_1>Flüchtlinge</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/thema/fluechtlinge-in-europa</topiclink_url_1>
+        <topiclink_label_2>Nobelpreis</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/thema/nobelpreis</topiclink_url_2>
+        <topiclink_label_3>VW-Affäre</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/thema/vw-affaere</topiclink_url_3>
+      </topiclink>
+    </topiclinks>
+    <header_image xsi:nil="true"/>
+    <snapshot src="http://xml.zeit.de/kultur/2012-03/momente/0710-moment-frueh.jpg" type="jpg" title="Taifun Mujigae hat in Südchina schwere Schäden angerichtet." align="left" publication-date="" expires="">
+      <bu>Taifun Mujigae hat in Südchina schwere Schäden angerichtet.</bu>
+      <copyright>© Reuters</copyright>
+    </snapshot>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-10-07T12:07:55.111638+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-10-07T12:14:48.262511+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-10-07T11:10:45.118658+00:00</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Aktuelle Nachrichten, Kommentare, Analysen und Hintergrundberichte aus Politik, Wirtschaft, Gesellschaft, Wissen, Kultur und Sport lesen Sie auf ZEIT ONLINE. Aktuelle Nachrichten, Kommentare, Analysen und Hintergrundberichte aus Politik, Wirtschaft, Gesellschaft, Wissen, Kultur und Sport lesen Sie auf ZEIT.de. Aktuelle Nachrichten, Kommentare, Analysen und Hintergrundberichte aus Politik, Wirtschaft, Gesellschaft, Wissen, Kultur und Sport lesen Sie bei der ZEIT. Aktuelle Nachrichten, Kommentare, Analysen und Hintergrundberichte aus Politik, Wirtschaft, Gesellschaft, Wissen, Kultur und Sport – die ZEIT. Aktuelle News, Kommentare, Analysen und Hintergrundberichte aus Politik, Wirtschaft, Gesellschaft, Wissen, Kultur und Sport lesen Sie auf ZEIT ONLINE.</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">ZEIT ONLINE | Nachrichten, Hintergründe und Debatten</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-10-07T11:13:50.066766+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.seemann</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/angebote/zeit-shop-buehne/index</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">homepage</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:91f3d214-5186-454c-9e69-6ce74562ed90}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>VORSCHAU: Shop-Bühne</title>
+    <cluster visible="True" visible_mobile="True" area="id-8d99390e-9b77-4afd-b81b-a227a4ba50a8" kind="solo">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-cf4518ca-62fb-4b2c-a73e-90edfe994143" kind="solo" count="1" automatic="False" automatic_type="centerpage" title="ZEIT ONLINE Startseite" read_more_url="http://www.zeit.de/index">
+        <referenced_cp>http://xml.zeit.de/index</referenced_cp>
+        <container cp:type="teaser" module="zon-fullwidth" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-d9c114cd-08c5-4bd4-9573-71fd5f74a718">
+          <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
+          </block>
+        </container>
+      </region>
+    </cluster>
+    <cluster visible="True" area="id-c7f6e25c-f7e8-4d0e-876d-f47e88be2918" kind="gallery" visible_mobile="True" title="ZEIT Shop">
+      <region visible="True" hide-dupes="True" area="id-f103fa99-95e2-4094-8bb9-d56b482325f7" kind="shop" title="ZEIT Shop" count="3" automatic="True" automatic_type="centerpage" visible_mobile="True" supertitle="Alle Angebote im Shop" read_more_url="http://shop.zeit.de">
+        <referenced_cp>http://xml.zeit.de/angebote/zeit-shop-buehne/inhaltstemplate</referenced_cp>
+        <container cp:type="auto-teaser" module="zon-shop" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-3f666f47-4cf7-43a7-97c1-305a8665d8b7"/>
+        <container cp:type="auto-teaser" module="zon-shop" visible="True" visible_mobile="False" text_color="dark" overlay_level="3" cp:__name__="id-cdd6d281-49de-4d2c-af3b-a5817e6547a2"/>
+        <container cp:type="auto-teaser" module="zon-shop" visible="True" visible_mobile="False" text_color="dark" overlay_level="3" cp:__name__="id-cdd62d81-49de-4d2c-af3b-a5817e6547a2"/>
+      </region>
+    </cluster>
+    <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa993" title="Fotostrecken" kind="gallery">
+        <region visible="True" hide-dupes="False" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96812" kind="gallery" title="Fotostrecken" count="2" automatic="True" automatic_type="centerpage">
+            <referenced_cp>http://xml.zeit.de/foto/index</referenced_cp>
+            <container cp:type="auto-teaser" module="zon-gallery" visible="True" cp:__name__="id-7b76790b-cf36-b49f-8343-0069411a8c5b"/>
+            <container cp:type="auto-teaser" module="zon-gallery" visible="True" cp:__name__="id-a9cb1735-6a36-2401-afef-6e19baf544e3"/>
+        </region>
+    </cluster>
+  </body>
+  <feed></feed>
+  <teaser>
+    <title>VORSCHAU: Shop-Bühne</title>
+  </teaser>
+</centerpage>

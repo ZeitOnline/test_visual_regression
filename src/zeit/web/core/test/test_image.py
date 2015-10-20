@@ -14,6 +14,7 @@ import zeit.cms.interfaces
 import zeit.content.article.interfaces
 import zeit.content.image.variant
 
+import zeit.web.core.image
 import zeit.web.core.sources
 import zeit.web.core.template
 
@@ -90,7 +91,7 @@ def test_brightcove_images_should_set_cache_headers(testserver):
             testserver.url))
     settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
     assert resp.headers.get('Cache-Control') == 'max-age={}'.format(
-        settings.get('caching_time_image'))
+        settings.get('caching_time_external'))
 
 
 def test_native_images_should_set_cache_headers(testserver):
@@ -103,7 +104,7 @@ def test_native_images_should_set_cache_headers(testserver):
 
 
 def test_spektrum_images_should_set_cache_headers(testserver):
-    resp = requests.get('{}/spektrum-image/images/img1.jpg'.format(
+    resp = requests.get('{}/spektrum-image/images/img1.jpg/wide'.format(
         testserver.url))
     settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
     assert resp.headers.get('Cache-Control') == 'max-age={}'.format(
@@ -111,7 +112,7 @@ def test_spektrum_images_should_set_cache_headers(testserver):
 
 
 def test_spektrum_images_should_handle_non_ascii(testserver):
-    resp = requests.get(u'{}/spektrum-image/images/umläut.jpg'.format(
+    resp = requests.get(u'{}/spektrum-image/images/umläut.jpg/wide'.format(
         testserver.url))
     assert resp.status_code == 404
 
@@ -237,7 +238,7 @@ def test_variant_getter_should_output_a_variant_image_if_all_went_well(
         'http://xml.zeit.de/zeit-online/cp-content/article-01')
     monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'large'.format)
     variant = zeit.web.core.template.get_image(mock.Mock(), content)
-    assert isinstance(variant, zeit.web.core.centerpage.VariantImage)
+    assert isinstance(variant, zeit.web.core.image.VariantImage)
 
 
 def test_image_view_uses_native_filename_for_legacy_images():
@@ -266,7 +267,7 @@ def test_image_view_uses_traversed_path_segment_if_parent_unavailable():
     context.__parent__ = []
     context.mimeType = u'mööp'
     request = mock.Mock()
-    request.traversed = ['lorem', 'ipsum']
+    request.path = 'lorem/ipsum'
     view = zeit.web.core.view_image.Image(context, request)
     assert view.content_disposition == 'inline; filename="ipsum.jpeg"'
 
@@ -277,7 +278,7 @@ def test_image_view_uses_content_type_as_fileextension_if_available():
     context.__parent__ = []
     context.mimeType = 'image/png'
     request = mock.Mock()
-    request.traversed = ['dolorset']
+    request.path = 'dolorset'
     view = zeit.web.core.view_image.Image(context, request)
     assert view.content_disposition == 'inline; filename="dolorset.png"'
 
@@ -288,7 +289,7 @@ def test_image_view_uses_jpeg_as_fileextension_if_content_type_unavailable():
     context.__parent__ = []
     context.mimeType = u'mööp'
     request = mock.Mock()
-    request.traversed = ['dolorset']
+    request.path = 'dolorset'
     view = zeit.web.core.view_image.Image(context, request)
     assert view.content_disposition == 'inline; filename="dolorset.jpeg"'
 
@@ -299,7 +300,7 @@ def test_image_view_should_handle_unicode_filename_and_extension():
     context.__parent__ = []
     context.mimeType = u'image/gemälde'
     request = mock.Mock()
-    request.traversed = [u'wunder', u'schönes porträt']
+    request.path = u'wunder/schönes porträt'
     view = zeit.web.core.view_image.Image(context, request)
     assert view.content_disposition == (
         'inline; filename="schoenes-portraet.jpeg"')

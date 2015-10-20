@@ -75,6 +75,8 @@ def app_settings(mockserver):
         'community_host_timeout_secs': '10',
         'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
         'spektrum_img_host': mockserver.url + '/spektrum',
+        'zett_hp_feed': mockserver.url + '/zett/feed.xml',
+        'zett_img_host': mockserver.url + '/zett',
         'node_comment_statistics': 'community/node-comment-statistics.xml',
         'default_teaser_images': (
             'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
@@ -277,7 +279,15 @@ def preserve_settings(application_session, request):
 
 
 @pytest.fixture
-def application(application_session, preserve_settings, zodb, request):
+def reset_solr(application_session, request):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    if isinstance(solr, MockSolr):
+        solr.reset()
+
+
+@pytest.fixture
+def application(
+        application_session, preserve_settings, reset_solr, zodb, request):
     # This application_session/application split is a bit clumsy, but some
     # things (e.g. reset connector, teardown zodb) needs to be called after
     # each test (i.e. in 'function' scope). The many diverse fixtures make this
@@ -664,6 +674,9 @@ class MockSolr(object):
     zope.interface.implements(zeit.solr.interfaces.ISolr)
 
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.results = []
 
     def search(self, q, rows=10, **kw):

@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC  # NOQA
+from selenium.webdriver.support.ui import WebDriverWait
 import pytest
 import requests
 
 import zeit.cms.interfaces
 import zeit.content.image.interfaces
 
-import zeit.web.core.centerpage
+import zeit.web.site.module.playlist
 import zeit.web.site.view_video
-
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC  # NOQA
-from selenium.webdriver.support.ui import WebDriverWait
 
 
 def is_adcontrolled(contents):
@@ -27,7 +26,7 @@ def test_video_imagegroup_should_adapt_videos(application):
     video = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/video/2015-01/3537342483001')
     group = zeit.content.image.interfaces.IImageGroup(video)
-    assert isinstance(group, zeit.web.core.centerpage.VideoImageGroup)
+    assert isinstance(group, zeit.web.site.module.playlist.ImageGroup)
 
 
 @pytest.mark.parametrize('img,size,res', [

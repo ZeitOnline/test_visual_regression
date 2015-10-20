@@ -100,6 +100,20 @@ def test_route_config_should_make_friedbert_surrender_to_blacklisted_routes(
     assert error.getcode() == 303
 
 
+def test_blacklist_entry_should_match_everything_but_image_urls(testbrowser):
+    with pytest.raises(urllib2.HTTPError) as info:
+        testbrowser('/angebote/autosuche/foo/bar/index')
+    assert info.value.getcode() == 303
+
+    with pytest.raises(urllib2.HTTPError) as info:
+        testbrowser('/angebote/autosuche/foo/bar/my_logo')
+    assert info.value.getcode() == 303
+
+    with pytest.raises(urllib2.HTTPError) as info:
+        testbrowser('/angebote/autosuche/foo/bar/wide__123x456')
+    assert info.value.getcode() == 404
+
+
 @pytest.mark.parametrize('path, moved', [
     ('', '/index'),
     ('/', '/index'),
