@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>ze.tt</title>
+        <link>http://ze.tt</link>
+        <description>beta</description>
+        <image>
+            <url>http://ze.tt/apple-touch-icon-144x144.png</url>
+            <title>ze.tt</title>
+            <link>http://ze.tt</link>
+        </image>
+        <language>de-DE</language>
+        <copyright>Copyright ze.tt GmbH. Alle Rechte vorbehalten.</copyright>
+        <atom:link href="http://ze.tt" rel="self" type="application/rss+xml"/>
+        <item>
+            <title>Schultüten: Wer hat die dickste?</title>
+            <link>http://ze.tt/schultueten-wer-hat-die-dickste/</link>
+            <description>Womit geklärt wäre, woher die Niedersachsen ihre Komplexe haben. </description>
+            <pubDate>Mon, 10 Aug 2015 05:56:44 +0000</pubDate>
+            <guid isPermaLink="false">7419</guid>
+            <enclosure length="239127" type="image/jpeg" url="http://ze.tt/wp-content/uploads/2015/08/photocaseoo6lm67i55842362-e1439186000645-1024x645.jpg"/>
+        </item>
+        <item>
+            <title>Nilpferd in Nigeria erschossen: Tierschutz in Zeiten von Boko Haram</title>
+            <link>http://ze.tt/nilpferd-in-nigeria-erschossen-tierschutz-in-zeiten-von-boko-haram/</link>
+            <description>Tierschutz muss man sich leisten können. In Nigeria ist nun ein wild-wütendes Nilpferd erschossen worden. Die Anwohner hatten keine andere Wahl.</description>
+            <pubDate>Mon, 10 Aug 2015 12:09:50 +0000</pubDate>
+            <guid isPermaLink="false">8009</guid>
+            <enclosure length="170406" type="image/jpeg" url="http://ze.tt/wp-content/uploads/2015/08/GettyImages-185725319-e1439203447463-1024x576.jpg"/>
+        </item>
+        <item>
+            <title>Wichtiges vom Wochenende – Update 32</title>
+            <link>http://ze.tt/wichtiges-vom-wochenende-update-32/</link>
+            <description>Mann, war das wieder heiß am Wochenende. Wer die Nachrichtenlage nicht im Blick hatte, kann sich hier schnell auf Stand bringen.</description>
+            <pubDate>Mon, 10 Aug 2015 08:24:09 +0000</pubDate>
+            <guid isPermaLink="false">7981</guid>
+            <enclosure length="198149" type="image/jpeg" url="http://ze.tt/wp-content/uploads/2015/08/GettyImages-483286102-e1439194020948-1024x577.jpg"/>
+        </item>
+    </channel>
+</rss>

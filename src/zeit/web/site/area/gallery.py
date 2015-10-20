@@ -18,13 +18,6 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
     _hits = zeit.cms.content.property.ObjectPathProperty(
         '.hits', zope.schema.Int(required=False))
 
-    def values(self):
-        return self._values
-
-    @zeit.web.reify
-    def _values(self):
-        return super(Gallery, self).values()
-
     @property
     def hits(self):
         if self._hits is None:
