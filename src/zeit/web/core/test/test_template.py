@@ -16,6 +16,7 @@ import zeit.cms.interfaces
 import zeit.content.cp.blocks.teaser
 
 import zeit.web.core.decorator
+import zeit.web.core.image
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.site.module.search_form
@@ -70,7 +71,7 @@ def test_get_teaser_image(testserver):
         'http://xml.zeit.de/centerpage/article_video_asset_2'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
-    assert isinstance(image, zeit.web.core.centerpage.TeaserImage), (
+    assert isinstance(image, zeit.web.core.image.TeaserImage), (
         'Article with video asset should produce a teaser image.')
     assert 'katzencontent-zmo-large.jpg' in image.src
 
@@ -80,7 +81,7 @@ def test_get_teaser_image(testserver):
     )
 
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
-    assert isinstance(image, zeit.web.core.centerpage.TeaserImage), (
+    assert isinstance(image, zeit.web.core.image.TeaserImage), (
         'Article with image asset should produce a teaser image.')
     assert 'frau-isst-suppe-2-zmo-large.jpg' in image.src
 
@@ -475,7 +476,7 @@ def test_get_column_image_should_return_an_image_or_none(application):
         zeit.cms.interfaces.ICMSContent(
             'http://xml.zeit.de/zeit-online/cp-content/kolumne'))
 
-    assert isinstance(img, zeit.web.core.centerpage.Image)
+    assert isinstance(img, zeit.web.core.image.Image)
     assert zeit.web.core.template.get_column_image(None) is None
 
     teaser = mock.Mock()

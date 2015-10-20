@@ -4,6 +4,10 @@ Change log for zeit.web
 2.15 (unreleased)
 -----------------
 
+- ZON-1937: Add ze.tt parquet
+
+- ZON-2288: Generalize RSS content sources for ze.tt and spektrum
+
 - ZON-1191: Implement the mighty ZEIT Shop Homepage area
 
 - ZON-2273: Turn off zeit.de/beta

@@ -86,10 +86,10 @@ class Byline(list):
             yield 'text', display_name
 
     def groups(self):
-        authors = filter(bool, self.context.authorships)
+        authors = filter(bool, getattr(self.context, 'authorships', ()))
 
         if not authors:
-            authors = filter(bool, self.context.authors)
+            authors = filter(bool, getattr(self.context, 'authors', ()))
             if not authors:
                 self[:] = []  # Bail out if we don't have any authors.
             else:

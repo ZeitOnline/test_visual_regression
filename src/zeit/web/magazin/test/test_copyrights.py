@@ -236,7 +236,7 @@ def test_centerpage_gracefully_skips_malformed_copyrights(
     view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
 
     group = 'http://xml.zeit.de/centerpage/katzencontent/'
-    image = zeit.web.core.centerpage.TeaserImage(
+    image = zeit.web.core.image.TeaserImage(
         zeit.cms.interfaces.ICMSContent(group),
         zeit.cms.interfaces.ICMSContent(group + 'katzencontent-180x101.jpg'))
 

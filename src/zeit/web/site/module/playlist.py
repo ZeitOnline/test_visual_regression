@@ -1,11 +1,34 @@
 import logging
 
+import grokcore.component
+
+import zeit.content.image.interfaces
 import zeit.content.video.interfaces
 
 import zeit.web
+import zeit.web.core.image
 import zeit.web.site.module
 
 log = logging.getLogger(__name__)
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
+class ImageGroup(zeit.web.core.image.LocalImageGroup):
+
+    def __init__(self, context):
+        super(ImageGroup, self).__init__(context)
+        self.image_url = context.video_still
+        self.uniqueId = '{}/imagegroup/'.format(context.uniqueId)
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
+class VideoImages(object):
+
+    def __init__(self, context):
+        self.context = context
+        self.image = zeit.content.image.interfaces.IImageGroup(context)
 
 
 @zeit.web.register_module('playlist')

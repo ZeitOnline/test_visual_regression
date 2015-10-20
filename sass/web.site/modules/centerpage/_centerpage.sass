@@ -47,7 +47,8 @@
 	&--parquet,
 	&--solo,
 	&--spektrum,
-	&--topic
+	&--topic,
+	&--zett
 		padding: 0
 		position: relative
 	&--newsticker,
@@ -61,10 +62,15 @@
 			display: block
 	&--spektrum
 		+respond-min($break-tablet-min)
-			border-bottom: 1px solid $spektrum_de_blue
-			border-top: 1px solid $spektrum_de_blue
+			border-color: $primary-color-spektrum
+			border-style: solid
+			border-width: 1px 0
 			margin-bottom: -1px
 			margin-top: -1px
+	&--zett
+		background-color: $zon_lighter_grey
+		margin-top: -1px // "remove" border-top of parquet region
+
 	+respond-min($break-areas)
 		float: left
 		&--ranking
