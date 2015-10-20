@@ -678,6 +678,9 @@ class Content(Base):
         if self.is_advertorial:
             return None
 
+        if not self.context.channels or len(self.context.channels) == 0:
+            return None
+
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
 
         def next(from_, to, sort):
@@ -692,6 +695,7 @@ class Content(Base):
                     lq.field('uniqueId', self.context.uniqueId)),
                 lq.not_(
                     lq.field('ressort', 'zeit-magazin')),
+                lq.text_range('channels', None, None),
                 lq.field_raw(
                     'product_id', lq.or_(
                         'ZEDE', 'ZEI', 'ZECH', 'ZEC', 'ZEOE', 'ZES', 'ZTWI',

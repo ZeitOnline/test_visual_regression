@@ -1043,6 +1043,12 @@ def test_article_lineage_should_not_render_on_advertorials(testbrowser):
     assert len(browser.cssselect('.article-lineage')) == 0
 
 
+def test_article_lineage_should_not_render_on_articles_without_channels(
+        testbrowser):
+    browser = testbrowser('/zeit-online/article/dpa')
+    assert len(browser.cssselect('.article-lineage')) == 0
+
+
 def test_advertisement_nextread_should_render_after_nextread(
         testbrowser, workingcopy):
     article = zeit.cms.interfaces.ICMSContent(
