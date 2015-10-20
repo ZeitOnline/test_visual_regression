@@ -44,18 +44,14 @@
              * setCurrentJob – defines current job object in list
              */
             setCurrentJob: function() {
-                if ( box.current !== box.maxJobs ) {
-                    box.current++;
-                } else {
-                    box.current = 0;
-                }
+                this.current = ( this.current + 1 ) % this.jobs.length;
             },
             /**
              * hideJob – fades out a job per animation
              */
             hideJob: function() {
 
-                $( box.jobs[box.current] ).find( '.jb-text' ).delay( 10000 ).velocity( 'fadeOut', 3000, function() {
+                $( this.jobs[this.current] ).find( '.jb-text' ).delay( 8000 ).velocity( 'transition.slideUpOut', 500, function() {
                     $( box.jobs[box.current] ).removeClass( 'jb-content--show' );
                     box.setCurrentJob();
                     box.showJob();
@@ -66,8 +62,8 @@
              * showJob – fades in a job per animation
              */
             showJob: function() {
-                $( box.jobs[box.current] ).addClass( 'jb-content--show' );
-                $( box.jobs[box.current] ).find( '.jb-text' ).velocity( 'fadeIn', 3000, function() {
+                $( this.jobs[this.current] ).addClass( 'jb-content--show' );
+                $( this.jobs[this.current] ).find( '.jb-text' ).velocity( 'transition.slideUpIn', 500, function() {
                     box.hideJob();
                 });
 

@@ -75,13 +75,14 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
     background-color: $zon-seashell
     padding: remify(20px)
     position: relative
+    min-height: remify(150px)
     &__kicker
         color: $red
         font-size: em(12px)
         line-height: em(15px)
         font-weight: bold
         letter-spacing: $letter-spacing-l
-        margin-bottom: remify(10px)
+        margin-bottom: remify(20px)
         +respond-min($break-tablet-min)
             font-size: em(13px)
 
@@ -124,7 +125,7 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
     +respond-min($break-desktop-min)
         display: inline-block
         position: absolute
-        top: remify(30px)
+        top: remify(40px)
         right: remify(20px)
 
 .jb-button

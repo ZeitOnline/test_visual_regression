@@ -7,7 +7,7 @@
             {% block kicker %}Aktuelle Jobs im ZEIT Stellenmarkt{% endblock %}
         </div>
         {% for teaser in module[:3] %}
-        <a class="jb-content {% if loop.first %}jb-content--show jb-content--first{% endif %}" href="{{ teaser.url }}">
+        <a class="jb-content {% if loop.first %}jb-content--show jb-content--first{% endif %}" href="{{ teaser.url }}?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker1.textlink.stellenanzeige.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker1_textlink_stellenanzeige_">
             <div class="jb-icon">
                 <span class="jb-icon__bullet"></span>
             </div>
@@ -23,7 +23,7 @@
             </div>
             {% block link %}
                 <div class="jb-link">
-                    <a class="jb-link__text" href="http://jobs.zeit.de/?wt_mc=zeit_de.intern.zeit_stellenmarkt.zon_hp.ticker.stellenmarkt_startseite.textlink">Zum Stellenmarkt</a>
+                    <a class="jb-link__text" href="https://jobs.zeit.de/?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker1.textlink.startseite.x&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker1_textlink_startseite_x">Zum Stellenmarkt</a>
                 </div>
             {% endblock %}
         </span>
