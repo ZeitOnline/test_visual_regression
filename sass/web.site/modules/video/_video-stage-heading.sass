@@ -16,13 +16,19 @@
 		position: absolute
 		left: $page-padding
 		top: remify($small--px)
+	&__brand-name
+		+hide-text
+		display: inline-block
+		position: absolute
 	&__logo
-		height: auto
+		height: remify(20px)
+		vertical-align: sub
 		width: remify(136px)
-		+image_text_replacement(inline-block, text-bottom)
 		+respond-min($break-phablet-min)
 			width: remify(197px)
-		+old-ie
-			background: none !important
-			text-indent: 0
-			width: auto
+			height: remify(27px)
+		// +image_text_replacement(inline-block, text-bottom)
+		// +old-ie
+		// 	background: none !important
+		// 	text-indent: 0
+		// 	width: auto
