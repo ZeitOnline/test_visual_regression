@@ -121,6 +121,10 @@ class INextread(IFrontendBlock):
     """Nextread teaser block must be similar to zeit.content.cp.TeaserBlock"""
 
 
+class INextreadlist(zope.interface.Interface):
+    """List of all nextreads belonging to an article."""
+
+
 class ITeaser(zope.interface.Interface):
 
     image = zope.interface.Attribute('image')

@@ -274,3 +274,28 @@ def test_block_breaking_news_has_correct_date(application):
 
     breaking_news = zeit.web.core.block.BreakingNews()
     assert breaking_news.date_first_released == view.date_first_released
+
+
+def test_find_nextread_returns_none_if_nonexistent(application):
+    assert zeit.web.core.block.find_nextread_folder('Wissen', None) is None
+
+
+def test_find_nextread_from_ressort_without_subressort(application):
+    assert zeit.web.core.block.find_nextread_folder(
+        'Wirtschaft', None) is not None
+
+
+def test_find_nextread_from_subressort(application):
+    assert zeit.web.core.block.find_nextread_folder(
+        'Deutschland', 'Datenschutz') is not None
+
+
+def test_find_nextread_from_ressort_if_subressort_has_none(application):
+    assert zeit.web.core.block.find_nextread_folder(
+        'Deutschland', 'Integration') is not None
+
+
+def test_find_nextread_from_correct_ressort_if_subressort_has_same_name(
+        application):
+    folder = zeit.web.core.block.find_nextread_folder('Deutschland', 'Meinung')
+    assert 'deutsch' in list(folder.values())[0].title

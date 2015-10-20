@@ -115,7 +115,8 @@ class Base(zeit.web.core.view.Base):
 
 @pyramid.view.view_config(
     route_name='login_state',
-    renderer='templates/inc/navigation/login-state.html')
+    renderer='templates/inc/navigation/login-state.html',
+    http_cache=60)
 def login_state(request):
     settings = request.registry.settings
     destination = request.params['context-uri'] if request.params.get(
@@ -126,16 +127,11 @@ def login_state(request):
             settings.get('sso_cookie')):
         log.warn("SSO Cookie present, but not authenticated")
 
-    if settings['sso_activate']:
-        info['login'] = u"{}/anmelden?url={}".format(
+    info['login'] = u"{}/anmelden?url={}".format(
+        settings['sso_url'], destination)
+    info['logout'] = u"{}/abmelden?url={}".format(
             settings['sso_url'], destination)
-        info['logout'] = u"{}/abmelden?url={}".format(
-            settings['sso_url'], destination)
-    else:
-        info['login'] = u"{}/user/login?destination={}".format(
-            settings['community_host'], destination)
-        info['logout'] = u"{}/user/logout?destination={}".format(
-            settings['community_host'], destination)
+
     if request.authenticated_userid and 'user' in request.session:
         info['user'] = request.session['user']
         info['profile'] = "{}/user".format(settings['community_host'])

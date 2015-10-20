@@ -1,1 +1,15 @@
-{% extends "zeit.web.site:templates/inc/area/parquet.html" %}
+{% extends "zeit.web.site:templates/inc/area/default.html" %}
+
+{% block before_module_list %}
+    <div class="parquet-zett__head">
+        <a class="parquet-zett__title" href="http://ze.tt/">
+            {{ lama.use_svg_icon('logo-zett', 'parquet-zett__logo', request) }}
+        </a>
+    </div>
+
+    <div class="parquet-zett__teasers">
+{% endblock %}
+
+{% block after_module_list %}
+    </div>
+{% endblock %}
