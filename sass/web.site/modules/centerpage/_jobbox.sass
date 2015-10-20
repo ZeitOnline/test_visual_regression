@@ -1,4 +1,5 @@
 $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
+$break-action: 380px
 
 .jobbox
     &__label
@@ -35,7 +36,7 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
             &__bullet
                 width: remify(30px)
                 height: remify(30px)
-                top: remify(20px)
+                top: remify(16px)
                 display: block
                 background-color: rgba(22, 135, 80, .8)
                 position: relative
@@ -70,25 +71,26 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
             display: block
             top: 0
             right: 0
+            text-align: right
 
 .jb-box
     background-color: $zon-seashell
     padding: remify(20px)
     position: relative
-    min-height: remify(150px)
+    min-height: remify(140px)
     &__kicker
         color: $red
         font-size: em(12px)
         line-height: em(15px)
         font-weight: bold
-        letter-spacing: $letter-spacing-l
-        margin-bottom: remify(20px)
+        letter-spacing: $letter-spacing-m
+        margin-bottom: remify(10px)
         +respond-min($break-tablet-min)
             font-size: em(13px)
 
 .jb-content
     display: none
-    min-height: remify(100px)
+    min-height: remify(95px)
     &--show
         display: block
         +respond-min($break-desktop-min)
@@ -121,11 +123,12 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
 
 .jb-action
     display: block
-    text-align: center
+    text-align: left
     +respond-min($break-desktop-min)
+        text-align: center
         display: inline-block
         position: absolute
-        top: remify(40px)
+        top: remify(28px)
         right: remify(20px)
 
 .jb-button
@@ -134,18 +137,28 @@ $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
         display: block
     &__text
         +zon-button-dark()
+        margin-left: 0
         border: none
         color: $white
+        margin-bottom: remify(14px)
         background-color: rgba(22, 135, 80, .8)
         &:hover,
         &:focus
             background-color: rgba(22, 135, 80, 1)
         a
             color: $white
+        /* very small screens do a break, so we have to restyle here */
+        +respond-min($break-action)
+            margin-bottom: 0
+        +respond-min($break-desktop-min)
+            margin-bottom: remify(14px)
 
 .jb-link
     display: inline-block
-    margin-left: remify(10px)
+    margin-left: 0
+    /* very small screens do a break, so we have to restyle here */
+    +respond-min($break-action)
+        margin-left: remify(10px)
     +respond-min($break-desktop-min)
         display: block
         margin-left: 0
