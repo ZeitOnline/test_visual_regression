@@ -36,11 +36,6 @@ class Jobbox(zeit.web.site.module.Module, list):
     def __init__(self, context):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         url = conf.get('academics_hp_feed')
-
-        # TODO: Delete this line once corresponding varnish PR is merged!
-        #       https://github.com/ZeitOnline/zeit.varnish/pull/94
-        url = 'http://jobs.zeit.de/stellenangebote/adpanel_333644.html?format=rss_2.0'  # NOQA
-
         list.__init__(self, zeit.web.site.area.rss.parse_feed(url, 'jobbox'))
         zeit.web.site.module.Module.__init__(self, context)
         self.title = "klaus"

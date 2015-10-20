@@ -13,8 +13,10 @@ import pyramid.testing
 import pytest
 
 from zeit.cms.checkout.helper import checked_out
-import zeit.web.site.view_article
+import zeit.cms.related.interfaces
 import zeit.cms.interfaces
+
+import zeit.web.site.view_article
 
 
 screen_sizes = ((320, 480, True), (520, 960, True),
@@ -1039,3 +1041,18 @@ def test_article_lineage_should_be_fixed_after_scrolling(
 def test_article_lineage_should_not_render_on_advertorials(testbrowser):
     browser = testbrowser('/zeit-online/article/angebot')
     assert len(browser.cssselect('.article-lineage')) == 0
+
+
+def test_advertisement_nextread_should_render_after_nextread(
+        testbrowser, workingcopy):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    with checked_out(article) as co:
+        co.ressort = u'Wirtschaft'
+        co.sub_ressort = None
+        zeit.cms.related.interfaces.IRelatedContent(co).related = (
+            zeit.cms.interfaces.ICMSContent(
+                'http://xml.zeit.de/zeit-online/article/02'),)
+    browser = testbrowser('/zeit-online/article/01')
+    assert len(browser.cssselect('.nextread')) == 1
+    assert len(browser.cssselect('.nextread-advertisement')) == 1

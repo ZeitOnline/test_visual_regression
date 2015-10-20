@@ -45,11 +45,19 @@
 
         init: function() {
 
-            var that = this;
+            var that = this,
+                viewportMetaElement;
 
             // only use this on Desktop.
             // OPTIMIZE: move this to site.js, so we dont have to check on every instance?
             if ( window.ZMO.breakpoint.get() !== 'desktop' ) {
+                return false;
+            }
+
+            // we do not want to show the elements on iPad, where the "desktop" breakpoint
+            // has been enforced via `window.ZMO.viewport.set( 'banner' );` (library.html, line 115)
+            viewportMetaElement = document.getElementById( 'viewport-meta' );
+            if ( viewportMetaElement && viewportMetaElement.getAttribute( 'content' ) === 'width=1280' ) {
                 return false;
             }
 

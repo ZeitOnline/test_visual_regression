@@ -126,6 +126,15 @@
 					{{ comment.text | safe }}
 				</div>
 				<div class="comment__reactions">
+					{% if comment.is_reply -%}
+						{% set origin = view.comments.index[comment.in_reply | int] | d(None) -%}
+						{% if origin -%}
+							<a class="comment__origin js-jump-to-comment" href="{{ '{0}?cid={1}#cid-{1}'.format(view.content_url, comment.in_reply) }}">
+								Antwort auf <strong>#{{ origin.shown_num }}</strong> von <strong>{{ origin.name }}</strong>
+							</a>
+						{%- endif %}
+					{%- endif %}
+
 					{% if view.comments_allowed -%}
 					<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='comment', pid=comment.cid) }}#comment-form" title="Antworten">
 						{{ lama.use_svg_icon('comment-reply', 'comment__icon comment__icon-reply', request) }}
