@@ -19,6 +19,10 @@ Change log for zeit.web
 
 - ZON-2036: Bildrechte im Footer von CPs
 
+- ZON-2303: Set caching header for login-state
+
+- MAINT: Remove obsolete sso_activate option from login view
+
 - FIX: Fix display of future dates
 
 
@@ -33,17 +37,17 @@ Change log for zeit.web
 2.14 (2015-10-15)
 -----------------
 
-- MAINT: Animate chronological article navigation
-
 - ZON-1975: Update ZMO parquet style
-
-- MAINT: Fix video preloading (because it costs too much money)
-
-- MAINT: Fix adcontroller handle in ZMO galleries
 
 - ZON-2292: Add lazyloading for centerpages
 
 - ZON-2318: Fallback für Related mit unveröffentlichtem/fehlendem Bild
+
+- MAINT: Animate chronological article navigation
+
+- MAINT: Fix video preloading (because it costs too much money)
+
+- MAINT: Fix adcontroller handle in ZMO galleries
 
 
 2.13.3 (2015-10-14)
@@ -53,7 +57,7 @@ Change log for zeit.web
 
 - MAINT: Exclude ZMO from article lineage query
 
-- MAINT: adjust adBlocker Tracking to GTM dataLayer conventions
+- MAINT: Adjust adBlocker Tracking to GTM dataLayer conventions
 
 
 2.13.2 (2015-10-14)
@@ -106,7 +110,7 @@ Change log for zeit.web
 
 - ZON-2138: Change servicebox link headhunter (main part was mercurial commit)
 
-- ZON-2301: fix/adjust date_last_modified for HP
+- ZON-2301: Fix/adjust date_last_modified for HP
 
 - ZON-1984: Storystream follow-up/cleanup
 
@@ -125,9 +129,9 @@ Change log for zeit.web
 
 - ZON-1936: Change bottom separator color in Spektrum parquet area
 
-- HOTFIX: Repair old IE css reference
-
 - ZON-2115: Antidote for keyword and topicpage special rules
+
+- HOTFIX: Repair old IE css reference
 
 
 2.9.2 (2015-10-01)
