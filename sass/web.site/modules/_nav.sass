@@ -66,46 +66,49 @@ $icon-color--hover: $zon-charcoal
 		+order(40)
 		margin: $petite 0
 
-.logo_bar__menu
-	display: inline-block
-	width: $zon-bar-height-phablet
-	border-left: 1px solid $zon_light_grey
-	+respond-min($break-tablet-min)
-		display: none
-	a
-		color: $icon-color
-		+on-interaction
-			color: $icon-color--hover
+	&__brand
+		font-size: inherit
+		margin: 0
+		position: relative
 
-.logo_bar__menu-icon
-	width: remify(18px)
-	height: remify(18px)
-	display: block
-	margin: remify( (($zon-bar-height-phablet-px - 18px) / 2) ) auto 0
-	&--burger
-		.main_nav--open &
-			display: none
-	&--close
-		display: none
-		.main_nav--open &
-			display: block
-
-.logo_bar__image
-	display: inline-block
-	font-size: inherit
-	margin: 0
-	position: relative
-	a
+	&__brand-name
 		+hide-text
-		@extend %main_nav_icons
+		display: inline-block
+		position: absolute
+
+	&__brand-logo
+		display: block
+		height: $zon-logo-height-small
 		margin: em(13px) 0 0 0
 		width: $zon-logo-width-small
-		height: $zon-logo-height-small
 		+respond-min($break-tablet-min)
+			height: $zon-logo-height
 			margin: 0
 			width: $zon-logo-width
-			height: $zon-logo-height
 
+	&__menu
+		border-left: 1px solid $zon_light_grey
+		display: inline-block
+		width: $zon-bar-height-phablet
+		+respond-min($break-tablet-min)
+			display: none
+		a
+			color: $icon-color
+			+on-interaction
+				color: $icon-color--hover
+
+	&__menu-icon
+		display: block
+		height: remify(18px)
+		margin: remify( (($zon-bar-height-phablet-px - 18px) / 2) ) auto 0
+		width: remify(18px)
+		&--burger
+			.main_nav--open &
+				display: none
+		&--close
+			display: none
+			.main_nav--open &
+				display: block
 
 //box 2: community
 .main_nav__community
