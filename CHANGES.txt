@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.15 (unreleased)
+2.15 (2015-10-20)
 -----------------
 
 - ZON-2206: Check whether an advertisement-nextread exists for the article's
