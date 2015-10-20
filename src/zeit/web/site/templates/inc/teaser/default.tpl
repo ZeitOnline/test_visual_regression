@@ -2,7 +2,7 @@
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
 {% block teaser %}
-<article class="{% block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}{% if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="{{ teaser.uniqueId }}"{% block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %} data-clicktracking="{{ area.kind }}">
+<article class="{% block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}{% if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="{{ teaser.uniqueId }}"{% block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %} data-clicktracking="{{ area.kind }}" {% block teaser_attributes %}{% endblock %}>
 
     {% block teaser_label %}{% endblock %}
     {% block teaser_media_position_before_title %}{% endblock %}
@@ -20,22 +20,26 @@
             {% endif %}
         {% endblock teaser_journalistic_format %}
 
-        <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
-            {% block teaser_link %}
-            <a class="{{ self.layout() }}__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}" href="{{ teaser.uniqueId | create_url }}">
-                {% block teaser_kicker %}
-                <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, 'zmo' if area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent')) }}">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
-                {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">:</span>{% endif %}
-                {% endblock %}
-                {% block teaser_title %}
-                <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
-                {% endblock %}
-                {% block teaser_product %}
-                   {# Use this for short teaser #}
-                {% endblock %}
-            </a>
-            {% endblock %}
-        </h2>
+        {% block teaser_heading %}
+            <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
+                {% block teaser_link %}
+                <a class="{{ self.layout() }}__combined-link"
+                   title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}"
+                   href="{{ teaser | create_url }}">
+                    {% block teaser_kicker %}
+                    <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, 'zmo' if area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent')) }}">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
+                    {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">:</span>{% endif %}
+                    {% endblock %}
+                    {% block teaser_title %}
+                    <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
+                    {% endblock %}
+                    {% block teaser_product %}
+                       {# Use this for short teaser #}
+                    {% endblock %}
+                </a>
+                {% endblock teaser_link %}
+            </h2>
+        {% endblock teaser_heading %}
 
         {% block teaser_media_position_after_title %}{% endblock %}
 
@@ -61,7 +65,7 @@
                     {% set comments = view.comment_counts[teaser.uniqueId] %}
                     {% if comments %}
                         {% set comments_string = comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
-                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser.uniqueId | create_url }}#comments" title="Kommentare anzeigen">{{ comments_string }}</a>
+                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser | create_url }}#comments" title="Kommentare anzeigen">{{ comments_string }}</a>
                     {% endif %}
                 {% endblock %}
             </div>

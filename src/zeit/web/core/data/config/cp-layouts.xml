@@ -36,6 +36,13 @@
         default="gallery"
         />
     <layout
+        id="zon-shop"
+        title="ZEIT Shop Produkt Teaser"
+        image_pattern="zon-thumbnail"
+        areas="shop"
+        default="shop"
+        />
+    <layout
         id="zon-inhouse"
         title="Verlagsangebot"
         image_pattern="zon-thumbnail"

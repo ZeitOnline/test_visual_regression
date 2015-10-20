@@ -51,7 +51,6 @@ require([
     'web.site/plugins/jquery.selectNav',
     'web.site/plugins/jquery.shuffleTeasers',
     'web.site/plugins/jquery.snapshot',
-    'web.site/plugins/jquery.toggleBeta',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
@@ -81,7 +80,7 @@ require([
         $.updateSignals();
         $( '#main' ).autoclick();
         $( '#series_select' ).selectNav();
-        $( '.js-gallery-teaser-shuffle' ).shuffleTeasers();
+        $( '.js-bar-teaser-shuffle' ).shuffleTeasers();
         $( '.js-accordion' ).accordion();
         $( '.storystream-markup__content--first' ).storystream();
         $( '.jobbox--animate' ).animateJobs();
@@ -101,6 +100,4 @@ require([
     $( '.js-scroll' ).animateScroll();
     // search
     $( '.search-form' ).searchTools();
-    // beta
-    $( '#beta-toggle' ).toggleBeta();
 });
