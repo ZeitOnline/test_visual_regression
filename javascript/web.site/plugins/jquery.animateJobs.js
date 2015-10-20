@@ -62,6 +62,8 @@
              * showJob – fades in a job per animation
              */
             showJob: function() {
+                var link = $( this.jobs[this.current] ).attr( 'href' );
+                $( '.jb-button__link' ).attr( 'href', link );
                 $( this.jobs[this.current] ).addClass( 'jb-content--show' );
                 $( this.jobs[this.current] ).find( '.jb-text' ).velocity( 'transition.slideUpIn', 500, function() {
                     box.hideJob();
