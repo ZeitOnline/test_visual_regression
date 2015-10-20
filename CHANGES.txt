@@ -4,13 +4,11 @@ Change log for zeit.web
 2.16 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1944: Implement Jobbox
 
 
 2.15 (2015-10-20)
 -----------------
-
-- ZON-1944: Implement Jobbox
 
 - ZON-2206: Check whether an advertisement-nextread exists for the article's
   (sub)ressort and render it
