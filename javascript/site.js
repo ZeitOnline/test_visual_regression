@@ -57,6 +57,7 @@ require([
     'web.site/plugins/jquery.countFormchars',
     'web.site/plugins/jquery.imageCopyrightFooter',
     'web.site/plugins/jquery.hpOverlay',
+    'web.site/plugins/jquery.animateJobs',
     'web.site/plugins/jquery.fixPosition'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
@@ -82,6 +83,7 @@ require([
         $( '.js-bar-teaser-shuffle' ).shuffleTeasers();
         $( '.js-accordion' ).accordion();
         $( '.storystream-markup__content--first' ).storystream();
+        $( '.jobbox--animate' ).animateJobs();
         $( '.js-image-copyright-footer' ).imageCopyrightFooter();
     } else if ( article.length ) {
         // article, gallery etc.
