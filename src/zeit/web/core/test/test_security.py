@@ -1,9 +1,10 @@
+import urllib2
+
 from cryptography.hazmat.primitives import serialization as cryptoserialization
 from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
 import cryptography.hazmat.backends
 import jwt
 import mock
-import urllib2
 
 import zeit.web.core.security
 
@@ -12,7 +13,7 @@ def test_reload_community_should_produce_result(monkeypatch):
     request = mock.Mock()
 
     def call(request, **kwargs):
-        return "result"
+        return 'result'
 
     monkeypatch.setattr(urllib2, 'urlopen', call)
 
@@ -43,12 +44,12 @@ def test_reload_community_should_suceed_after_one_call(monkeypatch):
         request.called = request.called + 1
         if request.called == 1:
             raise Exception
-        return "result"
+        return 'result'
 
     monkeypatch.setattr(urllib2, 'urlopen', call)
 
     res = zeit.web.core.security.recursively_call_community(request, 2)
-    assert res == "result"
+    assert res == 'result'
     assert request.called == 2
 
 
@@ -70,7 +71,6 @@ def test_decode_sso_should_work():
 
 
 def test_decode_sso_should_not_work():
-    k = 'foo'
     cookie = ('eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfcGVybWFuZW50Ijp0cnV'
               'lLCJyb2xlcyI6W10sImNyZWF0ZWQiOiIyMDE1LTA5LTExIDE3OjQxOjIxIiw'
               'iaWRlbnRpdHkuaWQiOjMsImlkZW50aXR5LmF1dGhfdHlwZSI6bnVsbCwiZW1'
@@ -85,5 +85,5 @@ def test_decode_sso_should_not_work():
               'dUQiBh0SXeuaEAgorlmK0Ks54RmB2XJKXVJboeSqkFixhdUwFnJ2byvTcx1A'
               'fzuLagrLQZ9OCWU4dyH4A')
 
-    res = zeit.web.core.security.get_user_info_from_sso_cookie(cookie, k)
+    res = zeit.web.core.security.get_user_info_from_sso_cookie(cookie, 'foo')
     assert res is None
