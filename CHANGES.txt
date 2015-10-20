@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-2277: Show origin for answer comments
 
+- ZON-1937: Add ze.tt parquet
+
+- ZON-2288: Generalize RSS content sources for ze.tt and spektrum
+
 - ZON-1191: Implement the mighty ZEIT Shop Homepage area
 
 - ZON-2273: Turn off zeit.de/beta
