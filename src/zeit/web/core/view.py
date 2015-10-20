@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import base64
 import datetime
+import itertools
 import logging
 import lxml.etree
 import os.path
@@ -725,14 +726,14 @@ class Content(Base):
         return self.context.commentSectionEnable is not False
 
     @zeit.web.reify
-    def nextread(self):
-        return zeit.web.core.interfaces.INextread(self.context)
+    def nextreads(self):
+        return zeit.web.core.interfaces.INextreadlist(self.context)
 
     @zeit.web.reify
     def comment_counts(self):
-        if self.nextread:
+        if any(self.nextreads):
             return zeit.web.core.comments.get_counts(
-                *[t.uniqueId for t in self.nextread])
+                *[t.uniqueId for t in itertools.chain(*self.nextreads)])
 
 
 @pyramid.view.view_config(route_name='health_check')

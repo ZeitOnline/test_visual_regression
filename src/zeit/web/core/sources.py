@@ -5,6 +5,7 @@ import pkg_resources
 import random
 import re
 import urlparse
+import xml.sax.saxutils
 
 import gocept.cache.method
 import lxml.etree
@@ -119,6 +120,43 @@ class BlacklistSource(zeit.cms.content.sources.SimpleXMLSource):
 
 
 BLACKLIST_SOURCE = BlacklistSource()
+
+
+class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):
+
+    product_configuration = (
+        zeit.cms.content.sources.SubNavigationSource.product_configuration)
+    config_url = zeit.cms.content.sources.SubNavigationSource.config_url
+
+    master_node_xpath = (
+        zeit.cms.content.sources.SubNavigationSource.master_node_xpath)
+    slave_tag = zeit.cms.content.sources.SubNavigationSource.slave_tag
+    attribute = zeit.cms.content.sources.SubNavigationSource.attribute
+
+    # Same idea as zeit.cms.content.sources.MasterSlavesource.getTitle()
+    def find(self, ressort, subressort):
+        tree = self._get_tree()
+        if subressort is None:
+            nodes = tree.xpath(
+                '{master_node_xpath}[@{attribute} = {master}]'.format(
+                    master_node_xpath=self.master_node_xpath,
+                    attribute=self.attribute,
+                    master=xml.sax.saxutils.quoteattr(ressort)))
+        else:
+            nodes = tree.xpath(
+                '{master_node_xpath}[@{attribute} = {master}]'
+                '/{slave_tag}[@{attribute} = {slave}]'.format(
+                    master_node_xpath=self.master_node_xpath,
+                    attribute=self.attribute,
+                    slave_tag=self.slave_tag,
+                    master=xml.sax.saxutils.quoteattr(ressort),
+                    slave=xml.sax.saxutils.quoteattr(subressort)))
+        if not nodes:
+            return {}
+        return zeit.cms.interfaces.ICMSContent(
+            nodes[0].get('uniqueId'), {})
+
+RESSORTFOLDER_SOURCE = RessortFolderSource()
 
 
 class Solr(object):
