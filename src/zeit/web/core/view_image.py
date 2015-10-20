@@ -1,6 +1,5 @@
 import os.path
 import logging
-import urllib2
 
 from pyramid.view import view_config
 import pyramid.httpexceptions
@@ -13,7 +12,11 @@ import zeit.content.image.interfaces
 
 import zeit.web
 import zeit.web.core.cache
+import zeit.web.core.image
 import zeit.web.core.view
+import zeit.web.site.area
+import zeit.web.site.area.spektrum
+import zeit.web.site.area.zett
 
 
 log = logging.getLogger(__name__)
@@ -42,7 +45,7 @@ class Image(zeit.web.core.view.Base):
             name = os.path.basename(
                 self.context.__parent__.uniqueId.rstrip('/'))
         except:
-            name = self.request.traversed[-1]
+            name = self.request.path.split('/')[-1]
 
         ext = self.content_type.split('/')[-1]
         name = zeit.cms.interfaces.normalize_filename(name)
@@ -94,26 +97,44 @@ class Brightcove(Image):
             raise pyramid.httpexceptions.HTTPNotFound(err.message)
 
 
-@view_config(route_name='spektrum-image')
-class SpektrumImage(zeit.web.core.view.Base):
+class RSSImage(Image):
 
-    def __call__(self):
-        path = '/'.join(self.request.matchdict.get('path')).encode('utf-8')
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        image_url = '{}/{}'.format(conf.get('spektrum_img_host', ''), path)
-        file_name = path.rsplit('/', 1).pop()
+    remote_host = ''
+    ig_class = zeit.web.core.image.LocalImageGroup
 
-        try:
-            with zeit.web.core.metrics.timer('spektrum.reponse_time'):
-                fileobj = urllib2.urlopen(image_url, timeout=4)
-        except IOError:
+    def __init__(self, context, request):
+        super(RSSImage, self).__init__(context, request)
+
+        segments = self.request.matchdict.get('path')
+        if len(segments) < 3:
             raise pyramid.httpexceptions.HTTPNotFound()
 
-        response = self.request.response
-        response.app_iter = pyramid.response.FileIter(fileobj)
-        response.content_type = 'image/jpeg'
-        response.headers['Content-Type'] = response.content_type
-        response.headers['Content-Disposition'] = (
-            'inline; filename="{}"'.format(file_name))
-        response.cache_expires(zeit.web.core.cache.ICachingTime(image_url))
-        return response
+        file_name, variant = segments[-2:]
+        path = '/'.join(segments[:-1]).encode('utf-8')
+        image_url = '{}/{}'.format(self.remote_host, path)
+
+        group = zeit.web.core.image.LocalImageGroup(context)
+        group.image_url = image_url
+        try:
+            self.context = group[variant]
+        except Exception, err:
+            raise pyramid.httpexceptions.HTTPNotFound(err.message)
+
+    @zeit.web.reify
+    def remote_host(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get(self.host_key, '')
+
+
+@view_config(route_name='spektrum-image')
+class Spektrum(RSSImage):
+
+    host_key = 'spektrum_img_host'
+    ig_class = zeit.web.site.area.spektrum.ImageGroup
+
+
+@view_config(route_name='zett-image')
+class Zett(RSSImage):
+
+    host_key = 'zett_img_host'
+    ig_class = zeit.web.site.area.zett.ImageGroup

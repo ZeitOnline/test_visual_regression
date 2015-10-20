@@ -178,26 +178,9 @@ class Liveblog(object):
             pass
 
 
-class BaseImage(object):
-
-    @property
-    def ratio(self):
-        try:
-            width, height = self.image.getImageSize()
-            return float(width) / float(height)
-        except (TypeError, ZeroDivisionError):
-            return
-
-    def getImageSize(self):  # NOQA
-        try:
-            return self.image.getImageSize()
-        except AttributeError:
-            return
-
-
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
-class Image(BaseImage):
+class Image(zeit.web.core.image.BaseImage):
 
     DEFAULT_VARIANT = 'wide'
 
@@ -670,6 +653,8 @@ class AdvertisementNextread(Nextread):
 
 @beaker.cache.cache_region('default_term', 'nextread_folder')
 def find_nextread_folder(ressort, subressort):
+    ressort = ressort if ressort else ''
+    subressort = subressort if subressort else ''
     folder = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(
         ressort, subressort)
     if not folder:
