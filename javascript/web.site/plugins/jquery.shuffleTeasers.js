@@ -11,7 +11,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
     function loadGalleryTeasers( event ) {
 
         var $this = $( this ),
-            $galleryArea = $this.closest( '.cp-area--gallery' ),
+            $galleryArea = $this.closest( '.cp-area' ),
             sourceUrl = $this.data( 'sourceurl' ),
             fallbackUrl;
 
@@ -20,12 +20,12 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
         }
 
         $.get( sourceUrl, function( data ) {
-            var selector = '.teaser-gallery',
+            var selector = 'article[data-type="teaser"]',
                 $data = $( data ),
                 $teasers = $data.find( selector ),
-                $shuffleButton = $galleryArea.find( '.js-gallery-teaser-shuffle' ),
+                $shuffleButton = $galleryArea.find( '.js-bar-teaser-shuffle' ),
                 duration = 400,
-                nextPageSource = $data.find( '.js-gallery-teaser-shuffle' ).data( 'sourceurl' );
+                nextPageSource = $data.find( '.js-bar-teaser-shuffle' ).data( 'sourceurl' );
 
             if ( $galleryArea.offset().top < document.documentElement.scrollTop ) {
                 $galleryArea.velocity( 'scroll', duration );
@@ -34,7 +34,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
             if ( nextPageSource ) {
                 $shuffleButton.data( 'sourceurl', nextPageSource );
             } else {
-                $shuffleButton.velocity( { opacity: 0 } );
+                $shuffleButton.velocity( { opacity: 0 }, { visibility: 'hidden' } );
             }
 
             $galleryArea.find( selector ).velocity( 'transition.slideLeftBigOut', {
@@ -44,6 +44,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
                         $( elements ).parent().replaceWith( $teasers.parent() );
                         images.scale( $teasers );
                         $teasers.velocity( 'transition.slideRightBigIn', {
+                            display: '', // remove the property altogether and return to previous display value from CSS
                             duration: duration,
                             stagger: 50
                         });

@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
+import random
 
 import babel.dates
+import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
@@ -23,6 +25,7 @@ import zeit.newsletter.interfaces
 import zeit.web
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
+import zeit.web.core.sources
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
@@ -175,26 +178,9 @@ class Liveblog(object):
             pass
 
 
-class BaseImage(object):
-
-    @property
-    def ratio(self):
-        try:
-            width, height = self.image.getImageSize()
-            return float(width) / float(height)
-        except (TypeError, ZeroDivisionError):
-            return
-
-    def getImageSize(self):  # NOQA
-        try:
-            return self.image.getImageSize()
-        except AttributeError:
-            return
-
-
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
-class Image(BaseImage):
+class Image(zeit.web.core.image.BaseImage):
 
     DEFAULT_VARIANT = 'wide'
 
@@ -636,6 +622,70 @@ class ZONNextread(Nextread):
         rel = zeit.cms.related.interfaces.IRelatedContent(context, None)
         args = rel.related if rel and rel.related else ()
         super(ZONNextread, self).__init__(context, args)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.INextread)
+@grokcore.component.adapter(
+    zeit.cms.interfaces.ICMSContent, name="advertisement")
+class AdvertisementNextread(Nextread):
+
+    image_pattern = '940x400'
+    layout_id = 'advertisement'
+
+    def __init__(self, context):
+        super(AdvertisementNextread, self).__init__(context)
+        metadata = zeit.cms.content.interfaces.ICommonMetadata(context, None)
+        if metadata is None:
+            return
+        nextread = self.random_item(find_nextread_folder(
+            metadata.ressort, metadata.sub_ressort))
+        if nextread is not None:
+            self.append(nextread)
+
+    def random_item(self, folder):
+        if not folder:
+            return None
+        key = random.sample(folder.keys(), 1)
+        if not key:
+            return None
+        return folder[key[0]]
+
+
+@beaker.cache.cache_region('default_term', 'nextread_folder')
+def find_nextread_folder(ressort, subressort):
+    ressort = ressort if ressort else ''
+    subressort = subressort if subressort else ''
+    folder = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(
+        ressort, subressort)
+    if not folder:
+        folder = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(ressort, None)
+    advertisement_nextread_folder = zope.component.getUtility(
+        zeit.web.core.interfaces.ISettings).get(
+            'advertisement_nextread_folder', '')
+    if advertisement_nextread_folder not in folder:
+        return None
+    return folder[advertisement_nextread_folder]
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.INextreadlist)
+@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
+def nextreadlist(context):
+    result = []
+    for name, nextread in sorted(zope.component.getAdapters(
+            (context,), zeit.web.core.interfaces.INextread)):
+        if nextread:
+            result.append(nextread)
+    return result
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.INextreadlist)
+@grokcore.component.adapter(zeit.magazin.interfaces.IZMOContent)
+def zmo_nextreadlist(context):
+    nextread = zeit.web.core.interfaces.INextread(context)
+    if nextread:
+        return [nextread]
+    else:
+        return []
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IBreakingNews)

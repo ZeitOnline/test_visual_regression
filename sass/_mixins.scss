@@ -322,9 +322,9 @@
 
 @mixin zon-button-inky($margin: 0) {
 	@include zon-button($background-color: $zon_dark_grey,
-	                    $hover-background-color: $zon_charcoal,
+	                    $hover-background-color: $zon-charcoal,
 	                    $border-color: $zon_dark_grey,
-	                    $hover-border-color: $zon_charcoal,
+	                    $hover-border-color: $zon-charcoal,
 	                    $color: $white,
 	                    $hover-color: $white,
 	                    $visited-color: $white,

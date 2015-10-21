@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ressorts>
+    <ressort name="Deutschland" uniqueId="http://xml.zeit.de/deutschland">
+        <title>Deutschland</title>
+        <subnavigation name="Integration" uniqueId="http://xml.zeit.de/deutschland/integration">
+            <title>Integration</title>
+        </subnavigation>
+        <subnavigation name="Datenschutz" uniqueId="http://xml.zeit.de/deutschland/datenschutz">
+            <title>Datenschutz</title>
+        </subnavigation>
+        <subnavigation name="Meinung" uniqueId="http://xml.zeit.de/deutschland/meinung">
+            <title>Meinung</title>
+        </subnavigation>
+    </ressort>
+
+    <ressort name="International" uniqueId="http://xml.zeit.de/international">
+        <title>International</title>
+        <subnavigation name="US-Wahl" uniqueId="http://xml.zeit.de/international/us-wahl">
+            <title>US-Wahl</title>
+        </subnavigation>
+        <subnavigation name="Nahost" uniqueId="http://xml.zeit.de/international/nahost">
+            <title>Nahost</title>
+        </subnavigation>
+        <subnavigation name="Meinung" uniqueId="http://xml.zeit.de/international/meinung">
+            <title>Meinung</title>
+        </subnavigation>
+    </ressort>
+
+    <ressort name="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft"><title>Wirtschaft</title></ressort>
+    <ressort name="Finanzen" uniqueId="http://xml.zeit.de/finanzen"><title>Finanzen</title></ressort>
+    <ressort name="Wissen" uniqueId="http://xml.zeit.de/wissen"><title>Wissen</title></ressort>
+    <ressort name="Gesundheit" uniqueId="http://xml.zeit.de/gesundheit"><title>Gesundheit</title></ressort>
+    <ressort name="Computer" uniqueId="http://xml.zeit.de/computer"><title>Computer</title></ressort>
+
+    <ressort name="Bildung &amp; Beruf" uniqueId="http://xml.zeit.de/bildung-beruf">
+        <title>Bildung &amp; Beruf</title>
+    </ressort>
+    <ressort name="Studium" uniqueId="http://xml.zeit.de/studium"><title>Studium</title></ressort>
+    <ressort name="Campus" uniqueId="http://xml.zeit.de/campus"><title>Campus</title></ressort>
+    <ressort name="Zeit für die Schule" uniqueId="http://xml.zeit.de/schule"><title>Zeit für die Schule</title></ressort>
+
+    <ressort name="Kultur" uniqueId="http://xml.zeit.de/kultur"><title>Kultur</title></ressort>
+    <ressort name="Feuilleton" uniqueId="http://xml.zeit.de/feuilleton"><title>Feuilleton</title></ressort>
+    <ressort name="Musik" uniqueId="http://xml.zeit.de/musik"><title>Musik</title></ressort>
+    <ressort name="Literatur" uniqueId="http://xml.zeit.de/literatur"><title>Literatur</title></ressort>
+
+
+    <ressort name="Leben" uniqueId="http://xml.zeit.de/leben"><title>Leben</title></ressort>
+    <ressort name="ZUENDER" uniqueId="http://xml.zeit.de/zuender"><title>ZUENDER</title></ressort>
+    <ressort name="Reisen" uniqueId="http://xml.zeit.de/reisen"><title>Reisen</title></ressort>
+    <ressort name="Sport" uniqueId="http://xml.zeit.de/sport"><title>Sport</title></ressort>
+    <ressort name="Spiele" uniqueId="http://xml.zeit.de/spiele"><title>Spiele</title></ressort>
+    <ressort name="Auto" uniqueId="http://xml.zeit.de/auto"><title>Auto</title></ressort>
+    <ressort name="Video" uniqueId="http://xml.zeit.de/video"><title>Video</title></ressort>
+
+</ressorts>

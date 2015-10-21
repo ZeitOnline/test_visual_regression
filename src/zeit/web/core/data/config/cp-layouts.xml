@@ -11,8 +11,8 @@
         id="zon-small"
         title="Kleiner Teaser"
         image_pattern="zon-thumbnail"
-        areas="duo major minor ranking parquet spektrum"
-        default="major minor parquet"
+        areas="duo major minor ranking parquet spektrum zett"
+        default="major minor parquet spektrum zett"
         />
     <layout
         id="zon-topic"
@@ -34,6 +34,13 @@
         image_pattern="540x304"
         areas="gallery"
         default="gallery"
+        />
+    <layout
+        id="zon-shop"
+        title="ZEIT Shop Produkt Teaser"
+        image_pattern="zon-thumbnail"
+        areas="shop"
+        default="shop"
         />
     <layout
         id="zon-inhouse"

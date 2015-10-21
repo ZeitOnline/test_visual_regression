@@ -11,7 +11,6 @@ import zeit.cms.content.interfaces
 import zeit.web.core.gallery
 import zeit.web.core.view
 import zeit.web.magazin.view
-import zeit.web.site.area.spektrum
 
 
 log = logging.getLogger(__name__)
@@ -115,23 +114,9 @@ class Base(zeit.web.core.view.Base):
 
 
 @pyramid.view.view_config(
-    route_name='spektrum-kooperation',
-    renderer='templates/inc/area/spektrum.html')
-def spektrum_hp_feed(request):
-    # add CORS header to allow ESI JS drop-in
-    request.response.headers.add(
-        'Access-Control-Allow-Origin', '*')
-    request.response.cache_expires(60)
-    return {
-        'esi_toggle': True,
-        'area': zeit.web.site.area.spektrum.HPFeed(),
-        'parquet_position': request.params.get('parquet-position')
-    }
-
-
-@pyramid.view.view_config(
     route_name='login_state',
-    renderer='templates/inc/navigation/login-state.html')
+    renderer='templates/inc/navigation/login-state.html',
+    http_cache=60)
 def login_state(request):
     settings = request.registry.settings
     destination = request.params['context-uri'] if request.params.get(
@@ -142,16 +127,11 @@ def login_state(request):
             settings.get('sso_cookie')):
         log.warn("SSO Cookie present, but not authenticated")
 
-    if settings['sso_activate']:
-        info['login'] = u"{}/anmelden?url={}".format(
+    info['login'] = u"{}/anmelden?url={}".format(
+        settings['sso_url'], destination)
+    info['logout'] = u"{}/abmelden?url={}".format(
             settings['sso_url'], destination)
-        info['logout'] = u"{}/abmelden?url={}".format(
-            settings['sso_url'], destination)
-    else:
-        info['login'] = u"{}/user/login?destination={}".format(
-            settings['community_host'], destination)
-        info['logout'] = u"{}/user/logout?destination={}".format(
-            settings['community_host'], destination)
+
     if request.authenticated_userid and 'user' in request.session:
         info['user'] = request.session['user']
         info['profile'] = "{}/user".format(settings['community_host'])

@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 import mock
 
 from zeit.content.article.article import Article
+from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
 
 import zeit.web.core.interfaces
@@ -772,3 +773,10 @@ def test_article_first_page_must_have_no_image_as_first_block(application):
         article body.')
     assert not zeit.content.article.edit.interfaces.IImage.providedBy(
         block), 'Image must not be present on first position in page.'
+
+
+def test_zmo_should_not_render_advertisement_nextread(
+        testbrowser, workingcopy):
+    # /artikel/10 has ressort 'Wirtschaft' which has ad-nextread content.
+    browser = testbrowser('/artikel/10')
+    assert len(browser.cssselect('.nextread-advertisement')) == 0
