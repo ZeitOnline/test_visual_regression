@@ -45,12 +45,7 @@ def rawXml(application):
     return zeit.web.core.template.get_module(block)
 
 
-def test_raw_xml_should_have_attribute_alldevices(rawXml):
-    assert rawXml.alldevices is True
-
-
 def test_raw_xml_contains_html(rawXml):
-    assert '<section class="servicelinks">' in rawXml.xml
     assert 'http://services.zeit.de/toptarif/vergleichsrechner.p' in rawXml.xml
     assert 'http://marktplatz.zeit.de/angebote/job-und-karriere' in rawXml.xml
     assert 'http://www.bellevue-ferienhaus.de/zeit/' in rawXml.xml

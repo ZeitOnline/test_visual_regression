@@ -9,8 +9,8 @@ class RawXML(zeit.web.site.module.Module, list):
 
     @zeit.web.reify
     def xml(self):
-        return lxml.etree.tostring(self.context.xml, pretty_print=True)
-
-    @zeit.web.reify
-    def alldevices(self):
-        return 'alldevices' in self.context.xml.raw.keys()
+        try:
+            xml = self.context.xml.find('raw[@alldevices="true"]/*')
+            return ''.join(map(lxml.etree.tostring, xml))
+        except:
+            return ''
