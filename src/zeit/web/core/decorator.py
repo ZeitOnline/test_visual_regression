@@ -150,7 +150,7 @@ class reify(pyramid.decorator.reify):  # NOQA
 
 def register_module(name):
     """Register a CPExtra implementation for a RAM-style module using the
-    cpextra name as an adapter identifier.
+    cpextra identifier as an adapter name.
 
     Usage example:
     First, implement your module class in python
