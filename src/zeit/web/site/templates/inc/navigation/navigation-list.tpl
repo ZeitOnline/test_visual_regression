@@ -8,16 +8,32 @@ itemtype="http://schema.org/SiteNavigationElement"
 	{% for i in items -%}
 	{% set section = items[i] %}
     {% set id = section.item_id | pop_from_dotted_name %}
-	<li class="{{ class }}__item" data-id="{{ id if id else section.item_id }}" {% if section.has_children() %} data-feature="dropdown"{% endif %}>
+	<li class="{{ class }}__item{% if nav_parent_class == 'primary-nav' and section.label %} {{ class }}__item--has-label{% endif %}" data-id="{{ id if id else section.item_id }}" {% if section.has_children() %} data-feature="dropdown"{% endif %}>
 		<a class="{{ class }}__link{% if id in (view.ressort,
         view.sub_ressort) %} {{ class }}__link--current{% endif %}" href="{{
-        section.href | create_url }}" itemprop="url" data-id="{{ section.item_id }}"><span itemprop="name">{{
-        section.text }}</span></a>
+        section.href | create_url }}" itemprop="url" data-id="{{ section.item_id }}">
+			{# Only inside(!) a primary-nav, we show the label-attributes. #}
+	        {% if nav_parent_class == 'primary-nav' and section.label %}
+	        	<span class="{{ class }}__label">{{ section.label }}</span>
+	        {% endif %}
+			<span itemprop="name">{{section.text }}</span>
+		</a>
 		{% if section.has_children() -%}
+
+			{# this helps us to detect if we are inside a primary-nav when the template is called recursively #}
+			{% if class == 'primary-nav' %}
+				{%- set nav_parent_class = class -%}
+			{% endif %}
+
 			{%- set navigation = section -%}
 			{%- set nav_class = "dropdown" -%}
 			{% include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" %}
 		{%- endif %}
+
+		{# this helps us to detect if we are inside a primary-nav when the template is called recursively #}
+		{% if class == 'primary-nav' %}
+			{%- set nav_parent_class = None -%}
+		{% endif %}
 	</li>
 	{% endfor %}
 	{% if class == 'primary-nav' %}
