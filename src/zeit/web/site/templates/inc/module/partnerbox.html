@@ -1,0 +1,21 @@
+<aside class="partnerbox">
+    <span class="partnerbox__label">Verlagsangebot</span>
+    <div class="partner">
+        <div class="partner__kicker">
+            {% block kicker %}{% endblock %}
+        </div>
+        <div class="partner__intro">
+            {% block intro %}{% endblock %}
+        </div>
+        <div class="partner__dropdown">
+            {% block dropdown %}{% endblock %}
+        </div>
+        <span class="partner__action">
+            <div class="button">
+                <span class="button__text">{% block button %}{% endblock %}</span>
+            </div>
+            {% block link %}
+            {% endblock %}
+        </span>
+    </div>
+</aside>

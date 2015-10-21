@@ -7,7 +7,7 @@ import zeit.web.site.module
 log = logging.getLogger(__name__)
 
 
-@zeit.web.register_module('dropbox-jobs')
-class DropboxJobs(zeit.web.site.module.Module, list):
+@zeit.web.register_module('partnerbox-jobs')
+class PartnerJobs(zeit.web.site.module.Module, list):
 
     pass
