@@ -9,7 +9,9 @@ Change log for zeit.web
 
 - ZON-1944: Implement Jobbox
 
-- Fix: Change number of jobs to be displayed in Jobbox
+- FIX: Change number of jobs to be displayed in Jobbox
+
+- FIX: Make Jobbox more failsave and multi instance ready
 
 
 2.15 (2015-10-20)

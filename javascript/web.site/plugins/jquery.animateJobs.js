@@ -29,55 +29,55 @@
     $.fn.animateJobs = function() {
 
         var box = {
-            current: 0,
-            maxJobs: 0,
-            jobs: false,
             /**
              * getJobList – returns current list of job html objects
-             * @param  {object} $box jQuery-Object of the jobbox
+             * @param  {object} jobs jQuery-Object of the jobbox
              * @return {object}
              */
-            getJobList: function( $box ) {
-                return ( $box.find( '.jb-content' ) );
+            getJobList: function( jobs ) {
+                return ( $( jobs ).find( '.jb-content' ) );
             },
             /**
              * setCurrentJob – defines current job object in list
+             * @param  {object} jobs jQuery-Object of the jobbox
+             * @param  {integer} index of currently shown job
+             * @return {integer}
              */
-            setCurrentJob: function() {
-                this.current = ( this.current + 1 ) % this.jobs.length;
+            setCurrentJob: function( jobs, current ) {
+                return ( ( current + 1 ) % jobs.length );
             },
             /**
              * hideJob – fades out a job per animation
+             * @param  {object} jobs jQuery-Object of the jobbox
+             * @param  {integer} index of currently shown job
              */
-            hideJob: function() {
-
-                $( this.jobs[this.current] ).find( '.jb-text' ).delay( 8000 ).velocity( 'transition.slideUpOut', 500, function() {
-                    $( box.jobs[box.current] ).removeClass( 'jb-content--show' );
-                    box.setCurrentJob();
-                    box.showJob();
+            hideJob: function( jobs, current ) {
+                $( jobs[current] ).find( '.jb-text' ).delay( 8000 ).velocity( 'transition.slideUpOut', 500, function() {
+                    $( jobs[current] ).removeClass( 'jb-content--show' );
+                    box.showJob( jobs, box.setCurrentJob( jobs, current ) );
                 });
-
             },
             /**
              * showJob – fades in a job per animation
+             * @param  {object} jobs jQuery-Object of the jobbox
+             * @param  {integer} index of currently shown job
              */
-            showJob: function() {
-                var link = $( this.jobs[this.current] ).attr( 'href' );
-                $( '.jb-button__link' ).attr( 'href', link );
-                $( this.jobs[this.current] ).addClass( 'jb-content--show' );
-                $( this.jobs[this.current] ).find( '.jb-text' ).velocity( 'transition.slideUpIn', 500, function() {
-                    box.hideJob();
+            showJob: function( jobs, current ) {
+                var link = $( jobs[current] ).attr( 'href' );
+                $( jobs ).closest( 'aside' ).find( '.jb-button__link' ).attr( 'href', link );
+                $( jobs[current] ).addClass( 'jb-content--show' );
+                $( jobs[current] ).find( '.jb-text' ).velocity( 'transition.slideUpIn', 500, function() {
+                    box.hideJob( jobs, current );
                 });
 
             }
         };
 
         return this.each( function() {
-            box.jobs = box.getJobList( $( this ) );
-            box.maxJobs = box.jobs.length - 1;
             // as the first job is displayed by default,
             // we start with hiding it
-            box.hideJob();
+            var jobs = box.getJobList( this );
+            box.hideJob( jobs, 0 );
         });
     };
 
