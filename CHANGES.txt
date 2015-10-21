@@ -4,6 +4,8 @@ Change log for zeit.web
 2.16 (unreleased)
 -----------------
 
+- MAINT: Tweak ze.tt parquet area
+
 - ZON-2334: Unbearbeitete Printartikel von der chronologischen Navigation
   ausschliessen
 
