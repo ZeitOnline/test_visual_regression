@@ -19,7 +19,7 @@
         {% endfor %}
         <span class="jb-action">
             <div class="jb-button">
-                <span class="jb-button__text">{% block button %}<a class="jb-button__link" href="{{ module[0].url }}?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker1.textlink.stellenanzeige.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker1_textlink_stellenanzeige_">mehr erfahren</a>{% endblock %}</span>
+                <span class="jb-button__text">{% block button %}<a class="jb-button__link" href="{% if module %}{{ module[0].url }}?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker1.textlink.stellenanzeige.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker1_textlink_stellenanzeige_{% endif %}">mehr erfahren</a>{% endblock %}</span>
             </div>
             {% block link %}
                 <div class="jb-link">
