@@ -4,6 +4,8 @@ Change log for zeit.web
 2.16 (unreleased)
 -----------------
 
+- ZON-2276: Fold/unfold comment replies
+
 - ZON-2334: Unbearbeitete Printartikel von der chronologischen Navigation
   ausschliessen
 
