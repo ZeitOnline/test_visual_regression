@@ -1,11 +1,13 @@
 import collections
 import logging
 import re
+import types
 
 import grokcore.component
 import jinja2
 import peak.util.proxies
 import zope.component
+import zope.interface
 
 import zeit.cms.interfaces
 import zeit.content.image.interfaces
@@ -113,50 +115,97 @@ def neighborhood(iterable, default=None):
     yield prev, item, default
 
 
-class nsmixin:
+class INewStyle(zope.interface.Interface):
+    """Interface class for all new style base types."""
+
+    pass
+
+
+class NSNoneType(type):
+    """Custom new style None type to allow interface provisioning."""
+
+    zope.interface.implements(INewStyle)
+
+    def __str__(self):
+        return ''
+
+    def __repr__(self):
+        return 'NSNone'
+
+    def __nonzero__(self):
+        return False
+
+    def __eq__(self, other):
+        return other is None or other is self
+
+
+NSNone = NSNoneType('NSNone', (type,), {})
+del NSNoneType
+
+
+@grokcore.component.adapter(types.NoneType)
+@grokcore.component.implementer(INewStyle)
+def nsnone(context):
+    """Adapter to convert a regular None into a new style None singleton."""
+    return NSNone
+
+
+class nsmixin:  # NOQA
     """New style magic attribute methods as a mixin class."""
 
     __setattr__ = object.__setattr__
     __delattr__ = object.__delattr__
 
 
-class nslist(list, nsmixin):
+@grokcore.component.adapter(list)
+@grokcore.component.implementer(INewStyle)
+class nslist(list, nsmixin):  # NOQA
     """New style list class with attribute access and manipulation."""
 
     pass
 
 
-class nstuple(tuple, nsmixin):
+@grokcore.component.adapter(tuple)
+@grokcore.component.implementer(INewStyle)
+class nstuple(tuple, nsmixin):  # NOQA
     """New style tuple class with attribute access and manipulation."""
 
     pass
 
 
-class nsdict(dict, nsmixin):
+@grokcore.component.adapter(dict)
+@grokcore.component.implementer(INewStyle)
+class nsdict(dict, nsmixin):  # NOQA
     """New style dictionary class with attribute access and manipulation."""
 
     pass
 
 
-class nsset(set, nsmixin):
+@grokcore.component.adapter(set)
+@grokcore.component.implementer(INewStyle)
+class nsset(set, nsmixin):  # NOQA
     """New style set class with attribute access and manipulation."""
 
     pass
 
 
-class nsstr(str, nsmixin):
+@grokcore.component.adapter(str)
+@grokcore.component.implementer(INewStyle)
+class nsstr(str, nsmixin):  # NOQA
     """New style string class with attribute access and manipulation."""
 
     pass
 
 
-class nsunicode(unicode, nsmixin):
+@grokcore.component.adapter(unicode)
+@grokcore.component.implementer(INewStyle)
+class nsunicode(unicode, nsmixin):  # NOQA
     """New style unicode class with attribute access and manipulation."""
 
     pass
 
 
-class frozendict(dict):
+class frozendict(dict):  # NOQA
     """Custom dictionary class that discourages item manipulation."""
 
     __delitem__ = __setitem__ = clear = pop = popitem = setdefault = update = (
@@ -166,14 +215,14 @@ class frozendict(dict):
         return hash(tuple(sorted(self.items())))
 
 
-class attrdict(dict):
+class attrdict(dict):  # NOQA
     """Custom dictionary class that allows item access via attribute names."""
 
     def __getattr__(self, key):
         return key in self and self[key] or self.__getattribute__(key)
 
 
-class defaultdict(collections.defaultdict):
+class defaultdict(collections.defaultdict):  # NOQA
     """Extension of stdlib's defaultdict that overwrites its `get` method and
     behaviour of the `in` operator.
     """
@@ -198,7 +247,7 @@ class defaultdict(collections.defaultdict):
         return True
 
 
-class defaultattrdict(attrdict, defaultdict):
+class defaultattrdict(attrdict, defaultdict):  # NOQA
     """Combines the best of both the default- and the attrdict."""
 
     def __getattr__(self, key):
