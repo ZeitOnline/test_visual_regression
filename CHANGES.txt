@@ -4,6 +4,8 @@ Change log for zeit.web
 2.16 (unreleased)
 -----------------
 
+- ZON-2144: Add service link module (in fact add raw to centerpages)
+
 - ZON-2334: Unbearbeitete Printartikel von der chronologischen Navigation
   ausschliessen
 
