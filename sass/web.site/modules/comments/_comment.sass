@@ -88,6 +88,7 @@ $color-comment-border: $zon_light_grey
 		+clearfix
 		text-align: right
 
+	&__rewrapper,
 	&__origin,
 	&__reaction,
 	&__date
@@ -112,6 +113,13 @@ $color-comment-border: $zon_light_grey
 		+respond-min($break-phablet-min)
 			display: inline
 			padding-left: remify(4px)
+
+	&__rewrapper
+		color: $zon_grey
+		cursor: pointer
+		display: none
+		float: left
+		margin-top: remify(4px)
 
 	&__origin
 		display: block
