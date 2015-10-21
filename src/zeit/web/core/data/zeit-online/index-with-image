@@ -92,7 +92,7 @@
             </container>
             <container cp:type="xml" module="xml" cp:__name__="cdb094df-8adc-46d7-b77f-8feb3aabd9e3">
                 <raw alldevices="true">
-                    <section class="servicelinks">
+                    <aside class="servicelinks">
                         <h2 class="servicelinks__title">Service</h2>
                         <ul class="servicelinks__list">
                             <li class="servicelinks__item">
@@ -128,7 +128,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </section>
+                    </aside>
                 </raw>
             </container>
         </region>
