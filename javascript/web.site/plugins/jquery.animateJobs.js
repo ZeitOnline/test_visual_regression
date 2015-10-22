@@ -13,7 +13,7 @@
         this.button = box.find( '.jobbox__button' );
 
         if ( this.jobs.length ) {
-            this.showJob();
+            this.showJob( true );
         }
     }
 
@@ -22,21 +22,24 @@
         this.showJob();
     };
 
-    Jobbox.prototype.showJob = function() {
+    Jobbox.prototype.showJob = function( initial ) {
         var box = this,
             job = this.jobs.eq( this.current ),
             link = job.attr( 'href' );
 
         this.button.attr( 'href', link );
-        job
-            .velocity( 'transition.slideUpIn', { duration: 500, display: 'block' } )
-            .velocity( 'transition.slideUpOut', {
-                duration: 500,
-                delay: 8000,
-                complete: function() {
-                    box.showNext();
-                }
-            });
+
+        if ( !initial ) {
+            job.velocity( 'transition.slideUpIn', { duration: 500, display: 'block' } );
+        }
+
+        job.velocity( 'transition.slideUpOut', {
+            duration: 500,
+            delay: 8000,
+            complete: function() {
+                box.showNext();
+            }
+        });
     };
 
     /**
