@@ -13,6 +13,8 @@ Change log for zeit.web
 
 - ZON-1944: Implement Jobbox
 
+- ZON-2060: Verlagsangebotskennzeichung in Hauptnavi
+
 - Fix: Change number of jobs to be displayed in Jobbox
 
 - Fix: Squeeze adplace ZMO mobile 8 by 2.5em width
