@@ -227,7 +227,6 @@ class PostComment(zeit.web.core.view.Base):
             premoderation = True if (response.status_code == 202 and (
                 response.headers.get('x-premoderation') == 'true')) else False
 
-
             return {
                 'request': {
                     'action': action,
