@@ -35,11 +35,12 @@ class Navigation(object):
 @zope.interface.implementer(zeit.web.core.interfaces.INavigationItem)
 class NavigationItem(Navigation):
 
-    def __init__(self, item_id, text, href):
+    def __init__(self, item_id, text, href, label=None):
         super(NavigationItem, self).__init__()
         self.item_id = item_id
         self.text = text
         self.href = href
+        self.label = label
 
 
 navigation = None
@@ -79,8 +80,9 @@ def _register_navigation_items(navigation, node):
         item_id = section.link.attrib.get('id')
         text = section.link.text
         href = section.link.attrib.get('href')
+        label = section.link.attrib.get('label') or None
         navigation[item_id] = NavigationItem(
-            item_id, text, href)
+            item_id, text, href, label)
         try:
             sub_sections_node = section.sub_sections.xpath('sub_section')
             _register_navigation_items(

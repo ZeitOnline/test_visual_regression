@@ -11,6 +11,11 @@ import zeit.cms.interfaces
 import zeit.web.core.interfaces
 import zeit.web.core.template
 
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 def test_comment_section_should_be_limited_in_top_level_comments(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
@@ -70,7 +75,7 @@ def test_comment_pagination_should_work(testbrowser):
     browser = testbrowser('/zeit-online/article/01?page=2')
     section = browser.document.get_element_by_id('comments')
     pages = section.find_class('pager__page')
-    assert len(pages) == 2
+    assert len(pages) == 5
     assert '--current' in (pages[1].get('class'))
 
 
@@ -111,7 +116,7 @@ def test_comment_filter_works_as_expected(testbrowser):
     assert len(comments) == 1
     browser = testbrowser('/zeit-online/article/01?sort=recommended')
     comments = browser.cssselect('.comment')
-    assert len(comments) == 10
+    assert len(comments) == 4
 
 
 def test_comment_in_reply_to_shows_origin(testbrowser):
@@ -162,13 +167,13 @@ def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
         'comment section template must return an empty document')
 
 
-def test_comment_reply_threads_wrap_on_load_and_expand_on_click(
+def test_comment_reply_threads_wraps_on_load_and_toggles_on_click(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/article/02' % testserver.url)
 
     wrapped_threads = driver.find_elements_by_css_selector('.comment--wrapped')
-    assert len(wrapped_threads) == 5
+    assert len(wrapped_threads) == 3
 
     hidden_reply = driver.find_element_by_id('cid-5122767')
     assert not hidden_reply.is_displayed()
@@ -178,8 +183,18 @@ def test_comment_reply_threads_wrap_on_load_and_expand_on_click(
     assert comment_count_overlay.text == '+2'
 
     wrapped_threads[0].click()
-    assert len(driver.find_elements_by_css_selector('.comment--wrapped')) == 4
+    assert len(driver.find_elements_by_css_selector('.comment--wrapped')) == 2
     assert hidden_reply.is_displayed()
+
+    toggle = driver.find_element_by_id('hide-replies-cid-5122059')
+    toggle.click()
+
+    try:
+        element = WebDriverWait(driver, 1).until(
+            expected_conditions.invisibility_of_element_located(
+                (By.ID, 'cid-5122767')))
+    except TimeoutException:
+        assert False, 'Click must hide comment reply'
 
 
 def test_comment_reply_thread_must_not_wrap_if_deeplinked(
