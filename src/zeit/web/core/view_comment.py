@@ -224,6 +224,10 @@ class PostComment(zeit.web.core.view.Base):
                 request.session['last_commented_time'] = (
                     datetime.datetime.utcnow())
 
+            premoderation = True if (response.status_code == 202 and (
+                response.headers.get('x-premoderation') == 'true')) else False
+
+
             return {
                 'request': {
                     'action': action,
@@ -234,7 +238,8 @@ class PostComment(zeit.web.core.view.Base):
                     'content': content,
                     'error': error,
                     'recommendations': recommendations,
-                    'new_cid': self.new_cid}
+                    'new_cid': self.new_cid,
+                    'premoderation': premoderation}
             }
 
         elif response.status_code == 409:

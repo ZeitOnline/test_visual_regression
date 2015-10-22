@@ -618,3 +618,25 @@ def test_article_view_should_have_short_caching_time_on_unloadable_thread(
 
     browser = testbrowser('%s/artikel/01' % testserver.url)
     assert browser.headers.get('cache-control') == 'max-age=5'
+
+
+@pytest.mark.parametrize("header, state", [
+    ({'x-premoderation': 'true'}, True),
+    ({'x-premoderation': 'false'}, False),
+    ({}, False)])
+def test_post_comment_should_have_correct_premoderation_states(
+        application, monkeypatch, header, state):
+    poster = _create_poster(monkeypatch)
+    poster.request.method = "POST"
+    poster.request.params['comment'] = 'my comment'
+    poster.path = 'my/path'
+    poster.request.params['action'] = 'comment'
+    poster.request.params['pid'] = None
+    with patch.object(requests, 'post') as mock_method:
+        response = mock.Mock()
+        response.status_code = 202
+        response.headers = header
+        response.content = ''
+        mock_method.return_value = response
+        ret_value = poster.post_comment()
+        assert ret_value['response']['premoderation'] is state
