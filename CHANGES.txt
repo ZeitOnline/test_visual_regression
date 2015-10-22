@@ -4,13 +4,12 @@ Change log for zeit.web
 2.17 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Tweak ze.tt parquet area
+
 
 
 2.16 (2015-10-22)
 -----------------
-
-- MAINT: Tweak ze.tt parquet area
 
 - ZON-2276: Fold/unfold comment replies
 
