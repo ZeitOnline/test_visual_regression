@@ -4,6 +4,8 @@ Change log for zeit.web
 2.16 (unreleased)
 -----------------
 
+- MAINT: Normalize spektrum teaser and parquet
+
 - ZON-2144: Add service link module (in fact add raw to centerpages)
 
 - ZON-2334: Unbearbeitete Printartikel von der chronologischen Navigation
