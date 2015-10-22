@@ -4,6 +4,8 @@ Change log for zeit.web
 2.17 (unreleased)
 -----------------
 
+- ZON-2337: Exclude article lineage from ressort "administratives"
+
 - MAINT: Tweak ze.tt parquet area
 
 
