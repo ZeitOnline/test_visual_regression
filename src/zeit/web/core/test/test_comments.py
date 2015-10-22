@@ -130,23 +130,14 @@ def test_comment_to_dict_should_parse_correctly(application, testserver):
 def test_entire_thread_should_be_parsed(application, testserver):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
-    thread_as_json = zeit.web.core.comments.get_thread(
-        unique_id, sort='desc')
-    assert thread_as_json['comments'][0]['cid'] == 2969196
-    assert thread_as_json['comments'][40]['cid'] == 2968920
-    assert thread_as_json['comment_count'] == 41
-
-
-# this test is the same as "test_entire_thread_should_be_parsed"
-# what paging should be tested here? comment paging or article paging?
-# def test_paging_should_not_affect_comment_threads(application, testserver):
-#     unique_id = ('http://xml.zeit.de/politik/deutschland/'
-#                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
-#     thread_as_json = zeit.web.core.comments.get_thread(
-#         unique_id, sort='desc')
-#     assert thread_as_json['comments'][0]['cid'] == 2969196
-#     assert thread_as_json['comments'][40]['cid'] == 2968920
-#     assert thread_as_json['comment_count'] == 41
+    thread = zeit.web.core.comments.get_thread(unique_id, sort='desc')
+    first = thread['comments'].pop(0)
+    last = thread['comments'].pop()
+    assert first['cid'] == 2969196
+    assert last['cid'] == 2968470
+    assert thread['comment_count'] == 41
+    assert len(first['replies']) == 0
+    assert len(last['replies']) == 1
 
 
 def test_thread_should_have_valid_page_information(application, testserver):
@@ -154,28 +145,28 @@ def test_thread_should_have_valid_page_information(application, testserver):
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id)
     assert thread['pages']['current'] is None
-    assert thread['pages']['total'] == 2
+    assert thread['pages']['total'] == 4
 
     thread = zeit.web.core.comments.get_thread(unique_id, page=2)
     assert thread['pages']['current'] == 2
-    assert len(thread['comments']) == 6
+    assert len(thread['comments']) == 4
 
     # check for page not present
     thread = zeit.web.core.comments.get_thread(unique_id, page=6)
     assert thread['pages']['current'] == 1
-    assert len(thread['comments']) == 35
+    assert len(thread['comments']) == 4
 
     thread = zeit.web.core.comments.get_thread(unique_id, cid=2968742)
-    assert thread['pages']['current'] == 2
+    assert thread['pages']['current'] == 3
 
     # ignore page param if comment id is supplied
-    thread = zeit.web.core.comments.get_thread(unique_id, page=3, cid=2968742)
-    assert thread['pages']['current'] == 2
+    thread = zeit.web.core.comments.get_thread(unique_id, page=2, cid=2968742)
+    assert thread['pages']['current'] == 3
 
     # comment id AND sort descendant
     thread = zeit.web.core.comments.get_thread(unique_id, sort='desc',
                                                cid=2968742)
-    assert thread['pages']['current'] == 1
+    assert thread['pages']['current'] == 2
 
 
 def test_dict_with_article_paths_and_comment_counts_should_be_created(
