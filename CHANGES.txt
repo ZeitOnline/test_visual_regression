@@ -10,6 +10,8 @@ Change log for zeit.web
 2.16 (2015-10-22)
 -----------------
 
+- MAINT: Tweak ze.tt parquet area
+
 - ZON-2276: Fold/unfold comment replies
 
 - ZON-2144: Add service link module (in fact add raw to centerpages)
