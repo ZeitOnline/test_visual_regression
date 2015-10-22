@@ -1,0 +1,117 @@
+.partnerbox
+    margin-top: remify(10px)
+    &__label
+        @extend %ad-label
+
+.partner
+    background-color: $whitesmoke
+    padding-bottom: remify(20px)
+    position: relative
+    min-height: remify(140px)
+    &__kicker
+        height: remify(70px)
+        color: $white
+        font-size: em(18px)
+        line-height: em(22px)
+        text-align: left
+        background-color: $zon_lighter_grey
+        font-weight: bold
+        padding: remify(20px)
+        &--jobs
+            color: $zon-charcoal
+    &__intro
+        color: $zon_grey
+        font-size: em(14px)
+        line-height: em(21px)
+        letter-spacing: $letter-spacing-s
+        padding: remify(20px)
+    &__dropdwon
+        background-color: $gainsboro
+        padding: remify(20px)
+        width: 100%
+        display: block
+
+.jb-content
+    display: none
+    min-height: remify(95px)
+    &--show
+        display: block
+        +respond-min($break-desktop-min)
+            display: inline-block
+    &--first
+        .jb-text
+            opacity: 1
+    +respond-min($break-desktop-min)
+        vertical-align: middle
+        width: 65%
+
+.jb-text
+    opacity: 0
+    &__title
+        font-weight: bold
+        font-size: em(18px)
+        line-height: em(22px)
+        color: $zon-charcoal
+        margin-bottom: remify(5px)
+        max-height: 4em
+        overflow: hidden
+    &__byline
+        color: $zon_grey
+        font-size: em(14px)
+        line-height: em(17px)
+        letter-spacing: $letter-spacing-s
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+
+.jb-action
+    display: block
+    text-align: left
+    +respond-min($break-desktop-min)
+        text-align: center
+        display: inline-block
+        position: absolute
+        top: remify(28px)
+        right: remify(20px)
+
+.jb-button
+    display: inline-block
+    +respond-min($break-desktop-min)
+        display: block
+    &__text
+        +zon-button-dark()
+        margin-left: 0
+        border: none
+        color: $white
+        margin-bottom: remify(14px)
+        background-color: rgba(22, 135, 80, .8)
+        &:hover,
+        &:focus
+            background-color: rgba(22, 135, 80, 1)
+        a
+            color: $white
+        /* very small screens do a break, so we have to restyle here */
+        +respond-min($break-action)
+            margin-bottom: 0
+        +respond-min($break-desktop-min)
+            margin-bottom: remify(14px)
+
+.jb-link
+    display: inline-block
+    margin-left: 0
+    /* very small screens do a break, so we have to restyle here */
+    +respond-min($break-action)
+        margin-left: remify(10px)
+    +respond-min($break-desktop-min)
+        display: block
+        margin-left: 0
+    &__text
+        color: $zon_grey
+        font-size: em(14px)
+        line-height: em(17px)
+        border-bottom: 1px solid rgba(112, 112, 112, 0.5)
+        letter-spacing: $letter-spacing-s
+        +on-interaction
+            color: $zon_grey
+            border-bottom: 1px solid rgba(112, 112, 112, 1)
+
