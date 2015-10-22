@@ -75,6 +75,7 @@ class INavigationItem(zope.interface.Interface):
     item_id = zope.interface.Attribute('item_id')
     navigation_items = zope.interface.Attribute('navigation_items')
     text = zope.interface.Attribute('text')
+    label = zope.interface.Attribute('label')
 
 
 class IPages(zope.interface.common.sequence.IReadSequence):
@@ -119,6 +120,10 @@ class IBannerlist(zope.interface.Interface):
 
 class INextread(IFrontendBlock):
     """Nextread teaser block must be similar to zeit.content.cp.TeaserBlock"""
+
+
+class INextreadlist(zope.interface.Interface):
+    """List of all nextreads belonging to an article."""
 
 
 class ITeaser(zope.interface.Interface):

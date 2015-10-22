@@ -99,6 +99,19 @@ class RSSImages(object):
         self.image = zeit.content.image.interfaces.IImageGroup(context)
 
 
+def parse_feed(url, kind):
+    try:
+        with zeit.web.core.metrics.timer('feed.rss.reponse_time'):
+            resp = requests.get(url, timeout=2.0)
+        xml = lxml.etree.fromstring(resp.content)
+    except (requests.exceptions.RequestException,
+            lxml.etree.XMLSyntaxError), e:
+        log.debug('Could not collect {}: {}'.format(url, e))
+        return
+    for item in xml.xpath('/rss/channel/item'):
+        yield zope.component.getAdapter(item, IRSSLink, kind)
+
+
 class IRSSArea(zeit.content.cp.interfaces.IArea):
 
     feed_key = zope.interface.Attribute('feed_key')
@@ -115,23 +128,16 @@ class RSSArea(zeit.content.cp.automatic.AutomaticArea):
         import zeit.web.site.view_centerpage
 
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        feed_url = conf.get(self.feed_key)
+        url = conf.get(self.feed_key)
         values = []
-        try:
-            with zeit.web.core.metrics.timer('feed.rss.reponse_time'):
-                resp = requests.get(feed_url, timeout=2.0)
-            xml = lxml.etree.fromstring(resp.content)
-        except (requests.exceptions.RequestException,
-                lxml.etree.XMLSyntaxError), e:
-            log.debug('Could not collect {}: {}'.format(self.feed_key, e))
-            return
-        for i in xml.xpath('/rss/channel/item'):
-            content = zope.component.getAdapter(i, IRSSLink, self.kind)
+
+        for item in parse_feed(url, self.kind):
             module = zeit.web.site.view_centerpage.LegacyModule(
-                [content], layout=self.module_layout)
-            content.__parent__ = self
+                [item], layout=self.module_layout)
+            item.__parent__ = self
             module.type = 'teaser'
             values.append(module)
+
         return values
 
     @zeit.web.reify

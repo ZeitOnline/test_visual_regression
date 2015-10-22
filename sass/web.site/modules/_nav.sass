@@ -461,12 +461,16 @@ $icon-color--hover: $zon-charcoal
 				display: block
 				width: 100%
 				padding: 0 $fine 0 $fine
+				white-space: nowrap
 				&:after
 					content: ""
 					margin-left: 0
 				&:hover,
 				&--current
 					background-color: $gainsboro
+			&--has-label
+				background-color: #FAFAF3
+				border-top: 1px solid #CCC
 		// dropdowns can contain dropdowns
 		.dropdown
 			box-shadow: none
@@ -476,7 +480,11 @@ $icon-color--hover: $zon-charcoal
 			position: relative
 			.dropdown__link
 				padding-left: $petite
-
+.dropdown__label
+	@extend %ad-label
+	margin: remify(0 0 -4px)
+	padding: remify(8px 0 0)
+	text-align: left
 
 .js .primary-nav--js-no-overflow
 	+respond-min($break-tablet-min)

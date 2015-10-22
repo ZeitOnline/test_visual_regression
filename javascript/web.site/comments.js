@@ -378,7 +378,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
             .velocity( 'slideUp', slideDuration );
     },
 
-    hideReplies = function() {
+    wrapReplies = function() {
         var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
             $target;
 
@@ -387,12 +387,17 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         }
 
         $rootComments.each( function() {
-            var $answers = $( this ).nextUntil( '.js-comment-toplevel', '.comment--indented' ),
-                containsTarget = $answers.length > 1 && $target && $answers.is( $target );
+            var $root = $( this ),
+                $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
+                containsTarget = $answers.length > 1 && $target && $answers.is( $target ),
+                id = 'hide-replies-' + this.id,
+                link = '<span id="' + id + '" class="comment__rewrapper js-hide-replies">' +
+                    $answers.length + ' Antworten verbergen</span>';
 
             // when deeplinked, prevent collapse of reply thread
             if ( $answers.length > 1  && !containsTarget ) {
-                coverReply( $answers.eq( 0 ), $answers.length - 1 );
+                $root.find( '.comment__reactions' ).append( link );
+                coverReply( $answers.eq( 0 ).data({ undo: id }), $answers.length - 1 );
                 $answers.slice( 1 ).velocity( 'slideUp', slideDuration );
             }
         });
@@ -402,22 +407,34 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         var overlayHTML = '' +
             '<div class="comment-overlay">\n' +
                 '<div class="comment-overlay__wrap">\n' +
-                    '<span class="comment-overlay__count">+%replyCount%</span>\n' +
+                    '<span class="comment-overlay__count">+' + replyCount + '</span>\n' +
                     '<span class="comment-overlay__cta">Weitere Antworten anzeigen</span>\n' +
                 '</div>\n' +
             '</div>\n';
 
-        overlayHTML = overlayHTML.replace( '%replyCount%', replyCount );
         $firstReply.addClass( 'comment--wrapped' )
             .find( '.comment__body' )
             .append( overlayHTML );
     },
 
     showReplies = function( e ) {
+        var $wrapped = $( this ),
+            selector = '#' + $wrapped.data( 'undo' ),
+            $link = $( selector );
+
         e.preventDefault();
-        $( this ).removeClass( 'comment--wrapped' )
+        $link.velocity( 'fadeIn' );
+        $wrapped.removeClass( 'comment--wrapped' )
             .nextUntil( '.js-comment-toplevel', '.comment--indented' ) // get other replies, filter to remove ads from result
             .velocity( 'slideDown', slideDuration );
+    },
+
+    hideReplies = function() {
+        var $root = $( this ).velocity( 'fadeOut' ).closest( '.comment' ),
+            $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' );
+
+        $answers.first().addClass( 'comment--wrapped' );
+        $answers.slice( 1 ).velocity( 'slideUp', slideDuration );
     },
 
     addModeration = function() {
@@ -447,6 +464,15 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
             .append( modHTML );
     },
 
+    jumpToComment = function() {
+        var comment = $( this.hash );
+
+        if ( comment.length ) {
+            comment.scrollIntoView();
+            return false;
+        }
+    },
+
     /**
      * comments.js: initialize
      * @function init
@@ -459,8 +485,14 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
         var uid = $commentForm.attr( 'data-uid' );
 
-        // highlight recommended comments for logged in user
+        // disable submit buttons of required fields
+        $comments.find( '.js-required' ).each( enableForm );
+
+        // collapse consecutive replies
+        wrapReplies();
+
         if ( uid ) {
+            // highlight recommended comments for logged in user
             $commentsBody.find( '.js-recommend-comment' ).each( function() {
                 var fans = this.getAttribute( 'data-fans' );
 
@@ -470,16 +502,12 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                     toggleRecommendationLink( $( this ) );
                 }
             });
+
+            // add community frontend moderation
             if ( $commentForm.data( 'mod' ) === 'mod' ) {
                 $commentsBody.find( '.comment' ).each( addModeration );
             }
         }
-
-        // disable submit buttons of required fields
-        $comments.find( '.js-required' ).each( enableForm );
-
-        // collapse consecutive replies
-        hideReplies();
 
         // register event handlers
         $comments.on( 'submit', '.js-submit-comment', submitComment );
@@ -490,7 +518,9 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         $commentsBody.on( 'click', '.js-submit-report', submitReport );
         $commentsBody.on( 'click', '.js-recommend-comment', recommendComment );
         $commentsBody.on( 'click', '.comment--wrapped', showReplies );
+        $commentsBody.on( 'click', '.js-hide-replies', hideReplies );
         $commentsBody.on( 'click', '.js-promote-comment', promoteComment );
+        $commentsBody.on( 'click', '.js-jump-to-comment', jumpToComment );
         $comments.on( inputEvent, '.js-required', enableForm );
     };
 

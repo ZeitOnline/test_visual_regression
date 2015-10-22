@@ -9,24 +9,6 @@ def test_login_state_view_should_deliver_correct_destination():
     request = mock.Mock()
     request.registry.settings = {}
     request.session = {}
-    request.registry.settings['sso_activate'] = False
-    request.registry.settings['community_host'] = "http://community"
-    request.registry.settings['community_static_host'] = "community_static"
-    request.host = "destination"
-    request.params = {}
-    result = zeit.web.site.view.login_state(request)
-    assert result == {
-        'login': 'http://community/user/login?destination=http://destination',
-        'logout': 'http://community/user/logout?destination=http://destination'
-    }
-    request.params = {'context-uri': 'http://context-uri'}
-    result = zeit.web.site.view.login_state(request)
-    assert result == {
-        'login': 'http://community/user/login?destination=http://context-uri',
-        'logout': 'http://community/user/logout?destination=http://context-uri'
-    }
-
-    request.session = {}
     request.registry.settings['sso_activate'] = True
     request.registry.settings['community_host'] = "http://community"
     request.registry.settings['sso_url'] = "http://sso"
@@ -38,20 +20,6 @@ def test_login_state_view_should_deliver_correct_destination():
         'login': 'http://sso/anmelden?url=http://destination_sso',
         'logout': 'http://sso/abmelden?url=http://destination_sso'
     }
-
-
-def test_login_state_view_should_deliver_correct_user():
-    request = mock.Mock()
-    request.registry.settings = {}
-    request.authenticated_userid = 123
-    request.session = {}
-    request.session['user'] = {}
-    request.registry.settings['sso_activate'] = False
-    request.registry.settings['community_host'] = "http://community"
-    request.params = {}
-    result = zeit.web.site.view.login_state(request)
-    assert result['user'] == {}
-    assert result['profile'] == 'http://community/user'
 
 
 def test_article_should_have_breadcrumbs(testserver, testbrowser):
@@ -122,3 +90,10 @@ def test_keyword_redirect_should_handle_unicode(testserver, testbrowser):
     assert resp.status_code == 301
     assert resp.headers['Location'] == (
         u'%s/thema/istván-szabó' % testserver.url).encode('utf-8')
+
+
+def test_main_nav_should_render_labels(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
+    dropdown_label = browser.cssselect('.primary-nav .dropdown__label')
+    assert len(dropdown_label) == 1
+    assert dropdown_label[0].text == 'Anzeige'

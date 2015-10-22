@@ -65,6 +65,7 @@ def app_settings(mockserver):
         'asset_prefix': '/static/latest',
         'image_prefix': '',
         'jsconf_prefix': '/jsconf',
+        'comment_page_size': '4',
         'community_host': 'http://localhost:6551',
         'community_static_host': 'http://static_community/foo',
         'agatho_host': mockserver.url + '/comments',
@@ -77,6 +78,8 @@ def app_settings(mockserver):
         'spektrum_img_host': mockserver.url + '/spektrum',
         'zett_hp_feed': mockserver.url + '/zett/feed.xml',
         'zett_img_host': mockserver.url + '/zett',
+        'academics_hp_feed': mockserver.url + '/academics/feed.xml',
+        'academics_img_host': mockserver.url + '/academics',
         'node_comment_statistics': 'community/node-comment-statistics.xml',
         'default_teaser_images': (
             'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
@@ -94,9 +97,9 @@ def app_settings(mockserver):
         'vivi_zeit.cms_source-keyword': (
             'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
         'vivi_zeit.cms_source-navigation': (
-            'egg://zeit.cms.content/navigation.xml'),
+            'egg://zeit.web.core/data/config/ressorts.xml'),
         'vivi_zeit.cms_source-channels': (
-            'egg://zeit.cms.content/navigation.xml'),
+            'egg://zeit.web.core/data/config/ressorts.xml'),
         'vivi_zeit.cms_source-products': (
             'egg://zeit.web.core/data/config/products.xml'),
         'vivi_zeit.cms_source-serie': (
@@ -182,7 +185,8 @@ def app_settings(mockserver):
         'debug.propagate_jinja_errors': True,
         'debug.enable_profiler': False,
         'dev_environment': True,
-        'enable_article_lineage': True
+        'enable_article_lineage': True,
+        'advertisement_nextread_folder': 'verlagsangebote',
     }
 
 
