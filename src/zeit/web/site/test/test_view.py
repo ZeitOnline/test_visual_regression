@@ -90,3 +90,10 @@ def test_keyword_redirect_should_handle_unicode(testserver, testbrowser):
     assert resp.status_code == 301
     assert resp.headers['Location'] == (
         u'%s/thema/istván-szabó' % testserver.url).encode('utf-8')
+
+
+def test_main_nav_should_render_labels(testserver, testbrowser):
+    browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
+    dropdown_label = browser.cssselect('.primary-nav .dropdown__label')
+    assert len(dropdown_label) == 1
+    assert dropdown_label[0].text == 'Anzeige'

@@ -27,7 +27,11 @@
                    title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}"
                    href="{{ teaser | create_url }}">
                     {% block teaser_kicker %}
-                    <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, 'zmo' if area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent')) }}">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
+                    <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(
+                        journalistic_format,
+                        area.kind if area.kind == 'spektrum',
+                        'zmo' if area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent')
+                    ) }}">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
                     {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">:</span>{% endif %}
                     {% endblock %}
                     {% block teaser_title %}

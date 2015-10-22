@@ -75,6 +75,7 @@ class INavigationItem(zope.interface.Interface):
     item_id = zope.interface.Attribute('item_id')
     navigation_items = zope.interface.Attribute('navigation_items')
     text = zope.interface.Attribute('text')
+    label = zope.interface.Attribute('label')
 
 
 class IPages(zope.interface.common.sequence.IReadSequence):
