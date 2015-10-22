@@ -1,0 +1,44 @@
+.servicelinks
+	margin: 0
+	overflow: hidden
+	+respond-min($break-tablet-min)
+		margin: remify(20px 0)
+	&__title
+		border-bottom: 1px solid #d6d6d6
+		color: $zon_dark_grey
+		font-size: remify(14px)
+		font-weight: 700
+		letter-spacing: $zon-letter-spacing-m
+		line-height: 1.14
+		padding: remify(0 10px 12px 10px)
+		text-transform: uppercase
+	&__list
+		float: left
+		list-style: none
+		margin: 0
+		padding: remify(0 10px)
+		width: 100%
+		&:nthd-child(odd)
+			clear: left
+		+respond-min($break-phablet-min)
+			width: 50%
+		+respond-min($break-tablet-min)
+			width: 100%
+		+respond-min($break-desktop-min)
+			width: 50%
+	&__item
+		color: #8b8b8b
+		color: rgba(77, 77, 77, 0.65)
+		font-size: 15px
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1.33
+		margin-bottom: remify(10px)
+	&__link
+		text-decoration: none
+		&:link,
+		&:visited
+			color: #8b8b8b
+			color: rgba(77, 77, 77, 0.65)
+		&:hover,
+		&:active
+			color: #4d4d4d

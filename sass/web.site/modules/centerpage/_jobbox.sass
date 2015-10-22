@@ -25,9 +25,11 @@ $break-action: 380px
                 & > a:last-of-type
                     display: none
         .jb-content
-            display: block
+            display: none
             min-height: 0
             width: 100%
+            &:nth-child(-n+4)
+                display: block
             +on-interaction
                 .jb-icon__bullet
                     background-color: rgba(22, 135, 80, 1)
