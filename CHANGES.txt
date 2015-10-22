@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - Fix: Squeeze adplace ZMO mobile 8 by 2.5em width
 
+- MAINT: Normalize spektrum teaser and parquet
+
+- ZON-2144: Add service link module (in fact add raw to centerpages)
+
 - ZON-2334: Unbearbeitete Printartikel von der chronologischen Navigation
   ausschliessen
 
