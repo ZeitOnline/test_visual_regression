@@ -65,6 +65,7 @@ def app_settings(mockserver):
         'asset_prefix': '/static/latest',
         'image_prefix': '',
         'jsconf_prefix': '/jsconf',
+        'comment_page_size': '4',
         'community_host': 'http://localhost:6551',
         'community_static_host': 'http://static_community/foo',
         'agatho_host': mockserver.url + '/comments',
