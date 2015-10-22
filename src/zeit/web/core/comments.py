@@ -247,18 +247,20 @@ def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
 
     # flatten comment tree
     thread['comments'] = comments = []
-    # positional_index = {}
     for main_comment in sorted_tree:
-        # positional_index[main_comment[0]['cid']] = len(comments)
-        comments.append(main_comment[0])
+        origin = main_comment[0]
+        origin['replies'] = []
+        comments.append(origin)
         for sub_comment in main_comment[1]:
-            # positional_index[sub_comment['cid']] = len(comments)
-            comments.append(sub_comment)
+            origin['replies'].append(sub_comment)
 
     # display comment count
     thread['headline'] = '{} {}'.format(
         total_comment_count,
         'Kommentar' if total_comment_count == 1 else 'Kommentare')
+
+    # comments ad place
+    thread['ad_place'] = int(page_size / 2 + 1)
 
     # all things pagination
     thread['pages'] = {
