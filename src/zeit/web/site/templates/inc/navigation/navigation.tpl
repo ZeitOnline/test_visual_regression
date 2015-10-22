@@ -4,7 +4,7 @@
 	<div itemscope itemtype="http://schema.org/Organization" class="logo_bar">
 		{% with tag_name = 'h1' if view.is_hp else 'div' %}
 		<{{ tag_name }} class="logo_bar__brand" itemprop="brand">
-			<a itemprop="url" role="img" href="http://{{ view.request.host }}/index" title="Nachrichten auf ZEIT ONLINE" id="hp.global.topnav.centerpages.logo" data-id="topnav.2.1..logo">
+			<a itemprop="url" role="img" href="http://{{ view.request.host }}/index" title="Nachrichten auf ZEIT ONLINE" data-id="topnav.2.1..logo">
 				{# Metatag to show Google the image, see http://stackoverflow.com/questions/18130827/schema-org-give-a-div-a-itemprop-image -#}
 				<meta itemprop="logo" content="http://{{ view.request.host }}/static/icons/zon-logo-desktop.png">
                 {{ lama.use_svg_icon('logo-zon-black', 'logo_bar__brand-logo', view.request) }}
