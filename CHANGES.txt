@@ -6,12 +6,18 @@ Change log for zeit.web
 
 - ZON-2276: Fold/unfold comment replies
 
+- ZON-2144: Add service link module (in fact add raw to centerpages)
+
 - ZON-2334: Unbearbeitete Printartikel von der chronologischen Navigation
   ausschliessen
 
 - ZON-1944: Implement Jobbox
 
 - Fix: Change number of jobs to be displayed in Jobbox
+
+- Fix: Squeeze adplace ZMO mobile 8 by 2.5em width
+
+- MAINT: Normalize spektrum teaser and parquet
 
 
 2.15 (2015-10-20)

@@ -159,8 +159,7 @@ define( [ 'jquery' ], function( $ ) {
             event.preventDefault();
             event.stopImmediatePropagation();
             console.debug( trackingData );
-        }
-        if ( trackingData ) {
+        } else if ( trackingData ) {
             window.wt.sendinfo({
                 linkId: trackingData,
                 sendOnUnload: 1
