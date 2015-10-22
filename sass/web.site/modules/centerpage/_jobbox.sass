@@ -1,176 +1,150 @@
 $bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
-$break-action: 380px
 
 .jobbox
-    &__label
-        @extend %ad-label
-    &--parquet
-        padding: remify(20px) 0 remify(20px) 0
-    /* jobbox in duo is different */
-    &--duo
-        display: block
-        .jb-box
-            background-color: $white
-            padding: remify(10px)
-            border: 1px solid $silver
-            &__kicker
-                line-height: remify(84px)
-                color: $grey--mid-dark
-                font-size: em(22px)
-                text-align: center
-                letter-spacing: $letter-spacing-s
-                background: $silver url($bg_kicker) no-repeat right
-                background-size: cover
-            +respond-max($break-desktop-min)
-                & > a:last-of-type
-                    display: none
-        .jb-content
-            display: none
-            min-height: 0
-            width: 100%
-            &:nth-child(-n+4)
-                display: block
-            +on-interaction
-                .jb-icon__bullet
-                    background-color: rgba(22, 135, 80, 1)
-        .jb-icon
-            display: table-cell
-            &__bullet
-                width: remify(30px)
-                height: remify(30px)
-                top: remify(16px)
-                display: block
-                background-color: rgba(22, 135, 80, .8)
-                position: relative
-                +border-radius(20px)
-                &:after
-                    content: '\203A'
-                    color: $white
-                    font-size: remify(30px)
-                    position: absolute
-                    top: remify(-9px)
-                    left: remify(11px)
-        .jb-text
-            opacity: 1
-            display: table-cell
-            padding-left: remify(15px)
-            &__title
-                font-size: em(15px)
-                line-height: em(18px)
-                color: $grey--mid
-                margin-bottom: remify(3px)
-                max-height: none
-            &__byline
-                color: $zon_grey
-                font-size: em(14px)
-                line-height: em(17px)
-                margin-bottom: remify(10px)
-                max-width: remify(180px)
-                +respond-min($break-desktop-min)
-                    max-width: remify(220px)
-        .jb-action
-            position: relative
-            display: block
-            top: 0
-            right: 0
-            text-align: right
+	margin: $vertical-space 0
 
-.jb-box
-    background-color: $zon-seashell
-    padding: remify(20px)
-    position: relative
-    min-height: remify(140px)
-    &__kicker
-        color: $red
-        font-size: em(12px)
-        line-height: em(15px)
-        font-weight: bold
-        letter-spacing: $letter-spacing-m
-        margin-bottom: remify(10px)
-        +respond-min($break-tablet-min)
-            font-size: em(13px)
+	&__label
+		@extend %ad-label
 
-.jb-content
-    display: none
-    min-height: remify(95px)
-    &--show
-        display: block
-        +respond-min($break-desktop-min)
-            display: inline-block
-    &--first
-        .jb-text
-            opacity: 1
-    +respond-min($break-desktop-min)
-        vertical-align: middle
-        width: 65%
+	&__container
+		+clearfix
+		background-color: $zon-seashell
+		padding: remify(20px)
 
-.jb-text
-    opacity: 0
-    &__title
-        font-weight: bold
-        font-size: em(18px)
-        line-height: em(22px)
-        color: $zon-charcoal
-        margin-bottom: remify(5px)
-        max-height: 4em
-        overflow: hidden
-    &__byline
-        color: $zon_grey
-        font-size: em(14px)
-        line-height: em(17px)
-        letter-spacing: $letter-spacing-s
-        white-space: nowrap
-        overflow: hidden
-        text-overflow: ellipsis
+	&__kicker
+		@extend %teaser-kicker
 
-.jb-action
-    display: block
-    text-align: left
-    +respond-min($break-desktop-min)
-        text-align: center
-        display: inline-block
-        position: absolute
-        top: remify(28px)
-        right: remify(20px)
+	&__header
+		background-size: cover
+		background: $zon_lighter_grey url($bg_kicker) no-repeat right
+		color: $color-text
+		font-size: em(22px)
+		font-weight: bold
+		letter-spacing: $letter-spacing-s
+		line-height: remify(84px)
+		text-align: center
 
-.jb-button
-    display: inline-block
-    +respond-min($break-desktop-min)
-        display: block
-    &__text
-        +zon-button-dark()
-        margin-left: 0
-        border: none
-        color: $white
-        margin-bottom: remify(14px)
-        background-color: rgba(22, 135, 80, .8)
-        &:hover,
-        &:focus
-            background-color: rgba(22, 135, 80, 1)
-        a
-            color: $white
-        /* very small screens do a break, so we have to restyle here */
-        +respond-min($break-action)
-            margin-bottom: 0
-        +respond-min($break-desktop-min)
-            margin-bottom: remify(14px)
+	&__jobs
+		min-height: remify(94px) // make sure to exceed 3 lines of title + margin + 1 byline here
 
-.jb-link
-    display: inline-block
-    margin-left: 0
-    /* very small screens do a break, so we have to restyle here */
-    +respond-min($break-action)
-        margin-left: remify(10px)
-    +respond-min($break-desktop-min)
-        display: block
-        margin-left: 0
-    &__text
-        color: $zon_grey
-        font-size: em(14px)
-        line-height: em(17px)
-        border-bottom: 1px solid rgba(112, 112, 112, 0.5)
-        letter-spacing: $letter-spacing-s
-        +on-interaction
-            color: $zon_grey
-            border-bottom: 1px solid rgba(112, 112, 112, 1)
+	&__job
+		display: none
+		line-height: 1.2
+		&:first-child
+			display: block
 
+	&__title
+		color: $zon-charcoal
+		font-size: em(18px)
+		font-weight: bold
+		margin-bottom: remify(5px)
+		max-height: 1.2em * 3 // multiply line-height for a maximum of 3 lines height
+		overflow: hidden
+
+	&__byline
+		color: $zon_grey
+		font-size: em(14px)
+		letter-spacing: $letter-spacing-s
+		// max-width: 100%
+		overflow: hidden
+		text-overflow: ellipsis
+		white-space: nowrap
+
+	&__button
+		+zon-button-green($margin: remify(14px 0 0))
+
+	&__link
+		border-bottom: 1px solid rgba($zon_grey, .4)
+		color: $zon_grey
+		display: inline-block
+		font-size: em(14px)
+		letter-spacing: $letter-spacing-s
+		line-height: 1.2
+		margin: remify(14px 0 0 10px)
+		+on-interaction
+			border-bottom-color: rgba($zon_grey, .8)
+			color: $zon_grey
+
+	/* jobbox in duo is different */
+	&--duo
+		.jobbox__container
+			background-color: $white
+			padding: remify(9px)
+			border: 1px solid $color-border
+
+		.jobbox__jobs
+			float: none // reset
+			width: auto // reset
+
+		.jobbox__job
+			margin: remify(26px 0)
+			padding: remify(0 10px 0 54px)
+			position: relative
+			&:before
+				background-color: rgba(22, 135, 80, .8)
+				border-radius: 50%
+				box-sizing: border-box
+				color: $white
+				content: '\203A'
+				font-size: remify(32px)
+				height: remify(32px)
+				left: remify(5px)
+				line-height: remify(22px)
+				padding-left: remify(4px)
+				position: absolute
+				text-align: center
+				top: 0
+				width: remify(32px)
+			+on-interaction
+				&:before
+					background-color: rgba(22, 135, 80, 1)
+			&:nth-child(-n+2)
+				display: block
+			+respond-min($break-tablet-min)
+				&:nth-child(-n+3)
+					display: block
+
+		.jobbox__title
+			color: $zon_dark_grey
+			font-size: em(15px)
+			max-height: none
+
+		// .jobbox__byline
+		// 	max-width: 75%
+
+		.jobbox__action
+			float: none // reset
+			text-align: right
+
+		.jobbox__button
+			margin: remify(0 10px 10px 0)
+
++respond-min($break-desktop-min)
+	.jobbox
+		&__jobs
+			float: left
+			width: 70%
+
+		&__action
+			float: right
+			text-align: center
+
+		&__button
+			margin: 0
+
+		&__links
+			display: block
+		&__link
+			margin-left: 0
+
+	.jobbox--minor
+		.jobbox__jobs
+			float: none
+			width: 100%
+
+		.jobbox__action
+			float: none
+			text-align: left
+
+		.jobbox__button
+			margin-top: remify(14px)

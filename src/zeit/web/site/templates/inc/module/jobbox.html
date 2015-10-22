@@ -1,31 +1,33 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-<aside class="jobbox {% block modifier %}jobbox--animate{% endblock %}">
-    <span class="jobbox__label">Verlagsangebot</span>
-    <div class="jb-box">
-        <div class="jb-box__kicker">
-            {% block kicker %}Aktuelle Jobs im ZEIT Stellenmarkt{% endblock %}
-        </div>
-        {% for teaser in module %}
-        <a class="jb-content {% if loop.first %}jb-content--show jb-content--first{% endif %}" href="{{ teaser.url }}{% block tracking %}?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker1.textlink.stellenanzeige.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker1_textlink_stellenanzeige_{% endblock %}">
-            <div class="jb-icon">
-                <span class="jb-icon__bullet"></span>
-            </div>
-            <div class="jb-text">
-                <div class="jb-text__title">{{ teaser.title }}</div>
-                <div class="jb-text__byline">{{ teaser.text }}</div>
-            </div>
-        </a>
-        {% endfor %}
-        <span class="jb-action">
-            <div class="jb-button">
-                <span class="jb-button__text">{% block button %}<a class="jb-button__link" href="{{ module[0].url }}?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker1.textlink.stellenanzeige.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker1_textlink_stellenanzeige_">mehr erfahren</a>{% endblock %}</span>
-            </div>
-            {% block link %}
-                <div class="jb-link">
-                    <a class="jb-link__text" href="http://jobs.zeit.de/?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker1.textlink.startseite.x&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker1_textlink_startseite_x">Zum Stellenmarkt</a>
-                </div>
-            {% endblock %}
-        </span>
-    </div>
+<aside class="{{ 'jobbox' | with_mods(area.kind) }}{% block jobbox_modifier %} jobbox--animate{% endblock %}">
+	<span class="jobbox__label">Verlagsangebot</span>
+	<div class="jobbox__container">
+		{% block jobbox_header %}
+		<div class="jobbox__kicker">
+			Aktuelle Jobs im ZEIT Stellenmarkt
+		</div>
+		{% endblock %}
+
+		<div class="jobbox__jobs">
+		{% for teaser in module %}
+			<a class="jobbox__job" href="{{ teaser.url }}{% block tracking %}?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker1.textlink.stellenanzeige.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker1_textlink_stellenanzeige_{% endblock %}">
+				<div class="jobbox__title">{{ teaser.title }}</div>
+				<div class="jobbox__byline">{{ teaser.text }}</div>
+			</a>
+		{% endfor %}
+		</div>
+
+		<div class="jobbox__action">
+		{% block jobbox_button %}
+			<a class="jobbox__button" href="{% if module %}{{ module[0].url }}{{ self.tracking() }}{% endif %}">mehr erfahren</a>
+		{% endblock %}
+
+		{% block jobbox_link %}
+			<span class="jobbox__links">
+				<a class="jobbox__link" href="http://jobs.zeit.de/?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker1.textlink.startseite.x&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker1_textlink_startseite_x">Zum Stellenmarkt</a>
+			</span>
+		{% endblock %}
+		</div>
+	</div>
 </aside>
