@@ -43,6 +43,13 @@
         default="shop"
         />
     <layout
+        id="zon-printkiosk"
+        title="ZEIT Printbanderole Produkt Teaser"
+        image_pattern="zon-thumbnail"
+        areas="printkiosk"
+        default="printkiosk"
+        />
+    <layout
         id="zon-inhouse"
         title="Verlagsangebot"
         image_pattern="zon-thumbnail"
