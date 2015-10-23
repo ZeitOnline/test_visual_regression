@@ -25,11 +25,34 @@
         line-height: em(21px)
         letter-spacing: $letter-spacing-s
         padding: remify(20px)
-    &__dropdwon
-        background-color: $gainsboro
-        padding: remify(20px)
-        width: 100%
+    &__dropdown
+        padding: 0 remify(20px)
+    &__action
         display: block
+        text-align: left
+
+.p-button
+    display: inline-block
+    &__text
+        +zon-button-dark()
+        margin-left: 0
+        border: none
+        color: $white
+        margin-bottom: remify(14px)
+        a
+            color: $white
+        &--jobs
+            background-color: rgba(22, 135, 80, .8)
+            &:hover,
+            &:focus
+                background-color: rgba(22, 135, 80, 1)
+
+.p-dropdown
+    background-color: $gainsboro
+    display: block
+    height: remify(35px)
+    width: 100%
+
 
 .jb-content
     display: none
