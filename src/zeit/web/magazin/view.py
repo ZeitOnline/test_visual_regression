@@ -53,7 +53,7 @@ class Base(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def ressort_literally(self):
-        if self.is_hp:
+        if self.is_hp or self.ressort == 'lebensart':
             return 'ZEITmagazin'
         ressorts = {
             'leben': 'Leben',
