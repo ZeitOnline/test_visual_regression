@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-2337: Exclude article lineage from ressort "administratives"
 
+- FIX: Change number of jobs to be displayed in Jobbox
+
+- FIX: Make Jobbox more failsave and multi instance ready
+
 
 2.17 (2015-10-22)
 -----------------
