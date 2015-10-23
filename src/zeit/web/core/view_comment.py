@@ -205,11 +205,14 @@ class PostComment(zeit.web.core.view.Base):
                         'user' in request.session) and (
                             request.session['user']['name']):
                     self.user_name = request.session['user']['name']
+                    self.status.append("User name {} was set".format(
+                        self.user_name))
                 else:
                     raise pyramid.httpexceptions.HTTPInternalServerError(
                         title='No user name found',
                         explanation='Session could not be '
                                     'reloaded with new user_name.')
+
             content = None
             error = None
             if response.content:
@@ -226,6 +229,10 @@ class PostComment(zeit.web.core.view.Base):
 
             premoderation = True if (response.status_code == 202 and (
                 response.headers.get('x-premoderation') == 'true')) else False
+
+            if premoderation:
+                 self.status.append(
+                     "Comment needs moderation (premoderation state)")
 
             return {
                 'request': {
