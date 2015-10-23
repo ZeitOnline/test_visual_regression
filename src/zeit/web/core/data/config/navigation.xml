@@ -54,6 +54,9 @@
       <sub_section>
         <link href="http://xml.zeit.de/kultur/kunst/index" id="topnav.mainnav.4.4.kunst">Kunst</link>
       </sub_section>
+      <sub_section>
+        <link href="http://xml.zeit.de/angebote/buchtipp/index" id="topnav.mainnav.4.5.leseperlen" label="Anzeige">Buchtipps: Leseperlen</link>
+      </sub_section>
     </sub_sections>
   </section>
   <section>
@@ -101,6 +104,9 @@
       </sub_section>
       <sub_section>
         <link href="http://xml.zeit.de/studium/studiengaenge" id="topnav.mainnav.7.4.studiengaenge">Studiengänge</link>
+      </sub_section>
+      <sub_section>
+        <link href="http://studiengaenge.zeit.de/sit" id="topnav.mainnav.7.5.studium-interessentest">Studium-Interessentest</link>
       </sub_section>
     </sub_sections>
   </section>

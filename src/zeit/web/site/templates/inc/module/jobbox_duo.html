@@ -1,7 +1,17 @@
 {%- extends "zeit.web.site:templates/inc/module/jobbox.html" -%}
 
-{% block modifier %}jobbox--duo{% endblock %}
-{% block kicker %}Der ZEIT Stellenmarkt{% endblock %}
+{% block jobbox_modifier %}{% endblock %}
+
+{% block jobbox_header %}
+	<div class="jobbox__header">
+		Der ZEIT Stellenmarkt
+	</div>
+{% endblock %}
+
 {% block tracking %}?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker2.textlink.stellenanzeige.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker2_textlink_stellenanzeige_{% endblock %}
-{% block button %}<a href="http://jobs.zeit.de/?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker2.textlink.startseite.x&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker2_textlink_startseite_x">Alle Job-Angebote</a>{% endblock %}
-{% block link %}{% endblock %}
+
+{% block jobbox_button -%}
+	<a class="jobbox__button" href="http://jobs.zeit.de/?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker2.textlink.startseite.x&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker2_textlink_startseite_x">Alle Job-Angebote</a>
+{% endblock %}
+
+{% block jobbox_link %}{% endblock %}

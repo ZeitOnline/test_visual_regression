@@ -674,8 +674,8 @@ class Content(Base):
 
     @zeit.web.reify
     def lineage(self):
-
-        if self.is_advertorial or not self.context.channels:
+        if self.is_advertorial or not self.context.channels or (
+                self.ressort == 'administratives'):
             return None
 
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
