@@ -60,7 +60,7 @@ class Base(zeit.web.core.view.Base):
             'mode-design': 'Mode & Design',
             'essen-trinken': 'Essen & Trinken',
         }
-        return ressorts.get(self.sub_ressort, '')
+        return ressorts.get(self.sub_ressort, self.ressort.capitalize())
 
     def banner_toggles(self, name):
         cases = {
