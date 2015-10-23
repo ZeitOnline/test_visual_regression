@@ -4,8 +4,6 @@ Change log for zeit.web
 2.18 (unreleased)
 -----------------
 
-- FIX: Change number of jobs to be displayed in Jobbox
-
 - FIX: Make Jobbox more failsave and multi instance ready
 
 - FIX: Make Jobbox square in 50/50
