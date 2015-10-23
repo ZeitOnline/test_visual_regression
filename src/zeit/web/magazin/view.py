@@ -51,6 +51,17 @@ class Base(zeit.web.core.view.Base):
             crumb_list.append((self.title, ''))
         return crumb_list
 
+    @zeit.web.reify
+    def ressort_literally(self):
+        if self.is_hp:
+            return 'ZEITmagazin'
+        ressorts = {
+            'leben': 'Leben',
+            'mode-design': 'Mode & Design',
+            'essen-trinken': 'Essen & Trinken',
+        }
+        return ressorts.get(self.sub_ressort, '')
+
     def banner_toggles(self, name):
         cases = {
             'viewport_zoom': 'tablet-landscape',
