@@ -71,7 +71,6 @@
 
     {# Modernizr -#}
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
-    {# SVG4everybody TODO: replace Grunticon completely, check IE8 Fallback -#}
     <script src="{{ request.asset_host }}/js/vendor/svg4everybody.legacy.js"></script>
     <script>
         {# needed for styling SVG in IE8 #}
@@ -82,6 +81,7 @@
             }
         });
     </script>
+    <!--
     {# Grunticon SVG -#}
     <script>
         {%- include "zeit.web.static:css/icons/grunticon.loader.js" ignore missing -%}
@@ -92,6 +92,7 @@
             "{{ request.asset_host }}/css/icons/site.fallback.css"
         ]);
     </script>
+    -->
     <noscript>
         <link href="{{ request.asset_host }}/css/icons/site.fallback.css" rel="stylesheet">
     </noscript>
