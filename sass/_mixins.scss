@@ -272,22 +272,25 @@
 }
 
 @mixin zon-button($background-color,
-                  $hover-background-color,
-                  $border-color,
-                  $hover-border-color,
-                  $color,
-                  $hover-color,
-                  $visited-color,
-                  $font-size: remify(13px),
-                  $font-weight: bold,
-                  $letter-spacing: $zon-letter-spacing-l,
-                  $margin: remify(14px 6px),
-                  $padding: remify(8px 16px)
+	              $hover-background-color,
+	              $color,
+	              $hover-color,
+	              $visited-color,
+	              $border-color: transparent,
+	              $hover-border-color: transparent,
+	              $font-size: remify(13px),
+	              $font-weight: bold,
+	              $letter-spacing: $zon-letter-spacing-l,
+	              $margin: remify(14px 6px),
+	              $padding: remify(8px 16px),
+	              $disabled: true
 	) {
 	@include inline-block(none);
 	background-color: $background-color;
 	border-radius: 5px;
-	border: 2px solid $border-color;
+	@if $border-color != transparent {
+		border: 2px solid $border-color;
+	}
 	color: $color;
 	font-size: $font-size;
 	font-weight: $font-weight;
@@ -304,61 +307,78 @@
 	&:hover,
 	&:focus {
 		background-color: $hover-background-color;
-		border-color: $hover-border-color;
+		@if $hover-border-color != transparent {
+			border-color: $hover-border-color;
+		}
 		color: $hover-color;
 		cursor: pointer;
 	}
-	&[disabled] {
-		opacity: 0.5;
+	@if $disabled {
+		&[disabled] {
+			opacity: 0.5;
+		}
+		&[disabled]:hover,
+		&[disabled]:focus {
+			background-color: $background-color;
+			@if $border-color != transparent {
+				border-color: $border-color;
+			}
+			color: $color;
+			cursor: default;
+		}
 	}
-	&[disabled]:hover,
-	&[disabled]:focus {
-		background-color: $background-color;
-		border-color: $border-color;
-		color: $color;
-		cursor: default;
+	@if (lightness($color) > 50 and $font-weight == bold) {
+		@include font-smoothing()
 	}
 }
 
 @mixin zon-button-inky($margin: 0) {
 	@include zon-button($background-color: $zon_dark_grey,
 	                    $hover-background-color: $zon-charcoal,
-	                    $border-color: $zon_dark_grey,
-	                    $hover-border-color: $zon-charcoal,
 	                    $color: $white,
 	                    $hover-color: $white,
 	                    $visited-color: $white,
 	                    $font-weight: normal,
 	                    $letter-spacing: 0.1em,
 	                    $margin: $margin,
-	                    $padding: remify(5px) 1em remify(4px)
+	                    $padding: remify(7px 15px 6px)
 	);
 }
 
 @mixin zon-button-dark($color: $zon_lighter_grey, $margin: remify(14px 6px)) {
 	@include zon-button($background-color: rgba(0, 0, 0, 0.2),
 	                    $hover-background-color: rgba(0, 0, 0, 0.5),
-	                    $border-color: $zon_mid_grey,
-	                    $hover-border-color: $zon-alto,
 	                    $color: $color,
 	                    $hover-color: $white,
 	                    $visited-color: $color,
-	                    $margin: $margin
+	                    $border-color: $zon_mid_grey,
+	                    $hover-border-color: $zon-alto,
+	                    $margin: $margin,
+	                    $disabled: false
 	);
-	@if (lightness($color) > 50) {
-		@include font-smoothing()
-	}
 }
 
 @mixin zon-button-light($margin: 0) {
 	@include zon-button($background-color: rgba(255, 255, 255, 0.5),
 	                    $hover-background-color: rgba(255, 255, 255, 0.8),
-	                    $border-color: $zon_light_grey,
-	                    $hover-border-color: $zon_mid_grey,
 	                    $color: $zon-charcoal,
 	                    $hover-color: $black,
 	                    $visited-color: $zon-charcoal,
+	                    $border-color: $zon_light_grey,
+	                    $hover-border-color: $zon_mid_grey,
 	                    $margin: $margin
+	);
+}
+
+@mixin zon-button-green($margin: 0) {
+	@include zon-button($background-color: rgba(22, 135, 80, .8),
+	                    $hover-background-color: rgba(22, 135, 80, 1),
+	                    $color: $white,
+	                    $hover-color: $white,
+	                    $visited-color: $white,
+	                    $margin: $margin,
+	                    $padding: remify(10px 16px),
+	                    $disabled: false
 	);
 }
 
