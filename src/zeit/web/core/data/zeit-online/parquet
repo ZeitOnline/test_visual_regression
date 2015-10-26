@@ -74,9 +74,6 @@
 		<cluster area="id-9e096c63-ca17-45f8-832c-867a6ad78505" kind="parquet" title="Parkett">
 			<region hide-dupes="True" area="id-d1ac1fc9-8640-4f32-96d8-8f956f04a7fb" kind="parquet" title="Titel" read_more="mehr Lametta" read_more_url="http://www.zeit.de/politik/index">
 				<referenced_cp>http://xml.zeit.de/zeit-online/parquet</referenced_cp>
-				<container cp:type="cpextra" module="jobbox" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c">
-	               <cp_extra id="jobbox"/>
-	            </container>
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-9644ea40-0b1a-415f-9be9-38310b9bbdd2">
 					<block href="http://xml.zeit.de/blogs/nsu-blog-bouffier"/>
 				</container>
