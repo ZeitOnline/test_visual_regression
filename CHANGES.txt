@@ -4,7 +4,7 @@ Change log for zeit.web
 2.19 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2167: Return correctly spelled ressort names to app wrapper
 
 
 2.18 (2015-10-26)
