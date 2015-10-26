@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.18 (unreleased)
+2.18 (2015-10-26)
 -----------------
 
 - ZON-2337: Exclude article lineage from ressort "administratives"
