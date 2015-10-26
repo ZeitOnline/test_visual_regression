@@ -4,13 +4,11 @@ Change log for zeit.web
 2.19 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Reorganize article footer to fix margins and harmonize border-color
 
 
 2.18 (2015-10-26)
 -----------------
-
-- MAINT: Reorganize article footer to fix margins and harmonize border-color
 
 - ZON-2337: Exclude article lineage from ressort "administratives"
 
