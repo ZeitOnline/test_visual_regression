@@ -103,16 +103,13 @@ class VariantImage(object):
         self.ratio = variant.ratio
         self.variant = variant.legacy_name or variant.name
 
-        group = zeit.content.image.interfaces.IImageGroup(variant, None)
-        if group:
-            self.image_group = group.uniqueId
-            self.path = group.variant_url(self.image_pattern)
-            self.fallback_path = group.variant_url(
-                self.image_pattern,
-                variant.fallback_width,
-                variant.fallback_height)
-        else:
-            self.image_group = None
+        group = zeit.content.image.interfaces.IImageGroup(variant)
+        self.image_group = group.uniqueId
+        self.path = group.variant_url(self.image_pattern)
+        self.fallback_path = group.variant_url(
+            self.image_pattern,
+            variant.fallback_width,
+            variant.fallback_height)
 
         meta = zeit.content.image.interfaces.IImageMetadata(group, None)
         if meta:

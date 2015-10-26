@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.18 (unreleased)
+2.19 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.18 (2015-10-26)
 -----------------
 
 - MAINT: Reorganize article footer to fix margins and harmonize border-color
@@ -11,6 +17,8 @@ Change log for zeit.web
 - FIX: Change number of jobs to be displayed in Jobbox
 
 - FIX: Make Jobbox more failsave and multi instance ready
+
+- FIX: Ignore image variants with unavailable parent groups
 
 
 2.17 (2015-10-22)
