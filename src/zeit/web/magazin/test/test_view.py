@@ -691,10 +691,15 @@ def test_ressort_literally_returns_correct_ressort(application):
     view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
     assert view.ressort_literally == 'ZEITmagazin'
     context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/artikel/02')
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert article_view.ressort_literally == 'ZEITmagazin'
+    context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/artikel/01')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.ressort_literally == 'Mode & Design'
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/artikel/02')
+        'http://xml.zeit.de/zeit-magazin/leben/2014-05/'
+        'Martenstein-Online-Kommentare')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.ressort_literally == 'Leben'
