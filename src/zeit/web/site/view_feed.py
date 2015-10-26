@@ -137,6 +137,9 @@ class Newsfeed(Base):
 
             description = metadata.teaserText
 
+            title = ': '.join(t for t in (
+                metadata.supertitle, metadata.title) if t)
+
             variant = None
             teaser_image = None
             images = zeit.content.image.interfaces.IImages(content, None)
@@ -159,7 +162,7 @@ class Newsfeed(Base):
                         metadata.teaserText)
 
             item = E.item(
-                E.title(metadata.title),
+                E.title(title),
                 E.link(content_url),
                 E.description(description),
                 E.category(metadata.sub_ressort or metadata.ressort),
