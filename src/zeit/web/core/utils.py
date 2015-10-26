@@ -1,13 +1,11 @@
 import collections
 import logging
 import re
-import types
 
 import grokcore.component
 import jinja2
 import peak.util.proxies
 import zope.component
-import zope.interface
 
 import zeit.cms.interfaces
 import zeit.content.image.interfaces
@@ -115,41 +113,6 @@ def neighborhood(iterable, default=None):
     yield prev, item, default
 
 
-class INewStyle(zope.interface.Interface):
-    """Interface class for all new style base types."""
-
-    pass
-
-
-class NSNoneType(type):
-    """Custom new style None type to allow interface provisioning."""
-
-    zope.interface.implements(INewStyle)
-
-    def __str__(self):
-        return ''
-
-    def __repr__(self):
-        return 'NSNone'
-
-    def __nonzero__(self):
-        return False
-
-    def __eq__(self, other):
-        return other is None or other is self
-
-
-NSNone = NSNoneType('NSNone', (type,), {})
-del NSNoneType
-
-
-@grokcore.component.adapter(types.NoneType)
-@grokcore.component.implementer(INewStyle)
-def nsnone(context):
-    """Adapter to convert a regular None into a new style None singleton."""
-    return NSNone
-
-
 class nsmixin:  # NOQA
     """New style magic attribute methods as a mixin class."""
 
@@ -157,48 +120,36 @@ class nsmixin:  # NOQA
     __delattr__ = object.__delattr__
 
 
-@grokcore.component.adapter(list)
-@grokcore.component.implementer(INewStyle)
 class nslist(list, nsmixin):  # NOQA
     """New style list class with attribute access and manipulation."""
 
     pass
 
 
-@grokcore.component.adapter(tuple)
-@grokcore.component.implementer(INewStyle)
 class nstuple(tuple, nsmixin):  # NOQA
     """New style tuple class with attribute access and manipulation."""
 
     pass
 
 
-@grokcore.component.adapter(dict)
-@grokcore.component.implementer(INewStyle)
 class nsdict(dict, nsmixin):  # NOQA
     """New style dictionary class with attribute access and manipulation."""
 
     pass
 
 
-@grokcore.component.adapter(set)
-@grokcore.component.implementer(INewStyle)
 class nsset(set, nsmixin):  # NOQA
     """New style set class with attribute access and manipulation."""
 
     pass
 
 
-@grokcore.component.adapter(str)
-@grokcore.component.implementer(INewStyle)
 class nsstr(str, nsmixin):  # NOQA
     """New style string class with attribute access and manipulation."""
 
     pass
 
 
-@grokcore.component.adapter(unicode)
-@grokcore.component.implementer(INewStyle)
 class nsunicode(unicode, nsmixin):  # NOQA
     """New style unicode class with attribute access and manipulation."""
 
