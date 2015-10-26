@@ -4,6 +4,8 @@ Change log for zeit.web
 2.18 (unreleased)
 -----------------
 
+- MAINT: Reorganize article footer to fix margins and harmonize border-color
+
 - ZON-2337: Exclude article lineage from ressort "administratives"
 
 - FIX: Change number of jobs to be displayed in Jobbox
