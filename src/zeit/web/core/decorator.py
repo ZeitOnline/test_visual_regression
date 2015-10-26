@@ -1,10 +1,10 @@
+import hashlib
 import logging
-import traceback
 import sys
+import traceback
 import types
 
-import pyramid
-import pyramid.decorator
+import beaker.cache
 import venusian
 import zope.component
 
@@ -133,19 +133,132 @@ class NestedAttributeError(StandardError):
     pass
 
 
-class reify(pyramid.decorator.reify):  # NOQA
-    """Subclass of `pyramid.decorator.reify` that fixes misleading tracebacks
-    caused by AttributeErrors nested inside the property code."""
+class hit_for_pass(object):  # NOQA
+    """Save the descision that this object is not reify-able."""
 
-    def __get__(self, *args, **kw):
+    def __init__(self, value):
+        self.value = value
+
+    def __call__(self):
+        return self.value
+
+
+class reify(object):  # NOQA
+    """Inspired by `pyramid.decorator.reify` and `beaker.cache.cache_region`.
+
+    With this property descriptor you can decorate zero-argument methods
+    of view classes, that will become cached read-only attributes.
+
+    The first-level cache will hold the result for the scope of the current
+    request only.
+
+    @zeit.web.reify
+    def resource_pipeline(self):
+        return okay_db.fetch('query')
+
+    You can also specify a beaker cache_region which will act as a
+    second-level cache with a configurable ttl. The cache key is derived from
+    the `uniqueId` property of the view context.
+
+    @zeit.web.reify('long_term')
+    def profile_director(self):
+        return slow_api.search('query')
+
+    It is also possible to return a hit_for_pass object and prevent certain
+    results from being written to the second-level cache.
+
+    @zeit.web.reify('long_term')
+    def system_target(self):
         try:
-            return super(reify, self).__get__(*args, **kw)
-        except AttributeError:
-            _, val, tb = sys.exc_info()
-            raise NestedAttributeError, val, tb
+            return buggy_service.get('query')
         except:
-            exc, val, tb = sys.exc_info()
-            raise exc, val, tb
+            return zeit.web.hit_for_pass(fallback)
+    """
+
+    def __init__(self, arg):
+        if isinstance(arg, basestring):
+            self.region = arg
+            self.func = None
+        else:
+            self.region = None
+            self(arg)
+
+    def __call__(self, func):
+        self.func = func
+        return self
+
+    def __get__(self, inst, objtype=None):
+        if inst is None:
+            return self
+
+        unset = object()
+        l_key = self._local_key(inst)
+        g_key = self._global_key(inst)
+        cache = self._get_cache(inst)
+
+        if l_key is not None:
+            try:
+                value = getattr(inst, l_key)  # Return from local cache
+                g_key = l_key = None
+            except AttributeError:
+                value = unset
+
+        if g_key is not None and value is unset and cache is not None:
+            try:
+                value = cache.get(g_key)  # Get from global cache
+                g_key = None
+            except (AttributeError, KeyError, TypeError):
+                value = unset
+
+        if value is unset:  # Fetch fresh results
+            try:
+                value = self.func(inst)
+            except AttributeError:
+                _, val, tb = sys.exc_info()
+                raise NestedAttributeError, val, tb
+            except:
+                exc, val, tb = sys.exc_info()
+                raise exc, val, tb
+
+        if isinstance(value, hit_for_pass):
+            value = value()  # Bypass global cache layer
+            g_key = None
+
+        if l_key is not None:
+            setattr(inst, l_key, value)  # Write to local cache
+
+        if g_key is not None and cache is not None:
+            cache.put(g_key, value)  # Write to global cache
+
+        return value
+
+    def _get_cache(self, inst):
+        namespace = self._get_namespace(inst)
+        region = beaker.cache.cache_regions.get(self.region)
+        if namespace is not None and region is not None:
+            return beaker.cache.Cache._get_cache(namespace, region)
+
+    def _get_namespace(self, inst):
+        try:
+            return u'{}|{}'.format(inst.__class__, self.func.__name__)
+        except (AttributeError, UnicodeDecodeError):
+            return
+
+    def _global_key(self, inst):
+        try:
+            namespace = self._get_namespace(inst)
+            unique_id = u'|'.join((namespace, inst.context.uniqueId))
+            return hashlib.sha1(unique_id).hexdigest()
+        except (AttributeError, TypeError, UnicodeDecodeError):
+            return
+
+    def _local_key(self, inst):
+        try:
+            return self._l_key
+        except AttributeError:
+            hex_key = hashlib.sha1(self.func.__name__).hexdigest()
+            self._l_key = '__{}__'.format(hex_key[:32])
+            return self._l_key
 
 
 def register_module(name):
