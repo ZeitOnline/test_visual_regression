@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - FIX: Make Jobbox more failsave and multi instance ready
 
+- FIX: Ignore image variants with unavailable parent groups
+
 
 2.17 (2015-10-22)
 -----------------
