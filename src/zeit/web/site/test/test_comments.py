@@ -190,7 +190,7 @@ def test_comment_reply_threads_wraps_on_load_and_toggles_on_click(
     toggle.click()
 
     try:
-        element = WebDriverWait(driver, 1).until(
+        WebDriverWait(driver, 1).until(
             expected_conditions.invisibility_of_element_located(
                 (By.ID, 'cid-5122767')))
     except TimeoutException:
@@ -198,7 +198,7 @@ def test_comment_reply_threads_wraps_on_load_and_toggles_on_click(
 
 
 def test_comment_reply_thread_must_not_wrap_if_deeplinked(
-        selenium_driver, testserver):
+        selenium_driver, testserver, mockserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/article/02#cid-5122767' % testserver.url)
     assert driver.find_element_by_id('cid-5122767').is_displayed()
