@@ -9,7 +9,9 @@
 				<span class="lightbox-content__text">
 					<span class="show-set-user">Ihr Benutzername
 					{0} wurde angelegt.<br></span> 
-					Kommentare neuer Nutzer werden von uns vor der Veröffentlichung geprüft.
+					Kommentare neuer Nutzer werden von uns
+					vor der Veröffentlichung <a
+					href="{{"http://xml.zeit.de/administratives/2010-03/netiquette" | create_url }}">geprüft</a>.
 					Ihr Kommentar erscheint, sobald er von unserem
 					Moderatorenteam freigeschaltet wurde.
 					Wir bitten um Ihr Verständnis.<br>
