@@ -199,12 +199,13 @@ class PostComment(zeit.web.core.view.Base):
                                ' (with pid {})'.format(method, unique_id, pid))
 
             invalidate_comment_thread(unique_id)
-
+            set_user = False
             if not self.user_name and action == 'comment':
                 if zeit.web.core.security.reload_user_info(self.request) and (
                         'user' in request.session) and (
                             request.session['user']['name']):
                     self.user_name = request.session['user']['name']
+                    set_user = True
                     self.status.append("User name {} was set".format(
                         self.user_name))
                 else:
@@ -245,6 +246,8 @@ class PostComment(zeit.web.core.view.Base):
                     'error': error,
                     'recommendations': recommendations,
                     'new_cid': self.new_cid,
+                    'setUser': set_user,
+                    'userName': self.user_name,
                     'premoderation': premoderation}
             }
 
