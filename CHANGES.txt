@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2328: Add premoderation for new users
 
+- ZON-2167: Return correctly spelled ressort names to app wrapper
+
 
 2.18 (2015-10-26)
 -----------------

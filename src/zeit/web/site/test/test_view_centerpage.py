@@ -1188,16 +1188,6 @@ def test_hidden_images_must_not_be_loaded_via_js(
             assert len(largeimage) == 1
 
 
-def test_app_wrapper_script(selenium_driver, testserver):
-
-    driver = selenium_driver
-    driver.get(
-        '{}/zeit-online/slenderized-index?app-content'.format(testserver.url))
-
-    ressort = driver.execute_script('return window.wrapper.getRessort()')
-    assert ressort == 'homepage'
-
-
 def test_frames_are_placed_correctly(testbrowser):
     browser = testbrowser('/zeit-online/index-with-quizzez')
     frame1 = browser.cssselect('.cp-area--minor > .frame')

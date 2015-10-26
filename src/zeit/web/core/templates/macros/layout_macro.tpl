@@ -31,18 +31,7 @@
     window.wrapper = {
         // provide ressort
         getRessort: function() {
-            var ressort = '{{ obj.ressort }}',
-                sub_ressort = '{{ obj.sub_ressort }}';
-
-            if( sub_ressort != '' ){
-                ressort = sub_ressort;
-            }
-
-            if( ressort == 'lebensart' ){
-                return  'Zeit Magazin';
-            }else{
-                return ressort.charAt(0).toUpperCase() + ressort.slice(1);
-            }
+            return "{{ view.ressort_literally }}"
         },
         // hide zmo navi header
         hideZMOHeader: function( $nav ){
