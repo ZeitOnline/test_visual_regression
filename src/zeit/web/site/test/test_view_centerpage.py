@@ -1194,16 +1194,6 @@ def test_hidden_images_must_not_be_loaded_via_js(
             assert len(largeimage) == 1
 
 
-def test_app_wrapper_script(selenium_driver, testserver):
-
-    driver = selenium_driver
-    driver.get(
-        '{}/zeit-online/slenderized-index?app-content'.format(testserver.url))
-
-    ressort = driver.execute_script('return window.wrapper.getRessort()')
-    assert ressort == 'homepage'
-
-
 def test_frames_are_placed_correctly(testbrowser):
     browser = testbrowser('/zeit-online/index-with-quizzez')
     frame1 = browser.cssselect('.cp-area--minor > .frame')
@@ -1395,57 +1385,43 @@ def test_zmo_parquet_has_zmo_styles(testbrowser):
 
 
 def test_jobbox_is_displayed_correctly(testbrowser):
-    browser = testbrowser('/index')
+    browser = testbrowser('/zeit-online/jobbox')
 
     # in main area
-    box = browser.cssselect('.cp-area--major > .jobbox')
-    box_label = box[0].cssselect('.jobbox__label')
-    box_content = box[0].cssselect('.jb-content')
-    box_action = box[0].cssselect('.jb-action')
-    job_title = box_content[0].cssselect('.jb-text__title')
-    job_text = box_content[0].cssselect('.jb-text__byline')
-
-    assert len(box)
-    assert len(box_label)
-    assert len(box_content) == 3
-    assert len(box_action)
-    assert len(job_title)
-    assert len(job_text)
+    box = browser.cssselect('.jobbox--major')[0]
+    assert len(box.cssselect('.jobbox__label'))
+    assert len(box.cssselect('.jobbox__kicker'))
+    assert len(box.cssselect('.jobbox__job')) == 3
+    assert len(box.cssselect('.jobbox__title')) == 3
+    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__action'))
 
     # in minor area
-    box = browser.cssselect('.cp-area--minor > .jobbox')
-    box_label = box[0].cssselect('.jobbox__label')
-    box_content = box[0].cssselect('.jb-content')
-    box_action = box[0].cssselect('.jb-action')
-    job_title = box_content[0].cssselect('.jb-text__title')
-    job_text = box_content[0].cssselect('.jb-text__byline')
+    box = browser.cssselect('.jobbox--minor')[0]
+    assert len(box.cssselect('.jobbox__label'))
+    assert len(box.cssselect('.jobbox__kicker'))
+    assert len(box.cssselect('.jobbox__job')) == 3
+    assert len(box.cssselect('.jobbox__title')) == 3
+    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__action'))
 
-    assert len(box)
-    assert len(box_label)
-    assert len(box_content) == 3
-    assert len(box_action)
-    assert len(job_title)
-    assert len(job_text)
+    # in duo area
+    box = browser.cssselect('.jobbox--duo')[0]
+    assert len(box.cssselect('.jobbox__label'))
+    assert len(box.cssselect('.jobbox__header'))
+    assert len(box.cssselect('.jobbox__job')) == 3
+    assert len(box.cssselect('.jobbox__title')) == 3
+    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__action'))
 
-
-def test_jobbox_parquet_is_displayed_correctly(testbrowser):
-    browser = testbrowser('/zeit-online/parquet')
-
-    # in main area
-    parquet = browser.cssselect('.cp-area--parquet')
-    box = parquet[0].cssselect('.jobbox')
-    box_label = box[0].cssselect('.jobbox__label')
-    box_content = box[0].cssselect('.jb-content')
-    box_action = box[0].cssselect('.jb-action')
-    job_title = box_content[0].cssselect('.jb-text__title')
-    job_text = box_content[0].cssselect('.jb-text__byline')
-
-    assert len(box)
-    assert len(box_label)
-    assert len(box_content) == 3
-    assert len(box_action)
-    assert len(job_title)
-    assert len(job_text)
+    # in parquet area
+    box = browser.cssselect('.jobbox--parquet')[0]
+    assert len(box.cssselect('.jobbox__label'))
+    assert len(box.cssselect('.jobbox__kicker'))
+    assert len(box.cssselect('.jobbox__job')) == 3
+    assert len(box.cssselect('.jobbox__title')) == 3
+    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__action'))
 
 
 def test_zett_parquet_is_rendering(testbrowser):
