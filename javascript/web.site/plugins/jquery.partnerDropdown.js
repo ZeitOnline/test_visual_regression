@@ -21,7 +21,7 @@
     * @memberOf jQuery
     */
     /**
-    * Switches between hidden and viewable mobile navigation
+    * handles dropdown in partner boxes
     * @class boxDropdown
     * @memberOf jQuery.fn
     * @return {object} jQuery-Object for chaining
@@ -35,7 +35,6 @@
                     $button = $( that ).find( '.pa-button__text' ),
                     tracking = $dropdown.data( 'tracklink' );
 
-                // toggle visibility of main navigation items
                 $button.on( 'click', function( event ) {
                     var link = $dropdown.find( '.pa-dropdown__option:selected' ).attr( 'value' );
                     if ( link ) {
@@ -46,7 +45,6 @@
             }
         };
 
-        //run through search element and return object
         return this.each( function() {
             el.bindDropboxEvents( this );
         });

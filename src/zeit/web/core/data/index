@@ -117,6 +117,9 @@
                 <container cp:type="cpextra" module="partnerbox_jobs" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c673478">
                     <cp_extra for="zeit.content.cp.interfaces.IArea" id="partnerbox_jobs" />
                 </container>
+                <container cp:type="cpextra" module="partnerbox_jobs" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c673478">
+                    <cp_extra for="zeit.content.cp.interfaces.IArea" id="partnerbox_jobs" />
+                </container>
             </region>
             <region area="id-da65a250-0482-4ce8-b662-5ca24af05061" visible="True" kind="minor">
                 <container cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe1b7" cp:type="teaser" hide-dupes="True" module="zon-square" visible="True">
