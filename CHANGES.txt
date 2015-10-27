@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2321: Beef up reify to a multilayer caching descriptor
 
+- ZON-2167: Return correctly spelled ressort names to app wrapper
+
 
 2.18 (2015-10-26)
 -----------------

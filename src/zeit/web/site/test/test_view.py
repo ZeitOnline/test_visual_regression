@@ -2,6 +2,8 @@
 import mock
 import requests
 
+import pyramid.testing
+
 import zeit.web.site.view
 
 
@@ -97,3 +99,19 @@ def test_main_nav_should_render_labels(testserver, testbrowser):
     dropdown_label = browser.cssselect('.primary-nav .dropdown__label')
     assert len(dropdown_label) == 1
     assert dropdown_label[0].text == 'Anzeige'
+
+
+def test_ressort_literally_returns_correct_ressort(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    request = pyramid.testing.DummyRequest()
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.ressort_literally == 'Homepage'
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    article_view = zeit.web.site.view_article.Article(context, request)
+    assert article_view.ressort_literally == 'Kultur'
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zeit')
+    article_view = zeit.web.site.view_article.Article(context, request)
+    assert article_view.ressort_literally == 'Gesellschaft'
