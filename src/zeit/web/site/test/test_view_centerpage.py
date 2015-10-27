@@ -1428,6 +1428,24 @@ def test_jobbox_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.jobbox__action'))
 
 
+def test_partnerbox_job_is_displayed_correctly(testbrowser):
+    browser = testbrowser('/index')
+
+    # in main area
+    box = browser.cssselect('.partnerbox')[0]
+    assert len(box.cssselect('.partnerbox__label'))
+    assert len(box.cssselect('.partner__link'))
+    assert len(box.cssselect('.partner__action'))
+    assert len(box.cssselect('.p-kicker--jobs'))
+    assert len(box.cssselect('.p-kicker__img'))
+    assert len(box.cssselect('.p-kicker__text'))
+    assert len(box.cssselect('.p-intro'))
+    assert len(box.cssselect('.p-intro__text'))
+    assert len(box.cssselect('.pa-dropdown'))
+    assert len(box.cssselect('.pa-button'))
+    assert len(box.cssselect('.pa-dropdown__option')) == 10
+
+
 def test_zett_parquet_is_rendering(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
 
