@@ -103,8 +103,8 @@
                     {% endif -%}
                     document.getElementById('{{ scriptname }}').parentNode.appendChild(elem);
                     AdController.render('iqadtile{{ banner.tile }}');
-                    if (console && typeof console.info === 'function') {
-                        console.info('AdController ' + AdController.VERSION + ' tile {{ banner.tile }} {{ type }}')
+                    if (window.console && typeof window.console.info === 'function') {
+                        window.console.info('AdController ' + AdController.VERSION + ' tile {{ banner.tile }} {{ type }}')
                     }
                 }
             }
