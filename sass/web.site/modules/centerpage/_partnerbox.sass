@@ -1,140 +1,98 @@
+$bg_kicker--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freisteller'
+
 .partnerbox
-    margin-top: remify(10px)
+    margin: $vertical-space 0
     &__label
         @extend %ad-label
+        +respond-min($break-desktop-min)
+            text-align: left
 
 .partner
     background-color: $whitesmoke
     padding-bottom: remify(20px)
     position: relative
     min-height: remify(140px)
-    &__kicker
-        height: remify(70px)
-        color: $white
-        font-size: em(18px)
-        line-height: em(22px)
-        text-align: left
-        background-color: $zon_lighter_grey
-        font-weight: bold
-        padding: remify(20px)
-        &--jobs
-            color: $zon-charcoal
-    &__intro
-        color: $zon_grey
-        font-size: em(14px)
-        line-height: em(21px)
-        letter-spacing: $letter-spacing-s
-        padding: remify(20px)
-    &__dropdown
-        padding: 0 remify(20px)
     &__action
         display: block
         text-align: left
+        padding: remify(0 20px)
+        +respond-min($break-desktop-min)
+            display: inline-block
+            width: 53%
+            padding-top: remify(20px)
+            vertical-align: top
+    &__link
+        display: block
+        letter-spacing: $letter-spacing-s
+        font-size: em(15px)
+        line-height: em(23px)
+        color: $zon_grey
+        a
+            border-bottom: 1px solid rgba($zon_grey, .4)
+            +on-interaction
+                border-bottom-color: rgba($zon_grey, .8)
+                color: $zon_grey
+        +respond-min($break-0)
+            display: inline-block
+            margin-left: remify(20px)
 
-.p-button
+.p-kicker
+    height: remify(75px)
+    text-align: left
+    background-color: $zon_lighter_grey
+    color: $white
+    &__text
+        font-size: em(16px)
+        font-weight: bold
+        line-height: em(22px)
+        display: inline-block
+        vertical-align: top
+        margin-top: remify(10px)
+        max-width: 40%
+        +respond-min($break-0)
+            max-width: 50%
+            font-size: em(18px)
+            margin-top: remify(20px)
+    &--jobs
+        color: $zon-charcoal
+        border-bottom: 1px solid $gainsboro
+        .p-kicker__img
+            display: inline-block
+            height: remify(75px)
+            width: remify(130px)
+            background: $zon_lighter_grey url($bg_kicker--jobs) no-repeat right
+            background-size: cover
+
+.p-intro
+    color: $zon_grey
+    font-size: em(14px)
+    line-height: em(21px)
+    letter-spacing: $letter-spacing-s
+    padding: remify(20px)
+    +respond-min($break-desktop-min)
+        display: inline-block
+        width: 45%
+    &__text
+        display: block
+        padding-bottom: remify(20px)
+    &__link
+        padding-top: remify(20px)
+        a
+            border-bottom: 1px solid rgba($zon_grey, .4)
+            color: $zon_grey
+            +on-interaction
+                border-bottom-color: rgba($zon_grey, .8)
+                color: $zon_grey
+
+.pa-button
     display: inline-block
     &__text
-        +zon-button-dark()
-        margin-left: 0
-        border: none
-        color: $white
-        margin-bottom: remify(14px)
-        a
-            color: $white
-        &--jobs
-            background-color: rgba(22, 135, 80, .8)
-            &:hover,
-            &:focus
-                background-color: rgba(22, 135, 80, 1)
+        +zon-button(rgba(22, 135, 80, .8),rgba(22, 135, 80, 1),$white,$white,$white)
+        margin-left: 0px
 
-.p-dropdown
+.pa-dropdown
     background-color: $gainsboro
     display: block
     height: remify(35px)
     width: 100%
-
-
-.jb-content
-    display: none
-    min-height: remify(95px)
-    &--show
-        display: block
-        +respond-min($break-desktop-min)
-            display: inline-block
-    &--first
-        .jb-text
-            opacity: 1
-    +respond-min($break-desktop-min)
-        vertical-align: middle
-        width: 65%
-
-.jb-text
-    opacity: 0
-    &__title
-        font-weight: bold
-        font-size: em(18px)
-        line-height: em(22px)
-        color: $zon-charcoal
-        margin-bottom: remify(5px)
-        max-height: 4em
-        overflow: hidden
-    &__byline
-        color: $zon_grey
-        font-size: em(14px)
-        line-height: em(17px)
-        letter-spacing: $letter-spacing-s
-        white-space: nowrap
-        overflow: hidden
-        text-overflow: ellipsis
-
-.jb-action
-    display: block
-    text-align: left
-    +respond-min($break-desktop-min)
-        text-align: center
-        display: inline-block
-        position: absolute
-        top: remify(28px)
-        right: remify(20px)
-
-.jb-button
-    display: inline-block
-    +respond-min($break-desktop-min)
-        display: block
-    &__text
-        +zon-button-dark()
-        margin-left: 0
-        border: none
-        color: $white
-        margin-bottom: remify(14px)
-        background-color: rgba(22, 135, 80, .8)
-        &:hover,
-        &:focus
-            background-color: rgba(22, 135, 80, 1)
-        a
-            color: $white
-        /* very small screens do a break, so we have to restyle here */
-        +respond-min($break-action)
-            margin-bottom: 0
-        +respond-min($break-desktop-min)
-            margin-bottom: remify(14px)
-
-.jb-link
-    display: inline-block
-    margin-left: 0
-    /* very small screens do a break, so we have to restyle here */
-    +respond-min($break-action)
-        margin-left: remify(10px)
-    +respond-min($break-desktop-min)
-        display: block
-        margin-left: 0
-    &__text
-        color: $zon_grey
-        font-size: em(14px)
-        line-height: em(17px)
-        border-bottom: 1px solid rgba(112, 112, 112, 0.5)
-        letter-spacing: $letter-spacing-s
-        +on-interaction
-            color: $zon_grey
-            border-bottom: 1px solid rgba(112, 112, 112, 1)
 
