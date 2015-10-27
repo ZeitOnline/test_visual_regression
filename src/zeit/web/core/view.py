@@ -713,7 +713,7 @@ class Content(Base):
         successor = next(date, None, 'asc') or default
 
         if predecessor is default or successor is default:
-            return zeit.web.hit_for_pass(predecessor + successor)
+            return zeit.web.dont_cache(predecessor + successor)
 
         return predecessor + successor
 

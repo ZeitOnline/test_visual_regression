@@ -160,7 +160,7 @@ def test_reify_should_skip_second_layer_if_beaker_is_unavailable(application):
 def test_reify_should_unpack_hitforpass_objects_and_skip_second_cache_layer(
         application):
 
-    function = mock.Mock(return_value=zeit.web.hit_for_pass(60))
+    function = mock.Mock(return_value=zeit.web.dont_cache(60))
 
     class Context(object):
         uniqueId = 'http://xml.zeit.de'  # NOQA

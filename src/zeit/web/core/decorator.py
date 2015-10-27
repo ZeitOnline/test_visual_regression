@@ -133,7 +133,7 @@ class NestedAttributeError(StandardError):
     pass
 
 
-class hit_for_pass(object):  # NOQA
+class dont_cache(object):  # NOQA
     """Save the descision that this object is not reify-able."""
 
     def __init__(self, value):
@@ -164,7 +164,7 @@ class reify(object):  # NOQA
     def profile_director(self):
         return slow_api.search('query')
 
-    It is also possible to return a hit_for_pass object and prevent certain
+    It is also possible to return a `dont_cache` object and prevent certain
     results from being written to the second-level cache.
 
     @zeit.web.reify('long_term')
@@ -172,7 +172,7 @@ class reify(object):  # NOQA
         try:
             return buggy_service.get('query')
         except:
-            return zeit.web.hit_for_pass(fallback)
+            return zeit.web.dont_cache(fallback)
     """
 
     def __init__(self, arg):
@@ -220,7 +220,7 @@ class reify(object):  # NOQA
                 exc, val, tb = sys.exc_info()
                 raise exc, val, tb
 
-        if isinstance(value, hit_for_pass):
+        if isinstance(value, dont_cache):
             value = value()  # Bypass global cache layer
             g_key = None
 

@@ -1,4 +1,4 @@
-from zeit.web.core.decorator import hit_for_pass, reify, register_copyrights, \
+from zeit.web.core.decorator import dont_cache, reify, register_copyrights, \
     register_area, register_module, register_filter, register_ctxfilter, \
     register_envfilter, register_evalctxfilter, \
     register_global, register_ctxfunc, register_envfunc, \
@@ -12,4 +12,4 @@ __all__ = [
     'register_filter', 'register_ctxfilter', 'register_envfilter',
     'register_evalctxfilter', 'register_global', 'register_ctxfunc',
     'register_envfunc', 'register_evalctxfunc', 'register_test',
-    'hit_for_pass']
+    'dont_cache']
