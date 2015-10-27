@@ -156,10 +156,6 @@
 
             $( window ).on( 'keydown', handleKeydown );
 
-            console.log( 'HTML', buttonTemplates );
-            console.log( backButton, nextButton );
-            console.log( buttons );
-
             figures.on( 'scaling_ready', function( e ) {
                 var currentSlide;
 
