@@ -570,6 +570,12 @@ def test_videostage_video_should_play(selenium_driver, testserver):
         assert False, 'Video not visible with 10 seconds'
 
 
+def test_videostage_has_zon_svg_logo(testbrowser):
+    browser = testbrowser('/zeit-online/video-stage')
+    logo = browser.cssselect('svg.video-stage-heading__logo')
+    assert len(logo) == 1
+
+
 def test_module_printbox_should_contain_teaser_image(application):
     mycp = mock.Mock()
     view = zeit.web.site.view_centerpage.LegacyCenterpage(

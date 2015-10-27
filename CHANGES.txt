@@ -10,6 +10,7 @@ Change log for zeit.web
 
 - ZON-2238: Allow duplicate hiding in automatic gallery area
 
+- ZON-2051: Remove Grunticon from ZON and use SVG sprites
 
 2.18 (2015-10-26)
 -----------------

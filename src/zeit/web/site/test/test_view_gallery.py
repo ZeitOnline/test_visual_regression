@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import zeit.cms.interfaces
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
+from selenium.common.exceptions import TimeoutException
 
 
 def test_article_should_render_full_view(testserver, testbrowser):
@@ -35,3 +39,18 @@ def test_zon_gallery_should_display_a_gallery(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/gallery/biga_1'.format(
         testserver.url)).cssselect
     assert len(select('.gallery')) == 1
+
+
+def test_zon_gallery_uses_svg_icons(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/gallery/biga_1' % testserver.url)
+    try:
+        cond = expected_conditions.presence_of_element_located(
+            (By.CLASS_NAME, "bx-wrapper"))
+        WebDriverWait(driver, 10).until(cond)
+    except TimeoutException:
+        assert False, 'Timeout gallery script'
+    else:
+        gallery = driver.find_element_by_css_selector(".gallery")
+        svg_icons = gallery.find_elements_by_css_selector(".bx-arrow-icon")
+        assert len(svg_icons) == 4, "svg arrow icons are missing"

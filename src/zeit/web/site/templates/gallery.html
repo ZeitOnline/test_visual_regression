@@ -2,7 +2,7 @@
 
 {% block article_pages %}
     <div class="article-page">
-        {{ blocks.inlinegallery(view.images, wrapper_class='gallery') }}
+        {{ blocks.inlinegallery(view.images, view, wrapper_class='gallery') }}
     </div>
     <div class="article-page">
         <div class="gallery__description article__item">

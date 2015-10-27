@@ -102,7 +102,7 @@ def test_spektrum_parquet_should_render_special_parquet_link(
         'Spektrum link has not the correct text')
 
 
-def test_sprektrum_parquet_should_display_meta_more(
+def test_spektrum_parquet_should_display_meta_more(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/parquet-feeds' % testserver.url)
