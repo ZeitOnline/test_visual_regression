@@ -9,9 +9,7 @@
             {% block intro %}{% endblock %}
         </div>
         <div class="partner__action">
-            <select class="pa-dropdown" data-tracklink="{% block tracking %}{% endblock %}">
-                {% block dropdown %}{% endblock %}
-            </select>
+            {% block dropdown %}{% endblock %}
             <span class="pa-button">
                 <span class="pa-button__text">{% block button %}{% endblock %}</span>
             </span>
