@@ -4,6 +4,8 @@ Change log for zeit.web
 2.19 (unreleased)
 -----------------
 
+- ZON-2324: Add Studiumbox
+
 - ZON-2168: Link-Object teaser should point to target URL
 
 - ZON-2167: Return correctly spelled ressort names to app wrapper
