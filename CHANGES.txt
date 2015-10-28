@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-2337: Exclude article lineage from ressort "administratives"
 
+- ZON-2342: ZEIT Shop Follow-Up
+
 - FIX: Change number of jobs to be displayed in Jobbox
 
 - FIX: Make Jobbox more failsave and multi instance ready
