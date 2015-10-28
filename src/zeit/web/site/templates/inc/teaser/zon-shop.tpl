@@ -13,6 +13,14 @@
 	</div>
 {% endblock %}
 
+{% block teaser_text %}
+	{% set module_layout = self.layout() %}
+	{% set href = teaser | create_url %}
+	<a href="{{ href }}">
+		{{ super() }}
+	</a>
+{% endblock %}
+
 {# Eliminate many default teaser blocks #}
 {% block teaser_journalistic_format %}{% endblock %}
 {% block teaser_heading %}{% endblock %}

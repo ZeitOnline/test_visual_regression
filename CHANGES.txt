@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.19 (unreleased)
+2.20 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.19 (2015-10-28)
 -----------------
 
 - ZON-2324: Add Studiumbox
@@ -11,6 +17,10 @@ Change log for zeit.web
 - ZON-2167: Return correctly spelled ressort names to app wrapper
 
 - ZON-2238: Allow duplicate hiding in automatic gallery area
+
+- ZON-2342: ZEIT Shop Follow-Up
+
+- FIX: Make Jobbox square in 50/50
 
 
 2.18 (2015-10-26)
@@ -23,6 +33,8 @@ Change log for zeit.web
 - FIX: Make Jobbox more failsave and multi instance ready
 
 - FIX: Ignore image variants with unavailable parent groups
+
+- FIX: Make Jobbox more failsave and multi instance ready
 
 
 2.17 (2015-10-22)
