@@ -55,7 +55,7 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
     def next_page(self):
         if self.page < self.total_pages:
             return self.page + 1
-        elif self.total_pages > 1:
+        else:
             # Rewind to page 1
             return 1
 
