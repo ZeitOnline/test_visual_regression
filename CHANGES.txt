@@ -6,7 +6,13 @@ Change log for zeit.web
 
 - ZON-2328: Add premoderation for new users
 
+- ZON-2168: Link-Object teaser should point to target URL
+
 - ZON-2167: Return correctly spelled ressort names to app wrapper
+
+- ZON-2238: Allow duplicate hiding in automatic gallery area
+
+- FIX: Make Jobbox square in 50/50
 
 
 2.18 (2015-10-26)
@@ -19,6 +25,8 @@ Change log for zeit.web
 - FIX: Make Jobbox more failsave and multi instance ready
 
 - FIX: Ignore image variants with unavailable parent groups
+
+- FIX: Make Jobbox more failsave and multi instance ready
 
 
 2.17 (2015-10-22)
