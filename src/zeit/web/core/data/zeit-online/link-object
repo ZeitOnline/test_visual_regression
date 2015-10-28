@@ -63,24 +63,17 @@
         </topiclinks>
     </head>
     <body>
-        <title>Galerie Teaser</title>
-        <cluster visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f">
-            <region visible="True" area="id-c8a4bedc-5721-412f-994f-c55fb03955d2" kind="duo">
-                <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-a560c834-fa2e-4d35-a540-c55fb03955d2">
-                    <block href="http://xml.zeit.de/zeit-online/gallery/weltall" uniqueId="http://xml.zeit.de/zeit-online/gallery/weltall" year="2015" issue="7" ressort="zeit-magazin" contenttype="gallery"></block>
-                </container>
-            </region>
-        </cluster>
-        <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa993" title="Fotostrecken" kind="gallery">
-            <region visible="True" hide-dupes="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96812" kind="gallery" title="Fotostrecken" count="2" automatic="True" automatic_type="centerpage">
-                <referenced_cp>http://xml.zeit.de/foto/index</referenced_cp>
-                <container cp:type="auto-teaser" module="zon-gallery" visible="True" cp:__name__="id-7b76790b-cf36-b49f-8343-0069411a8c5b"/>
-                <container cp:type="auto-teaser" module="zon-gallery" visible="True" cp:__name__="id-a9cb1735-6a36-2401-afef-6e19baf544e3"/>
-            </region>
+        <title>CP-Editor 0.4</title>
+        <cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher">
+          <region visible="True" hide-dupes="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
+            <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-fullwidth" visible="True">
+              <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
+            </container>
+          </region>
         </cluster>
     </body>
     <feed/>
     <teaser>
-        <title>Galerie Teaser</title>
+        <title>CP-Editor 0.4</title>
     </teaser>
 </centerpage>
