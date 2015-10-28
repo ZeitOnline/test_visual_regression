@@ -4,7 +4,7 @@ Change log for zeit.web
 2.20 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2285: Identify if view is wrapped via user agent
 
 
 2.19 (2015-10-28)
