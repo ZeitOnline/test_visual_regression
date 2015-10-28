@@ -8,11 +8,11 @@ Change log for zeit.web
 
 - ZON-2206: Handle empty subressort DAV property properly
 
+- MAINT: Fix bumpy chronological article navigation
+
 
 2.19 (2015-10-28)
 -----------------
-
-- MAINT: Fix bumpy chronological article navigation
 
 - ZON-2168: Link-Object teaser should point to target URL
 
