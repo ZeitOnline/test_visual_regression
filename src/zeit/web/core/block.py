@@ -209,9 +209,7 @@ class Image(zeit.web.core.image.BaseImage):
 
             self.align = model_block.xml.get('align')
             self.href = model_block.xml.get('href')
-            self.caption = bu
-            self.attr_title = bu
-            self.attr_alt = bu
+            self.caption = self.title = self.alt = bu
             cr = model_block.xml.find('copyright')
             if cr is not None:
                 rel = cr.attrib.get('rel', '') == 'nofollow'
