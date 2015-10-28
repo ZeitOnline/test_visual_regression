@@ -11,7 +11,7 @@ def test_wrapper_functions_are_working(selenium_driver, testserver):
 
     # test ressort
     ressort = driver.execute_script("return window.wrapper.getRessort()")
-    assert ressort == "Zeit Magazin", 'Ressort is not Zeit Magazin'
+    assert ressort == "ZEITmagazin", 'Ressort is not ZEITmagazin'
 
     # test zmo header is hidden and spacer displayed
     driver.execute_script("window.wrapper.setHeaderMargin(111)")
