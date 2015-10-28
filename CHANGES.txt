@@ -1,7 +1,15 @@
 Change log for zeit.web
 =======================
 
-2.19 (unreleased)
+2.20 (unreleased)
+-----------------
+
+- ZON-2285: Identify if view is wrapped via user agent
+
+- ZON-2206: Handle empty subressort DAV property properly
+
+
+2.19 (2015-10-28)
 -----------------
 
 - MAINT: Fix bumpy chronological article navigation
