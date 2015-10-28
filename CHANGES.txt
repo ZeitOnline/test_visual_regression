@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.19 (unreleased)
+2.20 (unreleased)
+-----------------
+
+- ZON-2285: Identify if view is wrapped via user agent
+
+
+2.19 (2015-10-28)
 -----------------
 
 - ZON-2168: Link-Object teaser should point to target URL
