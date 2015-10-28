@@ -16,7 +16,7 @@
 {% block teaser_text %}
 	{% set module_layout = self.layout() %}
 	{% set href = teaser | create_url %}
-	<a class="{% block mediablock_link %}{% endblock %}" href="{{ href }}"{% if tracking_slug %} data-id="{{ tracking_slug }}text"{% endif %}>
+	<a href="{{ href }}">
 		{{ super() }}
 	</a>
 {% endblock %}
