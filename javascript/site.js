@@ -58,7 +58,8 @@ require([
     'web.site/plugins/jquery.imageCopyrightFooter',
     'web.site/plugins/jquery.hpOverlay',
     'web.site/plugins/jquery.animateJobs',
-    'web.site/plugins/jquery.fixPosition'
+    'web.site/plugins/jquery.fixPosition',
+    'web.site/plugins/jquery.partnerDropdown'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         isHp = document.body.getAttribute( 'data-is-hp' ),
@@ -85,6 +86,8 @@ require([
         $( '.storystream-markup__content--first' ).storystream();
         $( '.jobbox--animate' ).animateJobs();
         $( '.js-image-copyright-footer' ).imageCopyrightFooter();
+        $( '.partner__action' ).boxDropdown();
+
     } else if ( article.length ) {
         // article, gallery etc.
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });

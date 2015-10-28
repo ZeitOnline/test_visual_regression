@@ -14,6 +14,8 @@ Change log for zeit.web
 2.18 (2015-10-26)
 -----------------
 
+- ZON-2327: Implement Jobbox with Dropdown
+
 - ZON-2337: Exclude article lineage from ressort "administratives"
 
 - FIX: Change number of jobs to be displayed in Jobbox
