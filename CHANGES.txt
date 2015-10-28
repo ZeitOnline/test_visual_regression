@@ -10,13 +10,13 @@ Change log for zeit.web
 
 - ZON-2238: Allow duplicate hiding in automatic gallery area
 
+- ZON-2342: ZEIT Shop Follow-Up
+
 
 2.18 (2015-10-26)
 -----------------
 
 - ZON-2337: Exclude article lineage from ressort "administratives"
-
-- ZON-2342: ZEIT Shop Follow-Up
 
 - FIX: Change number of jobs to be displayed in Jobbox
 
