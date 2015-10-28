@@ -63,24 +63,61 @@
         </topiclinks>
     </head>
     <body>
-        <title>Galerie Teaser</title>
-        <cluster visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f">
-            <region visible="True" area="id-c8a4bedc-5721-412f-994f-c55fb03955d2" kind="duo">
-                <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-a560c834-fa2e-4d35-a540-c55fb03955d2">
-                    <block href="http://xml.zeit.de/zeit-online/gallery/weltall" uniqueId="http://xml.zeit.de/zeit-online/gallery/weltall" year="2015" issue="7" ressort="zeit-magazin" contenttype="gallery"></block>
+        <title>Jobbox</title>
+        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" kind="solo">
+            <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" kind="solo">
+                <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" module="zon-fullwidth">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
                 </container>
             </region>
         </cluster>
-        <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa993" title="Fotostrecken" kind="gallery">
-            <region visible="True" hide-dupes="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96812" kind="gallery" title="Fotostrecken" count="2" automatic="True" automatic_type="centerpage">
-                <referenced_cp>http://xml.zeit.de/foto/index</referenced_cp>
-                <container cp:type="auto-teaser" module="zon-gallery" visible="True" cp:__name__="id-7b76790b-cf36-b49f-8343-0069411a8c5b"/>
-                <container cp:type="auto-teaser" module="zon-gallery" visible="True" cp:__name__="id-a9cb1735-6a36-2401-afef-6e19baf544e3"/>
+        <cluster area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
+            <region area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
+                <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" module="zon-small">
+                    <block href="http://xml.zeit.de/zeit-online/article/01"/>
+                </container>
+                <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c" cp:type="cpextra" module="jobbox">
+                    <cp_extra id="jobbox"/>
+                </container>
+                <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11d" cp:type="cpextra" module="jobbox">
+                    <cp_extra id="jobbox"/>
+                </container>
+            </region>
+            <region area="id-da65a250-0482-4ce8-b662-5ca24af05061" kind="minor">
+                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60598" cp:type="teaser" module="zon-small">
+                    <block href="http://xml.zeit.de/zeit-online/article/01"/>
+                </container>
+                <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11d" cp:type="cpextra" module="jobbox">
+                    <cp_extra id="jobbox"/>
+                </container>
+            </region>
+        </cluster>
+        <cluster area="id-c159958c-b496-4ccf-8b8f-8cefd57e630e" kind="duo">
+            <region area="id-aa58b55f-c74b-48b3-b0cb-aa1cdfc3014f" kind="duo">
+                <container cp:__name__="id-a560c834-fa2e-4d35-a540-d20dff18f95a" cp:type="teaser" module="zon-square">
+                    <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" />
+                </container>
+            </region>
+            <region area="id-00161f57-a6f8-4da8-80a8-6bce967e03ac" kind="duo">
+                <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c" cp:type="cpextra" module="jobbox">
+                    <cp_extra id="jobbox"/>
+                </container>
+            </region>
+        </cluster>
+        <cluster area="id-9e096c63-ca17-45f8-832c-867a6ad78505" kind="parquet">
+            <region area="id-d1ac1fc9-8640-4f32-96d8-8f956f04a7fb" kind="parquet" title="Parkett">
+                <referenced_cp>http://xml.zeit.de/zeit-online/parquet</referenced_cp>
+                <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c" cp:type="cpextra" module="jobbox">
+                   <cp_extra id="jobbox"/>
+                </container>
+                <container cp:__name__="id-9644ea40-0b1a-415f-9be9-38310b9bbdd2" cp:type="teaser" module="zon-small">
+                    <block href="http://xml.zeit.de/blogs/nsu-blog-bouffier"/>
+                </container>
             </region>
         </cluster>
     </body>
     <feed/>
     <teaser>
-        <title>Galerie Teaser</title>
+        <title>Jobbox</title>
     </teaser>
 </centerpage>

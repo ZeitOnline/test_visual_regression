@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+    <attribute name="href" ns="DAV:">/cms/work/2008/13/Scientologen</attribute>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">1</attribute>
+    <attribute name="title" ns="http://namespaces.zeit.de/CMS/document">OT 8 antwortet nicht</attribute>
+    <attribute name="topic" ns="http://namespaces.zeit.de/CMS/document">International</attribute>
+    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2013-09-09T10:16:43+00:00</attribute>
+    <attribute name="erscheint" ns="http://namespaces.zeit.de/CMS/document">2008-03-20T12:00Z</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">13</attribute>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2008-03-20T12:00:00Z</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Politik</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">Politik</attribute>
+    <attribute name="last_count" ns="http://namespaces.zeit.de/CMS/lifetimecounter">2010-04-10</attribute>
+    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2009-08-21T19:19:10.432109+00:00</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:d16fd0a7-277a-480b-9b21-a6271ac4f6d2}</attribute>
+    <attribute name="last-modified-by" ns="http://namespaces.zeit.de/CMS/workflow">cbunte</attribute>
+    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2008-03-19T02:35:00+00:00</attribute>
+    <attribute name="jobname" ns="http://namespaces.zeit.de/CMS/document">Ã·-Scientologen</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Nikolaus Jilch</attribute>
+    <attribute name="keywords" ns="http://namespaces.zeit.de/CMS/document">Ãsterreich;Religion;Sekte;Scientology</attribute>
+    <attribute name="revision" ns="http://namespaces.zeit.de/CMS/workflow">42</attribute>
+    <attribute name="new_comments" ns="http://namespaces.zeit.de/CMS/document">1</attribute>
+    <attribute name="text-length" ns="http://namespaces.zeit.de/CMS/document">10466</attribute>
+    <attribute name="comment-id" ns="http://namespaces.zeit.de/CMS/document">/cms/work/2008/13/Scientologen</attribute>
+    <attribute name="date-first-release" ns="http://namespaces.zeit.de/CMS/document">2008-03-19T01:52Z</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">article</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEI</attribute>
+    <attribute name="mostread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">Ausland</attribute>
+    <rankedTags>
+        <tag type="Person" url_value="martin-bartenstein" uuid="95c26264-d854-4ee5-936b-5160cf7c94e6">Martin Bartenstein</tag>
+        <tag type="Location" url_value="oesterreich" uuid="dd4341ba-1e05-4077-9654-ea49ec962630">Ãsterreich</tag>
+        <tag type="free" url_value="aussteiger" uuid="646ae17b-7605-483c-802c-19f4e8de8861">Aussteiger</tag>
+        <tag type="free" url_value="hollywood" uuid="97ace102-c85a-46ba-8b3d-ed1f4173ae8e">Hollywood</tag>
+        <tag type="Organization" url_value="ikea" uuid="647c952d-d1cf-43d5-afea-bd2ace8e31ea">Ikea</tag>
+        <tag type="Organization" url_value="innenministeriums" uuid="762e5d9d-eed0-4d62-9bba-1862712c2eb7">Innenministerium </tag>
+        <tag type="free" url_value="sekte" uuid="d4824fe5-42a6-4630-83bf-b6722761edd2">Sekte</tag>
+        <tag type="Location" url_value="amerika" uuid="8bf4f936-32f2-4a23-ac8f-c06cc00424ae">USA</tag>
+        <tag type="Location" url_value="wien" uuid="7a683a87-3ab0-48ad-b719-e3b375a8b6b5">Wien</tag>
+        <tag type="Location" url_value="berlin" uuid="f0c02270-9bb3-47da-9fa2-a33f919f75d4">Berlin</tag>
+    </rankedTags>
+    <attribute name="first_count" ns="http://namespaces.zeit.de/CMS/lifetimecounter">2008-08-10</attribute>
+    <attribute name="paragraphsperpage" ns="http://namespaces.zeit.de/CMS/document">9</attribute>
+    <attribute name="copyrights" ns="http://namespaces.zeit.de/CMS/document">DIE ZEIT, 20.03.2008 Nr. 13</attribute>
+    <attribute name="leftcol_ressort" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="total_hits" ns="http://namespaces.zeit.de/CMS/lifetimecounter">1347</attribute>
+    <attribute name="page" ns="http://namespaces.zeit.de/CMS/document">14</attribute>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
+    <attribute name="resourcetype" ns="DAV:"/>
+    <attribute name="creationdate" ns="DAV:">2014-06-25T18:37:23Z</attribute>
+    <attribute name="getcontentlength" ns="DAV:">17378</attribute>
+    <attribute name="getlastmodified" ns="DAV:">Wed, 25 Jun 2014 18:37:23 GMT</attribute>
+    <attribute name="getetag" ns="DAV:">&quot;10067bc-43e2-4fcad5e013a5d&quot;</attribute>
+    <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+    <attribute name="supportedlock" ns="DAV:"/>
+    <attribute name="lockdiscovery" ns="DAV:"/>
+    <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noodp,noydir,noarchive </attribute>
+</head>

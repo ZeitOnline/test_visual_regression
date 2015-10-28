@@ -678,6 +678,9 @@ class Content(Base):
         if self.is_advertorial:
             return None
 
+        if self.ressort == 'administratives':
+            return None
+
         if not self.context.channels or len(self.context.channels) == 0:
             return None
 

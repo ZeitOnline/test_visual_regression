@@ -683,3 +683,23 @@ def test_adv_teaser_on_cp_should_render_modifier(testserver, testbrowser):
 def test_adv_teaser_on_adv_should_not_render_modifier(testserver, testbrowser):
     browser = testbrowser('%s/centerpage/advertorial' % testserver.url)
     assert not browser.cssselect('.is-advertorial')
+
+
+def test_ressort_literally_returns_correct_ressort(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/index')
+    view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
+    assert view.ressort_literally == 'ZEITmagazin'
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/artikel/02')
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert article_view.ressort_literally == 'ZEITmagazin'
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/artikel/01')
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert article_view.ressort_literally == 'Mode & Design'
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/leben/2014-05/'
+        'Martenstein-Online-Kommentare')
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert article_view.ressort_literally == 'Leben'

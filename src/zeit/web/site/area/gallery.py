@@ -19,6 +19,11 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
         '.hits', zope.schema.Int(required=False))
 
     @property
+    def count_to_replace_duplicates(self):
+        return self.MINIMUM_COUNT_TO_REPLACE_DUPLICATES + (
+            (self.page - 1) * self.count)
+
+    @property
     def hits(self):
         if self._hits is None:
             self.values()
@@ -31,7 +36,10 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
 
     @property
     def page(self):
-        return int(pyramid.threadlocal.get_current_request().GET.get('p', 1))
+        try:
+            return int(pyramid.threadlocal.get_current_request().GET['p'])
+        except (KeyError, ValueError):
+            return 1
 
     @zeit.web.reify
     def total_pages(self):
@@ -52,7 +60,6 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
             return 1
 
     def _query_centerpage(self):
-        teasers = list(zeit.content.cp.interfaces.ITeaseredContent(
-            self.referenced_cp, []))
-        self._hits = len(teasers)
-        return teasers[(self.page - 1) * self.count:self.page * self.count]
+        result = super(Gallery, self)._query_centerpage()
+        self._hits = len(result)
+        return result[(self.page - 1) * self.count:self.page * self.count]
