@@ -7,14 +7,12 @@
 		color: $zon_dark_grey
 
 .article-interactions
-	border-top: 2px solid $zon_lighter_grey
-	clear: both
-	padding: remify(20px 0 10px)
+	margin: $vertical-space auto remify(32px)
 	position: relative
 
 .print-menu
 	position: absolute
-	top: remify(20px)
+	top: 0
 	left: remify(55px)
 	display: none
 	&__print,
@@ -82,6 +80,6 @@
 
 .sharing-menu--active .sharing-menu__items,
 .no-js .sharing-menu__items // no-js fallback
-	margin:  remify(14px 0) // animated
+	margin:  remify(14px 0 0) // animated
 	max-height: remify(64px) // animated
 

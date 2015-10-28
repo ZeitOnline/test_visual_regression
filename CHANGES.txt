@@ -14,6 +14,8 @@ Change log for zeit.web
 2.19 (2015-10-28)
 -----------------
 
+- MAINT: Reorganize article footer to fix margins and harmonize border-color
+
 - ZON-2168: Link-Object teaser should point to target URL
 
 - ZON-2167: Return correctly spelled ressort names to app wrapper
