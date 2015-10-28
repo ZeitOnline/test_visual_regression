@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2342: ZEIT Shop Follow-Up
 
+- FIX: Make Jobbox square in 50/50
+
 
 2.18 (2015-10-26)
 -----------------
@@ -23,6 +25,8 @@ Change log for zeit.web
 - FIX: Make Jobbox more failsave and multi instance ready
 
 - FIX: Ignore image variants with unavailable parent groups
+
+- FIX: Make Jobbox more failsave and multi instance ready
 
 
 2.17 (2015-10-22)
