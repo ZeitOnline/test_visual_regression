@@ -30,7 +30,6 @@
 		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
 		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Aktuelle Nachrichten, Hintergründe, Kommentare und Reportagen zu deutscher und internationaler Politik bei ZEIT ONLINE</attribute>
 		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Aktuelle Politik - Nachrichten und Reportagen</attribute>
 		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
 		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
 		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-10-22T14:40:56.652107+00:00</attribute>
