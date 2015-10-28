@@ -42,23 +42,24 @@ require([
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.site/plugins/jquery.accordion',
     'web.site/plugins/jquery.adaptnav',
+    'web.site/plugins/jquery.animateJobs',
     'web.site/plugins/jquery.autoclick',
+    'web.site/plugins/jquery.countFormchars',
     'web.site/plugins/jquery.extendfooter',
+    'web.site/plugins/jquery.fixPosition',
+    'web.site/plugins/jquery.hpOverlay',
+    'web.site/plugins/jquery.imageCopyrightFooter',
     'web.site/plugins/jquery.infobox',
     'web.site/plugins/jquery.liveblog',
-    'web.site/plugins/jquery.storystream',
     'web.site/plugins/jquery.searchTools',
     'web.site/plugins/jquery.selectNav',
     'web.site/plugins/jquery.shuffleTeasers',
     'web.site/plugins/jquery.snapshot',
+    'web.site/plugins/jquery.storystream',
+    'web.site/plugins/jquery.tabs',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
-    'web.site/plugins/jquery.updateSignals',
-    'web.site/plugins/jquery.countFormchars',
-    'web.site/plugins/jquery.imageCopyrightFooter',
-    'web.site/plugins/jquery.hpOverlay',
-    'web.site/plugins/jquery.animateJobs',
-    'web.site/plugins/jquery.fixPosition'
+    'web.site/plugins/jquery.updateSignals'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         isHp = document.body.getAttribute( 'data-is-hp' ),
@@ -84,6 +85,7 @@ require([
         $( '.js-accordion' ).accordion();
         $( '.storystream-markup__content--first' ).storystream();
         $( '.jobbox--animate' ).animateJobs();
+        $( '.js-tabs' ).tabs();
         $( '.js-image-copyright-footer' ).imageCopyrightFooter();
     } else if ( article.length ) {
         // article, gallery etc.
