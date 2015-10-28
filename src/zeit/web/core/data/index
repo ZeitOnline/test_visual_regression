@@ -117,7 +117,7 @@
                 <container cp:type="cpextra" module="partnerbox_jobs" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c673478">
                     <cp_extra for="zeit.content.cp.interfaces.IArea" id="partnerbox_jobs" />
                 </container>
-                <container cp:type="cpextra" module="partnerbox_reisen" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c673478s">
+                <container cp:type="cpextra" module="partnerbox_reisen" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c673478shj">
                     <cp_extra for="zeit.content.cp.interfaces.IArea" id="partnerbox_reisen" />
                 </container>
             </region>
