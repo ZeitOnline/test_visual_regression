@@ -21,20 +21,16 @@ $bg_kicker--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freiste
             vertical-align: top
             width: 55%
             padding: remify(25px)
-    &__link
-        display: block
-        letter-spacing: $letter-spacing-s
-        font-size: em(15px)
-        line-height: em(23px)
+    &__intro
         color: $zon_grey
-        a
-            border-bottom: 1px solid rgba($zon_grey, .4)
-            +on-interaction
-                border-bottom-color: rgba($zon_grey, .8)
-                color: $zon_grey
-        +respond-min($break-0)
-            display: inline-block
-            margin-left: remify(20px)
+        font-size: em(14px)
+        line-height: em(25px)
+        letter-spacing: $letter-spacing-s
+        padding: remify(25px)
+        display: block
+        +respond-min($break-desktop-min)
+            display: table-cell
+            vertical-align: top
 
 .p-kicker
     height: remify(72px)
@@ -57,26 +53,6 @@ $bg_kicker--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freiste
             background: $zon_lighter_grey url($bg_kicker--jobs) no-repeat right
             background-size: cover
 
-.p-intro
-    color: $zon_grey
-    font-size: em(14px)
-    line-height: em(25px)
-    letter-spacing: $letter-spacing-s
-    padding: remify(25px)
-    +respond-min($break-desktop-min)
-        display: table-cell
-        vertical-align: top
-    &__text
-        display: block
-    &__link
-        padding-top: remify(20px)
-        a
-            border-bottom: 1px solid rgba($zon_grey, .4)
-            color: $zon_grey
-            +on-interaction
-                border-bottom-color: rgba($zon_grey, .8)
-                color: $zon_grey
-
 .pa-button
     display: inline-block
     &__text
@@ -88,4 +64,19 @@ $bg_kicker--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freiste
     display: block
     height: remify(35px)
     width: 100%
+
+.pa-link
+    display: block
+    letter-spacing: $letter-spacing-s
+    font-size: em(15px)
+    line-height: em(23px)
+    color: $zon_grey
+    a
+        border-bottom: 1px solid rgba($zon_grey, .4)
+        +on-interaction
+            border-bottom-color: rgba($zon_grey, .8)
+            color: $zon_grey
+    +respond-min($break-0)
+        display: inline-block
+        margin-left: remify(20px)
 

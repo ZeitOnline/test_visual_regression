@@ -5,9 +5,8 @@
             <span class="p-kicker__img"></span>
             <span class="p-kicker__text">{% block kicker_text %}{% endblock %}</span>
         </div>
-        <div class="p-intro">
-            <span class="p-intro__text">{% block intro %}{% endblock %}</span>
-            <span class="p-intro__link">{% block link_intro %}{% endblock %}</span>
+        <div class="partner__intro">
+            {% block intro %}{% endblock %}
         </div>
         <div class="partner__action">
             <select class="pa-dropdown" data-tracklink="{% block tracking %}{% endblock %}">
@@ -16,7 +15,7 @@
             <span class="pa-button">
                 <span class="pa-button__text">{% block button %}{% endblock %}</span>
             </span>
-            <span class="partner__link">
+            <span class="pa-link">
                 {% block link_bottom %}{% endblock %}
             </span>
         </div>
