@@ -13,6 +13,7 @@ import operator
 import beaker
 import datetime
 import time
+import pytz
 
 
 def test_comment_count_should_handle_missing_uid_param(comment_counter):
@@ -618,3 +619,113 @@ def test_article_view_should_have_short_caching_time_on_unloadable_thread(
 
     browser = testbrowser('%s/artikel/01' % testserver.url)
     assert browser.headers.get('cache-control') == 'max-age=5'
+
+
+def test_community_maintenance_should_be_created_from_xml():
+    xml = lxml.etree.fromstring(
+        """
+        <community_maintenance>
+            <active>true</active>
+            <scheduled>true</scheduled>
+            <begin>2010-10-10T10:10:10.10+00:00</begin>
+            <end>2020-10-10T10:10:10.10+00:00</end>
+            <text_scheduled></text_scheduled>
+            <text_active></text_active>
+        </community_maintenance>
+        """)
+
+    maintenance = {
+        'active': False,
+        'scheduled': False,
+        'begin': None,
+        'end': None,
+        'text_scheduled': (u'Aufgrund von Wartungsarbeiten sind die '
+                           u'Kommentarfunktionen in Kürze vorübergehend '
+                           u'nicht mehr verfügbar. Wir bitten um Ihr '
+                           u'Verständnis.'),
+        'text_active': (u'Aufgrund von Wartungsarbeiten sind die '
+                        u'Kommentarfunktionen vorübergehend '
+                        u'nicht mehr verfügbar. Wir bitten um Ihr '
+                        u'Verständnis.')
+    }
+
+    res = zeit.web.core.comments._maintenance_from_xml(xml, maintenance)
+    begin = datetime.datetime(2010,10,10,10,10,10,100000,tzinfo=pytz.utc)
+    end = datetime.datetime(2020,10,10,10,10,10,100000,tzinfo=pytz.utc)
+    assert res['active']
+    assert res['scheduled']
+    assert res['begin'] == begin
+    assert res['end'] == end
+    assert res['text_scheduled'] == maintenance['text_scheduled']
+    assert res['text_active'] == maintenance['text_active']
+
+    xml = lxml.etree.fromstring(
+        """
+        <community_maintenance>
+            <text_scheduled>text_scheduled</text_scheduled>
+            <text_active>text_active</text_active>
+        </community_maintenance>
+        """)
+    res = zeit.web.core.comments._maintenance_from_xml(xml, maintenance)
+    assert res['text_scheduled'] == 'text_scheduled'
+    assert res['text_active'] == 'text_active'
+
+def test_community_maintenance_should_be_scheduled_correctly():
+    maintenance = {
+        'active': False,
+        'scheduled': True,
+        'begin': datetime.datetime(2000,10,10,10,10,10,100000,tzinfo=pytz.utc),
+        'end': datetime.datetime(2299,10,10,10,10,10,100000,tzinfo=pytz.utc),
+        'text_scheduled': (u'Aufgrund von Wartungsarbeiten sind die '
+                           u'Kommentarfunktionen in Kürze vorübergehend '
+                           u'nicht mehr verfügbar. Wir bitten um Ihr '
+                           u'Verständnis.'),
+        'text_active': (u'Aufgrund von Wartungsarbeiten sind die '
+                        u'Kommentarfunktionen vorübergehend '
+                        u'nicht mehr verfügbar. Wir bitten um Ihr '
+                        u'Verständnis.')
+    }
+    assert zeit.web.core.comments._derive_maintenance_from_schedule(
+        maintenance)['active'] == True
+
+    maintenance['active'] = False
+    maintenance['end'] = datetime.datetime(
+        2001,10,10,10,10,10,100000,tzinfo=pytz.utc)
+
+    assert zeit.web.core.comments._derive_maintenance_from_schedule(
+        maintenance)['active'] == False
+
+    maintenance['active'] = False
+    maintenance['begin'] = datetime.datetime(
+        2299,10,10,10,10,10,100000,tzinfo=pytz.utc)
+    maintenance['end'] = datetime.datetime(
+        2299,12,10,10,10,10,100000,tzinfo=pytz.utc)
+
+    assert zeit.web.core.comments._derive_maintenance_from_schedule(
+        maintenance)['active'] == False
+
+    maintenance['active'] = True
+    maintenance['begin'] = datetime.datetime(
+        2299,10,10,10,10,10,100000,tzinfo=pytz.utc)
+    maintenance['end'] = datetime.datetime(
+        2299,12,10,10,10,10,100000,tzinfo=pytz.utc)
+
+    assert zeit.web.core.comments._derive_maintenance_from_schedule(
+        maintenance)['active'] == True
+
+    maintenance['active'] = True
+    maintenance['begin'] = datetime.datetime(
+        2000,10,10,10,10,10,100000,tzinfo=pytz.utc)
+    maintenance['end'] = datetime.datetime(
+        2001,12,10,10,10,10,100000,tzinfo=pytz.utc)
+
+    assert zeit.web.core.comments._derive_maintenance_from_schedule(
+        maintenance)['active'] == True
+
+def test_community_maintenance_should_be_created_from_config(application):
+    maintenance = zeit.web.core.comments.community_maintenance()
+    assert maintenance['active'] == True
+    assert maintenance['text_active'] == 'text_active'
+
+
+

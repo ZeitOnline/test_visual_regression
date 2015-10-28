@@ -8,6 +8,7 @@ from BeautifulSoup import BeautifulSoup
 import babel.dates
 import beaker.cache
 import lxml.etree
+import pytz
 import requests
 import requests.exceptions
 import zope.component
@@ -273,6 +274,71 @@ def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
             page, pages)
 
     return thread
+
+
+def community_maintenance():
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    unique_id = conf.get('community_maintenance')
+    maintenance = _community_maintenance_cache(unique_id)
+    return _derive_maintenance_from_schedule(maintenance)
+
+
+@beaker.cache.cache_region('long_term', 'community_maintenance')
+def _community_maintenance_cache(unique_id=None):
+    maintenance = {
+        'active': False,
+        'scheduled': False,
+        'begin': None,
+        'end': None,
+        'text_scheduled': (u'Aufgrund von Wartungsarbeiten sind die '
+                           u'Kommentarfunktionen in Kürze vorübergehend '
+                           u'nicht mehr verfügbar. Wir bitten um Ihr '
+                           u'Verständnis.'),
+        'text_active': (u'Aufgrund von Wartungsarbeiten sind die '
+                        u'Kommentarfunktionen vorübergehend '
+                        u'nicht mehr verfügbar. Wir bitten um Ihr '
+                        u'Verständnis.')
+    }
+
+    if unique_id:
+        xml = zeit.cms.interfaces.ICMSContent(unique_id).xml
+        maintenance = _maintenance_from_xml(xml, maintenance)
+
+    return maintenance
+
+
+def _maintenance_from_xml(xml, maintenance):
+    for key in maintenance.keys():
+        elem = xml.xpath('/community_maintenance/{}'.format(key))
+        if not elem:
+            continue
+
+        elem = elem[0].text
+
+        if not elem or elem.strip() == '':
+            elem = maintenance[key]
+        if elem and elem.lower() == 'false':
+            elem = False
+        if elem and elem.lower() == 'true':
+            elem = True
+        if zeit.web.core.date.parse_date(elem):
+            elem = zeit.web.core.date.parse_date(elem)
+
+        maintenance[key] = elem
+    return maintenance
+
+
+def _derive_maintenance_from_schedule(maintenance):
+    now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
+    override = maintenance['active']
+    if maintenance['scheduled'] and maintenance['begin'] and (
+        now-maintenance['begin'] >= datetime.timedelta(0)):
+        maintenance['active'] = True
+
+    if not override and maintenance['scheduled'] and maintenance['end'] and (
+        now-maintenance['end'] >= datetime.timedelta(0)):
+        maintenance['active'] = False
+    return maintenance
 
 
 @beaker.cache.cache_region('long_term', 'comment_thread')

@@ -590,6 +590,10 @@ class Content(Base):
         return 'summary_large_image'
 
     @zeit.web.reify
+    def community_maintenance(self):
+        return zeit.web.core.comments.community_maintenance()
+
+    @zeit.web.reify
     def comments(self):
         if not self.show_commentthread:
             return

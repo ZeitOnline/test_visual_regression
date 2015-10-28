@@ -30,6 +30,12 @@
 	{% endif %}
 	</div>
 
+	{% if view.community_maintenance.scheduled %}
+	<div class="comment-section__error comment-section__item">	
+		<span>{{ view.community_maintenance.text_scheduled }}</span>
+	</div>
+	{% endif %}
+
 	{% if view.comments %}
 	<div class="comment-preferences">
 		<div class="comment-preferences__container">
