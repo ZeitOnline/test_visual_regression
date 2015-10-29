@@ -63,11 +63,6 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
             # Rewind to page 1
             return 1
 
-    def _query_centerpage(self):
-        result = super(Gallery, self)._query_centerpage()
-        self._hits = len(result)
-        return result
-
     def _extract_newest(self, content, predicate=None):
         # Deduplicate automatic gallery areas for pagination.
         #
@@ -82,6 +77,7 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
                 teaser = super(Gallery, self)._extract_newest(
                     content, predicate)
             self.page_called[self.page] = True
+            self._hits = len(self.context.values()) + 2
             return teaser
 
         return super(Gallery, self)._extract_newest(content, predicate)
