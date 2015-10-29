@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2342: ZEIT Shop Follow-Up
 
+- ZON-2336: Prefix newsfeed item title with supertitle
+
 - FIX: Make Jobbox square in 50/50
 
 
