@@ -3,7 +3,7 @@
 {% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
 {% macro image(image, loop) %}
-    {% include 'zeit.web.site:templates/inc/article-image.tpl' with context %}
+    {% include 'zeit.web.site:templates/inc/asset/image_article.tpl' with context %}
 {% endmacro %}
 
 {% macro intertitle(intertitle) -%}

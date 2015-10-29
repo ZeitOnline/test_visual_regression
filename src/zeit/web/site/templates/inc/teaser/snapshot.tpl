@@ -5,10 +5,12 @@
 {% set image = teaser %}
 {% set module_layout = 'snapshot' %}
 {% set tracking_slug = '{}...{}.'.format(region_loop.index, module_layout) %}
+{% set media_caption_additional_class = 'figcaption--hidden' %}
 
+{# TODO: Why not extend the image-linked.tpl directly? #}
 <div class="snapshot" id="snapshot" hidden>
     {{ cp.section_heading('Momentaufnahme', 'Gesammelte Momente', path, view, tracking_slug + 'gesammelte_momente') }}
-    {% include "zeit.web.site:templates/inc/linked-image.tpl" %}
+    {% include "zeit.web.site:templates/inc/asset/image_linked.tpl" %}
     <div class="snapshot-caption">
         {{ teaser.title | trim | hide_none }} {{ cp.image_copyright(teaser.copyright, 'snapshot-caption') }}</span>
     </div>

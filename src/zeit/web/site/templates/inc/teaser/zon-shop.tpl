@@ -9,7 +9,7 @@
 	{# OPTIMIZE: Figcaption would be better than this wrapper.
 	   But JS fills the whole <figure> when loading an image.#}
 	<div class="{{ self.layout() }}__figurewrapper">
-		{% include "zeit.web.site:templates/inc/teaser_asset/imagegroup.tpl" %}
+		{% include "zeit.web.site:templates/inc/asset/image_teaser.tpl" %}
 	</div>
 {% endblock %}
 
