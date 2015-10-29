@@ -4,6 +4,8 @@ Change log for zeit.web
 2.20 (unreleased)
 -----------------
 
+- ZON-2328: Add premoderation for new users
+
 - ZON-2285: Identify if view is wrapped via user agent
 
 - ZON-2206: Handle empty subressort DAV property properly
