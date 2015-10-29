@@ -288,7 +288,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjc
     function prepareImages( container ) {
         var images = [];
         prepareScaling();
-        $( '.scaled-image > noscript', container ).each( function() {
+        $( '.scaled-image noscript', container ).each( function() {
             var $noscript = $( this ),
                 $parent = $noscript.parent(),
                 markup = $noscript.text(),
@@ -302,7 +302,11 @@ define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjc
                 markup = markup.replace( 'src="', 'data-dev-null="' );
                 // hide alt from display while image is processed
                 markup = markup.replace( 'alt="', 'data-alt="' );
-                $parent.html( markup );
+                // hide remaining conditional comment fragments
+                markup = markup.replace( '<!--<![endif]-->', '' );
+                markup = markup.replace( '<!--[if gt IE 8]><!-->', '' );
+
+                $noscript.replaceWith( markup );
                 images.push( prepareImage( $parent.find( 'img' ), true ) );
 
             } else {
