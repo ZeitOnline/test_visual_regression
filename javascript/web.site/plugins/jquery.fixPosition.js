@@ -91,7 +91,7 @@
                 currentTimestamp = currentDate.getTime(),
                 winHeight,
                 articleBodyOffset,
-                articleBodyHeight,
+                nextOffset,
                 currentMinFixedPos,
                 currentMaxFixedPos;
 
@@ -104,10 +104,10 @@
             winHeight = $( window ).height();
 
             articleBodyOffset = this.$articleBody.offset();
-            articleBodyHeight = this.$articleBody.height();
+            nextOffset = this.element.next().offset();
 
             currentMinFixedPos = parseInt( articleBodyOffset.top - ( winHeight / 2 ), 10 );
-            currentMaxFixedPos = parseInt( articleBodyOffset.top + articleBodyHeight - ( winHeight / 2 ), 10 );
+            currentMaxFixedPos = parseInt( nextOffset.top - ( winHeight / 2 ), 10 );
 
             // for performance: track if nothing has changed
             if ( this.minFixedPos === currentMinFixedPos && this.maxFixedPos === currentMaxFixedPos ) {

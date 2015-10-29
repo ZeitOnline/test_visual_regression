@@ -933,14 +933,13 @@ def test_centerpage_biga_area_should_render_in_isolation_with_page_param(
     assert teaser_second_page.text == 'Das hab ich auf dem Schirm'
 
 
-def test_centerpage_should_render_bam_style_buzzboxes(testbrowser, testserver):
+def test_centerpage_should_render_bam_style_buzzboxes(testbrowser):
     browser = testbrowser('/centerpage/zeitonline')
     assert browser.cssselect('.buzz-box')
     assert len(browser.cssselect('.buzz-box__teasers article')) == 3
 
 
-def test_centerpage_square_teaser_has_pixelperfect_image(
-        testbrowser, testserver):
+def test_centerpage_square_teaser_has_pixelperfect_image(testbrowser):
     browser = testbrowser('/zeit-online/teaser-square-setup')
     images = browser.cssselect('.teaser-square .scaled-image')
     assert len(images)
@@ -965,20 +964,30 @@ def test_centerpage_teaser_is_clickable_en_block_for_touch_devices(
     assert driver.current_url == href
 
 
-def test_gallery_teaser_exists(testbrowser, testserver):
+def test_gallery_teaser_exists(testbrowser):
     select = testbrowser('/zeit-online/teaser-gallery-setup').cssselect
     assert len(select('.cp-region--gallery')) == 1
     assert len(select('.cp-area--gallery')) == 1
 
 
-def test_gallery_teaser_has_ressort_heading(testbrowser, testserver):
+def test_gallery_teaser_has_ressort_heading(testbrowser):
     select = testbrowser('/zeit-online/teaser-gallery-setup').cssselect
     title = select('.cp-area--gallery .section-heading__title')
     assert len(title) == 1
     assert "Fotostrecken" in title[0].text
 
 
-def test_gallery_teaser_has_correct_elements(testbrowser, testserver):
+def test_gallery_teaser_should_hide_duplicates(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+
+    refcp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/foto/index')
+    first = zeit.content.cp.interfaces.ITeaseredContent(refcp).next()
+
+    assert first.uniqueId != browser.cssselect(
+        '.cp-area--gallery article')[0].attrib['data-unique-id']
+
+
+def test_gallery_teaser_has_correct_elements(testbrowser):
     wanted = 2
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
     area = browser.cssselect('.cp-area--gallery')[0]
