@@ -196,7 +196,7 @@
                 <text>
                     <h4>Wie wird der Modus ausgelöst?</h4>
                     <ul>
-                        <li>if the pages are requested from a host with the URL <a href="http://app-content.zeit.de">app-content.zeit.de</a></li>
+                        <li>if the pages are requested from a host with a User-Agent containing ZONApp.</a></li>
                         <li>if the dev environment and the query parameter <a href="/zeit-online/article/01?app-content">?app-content</a> is present.</li>
                     </ul>
                 </text>

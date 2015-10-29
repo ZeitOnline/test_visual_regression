@@ -236,12 +236,12 @@
 /* mixins for navigation/header */
 
 @mixin add_nav_bar_style($height, $double: false) {
-	border-bottom: 1px solid $zon_light_grey;
+	border-bottom: 1px solid $color-border;
 	height: $height;
 	padding-left: $fine;
 	width: 100%;
 	@if $double {
-		border-top: 1px solid $zon_light_grey;
+		border-top: 1px solid $color-border;
 	}
 }
 
