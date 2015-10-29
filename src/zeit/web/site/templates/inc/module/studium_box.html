@@ -16,11 +16,19 @@
 			<a href="#studiengangssuche"><span class="concise">Studiengangssuche</span><span class="verbose">Suchmaschine für Studiengänge</span></a>
 		</h2>
 		<div class="studiumbox__content" id="studiengangssuche">
-			<form method="post" action="http://studiengaenge.zeit.de/studienangebote?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.suma.teaser.button.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=funktionsbox_studium&utm_content=suma_teaser_button_">
+			<form action="http://studiengaenge.zeit.de/studienangebote">
 				<h3 class="studiumbox__title">Was oder wo möchten Sie studieren?</h3>
-				<input name="suche_refine" type="text" class="studiumbox__input" placeholder="Suchbegriff eingeben">
+				<input name="suche" type="text" class="studiumbox__input" placeholder="Suchbegriff eingeben">
+
+				<input type="hidden" name="wt_zmc" value="fix.int.zonpmr.zeitde.funktionsbox_studium.suma.teaser.button.">
+				<input type="hidden" name="utm_medium" value="fix">
+				<input type="hidden" name="utm_source" value="zeitde_zonpmr_int">
+				<input type="hidden" name="utm_campaign" value="funktionsbox_studium">
+				<input type="hidden" name="utm_content" value="suma_teaser_button_">
+
 				<input class="studiumbox__button" type="submit" value="Suchen">
-				<a href="http://studiengaenge.zeit.de/studienangebote?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.suma.teaser.button.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=funktionsbox_studium&utm_content=suma_teaser_button_" class="studiumbox__link">Ich weiß es noch nicht</a>
+
+				<a href="http://studiengaenge.zeit.de/sit?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.suma.teaser.sit_link.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=funktionsbox_studium&utm_content=suma_teaser_sit_link_" class="studiumbox__link">Ich weiß es noch nicht</a>
 			</form>
 		</div>
 
@@ -29,11 +37,67 @@
 			<a href="#hochschulranking">CHE Hochschul&shy;Ranking</a>
 		</h2>
 		<div class="studiumbox__content" id="hochschulranking">
-			<form method="post" action="http://ranking.zeit.de/che2015/de/rankingunion/show?esb=7&ab=3&hstyp=1#&left_f1=23&left_f2=42&left_f3=346&left_f4=272&left_f5=14&order=alpha&unionview=table&subfach=&wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.suma.teaser.button.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=funktionsbox_studium&utm_content=suma_teaser_button_">
+			<form action="http://ranking.zeit.de/che2015/de/rankingunion/show">
 				<h3 class="studiumbox__title">Welche Uni ist die beste für Ihr Fach?</h3>
-				<select name="" class="studiumbox__input">
-					<option value="sad">as</option>
+				<select name="esb" class="studiumbox__input" onchange="
+					var f = this.form, o = this.options[this.selectedIndex];
+					f.ab.value = o.getAttribute('data-ab');
+					f.hstyp.value = o.getAttribute('data-hstyp');
+					f.subfach.value = o.getAttribute('data-subfach');">
+					<option>Fachbereich auswählen …</option>
+					<option value="31" data-ab="1" data-hstyp="1">Anglistik / Amerikanistik</option>
+					<option value="7"  data-ab="3" data-hstyp="1">Architektur</option>
+					<option value="24" data-ab="3" data-hstyp="1">BWL</option>
+					<option value="8"  data-ab="3" data-hstyp="1" data-subfach="104">Bauingenieurwesen</option>
+					<option value="10" data-ab="3" data-hstyp="1" data-subfach="112">Bioingenieurwesen / Biotechnologie</option>
+					<option value="35" data-ab="3" data-hstyp="1">Biologie</option>
+					<option value="20" data-ab="3" data-hstyp="1">Chemie</option>
+					<option value="10" data-ab="3" data-hstyp="1" data-subfach="111">Chemieingenieurwesen / Angewandte Chemie</option>
+					<option value="9"  data-ab="3" data-hstyp="1" data-subfach="101">Elektrotechnik und Informationstechnik</option>
+					<option value="34" data-ab="3" data-hstyp="1">Erziehungswissenschaft</option>
+					<option value="8"  data-ab="3" data-hstyp="2" data-subfach="105">Facility Management</option>
+					<option value="43" data-ab="3" data-hstyp="1">Geografie</option>
+					<option value="42" data-ab="3" data-hstyp="1">Geowissenschaften</option>
+					<option value="30" data-ab="1" data-hstyp="1">Germanistik</option>
+					<option value="33" data-ab="3" data-hstyp="1">Geschichte</option>
+					<option value="1"  data-ab="3" data-hstyp="1">Informatik</option>
+					<option value="5"  data-ab="3" data-hstyp="1">Jura</option>
+					<option value="10" data-ab="3" data-hstyp="1" data-subfach="109">Maschinenbau</option>
+					<option value="3"  data-ab="3" data-hstyp="1">Mathematik</option>
+					<option value="10" data-ab="3" data-hstyp="1" data-subfach="103">Mechatronik</option>
+					<option value="47" data-ab="3" data-hstyp="2">Medien- / Kommunikationsw. / Journalistik (FH)</option>
+					<option value="41" data-ab="3" data-hstyp="1">Medienwissenschaften (Uni)</option>
+					<option value="36" data-ab="3" data-hstyp="1">Medizin</option>
+					<option value="38" data-ab="3">Pflegewissenschaft</option>
+					<option value="19" data-ab="3" data-hstyp="1">Pharmazie</option>
+					<option value="4"  data-ab="3" data-hstyp="1">Physik</option>
+					<option value="11" data-ab="3" data-hstyp="2" data-subfach="116">Physikalische Technik</option>
+					<option value="28" data-ab="3" data-hstyp="1">Politikwissenschaft / Sozialwiss.</option>
+					<option value="32" data-ab="3" data-hstyp="1">Psychologie</option>
+					<option value="44" data-ab="1" data-hstyp="1">Romanistik</option>
+					<option value="23" data-ab="3">Soziale Arbeit</option>
+					<option value="45" data-ab="3" data-hstyp="1">Sport / Sportwissenschaft</option>
+					<option value="8"  data-ab="3" data-hstyp="1" data-subfach="107">Umweltingenieurwesen</option>
+					<option value="27" data-ab="3" data-hstyp="1">VWL</option>
+					<option value="10" data-ab="3" data-hstyp="1" data-subfach="110">Verfahrenstechnik</option>
+					<option value="10" data-ab="3" data-hstyp="1" data-subfach="108">Werkstofftechnik / Materialwissenschaft</option>
+					<option value="2"  data-ab="3" data-hstyp="1">Wirtschaftsinformatik</option>
+					<option value="13" data-ab="3" data-hstyp="1">Wirtschaftsingenieurwesen</option>
+					<option value="6"  data-ab="3">Wirtschaftsrecht</option>
+					<option value="25" data-ab="3" data-hstyp="1">Wirtschaftswissenschaften</option>
+					<option value="37" data-ab="3" data-hstyp="1">Zahnmedizin</option>
 				</select>
+
+				<input type="hidden" name="ab" value="3">
+				<input type="hidden" name="hstyp" value="1">
+				<input type="hidden" name="subfach" value="">
+
+				<input type="hidden" name="wt_zmc" value="fix.int.zonpmr.zeitde.funktionsbox_studium.che.teaser.button.">
+				<input type="hidden" name="utm_medium" value="fix">
+				<input type="hidden" name="utm_source" value="zeitde_zonpmr_int">
+				<input type="hidden" name="utm_campaign" value="funktionsbox_studium">
+				<input type="hidden" name="utm_content" value="che_teaser_button_">
+
 				<input class="studiumbox__button" type="submit" value="zum Ranking">
 			</form>
 		</div>
