@@ -422,12 +422,14 @@ def test_og_url_is_set_correctly(application):
 def test_wrapped_page_has_wrapped_property(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/slenderized-index')
-    request = pyramid.testing.DummyRequest()
-    request.host_url = 'http://app-content.zeit.de'
+    request = pyramid.testing.DummyRequest(headers={
+        'user-agent': 'Safari/537.36 ZONApp/Android/2.3beta'})
+    request.host_url = 'http://www.zeit.de'
     view = zeit.web.site.view_centerpage.Centerpage(context, request)
     assert view.is_wrapped
 
-    request = pyramid.testing.DummyRequest()
+    request = pyramid.testing.DummyRequest(headers={
+        'user-agent': 'Safari/537.36'})
     request.query_string = "app-content"
     request.host_url = 'http://www.zeit.de'
     view = zeit.web.site.view_centerpage.Centerpage(context, request)
