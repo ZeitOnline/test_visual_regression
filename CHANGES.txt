@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2206: Handle empty subressort DAV property properly
 
+- ZON-2321: Beef up reify to a multilayer caching descriptor
+
 - MAINT: Fix bumpy chronological article navigation
 
 
@@ -21,8 +23,6 @@ Change log for zeit.web
 - ZON-2168: Link-Object teaser should point to target URL
 
 - ZON-2167: Return correctly spelled ressort names to app wrapper
-
-- ZON-2321: Beef up reify to a multilayer caching descriptor
 
 - ZON-2238: Allow duplicate hiding in automatic gallery area
 
