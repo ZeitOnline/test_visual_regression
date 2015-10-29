@@ -197,7 +197,14 @@ class Image(zeit.web.core.image.BaseImage):
         self.attr_title = None
         self.attr_alt = None
 
-        self.layout = model_block.layout
+        self.layout = layout = model_block.layout
+
+        if layout.display_mode == 'large':
+            self.figure_mods = ('wide', 'rimless', 'apart')
+        elif layout.display_mode == 'float':
+            self.figure_mods = ('marginalia',)
+        else:
+            self.figure_mods = ()
 
         # TODO: don't use XML but adapt an Image and use it's metadata
         if model_block.xml is not None:
