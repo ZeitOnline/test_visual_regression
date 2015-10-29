@@ -64,6 +64,14 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
             return 1
 
     def _extract_newest(self, content):
+        # Deduplicate automatic gallery areas for pagination.
+        #
+        # Since we don't know which areas on previous pages may have been
+        # duplicates, we cannot paginate properly after slicing the already
+        # tidied up resultset.
+        # Therefore we need to memorize all previous pages and reiterate
+        # through all areas on each request, regardless of the current page, to
+        # be able to paginate the whole, deduplicated resultset.
         if not self.page_called.get(self.page, False):
             for i in range(0, (self.page * len(self.context.values())) - 1):
                 teaser = super(Gallery, self)._extract_newest(content)
