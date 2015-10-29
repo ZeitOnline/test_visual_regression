@@ -135,11 +135,14 @@ def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
         'zeit.web.site:templates/inc/comments/comment-form.html')
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
+
     request = mock.MagicMock()
     request.authenticated_userid = 123
     request.session = {'user': {'uid': '123', 'name': 'Max'}}
     request.path_url = 'http://xml.zeit.de/zeit-online/article/01'
     request.params = {'cid': None}
+    request.route_url = lambda x: "http://foo/"
+
     view = zeit.web.site.view_article.Article(content, request)
     view.comments_allowed = False
     string = comments.render(view=view, request=request)
