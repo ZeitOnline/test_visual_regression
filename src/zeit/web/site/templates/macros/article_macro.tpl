@@ -2,43 +2,9 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
-{% macro image(obj, loop) -%}
-    {% if obj | default_image_url -%}
-        <figure class="
-            {%- if loop -%}
-                slide
-            {# XXX We should move this mapping somewhere else than the template. #}
-            {%- elif obj.layout.display_mode == 'large' -%}
-                article__item article__item--wide article__item--rimless article__item--apart
-            {%- elif obj.layout.display_mode == 'float' -%}
-                article__item article__item--marginalia
-            {%- elif obj.layout.display_mode == 'column-width' -%}
-                article__item
-            {%- endif -%}
-            ">
-            <div class="scaled-image">
-                {{ lama.insert_responsive_image(obj, None, 'article') }}
-            </div>
-            <figcaption class="figure__caption {% if obj.layout == 'small' %}figure__caption--marginalia{%- endif -%}">
-                {% if loop -%}
-                <span class="figure__index">{{ loop.index }}/{{ loop.length }}</span>
-                {% endif -%}
-                <span class="figure__text">{{ obj.caption|hide_none }}</span>
-                {% if obj.copyright|count and obj.copyright[0][0] != '©' %}
-                <span class="figure__copyright">
-                    {%- if obj.copyright[0][1] -%}
-                    <a href="{{ obj.copyright[0][1] }}" target="_blank">
-                    {%- endif -%}
-                        {{ obj.copyright[0][0] }}
-                    {%- if obj.copyright[0][1] -%}
-                    </a>
-                    {%- endif -%}
-                </span>
-                {% endif %}
-            </figcaption>
-        </figure>
-    {%- endif %}
-{%- endmacro %}
+{% macro image(image, loop) %}
+    {% include 'zeit.web.site:templates/inc/article-image.tpl' with context %}
+{% endmacro %}
 
 {% macro intertitle(intertitle) -%}
     <h2 class="article__subheading article__item">
