@@ -8,7 +8,7 @@
 				</span>
 				<span class="lightbox-content__text">
 					<span class="show-set-user">Ihr Benutzername
-					{0} wurde angelegt.<br></span> 
+					<strong>{0}</strong> wurde angelegt.<br></span>
 					Kommentare neuer Nutzer werden von uns
 					vor der Veröffentlichung <a
 					href="{{"http://xml.zeit.de/administratives/2010-03/netiquette" | create_url }}">geprüft</a>.
