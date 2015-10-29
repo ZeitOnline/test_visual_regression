@@ -359,8 +359,13 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                         premoderation.children( '.lightbox' ).show();
                         premoderation.find( '.lightbox-button' ).on( 'click', function() {
                             premoderation.detach();
-                            $form.find( '.comment-form__textarea' ).val( '' );
-                            $form.find( '.button' ).prop( 'disabled', false );
+                            if ( response.response.setUser ) {
+                                window.location.hash = '#comment-form';
+                                window.location.reload();
+                            } else {
+                                $form.find( '.comment-form__textarea' ).val( '' );
+                                $form.find( '.button' ).prop( 'disabled', false );
+                            }
                         });
                         $( '#comments' ).before( premoderation );
                     } else {
