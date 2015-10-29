@@ -69,7 +69,7 @@ $icon-color--hover: $zon-charcoal
 .logo_bar__menu
 	display: inline-block
 	width: $zon-bar-height-phablet
-	border-left: 1px solid $zon_light_grey
+	border-left: 1px solid $color-border
 	+respond-min($break-tablet-min)
 		display: none
 	a
@@ -213,8 +213,8 @@ $icon-color--hover: $zon-charcoal
 			&:nth-child(n+4)
 				display: none
 			&:nth-child(2)
-				border-left: 1px solid $zon_light_grey
-				border-right: 1px solid $zon_light_grey
+				border-left: 1px solid $color-border
+				border-right: 1px solid $color-border
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style($width: auto)
 		+order(20)
@@ -254,7 +254,7 @@ $icon-color--hover: $zon-charcoal
 .search__input
 	background-color: $white
 	border-radius: $micro 0 0 $micro
-	border: 1px solid $zon_light_grey
+	border: 1px solid $color-border
 	border-right: none
 	color: $zon_grey
 	float: left
@@ -283,7 +283,7 @@ $icon-color--hover: $zon-charcoal
 .search__button
 	background-color: $white
 	border-radius: 0 $micro $micro 0
-	border: 1px solid $zon_light_grey
+	border: 1px solid $color-border
 	display: inline-block
 	float: left
 	height: $zon-search-square-size
@@ -369,7 +369,7 @@ $icon-color--hover: $zon-charcoal
 		+columns(3)
 	+respond-min($break-tablet-min)
 		+columns(auto)
-		border-bottom: 1px solid $zon_light_grey
+		border-bottom: 1px solid $color-border
 		display: block
 		font-size: $font-s
 		padding: 0
@@ -399,7 +399,7 @@ $icon-color--hover: $zon-charcoal
 .primary-nav__link:hover,
 .primary-nav__link--current
 	+respond-min($break-tablet-min)
-		box-shadow: inset 0 -3px 0 0 $zon_light_grey
+		box-shadow: inset 0 -3px 0 0 $color-border
 
 
 .primary-nav__item--featured
@@ -445,7 +445,7 @@ $icon-color--hover: $zon-charcoal
 	+respond-min($break-tablet-min)
 		box-shadow: 0 $micro $thin rgba(0,0,0,0.05)
 		background: $white
-		border: 1px solid $zon_light_grey
+		border: 1px solid $color-border
 		left: -$fine
 		min-width: $mediumhuge
 		padding-left: 0
@@ -467,7 +467,7 @@ $icon-color--hover: $zon-charcoal
 					background-color: $gainsboro
 			&--has-label
 				background-color: #FAFAF3
-				border-top: 1px solid #CCC
+				border-top: 1px solid $color-border
 		// dropdowns can contain dropdowns
 		.dropdown
 			box-shadow: none
