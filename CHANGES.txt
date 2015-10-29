@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - MAINT: Fix bumpy chronological article navigation
 
+- FIX: Deduplicate AutomaticAreas
+
 
 2.19 (2015-10-28)
 -----------------

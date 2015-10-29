@@ -18,6 +18,10 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
     _hits = zeit.cms.content.property.ObjectPathProperty(
         '.hits', zope.schema.Int(required=False))
 
+    def __init__(self, context):
+        super(Gallery, self).__init__(context)
+        self.page_called = {}
+
     @property
     def count_to_replace_duplicates(self):
         return self.MINIMUM_COUNT_TO_REPLACE_DUPLICATES + (
@@ -59,7 +63,11 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
             # Rewind to page 1
             return 1
 
-    def _query_centerpage(self):
-        result = super(Gallery, self)._query_centerpage()
-        self._hits = len(result)
-        return result[(self.page - 1) * self.count:self.page * self.count]
+    def _extract_newest(self, content):
+        if not self.page_called.get(self.page, False):
+            for i in range(0, (self.page * len(self.context.values())) - 1):
+                teaser = super(Gallery, self)._extract_newest(content)
+            self.page_called[self.page] = True
+            return teaser
+
+        return super(Gallery, self)._extract_newest(content)
