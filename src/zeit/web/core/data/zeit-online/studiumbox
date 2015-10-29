@@ -79,6 +79,9 @@
                 </container>
 			</region>
 			<region area="id-ec39599c-34a4-467b-9417-663d76bd3d94" kind="minor">
+				<container cp:__name__="id-c7d8c666-9f68-4a29-8ce9-2cf09a68340a" cp:type="cpextra" module="printbox">
+					<cp_extra id="printbox"/>
+				</container>
 			</region>
 		</cluster>
 	</body>
