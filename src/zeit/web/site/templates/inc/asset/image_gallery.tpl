@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/asset/image_article.tpl" -%}
+{%- extends "zeit.web.site:templates/inc/asset/image_linked.tpl" -%}
 
 {% set module_layout = 'gallery' %}
 
@@ -6,5 +6,6 @@
 
 {% block media_caption_content %}
     <span class="figure__index">{{ index | hide_none }}</span>
+    <span class="figure__text">{{ image.caption | hide_none }}</span>
     {{ super() }}
 {% endblock %}
