@@ -34,27 +34,41 @@ define( [ 'jquery' ], function( $ ) {
             }
 
             var data = [],
+                href,
                 type = 'text',
                 teasertype = '',
-                $article = $element.closest( 'article' ),
+                element = $element.get( 0 ),
+                $article = $element.closest( 'article, aside' ),
                 $area = $element.closest( '.cp-area' ),
                 articleClasses = $article.get( 0 ).className.split( ' ' );
-            if ( $element.get( 0 ).className.indexOf( 'button' ) !== -1 ) {
+
+            if ( element.className.indexOf( 'button' ) !== -1 ) {
                 type = 'button';
             } else if ( $element.closest( 'figure' ).length ) {
                 type = 'image';
             }
+
             teasertype += $article.data( 'clicktracking' ) ? $article.data( 'clicktracking' ) + '-' : '';
             teasertype += articleClasses[0];
+
+            if ( element.type === 'submit' ) {
+                href = element.form.action;
+            } else if ( element.action ) {
+                href = element.action;
+            } else {
+                href = $element.attr( 'href' );
+            }
+
             data = [
                 getBreakpoint(),
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // region bzw. verortung
                 $area.index() + 1, // area bzw. reihe
-                $area.find( 'article' ).index( $article ) + 1, // module bzw. spalte
+                $area.find( 'article, aside' ).index( $article ) + 1, // module bzw. spalte
                 teasertype, // subreihe
                 type, // bezeichner (image, button, text)
-                $element.attr( 'href' ) // url
+                href // url
             ];
+
             return formatTrackingData( data );
         },
         /**
@@ -267,18 +281,21 @@ define( [ 'jquery' ], function( $ ) {
             ];
             trackingData = formatTrackingData( data );
 
-            window.wt.sendinfo({
-                linkId: trackingData,
-                sendOnUnload: 1
-            });
-
+            if ( debugMode ) {
+                console.debug( trackingData );
+            } else {
+                window.wt.sendinfo({
+                    linkId: trackingData,
+                    sendOnUnload: 1
+                });
+            }
         });
     },
     debugMode = document.location.search.indexOf( 'webtrekk-clicktracking-debug' ) > -1;
 
     return {
         init: function() {
-            if ( typeof window.ZMO === 'undefined' || typeof window.wt === 'undefined' ) {
+            if ( typeof window.ZMO === 'undefined' || ( typeof window.wt === 'undefined' && !debugMode ) ) {
                 return;
             }
             /**
@@ -292,7 +309,11 @@ define( [ 'jquery' ], function( $ ) {
             var trackingLinks = {
                     main: [
                         '.main',
-                        'article a:not([data-wt-click])'
+                        [
+                         'article a:not([data-wt-click])',
+                         'aside a:not([data-wt-click])',
+                         'aside input[type="submit"]'
+                        ].join()
                     ],
                     useDataId: [
                         [
@@ -304,7 +325,6 @@ define( [ 'jquery' ], function( $ ) {
                          '.section-heading',
                          '.snapshot__media',
                          '#servicebox',
-                         '.print-box',
                          '.breaking-news-banner',
                          '.article-lineage'
                         ].join(),
@@ -332,6 +352,11 @@ define( [ 'jquery' ], function( $ ) {
             // exceptions and extra cases
             $( '*[data-tracking]' ).on( 'click', {
                 funcName: 'useDataTracking'
+            }, clickTrack );
+
+            // track form submit (on <RETURN>), e.g. studiumbox
+            $( '.main--centerpage' ).on( 'submit', 'aside form', {
+                funcName: 'main'
             }, clickTrack );
 
             registerGlobalTrackingMessageEndpointForVideoPlayer();
