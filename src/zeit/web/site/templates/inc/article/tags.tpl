@@ -1,5 +1,5 @@
 {% if view.ranked_tags | length %}
-    <nav class="article-tags article__item">
+    <nav class="article-tags">
         <h4 class="article-tags__title">Schlagworte</h4>
         <ul class="article-tags__list">
         {% for tag in view.ranked_tags[:6] -%}
