@@ -274,21 +274,6 @@ module.exports = function(grunt) {
                     pngfolder: 'magazin'
                 }
             },
-            website: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= svgmin.website.dest %>',
-                    src: [ '*.svg', '*.png' ],
-                    dest: project.codeDir + 'css/icons'
-                }],
-                options: {
-                    datasvgcss: 'site.data.svg.css',
-                    datapngcss: 'site.data.png.css',
-                    urlpngcss: 'site.fallback.css',
-                    previewhtml: 'site.preview.html',
-                    pngfolder: 'site'
-                }
-            },
             symbols: {
                 files: [{
                     expand: true,
