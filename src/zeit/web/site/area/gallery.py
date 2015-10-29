@@ -63,7 +63,7 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
             # Rewind to page 1
             return 1
 
-    def _extract_newest(self, content):
+    def _extract_newest(self, content, predicate=None):
         # Deduplicate automatic gallery areas for pagination.
         #
         # Since we don't know which areas on previous pages may have been
@@ -74,8 +74,9 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
         # be able to paginate the whole, deduplicated resultset.
         if not self.page_called.get(self.page, False):
             for i in range(0, (self.page * len(self.context.values())) - 1):
-                teaser = super(Gallery, self)._extract_newest(content)
+                teaser = super(Gallery, self)._extract_newest(
+                    content, predicate)
             self.page_called[self.page] = True
             return teaser
 
-        return super(Gallery, self)._extract_newest(content)
+        return super(Gallery, self)._extract_newest(content, predicate)
