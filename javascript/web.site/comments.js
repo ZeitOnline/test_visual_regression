@@ -348,6 +348,26 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
                         // enable submit button again
                         $form.find( '.button' ).prop( 'disabled', false );
+                    } else if ( response.response.premoderation ) {
+                        var premoderation = $( $( '#premoderation-template' ).html().format( response.response.userName ) );
+                        if ( response.response.setUser ) {
+                            premoderation.find( '.show-set-user' ).show();
+                        } else {
+                            premoderation.find( '.show-set-user' ).hide();
+                        }
+                        premoderation.children( '.overlay' ).show();
+                        premoderation.children( '.lightbox' ).show();
+                        premoderation.find( '.lightbox-button' ).on( 'click', function() {
+                            premoderation.detach();
+                            if ( response.response.setUser ) {
+                                window.location.hash = '#comment-form';
+                                window.location.reload();
+                            } else {
+                                $form.find( '.comment-form__textarea' ).val( '' );
+                                $form.find( '.button' ).prop( 'disabled', false );
+                            }
+                        });
+                        $( '#comments' ).before( premoderation );
                     } else {
                         window.location.href = response.location;
                     }

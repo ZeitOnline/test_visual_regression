@@ -38,3 +38,12 @@ def test_newsfeed_should_have_custom_max_age_header(testserver):
         headers={'Host': 'newsfeed.zeit.de'})
 
     assert res.headers.get('Cache-Control') == 'max-age=25'
+
+
+def test_newsfeed_should_concat_supertitle_and_title(testserver):
+    res = requests.get(
+        '%s/index' % testserver.url,
+        headers={'Host': 'newsfeed.zeit.de'})
+
+    xml = lxml.etree.fromstring(res.content)
+    assert xml.xpath('//item/title/text()')[0].startswith('"Der Hobbit": Geht')

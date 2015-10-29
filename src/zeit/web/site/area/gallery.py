@@ -55,6 +55,9 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
     def next_page(self):
         if self.page < self.total_pages:
             return self.page + 1
+        else:
+            # Rewind to page 1
+            return 1
 
     def _query_centerpage(self):
         result = super(Gallery, self)._query_centerpage()
