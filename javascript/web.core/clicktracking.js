@@ -53,8 +53,7 @@ define( [ 'jquery' ], function( $ ) {
 
             if ( element.type === 'submit' ) {
                 href = element.form.action;
-            } else if ( element.action ) {
-                href = element.action;
+                type = sanitizeString( element.value );
             } else {
                 href = $element.attr( 'href' );
             }
@@ -352,11 +351,6 @@ define( [ 'jquery' ], function( $ ) {
             // exceptions and extra cases
             $( '*[data-tracking]' ).on( 'click', {
                 funcName: 'useDataTracking'
-            }, clickTrack );
-
-            // track form submit (on <RETURN>), e.g. studiumbox
-            $( '.main--centerpage' ).on( 'submit', 'aside form', {
-                funcName: 'main'
             }, clickTrack );
 
             registerGlobalTrackingMessageEndpointForVideoPlayer();
