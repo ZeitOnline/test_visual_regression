@@ -4,6 +4,8 @@ Change log for zeit.web
 2.20 (unreleased)
 -----------------
 
+- ZON-2154: Prevent users from recommending their own comments
+
 - ZON-2328: Add premoderation for new users
 
 - ZON-2285: Identify if view is wrapped via user agent
