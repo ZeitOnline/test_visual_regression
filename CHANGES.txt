@@ -4,6 +4,8 @@ Change log for zeit.web
 2.20 (unreleased)
 -----------------
 
+- ZON-2328: Add premoderation for new users
+
 - ZON-2285: Identify if view is wrapped via user agent
 
 - ZON-2206: Handle empty subressort DAV property properly
@@ -11,6 +13,8 @@ Change log for zeit.web
 - MAINT: Fix bumpy chronological article navigation
 
 - ZON-2051: Remove Grunticon from ZON and use SVG sprites
+
+- FIX: Handle multiple child nodes in rawxml CP modules
 
 
 2.19 (2015-10-28)

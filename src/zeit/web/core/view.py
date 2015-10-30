@@ -425,7 +425,7 @@ class Base(object):
     @zeit.web.reify
     def is_wrapped(self):
         try:
-            return ('ZONApp' in self.request.headers.get('user-agent','') or (
+            return ('ZONApp' in self.request.headers.get('user-agent', '') or (
                 self.is_dev_environment and (
                     'app-content' in self.request.query_string)))
         except TypeError:
