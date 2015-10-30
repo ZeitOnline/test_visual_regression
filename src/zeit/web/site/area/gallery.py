@@ -12,6 +12,8 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
     # XXX: this is all very boilerplate-y, but it's get sh*t done
     #      nevertheless: refactoring would be great (aps)
 
+    # XXX I don't think we need to store these in XML; they only live during
+    # one request anyway.
     _hits = zeit.cms.content.property.ObjectPathProperty(
         '.hits', zope.schema.Int(required=False))
     _page = zeit.cms.content.property.ObjectPathProperty(
