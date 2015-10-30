@@ -232,8 +232,8 @@ class PostComment(zeit.web.core.view.Base):
                 response.headers.get('x-premoderation') == 'true')) else False
 
             if premoderation:
-                 self.status.append(
-                     "Comment needs moderation (premoderation state)")
+                self.status.append(
+                    "Comment needs moderation (premoderation state)")
 
             return {
                 'request': {
