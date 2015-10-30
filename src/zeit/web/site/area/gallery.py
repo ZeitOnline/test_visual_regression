@@ -14,8 +14,6 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
 
     # XXX I don't think we need to store these in XML; they only live during
     # one request anyway.
-    _hits = zeit.cms.content.property.ObjectPathProperty(
-        '.hits', zope.schema.Int(required=False))
     _page = zeit.cms.content.property.ObjectPathProperty(
         '.page', zope.schema.Int(required=False))
 
@@ -27,17 +25,6 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
     def count_to_replace_duplicates(self):
         return self.MINIMUM_COUNT_TO_REPLACE_DUPLICATES + (
             (self.page - 1) * self.count)
-
-    @property
-    def hits(self):
-        if self._hits is None:
-            self.values()
-        return self._hits or 0
-
-    @hits.setter
-    def hits(self, value):
-        if self._hits is None:
-            self._hits = value
 
     @property
     def page(self):
