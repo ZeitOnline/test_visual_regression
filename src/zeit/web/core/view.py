@@ -763,7 +763,7 @@ class Content(Base):
         return {
             'show': (self.comments_allowed or self.comments),
             'show_comment_form': (self.comments_loadable and (
-                self.comments_allowed)),
+                self.comments_allowed) and not user_blocked),
             'show_meta': not self.community_maintenance['active'] and (
                 bool(self.comments)) and self.comments_loadable,
             'show_comments': not self.community_maintenance['active'] and (

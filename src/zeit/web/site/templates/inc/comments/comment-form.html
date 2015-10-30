@@ -1,3 +1,4 @@
+{% if view.comment_area.show_comment_form %}
 {% set pid = view.request.GET['pid'] | d(None) %}
 
 {%- if pid and view.comments -%}
@@ -122,3 +123,9 @@
     </form>
 {%- endif %}
 </script>
+{% elif view.comment_area.user_blocked %}
+	<div class="comment-section__error comment-section__item">	
+		<span>Leider sind Sie für die Teilnahme an der Community
+gesperrt.</span>
+	</div>
+{% endif %}

@@ -1,5 +1,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
+{#
 	<pre>
 	SHOW: {{ view.comment_area.show }}
 	SHOW_META: {{ view.comment_area.show_meta }}
@@ -10,6 +11,7 @@
 	WARNING: {{ view.comment_area.warning }}
 	USER_Blocked: {{ view.comment_area.user_blocked }}
 	</pre>
+#}
 {% if view.comment_area.show %}
 <section class="comment-section" id="comments">
 	<h3 class="visually-hidden">Kommentare</h3>
@@ -124,13 +126,11 @@
 		    {% set esi_source = '{}/comment-form?pid={}'.format(view.content_url, view.request.GET.pid) %}
 		{% endif %}
 	{% endif %}
-	{% if view.comment_area.show_comment_form %}
-		{{ lama.insert_esi(esi_source, 'Kommentarformular konnte nicht geladen werden', view.is_dev_environment) }}
+	{{ lama.insert_esi(esi_source, 'Kommentarformular konnte nicht geladen werden', view.is_dev_environment) }}
 		<script type="text/template" id="js-report-success-template">
 			<div class="comment-form__response--success">
 				Danke! Ihre Meldung wird an die Redaktion weitergeleitet.
 			</div>
 		</script>
-	{% endif %}
 </section>
 {% endif %}
