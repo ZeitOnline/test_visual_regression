@@ -80,6 +80,18 @@ $fix-mqs-h: false !default;
 	}
 }
 
+@mixin respond-min-resolution($resolution) {
+	@if not $fix-mqs {
+		@media
+			only screen and (-webkit-min-device-pixel-ratio: $resolution),
+			only screen and (        min-device-pixel-ratio: $resolution),
+			only screen and (                min-resolution: 96dpi * $resolution),
+			only screen and (                min-resolution: 1dppx * $resolution) {
+				@content;
+		}
+	}
+}
+
 $old-ie: false !default;
 
 @mixin old-ie {

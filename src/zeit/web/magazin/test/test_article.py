@@ -6,8 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait
 import mock
 
-from zeit.content.article.article import Article
-from zeit.cms.checkout.helper import checked_out
+import zeit.content.article.article
 import zeit.cms.interfaces
 
 import zeit.web.core.interfaces
@@ -29,7 +28,7 @@ def test_ipages_contains_blocks(application):
   </body>
 </article>
 """)
-    article = Article(xml)
+    article = zeit.content.article.article.Article(xml)
     pages = zeit.web.core.interfaces.IPages(article)
     assert 2 == len(pages)
     assert 'foo bar\n' == str(list(pages[0])[0])
@@ -511,12 +510,10 @@ def test_gallery_should_have_click_counter_functions(testserver, testbrowser):
 def test_nextread_teaser_block_has_teasers_available(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
     nextread = zeit.web.core.interfaces.INextread(context)
-    assert hasattr(nextread, '__iter__'), \
-        'The nextread block should be iterable.'
-    assert len(nextread) == 1, \
-        '"Artikel 09" has exactly one nextread.'
-    assert all(map(lambda a: isinstance(a, Article), nextread)), \
-        'All nextread teasers should be articles.'
+    assert hasattr(nextread, '__iter__'), 'Nextread block should be iterable.'
+    assert len(nextread) == 1, '"Artikel 09" has exactly one nextread.'
+    func = lambda a: isinstance(a, zeit.content.article.article.Article)
+    assert all(map(func, nextread)), 'All nextread teasers should be articles.'
 
 
 def test_nextread_teaser_blocks_has_correct_layout_id(application):

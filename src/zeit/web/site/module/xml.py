@@ -10,7 +10,7 @@ class RawXML(zeit.web.site.module.Module, list):
     @zeit.web.reify
     def xml(self):
         try:
-            xml = self.context.xml.find('raw[@alldevices="true"]/*')
+            xml = self.context.xml.xpath('raw[@alldevices="true"]/*')
             return ''.join(map(lxml.etree.tostring, xml))
         except:
             return ''
