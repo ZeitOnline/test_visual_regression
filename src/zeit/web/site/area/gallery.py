@@ -61,12 +61,33 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
         # Therefore we need to memorize all previous pages and reiterate
         # through all areas on each request, regardless of the current page, to
         # be able to paginate the whole, deduplicated resultset.
-        if not self.page_called.get(self.page, False):
-            for i in range(0, (self.page * len(self.context.values())) - 1):
+        #
+        # Please wear your neo glasses.
+
+        if not self.page_called.get(self._page, False):
+            for i in range(0, (self._page * len(self.context.values())) - 1):
                 teaser = super(Gallery, self)._extract_newest(
                     content, predicate)
-            self.page_called[self.page] = True
-            self._hits = len(self.context.values()) + 2
+                if teaser is None:
+                    # Last page processing
+                    #
+                    # When our area list is exhausted, we have to start over
+                    # again. Unfortunately this implies that the last page may
+                    # contain all items from the first one, since we get to
+                    # know whether there are no areas left, when we actually
+                    # have reached the end of the list.
+                    # => duplicated content?
+                    self._rewind_page_processing()
+                    teaser = super(Gallery, self)._extract_newest(
+                        content, predicate)
+            self.page_called[self._page] = True
             return teaser
 
         return super(Gallery, self)._extract_newest(content, predicate)
+
+    def _rewind_page_processing(self):
+        self._page = 1
+        self._v_retrieved_content = 0
+        self._v_try_to_retrieve_content = True
+        self.next_page = 2
+        self.page_called = {}
