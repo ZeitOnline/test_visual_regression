@@ -69,8 +69,24 @@
 
 %teaser-kicker--zmo
 	color: $black
+	font-size: em(15px)
 	font-weight: normal
+	letter-spacing: .1em
+	line-height: 1.2
+
+%teaser-kicker--zmo-parquet
+	@extend %teaser-kicker--zmo
+	font-size: em(13px)
 	letter-spacing: .06em
+
+%teaser-kicker-logo--zmo
+	background-color: rgba(25,25,25,0.7)
+	border-radius: 3px
+	color: $white
+	height: remify(18px)
+	margin-right: remify(4px)
+	vertical-align: bottom
+	width: remify(31px)
 
 %teaser-combined-link
 	color: inherit
