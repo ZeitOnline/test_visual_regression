@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - MAINT: Fix bumpy chronological article navigation
 
+- FIX: Handle multiple child nodes in rawxml CP modules
+
 
 2.19 (2015-10-28)
 -----------------
