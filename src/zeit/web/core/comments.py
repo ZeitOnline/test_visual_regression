@@ -123,6 +123,7 @@ def comment_to_dict(comment):
 
     # TODO: Catch name and cid unavailabilty in element tree.
     return dict(
+        uid=comment.xpath('author/@id')[0].lstrip('uid-'),
         in_reply=in_reply,
         img_url=picture_url,
         userprofile_url=profile_url,

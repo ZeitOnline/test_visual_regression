@@ -1444,6 +1444,17 @@ def test_partnerbox_job_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.pa-dropdown__option')) == 9
 
 
+def test_studiumbox_is_displayed_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/studiumbox')
+
+    box = browser.cssselect('.studiumbox')[0]
+    assert len(box.cssselect('.studiumbox__label'))
+    assert len(box.cssselect('.studiumbox__container'))
+    assert len(box.cssselect('.studiumbox__headline')) == 3
+    assert len(box.cssselect('.studiumbox__content')) == 3
+    assert len(box.cssselect('.studiumbox__button')) == 3
+
+
 def test_zett_parquet_is_rendering(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
 

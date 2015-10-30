@@ -1,10 +1,20 @@
 Change log for zeit.web
 =======================
 
-2.20 (unreleased)
+2.21 (unreleased)
 -----------------
 
+- FIX: Handle ressorts with umlauts (during ad-nextread lookup)
+
+- ZON-2154: Prevent users from recommending their own comments
+
+- ZON-2324: Add Studiumbox
+
 - ZON-2327: Implement Jobbox with Dropdown
+
+
+2.20 (2015-10-30)
+-----------------
 
 - ZON-2328: Add premoderation for new users
 
