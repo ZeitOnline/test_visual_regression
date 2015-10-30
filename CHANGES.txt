@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.21 (unreleased)
+2.21 (2015-10-30)
 -----------------
 
 - FIX: Handle ressorts with umlauts (during ad-nextread lookup)
