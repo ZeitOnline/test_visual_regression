@@ -4,7 +4,6 @@ import zope.schema
 
 import zeit.cms.content.property
 import zeit.content.cp.automatic
-import zeit.content.cp.interfaces
 
 
 @zeit.web.register_area('gallery')
@@ -52,7 +51,7 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
     def page(self, value):
         self._page = value
 
-    @zeit.web.reify
+    @property
     def next_page(self):
         return self.page + 1
 
@@ -93,5 +92,4 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
         self.page = 1
         self._v_retrieved_content = 0
         self._v_try_to_retrieve_content = True
-        self.next_page = 2
         self.page_called = {}
