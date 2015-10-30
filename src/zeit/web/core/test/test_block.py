@@ -313,3 +313,9 @@ def test_find_nextread_from_correct_ressort_if_subressort_has_same_name(
         application):
     folder = zeit.web.core.block.find_nextread_folder('Deutschland', 'Meinung')
     assert 'deutsch' in list(folder.values())[0].title
+
+
+def test_find_nextread_does_not_break_on_umlauts(application):
+    # Assert nothing raised
+    zeit.web.core.block.find_nextread_folder(
+        u'Deutschländ', u'Datenschütz')
