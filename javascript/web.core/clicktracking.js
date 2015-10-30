@@ -52,7 +52,7 @@ define( [ 'jquery' ], function( $ ) {
             teasertype += articleClasses[0];
 
             if ( element.type === 'submit' ) {
-                href = element.form.action;
+                href = element.form.action + '?' + $( element.form ).serialize();
                 type = sanitizeString( element.value );
             } else {
                 href = $element.attr( 'href' );
@@ -180,17 +180,19 @@ define( [ 'jquery' ], function( $ ) {
         }
     },
     formatTrackingData = function( trackingData ) {
-        var url = trackingData.pop();
+        var url = trackingData.pop(),
+            slug = trackingData.join( '.' );
+
         if ( url ) {
             url = url.replace( /http(s)?:\/\//, '' );
 
-            // For sharing links, we want to preserve the GET parameters.
+            // For some links, we want to preserve the GET parameters.
             // Otherwise, remove them!
-            if ( typeof trackingData[1] !== 'string' || trackingData[1].indexOf( '.social.' ) === -1 ) {
+            if ( !/\.(social|studiumbox)\./.test( slug ) ) {
                 url = url.split( '?' )[0];
             }
         }
-        return trackingData.join( '.' ) + '|' + url;
+        return slug + '|' + url;
     },
     /**
      * returns the current breakpoint, and replaces "desktop" with "stationaer"
