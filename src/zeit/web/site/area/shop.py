@@ -1,6 +1,6 @@
-import zope.schema
-
 import zeit.content.cp.interfaces
+
+import zeit.web
 
 
 @zeit.web.register_area('shop')
