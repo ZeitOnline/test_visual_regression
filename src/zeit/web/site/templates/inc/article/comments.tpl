@@ -1,42 +1,50 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-{% if view.comments_allowed or view.comments %}
+	<pre>
+	SHOW: {{ view.comment_area.show }}
+	SHOW_META: {{ view.comment_area.show_meta }}
+	SHOW_COMMENT_FORM: {{ view.comment_area.show_comment_form }}
+	SHOW_COMMENTS: {{ view.comment_area.show_comments }}
+	NO_COMMENTS: {{ view.comment_area.show_comments }}
+	MESSAGE: {{ view.comment_area.message }}
+	WARNING: {{ view.comment_area.warning }}
+	USER_Blocked: {{ view.comment_area.user_blocked }}
+	</pre>
+{% if view.comment_area.show %}
 <section class="comment-section" id="comments">
 	<h3 class="visually-hidden">Kommentare</h3>
 	<div class="comment-section__head comment-section__item">
-	{% if view.comments %}
-		<span class="comment-section__headline">
+	{% if view.comment_area.show_meta %}
+	<span class="comment-section__headline">
 			{{ view.comments.headline }}
 			{% if view.comments.pages.title %}
 			<small>{{ view.comments.pages.title }}</small>
 			{% endif %}
 		</span>
-		{% if view.comments_allowed %}
+		{% if view.show_comment_form %}
 		<a href="#comment-form" class="comment-section__button button js-scroll">
 			Kommentieren
 		</a>
 		{% endif %}
-	{% elif not view.comments_loadable %}
-		<span class="comment-section__headline">
-			<span class="nowrap">Ein technischer Fehler ist aufgetreten:</span>
-			<span class="nowrap">Die Kommentare zu diesem Artikel konnten nicht geladen werden.</span>
-			<span class="nowrap">Bitte entschuldigen Sie diese Störung.</span>
-		</span>
-	{% else %}
+	{% elif view.comment_area.no_comments %}
 		<span class="comment-section__headline">
 			<span class="nowrap">Noch keine Kommentare.</span>
 			<span class="nowrap">Diskutieren Sie mit.</span>
 		</span>
+	{% else %}
+		<span class="comment-section__headline">
+			<span class="nowrap">Kommentare</span>
+		</span>
 	{% endif %}
 	</div>
 
-	{% if view.community_maintenance.scheduled %}
+	{% if view.comment_area.warning  %}
 	<div class="comment-section__error comment-section__item">	
-		<span>{{ view.community_maintenance.text_scheduled }}</span>
+		<span>{{ view.comment_area.message }}</span>
 	</div>
 	{% endif %}
-
-	{% if view.comments %}
+	
+	{% if view.comment_area.show_comments %}
 	<div class="comment-preferences">
 		<div class="comment-preferences__container">
 			{# funky future feature?
@@ -116,13 +124,13 @@
 		    {% set esi_source = '{}/comment-form?pid={}'.format(view.content_url, view.request.GET.pid) %}
 		{% endif %}
 	{% endif %}
-	{{ lama.insert_esi(esi_source, 'Kommentarformular konnte nicht geladen werden', view.is_dev_environment) }}
-
-	<script type="text/template" id="js-report-success-template">
-		<div class="comment-form__response--success">
-			Danke! Ihre Meldung wird an die Redaktion weitergeleitet.
-		</div>
-	</script>
-
+	{% if view.comment_area.show_comment_form %}
+		{{ lama.insert_esi(esi_source, 'Kommentarformular konnte nicht geladen werden', view.is_dev_environment) }}
+		<script type="text/template" id="js-report-success-template">
+			<div class="comment-form__response--success">
+				Danke! Ihre Meldung wird an die Redaktion weitergeleitet.
+			</div>
+		</script>
+	{% endif %}
 </section>
 {% endif %}

@@ -137,4 +137,8 @@ def get_community_user_info(request):
         elif 'roles' not in key:
             elements = elements[0]
         user_info[key] = elements
+
+    if user_info.get('roles') and len(user_info.get('roles')) == 1:
+        roles = user_info['roles'][:]
+        user_info['blocked'] = (roles.pop() == "anonymous user")
     return user_info

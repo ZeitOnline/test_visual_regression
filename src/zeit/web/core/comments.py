@@ -292,7 +292,7 @@ def _community_maintenance_cache(unique_id=None):
         'end': None,
         'text_scheduled': (u'Aufgrund von Wartungsarbeiten sind die '
                            u'Kommentarfunktionen in Kürze vorübergehend '
-                           u'nicht mehr verfügbar. Wir bitten um Ihr '
+                           u'nicht verfügbar. Wir bitten um Ihr '
                            u'Verständnis.'),
         'text_active': (u'Aufgrund von Wartungsarbeiten sind die '
                         u'Kommentarfunktionen vorübergehend '
