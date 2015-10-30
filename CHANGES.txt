@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2238: Allow duplicate hiding in automatic gallery area
 
+- ZON-606: Add community states
+
 
 2.18 (2015-10-26)
 -----------------
