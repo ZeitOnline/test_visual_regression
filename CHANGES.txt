@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2324: Add Studiumbox
 
+- ZON-2327: Implement Jobbox with Dropdown
+
 
 2.20 (2015-10-30)
 -----------------

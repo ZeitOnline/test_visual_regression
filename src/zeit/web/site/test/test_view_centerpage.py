@@ -1427,6 +1427,23 @@ def test_jobbox_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.jobbox__action'))
 
 
+def test_partnerbox_job_is_displayed_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/partnerbox-jobs')
+
+    # in main area
+    box = browser.cssselect('.partnerbox')[0]
+    assert len(box.cssselect('.partnerbox__label'))
+    assert len(box.cssselect('.partner__action'))
+    assert len(box.cssselect('.partner__intro'))
+    assert len(box.cssselect('.p-kicker--jobs'))
+    assert len(box.cssselect('.p-kicker__img'))
+    assert len(box.cssselect('.p-kicker__text'))
+    assert len(box.cssselect('.pa-dropdown'))
+    assert len(box.cssselect('.pa-button'))
+    assert len(box.cssselect('.pa-link'))
+    assert len(box.cssselect('.pa-dropdown__option')) == 9
+
+
 def test_studiumbox_is_displayed_correctly(testbrowser):
     browser = testbrowser('/zeit-online/studiumbox')
 
