@@ -7,6 +7,7 @@
 			<a itemprop="url" role="img" href="http://{{ view.request.host }}/index" title="Nachrichten auf ZEIT ONLINE" data-id="topnav.2.1..logo">
 				{# Metatag to show Google the image, see http://stackoverflow.com/questions/18130827/schema-org-give-a-div-a-itemprop-image -#}
 				<meta itemprop="logo" content="http://{{ view.request.host }}/static/icons/zon-logo-desktop.png">
+				<meta itemprop="name" content="ZEIT ONLINE">
                 {{ lama.use_svg_icon('logo-zon-black', 'logo_bar__brand-logo', view.request) }}
 			</a>
 		</{{ tag_name }}>
