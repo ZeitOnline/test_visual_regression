@@ -1,0 +1,167 @@
+.studiumbox
+	margin: $vertical-space 0
+
+	&__label
+		@extend %ad-label
+		+respond-min($break-phablet-min)
+			text-align: left
+
+	&__container
+		+clearfix
+		background-color: #f9f9f9
+		margin: 0 (-$page-padding)
+
+	&__headline
+		background-color: $zon_lighter_grey
+		font-size: em(14px)
+		letter-spacing: $zon-letter-spacing-m
+		line-height: 1.22
+		margin: 0
+		padding: remify(16px) $page-padding
+		position: relative
+		text-transform: uppercase
+		// fake border, hopefully a simple solution for the "border-margin"
+		&:before
+			background-color: $zon_light_grey
+			content: ""
+			height: 1px
+			left: 0
+			margin: remify(0 20px)
+			position: absolute
+			right: 0
+			top: 0
+		&:first-child:before
+			content: none
+		.verbose
+			display: none
+		a
+			color: $zon-charcoal
+			&:after
+				+font-smoothing
+				background-color: $zon_mid_grey
+				border-radius: 3px
+				color: $white
+				content: none
+				font-family: sans-serif
+				font-size: remify(16px)
+				font-weight: 100
+				line-height: 1
+				margin-left: remify(10px)
+				padding: 0 .22em
+
+	&__content
+		padding: remify(32px 20px 40px 70px)
+		position: relative
+		&:before
+			background: transparent url("../../images/studium-box-icons_54w.png") 0 0 no-repeat
+			background-size: cover
+			content: ""
+			height: remify(54px)
+			left: remify(10px)
+			position: absolute
+			top: remify(22px)
+			width: remify(54px)
+			+respond-min-resolution(1.5)
+				background-image: url("../../images/studium-box-icons_108w.png")
+
+	&__title
+		font-size: em(18px)
+		letter-spacing: $zon-letter-spacing-m
+		line-height: 1.22
+		margin: 0
+
+	&__text
+		color: $zon_grey
+		font-size: em(14px)
+		letter-spacing: $zon-letter-spacing-s
+		margin: 1em 0 1.5em
+
+	&__input
+		background-color: $zon-alto
+		margin: 1.5em 0 1em
+		width: 100%
+
+	&__button
+		+zon-button-red($margin: remify(0 16px 0 0))
+
+	&__link
+		border-bottom: 1px solid rgba($zon-charcoal, .4)
+		color: rgba($zon-charcoal, .8)
+		display: inline-block
+		font-size: em(15px)
+		letter-spacing: $zon-letter-spacing-s
+		margin-top: remify(16px)
+		white-space: nowrap
+		+on-interaction
+			border-bottom-color: rgba($zon-charcoal, .8)
+			color: $zon-charcoal
+
+#studium-interessenstest
+	&:before
+		background-position: 0 0
+#studiengangssuche
+	&:before
+		background-position: 0 50%
+#hochschulranking
+	&:before
+		background-position: 0 100%
+
+.js
+	.studiumbox__headline
+		clear: left
+		a
+			color: $zon_mid_grey
+			&:after
+				content: "\002B"
+			+on-interaction
+				color: $zon-charcoal
+				&:after
+					background-color: $zon-charcoal
+		&--active
+			a
+				color: $zon-charcoal
+				&:after
+					content: none
+
+	.studiumbox__content
+		display: none
+		&--active
+			display: block
+
++respond-max($break-phablet-min)
+	.no-js .studiumbox__headline:before,
+	.studiumbox__content--active + .studiumbox__headline:before
+		content: none
+
++respond-min($break-phablet-min)
+	.studiumbox__container
+		margin: 0
+		padding: remify(0 20px)
+
+	.studiumbox__headline
+		background-color: transparent
+		clear: both
+		float: left
+		padding: remify(16px 0)
+		width: 38%
+		&:before
+			margin: 0
+		.concise
+			display: none
+		.verbose
+			display: inline
+		.js & a:after
+			content: none
+
+	.studiumbox__content
+		padding-bottom: remify(20px)
+		padding-top: remify(16px)
+		clear: right
+		float: right
+		width: 62%
+		&:before
+			top: remify(10px)
+		.js &--active
+			display: none
+		.js &--clone
+			display: block
