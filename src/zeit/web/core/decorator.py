@@ -16,11 +16,10 @@ import zeit.web.core.jinja
 
 
 __all__ = [
-    'reify', 'register_copyrights', 'register_area', 'register_module',
-    'register_filter', 'register_ctxfilter', 'register_envfilter',
-    'register_evalctxfilter', 'register_global', 'register_ctxfunc',
-    'register_envfunc', 'register_evalctxfunc', 'register_test',
-]
+    'reify', 'register_area', 'register_module', 'register_filter',
+    'register_ctxfilter', 'register_envfilter', 'register_evalctxfilter',
+    'register_global', 'register_ctxfunc', 'register_envfunc',
+    'register_evalctxfunc', 'register_test']
 
 
 log = logging.getLogger(__name__)
@@ -113,20 +112,6 @@ register_ctxfunc = JinjaEnvRegistrator('globals', 'contextfunction')
 register_envfunc = JinjaEnvRegistrator('globals', 'environmentfunction')
 register_evalctxfunc = JinjaEnvRegistrator('globals', 'evalcontextfunction')
 register_test = JinjaEnvRegistrator('tests')
-
-
-def register_copyrights(func):
-    """A decorator that registers all teaser image copyrights it finds in the
-    teaser container the decorated method (or property) returns.
-    """
-    def wrapped(self):
-        container = func(self)
-        if container:
-            for t in zeit.web.core.interfaces.ITeaserSequence(container):
-                if t.image:
-                    self._copyrights.setdefault(t.image.image_group, t.image)
-        return container
-    return wrapped
 
 
 class NestedAttributeError(StandardError):
