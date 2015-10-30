@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.20 (unreleased)
+2.21 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.20 (2015-10-30)
 -----------------
 
 - ZON-2328: Add premoderation for new users
