@@ -54,20 +54,17 @@
 		@extend %teaser-bar__figurewrapper
 
 	&__text
-		border-top: 1px solid $zon_light_grey
+		border-top: 1px solid $color-border
 		color: $zon-charcoal
 		font-size: remify(16px)
 		letter-spacing: $zon-letter-spacing-s
 		line-height: 1.2
 		margin: 0
 		padding-top: remify(10px)
-		// thomaspuppe during the PR of this feature:
-		// since there is no link, we do not show the arrow and hoverState.
-		//&:after
-		//	content: "\0020\25B8" // No-Break Space and ▸ = Black Right-Pointing Small Triangle
-		//
+		&:after
+			content: "\0020\25B8" // No-Break Space and ▸ = Black Right-Pointing Small Triangle
 		+respond-min($break-desktop-min)
 			color: $zon_grey
 			.teaser-shop &
-		//		+on-interaction
-		//			color: $zon-charcoal
+				+on-interaction
+					color: $zon-charcoal

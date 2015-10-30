@@ -29,6 +29,13 @@ require([
     adblockCount.init();
 });
 
+String.prototype.format = function() {
+    var args = arguments;
+    return this.replace( /{(\d+)}/g, function( match, number ) {
+        return typeof args[number] !== 'undefined' ? args[number] : match ;
+    });
+};
+
 // add required jQuery plugins
 // require jQuery first, so we don't have to shim simple plugins
 // plugins that require other plugins or libraries must use the shim config

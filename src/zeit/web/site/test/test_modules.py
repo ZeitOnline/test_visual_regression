@@ -1,6 +1,9 @@
+import lxml.objectify
 import pytest
 
-import zeit.content.cp.interfaces
+import zeit.cms.interfaces
+import zeit.content.cp.centerpage
+import zeit.content.image.interfaces
 
 import zeit.web.site.module.headerimage
 import zeit.web.site.module.xml
@@ -52,3 +55,17 @@ def test_raw_xml_contains_html(rawXml):
     assert 'http://ad-emea.doubleclick.net/clk;265976593;9126704' in rawXml.xml
     assert 'https://premium.zeit.de/?wt_mc=pm.intern.fix.zeitde.' in rawXml.xml
     assert 'https://premium.zeit.de/abo/digitalpaket' in rawXml.xml
+
+
+def test_raw_xml_supports_multiple_nodes(application):
+    cp = zeit.content.cp.centerpage.CenterPage()
+    block = cp['lead'].create_item('xml')
+    block.xml.raw.set('alldevices', 'true')
+    # Setting this up is really finicky, since e.g. lxml nodes answer to list()
+    # by giving out siblings with the same tag, so this is rather carefully
+    # calibrated test content.
+    block.xml.raw.append(lxml.objectify.XML('<p>asdf1</p>'))
+    block.xml.raw.append(lxml.objectify.XML('<div>asdf2</div>'))
+    module = zeit.web.core.template.get_module(block)
+    assert 'asdf1' in module.xml
+    assert 'asdf2' in module.xml

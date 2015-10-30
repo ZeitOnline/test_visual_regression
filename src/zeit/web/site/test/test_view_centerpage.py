@@ -1428,7 +1428,7 @@ def test_jobbox_is_displayed_correctly(testbrowser):
 
 
 def test_partnerbox_job_is_displayed_correctly(testbrowser):
-    browser = testbrowser('/index')
+    browser = testbrowser('/zeit-online/partnerbox-jobs')
 
     # in main area
     box = browser.cssselect('.partnerbox')[0]

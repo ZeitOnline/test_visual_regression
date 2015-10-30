@@ -199,17 +199,21 @@ class PostComment(zeit.web.core.view.Base):
                                ' (with pid {})'.format(method, unique_id, pid))
 
             invalidate_comment_thread(unique_id)
-
+            set_user = False
             if not self.user_name and action == 'comment':
                 if zeit.web.core.security.reload_user_info(self.request) and (
                         'user' in request.session) and (
                             request.session['user']['name']):
                     self.user_name = request.session['user']['name']
+                    set_user = True
+                    self.status.append("User name {} was set".format(
+                        self.user_name))
                 else:
                     raise pyramid.httpexceptions.HTTPInternalServerError(
                         title='No user name found',
                         explanation='Session could not be '
                                     'reloaded with new user_name.')
+
             content = None
             error = None
             if response.content:
@@ -224,6 +228,13 @@ class PostComment(zeit.web.core.view.Base):
                 request.session['last_commented_time'] = (
                     datetime.datetime.utcnow())
 
+            premoderation = True if (response.status_code == 202 and (
+                response.headers.get('x-premoderation') == 'true')) else False
+
+            if premoderation:
+                self.status.append(
+                    "Comment needs moderation (premoderation state)")
+
             return {
                 'request': {
                     'action': action,
@@ -234,7 +245,10 @@ class PostComment(zeit.web.core.view.Base):
                     'content': content,
                     'error': error,
                     'recommendations': recommendations,
-                    'new_cid': self.new_cid}
+                    'new_cid': self.new_cid,
+                    'setUser': set_user,
+                    'userName': self.user_name,
+                    'premoderation': premoderation}
             }
 
         elif response.status_code == 409:

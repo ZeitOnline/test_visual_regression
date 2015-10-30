@@ -1,6 +1,8 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 {% if view.comments_allowed or view.comments %}
+
+{% include "zeit.web.site:templates/inc/comments/premoderation.tpl" %}
 <section class="comment-section" id="comments">
 	<h3 class="visually-hidden">Kommentare</h3>
 	<div class="comment-section__head comment-section__item">

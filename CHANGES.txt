@@ -1,16 +1,38 @@
 Change log for zeit.web
 =======================
 
-2.19 (unreleased)
+2.20 (unreleased)
 -----------------
 
 - ZON-2327: Implement Jobbox with Dropdown
+
+- ZON-2328: Add premoderation for new users
+
+- ZON-2285: Identify if view is wrapped via user agent
+
+- ZON-2206: Handle empty subressort DAV property properly
+
+- MAINT: Fix bumpy chronological article navigation
+
+- FIX: Handle multiple child nodes in rawxml CP modules
+
+
+2.19 (2015-10-28)
+-----------------
+
+- MAINT: Reorganize article footer to fix margins and harmonize border-color
 
 - ZON-2168: Link-Object teaser should point to target URL
 
 - ZON-2167: Return correctly spelled ressort names to app wrapper
 
 - ZON-2238: Allow duplicate hiding in automatic gallery area
+
+- ZON-2342: ZEIT Shop Follow-Up
+
+- ZON-2336: Prefix newsfeed item title with supertitle
+
+- FIX: Make Jobbox square in 50/50
 
 
 2.18 (2015-10-26)
@@ -23,6 +45,8 @@ Change log for zeit.web
 - FIX: Make Jobbox more failsave and multi instance ready
 
 - FIX: Ignore image variants with unavailable parent groups
+
+- FIX: Make Jobbox more failsave and multi instance ready
 
 
 2.17 (2015-10-22)
