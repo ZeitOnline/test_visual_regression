@@ -68,7 +68,7 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
         # Please wear your neo glasses.
 
         if not self.page_called.get(self.page, False):
-            for i in range(0, (self.page * len(self.context.values())) - 1):
+            for i in range(0, (self.page * self.context.count) - 1):
                 teaser = super(Gallery, self)._extract_newest(
                     content, predicate)
                 if teaser is None:
