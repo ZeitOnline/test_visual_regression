@@ -1,5 +1,3 @@
-import math
-
 import pyramid.threadlocal
 
 import zope.schema
