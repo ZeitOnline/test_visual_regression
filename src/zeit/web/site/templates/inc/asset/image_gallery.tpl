@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/asset/image_linked.tpl" -%}
+{%- extends "zeit.web.site:templates/inc/asset/image.tpl" -%}
 
 {% set module_layout = 'gallery' %}
 
