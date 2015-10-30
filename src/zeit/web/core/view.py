@@ -759,10 +759,13 @@ class Content(Base):
         if self.request.session.get('user'):
             user_blocked = self.request.session['user'].get('blocked')
 
+        accept_new_comments = self.context.commentsAllowed
+
         return {
             'show': (self.comments_allowed or self.comments),
             'show_comment_form': (self.comments_loadable and (
-                self.comments_allowed) and not user_blocked),
+                self.comments_allowed) and not user_blocked and (
+                    accept_new_comments)),
             'show_meta': not self.community_maintenance['active'] and (
                 bool(self.comments)) and self.comments_loadable,
             'show_comments': not self.community_maintenance['active'] and (
@@ -772,7 +775,8 @@ class Content(Base):
                 not self.comments_loadable) or (
                 self.community_maintenance['scheduled'])),
             'message': message,
-            'user_blocked': user_blocked
+            'user_blocked': user_blocked,
+            'accept_new_comments': accept_new_comments
         }
 
 

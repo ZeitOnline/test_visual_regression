@@ -123,6 +123,14 @@
     </form>
 {%- endif %}
 </script>
+{% elif not view.comment_area.accept_new_comments %}
+	<div class="comment-section__head comment-section__item">
+		<span class="comment-section__headline">
+			<span class="nowrap">Der Kommentarbereich dieses Artikels ist geschlossen.</span>
+			<span class="nowrap">Wir bitten um Ihr Verständnis.</span>
+		</span>
+	</div>
+
 {% elif view.comment_area.user_blocked %}
 	<div class="comment-section__error comment-section__item">	
 		<span>Leider sind Sie für die Teilnahme an der Community
