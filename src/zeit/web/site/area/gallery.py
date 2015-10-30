@@ -8,6 +8,9 @@ import zeit.content.cp.automatic
 
 @zeit.web.register_area('gallery')
 class Gallery(zeit.content.cp.automatic.AutomaticArea):
+    """Area that paginates in a cycle (i.e. when you reached the last page, it
+    begins from the first page again).
+    """
 
     # XXX: this is all very boilerplate-y, but it's get sh*t done
     #      nevertheless: refactoring would be great (aps)
@@ -61,14 +64,6 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
                 teaser = super(Gallery, self)._extract_newest(
                     content, predicate)
                 if teaser is None:
-                    # Last page processing
-                    #
-                    # When our area list is exhausted, we have to start over
-                    # again. Unfortunately this implies that the last page may
-                    # contain all items from the first one, since we get to
-                    # know whether there are no areas left, when we actually
-                    # have reached the end of the list.
-                    # => duplicated content?
                     self._rewind_page_processing()
                     teaser = super(Gallery, self)._extract_newest(
                         content, predicate)
