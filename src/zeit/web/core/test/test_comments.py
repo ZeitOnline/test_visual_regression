@@ -426,13 +426,12 @@ def test_post_comment_should_get_with_correct_arguments(
         response.content = ''
         mock_method.return_value = response
         poster.post_comment()
-
     expected = sorted(result[1]['data'].items(), key=operator.itemgetter(1))
+    assert result[0] in dict(mock_method.call_args_list)
     actual = sorted(
-        mock_method.call_args_list[0][1]['data'].items(),
+        dict(mock_method.call_args_list).get(result[0])['data'].items(),
         key=operator.itemgetter(1))
     assert actual == expected
-    assert result[0] == mock_method.call_args_list[0][0]
 
 
 @pytest.mark.parametrize("path, comment, pid, action, result", [
