@@ -21,7 +21,7 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
 
     def __init__(self, context):
         super(Gallery, self).__init__(context)
-        self.page_called = {}
+        self.skipped_previous_pages = False
 
     @property
     def count_to_replace_duplicates(self):
@@ -69,7 +69,7 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
         #
         # Please wear your neo glasses.
 
-        if not self.page_called.get(self.page, False):
+        if not self.skipped_previous_pages:
             for i in range(0, (self.page * self.context.count) - 1):
                 teaser = super(Gallery, self)._extract_newest(
                     content, predicate)
@@ -85,7 +85,7 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
                     self._rewind_page_processing()
                     teaser = super(Gallery, self)._extract_newest(
                         content, predicate)
-            self.page_called[self.page] = True
+            self.skipped_previous_pages = True
             return teaser
 
         return super(Gallery, self)._extract_newest(content, predicate)
@@ -94,4 +94,4 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
         self.page = 1
         self._v_retrieved_content = 0
         self._v_try_to_retrieve_content = True
-        self.page_called = {}
+        self.skipped_previous_pages = False
