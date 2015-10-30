@@ -1437,6 +1437,7 @@ def test_studiumbox_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.studiumbox__content')) == 3
     assert len(box.cssselect('.studiumbox__button')) == 3
 
+
 def test_zett_parquet_is_rendering(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
 
