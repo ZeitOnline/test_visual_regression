@@ -4,13 +4,11 @@ Change log for zeit.web
 2.21 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2324: Add Studiumbox
 
 
 2.20 (2015-10-30)
 -----------------
-
-- ZON-2324: Add Studiumbox
 
 - ZON-2328: Add premoderation for new users
 
