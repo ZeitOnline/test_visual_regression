@@ -29,16 +29,20 @@
                     {%- block teaser_kicker %}
                     {% set kicker_class = '%s__kicker' | format(self.layout()) %}
                     {% set is_zmo_teaser = provides(teaser, 'zeit.magazin.interfaces.IZMOContent') %}
-                    {% set is_zmo_parquet = area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent') -%}
+                    {% set is_zmo_parquet = area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent') %}
+                    {% set is_zett_content = provides(teaser, 'zeit.content.link.interfaces.ILink') and teaser.url.startswith('http://ze.tt') -%}
                     <span class="{{ kicker_class | with_mods(
                         journalistic_format,
                         area.kind if area.kind == 'spektrum',
                         'zmo' if is_zmo_teaser and not is_zmo_parquet,
-                        'zmo-parquet' if is_zmo_parquet
+                        'zmo-parquet' if is_zmo_parquet,
+                        'zett' if is_zett_content
                     )}}">{% if is_zmo_teaser and not is_zmo_parquet %}
                             {% block kicker_logo scoped %}
                             {{ lama.use_svg_icon('logo-zmo-zm', kicker_class + '-logo--zmo', request) }}
                             {%- endblock %}
+                        {% elif is_zett_content %}
+                            {{ lama.use_svg_icon('logo-zett-small', kicker_class + '-logo--zett', request) }}
                         {%- endif -%}
                         {{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
                     {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">:</span>{% endif %}
