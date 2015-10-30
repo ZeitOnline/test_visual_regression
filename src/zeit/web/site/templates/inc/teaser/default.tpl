@@ -26,12 +26,21 @@
                 <a class="{{ self.layout() }}__combined-link"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }} - {{ teaser.teaserTitle or teaser.title | hide_none }}"
                    href="{{ teaser | create_url }}">
-                    {% block teaser_kicker %}
-                    <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(
+                    {%- block teaser_kicker %}
+                    {% set kicker_class = '%s__kicker' | format(self.layout()) %}
+                    {% set is_zmo_teaser = provides(teaser, 'zeit.magazin.interfaces.IZMOContent') %}
+                    {% set is_zmo_parquet = area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent') -%}
+                    <span class="{{ kicker_class | with_mods(
                         journalistic_format,
                         area.kind if area.kind == 'spektrum',
-                        'zmo' if area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent')
-                    ) }}">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
+                        'zmo' if is_zmo_teaser and not is_zmo_parquet,
+                        'zmo-parquet' if is_zmo_parquet
+                    )}}">{% if is_zmo_teaser and not is_zmo_parquet %}
+                            {% block kicker_logo scoped %}
+                            {{ lama.use_svg_icon('logo-zmo-zm', kicker_class + '-logo--zmo', request) }}
+                            {%- endblock %}
+                        {%- endif -%}
+                        {{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
                     {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">:</span>{% endif %}
                     {% endblock %}
                     {% block teaser_title %}
