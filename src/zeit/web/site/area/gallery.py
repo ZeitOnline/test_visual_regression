@@ -21,6 +21,9 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
     def __init__(self, context):
         super(Gallery, self).__init__(context)
         self.page_called = {}
+        # Will have to mess with the page number for last page processing,
+        # which we cannot do with self.page directly.
+        self._page = self.page
 
     @property
     def count_to_replace_duplicates(self):
@@ -46,22 +49,8 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
             return 1
 
     @zeit.web.reify
-    def total_pages(self):
-        try:
-            if self.hits + self.count > 0:
-                return int(math.ceil(float(self.hits) / float(self.count)))
-            else:
-                return 0
-        except TypeError:
-            return 0
-
-    @zeit.web.reify
     def next_page(self):
-        if self.page < self.total_pages:
-            return self.page + 1
-        else:
-            # Rewind to page 1
-            return 1
+        return self.page + 1
 
     def _extract_newest(self, content, predicate=None):
         # Deduplicate automatic gallery areas for pagination.
