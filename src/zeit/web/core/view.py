@@ -745,7 +745,7 @@ class Content(Base):
     def comment_area(self):
         message = ''
         if self.community_maintenance['active']:
-            message =  self.community_maintenance['text_active']
+            message = self.community_maintenance['text_active']
         elif not self.comments_loadable:
             message = (u'Ein technischer Fehler ist aufgetreten. '
                        u'Die Kommentare zu diesem Artikel konnten '

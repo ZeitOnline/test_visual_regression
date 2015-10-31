@@ -516,4 +516,3 @@ def invalidate_maintenance(request):
         'community_maintenance',
         unique_id)
     return pyramid.response.Response('OK', 200)
-
