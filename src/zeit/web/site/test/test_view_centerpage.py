@@ -1052,16 +1052,16 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
 
     condition = expected_conditions.text_to_be_present_in_element((
         By.CSS_SELECTOR, '.teaser-gallery__title'),
-        'Das hab ich auf dem Schirm')
+        'Automesse Detroit 2014 US-Hersteller')
     assert WebDriverWait(driver, 5).until(condition), (
         'New teasers not loaded within 5 seconds')
 
     new_teaser_links = driver.find_elements_by_css_selector(
         '.teaser-gallery__combined-link')
     assert new_teaser_links[0].get_attribute('href').endswith(
-        '/galerien/fs-desktop-schreibtisch-computer')
-    assert new_teaser_links[1].get_attribute('href').endswith(
         '/galerien/bg-automesse-detroit-2014-usa')
+    assert new_teaser_links[1].get_attribute('href').endswith(
+        '/zeit-online/gallery/england-meer-strand-menschen-fs')
     assert teaserbutton.get_attribute('data-sourceurl').endswith('?p=2')
 
 
