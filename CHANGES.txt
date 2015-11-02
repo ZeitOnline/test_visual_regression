@@ -4,7 +4,9 @@ Change log for zeit.web
 2.22 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-606: Add community states
+
+- FIX: Deduplicate Automatic Gallery Areas
 
 
 2.21 (2015-10-30)
