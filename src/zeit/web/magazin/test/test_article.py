@@ -512,7 +512,10 @@ def test_nextread_teaser_block_has_teasers_available(application):
     nextread = zeit.web.core.interfaces.INextread(context)
     assert hasattr(nextread, '__iter__'), 'Nextread block should be iterable.'
     assert len(nextread) == 1, '"Artikel 09" has exactly one nextread.'
-    func = lambda a: isinstance(a, zeit.content.article.article.Article)
+
+    def func(a):
+        return isinstance(a, zeit.content.article.article.Article)
+
     assert all(map(func, nextread)), 'All nextread teasers should be articles.'
 
 
