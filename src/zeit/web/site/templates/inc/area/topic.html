@@ -10,12 +10,12 @@
 
 		{% include "zeit.web.site:templates/inc/asset/image_zon-topic.tpl" %}
 		{% include "zeit.web.site:templates/inc/teaser/zon-topic-main.tpl" %}
-		<aside class="teaser-topic-list">
+		<div class="teaser-topic-list">
 		{% for module in area.values()[0:3] -%}
 			{% set teaser = module | first_child %}
 			{% include "zeit.web.site:templates/inc/teaser/zon-topic-list.tpl" %}
 		{% endfor %}
-		</aside>
+		</div>
 	</section>
 {% endblock %}
 
