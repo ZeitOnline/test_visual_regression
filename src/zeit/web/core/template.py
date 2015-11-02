@@ -198,14 +198,6 @@ def substring_from(string, find):
 
 
 @zeit.web.register_filter
-def hide_none(string):
-    if string is None:
-        return ''
-    else:
-        return string
-
-
-@zeit.web.register_filter
 def get_layout(block, request=None):
     # Calculating the layout of a cp block can be slightly more expensive in
     # zeit.web, since we do lookups in some vocabularies, to change the layout,

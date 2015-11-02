@@ -4,7 +4,7 @@
     <div class="header__metadata">
     {%- if view.is_hp and view.topic_links | length -%}
         <div class="header__tags">
-            <span class="header__tags__label">{{ view.topic_links.title | hide_none }}</span>
+            <span class="header__tags__label">{{ view.topic_links.title }}</span>
             {% for label, link in view.topic_links %}
             <a href="{{ link }}" class="header__tags__link" data-id="topnav.article-tag.{{ loop.index }}..{{ label | format_webtrekk }}">{{ label }}</a>
             {% endfor %}

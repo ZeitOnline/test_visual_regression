@@ -24,7 +24,7 @@
             <ul class="footer-{{ class }}__list">
                 {% if section.text -%}
                 <li class="footer-{{ class }}__item footer-{{ class }}__item--label">
-                    {{ section.text | hide_none }}
+                    {{ section.text }}
                 </li>
                 {%- endif %}
 

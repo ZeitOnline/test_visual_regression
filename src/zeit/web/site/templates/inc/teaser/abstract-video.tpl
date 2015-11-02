@@ -17,10 +17,10 @@
                 {% endblock playbutton %}
                 <h2 class="{{ self.layout() }}-title">
                     <span class="{{ self.layout() }}-title__kicker">
-                        {{ teaser.supertitle | hide_none }}
+                        {{ teaser.supertitle }}
                     </span>
                     <span class="{{ self.layout() }}-title__title">
-                        {{ teaser.teaserTitle | hide_none }}
+                        {{ teaser.teaserTitle }}
                     </span>
                     {% block inlineplaybutton %}
                         {{ lama.playbutton('inline', teaser.videoDuration) }}

@@ -12,8 +12,8 @@
 		{%- endif -%}
 		<div class="{{ self.layout() }}__container">
 			<h2 class="{{ self.layout() }}__heading">
-				<span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
-				<span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
+				<span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
+				<span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
 			</h2>
 			<div class="{{ self.layout() }}__metadata">
                 {{ cp.include_teaser_datetime(teaser, self.layout(), self.layout()) }}

@@ -4,7 +4,7 @@
     {%- elif kind == 'teaser-storystream' -%}
         {%- set time = teaser | mod_date | format_timedelta(days=3) -%}
     {%- else -%}
-        {%- set time = get_delta_time_from_article(teaser) | hide_none -%}
+        {%- set time = get_delta_time_from_article(teaser) -%}
     {%- endif -%}
 
     {%- if time -%}

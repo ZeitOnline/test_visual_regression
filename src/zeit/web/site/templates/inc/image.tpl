@@ -22,15 +22,15 @@
     {% endfor %}
 {% endif %}
 
-<figure class="{% block mediablock %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class | hide_none }} scaled-image" {{ copyright_itemscope | hide_none}}>
+<figure class="{% block mediablock %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image" {{ copyright_itemscope }}>
     <!--[if gt IE 8]><!-->
     <noscript data-src="{{ fallback_source }}">
     <!--<![endif]-->
         <div class="{% block mediablock_helper %}{{ module_layout }}__media-container{% endblock %} {{ media_container_additional_class or '' }}">
             {% block mediablock_wrapper %}
-            <img class="{% block mediablock_item %}{{ module_layout }}__media-item{% endblock %}" alt="{{ image.attr_title | hide_none }}" src="{{ fallback_source }}" data-src="{{ source }}" data-ratio="{{ image.ratio | hide_none }}" data-variant="{{ image.image_pattern | hide_none }}"{% if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %} {% block mediablock_additional_data_attributes %}{% endblock %}>
+            <img class="{% block mediablock_item %}{{ module_layout }}__media-item{% endblock %}" alt="{{ image.attr_title }}" src="{{ fallback_source }}" data-src="{{ source }}" data-ratio="{{ image.ratio }}" data-variant="{{ image.image_pattern }}"{% if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %} {% block mediablock_additional_data_attributes %}{% endblock %}>
             {% endblock %}
-            {{ media_container_after | hide_none }}
+            {{ media_container_after }}
 
             {% if copyright_item_values and copyright_item_values[0] %}
                 <span itemprop="copyrightHolder" class="figureCopyrightHidden">
