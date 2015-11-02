@@ -197,7 +197,14 @@ class Image(zeit.web.core.image.BaseImage):
         self.attr_title = None
         self.attr_alt = None
 
-        self.layout = model_block.layout
+        self.layout = layout = model_block.layout
+
+        if layout.display_mode == 'large':
+            self.figure_mods = ('wide', 'rimless', 'apart')
+        elif layout.display_mode == 'float':
+            self.figure_mods = ('marginalia',)
+        else:
+            self.figure_mods = ()
 
         # TODO: don't use XML but adapt an Image and use it's metadata
         if model_block.xml is not None:
@@ -209,9 +216,7 @@ class Image(zeit.web.core.image.BaseImage):
 
             self.align = model_block.xml.get('align')
             self.href = model_block.xml.get('href')
-            self.caption = bu
-            self.attr_title = bu
-            self.attr_alt = bu
+            self.caption = self.title = self.alt = bu
             cr = model_block.xml.find('copyright')
             if cr is not None:
                 rel = cr.attrib.get('rel', '') == 'nofollow'

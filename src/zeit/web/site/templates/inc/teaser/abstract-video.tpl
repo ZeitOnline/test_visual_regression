@@ -9,7 +9,7 @@
         <div class="{{ self.layout() }}__container">
             {% block teaser_media_position_before_title %}
                 {% set image = get_image(module, teaser, default='wide') %}
-                {% include "zeit.web.site:templates/inc/teaser_asset/image_{}.tpl".format(self.layout()) ignore missing %}
+                {% include "zeit.web.site:templates/inc/asset/image_{}.tpl".format(self.layout()) ignore missing %}
             {% endblock %}
             <div class="{{ self.layout() }}__inner">
                 {% block playbutton %}

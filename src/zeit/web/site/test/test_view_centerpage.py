@@ -1478,10 +1478,10 @@ def test_imagecopyright_tags_are_not_displayed_on_centerpages(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
-    copyright = driver.find_elements_by_class_name('figureCopyrightHidden')
-    assert copyright[0].is_displayed() is False, 'copyright is not displayed'
-    assert copyright[1].is_displayed() is False, 'copyright is not displayed'
-    assert copyright[2].is_displayed() is False, 'copyright is not displayed'
+    copyright = driver.find_elements_by_class_name('figcaption--hidden')
+    assert copyright[0].is_displayed() is False
+    assert copyright[1].is_displayed() is False
+    assert copyright[2].is_displayed() is False
 
 
 def test_imagecopyright_link_is_present_on_centerpages(testbrowser):

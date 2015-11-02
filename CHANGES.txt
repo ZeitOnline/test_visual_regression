@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - MAINT: Plug in jinja finalizer to hide `None` expressions
 
+- MAINT: Replace deprecated Bitblt with new image handling
+
 
 2.21 (2015-10-30)
 -----------------
