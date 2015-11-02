@@ -37,13 +37,14 @@
                         'zmo' if is_zmo_teaser and not is_zmo_parquet,
                         'zmo-parquet' if is_zmo_parquet,
                         'zett' if is_zett_content
-                    )}}">{% if is_zmo_teaser and not is_zmo_parquet %}
-                            {% block kicker_logo scoped %}
+                        )}}">
+                        {% block kicker_logo scoped -%}
+                        {%- if is_zmo_teaser and not is_zmo_parquet %}
                             {{ lama.use_svg_icon('logo-zmo-zm', kicker_class + '-logo--zmo', request) }}
-                            {%- endblock %}
-                        {% elif is_zett_content %}
+                        {%- elif is_zett_content %}
                             {{ lama.use_svg_icon('logo-zett-small', kicker_class + '-logo--zett', request) }}
-                        {%- endif -%}
+                        {%- endif %}
+                        {%- endblock -%}
                         {{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
                     {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">:</span>{% endif %}
                     {% endblock %}

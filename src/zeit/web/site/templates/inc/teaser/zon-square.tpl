@@ -6,6 +6,11 @@
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
     {% include "zeit.web.site:templates/inc/teaser_asset/{}_zon-square.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
+    {% if provides(teaser, 'zeit.content.link.interfaces.ILink') and teaser.url.startswith('http://ze.tt') %}
+        {% block kicker_logo %}
+        {% endblock %}
+        {{ lama.use_svg_icon('logo-zett-small', 'teaser-square__kicker-logo--zett', request) }}
+    {% endif %}
 {% endblock %}
 
 {% block teaser_journalistic_format %}
