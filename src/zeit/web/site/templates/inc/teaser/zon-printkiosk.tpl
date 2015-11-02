@@ -5,11 +5,8 @@
 
 {% block teaser_media_position_before_title %}
 	{% set module_layout = self.layout() %}
-
-	{# OPTIMIZE: Figcaption would be better than this wrapper.
-	   But JS fills the whole <figure> when loading an image.#}
-	<div class="{{ self.layout() }}__figurewrapper">
-		{% include "zeit.web.site:templates/inc/teaser_asset/imagegroup.tpl" %}
+	<div class="{{ module_layout }}__figurewrapper">
+		{% include "zeit.web.site:templates/inc/teaser_asset/imagegroup_printkiosk.tpl" %}
 	</div>
 {% endblock %}
 
