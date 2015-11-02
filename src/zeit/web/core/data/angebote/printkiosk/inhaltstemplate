@@ -76,10 +76,10 @@
       <region area="informatives" visible="True" visible_mobile="True" hide-dupes="True"/>
     </cluster>
     <cluster area="teaser-mosaic" visible="True" visible_mobile="True"/>
-    <title>Inhaltstemplate: »ZEIT Shop«-Bühne</title>
+    <title>Inhaltstemplate: Printbanderole</title>
   </body>
   <feed/>
   <teaser>
-    <title>Inhaltstemplate: »ZEIT Shop«-Bühne</title>
+    <title>Inhaltstemplate: Printbanderole</title>
   </teaser>
 </centerpage>
