@@ -20,7 +20,7 @@
 				{% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
 				{% if comments -%}
 					<span class="{{ self.layout() }}__commentcount">
-						{{- comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') -}}
+						{{ comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') }}
 					</span>
 				{%- endif %}
 			</div>

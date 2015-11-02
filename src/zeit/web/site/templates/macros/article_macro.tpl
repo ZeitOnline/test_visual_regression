@@ -187,7 +187,7 @@
 {% macro citation(obj) -%}
     <figure class="quote article__item">
         <blockquote class="quote__text">
-            {{- obj.text -}}
+            {{ obj.text }}
         </blockquote>
         {% if obj.attribution %}
             <figcaption class="quote__source">
