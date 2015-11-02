@@ -1,8 +1,28 @@
 Change log for zeit.web
 =======================
 
-2.20 (unreleased)
+2.22 (unreleased)
 -----------------
+
+- ZON-606: Add community states
+
+
+2.21 (2015-10-30)
+-----------------
+
+- FIX: Handle ressorts with umlauts (during ad-nextread lookup)
+
+- ZON-2154: Prevent users from recommending their own comments
+
+- ZON-2324: Add Studiumbox
+
+- ZON-2327: Implement Jobbox with Dropdown
+
+
+2.20 (2015-10-30)
+-----------------
+
+- ZON-2328: Add premoderation for new users
 
 - ZON-2285: Identify if view is wrapped via user agent
 
@@ -10,7 +30,7 @@ Change log for zeit.web
 
 - MAINT: Fix bumpy chronological article navigation
 
-- ZON-2051: Remove Grunticon from ZON and use SVG sprites
+- FIX: Handle multiple child nodes in rawxml CP modules
 
 
 2.19 (2015-10-28)

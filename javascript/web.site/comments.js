@@ -348,6 +348,26 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
                         // enable submit button again
                         $form.find( '.button' ).prop( 'disabled', false );
+                    } else if ( response.response.premoderation ) {
+                        var premoderation = $( $( '#premoderation-template' ).html().format( response.response.userName ) );
+                        if ( response.response.setUser ) {
+                            premoderation.find( '.show-set-user' ).show();
+                        } else {
+                            premoderation.find( '.show-set-user' ).hide();
+                        }
+                        premoderation.children( '.overlay' ).show();
+                        premoderation.children( '.lightbox' ).show();
+                        premoderation.find( '.lightbox-button' ).on( 'click', function() {
+                            premoderation.detach();
+                            if ( response.response.setUser ) {
+                                window.location.hash = '#comment-form';
+                                window.location.reload();
+                            } else {
+                                $form.find( '.comment-form__textarea' ).val( '' );
+                                $form.find( '.button' ).prop( 'disabled', false );
+                            }
+                        });
+                        $( '#comments' ).before( premoderation );
                     } else {
                         window.location.href = response.location;
                     }
@@ -494,12 +514,18 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         if ( uid ) {
             // highlight recommended comments for logged in user
             $commentsBody.find( '.js-recommend-comment' ).each( function() {
-                var fans = this.getAttribute( 'data-fans' );
+                if ( uid === this.getAttribute( 'data-uid' ) ) {
+                    // hide recommendation link for user's own comments
+                    this.style.display = 'none';
+                } else {
+                    // highlight recommended comments for logged in user
+                    var fans = this.getAttribute( 'data-fans' );
 
-                fans = fans.length ? fans.split( ',' ) : [];
+                    fans = fans.length ? fans.split( ',' ) : [];
 
-                if ( fans.indexOf( uid ) !== -1 ) {
-                    toggleRecommendationLink( $( this ) );
+                    if ( fans.indexOf( uid ) !== -1 ) {
+                        toggleRecommendationLink( $( this ) );
+                    }
                 }
             });
 

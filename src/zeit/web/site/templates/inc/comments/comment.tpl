@@ -62,7 +62,12 @@
 				{{ lama.use_svg_icon('comment-report', 'comment__icon comment__icon-report', request) }}
 				<span class="comment__action">Melden</span>
 			</a>
-			<a class="comment__reaction js-recommend-comment" data-cid="{{ comment.cid }}" data-fans="{{ comment.fans }}" href="{{ view.request | append_get_params(action='recommend', pid=comment.cid) }}#cid-{{ comment.cid }}" title="Empfehlen">
+			<a class="comment__reaction js-recommend-comment"
+			   data-cid="{{ comment.cid }}"
+			   data-fans="{{ comment.fans }}"
+			   data-uid="{{ comment.uid }}"
+			   href="{{ view.request | append_get_params(action='recommend', pid=comment.cid) }}#cid-{{ comment.cid }}"
+			   title="Empfehlen">
 				{{ lama.use_svg_icon('comment-recommend', 'comment__icon comment__icon-recommend', request) }}
 				<span class="comment__action">Empfehlen</span>
 			</a>

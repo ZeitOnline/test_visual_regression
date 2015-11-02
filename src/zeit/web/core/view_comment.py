@@ -89,6 +89,7 @@ class PostComment(zeit.web.core.view.Base):
         comment = params.get('comment')
         action = params.get('action')
         user_name = params.get('username')
+        unique_id = 'http://xml.zeit.de/{}'.format(self.path)
 
         self.handle_comment_locking(request, action)
 
@@ -137,12 +138,17 @@ class PostComment(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPBadRequest(
                 title='No report could be posted',
                 explanation=('Pid and comment needed.'))
-        elif action == 'recommend' and not pid:
-            raise pyramid.httpexceptions.HTTPBadRequest(
-                title='No recommondation could be posted',
-                explanation=('Pid needed.'))
+        elif action == 'recommend':
+            if not pid:
+                raise pyramid.httpexceptions.HTTPBadRequest(
+                    title='No recommondation could be posted',
+                    explanation=('Pid needed.'))
+            commenter = self._get_commenter_id(unique_id, pid)
+            if commenter == uid:
+                raise pyramid.httpexceptions.HTTPBadRequest(
+                    title='No recommondation could be posted',
+                    explanation=('Own comments must not be recommended.'))
 
-        unique_id = 'http://xml.zeit.de/{}'.format(self.path)
         nid = self._nid_by_comment_thread(unique_id)
         action_url = self._action_url(action, self.path)
 
@@ -199,17 +205,21 @@ class PostComment(zeit.web.core.view.Base):
                                ' (with pid {})'.format(method, unique_id, pid))
 
             invalidate_comment_thread(unique_id)
-
+            set_user = False
             if not self.user_name and action == 'comment':
                 if zeit.web.core.security.reload_user_info(self.request) and (
                         'user' in request.session) and (
                             request.session['user']['name']):
                     self.user_name = request.session['user']['name']
+                    set_user = True
+                    self.status.append("User name {} was set".format(
+                        self.user_name))
                 else:
                     raise pyramid.httpexceptions.HTTPInternalServerError(
                         title='No user name found',
                         explanation='Session could not be '
                                     'reloaded with new user_name.')
+
             content = None
             error = None
             if response.content:
@@ -224,6 +234,13 @@ class PostComment(zeit.web.core.view.Base):
                 request.session['last_commented_time'] = (
                     datetime.datetime.utcnow())
 
+            premoderation = True if (response.status_code == 202 and (
+                response.headers.get('x-premoderation') == 'true')) else False
+
+            if premoderation:
+                self.status.append(
+                    "Comment needs moderation (premoderation state)")
+
             return {
                 'request': {
                     'action': action,
@@ -234,7 +251,10 @@ class PostComment(zeit.web.core.view.Base):
                     'content': content,
                     'error': error,
                     'recommendations': recommendations,
-                    'new_cid': self.new_cid}
+                    'new_cid': self.new_cid,
+                    'setUser': set_user,
+                    'userName': self.user_name,
+                    'premoderation': premoderation}
             }
 
         elif response.status_code == 409:
@@ -270,6 +290,12 @@ class PostComment(zeit.web.core.view.Base):
                 return comment['fans'].split(',')
 
         return []
+
+    def _get_commenter_id(self, unique_id, pid):
+        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
+
+        if comment_thread and comment_thread['index'][pid]:
+            return comment_thread['index'][pid]['uid']
 
     def _nid_by_comment_thread(self, unique_id):
         nid = None
@@ -473,3 +499,20 @@ def invalidate(request):
         raise pyramid.httpexceptions.HTTPBadRequest(
             title='Type error',
             explanation='Error: {}'.format(err))
+
+
+@pyramid.view.view_config(route_name='invalidate_community_maintenance')
+def invalidate_maintenance(request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    unique_id = conf.get('community_maintenance')
+    if not unique_id:
+        raise pyramid.httpexceptions.HTTPBadRequest(
+            title='No path given',
+            explanation='A maintenance object is not configured.')
+
+    beaker.cache.region_invalidate(
+        zeit.web.core.comments._community_maintenance_cache,
+        None,
+        'community_maintenance',
+        unique_id)
+    return pyramid.response.Response('OK', 200)

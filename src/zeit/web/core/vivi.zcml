@@ -23,6 +23,7 @@
     <include package="zeit.content.infobox" />
     <include package="zeit.content.portraitbox" />
     <include package="zeit.content.video" />
+    <include package="zeit.content.rawxml" />
     <exclude package="zeit.content.cp.browser" />
     <include package="zeit.content.cp" />
     <include package="zeit.intrafind" />
