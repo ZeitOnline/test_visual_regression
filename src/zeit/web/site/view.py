@@ -112,6 +112,25 @@ class Base(zeit.web.core.view.Base):
         else:
             return 'index,follow,noodp,noydir,noarchive'
 
+    @zeit.web.reify
+    def ressort_literally(self):
+        if self.is_hp:
+            return 'Homepage'
+
+        items = self.navigation.navigation_items
+        try:
+            item = next((items[key].text, key) for key in items.keys() if (
+                        self.ressort in key))
+            if self.sub_ressort != '' and items[item[1]].has_children():
+                items = items[item[1]].navigation_items
+                item = next((items[key].text, key) for key in items.keys() if (
+                            self.sub_ressort in key))
+        except StopIteration:
+            # dirty fallback (for old ressorts not in navigation.xml)
+            return self.sub_ressort.upper() if (
+                self.sub_ressort != '') else self.ressort.upper()
+        return item[0]
+
 
 @pyramid.view.view_config(
     route_name='login_state',

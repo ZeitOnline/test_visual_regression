@@ -136,16 +136,16 @@ class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):
     # Same idea as zeit.cms.content.sources.MasterSlavesource.getTitle()
     def find(self, ressort, subressort):
         tree = self._get_tree()
-        if subressort is None:
+        if not subressort:
             nodes = tree.xpath(
-                '{master_node_xpath}[@{attribute} = {master}]'.format(
+                u'{master_node_xpath}[@{attribute} = {master}]'.format(
                     master_node_xpath=self.master_node_xpath,
                     attribute=self.attribute,
                     master=xml.sax.saxutils.quoteattr(ressort)))
         else:
             nodes = tree.xpath(
-                '{master_node_xpath}[@{attribute} = {master}]'
-                '/{slave_tag}[@{attribute} = {slave}]'.format(
+                u'{master_node_xpath}[@{attribute} = {master}]'
+                u'/{slave_tag}[@{attribute} = {slave}]'.format(
                     master_node_xpath=self.master_node_xpath,
                     attribute=self.attribute,
                     slave_tag=self.slave_tag,

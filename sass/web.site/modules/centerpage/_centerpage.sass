@@ -8,7 +8,7 @@
 .cp-region
 	margin-bottom: $vertical-space
 	padding: 0 $cp-padding
-	border-color: $zon_light_grey
+	border-color: $color-border
 	border-style: solid
 	border-width: 0
 	+pie-clearfix
@@ -22,7 +22,10 @@
 			&:last-child
 				border-bottom-width: 1px
 			+ div:not(.cp-region--parquet)
-				border-top: 1px solid $zon_light_grey
+				border-top: 1px solid $color-border
+	&--gallery
+		background-color: $zon_lighter_grey
+		padding-bottom: remify(40px)
 	// we want a border if grey meets grey
 	&--gallery + &--parquet
 		border-top-width: 1px
@@ -72,7 +75,7 @@
 	// so we have to do all the border styling here, too
 	&--zett
 		background-color: $zon_lighter_grey
-		border-bottom: 1px solid $zon_light_grey
+		border-bottom: 1px solid $color-border
 		margin-top: -1px // "remove" border-top of parent parquet region
 		+respond-min($break-tablet-min)
 			border-bottom-color: $zon_mid_grey
