@@ -1,28 +1,16 @@
 import pyramid.threadlocal
 
-import zope.schema
-
 import zeit.cms.content.property
 import zeit.content.cp.automatic
 
 
 @zeit.web.register_area('gallery')
 class Gallery(zeit.content.cp.automatic.AutomaticArea):
-    """Area that paginates in a cycle (i.e. when you reached the last page, it
-    begins from the first page again).
-    """
-
-    # XXX: this is all very boilerplate-y, but it's get sh*t done
-    #      nevertheless: refactoring would be great (aps)
-
-    # XXX I don't think we need to store these in XML; they only live during
-    # one request anyway.
-    _page = zeit.cms.content.property.ObjectPathProperty(
-        '.page', zope.schema.Int(required=False))
 
     def __init__(self, context):
         super(Gallery, self).__init__(context)
-        self.skipped_previous_pages = False
+        self.skip_previous_pages = True
+        self._page = None
 
     @property
     def count_to_replace_duplicates(self):
@@ -48,32 +36,18 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
         return self.page + 1
 
     def _extract_newest(self, content, predicate=None):
-        # Deduplicate automatic gallery areas for pagination.
+        # Deduplicate automatic gallery area for pagination.
         #
-        # Since we don't know which areas on previous pages may have been
-        # duplicates, we cannot paginate properly after slicing the already
-        # tidied up resultset.
-        # Therefore we need to memorize all previous pages and reiterate
-        # through all areas on each request, regardless of the current page, to
-        # be able to paginate the whole, deduplicated resultset.
-        #
-        # Please wear your neo glasses.
+        # Since we don't know which teasers on previous pages may have been
+        # duplicates, we need to burn through all previous pages and consume
+        # enough valid teasers of the content slice.
 
-        if not self.skipped_previous_pages:
-            for i in range(0, (self.page * self.context.count) - 1):
-                teaser = super(Gallery, self)._extract_newest(
-                    content, predicate)
-                if teaser is None:
-                    self._rewind_page_processing()
-                    teaser = super(Gallery, self)._extract_newest(
-                        content, predicate)
-            self.skipped_previous_pages = True
-            return teaser
+        if self.skip_previous_pages:
+            for _ in range((self.page - 1) * self.context.count):
+                super(Gallery, self)._extract_newest(content, predicate)
+            else:
+                self._v_retrieved_content = 0
+                self._v_try_to_retrieve_content = True
+                self.skip_previous_pages = False
 
         return super(Gallery, self)._extract_newest(content, predicate)
-
-    def _rewind_page_processing(self):
-        self.page = 1
-        self._v_retrieved_content = 0
-        self._v_try_to_retrieve_content = True
-        self.skipped_previous_pages = False
