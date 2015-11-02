@@ -84,7 +84,7 @@ def recursively_call_community(req, tries):
                     'community_user_info.community.reponse_time'):
                 return urllib2.urlopen(req, timeout=2)
         except Exception:
-            return recursively_call_community(req, tries-1)
+            return recursively_call_community(req, tries - 1)
     else:
         return
 
@@ -138,7 +138,7 @@ def get_community_user_info(request):
             elements = elements[0]
         user_info[key] = elements
 
-    if user_info.get('roles') and len(user_info.get('roles')) == 1:
+    if len(user_info.get('roles'), []) == 1:
         roles = user_info['roles'][:]
         user_info['blocked'] = (roles.pop() == "anonymous user")
     return user_info

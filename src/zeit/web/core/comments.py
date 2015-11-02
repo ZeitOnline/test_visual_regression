@@ -310,11 +310,9 @@ def _community_maintenance_cache(unique_id=None):
 
 def _maintenance_from_xml(xml, maintenance):
     for key in maintenance.keys():
-        elem = xml.xpath('/community_maintenance/{}'.format(key))
-        if not elem:
+        elem = (xml.findtext(key) or '').strip()
+        if elem == '':
             continue
-
-        elem = elem[0].text
 
         if not elem or elem.strip() == '':
             elem = maintenance[key]
@@ -333,11 +331,11 @@ def _derive_maintenance_from_schedule(maintenance):
     now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
     override = maintenance['active']
     if maintenance['scheduled'] and maintenance['begin'] and (
-            now-maintenance['begin'] >= datetime.timedelta(0)):
+            now - maintenance['begin'] >= datetime.timedelta(0)):
         maintenance['active'] = True
 
     if not override and maintenance['scheduled'] and maintenance['end'] and (
-            now-maintenance['end'] >= datetime.timedelta(0)):
+            now - maintenance['end'] >= datetime.timedelta(0)):
         maintenance['active'] = False
     return maintenance
 
