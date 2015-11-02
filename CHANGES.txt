@@ -6,11 +6,11 @@ Change log for zeit.web
 
 - ZON-606: Add community states
 
+- FIX: Deduplicate Automatic Gallery Areas
+
 
 2.21 (2015-10-30)
 -----------------
-
-- FIX: Deduplicate Automatic Gallery Areas
 
 - FIX: Handle ressorts with umlauts (during ad-nextread lookup)
 
