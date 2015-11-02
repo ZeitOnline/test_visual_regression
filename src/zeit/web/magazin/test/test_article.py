@@ -513,7 +513,7 @@ def test_nextread_teaser_block_has_teasers_available(application):
     assert hasattr(nextread, '__iter__'), 'Nextread block should be iterable.'
     assert len(nextread) == 1, '"Artikel 09" has exactly one nextread.'
 
-    def func(x):
+    def func(a):
         return isinstance(a, zeit.content.article.article.Article)
 
     assert all(map(func, nextread)), 'All nextread teasers should be articles.'

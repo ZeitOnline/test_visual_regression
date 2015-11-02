@@ -613,8 +613,10 @@ def test_article_view_should_have_short_caching_time_on_unloadable_thread(
     monkeypatch.setattr(zeit.web.core.comments, 'get_thread', get_thread)
     browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
     assert browser.headers.get('cache-control') == 'max-age=5'
-    assert browser.cssselect('.comment-section__headline .nowrap')[0].text == (
-        'Ein technischer Fehler ist aufgetreten:')
+    assert browser.cssselect('.comment-section__error span')[0].text == (
+        u'Ein technischer Fehler ist aufgetreten. Die Kommentare '
+        u'zu diesem Artikel konnten nicht geladen werden. Bitte '
+        u'entschuldigen Sie diese Störung.')
 
     browser = testbrowser('%s/artikel/01' % testserver.url)
     assert browser.headers.get('cache-control') == 'max-age=5'
@@ -728,7 +730,7 @@ def test_community_maintenance_should_be_scheduled_correctly():
 
 def test_community_maintenance_should_be_created_from_config(application):
     maintenance = zeit.web.core.comments.community_maintenance()
-    assert maintenance['active'] == True
+    assert maintenance['active'] == False
     assert maintenance['text_active'] == 'text_active'
 
 

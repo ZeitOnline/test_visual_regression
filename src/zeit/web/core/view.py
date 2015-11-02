@@ -762,9 +762,9 @@ class Content(Base):
         accept_new_comments = self.context.commentsAllowed
 
         return {
-            'show': (self.comments_allowed or self.comments),
+            'show': (self.comments_allowed or bool(self.comments)),
             'show_comment_form': (self.comments_loadable and (
-                self.comments_allowed) and not user_blocked and (
+                self.show_commentthread) and not user_blocked and (
                     accept_new_comments)),
             'show_meta': not self.community_maintenance['active'] and (
                 bool(self.comments)) and self.comments_loadable,
