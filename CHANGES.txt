@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Deduplicate Automatic Gallery Areas
 
+- MAINT: Plug in jinja finalizer to hide `None` expressions
+
 
 2.21 (2015-10-30)
 -----------------
