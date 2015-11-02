@@ -134,45 +134,11 @@
     {% endif -%}
 {%- endmacro %}
 
-
 {% macro use_svg_icon(name, class, request) -%}
     <svg class="svg-symbol {{ class }}" role="img" aria-labelledby="title">
         <use xlink:href="{{ request.asset_host }}/css/web.site/icons.svg#svg-{{ name }}"></use>
     </svg>
 {%- endmacro %}
-
-
-{% macro insert_responsive_image(image, image_class, page_type) %}
-
-    {% set alt = '' %}
-    {% set title = '' %}
-    {% set source = image | default_image_url %}
-
-    {% if image.alt %}
-        {% set alt = image.alt %}
-        {% set title = image.title %}
-    {% elif image.attr_alt %}
-        {% set alt = image.attr_alt %}
-        {% set title = image.attr_title %}
-    {% endif %}
-
-    {% if image %}
-        <!--[if gt IE 8]><!-->
-            <noscript data-src="{{ source }}">
-        <!--<![endif]-->
-        {% if page_type == 'article' and image.href %}
-            <a href="{{ image.href }}">
-        {% endif %}
-                <img alt="{{ alt }}"{% if title %} title="{{ title }}"{% endif %} class="{{ image_class | default('', true) }} figure__media" src="{{ source }}" data-src="{{ source }}" data-ratio="{{ image.ratio }}"{% if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %}>
-        {% if page_type == 'article' and image.href %}
-            </a>
-        {% endif %}
-        <!--[if gt IE 8]><!-->
-            </noscript>
-        <!--<![endif]-->
-    {% endif %}
-{% endmacro %}
-
 
 {% macro insert_esi(src, error_text='', is_dev=False) %}
     {% if is_dev %}

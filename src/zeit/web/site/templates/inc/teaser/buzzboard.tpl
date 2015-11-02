@@ -7,7 +7,7 @@
 {% block teaser_media_position_before_title %}
 	{% if row == 0 %}
 		{% set module_layout = self.layout() %}
-		{% include "zeit.web.site:templates/inc/teaser_asset/{}_buzzboard.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
+		{% include "zeit.web.site:templates/inc/asset/image_buzzboard.tpl" ignore missing %}
 	{% endif %}
 {% endblock %}
 

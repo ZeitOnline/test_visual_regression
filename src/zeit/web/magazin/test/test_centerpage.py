@@ -557,8 +557,8 @@ def test_teaser_image_should_be_created_from_image_group_and_image(
 
     assert teaser_image.caption == 'Die ist der image sub text '
     assert teaser_image.src == img.uniqueId
-    assert teaser_image.attr_alt == 'Die ist der Alttest'
-    assert teaser_image.attr_title == 'Katze!'
+    assert teaser_image.alt == 'Die ist der Alttest'
+    assert teaser_image.title == 'Katze!'
 
 
 def test_get_reaches_from_centerpage_view(application):
