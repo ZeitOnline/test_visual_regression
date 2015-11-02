@@ -499,3 +499,20 @@ def invalidate(request):
         raise pyramid.httpexceptions.HTTPBadRequest(
             title='Type error',
             explanation='Error: {}'.format(err))
+
+
+@pyramid.view.view_config(route_name='invalidate_community_maintenance')
+def invalidate_maintenance(request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    unique_id = conf.get('community_maintenance')
+    if not unique_id:
+        raise pyramid.httpexceptions.HTTPBadRequest(
+            title='No path given',
+            explanation='A maintenance object is not configured.')
+
+    beaker.cache.region_invalidate(
+        zeit.web.core.comments._community_maintenance_cache,
+        None,
+        'community_maintenance',
+        unique_id)
+    return pyramid.response.Response('OK', 200)
