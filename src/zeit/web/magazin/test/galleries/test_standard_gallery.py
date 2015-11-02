@@ -92,7 +92,7 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
         driver.set_window_size(560, 900)
         # driver.save_screenshot(
         #    "/tmp/test_buttons_should_be_visible_on_tap_mobile.png")
-        figselector = ".inline-gallery .figure-full-width:not(.bx-clone)"
+        figselector = ".inline-gallery .slide:not(.bx-clone)"
         figure = driver.find_element_by_css_selector(figselector)
         figure.click()
         bigButtonPrev = driver.find_element_by_css_selector(".bx-overlay-prev")
@@ -147,5 +147,5 @@ def test_standalone_gallery_uses_responsive_images_with_ratio(
         testserver, testbrowser):
     browser = testbrowser('%s/galerien/fs-desktop-schreibtisch-computer' % (
         testserver.url))
-    image = browser.cssselect('div.inline-gallery div.scaled-image')[0]
+    image = browser.cssselect('.inline-gallery .slide')[0]
     assert 'data-ratio="0.743405275779"' in etree.tostring(image)

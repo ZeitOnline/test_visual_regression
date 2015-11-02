@@ -5,7 +5,7 @@
 
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/{}_zon-square.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
+    {% include "zeit.web.site:templates/inc/asset/image_zon-square.tpl" ignore missing %}
 {% endblock %}
 
 {% block teaser_journalistic_format %}

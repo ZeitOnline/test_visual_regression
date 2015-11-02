@@ -19,6 +19,26 @@
     </div>
 {%- endmacro %}
 
+{% macro insert_responsive_image(image, image_class, page_type) %}
+    {# TRASHME: I want to be replace by the new snazzy image.tpl #}
+    {% if image %}
+        {% set source = image | default_image_url %}
+        <!--[if gt IE 8]><!-->
+            <noscript data-src="{{ source }}">
+        <!--<![endif]-->
+        {% if page_type == 'article' and image.href %}
+            <a href="{{ image.href }}">
+        {% endif %}
+                <img alt="{{ image.alt | hide_none }}"{% if image.title %} title="{{ image.title }}"{% endif %} class="{{ image_class | default('', true) }} figure__media" src="{{ source }}" data-src="{{ source }}" data-ratio="{{ image.ratio }}"{% if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %}>
+        {% if page_type == 'article' and image.href %}
+            </a>
+        {% endif %}
+        <!--[if gt IE 8]><!-->
+            </noscript>
+        <!--<![endif]-->
+    {% endif %}
+{% endmacro %}
+
 {% macro sharing_meta(obj, request) -%}
     <meta name="twitter:card" content="{{obj.twitter_card_type}}">
     <meta name="twitter:site" content="@zeitonline">

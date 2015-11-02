@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Deduplicate Automatic Gallery Areas
 
+- MAINT: Replace deprecated Bitblt with new image handling
+
 
 2.21 (2015-10-30)
 -----------------

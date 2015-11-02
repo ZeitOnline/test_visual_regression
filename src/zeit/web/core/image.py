@@ -63,8 +63,6 @@ class Image(BaseImage):
         meta = zeit.content.image.interfaces.IImageMetadata(image, None)
         if meta:
             self.alt = meta.alt
-            self.attr_alt = meta.alt or meta.caption
-            self.attr_title = meta.title or meta.caption
             self.caption = meta.caption
             self.copyright = meta.copyrights
             self.title = meta.title
@@ -87,8 +85,6 @@ class TeaserImage(BaseImage):
         meta = zeit.content.image.interfaces.IImageMetadata(group, None)
         if meta:
             self.alt = meta.alt
-            self.attr_alt = meta.alt or meta.caption
-            self.attr_title = meta.title or meta.caption
             self.caption = meta.caption
             self.copyright = meta.copyrights
             self.title = meta.title
@@ -114,8 +110,6 @@ class VariantImage(object):
         meta = zeit.content.image.interfaces.IImageMetadata(group, None)
         if meta:
             self.alt = meta.alt
-            self.attr_alt = meta.alt or meta.caption
-            self.attr_title = meta.title or meta.caption
             self.caption = meta.caption
             self.copyright = meta.copyrights
             self.title = meta.title
