@@ -62,7 +62,7 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
 def test_inline_gallery_uses_responsive_images_with_ratio(
         testserver, testbrowser):
     browser = testbrowser('%s/artikel/01' % testserver.url)
-    image = browser.cssselect('div.inline-gallery div.scaled-image')[0]
+    image = browser.cssselect('.inline-gallery .slide')[0]
     assert 'data-ratio="1.77914110429"' in lxml.etree.tostring(image)
 
 

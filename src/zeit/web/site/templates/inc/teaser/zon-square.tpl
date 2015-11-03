@@ -5,7 +5,7 @@
 
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/{}_zon-square.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
+    {% include "zeit.web.site:templates/inc/asset/image_zon-square.tpl" ignore missing %}
     {% if provides(teaser, 'zeit.content.link.interfaces.ILink') and teaser.url.startswith('http://ze.tt') %}
         {% block kicker_logo %}
         {% endblock %}
@@ -21,7 +21,7 @@
             <span class="{{ self.layout() }}__series-label">Serie: {{ teaser.serie.serienname }}</span>
         {%- endif %}
     {%- elif teaser.blog %}
-        <span class="{{ self.layout() }}__series-label">Blog: {{ teaser.blog.name | hide_none }}</span>
+        <span class="{{ self.layout() }}__series-label">Blog: {{ teaser.blog.name }}</span>
     {%- endif %}
 {% endblock teaser_journalistic_format %}
 

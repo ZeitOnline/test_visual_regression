@@ -40,7 +40,7 @@
                         window.clickCount.ga( 'hp.zm.slidegallery.showslide.' );
                     }
                 },
-                slideSelector: '.figure-full-width',
+                slideSelector: '.slide',
                 controls: !hasTouch,
                 pagerType: ( hasTouch ) ? 'full' : 'short',
                 nextText: 'Zum nächsten Bild',

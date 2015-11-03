@@ -8,10 +8,10 @@
 					<div class="column-heading__information">
 						<h1 class="column-heading__header" itemprop="headline">
 							<span class="column-heading__kicker">
-								{{ view.serie + ' / ' | hide_none }}
-								{{ view.supertitle | hide_none }}
+								{{ view.serie + ' / ' }}
+								{{ view.supertitle }}
 							</span>{% if view.title %}<span class="article-heading__colon">: </span>{% endif %}
-							<span class="column-heading__title">{{ view.title | hide_none }}</span>
+							<span class="column-heading__title">{{ view.title }}</span>
 						</h1>
 						{% if view.authors %}
 							<div class="column-heading__name" itemscope itemtype="http://schema.org/Person" itemprop="author">
@@ -39,7 +39,7 @@
 		<div class="column-heading__lower">
 			<div class="article__item">
 				<div class="summary" itemprop="description">
-					{{ view.subtitle | hide_none }}
+					{{ view.subtitle }}
 				</div>
 				<div class="metadata metadata--column">
 					{% include "zeit.web.site:templates/inc/article/metadata.tpl" %}

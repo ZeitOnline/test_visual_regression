@@ -138,7 +138,7 @@ def get_community_user_info(request):
             elements = elements[0]
         user_info[key] = elements
 
-    if len(user_info.get('roles'), []) == 1:
+    if len(user_info.get('roles', [])) == 1:
         roles = user_info['roles'][:]
         user_info['blocked'] = (roles.pop() == "anonymous user")
     return user_info
