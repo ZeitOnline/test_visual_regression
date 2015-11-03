@@ -277,6 +277,7 @@ class Application(object):
 
         self.config.commit()
         self.jinja_env = env = self.config.get_jinja2_environment()
+        env.finalize = zeit.web.core.jinja.finalize
         env.trim_blocks = True
 
         default_loader = env.loader

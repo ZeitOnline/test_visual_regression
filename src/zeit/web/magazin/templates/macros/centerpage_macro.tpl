@@ -75,19 +75,19 @@
                 {% if supertitle != 'false' %}
                     <div class="cp_{{block}}__supertitle">
                         {% if teaser.teaserSupertitle %}
-                            {{ teaser.teaserSupertitle | hide_none }}
+                            {{ teaser.teaserSupertitle }}
                         {% elif teaser.supertitle %}
-                            {{ teaser.supertitle | hide_none }}
+                            {{ teaser.supertitle }}
                         {% endif %}
                     </div>
                 {% endif %}
                 <div class="cp_{{block}}__title">
-                    {{ teaser.teaserTitle | hide_none }}
+                    {{ teaser.teaserTitle }}
                 </div>
             </h2>
             {% if subtitle != 'false' %}
                 <span class="cp_{{block}}__subtitle">
-                    {{ teaser.teaserText | hide_none }}
+                    {{ teaser.teaserText }}
                 </span>
             {% endif %}
         </a>

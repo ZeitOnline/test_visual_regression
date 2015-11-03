@@ -3,20 +3,20 @@
     {% set source = (request.image_host + image.path) if image is variant else image | default_image_url %}
     {% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source %}
 
-    <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class | hide_none }} scaled-image" itemscope itemtype="http://schema.org/Photograph">
+    <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image" itemscope itemtype="http://schema.org/Photograph">
         <!--[if gt IE 8]><!-->
         <noscript data-src="{{ fallback_source }}">
         <!--<![endif]-->
-            <div class="{% block media_block_helper %}{{ module_layout }}__media-container{% endblock %} {{ media_container_additional_class | hide_none }}">
+            <div class="{% block media_block_helper %}{{ module_layout }}__media-container{% endblock %} {{ media_container_additional_class }}">
                 {% block media_block_wrapper %}
-                <img class="{% block media_block_item %}{{ module_layout }}__media-item{% endblock %}" alt="{{ image.alt | hide_none }}" src="{{ fallback_source }}" data-src="{{ source }}" data-ratio="{{ image.ratio | hide_none }}" data-variant="{{ image.image_pattern | hide_none }}"{% if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %} {% block media_block_additional_data_attributes %}{% endblock %}>
+                <img class="{% block media_block_item %}{{ module_layout }}__media-item{% endblock %}" alt="{{ image.alt }}" src="{{ fallback_source }}" data-src="{{ source }}" data-ratio="{{ image.ratio }}" data-variant="{{ image.image_pattern }}"{% if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %} {% block media_block_additional_data_attributes %}{% endblock %}>
                 {% endblock %}
-                {{ media_container_after | hide_none }}
+                {{ media_container_after }}
             </div>
         <!--[if gt IE 8]><!-->
         </noscript>
         <!--<![endif]-->
-        <figcaption class="figure__caption {{ media_caption_additional_class | hide_none }}">
+        <figcaption class="figure__caption {{ media_caption_additional_class }}">
             {% block media_caption_content %}
                 {% for name, url, nofollow in image.copyright %}
                 <span class="figure__copyright" itemprop="copyrightHolder">

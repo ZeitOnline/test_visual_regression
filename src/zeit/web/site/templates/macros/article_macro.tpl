@@ -2,13 +2,13 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
-{% macro image(image, loop) %}
+{% macro image(image, loop) -%}
     {% include 'zeit.web.site:templates/inc/asset/image_article.tpl' with context %}
-{% endmacro %}
+{%- endmacro %}
 
 {% macro intertitle(intertitle) -%}
     <h2 class="article__subheading article__item">
-        {{ intertitle|striptags }}
+        {{ intertitle | striptags }}
     </h2>
 {%- endmacro %}
 
@@ -130,7 +130,7 @@
 {% macro citation(obj) -%}
     <figure class="quote article__item">
         <blockquote class="quote__text">
-            {{- obj.text -}}
+            {{ obj.text }}
         </blockquote>
         {% if obj.attribution %}
             <figcaption class="quote__source">

@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Deduplicate Automatic Gallery Areas
 
+- MAINT: Plug in jinja finalizer to hide `None` expressions
+
 - MAINT: Replace deprecated Bitblt with new image handling
 
 - MAINT: Deprecate d11n for good.

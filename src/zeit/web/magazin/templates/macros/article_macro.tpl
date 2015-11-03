@@ -12,11 +12,11 @@
 {%- endmacro %}
 
 {% macro supertitle() -%}
-  <div class="article__head__supertitle">{{ view.supertitle | hide_none }}</div>
+  <div class="article__head__supertitle">{{ view.supertitle }}</div>
 {%- endmacro %}
 
 {% macro title() -%}
-  <div class="article__head__title">{{ view.title | hide_none }}</div>
+  <div class="article__head__title">{{ view.title }}</div>
 {%- endmacro %}
 
 {% macro subtitle(include_meta=False, with_quotes=False) -%}
@@ -192,7 +192,7 @@
                 {% if loop -%}
                 <span class="figure__index">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
-                <span class="figure__text">{{ obj.caption | hide_none | safe }}</span>
+                <span class="figure__text">{{ obj.caption | safe }}</span>
                 {% if obj.copyright|count and obj.copyright[0][0] != '©' %}
                 <span class="figure__copyright">
                     {%- if obj.copyright[0][1] -%}
@@ -212,7 +212,7 @@
 {% macro headerimage(obj) -%}
     <div class="scaled-image is-pixelperfect article__head-image">
         {{ lama.insert_responsive_image(obj) }}
-    </div>{{ obj.caption | hide_none | safe }}{{ obj.copyright }}
+    </div>{{ obj.caption | safe }}{{ obj.copyright }}
 {%- endmacro %}
 
 {% macro video(obj) -%}
@@ -241,7 +241,7 @@
 {% macro headervideo(obj, wrap_class='article__main-video--longform', img_class='') -%}
 
     {% if obj.id is not defined and obj.uniqueId -%}
-        {% set id = obj.uniqueId|substring_from('/') %}
+        {% set id = obj.uniqueId | substring_from('/') %}
     {% elif obj.id -%}
         {% set id = obj.id %}
     {% endif %}

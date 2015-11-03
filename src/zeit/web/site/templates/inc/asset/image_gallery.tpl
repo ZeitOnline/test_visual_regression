@@ -8,6 +8,6 @@
 
 {% block media_caption_content %}
     <span class="figure__index">{{ image_loop.index }}/{{ image_loop.length }}</span>
-    <span class="figure__text">{{ image.caption | hide_none }}</span>
+    <span class="figure__text">{{ image.caption }}</span>
     {{ super() }}
 {% endblock %}
