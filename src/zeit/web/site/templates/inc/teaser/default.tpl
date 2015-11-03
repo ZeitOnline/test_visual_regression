@@ -40,9 +40,9 @@
                         )}}">
                         {% block kicker_logo scoped -%}
                         {%- if is_zmo_teaser and not is_zmo_parquet %}
-                            {{ lama.use_svg_icon('logo-zmo-zm', kicker_class + '-logo--zmo', request) }}
+                            {{ lama.use_svg_icon('logo-zmo-zm', kicker_class + '-logo--zmo svg-symbol--hide-ie', request) }}
                         {%- elif is_zett_content %}
-                            {{ lama.use_svg_icon('logo-zett-small', kicker_class + '-logo--zett', request) }}
+                            {{ lama.use_svg_icon('logo-zett-small', kicker_class + '-logo--zett svg-symbol--hide-ie', request) }}
                         {%- endif %}
                         {%- endblock -%}
                         {{ teaser.teaserSupertitle or teaser.supertitle }}</span>

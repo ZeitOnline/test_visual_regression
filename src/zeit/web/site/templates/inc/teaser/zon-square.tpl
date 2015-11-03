@@ -9,7 +9,7 @@
     {% if provides(teaser, 'zeit.content.link.interfaces.ILink') and teaser.url.startswith('http://ze.tt') %}
         {% block kicker_logo %}
         {% endblock %}
-        {{ lama.use_svg_icon('logo-zett-small', 'teaser-square__kicker-logo--zett', request) }}
+        {{ lama.use_svg_icon('logo-zett-small', 'teaser-square__kicker-logo--zett svg-symbol--hide-ie', request) }}
     {% endif %}
 {% endblock %}
 
