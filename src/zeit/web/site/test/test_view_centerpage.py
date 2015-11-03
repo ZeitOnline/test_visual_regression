@@ -132,7 +132,7 @@ def test_default_teaser_should_match_css_selectors(
     assert link.attrib['title'] == 'teaserSupertitle - teaserTitle'
 
     link_kicker = html('a.teaser__combined-link span.teaser__kicker')[0]
-    assert link_kicker.text == 'teaserSupertitle'
+    assert 'teaserSupertitle' in link_kicker.text_content()
 
     link_title = html('a.teaser__combined-link span.teaser__title')[0]
     assert link_title.text == 'teaserTitle'
@@ -642,7 +642,7 @@ def test_gallery_teaser_should_contain_supertitle(testserver, testbrowser):
     uid = 'http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer'
     kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
                                '.teaser-small__kicker'.format(uid))[0]
-    assert kicker.text == 'Desktop-Bilder'
+    assert 'Desktop-Bilder' in kicker.text_content()
 
 
 def test_centerpage_should_have_header_tags(testbrowser, testserver):
