@@ -1527,3 +1527,39 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
     closelink.click()
     copyright = driver.find_element_by_class_name('image-copyright-footer')
     assert copyright.is_displayed() is False, 'copyright is not displayed'
+
+
+def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
+    browser = testbrowser('/zeit-online/journalistic-formats-zmo')
+
+    teaser_fullwidth_logo = browser.cssselect('.teaser-fullwidth__kicker-logo--zmo')[0]
+    teaser_classic_logo = browser.cssselect('.teaser-classic__kicker-logo--zmo')[0]
+    teaser_large_logo =  browser.cssselect('.teaser-large__kicker-logo--zmo')[0]
+    teaser_small_logo = browser.cssselect('.teaser-small__kicker-logo--zmo')[0]
+    teaser_small_minor_logo = browser.cssselect('.teaser-small-minor__kicker-logo--zmo')[0]
+    teaser_kicker_zmo_parquet = browser.cssselect('.teaser-small__kicker--zmo-parquet svg')
+
+    assert len(teaser_fullwidth_kicker) == 1
+    assert len(teaser_classic_kicker) == 1
+    assert len(teaser_large_kicker) == 1
+    assert len(teaser_small_kicker) == 1
+    assert len(teaser_small_minor_kicker) == 1
+    assert len(teaser_kicker_zmo_parquet) == 0  # assert there is no kicker logo when in zmo parquet
+
+
+def test_zett_teaser_kicker_should_contain_logo(testbrowser):
+    browser = testbrowser('/zeit-online/journalistic-formats-zett')
+
+    teaser_fullwidth_logo = browser.cssselect('.teaser-fullwidth__kicker-logo--zett')[0]
+    teaser_classic_logo = browser.cssselect('.teaser-classic__kicker-logo--zett')[0]
+    teaser_large_logo =  browser.cssselect('.teaser-large__kicker-logo--zett')[0]
+    teaser_small_logo = browser.cssselect('.teaser-small__kicker-logo--zett')[0]
+    teaser_small_minor_logo = browser.cssselect('.teaser-small-minor__kicker-logo--zett')[0]
+    teaser_square_logo = browser.cssselect('.teaser-square__kicker-logo--zett')[0]
+
+    assert len(teaser_fullwidth_logo) == 1
+    assert len(teaser_classic_logo) == 1
+    assert len(teaser_large_logo) == 1
+    assert len(teaser_small_logo) == 1
+    assert len(teaser_small_minor_logo) == 1
+    assert len(teaser_square_logo) == 1
