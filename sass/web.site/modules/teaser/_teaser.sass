@@ -60,48 +60,44 @@
 	letter-spacing: $zon-letter-spacing-m
 	line-height: 1.2
 	margin-bottom: em(4px, 13px)
+	&--blog
+		color: $zon_dark_grey
+		font-family: $font-franziska
+		font-style: italic
+		font-weight: normal
+	&--zmo
+		color: $black
+		font-size: em(15px)
+		font-weight: normal
+		letter-spacing: .1em
+		line-height: 1.2
+	&--zmo-parquet
+		@extend %teaser-kicker--zmo
+		font-size: em(13px)
+		letter-spacing: .06em
+	&--zett
+		color: $black
+		font-size: em(13px)
+		font-weight: normal
+		letter-spacing: 0.05em
+		line-height: 1.3
 
-%teaser-kicker--blog
-	color: $zon_dark_grey
-	font-family: $font-franziska
-	font-style: italic
-	font-weight: normal
-
-%teaser-kicker--zmo
-	color: $black
-	font-size: em(15px)
-	font-weight: normal
-	letter-spacing: .1em
-	line-height: 1.2
-
-%teaser-kicker--zett
-	color: $black
-	font-size: em(13px)
-	font-weight: normal
-	letter-spacing: 0.05em
-	line-height: 1.3
-
-%teaser-kicker--zmo-parquet
-	@extend %teaser-kicker--zmo
-	font-size: em(13px)
-	letter-spacing: .06em
-
-%teaser-kicker-logo--zmo
-	background-color: rgba(25,25,25,0.7)
-	border-radius: 3px
-	color: $white
-	height: remify(18px)
-	margin-right: remify(4px)
-	vertical-align: bottom
-	width: remify(31px)
-
-%teaser-kicker-logo--zett
-	background-color: $primary-color-zett
-	color: $white
-	height: remify(18px)
-	margin-right: remify(4px)
-	vertical-align: sub
-	width: remify(30px)
+%teaser-kicker-logo
+	&--zmo
+		background-color: rgba(25,25,25,0.7)
+		border-radius: 3px
+		color: $white
+		height: remify(18px)
+		margin-right: remify(4px)
+		vertical-align: bottom
+		width: remify(31px)
+	&--zett
+		background-color: $primary-color-zett
+		color: $white
+		height: remify(18px)
+		margin-right: remify(4px)
+		vertical-align: sub
+		width: remify(30px)
 
 %teaser-combined-link
 	color: inherit
