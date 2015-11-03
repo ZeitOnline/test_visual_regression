@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - MAINT: Deprecate d11n for good.
 
+- MAINT: Sass: Replace underscores in variable names
+
 
 2.21 (2015-10-30)
 -----------------

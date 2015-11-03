@@ -5,8 +5,8 @@
 	// overflow: hidden // needed for animation using max-height
 
 	&__heading
-		background-color: $zon_lighter_grey
-		color: $zon_dark_grey
+		background-color: $zon-lighter-grey
+		color: $zon-dark-grey
 		display: block
 		font-size: em(14px)
 		font-weight: bold
@@ -15,7 +15,7 @@
 		padding: remify(6px 10px)
 		text-transform: uppercase
 		+on-interaction
-			background-color: $zon_dark_grey
+			background-color: $zon-dark-grey
 			color: $white
 	&__teasers
 		counter-reset: buzz-box
@@ -28,7 +28,7 @@
 			padding: 0
 			position: relative
 			&:before
-				color: $zon_dark_grey
+				color: $zon-dark-grey
 				content: counter(buzz-box)
 				counter-increment: buzz-box
 				font-size: em(22px)

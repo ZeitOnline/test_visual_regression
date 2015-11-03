@@ -1,4 +1,4 @@
-$bg_kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
+$bg-kicker: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-bild-desktop'
 $module: 'jobbox'
 
 .#{$module}
@@ -13,7 +13,7 @@ $module: 'jobbox'
         @extend %teaser-kicker
     &__header
         background-size: cover
-        background: $zon_lighter_grey url($bg_kicker) no-repeat right
+        background: $zon-lighter-grey url($bg-kicker) no-repeat right
         color: $color-text
         font-size: em(22px)
         font-weight: bold
@@ -35,7 +35,7 @@ $module: 'jobbox'
         max-height: 1.2em * 3 // multiply line-height for a maximum of 3 lines height
         overflow: hidden
     &__byline
-        color: $zon_grey
+        color: $zon-grey
         font-size: em(14px)
         letter-spacing: $letter-spacing-s
         // max-width: 100%
@@ -45,16 +45,16 @@ $module: 'jobbox'
     &__button
         +zon-button-green($margin: remify(14px 0 0))
     &__link
-        border-bottom: 1px solid rgba($zon_grey, .4)
-        color: $zon_grey
+        border-bottom: 1px solid rgba($zon-grey, .4)
+        color: $zon-grey
         display: inline-block
         font-size: em(14px)
         letter-spacing: $letter-spacing-s
         line-height: 1.2
         margin: remify(14px 0 0 10px)
         +on-interaction
-            border-bottom-color: rgba($zon_grey, .8)
-            color: $zon_grey
+            border-bottom-color: rgba($zon-grey, .8)
+            color: $zon-grey
 
     /* jobbox in duo is different */
     &--duo
@@ -107,7 +107,7 @@ $module: 'jobbox'
                 &:nth-child(3)
                     display: block
         .#{$module}__title
-            color: $zon_dark_grey
+            color: $zon-dark-grey
             font-size: em(15px)
             overflow: hidden
         .#{$module}__action
