@@ -1386,7 +1386,7 @@ def test_zmo_parquet_has_zmo_styles(testbrowser):
     zmo_region = regions[3]
     zmo_title = zmo_region.cssselect('.parquet-meta__title--zmo')
     zmo_logo = zmo_region.cssselect('.parquet-meta__logo--zmo')
-    zmo_kicker = zmo_region.cssselect('.teaser-small__kicker--zmo')
+    zmo_kicker = zmo_region.cssselect('.teaser-small__kicker--zmo-parquet')
 
     assert len(zmo_title)
     assert len(zmo_logo)
