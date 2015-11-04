@@ -922,9 +922,10 @@ def test_centerpage_area_should_render_in_isolation(testbrowser):
 def test_centerpage_biga_area_should_render_in_isolation_with_page_param(
         testbrowser):
     browser = testbrowser('/index/area/id-5fe59e73-e388-42a4-a8d4-'
-                          '750b0bf96812?p=2')
+                          '750b0bf96812?p=http://xml.zeit.de/galerien/'
+                          'bg-automesse-detroit-2014-usa')
     teaser_second_page = browser.cssselect('.teaser-gallery__title')[0]
-    assert teaser_second_page.text == 'Das hab ich auf dem Schirm'
+    assert teaser_second_page.text == 'Immer nur das Meer sehen'
 
 
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser):
@@ -1062,7 +1063,8 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
         '/galerien/bg-automesse-detroit-2014-usa')
     assert new_teaser_links[1].get_attribute('href').endswith(
         '/zeit-online/gallery/england-meer-strand-menschen-fs')
-    assert teaserbutton.get_attribute('data-sourceurl').endswith('?p=2')
+    assert teaserbutton.get_attribute('data-sourceurl').endswith(
+        '?p=http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer')
 
 
 def test_homepage_should_have_proper_meetrics_integration(

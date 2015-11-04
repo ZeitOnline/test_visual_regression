@@ -9,31 +9,8 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
 
     def __init__(self, context):
         super(Gallery, self).__init__(context)
-        self.skip_previous_pages = True
-        self._page = None
-
-    @property
-    def count_to_replace_duplicates(self):
-        return self.MINIMUM_COUNT_TO_REPLACE_DUPLICATES + (
-            (self.page - 1) * self.count)
-
-    @property
-    def page(self):
-        if self._page is None:
-            request = pyramid.threadlocal.get_current_request()
-            try:
-                self._page = int(request.GET['p'])
-            except (KeyError, ValueError):
-                self._page = 1
-        return self._page
-
-    @page.setter
-    def page(self, value):
-        self._page = value
-
-    @property
-    def next_page(self):
-        return self.page + 1
+        request = pyramid.threadlocal.get_current_request()
+        self.skip_until = self.next_page = request.GET.get('p', None)
 
     def _extract_newest(self, content, predicate=None):
         # Deduplicate automatic gallery area for pagination.
@@ -42,12 +19,20 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
         # duplicates, we need to burn through all previous pages and consume
         # enough valid teasers of the content slice.
 
-        if self.skip_previous_pages:
-            for _ in range((self.page - 1) * self.context.count):
-                super(Gallery, self)._extract_newest(content, predicate)
-            else:
-                self._v_retrieved_content = 0
-                self._v_try_to_retrieve_content = True
-                self.skip_previous_pages = False
+        while self.skip_until:
+            if len(content) == 0:
+                more_content = self._retrieve_content()
+                if more_content:
+                    content[:] = more_content
+            teaser = super(Gallery, self)._extract_newest(content, predicate)
+            if teaser.uniqueId == self.skip_until:
+                self.skip_until = None
 
-        return super(Gallery, self)._extract_newest(content, predicate)
+        teaser = super(Gallery, self)._extract_newest(content, predicate)
+        if teaser:
+            self.next_page = teaser.uniqueId
+            return teaser
+        else:
+            self._v_retrieved_content = 0
+            self._v_try_to_retrieve_content = True
+            return super(Gallery, self)._extract_newest(content, predicate)
