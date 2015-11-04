@@ -241,6 +241,7 @@ class Base(object):
         mappings = zeit.web.core.banner.banner_id_mappings
         for mapping in mappings:
             if getattr(self, mapping['target'], None) == mapping['value']:
+                # change ressort but leave subressort intact
                 if mapping['target'] == 'ressort' and self.sub_ressort != '':
                     return u'{}/{}/{}'.format(
                         mapping['banner_code'],
