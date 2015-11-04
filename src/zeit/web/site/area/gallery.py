@@ -1,65 +1,38 @@
-import math
-
 import pyramid.threadlocal
-
-import zope.schema
 
 import zeit.cms.content.property
 import zeit.content.cp.automatic
-import zeit.content.cp.interfaces
 
 
 @zeit.web.register_area('gallery')
 class Gallery(zeit.content.cp.automatic.AutomaticArea):
 
-    # XXX: this is all very boilerplate-y, but it's get sh*t done
-    #      nevertheless: refactoring would be great (aps)
+    def __init__(self, context):
+        super(Gallery, self).__init__(context)
+        request = pyramid.threadlocal.get_current_request()
+        self.skip_until = self.next_page = request.GET.get('p', None)
 
-    _hits = zeit.cms.content.property.ObjectPathProperty(
-        '.hits', zope.schema.Int(required=False))
+    def _extract_newest(self, content, predicate=None):
+        # Deduplicate automatic gallery area for pagination.
+        #
+        # Since we don't know which teasers on previous pages may have been
+        # duplicates, we need to burn through all previous pages and consume
+        # enough valid teasers of the content slice.
 
-    @property
-    def count_to_replace_duplicates(self):
-        return self.MINIMUM_COUNT_TO_REPLACE_DUPLICATES + (
-            (self.page - 1) * self.count)
+        while self.skip_until:
+            if len(content) == 0:
+                more_content = self._retrieve_content()
+                if more_content:
+                    content[:] = more_content
+            teaser = super(Gallery, self)._extract_newest(content, predicate)
+            if teaser.uniqueId == self.skip_until:
+                self.skip_until = None
 
-    @property
-    def hits(self):
-        if self._hits is None:
-            self.values()
-        return self._hits or 0
-
-    @hits.setter
-    def hits(self, value):
-        if self._hits is None:
-            self._hits = value
-
-    @property
-    def page(self):
-        try:
-            return int(pyramid.threadlocal.get_current_request().GET['p'])
-        except (KeyError, ValueError):
-            return 1
-
-    @zeit.web.reify
-    def total_pages(self):
-        try:
-            if self.hits + self.count > 0:
-                return int(math.ceil(float(self.hits) / float(self.count)))
-            else:
-                return 0
-        except TypeError:
-            return 0
-
-    @zeit.web.reify
-    def next_page(self):
-        if self.page < self.total_pages:
-            return self.page + 1
+        teaser = super(Gallery, self)._extract_newest(content, predicate)
+        if teaser:
+            self.next_page = teaser.uniqueId
+            return teaser
         else:
-            # Rewind to page 1
-            return 1
-
-    def _query_centerpage(self):
-        result = super(Gallery, self)._query_centerpage()
-        self._hits = len(result)
-        return result[(self.page - 1) * self.count:self.page * self.count]
+            self._v_retrieved_content = 0
+            self._v_try_to_retrieve_content = True
+            return super(Gallery, self)._extract_newest(content, predicate)

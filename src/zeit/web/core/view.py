@@ -589,6 +589,10 @@ class Content(Base):
         return 'summary_large_image'
 
     @zeit.web.reify
+    def community_maintenance(self):
+        return zeit.web.core.comments.community_maintenance()
+
+    @zeit.web.reify
     def comments(self):
         if not self.show_commentthread:
             return
@@ -736,6 +740,44 @@ class Content(Base):
         if any(self.nextreads):
             return zeit.web.core.comments.get_counts(
                 *[t.uniqueId for t in itertools.chain(*self.nextreads)])
+
+    @zeit.web.reify
+    def comment_area(self):
+        message = ''
+        if self.community_maintenance['active']:
+            message = self.community_maintenance['text_active']
+        elif not self.comments_loadable:
+            message = (u'Ein technischer Fehler ist aufgetreten. '
+                       u'Die Kommentare zu diesem Artikel konnten '
+                       u'nicht geladen werden. Bitte entschuldigen Sie '
+                       u'diese Störung.')
+        elif self.community_maintenance['scheduled']:
+            message = self.community_maintenance['text_scheduled']
+
+        user_blocked = False
+        self.request.authenticated_userid
+        if self.request.session.get('user'):
+            user_blocked = self.request.session['user'].get('blocked')
+
+        accept_new_comments = self.context.commentsAllowed
+
+        return {
+            'show': (self.comments_allowed or bool(self.comments)),
+            'show_comment_form': (self.comments_loadable and (
+                self.show_commentthread) and not user_blocked and (
+                    accept_new_comments)),
+            'show_meta': not self.community_maintenance['active'] and (
+                bool(self.comments)) and self.comments_loadable,
+            'show_comments': not self.community_maintenance['active'] and (
+                self.comments_loadable and self.comments),
+            'no_comments': (not self.comments and self.comments_loadable),
+            'warning': (self.community_maintenance['active'] or (
+                not self.comments_loadable) or (
+                self.community_maintenance['scheduled'])),
+            'message': message,
+            'user_blocked': user_blocked,
+            'accept_new_comments': accept_new_comments
+        }
 
 
 @pyramid.view.view_config(route_name='health_check')

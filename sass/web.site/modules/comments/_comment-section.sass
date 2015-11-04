@@ -8,8 +8,9 @@
 		padding: 0 $page-padding
 		+respond-min($break-tablet-min)
 			max-width: remify(700px) // 660px + 2*$page-padding
-	&__head
-		background-color: $zon_lighter_grey
+	&__head,
+	&__error
+		background-color: $zon-lighter-grey
 		padding-bottom: em(32px)
 		padding-top: em(32px)
 		text-align: center
@@ -19,6 +20,9 @@
 			+align-items(center)
 		+respond-min($break-tablet-min)
 			background-color: transparent
+	&__error
+		text-align: left
+		color: $color-text-highlighted
 	&__headline
 		font-size: remify(18px)
 		font-weight: bold
@@ -30,7 +34,7 @@
 			margin-bottom: 0
 			text-align: left
 		small
-			color: $zon_mid_grey
+			color: $zon-mid-grey
 			display: block
 			font-size: remify(12px)
 			font-weight: normal

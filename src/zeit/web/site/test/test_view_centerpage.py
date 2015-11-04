@@ -928,9 +928,10 @@ def test_centerpage_area_should_render_in_isolation(testbrowser):
 def test_centerpage_biga_area_should_render_in_isolation_with_page_param(
         testbrowser):
     browser = testbrowser('/index/area/id-5fe59e73-e388-42a4-a8d4-'
-                          '750b0bf96812?p=2')
+                          '750b0bf96812?p=http://xml.zeit.de/galerien/'
+                          'bg-automesse-detroit-2014-usa')
     teaser_second_page = browser.cssselect('.teaser-gallery__title')[0]
-    assert teaser_second_page.text == 'Das hab ich auf dem Schirm'
+    assert teaser_second_page.text == 'Immer nur das Meer sehen'
 
 
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser):
@@ -1058,17 +1059,18 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
 
     condition = expected_conditions.text_to_be_present_in_element((
         By.CSS_SELECTOR, '.teaser-gallery__title'),
-        'Das hab ich auf dem Schirm')
+        'Automesse Detroit 2014 US-Hersteller')
     assert WebDriverWait(driver, 5).until(condition), (
         'New teasers not loaded within 5 seconds')
 
     new_teaser_links = driver.find_elements_by_css_selector(
         '.teaser-gallery__combined-link')
     assert new_teaser_links[0].get_attribute('href').endswith(
-        '/galerien/fs-desktop-schreibtisch-computer')
-    assert new_teaser_links[1].get_attribute('href').endswith(
         '/galerien/bg-automesse-detroit-2014-usa')
-    assert teaserbutton.get_attribute('data-sourceurl').endswith('?p=2')
+    assert new_teaser_links[1].get_attribute('href').endswith(
+        '/zeit-online/gallery/england-meer-strand-menschen-fs')
+    assert teaserbutton.get_attribute('data-sourceurl').endswith(
+        '?p=http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer')
 
 
 def test_homepage_should_have_proper_meetrics_integration(
@@ -1433,6 +1435,34 @@ def test_jobbox_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.jobbox__action'))
 
 
+def test_partnerbox_job_is_displayed_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/partnerbox-jobs')
+
+    # in main area
+    box = browser.cssselect('.partnerbox')[0]
+    assert len(box.cssselect('.partnerbox__label'))
+    assert len(box.cssselect('.partner__action'))
+    assert len(box.cssselect('.partner__intro'))
+    assert len(box.cssselect('.p-kicker--jobs'))
+    assert len(box.cssselect('.p-kicker__img'))
+    assert len(box.cssselect('.p-kicker__text'))
+    assert len(box.cssselect('.pa-dropdown'))
+    assert len(box.cssselect('.pa-button'))
+    assert len(box.cssselect('.pa-link'))
+    assert len(box.cssselect('.pa-dropdown__option')) == 9
+
+
+def test_studiumbox_is_displayed_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/studiumbox')
+
+    box = browser.cssselect('.studiumbox')[0]
+    assert len(box.cssselect('.studiumbox__label'))
+    assert len(box.cssselect('.studiumbox__container'))
+    assert len(box.cssselect('.studiumbox__headline')) == 3
+    assert len(box.cssselect('.studiumbox__content')) == 3
+    assert len(box.cssselect('.studiumbox__button')) == 3
+
+
 def test_zett_parquet_is_rendering(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
 
@@ -1456,10 +1486,10 @@ def test_imagecopyright_tags_are_not_displayed_on_centerpages(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
-    copyright = driver.find_elements_by_class_name('figureCopyrightHidden')
-    assert copyright[0].is_displayed() is False, 'copyright is not displayed'
-    assert copyright[1].is_displayed() is False, 'copyright is not displayed'
-    assert copyright[2].is_displayed() is False, 'copyright is not displayed'
+    copyright = driver.find_elements_by_class_name('figcaption--hidden')
+    assert copyright[0].is_displayed() is False
+    assert copyright[1].is_displayed() is False
+    assert copyright[2].is_displayed() is False
 
 
 def test_imagecopyright_link_is_present_on_centerpages(testbrowser):

@@ -12,10 +12,10 @@
 
 {% block teaser_link %}
 	{% if readmore_url %}
-	<a class="{{ self.layout() }}__combined-link" title="{{ topic_supertitle | hide_none }} - {{ area.title | hide_none }}" href="{{ readmore_url }}">
-		<span class="{{ self.layout() }}__kicker">{{ topic_supertitle | hide_none }}</span>
+	<a class="{{ self.layout() }}__combined-link" title="{{ topic_supertitle }} - {{ area.title }}" href="{{ readmore_url }}">
+		<span class="{{ self.layout() }}__kicker">{{ topic_supertitle }}</span>
 		{%- if topic_supertitle %}<span class="visually-hidden">:</span>{% endif %}
-		<span class="{{ self.layout() }}__title">{{ area.title | hide_none }}</span>
+		<span class="{{ self.layout() }}__title">{{ area.title }}</span>
 	</a>
 	 {% endif %}
 {% endblock %}

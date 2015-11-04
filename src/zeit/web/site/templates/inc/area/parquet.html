@@ -5,14 +5,14 @@
 
         {% if area.referenced_cp is none %}
             <span class="parquet-meta__title">
-                {{ area.title | hide_none }}
+                {{ area.title }}
             </span>
         {% else %}
             <a class="parquet-meta__title{% if provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent') %} parquet-meta__title--zmo{% endif %}" href="{{ area.referenced_cp.uniqueId | create_url }}">
             {% if provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent') %}
                 {{ lama.use_svg_icon('logo-zmo', 'parquet-meta__logo parquet-meta__logo--zmo', request) }}
             {% else %}
-                {{ area.title | hide_none }}
+                {{ area.title }}
             {% endif %}
             </a>
         {% endif %}

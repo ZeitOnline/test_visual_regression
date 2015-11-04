@@ -2,7 +2,7 @@
 	// needs a clearfix hack, in case the floating ad--tile is higher than the content
 	+pie-clearfix
 	background-color: $color-video-background
-	color: $zon_lighter_grey
+	color: $zon-lighter-grey
 	margin: 0 (-$page-padding) // enforce full width background with padding
 	padding: 0 $page-padding remify(40px) $page-padding // enforce full width background with padding
 	+respond-min($break-tablet-min)
@@ -15,30 +15,30 @@
 		+respond_min($break-tablet-min)
 			margin-top: remify(40px)
 		&__kicker
-			color: $zon_mid_grey
+			color: $zon-mid-grey
 		&__title
-			color: $zon_lighter_grey
+			color: $zon-lighter-grey
 			+respond-min($break-desktop-min)
 				font-size: remify(30px)
 
 	.summary
-		color: $zon_light_grey
+		color: $zon-light-grey
 		+respond-min($break-tablet-min)
 			font-size: remify(18px)
 
 	.metadata
-		color: $zon_mid_grey
+		color: $zon-mid-grey
 		margin-bottom: 0
 
 		.sharing-menu__title
 			color: inherit
 			white-space: nowrap
 			+on-interaction
-				color: $zon_light_grey
+				color: $zon-light-grey
 
 		// sharing menu on dark background
 		.sharing-menu--active .sharing-menu__title
-			color: $zon_light_grey
+			color: $zon-light-grey
 
 
 	// TODO: ad-div should have ".ad-desktop--7-on-video" and then we could
@@ -49,7 +49,7 @@
 		position: relative
 
 		&:before
-			border-left: 1px solid $zon_grey
+			border-left: 1px solid $zon-grey
 			content: ""
 			height: 100%
 			left: remify(-20px)

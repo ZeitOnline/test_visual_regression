@@ -19,10 +19,10 @@
                         {% if is_column == True %}
                             {{ view.serie + ' / ' }}
                         {% endif %}
-                        {{- view.supertitle | hide_none -}}
+                        {{ view.supertitle }}
                     </span>{%- if view.title -%}<span class="article-heading__colon">: </span>{%- endif -%}
                     <span class="article-heading__title">
-                        {{- view.title | hide_none -}}
+                        {{ view.title }}
                     </span>
                 </{{ headertag }}>
             </div>
@@ -38,7 +38,7 @@
                 </div>
             {% else %}
                 <div class="summary" itemprop="description">
-                    {{ view.subtitle | hide_none }}
+                    {{ view.subtitle }}
                 </div>
                 {%- set byline = view.context | get_byline %}
                 {% if byline | length -%}

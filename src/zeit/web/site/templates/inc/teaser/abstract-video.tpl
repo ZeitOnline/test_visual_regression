@@ -9,7 +9,7 @@
         <div class="{{ self.layout() }}__container">
             {% block teaser_media_position_before_title %}
                 {% set image = get_image(module, teaser, default='wide') %}
-                {% include "zeit.web.site:templates/inc/teaser_asset/image_{}.tpl".format(self.layout()) ignore missing %}
+                {% include "zeit.web.site:templates/inc/asset/image_{}.tpl".format(self.layout()) ignore missing %}
             {% endblock %}
             <div class="{{ self.layout() }}__inner">
                 {% block playbutton %}
@@ -17,10 +17,10 @@
                 {% endblock playbutton %}
                 <h2 class="{{ self.layout() }}-title">
                     <span class="{{ self.layout() }}-title__kicker">
-                        {{ teaser.supertitle | hide_none }}
+                        {{ teaser.supertitle }}
                     </span>
                     <span class="{{ self.layout() }}-title__title">
-                        {{ teaser.teaserTitle | hide_none }}
+                        {{ teaser.teaserTitle }}
                     </span>
                     {% block inlineplaybutton %}
                         {{ lama.playbutton('inline', teaser.videoDuration) }}

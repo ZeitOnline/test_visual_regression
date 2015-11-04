@@ -176,6 +176,9 @@ class Application(object):
         config.add_route('json_comment_count', '/json/comment_count')
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('invalidate_comment_thread', '/-comments/invalidate')
+        config.add_route(
+            'invalidate_community_maintenance',
+            '/-comments/invalidate_maintenance')
         config.add_route('newsfeed', '/newsfeed/*traverse')
         config.add_route('home', '/')
         config.add_route('login_state', '/login-state')
@@ -274,6 +277,7 @@ class Application(object):
 
         self.config.commit()
         self.jinja_env = env = self.config.get_jinja2_environment()
+        env.finalize = zeit.web.core.jinja.finalize
         env.trim_blocks = True
 
         default_loader = env.loader

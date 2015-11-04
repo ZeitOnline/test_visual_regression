@@ -277,35 +277,35 @@ def test_article08_has_correct_date(testbrowser):
     # not updated print article
     browser = testbrowser('/artikel/08')
     date = browser.cssselect('.article__head__meta__date')[0].text
-    assert date == '19. Februar 2014'
+    assert date.strip() == '19. Februar 2014'
 
 
 def test_article09_has_correct_date(testbrowser):
     # updated print article
     browser = testbrowser('/artikel/09')
     date = browser.cssselect('.article__head__meta__date')[0].text
-    assert date == u'4. März 2014, 14:35 Uhr'
+    assert date.strip() == u'4. März 2014, 14:35 Uhr'
 
 
 def test_article03_has_correct_date(testbrowser):
     # not updated online article
     browser = testbrowser('/artikel/03')
     date = browser.cssselect('.article__head__meta__date')[0].text
-    assert date == '30. Juli 2013, 17:20 Uhr'
+    assert date.strip() == '30. Juli 2013, 17:20 Uhr'
 
 
 def test_article10_has_correct_date(testbrowser):
     # updated online article
     browser = testbrowser('/artikel/10')
     date = browser.cssselect('.article__head__meta__date')[0].text
-    assert date == '20. Februar 2014, 17:59 Uhr'
+    assert date.strip() == '20. Februar 2014, 17:59 Uhr'
 
 
 def test_article05_has_correct_date(testbrowser):
     # longform
     browser = testbrowser('/artikel/05')
     date = browser.cssselect('.article__head__meta__date')[0].text
-    assert date == '3. November 2013'
+    assert date.strip() == '3. November 2013'
 
 
 def test_print_article_has_no_last_changed_date(testserver, testbrowser):
@@ -512,7 +512,10 @@ def test_nextread_teaser_block_has_teasers_available(application):
     nextread = zeit.web.core.interfaces.INextread(context)
     assert hasattr(nextread, '__iter__'), 'Nextread block should be iterable.'
     assert len(nextread) == 1, '"Artikel 09" has exactly one nextread.'
-    func = lambda a: isinstance(a, zeit.content.article.article.Article)
+
+    def func(a):
+        return isinstance(a, zeit.content.article.article.Article)
+
     assert all(map(func, nextread)), 'All nextread teasers should be articles.'
 
 
