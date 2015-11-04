@@ -11,11 +11,11 @@ def test_footer_should_have_basic_structure(jinja2_env):
     html_str = tpl.render(view=mock.MagicMock(), request=mock.Mock())
     html = lxml.html.fromstring(html_str).cssselect
 
-    assert len(html('.footer-logo')) == 1, (
-        'just one .footer-logo')
+    assert len(html('.footer-brand')) == 1, (
+        'just one .footer-brand')
 
-    assert len(html('.footer-logo__image')) == 1, (
-        'just one .footer-logo__image')
+    assert len(html('.footer-brand__logo')) == 1, (
+        'just one .footer-brand__logo')
 
     assert len(html('.footer-publisher')) == 1, (
         'just one .footer-publisher')
@@ -27,14 +27,14 @@ def test_footer_should_have_basic_structure(jinja2_env):
         'just one .footer-links__button')
 
 
-def test_footer_logo_macro_links_to_hp(jinja2_env):
+def test_footer_logo_links_to_hp(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/macros/footer_macro.tpl')
+        'zeit.web.site:templates/inc/footer.html')
 
     request = mock.Mock()
     request.host = 'foo.bar'
 
-    html_str = tpl.module.footer_logo(request)
+    html_str = tpl.render(view=mock.MagicMock(), request=request)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert html('a[href="http://foo.bar/index"]')[0] is not None, (
@@ -42,6 +42,7 @@ def test_footer_logo_macro_links_to_hp(jinja2_env):
 
 
 # integration tests
+
 
 def test_footer_is_displayed(selenium_driver, testserver):
 

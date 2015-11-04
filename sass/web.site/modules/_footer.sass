@@ -1,8 +1,4 @@
-// sizes
-$footer-logo-width: em(300px)
-$footer-logo-width-small: em(280px)
-
-// carefull, the order of this pseudo class is important here
+// careful, the order of this pseudo class is important here
 %footer_dark
 	background-color: $zon-charcoal
 	color: $zon-grey
@@ -11,7 +7,7 @@ $footer-logo-width-small: em(280px)
 		+on-interaction
 			color: $zon-lighter-grey
 
-// carefull, the order of this pseudo class is important here
+// careful, the order of this pseudo class is important here
 %footer_light
 	background-color: $zon-lighter-grey
 	color: $zon-dark-grey
@@ -71,21 +67,21 @@ $footer-logo-width-small: em(280px)
 	margin-top: remify(60px)
 	text-align: center
 
-.footer-logo
-	&__image
-		display: inline-block
-		margin-bottom: remify(20px)
-		a
-			+hide-text
-			+background-size(contain)
-			background-position: 50% 50%
-			display: block
-			width: $footer-logo-width-small
-			+respond-min($break-tablet-min)
-				width: $footer-logo-width
-			+old-ie
-				height: 37px
-				width: 346px
+.footer-brand
+	display: inline-block
+	margin-bottom: remify(20px)
+	position: relative
+	&,
+	&:focus,
+	&:hover
+		color: $color-zon-logo
+	&__logo
+		display: block
+		height: remify(30px)
+		width: remify(280px)
+		+respond-min($break-tablet-min)
+			height: remify(32px)
+			width: remify(300px)
 
 .footer-publisher
 	@extend %footer_dark

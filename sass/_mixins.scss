@@ -261,16 +261,6 @@
 	        transform-origin: $value;
 }
 
-@mixin image_text_replacement($display: block, $vertical-align: middle) {
-	@include background-size(contain);
-	background-position: 50% 50%;
-	display: $display;
-	text-indent: -50000em;
-	@if $display == inline-block or $display == inline {
-		vertical-align: $vertical-align;
-	}
-}
-
 @mixin zon-button($background-color,
 	              $hover-background-color,
 	              $color,

@@ -42,6 +42,8 @@ Change log for zeit.web
 
 - MAINT: Fix bumpy chronological article navigation
 
+- ZON-2051: Remove Grunticon from ZON and use SVG sprites
+
 - FIX: Handle multiple child nodes in rawxml CP modules
 
 
