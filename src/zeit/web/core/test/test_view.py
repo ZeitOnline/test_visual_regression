@@ -194,40 +194,51 @@ def test_missing_breaking_news_should_eval_to_false(application):
 
 
 def test_adcontroller_handles_for_entdecken_und_reisen(mock_ad_view):
-    assert mock_ad_view('centerpage', 'entdecken', ''
-                        ).adcontroller_handle == 'index'
-    assert mock_ad_view('centerpage', 'entdecken', 'reisen'
-                        ).adcontroller_handle == 'centerpage'
-    assert mock_ad_view('article', 'entdecken', ''
-                        ).adcontroller_handle == 'artikel'
-    assert mock_ad_view('article', 'entdecken', 'reisen'
-                        ).adcontroller_handle == 'artikel'
+    assert mock_ad_view(
+        'centerpage', 'entdecken', ''
+    ).adcontroller_handle == 'index'
+    assert mock_ad_view(
+        'centerpage', 'entdecken', 'reisen'
+    ).adcontroller_handle == 'centerpage'
+    assert mock_ad_view(
+        'article', 'entdecken', ''
+    ).adcontroller_handle == 'artikel'
+    assert mock_ad_view(
+        'article', 'entdecken', 'reisen'
+    ).adcontroller_handle == 'artikel'
 
 
 def test_adcontroller_banner_channel_for_entdecken_und_reisen(mock_ad_view):
     assert mock_ad_view(
         'centerpage', 'entdecken', ''
-        ).banner_channel == 'reisen/centerpage'
+    ).banner_channel == 'reisen/centerpage'
     assert mock_ad_view(
         'centerpage', 'entdecken', 'reisen'
-        ).banner_channel == 'reisen/centerpage'
+    ).banner_channel == 'reisen/centerpage'
 
 
 def test_adcontroller_handle_return_value(mock_ad_view):
-    assert mock_ad_view('centerpage', 'politik', ''
-                        ).adcontroller_handle == 'index'
-    assert mock_ad_view('centerpage', 'zeit-magazin', ''
-                        ).adcontroller_handle == 'index'
-    assert mock_ad_view('centerpage', 'homepage', '', is_hp=True
-                        ).adcontroller_handle == 'homepage'
-    assert mock_ad_view('centerpage', 'politik', 'deutschland'
-                        ).adcontroller_handle == 'centerpage'
-    assert mock_ad_view('article', 'politik', 'deutschland'
-                        ).adcontroller_handle == 'artikel'
-    assert mock_ad_view('video', 'politik', 'deutschland'
-                        ).adcontroller_handle == 'video_artikel'
-    assert mock_ad_view('quiz', 'politik', 'deutschland'
-                        ).adcontroller_handle == 'quiz'
+    assert mock_ad_view(
+        'centerpage', 'politik', ''
+    ).adcontroller_handle == 'index'
+    assert mock_ad_view(
+        'centerpage', 'zeit-magazin', ''
+    ).adcontroller_handle == 'index'
+    assert mock_ad_view(
+        'centerpage', 'homepage', '', is_hp=True
+    ).adcontroller_handle == 'homepage'
+    assert mock_ad_view(
+        'centerpage', 'politik', 'deutschland'
+    ).adcontroller_handle == 'centerpage'
+    assert mock_ad_view(
+        'article', 'politik', 'deutschland'
+    ).adcontroller_handle == 'artikel'
+    assert mock_ad_view(
+        'video', 'politik', 'deutschland'
+    ).adcontroller_handle == 'video_artikel'
+    assert mock_ad_view(
+        'quiz', 'politik', 'deutschland'
+    ).adcontroller_handle == 'quiz'
 
 
 def test_banner_channel_mapping_should_apply_first_rule(mock_ad_view):

@@ -4,6 +4,8 @@ Change log for zeit.web
 2.22 (unreleased)
 -----------------
 
+- ZON-2362: Set banner_channel for new ressort 'entdecken' to 'reisen'
+
 - ZON-606: Add community states
 
 - FIX: Deduplicate Automatic Gallery Areas
