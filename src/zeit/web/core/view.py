@@ -230,6 +230,11 @@ class Base(object):
         # manually banner_id rules first
         if self.context.banner_id is not None:
             return u'{}/{}'.format(self.context.banner_id, self.banner_type)
+        # the famous 'entdecken/reisen' case, limited until 01/2016
+        # return for all ressort 'entdecken' old code 'reisen'
+        # there's always a first and a half rule
+        if self.ressort == 'entdecken':
+            return u'reisen/{}'.format(self.banner_type)
         # second rule: angebote are mapped with two levels
         if self.ressort == 'angebote':
             adv_title = self.context.advertisement_title or self.ressort
