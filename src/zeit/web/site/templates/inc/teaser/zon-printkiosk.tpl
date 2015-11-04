@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block teaser_container %}
-    <p class="{{ self.layout() }}__title">{{ teaser.teaserTitle | hide_none }}</p>
+    <p class="{{ self.layout() }}__title">{{ teaser.teaserTitle }}</p>
 {% endblock %}
 
 {# Eliminate many default teaser blocks #}
