@@ -48,6 +48,8 @@ Change log for zeit.web
 
 - ZON-2206: Handle empty subressort DAV property properly
 
+- ZON-2321: Beef up reify to a multilayer caching descriptor
+
 - MAINT: Fix bumpy chronological article navigation
 
 - ZON-2051: Remove Grunticon from ZON and use SVG sprites

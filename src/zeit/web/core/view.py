@@ -681,16 +681,10 @@ class Content(Base):
                         "d. MMMM yyyy", locale="de_De")
                 return base64.b64encode(label.encode('latin-1'))
 
-    @zeit.web.reify
+    @zeit.web.reify('default_term')
     def lineage(self):
-
-        if self.is_advertorial:
-            return None
-
-        if self.ressort == 'administratives':
-            return None
-
-        if not self.context.channels or len(self.context.channels) == 0:
+        if self.is_advertorial or not self.context.channels or (
+                self.ressort == 'administratives'):
             return None
 
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
@@ -727,6 +721,9 @@ class Content(Base):
         predecessor = next(None, date, 'desc') or default
         successor = next(date, None, 'asc') or default
 
+        if predecessor is default or successor is default:
+            return zeit.web.dont_cache(predecessor + successor)
+
         return predecessor + successor
 
     @zeit.web.reify
@@ -741,7 +738,7 @@ class Content(Base):
     def nextreads(self):
         return zeit.web.core.interfaces.INextreadlist(self.context)
 
-    @zeit.web.reify
+    @zeit.web.reify('default_term')
     def comment_counts(self):
         if any(self.nextreads):
             return zeit.web.core.comments.get_counts(
