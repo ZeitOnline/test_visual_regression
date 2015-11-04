@@ -35,6 +35,15 @@
 	width: 100%
 	margin: auto
 
+	&__media
+		margin: 1em auto
+		max-height: remify(190px)
+		max-width: remify(160px)
+
+	&__container
+		margin: remify(20px) auto
+		max-width: remify(160px)
+
 	+respond-min($break-phablet-min)
 		width: 50%
 	+respond-min($break-tablet-min)
