@@ -230,6 +230,11 @@ class Base(object):
         # manually banner_id rules first
         if self.context.banner_id is not None:
             return u'{}/{}'.format(self.context.banner_id, self.banner_type)
+        # the famous 'entdecken/reisen' case, limited until 01/2016
+        # return for all ressort 'entdecken' old code 'reisen'
+        # there's always a first and a half rule
+        if self.ressort == 'entdecken':
+            return u'reisen/{}'.format(self.banner_type)
         # second rule: angebote are mapped with two levels
         if self.ressort == 'angebote':
             adv_title = self.context.advertisement_title or self.ressort
@@ -241,6 +246,7 @@ class Base(object):
         mappings = zeit.web.core.banner.banner_id_mappings
         for mapping in mappings:
             if getattr(self, mapping['target'], None) == mapping['value']:
+                # change ressort but leave subressort intact
                 if mapping['target'] == 'ressort' and self.sub_ressort != '':
                     return u'{}/{}/{}'.format(
                         mapping['banner_code'],
