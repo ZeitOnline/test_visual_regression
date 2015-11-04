@@ -2,7 +2,7 @@
 	padding: 0 $storystream-padding-mobile
 
 	&--first
-		background-color: $zon_lighter_grey
+		background-color: $zon-lighter-grey
 
 	&__container
 		padding: $vertical-space $storystream-padding-mobile
@@ -18,7 +18,7 @@
 			padding-top: $vertical-space
 			position: relative
 			&:before
-				+make-a-circle($color: $white, $radius: 9px, $border_color: $zon_mid_grey, $border_width: 2px)
+				+make-a-circle($color: $white, $radius: 9px, $border_color: $zon-mid-grey, $border_width: 2px)
 				left: -$storystream-padding-mobile
 				margin: remify(-5px 0 0 -6px)
 				top: $vertical-space*1.5
@@ -40,7 +40,7 @@
 		margin: 0
 
 	&__text
-		color: $zon_dark_grey
+		color: $zon-dark-grey
 		font-size: remify(16px)
 		line-height: remify(21px)
 		&--first
@@ -101,7 +101,7 @@
 		right: 0
 		bottom: 0
 		height: 5 * 1.5 * em(20px) // 3 lines paragraph text
-		+background-image(linear-gradient(0deg, rgba($zon_lighter_grey, 1) 1.5em, rgba($zon_lighter_grey, 0) 100%))
+		+background-image(linear-gradient(0deg, rgba($zon-lighter-grey, 1) 1.5em, rgba($zon-lighter-grey, 0) 100%))
 		z-index: 1
 
 	&:after

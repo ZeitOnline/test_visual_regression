@@ -14,7 +14,7 @@ $login-icon-width: remify(18px)
 $login-icon-height: remify(18px)
 $user-picture-diameter: remify(45px)
 
-$icon-color: $zon_dark_grey
+$icon-color: $zon-dark-grey
 $icon-color--hover: $zon-charcoal
 
 // basic style for nav box
@@ -53,7 +53,7 @@ $icon-color--hover: $zon-charcoal
 		width: auto
 		font-size: remify(10px)
 		text-transform: uppercase
-		color: $zon_grey
+		color: $zon-grey
 
 //box 1: logo
 .logo_bar
@@ -117,7 +117,7 @@ $icon-color--hover: $zon-charcoal
 		+remove_nav_bar_style($width: auto)
 		+order(30)
 		+flex(0 0 auto)
-		color: $zon_grey
+		color: $zon-grey
 		font-size: remify(10px)
 		line-height: $zon-bar-height-phablet
 		min-width: remify(80px) // fallback for failing esi include
@@ -133,7 +133,7 @@ $icon-color--hover: $zon-charcoal
 .user-link
 	+respond-min($break-tablet-min)
 		+inline-block
-		+link-colors($black, $zon_dark_grey, $zon_dark_grey, $black, $zon_dark_grey)
+		+link-colors($black, $zon-dark-grey, $zon-dark-grey, $black, $zon-dark-grey)
 		margin-right: remify(5px)
 
 .main_nav__community__icon
@@ -256,7 +256,7 @@ $icon-color--hover: $zon-charcoal
 	border-radius: $micro 0 0 $micro
 	border: 1px solid $color-border
 	border-right: none
-	color: $zon_grey
+	color: $zon-grey
 	float: left
 	font-size: $font-m
 	height: $zon-search-square-size
@@ -264,7 +264,7 @@ $icon-color--hover: $zon-charcoal
 	width: 70%
 	&:focus
 		outline-width: 0
-		color: $zon_dark_grey
+		color: $zon-dark-grey
 	+respond-min($break-tablet-min)
 		width: $zon-search-width
 		visibility: hidden
@@ -291,7 +291,7 @@ $icon-color--hover: $zon-charcoal
 	width: $zon-search-square-size
 	color: $icon-color
 	+on-interaction
-		background-color: $zon_lighter_grey
+		background-color: $zon-lighter-grey
 		color: $icon-color--hover
 		outline-width: 0
 	+respond-min($break-tablet-min)
@@ -412,13 +412,13 @@ $icon-color--hover: $zon-charcoal
 
 	.primary-nav__link
 		color: $white
-		background-color: $zon_dark_grey
+		background-color: $zon-dark-grey
 		border-radius: 3px
 		+transition(background-color .15s linear)
 		padding: 0 $fine
 		&:hover
 			box-shadow: none
-			background-color: $zon_grey
+			background-color: $zon-grey
 
 
 

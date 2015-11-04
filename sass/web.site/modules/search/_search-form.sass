@@ -14,7 +14,7 @@ $dropdown-width: remify(160px)
 	font-size: remify(14px)
 	&__input
 		background-color: $white
-		border-color: $zon_light_grey
+		border-color: $zon-light-grey
 		border-radius: remify(4px 0 0 4px)
 		border-style: solid
 		border-width: 1px 0 1px 1px
@@ -25,15 +25,15 @@ $dropdown-width: remify(160px)
 		&:hover,
 		&:focus+.search-submit,
 		&:hover+.search-submit
-			border-color: $zon_mid_grey
+			border-color: $zon-mid-grey
 		&:focus
 			background-color: $white
 
 .search-submit
 	background-color: $white
-	color: $zon_dark_grey
+	color: $zon-dark-grey
 	border-radius: remify(0 4px 4px 0)
-	border: 1px solid $zon_light_grey
+	border: 1px solid $zon-light-grey
 	border-left: none
 	outline: none // readd in :focus for a11y
 	padding: remify(10px 12px)
@@ -56,7 +56,7 @@ $dropdown-width: remify(160px)
 
 .search-options
 	margin-top: remify(14px)
-	color: $zon_grey
+	color: $zon-grey
 	&__on
 		display: none
 		+transition(max-height .3s ease-in-out)
@@ -105,9 +105,9 @@ $dropdown-width: remify(160px)
 	width: $dropdown-width
 	&__legend
 		background-color: $white
-		border: 1px solid $zon_light_grey
+		border: 1px solid $zon-light-grey
 		border-radius: remify(4px)
-		color: $zon_grey
+		color: $zon-grey
 		cursor: pointer
 		display: block
 		font-size: remify(12px)
@@ -123,8 +123,8 @@ $dropdown-width: remify(160px)
 		background: lighten($zon-warm-grey, 5%)
 		border-width: 0px 1px
 		border-style: solid
-		border-color: $zon_light_grey
-		box-shadow: inset 0 -1px 0 $zon_light_grey // fake border bottom
+		border-color: $zon-light-grey
+		box-shadow: inset 0 -1px 0 $zon-light-grey // fake border bottom
 		font-size: remify(11px)
 		line-height: 2
 		overflow: hidden
