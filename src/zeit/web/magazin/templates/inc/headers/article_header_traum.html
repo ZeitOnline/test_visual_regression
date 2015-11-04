@@ -13,7 +13,7 @@
         <span class="article__head__meta-wrap is-constrained">
             <span class="article__head__meta">
                 <div class="article__head__meta__offset">
-                    {{ view.genre | hide_none }}
+                    {{ view.genre }}
                     {{ blocks.meta_author(view.authors) }}
                 </div>
                 {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}

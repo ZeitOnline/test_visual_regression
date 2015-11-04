@@ -1,9 +1,3 @@
-{% macro footer_logo(request) -%}
-    <a href="http://{{ request.host }}/index" title="Nachrichten auf ZEIT ONLINE" class="icon-zon-logo-desktop" data-id="footernav.logo.1..logo">
-        <!--start: title-->Nachrichten auf ZEIT ONLINE<!--end: title-->
-    </a>
-{%- endmacro %}
-
 {% macro footer_publisher(view) -%}
     {{ build_footer_bar(view, view.navigation_footer_publisher, 'publisher', True) }}
 {%- endmacro %}
@@ -24,7 +18,7 @@
             <ul class="footer-{{ class }}__list">
                 {% if section.text -%}
                 <li class="footer-{{ class }}__item footer-{{ class }}__item--label">
-                    {{ section.text | hide_none }}
+                    {{ section.text }}
                 </li>
                 {%- endif %}
 

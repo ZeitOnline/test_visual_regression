@@ -9,5 +9,5 @@
 </span>
 {% endif %}
 <time itemprop="datePublished" content="{{ view.date_last_modified | format_date('iso8601') }}" datetime="{{ view.date_last_modified | format_date('iso8601') }}" class="article__head__meta__date">
-    {{- view.date_last_modified | format_date(view.show_date_format) -}}
+    {{ view.date_last_modified | format_date(view.show_date_format) }}
 </time>

@@ -4,7 +4,7 @@
 
 <article class="{{ module_layout }}">
 	<div class="{{ module_layout }}__container-outer">
-		<span class="{{ module_layout }}__label">{{ {'publisher': 'Verlagsangebot', 'advertisement': 'Anzeige'}.get(teaser.supertitle) | hide_none }}</span>
+		<span class="{{ module_layout }}__label">{{ {'publisher': 'Verlagsangebot', 'advertisement': 'Anzeige'}.get(teaser.supertitle) }}</span>
 		<div class="{{ module_layout }}__container-inner">
 			<h2 class="{{ module_layout }}__title">{{ teaser.title }}</h2>
 			<p class="{{ module_layout }}__text">{{ teaser.text }}</p>

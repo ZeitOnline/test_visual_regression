@@ -49,14 +49,14 @@
         };
 
         wt.customParameter = {
-            1: "{{ view.authors_list | lower | hide_none }}", // Autor
+            1: "{{ view.authors_list | lower }}", // Autor
             2: "{{ ivw_code }}", // IVW-Code
             3: "{{ pagination }}", // Seite
             4: "{{ view.ranked_tags_list | lower if view.ressort | lower != 'homepage'}}", // Schlagworte
             5: "{{ view.date_last_modified }}", // Last published
             6: "{{ view.text_length }}", // Textlänge
-            7: "{{ view.news_source | hide_none | lower }}", // Quelle
-            8: "{{ view.product_id | hide_none | lower }}", // Product-Id
+            7: "{{ view.news_source | lower }}", // Quelle
+            8: "{{ view.product_id | lower }}", // Product-Id
             9: "{{ view.banner_channel | lower }}", // Banner-Channel
             10: "{%- if view.context.advertising_enabled %}yes{% endif -%}", // Banner aktiv?
             11: "", // Fehler
@@ -101,14 +101,14 @@
                 date
             )
         }}{{ "&cp1=%s&cp2=%s&cp3=%s&cp4=%s&cp5=%s&cp6=%s&cp7=%s&cp8=%s&cp9=%s&cp10=%s&cp11=%s&cp12=%s&cp13=%s&cp15=%s" | format(
-            view.authors_list | lower | hide_none,
+            view.authors_list | lower,
             ivw_code,
             pagination,
             view.ranked_tags_list | lower,
             view.date_last_modified,
             view.text_length,
-            view.news_source | hide_none | lower,
-            view.product_id | hide_none | lower,
+            view.news_source | lower,
+            view.product_id | lower,
             view.banner_channel | lower,
             "",
             "",

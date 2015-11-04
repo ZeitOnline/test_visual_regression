@@ -34,6 +34,13 @@ p_log = logging.getLogger('profile')
 _make_traceback = None
 
 
+def finalize(expr):
+    """Custom jinja finalizer function to implicitly hide `None` expressions"""
+    if expr is None:
+        return u''
+    return expr
+
+
 class Undefined(jinja2.runtime.Undefined):
 
     """Custom jinja Undefined class that represents unresolvable template

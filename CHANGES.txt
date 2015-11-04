@@ -8,9 +8,15 @@ Change log for zeit.web
 
 - FIX: Deduplicate Automatic Gallery Areas
 
+- FIX: Repair deduped pagination for gallery areas
+
+- MAINT: Plug in jinja finalizer to hide `None` expressions
+
 - MAINT: Replace deprecated Bitblt with new image handling
 
 - MAINT: Deprecate d11n for good.
+
+- MAINT: Sass: Replace underscores in variable names
 
 
 2.21 (2015-10-30)
@@ -35,6 +41,8 @@ Change log for zeit.web
 - ZON-2206: Handle empty subressort DAV property properly
 
 - MAINT: Fix bumpy chronological article navigation
+
+- ZON-2051: Remove Grunticon from ZON and use SVG sprites
 
 - FIX: Handle multiple child nodes in rawxml CP modules
 

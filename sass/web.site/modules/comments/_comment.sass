@@ -1,4 +1,4 @@
-$color-comment-author-bg: $zon_lighter_grey
+$color-comment-author-bg: $zon-lighter-grey
 $color-comment-border: $color-border
 
 .comment
@@ -27,8 +27,8 @@ $color-comment-border: $color-border
 			.comment-overlay__count
 				background-color: $zon-charcoal
 			.comment-overlay__cta
-				color: $zon_dark_grey
-				border-bottom: 1px solid $zon_mid_grey
+				color: $zon-dark-grey
+				border-bottom: 1px solid $zon-mid-grey
 		.comment__body
 			max-height: 7em // em-tentional :D
 			overflow: hidden
@@ -67,11 +67,11 @@ $color-comment-border: $color-border
 			margin: 0 0 0.6667em 0
 
 		p:last-of-type em:only-child
-			color: $zon_grey
+			color: $zon-grey
 			font-family: $font-franziska
 			font-style: normal
 			&:before
-				background-color: $zon_grey
+				background-color: $zon-grey
 				border-radius: 50%
 				color: $white
 				content: "!"
@@ -93,9 +93,9 @@ $color-comment-border: $color-border
 	&__reaction,
 	&__date
 		+link
-			color: $zon_grey
+			color: $zon-grey
 		+on-interaction
-			color: $zon_dark_grey
+			color: $zon-dark-grey
 		font-size: remify(13px)
 		letter-spacing: $zon-letter-spacing-s
 
@@ -115,7 +115,7 @@ $color-comment-border: $color-border
 			padding-left: remify(4px)
 
 	&__rewrapper
-		color: $zon_grey
+		color: $zon-grey
 		cursor: pointer
 		display: none
 		float: left
@@ -147,7 +147,7 @@ $color-comment-border: $color-border
 			border-bottom: 1px solid currentColor
 
 		&--sending
-			color: $zon_light_grey !important
+			color: $zon-light-grey !important
 
 
 .comment--indented
@@ -157,7 +157,7 @@ $color-comment-border: $color-border
 		padding: 0 $page-padding
 
 	.comment__container
-		box-shadow: inset remify(24px) 0 0 0 $zon_lighter_grey
+		box-shadow: inset remify(24px) 0 0 0 $zon-lighter-grey
 		padding-left: remify(48px)
 		padding-right: $page-padding
 		border-top: 1px solid $color-comment-border
@@ -229,15 +229,15 @@ $color-comment-border: $color-border
 		+border-radius(1em)
 		+transition(background-color .2s)
 		background-color: $zon-trout
-		color: $zon_lighter_grey
+		color: $zon-lighter-grey
 		font-size: remify(11px)
 		margin-right: remify(12px)
 		padding: remify(3px 8px)
 	&__cta
 		+transition-property(border-bottom-color, color)
 		+transition-duration(.2s)
-		border-bottom: 1px solid $zon_light_grey
-		color: $zon_grey
+		border-bottom: 1px solid $zon-light-grey
+		color: $zon-grey
 		font-size: remify(15px)
 		letter-spacing: $zon-letter-spacing-s
 

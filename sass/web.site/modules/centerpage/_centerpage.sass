@@ -24,7 +24,7 @@
 			+ div:not(.cp-region--parquet)
 				border-top: 1px solid $color-border
 	&--gallery
-		background-color: $zon_lighter_grey
+		background-color: $zon-lighter-grey
 		padding-bottom: remify(40px)
 	// we want a border if grey meets grey
 	&--gallery + &--parquet
@@ -74,11 +74,11 @@
 	// Unfortunately, the region containing the ze.tt parquet area is not aware of that fact
 	// so we have to do all the border styling here, too
 	&--zett
-		background-color: $zon_lighter_grey
+		background-color: $zon-lighter-grey
 		border-bottom: 1px solid $color-border
 		margin-top: -1px // "remove" border-top of parent parquet region
 		+respond-min($break-tablet-min)
-			border-bottom-color: $zon_mid_grey
+			border-bottom-color: $zon-mid-grey
 			margin-bottom: -1px // "remove" border-top of next region
 
 	+respond-min($break-areas)

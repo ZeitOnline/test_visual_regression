@@ -10,7 +10,7 @@
 			<span class="{{ self.layout() }}__series-label">Serie: {{ teaser.serie.serienname }}</span>
 		{%- endif %}
 	{%- elif teaser.blog %}
-		<span class="{{ self.layout() }}__series-label">Blog: {{ teaser.blog.name | hide_none }}</span>
+		<span class="{{ self.layout() }}__series-label">Blog: {{ teaser.blog.name }}</span>
 	{%- endif %}
 {% endblock teaser_journalistic_format %}
 

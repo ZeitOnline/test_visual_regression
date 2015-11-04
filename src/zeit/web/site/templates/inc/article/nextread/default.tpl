@@ -8,8 +8,8 @@
 		{% include "zeit.web.site:templates/inc/asset/image_nextread-default.tpl" with context %}
 		<div class="{{ module_layout }}__container">
 			<h2 class="{{ module_layout }}__heading">
-				<span class="{{ module_layout }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
-				<span class="{{ module_layout }}__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
+				<span class="{{ module_layout }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
+				<span class="{{ module_layout }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
 			</h2>
 			<div class="{{ module_layout }}__metadata">
 				{{ cp.include_teaser_datetime(teaser, module_layout, module_layout) }}

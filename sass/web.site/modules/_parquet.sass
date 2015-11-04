@@ -1,6 +1,6 @@
 .parquet-meta
 	vertical-align: top
-	background-color: $zon_lighter_grey
+	background-color: $zon-lighter-grey
 	+respond-min($break-tablet-min)
 		display: table-cell
 		width: 27%
@@ -31,7 +31,7 @@
 			+on-interaction
 				text-decoration: underline
 		&:after
-			color: $zon_grey
+			color: $zon-grey
 			content: "\203A" // › = single right-pointing angle quotation mark
 			float: right
 			font-size: remify(32px)
@@ -66,7 +66,7 @@
 			background-color: $primary-color-zmo
 			color: $white
 			&:after
-				color: $zon_light_grey
+				color: $zon-light-grey
 
 	&__links
 		display: none
@@ -83,9 +83,9 @@
 	&__topic-link,
 	&__more-link
 		+link
-			color: $zon_grey
+			color: $zon-grey
 		+on-interaction
-			color: $zon_dark_grey
+			color: $zon-dark-grey
 		display: inline-block
 		font-size: remify(14px)
 		letter-spacing: $zon-letter-spacing-s
@@ -93,9 +93,9 @@
 		overflow: hidden
 
 	&__topic-link
-		border-bottom: 1px solid rgba($zon_mid_grey, .4)
+		border-bottom: 1px solid rgba($zon-mid-grey, .4)
 		+on-interaction
-			border-bottom-color: $zon_mid_grey
+			border-bottom-color: $zon-mid-grey
 
 	&__more-link
 		font-weight: bold

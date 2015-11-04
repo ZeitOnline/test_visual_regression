@@ -11,7 +11,7 @@
 {%- endblock article_header %}
 
 {% block article_pages -%}
-    {{ blocks.inlinegallery(view.images, wrapper_class='gallery') }}
+    {{ blocks.inlinegallery(view.images, view, wrapper_class='gallery') }}
     <div class="article__page gallery__info">
         <div class="gallery__description">
             {{ view.galleryText|safe }}
