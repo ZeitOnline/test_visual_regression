@@ -193,6 +193,26 @@ def test_missing_breaking_news_should_eval_to_false(application):
     assert view.breaking_news.published is False
 
 
+def test_adcontroller_handles_for_entdecken_und_reisen(mock_ad_view):
+    assert mock_ad_view('centerpage', 'entdecken', ''
+                        ).adcontroller_handle == 'index'
+    assert mock_ad_view('centerpage', 'entdecken', 'reisen'
+                        ).adcontroller_handle == 'centerpage'
+    assert mock_ad_view('article', 'entdecken', ''
+                        ).adcontroller_handle == 'artikel'
+    assert mock_ad_view('article', 'entdecken', 'reisen'
+                        ).adcontroller_handle == 'artikel'
+
+
+def test_adcontroller_banner_channel_for_entdecken_und_reisen(mock_ad_view):
+    assert mock_ad_view(
+        'centerpage', 'entdecken', ''
+        ).banner_channel == 'reisen/centerpage'
+    assert mock_ad_view(
+        'centerpage', 'entdecken', 'reisen'
+        ).banner_channel == 'reisen/centerpage'
+
+
 def test_adcontroller_handle_return_value(mock_ad_view):
     assert mock_ad_view('centerpage', 'politik', ''
                         ).adcontroller_handle == 'index'
