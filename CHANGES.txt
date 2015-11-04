@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Deduplicate Automatic Gallery Areas
 
+- FIX: Repair deduped pagination for gallery areas
+
 - MAINT: Plug in jinja finalizer to hide `None` expressions
 
 - MAINT: Replace deprecated Bitblt with new image handling
