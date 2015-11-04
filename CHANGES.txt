@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2362: Set banner_channel for new ressort 'entdecken' to 'reisen'
 
+- ZON-2365: Fix pre-moderation lightbox on mobile
+
 - ZON-606: Add community states
 
 - FIX: Deduplicate Automatic Gallery Areas
