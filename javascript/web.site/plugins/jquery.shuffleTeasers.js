@@ -52,7 +52,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
                 });
         }).fail(function( ) {
             fallbackUrl = $this.attr( 'href' );
-            if ( sourceUrl ) {
+            if ( fallbackUrl ) {
                 window.location.href = fallbackUrl;
             }
         });
