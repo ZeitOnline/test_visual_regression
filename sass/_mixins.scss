@@ -323,7 +323,7 @@
 }
 
 @mixin zon-button-inky($margin: 0) {
-	@include zon-button($background-color: $zon_dark_grey,
+	@include zon-button($background-color: $zon-dark-grey,
 	                    $hover-background-color: $zon-charcoal,
 	                    $color: $white,
 	                    $hover-color: $white,
@@ -335,13 +335,13 @@
 	);
 }
 
-@mixin zon-button-dark($color: $zon_lighter_grey, $margin: remify(14px 6px)) {
+@mixin zon-button-dark($color: $zon-lighter-grey, $margin: remify(14px 6px)) {
 	@include zon-button($background-color: rgba(0, 0, 0, 0.2),
 	                    $hover-background-color: rgba(0, 0, 0, 0.5),
 	                    $color: $color,
 	                    $hover-color: $white,
 	                    $visited-color: $color,
-	                    $border-color: $zon_mid_grey,
+	                    $border-color: $zon-mid-grey,
 	                    $hover-border-color: $zon-alto,
 	                    $margin: $margin,
 	                    $disabled: false
@@ -354,8 +354,8 @@
 	                    $color: $zon-charcoal,
 	                    $hover-color: $black,
 	                    $visited-color: $zon-charcoal,
-	                    $border-color: $zon_light_grey,
-	                    $hover-border-color: $zon_mid_grey,
+	                    $border-color: $zon-light-grey,
+	                    $hover-border-color: $zon-mid-grey,
 	                    $margin: $margin
 	);
 }

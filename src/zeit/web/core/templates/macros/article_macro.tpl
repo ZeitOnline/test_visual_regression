@@ -1,4 +1,4 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %} <!-- sinnvoll? -->
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 {% macro inlinegallery(obj, view=None, wrapper_class='inline-gallery__wrap') -%}
     <div class="{{ wrapper_class }}">

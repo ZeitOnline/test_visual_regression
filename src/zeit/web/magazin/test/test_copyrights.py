@@ -14,22 +14,24 @@ import zeit.web.core.centerpage
 
 
 @pytest.fixture
-def cp_factory(application):
+def cp_factory(application, dummy_request):
     """A factory function to create dummy cp views with an `area` property
     that can be configured by providing an `area_getter` function. The `area`
     is decorated with zeit.web.register_copyrights.
     """
+    def register_copyrights(func):
+        def decorator(self):
+            return self.register_copyrights(func(self))
+        return decorator
+
     def wrapped(area_getter):
         cp = zeit.cms.interfaces.ICMSContent(
             'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
-        view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
-
-        view_class = type('View', (object,), {
+        view_class = type('View', (
+            zeit.web.magazin.view_centerpage.Centerpage,), {
             '_copyrights': {},
-            'context': view.context,
-            'area': property(zeit.web.register_copyrights(area_getter))}
-        )
-        view = view_class()
+            'area': property(register_copyrights(area_getter))})
+        view = view_class(cp, dummy_request)
         # Copyright registration needs to be triggered by accessing the
         # property at least once.
         view.area

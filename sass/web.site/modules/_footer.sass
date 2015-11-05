@@ -1,16 +1,16 @@
 // careful, the order of this pseudo class is important here
 %footer_dark
 	background-color: $zon-charcoal
-	color: $zon_grey
+	color: $zon-grey
 	a
 		color: inherit
 		+on-interaction
-			color: $zon_lighter_grey
+			color: $zon-lighter-grey
 
 // careful, the order of this pseudo class is important here
 %footer_light
-	background-color: $zon_lighter_grey
-	color: $zon_dark_grey
+	background-color: $zon-lighter-grey
+	color: $zon-dark-grey
 	a
 		color: inherit
 		+on-interaction
@@ -67,14 +67,14 @@
 	margin-top: remify(60px)
 	text-align: center
 
-.footer-brand,
-.footer-brand:hover
-	color: $color-zon-logo
-
 .footer-brand
 	display: inline-block
 	margin-bottom: remify(20px)
 	position: relative
+	&,
+	&:focus,
+	&:hover
+		color: $color-zon-logo
 	&__logo
 		display: block
 		height: remify(30px)
@@ -86,15 +86,15 @@
 .footer-publisher
 	@extend %footer_dark
 	+respond-min($break-tablet-min)
-		background-color: $zon_lighter_grey
-		color: $zon_dark_grey
+		background-color: $zon-lighter-grey
+		color: $zon-dark-grey
 		padding-bottom: remify(20px)
 	&__row
 		&--extra
 			@extend %footer_column_row
 			+respond-min($break-tablet-min)
-				background-color: $zon_lighter_grey
-				color: $zon_dark_grey
+				background-color: $zon-lighter-grey
+				color: $zon-dark-grey
 				a
 					color: inherit
 					+on-interaction
@@ -126,7 +126,7 @@
 			content: none
 	&__row--more
 		@extend %footer_light
-		border-top: 1px solid $zon_light_grey
+		border-top: 1px solid $zon-light-grey
 		+respond-min($break-tablet-min)
 			display: none !important
 	&__more
@@ -140,7 +140,7 @@
 
 .footer-links
 	background-color: $zon-charcoal
-	border-top: 1px solid $zon_grey
+	border-top: 1px solid $zon-grey
 	padding-bottom: $junior
 	+respond-min($break-tablet-min)
 		border-top: none
@@ -156,7 +156,7 @@
 		@extend %footer_dot
 	&__button
 		clear: both
-		border-top: 1px solid $zon_grey
+		border-top: 1px solid $zon-grey
 		margin-top: -1px
 		padding: remify(18px) 0
 		+respond-min($break-tablet-min)
