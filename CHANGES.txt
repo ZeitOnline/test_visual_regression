@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Drop caption block from centerpage header image
 
+- FIX: Fix Jobbox Dropdown
+
 
 2.22 (2015-11-04)
 -----------------
