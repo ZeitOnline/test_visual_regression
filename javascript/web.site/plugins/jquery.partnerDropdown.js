@@ -36,7 +36,7 @@
                     tracking = $dropdown.data( 'tracklink' );
 
                 $button.on( 'click', function( event ) {
-                    var link = $dropdown.val();
+                    var link = $dropdown.find( 'option:selected' ).attr( 'value' );
                     if ( link ) {
                         window.location.href = link + tracking;
                     }
