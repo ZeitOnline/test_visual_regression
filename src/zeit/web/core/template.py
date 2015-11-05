@@ -880,6 +880,14 @@ def remove_get_params(url, *args):
             scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
 
 
+@zeit.web.register_filter
+def join_if_exists(l, s):
+    # Join list items through string, if item is not None.
+    if s is None:
+        s = ''
+    return s.join([li for li in l if li])
+
+
 @zeit.web.register_global
 def provides(obj, iface):
     try:
