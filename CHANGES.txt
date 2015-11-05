@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-606: Add community states
 
+- ZON-2247: Add caption to videos in articles
+
 - FIX: Deduplicate Automatic Gallery Areas
 
 - FIX: Repair deduped pagination for gallery areas
