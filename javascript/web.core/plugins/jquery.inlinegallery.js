@@ -126,8 +126,9 @@
                 galleryWidth = gallery.width(),
                 figures = gallery.find( options.slideSelector ),
                 figcaptions = gallery.find( '.figure__caption' ),
-                backButton = $( '<div class="bx-zone-prev"><a class="bx-overlay-prev icon-pfeil-links">Ein Bild zurück</a></div>' ),
-                nextButton = $( '<div class="bx-zone-next"><a class="bx-overlay-next icon-pfeil-rechts">Ein Bild vor</a></div>' ),
+                buttonTemplates = $( '.inline-gallery-icon-templates' ).first().html(),
+                backButton = $( buttonTemplates ).filter( '.bx-zone-prev' ),
+                nextButton = $( buttonTemplates ).filter( '.bx-zone-next' ),
                 buttons = backButton.add( nextButton ),
                 DOM_VK_LEFT = 37,
                 DOM_VK_RIGHT = 39,
@@ -245,8 +246,12 @@
                     backButton.insertAfter( gallery ).on( 'click', function() { slider.goToPrevSlide(); } );
 
                     /* add icons to existing gallery buttons */
-                    $( '.bx-next' ).addClass( 'icon-pfeil-rechts' );
-                    $( '.bx-prev' ).addClass( 'icon-pfeil-links' );
+                    $( '.bx-next' ).addClass( 'icon-pfeil-rechts' )
+                        .wrapInner( '<span class="bx-icon-description"></span>' )
+                        .prepend( nextButton.find( 'svg' ).clone() );
+                    $( '.bx-prev' ).addClass( 'icon-pfeil-links' )
+                        .wrapInner( '<span class="bx-icon-description"></span>' )
+                        .prepend( backButton.find( 'svg' ).clone() );
 
                     sliderViewport.parent().addClass( 'bx-wrapper--no-touch' );
                 } else {

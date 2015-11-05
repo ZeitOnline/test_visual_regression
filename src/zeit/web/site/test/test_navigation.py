@@ -30,7 +30,7 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
     assert len(html('.main_nav > div')) == 7, 'seven divs within .main_nav'
 
     assert len(html('.main_nav > div.logo_bar >'
-                    'h1.logo_bar__image')) == 1, 'just one .logo_bar__image'
+                    'h1.logo_bar__brand')) == 1, 'just one .logo_bar__brand'
 
     assert len(html('.main_nav > div.logo_bar >'
                     'div.logo_bar__menu')) == 1, 'just one .logo_bar__menu'
@@ -155,9 +155,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
 
     # Logo
     assert html('a[href*="/index"]'
-                '[title="Nachrichten auf ZEIT ONLINE"]'
-                '[class="icon-zon-logo-desktop"]'
-                '[id="hp.global.topnav.centerpages.logo"]')[0] is not None, (
+                '[title="Nachrichten auf ZEIT ONLINE"]')[0] is not None, (
                     'Logo link is missing')
 
     # Main menu icon
@@ -236,7 +234,8 @@ def test_cp_should_have_valid_main_nav_structure(testserver, testbrowser):
     html = browser.cssselect
 
     assert len(html('.main_nav')) == 1, 'Main navigation must be present'
-    assert len(html('div.logo_bar__image')) == 1, 'ZON logo must be present'
+    assert len(html('svg.logo_bar__brand-logo')) == 1, (
+        'ZON logo must be present')
     assert len(html('div.logo_bar__menu')) == 1, 'Menu link must be present'
     assert len(html('div.main_nav__teaser')) == 1, 'Teaser must be present'
     assert len(html('div.main_nav__community')) == 1, (
@@ -279,16 +278,6 @@ def test_cp_should_have_valid_classifieds_structure(testserver, testbrowser):
         'Immo link is not present.')
     assert len(html('li[data-id="automarkt"] > a')) == 2, (
         'Automarkt link is not present.')
-
-
-def test_cp_has_valid_logo_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
-    html_str = browser.contents
-    html = lxml.html.fromstring(html_str).cssselect
-    link = html('.logo_bar a.icon-zon-logo-desktop')[0]
-    assert link.get('href') == testserver.url + '/index'
-    assert link.get('title') == 'Nachrichten auf ZEIT ONLINE'
-    assert link.get('id') == 'hp.global.topnav.centerpages.logo'
 
 
 def test_cp_has_valid_burger_structure(testserver, testbrowser):
@@ -340,7 +329,8 @@ def test_zon_main_nav_has_correct_structure(
     driver.get('%s/zeit-online/index' % testserver.url)
 
     main_nav = driver.find_elements_by_class_name('main_nav')[0]
-    logo_bar__image = driver.find_elements_by_class_name('logo_bar__image')[0]
+    logo_bar__logo = driver.find_elements_by_class_name(
+        'logo_bar__brand-logo')[0]
     search__button = driver.find_elements_by_class_name('search__button')[0]
     search__input = driver.find_elements_by_class_name('search__input')[0]
     main_nav__community = driver.find_elements_by_class_name(
@@ -358,7 +348,7 @@ def test_zon_main_nav_has_correct_structure(
     # navigation is visible in all sizes
     assert main_nav.is_displayed()
     # logo is visible in all sizes
-    assert logo_bar__image.is_displayed()
+    assert logo_bar__logo.is_displayed()
 
     if small_screen:
         # burger menu is visible

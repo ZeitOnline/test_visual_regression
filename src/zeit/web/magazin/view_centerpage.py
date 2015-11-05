@@ -7,8 +7,8 @@ import zeit.connector.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
-import zeit.seo
 import zeit.magazin.interfaces
+import zeit.seo
 
 import zeit.web.core.article
 import zeit.web.core.comments
@@ -16,7 +16,6 @@ import zeit.web.core.interfaces
 import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
-
 import zeit.web.magazin.view
 
 
@@ -45,23 +44,30 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
             except:
                 continue
 
+    def register_copyrights(self, container):
+        """Registers all teaser image copyrights found in the container."""
+        for t in zeit.web.core.interfaces.ITeaserSequence(container, []):
+            try:
+                self._copyrights.setdefault(t.image.image_group, t.image)
+            except AttributeError:
+                continue
+        return container
+
     @zeit.web.reify
-    @zeit.web.register_copyrights
     def monothematic_block(self):
         try:
             mtb_teaserbar = self.context['teaser-mosaic'].values()[0]
             if mtb_teaserbar.layout.id == 'zmo-mtb':
-                return mtb_teaserbar
+                return self.register_copyrights(mtb_teaserbar)
         except IndexError:
             return
 
     @zeit.web.reify
-    @zeit.web.register_copyrights
     def teaserbar(self):
         try:
             zmo_teaserbar = self.context['teaser-mosaic'].values()[1]
             if zmo_teaserbar.layout.id == 'zmo-teaser-bar':
-                return zmo_teaserbar
+                return self.register_copyrights(zmo_teaserbar)
         except IndexError:
             return
 
@@ -74,26 +80,24 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
                     teaser_list.remove(teaser)
             except AttributeError:
                 continue
-        return teaser_list
+        return self.register_copyrights(teaser_list)
 
     @zeit.web.reify
-    @zeit.web.register_copyrights
     def area_lead_1(self):
-        return self.insert_seperator('before', self.area_lead) or \
-            self.area_lead
+        separated = self.insert_seperator('before', self.area_lead)
+        return self.register_copyrights(separated or self.area_lead)
 
     @zeit.web.reify
-    @zeit.web.register_copyrights
     def area_lead_2(self):
-        return self.insert_seperator('after', self.area_lead)
+        separated = self.insert_seperator('after', self.area_lead)
+        return self.register_copyrights(separated)
 
     @zeit.web.reify
-    @zeit.web.register_copyrights
     def area_lead_full_teaser(self):
         for teaser_block in self.context.values()[0]["lead"].values():
             try:
                 if 'zmo-leader-fullwidth' in teaser_block.layout.id:
-                    return teaser_block
+                    return self.register_copyrights(teaser_block)
             except AttributeError:
                 continue
 
@@ -102,15 +106,14 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
         return self.context.values()[0]["informatives"].values()
 
     @zeit.web.reify
-    @zeit.web.register_copyrights
     def area_informatives_1(self):
-        return self.insert_seperator('before', self.area_informatives) or \
-            self.area_informatives
+        separated = self.insert_seperator('before', self.area_informatives)
+        return self.register_copyrights(separated or self.area_informatives)
 
     @zeit.web.reify
-    @zeit.web.register_copyrights
     def area_informatives_2(self):
-        return self.insert_seperator('after', self.area_informatives)
+        separated = self.insert_seperator('after', self.area_informatives)
+        return self.register_copyrights(separated)
 
     @zeit.web.reify
     def area_buzz(self):
@@ -118,8 +121,7 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
         return dict(
             twitter=conn.get_social(facet='twitter', section='zeit-magazin'),
             facebook=conn.get_social(facet='facebook', section='zeit-magazin'),
-            comments=conn.get_comments(section='zeit-magazin')
-        )
+            comments=conn.get_comments(section='zeit-magazin'))
 
     @zeit.web.reify
     def copyrights(self):
