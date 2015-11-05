@@ -1,8 +1,9 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 <aside class="{{ 'jobbox' | with_mods(area.kind) }}{% block jobbox_modifier %} jobbox--animate{% endblock %}">
-	<span class="jobbox__label">Verlagsangebot</span>
+	{% block jobbox_toplabel %}<span class="jobbox__label">Verlagsangebot</span>{% endblock %}
 	<div class="jobbox__container">
+		{% block jobbox_boxlabel %}{% endblock %}
 		{% block jobbox_header %}
 		<div class="jobbox__kicker">
 			Aktuelle Jobs im ZEIT Stellenmarkt

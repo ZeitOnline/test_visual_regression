@@ -19,14 +19,14 @@ import zeit.web.core.view
 import zeit.web.magazin.view_article
 
 
-def test_base_view_produces_acceptable_return_type(application):
+def test_base_view_produces_acceptable_return_type(application, dummy_request):
     class BaseView(zeit.web.core.view.Base):
 
         """This view class does not implement a __call__ method."""
 
         pass
     content = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    obj = BaseView(content, pyramid.testing.DummyRequest())
+    obj = BaseView(content, dummy_request)
     assert hasattr(obj(), '__iter__'), 'BaseView returns an iterable type.'
 
 

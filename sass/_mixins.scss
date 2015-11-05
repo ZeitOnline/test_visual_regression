@@ -236,12 +236,12 @@
 /* mixins for navigation/header */
 
 @mixin add_nav_bar_style($height, $double: false) {
-	border-bottom: 1px solid $zon_light_grey;
+	border-bottom: 1px solid $color-border;
 	height: $height;
 	padding-left: $fine;
 	width: 100%;
 	@if $double {
-		border-top: 1px solid $zon_light_grey;
+		border-top: 1px solid $color-border;
 	}
 }
 
@@ -373,6 +373,18 @@
 @mixin zon-button-green($margin: 0) {
 	@include zon-button($background-color: rgba(22, 135, 80, .8),
 	                    $hover-background-color: rgba(22, 135, 80, 1),
+	                    $color: $white,
+	                    $hover-color: $white,
+	                    $visited-color: $white,
+	                    $margin: $margin,
+	                    $padding: remify(10px 16px),
+	                    $disabled: false
+	);
+}
+
+@mixin zon-button-red($margin: 0) {
+	@include zon-button($background-color: rgba(#A60E00, .8),
+	                    $hover-background-color: rgba(#A60E00, 1),
 	                    $color: $white,
 	                    $hover-color: $white,
 	                    $visited-color: $white,

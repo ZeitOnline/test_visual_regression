@@ -12,30 +12,14 @@
 {%- endmacro %}
 
 {% macro supertitle() -%}
-  {#
-    view = {'supertitle': u'Streik der Lokführer'}
-  #}
-  <div class="article__head__supertitle">{{ view.supertitle | hide_none }}</div>
+  <div class="article__head__supertitle">{{ view.supertitle }}</div>
 {%- endmacro %}
 
 {% macro title() -%}
-  {#
-    view = {'title': u'Japan und China kommen sich näher'}
-  #}
-  <div class="article__head__title">{{ view.title | hide_none }}</div>
+  <div class="article__head__title">{{ view.title }}</div>
 {%- endmacro %}
 
 {% macro subtitle(include_meta=False, with_quotes=False) -%}
-  {#
-    include_meta = True
-    with_quotes = True
-    view = {'subtitle': u'Historischer Händedruck: Chinas Präsident Xi und '
-                        u'Japans Premier Abe haben sich in Peking getroffen. '
-                        u'Beide Staaten wollen ihre Beziehungen neu beleben.',
-            'genre': 'Politik',
-            'authors': ['Ursula Finkel', 'Marcel Fassbinder']
-            }
-  #}
     <div class="article__head__subtitle">
         <p>
             <strong>
@@ -66,47 +50,24 @@
 {%- endmacro %}
 
 {% macro paragraph(html) -%}
-  {#
-    html = (u'Sieben Begriffe für ein und denselben <i>Gegenstand</i> – das ist '
-            u'deutsches Kulturgut. <b>Dialekte</b> gehören schon immer zu diesem '
-            u'viel durchwanderten und umkämpften Land. Auch die deutsche '
-            u'Teilung hat zur <a href="#">sprachlichen Vielfalt</a> beigetragen.')
-  #}
     <p class="is-constrained is-centered">
         {{ html | safe}}
     </p>
 {%- endmacro %}
 
 {% macro unorderedlist(html) -%}
-  {#
-    html = (u'<li>And I will <i>strike down</i> upon thee with <em>great vengeance</em></li>'
-            u'<li>and <b>furious anger</b> those who <strong>would</strong> attempt</li>'
-            u'<li>to poison and destroy <a href="#">My brothers</a>.</li>')
-  #}
     <ul class="is-constrained is-centered">
         {{ html | safe }}
     </ul>
 {%- endmacro %}
 
 {% macro orderedlist(html) -%}
-  {#
-    html = (u'<li>And I will <i>strike down</i> upon thee with <em>great vengeance</em></li>'
-            u'<li>and <b>furious anger</b> those who <strong>would</strong> attempt</li>'
-            u'<li>to poison and destroy <a href="#">My brothers</a>.</li>')
-  #}
     <ol class="is-constrained is-centered">
         {{ html | safe }}
     </ol>
 {%- endmacro %}
 
 {% macro portraitbox(obj) -%}
-  {#
-    obj = {'name': u'Herrmann Koser',
-           'text': (u'Herrmann Koser ist ZEITmagazin-Leserin und eine der '
-                    u'meinungsstarken Kommentatoren bei unseren sonntäglichen '
-                    u'Tatort-Diskussionen bei Facebook.')
-           }
-  #}
     {% if obj.name -%}
         <figure class="portraitbox figure-stamp">
             <div class="portraitbox-heading">
@@ -118,11 +79,6 @@
 {%- endmacro %}
 
 {% macro subpage_chapter(number, subtitle, class) -%}
-  {#
-    number = 4
-    subtitle = (u'Am Potsdamer Platz steigen Ballons der symbolischen '
-                u'Lichtgrenze gen Himmel.')
-  #}
     {% if subtitle -%}
         <div class="{{ class }}">
             <span>Kapitel {{ number }}</span>
@@ -165,12 +121,12 @@
 
 {% macro intertitle(intertitle) -%}
     <h2 class="article__subheading is-constrained is-centered">
-        {{ intertitle|striptags }}
+        {{ intertitle | striptags }}
     </h2>
 {%- endmacro %}
 
 {% macro raw(obj) -%}
-    <div class="raw">{{ obj.xml|safe }}</div>
+    <div class="raw">{{ obj.xml | safe }}</div>
 {%- endmacro %}
 
 {% macro citation(obj) -%}
@@ -236,7 +192,7 @@
                 {% if loop -%}
                 <span class="figure__index">{{ loop.index }}/{{ loop.length }}</span>
                 {% endif -%}
-                <span class="figure__text">{{ obj.caption | hide_none | safe }}</span>
+                <span class="figure__text">{{ obj.caption | safe }}</span>
                 {% if obj.copyright|count and obj.copyright[0][0] != '©' %}
                 <span class="figure__copyright">
                     {%- if obj.copyright[0][1] -%}
@@ -256,7 +212,7 @@
 {% macro headerimage(obj) -%}
     <div class="scaled-image is-pixelperfect article__head-image">
         {{ lama.insert_responsive_image(obj) }}
-    </div>{{ obj.caption | hide_none | safe }}{{ obj.copyright }}
+    </div>{{ obj.caption | safe }}{{ obj.copyright }}
 {%- endmacro %}
 
 {% macro video(obj) -%}
@@ -285,7 +241,7 @@
 {% macro headervideo(obj, wrap_class='article__main-video--longform', img_class='') -%}
 
     {% if obj.id is not defined and obj.uniqueId -%}
-        {% set id = obj.uniqueId|substring_from('/') %}
+        {% set id = obj.uniqueId | substring_from('/') %}
     {% elif obj.id -%}
         {% set id = obj.id %}
     {% endif %}

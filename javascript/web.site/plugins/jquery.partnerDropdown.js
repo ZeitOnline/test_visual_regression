@@ -36,9 +36,9 @@
                     tracking = $dropdown.data( 'tracklink' );
 
                 $button.on( 'click', function( event ) {
-                    var link = $dropdown.find( '.pa-dropdown__option:selected' ).attr( 'value' );
+                    var link = $dropdown.val();
                     if ( link ) {
-                        window.open( link + tracking, '_self' );
+                        window.location.href = link + tracking;
                     }
                 });
 

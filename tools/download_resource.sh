@@ -5,7 +5,7 @@
 # To download resource and meta resource of the homepage call:
 # ./download_resource.sh index
 
-dav_host='http://vivi-pommes.zeit.de:9000';
+dav_host='http://cms-backend.zeit.de:9000';
 
 if [[ $1 == /* ]]; then
 	echo "ERROR: path should _not_ begin with a '/' ’cause it‘s a subpath of /cms/work/"

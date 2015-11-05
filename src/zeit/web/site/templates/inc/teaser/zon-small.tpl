@@ -14,5 +14,5 @@
 		{% set media_block_additional_class = '{}__media--force-mobile'.format(module_layout) %}
 	{% endif %}
 
-	{% include "zeit.web.site:templates/inc/teaser_asset/{}.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
+	{% include "zeit.web.site:templates/inc/asset/image_teaser.tpl" ignore missing %}
 {% endblock %}

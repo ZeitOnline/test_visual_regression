@@ -19,10 +19,10 @@
                         {% if is_column == True %}
                             {{ view.serie + ' / ' }}
                         {% endif %}
-                        {{- view.supertitle | hide_none -}}
+                        {{ view.supertitle }}
                     </span>{%- if view.title -%}<span class="article-heading__colon">: </span>{%- endif -%}
                     <span class="article-heading__title">
-                        {{- view.title | hide_none -}}
+                        {{ view.title }}
                     </span>
                 </{{ headertag }}>
             </div>
@@ -38,7 +38,7 @@
                 </div>
             {% else %}
                 <div class="summary" itemprop="description">
-                    {{ view.subtitle | hide_none }}
+                    {{ view.subtitle }}
                 </div>
                 {%- set byline = view.context | get_byline %}
                 {% if byline | length -%}
@@ -74,16 +74,23 @@
     {% endblock %}
 
     {% endblock content %}
-    {% block article_interactions %}
-    <div class="article-interactions article__item">
-        {% include "zeit.web.site:templates/inc/article/sharing-menu.tpl" %}
-        {% block print %}
+
+    {% block article_footer %}
+    <div class="article-footer article__item">
+        {% block article_interactions %}
+        <div class="article-interactions">
+            {% include "zeit.web.site:templates/inc/article/sharing-menu.tpl" %}
+            {% block print %}
+            {% endblock %}
+        </div>
+        {% endblock %}
+
+        {% block article_tags %}
+            {% include "zeit.web.site:templates/inc/article/tags.tpl" %}
         {% endblock %}
     </div>
     {% endblock %}
-    {% block article_tags %}
-        {% include "zeit.web.site:templates/inc/article/tags.tpl" %}
-    {% endblock %}
+
     {% block nextread %}
         {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
     {% endblock %}

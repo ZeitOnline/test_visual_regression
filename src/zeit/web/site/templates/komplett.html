@@ -4,7 +4,7 @@
     {% for page in view.pages %}
         <section class="article-page" data-page-number="{{ page.number+1 }}" id="seite-{{ page.number+1 }}">
             {% if not loop.first %}
-                <h3 class="article-page__page-teaser article__item">{{ page.teaser | hide_none }}</h3>
+                <h3 class="article-page__page-teaser article__item">{{ page.teaser }}</h3>
             {% endif %}
             {{ render_page(page) }}
         </section>

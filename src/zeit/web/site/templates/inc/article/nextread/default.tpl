@@ -1,28 +1,23 @@
-{% set image = get_teaser_image(module, teaser) %}
-{% set has_default_image = get_default_image_id() in image.uniqueId %}
-{% set is_column = teaser and teaser.serie and teaser.serie.column %}
-{% set tracking_slug = 'articlebottom.editorial-nextread...area' %}
+{% set image = get_image(module, teaser, fallback=False) %}
+{% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
+{% set module_layout = self.layout() %}
 
-<article class="{% block layout %}nextread{% endblock %}{% if not image or has_default_image or is_column %} {{ self.layout() }}--no-image{% else %} {{ self.layout() }}--with-image{% endif %}" id="{{ self.layout() }}">
-	<a class="{{ self.layout() }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}" data-id="{{ tracking_slug }}">
-		<div class="{{ self.layout() }}__lead">{{ module.lead or 'Lesen Sie jetzt' }}</div>
-		{% if image and not has_default_image and not is_column -%}
-			{% set module_layout = self.layout() %}
-			{% include "zeit.web.site:templates/inc/teaser_asset/{}_zon-nextread.tpl".format(teaser | auto_select_asset | block_type) ignore missing %}
-		{%- endif -%}
-		<div class="{{ self.layout() }}__container">
-			<h2 class="{{ self.layout() }}__heading">
-				<span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle | hide_none }}</span>
-				<span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title | hide_none }}</span>
+<article class="{% block layout %}nextread{% endblock %}{% if not image %} {{ module_layout }}--no-image{% else %} {{ module_layout }}--with-image{% endif %}" id="{{ module_layout }}">
+	<a class="{{ module_layout }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}" data-id="articlebottom.editorial-nextread...area">
+		<div class="{{ module_layout }}__lead">{{ module.lead or 'Lesen Sie jetzt' }}</div>
+		{% include "zeit.web.site:templates/inc/asset/image_nextread-default.tpl" with context %}
+		<div class="{{ module_layout }}__container">
+			<h2 class="{{ module_layout }}__heading">
+				<span class="{{ module_layout }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
+				<span class="{{ module_layout }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
 			</h2>
-			<div class="{{ self.layout() }}__metadata">
-                {{ cp.include_teaser_datetime(teaser, self.layout(), self.layout()) }}
-				{% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
-				{% if comments -%}
-					<span class="{{ self.layout() }}__commentcount">
-						{{- comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') -}}
+			<div class="{{ module_layout }}__metadata">
+				{{ cp.include_teaser_datetime(teaser, module_layout, module_layout) }}
+				{% if comments %}
+					<span class="{{ module_layout }}__commentcount">
+						{{ comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') }}
 					</span>
-				{%- endif %}
+				{% endif %}
 			</div>
 		</div>
 	</a>

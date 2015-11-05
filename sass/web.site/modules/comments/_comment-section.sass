@@ -1,14 +1,15 @@
 .comment-section
 	margin: 0 (-$page-padding)
 	+respond-min($break-tablet-min)
-		border-top: 1px solid $zon_light_grey
+		border-top: 1px solid $color-border
 	&__item
 		margin-left: auto
 		margin-right: auto
 		padding: 0 $page-padding
 		+respond-min($break-tablet-min)
 			max-width: remify(700px) // 660px + 2*$page-padding
-	&__head
+	&__head,
+	&__error
 		background-color: $zon_lighter_grey
 		padding-bottom: em(32px)
 		padding-top: em(32px)
@@ -19,6 +20,9 @@
 			+align-items(center)
 		+respond-min($break-tablet-min)
 			background-color: transparent
+	&__error
+		text-align: left
+		color: $color-text-highlighted
 	&__headline
 		font-size: remify(18px)
 		font-weight: bold
@@ -41,7 +45,7 @@
 			content: "\25B8" // ▸ = Black right-pointing small triangle
 			margin-left: 3px
 	&__form
-		border-top: 1px solid $zon_lighter_grey
+		border-top: 1px solid $color-border
 
 		.comment-form__cancel--hidden
 			display: none

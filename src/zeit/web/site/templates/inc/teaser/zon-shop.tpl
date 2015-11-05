@@ -9,8 +9,16 @@
 	{# OPTIMIZE: Figcaption would be better than this wrapper.
 	   But JS fills the whole <figure> when loading an image.#}
 	<div class="{{ self.layout() }}__figurewrapper">
-		{% include "zeit.web.site:templates/inc/teaser_asset/imagegroup.tpl" %}
+		{% include "zeit.web.site:templates/inc/asset/image_teaser.tpl" %}
 	</div>
+{% endblock %}
+
+{% block teaser_text %}
+	{% set module_layout = self.layout() %}
+	{% set href = teaser | create_url %}
+	<a href="{{ href }}">
+		{{ super() }}
+	</a>
 {% endblock %}
 
 {# Eliminate many default teaser blocks #}

@@ -6,8 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait
 import mock
 
-from zeit.content.article.article import Article
-from zeit.cms.checkout.helper import checked_out
+import zeit.content.article.article
 import zeit.cms.interfaces
 
 import zeit.web.core.interfaces
@@ -29,7 +28,7 @@ def test_ipages_contains_blocks(application):
   </body>
 </article>
 """)
-    article = Article(xml)
+    article = zeit.content.article.article.Article(xml)
     pages = zeit.web.core.interfaces.IPages(article)
     assert 2 == len(pages)
     assert 'foo bar\n' == str(list(pages[0])[0])
@@ -278,35 +277,35 @@ def test_article08_has_correct_date(testbrowser):
     # not updated print article
     browser = testbrowser('/artikel/08')
     date = browser.cssselect('.article__head__meta__date')[0].text
-    assert date == '19. Februar 2014'
+    assert date.strip() == '19. Februar 2014'
 
 
 def test_article09_has_correct_date(testbrowser):
     # updated print article
     browser = testbrowser('/artikel/09')
     date = browser.cssselect('.article__head__meta__date')[0].text
-    assert date == u'4. März 2014, 14:35 Uhr'
+    assert date.strip() == u'4. März 2014, 14:35 Uhr'
 
 
 def test_article03_has_correct_date(testbrowser):
     # not updated online article
     browser = testbrowser('/artikel/03')
     date = browser.cssselect('.article__head__meta__date')[0].text
-    assert date == '30. Juli 2013, 17:20 Uhr'
+    assert date.strip() == '30. Juli 2013, 17:20 Uhr'
 
 
 def test_article10_has_correct_date(testbrowser):
     # updated online article
     browser = testbrowser('/artikel/10')
     date = browser.cssselect('.article__head__meta__date')[0].text
-    assert date == '20. Februar 2014, 17:59 Uhr'
+    assert date.strip() == '20. Februar 2014, 17:59 Uhr'
 
 
 def test_article05_has_correct_date(testbrowser):
     # longform
     browser = testbrowser('/artikel/05')
     date = browser.cssselect('.article__head__meta__date')[0].text
-    assert date == '3. November 2013'
+    assert date.strip() == '3. November 2013'
 
 
 def test_print_article_has_no_last_changed_date(testserver, testbrowser):
@@ -511,12 +510,13 @@ def test_gallery_should_have_click_counter_functions(testserver, testbrowser):
 def test_nextread_teaser_block_has_teasers_available(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
     nextread = zeit.web.core.interfaces.INextread(context)
-    assert hasattr(nextread, '__iter__'), \
-        'The nextread block should be iterable.'
-    assert len(nextread) == 1, \
-        '"Artikel 09" has exactly one nextread.'
-    assert all(map(lambda a: isinstance(a, Article), nextread)), \
-        'All nextread teasers should be articles.'
+    assert hasattr(nextread, '__iter__'), 'Nextread block should be iterable.'
+    assert len(nextread) == 1, '"Artikel 09" has exactly one nextread.'
+
+    def func(a):
+        return isinstance(a, zeit.content.article.article.Article)
+
+    assert all(map(func, nextread)), 'All nextread teasers should be articles.'
 
 
 def test_nextread_teaser_blocks_has_correct_layout_id(application):

@@ -32,7 +32,7 @@
         cc: function() {
             // cc tracking
             var img = document.createElement('img');
-            img.src = 'http://cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel|hide_none }}&amp;r=' + escape(document.referrer) + '&amp;rand=' + Math.random() * 10000000000000000;
+            img.src = 'http://cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel }}&amp;r=' + escape(document.referrer) + '&amp;rand=' + Math.random() * 10000000000000000;
         },
         all: function(id) {
             // start all tracking functions

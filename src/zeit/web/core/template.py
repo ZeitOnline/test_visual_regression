@@ -198,14 +198,6 @@ def substring_from(string, find):
 
 
 @zeit.web.register_filter
-def hide_none(string):
-    if string is None:
-        return ''
-    else:
-        return string
-
-
-@zeit.web.register_filter
 def get_layout(block, request=None):
     # Calculating the layout of a cp block can be slightly more expensive in
     # zeit.web, since we do lookups in some vocabularies, to change the layout,
@@ -310,19 +302,23 @@ def first_ancestor(iterable):
 
 @zeit.web.register_filter
 def startswith(string, value):
-    if not isinstance(string, basestring):
-        return False
-    return string.startswith(value)
+    if isinstance(string, basestring):
+        return string.startswith(value)
+    return False
 
 
 @zeit.web.register_filter
 def remove_break(string):
-    return re.sub('\n', '', string)
+    if isinstance(string, basestring):
+        return re.sub('\n', '', string)
+    return string
 
 
 @zeit.web.register_filter
-def replace_list_seperator(scsv, seperator):
-    return scsv.replace(';', seperator)
+def replace_list_seperator(string, seperator):
+    if isinstance(string, basestring):
+        return string.replace(';', seperator)
+    return string
 
 
 @zeit.web.register_filter
@@ -743,17 +739,21 @@ def get_module(module, name=None):
 
 
 @zeit.web.register_filter
-def attr_safe(text):
-    """Return an attribute safe version of text"""
-    return re.sub('[^a-zA-Z]', '', text).lower()
+def attr_safe(string):
+    """Return an attribute safe version of string"""
+    if isinstance(string, basestring):
+        return re.sub('[^a-zA-Z]', '', string).lower()
+    return string
 
 
 @zeit.web.register_filter
-def format_webtrekk(text):
+def format_webtrekk(string):
     """Returns a string that is webtrekk-safe.
     This code does the same as sanitizeString in clicktracking.js
     """
-    text = text.lower().replace(
+    if not isinstance(string, basestring):
+        return string
+    string = string.lower().replace(
         u'ä', 'ae').replace(
         u'ö', 'oe').replace(
         u'ü', 'ue').replace(
@@ -762,10 +762,10 @@ def format_webtrekk(text):
         u'é', 'e').replace(
         u'è', 'e').replace(
         u'ß', 'ss')
-    text = re.sub(u'[^a-zA-Z0-9]', '_', text)
-    text = re.sub(u'_+', '_', text)
-    text = re.sub(u'^_|_$', '', text)
-    return text
+    string = re.sub(u'[^a-zA-Z0-9]', '_', string)
+    string = re.sub(u'_+', '_', string)
+    string = re.sub(u'^_|_$', '', string)
+    return string
 
 
 @zeit.web.register_global

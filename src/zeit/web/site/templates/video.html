@@ -3,14 +3,14 @@
 
 {% block content %}
     <article class="article article--video"
-        {% if view.serie %} data-video-series="{{ view.serie|attr_safe }}"{% endif %}
+        {% if view.serie %} data-video-series="{{ view.serie | attr_safe }}"{% endif %}
         data-video-provider="brightcove"
         data-video-size="large"
         data-video-page-url="{{ view.content_url }}{% if view.slug %}/{{ view.slug }}{% endif %}"
         itemtype="http://schema.org/VideoObject" itemscope>
         {% profile %}
         <meta itemprop="playerType" content="HTML5 Flash">
-        <meta itemprop="name" content="{{ view.title | hide_none }}">
+        <meta itemprop="name" content="{{ view.title }}">
         <meta itemprop="uploadDate" content="{{ view.date_last_modified | format_date('iso8601') }}">
         {% if view.iso_duration %}
             <meta itemprop="duration" content="{{ view.iso_duration }}">
@@ -34,7 +34,7 @@
 
         <div class="article__item">
             <div class="summary" itemprop="description">
-                {{ view.subtitle | hide_none }}
+                {{ view.subtitle }}
             </div>
             <div class="metadata">
                 {% include "zeit.web.site:templates/inc/article/metadata.tpl" %}
@@ -45,8 +45,8 @@
     </article>
 {% endblock %}
 
-{% block nextread %}
+{% block article_footer %}
 {% endblock %}
 
-{% block article_interactions %}
+{% block nextread %}
 {% endblock %}

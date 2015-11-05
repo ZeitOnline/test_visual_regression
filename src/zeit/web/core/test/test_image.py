@@ -124,8 +124,8 @@ def test_variant_image_should_provide_desired_attributes(application):
     variant = group.get_variant_by_key('default')
     img = zeit.web.core.interfaces.ITeaserImage(variant)
 
-    assert img.alt == img.attr_alt == meta.alt
-    assert img.title == img.attr_title == meta.title
+    assert img.alt == meta.alt
+    assert img.title == meta.title
     assert img.caption == meta.caption
     assert img.copyright == meta.copyrights
     assert img.image_pattern == img.variant == variant.name

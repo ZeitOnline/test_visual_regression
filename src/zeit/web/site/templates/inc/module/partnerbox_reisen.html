@@ -3,18 +3,15 @@
 {% block modifier %}reisen{% endblock %}
 {% block kicker_text %}Finden Sie hier Ihre Traumreise!{% endblock %}
 
-{% block intro %}Wir haben über 100 ausgefallene und einzigartige Reisen für Sie zusammengestellt.{% endblock %}
+{% block intro %}Entdecken Sie einzigartige ZEIT-Reisen das ganze Jahr in über 60 faszinierende Länder dieser Erde!{% endblock %}
 
 {% block dropdown %}
-<select class="pa-dropdown" data-tracklink="">
-    <option class="pa-dropdown__option">Reiseland wählen</option>
-</select>
-<select class="pa-dropdown" data-tracklink="">
-    <option class="pa-dropdown__option">Art der Reise wählen</option>
-</select>
+    {{ partner_macro.dropdown_reisen() }}
 {% endblock %}
 
-{% block button %}Reise finden{% endblock %}
+{% block button %}Reisen anzeigen{% endblock %}
 
-{% block link_bottom %}<a href="http://jobs.zeit.de/action/account/create/agent-all?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.funktionsbox.streifen.job_nl_bestellen.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=funktionsbox_streifen_job_nl_bestellen_
-">Zeit Reisen</a>{% endblock %}
+{% block link_bottom %}
+    <a href="http://zeitreisen.zeit.de/">Alle Reisen</a>
+    {{ lama.use_svg_icon('logo-zeit-reisen', 'pa-link--icon', request) }}
+{% endblock %}

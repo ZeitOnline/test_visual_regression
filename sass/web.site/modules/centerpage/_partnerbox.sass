@@ -14,8 +14,6 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
     position: relative
     min-height: remify(140px)
     &__action
-        display: block
-        text-align: left
         padding: remify(0 25px)
         +respond-min($break-desktop-min)
             display: table-cell
@@ -45,23 +43,12 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
         display: table-cell
         vertical-align: middle
         height: remify(72px)
-    &--jobs
-        color: $zon-charcoal
-        border-bottom: 1px solid $gainsboro
-        .p-kicker__img
-            display: table-cell
-            height: remify(72px)
-            width: remify(130px)
-            background: $zon_lighter_grey url($bg_kicker--jobs) no-repeat right
-            background-size: cover
-    &--reisen
-        background: $zon_lighter_grey url($bg_kicker--reisen) no-repeat right
-        background-size: cover
+        padding-left: remify(25px)
 
 .pa-button
     display: inline-block
     &__text
-        +zon-button(rgba(22, 135, 80, .8),rgba(22, 135, 80, 1),$white,$white,$white)
+        +zon-button(rgba($zon-green, .8),rgba($zon-green, 1),$white,$white,$white)
         margin-left: 0px
 
 .pa-dropdown
@@ -84,4 +71,44 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
     +respond-min($break-0)
         display: inline-block
         margin-left: remify(20px)
+
+/* modifier */
+.partner
+
+    &--jobs
+        .p-kicker
+            color: $zon-charcoal
+            border-bottom: 1px solid $gainsboro
+            &__img
+                display: table-cell
+                height: remify(72px)
+                width: remify(130px)
+                background: $zon_lighter_grey url($bg_kicker--jobs) no-repeat right
+                background-size: cover
+            &__text
+                padding-left: 0
+
+    &--reisen
+        padding-bottom: remify(50px)
+        .p-kicker
+            background: $zon_lighter_grey url($bg_kicker--reisen) no-repeat right
+            background-size: cover
+            &__text
+                max-width: remify(200px)
+                +respond-min($break-desktop-min)
+                    max-width: none
+        .pa-button
+            &__text
+                +zon-button(rgba($zon-yellow, .8),rgba($zon-yellow, 1),$white,$white,$white)
+                margin-left: 0px
+        .pa-link
+            position: absolute
+            bottom: remify(20px)
+            right: remify(25px)
+            +respond-min($break-phablet-min)
+                top: remify(12px)
+
+
+
+
 

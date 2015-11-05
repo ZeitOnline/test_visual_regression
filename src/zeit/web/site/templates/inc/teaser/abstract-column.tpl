@@ -2,12 +2,12 @@
 
 {% block layout %}teaser-column{% endblock %}
 
-{# TODO: "get_column_image(teaser)" is also used in columnpic_zon-column.tpl . Should not be redundant. #}
+{# TODO: "get_column_image(teaser)" is also used in image_zon-column.tpl . Should not be redundant. #}
 {% block teaser_modifier %}{% if get_column_image(teaser) %}{{ self.layout() }}--has-media{% endif %}{% endblock %}
 
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
-    {% include "zeit.web.site:templates/inc/teaser_asset/columnpic_zon-column.tpl" %}
+    {% include "zeit.web.site:templates/inc/asset/image_zon-column.tpl" %}
 {% endblock %}
 
 {% block teaser_journalistic_format %}

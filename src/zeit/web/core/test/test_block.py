@@ -285,6 +285,20 @@ def test_find_nextread_from_ressort_without_subressort(application):
         'Wirtschaft', None) is not None
 
 
+def test_find_nextread_empty_string_subressort(application):
+    # DAV properties return '' instead of None when their value is unset.
+    calls = []
+
+    def find(self, *args, **kw):
+        calls.append(object())
+        return original_find(self, *args, **kw)
+    original_find = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find
+    zeit.web.core.sources.RESSORTFOLDER_SOURCE.find = find
+    assert zeit.web.core.block.find_nextread_folder(
+        'Wirtschaft', '') is not None
+    assert len(calls) == 1
+
+
 def test_find_nextread_from_subressort(application):
     assert zeit.web.core.block.find_nextread_folder(
         'Deutschland', 'Datenschutz') is not None
@@ -299,3 +313,9 @@ def test_find_nextread_from_correct_ressort_if_subressort_has_same_name(
         application):
     folder = zeit.web.core.block.find_nextread_folder('Deutschland', 'Meinung')
     assert 'deutsch' in list(folder.values())[0].title
+
+
+def test_find_nextread_does_not_break_on_umlauts(application):
+    # Assert nothing raised
+    zeit.web.core.block.find_nextread_folder(
+        u'Deutschländ', u'Datenschütz')
