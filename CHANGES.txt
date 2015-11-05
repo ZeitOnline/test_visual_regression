@@ -6,7 +6,7 @@ Change log for zeit.web
 
 - HOTFIX: Drop caption block from centerpage header image
 
-- ZON-2047: Add ZMO and ze.tt teaser kicker logo
+- ZON-2047: Teaser kicker design for ZMO and ze.tt
 
 
 2.22 (2015-11-04)
