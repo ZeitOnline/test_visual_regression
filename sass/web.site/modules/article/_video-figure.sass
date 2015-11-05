@@ -9,18 +9,15 @@
 			margin-left: auto
 			margin-right: auto
 			max-width: remify(660px)
+			padding-left: 0
+			padding-right: 0
 	&__pagetitle
 		@extend %teaser-title
 		display: block
 		font-size: remify(17px)
 		padding-bottom: remify(16px)
 	&__description
-		color: $zon-dark-grey
+		@extend %figure-caption
 		display: block
-		font-family: $font-franziska
-		font-size: remify(15px)
-		font-style: italic
-		&--marginalia
-			margin: remify(12px 0 0)
-		+respond-min($break-desktop-min)
-			font-size: remify(16px)
+		margin-left: 0
+		margin-right: 0
