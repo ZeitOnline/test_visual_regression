@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Drop caption block from centerpage header image
 
+- ZON-2376: Add kicker content to og:title meta tag
+
 
 2.22 (2015-11-04)
 -----------------
