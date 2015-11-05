@@ -1,0 +1,26 @@
+.video-figure
+	&__caption
+		color: $zon-dark-grey
+		line-height: 1.5
+		padding-left: $page-padding
+		padding-right: $page-padding
+		padding-top: $page-padding
+	&__pagetitle
+		@extend %teaser-title
+		display: block
+		font-size: remify(17px)
+		padding-bottom: remify(16px)
+	&__description
+		color: $zon-dark-grey
+		display: block
+		font-family: $font-franziska
+		font-size: remify(15px)
+		font-style: italic
+		&--marginalia
+			margin: remify(12px 0 0)
+		+respond-min($break-tablet-min)
+			margin-left: auto
+			margin-right: auto
+			max-width: remify(660px)
+		+respond-min($break-desktop-min)
+			font-size: remify(16px)
