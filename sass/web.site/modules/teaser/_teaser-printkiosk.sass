@@ -15,14 +15,11 @@
 		+zon-button-dark($margin: remify(14px) auto)
 		display: table
 
+		// TODO: only switch content span for JS/noJS ?
 		&--default
 			.js &
-				+respond-min($break-desktop-min)
-					display: none
+				display: none
 		&--jsdesktop
-			.js &
-				+respond-max($break-desktop-min)
-					display: none
 			.no-js &
 				display: none
 

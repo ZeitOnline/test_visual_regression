@@ -13,11 +13,13 @@
 {% endblock %}
 
 {% block after_module_list %}
-    <a href="http://www.zeitabo.de/magazin-angebote.html">
+    {% set tracking_slug = '{}...{}'.format(region_loop.index, '-'.join([area.kind, module_layout])) %}
+    <a  href="http://www.zeitabo.de/magazin-angebote.html"
+        data-id="{{ tracking_slug }}.paginationbutton">
         <span class="button {{ module_layout }}-group__button {{ module_layout }}-group__button--default">Alle Angebote</span>
         {% if area.next_page %}
-            <span class="button {{ module_layout }}-group__button {{ module_layout }}-group__button--jsdesktop js-bar-teaser-shuffle"
-                  data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p={{ area.next_page }}">
+            <span class="button {{ module_layout }}-group__button {{ module_layout }}-group__button--jsdesktop js-bar-teaser-paginate"
+                  data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p=">
                 {{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), request) }}
                 Weitere laden
             </span>

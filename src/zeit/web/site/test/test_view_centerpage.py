@@ -1054,7 +1054,7 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
     teaserbutton = driver.find_element_by_css_selector(
-        '.js-bar-teaser-shuffle')
+        '.js-bar-teaser-paginate')
     teaserbutton.click()
 
     condition = expected_conditions.text_to_be_present_in_element((
