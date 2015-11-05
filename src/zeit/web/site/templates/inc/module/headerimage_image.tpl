@@ -6,3 +6,5 @@
     data-mobile-src="{{ request.image_host + mobile_image.path }}" data-mobile-ratio="{{ mobile_image.ratio }}" data-mobile-variant="{{ mobile_image.image_pattern }}"
     {% endif %}
 {% endblock %}
+
+{% block media_caption_content %}{% endblock %}
