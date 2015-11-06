@@ -1468,7 +1468,8 @@ def test_partnerbox_jobs_dropdown_works(selenium_driver, testserver):
     dropdown = driver.find_elements_by_class_name('pa-dropdown')[0]
     button = driver.find_elements_by_class_name('pa-button__text')[0]
 
-    dropdown.find_element_by_xpath("//option[text()='Kunst & Kultur']").click()
+    dropdown.find_element_by_xpath(
+        "//option[text()='Kunst & Kultur']").click()
     button.click()
     assert 'stellenmarkt/kultur_kunst' in driver.current_url
     assert 'stellenmarkt.funktionsbox.streifen' in driver.current_url
@@ -1508,7 +1509,8 @@ def test_partnerbox_reisen_dropdown_works(selenium_driver, testserver):
     dropdown = driver.find_elements_by_class_name('pa-dropdown')
     button = driver.find_elements_by_class_name('pa-button__text')
 
-    dropdown[0].find_element_by_xpath("//option[text()='Kulturreisen']").click()
+    dropdown[0].find_element_by_xpath(
+        "//option[text()='Kulturreisen']").click()
     button[0].click()
     assert '/themenreisen/kulturreisen/' in driver.current_url
     assert 'display.zeit_online.reisebox.dynamisch' in driver.current_url
