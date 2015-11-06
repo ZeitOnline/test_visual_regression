@@ -4,7 +4,7 @@ Change log for zeit.web
 2.23 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2159: Nestle ranking area closer up to cms code
 
 
 2.22 (2015-11-04)

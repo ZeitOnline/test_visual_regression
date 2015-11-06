@@ -15,23 +15,13 @@ log = logging.getLogger(__name__)
 
 SANITY_BOUND = 500
 
-DATE_MAP = [
-    (u'date-last-modified', u'date_last_modified'),
-    (u'date_first_released', u'date_first_released'),
-    (u'last-semantic-change', u'last_semantic_change'),
-    (u'date_last_published', u'date_last_published'),
-    (u'date_last_published', u'date_last_published_semantic')
-]
 
+class Placeholder(object):
 
-@zeit.web.register_area('overview')
-class Overview(zeit.web.site.area.ranking.Ranking):
+    def __init__(self, context):
+        self.context = context
 
-    count = SANITY_BOUND
-    sort_order = 'publikation'
-
-    @property
-    def placeholder(self):
+    def values(self):
         values = self.context.values()
         length = len(values)
         if not length or self.hits <= length:
@@ -47,16 +37,22 @@ class Overview(zeit.web.site.area.ranking.Ranking):
             clone.__name__ = str(uuid.uuid4())
             yield clone
 
-    def document_hook(self, doc):
-        doc = super(Overview, self).document_hook(doc)
-        for source, target in DATE_MAP:
-            try:
-                doc[target] = isinstance(doc[source], unicode) and (
-                    zeit.web.core.date.parse_date(
-                        doc[source], '%Y-%m-%dT%H:%M:%SZ')) or doc[source]
-            except KeyError:
-                continue
-        return doc
+
+@zeit.web.register_area('overview')
+class Overview(zeit.web.site.area.ranking.Ranking):
+
+    count = SANITY_BOUND
+    sort_order = 'publikation'
+
+    def values(self):
+        self.context = Placeholder(self.context)  # Monkeypatch the context
+        values = super(Overview, self).values()
+        self.context = self.context.context
+        return values
+
+    def _query_solr(self, query, sort_order):
+        query = self._build_query()
+        return super(Overview, self)._query_solr(query, sort_order)
 
     def _build_query(self):
         offset = datetime.timedelta(days=self.current_page - 1)

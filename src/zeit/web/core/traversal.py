@@ -145,8 +145,8 @@ class CenterPage(Traversable):
                 form['mode'] = tdict['request'].GET.get('mode')
                 form['sort'] = tdict['request'].GET.get('sort')
                 area.raw_query = form.raw_query
+                area.raw_order = form.raw_order
                 area.sort_order = form.sort_order
-                area.query = form.query
             else:
                 form = zeit.web.site.module.search_form.Form(tdict['context'])
 
