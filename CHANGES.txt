@@ -1,8 +1,32 @@
 Change log for zeit.web
 =======================
 
-2.22 (unreleased)
+2.24 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.23 (2015-11-06)
+-----------------
+
+- HOTFIX: zmo gallery buttons
+
+- ZON-2390: remove link from nonlinked images
+
+- HOTFIX: Drop caption block from centerpage header image
+
+- HOTFIX: nextread image in ZMO
+
+- ZON-2385: Fix Jobbox Dropdown
+
+
+2.22 (2015-11-04)
+-----------------
+
+- ZON-2362: Set banner_channel for new ressort 'entdecken' to 'reisen'
+
+- ZON-2365: Fix pre-moderation lightbox on mobile
 
 - ZON-606: Add community states
 
@@ -41,6 +65,8 @@ Change log for zeit.web
 - ZON-2285: Identify if view is wrapped via user agent
 
 - ZON-2206: Handle empty subressort DAV property properly
+
+- ZON-2321: Beef up reify to a multilayer caching descriptor
 
 - MAINT: Fix bumpy chronological article navigation
 
