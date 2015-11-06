@@ -16,7 +16,7 @@
 
 {% macro dropdown_reisen() %}
 
-<select class="pa-dropdown" data-tracklink="?wt_mc=zr.intern.display.zeit_online.reisebox.dynamisch.widget.widget&utm_source=zeit_online&utm_medium=display&utm_campaign=reisebox_dynamisch&utm_content=widget">
+<select class="pa-dropdown" data-tracklink="?wt_mc=zr.intern.display.zeit_online.reisebox.dynamisch.widget.widget&amp;utm_source=zeit_online&amp;utm_medium=display&amp;utm_campaign=reisebox_dynamisch&amp;utm_content=widget">
     <option class="pa-dropdown__option">Art der Reise wählen</option>
     <option class="pa-dropdown__option" value="http://zeitreisen.zeit.de/schiffsreisen/expeditionskreuzfahrten/">Expeditionskreuzfahrten</option>
     <option class="pa-dropdown__option" value="http://zeitreisen.zeit.de/themenreisen/fotoreisen/">Fotoreisen</option>
