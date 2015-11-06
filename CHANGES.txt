@@ -4,6 +4,8 @@ Change log for zeit.web
 2.23 (unreleased)
 -----------------
 
+- ZON-2390: remove link from nonlinked images
+
 - HOTFIX: Drop caption block from centerpage header image
 
 - HOTFIX: nextread image in ZMO
@@ -15,6 +17,8 @@ Change log for zeit.web
 -----------------
 
 - ZON-2362: Set banner_channel for new ressort 'entdecken' to 'reisen'
+
+- ZON-2365: Fix pre-moderation lightbox on mobile
 
 - ZON-606: Add community states
 
