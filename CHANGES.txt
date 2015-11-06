@@ -4,6 +4,8 @@ Change log for zeit.web
 2.23 (unreleased)
 -----------------
 
+- HOTFIX: zmo gallery buttons
+
 - ZON-2390: remove link from nonlinked images
 
 - HOTFIX: Drop caption block from centerpage header image
