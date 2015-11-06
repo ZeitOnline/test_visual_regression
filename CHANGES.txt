@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-2.23 (unreleased)
+2.24 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.23 (2015-11-06)
+-----------------
+
+- HOTFIX: zmo gallery buttons
 
 - ZON-2390: remove link from nonlinked images
 
