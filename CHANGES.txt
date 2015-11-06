@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - HOTFIX: nextread image in ZMO
 
+- ZON-2385: Fix Jobbox Dropdown
+
 
 2.22 (2015-11-04)
 -----------------
