@@ -5,7 +5,7 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
     margin: $vertical-space 0
     &__label
         @extend %ad-label
-        +respond-min($break-desktop-min)
+        +respond-min($break-tablet-min)
             text-align: left
 
 .partner
@@ -13,6 +13,8 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
     padding-bottom: remify(20px)
     position: relative
     min-height: remify(140px)
+    +respond-min($break-desktop-min)
+        padding-bottom: 0
     &__action
         padding: remify(0 25px)
         +respond-min($break-desktop-min)
@@ -90,6 +92,8 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
                 background-size: cover
             &__text
                 padding-left: 0
+                +respond-min($break-0)
+                    padding-left: 15px
 
     &--reisen
         .p-kicker
@@ -112,13 +116,6 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
                 margin-top: 0
                 top: remify(12px)
                 right: remify(25px)
-            +respond-min($break-desktop-min)
-                bottom: remify(12px)
-                left: 0
-                top: auto
-                right: auto
-                text-align: left
-                margin-left: remify(25px)
             &__icon
                 color: $zon-charcoal
                 height: remify(25px)
@@ -129,21 +126,9 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
                     color: $white
                     +on-interaction
                         color: $white
-                +respond-min($break-desktop-min)
-                    color: $zon-charcoal
-                    +on-interaction
-                        color: $zon-charcoal
             &__text
                 color: $zon-charcoal
                 +respond-min($break-0)
                     color: $white
-                +respond-min($break-desktop-min)
-                    color: $zon-charcoal
-
-
-
-
-
-
 
 

@@ -14,7 +14,7 @@
         <div class="partner__action">
             {% block dropdown %}{% endblock %}
             <span class="pa-button">
-                <a class="pa-button__text">{% block button %}{% endblock %}</a>
+                <a class="pa-button__text" href="{% block link_button %}{% endblock %}">{% block button %}{% endblock %}</a>
             </span>
             <span class="pa-link">
                 {% block link_bottom %}{% endblock %}

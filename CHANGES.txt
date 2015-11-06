@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Fix Jobbox Dropdown
 
+- ZON-2325: Implement Reisebox and add Tracking to all Boxes
+
 
 2.22 (2015-11-04)
 -----------------

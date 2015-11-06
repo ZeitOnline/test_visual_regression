@@ -1,7 +1,7 @@
 {% macro dropdown_jobs() %}
 
 <select class="pa-dropdown" data-tracklink="?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.funktionsbox.streifen.berufsfeld_auswahl.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=funktionsbox_streifen_berufsfeld_auswahl_">
-    <option class="pa-dropdown__option">Berufsfeld auswählen</option>
+    <option class="pa-dropdown__option" value="http://www.zeit.de">Berufsfeld auswählen</option>
     <option class="pa-dropdown__option" value="http://jobs.zeit.de/stellenmarkt/naturwissenschaften_life_science_39807.html">Naturwissenschaften &amp; Life Sciences</option>
     <option class="pa-dropdown__option" value="http://jobs.zeit.de/stellenmarkt/paedagogik_soziales_39805.html">Pädagogik &amp; Soziales</option>
     <option class="pa-dropdown__option" value="http://jobs.zeit.de/stellenmarkt/medizin_gesundheit_39798.html">Medizin, Gesundheit &amp; Psychologie</option>
