@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Drop caption block from centerpage header image
 
+- HOTFIX: nextread image in ZMO
+
 
 2.22 (2015-11-04)
 -----------------
