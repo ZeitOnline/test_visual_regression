@@ -20,14 +20,28 @@
 
 .teaser-printkiosk
 	float: left
+	margin: auto
 	text-align: center
 	width: 100%
-	margin: auto
 
 	&__media
+		height: remify(190px)
 		margin: 1em auto
+		position: relative
+		width: remify(160px)
+
+	&__media-container
+		bottom: 0
+		position: absolute
+		width: 100%
+
+	&__media-item
+		margin: auto
 		max-height: remify(190px)
 		max-width: remify(160px)
+		// override width:100% from .scaled-image
+		.scaled-image &
+			width: auto
 
 	&__container
 		margin: remify(20px) auto
