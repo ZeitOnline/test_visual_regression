@@ -12,6 +12,8 @@
 {% block button %}Reisen anzeigen{% endblock %}
 
 {% block link_bottom %}
-    <a href="http://zeitreisen.zeit.de/">Alle Reisen</a>
-    {{ lama.use_svg_icon('logo-zeit-reisen', 'pa-link--icon', request) }}
+    <div class="pa-link__text">Ein Angebot von</div>
+    <a href="http://zeitreisen.zeit.de/?wt_mc=zr.intern.display.zeit_online.reisebox.dynamisch.widget.widget&utm_source=zeit_online&utm_medium=display&utm_campaign=reisebox_dynamisch&utm_content=widget">
+        {{ lama.use_svg_icon('logo-zeit-reisen', 'pa-link__icon', request) }}
+    </a>
 {% endblock %}

@@ -66,8 +66,7 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
     letter-spacing: $letter-spacing-s
     font-size: em(15px)
     line-height: em(23px)
-    color: $zon-grey
-    a
+    &__link
         border-bottom: 1px solid rgba($zon-grey, .4)
         +on-interaction
             border-bottom-color: rgba($zon-grey, .8)
@@ -93,7 +92,6 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
                 padding-left: 0
 
     &--reisen
-        padding-bottom: remify(50px)
         .p-kicker
             background: $zon_lighter_grey url($bg_kicker--reisen) no-repeat right
             background-size: cover
@@ -106,11 +104,44 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
                 +zon-button(rgba($zon-yellow, .8),rgba($zon-yellow, 1),$white,$white,$white)
                 margin-left: 0px
         .pa-link
-            position: absolute
-            bottom: remify(20px)
-            right: remify(25px)
-            +respond-min($break-phablet-min)
+            text-align: right
+            margin-top: remify(30px)
+            +respond-min($break-0)
+                display: block
+                position: absolute
+                margin-top: 0
                 top: remify(12px)
+                right: remify(25px)
+            +respond-min($break-desktop-min)
+                bottom: remify(12px)
+                left: 0
+                top: auto
+                right: auto
+                text-align: left
+                margin-left: remify(25px)
+            &__icon
+                color: $zon-charcoal
+                height: remify(25px)
+                width: remify(160px)
+                +on-interaction
+                    color: $zon-charcoal
+                +respond-min($break-0)
+                    color: $white
+                    +on-interaction
+                        color: $white
+                +respond-min($break-desktop-min)
+                    color: $zon-charcoal
+                    +on-interaction
+                        color: $zon-charcoal
+            &__text
+                color: $zon-charcoal
+                +respond-min($break-0)
+                    color: $white
+                +respond-min($break-desktop-min)
+                    color: $zon-charcoal
+
+
+
 
 
 
