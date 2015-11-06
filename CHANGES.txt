@@ -4,6 +4,8 @@ Change log for zeit.web
 2.23 (unreleased)
 -----------------
 
+- HOTFIX: zmo gallery buttons
+
 - HOTFIX: Drop caption block from centerpage header image
 
 - HOTFIX: nextread image in ZMO
