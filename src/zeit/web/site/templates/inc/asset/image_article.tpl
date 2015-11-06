@@ -1,6 +1,7 @@
 {%- extends "zeit.web.site:templates/inc/asset/image_linked.tpl" -%}
 
 {% set module_layout = 'article' %}
+{% set href = image.href %}
 
 {% set media_block_additional_class = 'article__item' | with_mods(*image.figure_mods) %}
 

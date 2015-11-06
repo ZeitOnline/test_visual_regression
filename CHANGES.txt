@@ -1,12 +1,24 @@
 Change log for zeit.web
 =======================
 
-2.23 (unreleased)
+2.24 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.23 (2015-11-06)
+-----------------
+
+- HOTFIX: zmo gallery buttons
+
+- ZON-2390: remove link from nonlinked images
 
 - HOTFIX: Drop caption block from centerpage header image
 
-- FIX: Fix Jobbox Dropdown
+- HOTFIX: nextread image in ZMO
+
+- ZON-2385: Fix Jobbox Dropdown
 
 - ZON-2325: Implement Reisebox and add Tracking to all Boxes
 
@@ -15,6 +27,8 @@ Change log for zeit.web
 -----------------
 
 - ZON-2362: Set banner_channel for new ressort 'entdecken' to 'reisen'
+
+- ZON-2365: Fix pre-moderation lightbox on mobile
 
 - ZON-606: Add community states
 
