@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Drop caption block from centerpage header image
 
+- HOTFIX: nextread image in ZMO
+
 - ZON-2385: Fix Jobbox Dropdown
 
 
