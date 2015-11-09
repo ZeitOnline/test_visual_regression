@@ -1071,8 +1071,5 @@ def test_advertisement_nextread_should_render_after_nextread(
 
 def test_article_should_contain_veeseo_widget(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    assert browser.cssselect('.veeseo-widget-script')
+    assert browser.cssselect('#veeseo-widget')
     assert browser.cssselect('.RA2VW2')
-    browser = testbrowser('/video/2015-01/3537342483001')
-    assert browser.cssselect('.veeseo-widget-script')
-    assert browser.cssselect('.RV2VW2')

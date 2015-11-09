@@ -95,12 +95,7 @@
         {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
     {% endblock %}
 
-    {% block veeseo %}
     {% block veeseo_div %}{% endblock %}
-    {% block veeseo_script %}
-        <script class="veeseo-widget-script" type="text/javascript" src="http://rce.veeseo.com/widgets/zeit/widget.js"></script>
-    {% endblock %}
-    {% endblock %}
 
     {% block article_google_ad %}
         {% if view.context.advertising_enabled -%}

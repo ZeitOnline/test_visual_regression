@@ -194,7 +194,8 @@
         {% endif %}
     {% endblock %}
 
-    {% block veeseo_script%}
-    {% endblock %}
+    {% if view.type == 'article' or view.type == 'video' or view.type == 'gallery' %}
+        <script id="veeseo-widget" type="text/javascript" src="http://rce.veeseo.com/widgets/zeit/widget.js"></script>
+    {% endif %}
 </body>
 </html>
