@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2159: Nestle ranking area closer up to cms code
 
+- ZON-2061: Printbanderole
+
 - ZON-2247: Add caption to videos in articles
 
 
