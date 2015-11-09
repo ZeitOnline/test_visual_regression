@@ -214,8 +214,6 @@ class DynamicFolder(CenterPage):
             raise pyramid.httpexceptions.HTTPMovedPermanently(location=url)
         try:
             tdict['context'] = self.context[tdict['view_name']]
-            import pdb; pdb.set_trace()  # XXX BREAKPOINT
-
         except (IndexError, KeyError, TypeError):
             pass
         else:
