@@ -94,13 +94,14 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     def _query_solr(self, query, sort_order):
         result = []
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+        start = self._v_retrieved_content + self.count * (self.page - 1)
         try:
             with zeit.web.core.metrics.timer('solr.reponse_time'):
                 solr_result = conn.search(
                     query,
                     sort=sort_order,
                     rows=self.count_to_replace_duplicates,
-                    start=self.count * (self.page - 1),
+                    start=start,
                     fl=FIELDS)
         except (pysolr.SolrError, ValueError) as e:
             log.warning(u'{} for query {}'.format(e, query))
