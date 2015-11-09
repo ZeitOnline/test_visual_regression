@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.24 (unreleased)
+2.24 (2015-11-09)
 -----------------
 
 - ZON-2367: Embed veeseo video widget
