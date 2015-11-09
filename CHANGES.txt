@@ -4,7 +4,8 @@ Change log for zeit.web
 2.25 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Render a redirect, if we have a call to a dynamic folde with an empty
+  view_name
 
 
 2.24 (2015-11-09)
