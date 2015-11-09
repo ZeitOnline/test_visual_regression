@@ -4,6 +4,8 @@ Change log for zeit.web
 2.24 (unreleased)
 -----------------
 
+- ZON-2061: Printbanderole
+
 - ZON-2247: Add caption to videos in articles
 
 
