@@ -1,10 +1,19 @@
 Change log for zeit.web
 =======================
 
-2.24 (unreleased)
+2.25 (unreleased)
 -----------------
 
 - ZON-2159: Nestle ranking area closer up to cms code
+
+- HOTFIX: Render a redirect if we have a call to a dynamic folder with an empty
+  view_name
+
+
+2.24 (2015-11-09)
+-----------------
+
+- ZON-2367: Embed veeseo video widget
 
 - ZON-2061: Printbanderole
 
