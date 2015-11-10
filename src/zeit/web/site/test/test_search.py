@@ -175,7 +175,7 @@ def test_successful_search_result_should_produce_nonzero_hit_counter(
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/0%s' % i}
                     for i in range(1, 74)]
-    assert search_area.hits == 73
+    assert search_area.hits == 20
 
 
 def test_empty_search_result_should_produce_valid_resultset(search_area):
