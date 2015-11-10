@@ -33,6 +33,14 @@ MODES = collections.OrderedDict([
 ])
 
 
+ORDERS = collections.defaultdict(
+    lambda: 'last-semantic-change desc', {
+        'relevanz': 'score desc',
+        'aktuell': 'last-semantic-change desc',
+        'publikation': 'date_last_published asc'}
+)
+
+
 RESTRICTIONS = [lq.not_(lq._field(k, v)) for k, v in (
     ('product_id', lq.or_('News', 'afp', 'SID', 'ADV')),
     ('ressort', lq.or_('Administratives', 'News', 'Aktuelles')),
@@ -95,8 +103,11 @@ class Form(zeit.web.site.module.Module):
         if self.query in (None, lq.any_value()):
             return 'aktuell'
         this = self['sort']
-        orders = zeit.web.site.area.ranking.ORDERS
-        return this in orders and this or 'aktuell'
+        return this in ORDERS and this or 'aktuell'
+
+    @zeit.web.reify
+    def raw_order(self):
+        return ORDERS[self.sort_order]
 
     @zeit.web.reify
     def raw_query(self):

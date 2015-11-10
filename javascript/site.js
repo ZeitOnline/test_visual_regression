@@ -60,7 +60,7 @@ require([
     'web.site/plugins/jquery.liveblog',
     'web.site/plugins/jquery.searchTools',
     'web.site/plugins/jquery.selectNav',
-    'web.site/plugins/jquery.shuffleTeasers',
+    'web.site/plugins/jquery.paginateTeasers',
     'web.site/plugins/jquery.snapshot',
     'web.site/plugins/jquery.storystream',
     'web.site/plugins/jquery.tabs',
@@ -89,7 +89,7 @@ require([
         $.updateSignals();
         $( '#main' ).autoclick();
         $( '#series_select' ).selectNav();
-        $( '.js-bar-teaser-shuffle' ).shuffleTeasers();
+        $( '.js-bar-teaser-paginate' ).paginateTeasers();
         $( '.js-accordion' ).accordion();
         $( '.storystream-markup__content--first' ).storystream();
         $( '.jobbox--animate' ).animateJobs();

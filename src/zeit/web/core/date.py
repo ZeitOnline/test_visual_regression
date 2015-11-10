@@ -44,6 +44,15 @@ def mod_date(resource):
 
 
 @zeit.web.register_filter
+def release_date(resource):
+    try:
+        pub_info = zeit.cms.workflow.interfaces.IPublishInfo(resource)
+        return pub_info.date_first_released
+    except TypeError:
+        return
+
+
+@zeit.web.register_filter
 def format_comment_date(comment_date, base_date=None):
     interval = DeltaTime(comment_date, base_date)
     if interval.delta.days < 365:
