@@ -14,6 +14,7 @@ require([ 'vendor/require', 'config' ], function() {});
 // the order in the array and the function names have to correlate
 // which is quite disturbing in my book…
 require([
+    'web.core/adReload',
     'web.core/images',
     'web.magazin/errors',
     'web.magazin/main-nav',
@@ -22,7 +23,8 @@ require([
     'web.magazin/sharing',
     'web.magazin/cards',
     'web.magazin/photocluster'
-], function( images, errors, nav, tabs, comments, sharing, cards, photocluster ) {
+], function( adReload, images, errors, nav, tabs, comments, sharing, cards, photocluster ) {
+    adReload.init();
     errors.init();
     nav.init();
     tabs.init();
