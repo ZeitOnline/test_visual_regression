@@ -1602,7 +1602,6 @@ def test_printkiosk_area_should_render_in_isolation_skippage(testbrowser):
     assert teasertexts[2].text == 'DIE ZEIT'
 
 
-    # @pytest.mark.xfail(reason='Fortune favours the fail')
 def test_printkiosk_loads_next_page_on_click(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('{}/angebote/printkiosk/vorschau'.format(testserver.url))
