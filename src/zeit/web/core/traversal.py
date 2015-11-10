@@ -145,8 +145,8 @@ class CenterPage(Traversable):
                 form['mode'] = tdict['request'].GET.get('mode')
                 form['sort'] = tdict['request'].GET.get('sort')
                 area.raw_query = form.raw_query
+                area.raw_order = form.raw_order
                 area.sort_order = form.sort_order
-                area.query = form.query
             else:
                 form = zeit.web.site.module.search_form.Form(tdict['context'])
 
@@ -209,6 +209,9 @@ class Folder(Traversable):
 class DynamicFolder(CenterPage):
 
     def __call__(self, tdict):
+        if not tdict['view_name']:
+            url = '{}/index'.format(tdict['request'].url.rstrip('/'))
+            raise pyramid.httpexceptions.HTTPMovedPermanently(location=url)
         try:
             tdict['context'] = self.context[tdict['view_name']]
         except (IndexError, KeyError, TypeError):
