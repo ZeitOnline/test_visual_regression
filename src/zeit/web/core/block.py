@@ -263,8 +263,6 @@ class HeaderImage(Image):
         return layout == 'zmo-xl-header'
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class HeaderImageStandard(HeaderImage):
     pass
 
