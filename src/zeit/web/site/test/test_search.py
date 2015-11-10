@@ -156,9 +156,10 @@ def test_search_form_should_create_valid_type_restricted_query(search_form):
         'NOT expires:[* TO NOW]')
 
 
-def test_search_area_should_produce_valid_set_of_search_results(
-        monkeypatch, search_area):
-    assert search_area.values()
+def test_search_area_should_produce_valid_set_of_search_results(search_area):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'foo://zeit.de'}]
+    assert list(search_area.values()[0])[0].uniqueId == 'foo://zeit.de'
 
 
 def test_empty_search_result_should_produce_zero_hit_counter(
@@ -174,7 +175,7 @@ def test_successful_search_result_should_produce_nonzero_hit_counter(
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/0%s' % i}
                     for i in range(1, 74)]
-    assert search_area.hits == 73
+    assert search_area.hits == 20
 
 
 def test_empty_search_result_should_produce_valid_resultset(search_area):
@@ -195,22 +196,16 @@ def test_successful_search_result_should_produce_valid_resultset(search_area):
     solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/0%s' % i}
                     for i in range(1, 9)]
     assert len([a for b in search_area.values() for a in b if b]) == 8
-
+    solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/01'}]
     block = iter(search_area.values()).next()
     assert zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(block)
     assert zeit.cms.interfaces.ICMSContent.providedBy(iter(block).next())
 
 
 def test_successful_search_result_should_render_in_browser(
-        testserver, testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
-        get_result_dict('http://xml.zeit.de/zeit-online/article/01'),
-        get_result_dict('http://xml.zeit.de/zeit-online/article/zeit'),
-        get_result_dict('http://xml.zeit.de/artikel/artikel-ohne-assets')
-    ]
-    browser = testbrowser('{}/suche/index'.format(testserver.url))
-    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 3
+        testbrowser, datasolr):
+    browser = testbrowser('/suche/index')
+    assert browser.cssselect('.cp-area--ranking .teaser-small')
 
 
 def test_mock_solr_should_produce_usable_results(application):

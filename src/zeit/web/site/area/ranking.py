@@ -1,7 +1,7 @@
-import collections
 import logging
 import math
 
+import pyramid
 import pysolr
 import zc.iso8601.parse
 import zope.component
@@ -25,34 +25,37 @@ log = logging.getLogger(__name__)
 
 
 FIELDS = ' '.join([
-    'date_last_published',
-    'date_last_published_semantic',
+    'authors',
+    'date-last-modified',
     'date_first_released',
+    'date_last_published',
     'image-base-id',
     'last-semantic-change',
     'product_id',
     'serie',
     'supertitle',
-    'title',
-    'uniqueId',
     'teaser_text',
-    'type'
+    'title',
+    'type',
+    'uniqueId'
 ])
 
 
 FIELD_MAP = [
+    (u'authors', u'authorships'),
     (u'supertitle', u'teaserSupertitle'),
-    (u'title', u'teaserTitle'),
     (u'teaser_text', u'teaserText'),
+    (u'title', u'teaserTitle')
 ]
 
 
-ORDERS = collections.defaultdict(
-    lambda: 'last-semantic-change desc', {
-        'relevanz': 'score desc',
-        'aktuell': 'last-semantic-change desc',
-        'publikation': 'date_last_published asc'}
-)
+DATE_MAP = [
+    (u'date-last-modified', u'date_last_modified'),
+    (u'date_first_released', u'date_first_released'),
+    (u'last-semantic-change', u'last_semantic_change'),
+    (u'date_last_published', u'date_last_published'),
+    (u'date_last_published', u'date_last_published_semantic')
+]
 
 
 class IRanking(zeit.content.cp.interfaces.IArea):
@@ -79,9 +82,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     sort_order = zeit.cms.content.property.ObjectPathProperty(
         '.sort_order', IRanking['sort_order'])
 
-    query = zeit.cms.content.property.ObjectPathProperty(
-        '.query', IRanking['query'])
-
     raw_query = zeit.cms.content.property.ObjectPathProperty(
         '.raw_query', IRanking['raw_query'])
 
@@ -91,84 +91,58 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     _hits = zeit.cms.content.property.ObjectPathProperty(
         '.hits', IRanking['hits'])
 
-    def values(self):
+    def _query_solr(self, query, sort_order):
         result = []
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        query = self._build_query()
+        start = self._v_retrieved_content + self.count * (self.page - 1)
         try:
             with zeit.web.core.metrics.timer('solr.reponse_time'):
                 solr_result = conn.search(
                     query,
-                    sort=ORDERS[self.sort_order],
-                    rows=self.count,
-                    fl=FIELDS,
-                    start=self.count * (self.page - 1))
+                    sort=sort_order,
+                    rows=self.count_to_replace_duplicates,
+                    start=start,
+                    fl=FIELDS)
         except (pysolr.SolrError, ValueError) as e:
             log.warning(u'{} for query {}'.format(e, query))
-            return result
-        docs = collections.deque(solr_result)
-        self.hits = solr_result.hits
-        for block in self.placeholder:
-            if not zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(
-                    block) or not len(docs):
-                result.append(block)
-                continue
-            context = self.document_hook(docs.popleft())
-            try:
-                block.insert(0, zeit.cms.interfaces.ICMSContent(context))
-            except TypeError:
-                log.debug('Corrupted search result', context.get('uniqueId'))
-                continue
-            result.append(block)
+        else:
+            self.hits = solr_result.hits
+            for doc in solr_result:
+                doc = self.document_hook(doc)
+                content = zeit.cms.interfaces.ICMSContent(doc, None)
+                if content is not None:
+                    result.append(content)
         return result
 
-    def _build_query(self):
-        return self.raw_query
-
-    def document_hook(self, doc):
+    @staticmethod
+    def document_hook(doc):
         for source, target in FIELD_MAP:
             try:
                 doc[target] = doc[source]
             except KeyError:
                 continue
 
-        lsp = doc.get('date_last_published_semantic')
-        if lsp:
+        for source, target in DATE_MAP:
             try:
-                doc['date_last_published_semantic'] = (
-                    zc.iso8601.parse.datetimetz(lsp))
-            except:
-                doc['date_last_published_semantic'] = None
-        else:
-            doc['date_last_published_semantic'] = None
-            first = doc.get('date_first_released')
-            if first:
-                try:
-                    doc['date_first_released'] = (
-                        zc.iso8601.parse.datetimetz(lsp))
-                except:
-                    doc['date_first_released'] = None
-            else:
-                doc['date_first_released'] = None
+                doc[target] = zc.iso8601.parse.datetimetz(str(doc[source]))
+            except (KeyError, UnicodeEncodeError, ValueError):
+                continue
 
-        serie = doc.get('serie')
-        if serie:
-            source = zeit.cms.content.interfaces.ICommonMetadata[
-                'serie'].source.factory
-            doc['serie'] = source.values.get(serie, serie)
-        else:
-            doc['serie'] = None
+        serie = doc.get('serie', None)
+        source = zeit.cms.content.interfaces.ICommonMetadata['serie'].source
+        doc['serie'] = source.factory.values.get(serie, serie)
 
         # XXX The asset badges are not indexed in solr, so we lie about them
-        doc['gallery'] = None
-        doc['video'] = None
-        doc['video_2'] = None
+        doc['gallery'] = doc['video'] = doc['video_2'] = None
 
         return doc
 
     @property
-    def placeholder(self):
-        return iter(self.context.values())
+    def query(self):
+        request = pyramid.threadlocal.get_current_request()
+        param = u' '.join(request.GET.getall('q'))
+        if param and self.raw_query:
+            return param
 
     @property
     def hits(self):

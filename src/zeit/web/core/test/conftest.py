@@ -686,7 +686,13 @@ class MockSolr(object):
         self.results = []
 
     def search(self, q, rows=10, **kw):
-        return pysolr.Results(self.results, len(self.results))
+        results = []
+        for i in range(rows):
+            try:
+                results.insert(0, self.results.pop())
+            except IndexError:
+                break
+        return pysolr.Results(results, len(results))
 
     def update_raw(self, xml, **kw):
         pass
