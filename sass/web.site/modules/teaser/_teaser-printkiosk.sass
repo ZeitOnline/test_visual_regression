@@ -44,8 +44,14 @@
 			width: auto
 
 	&__container
-		margin: remify(20px) auto
+		margin: remify(20px) auto 0
 		max-width: remify(160px)
+
+	&__title
+		font-size: remify(16px)
+		line-height: 1.5
+		margin: remify(16px) auto 0
+		min-height: 3em // that's two lines when line-height is 1.5
 
 	+respond-min($break-phablet-min)
 		width: 50%
