@@ -746,7 +746,7 @@ class Content(Base):
 
     @zeit.web.reify('default_term')
     def comment_counts(self):
-        if any(self.nextread):
+        if self.nextread:
             return zeit.web.core.comments.get_counts(
                 [t.uniqueId for t in self.nextread])
 
