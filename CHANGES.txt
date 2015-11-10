@@ -9,6 +9,8 @@ Change log for zeit.web
 - HOTFIX: Render a redirect if we have a call to a dynamic folder with an empty
   view_name
 
+- FIX: Add missing horizontal padding to videostage-heading
+
 
 2.24 (2015-11-09)
 -----------------
