@@ -209,6 +209,9 @@ class Folder(Traversable):
 class DynamicFolder(CenterPage):
 
     def __call__(self, tdict):
+        if not tdict['view_name']:
+            url = '{}/index'.format(tdict['request'].url.rstrip('/'))
+            raise pyramid.httpexceptions.HTTPMovedPermanently(location=url)
         try:
             tdict['context'] = self.context[tdict['view_name']]
         except (IndexError, KeyError, TypeError):

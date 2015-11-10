@@ -134,3 +134,22 @@ def test_plain_folder_traversal_should_trigger_redirect_to_index(
         zeit.web.core.traversal.RepositoryTraverser.invoke(**tdict)
 
     assert redirect.value.location.endswith(moved)
+
+
+@pytest.mark.parametrize('path, moved', [
+    ('/dynamic', '/dynamic/index'),
+    ('/dynamic/', '/dynamic/index')])
+def test_dynamic_folder_traversal_should_trigger_redirect_to_index(
+        path, moved, application):
+
+    tdict = dict(
+        context=zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic'),
+        traversed=tuple(path.split('/')),
+        view_name='',
+        request=pyramid.request.Request.blank(path))
+
+    with pytest.raises(
+            pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
+        zeit.web.core.traversal.RepositoryTraverser.invoke(**tdict)
+
+    assert redirect.value.location.endswith(moved)
