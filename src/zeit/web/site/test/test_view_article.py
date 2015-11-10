@@ -1054,7 +1054,7 @@ def test_article_lineage_should_not_render_on_administratives(testbrowser):
     assert len(browser.cssselect('.article-lineage')) == 0
 
 
-def test_advertisement_nextread_should_render_after_nextread(
+def test_advertisement_nextread_should_render_after_veeseo(
         testbrowser, workingcopy):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -1066,6 +1066,7 @@ def test_advertisement_nextread_should_render_after_nextread(
                 'http://xml.zeit.de/zeit-online/article/02'),)
     browser = testbrowser('/zeit-online/article/01')
     assert len(browser.cssselect('.nextread')) == 1
+    assert len(browser.cssselect('.RA2VW2')) == 1
     assert len(browser.cssselect('.nextread-advertisement')) == 1
 
 
