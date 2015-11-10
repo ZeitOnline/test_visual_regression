@@ -303,12 +303,17 @@ class Base(object):
         levels = self.banner_channel.split('/')
         # remove type from level3
         levels[1] = '' if levels[1] == self.type else levels[1]
+        # fix keywords for advertorials
+        level2 = "".join(re.findall(r"[A-Za-z0-9_]*", levels[0]))
+        level3 = "".join(re.findall(r"[A-Za-z0-9_]*", levels[1]))
+        keywords = ','.join(self.adwords) if (
+            level2 != 'angebote') else '{},{}'.format(level2, level3)
         return [('$handle', self.adcontroller_handle),
-                ('level2', "".join(re.findall(r"[A-Za-z0-9_]*", levels[0]))),
-                ('level3', "".join(re.findall(r"[A-Za-z0-9_]*", levels[1]))),
+                ('level2', level2),
+                ('level3', level3),
                 ('level4', ''),
                 ('$autoSizeFrames', True),
-                ('keywords', ','.join(self.adwords)),
+                ('keywords', keywords),
                 ('tma', '')]
 
     @zeit.web.reify

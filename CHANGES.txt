@@ -4,10 +4,12 @@ Change log for zeit.web
 2.25 (unreleased)
 -----------------
 
+- FIX: Add advertorial keywords to banner config
+
 - ZON-2159: Nestle ranking area closer up to cms code
 
 - HOTFIX: Render a redirect if we have a call to a dynamic folder with an empty
-  view_name
+  view_name 
 
 
 2.24 (2015-11-09)
