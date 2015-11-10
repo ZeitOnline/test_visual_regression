@@ -185,18 +185,49 @@ class Image(zeit.web.core.image.BaseImage):
     DEFAULT_VARIANT = 'wide'
 
     def __new__(cls, model_block):
-        if (getattr(model_block.layout, 'id', None) == 'zmo-xl-header' or
-                getattr(model_block, 'is_empty', False)):
+        if getattr(model_block, 'is_empty', False):
             return
-        return super(Image, cls).__new__(cls, model_block)
+        if not cls.wanted_layout(getattr(model_block.layout, 'id', None)):
+            return
+
+        target = None
+        referenced = None
+        try:
+            if model_block.references:
+                referenced = model_block.references.target
+        except TypeError:
+            pass  # Unresolveable uniqueId
+        if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
+            variant = getattr(model_block.layout, 'variant', None) or (
+                cls.DEFAULT_VARIANT)
+            try:
+                target = referenced[variant]
+            except KeyError:
+                target = None
+        else:
+            target = referenced
+        if zeit.web.core.image.is_image_expired(target):
+            target = None
+
+        if not target:
+            return
+
+        instance = super(Image, cls).__new__(cls, model_block)
+        instance.image = target
+        instance.src = instance.image.uniqueId
+        instance.uniqueId = instance.image.uniqueId
+        if model_block.references.title:
+            instance.attr_title = model_block.references.title
+        if model_block.references.alt:
+            instance.attr_alt = model_block.references.alt
+
+        return instance
+
+    @classmethod
+    def wanted_layout(cls, layout):
+        return layout != 'zmo-xl-header'
 
     def __init__(self, model_block):
-        self.image = None
-        self.src = None
-        self.uniqueId = None
-        self.attr_title = None
-        self.attr_alt = None
-
         self.layout = layout = model_block.layout
 
         if layout.display_mode == 'large':
@@ -222,47 +253,14 @@ class Image(zeit.web.core.image.BaseImage):
                 rel = cr.attrib.get('rel', '') == 'nofollow'
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
-        target = None
-        referenced = None
-        try:
-            if model_block.references:
-                referenced = model_block.references.target
-        except TypeError:
-            pass  # Unresolveable uniqueId
-        if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
-            variant = getattr(model_block.layout, 'variant', None) or (
-                self.DEFAULT_VARIANT)
-            try:
-                target = referenced[variant]
-            except KeyError:
-                target = None
-        else:
-            target = referenced
-        if zeit.web.core.image.is_image_expired(target):
-            target = None
-
-        if target:
-            self.image = target
-            self.src = self.image and self.image.uniqueId
-            self.uniqueId = self.image and self.image.uniqueId
-            if model_block.references.title:
-                self.attr_title = model_block.references.title
-            if model_block.references.alt:
-                self.attr_alt = model_block.references.alt
-
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class HeaderImage(Image):
 
-    def __new__(cls, model_block):
-        if (getattr(model_block.layout, 'id', None) != 'zmo-xl-header' or
-                getattr(model_block, 'is_empty', False)):
-            return
-        return super(Image, cls).__new__(cls, model_block)
-
-    def __init__(self, model_block):
-        super(HeaderImage, self).__init__(model_block)
+    @classmethod
+    def wanted_layout(cls, layout):
+        return layout == 'zmo-xl-header'
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
