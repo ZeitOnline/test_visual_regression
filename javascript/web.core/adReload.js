@@ -6,15 +6,25 @@
 define( [ 'jquery' ], function( $ ) {
 
     var debug = false,
+    configUrl = window.ZMO.jsconfHost + '/config_adreload.json',
+    config = true,
     /**
      * initialize a new counting mandator by checking id against configuration
      * @return {bool}   return state when ready
      */
     initialize = function() {
         console.debug( 'initialize' );
+        var $deferred = $.Deferred();
         // ggf. config laden
+        if ( config === false ) {
+            console.debug( 'ajax routine' );
+            return $.ajax( configUrl, { dataType: 'json' });
+        } else {
+            $deferred.resolve();
+        }
         // im localstorage ablegen
         // returnen
+        return $deferred.promise();
     },
     interaction = function( event, sender, message ) {
         console.debug( 'interaction', event, sender, message );
@@ -43,13 +53,16 @@ define( [ 'jquery' ], function( $ ) {
 
     return {
         init: function() {
+            console.debug( 'init' );
             // configure page
-            if ( initialize() ) {
+            var promise = initialize();
+            promise.done( function() {
+                config = promise.responseJSON;
                 // add eventlistener
                 $( window ).on( 'interaction.adreload.z', interaction );
                 // listen to window.messages for channel interactions
                 $( window ).on( 'message', message );
-            }
+            });
             // on page unload unbind all at unload to prevent memory leaks
             $( window ).on( 'unload', function( event ) {
                 $( window ).off( 'adreload' );
