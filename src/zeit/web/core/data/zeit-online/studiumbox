@@ -74,8 +74,8 @@
 				<container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" module="zon-large">
 					<block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
 				</container>
-                <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c" cp:type="cpextra" module="studium_box">
-                    <cp_extra id="studium_box"/>
+                <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c" cp:type="cpextra" module="studiumbox">
+                    <cp_extra id="studiumbox"/>
                 </container>
 			</region>
 			<region area="id-ec39599c-34a4-467b-9417-663d76bd3d94" kind="minor">
