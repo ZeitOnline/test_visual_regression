@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 import re
 
-import lxml.html
-import lxml.etree
-import mock
-import pytest
-import requests
-
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
+import lxml.etree
+import lxml.html
+import mock
+import pyramid.httpexceptions
 import pyramid.testing
+import pytest
+import requests
 
 import zeit.content.cp.centerpage
 
