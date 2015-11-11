@@ -1223,8 +1223,8 @@ def test_quiz_frames_are_placed_correctly(testbrowser):
     assert len(frameheadline2) == 0
     assert frameheadline1[0].text == 'Quiz'
 
-    assert iframe1[0].get('src') == 'http://quiz.zeit.de/#/quiz/103'
-    assert iframe2[0].get('src') == 'http://quiz.zeit.de/#/quiz/136'
+    assert iframe1[0].get('src') == 'http://quiz.zeit.de/#/quiz/103?embedded'
+    assert iframe2[0].get('src') == 'http://quiz.zeit.de/#/quiz/136?embedded'
 
 
 def test_quiz_frame_dimensions(selenium_driver, testserver, screen_size):
