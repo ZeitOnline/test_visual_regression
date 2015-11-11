@@ -332,7 +332,7 @@ class CenterpageArea(Centerpage):
 
     def __init__(self, context, request):
         if not request.subpath:
-            raise pyramid.httpexceptions.NotFound()
+            raise pyramid.httpexceptions.HTTPNotFound()
 
         self.context = None
         self.request = request
