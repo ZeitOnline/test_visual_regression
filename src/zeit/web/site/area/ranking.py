@@ -132,8 +132,9 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         source = zeit.cms.content.interfaces.ICommonMetadata['serie'].source
         doc['serie'] = source.factory.values.get(serie, serie)
 
-        # XXX The asset badges are not indexed in solr, so we lie about them
-        doc['gallery'] = doc['video'] = doc['video_2'] = None
+        # XXX The some fields are not indexed in solr, so we lie about them
+        overrides = ('gallery', 'lead_candidate', 'video', 'video_2')
+        doc.update({k: None for k in overrides})
 
         return doc
 
