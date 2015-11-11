@@ -507,7 +507,7 @@ def test_nextread_date_looks_less_like_a_date_for_google(jinja2_env):
         asset_host='',
         image_host='')
     view = zeit.web.site.view_article.Article(content, request)
-    html_str = tpl.render(view=view,module=view.nextread,request=request)
+    html_str = tpl.render(view=view, module=view.nextread, request=request)
     html = lxml.html.fromstring(html_str)
     datetime = html.cssselect('.nextread__dt')
     assert datetime[0].tag == 'span'
