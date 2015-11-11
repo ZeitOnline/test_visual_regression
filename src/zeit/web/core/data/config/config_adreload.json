@@ -1,16 +1,16 @@
 {
 	"schach": {
 		"name": "schach",
-		"time": "",
+		"time": 0,
 		"interval": 3,
 		"pagetypes": ["article"],
 		"slug": "/"
 	},
 	"zmo-gallery": {
 		"name": "zmo-gallery",
-		"time": 1000,
-		"interval": 1,
-		"pageypes": ["gallery"],
+		"time": 5000,
+		"interval": 5,
+		"pagetypes": ["gallery"],
 		"slug": "/zeit-magazin"
 	}
 }

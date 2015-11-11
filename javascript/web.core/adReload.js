@@ -1,3 +1,4 @@
+// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 /**
  * @fileOverview API for asynchronely reload ads on webpages
  * @author nico.bruenjes@zeit.de
@@ -5,32 +6,85 @@
  */
 define( [ 'jquery' ], function( $ ) {
 
-    var debug = false,
+    var debug = location.search.indexOf( 'debug-adreload' ) !== -1,
     configUrl = window.ZMO.jsconfHost + '/config_adreload.json',
-    config = true,
+    config = false,
+    timer = {},
+    checkClickCount = function( myconfig ) {
+        // do we need a timer?
+        if ( typeof myconfig.time !== 'undefined' && myconfig.time > 0 ) {
+            // timer not set
+            if ( typeof timer[myconfig.name] !== 'undefined' && timer[myconfig.name] === true ) {
+                // do not count while timer is set
+                if ( debug ) { console.debug( 'TIMER läuft noch' ); }
+                return false;
+            } else {
+                // set timer
+                window.setTimeout( function() {
+                    timer[myconfig.name] = false;
+                }, myconfig.time );
+                timer[myconfig.name] = true;
+                // extra
+                return clickCount( myconfig );
+            }
+        } else {
+            return clickCount( myconfig );
+        }
+    },
+    clickCount = function( myconfig ) {
+        // load on every click
+        if ( myconfig.interval < 2 ) {
+            if ( debug ) { console.debug( 'direct click' ); }
+            return true;
+        }
+        // load cause max reached
+        if ( $( 'body' ).data( myconfig.name ) + 1 === myconfig.interval ) {
+            if ( debug ) { console.debug( 'max click' ); }
+            return true;
+        }  else {
+            if ( $( 'body' ).data( myconfig.name ) ) {
+                if ( debug ) { console.debug( 'add up clicks' ); }
+                $( 'body' ).data( myconfig.name, $( 'body' ).data( myconfig.name ) + 1 );
+            } else {
+                if ( debug ) { console.debug( 'first click' ); }
+                $( 'body' ).data( myconfig.name, 1 );
+            }
+            return false;
+        }
+    },
     /**
      * initialize a new counting mandator by checking id against configuration
      * @return {bool}   return state when ready
      */
-    initialize = function() {
-        console.debug( 'initialize' );
-        var $deferred = $.Deferred();
-        // ggf. config laden
-        if ( config === false ) {
-            console.debug( 'ajax routine' );
-            return $.ajax( configUrl, { dataType: 'json' });
-        } else {
-            $deferred.resolve();
-        }
-        // im localstorage ablegen
-        // returnen
-        return $deferred.promise();
+    loadConfig = function() {
+        return $.ajax( configUrl, { dataType: 'json' } );
     },
     interaction = function( event, sender, message ) {
-        console.debug( 'interaction', event, sender, message );
-        // check config
-        // check session storage
-        // defer_counting
+        // check config if sender is registered
+        if ( typeof config[ sender ] === 'undefined' ) { return; }
+        var myconfig = config[ sender ];
+        // check if slug and pagetype match
+        if (
+            window.location.pathname.indexOf( myconfig.slug ) < 0 ||
+            $.inArray( window.ZMO.view.type, myconfig.pagetypes ) < 0
+        ) { return; }
+        if ( checkClickCount( myconfig ) ) {
+            // reload Ads
+            if ( typeof window.IQD_ReloadHandle !== 'undefined' ) {
+                if ( debug ) { console.debug( 'adReload emitted' ); }
+                window.IQD_ReloadHandle();
+            }
+            // emit webtrekk PI
+            if ( typeof window.wt !== 'undefined' ) {
+                if ( debug ) { console.debug( 'webtrekk emitted' ); }
+                window.wt.sendinfo();
+            }
+            // emit IVW PI
+            if ( typeof window.iom !== 'undefined' && typeof window.iam_data !== 'undefined' ) {
+                if ( debug ) { console.debug( 'ivw emitted' ); }
+                window.iom.c( window.iam_data, 1 );
+            }
+        }
     },
     /**
      * channel filtered window.messages to interaction api
@@ -53,11 +107,10 @@ define( [ 'jquery' ], function( $ ) {
 
     return {
         init: function() {
-            console.debug( 'init' );
-            // configure page
-            var promise = initialize();
-            promise.done( function() {
-                config = promise.responseJSON;
+            // load configuration
+            var inits = loadConfig();
+            inits.done( function() {
+                config = inits.responseJSON;
                 // add eventlistener
                 $( window ).on( 'interaction.adreload.z', interaction );
                 // listen to window.messages for channel interactions
