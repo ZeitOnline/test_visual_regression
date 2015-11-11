@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2376: Add kicker content (supertitle) to og:title meta tag
 
+- FIX: rework ZMO galleries (back to normal)
+
 - HOTFIX: Render a redirect if we have a call to a dynamic folder with an empty
   view_name
 
