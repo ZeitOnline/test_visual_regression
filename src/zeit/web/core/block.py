@@ -660,16 +660,29 @@ class AdvertisementNextread(Nextread):
 def find_nextread_folder(ressort, subressort):
     ressort = ressort if ressort else ''
     subressort = subressort if subressort else ''
+
     folder = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(
         ressort, subressort)
-    if not folder:
+    if not contains_nextreads(folder):
         folder = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(ressort, None)
-    advertisement_nextread_folder = zope.component.getUtility(
+    if not contains_nextreads(folder):
+        return None
+    nextread_foldername = zope.component.getUtility(
         zeit.web.core.interfaces.ISettings).get(
             'advertisement_nextread_folder', '')
-    if advertisement_nextread_folder not in folder:
-        return None
-    return folder[advertisement_nextread_folder]
+    return folder[nextread_foldername]
+
+
+def contains_nextreads(folder):
+    if not folder:
+        return False
+    nextread_foldername = zope.component.getUtility(
+        zeit.web.core.interfaces.ISettings).get(
+            'advertisement_nextread_folder', '')
+    if nextread_foldername not in folder:
+        return False
+    advertisement_nextread_folder = folder[nextread_foldername]
+    return bool(len(advertisement_nextread_folder))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IBreakingNews)

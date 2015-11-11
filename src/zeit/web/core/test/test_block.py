@@ -304,9 +304,14 @@ def test_find_nextread_from_subressort(application):
         'Deutschland', 'Datenschutz')
 
 
-def test_find_nextread_from_ressort_if_subressort_has_none(application):
+def test_find_nextread_from_ressort_if_subressort_has_no_folder(application):
     assert 'jobs' in zeit.web.core.block.find_nextread_folder(
         'Deutschland', 'Integration')
+
+
+def test_find_nextread_from_ressort_if_subressort_folder_is_empty(application):
+    assert 'jobs' in zeit.web.core.block.find_nextread_folder(
+        'Deutschland', 'Osten')
 
 
 def test_find_nextread_from_correct_ressort_if_subressort_has_same_name(
