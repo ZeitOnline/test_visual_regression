@@ -8,7 +8,7 @@ Change log for zeit.web
 
 - ZON-2159: Nestle ranking area closer up to cms code
 
-- ZON-2396: Support specialized quiz module on CPs
+- ZON-2396: Support specialized quiz module on CPs and articles
 
 - FIX: rework ZMO galleries (back to normal)
 
