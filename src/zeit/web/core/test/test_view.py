@@ -535,3 +535,11 @@ def test_content_view_should_provide_lineage_property(
     content = zeit.web.core.view.Content(context, dummy_request)
     assert len(content.lineage) == 2
     assert all(isinstance(l, dict) for l in content.lineage)
+
+
+def test_ispaginated_predicate_should_handle_get_parameter():
+    ip = zeit.web.core.view.is_paginated
+    assert ip(None, mock.Mock(GET={})) is False
+    assert ip(None, mock.Mock(GET={'p': 'klaus'})) is False
+    assert ip(None, mock.Mock(GET={'p': '1'})) is False
+    assert ip(None, mock.Mock(GET={'p': '4'})) is True
