@@ -6,7 +6,7 @@ Change log for zeit.web
 
 - ZON-2159: Nestle ranking area closer up to cms code
 
-- ZON-2376: Add kicker content (supertitle) to og:title meta tag
+- ZON-2376: use pagetitle in og:title meta tag
 
 - FIX: rework ZMO galleries (back to normal)
 
