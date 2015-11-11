@@ -1205,7 +1205,7 @@ def test_hidden_images_must_not_be_loaded_via_js(
             assert len(largeimage) == 1
 
 
-def test_frames_are_placed_correctly(testbrowser):
+def test_quiz_frames_are_placed_correctly(testbrowser):
     browser = testbrowser('/zeit-online/index-with-quizzez')
     frame1 = browser.cssselect('.cp-area--minor > .frame')
     frame2 = browser.cssselect('.cp-area--duo > .frame')
@@ -1227,7 +1227,7 @@ def test_frames_are_placed_correctly(testbrowser):
     assert iframe2[0].get('src') == 'http://quiz.zeit.de/#/quiz/136'
 
 
-def test_frame_dimensions(selenium_driver, testserver, screen_size):
+def test_quiz_frame_dimensions(selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('{}/zeit-online/index-with-quizzez'.format(testserver.url))
