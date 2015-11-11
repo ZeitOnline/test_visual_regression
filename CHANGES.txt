@@ -6,7 +6,8 @@ Change log for zeit.web
 
 - FIX: Make veeseo video widget appear before advertisement nextread
 
-- ZON-2159: Nestle ranking area closer up to cms code
+- ZON-2159: Nestle ranking area closer up to cms code and implement rudimentary
+  paginated centerpage view.
 
 - FIX: rework ZMO galleries (back to normal)
 
