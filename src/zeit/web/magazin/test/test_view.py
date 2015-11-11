@@ -570,14 +570,14 @@ def test_pagination_prev_page_url_on_first_page_is_none(application):
 def test_article09_should_have_a_nextread(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
     view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert len(view.nextreads) == 1
-    assert view.nextreads[0] is not None
+    assert len(view.nextread) == 1
+    assert view.nextread[0] is not None
 
 
 def test_article01_should_not_have_nextread_teasers(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert len(view.nextreads) == 0
+    assert len(view.nextread) == 0
 
 
 def test_caching_headers_should_be_set(testserver, testbrowser):
