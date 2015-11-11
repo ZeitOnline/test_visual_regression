@@ -39,11 +39,7 @@
 		<div class="studiumbox__content" id="hochschulranking">
 			<form action="http://ranking.zeit.de/che2015/de/rankingunion/show">
 				<h3 class="studiumbox__title">Welche Uni ist die beste für Ihr Fach?</h3>
-				<select name="esb" class="studiumbox__input" onchange="
-					var f = this.form, o = this.options[this.selectedIndex];
-					f.ab.value = o.getAttribute('data-ab');
-					f.hstyp.value = o.getAttribute('data-hstyp');
-					f.subfach.value = o.getAttribute('data-subfach');">
+				<select name="esb" class="studiumbox__input">
 					<option>Fachbereich auswählen …</option>
 					<option value="31" data-ab="1" data-hstyp="1">Anglistik / Amerikanistik</option>
 					<option value="7"  data-ab="3" data-hstyp="1">Architektur</option>
