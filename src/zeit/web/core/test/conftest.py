@@ -697,6 +697,9 @@ class MockSolr(object):
     def update_raw(self, xml, **kw):
         pass
 
+    def delete(self, **kw):
+        pass
+
 
 @pytest.fixture
 def datasolr(request):

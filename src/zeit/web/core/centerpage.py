@@ -5,6 +5,7 @@ import zope.component
 
 import zeit.cms.interfaces
 import zeit.content.cp.area
+import zeit.content.cp.blocks.teaser
 import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
 import zeit.content.image.imagegroup
@@ -230,3 +231,15 @@ def search_with_timing_metrics(*args, **kw):
         return original_search(*args, **kw)
 original_search = zeit.find.search.search
 zeit.find.search.search = search_with_timing_metrics
+
+
+# We can't do anything with non-existent content (as opposed to vivi where
+# showing placeholders might give some benefit), so we don't bother with
+# FakeEntry, as zeit.cms.syndication.feed.ContentList does.
+def iter_without_fakeentry(self):
+    for unique_id in self.keys():
+        try:
+            yield zeit.cms.interfaces.ICMSContent(unique_id)
+        except TypeError:
+            continue
+zeit.content.cp.blocks.teaser.TeaserBlock.__iter__ = iter_without_fakeentry

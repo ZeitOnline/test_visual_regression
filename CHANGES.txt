@@ -8,6 +8,9 @@ Change log for zeit.web
 
 - FIX: rework ZMO galleries (back to normal)
 
+- FIX: Skip nonexistent content (instead of trying to make it "work" somehow
+  with FakeEntry)
+
 - HOTFIX: Render a redirect if we have a call to a dynamic folder with an empty
   view_name
 
