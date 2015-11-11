@@ -1619,3 +1619,20 @@ def test_printkiosk_loads_next_page_on_click(selenium_driver, testserver):
         '.teaser-printkiosk__title')
     assert new_teaser_titles[0].text == 'ZEIT GESCHICHTE'
     assert new_teaser_titles[2].text == 'DIE ZEIT'
+
+
+def test_centerpage_page_should_be_reconstructed(application, dummy_request):
+    dummy_request.GET['p'] = '3'
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
+    view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
+    assert len(view.regions) == 2
+    assert view.regions[0].values()[0].values()[0].supertitle == 'Griechenland'
+    assert view.regions[1].values()[0].kind == 'ranking'
+
+
+def test_centerpage_page_should_require_ranking(application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/slenderized-index')
+    view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
+    with pytest.raises(pyramid.httpexceptions.HTTPNotFound):
+        list(view.regions)
