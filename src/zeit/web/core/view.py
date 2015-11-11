@@ -735,14 +735,20 @@ class Content(Base):
         return self.context.commentSectionEnable is not False
 
     @zeit.web.reify
-    def nextreads(self):
-        return zeit.web.core.interfaces.INextreadlist(self.context)
+    def nextread(self):
+        return zeit.web.core.interfaces.INextread(self.context)
+
+    @zeit.web.reify
+    def nextread_ad(self):
+        return zope.component.getAdapter(
+            self.context, zeit.web.core.interfaces.INextread,
+            name="advertisement")
 
     @zeit.web.reify('default_term')
     def comment_counts(self):
-        if any(self.nextreads):
+        if self.nextread:
             return zeit.web.core.comments.get_counts(
-                *[t.uniqueId for t in itertools.chain(*self.nextreads)])
+                [t.uniqueId for t in self.nextread])
 
     @zeit.web.reify
     def comment_area(self):
@@ -776,7 +782,7 @@ class Content(Base):
             'no_comments': (not self.comments and self.comments_loadable),
             'warning': (self.community_maintenance['active'] or (
                 not self.comments_loadable) or (
-                self.community_maintenance['scheduled'])),
+                    self.community_maintenance['scheduled'])),
             'message': message,
             'user_blocked': user_blocked,
             'accept_new_comments': accept_new_comments
