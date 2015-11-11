@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2159: Nestle ranking area closer up to cms code
 
+- FIX: rework ZMO galleries (back to normal)
+
 - HOTFIX: Render a redirect if we have a call to a dynamic folder with an empty
   view_name
 
