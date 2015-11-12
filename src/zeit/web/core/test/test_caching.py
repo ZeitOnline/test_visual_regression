@@ -67,12 +67,15 @@ def test_already_expired_image_should_have_caching_time_zero(
 
 
 @pytest.mark.skipif(not HAVE_PYLIBMC, reason='pylibmc not installed')
-def test_should_bypass_cache_on_memcache_server_error(application):
+def test_should_bypass_cache_on_memcache_server_error(application, request):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings_copy = copy.copy(settings)
     settings_copy['cache.type'] = 'ext:memcached'
     settings_copy['cache.url'] = 'localhost:99998'
     pyramid_beaker.set_cache_regions_from_settings(settings_copy)
+    request.addfinalizer(
+        lambda: pyramid_beaker.set_cache_regions_from_settings(settings))
+
     with mock.patch('zeit.web.core.comments.request_thread') as request:
         request.return_value = ''
         try:
@@ -83,7 +86,6 @@ def test_should_bypass_cache_on_memcache_server_error(application):
         except beaker.exceptions.InvalidCacheBackendError:
             print "No valid beaker backend could be found."
 
-        pyramid_beaker.set_cache_regions_from_settings(settings)
         assert request.call_count == 2
 
 
