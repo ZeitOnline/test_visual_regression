@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.25 (unreleased)
+2.25 (2015-11-12)
 -----------------
 
 - FIX: Add advertorial keywords to banner config
