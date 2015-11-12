@@ -121,8 +121,10 @@ def test_default_teaser_should_match_css_selectors(
 
     module = mock.Mock()
 
+    request = mock.Mock()
+
     html_str = tpl.render(
-        teaser=teaser, layout='teaser', view=view, area=area, module=module)
+        teaser=teaser, layout='teaser', view=view, area=area, module=module, request=request)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('article.teaser h2.teaser__heading')) == 1
@@ -132,7 +134,7 @@ def test_default_teaser_should_match_css_selectors(
     assert link.attrib['title'] == 'teaserSupertitle - teaserTitle'
 
     link_kicker = html('a.teaser__combined-link span.teaser__kicker')[0]
-    assert link_kicker.text == 'teaserSupertitle'
+    assert 'teaserSupertitle' in link_kicker.text_content()
 
     link_title = html('a.teaser__combined-link span.teaser__title')[0]
     assert link_title.text == 'teaserTitle'
@@ -642,7 +644,7 @@ def test_gallery_teaser_should_contain_supertitle(testserver, testbrowser):
     uid = 'http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer'
     kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
                                '.teaser-small__kicker'.format(uid))[0]
-    assert kicker.text == 'Desktop-Bilder'
+    assert 'Desktop-Bilder' in kicker.text_content()
 
 
 def test_centerpage_should_have_header_tags(testbrowser, testserver):
@@ -1388,7 +1390,7 @@ def test_zmo_parquet_has_zmo_styles(testbrowser):
     zmo_region = regions[3]
     zmo_title = zmo_region.cssselect('.parquet-meta__title--zmo')
     zmo_logo = zmo_region.cssselect('.parquet-meta__logo--zmo')
-    zmo_kicker = zmo_region.cssselect('.teaser-small__kicker--zmo')
+    zmo_kicker = zmo_region.cssselect('.teaser-small__kicker--zmo-parquet')
 
     assert len(zmo_title)
     assert len(zmo_logo)
@@ -1593,6 +1595,55 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
     closelink.click()
     copyright = driver.find_element_by_class_name('image-copyright-footer')
     assert copyright.is_displayed() is False, 'copyright is not displayed'
+
+
+def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
+    browser = testbrowser('/zeit-online/journalistic-formats-zmo')
+
+    teaser_fullwidth_logo = browser.cssselect(
+        '.teaser-fullwidth__kicker-logo--zmo')[0]
+    teaser_classic_logo = browser.cssselect(
+        '.teaser-classic__kicker-logo--zmo')[0]
+    teaser_large_logo =  browser.cssselect(
+        '.teaser-large__kicker-logo--zmo')[0]
+    teaser_small_logo = browser.cssselect(
+        '.teaser-small__kicker-logo--zmo')[0]
+    teaser_small_minor_logo = browser.cssselect(
+        '.teaser-small-minor__kicker-logo--zmo')[0]
+    teaser_kicker_zmo_parquet = browser.cssselect(
+        '.teaser-small__kicker--zmo-parquet svg')
+
+    assert len(teaser_fullwidth_logo) == 1
+    assert len(teaser_classic_logo) == 1
+    assert len(teaser_large_logo) == 1
+    assert len(teaser_small_logo) == 1
+    assert len(teaser_small_minor_logo) == 1
+    # assert there is no kicker logo when in zmo parquet
+    assert len(teaser_kicker_zmo_parquet) == 0
+
+
+def test_zett_teaser_kicker_should_contain_logo(testbrowser):
+    browser = testbrowser('/zeit-online/journalistic-formats-zett')
+
+    teaser_fullwidth_logo = browser.cssselect(
+        '.teaser-fullwidth__kicker-logo--zett')[0]
+    teaser_classic_logo = browser.cssselect(
+        '.teaser-classic__kicker-logo--zett')[0]
+    teaser_large_logo =  browser.cssselect(
+        '.teaser-large__kicker-logo--zett')[0]
+    teaser_small_logo = browser.cssselect(
+        '.teaser-small__kicker-logo--zett')[0]
+    teaser_small_minor_logo = browser.cssselect(
+        '.teaser-small-minor__kicker-logo--zett')[0]
+    teaser_square_logo = browser.cssselect(
+        '.teaser-square__kicker-logo--zett')[0]
+
+    assert len(teaser_fullwidth_logo) == 1
+    assert len(teaser_classic_logo) == 1
+    assert len(teaser_large_logo) == 1
+    assert len(teaser_small_logo) == 1
+    assert len(teaser_small_minor_logo) == 1
+    assert len(teaser_square_logo) == 1
 
 
 def test_printkiosk_is_structured_correctly(testbrowser):

@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2325: Implement Reisebox and add Tracking to all Boxes
 
+- ZON-2047: Teaser kicker design for ZMO and ze.tt
+
 - FIX: Make veeseo video widget appear before advertisement nextread
 
 - FIX: Rework ZMO galleries (back to normal)
