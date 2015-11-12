@@ -38,6 +38,9 @@
     <region kind="gallery" title="ZEIT Shop">
         <area kind="shop"/>
     </region>
+    <region kind="gallery" title="ZEIT Printbanderole">
+        <area kind="printkiosk"/>
+    </region>
     <region kind="gallery" title="Galerie">
         <area kind="gallery"/>
     </region>

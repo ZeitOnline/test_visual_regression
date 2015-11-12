@@ -507,7 +507,7 @@ def test_nextread_date_looks_less_like_a_date_for_google(jinja2_env):
         asset_host='',
         image_host='')
     view = zeit.web.site.view_article.Article(content, request)
-    html_str = tpl.render(view=view, request=request)
+    html_str = tpl.render(view=view, module=view.nextread, request=request)
     html = lxml.html.fromstring(html_str)
     datetime = html.cssselect('.nextread__dt')
     assert datetime[0].tag == 'span'
@@ -1054,7 +1054,7 @@ def test_article_lineage_should_not_render_on_administratives(testbrowser):
     assert len(browser.cssselect('.article-lineage')) == 0
 
 
-def test_advertisement_nextread_should_render_after_nextread(
+def test_advertisement_nextread_should_render_after_veeseo(
         testbrowser, workingcopy):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -1065,5 +1065,15 @@ def test_advertisement_nextread_should_render_after_nextread(
             zeit.cms.interfaces.ICMSContent(
                 'http://xml.zeit.de/zeit-online/article/02'),)
     browser = testbrowser('/zeit-online/article/01')
-    assert len(browser.cssselect('.nextread')) == 1
-    assert len(browser.cssselect('.nextread-advertisement')) == 1
+    nextread = browser.xpath('//main/article')[1]
+    veeseo = browser.xpath('//main/div')[1]
+    ad = browser.xpath('//main/article')[2]
+    assert nextread.attrib.get('class') == 'nextread nextread--with-image'
+    assert veeseo.attrib.get('class') == 'RA2VW2'
+    assert ad.attrib.get('class') == 'nextread-advertisement'
+
+
+def test_article_should_contain_veeseo_widget(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    assert browser.cssselect('#veeseo-widget')
+    assert browser.cssselect('.RA2VW2')

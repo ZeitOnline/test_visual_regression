@@ -1056,7 +1056,7 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
     teaserbutton = driver.find_element_by_css_selector(
-        '.js-bar-teaser-shuffle')
+        '.js-bar-teaser-paginate')
     teaserbutton.click()
 
     condition = expected_conditions.text_to_be_present_in_element((
@@ -1072,7 +1072,7 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
     assert new_teaser_links[1].get_attribute('href').endswith(
         '/zeit-online/gallery/england-meer-strand-menschen-fs')
     assert teaserbutton.get_attribute('data-sourceurl').endswith(
-        '?p=http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer')
+        'teaser-gallery-setup/area/id-5fe59e73-e388-42a4-a8d4-750b0bf96812?p=')
 
 
 def test_homepage_should_have_proper_meetrics_integration(
@@ -1437,7 +1437,7 @@ def test_jobbox_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.jobbox__action'))
 
 
-def test_partnerbox_job_is_displayed_correctly(testbrowser):
+def test_partnerbox_jobs_is_displayed_correctly(testbrowser):
     browser = testbrowser('/zeit-online/partnerbox-jobs')
 
     # in main area
@@ -1445,13 +1445,77 @@ def test_partnerbox_job_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.partnerbox__label'))
     assert len(box.cssselect('.partner__action'))
     assert len(box.cssselect('.partner__intro'))
-    assert len(box.cssselect('.p-kicker--jobs'))
+    assert len(box.cssselect('.partner--jobs'))
     assert len(box.cssselect('.p-kicker__img'))
     assert len(box.cssselect('.p-kicker__text'))
     assert len(box.cssselect('.pa-dropdown'))
     assert len(box.cssselect('.pa-button'))
     assert len(box.cssselect('.pa-link'))
     assert len(box.cssselect('.pa-dropdown__option')) == 9
+
+
+def test_partnerbox_jobs_dropdown_works(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/partnerbox-jobs' % testserver.url)
+    dropdown = driver.find_elements_by_class_name('pa-dropdown')[0]
+    button = driver.find_elements_by_class_name('pa-button__text')[0]
+
+    # test without selecting anything
+    button.click()
+    assert 'jobs.zeit.de' in driver.current_url
+    assert 'stellenmarkt.funktionsbox.streifen' in driver.current_url
+
+    # test with selected dropdown
+    driver.get('%s/zeit-online/partnerbox-jobs' % testserver.url)
+    dropdown = driver.find_elements_by_class_name('pa-dropdown')[0]
+    button = driver.find_elements_by_class_name('pa-button__text')[0]
+
+    dropdown.find_element_by_xpath(
+        "//option[text()='Kunst & Kultur']").click()
+    button.click()
+    assert 'stellenmarkt/kultur_kunst' in driver.current_url
+    assert 'stellenmarkt.funktionsbox.streifen' in driver.current_url
+
+
+def test_partnerbox_reisen_is_displayed_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/partnerbox-reisen')
+
+    # in main area
+    box = browser.cssselect('.partnerbox')[0]
+    assert len(box.cssselect('.partnerbox__label'))
+    assert len(box.cssselect('.partner__action'))
+    assert len(box.cssselect('.partner__intro'))
+    assert len(box.cssselect('.partner--reisen'))
+    assert len(box.cssselect('.p-kicker__img'))
+    assert len(box.cssselect('.p-kicker__text'))
+    assert len(box.cssselect('.pa-dropdown'))
+    assert len(box.cssselect('.pa-button'))
+    assert len(box.cssselect('.pa-link'))
+    assert len(box.cssselect('.pa-link__icon'))
+    assert len(box.cssselect('.pa-dropdown__option')) == 18
+
+
+def test_partnerbox_reisen_dropdown_works(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/partnerbox-reisen' % testserver.url)
+    dropdown = driver.find_elements_by_class_name('pa-dropdown')
+    button = driver.find_elements_by_class_name('pa-button__text')
+
+    # test without selecting anything
+    button[0].click()
+    assert 'zeitreisen.zeit.de' in driver.current_url
+    assert 'display.zeit_online.reisebox.dynamisch' in driver.current_url
+
+    # test with selected dropdown
+    driver.get('%s/zeit-online/partnerbox-reisen' % testserver.url)
+    dropdown = driver.find_elements_by_class_name('pa-dropdown')
+    button = driver.find_elements_by_class_name('pa-button__text')
+
+    dropdown[0].find_element_by_xpath(
+        "//option[text()='Kulturreisen']").click()
+    button[0].click()
+    assert '/themenreisen/kulturreisen/' in driver.current_url
+    assert 'display.zeit_online.reisebox.dynamisch' in driver.current_url
 
 
 def test_studiumbox_is_displayed_correctly(testbrowser):
@@ -1536,30 +1600,43 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
 def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats-zmo')
 
-    teaser_fullwidth_logo = browser.cssselect('.teaser-fullwidth__kicker-logo--zmo')[0]
-    teaser_classic_logo = browser.cssselect('.teaser-classic__kicker-logo--zmo')[0]
-    teaser_large_logo =  browser.cssselect('.teaser-large__kicker-logo--zmo')[0]
-    teaser_small_logo = browser.cssselect('.teaser-small__kicker-logo--zmo')[0]
-    teaser_small_minor_logo = browser.cssselect('.teaser-small-minor__kicker-logo--zmo')[0]
-    teaser_kicker_zmo_parquet = browser.cssselect('.teaser-small__kicker--zmo-parquet svg')
+    teaser_fullwidth_logo = browser.cssselect(
+        '.teaser-fullwidth__kicker-logo--zmo')[0]
+    teaser_classic_logo = browser.cssselect(
+        '.teaser-classic__kicker-logo--zmo')[0]
+    teaser_large_logo =  browser.cssselect(
+        '.teaser-large__kicker-logo--zmo')[0]
+    teaser_small_logo = browser.cssselect(
+        '.teaser-small__kicker-logo--zmo')[0]
+    teaser_small_minor_logo = browser.cssselect(
+        '.teaser-small-minor__kicker-logo--zmo')[0]
+    teaser_kicker_zmo_parquet = browser.cssselect(
+        '.teaser-small__kicker--zmo-parquet svg')
 
     assert len(teaser_fullwidth_logo) == 1
     assert len(teaser_classic_logo) == 1
     assert len(teaser_large_logo) == 1
     assert len(teaser_small_logo) == 1
     assert len(teaser_small_minor_logo) == 1
-    assert len(teaser_kicker_zmo_parquet) == 0  # assert there is no kicker logo when in zmo parquet
+    # assert there is no kicker logo when in zmo parquet
+    assert len(teaser_kicker_zmo_parquet) == 0
 
 
 def test_zett_teaser_kicker_should_contain_logo(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats-zett')
 
-    teaser_fullwidth_logo = browser.cssselect('.teaser-fullwidth__kicker-logo--zett')[0]
-    teaser_classic_logo = browser.cssselect('.teaser-classic__kicker-logo--zett')[0]
-    teaser_large_logo =  browser.cssselect('.teaser-large__kicker-logo--zett')[0]
-    teaser_small_logo = browser.cssselect('.teaser-small__kicker-logo--zett')[0]
-    teaser_small_minor_logo = browser.cssselect('.teaser-small-minor__kicker-logo--zett')[0]
-    teaser_square_logo = browser.cssselect('.teaser-square__kicker-logo--zett')[0]
+    teaser_fullwidth_logo = browser.cssselect(
+        '.teaser-fullwidth__kicker-logo--zett')[0]
+    teaser_classic_logo = browser.cssselect(
+        '.teaser-classic__kicker-logo--zett')[0]
+    teaser_large_logo =  browser.cssselect(
+        '.teaser-large__kicker-logo--zett')[0]
+    teaser_small_logo = browser.cssselect(
+        '.teaser-small__kicker-logo--zett')[0]
+    teaser_small_minor_logo = browser.cssselect(
+        '.teaser-small-minor__kicker-logo--zett')[0]
+    teaser_square_logo = browser.cssselect(
+        '.teaser-square__kicker-logo--zett')[0]
 
     assert len(teaser_fullwidth_logo) == 1
     assert len(teaser_classic_logo) == 1
@@ -1567,3 +1644,93 @@ def test_zett_teaser_kicker_should_contain_logo(testbrowser):
     assert len(teaser_small_logo) == 1
     assert len(teaser_small_minor_logo) == 1
     assert len(teaser_square_logo) == 1
+
+
+def test_printkiosk_is_structured_correctly(testbrowser):
+    browser = testbrowser('/angebote/printkiosk/vorschau')
+    teasers = browser.cssselect('.cp-area--printkiosk .teaser-printkiosk')
+    assert len(teasers) == 4
+    paginationbutton = browser.cssselect('.js-bar-teaser-paginate')
+    assert len(paginationbutton) == 1
+    assert paginationbutton[0].attrib['data-sourceurl'].endswith('?p=')
+
+
+def test_printkiosk_displays_items_according_to_breakpoint(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/angebote/printkiosk/vorschau' % testserver.url)
+    teasers = driver.find_elements_by_class_name('teaser-printkiosk')
+
+    if screen_size[0] == 320:
+        assert teasers[0].is_displayed() is True
+        assert teasers[1].is_displayed() is False
+        assert teasers[2].is_displayed() is False
+        assert teasers[3].is_displayed() is False
+    if screen_size[0] == 520:
+        assert teasers[0].is_displayed() is True
+        assert teasers[1].is_displayed() is True
+        assert teasers[2].is_displayed() is False
+        assert teasers[3].is_displayed() is False
+    if screen_size[0] == 768:
+        assert teasers[0].is_displayed() is True
+        assert teasers[1].is_displayed() is True
+        assert teasers[2].is_displayed() is True
+        assert teasers[3].is_displayed() is False
+    if screen_size[0] == 980:
+        assert teasers[0].is_displayed() is True
+        assert teasers[1].is_displayed() is True
+        assert teasers[2].is_displayed() is True
+        assert teasers[3].is_displayed() is True
+
+
+def test_printkiosk_area_should_render_in_isolation_firstpage(testbrowser):
+    browser = testbrowser(
+        '/angebote/printkiosk/vorschau/area/'
+        'id-f103fa99-95e2-4094-8bb9-d56b482325f7')
+    teasers = browser.cssselect('.cp-area--printkiosk .teaser-printkiosk')
+    assert len(teasers) == 4
+    teasertexts = browser.cssselect('.teaser-printkiosk__title')
+    teasertexts[0].text = 'DIE ZEIT'
+
+
+def test_printkiosk_area_should_render_in_isolation_secondpage(testbrowser):
+    browser = testbrowser(
+        '/angebote/printkiosk/vorschau/area/'
+        'id-f103fa99-95e2-4094-8bb9-d56b482325f7?p='
+        'http://xml.zeit.de/angebote/printkiosk/linkobjekte/zeit-spezial')
+    teasers = browser.cssselect('.cp-area--printkiosk .teaser-printkiosk')
+    assert len(teasers) == 4
+    teasertexts = browser.cssselect('.teaser-printkiosk__title')
+    assert teasertexts[0].text == 'ZEIT GESCHICHTE'
+
+
+def test_printkiosk_area_should_render_in_isolation_skippage(testbrowser):
+    browser = testbrowser(
+        '/angebote/printkiosk/vorschau/area/'
+        'id-f103fa99-95e2-4094-8bb9-d56b482325f7?p='
+        'http://xml.zeit.de/angebote/printkiosk/linkobjekte/zeit-spezial')
+    teasers = browser.cssselect('.cp-area--printkiosk .teaser-printkiosk')
+    assert len(teasers) == 4
+    teasertexts = browser.cssselect('.teaser-printkiosk__title')
+    assert teasertexts[0].text == 'ZEIT GESCHICHTE'
+    assert teasertexts[2].text == 'DIE ZEIT'
+
+
+def test_printkiosk_loads_next_page_on_click(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('{}/angebote/printkiosk/vorschau'.format(testserver.url))
+    teaserbutton = driver.find_element_by_css_selector(
+        '.js-bar-teaser-paginate')
+    teaserbutton.click()
+
+    condition = expected_conditions.text_to_be_present_in_element((
+        By.CSS_SELECTOR, '.teaser-printkiosk__title'),
+        'ZEIT GESCHICHTE')
+    assert WebDriverWait(driver, 5).until(condition), (
+        'New teasers not loaded within 5 seconds')
+
+    new_teaser_titles = driver.find_elements_by_css_selector(
+        '.teaser-printkiosk__title')
+    assert new_teaser_titles[0].text == 'ZEIT GESCHICHTE'
+    assert new_teaser_titles[2].text == 'DIE ZEIT'
