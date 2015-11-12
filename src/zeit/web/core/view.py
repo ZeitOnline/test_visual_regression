@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import base64
 import datetime
-import itertools
 import logging
 import lxml.etree
 import os.path

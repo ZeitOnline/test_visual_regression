@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2376: Use pagetitle in og:title meta tag
 
+- ZON-2325: Implement Reisebox and add Tracking to all Boxes
+
 - FIX: Make veeseo video widget appear before advertisement nextread
 
 - FIX: Rework ZMO galleries (back to normal)
