@@ -120,9 +120,10 @@
     {% include 'zeit.web.site:templates/inc/module/cardstack.html' %}
 {% endmacro -%}
 
+{# Quiz macro is used inside of articles. (On CPs, the module template is used.) #}
 {% macro quiz(module) -%}
     <div class="article__item article__item--wide article__item--rimless x-spacing">
-        <iframe class="frame__iframe" src="{{ module.url }}?embedded{{ module.adreload }}"></iframe>
+        <iframe frameborder="0" scrolling="no" width="100%" height="400" src="{{ module.url }}?embedded{{ module.adreload }}"></iframe>
     </div>
 {% endmacro -%}
 
