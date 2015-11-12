@@ -1529,6 +1529,131 @@ def test_studiumbox_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.studiumbox__button')) == 3
 
 
+def test_studiumbox_changes_tabs(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/studiumbox' % testserver.url)
+    box = driver.find_element_by_class_name('studiumbox')
+    links = box.find_elements_by_tag_name('h2')
+    link1 = '#studium-interessenstest'
+    link2 = '#studiengangssuche'
+    link3 = '#hochschulranking'
+
+    # test initial state
+    active_link = links[0]
+    link_class = active_link.get_attribute('class')
+    link_href = active_link.find_element_by_tag_name('a').get_attribute('href')
+    content = (box.find_element_by_class_name('studiumbox__content--clone')
+               .get_attribute('id'))
+    assert 'studiumbox__headline--active' in link_class
+    assert link1 in link_href
+    assert content in link1
+
+    # test link2
+    active_link = links[1]
+    active_link.find_element_by_tag_name('a').click()
+    link_class = active_link.get_attribute('class')
+    link_href = active_link.find_element_by_tag_name('a').get_attribute('href')
+    content = (box.find_element_by_class_name('studiumbox__content--clone')
+               .get_attribute('id'))
+    assert 'studiumbox__headline--active' in link_class
+    assert link2 in link_href
+    assert content in link2
+
+    # test link3
+    active_link = links[2]
+    active_link.find_element_by_tag_name('a').click()
+    link_class = active_link.get_attribute('class')
+    link_href = active_link.find_element_by_tag_name('a').get_attribute('href')
+    content = (box.find_element_by_class_name('studiumbox__content--clone')
+               .get_attribute('id'))
+    assert 'studiumbox__headline--active' in link_class
+    assert link3 in link_href
+    assert content in link3
+
+
+def test_studiumbox_interessentest_works(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/studiumbox' % testserver.url)
+    box = driver.find_element_by_class_name('studiumbox')
+    links = box.find_elements_by_tag_name('h2')
+
+    # test interessentest
+    button = (box.find_element_by_class_name('studiumbox__content--clone')
+              .find_element_by_class_name('studiumbox__button'))
+    button.click()
+    assert ('http://studiengaenge.zeit.de/sit'
+            '?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.sit.teaser.'
+            'button.&utm_medium=fix&utm_source=zeitde_zonpmr_int'
+            '&utm_campaign=funktionsbox_studium'
+            '&utm_content=sit_teaser_button_x' in driver.current_url)
+
+
+def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/studiumbox' % testserver.url)
+    box = driver.find_element_by_class_name('studiumbox')
+    links = box.find_elements_by_tag_name('h2')
+
+    # test suchmaschine
+    active_link = links[1].find_element_by_tag_name('a')
+    active_link.click()
+    form = (box.find_element_by_class_name(
+            'studiumbox__content--clone')
+            .find_element_by_tag_name('form'))
+    inputElement = (form.find_element_by_class_name('studiumbox__input'))
+    inputElement.send_keys('test')
+    form.submit()
+    assert ('http://studiengaenge.zeit.de/studienangebote'
+            '?suche=test&wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium'
+            '.suma.teaser.button.&utm_medium=fix&utm_source=zeitde_zonpmr_int'
+            '&utm_campaign=funktionsbox_studium'
+            '&utm_content=suma_teaser_button_x' in driver.current_url)
+
+
+def test_studiumbox_ranking_works(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/studiumbox' % testserver.url)
+    box = driver.find_element_by_class_name('studiumbox')
+    links = box.find_elements_by_tag_name('h2')
+
+    # test suchmaschine
+    active_link = links[2].find_element_by_tag_name('a')
+    active_link.click()
+    form = (box.find_element_by_class_name(
+            'studiumbox__content--clone')
+            .find_element_by_tag_name('form'))
+    dropdown = (form.find_element_by_class_name('studiumbox__input'))
+    dropdown.find_element_by_xpath(
+        "//option[text()='BWL']").click()
+    form.submit()
+    assert ('http://ranking.zeit.de/che2015/de/rankingunion/show?'
+            'esb=24&ab=3&hstyp=1&subfach=&wt_zmc=fix.int.zonpmr.zeitde'
+            '.funktionsbox_studium.che.teaser.button.'
+            '&utm_medium=fix&utm_source=zeitde_zonpmr_int'
+            '&utm_campaign=funktionsbox_studium'
+            '&utm_content=che_teaser_button_x#&left_f1=23'
+            '&left_f2=62&left_f3=525&left_f4=363&left_f5=14'
+            '&order=alpha&unionview=table&subfach=' in driver.current_url)
+
+
+def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/studiumbox' % testserver.url)
+    box = driver.find_element_by_class_name('studiumbox')
+    link = box.find_elements_by_tag_name('h2')[2].find_element_by_tag_name('a')
+
+    # test with hochschulranking
+    link.click()
+    button = (box.find_element_by_class_name('studiumbox__content--clone')
+              .find_element_by_class_name('studiumbox__button'))
+    button.click()
+    assert ('http://ranking.zeit.de/che2015/de/faecher'
+            '?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.che.teaser'
+            '.button_ohne_fach.x&utm_medium=fix&utm_source=zeitde_zonpmr_int'
+            '&utm_campaign=funktionsbox_studium'
+            '&utm_content=che_teaser_button_ohne_fach_x' in driver.current_url)
+
+
 def test_zett_parquet_is_rendering(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
 
