@@ -2,7 +2,8 @@
     data-unique-id="{{ teaser.uniqueId }}"
     data-clicktracking="{{ area.kind }}"
     data-type="teaser">
-    <a href="{{ teaser | create_url }}">
+    {% set teaser_link = teaser | create_url %}
+    {% if teaser_link %}<a href="{{ teaser_link }}">{% endif %}
         <div class="teaser-printkiosk__figurewrapper">
             {% block teaser_media_position_before_title %}
                 {% set module_layout = self.layout() %}
@@ -14,5 +15,5 @@
         <div class="teaser-printkiosk__container">
             <p class="{{ self.layout() }}__title">{{ teaser.teaserTitle }}</p>
         </div>
-    </a>
+    {% if teaser_link %}</a>{% endif %}
 </article>
