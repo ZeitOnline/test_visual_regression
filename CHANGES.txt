@@ -4,10 +4,28 @@ Change log for zeit.web
 2.25 (unreleased)
 -----------------
 
+- FIX: Add advertorial keywords to banner config
+
 - ZON-2159: Nestle ranking area closer up to cms code
 
-- HOTFIX: Render a redirect if we have a call to a dynamic folder with an empty
-  view_name
+- ZON-2376: Use pagetitle in og:title meta tag
+
+- ZON-2325: Implement Reisebox and add Tracking to all Boxes
+
+- ZON-2047: Teaser kicker design for ZMO and ze.tt
+
+- FIX: Make veeseo video widget appear before advertisement nextread
+
+- FIX: Rework ZMO galleries (back to normal)
+
+- FIX: Add missing horizontal padding to videostage-heading
+
+- FIX: fixes/optimization for Printbanderole
+
+- HOTFIX: Render redirect if dynamic folder with empty view_name is called
+
+- HOTFIX: Make reify-beaker work with memcache (which then enables actual
+  caching of article lineage)
 
 - BUG-321: Don't display article image blocks that do not point to an image
 
