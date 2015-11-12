@@ -6,14 +6,14 @@
 			<a href="#studium-interessenstest">Studium-Interessenstest</a>
 		</h2>
 		<div class="studiumbox__content studiumbox__content--active" id="studium-interessenstest">
-			<h3 class="studiumbox__title">Welches Studium passt zu ihren Interessen?</h3>
+			<h3 class="studiumbox__title">Welches Studium passt zu Ihren Interessen?</h3>
 			<p class="studiumbox__text">Finden Sie es heraus mit dem Studium-Interessentest.</p>
-			<a href="http://studiengaenge.zeit.de/sit?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.sit.teaser.button.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=funktionsbox_studium&utm_content=sit_teaser_button_" class="studiumbox__button">zum Test</a>
+			<a href="http://studiengaenge.zeit.de/sit?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.sit.teaser.button.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=funktionsbox_studium&utm_content=sit_teaser_button_x" class="studiumbox__button">zum Test</a>
 		</div>
 
 		{# TAB 2 #}
 		<h2 class="studiumbox__headline">
-			<a href="#studiengangssuche"><span class="concise">Studiengangssuche</span><span class="verbose">Suchmaschine für Studiengänge</span></a>
+			<a href="#studiengangssuche"><span class="concise">Studiengangsuche</span><span class="verbose">Suchmaschine für Studiengänge</span></a>
 		</h2>
 		<div class="studiumbox__content" id="studiengangssuche">
 			<form action="http://studiengaenge.zeit.de/studienangebote">
@@ -24,22 +24,26 @@
 				<input type="hidden" name="utm_medium" value="fix">
 				<input type="hidden" name="utm_source" value="zeitde_zonpmr_int">
 				<input type="hidden" name="utm_campaign" value="funktionsbox_studium">
-				<input type="hidden" name="utm_content" value="suma_teaser_button_">
+				<input type="hidden" name="utm_content" value="suma_teaser_button_x">
 
 				<input class="studiumbox__button" type="submit" value="Suchen">
 
-				<a href="http://studiengaenge.zeit.de/sit?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.suma.teaser.sit_link.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=funktionsbox_studium&utm_content=suma_teaser_sit_link_" class="studiumbox__link">Ich weiß es noch nicht</a>
+				<a href="http://studiengaenge.zeit.de/sit?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.suma.teaser.sit_link.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=funktionsbox_studium&utm_content=suma_teaser_sit_link_x" class="studiumbox__link">Ich weiß es noch nicht</a>
 			</form>
 		</div>
 
 		{# TAB 3 #}
-		<h2 class="studiumbox__headline">
+		<h2 class="studiumbox__headline studiumbox__headline--prevent_empty">
 			<a href="#hochschulranking">CHE Hochschul&shy;Ranking</a>
 		</h2>
 		<div class="studiumbox__content" id="hochschulranking">
 			<form action="http://ranking.zeit.de/che2015/de/rankingunion/show">
 				<h3 class="studiumbox__title">Welche Uni ist die beste für Ihr Fach?</h3>
-				<select name="esb" class="studiumbox__input">
+				<select name="esb" class="studiumbox__input" onchange="
+					var f = this.form, o = this.options[this.selectedIndex];
+					f.ab.value = o.getAttribute('data-ab');
+					f.hstyp.value = o.getAttribute('data-hstyp');
+					f.subfach.value = o.getAttribute('data-subfach');">
 					<option>Fachbereich auswählen …</option>
 					<option value="31" data-ab="1" data-hstyp="1">Anglistik / Amerikanistik</option>
 					<option value="7"  data-ab="3" data-hstyp="1">Architektur</option>
@@ -92,7 +96,7 @@
 				<input type="hidden" name="utm_medium" value="fix">
 				<input type="hidden" name="utm_source" value="zeitde_zonpmr_int">
 				<input type="hidden" name="utm_campaign" value="funktionsbox_studium">
-				<input type="hidden" name="utm_content" value="che_teaser_button_">
+				<input type="hidden" name="utm_content" value="che_teaser_button_x">
 
 				<input class="studiumbox__button" type="submit" value="zum Ranking">
 			</form>

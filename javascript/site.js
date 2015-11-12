@@ -67,8 +67,7 @@ require([
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
-    'web.site/plugins/jquery.partnerDropdown',
-    'web.site/plugins/jquery.studiumDropdown'
+    'web.site/plugins/jquery.partnerDropdown'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         isHp = document.body.getAttribute( 'data-is-hp' ),
@@ -97,7 +96,6 @@ require([
         $( '.js-tabs' ).tabs();
         $( '.js-image-copyright-footer' ).imageCopyrightFooter();
         $( '.partner__action' ).boxDropdown();
-        $( '#hochschulranking' ).studiumDropdown();
 
     } else if ( article.length ) {
         // article, gallery etc.
