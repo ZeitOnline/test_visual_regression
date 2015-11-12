@@ -1604,7 +1604,7 @@ def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
         '.teaser-fullwidth__kicker-logo--zmo')[0]
     teaser_classic_logo = browser.cssselect(
         '.teaser-classic__kicker-logo--zmo')[0]
-    teaser_large_logo =  browser.cssselect(
+    teaser_large_logo = browser.cssselect(
         '.teaser-large__kicker-logo--zmo')[0]
     teaser_small_logo = browser.cssselect(
         '.teaser-small__kicker-logo--zmo')[0]
@@ -1629,7 +1629,7 @@ def test_zett_teaser_kicker_should_contain_logo(testbrowser):
         '.teaser-fullwidth__kicker-logo--zett')[0]
     teaser_classic_logo = browser.cssselect(
         '.teaser-classic__kicker-logo--zett')[0]
-    teaser_large_logo =  browser.cssselect(
+    teaser_large_logo = browser.cssselect(
         '.teaser-large__kicker-logo--zett')[0]
     teaser_small_logo = browser.cssselect(
         '.teaser-small__kicker-logo--zett')[0]
