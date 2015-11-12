@@ -1,4 +1,4 @@
-<article class="{% block layout %}teaser-printkiosk{% endblock %} {% if module.visible_mobile == False %} mobile-hidden{% endif %}"
+<article class="{% block layout %}teaser-printkiosk{% endblock %}"
     data-unique-id="{{ teaser.uniqueId }}"
     data-clicktracking="{{ area.kind }}"
     data-type="teaser">
