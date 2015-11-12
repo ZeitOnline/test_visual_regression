@@ -15,6 +15,14 @@ import zeit.web.core.comments
 import zeit.web.core.interfaces
 
 
+try:
+    import pylibmc
+except:
+    HAVE_PYLIBMC = False
+else:
+    HAVE_PYLIBMC = True
+
+
 @pytest.mark.parametrize(
     'content', [
         ('http://xml.zeit.de/artikel/01', 10),
@@ -58,7 +66,7 @@ def test_already_expired_image_should_have_caching_time_zero(
     assert zeit.web.core.cache.ICachingTime(group['wide']) == 0
 
 
-@pytest.mark.xfail(reason='Pylibmc might not be installed on all machines')
+@pytest.mark.skipif(not HAVE_PYLIBMC, reason='pylibmc not installed')
 def test_should_bypass_cache_on_memcache_server_error(application):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings_copy = copy.copy(settings)
