@@ -611,7 +611,7 @@ def test_linkobject_teaser_should_contain_supertitle(testserver, testbrowser):
     uid = 'http://xml.zeit.de/zeit-online/cp-content/link_teaser'
     kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
                                '.teaser-small__kicker'.format(uid))[0]
-    assert kicker.text == 'Freier Teaser Kicker'
+    assert kicker.text.strip() == 'Freier Teaser Kicker'
 
 
 def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
@@ -621,7 +621,7 @@ def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
         '.teaser-large[data-unique-id="{}"] '.format(uid))[0]
 
     kicker = teaser.cssselect('.teaser-large__kicker--blog')[0]
-    assert kicker.text == 'Zeugenvernehmung'
+    assert kicker.text.strip() == 'Zeugenvernehmung'
 
     marker = teaser.cssselect('.blog-format__marker')[0]
     assert marker.text == 'Blog'

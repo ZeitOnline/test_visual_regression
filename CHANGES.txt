@@ -33,6 +33,8 @@ Change log for zeit.web
 - HOTFIX: Make reify-beaker work with memcache (which then enables actual
   caching of article lineage)
 
+- BUG-321: Don't display article image blocks that do not point to an image
+
 
 2.24 (2015-11-09)
 -----------------
