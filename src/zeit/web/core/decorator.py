@@ -225,13 +225,13 @@ class reify(object):  # NOQA
 
     def _get_namespace(self, inst):
         try:
-            return u'{}|{}'.format(inst.__class__, self.func.__name__)
+            return '{}|{}'.format(inst.__class__, self.func.__name__)
         except (AttributeError, UnicodeDecodeError):
             return
 
     def _global_key(self, inst):
         try:
-            namespace = self._get_namespace(inst)
+            namespace = unicode(self._get_namespace(inst))
             unique_id = u'|'.join((namespace, inst.context.uniqueId))
             return hashlib.sha1(unique_id).hexdigest()
         except (AttributeError, TypeError, UnicodeDecodeError):

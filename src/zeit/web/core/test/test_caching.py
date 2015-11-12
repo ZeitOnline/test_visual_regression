@@ -144,6 +144,38 @@ def test_reify_should_store_result_in_beaker_cache_region(application):
     assert cache.get('ee433f8b858201f4f5e3baf0c7786237244b44ac') == 71
 
 
+@pytest.mark.skipif(not HAVE_PYLIBMC, reason='pylibmc not installed')
+def test_reify_should_work_with_memcache(application, monkeypatch, request):
+    # Don't suppress errors, detecting those is the whole point of this test.
+    monkeypatch.setattr(
+        beaker.ext.memcached.PyLibMCNamespaceManager, '__contains__',
+        zeit.web.core.cache.original_contains)
+
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings_copy = copy.copy(settings)
+    settings_copy['cache.type'] = 'ext:memcached'
+    settings_copy['cache.url'] = 'localhost:99998'
+    pyramid_beaker.set_cache_regions_from_settings(settings_copy)
+    request.addfinalizer(
+        lambda: pyramid_beaker.set_cache_regions_from_settings(settings))
+
+    class Context(object):
+        uniqueId = 'http://xml.zeit.de'  # NOQA
+
+    class Foo(object):
+        context = Context
+
+        @zeit.web.reify('long_term')
+        def prop(self):
+            return 71
+
+    foo = Foo()
+    # We hope that we've hit any interesting integration issues if we make it
+    # to the "actually connect to memcache" point.
+    with pytest.raises(pylibmc.ConnectionError):
+        assert foo.prop == 71
+
+
 def test_reify_should_skip_second_layer_if_beaker_is_unavailable(application):
     function = mock.Mock(return_value=60)
 
