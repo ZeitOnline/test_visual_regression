@@ -124,7 +124,8 @@ def test_default_teaser_should_match_css_selectors(
     request = mock.Mock()
 
     html_str = tpl.render(
-        teaser=teaser, layout='teaser', view=view, area=area, module=module, request=request)
+        teaser=teaser, layout='teaser', view=view, area=area, module=module,
+        request=request)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('article.teaser h2.teaser__heading')) == 1
