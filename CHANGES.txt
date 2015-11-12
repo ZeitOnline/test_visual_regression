@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - FIX: Add missing horizontal padding to videostage-heading
 
+- FIX: fixes/optimization for Printbanderole
+
 - HOTFIX: Render redirect if dynamic folder with empty view_name is called
 
 - HOTFIX: Make reify-beaker work with memcache (which then enables actual
