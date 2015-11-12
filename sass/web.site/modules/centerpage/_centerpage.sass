@@ -34,8 +34,12 @@
 	// 			   Seems like we started with the desktop and retrofitted.
 	// 			   This is an atempt to do it *mobile first*.
 	&--solo,
-	&--topic
+	&--topic,
+	&--gallery
 		padding: 0
+	&--gallery
+		background-color: $zon_lighter_grey
+		padding-bottom: remify(40px)
 
 .cp-area
 	padding: 0 $cp-padding
@@ -93,3 +97,14 @@
 			width: 33.33%
 		&--quartet
 			width: 25%
+
+	// Fotostrecken + Shopbühne: twice the padding, because the region no longer has padding
+	&--gallery,
+	&--shop
+		padding: 0 2*$cp-padding
+	// Printbanderole
+	&--printkiosk
+		background-color: #33333A
+		+background-image(linear-gradient(to right, #4A4A4A 0%, #2C2A2B 30%, #494A4E 60%, #3B3B3D 80%, #4A4A4A 100%))
+		color: #FFF
+		padding: $cp-padding 2*$cp-padding

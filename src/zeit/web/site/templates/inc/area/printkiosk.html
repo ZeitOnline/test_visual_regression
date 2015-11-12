@@ -1,0 +1,24 @@
+{% extends "zeit.web.site:templates/inc/area/default.html" %}
+
+{% set module_layout = 'teaser-printkiosk' %}
+
+{% block before_module_list %}
+    <h3 class="{{ module_layout }}-group__title">{{ area.title }}</h3>
+{% endblock %}
+
+{% block module_list %}
+    <div class="{{ module_layout }}-group__container {{ module_layout }}-group__container--shop ">
+        {{ super() }}
+    </div>
+{% endblock %}
+
+{% block after_module_list %}
+    {% set tracking_slug = '{}...{}'.format(region_loop.index, '-'.join([area.kind, module_layout])) %}
+    <a  href="http://www.zeitabo.de/magazin-angebote.html"
+        data-id="{{ tracking_slug }}.paginationbutton"
+        class="button {{ module_layout }}-group__button js-bar-teaser-paginate"
+        data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p=">
+        {{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), request) }}
+        Weitere laden
+    </a>
+{% endblock %}

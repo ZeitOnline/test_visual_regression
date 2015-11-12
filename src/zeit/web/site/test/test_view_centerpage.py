@@ -1054,7 +1054,7 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
     teaserbutton = driver.find_element_by_css_selector(
-        '.js-bar-teaser-shuffle')
+        '.js-bar-teaser-paginate')
     teaserbutton.click()
 
     condition = expected_conditions.text_to_be_present_in_element((
@@ -1070,7 +1070,7 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
     assert new_teaser_links[1].get_attribute('href').endswith(
         '/zeit-online/gallery/england-meer-strand-menschen-fs')
     assert teaserbutton.get_attribute('data-sourceurl').endswith(
-        '?p=http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer')
+        'teaser-gallery-setup/area/id-5fe59e73-e388-42a4-a8d4-750b0bf96812?p=')
 
 
 def test_homepage_should_have_proper_meetrics_integration(
@@ -1593,3 +1593,93 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
     closelink.click()
     copyright = driver.find_element_by_class_name('image-copyright-footer')
     assert copyright.is_displayed() is False, 'copyright is not displayed'
+
+
+def test_printkiosk_is_structured_correctly(testbrowser):
+    browser = testbrowser('/angebote/printkiosk/vorschau')
+    teasers = browser.cssselect('.cp-area--printkiosk .teaser-printkiosk')
+    assert len(teasers) == 4
+    paginationbutton = browser.cssselect('.js-bar-teaser-paginate')
+    assert len(paginationbutton) == 1
+    assert paginationbutton[0].attrib['data-sourceurl'].endswith('?p=')
+
+
+def test_printkiosk_displays_items_according_to_breakpoint(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/angebote/printkiosk/vorschau' % testserver.url)
+    teasers = driver.find_elements_by_class_name('teaser-printkiosk')
+
+    if screen_size[0] == 320:
+        assert teasers[0].is_displayed() is True
+        assert teasers[1].is_displayed() is False
+        assert teasers[2].is_displayed() is False
+        assert teasers[3].is_displayed() is False
+    if screen_size[0] == 520:
+        assert teasers[0].is_displayed() is True
+        assert teasers[1].is_displayed() is True
+        assert teasers[2].is_displayed() is False
+        assert teasers[3].is_displayed() is False
+    if screen_size[0] == 768:
+        assert teasers[0].is_displayed() is True
+        assert teasers[1].is_displayed() is True
+        assert teasers[2].is_displayed() is True
+        assert teasers[3].is_displayed() is False
+    if screen_size[0] == 980:
+        assert teasers[0].is_displayed() is True
+        assert teasers[1].is_displayed() is True
+        assert teasers[2].is_displayed() is True
+        assert teasers[3].is_displayed() is True
+
+
+def test_printkiosk_area_should_render_in_isolation_firstpage(testbrowser):
+    browser = testbrowser(
+        '/angebote/printkiosk/vorschau/area/'
+        'id-f103fa99-95e2-4094-8bb9-d56b482325f7')
+    teasers = browser.cssselect('.cp-area--printkiosk .teaser-printkiosk')
+    assert len(teasers) == 4
+    teasertexts = browser.cssselect('.teaser-printkiosk__title')
+    teasertexts[0].text = 'DIE ZEIT'
+
+
+def test_printkiosk_area_should_render_in_isolation_secondpage(testbrowser):
+    browser = testbrowser(
+        '/angebote/printkiosk/vorschau/area/'
+        'id-f103fa99-95e2-4094-8bb9-d56b482325f7?p='
+        'http://xml.zeit.de/angebote/printkiosk/linkobjekte/zeit-spezial')
+    teasers = browser.cssselect('.cp-area--printkiosk .teaser-printkiosk')
+    assert len(teasers) == 4
+    teasertexts = browser.cssselect('.teaser-printkiosk__title')
+    assert teasertexts[0].text == 'ZEIT GESCHICHTE'
+
+
+def test_printkiosk_area_should_render_in_isolation_skippage(testbrowser):
+    browser = testbrowser(
+        '/angebote/printkiosk/vorschau/area/'
+        'id-f103fa99-95e2-4094-8bb9-d56b482325f7?p='
+        'http://xml.zeit.de/angebote/printkiosk/linkobjekte/zeit-spezial')
+    teasers = browser.cssselect('.cp-area--printkiosk .teaser-printkiosk')
+    assert len(teasers) == 4
+    teasertexts = browser.cssselect('.teaser-printkiosk__title')
+    assert teasertexts[0].text == 'ZEIT GESCHICHTE'
+    assert teasertexts[2].text == 'DIE ZEIT'
+
+
+def test_printkiosk_loads_next_page_on_click(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('{}/angebote/printkiosk/vorschau'.format(testserver.url))
+    teaserbutton = driver.find_element_by_css_selector(
+        '.js-bar-teaser-paginate')
+    teaserbutton.click()
+
+    condition = expected_conditions.text_to_be_present_in_element((
+        By.CSS_SELECTOR, '.teaser-printkiosk__title'),
+        'ZEIT GESCHICHTE')
+    assert WebDriverWait(driver, 5).until(condition), (
+        'New teasers not loaded within 5 seconds')
+
+    new_teaser_titles = driver.find_elements_by_css_selector(
+        '.teaser-printkiosk__title')
+    assert new_teaser_titles[0].text == 'ZEIT GESCHICHTE'
+    assert new_teaser_titles[2].text == 'DIE ZEIT'

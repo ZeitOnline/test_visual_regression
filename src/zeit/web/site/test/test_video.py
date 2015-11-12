@@ -264,3 +264,9 @@ def test_article_teaser_should_not_be_identified_as_video(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/gesellschaft/2015-02/crystal-meth-nancy-schmidt')
     assert not zeit.web.core.template.is_video(article)
+
+
+def test_video_should_contain_veeseo_widget(testbrowser):
+    browser = testbrowser('/video/2015-01/3537342483001')
+    assert browser.cssselect('#veeseo-widget')
+    assert browser.cssselect('.RV2VW2')

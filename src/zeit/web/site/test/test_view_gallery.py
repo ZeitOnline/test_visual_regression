@@ -54,3 +54,9 @@ def test_zon_gallery_uses_svg_icons(selenium_driver, testserver):
         gallery = driver.find_element_by_css_selector(".gallery")
         svg_icons = gallery.find_elements_by_css_selector(".bx-arrow-icon")
         assert len(svg_icons) == 4, "svg arrow icons are missing"
+
+
+def test_gallery_should_contain_veeseo_widget(testbrowser):
+    browser = testbrowser('/zeit-online/gallery/biga_1')
+    assert browser.cssselect('#veeseo-widget')
+    assert browser.cssselect('.RA2VW2')
