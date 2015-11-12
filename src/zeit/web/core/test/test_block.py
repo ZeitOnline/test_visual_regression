@@ -180,7 +180,7 @@ def test_image_should_not_break_on_missing_image(application):
     # We use an otherwise empty folder to simulate missing master image.
     model_block.references.target.uniqueId = 'http://xml.zeit.de/news'
     image = zeit.web.core.block.Image(model_block)
-    assert image.image is None
+    assert image is None
 
 
 def test_image_should_use_variant_given_on_layout(application):
@@ -205,7 +205,7 @@ def test_image_should_be_none_if_expired():
     with mock.patch('zeit.web.core.image.is_image_expired') as expired:
         expired.return_value = True
         image = zeit.web.core.block.Image(model_block)
-        assert image.image is None
+        assert image is None
 
 
 def test_module_class_should_hash_as_expected():

@@ -26,3 +26,9 @@ $has-layout-support-threshold: 0.01
 //		color: red
 //		+old-ie
 //			color: blue
+
+// hide SVGs that break in IE8 if necessary by appending
+// the 'svg-symbol--hide-ie' class when using the use_svg
+// macro.
+.svg-symbol--hide-ie
+    display: none

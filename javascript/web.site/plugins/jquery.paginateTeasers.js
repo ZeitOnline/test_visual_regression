@@ -104,6 +104,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
     function paginateGalleryTeasers( event ) {
 
         $this = $( this );
+        $this.blur();
         $galleryArea = $this.closest( '.cp-area' );
         sourceUrl = $this.data( 'sourceurl' );
 

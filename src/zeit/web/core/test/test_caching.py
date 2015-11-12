@@ -15,6 +15,14 @@ import zeit.web.core.comments
 import zeit.web.core.interfaces
 
 
+try:
+    import pylibmc
+except:
+    HAVE_PYLIBMC = False
+else:
+    HAVE_PYLIBMC = True
+
+
 @pytest.mark.parametrize(
     'content', [
         ('http://xml.zeit.de/artikel/01', 10),
@@ -58,13 +66,16 @@ def test_already_expired_image_should_have_caching_time_zero(
     assert zeit.web.core.cache.ICachingTime(group['wide']) == 0
 
 
-@pytest.mark.xfail(reason='Pylibmc might not be installed on all machines')
-def test_should_bypass_cache_on_memcache_server_error(application):
+@pytest.mark.skipif(not HAVE_PYLIBMC, reason='pylibmc not installed')
+def test_should_bypass_cache_on_memcache_server_error(application, request):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings_copy = copy.copy(settings)
     settings_copy['cache.type'] = 'ext:memcached'
     settings_copy['cache.url'] = 'localhost:99998'
     pyramid_beaker.set_cache_regions_from_settings(settings_copy)
+    request.addfinalizer(
+        lambda: pyramid_beaker.set_cache_regions_from_settings(settings))
+
     with mock.patch('zeit.web.core.comments.request_thread') as request:
         request.return_value = ''
         try:
@@ -75,7 +86,6 @@ def test_should_bypass_cache_on_memcache_server_error(application):
         except beaker.exceptions.InvalidCacheBackendError:
             print "No valid beaker backend could be found."
 
-        pyramid_beaker.set_cache_regions_from_settings(settings)
         assert request.call_count == 2
 
 
@@ -127,11 +137,44 @@ def test_reify_should_store_result_in_beaker_cache_region(application):
     foo = Foo()
     cache = Foo.prop._get_cache(foo)
     assert cache.namespace_name == (
-        u'<class \'zeit.web.core.test.test_caching.Foo\'>|prop')
+        'zeit.web.core.test.test_caching.Foo.prop')
     assert foo.prop == 71
-    assert Foo.prop._global_key(foo).startswith('ee433f8b858201f4f5e3baf0c77')
-    assert cache.has_key('ee433f8b858201f4f5e3baf0c7786237244b44ac')  # NOQA
-    assert cache.get('ee433f8b858201f4f5e3baf0c7786237244b44ac') == 71
+    assert Foo.prop._global_key(
+        foo) == 'dc785f7304a94df7b6820434b1654e4674c7923f'
+    assert cache.has_key('dc785f7304a94df7b6820434b1654e4674c7923f')  # NOQA
+    assert cache.get('dc785f7304a94df7b6820434b1654e4674c7923f') == 71
+
+
+@pytest.mark.skipif(not HAVE_PYLIBMC, reason='pylibmc not installed')
+def test_reify_should_work_with_memcache(application, monkeypatch, request):
+    # Don't suppress errors, detecting those is the whole point of this test.
+    monkeypatch.setattr(
+        beaker.ext.memcached.PyLibMCNamespaceManager, '__contains__',
+        zeit.web.core.cache.original_contains)
+
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings_copy = copy.copy(settings)
+    settings_copy['cache.type'] = 'ext:memcached'
+    settings_copy['cache.url'] = 'localhost:99998'
+    pyramid_beaker.set_cache_regions_from_settings(settings_copy)
+    request.addfinalizer(
+        lambda: pyramid_beaker.set_cache_regions_from_settings(settings))
+
+    class Context(object):
+        uniqueId = 'http://xml.zeit.de'  # NOQA
+
+    class Foo(object):
+        context = Context
+
+        @zeit.web.reify('long_term')
+        def prop(self):
+            return 71
+
+    foo = Foo()
+    # We hope that we've hit any interesting integration issues if we make it
+    # to the "actually connect to memcache" point.
+    with pytest.raises(pylibmc.ConnectionError):
+        assert foo.prop == 71
 
 
 def test_reify_should_skip_second_layer_if_beaker_is_unavailable(application):
