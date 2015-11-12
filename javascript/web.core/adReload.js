@@ -10,6 +10,27 @@ define( [ 'jquery' ], function( $ ) {
     configUrl = window.ZMO.jsconfHost + '/config_adreload.json',
     config = false,
     timer = {},
+    /**
+     * logging helper - wraps if debug --> console.log
+     * @return {void}
+     */
+    log = function() {
+        if ( location.search.indexOf( 'debug-adreload' ) !== -1 ) {
+            var args = Array.prototype.slice.call( arguments );
+            // just one argument which is a string
+            if ( args.length === 1 && typeof args[0] === 'string' ) {
+                console.log( args.toString() );
+            } else {
+                // all other cases
+                console.log( args );
+            }
+        }
+    },
+    /**
+     * check timer and click interval
+     * @param  {object} myconfig configuration section read from json before
+     * @return {bool}
+     */
     checkClickCount = function( myconfig ) {
         // do we need a timer?
         if ( typeof myconfig.time !== 'undefined' && myconfig.time > 0 ) {
