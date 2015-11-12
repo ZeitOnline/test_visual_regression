@@ -35,10 +35,10 @@
                     $button = $( that ).find( '.pa-button__text' ),
                     tracking = $dropdown.data( 'tracklink' );
 
-                $button.on( 'click', function( event ) {
+                $dropdown.on( 'change', function( event ) {
                     var link = $dropdown.find( '.pa-dropdown__option:selected' ).attr( 'value' );
                     if ( link ) {
-                        window.location.href = link + tracking;
+                        $button.attr( 'href', link + tracking );
                     }
                 });
 

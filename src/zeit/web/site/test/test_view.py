@@ -115,3 +115,10 @@ def test_ressort_literally_returns_correct_ressort(application):
         'http://xml.zeit.de/zeit-online/article/zeit')
     article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.ressort_literally == 'Gesellschaft'
+
+
+def test_og_title_equals_pagetitle(testbrowser):
+    browser = testbrowser('/zeit-online/article/02')
+    og_title = browser.cssselect(
+        'meta[property="og:title"]')[0].attrib.get('content')
+    assert browser.cssselect('title')[0].text == og_title
