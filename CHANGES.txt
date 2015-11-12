@@ -4,7 +4,7 @@ Change log for zeit.web
 2.26 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2396: Support specialized quiz module on CPs and articles
 
 
 2.25 (2015-11-12)
@@ -13,6 +13,8 @@ Change log for zeit.web
 - FIX: Add advertorial keywords to banner config
 
 - ZON-2159: Nestle ranking area closer up to cms code
+
+- FIX: rework ZMO galleries (back to normal)
 
 - ZON-2376: Use pagetitle in og:title meta tag
 

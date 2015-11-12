@@ -178,6 +178,23 @@ class Liveblog(object):
             pass
 
 
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IQuiz)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+class Quiz(object):
+
+    def __init__(self, context):
+        self.context = context
+
+    @zeit.web.reify
+    def url(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('quiz_url', '').format(quiz_id=self.context.quiz_id)
+
+    @zeit.web.reify
+    def adreload(self):
+        return '&adcontrol' if self.context.adreload_enabled else ''
+
+
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class Image(zeit.web.core.image.BaseImage):

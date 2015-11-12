@@ -1207,7 +1207,7 @@ def test_hidden_images_must_not_be_loaded_via_js(
             assert len(largeimage) == 1
 
 
-def test_frames_are_placed_correctly(testbrowser):
+def test_quiz_frames_are_placed_correctly(testbrowser):
     browser = testbrowser('/zeit-online/index-with-quizzez')
     frame1 = browser.cssselect('.cp-area--minor > .frame')
     frame2 = browser.cssselect('.cp-area--duo > .frame')
@@ -1225,11 +1225,11 @@ def test_frames_are_placed_correctly(testbrowser):
     assert len(frameheadline2) == 0
     assert frameheadline1[0].text == 'Quiz'
 
-    assert iframe1[0].get('src') == 'http://quiz.zeit.de/#/quiz/103'
-    assert iframe2[0].get('src') == 'http://quiz.zeit.de/#/quiz/136'
+    assert iframe1[0].get('src') == 'http://quiz.zeit.de/#/quiz/103?embedded'
+    assert iframe2[0].get('src') == 'http://quiz.zeit.de/#/quiz/136?embedded'
 
 
-def test_frame_dimensions(selenium_driver, testserver, screen_size):
+def test_quiz_frame_dimensions(selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('{}/zeit-online/index-with-quizzez'.format(testserver.url))
@@ -1604,7 +1604,7 @@ def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
         '.teaser-fullwidth__kicker-logo--zmo')[0]
     teaser_classic_logo = browser.cssselect(
         '.teaser-classic__kicker-logo--zmo')[0]
-    teaser_large_logo =  browser.cssselect(
+    teaser_large_logo = browser.cssselect(
         '.teaser-large__kicker-logo--zmo')[0]
     teaser_small_logo = browser.cssselect(
         '.teaser-small__kicker-logo--zmo')[0]
@@ -1629,7 +1629,7 @@ def test_zett_teaser_kicker_should_contain_logo(testbrowser):
         '.teaser-fullwidth__kicker-logo--zett')[0]
     teaser_classic_logo = browser.cssselect(
         '.teaser-classic__kicker-logo--zett')[0]
-    teaser_large_logo =  browser.cssselect(
+    teaser_large_logo = browser.cssselect(
         '.teaser-large__kicker-logo--zett')[0]
     teaser_small_logo = browser.cssselect(
         '.teaser-small__kicker-logo--zett')[0]
