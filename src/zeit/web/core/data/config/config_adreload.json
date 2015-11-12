@@ -12,5 +12,13 @@
 		"interval": 5,
 		"pagetypes": ["gallery"],
 		"slug": "/zeit-magazin"
+	},
+	"test": {
+		"name": "test",
+		"time": 0,
+		"interval": 4,
+		"pagetypes": ["article"],
+		"slug": "/zeit-online/article/fischer",
+		"origin": "http://localhost:9090"
 	}
 }
