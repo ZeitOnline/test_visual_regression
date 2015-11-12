@@ -6,8 +6,7 @@
  */
 define( [ 'jquery' ], function( $ ) {
 
-    var debug = location.search.indexOf( 'debug-adreload' ) !== -1,
-    configUrl = window.ZMO.jsconfHost + '/config_adreload.json',
+    var configUrl = window.ZMO.jsconfHost + '/config_adreload.json',
     config = false,
     timer = {},
     /**
@@ -37,7 +36,6 @@ define( [ 'jquery' ], function( $ ) {
             // timer not set
             if ( typeof timer[myconfig.name] !== 'undefined' && timer[myconfig.name] === true ) {
                 // do not count while timer is set
-                if ( debug ) { console.debug( 'TIMER läuft noch' ); }
                 return false;
             } else {
                 // set timer
@@ -52,38 +50,57 @@ define( [ 'jquery' ], function( $ ) {
             return clickCount( myconfig );
         }
     },
+    /**
+     * check against the interaction interval
+     * @param  {object} myconfig configuration section read from json before
+     * @return {bool}
+     */
     clickCount = function( myconfig ) {
         // load on every click
         if ( myconfig.interval < 2 ) {
-            if ( debug ) { console.debug( 'direct click' ); }
+            log( 'direct click' );
             return true;
         }
         // load cause max reached
         if ( $( 'body' ).data( myconfig.name ) + 1 === myconfig.interval ) {
-            if ( debug ) { console.debug( 'max click' ); }
+            log( 'max click' );
+            $( 'body' ).removeData( myconfig.name );
             return true;
         }  else {
             if ( $( 'body' ).data( myconfig.name ) ) {
-                if ( debug ) { console.debug( 'add up clicks' ); }
+                log( 'add up clicks' );
                 $( 'body' ).data( myconfig.name, $( 'body' ).data( myconfig.name ) + 1 );
             } else {
-                if ( debug ) { console.debug( 'first click' ); }
+                log( 'first click' );
                 $( 'body' ).data( myconfig.name, 1 );
             }
             return false;
         }
     },
     /**
-     * initialize a new counting mandator by checking id against configuration
-     * @return {bool}   return state when ready
+     * load configuration from json file
+     * @return {object} ajax promise
      */
     loadConfig = function() {
         return $.ajax( configUrl, { dataType: 'json' } );
     },
-    interaction = function( event, sender, message ) {
-        // check config if sender is registered
-        if ( typeof config[ sender ] === 'undefined' ) { return; }
-        var myconfig = config[ sender ];
+    /**
+     * interaction event
+     * @param  {object} event   DOM event object
+     * @param  {string} name  interaction emmitter name
+     * @param  {string} message message field of the request
+     * @return {void}
+     */
+    interaction = function( event, name, message ) {
+        // check config if name is registered
+        var myconfig;
+        try {
+            myconfig = config[ name ];
+            log( myconfig );
+        } catch ( e ) {
+            log( 'error', e );
+            return;
+        }
         // check if slug and pagetype match
         if (
             window.location.pathname.indexOf( myconfig.slug ) < 0 ||
@@ -92,17 +109,17 @@ define( [ 'jquery' ], function( $ ) {
         if ( checkClickCount( myconfig ) ) {
             // reload Ads
             if ( typeof window.IQD_ReloadHandle !== 'undefined' ) {
-                if ( debug ) { console.debug( 'adReload emitted' ); }
+                log( 'adReload emitted' );
                 window.IQD_ReloadHandle();
             }
             // emit webtrekk PI
             if ( typeof window.wt !== 'undefined' ) {
-                if ( debug ) { console.debug( 'webtrekk emitted' ); }
+                log( 'webtrekk emitted' );
                 window.wt.sendinfo();
             }
             // emit IVW PI
             if ( typeof window.iom !== 'undefined' && typeof window.iam_data !== 'undefined' ) {
-                if ( debug ) { console.debug( 'ivw emitted' ); }
+                log( 'ivw emitted' );
                 window.iom.c( window.iam_data, 1 );
             }
         }
@@ -113,17 +130,19 @@ define( [ 'jquery' ], function( $ ) {
      * @return {void}
      */
     message = function( event ) {
-        var messageData, sender, message;
+        var messageData, message;
+        log( 'message: ', event );
         try {
             messageData = JSON.parse( event.originalEvent.data );
         } catch ( e ) {
+            log( 'error', e );
             return;
         }
-        if ( typeof messageData.sender !== 'string' || typeof messageData.message !== 'string' ) {
-            console.error( 'messageData not completely set' );
+        if ( typeof messageData.name !== 'string' || event.originalEvent.origin !== config[messageData.name].origin ) {
+            log( 'error', 'messageData not correctly set' );
             return;
         }
-        $( window ).trigger( 'interaction.adreload.z', [ sender, message ]);
+        $( window ).trigger( 'interaction.adreload.z', [ messageData.name, messageData.message ] );
     };
 
     return {
