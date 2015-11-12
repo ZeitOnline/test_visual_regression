@@ -1435,7 +1435,7 @@ def test_jobbox_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.jobbox__action'))
 
 
-def test_partnerbox_job_is_displayed_correctly(testbrowser):
+def test_partnerbox_jobs_is_displayed_correctly(testbrowser):
     browser = testbrowser('/zeit-online/partnerbox-jobs')
 
     # in main area
@@ -1443,13 +1443,77 @@ def test_partnerbox_job_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.partnerbox__label'))
     assert len(box.cssselect('.partner__action'))
     assert len(box.cssselect('.partner__intro'))
-    assert len(box.cssselect('.p-kicker--jobs'))
+    assert len(box.cssselect('.partner--jobs'))
     assert len(box.cssselect('.p-kicker__img'))
     assert len(box.cssselect('.p-kicker__text'))
     assert len(box.cssselect('.pa-dropdown'))
     assert len(box.cssselect('.pa-button'))
     assert len(box.cssselect('.pa-link'))
     assert len(box.cssselect('.pa-dropdown__option')) == 9
+
+
+def test_partnerbox_jobs_dropdown_works(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/partnerbox-jobs' % testserver.url)
+    dropdown = driver.find_elements_by_class_name('pa-dropdown')[0]
+    button = driver.find_elements_by_class_name('pa-button__text')[0]
+
+    # test without selecting anything
+    button.click()
+    assert 'jobs.zeit.de' in driver.current_url
+    assert 'stellenmarkt.funktionsbox.streifen' in driver.current_url
+
+    # test with selected dropdown
+    driver.get('%s/zeit-online/partnerbox-jobs' % testserver.url)
+    dropdown = driver.find_elements_by_class_name('pa-dropdown')[0]
+    button = driver.find_elements_by_class_name('pa-button__text')[0]
+
+    dropdown.find_element_by_xpath(
+        "//option[text()='Kunst & Kultur']").click()
+    button.click()
+    assert 'stellenmarkt/kultur_kunst' in driver.current_url
+    assert 'stellenmarkt.funktionsbox.streifen' in driver.current_url
+
+
+def test_partnerbox_reisen_is_displayed_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/partnerbox-reisen')
+
+    # in main area
+    box = browser.cssselect('.partnerbox')[0]
+    assert len(box.cssselect('.partnerbox__label'))
+    assert len(box.cssselect('.partner__action'))
+    assert len(box.cssselect('.partner__intro'))
+    assert len(box.cssselect('.partner--reisen'))
+    assert len(box.cssselect('.p-kicker__img'))
+    assert len(box.cssselect('.p-kicker__text'))
+    assert len(box.cssselect('.pa-dropdown'))
+    assert len(box.cssselect('.pa-button'))
+    assert len(box.cssselect('.pa-link'))
+    assert len(box.cssselect('.pa-link__icon'))
+    assert len(box.cssselect('.pa-dropdown__option')) == 18
+
+
+def test_partnerbox_reisen_dropdown_works(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/partnerbox-reisen' % testserver.url)
+    dropdown = driver.find_elements_by_class_name('pa-dropdown')
+    button = driver.find_elements_by_class_name('pa-button__text')
+
+    # test without selecting anything
+    button[0].click()
+    assert 'zeitreisen.zeit.de' in driver.current_url
+    assert 'display.zeit_online.reisebox.dynamisch' in driver.current_url
+
+    # test with selected dropdown
+    driver.get('%s/zeit-online/partnerbox-reisen' % testserver.url)
+    dropdown = driver.find_elements_by_class_name('pa-dropdown')
+    button = driver.find_elements_by_class_name('pa-button__text')
+
+    dropdown[0].find_element_by_xpath(
+        "//option[text()='Kulturreisen']").click()
+    button[0].click()
+    assert '/themenreisen/kulturreisen/' in driver.current_url
+    assert 'display.zeit_online.reisebox.dynamisch' in driver.current_url
 
 
 def test_studiumbox_is_displayed_correctly(testbrowser):
