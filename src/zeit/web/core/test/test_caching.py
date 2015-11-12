@@ -137,11 +137,12 @@ def test_reify_should_store_result_in_beaker_cache_region(application):
     foo = Foo()
     cache = Foo.prop._get_cache(foo)
     assert cache.namespace_name == (
-        u'<class \'zeit.web.core.test.test_caching.Foo\'>|prop')
+        'zeit.web.core.test.test_caching.Foo.prop')
     assert foo.prop == 71
-    assert Foo.prop._global_key(foo).startswith('ee433f8b858201f4f5e3baf0c77')
-    assert cache.has_key('ee433f8b858201f4f5e3baf0c7786237244b44ac')  # NOQA
-    assert cache.get('ee433f8b858201f4f5e3baf0c7786237244b44ac') == 71
+    assert Foo.prop._global_key(
+        foo) == 'dc785f7304a94df7b6820434b1654e4674c7923f'
+    assert cache.has_key('dc785f7304a94df7b6820434b1654e4674c7923f')  # NOQA
+    assert cache.get('dc785f7304a94df7b6820434b1654e4674c7923f') == 71
 
 
 @pytest.mark.skipif(not HAVE_PYLIBMC, reason='pylibmc not installed')

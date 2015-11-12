@@ -225,7 +225,10 @@ class reify(object):  # NOQA
 
     def _get_namespace(self, inst):
         try:
-            return '{}|{}'.format(inst.__class__, self.func.__name__)
+            return '.'.join([
+                inst.__class__.__module__,
+                inst.__class__.__name__,
+                self.func.__name__])
         except (AttributeError, UnicodeDecodeError):
             return
 
