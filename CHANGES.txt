@@ -12,9 +12,9 @@ Change log for zeit.web
 
 - FIX: Rework ZMO galleries (back to normal)
 
-- HOTFIX: Render redirect if dynamic folder with empty view_name is called
-
 - FIX: Add missing horizontal padding to videostage-heading
+
+- HOTFIX: Render redirect if dynamic folder with empty view_name is called
 
 
 2.24 (2015-11-09)
