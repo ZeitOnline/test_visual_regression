@@ -4,6 +4,8 @@ Change log for zeit.web
 2.25 (unreleased)
 -----------------
 
+- FIX: Add advertorial keywords to banner config
+
 - ZON-2159: Nestle ranking area closer up to cms code
 
 - ZON-2376: Use pagetitle in og:title meta tag
