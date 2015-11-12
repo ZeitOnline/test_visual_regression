@@ -4,16 +4,15 @@ Change log for zeit.web
 2.25 (unreleased)
 -----------------
 
-- FIX: Make veeseo video widget appear before advertisement nextread
-
 - ZON-2159: Nestle ranking area closer up to cms code
 
-- ZON-2376: use pagetitle in og:title meta tag
+- ZON-2376: Use pagetitle in og:title meta tag
 
-- FIX: rework ZMO galleries (back to normal)
+- FIX: Make veeseo video widget appear before advertisement nextread
 
-- HOTFIX: Render a redirect if we have a call to a dynamic folder with an empty
-  view_name
+- FIX: Rework ZMO galleries (back to normal)
+
+- HOTFIX: Render redirect if dynamic folder with empty view_name is called
 
 
 2.24 (2015-11-09)
@@ -37,6 +36,7 @@ Change log for zeit.web
 
 - HOTFIX: Drop caption block from centerpage header image
 
+- HOTFIX: Nextread image in ZMO
 
 
 2.22 (2015-11-04)
