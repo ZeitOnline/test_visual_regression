@@ -6,8 +6,13 @@ Change log for zeit.web
 
 - ZON-2159: Nestle ranking area closer up to cms code
 
-- HOTFIX: Render a redirect if we have a call to a dynamic folder with an empty
-  view_name
+- ZON-2376: Use pagetitle in og:title meta tag
+
+- FIX: Make veeseo video widget appear before advertisement nextread
+
+- FIX: Rework ZMO galleries (back to normal)
+
+- HOTFIX: Render redirect if dynamic folder with empty view_name is called
 
 - FIX: Add missing horizontal padding to videostage-heading
 

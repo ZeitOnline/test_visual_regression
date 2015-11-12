@@ -92,10 +92,16 @@
     {% endblock %}
 
     {% block nextread %}
+        {% set module = view.nextread %}
         {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
     {% endblock %}
 
     {% block veeseo_div %}{% endblock %}
+
+    {% block nextread_ad %}
+        {% set module = view.nextread_ad %}
+        {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
+    {% endblock %}
 
     {% block article_google_ad %}
         {% if view.context.advertising_enabled -%}
