@@ -22,6 +22,9 @@ Change log for zeit.web
 
 - HOTFIX: Render redirect if dynamic folder with empty view_name is called
 
+- HOTFIX: Make reify-beaker work with memcache (which then enables actual
+  caching of article lineage)
+
 
 2.24 (2015-11-09)
 -----------------
