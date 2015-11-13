@@ -39,13 +39,13 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">80969ebecc494a52a0a0226e5c881c8b</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Deutschland</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="serie">10 nach 8</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Deutschland sollte weniger orthodox Wirtschaftspolitik betreiben und mehr Nachsicht mit den Nachbarn haben. (tis)</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Meinung</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">5702</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
