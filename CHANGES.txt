@@ -4,6 +4,8 @@ Change log for zeit.web
 2.26 (unreleased)
 -----------------
 
+- ZON-2331: AdReloading wrapper script
+
 - ZON-2396: Support specialized quiz module on CPs and articles
 
 
