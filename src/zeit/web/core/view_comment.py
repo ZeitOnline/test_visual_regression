@@ -80,19 +80,6 @@ class PostComment(zeit.web.core.view.Base):
         request.session['lock_commenting'] = True
         request.session['lock_commenting_ts'] = datetime.datetime.utcnow()
 
-    # Debug function to see what's requested
-    def _dump_request(self, r):
-        req = r.request
-
-        command = "curl -X {method} -H {headers} -d '{data}' '{uri}'"
-        method = req.method
-        uri = req.url
-        data = req.body
-        headers = ["'{0}: {1}'".format(k, v) for k, v in req.headers.items()]
-        headers = " -H ".join(headers)
-        return command.format(
-            method=method, headers=headers, data=data, uri=uri)
-
     def post_comment(self):
         request = self.request
         user = request.session['user']
