@@ -121,6 +121,13 @@
     {% include 'zeit.web.site:templates/inc/module/cardstack.html' %}
 {% endmacro -%}
 
+{# Quiz macro is used inside of articles. (On CPs, the module template is used.) #}
+{% macro quiz(module) -%}
+    <div class="article__item article__item--wide article__item--rimless x-spacing">
+        <iframe frameborder="0" scrolling="no" width="100%" height="400" src="{{ module.url }}?embedded{{ module.adreload }}"></iframe>
+    </div>
+{% endmacro -%}
+
 {% macro video(video) -%}
     <div class="article__item article__item--wide article__item--rimless article__item--apart">
         {% set playerId = 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9' %}

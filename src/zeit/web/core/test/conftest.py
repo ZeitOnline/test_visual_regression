@@ -189,6 +189,7 @@ def app_settings(mockserver):
         'dev_environment': True,
         'enable_article_lineage': True,
         'advertisement_nextread_folder': 'verlagsangebote',
+        'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
     }
 
 

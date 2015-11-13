@@ -31,7 +31,7 @@ class IGalleryImage(zope.interface.Interface):
 
 @grokcore.component.implementer(IGalleryImage)
 @grokcore.component.adapter(zeit.content.gallery.interfaces.IGalleryEntry)
-class GalleryImage(zeit.web.core.block.Image):
+class GalleryImage(zeit.web.core.image.BaseImage):
 
     def __init__(self, item):
         self.caption = item.caption
