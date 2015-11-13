@@ -140,31 +140,9 @@ class CenterPage(Traversable):
                 self.context, module='search-form')
             if form:
                 form = zeit.web.core.template.get_module(form)
-                form['q'] = u' '.join(tdict['request'].GET.getall('q'))
-                form['type'] = u' '.join(tdict['request'].GET.getall('type'))
-                form['mode'] = tdict['request'].GET.get('mode')
-                form['sort'] = tdict['request'].GET.get('sort')
                 area.raw_query = form.raw_query
                 area.raw_order = form.raw_order
                 area.sort_order = form.sort_order
-            else:
-                form = zeit.web.site.module.search_form.Form(tdict['context'])
-
-            form['page'] = tdict['request'].GET.get('p')
-
-            # Validate page number
-            try:
-                page_num = int(form['page'])
-            except ValueError:
-                # page_num is not a number
-                raise pyramid.httpexceptions.HTTPNotFound()
-            except TypeError:
-                # page_num is None
-                pass
-            else:
-                if page_num > area.total_pages or page_num <= 0:
-                    raise pyramid.httpexceptions.HTTPNotFound()
-            area.page = form.page
 
 
 @traverser(zeit.content.cp.interfaces.ICenterPage)
