@@ -131,7 +131,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
         serie = doc.get('serie', None)
         source = zeit.cms.content.interfaces.ICommonMetadata['serie'].source
-        doc['serie'] = source.factory.values.get(serie, serie)
+        doc['serie'] = source.factory.values.get(serie, None)
 
         # XXX The asset badges are not indexed in solr, so we lie about them
         doc['gallery'] = doc['video'] = doc['video_2'] = None
