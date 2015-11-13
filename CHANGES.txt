@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2396: Support specialized quiz module on CPs and articles
 
+- ZON-2359: Edit zeitshop link
+
 
 2.25 (2015-11-12)
 -----------------
