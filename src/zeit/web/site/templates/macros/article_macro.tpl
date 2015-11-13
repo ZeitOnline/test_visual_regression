@@ -117,6 +117,7 @@
 
 {% macro cardstack(module, view) -%}
     {% set request = view.request %}
+    {% set static_param = '' %}
     {% include 'zeit.web.site:templates/inc/module/cardstack.html' %}
 {% endmacro -%}
 
