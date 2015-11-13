@@ -1,0 +1,80 @@
+.teaser-printkiosk-group
+	&__title
+		+font-smoothing
+		color: $white
+		font-size: remify(20px)
+		line-height: remify(24px)
+		text-align: center
+
+	&__container
+		+clearfix
+		margin: remify(20px 0)
+
+	&__button
+		@extend %teaser-bar-group__button
+		+zon-button-dark($margin: remify(14px) auto)
+		display: table
+
+	&__shuffle-icon
+		@extend %teaser-bar-group__shuffle-icon
+
+.teaser-printkiosk
+	float: left
+	margin: auto
+	text-align: center
+	width: 100%
+
+	&__media
+		height: remify(190px)
+		margin: 1em auto
+		position: relative
+		width: remify(160px)
+
+	&__media-container
+		bottom: 0
+		position: absolute
+		width: 100%
+
+	&__media-item
+		margin: auto
+		max-height: remify(190px)
+		max-width: remify(160px)
+		// override width:100% from .scaled-image
+		.scaled-image &
+			width: auto
+
+	&__container
+		margin: remify(20px) auto 0
+		max-width: remify(160px)
+
+	&__title
+		color: $white
+		font-size: remify(16px)
+		line-height: 1.5
+		margin: remify(16px) auto 0
+		min-height: 3em // that's two lines when line-height is 1.5
+
+	+respond-min($break-phablet-min)
+		width: 50%
+	+respond-min($break-tablet-min)
+		width: 33.33%
+	+respond-min($break-desktop-min)
+		width: 25%
+
+	// OPTIMIZE: once we drop IE8, we can use nth-child here!
+	// Also, that's why we need to "subtract" here, because displaying on
+	// respond-min does not work (the 2nd item does not know that there is a
+	// 3rd+4th)
+	//
+	// don't display the second item on screens smaller than phablet
+	& + &
+		+respond-max($break-phablet-min)
+			display: none
+	// don't display the third item on screens smaller than tablet
+	& + & + &
+		+respond-max($break-tablet-min)
+			display: none
+	// don't display the fourth item on screens smaller than desktop
+	& + & + & + &
+		+respond-max($break-desktop-min)
+			display: none

@@ -647,3 +647,8 @@ def test_existing_image_should_preserve_pattern_order(patterns, application):
         ['schoppenstube-540x304.jpg', 'schoppenstube-148x84.jpg'])
     expected_pattern = (lambda x: x.remove('368x220') or x)(list(patterns))[0]
     assert pattern == expected_pattern
+
+
+def test_join_if_exists_should_should_filter_none():
+    assert zeit.web.core.template.join_if_exists(
+        ['honey', None, 'flash'], '-') == 'honey-flash'

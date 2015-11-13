@@ -189,6 +189,7 @@ def app_settings(mockserver):
         'dev_environment': True,
         'enable_article_lineage': True,
         'advertisement_nextread_folder': 'verlagsangebote',
+        'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
     }
 
 
@@ -686,7 +687,13 @@ class MockSolr(object):
         self.results = []
 
     def search(self, q, rows=10, **kw):
-        return pysolr.Results(self.results, len(self.results))
+        results = []
+        for i in range(rows):
+            try:
+                results.insert(0, self.results.pop())
+            except IndexError:
+                break
+        return pysolr.Results(results, len(results))
 
     def update_raw(self, xml, **kw):
         pass

@@ -10,10 +10,9 @@ $gallery-dots-diameter: 8px
         padding: 0
         clear: none
     .figure__media
-        margin: 0 auto
-        max-height: 620px
-        max-width: 100%
         width: auto
+        max-height: 620px
+        margin: 0 auto
     .figure__caption
         color: $grey--mid
         margin: $small auto 0
@@ -67,7 +66,6 @@ html.js
     +respond-min($break-1)
         padding: 0 0 em(14px)
 .bx-controls-direction
-    +inline-block
     float: right
 .bx-wrapper--touch .bx-pager
     font-size: $gallery-dots-diameter
@@ -116,40 +114,24 @@ html.js
     color: #fff
     border: none
     +opacity(0.3)
-    &:hover,
-    &:active,
-    &:focus
-        color: $white
     &:hover
         +opacity(0.7)
     &:focus
         outline: 0
     &.disabled
         +opacity(0.1)
-    .bx-arrow-icon
-        height: remify(15px)
-        width: remify(15px)
-            
 .bx-overlay-prev,
 .bx-overlay-next
     @extend .bx-next
     margin: 0
     position: absolute
     top: em(10px)
-    padding: remify(20px)
     +respond-min($break-1)
         top: 50%
         margin-top: -$gallery-button-radius
         width: $gallery-button-radius * 2
         height: $gallery-button-radius * 2
         +opacity(0)
-    .bx-arrow-icon
-        display: block
-        height: remify(30px)
-        width: remify(30px)
-    .svg-symbol
-        fill: currentColor
-
 .bx-overlay-prev
     left: em(10px)
 .bx-overlay-next

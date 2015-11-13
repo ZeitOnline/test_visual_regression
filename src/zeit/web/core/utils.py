@@ -228,6 +228,12 @@ class LazyProxy(object):
     <zeit.content.cp.interfaces.ICenterPage proxy at 0x109bbe510>
     """
 
+    def __new__(cls, context, istack=None):
+        if not getattr(context, 'get', {}.get)('uniqueId', None):
+            raise TypeError(
+                'Could not adapt', context, zeit.cms.interfaces.ICMSContent)
+        return object.__new__(cls)
+
     def __init__(self, context, istack=[zeit.cms.interfaces.ICMSContent]):
         def callback():
             factory = context.get('uniqueId', None)
@@ -326,8 +332,7 @@ class LazyProxy(object):
     # in __conform__ above, we cannot use an adapter to do this. ;-)
     @property
     def image(self):
-        context = self.__proxy__
-        image_ids = context.get('image-base-id', [])
+        image_ids = self.__proxy__.get('image-base-id', [])
         if not image_ids:
             raise AttributeError('image')
         return zeit.cms.interfaces.ICMSContent(image_ids[0])
@@ -336,8 +341,7 @@ class LazyProxy(object):
     # (Note: templates try to access this directly without adapting first.)
     @property
     def blog(self):
-        context = self.__proxy__
-        if context.get('type') != 'link':
+        if self.__proxy__.get('type') != 'link':
             return False
         raise AttributeError('blog')
 
