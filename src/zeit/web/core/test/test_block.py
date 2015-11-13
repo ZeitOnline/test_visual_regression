@@ -281,8 +281,8 @@ def test_find_nextread_returns_none_if_nonexistent(application):
 
 
 def test_find_nextread_from_ressort_without_subressort(application):
-    assert zeit.web.core.block.find_nextread_folder(
-        'Wirtschaft', None) is not None
+    assert 'jobs' in zeit.web.core.block.find_nextread_folder(
+        'Wirtschaft', None)
 
 
 def test_find_nextread_empty_string_subressort(application):
@@ -294,19 +294,24 @@ def test_find_nextread_empty_string_subressort(application):
         return original_find(self, *args, **kw)
     original_find = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find
     zeit.web.core.sources.RESSORTFOLDER_SOURCE.find = find
-    assert zeit.web.core.block.find_nextread_folder(
-        'Wirtschaft', '') is not None
+    assert 'jobs' in zeit.web.core.block.find_nextread_folder(
+        'Wirtschaft', '')
     assert len(calls) == 1
 
 
 def test_find_nextread_from_subressort(application):
-    assert zeit.web.core.block.find_nextread_folder(
-        'Deutschland', 'Datenschutz') is not None
+    assert 'jobs' in zeit.web.core.block.find_nextread_folder(
+        'Deutschland', 'Datenschutz')
 
 
-def test_find_nextread_from_ressort_if_subressort_has_none(application):
-    assert zeit.web.core.block.find_nextread_folder(
-        'Deutschland', 'Integration') is not None
+def test_find_nextread_from_ressort_if_subressort_has_no_folder(application):
+    assert 'jobs' in zeit.web.core.block.find_nextread_folder(
+        'Deutschland', 'Integration')
+
+
+def test_find_nextread_from_ressort_if_subressort_folder_is_empty(application):
+    assert 'jobs' in zeit.web.core.block.find_nextread_folder(
+        'Deutschland', 'Osten')
 
 
 def test_find_nextread_from_correct_ressort_if_subressort_has_same_name(
@@ -317,5 +322,4 @@ def test_find_nextread_from_correct_ressort_if_subressort_has_same_name(
 
 def test_find_nextread_does_not_break_on_umlauts(application):
     # Assert nothing raised
-    zeit.web.core.block.find_nextread_folder(
-        u'Deutschländ', u'Datenschütz')
+    zeit.web.core.block.find_nextread_folder(u'Deutschländ', u'Datenschütz')

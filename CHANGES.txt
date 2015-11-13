@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2159: Nestle ranking area closer up to cms code
 
+- ZON-2399: Check if ad-nextread folder contains items, not just if it's there
+
 - FIX: rework ZMO galleries (back to normal)
 
 - ZON-2376: Use pagetitle in og:title meta tag
