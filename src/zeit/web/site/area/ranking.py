@@ -160,6 +160,8 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         # XXX The asset badges are not indexed in solr, so we lie about them
         doc['gallery'] = doc['video'] = doc['video_2'] = None
 
+        doc.setdefault('lead_candidate', False)
+
         return doc
 
     @zeit.web.reify
