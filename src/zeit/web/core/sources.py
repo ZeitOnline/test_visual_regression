@@ -180,7 +180,9 @@ class Solr(object):
                     assert zeit.web.core.view.known_content(content)
                     results.append({
                         u'date_last_published': u'2015-07-01T09:50:42Z',
+                        u'date_first_released': u'2015-07-01T09:50:42Z',
                         u'last-semantic-change': u'2015-07-01T09:50:42Z',
+                        u'lead_candidate': False,
                         u'product_id': content.product.id,
                         u'supertitle': content.supertitle,
                         u'title': content.title,
