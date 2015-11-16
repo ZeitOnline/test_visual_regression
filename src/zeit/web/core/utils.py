@@ -346,15 +346,16 @@ class LazyProxy(object):
         raise AttributeError('blog')
 
 
-def _dump_request(self, response):
-    """ Pass a requests response and receive an executable curl """
-    req = r.request
-
+def dump_request(response):
+    """Debug helper. Pass a `requests` response and receive an executable curl
+    command line.
+    """
+    request = response.request
     command = "curl -X {method} -H {headers} -d '{data}' '{uri}'"
-    method = req.method
-    uri = req.url
-    data = req.body
-    headers = ["'{0}: {1}'".format(k, v) for k, v in req.headers.items()]
+    method = request.method
+    uri = request.url
+    data = request.body
+    headers = ["'{0}: {1}'".format(k, v) for k, v in request.headers.items()]
     headers = " -H ".join(headers)
     return command.format(
         method=method, headers=headers, data=data, uri=uri)
