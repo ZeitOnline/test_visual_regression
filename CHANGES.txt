@@ -6,7 +6,9 @@ Change log for zeit.web
 
 - ZON-2396: Support specialized quiz module on CPs and articles
 
-- ZON-2400: Sent static parameter for cardstack body on CPs
+- ZON-2400: Send static parameter for cardstack body on CPs
+
+- ZON-2359: Edit zeitshop link
 
 
 2.25 (2015-11-12)
