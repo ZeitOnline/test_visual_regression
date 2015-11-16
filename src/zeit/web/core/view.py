@@ -45,6 +45,13 @@ def is_advertorial(context, request):
     return getattr(context, 'product_text', None) == 'Advertorial'
 
 
+def is_paginated(context, request):
+    try:
+        return int(request.GET['p']) > 1
+    except (KeyError, ValueError):
+        return False
+
+
 def redirect_on_trailing_slash(request):
     if request.path.endswith('/') and not len(request.path) == 1:
         scheme, netloc, path, params, query, fragment = urlparse.urlparse(

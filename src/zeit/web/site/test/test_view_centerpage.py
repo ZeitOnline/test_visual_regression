@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 import re
 
-import lxml.html
-import lxml.etree
-import mock
-import pytest
-import requests
-
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
+import lxml.etree
+import lxml.html
+import mock
+import pyramid.httpexceptions
 import pyramid.testing
+import pytest
+import requests
 
 import zeit.content.cp.centerpage
 
@@ -1860,3 +1860,20 @@ def test_printkiosk_loads_next_page_on_click(selenium_driver, testserver):
         '.teaser-printkiosk__title')
     assert new_teaser_titles[0].text == 'ZEIT GESCHICHTE'
     assert new_teaser_titles[2].text == 'DIE ZEIT'
+
+
+def test_centerpage_page_should_be_reconstructed(application, dummy_request):
+    dummy_request.GET['p'] = '3'
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
+    view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
+    assert len(view.regions) == 2
+    assert view.regions[0].values()[0].values()[0].supertitle == 'Griechenland'
+    assert view.regions[1].values()[0].kind == 'ranking'
+
+
+def test_centerpage_page_should_require_ranking(application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/slenderized-index')
+    view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
+    with pytest.raises(pyramid.httpexceptions.HTTPNotFound):
+        list(view.regions)

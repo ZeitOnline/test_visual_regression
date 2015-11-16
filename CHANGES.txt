@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2359: Edit zeitshop link
 
+- ZON-2159: Implement rudimentary paginated centerpage view
+
 
 2.25 (2015-11-12)
 -----------------
