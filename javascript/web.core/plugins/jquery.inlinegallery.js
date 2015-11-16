@@ -39,7 +39,7 @@
                         window.clickCount.webtrekk( 'hp.zm.slidegallery.showslide.' );
                         window.clickCount.ga( 'hp.zm.slidegallery.showslide.' );
                     }
-                    // add add reloading capability
+                    // add ad-reloading capability
                     if ( typeof window.ZMO !== 'undefined' ) {
                         var prefix = window.ZMO.view.ressort === 'zeit-magazin' ? 'zmo-' : '';
                         $( window ).trigger( 'interaction.adreload.z', [ prefix + 'gallery', 'interaction' ] );
