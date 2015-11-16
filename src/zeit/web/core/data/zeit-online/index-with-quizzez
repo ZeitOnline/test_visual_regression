@@ -122,8 +122,8 @@
                         </author>
                     </block>
                 </container>
-                <container cp:type="frame" module="frame" title="Quiz" visible="True" visible_mobile="True" cp:__name__="id-6d45df0c-6340-4e89-9a0a-f84b727d2152">
-                    <url>http://quiz.zeit.de/#/quiz/103</url>
+                <container cp:type="quiz" module="quiz" title="Quiz" visible="True" visible_mobile="True" cp:__name__="id-6d45df0c-6340-4e89-9a0a-f84b727d2152">
+                    <quiz_id>103</quiz_id>
                 </container>
             </region>
         </cluster>
@@ -145,8 +145,8 @@
                 </container>
             </region>
             <region visible="True" hide-dupes="True" area="id-0e98c5c2-2b95-42b7-9ccc-83e684fa87ba" kind="duo">
-                <container cp:type="frame" module="frame" visible="True" visible_mobile="True" cp:__name__="id-6d45df0c-6340-4e89-9a0a-f84b727d2152">
-                    <url>http://quiz.zeit.de/#/quiz/136</url>
+                <container cp:type="quiz" module="quiz" visible="True" visible_mobile="True" cp:__name__="id-6d45df0c-6340-4e89-9a0a-f84b727d2152">
+                    <quiz_id>136</quiz_id>
                 </container>
             </region>
         </cluster>

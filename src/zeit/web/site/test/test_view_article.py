@@ -1077,3 +1077,12 @@ def test_article_should_contain_veeseo_widget(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     assert browser.cssselect('#veeseo-widget')
     assert browser.cssselect('.RA2VW2')
+
+
+def test_article_should_render_quiz_in_iframe(testbrowser):
+    browser = testbrowser('/zeit-online/article/quiz')
+    iframe = browser.cssselect('iframe')
+    assert iframe[0].get(
+        'src') == 'http://quiz.zeit.de/#/quiz/103?embedded&adcontrol'
+    assert iframe[1].get(
+        'src') == 'http://quiz.zeit.de/#/quiz/104?embedded'

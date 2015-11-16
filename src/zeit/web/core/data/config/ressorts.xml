@@ -11,6 +11,9 @@
         <subnavigation name="Meinung" uniqueId="http://xml.zeit.de/deutschland/meinung">
             <title>Meinung</title>
         </subnavigation>
+        <subnavigation name="Osten" uniqueId="http://xml.zeit.de/deutschland/osten">
+            <title>Osten</title>
+        </subnavigation>
     </ressort>
 
     <ressort name="International" uniqueId="http://xml.zeit.de/international">
