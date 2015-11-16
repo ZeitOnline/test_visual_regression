@@ -60,6 +60,7 @@ define( [ 'jquery' ], function( $ ) {
         // load cause max reached
         if ( clickCounter[ myconfig.name ] && clickCounter[ myconfig.name ] + 1 === myconfig.interval ) {
             log( 'max click' );
+            // remember: delete leaves an empty slot. it is ok as long as we do not iterate.
             delete clickCounter[ myconfig.name ];
             return true;
         }  else {
