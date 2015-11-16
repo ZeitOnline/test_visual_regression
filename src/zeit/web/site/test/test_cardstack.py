@@ -36,6 +36,11 @@ def test_cardstack_should_have_static_param_on_cps(
 
     assert re.search(esihead, browser.contents)
 
+    esibody = ('<esi:include src="http://www.zeit.de'
+               '/cardstack-backend/.*/esi/body.*static=true')
+
+    assert re.search(esibody, browser.contents)
+
 
 def test_cardstack_should_not_have_static_param_on_articles(testbrowser):
     url = '/zeit-online/article/cardstack'
@@ -45,3 +50,8 @@ def test_cardstack_should_not_have_static_param_on_articles(testbrowser):
                '/cardstack-backend/stacks/esi/head.*static=true')
 
     assert not re.search(esihead, browser.contents)
+
+    esibody = ('<esi:include src="http://www.zeit.de'
+               '/cardstack-backend/.*/esi/body.*static=true')
+
+    assert not re.search(esibody, browser.contents)
