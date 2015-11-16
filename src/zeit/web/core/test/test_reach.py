@@ -81,3 +81,10 @@ def test_buzz_module_should_ignore_ressort_of_homepage(application):
         'http://xml.zeit.de/zeit-online/slenderized-index')
     module = zeit.web.site.module.buzzbox.Buzzbox(context)
     assert module.ressort is None
+
+
+def test_reach_should_return_none_on_timeout(application, mockserver):
+    mockserver.settings['sleep'] = 0.2
+    reach = zeit.web.core.reach.Reach()
+    social = reach.get_social()
+    assert social == []

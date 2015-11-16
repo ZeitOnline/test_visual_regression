@@ -71,7 +71,7 @@ def app_settings(mockserver):
         'community_maintenance': ('http://xml.zeit.de/config/'
                                   'community_maintenance.xml'),
         'agatho_host': mockserver.url + '/comments',
-        'linkreach_host': 'egg://zeit.web.core/data/linkreach/api',
+        'linkreach_host': mockserver.url + '/linkreach/api',
         'google_tag_manager_host': 'foo.baz',
         'app_servers': '',
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
@@ -390,13 +390,15 @@ def sleep_tween(handler, registry):
         # XXX. Set sleep time per request
         conf = zope.component.getUtility(ISettings)
         import time
+
         time.sleep(conf['sleep'])
         print 'For request %s, mockserver slept %s seconds.' % (request.path,
                                                                 conf['sleep'])
         response = handler(request)
 
         # For comfortability set sleep back to 0
-        conf['sleep'] = 0
+        if conf['sleep_reset']:
+            conf['sleep'] = 0
         return response
     return timeout
 
@@ -431,7 +433,7 @@ def mockserver(request):
     config.add_view(StaticViewMaybeReplaceHostURL(
         pkg_resources.resource_filename('zeit.web.core', 'data')),
         route_name='static')
-    settings = {'sleep': 0}
+    settings = {'sleep': 0, 'sleep_reset': True}
     settings = pyramid.config.settings.Settings(d=settings)
     interface = ISettings
     zope.interface.declarations.alsoProvides(settings, interface)
