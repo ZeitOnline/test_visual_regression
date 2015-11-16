@@ -132,7 +132,8 @@ def view_timer_rendering(event):
         event.request.view_timer.stop('total')
         event.request.view_timer_all.intermediate('rendering')
         event.request.view_timer_all.stop('total')
-    memory = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    memory_delta = memory - event.request.memory
-    memory_log.debug(
-        'Memory delta %s: %s KB', event.request.path, memory_delta)
+    if getattr(event.request, 'memory', None):
+        memory = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        memory_delta = memory - event.request.memory
+        memory_log.debug(
+            'Memory delta %s: %s KB', event.request.path, memory_delta)

@@ -471,11 +471,6 @@ def test_get_image_asset_should_return_image_asset(testserver, testbrowser):
     assert isinstance(asset, zeit.content.image.imagegroup.ImageGroup)
 
 
-def test_get_image_asset_should_catch_fake_entries(testserver, testbrowser):
-    fake_entry = zeit.cms.syndication.feed.FakeEntry(None, '')
-    assert zeit.web.core.centerpage.get_image_asset(fake_entry) is None
-
-
 def test_get_gallery_asset_should_return_gallery_asset(
         testserver, testbrowser):
     article = 'http://xml.zeit.de/centerpage/article_gallery_asset'
@@ -485,22 +480,12 @@ def test_get_gallery_asset_should_return_gallery_asset(
     assert isinstance(asset, zeit.content.gallery.gallery.Gallery)
 
 
-def test_get_gallery_asset_should_catch_fake_entries(testserver, testbrowser):
-    fake_entry = zeit.cms.syndication.feed.FakeEntry(None, '')
-    assert zeit.web.core.centerpage.get_gallery_asset(fake_entry) is None
-
-
 def test_get_video_asset_should_return_video_asset(testserver, testbrowser):
     article = 'http://xml.zeit.de/centerpage/article_video_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.web.core.centerpage.get_video_asset(
         context)
     assert isinstance(asset, zeit.content.video.video.Video)
-
-
-def test_get_video_asset_should_catch_fake_entries(testserver, testbrowser):
-    fake_entry = zeit.cms.syndication.feed.FakeEntry(None, '')
-    assert zeit.web.core.centerpage.get_video_asset(fake_entry) is None
 
 
 def test_default_image_url_should_return_default_image_size(
