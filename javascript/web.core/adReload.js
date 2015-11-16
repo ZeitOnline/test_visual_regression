@@ -128,16 +128,28 @@ define( [ 'jquery' ], function( $ ) {
     message = function( event ) {
         var messageData, message;
         log( 'message: ', event );
+
+        if ( typeof( event.originalEvent.data ) === 'undefined' ) {
+            return;
+        }
+
+        // Avoid JSON-parsing of messages which are not JSON
+        if ( event.originalEvent.data.indexOf( '{' ) !== 0 ) {
+            return;
+        }
+
         try {
             messageData = JSON.parse( event.originalEvent.data );
         } catch ( e ) {
             log( 'error', e );
             return;
         }
+
         if ( typeof messageData.name !== 'string' || event.originalEvent.origin !== config[messageData.name].origin ) {
             log( 'error', 'messageData not correctly set' );
             return;
         }
+
         $( window ).trigger( 'interaction.adreload.z', [ messageData.name, messageData.message ] );
     };
 
