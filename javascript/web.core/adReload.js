@@ -9,6 +9,7 @@ define( [ 'jquery' ], function( $ ) {
     var configUrl = window.ZMO.jsconfHost + '/config_adreload.json',
     config = false,
     timer = {},
+    clickCounter = [],
     /**
      * logging helper - wraps if debug --> console.log
      * @return {void}
@@ -55,18 +56,19 @@ define( [ 'jquery' ], function( $ ) {
             log( 'direct click' );
             return true;
         }
+
         // load cause max reached
-        if ( $( 'body' ).data( myconfig.name ) + 1 === myconfig.interval ) {
+        if ( clickCounter[ myconfig.name ] && clickCounter[ myconfig.name ] + 1 === myconfig.interval ) {
             log( 'max click' );
-            $( 'body' ).removeData( myconfig.name );
+            delete clickCounter[ myconfig.name ];
             return true;
         }  else {
-            if ( $( 'body' ).data( myconfig.name ) ) {
+            if ( clickCounter[ myconfig.name ] ) {
                 log( 'add up clicks' );
-                $( 'body' ).data( myconfig.name, $( 'body' ).data( myconfig.name ) + 1 );
+                clickCounter[ myconfig.name ] += 1;
             } else {
                 log( 'first click' );
-                $( 'body' ).data( myconfig.name, 1 );
+                clickCounter[ myconfig.name ] = 1;
             }
             return false;
         }
