@@ -4,14 +4,12 @@
     data-type="teaser">
     {% set teaser_link = teaser | create_url %}
     {% if teaser_link %}<a href="{{ teaser_link }}">{% endif %}
-        <div class="teaser-printkiosk__figurewrapper">
-            {% block teaser_media_position_before_title %}
-                {% set module_layout = self.layout() %}
-                <div class="{{ module_layout }}__figurewrapper">
-                    {% include "zeit.web.site:templates/inc/teaser_asset/imagegroup_printkiosk.tpl" %}
-                </div>
-            {% endblock %}
-        </div>
+        {% block teaser_media_position_before_title %}
+            {% set module_layout = self.layout() %}
+            <div class="{{ module_layout }}__figurewrapper">
+                {% include "zeit.web.site:templates/inc/teaser_asset/imagegroup_printkiosk.tpl" %}
+            </div>
+        {% endblock %}
         <div class="teaser-printkiosk__container">
             <p class="{{ self.layout() }}__title">{{ teaser.teaserTitle }}</p>
         </div>
