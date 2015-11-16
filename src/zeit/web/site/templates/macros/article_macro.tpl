@@ -117,7 +117,15 @@
 
 {% macro cardstack(module, view) -%}
     {% set request = view.request %}
+    {% set static_param = '' %}
     {% include 'zeit.web.site:templates/inc/module/cardstack.html' %}
+{% endmacro -%}
+
+{# Quiz macro is used inside of articles. (On CPs, the module template is used.) #}
+{% macro quiz(module) -%}
+    <div class="article__item article__item--wide article__item--rimless x-spacing">
+        <iframe frameborder="0" scrolling="no" width="100%" height="400" src="{{ module.url }}?embedded{{ module.adreload }}"></iframe>
+    </div>
 {% endmacro -%}
 
 {% macro video(video) -%}

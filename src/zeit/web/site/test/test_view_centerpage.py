@@ -124,7 +124,8 @@ def test_default_teaser_should_match_css_selectors(
     request = mock.Mock()
 
     html_str = tpl.render(
-        teaser=teaser, layout='teaser', view=view, area=area, module=module, request=request)
+        teaser=teaser, layout='teaser', view=view, area=area, module=module,
+        request=request)
     html = lxml.html.fromstring(html_str).cssselect
 
     assert len(html('article.teaser h2.teaser__heading')) == 1
@@ -611,7 +612,7 @@ def test_linkobject_teaser_should_contain_supertitle(testserver, testbrowser):
     uid = 'http://xml.zeit.de/zeit-online/cp-content/link_teaser'
     kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
                                '.teaser-small__kicker'.format(uid))[0]
-    assert kicker.text == 'Freier Teaser Kicker'
+    assert kicker.text.strip() == 'Freier Teaser Kicker'
 
 
 def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
@@ -621,7 +622,7 @@ def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
         '.teaser-large[data-unique-id="{}"] '.format(uid))[0]
 
     kicker = teaser.cssselect('.teaser-large__kicker--blog')[0]
-    assert kicker.text == 'Zeugenvernehmung'
+    assert kicker.text.strip() == 'Zeugenvernehmung'
 
     marker = teaser.cssselect('.blog-format__marker')[0]
     assert marker.text == 'Blog'
@@ -1207,7 +1208,7 @@ def test_hidden_images_must_not_be_loaded_via_js(
             assert len(largeimage) == 1
 
 
-def test_frames_are_placed_correctly(testbrowser):
+def test_quiz_frames_are_placed_correctly(testbrowser):
     browser = testbrowser('/zeit-online/index-with-quizzez')
     frame1 = browser.cssselect('.cp-area--minor > .frame')
     frame2 = browser.cssselect('.cp-area--duo > .frame')
@@ -1225,11 +1226,11 @@ def test_frames_are_placed_correctly(testbrowser):
     assert len(frameheadline2) == 0
     assert frameheadline1[0].text == 'Quiz'
 
-    assert iframe1[0].get('src') == 'http://quiz.zeit.de/#/quiz/103'
-    assert iframe2[0].get('src') == 'http://quiz.zeit.de/#/quiz/136'
+    assert iframe1[0].get('src') == 'http://quiz.zeit.de/#/quiz/103?embedded'
+    assert iframe2[0].get('src') == 'http://quiz.zeit.de/#/quiz/136?embedded'
 
 
-def test_frame_dimensions(selenium_driver, testserver, screen_size):
+def test_quiz_frame_dimensions(selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('{}/zeit-online/index-with-quizzez'.format(testserver.url))
@@ -1729,7 +1730,7 @@ def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
         '.teaser-fullwidth__kicker-logo--zmo')[0]
     teaser_classic_logo = browser.cssselect(
         '.teaser-classic__kicker-logo--zmo')[0]
-    teaser_large_logo =  browser.cssselect(
+    teaser_large_logo = browser.cssselect(
         '.teaser-large__kicker-logo--zmo')[0]
     teaser_small_logo = browser.cssselect(
         '.teaser-small__kicker-logo--zmo')[0]
@@ -1754,7 +1755,7 @@ def test_zett_teaser_kicker_should_contain_logo(testbrowser):
         '.teaser-fullwidth__kicker-logo--zett')[0]
     teaser_classic_logo = browser.cssselect(
         '.teaser-classic__kicker-logo--zett')[0]
-    teaser_large_logo =  browser.cssselect(
+    teaser_large_logo = browser.cssselect(
         '.teaser-large__kicker-logo--zett')[0]
     teaser_small_logo = browser.cssselect(
         '.teaser-small__kicker-logo--zett')[0]
