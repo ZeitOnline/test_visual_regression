@@ -291,6 +291,40 @@ class Centerpage(
 
 
 @pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICP2015,
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       zeit.web.core.view.is_paginated),
+    renderer='templates/centerpage.html')
+class CenterpagePage(Centerpage):
+
+    @zeit.web.reify
+    def regions(self):
+        if self.area_ranking is None:
+            # A paginatable centerpage needs a ranking area.
+            raise pyramid.httpexceptions.HTTPNotFound(
+                'This centerpage is not paginatable.')
+
+        values = self.context.values()
+        if len(values) == 0:
+            return []
+
+        # Reconstruct a paginated cp with optional header and ranking area.
+        regions = [LegacyRegion([zeit.web.core.centerpage.IRendered(
+            self.area_ranking)])]
+
+        # Try to preserve centerpage header modules.
+        # XXX This could be a lot sleeker if done in config.
+        find = zeit.web.core.utils.find_block
+        header = find(values[0], module='headerimage') or find(
+            values[0], module='centerpage-header') or find(
+            values[0], module='search-form')
+        if header:
+            regions.insert(0, LegacyRegion([LegacyArea([header])]))
+
+        return regions
+
+
+@pyramid.view.view_config(
     name='area',
     context=zeit.content.cp.interfaces.ICP2015,
     renderer='templates/inc/area/includer.html')
@@ -298,7 +332,7 @@ class CenterpageArea(Centerpage):
 
     def __init__(self, context, request):
         if not request.subpath:
-            raise pyramid.httpexceptions.NotFound()
+            raise pyramid.httpexceptions.HTTPNotFound()
 
         self.context = None
         self.request = request

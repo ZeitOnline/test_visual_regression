@@ -235,11 +235,7 @@ def get_layout(block, request=None):
             layout = 'hide'
     else:
         layout = layout_id
-
-        if isinstance(teaser, zeit.cms.syndication.feed.FakeEntry):
-            log.debug('Broken ref at {}'.format(teaser.uniqueId))
-            layout = 'hide'
-        elif layout == 'zon-square':
+        if layout == 'zon-square':
             # ToDo: Remove when Longform will be generally used on www.zeit.de
             if urlparse.urlparse(teaser.uniqueId).path.startswith('/feature/'):
                 layout = layout

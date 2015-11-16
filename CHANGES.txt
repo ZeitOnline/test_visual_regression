@@ -10,15 +10,25 @@ Change log for zeit.web
 2.26 (2015-11-16)
 -----------------
 
+- MAINT: Add a function in utils that helps to debug requests via curl
+
+- FIX: Skip nonexistent content (instead of trying to make it "work" somehow
+  with FakeEntry)
+
 - ZON-2396: Support specialized quiz module on CPs and articles
 
 - ZON-2400: Send static parameter for cardstack body on CPs
 
 - ZON-2359: Edit zeitshop link
 
+- ZON-2159: Implement rudimentary paginated centerpage view
+
 
 2.25 (2015-11-12)
 -----------------
+
+- FIX: Studiumbox (repair tracking, add fallback for empty form, rename module,
+  fix icon display, correct spelling, add tests)
 
 - FIX: Add advertorial keywords to banner config
 
