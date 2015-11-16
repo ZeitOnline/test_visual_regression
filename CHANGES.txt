@@ -14,6 +14,9 @@ Change log for zeit.web
 2.25 (2015-11-12)
 -----------------
 
+- FIX: Studiumbox (repair tracking, add fallback for empty form, rename module,
+  fix icon display, correct spelling, add tests)
+
 - FIX: Add advertorial keywords to banner config
 
 - ZON-2159: Nestle ranking area closer up to cms code
