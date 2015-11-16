@@ -275,6 +275,9 @@ def register_module(name):
     {% endfor %}
 
     That's it.
+
+    If your module template is self-sufficient, you can even skip the python
+    module implementation and registration.
     """
 
     def registrator(cls):

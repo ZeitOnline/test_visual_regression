@@ -1,10 +1,10 @@
 {% extends "zeit.web.site:templates/inc/area/default.html" %}
 
 {% block before_module_list %}
-{% if area.query %}
+{% if area.query_string %}
 <div class="search-counter">
     <div class="search-counter__hits"{% if area.hits %} id="search-area-has-hits"{% endif %}>
-        {{ area.hits | default(0) | pluralize('Keine Suchergebnisse', '{} Suchergebnis', '{} Suchergebnisse') }} für &raquo;{{ area.query | truncate(120, True) }}&laquo;
+        {{ area.hits | default(0) | pluralize('Keine Suchergebnisse', '{} Suchergebnis', '{} Suchergebnisse') }} für &raquo;{{ area.query_string | truncate(120, True) }}&laquo;
     </div>
     <nav>
         <span class="search-counter__label">Sortieren nach</span>

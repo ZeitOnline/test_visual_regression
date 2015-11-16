@@ -36,14 +36,14 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ba8de262-3438-42c3-9f55-ed824f8849b0}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Deutschland sollte weniger orthodox Wirtschaftspolitik betreiben und mehr Nachsicht mit den Nachbarn haben. (tis)</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">7850f18915e34d159813aa3e96cfdd8e</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Meinung</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-10-21T05:07:53.619066+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">F&#xFC;nf vor acht</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Deutschland</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">43</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>

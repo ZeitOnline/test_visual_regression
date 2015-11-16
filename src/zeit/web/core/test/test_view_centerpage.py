@@ -1,3 +1,5 @@
+import zope.component
+
 import zeit.content.cp.centerpage
 import zeit.cms.interfaces
 
@@ -62,6 +64,27 @@ def test_centerpage_should_evaluate_automatic_areas_for_teasers(
     assert items[0].uniqueId == (
         'http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm')
     assert len(items) == area.count
+
+
+def test_nonexistent_content_should_be_skipped(application, workingcopy):
+    other = zeit.content.cp.centerpage.CenterPage()
+    teaser = other.body.create_item('region').create_item('area').create_item(
+        'teaser')
+    teaser.insert(0, 'http://xml.zeit.de/zeit-online/article/01')
+    repository = zope.component.getUtility(
+        zeit.cms.repository.interfaces.IRepository)
+    repository['testcp'] = other
+    del repository['zeit-online']['article']['01']
+
+    cp = zeit.content.cp.centerpage.CenterPage()
+    # cp.uniqueId = 'http://xml.zeit.de/testcp'
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = 'duo'  # Fixture config default teaser layout
+    area.automatic_type = 'centerpage'
+    area.referenced_cp = other
+    area.count = 1
+    area.automatic = True
+    assert not zeit.content.cp.interfaces.IRenderedArea(area).values()
 
 
 def test_centerpage_should_collect_teaser_counts_from_community(

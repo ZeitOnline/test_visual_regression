@@ -31,6 +31,7 @@ FIELDS = ' '.join([
     'date_last_published',
     'image-base-id',
     'last-semantic-change',
+    'lead_candidate'
     'product_id',
     'serie',
     'supertitle',
@@ -138,7 +139,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         return doc
 
     @property
-    def query(self):
+    def query_string(self):
         request = pyramid.threadlocal.get_current_request()
         param = u' '.join(request.GET.getall('q'))
         if param and self.raw_query:
