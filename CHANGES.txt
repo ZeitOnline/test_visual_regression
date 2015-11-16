@@ -4,6 +4,9 @@ Change log for zeit.web
 2.26 (unreleased)
 -----------------
 
+- FIX: Skip nonexistent content (instead of trying to make it "work" somehow
+  with FakeEntry)
+
 - ZON-2396: Support specialized quiz module on CPs and articles
 
 - ZON-2400: Send static parameter for cardstack body on CPs
