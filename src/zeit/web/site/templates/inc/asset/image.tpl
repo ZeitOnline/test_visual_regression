@@ -19,10 +19,6 @@
         <figcaption class="figure__caption {{ media_caption_additional_class }}">
             {% block media_caption_content %}
                 {% for name, url, nofollow in image.copyright %}
-
-                {# copyright URLs for images destroy the printkiosk teaser. That's why we suppress them. #}
-                {% if module_layout == 'teaser-printkiosk' %}{% set url = None %}{% endif %}
-
                 <span class="figure__copyright" itemprop="copyrightHolder">
                     {% if url %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}" target="_blank">{% endif %}
                     {% if name | trim | length > 1 %}<span itemprop="name">{{ name }}</span>{% endif %}
