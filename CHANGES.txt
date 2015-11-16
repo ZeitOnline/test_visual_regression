@@ -4,6 +4,8 @@ Change log for zeit.web
 2.26 (unreleased)
 -----------------
 
+- MAINT: Add a function in utils that helps to debug requests via curl
+
 - FIX: Skip nonexistent content (instead of trying to make it "work" somehow
   with FakeEntry)
 

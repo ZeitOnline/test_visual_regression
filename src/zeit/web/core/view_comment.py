@@ -199,7 +199,6 @@ class PostComment(zeit.web.core.view.Base):
                 params=data,
                 cookies=dict(request.cookies),
                 allow_redirects=False)
-
         if response.status_code >= 200 and response.status_code <= 303:
             self.status.append('Action {} was performed for {}'
                                ' (with pid {})'.format(method, unique_id, pid))

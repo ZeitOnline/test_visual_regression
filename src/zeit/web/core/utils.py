@@ -344,3 +344,18 @@ class LazyProxy(object):
         if self.__proxy__.get('type') != 'link':
             return False
         raise AttributeError('blog')
+
+
+def dump_request(response):
+    """Debug helper. Pass a `requests` response and receive an executable curl
+    command line.
+    """
+    request = response.request
+    command = "curl -X {method} -H {headers} -d '{data}' '{uri}'"
+    method = request.method
+    uri = request.url
+    data = request.body
+    headers = ["'{0}: {1}'".format(k, v) for k, v in request.headers.items()]
+    headers = " -H ".join(headers)
+    return command.format(
+        method=method, headers=headers, data=data, uri=uri)
