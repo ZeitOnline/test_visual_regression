@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.27 (unreleased)
+2.27 (2015-11-16)
 -----------------
 
 - MAINT: Add a function in utils that helps to debug requests via curl
