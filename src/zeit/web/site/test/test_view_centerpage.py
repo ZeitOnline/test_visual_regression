@@ -12,6 +12,7 @@ import pyramid.httpexceptions
 import pyramid.testing
 import pytest
 import requests
+import zope.component
 
 import zeit.content.cp.centerpage
 
@@ -1576,7 +1577,7 @@ def test_studiumbox_interessentest_works(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
-    links = box.find_elements_by_tag_name('h2')
+    box.find_elements_by_tag_name('h2')
 
     # test interessentest
     button = (box.find_element_by_class_name('studiumbox__content--clone')
@@ -1601,8 +1602,8 @@ def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
     form = (box.find_element_by_class_name(
             'studiumbox__content--clone')
             .find_element_by_tag_name('form'))
-    inputElement = (form.find_element_by_class_name('studiumbox__input'))
-    inputElement.send_keys('test')
+    input_element = (form.find_element_by_class_name('studiumbox__input'))
+    input_element.send_keys('test')
     form.submit()
     assert ('http://studiengaenge.zeit.de/studienangebote'
             '?suche=test&wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium'
@@ -1877,3 +1878,62 @@ def test_centerpage_page_should_require_ranking(application, dummy_request):
     view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
     with pytest.raises(pyramid.httpexceptions.HTTPNotFound):
         list(view.regions)
+
+
+def test_ranking_area_should_determine_uids_above(application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
+    context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
+    area = zeit.web.core.centerpage.get_area(context)
+    assert area.uids_above == ['http://xml.zeit.de/zeit-magazin/leben/2015-02/'
+                               'magdalena-ruecken-fs',
+                               'http://xml.zeit.de/zeit-magazin/mode-design/'
+                               '2014-05/karl-lagerfeld-interview']
+
+
+def test_ranking_should_detect_empty_precedence(application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
+    context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
+    area = zeit.web.core.centerpage.get_area(context)
+    assert area.uids_above == []
+
+
+def test_ranking_ara_should_offset_resultset_on_materialized_cp(
+        application, dummy_request):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(35)]
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
+    context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
+    area = zeit.web.core.centerpage.get_area(context)
+    dummy_request.GET['p'] = 2
+    assert len(area.values()) == 10
+    assert area.total_pages == 5
+    assert area.filter_query == (
+        'NOT (uniqueId:(http://xml.zeit.de/zeit-magazin/leben/2015-02/'
+        'magdalena-ruecken-fs) OR uniqueId:(http://xml.zeit.de/zeit-magazin/'
+        'mode-design/2014-05/karl-lagerfeld-interview))')
+
+
+def test_ranking_ara_should_not_offset_resultset_on_materialized_cp(
+        application, dummy_request):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(35)]
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
+    context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
+    area = zeit.web.core.centerpage.get_area(context)
+    assert len(area.values()) == 10
+    assert area.total_pages == 4
+    assert area.filter_query == '*:*'
+
+
+@pytest.mark.parametrize('params, page', (
+    [{'p': '2'}, 2],
+    [{'p': '-3'}, 3],
+    [{'p': 'moep'}, 1],
+    [{}, 1]))
+def test_ranking_area_should_handle_various_page_values(
+        params, page, application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
+    context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
+    area = zeit.web.core.centerpage.get_area(context)
+    dummy_request.GET = params
+    assert area.page == page
