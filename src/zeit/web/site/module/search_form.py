@@ -64,7 +64,7 @@ class Form(zeit.web.site.module.Module):
 
     @zeit.web.reify
     def types(self):
-        types = set(self.request.GET.getall('type'))
+        types = set(t for t in self.request.GET.getall('type') if t)
         if len(types):
             return list(types.intersection(TYPES.keys()))
         else:
@@ -90,7 +90,7 @@ class Form(zeit.web.site.module.Module):
         if self.query in (None, lq.any_value()):
             return 'aktuell'
         order = self.request.GET.get('sort')
-        return order in ORDERS and order or 'aktuell'
+        return order in ORDERS and order or 'relevanz'
 
     @zeit.web.reify
     def raw_order(self):

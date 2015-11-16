@@ -33,7 +33,7 @@ def search_area(application, dummy_request):
 
 def test_search_form_should_allow_empty_query(
         dummy_request, search_form):
-    dummy_request.GET['q'] = None
+    dummy_request.GET['q'] = ''
     assert search_form.query is None
 
 
@@ -51,13 +51,14 @@ def test_search_form_should_allow_empty_type_setting(
 
 def test_search_form_should_filter_type_settings(
         dummy_request, search_form):
-    dummy_request.GET['type'] = 'article pfannkuchen'
+    dummy_request.GET.add('type', 'article')
+    dummy_request.GET.add('type', 'pfannkuchen')
     assert search_form.types == ['article']
 
 
 def test_search_form_should_allow_empty_mode_setting(
         dummy_request, search_form):
-    dummy_request.GET['mode'] = None
+    dummy_request.GET['mode'] = ''
     assert search_form.mode is None
 
 
@@ -75,23 +76,23 @@ def test_search_form_should_allow_valid_mode_setting(
 
 def test_search_form_should_default_to_recency_sort_order(
         dummy_request, search_form):
-    dummy_request.GET['q'] = None
-    dummy_request.GET['sort'] = None
+    dummy_request.GET['q'] = ''
+    dummy_request.GET['sort'] = ''
     assert search_form.sort_order == 'aktuell'
 
 
 def test_search_form_should_sort_valid_queries_by_relevancy(
         dummy_request, search_form):
     dummy_request.GET['q'] = 'pfannkuchen'
-    dummy_request.GET['sort'] = None
-    assert search_form.sort_order == 'aktuell'
+    dummy_request.GET['sort'] = ''
+    assert search_form.sort_order == 'relevanz'
 
 
 def test_search_form_should_ignore_invalid_sort_orders(
         dummy_request, search_form):
     dummy_request.GET['q'] = 'pfannkuchen'
     dummy_request.GET['sort'] = 'pfannkuchen'
-    assert search_form.sort_order == 'aktuell'
+    assert search_form.sort_order == 'relevanz'
 
 
 def test_search_form_should_allow_valid_search_order_aktuell(
@@ -108,24 +109,6 @@ def test_search_form_should_allow_valid_search_order_relevanz(
     assert search_form.sort_order == 'relevanz'
 
 
-def test_search_form_should_ignore_negative_page_numbers(
-        dummy_request, search_form):
-    dummy_request.GET['page'] = '-73'
-    assert search_form.page == 73
-
-
-def test_search_form_should_allow_allow_valid_page_numbers(
-        dummy_request, search_form):
-    dummy_request.GET['page'] = '42'
-    assert search_form.page == 42
-
-
-def test_search_form_should_ignore_invalid_page_numbers(
-        dummy_request, search_form):
-    dummy_request.GET['page'] = 'pfannkuchen'
-    assert search_form.page == 1
-
-
 def test_search_form_should_create_valid_empty_query_string(
         dummy_request, search_form):
     assert search_form.raw_query == (
@@ -137,7 +120,7 @@ def test_search_form_should_create_valid_empty_query_string(
 
 def test_search_form_should_create_valid_fulltext_query_string(
         dummy_request, search_form):
-    search_form['q'] = 'pfannkuchen AND ahornsirup'
+    dummy_request.GET['q'] = 'pfannkuchen AND ahornsirup'
     assert search_form.raw_query == (
         '{!boost b=recip(ms(NOW,last-semantic-change),3.16e-11,1,1)}'
         '{!type=IntrafindQueryParser}(pfannkuchen AND ahornsirup) '
