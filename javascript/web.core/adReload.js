@@ -16,13 +16,7 @@ define( [ 'jquery' ], function( $ ) {
     log = function() {
         if ( location.search.indexOf( 'debug-adreload' ) !== -1 ) {
             var args = Array.prototype.slice.call( arguments );
-            // just one argument which is a string
-            if ( args.length === 1 && typeof args[0] === 'string' ) {
-                console.log( args.toString() );
-            } else {
-                // all other cases
-                console.log( args );
-            }
+            console.log( args );
         }
     },
     /**
