@@ -52,7 +52,33 @@
 		+respond-min($break-tablet-min)
 			color: $white
 			font-size: em(14px)
-
+		&--zmo
+			@extend %teaser-kicker--zmo
+			font-size: remify(17px)
+			+respond-min($break-tablet-min)
+				letter-spacing: 0.1em
+				font-size: remify(16px)
+				line-height: 1.25
+		&--zett
+			@extend %teaser-kicker--zett
+			+respond-min($break-tablet-min)
+				font-size: remify(13px)
+				color: $zon_lighter_grey
+				letter-spacing: 0.08em
+				line-height: 1.5
+	&__kicker-logo
+		&--zmo
+			@extend %teaser-kicker-logo--zmo
+			+respond-min($break-tablet-min)
+				background: none
+				border-radius: 0
+				border-right: 1px solid rgba($white, 0.5)
+				height: remify(22px)
+				margin-right: remify(7px)
+				padding-right: remify(4px)
+				width: remify(42px) // padding-right is added
+		&--zett
+			@extend %teaser-kicker-logo--zett
 	&__title
 		@extend %teaser-title
 		font-size: em(24px)

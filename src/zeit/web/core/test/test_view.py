@@ -24,7 +24,8 @@ def mock_ad_view(application):
         def __init__(
                 self, type, ressort,
                 sub_ressort, is_hp=False, banner_id=None, serienname='',
-                product_id=None, path_info=None, adv_title=''):
+                product_id=None, product_text=None,
+                path_info=None, adv_title=''):
             self.type = type
             self.ressort = ressort
             self.sub_ressort = sub_ressort
@@ -34,6 +35,7 @@ def mock_ad_view(application):
             context = mock.Mock()
             context.banner_id = banner_id
             context.advertisement_title = adv_title
+            context.product_text = product_text
             request = pyramid.testing.DummyRequest()
             request.path_info = path_info
             self.request = request
@@ -354,6 +356,18 @@ def test_adcontroller_values_are_correctly_returned(mock_ad_view):
     zw_test = mock_ad_view(
         'centerpage', 'studium', 'uni-leben').adcontroller_values
     assert zw_code == zw_test
+
+
+def test_banner_advertorial_extrarulez(mock_ad_view):
+    adv_test = mock_ad_view(
+        'centerpage', 'angebote',
+        '', banner_id='angebote/ingdiba',
+        adv_title='ingdiba', product_text='Advertorial').adcontroller_values
+    adv_code = [('$handle', 'adv_index'), ('level2', u'angebote'),
+                ('level3', u'ingdiba'), ('level4', ''),
+                ('$autoSizeFrames', True), ('keywords', 'angebote,ingdiba'),
+                ('tma', '')]
+    assert adv_test == adv_code
 
 
 def test_centerpage_should_have_manual_seo_pagetitle(application):
