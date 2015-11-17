@@ -8,13 +8,6 @@
 	margin: 0 auto
 	padding: $little 0
 
-.ad
-	&__label
-		@extend %label
-		.ad-desktop--3 &,
-		.ad-desktop--12 &
-			text-align: right
-
 // mobile ads
 .ad-mobile
 	background-color: $color-advertising-bg
@@ -40,6 +33,11 @@
 		display: block // generally visible on desktop
 		&:empty
 			display: none
+	// shows Anzeige-Label before every Ad
+	&[data-banner-label]
+		*:first-child:before
+			@extend %label
+			content: "Anzeige"
 	&--3,
 	&--12
 		@extend %monsterbanner
@@ -76,8 +74,6 @@
 				margin-right: auto
 				max-width: remify(980px)
 				padding-right: remify(20px)
-		.ad__label
-			display: none
 	&--13-on-centerpage
 		margin-bottom: remify(20px)
 	// fuck you iqd: centering of content of unknowable width
@@ -87,9 +83,6 @@
 		margin: remify(48px 0)
 		vertical-align: middle
 		width: 100%
-		// hide original label cause we cannot position it
-		.ad__label
-			display: none
 		// uses code by iqd, may break tomorrow
 		div[id*="__container__"]
 			display: table-cell
