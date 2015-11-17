@@ -58,21 +58,15 @@ TYPES = collections.OrderedDict([
 @zeit.web.register_module('search-form')
 class Form(zeit.web.site.module.Module):
 
-    def __setitem__(self, key, value):
-        self.context.xml.set(key, value or '')
-
-    def __getitem__(self, key):
-        return self.context.xml.get(key, '') or None
-
     @zeit.web.reify
     def query(self):
-        return self['q']
+        return u' '.join(self.request.GET.getall('q')) or None
 
     @zeit.web.reify
     def types(self):
-        these = set((self['type'] or '').split())
-        if len(these):
-            return list(these.intersection(TYPES.keys()))
+        types = set(t for t in self.request.GET.getall('type') if t)
+        if len(types):
+            return list(types.intersection(TYPES.keys()))
         else:
             return TYPES.keys()
 
@@ -83,15 +77,8 @@ class Form(zeit.web.site.module.Module):
 
     @zeit.web.reify
     def mode(self):
-        this = self['mode']
-        return this in MODES and this or None
-
-    @zeit.web.reify
-    def page(self):
-        try:
-            return abs(int(self['page']))
-        except (TypeError, ValueError):
-            return 1
+        mode = self.request.GET.get('mode')
+        return mode in MODES and mode or None
 
     @property
     def mode_choice(self):
@@ -102,8 +89,8 @@ class Form(zeit.web.site.module.Module):
     def sort_order(self):
         if self.query in (None, lq.any_value()):
             return 'aktuell'
-        this = self['sort']
-        return this in ORDERS and this or 'aktuell'
+        order = self.request.GET.get('sort')
+        return order in ORDERS and order or 'relevanz'
 
     @zeit.web.reify
     def raw_order(self):

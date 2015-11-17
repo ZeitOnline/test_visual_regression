@@ -30,7 +30,9 @@ def test_overview_area_should_have_a_sanity_bound_count(application):
     assert area.count == zeit.web.site.area.overview.SANITY_BOUND
 
 
-def test_overview_area_should_overflow_if_necessary(application, monkeypatch):
+def test_overview_area_should_overflow_if_necessary(
+        application, dummy_request, monkeypatch):
+
     def qs(self, *args):
         self.hits = 3
 
@@ -45,7 +47,9 @@ def test_overview_area_should_overflow_if_necessary(application, monkeypatch):
     assert len(area.context.values()) == 3
 
 
-def test_overview_area_should_respect_sanity_bound(application, monkeypatch):
+def test_overview_area_should_respect_sanity_bound(
+        application, dummy_request, monkeypatch):
+
     def qs(self, *args):
         self.hits = 10
 
