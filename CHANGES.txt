@@ -4,6 +4,8 @@ Change log for zeit.web
 2.28 (unreleased)
 -----------------
 
+- ZON-2331: AdReloading wrapper script
+
 - FIX: disable article-lineage tests for Jenkins
 
 
@@ -20,8 +22,6 @@ Change log for zeit.web
 
 2.26 (2015-11-16)
 -----------------
-
-- ZON-2331: AdReloading wrapper script
 
 - ZON-2396: Support specialized quiz module on CPs and articles
 
