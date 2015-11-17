@@ -68,25 +68,20 @@ def test_already_expired_image_should_have_caching_time_zero(
 
 @pytest.mark.skipif(not HAVE_PYLIBMC, reason='pylibmc not installed')
 def test_should_bypass_cache_on_memcache_server_error(application, request):
-    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings_copy = copy.copy(settings)
-    settings_copy['cache.type'] = 'ext:memcached'
-    settings_copy['cache.url'] = 'localhost:99998'
-    pyramid_beaker.set_cache_regions_from_settings(settings_copy)
-    request.addfinalizer(
-        lambda: pyramid_beaker.set_cache_regions_from_settings(settings))
+    with mock.patch.dict(
+            beaker.cache.cache_regions['long_term'],
+            {'type': 'ext:memcached', 'url': 'localhost:9998'}):
 
-    with mock.patch('zeit.web.core.comments.request_thread') as request:
-        request.return_value = ''
-        try:
-            zeit.web.core.comments.get_cacheable_thread(
-                'http://xml.zeit.de/artikel/01')
-            zeit.web.core.comments.get_cacheable_thread(
-                'http://xml.zeit.de/artikel/01')
-        except beaker.exceptions.InvalidCacheBackendError:
-            print "No valid beaker backend could be found."
+        @beaker.cache.cache_region('long_term', 'test_memcache')
+        def use_cache(arg):
+            calls.append(arg)
+            return None
 
-        assert request.call_count == 2
+        calls = []
+
+        use_cache(1)
+        use_cache(1)
+        assert len(calls) == 2
 
 
 def test_reify_should_retain_basic_reify_functionality(application):
@@ -152,29 +147,25 @@ def test_reify_should_work_with_memcache(application, monkeypatch, request):
         beaker.ext.memcached.PyLibMCNamespaceManager, '__contains__',
         zeit.web.core.cache.original_contains)
 
-    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings_copy = copy.copy(settings)
-    settings_copy['cache.type'] = 'ext:memcached'
-    settings_copy['cache.url'] = 'localhost:99998'
-    pyramid_beaker.set_cache_regions_from_settings(settings_copy)
-    request.addfinalizer(
-        lambda: pyramid_beaker.set_cache_regions_from_settings(settings))
+    with mock.patch.dict(
+            beaker.cache.cache_regions['long_term'],
+            {'type': 'ext:memcached', 'url': 'localhost:9998'}):
 
-    class Context(object):
-        uniqueId = 'http://xml.zeit.de'  # NOQA
+        class Context(object):
+            uniqueId = 'http://xml.zeit.de'  # NOQA
 
-    class Foo(object):
-        context = Context
+        class Foo(object):
+            context = Context
 
-        @zeit.web.reify('long_term')
-        def prop(self):
-            return 71
+            @zeit.web.reify('long_term')
+            def prop(self):
+                return 71
 
-    foo = Foo()
-    # We hope that we've hit any interesting integration issues if we make it
-    # to the "actually connect to memcache" point.
-    with pytest.raises(pylibmc.ConnectionError):
-        assert foo.prop == 71
+        foo = Foo()
+        # We hope that we've hit any interesting integration issues if we make
+        # it to the "actually connect to memcache" point.
+        with pytest.raises(pylibmc.ConnectionError):
+            assert foo.prop == 71
 
 
 def test_reify_should_skip_second_layer_if_beaker_is_unavailable(application):
