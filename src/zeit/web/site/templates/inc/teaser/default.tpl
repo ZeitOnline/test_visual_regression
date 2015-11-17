@@ -37,8 +37,8 @@
                         area.kind if area.kind == 'spektrum',
                         'zmo' if is_zmo_teaser and not is_zmo_parquet,
                         'zmo-parquet' if is_zmo_parquet,
-                        'zett' if is_zett_content,
-                        'zett-parquet' if is_zett_content and not is_zett_parquett
+                        'zett' if is_zett_content and not is_zett_parquet,
+                        'zett-parquet' if is_zett_parquet
                         )}}">
                         {% block kicker_logo scoped -%}
                         {%- if is_zmo_teaser and not is_zmo_parquet %}
