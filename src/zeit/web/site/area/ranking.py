@@ -93,7 +93,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     @property
     def hide_dupes(self):
-        """We packs its own deduping for solr queries, so we pretend hide_dupes
+        """We pack our own deduping for solr queries, so we pretend hide_dupes
         to be False in that case, so that _extract_newest() doesn't try to
         dedupe results a second time.
 
