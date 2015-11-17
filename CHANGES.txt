@@ -4,7 +4,7 @@ Change log for zeit.web
 2.29 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2404: Show comment replies in ZMO
 
 
 2.28 (2015-11-17)
