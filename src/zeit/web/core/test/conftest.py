@@ -18,6 +18,7 @@ import pytest
 import repoze.bitblt.processor
 import selenium.webdriver
 import transaction
+import webob.multidict
 import webtest
 import zope.browserpage.metaconfigure
 import zope.event
@@ -349,6 +350,7 @@ def config(application, request):
 @pytest.fixture
 def dummy_request(request, config):
     req = pyramid.testing.DummyRequest(is_xhr=False)
+    req.GET = webob.multidict.MultiDict(req.GET)
     req.response.headers = set()
     req.registry.settings = config.registry.settings
     req.matched_route = None
@@ -695,13 +697,22 @@ class MockSolr(object):
                 results.insert(0, self.results.pop())
             except IndexError:
                 break
-        return pysolr.Results(results, len(results))
+        return pysolr.Results(results, self._hits)
 
     def update_raw(self, xml, **kw):
         pass
 
     def delete(self, **kw):
         pass
+
+    @property
+    def results(self):
+        return self._results
+
+    @results.setter
+    def results(self, value):
+        self._hits = len(value)
+        self._results = value
 
 
 @pytest.fixture

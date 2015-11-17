@@ -7,11 +7,10 @@ import zc.iso8601.parse
 import zope.component
 import zope.schema
 
+from zeit.solr import query as lq
 import zeit.cms.content.property
 import zeit.content.cp.automatic
 import zeit.content.cp.interfaces
-import zeit.find.daterange
-import zeit.find.search
 import zeit.solr.interfaces
 
 import zeit.web
@@ -70,9 +69,6 @@ class IRanking(zeit.content.cp.interfaces.IArea):
     hits = zope.schema.Int(
         title=u'Search result count', default=None, required=False)
 
-    page = zope.schema.Int(
-        title=u'Search result page', default=None, required=False)
-
 
 @zeit.web.register_area('ranking')
 class Ranking(zeit.content.cp.automatic.AutomaticArea):
@@ -86,24 +82,42 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     raw_query = zeit.cms.content.property.ObjectPathProperty(
         '.raw_query', IRanking['raw_query'])
 
-    _page = zeit.cms.content.property.ObjectPathProperty(
-        '.page', IRanking['page'])
+    _hits = zeit.cms.content.property.ObjectPathAttributeProperty(
+        '.', 'hits', IRanking['hits'])
 
-    _hits = zeit.cms.content.property.ObjectPathProperty(
-        '.hits', IRanking['hits'])
+    _hide_dupes = zeit.content.cp.area.Area.hide_dupes
+
+    def __init__(self, context):
+        super(Ranking, self).__init__(context)
+        self.request = pyramid.threadlocal.get_current_request()
+
+    @property
+    def hide_dupes(self):
+        """We pack our own deduping for solr queries, so we pretend hide_dupes
+        to be False in that case, so that _extract_newest() doesn't try to
+        dedupe results a second time.
+
+        XXX If the solr deduping works out, move to zeit.content.cp?
+        """
+        if self.automatic_type == 'query':
+            return False
+        return self._hide_dupes
 
     def _query_solr(self, query, sort_order):
+        if self._v_retrieved_content > 0:
+            return []
+
         result = []
         conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        start = self._v_retrieved_content + self.count * (self.page - 1)
         try:
             with zeit.web.core.metrics.timer('solr.reponse_time'):
                 solr_result = conn.search(
                     query,
                     sort=sort_order,
-                    rows=self.count_to_replace_duplicates,
-                    start=start,
-                    fl=FIELDS)
+                    rows=self.count,
+                    start=self.start,
+                    fl=FIELDS,
+                    fq=self.filter_query)
         except (pysolr.SolrError, ValueError) as e:
             log.warning(u'{} for query {}'.format(e, query))
         else:
@@ -114,6 +128,21 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                 if content is not None:
                     result.append(content)
         return result
+
+    @zeit.web.reify('default-term')
+    def uids_above(self):
+        if not self._hide_dupes:
+            return zeit.web.dont_cache([])
+        cp = zeit.content.cp.interfaces.ICenterPage(self)
+        return [i.uniqueId for i in cp._teasered_content_above(self)
+                if hasattr(i, 'uniqueId')]
+
+    @zeit.web.reify
+    def filter_query(self):
+        if len(self.uids_above) == 0:
+            return lq.any_value()
+        return lq.not_(lq.or_(
+            *[lq.field_raw('uniqueId', i) for i in self.uids_above]))
 
     @staticmethod
     def document_hook(doc):
@@ -131,17 +160,18 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
         serie = doc.get('serie', None)
         source = zeit.cms.content.interfaces.ICommonMetadata['serie'].source
-        doc['serie'] = source.factory.values.get(serie, serie)
+        doc['serie'] = source.factory.values.get(serie, None)
 
         # XXX The asset badges are not indexed in solr, so we lie about them
         doc['gallery'] = doc['video'] = doc['video_2'] = None
 
+        doc.setdefault('lead_candidate', False)
+
         return doc
 
-    @property
+    @zeit.web.reify
     def query_string(self):
-        request = pyramid.threadlocal.get_current_request()
-        param = u' '.join(request.GET.getall('q'))
+        param = u' '.join(self.request.GET.getall('q'))
         if param and self.raw_query:
             return param
 
@@ -156,29 +186,38 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         if self._hits is None:
             self._hits = value
 
-    @property
-    def page(self):
-        if self._page is None:
-            return 1
-        return self._page
-
-    @page.setter
-    def page(self, value):
-        self._page = value
+    @zeit.web.reify
+    def start(self):
+        return self.count * max(self.page - 1 - (len(self.uids_above) > 0), 0)
 
     @zeit.web.reify
-    def total_pages(self):
-        if self.hits + self.count > 0:
-            return int(math.ceil(float(self.hits) / float(self.count)))
-        else:
+    def count(self):
+        if self.page == 1 and len(self.uids_above) > 0:
             return 0
+        return self._count
+
+    @zeit.web.reify
+    def page(self):
+        try:
+            return abs(int(self.request.GET['p']))
+        except (KeyError, TypeError, ValueError):
+            return 1
 
     @zeit.web.reify
     def current_page(self):
-        return self.page
+        return self.page  # Compat to article pagination
+
+    @zeit.web.reify
+    def total_pages(self):
+        if self.hits > 0 < self._count:
+            return int(math.ceil(float(self.hits) / float(self._count)) +
+                       (len(self.uids_above) > 0))
+        return 0
 
     @zeit.web.reify
     def pagination(self):
+        if self.page > self.total_pages:
+            raise pyramid.httpexceptions.HTTPNotFound()
         pagination = zeit.web.core.template.calculate_pagination(
             self.current_page, self.total_pages)
         return pagination if pagination is not None else []

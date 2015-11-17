@@ -1,3 +1,4 @@
+import pyramid.threadlocal
 import zope.interface
 
 import zeit.content.cp.interfaces
@@ -41,3 +42,9 @@ class Module(object):
     def layout(self, value):
         self._layout = zeit.content.cp.layout.BlockLayout(
             value, value, areas=[], image_pattern=value)
+
+    @property
+    def request(self):
+        # XXX Yes, yes, it's bad practice. But milking the request object
+        #     during traversal is ever so slightly more horrible. (ND)
+        return pyramid.threadlocal.get_current_request()

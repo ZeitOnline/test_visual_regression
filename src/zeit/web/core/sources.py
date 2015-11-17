@@ -4,6 +4,7 @@ import os.path
 import pkg_resources
 import random
 import re
+import urllib
 import urlparse
 import xml.sax.saxutils
 
@@ -169,13 +170,13 @@ class Solr(object):
         repo = pkg_resources.resource_filename(parts.netloc, parts.path[1:])
         results = []
         for root, subdirs, files in os.walk(repo):
-            if not random.randint(0, 4):
+            if not random.getrandbits(1):
                 continue  # Skip some folders to speed things up.
             for filename in files:
                 try:
-                    assert not filename.endswith('meta')
+                    name = filename.replace('.meta', '')
                     unique_id = os.path.join(
-                        root.replace(repo, 'http://xml.zeit.de'), filename)
+                        root.replace(repo, 'http://xml.zeit.de'), name)
                     content = zeit.cms.interfaces.ICMSContent(unique_id)
                     assert zeit.web.core.view.known_content(content)
                     results.append({
@@ -191,6 +192,9 @@ class Solr(object):
                     })
                 except (AttributeError, AssertionError, TypeError):
                     continue
+
+        log.debug('Mocking solr request ' + urllib.urlencode(
+            kw.items() + [('q', q), ('rows', rows)], True))
         return pysolr.Results(
             random.sample(results, min(rows, len(results))), len(results))
 
