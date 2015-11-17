@@ -21,6 +21,8 @@ Change log for zeit.web
 2.26 (2015-11-16)
 -----------------
 
+- ZON-2331: AdReloading wrapper script
+
 - ZON-2396: Support specialized quiz module on CPs and articles
 
 - ZON-2400: Send static parameter for cardstack body on CPs
