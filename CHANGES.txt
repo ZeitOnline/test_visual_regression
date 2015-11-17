@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2331: AdReloading wrapper script
 
+- ZON-2159: Fill up first-page of paginated, ranking CPs with deduped content
+
 - FIX: Disable article-lineage tests for Jenkins
 
 

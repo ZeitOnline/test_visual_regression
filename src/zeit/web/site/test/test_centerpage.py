@@ -157,13 +157,13 @@ def test_centerpage_should_gracefully_skip_all_broken_references(
     assert not browser.cssselect('.main__snapshot *')
 
 
-def test_dynamic_centerpage_collection_should_output_teasers(application):
+def test_dynamic_centerpage_collection_should_output_teasers(
+        application, dummy_request):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/0%s' % i}
                     for i in range(1, 9)]
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
-    view = zeit.web.site.view_centerpage.Centerpage(
-        cp, pyramid.testing.DummyRequest())
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
     counter = 0
     for region in view.regions:
             for area in region.values():

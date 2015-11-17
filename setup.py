@@ -50,7 +50,7 @@ setup(
         'wsgiproxy',
         'zc.iso8601',
         'zeit.brightcove',
-        'zeit.cms',
+        'zeit.cms>=2.62.0.dev0',
         'zeit.connector',
         'zeit.content.advertisement',
         'zeit.content.article>=3.11.0.dev0',
