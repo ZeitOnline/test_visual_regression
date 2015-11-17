@@ -1,6 +1,6 @@
 /**
- * @fileOverview Module an API for track events and clicks via webtrekk
- * @author moritz.stoltenburg@zeit.de
+ * @fileOverview Module and API for track events and clicks via webtrekk
+ * @author moritz.stoltenburg@zeit.de, thomas.puppe@zeit.de
  * @version  0.1
  */
 define( [ 'jquery' ], function( $ ) {
