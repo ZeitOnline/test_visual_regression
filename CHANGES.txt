@@ -6,11 +6,13 @@ Change log for zeit.web
 
 - FIX: Fix overlapping gallery images on mobile view
 
+- ZON-2214: Decrease timeouts for reach.zeit.de
+
 - ZON-2388: Tweak Navi to make Spiele reappear
 
 - ZON-2331: AdReloading wrapper script
 
-- FIX: disable article-lineage tests for Jenkins
+- FIX: Disable article-lineage tests for Jenkins
 
 
 2.27 (2015-11-16)

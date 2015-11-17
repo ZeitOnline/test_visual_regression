@@ -32,7 +32,7 @@ class Reach(object):
         url = u'{}/{}'.format(self.host, location.encode('utf-8'))
         try:
             with zeit.web.core.metrics.timer('http.reponse_time'):
-                return self.session.get(url, params=kw, timeout=3.0).json()
+                return self.session.get(url, params=kw, timeout=0.2).json()
         except (requests.exceptions.RequestException, ValueError), err:
             log.debug('Reach connection failed: {}'.format(err))
 
