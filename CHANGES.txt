@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2388: Tweak Navi to make Spiele reappear
 
+- ZON-2331: AdReloading wrapper script
+
 - FIX: disable article-lineage tests for Jenkins
 
 
