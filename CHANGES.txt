@@ -4,6 +4,8 @@ Change log for zeit.web
 2.28 (unreleased)
 -----------------
 
+- FIX: Add missing teaser style to ZMO parquet teaser
+
 - FIX: Fix overlapping gallery images on mobile view
 
 - ZON-2214: Decrease timeouts for reach.zeit.de
