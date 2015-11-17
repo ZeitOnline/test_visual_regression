@@ -85,8 +85,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     _hits = zeit.cms.content.property.ObjectPathAttributeProperty(
         '.', 'hits', IRanking['hits'])
 
-    _hide_dupes = zeit.cms.content.property.ObjectPathAttributeProperty(
-        '.', 'hide-dupes', IRanking['hide_dupes'])
+    _hide_dupes = zeit.content.cp.area.Area.hide_dupes
 
     def __init__(self, context):
         super(Ranking, self).__init__(context)
