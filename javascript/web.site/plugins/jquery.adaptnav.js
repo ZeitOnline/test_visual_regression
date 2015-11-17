@@ -92,7 +92,7 @@
                 //get size available in navi
                 var featureWidth = el.$feature.outerWidth( true ),
                     moreWidth = el.$moreList.outerWidth( true ),
-                    tolerance = el.$nav.outerWidth() * 0.05;
+                    tolerance = el.$nav.outerWidth() * 0.01;
                 return ( el.$nav.width() - featureWidth - moreWidth - tolerance );
             }
         };
