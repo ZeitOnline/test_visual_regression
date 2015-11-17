@@ -124,7 +124,7 @@
 {# Quiz macro is used inside of articles. (On CPs, the module template is used.) #}
 {% macro quiz(module) -%}
     <div class="article__item article__item--wide article__item--rimless x-spacing">
-        <iframe frameborder="0" scrolling="no" width="100%" height="400" src="{{ module.url }}?embedded{{ module.adreload }}"></iframe>
+        <iframe frameborder="0" scrolling="no" width="100%" height="480" src="{{ module.url }}?embedded{{ module.adreload }}"></iframe>
     </div>
 {% endmacro -%}
 
