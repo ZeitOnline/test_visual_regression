@@ -3,7 +3,7 @@
     {% set source = (request.image_host + image.path) if image is variant else image | default_image_url %}
     {% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source %}
 
-    <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image" itemscope itemtype="http://schema.org/Photograph">
+    <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image" itemscope itemtype="http://schema.org/ImageObject">
         <!--[if gt IE 8]><!-->
         <noscript data-src="{{ fallback_source }}">
         <!--<![endif]-->

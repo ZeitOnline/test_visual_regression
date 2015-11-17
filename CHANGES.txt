@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-2214: Decrease timeouts for reach.zeit.de
 
+- ZON-2331: AdReloading wrapper script
+
+- FIX: disable article-lineage tests for Jenkins
+
 
 2.27 (2015-11-16)
 -----------------
