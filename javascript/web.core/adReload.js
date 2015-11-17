@@ -130,7 +130,7 @@ define( [ 'jquery' ], function( $ ) {
         var messageData, message;
         log( 'message: ', event );
 
-        if ( typeof( event.originalEvent.data ) === 'undefined' ) {
+        if ( typeof event.originalEvent.data  !== 'string' ) {
             return;
         }
 
