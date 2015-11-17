@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.28 (unreleased)
+2.28 (2015-11-17)
 -----------------
 
 - ZON-2214: Decrease timeouts for reach.zeit.de
