@@ -93,9 +93,15 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     @property
     def hide_dupes(self):
-        # Ranking area packs its own deduping for solr queries.
-        # XXX If it works out, maybe transfer to other areas as well.
-        return self.automatic_type != 'query' and self._hide_dupes
+        """We packs its own deduping for solr queries, so we pretend hide_dupes
+        to be False in that case, so that _extract_newest() doesn't try to
+        dedupe results a second time.
+
+        XXX If the solr deduping works out, move to zeit.content.cp?
+        """
+        if self.automatic_type == 'query':
+            return False
+        return self._hide_dupes
 
     def _query_solr(self, query, sort_order):
         if self._v_retrieved_content > 0:
