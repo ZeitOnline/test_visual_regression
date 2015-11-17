@@ -4,10 +4,6 @@ Change log for zeit.web
 2.28 (unreleased)
 -----------------
 
-- FIX: Add missing teaser style to ZMO parquet teaser
-
-- FIX: Fix overlapping gallery images on mobile view
-
 - ZON-2214: Decrease timeouts for reach.zeit.de
 
 - ZON-2388: Tweak Navi to make Spiele reappear
@@ -17,6 +13,10 @@ Change log for zeit.web
 - ZON-2159: Fill up first-page of paginated, ranking CPs with deduped content
 
 - FIX: Disable article-lineage tests for Jenkins
+
+- FIX: Add missing teaser style to ZMO parquet teaser
+
+- FIX: Fix overlapping gallery images on mobile view
 
 
 2.27 (2015-11-16)
