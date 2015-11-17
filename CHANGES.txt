@@ -4,6 +4,8 @@ Change log for zeit.web
 2.28 (unreleased)
 -----------------
 
+- FIX: Fix overlapping gallery images on mobile view
+
 - ZON-2214: Decrease timeouts for reach.zeit.de
 
 - ZON-2388: Tweak Navi to make Spiele reappear
