@@ -2,11 +2,13 @@
 import urlparse
 import logging
 
+import pyramid.httpexceptions
 import pyramid.view
 
 import zeit.content.article.interfaces
 import zeit.content.video.interfaces
 import zeit.cms.content.interfaces
+import zeit.cms.interfaces
 
 import zeit.web.core.gallery
 import zeit.web.core.view
@@ -193,4 +195,14 @@ class CommentForm(zeit.web.core.view.Content):
     route_name='frame_builder',
     renderer='templates/frame_builder.html')
 class FrameBuilder(Base):
-    pass
+    def __init__(self, context, request):
+        super(FrameBuilder, self).__init__(context, request)
+        try:
+            self.context = zeit.cms.interfaces.ICMSContent(
+                'http://xml.zeit.de/index')
+        except TypeError:
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+    @zeit.web.reify
+    def banner_channel(self):
+        return self.request.GET.get('banner_channel', 'homepage/centerpage')
