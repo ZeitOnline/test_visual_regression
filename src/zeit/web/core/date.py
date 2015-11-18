@@ -54,6 +54,8 @@ def release_date(resource):
 
 @zeit.web.register_filter
 def format_comment_date(comment_date, base_date=None):
+    if not isinstance(comment_date, datetime.datetime):
+        return ''
     interval = DeltaTime(comment_date, base_date)
     if interval.delta.days < 365:
         return interval.get_time_since_comment_posting()
@@ -63,7 +65,7 @@ def format_comment_date(comment_date, base_date=None):
 
 @zeit.web.register_filter
 def format_timedelta(date, absolute=False, format='short', **kwargs):
-    if date is None:
+    if not isinstance(date, datetime.datetime):
         return ''
     interval = DeltaTime(date)
     relative = interval.get_time_since_modification(**kwargs)
@@ -75,11 +77,12 @@ def format_timedelta(date, absolute=False, format='short', **kwargs):
 @zeit.web.register_global
 def get_delta_time_from_article(article, base_date=None):
     modification = mod_date(article)
-    if modification is not None:
-        delta = DeltaTime(modification, base_date)
-        delta = delta.get_time_since_modification()
-        if delta:
-            return delta.title()
+    if not isinstance(modification, datetime.datetime):
+        return None
+    delta = DeltaTime(modification, base_date)
+    delta = delta.get_time_since_modification()
+    if delta:
+        return delta.title()
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IDeltaTimeEntity)
