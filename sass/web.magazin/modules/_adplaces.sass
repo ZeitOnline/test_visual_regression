@@ -1,10 +1,3 @@
-.ad
-    &__label
-        @extend %ad-label
-        .ad-desktop--3 &,
-        .ad-desktop--12 &
-            text-align: right
-
 div[id*="__container__"]
     &:before
         @extend %ad-label
@@ -42,6 +35,11 @@ div[id*="__container__"]
         display: block // generally visible on desktop
         &:empty
             display: none
+    // shows Anzeige-Label before every Ad
+    &[data-banner-label]
+        *:first-child:before
+            @extend %ad-label
+            content: "Anzeige"
     &--3,
     &--12
         margin: 0 auto
@@ -56,10 +54,6 @@ div[id*="__container__"]
     &--7-on-article,
     &--8-on-article
         display: none
-        .ad__label
-            display: none
-            +respond-min($break-3)
-                display: block
         +respond_min($break-mobile-ad-width)
             border-top: 1px solid $charcoal
             border-bottom: 1px solid $charcoal
