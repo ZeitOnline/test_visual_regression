@@ -25,7 +25,7 @@
     <![endif]-->
     {% endblock css_lte9_navi_link %}
 
-    {# include "zeit.web.core:templates/inc/inline_js/library.html" ignore missing #}
+    {% include "zeit.web.core:templates/inc/inline_js/library.html" ignore missing %}
 
     {# Modernizr -#}
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
@@ -115,7 +115,6 @@
     </div>
     {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
-    {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
     {% block meetrics %}
         {% include "zeit.web.core:templates/inc/tracking/meetrics_relaunch.html" ignore missing %}
     {% endblock %}
@@ -123,31 +122,7 @@
         var require = { baseUrl: '{{ request.asset_host }}/js/' };
     </script>
 
-    <!-- popover -->
-    {% if view.is_hp %}
-        {%- include "zeit.web.site:templates/inc/overlay.html" ignore missing -%}
-    {% endif %}
-
-    {% block adblocker_count %}
-        {%- include "zeit.web.core:templates/inc/tracking/adblocker_count.html" ignore missing -%}
-    {% endblock %}
-
     <script src="{{ request.asset_host }}/js/site.js"></script>
 
-    {% if view.vgwort_url %}
-    <!--start: vgwort-->
-    <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" id="vgwort_pixel" class="visually-hidden">
-    <!--end: vgwort-->
-    {% endif %}
-    {% block cardstack_bottom %}
-        {% if view.has_cardstack %}
-            {% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/esi/scripts?shareUrl={}'.format(request.url) %}
-            {{ lama.insert_esi(esi_source, 'Cardstack konnte nicht eingebunden werden', view.is_dev_environment) }}
-        {% endif %}
-    {% endblock %}
-
-    {% if view.type == 'article' or view.type == 'video' or view.type == 'gallery' %}
-        <script id="veeseo-widget" type="text/javascript" src="http://rce.veeseo.com/widgets/zeit/widget.js"></script>
-    {% endif %}
 </body>
 </html>
