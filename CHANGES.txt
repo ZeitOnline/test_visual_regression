@@ -4,6 +4,8 @@ Change log for zeit.web
 2.29 (unreleased)
 -----------------
 
+- HOTFIX: Fix iOS' 9 Safari specific misbehaviour
+
 - ZON-2393: Replace adlabel span by css content to improve ad reloading
 
 
