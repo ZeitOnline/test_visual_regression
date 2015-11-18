@@ -10,6 +10,8 @@ Change log for zeit.web
   * displaying content with invalid timestamps
   * caching content with non-ascii uniqueIds
 
+- FIX: Return HTTP 400 Bad Request for URLs with invalid unicode
+
 
 2.28 (2015-11-17)
 -----------------
