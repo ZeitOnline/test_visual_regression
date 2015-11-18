@@ -171,6 +171,7 @@ class Application(object):
             self.config.include('pyramid_zodbconn')
 
         log.debug('Configuring Pyramid')
+        config.add_route('frame_builder', '/frame-builder')
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')

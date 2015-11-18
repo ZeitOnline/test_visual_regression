@@ -187,3 +187,10 @@ class CommentForm(zeit.web.core.view.Content):
         if 'error' not in self.request.params:
             return
         return self.request.session.pop(self.request.params['error'])
+
+
+@pyramid.view.view_config(
+    route_name='frame_builder',
+    renderer='templates/frame_builder.html')
+class FrameBuilder(Base):
+    pass
