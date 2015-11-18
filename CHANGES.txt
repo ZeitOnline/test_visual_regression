@@ -6,7 +6,7 @@ Change log for zeit.web
 
 - ZON-2393: Replace adlabel span by css content to improve ad reloading
 
-  - FIX: Be more defensive in several places:
+- FIX: Be more defensive in several places:
   * displaying content with invalid timestamps
   * caching content with non-ascii uniqueIds
 
