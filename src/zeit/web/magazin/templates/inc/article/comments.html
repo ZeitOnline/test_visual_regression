@@ -100,8 +100,11 @@
 			<div class="comments__body" id="js-comments-body">
 				<div class="tabs__content is-active">
 					<div class="comments__list" id="tab1">
+						{# parse comments #}
 						{% for comment in view.comments.comments %}
 							{% include "zeit.web.magazin:templates/inc/article/comment.html" %}
+
+							{# parse comment replies #}
 							{% for comment in comment.replies %}
 								{% include "zeit.web.magazin:templates/inc/article/comment.html" %}
 							{% endfor %}
@@ -110,10 +113,18 @@
 				</div>
 				<div class="tabs__content">
 					<div class="comments__list" id="tab2">
+						{# parse comments #}
 						{% for comment in view.comments.comments %}
 							{% if comment.is_promoted -%}
 								{% include "zeit.web.magazin:templates/inc/article/comment.html" %}
 							{%- endif %}
+
+							{# parse comment replies #}
+							{% for comment in comment.replies %}
+								{% if comment.is_promoted -%}
+									{% include "zeit.web.magazin:templates/inc/article/comment.html" %}
+								{%- endif %}
+							{% endfor %}
 						{% endfor %}
 					</div>
 				</div>
