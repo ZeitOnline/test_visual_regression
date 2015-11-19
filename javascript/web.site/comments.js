@@ -413,7 +413,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                 id = 'hide-replies-' + this.id,
                 rewrapper = '' +
                     '<div id="' + id + '" class="comment__rewrapper js-hide-replies">' +
-                        '<span class="comment__count">−' + $answers.length + '</span>\n' +
+                        '<span class="comment__count">− ' + $answers.length + '</span>\n' +
                         '<span class="comment__cta">Antworten verbergen</span>\n' +
                     '</div>\n';
 
@@ -430,7 +430,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         var overlayHTML = '' +
             '<div class="comment-overlay">\n' +
                 '<div class="comment-overlay__wrap">\n' +
-                    '<span class="comment-overlay__count">+' + replyCount + '</span>\n' +
+                    '<span class="comment-overlay__count">+ ' + replyCount + '</span>\n' +
                     '<span class="comment-overlay__cta">Weitere Antworten anzeigen</span>\n' +
                 '</div>\n' +
             '</div>\n';
