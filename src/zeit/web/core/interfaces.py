@@ -229,3 +229,7 @@ class IMetrics(zope.interface.Interface):
 
     def gauge(identifier=None):
         """Returns a ``statsd.Gauge``."""
+
+
+class ISharingImage(zope.interface.Interface):
+    """Adapts ICMSContent to an IImageGroup to be used for sharing purposes"""
