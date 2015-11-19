@@ -27,20 +27,12 @@
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
                    href="{{ teaser | create_url }}">
                     {% block teaser_kicker %}
-                        {% set kicker_class = '%s__kicker' | format(self.layout()) %}
-                        {% set is_zmo_parquet = area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent') %}
-                        <span class="{{ kicker_class | with_mods(
-                            journalistic_format,
-                            area.kind if area.kind == 'spektrum',
-                            'zmo' if teaser is zmo_content and not is_zmo_parquet,
-                            'zmo-parquet' if is_zmo_parquet,
-                            'zett' if teaser is zett_content
-                            )}}">
-                            {% block kicker_logo scoped -%}
-                                {% if teaser is zmo_content and not is_zmo_parquet %}
-                                    {{ lama.use_svg_icon('logo-zmo-zm', kicker_class + '-logo--zmo svg-symbol--hide-ie', request) }}
+                        <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind) }}">
+                            {% block kicker_logo scoped %}
+                                {% if teaser is zmo_content %}
+                                    {{ lama.use_svg_icon('logo-zmo-zm', self.layout() + '__kicker-logo--zmo svg-symbol--hide-ie', request) }}
                                 {% elif teaser is zett_content %}
-                                    {{ lama.use_svg_icon('logo-zett-small', kicker_class + '-logo--zett svg-symbol--hide-ie', request) }}
+                                    {{ lama.use_svg_icon('logo-zett-small', self.layout() + '__kicker-logo--zett svg-symbol--hide-ie', request) }}
                                 {% endif %}
                             {% endblock %}
                             {{ teaser.teaserSupertitle or teaser.supertitle }}
