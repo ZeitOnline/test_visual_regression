@@ -29,19 +29,17 @@
                     {% block teaser_kicker %}
                         {% set kicker_class = '%s__kicker' | format(self.layout()) %}
                         {% set is_zmo_parquet = area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent') %}
-                        {% set is_zett_parquet = area.kind == 'zett' %}
                         <span class="{{ kicker_class | with_mods(
                             journalistic_format,
                             area.kind if area.kind == 'spektrum',
                             'zmo' if teaser is zmo_content and not is_zmo_parquet,
                             'zmo-parquet' if is_zmo_parquet,
-                            'zett' if teaser is zett_content and not is_zett_parquet,
-                            'zett-parquet' if is_zett_parquet
+                            'zett' if teaser is zett_content
                             )}}">
                             {% block kicker_logo scoped -%}
                                 {% if teaser is zmo_content and not is_zmo_parquet %}
                                     {{ lama.use_svg_icon('logo-zmo-zm', kicker_class + '-logo--zmo svg-symbol--hide-ie', request) }}
-                                {% elif teaser is zett_content and not is_zett_parquet %}
+                                {% elif teaser is zett_content %}
                                     {{ lama.use_svg_icon('logo-zett-small', kicker_class + '-logo--zett svg-symbol--hide-ie', request) }}
                                 {% endif %}
                             {% endblock %}
