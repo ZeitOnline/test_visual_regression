@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Fix iOS' 9 Safari specific misbehaviour
 
+- ZON-2387: Rebuild ze.tt parquet to mimic Spektrum/ZMO parquet
+
 - ZON-2393: Replace adlabel span by css content to improve ad reloading
 
 
