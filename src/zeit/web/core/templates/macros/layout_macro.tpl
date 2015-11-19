@@ -96,10 +96,7 @@
                     elem.className = "ad ad-{{ type }} ad-{{type}}--{{ banner.tile }} ad-{{type}}--{{ banner.tile }}-on-{{ pagetype }}";
                     elem.setAttribute('data-banner-type', '{{ type }}');
                     {% if banner.label and not(mobile) -%}
-                        var label = document.createElement('span');
-                        label.className = "ad__label";
-                        label.textContent = "{{ banner.label }}";
-                        elem.appendChild(label);
+                        elem.setAttribute('data-banner-label', '{{ banner.label | lower }}');
                     {% endif -%}
                     document.getElementById('{{ scriptname }}').parentNode.appendChild(elem);
                     AdController.render('iqadtile{{ banner.tile }}');
