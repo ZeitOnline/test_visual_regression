@@ -72,3 +72,11 @@ def test_overview_area_clone_factory_should_set_proper_attributes():
     assert all(c.xml is Foo.xml for c in clones)
     assert all(c.__parent__ is Foo.__parent__ for c in clones)
     assert all(len(c.__name__) == 36 for c in clones)
+
+
+def test_get_area_should_recognize_zmo_parquet(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/journalistic-formats-zmo')
+    area = zeit.web.core.utils.find_block(
+        context, area='id-c52657e6-7494-46d9-86d4-90a88775090c')
+    assert zeit.web.core.centerpage.get_area(area).kind == 'zmo-parquet'
