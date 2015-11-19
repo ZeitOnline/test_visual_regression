@@ -26,29 +26,30 @@
                 <a class="{{ self.layout() }}__combined-link"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
                    href="{{ teaser | create_url }}">
-                    {%- block teaser_kicker %}
-                    {% set kicker_class = '%s__kicker' | format(self.layout()) %}
-                    {% set is_zmo_teaser = provides(teaser, 'zeit.magazin.interfaces.IZMOContent') %}
-                    {% set is_zmo_parquet = area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent') %}
-                    {% set is_zett_content = provides(teaser, 'zeit.content.link.interfaces.ILink') and teaser.url.startswith('http://ze.tt') %}
-                    {% set is_zett_parquet = (area.kind == 'zett')%}
-                    <span class="{{ kicker_class | with_mods(
-                        journalistic_format,
-                        area.kind if area.kind == 'spektrum',
-                        'zmo' if is_zmo_teaser and not is_zmo_parquet,
-                        'zmo-parquet' if is_zmo_parquet,
-                        'zett' if is_zett_content and not is_zett_parquet,
-                        'zett-parquet' if is_zett_parquet
-                        )}}">
-                        {% block kicker_logo scoped -%}
-                        {%- if is_zmo_teaser and not is_zmo_parquet %}
-                            {{ lama.use_svg_icon('logo-zmo-zm', kicker_class + '-logo--zmo svg-symbol--hide-ie', request) }}
-                        {%- elif is_zett_content and not is_zett_parquet %}
-                            {{ lama.use_svg_icon('logo-zett-small', kicker_class + '-logo--zett svg-symbol--hide-ie', request) }}
-                        {%- endif %}
-                        {%- endblock -%}
-                        {{ teaser.teaserSupertitle or teaser.supertitle }}</span>
-                    {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">:</span>{% endif %}
+                    {% block teaser_kicker %}
+                        {% set kicker_class = '%s__kicker' | format(self.layout()) %}
+                        {% set is_zmo_parquet = area.referenced_cp and provides(area.referenced_cp, 'zeit.magazin.interfaces.IZMOContent') %}
+                        {% set is_zett_parquet = area.kind == 'zett' %}
+                        <span class="{{ kicker_class | with_mods(
+                            journalistic_format,
+                            area.kind if area.kind == 'spektrum',
+                            'zmo' if teaser is zmo_content and not is_zmo_parquet,
+                            'zmo-parquet' if is_zmo_parquet,
+                            'zett' if teaser is zett_content and not is_zett_parquet,
+                            'zett-parquet' if is_zett_parquet
+                            )}}">
+                            {% block kicker_logo scoped -%}
+                                {% if teaser is zmo_content and not is_zmo_parquet %}
+                                    {{ lama.use_svg_icon('logo-zmo-zm', kicker_class + '-logo--zmo svg-symbol--hide-ie', request) }}
+                                {% elif teaser is zett_content and not is_zett_parquet %}
+                                    {{ lama.use_svg_icon('logo-zett-small', kicker_class + '-logo--zett svg-symbol--hide-ie', request) }}
+                                {% endif %}
+                            {% endblock %}
+                            {{ teaser.teaserSupertitle or teaser.supertitle }}
+                        </span>
+                        {% if teaser.teaserSupertitle or teaser.supertitle %}
+                            <span class="visually-hidden">:</span>
+                        {% endif %}
                     {% endblock %}
                     {% block teaser_title %}
                     <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
