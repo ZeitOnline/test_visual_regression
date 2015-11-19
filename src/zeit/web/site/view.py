@@ -195,14 +195,23 @@ class CommentForm(zeit.web.core.view.Content):
     route_name='frame_builder',
     renderer='templates/frame_builder.html')
 class FrameBuilder(Base):
+
     def __init__(self, context, request):
         super(FrameBuilder, self).__init__(context, request)
         try:
             self.context = zeit.cms.interfaces.ICMSContent(
                 'http://xml.zeit.de/index')
+            self.context.advertising_enabled = self.banner_on
         except TypeError:
             raise pyramid.httpexceptions.HTTPNotFound()
 
     @zeit.web.reify
+    def advertising_enabled(self):
+        if self.banner_channel:
+            return True
+        else:
+            return False
+
+    @zeit.web.reify
     def banner_channel(self):
-        return self.request.GET.get('banner_channel', 'homepage/centerpage')
+        return self.request.GET.get('banner_channel', None)
