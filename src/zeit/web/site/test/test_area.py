@@ -78,5 +78,5 @@ def test_get_area_should_recognize_zmo_parquet(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/journalistic-formats-zmo')
     area = zeit.web.core.utils.find_block(
-        context, area='id-c52657e6-7494-46d9-86d4-90a88775090c')
+        context, 'area', area='id-c52657e6-7494-46d9-86d4-90a88775090c')
     assert zeit.web.core.centerpage.get_area(area).kind == 'zmo-parquet'
