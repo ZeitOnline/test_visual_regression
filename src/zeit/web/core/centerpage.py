@@ -79,7 +79,7 @@ def get_image_asset(teaser):
 
 
 @zeit.web.register_filter
-def get_area(area, name=None):
+def get_area(area):
     if zeit.content.cp.interfaces.IArea.providedBy(area) and (
             zeit.magazin.interfaces.IZMOContent.providedBy(
                 area.referenced_cp)):
