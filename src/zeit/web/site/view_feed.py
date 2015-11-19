@@ -191,7 +191,7 @@ class AuthorFeed(Newsfeed):
         return "Autorenfeed {}".format(self.context.display_name)
 
     @zeit.web.reify
-    def subtitle(self):
+    def pagedescription(self):
         return "Alle Artikel von {}".format(self.context.display_name)
 
     @zeit.web.reify

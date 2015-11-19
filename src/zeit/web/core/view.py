@@ -405,7 +405,7 @@ class Base(object):
             desc = zeit.seo.interfaces.ISEO(self.context).html_description
             assert desc
         except (AssertionError, TypeError):
-            desc = self.subtitle
+            desc = self.context.subtitle
         return desc or self.seo_title_default
 
     @zeit.web.reify
