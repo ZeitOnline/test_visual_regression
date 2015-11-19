@@ -1937,3 +1937,11 @@ def test_ranking_area_should_handle_various_page_values(
     area = zeit.web.core.centerpage.get_area(context)
     dummy_request.GET = params
     assert area.page == page
+
+
+def test_ranking_area_should_silently_accept_emptyness(
+        application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
+    context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
+    area = zeit.web.core.centerpage.get_area(context)
+    assert area.pagination == []
