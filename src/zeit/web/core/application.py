@@ -218,7 +218,8 @@ class Application(object):
         else:
             for index, route in enumerate(blacklist):
                 config.add_route('blacklist_{}'.format(index), route,
-                                 zeit.web.core.view.surrender)
+                    zeit.web.core.view.surrender, header=pyramid.config.not_(
+                        'host:newsfeed(\.staging)?\.zeit\.de'))
 
         if not self.settings.get('debug.show_exceptions'):
             config.add_view(view=zeit.web.core.view.service_unavailable,
