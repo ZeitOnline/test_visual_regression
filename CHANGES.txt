@@ -4,6 +4,8 @@ Change log for zeit.web
 2.30 (unreleased)
 -----------------
 
+- ZON-2413: Disect default teaser sticker edgecasing, handle feature longforms
+
 - ZON-2414: Use pagetitle in twitter:title meta tag
 
 - ZON-2404: Show comment replies in ZMO
@@ -12,6 +14,8 @@ Change log for zeit.web
   that don't have an article image yet
 
 - ZON-2358: Tweak collapse comment button
+
+- MAINT: Update pyramid to 1.5.7
 
 
 2.29 (2015-11-20)
