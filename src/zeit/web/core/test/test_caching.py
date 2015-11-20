@@ -120,7 +120,7 @@ def test_reify_should_set_region_parameter_accordingly(application):
 
 def test_reify_should_store_result_in_beaker_cache_region(application):
     class Context(object):
-        uniqueId = 'http://xml.zeit.de'  # NOQA
+        uniqueId = u'http://xml.zeit.de/ünicöde'  # NOQA
 
     class Foo(object):
         context = Context
@@ -134,10 +134,10 @@ def test_reify_should_store_result_in_beaker_cache_region(application):
     assert cache.namespace_name == (
         'zeit.web.core.test.test_caching.Foo.prop')
     assert foo.prop == 71
-    assert Foo.prop._global_key(
-        foo) == 'dc785f7304a94df7b6820434b1654e4674c7923f'
-    assert cache.has_key('dc785f7304a94df7b6820434b1654e4674c7923f')  # NOQA
-    assert cache.get('dc785f7304a94df7b6820434b1654e4674c7923f') == 71
+    expected_hash = '484c85976b9f119fe80613cef1114e7be9db618c'
+    assert Foo.prop._global_key(foo) == expected_hash
+    assert cache.has_key(expected_hash)  # NOQA
+    assert cache.get(expected_hash) == 71
 
 
 @pytest.mark.skipif(not HAVE_PYLIBMC, reason='pylibmc not installed')

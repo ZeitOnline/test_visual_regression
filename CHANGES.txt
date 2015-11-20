@@ -10,6 +10,12 @@ Change log for zeit.web
 
 - ZON-2393: Replace adlabel span by css content to improve ad reloading
 
+- FIX: Displaying content with invalid timestamps
+
+- FIX: Caching content with non-ascii uniqueIds
+
+- FIX: Return HTTP 400 Bad Request for URLs with invalid unicode
+
 - FIX: Don't throw 404s if ranking area is empty
 
 

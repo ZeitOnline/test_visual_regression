@@ -557,3 +557,9 @@ def test_ispaginated_predicate_should_handle_get_parameter():
     assert ip(None, mock.Mock(GET={'p': 'klaus'})) is False
     assert ip(None, mock.Mock(GET={'p': '1'})) is False
     assert ip(None, mock.Mock(GET={'p': '4'})) is True
+
+
+def test_invalid_unicode_should_return_http_400(testbrowser):
+    with pytest.raises(urllib2.HTTPError) as info:
+        testbrowser('/index%C8')
+    assert info.value.getcode() == 400
