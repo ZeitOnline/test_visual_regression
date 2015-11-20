@@ -15,12 +15,14 @@ require([
     'web.core/images',
     'web.core/clicktracking',
     'web.core/adReload',
+    'web.core/overscrolling.js',
     'web.site/video/videoStage',
     'web.site/articledate',
     'web.site/articlesharing',
     'web.site/comments',
     'web.site/adblockCount.js'
-], function( images, clicktracking, adReload, videoStage, articledate, articlesharing, comments, adblockCount ) {
+], function( images, clicktracking, adReload, overscrolling, videoStage, articledate, articlesharing, comments, adblockCount ) {
+    var article = document.getElementById( 'js-article' );
     images.init();
     clicktracking.init();
     adReload.init();
@@ -29,6 +31,9 @@ require([
     articlesharing.init();
     comments.init();
     adblockCount.init();
+    if ( article ) {
+        overscrolling.init();
+    }
 });
 
 String.prototype.format = function() {
