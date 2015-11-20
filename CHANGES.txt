@@ -4,7 +4,8 @@ Change log for zeit.web
 2.30 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2261: Use configured fallback sharing image for breaking news articles
+  that don't have an article image yet
 
 
 2.29 (2015-11-20)
