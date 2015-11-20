@@ -11,6 +11,8 @@ Change log for zeit.web
 - ZON-2261: Use configured fallback sharing image for breaking news articles
   that don't have an article image yet
 
+- MAINT: Update pyramid to 1.5.7
+
 
 2.29 (2015-11-20)
 -----------------
