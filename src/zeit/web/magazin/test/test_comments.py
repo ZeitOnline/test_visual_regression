@@ -36,3 +36,15 @@ def test_comments_template_respects_metadata(jinja2_env, testserver):
 
     assert string.strip() == '', (
         'comment section template must return an empty document')
+
+
+def test_comments_and_replies_do_appear(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/artikel/01' % testserver.url)
+    button = driver.find_element_by_class_name('js-comments-trigger')
+    button.click()
+    comments = driver.find_elements_by_class_name('comment')
+    assert 'Ich bin ja schon etwas angejahrt' in comments[7].text
+    assert 'is-indented' in comments[8].get_attribute('class')
+    assert 'Man muss nicht Sozialist sein' in comments[8].text

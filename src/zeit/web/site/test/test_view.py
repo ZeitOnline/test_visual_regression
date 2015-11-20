@@ -117,8 +117,14 @@ def test_ressort_literally_returns_correct_ressort(application):
     assert article_view.ressort_literally == 'Gesellschaft'
 
 
-def test_og_title_equals_pagetitle(testbrowser):
+def test_sharing_titles_equal_pagetitle(testbrowser):
     browser = testbrowser('/zeit-online/article/02')
+
+    pagetitle = browser.cssselect('title')[0].text
     og_title = browser.cssselect(
         'meta[property="og:title"]')[0].attrib.get('content')
-    assert browser.cssselect('title')[0].text == og_title
+    twitter_title = browser.cssselect(
+        'meta[name="twitter:title"]')[0].attrib.get('content')
+
+    assert og_title == pagetitle
+    assert twitter_title == pagetitle
