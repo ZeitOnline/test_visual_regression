@@ -207,10 +207,7 @@ class FrameBuilder(Base):
 
     @zeit.web.reify
     def advertising_enabled(self):
-        if self.banner_channel:
-            return True
-        else:
-            return False
+        return self.banner_channel is not None
 
     @zeit.web.reify
     def banner_channel(self):
