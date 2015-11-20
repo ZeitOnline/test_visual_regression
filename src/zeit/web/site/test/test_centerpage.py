@@ -187,7 +187,7 @@ def test_pagination_should_be_validated(testserver, testbrowser):
             '{}/dynamic/angela-merkel?p=-1'.format(testserver.url)).headers
     with pytest.raises(urllib2.HTTPError):
         assert '404 Not Found' in testbrowser(
-            '{}/dynamic/angela-merkel?p=123'.format(testserver.url)).headers
+            '{}/dynamic/angela-merkel?p=0'.format(testserver.url)).headers
     with pytest.raises(urllib2.HTTPError):
         assert '404 Not Found' in testbrowser(
             '{}/dynamic/angela-merkel?p=1moep'.format(testserver.url)).headers
