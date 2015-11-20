@@ -191,6 +191,8 @@ def app_settings(mockserver):
         'enable_article_lineage': True,
         'advertisement_nextread_folder': 'verlagsangebote',
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
+        'breaking_news_fallback_image': (
+            'http://xml.zeit.de/administratives/eilmeldung-share-image'),
     }
 
 

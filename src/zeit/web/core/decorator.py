@@ -236,7 +236,7 @@ class reify(object):  # NOQA
         try:
             namespace = unicode(self._get_namespace(inst))
             unique_id = u'|'.join((namespace, inst.context.uniqueId))
-            return hashlib.sha1(unique_id).hexdigest()
+            return hashlib.sha1(unique_id.encode('utf-8')).hexdigest()
         except (AttributeError, TypeError, UnicodeDecodeError):
             return
 
