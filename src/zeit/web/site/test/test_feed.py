@@ -1,6 +1,7 @@
 import requests
 import lxml.etree
-
+import zope.component
+import zeit.solr.interfaces
 
 def test_newsfeed_should_only_render_cp2015(testserver):
 
@@ -49,10 +50,13 @@ def test_newsfeed_should_concat_supertitle_and_title(testserver):
     assert xml.xpath('//item/title/text()')[0].startswith('"Der Hobbit": Geht')
 
 def test_newsfeed_should_render_an_authorfeed(testserver):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        { 'uniqueId': 'http://xml.zeit.de/artikel/01' }
+    ]
     res = requests.get(
-        '{}/autoren/anne_mustermann'.format(testserver.url),
+        '{}/autoren/author3'.format(testserver.url),
         headers={'Host': 'newsfeed.zeit.de'})
-    import pdb; pdb.set_trace()  # XXX BREAKPOINT
 
     xml = lxml.etree.fromstring(res.content)
-    assert xml.xpath('//item/title/text()')[0].startswith('"Der Hobbit": Geht')
+    assert xml.xpath('//item/title/text()')[0].startswith('Gentrifizierung: Mei, is des traurig!')

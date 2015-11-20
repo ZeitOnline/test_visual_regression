@@ -119,7 +119,8 @@ class Newsfeed(Base):
             )
         )
         root.append(channel)
-        for content in filter_and_sort_entries(self.items)[1:15]:
+
+        for content in filter_and_sort_entries(self.items)[:15]:
             metadata = zeit.cms.content.interfaces.ICommonMetadata(
                 content, None)
             if metadata is None:
