@@ -1925,11 +1925,7 @@ def test_ranking_ara_should_not_offset_resultset_on_materialized_cp(
     assert area.filter_query == '*:*'
 
 
-@pytest.mark.parametrize('params, page', (
-    [{'p': '2'}, 2],
-    [{'p': '-3'}, 3],
-    [{'p': 'moep'}, 1],
-    [{}, 1]))
+@pytest.mark.parametrize('params, page', ([{'p': '2'}, 2], [{}, 1]))
 def test_ranking_area_should_handle_various_page_values(
         params, page, application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
@@ -1937,3 +1933,11 @@ def test_ranking_area_should_handle_various_page_values(
     area = zeit.web.core.centerpage.get_area(context)
     dummy_request.GET = params
     assert area.page == page
+
+
+def test_ranking_area_should_silently_accept_emptyness(
+        application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
+    context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
+    area = zeit.web.core.centerpage.get_area(context)
+    assert area.pagination == []
