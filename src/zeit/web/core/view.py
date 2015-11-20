@@ -484,6 +484,10 @@ class Base(object):
         return self.content_url
 
     @zeit.web.reify
+    def sharing_image(self):
+        return zeit.web.core.interfaces.ISharingImage(self.context, None)
+
+    @zeit.web.reify
     def is_dev_environment(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('dev_environment', '')
