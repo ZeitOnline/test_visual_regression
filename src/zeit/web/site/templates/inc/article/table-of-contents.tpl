@@ -8,6 +8,9 @@
 <aside class="article-toc article__item article__item--wide">
 	<div class="article-toc__container">
 		<h3 class="article-toc__headline">Inhalt</h3>
+		<a class="article-toc__onesie" href="{{ view.content_url }}/komplettansicht" data-id="article-toc....all">Auf einer Seite lesen</a>
+		<div class="article-toc__seperator"></div>
+
 		<ol class="article-toc__list">
 		{%- set current = view.pagination.current %}
 
@@ -32,8 +35,6 @@
 		{% endfor %}
 
 		</ol>
-
-		<a class="article-toc__onesie" href="{{ view.content_url }}/komplettansicht" data-id="article-toc....all">Auf einer Seite lesen</a>
 
 	</div>
 </aside>
