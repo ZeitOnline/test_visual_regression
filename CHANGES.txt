@@ -1,15 +1,29 @@
 Change log for zeit.web
 =======================
 
-2.29 (unreleased)
+2.30 (unreleased)
+-----------------
+
+- ZON-2261: Use configured fallback sharing image for breaking news articles
+  that don't have an article image yet
+
+
+2.29 (2015-11-20)
 -----------------
 
 - HOTFIX: Fix iOS' 9 Safari specific misbehaviour
 
+- ZON-2387: Rebuild ze.tt parquet to mimic Spektrum/ZMO parquet
+
 - ZON-2393: Replace adlabel span by css content to improve ad reloading
 
-- ZON-2261: Use configured fallback sharing image for breaking news articles
-  that don't have an article image yet
+- FIX: Displaying content with invalid timestamps
+
+- FIX: Caching content with non-ascii uniqueIds
+
+- FIX: Return HTTP 400 Bad Request for URLs with invalid unicode
+
+- FIX: Don't throw 404s if ranking area is empty
 
 
 2.28 (2015-11-17)

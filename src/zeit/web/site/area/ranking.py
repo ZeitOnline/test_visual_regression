@@ -199,8 +199,12 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     @zeit.web.reify
     def page(self):
         try:
-            return abs(int(self.request.GET['p']))
-        except (KeyError, TypeError, ValueError):
+            page = int(self.request.GET['p'])
+            assert page > 0
+            return page
+        except (AssertionError, ValueError):
+            raise pyramid.httpexceptions.HTTPNotFound()
+        except KeyError:
             return 1
 
     @zeit.web.reify
@@ -217,7 +221,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     @zeit.web.reify
     def pagination(self):
         if self.page > self.total_pages:
-            raise pyramid.httpexceptions.HTTPNotFound()
+            return []
         pagination = zeit.web.core.template.calculate_pagination(
             self.current_page, self.total_pages)
         return pagination if pagination is not None else []

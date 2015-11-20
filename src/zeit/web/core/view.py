@@ -832,6 +832,15 @@ def not_found(request):
     return pyramid.response.Response(body, 404, [('X-Render-With', 'default')])
 
 
+@pyramid.view.view_config(context=pyramid.exceptions.URLDecodeError)
+# Unfortunately, not everyone raises a specific error, so we need to catch
+# the generic one, too. (See also <https://github.com/Pylons/webob/issues/115>)
+@pyramid.view.view_config(context=UnicodeDecodeError)
+def invalid_unicode_in_request(request):
+    body = 'Status 400: Invalid unicode data in request.'
+    return pyramid.response.Response(body, 400)
+
+
 # For some reason we are not able to register ICMSContent on this.
 # We have to register this on every content-view.
 @pyramid.view.view_config(context=zeit.content.cp.interfaces.ICenterPage)
