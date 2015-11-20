@@ -1660,13 +1660,34 @@ def test_zett_parquet_is_rendering(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
 
     zett_parquet = browser.cssselect('.cp-area--zett')[0]
-    title = zett_parquet.cssselect('.parquet-zett__title')
-    logo = zett_parquet.cssselect('.parquet-zett__logo')
-    teaser = zett_parquet.cssselect('.teaser-zett')
+    title = zett_parquet.cssselect('.parquet-meta__title')
+    logo = zett_parquet.cssselect('.parquet-meta__logo')
+    teaser = zett_parquet.cssselect('.teaser-small')
+    more_link = zett_parquet.cssselect('.parquet-meta__more-link--zett')
 
     assert len(title)
     assert len(logo)
+    assert len(more_link)
     assert len(teaser) == 3
+
+
+def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):
+    browser = testbrowser('/zeit-online/parquet-feeds')
+
+    assert browser.cssselect('.teaser-small__kicker--zett-parquet')
+
+    kicker_logo = browser.cssselect('.teaser-small__kicker--zett-parquet svg')
+    assert len(kicker_logo) == 0  # no kicker logos inside zett parquet
+
+
+def test_zett_parquet_should_link_to_zett(testbrowser):
+    browser = testbrowser('/zeit-online/parquet-feeds')
+
+    link_logo = browser.cssselect('.parquet-meta__title--zett')[0]
+    link_more = browser.cssselect('.parquet-meta__more-link--zett')[0]
+
+    assert link_logo.attrib['href'] == 'http://ze.tt/'
+    assert link_more.attrib['href'] == 'http://ze.tt/'
 
 
 def test_imagecopyright_tags_are_present_on_centerpages(testbrowser):

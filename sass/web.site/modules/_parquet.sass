@@ -17,6 +17,16 @@
 			height: remify(20px)
 			max-width: remify(205px)
 			width: 100%
+		&--zett
+			background-color: $primary-color-zett
+			color: $white
+			height: remify(63px)
+			left: remify($page-padding)
+			position: absolute
+			text-align: center
+			top: 0
+			width: remify(86px)
+
 	&__title
 		+link
 			color: inherit
@@ -67,6 +77,16 @@
 			color: $white
 			&:after
 				color: $zon-light-grey
+		&--zett
+			background-color: $zon-charcoal
+			color: $white
+			height: remify(50px)
+			margin-bottom: remify(13px)
+			overflow: visible // show the extending logo
+			padding: remify(14px) $page-padding
+			position: relative
+			&:after
+				color: $white
 
 	&__links
 		display: none
@@ -79,6 +99,11 @@
 		list-style: none
 		padding: 0
 		width: 100%
+
+	&__more
+		color: $zon-grey
+		font-size: remify(14px)
+		letter-spacing: $zon-letter-spacing-s
 
 	&__topic-link,
 	&__more-link
@@ -105,11 +130,11 @@
 			+link
 				color: $primary-color-spektrum
 			display: block
-			font-weight: normal
-
-	&__more
-		&--spektrum
-			font-size: remify(14px)
+			font-weight: bold
+		&--zett
+			+link
+				color: $primary-color-zett
+			display: block
 
 .parquet-teasers
 	display: table-cell
