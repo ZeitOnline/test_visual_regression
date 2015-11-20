@@ -77,8 +77,7 @@ def find_block(context, attrib='cp:__name__', **specs):
         tpl.render(attr=attrib, specs=specs.items()).strip(),
         namespaces={'cp': 'http://namespaces.zeit.de/CMS/cp'})
     try:
-        block = context.get_recursive(unique_ids[0])
-        return zeit.cms.interfaces.ICMSContent(block.uniqueId)
+        return context.get_recursive(unique_ids[0])
     except (AttributeError, IndexError, TypeError):
         return
 
