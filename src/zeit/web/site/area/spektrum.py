@@ -27,19 +27,7 @@ class ImageGroup(zeit.web.core.image.LocalImageGroup):
 @grokcore.component.adapter(None, name='spektrum')
 class Link(zeit.web.site.area.rss.RSSLink):
 
-    @zeit.web.reify
-    def title(self):
-        title = self.xml.findtext('title')
-        if title and ': ' in title:
-            return title.split(': ', 1)[1]
-        return title
-
-    @zeit.web.reify
-    def supertitle(self):
-        title = self.xml.findtext('title')
-        if title and ': ' in title:
-            return title.split(': ', 1)[0]
-        return ''
+    pass
 
 
 @zeit.web.register_area('spektrum')
