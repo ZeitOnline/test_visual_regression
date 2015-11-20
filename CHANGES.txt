@@ -4,6 +4,8 @@ Change log for zeit.web
 2.30 (unreleased)
 -----------------
 
+- ZON-2414: Use pagetitle in twitter:title meta tag
+
 - ZON-2404: Show comment replies in ZMO
 
 - ZON-2261: Use configured fallback sharing image for breaking news articles
