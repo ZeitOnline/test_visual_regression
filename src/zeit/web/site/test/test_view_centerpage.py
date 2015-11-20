@@ -1677,7 +1677,7 @@ def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):
     assert browser.cssselect('.teaser-small__kicker--zett-parquet')
 
     kicker_logo = browser.cssselect('.teaser-small__kicker--zett-parquet svg')
-    assert len(kicker_logo) == 0 # no kicker logos inside zett parquet
+    assert len(kicker_logo) == 0  # no kicker logos inside zett parquet
 
 
 def test_zett_parquet_should_link_to_zett(testbrowser):
