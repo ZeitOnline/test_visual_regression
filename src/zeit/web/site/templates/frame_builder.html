@@ -79,21 +79,9 @@
             </div>
         {% endblock adplace_top %}
         <div class="page__content">
-            {% profile %}
-            {% if not view.is_wrapped %}
             <header class="header" role="banner">
-                {% block navigation %}
-                    {%- include "zeit.web.site:templates/inc/navigation/navigation.tpl" ignore missing -%}
-                {% endblock navigation %}
-                {% block metadata %}
-                {% endblock metadata %}
+                {%- include "zeit.web.site:templates/inc/navigation/navigation.tpl" ignore missing -%}
             </header>
-            {% endif %}
-            {% block breaking_news %}
-                {%- include "zeit.web.site:templates/inc/breaking_news.tpl" ignore missing -%}
-            {% endblock breaking_news %}
-            {% block liveblog_status %}{% endblock %}
-            {% endprofile %}
             {% block adplace_billboard %}
                 {# desktop ad place 3 #}
                 {{ lama.adplace(view.banner(3), view) }}
@@ -104,13 +92,11 @@
                 {% block main %}{% endblock main %}
                 {{ lama.adplace(view.banner(8), view, mobile=True) }}
             </main>
-            {% profile %}
             <footer class="footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" >
                 {% block footer %}
                     {%- include "zeit.web.site:templates/inc/footer.html" ignore missing -%}
                 {% endblock footer %}
             </footer>
-            {% endprofile %}
         </div>
     </div>
     {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
