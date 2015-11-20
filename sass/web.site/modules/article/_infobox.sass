@@ -59,31 +59,10 @@
 		&:focus
 			outline: 0
 		&:after
-			background: $zon-mid-grey
-			border-radius: 3px
-			color: $white
-			content: "+"
-			font-family: sans-serif
-			font-weight: 700
-			height: remify(17px)
-			line-height: 1
-			margin-left: remify(10px)
-			text-align: center
-			text-decoration: none
-			vertical-align: middle
-			width: remify(17px)
-			+inline-block
-			+font-smoothing
-			+respond-min($break-tablet-min)
-				display: none
+			+build-mobile-plus-minus-button()
 		&--active
-			font-weight: 700
-			text-decoration: none
 			&:after
-				content: "–"
-				text-decoration: none
-				+respond-min($break-tablet-min)
-					display: none
+				+build-mobile-plus-minus-button('-')
 		.js &--displayed
 			display: block
 	&__content
