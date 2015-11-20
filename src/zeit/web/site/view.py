@@ -215,3 +215,7 @@ class FrameBuilder(Base):
     @zeit.web.reify
     def banner_channel(self):
         return self.request.GET.get('banner_channel', None)
+
+    @zeit.web.reify
+    def ressort(self):
+        return self.request.GET.get('ressort', None)
