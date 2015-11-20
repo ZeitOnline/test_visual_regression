@@ -4,7 +4,7 @@ Change log for zeit.web
 2.30 (unreleased)
 -----------------
 
-- ZON-2395: IVW-Verpixelung für Videoaufrufe
+- ZON-2395: IVW-Verpixelung for video plays
 
 
 2.29 (2015-11-20)
