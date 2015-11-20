@@ -1,4 +1,10 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
-{% include "zeit.web.site:templates/frame_builder/html-head.tpl" %}
-{% include "zeit.web.site:templates/frame_builder/upper-body.tpl" %}
-{% include "zeit.web.site:templates/frame_builder/lower-body.tpl" %}
+
+{% if not view.page_slice %}
+    {% include "zeit.web.site:templates/frame_builder/html-head.tpl" %}
+    {% include "zeit.web.site:templates/frame_builder/upper-body.tpl" %}
+    {% include "zeit.web.site:templates/frame_builder/lower-body.tpl" %}
+{% else %}
+    {% include "zeit.web.site:templates/frame_builder/{}.tpl".format(view.page_slice) %}
+{% endif %}
+

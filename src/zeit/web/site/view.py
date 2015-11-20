@@ -216,3 +216,7 @@ class FrameBuilder(Base):
     @zeit.web.reify
     def ressort(self):
         return self.request.GET.get('ressort', None)
+
+    @zeit.web.reify
+    def page_slice(self):
+        return self.request.GET.get('page_slice', None)

@@ -9,9 +9,6 @@
     </div>
     {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
-    {% block meetrics %}
-        {% include "zeit.web.core:templates/inc/tracking/meetrics_relaunch.html" ignore missing %}
-    {% endblock %}
     <script>
         var require = { baseUrl: '{{ request.asset_host }}/js/' };
     </script>
