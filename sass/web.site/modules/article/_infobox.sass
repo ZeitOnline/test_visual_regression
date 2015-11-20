@@ -62,7 +62,7 @@
 			+build-mobile-plus-minus-button()
 		&--active
 			&:after
-				+build-mobile-plus-minus-button('-')
+				+build-mobile-plus-minus-button('\2212') // U+2212 = − (minus sign)
 		.js &--displayed
 			display: block
 	&__content
