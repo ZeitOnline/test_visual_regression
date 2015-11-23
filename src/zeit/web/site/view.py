@@ -192,8 +192,8 @@ class CommentForm(zeit.web.core.view.Content):
 
 
 @pyramid.view.view_config(
-    route_name='frame_builder',
-    renderer='templates/frame_builder/frame_builder.html')
+    route_name='framebuilder',
+    renderer='templates/framebuilder/framebuilder.html')
 class FrameBuilder(Base):
 
     def __init__(self, context, request):
