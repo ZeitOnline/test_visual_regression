@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: style ZMO/zett icons on topicteaser
 
+- FIX: Remove padding from ZMO parquet
+
 
 2.30 (2015-11-23)
 -----------------
