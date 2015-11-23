@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime, timedelta
+import beaker.exceptions
+import datetime
 import mock
-import pyramid_beaker
 import pytest
 import pytz
-import zope.component
-import copy
-import beaker.exceptions
 
 import zeit.cms.interfaces
 
@@ -44,9 +41,9 @@ def test_caching_time_for_image_should_respect_group_expires(
         application, clock):
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube')
-    now = datetime(2015, 1, 1, 10, 0, tzinfo=pytz.UTC)
+    now = datetime.datetime(2015, 1, 1, 10, 0, tzinfo=pytz.UTC)
     clock.freeze(now)
-    expires = now + timedelta(seconds=5)
+    expires = now + datetime.timedelta(seconds=5)
     workflow = zeit.cms.workflow.interfaces.IPublishInfo(group)
     workflow.released_to = expires
     assert zeit.web.core.cache.ICachingTime(group['wide']) == 5
@@ -58,9 +55,9 @@ def test_already_expired_image_should_have_caching_time_zero(
     # place, so the caching time is more for completeness' sake.
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube')
-    now = datetime(2015, 1, 1, 10, 0, tzinfo=pytz.UTC)
+    now = datetime.datetime(2015, 1, 1, 10, 0, tzinfo=pytz.UTC)
     clock.freeze(now)
-    expires = now - timedelta(seconds=5)
+    expires = now - datetime.timedelta(seconds=5)
     workflow = zeit.cms.workflow.interfaces.IPublishInfo(group)
     workflow.released_to = expires
     assert zeit.web.core.cache.ICachingTime(group['wide']) == 0

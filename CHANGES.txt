@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-2.30 (unreleased)
+2.31 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.30 (2015-11-23)
+-----------------
+
+- DEV-752: Prepare spektrum feed to use category supertitle
 
 - ZON-2395: IVW-Verpixelung for video plays
 
@@ -17,7 +25,11 @@ Change log for zeit.web
 
 - ZON-2358: Tweak collapse comment button
 
+- ZON-2291: Implement author rss
+
 - MAINT: Update pyramid to 1.5.7
+
+- FIX: Quote uniqueIds in Solr queries using quotes not brackets
 
 
 2.29 (2015-11-20)
