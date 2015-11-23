@@ -411,12 +411,15 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                 $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
                 containsTarget = $answers.length > 1 && $target && $answers.is( $target ),
                 id = 'hide-replies-' + this.id,
-                link = '<span id="' + id + '" class="comment__rewrapper js-hide-replies">' +
-                    $answers.length + ' Antworten verbergen</span>';
+                rewrapper = '' +
+                    '<div id="' + id + '" class="comment__rewrapper js-hide-replies">' +
+                        '<span class="comment__count">− ' + $answers.length + '</span>\n' +
+                        '<span class="comment__cta">Antworten verbergen</span>\n' +
+                    '</div>\n';
 
             // when deeplinked, prevent collapse of reply thread
             if ( $answers.length > 1  && !containsTarget ) {
-                $root.find( '.comment__reactions' ).append( link );
+                $root.next( '.comment--indented' ).find( '.comment__container' ).prepend( rewrapper );
                 coverReply( $answers.eq( 0 ).data({ undo: id }), $answers.length - 1 );
                 $answers.slice( 1 ).velocity( 'slideUp', slideDuration );
             }
@@ -427,7 +430,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
         var overlayHTML = '' +
             '<div class="comment-overlay">\n' +
                 '<div class="comment-overlay__wrap">\n' +
-                    '<span class="comment-overlay__count">+' + replyCount + '</span>\n' +
+                    '<span class="comment-overlay__count">+ ' + replyCount + '</span>\n' +
                     '<span class="comment-overlay__cta">Weitere Antworten anzeigen</span>\n' +
                 '</div>\n' +
             '</div>\n';
@@ -443,18 +446,18 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
             $link = $( selector );
 
         e.preventDefault();
-        $link.velocity( 'fadeIn' );
+        $link.velocity( 'slideDown', slideDuration );
         $wrapped.removeClass( 'comment--wrapped' )
             .nextUntil( '.js-comment-toplevel', '.comment--indented' ) // get other replies, filter to remove ads from result
             .velocity( 'slideDown', slideDuration );
     },
 
     hideReplies = function() {
-        var $root = $( this ).velocity( 'fadeOut' ).closest( '.comment' ),
+        var $root = $( this ).velocity( 'slideUp' ).closest( '.comment' ),
             $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' );
 
-        $answers.first().addClass( 'comment--wrapped' );
-        $answers.slice( 1 ).velocity( 'slideUp', slideDuration );
+        $root.addClass( 'comment--wrapped' );
+        $answers.velocity( 'slideUp', slideDuration );
     },
 
     addModeration = function() {

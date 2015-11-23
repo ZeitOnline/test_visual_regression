@@ -73,8 +73,8 @@
     <cluster area="id-7c243c08-55d4-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher">
       <region area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
         <container cp:type="teaser" module="zon-fullwidth" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead1c">
-			<block href="http://xml.zeit.de/artikel/02"/>
-		</container>
+      <block href="http://xml.zeit.de/artikel/02"/>
+    </container>
       </region>
     </cluster>
 
@@ -82,38 +82,42 @@
     <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" kind="solo" title="AufmacherClassic">
       <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" kind="solo">
         <container cp:type="teaser" module="zon-classic" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead2c">
-			<block href="http://xml.zeit.de/artikel/02"/>
-		</container>
+      <block href="http://xml.zeit.de/artikel/02"/>
+    </container>
       </region>
     </cluster>
 
     <!-- Major/Minor Duo -->
     <cluster area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
       <region area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
-      	
+
         <container cp:type="teaser" module="zon-large" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead3c">
-			<block href="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview"/>
-		</container>
+      <block href="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview"/>
+    </container>
 
-		<container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead4c">
-			<block href="http://xml.zeit.de/artikel/02"/>
-		</container>
+    <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead4c">
+      <block href="http://xml.zeit.de/artikel/02"/>
+    </container>
 
-		 <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead5f">
-			<block href="http://xml.zeit.de/artikel/01"/>
-		</container>
+    <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-8f488152572a">
+      <block href="http://xml.zeit.de/feature/feature_longform"/>
+    </container>
+
+     <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead5f">
+      <block href="http://xml.zeit.de/artikel/01"/>
+    </container>
 
       </region>
 
       <region area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor" title="Marginalspalte">
 
         <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead1b">
-			<block href="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview"/>
-		</container>
+      <block href="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview"/>
+    </container>
 
-		<container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead8f">
-			<block href="http://xml.zeit.de/artikel/01"/>
-		</container>
+    <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead8f">
+      <block href="http://xml.zeit.de/artikel/01"/>
+    </container>
 
       </region>
     </cluster>
@@ -122,13 +126,13 @@
     <cluster area="id-7e329214-665f-457d-a624-94c47850f956">
         <region area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb8" kind="duo">
             <container cp:type="teaser" module="zon-square" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152572a">
-				<block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" />
-			</container>
+        <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" />
+      </container>
         </region>
         <region area="id-0e98c5c2-2b95-42b7-9ccc-83e684fa87bb" kind="duo">
             <container cp:type="teaser" module="zon-square" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152573a">
-				<block href="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview"/>
-			</container>
+        <block href="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview"/>
+      </container>
         </region>
     </cluster>
 
@@ -136,32 +140,32 @@
     <cluster area="id-bdfb0156-4df4-4bcd-bf1e-68609ef1a109" kind="parquet" title="Parquet">
       <region area="id-1ac0ac50-fe94-4431-baac-435cc2a934dd" kind="parquet" title="Parkett: ZMO-Teaser">
 
-		<container cp:type="teaser" module="zon-large" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
-			<block href="http://xml.zeit.de/artikel/02"/>
-		</container>
+    <container cp:type="teaser" module="zon-large" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
+      <block href="http://xml.zeit.de/artikel/02"/>
+    </container>
 
         <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
-			<block href="http://xml.zeit.de/artikel/02"/>
-		</container>
+      <block href="http://xml.zeit.de/artikel/02"/>
+    </container>
 
-		<container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9b">
-			<block href="http://xml.zeit.de/artikel/01"/>
-		</container>
+    <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9b">
+      <block href="http://xml.zeit.de/artikel/01"/>
+    </container>
       </region>
     </cluster>
 
     <!-- ZMO Parkett -->
-	<cluster area="id-db3160e7-782c-494a-81f4-ba9d4e4f9f7c" kind="parquet" title="Parkett">
-		<region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="parquet" title="ZEITMagazin" read_more="mehr davon" read_more_url="http://www.zeit.de/karriere/index">
-			<referenced_cp>http://xml.zeit.de/zeit-magazin/index</referenced_cp>
-			<container cp:type="teaser" module="zon-small" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
-				<block href="http://xml.zeit.de/artikel/02"/>
-			</container>
-			<container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
-				<block href="http://xml.zeit.de/artikel/01"/>
-			</container>
-		</region>
-	</cluster>
+  <cluster area="id-db3160e7-782c-494a-81f4-ba9d4e4f9f7c" kind="parquet" title="Parkett">
+    <region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="parquet" title="ZEITMagazin" read_more="mehr davon" read_more_url="http://www.zeit.de/karriere/index">
+      <referenced_cp>http://xml.zeit.de/zeit-magazin/index</referenced_cp>
+      <container cp:type="teaser" module="zon-small" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
+        <block href="http://xml.zeit.de/artikel/02"/>
+      </container>
+      <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
+        <block href="http://xml.zeit.de/artikel/01"/>
+      </container>
+    </region>
+  </cluster>
 
   </body>
   <feed />
