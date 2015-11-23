@@ -4,7 +4,6 @@ import os.path
 import pkg_resources
 import re
 import urlparse
-import warnings
 
 import bugsnag
 import bugsnag.wsgi.middleware
@@ -216,7 +215,8 @@ class Application(object):
             log.error('Could not parse route blacklist: {}'.format(err))
         else:
             for index, route in enumerate(blacklist):
-                config.add_route('blacklist_{}'.format(index), route,
+                config.add_route(
+                    'blacklist_{}'.format(index), route,
                     header=pyramid.config.not_(
                         'host:newsfeed(\.staging)?\.zeit\.de'))
                 config.add_view(

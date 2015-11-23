@@ -3,8 +3,8 @@ import lxml.etree
 import zope.component
 import zeit.solr.interfaces
 
-def test_newsfeed_should_only_render_cp2015(testserver):
 
+def test_newsfeed_should_only_render_cp2015(testserver):
     res = requests.get(
         '%s/index' % testserver.url,
         headers={'Host': 'newsfeed.zeit.de'})
@@ -49,14 +49,14 @@ def test_newsfeed_should_concat_supertitle_and_title(testserver):
     xml = lxml.etree.fromstring(res.content)
     assert xml.xpath('//item/title/text()')[0].startswith('"Der Hobbit": Geht')
 
+
 def test_newsfeed_should_render_an_authorfeed(testserver):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
-        { 'uniqueId': 'http://xml.zeit.de/artikel/01' }
-    ]
+    solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/01'}]
     res = requests.get(
         '{}/autoren/author3'.format(testserver.url),
         headers={'Host': 'newsfeed.zeit.de'})
 
     xml = lxml.etree.fromstring(res.content)
-    assert xml.xpath('//item/title/text()')[0].startswith('Gentrifizierung: Mei, is des traurig!')
+    assert xml.xpath('//item/title/text()')[0].startswith(
+        'Gentrifizierung: Mei, is des traurig!')
