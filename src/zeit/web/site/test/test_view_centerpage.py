@@ -1660,13 +1660,34 @@ def test_zett_parquet_is_rendering(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
 
     zett_parquet = browser.cssselect('.cp-area--zett')[0]
-    title = zett_parquet.cssselect('.parquet-zett__title')
-    logo = zett_parquet.cssselect('.parquet-zett__logo')
-    teaser = zett_parquet.cssselect('.teaser-zett')
+    title = zett_parquet.cssselect('.parquet-meta__title')
+    logo = zett_parquet.cssselect('.parquet-meta__logo')
+    teaser = zett_parquet.cssselect('.teaser-small')
+    more_link = zett_parquet.cssselect('.parquet-meta__more-link--zett')
 
     assert len(title)
     assert len(logo)
+    assert len(more_link)
     assert len(teaser) == 3
+
+
+def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):
+    browser = testbrowser('/zeit-online/parquet-feeds')
+
+    assert browser.cssselect('.teaser-small__kicker--zett-parquet')
+
+    kicker_logo = browser.cssselect('.teaser-small__kicker--zett-parquet svg')
+    assert len(kicker_logo) == 0  # no kicker logos inside zett parquet
+
+
+def test_zett_parquet_should_link_to_zett(testbrowser):
+    browser = testbrowser('/zeit-online/parquet-feeds')
+
+    link_logo = browser.cssselect('.parquet-meta__title--zett')[0]
+    link_more = browser.cssselect('.parquet-meta__more-link--zett')[0]
+
+    assert link_logo.attrib['href'] == 'http://ze.tt/'
+    assert link_more.attrib['href'] == 'http://ze.tt/'
 
 
 def test_imagecopyright_tags_are_present_on_centerpages(testbrowser):
@@ -1747,6 +1768,14 @@ def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
     assert len(teaser_small_minor_logo) == 1
     # assert there is no kicker logo when in zmo parquet
     assert len(teaser_kicker_zmo_parquet) == 0
+
+
+def test_longform_should_not_contain_logo_in_kicker(testbrowser):
+    browser = testbrowser('/zeit-online/journalistic-formats-zmo')
+
+    major = browser.cssselect('.cp-area--major')[0]
+    assert len(major.cssselect('.teaser-small ')) == 3
+    assert len(major.cssselect('.teaser-small__kicker-logo--zmo')) == 2
 
 
 def test_zett_teaser_kicker_should_contain_logo(testbrowser):
@@ -1908,9 +1937,9 @@ def test_ranking_ara_should_offset_resultset_on_materialized_cp(
     assert len(area.values()) == 10
     assert area.total_pages == 5
     assert area.filter_query == (
-        'NOT (uniqueId:(http://xml.zeit.de/zeit-magazin/leben/2015-02/'
-        'magdalena-ruecken-fs) OR uniqueId:(http://xml.zeit.de/zeit-magazin/'
-        'mode-design/2014-05/karl-lagerfeld-interview))')
+        'NOT (uniqueId:"http://xml.zeit.de/zeit-magazin/leben/2015-02/'
+        'magdalena-ruecken-fs" OR uniqueId:"http://xml.zeit.de/zeit-magazin/'
+        'mode-design/2014-05/karl-lagerfeld-interview")')
 
 
 def test_ranking_ara_should_not_offset_resultset_on_materialized_cp(

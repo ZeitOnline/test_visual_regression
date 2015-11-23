@@ -484,6 +484,10 @@ class Base(object):
         return self.content_url
 
     @zeit.web.reify
+    def sharing_image(self):
+        return zeit.web.core.interfaces.ISharingImage(self.context, None)
+
+    @zeit.web.reify
     def is_dev_environment(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('dev_environment', '')
@@ -828,12 +832,22 @@ def not_found(request):
     return pyramid.response.Response(body, 404, [('X-Render-With', 'default')])
 
 
+@pyramid.view.view_config(context=pyramid.exceptions.URLDecodeError)
+# Unfortunately, not everyone raises a specific error, so we need to catch
+# the generic one, too. (See also <https://github.com/Pylons/webob/issues/115>)
+@pyramid.view.view_config(context=UnicodeDecodeError)
+def invalid_unicode_in_request(request):
+    body = 'Status 400: Invalid unicode data in request.'
+    return pyramid.response.Response(body, 400)
+
+
 # For some reason we are not able to register ICMSContent on this.
 # We have to register this on every content-view.
 @pyramid.view.view_config(context=zeit.content.cp.interfaces.ICenterPage)
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
 @pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
+@pyramid.view.view_config(route_name='schlagworte_index')
 def surrender(context, request):
     return pyramid.response.Response(
         'OK', 303, headerlist=[('X-Render-With', 'default')])

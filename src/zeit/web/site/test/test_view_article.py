@@ -967,6 +967,33 @@ def test_article_should_have_large_facebook_and_twitter_images(testbrowser):
         'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
 
 
+def test_breaking_news_should_have_fallback_sharing_image(
+        testbrowser, workingcopy):
+    doc = testbrowser('/zeit-online/article/eilmeldungsartikel').document
+    assert 'administratives/eilmeldung-share-image' in doc.xpath(
+        '//meta[@property="og:image"]/@content')[0]
+    assert 'administratives/eilmeldung-share-image' in doc.xpath(
+        '//meta[@name="twitter:image"]/@content')[0]
+
+
+def test_breaking_news_should_have_their_own_sharing_image_if_present(
+        testbrowser, workingcopy):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/eilmeldungsartikel')
+    with checked_out(content) as co:
+        zeit.content.image.interfaces.IImages(co).image = (
+            zeit.cms.interfaces.ICMSContent(
+                'http://xml.zeit.de/zeit-online/image/'
+                'filmstill-hobbit-schlacht-fuenf-hee'))
+    doc = testbrowser('/zeit-online/article/eilmeldungsartikel').document
+    assert (
+        'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee' in
+        doc.xpath('//meta[@property="og:image"]/@content')[0])
+    assert (
+        'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee' in
+        doc.xpath('//meta[@name="twitter:image"]/@content')[0])
+
+
 def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     main_image = browser.cssselect('.article-body img')[0]
