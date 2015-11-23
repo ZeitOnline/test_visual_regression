@@ -4,6 +4,8 @@ Change log for zeit.web
 2.31 (unreleased)
 -----------------
 
+- ZON-2347: Shop carousel: consolidate two teaser links into one
+
 - FIX: style ZMO/zett icons on topicteaser
 
 - FIX: Remove padding from ZMO parquet
