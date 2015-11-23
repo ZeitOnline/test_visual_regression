@@ -39,13 +39,12 @@
             options = $.extend( {}, defaults, settings );
 
         /**
-        * bindToggleEvent – toggle slide event
+        * bindToggleEvent – toggle show/hide event
         * @param  {object} area HTML-Object the plugin is bound to
         */
         function bindToggleEvent( area ) {
 
-            var clickableElement = '.' + options.clickableElementName,
-                $element = $( area ).find( clickableElement );
+            var $element = $( area ).find( '.' + options.clickableElementName );
 
             // set click event
             $element.on( 'click', function() {

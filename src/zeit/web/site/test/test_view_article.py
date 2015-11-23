@@ -120,12 +120,15 @@ def test_article_toc_has_mobile_functionality(testserver, selenium_driver):
 
     # after second click
     toc_index.click()
-    assert not toc_list.is_displayed()
+    condition = EC.invisibility_of_element_located((
+        By.CSS_SELECTOR, '.article-toc__list'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
     assert '--active' not in toc_index.get_attribute('class')
 
     # click on onesie
     toc_onesie.click()
-    assert '/komplettansicht' in driver.current_url
+    assert '/komplettansicht' in selenium_driver.current_url
 
 
 def test_article_page_1_has_correct_h1(testbrowser):
@@ -133,7 +136,7 @@ def test_article_page_1_has_correct_h1(testbrowser):
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
         u'Nancy braucht was Schnelles'), (
-        'article headline is not h1')
+            'article headline is not h1')
 
 
 def test_article_page_2_has_correct_h1(testbrowser):
@@ -141,7 +144,7 @@ def test_article_page_2_has_correct_h1(testbrowser):
     node = '.article__page-teaser > h1'
     assert select(node)[0].text.strip() == (
         u'Der Horror von Crystal wurzelt in der Normalität'), (
-        'article page teaser is not h1')
+            'article page teaser is not h1')
 
 
 def test_article_page_teaserless_has_correct_h1(testbrowser):
@@ -149,7 +152,7 @@ def test_article_page_teaserless_has_correct_h1(testbrowser):
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
         u'Nancy braucht was Schnelles'), (
-        'article headline is not h1')
+            'article headline is not h1')
 
 
 def test_article_complete_has_correct_h1(testbrowser):
@@ -157,7 +160,7 @@ def test_article_complete_has_correct_h1(testbrowser):
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
         u'Nancy braucht was Schnelles'), (
-        'article headline is not h1')
+            'article headline is not h1')
 
 
 def test_article_plain_has_correct_h1(testbrowser):
@@ -165,14 +168,14 @@ def test_article_plain_has_correct_h1(testbrowser):
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
         u'Williams wackelt weiter, steht aber im Viertelfinale'), (
-        'article headline must be h1')
+            'article headline must be h1')
 
 
 def test_article_page_1_has_correct_title(testbrowser):
     select = testbrowser('/zeit-online/article/zeit').cssselect
     assert select('title')[0].text.strip() == (
         u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
-        'article headline is not title')
+            'article headline is not title')
 
 
 def test_article_page_2_has_correct_title(testbrowser):
@@ -180,28 +183,28 @@ def test_article_page_2_has_correct_title(testbrowser):
     assert select('title')[0].text.strip() == (
         u'Crystal Meth: Der Horror von Crystal '
         u'wurzelt in der Normalität |\xa0ZEIT ONLINE'), (
-        'article page teaser is not title')
+            'article page teaser is not title')
 
 
 def test_article_page_teaserless_has_correct_title(testbrowser):
     select = testbrowser('/zeit-online/article/zeit/seite-5').cssselect
     assert select('title')[0].text.strip() == (
         u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
-        'article headline is not title')
+            'article headline is not title')
 
 
 def test_article_complete_has_correct_title(testbrowser):
     select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
     assert select('title')[0].text.strip() == (
         u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
-        'article headline is not title')
+            'article headline is not title')
 
 
 def test_article_plain_has_correct_title(testbrowser):
     select = testbrowser('zeit-online/article/02').cssselect
     assert select('title')[0].text.strip() == (
         u'Zwei Baguettes und ein Zimmer bitte |\xa0ZEIT ONLINE'), (
-        'article headline is not title')
+            'article headline is not title')
 
 
 def test_fresh_breaking_news_article_renders_breaking_bar(testbrowser):
@@ -339,7 +342,7 @@ def test_article_sharing_menu_should_open_and_close(
         By.CSS_SELECTOR, sharing_menu_selector))
     assert WebDriverWait(
         selenium_driver, 1).until(condition), (
-        'sharing menu should hide again on click')
+            'sharing menu should hide again on click')
 
 
 def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
