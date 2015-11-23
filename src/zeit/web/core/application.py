@@ -15,6 +15,7 @@ import pyramid.renderers
 import pyramid_beaker
 import pyramid_jinja2
 import pyramid_zodbconn
+import requests.sessions
 import venusian
 import zope.app.appsetup.product
 import zope.component
@@ -464,3 +465,7 @@ zeit.cms.repository.file.RepositoryFile.__parent__ = property(
     resolve_parent, set_workingcopy_parent)
 zeit.cms.repository.folder.Folder.__parent__ = property(
     resolve_parent, set_workingcopy_parent)
+
+
+# Skip superfluous disk accesses, since we never use netrc for authentication.
+requests.sessions.get_netrc_auth = lambda *args, **kw: None
