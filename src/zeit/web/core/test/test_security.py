@@ -9,7 +9,7 @@ import mock
 import zeit.web.core.security
 
 
-def test_reload_community_should_produce_result(monkeypatch):
+def test_reload_community_should_produce_result(mock_metrics, monkeypatch):
     request = mock.Mock()
 
     def call(request, **kwargs):
@@ -21,7 +21,7 @@ def test_reload_community_should_produce_result(monkeypatch):
     assert res == 'result'
 
 
-def test_reload_community_should_be_recalled(monkeypatch):
+def test_reload_community_should_be_recalled(mock_metrics, monkeypatch):
     request = mock.Mock()
     request.called = 0
 
@@ -36,7 +36,8 @@ def test_reload_community_should_be_recalled(monkeypatch):
     assert request.called == 2
 
 
-def test_reload_community_should_suceed_after_one_call(monkeypatch):
+def test_reload_community_should_suceed_after_one_call(
+        mock_metrics, monkeypatch):
     request = mock.Mock()
     request.called = 0
 
