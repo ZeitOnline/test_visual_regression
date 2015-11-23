@@ -2,18 +2,23 @@
  * @fileOverview Script to overscroll content pages with a loaction switch to another page
  * @author nico.bruenjes@zeit.de
  * @version  0.1
+ * @todo load first article instead of image
+ * @todo make navigation background image
+ * @todo do not count on homepage, remove hash
  */
 define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
     var defaults = {
-        jumpTo: 'http://www.zeit.de/#overscrolled',
-        triggerElement: '.footer',
+        jumpHash: '#overscroll-artikel',
+        jumpTo: 'http://www.zeit.de/',
         livePreview: false,
-        previewPath: 'http://localhost:9090/exampleimages/sitepreview/sitepreview.jpg',
+        overscrollElement: '#overscrolling',
         previewHeight: 550,
         previewOpacity: 0.4,
+        previewPath: '/exampleimages/sitepreview/sitepreview.jpg',
         progressElement: '#circle_progress',
         progressElementBar: '#circle_progress_bar',
         progressText: 'Zurück zur Startseite',
+        triggerElement: '.footer',
         windowMinHeight: 1000
     },
     config,
@@ -26,11 +31,11 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
             $element = $( $template.html() );
 
         // add text
-        $element.find( '#overscrolling_indicator' ).attr( 'data-text', config.progressText );
+        $element.find( config.overscrollElement + '_indicator' ).attr( 'data-text', config.progressText );
         // preview image case
         if ( !config.livepreview ) {
             var img = $( '<img alt="">' ).attr( 'src', config.previewPath );
-            $element.find( '#overscrolling_target' )
+            $element.find( config.overscrollElement + '_target' )
                 .css({
                     height: config.previewHeight,
                     opacity: config.previewOpacity,
@@ -43,13 +48,23 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
         // insert the shite
         $element.insertBefore( $template );
 
+        // make indicator clickable
+        $( config.overscrollElement + '_indicator' ).on( 'click', function( event ) {
+            event.preventDefault();
+            if ( debug ) {
+                console.debug( 'overscrolling: click jump to HP.' );
+            } else {
+                window.location.href = config.jumpTo; // click w/o hash
+            }
+        });
+
         $( window ).on( 'scroll', $.throttle( function() {
             animateCircleByScroll();
             if ( $( window ).scrollTop() >= $( document ).height() - $( window ).height() ) {
                 if ( debug ) {
-                    console.debug( 'BÄMM!' );
+                    console.debug( 'overscrolling: jump to HP.' );
                 } else {
-                    window.location.href = config.jumpTo;
+                    window.location.href = config.jumpTo + config.jumpHash;
                 }
             }
         }, 25 ));
@@ -65,20 +80,20 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
     },
     animateCircleByScroll = function() {
         var windowBottom = $( window ).scrollTop() + $( window ).height(),
-            elementOffset = $( '#overscrolling' ).offset().top,
-            elementHeight = $( '#overscrolling' ).height(),
+            elementOffset = $( config.overscrollElement ).offset().top,
+            elementHeight = $( config.overscrollElement ).height(),
             partOfWay = parseInt( ( windowBottom - elementOffset )  * 100 / elementHeight ),
             $progressElement = $( config.progressElementBar ),
-            indicatorOffset = $( '#overscrolling' ).offset().top + $( '#overscrolling_indicator' ).height() + 25 + 25;
+            indicatorOffset = $( config.overscrollElement ).offset().top + $( config.overscrollElement + '_indicator' ).height() + 25 + 25;
         if ( windowBottom >= elementOffset ) {
             animateCircle( $progressElement, partOfWay );
         } else {
             animateCircle( $progressElement, 0 );
         }
         if ( windowBottom > indicatorOffset ) {
-            $( '#overscrolling_indicator' ).addClass( 'overscrolling__indicator--fixed' );
+            $( config.overscrollElement + '_indicator' ).addClass( 'overscrolling__indicator--fixed' );
         } else {
-            $( '#overscrolling_indicator' ).removeClass( 'overscrolling__indicator--fixed' );
+            $( config.overscrollElement + '_indicator' ).removeClass( 'overscrolling__indicator--fixed' );
         }
     };
 
@@ -93,8 +108,12 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
                             // attach Elements
                             loadElements();
                         }
+                    } else {
+                        if ( debug ) { console.debug( 'overscrolling: not on desktop' ); }
                     }
                 });
+            } else {
+                if ( debug ) { console.debug( 'overscrolling: windowMinHeight not matched' ); }
             }
         }
     };
