@@ -1,7 +1,7 @@
 import mock
 
 import pyramid.scripts.pviews
-
+import pyramid.request
 import zeit.cms.interfaces
 
 import zeit.web.site.view_centerpage
@@ -10,7 +10,10 @@ import zeit.web.site.view_centerpage
 def test_custom_predicate_should_only_match_website_content(application):
     pviews = pyramid.scripts.pviews.PViewsCommand([])
     registry = application.zeit_app.config.registry
-    views = pviews._find_view('/centerpage/zeitonline', registry).views
+
+    request = pyramid.request.Request.blank('/centerpage/zeitonline')
+    request.registry = registry
+    views = pviews._find_view(request).views
 
     # Just a helper, since the position in pviews in unpredictable
     def zon_view(pviews):
@@ -45,7 +48,9 @@ def test_custom_predicate_should_only_match_website_content(application):
 def test_custom_predicate_should_only_match_zmo_content(application):
     pviews = pyramid.scripts.pviews.PViewsCommand([])
     registry = application.zeit_app.config.registry
-    views = pviews._find_view('/centerpage/index', registry).views
+    request = pyramid.request.Request.blank('/centerpage/index')
+    request.registry = registry
+    views = pviews._find_view(request).views
 
     # Just a helper, since the position in pviews in unpredictable
     def zmo_view(pviews):
@@ -79,8 +84,9 @@ def test_custom_predicate_should_only_match_zmo_content(application):
 def test_content_should_be_rendered_with_render_with_header(application):
     pviews = pyramid.scripts.pviews.PViewsCommand([])
     registry = application.zeit_app.config.registry
-    views = pviews._find_view(
-        '/zeit-online/render-with-header', registry).views
+    request = pyramid.request.Request.blank('/zeit-online/render-with-header')
+    request.registry = registry
+    views = pviews._find_view(request).views
 
     def render_with_view(pviews):
         for view in pviews:

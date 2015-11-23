@@ -196,7 +196,7 @@
                 <text>
                     <h4>Wie wird der Modus ausgelöst?</h4>
                     <ul>
-                        <li>if the pages are requested from a host with a User-Agent containing ZONApp.</a></li>
+                        <li>if the pages are requested from a host with a User-Agent containing ZONApp.</li>
                         <li>if the dev environment and the query parameter <a href="/zeit-online/article/01?app-content">?app-content</a> is present.</li>
                     </ul>
                 </text>
@@ -228,6 +228,15 @@
                     <strong>Wie wird der Modus ausgelöst?</strong>
                     <ul>
                         <li>Über den Query Parameter <a href="/zeit-online/storystream/dummy?debug=eilmeldung">?debug=eilmeldung</a>.</li>
+                    </ul>
+                </text>
+            </container>
+            <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-8bc1e86c-bcf7-4d07-a59c-287eb191f254" title="Tracking für Video-Abspielen">
+                <text>
+                    <p>Der Brightcove Video-Player sendet via window.postMessage events (playerStarted, contentStarted, contentCompleted). Diese werden vom Modul triggeredEventTracking.js auf unserer Seite abgefangen, ausgewertet, und dann als Tracking-Event an Webtrekk und IVW gegeben.</p>
+                    <strong>Das ganze lässt sich in der Konsole beobachten:</strong>
+                    <ul>
+                        <li>Über den Query Parameter <a href="http://www.zeit.de/digital/datenschutz/2015-11/vorratsdatenspeicherung-ueberwachung-paris-anschlag-terrorismus?triggered-event-tracking-debug">?triggered-event-tracking-debug</a>.</li>
                     </ul>
                 </text>
             </container>

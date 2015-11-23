@@ -1,12 +1,13 @@
 import grokcore.component
+import zope.component
 import zope.interface
 import copy
 
-import zeit.cms.repository.interfaces
+import zeit.cms.interfaces
 import zeit.content.article
-import zeit.content.article.article
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
+import zeit.content.image.imagereference
 
 import zeit.web.core.block
 import zeit.web.core.interfaces
@@ -212,3 +213,29 @@ class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
 
 class IPhotoclusterArticle(zeit.content.article.interfaces.IArticle):
     pass
+
+
+@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
+@grokcore.component.implementer(zeit.web.core.interfaces.ISharingImage)
+def default_sharing_image(context):
+    image = zeit.content.image.interfaces.IImages(context, None)
+    if image is None:
+        return None
+    return image.image
+
+
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
+@grokcore.component.implementer(zeit.web.core.interfaces.ISharingImage)
+def breakingnews_sharing_image(context):
+    """Use a configured fallback image for breaking news articles
+    that don't have an article image yet.
+    """
+
+    article_image = default_sharing_image(context)
+    if zeit.content.article.interfaces.IBreakingNews(
+            context).is_breaking and article_image is None:
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return zeit.cms.interfaces.ICMSContent(
+            conf['breaking_news_fallback_image'], None)
+    else:
+        return article_image
