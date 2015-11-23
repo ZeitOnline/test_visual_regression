@@ -455,14 +455,11 @@
 	border-radius: 3px;
 	color: $white;
 	content: $content;
-	font-family: sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 	font-weight: 700;
-	height: remify(17px);
-	line-height: 1;
 	margin-left: remify(10px);
 	text-align: center;
-	text-decoration: none;
-	vertical-align: middle;
+	vertical-align: text-top;
 	width: remify(17px);
 	@include inline-block();
 	@include font-smoothing();
