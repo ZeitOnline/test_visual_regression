@@ -32,7 +32,8 @@ require([
     comments.init();
     adblockCount.init();
     if ( article ) {
-        overscrolling.init();
+        window.ZMO.overscrolling = overscrolling;
+        //overscrolling.init();
     }
 });
 
