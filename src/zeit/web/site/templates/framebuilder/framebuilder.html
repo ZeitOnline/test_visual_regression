@@ -1,9 +1,9 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 {% if not view.page_slice %}
-    {% include "zeit.web.site:templates/framebuilder/html-head.tpl" %}
-    {% include "zeit.web.site:templates/framebuilder/upper-body.tpl" %}
-    {% include "zeit.web.site:templates/framebuilder/lower-body.tpl" %}
+    {% include "zeit.web.site:templates/framebuilder/html_head.tpl" %}
+    {% include "zeit.web.site:templates/framebuilder/upper_body.tpl" %}
+    {% include "zeit.web.site:templates/framebuilder/lower_body.tpl" %}
 {% else %}
     {% include "zeit.web.site:templates/framebuilder/{}.tpl".format(view.page_slice) %}
 {% endif %}
