@@ -100,6 +100,34 @@ def test_article_pagination_active_state(testbrowser):
     assert '--current' in select('.article-toc__item')[2].get('class')
 
 
+def test_article_toc_has_mobile_functionality(testserver, selenium_driver):
+
+    selenium_driver.set_window_size(320, 480)
+    selenium_driver.get('{}/zeit-online/article/zeit'.format(testserver.url))
+
+    toc_box = selenium_driver.find_element_by_css_selector('.article-toc')
+    toc_index = toc_box.find_element_by_css_selector('.article-toc__headline')
+    toc_onesie = toc_box.find_element_by_css_selector('.article-toc__onesie')
+    toc_list = toc_box.find_element_by_css_selector('.article-toc__list')
+
+    # before click
+    assert not toc_list.is_displayed()
+
+    # after click
+    toc_index.click()
+    assert toc_index.is_displayed()
+    assert '--active' in toc_index.get_attribute('class')
+
+    # after second click
+    toc_index.click()
+    assert not toc_list.is_displayed()
+    assert '--active' not in toc_index.get_attribute('class')
+
+    # click on onesie
+    toc_onesie.click()
+    assert '/komplettansicht' in driver.current_url
+
+
 def test_article_page_1_has_correct_h1(testbrowser):
     select = testbrowser('/zeit-online/article/zeit').cssselect
     node = '.article__item > h1 > .article-heading__title'

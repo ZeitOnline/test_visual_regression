@@ -1,3 +1,5 @@
+$break-onesie: 360px // breakpoint for onesie
+
 .article-toc
 	display: block
 
@@ -9,7 +11,6 @@
 		width: 100%
 		+respond-min($break-tablet-min)
 			position: relative
-			display: block
 			float: left
 			margin-bottom: remify(36px) // add more space due to absolute position of onesie
 			width: remify(205px) // same like .article__item--marginalia
@@ -25,28 +26,34 @@
 		width: 48%
 		&:after
 			+build-mobile-plus-minus-button()
+		+on-interaction
+			&:after
+				cursor: pointer
+		&--active
+			&:after
+				+build-mobile-plus-minus-button('-')
 		+respond-min($break-tablet-min)
 			display: block
 			width: auto
 
 	&__list
+		display: none
 		letter-spacing: $zon-letter-spacing-s
 		list-style: none
 		margin-left: -$page-padding
 		margin-right: -$page-padding
 		margin-top: 0px
 		padding: remify(5px) $page-padding 0 $page-padding
-		width: auto
 		border-bottom: 1px solid $zon-silver
 		background-color: $zon-lighter-grey
 		+respond-min($break-tablet-min)
+			display: block !important // use important to overwrite possible js
 			margin: 0
 			padding: 0
 			border: none
 			background-color: transparent
 
 	&__item
-		color: $zon-grey
 		margin: remify(16px 0)
 		&:not(:last-child)
 			border-bottom: 1px solid $zon-alto
@@ -56,7 +63,7 @@
 		a
 			+on-interaction
 				border-bottom: 1px solid rgba($color-text, .5)
-				color: currentColor
+				color: $zon-grey
 		+respond-min($break-tablet-min)
 			&:not(:last-child)
 				border: 0px
@@ -69,14 +76,17 @@
 			letter-spacing: $zon-letter-spacing-m
 
 	&__onesie
-		text-align: right
 		color: $zon-grey
 		letter-spacing: $zon-letter-spacing-m
+		display: block
+		padding-top: remify(16px)
 		&:after
 			content: " \203A" // › = single right-pointing angle quotation mark
-		+respond-min($break-0)
+		+respond-min($break-onesie) // special breakpoint to avoid line break
 			display: inline-block
 			width: 50%
+			text-align: right
+			padding-top: 0
 		+respond-min($break-tablet-min)
 			position: absolute
 			bottom: remify(-16px) // move element to bottom
