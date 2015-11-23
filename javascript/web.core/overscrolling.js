@@ -18,11 +18,26 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
         progressElement: '#circle_progress',
         progressElementBar: '#circle_progress_bar',
         progressText: 'Zurück zur Startseite',
+        trackingBase: 'stationaer.overscroll....',
+        trackingSlugs: {
+            view: '',
+            click: 'clickToHP',
+            scroll: 'scrollToHP'
+        },
         triggerElement: '.footer',
-        windowMinHeight: 1000
+        windowMinHeight: 1000,
     },
     config,
     debug = location.search.indexOf( 'debug-overscrolling' ) !== -1,
+    clickTrack = function ( type, target ) {
+        type = type | '';
+        target = target | '';
+        var trackingData = config.trackingBase + type + '|' + target;
+        window.wt.sendinfo({
+            linkId: trackingData,
+            sendOnUnload: 1
+        }
+    },
     loadElements = function( options ) {
         // first untie the trigger event
         $( config.triggerElement ).off( 'inview' );
@@ -48,12 +63,20 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
         // insert the shite
         $element.insertBefore( $template );
 
+        $( config.overscrollElement ).on( 'inview', function( isVisible ) {
+            if ( isVisible ) {
+                $( config.overscrollElement ).off( 'inview' );
+                clickTrack( 'view' );
+            }
+        });
+
         // make indicator clickable
         $( config.overscrollElement + '_indicator' ).on( 'click', function( event ) {
             event.preventDefault();
             if ( debug ) {
                 console.debug( 'overscrolling: click jump to HP.' );
             } else {
+                clickTrack( 'click', config.jumpTo );
                 window.location.href = config.jumpTo; // click w/o hash
             }
         });
@@ -64,6 +87,7 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
                 if ( debug ) {
                     console.debug( 'overscrolling: jump to HP.' );
                 } else {
+                    clickTrack( 'scroll', config.jumpTo );
                     window.location.href = config.jumpTo + config.jumpHash;
                 }
             }
