@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging"><attribute ns="DAV:" name="href">/cms/work/administratives/eilmeldung-share-image/</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">ZEIT ONLINE Eilmeldung - Nachrichten, Neuigkeiten, News</attribute><attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">eilmeldung-share-image.jpg</attribute><attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-09-23T11:16:42.474882+00:00</attribute><attribute ns="http://namespaces.zeit.de/CMS/document" name="title">ZEIT ONLINE Eilmeldung - Nachrichten, Neuigkeiten, News</attribute><attribute ns="http://namespaces.zeit.de/CMS/image" name="variants">&lt;pickle&gt;
+  &lt;dictionary&gt;
+    &lt;item&gt;
+      &lt;key&gt; &lt;unicode&gt;cinema&lt;/unicode&gt; &lt;/key&gt;
+      &lt;value&gt;
+        &lt;dictionary&gt;
+          &lt;item key="focus_x"&gt;
+              &lt;float&gt;0.5&lt;/float&gt;
+          &lt;/item&gt;
+          &lt;item key="focus_y"&gt;
+              &lt;float&gt;0.19668201676703267&lt;/float&gt;
+          &lt;/item&gt;
+          &lt;item key="zoom"&gt;
+              &lt;int&gt;1&lt;/int&gt;
+          &lt;/item&gt;
+        &lt;/dictionary&gt;
+      &lt;/value&gt;
+    &lt;/item&gt;
+    &lt;item&gt;
+      &lt;key&gt; &lt;unicode&gt;default&lt;/unicode&gt; &lt;/key&gt;
+      &lt;value&gt;
+        &lt;dictionary&gt;
+          &lt;item key="focus_x"&gt;
+              &lt;float&gt;0.4968621524763696&lt;/float&gt;
+          &lt;/item&gt;
+          &lt;item key="focus_y"&gt;
+              &lt;float&gt;0.6559817797517123&lt;/float&gt;
+          &lt;/item&gt;
+          &lt;item key="zoom"&gt;
+              &lt;int&gt;1&lt;/int&gt;
+          &lt;/item&gt;
+        &lt;/dictionary&gt;
+      &lt;/value&gt;
+    &lt;/item&gt;
+    &lt;item&gt;
+      &lt;key&gt; &lt;unicode&gt;panorama&lt;/unicode&gt; &lt;/key&gt;
+      &lt;value&gt;
+        &lt;dictionary&gt;
+          &lt;item key="focus_x"&gt;
+              &lt;float&gt;0.5&lt;/float&gt;
+          &lt;/item&gt;
+          &lt;item key="focus_y"&gt;
+              &lt;float&gt;0.8231489432073326&lt;/float&gt;
+          &lt;/item&gt;
+          &lt;item key="zoom"&gt;
+              &lt;int&gt;1&lt;/int&gt;
+          &lt;/item&gt;
+        &lt;/dictionary&gt;
+      &lt;/value&gt;
+    &lt;/item&gt;
+    &lt;item&gt;
+      &lt;key&gt; &lt;unicode&gt;portrait-large&lt;/unicode&gt; &lt;/key&gt;
+      &lt;value&gt;
+        &lt;dictionary&gt;
+          &lt;item key="focus_x"&gt;
+              &lt;int&gt;0&lt;/int&gt;
+          &lt;/item&gt;
+          &lt;item key="focus_y"&gt;
+              &lt;int&gt;1&lt;/int&gt;
+          &lt;/item&gt;
+          &lt;item key="zoom"&gt;
+              &lt;float&gt;0.5751376005964521&lt;/float&gt;
+          &lt;/item&gt;
+        &lt;/dictionary&gt;
+      &lt;/value&gt;
+    &lt;/item&gt;
+    &lt;item&gt;
+      &lt;key&gt; &lt;unicode&gt;portrait-small&lt;/unicode&gt; &lt;/key&gt;
+      &lt;value&gt;
+        &lt;dictionary&gt;
+          &lt;item key="focus_x"&gt;
+              &lt;int&gt;0&lt;/int&gt;
+          &lt;/item&gt;
+          &lt;item key="focus_y"&gt;
+              &lt;int&gt;1&lt;/int&gt;
+          &lt;/item&gt;
+          &lt;item key="zoom"&gt;
+              &lt;float&gt;0.6272175076201126&lt;/float&gt;
+          &lt;/item&gt;
+        &lt;/dictionary&gt;
+      &lt;/value&gt;
+    &lt;/item&gt;
+    &lt;item&gt;
+      &lt;key&gt; &lt;unicode&gt;square-large&lt;/unicode&gt; &lt;/key&gt;
+      &lt;value&gt;
+        &lt;dictionary&gt;
+          &lt;item key="focus_x"&gt;
+              &lt;int&gt;0&lt;/int&gt;
+          &lt;/item&gt;
+          &lt;item key="focus_y"&gt;
+              &lt;int&gt;1&lt;/int&gt;
+          &lt;/item&gt;
+          &lt;item key="zoom"&gt;
+              &lt;float&gt;0.4819419775014802&lt;/float&gt;
+          &lt;/item&gt;
+        &lt;/dictionary&gt;
+      &lt;/value&gt;
+    &lt;/item&gt;
+    &lt;item&gt;
+      &lt;key&gt; &lt;unicode&gt;square-small&lt;/unicode&gt; &lt;/key&gt;
+      &lt;value&gt;
+        &lt;dictionary&gt;
+          &lt;item key="focus_x"&gt;
+              &lt;int&gt;0&lt;/int&gt;
+          &lt;/item&gt;
+          &lt;item key="focus_y"&gt;
+              &lt;int&gt;1&lt;/int&gt;
+          &lt;/item&gt;
+          &lt;item key="zoom"&gt;
+              &lt;float&gt;0.4764598820253054&lt;/float&gt;
+          &lt;/item&gt;
+        &lt;/dictionary&gt;
+      &lt;/value&gt;
+    &lt;/item&gt;
+    &lt;item&gt;
+      &lt;key&gt; &lt;unicode&gt;stripe&lt;/unicode&gt; &lt;/key&gt;
+      &lt;value&gt;
+        &lt;dictionary&gt;
+          &lt;item key="focus_x"&gt;
+              &lt;float&gt;0.5&lt;/float&gt;
+          &lt;/item&gt;
+          &lt;item key="focus_y"&gt;
+              &lt;float&gt;0.6999680025597952&lt;/float&gt;
+          &lt;/item&gt;
+          &lt;item key="zoom"&gt;
+              &lt;int&gt;1&lt;/int&gt;
+          &lt;/item&gt;
+        &lt;/dictionary&gt;
+      &lt;/value&gt;
+    &lt;/item&gt;
+  &lt;/dictionary&gt;
+&lt;/pickle&gt;</attribute><attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute><attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:91a40d70-945a-4b83-9079-a27f2e471ae8}</attribute><attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute><attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute><attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute><attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-09-23T11:22:43.087634+00:00</attribute><attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.neukamm</attribute><attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute><attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt;
+  &lt;tuple&gt;
+    &lt;tuple&gt;
+      &lt;unicode&gt;© ZEIT ONLINE&lt;/unicode&gt;
+      &lt;none/&gt;
+      &lt;false/&gt;
+    &lt;/tuple&gt;
+  &lt;/tuple&gt;
+&lt;/pickle&gt;</attribute><attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-23T11:21:43.401023+00:00</attribute><attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-09-23T11:22:43.087634+00:00</attribute><attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-09-23T11:21:51.563503+00:00</attribute><attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-09-23T11:21:43.028594+00:00</attribute><attribute ns="DAV:" name="resourcetype"/>
+<attribute ns="DAV:" name="creationdate">2015-09-23T11:21:44Z</attribute>
+<attribute ns="DAV:" name="getlastmodified">Wed, 23 Sep 2015 11:21:44 GMT</attribute>
+<attribute ns="DAV:" name="getetag">"eb0210-1000-5206851ca04d0"</attribute>
+<attribute ns="DAV:" name="supportedlock">
+
+
+
+
+
+
+
+
+</attribute>
+<attribute ns="DAV:" name="lockdiscovery"/>
+<attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>
