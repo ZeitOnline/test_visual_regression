@@ -59,7 +59,7 @@
                     } else {
                         $( options.toggleElement ).velocity( options.hide, { duration: 200 } );
                     }
-                    // toggle suffix if the is one
+                    // toggle suffix if there is one
                     $element.toggleClass( options.clickableElementName + options.activeSuffix );
                 }
 
