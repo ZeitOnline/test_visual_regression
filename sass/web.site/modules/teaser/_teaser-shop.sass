@@ -34,6 +34,10 @@
 	max-width: remify(300px)
 	box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.07)
 
+	// don't display the second until tablet
+	& + &
+		+respond-max($break-tablet-min)
+			display: none
 	// don't display the third item on smaller screens evarrrrr
 	& + & + &
 		+respond-max($break-desktop-min)
@@ -42,6 +46,8 @@
 		box-shadow: none
 		+on-interaction
 			box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.07)
+			.teaser-shop__text
+				color: $zon-charcoal
 
 	&__media
 		@extend %teaser-bar__media
@@ -65,6 +71,3 @@
 			content: "\0020\25B8" // No-Break Space and ▸ = Black Right-Pointing Small Triangle
 		+respond-min($break-desktop-min)
 			color: $zon-grey
-			.teaser-shop &
-				+on-interaction
-					color: $zon-charcoal
