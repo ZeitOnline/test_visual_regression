@@ -4,7 +4,7 @@ Change log for zeit.web
 2.31 (unreleased)
 -----------------
 
-- fix/topicteaser-zmo-icon: fox ZMO/zett icons on topicteaser
+- FIX: style ZMO/zett icons on topicteaser
 
 
 2.30 (2015-11-23)
