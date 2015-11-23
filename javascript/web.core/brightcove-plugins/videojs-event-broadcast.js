@@ -15,7 +15,7 @@
         // - two(!) times on start (with currentTime undefined and currentTime 0)
         // - on resume (after pause).
         // - on jumping to another position in the video
-        // That's why we ose one() for registering the event. (Another solution
+        // That's why we choose one() for registering the event. (Another solution
         // would be to check for that one event which has currentTime===0.)
         player.one( 'play', function( e ) {
             postEventToWindow( 'playerStarted' );
