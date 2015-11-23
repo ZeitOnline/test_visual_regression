@@ -7,7 +7,11 @@
     brightcove_embed="default"
     ) %}
 
-<div class="video-player" id="video-player-{{ videoId }}">
+<div class="video-player"
+    id="video-player-{{ videoId }}"
+    data-video-provider="brightcove"
+    data-video-size="large">
+
     {% if iframe %}
         <iframe
             class="video-player__iframe"

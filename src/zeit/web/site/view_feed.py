@@ -10,12 +10,14 @@ import pytz
 import pyramid.view
 import lxml.etree
 import lxml.objectify
+import zope.component
 
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.cms.interfaces
 import zeit.push.interfaces
 
+import zeit.web
 import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.template
@@ -57,15 +59,18 @@ def lps_sort(context):
     return info.date_last_published_semantic or DATE_MIN
 
 
-def filter_and_sort_entries(context):
+def filter_and_sort_entries(items):
     filter_news = filter(
         lambda c: '/news' not in c.uniqueId,
-        zeit.content.cp.interfaces.ITeaseredContent(context))
+        items)
     return sorted(filter_news, key=lps_sort, reverse=True)
 
 
 class Base(zeit.web.core.view.Base):
-    pass
+
+    @property
+    def items(self):
+        return zeit.content.cp.interfaces.ITeaseredContent(self.context)
 
 
 @pyramid.view.view_defaults(
@@ -114,7 +119,8 @@ class Newsfeed(Base):
             )
         )
         root.append(channel)
-        for content in filter_and_sort_entries(self.context)[1:15]:
+
+        for content in filter_and_sort_entries(self.items)[:15]:
             metadata = zeit.cms.content.interfaces.ICommonMetadata(
                 content, None)
             if metadata is None:
@@ -178,6 +184,30 @@ class Newsfeed(Base):
 
 
 @pyramid.view.view_config(
+    header='host:newsfeed(\.staging)?\.zeit\.de',
+    context='zeit.content.author.interfaces.IAuthor')
+class AuthorFeed(Newsfeed):
+    @zeit.web.reify
+    def supertitle(self):
+        return "Autorenfeed {}".format(self.context.display_name)
+
+    @zeit.web.reify
+    def pagedescription(self):
+        return "Alle Artikel von {}".format(self.context.display_name)
+
+    @zeit.web.reify
+    def items(self):
+        solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+        query = '{} AND (type:article)'.format(self.context.display_name)
+        resultset = []
+        for result in solr.search(
+                query, sort='date-first-released desc', rows=8):
+            resultset.append(
+                zeit.cms.interfaces.ICMSContent(result['uniqueId']))
+        return resultset
+
+
+@pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-spektrum-flavoured',
     renderer='string')
@@ -204,7 +234,7 @@ class SpektrumFeed(Base):
                        type=self.request.response.content_type)
         )
         root.append(channel)
-        for content in filter_and_sort_entries(self.context)[1:100]:
+        for content in filter_and_sort_entries(self.items)[1:100]:
             normalized_title = zeit.cms.interfaces.normalize_filename(
                 content.title)
             tracking = urllib.urlencode({
