@@ -8,7 +8,8 @@
  */
 define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
     var defaults = {
-        jumpHash: '#overscroll-artikel',
+        documentMinHeight: 1000,
+        jumpHash: '#overscroll-article',
         jumpTo: 'http://www.zeit.de/',
         livePreview: false,
         overscrollElement: '#overscrolling',
@@ -24,19 +25,18 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
             click: 'clickToHP',
             scroll: 'scrollToHP'
         },
-        triggerElement: '.footer',
-        windowMinHeight: 1000,
+        triggerElement: '.footer'
     },
     config,
     debug = location.search.indexOf( 'debug-overscrolling' ) !== -1,
-    clickTrack = function ( type, target ) {
-        type = type | '';
-        target = target | '';
+    clickTrack = function( type, target ) {
+        type = type || '';
+        target = target || '';
         var trackingData = config.trackingBase + type + '|' + target;
         window.wt.sendinfo({
             linkId: trackingData,
             sendOnUnload: 1
-        }
+        });
     },
     loadElements = function( options ) {
         // first untie the trigger event
@@ -124,7 +124,7 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
     return {
         init: function( options ) {
             config = $.extend( defaults, options );
-            if ( $( window ).height() >= config.windowMinHeight ) {
+            if ( $( document ).height() >= config.documentMinHeight ) {
                 // inview event to change to elemen
                 $( config.triggerElement ).on( 'inview', function( isVisible ) {
                     if ( isVisible ) {
@@ -137,7 +137,7 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
                     }
                 });
             } else {
-                if ( debug ) { console.debug( 'overscrolling: windowMinHeight not matched' ); }
+                if ( debug ) { console.debug( 'overscrolling: documentMinHeight not matched' ); }
             }
         }
     };
