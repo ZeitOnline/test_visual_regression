@@ -1770,6 +1770,14 @@ def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
     assert len(teaser_kicker_zmo_parquet) == 0
 
 
+def test_longform_should_not_contain_logo_in_kicker(testbrowser):
+    browser = testbrowser('/zeit-online/journalistic-formats-zmo')
+
+    major = browser.cssselect('.cp-area--major')[0]
+    assert len(major.cssselect('.teaser-small ')) == 3
+    assert len(major.cssselect('.teaser-small__kicker-logo--zmo')) == 2
+
+
 def test_zett_teaser_kicker_should_contain_logo(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats-zett')
 

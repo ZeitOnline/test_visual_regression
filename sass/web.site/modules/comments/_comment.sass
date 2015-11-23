@@ -88,7 +88,6 @@ $color-comment-border: $color-border
 		+clearfix
 		text-align: right
 
-	&__rewrapper,
 	&__origin,
 	&__reaction,
 	&__date
@@ -113,13 +112,6 @@ $color-comment-border: $color-border
 		+respond-min($break-phablet-min)
 			display: inline
 			padding-left: remify(4px)
-
-	&__rewrapper
-		color: $zon-grey
-		cursor: pointer
-		display: none
-		float: left
-		margin-top: remify(4px)
 
 	&__origin
 		display: block
@@ -149,6 +141,34 @@ $color-comment-border: $color-border
 		&--sending
 			color: $zon-light-grey !important
 
+	&__rewrapper
+		display: none
+		cursor: pointer
+		padding-bottom: remify(28px)
+
+		&:hover
+			.comment__count
+				background-color: $zon-charcoal
+			.comment__cta
+				color: $zon-dark-grey
+				border-bottom: 1px solid $zon-mid-grey
+
+	&__count
+		+border-radius(1em)
+		+transition(background-color .2s)
+		background-color: $zon-trout
+		color: $zon-lighter-grey
+		font-size: remify(11px)
+		margin-right: remify(12px)
+		padding: remify(3px 8px)
+
+	&__cta
+		+transition-property(border-bottom-color, color)
+		+transition-duration(.2s)
+		border-bottom: 1px solid $zon-light-grey
+		color: $zon-grey
+		font-size: remify(15px)
+		letter-spacing: $zon-letter-spacing-s
 
 .comment--indented
 	border-top-width: 0 !important
@@ -226,21 +246,9 @@ $color-comment-border: $color-border
 		bottom: remify(20px)
 		position: absolute
 	&__count
-		+border-radius(1em)
-		+transition(background-color .2s)
-		background-color: $zon-trout
-		color: $zon-lighter-grey
-		font-size: remify(11px)
-		margin-right: remify(12px)
-		padding: remify(3px 8px)
+		@extend .comment__count
 	&__cta
-		+transition-property(border-bottom-color, color)
-		+transition-duration(.2s)
-		border-bottom: 1px solid $zon-light-grey
-		color: $zon-grey
-		font-size: remify(15px)
-		letter-spacing: $zon-letter-spacing-s
-
+		@extend .comment__cta
 
 // icons
 .comment__badge

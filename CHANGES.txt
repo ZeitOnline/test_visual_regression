@@ -4,6 +4,21 @@ Change log for zeit.web
 2.30 (unreleased)
 -----------------
 
+- DEV-752: Prepare spektrum feed to use category supertitle
+
+- ZON-2395: IVW-Verpixelung for video plays
+
+- ZON-2413: Disect default teaser sticker edgecasing, handle feature longforms
+
+- ZON-2414: Use pagetitle in twitter:title meta tag
+
+- ZON-2404: Show comment replies in ZMO
+
+- ZON-2261: Use configured fallback sharing image for breaking news articles
+  that don't have an article image yet
+
+- ZON-2358: Tweak collapse comment button
+
 - MAINT: Update pyramid to 1.5.7
 
 - ZON-2291: Implement author rss

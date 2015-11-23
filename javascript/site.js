@@ -14,15 +14,17 @@ require([ 'vendor/require', 'config' ], function() {});
 require([
     'web.core/images',
     'web.core/clicktracking',
+    'web.core/triggeredEventTracking',
     'web.core/adReload',
     'web.site/video/videoStage',
     'web.site/articledate',
     'web.site/articlesharing',
     'web.site/comments',
     'web.site/adblockCount.js'
-], function( images, clicktracking, adReload, videoStage, articledate, articlesharing, comments, adblockCount ) {
+], function( images, clicktracking, triggeredEventTracking, adReload, videoStage, articledate, articlesharing, comments, adblockCount ) {
     images.init();
     clicktracking.init();
+    triggeredEventTracking.init();
     adReload.init();
     videoStage.init();
     articledate.init();
