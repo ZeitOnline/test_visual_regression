@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2353: Adapt wording in Jobteaser
 
+- FIX: Remove padding from ZMO parquet
+
 
 2.30 (2015-11-23)
 -----------------
