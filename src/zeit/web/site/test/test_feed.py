@@ -47,7 +47,7 @@ def test_newsfeed_should_concat_supertitle_and_title(testserver):
         headers={'Host': 'newsfeed.zeit.de'})
 
     xml = lxml.etree.fromstring(res.content)
-    assert xml.xpath('//item/title/text()')[0].startswith('"Der Hobbit": Geht')
+    assert xml.xpath('//item/title/text()')[1].startswith('"Der Hobbit": Geht')
 
 
 def test_newsfeed_should_render_an_authorfeed(testserver):
