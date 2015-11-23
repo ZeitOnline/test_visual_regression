@@ -4,7 +4,7 @@ Change log for zeit.web
 2.31 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2421: Framebuilder - first steps
 
 
 2.30 (2015-11-23)
