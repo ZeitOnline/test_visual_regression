@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - DEV-752: Prepare spektrum feed to use category supertitle
 
+- ZON-2395: IVW-Verpixelung for video plays
+
 - ZON-2413: Disect default teaser sticker edgecasing, handle feature longforms
 
 - ZON-2414: Use pagetitle in twitter:title meta tag
