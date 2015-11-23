@@ -4,9 +4,10 @@ import logging
 import os
 import PIL
 import tempfile
-import urllib2
 
 import pytz
+import requests
+import requests_file
 import grokcore.component
 import zope.component
 
@@ -135,16 +136,21 @@ class LocalImage(object):
     def fetch(self):
         if self.isfile():
             return
+        # XXX requests does not seem to allow to mount stuff as a default, sigh
+        session = requests.Session()
+        session.mount('file://', requests_file.FileAdapter())
         try:
-            # TODO: Switch to requests to leverage urllib3 connection pooling.
             with zeit.web.core.metrics.timer(
                     'zeit.web.core.video.thumbnail.brightcove.response_time'):
-                resp = urllib2.urlopen(self.url, timeout=2)
-                content = resp.read()
+                response = session.get(self.url, stream=True, timeout=2)
+                response.raise_for_status()
+                content = response.raw.read()
+                # Analoguous to requests.api.request().
+                session.close()
             assert len(content) > 1024
             with self.open(mode='w+') as fh:
                 fh.write(content)
-        except (AssertionError, IOError, ValueError):
+        except (requests.exceptions.RequestException, IOError, AssertionError):
             log.debug('Remote image {} could not be downloaded to {}.'.format(
                       self.url, self.__name__))
             raise TypeError('Could not adapt {}'.format(self.url))

@@ -4,6 +4,8 @@ Change log for zeit.web
 2.34 (unreleased)
 -----------------
 
+- MAINT: Use `requests` throughout, no more `urllib2.urlopen`
+
 - PERF: Disable `requests` trying to read credentials from `~/.netrc`,
   saving quite a few superfluous disk accesses
 

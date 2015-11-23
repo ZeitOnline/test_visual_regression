@@ -1,7 +1,9 @@
 import collections
 
 import lxml.objectify
-import urllib2
+import requests
+import requests.exceptions
+import requests_file
 import zope.interface
 
 import zeit.web.core.interfaces
@@ -53,13 +55,17 @@ navigation_footer_links = None
 
 def make_navigation(navigation_config):
     navigation = Navigation()
-
+    # XXX requests does not seem to allow to mount stuff as a default, sigh.
+    session = requests.Session()
+    session.mount('file://', requests_file.FileAdapter())
     try:
-        config_file = urllib2.urlopen(navigation_config)
-    except (urllib2.URLError, ValueError):
+        config_file = session.get(navigation_config, stream=True, timeout=2)
+        # Analoguous to requests.api.request().
+        session.close()
+    except requests.exceptions.RequestException:
         return navigation
 
-    root = lxml.objectify.fromstring(config_file.read())
+    root = lxml.objectify.parse(config_file.raw).getroot()
     _register_navigation_items(navigation, root.xpath('section'))
 
     return navigation

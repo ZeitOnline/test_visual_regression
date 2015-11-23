@@ -1,4 +1,4 @@
-import urllib2
+import requests
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
 from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
@@ -12,24 +12,24 @@ import zeit.web.core.security
 def test_reload_community_should_produce_result(mock_metrics, monkeypatch):
     request = mock.Mock()
 
-    def call(request, **kwargs):
+    def call(self, request, **kwargs):
         return 'result'
 
-    monkeypatch.setattr(urllib2, 'urlopen', call)
+    monkeypatch.setattr(requests.Session, 'send', call)
 
     res = zeit.web.core.security.recursively_call_community(request, 2)
     assert res == 'result'
 
 
 def test_reload_community_should_be_recalled(mock_metrics, monkeypatch):
-    request = mock.Mock()
+    request = mock.Mock().prepare()
     request.called = 0
 
-    def call(request, **kwargs):
+    def call(self, request, **kwargs):
         request.called = request.called + 1
         raise Exception
 
-    monkeypatch.setattr(urllib2, 'urlopen', call)
+    monkeypatch.setattr(requests.Session, 'send', call)
 
     res = zeit.web.core.security.recursively_call_community(request, 2)
     assert res is None
@@ -41,13 +41,13 @@ def test_reload_community_should_suceed_after_one_call(
     request = mock.Mock()
     request.called = 0
 
-    def call(request, **kwargs):
+    def call(self, request, **kwargs):
         request.called = request.called + 1
         if request.called == 1:
             raise Exception
         return 'result'
 
-    monkeypatch.setattr(urllib2, 'urlopen', call)
+    monkeypatch.setattr(requests.Session, 'send', call)
 
     res = zeit.web.core.security.recursively_call_community(request, 2)
     assert res == 'result'
