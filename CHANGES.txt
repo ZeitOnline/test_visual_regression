@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1601: Add mobile TOC
 
+- FIX: style ZMO/zett icons on topicteaser
+
 - FIX: Remove padding from ZMO parquet
 
 
