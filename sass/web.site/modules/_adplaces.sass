@@ -33,17 +33,15 @@
 		display: block // generally visible on desktop
 		&:empty
 			display: none
+	.ad__label
+		@extend %label
 	.ad-desktop--3 > .ad__label
 		@extend %label
 	// shows Anzeige-Label before every Ad
 	&[data-banner-label]
-		*:first-child:before
+		div[id*="__container__"]:before
 			@extend %label
 			content: "Anzeige"
-	&--12-on-centerpage[data-banner-label]
-		*:first-child:before
-			content: ""
-			display: none
 	&--3,
 	&--12
 		@extend %monsterbanner
