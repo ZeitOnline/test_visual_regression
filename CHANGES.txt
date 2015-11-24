@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Style adlabels for iqd 
 
+- ZON-2347: Shop carousel: consolidate two teaser links into one
+
 - ZON-2421: Framebuilder - first steps
 
 - ZON-2353: Adapt wording in Jobteaser
