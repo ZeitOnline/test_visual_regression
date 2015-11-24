@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-2347: Shop carousel: consolidate two teaser links into one
 
+- ZON-2353: Adapt wording in Jobteaser
+
+- ZON-1601: Add mobile TOC
+
 - FIX: style ZMO/zett icons on topicteaser
 
 - FIX: Remove padding from ZMO parquet

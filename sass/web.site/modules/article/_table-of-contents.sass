@@ -1,35 +1,73 @@
+$break-onesie: 360px // breakpoint for onesie
+
 .article-toc
-	display: none
-	+respond-min($break-tablet-min)
-		display: block
+	display: block
 
 	&__container
-		float: left
 		font-size: em(14px)
 		line-height: round-to-precision(20/14)
 		margin: remify(0 25px 20px 0)
 		padding-top: remify(3px)
-		width: remify(205px) // same like .article__item--marginalia
+		width: 100%
+		+respond-min($break-tablet-min)
+			position: relative
+			float: left
+			margin-bottom: remify(36px) // add more space due to absolute position of onesie
+			width: remify(205px) // same like .article__item--marginalia
 		+respond-min($break-desktop-min)
 			width: remify(220px) // same like .article__item--marginalia
 
 	&__headline
+		display: inline-block
 		font-size: 1em
 		letter-spacing: $zon-letter-spacing-l
 		margin: 0
 		text-transform: uppercase
+		width: 48%
+		&:after
+			+build-mobile-plus-minus-button()
+		+on-interaction
+			&:after
+				cursor: pointer
+		&--active
+			&:after
+				+build-mobile-plus-minus-button('-')
+		+respond-min($break-tablet-min)
+			display: block
+			width: auto
 
 	&__list
+		display: none
 		letter-spacing: $zon-letter-spacing-s
 		list-style: none
-		margin: 0
-		padding: 0
+		margin-left: -$page-padding
+		margin-right: -$page-padding
+		margin-top: 0px
+		padding: remify(5px) $page-padding 0 $page-padding
+		border-bottom: 1px solid $zon-silver
+		background-color: $zon-lighter-grey
+		+respond-min($break-tablet-min)
+			display: block !important // use important to overwrite possible js
+			margin: 0
+			padding: 0
+			border: none
+			background-color: transparent
 
 	&__item
-		color: $zon-grey
 		margin: remify(16px 0)
+		&:not(:last-child)
+			border-bottom: 1px solid $zon-alto
+			padding-bottom: remify(20px)
 		&--current
 			color: inherit
+		a
+			+on-interaction
+				border-bottom: 1px solid rgba($color-text, .5)
+				color: $zon-grey
+		+respond-min($break-tablet-min)
+			&:not(:last-child)
+				border: 0px
+				padding: 0px
 
 	&__link
 		color: $zon-grey
@@ -38,13 +76,32 @@
 			letter-spacing: $zon-letter-spacing-m
 
 	&__onesie
-		color: $color-text
-		font-weight: bold
+		color: $zon-grey
 		letter-spacing: $zon-letter-spacing-m
+		display: block
+		padding-top: remify(16px)
 		&:after
 			content: " \203A" // › = single right-pointing angle quotation mark
+		+respond-min($break-onesie) // special breakpoint to avoid line break
+			display: inline-block
+			width: 50%
+			text-align: right
+			padding-top: 0
+		+respond-min($break-tablet-min)
+			position: absolute
+			bottom: remify(-16px) // move element to bottom
+			height: remify(20px) // avoid jump on hover
+			color: $color-text
+			font-weight: bold
+			width: auto
+			+on-interaction
+				border-bottom: 1px solid rgba($color-text, .5)
+				color: currentColor
 
-	a
-		+on-interaction
-			border-bottom: 1px solid rgba($color-text, .5)
-			color: currentColor
+	&__seperator
+		border-bottom: 1px solid $zon-silver
+		margin-left: -$page-padding
+		margin-right: -$page-padding
+		padding-top: remify(16px)
+		+respond-min($break-tablet-min)
+			display: none
