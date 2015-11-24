@@ -4,6 +4,8 @@ Change log for zeit.web
 2.31 (unreleased)
 -----------------
 
+- ZON-2421: Framebuilder - first steps
+
 - ZON-2353: Adapt wording in Jobteaser
 
 - ZON-1601: Add mobile TOC
