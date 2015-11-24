@@ -4,7 +4,7 @@ Change log for zeit.web
 2.32 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Style adlabels for iqd 2
 
 
 2.31 (2015-11-24)
