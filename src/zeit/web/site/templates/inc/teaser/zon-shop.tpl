@@ -1,5 +1,5 @@
 <article class="{% block layout %}teaser-shop{% endblock %}"
-    data-unique-id="http://xml.zeit.de/angebote/zeit-shop-buehne/Linkobjekte/bree-weekender"
+    data-unique-id="{{ teaser.uniqueId }}"
     data-clicktracking="{{ area.kind }}"
     data-type="teaser">
     <a href="{{ teaser | create_url }}">
