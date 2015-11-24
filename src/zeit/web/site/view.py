@@ -2,11 +2,13 @@
 import urlparse
 import logging
 
+import pyramid.httpexceptions
 import pyramid.view
 
 import zeit.content.article.interfaces
 import zeit.content.video.interfaces
 import zeit.cms.content.interfaces
+import zeit.cms.interfaces
 
 import zeit.web.core.gallery
 import zeit.web.core.view
@@ -187,3 +189,38 @@ class CommentForm(zeit.web.core.view.Content):
         if 'error' not in self.request.params:
             return
         return self.request.session.pop(self.request.params['error'])
+
+
+@pyramid.view.view_config(
+    route_name='framebuilder',
+    renderer='templates/framebuilder/framebuilder.html')
+class FrameBuilder(Base):
+
+    def __init__(self, context, request):
+        super(FrameBuilder, self).__init__(context, request)
+        try:
+            self.context = zeit.cms.interfaces.ICMSContent(
+                'http://xml.zeit.de/index')
+            self.context.advertising_enabled = self.banner_on
+        except TypeError:
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+    @zeit.web.reify
+    def advertising_enabled(self):
+        return self.banner_channel is not None
+
+    @zeit.web.reify
+    def banner_channel(self):
+        return self.request.GET.get('banner_channel', None)
+
+    @zeit.web.reify
+    def ressort(self):
+        return self.request.GET.get('ressort', None)
+
+    @zeit.web.reify
+    def page_slice(self):
+        return self.request.GET.get('page_slice', None)
+
+    @zeit.web.reify
+    def desktop_only(self):
+        return self.request.GET.get('desktop_only', None)
