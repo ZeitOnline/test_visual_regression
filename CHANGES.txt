@@ -4,6 +4,8 @@ Change log for zeit.web
 2.31 (unreleased)
 -----------------
 
+- ZON-2353: Adapt wording in Jobteaser
+
 - ZON-1601: Add mobile TOC
 
 - FIX: style ZMO/zett icons on topicteaser
