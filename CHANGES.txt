@@ -4,13 +4,15 @@ Change log for zeit.web
 2.31 (unreleased)
 -----------------
 
+- HOTFIX: Style adlabels for iqd 
+
 - ZON-2421: Framebuilder - first steps
 
 - ZON-2353: Adapt wording in Jobteaser
 
 - ZON-1601: Add mobile TOC
 
-- FIX: style ZMO/zett icons on topicteaser
+- FIX: Style ZMO/zett icons on topicteaser
 
 - FIX: Remove padding from ZMO parquet
 
