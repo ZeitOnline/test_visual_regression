@@ -2,11 +2,10 @@
 import base64
 import datetime
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
 import lxml.etree
 import mock
 import pyramid.testing
@@ -120,7 +119,7 @@ def test_article_toc_has_mobile_functionality(testserver, selenium_driver):
 
     # after second click
     toc_index.click()
-    condition = EC.invisibility_of_element_located((
+    condition = expected_conditions.invisibility_of_element_located((
         By.CSS_SELECTOR, '.article-toc__list'))
     assert WebDriverWait(
         selenium_driver, 1).until(condition)
@@ -338,7 +337,7 @@ def test_article_sharing_menu_should_open_and_close(
     sharing_menu_target.click()
     # we need to wait for the CSS animation to finish
     # so the sharing menu is actually hidden
-    condition = EC.invisibility_of_element_located((
+    condition = expected_conditions.invisibility_of_element_located((
         By.CSS_SELECTOR, sharing_menu_selector))
     assert WebDriverWait(
         selenium_driver, 1).until(condition), (
