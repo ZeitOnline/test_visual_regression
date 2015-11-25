@@ -1058,6 +1058,13 @@ def test_article_lineage_should_render_correctly(testbrowser):
     assert len(browser.cssselect('.article-lineage__link-text--next')) == 1
 
 
+def test_article_lineage_has_text_elements(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect('.article-lineage__link-kicker')) == 2
+    assert len(browser.cssselect('.article-lineage__link-supertitle')) == 2
+    assert len(browser.cssselect('.article-lineage__link-title')) == 2
+
+
 @pytest.mark.xfail(reason='This test fails on Jenkins. Disabled until fixed.')
 def test_article_lineage_should_be_hidden_on_small_screens(
         selenium_driver, testserver, screen_size):

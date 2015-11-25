@@ -26,7 +26,7 @@ $article-lineage-transition-duration: .4s
 		background: $zon-lighter-grey
 		box-shadow: none
 		color: $zon-charcoal
-		height: remify(80px)
+		height: remify(100px)
 		max-width: remify(60px)
 		padding: remify(0 20px)
 		position: absolute
@@ -45,7 +45,7 @@ $article-lineage-transition-duration: .4s
 	&__link-icon
 		width: remify(20px)
 		height: remify(30px)
-		margin: remify(25px 0)
+		margin: remify(35px 0)
 		color: $zon-lighter-grey
 		&--prev
 			float: left
@@ -56,7 +56,7 @@ $article-lineage-transition-duration: .4s
 		display: block
 		opacity: 0
 		overflow: hidden
-		padding-top: remify(16px)
+		padding-top: remify(20px)
 		&--prev
 			margin: remify(0 5px 0 45px)
 		&--next
@@ -66,13 +66,26 @@ $article-lineage-transition-duration: .4s
 		display: block
 		font-family: $font-franziska
 		font-size: remify(14px)
+		line-height: remify(17px)
 		font-style: italic
 		white-space: nowrap
-	&__link-title
+
+	// variable title/ supertitle
+	&__link-title,
+	&__link-supertitle
 		display: block
 		font-family: $font-tabletgothic
-		font-size: remify(16px)
-		font-weight: bold
 		overflow: hidden
 		text-overflow: ellipsis
 		white-space: nowrap
+	&__link-title
+		font-size: remify(16px)
+		font-weight: bold
+		line-height: remify(18px)
+		letter-spacing: $zon-letter-spacing-s
+	&__link-supertitle
+		font-size: remify(12px)
+		line-height: remify(13px)
+		color: $zon-red
+		letter-spacing: $zon-letter-spacing-m
+		margin: remify(10px 0 5px 0)

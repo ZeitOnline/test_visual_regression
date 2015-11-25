@@ -4,6 +4,8 @@ Change log for zeit.web
 2.33 (unreleased)
 -----------------
 
+- ZON-2357: Add Supertitle to Article Lineage
+
 - HOTFIX: Fix shop carousel teaser uniqueId
 
 - ZON-2418: Update webtrekk page parameter 10
@@ -18,7 +20,7 @@ Change log for zeit.web
 2.31 (2015-11-24)
 -----------------
 
-- HOTFIX: Style adlabels for iqd 
+- HOTFIX: Style adlabels for iqd
 
 - ZON-2347: Shop carousel: consolidate two teaser links into one
 
