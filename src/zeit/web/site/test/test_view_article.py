@@ -1097,6 +1097,33 @@ def test_article_lineage_should_be_fixed_after_scrolling(
         assert False, 'Fixed Lineage not visible after scrolled into view'
 
 
+def test_article_lineage_overlapping_with_fullwidth_elements_should_be_hidden(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/zeit-online/article/infoboxartikel' % testserver.url)
+    # Force page load even if another test has left the browser on _this_ page.
+    driver.refresh()
+
+    driver.execute_script('window.scrollTo(0, 600)')
+    wait = WebDriverWait(driver, 5)
+
+    try:
+        wait.until(expected_conditions.visibility_of_element_located(
+                   (By.CSS_SELECTOR, '.article-lineage')))
+    except TimeoutException:
+        assert False, 'Fixed Lineage not visible after scrolled into view'
+
+    driver.get('%s/zeit-online/article/infoboxartikel#sauriersindsuper' %
+               testserver.url)
+
+    try:
+        wait.until(expected_conditions.invisibility_of_element_located(
+                   (By.CSS_SELECTOR, '.article-lineage')))
+    except TimeoutException:
+        assert False, 'Fixed Lineage visible above fullwidth element'
+
+
 def test_article_lineage_should_not_render_on_advertorials(testbrowser):
     browser = testbrowser('/zeit-online/article/angebot')
     assert len(browser.cssselect('.article-lineage')) == 0
