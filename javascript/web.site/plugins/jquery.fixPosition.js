@@ -32,6 +32,19 @@
         this.maxFixedPos = 2000;
 
         this.$articleBody = undefined;
+        this.bypass = [];
+        this.fullwidthElements = [
+            '.hide-lineage',
+            '.infobox',
+            '.inline-gallery__wrap',
+            '.liveblog',
+            '.x-fullwidth',
+            '.zg-grafik--default-margin',
+            '.zon-grafik',
+            '.zon-grafik--map',
+            'picture'
+        ];
+        this.threshold = 40;
 
         // In 2015, we need multiple lines of code to detect the scrolling position
         // (https://developer.mozilla.org/de/docs/Web/API/Window/scrollY)
@@ -63,6 +76,7 @@
 
             // calculate/select the things that will remain unchanged
             this.$articleBody = $( '.article-body' ).eq( 0 );
+            this.bypass = this.$articleBody.find( this.fullwidthElements.join() );
 
             // no article found? stop everything.
             if ( !this.$articleBody.length ) {
@@ -135,8 +149,36 @@
 
             // luckily, jQuery is only changing the DOM if needed
             this.element
+                .removeClass( this.baseClass + '--hidden' ) // needed for variant (A)
+                // .css({ top: '' }) // needed for variant (B)
                 .toggleClass( this.baseClass + '--fixed', this.fixed )
                 .toggleClass( this.baseClass + '--absolute', this.absolute );
+
+            // check for collisions
+            if ( this.fixed && this.bypass.length ) {
+                var anchor = ( this.node.firstElementChild || this.element.children().get( 0 ) ).getBoundingClientRect(),
+                    // needed for variant (B)
+                    // height = anchor.height || 80,
+                    i, area;
+
+                for ( i = this.bypass.length - 1; i >= 0; i-- ) {
+                    area = this.bypass.get( i ).getBoundingClientRect();
+
+                    if ( anchor.bottom > area.top - this.threshold && anchor.top < area.bottom + this.threshold ) {
+                        // variant (A): fade out while overlapping with fullwidth element
+                        this.element
+                            .addClass( this.baseClass + '--hidden' )
+                            .removeClass( this.baseClass + '--fixed' );
+
+                        // variant (B): sticky above fullwidth element
+                        // this.element
+                        //     .removeClass( this.baseClass + '--fixed' )
+                        //     .addClass( this.baseClass + '--absolute' )
+                        //     .css({ top: Math.round( this.bypass.get( i ).offsetTop - height - this.threshold ) + 'px' });
+                    }
+                }
+
+            }
         }
     };
 
