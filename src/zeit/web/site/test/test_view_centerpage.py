@@ -1658,8 +1658,6 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
 
 def test_zett_banner_is_displayed(testbrowser):
     browser = testbrowser('/zeit-online/zett-banner')
-
-    # in main area
     box = browser.cssselect('.zett-banner')[0]
     assert len(box.cssselect('.zett-banner__wrapper'))
 
