@@ -76,12 +76,14 @@
 
             // calculate/select the things that will remain unchanged
             this.$articleBody = $( '.article-body' ).eq( 0 );
-            this.bypass = this.$articleBody.find( this.fullwidthElements.join() );
 
             // no article found? stop everything.
             if ( !this.$articleBody.length ) {
                 return;
             }
+
+            // calculate/select more things that will remain unchanged
+            this.bypass = this.$articleBody.find( this.fullwidthElements.join() );
 
             $( window ).on( 'scroll', $.throttle( function() { that.handleScrolling(); }, 100 ) );
 
