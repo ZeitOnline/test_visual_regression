@@ -1,5 +1,12 @@
 $article-lineage-transition-duration: .4s
 
+%al-dynamic-texts
+	display: block
+	font-family: $font-tabletgothic
+	overflow: hidden
+	text-overflow: ellipsis
+	white-space: nowrap
+
 .article-lineage
 	+transition(opacity .5s)
 	display: none
@@ -21,28 +28,29 @@ $article-lineage-transition-duration: .4s
 	&--absolute
 		position: absolute
 		top: auto
-	&__link
-		+transition(max-width $article-lineage-transition-duration ease-out, box-shadow .1s ($article-lineage-transition-duration - 0.1s)) // remove box-shadow at transition end
-		background: $zon-lighter-grey
-		box-shadow: none
+
+.al-link
+	+transition(max-width $article-lineage-transition-duration ease-out, box-shadow .1s ($article-lineage-transition-duration - 0.1s)) // remove box-shadow at transition end
+	background: $zon-lighter-grey
+	box-shadow: none
+	color: $zon-charcoal
+	height: remify(100px)
+	max-width: remify(60px)
+	padding: remify(0 20px)
+	position: absolute
+	&--prev
+		left: 0
+	&--next
+		right: 0
+	&:focus,
+	&:hover
+		+transition-delay(0s) // needed to show box-shadow at transition start
+		box-shadow: 0px 1px 3px $zon-mid-grey
 		color: $zon-charcoal
-		height: remify(100px)
-		max-width: remify(60px)
-		padding: remify(0 20px)
-		position: absolute
-		&--prev
-			left: 0
-		&--next
-			right: 0
-		&:focus,
-		&:hover
-			+transition-delay(0s) // needed to show box-shadow at transition start
-			box-shadow: 0px 1px 3px $zon-mid-grey
-			color: $zon-charcoal
-			max-width: em(820px)
-			.article-lineage__link-text
-				opacity: 1
-	&__link-icon
+		max-width: em(820px)
+		.al-text
+			opacity: 1
+	&__icon
 		width: remify(20px)
 		height: remify(30px)
 		margin: remify(35px 0)
@@ -51,17 +59,18 @@ $article-lineage-transition-duration: .4s
 			float: left
 		&--next
 			float: right
-	&__link-text
-		+transition(opacity $article-lineage-transition-duration)
-		display: block
-		opacity: 0
-		overflow: hidden
-		padding-top: remify(20px)
-		&--prev
-			margin: remify(0 5px 0 45px)
-		&--next
-			margin: remify(0 45px 0 5px)
-	&__link-kicker
+
+.al-text
+	+transition(opacity $article-lineage-transition-duration)
+	display: block
+	opacity: 0
+	overflow: hidden
+	padding-top: remify(20px)
+	&--prev
+		margin: remify(0 5px 0 45px)
+	&--next
+		margin: remify(0 45px 0 5px)
+	&__kicker
 		color: $zon-dark-grey
 		display: block
 		font-family: $font-franziska
@@ -69,21 +78,14 @@ $article-lineage-transition-duration: .4s
 		line-height: remify(17px)
 		font-style: italic
 		white-space: nowrap
-
-	// variable title/ supertitle
-	&__link-title,
-	&__link-supertitle
-		display: block
-		font-family: $font-tabletgothic
-		overflow: hidden
-		text-overflow: ellipsis
-		white-space: nowrap
-	&__link-title
+	&__title
+		@extend %al-dynamic-texts
 		font-size: remify(16px)
-		font-weight: bold
 		line-height: remify(18px)
+		font-weight: bold
 		letter-spacing: $zon-letter-spacing-s
-	&__link-supertitle
+	&__supertitle
+		@extend %al-dynamic-texts
 		font-size: remify(12px)
 		line-height: remify(13px)
 		color: $zon-red
