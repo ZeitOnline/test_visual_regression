@@ -9,7 +9,8 @@ $classic-padding: remify(20px)
 		padding-left: $page-padding
 		padding-right: $page-padding
 	&__container
-		overflow: hidden
+		+respond-min($break-areas)
+			overflow: hidden
 	&__media
 		@extend %teaser-media
 		background-color: $zon-lighter-grey // placeholder for image
@@ -44,6 +45,11 @@ $classic-padding: remify(20px)
 			@extend %teaser-kicker-logo--zmo
 		&--zett
 			@extend %teaser-kicker-logo--zett
+		&--liveblog
+			@extend %teaser-kicker-logo--liveblog
+			vertical-align: initial
+		&--liveblog-live
+			@extend %teaser-kicker-logo--liveblog-live
 	&__title
 		@extend %teaser-title
 		font-size: em(24px)
