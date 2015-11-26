@@ -6,7 +6,7 @@
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
     {% include "zeit.web.site:templates/inc/asset/image_zon-square.tpl" ignore missing %}
-    {% if provides(teaser, 'zeit.content.link.interfaces.ILink') and teaser.url.startswith('http://ze.tt') %}
+    {% if teaser is zett_content %}
         {% block kicker_logo %}
         {% endblock %}
         {{ lama.use_svg_icon('logo-zett-small', 'teaser-square__kicker-logo--zett svg-symbol--hide-ie', request) }}
