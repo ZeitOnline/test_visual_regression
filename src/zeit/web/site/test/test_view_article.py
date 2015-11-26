@@ -1054,8 +1054,15 @@ def test_article_advertorial_pages_should_render_correctly(testbrowser):
 
 def test_article_lineage_should_render_correctly(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect('.article-lineage__link-text--prev')) == 1
-    assert len(browser.cssselect('.article-lineage__link-text--next')) == 1
+    assert len(browser.cssselect('.al-text--prev')) == 1
+    assert len(browser.cssselect('.al-text--next')) == 1
+
+
+def test_article_lineage_has_text_elements(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect('.al-text__kicker')) == 2
+    assert len(browser.cssselect('.al-text__supertitle')) == 2
+    assert len(browser.cssselect('.al-text__title')) == 2
 
 
 @pytest.mark.xfail(reason='This test fails on Jenkins. Disabled until fixed.')
@@ -1066,9 +1073,9 @@ def test_article_lineage_should_be_hidden_on_small_screens(
     driver.get('%s/zeit-online/article/zeit' % testserver.url)
     driver.execute_script("window.scrollTo(0, 500)")
     lineage_links = driver.find_elements_by_css_selector(
-        '.article-lineage__link')
+        '.al-link')
     lineage_linktexts = driver.find_elements_by_css_selector(
-        '.article-lineage__link-text')
+        '.al-text')
 
     if screen_size[0] < 980:
         assert not lineage_links[0].is_displayed()

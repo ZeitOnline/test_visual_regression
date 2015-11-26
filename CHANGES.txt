@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2352: Add liveglog teaser icon
 
+- ZON-2357: Add Supertitle to Article Lineage
+
 - ZON-2415: Add Zett Banner
 
 - ZON-2369: Mark comments by freelancer

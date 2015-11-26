@@ -725,17 +725,17 @@ class Content(Base):
                     'published', 'published'))
             with zeit.web.core.metrics.timer('lineage.solr.reponse_time'):
                 return conn.search(query, sort='date_first_released ' + sort,
-                                   fl='title uniqueId', rows=1).docs
+                                   fl='title supertitle uniqueId', rows=1).docs
 
         date = zeit.cms.workflow.interfaces.IPublishInfo(
             self.context).date_first_released
 
         default = [{
             'title': 'Startseite',
+            'supertitle': '',
             'uniqueId': 'http://xml.zeit.de/index'}]
         predecessor = next(None, date, 'desc') or default
         successor = next(date, None, 'asc') or default
-
         if predecessor is default or successor is default:
             return zeit.web.dont_cache(predecessor + successor)
 
