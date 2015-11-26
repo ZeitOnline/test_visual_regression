@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2357: Add Supertitle to Article Lineage
 
+- ZON-2369: Mark comments by freelancer
+
 - HOTFIX: Fix shop carousel teaser uniqueId
 
 - ZON-2418: Update webtrekk page parameter 10

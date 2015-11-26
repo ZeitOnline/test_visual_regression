@@ -16,7 +16,7 @@
 			</div>
 			{% endif %}
 			<div class="comment-meta__name">
-				{% if comment.is_author %}
+				{% if comment.is_author or comment.is_freelancer %}
 				<span title="{{ comment.role }}" class="comment-meta__badge comment-meta__badge--author">
 					{{ lama.use_svg_icon('promoted', 'comment-meta__icon comment-meta__icon--author', request) }}
 				</span>
