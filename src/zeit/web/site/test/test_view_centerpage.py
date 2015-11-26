@@ -1656,6 +1656,12 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
             '&utm_content=che_teaser_button_ohne_fach_x' in driver.current_url)
 
 
+def test_zett_banner_is_displayed(testbrowser):
+    browser = testbrowser('/zeit-online/zett-banner')
+    box = browser.cssselect('.zett-banner')[0]
+    assert len(box.cssselect('.zett-banner__wrapper'))
+
+
 def test_zett_parquet_is_rendering(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
 
