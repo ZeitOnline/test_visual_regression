@@ -23,6 +23,7 @@ import zeit.content.link.interfaces
 import zeit.magazin.interfaces
 
 import zeit.web
+import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.image
 import zeit.web.core.interfaces
@@ -339,6 +340,12 @@ def is_gallery(context):
 @zeit.web.register_filter
 def is_video(context):
     return zeit.content.video.interfaces.IVideo.providedBy(context)
+
+
+@zeit.web.register_filter
+def is_liveblog(context):
+    return zeit.web.core.article.ILiveblogArticle.providedBy(
+        context) or context.template == 'zon-liveblog'
 
 
 # TRASHME: Definition of default images sizes for bitblt images
