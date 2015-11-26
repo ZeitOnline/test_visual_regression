@@ -58,11 +58,11 @@
             7: "{{ view.news_source | lower }}", // Quelle
             8: "{{ view.product_id | lower }}", // Product-Id
             9: "{{ view.banner_channel | lower }}", // Banner-Channel
-            10: "{%- if view.context.advertising_enabled %}yes{% endif -%}", // Banner aktiv?
+            10: "{{ 'yes' if view.context.advertising_enabled else 'no' }}", // Banner aktiv?
             11: "", // Fehler
             12: window.ZMO.getSiteParam('.site'),
             13: window.ZMO.breakpoint.getTrackingBreakpoint(),
-            14: "{{ 'alt' if 'zeitmz' in view.banner_channel else 'neu'  }}",
+            14: "{{ 'alt' if 'zeitmz' in view.banner_channel | default('', True) else 'neu'  }}",
             15: "{{ push }}"
         };
 

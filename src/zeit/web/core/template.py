@@ -94,6 +94,20 @@ def variant(image):
     return isinstance(image, zeit.web.core.image.VariantImage)
 
 
+@zeit.web.register_test
+def zmo_content(content):
+    # XXX Stopgap until longforms are not IZMOContent anymore (ZON-2411).
+    return not getattr(content, 'uniqueId', '').replace(
+        zeit.cms.interfaces.ID_NAMESPACE, '', 1).startswith('feature') and (
+            zeit.magazin.interfaces.IZMOContent.providedBy(content))
+
+
+@zeit.web.register_test
+def zett_content(content):
+    return zeit.content.link.interfaces.ILink.providedBy(
+        content) and content.url.startswith('http://ze.tt')
+
+
 @zeit.web.register_filter
 def block_type(obj):
     """Outputs the class name in lower case format of one or multiple block

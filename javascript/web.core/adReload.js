@@ -146,7 +146,9 @@ define( [ 'jquery' ], function( $ ) {
             return;
         }
 
-        if ( typeof messageData.name !== 'string' || event.originalEvent.origin !== config[messageData.name].origin ) {
+        if ( typeof messageData.name !== 'string' ||
+                typeof config[messageData.name] === 'undefined' ||
+                event.originalEvent.origin !== config[messageData.name].origin ) {
             log( 'error', 'messageData not correctly set' );
             return;
         }

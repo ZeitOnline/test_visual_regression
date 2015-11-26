@@ -14,15 +14,17 @@ require([ 'vendor/require', 'config' ], function() {});
 require([
     'web.core/images',
     'web.core/clicktracking',
+    'web.core/triggeredEventTracking',
     'web.core/adReload',
     'web.site/video/videoStage',
     'web.site/articledate',
     'web.site/articlesharing',
     'web.site/comments',
     'web.site/adblockCount.js'
-], function( images, clicktracking, adReload, videoStage, articledate, articlesharing, comments, adblockCount ) {
+], function( images, clicktracking, triggeredEventTracking, adReload, videoStage, articledate, articlesharing, comments, adblockCount ) {
     images.init();
     clicktracking.init();
+    triggeredEventTracking.init();
     adReload.init();
     videoStage.init();
     articledate.init();
@@ -69,7 +71,8 @@ require([
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
-    'web.site/plugins/jquery.partnerDropdown'
+    'web.site/plugins/jquery.partnerDropdown',
+    'web.site/plugins/jquery.toggleOnClick'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         isHp = document.body.getAttribute( 'data-is-hp' ),
@@ -104,6 +107,7 @@ require([
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
         article.find( '.js-infobox' ).infobox();
         article.find( '.liveblog' ).liveblog();
+        article.find( '.article-toc' ).toggleOnClick();
         $.picturefill();
         $( '.js-count-formchars' ).countFormchars();
         $( '.js-fix-position' ).fixPosition();

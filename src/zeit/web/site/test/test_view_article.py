@@ -100,12 +100,43 @@ def test_article_pagination_active_state(testbrowser):
     assert '--current' in select('.article-toc__item')[2].get('class')
 
 
+def test_article_toc_has_mobile_functionality(testserver, selenium_driver):
+
+    selenium_driver.set_window_size(320, 480)
+    selenium_driver.get('{}/zeit-online/article/zeit'.format(testserver.url))
+
+    toc_box = selenium_driver.find_element_by_css_selector('.article-toc')
+    toc_index = toc_box.find_element_by_css_selector('.article-toc__headline')
+    toc_onesie = toc_box.find_element_by_css_selector('.article-toc__onesie')
+    toc_list = toc_box.find_element_by_css_selector('.article-toc__list')
+
+    # before click
+    assert not toc_list.is_displayed()
+
+    # after click
+    toc_index.click()
+    assert toc_index.is_displayed()
+    assert '--active' in toc_index.get_attribute('class')
+
+    # after second click
+    toc_index.click()
+    condition = EC.invisibility_of_element_located((
+        By.CSS_SELECTOR, '.article-toc__list'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+    assert '--active' not in toc_index.get_attribute('class')
+
+    # click on onesie
+    toc_onesie.click()
+    assert '/komplettansicht' in selenium_driver.current_url
+
+
 def test_article_page_1_has_correct_h1(testbrowser):
     select = testbrowser('/zeit-online/article/zeit').cssselect
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
         u'Nancy braucht was Schnelles'), (
-        'article headline is not h1')
+            'article headline is not h1')
 
 
 def test_article_page_2_has_correct_h1(testbrowser):
@@ -113,7 +144,7 @@ def test_article_page_2_has_correct_h1(testbrowser):
     node = '.article__page-teaser > h1'
     assert select(node)[0].text.strip() == (
         u'Der Horror von Crystal wurzelt in der Normalität'), (
-        'article page teaser is not h1')
+            'article page teaser is not h1')
 
 
 def test_article_page_teaserless_has_correct_h1(testbrowser):
@@ -121,7 +152,7 @@ def test_article_page_teaserless_has_correct_h1(testbrowser):
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
         u'Nancy braucht was Schnelles'), (
-        'article headline is not h1')
+            'article headline is not h1')
 
 
 def test_article_complete_has_correct_h1(testbrowser):
@@ -129,7 +160,7 @@ def test_article_complete_has_correct_h1(testbrowser):
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
         u'Nancy braucht was Schnelles'), (
-        'article headline is not h1')
+            'article headline is not h1')
 
 
 def test_article_plain_has_correct_h1(testbrowser):
@@ -137,14 +168,14 @@ def test_article_plain_has_correct_h1(testbrowser):
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
         u'Williams wackelt weiter, steht aber im Viertelfinale'), (
-        'article headline must be h1')
+            'article headline must be h1')
 
 
 def test_article_page_1_has_correct_title(testbrowser):
     select = testbrowser('/zeit-online/article/zeit').cssselect
     assert select('title')[0].text.strip() == (
         u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
-        'article headline is not title')
+            'article headline is not title')
 
 
 def test_article_page_2_has_correct_title(testbrowser):
@@ -152,28 +183,28 @@ def test_article_page_2_has_correct_title(testbrowser):
     assert select('title')[0].text.strip() == (
         u'Crystal Meth: Der Horror von Crystal '
         u'wurzelt in der Normalität |\xa0ZEIT ONLINE'), (
-        'article page teaser is not title')
+            'article page teaser is not title')
 
 
 def test_article_page_teaserless_has_correct_title(testbrowser):
     select = testbrowser('/zeit-online/article/zeit/seite-5').cssselect
     assert select('title')[0].text.strip() == (
         u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
-        'article headline is not title')
+            'article headline is not title')
 
 
 def test_article_complete_has_correct_title(testbrowser):
     select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
     assert select('title')[0].text.strip() == (
         u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
-        'article headline is not title')
+            'article headline is not title')
 
 
 def test_article_plain_has_correct_title(testbrowser):
     select = testbrowser('zeit-online/article/02').cssselect
     assert select('title')[0].text.strip() == (
         u'Zwei Baguettes und ein Zimmer bitte |\xa0ZEIT ONLINE'), (
-        'article headline is not title')
+            'article headline is not title')
 
 
 def test_fresh_breaking_news_article_renders_breaking_bar(testbrowser):
@@ -311,7 +342,7 @@ def test_article_sharing_menu_should_open_and_close(
         By.CSS_SELECTOR, sharing_menu_selector))
     assert WebDriverWait(
         selenium_driver, 1).until(condition), (
-        'sharing menu should hide again on click')
+            'sharing menu should hide again on click')
 
 
 def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
@@ -937,6 +968,33 @@ def test_article_should_have_large_facebook_and_twitter_images(testbrowser):
         'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
     assert doc.xpath('//meta[@name="twitter:image"]/@content')[0].endswith(
         'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+
+
+def test_breaking_news_should_have_fallback_sharing_image(
+        testbrowser, workingcopy):
+    doc = testbrowser('/zeit-online/article/eilmeldungsartikel').document
+    assert 'administratives/eilmeldung-share-image' in doc.xpath(
+        '//meta[@property="og:image"]/@content')[0]
+    assert 'administratives/eilmeldung-share-image' in doc.xpath(
+        '//meta[@name="twitter:image"]/@content')[0]
+
+
+def test_breaking_news_should_have_their_own_sharing_image_if_present(
+        testbrowser, workingcopy):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/eilmeldungsartikel')
+    with checked_out(content) as co:
+        zeit.content.image.interfaces.IImages(co).image = (
+            zeit.cms.interfaces.ICMSContent(
+                'http://xml.zeit.de/zeit-online/image/'
+                'filmstill-hobbit-schlacht-fuenf-hee'))
+    doc = testbrowser('/zeit-online/article/eilmeldungsartikel').document
+    assert (
+        'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee' in
+        doc.xpath('//meta[@property="og:image"]/@content')[0])
+    assert (
+        'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee' in
+        doc.xpath('//meta[@name="twitter:image"]/@content')[0])
 
 
 def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):

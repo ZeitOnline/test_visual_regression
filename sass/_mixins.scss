@@ -448,3 +448,22 @@
 	top: auto;
 	width: 1px;
 }
+
+// build mobile plus/minus button as used in infoxbox
+@mixin build-mobile-plus-minus-button($content: '+') {
+	background: $zon-mid-grey;
+	border-radius: 3px;
+	color: $white;
+	content: $content;
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight: 700;
+	margin-left: remify(10px);
+	text-align: center;
+	vertical-align: text-top;
+	width: remify(17px);
+	@include inline-block();
+	@include font-smoothing();
+	@include respond-min($break-tablet-min) {
+		display: none;
+	}
+}

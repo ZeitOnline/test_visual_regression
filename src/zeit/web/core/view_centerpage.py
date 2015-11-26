@@ -64,7 +64,7 @@ class Centerpage(zeit.web.core.view.Base):
 def json_update_time(request):
     try:
         resource = zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/{}.cp2015'.format(
+            'http://xml.zeit.de/{}'.format(
                 request.matchdict['path']), None)
         if resource is None:
             resource = zeit.cms.interfaces.ICMSContent(

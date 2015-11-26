@@ -46,16 +46,14 @@ def test_rss_link_object_with_empty_values_should_not_break():
     assert teaser.image_url is None
 
 
-def test_spektrum_title_should_be_colon_splitted():
+def test_spektrum_supertitle_should_be_extracted_from_category():
     xml_str = """
         <item>
-            <title><![CDATA[supertitle: title]]></title>
+            <category><![CDATA[Lorem ipsum]]></category>
         </item>"""
 
-    teaser = zeit.web.site.area.spektrum.Link(
-        lxml.etree.fromstring(xml_str))
-    assert teaser.title == 'title'
-    assert teaser.supertitle == 'supertitle'
+    teaser = zeit.web.site.area.spektrum.Link(lxml.etree.fromstring(xml_str))
+    assert teaser.supertitle == 'Lorem ipsum'
 
 
 def test_spektrum_image_should_have_expected_attributes(application):
