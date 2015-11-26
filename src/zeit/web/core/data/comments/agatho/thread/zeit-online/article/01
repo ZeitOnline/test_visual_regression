@@ -21,7 +21,7 @@
   <flagged type="leser_empfehlung" userid="340322"/>
   <flagged type="leser_empfehlung" userid="296040"/>
   <flagged type="leser_empfehlung" userid="277822"/>
-  <author id="uid-394578" url="/user/skarsgard">
+  <author id="uid-394578" url="/user/skarsgard" roles="author">
    <name>Skarsgard</name>
   </author>
  </comment>
@@ -39,7 +39,7 @@
   <homepage></homepage>
   <flagged type="leser_empfehlung" userid="395912"/>
   <flagged type="leser_empfehlung" userid="267783"/>
-  <author id="uid-311626" url="/user/monaco-franze">
+  <author id="uid-311626" url="/user/monaco-franze" roles="freelancer" sex="weiblich">
    <name>Monaco Franze</name>
   </author>
  </comment>

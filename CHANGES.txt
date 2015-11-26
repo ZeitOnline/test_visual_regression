@@ -4,6 +4,10 @@ Change log for zeit.web
 2.33 (unreleased)
 -----------------
 
+- ZON-2415: Add Zett Banner
+
+- ZON-2369: Mark comments by freelancer
+
 - HOTFIX: Fix shop carousel teaser uniqueId
 
 - ZON-2355: Hide chronological article navigation covering fullwidth elements

@@ -1,0 +1,13 @@
+$url_gif: 'http://www.zeit.de/administratives/zett/zett-banner'
+
+.zett-banner
+    margin: $vertical-space 0
+    &__wrapper
+        background: $zon_lighter_grey url($url_gif) no-repeat center
+        background-size: cover
+        max-width: remify(300px)
+        height: remify(100px)
+        display: block
+        margin: auto
+        +respond-min($break-tablet-min)
+            width: 100%
