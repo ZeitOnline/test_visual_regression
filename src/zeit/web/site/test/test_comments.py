@@ -128,6 +128,21 @@ def test_comment_in_reply_to_shows_origin(testbrowser):
     assert link.text_content().strip() == 'Antwort auf #1 von Skarsgard'
 
 
+def test_comment_author_roles_should_be_displayed(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    comment_author = browser.document.get_element_by_id('cid-2968470')
+    comment_freelancer = browser.document.get_element_by_id('cid-2968473')
+    selector = '.comment-meta__badge--author'
+    icon_author = comment_author.cssselect(selector)
+    icon_freelancer = comment_freelancer.cssselect(selector)
+
+    assert 'comment--author' in comment_author.get('class')
+    assert len(icon_author) == 1
+    assert len(icon_freelancer) == 1
+    assert icon_author[0].attrib['title'] == 'Redaktion'
+    assert icon_freelancer[0].attrib['title'] == 'Freie Autorin'
+
+
 def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
     comments = jinja2_env.get_template(
         'zeit.web.site:templates/inc/article/comments.tpl')
