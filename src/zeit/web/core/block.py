@@ -23,6 +23,7 @@ import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 
 import zeit.web
+import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
 import zeit.web.core.sources
