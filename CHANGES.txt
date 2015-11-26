@@ -4,7 +4,7 @@ Change log for zeit.web
 2.30 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2354: Remove vertical spacing of regions where unneeded
 
 
 2.29 (2015-11-20)
