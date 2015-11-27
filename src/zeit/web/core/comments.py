@@ -47,6 +47,7 @@ def comment_to_dict(comment):
     if comment.xpath('author/@roles'):
         roles = comment.xpath('author/@roles')[0]
         is_author = 'author' in roles
+        is_freelancer = 'freelancer' in roles
         roles = roles.split(',')
         try:
             gender = comment.xpath('author/@sex')[0]
@@ -58,6 +59,7 @@ def comment_to_dict(comment):
                        u'author_undefined': 'Redaktion',
                        u'expert_weiblich': 'Expertin',
                        u'expert_männlich': 'Experte',
+                       u'freelancer_undefined': 'Freier Autor',
                        u'freelancer_weiblich': 'Freie Autorin',
                        u'freelancer_männlich': 'Freier Autor'}
 
@@ -65,6 +67,7 @@ def comment_to_dict(comment):
                  if '%s_%s' % (role, gender) in roles_words]
     else:
         is_author = False
+        is_freelancer = False
         roles = []
 
     if comment.xpath('author/@picture'):
@@ -137,6 +140,7 @@ def comment_to_dict(comment):
         recommendations=len(
             comment.xpath('flagged[@type="leser_empfehlung"]')),
         is_author=is_author,
+        is_freelancer=is_freelancer,
         is_reply=bool(in_reply),
         is_promoted=bool(
             len(comment.xpath('flagged[@type="kommentar_empfohlen"]')))

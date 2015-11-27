@@ -99,6 +99,28 @@
 		@extend %teaser-kicker-topic
 		display: inline-block
 		margin-bottom: remify(4px)
+	&__kicker-logo
+		&--zmo
+			@extend %teaser-kicker-logo--zmo
+			+respond-min($break-tablet-min)
+				background: none
+				border-radius: 0
+				border-right: 1px solid rgba($white, 0.5)
+				height: remify(18px)
+				margin-right: remify(4px)
+				padding-right: remify(3px)
+				width: remify(34px) // padding-right is added
+		&--zett
+			@extend %teaser-kicker-logo--zett
+		&--liveblog
+			@extend %teaser-kicker-logo--liveblog
+			+respond-min($break-tablet-min)
+				display: table
+				margin-bottom: remify(6px)
+				padding-bottom: remify(4px)
+				padding-top: remify(3px)
+		&--liveblog-closed
+			@extend %teaser-kicker-logo--liveblog-closed
 	&__title
 		@extend %teaser-title
 		color: $white

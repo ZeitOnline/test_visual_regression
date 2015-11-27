@@ -336,6 +336,9 @@ class CenterpageArea(Centerpage):
 
         self.context = None
         self.request = request
+
+        self.request.response.headers.add('X-Robots-Tag', 'noindex')
+
         self.comment_counts = {}
         self.has_solo_leader = False
 
@@ -348,7 +351,7 @@ class CenterpageArea(Centerpage):
             try:
                 return index == int(name.lstrip(u'no-'))
             except ValueError:
-                raise pyramid.httpexceptions.HTTPNotFound('Area nicht gefunden')
+                raise pyramid.httpexceptions.HTTPNotFound('Area not found')
 
         if name.startswith('id-'):
             condition = uid_cond

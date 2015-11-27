@@ -927,6 +927,7 @@ def test_centerpage_area_should_render_in_isolation(testbrowser):
     select = browser.cssselect
     assert len(select('div.cp-area.cp-area--gallery')) == 1
     assert len(select('article.teaser-gallery')) == 2
+    assert browser.headers['X-Robots-Tag'] == 'noindex'
 
 
 def test_centerpage_area_should_render_on_index(testbrowser):
@@ -1663,6 +1664,12 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
             '&utm_content=che_teaser_button_ohne_fach_x' in driver.current_url)
 
 
+def test_zett_banner_is_displayed(testbrowser):
+    browser = testbrowser('/zeit-online/zett-banner')
+    box = browser.cssselect('.zett-banner')[0]
+    assert len(box.cssselect('.zett-banner__wrapper'))
+
+
 def test_zett_parquet_is_rendering(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
 
@@ -1944,9 +1951,9 @@ def test_ranking_ara_should_offset_resultset_on_materialized_cp(
     assert len(area.values()) == 10
     assert area.total_pages == 5
     assert area.filter_query == (
-        'NOT (uniqueId:(http://xml.zeit.de/zeit-magazin/leben/2015-02/'
-        'magdalena-ruecken-fs) OR uniqueId:(http://xml.zeit.de/zeit-magazin/'
-        'mode-design/2014-05/karl-lagerfeld-interview))')
+        'NOT (uniqueId:"http://xml.zeit.de/zeit-magazin/leben/2015-02/'
+        'magdalena-ruecken-fs" OR uniqueId:"http://xml.zeit.de/zeit-magazin/'
+        'mode-design/2014-05/karl-lagerfeld-interview")')
 
 
 def test_ranking_ara_should_not_offset_resultset_on_materialized_cp(

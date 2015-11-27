@@ -23,6 +23,7 @@ import zeit.content.link.interfaces
 import zeit.magazin.interfaces
 
 import zeit.web
+import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.image
 import zeit.web.core.interfaces
@@ -226,7 +227,7 @@ def get_layout(block, request=None):
     try:
         key = request and hash(block)
     except (NotImplementedError, TypeError), e:
-        log.debug('Cannot cache {} layout: {}'.format(block, e))
+        log.debug('Cannot cache {} layout: {}'.format(type(block), e))
         key = None
 
     if key:
@@ -339,6 +340,12 @@ def is_gallery(context):
 @zeit.web.register_filter
 def is_video(context):
     return zeit.content.video.interfaces.IVideo.providedBy(context)
+
+
+@zeit.web.register_filter
+def is_liveblog(context):
+    return zeit.content.article.interfaces.IArticle.providedBy(
+        context) and context.template == 'zon-liveblog'
 
 
 # TRASHME: Definition of default images sizes for bitblt images

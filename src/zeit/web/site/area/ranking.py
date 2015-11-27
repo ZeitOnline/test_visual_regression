@@ -142,7 +142,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         if len(self.uids_above) == 0:
             return lq.any_value()
         return lq.not_(lq.or_(
-            *[lq.field_raw('uniqueId', i) for i in self.uids_above]))
+            *[lq._field('uniqueId', '"%s"' % i) for i in self.uids_above]))
 
     @staticmethod
     def document_hook(doc):

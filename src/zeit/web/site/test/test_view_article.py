@@ -2,11 +2,10 @@
 import base64
 import datetime
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
 import lxml.etree
 import mock
 import pyramid.testing
@@ -100,12 +99,43 @@ def test_article_pagination_active_state(testbrowser):
     assert '--current' in select('.article-toc__item')[2].get('class')
 
 
+def test_article_toc_has_mobile_functionality(testserver, selenium_driver):
+
+    selenium_driver.set_window_size(320, 480)
+    selenium_driver.get('{}/zeit-online/article/zeit'.format(testserver.url))
+
+    toc_box = selenium_driver.find_element_by_css_selector('.article-toc')
+    toc_index = toc_box.find_element_by_css_selector('.article-toc__headline')
+    toc_onesie = toc_box.find_element_by_css_selector('.article-toc__onesie')
+    toc_list = toc_box.find_element_by_css_selector('.article-toc__list')
+
+    # before click
+    assert not toc_list.is_displayed()
+
+    # after click
+    toc_index.click()
+    assert toc_index.is_displayed()
+    assert '--active' in toc_index.get_attribute('class')
+
+    # after second click
+    toc_index.click()
+    condition = expected_conditions.invisibility_of_element_located((
+        By.CSS_SELECTOR, '.article-toc__list'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+    assert '--active' not in toc_index.get_attribute('class')
+
+    # click on onesie
+    toc_onesie.click()
+    assert '/komplettansicht' in selenium_driver.current_url
+
+
 def test_article_page_1_has_correct_h1(testbrowser):
     select = testbrowser('/zeit-online/article/zeit').cssselect
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
         u'Nancy braucht was Schnelles'), (
-        'article headline is not h1')
+            'article headline is not h1')
 
 
 def test_article_page_2_has_correct_h1(testbrowser):
@@ -113,7 +143,7 @@ def test_article_page_2_has_correct_h1(testbrowser):
     node = '.article__page-teaser > h1'
     assert select(node)[0].text.strip() == (
         u'Der Horror von Crystal wurzelt in der Normalität'), (
-        'article page teaser is not h1')
+            'article page teaser is not h1')
 
 
 def test_article_page_teaserless_has_correct_h1(testbrowser):
@@ -121,7 +151,7 @@ def test_article_page_teaserless_has_correct_h1(testbrowser):
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
         u'Nancy braucht was Schnelles'), (
-        'article headline is not h1')
+            'article headline is not h1')
 
 
 def test_article_complete_has_correct_h1(testbrowser):
@@ -129,7 +159,7 @@ def test_article_complete_has_correct_h1(testbrowser):
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
         u'Nancy braucht was Schnelles'), (
-        'article headline is not h1')
+            'article headline is not h1')
 
 
 def test_article_plain_has_correct_h1(testbrowser):
@@ -137,14 +167,14 @@ def test_article_plain_has_correct_h1(testbrowser):
     node = '.article__item > h1 > .article-heading__title'
     assert select(node)[0].text.strip() == (
         u'Williams wackelt weiter, steht aber im Viertelfinale'), (
-        'article headline must be h1')
+            'article headline must be h1')
 
 
 def test_article_page_1_has_correct_title(testbrowser):
     select = testbrowser('/zeit-online/article/zeit').cssselect
     assert select('title')[0].text.strip() == (
         u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
-        'article headline is not title')
+            'article headline is not title')
 
 
 def test_article_page_2_has_correct_title(testbrowser):
@@ -152,28 +182,28 @@ def test_article_page_2_has_correct_title(testbrowser):
     assert select('title')[0].text.strip() == (
         u'Crystal Meth: Der Horror von Crystal '
         u'wurzelt in der Normalität |\xa0ZEIT ONLINE'), (
-        'article page teaser is not title')
+            'article page teaser is not title')
 
 
 def test_article_page_teaserless_has_correct_title(testbrowser):
     select = testbrowser('/zeit-online/article/zeit/seite-5').cssselect
     assert select('title')[0].text.strip() == (
         u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
-        'article headline is not title')
+            'article headline is not title')
 
 
 def test_article_complete_has_correct_title(testbrowser):
     select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
     assert select('title')[0].text.strip() == (
         u'Crystal Meth: Nancy braucht was Schnelles |\xa0ZEIT ONLINE'), (
-        'article headline is not title')
+            'article headline is not title')
 
 
 def test_article_plain_has_correct_title(testbrowser):
     select = testbrowser('zeit-online/article/02').cssselect
     assert select('title')[0].text.strip() == (
         u'Zwei Baguettes und ein Zimmer bitte |\xa0ZEIT ONLINE'), (
-        'article headline is not title')
+            'article headline is not title')
 
 
 def test_fresh_breaking_news_article_renders_breaking_bar(testbrowser):
@@ -307,11 +337,11 @@ def test_article_sharing_menu_should_open_and_close(
     sharing_menu_target.click()
     # we need to wait for the CSS animation to finish
     # so the sharing menu is actually hidden
-    condition = EC.invisibility_of_element_located((
+    condition = expected_conditions.invisibility_of_element_located((
         By.CSS_SELECTOR, sharing_menu_selector))
     assert WebDriverWait(
         selenium_driver, 1).until(condition), (
-        'sharing menu should hide again on click')
+            'sharing menu should hide again on click')
 
 
 def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
@@ -1023,8 +1053,15 @@ def test_article_advertorial_pages_should_render_correctly(testbrowser):
 
 def test_article_lineage_should_render_correctly(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect('.article-lineage__link-text--prev')) == 1
-    assert len(browser.cssselect('.article-lineage__link-text--next')) == 1
+    assert len(browser.cssselect('.al-text--prev')) == 1
+    assert len(browser.cssselect('.al-text--next')) == 1
+
+
+def test_article_lineage_has_text_elements(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect('.al-text__kicker')) == 2
+    assert len(browser.cssselect('.al-text__supertitle')) == 2
+    assert len(browser.cssselect('.al-text__title')) == 2
 
 
 @pytest.mark.xfail(reason='This test fails on Jenkins. Disabled until fixed.')
@@ -1035,9 +1072,9 @@ def test_article_lineage_should_be_hidden_on_small_screens(
     driver.get('%s/zeit-online/article/zeit' % testserver.url)
     driver.execute_script("window.scrollTo(0, 500)")
     lineage_links = driver.find_elements_by_css_selector(
-        '.article-lineage__link')
+        '.al-link')
     lineage_linktexts = driver.find_elements_by_css_selector(
-        '.article-lineage__link-text')
+        '.al-text')
 
     if screen_size[0] < 980:
         assert not lineage_links[0].is_displayed()
@@ -1065,6 +1102,33 @@ def test_article_lineage_should_be_fixed_after_scrolling(
                    (By.CSS_SELECTOR, '.article-lineage--fixed')))
     except TimeoutException:
         assert False, 'Fixed Lineage not visible after scrolled into view'
+
+
+def test_article_lineage_overlapping_with_fullwidth_elements_should_be_hidden(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/zeit-online/article/infoboxartikel' % testserver.url)
+    # Force page load even if another test has left the browser on _this_ page.
+    driver.refresh()
+
+    driver.execute_script('window.scrollTo(0, 600)')
+    wait = WebDriverWait(driver, 5)
+
+    try:
+        wait.until(expected_conditions.visibility_of_element_located(
+                   (By.CSS_SELECTOR, '.article-lineage')))
+    except TimeoutException:
+        assert False, 'Fixed Lineage not visible after scrolled into view'
+
+    driver.get('%s/zeit-online/article/infoboxartikel#sauriersindsuper' %
+               testserver.url)
+
+    try:
+        wait.until(expected_conditions.invisibility_of_element_located(
+                   (By.CSS_SELECTOR, '.article-lineage')))
+    except TimeoutException:
+        assert False, 'Fixed Lineage visible above fullwidth element'
 
 
 def test_article_lineage_should_not_render_on_advertorials(testbrowser):
