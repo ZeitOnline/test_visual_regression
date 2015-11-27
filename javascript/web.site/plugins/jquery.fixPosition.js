@@ -37,7 +37,6 @@
             '.hide-lineage',
             '.infobox',
             '.inline-gallery__wrap',
-            '.liveblog',
             '.x-fullwidth',
             '.zg-grafik--default-margin',
             '.zon-grafik',
@@ -82,11 +81,16 @@
                 return;
             }
 
+            // special case: liveblogs
+            if ( this.$articleBody.find( '.liveblog' ).length ) {
+                this.element.addClass( this.baseClass + '--absolute' );
+                return;
+            }
+
             // calculate/select more things that will remain unchanged
             this.bypass = this.$articleBody.find( this.fullwidthElements.join() );
 
             $( window ).on( 'scroll', $.throttle( function() { that.handleScrolling(); }, 100 ) );
-
         },
 
         /*
@@ -177,6 +181,9 @@
                         //     .removeClass( this.baseClass + '--fixed' )
                         //     .addClass( this.baseClass + '--absolute' )
                         //     .css({ top: Math.round( this.bypass.get( i ).offsetTop - height - this.threshold ) + 'px' });
+
+                        // collision found: stop searching
+                        break;
                     }
                 }
 
