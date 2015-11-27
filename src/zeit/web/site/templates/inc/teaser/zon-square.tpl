@@ -7,9 +7,13 @@
     {% set module_layout = self.layout() %}
     {% include "zeit.web.site:templates/inc/asset/image_zon-square.tpl" ignore missing %}
     {% if teaser is zett_content %}
-        {% block kicker_logo %}
-        {% endblock %}
         {{ lama.use_svg_icon('logo-zett-small', 'teaser-square__kicker-logo--zett svg-symbol--hide-ie', request) }}
+    {% endif %}
+{% endblock %}
+
+{% block kicker_logo %}
+    {% if teaser is not zett_content %}
+        {{ super() }}
     {% endif %}
 {% endblock %}
 
