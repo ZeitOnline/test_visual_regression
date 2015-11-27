@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2354: Remove vertical spacing of regions where unneeded
 
+- ZON-2445: Change twitter shares to mostread in ZMO buzzboard
+
 
 2.32.1 (2015-11-27)
 -------------------
