@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.33 (unreleased)
+2.33 (2015-11-27)
 -----------------
 
 - ZON-2352: Add liveglog teaser icon
