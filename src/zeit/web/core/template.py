@@ -226,7 +226,7 @@ def get_layout(block, request=None):
     try:
         key = request and hash(block)
     except (NotImplementedError, TypeError), e:
-        log.debug('Cannot cache {} layout: {}'.format(block, e))
+        log.debug('Cannot cache {} layout: {}'.format(type(block), e))
         key = None
 
     if key:
