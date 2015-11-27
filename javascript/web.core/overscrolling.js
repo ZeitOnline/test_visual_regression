@@ -2,9 +2,6 @@
  * @fileOverview Script to overscroll content pages with a loaction switch to another page
  * @author nico.bruenjes@zeit.de
  * @version  0.1
- * @todo load first article instead of image
- * @todo make navigation background image
- * @todo do not count on homepage, remove hash
  */
 define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
     var defaults = {
@@ -22,7 +19,7 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
         progressText: 'Zurück zur Startseite',
         trackingBase: 'stationaer.overscroll....',
         trackingSlugs: {
-            view: '',
+            view: 'appear',
             click: 'clickToHP',
             scroll: 'scrollToHP'
         },
@@ -31,13 +28,12 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
     config,
     debug = location.search.indexOf( 'debug-overscrolling' ) !== -1,
     clickTrack = function( type, target ) {
-        type = type || '';
-        target = target || '';
         var trackingData = config.trackingBase + type + '|' + target;
         window.wt.sendinfo({
             linkId: trackingData,
             sendOnUnload: 1
         });
+        $( window ).trigger( 'overscroll', { 'action': type } );
     },
     loadElements = function( options ) {
         // first untie the trigger event
@@ -87,7 +83,7 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
         $( config.overscrollElement ).on( 'inview', function( isVisible ) {
             if ( isVisible ) {
                 $( config.overscrollElement ).off( 'inview' );
-                clickTrack( 'view' );
+                clickTrack( 'appear', config.jumpTo );
             }
         });
 
@@ -97,7 +93,7 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
             if ( debug ) {
                 console.debug( 'overscrolling: click jump to HP.' );
             } else {
-                clickTrack( 'click', config.jumpTo );
+                clickTrack( 'clickToHP', config.jumpTo );
                 window.location.href = config.jumpTo; // click w/o hash
             }
         });
@@ -108,7 +104,7 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
                 if ( debug ) {
                     console.debug( 'overscrolling: jump to HP.' );
                 } else {
-                    clickTrack( 'scroll', config.jumpTo );
+                    clickTrack( 'scrollToHP', config.jumpTo );
                     window.location.href = config.jumpTo + config.jumpHash;
                 }
             }
