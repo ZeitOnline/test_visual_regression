@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2415: Add Zett Banner
 
+- ZON-2355: Hide chronological article navigation covering fullwidth elements
+
 - ZON-2369: Mark comments by freelancer
 
 - ZON-2418: Update webtrekk page parameter 10
