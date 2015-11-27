@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2354: Remove vertical spacing of regions where unneeded
 
+- MAINT: Add noindex header to XHR views (just to be on the safe side)
+
 
 2.32.1 (2015-11-27)
 -------------------

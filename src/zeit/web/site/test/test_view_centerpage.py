@@ -927,6 +927,7 @@ def test_centerpage_area_should_render_in_isolation(testbrowser):
     select = browser.cssselect
     assert len(select('div.cp-area.cp-area--gallery')) == 1
     assert len(select('article.teaser-gallery')) == 2
+    assert browser.headers['X-Robots-Tag'] == 'noindex'
 
 
 def test_centerpage_biga_area_should_render_in_isolation_with_page_param(

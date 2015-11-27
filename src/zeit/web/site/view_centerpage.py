@@ -337,6 +337,8 @@ class CenterpageArea(Centerpage):
         self.context = None
         self.request = request
 
+        self.request.response.headers.add('X-Robots-Tag', 'noindex')
+
         for region in context.values():
             for area in region.values():
                 if area.uniqueId.rsplit('/', 1)[-1] == request.subpath[-1]:
