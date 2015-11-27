@@ -114,11 +114,13 @@
 			@extend %teaser-kicker-logo--zett
 		&--liveblog
 			@extend %teaser-kicker-logo--liveblog
-			display: inline-block
-			padding-bottom: remify(4px)
-			padding-top: remify(3px)
-		&--liveblog-live
-			@extend %teaser-kicker-logo--liveblog-live
+			+respond-min($break-tablet-min)
+				display: table
+				margin-bottom: remify(6px)
+				padding-bottom: remify(4px)
+				padding-top: remify(3px)
+		&--liveblog-closed
+			@extend %teaser-kicker-logo--liveblog-closed
 	&__title
 		@extend %teaser-title
 		color: $white

@@ -100,8 +100,8 @@
 		vertical-align: sub
 		width: remify(30px)
 	&--liveblog
-		+background-image(linear-gradient(to top, #494b52, $trout))
-		background-color: $trout
+		+background-image(linear-gradient(to top, $zon-red, #d41910))
+		background-color: $zon-red
 		border-radius: remify(3px)
 		color: $white
 		font-size: remify(10px)
@@ -113,6 +113,7 @@
 		text-transform: uppercase
 		vertical-align: 1px
 		&:before
+			+animation(live-blog-indicator-animation 2s infinite)
 			background-color: $zon-lighter-grey
 			border-radius: 50%
 			content: ""
@@ -120,10 +121,11 @@
 			height: remify(8px)
 			margin-right: remify(4px)
 			width: remify(8px)
-		&-live
-			// +animation(live-blog-indicator-animation 2s infinite)
-			+background-image(linear-gradient(to top, $zon-red, #d41910))
-			background-color: $zon-red
+		&-closed
+			+background-image(linear-gradient(to top, #494b52, $trout))
+			background-color: $trout
+			&:before
+				+animation(none)
 
 %teaser-combined-link
 	color: inherit
