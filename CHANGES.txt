@@ -12,9 +12,15 @@ Change log for zeit.web
 
 - ZON-2369: Mark comments by freelancer
 
-- HOTFIX: Fix shop carousel teaser uniqueId
-
 - ZON-2418: Update webtrekk page parameter 10
+
+- ZON-2354: Remove vertical spacing of regions where unneeded
+
+
+2.32.1 (2015-11-27)
+-------------------
+
+- HOTFIX: Fix shop carousel teaser uniqueId
 
 
 2.32 (2015-11-24)
