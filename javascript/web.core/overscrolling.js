@@ -8,12 +8,13 @@
  */
 define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
     var defaults = {
-        documentMinHeight: 1000,
+        documentMinHeight: 800,
         jumpHash: '#overscroll-article',
-        jumpTo: 'http://www.zeit.de/',
+        jumpTo: 'http://localhost:9090/index',
         livePreview: false,
         overscrollElement: '#overscrolling',
-        previewHeight: 550,
+        previewAreaAdress: '/index/area/no-1',
+        previewHeight: 600,
         previewOpacity: 0.4,
         previewPath: '/exampleimages/sitepreview/sitepreview.jpg',
         progressElement: '#circle_progress',
@@ -43,25 +44,45 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
         $( config.triggerElement ).off( 'inview' );
         // attach stuff
         var $template = $( '#circle_progress_script' ),
-            $element = $( $template.html() );
+            $element = $( $template.html() ),
+            $target = $element.find( config.overscrollElement + '_target' ),
+            $indicator = $element.find( config.overscrollElement + '_indicator' );
 
         // add text
-        $element.find( config.overscrollElement + '_indicator' ).attr( 'data-text', config.progressText );
+        $indicator.attr( 'data-text', config.progressText );
         // preview image case
-        if ( !config.livepreview ) {
+        if ( !config.livePreview ) {
             var img = $( '<img alt="">' ).attr( 'src', config.previewPath );
-            $element.find( config.overscrollElement + '_target' )
-                .css({
+            $target.css({
                     height: config.previewHeight,
                     opacity: config.previewOpacity,
                     overflow: 'hidden'
                 })
                 .append( img );
+            // insert the shite
+            $element.insertBefore( $template );
         } else {
-            // todo: add more element loading here
+            // load first teaser on homepage
+            $target.css({
+                    height: config.previewHeight,
+                    opacity: config.previewOpacity,
+                    overflow: 'hidden'
+                })
+                .addClass( 'overscrolling__target--with-header-image' );
+            $element.insertBefore( $template );
+            $target.load( config.previewAreaAdress, function() {
+                var $noscript = $target.find( 'noscript[data-src]' ),
+                    src = $noscript.attr( 'data-src' );
+                if ( src ) {
+                    $( '<img>' ).attr( 'src', src ).insertBefore( $noscript );
+                }
+                $target.find( 'a' )
+                    .css({ cursor: 'default' })
+                    .on( 'click', function( event ) {
+                        event.preventDefault();
+                    });
+            });
         }
-        // insert the shite
-        $element.insertBefore( $template );
 
         $( config.overscrollElement ).on( 'inview', function( isVisible ) {
             if ( isVisible ) {
