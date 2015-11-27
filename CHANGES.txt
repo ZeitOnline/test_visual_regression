@@ -4,8 +4,6 @@ Change log for zeit.web
 2.33 (unreleased)
 -----------------
 
-- MAINT: Polish nextread, advertising nextread and article lineage
-
 - ZON-2352: Add liveglog teaser icon
 
 - ZON-2357: Add Supertitle to Article Lineage
@@ -23,6 +21,8 @@ Change log for zeit.web
 - ZON-2445: Change twitter shares to mostread in ZMO buzzboard
 
 - MAINT: Add noindex header to XHR views (just to be on the safe side)
+
+- MAINT: Polish nextread, advertising nextread and article lineage
 
 
 2.32.1 (2015-11-27)
