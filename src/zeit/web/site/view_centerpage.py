@@ -362,7 +362,7 @@ class CenterpageArea(Centerpage):
                     self.context = zeit.web.core.centerpage.get_area(area)
                     return
                 else:
-                    index +=1
+                    index += 1
 
     def __call__(self):
         return {
