@@ -336,12 +336,33 @@ class CenterpageArea(Centerpage):
 
         self.context = None
         self.request = request
+        self.comment_counts = {}
+        self.has_solo_leader = False
 
+        name = request.subpath[-1]
+
+        def uid_cond(index, area):
+            return area.uniqueId.rsplit('/', 1)[-1] == name
+
+        def index_cond(index, area):
+            try:
+                return index == int(name.lstrip(u'no-'))
+            except ValueError:
+                raise pyramid.httpexceptions.HTTPNotFound('Area nicht gefunden')
+
+        if name.startswith('id-'):
+            condition = uid_cond
+        elif name.startswith('no-'):
+            condition = index_cond
+
+        index = 1
         for region in context.values():
             for area in region.values():
-                if area.uniqueId.rsplit('/', 1)[-1] == request.subpath[-1]:
+                if condition(index, area):
                     self.context = zeit.web.core.centerpage.get_area(area)
                     return
+                else:
+                    index +=1
 
     def __call__(self):
         return {
