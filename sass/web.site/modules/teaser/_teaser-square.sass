@@ -58,6 +58,10 @@ $layout: ".teaser-square"
 			left: remify(15px)
 			position: absolute
 			width: remify(40px)
+		&--liveblog
+			@extend %teaser-kicker-logo--liveblog
+		&--liveblog-closed
+			@extend %teaser-kicker-logo--liveblog-closed
 	&__series-label
 		margin-bottom: 0
 		&:after
