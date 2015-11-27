@@ -2,101 +2,81 @@
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
     <keywordset>
-      <keyword py:pytype="str" source="manual">primaten</keyword>
-      <keyword py:pytype="str" source="manual">sozialverhalten</keyword>
-      <keyword py:pytype="str" source="manual">regenwald</keyword>
-      <keyword py:pytype="str" source="manual">zoologie</keyword>
-      <keyword py:pytype="str" source="manual">verhaltensforschung</keyword>
-      <keyword py:pytype="str" source="manual">demokratische-republik-kongo</keyword>
-      <keyword py:pytype="str" source="manual">affe</keyword>
+      <keyword source="manual">primaten</keyword>
+      <keyword source="manual">sozialverhalten</keyword>
+      <keyword source="manual">regenwald</keyword>
+      <keyword source="manual">zoologie</keyword>
+      <keyword source="manual">verhaltensforschung</keyword>
+      <keyword source="manual">demokratische-republik-kongo</keyword>
+      <keyword source="manual">affe</keyword>
     </keywordset>
     <image align="left" base-id="http://xml.zeit.de/wissen/umwelt/2013-01/bonobos/" type="jpg" publication-date="" expires="">
-      <bu py:pytype="str">Bonobos in einem Wildreservat nahe Kinshasa in der Demokratischen Republik Kongo (Archivbild)</bu>
-      <copyright py:pytype="str">© Finbarr O'Reilly/Reuters</copyright>
+      <bu>Bonobos in einem Wildreservat nahe Kinshasa in der Demokratischen Republik Kongo (Archivbild)</bu>
+      <copyright>© Finbarr O'Reilly/Reuters</copyright>
     </image>
     <references>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wissen/umwelt/2012-06/bonobo-genom" year="2012" issue="24" ressort="Wissen" contenttype="article" publication-date="" expires="">
-        <supertitle py:pytype="str">Genomentzifferung</supertitle>
-        <title py:pytype="str">Was den Bonobo unter den Menschenaffen einzigartig macht</title>
-        <text py:pytype="str">Das letzte Affengenom ist entziffert: Genetiker haben das Erbgut des kaum erforschten Bonobo untersucht. Es zeigt, wie unabhängig sich der Menschenaffe entwickelte.</text>
-        <description py:pytype="str">Das letzte Affengenom ist entziffert: Genetiker haben das Erbgut des kaum erforschten Bonobo untersucht. Es zeigt, wie unabhängig sich der Menschenaffe entwickelte.</description>
-        <byline xsi:nil="true" />
-        <image alt="Bonobo Affe Genom" align="left" title="Bonobo Affe Genom" base-id="http://xml.zeit.de/wissen/umwelt/2012-06/bonobo-affe/" type="jpg" publication-date="" expires="">
-          <bu py:pytype="str">Ein einjähriges Bonobo-Junges aus dem Berliner Zoo</bu>
-          <copyright py:pytype="str">© Johannes Eisele/AFP/Getty Images</copyright>
-        </image>
-      </reference>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wissen/umwelt/2012-09/kongo-affenart-forschung" year="2012" issue="37" ressort="Wissen" contenttype="article" publication-date="" expires="">
-        <supertitle py:pytype="str">Zoologie</supertitle>
-        <title py:pytype="str">Forscher entdecken Affenart im Kongo</title>
-        <text py:pytype="str">"Cercopithecus lomamiensis" ist die erste auf dem afrikanischen Kontinent gefundene Affenart seit vielen Jahren. Bei der Entdeckung half den Biologen der Zufall.</text>
-        <description py:pytype="str">"Cercopithecus lomamiensis" ist die erste auf dem afrikanischen Kontinent gefundene Affenart seit vielen Jahren. Bei der Entdeckung half den Biologen der Zufall.</description>
-        <byline xsi:nil="true" />
-        <image align="left" title="Kongo Affenart entdeckt" base-id="http://xml.zeit.de/wissen/2012-09/kongo-affenart-entdeckt/" type="jpg" publication-date="" expires="">
-          <bu py:pytype="str">Die bislang unbekannte Affenart Cercopithecus lomamiensis</bu>
-          <copyright py:pytype="str">© dpa</copyright>
-        </image>
-      </reference>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wissen/2010-06/mann-affe-wettbewerb" year="2010" issue="26" ressort="Wissen" contenttype="article" publication-date="" expires="">
-        <supertitle py:pytype="str">Evolution</supertitle>
-        <title py:pytype="str">Im Wettbewerb verhalten sich Männer wie Menschenaffen</title>
-        <text py:pytype="str">Friedfertiger Bonobo oder aggressiver Schimpanse? Männer und Affen haben laut einer Harvard-Studie hormonell einiges gemeinsam – zumindest in Konkurrenzsituationen.</text>
-        <description py:pytype="str">Friedfertiger Bonobo oder aggressiver Schimpanse? Männer und Affen haben laut einer Harvard-Studie hormonell einiges gemeinsam – zumindest in Konkurrenzsituationen.</description>
-        <byline xsi:nil="true" />
-        <image alt="Mann Bonobo Kongo " align="left" base-id="http://xml.zeit.de/wissen/2010-06/bonobo-mensch-affe/" type="jpg" publication-date="" expires="">
-          <bu py:pytype="str">Der Durchschnittsmann gleicht eher einem friedfertigen, passiven Bonobo</bu>
-          <copyright py:pytype="str">© Desirey Minkoh/AFP/Getty Images</copyright>
-        </image>
-      </reference>
+      <reference type="intern" href="http://xml.zeit.de/wissen/umwelt/2012-06/bonobo-genom" contenttype="article"/>
     </references>
-    
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Daniel Lingenhöhl</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-05-06T09:42:02.727866+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-01-07T09:08:16.305937+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-04-28T11:37:29+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">notnecessary</attribute>
-    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-05-28T13:32:47.834320+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.szuppa</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">777</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">SpeDE</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">spektrum.de</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">79ee4f8b097f4777b13fd583dd9dfdd4</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wissen</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Umwelt</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">4324</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9f5f5ffe-b70b-4471-96d4-14fe71a19cfe}</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">2</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
-  <rankedTags><tag url_value="affe" uuid="014763fa-a4fe-4d58-ad15-ed1fa16d2674" score="4" type="free">Affe</tag><tag url_value="aggression" uuid="00686f6f-2e6b-41ab-ba47-2ce92a4de6b7" score="4" type="free">Aggression</tag><tag url_value="geschlechtsverkehr" uuid="0b556adf-de00-445f-bcbb-e3e0c71b3538" score="4" type="free">Geschlechtsverkehr</tag><tag url_value="schimpanse" uuid="9352b120-13e6-4068-baf0-69e7107d19da" score="4" type="free">Schimpanse</tag><tag url_value="sozialverhalten" uuid="db85c4ce-2437-46a1-948c-afad74cf058f" score="4" type="free">Sozialverhalten</tag><tag url_value="studie" uuid="9c9e1234-a473-47c3-92df-8c14f91890a7" score="4" type="free">Studie</tag><tag url_value="tier" uuid="1c4ba359-16f1-47e5-817e-26fc6361e855" score="4" type="free">Tier</tag><tag url_value="verhaltensforschung" uuid="efc59cd5-c25e-4171-a2ae-820ac3eda69c" score="4" type="free">Verhaltensforschung</tag><tag url_value="test" uuid="6cba3b0a-c757-4b2e-b3b0-06920090f3dd" score="3" type="free">Test</tag><tag url_value="kinshasa" uuid="b2834cb9-37fb-4759-a903-955c2b0a55a8" score="1" type="Location">Kinshasa</tag></rankedTags></head><body>
-    <supertitle py:pytype="str">Verhaltensforschung</supertitle>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Daniel Lingenhöhl</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Kultur Film</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-05-06T09:42:02.727866+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-05-27T17:11:30.179510+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-04-28T11:37:29+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">notnecessary</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-05-28T13:32:47.834320+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.szuppa</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">777</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">79ee4f8b097f4777b13fd583dd9dfdd4</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wissen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Umwelt</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">4324</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9f5f5ffe-b70b-4471-96d4-14fe71a19cfe}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">2</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+    <rankedTags>
+      <tag url_value="affe" uuid="014763fa-a4fe-4d58-ad15-ed1fa16d2674" score="4" type="free">Affe</tag>
+      <tag url_value="aggression" uuid="00686f6f-2e6b-41ab-ba47-2ce92a4de6b7" score="4" type="free">Aggression</tag>
+      <tag url_value="geschlechtsverkehr" uuid="0b556adf-de00-445f-bcbb-e3e0c71b3538" score="4" type="free">Geschlechtsverkehr</tag>
+      <tag url_value="schimpanse" uuid="9352b120-13e6-4068-baf0-69e7107d19da" score="4" type="free">Schimpanse</tag>
+      <tag url_value="sozialverhalten" uuid="db85c4ce-2437-46a1-948c-afad74cf058f" score="4" type="free">Sozialverhalten</tag>
+      <tag url_value="studie" uuid="9c9e1234-a473-47c3-92df-8c14f91890a7" score="4" type="free">Studie</tag>
+      <tag url_value="tier" uuid="1c4ba359-16f1-47e5-817e-26fc6361e855" score="4" type="free">Tier</tag>
+      <tag url_value="verhaltensforschung" uuid="efc59cd5-c25e-4171-a2ae-820ac3eda69c" score="4" type="free">Verhaltensforschung</tag>
+      <tag url_value="test" uuid="6cba3b0a-c757-4b2e-b3b0-06920090f3dd" score="3" type="free">Test</tag>
+      <tag url_value="kinshasa" uuid="b2834cb9-37fb-4759-a903-955c2b0a55a8" score="1" type="Location">Kinshasa</tag>
+    </rankedTags>
+  </head>
+  <body>
+    <supertitle>Verhaltensforschung</supertitle>
     <title>Bonobos tauschen Futter gegen Kuscheln</title>
     <subtitle>Anders als andere Primaten teilen Bonobos auch mit fremden Artgenossen ihre Nahrung, um gestreichelt zu werden. Schimpansen würden Mitglieder anderer Sippen eher töten.</subtitle>
     <division type="page">
       <image align="left" src="http://xml.zeit.de/wissen/umwelt/2013-01/bonobos/bonobos-540x304.jpg" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
-        <bu py:pytype="str">Bonobos in einem Wildreservat nahe Kinshasa in der Demokratischen Republik Kongo (Archivbild)</bu>
-        <copyright py:pytype="str">© Finbarr O'Reilly/Reuters</copyright>
+        <bu>Bonobos in einem Wildreservat nahe Kinshasa in der Demokratischen Republik Kongo (Archivbild)</bu>
+        <copyright>© Finbarr O'Reilly/Reuters</copyright>
       </image>
       <p><a href="http://www.zeit.de/wissen/umwelt/2012-06/bonobo-genom">Bonobos</a> gelten als die großen Pazifisten unter den Primaten: Im Gegensatz zu Schimpansen – oder auch uns – bevorzugen sie stets friedliche Konfliktlösungen mit bekannten wie fremden Artgenossen: etwa durch soziale Handlungen wie Fellpflege bis hin zum Geschlechtsverkehr. Eine neue Studie von <a target="_blank" href="http://evolutionaryanthropology.duke.edu/people?subpage=profile&amp;Gurl=%2Faas%2FBAA&amp;Uil=jingzhi.tan">Jingzhi Tan</a> und <a target="_blank" href="http://www.dibs.duke.edu/research/profiles/88-brian-hare">Brian Hare</a> von der Duke University in Durham bestätigt nun ein weiteres Mal, wie weit die im Kongo-Regenwald lebende Affenart geht, um sich ein behagliches Umfeld zu schaffen: <a target="_blank" href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0051922">Sie teilen sogar mit ihnen unbekannten Bonobos Futter</a>, um im Gegenzug Streicheleinheiten zu erhalten – ein Verhalten, das die wesentlich aggressiveren Schimpansen bislang noch nicht vor Forschern gezeigt haben. Im Gegenteil: Wenn Schimpansen die Gelegenheit haben, töten sie Mitglieder benachbarter Sippen, um deren Konkurrenz zu verringern.</p>
       <p>Getestet haben Tan und Hare dieses prosoziale Verhalten mit einer Reihe von Experimenten mit verwaisten Bonobos, die im Primatenschutzzentrum <a target="_blank" href="http://www.lolayabonobo.org/">Lola ya Bonobo</a> in der Nähe der kongolesischen Stadt <entity idref="Kinshasa" entity_type="Location" url_value="orte/kinshasa">Kinshasa</entity> leben: So durfte ein Bonobo (<em>Pan paniscus</em>) in ein Gehege, das an zwei weitere Käfige grenzte und in dem bereits größere Futtermengen ausgelegt waren – wobei der Menschenaffe wusste, wie man die Türen zu den Nachbarbehausungen öffnen konnte, in denen auf der einen Seite ein fremder und auf der anderen ein bekannter Artgenosse saß. Doch statt sich allein an den angebotenen Früchten und anderen Leckereien zu delektieren, öffnete der Affe im zentralen Käfig zur Überraschung der Forscher mehrheitlich das Tor zum ihnen neuen Bonobo; nur eine Minderheit suchte zuerst die Gesellschaft des vertrauten Gruppenmitglieds.</p>
@@ -104,8 +84,8 @@
       <infobox href="http://xml.zeit.de/zeit-online/article/info-bonobo" publication-date="" expires="" is_empty="False" />
       <p>In gewissem Rahmen wird diese Hilfsbereitschaft der Bonobos aber nicht nur aus Eigennutz betrieben – zum Empfang von Zärtlichkeiten oder zum Ausbau des sozialen Netzwerks –, die Affen verschaffen fremden wie bekannten Tieren ebenfalls Zugang zu Nahrung, wenn sie diese nicht selbst erreichen können, und sogar, wenn sie dafür im Gegenzug keine sozialen Interaktionen pflegen können. Auch in diesem Versuch der Forscher öffneten die Tiere mit Hilfe einer Leine den gegenüber befindlichen Käfig, ohne dass sie ihren eigenen verlassen konnten. Ihr altruistisches Verhalten endete erst dann, wenn sie nicht nur keine direkten Streicheleinheiten mehr empfangen können, sondern zudem gleichzeitig auch etwas von ihrem Futter abgeben müssen.</p>
       <image align="left" href="http://www.spektrum.de/" src="http://xml.zeit.de/wissen/2012-04/spektrum/Spektrum-180x101.jpg" type="jpg" publication-date="" expires="" layout="large" is_empty="False">
-        <bu py:pytype="str">Erschienen auf spektrum.de</bu>
-        <copyright py:pytype="str">© Screenshot ZEIT ONLINE</copyright>
+        <bu>Erschienen auf spektrum.de</bu>
+        <copyright>© Screenshot ZEIT ONLINE</copyright>
       </image>
       <p>In diesem Versuch hätte der Freigelassene nun Zugriff auf das gemeinsame Futter gehabt, der Aufbau des Experiments ließ jedoch keinen direkten Kontakt mehr zu. "Sehen sie keinen sozialen Gewinn mehr für sich, teilen sie auch nicht mehr", betont Hare. "Sie interessieren sich füreinander, selbst dann, wenn sie davon nicht profitieren – nicht aber, wenn sie davon nur einen Verlust haben." Das unterscheide sie dann doch von Menschen, die auch anonym spenden würden, ohne dafür direkte Gegenleistungen zu erhalten, so der Forscher. Allerdings zeigten Tests bei Menschen ebenfalls, dass diese großzügiger geben, wenn der Empfänger bekannt ist.</p>
       <p>Insgesamt sind die beiden Biologen jedenfalls begeistert von ihrer Entdeckung. "Das ist eine der verrückteren Beobachtungen, die wir in den letzten zehn Jahren bei unserer Arbeit mit den Bonobos gemacht haben. Mit Schimpansen hätten wir diese Studie nicht durchführen können: Sie wären übereinander hergefallen", meint Hare abschließend.</p>
@@ -116,9 +96,8 @@
       </p>
     </division>
   </body>
-  
   <teaser>
-    <title py:pytype="str">Bonobos tauschen Futter gegen Kuscheln</title>
-    <text py:pytype="str">Anders als andere Primaten teilen Bonobos auch mit fremden Artgenossen ihre Nahrung, um gestreichelt zu werden. Schimpansen würden Mitglieder anderer Sippen eher töten.</text>
+    <title>Bonobos tauschen Futter gegen Kuscheln</title>
+    <text>Anders als andere Primaten teilen Bonobos auch mit fremden Artgenossen ihre Nahrung, um gestreichelt zu werden. Schimpansen würden Mitglieder anderer Sippen eher töten.</text>
   </teaser>
 </article>

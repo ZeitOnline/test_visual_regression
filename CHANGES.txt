@@ -10,11 +10,15 @@ Change log for zeit.web
 
 - ZON-2415: Add Zett Banner
 
+- ZON-2355: Hide chronological article navigation covering fullwidth elements
+
 - ZON-2369: Mark comments by freelancer
 
 - ZON-2418: Update webtrekk page parameter 10
 
 - ZON-2354: Remove vertical spacing of regions where unneeded
+
+- MAINT: Add noindex header to XHR views (just to be on the safe side)
 
 
 2.32.1 (2015-11-27)
