@@ -6,15 +6,15 @@ Available attributes:
     zeit.web.magazin.view_centerpage.Centerpage
 #}
 
-{%- set captions = {'twitter': ('Auf Twitter', 'Tweets'),
-                    'facebook': ('Auf Facebook', 'Empfehlungen'),
-                    'comments': ('Kommentiert', 'Kommentare')} -%}
+{%- set captions = {'views': ('Meistgelesen', ['Keine Leser', '{} Leser', '{} Leser']),
+                    'facebook': ('Auf Facebook', ['Keine Empfehlungen', '{} Empfehlung', '{} Empfehlungen']),
+                    'comments': ('Kommentiert', ['Keine Kommentare', '{} Kommentar', '{} Kommentare'])} -%}
 
 <div class="cp_buzz">
     <div class="cp_buzz__divider">
         <span class="cp_buzz__header">Beliebt und angesagt</span>
     </div>
-    {% for service, articles in view.area_buzz.items() %}
+    {% for service, articles in view.area_buzz %}
     <div class="cp_buzz__service">
         <div class="cp_buzz__header">
             <div class="cp_buzz__icon icon-buzz-{{ service }}"></div>
@@ -31,7 +31,7 @@ Available attributes:
                     </p>
                     {% if article.score %}
                     <p class="cp_buzz__service__list__entry__score">
-                        {{ article.score }} {{ captions[service][1] }}
+                        {{ article.score | pluralize(*captions[service][1]) }}<br>
                     </p>
                     {% endif %}
                 </div>
