@@ -7,7 +7,7 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
     var defaults = {
         documentMinHeight: 800,
         jumpHash: '#overscroll-article',
-        jumpTo: 'http://localhost:9090/index',
+        jumpTo: 'http://www.zeit.de/index',
         livePreview: false,
         overscrollElement: '#overscrolling',
         previewAreaAdress: '/index/area/no-1',
