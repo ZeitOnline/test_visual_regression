@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - ZON-2445: Change twitter shares to mostread in ZMO buzzboard
 
+- MAINT: Add noindex header to XHR views (just to be on the safe side)
+
 
 2.32.1 (2015-11-27)
 -------------------
