@@ -4,6 +4,8 @@ Change log for zeit.web
 2.33 (unreleased)
 -----------------
 
+- MAINT: Polish nextread, advertising nextread and article lineage
+
 - ZON-2352: Add liveglog teaser icon
 
 - ZON-2357: Add Supertitle to Article Lineage

@@ -21,7 +21,6 @@
 		margin-bottom: remify(10px)
 	&__kicker
 		@extend %teaser-kicker
-		margin-bottom: remify(7px)
 	&__title
 		@extend %teaser-title
 	&__metadata
@@ -32,7 +31,7 @@
 		@extend %teaser-commentcount
 
 	&--with-image &__container
-		padding-bottom: remify(64px)
+		padding-bottom: remify(32px)
 
 	&--no-image
 		+font-smoothing
@@ -61,7 +60,7 @@
 			position: relative
 			&:after
 				border-bottom: 1px solid rgba($white, .5)
-				bottom: remify(5px)
+				top: remify(55px)
 				content: ""
 				left: 0
 				position: absolute
@@ -72,8 +71,6 @@
 			+teaser-image-dark-overlay($angle: 0deg)
 		&__heading
 			margin-bottom: remify(16px)
-		&__kicker
-			margin-bottom: remify(10px)
 		&__title
 			font-size: em(28px)
 			line-height: 1.12
@@ -91,7 +88,7 @@
 				position: absolute
 				left: 50%
 				margin-left: remify(-330px)
-				padding-bottom: remify(32px)
+				padding-bottom: remify(64px)
 			.nextread__lead
 				color: $white
 				top: 0
