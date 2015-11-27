@@ -10,7 +10,7 @@
         {{ lama.use_svg_icon('arrow-articlelineage-left', 'al-link__icon al-link__icon--prev', request) }}
         <span class="al-text al-text--prev {% if predecessor.supertitle %}al-text--has-supertitle{% endif %}">
             <span class="al-text__kicker">{% if predecessor.uniqueId == 'http://xml.zeit.de/index' %}ZEIT ONLINE{% else %}Voriger Artikel{% endif %}</span>
-            <span class="al-text__supertitle">{{ predecessor.supertitle }}</span>
+            {% if predecessor.supertitle %}<span class="al-text__supertitle">{{ predecessor.supertitle }}</span>{% endif %}
             <span class="al-text__title">{{ predecessor.title }}</span>
         </span>
     </a>
@@ -19,7 +19,7 @@
         {{ lama.use_svg_icon('arrow-articlelineage-right', 'al-link__icon al-link__icon--next', request) }}
         <span class="al-text al-text--next {% if successor.supertitle %}al-text--has-supertitle{% endif %}">
             <span class="al-text__kicker">{% if successor.uniqueId == 'http://xml.zeit.de/index' %}ZEIT ONLINE{% else %}Nächster Artikel{% endif %}</span>
-            <span class="al-text__supertitle">{{ successor.supertitle }}</span>
+            {% if successor.supertitle %}<span class="al-text__supertitle">{{ successor.supertitle }}</span>{% endif %}
             <span class="al-text__title">{{ successor.title }}</span>
         </span>
     </a>
