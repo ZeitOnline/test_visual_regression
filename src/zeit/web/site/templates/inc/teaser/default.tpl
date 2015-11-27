@@ -34,7 +34,7 @@
                                 {% elif teaser is zett_content %}
                                     {{ lama.use_svg_icon('logo-zett-small', self.layout() + '__kicker-logo--zett svg-symbol--hide-ie', request) }}
                                 {% elif teaser | is_liveblog %}
-                                    <span class="{{ self.layout() }}__kicker-logo--liveblog{% if teaser.liveblog_is_live or True %} {{ self.layout() }}__kicker-logo--liveblog-live{% endif %}">live</span>
+                                    <span class="{{ self.layout() }}__kicker-logo--liveblog{% if teaser.liveblog_is_live == False %} {{ self.layout() }}__kicker-logo--liveblog-closed{% endif %}">live</span>
                                 {% endif %}
                             {% endblock %}
                             {{ teaser.teaserSupertitle or teaser.supertitle }}
