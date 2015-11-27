@@ -1,5 +1,5 @@
 .nextread-advertisement
-	margin: 0 (-$page-padding)
+	margin: remify(40px) (-$page-padding)
 
 	&__label
 		@extend %label
@@ -52,6 +52,7 @@
 		background-color: $color-advertising-bg
 		position: relative
 		height: remify(210px)
+		margin: 0 (-$page-padding)
 
 		&__label
 			background: rgba(255, 255, 255, 0.8)
@@ -68,13 +69,16 @@
 			padding-right: 0
 			position: relative
 			width: remify(660px)
+			display: table
+			height: 100%
 
 		&__container-inner
 			border: none
-			padding-left: 0
-			padding-right: 0
+			padding: 0
 			position: relative
 			text-align: left
+			display: table-cell
+			vertical-align: middle
 
 		&__title,
 		&__text
@@ -83,6 +87,7 @@
 		&__title
 			font-size: remify(24px)
 			line-height: remify(27px)
+			margin: 0
 
 		&__text
 			font-size: remify(16px)

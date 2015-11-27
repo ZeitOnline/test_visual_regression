@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2408: Add overscroll effect
 
+- MAINT: Polish nextread, advertising nextread and article lineage
+
 - ZON-2352: Add liveglog teaser icon
 
 - ZON-2357: Add Supertitle to Article Lineage
