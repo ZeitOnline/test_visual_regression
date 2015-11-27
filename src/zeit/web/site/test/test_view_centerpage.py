@@ -929,6 +929,13 @@ def test_centerpage_area_should_render_in_isolation(testbrowser):
     assert len(select('article.teaser-gallery')) == 2
 
 
+def test_centerpage_area_should_render_on_index(testbrowser):
+    browser = testbrowser('/index/area/no-1')
+    select = browser.cssselect
+    assert len(select('.cp-area.cp-area--solo')) == 1
+    assert len(select('article.teaser-fullwidth')) == 1
+
+
 def test_centerpage_biga_area_should_render_in_isolation_with_page_param(
         testbrowser):
     browser = testbrowser('/index/area/id-5fe59e73-e388-42a4-a8d4-'
