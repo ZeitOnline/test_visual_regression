@@ -344,8 +344,8 @@ def is_video(context):
 
 @zeit.web.register_filter
 def is_liveblog(context):
-    return zeit.web.core.article.ILiveblogArticle.providedBy(
-        context) or context.template == 'zon-liveblog'
+    return zeit.content.article.interfaces.IArticle.providedBy(
+        context) and context.template == 'zon-liveblog'
 
 
 # TRASHME: Definition of default images sizes for bitblt images
