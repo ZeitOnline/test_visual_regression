@@ -198,7 +198,8 @@ class AuthorFeed(Newsfeed):
     @zeit.web.reify
     def items(self):
         solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        query = '{} AND (type:article)'.format(self.context.display_name)
+        query = 'author:"{}" AND (type:article)'.format(
+            self.context.display_name)
         resultset = []
         for result in solr.search(
                 query, sort='date-first-released desc', rows=8):
