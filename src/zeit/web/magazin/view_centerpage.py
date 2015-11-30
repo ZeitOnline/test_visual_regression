@@ -118,10 +118,11 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
     @zeit.web.reify
     def area_buzz(self):
         conn = zope.component.getUtility(zeit.web.core.interfaces.IReach)
-        return dict(
-            twitter=conn.get_social(facet='twitter', section='zeit-magazin'),
-            facebook=conn.get_social(facet='facebook', section='zeit-magazin'),
-            comments=conn.get_comments(section='zeit-magazin'))
+        return (
+            ('views', conn.get_views(section='zeit-magazin')),
+            ('facebook', conn.get_social(
+                facet='facebook', section='zeit-magazin')),
+            ('comments', conn.get_comments(section='zeit-magazin')))
 
     @zeit.web.reify
     def copyrights(self):

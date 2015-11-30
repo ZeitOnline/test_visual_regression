@@ -559,10 +559,18 @@ def test_get_reaches_from_centerpage_view(application):
     view = zeit.web.magazin.view_centerpage.Centerpage(cp, request)
 
     buzz = view.area_buzz
-    assert set(buzz.keys()) == {'facebook', 'twitter', 'comments'}
-    assert len(buzz['facebook']) == 3
-    assert len(buzz['twitter']) == 3
-    assert len(buzz['comments']) == 3
+
+    buzz_views = buzz[0]
+    buzz_facebook = buzz[1]
+    buzz_comments = buzz[2]
+
+    assert buzz_views[0] == 'views'
+    assert buzz_facebook[0] == 'facebook'
+    assert buzz_comments[0] == 'comments'
+
+    assert len(buzz_views[1]) == 3
+    assert len(buzz_facebook[1]) == 3
+    assert len(buzz_comments[1]) == 3
 
 
 def test_centerpages_produces_no_error(testserver, testbrowser):

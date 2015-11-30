@@ -2,11 +2,10 @@
 import base64
 import datetime
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
 import lxml.etree
 import mock
 import pyramid.testing
@@ -120,7 +119,7 @@ def test_article_toc_has_mobile_functionality(testserver, selenium_driver):
 
     # after second click
     toc_index.click()
-    condition = EC.invisibility_of_element_located((
+    condition = expected_conditions.invisibility_of_element_located((
         By.CSS_SELECTOR, '.article-toc__list'))
     assert WebDriverWait(
         selenium_driver, 1).until(condition)
@@ -338,7 +337,7 @@ def test_article_sharing_menu_should_open_and_close(
     sharing_menu_target.click()
     # we need to wait for the CSS animation to finish
     # so the sharing menu is actually hidden
-    condition = EC.invisibility_of_element_located((
+    condition = expected_conditions.invisibility_of_element_located((
         By.CSS_SELECTOR, sharing_menu_selector))
     assert WebDriverWait(
         selenium_driver, 1).until(condition), (
@@ -1054,8 +1053,15 @@ def test_article_advertorial_pages_should_render_correctly(testbrowser):
 
 def test_article_lineage_should_render_correctly(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect('.article-lineage__link-text--prev')) == 1
-    assert len(browser.cssselect('.article-lineage__link-text--next')) == 1
+    assert len(browser.cssselect('.al-text--prev')) == 1
+    assert len(browser.cssselect('.al-text--next')) == 1
+
+
+def test_article_lineage_has_text_elements(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect('.al-text__kicker')) == 2
+    assert len(browser.cssselect('.al-text__supertitle')) == 2
+    assert len(browser.cssselect('.al-text__title')) == 2
 
 
 @pytest.mark.xfail(reason='This test fails on Jenkins. Disabled until fixed.')
@@ -1066,9 +1072,9 @@ def test_article_lineage_should_be_hidden_on_small_screens(
     driver.get('%s/zeit-online/article/zeit' % testserver.url)
     driver.execute_script("window.scrollTo(0, 500)")
     lineage_links = driver.find_elements_by_css_selector(
-        '.article-lineage__link')
+        '.al-link')
     lineage_linktexts = driver.find_elements_by_css_selector(
-        '.article-lineage__link-text')
+        '.al-text')
 
     if screen_size[0] < 980:
         assert not lineage_links[0].is_displayed()
@@ -1096,6 +1102,33 @@ def test_article_lineage_should_be_fixed_after_scrolling(
                    (By.CSS_SELECTOR, '.article-lineage--fixed')))
     except TimeoutException:
         assert False, 'Fixed Lineage not visible after scrolled into view'
+
+
+def test_article_lineage_overlapping_with_fullwidth_elements_should_be_hidden(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/zeit-online/article/infoboxartikel' % testserver.url)
+    # Force page load even if another test has left the browser on _this_ page.
+    driver.refresh()
+
+    driver.execute_script('window.scrollTo(0, 600)')
+    wait = WebDriverWait(driver, 5)
+
+    try:
+        wait.until(expected_conditions.visibility_of_element_located(
+                   (By.CSS_SELECTOR, '.article-lineage')))
+    except TimeoutException:
+        assert False, 'Fixed Lineage not visible after scrolled into view'
+
+    driver.get('%s/zeit-online/article/infoboxartikel#sauriersindsuper' %
+               testserver.url)
+
+    try:
+        wait.until(expected_conditions.invisibility_of_element_located(
+                   (By.CSS_SELECTOR, '.article-lineage')))
+    except TimeoutException:
+        assert False, 'Fixed Lineage visible above fullwidth element'
 
 
 def test_article_lineage_should_not_render_on_advertorials(testbrowser):

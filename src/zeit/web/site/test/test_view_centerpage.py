@@ -927,6 +927,7 @@ def test_centerpage_area_should_render_in_isolation(testbrowser):
     select = browser.cssselect
     assert len(select('div.cp-area.cp-area--gallery')) == 1
     assert len(select('article.teaser-gallery')) == 2
+    assert browser.headers['X-Robots-Tag'] == 'noindex'
 
 
 def test_centerpage_biga_area_should_render_in_isolation_with_page_param(
@@ -1654,6 +1655,12 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
             '.button_ohne_fach.x&utm_medium=fix&utm_source=zeitde_zonpmr_int'
             '&utm_campaign=funktionsbox_studium'
             '&utm_content=che_teaser_button_ohne_fach_x' in driver.current_url)
+
+
+def test_zett_banner_is_displayed(testbrowser):
+    browser = testbrowser('/zeit-online/zett-banner')
+    box = browser.cssselect('.zett-banner')[0]
+    assert len(box.cssselect('.zett-banner__wrapper'))
 
 
 def test_zett_parquet_is_rendering(testbrowser):

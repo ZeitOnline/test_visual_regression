@@ -1,8 +1,54 @@
 Change log for zeit.web
 =======================
 
-2.31 (unreleased)
+2.34 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.33 (2015-11-27)
+-----------------
+
+- ZON-2352: Add liveglog teaser icon
+
+- ZON-2357: Add Supertitle to Article Lineage
+
+- ZON-2415: Add Zett Banner
+
+- ZON-2355: Hide chronological article navigation covering fullwidth elements
+
+- ZON-2369: Mark comments by freelancer
+
+- ZON-2418: Update webtrekk page parameter 10
+
+- ZON-2354: Remove vertical spacing of regions where unneeded
+
+- ZON-2445: Change twitter shares to mostread in ZMO buzzboard
+
+- MAINT: Add noindex header to XHR views (just to be on the safe side)
+
+- MAINT: Polish nextread, advertising nextread and article lineage
+
+
+2.32.1 (2015-11-27)
+-------------------
+
+- HOTFIX: Fix shop carousel teaser uniqueId
+
+
+2.32 (2015-11-24)
+-----------------
+
+- HOTFIX: Style adlabels for iqd 2
+
+
+2.31 (2015-11-24)
+-----------------
+
+- HOTFIX: Style adlabels for iqd
+
+- ZON-2347: Shop carousel: consolidate two teaser links into one
 
 - ZON-2421: Framebuilder - first steps
 
@@ -10,7 +56,7 @@ Change log for zeit.web
 
 - ZON-1601: Add mobile TOC
 
-- FIX: style ZMO/zett icons on topicteaser
+- FIX: Style ZMO/zett icons on topicteaser
 
 - FIX: Remove padding from ZMO parquet
 
