@@ -118,6 +118,9 @@ class VariantImage(object):
 
 class LocalImage(object):
 
+    KiB = 1024
+    DOWNLOAD_CHUNK_SIZE = 2 * KiB
+
     def __init__(self, url):
         if not isinstance(url, basestring):
             raise TypeError('Local image URL needs to be string formatted')
@@ -144,12 +147,16 @@ class LocalImage(object):
                     'zeit.web.core.video.thumbnail.brightcove.response_time'):
                 response = session.get(self.url, stream=True, timeout=2)
                 response.raise_for_status()
-                content = response.raw.read()
-                # Analoguous to requests.api.request().
-                session.close()
-            assert len(content) > 1024
             with self.open(mode='w+') as fh:
-                fh.write(content)
+                first_chunk = True
+                for chunk in response.iter_content(self.DOWNLOAD_CHUNK_SIZE):
+                    # Too small means something is not right with this download
+                    if first_chunk:
+                        first_chunk = False
+                        assert len(chunk) > self.DOWNLOAD_CHUNK_SIZE / 2
+                    fh.write(chunk)
+            # Analoguous to requests.api.request().
+            session.close()
         except (requests.exceptions.RequestException, IOError, AssertionError):
             log.debug('Remote image {} could not be downloaded to {}.'.format(
                       self.url, self.__name__))
