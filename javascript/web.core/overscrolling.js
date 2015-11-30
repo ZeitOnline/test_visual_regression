@@ -80,8 +80,8 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
             });
         }
 
-        $( config.overscrollElement ).on( 'inview', function( isVisible ) {
-            if ( isVisible ) {
+        $( config.overscrollElement ).on( 'inview', function( event, isInView ) {
+            if ( isInView ) {
                 $( config.overscrollElement ).off( 'inview' );
                 clickTrack( 'appear', config.jumpTo );
             }
@@ -143,14 +143,14 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
             config = $.extend( defaults, options );
             if ( $( document ).height() >= config.documentMinHeight ) {
                 // inview event to change to elemen
-                $( config.triggerElement ).on( 'inview', function( isVisible ) {
-                    if ( isVisible ) {
+                $( config.triggerElement ).on( 'inview', function( event, isInView ) {
+                    if ( isInView ) {
                         if ( typeof window.ZMO === 'object' && window.ZMO.breakpoint.get() === 'desktop' ) {
                             // attach Elements
                             loadElements();
+                        } else {
+                            if ( debug ) { console.debug( 'overscrolling: not on desktop' ); }
                         }
-                    } else {
-                        if ( debug ) { console.debug( 'overscrolling: not on desktop' ); }
                     }
                 });
             } else {
