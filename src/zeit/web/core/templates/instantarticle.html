@@ -1,3 +1,4 @@
+{% import 'zeit.web.core:templates/macros/instantarticle_macro.tpl' as blocks %}
 <!doctype html>
 <html lang="en" prefix="op: http://media.facebook.com/op#">
 
@@ -38,7 +39,15 @@
         </header>
         <!-- Article body goes here -->
         <!-- Body text for your article -->
-        <p> Article content </p>
+
+        {% for page in view.pages %}
+            {% for item in page %}
+                {% set type = item | block_type %}
+                {% if type not in ['place', 'contentadblock', 'cardstack', 'liveblog', 'inlinegallery'] %}
+                    {{ (blocks[type] or blocks["no_block"])(item) }}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
         <!-- A video within your article -->
         <!--
             <figure>
