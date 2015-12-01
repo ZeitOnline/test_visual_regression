@@ -22,6 +22,8 @@ $article-lineage-transition-duration: .4s
 	z-index: 4
 	+respond-min($break-desktop-min)
 		display: block
+	+old-ie
+		display: none
 	&--hidden
 		+transition-duration(90ms) // used to fade it out quickly
 	&--absolute,

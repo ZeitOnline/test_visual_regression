@@ -4,7 +4,9 @@ Change log for zeit.web
 2.34 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2408: Add overscroll effect
+
+- MAINT: Polish nextread, advertising nextread and article lineage
 
 
 2.33 (2015-11-27)

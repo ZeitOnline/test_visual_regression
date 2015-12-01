@@ -16,12 +16,25 @@ require([
     'web.core/clicktracking',
     'web.core/triggeredEventTracking',
     'web.core/adReload',
+    'web.core/overscrolling.js',
     'web.site/video/videoStage',
     'web.site/articledate',
     'web.site/articlesharing',
     'web.site/comments',
     'web.site/adblockCount.js'
-], function( images, clicktracking, triggeredEventTracking, adReload, videoStage, articledate, articlesharing, comments, adblockCount ) {
+], function(
+    images,
+    clicktracking,
+    triggeredEventTracking,
+    adReload,
+    overscrolling,
+    videoStage,
+    articledate,
+    articlesharing,
+    comments,
+    adblockCount
+) {
+    var article = document.getElementById( 'js-article' );
     images.init();
     clicktracking.init();
     triggeredEventTracking.init();
@@ -31,6 +44,10 @@ require([
     articlesharing.init();
     comments.init();
     adblockCount.init();
+    if ( article ) {
+        window.ZMO.overscrolling = overscrolling;
+        //overscrolling.init();
+    }
 });
 
 String.prototype.format = function() {
