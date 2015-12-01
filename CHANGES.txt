@@ -4,7 +4,7 @@ Change log for zeit.web
 2.34 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Handle non-ascii author names in author feed
 
 
 2.33 (2015-11-27)
