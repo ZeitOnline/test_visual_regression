@@ -25,7 +25,8 @@
                 {% block teaser_link %}
                 <a class="{{ self.layout() }}__combined-link"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
-                   href="{{ teaser | create_url }}">
+                   href="{% block teaser_link_href %}{{ teaser | create_url }}{% endblock teaser_link_href %}">
+
                     {% block teaser_kicker %}
                         <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind) }}">
                             {% block kicker_logo scoped %}
