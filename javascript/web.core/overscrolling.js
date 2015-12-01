@@ -3,7 +3,7 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
+define( [ 'modernizr', 'jquery', 'jquery.throttle', 'jquery.inview' ], function( Modernizr, $ ) {
     var defaults = {
         documentMinHeight: 800,
         jumpHash: '#overscroll-article',
@@ -140,6 +140,10 @@ define( [ 'jquery', 'jquery.throttle', 'jquery.inview' ], function( $ ) {
 
     return {
         init: function( options ) {
+            if ( !Modernizr.svg ) {
+                if ( debug ) { console.debug( 'overscrolling: no svg available' ); }
+                return;
+            }
             config = $.extend( defaults, options );
             if ( $( document ).height() >= config.documentMinHeight ) {
                 // inview event to change to elemen
