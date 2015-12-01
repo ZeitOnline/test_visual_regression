@@ -1,5 +1,5 @@
 {% if view.pagination and view.pagination.total > 1 -%}
-<div class="article-pagination article__item {% block pagination_modifier %}{% endblock %}role="navigation" aria-labeledby="article-pagination-title">
+<div class="article-pagination article__item {% block pagination_modifier %}{% endblock %}" role="navigation" aria-labeledby="article-pagination-title">
 	<div class="visually-hidden" id="article-pagination-title">Seitennavigation</div>
 
 	{% if view.pagination.next_page_url -%}
@@ -18,7 +18,7 @@
 	{% if view.request.view_name != 'komplettansicht' %}
 	<ul class="article-pager">
 		<li class="article-pager__label">Seite</li>
-		
+
 		{%- for page in view.pagination.pager %}
 		<li class="article-pager__number{% if page == view.pagination.current %} article-pager__number--current{% endif %}">
 			{%- if page == view.pagination.current -%}
