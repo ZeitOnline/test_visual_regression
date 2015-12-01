@@ -4,7 +4,7 @@ Change log for zeit.web
 2.34 (unreleased)
 -----------------
 
-- ZON-2506: Add tracking parameters to zett parquet links
+- ZON-2506: Add tracking parameters to ze.tt links
 
 
 2.33 (2015-11-27)
