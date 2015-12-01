@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: Polish nextread, advertising nextread and article lineage
 
+- HOTFIX: Handle non-ascii author names in author feed
+
 
 2.33 (2015-11-27)
 -----------------

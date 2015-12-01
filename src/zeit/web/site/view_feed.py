@@ -189,16 +189,16 @@ class Newsfeed(Base):
 class AuthorFeed(Newsfeed):
     @zeit.web.reify
     def supertitle(self):
-        return "Autorenfeed {}".format(self.context.display_name)
+        return u'Autorenfeed {}'.format(self.context.display_name)
 
     @zeit.web.reify
     def pagedescription(self):
-        return "Alle Artikel von {}".format(self.context.display_name)
+        return u'Alle Artikel von {}'.format(self.context.display_name)
 
     @zeit.web.reify
     def items(self):
         solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        query = 'author:"{}" AND (type:article)'.format(
+        query = u'author:"{}" AND (type:article)'.format(
             self.context.display_name)
         resultset = []
         for result in solr.search(
