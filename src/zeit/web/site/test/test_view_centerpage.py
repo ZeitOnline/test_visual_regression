@@ -379,15 +379,28 @@ def test_snapshot_morelink_text_icon_switch(
         assert linkdisplay == u'inline', 'Linktext hidden on other than mobile'
 
 
-def test_snapshot_should_display_copyright_with_nonbreaking_space(
-        testserver, testbrowser):
-
+def test_snapshot_should_show_first_gallery_image(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    image = browser.cssselect('.snapshot__media-item')[0]
+    assert image.attrib['src'].endswith('462507429-540x304.jpg')
 
-    copyright = browser.cssselect('.snapshot-caption__item')
 
-    assert u'\xa9\xa0' in copyright[0].text, (
-        'Copyright text hast no copyright sign with non breaking space')
+def test_snapshot_should_display_correct_teaser_title(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    title = browser.cssselect('.snapshot .section-heading__title')[0]
+    assert title.text.strip() == 'Momentaufnahme'
+
+
+def test_snapshot_should_display_correct_image_caption(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    caption = browser.cssselect('.snapshot-caption')[0]
+    assert caption.text.strip() == 'Eisschwimmen im chinesischen Shenyang'
+
+
+def test_snapshot_should_display_copyright_with_nonbreaking_space(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    copyright = browser.cssselect('.snapshot-caption__item')[0]
+    assert copyright.text.strip() == u'\xa9\xa0Xinhua/Zhang Wenkui/Reuters'
 
 
 def test_snapshot_should_have_description_text(testserver, testbrowser):
