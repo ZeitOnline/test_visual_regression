@@ -449,7 +449,7 @@ $icon-color--hover: $zon-charcoal
 		min-width: $mediumhuge
 		padding-left: 0
 		position: absolute
-		.dropdown__item
+		&__item
 			display: block // get rid of bullet points
 			width: 100%
 			& > .dropdown__link
@@ -467,6 +467,27 @@ $icon-color--hover: $zon-charcoal
 			&--has-label
 				background-color: #FAFAF3
 				border-top: 1px solid $color-border
+				// quantity query to catch groups of min 2 &--has-label
+				&:nth-last-child(n+2), &:nth-last-child(n+2) ~ &
+					border-top: none
+					.dropdown__label
+						display: none
+				// quantity query to catch the first of them
+				&:nth-last-child(n+2), &:nth-last-child(n+2):first-child ~ &
+					border-top: 1px solid $color-border
+					span:before
+						color: $zon-mid-grey
+						content: "Anzeigen"
+						display: block
+						font-family: $font-tabletgothic
+						font-size: em(9px)
+						letter-spacing: .15em
+						line-height: 1
+						margin: remify(0 0 10px -4px)
+						padding: remify(8px 0 0)
+						text-align: left
+						text-transform: uppercase
+
 		// dropdowns can contain dropdowns
 		.dropdown
 			box-shadow: none
