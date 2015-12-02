@@ -1,6 +1,5 @@
-import urllib2
 import jwt
-
+import requests
 import lxml.etree
 import zope.component
 import pyramid.authentication
@@ -82,7 +81,11 @@ def recursively_call_community(req, tries):
         try:
             with zeit.web.core.metrics.timer(
                     'community_user_info.community.reponse_time'):
-                return urllib2.urlopen(req, timeout=2)
+                # Analoguous to requests.api.request().
+                session = requests.Session()
+                response = session.send(req, stream=True, timeout=2)
+                session.close()
+                return response
         except Exception:
             return recursively_call_community(req, tries - 1)
     else:
@@ -109,10 +112,10 @@ def get_community_user_info(request):
     # community.
     community_host = request.registry.settings['community_host']
 
-    community_request = urllib2.Request(
-        community_host.rstrip('/') + '/user/xml',
+    community_request = requests.Request(
+        'GET', community_host.rstrip('/') + '/user/xml',
         headers={'Accept': 'application/xml',
-                 'Cookie': request.headers.get('Cookie', '')})
+                 'Cookie': request.headers.get('Cookie', '')}).prepare()
 
     community_response = recursively_call_community(community_request, 1)
 
@@ -121,7 +124,7 @@ def get_community_user_info(request):
 
     try:
         # Parse XML response and construct a dictionary from it
-        xml_info = lxml.etree.fromstring(community_response.read())
+        xml_info = lxml.etree.parse(community_response.raw)
     except lxml.etree.XMLSyntaxError:
         return user_info
 
