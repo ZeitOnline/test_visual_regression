@@ -34,12 +34,14 @@
             </time>
 
             <!-- The authors of your article -->
-            <address>
-                <a rel="facebook" href="http://facebook.com/brandon.diamond">Brandon Diamond</a> Brandon is a avid zombie hunter.
-            </address>
-            <address>
-                <a>TR Vishwanath</a> Vish is a scholar and a gentleman.
-            </address>
+            {% for author in view.authors -%}
+                <address>
+                    <a href="{{ author.href | create_url }}">
+                        {{ author['name'] }}
+                    </a>
+                </address>
+            {% endfor -%}
+
             <!-- The cover image shown inside your article -->
             <figure>
                 <img src="http://mydomain.com/path/to/img.jpg" />
