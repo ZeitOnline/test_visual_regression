@@ -366,50 +366,13 @@ def test_small_teaser_should_have_responsive_layout(
         assert width == 250
 
 
-def test_snapshot_hidden_on_initial_load(
-        selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/index' % testserver.url)
-    snapshot = driver.find_element_by_id('snapshot')
-    assert not snapshot.is_displayed(), 'Snapshot not hidden onload'
-
-
-def test_snapshot_displayed_after_scroll(
-        selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/index' % testserver.url)
-    driver.execute_script("window.scrollTo(0, \
-        document.getElementById('snapshot').parentNode.offsetTop)")
-    try:
-        wait = WebDriverWait(driver, 10)
-        wait.until(expected_conditions.visibility_of_element_located(
-                   (By.ID, 'snapshot')))
-    except TimeoutException:
-        assert False, 'Snapshot not visible after scrolled into view'
-
-
-def test_snapshot_displayed_after_direct_load_with_anchor(
-        selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/index#snapshot' % testserver.url)
-    try:
-        wait = WebDriverWait(driver, 10)
-        wait.until(expected_conditions.visibility_of_element_located(
-                   (By.ID, 'snapshot')))
-    except TimeoutException:
-        assert False, 'Snapshot not visible for link with fragment identifier'
-
-
 def test_snapshot_morelink_text_icon_switch(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/index' % testserver.url)
+    driver.get('%s/zeit-online/teaser-gallery-setup' % testserver.url)
     linkdisplay = driver.execute_script(
-        "return $('#snapshot .section-heading__text').eq(0).css('display')")
+        "return $('.snapshot .section-heading__text').eq(0).css('display')")
     if screen_size[0] == 320:
         assert linkdisplay == u'none', 'Linktext not hidden on mobile'
     else:
@@ -419,7 +382,7 @@ def test_snapshot_morelink_text_icon_switch(
 def test_snapshot_should_display_copyright_with_nonbreaking_space(
         testserver, testbrowser):
 
-    browser = testbrowser('/zeit-online/index')
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
 
     copyright = browser.cssselect('.snapshot-caption__item')
 
@@ -427,21 +390,10 @@ def test_snapshot_should_display_copyright_with_nonbreaking_space(
         'Copyright text hast no copyright sign with non breaking space')
 
 
-def test_snapshot_should_not_be_displayed_where_no_snapshot_is_present(
-        testserver, testbrowser):
-
-    browser = testbrowser('/zeit-online/main-teaser-setup')
-
-    assert not browser.cssselect('#snapshot'), (
-        'There is an snaphot on a page which should not have one')
-
-
 def test_snapshot_should_have_description_text(testserver, testbrowser):
-
-    browser = testbrowser('/zeit-online/index')
-    description = browser.cssselect('.snapshot-caption')
-    text = u'Die Installation "Cantareira-Wüste" des brasilianischen Künstlers'
-    assert text in description[0].text
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    caption = browser.cssselect('.snapshot-caption')[0]
+    assert caption.text.strip() == u'Eisschwimmen im chinesischen Shenyang'
 
 
 def test_small_teaser_without_image_has_no_padding_left(
@@ -1061,7 +1013,6 @@ def test_gallery_teaser_hides_elements_on_mobile(selenium_driver, testserver):
         'Gallery description text must be displayed on desktop.')
 
 
-# @pytest.mark.xfail(reason='Fortune favours the fail')
 def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
@@ -1071,16 +1022,16 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
 
     condition = expected_conditions.text_to_be_present_in_element((
         By.CSS_SELECTOR, '.teaser-gallery__title'),
-        'Automesse Detroit 2014 US-Hersteller')
+        'Immer nur das Meer sehen')
     assert WebDriverWait(driver, 5).until(condition), (
         'New teasers not loaded within 5 seconds')
 
     new_teaser_links = driver.find_elements_by_css_selector(
         '.teaser-gallery__combined-link')
     assert new_teaser_links[0].get_attribute('href').endswith(
-        '/galerien/bg-automesse-detroit-2014-usa')
-    assert new_teaser_links[1].get_attribute('href').endswith(
         '/zeit-online/gallery/england-meer-strand-menschen-fs')
+    assert new_teaser_links[1].get_attribute('href').endswith(
+        '/zeit-online/gallery/google-neuronale-netzwerke-fs')
     assert teaserbutton.get_attribute('data-sourceurl').endswith(
         'teaser-gallery-setup/area/id-5fe59e73-e388-42a4-a8d4-750b0bf96812?p=')
 
