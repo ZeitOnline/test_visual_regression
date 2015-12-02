@@ -15,6 +15,8 @@ Change log for zeit.web
 
 - HOTFIX: Handle non-ascii author names in author feed
 
+- MAINT: Use time-based caching for video series source
+
 
 2.33 (2015-11-27)
 -----------------
