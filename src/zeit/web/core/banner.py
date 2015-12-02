@@ -1,5 +1,6 @@
-import urllib2
-
+import requests
+import requests.exceptions
+import requests_file
 import lxml.objectify
 import zope.interface
 
@@ -79,12 +80,17 @@ banner_id_mappings = None
 def make_banner_list(banner_config):
     if not banner_config:
         return []
+    # XXX requests does not seem to allow to mount stuff as a default, sigh.
+    session = requests.Session()
+    session.mount('file://', requests_file.FileAdapter())
     banner_list = []
     try:
-        banner_file = urllib2.urlopen(banner_config)
-    except urllib2.URLError:
+        banner_file = session.get(banner_config, stream=True, timeout=2)
+        # Analoguous to requests.api.request().
+        session.close()
+    except requests.exceptions.RequestException:
         return banner_list
-    root = lxml.objectify.fromstring(banner_file.read())
+    root = lxml.objectify.parse(banner_file.raw).getroot()
     for place in root.place:
         try:
             sizes = str(place.multiple_sizes).strip().split(',')
@@ -112,12 +118,17 @@ def make_banner_list(banner_config):
 def make_iqd_mobile_ids(banner_config):
     if not banner_config:
         return {}
+    # XXX requests does not seem to allow to mount stuff as a default, sigh.
+    session = requests.Session()
+    session.mount('file://', requests_file.FileAdapter())
     iqd_mobile_ids = {}
     try:
-        banner_file = urllib2.urlopen(banner_config)
-    except urllib2.URLError:
+        banner_file = session.get(banner_config, stream=True, timeout=2)
+        # Analoguous to requests.api.request().
+        session.close()
+    except requests.exceptions.RequestException:
         return iqd_mobile_ids
-    root = lxml.objectify.fromstring(banner_file.read())
+    root = lxml.objectify.parse(banner_file.raw).getroot()
     for iqd_id in root.iqd_id:
         try:
             iqd_mobile_ids[iqd_id.get('ressort')] = IqdMobileList(iqd_id)
