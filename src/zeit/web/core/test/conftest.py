@@ -613,6 +613,13 @@ def clock(monkeypatch):
     return Freeze
 
 
+@pytest.fixture
+def mock_metrics(monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.metrics, 'timer',
+        zeit.web.core.metrics.mock_contextmanager)
+
+
 class TestApp(webtest.TestApp):
 
     def get_json(self, url, params=None, headers=None, *args, **kw):
