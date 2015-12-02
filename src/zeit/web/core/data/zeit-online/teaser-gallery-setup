@@ -64,13 +64,6 @@
     </head>
     <body>
         <title>Galerie Teaser</title>
-        <cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo">
-            <region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
-                <container cp:type="teaser" module="zon-snapshot" visible="True" visible_mobile="True" cp:__name__="id-56b7a0a7-9c6e-49f5-af55-81540881d87a" supertitle="Markenspitz" title="Momentaufnahme" read_more="Gesammelte Momente" read_more_url="http://www.zeit.de/kultur/2012-03/fs-momente" force_mobile_image="True">
-                    <block href="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer" uniqueId="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer" year="2012" issue="11" ressort="Kultur" contenttype="gallery" publication-date="" expires="" ></block>
-                </container>
-            </region>
-        </cluster>
         <cluster visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f">
             <region visible="True" area="id-c8a4bedc-5721-412f-994f-c55fb03955d2" kind="duo">
                 <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-a560c834-fa2e-4d35-a540-c55fb03955d2">
@@ -83,6 +76,13 @@
                 <referenced_cp>http://xml.zeit.de/foto/index</referenced_cp>
                 <container cp:type="auto-teaser" module="zon-gallery" visible="True" cp:__name__="id-7b76790b-cf36-b49f-8343-0069411a8c5b"/>
                 <container cp:type="auto-teaser" module="zon-gallery" visible="True" cp:__name__="id-a9cb1735-6a36-2401-afef-6e19baf544e3"/>
+            </region>
+        </cluster>
+        <cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo">
+            <region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
+                <container cp:type="teaser" module="zon-snapshot" visible="True" visible_mobile="True" cp:__name__="id-56b7a0a7-9c6e-49f5-af55-81540881d87a" supertitle="Markenspitz" title="Momentaufnahme" read_more="Gesammelte Momente" read_more_url="http://www.zeit.de/kultur/2012-03/fs-momente" force_mobile_image="True">
+                    <block href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" uniqueId="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" year="2012" issue="11" ressort="Kultur" contenttype="gallery" publication-date="" expires="" ></block>
+                </container>
             </region>
         </cluster>
     </body>
