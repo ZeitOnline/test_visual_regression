@@ -52,12 +52,12 @@
         <!-- Body text for your article -->
 
         {% for page in view.pages %}
-            {% for item in page %}
+            {%- for item in page -%}
                 {% set type = item | block_type %}
-                {% if type not in ['place', 'contentadblock', 'cardstack', 'liveblog', 'inlinegallery'] %}
+                {%- if type not in ['place', 'contentadblock', 'cardstack', 'liveblog', 'inlinegallery'] -%}
                     {{ (blocks[type] or blocks["no_block"])(item) }}
-                {% endif %}
-            {% endfor %}
+                {%- endif -%}
+            {%- endfor -%}
         {% endfor %}
         <!-- A video within your article -->
         <!--
