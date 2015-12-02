@@ -43,14 +43,20 @@
             {% endfor -%}
 
             <!-- The cover image shown inside your article -->
-            <figure>
-                <img src="http://mydomain.com/path/to/img.jpg" />
-                <figcaption>This image is amazing</figcaption>
-            </figure>
+            <!-- FB documentation is ambigious:
+                  - image shall be 2048x2048 pixels
+                  - image will be cropped to 4:3
+             -->
+            {% set image = get_variant(view.sharing_image, 'square') if view.sharing_image else None %}
+            {% if image -%}
+                <figure>
+                    <img src="{{ request.image_host + image.path + '__2048x2048' }}" />
+                    <figcaption>{{ image.caption }}</figcaption>
+                </figure>
+            {% endif %}
         </header>
-        <!-- Article body goes here -->
-        <!-- Body text for your article -->
 
+        <!-- Article body goes here -->
         {% for page in view.pages %}
             {%- for item in page -%}
                 {% set type = item | block_type %}
@@ -59,26 +65,7 @@
                 {%- endif -%}
             {%- endfor -%}
         {% endfor %}
-        <!-- A video within your article -->
-        <!--
-            <figure>
-                <video>
-                    <source src="http://mydomain.com/path/to/video.mp4" type="video/mp4" />
-                </video>
-            </figure>
-        -->
-        <!-- An ad within your article -->
-        <!--
-            <figure class="op-ad">
-                <iframe src="https://www.adserver.com/ss;adtype=banner320x50" height="60" width="320"></iframe>
-            </figure>
-        -->
-        <!-- Analytics code for your article -->
-        <!--
-            <figure class="op-tracker">
-                <iframe src="" hidden></iframe>
-            </figure>
-        -->
+
         <!--
             <footer>
                 <small>Copyright details for your article – Legal notes</small>
