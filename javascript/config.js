@@ -20,8 +20,7 @@ require.config({
         'freewall': 'vendor/freewall',
         'jquery.clarify': 'web.core/plugins/jquery.clarify',
         'jquery.debounce': 'web.core/plugins/jquery.debounce',
-        'jquery.throttle': 'web.core/plugins/jquery.throttle',
-        'jquery.inview': 'vendor/jquery.inview'
+        'jquery.throttle': 'web.core/plugins/jquery.throttle'
     },
     // a shim is needed for jQuery Plugins to load
     // add the name or path and an array of required scripts
@@ -35,7 +34,6 @@ require.config({
         'web.site/plugins/jquery.autoclick': [ 'jquery', 'modernizr' ],
         'web.site/plugins/jquery.fixPosition': [ 'jquery', 'jquery.throttle' ],
         'web.site/plugins/jquery.hpOverlay': [ 'jquery', 'jquery.debounce' ],
-        'web.site/plugins/jquery.snapshot': [ 'jquery', 'jquery.inview' ],
         'freewall': {
             deps: [ 'jquery' ],
             exports: 'freewall'
