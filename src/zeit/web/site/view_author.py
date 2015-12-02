@@ -27,6 +27,74 @@ class AuthorHeader(zeit.web.site.module.Module):
         return self.context.image_group
 
 
+@zeit.web.register_module('author_topics')
+class AuthorTopics(zeit.web.site.module.Module):
+
+    def __init__(self, context):
+        super(AuthorTopics, self).__init__(context)
+        self.layout = 'author_topics'
+
+    @zeit.web.reify
+    def topics(self):
+        return ['Griechenland', 'Ukraine', 'Islam']
+
+
+@zeit.web.register_module('author_bio')
+class AuthorBio(zeit.web.site.module.Module):
+
+    def __init__(self, context):
+        super(AuthorBio, self).__init__(context)
+        self.layout = 'author_bio'
+
+    @zeit.web.reify
+    def bio(self):
+        return 'Hallo ich bin ein Autor'
+
+
+@zeit.web.register_module('author_contact')
+class AuthorContact(zeit.web.site.module.Module):
+
+    def __init__(self, context):
+        super(AuthorContact, self).__init__(context)
+        self.layout = 'author_contact'
+
+    @zeit.web.reify
+    def twitter(self):
+        return '@JacobLenz'
+
+    @zeit.web.reify
+    def facebook(self):
+        return 'facebook.com/jacob.lenz'
+
+    @zeit.web.reify
+    def instagram(self):
+        return '@zonlenz'
+
+    @zeit.web.reify
+    def mail(self):
+        return 'jacob.lenz@zeit.de'
+
+
+@zeit.web.register_module('author_comments')
+class AuthorComments(zeit.web.site.module.Module):
+
+    def __init__(self, context):
+        super(AuthorComments, self).__init__(context)
+        self.layout = 'author_comments'
+
+    pass
+
+
+@zeit.web.register_module('author_texts')
+class AuthorTexts(zeit.web.site.module.Module):
+
+    def __init__(self, context):
+        super(AuthorTexts, self).__init__(context)
+        self.layout = 'author_texts'
+
+    pass
+
+
 @pyramid.view.view_config(
     renderer='templates/author.html',
     context=zeit.content.author.interfaces.IAuthor)
@@ -70,8 +138,23 @@ class Author(zeit.web.core.view.Base):
     def regions(self):
         regions = []
 
-        module = AuthorHeader(self.context)
-        regions.append(LegacyRegion([LegacyArea([module])]))
+        # first region: header
+        header = AuthorHeader(self.context)
+        regions.append(LegacyRegion([LegacyArea([header])]))
+
+        # second region: topics, bio, contact
+        topics = AuthorTopics(self.context)
+        bio = AuthorBio(self.context)
+        contact = AuthorContact(self.context)
+        regions.append(LegacyRegion([
+                       LegacyArea([topics, bio], kind="major"),
+                       LegacyArea([contact], kind="minor")]))
+
+        # third region: texts, comments
+        texts = AuthorTexts(self.context)
+        comments = AuthorComments(self.context)
+        regions.append(LegacyRegion([
+                       LegacyArea([texts]), LegacyArea([comments])]))
 
         return regions
 
