@@ -21,10 +21,6 @@ class AuthorTopics(zeit.web.site.module.Module):
         super(AuthorTopics, self).__init__(context)
         self.layout = 'author_topics'
 
-    @zeit.web.reify
-    def topics(self):
-        return ['Griechenland', 'Ukraine', 'Islam']
-
 
 @zeit.web.register_module('author_bio')
 class AuthorBio(zeit.web.site.module.Module):
