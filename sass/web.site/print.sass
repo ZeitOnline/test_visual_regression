@@ -1,0 +1,117 @@
+$zon-print-grey: #707070
+
+@media print
+
+    @page
+        size: auto
+        margin: 15mm 25mm
+        widows: 3
+        orphans: 2
+
+    body
+        background: transparent
+
+    a[href^="http"] // don't display hash-links
+        color: $zon-print-grey
+        page-break-inside: avoid
+        &:after
+            font-size: 9.5pt
+            content: " [" attr(href) "]"
+            color: $zon-print-grey
+            border-bottom: 0
+            word-break: break-all
+
+    #comments,
+    .comment-section,
+    #nextread,
+    .nextread,
+    .article-footer,
+    .article-lineage,
+    .veeseoWidget,
+    .footer,
+    .article-pagination,
+    .nextread-advertisement,
+    .video-player,
+    .video-figure__caption,
+    .logo_bar__menu,
+    div[class="main_nav__"] // hide all nav elements but keep ZON logo
+        display: none
+
+    .logo_bar
+        padding: 0
+        border-bottom: 1pt solid $zon-print-grey
+        &__brand-logo
+            padding: 0
+
+    #main
+        padding: 0
+        margin: 0
+
+    .page-content
+        box-shadow: none
+
+    .article-heading
+        &__kicker
+            font-size: 7pt
+            line-height: 9pt
+            color: $zon-print-grey
+        &__title
+            font-size: 18pt
+            line-height: 21pt
+            margin-bottom: 14pt
+
+    .summary,
+    .byline
+        font-size: 10.5pt
+        line-height: 15pt
+        margin-bottom: 7pt
+
+    .byline
+        a:after
+            content: ""
+
+    .metadata
+        font-size: 7pt
+        line-height: 9pt
+
+    .article
+        &__media
+            width: 100mm
+            margin: 14pt 0
+
+            .figure
+                &__caption
+                    margin-left: 0
+                    font-size: 7pt
+
+        &__item
+            &--marginalia
+                // ATTENTION: duplicated code
+                float: left
+                margin: remify(14px 25px 14px 0)
+                width: remify(205px)
+
+    .article__subheading,
+    .article-page__page-teaser
+        font-size: 11pt
+        line-height: 14pt
+        margin-top: 14pt
+        margin-bottom: 7pt
+        break-after: avoid
+        page-break-inside: avoid
+        page-break-after: avoid
+
+    .paragraph,
+    .raw
+        font-size: 9.5pt
+        line-height: 14pt
+        margin-bottom: 7pt
+
+    .portraitbox
+        page-break-inside: avoid
+        &__heading,
+        &__body
+            font-size: 7pt
+            line-height: 11pt
+            margin-bottom: 6pt
+
