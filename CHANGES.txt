@@ -17,6 +17,8 @@ Change log for zeit.web
 
 - MAINT: Use time-based caching for video series source
 
+- ZON-2478: Implement rss feed for instant articles
+
 
 2.33 (2015-11-27)
 -----------------
