@@ -17,6 +17,8 @@ Change log for zeit.web
 
 - MAINT: Use time-based caching for video series source
 
+- FIX: Re-add zett and zmo teaser kicker modifier
+
 
 2.33 (2015-11-27)
 -----------------
