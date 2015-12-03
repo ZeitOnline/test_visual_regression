@@ -6,10 +6,17 @@
 		"pagetypes": ["article"],
 		"slug": "/"
 	},
+	"gallery": {
+		"name": "gallery",
+		"time": 1000,
+		"interval": 1,
+		"pagetypes": ["gallery"],
+		"slug": "/"
+	},
 	"zmo-gallery": {
 		"name": "zmo-gallery",
-		"time": 5000,
-		"interval": 5,
+		"time": 1000,
+		"interval": 1,
 		"pagetypes": ["gallery"],
 		"slug": "/zeit-magazin"
 	},
