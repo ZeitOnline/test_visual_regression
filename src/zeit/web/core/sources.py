@@ -9,10 +9,10 @@ import urlparse
 import xml.sax.saxutils
 
 import gocept.cache.method
-import lxml.etree
 import pysolr
 import zope.interface
 
+import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.content.image.variant
 import zeit.imp.source
@@ -27,18 +27,23 @@ video_series = None
 log = logging.getLogger(__name__)
 
 
-def get_video_series(series_source):
-    try:
-        series_xml = lxml.etree.parse(series_source)
-    except (TypeError, IOError):
-        return list()
-    videoseries = series_xml.xpath('/allseries/videoseries/series')
-    videoseries_list = list()
-    for video in videoseries:
-        url = video.xpath('@url')[0]
-        title = video.xpath('@title')[0]
-        videoseries_list.append(dict(url=url, title=title))
-    return videoseries_list
+class VideoSeriesSource(zeit.cms.content.sources.SimpleXMLSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'series-source'
+
+    def getValues(self):
+        try:
+            xml = self._get_tree()
+        except (TypeError, IOError):
+            return []
+        videoseries = xml.xpath('/allseries/videoseries/series')
+        result = []
+        for node in videoseries:
+            result.append(dict(url=node.get('url'), title=node.get('title')))
+        return result
+
+VIDEO_SERIES = VideoSeriesSource()
 
 
 class ScaleSource(zeit.imp.source.ScaleSource):
