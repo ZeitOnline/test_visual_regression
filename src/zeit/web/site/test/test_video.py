@@ -8,6 +8,7 @@ import requests
 
 import zeit.cms.interfaces
 import zeit.content.image.interfaces
+import zeit.content.video.video
 
 import zeit.web.site.module.playlist
 import zeit.web.site.view_video
@@ -270,3 +271,9 @@ def test_video_should_contain_veeseo_widget(testbrowser):
     browser = testbrowser('/video/2015-01/3537342483001')
     assert browser.cssselect('#veeseo-widget')
     assert browser.cssselect('.RV2VW2')
+
+
+def test_video_should_not_break_on_missing_still_image(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.content.video.video.Video, 'video_still', None)
+    testbrowser('/video/2015-01/3537342483001')
