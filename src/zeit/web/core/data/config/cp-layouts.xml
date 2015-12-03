@@ -421,11 +421,4 @@
         image_pattern="zmo-print-cover"
         areas="solo duo major minor ranking parquet"
         available="zeit.magazin.interfaces.IZMOContent"/>
-
-    <!-- Teaser formats for author pages -->
-    <layout
-        id="author_header"
-        title="Header Autorenseite"
-        areas="solo"
-        />
 </layouts>
