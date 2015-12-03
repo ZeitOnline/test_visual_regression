@@ -45,8 +45,6 @@ class AuthorComments(zeit.web.site.module.Module):
         super(AuthorComments, self).__init__(context)
         self.layout = 'author_comments'
 
-    pass
-
 
 @zeit.web.register_module('author_texts')
 class AuthorTexts(zeit.web.site.module.Module):
@@ -54,8 +52,6 @@ class AuthorTexts(zeit.web.site.module.Module):
     def __init__(self, context):
         super(AuthorTexts, self).__init__(context)
         self.layout = 'author_texts'
-
-    pass
 
 
 @pyramid.view.view_config(
