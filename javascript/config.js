@@ -20,7 +20,8 @@ require.config({
         'freewall': 'vendor/freewall',
         'jquery.clarify': 'web.core/plugins/jquery.clarify',
         'jquery.debounce': 'web.core/plugins/jquery.debounce',
-        'jquery.throttle': 'web.core/plugins/jquery.throttle'
+        'jquery.throttle': 'web.core/plugins/jquery.throttle',
+        'jquery.inview': 'vendor/jquery.inview'
     },
     // a shim is needed for jQuery Plugins to load
     // add the name or path and an array of required scripts
