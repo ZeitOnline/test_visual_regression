@@ -198,7 +198,7 @@ def test_comment_reply_threads_wraps_on_load_and_toggles_on_click(
 
     comment_count_overlay = driver.find_element_by_class_name(
         'comment-overlay__count')
-    assert comment_count_overlay.text == '+ 2'
+    assert comment_count_overlay.text == '+2'
 
     wrapped_threads[0].click()
     assert len(driver.find_elements_by_css_selector('.comment--wrapped')) == 2
