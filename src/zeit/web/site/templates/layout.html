@@ -86,7 +86,7 @@
     </noscript>
     <script>
         // trigger print dialog after "Artikel drucken" was clicked
-        if ( location.search.indexOf( 'print=true' ) !== -1 ) {
+        if ( location.search.indexOf( 'print' ) !== -1 ) {
             if ( window.addEventListener ) {
                 window.addEventListener( 'load', window.print, false );
             } else if ( window.attachEvent ) {
