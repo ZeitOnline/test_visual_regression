@@ -5,69 +5,67 @@
 <head>
     <meta charset="utf-8">
     <meta property="op:markup_version" content="v1.0">
+
     <!-- The URL of the web version of your article -->
-    <link rel="canonical" href="{{ cannonical_url }}">
+    <link rel="canonical" href="{{ view.content_url }}">
+
     <!-- The style to be used for this article -->
     <meta property="fb:article_style" content="default">
-    <meta property="op:markup_version" content="v1.0">
 </head>
 
 <body>
     <article>
         <header>
-            <!-- The title and subtitle shown in your article -->
-            <h1> {{ view.title }} </h1>
-            <!-- <h2> Subtitle </h2> -->
-            <!-- The date and time when your article was originally published -->
-            <time class="op-published" dateTime="{{ view.date_first_released | format_date('iso8601') }}">{{ view.date_first_released | format_date(view.show_date_format) }}</time>
-            <!-- The date and time when your article was last updated -->
-            <time class="op-modified" dateTime="{{ view.date_last_modified | format_date('iso8601') }}">{{ view.date_last_modified | format_date(view.show_date_format) }}</time>
-            <!-- The authors of your article -->
-            <address>
-                <a rel="facebook" href="http://facebook.com/brandon.diamond">Brandon Diamond</a> Brandon is a avid zombie hunter.
-            </address>
-            <address>
-                <a>TR Vishwanath</a> Vish is a scholar and a gentleman.
-            </address>
-            <!-- The cover image shown inside your article -->
-            <figure>
-                <img src="http://mydomain.com/path/to/img.jpg" />
-                <figcaption>This image is amazing</figcaption>
-            </figure>
             <!-- A kicker for your article -->
-            <h3 class="op-kicker">{{ view.subtitle }}</h3>
-        </header>
-        <!-- Article body goes here -->
-        <!-- Body text for your article -->
+            <h3 class="op-kicker">{{ view.supertitle }}</h3>
 
+            <!-- The title and subtitle  -->
+            <h1>{{ view.title }}</h1>
+            <h2>{{ view.subtitle}}</h2>
+
+            <!-- The date and time when your article was originally published -->
+            <time class="op-published" dateTime="{{ view.date_first_released | format_date('iso8601') }}">
+                {{ view.date_first_released | format_date(view.show_date_format) }}
+            </time>
+
+            <!-- The date and time when your article was last updated -->
+            <time class="op-modified" dateTime="{{ view.date_last_modified | format_date('iso8601') }}">
+                {{ view.date_last_modified | format_date(view.show_date_format) }}
+            </time>
+
+            <!-- The authors of your article -->
+            {% for author in view.authors -%}
+                <address>
+                    <a href="{{ author.href | create_url }}">
+                        {{ author['name'] }}
+                    </a>
+                </address>
+            {% endfor -%}
+
+            <!-- The cover image shown inside your article -->
+            <!-- FB documentation is ambigious:
+                  - image shall be 2048x2048 pixels
+                  - image will be cropped to 4:3
+             -->
+            {% set image = get_variant(view.sharing_image, 'square') if view.sharing_image else None %}
+            {% if image -%}
+                <figure>
+                    <img src="{{ request.image_host + image.path + '__2048x2048' }}" />
+                    <figcaption>{{ image.caption }}</figcaption>
+                </figure>
+            {% endif %}
+        </header>
+
+        <!-- Article body goes here -->
         {% for page in view.pages %}
-            {% for item in page %}
+            {%- for item in page -%}
                 {% set type = item | block_type %}
-                {% if type not in ['place', 'contentadblock', 'cardstack', 'liveblog', 'inlinegallery'] %}
+                {%- if type not in ['place', 'contentadblock', 'cardstack', 'liveblog', 'inlinegallery'] -%}
                     {{ (blocks[type] or blocks["no_block"])(item) }}
-                {% endif %}
-            {% endfor %}
+                {%- endif -%}
+            {%- endfor -%}
         {% endfor %}
-        <!-- A video within your article -->
-        <!--
-            <figure>
-                <video>
-                    <source src="http://mydomain.com/path/to/video.mp4" type="video/mp4" />
-                </video>
-            </figure>
-        -->
-        <!-- An ad within your article -->
-        <!--
-            <figure class="op-ad">
-                <iframe src="https://www.adserver.com/ss;adtype=banner320x50" height="60" width="320"></iframe>
-            </figure>
-        -->
-        <!-- Analytics code for your article -->
-        <!--
-            <figure class="op-tracker">
-                <iframe src="" hidden></iframe>
-            </figure>
-        -->
+
         <!--
             <footer>
                 <small>Copyright details for your article – Legal notes</small>
