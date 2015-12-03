@@ -2,13 +2,13 @@
     <div class="author-header__inner">
         <div class="author-header__information">
             <h1 class="author-header__name">
-                {{ module.name }}
+                {{ context.display_name }}
             </h1>
             <div class="author-header__position">
-                {{ module.position }}
+                {{ context.summary }}
             </div>
             <div class="author-header__image">
-                {% include "zeit.web.site:templates/inc/article/column_author_image.tpl" %}
+                <!-- context.image_group : passendes Template für image group nutzen -->
             </div>
         </div>
     </div>

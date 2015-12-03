@@ -13,19 +13,6 @@ class AuthorHeader(zeit.web.site.module.Module):
         super(AuthorHeader, self).__init__(context)
         self.layout = 'author_header'
 
-    @zeit.web.reify
-    def name(self):
-        return self.context.display_name
-
-    @zeit.web.reify
-    def position(self):
-        # XXX Get info from xml
-        return 'Redakteur(in) im Ressort Politik, ZEIT ONLINE'
-
-    @zeit.web.reify
-    def image_group(self):
-        return self.context.image_group
-
 
 @zeit.web.register_module('author_topics')
 class AuthorTopics(zeit.web.site.module.Module):
@@ -46,10 +33,6 @@ class AuthorBio(zeit.web.site.module.Module):
         super(AuthorBio, self).__init__(context)
         self.layout = 'author_bio'
 
-    @zeit.web.reify
-    def bio(self):
-        return 'Hallo ich bin ein Autor'
-
 
 @zeit.web.register_module('author_contact')
 class AuthorContact(zeit.web.site.module.Module):
@@ -57,22 +40,6 @@ class AuthorContact(zeit.web.site.module.Module):
     def __init__(self, context):
         super(AuthorContact, self).__init__(context)
         self.layout = 'author_contact'
-
-    @zeit.web.reify
-    def twitter(self):
-        return '@JacobLenz'
-
-    @zeit.web.reify
-    def facebook(self):
-        return 'facebook.com/jacob.lenz'
-
-    @zeit.web.reify
-    def instagram(self):
-        return '@zonlenz'
-
-    @zeit.web.reify
-    def mail(self):
-        return 'jacob.lenz@zeit.de'
 
 
 @zeit.web.register_module('author_comments')
@@ -157,21 +124,3 @@ class Author(zeit.web.core.view.Base):
                        LegacyArea([texts]), LegacyArea([comments])]))
 
         return regions
-
-        # region(
-        #     area(
-        #         author_header))
-
-        # region(
-        #     area(
-        #         schwerpunkte,
-        #         minibio,
-        #         fragen),
-        #     area(
-        #          kontaktdaten)
-
-        # region([
-        #        area(
-        #             AuthorenTexte),
-        #        area(
-        #             AutorenKommentare])

@@ -1,1 +1,4 @@
-Bio
+{{ context.biography }}
+{% for question in context.bio_questions.values() %}
+  <br>{{question.title}}<br>{{question.answer}}
+{% endfor %}
