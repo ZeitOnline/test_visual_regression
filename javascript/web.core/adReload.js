@@ -105,19 +105,21 @@ define( [ 'jquery' ], function( $ ) {
         ) { return; }
         if ( checkClickCount( myconfig ) ) {
             // reload Ads
-            if ( typeof window.IQD_ReloadHandle !== 'undefined' ) {
+            if ( typeof window.IQD_ReloadHandle === 'function' ) {
                 log( 'adReload emitted' );
                 window.IQD_ReloadHandle();
-            }
-            // emit webtrekk PI
-            if ( typeof window.wt !== 'undefined' ) {
-                log( 'webtrekk emitted' );
-                window.wt.sendinfo();
-            }
-            // emit IVW PI
-            if ( typeof window.iom !== 'undefined' && typeof window.iam_data !== 'undefined' ) {
-                log( 'ivw emitted' );
-                window.iom.c( window.iam_data, 1 );
+
+                // emit webtrekk PI
+                if ( typeof window.wt !== 'undefined' ) {
+                    log( 'webtrekk emitted' );
+                    window.wt.sendinfo();
+                }
+
+                // emit IVW PI
+                if ( typeof window.iom !== 'undefined' && typeof window.iam_data !== 'undefined' ) {
+                    log( 'ivw emitted' );
+                    window.iom.c( window.iam_data, 1 );
+                }
             }
         }
     },
