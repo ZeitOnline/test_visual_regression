@@ -15,9 +15,8 @@ define( [ 'jquery' ], function( $ ) {
      * @return {void}
      */
     log = function() {
-        if ( location.search.indexOf( 'debug-adreload' ) !== -1 ) {
-            var args = Array.prototype.slice.call( arguments );
-            console.log( args );
+        if ( window.location.search.indexOf( 'debug-adreload' ) !== -1 ) {
+            console.log.apply( console, arguments );
         }
     },
     /**
@@ -28,16 +27,14 @@ define( [ 'jquery' ], function( $ ) {
     checkClickCount = function( myconfig ) {
         // do we need a timer?
         if ( typeof myconfig.time !== 'undefined' && myconfig.time > 0 ) {
-            // timer not set
-            if ( typeof timer[myconfig.name] !== 'undefined' && timer[myconfig.name] === true ) {
-                // do not count while timer is set
+            var now = $.now();
+
+            if ( timer[ myconfig.name ] > now ) {
+                // do not count if timer is set in the future
                 return false;
             } else {
                 // set timer
-                window.setTimeout( function() {
-                    timer[myconfig.name] = false;
-                }, myconfig.time );
-                timer[myconfig.name] = true;
+                timer[ myconfig.name ] = now + myconfig.time;
                 // extra
                 return clickCount( myconfig );
             }
@@ -57,22 +54,21 @@ define( [ 'jquery' ], function( $ ) {
             return true;
         }
 
-        // load cause max reached
-        if ( clickCounter[ myconfig.name ] && clickCounter[ myconfig.name ] + 1 === myconfig.interval ) {
-            log( 'max click' );
-            // remember: delete leaves an empty slot. it is ok as long as we do not iterate.
-            delete clickCounter[ myconfig.name ];
-            return true;
-        }  else {
-            if ( clickCounter[ myconfig.name ] ) {
-                log( 'add up clicks' );
-                clickCounter[ myconfig.name ] += 1;
+        // consecutive events
+        if ( clickCounter[ myconfig.name ] ) {
+            // gained configured interval
+            if ( ++clickCounter[ myconfig.name ] % myconfig.interval === 0 ) {
+                log( 'max click' );
+                return true;
             } else {
-                log( 'first click' );
-                clickCounter[ myconfig.name ] = 1;
+                log( 'add up clicks' );
             }
-            return false;
+        }  else {
+            log( 'first click' );
+            clickCounter[ myconfig.name ] = 1;
         }
+
+        return false;
     },
     /**
      * load configuration from json file
