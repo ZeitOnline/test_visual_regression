@@ -13,6 +13,8 @@ Change log for zeit.web
 
 - ZON-2408: Add overscroll effect
 
+- ZON-2380: Trigger adreload in slideshows on every possible slide event
+
 - MAINT: Polish nextread, advertising nextread and article lineage
 
 - HOTFIX: Handle non-ascii author names in author feed
