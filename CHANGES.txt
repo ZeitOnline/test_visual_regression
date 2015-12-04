@@ -4,6 +4,8 @@ Change log for zeit.web
 2.35 (unreleased)
 -----------------
 
+- ZON-2450: Add more advertorials to navigation
+
 - MAINT: Cleanup community notifications
 
 - FIX: Be more defensive in several places:
@@ -14,8 +16,6 @@ Change log for zeit.web
 
 2.34 (2015-12-04)
 -----------------
-
-- ZON-2450: Add more advertorials to navigation
 
 - HOTFIX: Fix lineage test
 
