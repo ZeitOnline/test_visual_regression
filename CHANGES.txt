@@ -4,7 +4,10 @@ Change log for zeit.web
 2.35 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Be more defensive in several places:
+  * Portraitboxes with funny HTML
+  * Images with empty copyright
+  * Videos without still image
 
 
 2.34 (2015-12-04)
