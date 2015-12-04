@@ -28,7 +28,7 @@
 			<small>{{ view.comments.pages.title }}</small>
 			{% endif %}
 		</span>
-		{% if view.show_comment_form %}
+		{% if view.comment_area.show_comment_form %}
 		<a href="#comment-form" class="comment-section__button button js-scroll">
 			Kommentieren
 		</a>
