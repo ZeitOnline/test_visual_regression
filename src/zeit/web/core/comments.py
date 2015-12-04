@@ -477,7 +477,7 @@ def get_counts(*unique_ids):
         return {}
 
 
-def get_user_comments(author, page=0, rows=10, sort="DESC"):
+def get_user_comments(author, page=1, rows=10, sort="DESC"):
     """Return a dictionary containing comments for an IAuthor,
 
     :param author: An objects which implements zeit.content.author.IAuthor
@@ -493,7 +493,7 @@ def get_user_comments(author, page=0, rows=10, sort="DESC"):
     if not getattr(author, 'email'):
         return
     uri = '{}/usercommentsxml/{}/{}/{}/{}'.format(
-        conf.get('agatho_host', ''), author.email, page, rows, sort)
+        conf.get('agatho_host', ''), author.email, (page-1), rows, sort)
 
     timeout = float(conf.get('community_host_timeout_secs', 5))
 
@@ -503,17 +503,27 @@ def get_user_comments(author, page=0, rows=10, sort="DESC"):
     xml = lxml.etree.fromstring(result.content())
     comments = {
         'comments':[],
-        'uid': xml.xpath('/user_comments/uid')[0].text,
-        'published_total':  xml.xpath(
-            '/user_comments/published_total')[0].text
+        'uid': int(xml.xpath('/user_comments/uid')[0].text),
+        'published_total':  int(xml.xpath(
+            '/user_comments/published_total')[0].text),
+        'page': page,
+        'rows': rows,
+        'sort': sort
     }
+
+    if rows > 0:
+        add = 0 if comments['published_total'] % rows == 0 else 1
+        comments['page_total'] = (comments['published_total'] / rows)+add
+    else:
+        comments['page_total'] = 0
+
     for comment in xml.xpath('/user_comments//item'):
-        comments['comments'].append(get_user_comment(comment))
+        comments['comments'].append(_get_user_comment(comment))
 
     return comments
 
 
-def get_user_comment(comment):
+def _get_user_comment(comment):
     co_dict = {}
     if comment.xpath('cid'):
         co_dict['cid'] = comment.xpath('cid')[0]
