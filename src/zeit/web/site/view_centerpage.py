@@ -58,7 +58,9 @@ class LegacyArea(collections.OrderedDict, zeit.content.cp.area.AreaFactory):
             self, [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
         self.kind = kw.pop('kind', 'solo')
         self.xml = kw.pop('xml', self.get_xml())
-        self.automatic = kw.pop('kind', False)
+        self.automatic = kw.pop('automatic', False)
+        self.__parent__ = kw.pop('parent', None)
+
         for key in kw:
             try:
                 assert not hasattr(self, key)
