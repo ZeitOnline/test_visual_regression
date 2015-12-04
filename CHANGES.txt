@@ -4,6 +4,8 @@ Change log for zeit.web
 2.35 (unreleased)
 -----------------
 
+- MAINT: Cleanup community notifications
+
 - FIX: Be more defensive in several places:
   * Portraitboxes with funny HTML
   * Images with empty copyright
@@ -12,8 +14,6 @@ Change log for zeit.web
 
 2.34 (2015-12-04)
 -----------------
-
-- MAINT: Cleanup community notifications
 
 - HOTFIX: Fix lineage test
 
