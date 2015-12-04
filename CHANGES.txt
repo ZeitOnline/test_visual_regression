@@ -4,7 +4,7 @@ Change log for zeit.web
 2.35 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2474: Make comments per user available in zeit.web
 
 
 2.34 (2015-12-04)
