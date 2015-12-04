@@ -754,3 +754,37 @@ def test_post_comment_should_have_correct_premoderation_states(
         mock_method.return_value = response
         ret_value = poster.post_comment()
         assert ret_value['response']['premoderation'] is state
+
+def test_user_comments_should_have_expected_structure():
+    xml_str = """
+        <item>
+            <cid>1</cid>
+            <title>[empty]</title>
+            <description>&lt;p&gt;Ich praezisiere.&lt;/p&gt;</description>
+            <pubDate>Tue, 17 Nov 2015 10:39:50 +0100</pubDate>
+            <cms_uniqueId>http://www.zeit.de/artikel/01</cms_uniqueId>
+        </item>"""
+
+    xml = lxml.etree.fromstring(xml_str)
+    result = zeit.web.core.comments._get_user_comment(xml)
+    assert result['cid'] == 1
+    assert result['description'] == '<p>Ich praezisiere.</p>'
+    assert result['publication_date'] == 'Tue, 17 Nov 2015 10:39:50 +0100'
+    assert result['uniqueId'] == 'http://xml.zeit.de/artikel/01'
+    assert result['title'] == '[empty]'
+
+    xml_str = """
+        <item>
+            <cid></cid>
+            <title></title>
+            <description></description>
+            <pubDate></pubDate>
+            <cms_uniqueId></cms_uniqueId>
+        </item>"""
+
+    xml = lxml.etree.fromstring(xml_str)
+    result = zeit.web.core.comments._get_user_comment(xml)
+    assert result['cid'] is None
+    assert result['description'] is None
+    assert result['publication_date'] is None
+    assert result['uniqueId'] is None

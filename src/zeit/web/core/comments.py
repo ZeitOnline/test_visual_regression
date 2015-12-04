@@ -477,6 +477,10 @@ def get_counts(*unique_ids):
         return {}
 
 
+class PagesExhaustedError(Exception):
+    pass
+
+
 def get_user_comments(author, page=1, rows=10, sort="DESC"):
     """Return a dictionary containing comments for an IAuthor,
 
@@ -517,6 +521,9 @@ def get_user_comments(author, page=1, rows=10, sort="DESC"):
     else:
         comments['page_total'] = 0
 
+    if page > comments['page_total']:
+        raise PagesExhaustedError()
+
     for comment in xml.xpath('/user_comments//item'):
         comments['comments'].append(_get_user_comment(comment))
 
@@ -526,21 +533,28 @@ def get_user_comments(author, page=1, rows=10, sort="DESC"):
 def _get_user_comment(comment):
     co_dict = {}
     if comment.xpath('cid'):
-        co_dict['cid'] = comment.xpath('cid')[0]
+        try:
+            co_dict['cid'] = int(comment.xpath('cid')[0].text)
+        except TypeError:
+            co_dict['cid'] = None
     if comment.xpath('uid'):
-        co_dict['uid'] = comment.xpath('uid')[0]
+        try:
+            co_dict['uid'] = int(comment.xpath('uid')[0].text)
+        except TypeError:
+            co_dict['uid'] = None
     if comment.xpath('title'):
-        co_dict['title'] = comment.xpath('title')[0]
+        co_dict['title'] = comment.xpath('title')[0].text
     if comment.xpath('description'):
-        co_dict['description'] = comment.xpath('description')[0]
+        co_dict['description'] = comment.xpath('description')[0].text
     if comment.xpath('pubDate'):
-        co_dict['publication_date'] = comment.xpath('pubDate')[0]
+        co_dict['publication_date'] = comment.xpath('pubDate')[0].text
     if comment.xpath('cms_uniqueId'):
-        co_dict['uniqueId'] = comment.xpath('cms_uniqueId')[0]
+        co_dict['uniqueId'] = comment.xpath('cms_uniqueId')[0].text
         # XXX Temporary fix, because drupal does not produce right uniqueIds
         # yet.
-        co_dict['uniqueId'] = co_dict['uniqueId'].replace(
-            'www.zeit.de', 'xml.zeit.de')
+        if co_dict['uniqueId'] is not None:
+            co_dict['uniqueId'] = co_dict['uniqueId'].replace(
+                'www.zeit.de', 'xml.zeit.de')
     return co_dict
 
 
