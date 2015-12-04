@@ -1,6 +1,5 @@
 <blacklist>
   <route>/angebote/{segment}/index</route>
-  <route>/autoren/*path</route>
   <route>/hilfe/hilfe</route>
   <route>/schlagworte/index/{segment}/index</route>
   <route>/studium/rankings/index</route>

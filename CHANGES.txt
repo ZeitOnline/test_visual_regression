@@ -23,6 +23,8 @@ Change log for zeit.web
 
 - HOTFIX: Handle non-ascii author names in author feed
 
+- ZON-2462: Connect friedbert to new author object
+
 - MAINT: Use time-based caching for video series source
 
 
