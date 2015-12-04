@@ -755,7 +755,8 @@ def test_post_comment_should_have_correct_premoderation_states(
         ret_value = poster.post_comment()
         assert ret_value['response']['premoderation'] is state
 
-def test_user_comments_should_have_expected_structure():
+
+def test_user_comment_should_have_expected_structure():
     xml_str = """
         <item>
             <cid>1</cid>
@@ -788,3 +789,17 @@ def test_user_comments_should_have_expected_structure():
     assert result['description'] is None
     assert result['publication_date'] is None
     assert result['uniqueId'] is None
+
+
+def test_user_comment_thread_should_have_expected_structure(
+        application, testserver):
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/author3')
+    thread = zeit.web.core.comments.get_user_comments(author)
+    assert thread['uid'] == 172432
+    assert thread['published_total'] == 570
+    assert thread['page'] == 1
+    assert thread['page_total'] == 95
+    assert thread['sort'] == 'DESC'
+    assert thread['rows'] == 6
+    assert len(thread['comments']) == 6

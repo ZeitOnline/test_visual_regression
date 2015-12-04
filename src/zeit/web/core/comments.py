@@ -481,7 +481,7 @@ class PagesExhaustedError(Exception):
     pass
 
 
-def get_user_comments(author, page=1, rows=10, sort="DESC"):
+def get_user_comments(author, page=1, rows=6, sort="DESC"):
     """Return a dictionary containing comments for an IAuthor,
 
     :param author: An objects which implements zeit.content.author.IAuthor
@@ -504,12 +504,25 @@ def get_user_comments(author, page=1, rows=10, sort="DESC"):
     with zeit.web.core.metrics.timer('user_comments.community.response_time'):
         result = requests.get(uri, timeout=timeout)
 
-    xml = lxml.etree.fromstring(result.content())
+    xml = lxml.etree.fromstring(result.content)
+
+    uid = None
+    try:
+        uid = int(xml.xpath('/users_comments/uid')[0].text)
+    except TypeError:
+        pass
+
+    published_total = None
+    try:
+        published_total = int(xml.xpath(
+            '/users_comments/published_total')[0].text)
+    except TypeError:
+        pass
+
     comments = {
-        'comments':[],
-        'uid': int(xml.xpath('/user_comments/uid')[0].text),
-        'published_total':  int(xml.xpath(
-            '/user_comments/published_total')[0].text),
+        'comments': [],
+        'uid': uid,
+        'published_total': published_total,
         'page': page,
         'rows': rows,
         'sort': sort
@@ -524,7 +537,7 @@ def get_user_comments(author, page=1, rows=10, sort="DESC"):
     if page > comments['page_total']:
         raise PagesExhaustedError()
 
-    for comment in xml.xpath('/user_comments//item'):
+    for comment in xml.xpath('/users_comments//item'):
         comments['comments'].append(_get_user_comment(comment))
 
     return comments
@@ -556,5 +569,3 @@ def _get_user_comment(comment):
             co_dict['uniqueId'] = co_dict['uniqueId'].replace(
                 'www.zeit.de', 'xml.zeit.de')
     return co_dict
-
-
