@@ -8,6 +8,7 @@
   "feature-detects": [
     "test/touchevents",
     "test/video",
+    "test/svg",
     "test/css/transforms",
     "test/css/transforms3d",
     "test/css/transformstylepreserve3d",

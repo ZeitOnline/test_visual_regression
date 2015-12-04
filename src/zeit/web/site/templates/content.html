@@ -113,4 +113,19 @@
         {% include "zeit.web.site:templates/inc/article/comments.tpl" %}
     {% endprofile %}
     {% endblock comments %}
+
 {% endblock main %}
+
+{% block progress_circle %}
+<script id="circle_progress_script" type="text/template">
+    <div id="overscrolling" class="overscrolling">
+        <div id="overscrolling_target" class="overscrolling__target"></div>
+        <div id="overscrolling_indicator" class="circle-progress overscrolling__indicator">
+            <svg id="circle_progress_svg" class="circle-progress__svg" width="150" height="150" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <circle shape-rendering="geometricPrecision" class="circle-progress__fill" r="70" cx="75" cy="75" stroke="#fff" fill="rgba(0,0,0,0.6)" stroke-dasharray="458.672" stroke-dashoffset="0"></circle>
+                <circle shape-rendering="geometricPrecision" id="circle_progress_bar" class="circle-progress__bar" r="70" cx="75" cy="75" transform="rotate(270,75,75)" fill="transparent" stroke="transparent" stroke-dasharray="458.672"></circle>
+            </svg>
+        </div>
+    </div>
+</script>
+{% endblock %}

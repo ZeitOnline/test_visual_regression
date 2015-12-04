@@ -67,13 +67,14 @@ def from_settings():
     else:
         log.info(
             'Not initializing metrics collection, no statsd_address setting')
-
-        @contextlib.contextmanager
-        def mock_time(self, identifier=None):
-            yield
         metrics = mock.Mock()
-        metrics.time = mock_time
+        metrics.time = mock_contextmanager
         return metrics
+
+
+@contextlib.contextmanager
+def mock_contextmanager(self, *args, **kw):
+    yield
 
 
 def timer(identifier):

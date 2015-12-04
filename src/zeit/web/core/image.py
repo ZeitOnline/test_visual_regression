@@ -4,9 +4,10 @@ import logging
 import os
 import PIL
 import tempfile
-import urllib2
 
 import pytz
+import requests
+import requests_file
 import grokcore.component
 import zope.component
 
@@ -117,6 +118,9 @@ class VariantImage(object):
 
 class LocalImage(object):
 
+    KiB = 1024
+    DOWNLOAD_CHUNK_SIZE = 2 * KiB
+
     def __init__(self, url):
         if not isinstance(url, basestring):
             raise TypeError('Local image URL needs to be string formatted')
@@ -135,16 +139,25 @@ class LocalImage(object):
     def fetch(self):
         if self.isfile():
             return
+        # XXX requests does not seem to allow to mount stuff as a default, sigh
+        session = requests.Session()
+        session.mount('file://', requests_file.FileAdapter())
         try:
-            # TODO: Switch to requests to leverage urllib3 connection pooling.
             with zeit.web.core.metrics.timer(
                     'zeit.web.core.video.thumbnail.brightcove.response_time'):
-                resp = urllib2.urlopen(self.url, timeout=2)
-                content = resp.read()
-            assert len(content) > 1024
+                response = session.get(self.url, stream=True, timeout=2)
+                response.raise_for_status()
             with self.open(mode='w+') as fh:
-                fh.write(content)
-        except (AssertionError, IOError, ValueError):
+                first_chunk = True
+                for chunk in response.iter_content(self.DOWNLOAD_CHUNK_SIZE):
+                    # Too small means something is not right with this download
+                    if first_chunk:
+                        first_chunk = False
+                        assert len(chunk) > self.DOWNLOAD_CHUNK_SIZE / 2
+                    fh.write(chunk)
+            # Analoguous to requests.api.request().
+            session.close()
+        except (requests.exceptions.RequestException, IOError, AssertionError):
             log.debug('Remote image {} could not be downloaded to {}.'.format(
                       self.url, self.__name__))
             raise TypeError('Could not adapt {}'.format(self.url))
@@ -207,7 +220,10 @@ class LocalImageGroup(zeit.content.image.imagegroup.ImageGroup,
 
     @zeit.web.reify
     def master_image(self):
-        image = LocalImage(self.image_url)
+        try:
+            image = LocalImage(self.image_url)
+        except TypeError:
+            return None
         image.src = self.image_url
         image.mimeType = 'image/jpeg'
         image.image_pattern = 'wide-large'
