@@ -4,7 +4,20 @@ Change log for zeit.web
 2.34 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Fix lineage test
+
+- MAINT: Use `requests` throughout, no more `urllib2.urlopen`
+
+- PERF: Disable `requests` trying to read credentials from `~/.netrc`,
+  saving quite a few superfluous disk accesses
+
+- ZON-2408: Add overscroll effect
+
+- MAINT: Polish nextread, advertising nextread and article lineage
+
+- HOTFIX: Handle non-ascii author names in author feed
+
+- MAINT: Use time-based caching for video series source
 
 
 2.33 (2015-11-27)

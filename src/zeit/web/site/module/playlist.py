@@ -45,4 +45,4 @@ class Playlist(zeit.web.site.module.Module):
 
     @zeit.web.reify
     def video_series_list(self):
-        return zeit.web.core.sources.video_series
+        return list(zeit.web.core.sources.VIDEO_SERIES)

@@ -15,6 +15,7 @@ import pyramid.renderers
 import pyramid_beaker
 import pyramid_jinja2
 import pyramid_zodbconn
+import requests.sessions
 import venusian
 import zope.app.appsetup.product
 import zope.component
@@ -81,7 +82,6 @@ class Application(object):
         self.configure_zca()
         self.configure_pyramid()
         self.configure_banner()
-        self.configure_series()
         self.configure_navigation()
         self.configure_bugsnag()
 
@@ -98,12 +98,6 @@ class Application(object):
             self.settings.get('vivi_zeit.web_banner-id-mappings', ''))
         zeit.web.core.banner.banner_id_mappings = (
             zeit.web.core.banner.make_banner_id_mappings(banner_id_mappings))
-
-    def configure_series(self):
-        series_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_series-source', ''))
-        zeit.web.core.sources.video_series = (
-            zeit.web.core.sources.get_video_series(series_source))
 
     def configure_navigation(self):
         navigation_config = maybe_convert_egg_url(
@@ -464,3 +458,7 @@ zeit.cms.repository.file.RepositoryFile.__parent__ = property(
     resolve_parent, set_workingcopy_parent)
 zeit.cms.repository.folder.Folder.__parent__ = property(
     resolve_parent, set_workingcopy_parent)
+
+
+# Skip superfluous disk accesses, since we never use netrc for authentication.
+requests.sessions.get_netrc_auth = lambda *args, **kw: None
