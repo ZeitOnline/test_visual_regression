@@ -155,7 +155,7 @@ def request_thread(path):
     """
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    timeout = float(conf.get('community_host_timeout_secs', 5))
+    timeout = float(conf.get('community_host_timeout_secs', 0.5))
     uri = '{}/agatho/thread{}'.format(
         conf.get('agatho_host', ''), path.encode('utf-8'))
     try:
@@ -475,3 +475,62 @@ def get_counts(*unique_ids):
                 n.attrib['comment_count'] for n in nodes}
     except (AttributeError, IndexError, KeyError, lxml.etree.LxmlError):
         return {}
+
+
+def get_user_comments(author, page=0, rows=10, sort="DESC"):
+    """Return a dictionary containing comments for an IAuthor,
+
+    :param author: An objects which implements zeit.content.author.IAuthor
+    :param page: A number which represents the page being retrieved
+    :param rows: Number of items being displayed per page
+    :param sort: String describing sort order.
+                 DESC is descending. ASC is ascending
+    :rtype: dict
+    """
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+
+    if not getattr(author, 'email'):
+        return
+    uri = '{}/usercommentsxml/{}/{}/{}/{}'.format(
+        conf.get('agatho_host', ''), author.email, page, rows, sort)
+
+    timeout = float(conf.get('community_host_timeout_secs', 5))
+
+    with zeit.web.core.metrics.timer('user_comments.community.response_time'):
+        result = requests.get(uri, timeout=timeout)
+
+    xml = lxml.etree.fromstring(result.content())
+    comments = {
+        'comments':[],
+        'uid': xml.xpath('/user_comments/uid')[0].text,
+        'published_total':  xml.xpath(
+            '/user_comments/published_total')[0].text
+    }
+    for comment in xml.xpath('/user_comments//item'):
+        comments['comments'].append(get_user_comment(comment))
+
+    return comments
+
+
+def get_user_comment(comment):
+    co_dict = {}
+    if comment.xpath('cid'):
+        co_dict['cid'] = comment.xpath('cid')[0]
+    if comment.xpath('uid'):
+        co_dict['uid'] = comment.xpath('uid')[0]
+    if comment.xpath('title'):
+        co_dict['title'] = comment.xpath('title')[0]
+    if comment.xpath('description'):
+        co_dict['description'] = comment.xpath('description')[0]
+    if comment.xpath('pubDate'):
+        co_dict['publication_date'] = comment.xpath('pubDate')[0]
+    if comment.xpath('cms_uniqueId'):
+        co_dict['uniqueId'] = comment.xpath('cms_uniqueId')[0]
+        # XXX Temporary fix, because drupal does not produce right uniqueIds
+        # yet.
+        co_dict['uniqueId'] = co_dict['uniqueId'].replace(
+            'www.zeit.de', 'xml.zeit.de')
+    return co_dict
+
+
