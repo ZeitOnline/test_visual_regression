@@ -9,30 +9,35 @@
 		+respond-min($break-tablet-min)
 			max-width: remify(700px) // 660px + 2*$page-padding
 	&__head,
-	&__error
+	&__note
 		background-color: $zon-lighter-grey
+	&__note
+		padding-bottom: em(16px)
+		padding-top: em(16px)
+	&__head
 		padding-bottom: em(32px)
 		padding-top: em(32px)
 		text-align: center
 		+respond-min($break-phablet-min)
-			+display-flex // flexbox
-			+justify-content(space-between) // flexbox
-			+align-items(center)
+			+clearfix
+			text-align: unset
 		+respond-min($break-tablet-min)
 			background-color: transparent
-	&__error
-		text-align: left
+	&__message
+		clear: both
 		color: $color-text-highlighted
+		text-align: left
+	&__head &__message
+		padding-top: em(32px)
 	&__headline
+		display: block
 		font-size: remify(18px)
 		font-weight: bold
-		display: block
 		margin-bottom: .5em
 		+respond-min($break-phablet-min)
+			float: left
 			font-size: remify(20px)
-			display: inline
 			margin-bottom: 0
-			text-align: left
 		small
 			color: $zon-mid-grey
 			display: block
@@ -41,6 +46,8 @@
 			letter-spacing: $zon-letter-spacing-m
 	&__button
 		white-space: nowrap
+		+respond-min($break-phablet-min)
+			float: right
 		&:after
 			content: "\25B8" // ▸ = Black right-pointing small triangle
 			margin-left: 3px
