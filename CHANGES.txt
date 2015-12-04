@@ -15,6 +15,8 @@ Change log for zeit.web
 2.34 (2015-12-04)
 -----------------
 
+- ZON-2450: Add more advertorials to navigation
+
 - HOTFIX: Fix lineage test
 
 - MAINT: Use `requests` throughout, no more `urllib2.urlopen`
