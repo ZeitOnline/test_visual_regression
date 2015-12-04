@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.34 (unreleased)
+2.34 (2015-12-04)
 -----------------
 
 - HOTFIX: Fix lineage test
