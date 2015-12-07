@@ -560,6 +560,12 @@ class UserComment(object):
         except (TypeError, ValueError, IndexError):
             raise NoValidComment('Comment ID (cid) must be given.')
 
+    def _node_value(self, name, cast=lambda x: x):
+        match = self._comment.xpath(name)
+        if not match:
+            return None
+        return cast(match[0].text)
+
     @property
     def __name__(self):
         return self.cid
@@ -570,42 +576,37 @@ class UserComment(object):
 
     @zeit.web.reify
     def cid(self):
-        return int(self._comment.xpath('cid')[0].text)
+        return self._node_value('cid', int)
 
     @zeit.web.reify
     def uid(self):
-        if self._comment.xpath('uid'):
-            try:
-                return int(self._comment.xpath('uid')[0].text)
-            except TypeError:
-                return
+        try:
+           return self._node_value('uid', int)
+        except TypeError:
+            return
 
     @zeit.web.reify
     def title(self):
-        if self._comment.xpath('title'):
-            return self._comment.xpath('title')[0].text
+        return self._node_value('title')
 
     @zeit.web.reify
     def description(self):
-        if self._comment.xpath('description'):
-            return self._comment.xpath('description')[0].text
+        return self._node_value('description')
 
     @zeit.web.reify
     def publication_date(self):
-        if self._comment.xpath('pubDate'):
-            return self._comment.xpath('pubDate')[0].text
+        return self._node_value('pubDate')
 
     @zeit.web.reify
     def referenced_content(self):
-        if self._comment.xpath('cms_uniqueId'):
-            drupal_id = self._comment.xpath('cms_uniqueId')[0].text
+        drupal_id = self._node_value('cms_uniqueId')
 
-            # XXX Temporary fix, because drupal does not produce
-            # right uniqueIds yet. I suppose TB will repair this, within this
-            # iteration.
-            if drupal_id is not None:
-                uniqueId = drupal_id.replace('www.zeit.de', 'xml.zeit.de')
-                try:
-                    return zeit.cms.interfaces.ICMSContent(uniqueId)
-                except TypeError:
-                    return
+        # XXX Temporary fix, because drupal does not produce
+        # right uniqueIds yet. I suppose TB will repair this, within this
+        # iteration.
+        if drupal_id is not None:
+            uniqueId = drupal_id.replace('www.zeit.de', 'xml.zeit.de')
+            try:
+                return zeit.cms.interfaces.ICMSContent(uniqueId)
+            except TypeError:
+                return
