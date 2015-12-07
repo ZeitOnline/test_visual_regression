@@ -4,6 +4,10 @@ Change log for zeit.web
 2.35 (unreleased)
 -----------------
 
+- ZON-2446: Implement HTML for Instant Articles
+
+- ZON-2478: Implement RSS feed for Instant Articles
+
 - ZON-2460: Fix several problems for wrapper apps
 
 - ZON-2450: Add more advertorials to navigation
