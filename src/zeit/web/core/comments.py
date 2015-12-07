@@ -560,9 +560,13 @@ class UserComment(object):
         except (TypeError, ValueError, IndexError):
             raise NoValidComment('Comment ID (cid) must be given.')
 
+    @property
+    def __name__(self):
+        return self.cid
+
     @zeit.web.reify
     def uniqueId(self):
-        return 'http://xml.zeit.de/comments/cid-{}'.format(self.cid)
+        return 'http://community.zeit.de/comment/{}'.format(self.cid)
 
     @zeit.web.reify
     def cid(self):

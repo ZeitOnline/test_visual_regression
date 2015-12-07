@@ -769,9 +769,10 @@ def test_user_comment_should_have_expected_structure(application):
     xml = lxml.etree.fromstring(xml_str)
     comment = zeit.web.core.comments.UserComment(xml)
     assert comment.cid == 1
+    assert comment.__name__ == 1
     assert comment.description == '<p>Ich praezisiere.</p>'
     assert comment.publication_date == 'Tue, 17 Nov 2015 10:39:50 +0100'
-    assert comment.uniqueId == 'http://xml.zeit.de/comments/cid-1'
+    assert comment.uniqueId == 'http://community.zeit.de/comment/1'
     assert comment.title == '[empty]'
     assert comment.referenced_content.uniqueId == (
         'http://xml.zeit.de/artikel/01')
@@ -790,7 +791,7 @@ def test_user_comment_should_have_expected_structure(application):
     assert comment.cid == 1
     assert comment.description is None
     assert comment.publication_date is None
-    assert comment.uniqueId == 'http://xml.zeit.de/comments/cid-1'
+    assert comment.uniqueId == 'http://community.zeit.de/comment/1'
 
 
 def test_user_comments_should_raise_exception_if_no_cid_given(application):
