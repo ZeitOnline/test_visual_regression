@@ -1190,3 +1190,17 @@ def test_article_should_render_quiz_in_iframe(testbrowser):
         'src') == 'http://quiz.zeit.de/#/quiz/103?embedded&adcontrol'
     assert iframe[1].get(
         'src') == 'http://quiz.zeit.de/#/quiz/104?embedded'
+
+
+def test_instantarticle_representation_should_have_content(testbrowser):
+    bro = testbrowser('/instantarticle/zeit-online/article/quotes')
+
+    canonical = bro.cssselect('link[rel=canonical]')[0].attrib['href']
+    assert 'zeit-online/article/quotes' in canonical
+    assert 'instantarticle' not in canonical
+
+    assert '"Pulp Fiction"' in bro.cssselect('h1')[0].text
+    assert bro.cssselect('.op-published')[0].text.strip() == '2. Juni 1999'
+    assert bro.cssselect('figure > img[src$="square__2048x2048"]')
+    assert len(bro.cssselect('aside')) == 3
+
