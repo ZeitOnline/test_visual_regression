@@ -1203,4 +1203,3 @@ def test_instantarticle_representation_should_have_content(testbrowser):
     assert bro.cssselect('.op-published')[0].text.strip() == '2. Juni 1999'
     assert bro.cssselect('figure > img[src$="square__2048x2048"]')
     assert len(bro.cssselect('aside')) == 3
-

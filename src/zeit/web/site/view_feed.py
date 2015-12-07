@@ -29,6 +29,7 @@ import zeit.web.site.view
 
 log = logging.getLogger(__name__)
 
+
 def _add_none(elem, text):
     elem.text = ''
 
@@ -42,8 +43,10 @@ ATOM_MAKER = getattr(ELEMENT_MAKER, '{%s}link' % ATOM_NAMESPACE)
 CONTENT_MAKER = getattr(ELEMENT_MAKER, '{%s}encoded' % CONTENT_NAMESPACE)
 DC_MAKER = getattr(ELEMENT_MAKER, '{%s}creator' % DC_NAMESPACE)
 
+
 def CDATA(str):
     return lxml.etree.CDATA(str)
+
 
 def format_rfc822_date(date):
     if date is None:
@@ -238,9 +241,9 @@ class InstantArticleFeed(Newsfeed):
     @zeit.web.reify
     def pagedescription(self):
         return (u'Aktuelle Nachrichten, Kommentare, '
-               u'Analysen und Hintergrundberichte aus '
-               u'Politik, Wirtschaft, Gesellschaft, Wissen, '
-               u'Kultur und Sport lesen Sie auf ZEIT ONLINE.')
+                u'Analysen und Hintergrundberichte aus '
+                u'Politik, Wirtschaft, Gesellschaft, Wissen, '
+                u'Kultur und Sport lesen Sie auf ZEIT ONLINE.')
 
     @zeit.web.reify
     def items(self):
@@ -249,7 +252,7 @@ class InstantArticleFeed(Newsfeed):
         resultset = []
         for result in solr.search(
                 query, sort='date-first-released desc', rows=15):
-            resultset.append( zeit.cms.interfaces.ICMSContent(result))
+            resultset.append(zeit.cms.interfaces.ICMSContent(result))
         return resultset
 
     def build_feed(self):
