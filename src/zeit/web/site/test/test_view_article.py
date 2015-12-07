@@ -10,10 +10,13 @@ import lxml.etree
 import mock
 import pyramid.testing
 import pytest
+import zope.component
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.cms.related.interfaces
 import zeit.cms.interfaces
+
+import zeit.solr.interfaces
 
 import zeit.web.site.view_article
 
@@ -1058,6 +1061,14 @@ def test_article_lineage_should_render_correctly(testbrowser):
 
 
 def test_article_lineage_has_text_elements(testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{
+        u'supertitle': u'a',
+        u'uniqueId': u'http://xml.zeit.de/01',
+        u'title': u'b'}, {
+        u'supertitle': u'c',
+        u'uniqueId': u'http://xml.zeit.de/02',
+        u'title': u'd'}]
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(browser.cssselect('.al-text__kicker')) == 2
     assert len(browser.cssselect('.al-text__supertitle')) == 2

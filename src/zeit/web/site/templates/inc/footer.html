@@ -27,6 +27,6 @@
         </div>
     </script>
     <div class="footer-links__button">
-        <a href="{{ view.canonical_url }}" class="footer-links__linkbutton js-scroll" title="Zurück nach oben" data-id="footernav.4.1..pfeil">Nach oben</a>
+        <a href="{{ view.canonical_url if not view.is_wrapped else '#top' }}" class="footer-links__linkbutton js-scroll" title="Zurück nach oben" data-id="footernav.4.1..pfeil">Nach oben</a>
     </div>
 </div>
