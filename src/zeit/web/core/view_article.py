@@ -253,8 +253,7 @@ class Article(zeit.web.core.view.Content):
         return sorted(cr_list, key=lambda k: k['label'])
 
 
-@view_config(custom_predicates=(zeit.web.core.is_admin,),
-             context=zeit.content.article.interfaces.IArticle,
+@view_config(context=zeit.content.article.interfaces.IArticle,
              route_name='instantarticle',
              renderer='templates/instantarticle.html')
 class InstantArticle(Article):
