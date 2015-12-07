@@ -74,7 +74,7 @@ def test_instant_article_feed_should_be_rendered(testserver):
         'Gentrifizierung: Mei, is des traurig!')
     content = xml.xpath('//item/content:encoded',
         namespaces={'content': 'http://purl.org/rss/1.0/modules/content/'})
-    assert ('<![CDATA[<esi:include src="http://www.zeit.de/instant-articles/'
+    assert ('<![CDATA[<esi:include src="http://www.zeit.de/instant-articles'
             '/artikel/01" />]]') in lxml.etree.tostring(content[0])
 
     assert xml.xpath('//item/link/text()')[0].startswith(
