@@ -1,3 +1,20 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+
+<div class="author-contact">
+    <div class="author-contact__twitter">
+        {{ lama.use_svg_icon('author-twitter', 'author-contact__icon', view.request) }}
+    </div>
+    <div class="author-contact__facebook">
+        {{ lama.use_svg_icon('author-fb', 'author-contact__icon', view.request) }}
+    </div>
+    <div class="author-contact__instagram">
+        {{ lama.use_svg_icon('author-instagram', 'author-contact__icon', view.request) }}
+    </div>
+    <div class="author-contact__email">
+        {{ lama.use_svg_icon('author-email', 'author-contact__icon', view.request) }}
+    </div>
+</div>
+
 {{context.twitter}}
 {{context.facebook}}
 {{context.instagram}}
