@@ -4,6 +4,8 @@ Change log for zeit.web
 2.35 (unreleased)
 -----------------
 
+- ZON-2469: Embed favourite content into author profile page
+
 - ZON-2460: Fix several problems for wrapper apps
 
 - ZON-2450: Add more advertorials to navigation
