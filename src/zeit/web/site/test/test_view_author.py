@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 def test_author_page_should_show_favourite_content_if_available(testbrowser):
     browser = testbrowser('/autoren/j_random')
     assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 3
