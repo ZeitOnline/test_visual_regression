@@ -2,10 +2,6 @@
 <centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
   <head>
     <header_image/>
-    <snapshot align="left" expires="" publication-date="" src="http://xml.zeit.de/broken/reference.jpg" title="Ein schneebedecktes Feld bei Buffalo im US-Bundesstaat New Broke" type="jpg">
-        <bu>Ein schneebedecktes Feld bei Buffalo im US-Bundesstaat New Broke</bu>
-        <copyright>© Lindsay DeDario/Reuters</copyright>
-    </snapshot>
     <rankedTags xmlns:ns0="http://namespaces.zeit.de/CMS/tagging">
       <tag type="Person" url_value="sasha-waltz" uuid="ee170ef7-ccdc-48f7-a617-62f5158512ea">Sasha Waltz</tag>
       <tag type="Organization" url_value="interpol" uuid="0d1b12e1-1ee1-4cde-810b-033f45ce3450">Interpol</tag>

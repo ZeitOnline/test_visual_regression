@@ -12,10 +12,6 @@
       </topiclink>
     </topiclinks>
     <header_image xsi:nil="true"/>
-    <snapshot src="http://xml.zeit.de/kultur/2012-03/momente/0710-moment-frueh.jpg" type="jpg" title="Taifun Mujigae hat in Südchina schwere Schäden angerichtet." align="left" publication-date="" expires="">
-      <bu>Taifun Mujigae hat in Südchina schwere Schäden angerichtet.</bu>
-      <copyright>© Reuters</copyright>
-    </snapshot>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
