@@ -28,7 +28,7 @@
                    href="{{ teaser | create_url }}">
 
                     {% block teaser_kicker %}
-                        <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind) }}">
+                        <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content) }}">
                             {% block kicker_logo scoped %}
                                 {% if teaser is zmo_content %}
                                     {{ lama.use_svg_icon('logo-zmo-zm', self.layout() + '__kicker-logo--zmo svg-symbol--hide-ie', request) }}

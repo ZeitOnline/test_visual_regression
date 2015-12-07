@@ -7,7 +7,6 @@
     <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">14</attribute>
     <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2014-04-05T06:36:09.138080+00:00</attribute>
     <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">leben</attribute>
     <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
     <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
     <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
@@ -30,7 +29,7 @@
     <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
     <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">gallery</attribute>
     <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-04-05T06:34:51.541755+00:00</attribute>
-    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">zeit-magazin</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Digital</attribute>
     <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
     <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
     <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>

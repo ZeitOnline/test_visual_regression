@@ -9,6 +9,7 @@ import zeit.content.image.image
 import zeit.content.gallery.gallery
 
 import zeit.web.core.block
+import zeit.web.core.template
 import zeit.web.core.utils
 
 # Custom interface classes to destinguish between regular galleries (inline
@@ -34,8 +35,8 @@ class IGalleryImage(zope.interface.Interface):
 class GalleryImage(zeit.web.core.image.BaseImage):
 
     def __init__(self, item):
-        self.caption = item.caption
-        self.layout = 'large'  # item.layout
+        self.layout = item.layout or 'large'
+        self.image_pattern = 'zon-large'
         self.title = item.title
         self.text = item.text
 
@@ -44,11 +45,25 @@ class GalleryImage(zeit.web.core.image.BaseImage):
             self.uniqueId = item.image.uniqueId
             self.image = item.image
 
-        meta = zeit.content.image.interfaces.IImageMetadata(item)
+        meta = zeit.content.image.interfaces.IImageMetadata(item.image)
         fix_ml = zeit.web.core.utils.fix_misrepresented_latin
         self.copyright = list((fix_ml(i[0]),) + i[1:] for i in meta.copyrights)
         self.alt = meta.alt
         self.align = meta.alignment
+        self.caption = meta.caption
+
+
+@zeit.web.register_global
+def get_gallery_image(module=None, content=None, **kwargs):
+    # XXX Re-implement once we have a solution for RepositoryImage variants.
+
+    if content is None:
+        content = zeit.web.core.template.first_child(module)
+
+    if content is None:
+        return
+
+    return zeit.web.core.template.first_child(Gallery(content).itervalues())
 
 
 class Gallery(collections.OrderedDict):
@@ -62,7 +77,7 @@ class Gallery(collections.OrderedDict):
         return object.__repr__(self)
 
     @property
-    def galleryText(self):
+    def galleryText(self):  # NOQA
         return zeit.wysiwyg.interfaces.IHTMLContent(
             self.context).html
 
