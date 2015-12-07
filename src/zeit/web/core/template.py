@@ -168,7 +168,7 @@ def append_campaign_params(context, url):
                 'utm_source':'zon'}
         else:
             campaign_params = {
-                'utm_campaign':'zonteaser'
+                'utm_campaign':'zonteaser',
                 'utm_medium':'teaser',
                 'utm_source':'zon'}
 
