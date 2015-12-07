@@ -1667,7 +1667,10 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
 def test_zett_banner_is_displayed(testbrowser):
     browser = testbrowser('/zeit-online/zett-banner')
     box = browser.cssselect('.zett-banner')[0]
+    link = box.cssselect('a')[0]
     assert len(box.cssselect('.zett-banner__wrapper'))
+    assert ('http://ze.tt/?utm_source=zon&utm_medium=banner&utm_content=1'
+            '&utm_campaign=zonbanner') == link.get('href')
 
 
 def test_zett_parquet_is_rendering(testbrowser):
@@ -1678,11 +1681,17 @@ def test_zett_parquet_is_rendering(testbrowser):
     logo = zett_parquet.cssselect('.parquet-meta__logo')
     teaser = zett_parquet.cssselect('.teaser-small')
     more_link = zett_parquet.cssselect('.parquet-meta__more-link--zett')
+    links = zett_parquet.cssselect('a')
 
     assert len(title)
     assert len(logo)
     assert len(more_link)
     assert len(teaser) == 3
+
+    # test campaign parameters
+    for link in links:
+        assert ('?utm_source=zon&utm_medium=parkett&utm_campaign='
+                'zonparkett') in link.get('href')
 
 
 def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):
@@ -1700,8 +1709,10 @@ def test_zett_parquet_should_link_to_zett(testbrowser):
     link_logo = browser.cssselect('.parquet-meta__title--zett')[0]
     link_more = browser.cssselect('.parquet-meta__more-link--zett')[0]
 
-    assert link_logo.attrib['href'] == 'http://ze.tt/'
-    assert link_more.attrib['href'] == 'http://ze.tt/'
+    assert ('http://ze.tt/?utm_source=zon&utm_medium=parkett&utm_campaign='
+            'zonparkett') == link_logo.attrib['href']
+    assert ('http://ze.tt/?utm_source=zon&utm_medium=parkett&utm_campaign='
+            'zonparkett') == link_more.attrib['href']
 
 
 def test_imagecopyright_tags_are_present_on_centerpages(testbrowser):
@@ -1814,6 +1825,24 @@ def test_zett_teaser_kicker_should_contain_logo(testbrowser):
     assert len(teaser_small_logo) == 1
     assert len(teaser_small_minor_logo) == 1
     assert len(teaser_square_logo) == 1
+
+
+def test_zett_teaser_should_contain_campaign_parameter(testbrowser):
+    browser = testbrowser('/zeit-online/journalistic-formats-zett')
+    select = browser.cssselect
+    links = select('.cp-area:not(.cp-area--zett) a[href*="//ze.tt"]')
+    zett_parquet_links = select('.cp-area--zett a[href*="//ze.tt"]')
+
+    assert len(links)
+    assert len(zett_parquet_links)
+
+    for link in links:
+        assert ('?utm_source=zon&utm_medium=teaser&utm_campaign='
+                'zonteaser') in link.get('href')
+
+    for link in zett_parquet_links:
+        assert ('?utm_source=zon&utm_medium=parkett&utm_campaign='
+                'zonparkett') in link.get('href')
 
 
 def test_printkiosk_is_structured_correctly(testbrowser):
