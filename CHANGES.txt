@@ -40,8 +40,6 @@ Change log for zeit.web
 
 - MAINT: Use time-based caching for video series source
 
-- ZON-2463: Style Autorenseitenheader
-
 - FIX: Re-add zett and zmo teaser kicker modifier
 
 
