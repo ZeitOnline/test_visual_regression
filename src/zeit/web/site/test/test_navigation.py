@@ -520,6 +520,26 @@ def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
         'Search bar is displayed')
 
 
+def test_advertorial_nav_links_hidden_mobile(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+
+    logo_bar__menu = driver.find_element_by_class_name('logo_bar__menu')
+    menu_link = logo_bar__menu.find_element_by_tag_name('a')
+    ressort_nav = driver.find_element_by_class_name(
+        'main_nav__ressorts')
+    adv_links = ressort_nav.find_elements_by_class_name(
+        'primary-nav__item--has-label')
+
+    menu_link.click()
+
+    # test navigation is display, advertorials not
+    assert ressort_nav.is_displayed(), ('Ressort bar is not displayed')
+    assert len(adv_links) == 2,  ('advertorial links missing')
+    assert not adv_links[0].is_displayed(), ('advertorial links are displayed')
+
+
 def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
 
     driver = selenium_driver

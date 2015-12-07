@@ -42,6 +42,7 @@
                 this.$nav = $that;
                 this.$items = el.$nav.children( '.primary-nav__item' ).
                     not( '*[data-id="more-dropdown"]' ).
+                    not( '.primary-nav__item--has-label' ).
                     not( '.primary-nav__item--featured' );
                 this.$feature = el.$nav.find( '.primary-nav__item--featured' );
 
