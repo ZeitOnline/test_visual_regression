@@ -756,7 +756,7 @@ def test_post_comment_should_have_correct_premoderation_states(
         assert ret_value['response']['premoderation'] is state
 
 
-def test_user_comment_should_have_expected_structure():
+def test_user_comment_should_have_expected_structure(application):
     xml_str = """
         <item>
             <cid>1</cid>
@@ -767,16 +767,18 @@ def test_user_comment_should_have_expected_structure():
         </item>"""
 
     xml = lxml.etree.fromstring(xml_str)
-    result = zeit.web.core.comments._get_user_comment(xml)
-    assert result['cid'] == 1
-    assert result['description'] == '<p>Ich praezisiere.</p>'
-    assert result['publication_date'] == 'Tue, 17 Nov 2015 10:39:50 +0100'
-    assert result['uniqueId'] == 'http://xml.zeit.de/artikel/01'
-    assert result['title'] == '[empty]'
+    comment = zeit.web.core.comments.UserComment(xml)
+    assert comment.cid == 1
+    assert comment.description == '<p>Ich praezisiere.</p>'
+    assert comment.publication_date == 'Tue, 17 Nov 2015 10:39:50 +0100'
+    assert comment.uniqueId == 'http://xml.zeit.de/comments/cid-1'
+    assert comment.title == '[empty]'
+    assert comment.referenced_content.uniqueId == (
+        'http://xml.zeit.de/artikel/01')
 
     xml_str = """
         <item>
-            <cid></cid>
+            <cid>1</cid>
             <title></title>
             <description></description>
             <pubDate></pubDate>
@@ -784,11 +786,28 @@ def test_user_comment_should_have_expected_structure():
         </item>"""
 
     xml = lxml.etree.fromstring(xml_str)
-    result = zeit.web.core.comments._get_user_comment(xml)
-    assert result['cid'] is None
-    assert result['description'] is None
-    assert result['publication_date'] is None
-    assert result['uniqueId'] is None
+    comment = zeit.web.core.comments.UserComment(xml)
+    assert comment.cid == 1
+    assert comment.description is None
+    assert comment.publication_date is None
+    assert comment.uniqueId == 'http://xml.zeit.de/comments/cid-1'
+
+
+def test_user_comments_should_raise_exception_if_no_cid_given(application):
+    xml_str = '<item><cid></cid></item>'
+    xml = lxml.etree.fromstring(xml_str)
+    with pytest.raises(zeit.web.core.comments.NoValidComment):
+        zeit.web.core.comments.UserComment(xml)
+
+    xml_str = '<item></item>'
+    xml = lxml.etree.fromstring(xml_str)
+    with pytest.raises(zeit.web.core.comments.NoValidComment):
+        zeit.web.core.comments.UserComment(xml)
+
+    xml_str = '<item><cid>a</cid></item>'
+    xml = lxml.etree.fromstring(xml_str)
+    with pytest.raises(zeit.web.core.comments.NoValidComment):
+        zeit.web.core.comments.UserComment(xml)
 
 
 def test_user_comment_thread_should_have_expected_structure(

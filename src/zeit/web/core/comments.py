@@ -538,34 +538,70 @@ def get_user_comments(author, page=1, rows=6, sort="DESC"):
         raise PagesExhaustedError()
 
     for comment in xml.xpath('/users_comments//item'):
-        comments['comments'].append(_get_user_comment(comment))
+        comments['comments'].append(UserComment(comment))
 
     return comments
 
 
-def _get_user_comment(comment):
-    co_dict = {}
-    if comment.xpath('cid'):
+class NoValidComment(Exception):
+    pass
+
+
+# XXX Right now we need this for comments, which are displayed on author
+# pages. We should think about redesigning this and use one comment object
+# throughout the whole comment API (RD, 2015-12-07)
+class UserComment(object):
+    zope.interface.implements(zeit.cms.interfaces.ICMSContent)
+
+    def __init__(self, comment):
+        self._comment = comment
         try:
-            co_dict['cid'] = int(comment.xpath('cid')[0].text)
-        except TypeError:
-            co_dict['cid'] = None
-    if comment.xpath('uid'):
-        try:
-            co_dict['uid'] = int(comment.xpath('uid')[0].text)
-        except TypeError:
-            co_dict['uid'] = None
-    if comment.xpath('title'):
-        co_dict['title'] = comment.xpath('title')[0].text
-    if comment.xpath('description'):
-        co_dict['description'] = comment.xpath('description')[0].text
-    if comment.xpath('pubDate'):
-        co_dict['publication_date'] = comment.xpath('pubDate')[0].text
-    if comment.xpath('cms_uniqueId'):
-        co_dict['uniqueId'] = comment.xpath('cms_uniqueId')[0].text
-        # XXX Temporary fix, because drupal does not produce right uniqueIds
-        # yet.
-        if co_dict['uniqueId'] is not None:
-            co_dict['uniqueId'] = co_dict['uniqueId'].replace(
-                'www.zeit.de', 'xml.zeit.de')
-    return co_dict
+            int(self._comment.xpath('cid')[0].text)
+        except (TypeError, ValueError, IndexError):
+            raise NoValidComment('Comment ID (cid) must be given.')
+
+    @zeit.web.reify
+    def uniqueId(self):
+        return 'http://xml.zeit.de/comments/cid-{}'.format(self.cid)
+
+    @zeit.web.reify
+    def cid(self):
+        return int(self._comment.xpath('cid')[0].text)
+
+    @zeit.web.reify
+    def uid(self):
+        if self._comment.xpath('uid'):
+            try:
+                return int(self._comment.xpath('uid')[0].text)
+            except TypeError:
+                return
+
+    @zeit.web.reify
+    def title(self):
+        if self._comment.xpath('title'):
+            return self._comment.xpath('title')[0].text
+
+    @zeit.web.reify
+    def description(self):
+        if self._comment.xpath('description'):
+            return self._comment.xpath('description')[0].text
+
+    @zeit.web.reify
+    def publication_date(self):
+        if self._comment.xpath('pubDate'):
+            return self._comment.xpath('pubDate')[0].text
+
+    @zeit.web.reify
+    def referenced_content(self):
+        if self._comment.xpath('cms_uniqueId'):
+            drupal_id = self._comment.xpath('cms_uniqueId')[0].text
+
+            # XXX Temporary fix, because drupal does not produce
+            # right uniqueIds yet. I suppose TB will repair this, within this
+            # iteration.
+            if drupal_id is not None:
+                uniqueId = drupal_id.replace('www.zeit.de', 'xml.zeit.de')
+                try:
+                    return zeit.cms.interfaces.ICMSContent(uniqueId)
+                except TypeError:
+                    return
