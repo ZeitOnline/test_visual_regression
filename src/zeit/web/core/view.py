@@ -767,7 +767,13 @@ class Content(Base):
 
     @zeit.web.reify
     def comment_area(self):
-        message = ''
+        user_blocked = False
+        self.request.authenticated_userid
+        if self.request.session.get('user'):
+            user_blocked = self.request.session['user'].get('blocked')
+
+        message = None
+        note = None
         if self.community_maintenance['active']:
             message = self.community_maintenance['text_active']
         elif not self.comments_loadable:
@@ -775,32 +781,28 @@ class Content(Base):
                        u'Die Kommentare zu diesem Artikel konnten '
                        u'nicht geladen werden. Bitte entschuldigen Sie '
                        u'diese Störung.')
+        elif not self.comments_allowed:
+            message = (u'Der Kommentarbereich dieses Artikels ist geschlossen.'
+                       u' Wir bitten um Ihr Verständnis.')
+            note = message
+        elif user_blocked:
+            # no message: individual messages are only possible inside ESI form
+            note = (u'Leider sind Sie für die Teilnahme an der Community '
+                    u'gesperrt.')
         elif self.community_maintenance['scheduled']:
             message = self.community_maintenance['text_scheduled']
 
-        user_blocked = False
-        self.request.authenticated_userid
-        if self.request.session.get('user'):
-            user_blocked = self.request.session['user'].get('blocked')
-
-        accept_new_comments = self.context.commentsAllowed
-
         return {
             'show': (self.comments_allowed or bool(self.comments)),
-            'show_comment_form': (self.comments_loadable and (
-                self.show_commentthread) and not user_blocked and (
-                    accept_new_comments)),
-            'show_meta': not self.community_maintenance['active'] and (
-                bool(self.comments)) and self.comments_loadable,
+            'show_comment_form': not self.community_maintenance['active'] and (
+                self.comments_allowed) and self.comments_loadable and (
+                    not user_blocked),
             'show_comments': not self.community_maintenance['active'] and (
-                self.comments_loadable and self.comments),
+                self.comments_loadable and bool(self.comments)),
             'no_comments': (not self.comments and self.comments_loadable),
-            'warning': (self.community_maintenance['active'] or (
-                not self.comments_loadable) or (
-                    self.community_maintenance['scheduled'])),
+            'note': note,
             'message': message,
-            'user_blocked': user_blocked,
-            'accept_new_comments': accept_new_comments
+            'user_blocked': user_blocked
         }
 
 

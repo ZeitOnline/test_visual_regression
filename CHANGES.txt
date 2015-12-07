@@ -1,7 +1,20 @@
 Change log for zeit.web
 =======================
 
-2.34 (unreleased)
+2.35 (unreleased)
+-----------------
+
+- ZON-2450: Add more advertorials to navigation
+
+- MAINT: Cleanup community notifications
+
+- FIX: Be more defensive in several places:
+  * Portraitboxes with funny HTML
+  * Images with empty copyright
+  * Videos without still image
+
+
+2.34 (2015-12-04)
 -----------------
 
 - HOTFIX: Fix lineage test
@@ -20,6 +33,8 @@ Change log for zeit.web
 - HOTFIX: Handle non-ascii author names in author feed
 
 - MAINT: Use time-based caching for video series source
+
+- FIX: Re-add zett and zmo teaser kicker modifier
 
 
 2.33 (2015-11-27)

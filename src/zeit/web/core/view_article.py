@@ -239,7 +239,7 @@ class Article(zeit.web.core.view.Content):
 
         cr_list = []
         for i in self._copyrights.itervalues():
-            if len(i.copyright[0][0]) > 1:
+            if i.copyright and len(i.copyright[0][0]) > 1:
                 cr_list.append(
                     dict(
                         label=i.copyright[0][0],
