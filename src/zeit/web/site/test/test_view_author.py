@@ -1,26 +1,5 @@
 # -*- coding: utf-8 -*-
-import re
-
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.ui import WebDriverWait
-import lxml.etree
-import lxml.html
-import mock
-import pyramid.httpexceptions
-import pyramid.testing
-import pytest
-import requests
-import zope.component
-
-import zeit.content.cp.centerpage
-
-import zeit.web.core.centerpage
-import zeit.web.core.interfaces
-import zeit.web.core.utils
-import zeit.web.site.module.playlist
-import zeit.web.site.view_centerpage
+import zeit.web.site.view_author
 
 
 def test_author_header_should_be_fully_rendered(testserver, testbrowser):
@@ -33,3 +12,6 @@ def test_author_header_should_be_fully_rendered(testserver, testbrowser):
     assert len(name) == 1
     assert len(summary) == 1
     assert len(image) == 1
+
+    assert 'J. Random Hacker' in name[0].text
+    assert 'Random Hacker ist Redakteur' in summary[0].text
