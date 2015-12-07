@@ -139,7 +139,20 @@ def create_url(context, obj, request=None):
         return obj.replace(
             zeit.cms.interfaces.ID_NAMESPACE, host, 1).replace('.cp2015', '')
     elif zeit.content.link.interfaces.ILink.providedBy(obj):
-        return obj.url
+        # add campaign parameters for linked ze.tt content
+        if obj.url is not None and obj.url.startswith('http://ze.tt'):
+            try:
+                kind = context.get('area').kind
+            except:
+                kind = None
+
+            if kind == 'zett':
+                querystring = '?utm_source=zon&utm_medium=parkett&utm_campaign=zonparkett'
+            else:
+                querystring = '?utm_source=zon&utm_medium=teaser&utm_campaign=zonteaser'
+            return obj.url + querystring
+        else:
+            return obj.url
     elif zeit.content.video.interfaces.IVideo.providedBy(obj):
         slug = zeit.web.site.view_video.Video.get_slug(obj)
         # titles = (t for t in (obj.supertitle, obj.title) if t)

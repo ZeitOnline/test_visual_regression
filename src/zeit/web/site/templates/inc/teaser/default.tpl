@@ -25,7 +25,7 @@
                 {% block teaser_link %}
                 <a class="{{ self.layout() }}__combined-link"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
-                   href="{% block teaser_link_href %}{{ teaser | create_url + "?utm_source=zon&utm_medium=teaser&utm_campaign=zonteaser" if teaser is zett_content }}{% endblock teaser_link_href %}">
+                   href="{{ teaser | create_url }}">
 
                     {% block teaser_kicker %}
                         <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind) }}">
