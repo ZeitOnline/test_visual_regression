@@ -282,7 +282,7 @@ class InstantArticleFeed(Newsfeed):
                 self.request.route_url('home'), 'http://www.zeit.de/', 1)
 
             scheme, netloc, path, p, q, f = urlparse.urlparse(content_url)
-            instant_articles_url = '{}://{}/instant-articles/{}'.format(
+            instant_articles_url = '{}://{}/instant-articles{}'.format(
                 scheme, netloc, path)
 
             esi_include = '<esi:include src="{}" />'.format(
