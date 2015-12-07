@@ -41,7 +41,7 @@
         {# 'Jetzt lesen' makes no sense for videos #}
         {% set label = 'Video ansehen' %}
     {% endif %}
-    <a href="{{ teaser | create_url }}" class="{{ self.layout() }}__button">
+    <a href="{{ teaser | create_url | append_campaign_params }}" class="{{ self.layout() }}__button">
         <span class="{{ self.layout() }}__button-extra">{{ extra }}</span>
         {{ label }}
     </a>

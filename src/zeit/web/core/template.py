@@ -139,20 +139,7 @@ def create_url(context, obj, request=None):
         return obj.replace(
             zeit.cms.interfaces.ID_NAMESPACE, host, 1).replace('.cp2015', '')
     elif zeit.content.link.interfaces.ILink.providedBy(obj):
-        # add campaign parameters for linked ze.tt content
-        if obj.url is not None and obj.url.startswith('http://ze.tt'):
-            try:
-                kind = context.get('area').kind
-            except:
-                kind = None
-
-            if kind == 'zett':
-                querystring = '?utm_source=zon&utm_medium=parkett&utm_campaign=zonparkett'
-            else:
-                querystring = '?utm_source=zon&utm_medium=teaser&utm_campaign=zonteaser'
-            return obj.url + querystring
-        else:
-            return obj.url
+        return obj.url
     elif zeit.content.video.interfaces.IVideo.providedBy(obj):
         slug = zeit.web.site.view_video.Video.get_slug(obj)
         # titles = (t for t in (obj.supertitle, obj.title) if t)
@@ -162,6 +149,33 @@ def create_url(context, obj, request=None):
         return create_url(context, obj.uniqueId, request=request)
     else:
         return ''
+
+
+@zeit.web.register_ctxfilter
+def append_campaign_params(context, url):
+    # add campaign parameters for linked ze.tt content
+    if url is not None and url.startswith('http://ze.tt'):
+        try:
+            kind = context.get('area').kind
+        except:
+            kind = None
+
+        if kind == 'zett':
+            campaign_params = {'utm_source':'zon',
+                'utm_medium':'parkett',
+                'utm_campaign':'zonparkett'}
+        else:
+            campaign_params = {'utm_source':'zon',
+                'utm_medium':'teaser',
+                'utm_campaign':'zonteaser'}
+
+        scheme, netloc, path, query, fragment = urlparse.urlsplit(url)
+        query_params = urlparse.parse_qs(query)
+        query_params.update(campaign_params)
+        return '{}://{}{}?{}'.format(
+            scheme, netloc, path, urllib.urlencode(query_params, doseq=True))
+    else:
+        return url
 
 
 @zeit.web.register_filter
