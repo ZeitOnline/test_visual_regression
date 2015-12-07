@@ -26,7 +26,6 @@
                 <a class="{{ self.layout() }}__combined-link"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
                    href="{{ teaser | create_url }}">
-
                     {% block teaser_kicker %}
                         <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content) }}">
                             {% block kicker_logo scoped %}
