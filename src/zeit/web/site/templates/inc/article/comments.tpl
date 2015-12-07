@@ -4,14 +4,12 @@
 	{#
 	<pre>
 	SHOW: {{ view.comment_area.show }}
-	SHOW_META: {{ view.comment_area.show_meta }}
 	SHOW_COMMENT_FORM: {{ view.comment_area.show_comment_form }}
 	SHOW_COMMENTS: {{ view.comment_area.show_comments }}
 	NO_COMMENTS: {{ view.comment_area.show_comments }}
 	MESSAGE: {{ view.comment_area.message }}
-	WARNING: {{ view.comment_area.warning }}
-	USER_Blocked: {{ view.comment_area.user_blocked }}
-	accept_new_comments: {{view.comment_area.accept_new_comments }}
+	NOTE: {{ view.comment_area.note }}
+	USER_BLOCKED: {{ view.comment_area.user_blocked }}
 	</pre>
 	#}
 
@@ -21,8 +19,8 @@
 <section class="comment-section" id="comments">
 	<h3 class="visually-hidden">Kommentare</h3>
 	<div class="comment-section__head comment-section__item">
-	{% if view.comment_area.show_meta %}
-	<span class="comment-section__headline">
+	{% if view.comment_area.show_comments %}
+		<span class="comment-section__headline">
 			{{ view.comments.headline }}
 			{% if view.comments.pages.title %}
 			<small>{{ view.comments.pages.title }}</small>
@@ -43,14 +41,14 @@
 			<span class="nowrap">Kommentare</span>
 		</span>
 	{% endif %}
+
+	{% if view.comment_area.message  %}
+		<div class="comment-section__message">
+			{{ view.comment_area.message }}
+		</div>
+	{% endif %}
 	</div>
 
-	{% if view.comment_area.warning  %}
-	<div class="comment-section__error comment-section__item">	
-		<span>{{ view.comment_area.message }}</span>
-	</div>
-	{% endif %}
-	
 	{% if view.comment_area.show_comments %}
 	<div class="comment-preferences">
 		<div class="comment-preferences__container">

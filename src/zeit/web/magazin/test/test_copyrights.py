@@ -228,7 +228,7 @@ def test_only_gallery_images_with_cr_should_show_up_in_copyrights(
         testserver, testbrowser):
     browser = testbrowser(
         '%s/galerien/bg-automesse-detroit-2014-usa' % testserver.url)
-    assert len(browser.cssselect('ul.copyrights__list li')) == 1
+    assert len(browser.cssselect('ul.copyrights__list li')) == 2
 
 
 def test_centerpage_gracefully_skips_malformed_copyrights(
