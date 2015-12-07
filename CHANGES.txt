@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2450: Add more advertorials to navigation
 
+- ZON-2449: Include kicker in title of socialflow feeds
+
 - MAINT: Cleanup community notifications
 
 - FIX: Be more defensive in several places:

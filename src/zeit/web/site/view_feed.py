@@ -321,8 +321,13 @@ class SocialFeed(Base):
             # unfortunately still generates un-unseful production links.
             content_url = content_url.replace(
                 self.request.route_url('home'), 'http://www.zeit.de/', 1)
+            if content.supertitle:
+                content_title = u'{}: {}'.format(
+                    content.supertitle, content.title)
+            else:
+                content_title = content.title
             item = E.item(
-                E.title(content.title),
+                E.title(content_title),
                 E.link(content_url),
                 E.description(content.teaserText),
                 E.pubDate(
