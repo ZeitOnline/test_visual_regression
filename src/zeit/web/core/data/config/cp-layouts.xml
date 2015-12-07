@@ -61,6 +61,12 @@
         image_pattern="zon-thumbnail"
         areas="solo duo major minor ranking parquet"
         />
+    <layout
+        id="zon-snapshot"
+        title="Galerieteaser Momentaufnahme"
+        image_pattern="zon-large"
+        areas="solo"
+        />
     <!-- formally known as zon-fullwidth-onimage/zon-fullwidth -->
     <layout
         id="zon-fullwidth"

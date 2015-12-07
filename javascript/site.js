@@ -82,7 +82,6 @@ require([
     'web.site/plugins/jquery.searchTools',
     'web.site/plugins/jquery.selectNav',
     'web.site/plugins/jquery.paginateTeasers',
-    'web.site/plugins/jquery.snapshot',
     'web.site/plugins/jquery.storystream',
     'web.site/plugins/jquery.tabs',
     'web.site/plugins/jquery.togglenavi',
@@ -104,7 +103,6 @@ require([
     if ( pageType === 'centerpage' ) {
         // homepage
         if ( isHp === 'true' ) {
-            $( '#snapshot' ).snapshot();
             $.hpOverlay();
         }
         // centerpage

@@ -2,10 +2,6 @@
 <centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <head>
         <header_image/>
-        <snapshot align="left" expires="" publication-date="" src="http://xml.zeit.de/exampleimages/artikel/leinwand.jpg" title="Ein schneebedecktes Feld bei Buffalo im US-Bundesstaat New York" type="jpg">
-            <bu>Ein schneebedecktes Feld bei Buffalo im US-Bundesstaat New York</bu>
-            <copyright>© Lindsay DeDario/Reuters</copyright>
-        </snapshot>
         <image src="http://xml.zeit.de/zeit-online/cp-content/ig-1/" type="jpg" title="Ein Seemann im Hafen von Hamburg " alt="Ein Seemann im Hafen von Hamburg " align="left" publication-date="" expires="">
             <bu py:pytype="str">Mauerfall</bu>
             <copyright py:pytype="str">© dpa</copyright>

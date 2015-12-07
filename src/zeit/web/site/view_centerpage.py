@@ -212,13 +212,6 @@ class Centerpage(
         return breadcrumbs
 
     @zeit.web.reify
-    def regions(self):
-        region_list = super(Centerpage, self).regions
-        if self.is_hp:
-            region_list.append(self.region_snapshot)
-        return region_list
-
-    @zeit.web.reify
     def last_semantic_change(self):
         """Timestamp representing the last semantic change of the centerpage.
         :rtype: datetime.datetime
@@ -246,20 +239,6 @@ class Centerpage(
         elif self.context.ressort:
             return self.context.ressort.lower()
         return ''
-
-    @zeit.web.reify
-    def region_snapshot(self):
-        """Return the centerpage snapshot region aka Momentaufnahme."""
-        # TODO: Reimplement snapshot as a proper vivi+friedbert module.
-        try:
-            snapshot = zeit.web.core.interfaces.ITeaserImage(
-                self.context.snapshot)
-            assert snapshot
-        except TypeError:
-            snapshot = None
-
-        module = LegacyModule([snapshot], layout='snapshot')
-        return LegacyRegion([LegacyArea([module])])
 
     @zeit.web.reify
     def area_ranking(self):
@@ -450,8 +429,6 @@ class LegacyCenterpage(Centerpage):
         regions.append(region_multi)
 
         regions += self.region_list_parquet
-
-        regions.append(self.region_snapshot)
 
         return regions
 
