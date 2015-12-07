@@ -119,6 +119,9 @@ class Base(zeit.web.core.view.Base):
         if self.is_hp:
             return 'Homepage'
 
+        if self.ressort == 'administratives':
+            return ''
+
         items = self.navigation.navigation_items
         try:
             item = next((items[key].text, key) for key in items.keys() if (
@@ -129,8 +132,8 @@ class Base(zeit.web.core.view.Base):
                             self.sub_ressort in key))
         except StopIteration:
             # dirty fallback (for old ressorts not in navigation.xml)
-            return self.sub_ressort.upper() if (
-                self.sub_ressort != '') else self.ressort.upper()
+            return self.sub_ressort.capitalize() if (
+                self.sub_ressort != '') else self.ressort.capitalize()
         return item[0]
 
 
