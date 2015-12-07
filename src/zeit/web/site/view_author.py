@@ -2,7 +2,9 @@ import pyramid.view
 
 import zeit.content.author.interfaces
 
-from zeit.web.site.view_centerpage import LegacyArea, LegacyRegion
+from zeit.web.site.view_centerpage import LegacyArea
+from zeit.web.site.view_centerpage import LegacyModule
+from zeit.web.site.view_centerpage import LegacyRegion
 import zeit.web.site.view
 
 
@@ -99,6 +101,10 @@ class Author(zeit.web.core.view.Base):
         return ''
 
     @zeit.web.reify
+    def comment_counts(self):
+        return {}
+
+    @zeit.web.reify
     def regions(self):
         regions = []
 
@@ -119,5 +125,10 @@ class Author(zeit.web.core.view.Base):
         comments = AuthorComments(self.context)
         regions.append(LegacyRegion([
                        LegacyArea([texts]), LegacyArea([comments])]))
+
+        # fourth region: pinned and automatic teasers
+        ranking = LegacyArea([LegacyModule([c], layout='zon-small') for c in
+                              self.context.favourite_content], kind='ranking')
+        regions.append(LegacyRegion([ranking]))
 
         return regions

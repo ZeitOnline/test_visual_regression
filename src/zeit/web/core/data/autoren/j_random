@@ -24,4 +24,9 @@
     <bu py:pytype="str">Der Lobbyist Peter Hochegger (Archivfoto von 2010)</bu>
     <copyright py:pytype="str">© Roland Schlager/dpa</copyright>
   </image_group>
+  <favourites>
+    <reference type="intern" href="http://xml.zeit.de/zeit-online/cp-content/article-01"></reference>
+    <reference type="intern" href="http://xml.zeit.de/zeit-online/gallery/weltall"></reference>
+    <reference type="intern" href="http://xml.zeit.de/zeit-online/cp-content/kolumne"></reference>
+  </favourites>
 </author>

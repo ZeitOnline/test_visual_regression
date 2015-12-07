@@ -12,6 +12,15 @@ def test_author_header_should_be_fully_rendered(testserver, testbrowser):
     assert len(name) == 1
     assert len(summary) == 1
     assert len(image) == 1
-
     assert 'J. Random Hacker' in name[0].text
     assert 'Random Hacker ist Redakteur' in summary[0].text
+
+
+def test_author_page_should_show_favourite_content_if_available(testbrowser):
+    browser = testbrowser('/autoren/j_random')
+    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 3
+
+
+def test_author_page_should_hide_favourite_content_if_missing(testbrowser):
+    browser = testbrowser('/autoren/anne_mustermann')
+    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 0
