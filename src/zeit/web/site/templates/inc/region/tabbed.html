@@ -1,0 +1,9 @@
+{% extends "zeit.web.site:templates/inc/region/default.html" %}
+
+{% block before_area_list %}
+<div> <!-- XXX This needs proper tab markup. -->
+  {% for tab in region.tabs %}
+  <h3><a class="{{'current' if tab.name == view.current_tab_name}}" href="{{view.content_url}}/{{tab.name}}">{{tab.title}}</a></h3>
+  {% endfor %}
+</div>
+{% endblock %}
