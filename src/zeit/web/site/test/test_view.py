@@ -96,9 +96,10 @@ def test_keyword_redirect_should_handle_unicode(testserver, testbrowser):
 
 def test_main_nav_should_render_labels(testserver, testbrowser):
     browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
-    dropdown_label = browser.cssselect('.primary-nav .dropdown__label')
-    assert len(dropdown_label) == 1
-    assert dropdown_label[0].text == 'Anzeige'
+    dropdown_label = browser.cssselect('.primary-nav *[data-label]')
+    assert len(dropdown_label) == 6  # three elements two times
+    assert dropdown_label[0].attrib['data-label'] == 'Anzeige'
+    assert dropdown_label[1].attrib['data-label'] == 'Anzeigen'
 
 
 def test_ressort_literally_returns_correct_ressort(application):
@@ -115,6 +116,10 @@ def test_ressort_literally_returns_correct_ressort(application):
         'http://xml.zeit.de/zeit-online/article/zeit')
     article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.ressort_literally == 'Gesellschaft'
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/administratives')
+    article_view = zeit.web.site.view_article.Article(context, request)
+    assert article_view.ressort_literally == ''
 
 
 def test_sharing_titles_equal_pagetitle(testbrowser):

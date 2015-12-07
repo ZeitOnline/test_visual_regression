@@ -1,6 +1,5 @@
 import pyramid.threadlocal
 
-import zeit.cms.content.property
 import zeit.content.cp.automatic
 
 
@@ -25,7 +24,7 @@ class Gallery(zeit.content.cp.automatic.AutomaticArea):
                 if more_content:
                     content[:] = more_content
             teaser = super(Gallery, self)._extract_newest(content, predicate)
-            if teaser.uniqueId == self.skip_until:
+            if teaser is None or teaser.uniqueId == self.skip_until:
                 self.skip_until = None
 
         teaser = super(Gallery, self)._extract_newest(content, predicate)

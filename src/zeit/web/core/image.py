@@ -220,7 +220,10 @@ class LocalImageGroup(zeit.content.image.imagegroup.ImageGroup,
 
     @zeit.web.reify
     def master_image(self):
-        image = LocalImage(self.image_url)
+        try:
+            image = LocalImage(self.image_url)
+        except TypeError:
+            return None
         image.src = self.image_url
         image.mimeType = 'image/jpeg'
         image.image_pattern = 'wide-large'
