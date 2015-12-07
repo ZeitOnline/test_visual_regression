@@ -1633,8 +1633,8 @@ def test_zett_banner_is_displayed(testbrowser):
     box = browser.cssselect('.zett-banner')[0]
     link = box.cssselect('a')[0]
     assert len(box.cssselect('.zett-banner__wrapper'))
-    assert ('http://ze.tt/?utm_source=zon&utm_medium=banner&utm_content=1'
-            '&utm_campaign=zonbanner') == link.get('href')
+    assert ('http://ze.tt/?utm_campaign=zonbanner&utm_content=1'
+            '&utm_medium=banner&utm_source=zon') == link.get('href')
 
 
 def test_zett_parquet_is_rendering(testbrowser):
@@ -1654,8 +1654,8 @@ def test_zett_parquet_is_rendering(testbrowser):
 
     # test campaign parameters
     for link in links:
-        assert ('?utm_source=zon&utm_medium=parkett&utm_campaign='
-                'zonparkett') in link.get('href')
+        assert ('?utm_campaign=zonparkett&utm_medium=parkett'
+                '&utm_source=zon') in link.get('href')
 
 
 def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):
@@ -1673,10 +1673,10 @@ def test_zett_parquet_should_link_to_zett(testbrowser):
     link_logo = browser.cssselect('.parquet-meta__title--zett')[0]
     link_more = browser.cssselect('.parquet-meta__more-link--zett')[0]
 
-    assert ('http://ze.tt/?utm_source=zon&utm_medium=parkett&utm_campaign='
-            'zonparkett') == link_logo.attrib['href']
-    assert ('http://ze.tt/?utm_source=zon&utm_medium=parkett&utm_campaign='
-            'zonparkett') == link_more.attrib['href']
+    assert ('http://ze.tt/?utm_campaign=zonparkett&utm_medium=parkett'
+            '&utm_source=zon') == link_logo.attrib['href']
+    assert ('http://ze.tt/?utm_campaign=zonparkett&utm_medium=parkett'
+            '&utm_source=zon') == link_more.attrib['href']
 
 
 def test_imagecopyright_tags_are_present_on_centerpages(testbrowser):
@@ -1849,12 +1849,12 @@ def test_zett_teaser_should_contain_campaign_parameter(testbrowser):
     assert len(zett_parquet_links)
 
     for link in links:
-        assert ('?utm_source=zon&utm_medium=teaser&utm_campaign='
-                'zonteaser') in link.get('href')
+        assert ('?utm_campaign=zonteaser&utm_medium=teaser'
+                '&utm_source=zon') in link.get('href')
 
     for link in zett_parquet_links:
-        assert ('?utm_source=zon&utm_medium=parkett&utm_campaign='
-                'zonparkett') in link.get('href')
+        assert ('?utm_campaign=zonparkett&utm_medium=parkett'
+                '&utm_source=zon') in link.get('href')
 
 
 def test_printkiosk_is_structured_correctly(testbrowser):

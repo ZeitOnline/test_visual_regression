@@ -1,4 +1,5 @@
 # coding: utf8
+import collections
 import datetime
 import itertools
 import logging
@@ -161,19 +162,22 @@ def append_campaign_params(context, url):
             kind = None
 
         if kind == 'zett':
-            campaign_params = {'utm_source':'zon',
+            campaign_params = {
+                'utm_campaign':'zonparkett',
                 'utm_medium':'parkett',
-                'utm_campaign':'zonparkett'}
+                'utm_source':'zon'}
         else:
-            campaign_params = {'utm_source':'zon',
+            campaign_params = {
+                'utm_campaign':'zonteaser'
                 'utm_medium':'teaser',
-                'utm_campaign':'zonteaser'}
+                'utm_source':'zon'}
 
         scheme, netloc, path, query, fragment = urlparse.urlsplit(url)
         query_params = urlparse.parse_qs(query)
         query_params.update(campaign_params)
-        return '{}://{}{}?{}'.format(
-            scheme, netloc, path, urllib.urlencode(query_params, doseq=True))
+        # sort query params alphabetical by key for SEO
+        return '{}://{}{}?{}'.format(scheme, netloc, path, urllib.urlencode(
+            collections.OrderedDict(sorted(query_params.items())), doseq=True))
     else:
         return url
 
