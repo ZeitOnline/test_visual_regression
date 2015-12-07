@@ -366,82 +366,47 @@ def test_small_teaser_should_have_responsive_layout(
         assert width == 250
 
 
-def test_snapshot_hidden_on_initial_load(
-        selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/index' % testserver.url)
-    snapshot = driver.find_element_by_id('snapshot')
-    assert not snapshot.is_displayed(), 'Snapshot not hidden onload'
-
-
-def test_snapshot_displayed_after_scroll(
-        selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/index' % testserver.url)
-    driver.execute_script("window.scrollTo(0, \
-        document.getElementById('snapshot').parentNode.offsetTop)")
-    try:
-        wait = WebDriverWait(driver, 10)
-        wait.until(expected_conditions.visibility_of_element_located(
-                   (By.ID, 'snapshot')))
-    except TimeoutException:
-        assert False, 'Snapshot not visible after scrolled into view'
-
-
-def test_snapshot_displayed_after_direct_load_with_anchor(
-        selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/index#snapshot' % testserver.url)
-    try:
-        wait = WebDriverWait(driver, 10)
-        wait.until(expected_conditions.visibility_of_element_located(
-                   (By.ID, 'snapshot')))
-    except TimeoutException:
-        assert False, 'Snapshot not visible for link with fragment identifier'
-
-
 def test_snapshot_morelink_text_icon_switch(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/index' % testserver.url)
+    driver.get('%s/zeit-online/teaser-gallery-setup' % testserver.url)
     linkdisplay = driver.execute_script(
-        "return $('#snapshot .section-heading__text').eq(0).css('display')")
+        "return $('.snapshot .section-heading__text').eq(0).css('display')")
     if screen_size[0] == 320:
         assert linkdisplay == u'none', 'Linktext not hidden on mobile'
     else:
         assert linkdisplay == u'inline', 'Linktext hidden on other than mobile'
 
 
-def test_snapshot_should_display_copyright_with_nonbreaking_space(
-        testserver, testbrowser):
-
-    browser = testbrowser('/zeit-online/index')
-
-    copyright = browser.cssselect('.snapshot-caption__item')
-
-    assert u'\xa9\xa0' in copyright[0].text, (
-        'Copyright text hast no copyright sign with non breaking space')
+def test_snapshot_should_show_first_gallery_image(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    image = browser.cssselect('.snapshot__media-item')[0]
+    assert image.attrib['src'].endswith('462507429-540x304.jpg')
 
 
-def test_snapshot_should_not_be_displayed_where_no_snapshot_is_present(
-        testserver, testbrowser):
+def test_snapshot_should_display_correct_teaser_title(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    title = browser.cssselect('.snapshot .section-heading__title')[0]
+    assert title.text.strip() == 'Momentaufnahme'
 
-    browser = testbrowser('/zeit-online/main-teaser-setup')
 
-    assert not browser.cssselect('#snapshot'), (
-        'There is an snaphot on a page which should not have one')
+def test_snapshot_should_display_correct_image_caption(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    caption = browser.cssselect('.snapshot-caption')[0]
+    assert caption.text.strip() == 'Eisschwimmen im chinesischen Shenyang'
+
+
+def test_snapshot_should_display_copyright_with_nonbreaking_space(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    copyright = browser.cssselect('.snapshot-caption__item')[0]
+    assert copyright.text.strip() == u'\xa9\xa0Xinhua/Zhang Wenkui/Reuters'
 
 
 def test_snapshot_should_have_description_text(testserver, testbrowser):
-
-    browser = testbrowser('/zeit-online/index')
-    description = browser.cssselect('.snapshot-caption')
-    text = u'Die Installation "Cantareira-Wüste" des brasilianischen Künstlers'
-    assert text in description[0].text
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    caption = browser.cssselect('.snapshot-caption')[0]
+    assert caption.text.strip() == u'Eisschwimmen im chinesischen Shenyang'
 
 
 def test_small_teaser_without_image_has_no_padding_left(
@@ -1061,7 +1026,6 @@ def test_gallery_teaser_hides_elements_on_mobile(selenium_driver, testserver):
         'Gallery description text must be displayed on desktop.')
 
 
-# @pytest.mark.xfail(reason='Fortune favours the fail')
 def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('{}/zeit-online/teaser-gallery-setup'.format(testserver.url))
@@ -1071,16 +1035,16 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
 
     condition = expected_conditions.text_to_be_present_in_element((
         By.CSS_SELECTOR, '.teaser-gallery__title'),
-        'Automesse Detroit 2014 US-Hersteller')
+        'Immer nur das Meer sehen')
     assert WebDriverWait(driver, 5).until(condition), (
         'New teasers not loaded within 5 seconds')
 
     new_teaser_links = driver.find_elements_by_css_selector(
         '.teaser-gallery__combined-link')
     assert new_teaser_links[0].get_attribute('href').endswith(
-        '/galerien/bg-automesse-detroit-2014-usa')
-    assert new_teaser_links[1].get_attribute('href').endswith(
         '/zeit-online/gallery/england-meer-strand-menschen-fs')
+    assert new_teaser_links[1].get_attribute('href').endswith(
+        '/zeit-online/gallery/google-neuronale-netzwerke-fs')
     assert teaserbutton.get_attribute('data-sourceurl').endswith(
         'teaser-gallery-setup/area/id-5fe59e73-e388-42a4-a8d4-750b0bf96812?p=')
 
@@ -1784,6 +1748,30 @@ def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
     assert len(teaser_kicker_zmo_parquet) == 0
 
 
+def test_zmo_teaser_kicker_should_have_zmo_modifier(testbrowser):
+    browser = testbrowser('/zeit-online/journalistic-formats-zmo')
+
+    teaser_fullwidth_kicker = browser.cssselect(
+        '.teaser-fullwidth__kicker--zmo')
+    teaser_classic_kicker = browser.cssselect(
+        '.teaser-classic__kicker--zmo')
+    teaser_large_kicker = browser.cssselect(
+        '.teaser-large__kicker--zmo')
+    teaser_small_kicker = browser.cssselect(
+        '.teaser-small__kicker--zmo')
+    teaser_small_minor_kicker = browser.cssselect(
+        '.teaser-small-minor__kicker--zmo')
+    teaser_parquet_kicker = browser.cssselect(
+        '.teaser-small__kicker--zmo-parquet.teaser-small__kicker--zmo')
+
+    assert len(teaser_fullwidth_kicker) == 1
+    assert len(teaser_classic_kicker) == 1
+    assert len(teaser_large_kicker) == 2
+    assert len(teaser_small_kicker) == 4
+    assert len(teaser_small_minor_kicker) == 2
+    assert len(teaser_parquet_kicker) == 0
+
+
 def test_longform_should_not_contain_logo_in_kicker(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats-zmo')
 
@@ -1814,6 +1802,30 @@ def test_zett_teaser_kicker_should_contain_logo(testbrowser):
     assert len(teaser_small_logo) == 1
     assert len(teaser_small_minor_logo) == 1
     assert len(teaser_square_logo) == 1
+
+
+def test_zett_teaser_kicker_should_have_zett_modifier(testbrowser, testserver):
+    browser = testbrowser('/zeit-online/journalistic-formats-zett')
+
+    teaser_fullwidth_kicker = browser.cssselect(
+        '.teaser-fullwidth__kicker--zett')
+    teaser_classic_kicker = browser.cssselect(
+        '.teaser-classic__kicker--zett')
+    teaser_large_kicker = browser.cssselect(
+        '.teaser-large__kicker--zett')
+    teaser_small_kicker = browser.cssselect(
+        '.teaser-small__kicker--zett')
+    teaser_small_minor_kicker = browser.cssselect(
+        '.teaser-small-minor__kicker--zett')
+    teaser_square_kicker = browser.cssselect(
+        '.teaser-square__kicker--zett')
+
+    assert len(teaser_fullwidth_kicker) == 1
+    assert len(teaser_classic_kicker) == 1
+    assert len(teaser_large_kicker) == 2
+    assert len(teaser_small_kicker) == 4
+    assert len(teaser_small_minor_kicker) == 2
+    assert len(teaser_square_kicker) == 2
 
 
 def test_printkiosk_is_structured_correctly(testbrowser):

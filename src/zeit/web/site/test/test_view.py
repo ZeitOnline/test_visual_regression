@@ -116,6 +116,10 @@ def test_ressort_literally_returns_correct_ressort(application):
         'http://xml.zeit.de/zeit-online/article/zeit')
     article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.ressort_literally == 'Gesellschaft'
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/administratives')
+    article_view = zeit.web.site.view_article.Article(context, request)
+    assert article_view.ressort_literally == ''
 
 
 def test_sharing_titles_equal_pagetitle(testbrowser):
