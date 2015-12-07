@@ -36,11 +36,10 @@
         <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
         <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
         <attribute name="refined" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
-        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">zeit-magazin</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Digital</attribute>
         <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
         <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
-        <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">leben</attribute>
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">gallery</attribute>
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.gallery">standalone</attribute>
         <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
