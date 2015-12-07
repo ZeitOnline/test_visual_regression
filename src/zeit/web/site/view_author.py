@@ -13,6 +13,11 @@ class AuthorHeader(zeit.web.site.module.Module):
         super(AuthorHeader, self).__init__(context)
         self.layout = 'author_header'
 
+    @zeit.web.reify
+    def author_img(self):
+        return zeit.web.core.template.closest_substitute_image(
+            self.context.image_group, 'zon-column')
+
 
 @zeit.web.register_module('author_topics')
 class AuthorTopics(zeit.web.site.module.Module):
