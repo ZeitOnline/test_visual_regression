@@ -137,6 +137,31 @@ class Author(zeit.web.core.view.Base):
         return LegacyArea([])  # XXX not yet implemented
 
 
+class UserCommentsArea(LegacyArea):
+
+    def __init__(self, arg, **kw):
+        super(self.__class__, self).__init__(arg, **kw)
+        self.comments = kw['comments']
+
+    @zeit.web.reify
+    def page(self):
+        return self.comments['page']
+
+    @zeit.web.reify
+    def current_page(self):
+        return self.page
+
+    @zeit.web.reify
+    def total_pages(self):
+        return self.comments['page_total']
+
+    @zeit.web.reify
+    def pagination(self):
+        pagination = zeit.web.core.template.calculate_pagination(
+            self.current_page, self.total_pages)
+        return pagination if pagination is not None else []
+
+
 @pyramid.view.view_config(
     renderer='templates/author.html',
     context=zeit.content.author.interfaces.IAuthor,
@@ -147,9 +172,14 @@ class Comments(Author):
 
     @zeit.web.reify
     def area_for_tab(self):
-        page = getattr(self.request.GET, 'p', 1)
-        comments = zeit.web.core.comments.get_user_comments(
-            self.context, page=page)
-        return LegacyArea(
-            [LegacyModule([c], layout='user-comment') for c in comments],
-            kind='ranking')
+        page = int(self.request.GET.get('p', '1'))
+
+        try:
+            comments_meta = zeit.web.core.comments.get_user_comments(
+                self.context, page=page, rows=10)
+            comments = comments_meta['comments']
+            return UserCommentsArea(
+                [LegacyModule([c], layout='user-comment') for c in comments],
+                kind='user-comments', comments=comments_meta)
+        except zeit.web.core.comments.PagesExhaustedError:
+            raise pyramid.httpexceptions.HTTPNotFound()
