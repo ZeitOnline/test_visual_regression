@@ -142,4 +142,9 @@ class Comments(Author):
 
     @zeit.web.reify
     def area_for_tab(self):
-        return LegacyArea([])  # XXX not yet implemented
+        page = getattr(self.request.GET, 'p', 1)
+        comments = zeit.web.core.comments.get_user_comments(
+            self.context, page=page)
+        return LegacyArea(
+            [LegacyModule([c], layout='user-comment') for c in comments],
+            kind='ranking')
