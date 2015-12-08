@@ -1,0 +1,76 @@
+{% import 'zeit.web.core:templates/macros/instantarticle_macro.tpl' as blocks %}
+<!doctype html>
+<html lang="de" prefix="op: http://media.facebook.com/op#">
+
+<head>
+    <meta charset="utf-8">
+    <meta property="op:markup_version" content="v1.0">
+
+    <!-- The URL of the web version of your article -->
+    <link rel="canonical" href="{{ view.content_url }}">
+
+    <!-- The style to be used for this article -->
+    <meta property="fb:article_style" content="default">
+</head>
+
+<body>
+    <article>
+        <header>
+            <!-- A kicker for your article -->
+            <h3 class="op-kicker">{{ view.supertitle }}</h3>
+
+            <!-- The title and subtitle  -->
+            <h1>{{ view.title }}</h1>
+            <h2>{{ view.subtitle}}</h2>
+
+            <!-- The date and time when your article was originally published -->
+            <time class="op-published" dateTime="{{ view.date_first_released | format_date('iso8601') }}">
+                {{ view.date_first_released | format_date(view.show_date_format) }}
+            </time>
+
+            <!-- The date and time when your article was last updated -->
+            <time class="op-modified" dateTime="{{ view.date_last_modified | format_date('iso8601') }}">
+                {{ view.date_last_modified | format_date(view.show_date_format) }}
+            </time>
+
+            <!-- The authors of your article -->
+            {% for author in view.authors -%}
+                <address>
+                    <a href="{{ author.href | create_url }}">
+                        {{ author['name'] }}
+                    </a>
+                </address>
+            {% endfor -%}
+
+            <!-- The cover image shown inside your article -->
+            <!-- FB documentation is ambigious:
+                  - image shall be 2048x2048 pixels
+                  - image will be cropped to 4:3
+             -->
+            {% set image = get_variant(view.sharing_image, 'square') if view.sharing_image else None %}
+            {% if image -%}
+                <figure>
+                    <img src="{{ request.image_host + image.path + '__2048x2048' }}" />
+                    <figcaption>{{ image.caption }}</figcaption>
+                </figure>
+            {% endif %}
+        </header>
+
+        <!-- Article body goes here -->
+        {% for page in view.pages %}
+            {%- for item in page -%}
+                {% set type = item | block_type %}
+                {%- if type not in ['place', 'contentadblock', 'cardstack', 'liveblog', 'inlinegallery'] -%}
+                    {{ (blocks[type] or blocks["no_block"])(item) }}
+                {%- endif -%}
+            {%- endfor -%}
+        {% endfor %}
+
+        <!--
+            <footer>
+                <small>Copyright details for your article – Legal notes</small>
+            </footer>
+        -->
+    </article>
+</body>
+</html>
