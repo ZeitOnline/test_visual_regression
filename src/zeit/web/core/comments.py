@@ -155,7 +155,7 @@ def request_thread(path):
     """
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    timeout = float(conf.get('community_host_timeout_secs', 5))
+    timeout = float(conf.get('community_host_timeout_secs', 0.5))
     uri = '{}/agatho/thread{}'.format(
         conf.get('agatho_host', ''), path.encode('utf-8'))
     try:
@@ -475,3 +475,138 @@ def get_counts(*unique_ids):
                 n.attrib['comment_count'] for n in nodes}
     except (AttributeError, IndexError, KeyError, lxml.etree.LxmlError):
         return {}
+
+
+class PagesExhaustedError(Exception):
+    pass
+
+
+def get_user_comments(author, page=1, rows=6, sort="DESC"):
+    """Return a dictionary containing comments for an IAuthor,
+
+    :param author: An objects which implements zeit.content.author.IAuthor
+    :param page: A number which represents the page being retrieved
+    :param rows: Number of items being displayed per page
+    :param sort: String describing sort order.
+                 DESC is descending. ASC is ascending
+    :rtype: dict
+    """
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+
+    if not getattr(author, 'email'):
+        return
+    uri = '{}/usercommentsxml/{}/{}/{}/{}'.format(
+        conf.get('agatho_host', ''), author.email, (page-1), rows, sort)
+
+    timeout = float(conf.get('community_host_timeout_secs', 5))
+
+    with zeit.web.core.metrics.timer('user_comments.community.response_time'):
+        result = requests.get(uri, timeout=timeout)
+
+    xml = lxml.etree.fromstring(result.content)
+
+    uid = None
+    try:
+        uid = int(xml.xpath('/users_comments/uid')[0].text)
+    except TypeError:
+        pass
+
+    published_total = None
+    try:
+        published_total = int(xml.xpath(
+            '/users_comments/published_total')[0].text)
+    except TypeError:
+        pass
+
+    comments = {
+        'comments': [],
+        'uid': uid,
+        'published_total': published_total,
+        'page': page,
+        'rows': rows,
+        'sort': sort
+    }
+
+    if rows > 0:
+        add = 0 if comments['published_total'] % rows == 0 else 1
+        comments['page_total'] = (comments['published_total'] / rows)+add
+    else:
+        comments['page_total'] = 0
+
+    if page > comments['page_total']:
+        raise PagesExhaustedError()
+
+    for comment in xml.xpath('/users_comments//item'):
+        comments['comments'].append(UserComment(comment))
+
+    return comments
+
+
+class NoValidComment(Exception):
+    pass
+
+
+# XXX Right now we need this for comments, which are displayed on author
+# pages. We should think about redesigning this and use one comment object
+# throughout the whole comment API (RD, 2015-12-07)
+class UserComment(object):
+    zope.interface.implements(zeit.cms.interfaces.ICMSContent)
+
+    def __init__(self, comment):
+        self._comment = comment
+        try:
+            int(self._comment.xpath('cid')[0].text)
+        except (TypeError, ValueError, IndexError):
+            raise NoValidComment('Comment ID (cid) must be given.')
+
+    def _node_value(self, name, cast=lambda x: x):
+        match = self._comment.xpath(name)
+        if not match:
+            return None
+        return cast(match[0].text)
+
+    @property
+    def __name__(self):
+        return self.cid
+
+    @zeit.web.reify
+    def uniqueId(self):
+        return 'http://community.zeit.de/comment/{}'.format(self.cid)
+
+    @zeit.web.reify
+    def cid(self):
+        return self._node_value('cid', int)
+
+    @zeit.web.reify
+    def uid(self):
+        try:
+            return self._node_value('uid', int)
+        except TypeError:
+            return
+
+    @zeit.web.reify
+    def title(self):
+        return self._node_value('title')
+
+    @zeit.web.reify
+    def description(self):
+        return self._node_value('description')
+
+    @zeit.web.reify
+    def publication_date(self):
+        return self._node_value('pubDate')
+
+    @zeit.web.reify
+    def referenced_content(self):
+        drupal_id = self._node_value('cms_uniqueId')
+
+        # XXX Temporary fix, because drupal does not produce
+        # right uniqueIds yet. I suppose TB will repair this, within this
+        # iteration.
+        if drupal_id is not None:
+            uniqueId = drupal_id.replace('www.zeit.de', 'xml.zeit.de')
+            try:
+                return zeit.cms.interfaces.ICMSContent(uniqueId)
+            except TypeError:
+                return

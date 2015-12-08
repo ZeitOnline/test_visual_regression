@@ -17,6 +17,8 @@ Change log for zeit.web
   * Images with empty copyright
   * Videos without still image
 
+- ZON-2474: Make comments per user available in zeit.web
+
 
 2.34 (2015-12-04)
 -----------------
