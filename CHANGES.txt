@@ -4,6 +4,8 @@ Change log for zeit.web
 2.35 (unreleased)
 -----------------
 
+- DEV-968: Distribute new Webtrekk script
+
 - ZON-2446: Implement HTML for Instant Articles
 
 - ZON-2478: Implement RSS feed for Instant Articles
