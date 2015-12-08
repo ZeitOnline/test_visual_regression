@@ -1,4 +1,6 @@
 $zon-print-grey: #707070
+$print-media-width: 100mm
+$print-media-margin: 14pt 0
 
 @media print
 
@@ -28,12 +30,11 @@ $zon-print-grey: #707070
         &:after
             border-bottom: 1px solid white // To visibly hide grey border of <a>
             content: " [" attr(href) "]"
-            font-family: "TabletGothic" sans-serif // this doesnt work: $font-tabletgothic
+            font-family: $font-tabletgothic
             font-size: 9.5pt
             word-wrap: break-word
 
-    a[href^="#"]:after,
-    a[href^="javascript"]:after
+    a[href^="#"]:after
         content: ""
 
     #adunit,
@@ -50,7 +51,7 @@ $zon-print-grey: #707070
     .veeseoWidget,
     .video-figure__caption,
     .video-player,
-    div[class="main_nav__"] // Hide all nav elements but keep ZON logo
+    div[class="main_nav__"] // Hide all nav elements but keep ZON logo visible
         display: none
 
     #main
@@ -61,18 +62,23 @@ $zon-print-grey: #707070
         box-shadow: none
 
     .logo_bar
-        padding: 0
         border-bottom: 1pt solid $zon-print-grey
+        padding: 0
         a:after
             content: ""
         &__brand-logo
             padding: 0
 
     .article-heading
+        margin: 6mm 0 0
+
         &__kicker
             color: $zon-print-grey
             font-size: 7pt
             line-height: 9pt
+            margin-bottom: 1pt
+            padding: 0
+
         &__title
             font-size: 18pt
             line-height: 21pt
@@ -90,15 +96,15 @@ $zon-print-grey: #707070
     .metadata
         font-size: 7pt
         line-height: 9pt
+        margin-bottom: 14pt
 
     .article
         &__media
-            width: 100mm
-            margin: 14pt 0
+            width: $print-media-width
+            margin: $print-media-margin
 
         &__item
             &--marginalia
-                // ATTENTION: this is duplicated code
                 float: left
                 margin: remify(14px 25px 14px 0)
                 width: remify(205px)
@@ -123,6 +129,9 @@ $zon-print-grey: #707070
 
     .portraitbox
         page-break-inside: avoid
+        width: 40mm
+        margin: 0 20pt 14pt 0
+
         &__heading,
         &__body
             font-size: 7pt
@@ -132,3 +141,31 @@ $zon-print-grey: #707070
         a:after
             color: $zon-print-grey
             font-size: 7pt
+
+    .infobox
+        background-color: transparent
+        border: 1pt solid $zon-print-grey
+        margin: $print-media-margin
+        padding: 0
+        page-break-inside: avoid
+        width: $print-media-width
+
+    .infobox-tab
+        border-bottom: 1pt solid $zon-print-grey
+        padding: 9pt
+
+        &__link,
+        &__title,
+        &__content p
+            font-size: 7pt
+            line-height: 11pt
+            margin-bottom: 6pt
+
+        &__title
+            padding: 0
+
+        &__link
+            font-weight: bold
+
+        &__content[aria-hidden='true']
+            max-height: none // always show all infobox content (ignore script)
