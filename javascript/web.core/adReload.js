@@ -125,8 +125,7 @@ define( [ 'jquery' ], function( $ ) {
      * @return {void}
      */
     message = function( event ) {
-        var messageData, message;
-        log( 'message: ', event );
+        var messageData;
 
         if ( typeof event.originalEvent.data  !== 'string' ) {
             return;
