@@ -97,3 +97,14 @@ def test_content_should_be_rendered_with_render_with_header(application):
     view_wrapper = render_with_view(views)
     assert view_wrapper is not None, (
         'We do not have a render-with view')
+
+
+def test_instantarticle_view_should_match(application):
+    pviews = pyramid.scripts.pviews.PViewsCommand([])
+    registry = application.zeit_app.config.registry
+
+    request = pyramid.request.Request.blank(
+        '/instantarticle/zeit-online/article/simple')
+    request.registry = registry
+
+    assert pviews._find_view(request).func_name == 'InstantArticle'

@@ -1,6 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
+    <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00">
+      <bu>Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil "Die Schlacht der fünf Heere"</bu>
+      <copyright>© Warner Bros.</copyright>
+    </image>
     <rankedTags>
       <tag url_value="cadillac" uuid="75891846-404c-4b7b-aad6-e9920bc35d23" score="4" type="Organization">Cadillac</tag>
       <tag url_value="musical" uuid="7aa123ca-ce5e-4677-ab78-63d6b2b7be9c" score="4" type="free">Musical</tag>

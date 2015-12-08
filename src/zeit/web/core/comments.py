@@ -581,7 +581,7 @@ class UserComment(object):
     @zeit.web.reify
     def uid(self):
         try:
-           return self._node_value('uid', int)
+            return self._node_value('uid', int)
         except TypeError:
             return
 
