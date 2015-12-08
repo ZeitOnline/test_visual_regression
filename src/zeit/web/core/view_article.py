@@ -3,6 +3,7 @@ import itertools
 import logging
 import re
 
+from pyramid.view import view_config
 import pyramid.httpexceptions
 import zope.component
 
@@ -250,6 +251,13 @@ class Article(zeit.web.core.view.Content):
                     )
                 )
         return sorted(cr_list, key=lambda k: k['label'])
+
+
+@view_config(context=zeit.content.article.interfaces.IArticle,
+             route_name='instantarticle',
+             renderer='templates/instantarticle.html')
+class InstantArticle(Article):
+    pass
 
 
 class ArticlePage(Article):
