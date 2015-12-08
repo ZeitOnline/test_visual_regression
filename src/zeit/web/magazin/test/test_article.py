@@ -91,7 +91,7 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
             'script for RSA not in DOM')
     assert locate_by_selector(
         '//script[@src=\'http://scripts.zeit.de/static/js/'
-        'webtrekk/webtrekk_v3.js\']'), (
+        'webtrekk/webtrekk_v4.0.5.js\']'), (
             'script for Webtrekk not in DOM')
     assert locate_by_selector(
         '//script[@src=\'https://script.ioam.de/iam.js\']'), (
