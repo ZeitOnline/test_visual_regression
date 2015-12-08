@@ -467,3 +467,13 @@
 		display: none;
 	}
 }
+
+// scales images as used in columns
+@mixin scale-media-in-column-style() {
+	width: 100%;
+	height: 0;
+	margin: 0;
+	padding-bottom: 100%;
+	position: relative;
+	overflow: hidden;
+}

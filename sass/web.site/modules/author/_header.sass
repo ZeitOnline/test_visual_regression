@@ -2,10 +2,79 @@
     margin-left: -$page-padding
     margin-right: -$page-padding
     padding-bottom: remify(40px)
-    background-color: $zon-lighter-grey
+
+    &__upper
+        background-color: $cararra
+
+    &__inner
+        padding-top: remify(10px)
+        +respond-min($break-tablet-min)
+            position: relative
+            max-width: remify(620px)
+            margin: 0 auto 0 auto
+            +display-flex()
+
+    &__image
+        max-width: remify(150px)
+        max-height: remify(160px)
+        margin: auto
+        +respond-min($break-tablet-min)
+            +order(20)
+            max-width: none
+            max-height: none
+            width: remify(200px)
+            height: remify(200px)
+            margin: 0 0 0 auto
+
+    &__media
+        +scale-media-in-column-style()
+
+.author-header-info
+    text-align: center
+    color: $zon-dark-grey
+    border-bottom: 1px solid $zon-light-grey
+    background-color: $white
+    +respond-min($break-tablet-min)
+        +order(10)
+        border-bottom: none
+        text-align: left
+        background-color: transparent
+        max-width: 60%
+        height: remify(200px)
+        overflow: hidden
 
     &__inner
         +respond-min($break-tablet-min)
-            max-width: remify(620px)
-            margin-left: auto
-            margin-right: auto
+            position: relative
+            top: 50%
+            transform: translateY(-50%)
+
+    &__name
+        font-family: $font-tabletgothic
+        font-size: remify(24px)
+        line-height: remify(27px)
+        padding-top: remify(25px)
+        margin-top: 0
+        max-width: 90%
+        +respond-min($break-tablet-min)
+            padding-top: 0
+            max-width: none
+            font-size: remify(30px)
+            line-height: remify(34px)
+            max-height: remify(34px) * 2 // allow 2 lines
+            overflow: hidden
+
+    &__summary
+        font-family: $font-franziska
+        font-size: remify(16px)
+        font-style: italic
+        line-height: remify(20px)
+        padding-bottom: remify(20px)
+        max-width: 80%
+        margin: auto
+        +respond-min($break-tablet-min)
+            max-width: none
+            font-size: remify(20px)
+            line-height: remify(30px)
+            max-height: remify(30px) * 3 // allow 3 lines
+            overflow: hidden

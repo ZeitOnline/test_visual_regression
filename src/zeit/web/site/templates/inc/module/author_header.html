@@ -1,14 +1,20 @@
 <div class="author-header">
-    <div class="author-header__inner">
-        <div class="author-header__information">
-            <h1 class="author-header__name">
-                {{ context.display_name }}
-            </h1>
-            <div class="author-header__position">
-                {{ context.summary }}
-            </div>
+    <div class="author-header__upper">
+        <div class="author-header__inner">
             <div class="author-header__image">
-                <!-- context.image_group : passendes Template für image group nutzen -->
+                {% set image = module.author_img %}
+                {% set module_layout = 'author-header' %}
+                {% include "zeit.web.site:templates/inc/asset/image.tpl" %}
+            </div>
+            <div class="author-header-info">
+                <div class="author-header-info__inner">
+                    <h1 class="author-header-info__name">
+                        {{ context.display_name }}
+                    </h1>
+                    <div class="author-header-info__summary">
+                        {{ context.summary }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

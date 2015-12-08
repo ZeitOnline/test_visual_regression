@@ -136,7 +136,7 @@ def test_rss_feed_of_cp_has_requested_format(testserver):
     assert ('wt_zmc=koop.ext.zonaudev.spektrumde.feed.'
             'article-image-asset.bildtext.link.x' in feed)
     assert re.search(
-        '<enclosure .* url="http://newsfeed.zeit.de/centerpage/katzencontent/',
+        '<enclosure.*url="http://newsfeed.zeit.de/centerpage/katzencontent/',
         feed)
 
 
