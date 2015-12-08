@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.35 (unreleased)
+2.35 (2015-12-08)
 -----------------
 
 - DEV-968: Distribute new Webtrekk script
