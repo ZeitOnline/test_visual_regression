@@ -104,14 +104,14 @@ $print-media-margin: 14pt 0
 
     .article
         &__media
-            width: $print-media-width
+            max-width: $print-media-width
             margin: $print-media-margin
 
         &__item
             &--marginalia
                 float: left
                 page-break-inside: avoid
-                width: 40mm
+                max-width: 40mm
                 margin: 0 20pt 14pt 0
                 a
                     font-size: 7pt
@@ -154,7 +154,7 @@ $print-media-margin: 14pt 0
         margin: $print-media-margin
         padding: 0
         page-break-inside: avoid
-        width: $print-media-width
+        max-width: $print-media-width
 
     .infobox-tab
         border-bottom: 1pt solid $zon-print-grey
