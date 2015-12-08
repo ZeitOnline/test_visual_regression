@@ -31,15 +31,18 @@ $print-media-margin: 14pt 0
             border-bottom: 1px solid white // To visibly hide grey border of <a>
             content: " [" attr(href) "]"
             font-family: $font-tabletgothic
-            font-size: 9.5pt
+            font-size: inherit
             word-wrap: break-word
 
     a[href^="#"]:after
         content: ""
 
+    #ads,
     #adunit,
     #comments,
     #nextread,
+    .ad,
+    .ads,
     .article-footer,
     .article-lineage,
     .article-pagination,
@@ -51,8 +54,9 @@ $print-media-margin: 14pt 0
     .veeseoWidget,
     .video-figure__caption,
     .video-player,
+    iframe[id^="google_ads"],
     div[class="main_nav__"] // Hide all nav elements but keep ZON logo visible
-        display: none
+        display: none !important
 
     #main
         padding: 0
@@ -106,8 +110,11 @@ $print-media-margin: 14pt 0
         &__item
             &--marginalia
                 float: left
-                margin: remify(14px 25px 14px 0)
-                width: remify(205px)
+                page-break-inside: avoid
+                width: 40mm
+                margin: 0 20pt 14pt 0
+                a
+                    font-size: 7pt
 
     .figure
         &__caption
@@ -120,6 +127,8 @@ $print-media-margin: 14pt 0
         line-height: 14pt
         margin-bottom: 7pt
         margin-top: 14pt
+        page-break-inside: avoid
+        page-break-after: avoid
 
     .paragraph,
     .raw
@@ -128,9 +137,6 @@ $print-media-margin: 14pt 0
         margin-bottom: 7pt
 
     .portraitbox
-        page-break-inside: avoid
-        width: 40mm
-        margin: 0 20pt 14pt 0
 
         &__heading,
         &__body
