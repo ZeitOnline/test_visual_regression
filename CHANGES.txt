@@ -4,7 +4,7 @@ Change log for zeit.web
 2.36 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2506: Add campaign parameters to ze.tt links
 
 
 2.35 (2015-12-08)
