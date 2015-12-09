@@ -28,12 +28,12 @@ class AuthorTopics(zeit.web.site.module.Module):
         self.layout = 'author_topics'
 
 
-@zeit.web.register_module('author_bio')
+@zeit.web.register_module('author_biography')
 class AuthorBio(zeit.web.site.module.Module):
 
     def __init__(self, context):
         super(AuthorBio, self).__init__(context)
-        self.layout = 'author_bio'
+        self.layout = 'author_biography'
 
 
 @zeit.web.register_module('author_contact')
