@@ -74,7 +74,10 @@ class IRanking(zeit.content.cp.interfaces.IArea):
 class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     zope.interface.implements(
-        IRanking, zeit.content.cp.interfaces.IRenderedArea)
+        IRanking,
+        zeit.content.cp.interfaces.IRenderedArea,
+        zeit.web.core.interfaces.IPagination
+    )
 
     sort_order = zeit.cms.content.property.ObjectPathProperty(
         '.sort_order', IRanking['sort_order'])
