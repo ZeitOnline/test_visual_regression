@@ -1,7 +1,7 @@
 import pyramid.view
 
 import zeit.content.author.interfaces
-import zope.interfaces
+import zope.interface
 
 from zeit.web.site.view_centerpage import LegacyArea
 from zeit.web.site.view_centerpage import LegacyModule
@@ -140,7 +140,7 @@ class Author(zeit.web.core.view.Base):
 
 class UserCommentsArea(LegacyArea):
 
-    zope.interface.implements(zeit.web.site.IPagination)
+    zope.interface.implements(zeit.web.core.interfaces.IPagination)
 
     def __init__(self, arg, **kw):
         super(self.__class__, self).__init__(arg, **kw)

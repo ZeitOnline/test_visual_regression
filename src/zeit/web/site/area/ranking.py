@@ -15,6 +15,7 @@ import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core.block
+import zeit.web.core.interfaces
 import zeit.web.core.date
 import zeit.web.core.metrics
 import zeit.web.core.template
