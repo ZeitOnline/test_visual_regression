@@ -133,27 +133,35 @@ class Author(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def area_articles(self):
-        cp = zeit.content.cp.centerpage.CenterPage()
-        cp.uniqueId = 'http://xml.zeit.de'
-        area = cp.body.create_item('region').create_item('area')
-        area.kind = 'author-articles'
-        area.automatic_type = 'query'
-        area.raw_query = u'author:"{}" AND (type:article)'.format(
-            self.context.display_name)
-        area.raw_order = 'date-first-released desc'
+        return create_author_article_area(self.context)
+
+
+def create_author_article_area(
+        context, count=None, dedupe_favourite_content=True):
+    cp = zeit.content.cp.centerpage.CenterPage()
+    cp.uniqueId = context.uniqueId + u'/articles'
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = 'author-articles'
+    area.automatic_type = 'query'
+    area.raw_query = u'author:"{}" AND (type:article)'.format(
+        context.display_name)
+    area.raw_order = 'date-first-released desc'
+    if count is not None:
+        area.count = count
+    else:
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         area.count = int(conf.get('author_articles_page_size', '10'))
-        area.automatic = True
-
-        return AuthorArticleRanking(area, self.context)
+    area.automatic = True
+    favourite_content = (
+        context.favourite_content if dedupe_favourite_content else [])
+    return AuthorArticleRanking(area, favourite_content)
 
 
 class AuthorArticleRanking(zeit.web.site.area.ranking.Ranking):
 
-    def __init__(self, context, author):
+    def __init__(self, context, favourite_content):
         super(AuthorArticleRanking, self).__init__(context)
-        self.uids_above = [
-            x.uniqueId for x in author.favourite_content]
+        self.uids_above = [x.uniqueId for x in favourite_content]
 
     @zeit.web.reify
     def count(self):
