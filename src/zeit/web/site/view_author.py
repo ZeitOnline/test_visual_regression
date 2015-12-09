@@ -53,23 +53,14 @@ class AuthorContact(zeit.web.site.module.Module):
 class Author(zeit.web.core.view.Base):
     """This view implements tabs that each have their own URL.
     To add a tab, subclass this, configure a different view name and provide
-    an ``area_for_tab``.
+    a different ``tab_areas``.
 
     This class is also a view (without a view name, so serves as default) and
     displays the articles tab
-
-    We use a region kind='tabbed' to render the tab list menu, described in
-    ``tabs`` and ``current_tab``; this region also contains the
-    ``area_for_tab``.
-
     """
 
     advertising_enabled = True
 
-    tabs = [
-        {'name': '', 'title': 'Artikel'},
-        {'name': 'kommentare', 'title': 'Kommentare'},
-    ]
     current_tab_name = ''
 
     @zeit.web.reify
@@ -124,14 +115,10 @@ class Author(zeit.web.core.view.Base):
                        LegacyArea([topics, bio], kind="major"),
                        LegacyArea([contact], kind="minor")]))
 
-        # third region: texts, comments
-        regions.append(LegacyRegion(
-            self.areas_for_tab, kind='tabbed', tabs=self.tabs))
-
         return regions
 
     @zeit.web.reify
-    def areas_for_tab(self):
+    def tab_areas(self):
         if is_paginated(self.context, self.request):
             return [self.area_articles]
         else:
@@ -184,5 +171,5 @@ class Comments(Author):
     current_tab_name = 'kommentare'
 
     @zeit.web.reify
-    def areas_for_tab(self):
+    def tab_areas(self):
         return [LegacyArea([])]  # XXX not yet implemented
