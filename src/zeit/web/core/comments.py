@@ -595,17 +595,15 @@ class UserComment(object):
 
     @zeit.web.reify
     def publication_date(self):
-        return self._node_value('pubDate')
+        return self._node_value(
+            'pubDate',
+            cast=zeit.web.core.date.parse_date)
 
     @zeit.web.reify
     def referenced_content(self):
-        drupal_id = self._node_value('cms_uniqueId')
+        uniqueId = self._node_value('cms_uniqueId')
 
-        # XXX Temporary fix, because drupal does not produce
-        # right uniqueIds yet. I suppose TB will repair this, within this
-        # iteration.
-        if drupal_id is not None:
-            uniqueId = drupal_id.replace('www.zeit.de', 'xml.zeit.de')
+        if uniqueId is not None:
             try:
                 return zeit.cms.interfaces.ICMSContent(uniqueId)
             except TypeError:
