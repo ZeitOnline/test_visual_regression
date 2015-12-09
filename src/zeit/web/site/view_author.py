@@ -5,7 +5,6 @@ import zeit.content.author.interfaces
 from zeit.web.site.view_centerpage import LegacyArea
 from zeit.web.site.view_centerpage import LegacyModule
 from zeit.web.site.view_centerpage import LegacyRegion
-import zeit.web.site.view
 
 
 @zeit.web.register_module('author_header')
@@ -45,28 +44,30 @@ class AuthorContact(zeit.web.site.module.Module):
         self.layout = 'author_contact'
 
 
-@zeit.web.register_module('author_comments')
-class AuthorComments(zeit.web.site.module.Module):
-
-    def __init__(self, context):
-        super(AuthorComments, self).__init__(context)
-        self.layout = 'author_comments'
-
-
-@zeit.web.register_module('author_texts')
-class AuthorTexts(zeit.web.site.module.Module):
-
-    def __init__(self, context):
-        super(AuthorTexts, self).__init__(context)
-        self.layout = 'author_texts'
-
-
 @pyramid.view.view_config(
     renderer='templates/author.html',
     context=zeit.content.author.interfaces.IAuthor)
 class Author(zeit.web.core.view.Base):
+    """This view implements tabs that each have their own URL.
+    To add a tab, subclass this, configure a different view name and provide
+    an ``area_for_tab``.
+
+    This class is also a view (without a view name, so serves as default) and
+    displays the articles tab
+
+    We use a region kind='tabbed' to render the tab list menu, described in
+    ``tabs`` and ``current_tab``; this region also contains the
+    ``area_for_tab``.
+
+    """
 
     advertising_enabled = True
+
+    tabs = [
+        {'name': '', 'title': 'Artikel'},
+        {'name': 'kommentare', 'title': 'Kommentare'},
+    ]
+    current_tab_name = ''
 
     @zeit.web.reify
     def pagetitle(self):
@@ -121,10 +122,8 @@ class Author(zeit.web.core.view.Base):
                        LegacyArea([contact], kind="minor")]))
 
         # third region: texts, comments
-        texts = AuthorTexts(self.context)
-        comments = AuthorComments(self.context)
-        regions.append(LegacyRegion([
-                       LegacyArea([texts]), LegacyArea([comments])]))
+        regions.append(LegacyRegion(
+            [self.area_for_tab], kind='tabbed', tabs=self.tabs))
 
         # fourth region: pinned and automatic teasers
         ranking = LegacyArea([LegacyModule([c], layout='zon-small') for c in
@@ -132,3 +131,20 @@ class Author(zeit.web.core.view.Base):
         regions.append(LegacyRegion([ranking]))
 
         return regions
+
+    @zeit.web.reify
+    def area_for_tab(self):
+        return LegacyArea([])  # XXX not yet implemented
+
+
+@pyramid.view.view_config(
+    renderer='templates/author.html',
+    context=zeit.content.author.interfaces.IAuthor,
+    name='kommentare')
+class Comments(Author):
+
+    current_tab_name = 'kommentare'
+
+    @zeit.web.reify
+    def area_for_tab(self):
+        return LegacyArea([])  # XXX not yet implemented

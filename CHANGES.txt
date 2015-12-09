@@ -1,14 +1,26 @@
 Change log for zeit.web
 =======================
 
-2.35 (unreleased)
+2.36 (unreleased)
 -----------------
 
 - ZON-2469: Embed favourite content into author profile page
 
+
+2.35 (2015-12-08)
+-----------------
+
+- DEV-968: Distribute new Webtrekk script
+
+- ZON-2446: Implement HTML for Instant Articles
+
+- ZON-2478: Implement RSS feed for Instant Articles
+
 - ZON-2460: Fix several problems for wrapper apps
 
 - ZON-2450: Add more advertorials to navigation
+
+- ZON-2449: Include kicker in title of socialflow feeds
 
 - MAINT: Cleanup community notifications
 
@@ -16,6 +28,8 @@ Change log for zeit.web
   * Portraitboxes with funny HTML
   * Images with empty copyright
   * Videos without still image
+
+- ZON-2474: Make comments per user available in zeit.web
 
 - ZON-2463: Style Autorenseitenheader
 
