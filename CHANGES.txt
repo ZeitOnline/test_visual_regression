@@ -6,8 +6,6 @@ Change log for zeit.web
 
 - ZON-2469: Embed favourite content into author profile page
 
-- ZON-2466: Style Contact Data Autorenseiten
-
 
 2.35 (2015-12-08)
 -----------------
