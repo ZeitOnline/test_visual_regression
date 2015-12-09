@@ -17,7 +17,7 @@
 	<div class="user-comment__date">blabla datum{{ comment.publication_date }}, verfasst zu:</div>
 	<a href="{{ article | create_url }}?cid={{ comment.cid }}#cid-{{ comment.cid }}" class="user-comment__article-link">
 		{% if supertitle %}
-			<span class="user-comment__article-supertitle">
+			<span class="user-comment__article-kicker">
 				{{ supertitle }}:
 			</span>
 		{% endif %}
