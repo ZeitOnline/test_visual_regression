@@ -2,7 +2,7 @@
     <div class="author-header__upper">
         <div class="author-header__inner">
             <div class="author-header__image">
-                {% set image = module.author_img %}
+                {% set image = get_variant(context.image_group, 'square') %}
                 {% set module_layout = 'author-header' %}
                 {% include "zeit.web.site:templates/inc/asset/image.tpl" %}
             </div>
