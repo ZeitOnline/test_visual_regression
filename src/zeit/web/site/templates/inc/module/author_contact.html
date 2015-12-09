@@ -28,12 +28,12 @@
 	</div>
 	{% endif %}
 
-	{% if context.email %}
+	{#% if context.email %}
 	<div class="author-contact__item">
 		<a href="mailto:{{ context.email }}" class="author-contact__link">
 			{{ lama.use_svg_icon('author-email', 'author-contact__icon' | with_mods('email'), view.request) }}
 			<span class="author-contact__text">{{ context.email }}</span>
 		</a>
 	</div>
-	{% endif %}
+	{% endif %#}
 </div>
