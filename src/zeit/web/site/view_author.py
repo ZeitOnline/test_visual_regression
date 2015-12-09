@@ -47,8 +47,7 @@ class AuthorContact(zeit.web.site.module.Module):
         super(AuthorContact, self).__init__(context)
         self.layout = 'author_contact'
 
-
-@pyramid.view.view_config(
+@pyramid.view.view_defaults(
     renderer='templates/author.html',
     context=zeit.content.author.interfaces.IAuthor)
 class Author(zeit.web.core.view.Base):
@@ -151,6 +150,28 @@ class Author(zeit.web.core.view.Base):
         return False
 
 
+@pyramid.view.view_config(name='kommentare')
+class Comments(Author):
+
+    current_tab_name = 'kommentare'
+
+    @zeit.web.reify
+    def tab_areas(self):
+        page = int(self.request.GET.get('p', '1'))
+        page_size = int(self.request.registry.settings.get(
+            'author_comment_page_size', '10'))
+
+        try:
+            comments_meta = zeit.web.core.comments.get_user_comments(
+                self.context, page=page, rows=page_size)
+            comments = comments_meta['comments']
+            return [UserCommentsArea(
+                [LegacyModule([c], layout='user-comment') for c in comments],
+                comments=comments_meta)]
+        except zeit.web.core.comments.PagesExhaustedError:
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+
 def create_author_article_area(
         context, count=None, dedupe_favourite_content=True):
     cp = zeit.content.cp.centerpage.CenterPage()
@@ -211,28 +232,3 @@ class UserCommentsArea(LegacyArea):
         pagination = zeit.web.core.template.calculate_pagination(
             self.current_page, self.total_pages)
         return pagination if pagination is not None else []
-
-
-@pyramid.view.view_config(
-    renderer='templates/author.html',
-    context=zeit.content.author.interfaces.IAuthor,
-    name='kommentare')
-class Comments(Author):
-
-    current_tab_name = 'kommentare'
-
-    @zeit.web.reify
-    def tab_areas(self):
-        page = int(self.request.GET.get('p', '1'))
-        page_size = int(self.request.registry.settings.get(
-            'author_comment_page_size', '10'))
-
-        try:
-            comments_meta = zeit.web.core.comments.get_user_comments(
-                self.context, page=page, rows=page_size)
-            comments = comments_meta['comments']
-            return [UserCommentsArea(
-                [LegacyModule([c], layout='user-comment') for c in comments],
-                comments=comments_meta)]
-        except zeit.web.core.comments.PagesExhaustedError:
-            raise pyramid.httpexceptions.HTTPNotFound()
