@@ -1,4 +1,5 @@
-{% extends "zeit.web.site:templates/inc/area/ranking.html" %}
+{% extends "zeit.web.site:templates/inc/area/default.html" %}
 
-{% block before_module_list %}
-{% endblock before_module_list %}
+{% block after_module_list %}
+    {% include "zeit.web.site:templates/inc/pagination.tpl" %}
+{% endblock %}

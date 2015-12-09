@@ -141,6 +141,7 @@ class UserCommentsArea(LegacyArea):
 
     def __init__(self, arg, **kw):
         super(self.__class__, self).__init__(arg, **kw)
+        self.kind = 'user-comments'
         self.comments = kw['comments']
 
     @zeit.web.reify
@@ -173,13 +174,15 @@ class Comments(Author):
     @zeit.web.reify
     def area_for_tab(self):
         page = int(self.request.GET.get('p', '1'))
+        page_size = int(self.request.registry.settings.get(
+            'author_comment_page_size', '10'))
 
         try:
             comments_meta = zeit.web.core.comments.get_user_comments(
-                self.context, page=page, rows=10)
+                self.context, page=page, rows=page_size)
             comments = comments_meta['comments']
             return UserCommentsArea(
                 [LegacyModule([c], layout='user-comment') for c in comments],
-                kind='user-comments', comments=comments_meta)
+                comments=comments_meta)
         except zeit.web.core.comments.PagesExhaustedError:
             raise pyramid.httpexceptions.HTTPNotFound()
