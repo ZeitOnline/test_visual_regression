@@ -1,10 +1,16 @@
 Change log for zeit.web
 =======================
 
-2.35 (unreleased)
+2.36 (unreleased)
 -----------------
 
 - ZON-2469: Embed favourite content into author profile page
+
+
+2.35 (2015-12-08)
+-----------------
+
+- DEV-968: Distribute new Webtrekk script
 
 - ZON-2446: Implement HTML for Instant Articles
 
