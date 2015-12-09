@@ -7,7 +7,7 @@ import zeit.solr.interfaces
 import zeit.web.core.interfaces
 
 
-def test_author_header_should_be_fully_rendered(testserver, testbrowser):
+def test_author_header_should_be_fully_rendered(testbrowser):
     browser = testbrowser('/autoren/j_random')
     header = browser.cssselect('.author-header')
     name = browser.cssselect('.author-header-info__name')
@@ -78,3 +78,17 @@ def test_first_page_shows_fewer_solr_results_since_it_shows_favourite_content(
     browser = testbrowser('/autoren/j_random')
     # 3 favourite_content + 1 solr result
     assert len(browser.cssselect('.teaser-small')) == 4
+
+
+def test_author_contact_should_be_fully_rendered(testbrowser):
+    browser = testbrowser('/autoren/j_random')
+    container = browser.cssselect('.author-contact')[0]
+    items = container.cssselect('.author-contact__item')
+    twitter = container.cssselect('.author-contact__icon--twitter')
+    facebook = container.cssselect('.author-contact__icon--facebook')
+    instagram = container.cssselect('.author-contact__icon--instagram')
+
+    assert len(items) == 3
+    assert len(twitter) == 1
+    assert len(facebook) == 1
+    assert len(instagram) == 1
