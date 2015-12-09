@@ -10,8 +10,8 @@ import zeit.web.core.interfaces
 def test_author_header_should_be_fully_rendered(testbrowser):
     browser = testbrowser('/autoren/j_random')
     header = browser.cssselect('.author-header')
-    name = browser.cssselect('.author-header-info__name')
-    summary = browser.cssselect('.author-header-info__summary')
+    name = browser.cssselect('.author-header__name')
+    summary = browser.cssselect('.author-header__summary')
     image = browser.cssselect('.author-header__image')
 
     assert len(name) == 1

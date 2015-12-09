@@ -10,43 +10,6 @@ from zeit.web.site.view_centerpage import LegacyRegion
 import zeit.web.core.interfaces
 
 
-@zeit.web.register_module('author_header')
-class AuthorHeader(zeit.web.site.module.Module):
-
-    def __init__(self, context):
-        super(AuthorHeader, self).__init__(context)
-        self.layout = 'author_header'
-
-    @zeit.web.reify
-    def author_img(self):
-        return zeit.web.core.template.closest_substitute_image(
-            self.context.image_group, 'zon-column')
-
-
-@zeit.web.register_module('author_topics')
-class AuthorTopics(zeit.web.site.module.Module):
-
-    def __init__(self, context):
-        super(AuthorTopics, self).__init__(context)
-        self.layout = 'author_topics'
-
-
-@zeit.web.register_module('author_bio')
-class AuthorBio(zeit.web.site.module.Module):
-
-    def __init__(self, context):
-        super(AuthorBio, self).__init__(context)
-        self.layout = 'author_bio'
-
-
-@zeit.web.register_module('author_contact')
-class AuthorContact(zeit.web.site.module.Module):
-
-    def __init__(self, context):
-        super(AuthorContact, self).__init__(context)
-        self.layout = 'author_contact'
-
-
 @pyramid.view.view_config(
     renderer='templates/author.html',
     context=zeit.content.author.interfaces.IAuthor)
@@ -100,22 +63,9 @@ class Author(zeit.web.core.view.Base):
         return {}
 
     @zeit.web.reify
-    def regions(self):
-        regions = []
-
-        # first region: header
-        header = AuthorHeader(self.context)
-        regions.append(LegacyRegion([LegacyArea([header])]))
-
-        # second region: topics, bio, contact
-        topics = AuthorTopics(self.context)
-        bio = AuthorBio(self.context)
-        contact = AuthorContact(self.context)
-        regions.append(LegacyRegion([
-                       LegacyArea([topics, bio], kind="major"),
-                       LegacyArea([contact], kind="minor")]))
-
-        return regions
+    def author_img(self):
+        return zeit.web.core.template.closest_substitute_image(
+            self.context.image_group, 'zon-column')
 
     @zeit.web.reify
     def tab_areas(self):
