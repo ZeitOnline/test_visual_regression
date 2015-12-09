@@ -64,10 +64,12 @@
             {% block teaser_metadata_default %}
             <div class="{{ self.layout() }}__metadata">
                 {% block teaser_byline %}
+                    {% set byline = teaser | get_byline %}
+                    {% if byline | length %}
                     <span class="{{ self.layout() }}__byline">
-                        {%- set byline = teaser | get_byline -%}
                         {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
                     </span>
+                    {% endif %}
                 {% endblock %}
                 {% block teaser_datetime %}
                     {% if not view.is_advertorial %}
