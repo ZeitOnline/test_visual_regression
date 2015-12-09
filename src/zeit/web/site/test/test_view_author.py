@@ -78,7 +78,6 @@ def test_first_page_shows_fewer_solr_results_since_it_shows_favourite_content(
     browser = testbrowser('/autoren/j_random')
     # 3 favourite_content + 1 solr result
     assert len(browser.cssselect('.teaser-small')) == 4
-    assert len(browser.cssselect('.teaser-small')) == 0
 
 
 def test_author_contact_should_be_fully_rendered(testbrowser):
