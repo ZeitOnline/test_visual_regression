@@ -23,12 +23,12 @@ def test_author_header_should_be_fully_rendered(testserver, testbrowser):
 
 def test_author_page_should_show_favourite_content_if_available(testbrowser):
     browser = testbrowser('/autoren/j_random')
-    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 3
+    assert len(browser.cssselect('.teaser-small')) == 3
 
 
 def test_author_page_should_hide_favourite_content_if_missing(testbrowser):
     browser = testbrowser('/autoren/anne_mustermann')
-    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 0
+    assert len(browser.cssselect('.teaser-small')) == 0
 
 
 def test_author_page_should_show_articles_by_author(testbrowser):
@@ -37,7 +37,7 @@ def test_author_page_should_show_articles_by_author(testbrowser):
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     browser = testbrowser('/autoren/anne_mustermann')
-    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 2
+    assert len(browser.cssselect('.teaser-small')) == 2
 
 
 def test_articles_by_author_should_paginate(testbrowser):
@@ -48,7 +48,7 @@ def test_articles_by_author_should_paginate(testbrowser):
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     browser = testbrowser('/autoren/anne_mustermann?p=2')
-    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 1
+    assert len(browser.cssselect('.teaser-small')) == 1
     page = browser.cssselect('.pager__page.pager__page--current span')[0].text
     assert page == '2'
 
@@ -60,7 +60,7 @@ def test_author_page_should_hide_favourite_content_on_further_pages(
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     browser = testbrowser('/autoren/j_random?p=2')
-    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 2
+    assert len(browser.cssselect('.teaser-small')) == 2
 
 
 @pytest.mark.skipif(
@@ -77,4 +77,4 @@ def test_first_page_shows_fewer_solr_results_since_it_shows_favourite_content(
     solr.results = [{'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'}]
     browser = testbrowser('/autoren/j_random')
     # 3 favourite_content + 1 solr result
-    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 4
+    assert len(browser.cssselect('.teaser-small')) == 4

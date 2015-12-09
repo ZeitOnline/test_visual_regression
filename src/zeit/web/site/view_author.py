@@ -142,14 +142,14 @@ class Author(zeit.web.core.view.Base):
         return LegacyArea(
             [LegacyModule([c], layout='zon-small')
              for c in self.context.favourite_content],
-            kind='ranking')
+            kind='author-favourite-content')
 
     @zeit.web.reify
     def area_articles(self):
         cp = zeit.content.cp.centerpage.CenterPage()
         cp.uniqueId = 'http://xml.zeit.de'
         area = cp.body.create_item('region').create_item('area')
-        area.kind = 'ranking'
+        area.kind = 'author-articles'
         area.automatic_type = 'query'
         area.raw_query = u'author:"{}" AND (type:article)'.format(
             self.context.display_name)
