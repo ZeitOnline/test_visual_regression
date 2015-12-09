@@ -24,6 +24,8 @@ Change log for zeit.web
 
 - ZON-2449: Include kicker in title of socialflow feeds
 
+- ZON-2429: "Snapshot" on homepage now is a normal teaser module
+
 - MAINT: Cleanup community notifications
 
 - FIX: Be more defensive in several places:
