@@ -1,10 +1,13 @@
 import pyramid.view
+import zope.component
 
 import zeit.content.author.interfaces
 
+from zeit.web.core.view import is_paginated
 from zeit.web.site.view_centerpage import LegacyArea
 from zeit.web.site.view_centerpage import LegacyModule
 from zeit.web.site.view_centerpage import LegacyRegion
+import zeit.web.core.interfaces
 
 
 @zeit.web.register_module('author_header')
@@ -123,18 +126,53 @@ class Author(zeit.web.core.view.Base):
 
         # third region: texts, comments
         regions.append(LegacyRegion(
-            [self.area_for_tab], kind='tabbed', tabs=self.tabs))
-
-        # fourth region: pinned and automatic teasers
-        ranking = LegacyArea([LegacyModule([c], layout='zon-small') for c in
-                              self.context.favourite_content], kind='ranking')
-        regions.append(LegacyRegion([ranking]))
+            self.areas_for_tab, kind='tabbed', tabs=self.tabs))
 
         return regions
 
     @zeit.web.reify
-    def area_for_tab(self):
-        return LegacyArea([])  # XXX not yet implemented
+    def areas_for_tab(self):
+        if is_paginated(self.context, self.request):
+            return [self.area_articles]
+        else:
+            return [self.area_favourite_content, self.area_articles]
+
+    @zeit.web.reify
+    def area_favourite_content(self):
+        return LegacyArea(
+            [LegacyModule([c], layout='zon-small')
+             for c in self.context.favourite_content],
+            kind='ranking')
+
+    @zeit.web.reify
+    def area_articles(self):
+        cp = zeit.content.cp.centerpage.CenterPage()
+        cp.uniqueId = 'http://xml.zeit.de'
+        area = cp.body.create_item('region').create_item('area')
+        area.kind = 'ranking'
+        area.automatic_type = 'query'
+        area.raw_query = u'author:"{}" AND (type:article)'.format(
+            self.context.display_name)
+        area.raw_order = 'date-first-released desc'
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        area.count = int(conf.get('author_articles_page_size', '10'))
+        area.automatic = True
+
+        return AuthorArticleRanking(area, self.context)
+
+
+class AuthorArticleRanking(zeit.web.site.area.ranking.Ranking):
+
+    def __init__(self, context, author):
+        super(AuthorArticleRanking, self).__init__(context)
+        self.uids_above = [
+            x.uniqueId for x in author.favourite_content]
+
+    @zeit.web.reify
+    def count(self):
+        if self.page == 1:
+            return self._count - len(self.uids_above)
+        return self._count
 
 
 @pyramid.view.view_config(
@@ -146,5 +184,5 @@ class Comments(Author):
     current_tab_name = 'kommentare'
 
     @zeit.web.reify
-    def area_for_tab(self):
-        return LegacyArea([])  # XXX not yet implemented
+    def areas_for_tab(self):
+        return [LegacyArea([])]  # XXX not yet implemented

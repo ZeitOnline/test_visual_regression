@@ -12,7 +12,7 @@
         title="Kleiner Teaser"
         image_pattern="zon-thumbnail"
         areas="duo major minor ranking parquet spektrum zett zmo-parquet"
-        default="major minor parquet spektrum zett zmo-parquet"
+        default="major minor parquet zmo-parquet ranking spektrum zett"
         />
     <layout
         id="zon-topic"
