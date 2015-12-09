@@ -136,6 +136,20 @@ class Author(zeit.web.core.view.Base):
     def area_articles(self):
         return create_author_article_area(self.context)
 
+    @zeit.web.reify
+    def has_author_comments(self):
+        page_size = int(self.request.registry.settings.get(
+            'author_comment_page_size', '10'))
+
+        try:
+            comments = zeit.web.core.comments.get_user_comments(
+                self.context, page=1, rows=page_size)
+            return comments.get('page_total', 0) > 0
+        except zeit.web.core.comments.PagesExhaustedError:
+            pass
+
+        return False
+
 
 def create_author_article_area(
         context, count=None, dedupe_favourite_content=True):

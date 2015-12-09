@@ -11,7 +11,9 @@
     <div class="{{ 'cp-region' | with_mods('tabbed') }}">
         <div> <!-- XXX This needs proper tab markup. -->
           <h3><a class="{{'current' if view.current_tab_name == ''}}" href="{{view.content_url}}">Artikel</a></h3>
-          <h3><a class="{{'current' if view.current_tab_name == 'kommentare'}}" href="{{view.content_url}}/kommentare">Kommentare</a></h3>
+          {% if view.has_author_comments %}
+            <h3><a class="{{'current' if view.current_tab_name == 'kommentare' }}" href="{{view.content_url}}/kommentare">Kommentare</a></h3>
+          {% endif %}
         </div>
 
         {%- for area in view.tab_areas %}
