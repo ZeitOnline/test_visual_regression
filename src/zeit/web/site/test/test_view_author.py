@@ -26,7 +26,7 @@ def test_author_page_should_hide_favourite_content_if_missing(testbrowser):
     assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 0
 
 
-def test_author_content_should_be_fully_rendered(testserver, testbrowser):
+def test_author_contact_should_be_fully_rendered(testserver, testbrowser):
     browser = testbrowser('/autoren/j_random')
     header = browser.cssselect('.author-contact')
     items = browser.cssselect('.author-contact__item')
