@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.36 (unreleased)
+2.36 (2015-12-10)
 -----------------
 
 - HOTFIX: correct path for Instant Articles
