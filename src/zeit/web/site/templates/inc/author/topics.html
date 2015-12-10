@@ -1,0 +1,11 @@
+{% if view.topic_links | length %}
+<div class="author-topics">
+	<h2 class="author__subheadline">Schwerpunkte</h2>
+
+	<div class="header__tags">
+		{% for label, link in view.topic_links %}
+		<a href="{{ link }}" class="header__tags__link" data-id="topnav.article-tag.{{ loop.index }}..{{ label | format_webtrekk }}">{{ label }}</a>
+		{% endfor %}
+	</div>
+</div>
+{% endif %}
