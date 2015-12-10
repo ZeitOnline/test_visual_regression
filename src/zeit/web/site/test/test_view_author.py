@@ -104,4 +104,3 @@ def test_author_biography_should_be_fully_rendered(testbrowser):
     assert len(summary) == 1
     assert len(questions) == 1
     assert 'Das ist die Biographie' in summary[0].text
-
