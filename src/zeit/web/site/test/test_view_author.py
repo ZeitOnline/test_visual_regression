@@ -85,7 +85,7 @@ def test_view_author_comments_should_have_comments_area(application):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/author3')
     request = mock.Mock()
-    request.registry.settings = {'author_comment_page_size': '1'}
+    request.registry.settings = {'author_comment_page_size': '6'}
     request.GET = {'p': '1'}
     view = zeit.web.site.view_author.Comments(
         author, request)

@@ -68,6 +68,7 @@ def app_settings(mockserver):
         'jsconf_prefix': '/jsconf',
         'author_articles_page_size': '10',
         'comment_page_size': '4',
+        'author_comment_page_size': '6',
         'community_host': 'http://localhost:6551',
         'community_static_host': 'http://static_community/foo',
         'community_maintenance': ('http://xml.zeit.de/config/'
