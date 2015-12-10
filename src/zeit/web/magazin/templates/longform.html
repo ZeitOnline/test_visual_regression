@@ -15,7 +15,7 @@
     <nav id="js-main-nav" class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
             {% block longform_logo %}
-            <a href="http://{{ request.host }}/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
+            <a href="{{ request.route_url('home') }}zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
                     <span class="main-nav__logo__img icon-logo-zmo-large" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>

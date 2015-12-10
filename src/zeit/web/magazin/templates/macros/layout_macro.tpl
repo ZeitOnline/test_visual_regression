@@ -50,7 +50,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{obj.title or 'ZEITmagazin ONLINE'}}">
     <meta property="og:description" content="{{obj.subtitle or 'Mode&Design, Essen&Trinken, Leben'}}">
-    <meta property="og:url" content="{{obj.content_url or 'http://' + request.host + request.path_info}}">
+    <meta property="og:url" content="{{obj.content_url or request.route_url('home') + request.path_info}}">
     {% set image = get_image(content=obj.context, fallback=False, default='wide') %}
     {% if image -%}
         {% set source = request.image_host + image.path + '__1300x731' %}
@@ -64,7 +64,7 @@
     {% set title_tag = 'h1' if is_main_h1 else 'div' %}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="main-nav__wrap">
-            <a href="http://{{ request.host }}/zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
+            <a href="{{ request.route_url('home') }}zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
                 <{{ title_tag }} class="main-nav__logo__wrap">
                     <span class="main-nav__logo__img icon-logo-zmo-large" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
@@ -85,14 +85,14 @@
                             <div class="main-nav__ressorts__slider-arrow--left icon-arrow-left is-inactive"></div>
                             <div class="main-nav__ressorts__slider-arrow--right icon-arrow-right"></div>
                             <div class="main-nav__ressorts__slider-strip" id="js-main-nav-ressorts-slider-strip">
-                                <a href="http://{{ request.host }}/zeit-magazin/mode-design/index" id="hp.zm.topnav.centerpages.mode./zeit-magazin/mode-design/index">Mode &amp; Design</a>
-                                <a href="http://{{ request.host }}/zeit-magazin/essen-trinken/index" id="hp.zm.topnav.centerpages.essen./zeit-magazin/essen-trinken/index">Essen &amp; Trinken</a>
-                                <a href="http://{{ request.host }}/zeit-magazin/leben/index" id="hp.zm.topnav.centerpages.leben./zeit-magazin/leben/index">Leben</a>
+                                <a href="{{ request.route_url('home') }}zeit-magazin/mode-design/index" id="hp.zm.topnav.centerpages.mode./zeit-magazin/mode-design/index">Mode &amp; Design</a>
+                                <a href="{{ request.route_url('home') }}zeit-magazin/essen-trinken/index" id="hp.zm.topnav.centerpages.essen./zeit-magazin/essen-trinken/index">Essen &amp; Trinken</a>
+                                <a href="{{ request.route_url('home') }}zeit-magazin/leben/index" id="hp.zm.topnav.centerpages.leben./zeit-magazin/leben/index">Leben</a>
                             </div>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__only-small">
-                        <a href="http://{{ request.host }}/index" id="hp.zm.topnav.links.zon./index">» ZEIT ONLINE</a>
+                        <a href="{{ request.route_url('home') }}index" id="hp.zm.topnav.links.zon./index">» ZEIT ONLINE</a>
                     </div>
                     <div class="main-nav__section main-nav__service-primary">
                         <a href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="hp.zm.topnav.links.abo.//www.zeitabo.de">Abo</a>
@@ -101,29 +101,29 @@
                     </div>
                     <div class="main-nav__aside">
                         <div class="main-nav__section main-nav__only-full">
-                            <a href="http://{{ request.host }}/index" id="hp.zm.topnav.links.zon./index">» ZEIT ONLINE</a>
+                            <a href="{{ request.route_url('home') }}index" id="hp.zm.topnav.links.zon./index">» ZEIT ONLINE</a>
                         </div>
                         <div class="main-nav__section main-nav__service">
                             <span class="main-nav__section__trigger icon-arrow-down js-main-nav-section-trigger"><span class="main-nav__section__text">Service</span></span>
                             <div class="main-nav__section__content js-main-nav-section-content">
-                                <a href="http://{{ request.host }}/campus/index" id="hp.zm.topnav.links.zeitcampus./campus/index">ZEITCampus</a>
-                                <a href="http://{{ request.host }}/wissen/zeit-geschichte/index" id="hp.zm.topnav.links.zeitgeschichte./wissen/zeit-geschichte/index">ZEITGeschichte</a>
-                                <a href="http://{{ request.host }}/wissen/zeit-wissen/index" id="hp.zm.topnav.links.zeitwissen./wissen/zeit-wissen/index">ZEITWissen</a>
-                                <a href="http://{{ request.host }}/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.zm.topnav.links.partnersuche./angebote/partnersuche/index">Partnersuche</a>
+                                <a href="{{ request.route_url('home') }}campus/index" id="hp.zm.topnav.links.zeitcampus./campus/index">ZEITCampus</a>
+                                <a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index" id="hp.zm.topnav.links.zeitgeschichte./wissen/zeit-geschichte/index">ZEITGeschichte</a>
+                                <a href="{{ request.route_url('home') }}wissen/zeit-wissen/index" id="hp.zm.topnav.links.zeitwissen./wissen/zeit-wissen/index">ZEITWissen</a>
+                                <a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.zm.topnav.links.partnersuche./angebote/partnersuche/index">Partnersuche</a>
                                 <a href="http://zeit.immowelt.de/" id="hp.zm.topnav.links.immobilien.//zeit.immowelt.de">Immobilien</a>
                                 <a href="http://automarkt.zeit.de/" id="hp.zm.topnav.links.automarkt.//automarkt.zeit.de">Automarkt</a>
                                 <a href="http://jobs.zeit.de/" id="hp.zm.topnav.links.jobs.//jobs.zeit.de">Jobs</a>
                                 <a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zmo.fix.dach.text.apps" id="hp.zm.topnav.links.apps.//premium.zeit.de/abo/appsios">Apps</a>
                                 <a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zmo.fix.dach.text.audio" id="hp.zm.topnav.links.audio.//premium.zeit.de/abo/digitalpaket5">Audio</a>
-                                <a href="http://{{ request.host }}/archiv" id="hp.zm.topnav.links.archiv./archiv">Archiv</a>
-                                <a href="http://{{ request.host }}/spiele/index" id="hp.zm.topnav.links.spiele./spiele/index">Spiele</a>
+                                <a href="{{ request.route_url('home') }}archiv" id="hp.zm.topnav.links.archiv./archiv">Archiv</a>
+                                <a href="{{ request.route_url('home') }}spiele/index" id="hp.zm.topnav.links.spiele./spiele/index">Spiele</a>
                             </div>
                         </div>
                         {#
                         <div class="main-nav__section main-nav__search">
                             <span class="main-nav__section__trigger icon-search js-main-nav-section-trigger"><span class="main-nav__section__text">Suche</span></span>
                             <div class="main-nav__section__content js-main-nav-section-content">
-                                <form action="http://{{ request.host }}/suche/index" role="search" method="get" class="main-nav__search__form">
+                                <form action="{{ request.route_url('home') }}suche/index" role="search" method="get" class="main-nav__search__form">
                                     <input class="main-nav__search__input" type="text" name="q" size="20" placeholder="Suchbegriff …">
                                     <input class="main-nav__search__submit" type="submit" value="Suchen">
                                 </form>

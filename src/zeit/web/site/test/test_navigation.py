@@ -76,6 +76,7 @@ def test_nav_ressorts_should_produce_markup(application, jinja2_env):
     mock_request.route_url.return_value = 'http://www.zeit.de/'
     mock_view.request = mock_request
     html_str = tpl.render(view=mock_view,
+                          request=mock_request,
                           navigation=nav, nav_class='primary-nav')
     html = lxml.html.fromstring(html_str).cssselect
 
@@ -148,7 +149,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
-    mock_view.request.host = 'www.zeit.de'
+    mock_view.request.route_url.return_value = 'http://www.zeit.de/'
     mock_request = mock.Mock()
     html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect
@@ -185,7 +186,7 @@ def test_nav_should_contain_schema_org_markup(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
-    mock_view.request.host = 'www.zeit.de'
+    mock_view.request.route_url.return_value = 'http://www.zeit.de/'
     mock_request = mock.Mock()
     html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect

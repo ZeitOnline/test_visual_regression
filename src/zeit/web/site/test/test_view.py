@@ -15,12 +15,12 @@ def test_login_state_view_should_deliver_correct_destination():
     request.registry.settings['community_host'] = "http://community"
     request.registry.settings['sso_url'] = "http://sso"
     request.registry.settings['community_static_host'] = "community_static"
-    request.host = "destination_sso"
+    request.route_url.return_value = 'http://destination_sso/'
     request.params = {}
     result = zeit.web.site.view.login_state(request)
     assert result == {
-        'login': 'http://sso/anmelden?url=http://destination_sso',
-        'logout': 'http://sso/abmelden?url=http://destination_sso'
+        'login': 'http://sso/anmelden?url=http://destination_sso/',
+        'logout': 'http://sso/abmelden?url=http://destination_sso/'
     }
 
 

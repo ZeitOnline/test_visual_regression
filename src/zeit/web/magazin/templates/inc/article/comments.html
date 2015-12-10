@@ -147,7 +147,7 @@
 			<form method="POST" class="comment__form">
 				<p><textarea name="comment" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
 				<p class="comment__form__text">
-					Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://{{ request.host }}/administratives/2010-03/netiquette">Netiquette</a> zu melden.
+					Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="{{ request.route_url('home') }}administratives/2010-03/netiquette">Netiquette</a> zu melden.
 					Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
 				</p>
 				<p class="comment__form__actions">
