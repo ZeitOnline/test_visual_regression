@@ -68,6 +68,10 @@ class Author(zeit.web.core.view.Base):
             self.context.image_group, 'zon-column')
 
     @zeit.web.reify
+    def topic_links(self):
+        return zeit.web.core.interfaces.ITopicLink(self.context)
+
+    @zeit.web.reify
     def tab_areas(self):
         if is_paginated(self.context, self.request):
             return [self.area_articles]
