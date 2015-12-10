@@ -1,0 +1,41 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+
+<div class="author-contact">
+    <h2 class="author-contact__title author__subheadline">Kontakt</h2>
+
+    {% if context.twitter %}
+    <div class="author-contact__item">
+        <a href="https://twitter.com/{{ context.twitter | replace('@', '') }}" class="author-contact__link">
+            {{ lama.use_svg_icon('author-twitter', 'author-contact__icon' | with_mods('twitter'), view.request) }}
+            <span class="author-contact__text">{{ context.twitter }}</span>
+        </a>
+    </div>
+    {% endif %}
+
+    {% if context.facebook %}
+    <div class="author-contact__item">
+        <a href="https://www.facebook.com/{{ context.facebook }}" class="author-contact__link">
+            {{ lama.use_svg_icon('author-facebook', 'author-contact__icon' | with_mods('facebook'), view.request) }}
+            <span class="author-contact__text">{{ context.facebook }}</span>
+        </a>
+    </div>
+    {% endif %}
+
+    {% if context.instagram %}
+    <div class="author-contact__item">
+        <a href="https://www.instagram.com/{{ context.instagram }}" class="author-contact__link">
+            {{ lama.use_svg_icon('author-instagram', 'author-contact__icon' | with_mods('instagram'), view.request) }}
+            <span class="author-contact__text">{{ context.instagram }}</span>
+        </a>
+    </div>
+    {% endif %}
+
+    {#% if context.email %}
+    <div class="author-contact__item">
+        <a href="mailto:{{ context.email }}" class="author-contact__link">
+            {{ lama.use_svg_icon('author-email', 'author-contact__icon' | with_mods('email'), view.request) }}
+            <span class="author-contact__text">{{ context.email }}</span>
+        </a>
+    </div>
+    {% endif %#}
+</div>

@@ -29,4 +29,10 @@
     <reference type="intern" href="http://xml.zeit.de/zeit-online/gallery/weltall"></reference>
     <reference type="intern" href="http://xml.zeit.de/zeit-online/cp-content/kolumne"></reference>
   </favourites>
+  <topiclink_label_1>Eins</topiclink_label_1>
+  <topiclink_label_2>Zwei</topiclink_label_2>
+  <topiclink_label_3>Drei</topiclink_label_3>
+  <topiclink_url_1>http://www.zeit.de/thema/eins</topiclink_url_1>
+  <topiclink_url_2>http://www.zeit.de/thema/zwei</topiclink_url_2>
+  <topiclink_url_3>http://www.zeit.de/thema/drei</topiclink_url_3>
 </author>

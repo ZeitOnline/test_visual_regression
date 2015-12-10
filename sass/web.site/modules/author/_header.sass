@@ -1,80 +1,64 @@
 .author-header
-    margin-left: -$page-padding
-    margin-right: -$page-padding
-    padding-bottom: remify(40px)
-
-    &__upper
-        background-color: $cararra
+    background-color: $cararra
+    margin: 0 (-$page-padding) remify(40px)
 
     &__inner
         padding-top: remify(10px)
         +respond-min($break-tablet-min)
             position: relative
-            max-width: remify(620px)
-            margin: 0 auto 0 auto
             +display-flex()
+            +justify-content(space-between)
+            +align-items(center)
 
     &__image
-        max-width: remify(150px)
-        max-height: remify(160px)
+        width: remify(150px)
         margin: auto
         +respond-min($break-tablet-min)
-            +order(20)
-            max-width: none
-            max-height: none
+            +align-self(flex-end)
+            +flex(0 0 auto)
+            +order(2)
             width: remify(200px)
-            height: remify(200px)
-            margin: 0 0 0 auto
+            margin: 0
 
     &__media
         +scale-media-in-column-style()
 
-.author-header-info
-    text-align: center
-    color: $zon-dark-grey
-    border-bottom: 1px solid $zon-light-grey
-    background-color: $white
-    +respond-min($break-tablet-min)
-        +order(10)
-        border-bottom: none
-        text-align: left
-        background-color: transparent
-        max-width: 60%
-        height: remify(200px)
-        overflow: hidden
-
-    &__inner
+    &__text
+        background-color: $color-page-bg
+        border-bottom: 1px solid $color-border
+        color: $zon-dark-grey
+        padding: remify(24px $page-padding)
+        text-align: center
         +respond-min($break-tablet-min)
-            position: relative
-            top: 50%
-            transform: translateY(-50%)
+            +flex(0 0 auto)
+            +order(1)
+            background-color: transparent
+            border-bottom: none
+            max-width: 60%
+            padding: 0
+            text-align: left
 
     &__name
-        font-family: $font-tabletgothic
-        font-size: remify(24px)
-        line-height: remify(27px)
-        padding-top: remify(25px)
-        margin-top: 0
-        max-width: 90%
+        font-size: em(24px)
+        line-height: 1.2
+        margin: 0 auto .5em
         +respond-min($break-tablet-min)
-            padding-top: 0
+            font-size: em(32px)
+            line-height: 1.2
+            max-height: remify(32px) * 1.2 * 2 // allow 2 lines maximum
             max-width: none
-            font-size: remify(30px)
-            line-height: remify(34px)
-            max-height: remify(34px) * 2 // allow 2 lines
             overflow: hidden
 
     &__summary
         font-family: $font-franziska
-        font-size: remify(16px)
+        font-size: em(16px)
         font-style: italic
-        line-height: remify(20px)
-        padding-bottom: remify(20px)
-        max-width: 80%
+        line-height: 1.25
         margin: auto
+        max-width: 90%
         +respond-min($break-tablet-min)
+            font-size: em(22px)
+            line-height: 1.5
+            max-height: remify(22px) * 1.5 * 3 // allow 3 lines maximum
             max-width: none
-            font-size: remify(20px)
-            line-height: remify(30px)
-            max-height: remify(30px) * 3 // allow 3 lines
             overflow: hidden

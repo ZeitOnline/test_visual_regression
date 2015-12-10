@@ -1,0 +1,56 @@
+.author-contact
+	+clearfix
+	+respond-min($break-areas)
+		border-bottom: none
+		position: absolute
+		right: -50px
+		top: 0
+
+	&__title
+		display: none
+		+respond-min($break-areas)
+			display: block
+
+	&__item
+		float: left
+		padding: 1em 0
+		width: 33.33%
+		+respond-min($break-areas)
+			float: none
+			padding: 0
+			width: auto
+
+	&__link
+		color: $zon-dark-grey
+		display: inline-block
+		margin-bottom: remify(3px)
+		max-width: 100%
+		overflow: hidden
+		text-overflow: ellipsis
+		white-space: nowrap
+
+	&__icon
+		height: remify(24px)
+		width: remify(24px)
+
+		&--twitter
+			color: $color-twitter
+		&--facebook
+			color: $color-facebook
+		&--instagram
+			color: #66583d
+		&--email
+			color: $zon-grey
+
+		+respond-min($break-areas)
+			height: remify(18px)
+			margin-right: remify(10px)
+			vertical-align: middle
+			width: remify(18px)
+
+	&__text
+		display: none
+		font-size: em(13px)
+		letter-spacing: $zon-letter-spacing-s
+		+respond-min($break-areas)
+			display: initial

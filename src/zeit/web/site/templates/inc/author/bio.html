@@ -3,7 +3,7 @@
         {{ context.biography }}
     </div>
     <span class="author-seperator"></span>
-    <div class="author-questions author-questions--wrapped">
+    <div class="author-questions">
         {% for question in context.bio_questions.values() %}
             <div class="author-questions__title">
                 {{question.title}}
