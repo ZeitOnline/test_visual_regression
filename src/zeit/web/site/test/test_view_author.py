@@ -97,8 +97,8 @@ def test_author_contact_should_be_fully_rendered(testbrowser):
 def test_author_biography_should_be_fully_rendered(testbrowser):
     browser = testbrowser('/autoren/j_random')
     container = browser.cssselect('.author-biography')
-    summary = container.cssselect('.author-summary')
-    questions = container.cssselect('.author-questions')
+    summary = container[0].cssselect('.author-summary')
+    questions = container[0].cssselect('.author-questions')
 
     assert len(container) == 1
     assert len(summary) == 1
