@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2506: Add campaign parameters to ze.tt links
 
+- MAINT: Fix asset_host etc to allow mounting under an URL prefix (for showcases)
+
 
 2.35 (2015-12-08)
 -----------------
