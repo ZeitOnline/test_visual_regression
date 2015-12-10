@@ -50,7 +50,7 @@ class GalleryImage(zeit.web.core.image.BaseImage):
         self.copyright = list((fix_ml(i[0]),) + i[1:] for i in meta.copyrights)
         self.alt = meta.alt
         self.align = meta.alignment
-        self.caption = meta.caption
+        self.caption = item.caption
 
 
 @zeit.web.register_global
