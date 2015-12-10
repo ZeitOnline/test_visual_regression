@@ -7,7 +7,6 @@ import zope.interface
 from zeit.web.core.view import is_paginated
 from zeit.web.site.view_centerpage import LegacyArea
 from zeit.web.site.view_centerpage import LegacyModule
-from zeit.web.site.view_centerpage import LegacyRegion
 import zeit.web.core.interfaces
 
 
@@ -48,8 +47,9 @@ class AuthorContact(zeit.web.site.module.Module):
         self.layout = 'author_contact'
 
 @pyramid.view.view_defaults(
-    renderer='templates/author.html',
-    context=zeit.content.author.interfaces.IAuthor)
+    context=zeit.content.author.interfaces.IAuthor,
+    renderer='templates/author.html')
+@pyramid.view.view_config(name='')
 class Author(zeit.web.core.view.Base):
     """This view implements tabs that each have their own URL.
     To add a tab, subclass this, configure a different view name and provide

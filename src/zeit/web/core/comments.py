@@ -565,7 +565,7 @@ class UserComment(object):
 
     def _node_value(self, name, cast=lambda x: x):
         match = self._comment.xpath(name)
-        if not match or len(match) > 0:
+        if not match and not len(match) > 0:
             return None
 
         return cast(match[0].text)
