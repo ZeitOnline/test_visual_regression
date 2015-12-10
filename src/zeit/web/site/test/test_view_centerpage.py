@@ -395,7 +395,9 @@ def test_snapshot_should_display_correct_teaser_title(testbrowser):
 def test_snapshot_should_display_correct_image_caption(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
     caption = browser.cssselect('.snapshot-caption')[0]
-    assert caption.text.strip() == 'Eisschwimmen im chinesischen Shenyang'
+    assert (caption.text.strip() ==
+            u'Ford präsentiert auf der Automesse in Detroit'
+            u' den neuen Pick-up F-150.')
 
 
 def test_snapshot_should_display_copyright_with_nonbreaking_space(testbrowser):
@@ -407,7 +409,9 @@ def test_snapshot_should_display_copyright_with_nonbreaking_space(testbrowser):
 def test_snapshot_should_have_description_text(testserver, testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
     caption = browser.cssselect('.snapshot-caption')[0]
-    assert caption.text.strip() == u'Eisschwimmen im chinesischen Shenyang'
+    assert (caption.text.strip() ==
+            u'Ford präsentiert auf der Automesse in Detroit'
+            u' den neuen Pick-up F-150.')
 
 
 def test_small_teaser_without_image_has_no_padding_left(

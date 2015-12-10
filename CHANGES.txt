@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - HOTFIX: Fix navigation submenu appearance
 
+- HOTFIX: Display gallery entry captions again
+
 - ZON-2506: Add campaign parameters to ze.tt links
 
 - MAINT: Fix asset_host etc to allow mounting under an URL prefix (for showcases)
