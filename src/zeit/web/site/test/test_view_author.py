@@ -92,6 +92,7 @@ def test_view_author_comments_should_have_comments_area(application):
     assert type(view.tab_areas[0]) == (
         zeit.web.site.view_author.UserCommentsArea)
 
+
 def test_author_contact_should_be_fully_rendered(testbrowser):
     browser = testbrowser('/autoren/j_random')
     container = browser.cssselect('.author-contact')[0]
@@ -104,3 +105,21 @@ def test_author_contact_should_be_fully_rendered(testbrowser):
     assert len(twitter) == 1
     assert len(facebook) == 1
     assert len(instagram) == 1
+
+
+def test_author_should_have_user_comments(testbrowser):
+    browser = testbrowser('/autoren/author3/kommentare')
+    comments = browser.cssselect('.user-comment')
+
+    # comment *without* title
+    assert 'Ich habe den Halbsatz' in comments[0].cssselect(
+        '.user-comment__text > p')[0].text
+    # comment *with* title
+    assert 'Hmmmmmm' == comments[1].cssselect(
+        '.user-comment__text > p')[0].text
+
+    assert 'vor 3 Wochen, verfasst zu:' == comments[0].cssselect(
+        '.user-comment__date')[0].text
+
+    assert '?cid=5572182#cid-5572182' in comments[0].cssselect(
+        '.user-comment__article-link')[0].attrib['href']
