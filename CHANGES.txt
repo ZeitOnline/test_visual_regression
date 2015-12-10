@@ -4,6 +4,8 @@ Change log for zeit.web
 2.36 (unreleased)
 -----------------
 
+- HOTFIX: correct path for Instant Articles
+
 - HOTFIX: Hide separator for empty metadata
 
 - HOTFIX: Fix navigation submenu appearance
