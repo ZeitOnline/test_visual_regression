@@ -4,16 +4,30 @@
     {% include "zeit.web.site:templates/inc/author/header.html" %}
     {% include "zeit.web.site:templates/inc/author/profile.html" %}
 
-    <div class="{{ 'cp-region' | with_mods('tabbed') }}">
-        <div> <!-- XXX This needs proper tab markup. -->
-          <h3><a class="{{'current' if view.current_tab_name == ''}}" href="{{view.content_url}}">Artikel</a></h3>
-          <h3><a class="{{'current' if view.current_tab_name == 'kommentare'}}" href="{{view.content_url}}/kommentare">Kommentare</a></h3>
-        </div>
+    <div class="tabbar">
+        <ul class="tabbar__container">
+            <li class="tabbar__item">
+            {% if view.current_tab_name == '' %}
+                <span class="{{ 'tabbar__link' | with_mods('active') }}">Artikel</span>
+            {% else %}
+                <a class="tabbar__link" href="{{view.content_url}}">Artikel</a>
+            {% endif %}
+            </li>
 
-        {%- for area in view.tab_areas %}
-            {%- set area_loop = loop %}
-            {% include "zeit.web.site:templates/inc/area/includer.html" %}
-        {%- endfor %}
+            <li class="tabbar__item">
+            {% if view.current_tab_name == 'kommentare' %}
+                <span class="{{ 'tabbar__link' | with_mods('active') }}">Kommentare</span>
+            {% else %}
+                <a class="tabbar__link" href="{{view.content_url}}/kommentare">Kommentare</a>
+            {% endif %}
+            </li>
+        </ul>
+    </div>
+
+    {%- for area in view.tab_areas %}
+    {%- set area_loop = loop %}
+    {% include "zeit.web.site:templates/inc/area/includer.html" %}
+    {%- endfor %}
     </div>
 
 {% endblock main %}

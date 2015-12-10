@@ -1,0 +1,77 @@
+// .tabbar ist "eigentlich" (TM) überall einsetzbar,
+// aber natürlich auf Breite der Autorenseite angepasst.
+// Bei der nächsten Verwendung: Good Luck.
+
+.tabbar
+	border-top: 1px $zon-alto solid
+	margin: remify(40px) (-$page-padding)  0
+	padding: remify(20px) 0 0 0
+
+	&__container
+		// flexbox (same width) as default, table (width depending on content) as fallback for IE 9
+		display: table
+		display: flex
+		margin: 0 auto
+		padding: 0 $page-padding
+		width: 100%
+
+	&__item
+		// flexbox (same width) as default, table (width depending on content) as fallback for IE 9
+		display: table-cell
+		flex: 1
+		list-style: none
+		margin: 0
+
+	&__link
+		+font-smoothing
+		background-color: #EEEEEE
+		display: block
+		color: #707070
+		padding: remify(10px 20px)
+		text-align: center
+		&--active
+			background-color: #535560
+			color: #FFFFFF
+
+	&__item:first-child
+		.tabbar__link
+			border-radius: 10px 0 0 10px
+
+	&__item:last-child
+		.tabbar__link
+			border-radius: 0 10px 10px 0
+
++respond-min($break-tablet-min)
+	// verdammte specificity!
+	.tabbar__item:first-child .tabbar__link,
+	.tabbar__item:last-child .tabbar__link,
+		border-radius: 0
+
+	.tabbar
+		display: block
+		background: #EEEEEE
+		border: none
+		// TODO: auf die 65px kommen
+		padding-top: 20px
+		position: relative
+		&__container
+			// according to author__item
+			margin: 0 auto
+			// 620 + 2*$page-padding
+			max-width: remify(680px)
+			display: block
+		&__item
+			//border: 1px red solid
+			display: inline-block
+		&__link
+			background-color: #EEEEEE
+			color: $zon-grey
+			&--active
+				background-color: #FFFFFF
+				font-weight: bold
+
+	// verdammte specificity!
+	.tabbar__link--active,
+	.tabbar__item:first-child .tabbar__link--active,
+	.tabbar__item:last-child .tabbar__link--active,
+		border-radius: 10px 10px 0 0
