@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
+import mock
 import zope.component
 
 import zeit.solr.interfaces
@@ -78,3 +79,15 @@ def test_first_page_shows_fewer_solr_results_since_it_shows_favourite_content(
     browser = testbrowser('/autoren/j_random')
     # 3 favourite_content + 1 solr result
     assert len(browser.cssselect('.teaser-small')) == 4
+
+
+def test_view_author_comments_should_have_comments_area(application):
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/author3')
+    request = mock.Mock()
+    request.registry.settings = {'author_comment_page_size': '1'}
+    request.GET = {'p': '1'}
+    view = zeit.web.site.view_author.Comments(
+        author, request)
+    assert type(view.tab_areas[0]) == (
+        zeit.web.site.view_author.UserCommentsArea)

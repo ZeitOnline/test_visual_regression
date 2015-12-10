@@ -30,7 +30,7 @@ setup(
         'bugsnag',
         'colander',
         'cryptography',
-        'dateutil',
+        'python-dateutil',
         'grokcore.component',
         'iso8601',
         'lxml',

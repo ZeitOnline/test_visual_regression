@@ -597,7 +597,7 @@ class UserComment(object):
     def publication_date(self):
         return zeit.web.core.date.parse_date(
             self._node_value('pubDate'),
-            date_format='%Y-%m-%dT%H:%M:%S+00:00')
+            date_format='iso-8601')
 
     @zeit.web.reify
     def referenced_content(self):
