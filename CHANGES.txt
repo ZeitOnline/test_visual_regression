@@ -4,6 +4,8 @@ Change log for zeit.web
 2.36 (unreleased)
 -----------------
 
+- HOTFIX: Hide separator for empty metadata
+
 - HOTFIX: Fix navigation submenu appearance
 
 - ZON-2506: Add campaign parameters to ze.tt links
