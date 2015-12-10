@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: correct path for Instant Articles
 
+- HOTFIX: Hide separator for empty metadata
+
 - HOTFIX: Fix navigation submenu appearance
 
 - ZON-2506: Add campaign parameters to ze.tt links

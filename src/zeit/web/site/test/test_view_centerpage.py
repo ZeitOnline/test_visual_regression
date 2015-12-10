@@ -14,6 +14,7 @@ import pytest
 import requests
 import zope.component
 
+from zeit.cms.checkout.helper import checked_out
 import zeit.content.cp.centerpage
 
 import zeit.web.core.centerpage
@@ -2025,3 +2026,16 @@ def test_ranking_area_should_silently_accept_emptyness(
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
     area = zeit.web.core.centerpage.get_area(context)
     assert area.pagination == []
+
+
+def test_no_author_should_not_display_byline(testbrowser, workingcopy):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    with checked_out(article) as co:
+        co.authorships = ()
+
+    browser = testbrowser('/zeit-online/slenderized-centerpage')
+    teaser = browser.cssselect(
+        '.teaser-fullwidth[data-unique-id="{}"] '.format(article.uniqueId))[0]
+
+    assert not teaser.cssselect('.teaser-fullwidth__byline')
