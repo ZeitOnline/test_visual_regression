@@ -6,7 +6,11 @@ Change log for zeit.web
 
 - HOTFIX: Hide separator for empty metadata
 
+- HOTFIX: Fix navigation submenu appearance
+
 - ZON-2506: Add campaign parameters to ze.tt links
+
+- MAINT: Fix asset_host etc to allow mounting under an URL prefix (for showcases)
 
 
 2.35 (2015-12-08)
@@ -23,6 +27,8 @@ Change log for zeit.web
 - ZON-2450: Add more advertorials to navigation
 
 - ZON-2449: Include kicker in title of socialflow feeds
+
+- ZON-2429: "Snapshot" on homepage now is a normal teaser module
 
 - MAINT: Cleanup community notifications
 
