@@ -100,22 +100,13 @@ class Author(zeit.web.core.view.Base):
         return {}
 
     @zeit.web.reify
-    def regions(self):
-        regions = []
+    def author_img(self):
+        return zeit.web.core.template.closest_substitute_image(
+            self.context.image_group, 'zon-column')
 
-        # first region: header
-        header = AuthorHeader(self.context)
-        regions.append(LegacyRegion([LegacyArea([header])]))
-
-        # second region: topics, bio, contact
-        topics = AuthorTopics(self.context)
-        bio = AuthorBio(self.context)
-        contact = AuthorContact(self.context)
-        regions.append(LegacyRegion([
-                       LegacyArea([topics, bio], kind="major"),
-                       LegacyArea([contact], kind="minor")]))
-
-        return regions
+    @zeit.web.reify
+    def topic_links(self):
+        return zeit.web.core.interfaces.ITopicLink(self.context)
 
     @zeit.web.reify
     def tab_areas(self):

@@ -1,12 +1,8 @@
 {% extends "zeit.web.site:templates/layout.html" %}
 
 {% block main %}
-    {% for region in view.regions %}
-        {% set region_loop = loop %}
-
-        {%- include ["zeit.web.site:templates/inc/region/{}.html".format(region.kind),
-                     "zeit.web.site:templates/inc/region/default.html"] ignore missing -%}
-    {% endfor %}
+    {% include "zeit.web.site:templates/inc/author/header.html" %}
+    {% include "zeit.web.site:templates/inc/author/profile.html" %}
 
     <div class="{{ 'cp-region' | with_mods('tabbed') }}">
         <div> <!-- XXX This needs proper tab markup. -->

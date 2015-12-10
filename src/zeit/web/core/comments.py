@@ -504,6 +504,9 @@ def get_user_comments(author, page=1, rows=6, sort="DESC"):
     with zeit.web.core.metrics.timer('user_comments.community.response_time'):
         result = requests.get(uri, timeout=timeout)
 
+    if not result.ok:
+        return
+
     xml = lxml.etree.fromstring(result.content)
 
     uid = None
@@ -562,8 +565,9 @@ class UserComment(object):
 
     def _node_value(self, name, cast=lambda x: x):
         match = self._comment.xpath(name)
-        if not match:
+        if not match or len(match) > 0:
             return None
+
         return cast(match[0].text)
 
     @property

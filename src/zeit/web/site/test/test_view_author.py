@@ -8,11 +8,11 @@ import zeit.solr.interfaces
 import zeit.web.core.interfaces
 
 
-def test_author_header_should_be_fully_rendered(testserver, testbrowser):
+def test_author_header_should_be_fully_rendered(testbrowser):
     browser = testbrowser('/autoren/j_random')
     header = browser.cssselect('.author-header')
-    name = browser.cssselect('.author-header-info__name')
-    summary = browser.cssselect('.author-header-info__summary')
+    name = browser.cssselect('.author-header__name')
+    summary = browser.cssselect('.author-header__summary')
     image = browser.cssselect('.author-header__image')
 
     assert len(name) == 1
@@ -85,9 +85,22 @@ def test_view_author_comments_should_have_comments_area(application):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/author3')
     request = mock.Mock()
-    request.registry.settings = {'author_comment_page_size': '1'}
+    request.registry.settings = {'author_comment_page_size': '6'}
     request.GET = {'p': '1'}
     view = zeit.web.site.view_author.Comments(
         author, request)
     assert type(view.tab_areas[0]) == (
         zeit.web.site.view_author.UserCommentsArea)
+
+def test_author_contact_should_be_fully_rendered(testbrowser):
+    browser = testbrowser('/autoren/j_random')
+    container = browser.cssselect('.author-contact')[0]
+    items = container.cssselect('.author-contact__item')
+    twitter = container.cssselect('.author-contact__icon--twitter')
+    facebook = container.cssselect('.author-contact__icon--facebook')
+    instagram = container.cssselect('.author-contact__icon--instagram')
+
+    assert len(items) == 3
+    assert len(twitter) == 1
+    assert len(facebook) == 1
+    assert len(instagram) == 1

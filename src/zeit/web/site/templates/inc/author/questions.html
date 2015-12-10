@@ -1,0 +1,6 @@
+<div class="author-interview">
+{% for question in context.bio_questions.values() %}
+	<h3>{{ question.title }}</h3>
+	<p>{{ question.answer }}</p>
+{% endfor %}
+</div>
