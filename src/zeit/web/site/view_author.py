@@ -165,6 +165,8 @@ class Comments(Author):
                 comments=comments_meta)]
         except zeit.web.core.comments.PagesExhaustedError:
             raise pyramid.httpexceptions.HTTPNotFound()
+        except zeit.web.core.comments.UserCommentsException:
+            return []
 
 
 def create_author_article_area(
