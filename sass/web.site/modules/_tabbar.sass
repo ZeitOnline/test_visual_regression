@@ -3,75 +3,50 @@
 // Bei der nächsten Verwendung: Good Luck.
 
 .tabbar
-	border-top: 1px $zon-alto solid
-	margin: remify(40px) (-$page-padding)  0
-	padding: remify(20px) 0 0 0
-
 	&__container
-		// flexbox (same width) as default, table (width depending on content) as fallback for IE 9
-		display: table
-		display: flex
+		+clearfix()
+		border-radius: .3em
 		margin: 0 auto
-		padding: 0 $page-padding
+		padding: 0
 		width: 100%
 
 	&__item
-		// flexbox (same width) as default, table (width depending on content) as fallback for IE 9
-		display: table-cell
-		flex: 1
+		float: left
 		list-style: none
 		margin: 0
+		width: 50%
 
 	&__link
-		+font-smoothing
-		background-color: #EEEEEE
+		background-color: $zon-lighter-grey
+		color: $zon-grey
 		display: block
-		color: #707070
-		padding: remify(10px 20px)
+		font-size: em(15px)
+		letter-spacing: $zon-letter-spacing-s
+		padding: remify(10px)
 		text-align: center
 		&--active
-			background-color: #535560
-			color: #FFFFFF
-
-	&__item:first-child
-		.tabbar__link
-			border-radius: 10px 0 0 10px
-
-	&__item:last-child
-		.tabbar__link
-			border-radius: 0 10px 10px 0
+			background-color: $zon-trout
+			color: $white
 
 +respond-min($break-tablet-min)
-	// verdammte specificity!
-	.tabbar__item:first-child .tabbar__link,
-	.tabbar__item:last-child .tabbar__link,
-		border-radius: 0
-
 	.tabbar
-		display: block
-		background: #EEEEEE
-		border: none
-		// TODO: auf die 65px kommen
-		padding-top: 20px
-		position: relative
+		background-color: $zon-lighter-grey
+		margin: 0 (-$page-padding)
+		padding-top: remify(30px)
 		&__container
-			// according to author__item
-			margin: 0 auto
-			// 620 + 2*$page-padding
-			max-width: remify(680px)
-			display: block
+			border-radius: 0
+			left: remify(-15px) // indent equals link padding
+			position: relative
 		&__item
-			//border: 1px red solid
-			display: inline-block
+			margin-right: remify(10px)
+			width: auto
 		&__link
-			background-color: #EEEEEE
+			background-color: transparent
+			border-radius: .3em .3em 0 0
 			color: $zon-grey
+			padding: remify(8px 15px)
 			&--active
-				background-color: #FFFFFF
+				+font-smoothing()
+				background-color: $white
+				color: $zon-dark-grey
 				font-weight: bold
-
-	// verdammte specificity!
-	.tabbar__link--active,
-	.tabbar__item:first-child .tabbar__link--active,
-	.tabbar__item:last-child .tabbar__link--active,
-		border-radius: 10px 10px 0 0

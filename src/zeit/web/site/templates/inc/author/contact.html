@@ -1,5 +1,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
+{% if context.twitter or context.facebook or context.instagram %}
 <div class="author-contact">
     <h2 class="author-contact__title author__subheadline">Kontakt</h2>
 
@@ -39,3 +40,4 @@
     </div>
     {% endif %#}
 </div>
+{% endif %}
