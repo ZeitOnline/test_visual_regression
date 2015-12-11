@@ -1,4 +1,5 @@
 # coding: utf8
+import collections
 import datetime
 import itertools
 import logging
@@ -149,6 +150,36 @@ def create_url(context, obj, request=None):
         return create_url(context, obj.uniqueId, request=request)
     else:
         return ''
+
+
+@zeit.web.register_ctxfilter
+def append_campaign_params(context, url):
+    # add campaign parameters for linked ze.tt content
+    if url is not None and url.startswith('http://ze.tt'):
+        try:
+            kind = context.get('area').kind
+        except:
+            kind = None
+
+        if kind == 'zett':
+            campaign_params = {
+                'utm_campaign': 'zonparkett',
+                'utm_medium': 'parkett',
+                'utm_source': 'zon'}
+        else:
+            campaign_params = {
+                'utm_campaign': 'zonteaser',
+                'utm_medium': 'teaser',
+                'utm_source': 'zon'}
+
+        scheme, netloc, path, query, fragment = urlparse.urlsplit(url)
+        query_params = urlparse.parse_qs(query)
+        query_params.update(campaign_params)
+        # sort query params alphabetical by key for SEO
+        return '{}://{}{}?{}'.format(scheme, netloc, path, urllib.urlencode(
+            collections.OrderedDict(sorted(query_params.items())), doseq=True))
+    else:
+        return url
 
 
 @zeit.web.register_filter
