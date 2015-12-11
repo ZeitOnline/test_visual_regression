@@ -24,6 +24,8 @@
 		background-color: #EEEEEE
 		display: block
 		color: #707070
+		font-size: em(15px)
+		letter-spacing: $zon-letter-spacing-s
 		padding: remify(10px 20px)
 		text-align: center
 		&--active
@@ -32,11 +34,11 @@
 
 	&__item:first-child
 		.tabbar__link
-			border-radius: 10px 0 0 10px
+			border-radius: .3em 0 0 .3em
 
 	&__item:last-child
 		.tabbar__link
-			border-radius: 0 10px 10px 0
+			border-radius: 0 .3em .3em 0
 
 +respond-min($break-tablet-min)
 	// verdammte specificity!
@@ -48,14 +50,12 @@
 		display: block
 		background: #EEEEEE
 		border: none
-		// TODO: auf die 65px kommen
-		padding-top: 20px
+		padding-top: remify(18px)
 		position: relative
 		&__container
 			display: block
 			padding: 0
 		&__item
-			//border: 1px red solid
 			display: inline-block
 		&__link
 			background-color: #EEEEEE
@@ -68,4 +68,4 @@
 	.tabbar__link--active,
 	.tabbar__item:first-child .tabbar__link--active,
 	.tabbar__item:last-child .tabbar__link--active,
-		border-radius: 10px 10px 0 0
+		border-radius: .3em .3em 0 0
