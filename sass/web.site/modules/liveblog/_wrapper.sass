@@ -7,34 +7,6 @@
 	position: relative
 
 .liveblog-text-wrapper--wrapped
-	cursor: pointer
 	margin: 0 auto
 	max-width: em(660px)
-	max-height: 5 * 1.4 * em(18px) // 5 lines paragraph text
-	+respond-min($break-desktop-min)
-		max-height: 5 * 1.5 * em(20px) // 5 lines paragraph text
-
-	&:before
-		content: ""
-		position: absolute
-		left: 0
-		right: 0
-		bottom: 0
-		height: 3 * 1.5 * em(20px) // 3 lines paragraph text
-		+background-image(linear-gradient(0deg, rgba($white, 1) 1.5em, rgba($white, 0) 100%))
-
-	&:after
-		color: $color-link--default
-		content: "+ alles anzeigen"
-		position: absolute
-		bottom: 0
-		left: 0
-		text-align: center
-		letter-spacing: $zon-letter-spacing-s
-		border-bottom: 1px solid rgba($color-link--default, .5)
-		+transition-property(border-bottom-color, color)
-		+transition-duration(.2s)
-
-	&:hover:after
-		color: $color-link--hover
-		border-bottom-color: rgba($color-link--hover, .5)
+	+live-blog-text-wrapper()
