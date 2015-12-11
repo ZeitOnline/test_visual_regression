@@ -1,6 +1,9 @@
 $zon-print-grey: #707070
 $print-media-width: 100mm
 $print-media-margin: 14pt 0
+// using this zoom factor to make fonts bigger
+// in opposition to designs
+$print-zoom: 1.263157895
 
 @media print
 
@@ -79,29 +82,29 @@ $print-media-margin: 14pt 0
 
         &__kicker
             color: $zon-print-grey
-            font-size: 7pt
-            line-height: 9pt
-            margin-bottom: 1pt
+            font-size: 7pt * $print-zoom
+            line-height: 9pt * $print-zoom
+            margin-bottom: 1pt * $print-zoom
             padding: 0
 
         &__title
-            font-size: 18pt
-            line-height: 21pt
-            margin-bottom: 14pt
+            font-size: 18pt * $print-zoom
+            line-height: 21pt * $print-zoom
+            margin-bottom: 14pt * $print-zoom
 
     .summary,
     .byline
-        font-size: 10.5pt
-        line-height: 15pt
-        margin-bottom: 7pt
+        font-size: 10.5pt * $print-zoom
+        line-height: 15pt * $print-zoom
+        margin-bottom: 7pt * $print-zoom
 
     .byline a:after
         content: ""
 
     .metadata
-        font-size: 7pt
-        line-height: 9pt
-        margin-bottom: 14pt
+        font-size: 7pt * $print-zoom
+        line-height: 9pt * $print-zoom
+        margin-bottom: 14pt * $print-zoom
 
     .article
         &__media
@@ -113,41 +116,41 @@ $print-media-margin: 14pt 0
                 float: left
                 page-break-inside: avoid
                 max-width: 40mm
-                margin: 0 20pt 14pt 0
+                margin: 0 (20pt * $print-zoom) (14pt * $print-zoom) 0
                 a
-                    font-size: 7pt
+                    font-size: 7pt * $print-zoom
 
     .figure
         &__caption
             margin-left: 0
-            font-size: 7pt
+            font-size: 7pt * $print-zoom
 
     .article__subheading,
     .article-page__page-teaser
-        font-size: 11pt
-        line-height: 14pt
-        margin-bottom: 7pt
-        margin-top: 14pt
+        font-size: 11pt * $print-zoom
+        line-height: 14pt * $print-zoom
+        margin-bottom: 7pt * $print-zoom
+        margin-top: 14pt * $print-zoom
         page-break-inside: avoid
         page-break-after: avoid
 
     .paragraph,
     .raw
-        font-size: 9.5pt
-        line-height: 14pt
-        margin-bottom: 7pt
+        font-size: 9.5pt * $print-zoom
+        line-height: 14pt * $print-zoom
+        margin-bottom: 7pt * $print-zoom
 
     .portraitbox
 
         &__heading,
         &__body
-            font-size: 7pt
-            line-height: 11pt
-            margin-bottom: 6pt
+            font-size: 7pt * $print-zoom
+            line-height: 11pt * $print-zoom
+            margin-bottom: 6pt * $print-zoom
         a,
         a:after
             color: $zon-print-grey
-            font-size: 7pt
+            font-size: 7pt * $print-zoom
 
     .infobox
         background-color: transparent
@@ -159,14 +162,14 @@ $print-media-margin: 14pt 0
 
     .infobox-tab
         border-bottom: 1pt solid $zon-print-grey
-        padding: 9pt
+        padding: 9pt * $print-zoom
 
         &__link,
         &__title,
         &__content p
-            font-size: 7pt
-            line-height: 11pt
-            margin-bottom: 6pt
+            font-size: 7pt * $print-zoom
+            line-height: 11pt * $print-zoom
+            margin-bottom: 6pt * $print-zoom
 
         &__title
             padding: 0
