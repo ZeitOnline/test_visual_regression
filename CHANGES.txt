@@ -4,7 +4,7 @@ Change log for zeit.web
 2.37 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: (Temporarily) xfail test which never works on Jenkins
 
 
 2.36 (2015-12-10)
