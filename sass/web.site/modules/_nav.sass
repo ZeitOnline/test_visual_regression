@@ -162,19 +162,15 @@ $icon-color--hover: $zon-charcoal
 		+display-flex()
 		+flex-wrap(wrap)
 		+justify-content(space-between)
-		li
+		& > li
 			width: 50%
-			text-align: left
 			margin: 0
-	+respond-min($break-phablet-min)
-		ul
-			li
+			+respond-min($break-phablet-min)
 				width: 33%
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style($width: auto)
 		+order(10)
 		+flex(2 0 35%)
-		text-align: left
 		& > ul
 			margin-right: $petite
 			display: inline-block

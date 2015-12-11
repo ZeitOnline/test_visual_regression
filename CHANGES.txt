@@ -1,10 +1,29 @@
 Change log for zeit.web
 =======================
 
-2.36 (unreleased)
+2.37 (unreleased)
 -----------------
 
 - ZON-2290: Add print CSS
+
+- FIX: (Temporarily) xfail test which never works on Jenkins
+
+
+2.36 (2015-12-10)
+-----------------
+
+- HOTFIX: correct path for Instant Articles
+
+- HOTFIX: Hide separator for empty metadata
+
+- HOTFIX: Fix navigation submenu appearance
+
+- HOTFIX: Display gallery entry captions again
+
+- ZON-2506: Add campaign parameters to ze.tt links
+
+- MAINT: Fix asset_host etc to allow mounting under an URL prefix (for showcases)
+>>>>>>> master
 
 
 2.35 (2015-12-08)
@@ -21,6 +40,8 @@ Change log for zeit.web
 - ZON-2450: Add more advertorials to navigation
 
 - ZON-2449: Include kicker in title of socialflow feeds
+
+- ZON-2429: "Snapshot" on homepage now is a normal teaser module
 
 - MAINT: Cleanup community notifications
 
