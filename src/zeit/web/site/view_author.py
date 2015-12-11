@@ -114,7 +114,8 @@ class Author(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def tab_areas(self):
-        if is_paginated(self.context, self.request):
+        if is_paginated(self.context, self.request) or (
+                len(self.area_favourite_content) == 0):
             return [self.area_articles]
         else:
             return [self.area_favourite_content, self.area_articles]

@@ -1,5 +1,7 @@
 {% extends "zeit.web.site:templates/inc/area/ranking.html" %}
 
 {% block before_module_list %}
-<h4>Weitere Artikel</h4>
+    {% if view.tab_areas | length > 1 %}
+        <h4 class="author__subheadline">Weitere Artikel</h4>
+    {% endif %}
 {% endblock before_module_list %}

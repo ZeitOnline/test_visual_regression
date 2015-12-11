@@ -1,24 +1,27 @@
 .author-contact
 	+clearfix
+	+respond-max($break-areas)
+		border-bottom: 1px solid $color-border
+		margin: 0 (-$page-padding)
+		padding: 0 $page-padding
 	+respond-min($break-areas)
-		border-bottom: none
+		left: 100%
+		max-width: remify(180px)
 		position: absolute
-		right: -50px
 		top: 0
+	+respond-min($break-desktop-min)
+		max-width: remify(200px)
 
 	&__title
-		display: none
-		+respond-min($break-areas)
-			display: block
+		+respond-max($break-areas)
+			display: none
 
 	&__item
-		float: left
-		padding: 1em 0
-		width: 33.33%
-		+respond-min($break-areas)
-			float: none
-			padding: 0
-			width: auto
+		+respond-max($break-areas)
+			float: left
+			max-width: remify(70px)
+			padding: 1em 0
+			width: 25%
 
 	&__link
 		color: $zon-dark-grey
@@ -49,8 +52,7 @@
 			width: remify(18px)
 
 	&__text
-		display: none
 		font-size: em(13px)
 		letter-spacing: $zon-letter-spacing-s
-		+respond-min($break-areas)
-			display: initial
+		+respond-max($break-areas)
+			display: none

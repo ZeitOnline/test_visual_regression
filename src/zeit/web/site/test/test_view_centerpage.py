@@ -14,6 +14,7 @@ import pytest
 import requests
 import zope.component
 
+from zeit.cms.checkout.helper import checked_out
 import zeit.content.cp.centerpage
 
 import zeit.web.core.centerpage
@@ -394,7 +395,9 @@ def test_snapshot_should_display_correct_teaser_title(testbrowser):
 def test_snapshot_should_display_correct_image_caption(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
     caption = browser.cssselect('.snapshot-caption')[0]
-    assert caption.text.strip() == 'Eisschwimmen im chinesischen Shenyang'
+    assert (caption.text.strip() ==
+            u'Ford präsentiert auf der Automesse in Detroit'
+            u' den neuen Pick-up F-150.')
 
 
 def test_snapshot_should_display_copyright_with_nonbreaking_space(testbrowser):
@@ -406,7 +409,9 @@ def test_snapshot_should_display_copyright_with_nonbreaking_space(testbrowser):
 def test_snapshot_should_have_description_text(testserver, testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
     caption = browser.cssselect('.snapshot-caption')[0]
-    assert caption.text.strip() == u'Eisschwimmen im chinesischen Shenyang'
+    assert (caption.text.strip() ==
+            u'Ford präsentiert auf der Automesse in Detroit'
+            u' den neuen Pick-up F-150.')
 
 
 def test_small_teaser_without_image_has_no_padding_left(
@@ -1631,7 +1636,10 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
 def test_zett_banner_is_displayed(testbrowser):
     browser = testbrowser('/zeit-online/zett-banner')
     box = browser.cssselect('.zett-banner')[0]
+    link = box.cssselect('a')[0]
     assert len(box.cssselect('.zett-banner__wrapper'))
+    assert ('http://ze.tt/?utm_campaign=zonbanner&utm_content=1'
+            '&utm_medium=banner&utm_source=zon') == link.get('href')
 
 
 def test_zett_parquet_is_rendering(testbrowser):
@@ -1642,11 +1650,17 @@ def test_zett_parquet_is_rendering(testbrowser):
     logo = zett_parquet.cssselect('.parquet-meta__logo')
     teaser = zett_parquet.cssselect('.teaser-small')
     more_link = zett_parquet.cssselect('.parquet-meta__more-link--zett')
+    links = zett_parquet.cssselect('a')
 
     assert len(title)
     assert len(logo)
     assert len(more_link)
     assert len(teaser) == 3
+
+    # test campaign parameters
+    for link in links:
+        assert ('?utm_campaign=zonparkett&utm_medium=parkett'
+                '&utm_source=zon') in link.get('href')
 
 
 def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):
@@ -1664,8 +1678,10 @@ def test_zett_parquet_should_link_to_zett(testbrowser):
     link_logo = browser.cssselect('.parquet-meta__title--zett')[0]
     link_more = browser.cssselect('.parquet-meta__more-link--zett')[0]
 
-    assert link_logo.attrib['href'] == 'http://ze.tt/'
-    assert link_more.attrib['href'] == 'http://ze.tt/'
+    assert ('http://ze.tt/?utm_campaign=zonparkett&utm_medium=parkett'
+            '&utm_source=zon') == link_logo.attrib['href']
+    assert ('http://ze.tt/?utm_campaign=zonparkett&utm_medium=parkett'
+            '&utm_source=zon') == link_more.attrib['href']
 
 
 def test_imagecopyright_tags_are_present_on_centerpages(testbrowser):
@@ -1826,6 +1842,24 @@ def test_zett_teaser_kicker_should_have_zett_modifier(testbrowser, testserver):
     assert len(teaser_small_kicker) == 4
     assert len(teaser_small_minor_kicker) == 2
     assert len(teaser_square_kicker) == 2
+
+
+def test_zett_teaser_should_contain_campaign_parameter(testbrowser):
+    browser = testbrowser('/zeit-online/journalistic-formats-zett')
+    select = browser.cssselect
+    links = select('.cp-area:not(.cp-area--zett) a[href*="//ze.tt"]')
+    zett_parquet_links = select('.cp-area--zett a[href*="//ze.tt"]')
+
+    assert len(links)
+    assert len(zett_parquet_links)
+
+    for link in links:
+        assert ('?utm_campaign=zonteaser&utm_medium=teaser'
+                '&utm_source=zon') in link.get('href')
+
+    for link in zett_parquet_links:
+        assert ('?utm_campaign=zonparkett&utm_medium=parkett'
+                '&utm_source=zon') in link.get('href')
 
 
 def test_printkiosk_is_structured_correctly(testbrowser):
@@ -1996,3 +2030,16 @@ def test_ranking_area_should_silently_accept_emptyness(
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
     area = zeit.web.core.centerpage.get_area(context)
     assert area.pagination == []
+
+
+def test_no_author_should_not_display_byline(testbrowser, workingcopy):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-01')
+    with checked_out(article) as co:
+        co.authorships = ()
+
+    browser = testbrowser('/zeit-online/slenderized-centerpage')
+    teaser = browser.cssselect(
+        '.teaser-fullwidth[data-unique-id="{}"] '.format(article.uniqueId))[0]
+
+    assert not teaser.cssselect('.teaser-fullwidth__byline')
