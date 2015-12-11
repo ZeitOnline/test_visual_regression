@@ -134,9 +134,7 @@ class Author(zeit.web.core.view.Base):
         try:
             comments = zeit.web.core.comments.get_user_comments(
                 self.context, page=1, rows=page_size)
-            if not comments:
-                return
-            return comments.get('page_total', 0) > 0
+            return comments and comments.get('page_total', 0) > 0
         except zeit.web.core.comments.PagesExhaustedError:
             pass
 
