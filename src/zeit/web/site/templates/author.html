@@ -10,7 +10,7 @@
             {% if view.current_tab_name == '' %}
                 <span class="{{ 'tabbar__link' | with_mods('active') }}">Artikel</span>
             {% else %}
-                <a class="tabbar__link" href="{{view.content_url}}#author-content">Artikel</a>
+                <a class="tabbar__link" href="{{ view.content_url }}#author-content">Artikel</a>
             {% endif %}
             </li>
 
@@ -18,17 +18,17 @@
             {% if view.current_tab_name == 'kommentare' %}
                 <span class="{{ 'tabbar__link' | with_mods('active') }}">Kommentare</span>
             {% else %}
-                <a class="tabbar__link" href="{{view.content_url}}/kommentare#author-content">Kommentare</a>
+                <a class="tabbar__link" href="{{ view.content_url }}/kommentare#author-content">Kommentare</a>
             {% endif %}
             </li>
         </ul>
     </div>
 
     <div class="author__item">
-        {%- for area in view.tab_areas %}
+    {%- for area in view.tab_areas %}
         {%- set area_loop = loop %}
         {% include "zeit.web.site:templates/inc/area/includer.html" %}
-        {%- endfor %}
+    {%- endfor %}
     </div>
 
 {% endblock main %}
