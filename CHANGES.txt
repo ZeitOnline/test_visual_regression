@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2469: Embed favourite content into author profile page
 
+- ZON-2475: Tabbed navigation inside content
+
 
 2.35 (2015-12-08)
 -----------------
