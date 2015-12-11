@@ -5,7 +5,7 @@
     {% include "zeit.web.site:templates/inc/author/profile.html" %}
 
     <div class="tabbar">
-        <ul class="tabbar__container">
+        <ul class="tabbar__container author__item">
             <li class="tabbar__item">
             {% if view.current_tab_name == '' %}
                 <span class="{{ 'tabbar__link' | with_mods('active') }}">Artikel</span>
@@ -24,9 +24,11 @@
         </ul>
     </div>
 
-    {%- for area in view.tab_areas %}
-    {%- set area_loop = loop %}
-    {% include "zeit.web.site:templates/inc/area/includer.html" %}
-    {%- endfor %}
+    <div class="author__item">
+        {%- for area in view.tab_areas %}
+        {%- set area_loop = loop %}
+        {% include "zeit.web.site:templates/inc/area/includer.html" %}
+        {%- endfor %}
+    </div>
 
 {% endblock main %}

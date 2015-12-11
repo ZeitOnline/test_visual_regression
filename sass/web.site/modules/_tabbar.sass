@@ -3,15 +3,12 @@
 // Bei der nächsten Verwendung: Good Luck.
 
 .tabbar
-	border-top: 1px $zon-alto solid
-	margin: remify(40px) (-$page-padding)  0
-	padding: remify(20px) 0 0 0
+	margin: 0 (-$page-padding)  0
 
 	&__container
 		// flexbox (same width) as default, table (width depending on content) as fallback for IE 9
 		display: table
 		display: flex
-		margin: 0 auto
 		padding: 0 $page-padding
 		width: 100%
 
@@ -55,11 +52,8 @@
 		padding-top: 20px
 		position: relative
 		&__container
-			// according to author__item
-			margin: 0 auto
-			// 620 + 2*$page-padding
-			max-width: remify(680px)
 			display: block
+			padding: 0
 		&__item
 			//border: 1px red solid
 			display: inline-block
