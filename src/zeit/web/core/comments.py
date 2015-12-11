@@ -477,7 +477,19 @@ def get_counts(*unique_ids):
         return {}
 
 
-class PagesExhaustedError(Exception):
+class UserCommentsException(Exception):
+    pass
+
+
+class PagesExhaustedError(UserCommentsException):
+    pass
+
+
+class NoValidComment(UserCommentsException):
+    pass
+
+
+class CommunityNotReachable(UserCommentsException):
     pass
 
 
@@ -502,8 +514,10 @@ def get_user_comments(author, page=1, rows=6, sort="DESC"):
     timeout = float(conf.get('community_host_timeout_secs', 5))
 
     with zeit.web.core.metrics.timer('user_comments.community.response_time'):
-        result = requests.get(uri, timeout=timeout)
-
+        try:
+            result = requests.get(uri, timeout=timeout)
+        except requests.exceptions.RequestException:
+            raise UserCommentsException
     if not result.ok:
         return
 
@@ -544,10 +558,6 @@ def get_user_comments(author, page=1, rows=6, sort="DESC"):
         comments['comments'].append(UserComment(comment))
 
     return comments
-
-
-class NoValidComment(Exception):
-    pass
 
 
 # XXX Right now we need this for comments, which are displayed on author

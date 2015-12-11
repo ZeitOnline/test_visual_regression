@@ -3,11 +3,14 @@ import zope.component
 
 import zeit.content.author.interfaces
 import zope.interface
+import logging
 
 from zeit.web.core.view import is_paginated
 from zeit.web.site.view_centerpage import LegacyArea
 from zeit.web.site.view_centerpage import LegacyModule
 import zeit.web.core.interfaces
+
+log = logging.getLogger(__name__)
 
 
 @zeit.web.register_module('author_header')
@@ -45,6 +48,7 @@ class AuthorContact(zeit.web.site.module.Module):
     def __init__(self, context):
         super(AuthorContact, self).__init__(context)
         self.layout = 'author_contact'
+
 
 @pyramid.view.view_defaults(
     context=zeit.content.author.interfaces.IAuthor,
@@ -135,8 +139,8 @@ class Author(zeit.web.core.view.Base):
             comments = zeit.web.core.comments.get_user_comments(
                 self.context, page=1, rows=page_size)
             return comments and comments.get('page_total', 0) > 0
-        except zeit.web.core.comments.PagesExhaustedError:
-            pass
+        except zeit.web.core.comments.UserCommentsException:
+            log.warn('An exception occured, while trying to fetch comments.')
 
         return False
 
