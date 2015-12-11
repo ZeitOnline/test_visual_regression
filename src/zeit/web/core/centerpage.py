@@ -4,7 +4,7 @@ import grokcore.component
 import zope.component
 
 import zeit.cms.interfaces
-import zeit.content.author
+import zeit.content.author.interfaces
 import zeit.content.cp.area
 import zeit.content.cp.blocks.teaser
 import zeit.content.cp.interfaces
