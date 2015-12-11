@@ -1,0 +1,29 @@
+.author-biography
+    font-family: $font-tabletgothic
+    font-size: remify(17px)
+    line-height: remify(22px)
+    color: $zon-charcoal
+    +respond-min($break-tablet-min)
+        font-size: remify(16px)
+        line-height: remify(24px)
+
+.author-questions
+    +transition(max-height .5s)
+    overflow: hidden
+    position: relative
+
+    &__title
+        font-weight: bold
+        margin: remify(20px 0 10px 0)
+
+    &--wrapped
+        +live-blog-text-wrapper($content: '+ mehr')
+
+.author-seperator
+    margin: remify(40px 0 $vertical-space 0)
+    margin-left: -($page-padding + $cp-padding)
+    margin-right: -($page-padding + $cp-padding)
+    border-top: 1px solid $zon-light-grey
+    display: block
+    +respond-min($break-tablet-min)
+        display: none

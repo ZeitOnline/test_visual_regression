@@ -123,3 +123,15 @@ def test_author_should_have_user_comments(testbrowser):
 
     assert '?cid=5572182#cid-5572182' in comments[0].cssselect(
         '.user-comment__article-link')[0].attrib['href']
+
+
+def test_author_biography_should_be_fully_rendered(testbrowser):
+    browser = testbrowser('/autoren/j_random')
+    container = browser.cssselect('.author-biography')
+    summary = container[0].cssselect('.author-summary')
+    questions = container[0].cssselect('.author-questions')
+
+    assert len(container) == 1
+    assert len(summary) == 1
+    assert len(questions) == 1
+    assert 'Das ist die Biographie' in summary[0].text

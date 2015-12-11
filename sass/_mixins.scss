@@ -477,3 +477,46 @@
 	position: relative;
 	overflow: hidden;
 }
+
+// wraps text in liveblog style
+@mixin live-blog-text-wrapper($content: '+ alles anzeigen', $height: 5, $paraLines: 3,
+                              $bgColor: $white, $zindex-before: auto, $zindex-after: auto,
+                              $linkColor: $color-link--default, $font-size: inherit) {
+	cursor: pointer;
+    max-height: $height * 1.4 * em(18px);
+	&:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: $paraLines * 1.5 * em(20px);
+		@include background-image(linear-gradient(0deg, rgba($bgColor, 1) 1.5em, rgba($bgColor, 0) 100%));
+		z-index: $zindex-before;
+	}
+
+	&:after {
+		color: $linkColor;
+		content: $content;
+		font-size: $font-size;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		text-align: center;
+		letter-spacing: $zon-letter-spacing-s;
+		border-bottom: 1px solid rgba($color-link--default, .5);
+		@include transition-property(border-bottom-color, color);
+		@include transition-duration(.2s);
+		z-index: $zindex-after;
+	}
+
+	&:hover:after {
+		color: $color-link--hover;
+		border-bottom-color: rgba($color-link--hover, .5);
+	}
+
+	@include respond-min($break-desktop-min) {
+		max-height: $height * 1.5 * em(20px); // 5 lines paragraph text
+	}
+}
+

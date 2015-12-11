@@ -82,7 +82,7 @@ require([
     'web.site/plugins/jquery.searchTools',
     'web.site/plugins/jquery.selectNav',
     'web.site/plugins/jquery.paginateTeasers',
-    'web.site/plugins/jquery.storystream',
+    'web.site/plugins/jquery.longTextWrapper',
     'web.site/plugins/jquery.tabs',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
@@ -111,7 +111,7 @@ require([
         $( '#series_select' ).selectNav();
         $( '.js-bar-teaser-paginate' ).paginateTeasers();
         $( '.js-accordion' ).accordion();
-        $( '.storystream-markup__content--first' ).storystream();
+        $( '.storystream-markup__content--first' ).longTextWrapper();
         $( '.jobbox--animate' ).animateJobs();
         $( '.js-tabs' ).tabs();
         $( '.js-image-copyright-footer' ).imageCopyrightFooter();
@@ -126,6 +126,9 @@ require([
         $.picturefill();
         $( '.js-count-formchars' ).countFormchars();
         $( '.js-fix-position' ).fixPosition();
+    } else if ( pageType === 'author' ) {
+        $( '.author-questions' ).longTextWrapper({ className: 'author-questions',
+                                                 wrap: false, height: 120, classAfterClick: 'author-questions' });
     }
 
     // more ("non critical") global stuff
