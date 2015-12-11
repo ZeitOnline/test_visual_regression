@@ -10,7 +10,7 @@
             {% if view.current_tab_name == '' %}
                 <span class="{{ 'tabbar__link' | with_mods('active') }}">Artikel</span>
             {% else %}
-                <a class="tabbar__link" href="{{view.content_url}}">Artikel</a>
+                <a class="tabbar__link" href="{{ view.content_url }}">Artikel</a>
             {% endif %}
             </li>
 
@@ -18,7 +18,7 @@
             {% if view.current_tab_name == 'kommentare' %}
                 <span class="{{ 'tabbar__link' | with_mods('active') }}">Kommentare</span>
             {% else %}
-                <a class="tabbar__link" href="{{view.content_url}}/kommentare">Kommentare</a>
+                <a class="tabbar__link" href="{{ view.content_url }}/kommentare">Kommentare</a>
             {% endif %}
             </li>
         </ul>
