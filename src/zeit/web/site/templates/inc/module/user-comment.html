@@ -9,9 +9,9 @@
 
 <div class="user-comment">
 	<div class="user-comment__text">
-		{% if comment.title != '[empty]' %}
+		{% if comment.title != '[empty]' -%}
 			<p>{{ comment.title }}</p>
-		{% endif %}
+		{%- endif -%}
 		{{ comment.description | safe }}
 	</div>
 	<div class="user-comment__date">{{ comment.publication_date | format_comment_date }}, verfasst zu:</div>
