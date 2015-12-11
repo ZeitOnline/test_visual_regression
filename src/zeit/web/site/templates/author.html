@@ -17,8 +17,10 @@
             <li class="tabbar__item">
             {% if view.current_tab_name == 'kommentare' %}
                 <span class="{{ 'tabbar__link' | with_mods('active') }}">Kommentare</span>
-            {% else %}
+            {% elif view.has_author_comments %}
                 <a class="tabbar__link" href="{{view.content_url}}/kommentare">Kommentare</a>
+            {% else %}
+                <span class="tabbar__link" href="{{view.content_url}}/kommentare">keine Kommentare</span>
             {% endif %}
             </li>
         </ul>

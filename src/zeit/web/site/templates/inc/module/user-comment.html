@@ -3,9 +3,6 @@
 {% set comment = module[0] %}
 {% set article = comment.referenced_content %}
 {% set supertitle = article.teaserSupertitle if article.teaserSupertitle else article.supertitle %}
-{# <pre>{{ comment | obj_debug }}</pre>
-<hr/>
-<pre>{{ article | obj_debug }}</pre> #}
 
 <div class="user-comment">
 	<div class="user-comment__text">
