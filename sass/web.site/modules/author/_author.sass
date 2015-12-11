@@ -32,13 +32,16 @@
 
 .cp-area--author-favourite-content
 	background-color: $zon-lighter-grey
-	margin: remify(40px) (-$page-padding) remify(40px)
-	padding: remify(20px) $page-padding remify(40px)
+	margin: remify(30px) (-$page-padding) 0
+	padding: remify(20px) $page-padding
 	width: auto
 	+respond-min($break-tablet-min)
 		background-color: #FAFAFA
 		box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1)
-		// break out of the box
-		padding: remify(40px)
 		margin-left: remify(-40px)
-		max-width: 760px
+		margin-right: remify(-40px)
+		padding: remify(40px)
+
+.cp-area--author-articles
+	margin-top: remify(40px)
+	padding: 0

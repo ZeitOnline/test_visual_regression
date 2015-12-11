@@ -3,69 +3,50 @@
 // Bei der nächsten Verwendung: Good Luck.
 
 .tabbar
-	margin: 0 (-$page-padding)  0
-
 	&__container
-		// flexbox (same width) as default, table (width depending on content) as fallback for IE 9
-		display: table
-		display: flex
-		padding: 0 remify(10px)
+		+clearfix()
+		border-radius: .3em
+		margin: 0 auto
+		padding: 0
 		width: 100%
 
 	&__item
-		// flexbox (same width) as default, table (width depending on content) as fallback for IE 9
-		display: table-cell
-		flex: 1
+		float: left
 		list-style: none
 		margin: 0
+		width: 50%
 
 	&__link
-		+font-smoothing
-		background-color: #EEEEEE
+		background-color: $zon-lighter-grey
+		color: $zon-grey
 		display: block
-		color: #707070
 		font-size: em(15px)
 		letter-spacing: $zon-letter-spacing-s
-		padding: remify(10px 20px)
+		padding: remify(10px)
 		text-align: center
 		&--active
-			background-color: #535560
-			color: #FFFFFF
-
-	&__item:first-child
-		.tabbar__link
-			border-radius: .3em 0 0 .3em
-
-	&__item:last-child
-		.tabbar__link
-			border-radius: 0 .3em .3em 0
+			+font-smoothing()
+			background-color: $zon-trout
+			color: $white
 
 +respond-min($break-tablet-min)
-	// verdammte specificity!
-	.tabbar__item:first-child .tabbar__link,
-	.tabbar__item:last-child .tabbar__link,
-		border-radius: 0
-
 	.tabbar
-		display: block
-		background: #EEEEEE
-		border: none
-		padding-top: remify(18px)
-		position: relative
+		background-color: $zon-lighter-grey
+		margin: 0 (-$page-padding)
+		padding-top: remify(30px)
 		&__container
-			display: block
-			padding: 0
+			border-radius: 0
+			left: remify(-15px) // indent equals link padding
+			position: relative
 		&__item
-			display: inline-block
+			margin-right: remify(10px)
+			width: auto
 		&__link
-			background-color: #EEEEEE
+			background-color: transparent
+			border-radius: .3em .3em 0 0
 			color: $zon-grey
+			padding: remify(8px 15px)
 			&--active
-				background-color: #FFFFFF
+				background-color: $white
+				color: $zon-dark-grey
 				font-weight: bold
-
-	// verdammte specificity!
-	.tabbar__link--active,
-	.tabbar__item:first-child .tabbar__link--active,
-	.tabbar__item:last-child .tabbar__link--active,
-		border-radius: .3em .3em 0 0
