@@ -94,7 +94,7 @@ class DeltaTimeEntity(object):
 
     def __init__(self, delta):
         if not isinstance(delta, datetime.timedelta):
-            raise TypeError
+            raise TypeError()
         self.delta = delta
         self.number = None
         self.text = None

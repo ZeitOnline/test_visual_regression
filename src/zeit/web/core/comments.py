@@ -517,7 +517,7 @@ def get_user_comments(author, page=1, rows=6, sort="DESC"):
         try:
             result = requests.get(uri, timeout=timeout)
         except requests.exceptions.RequestException:
-            raise UserCommentsException
+            raise UserCommentsException()
     if not result.ok:
         return
 
