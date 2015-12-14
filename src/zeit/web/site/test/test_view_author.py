@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 import pytest
 import mock
 import zope.component
@@ -107,7 +109,8 @@ def test_author_contact_should_be_fully_rendered(testbrowser):
     assert len(instagram) == 1
 
 
-def test_author_should_have_user_comments(testbrowser):
+def test_author_should_have_user_comments(testbrowser, clock):
+    clock.freeze(datetime.datetime(2015, 12, 9))
     browser = testbrowser('/autoren/author3/kommentare')
     comments = browser.cssselect('.user-comment')
 
