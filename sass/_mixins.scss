@@ -468,16 +468,6 @@
 	}
 }
 
-// scales images as used in columns
-@mixin scale-media-in-column-style() {
-	width: 100%;
-	height: 0;
-	margin: 0;
-	padding-bottom: 100%;
-	position: relative;
-	overflow: hidden;
-}
-
 // wraps text in liveblog style
 @mixin live-blog-text-wrapper($content: '+ alles anzeigen', $height: 5, $paraLines: 3,
                               $bgColor: $white, $zindex-before: auto, $zindex-after: auto,
