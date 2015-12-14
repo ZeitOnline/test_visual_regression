@@ -21,9 +21,7 @@ import zeit.push.interfaces
 
 import zeit.web
 import zeit.web.core.cache
-import zeit.web.core.interfaces
 import zeit.web.core.template
-import zeit.web.core.view_centerpage
 import zeit.web.site.view
 
 
@@ -36,16 +34,14 @@ def _add_none(elem, text):
 ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
 CONTENT_NAMESPACE = 'http://purl.org/rss/1.0/modules/content/'
 DC_NAMESPACE = 'http://purl.org/dc/elements/1.1/'
+ESI_NAMESPACE = 'http://www.edge-delivery.org/esi/1.0'
 ELEMENT_MAKER = lxml.builder.ElementMaker(nsmap={
-    'atom': ATOM_NAMESPACE, 'content': CONTENT_NAMESPACE, 'dc': DC_NAMESPACE},
+    'atom': ATOM_NAMESPACE, 'content': CONTENT_NAMESPACE, 'dc': DC_NAMESPACE,
+    'esi': ESI_NAMESPACE},
     typemap={NoneType: _add_none})
 ATOM_MAKER = getattr(ELEMENT_MAKER, '{%s}link' % ATOM_NAMESPACE)
 CONTENT_MAKER = getattr(ELEMENT_MAKER, '{%s}encoded' % CONTENT_NAMESPACE)
 DC_MAKER = getattr(ELEMENT_MAKER, '{%s}creator' % DC_NAMESPACE)
-
-
-def CDATA(str):
-    return lxml.etree.CDATA(str)
 
 
 def format_rfc822_date(date):
@@ -285,11 +281,12 @@ class InstantArticleFeed(Newsfeed):
                 self.request.route_url('home'), 'http://www.zeit.de/', 1)
 
             scheme, netloc, path, p, q, f = urlparse.urlparse(content_url)
-            instant_articles_url = '{}://{}/instantarticle{}'.format(
-                scheme, netloc, path)
+            instant_articles_url = (
+                '{}://{}/instantarticle{}?cdata=true'.format(
+                    scheme, netloc, path))
 
-            esi_include = '<esi:include src="{}" />'.format(
-                instant_articles_url)
+            esi_include = getattr(E, '{%s}include' % ESI_NAMESPACE)(
+                src=instant_articles_url)
 
             authors = []
             if getattr(content, 'authorships', None):
@@ -311,7 +308,7 @@ class InstantArticleFeed(Newsfeed):
                 E.pubDate(format_iso8601_date(
                     last_published_semantic(content))),
                 E.guid(content_url, isPermaLink='false'),
-                CONTENT_MAKER(CDATA(esi_include))
+                CONTENT_MAKER(esi_include)
             )
             channel.append(item)
         return root
