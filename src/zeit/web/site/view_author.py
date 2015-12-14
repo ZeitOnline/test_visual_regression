@@ -1,3 +1,4 @@
+# coding: utf-8
 import pyramid.view
 import zope.component
 
@@ -30,13 +31,20 @@ class Author(zeit.web.core.view.Base):
 
     current_tab_name = ''
 
+    # XXX Do we really *not want* to inherit from z.w.site.view.Base?
+    pagetitle_suffix = zeit.web.site.view.Base.pagetitle_suffix
+
     @zeit.web.reify
     def pagetitle(self):
-        return self.context.display_name
+        return u'{} | Autoren{}'.format(
+            self.context.display_name, self.pagetitle_suffix)
 
     @zeit.web.reify
     def pagedescription(self):
-        return self.context.display_name
+        return (
+            u'Hier finden Sie Informationen sowie alle Texte und Artikel'
+            u' von {} auf ZEIT ONLINE und aus DIE ZEIT im Überblick.'.format(
+                self.context.display_name))
 
     @zeit.web.reify
     def ranked_tags_list(self):

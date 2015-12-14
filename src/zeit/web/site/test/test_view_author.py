@@ -31,7 +31,14 @@ def test_author_page_should_show_favourite_content_if_available(testbrowser):
 
 def test_author_page_should_hide_favourite_content_if_missing(testbrowser):
     browser = testbrowser('/autoren/anne_mustermann')
+    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 0
     assert len(browser.cssselect('.teaser-small')) == 0
+
+
+def test_author_page_should_feature_schema_org_props(testbrowser):
+    doc = testbrowser('/autoren/anne_mustermann').document
+    name = doc.xpath('//*[@itemprop="author"]/*[@itemprop="name"]')
+    assert name[0].text.strip() == 'Anne Mustermann'
 
 
 def test_author_page_should_show_articles_by_author(testbrowser):

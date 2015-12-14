@@ -5,8 +5,8 @@
 			{% set module_layout = 'author-header' %}
 			{% include "zeit.web.site:templates/inc/asset/image.tpl" %}
 		</div>
-		<div class="author-header__text">
-			<h1 class="author-header__name">
+		<div class="author-header__text" itemscope itemtype="http://schema.org/Person" itemprop="author">
+			<h1 class="author-header__name" itemprop="name">
 				{{ context.display_name }}
 			</h1>
 			<div class="author-header__summary">
@@ -15,4 +15,3 @@
 		</div>
 	</div>
 </div>
-
