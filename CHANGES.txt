@@ -9,6 +9,7 @@ Change log for zeit.web
 - FIX: Be more defensive in several places:
   * Ignore byline for content with missing content-type
   * Skip gallery entries with missing content-type
+  * Skip unresolveable images in Spektrum feed
 
 
 2.36 (2015-12-10)
