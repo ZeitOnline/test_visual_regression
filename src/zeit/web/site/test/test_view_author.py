@@ -128,7 +128,7 @@ def test_author_should_have_user_comments(testbrowser, clock):
     assert 'Hmmmmmm' == comments[1].cssselect(
         '.user-comment__text > p')[0].text
 
-    assert 'vor 3 Wochen, verfasst zu:' == comments[0].cssselect(
+    assert '17. November 2015, verfasst zu:' == comments[0].cssselect(
         '.user-comment__date')[0].text
 
     assert '?cid=5572182#cid-5572182' in comments[0].cssselect(
