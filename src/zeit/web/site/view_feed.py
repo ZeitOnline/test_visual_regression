@@ -78,6 +78,18 @@ def filter_and_sort_entries(items):
     return sorted(filter_news, key=lps_sort, reverse=True)
 
 
+def create_public_url(url):
+    # Since the feed views will be accessed via newsfeed.zeit.de, we
+    # cannot use route_url() as is, since it uses that hostname, which
+    # is not the one we want. This is a heuristic attempt that should work
+    # in both production and staging (and "localhost" type environments),
+    # but at the cost of hard-coding the "newsfeed" hostname here.
+    if url.startswith('http://newsfeed'):
+        return url.replace('http://newsfeed', 'http://www', 1)
+    else:
+        return url
+
+
 class Base(zeit.web.core.view.Base):
 
     @property
@@ -140,12 +152,7 @@ class Newsfeed(Base):
 
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
-            # XXX Since this view will be accessed via newsfeed.zeit.de, we
-            # cannot use route_url() as is, since it uses that hostname, which
-            # is not the one we want. In non-production environments this
-            # unfortunately still generates useless production links.
-            content_url = content_url.replace(
-                self.request.route_url('home'), 'http://www.zeit.de/', 1)
+            content_url = create_public_url(content_url)
 
             authors = []
             if getattr(content, 'authorships', None):
@@ -273,12 +280,7 @@ class InstantArticleFeed(Newsfeed):
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
 
-            # XXX Since this view will be accessed via newsfeed.zeit.de, we
-            # cannot use route_url() as is, since it uses that hostname, which
-            # is not the one we want. In non-production environments this
-            # unfortunately still generates useless production links.
-            content_url = content_url.replace(
-                self.request.route_url('home'), 'http://www.zeit.de/', 1)
+            content_url = create_public_url(content_url)
 
             scheme, netloc, path, p, q, f = urlparse.urlparse(content_url)
             instant_articles_url = (
@@ -355,12 +357,7 @@ class SpektrumFeed(Base):
             })
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
-            # XXX Since this view will be accessed via newsfeed.zeit.de, we
-            # cannot use route_url() as is, since it uses that hostname, which
-            # is not the one we want. In non-production environments this
-            # unfortunately still generates useless production links.
-            content_url = content_url.replace(
-                self.request.route_url('home'), 'http://www.zeit.de/', 1)
+            content_url = create_public_url(content_url)
             item = E.item(
                 E.title(content.title),
                 E.link('%s?%s' % (content_url, tracking)),
@@ -421,12 +418,7 @@ class SocialFeed(Base):
                 self.context):
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
-            # XXX Since this view will be accessed via newsfeed.zeit.de, we
-            # cannot use route_url() as is, since it uses that hostname, which
-            # is not the one we want. In non-production environments this
-            # unfortunately still generates un-unseful production links.
-            content_url = content_url.replace(
-                self.request.route_url('home'), 'http://www.zeit.de/', 1)
+            content_url = create_public_url(content_url)
             if content.supertitle:
                 content_title = u'{}: {}'.format(
                     content.supertitle, content.title)
