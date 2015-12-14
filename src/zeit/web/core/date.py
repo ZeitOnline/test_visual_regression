@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+import dateutil.parser
 
 import babel.dates
 import zope.interface
@@ -15,10 +16,13 @@ locale = 'de_DE'
 def parse_date(date,
                date_format='%Y-%m-%dT%H:%M:%S.%f+00:00'):
     try:
-        utc = babel.dates.get_timezone('UTC')
-        dt = datetime.datetime.strptime(date, date_format)
-        return dt.replace(tzinfo=utc)
-    except (TypeError, ValueError):
+        if date_format == 'iso-8601':
+            return dateutil.parser.parse(date)
+        else:
+            utc = babel.dates.get_timezone('UTC')
+            dt = datetime.datetime.strptime(date, date_format)
+            return dt.replace(tzinfo=utc)
+    except (TypeError, ValueError, AttributeError):
         return
 
 
@@ -90,7 +94,7 @@ class DeltaTimeEntity(object):
 
     def __init__(self, delta):
         if not isinstance(delta, datetime.timedelta):
-            raise TypeError
+            raise TypeError()
         self.delta = delta
         self.number = None
         self.text = None

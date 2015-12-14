@@ -3,17 +3,21 @@ import pyramid.view
 import zope.component
 
 import zeit.content.author.interfaces
+import zope.interface
+import logging
 
 from zeit.web.core.view import is_paginated
 from zeit.web.site.view_centerpage import LegacyArea
 from zeit.web.site.view_centerpage import LegacyModule
-from zeit.web.site.view_centerpage import LegacyRegion
 import zeit.web.core.interfaces
 
+log = logging.getLogger(__name__)
 
-@pyramid.view.view_config(
-    renderer='templates/author.html',
-    context=zeit.content.author.interfaces.IAuthor)
+
+@pyramid.view.view_defaults(
+    context=zeit.content.author.interfaces.IAuthor,
+    renderer='templates/author.html')
+@pyramid.view.view_config(name='')
 class Author(zeit.web.core.view.Base):
     """This view implements tabs that each have their own URL.
     To add a tab, subclass this, configure a different view name and provide
@@ -98,6 +102,44 @@ class Author(zeit.web.core.view.Base):
     def area_articles(self):
         return create_author_article_area(self.context)
 
+    @zeit.web.reify
+    def has_author_comments(self):
+        page_size = int(self.request.registry.settings.get(
+            'author_comment_page_size', '10'))
+
+        try:
+            comments = zeit.web.core.comments.get_user_comments(
+                self.context, page=1, rows=page_size)
+            return comments and comments.get('page_total', 0) > 0
+        except zeit.web.core.comments.UserCommentsException:
+            log.warn('An exception occured, while trying to fetch comments.')
+
+        return False
+
+
+@pyramid.view.view_config(name='kommentare')
+class Comments(Author):
+
+    current_tab_name = 'kommentare'
+
+    @zeit.web.reify
+    def tab_areas(self):
+        page = int(self.request.GET.get('p', '1'))
+        page_size = int(self.request.registry.settings.get(
+            'author_comment_page_size', '10'))
+
+        try:
+            comments_meta = zeit.web.core.comments.get_user_comments(
+                self.context, page=page, rows=page_size)
+            comments = comments_meta['comments']
+            return [UserCommentsArea(
+                [LegacyModule([c], layout='user-comment') for c in comments],
+                comments=comments_meta)]
+        except zeit.web.core.comments.PagesExhaustedError:
+            raise pyramid.httpexceptions.HTTPNotFound()
+        except zeit.web.core.comments.UserCommentsException:
+            return [UserCommentsArea([])]
+
 
 def create_author_article_area(
         context, count=None, dedupe_favourite_content=True):
@@ -133,14 +175,29 @@ class AuthorArticleRanking(zeit.web.site.area.ranking.Ranking):
         return self._count
 
 
-@pyramid.view.view_config(
-    renderer='templates/author.html',
-    context=zeit.content.author.interfaces.IAuthor,
-    name='kommentare')
-class Comments(Author):
+class UserCommentsArea(LegacyArea):
 
-    current_tab_name = 'kommentare'
+    zope.interface.implements(zeit.web.core.interfaces.IPagination)
+
+    def __init__(self, arg, **kw):
+        super(self.__class__, self).__init__(arg, **kw)
+        self.kind = 'user-comments'
+        self.comments = kw.get('comments', {'page_total': 0, 'page': 1})
 
     @zeit.web.reify
-    def tab_areas(self):
-        return [LegacyArea([])]  # XXX not yet implemented
+    def page(self):
+        return self.comments['page']
+
+    @zeit.web.reify
+    def current_page(self):
+        return self.page
+
+    @zeit.web.reify
+    def total_pages(self):
+        return self.comments['page_total']
+
+    @zeit.web.reify
+    def pagination(self):
+        pagination = zeit.web.core.template.calculate_pagination(
+            self.current_page, self.total_pages)
+        return pagination if pagination is not None else []
