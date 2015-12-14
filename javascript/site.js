@@ -127,8 +127,7 @@ require([
         $( '.js-count-formchars' ).countFormchars();
         $( '.js-fix-position' ).fixPosition();
     } else if ( pageType === 'author' ) {
-        $( '.author-questions' ).longTextWrapper({ className: 'author-questions',
-                                                 wrap: false, height: 120, classAfterClick: 'author-questions' });
+        $( '.author-questions' ).longTextWrapper();
     }
 
     // more ("non critical") global stuff

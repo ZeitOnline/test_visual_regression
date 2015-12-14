@@ -1,67 +1,44 @@
 /**
- * @fileOverview jQuery plugin to pimp storystream CPs
+ * @fileOverview jQuery plugin to wrap long text
  * @author moritz.stoltenburg@zeit.de
  * @author thomas.puppe@zeit.de
  * @version  0.1
  */
 (function( $ ) {
-    function textWrapper( element, options ) {
+    function TextWrapper( element, options ) {
         this.node = element;
         this.element = $( element );
         this.options = options;
         this.init();
     }
 
-    textWrapper.prototype = {
+    TextWrapper.prototype.init = function() {
+        var height = Math.ceil( this.element.height()),
+            className = this.node.className.split( /\s+/ ).shift() + '--wrapped',
+            wrapper = this.element;
 
-        init: function() {
-            this.wrapSiblings();
-        },
+        if ( height > this.options.minHeight ) {
+            wrapper.addClass( className );
 
-        wrapSiblings: function() {
-            var height = Math.ceil( this.element.height()),
-                options = this.options,
-                wrapper,
-                container,
-                firstChild;
-
-            if ( height > options.minHeight ) {
-
-                if ( options.wrap ) {
-                    // either wrap element
-                    wrapper = this.element.wrap(
-                    '<div class="' + options.className + ' ' + options.className + '--wrapped"></div>' ).parent();
-                } else {
-                    // or use it directly
-                    wrapper = this.element;
-                    wrapper.addClass( options.className + '--wrapped' );
-                }
-
-                wrapper.on( 'click', function() {
-                    $( this ).off( 'click' ).on( 'transitionend', function() {
-                        this.className = options.classAfterClick;
-                        this.removeAttribute( 'style' );
-                    });
-                    this.className = options.className;
-                    this.style.maxHeight = ( height + 60 ) + 'px';
+            wrapper.on( 'click.wrap', function() {
+                wrapper.off( 'click.wrap' ).on( 'transitionend', function() {
+                    this.removeAttribute( 'style' );
                 });
-            }
+                wrapper.removeClass( className );
+                this.style.maxHeight = ( height + 60 ) + 'px';
+            });
         }
     };
 
     $.fn.longTextWrapper = function( settings ) {
-
         // default is storystream
         var defaults = {
-            className: 'storystream-markup-wrapper',
-            classAfterClick: '',
-            wrap: true,
-            minHeight: 150
-        },
-        options = $.extend( {}, defaults, settings );
+                minHeight: 150
+            },
+            options = $.extend( {}, defaults, settings );
 
         return this.each( function() {
-            new textWrapper( this, options );
+            new TextWrapper( this, options );
         });
     };
 

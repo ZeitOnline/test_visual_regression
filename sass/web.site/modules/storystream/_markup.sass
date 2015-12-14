@@ -12,8 +12,14 @@
 			padding: 0 $vertical-space $vertical-space
 
 	&__content
-		max-width: remify(640px)
 		margin: 0 auto
+		max-width: remify(640px)
+		&--wrapped
+			+live-blog-text-wrapper($content: '+ Mehr lesen',$height: 7, $paraLines: 5, $bgColor: $zon-lighter-grey, $zindex-before: 1, $zindex-after: 2, $linkColor: #777, $font-size: 0.9em)
+		&--first
+			+transition(max-height .5s)
+			overflow: hidden
+			position: relative
 		&--last
 			padding-top: $vertical-space
 			position: relative
@@ -80,14 +86,3 @@
 		&__content--last:before,
 		&__content--last:after
 			left: -$storystream-padding-desktop-inner
-
-.storystream-markup-wrapper
-	+transition(max-height .5s)
-	overflow: hidden
-	position: relative
-
-.storystream-markup-wrapper--wrapped
-	margin: 0 auto
-	max-width: remify(640px)
-
-	+live-blog-text-wrapper($content: '+ Mehr lesen',$height: 7, $paraLines: 5, $bgColor: $zon-lighter-grey, $zindex-before: 1, $zindex-after: 2, $linkColor: #777, $font-size: 0.9em)
