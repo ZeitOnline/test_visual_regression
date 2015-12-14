@@ -130,11 +130,8 @@ def test_author_should_have_user_comments(testbrowser, clock):
 
 def test_author_biography_should_be_fully_rendered(testbrowser):
     browser = testbrowser('/autoren/j_random')
-    container = browser.cssselect('.author-biography')
-    summary = container[0].cssselect('.author-summary')
-    questions = container[0].cssselect('.author-questions')
-
-    assert len(container) == 1
-    assert len(summary) == 1
-    assert len(questions) == 1
-    assert 'Das ist die Biographie' in summary[0].text
+    bio = browser.cssselect('.author-biography')
+    assert 'Das ist die Biographie' in bio[0].text
+    summary = browser.cssselect('.author-header__summary')
+    assert 'Redakteur im Ressort Digital' in summary[0].text
+    assert browser.cssselect('.author-questions')
