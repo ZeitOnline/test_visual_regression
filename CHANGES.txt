@@ -6,6 +6,9 @@ Change log for zeit.web
 
 - FIX: (Temporarily) xfail test which never works on Jenkins
 
+- FIX: Be more defensive in several places:
+  * Bylines for content without a content-type
+
 
 2.36 (2015-12-10)
 -----------------
