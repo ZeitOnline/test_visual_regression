@@ -10,6 +10,7 @@ Change log for zeit.web
   * Ignore byline for content with missing content-type
   * Skip gallery entries with missing content-type
   * Skip unresolveable images in Spektrum feed
+  * Handle non-ascii user names
 
 
 2.36 (2015-12-10)
