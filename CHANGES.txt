@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: (Temporarily) xfail test which never works on Jenkins
 
+- ZON-2545: Adjust padding on printkiosk and snapshot
+
 
 2.36 (2015-12-10)
 -----------------
