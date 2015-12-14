@@ -15,8 +15,8 @@
 	<a href="{{ article | create_url }}?cid={{ comment.cid }}#cid-{{ comment.cid }}" class="user-comment__article-link">
 		{% if supertitle %}
 			<span class="user-comment__article-kicker">
-				{{ supertitle }}:
-			</span>
+				{{- supertitle -}}
+			</span><span class="visually-hidden">:</span>
 		{% endif %}
 		<span class="user-comment__article-title">
 			{{ article.teaserTitle if article.teaserTitle else article.title }}
