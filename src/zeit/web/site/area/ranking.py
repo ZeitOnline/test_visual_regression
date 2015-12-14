@@ -15,6 +15,7 @@ import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core.block
+import zeit.web.core.interfaces
 import zeit.web.core.date
 import zeit.web.core.metrics
 import zeit.web.core.template
@@ -74,7 +75,10 @@ class IRanking(zeit.content.cp.interfaces.IArea):
 class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     zope.interface.implements(
-        IRanking, zeit.content.cp.interfaces.IRenderedArea)
+        IRanking,
+        zeit.content.cp.interfaces.IRenderedArea,
+        zeit.web.core.interfaces.IPagination
+    )
 
     sort_order = zeit.cms.content.property.ObjectPathProperty(
         '.sort_order', IRanking['sort_order'])

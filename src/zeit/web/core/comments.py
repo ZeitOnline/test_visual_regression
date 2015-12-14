@@ -477,7 +477,19 @@ def get_counts(*unique_ids):
         return {}
 
 
-class PagesExhaustedError(Exception):
+class UserCommentsException(Exception):
+    pass
+
+
+class PagesExhaustedError(UserCommentsException):
+    pass
+
+
+class NoValidComment(UserCommentsException):
+    pass
+
+
+class CommunityNotReachable(UserCommentsException):
     pass
 
 
@@ -502,7 +514,12 @@ def get_user_comments(author, page=1, rows=6, sort="DESC"):
     timeout = float(conf.get('community_host_timeout_secs', 5))
 
     with zeit.web.core.metrics.timer('user_comments.community.response_time'):
-        result = requests.get(uri, timeout=timeout)
+        try:
+            result = requests.get(uri, timeout=timeout)
+        except requests.exceptions.RequestException:
+            raise UserCommentsException()
+    if not result.ok:
+        return
 
     xml = lxml.etree.fromstring(result.content)
 
@@ -543,10 +560,6 @@ def get_user_comments(author, page=1, rows=6, sort="DESC"):
     return comments
 
 
-class NoValidComment(Exception):
-    pass
-
-
 # XXX Right now we need this for comments, which are displayed on author
 # pages. We should think about redesigning this and use one comment object
 # throughout the whole comment API (RD, 2015-12-07)
@@ -562,8 +575,9 @@ class UserComment(object):
 
     def _node_value(self, name, cast=lambda x: x):
         match = self._comment.xpath(name)
-        if not match:
+        if not match and not len(match) > 0:
             return None
+
         return cast(match[0].text)
 
     @property
@@ -595,17 +609,15 @@ class UserComment(object):
 
     @zeit.web.reify
     def publication_date(self):
-        return self._node_value('pubDate')
+        return zeit.web.core.date.parse_date(
+            self._node_value('pubDate'),
+            date_format='iso-8601')
 
     @zeit.web.reify
     def referenced_content(self):
-        drupal_id = self._node_value('cms_uniqueId')
+        uniqueId = self._node_value('cms_uniqueId')
 
-        # XXX Temporary fix, because drupal does not produce
-        # right uniqueIds yet. I suppose TB will repair this, within this
-        # iteration.
-        if drupal_id is not None:
-            uniqueId = drupal_id.replace('www.zeit.de', 'xml.zeit.de')
+        if uniqueId is not None:
             try:
                 return zeit.cms.interfaces.ICMSContent(uniqueId)
             except TypeError:
