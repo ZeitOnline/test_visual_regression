@@ -762,7 +762,7 @@ def test_user_comment_should_have_expected_structure(application):
             <cid>1</cid>
             <title>[empty]</title>
             <description>&lt;p&gt;Ich praezisiere.&lt;/p&gt;</description>
-            <pubDate>Tue, 17 Nov 2015 10:39:50 +0100</pubDate>
+            <pubDate>2015-11-17T10:39:50+00:00</pubDate>
             <cms_uniqueId>http://www.zeit.de/artikel/01</cms_uniqueId>
         </item>"""
 
@@ -771,7 +771,7 @@ def test_user_comment_should_have_expected_structure(application):
     assert comment.cid == 1
     assert comment.__name__ == 1
     assert comment.description == '<p>Ich praezisiere.</p>'
-    assert comment.publication_date == 'Tue, 17 Nov 2015 10:39:50 +0100'
+    assert comment.publication_date.isoformat() == '2015-11-17T10:39:50+00:00'
     assert comment.uniqueId == 'http://community.zeit.de/comment/1'
     assert comment.title == '[empty]'
     assert comment.referenced_content.uniqueId == (

@@ -23,6 +23,13 @@ def test_zon_gallery_should_have_metadata(testbrowser, testserver):
     assert len(select('.summary, .byline, .metadata')) == 3
 
 
+def test_gallery_should_display_entry_caption(testbrowser, testserver):
+    browser = testbrowser('{}/zeit-online/gallery/biga_1'.format(
+        testserver.url))
+    assert browser.cssselect('.figure__text')[0].text.startswith(
+        'Mathias Modica')
+
+
 def test_zon_gallery_should_have_no_pagination(testbrowser, testserver):
     select = testbrowser('{}/zeit-online/gallery/biga_1'.format(
         testserver.url)).cssselect

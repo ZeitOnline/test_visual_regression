@@ -375,7 +375,7 @@ def maybe_convert_egg_url(url):
 
 def join_url_path(base, path):
     parts = urlparse.urlsplit(base)
-    path = os.path.join(parts.path, path)
+    path = (parts.path + path).replace('//', '/')
     return urlparse.urlunsplit(
         (parts[0], parts[1], path, parts[3], parts[4]))
 
