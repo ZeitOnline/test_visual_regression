@@ -1,30 +1,22 @@
 .user-comment
-    border-top: 1px solid $color-border
-    font-size: remify(16px)
-    padding: remify(24px 0)
-
-    +respond-min($break-tablet-min)
-        border: none
-        // this is better be done by html class .author-item
-        // substitute after merge; TODO: ARNE
-        max-width: remify(620px)
-        margin-left: auto
-        margin-right: auto
-        // /END
+    @extend %teaser
 
     &__text
-        line-height: 1.5
-        & > p:first-child
-            margin-top: 0
+        margin-bottom: remify(20px)
+        > p
+            margin: 0 0 .6em 0
     &__date
-        color: $zon-mid-grey
-        font-size: remify(14px)
-        margin-bottom: remify(10px)
+        @extend %teaser-metadata
+        margin-bottom: remify(7px)
+        +respond-min($break-tablet-min)
+            margin-bottom: remify(1px)
 
     &__article-link
         font-weight: bold
+        letter-spacing: $zon-letter-spacing-s
+        line-height: 1.2
     &__article-kicker
-        color: $zon-red
-        letter-spacing: $zon-letter-spacing-m
+        color: $color-text-highlighted
+        margin-right: remify(10px)
     &__article-title
-        color: $black
+        color: $zon-charcoal
