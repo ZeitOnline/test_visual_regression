@@ -1,4 +1,7 @@
 {% import 'zeit.web.core:templates/macros/instantarticle_macro.tpl' as blocks %}
+{%- if view.wrap_in_cdata %}
+<![CDATA[
+{%- endif %}
 <!doctype html>
 <html lang="de" prefix="op: http://media.facebook.com/op#">
 
@@ -74,3 +77,6 @@
     </article>
 </body>
 </html>
+{%- if view.wrap_in_cdata %}
+]]>
+{%- endif %}

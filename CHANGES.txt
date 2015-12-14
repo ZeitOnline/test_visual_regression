@@ -4,6 +4,8 @@ Change log for zeit.web
 2.37 (unreleased)
 -----------------
 
+- ZON-2551: Make ESI work for Instant Articles feed
+
 - FIX: (Temporarily) xfail test which never works on Jenkins
 
 - ZON-2545: Adjust padding on printkiosk and snapshot

@@ -1204,3 +1204,14 @@ def test_instantarticle_representation_should_have_content(testbrowser):
     assert bro.cssselect('.op-published')[0].text.strip() == '2. Juni 1999'
     assert bro.cssselect('figure > img[src$="square__2048x2048"]')
     assert len(bro.cssselect('aside')) == 3
+
+
+def test_instantarticle_should_wrap_with_cdata_if_asked(testbrowser):
+    browser = testbrowser(
+        '/instantarticle/zeit-online/article/quotes?cdata=true')
+    assert browser.contents.startswith('<![CDATA[')
+    assert browser.contents.endswith(']]>')
+
+    browser = testbrowser(
+        '/instantarticle/zeit-online/article/quotes')
+    assert browser.contents.startswith('<!doctype')
