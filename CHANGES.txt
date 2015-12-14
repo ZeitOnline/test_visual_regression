@@ -4,9 +4,7 @@ Change log for zeit.web
 2.37 (unreleased)
 -----------------
 
-- ZON-2469: Embed favourite content into author profile page
-
-- ZON-2475: Tabbed navigation inside content
+- ZON-2444, ZON-2455, ZON-2456: Author pages with bio, articles and comments
 
 - FIX: (Temporarily) xfail test which never works on Jenkins
 
