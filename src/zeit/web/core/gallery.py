@@ -69,8 +69,17 @@ def get_gallery_image(module=None, content=None, **kwargs):
 class Gallery(collections.OrderedDict):
 
     def __init__(self, context):
-        super(Gallery, self).__init__([(k, IGalleryImage(v)) for k, v in
-                                      context.items() if v.layout != 'hidden'])
+        entries = []
+        for key in context.keys():
+            try:
+                value = context[key]
+            except:
+                continue
+            else:
+                if value.layout == 'hidden':
+                    continue
+                entries.append((key, IGalleryImage(value)))
+        super(Gallery, self).__init__(entries)
         self.context = context
 
     def __repr__(self):
