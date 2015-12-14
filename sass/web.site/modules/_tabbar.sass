@@ -1,0 +1,52 @@
+// .tabbar ist "eigentlich" (TM) überall einsetzbar,
+// aber natürlich auf Breite der Autorenseite angepasst.
+// Bei der nächsten Verwendung: Good Luck.
+
+.tabbar
+	&__container
+		+clearfix()
+		border-radius: .3em
+		margin: 0 auto
+		padding: 0
+		width: 100%
+
+	&__item
+		float: left
+		list-style: none
+		margin: 0
+		width: 50%
+
+	&__link
+		background-color: $zon-lighter-grey
+		color: $zon-grey
+		display: block
+		font-size: em(15px)
+		letter-spacing: $zon-letter-spacing-s
+		padding: remify(10px)
+		text-align: center
+		&--active
+			background-color: $zon-trout
+			color: $white
+
++respond-min($break-tablet-min)
+	.tabbar
+		background-color: $zon-lighter-grey
+		margin: 0 (-$page-padding)
+		padding-top: remify(30px)
+		&__container
+			border-radius: 0
+			left: remify(-15px) // indent equals link padding
+			position: relative
+		&__item
+			margin-right: remify(10px)
+			width: auto
+		&__link
+			background-color: transparent
+			border-radius: .3em .3em 0 0
+			color: $zon-grey
+			padding: remify(8px 15px)
+			&--active
+				+font-smoothing()
+				background-color: $white
+				color: $zon-dark-grey
+				font-weight: bold

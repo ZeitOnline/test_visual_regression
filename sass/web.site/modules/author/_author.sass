@@ -1,0 +1,47 @@
+.author
+	&__item
+		+respond-min($break-tablet-min)
+			max-width: remify(620px)
+			margin-left: auto
+			margin-right: auto
+
+	&__subheadline
+		color: $zon-dark-grey
+		font-size: em(13px)
+		letter-spacing: $zon-letter-spacing-m
+		margin: 0 0 .5em
+		text-transform: uppercase
+		+respond-min($break-tablet-min)
+			font-size: em(15px)
+
+.author-profile
+	position: relative
+	margin-bottom: remify(40px)
+	+respond-min($break-tablet-min)
+		max-width: remify(480px)
+		padding-right: remify(40px)
+	+respond-min($break-desktop-min)
+		max-width: remify(520px)
+
+%author-copytext
+	font-size: em(17px)
+	line-height: 1.4
+	+respond-min($break-tablet-min)
+		font-size: em(16px)
+		line-height: 1.5
+
+.cp-area--author-favourite-content
+	background-color: $zon-lighter-grey
+	margin: remify(30px) (-$page-padding) 0
+	padding: remify(20px) $page-padding
+	width: auto
+	+respond-min($break-tablet-min)
+		background-color: #FAFAFA
+		box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1)
+		margin-left: remify(-40px)
+		margin-right: remify(-40px)
+		padding: remify(40px)
+
+.cp-area--author-articles
+	margin-top: remify(40px)
+	padding: 0

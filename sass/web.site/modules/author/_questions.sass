@@ -1,0 +1,16 @@
+.author-questions
+    @extend %author-copytext
+    +transition(max-height .5s)
+    margin-top: remify(30px)
+    overflow: hidden
+    position: relative
+
+    &__title
+        font-size: inherit
+        margin: 0 0 .5em
+
+    &__text
+        margin: 0 0 .75em
+
+    &--wrapped
+        +live-blog-text-wrapper($content: '+ mehr')
