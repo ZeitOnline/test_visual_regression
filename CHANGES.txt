@@ -12,6 +12,8 @@ Change log for zeit.web
   * Skip unresolveable images in Spektrum feed
   * Handle non-ascii user names
 
+- MAINT: Allow HTTP exceptions to propagate to the client from Jinja templates
+
 
 2.36 (2015-12-10)
 -----------------
