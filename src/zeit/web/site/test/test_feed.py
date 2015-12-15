@@ -102,3 +102,18 @@ def test_instant_article_feed_should_be_rendered(testserver):
 
     assert xml.xpath('//item/link/text()')[0].startswith(
         'http://www.zeit.de/artikel/01')
+
+
+def test_roost_feed_contains_mobile_override_text(testserver):
+    feed_path = '/centerpage/index/rss-roost'
+    res = requests.get(
+        testserver.url + feed_path, headers={'Host': 'newsfeed.zeit.de'})
+
+    assert res.status_code == 200
+    assert res.headers['Content-Type'].startswith('application/rss+xml')
+    feed = res.text
+    assert '<atom:link href="http://newsfeed.zeit.de%s"' % feed_path in feed
+    assert ('<link>http://www.zeit.de/centerpage/article_image_asset</link>'
+            in feed)
+    assert '<title>Article Image Asset Sptzmarke</title>' in feed
+    assert '<content:encoded>Mobile-Text' in feed
