@@ -1,16 +1,30 @@
 Change log for zeit.web
 =======================
 
-2.37 (unreleased)
+2.38 (unreleased)
 -----------------
 
 - ZON-2444, ZON-2455, ZON-2456: Author pages with bio, articles and comments
 
-- ZON-2551: Make ESI work for Instant Articles feed
+- ZON-2520: Implement RSS feed for Roost
 
-- FIX: (Temporarily) xfail test which never works on Jenkins
+
+2.37 (2015-12-15)
+-----------------
 
 - ZON-2545: Adjust padding on printkiosk and snapshot
+
+- ZON-2551: Make ESI work for Instant Articles feed
+
+- FIX: prevent links in links in shop teaser
+
+- MAINT: Allow HTTP exceptions to propagate to the client from Jinja templates
+
+- FIX: Be more defensive in several places:
+  * Ignore byline for content with missing content-type
+  * Skip gallery entries with missing content-type
+  * Skip unresolveable images in Spektrum feed
+  * Handle non-ascii user names
 
 
 2.36 (2015-12-10)
@@ -27,6 +41,8 @@ Change log for zeit.web
 - ZON-2506: Add campaign parameters to ze.tt links
 
 - MAINT: Fix asset_host etc to allow mounting under an URL prefix (for showcases)
+
+- MAINT: Adjust templates to allow mounting under an URL prefix (for showcases)
 
 
 2.35 (2015-12-08)

@@ -62,7 +62,7 @@ def test_breadcumb_should_produce_expected_data():
     context.title = 'This is my title'
 
     request = mock.Mock()
-    request.host = 'foo.bar'
+    request.route_url.return_value = 'http://foo.bar/'
 
     article = zeit.web.magazin.view_article.Article(context, request)
 
@@ -83,7 +83,7 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
     context.title = 'This is my title'
 
     request = mock.Mock()
-    request.host = 'foo.bar'
+    request.route_url.return_value = 'http://foo.bar/'
 
     article = zeit.web.magazin.view_article.Article(context, request)
 
@@ -641,8 +641,10 @@ def test_feature_longform_template_should_have_zon_logo_header(jinja2_env):
     # jinja2 has a blocks attribute which generates a stream,
     # if called with context. We can use it with a html parser.
     ctx, request = (mock.Mock(),) * 2
-    request.request.host = 'foo.bar'
-    ctx.resolve = mock.Mock(return_value=request)
+    # It seems jinja evaluates {{request.route_url('home')}} not like
+    # getattr(ctx.resolve('request'), 'route_url')('home'), but more like
+    # ctx.call('request.route_url', 'home')
+    ctx.call.return_value = 'http://foo.bar/'
 
     html_str = ' '.join(list(tpl.blocks['longform_logo'](ctx)))
     html = lxml.html.fromstring(html_str)

@@ -41,8 +41,8 @@ itemtype="http://schema.org/SiteNavigationElement"
 		{% include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" %}
 	</li>
 	<li class="{{ class }}__item {{ class }}__item--featured">
-		<a class="{{ class }}__link" itemprop="url" href="http://{{
-        view.request.host }}/zeit-magazin/index"
+		<a class="{{ class }}__link" itemprop="url" href="{{
+        request.route_url('home') }}zeit-magazin/index"
         data-id="topnav.mainnav.14..zeitmagazin"><span
         itemprop="name">ZEITmagazin</span></a>
 	</li>

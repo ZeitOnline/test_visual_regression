@@ -442,8 +442,9 @@ def test_notfound_view_works_for_post(testserver, testbrowser):
     assert err.value.getcode() == 404
 
 
-def test_canonical_handles_non_ascii_urls():
+def test_canonical_handles_non_ascii_urls(application):
     req = pyramid.request.Request.blank(u'/ümläut'.encode('utf-8'))
+    req.registry = application.zeit_app.config.registry
     view = zeit.web.core.view.Base(None, req)
     assert u'http://localhost/ümläut' == view.canonical_url
 

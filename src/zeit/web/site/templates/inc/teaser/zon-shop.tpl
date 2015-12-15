@@ -5,7 +5,7 @@
     <a href="{{ teaser | create_url }}">
         <div class="{{ self.layout() }}__figurewrapper">
             {% set module_layout = self.layout() %}
-            {% include "zeit.web.site:templates/inc/asset/image_teaser.tpl" %}
+            {% include "zeit.web.site:templates/inc/teaser_asset/imagegroup_shop.tpl" %}
         </div>
         <div class="{{ self.layout() }}__container">
             <p class="{{ self.layout() }}__text">{{ teaser.teaserText }}</p>

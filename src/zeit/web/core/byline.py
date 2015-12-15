@@ -142,3 +142,15 @@ class ArticleContentByline(ContentByline):
                 yield 'linked_author', author.target
             else:
                 yield 'plain_author', author.target
+
+
+@grokcore.component.implementer(ITeaserByline)
+@grokcore.component.adapter(zeit.cms.repository.interfaces.IUnknownResource)
+def unknown_teaser_byline(context):
+    return TeaserByline(None)
+
+
+@grokcore.component.implementer(IContentByline)
+@grokcore.component.adapter(zeit.cms.repository.interfaces.IUnknownResource)
+def unknown_content_byline(context):
+    return ContentByline(None)
