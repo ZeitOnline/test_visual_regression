@@ -211,7 +211,7 @@ class PostComment(zeit.web.core.view.Base):
                             request.session['user']['name']):
                     self.user_name = request.session['user']['name']
                     set_user = True
-                    self.status.append("User name {} was set".format(
+                    self.status.append(u"User name {} was set".format(
                         self.user_name))
                 else:
                     raise pyramid.httpexceptions.HTTPInternalServerError(

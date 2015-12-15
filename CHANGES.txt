@@ -8,7 +8,15 @@ Change log for zeit.web
 
 - FIX: (Temporarily) xfail test which never works on Jenkins
 
+- MAINT: Allow HTTP exceptions to propagate to the client from Jinja templates
+
 - ZON-2545: Adjust padding on printkiosk and snapshot
+
+- FIX: Be more defensive in several places:
+  * Ignore byline for content with missing content-type
+  * Skip gallery entries with missing content-type
+  * Skip unresolveable images in Spektrum feed
+  * Handle non-ascii user names
 
 
 2.36 (2015-12-10)
