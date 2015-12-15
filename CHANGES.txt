@@ -4,7 +4,7 @@ Change log for zeit.web
 2.38 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2428: Remove "ZEIT ONLINE" from social media meta titles
 
 
 2.37 (2015-12-15)

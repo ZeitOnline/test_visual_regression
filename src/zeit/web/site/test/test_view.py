@@ -122,7 +122,7 @@ def test_ressort_literally_returns_correct_ressort(application):
     assert article_view.ressort_literally == ''
 
 
-def test_sharing_titles_equal_pagetitle(testbrowser):
+def test_sharing_titles_differ_from_html_title(testbrowser):
     browser = testbrowser('/zeit-online/article/02')
 
     pagetitle = browser.cssselect('title')[0].text
@@ -131,5 +131,5 @@ def test_sharing_titles_equal_pagetitle(testbrowser):
     twitter_title = browser.cssselect(
         'meta[name="twitter:title"]')[0].attrib.get('content')
 
-    assert og_title == pagetitle
-    assert twitter_title == pagetitle
+    assert og_title + u' | ZEIT ONLINE' == pagetitle
+    assert twitter_title + u' | ZEIT ONLINE' == pagetitle
