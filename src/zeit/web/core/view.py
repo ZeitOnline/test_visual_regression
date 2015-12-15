@@ -351,7 +351,8 @@ class Base(object):
     def canonical_url(self):
         """ Set own url as default canonical. Overwrite for special
             cases and page types"""
-        return u"{}{}".format(self.request.host_url, self.request.path_info)
+        return u"{}{}".format(
+            self.request.route_url('home').rstrip('/'), self.request.path_info)
 
     @zeit.web.reify
     def js_vars(self):

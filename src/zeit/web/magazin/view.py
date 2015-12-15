@@ -20,25 +20,26 @@ class Base(zeit.web.core.view.Base):
         crumbs = {
             'start': (
                 'Start',
-                'http://{}/index'.format(self.request.host)
+                '{}index'.format(self.request.route_url('home'))
             ),
             'zmo': (
                 'ZEIT Magazin',
-                'http://{}/zeit-magazin/index'.format(self.request.host)
+                '{}zeit-magazin/index'.format(self.request.route_url('home'))
             ),
             'leben': (
                 'Leben',
-                'http://{}/zeit-magazin/leben/index'.format(self.request.host)
+                '{}zeit-magazin/leben/index'.format(
+                    self.request.route_url('home'))
             ),
             'mode-design': (
                 'Mode & Design',
-                'http://{}/zeit-magazin/mode-design/index'.format(
-                    self.request.host)
+                '{}zeit-magazin/mode-design/index'.format(
+                    self.request.route_url('home'))
             ),
             'essen-trinken': (
                 'Essen & Trinken',
-                'http://{}/zeit-magazin/essen-trinken/index'.format(
-                    self.request.host)
+                '{}zeit-magazin/essen-trinken/index'.format(
+                    self.request.route_url('home'))
             )
         }
         crumb_list = [crumbs['start']]

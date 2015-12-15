@@ -32,7 +32,7 @@ def test_footer_logo_links_to_hp(jinja2_env):
         'zeit.web.site:templates/inc/footer.html')
 
     request = mock.Mock()
-    request.host = 'foo.bar'
+    request.route_url.return_value = 'http://foo.bar/'
 
     html_str = tpl.render(view=mock.MagicMock(), request=request)
     html = lxml.html.fromstring(html_str).cssselect

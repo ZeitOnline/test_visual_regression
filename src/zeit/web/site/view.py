@@ -144,7 +144,7 @@ class Base(zeit.web.core.view.Base):
 def login_state(request):
     settings = request.registry.settings
     destination = request.params['context-uri'] if request.params.get(
-        'context-uri') else 'http://{}'.format(request.host)
+        'context-uri') else request.route_url('home')
     info = {}
 
     if not request.authenticated_userid and request.cookies.get(
@@ -154,7 +154,7 @@ def login_state(request):
     info['login'] = u"{}/anmelden?url={}".format(
         settings['sso_url'], destination)
     info['logout'] = u"{}/abmelden?url={}".format(
-            settings['sso_url'], destination)
+        settings['sso_url'], destination)
 
     if request.authenticated_userid and 'user' in request.session:
         info['user'] = request.session['user']
@@ -165,8 +165,9 @@ def login_state(request):
 @pyramid.view.view_config(route_name='schlagworte')
 def schlagworte(request):
     raise pyramid.httpexceptions.HTTPMovedPermanently(
-        u'http://{}/thema/{}'.format(
-            request.host, request.matchdict['item'].lower()).encode('utf-8'))
+        u'{}thema/{}'.format(
+            request.route_path('home'),
+            request.matchdict['item'].lower()).encode('utf-8'))
 
 
 # XXX We should be a little more specific here, ie ICommentableContent
