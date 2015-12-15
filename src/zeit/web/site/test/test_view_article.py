@@ -972,7 +972,7 @@ def test_article_should_have_large_facebook_and_twitter_images(testbrowser):
         'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
 
 
-def test_article_should_have_large_facebook_and_twitter_images(testbrowser):
+def test_column_article_should_have_author_as_social_media_image(testbrowser):
     doc = testbrowser('/zeit-online/article/fischer').document
     assert doc.xpath('//meta[@property="og:image"]/@content')[0].endswith(
         'zeit-online/cp-content/author_images/Julia_Zange/wide__1300x731')
