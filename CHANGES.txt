@@ -6,7 +6,11 @@ Change log for zeit.web
 
 - ZON-2290: Add print CSS
 
+- ZON-2551: Make ESI work for Instant Articles feed
+
 - FIX: (Temporarily) xfail test which never works on Jenkins
+
+- ZON-2545: Adjust padding on printkiosk and snapshot
 
 
 2.36 (2015-12-10)
