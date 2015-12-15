@@ -2043,3 +2043,11 @@ def test_no_author_should_not_display_byline(testbrowser, workingcopy):
         '.teaser-fullwidth[data-unique-id="{}"] '.format(article.uniqueId))[0]
 
     assert not teaser.cssselect('.teaser-fullwidth__byline')
+
+
+def test_shop_and_printkiosk_must_not_contain_links_inside_links(testbrowser):
+    browser = testbrowser('/angebote/zeit-shop-buehne/vorschau')
+    assert len(browser.cssselect('.teaser-shop:first-child a')) == 1
+
+    browser = testbrowser('/angebote/printkiosk/vorschau')
+    assert len(browser.cssselect('.teaser-printkiosk:first-child a')) == 1
