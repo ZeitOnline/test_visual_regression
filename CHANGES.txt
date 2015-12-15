@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.37 (unreleased)
+2.37 (2015-12-15)
 -----------------
 
 - ZON-2545: Adjust padding on printkiosk and snapshot
