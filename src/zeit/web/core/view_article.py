@@ -257,7 +257,10 @@ class Article(zeit.web.core.view.Content):
              route_name='instantarticle',
              renderer='templates/instantarticle.html')
 class InstantArticle(Article):
-    pass
+
+    @zeit.web.reify
+    def wrap_in_cdata(self):
+        return pyramid.settings.asbool(self.request.GET.get('cdata'))
 
 
 class ArticlePage(Article):
