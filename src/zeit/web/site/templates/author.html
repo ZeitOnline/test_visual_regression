@@ -14,15 +14,15 @@
             {% endif %}
             </li>
 
-            <li class="tabbar__item">
             {% if view.current_tab_name == 'kommentare' %}
+            <li class="tabbar__item">
                 <span class="{{ 'tabbar__link' | with_mods('active') }}">Kommentare</span>
-            {% elif view.has_author_comments %}
-                <a class="tabbar__link" href="{{ view.content_url }}/kommentare#author-content">Kommentare</a>
-            {% else %}
-                <span class="tabbar__link">keine Kommentare</span>
-            {% endif %}
             </li>
+            {% elif view.has_author_comments %}
+            <li class="tabbar__item">
+                <a class="tabbar__link" href="{{ view.content_url }}/kommentare#author-content">Kommentare</a>
+            </li>
+            {% endif %}
         </ul>
     </div>
 
