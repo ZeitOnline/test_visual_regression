@@ -62,6 +62,28 @@ def test_newsfeed_should_render_an_authorfeed(testserver):
         'Gentrifizierung: Mei, is des traurig!')
 
 
+def test_socialflow_feed_contains_social_fields(testserver):
+    feed_path = '/centerpage/index/rss-socialflow-twitter'
+    res = requests.get(
+        testserver.url + feed_path, headers={'Host': 'newsfeed.zeit.de'})
+
+    assert res.status_code == 200
+    assert res.headers['Content-Type'].startswith('application/rss+xml')
+    feed = res.text
+    assert '<atom:link href="http://newsfeed.zeit.de%s"' % feed_path in feed
+    assert ('<link>http://www.zeit.de/centerpage/article_image_asset</link>'
+            in feed)
+    assert '<content:encoded>Twitter-Text' in feed
+    assert '<content:encoded>Facebook-Text' not in feed
+
+    feed_path = '/centerpage/index/rss-socialflow-facebook'
+    res = requests.get(
+        testserver.url + feed_path, headers={'Host': 'newsfeed.zeit.de'})
+    feed = res.text
+    assert '<content:encoded>Twitter-Text' not in feed
+    assert '<content:encoded>Facebook-Text' in feed
+
+
 def test_instant_article_feed_should_be_rendered(testserver):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/01'}]
