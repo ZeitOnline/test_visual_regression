@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-2564: Add separate feed `rss-socialflow-facebook-zmo`
 
+- ZON-2260: Columns: use author portraits for social sharing images
+
+- ZON-2551: Make ESI work for Instant Articles feed
+
 - FIX: Retrieve mobile text from the correct field for roost feed
 
 - ZON-2290: Add print CSS
