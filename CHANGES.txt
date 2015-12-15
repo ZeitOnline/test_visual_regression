@@ -4,15 +4,13 @@ Change log for zeit.web
 2.37 (unreleased)
 -----------------
 
-- FIX: prevent links in links in shop teaser
+- ZON-2545: Adjust padding on printkiosk and snapshot
 
 - ZON-2551: Make ESI work for Instant Articles feed
 
-- FIX: (Temporarily) xfail test which never works on Jenkins
+- FIX: prevent links in links in shop teaser
 
 - MAINT: Allow HTTP exceptions to propagate to the client from Jinja templates
-
-- ZON-2545: Adjust padding on printkiosk and snapshot
 
 - FIX: Be more defensive in several places:
   * Ignore byline for content with missing content-type
