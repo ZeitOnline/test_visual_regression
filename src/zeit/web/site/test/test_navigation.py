@@ -149,11 +149,14 @@ def test_nav_contains_essential_elements(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
-    mock_view.request.route_url.return_value = 'http://www.zeit.de/'
+
+    def route_url(arg):
+        return 'http://www.zeit.de/'
+
     mock_request = mock.Mock()
+    mock_request.route_url = route_url
     html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect
-
     # Logo
     assert html('a[href*="/index"]'
                 '[title="Nachrichten auf ZEIT ONLINE"]')[0] is not None, (

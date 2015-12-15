@@ -20,25 +20,25 @@ class Base(zeit.web.core.view.Base):
         crumbs = {
             'start': (
                 'Start',
-                '{}/index'.format(self.request.route_url('home'))
+                '{}index'.format(self.request.route_url('home'))
             ),
             'zmo': (
                 'ZEIT Magazin',
-                '{}/zeit-magazin/index'.format(self.request.route_url('home'))
+                '{}zeit-magazin/index'.format(self.request.route_url('home'))
             ),
             'leben': (
                 'Leben',
-                '{}/zeit-magazin/leben/index'.format(
+                '{}zeit-magazin/leben/index'.format(
                     self.request.route_url('home'))
             ),
             'mode-design': (
                 'Mode & Design',
-                '{}/zeit-magazin/mode-design/index'.format(
+                '{}zeit-magazin/mode-design/index'.format(
                     self.request.route_url('home'))
             ),
             'essen-trinken': (
                 'Essen & Trinken',
-                '{}/zeit-magazin/essen-trinken/index'.format(
+                '{}zeit-magazin/essen-trinken/index'.format(
                     self.request.route_url('home'))
             )
         }
