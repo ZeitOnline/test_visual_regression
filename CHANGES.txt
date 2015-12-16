@@ -4,7 +4,7 @@ Change log for zeit.web
 2.39 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Display bylines on ranking area teasers
 
 
 2.38 (2015-12-16)
@@ -17,8 +17,6 @@ Change log for zeit.web
 - ZON-2520: Implement RSS feed for Roost
 
 - ZON-2428: Remove "ZEIT ONLINE" from social media meta titles
-
-- FIX: Display bylines on ranking area teasers
 
 - MAINT: Fix asset_host etc to allow mounting under an URL prefix (for showcases)
 
