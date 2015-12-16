@@ -4,6 +4,8 @@ Change log for zeit.web
 2.38 (unreleased)
 -----------------
 
+- HOTFIX: Set correct IVW-ID for new Android Wrapper App
+
 - ZON-2444, ZON-2455, ZON-2456: Author pages with bio, articles and comments
 
 - ZON-2520: Implement RSS feed for Roost
