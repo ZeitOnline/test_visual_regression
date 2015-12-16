@@ -1,4 +1,3 @@
-# coding: utf-8
 import pyramid.view
 import zope.component
 
@@ -12,6 +11,43 @@ from zeit.web.site.view_centerpage import LegacyModule
 import zeit.web.core.interfaces
 
 log = logging.getLogger(__name__)
+
+
+@zeit.web.register_module('author_header')
+class AuthorHeader(zeit.web.site.module.Module):
+
+    def __init__(self, context):
+        super(AuthorHeader, self).__init__(context)
+        self.layout = 'author_header'
+
+    @zeit.web.reify
+    def author_img(self):
+        return zeit.web.core.template.closest_substitute_image(
+            self.context.image_group, 'zon-column')
+
+
+@zeit.web.register_module('author_topics')
+class AuthorTopics(zeit.web.site.module.Module):
+
+    def __init__(self, context):
+        super(AuthorTopics, self).__init__(context)
+        self.layout = 'author_topics'
+
+
+@zeit.web.register_module('author_bio')
+class AuthorBio(zeit.web.site.module.Module):
+
+    def __init__(self, context):
+        super(AuthorBio, self).__init__(context)
+        self.layout = 'author_bio'
+
+
+@zeit.web.register_module('author_contact')
+class AuthorContact(zeit.web.site.module.Module):
+
+    def __init__(self, context):
+        super(AuthorContact, self).__init__(context)
+        self.layout = 'author_contact'
 
 
 @pyramid.view.view_defaults(
@@ -31,20 +67,17 @@ class Author(zeit.web.core.view.Base):
 
     current_tab_name = ''
 
-    # XXX Do we really *not want* to inherit from z.w.site.view.Base?
-    pagetitle_suffix = zeit.web.site.view.Base.pagetitle_suffix
-
     @zeit.web.reify
     def pagetitle(self):
-        return u'{} | Autoren{}'.format(
-            self.context.display_name, self.pagetitle_suffix)
+        return self.context.display_name
+
+    @zeit.web.reify
+    def social_pagetitle(self):
+        return self.pagetitle
 
     @zeit.web.reify
     def pagedescription(self):
-        return (
-            u'Hier finden Sie Informationen sowie alle Texte und Artikel'
-            u' von {} auf ZEIT ONLINE und aus DIE ZEIT im Überblick.'.format(
-                self.context.display_name))
+        return self.context.display_name
 
     @zeit.web.reify
     def ranked_tags_list(self):
@@ -85,8 +118,7 @@ class Author(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def tab_areas(self):
-        if is_paginated(self.context, self.request) or (
-                len(self.area_favourite_content) == 0):
+        if is_paginated(self.context, self.request):
             return [self.area_articles]
         else:
             return [self.area_favourite_content, self.area_articles]
@@ -138,7 +170,7 @@ class Comments(Author):
         except zeit.web.core.comments.PagesExhaustedError:
             raise pyramid.httpexceptions.HTTPNotFound()
         except zeit.web.core.comments.UserCommentsException:
-            return [UserCommentsArea([])]
+            return []
 
 
 def create_author_article_area(
@@ -182,7 +214,7 @@ class UserCommentsArea(LegacyArea):
     def __init__(self, arg, **kw):
         super(self.__class__, self).__init__(arg, **kw)
         self.kind = 'user-comments'
-        self.comments = kw.get('comments', {'page_total': 0, 'page': 1})
+        self.comments = kw['comments']
 
     @zeit.web.reify
     def page(self):
