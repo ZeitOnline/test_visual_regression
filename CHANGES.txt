@@ -69,10 +69,6 @@ Change log for zeit.web
   * Images with empty copyright
   * Videos without still image
 
-- ZON-2474: Make comments per user available in zeit.web
-
-- ZON-2463: Style Autorenseitenheader
-
 
 2.34 (2015-12-04)
 -----------------
@@ -91,8 +87,6 @@ Change log for zeit.web
 - MAINT: Polish nextread, advertising nextread and article lineage
 
 - HOTFIX: Handle non-ascii author names in author feed
-
-- ZON-2462: Connect friedbert to new author object
 
 - MAINT: Use time-based caching for video series source
 
