@@ -41,14 +41,14 @@ class Author(zeit.web.site.view.Base):
 
     @zeit.web.reify
     def social_pagetitle(self):
+        return self.context.display_name
+
+    @zeit.web.reify
+    def pagedescription(self):
         return (
             u'Hier finden Sie Informationen sowie alle Texte und Artikel'
             u' von {} auf ZEIT ONLINE und aus DIE ZEIT im Überblick.'.format(
                 self.context.display_name))
-
-    @zeit.web.reify
-    def pagedescription(self):
-        return self.context.display_name
 
     @zeit.web.reify
     def ranked_tags_list(self):
