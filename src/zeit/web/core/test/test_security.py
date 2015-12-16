@@ -27,7 +27,7 @@ def test_reload_community_should_be_recalled(mock_metrics, monkeypatch):
 
     def call(self, request, **kwargs):
         request.called = request.called + 1
-        raise Exception
+        raise Exception('provoked')
 
     monkeypatch.setattr(requests.Session, 'send', call)
 
@@ -44,7 +44,7 @@ def test_reload_community_should_suceed_after_one_call(
     def call(self, request, **kwargs):
         request.called = request.called + 1
         if request.called == 1:
-            raise Exception
+            raise Exception('provoked')
         return 'result'
 
     monkeypatch.setattr(requests.Session, 'send', call)

@@ -7,118 +7,67 @@
 	&__container
 		padding: $vertical-space $storystream-padding-mobile
 		&--first
-			padding: $vertical-space*1.5 $storystream-padding-mobile
+			padding: remify(32px) 0
 		&--last
-			padding: 0 $vertical-space $vertical-space
+			padding-top: 0
 
 	&__content
-		max-width: remify(640px)
 		margin: 0 auto
+		max-width: remify(640px)
+		&--wrapped
+			+text-wrapper($content: '+ Mehr lesen', $height: 7, $paraLines: 5, $bgColor: $zon-lighter-grey, $linkColor: $zon-grey, $font-size: .9em)
+		&--first
+			+transition(max-height .5s)
+			overflow: hidden
+			position: relative
 		&--last
 			padding-top: $vertical-space
 			position: relative
 			&:before
+				background-color: $color-storystream-border
+				content: ''
+				height: $vertical-space*1.5
+				left: -$storystream-padding-mobile
+				position: absolute
+				top: 0
+				width: 1px
+			&:after
 				+make-a-circle($color: $white, $radius: 9px, $border_color: $zon-mid-grey, $border_width: 2px)
 				left: -$storystream-padding-mobile
 				margin: remify(-5px 0 0 -6px)
 				top: $vertical-space*1.5
-				z-index: 2
-			&:after
-				content: ''
-				position: absolute
-				width: 1px
-				height: $vertical-space*1.5
-				background-color: $color-storystream-border
-				left: -$storystream-padding-mobile
-				top: 0
-				z-index: 1
 
 	&__title
 		font-size: remify(18px)
 		font-weight: bold
-		line-height: remify(22px)
+		line-height: 1.2
 		margin: 0
 
 	&__text
 		color: $zon-dark-grey
 		font-size: remify(16px)
-		line-height: remify(21px)
+		line-height: 1.4
 		&--first
-			color: #777
+			color: $zon-grey
 
 	ul
 		@extend %markup-ul
 
 +respond-min($break-tablet-min)
 	.storystream-markup
-		padding: 0 $storystream-padding-tablet
-
 		&__content--last:before,
 		&__content--last:after
 			left: -$storystream-padding-tablet
 
 		&__title
 			font-size: remify(21px)
-			line-height: remify(24px)
 
 		&__text
 			font-size: remify(17px)
-			line-height: remify(25px)
-
-		ul li
-			margin-left: 0
-			&:before
-				border-radius: 50%
-				height: remify(5px)
-				left: remify(-15px)
-				width: remify(5px)
+			line-height: 1.5
 
 +respond-min($break-desktop-min)
 	.storystream-markup
-		padding: 0 $storystream-padding-desktop-outer
-
 		&__content--last:before,
 		&__content--last:after
 			left: -$storystream-padding-desktop-inner
-
-.storystream-markup-wrapper
-	+transition(max-height .5s)
-	overflow: hidden
-	position: relative
-
-.storystream-markup-wrapper--wrapped
-	cursor: pointer
-	margin: 0 auto
-	max-width: remify(640px)
-	max-height: 7 * 1.4 * em(18px) // 5 lines paragraph text
-	+respond-min($break-desktop-min)
-		max-height: 7 * 1.5 * em(20px) // 5 lines paragraph text
-
-	&:before
-		content: ""
-		position: absolute
-		left: 0
-		right: 0
-		bottom: 0
-		height: 5 * 1.5 * em(20px) // 3 lines paragraph text
-		+background-image(linear-gradient(0deg, rgba($zon-lighter-grey, 1) 1.5em, rgba($zon-lighter-grey, 0) 100%))
-		z-index: 1
-
-	&:after
-		color: #777
-		content: "+ Mehr lesen"
-		font-size: 0.9em // em by purpose
-		position: absolute
-		bottom: 0
-		left: 0
-		text-align: center
-		letter-spacing: $zon-letter-spacing-s
-		border-bottom: 1px solid rgba($color-link--default, .5)
-		+transition-property(border-bottom-color, color)
-		+transition-duration(.2s)
-		z-index: 2
-
-	&:hover:after
-		color: $color-link--hover
-		border-bottom-color: rgba($color-link--hover, .5)
-
