@@ -395,9 +395,9 @@ class Base(object):
             assert title
         except (AssertionError, TypeError):
             if getattr(self, 'supertitle'):
-                title = '{}: {}'.format(self.supertitle, self.title)
+                title = u'{}: {}'.format(self.supertitle, self.title)
             else:
-                title = self.title
+                title
         if title:
             if self.is_hp or not suffix:
                 return title
