@@ -6,8 +6,6 @@ Change log for zeit.web
 
 - ZON-2444, ZON-2455, ZON-2456: Author pages with bio, articles and comments
 
-- ZON-2551: Make ESI work for Instant Articles feed
-
 - ZON-2462: Connect friedbert to new author object
 
 - ZON-2474: Make comments per user available in zeit.web

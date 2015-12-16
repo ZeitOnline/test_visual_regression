@@ -2,7 +2,7 @@
 
 {% block teaser_kicker %}
     <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('zett-parquet') }}">
-        {{ teaser.teaserSupertitle or teaser.supertitle }}
+        {{- teaser.teaserSupertitle or teaser.supertitle -}}
     </span>
     {%- if teaser.teaserSupertitle or teaser.supertitle -%}
         <span class="visually-hidden">:</span>

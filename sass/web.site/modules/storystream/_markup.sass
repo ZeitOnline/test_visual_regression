@@ -7,15 +7,15 @@
 	&__container
 		padding: $vertical-space $storystream-padding-mobile
 		&--first
-			padding: $vertical-space*1.5 $storystream-padding-mobile
+			padding: remify(32px) 0
 		&--last
-			padding: 0 $vertical-space $vertical-space
+			padding-top: 0
 
 	&__content
 		margin: 0 auto
 		max-width: remify(640px)
 		&--wrapped
-			+live-blog-text-wrapper($content: '+ Mehr lesen',$height: 7, $paraLines: 5, $bgColor: $zon-lighter-grey, $zindex-before: 1, $zindex-after: 2, $linkColor: #777, $font-size: 0.9em)
+			+text-wrapper($content: '+ Mehr lesen', $height: 7, $paraLines: 5, $bgColor: $zon-lighter-grey, $linkColor: $zon-grey, $font-size: .9em)
 		&--first
 			+transition(max-height .5s)
 			overflow: hidden
@@ -24,65 +24,50 @@
 			padding-top: $vertical-space
 			position: relative
 			&:before
+				background-color: $color-storystream-border
+				content: ''
+				height: $vertical-space*1.5
+				left: -$storystream-padding-mobile
+				position: absolute
+				top: 0
+				width: 1px
+			&:after
 				+make-a-circle($color: $white, $radius: 9px, $border_color: $zon-mid-grey, $border_width: 2px)
 				left: -$storystream-padding-mobile
 				margin: remify(-5px 0 0 -6px)
 				top: $vertical-space*1.5
-				z-index: 2
-			&:after
-				content: ''
-				position: absolute
-				width: 1px
-				height: $vertical-space*1.5
-				background-color: $color-storystream-border
-				left: -$storystream-padding-mobile
-				top: 0
-				z-index: 1
 
 	&__title
 		font-size: remify(18px)
 		font-weight: bold
-		line-height: remify(22px)
+		line-height: 1.2
 		margin: 0
 
 	&__text
 		color: $zon-dark-grey
 		font-size: remify(16px)
-		line-height: remify(21px)
+		line-height: 1.4
 		&--first
-			color: #777
+			color: $zon-grey
 
 	ul
 		@extend %markup-ul
 
 +respond-min($break-tablet-min)
 	.storystream-markup
-		padding: 0 $storystream-padding-tablet
-
 		&__content--last:before,
 		&__content--last:after
 			left: -$storystream-padding-tablet
 
 		&__title
 			font-size: remify(21px)
-			line-height: remify(24px)
 
 		&__text
 			font-size: remify(17px)
-			line-height: remify(25px)
-
-		ul li
-			margin-left: 0
-			&:before
-				border-radius: 50%
-				height: remify(5px)
-				left: remify(-15px)
-				width: remify(5px)
+			line-height: 1.5
 
 +respond-min($break-desktop-min)
 	.storystream-markup
-		padding: 0 $storystream-padding-desktop-outer
-
 		&__content--last:before,
 		&__content--last:after
 			left: -$storystream-padding-desktop-inner

@@ -37,7 +37,7 @@
                                     <span class="{{ self.layout() }}__kicker-logo--liveblog{% if teaser.liveblog_is_live == False %} {{ self.layout() }}__kicker-logo--liveblog-closed{% endif %}">live</span>
                                 {% endif %}
                             {% endblock %}
-                            {{ teaser.teaserSupertitle or teaser.supertitle }}
+                            {{ teaser.teaserSupertitle or teaser.supertitle -}}
                         </span>
                         {%- if teaser.teaserSupertitle or teaser.supertitle -%}
                             <span class="visually-hidden">:</span>
