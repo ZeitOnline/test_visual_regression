@@ -1,16 +1,48 @@
 Change log for zeit.web
 =======================
 
-2.37 (unreleased)
+2.39 (unreleased)
 -----------------
 
 - ZON-2290: Add print CSS
 
 - ZON-2551: Make ESI work for Instant Articles feed
 
-- FIX: (Temporarily) xfail test which never works on Jenkins
+
+2.38 (2015-12-16)
+-----------------
+
+- HOTFIX: Set correct IVW-ID for new Android Wrapper App
+
+- ZON-2444, ZON-2455, ZON-2456: Author pages with bio, articles and comments
+
+- ZON-2520: Implement RSS feed for Roost
+
+- ZON-2428: Remove "ZEIT ONLINE" from social media meta titles
+
+- MAINT: Fix asset_host etc to allow mounting under an URL prefix (for showcases)
+
+- MAINT: Adjust templates to allow mounting under an URL prefix (for showcases)
+
+- HOTFIX: Author should be able to handle social_pagetitle
+
+
+2.37 (2015-12-15)
+-----------------
 
 - ZON-2545: Adjust padding on printkiosk and snapshot
+
+- ZON-2551: Make ESI work for Instant Articles feed
+
+- FIX: prevent links in links in shop teaser
+
+- MAINT: Allow HTTP exceptions to propagate to the client from Jinja templates
+
+- FIX: Be more defensive in several places:
+  * Ignore byline for content with missing content-type
+  * Skip gallery entries with missing content-type
+  * Skip unresolveable images in Spektrum feed
+  * Handle non-ascii user names
 
 
 2.36 (2015-12-10)
@@ -25,8 +57,6 @@ Change log for zeit.web
 - HOTFIX: Display gallery entry captions again
 
 - ZON-2506: Add campaign parameters to ze.tt links
-
-- MAINT: Fix asset_host etc to allow mounting under an URL prefix (for showcases)
 
 
 2.35 (2015-12-08)

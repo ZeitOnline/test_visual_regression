@@ -15,12 +15,12 @@ def test_login_state_view_should_deliver_correct_destination():
     request.registry.settings['community_host'] = "http://community"
     request.registry.settings['sso_url'] = "http://sso"
     request.registry.settings['community_static_host'] = "community_static"
-    request.host = "destination_sso"
+    request.route_url.return_value = 'http://destination_sso/'
     request.params = {}
     result = zeit.web.site.view.login_state(request)
     assert result == {
-        'login': 'http://sso/anmelden?url=http://destination_sso',
-        'logout': 'http://sso/abmelden?url=http://destination_sso'
+        'login': 'http://sso/anmelden?url=http://destination_sso/',
+        'logout': 'http://sso/abmelden?url=http://destination_sso/'
     }
 
 
@@ -122,7 +122,7 @@ def test_ressort_literally_returns_correct_ressort(application):
     assert article_view.ressort_literally == ''
 
 
-def test_sharing_titles_equal_pagetitle(testbrowser):
+def test_sharing_titles_differ_from_html_title(testbrowser):
     browser = testbrowser('/zeit-online/article/02')
 
     pagetitle = browser.cssselect('title')[0].text
@@ -131,5 +131,5 @@ def test_sharing_titles_equal_pagetitle(testbrowser):
     twitter_title = browser.cssselect(
         'meta[name="twitter:title"]')[0].attrib.get('content')
 
-    assert og_title == pagetitle
-    assert twitter_title == pagetitle
+    assert og_title + u' | ZEIT ONLINE' == pagetitle
+    assert twitter_title + u' | ZEIT ONLINE' == pagetitle

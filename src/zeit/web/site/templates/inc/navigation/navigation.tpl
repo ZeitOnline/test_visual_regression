@@ -4,9 +4,9 @@
 	<div itemscope itemtype="http://schema.org/Organization" class="logo_bar">
 		{% with tag_name = 'h1' if view.is_hp else 'div' %}
 		<{{ tag_name }} class="logo_bar__brand" itemprop="brand">
-			<a itemprop="url" role="img" href="http://{{ view.request.host }}/index" title="Nachrichten auf ZEIT ONLINE" data-id="topnav.2.1..logo">
+			<a itemprop="url" role="img" href="{{ request.route_url('home') }}index" title="Nachrichten auf ZEIT ONLINE" data-id="topnav.2.1..logo">
 				{# Metatag to show Google the image, see http://stackoverflow.com/questions/18130827/schema-org-give-a-div-a-itemprop-image -#}
-				<meta itemprop="logo" content="http://{{ view.request.host }}/static/icons/zon-logo-desktop.png">
+				<meta itemprop="logo" content="{{ request.asset_host }}/icons/site/zon-logo-desktop.png">
 				<meta itemprop="name" content="ZEIT ONLINE">
 				<object class="logo_bar__brand-logo" data="{{ view.request.asset_host }}/images/logo-zon-black.svg" type="image/svg+xml">
 					<img src="{{ view.request.asset_host }}/images/logo-zon-black.png" alt="ZEIT ONLINE" />
@@ -33,7 +33,7 @@
 
 	<!-- wrap start -->
 	<div class="main_nav__community" data-dropdown="true">
-		{% set esi_source = 'http://{}/login-state?context-uri={}'.format(request.host, request.url) %}
+		{% set esi_source = '{}/login-state?context-uri={}'.format(request.route_url('home'), request.url) %}
 		{{ lama.insert_esi(esi_source, 'Anmeldung nicht möglich', view.is_dev_environment) }}
 	</div>
 	<div class="main_nav__ressorts" data-dropdown="true">

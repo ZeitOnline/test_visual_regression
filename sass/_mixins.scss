@@ -467,3 +467,44 @@
 		display: none;
 	}
 }
+
+// wraps text in liveblog style
+@mixin text-wrapper($content: '+ alles anzeigen', $height: 5, $paraLines: 3,
+                              $bgColor: $white, $linkColor: $color-link--default, $font-size: inherit) {
+	cursor: pointer;
+    max-height: $height * 1.4 * em(18px);
+
+	@include respond-min($break-desktop-min) {
+		max-height: $height * 1.5 * em(20px); // 5 lines paragraph text
+	}
+
+	&:before {
+		@include transition-duration(.2s);
+		@include transition-property(border-bottom-color, color);
+		border-bottom: 1px solid rgba($color-link--default, .5);
+		bottom: 0;
+		color: $linkColor;
+		content: $content;
+		font-size: $font-size;
+		left: 0;
+		letter-spacing: $zon-letter-spacing-s;
+		position: absolute;
+		z-index: 1;
+	}
+
+	&:hover:before {
+		border-bottom-color: rgba($color-link--hover, .5);
+		color: $color-link--hover;
+	}
+
+	&:after {
+		@include background-image(linear-gradient(0deg, rgba($bgColor, 1) 1.5em, rgba($bgColor, 0) 100%));
+		bottom: 0;
+		content: "";
+		height: $paraLines * 1.5 * em(20px);
+		left: 0;
+		position: absolute;
+		right: 0;
+	}
+}
+

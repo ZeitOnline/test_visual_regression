@@ -1,14 +1,18 @@
 .storystream-summary
-	padding: $storystream-padding-mobile*1.5 $storystream-padding-mobile
-	&__container
-		max-width: remify(640px)
-		font-size: remify(18px)
-		line-height: 1.4
-		margin: 0 auto remify(20px)
-
+	color: $zon-dark-grey
+	font-size: em(18px)
+	line-height: 1.4
+	padding: remify(32px) $storystream-padding-mobile
 	+respond-min($break-tablet-min)
 		line-height: 1.5
-		padding: 0 $storystream-padding-tablet
 	+respond-min($break-desktop-min)
-		font-size: remify(20px)
-		padding: 0 $storystream-padding-desktop-outer
+		font-size: em(20px)
+
+	&__container
+		margin: 0 auto
+		max-width: remify(640px)
+
+		p
+			margin: 0 0 1em 0
+			&:last-child
+				margin-bottom: 0

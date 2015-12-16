@@ -10,7 +10,7 @@
 			{%- endif %}
 		</a>
 	{% else %}
-		<a href="http://{{ view.request.host }}/index" data-id="article-pager....startseite">
+		<a href="{{ request.route_url('home') }}index" data-id="article-pager....startseite">
 			<span class="article-pagination__button article-pagination__button--next">Startseite</span>
 		</a>
 	{%- endif %}
@@ -43,7 +43,7 @@
 {% else %}
 <div class="article-pagination article__item article-pagination--komplettansicht" role="navigation" aria-labeledby="article-pagination-title">
 	<div class="visually-hidden" id="article-pagination-title">Seitennavigation</div>
-	<a href="http://{{ view.request.host }}/index" data-id="article-pager....startseite">
+	<a href="{{ request.route_url('home') }}index" data-id="article-pager....startseite">
 		<span class="article-pagination__button article-pagination__button--next">Startseite</span>
 	</a>
 </div>
