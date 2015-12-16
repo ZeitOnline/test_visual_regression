@@ -4,7 +4,7 @@ Change log for zeit.web
 2.39 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Display bylines on ranking area teasers
 
 
 2.38 (2015-12-16)
