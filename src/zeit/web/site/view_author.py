@@ -1,3 +1,4 @@
+# coding: utf-8
 import pyramid.view
 import zope.component
 
@@ -17,7 +18,7 @@ log = logging.getLogger(__name__)
     context=zeit.content.author.interfaces.IAuthor,
     renderer='templates/author.html')
 @pyramid.view.view_config(name='')
-class Author(zeit.web.core.view.Base):
+class Author(zeit.web.site.view.Base):
     """This view implements tabs that each have their own URL.
     To add a tab, subclass this, configure a different view name and provide
     a different ``tab_areas``.
@@ -36,11 +37,14 @@ class Author(zeit.web.core.view.Base):
     @zeit.web.reify
     def pagetitle(self):
         return u'{} | Autoren{}'.format(
-           self.context.display_name, self.pagetitle_suffix)
+            self.context.display_name, self.pagetitle_suffix)
 
     @zeit.web.reify
     def social_pagetitle(self):
-        return self.pagetitle
+        return (
+            u'Hier finden Sie Informationen sowie alle Texte und Artikel'
+            u' von {} auf ZEIT ONLINE und aus DIE ZEIT im Überblick.'.format(
+                self.context.display_name))
 
     @zeit.web.reify
     def pagedescription(self):
@@ -85,7 +89,8 @@ class Author(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def tab_areas(self):
-        if is_paginated(self.context, self.request):
+        if is_paginated(self.context, self.request) or (
+                len(self.area_favourite_content) == 0):
             return [self.area_articles]
         else:
             return [self.area_favourite_content, self.area_articles]
@@ -137,7 +142,7 @@ class Comments(Author):
         except zeit.web.core.comments.PagesExhaustedError:
             raise pyramid.httpexceptions.HTTPNotFound()
         except zeit.web.core.comments.UserCommentsException:
-            return []
+            return [UserCommentsArea([])]
 
 
 def create_author_article_area(
