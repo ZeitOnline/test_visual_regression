@@ -754,3 +754,72 @@ def test_post_comment_should_have_correct_premoderation_states(
         mock_method.return_value = response
         ret_value = poster.post_comment()
         assert ret_value['response']['premoderation'] is state
+
+
+def test_user_comment_should_have_expected_structure(application):
+    xml_str = """
+        <item>
+            <cid>1</cid>
+            <title>[empty]</title>
+            <description>&lt;p&gt;Ich praezisiere.&lt;/p&gt;</description>
+            <pubDate>2015-11-17T10:39:50+00:00</pubDate>
+            <cms_uniqueId>http://www.zeit.de/artikel/01</cms_uniqueId>
+        </item>"""
+
+    xml = lxml.etree.fromstring(xml_str)
+    comment = zeit.web.core.comments.UserComment(xml)
+    assert comment.cid == 1
+    assert comment.__name__ == 1
+    assert comment.description == '<p>Ich praezisiere.</p>'
+    assert comment.publication_date.isoformat() == '2015-11-17T10:39:50+00:00'
+    assert comment.uniqueId == 'http://community.zeit.de/comment/1'
+    assert comment.title == '[empty]'
+    assert comment.referenced_content.uniqueId == (
+        'http://xml.zeit.de/artikel/01')
+
+    xml_str = """
+        <item>
+            <cid>1</cid>
+            <title></title>
+            <description></description>
+            <pubDate></pubDate>
+            <cms_uniqueId></cms_uniqueId>
+        </item>"""
+
+    xml = lxml.etree.fromstring(xml_str)
+    comment = zeit.web.core.comments.UserComment(xml)
+    assert comment.cid == 1
+    assert comment.description is None
+    assert comment.publication_date is None
+    assert comment.uniqueId == 'http://community.zeit.de/comment/1'
+
+
+def test_user_comments_should_raise_exception_if_no_cid_given(application):
+    xml_str = '<item><cid></cid></item>'
+    xml = lxml.etree.fromstring(xml_str)
+    with pytest.raises(zeit.web.core.comments.NoValidComment):
+        zeit.web.core.comments.UserComment(xml)
+
+    xml_str = '<item></item>'
+    xml = lxml.etree.fromstring(xml_str)
+    with pytest.raises(zeit.web.core.comments.NoValidComment):
+        zeit.web.core.comments.UserComment(xml)
+
+    xml_str = '<item><cid>a</cid></item>'
+    xml = lxml.etree.fromstring(xml_str)
+    with pytest.raises(zeit.web.core.comments.NoValidComment):
+        zeit.web.core.comments.UserComment(xml)
+
+
+def test_user_comment_thread_should_have_expected_structure(
+        application, testserver):
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/author3')
+    thread = zeit.web.core.comments.get_user_comments(author)
+    assert thread['uid'] == 172432
+    assert thread['published_total'] == 570
+    assert thread['page'] == 1
+    assert thread['page_total'] == 95
+    assert thread['sort'] == 'DESC'
+    assert thread['rows'] == 6
+    assert len(thread['comments']) == 6

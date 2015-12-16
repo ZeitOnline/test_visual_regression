@@ -159,7 +159,7 @@
 	letter-spacing: $zon-letter-spacing-s
 	+respond-min($break-tablet-min)
 		font-size: em(13px)
-	*:not(:last-child):not(:empty):after
+	> *:not(:last-child):not(:empty):after
 		content: " / "
 		margin: 0 .2em
 		opacity: $color-separator-opacity

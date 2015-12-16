@@ -39,7 +39,7 @@
                             {% endblock %}
                             {{ teaser.teaserSupertitle or teaser.supertitle }}
                         </span>
-                        {% if teaser.teaserSupertitle or teaser.supertitle %}
+                        {%- if teaser.teaserSupertitle or teaser.supertitle -%}
                             <span class="visually-hidden">:</span>
                         {% endif %}
                     {% endblock %}

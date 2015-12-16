@@ -24,16 +24,7 @@
     padding-right: 1em
 
 .header__tags__link
-    border-radius: .3em
-    border: 1px solid $color-border
-    color: inherit
-    display: inline-block
-    margin: remify(0 9px 5px 0)
-    padding: remify(2px 7px 3px)
-    +on-interaction
-        background-color: $zon-lighter-grey
-        border-color: $zon-mid-grey
-        color: inherit
+    @extend %tags
 
 .header__date
     float: right

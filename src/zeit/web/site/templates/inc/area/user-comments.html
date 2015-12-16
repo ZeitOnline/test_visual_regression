@@ -1,0 +1,11 @@
+{% extends "zeit.web.site:templates/inc/area/default.html" %}
+
+{% block before_module_list %}
+    {% if not view.has_author_comments %}
+        Aufgrund technischer Probleme können die Kommentare dieses Autors momentan nicht angezeigt werden.
+    {% endif %}
+{% endblock %}
+
+{% block after_module_list %}
+    {% include "zeit.web.site:templates/inc/pagination.tpl" %}
+{% endblock %}
