@@ -141,11 +141,3 @@ def test_author_biography_should_be_fully_rendered(testbrowser):
     summary = browser.cssselect('.author-header__summary')
     assert 'Redakteur im Ressort Digital' in summary[0].text
     assert browser.cssselect('.author-questions')
-
-
-def test_view_authors_pagetitles_should_be_equal(application):
-    author = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/autoren/author3')
-    request = mock.Mock()
-    view = zeit.web.site.view_author.Author(author, request)
-    assert view.pagetitle == view.social_pagetitle
