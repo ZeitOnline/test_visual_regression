@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.38 (unreleased)
+2.39 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.38 (2015-12-16)
 -----------------
 
 - HOTFIX: Set correct IVW-ID for new Android Wrapper App

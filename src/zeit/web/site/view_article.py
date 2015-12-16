@@ -70,7 +70,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
                     [t for t in (
                         self.supertitle, self.title) if t])
         if title and suffix:
-            return '{}{}'.format(title, self.pagetitle_suffix)
+            return u'{}{}'.format(title, self.pagetitle_suffix)
         if title:
             return title
 
