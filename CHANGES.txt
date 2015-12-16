@@ -10,6 +10,10 @@ Change log for zeit.web
 
 - ZON-2428: Remove "ZEIT ONLINE" from social media meta titles
 
+- MAINT: Fix asset_host etc to allow mounting under an URL prefix (for showcases)
+
+- MAINT: Adjust templates to allow mounting under an URL prefix (for showcases)
+
 
 2.37 (2015-12-15)
 -----------------
@@ -41,10 +45,6 @@ Change log for zeit.web
 - HOTFIX: Display gallery entry captions again
 
 - ZON-2506: Add campaign parameters to ze.tt links
-
-- MAINT: Fix asset_host etc to allow mounting under an URL prefix (for showcases)
-
-- MAINT: Adjust templates to allow mounting under an URL prefix (for showcases)
 
 
 2.35 (2015-12-08)
