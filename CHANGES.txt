@@ -6,8 +6,6 @@ Change log for zeit.web
 
 - ZON-2290: Add print CSS
 
-- ZON-2551: Make ESI work for Instant Articles feed
-
 
 2.38 (2015-12-16)
 -----------------
