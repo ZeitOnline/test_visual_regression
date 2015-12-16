@@ -389,7 +389,7 @@ class Base(object):
     def supertitle(self):
         return self.context.supertitle
 
-    def _pagetitle_constructor(self, suffix):
+    def _pagetitle(self, suffix):
         try:
             title = zeit.seo.interfaces.ISEO(self.context).html_title
             assert title
@@ -404,11 +404,11 @@ class Base(object):
 
     @zeit.web.reify
     def pagetitle(self):
-        return self._pagetitle_constructor(True)
+        return self._pagetitle(suffix=True)
 
     @zeit.web.reify
     def social_pagetitle(self):
-        return self._pagetitle_constructor(False)
+        return self._pagetitle(suffix=False)
 
     @zeit.web.reify
     def pagedescription(self):

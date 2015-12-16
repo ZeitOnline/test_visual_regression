@@ -55,7 +55,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     def extend_from_template(self):
         return "zeit.web.site:templates/article.html"
 
-    def _pagetitle_constructor(self, suffix):
+    def _pagetitle(self, suffix):
         try:
             title = zeit.seo.interfaces.ISEO(self.context).html_title
             assert title
@@ -74,14 +74,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return title
 
         return self.seo_title_default
-
-    @zeit.web.reify
-    def pagetitle(self):
-        return self._pagetitle_constructor(True)
-
-    @zeit.web.reify
-    def social_pagetitle(self):
-        return self._pagetitle_constructor(False)
 
     @zeit.web.reify
     def pdf_link(self):
