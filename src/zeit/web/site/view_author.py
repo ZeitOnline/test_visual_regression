@@ -186,7 +186,7 @@ class UserCommentsArea(LegacyArea):
     def __init__(self, arg, **kw):
         super(self.__class__, self).__init__(arg, **kw)
         self.kind = 'user-comments'
-        self.comments = kw['comments']
+        self.comments = kw.get('comments', {'page_total': 0, 'page': 1})
 
     @zeit.web.reify
     def page(self):
