@@ -63,13 +63,14 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             if self.page_nr > 1 and self.current_page.teaser:
                 title = ': '.join(
                     [t for t in (
-                        self.supertitle, self.current_page.teaser) if t])
+                        getattr(self, 'supertitle'),
+                        self.current_page.teaser) if t])
             else:
                 title = ': '.join(
                     [t for t in (
                         self.supertitle, self.title) if t])
         if title and suffix:
-            return title + self.pagetitle_suffix
+            return '{}{}'.format(title, self.pagetitle_suffix)
         if title:
             return title
 

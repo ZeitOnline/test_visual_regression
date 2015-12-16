@@ -394,7 +394,10 @@ class Base(object):
             title = zeit.seo.interfaces.ISEO(self.context).html_title
             assert title
         except (AssertionError, TypeError):
-            title = ': '.join([t for t in (self.supertitle, self.title) if t])
+            if getattr(self, 'supertitle'):
+                title = '{}: {}'.format(self.supertitle, self.title)
+            else:
+                title = self.title
         if title:
             if self.is_hp or not suffix:
                 return title

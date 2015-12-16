@@ -32,12 +32,18 @@ class Author(zeit.web.core.view.Base):
     current_tab_name = ''
 
     # XXX Do we really *not want* to inherit from z.w.site.view.Base?
+    # I think we need to prove, that z.w.s.view.Base really _is_ a
+    # sufficient base for all views in z.w.s (RD, 2015-12-16)
     pagetitle_suffix = zeit.web.site.view.Base.pagetitle_suffix
 
     @zeit.web.reify
     def pagetitle(self):
         return u'{} | Autoren{}'.format(
             self.context.display_name, self.pagetitle_suffix)
+
+    @zeit.web.reify
+    def social_pagetitle(self):
+        return self.context.display_name
 
     @zeit.web.reify
     def pagedescription(self):

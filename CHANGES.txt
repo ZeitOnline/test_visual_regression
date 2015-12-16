@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - MAINT: Adjust templates to allow mounting under an URL prefix (for showcases)
 
+- HOTFIX: Author should be able to handle social_pagetitle
+
 
 2.37 (2015-12-15)
 -----------------
