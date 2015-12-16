@@ -13,43 +13,6 @@ import zeit.web.core.interfaces
 log = logging.getLogger(__name__)
 
 
-@zeit.web.register_module('author_header')
-class AuthorHeader(zeit.web.site.module.Module):
-
-    def __init__(self, context):
-        super(AuthorHeader, self).__init__(context)
-        self.layout = 'author_header'
-
-    @zeit.web.reify
-    def author_img(self):
-        return zeit.web.core.template.closest_substitute_image(
-            self.context.image_group, 'zon-column')
-
-
-@zeit.web.register_module('author_topics')
-class AuthorTopics(zeit.web.site.module.Module):
-
-    def __init__(self, context):
-        super(AuthorTopics, self).__init__(context)
-        self.layout = 'author_topics'
-
-
-@zeit.web.register_module('author_bio')
-class AuthorBio(zeit.web.site.module.Module):
-
-    def __init__(self, context):
-        super(AuthorBio, self).__init__(context)
-        self.layout = 'author_bio'
-
-
-@zeit.web.register_module('author_contact')
-class AuthorContact(zeit.web.site.module.Module):
-
-    def __init__(self, context):
-        super(AuthorContact, self).__init__(context)
-        self.layout = 'author_contact'
-
-
 @pyramid.view.view_defaults(
     context=zeit.content.author.interfaces.IAuthor,
     renderer='templates/author.html')
@@ -67,9 +30,13 @@ class Author(zeit.web.core.view.Base):
 
     current_tab_name = ''
 
+    # XXX Do we really *not want* to inherit from z.w.site.view.Base?
+    pagetitle_suffix = zeit.web.site.view.Base.pagetitle_suffix
+
     @zeit.web.reify
     def pagetitle(self):
-        return self.context.display_name
+        return u'{} | Autoren{}'.format(
+           self.context.display_name, self.pagetitle_suffix)
 
     @zeit.web.reify
     def social_pagetitle(self):
