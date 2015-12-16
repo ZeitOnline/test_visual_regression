@@ -55,8 +55,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     def extend_from_template(self):
         return "zeit.web.site:templates/article.html"
 
-    @zeit.web.reify
-    def pagetitle(self):
+    def _pagetitle(self, suffix):
         try:
             title = zeit.seo.interfaces.ISEO(self.context).html_title
             assert title
@@ -69,8 +68,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
                 title = ': '.join(
                     [t for t in (
                         self.supertitle, self.title) if t])
+        if title and suffix:
+            return title + self.pagetitle_suffix
         if title:
-            return title + (u'' if self.is_hp else self.pagetitle_suffix)
+            return title
+
         return self.seo_title_default
 
     @zeit.web.reify

@@ -389,16 +389,26 @@ class Base(object):
     def supertitle(self):
         return self.context.supertitle
 
-    @zeit.web.reify
-    def pagetitle(self):
+    def _pagetitle(self, suffix):
         try:
             title = zeit.seo.interfaces.ISEO(self.context).html_title
             assert title
         except (AssertionError, TypeError):
             title = ': '.join([t for t in (self.supertitle, self.title) if t])
         if title:
-            return title + (u'' if self.is_hp else self.pagetitle_suffix)
+            if self.is_hp or not suffix:
+                return title
+            else:
+                return title + self.pagetitle_suffix
         return self.seo_title_default
+
+    @zeit.web.reify
+    def pagetitle(self):
+        return self._pagetitle(suffix=True)
+
+    @zeit.web.reify
+    def social_pagetitle(self):
+        return self._pagetitle(suffix=False)
 
     @zeit.web.reify
     def pagedescription(self):
