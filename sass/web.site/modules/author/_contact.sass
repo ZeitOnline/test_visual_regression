@@ -1,0 +1,58 @@
+.author-contact
+	+clearfix
+	+respond-max($break-areas)
+		border-bottom: 1px solid $color-border
+		margin: 0 (-$page-padding)
+		padding: 0 $page-padding
+	+respond-min($break-areas)
+		left: 100%
+		max-width: remify(180px)
+		position: absolute
+		top: 0
+	+respond-min($break-desktop-min)
+		max-width: remify(200px)
+
+	&__title
+		+respond-max($break-areas)
+			display: none
+
+	&__item
+		+respond-max($break-areas)
+			float: left
+			max-width: remify(70px)
+			padding: 1em 0
+			width: 25%
+
+	&__link
+		color: $zon-dark-grey
+		display: inline-block
+		margin-bottom: remify(3px)
+		max-width: 100%
+		overflow: hidden
+		text-overflow: ellipsis
+		white-space: nowrap
+
+	&__icon
+		height: remify(24px)
+		width: remify(24px)
+
+		&--twitter
+			color: $color-twitter
+		&--facebook
+			color: $color-facebook
+		&--instagram
+			color: #66583d
+		&--email
+			color: $zon-grey
+
+		+respond-min($break-areas)
+			height: remify(18px)
+			margin-right: remify(10px)
+			vertical-align: middle
+			width: remify(18px)
+
+	&__text
+		font-size: em(13px)
+		letter-spacing: $zon-letter-spacing-s
+		+respond-max($break-areas)
+			display: none

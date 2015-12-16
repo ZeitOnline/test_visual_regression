@@ -1,0 +1,25 @@
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
+
+{% set comment = module[0] %}
+{% set article = comment.referenced_content %}
+{% set supertitle = article.teaserSupertitle if article.teaserSupertitle else article.supertitle %}
+
+<div class="user-comment">
+	<div class="user-comment__text">
+		{% if comment.title != '[empty]' -%}
+			<p>{{ comment.title }}</p>
+		{%- endif -%}
+		{{ comment.description | safe }}
+	</div>
+	<div class="user-comment__date">{{ comment.publication_date | format_timedelta(days=3, absolute=True) }}, verfasst zu:</div>
+	<a href="{{ article | create_url }}?cid={{ comment.cid }}#cid-{{ comment.cid }}" class="user-comment__article-link">
+		{% if supertitle %}
+			<span class="user-comment__article-kicker">
+				{{- supertitle -}}
+			</span><span class="visually-hidden">:</span>
+		{% endif %}
+		<span class="user-comment__article-title">
+			{{ article.teaserTitle if article.teaserTitle else article.title }}
+		</span>
+	</a>
+</div>

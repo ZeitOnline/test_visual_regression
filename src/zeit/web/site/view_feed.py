@@ -216,15 +216,9 @@ class AuthorFeed(Newsfeed):
 
     @zeit.web.reify
     def items(self):
-        solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        query = u'author:"{}" AND (type:article)'.format(
-            self.context.display_name)
-        resultset = []
-        for result in solr.search(
-                query, sort='date-first-released desc', rows=8):
-            resultset.append(
-                zeit.cms.interfaces.ICMSContent(result['uniqueId']))
-        return resultset
+        return zeit.content.cp.interfaces.ITeaseredContent(
+            zeit.web.site.view_author.create_author_article_area(
+                self.context, count=8, dedupe_favourite_content=False))
 
 
 @pyramid.view.view_defaults(

@@ -233,3 +233,17 @@ class IMetrics(zope.interface.Interface):
 
 class ISharingImage(zope.interface.Interface):
     """Adapts ICMSContent to an IImageGroup to be used for sharing purposes"""
+
+
+class IPagination(zope.interface.Interface):
+    """An pagination object to render a page with a certain subset of an
+       resultset (e.g solr query). Also used to display html pagination
+       object."""
+
+    page = zope.interface.Attribute(
+        'The actual page being displayed.')
+    current_page = zope.interface.Attribute(
+        'Same as page. Kept for hysterical raisins.')
+    total_page = zope.interface.Attribute(
+        'Number of pages available.')
+    pagination = zope.interface.Attribute('A list of page numbers.')
