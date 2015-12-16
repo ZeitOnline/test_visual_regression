@@ -414,25 +414,25 @@ class SocialFeed(Base):
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
             content_url = create_public_url(content_url)
-            if content.supertitle:
-                content_title = u'{}: {}'.format(
-                    content.supertitle, content.title)
-            else:
-                content_title = content.title
             item = E.item(
-                E.title(content_title),
+                E.title(self.make_title(content)),
                 E.link(content_url),
                 E.description(content.teaserText),
                 E.pubDate(
                     format_rfc822_date(last_published_semantic(content))),
                 E.guid(content.uniqueId, isPermaLink='false'),
             )
-            social_value = getattr(
-                zeit.push.interfaces.IPushMessages(content), self.social_field)
+            social_value = self.social_value(content)
             if social_value:
                 item.append(CONTENT_MAKER(social_value))
             channel.append(item)
         return root
+
+    def make_title(self, content):
+        if content.supertitle:
+            return u'{}: {}'.format(content.supertitle, content.title)
+        else:
+            return content.title
 
 
 @pyramid.view.view_config(
@@ -441,7 +441,8 @@ class SocialFeed(Base):
     renderer='string')
 class TwitterFeed(SocialFeed):
 
-    social_field = 'short_text'
+    def social_value(self, content):
+        return zeit.push.interfaces.IPushMessages(content).short_text
 
 
 @pyramid.view.view_config(
@@ -450,4 +451,21 @@ class TwitterFeed(SocialFeed):
     renderer='string')
 class FacebookFeed(SocialFeed):
 
-    social_field = 'long_text'
+    def social_value(self, content):
+        return zeit.push.interfaces.IPushMessages(content).long_text
+
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-roost',
+    renderer='string')
+class RoostFeed(SocialFeed):
+
+    def make_title(self, content):
+        return content.supertitle
+
+    def social_value(self, content):
+        push = zeit.push.interfaces.IPushMessages(content)
+        for config in push.message_config:
+            if config.get('type') == 'parse':
+                return config.get('override_text')

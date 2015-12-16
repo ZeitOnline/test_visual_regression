@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2463: Style Autorenseitenheader
 
+- ZON-2520: Implement RSS feed for Roost
+
 
 2.37 (2015-12-15)
 -----------------
