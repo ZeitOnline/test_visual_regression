@@ -36,7 +36,6 @@ import zeit.web.core.banner
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
-import zeit.web.core.sources
 
 
 log = logging.getLogger(__name__)
@@ -205,25 +204,6 @@ class Application(object):
 
         config.add_route('xml', '/xml/*traverse')
 
-        try:
-            blacklist = zeit.web.core.sources.BlacklistSource(
-            ).factory.getValues()
-        except Exception, err:
-            log.error('Could not parse route blacklist: {}'.format(err))
-        else:
-            for index, route in enumerate(blacklist):
-                config.add_route(
-                    'blacklist_{}'.format(index), route,
-                    header=pyramid.config.not_(
-                        'host:newsfeed(\.staging)?\.zeit\.de'))
-                config.add_view(
-                    zeit.web.core.view.surrender,
-                    route_name='blacklist_{}'.format(index))
-
-        if not self.settings.get('debug.show_exceptions'):
-            config.add_view(view=zeit.web.core.view.service_unavailable,
-                            context=Exception)
-
         config.set_request_property(configure_host('asset'), reify=True)
         config.set_request_property(configure_host('image'), reify=True)
         config.set_request_property(configure_host('jsconf'), reify=True)
@@ -360,6 +340,7 @@ class Application(object):
         if self.settings.get('dev_environment'):
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
+
 
 factory = Application()
 
