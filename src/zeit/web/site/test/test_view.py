@@ -143,4 +143,3 @@ def test_article_should_show_premoderation_warning(application):
     request.session = {'user': {'blocked': False, 'premoderation': True}}
     view = zeit.web.site.view_article.Article(article, request)
     assert view.comment_area['show_premoderation_warning'] == True
-
