@@ -19,10 +19,12 @@
     {% set class = 'comment-form__cancel--hidden' %}
 {% endif %}
 
-<div class="comment-section__warning">
-    <p>Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind, oder kürzlich gegen unsere
-            <a href='{{request.route_url('home')}}/netiquette' />Netiquette</a> verstoßen haben.</p>
-</div>
+{% if view.comment_area.show_premoderation_warning %}
+    <div class="comment-section__warning">
+        <p>Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind, oder kürzlich gegen unsere <a href='{{request.route_url('home')}}/netiquette' />Netiquette</a> verstoßen haben.</p>
+    </div>
+{% endif %}
+
 <div class="comment-section__form comment-section__item">
 {%- if request.authenticated_userid %}
     {% set is_mod = 'admin-tech' in request.session.user.roles or 'admin-editor' in request.session.user.roles %}
