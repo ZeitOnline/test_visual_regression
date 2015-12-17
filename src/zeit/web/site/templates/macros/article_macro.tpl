@@ -81,13 +81,13 @@
     {% if obj.contents -%}
     {% set id = obj.title | attr_safe %}
     <aside class="infobox js-infobox" id="{{ id }}" role="application">
-        <div class="infobox__navigation" id="{{ id }}--navigation" role="tablist"></div>
+        <div class="infobox__navigation" id="{{ id }}-navigation" role="tablist"></div>
         <div class="infobox__content">
             {% for title, text in obj.contents %}
                 <section class="infobox-tab" id="{{ id }}-{{ loop.index }}">
-                    <h3>
+                    <h3 class="infobox-tab__title">
                         <a
-                            class="infobox-tab__tab"
+                            class="infobox-tab__link"
                             id="{{ id }}-{{ loop.index }}-tab"
                             href="#{{ id }}-{{ loop.index }}"
                             tabindex="0"
