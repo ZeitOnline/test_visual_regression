@@ -8,9 +8,7 @@
 				{# Metatag to show Google the image, see http://stackoverflow.com/questions/18130827/schema-org-give-a-div-a-itemprop-image -#}
 				<meta itemprop="logo" content="{{ request.asset_host }}/icons/site/zon-logo-desktop.png">
 				<meta itemprop="name" content="ZEIT ONLINE">
-				<object class="logo_bar__brand-logo" data="{{ view.request.asset_host }}/images/logo-zon-black.svg" type="image/svg+xml">
-					<img src="{{ view.request.asset_host }}/images/logo-zon-black.png" alt="ZEIT ONLINE" />
-				</object>
+                {{ lama.use_svg_icon('logo-zon-black', 'logo_bar__brand-logo', view.request) }}
 			</a>
 		</{{ tag_name }}>
 		{% endwith %}
