@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 
+import pyramid.testing
 import pytest
 import mock
 import zope.component
@@ -141,3 +142,13 @@ def test_author_biography_should_be_fully_rendered(testbrowser):
     summary = browser.cssselect('.author-header__summary')
     assert 'Redakteur im Ressort Digital' in summary[0].text
     assert browser.cssselect('.author-questions')
+
+
+def test_author_first_favorite_article_forces_mobile_image(application):
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/j_random')
+    request = pyramid.testing.DummyRequest()
+    view = zeit.web.site.view_author.Author(author, request)
+    teasers = view.area_favourite_content.values()
+    assert teasers[0].force_mobile_image
+    assert not teasers[1].force_mobile_image

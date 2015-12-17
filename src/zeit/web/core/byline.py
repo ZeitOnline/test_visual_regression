@@ -5,33 +5,33 @@ import grokcore.component
 import zope.interface
 
 import zeit.content.article.interfaces
-import zeit.content.cp.interfaces
 import zeit.content.link.interfaces
 
 import zeit.web
 
 
-class ITeaserByline(zope.interface.Interface):
+class IByline(zope.interface.Interface):
     """A string representation of information on author, genre, location of a
-    ICMSContent resource to be displayed in a teaser context.
-    """
+    content object. This depends on both the context of the page being
+    displayed, and the content object to be displayed, e.g. bylines for content
+    in a list of teaser modules (say, on a centerpage) look differently than
+    the byline on a single page (say, on an article).
 
-
-class IContentByline(zope.interface.Interface):
-    """A string representation of information on author, genre, location of a
-    ICMSContent resource to be displayed on a content page.
     """
 
 
 @zeit.web.register_ctxfilter
 def get_byline(context, content):
     """Natural language byline for centerpage teasers and article heads."""
-    context = getattr(context.get('view'), 'context', None)
-    if zeit.content.cp.interfaces.ICenterPage.providedBy(context):
-        return ITeaserByline(content, ())
-    return IContentByline(content, ())
+    page_context = getattr(context.get('view'), 'context', None)
+    return zope.component.queryMultiAdapter(
+        (page_context, content), IByline, default=())
 
 
+@grokcore.component.adapter(
+    zope.interface.Interface,
+    zeit.cms.content.interfaces.ICommonMetadata)
+@grokcore.component.implementer(IByline)
 class Byline(list):
 
     # TODO: This should be configured by an XMLSource. So far the given
@@ -43,7 +43,7 @@ class Byline(list):
               'gastbeitrag': 'ein',
               'interview': 'ein'}
 
-    def __init__(self, context):
+    def __init__(self, page_context, context):
         super(Byline, self).__init__()
         self.context = context
         self.genre()
@@ -111,29 +111,21 @@ class Byline(list):
         self.append(('enum', groups) if len(groups) > 1 else groups[0])
 
 
-@grokcore.component.implementer(ITeaserByline)
-@grokcore.component.adapter(zeit.cms.content.interfaces.ICommonMetadata)
-class TeaserByline(Byline):
-    pass
-
-
-@grokcore.component.implementer(ITeaserByline)
-@grokcore.component.adapter(zeit.content.link.interfaces.ILink)
-class LinkTeaserByline(TeaserByline):
+@grokcore.component.adapter(
+    zope.interface.Interface,
+    zeit.content.link.interfaces.ILink)
+@grokcore.component.implementer(IByline)
+class LinkTeaserByline(Byline):
 
     def genre(self):
         pass
 
 
-@grokcore.component.implementer(IContentByline)
-@grokcore.component.adapter(zeit.cms.content.interfaces.ICommonMetadata)
-class ContentByline(Byline):
-    pass
-
-
-@grokcore.component.implementer(IContentByline)
-@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
-class ArticleContentByline(ContentByline):
+@grokcore.component.adapter(
+    zeit.content.article.interfaces.IArticle,
+    zeit.content.article.interfaces.IArticle)
+@grokcore.component.implementer(IByline)
+class ArticleByline(Byline):
 
     @staticmethod
     def expand_authors(authors):
@@ -144,13 +136,19 @@ class ArticleContentByline(ContentByline):
                 yield 'plain_author', author.target
 
 
-@grokcore.component.implementer(ITeaserByline)
-@grokcore.component.adapter(zeit.cms.repository.interfaces.IUnknownResource)
-def unknown_teaser_byline(context):
-    return TeaserByline(None)
+@grokcore.component.adapter(
+    zope.interface.Interface,
+    zeit.web.core.utils.LazyProxy)
+@grokcore.component.implementer(IByline)
+class ProxyByline(Byline):
 
-
-@grokcore.component.implementer(IContentByline)
-@grokcore.component.adapter(zeit.cms.repository.interfaces.IUnknownResource)
-def unknown_content_byline(context):
-    return ContentByline(None)
+    def __init__(self, page_context, context):
+        # Skip Byline.__init__(), we don't want to expose the proxy by probing
+        # for properties it might not have.
+        super(Byline, self).__init__()
+        self.context = context
+        authors = filter(bool, self.context.__proxy__.get('authors', ()))
+        if authors:
+            self.from_()
+            authors = tuple(('text', a) for a in authors)
+            self.append(('enum', authors))

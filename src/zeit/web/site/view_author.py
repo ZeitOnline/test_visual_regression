@@ -99,10 +99,12 @@ class Author(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def area_favourite_content(self):
-        return LegacyArea(
-            [LegacyModule([c], layout='zon-small')
-             for c in self.context.favourite_content],
-            kind='author-favourite-content')
+        modules = []
+        for index, content in enumerate(self.context.favourite_content):
+            module = LegacyModule([content], layout='zon-small')
+            module.force_mobile_image = not bool(index)
+            modules.append(module)
+        return LegacyArea(modules, kind='author-favourite-content')
 
     @zeit.web.reify
     def area_articles(self):

@@ -10,7 +10,7 @@ import zeit.web.core.byline
 
 def test_article_byline_should_be_represented_as_a_nested_tuple(application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
-    byline = zeit.web.core.byline.ITeaserByline(article)
+    byline = zeit.web.core.byline.get_byline({}, article)
     assert byline.context == article
     assert byline == [
         ('text', u'Ein Kommentar'),
@@ -29,7 +29,7 @@ def test_article_byline_should_be_represented_as_a_nested_tuple(application):
 def test_quiz_byline_should_be_represented_as_a_nested_tuple(application):
     quiz = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/quiz/quiz-workaholic')
-    byline = zeit.web.core.byline.ITeaserByline(quiz)
+    byline = zeit.web.core.byline.get_byline({}, quiz)
     assert byline.context == quiz
     assert byline == [
         ('text', u'Von'),
@@ -101,7 +101,7 @@ def test_teaser_byline_should_expand_authors_as_text(monkeypatch):
     author.target.display_name = u'Max Mustermann'
     author2 = mock.Mock()
     author2.target.display_name = u'Anne Mustermann'
-    cls = zeit.web.core.byline.TeaserByline
+    cls = zeit.web.core.byline.Byline
     monkeypatch.setattr(cls, '__init__', lambda s: list.__init__(s))
     assert tuple(cls().expand_authors([author, author2])) == (
         ('text', u'Max Mustermann'), ('text', u'Anne Mustermann'))
@@ -110,7 +110,7 @@ def test_teaser_byline_should_expand_authors_as_text(monkeypatch):
 def test_teaser_byline_should_ignore_authors_without_display_name(monkeypatch):
     author = mock.Mock()
     author.target = mock.Mock(spec=[])
-    cls = zeit.web.core.byline.TeaserByline
+    cls = zeit.web.core.byline.Byline
     monkeypatch.setattr(cls, '__init__', lambda s: list.__init__(s))
     assert tuple(cls().expand_authors([author])) == ()
 
@@ -122,7 +122,7 @@ def test_content_byline_should_expand_authors_with_links(monkeypatch):
     author2 = mock.Mock()
     author2.target.display_name = u'Anne Mustermann'
     author2.target.uniqueId = None
-    cls = zeit.web.core.byline.ArticleContentByline
+    cls = zeit.web.core.byline.ArticleByline
     monkeypatch.setattr(cls, '__init__', lambda s: list.__init__(s))
     assert tuple(cls().expand_authors([author, author2])) == (
         ('linked_author', author.target), ('plain_author', author2.target))
