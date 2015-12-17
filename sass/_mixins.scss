@@ -508,3 +508,17 @@
 	}
 }
 
+@mixin exclamation() {
+	background-color: $zon-grey;
+	border-radius: 50%;
+	color: $white;
+	content: "!";
+	display: inline-block;
+	font-size: remify(13px);
+	height: remify(16px);
+	line-height: remify(16px);
+	margin-right: .5em;
+	text-align: center;
+	width: remify(16px);
+	vertical-align: text-top;
+}

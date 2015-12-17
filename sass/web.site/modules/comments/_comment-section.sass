@@ -27,6 +27,21 @@
 		clear: both
 		color: $color-text-highlighted
 		text-align: left
+	&__warning
+		background-color: $zon-lighter-grey
+		p
+			max-width: 43.75rem
+			padding: 1rem 1.25rem
+			color: $zon-grey
+			margin: auto
+			&:before
+				+exclamation
+				margin-top: 2px
+			a
+				color: $zon-grey
+				border-bottom: 1px solid $zon-grey
+	&__warning + div.comment-section__form
+		border-top: 0
 	&__head &__message
 		padding-top: em(32px)
 	&__headline
