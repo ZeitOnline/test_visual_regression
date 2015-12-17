@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Display bylines on ranking area teasers
 
+- ZON-2543: Show warning if premoderation is active
+
 
 2.38 (2015-12-16)
 -----------------
