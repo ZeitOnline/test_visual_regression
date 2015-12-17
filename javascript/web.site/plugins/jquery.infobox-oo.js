@@ -11,10 +11,12 @@
         this.infobox = $( infobox );
         this.navigation = $( '#' + this.id + '-navigation', this.infobox );
         this.tabpanels = $( '.infobox-tab__panel', this.infobox );
-        this.tabtitles = $( '.infobox-tab__title', this.infobox )
+        this.tabtitlesMobile = $( '.infobox-tab__title', this.infobox );
+        this.tabtitles = this.tabtitlesMobile
                             .clone()
                             .appendTo( this.navigation );
         this.tablinks = $( this.tabtitles ).find( 'a' );
+        this.tablinksMobile = $( this.tabtitlesMobile ).find( 'a' );
         this.currentTab = this.tablinks.first();
 
         this.init();
@@ -25,13 +27,23 @@
 
         this.navigation.attr( 'role', 'tablist' );
 
-        this.tabtitles
-            .attr( 'role', 'tab' )
-            .addClass( 'infobox-tab__title--displayed' );
-
-        this.tablinks.each( function() {
-            $( this ).attr( 'aria-controls', $( this ).data( 'aria-controls' ) );
-        });
+        if ( this.isDesktop ) {
+            // TODO refactor this
+            this.tabtitles
+                .attr( 'role', 'tab' )
+                .addClass( 'infobox-tab__title--displayed' );
+            this.tablinks.each( function() {
+                $( this ).attr( 'aria-controls', $( this ).data( 'aria-controls' ) );
+            });
+        } else {
+            this.tabtitlesMobile
+                .attr( 'role', 'tab' )
+                .addClass( 'infobox-tab__title--displayed' );
+            this.tablinksMobile.each( function() {
+                $( this ).attr( 'aria-controls', $( this ).data( 'aria-controls' ) );
+            });
+            this.markHidden( this.tabpanels );
+        }
 
         // TODO switch to tab according to location.hash
         this.switchTo( this.tablinks.first() );
@@ -47,8 +59,19 @@
             }
         });
 
+        this.tablinksMobile.on( 'click', function( event ) {
+            event.preventDefault();
+            self.switchTo( $( this ) );
+        });
+
         $( window ).on( 'resize', function() {
-            // check if mobile & react if needed
+            if ( self.isDesktopView() === false ) {
+                self.tabtitlesMobile
+                    .attr( 'role', 'tab' )
+                    .addClass( 'infobox-tab__title--displayed' );
+                self.tabtitles
+                    .removeClass( 'infobox-tab__title--displayed' );
+            }
         });
 
     };
@@ -57,12 +80,22 @@
         var relatedPanelId = '#' + selectedTab.attr( 'aria-controls' ),
             relatedPanel = $( relatedPanelId );
 
-        this.currentTab.removeClass( 'infobox-tab__link--active' );
-        this.currentTab = selectedTab;
-        selectedTab.addClass( 'infobox-tab__link--active' );
+        if ( this.isDesktop ) {
+            this.currentTab.removeClass( 'infobox-tab__link--active' );
+            this.currentTab = selectedTab;
+            selectedTab.addClass( 'infobox-tab__link--active' );
 
-        this.markHidden( this.tabpanels );
-        this.markVisible( relatedPanel );
+            this.markHidden( this.tabpanels );
+            this.markVisible( relatedPanel );
+        } else {
+            selectedTab.toggleClass( 'infobox-tab__link--active' );
+            if ( selectedTab.hasClass( 'infobox-tab__link--active' )) {
+                this.markVisible( relatedPanel );
+            } else {
+                this.markHidden( relatedPanel );
+            }
+        }
+
     };
 
     InfoboxOO.prototype.markHidden = function( panels ) {
@@ -83,10 +116,6 @@
         return $( '#' + this.id + '-navigation', this.infobox ).is( ':visible' );
     };
 
-    InfoboxOO.prototype.checkResize = function() {
-
-    };
-
     InfoboxOO.prototype.getCurrentHash = function() {
         if ( window.location.hash ) {
             var hash = window.location.hash.substring( 1 );
@@ -97,10 +126,6 @@
             });
         }
         return false;
-    };
-
-    InfoboxOO.prototype.changeMenu = function( event, panel ) {
-
     };
 
     $.fn.infoboxOO = function() {
