@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2564: Add separate feed `rss-socialflow-facebook-zmo`
 
+- FIX: Retrieve mobile text from the correct field for roost feed
+
 - FIX: Display bylines on ranking area teasers
 
 

@@ -475,7 +475,4 @@ class RoostFeed(SocialFeed):
         return content.supertitle
 
     def social_value(self, content):
-        push = zeit.push.interfaces.IPushMessages(content)
-        for config in push.message_config:
-            if config.get('type') == 'parse':
-                return config.get('override_text')
+        return zeit.push.interfaces.IAccountData(content).mobile_text
