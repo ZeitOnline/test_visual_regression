@@ -71,7 +71,7 @@ setup(
         'zeit.intrafind',
         'zeit.magazin',
         'zeit.newsletter',
-        'zeit.push',
+        'zeit.push>=1.11.0.dev0',
         'zeit.seo',
         'zeit.solr',
         'zeit.vgwort',

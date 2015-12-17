@@ -4,6 +4,8 @@ Change log for zeit.web
 2.39 (unreleased)
 -----------------
 
+- ZON-2564: Add separate feed `rss-socialflow-facebook-zmo`
+
 - FIX: Display bylines on ranking area teasers
 
 
