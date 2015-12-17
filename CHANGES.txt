@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Display bylines on ranking area teasers
 
+- FIX: Fix ZMO pagetitles in articles
+
 
 2.38 (2015-12-16)
 -----------------
