@@ -88,6 +88,27 @@ class Article(zeit.web.core.view.Content):
             titles.append(title)
         return titles
 
+    def _pagetitle(self, suffix):
+        try:
+            title = zeit.seo.interfaces.ISEO(self.context).html_title
+            assert title
+        except (AssertionError, TypeError):
+            if self.page_nr > 1 and self.current_page.teaser:
+                title = ': '.join(
+                    [t for t in (
+                        getattr(self, 'supertitle'),
+                        self.current_page.teaser) if t])
+            else:
+                title = ': '.join(
+                    [t for t in (
+                        self.supertitle, self.title) if t])
+        if title and suffix:
+            return u'{}{}'.format(title, self.pagetitle_suffix)
+        if title:
+            return title
+
+        return self.seo_title_default
+
     @zeit.web.reify
     def pages_urls(self):
         urls = []
