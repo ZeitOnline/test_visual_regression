@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Display bylines on ranking area teasers
 
+- ZON-2533: Fix character count at comment reply form
+
 
 2.38 (2015-12-16)
 -----------------
