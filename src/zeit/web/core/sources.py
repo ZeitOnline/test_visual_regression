@@ -205,3 +205,11 @@ class Solr(object):
 
     def update_raw(self, xml, **kw):
         pass
+
+
+class FeatureToggleSource(zeit.cms.content.sources.SimpleXMLSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'feature-toggle-source'
+
+FEATURE_TOGGLE_SOURCE = FeatureToggleSource()
