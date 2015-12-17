@@ -21,7 +21,9 @@
 
 {% if view.comment_area.show_premoderation_warning %}
     <div class="comment-section__warning">
-        <p>Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind, oder kürzlich gegen unsere <a href='{{request.route_url('home')}}/netiquette' />Netiquette</a> verstoßen haben.</p>
+        <p>Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie
+        veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind, oder
+        kürzlich gegen unsere <a href='{{request.route_url('home')}}administratives/2010-03/netiquette' />Netiquette</a> verstoßen haben.</p>
     </div>
 {% endif %}
 

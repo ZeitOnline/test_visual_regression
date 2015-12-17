@@ -784,6 +784,7 @@ class Content(Base):
         user_blocked = False
         premoderation = False
         self.request.authenticated_userid
+
         if self.request.session.get('user'):
             user_blocked = self.request.session['user'].get('blocked')
             premoderation = self.request.session['user'].get('premoderation')
