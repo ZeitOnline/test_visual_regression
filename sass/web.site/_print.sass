@@ -52,14 +52,13 @@ $print-zoom: 1.263157895
     .comment-section,
     .article-toc,
     .footer,
-    .logo_bar__menu,
+    .logo_bar,
     .nextread,
     .nextread-advertisement,
     .veeseoWidget,
     .video-figure__caption,
     .video-player,
-    iframe[id^="google_ads"],
-    div[class="main_nav__"] // Hide all nav elements but keep ZON logo visible
+    iframe[id^="google_ads"]
         display: none !important
 
     #main
@@ -69,13 +68,10 @@ $print-zoom: 1.263157895
     .page__content
         box-shadow: none
 
-    .logo_bar
+    .header:after
         border-bottom: 1pt solid $zon-print-grey
-        padding: 0
-        a:after
-            content: ""
-        &__brand-logo
-            padding: 0
+        content: url("../../images/logo-zon-black.svg")
+        display: block
 
     .article-heading
         margin: 6mm 0 0
