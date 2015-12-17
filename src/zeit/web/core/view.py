@@ -782,9 +782,11 @@ class Content(Base):
     @zeit.web.reify
     def comment_area(self):
         user_blocked = False
+        premoderation = False
         self.request.authenticated_userid
         if self.request.session.get('user'):
             user_blocked = self.request.session['user'].get('blocked')
+            premoderation = self.request.session['user'].get('premoderation')
 
         message = None
         note = None
@@ -816,7 +818,8 @@ class Content(Base):
             'no_comments': (not self.comments and self.comments_loadable),
             'note': note,
             'message': message,
-            'user_blocked': user_blocked
+            'user_blocked': user_blocked,
+            'show_premoderation_warning': premoderation
         }
 
 
