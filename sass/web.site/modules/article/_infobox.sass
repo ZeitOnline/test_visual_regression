@@ -61,11 +61,13 @@
 		&:after
 			+build-mobile-plus-minus-button()
 		&--active
+			+link
+				text-decoration: underline
 			&:after
 				+build-mobile-plus-minus-button('\2212') // U+2212 = − (minus sign)
 		.js &--displayed
 			display: block
-	&__content
+	&__panel
 		// aria attributes late added by javascript
 		// so these apply only progressively enhanced
 		overflow: hidden
