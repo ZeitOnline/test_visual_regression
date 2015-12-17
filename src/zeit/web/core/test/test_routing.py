@@ -8,6 +8,7 @@ import zeit.content.cp.interfaces
 import zeit.cms.interfaces
 
 import zeit.web.core.article
+import zeit.web.core.routing
 
 
 def test_spektrum_feed_should_not_use_parallel_cp(my_traverser):
@@ -63,7 +64,7 @@ def test_dynamic_folder_traversal_should_rewrite_traversal_dictionary(
         view_name='',
         request=dummy_request)
 
-    resulting = zeit.web.core.traversal.RepositoryTraverser.invoke(**initial)
+    resulting = zeit.web.core.routing.RepositoryTraverser.invoke(**initial)
     assert resulting == expected
 
 
@@ -71,7 +72,7 @@ def test_dynamic_folder_traversal_should_allow_for_ranking_pagination(
         application, dummy_request, datasolr):
     dummy_request.GET['p'] = '2'
 
-    tdict = zeit.web.core.traversal.RepositoryTraverser.invoke(
+    tdict = zeit.web.core.routing.RepositoryTraverser.invoke(
         context=zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic'),
         traversed=('dynamic',),
         view_name='adel-tawil',
@@ -131,7 +132,7 @@ def test_plain_folder_traversal_should_trigger_redirect_to_index(
 
     with pytest.raises(
             pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
-        zeit.web.core.traversal.RepositoryTraverser.invoke(**tdict)
+        zeit.web.core.routing.RepositoryTraverser.invoke(**tdict)
 
     assert redirect.value.location.endswith(moved)
 
@@ -150,6 +151,6 @@ def test_dynamic_folder_traversal_should_trigger_redirect_to_index(
 
     with pytest.raises(
             pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
-        zeit.web.core.traversal.RepositoryTraverser.invoke(**tdict)
+        zeit.web.core.routing.RepositoryTraverser.invoke(**tdict)
 
     assert redirect.value.location.endswith(moved)
