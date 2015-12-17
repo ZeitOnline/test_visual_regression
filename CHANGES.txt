@@ -4,7 +4,9 @@ Change log for zeit.web
 2.39 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2561: Force mobile image for first teaser of authors favorite articles
+
+- FIX: Display bylines on ranking area teasers
 
 
 2.38 (2015-12-16)
