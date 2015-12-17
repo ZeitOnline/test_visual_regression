@@ -28,13 +28,18 @@
     */
     $.fn.countFormchars = function() {
         return this.each( function() {
-            var $counter = $( this ),
-                $formField = $( $counter.data( 'charcount-element' ) );
 
-            $formField.on( 'change keyup paste', function( e ) {
-                var formFieldContentLength = this.value.length;
-                $counter.text( formFieldContentLength + ' / ' );
+            $( this ).on( 'change keyup paste', function( e ) {
+                var $textarea = $( e.target );
+
+                if ( $textarea.hasClass( 'comment-form__textarea' ) ) {
+                    var $counter = $textarea.parent( '.comment-form' ).find( '.js-count-formchars' ),
+                        formFieldContentLength = $textarea.val().length;
+                    $counter.text( formFieldContentLength + ' / ' );
+                }
+
             } );
+
         });
     };
 })( jQuery );

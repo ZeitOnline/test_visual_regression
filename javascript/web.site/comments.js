@@ -34,9 +34,10 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                 .addClass( 'js-reply-form' )
                 .css( 'display', 'none' )
                 .appendTo( comment );
-            form.find( 'textarea[name="comment"]' ).attr( 'placeholder', 'Ihre Antwort' );
+            form.find( 'textarea[name="comment"]' ).attr( 'placeholder', 'Ihre Antwort' ).val( '' );
             form.find( 'input[type="submit"]' ).prop( 'disabled', true ).val( 'Antworten' );
             form.find( 'input[name="pid"]' ).val( cid );
+            form.find( '.js-count-formchars' ).text( '' );
         }
 
         showForm( form, comment );
