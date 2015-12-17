@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Display bylines on ranking area teasers
 
+- ZON-2566: Edit text for premoderation popup
+
 
 2.38 (2015-12-16)
 -----------------
