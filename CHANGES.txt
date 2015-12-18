@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2543: Show warning if premoderation is active
 
+- ZON-2571: Rework alert for blocked community user
+
 - ZON-2566: Edit text for premoderation popup
 
 
