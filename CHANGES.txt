@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - ZON-2566: Edit text for premoderation popup
 
+- MAINT: Have fake solr return real content dates
+
 
 2.38 (2015-12-16)
 -----------------
