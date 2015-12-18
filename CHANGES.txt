@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2561: Force mobile image for first teaser of authors favorite articles
 
+- ZON-2572: Prepare runtime-adjustable blacklist
+
 - FIX: Display bylines on ranking area teasers
 
 - FIX: Fix ZMO pagetitles in articles
