@@ -397,7 +397,7 @@ class Base(object):
             if getattr(self, 'supertitle'):
                 title = u'{}: {}'.format(self.supertitle, self.title)
             else:
-                title
+                title = self.title
         if title:
             if self.is_hp or not suffix:
                 return title
