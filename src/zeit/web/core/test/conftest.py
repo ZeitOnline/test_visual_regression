@@ -163,6 +163,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/gallery-types.xml'),
         'vivi_zeit.web_series-source': (
             'egg://zeit.web.core/data/config/series.xml'),
+        'vivi_zeit.web_feature-toggle-source': (
+            'egg://zeit.web.core/data/config/feature-toggle.xml'),
         'vivi_zeit.web_blacklist-url': (
             'egg://zeit.web.core/data/config/blacklist.xml'),
         'vivi_zeit.imp_scale-source':
