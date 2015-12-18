@@ -53,8 +53,6 @@ class Application(object):
         settings = pyramid.config.settings.Settings(d=settings)
         settings['app_servers'] = filter(
             None, settings['app_servers'].split(','))
-        settings['enable_third_party_modules'] = bool(settings.get(
-            'enable_third_party_modules', True))
         settings['enable_trackers'] = bool(settings.get(
             'enable_trackers', True))
         settings['enable_iqd'] = bool(settings.get(

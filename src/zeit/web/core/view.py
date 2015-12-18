@@ -123,8 +123,8 @@ class Base(object):
 
     @zeit.web.reify
     def enable_third_party_modules(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('enable_third_party_modules', True)
+        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.factory.find(
+            'third_party_modules')
 
     @zeit.web.reify
     def enable_iqd(self):
