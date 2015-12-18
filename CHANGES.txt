@@ -24,6 +24,8 @@ Change log for zeit.web
 
 - MAINT: Have fake solr return real content dates
 
+- ZON-2580: Fix Webtrekk param 12
+
 
 2.38 (2015-12-16)
 -----------------
