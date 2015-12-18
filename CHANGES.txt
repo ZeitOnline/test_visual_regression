@@ -4,6 +4,10 @@ Change log for zeit.web
 2.39 (unreleased)
 -----------------
 
+- ZON-2564: Add separate feed `rss-socialflow-facebook-zmo`
+
+- FIX: Retrieve mobile text from the correct field for roost feed
+
 - ZON-2290: Add print CSS
 
 - ZON-2561: Force mobile image for first teaser of authors favorite articles
