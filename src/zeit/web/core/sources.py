@@ -214,7 +214,7 @@ class FeatureToggleSource(zeit.cms.content.sources.SimpleXMLSource):
 
     def find(self, name):
         try:
-            return getattr(self._get_tree(), name, False)
+            return bool(getattr(self._get_tree(), name, False))
         except TypeError:
             return False
 
