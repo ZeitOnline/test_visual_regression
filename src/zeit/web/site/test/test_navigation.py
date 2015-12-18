@@ -238,7 +238,7 @@ def test_cp_should_have_valid_main_nav_structure(testserver, testbrowser):
     html = browser.cssselect
 
     assert len(html('.main_nav')) == 1, 'Main navigation must be present'
-    assert len(html('svg.logo_bar__brand-logo')) == 1, (
+    assert len(html('.logo_bar__brand-logo')) == 1, (
         'ZON logo must be present')
     assert len(html('div.logo_bar__menu')) == 1, 'Menu link must be present'
     assert len(html('div.main_nav__teaser')) == 1, 'Teaser must be present'

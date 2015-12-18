@@ -72,7 +72,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         except:
             pass
 
-        path = prefix + '?print=true'
+        path = prefix + '?print'
         return url + path
 
     @zeit.web.reify
