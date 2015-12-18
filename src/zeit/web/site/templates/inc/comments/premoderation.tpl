@@ -11,7 +11,7 @@
 					<strong>{0}</strong> wurde angelegt.<br></span>
 					Die ersten Kommentare neuer Benutzer prüfen wir vorübergehend, bevor wir sie
 					veröffentlichen. Dies geschieht auch
-					bei Nutzern, die kürzlich gegen <a href="{{"http://xml.zeit.de/administratives/2010-03/netiquette" | create_url }}">unsere Netiquette</a>
+					bei Nutzern, die kürzlich gegen <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">unsere Netiquette</a>
 					verstoßen haben. Bei Fragen wenden Sie
 					sich bitte an <a href="mailto:community@zeit.de">community@zeit.de</a>.
 					Vielen Dank für Ihre Geduld.

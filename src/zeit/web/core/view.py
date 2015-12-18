@@ -782,12 +782,16 @@ class Content(Base):
     @zeit.web.reify
     def comment_area(self):
         user_blocked = False
+        premoderation = False
         self.request.authenticated_userid
+
         if self.request.session.get('user'):
             user_blocked = self.request.session['user'].get('blocked')
+            premoderation = self.request.session['user'].get('premoderation')
 
-        message = None
-        note = None
+        message = None   # used for general alerts in the comment section header
+        note = None      # used for general alerts at the comment form
+
         if self.community_maintenance['active']:
             message = self.community_maintenance['text_active']
         elif not self.comments_loadable:
@@ -801,8 +805,8 @@ class Content(Base):
             note = message
         elif user_blocked:
             # no message: individual messages are only possible inside ESI form
-            note = (u'Leider sind Sie für die Teilnahme an der Community '
-                    u'gesperrt.')
+            # no note: handled inside form template
+            note = None
         elif self.community_maintenance['scheduled']:
             message = self.community_maintenance['text_scheduled']
 
@@ -816,7 +820,9 @@ class Content(Base):
             'no_comments': (not self.comments and self.comments_loadable),
             'note': note,
             'message': message,
-            'user_blocked': user_blocked
+            'user_blocked': user_blocked,
+            'show_premoderation_warning': premoderation and (
+                self.comments_allowed and not user_blocked)
         }
 
 

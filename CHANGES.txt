@@ -22,6 +22,10 @@ Change log for zeit.web
 
 - FIX: Fix ZMO pagetitles in articles
 
+- ZON-2543: Show warning if premoderation is active
+
+- ZON-2571: Rework alert for blocked community user
+
 - ZON-2566: Edit text for premoderation popup
 
 - MAINT: Have fake solr return real content dates
