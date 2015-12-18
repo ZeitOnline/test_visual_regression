@@ -169,6 +169,10 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/scales.xml',
         'vivi_zeit.content.link_source-blogs': (
             'egg://zeit.web.core/data/config/blogs_meta.xml'),
+        'vivi_zeit.push_facebook-accounts': (
+            'egg://zeit.push.tests/fixtures/facebook-accounts.xml'),
+        'vivi_zeit.push_facebook-main-account': 'fb-test',
+        'vivi_zeit.push_facebook-magazin-account': 'fb-magazin',
         'vivi_zeit.brightcove_read-url': mockserver.url + '/video/bc.json',
         'vivi_zeit.brightcove_write-url': mockserver.url + '/video/bc.json',
         'vivi_zeit.brightcove_read-token': 'foo',

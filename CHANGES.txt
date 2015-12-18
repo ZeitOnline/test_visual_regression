@@ -4,6 +4,14 @@ Change log for zeit.web
 2.39 (unreleased)
 -----------------
 
+- ZON-2564: Add separate feed `rss-socialflow-facebook-zmo`
+
+- ZON-2260: Columns: use author portraits for social sharing images
+
+- ZON-2551: Make ESI work for Instant Articles feed
+
+- FIX: Retrieve mobile text from the correct field for roost feed
+
 - ZON-2290: Add print CSS
 
 - ZON-2561: Force mobile image for first teaser of authors favorite articles
@@ -13,6 +21,8 @@ Change log for zeit.web
 - FIX: Fix ZMO pagetitles in articles
 
 - ZON-2566: Edit text for premoderation popup
+
+- MAINT: Have fake solr return real content dates
 
 
 2.38 (2015-12-16)

@@ -82,6 +82,15 @@ def test_socialflow_feed_contains_social_fields(testserver):
     feed = res.text
     assert '<content:encoded>Twitter-Text' not in feed
     assert '<content:encoded>Facebook-Text' in feed
+    assert '<content:encoded>FB-ZMO' not in feed
+
+    feed_path = '/centerpage/index/rss-socialflow-facebook-zmo'
+    res = requests.get(
+        testserver.url + feed_path, headers={'Host': 'newsfeed.zeit.de'})
+    feed = res.text
+    assert '<content:encoded>Twitter-Text' not in feed
+    assert '<content:encoded>Facebook-Text' not in feed
+    assert '<content:encoded>FB-ZMO' in feed
 
 
 def test_instant_article_feed_should_be_rendered(testserver):
