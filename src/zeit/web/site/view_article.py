@@ -188,6 +188,12 @@ class ColumnArticle(Article):
         return zeit.web.core.template.closest_substitute_image(
             self.authors[0]['image_group'], 'zon-column')
 
+    @zeit.web.reify
+    def sharing_image(self):
+        if not self.authors:
+            return
+        return self.authors[0]['image_group']
+
 
 @view_config(name='seite',
              custom_predicates=(zeit.web.site.view.is_zon_content,
