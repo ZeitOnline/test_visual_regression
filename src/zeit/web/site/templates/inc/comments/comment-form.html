@@ -19,7 +19,11 @@
     {% set class = 'comment-form__cancel--hidden' %}
 {% endif %}
 
-{% if view.comment_area.user_blocked or view.comment_area.show_premoderation_warning %}
+{% if view.comment_area.note %}
+    <div class="comment-section__note">
+        <div class="comment-section__message comment-section__item">{{ view.comment_area.note }}</div>
+    </div>
+{% elif view.comment_area.user_blocked or view.comment_area.show_premoderation_warning %}
     <div class="comment-section__note">
         <div class="comment-section__notice comment-section__item">
         {% if view.comment_area.user_blocked %}
@@ -141,9 +145,3 @@
     </form>
 {%- endif %}
 </script>
-
-{% if view.comment_area.note %}
-    <div class="comment-section__note">
-        <div class="comment-section__message comment-section__item">{{ view.comment_area.note }}</div>
-    </div>
-{% endif %}
