@@ -4,6 +4,8 @@ Change log for zeit.web
 2.39 (unreleased)
 -----------------
 
+- ZON-2436: Account for image expiration in Nextread
+ 
 - ZON-2564: Add separate feed `rss-socialflow-facebook-zmo`
 
 - ZON-2260: Columns: use author portraits for social sharing images
