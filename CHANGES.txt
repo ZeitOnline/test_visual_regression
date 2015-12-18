@@ -8,7 +8,15 @@ Change log for zeit.web
 
 - FIX: Retrieve mobile text from the correct field for roost feed
 
+- ZON-2290: Add print CSS
+
+- ZON-2561: Force mobile image for first teaser of authors favorite articles
+
 - FIX: Display bylines on ranking area teasers
+
+- FIX: Fix ZMO pagetitles in articles
+
+- ZON-2566: Edit text for premoderation popup
 
 
 2.38 (2015-12-16)
