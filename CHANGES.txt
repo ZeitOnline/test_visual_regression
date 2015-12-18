@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.39 (unreleased)
+2.39 (2015-12-18)
 -----------------
 
 - ZON-2436: Account for image expiration in Nextread
