@@ -788,7 +788,6 @@ class Content(Base):
         if self.request.session.get('user'):
             user_blocked = self.request.session['user'].get('blocked')
             premoderation = self.request.session['user'].get('premoderation')
-            user_blocked = True
 
         message = None # used for general alerts in the comment section header
         note = None    # used for general alerts at the comment form
