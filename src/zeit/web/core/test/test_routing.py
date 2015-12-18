@@ -2,6 +2,7 @@ import urllib2
 
 import pyramid.request
 import pytest
+import requests
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.content.cp.interfaces
@@ -92,10 +93,17 @@ def test_preview_can_traverse_workingcopy_directly(my_traverser, workingcopy):
             tdict['context'])
 
 
-def test_route_config_should_make_friedbert_surrender_to_blacklisted_routes(
+def test_routesmapper_should_make_friedbert_surrender_to_blacklisted_routes(
         testbrowser):
     resp = testbrowser('/studium/rankings/index')
     assert resp.headers.get('X-Render-With') == 'default'
+
+
+def test_routesmapper_should_make_friedbert_unblacklist_newsfeed_host(
+        testserver):
+    resp = requests.get(testserver.url + '/angebote/printkiosk/index',
+                        headers={'Host': 'newsfeed.localhost:port'})
+    assert 'X-Render-With' not in resp.headers
 
 
 def test_blacklist_entry_should_match_everything_but_image_urls(testbrowser):
