@@ -29,14 +29,11 @@
     $.fn.countFormchars = function() {
         return this.each( function() {
 
-            $( this ).on( 'change keyup paste', function( e ) {
-                var $textarea = $( e.target );
+            $( this ).on( 'change keyup paste', '.comment-form__textarea', function( e ) {
 
-                if ( $textarea.hasClass( 'comment-form__textarea' ) ) {
-                    var $counter = $textarea.parent( '.comment-form' ).find( '.js-count-formchars' ),
-                        formFieldContentLength = $textarea.val().length;
-                    $counter.text( formFieldContentLength + ' / ' );
-                }
+                var $counter = $( this ).parent( '.comment-form' ).find( '.js-count-formchars' ),
+                    formFieldContentLength = $( this ).val().length;
+                $counter.text( formFieldContentLength + ' / ' );
 
             } );
 
