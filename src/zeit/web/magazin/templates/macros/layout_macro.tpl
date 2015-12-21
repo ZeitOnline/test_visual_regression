@@ -40,16 +40,16 @@
 {% endmacro %}
 
 {% macro sharing_meta(obj, request) -%}
-    <meta name="twitter:card" content="{{obj.twitter_card_type}}">
+    <meta name="twitter:card" content="{{ obj.twitter_card_type }}">
     <meta name="twitter:site" content="@zeitonline">
     <meta name="twitter:creator" content="@ZEITmagazin">
-    <meta name="twitter:title" content="{{obj.title}}">
-    <meta name="twitter:description" content="{{obj.subtitle}}">
+    <meta name="twitter:title" content="{{ obj.title }}">
+    <meta name="twitter:description" content="{{ obj.subtitle }}">
     <meta property="og:site_name" content="ZEITmagazin">
     <meta property="fb:admins" content="595098294">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="{{obj.title or 'ZEITmagazin ONLINE'}}">
-    <meta property="og:description" content="{{obj.subtitle or 'Mode&Design, Essen&Trinken, Leben'}}">
+    <meta property="og:title" content="{{ obj.title or 'ZEITmagazin ONLINE' }}">
+    <meta property="og:description" content="{{ obj.subtitle or 'Mode&Design, Essen&Trinken, Leben' }}">
     <meta property="og:url" content="{{ obj.content_url or request.route_url('home').rstrip('/') + request.path_info }}">
     {% set image = get_image(content=obj.context, fallback=False, default='wide') %}
     {% if image -%}
