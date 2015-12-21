@@ -452,7 +452,17 @@ class TwitterFeed(SocialFeed):
 class FacebookFeed(SocialFeed):
 
     def social_value(self, content):
-        return zeit.push.interfaces.IPushMessages(content).long_text
+        return zeit.push.interfaces.IAccountData(content).facebook_main_text
+
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-socialflow-facebook-zmo',
+    renderer='string')
+class FacebookMagazinFeed(SocialFeed):
+
+    def social_value(self, content):
+        return zeit.push.interfaces.IAccountData(content).facebook_magazin_text
 
 
 @pyramid.view.view_config(
@@ -465,7 +475,4 @@ class RoostFeed(SocialFeed):
         return content.supertitle
 
     def social_value(self, content):
-        push = zeit.push.interfaces.IPushMessages(content)
-        for config in push.message_config:
-            if config.get('type') == 'parse':
-                return config.get('override_text')
+        return zeit.push.interfaces.IAccountData(content).mobile_text

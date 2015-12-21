@@ -1,7 +1,9 @@
 {% import 'zeit.web.site:templates/macros/footer_macro.tpl' as foma %}
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-<a href="{{ request.route_url('home') }}index" class="footer-brand" title="Nachrichten auf ZEIT ONLINE" data-id="footernav.logo.1..logo">{{ lama.use_svg_icon('logo-zon-black', 'footer-brand__logo', view.request) }}</a>
+<a href="{{ request.route_url('home') }}index" class="footer-brand" title="Nachrichten auf ZEIT ONLINE" data-id="footernav.logo.1..logo">
+{{ lama.use_svg_icon('logo-zon-black', 'footer-brand__logo', view.request) }}
+</a>
 
 {%- include "zeit.web.site:templates/inc/navigation/breadcrumbs.tpl" ignore missing -%}
 <div class="footer-publisher">

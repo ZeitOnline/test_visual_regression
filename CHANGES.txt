@@ -1,12 +1,44 @@
 Change log for zeit.web
 =======================
 
-2.39 (unreleased)
+2.40 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.39 (2015-12-18)
+-----------------
+
+- ZON-2436: Account for image expiration in Nextread
+
+- ZON-2564: Add separate feed `rss-socialflow-facebook-zmo`
+
+- ZON-2260: Columns: use author portraits for social sharing images
+
+- ZON-2551: Make ESI work for Instant Articles feed
+
+- FIX: Retrieve mobile text from the correct field for roost feed
+
+- ZON-2290: Add print CSS
+
+- ZON-2561: Force mobile image for first teaser of authors favorite articles
 
 - FIX: Display bylines on ranking area teasers
 
 - ZON-2533: Fix character count at comment reply form
+
+- FIX: Fix ZMO pagetitles in articles
+
+- ZON-2543: Show warning if premoderation is active
+
+- ZON-2571: Rework alert for blocked community user
+
+- ZON-2566: Edit text for premoderation popup
+
+- MAINT: Have fake solr return real content dates
+
+- ZON-2580: Fix Webtrekk param 12
 
 
 2.38 (2015-12-16)

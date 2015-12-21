@@ -34,7 +34,7 @@
             concatString = concatString || '';
             if ( this.isMobileView() ) {
                 if ( this.is_wrapped ) {
-                    return this.wrapped.ivwclient + concatString;
+                    return 'mobile.app.' + this.wrapped.client;
                 }
                 return "mobile" + concatString;
             }
