@@ -789,8 +789,8 @@ class Content(Base):
             user_blocked = self.request.session['user'].get('blocked')
             premoderation = self.request.session['user'].get('premoderation')
 
-        message = None   # used for general alerts in the comment section header
-        note = None      # used for general alerts at the comment form
+        message = None  # used for general alerts in the comment section header
+        note = None     # used for general alerts at the comment form
 
         if self.community_maintenance['active']:
             message = self.community_maintenance['text_active']
