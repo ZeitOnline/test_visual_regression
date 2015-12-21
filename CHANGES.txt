@@ -6,12 +6,14 @@ Change log for zeit.web
 
 - Fix: IVW code in hybrid/wrapper apps
 
+- ZON-2588: Remove trailing slash from host to avoid double slash in URL path
+
 
 2.39 (2015-12-18)
 -----------------
 
 - ZON-2436: Account for image expiration in Nextread
- 
+
 - ZON-2564: Add separate feed `rss-socialflow-facebook-zmo`
 
 - ZON-2260: Columns: use author portraits for social sharing images

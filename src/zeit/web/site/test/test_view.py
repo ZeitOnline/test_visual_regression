@@ -19,8 +19,8 @@ def test_login_state_view_should_deliver_correct_destination():
     request.params = {}
     result = zeit.web.site.view.login_state(request)
     assert result == {
-        'login': 'http://sso/anmelden?url=http://destination_sso/',
-        'logout': 'http://sso/abmelden?url=http://destination_sso/'
+        'login': 'http://sso/anmelden?url=http://destination_sso',
+        'logout': 'http://sso/abmelden?url=http://destination_sso'
     }
 
 
