@@ -328,7 +328,7 @@ class PostComment(zeit.web.core.view.Base):
         xml_str = lxml.etree.tostring(content.xml)
         headers = {
             'X-uniqueId': '{}{}'.format(
-                self.request.route_url('home'),
+                self.request.route_url('home').rstrip('/'),
                 urlparse.urlparse(unique_id)[2]),
             'Content-Type': 'text/xml'}
 
