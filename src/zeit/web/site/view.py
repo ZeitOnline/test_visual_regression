@@ -144,7 +144,7 @@ class Base(zeit.web.core.view.Base):
 def login_state(request):
     settings = request.registry.settings
     destination = request.params['context-uri'] if request.params.get(
-        'context-uri') else request.route_url('home')
+        'context-uri') else request.route_url('home').rstrip('/')
     info = {}
 
     if not request.authenticated_userid and request.cookies.get(

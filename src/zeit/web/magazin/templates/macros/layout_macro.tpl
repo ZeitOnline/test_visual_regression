@@ -50,7 +50,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{obj.title or 'ZEITmagazin ONLINE'}}">
     <meta property="og:description" content="{{obj.subtitle or 'Mode&Design, Essen&Trinken, Leben'}}">
-    <meta property="og:url" content="{{obj.content_url or request.route_url('home') + request.path_info}}">
+    <meta property="og:url" content="{{ obj.content_url or request.route_url('home').rstrip('/') + request.path_info }}">
     {% set image = get_image(content=obj.context, fallback=False, default='wide') %}
     {% if image -%}
         {% set source = request.image_host + image.path + '__1300x731' %}
