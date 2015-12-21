@@ -4,14 +4,14 @@ Change log for zeit.web
 2.40 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2233: Fix FF < 27 Navigation
 
 
 2.39 (2015-12-18)
 -----------------
 
 - ZON-2436: Account for image expiration in Nextread
- 
+
 - ZON-2564: Add separate feed `rss-socialflow-facebook-zmo`
 
 - ZON-2260: Columns: use author portraits for social sharing images
