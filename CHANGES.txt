@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Force window reload after premoderation overlay close
 
+- FIX: IVW code in hybrid/wrapper apps
+
 
 2.39 (2015-12-18)
 -----------------

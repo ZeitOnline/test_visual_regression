@@ -564,3 +564,13 @@ def test_invalid_unicode_should_return_http_400(testbrowser):
     with pytest.raises(urllib2.HTTPError) as info:
         testbrowser('/index%C8')
     assert info.value.getcode() == 400
+
+
+def test_ivw_hyprid_method_for_apps(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.core:templates/inc/tracking/ivw_ver2.html')
+    view = mock.Mock()
+    view.is_wrapped = True
+    html = tpl.render(view=mock.Mock(), request=mock.Mock())
+    assert 'iom.h' in html
+    assert 'iom.c' not in html

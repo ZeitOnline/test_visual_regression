@@ -1,4 +1,5 @@
 {% if view.enable_third_party_modules and view.enable_tracking %}
+{% set delivery_method = 'h' if view.is_wrapped else 'c' %}
 <!-- ivw ver2 tracking -->
 <!-- SZM VERSION="2" -->
 <script type="text/javascript">
@@ -20,17 +21,17 @@
 
     if ( typeof iom !== "undefined" && typeof iam_data !== "undefined" ) {
         {% if view.is_hp %}
-        if ( window.location.hash === '#overscroll-article') {
-            if ("pushState" in history) {
-                history.replaceState("", document.title, window.location.pathname + window.location.search);
+            if ( window.location.hash === '#overscroll-article') {
+                if ("pushState" in history) {
+                    history.replaceState("", document.title, window.location.pathname + window.location.search);
+                } else {
+                    window.location.hash = '';
+                }
             } else {
-                window.location.hash = '';
+                iom.{{ delivery_method }}( iam_data, 1 );
             }
-        } else {
-            iom.c( iam_data, 1 );    
-        }
         {% else %}
-        iom.c( iam_data, 1 );
+            iom.{{ delivery_method }}( iam_data, 1 );
         {% endif %}
     }
 </script>
