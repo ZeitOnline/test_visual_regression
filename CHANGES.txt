@@ -4,11 +4,11 @@ Change log for zeit.web
 2.40 (unreleased)
 -----------------
 
-- Fix: IVW code in hybrid/wrapper apps
-
 - ZON-2588: Remove trailing slash from host to avoid double slash in URL path
 
 - FIX: Force window reload after premoderation overlay close
+
+- FIX: IVW code in hybrid/wrapper apps
 
 
 2.39 (2015-12-18)
