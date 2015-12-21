@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.40 (unreleased)
+2.40 (2015-12-21)
 -----------------
 
 - ZON-2588: Remove trailing slash from host to avoid double slash in URL path
