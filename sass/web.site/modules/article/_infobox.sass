@@ -21,6 +21,8 @@
 			width: remify(465px)
 		+respond-min($break-desktop-min)
 			width: remify(582px)
+	.no-js &__content
+		@extend .article__item
 
 .infobox-tab
 	margin: 0
@@ -61,8 +63,9 @@
 		&:after
 			+build-mobile-plus-minus-button()
 		&--active
-			+link
-				text-decoration: underline
+			+respond-min($break-tablet-min)
+				+link
+					text-decoration: underline
 			&:after
 				+build-mobile-plus-minus-button('\2212') // U+2212 = − (minus sign)
 		.js &--displayed
@@ -70,16 +73,8 @@
 	&__panel
 		// aria attributes late added by javascript
 		// so these apply only progressively enhanced
-		overflow: hidden
 		&[aria-hidden='true']
-			max-height: 0
-		&[aria-hidden='false']
-			height: auto
-			max-height: 100000px // very large size just to animate container
-		// obviously we left the BEM path here
-		// cause in the moment, we have no influence on html in infoboxes
-		// for backwards compatibility puposes
-		// sorry for that, http://i.giphy.com/sSlq4iEQ4KdDa.gif
+			display: none
 		p,
 		li,
 		td
