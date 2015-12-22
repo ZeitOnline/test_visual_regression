@@ -72,8 +72,7 @@ require([
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
     'web.site/plugins/jquery.partnerDropdown',
-    'web.site/plugins/jquery.toggleOnClick',
-    'web.site/plugins/jquery.infobox-oo'
+    'web.site/plugins/jquery.toggleOnClick'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         isHp = document.body.getAttribute( 'data-is-hp' ),
@@ -106,7 +105,7 @@ require([
     } else if ( article.length ) {
         // article, gallery etc.
         article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
-        article.find( '.js-infobox' ).infoboxOO();
+        article.find( '.js-infobox' ).infobox();
         article.find( '.liveblog' ).liveblog();
         article.find( '.article-toc' ).toggleOnClick();
         $.picturefill();
