@@ -91,8 +91,7 @@
                             id="{{ id }}-{{ loop.index }}-tab"
                             href="#{{ id }}-{{ loop.index }}"
                             tabindex="0"
-                            data-index="{{ loop.index }}"
-                            data-role="tab"
+                            data-id="{{ id }}-{{ loop.index }}-tab"
                             data-aria-controls="{{ id }}-{{ loop.index }}-article">
                             {{ title }}
                         </a>

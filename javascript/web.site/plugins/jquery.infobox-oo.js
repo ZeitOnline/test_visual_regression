@@ -3,40 +3,61 @@
  * @author nico.bruenjes@zeit.de, valentin.vonguttenberg@zeit.de
  * @version  0.2
  */
-(function( $, window ) {
+(function( $, window, location ) {
 
+    /**
+    * Clones the tab (navigation) links in their own div for creating
+    * a sidebar navigation and initializes instance variables.
+    *
+    * @constructor
+    */
     function InfoboxOO( infobox ) {
-        this.id = infobox.id;
         this.infobox = $( infobox );
-        this.navigation = $( '#' + this.id + '-navigation', this.infobox );
-        this.tabpanels = $( '.infobox-tab__panel', this.infobox );
-        this.tabtitles = $( '.infobox-tab__title', this.infobox )
+        this.navigation = this.infobox.find( '#' + this.infobox.attr( 'id' ) + '-navigation' );
+        this.hasSidebar = this.hasSidebarNavigation();
+        this.tabpanels = this.infobox.find( '.infobox-tab__panel' );
+        this.tabtitles = this.infobox.find( '.infobox-tab__title' )
                             .clone()
                             .appendTo( this.navigation );
-        this.tabs = $( this.tabtitles ).find( 'a' );
-        this.hasSidebar = this.hasSidebarNavigation();
+        this.tabs = this.tabtitles.find( 'a' );
+        this.curOpenTabId = undefined;
 
         this.init();
     }
 
+    /**
+    * Sets up variables, expands the first tab if hasSidebar is true
+    * and creates event listeners.
+    */
     InfoboxOO.prototype.init = function() {
         var self = this,
-            openTab = this.getSelectedTabByHash() || this.tabs.first();
+            selectedTab = this.getSelectedTabByHash() || this.tabs.first();
 
+        this.curOpenTabId = selectedTab.attr( 'id' );
+        this.infobox.find( '.infobox-tab__title a' ).removeAttr( 'id' );
         this.navigation.attr( 'role', 'tablist' );
-        this.setTabsAndTabtitles();
+        this.setNavigationMode();
 
         if ( this.hasSidebar ) {
-            this.switchTo( openTab );
+            this.switchTo( selectedTab );
+            // "jump" to selected tab after nesting
+            // this.infobox.scrollIntoView();
+            // setTimeout(function() {
+            //     if ( location.hash ) {
+            //         location = location.hash;
+            //     }
+            // }, 10 );
+            location = location.hash;
         } else {
-            this.markHidden( this.tabpanels );
+            this.setVisibility( this.tabpanels, false );
         }
 
         this.infobox.on( 'click', '.infobox-tab__link', function( event ) {
             var tab = $( this );
             event.preventDefault();
             self.switchTo( tab );
-            if ( self.hasSidebarNavigation() ) {
+            self.curOpenTabId = tab.attr( 'id' );
+            if ( self.hasSidebar ) {
                 var id = tab.attr( 'id' );
                 if ( history.pushState ) {
                     history.pushState( null, null, '#' + id.substring( 0, id.length - 4 ) );
@@ -45,88 +66,112 @@
         });
 
         $( window ).on( 'resize', function() {
-            var openTabs = self.infobox.find( 'infobox-tab__link--active' ).first();
-            self.switchNavigationMode( openTab );
+            if ( self.hasSidebar !== self.hasSidebarNavigation() ) {
+                self.hasSidebar = self.hasSidebarNavigation();
+                self.setNavigationMode();
+                self.switchTo( $( '#' + self.curOpenTabId ) );
+            }
         });
     };
 
+    /**
+    * @return {boolean} true if in the sidebar should be visible according
+    *                   to CSS, false otherwise
+    */
     InfoboxOO.prototype.hasSidebarNavigation = function() {
         return this.navigation.is( ':visible' );
     };
 
+    /**
+    * Select the given tab in the infobox and make its panel visible. When
+    * in sidebar mode (according to hasSidebar boolean), only one active
+    * panel is allowed so all panels – except the panel to the given tab –
+    * are hidden. If there is no sidebar, multiple panels may be expanded
+    * at the same time and the function works like a toggle and shows
+    * or hides the panel to the given tab
+    *
+    * @param {jQuery} selectedTab the tab to be shown or toggled
+    */
     InfoboxOO.prototype.switchTo = function( selectedTab ) {
         var relatedPanelId = '#' + selectedTab.attr( 'aria-controls' ),
             relatedPanel = $( relatedPanelId );
 
         if ( this.hasSidebar ) {
             this.tabs.removeClass( 'infobox-tab__link--active' );
-            selectedTab.addClass( 'infobox-tab__link--active' );
+            this.toggleTabActive( this.tabs, false );
 
-            this.markHidden( this.tabpanels );
-            this.markVisible( relatedPanel );
+            selectedTab.addClass( 'infobox-tab__link--active' );
+            this.toggleTabActive( selectedTab, true );
+
+            this.setVisibility( this.tabpanels, false );
+            this.setVisibility( relatedPanel, true );
         } else {
             selectedTab.toggleClass( 'infobox-tab__link--active' );
             if ( selectedTab.hasClass( 'infobox-tab__link--active' )) {
-                this.markVisible( relatedPanel );
+                this.toggleTabActive( selectedTab, true );
+                this.setVisibility( relatedPanel, true );
             } else {
-                this.markHidden( relatedPanel );
+                this.toggleTabActive( selectedTab, false );
+                this.setVisibility( relatedPanel, false );
             }
         }
-
-    };
-
-    InfoboxOO.prototype.markHidden = function( panels ) {
-        panels.attr({
-            'aria-hidden': true,
-            'aria-selected': false
-        });
-    };
-
-    InfoboxOO.prototype.markVisible = function( panels ) {
-        panels.attr({
-            'aria-hidden': false,
-            'aria-selected': true
-        });
     };
 
     /**
-    * Switches the presentation of navigation according to the hasSidebar boolean
+    * Sets aria-selected and aria-expanded attributes for tab(s) according
+    * to the given boolean.
     *
-    * @param {boolean} hasSidebar Wether to use sidebar navigation or if false the
-    *                  folded navigation.
-    * @param {jQuery} openTab Defines the panel that is opened after the switch
+    * @param {jQuery} tabs The tab(s) to be toggled
+    * @param {boolean} isActive If true the tabs are marked selected and
+    *                  expanded, if false these attributes are set to false
     */
-    InfoboxOO.prototype.switchNavigationMode = function( openTab ) {
-        // Do not rebuild the navigation if not necessary
-        if ( this.hasSidebar === this.hasSidebarNavigation()) {
-            return;
-        }
-
-        this.hasSidebar = this.hasSidebarNavigation();
-        this.setTabsAndTabtitles();
-
-        if ( this.hasSidebar ) {
-            this.switchTo( openTab );
-        } else {
-            this.markHidden( this.tabpanels.not( openTab ) );
-        }
+    InfoboxOO.prototype.toggleTabActive = function( tabs, isActive ) {
+        tabs.attr({
+            'aria-selected': isActive,
+            'aria-expanded': isActive
+        });
     };
 
     /**
-    * Adds the necessary attributes to the tab navigation according to the
-    * navigation mode (sidebar or folded).
+    * Sets the aria-hidden and aria-selected attributes of the given
+    * jQuery element(s) to hidden & not selected or visible & selected
+    * according to the given boolean.
+    *
+    * @param {jQuery} panels The panel(s) to be set visible or hidden
+    * @param {boolean} isVisible Sets the panel(s) visible if true or
+    *                  hidden otherwise
     */
-    InfoboxOO.prototype.setTabsAndTabtitles = function() {
+    InfoboxOO.prototype.setVisibility = function( panels, isVisible ) {
+        panels.attr({
+            'aria-hidden': !isVisible,
+            'aria-selected': isVisible
+        });
+    };
 
+    /**
+    * When the sidebar is visible, the cloned links in the navigation area
+    * are used, otherwise the links above the panels are used. This function
+    * sets the necessary attributes and updates instance variables according to
+    * the hasSidebar state.
+    */
+    InfoboxOO.prototype.setNavigationMode = function() {
         this.tabtitles
-            .removeAttr( 'role', 'tab' )
+            .removeAttr( 'role' )
             .removeClass( 'infobox-tab__title--displayed' );
-        this.tabs.removeAttr( 'aria-controls' );
+
+        this.tabs.each( function() {
+            $( this )
+                .removeAttr( 'id' )
+                .removeAttr( 'aria-controls' )
+                .removeClass( 'infobox-tab__link--active' );
+        });
+
+        this.setVisibility( this.tabpanels, false );
 
         if ( this.hasSidebar ) {
-            this.tabtitles = $( '.infobox__navigation .infobox-tab__title', this.infobox );
+            this.tabtitles = this.infobox.find( '.infobox__navigation .infobox-tab__title' );
         } else {
-            this.tabtitles = $( '.infobox-tab .infobox-tab__title', this.infobox );
+            this.tabtitles = this.infobox.find( '.infobox-tab .infobox-tab__title' );
         }
 
         this.tabtitles
@@ -135,7 +180,9 @@
 
         this.tabs = this.tabtitles.find( 'a' );
         this.tabs.each( function() {
-            $( this ).attr( 'aria-controls', $( this ).data( 'aria-controls' ) );
+            $( this )
+                .attr( 'aria-controls', $( this ).data( 'aria-controls' ) )
+                .attr( 'id', $( this ).data( 'id' ) );
         });
     };
 
@@ -146,16 +193,19 @@
     *                  tab has been found.
     */
     InfoboxOO.prototype.getSelectedTabByHash = function() {
-        if ( window.location.hash ) {
-            var hash = window.location.hash.substring( 1 );
+        if ( location.hash ) {
+            var hash = location.hash.substring( 1 );
             return this.tabs.filter( '#' + hash + '-tab' );
         }
     };
 
+    /**
+    * Create an infobox instance for each element it is called on.
+    */
     $.fn.infoboxOO = function() {
         return this.each( function() {
             new InfoboxOO( this );
         });
     };
 
-})( jQuery, window );
+})( jQuery, window, location );
