@@ -4,7 +4,7 @@ Change log for zeit.web
 2.42 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2157: Expose function hook for additional scripts
 
 
 2.41 (2015-12-22)
