@@ -566,7 +566,7 @@ def test_invalid_unicode_should_return_http_400(testbrowser):
     assert info.value.getcode() == 400
 
 
-def test_ivw_hyprid_method_for_apps(jinja2_env):
+def test_ivw_uses_hyprid_method_for_apps(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.core:templates/inc/tracking/ivw_ver2.html')
     view = mock.Mock()

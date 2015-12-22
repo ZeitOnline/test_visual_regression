@@ -4,7 +4,7 @@ Change log for zeit.web
 2.41 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- QUICKFIX: Set IVW to always use hybrid delivery method .h
 
 
 2.40 (2015-12-21)

@@ -1,5 +1,4 @@
 {% if view.enable_third_party_modules and view.enable_tracking %}
-{% set delivery_method = 'h' if view.is_wrapped else 'c' %}
 <!-- ivw ver2 tracking -->
 <!-- SZM VERSION="2" -->
 <script type="text/javascript">
@@ -28,10 +27,10 @@
                     window.location.hash = '';
                 }
             } else {
-                iom.{{ delivery_method }}( iam_data, 1 );
+                iom.h( iam_data, 1 );
             }
         {% else %}
-            iom.{{ delivery_method }}( iam_data, 1 );
+            iom.h( iam_data, 1 );
         {% endif %}
     }
 </script>
