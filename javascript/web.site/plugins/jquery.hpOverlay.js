@@ -14,14 +14,14 @@
  * @requires ZEIT-Lib
  */
 
-(function( $, window, document, ZMO ) {
+(function( $, window, document, Zeit ) {
     'use strict';
 
     // options may be overwritten by hpoverlay.config.js
     var options = {
             cookieTimeInDays: 1.5,
             endpoint: location.protocol + '//' + location.host + '/json_update_time/index',
-            config: ZMO.jsconfHost + '/hpoverlay.config.js',
+            config: Zeit.jsconfHost + '/hpoverlay.config.js',
             minutes: 5,
             isOn: true,
             updateTime: 1,
@@ -62,7 +62,7 @@
                 $( '.overlay' ).hide();
                 $( '#overlay-wrapper' ).hide();
                 this.visible = false;
-                ZMO.cookieCreate( 'overlaycanceled', 'canceled', options.cookieTimeInDays, '' );
+                Zeit.cookieCreate( 'overlaycanceled', 'canceled', options.cookieTimeInDays, '' );
 
                 // restore last focused element
                 if ( this.activeElement ) {
@@ -186,11 +186,11 @@
                 return;
             }
 
-            var cookie = ZMO.cookieRead( 'overlaycanceled' );
+            var cookie = Zeit.cookieRead( 'overlaycanceled' );
 
             if ( options.force ) {
                 overlay.show();
-            } else if ( !ZMO.isMobileView() && cookie !== 'canceled' ) {
+            } else if ( !Zeit.isMobileView() && cookie !== 'canceled' ) {
                 // only get config if there's no mobile view and cookie wasn't set
                 overlay.log( 'Configure popup' );
                 overlay.config();
@@ -200,4 +200,4 @@
         }
     });
 
-})( jQuery, window, document, window.ZMO );
+})( jQuery, window, document, window.Zeit );

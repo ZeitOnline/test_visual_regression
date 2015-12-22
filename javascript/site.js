@@ -12,6 +12,7 @@ require([ 'vendor/require', 'config' ], function() {});
 
 // require anonymous AMD modules here
 require([
+    'web.core/zeit',
     'web.core/images',
     'web.core/clicktracking',
     'web.core/triggeredEventTracking',
@@ -23,6 +24,7 @@ require([
     'web.site/comments',
     'web.site/adblockCount.js'
 ], function(
+    zeit,
     images,
     clicktracking,
     triggeredEventTracking,
@@ -35,19 +37,23 @@ require([
     adblockCount
 ) {
     var article = document.getElementById( 'js-article' );
+
     images.init();
     clicktracking.init();
     triggeredEventTracking.init();
     adReload.init();
     videoStage.init();
-    articledate.init();
-    articlesharing.init();
-    comments.init();
-    adblockCount.init();
+
     if ( article ) {
-        window.ZMO.overscrolling = overscrolling;
+        articledate.init();
+        articlesharing.init();
+        comments.init();
         //overscrolling.init();
+        zeit.overcrolling = overscrolling;
     }
+
+    adblockCount.init();
+    zeit.clearQueue();
 });
 
 String.prototype.format = function() {

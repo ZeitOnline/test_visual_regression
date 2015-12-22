@@ -11,8 +11,8 @@
             "co" : "URL: {{ request.path_info }}"
         };
 
-    if ( window.ZMO.isMobileView() ) {
-        iam_data.st = typeof ZMO.wrapped !== 'undefined' ? ZMO.wrapped.ivwclient : "mobzeit";
+    if ( window.Zeit.isMobileView() ) {
+        iam_data.st = window.Zeit.wrapped ? window.Zeit.wrapped.ivwclient : "mobzeit";
         iam_data.sv = "mo";
     } else {
         iam_data.st = "zeitonl";

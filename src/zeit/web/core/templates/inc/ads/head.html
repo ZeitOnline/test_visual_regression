@@ -18,7 +18,7 @@
         // conditionalize output of gzip fileending, to prevent code replication
         gz_suffix = gzipEnabled ? '.gz' : '',
         // conditionalize output of cdn directory for mobile, to prevent code replication
-        mob_suffix = ZMO.isMobileView() ? '_mob' : '';
+        mob_suffix = window.Zeit.isMobileView() ? '_mob' : '';
 
     document.write('<scr' + 'ipt src="http://scripts.zeit.de/iqd/cdn_zeit' + mob_suffix + '/' + iqd_mode + '/iqadcontroller.js' + gz_suffix + '"></scr' + 'ipt>');
 </script>
@@ -31,7 +31,7 @@
                 {{ '' | indent(4, true) }}{{ name }}: {% if value is string %}'{{ value }}'{% else %}{{ value | lower }}{% endif %}{{ ',' if not loop.last }}
         {% endfor -%}
         };
-        if ( ZMO.clientWidth > ZMO.mobileWidth && ZMO.clientWidth <= ZMO.noliquidMaxWidth ) {
+        if ( window.Zeit.getClientWidth() > window.Zeit.tabletMinWidth && window.Zeit.getClientWidth() <= window.Zeit.noliquidMaxWidth ) {
            var kws = adcSiteInfo.keywords.split(',');
            kws.push('diuqilon');
            adcSiteInfo.keywords = kws.join(',');
