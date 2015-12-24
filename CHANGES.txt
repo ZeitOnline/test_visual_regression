@@ -4,7 +4,7 @@ Change log for zeit.web
 2.42 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Fix non clickable image bug an fullwidth teaser
 
 
 2.41 (2015-12-22)
