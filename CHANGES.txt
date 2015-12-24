@@ -4,6 +4,8 @@ Change log for zeit.web
 2.42 (unreleased)
 -----------------
 
+- FIX: Wrapper-Apps: Set IVW identifier to `mobzeit` at all times
+
 - FIX: Fix non clickable image bug an fullwidth teaser
 
 - ZON-2533: Fix character count at comment reply form
