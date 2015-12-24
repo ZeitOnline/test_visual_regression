@@ -362,7 +362,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                             premoderation.detach();
                             if ( response.response.setUser ) {
                                 window.location.hash = '#comment-form';
-                                window.location.reload();
+                                window.location.reload( true );
                             } else {
                                 $form.find( '.comment-form__textarea' ).val( '' );
                                 $form.find( '.button' ).prop( 'disabled', false );

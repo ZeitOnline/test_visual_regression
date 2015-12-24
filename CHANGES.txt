@@ -1,10 +1,26 @@
 Change log for zeit.web
 =======================
 
-2.40 (unreleased)
+2.42 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Fix non clickable image bug an fullwidth teaser
+
+
+2.41 (2015-12-22)
+-----------------
+
+- QUICKFIX: Set IVW to always use hybrid delivery method .h
+
+
+2.40 (2015-12-21)
+-----------------
+
+- ZON-2588: Remove trailing slash from host to avoid double slash in URL path
+
+- FIX: Force window reload after premoderation overlay close
+
+- FIX: IVW code in hybrid/wrapper apps
 
 
 2.39 (2015-12-18)
@@ -50,7 +66,7 @@ Change log for zeit.web
 
 - ZON-2520: Implement RSS feed for Roost
 
-- ZON-2428: Remove "ZEIT ONLINE" from social media meta titles
+- ZON-2459: Remove "ZEIT ONLINE" from social media meta titles
 
 - MAINT: Fix asset_host etc to allow mounting under an URL prefix (for showcases)
 

@@ -20,17 +20,17 @@
 
     if ( typeof iom !== "undefined" && typeof iam_data !== "undefined" ) {
         {% if view.is_hp %}
-        if ( window.location.hash === '#overscroll-article') {
-            if ("pushState" in history) {
-                history.replaceState("", document.title, window.location.pathname + window.location.search);
+            if ( window.location.hash === '#overscroll-article') {
+                if ("pushState" in history) {
+                    history.replaceState("", document.title, window.location.pathname + window.location.search);
+                } else {
+                    window.location.hash = '';
+                }
             } else {
-                window.location.hash = '';
+                iom.h( iam_data, 1 );
             }
-        } else {
-            iom.c( iam_data, 1 );    
-        }
         {% else %}
-        iom.c( iam_data, 1 );
+            iom.h( iam_data, 1 );
         {% endif %}
     }
 </script>
