@@ -70,9 +70,6 @@ def JinjaEnvRegistrator(env_attr, marker=None, category='jinja'):  # NOQA
 
             :internal:
             """
-            if marker and isinstance(obj, types.FunctionType):
-                setattr(obj, marker, True)
-
             if not hasattr(scanner, 'env'):
                 return
 
@@ -89,6 +86,9 @@ def JinjaEnvRegistrator(env_attr, marker=None, category='jinja'):  # NOQA
 
                 setattr(sys.modules[obj.__module__], obj.func_name, fn)
                 obj = fn
+
+            if marker and isinstance(obj, types.FunctionType):
+                setattr(obj, marker, True)
 
             if env_attr in scanner.env.__dict__:
                 scanner.env.__dict__[env_attr][name] = obj

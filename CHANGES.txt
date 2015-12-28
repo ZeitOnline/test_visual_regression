@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Wrapper-Apps: Set IVW identifier to `mobzeit` at all times
 
+- FIX: Don't set a marker if you're gonna overwrite the function anyway
+
 
 2.42 (2015-12-28)
 -----------------
