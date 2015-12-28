@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-2157: Expose function hook for additional scripts
 
+- FIX: Fix non clickable image bug an fullwidth teaser
+
+- ZON-2533: Fix character count at comment reply form
+
 
 2.41 (2015-12-22)
 -----------------

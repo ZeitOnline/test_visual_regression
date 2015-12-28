@@ -130,7 +130,7 @@ require([
         article.find( '.liveblog' ).liveblog();
         article.find( '.article-toc' ).toggleOnClick();
         $.picturefill();
-        $( '.js-count-formchars' ).countFormchars();
+        $( '.comment-section' ).countFormchars();
         $( '.js-fix-position' ).fixPosition();
     } else if ( pageType === 'author' ) {
         $( '.author-questions' ).longTextWrapper();
