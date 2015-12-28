@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.42 (unreleased)
+2.42 (2015-12-28)
 -----------------
 
 - ZON-2533: Fix character count at comment reply form
