@@ -4,7 +4,7 @@ Change log for zeit.web
 2.43 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Wrapper-Apps: Set IVW identifier to `mobzeit` at all times
 
 
 2.42 (2015-12-28)
@@ -15,6 +15,8 @@ Change log for zeit.web
 - FIX: Fix non clickable image bug an fullwidth teaser
 
 - MAINT: Update config, disable ZMO tweet count, fix #536
+
+- FIX: Fix non clickable image bug an fullwidth teaser
 
 
 2.41 (2015-12-22)
