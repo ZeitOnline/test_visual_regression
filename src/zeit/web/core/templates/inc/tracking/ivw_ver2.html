@@ -11,12 +11,18 @@
             "co" : "URL: {{ request.path_info }}"
         };
 
+    {% if view.is_wrapped %}
+        {# in our Wrapper-Apps: always use the 'Angebotskennung' for the 'MEW' (mobile enabled website) #}
+        iam_data.st = "mobzeit";
+        iam_data.sv = "mo";
+    {% else %}
     if ( window.Zeit.isMobileView() ) {
-        iam_data.st = window.Zeit.wrapped ? window.Zeit.wrapped.ivwclient : "mobzeit";
+        iam_data.st = "mobzeit";
         iam_data.sv = "mo";
     } else {
         iam_data.st = "zeitonl";
     }
+    {% endif %}
 
     if ( typeof iom !== "undefined" && typeof iam_data !== "undefined" ) {
         {% if view.is_hp %}
