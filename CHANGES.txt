@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.43 (unreleased)
+2.43 (2015-12-28)
 -----------------
 
 - FIX: Wrapper-Apps: Set IVW identifier to `mobzeit` at all times
