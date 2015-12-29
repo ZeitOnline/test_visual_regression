@@ -20,7 +20,7 @@
                             .clone()
                             .appendTo( this.navigation );
         this.tabs = this.tabtitles.find( 'a' );
-        this.curOpenTabId = undefined;
+        this.curOpenTabId = undefined; // must be the id (because the tabs can change, the id cannot)!
 
         this.init();
     }
@@ -35,23 +35,26 @@
     */
     Infobox.prototype.init = function() {
         var self = this, // needed in event listeners
-            selectedTab = this.getSelectedTabByHash() || this.tabs.first();
+            hashTab;
 
-        this.curOpenTabId = selectedTab.attr( 'id' ); // must be the ID (the tabs can change, id does not)!
         this.infobox.find( '.infobox-tab__title a' ).removeAttr( 'id' );
         this.navigation.attr( 'role', 'tablist' );
         this.updateNavigationMode();
 
+        hashTab = this.getSelectedTabByHash();
+        this.curOpenTabId = hashTab ? hashTab.attr( 'id' ) : this.tabs.first().attr( 'id' );
+
         if ( this.hasSidebar ) {
-            this.selectTab( selectedTab );
-        } else {
-            this.setPanelsVisible( this.tabpanels, false );
+            this.selectTab( hashTab || this.tabs.first() );
+        } else if ( hashTab ) {
+            this.selectTab( hashTab );
         }
 
         // Switch to selected tab and update location.hash and curOpenTabId
         this.infobox.on( 'click', '.infobox-tab__link', function( event ) {
-            var tab = $( this );
             event.preventDefault();
+
+            var tab = $( this );
             self.curOpenTabId = tab.attr( 'id' );
             self.selectTab( tab );
             if ( self.hasSidebar ) {
@@ -74,9 +77,10 @@
         // When going back in the browser history update the open tab
         // according to the location.hash
         $( window ).on( 'hashchange', function( event ) {
-            var hashTab = self.getSelectedTabByHash();
-            if ( self.hasSidebar && hashTab ) {
-                event.preventDefault();
+            event.preventDefault();
+
+            if ( self.hasSidebar ) {
+                var hashTab = self.getSelectedTabByHash() || self.tabs.first();
                 self.curOpenTabId = hashTab.attr( 'id' );
                 self.selectTab( hashTab );
             }
@@ -203,8 +207,13 @@
     */
     Infobox.prototype.getSelectedTabByHash = function() {
         if ( location.hash ) {
-            var hash = location.hash.substring( 1 );
-            return this.tabs.filter( '#' + hash + '-tab' );
+            var hash = location.hash.substring( 1 ),
+                hashTab = this.tabs.filter( '#' + hash + '-tab' );
+            if ( hashTab && hashTab.length ) {
+                return hashTab;
+            } else {
+                return;
+            }
         }
     };
 
