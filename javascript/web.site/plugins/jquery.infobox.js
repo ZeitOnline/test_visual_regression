@@ -66,6 +66,17 @@
                 self.switchTo( $( '#' + self.curOpenTab.attr( 'id' ) ) );
             }
         });
+
+        // When going back in the browser history update the open tab
+        // according to the location.hash
+        $( window ).on( 'hashchange', function( event ) {
+            var hashTab = self.getSelectedTabByHash();
+            if ( self.hasSidebar && hashTab ) {
+                event.preventDefault();
+                self.curOpenTab = hashTab;
+                self.switchTo( hashTab );
+            }
+        });
     };
 
     /**
