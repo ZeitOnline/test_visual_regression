@@ -4,7 +4,7 @@ Change log for zeit.web
 2.44 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2233: Fix FF < 27 Navigation
 
 
 2.43 (2015-12-28)
