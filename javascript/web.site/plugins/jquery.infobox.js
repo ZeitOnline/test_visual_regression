@@ -80,8 +80,8 @@
     };
 
     /**
-    * @return {boolean} true if in the sidebar should be visible according
-    *                   to CSS, false otherwise
+    * @return {boolean} true if the sidebar is visible according to CSS,
+    *                   false otherwise
     */
     Infobox.prototype.hasSidebarNavigation = function() {
         return this.navigation.is( ':visible' );
