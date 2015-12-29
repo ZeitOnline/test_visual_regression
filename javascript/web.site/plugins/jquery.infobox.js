@@ -36,12 +36,12 @@
         this.curOpenTab = selectedTab;
         this.infobox.find( '.infobox-tab__title a' ).removeAttr( 'id' );
         this.navigation.attr( 'role', 'tablist' );
-        this.setNavigationMode();
+        this.updateNavigationMode();
 
         if ( this.hasSidebar ) {
             this.switchTo( selectedTab );
         } else {
-            this.setVisibility( this.tabpanels, false );
+            this.setPanelsVisible( this.tabpanels, false );
         }
 
         // Switch to selected tab and update location.hash and curOpenTab
@@ -49,10 +49,10 @@
             var tab = $( this );
             event.preventDefault();
             self.curOpenTab = tab;
-            self.switchTo( tab );
+            self.selectTab( tab );
             if ( self.hasSidebar ) {
-                var tabId = tab.attr( 'id' );
                 if ( history.pushState ) {
+                    var tabId = tab.attr( 'id' );
                     history.pushState( null, null, '#' + tabId.substring( 0, tabId.length - 4 ) );
                 }
             }
@@ -62,8 +62,8 @@
         $( window ).on( 'resize', function() {
             if ( self.hasSidebar !== self.hasSidebarNavigation() ) {
                 self.hasSidebar = self.hasSidebarNavigation();
-                self.setNavigationMode();
-                self.switchTo( $( '#' + self.curOpenTab.attr( 'id' ) ) );
+                self.updateNavigationMode();
+                self.selectTab( $( '#' + self.curOpenTab.attr( 'id' ) ) );
             }
         });
 
@@ -74,7 +74,7 @@
             if ( self.hasSidebar && hashTab ) {
                 event.preventDefault();
                 self.curOpenTab = hashTab;
-                self.switchTo( hashTab );
+                self.selectTab( hashTab );
             }
         });
     };
@@ -95,29 +95,29 @@
     * at the same time and the function works like a toggle and shows
     * or hides the panel to the given tab
     *
-    * @param {jQuery} selectedTab the tab to be shown or toggled
+    * @param {jQuery} tab the tab to be shown or toggled
     */
-    Infobox.prototype.switchTo = function( selectedTab ) {
-        var relatedPanelId = '#' + selectedTab.attr( 'aria-controls' ),
+    Infobox.prototype.selectTab = function( tab ) {
+        var relatedPanelId = '#' + tab.attr( 'aria-controls' ),
             relatedPanel = $( relatedPanelId );
 
         if ( this.hasSidebar ) {
             this.tabs.removeClass( 'infobox-tab__link--active' );
-            this.toggleTabActive( this.tabs, false );
+            this.setTabsActive( this.tabs, false );
 
-            selectedTab.addClass( 'infobox-tab__link--active' );
-            this.toggleTabActive( selectedTab, true );
+            tab.addClass( 'infobox-tab__link--active' );
+            this.setTabsActive( tab, true );
 
-            this.setVisibility( this.tabpanels, false );
-            this.setVisibility( relatedPanel, true );
+            this.setPanelsVisible( this.tabpanels, false );
+            this.setPanelsVisible( relatedPanel, true );
         } else {
-            selectedTab.toggleClass( 'infobox-tab__link--active' );
-            if ( selectedTab.hasClass( 'infobox-tab__link--active' )) {
-                this.toggleTabActive( selectedTab, true );
-                this.setVisibility( relatedPanel, true );
+            tab.toggleClass( 'infobox-tab__link--active' );
+            if ( tab.hasClass( 'infobox-tab__link--active' )) {
+                this.setTabsActive( tab, true );
+                this.setPanelsVisible( relatedPanel, true );
             } else {
-                this.toggleTabActive( selectedTab, false );
-                this.setVisibility( relatedPanel, false );
+                this.setTabsActive( tab, false );
+                this.setPanelsVisible( relatedPanel, false );
             }
         }
     };
@@ -130,7 +130,7 @@
     * @param {boolean} isActive If true the tabs are marked selected and
     *                  expanded, if false these attributes are set to false
     */
-    Infobox.prototype.toggleTabActive = function( tabs, isActive ) {
+    Infobox.prototype.setTabsActive = function( tabs, isActive ) {
         tabs.attr({
             'aria-selected': isActive,
             'aria-expanded': isActive
@@ -146,7 +146,7 @@
     * @param {boolean} isVisible Sets the panel(s) visible if true or
     *                  hidden otherwise
     */
-    Infobox.prototype.setVisibility = function( panels, isVisible ) {
+    Infobox.prototype.setPanelsVisible = function( panels, isVisible ) {
         panels.attr({
             'aria-hidden': !isVisible,
             'aria-selected': isVisible
@@ -159,7 +159,7 @@
     * sets the necessary attributes and updates instance variables according to
     * the hasSidebar state.
     */
-    Infobox.prototype.setNavigationMode = function() {
+    Infobox.prototype.updateNavigationMode = function() {
         this.tabtitles
             .removeAttr( 'role' )
             .removeClass( 'infobox-tab__title--displayed' );
@@ -171,7 +171,7 @@
                 .removeClass( 'infobox-tab__link--active' );
         });
 
-        this.setVisibility( this.tabpanels, false );
+        this.setPanelsVisible( this.tabpanels, false );
 
         if ( this.hasSidebar ) {
             this.tabtitles = this.infobox.find( '.infobox__navigation .infobox-tab__title' );
