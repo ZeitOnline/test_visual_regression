@@ -20,7 +20,7 @@
                             .clone()
                             .appendTo( this.navigation );
         this.tabs = this.tabtitles.find( 'a' );
-        this.curOpenTab = undefined;
+        this.curOpenTabId = undefined;
 
         this.init();
     }
@@ -33,7 +33,7 @@
         var self = this, // needed in event listeners
             selectedTab = this.getSelectedTabByHash() || this.tabs.first();
 
-        this.curOpenTab = selectedTab;
+        this.curOpenTabId = selectedTab.attr( 'id' ); // needs to be ID and not tab because the tabs change on resize, the id does not
         this.infobox.find( '.infobox-tab__title a' ).removeAttr( 'id' );
         this.navigation.attr( 'role', 'tablist' );
         this.updateNavigationMode();
@@ -44,11 +44,11 @@
             this.setPanelsVisible( this.tabpanels, false );
         }
 
-        // Switch to selected tab and update location.hash and curOpenTab
+        // Switch to selected tab and update location.hash and curOpenTabId
         this.infobox.on( 'click', '.infobox-tab__link', function( event ) {
             var tab = $( this );
             event.preventDefault();
-            self.curOpenTab = tab;
+            self.curOpenTabId = tab.attr( 'id' );
             self.selectTab( tab );
             if ( self.hasSidebar ) {
                 if ( history.pushState ) {
@@ -63,7 +63,7 @@
             if ( self.hasSidebar !== self.hasSidebarNavigation() ) {
                 self.hasSidebar = self.hasSidebarNavigation();
                 self.updateNavigationMode();
-                self.selectTab( $( '#' + self.curOpenTab.attr( 'id' ) ) );
+                self.selectTab( $( '#' + self.curOpenTabId ) );
             }
         });
 
@@ -73,7 +73,7 @@
             var hashTab = self.getSelectedTabByHash();
             if ( self.hasSidebar && hashTab ) {
                 event.preventDefault();
-                self.curOpenTab = hashTab;
+                self.curOpenTabId = hashTab.attr( 'id' );
                 self.selectTab( hashTab );
             }
         });
