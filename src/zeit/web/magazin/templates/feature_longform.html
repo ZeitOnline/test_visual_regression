@@ -5,7 +5,7 @@
 {%- endblock sharing_meta %}
 
 {% block longform_logo %}
-    <a href="http://{{ view.request.host }}/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./index">
+    <a href="{{ request.route_url('home') }}index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./index">
         <meta itemprop="name" content="Zeit Online">
         <div class="main-nav__logo__wrap">
             <span class="main-nav__logo__img icon-logo-zon-large" itemprop="logo" title="ZEIT ONLINE">ZEIT ONLINE</span>

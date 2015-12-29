@@ -25,19 +25,21 @@
                 {% block teaser_link %}
                 <a class="{{ self.layout() }}__combined-link"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
-                   href="{{ teaser | create_url }}">
+                   href="{{ teaser | create_url | append_campaign_params }}">
                     {% block teaser_kicker %}
-                        <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind) }}">
+                        <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content) }}">
                             {% block kicker_logo scoped %}
                                 {% if teaser is zmo_content %}
                                     {{ lama.use_svg_icon('logo-zmo-zm', self.layout() + '__kicker-logo--zmo svg-symbol--hide-ie', request) }}
                                 {% elif teaser is zett_content %}
                                     {{ lama.use_svg_icon('logo-zett-small', self.layout() + '__kicker-logo--zett svg-symbol--hide-ie', request) }}
+                                {% elif teaser | is_liveblog %}
+                                    <span class="{{ self.layout() }}__kicker-logo--liveblog{% if teaser.liveblog_is_live == False %} {{ self.layout() }}__kicker-logo--liveblog-closed{% endif %}">live</span>
                                 {% endif %}
                             {% endblock %}
-                            {{ teaser.teaserSupertitle or teaser.supertitle }}
+                            {{ teaser.teaserSupertitle or teaser.supertitle -}}
                         </span>
-                        {% if teaser.teaserSupertitle or teaser.supertitle %}
+                        {%- if teaser.teaserSupertitle or teaser.supertitle -%}
                             <span class="visually-hidden">:</span>
                         {% endif %}
                     {% endblock %}
@@ -62,10 +64,12 @@
             {% block teaser_metadata_default %}
             <div class="{{ self.layout() }}__metadata">
                 {% block teaser_byline %}
+                    {% set byline = teaser | get_byline %}
+                    {% if byline | length %}
                     <span class="{{ self.layout() }}__byline">
-                        {%- set byline = teaser | get_byline -%}
                         {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
                     </span>
+                    {% endif %}
                 {% endblock %}
                 {% block teaser_datetime %}
                     {% if not view.is_advertorial %}

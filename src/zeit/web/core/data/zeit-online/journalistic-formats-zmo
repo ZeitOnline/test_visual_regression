@@ -12,10 +12,6 @@
       </topiclink>
     </topiclinks>
     <header_image xsi:nil="true"/>
-    <snapshot src="http://xml.zeit.de/kultur/2012-03/momente/0630-moment-frueh" title="Da sich die Temperaturen in der chinesischen Stadt Wuhan auch nachts noch bei 35 Grad halten, schlafen rund tausend Studenten in einer Turnhalle." align="left" publication-date="" expires="">
-      <bu>Da sich die Temperaturen in der chinesischen Stadt Wuhan auch nachts noch bei 35 Grad halten, schlafen rund tausend Studenten in einer Turnhalle.</bu>
-      <copyright>© Zhu Xiyong/dpa</copyright>
-    </snapshot>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>

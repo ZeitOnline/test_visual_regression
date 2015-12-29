@@ -23,6 +23,7 @@ import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 
 import zeit.web
+import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
 import zeit.web.core.sources
@@ -68,9 +69,16 @@ class Portraitbox(object):
 
     def _author_text(self, pbox):
         # not the most elegant solution, but it gets sh*t done
-        return ''.join([lxml.etree.tostring(element) for element in
-                       lxml.html.fragments_fromstring(pbox) if
-                       element.tag != 'raw'])
+        parts = []
+        for element in lxml.html.fragments_fromstring(pbox):
+            if isinstance(element, lxml.etree.ElementBase):
+                if element.tag == 'raw':
+                    continue
+                parts.append(lxml.etree.tostring(element))
+            else:
+                # First item of fragments_fromstring may be str/unicode.
+                parts.append(element)
+        return ''.join(parts)
 
 
 class IInfoboxDivision(zope.interface.Interface):

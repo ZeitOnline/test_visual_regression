@@ -3,7 +3,8 @@
   <lastname>Meyer</lastname>
   <status>Online</status>
   <external>false</external>
-  <display_name>Otto Meyer</display_name>
+  <email>kai.biermann@zeit.de</email>
+  <display_name>Ottö Meyer</display_name>
   <image_group xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   src="http://xml.zeit.de/zeit-online/cp-content/ig-3/"

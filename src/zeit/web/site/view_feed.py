@@ -5,12 +5,14 @@ import datetime
 import email
 import logging
 import urllib
+import urlparse
 import pytz
 
 import pyramid.view
 import lxml.etree
 import lxml.objectify
 import zope.component
+from types import NoneType
 
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
@@ -19,20 +21,24 @@ import zeit.push.interfaces
 
 import zeit.web
 import zeit.web.core.cache
-import zeit.web.core.interfaces
 import zeit.web.core.template
-import zeit.web.core.view_centerpage
 import zeit.web.site.view
 
 
 log = logging.getLogger(__name__)
 
 
+def _add_none(elem, text):
+    elem.text = ''
+
 ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
 CONTENT_NAMESPACE = 'http://purl.org/rss/1.0/modules/content/'
 DC_NAMESPACE = 'http://purl.org/dc/elements/1.1/'
-ELEMENT_MAKER = lxml.objectify.ElementMaker(annotate=False, nsmap={
-    'atom': ATOM_NAMESPACE, 'content': CONTENT_NAMESPACE, 'dc': DC_NAMESPACE})
+ESI_NAMESPACE = 'http://www.edge-delivery.org/esi/1.0'
+ELEMENT_MAKER = lxml.builder.ElementMaker(nsmap={
+    'atom': ATOM_NAMESPACE, 'content': CONTENT_NAMESPACE, 'dc': DC_NAMESPACE,
+    'esi': ESI_NAMESPACE},
+    typemap={NoneType: _add_none})
 ATOM_MAKER = getattr(ELEMENT_MAKER, '{%s}link' % ATOM_NAMESPACE)
 CONTENT_MAKER = getattr(ELEMENT_MAKER, '{%s}encoded' % CONTENT_NAMESPACE)
 DC_MAKER = getattr(ELEMENT_MAKER, '{%s}creator' % DC_NAMESPACE)
@@ -42,6 +48,12 @@ def format_rfc822_date(date):
     if date is None:
         date = datetime.datetime.min
     return email.utils.formatdate(calendar.timegm(date.timetuple()))
+
+
+def format_iso8601_date(date):
+    if date is None:
+        date = datetime.datetime.min
+    return date.isoformat()
 
 
 def last_published_semantic(context):
@@ -64,6 +76,18 @@ def filter_and_sort_entries(items):
         lambda c: '/news' not in c.uniqueId,
         items)
     return sorted(filter_news, key=lps_sort, reverse=True)
+
+
+def create_public_url(url):
+    # Since the feed views will be accessed via newsfeed.zeit.de, we
+    # cannot use route_url() as is, since it uses that hostname, which
+    # is not the one we want. This is a heuristic attempt that should work
+    # in both production and staging (and "localhost" type environments),
+    # but at the cost of hard-coding the "newsfeed" hostname here.
+    if url.startswith('http://newsfeed'):
+        return url.replace('http://newsfeed', 'http://www', 1)
+    else:
+        return url
 
 
 class Base(zeit.web.core.view.Base):
@@ -128,12 +152,7 @@ class Newsfeed(Base):
 
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
-            # XXX Since this view will be accessed via newsfeed.zeit.de, we
-            # cannot use route_url() as is, since it uses that hostname, which
-            # is not the one we want. In non-production environments this
-            # unfortunately still generates useless production links.
-            content_url = content_url.replace(
-                self.request.route_url('home'), 'http://www.zeit.de/', 1)
+            content_url = create_public_url(content_url)
 
             authors = []
             if getattr(content, 'authorships', None):
@@ -189,22 +208,106 @@ class Newsfeed(Base):
 class AuthorFeed(Newsfeed):
     @zeit.web.reify
     def supertitle(self):
-        return "Autorenfeed {}".format(self.context.display_name)
+        return u'Autorenfeed {}'.format(self.context.display_name)
 
     @zeit.web.reify
     def pagedescription(self):
-        return "Alle Artikel von {}".format(self.context.display_name)
+        return u'Alle Artikel von {}'.format(self.context.display_name)
+
+    @zeit.web.reify
+    def items(self):
+        return zeit.content.cp.interfaces.ITeaseredContent(
+            zeit.web.site.view_author.create_author_article_area(
+                self.context, count=8, dedupe_favourite_content=False))
+
+
+@pyramid.view.view_defaults(
+    renderer='string')
+@pyramid.view.view_config(
+    header='host:newsfeed(\.staging)?\.zeit\.de',
+    route_name='instantarticle_feed')
+class InstantArticleFeed(Newsfeed):
+    @zeit.web.reify
+    def pagetitle(self):
+        return u'Instant Article Feed'
+
+    @zeit.web.reify
+    def supertitle(self):
+        return u'ZEIT ONLINE'
+
+    @zeit.web.reify
+    def pagedescription(self):
+        return (u'Aktuelle Nachrichten, Kommentare, '
+                u'Analysen und Hintergrundberichte aus '
+                u'Politik, Wirtschaft, Gesellschaft, Wissen, '
+                u'Kultur und Sport lesen Sie auf ZEIT ONLINE.')
 
     @zeit.web.reify
     def items(self):
         solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        query = '{} AND (type:article)'.format(self.context.display_name)
+        query = u'is_instant_article:"true" AND (type:article)'
         resultset = []
         for result in solr.search(
-                query, sort='date-first-released desc', rows=8):
-            resultset.append(
-                zeit.cms.interfaces.ICMSContent(result['uniqueId']))
+                query, sort='date-first-released desc', rows=15):
+            resultset.append(zeit.cms.interfaces.ICMSContent(result))
         return resultset
+
+    def build_feed(self):
+        E = ELEMENT_MAKER
+        build_date = format_iso8601_date(datetime.datetime.today())
+        root = E.rss(version='2.0')
+        channel = E.channel(
+            E.title(self.pagetitle),
+            E.link(self.request.route_url('home')),
+            E.description(self.pagedescription),
+            E.language('de-de'),
+            build_date
+        )
+        root.append(channel)
+
+        for content in filter_and_sort_entries(self.items)[:15]:
+            metadata = zeit.cms.content.interfaces.ICommonMetadata(
+                content, None)
+            if metadata is None:
+                continue
+
+            content_url = zeit.web.core.template.create_url(
+                None, content, self.request)
+
+            content_url = create_public_url(content_url)
+
+            scheme, netloc, path, p, q, f = urlparse.urlparse(content_url)
+            instant_articles_url = (
+                '{}://{}/instantarticle{}?cdata=true'.format(
+                    scheme, netloc, path))
+
+            esi_include = getattr(E, '{%s}include' % ESI_NAMESPACE)(
+                src=instant_articles_url)
+
+            authors = []
+            if getattr(content, 'authorships', None):
+                authors = [getattr(author.target, 'display_name', None)
+                           for author in content.authorships]
+                authors = [x for x in authors if x]
+
+            description = metadata.teaserText
+
+            title = ': '.join(t for t in (
+                metadata.supertitle, metadata.title) if t)
+
+            item = E.item(
+                E.title(title),
+                E.link(content_url),
+                E.description(description),
+                E.category(metadata.sub_ressort or metadata.ressort),
+                E.author(u', '.join(authors)),
+                E.pubDate(format_iso8601_date(
+                    last_published_semantic(content))),
+                E.guid(content_url, isPermaLink='false'),
+                CONTENT_MAKER(esi_include)
+            )
+            channel.append(item)
+        return root
 
 
 @pyramid.view.view_config(
@@ -248,12 +351,7 @@ class SpektrumFeed(Base):
             })
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
-            # XXX Since this view will be accessed via newsfeed.zeit.de, we
-            # cannot use route_url() as is, since it uses that hostname, which
-            # is not the one we want. In non-production environments this
-            # unfortunately still generates useless production links.
-            content_url = content_url.replace(
-                self.request.route_url('home'), 'http://www.zeit.de/', 1)
+            content_url = create_public_url(content_url)
             item = E.item(
                 E.title(content.title),
                 E.link('%s?%s' % (content_url, tracking)),
@@ -267,16 +365,17 @@ class SpektrumFeed(Base):
             if image is not None:
                 image_url = zeit.web.core.template.default_image_url(
                     image, 'spektrum')
-                image_url = image_url.replace(
-                    self.request.route_url('home').strip('/'),
-                    self.request.image_host, 1)
-                item.append(E.enclosure(
-                    url=image_url,
-                    # XXX Incorrect length, since bitblt will resize the image,
-                    # but since that happens outside of the application, we
-                    # cannot know the real size here.
-                    length=str(image.size),
-                    type=image.mimeType))
+                if image_url is not None:
+                    image_url = image_url.replace(
+                        self.request.route_url('home').strip('/'),
+                        self.request.image_host, 1)
+                    item.append(E.enclosure(
+                        url=image_url,
+                        # XXX Incorrect length, since bitblt will resize the
+                        # image, but since that happens outside of the
+                        # application, we cannot know the real size here.
+                        length=str(image.size),
+                        type=image.mimeType))
             channel.append(item)
         return root
 
@@ -314,26 +413,26 @@ class SocialFeed(Base):
                 self.context):
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
-            # XXX Since this view will be accessed via newsfeed.zeit.de, we
-            # cannot use route_url() as is, since it uses that hostname, which
-            # is not the one we want. In non-production environments this
-            # unfortunately still generates un-unseful production links.
-            content_url = content_url.replace(
-                self.request.route_url('home'), 'http://www.zeit.de/', 1)
+            content_url = create_public_url(content_url)
             item = E.item(
-                E.title(content.title),
+                E.title(self.make_title(content)),
                 E.link(content_url),
                 E.description(content.teaserText),
                 E.pubDate(
                     format_rfc822_date(last_published_semantic(content))),
                 E.guid(content.uniqueId, isPermaLink='false'),
             )
-            social_value = getattr(
-                zeit.push.interfaces.IPushMessages(content), self.social_field)
+            social_value = self.social_value(content)
             if social_value:
                 item.append(CONTENT_MAKER(social_value))
             channel.append(item)
         return root
+
+    def make_title(self, content):
+        if content.supertitle:
+            return u'{}: {}'.format(content.supertitle, content.title)
+        else:
+            return content.title
 
 
 @pyramid.view.view_config(
@@ -342,7 +441,8 @@ class SocialFeed(Base):
     renderer='string')
 class TwitterFeed(SocialFeed):
 
-    social_field = 'short_text'
+    def social_value(self, content):
+        return zeit.push.interfaces.IPushMessages(content).short_text
 
 
 @pyramid.view.view_config(
@@ -351,4 +451,28 @@ class TwitterFeed(SocialFeed):
     renderer='string')
 class FacebookFeed(SocialFeed):
 
-    social_field = 'long_text'
+    def social_value(self, content):
+        return zeit.push.interfaces.IAccountData(content).facebook_main_text
+
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-socialflow-facebook-zmo',
+    renderer='string')
+class FacebookMagazinFeed(SocialFeed):
+
+    def social_value(self, content):
+        return zeit.push.interfaces.IAccountData(content).facebook_magazin_text
+
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-roost',
+    renderer='string')
+class RoostFeed(SocialFeed):
+
+    def make_title(self, content):
+        return content.supertitle
+
+    def social_value(self, content):
+        return zeit.push.interfaces.IAccountData(content).mobile_text

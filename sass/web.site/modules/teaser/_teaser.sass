@@ -99,6 +99,33 @@
 		margin-right: remify(4px)
 		vertical-align: sub
 		width: remify(30px)
+	&--liveblog
+		+background-image(linear-gradient(to top, $zon-red, #d41910))
+		background-color: $zon-red
+		border-radius: remify(3px)
+		color: $white
+		font-size: remify(10px)
+		font-weight: bold
+		font-style: normal
+		letter-spacing: $zon-letter-spacing-l
+		margin-right: remify(3px)
+		padding: remify(2px 6px 3px)
+		text-transform: uppercase
+		vertical-align: 1px
+		&:before
+			+animation(live-blog-indicator-animation 2s infinite)
+			background-color: $zon-lighter-grey
+			border-radius: 50%
+			content: ""
+			display: inline-block
+			height: remify(8px)
+			margin-right: remify(4px)
+			width: remify(8px)
+		&-closed
+			+background-image(linear-gradient(to top, #494b52, $trout))
+			background-color: $trout
+			&:before
+				+animation(none)
 
 %teaser-combined-link
 	color: inherit
@@ -132,7 +159,7 @@
 	letter-spacing: $zon-letter-spacing-s
 	+respond-min($break-tablet-min)
 		font-size: em(13px)
-	*:not(:last-child):not(:empty):after
+	> *:not(:last-child):not(:empty):after
 		content: " / "
 		margin: 0 .2em
 		opacity: $color-separator-opacity

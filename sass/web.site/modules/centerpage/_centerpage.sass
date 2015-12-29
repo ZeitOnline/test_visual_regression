@@ -1,12 +1,11 @@
 // RAM vertical space rules
-// Regions have vertical space as margin-bottom of $vertical-space
+// Regions have no vertical space except for duo regions which always have vertival space as $vertical-space
 // Areas have no vertical space (and as they float don't collapse margins of children)
 // Modules have vertical space on top and bottom as padding (or margin, e.g. column teaser)
 //
-// $vertcal-space * 2 is the vertical gutter between two elements (rule of thumb)
+// $vertical-space * 2 is the vertical gutter between two elements (rule of thumb)
 
 .cp-region
-	margin-bottom: $vertical-space
 	padding: 0 $cp-padding
 	border-color: $color-border
 	border-style: solid
@@ -23,9 +22,12 @@
 				border-bottom-width: 1px
 			+ div:not(.cp-region--parquet)
 				border-top: 1px solid $color-border
-	&--gallery
-		background-color: $zon-lighter-grey
-		padding-bottom: remify(40px)
+			+ .cp-region--duo
+				// padding instead of margin to keep the border at the
+				// visual bottom of the preceding .cp-region--parquet
+				margin-top: 0
+				padding-top: $vertical-space
+
 	// we want a border if grey meets grey
 	&--gallery + &--parquet
 		border-top-width: 1px
@@ -37,9 +39,12 @@
 	&--topic,
 	&--gallery
 		padding: 0
-	&--gallery
-		background-color: $zon_lighter_grey
-		padding-bottom: remify(40px)
+	&--duo
+		+respond-min($break-tablet-min)
+			margin-bottom: $vertical-space
+			margin-top: $vertical-space
+			&:first-child
+				margin-top: 0
 
 .cp-area
 	padding: 0 $cp-padding
@@ -93,7 +98,8 @@
 	// Fotostrecken + Shopbühne: twice the padding, because the region no longer has padding
 	&--gallery,
 	&--shop
-		padding: 0 2*$cp-padding
+		background-color: $zon-lighter-grey
+		padding: 0 2*$cp-padding remify(40px)
 	// Printbanderole
 	&--printkiosk
 		background-color: #33333A

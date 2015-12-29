@@ -11,15 +11,33 @@
             "co" : "URL: {{ request.path_info }}"
         };
 
+    {% if view.is_wrapped %}
+        {# in our Wrapper-Apps: always use the 'Angebotskennung' for the 'MEW' (mobile enabled website) #}
+        iam_data.st = "mobzeit";
+        iam_data.sv = "mo";
+    {% else %}
     if ( window.ZMO.isMobileView() ) {
-        iam_data.st = typeof ZMO.wrapped !== 'undefined' ? ZMO.wrapped.ivwclient : "mobzeit";
+        iam_data.st = "mobzeit";
         iam_data.sv = "mo";
     } else {
         iam_data.st = "zeitonl";
     }
+    {% endif %}
 
     if ( typeof iom !== "undefined" && typeof iam_data !== "undefined" ) {
-        iom.c( iam_data, 1 );
+        {% if view.is_hp %}
+            if ( window.location.hash === '#overscroll-article') {
+                if ("pushState" in history) {
+                    history.replaceState("", document.title, window.location.pathname + window.location.search);
+                } else {
+                    window.location.hash = '';
+                }
+            } else {
+                iom.h( iam_data, 1 );
+            }
+        {% else %}
+            iom.h( iam_data, 1 );
+        {% endif %}
     }
 </script>
 {% endif %}

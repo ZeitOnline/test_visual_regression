@@ -71,17 +71,7 @@ $color-comment-border: $color-border
 			font-family: $font-franziska
 			font-style: normal
 			&:before
-				background-color: $zon-grey
-				border-radius: 50%
-				color: $white
-				content: "!"
-				display: inline-block
-				font-size: remify(13px)
-				height: remify(16px)
-				line-height: remify(16px)
-				margin-right: .5em
-				text-align: center
-				width: remify(16px)
+				@extend %exclamation
 				vertical-align: text-top
 
 	&__reactions

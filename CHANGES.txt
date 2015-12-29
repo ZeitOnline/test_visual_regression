@@ -1,18 +1,206 @@
 Change log for zeit.web
 =======================
 
-2.33 (unreleased)
+2.44 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.43 (2015-12-28)
+-----------------
+
+- FIX: Wrapper-Apps: Set IVW identifier to `mobzeit` at all times
+
+- FIX: Don't set a marker if you're gonna overwrite the function anyway
+
+
+2.42 (2015-12-28)
+-----------------
+
+- ZON-2533: Fix character count at comment reply form
+
+- FIX: Fix non clickable image bug an fullwidth teaser
+
+- MAINT: Update config, disable ZMO tweet count, fix #536
+
+- FIX: Fix non clickable image bug an fullwidth teaser
+
+
+2.41 (2015-12-22)
+-----------------
+
+- QUICKFIX: Set IVW to always use hybrid delivery method .h
+
+
+2.40 (2015-12-21)
+-----------------
+
+- ZON-2588: Remove trailing slash from host to avoid double slash in URL path
+
+- FIX: Force window reload after premoderation overlay close
+
+- FIX: IVW code in hybrid/wrapper apps
+
+
+2.39 (2015-12-18)
+-----------------
+
+- ZON-2436: Account for image expiration in Nextread
+
+- ZON-2564: Add separate feed `rss-socialflow-facebook-zmo`
+
+- ZON-2260: Columns: use author portraits for social sharing images
+
+- ZON-2551: Make ESI work for Instant Articles feed
+
+- FIX: Retrieve mobile text from the correct field for roost feed
+
+- ZON-2290: Add print CSS
+
+- ZON-2561: Force mobile image for first teaser of authors favorite articles
+
+- FIX: Display bylines on ranking area teasers
+
+- FIX: Fix ZMO pagetitles in articles
+
+- ZON-2543: Show warning if premoderation is active
+
+- ZON-2571: Rework alert for blocked community user
+
+- ZON-2566: Edit text for premoderation popup
+
+- MAINT: Have fake solr return real content dates
+
+- ZON-2580: Fix Webtrekk param 12
+
+
+2.38 (2015-12-16)
+-----------------
+
+- HOTFIX: Set correct IVW-ID for new Android Wrapper App
+
+- ZON-2444, ZON-2455, ZON-2456: Author pages with bio, articles and comments
+
+- ZON-2520: Implement RSS feed for Roost
+
+- ZON-2459: Remove "ZEIT ONLINE" from social media meta titles
+
+- MAINT: Fix asset_host etc to allow mounting under an URL prefix (for showcases)
+
+- MAINT: Adjust templates to allow mounting under an URL prefix (for showcases)
+
+- HOTFIX: Author should be able to handle social_pagetitle
+
+
+2.37 (2015-12-15)
+-----------------
+
+- ZON-2545: Adjust padding on printkiosk and snapshot
+
+- ZON-2551: Make ESI work for Instant Articles feed
+
+- FIX: prevent links in links in shop teaser
+
+- MAINT: Allow HTTP exceptions to propagate to the client from Jinja templates
+
+- FIX: Be more defensive in several places:
+  * Ignore byline for content with missing content-type
+  * Skip gallery entries with missing content-type
+  * Skip unresolveable images in Spektrum feed
+  * Handle non-ascii user names
+
+
+2.36 (2015-12-10)
+-----------------
+
+- HOTFIX: correct path for Instant Articles
+
+- HOTFIX: Hide separator for empty metadata
+
+- HOTFIX: Fix navigation submenu appearance
+
+- HOTFIX: Display gallery entry captions again
+
+- ZON-2506: Add campaign parameters to ze.tt links
+
+
+2.35 (2015-12-08)
+-----------------
+
+- DEV-968: Distribute new Webtrekk script
+
+- ZON-2446: Implement HTML for Instant Articles
+
+- ZON-2478: Implement RSS feed for Instant Articles
+
+- ZON-2460: Fix several problems for wrapper apps
+
+- ZON-2450: Add more advertorials to navigation
+
+- ZON-2449: Include kicker in title of socialflow feeds
+
+- ZON-2429: "Snapshot" on homepage now is a normal teaser module
+
+- MAINT: Cleanup community notifications
+
+- FIX: Be more defensive in several places:
+  * Portraitboxes with funny HTML
+  * Images with empty copyright
+  * Videos without still image
+
+
+2.34 (2015-12-04)
+-----------------
+
+- HOTFIX: Fix lineage test
+
+- MAINT: Use `requests` throughout, no more `urllib2.urlopen`
+
+- PERF: Disable `requests` trying to read credentials from `~/.netrc`,
+  saving quite a few superfluous disk accesses
+
+- ZON-2408: Add overscroll effect
+
+- ZON-2380: Trigger adreload in slideshows on every possible slide event
+
+- MAINT: Polish nextread, advertising nextread and article lineage
+
+- HOTFIX: Handle non-ascii author names in author feed
+
+- MAINT: Use time-based caching for video series source
+
+- FIX: Re-add zett and zmo teaser kicker modifier
+
+
+2.33 (2015-11-27)
+-----------------
+
+- ZON-2352: Add liveglog teaser icon
 
 - ZON-2357: Add Supertitle to Article Lineage
 
 - ZON-2415: Add Zett Banner
 
+- ZON-2355: Hide chronological article navigation covering fullwidth elements
+
 - ZON-2369: Mark comments by freelancer
 
-- HOTFIX: Fix shop carousel teaser uniqueId
-
 - ZON-2418: Update webtrekk page parameter 10
+
+- ZON-2354: Remove vertical spacing of regions where unneeded
+
+- ZON-2445: Change twitter shares to mostread in ZMO buzzboard
+
+- MAINT: Add noindex header to XHR views (just to be on the safe side)
+
+- MAINT: Polish nextread, advertising nextread and article lineage
+
+
+2.32.1 (2015-11-27)
+-------------------
+
+- HOTFIX: Fix shop carousel teaser uniqueId
 
 
 2.32 (2015-11-24)
@@ -37,6 +225,8 @@ Change log for zeit.web
 - FIX: Style ZMO/zett icons on topicteaser
 
 - FIX: Remove padding from ZMO parquet
+
+- FIX: Correct query for author feed
 
 
 2.30 (2015-11-23)

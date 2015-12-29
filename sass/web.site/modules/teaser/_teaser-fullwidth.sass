@@ -20,7 +20,7 @@
 			margin: 0
 			padding-bottom: 100% / 7 * 3 // image variant 'cinema'
 			z-index: 1
-	&__media-container
+	&__media-link
 		+respond-min($break-tablet-min)
 			+teaser-image-dark-overlay
 	&__container
@@ -79,6 +79,10 @@
 				width: remify(42px) // padding-right is added
 		&--zett
 			@extend %teaser-kicker-logo--zett
+		&--liveblog
+			@extend %teaser-kicker-logo--liveblog
+		&--liveblog-closed
+			@extend %teaser-kicker-logo--liveblog-closed
 	&__title
 		@extend %teaser-title
 		font-size: em(24px)

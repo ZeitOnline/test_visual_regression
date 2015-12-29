@@ -17,14 +17,16 @@
 		vertical-align: middle
 		overflow: hidden
 	&__text
+		+pie-clearfix
 		color: $zon-grey
 		font-size: remify(14px)
-		line-height: remify(36px)
 		margin: 1em 0
+		&--metadata
+			line-height: remify(36px) // fix vertical align, use avatar height
 	&__charcount
 		float: right
 		letter-spacing: 0.01em
-		margin-left: 3rem
+		margin-left: remify(20px)
 	&__username
 		+link
 			color: $zon-red
@@ -42,7 +44,7 @@
 		+on-interaction
 			color: $color-link--hover
 	&__textarea
-		margin: 0 0 1em
+		margin: 1em 0
 		height: 16em
 
 	&__input

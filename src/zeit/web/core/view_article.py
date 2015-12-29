@@ -3,6 +3,7 @@ import itertools
 import logging
 import re
 
+from pyramid.view import view_config
 import pyramid.httpexceptions
 import zope.component
 
@@ -86,6 +87,27 @@ class Article(zeit.web.core.view.Content):
                 title = self.pages[number].teaser
             titles.append(title)
         return titles
+
+    def _pagetitle(self, suffix):
+        try:
+            title = zeit.seo.interfaces.ISEO(self.context).html_title
+            assert title
+        except (AssertionError, TypeError):
+            if self.page_nr > 1 and self.current_page.teaser:
+                title = ': '.join(
+                    [t for t in (
+                        getattr(self, 'supertitle'),
+                        self.current_page.teaser) if t])
+            else:
+                title = ': '.join(
+                    [t for t in (
+                        self.supertitle, self.title) if t])
+        if title and suffix:
+            return u'{}{}'.format(title, self.pagetitle_suffix)
+        if title:
+            return title
+
+        return self.seo_title_default
 
     @zeit.web.reify
     def pages_urls(self):
@@ -239,7 +261,7 @@ class Article(zeit.web.core.view.Content):
 
         cr_list = []
         for i in self._copyrights.itervalues():
-            if len(i.copyright[0][0]) > 1:
+            if i.copyright and len(i.copyright[0][0]) > 1:
                 cr_list.append(
                     dict(
                         label=i.copyright[0][0],
@@ -250,6 +272,16 @@ class Article(zeit.web.core.view.Content):
                     )
                 )
         return sorted(cr_list, key=lambda k: k['label'])
+
+
+@view_config(context=zeit.content.article.interfaces.IArticle,
+             route_name='instantarticle',
+             renderer='templates/instantarticle.html')
+class InstantArticle(Article):
+
+    @zeit.web.reify
+    def wrap_in_cdata(self):
+        return pyramid.settings.asbool(self.request.GET.get('cdata'))
 
 
 class ArticlePage(Article):

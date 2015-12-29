@@ -15,6 +15,7 @@ import pyramid.renderers
 import pyramid_beaker
 import pyramid_jinja2
 import pyramid_zodbconn
+import requests.sessions
 import venusian
 import zope.app.appsetup.product
 import zope.component
@@ -81,7 +82,6 @@ class Application(object):
         self.configure_zca()
         self.configure_pyramid()
         self.configure_banner()
-        self.configure_series()
         self.configure_navigation()
         self.configure_bugsnag()
 
@@ -98,12 +98,6 @@ class Application(object):
             self.settings.get('vivi_zeit.web_banner-id-mappings', ''))
         zeit.web.core.banner.banner_id_mappings = (
             zeit.web.core.banner.make_banner_id_mappings(banner_id_mappings))
-
-    def configure_series(self):
-        series_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_series-source', ''))
-        zeit.web.core.sources.video_series = (
-            zeit.web.core.sources.get_video_series(series_source))
 
     def configure_navigation(self):
         navigation_config = maybe_convert_egg_url(
@@ -171,6 +165,8 @@ class Application(object):
 
         log.debug('Configuring Pyramid')
         config.add_route('framebuilder', '/framebuilder')
+        config.add_route('instantarticle', '/instantarticle/*traverse')
+        config.add_route('instantarticle_feed', '/instantarticle-feed')
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
@@ -224,7 +220,7 @@ class Application(object):
                     zeit.web.core.view.surrender,
                     route_name='blacklist_{}'.format(index))
 
-        if not self.settings.get('debug.show_exceptions'):
+        if not self.settings.get('jinja2.show_exceptions'):
             config.add_view(view=zeit.web.core.view.service_unavailable,
                             context=Exception)
 
@@ -286,17 +282,10 @@ class Application(object):
                 'load_template_from_dav_url'))
         }, delimiter='://')
 
-        if not self.settings.get('debug.propagate_jinja_errors'):
-            # If the application is not running in debug mode: overlay the
-            # jinja environment with a custom, more fault tolerant one.
-            env.__class__ = zeit.web.core.jinja.Environment
-            env = env.overlay()
-
         venusian.Scanner(env=env).scan(
             zeit.web.core,
             categories=('jinja',),
-            ignore=self.DONT_SCAN
-        )
+            ignore=self.DONT_SCAN)
 
     def configure_zca(self):
         """Sets up zope.component registrations by reading our
@@ -379,7 +368,7 @@ def maybe_convert_egg_url(url):
 
 def join_url_path(base, path):
     parts = urlparse.urlsplit(base)
-    path = os.path.join(parts.path, path)
+    path = (parts.path + path).replace('//', '/')
     return urlparse.urlunsplit(
         (parts[0], parts[1], path, parts[3], parts[4]))
 
@@ -464,3 +453,7 @@ zeit.cms.repository.file.RepositoryFile.__parent__ = property(
     resolve_parent, set_workingcopy_parent)
 zeit.cms.repository.folder.Folder.__parent__ = property(
     resolve_parent, set_workingcopy_parent)
+
+
+# Skip superfluous disk accesses, since we never use netrc for authentication.
+requests.sessions.get_netrc_auth = lambda *args, **kw: None

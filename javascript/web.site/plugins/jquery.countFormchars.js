@@ -28,13 +28,15 @@
     */
     $.fn.countFormchars = function() {
         return this.each( function() {
-            var $counter = $( this ),
-                $formField = $( $counter.data( 'charcount-element' ) );
 
-            $formField.on( 'change keyup paste', function( e ) {
-                var formFieldContentLength = this.value.length;
+            $( this ).on( 'change keyup paste', '.comment-form__textarea', function( e ) {
+
+                var $counter = $( this ).parent( '.comment-form' ).find( '.js-count-formchars' ),
+                    formFieldContentLength = $( this ).val().length;
                 $counter.text( formFieldContentLength + ' / ' );
+
             } );
+
         });
     };
 })( jQuery );

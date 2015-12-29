@@ -76,6 +76,8 @@ class Environment(jinja2.environment.Environment):
             self, exc_info=None, rendered=False, source_hint=None):
         if exc_info is None:
             exc_info = sys.exc_info()
+        if issubclass(exc_info[0], pyramid.httpexceptions.HTTPException):
+            raise exc_info[0], exc_info[1], exc_info[2]
         global _make_traceback
         if _make_traceback is None:
             from jinja2.debug import make_traceback as _make_traceback

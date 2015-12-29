@@ -1,23 +1,9 @@
 .snapshot
+	margin-bottom: $twice
 	margin-top: $twice
 	position: relative
 	&__media
 		margin: 0 0 remify(14px)
-
-.js
-	.snapshot__media
-		opacity: 0.1
-		+filter(blur(10px))
-		+transition-property(filter, opacity)
-		+transition-duration(2.5s)
-		+transition-timing-function(ease-out)
-	.snapshot
-		display: none
-		&--visible
-			display: block
-		&--uncovered .snapshot__media
-			opacity: 1
-			+filter(blur(0))
 
 .snapshot-caption
 	color: $zon-charcoal

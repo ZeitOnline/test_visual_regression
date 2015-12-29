@@ -19,7 +19,7 @@
         is_wrapped: true,
         wrapped: {
             client: /Android/i.test(navigator.userAgent) ? 'android' : 'ios',
-            ivwclient: this.client === 'android' ? 'aadzeion' : 'appzeion'
+            ivwclient: /Android/i.test(navigator.userAgent) ? 'aadzeion' : 'appzeion'
         },
         {% endif -%}
         clientWidth: Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 ),
@@ -34,7 +34,7 @@
             concatString = concatString || '';
             if ( this.isMobileView() ) {
                 if ( this.is_wrapped ) {
-                    return this.wrapped.ivwclient + concatString;
+                    return 'mobile.app.' + this.wrapped.client;
                 }
                 return "mobile" + concatString;
             }

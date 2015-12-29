@@ -56,7 +56,7 @@
     {% endblock css_lte_8_link %}
     {% block css_link %}
     <!--[if gt IE 8]><!-->
-        <link href="{{ request.asset_host }}/css/web.site/screen.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="{{ request.asset_host }}/css/web.site/screen.css" media="all" rel="stylesheet" type="text/css">
     <!--<![endif]-->
     {% endblock css_link %}
     {% block css_lte9_navi_link %}
@@ -84,6 +84,16 @@
     <noscript>
         <link href="{{ request.asset_host }}/css/icons/site.fallback.css" rel="stylesheet">
     </noscript>
+    <script>
+        // trigger print dialog after "Artikel drucken" was clicked
+        if ( location.search.indexOf( 'print' ) !== -1 ) {
+            if ( window.addEventListener ) {
+                window.addEventListener( 'load', window.print, false );
+            } else if ( window.attachEvent ) {
+                window.attachEvent( 'onload', window.print );
+            }
+        }
+    </script>
     {% if view.enable_third_party_modules %}
         <!-- IVW -->
         <script id="ivw-v2" type="text/javascript" src="https://script.ioam.de/iam.js"></script>
@@ -158,6 +168,7 @@
                     {%- include "zeit.web.site:templates/inc/footer.html" ignore missing -%}
                 {% endblock footer %}
             </footer>
+            {% block progress_circle %}{% endblock %}
             {% endprofile %}
         </div>
     </div>

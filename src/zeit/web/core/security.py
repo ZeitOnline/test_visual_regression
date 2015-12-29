@@ -1,6 +1,5 @@
-import urllib2
 import jwt
-
+import requests
 import lxml.etree
 import zope.component
 import pyramid.authentication
@@ -82,7 +81,11 @@ def recursively_call_community(req, tries):
         try:
             with zeit.web.core.metrics.timer(
                     'community_user_info.community.reponse_time'):
-                return urllib2.urlopen(req, timeout=2)
+                # Analoguous to requests.api.request().
+                session = requests.Session()
+                response = session.send(req, stream=True, timeout=2)
+                session.close()
+                return response
         except Exception:
             return recursively_call_community(req, tries - 1)
     else:
@@ -94,7 +97,13 @@ def get_community_user_info(request):
     the Cookie that Community has set when the user logged in there.
     """
 
-    user_info = dict(uid=0, name=None, mail=None, picture=None, roles=[])
+    user_info = dict(
+        uid=0,
+        name=None,
+        mail=None,
+        picture=None,
+        roles=[],
+        premoderation=False)
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     cookie = request.cookies.get(conf.get('sso_cookie'))
@@ -109,10 +118,10 @@ def get_community_user_info(request):
     # community.
     community_host = request.registry.settings['community_host']
 
-    community_request = urllib2.Request(
-        community_host.rstrip('/') + '/user/xml',
+    community_request = requests.Request(
+        'GET', community_host.rstrip('/') + '/user/xml',
         headers={'Accept': 'application/xml',
-                 'Cookie': request.headers.get('Cookie', '')})
+                 'Cookie': request.headers.get('Cookie', '')}).prepare()
 
     community_response = recursively_call_community(community_request, 1)
 
@@ -121,19 +130,22 @@ def get_community_user_info(request):
 
     try:
         # Parse XML response and construct a dictionary from it
-        xml_info = lxml.etree.fromstring(community_response.read())
+        xml_info = lxml.etree.parse(community_response.raw)
     except lxml.etree.XMLSyntaxError:
         return user_info
 
     for key in user_info.keys():
         postfix = 'roles' in key and '/role' or ''
         elements = xml_info.xpath('/user/{}/text()'.format(key + postfix))
+
         if len(elements) == 0:
             continue
         elif key == 'picture':
             if elements[0] == '0':
                 continue
             elements = zeit.web.core.comments.rewrite_picture_url(elements[0])
+        elif key == 'premoderation':
+            elements = True if int(elements[0]) else False
         elif 'roles' not in key:
             elements = elements[0]
         user_info[key] = elements

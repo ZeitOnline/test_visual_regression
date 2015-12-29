@@ -6,10 +6,14 @@
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
     {% include "zeit.web.site:templates/inc/asset/image_zon-square.tpl" ignore missing %}
-    {% if provides(teaser, 'zeit.content.link.interfaces.ILink') and teaser.url.startswith('http://ze.tt') %}
-        {% block kicker_logo %}
-        {% endblock %}
+    {% if teaser is zett_content %}
         {{ lama.use_svg_icon('logo-zett-small', 'teaser-square__kicker-logo--zett svg-symbol--hide-ie', request) }}
+    {% endif %}
+{% endblock %}
+
+{% block kicker_logo %}
+    {% if teaser is not zett_content %}
+        {{ super() }}
     {% endif %}
 {% endblock %}
 
@@ -37,7 +41,7 @@
         {# 'Jetzt lesen' makes no sense for videos #}
         {% set label = 'Video ansehen' %}
     {% endif %}
-    <a href="{{ teaser.uniqueId | create_url }}" class="{{ self.layout() }}__button">
+    <a href="{{ teaser | create_url | append_campaign_params }}" class="{{ self.layout() }}__button">
         <span class="{{ self.layout() }}__button-extra">{{ extra }}</span>
         {{ label }}
     </a>

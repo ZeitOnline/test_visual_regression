@@ -211,7 +211,7 @@ class PostComment(zeit.web.core.view.Base):
                             request.session['user']['name']):
                     self.user_name = request.session['user']['name']
                     set_user = True
-                    self.status.append("User name {} was set".format(
+                    self.status.append(u"User name {} was set".format(
                         self.user_name))
                 else:
                     raise pyramid.httpexceptions.HTTPInternalServerError(
@@ -327,8 +327,9 @@ class PostComment(zeit.web.core.view.Base):
 
         xml_str = lxml.etree.tostring(content.xml)
         headers = {
-            'X-uniqueId': 'http://{}{}'.format(
-                self.request.host, urlparse.urlparse(unique_id)[2]),
+            'X-uniqueId': '{}{}'.format(
+                self.request.route_url('home').rstrip('/'),
+                urlparse.urlparse(unique_id)[2]),
             'Content-Type': 'text/xml'}
 
         with zeit.web.core.metrics.timer(

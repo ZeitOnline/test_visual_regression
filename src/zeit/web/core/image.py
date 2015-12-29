@@ -4,9 +4,10 @@ import logging
 import os
 import PIL
 import tempfile
-import urllib2
 
 import pytz
+import requests
+import requests_file
 import grokcore.component
 import zope.component
 
@@ -99,15 +100,15 @@ class VariantImage(object):
         self.ratio = variant.ratio
         self.variant = variant.legacy_name or variant.name
 
-        group = zeit.content.image.interfaces.IImageGroup(variant)
-        self.image_group = group.uniqueId
-        self.path = group.variant_url(self.image_pattern)
-        self.fallback_path = group.variant_url(
+        self.group = zeit.content.image.interfaces.IImageGroup(variant)
+        self.image_group = self.group.uniqueId
+        self.path = self.group.variant_url(self.image_pattern)
+        self.fallback_path = self.group.variant_url(
             self.image_pattern,
             variant.fallback_width,
             variant.fallback_height)
 
-        meta = zeit.content.image.interfaces.IImageMetadata(group, None)
+        meta = zeit.content.image.interfaces.IImageMetadata(self.group, None)
         if meta:
             self.alt = meta.alt
             self.caption = meta.caption
@@ -116,6 +117,9 @@ class VariantImage(object):
 
 
 class LocalImage(object):
+
+    KiB = 1024
+    DOWNLOAD_CHUNK_SIZE = 2 * KiB
 
     def __init__(self, url):
         if not isinstance(url, basestring):
@@ -135,16 +139,25 @@ class LocalImage(object):
     def fetch(self):
         if self.isfile():
             return
+        # XXX requests does not seem to allow to mount stuff as a default, sigh
+        session = requests.Session()
+        session.mount('file://', requests_file.FileAdapter())
         try:
-            # TODO: Switch to requests to leverage urllib3 connection pooling.
             with zeit.web.core.metrics.timer(
                     'zeit.web.core.video.thumbnail.brightcove.response_time'):
-                resp = urllib2.urlopen(self.url, timeout=2)
-                content = resp.read()
-            assert len(content) > 1024
+                response = session.get(self.url, stream=True, timeout=2)
+                response.raise_for_status()
             with self.open(mode='w+') as fh:
-                fh.write(content)
-        except (AssertionError, IOError, ValueError):
+                first_chunk = True
+                for chunk in response.iter_content(self.DOWNLOAD_CHUNK_SIZE):
+                    # Too small means something is not right with this download
+                    if first_chunk:
+                        first_chunk = False
+                        assert len(chunk) > self.DOWNLOAD_CHUNK_SIZE / 2
+                    fh.write(chunk)
+            # Analoguous to requests.api.request().
+            session.close()
+        except (requests.exceptions.RequestException, IOError, AssertionError):
             log.debug('Remote image {} could not be downloaded to {}.'.format(
                       self.url, self.__name__))
             raise TypeError('Could not adapt {}'.format(self.url))
@@ -207,7 +220,10 @@ class LocalImageGroup(zeit.content.image.imagegroup.ImageGroup,
 
     @zeit.web.reify
     def master_image(self):
-        image = LocalImage(self.image_url)
+        try:
+            image = LocalImage(self.image_url)
+        except TypeError:
+            return None
         image.src = self.image_url
         image.mimeType = 'image/jpeg'
         image.image_pattern = 'wide-large'
@@ -248,10 +264,14 @@ def image_expires(image):
     """Returns number of seconds relative to now when the given image, or the
     image group it belongs to, will no longer be published.
     """
+
     if zeit.content.image.interfaces.IImage.providedBy(image):
         group = image.__parent__
+    elif isinstance(image, VariantImage):
+        group = image.group
     else:
         group = image
+
     if not zeit.content.image.interfaces.IImageGroup.providedBy(group):
         return None
 

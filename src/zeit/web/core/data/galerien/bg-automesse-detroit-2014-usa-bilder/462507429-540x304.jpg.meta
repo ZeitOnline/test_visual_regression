@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<head xmlns:D="DAV:">
+	<attribute ns="DAV:" name="href">/cms/work/kultur/2014-04/fs-shomei-tomatsu-japan-bilder/462507429-540x304.jpg</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;© Xinhua/Zhang Wenkui/Reuters&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-04-17T17:32:26.687272+00:00</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.hoehler</attribute>
+	<attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name=&quot;LocalImage&quot; module=&quot;zeit.content.image.image&quot;/&gt; &lt;global name=&quot;IZMOContent&quot; module=&quot;zeit.magazin.interfaces&quot;/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-04-18T09:13:36.802431+00:00</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:0cc317ab-a9cd-4003-91b7-0bcceeb7217e}</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-17T17:31:26+00:00</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-04-17T17:31:39.631374+00:00</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/document" name="title">Eisschwimmen im chinesischen Shenyang</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Eisschwimmen im chinesischen Shenyang</attribute>
+	<attribute ns="DAV:" name="resourcetype"/>
+	<attribute ns="DAV:" name="creationdate">2014-04-18T09:12:36Z</attribute>
+	<attribute ns="DAV:" name="getcontentlength">171059</attribute>
+	<attribute ns="DAV:" name="getlastmodified">Fri, 18 Apr 2014 09:12:36 GMT</attribute>
+	<attribute ns="DAV:" name="getetag">"721944-29c33-4f74d8cfe7c9d"</attribute>
+	<attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+	<attribute ns="DAV:" name="supportedlock"> </attribute>
+	<attribute ns="DAV:" name="lockdiscovery"/>
+	<attribute ns="DAV:" name="getcontenttype">image/jpeg</attribute>
+</head>

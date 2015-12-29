@@ -29,6 +29,38 @@
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Twitter-Text</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Facebook-Text</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt;
+  &lt;list&gt;
+    &lt;dictionary&gt;
+      &lt;item key="channels"&gt;
+          &lt;string&gt;parse-channel-news&lt;/string&gt;
+      &lt;/item&gt;
+      &lt;item key="enabled"&gt;
+          &lt;false/&gt;
+      &lt;/item&gt;
+      &lt;item key="override_text"&gt;
+          &lt;unicode&gt;Mobile-Text&lt;/unicode&gt;
+      &lt;/item&gt;
+      &lt;item key="type"&gt;
+          &lt;string&gt;parse&lt;/string&gt;
+      &lt;/item&gt;
+    &lt;/dictionary&gt;
+    &lt;dictionary&gt;
+      &lt;item key="enabled"&gt;
+          &lt;false/&gt;
+      &lt;/item&gt;
+      &lt;item key="override_text"&gt;
+          &lt;unicode&gt;FB-ZMO&lt;/unicode&gt;
+      &lt;/item&gt;
+      &lt;item key="account"&gt;
+          &lt;string&gt;zeitmagazin&lt;/string&gt;
+      &lt;/item&gt;
+      &lt;item key="type"&gt;
+          &lt;string&gt;facebook&lt;/string&gt;
+      &lt;/item&gt;
+    &lt;/dictionary&gt;
+  &lt;/list&gt;
+&lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
   <attribute ns="DAV:" name="resourcetype"/>

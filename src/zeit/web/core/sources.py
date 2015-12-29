@@ -9,10 +9,10 @@ import urlparse
 import xml.sax.saxutils
 
 import gocept.cache.method
-import lxml.etree
 import pysolr
 import zope.interface
 
+import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.content.image.variant
 import zeit.imp.source
@@ -27,18 +27,23 @@ video_series = None
 log = logging.getLogger(__name__)
 
 
-def get_video_series(series_source):
-    try:
-        series_xml = lxml.etree.parse(series_source)
-    except (TypeError, IOError):
-        return list()
-    videoseries = series_xml.xpath('/allseries/videoseries/series')
-    videoseries_list = list()
-    for video in videoseries:
-        url = video.xpath('@url')[0]
-        title = video.xpath('@title')[0]
-        videoseries_list.append(dict(url=url, title=title))
-    return videoseries_list
+class VideoSeriesSource(zeit.cms.content.sources.SimpleXMLSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'series-source'
+
+    def getValues(self):
+        try:
+            xml = self._get_tree()
+        except (TypeError, IOError):
+            return []
+        videoseries = xml.xpath('/allseries/videoseries/series')
+        result = []
+        for node in videoseries:
+            result.append(dict(url=node.get('url'), title=node.get('title')))
+        return result
+
+VIDEO_SERIES = VideoSeriesSource()
 
 
 class ScaleSource(zeit.imp.source.ScaleSource):
@@ -178,11 +183,18 @@ class Solr(object):
                     unique_id = os.path.join(
                         root.replace(repo, 'http://xml.zeit.de'), name)
                     content = zeit.cms.interfaces.ICMSContent(unique_id)
+                    publish = zeit.cms.workflow.interfaces.IPublishInfo(
+                        content)
+                    semantic = zeit.cms.content.interfaces.ISemanticChange(
+                        content)
                     assert zeit.web.core.view.known_content(content)
                     results.append({
-                        u'date_last_published': u'2015-07-01T09:50:42Z',
-                        u'date_first_released': u'2015-07-01T09:50:42Z',
-                        u'last-semantic-change': u'2015-07-01T09:50:42Z',
+                        u'date_last_published': (
+                            publish.date_last_published.isoformat()),
+                        u'date_first_released': (
+                            publish.date_first_released.isoformat()),
+                        u'last-semantic-change': (
+                            semantic.last_semantic_change.isoformat()),
                         u'lead_candidate': False,
                         u'product_id': content.product.id,
                         u'supertitle': content.supertitle,

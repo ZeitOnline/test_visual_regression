@@ -351,7 +351,8 @@ class Base(object):
     def canonical_url(self):
         """ Set own url as default canonical. Overwrite for special
             cases and page types"""
-        return u"{}{}".format(self.request.host_url, self.request.path_info)
+        return u"{}{}".format(
+            self.request.route_url('home').rstrip('/'), self.request.path_info)
 
     @zeit.web.reify
     def js_vars(self):
@@ -388,16 +389,29 @@ class Base(object):
     def supertitle(self):
         return self.context.supertitle
 
-    @zeit.web.reify
-    def pagetitle(self):
+    def _pagetitle(self, suffix):
         try:
             title = zeit.seo.interfaces.ISEO(self.context).html_title
             assert title
         except (AssertionError, TypeError):
-            title = ': '.join([t for t in (self.supertitle, self.title) if t])
+            if getattr(self, 'supertitle'):
+                title = u'{}: {}'.format(self.supertitle, self.title)
+            else:
+                title = self.title
         if title:
-            return title + (u'' if self.is_hp else self.pagetitle_suffix)
+            if self.is_hp or not suffix:
+                return title
+            else:
+                return title + self.pagetitle_suffix
         return self.seo_title_default
+
+    @zeit.web.reify
+    def pagetitle(self):
+        return self._pagetitle(suffix=True)
+
+    @zeit.web.reify
+    def social_pagetitle(self):
+        return self._pagetitle(suffix=False)
 
     @zeit.web.reify
     def pagedescription(self):
@@ -767,7 +781,17 @@ class Content(Base):
 
     @zeit.web.reify
     def comment_area(self):
-        message = ''
+        user_blocked = False
+        premoderation = False
+        self.request.authenticated_userid
+
+        if self.request.session.get('user'):
+            user_blocked = self.request.session['user'].get('blocked')
+            premoderation = self.request.session['user'].get('premoderation')
+
+        message = None  # used for general alerts in the comment section header
+        note = None     # used for general alerts at the comment form
+
         if self.community_maintenance['active']:
             message = self.community_maintenance['text_active']
         elif not self.comments_loadable:
@@ -775,32 +799,30 @@ class Content(Base):
                        u'Die Kommentare zu diesem Artikel konnten '
                        u'nicht geladen werden. Bitte entschuldigen Sie '
                        u'diese Störung.')
+        elif not self.comments_allowed:
+            message = (u'Der Kommentarbereich dieses Artikels ist geschlossen.'
+                       u' Wir bitten um Ihr Verständnis.')
+            note = message
+        elif user_blocked:
+            # no message: individual messages are only possible inside ESI form
+            # no note: handled inside form template
+            note = None
         elif self.community_maintenance['scheduled']:
             message = self.community_maintenance['text_scheduled']
 
-        user_blocked = False
-        self.request.authenticated_userid
-        if self.request.session.get('user'):
-            user_blocked = self.request.session['user'].get('blocked')
-
-        accept_new_comments = self.context.commentsAllowed
-
         return {
             'show': (self.comments_allowed or bool(self.comments)),
-            'show_comment_form': (self.comments_loadable and (
-                self.show_commentthread) and not user_blocked and (
-                    accept_new_comments)),
-            'show_meta': not self.community_maintenance['active'] and (
-                bool(self.comments)) and self.comments_loadable,
+            'show_comment_form': not self.community_maintenance['active'] and (
+                self.comments_allowed) and self.comments_loadable and (
+                    not user_blocked),
             'show_comments': not self.community_maintenance['active'] and (
-                self.comments_loadable and self.comments),
+                self.comments_loadable and bool(self.comments)),
             'no_comments': (not self.comments and self.comments_loadable),
-            'warning': (self.community_maintenance['active'] or (
-                not self.comments_loadable) or (
-                    self.community_maintenance['scheduled'])),
+            'note': note,
             'message': message,
             'user_blocked': user_blocked,
-            'accept_new_comments': accept_new_comments
+            'show_premoderation_warning': premoderation and (
+                self.comments_allowed and not user_blocked)
         }
 
 

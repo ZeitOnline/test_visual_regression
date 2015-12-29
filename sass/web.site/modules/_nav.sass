@@ -76,6 +76,7 @@ $icon-color--hover: $zon-charcoal
 		display: block
 		height: $zon-logo-height-small
 		margin: em(13px) 0 0 0
+		pointer-events: none
 		width: $zon-logo-width-small
 		+respond-min($break-tablet-min)
 			height: $zon-logo-height
@@ -162,19 +163,15 @@ $icon-color--hover: $zon-charcoal
 		+display-flex()
 		+flex-wrap(wrap)
 		+justify-content(space-between)
-		li
+		& > li
 			width: 50%
-			text-align: left
 			margin: 0
-	+respond-min($break-phablet-min)
-		ul
-			li
+			+respond-min($break-phablet-min)
 				width: 33%
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style($width: auto)
 		+order(10)
 		+flex(2 0 35%)
-		text-align: left
 		& > ul
 			margin-right: $petite
 			display: inline-block
@@ -381,7 +378,8 @@ $icon-color--hover: $zon-charcoal
 	color: $black
 	display: block // needed for css columns
 	line-height: 2.5714
-
+	&--has-label
+		display: none // hide on mobile
 	+respond-min($break-tablet-min)
 		float: left
 		padding-right: $little
@@ -449,7 +447,7 @@ $icon-color--hover: $zon-charcoal
 		min-width: $mediumhuge
 		padding-left: 0
 		position: absolute
-		.dropdown__item
+		&__item
 			display: block // get rid of bullet points
 			width: 100%
 			& > .dropdown__link
@@ -467,6 +465,24 @@ $icon-color--hover: $zon-charcoal
 			&--has-label
 				background-color: #FAFAF3
 				border-top: 1px solid $color-border
+				&:before
+					color: $zon-mid-grey
+					content: "Anzeige" // fallback imcabable browsers
+					content: attr(data-label)
+					display: block
+					font-family: $font-tabletgothic
+					font-size: em(9px)
+					letter-spacing: .15em
+					line-height: 1
+					margin: remify(0 0 0 10px)
+					padding: remify(8px 0 0)
+					text-align: left
+					text-transform: uppercase
+				& + &
+					border-top: none
+					&:before
+						display: none
+
 		// dropdowns can contain dropdowns
 		.dropdown
 			box-shadow: none

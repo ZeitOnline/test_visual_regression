@@ -1,0 +1,22 @@
+.user-comment
+    @extend %teaser
+
+    &__text
+        margin-bottom: remify(20px)
+        > p
+            margin: 0 0 .6em 0
+    &__date
+        @extend %teaser-metadata
+        margin-bottom: remify(7px)
+        +respond-min($break-tablet-min)
+            margin-bottom: remify(1px)
+
+    &__article-link
+        font-weight: bold
+        letter-spacing: $zon-letter-spacing-s
+        line-height: 1.2
+    &__article-kicker
+        color: $color-text-highlighted
+        margin-right: remify(10px)
+    &__article-title
+        color: $zon-charcoal

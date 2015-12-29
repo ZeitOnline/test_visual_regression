@@ -13,10 +13,6 @@
 					<span class="article__sharing__services__icon icon-sharebox-facebook"></span>
 					<span class="article__sharing__services__text">{{ view.linkreach.facebook.total | unitize }}</span>
 				</a>
-				<a href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&via=zeitonline&url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.twitter.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=twitter_zonaudev_int&utm_campaign=twitter_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
-					<span class="article__sharing__services__icon icon-sharebox-twitter"></span>
-					<span class="article__sharing__services__text">{{ view.linkreach.twitter.total | unitize }}</span>
-				</a>
 				<a href="https://plus.google.com/share?url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.gplus.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=gplus_zonaudev_int&utm_campaign=gplus_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
 					<span class="article__sharing__services__icon icon-sharebox-google"></span>
 					<span class="article__sharing__services__text">{{ view.linkreach.googleplus.total | unitize }}</span>
@@ -147,7 +143,7 @@
 			<form method="POST" class="comment__form">
 				<p><textarea name="comment" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
 				<p class="comment__form__text">
-					Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://{{ request.host }}/administratives/2010-03/netiquette">Netiquette</a> zu melden.
+					Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="{{ request.route_url('home') }}administratives/2010-03/netiquette">Netiquette</a> zu melden.
 					Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
 				</p>
 				<p class="comment__form__actions">

@@ -2,19 +2,21 @@
 import base64
 import datetime
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
 import lxml.etree
 import mock
 import pyramid.testing
 import pytest
+import zope.component
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.cms.related.interfaces
 import zeit.cms.interfaces
+
+import zeit.solr.interfaces
 
 import zeit.web.site.view_article
 
@@ -120,7 +122,7 @@ def test_article_toc_has_mobile_functionality(testserver, selenium_driver):
 
     # after second click
     toc_index.click()
-    condition = EC.invisibility_of_element_located((
+    condition = expected_conditions.invisibility_of_element_located((
         By.CSS_SELECTOR, '.article-toc__list'))
     assert WebDriverWait(
         selenium_driver, 1).until(condition)
@@ -338,7 +340,7 @@ def test_article_sharing_menu_should_open_and_close(
     sharing_menu_target.click()
     # we need to wait for the CSS animation to finish
     # so the sharing menu is actually hidden
-    condition = EC.invisibility_of_element_located((
+    condition = expected_conditions.invisibility_of_element_located((
         By.CSS_SELECTOR, sharing_menu_selector))
     assert WebDriverWait(
         selenium_driver, 1).until(condition), (
@@ -970,6 +972,14 @@ def test_article_should_have_large_facebook_and_twitter_images(testbrowser):
         'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
 
 
+def test_column_article_should_have_author_as_social_media_image(testbrowser):
+    doc = testbrowser('/zeit-online/article/fischer').document
+    assert doc.xpath('//meta[@property="og:image"]/@content')[0].endswith(
+        'zeit-online/cp-content/author_images/Julia_Zange/wide__1300x731')
+    assert doc.xpath('//meta[@name="twitter:image"]/@content')[0].endswith(
+        'zeit-online/cp-content/author_images/Julia_Zange/wide__1300x731')
+
+
 def test_breaking_news_should_have_fallback_sharing_image(
         testbrowser, workingcopy):
     doc = testbrowser('/zeit-online/article/eilmeldungsartikel').document
@@ -1015,7 +1025,7 @@ def test_article_has_print_pdf_function(testbrowser):
     print_m = browser.cssselect('.print-menu__print')
     pdf_m = browser.cssselect('.print-menu__pdf')
     assert (print_m[0].attrib['href'].endswith(
-        '/zeit-online/article/01?print=true'))
+        '/zeit-online/article/01?print'))
     assert (pdf_m[0].attrib['href'] ==
             'http://pdf.zeit.de/zeit-online/article/01.pdf')
 
@@ -1024,7 +1034,7 @@ def test_multi_page_article_has_print_link(testbrowser):
     browser = testbrowser('/zeit-online/article/tagesspiegel')
     print_m = browser.cssselect('.print-menu__print')
     assert (print_m[0].attrib['href'].endswith(
-        '/zeit-online/article/tagesspiegel/komplettansicht?print=true'))
+        '/zeit-online/article/tagesspiegel/komplettansicht?print'))
 
 
 def test_article_renders_quotes_correctly(testbrowser):
@@ -1059,6 +1069,14 @@ def test_article_lineage_should_render_correctly(testbrowser):
 
 
 def test_article_lineage_has_text_elements(testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{
+        u'supertitle': u'a',
+        u'uniqueId': u'http://xml.zeit.de/01',
+        u'title': u'b'}, {
+        u'supertitle': u'c',
+        u'uniqueId': u'http://xml.zeit.de/02',
+        u'title': u'd'}]
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(browser.cssselect('.al-text__kicker')) == 2
     assert len(browser.cssselect('.al-text__supertitle')) == 2
@@ -1103,6 +1121,34 @@ def test_article_lineage_should_be_fixed_after_scrolling(
                    (By.CSS_SELECTOR, '.article-lineage--fixed')))
     except TimeoutException:
         assert False, 'Fixed Lineage not visible after scrolled into view'
+
+
+@pytest.mark.xfail(reason='This test fails on Jenkins. Disabled until fixed.')
+def test_article_lineage_overlapping_with_fullwidth_elements_should_be_hidden(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/zeit-online/article/infoboxartikel' % testserver.url)
+    # Force page load even if another test has left the browser on _this_ page.
+    driver.refresh()
+
+    driver.execute_script('window.scrollTo(0, 600)')
+    wait = WebDriverWait(driver, 5)
+
+    try:
+        wait.until(expected_conditions.visibility_of_element_located(
+                   (By.CSS_SELECTOR, '.article-lineage')))
+    except TimeoutException:
+        assert False, 'Fixed Lineage not visible after scrolled into view'
+
+    driver.get('%s/zeit-online/article/infoboxartikel#sauriersindsuper' %
+               testserver.url)
+
+    try:
+        wait.until(expected_conditions.invisibility_of_element_located(
+                   (By.CSS_SELECTOR, '.article-lineage')))
+    except TimeoutException:
+        assert False, 'Fixed Lineage visible above fullwidth element'
 
 
 def test_article_lineage_should_not_render_on_advertorials(testbrowser):
@@ -1153,3 +1199,33 @@ def test_article_should_render_quiz_in_iframe(testbrowser):
         'src') == 'http://quiz.zeit.de/#/quiz/103?embedded&adcontrol'
     assert iframe[1].get(
         'src') == 'http://quiz.zeit.de/#/quiz/104?embedded'
+
+
+def test_instantarticle_representation_should_have_content(testbrowser):
+    bro = testbrowser('/instantarticle/zeit-online/article/quotes')
+
+    canonical = bro.cssselect('link[rel=canonical]')[0].attrib['href']
+    assert 'zeit-online/article/quotes' in canonical
+    assert 'instantarticle' not in canonical
+
+    assert '"Pulp Fiction"' in bro.cssselect('h1')[0].text
+    assert bro.cssselect('.op-published')[0].text.strip() == '2. Juni 1999'
+    assert bro.cssselect('figure > img[src$="square__2048x2048"]')
+    assert len(bro.cssselect('aside')) == 3
+
+
+def test_instantarticle_should_wrap_with_cdata_if_asked(testbrowser):
+    browser = testbrowser(
+        '/instantarticle/zeit-online/article/quotes?cdata=true')
+    assert browser.contents.startswith('<![CDATA[')
+    assert browser.contents.endswith(']]>')
+
+    browser = testbrowser(
+        '/instantarticle/zeit-online/article/quotes')
+    assert browser.contents.startswith('<!doctype')
+
+
+def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-expired-image')
+    assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
+    assert len(browser.cssselect('.nextread.nextread--no-image')) == 1

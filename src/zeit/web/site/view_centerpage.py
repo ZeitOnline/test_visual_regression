@@ -58,7 +58,9 @@ class LegacyArea(collections.OrderedDict, zeit.content.cp.area.AreaFactory):
             self, [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
         self.kind = kw.pop('kind', 'solo')
         self.xml = kw.pop('xml', self.get_xml())
-        self.automatic = kw.pop('kind', False)
+        self.automatic = kw.pop('automatic', False)
+        self.__parent__ = kw.pop('parent', None)
+
         for key in kw:
             try:
                 assert not hasattr(self, key)
@@ -212,13 +214,6 @@ class Centerpage(
         return breadcrumbs
 
     @zeit.web.reify
-    def regions(self):
-        region_list = super(Centerpage, self).regions
-        if self.is_hp:
-            region_list.append(self.region_snapshot)
-        return region_list
-
-    @zeit.web.reify
     def last_semantic_change(self):
         """Timestamp representing the last semantic change of the centerpage.
         :rtype: datetime.datetime
@@ -246,20 +241,6 @@ class Centerpage(
         elif self.context.ressort:
             return self.context.ressort.lower()
         return ''
-
-    @zeit.web.reify
-    def region_snapshot(self):
-        """Return the centerpage snapshot region aka Momentaufnahme."""
-        # TODO: Reimplement snapshot as a proper vivi+friedbert module.
-        try:
-            snapshot = zeit.web.core.interfaces.ITeaserImage(
-                self.context.snapshot)
-            assert snapshot
-        except TypeError:
-            snapshot = None
-
-        module = LegacyModule([snapshot], layout='snapshot')
-        return LegacyRegion([LegacyArea([module])])
 
     @zeit.web.reify
     def area_ranking(self):
@@ -337,11 +318,35 @@ class CenterpageArea(Centerpage):
         self.context = None
         self.request = request
 
+        self.request.response.headers.add('X-Robots-Tag', 'noindex')
+
+        self.comment_counts = {}
+        self.has_solo_leader = False
+
+        name = request.subpath[-1]
+
+        def uid_cond(index, area):
+            return area.uniqueId.rsplit('/', 1)[-1] == name
+
+        def index_cond(index, area):
+            try:
+                return index == int(name.lstrip(u'no-'))
+            except ValueError:
+                raise pyramid.httpexceptions.HTTPNotFound('Area not found')
+
+        if name.startswith('id-'):
+            condition = uid_cond
+        elif name.startswith('no-'):
+            condition = index_cond
+
+        index = 1
         for region in context.values():
             for area in region.values():
-                if area.uniqueId.rsplit('/', 1)[-1] == request.subpath[-1]:
+                if condition(index, area):
                     self.context = zeit.web.core.centerpage.get_area(area)
                     return
+                else:
+                    index += 1
 
     def __call__(self):
         return {
@@ -426,8 +431,6 @@ class LegacyCenterpage(Centerpage):
         regions.append(region_multi)
 
         regions += self.region_list_parquet
-
-        regions.append(self.region_snapshot)
 
         return regions
 

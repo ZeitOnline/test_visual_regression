@@ -56,24 +56,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return "zeit.web.site:templates/article.html"
 
     @zeit.web.reify
-    def pagetitle(self):
-        try:
-            title = zeit.seo.interfaces.ISEO(self.context).html_title
-            assert title
-        except (AssertionError, TypeError):
-            if self.page_nr > 1 and self.current_page.teaser:
-                title = ': '.join(
-                    [t for t in (
-                        self.supertitle, self.current_page.teaser) if t])
-            else:
-                title = ': '.join(
-                    [t for t in (
-                        self.supertitle, self.title) if t])
-        if title:
-            return title + (u'' if self.is_hp else self.pagetitle_suffix)
-        return self.seo_title_default
-
-    @zeit.web.reify
     def pdf_link(self):
         server = 'http://pdf.zeit.de/'
         path = '/'.join(self.request.traversed)
@@ -90,7 +72,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         except:
             pass
 
-        path = prefix + '?print=true'
+        path = prefix + '?print'
         return url + path
 
     @zeit.web.reify
@@ -205,6 +187,12 @@ class ColumnArticle(Article):
             return
         return zeit.web.core.template.closest_substitute_image(
             self.authors[0]['image_group'], 'zon-column')
+
+    @zeit.web.reify
+    def sharing_image(self):
+        if not self.authors:
+            return
+        return self.authors[0]['image_group']
 
 
 @view_config(name='seite',

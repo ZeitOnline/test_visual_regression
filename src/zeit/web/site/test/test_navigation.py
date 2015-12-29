@@ -76,6 +76,7 @@ def test_nav_ressorts_should_produce_markup(application, jinja2_env):
     mock_request.route_url.return_value = 'http://www.zeit.de/'
     mock_view.request = mock_request
     html_str = tpl.render(view=mock_view,
+                          request=mock_request,
                           navigation=nav, nav_class='primary-nav')
     html = lxml.html.fromstring(html_str).cssselect
 
@@ -148,11 +149,14 @@ def test_nav_contains_essential_elements(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
-    mock_view.request.host = 'www.zeit.de'
+
+    def route_url(arg):
+        return 'http://www.zeit.de/'
+
     mock_request = mock.Mock()
+    mock_request.route_url = route_url
     html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect
-
     # Logo
     assert html('a[href*="/index"]'
                 '[title="Nachrichten auf ZEIT ONLINE"]')[0] is not None, (
@@ -185,7 +189,7 @@ def test_nav_should_contain_schema_org_markup(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
-    mock_view.request.host = 'www.zeit.de'
+    mock_view.request.route_url.return_value = 'http://www.zeit.de/'
     mock_request = mock.Mock()
     html_str = tpl.render(view=mock_view, request=mock_request)
     html = lxml.html.fromstring(html_str).cssselect
@@ -234,7 +238,7 @@ def test_cp_should_have_valid_main_nav_structure(testserver, testbrowser):
     html = browser.cssselect
 
     assert len(html('.main_nav')) == 1, 'Main navigation must be present'
-    assert len(html('svg.logo_bar__brand-logo')) == 1, (
+    assert len(html('.logo_bar__brand-logo')) == 1, (
         'ZON logo must be present')
     assert len(html('div.logo_bar__menu')) == 1, 'Menu link must be present'
     assert len(html('div.main_nav__teaser')) == 1, 'Teaser must be present'
@@ -518,6 +522,26 @@ def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
         'Classifieds bar is displayed')
     assert main_nav__search.is_displayed() is False, (
         'Search bar is displayed')
+
+
+def test_advertorial_nav_links_hidden_mobile(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+
+    logo_bar__menu = driver.find_element_by_class_name('logo_bar__menu')
+    menu_link = logo_bar__menu.find_element_by_tag_name('a')
+    ressort_nav = driver.find_element_by_class_name(
+        'main_nav__ressorts')
+    adv_links = ressort_nav.find_elements_by_class_name(
+        'primary-nav__item--has-label')
+
+    menu_link.click()
+
+    # test navigation is display, advertorials not
+    assert ressort_nav.is_displayed(), ('Ressort bar is not displayed')
+    assert len(adv_links) == 2,  ('advertorial links missing')
+    assert not adv_links[0].is_displayed(), ('advertorial links are displayed')
 
 
 def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):

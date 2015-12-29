@@ -16,12 +16,25 @@ require([
     'web.core/clicktracking',
     'web.core/triggeredEventTracking',
     'web.core/adReload',
+    'web.core/overscrolling.js',
     'web.site/video/videoStage',
     'web.site/articledate',
     'web.site/articlesharing',
     'web.site/comments',
     'web.site/adblockCount.js'
-], function( images, clicktracking, triggeredEventTracking, adReload, videoStage, articledate, articlesharing, comments, adblockCount ) {
+], function(
+    images,
+    clicktracking,
+    triggeredEventTracking,
+    adReload,
+    overscrolling,
+    videoStage,
+    articledate,
+    articlesharing,
+    comments,
+    adblockCount
+) {
+    var article = document.getElementById( 'js-article' );
     images.init();
     clicktracking.init();
     triggeredEventTracking.init();
@@ -31,6 +44,10 @@ require([
     articlesharing.init();
     comments.init();
     adblockCount.init();
+    if ( article ) {
+        window.ZMO.overscrolling = overscrolling;
+        //overscrolling.init();
+    }
 });
 
 String.prototype.format = function() {
@@ -65,8 +82,7 @@ require([
     'web.site/plugins/jquery.searchTools',
     'web.site/plugins/jquery.selectNav',
     'web.site/plugins/jquery.paginateTeasers',
-    'web.site/plugins/jquery.snapshot',
-    'web.site/plugins/jquery.storystream',
+    'web.site/plugins/jquery.longTextWrapper',
     'web.site/plugins/jquery.tabs',
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
@@ -87,7 +103,6 @@ require([
     if ( pageType === 'centerpage' ) {
         // homepage
         if ( isHp === 'true' ) {
-            $( '#snapshot' ).snapshot();
             $.hpOverlay();
         }
         // centerpage
@@ -96,7 +111,7 @@ require([
         $( '#series_select' ).selectNav();
         $( '.js-bar-teaser-paginate' ).paginateTeasers();
         $( '.js-accordion' ).accordion();
-        $( '.storystream-markup__content--first' ).storystream();
+        $( '.storystream-markup__content--first' ).longTextWrapper();
         $( '.jobbox--animate' ).animateJobs();
         $( '.js-tabs' ).tabs();
         $( '.js-image-copyright-footer' ).imageCopyrightFooter();
@@ -109,8 +124,10 @@ require([
         article.find( '.liveblog' ).liveblog();
         article.find( '.article-toc' ).toggleOnClick();
         $.picturefill();
-        $( '.js-count-formchars' ).countFormchars();
+        $( '.comment-section' ).countFormchars();
         $( '.js-fix-position' ).fixPosition();
+    } else if ( pageType === 'author' ) {
+        $( '.author-questions' ).longTextWrapper();
     }
 
     // more ("non critical") global stuff

@@ -15,7 +15,7 @@ def test_login_state_view_should_deliver_correct_destination():
     request.registry.settings['community_host'] = "http://community"
     request.registry.settings['sso_url'] = "http://sso"
     request.registry.settings['community_static_host'] = "community_static"
-    request.host = "destination_sso"
+    request.route_url.return_value = 'http://destination_sso/'
     request.params = {}
     result = zeit.web.site.view.login_state(request)
     assert result == {
@@ -96,9 +96,10 @@ def test_keyword_redirect_should_handle_unicode(testserver, testbrowser):
 
 def test_main_nav_should_render_labels(testserver, testbrowser):
     browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
-    dropdown_label = browser.cssselect('.primary-nav .dropdown__label')
-    assert len(dropdown_label) == 1
-    assert dropdown_label[0].text == 'Anzeige'
+    dropdown_label = browser.cssselect('.primary-nav *[data-label]')
+    assert len(dropdown_label) == 6  # three elements two times
+    assert dropdown_label[0].attrib['data-label'] == 'Anzeige'
+    assert dropdown_label[1].attrib['data-label'] == 'Anzeigen'
 
 
 def test_ressort_literally_returns_correct_ressort(application):
@@ -115,9 +116,13 @@ def test_ressort_literally_returns_correct_ressort(application):
         'http://xml.zeit.de/zeit-online/article/zeit')
     article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.ressort_literally == 'Gesellschaft'
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/administratives')
+    article_view = zeit.web.site.view_article.Article(context, request)
+    assert article_view.ressort_literally == ''
 
 
-def test_sharing_titles_equal_pagetitle(testbrowser):
+def test_sharing_titles_differ_from_html_title(testbrowser):
     browser = testbrowser('/zeit-online/article/02')
 
     pagetitle = browser.cssselect('title')[0].text
@@ -126,5 +131,15 @@ def test_sharing_titles_equal_pagetitle(testbrowser):
     twitter_title = browser.cssselect(
         'meta[name="twitter:title"]')[0].attrib.get('content')
 
-    assert og_title == pagetitle
-    assert twitter_title == pagetitle
+    assert og_title + u' | ZEIT ONLINE' == pagetitle
+    assert twitter_title + u' | ZEIT ONLINE' == pagetitle
+
+
+def test_article_should_show_premoderation_warning(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+    request.host_url = 'http://www.zeit.de'
+    request.session = {'user': {'blocked': False, 'premoderation': True}}
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.comment_area['show_premoderation_warning'] is True
