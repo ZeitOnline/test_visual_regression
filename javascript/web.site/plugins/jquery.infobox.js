@@ -20,7 +20,7 @@
                             .clone()
                             .appendTo( this.navigation );
         this.tabs = this.tabtitles.find( 'a' );
-        this.curOpenTabId = undefined;
+        this.curOpenTab = undefined;
 
         this.init();
     }
@@ -30,46 +30,40 @@
     * and creates event listeners.
     */
     Infobox.prototype.init = function() {
-        var self = this,
+        var self = this, // needed in event listeners
             selectedTab = this.getSelectedTabByHash() || this.tabs.first();
 
-        this.curOpenTabId = selectedTab.attr( 'id' );
+        this.curOpenTab = selectedTab;
         this.infobox.find( '.infobox-tab__title a' ).removeAttr( 'id' );
         this.navigation.attr( 'role', 'tablist' );
         this.setNavigationMode();
 
         if ( this.hasSidebar ) {
             this.switchTo( selectedTab );
-            // "jump" to selected tab after nesting
-            // this.infobox.scrollIntoView();
-            // setTimeout(function() {
-            //     if ( location.hash ) {
-            //         location = location.hash;
-            //     }
-            // }, 10 );
-            location = location.hash;
         } else {
             this.setVisibility( this.tabpanels, false );
         }
 
+        // Switch to selected tab and update location.hash and curOpenTab
         this.infobox.on( 'click', '.infobox-tab__link', function( event ) {
             var tab = $( this );
             event.preventDefault();
+            self.curOpenTab = tab;
             self.switchTo( tab );
-            self.curOpenTabId = tab.attr( 'id' );
             if ( self.hasSidebar ) {
-                var id = tab.attr( 'id' );
+                var tabId = tab.attr( 'id' );
                 if ( history.pushState ) {
-                    history.pushState( null, null, '#' + id.substring( 0, id.length - 4 ) );
+                    history.pushState( null, null, '#' + tabId.substring( 0, tabId.length - 4 ) );
                 }
             }
         });
 
+        // Check if layout change is necessary when resizing
         $( window ).on( 'resize', function() {
             if ( self.hasSidebar !== self.hasSidebarNavigation() ) {
                 self.hasSidebar = self.hasSidebarNavigation();
                 self.setNavigationMode();
-                self.switchTo( $( '#' + self.curOpenTabId ) );
+                self.switchTo( $( '#' + self.curOpenTab.attr( 'id' ) ) );
             }
         });
     };
