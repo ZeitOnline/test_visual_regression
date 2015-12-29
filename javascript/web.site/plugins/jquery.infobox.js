@@ -39,7 +39,7 @@
         this.updateNavigationMode();
 
         if ( this.hasSidebar ) {
-            this.switchTo( selectedTab );
+            this.selectTab( selectedTab );
         } else {
             this.setPanelsVisible( this.tabpanels, false );
         }
