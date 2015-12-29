@@ -26,14 +26,18 @@
     }
 
     /**
-    * Sets up variables, expands the first tab if hasSidebar is true
-    * and creates event listeners.
+    * Sets up variables, expands the first tab if hasSidebar is true and
+    * creates event listeners.
+    *
+    * Keep attention to the this.tabtitles and the this.tabs variable because
+    * they either contain the tabtitles/tabs in the navigation div or the
+    * infobox-tab section! This is changed by this.updateNavigationMode().
     */
     Infobox.prototype.init = function() {
         var self = this, // needed in event listeners
             selectedTab = this.getSelectedTabByHash() || this.tabs.first();
 
-        this.curOpenTabId = selectedTab.attr( 'id' ); // needs to be ID and not tab because the tabs change on resize, the id does not
+        this.curOpenTabId = selectedTab.attr( 'id' ); // must be the ID (the tabs can change, id does not)!
         this.infobox.find( '.infobox-tab__title a' ).removeAttr( 'id' );
         this.navigation.attr( 'role', 'tablist' );
         this.updateNavigationMode();
