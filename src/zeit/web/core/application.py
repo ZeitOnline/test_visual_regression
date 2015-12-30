@@ -188,7 +188,6 @@ class Application(object):
 
         # Route to post comments to a communit service
         config.add_route('post_test_comments', '/admin/test-comments')
-        config.add_route('toggle_third_party_modules', '/admin/toggle-tpm')
 
         config.add_static_view(
             name=self.settings.get('asset_prefix', '/static/latest'),

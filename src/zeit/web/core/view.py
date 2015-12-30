@@ -891,16 +891,6 @@ def json_delta_time(request):
             'Missing parameter: unique_id or date', 412)
 
 
-@pyramid.view.view_config(
-    route_name='toggle_third_party_modules',
-    renderer='json',
-    custom_predicates=(zeit.web.core.is_admin,))
-def toggle_third_party_modules(request):
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['enable_third_party_modules'] = not conf['enable_third_party_modules']
-    return conf
-
-
 def json_delta_time_from_date(date, parsed_base_date):
     parsed_date = zeit.web.core.date.parse_date(date)
     if parsed_date is None:
