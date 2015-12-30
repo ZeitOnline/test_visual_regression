@@ -81,19 +81,21 @@
     {% if obj.contents -%}
     {% set id = obj.title | attr_safe %}
     <aside class="infobox js-infobox" id="{{ id }}" role="application">
-        <div class="infobox__navigation" id="{{ id }}-navigation" role="tablist"></div>
-        <div class="infobox__content">
+        <div class="infobox__container">
+            <div class="infobox__navigation"></div>
+            <div class="infobox__content">
             {% for title, text in obj.contents %}
                 <section class="infobox-tab" id="{{ id }}-{{ loop.index }}">
                     <h3 class="infobox-tab__title">
                         <a
                             class="infobox-tab__link"
                             id="{{ id }}-{{ loop.index }}-tab"
+                            role="tab"
                             href="#{{ id }}-{{ loop.index }}"
                             tabindex="0"
                             data-id="{{ id }}-{{ loop.index }}-tab"
-                            data-aria-controls="{{ id }}-{{ loop.index }}-article">
-                            {{ title }}
+                            aria-controls="{{ id }}-{{ loop.index }}-article">
+                            {{- title -}}
                         </a>
                     </h3>
                     <article
@@ -107,6 +109,7 @@
                     </article>
                 </section>
             {% endfor %}
+            </div>
         </div>
     </aside>
     {%- endif %}

@@ -13,14 +13,10 @@
     */
     function Infobox( infobox ) {
         this.infobox = $( infobox );
-        this.navigation = this.infobox.find( '#' + this.infobox.attr( 'id' ) + '-navigation' );
-        this.hasSidebar = this.hasSidebarNavigation();
+        this.navigation = this.infobox.find( '.infobox__navigation' );
         this.tabpanels = this.infobox.find( '.infobox-tab__panel' );
-        this.tabtitles = this.infobox.find( '.infobox-tab__title' )
-                            .clone()
-                            .appendTo( this.navigation );
-        this.tabs = this.tabtitles.find( 'a' );
-        this.curOpenTabId = undefined; // must be the id (because the tabs can change, the id cannot)!
+        this.tabs = this.infobox.find( '.infobox-tab__link' );
+        this.hasSidebar = false;
 
         this.init();
     }
@@ -29,38 +25,30 @@
     * Sets up variables, expands the first tab if hasSidebar is true and
     * creates event listeners.
     *
-    * Keep attention to the this.tabtitles and the this.tabs variable because
-    * they either contain the tabtitles/tabs in the navigation div or the
-    * infobox-tab section! This is changed by this.updateNavigationMode().
+    * Keep attention to the this.tabs variable because they either contain
+    * the tabs in the navigation div or the infobox-tab section! This is
+    * changed by this.updateNavigationMode().
     */
     Infobox.prototype.init = function() {
-        var self = this, // needed in event listeners
-            hashTab;
+        var self = this; // needed in event listeners
 
-        this.infobox.find( '.infobox-tab__title a' ).removeAttr( 'id' );
+        this.tabs.removeAttr( 'id' );
+        this.infobox.find( '.infobox-tab__title' )
+            .clone()
+            .appendTo( this.navigation );
         this.navigation.attr( 'role', 'tablist' );
         this.updateNavigationMode();
+        this.showActiveTab();
 
-        hashTab = this.getSelectedTabByHash();
-        this.curOpenTabId = hashTab ? hashTab.attr( 'id' ) : this.tabs.first().attr( 'id' );
-
-        if ( this.hasSidebar ) {
-            this.selectTab( hashTab || this.tabs.first() );
-        } else if ( hashTab ) {
-            this.selectTab( hashTab );
-        }
-
-        // Switch to selected tab and update location.hash and curOpenTabId
+        // Switch to selected tab and update location.hash
         this.infobox.on( 'click', '.infobox-tab__link', function( event ) {
             event.preventDefault();
 
-            var tab = $( this );
-            self.curOpenTabId = tab.attr( 'id' );
-            self.selectTab( tab );
+            self.selectTab( $( this ) );
+
             if ( self.hasSidebar ) {
-                if ( history.pushState ) {
-                    var tabId = tab.attr( 'id' );
-                    history.pushState( null, null, '#' + tabId.substring( 0, tabId.length - 4 ) );
+                if ( history.replaceState ) {
+                    history.replaceState( null, null, this.hash );
                 }
             }
         });
@@ -68,23 +56,23 @@
         // Check if layout change is necessary when resizing
         $( window ).on( 'resize', function() {
             if ( self.hasSidebar !== self.hasSidebarNavigation() ) {
-                self.hasSidebar = self.hasSidebarNavigation();
                 self.updateNavigationMode();
-                self.selectTab( $( '#' + self.curOpenTabId ) );
+                self.showActiveTab();
             }
         });
+    };
 
-        // When going back in the browser history update the open tab
-        // according to the location.hash
-        $( window ).on( 'hashchange', function( event ) {
-            event.preventDefault();
+    /**
+    * Show active tab
+    */
+    Infobox.prototype.showActiveTab = function() {
+        var hashTab = this.getSelectedTabByHash();
 
-            if ( self.hasSidebar ) {
-                var hashTab = self.getSelectedTabByHash() || self.tabs.first();
-                self.curOpenTabId = hashTab.attr( 'id' );
-                self.selectTab( hashTab );
-            }
-        });
+        if ( this.hasSidebar ) {
+            this.selectTab( hashTab || this.tabs.first() );
+        } else if ( hashTab ) {
+            this.selectTab( hashTab );
+        }
     };
 
     /**
@@ -106,27 +94,19 @@
     * @param {jQuery} tab the tab to be shown or toggled
     */
     Infobox.prototype.selectTab = function( tab ) {
-        var relatedPanelId = '#' + tab.attr( 'aria-controls' ),
-            relatedPanel = $( relatedPanelId );
+        var relatedPanel = $( '#' + tab.attr( 'aria-controls' ) );
 
         if ( this.hasSidebar ) {
-            this.tabs.removeClass( 'infobox-tab__link--active' );
             this.setTabsActive( this.tabs, false );
-
-            tab.addClass( 'infobox-tab__link--active' );
             this.setTabsActive( tab, true );
 
             this.setPanelsVisible( this.tabpanels, false );
             this.setPanelsVisible( relatedPanel, true );
         } else {
-            tab.toggleClass( 'infobox-tab__link--active' );
-            if ( tab.hasClass( 'infobox-tab__link--active' )) {
-                this.setTabsActive( tab, true );
-                this.setPanelsVisible( relatedPanel, true );
-            } else {
-                this.setTabsActive( tab, false );
-                this.setPanelsVisible( relatedPanel, false );
-            }
+            var isTabActive = ( tab.attr( 'aria-expanded' ) === 'true' );
+
+            this.setTabsActive( tab, !isTabActive );
+            this.setPanelsVisible( relatedPanel, !isTabActive );
         }
     };
 
@@ -168,34 +148,20 @@
     * the hasSidebar state.
     */
     Infobox.prototype.updateNavigationMode = function() {
-        this.tabtitles
-            .removeAttr( 'role' )
-            .removeClass( 'infobox-tab__title--displayed' );
+        this.hasSidebar = this.hasSidebarNavigation();
+        this.tabs.removeAttr( 'id' );
 
-        this.tabs.each( function() {
-            $( this )
-                .removeAttr( 'id' )
-                .removeAttr( 'aria-controls' )
-                .removeClass( 'infobox-tab__link--active' );
-        });
-
+        this.setTabsActive( this.tabs, false );
         this.setPanelsVisible( this.tabpanels, false );
 
         if ( this.hasSidebar ) {
-            this.tabtitles = this.infobox.find( '.infobox__navigation .infobox-tab__title' );
+            this.tabs = this.infobox.find( '.infobox__navigation .infobox-tab__link' );
         } else {
-            this.tabtitles = this.infobox.find( '.infobox-tab .infobox-tab__title' );
+            this.tabs = this.infobox.find( '.infobox__content .infobox-tab__link' );
         }
 
-        this.tabtitles
-            .attr( 'role', 'tab' )
-            .addClass( 'infobox-tab__title--displayed' );
-
-        this.tabs = this.tabtitles.find( 'a' );
-        this.tabs.each( function() {
-            $( this )
-                .attr( 'aria-controls', $( this ).data( 'aria-controls' ) )
-                .attr( 'id', $( this ).data( 'id' ) );
+        this.tabs.attr( 'id', function() {
+            return this.getAttribute( 'data-id' );
         });
     };
 
@@ -207,12 +173,10 @@
     */
     Infobox.prototype.getSelectedTabByHash = function() {
         if ( location.hash ) {
-            var hash = location.hash.substring( 1 ),
-                hashTab = this.tabs.filter( '#' + hash + '-tab' );
-            if ( hashTab && hashTab.length ) {
+            var hashTab = this.tabs.filter( location.hash + '-tab' );
+
+            if ( hashTab.length ) {
                 return hashTab;
-            } else {
-                return;
             }
         }
     };
