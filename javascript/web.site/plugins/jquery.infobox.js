@@ -6,11 +6,10 @@
 (function( $, window, location ) {
 
     /**
-    * Clones the tab (navigation) links in their own div for creating
-    * a sidebar navigation and initializes instance variables.
-    *
-    * @constructor
-    */
+     * Initializes instance variables.
+     *
+     * @constructor
+     */
     function Infobox( infobox ) {
         this.infobox = $( infobox );
         this.navigation = this.infobox.find( '.infobox__navigation' );
@@ -22,13 +21,10 @@
     }
 
     /**
-    * Sets up variables, expands the first tab if hasSidebar is true and
-    * creates event listeners.
-    *
-    * Keep attention to the this.tabs variable because they either contain
-    * the tabs in the navigation div or the infobox-tab section! This is
-    * changed by this.updateNavigationMode().
-    */
+     * Clones the tab (navigation) links to create a sidebar navigation
+     * for desktop view, expands the first tab if sidebar is visible and
+     * creates event listeners.
+     */
     Infobox.prototype.init = function() {
         var self = this; // needed in event listeners
 
@@ -63,8 +59,8 @@
     };
 
     /**
-    * Show active tab
-    */
+     * Show active tab
+     */
     Infobox.prototype.showActiveTab = function() {
         var hashTab = this.getSelectedTabByHash();
 
@@ -76,23 +72,22 @@
     };
 
     /**
-    * @return {boolean} true if the sidebar is visible according to CSS,
-    *                   false otherwise
-    */
+     * @return {boolean} true if the sidebar is visible, false otherwise
+     */
     Infobox.prototype.hasSidebarNavigation = function() {
         return this.navigation.is( ':visible' );
     };
 
     /**
-    * Select the given tab in the infobox and make its panel visible. When
-    * in sidebar mode (according to hasSidebar boolean), only one active
-    * panel is allowed so all panels – except the panel to the given tab –
-    * are hidden. If there is no sidebar, multiple panels may be expanded
-    * at the same time and the function works like a toggle and shows
-    * or hides the panel to the given tab
-    *
-    * @param {jQuery} tab the tab to be shown or toggled
-    */
+     * Select the given tab in the infobox and make its panel visible. When
+     * in sidebar mode (according to hasSidebar boolean), only one active
+     * panel is allowed so all panels – except the panel to the given tab –
+     * are hidden. If there is no sidebar, multiple panels may be expanded
+     * at the same time and the function works like a toggle and shows
+     * or hides the panel to the given tab
+     *
+     * @param {jQuery} tab the tab to be shown or toggled
+     */
     Infobox.prototype.selectTab = function( tab ) {
         var relatedPanel = $( '#' + tab.attr( 'aria-controls' ) );
 
@@ -111,13 +106,13 @@
     };
 
     /**
-    * Sets aria-selected and aria-expanded attributes for tab(s) according
-    * to the given boolean.
-    *
-    * @param {jQuery} tabs The tab(s) to be toggled
-    * @param {boolean} isActive If true the tabs are marked selected and
-    *                  expanded, if false these attributes are set to false
-    */
+     * Sets aria-selected and aria-expanded attributes for tab(s) according
+     * to the given boolean.
+     *
+     * @param {jQuery} tabs The tab(s) to be toggled
+     * @param {boolean} isActive If true the tabs are marked selected and
+     *                  expanded, if false these attributes are set to false
+     */
     Infobox.prototype.setTabsActive = function( tabs, isActive ) {
         tabs.attr({
             'aria-selected': isActive,
@@ -126,14 +121,14 @@
     };
 
     /**
-    * Sets the aria-hidden and aria-selected attributes of the given
-    * jQuery element(s) to hidden & not selected or visible & selected
-    * according to the given boolean.
-    *
-    * @param {jQuery} panels The panel(s) to be set visible or hidden
-    * @param {boolean} isVisible Sets the panel(s) visible if true or
-    *                  hidden otherwise
-    */
+     * Sets the aria-hidden and aria-selected attributes of the given
+     * jQuery element(s) to hidden & not selected or visible & selected
+     * according to the given boolean.
+     *
+     * @param {jQuery} panels The panel(s) to be set visible or hidden
+     * @param {boolean} isVisible Sets the panel(s) visible if true or
+     *                  hidden otherwise
+     */
     Infobox.prototype.setPanelsVisible = function( panels, isVisible ) {
         panels.attr({
             'aria-hidden': !isVisible,
@@ -142,11 +137,11 @@
     };
 
     /**
-    * When the sidebar is visible, the cloned links in the navigation area
-    * are used, otherwise the links above the panels are used. This function
-    * sets the necessary attributes and updates instance variables according to
-    * the hasSidebar state.
-    */
+     * When the sidebar is visible, the cloned links in the navigation area
+     * are used, otherwise the links above the panels are used. This function
+     * sets the necessary attributes and updates instance variables according to
+     * the hasSidebar state.
+     */
     Infobox.prototype.updateNavigationMode = function() {
         this.hasSidebar = this.hasSidebarNavigation();
         this.tabs.removeAttr( 'id' );
@@ -166,11 +161,11 @@
     };
 
     /**
-    * Checks the URL for possible hashs that are related to tabs of this infobox.
-    *
-    * @return {jQuery} The tab related to the hash or undefined if no related
-    *                  tab has been found.
-    */
+     * Checks the URL for possible hashs that are related to tabs of this infobox.
+     *
+     * @return {jQuery} The tab related to the hash or undefined if no related
+     *                  tab has been found.
+     */
     Infobox.prototype.getSelectedTabByHash = function() {
         if ( location.hash ) {
             var hashTab = this.tabs.filter( location.hash + '-tab' );
@@ -182,8 +177,8 @@
     };
 
     /**
-    * Create an infobox instance for each element it is called on.
-    */
+     * Create an infobox instance for each element it is called on.
+     */
     $.fn.infobox = function() {
         return this.each( function() {
             new Infobox( this );
