@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2230: Multiple Infoboxes do not collapse anymore (includes code makeover)
 
+- ZON-2233: Fix FF < 27 Navigation
+
 
 2.43 (2015-12-28)
 -----------------
