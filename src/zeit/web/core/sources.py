@@ -183,11 +183,18 @@ class Solr(object):
                     unique_id = os.path.join(
                         root.replace(repo, 'http://xml.zeit.de'), name)
                     content = zeit.cms.interfaces.ICMSContent(unique_id)
+                    publish = zeit.cms.workflow.interfaces.IPublishInfo(
+                        content)
+                    semantic = zeit.cms.content.interfaces.ISemanticChange(
+                        content)
                     assert zeit.web.core.view.known_content(content)
                     results.append({
-                        u'date_last_published': u'2015-07-01T09:50:42Z',
-                        u'date_first_released': u'2015-07-01T09:50:42Z',
-                        u'last-semantic-change': u'2015-07-01T09:50:42Z',
+                        u'date_last_published': (
+                            publish.date_last_published.isoformat()),
+                        u'date_first_released': (
+                            publish.date_first_released.isoformat()),
+                        u'last-semantic-change': (
+                            semantic.last_semantic_change.isoformat()),
                         u'lead_candidate': False,
                         u'product_id': content.product.id,
                         u'supertitle': content.supertitle,

@@ -218,7 +218,7 @@ class Application(object):
                     zeit.web.core.view.surrender,
                     route_name='blacklist_{}'.format(index))
 
-        if not self.settings.get('debug.show_exceptions'):
+        if not self.settings.get('jinja2.show_exceptions'):
             config.add_view(view=zeit.web.core.view.service_unavailable,
                             context=Exception)
 
@@ -280,17 +280,10 @@ class Application(object):
                 'load_template_from_dav_url'))
         }, delimiter='://')
 
-        if not self.settings.get('debug.propagate_jinja_errors'):
-            # If the application is not running in debug mode: overlay the
-            # jinja environment with a custom, more fault tolerant one.
-            env.__class__ = zeit.web.core.jinja.Environment
-            env = env.overlay()
-
         venusian.Scanner(env=env).scan(
             zeit.web.core,
             categories=('jinja',),
-            ignore=self.DONT_SCAN
-        )
+            ignore=self.DONT_SCAN)
 
     def configure_zca(self):
         """Sets up zope.component registrations by reading our

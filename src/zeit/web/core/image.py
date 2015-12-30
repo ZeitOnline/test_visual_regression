@@ -100,15 +100,15 @@ class VariantImage(object):
         self.ratio = variant.ratio
         self.variant = variant.legacy_name or variant.name
 
-        group = zeit.content.image.interfaces.IImageGroup(variant)
-        self.image_group = group.uniqueId
-        self.path = group.variant_url(self.image_pattern)
-        self.fallback_path = group.variant_url(
+        self.group = zeit.content.image.interfaces.IImageGroup(variant)
+        self.image_group = self.group.uniqueId
+        self.path = self.group.variant_url(self.image_pattern)
+        self.fallback_path = self.group.variant_url(
             self.image_pattern,
             variant.fallback_width,
             variant.fallback_height)
 
-        meta = zeit.content.image.interfaces.IImageMetadata(group, None)
+        meta = zeit.content.image.interfaces.IImageMetadata(self.group, None)
         if meta:
             self.alt = meta.alt
             self.caption = meta.caption
@@ -264,10 +264,14 @@ def image_expires(image):
     """Returns number of seconds relative to now when the given image, or the
     image group it belongs to, will no longer be published.
     """
+
     if zeit.content.image.interfaces.IImage.providedBy(image):
         group = image.__parent__
+    elif isinstance(image, VariantImage):
+        group = image.group
     else:
         group = image
+
     if not zeit.content.image.interfaces.IImageGroup.providedBy(group):
         return None
 

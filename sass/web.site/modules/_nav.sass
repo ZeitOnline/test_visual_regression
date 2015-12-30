@@ -23,6 +23,8 @@ $icon-color--hover: $zon-charcoal
 	+display-flex()
 	+flex-wrap(wrap)
 	width: 100%
+	@supports not (flex-wrap: wrap)
+		display: inline-block
 	*[data-dropdown="true"]
 		display: none
 		+respond-min($break-tablet-min)
@@ -76,6 +78,7 @@ $icon-color--hover: $zon-charcoal
 		display: block
 		height: $zon-logo-height-small
 		margin: em(13px) 0 0 0
+		pointer-events: none
 		width: $zon-logo-width-small
 		+respond-min($break-tablet-min)
 			height: $zon-logo-height

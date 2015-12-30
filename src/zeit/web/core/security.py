@@ -97,7 +97,13 @@ def get_community_user_info(request):
     the Cookie that Community has set when the user logged in there.
     """
 
-    user_info = dict(uid=0, name=None, mail=None, picture=None, roles=[])
+    user_info = dict(
+        uid=0,
+        name=None,
+        mail=None,
+        picture=None,
+        roles=[],
+        premoderation=False)
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     cookie = request.cookies.get(conf.get('sso_cookie'))
@@ -131,12 +137,15 @@ def get_community_user_info(request):
     for key in user_info.keys():
         postfix = 'roles' in key and '/role' or ''
         elements = xml_info.xpath('/user/{}/text()'.format(key + postfix))
+
         if len(elements) == 0:
             continue
         elif key == 'picture':
             if elements[0] == '0':
                 continue
             elements = zeit.web.core.comments.rewrite_picture_url(elements[0])
+        elif key == 'premoderation':
+            elements = True if int(elements[0]) else False
         elif 'roles' not in key:
             elements = elements[0]
         user_info[key] = elements

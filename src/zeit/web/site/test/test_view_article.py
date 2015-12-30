@@ -972,6 +972,14 @@ def test_article_should_have_large_facebook_and_twitter_images(testbrowser):
         'zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
 
 
+def test_column_article_should_have_author_as_social_media_image(testbrowser):
+    doc = testbrowser('/zeit-online/article/fischer').document
+    assert doc.xpath('//meta[@property="og:image"]/@content')[0].endswith(
+        'zeit-online/cp-content/author_images/Julia_Zange/wide__1300x731')
+    assert doc.xpath('//meta[@name="twitter:image"]/@content')[0].endswith(
+        'zeit-online/cp-content/author_images/Julia_Zange/wide__1300x731')
+
+
 def test_breaking_news_should_have_fallback_sharing_image(
         testbrowser, workingcopy):
     doc = testbrowser('/zeit-online/article/eilmeldungsartikel').document
@@ -1017,7 +1025,7 @@ def test_article_has_print_pdf_function(testbrowser):
     print_m = browser.cssselect('.print-menu__print')
     pdf_m = browser.cssselect('.print-menu__pdf')
     assert (print_m[0].attrib['href'].endswith(
-        '/zeit-online/article/01?print=true'))
+        '/zeit-online/article/01?print'))
     assert (pdf_m[0].attrib['href'] ==
             'http://pdf.zeit.de/zeit-online/article/01.pdf')
 
@@ -1026,7 +1034,7 @@ def test_multi_page_article_has_print_link(testbrowser):
     browser = testbrowser('/zeit-online/article/tagesspiegel')
     print_m = browser.cssselect('.print-menu__print')
     assert (print_m[0].attrib['href'].endswith(
-        '/zeit-online/article/tagesspiegel/komplettansicht?print=true'))
+        '/zeit-online/article/tagesspiegel/komplettansicht?print'))
 
 
 def test_article_renders_quotes_correctly(testbrowser):
@@ -1215,3 +1223,9 @@ def test_instantarticle_should_wrap_with_cdata_if_asked(testbrowser):
     browser = testbrowser(
         '/instantarticle/zeit-online/article/quotes')
     assert browser.contents.startswith('<!doctype')
+
+
+def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-expired-image')
+    assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
+    assert len(browser.cssselect('.nextread.nextread--no-image')) == 1
