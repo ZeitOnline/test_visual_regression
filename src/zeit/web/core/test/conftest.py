@@ -94,7 +94,6 @@ def app_settings(mockserver):
         'breaking_news_config': (
             'http://xml.zeit.de/eilmeldung/homepage-banner'),
         'breaking_news_timeout': 2 * 60 * 60,
-        'enable_third_party_modules': '',
         'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
         'vivi_zeit.cms_keyword-configuration': (
             'egg://zeit.cms.tagging.tests/keywords_config.xml'),
@@ -199,7 +198,6 @@ def app_settings(mockserver):
         'jinja2.environment': 'jinja2.environment.Environment',
         'jinja2.enable_profiler': False,
         'dev_environment': True,
-        'enable_article_lineage': True,
         'advertisement_nextread_folder': 'verlagsangebote',
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
         'breaking_news_fallback_image': (

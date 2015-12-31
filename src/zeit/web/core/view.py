@@ -507,9 +507,9 @@ class Base(object):
         return conf.get('dev_environment', '')
 
     @zeit.web.reify
-    def featuretoggle_articlelineage(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('enable_article_lineage', '')
+    def article_lineage_is_enabled(self):
+        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.factory.find(
+            'article_lineage')
 
     @zeit.web.reify
     def timezone(self):
