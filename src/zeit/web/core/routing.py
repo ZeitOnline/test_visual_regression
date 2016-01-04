@@ -239,8 +239,7 @@ class RoutesMapper(pyramid.urldispatch.RoutesMapper):
     @gocept.cache.method.Memoize(600, ignore_self=True)
     def compile_blacklist(self):
         matchers = []
-        blacklist = zeit.web.core.sources.BLACKLIST_SOURCE
-        for pattern in blacklist.factory.getValues():
+        for pattern in zeit.web.core.sources.BLACKLIST_SOURCE:
             matcher, _ = pyramid.urldispatch._compile_route(pattern)
             matchers.append(matcher)
         return matchers
