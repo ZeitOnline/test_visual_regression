@@ -6,7 +6,7 @@
  * comments.js: module for comments
  * @module comments
  */
-define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
+define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit ) {
 
     var $comments = $( '#comments' ),
         $commentsBody = $( '#js-comments-body' ),
@@ -483,7 +483,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
         modHTML = modHTML.replace( /%cid%/g, cid )
             .replace( '%action%', action )
-            .replace( '%ch%', window.ZMO.communityHost );
+            .replace( '%ch%', Zeit.communityHost );
         $comment.find( '.comment__reactions' )
             .append( modHTML );
     },

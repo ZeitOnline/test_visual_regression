@@ -4,6 +4,8 @@ Change log for zeit.web
 2.44 (unreleased)
 -----------------
 
+- ZON-2157: Expose function hook for additional scripts
+
 - ZON-2233: Fix FF < 27 Navigation
 
 
