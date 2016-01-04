@@ -8,7 +8,9 @@ Change log for zeit.web
 
 - ZON-2579: Set sourcetype for Webtrekk
 
-- FIX: Make video teasers detectable on dynamic CPs
+- ZON-2278: Make video teasers detectable on dynamic CPs
+
+- ZON-2591: Make logo pointer appear in IE>=10 again
 
 
 2.44 (2016-01-04)
@@ -26,8 +28,6 @@ Change log for zeit.web
 - FIX: make getMobileView available under old namespace (for Meetrics)
 
 - FIX: Handle proxied solr results in author feeds properly
-
-- ZON-2591: Make logo pointer appear in IE>=10 again
 
 
 2.43 (2015-12-28)
