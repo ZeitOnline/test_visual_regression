@@ -49,7 +49,7 @@ require([
         articlesharing.init();
         comments.init();
         //overscrolling.init();
-        zeit.overcrolling = overscrolling;
+        zeit.overscrolling = overscrolling;
     }
 
     adblockCount.init();
