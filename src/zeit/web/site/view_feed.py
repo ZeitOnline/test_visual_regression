@@ -156,9 +156,15 @@ class Newsfeed(Base):
 
             authors = []
             if getattr(content, 'authorships', None):
-                authors = [getattr(author.target, 'display_name', None)
-                           for author in content.authorships]
-                authors = [x for x in authors if x]
+                for author in content.authorships:
+                    name = None
+                    if isinstance(author, basestring):
+                        # LazyProxy solr result
+                        name = author
+                    else:
+                        name = getattr(author.target, 'display_name', None)
+                    if name:
+                        authors.append(name)
 
             description = metadata.teaserText
 

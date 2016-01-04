@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2233: Fix FF < 27 Navigation
 
+- FIX: Handle proxied solr results in author feeds properly
+
 
 2.43 (2015-12-28)
 -----------------
