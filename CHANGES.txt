@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - FIX: Handle proxied solr results in author feeds properly
 
+- ZON-2579: Set sourcetype for Webtrekk
+
 
 2.43 (2015-12-28)
 -----------------
