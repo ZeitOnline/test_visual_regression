@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2157: Expose function hook for additional scripts
 
+- ZON-2572: Prepare runtime-adjustable blacklist
+
 - ZON-2233: Fix FF < 27 Navigation
 
 - FIX: Handle proxied solr results in author feeds properly
