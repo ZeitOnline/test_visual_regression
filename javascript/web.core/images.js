@@ -6,13 +6,13 @@
  * images.js: module for images
  * @module images
  */
-define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjcl, $ ) {
+define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle' ], function( sjcl, $, Zeit ) {
 
     var images = [],
         $w = $( window ),
         threshold = 300,
         proxyScreen = {
-            breakpoint: window.ZMO.breakpoint.get(),
+            breakpoint: Zeit.breakpoint.get(),
             width: $w.width()
         },
         isMobile, isDesktop, $triggerRegion;
@@ -56,7 +56,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjc
      * @function prepareScaling
      */
     function prepareScaling() {
-        var breakpoint = window.ZMO.breakpoint.get();
+        var breakpoint = Zeit.breakpoint.get();
 
         isMobile = /mobile|phablet/.test( breakpoint );
         isDesktop = breakpoint === 'desktop';
@@ -326,7 +326,7 @@ define([ 'sjcl', 'jquery', 'jquery.debounce', 'jquery.throttle' ], function( sjc
         var oldBreakpoint = proxyScreen.breakpoint,
             oldWidth = proxyScreen.width;
         // mark actual screen env
-        proxyScreen.breakpoint = window.ZMO.breakpoint.get();
+        proxyScreen.breakpoint = Zeit.breakpoint.get();
         proxyScreen.width = $w.width();
         // only rescale if needed
         if ( proxyScreen.breakpoint !== oldBreakpoint || proxyScreen.width > oldWidth ) {

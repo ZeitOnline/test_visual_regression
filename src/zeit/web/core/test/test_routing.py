@@ -2,12 +2,14 @@ import urllib2
 
 import pyramid.request
 import pytest
+import requests
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.content.cp.interfaces
 import zeit.cms.interfaces
 
 import zeit.web.core.article
+import zeit.web.core.routing
 
 
 def test_spektrum_feed_should_not_use_parallel_cp(my_traverser):
@@ -63,7 +65,7 @@ def test_dynamic_folder_traversal_should_rewrite_traversal_dictionary(
         view_name='',
         request=dummy_request)
 
-    resulting = zeit.web.core.traversal.RepositoryTraverser.invoke(**initial)
+    resulting = zeit.web.core.routing.RepositoryTraverser.invoke(**initial)
     assert resulting == expected
 
 
@@ -71,7 +73,7 @@ def test_dynamic_folder_traversal_should_allow_for_ranking_pagination(
         application, dummy_request, datasolr):
     dummy_request.GET['p'] = '2'
 
-    tdict = zeit.web.core.traversal.RepositoryTraverser.invoke(
+    tdict = zeit.web.core.routing.RepositoryTraverser.invoke(
         context=zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic'),
         traversed=('dynamic',),
         view_name='adel-tawil',
@@ -91,27 +93,35 @@ def test_preview_can_traverse_workingcopy_directly(my_traverser, workingcopy):
             tdict['context'])
 
 
-def test_route_config_should_make_friedbert_surrender_to_blacklisted_routes(
+def test_routesmapper_should_make_friedbert_surrender_to_blacklisted_routes(
         testbrowser):
     with pytest.raises(urllib2.HTTPError) as info:
         browser = testbrowser('/studium/rankings/index')
-        assert browser.headers.get('X-Render-With')
-    error = info.value
-    assert error.getcode() == 303
+        assert browser.headers.get('X-Render-With') == 'default'
+        assert info.value.getcode() == 501
+
+
+def test_routesmapper_should_make_friedbert_unblacklist_newsfeed_host(
+        testserver):
+    resp = requests.get(testserver.url + '/angebote/printkiosk/index',
+                        headers={'Host': 'newsfeed.localhost:port'})
+    assert 'X-Render-With' not in resp.headers
 
 
 def test_blacklist_entry_should_match_everything_but_image_urls(testbrowser):
     with pytest.raises(urllib2.HTTPError) as info:
-        testbrowser('/angebote/autosuche/foo/bar/index')
-    assert info.value.getcode() == 303
+        resp = testbrowser('/angebote/autosuche/foo/bar/index')
+        assert resp.headers.get('X-Render-With') == 'default'
+        assert info.value.getcode() == 501
 
     with pytest.raises(urllib2.HTTPError) as info:
-        testbrowser('/angebote/autosuche/foo/bar/my_logo')
-    assert info.value.getcode() == 303
+        resp = testbrowser('/angebote/autosuche/foo/bar/my_logo')
+        assert resp.headers.get('X-Render-With') == 'default'
+        assert info.value.getcode() == 501
 
     with pytest.raises(urllib2.HTTPError) as info:
         testbrowser('/angebote/autosuche/foo/bar/wide__123x456')
-    assert info.value.getcode() == 404
+        assert info.value.getcode() == 404
 
 
 @pytest.mark.parametrize('path, moved', [
@@ -131,7 +141,7 @@ def test_plain_folder_traversal_should_trigger_redirect_to_index(
 
     with pytest.raises(
             pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
-        zeit.web.core.traversal.RepositoryTraverser.invoke(**tdict)
+        zeit.web.core.routing.RepositoryTraverser.invoke(**tdict)
 
     assert redirect.value.location.endswith(moved)
 
@@ -150,6 +160,6 @@ def test_dynamic_folder_traversal_should_trigger_redirect_to_index(
 
     with pytest.raises(
             pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
-        zeit.web.core.traversal.RepositoryTraverser.invoke(**tdict)
+        zeit.web.core.routing.RepositoryTraverser.invoke(**tdict)
 
     assert redirect.value.location.endswith(moved)

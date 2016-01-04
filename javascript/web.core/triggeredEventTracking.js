@@ -55,7 +55,7 @@ What does this script do?
    tracking. This could be generalized in the future, if/as needed.
 
 ----------------------------------------------------------------------------- */
-define( [ 'jquery' ], function( $ ) {
+define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
     var EXPECTED_NAME = 'zonTriggeredEventTracking',
         debugMode,
@@ -117,7 +117,7 @@ define( [ 'jquery' ], function( $ ) {
         }
 
         data = [
-            window.ZMO.breakpoint.getTrackingBreakpoint(),
+            Zeit.breakpoint.getTrackingBreakpoint(),
             'video',
             videoSize,
             videoSeries,
@@ -134,9 +134,9 @@ define( [ 'jquery' ], function( $ ) {
             sendOnUnload: 1
         });
 
-        if ( debugMode && window.console ) {
-            window.console.log( '[zonTriggeredEventTracking] Webtrekk data sent: ' );
-            window.console.log( trackingData );
+        if ( debugMode ) {
+            console.log( '[zonTriggeredEventTracking] Webtrekk data sent: ' );
+            console.log( trackingData );
         }
     };
 
@@ -157,17 +157,17 @@ define( [ 'jquery' ], function( $ ) {
                 'co': 'URL: ' + window.location.pathname
             };
 
-        if ( window.ZMO.isMobileView() ) {
-            iam_data.st = typeof window.ZMO.wrapped !== 'undefined' ? window.ZMO.wrapped.ivwclient : 'mobzeit';
+        if ( Zeit.isMobileView() ) {
+            iam_data.st = Zeit.wrapped ? Zeit.wrapped.ivwclient : 'mobzeit';
         } else {
             iam_data.st = 'zeitonl';
         }
 
         window.iom.c( iam_data, 1 );
 
-        if ( debugMode && window.console ) {
-            window.console.log( '[zonTriggeredEventTracking] IVW data sent: ' );
-            window.console.log( iam_data );
+        if ( debugMode ) {
+            console.log( '[zonTriggeredEventTracking] IVW data sent: ' );
+            console.log( iam_data );
         }
     };
 

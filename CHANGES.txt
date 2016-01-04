@@ -6,7 +6,15 @@ Change log for zeit.web
 
 - ZON-2230: Multiple Infoboxes do not collapse anymore (includes code makeover)
 
+- ZON-2157: Expose function hook for additional scripts
+
+- ZON-2572: Prepare runtime-adjustable blacklist
+
 - ZON-2233: Fix FF < 27 Navigation
+
+- FIX: make getMobileView available under old namespace (for Meetrics)
+
+- FIX: Handle proxied solr results in author feeds properly
 
 
 2.43 (2015-12-28)
