@@ -40,7 +40,7 @@
             1: "redaktion", // Zuordnung/Bereich
             2: "{{ view.tracking_type | lower }}", // Kategorie/Pagetype
             3: "{{ view.ressort | lower }}", // Ressort
-            4: "online", // Online/Sourcetype
+            4: "{{ view.product_id }}", // Online/Sourcetype
             5: "{{ view.sub_ressort | lower }}", // Subressort
             6: "{{ serie }}", // Cluster
             7: "{{ request.path_info | substring_from('/') }}", // doc-path
