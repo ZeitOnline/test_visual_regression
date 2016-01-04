@@ -27,6 +27,8 @@ Change log for zeit.web
 
 - FIX: Handle proxied solr results in author feeds properly
 
+- ZON-2591: Make logo pointer appear in IE>=10 again
+
 
 2.43 (2015-12-28)
 -----------------
