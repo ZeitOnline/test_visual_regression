@@ -5,7 +5,7 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-(function( $, Modernizr ) {
+(function( $, Modernizr, Zeit ) {
     /**
      * See (http://jquery.com/).
      * @name jQuery
@@ -40,10 +40,8 @@
                         window.clickCount.ga( 'hp.zm.slidegallery.showslide.' );
                     }
                     // add ad-reloading capability
-                    if ( typeof window.ZMO !== 'undefined' ) {
-                        var prefix = window.ZMO.view.ressort === 'zeit-magazin' ? 'zmo-' : '';
-                        $( window ).trigger( 'interaction.adreload.z', [ prefix + 'gallery', 'interaction' ] );
-                    }
+                    var prefix = Zeit.view.ressort === 'zeit-magazin' ? 'zmo-' : '';
+                    $( window ).trigger( 'interaction.adreload.z', [ prefix + 'gallery', 'interaction' ] );
                 },
                 slideSelector: '.slide',
                 controls: !hasTouch,
@@ -55,8 +53,8 @@
                 adaptiveHeight: true
             }, defaults ),
             singleGallery = null,
-            ressort = window.ZMO.view.ressort,
-            viewType = window.ZMO.view.type,
+            ressort = Zeit.view.ressort,
+            viewType = Zeit.view.type,
             galleryType = /[\\?&]gallery=([^&#]*)/.exec( location.search ),
             query = /slide=(\d+)/.exec( location.search.slice( 1 ) ),
             start;
@@ -71,9 +69,9 @@
             }
         }
 
-        if ( this.length && !window.ZMO.isMobileView() && galleryType !== 'dynamic' ) {
+        if ( this.length && !Zeit.isMobileView() && galleryType !== 'dynamic' ) {
             $.ajax({
-                url: window.ZMO.jsconfHost + '/gallery.blocked.ressorts.js',
+                url: Zeit.jsconfHost + '/gallery.blocked.ressorts.js',
                 dataType: 'script',
                 success: function() {
                     var queryString = location.search.slice( 1 ).replace( /&*\bslide=(\d+)/g, '' ),
@@ -280,4 +278,4 @@
             }
         });
     };
-})( jQuery, window.Modernizr );
+})( jQuery, window.Modernizr, window.Zeit );

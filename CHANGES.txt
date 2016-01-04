@@ -1,10 +1,22 @@
 Change log for zeit.web
 =======================
 
-2.43 (unreleased)
+2.44 (unreleased)
+-----------------
+
+- ZON-2157: Expose function hook for additional scripts
+
+- ZON-2233: Fix FF < 27 Navigation
+
+- FIX: Handle proxied solr results in author feeds properly
+
+
+2.43 (2015-12-28)
 -----------------
 
 - FIX: Wrapper-Apps: Set IVW identifier to `mobzeit` at all times
+
+- FIX: Don't set a marker if you're gonna overwrite the function anyway
 
 
 2.42 (2015-12-28)

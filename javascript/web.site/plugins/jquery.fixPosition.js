@@ -11,7 +11,7 @@
  * 2015-10-05: pixelperfection, optimize performance
  */
 
-(function( $ ) {
+(function( $, Zeit ) {
     function FixPosition( element ) {
 
         this.node = element;
@@ -57,19 +57,17 @@
 
         init: function() {
 
-            var that = this,
-                viewportMetaElement;
+            var that = this;
 
             // only use this on Desktop.
             // OPTIMIZE: move this to site.js, so we dont have to check on every instance?
-            if ( window.ZMO.breakpoint.get() !== 'desktop' ) {
+            if ( Zeit.breakpoint.get() !== 'desktop' ) {
                 return false;
             }
 
             // we do not want to show the elements on iPad, where the "desktop" breakpoint
-            // has been enforced via `window.ZMO.viewport.set( 'banner' );` (library.html, line 115)
-            viewportMetaElement = document.getElementById( 'viewport-meta' );
-            if ( viewportMetaElement && viewportMetaElement.getAttribute( 'content' ) === 'width=1280' ) {
+            // has been enforced via `Zeit.viewport.set( 'banner' );` (in library.html)
+            if ( Zeit.viewport.meta && Zeit.viewport.meta.getAttribute( 'content' ) === 'width=1280' ) {
                 return false;
             }
 
@@ -197,4 +195,4 @@
         });
     };
 
-})( jQuery );
+})( jQuery, window.Zeit );

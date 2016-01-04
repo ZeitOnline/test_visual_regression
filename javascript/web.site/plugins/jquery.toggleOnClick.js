@@ -3,7 +3,7 @@
  * @author anika.szuppa@zeit.de
  * @version  0.1
  */
-(function( $, ZMO ) {
+(function( $, Zeit ) {
     /**
     * See (http://jquery.com/)
     * @name jQuery
@@ -49,7 +49,7 @@
             // set click event
             $element.on( 'click', function() {
 
-                var size = ZMO.breakpoint.get();
+                var size = Zeit.breakpoint.get();
 
                 // test the size the event should be available at
                 if ( $.inArray( size, options.formats ) !== -1 ) {
@@ -70,4 +70,4 @@
             bindToggleEvent( this );
         });
     };
-})( jQuery, window.ZMO );
+})( jQuery, window.Zeit );
