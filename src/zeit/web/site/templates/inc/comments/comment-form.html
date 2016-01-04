@@ -19,6 +19,24 @@
     {% set class = 'comment-form__cancel--hidden' %}
 {% endif %}
 
+{% if view.comment_area.note %}
+    <div class="comment-section__note">
+        <div class="comment-section__message comment-section__item">{{ view.comment_area.note }}</div>
+    </div>
+{% elif view.comment_area.user_blocked or view.comment_area.show_premoderation_warning %}
+    <div class="comment-section__note">
+        <div class="comment-section__notice comment-section__item">
+        {% if view.comment_area.user_blocked %}
+            Die Kommentarfunktion wurde für Ihr Benutzerprofil gesperrt.
+            Bei Fragen <a href="mailto:community@zeit.de">wenden Sie sich bitte an die Community-Redaktion</a>.
+        {% elif view.comment_area.show_premoderation_warning %}
+            Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind,
+            oder kürzlich gegen <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">unsere Netiquette</a> verstoßen haben.
+        {% endif %}
+        </div>
+    </div>
+{% endif %}
+
 <div class="comment-section__form comment-section__item">
 {%- if request.authenticated_userid %}
     {% set is_mod = 'admin-tech' in request.session.user.roles or 'admin-editor' in request.session.user.roles %}
@@ -26,7 +44,7 @@
     <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.session.user.uid }}"
         {%- if is_mod %} data-mod="mod"{% endif %}>
         {% if view.comment_area.show_comment_form -%}
-        <div class="comment-form__text">
+        <div class="comment-form__text comment-form__text--metadata">
             {% if request.session.user.picture %}
                 <img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name }}" src="{{ request.session.user.picture }}">
             {% endif %}
@@ -42,7 +60,7 @@
                 </a>
             {% endif %}
             <span class="comment-form__charcount">
-                <span class="js-count-formchars" data-charcount-element="#comment-form textarea[name='comment']"></span> 1500 Zeichen
+                <span class="js-count-formchars"></span> 1500 Zeichen
             </span>
         </div>
             {% if request.registry.settings.sso_activate and not request.session.user.name %}
@@ -59,6 +77,13 @@
         <textarea class="comment-form__textarea js-required" name="comment" placeholder="{{ placeholder }}" maxlength="1500">
             {%- if view.error and view.error.comment %}{{ view.error.comment }}{% endif -%}
         </textarea>
+            {% if view.comment_area.show_premoderation_warning %}
+            {# hidden in comment form, just visible in (cloned) reply form #}
+            <p class="comment-form__text comment-section__notice">
+                Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind,
+                oder kürzlich gegen <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">unsere Netiquette</a> verstoßen haben.
+            </p>
+            {% endif %}
         <p class="comment-form__actions">
             <input type="hidden" name="action" value="comment">
             <input type="hidden" name="pid" value="{{ pid }}">
@@ -68,7 +93,7 @@
         {%- endif %}
     </form>
     {%- endblock %}
-{%- else %}
+{%- elif view.comment_area.show_comment_form %}
     <form class="comment-login" id="comment-form">
         <p>
             Bitte melden Sie sich an, um zu kommentieren.
@@ -120,9 +145,3 @@
     </form>
 {%- endif %}
 </script>
-
-{% if view.comment_area.note %}
-    <div class="comment-section__note">
-        <div class="comment-section__message comment-section__item">{{ view.comment_area.note }}</div>
-    </div>
-{% endif %}

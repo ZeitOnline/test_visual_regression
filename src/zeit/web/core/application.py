@@ -265,17 +265,10 @@ class Application(object):
                 'load_template_from_dav_url'))
         }, delimiter='://')
 
-        if not self.settings.get('debug.propagate_jinja_errors'):
-            # If the application is not running in debug mode: overlay the
-            # jinja environment with a custom, more fault tolerant one.
-            env.__class__ = zeit.web.core.jinja.Environment
-            env = env.overlay()
-
         venusian.Scanner(env=env).scan(
             zeit.web.core,
             categories=('jinja',),
-            ignore=self.DONT_SCAN
-        )
+            ignore=self.DONT_SCAN)
 
     def configure_zca(self):
         """Sets up zope.component registrations by reading our

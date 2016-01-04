@@ -23,6 +23,8 @@ $icon-color--hover: $zon-charcoal
 	+display-flex()
 	+flex-wrap(wrap)
 	width: 100%
+	@supports not (flex-wrap: wrap)
+		display: inline-block
 	*[data-dropdown="true"]
 		display: none
 		+respond-min($break-tablet-min)

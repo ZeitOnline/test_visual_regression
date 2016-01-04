@@ -131,8 +131,8 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
     assert '9: "zeitmz/essenundtrinken/article",' in browser.contents
     assert '10: "yes",' or '10: "",' in browser.contents
     assert '11: "",' in browser.contents
-    assert '12: window.ZMO.getSiteParam(\'.site\'),' in browser.contents
-    assert '13: window.ZMO.breakpoint.getTrackingBreakpoint(),' \
+    assert '12: window.Zeit.getSiteParam("site"),' in browser.contents
+    assert '13: window.Zeit.breakpoint.getTrackingBreakpoint(),' \
         in browser.contents
     assert '14: "alt"' in browser.contents
 
@@ -206,11 +206,11 @@ def test_webtrekk_series_tag_is_set_corectly(testserver, testbrowser):
 
 def test_webtrekk_has_session_parameter(testserver, testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index?app-content')
-    assert '1: window.ZMO.wrapped.client' in browser.contents
+    assert '1: window.Zeit.wrapped.client' in browser.contents
 
 
 @pytest.mark.xfail(reason='tracking scripts & pixels may timeout')
-def test_ivw_tracking_for_mobile_and_desktop(
+def test_ivw_tracking_for_mobile_and_desktop_and_wrapper(
         selenium_driver, testserver, monkeypatch):
 
     def tpm(me):
@@ -220,11 +220,19 @@ def test_ivw_tracking_for_mobile_and_desktop(
         zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
 
     driver = selenium_driver
+
     # ipad landscape
     driver.set_window_size(1024, 768)
     driver.get('%s/artikel/03' % testserver.url)
     content = driver.execute_script("return iam_data.st")
     assert content == "zeitonl"
+
+    # Wrapper-Apps must always be the »MEW-Angebotskennung« mobzeit
+    # we simulate this via the get-param 'appcontent' instead of user-agent
+    driver.get('%s/artikel/02?app-content=true' % testserver.url)
+    content = driver.execute_script("return iam_data.st")
+    assert content == "mobzeit"
+
     # ipad portrait and smaller
     driver.set_window_size(766, 1024)
     driver.get('%s/artikel/01' % testserver.url)

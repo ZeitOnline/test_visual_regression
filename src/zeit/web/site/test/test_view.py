@@ -19,8 +19,8 @@ def test_login_state_view_should_deliver_correct_destination():
     request.params = {}
     result = zeit.web.site.view.login_state(request)
     assert result == {
-        'login': 'http://sso/anmelden?url=http://destination_sso/',
-        'logout': 'http://sso/abmelden?url=http://destination_sso/'
+        'login': 'http://sso/anmelden?url=http://destination_sso',
+        'logout': 'http://sso/abmelden?url=http://destination_sso'
     }
 
 
@@ -133,3 +133,13 @@ def test_sharing_titles_differ_from_html_title(testbrowser):
 
     assert og_title + u' | ZEIT ONLINE' == pagetitle
     assert twitter_title + u' | ZEIT ONLINE' == pagetitle
+
+
+def test_article_should_show_premoderation_warning(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+    request.host_url = 'http://www.zeit.de'
+    request.session = {'user': {'blocked': False, 'premoderation': True}}
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.comment_area['show_premoderation_warning'] is True

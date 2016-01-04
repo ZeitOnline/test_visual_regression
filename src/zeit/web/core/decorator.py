@@ -70,10 +70,10 @@ def JinjaEnvRegistrator(env_attr, marker=None, category='jinja'):  # NOQA
 
             :internal:
             """
-            if not zope.component.getUtility(
-                    zeit.web.core.interfaces.ISettings).get(
-                        'debug.propagate_jinja_errors', False):
+            if not hasattr(scanner, 'env'):
+                return
 
+            if isinstance(scanner.env, zeit.web.core.jinja.Environment):
                 fn = types.FunctionType(
                     safeguard.func_code, obj.func_globals.copy(),
                     obj.func_name, obj.func_defaults, obj.func_closure)
@@ -90,7 +90,7 @@ def JinjaEnvRegistrator(env_attr, marker=None, category='jinja'):  # NOQA
             if marker and isinstance(obj, types.FunctionType):
                 setattr(obj, marker, True)
 
-            if hasattr(scanner, 'env') and env_attr in scanner.env.__dict__:
+            if env_attr in scanner.env.__dict__:
                 scanner.env.__dict__[env_attr][name] = obj
 
         venusian.attach(func, callback, category=category)

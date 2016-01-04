@@ -4,9 +4,9 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-define( [ 'jquery' ], function( $ ) {
+define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
-    var configUrl = window.ZMO.jsconfHost + '/config_adreload.json',
+    var configUrl = Zeit.jsconfHost + '/config_adreload.json',
     config = false,
     timer = {},
     clickCounter = [],
@@ -97,7 +97,7 @@ define( [ 'jquery' ], function( $ ) {
         // check if slug and pagetype match
         if (
             window.location.pathname.indexOf( myconfig.slug ) < 0 ||
-            $.inArray( window.ZMO.view.type, myconfig.pagetypes ) < 0
+            $.inArray( Zeit.view.type, myconfig.pagetypes ) < 0
         ) { return; }
         if ( checkClickCount( myconfig ) ) {
             // reload Ads

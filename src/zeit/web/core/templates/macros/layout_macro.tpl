@@ -86,9 +86,9 @@
             if (
                 typeof AdController !== 'undefined'
                 {% if type == 'desktop' and banner.tile == 2 %}
-                && ZMO.clientWidth > ZMO.sideAdMinWidth
+                && window.Zeit.getClientWidth() > window.Zeit.sideAdMinWidth
                 {% endif %}
-                && ZMO.clientWidth {{ operator | safe }} ZMO.mobileWidth
+                && window.Zeit.getClientWidth() {{ operator | safe }} window.Zeit.tabletMinWidth
                 ) {
                 if( ! document.getElementById( "iqadtile{{ banner.tile }}" ) ) {
                     var elem = document.createElement('div');

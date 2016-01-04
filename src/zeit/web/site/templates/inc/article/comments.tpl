@@ -89,7 +89,7 @@
 		</div>
 	</div>
 
-	<div id="js-comments-body">
+	<div class="comment-section__body" id="js-comments-body">
 
 		{# Show ads before the n-th comment, or before the last comment if there are less than n #}
 		{% for comment in view.comments.comments %}

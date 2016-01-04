@@ -2,7 +2,7 @@
 	<form class="comment-form" method="POST" id="report-comment-form">
 		<textarea name="comment" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="comment-form__textarea js-required"></textarea>
 		<p class="comment-form__text">
-			Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="http://www.zeit.de/administratives/2010-03/netiquette">Netiquette</a> zu melden.
+			Nutzen Sie dieses Fenster, um Verstöße gegen die <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">Netiquette</a> zu melden.
 			Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#comments-form">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
 		</p>
 		<p class="comment-form__actions">

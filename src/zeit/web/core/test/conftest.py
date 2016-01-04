@@ -37,11 +37,11 @@ import zeit.web.core.view
 @pytest.fixture(scope='session')
 def app_settings(mockserver):
     return {
-        'pyramid.reload_templates': 'false',
-        'pyramid.debug_authorization': 'false',
-        'pyramid.debug_notfound': 'false',
-        'pyramid.debug_routematch': 'false',
-        'pyramid.debug_templates': 'false',
+        'pyramid.reload_templates': False,
+        'pyramid.debug_authorization': False,
+        'pyramid.debug_notfound': False,
+        'pyramid.debug_routematch': False,
+        'pyramid.debug_templates': False,
         'cache.type': 'memory',
         'cache.lock_file': '/tmp/test_lock',
         'cache.regions': 'default_term, second, short_term, long_term',
@@ -49,6 +49,7 @@ def app_settings(mockserver):
         'cache.short_term.expire': '60',
         'cache.default_term.expire': '300',
         'cache.long_term.expire': '3600',
+        'session.type': 'memory',
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
         # XXX I'd rather put None here and change the settings for a specific
@@ -71,8 +72,8 @@ def app_settings(mockserver):
         'author_comment_page_size': '6',
         'community_host': 'http://localhost:6551',
         'community_static_host': 'http://static_community/foo',
-        'community_maintenance': ('http://xml.zeit.de/config/'
-                                  'community_maintenance.xml'),
+        'community_maintenance': (
+            'http://xml.zeit.de/config/community_maintenance.xml'),
         'agatho_host': mockserver.url + '/comments',
         'linkreach_host': mockserver.url + '/linkreach/api',
         'google_tag_manager_host': 'foo.baz',
@@ -169,6 +170,10 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/scales.xml',
         'vivi_zeit.content.link_source-blogs': (
             'egg://zeit.web.core/data/config/blogs_meta.xml'),
+        'vivi_zeit.push_facebook-accounts': (
+            'egg://zeit.push.tests/fixtures/facebook-accounts.xml'),
+        'vivi_zeit.push_facebook-main-account': 'fb-test',
+        'vivi_zeit.push_facebook-magazin-account': 'fb-magazin',
         'vivi_zeit.brightcove_read-url': mockserver.url + '/video/bc.json',
         'vivi_zeit.brightcove_write-url': mockserver.url + '/video/bc.json',
         'vivi_zeit.brightcove_read-token': 'foo',
@@ -188,9 +193,9 @@ def app_settings(mockserver):
         'sso_activate': '',
         'sso_url': 'http://my_sso',
         'sso_cookie': 'http://my_sso_cookie',
-        'debug.show_exceptions': True,
-        'debug.propagate_jinja_errors': True,
-        'debug.enable_profiler': False,
+        'jinja2.show_exceptions': True,
+        'jinja2.environment': 'jinja2.environment.Environment',
+        'jinja2.enable_profiler': False,
         'dev_environment': True,
         'enable_article_lineage': True,
         'advertisement_nextread_folder': 'verlagsangebote',
@@ -337,8 +342,8 @@ def debug_application(app_settings, request):
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     app_settings = app_settings.copy()
-    app_settings['debug.show_exceptions'] = ''
-    app_settings['debug.propagate_jinja_errors'] = ''
+    app_settings['jinja2.environment'] = 'zeit.web.core.jinja.Environment'
+    app_settings['jinja2.show_exceptions'] = False
     return repoze.bitblt.processor.ImageTransformationMiddleware(
         zeit.web.core.application.Application()({}, **app_settings),
         secret='time'

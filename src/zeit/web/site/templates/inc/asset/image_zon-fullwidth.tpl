@@ -1,5 +1,7 @@
 {%- extends "zeit.web.site:templates/inc/asset/image_teaser.tpl" -%}
 
+{% block media_block_link %}teaser-fullwidth__media-link{% endblock %}
+
 {% block media_block_additional_data_attributes %}
     {% set mobile_image = get_image(module, teaser, variant_id='wide') %}
     {% if mobile_image %}

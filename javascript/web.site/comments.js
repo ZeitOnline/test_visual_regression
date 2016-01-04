@@ -6,7 +6,7 @@
  * comments.js: module for comments
  * @module comments
  */
-define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
+define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit ) {
 
     var $comments = $( '#comments' ),
         $commentsBody = $( '#js-comments-body' ),
@@ -34,9 +34,10 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                 .addClass( 'js-reply-form' )
                 .css( 'display', 'none' )
                 .appendTo( comment );
-            form.find( 'textarea[name="comment"]' ).attr( 'placeholder', 'Ihre Antwort' );
+            form.find( 'textarea[name="comment"]' ).attr( 'placeholder', 'Ihre Antwort' ).val( '' );
             form.find( 'input[type="submit"]' ).prop( 'disabled', true ).val( 'Antworten' );
             form.find( 'input[name="pid"]' ).val( cid );
+            form.find( '.js-count-formchars' ).text( '' );
         }
 
         showForm( form, comment );
@@ -361,7 +362,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                             premoderation.detach();
                             if ( response.response.setUser ) {
                                 window.location.hash = '#comment-form';
-                                window.location.reload();
+                                window.location.reload( true );
                             } else {
                                 $form.find( '.comment-form__textarea' ).val( '' );
                                 $form.find( '.button' ).prop( 'disabled', false );
@@ -482,7 +483,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
 
         modHTML = modHTML.replace( /%cid%/g, cid )
             .replace( '%action%', action )
-            .replace( '%ch%', window.ZMO.communityHost );
+            .replace( '%ch%', Zeit.communityHost );
         $comment.find( '.comment__reactions' )
             .append( modHTML );
     },
