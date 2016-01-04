@@ -228,10 +228,11 @@ class AuthorFeed(Newsfeed):
 
 
 @pyramid.view.view_defaults(
+    context=zeit.content.cp.interfaces.ICenterPage,
     renderer='string')
 @pyramid.view.view_config(
     header='host:newsfeed(\.staging)?\.zeit\.de',
-    route_name='instantarticle_feed')
+    name='rss-instantarticle')
 class InstantArticleFeed(Newsfeed):
     @zeit.web.reify
     def pagetitle(self):
@@ -248,16 +249,6 @@ class InstantArticleFeed(Newsfeed):
                 u'Politik, Wirtschaft, Gesellschaft, Wissen, '
                 u'Kultur und Sport lesen Sie auf ZEIT ONLINE.')
 
-    @zeit.web.reify
-    def items(self):
-        solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        query = u'is_instant_article:"true" AND (type:article)'
-        resultset = []
-        for result in solr.search(
-                query, sort='date-first-released desc', rows=15):
-            resultset.append(zeit.cms.interfaces.ICMSContent(result))
-        return resultset
-
     def build_feed(self):
         E = ELEMENT_MAKER
         build_date = format_iso8601_date(datetime.datetime.today())
@@ -271,7 +262,7 @@ class InstantArticleFeed(Newsfeed):
         )
         root.append(channel)
 
-        for content in filter_and_sort_entries(self.items)[:15]:
+        for content in self.items:
             metadata = zeit.cms.content.interfaces.ICommonMetadata(
                 content, None)
             if metadata is None:
@@ -279,7 +270,6 @@ class InstantArticleFeed(Newsfeed):
 
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
-
             content_url = create_public_url(content_url)
 
             scheme, netloc, path, p, q, f = urlparse.urlparse(content_url)
@@ -413,10 +403,8 @@ class SocialFeed(Base):
                        type=self.request.response.content_type)
         )
         root.append(channel)
-        # We want all teasers available in the cp, not just the limited amount
-        # available in the ICPFeed.
-        for content in zeit.content.cp.interfaces.ITeaseredContent(
-                self.context):
+
+        for content in self.items:
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
             content_url = create_public_url(content_url)
