@@ -78,11 +78,14 @@
             }
 
             var index = self.tabs.index( document.activeElement ),
+                keyCode,
                 focus,
                 select;
 
             if ( index !== -1 ) {
-                switch ( event.keyCode ) {
+                keyCode = event.keyCode || event.which;
+
+                switch ( keyCode ) {
                     case 13: // return
                     case 32: // space
                         select = index;
@@ -113,7 +116,7 @@
                 self.tabs.eq( focus ).focus();
             } else if ( select !== undefined ) {
                 event.preventDefault();
-                self.selectTab( self.tabs.eq( select ) );
+                self.selectTab( self.tabs.eq( select ).focus() );
             }
         });
     };
