@@ -4,7 +4,7 @@ Change log for zeit.web
 2.45 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2230: Multiple Infoboxes do not collapse anymore (includes code makeover)
 
 
 2.44 (2016-01-04)
