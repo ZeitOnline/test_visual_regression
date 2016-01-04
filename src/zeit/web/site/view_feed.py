@@ -405,8 +405,7 @@ class SocialFeed(Base):
         root.append(channel)
         # We want all teasers available in the cp, not just the limited amount
         # available in the ICPFeed.
-        for content in zeit.content.cp.interfaces.ITeaseredContent(
-                self.context):
+        for content in self.items:
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
             content_url = create_public_url(content_url)
