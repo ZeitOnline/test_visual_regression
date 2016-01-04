@@ -32,7 +32,6 @@
         this.infobox.find( '.infobox-tab__title' )
             .clone()
             .appendTo( this.navigation );
-        this.navigation.attr( 'role', 'tablist' );
         this.updateNavigationMode();
         this.showActiveTab();
 
@@ -43,8 +42,8 @@
             self.selectTab( $( this ) );
 
             if ( self.hasSidebar ) {
-                if ( history.replaceState ) {
-                    history.replaceState( null, null, this.hash );
+                if ( history.pushState ) {
+                    history.pushState( null, null, this.hash );
                 }
             }
         });
@@ -54,6 +53,66 @@
             if ( self.hasSidebar !== self.hasSidebarNavigation() ) {
                 self.updateNavigationMode();
                 self.showActiveTab();
+            }
+        });
+
+        // When going back in the browser history update the open tab
+        // according to the location.hash
+        $( window ).on( 'hashchange', function( event ) {
+            if ( self.hasSidebar ) {
+                var tab = ( location.hash ) ? self.getSelectedTabByHash() : self.tabs.first();
+
+                if ( tab ) {
+                    event.preventDefault();
+                    self.selectTab( tab );
+                }
+            }
+        });
+
+        // Configure keyboard navigation
+        this.infobox.on( 'keydown', function( event ) {
+            // do nothing if there are other special keys involved
+            if ( event.altKey || event.shiftKey || event.ctrlKey || event.metaKey ) {
+                return;
+            }
+
+            var index = self.tabs.index( document.activeElement ),
+                focus,
+                select;
+
+            if ( index !== -1 ) {
+                switch ( event.keyCode ) {
+                    case 13: // return
+                    case 32: // space
+                        select = index;
+                        break;
+
+                    case 35: // end
+                        select = self.tabs.length - 1;
+                        break;
+
+                    case 36: // home
+                        select = 0;
+                        break;
+
+                    case 37: // left
+                    case 38: // up
+                        focus = --index;
+                        break;
+
+                    case 39: // right
+                    case 40: // down
+                        focus = ++index % self.tabs.length;
+                        break;
+                }
+            }
+
+            if ( focus !== undefined ) {
+                event.preventDefault();
+                self.tabs.eq( focus ).focus();
+            } else if ( select !== undefined ) {
+                event.preventDefault();
+                self.selectTab( self.tabs.eq( select ) );
             }
         });
     };
@@ -92,8 +151,8 @@
         var relatedPanel = $( '#' + tab.attr( 'aria-controls' ) );
 
         if ( this.hasSidebar ) {
-            this.setTabsActive( this.tabs, false );
-            this.setTabsActive( tab, true );
+            this.setTabsActive( this.tabs, false, -1 );
+            this.setTabsActive( tab, true, 0 );
 
             this.setPanelsVisible( this.tabpanels, false );
             this.setPanelsVisible( relatedPanel, true );
@@ -106,33 +165,29 @@
     };
 
     /**
-     * Sets aria-selected and aria-expanded attributes for tab(s) according
-     * to the given boolean.
+     * Sets aria-selected and aria-expanded attributes to the given boolean.
      *
-     * @param {jQuery} tabs The tab(s) to be toggled
-     * @param {boolean} isActive If true the tabs are marked selected and
-     *                  expanded, if false these attributes are set to false
+     * @param {jQuery}  tabs        Set of matched elements to be toggled
+     * @param {boolean} isActive
+     * @param {numeric} tabindex    tabindex value {-1|0} [optional]
      */
-    Infobox.prototype.setTabsActive = function( tabs, isActive ) {
+    Infobox.prototype.setTabsActive = function( tabs, isActive, tabindex ) {
         tabs.attr({
+            'tabindex': tabindex || 0,
             'aria-selected': isActive,
             'aria-expanded': isActive
         });
     };
 
     /**
-     * Sets the aria-hidden and aria-selected attributes of the given
-     * jQuery element(s) to hidden & not selected or visible & selected
-     * according to the given boolean.
+     * Sets the aria-hidden attribute to the given boolean.
      *
-     * @param {jQuery} panels The panel(s) to be set visible or hidden
-     * @param {boolean} isVisible Sets the panel(s) visible if true or
-     *                  hidden otherwise
+     * @param {jQuery} panels Set of matched elements to set visible or hidden
+     * @param {boolean} isVisible
      */
     Infobox.prototype.setPanelsVisible = function( panels, isVisible ) {
         panels.attr({
-            'aria-hidden': !isVisible,
-            'aria-selected': isVisible
+            'aria-hidden': !isVisible
         });
     };
 
@@ -151,8 +206,21 @@
 
         if ( this.hasSidebar ) {
             this.tabs = this.infobox.find( '.infobox__navigation .infobox-tab__link' );
+            // Mark-up navigation being a tabbed interface component
+            this.navigation.attr( 'role', 'tablist' );
+            // Remove accordion component mark-up
+            this.infobox.find( '.infobox__content' )
+                .removeAttr( 'role' )
+                .removeAttr( 'aria-multiselectable' );
         } else {
             this.tabs = this.infobox.find( '.infobox__content .infobox-tab__link' );
+            // Remove tabbed interface component mark-up
+            this.navigation.removeAttr( 'role' );
+            // Mark-up content being an accordion component
+            this.infobox.find( '.infobox__content' ).attr({
+                'role': 'tablist',
+                'aria-multiselectable': true
+            });
         }
 
         this.tabs.attr( 'id', function() {

@@ -2,12 +2,13 @@
 	background: $zon-lighter-grey
 	clear: both
 	margin: remify(40px (-$page-padding))
+	overflow: hidden // needed to prevent collapsing margins of .infobox-tab__link and .infobox-tab__panel
 	padding: 0 $page-padding
 	.js &__container
 		+respond-min($break-tablet-min)
+			+pie-clearfix
 			margin: 0 auto
 			max-width: remify(820px)
-			overflow: hidden
 			padding: remify(36px) 0
 	.js &__navigation
 		display: none
@@ -24,7 +25,6 @@
 
 .infobox-tab
 	margin: 0
-	overflow: hidden // needed to prevent collapsing margins of .infobox-tab__link and .infobox-tab__panel
 	padding: 0
 	border-bottom: 1px solid $color-border
 	&:last-of-type
@@ -41,8 +41,6 @@
 				border: none
 			.js .infobox-tab &
 				display: none
-		&:focus
-			outline: 0
 	&__link
 		color: $zon-dark-grey
 		display: block
@@ -58,11 +56,10 @@
 		+respond-min($break-tablet-min)
 			+on-interaction
 				text-decoration: underline
-		&:focus
-			outline: 0
 		.js &:after
 			+build-mobile-plus-minus-button()
 		&[aria-expanded="true"]
+			outline: 0
 			&:after
 				content: "\2212" // U+2212 = − (minus sign)
 			+respond-min($break-tablet-min)

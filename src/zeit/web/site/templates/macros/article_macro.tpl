@@ -86,13 +86,12 @@
             <div class="infobox__content">
             {% for title, text in obj.contents %}
                 <section class="infobox-tab" id="{{ id }}-{{ loop.index }}">
-                    <h3 class="infobox-tab__title">
+                    <h3 class="infobox-tab__title" role="presentation">
                         <a
                             class="infobox-tab__link"
                             id="{{ id }}-{{ loop.index }}-tab"
                             role="tab"
                             href="#{{ id }}-{{ loop.index }}"
-                            tabindex="0"
                             data-id="{{ id }}-{{ loop.index }}-tab"
                             aria-controls="{{ id }}-{{ loop.index }}-article">
                             {{- title -}}
