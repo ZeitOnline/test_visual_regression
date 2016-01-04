@@ -13,6 +13,7 @@
     function Infobox( infobox ) {
         this.infobox = $( infobox );
         this.navigation = this.infobox.find( '.infobox__navigation' );
+        this.accordion = this.infobox.find( '.infobox__content' );
         this.tabpanels = this.infobox.find( '.infobox-tab__panel' );
         this.tabs = this.infobox.find( '.infobox-tab__link' );
         this.hasSidebar = false;
@@ -205,19 +206,19 @@
         this.setPanelsVisible( this.tabpanels, false );
 
         if ( this.hasSidebar ) {
-            this.tabs = this.infobox.find( '.infobox__navigation .infobox-tab__link' );
+            this.tabs = this.navigation.find( '.infobox-tab__link' );
             // Mark-up navigation being a tabbed interface component
             this.navigation.attr( 'role', 'tablist' );
             // Remove accordion component mark-up
-            this.infobox.find( '.infobox__content' )
+            this.accordion
                 .removeAttr( 'role' )
                 .removeAttr( 'aria-multiselectable' );
         } else {
-            this.tabs = this.infobox.find( '.infobox__content .infobox-tab__link' );
+            this.tabs = this.accordion.find( '.infobox-tab__link' );
             // Remove tabbed interface component mark-up
             this.navigation.removeAttr( 'role' );
             // Mark-up content being an accordion component
-            this.infobox.find( '.infobox__content' ).attr({
+            this.accordion.attr({
                 'role': 'tablist',
                 'aria-multiselectable': true
             });
