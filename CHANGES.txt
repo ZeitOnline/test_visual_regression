@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2233: Fix FF < 27 Navigation
 
+- ZON-2591: Make logo pointer appear in IE>=10 again
+
 
 2.43 (2015-12-28)
 -----------------
