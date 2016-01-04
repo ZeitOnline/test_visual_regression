@@ -174,9 +174,9 @@
      */
     Infobox.prototype.setTabsActive = function( tabs, isActive, tabindex ) {
         tabs.attr({
-            'tabindex': tabindex || 0,
             'aria-selected': isActive,
-            'aria-expanded': isActive
+            'aria-expanded': isActive,
+            'tabindex': tabindex || 0
         });
     };
 
