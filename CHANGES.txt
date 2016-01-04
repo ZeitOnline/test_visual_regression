@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.44 (unreleased)
+2.45 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.44 (2016-01-04)
 -----------------
 
 - ZON-2230: Multiple Infoboxes do not collapse anymore (includes code makeover)
@@ -11,6 +17,9 @@ Change log for zeit.web
 - ZON-2572: Prepare runtime-adjustable blacklist
 
 - ZON-2233: Fix FF < 27 Navigation
+
+- ZON-2586: Move instantarticle feed from special URL (and hard-coded solr
+  query) to view name `/rss-instantarticle` on any centerpage
 
 - FIX: make getMobileView available under old namespace (for Meetrics)
 
