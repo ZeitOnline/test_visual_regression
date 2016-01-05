@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2230: Multiple Infoboxes do not collapse anymore (includes code makeover)
 
+- ZON-2579: Set sourcetype for Webtrekk
+
 
 2.44 (2016-01-04)
 -----------------
