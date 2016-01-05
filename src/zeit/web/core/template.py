@@ -370,8 +370,7 @@ def is_gallery(context):
 
 @zeit.web.register_filter
 def is_video(context):
-    return zeit.content.video.interfaces.IVideo.providedBy(context) or getattr(
-        context, 'type', '') in ('video', 'zeit.brightcove.interfaces.IVideo')
+    return zeit.content.video.interfaces.IVideo.providedBy(context)
 
 
 @zeit.web.register_filter
