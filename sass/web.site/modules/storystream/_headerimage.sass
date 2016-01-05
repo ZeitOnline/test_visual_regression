@@ -42,12 +42,24 @@
 			z-index: 1
 
 	&__kicker
+		position: absolute
+		top: remify(-15px)
+		white-space: nowrap
+
+	&__kicker-label
+		background: $zon-lighter-grey
+		border-radius: em(3px)
+		font-size: remify(12px)
+		color: $zon-charcoal
+		text-transform: uppercase
+		letter-spacing: $zon-letter-spacing-s
+		padding: remify(6px 10px)
+		margin-right: remify(10px)
+
+	&__kicker-text
 		color: $zon-lighter-grey
 		font-size: remify(15px)
 		letter-spacing: $zon-letter-spacing-m
-		line-height: remify(17px)
-		position: absolute
-		top: remify(-6px)
 
 	&__title
 		color: $white
