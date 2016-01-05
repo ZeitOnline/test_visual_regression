@@ -128,7 +128,6 @@
             var gallery = $( this ),
                 galleryWidth = gallery.width(),
                 figures = gallery.find( options.slideSelector ),
-                figcaptions = gallery.find( '.figure__caption' ),
                 buttonTemplates = $( '.inline-gallery-icon-templates' ).first().html(),
                 backButton = $( buttonTemplates ).filter( '.bx-zone-prev' ),
                 nextButton = $( buttonTemplates ).filter( '.bx-zone-next' ),
@@ -155,14 +154,20 @@
                             }
                             break;
                     }
+                },
+                setFigCaptionWidth = function( slide ) {
+                    var caption = slide.find( '.figure__caption' ),
+                    imageWidth = slide.find( '.figure__media' ).width();
+
+                    if ( caption.length && imageWidth > 300 && imageWidth < galleryWidth ) {
+                        caption.css( 'max-width', imageWidth + 'px' );
+                    }
                 };
 
             $( window ).on( 'keydown', handleKeydown );
 
             figures.on( 'scaling_ready', function( e ) {
                 var currentSlide;
-
-                figCaptionSize( $( e.target ) );
 
                 // if the slider loaded before the image
                 if ( slider.getCurrentSlideElement ) {
@@ -201,32 +206,6 @@
                 });
             }
 
-            var figCaptionSize = function( image, figcaption ) {
-                    var caption = figcaption || image.closest( 'figure' ).find( 'figcaption' ),
-                        imageWidth = image.width();
-
-                    console.log( image.width());
-
-                    if ( caption.length && imageWidth > 30 && imageWidth < galleryWidth ) {
-                        caption.css({
-                            'max-width': imageWidth + 'px',
-                            'padding-left': 0,
-                            'padding-right': 0
-                        });
-                    }
-                },
-                figCaptionSizing = function() {
-                    figcaptions.each( function() {
-                        var caption = $( this ),
-                            image = caption.prev().find( '.figure__media' );
-
-                        console.log( image );
-                        console.log( image.width());
-
-                        figCaptionSize( image, caption );
-                    });
-                };
-
             options.onSliderLoad = function() {
 
                 // TODO: has to be fixed, it isn't working but leads to a neverending loop
@@ -243,8 +222,6 @@
                 //         });
                 //     }
                 // }
-
-                figCaptionSizing();
 
                 sliderViewport = gallery.parent();
 
@@ -269,6 +246,12 @@
                 // fix ad columns
                 $( '#iqdBackgroundLeft, #iqdBackgroundRight' ).css( { height: document.body.offsetHeight + 'px' } );
 
+            };
+
+            setFigCaptionWidth( figures.first() );
+
+            options.onSlideBefore = function( slide ) {
+                setFigCaptionWidth( slide );
             };
 
             options.onSliderResize = function() {
