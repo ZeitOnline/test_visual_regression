@@ -28,7 +28,7 @@
         noliquidMaxWidth: 1024,
         maxWidth: 1280,
         getClientWidth: function() {
-            Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 )
+            return Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 );
         },
         isMobileView: function() {
             return this.getClientWidth() < this.tabletMinWidth;
@@ -88,6 +88,14 @@
         require: function() {
             this.queue.push( arguments );
         }
+    };
+
+    {#
+    // Alias for Meetrics. Has been added with v2.44 as fallback.
+    // TODO: remove as soon as Meetrics uses Zeit.isMobileView().
+    #}
+    window.ZMO = {
+        isMobileView: function() { return Zeit.isMobileView(); }
     };
 
 

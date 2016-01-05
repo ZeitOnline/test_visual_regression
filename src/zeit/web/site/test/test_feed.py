@@ -94,23 +94,22 @@ def test_socialflow_feed_contains_social_fields(testserver):
 
 
 def test_instant_article_feed_should_be_rendered(testserver):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/01'}]
     res = requests.get(
-        '{}/instantarticle-feed'.format(testserver.url),
+        '{}/centerpage/index/rss-instantarticle'.format(testserver.url),
         headers={'Host': 'newsfeed.zeit.de'})
     parser = lxml.etree.XMLParser(strip_cdata=False)
     xml = lxml.etree.fromstring(res.content, parser)
     assert xml.xpath('//item/title/text()')[0].startswith(
-        'Gentrifizierung: Mei, is des traurig!')
+        'Article Image Asset')
     content = xml.xpath(
         '//item/content:encoded',
         namespaces={'content': 'http://purl.org/rss/1.0/modules/content/'})
     assert ('<esi:include src="http://www.zeit.de/instantarticle'
-            '/artikel/01?cdata=true"/>') in lxml.etree.tostring(content[0])
+            '/centerpage/article_image_asset?cdata=true"/>'
+            in lxml.etree.tostring(content[0]))
 
     assert xml.xpath('//item/link/text()')[0].startswith(
-        'http://www.zeit.de/artikel/01')
+        'http://www.zeit.de/centerpage/article_image_asset')
 
 
 def test_roost_feed_contains_mobile_override_text(testserver):

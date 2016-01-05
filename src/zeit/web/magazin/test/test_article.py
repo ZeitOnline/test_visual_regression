@@ -111,7 +111,7 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
     assert '1: "redaktion",' in browser.contents
     assert '2: "article",' in browser.contents
     assert '3: "lebensart",' in browser.contents
-    assert '4: "online",' in browser.contents
+    assert '4: "zede",' in browser.contents
     assert '5: "essen-trinken",' in browser.contents
     assert '6: "weinkolumne",' in browser.contents
     assert '7: "03",' in browser.contents
@@ -181,7 +181,7 @@ def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
     assert '1: "redaktion",' in browser.contents
     assert '2: "centerpage",' in browser.contents
     assert '3: "lebensart",' in browser.contents
-    assert '4: "online",' in browser.contents
+    assert '4: "zede",' in browser.contents
     assert '5: "",' in browser.contents
     assert '6: "",' in browser.contents
     assert '7: "test-cp-zmo",' in browser.contents
