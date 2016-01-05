@@ -2002,7 +2002,7 @@ def test_ranking_ara_should_offset_resultset_on_materialized_cp(
         'mode-design/2014-05/karl-lagerfeld-interview")')
 
 
-def test_ranking_ara_should_not_offset_resultset_on_materialized_cp(
+def test_ranking_area_should_not_offset_resultset_on_materialized_cp(
         application, dummy_request):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(35)]
@@ -2051,3 +2051,37 @@ def test_shop_and_printkiosk_must_not_contain_links_inside_links(testbrowser):
 
     browser = testbrowser('/angebote/printkiosk/vorschau')
     assert len(browser.cssselect('.teaser-printkiosk:first-child a')) == 1
+
+
+def test_dynamic_cps_detect_videos_of_type_video(
+        application, dummy_request):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId':
+                    'http://xml.zeit.de/video/2014-01/1953013471001',
+                    'type': 'video'}]
+
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
+
+    context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
+    area = zeit.web.core.centerpage.get_area(context)
+    teaser = area.values()[0]
+    video = list(teaser)[0]
+
+    assert zeit.web.core.template.is_video(video)
+
+
+def test_dynamic_cps_show_detect_videos_of_type_IVideo(
+        application, dummy_request):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId':
+                    'http://xml.zeit.de/video/2014-01/1953013471001',
+                    'type': 'zeit.brightcove.interfaces.IVideo'}]
+
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
+
+    context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
+    area = zeit.web.core.centerpage.get_area(context)
+    teaser = area.values()[0]
+    video = list(teaser)[0]
+
+    assert zeit.web.core.template.is_video(video)
