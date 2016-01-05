@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2579: Set sourcetype for Webtrekk
 
+- ZON-2278: Make video teasers detectable on dynamic CPs
+
 
 2.44 (2016-01-04)
 -----------------
