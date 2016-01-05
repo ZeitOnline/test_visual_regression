@@ -2057,7 +2057,7 @@ def test_dynamic_cps_detect_videos_of_type_video(
         application, dummy_request):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId':
-                    'http://xml.zeit.de/video/2014-01/1953013471001',
+                     'http://xml.zeit.de/video/2014-01/1953013471001',
                      'type': 'video'}]
 
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
@@ -2074,7 +2074,7 @@ def test_dynamic_cps_show_detect_videos_of_type_IVideo(
         application, dummy_request):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId':
-                    'http://xml.zeit.de/video/2014-01/1953013471001',
+                     'http://xml.zeit.de/video/2014-01/1953013471001',
                      'type': 'zeit.brightcove.interfaces.IVideo'}]
 
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
