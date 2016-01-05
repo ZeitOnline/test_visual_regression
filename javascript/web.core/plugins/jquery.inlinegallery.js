@@ -205,6 +205,8 @@
                     var caption = figcaption || image.closest( 'figure' ).find( 'figcaption' ),
                         imageWidth = image.width();
 
+                    console.log( image.width());
+
                     if ( caption.length && imageWidth > 30 && imageWidth < galleryWidth ) {
                         caption.css({
                             'max-width': imageWidth + 'px',
@@ -217,6 +219,9 @@
                     figcaptions.each( function() {
                         var caption = $( this ),
                             image = caption.prev().find( '.figure__media' );
+
+                        console.log( image );
+                        console.log( image.width());
 
                         figCaptionSize( image, caption );
                     });
