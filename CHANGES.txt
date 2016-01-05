@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2579: Set sourcetype for Webtrekk
 
+- MAINT: Fix pysolr error handling of non-ascii server responses
+
 
 2.44 (2016-01-04)
 -----------------
