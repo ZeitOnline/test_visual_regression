@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - MAINT: Fix pysolr error handling of non-ascii server responses
 
+- FIX: Handle community read errors during recommendation
+
 
 2.44 (2016-01-04)
 -----------------
