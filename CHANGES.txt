@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2591: Make logo pointer appear in IE>=10 again
 
+- HOTFIX: Change timeout for community user_info
+
 
 2.44 (2016-01-04)
 -----------------
