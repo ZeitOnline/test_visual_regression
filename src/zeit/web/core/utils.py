@@ -7,8 +7,8 @@ import jinja2
 import peak.util.proxies
 import zope.component
 
+import zeit.cms.content.sources
 import zeit.cms.interfaces
-import zeit.content.image.interfaces
 
 
 log = logging.getLogger(__name__)
@@ -252,6 +252,17 @@ class LazyProxy(object):
         object.__setattr__(self, '__origin__', origin)
         object.__setattr__(self, '__proxy__', context)
 
+        # Let ourselves be treated like the actual content type we proxy for.
+        if 'type' in self.__proxy__:
+            type_id = self.__proxy__['type']
+            # BBB for really old video objects that were indexed differently.
+            if type_id == 'zeit.brightcove.interfaces.IVideo':
+                type_id = 'video'
+            zope.interface.alsoProvides(
+                # XXX We should tweak the source_class so we don't have to talk
+                # to `.factory`, but that's quite a bit of mechanical hassle.
+                self, CONTENT_TYPE_SOURCE.factory.find(type_id))
+
     def __getattr__(self, key):
         if not self.__exposed__ or not hasattr(self.__origin__, key):
             try:
@@ -265,8 +276,11 @@ class LazyProxy(object):
         if self.__exposed__:
             setattr(self.__origin__, key, value)
         else:
-            # TODO: Properly defer attribute setter until origin is exposed.
-            self.__proxy__[key] = value
+            if key == '__provides__':  # XXX kludge to allow alsoProvides(type)
+                object.__setattr__(self, key, value)
+            else:
+                # TODO Properly defer attribute setter until origin is exposed.
+                self.__proxy__[key] = value
 
     def __delattr__(self, key):
         raise NotImplementedError()
@@ -343,6 +357,9 @@ class LazyProxy(object):
         if self.__proxy__.get('type') != 'link':
             return False
         raise AttributeError('blog')
+
+
+CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()
 
 
 def dump_request(response):
