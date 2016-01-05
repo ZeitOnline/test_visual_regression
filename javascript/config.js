@@ -16,7 +16,7 @@ require.config({
         // $ ./configure --without-all --with-sha1 --with-codecHex --compress=none
         // $ make sjcl.js tidy
         'sjcl': 'libs/sjcl',
-        'bxSlider': 'vendor/jquery.bxslider',
+        'bxSlider': 'web.core/plugins/jquery.bxslider',
         'freewall': 'vendor/freewall',
         'jquery.clarify': 'web.core/plugins/jquery.clarify',
         'jquery.debounce': 'web.core/plugins/jquery.debounce',
