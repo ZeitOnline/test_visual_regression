@@ -26,12 +26,9 @@ $break-onesie: 360px // breakpoint for onesie
 		width: 48%
 		&:after
 			+build-mobile-plus-minus-button()
-		+on-interaction
-			&:after
-				cursor: pointer
 		&--active
 			&:after
-				+build-mobile-plus-minus-button('-')
+				content: "\2212" // U+2212 = − (minus sign)
 		+respond-min($break-tablet-min)
 			display: block
 			width: auto

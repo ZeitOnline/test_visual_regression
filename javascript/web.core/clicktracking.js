@@ -3,7 +3,7 @@
  * @author moritz.stoltenburg@zeit.de, thomas.puppe@zeit.de
  * @version  0.1
  */
-define( [ 'jquery' ], function( $ ) {
+define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
     /**
      * trackElement - collection of the different functions to gather the needed info to track smth
      * @type {Object}
@@ -199,7 +199,7 @@ define( [ 'jquery' ], function( $ ) {
      * @return {string}          breakpoint for webtrekk
      */
     getBreakpoint = function() {
-        return window.ZMO.breakpoint.getTrackingBreakpoint();
+        return Zeit.breakpoint.getTrackingBreakpoint();
     },
     /**
      * returns a string that is webtrekk-safe
@@ -233,7 +233,7 @@ define( [ 'jquery' ], function( $ ) {
 
     return {
         init: function() {
-            if ( typeof window.ZMO === 'undefined' || ( typeof window.wt === 'undefined' && !debugMode ) ) {
+            if ( typeof Zeit === 'undefined' || ( typeof window.wt === 'undefined' && !debugMode ) ) {
                 return;
             }
             /**

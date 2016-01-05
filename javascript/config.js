@@ -30,7 +30,7 @@ require.config({
         'jquery.clarify': [ 'jquery' ],
         'jquery.debounce': [ 'jquery' ],
         'jquery.throttle': [ 'jquery' ],
-        'web.core/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery', 'modernizr' ],
+        'web.core/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery', 'modernizr', 'web.core/zeit' ],
         'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],
         'web.site/plugins/jquery.autoclick': [ 'jquery', 'modernizr' ],
         'web.site/plugins/jquery.fixPosition': [ 'jquery', 'jquery.throttle' ],

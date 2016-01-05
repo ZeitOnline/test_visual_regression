@@ -36,7 +36,6 @@ import zeit.web.core.banner
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
-import zeit.web.core.sources
 
 
 log = logging.getLogger(__name__)
@@ -143,6 +142,9 @@ class Application(object):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
 
+        mapper = zeit.web.core.routing.RoutesMapper()
+        registry.registerUtility(mapper, pyramid.interfaces.IRoutesMapper)
+
         self.settings['version'] = pkg_resources.get_distribution(
             'zeit.web').version
 
@@ -166,7 +168,6 @@ class Application(object):
         log.debug('Configuring Pyramid')
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('instantarticle', '/instantarticle/*traverse')
-        config.add_route('instantarticle_feed', '/instantarticle-feed')
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
@@ -204,25 +205,6 @@ class Application(object):
             param_name='callback'))
 
         config.add_route('xml', '/xml/*traverse')
-
-        try:
-            blacklist = zeit.web.core.sources.BlacklistSource(
-            ).factory.getValues()
-        except Exception, err:
-            log.error('Could not parse route blacklist: {}'.format(err))
-        else:
-            for index, route in enumerate(blacklist):
-                config.add_route(
-                    'blacklist_{}'.format(index), route,
-                    header=pyramid.config.not_(
-                        'host:newsfeed(\.staging)?\.zeit\.de'))
-                config.add_view(
-                    zeit.web.core.view.surrender,
-                    route_name='blacklist_{}'.format(index))
-
-        if not self.settings.get('jinja2.show_exceptions'):
-            config.add_view(view=zeit.web.core.view.service_unavailable,
-                            context=Exception)
 
         config.set_request_property(configure_host('asset'), reify=True)
         config.set_request_property(configure_host('image'), reify=True)
@@ -353,6 +335,7 @@ class Application(object):
         if self.settings.get('dev_environment'):
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
+
 
 factory = Application()
 

@@ -3,7 +3,7 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-define( [ 'modernizr', 'jquery', 'jquery.throttle', 'jquery.inview' ], function( Modernizr, $ ) {
+define( [ 'modernizr', 'jquery', 'web.core/zeit', 'jquery.throttle', 'jquery.inview' ], function( Modernizr, $, Zeit ) {
     var defaults = {
         documentMinHeight: 800,
         jumpHash: '#overscroll-article',
@@ -149,7 +149,7 @@ define( [ 'modernizr', 'jquery', 'jquery.throttle', 'jquery.inview' ], function(
                 // inview event to change to elemen
                 $( config.triggerElement ).on( 'inview', function( event, isInView ) {
                     if ( isInView ) {
-                        if ( typeof window.ZMO === 'object' && window.ZMO.breakpoint.get() === 'desktop' ) {
+                        if ( Zeit.breakpoint.get() === 'desktop' ) {
                             // attach Elements
                             loadElements();
                         } else {

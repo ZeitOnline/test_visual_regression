@@ -1,10 +1,12 @@
 import urlparse
 import logging
 
-import pyramid.interfaces
+import gocept.cache.method
 import grokcore.component
-import pyramid.traversal
 import pyramid.httpexceptions
+import pyramid.interfaces
+import pyramid.traversal
+import pyramid.urldispatch
 import zope.component
 import zope.interface
 
@@ -16,13 +18,14 @@ import zeit.content.gallery.interfaces
 import zeit.content.video.interfaces
 import zeit.magazin.interfaces
 
-import zeit.web.site.module
 import zeit.web.core.article
 import zeit.web.core.centerpage
-import zeit.web.core.template
-import zeit.web.core.utils
 import zeit.web.core.gallery
 import zeit.web.core.interfaces
+import zeit.web.core.sources
+import zeit.web.core.template
+import zeit.web.core.utils
+import zeit.web.site.module
 
 
 log = logging.getLogger(__name__)
@@ -210,3 +213,39 @@ class Video(Traversable):
                 'imagegroup', 'comment-form', 'report-form'):
             tdict['request'].headers['X-SEO-Slug'] = tdict['view_name']
             tdict['view_name'] = ''
+
+
+@zope.interface.implementer(pyramid.interfaces.IRoutesMapper)
+class RoutesMapper(pyramid.urldispatch.RoutesMapper):
+
+    def __call__(self, request):
+        # Duplicated from super class (sigh).
+        try:
+            path = pyramid.urldispatch.decode_path_info(
+                request.environ['PATH_INFO'] or '/')
+        except KeyError:
+            path = '/'
+        except UnicodeDecodeError as e:
+            raise pyramid.exceptions.URLDecodeError(
+                e.encoding, e.object, e.start, e.end, e.reason)
+
+        if not request.headers.get('Host', '').startswith('newsfeed') and (
+                self.matches_blacklist(path)):
+            raise pyramid.httpexceptions.HTTPNotImplemented(
+                headers=[('X-Render-With', 'default')])
+
+        return super(RoutesMapper, self).__call__(request)
+
+    @gocept.cache.method.Memoize(600, ignore_self=True)
+    def compile_blacklist(self):
+        matchers = []
+        for pattern in zeit.web.core.sources.BLACKLIST_SOURCE:
+            matcher, _ = pyramid.urldispatch._compile_route(pattern)
+            matchers.append(matcher)
+        return matchers
+
+    def matches_blacklist(self, path):
+        for matcher in self.compile_blacklist():
+            if matcher(path) is not None:
+                return True
+        return False

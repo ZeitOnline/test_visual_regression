@@ -1141,16 +1141,16 @@ def test_breakpoint_sniffer_script(
 
     if screen_size[0] == 320:
         assert "mobile" == driver.execute_script(
-            "return window.ZMO.breakpoint.get()")
+            "return window.Zeit.breakpoint.get()")
     if screen_size[0] == 520:
         assert "phablet" == driver.execute_script(
-            "return window.ZMO.breakpoint.get()")
+            "return window.Zeit.breakpoint.get()")
     if screen_size[0] == 768:
         assert "tablet" == driver.execute_script(
-            "return window.ZMO.breakpoint.get()")
+            "return window.Zeit.breakpoint.get()")
     if screen_size[0] == 980:
         assert "desktop" == driver.execute_script(
-            "return window.ZMO.breakpoint.get()")
+            "return window.Zeit.breakpoint.get()")
 
 
 def test_hidden_images_must_not_be_loaded_via_js(

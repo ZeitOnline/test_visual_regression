@@ -40,7 +40,7 @@
             1: "redaktion", // Zuordnung/Bereich
             2: "{{ view.tracking_type | lower }}", // Kategorie/Pagetype
             3: "{{ view.ressort | lower }}", // Ressort
-            4: "online", // Online/Sourcetype
+            4: "{{ view.product_id | lower }}", // Online/Sourcetype
             5: "{{ view.sub_ressort | lower }}", // Subressort
             6: "{{ serie }}", // Cluster
             7: "{{ request.path_info | substring_from('/') }}", // doc-path
@@ -60,15 +60,15 @@
             9: "{{ view.banner_channel | lower }}", // Banner-Channel
             10: "{{ 'yes' if view.context.advertising_enabled else 'no' }}", // Banner aktiv?
             11: "", // Fehler
-            12: window.ZMO.getSiteParam('.site'),
-            13: window.ZMO.breakpoint.getTrackingBreakpoint(),
+            12: window.Zeit.getSiteParam("site"),
+            13: window.Zeit.breakpoint.getTrackingBreakpoint(),
             14: "{{ 'alt' if 'zeitmz' in view.banner_channel | default('', True) else 'neu'  }}",
             15: "{{ push }}"
         };
 
         {% if view.is_wrapped %}
         wt.customSessionParameter = {
-            1: window.ZMO.wrapped.client
+            1: window.Zeit.wrapped.client
         };
         {% endif %}
 
