@@ -4,6 +4,8 @@ Change log for zeit.web
 2.47 (unreleased)
 -----------------
 
+- BUG-327: Add webtrekk customerId for authenticated users
+
 - MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
 

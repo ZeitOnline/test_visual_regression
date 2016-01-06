@@ -51,6 +51,13 @@ class AuthenticationPolicy(
                 user_info['sso_verification'] = login_id
             request.session['user'] = user_info
 
+        # Make sure the account server ID is added to the session user info
+        if not request.session['user'].get('ssoid'):
+            sso_info = get_user_info_from_sso_cookie(login_id,
+                                                     conf.get('sso_key'))
+            if sso_info:
+                request.session['user']['ssoid'] = sso_info['id']
+
         # Drupal 6 gives anonymous users a session and uid==0
         # in some cases they where authenticated here, but they should not be!
         if int(user_info['uid']) == 0:
@@ -112,6 +119,7 @@ def get_community_user_info(request):
     if sso_info:
         user_info['name'] = sso_info.get('name')
         user_info['mail'] = sso_info.get('email')
+        user_info['ssoid'] = sso_info['id']
         user_info['uid'] = sso_info['id']
 
     # We still get the users avatar from the community. So we need to call the
