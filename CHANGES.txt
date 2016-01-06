@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2579: Set sourcetype for Webtrekk
 
+- ZON-2250: Add label to storystream
+
 
 2.44 (2016-01-04)
 -----------------
