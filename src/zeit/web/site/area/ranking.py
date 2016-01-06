@@ -133,7 +133,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                     result.append(content)
         return result
 
-    @zeit.web.reify('default-term')
+    @zeit.web.reify('default_term')
     def uids_above(self):
         if not self._hide_dupes:
             return zeit.web.dont_cache([])
