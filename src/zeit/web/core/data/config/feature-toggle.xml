@@ -3,4 +3,5 @@
   <article_lineage>true</article_lineage>
   <iqd>true</iqd>
   <third_party_modules>true</third_party_modules>
+  <tracking>true</tracking>
 </features>

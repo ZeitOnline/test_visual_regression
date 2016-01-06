@@ -132,9 +132,9 @@ class Base(object):
             'iqd')
 
     @zeit.web.reify
-    def enable_tracking(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('enable_tracking', True)
+    def tracking_is_enabled(self):
+        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.factory.find(
+            'tracking')
 
     def _set_response_headers(self):
         # ZMO Version header
