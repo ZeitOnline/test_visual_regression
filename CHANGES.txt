@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: fix webtrekk tests
 
+- MAINT: Add WAI-ARIA roles, states, and properties for accordion component
+
 
 2.46 (2016-01-06)
 -----------------
