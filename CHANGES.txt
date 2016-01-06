@@ -4,7 +4,7 @@ Change log for zeit.web
 2.47 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: fix webtrekk tests
 
 
 2.46 (2016-01-06)
