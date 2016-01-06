@@ -1,41 +1,39 @@
 import ast
-import logging
-import os.path
-import pkg_resources
-import re
-import urlparse
-
 import bugsnag
 import bugsnag.wsgi.middleware
 import jinja2
 import jinja2.ext
+import logging
+import os.path
+import pkg_resources
 import pyramid.authorization
 import pyramid.config
 import pyramid.renderers
 import pyramid_beaker
 import pyramid_jinja2
 import pyramid_zodbconn
+import pysolr
+import re
 import requests.sessions
+import urlparse
 import venusian
-import zope.app.appsetup.product
-import zope.component
-import zope.configuration.xmlconfig
-import zope.interface
-import zope.interface.declarations
-
 import zeit.cms.content.xmlsupport
 import zeit.cms.repository.file
 import zeit.cms.repository.folder
 import zeit.cms.repository.interfaces
 import zeit.cms.repository.repository
 import zeit.connector
-
 import zeit.web
 import zeit.web.core
 import zeit.web.core.banner
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
+import zope.app.appsetup.product
+import zope.component
+import zope.configuration.xmlconfig
+import zope.interface
+import zope.interface.declarations
 
 
 log = logging.getLogger(__name__)
@@ -440,3 +438,12 @@ zeit.cms.repository.folder.Folder.__parent__ = property(
 
 # Skip superfluous disk accesses, since we never use netrc for authentication.
 requests.sessions.get_netrc_auth = lambda *args, **kw: None
+
+
+# Allow pysolr error handling to deal with non-ascii HTML error pages
+def scrape_response_nonascii(self, headers, response):
+    if isinstance(response, str):
+        response = response.decode('utf-8')
+    return original_scrape_response(self, headers, response)
+original_scrape_response = pysolr.Solr._scrape_response
+pysolr.Solr._scrape_response = scrape_response_nonascii

@@ -283,7 +283,7 @@ class PostComment(zeit.web.core.view.Base):
     def _get_recommendations(self, unique_id, pid):
         comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
-        if comment_thread and comment_thread['index'][pid]:
+        if comment_thread and comment_thread.get('index', {})[pid]:
             comment = comment_thread['index'][pid]
             if len(comment['fans']):
                 return comment['fans'].split(',')
@@ -293,7 +293,7 @@ class PostComment(zeit.web.core.view.Base):
     def _get_commenter_id(self, unique_id, pid):
         comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
-        if comment_thread and comment_thread['index'][pid]:
+        if comment_thread and comment_thread.get('index', {})[pid]:
             return comment_thread['index'][pid]['uid']
 
     def _nid_by_comment_thread(self, unique_id):
