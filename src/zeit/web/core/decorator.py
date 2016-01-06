@@ -11,9 +11,6 @@ import zope.component
 import zeit.content.cp.interfaces
 import zeit.edit.interfaces
 
-import zeit.web.core.interfaces
-import zeit.web.core.jinja
-
 
 __all__ = [
     'reify', 'register_area', 'register_module', 'register_filter',
@@ -59,6 +56,8 @@ def JinjaEnvRegistrator(env_attr, marker=None, category='jinja'):  # NOQA
     :returns: Decorator that registers functions to the jinja context
     :rtype: types.FunctionType
     """
+    import zeit.web.core.jinja  # Prevent circular import (zeit.web.__init__)
+
     def registrator(func):
         """This decorator recronstructs the decorated function and injects
         the safeguarded codeblock into the dynamically created counterpart.
@@ -279,6 +278,8 @@ def register_module(name):
     If your module template is self-sufficient, you can even skip the python
     module implementation and registration.
     """
+    # Prevent circular import (zeit.web.__init__)
+    import zeit.web.core.interfaces
 
     def registrator(cls):
         gsm = zope.component.getGlobalSiteManager()
