@@ -64,7 +64,7 @@
         <noscript>
             <link href="{{ request.asset_host }}/css/icons/magazin.fallback.css" rel="stylesheet">
         </noscript>
-        {% if view.third_party_modules_is_enabled and view.enable_iqd%}
+        {% if view.third_party_modules_is_enabled and view.iqd_is_enabled%}
             <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
             <script type="text/javascript" src="{{ request.asset_host }}/js/libs/iqd/adam.js"></script>
 

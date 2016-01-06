@@ -55,8 +55,6 @@ class Application(object):
             None, settings['app_servers'].split(','))
         settings['enable_trackers'] = bool(settings.get(
             'enable_trackers', True))
-        settings['enable_iqd'] = bool(settings.get(
-            'enable_iqd', True))
         settings['linkreach_host'] = maybe_convert_egg_url(
             settings.get('linkreach_host', ''))
 

@@ -45,7 +45,7 @@
         <!-- IVW -->
         <script id="ivw-v2" type="text/javascript" src="https://script.ioam.de/iam.js"></script>
     {% endif %}
-    {% if view.third_party_modules_is_enabled and view.enable_iqd %}
+    {% if view.third_party_modules_is_enabled and view.iqd_is_enabled %}
         {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
         {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}

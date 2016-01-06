@@ -127,9 +127,9 @@ class Base(object):
             'third_party_modules')
 
     @zeit.web.reify
-    def enable_iqd(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('enable_iqd', True)
+    def iqd_is_enabled(self):
+        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.factory.find(
+            'iqd')
 
     @zeit.web.reify
     def enable_tracking(self):
