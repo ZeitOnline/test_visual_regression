@@ -122,7 +122,7 @@ class Base(object):
             return '{}/{}'.format(conf.get('vgwort_url'), token)
 
     @zeit.web.reify
-    def enable_third_party_modules(self):
+    def third_party_modules_is_enabled(self):
         return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.factory.find(
             'third_party_modules')
 

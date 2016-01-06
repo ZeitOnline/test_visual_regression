@@ -217,7 +217,7 @@ def test_ivw_tracking_for_mobile_and_desktop_and_wrapper(
         return True
 
     monkeypatch.setattr(
-        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
 
     driver = selenium_driver
 
