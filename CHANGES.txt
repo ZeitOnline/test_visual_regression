@@ -1,18 +1,34 @@
 Change log for zeit.web
 =======================
 
-2.45 (unreleased)
+2.47 (unreleased)
+-----------------
+
+- MAINT: Add WAI-ARIA roles, states, and properties for accordion component
+
+
+2.46 (2016-01-06)
+-----------------
+
+- HOTFIX: Change webtrekk contentId
+
+
+2.45 (2016-01-06)
 -----------------
 
 - ZON-2230: Multiple Infoboxes do not collapse anymore (includes code makeover)
 
 - ZON-2579: Set sourcetype for Webtrekk
 
+- MAINT: Fix pysolr error handling of non-ascii server responses
+
+- FIX: Handle community read errors during recommendation
+
 - ZON-2278: Make video teasers detectable on dynamic CPs
 
 - ZON-2591: Make logo pointer appear in IE>=10 again
 
-- MAINT: Add WAI-ARIA roles, states, and properties for accordion component
+- HOTFIX: Change timeout for community user_info
 
 
 2.44 (2016-01-04)
