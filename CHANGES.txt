@@ -8,6 +8,10 @@ Change log for zeit.web
 
 - ZON-2579: Set sourcetype for Webtrekk
 
+- MAINT: Fix pysolr error handling of non-ascii server responses
+
+- FIX: Handle community read errors during recommendation
+
 - ZON-2278: Make video teasers detectable on dynamic CPs
 
 - ZON-2591: Make logo pointer appear in IE>=10 again
