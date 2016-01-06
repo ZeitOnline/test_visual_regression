@@ -13,50 +13,36 @@ log = logging.getLogger(__name__)
 
 class AuthenticationPolicy(
         pyramid.authentication.SessionAuthenticationPolicy):
-    """An authentication policy that queries the Community backend for user
-    validation and additional user data and stores the result in the session.
+    """An authentication policy that reads and validates the SSO cookie,
+    queries the Community backend for user validation and additional user data
+    and stores the result in the session.
     """
 
     def authenticated_userid(self, request):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
-        login_id = request.cookies.get(conf.get('sso_cookie'))
+        cookie = request.cookies.get(conf.get('sso_cookie'))
 
         # If no sso cookie is present, bail out straight away:
-        if not login_id:
+        if not cookie:
             if 'user' in request.session:
                 del request.session['user']
             return
 
         # Make sure sso_verification in the user session matches the one send
         # via request
-        if login_id and request.session.get('user') and (
-                request.session['user'].get('sso_verification') != login_id):
+        if cookie and request.session.get('user') and (
+                request.session['user'].get('sso_verification') != cookie):
             del request.session['user']
 
-        drupal_id = None
-        if request.session.get('user') and (
-                request.session['user'].get('uid')):
-            drupal_id = request.session['user'].get('uid')
-
-        # If we have a community cookie for the current user, store/retrieve
-        # the user info in/from the session
-        if drupal_id and ('user' in request.session) and drupal_id == (
-                request.session['user'].get('uid')):
+        if request.session.get('user') and request.session['user'].get('uid'):
+            # retrieve the user info from the session
             user_info = request.session['user']
         else:
+            # store the user info in the session
             log.debug("Request user_info")
-            user_info = get_community_user_info(request)
-            if login_id:
-                user_info['sso_verification'] = login_id
+            user_info = get_user_info(request)
             request.session['user'] = user_info
-
-        # Make sure the account server ID is added to the session user info
-        if not request.session['user'].get('ssoid'):
-            sso_info = get_user_info_from_sso_cookie(login_id,
-                                                     conf.get('sso_key'))
-            if sso_info:
-                request.session['user']['ssoid'] = sso_info['id']
 
         # Drupal 6 gives anonymous users a session and uid==0
         # in some cases they where authenticated here, but they should not be!
@@ -67,13 +53,9 @@ class AuthenticationPolicy(
 
 
 def reload_user_info(request):
-        if request.authenticated_userid:
-            user_info = get_community_user_info(request)
-            if not user_info:
-                return False
-            request.session['user'] = user_info
-            return True
-        return False
+    if request.session.get('user'):
+        del request.session['user']
+    return bool(request.authenticated_userid)
 
 
 def get_user_info_from_sso_cookie(cookie, key):
@@ -99,7 +81,7 @@ def recursively_call_community(req, tries):
         return
 
 
-def get_community_user_info(request):
+def get_user_info(request):
     """Returns additional information from the Community backend by injecting
     the Cookie that Community has set when the user logged in there.
     """
@@ -120,7 +102,8 @@ def get_community_user_info(request):
         user_info['name'] = sso_info.get('name')
         user_info['mail'] = sso_info.get('email')
         user_info['ssoid'] = sso_info['id']
-        user_info['uid'] = sso_info['id']
+        # user_info['uid'] = sso_info['id']
+        user_info['sso_verification'] = cookie
 
     # We still get the users avatar from the community. So we need to call the
     # community.
