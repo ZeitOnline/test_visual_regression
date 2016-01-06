@@ -111,7 +111,7 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
     assert '1: "redaktion",' in browser.contents
     assert '2: "article",' in browser.contents
     assert '3: "lebensart",' in browser.contents
-    assert '4: "online",' in browser.contents
+    assert '4: "zede",' in browser.contents
     assert '5: "essen-trinken",' in browser.contents
     assert '6: "weinkolumne",' in browser.contents
     assert '7: "03",' in browser.contents
@@ -131,8 +131,8 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
     assert '9: "zeitmz/essenundtrinken/article",' in browser.contents
     assert '10: "yes",' or '10: "",' in browser.contents
     assert '11: "",' in browser.contents
-    assert '12: window.ZMO.getSiteParam(\'.site\'),' in browser.contents
-    assert '13: window.ZMO.breakpoint.getTrackingBreakpoint(),' \
+    assert '12: window.Zeit.getSiteParam("site"),' in browser.contents
+    assert '13: window.Zeit.breakpoint.getTrackingBreakpoint(),' \
         in browser.contents
     assert '14: "alt"' in browser.contents
 
@@ -181,7 +181,7 @@ def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
     assert '1: "redaktion",' in browser.contents
     assert '2: "centerpage",' in browser.contents
     assert '3: "lebensart",' in browser.contents
-    assert '4: "online",' in browser.contents
+    assert '4: "zede",' in browser.contents
     assert '5: "",' in browser.contents
     assert '6: "",' in browser.contents
     assert '7: "test-cp-zmo",' in browser.contents
@@ -206,7 +206,7 @@ def test_webtrekk_series_tag_is_set_corectly(testserver, testbrowser):
 
 def test_webtrekk_has_session_parameter(testserver, testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index?app-content')
-    assert '1: window.ZMO.wrapped.client' in browser.contents
+    assert '1: window.Zeit.wrapped.client' in browser.contents
 
 
 @pytest.mark.xfail(reason='tracking scripts & pixels may timeout')

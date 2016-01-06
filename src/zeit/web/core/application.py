@@ -1,42 +1,39 @@
 import ast
-import logging
-import os.path
-import pkg_resources
-import re
-import urlparse
-
 import bugsnag
 import bugsnag.wsgi.middleware
 import jinja2
 import jinja2.ext
+import logging
+import os.path
+import pkg_resources
 import pyramid.authorization
 import pyramid.config
 import pyramid.renderers
 import pyramid_beaker
 import pyramid_jinja2
 import pyramid_zodbconn
+import pysolr
+import re
 import requests.sessions
+import urlparse
 import venusian
-import zope.app.appsetup.product
-import zope.component
-import zope.configuration.xmlconfig
-import zope.interface
-import zope.interface.declarations
-
 import zeit.cms.content.xmlsupport
 import zeit.cms.repository.file
 import zeit.cms.repository.folder
 import zeit.cms.repository.interfaces
 import zeit.cms.repository.repository
 import zeit.connector
-
 import zeit.web
 import zeit.web.core
 import zeit.web.core.banner
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
-import zeit.web.core.sources
+import zope.app.appsetup.product
+import zope.component
+import zope.configuration.xmlconfig
+import zope.interface
+import zope.interface.declarations
 
 
 log = logging.getLogger(__name__)
@@ -139,6 +136,9 @@ class Application(object):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
 
+        mapper = zeit.web.core.routing.RoutesMapper()
+        registry.registerUtility(mapper, pyramid.interfaces.IRoutesMapper)
+
         self.settings['version'] = pkg_resources.get_distribution(
             'zeit.web').version
 
@@ -162,7 +162,6 @@ class Application(object):
         log.debug('Configuring Pyramid')
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('instantarticle', '/instantarticle/*traverse')
-        config.add_route('instantarticle_feed', '/instantarticle-feed')
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
@@ -199,25 +198,6 @@ class Application(object):
             param_name='callback'))
 
         config.add_route('xml', '/xml/*traverse')
-
-        try:
-            blacklist = zeit.web.core.sources.BlacklistSource(
-            ).factory.getValues()
-        except Exception, err:
-            log.error('Could not parse route blacklist: {}'.format(err))
-        else:
-            for index, route in enumerate(blacklist):
-                config.add_route(
-                    'blacklist_{}'.format(index), route,
-                    header=pyramid.config.not_(
-                        'host:newsfeed(\.staging)?\.zeit\.de'))
-                config.add_view(
-                    zeit.web.core.view.surrender,
-                    route_name='blacklist_{}'.format(index))
-
-        if not self.settings.get('jinja2.show_exceptions'):
-            config.add_view(view=zeit.web.core.view.service_unavailable,
-                            context=Exception)
 
         config.set_request_property(configure_host('asset'), reify=True)
         config.set_request_property(configure_host('image'), reify=True)
@@ -349,6 +329,7 @@ class Application(object):
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
 
+
 factory = Application()
 
 
@@ -452,3 +433,12 @@ zeit.cms.repository.folder.Folder.__parent__ = property(
 
 # Skip superfluous disk accesses, since we never use netrc for authentication.
 requests.sessions.get_netrc_auth = lambda *args, **kw: None
+
+
+# Allow pysolr error handling to deal with non-ascii HTML error pages
+def scrape_response_nonascii(self, headers, response):
+    if isinstance(response, str):
+        response = response.decode('utf-8')
+    return original_scrape_response(self, headers, response)
+original_scrape_response = pysolr.Solr._scrape_response
+pysolr.Solr._scrape_response = scrape_response_nonascii

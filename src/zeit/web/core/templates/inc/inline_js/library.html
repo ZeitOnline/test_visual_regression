@@ -2,8 +2,9 @@
     // Picture element HTML5 shiv
     document.createElement( 'picture' );
 
-    window.ZMO = {
+    window.Zeit = {
         jsconfHost: '{{ request.jsconf_host }}',
+        communityHost: '{{ request.registry.settings.community_host }}',
         view: {
             {% for key, value in view.js_vars -%}
                 '{{ key }}': '{{ value | remove_break }}',
@@ -22,43 +23,25 @@
             ivwclient: /Android/i.test(navigator.userAgent) ? 'aadzeion' : 'appzeion'
         },
         {% endif -%}
-        clientWidth: Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 ),
-        mobileWidth: 768,
-        noliquidMaxWidth: 1024,
+        tabletMinWidth: 768,
         sideAdMinWidth: 998,
+        noliquidMaxWidth: 1024,
         maxWidth: 1280,
-        isMobileView: function() {
-            return this.clientWidth < this.mobileWidth;
+        getClientWidth: function() {
+            return Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 );
         },
-        getSiteParam: function( concatString ) {
-            concatString = concatString || '';
+        isMobileView: function() {
+            return this.getClientWidth() < this.tabletMinWidth;
+        },
+        getSiteParam: function( text ) {
+            text = text || '';
             if ( this.isMobileView() ) {
                 if ( this.is_wrapped ) {
                     return 'mobile.app.' + this.wrapped.client;
                 }
-                return "mobile" + concatString;
+                return 'mobile.' + text;
             }
-            return "desktop" + concatString;
-        },
-        cookieCreate: function ( name, value, days, domain ) {
-            if ( arguments.length < 4 ) domain = 'zeit.de';
-            var expires = '';
-            if ( days ) {
-                var date = new Date();
-                date.setTime( date.getTime() + ( days * 24 * 60 * 60 * 1000 ) );
-                expires = '; expires=' + date.toGMTString();
-            }
-            document.cookie = name + '=' + value + expires + '; path=/; domain=' + domain;
-        },
-        cookieRead: function ( name ) {
-            var nameEQ = name + '=';
-            var ca = document.cookie.split( ';' );
-            for( var i=0; i < ca.length; i++ ) {
-                var c = ca[i];
-                while ( c.charAt(0) == ' ' ) c = c.substring( 1, c.length );
-                if ( c.indexOf( nameEQ ) === 0 ) return c.substring( nameEQ.length, c.length );
-            }
-            return null;
+            return 'desktop.' + text;
         },
         viewport: {
             meta: document.getElementById('viewport-meta'),
@@ -66,8 +49,6 @@
             banner: 'width=1280',
             set: function( key ) {
                 this.meta.setAttribute( 'content', this[ key ] );
-                {# update clientWidth after swicth #}
-                ZMO.clientWidth = Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 );
             },
             isLandscape: function() {
                 if ( window.matchMedia ) {
@@ -103,7 +84,18 @@
                 return point === 'desktop' ? 'stationaer' : point;
             }
         },
-        communityHost: '{{ request.registry.settings.community_host }}'
+        queue: [],
+        require: function() {
+            this.queue.push( arguments );
+        }
+    };
+
+    {#
+    // Alias for Meetrics. Has been added with v2.44 as fallback.
+    // TODO: remove as soon as Meetrics uses Zeit.isMobileView().
+    #}
+    window.ZMO = {
+        isMobileView: function() { return Zeit.isMobileView(); }
     };
 
 
@@ -111,15 +103,15 @@
     {%- if view.banner_toggles('viewport_zoom') == 'tablet' %}
     {# /* ZON style: set viewport for tablets */ #}
 
-    if ( screen.width >= window.ZMO.mobileWidth && screen.width < window.ZMO.maxWidth ) {
-        window.ZMO.viewport.set( 'banner' );
+    if ( screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.maxWidth ) {
+        window.Zeit.viewport.set( 'banner' );
     }
 
     {%- elif view.banner_toggles('viewport_zoom') == 'tablet-landscape' %}
     {# /* ZMO style: set viewport for tablets in landscape mode */ #}
 
-    if ( screen.width >= window.ZMO.mobileWidth && screen.width < window.ZMO.maxWidth && window.ZMO.viewport.isLandscape() ) {
-        window.ZMO.viewport.set( 'banner' );
+    if ( screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.maxWidth && window.Zeit.viewport.isLandscape() ) {
+        window.Zeit.viewport.set( 'banner' );
     }
 
     {%- endif %}

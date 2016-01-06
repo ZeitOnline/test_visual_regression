@@ -392,9 +392,9 @@ def test_infobox_mobile_actions(testserver, selenium_driver, screen_size):
         testserver.url))
     infobox = selenium_driver.find_element_by_id('sauriersindsuper')
     tabnavigation = infobox.find_elements_by_class_name('infobox__navigation')
-    tabpanels = infobox.find_elements_by_class_name('infobox-tab__content')
+    tabpanels = infobox.find_elements_by_class_name('infobox-tab__panel')
     clicker = infobox.find_elements_by_css_selector(
-        '.infobox-tab .infobox-tab__title')
+        '.infobox-tab .infobox-tab__link')
 
     assert infobox.is_displayed(), 'Infobox missing'
 
@@ -425,9 +425,9 @@ def test_infobox_desktop_actions(testserver, selenium_driver, screen_size):
     infobox = selenium_driver.find_element_by_id('sauriersindsuper')
     tabnavigation = infobox.find_elements_by_class_name(
         'infobox__navigation')[0]
-    tabpanels = infobox.find_elements_by_class_name('infobox-tab__content')
+    tabpanels = infobox.find_elements_by_class_name('infobox-tab__panel')
     clicker = infobox.find_elements_by_css_selector(
-        '.infobox__navigation .infobox-tab__title')
+        '.infobox__navigation .infobox-tab__link')
 
     assert infobox.is_displayed(), 'Infobox missing'
 
