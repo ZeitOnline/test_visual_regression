@@ -152,7 +152,7 @@ def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
         'http://xml.zeit.de/zeit-online/article/01')
 
     request = mock.MagicMock()
-    request.is_authenticated_user = True
+    request.authenticated_userid = 123
     request.session = {'user': {'uid': '123', 'name': 'Max'}}
     request.path_url = 'http://xml.zeit.de/zeit-online/article/01'
     request.params = {'cid': None}
