@@ -30,6 +30,8 @@ Change log for zeit.web
 
 - ZON-2591: Make logo pointer appear in IE>=10 again
 
+- ZON-2302: Fix user avatar in ZMO header
+
 - HOTFIX: Change timeout for community user_info
 
 
