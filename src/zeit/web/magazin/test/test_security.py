@@ -4,6 +4,7 @@ from zeit.web.core.comments import get_thread
 from zeit.web.core.security import AuthenticationPolicy
 from zeit.web.core.security import get_user_info
 import pytest
+import zeit.web.core.security
 
 
 @pytest.fixture
@@ -22,7 +23,7 @@ def test_cookieless_request_clears_session(policy, dummy_request):
 
 
 def test_session_cache_cleared_when_id_changes(
-        policy, dummy_request, mockserver_factory):
+        policy, dummy_request, mockserver_factory, monkeypatch):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>457322</uid>
@@ -32,14 +33,22 @@ def test_session_cache_cleared_when_id_changes(
         </roles>
     </user>
     """
+
+    def sso_cookie_patch(cookie, key):
+        return {
+            'name': 'my_name',
+            'email': 'my_email@example.com',
+            'id': 'foo'}
+
+    monkeypatch.setattr(zeit.web.core.security, 'get_user_info_from_sso_cookie', sso_cookie_patch)
     server = mockserver_factory(user_xml)
     dummy_request.registry.settings['community_host'] = server.url
     dummy_request.cookies['http://my_sso_cookie'] = 'foo'
     # Session still contains old user id and sensitive information
     dummy_request.session['user'] = dict(uid=42, name='s3crit')
-    dummy_request.cookies['login_id'] = 'foo'
     dummy_request.headers['Cookie'] = ''
-    assert policy.authenticated_userid(dummy_request) == '457322'
+    assert policy.authenticated_userid(dummy_request) == 'foo'
+    assert dummy_request.session['user']['uid'] == '457322'
     assert dummy_request.session['user']['name'] == 'test-user'
 
 
