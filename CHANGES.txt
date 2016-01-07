@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
+- ZON-2594: New customParameter for Webtrekk: platform
+
 
 2.46 (2016-01-06)
 -----------------
