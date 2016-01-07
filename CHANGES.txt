@@ -8,9 +8,7 @@ Change log for zeit.web
 
 - MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
-- ZON-2214: Enable Nextread for video pages again
-
-- ZON-2416: Insert new meta robot rules for Serienseiten
+- ZON-2214: Enable Nextread for video pages
 
 
 2.46 (2016-01-06)

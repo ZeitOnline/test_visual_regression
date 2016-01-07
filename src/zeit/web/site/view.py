@@ -97,11 +97,10 @@ class Base(zeit.web.core.view.Base):
 
         if path('/angebote') and not path('/angebote/partnersuche'):
             return 'index,nofollow,noodp,noydir,noarchive'
-        elif (path('/thema') or path('/serie')) and (
-                'p' not in query or query['p'] == ['1']):
-                    return 'follow,noarchive'
+        elif path('/thema') and ('p' not in query or query['p'] == ['1']):
+            return 'follow,noarchive'
         elif path('/banner') or path('/test') or path('/templates') \
-                or path('/thema') or path('/serie'):
+                or path('/thema'):
                 return 'noindex,follow,noodp,noydir,noarchive'
         elif path('/autoren/index'):
             return 'noindex,follow'

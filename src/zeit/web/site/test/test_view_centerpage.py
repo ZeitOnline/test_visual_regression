@@ -768,33 +768,6 @@ def test_robots_rules_for_thema_paths(application):
     assert view.meta_robots == 'follow,noarchive'
 
 
-def test_robots_rules_for_serie_paths(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/index')
-    request = pyramid.testing.DummyRequest()
-    request.path = '/serie/'
-
-    # paginated page
-    request.url = 'http://localhost/serie/test?p=2'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
-
-    # paginated page starting with 1
-    request.url = 'http://localhost/serie/test?p=10'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
-
-    # first page with param
-    request.url = 'http://localhost/serie/test?p=1'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'follow,noarchive'
-
-    # first page without param
-    request.url = 'http://localhost/serie/test'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'follow,noarchive'
-
-
 def test_robots_rules_for_angebote_paths(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
