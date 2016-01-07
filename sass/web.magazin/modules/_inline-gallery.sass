@@ -17,7 +17,9 @@ $gallery-dots-diameter: 8px
         color: $grey--mid
         margin: $small auto 0
         max-width: none
-        padding: 0
+        padding: 0 $page-padding--small
+        +respond-min($break-1)
+            padding: 0
     .figure__copyright
         color: $charcoal
         a
@@ -34,10 +36,6 @@ html.js
         .inline-gallery
             visibility: visible
 
-.bx-wrapper
-    display: table
-    caption-side: top
-    width: 100%
 .bx-wrapper--touch
     .bx-controls
         padding: $page-padding $page-padding 1em
@@ -48,7 +46,6 @@ html.js
         padding: $page-padding
         display: none
         +respond-min($break-1)
-            display: table-caption
             padding: 0 0 $page-padding
     +respond-min($break-1)
         .figure__index
@@ -58,7 +55,6 @@ html.js
 
 // controls
 .bx-controls
-    display: table-caption
     text-align: right
     padding: $page-padding $page-padding em(12px)
     +respond-min($break-1)
