@@ -2,8 +2,7 @@
     var clickCount = {
         webtrekk: function(id) {
             // webtrekk
-            if (typeof id === 'undefined') return;
-            if (typeof wt !== 'undefined' && typeof wt.sendinfo === 'function') {
+            if (id !== undefined && typeof wt !== 'undefined' && typeof wt.sendinfo === 'function') {
                 wt.sendinfo({
                     linkId: id + window.location.pathname
                 });
@@ -16,17 +15,16 @@
             }
         },
         ivw: function() {
-            // ivw version 1
-            if ('Z_IVW_RESSORT' in window) {
+            if (typeof iom !== 'undefined' && typeof iam_data !== 'undefined') {
+                // ivw version 2
+                iom.c(iam_data, 1);
+            } else if ('IVW' in window) {
+                // ivw version 1
                 var img = document.createElement('img');
-                img.src = 'http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/' + window.Z_IVW_RESSORT + '?r=' + escape(document.referrer) + '&amp;d=' + (Math.random() * 100000);
+                img.src = window.IVW + '?r=' + escape(document.referrer) + '&amp;d=' + (Math.random() * 100000);
                 img.width = 1;
                 img.height = 1;
-                img.className = 'ivw-aja-pixel';
-            }
-            // ivw version 2
-            if (typeof iom !== 'undefined' && typeof iam_data !== 'undefined') {
-                iom.c(iam_data, 1);
+                img.className = 'visually-hidden';
             }
         },
         cc: function() {
