@@ -10,6 +10,9 @@ Change log for zeit.web
 
 - FIX: Handle community read errors during recommendation (for real now)
 
+- FIX: Be more defensive in several places:
+  * Solr results with references to retracted images
+
 
 2.46 (2016-01-06)
 -----------------
