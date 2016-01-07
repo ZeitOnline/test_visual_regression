@@ -80,6 +80,21 @@ def test_comment_count_should_fallback_to_zero_if_count_unavailable(
         'Keine Kommentare')
 
 
+def test_comment_count_should_be_empty_for_link_object(
+        comment_counter, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.comments, 'request_counts', lambda *_: """
+    <?xml version="1.0" encoding="UTF-8"?>
+    <nodes>
+        <node comment_count="129" url="/artikel/01"/>
+    </nodes>""")
+
+    resp = comment_counter(no_interpolation='true',
+                           unique_id=NS + 'zeit-online/cp-content/link_teaser')
+    assert 'comment_count' in resp
+    assert not resp['comment_count']
+
+
 def test_request_thread_should_respond(application, mockserver):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')

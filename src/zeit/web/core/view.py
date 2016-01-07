@@ -944,7 +944,8 @@ def json_comment_count(request):
         articles = list(
             zeit.web.site.view_centerpage.Centerpage(context, request))
     else:
-        articles = [zeit.content.article.interfaces.IArticle(context)]
+        article = zeit.content.article.interfaces.IArticle(context, None)
+        articles = [article] if article is not None else []
 
     counts = zeit.web.core.comments.get_counts(*[a.uniqueId for a in articles])
     comment_count = {}

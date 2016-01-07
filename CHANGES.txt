@@ -12,6 +12,7 @@ Change log for zeit.web
 
 - FIX: Be more defensive in several places:
   * Solr results with references to retracted images
+  * Comment count of objects that are neither CP nor Article
 
 
 2.46 (2016-01-06)
