@@ -35,7 +35,8 @@ class AuthenticationPolicy(
                 request.session['user'].get('sso_verification') != cookie):
             del request.session['user']
 
-        if request.session.get('user') and request.session['user'].get('uid'):
+        if request.session.get('user') and (
+                is_reliable_user_info(request.session['user'])):
             # retrieve the user info from the session
             user_info = request.session['user']
         else:
@@ -43,12 +44,21 @@ class AuthenticationPolicy(
             log.debug("Request user_info")
             user_info = get_user_info(request)
             # require successful community login *and* valid SSO ID
-            if not int(user_info['uid']) or not user_info.get('ssoid'):
+            if not is_reliable_user_info(user_info):
                 return
             request.session['user'] = user_info
 
-
         return user_info['uid']
+
+
+def is_reliable_user_info(user_info):
+    if user_info and user_info.get('uid') and user_info.get('ssoid'):
+        try:
+            if int(user_info['uid']) is not 0:
+                return True
+        except:
+            pass
+    return False
 
 
 def reload_user_info(request):
