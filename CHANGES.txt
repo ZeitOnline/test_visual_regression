@@ -10,6 +10,9 @@ Change log for zeit.web
 
 - ZON-2214: Enable Nextread for video pages again
 
+- ZON-2416: Insert new meta robot rules for Serienseiten
+
+
 2.46 (2016-01-06)
 -----------------
 
