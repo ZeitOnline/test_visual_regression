@@ -58,7 +58,7 @@ def is_reliable_user_info(user_info):
     possibly old user session with missing values.
     Also implicitly checks for successfully decoded SSO cookie ('ssoid').
     """
-    if user_info and user_info.get('uid') and user_info.get('ssoid'):
+    if user_info and 'uid' in user_info and user_info.get('ssoid'):
         return True
 
     return False
