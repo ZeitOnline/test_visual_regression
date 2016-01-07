@@ -391,6 +391,7 @@ class Application(object):
         if 'dogpile_cache.pylibmc_url' in settings:
             settings['dogpile.cache.arguments.url'] = settings[
                 'dogpile_cache.pylibmc_url'].split(';')
+            del settings['dogpile_cache.pylibmc_url']
 
         for key in ['dogpile_cache.arguments.lock_timeout',
                     'dogpile_cache.arguments.memcache_expire_time']:
@@ -399,14 +400,17 @@ class Application(object):
 
         behaviors = {}
         behavior_prefix = 'dogpile_cache.pylibmc_behavior.'
+        to_remove = []
         for key, value in settings.items():
             if not key.startswith(behavior_prefix):
                 continue
             behaviors[key.replace(behavior_prefix, '')] = value
+            to_remove.append(key)
         if behaviors:
             convert = beaker.util.coerce_memcached_behaviors
             settings['dogpile_cache.arguments.behaviors'] = convert(behaviors)
-
+            for key in to_remove:
+                del settings[key]
 
 factory = Application()
 
