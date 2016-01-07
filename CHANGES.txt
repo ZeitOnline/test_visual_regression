@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
+- FIX: Handle community read errors during recommendation (for real now)
+
 
 2.46 (2016-01-06)
 -----------------
