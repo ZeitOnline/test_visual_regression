@@ -246,9 +246,8 @@
                 // fix ad columns
                 $( '#iqdBackgroundLeft, #iqdBackgroundRight' ).css( { height: document.body.offsetHeight + 'px' } );
 
+                setFigCaptionWidth( figures.first() );
             };
-
-            setFigCaptionWidth( figures.first() );
 
             options.onSlideBefore = function( slide ) {
                 setFigCaptionWidth( slide );
