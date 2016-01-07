@@ -33,7 +33,7 @@ define( function() {
                     var img = document.createElement( 'img' );
                     img.src = 'http://cc.zeit.de/cc.gif?banner-channel=' + encodeURIComponent( Zeit.view.banner_channel ) +
                                 '&amp;r=' + encodeURIComponent( document.referrer ) +
-                                '&amp;rand=' + Math.random() * 10000000000000000;
+                                '&amp;rand=' + Math.random() * 100000;
                 },
                 all: function( id ) {
                     // start all tracking functions
