@@ -7,8 +7,7 @@
 {% block media_block_item %}figure__media{% endblock %}
 
 {% block media_caption_content %}
-    {# NOTE: remove the '+ 1' when Jinja version was upgraded to >= 2.8, older versions count wrong #}
-    <span class="figure__index">{{ image_loop.index }}/{{ image_loop.length + 1 }}</span>
+    <span class="figure__index">{{ image_loop.index }}/{{ image_loop.length }}</span>
     <span class="figure__text">{{ image.caption }}</span>
     {{ super() }}
 {% endblock %}
