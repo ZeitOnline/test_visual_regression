@@ -106,7 +106,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 window.IQD_ReloadHandle();
 
                 // emit webtrekk PI
-                if ( typeof window.wt !== 'undefined' ) {
+                if ( 'wt' in window && typeof window.wt.sendinfo === 'function' ) {
                     log( 'webtrekk emitted' );
                     window.wt.sendinfo();
                 }
