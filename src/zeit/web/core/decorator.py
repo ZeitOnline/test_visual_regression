@@ -4,7 +4,7 @@ import sys
 import traceback
 import types
 
-import beaker.cache
+from dogpile.cache.api import NO_VALUE
 import venusian
 import zope.component
 
@@ -140,7 +140,7 @@ class reify(object):  # NOQA
     def resource_pipeline(self):
         return okay_db.fetch('query')
 
-    You can also specify a beaker cache_region which will act as a
+    You can also specify a dogpile cache region which will act as a
     second-level cache with a configurable ttl. The cache key is derived from
     the `uniqueId` property of the view context.
 
@@ -157,14 +157,17 @@ class reify(object):  # NOQA
             return buggy_service.get('query')
         except:
             return zeit.web.dont_cache(fallback)
+
     """
 
     def __init__(self, arg):
         if isinstance(arg, basestring):
-            self.region = arg
+            # Prevent circular import (zeit.web.__init__)
+            import zeit.web.core.cache
+            self.cache_region = zeit.web.core.cache.get_region(arg)
             self.func = None
         else:
-            self.region = None
+            self.cache_region = None
             self(arg)
 
     def __call__(self, func):
@@ -175,26 +178,23 @@ class reify(object):  # NOQA
         if inst is None:
             return self
 
-        unset = object()
         l_key = self._local_key(inst)
         g_key = self._global_key(inst)
-        cache = self._get_cache(inst)
+        cache = self.cache_region
 
         if l_key is not None:
             try:
                 value = getattr(inst, l_key)  # Return from local cache
                 g_key = l_key = None
             except AttributeError:
-                value = unset
+                value = NO_VALUE
 
-        if g_key is not None and value is unset and cache is not None:
-            try:
-                value = cache.get(g_key)  # Get from global cache
+        if g_key is not None and value is NO_VALUE and cache is not None:
+            value = cache.get(g_key)  # Get from global cache
+            if value is not NO_VALUE:
                 g_key = None
-            except (AttributeError, KeyError, TypeError):
-                value = unset
 
-        if value is unset:  # Fetch fresh results
+        if value is NO_VALUE:  # Fetch fresh results
             try:
                 value = self.func(inst)
             except AttributeError:
@@ -212,31 +212,24 @@ class reify(object):  # NOQA
             setattr(inst, l_key, value)  # Write to local cache
 
         if g_key is not None and cache is not None:
-            cache.put(g_key, value)  # Write to global cache
+            # XXX We should use cache.get_or_create() instead of get/set,
+            # to use the "many readers / one writer" feature of dogpile.cache.
+            cache.set(g_key, value)  # Write to global cache
 
         return value
 
-    def _get_cache(self, inst):
-        namespace = self._get_namespace(inst)
-        region = beaker.cache.cache_regions.get(self.region)
-        if namespace is not None and region is not None:
-            return beaker.cache.Cache._get_cache(namespace, region)
-
-    def _get_namespace(self, inst):
-        try:
-            return '.'.join([
-                inst.__class__.__module__,
-                inst.__class__.__name__,
-                self.func.__name__])
-        except (AttributeError, UnicodeDecodeError):
-            return
-
     def _global_key(self, inst):
         try:
-            namespace = unicode(self._get_namespace(inst))
-            unique_id = u'|'.join((namespace, inst.context.uniqueId))
-            return hashlib.sha1(unique_id.encode('utf-8')).hexdigest()
-        except (AttributeError, TypeError, UnicodeDecodeError):
+            # XXX I can't decide whether using
+            # `self.cache_region.function_key_generator` here instead of
+            # hard-coding would be cleaner (because it's not hard-coded and
+            # thus potentially customizeable for different regions) or not
+            # (because it makes assumptions about the cache region
+            # configuration).
+            key_generator = zeit.web.core.cache.key_generator(
+                None, self.func, cls=inst.__class__)
+            return key_generator(self, inst.context.uniqueId)
+        except AttributeError:
             return
 
     def _local_key(self, inst):

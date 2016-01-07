@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
+- ZON-2592: Use dogpile.cache instead of beaker for caching/memcache
+
 
 2.46 (2016-01-06)
 -----------------

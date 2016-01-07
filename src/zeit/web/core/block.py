@@ -4,7 +4,6 @@ import logging
 import random
 
 import babel.dates
-import beaker.cache
 import grokcore.component
 import lxml.etree
 import lxml.html
@@ -23,10 +22,14 @@ import zeit.magazin.interfaces
 import zeit.newsletter.interfaces
 
 import zeit.web
+import zeit.web.core.cache
 import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
 import zeit.web.core.sources
+
+
+DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
@@ -677,7 +680,7 @@ class AdvertisementNextread(Nextread):
         return folder[key[0]]
 
 
-@beaker.cache.cache_region('default_term', 'nextread_folder')
+@DEFAULT_TERM_CACHE.cache_on_arguments()
 def find_nextread_folder(ressort, subressort):
     ressort = ressort if ressort else ''
     subressort = subressort if subressort else ''

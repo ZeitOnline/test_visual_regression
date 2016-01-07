@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
-import beaker.cache
+import dogpile.cache
+import dogpile.cache.backends.memcached
+
 import mock
 import pytest
 
 import zeit.web
+import zeit.web.core.cache
 
 
 try:
@@ -16,20 +19,20 @@ else:
 
 @pytest.mark.skipif(not HAVE_PYLIBMC, reason='pylibmc not installed')
 def test_should_bypass_cache_on_memcache_server_error(application, request):
-    with mock.patch.dict(
-            beaker.cache.cache_regions['long_term'],
-            {'type': 'ext:memcached', 'url': 'localhost:9998'}):
+    region = dogpile.cache.make_region('test')
+    region.configure(
+        'dogpile.cache.pylibmc', arguments={'url': ['localhost:9998']})
 
-        @beaker.cache.cache_region('long_term', 'test_memcache')
-        def use_cache(arg):
-            calls.append(arg)
-            return None
+    @region.cache_on_arguments()
+    def use_cache(arg):
+        calls.append(arg)
+        return None
 
-        calls = []
+    calls = []
 
-        use_cache(1)
-        use_cache(1)
-        assert len(calls) == 2
+    use_cache(1)
+    use_cache(1)
+    assert len(calls) == 2
 
 
 def test_reify_should_retain_basic_reify_functionality(application):
@@ -62,11 +65,11 @@ def test_reify_should_set_region_parameter_accordingly(application):
         def second(self):
             pass
 
-    assert Foo.first.region is None
-    assert Foo.second.region == 'default_term'
+    assert Foo.first.cache_region is None
+    assert Foo.second.cache_region.name == 'default_term'
 
 
-def test_reify_should_store_result_in_beaker_cache_region(application):
+def test_reify_should_store_result_in_cache_region(application):
     class Context(object):
         uniqueId = u'http://xml.zeit.de/ünicöde'  # NOQA
 
@@ -78,65 +81,41 @@ def test_reify_should_store_result_in_beaker_cache_region(application):
             return 71
 
     foo = Foo()
-    cache = Foo.prop._get_cache(foo)
-    assert cache.namespace_name == (
-        'zeit.web.core.test.test_cache.Foo.prop')
+    cache = Foo.prop.cache_region
+    cache_key = Foo.prop._global_key(foo)
+    assert cache_key == (
+        u'zeit.web.core.test.test_cache.Foo.prop|http://xml.zeit.de/ünicöde')
     assert foo.prop == 71
-    expected_hash = '85444f4b731a8cf8f8f05dcf7db95f19e1420542'
-    assert Foo.prop._global_key(foo) == expected_hash
-    assert cache.has_key(expected_hash)  # NOQA
-    assert cache.get(expected_hash) == 71
+    assert cache.get(cache_key) == 71
 
 
 @pytest.mark.skipif(not HAVE_PYLIBMC, reason='pylibmc not installed')
 def test_reify_should_work_with_memcache(application, monkeypatch, request):
     # Don't suppress errors, detecting those is the whole point of this test.
     monkeypatch.setattr(
-        beaker.ext.memcached.PyLibMCNamespaceManager, '__contains__',
-        zeit.web.core.cache.original_contains)
+        dogpile.cache.backends.memcached.GenericMemcachedBackend, 'get',
+        zeit.web.core.cache.original_get)
 
-    with mock.patch.dict(
-            beaker.cache.cache_regions['long_term'],
-            {'type': 'ext:memcached', 'url': 'localhost:9998'}):
-
-        class Context(object):
-            uniqueId = 'http://xml.zeit.de'  # NOQA
-
-        class Foo(object):
-            context = Context
-
-            @zeit.web.reify('long_term')
-            def prop(self):
-                return 71
-
-        foo = Foo()
-        # We hope that we've hit any interesting integration issues if we make
-        # it to the "actually connect to memcache" point.
-        with pytest.raises(pylibmc.ConnectionError):
-            assert foo.prop == 71
-
-
-def test_reify_should_skip_second_layer_if_beaker_is_unavailable(application):
-    function = mock.Mock(return_value=60)
+    region = zeit.web.core.cache.get_region('test')
+    region.configure(
+        'dogpile.cache.pylibmc', arguments={'url': ['localhost:9998']})
+    request.addfinalizer(lambda: zeit.web.core.cache.CACHE_REGIONS.pop('test'))
 
     class Context(object):
         uniqueId = 'http://xml.zeit.de'  # NOQA
 
-    class Hour(object):
+    class Foo(object):
         context = Context
 
-        @zeit.web.reify('some_cache_region_that_aint_there')
-        def seconds(self):
-            return function()
+        @zeit.web.reify('test')
+        def prop(self):
+            return 71
 
-    hour = Hour()
-    assert hour.seconds == 60
-    assert function.call_count == 1
-    assert hour.seconds == 60
-    assert function.call_count == 1
-    hour = Hour()
-    assert hour.seconds == 60
-    assert function.call_count == 2
+    foo = Foo()
+    # We hope that we've hit any interesting integration issues if we make
+    # it to the "actually connect to memcache" point.
+    with pytest.raises(pylibmc.ConnectionError):
+        assert foo.prop == 71
 
 
 def test_reify_should_unpack_hitforpass_objects_and_skip_second_cache_layer(
