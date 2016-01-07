@@ -258,10 +258,11 @@ class LazyProxy(object):
             # BBB for really old video objects that were indexed differently.
             if type_id == 'zeit.brightcove.interfaces.IVideo':
                 type_id = 'video'
-            zope.interface.alsoProvides(
-                # XXX We should tweak the source_class so we don't have to talk
-                # to `.factory`, but that's quite a bit of mechanical hassle.
-                self, CONTENT_TYPE_SOURCE.factory.find(type_id))
+            # XXX We should tweak the source_class so we don't have to talk to
+            # `.factory`, but that's quite a bit of mechanical hassle.
+            type_iface = CONTENT_TYPE_SOURCE.factory.find(type_id)
+            if type_iface is not None:
+                zope.interface.alsoProvides(self, type_iface)
 
     def __getattr__(self, key):
         if not self.__exposed__ or not hasattr(self.__origin__, key):
