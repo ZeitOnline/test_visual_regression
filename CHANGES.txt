@@ -4,7 +4,7 @@ Change log for zeit.web
 2.47 (unreleased)
 -----------------
 
-- FIX: fix webtrekk tests
+- ZON-2250: Add label to storystream
 
 - MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 

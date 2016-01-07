@@ -14,6 +14,12 @@ def test_storystream_page_should_render_scope(testbrowser):
     assert scope_text == '25. Januar 2015 bis 19. September 2015'
 
 
+def test_storystream_page_should_render_label(testbrowser):
+    browser = testbrowser('/zeit-online/storystream/dummy')
+    assert len(browser.cssselect(
+               '.storystream-headerimage__kicker-label')) == 1
+
+
 def test_storystream_teaser_should_render_teaser_types(testbrowser):
     browser = testbrowser('/zeit-online/storystream-teaser')
     assert len(browser.cssselect('.cp-region--solo .teaser-storystream')) == 1
