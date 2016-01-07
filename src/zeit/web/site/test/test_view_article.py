@@ -820,6 +820,36 @@ def test_imported_article_has_special_meta_robots(
         'wrong robots for none product article')
 
 
+def test_article_has_correct_meta_keywords(
+        application, monkeypatch):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+
+    # all values
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'politik')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'supertitle', u'Der Supertitle')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ranked_tags_list', u'Test;Test 1')
+    article_view = zeit.web.site.view_article.Article(context, request)
+    assert article_view.meta_keywords == 'Politik, Der Supertitle, Test, Test 1', (
+        'wrong article keywords')
+
+    # missing values
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'supertitle', u'Der Supertitle')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ranked_tags_list', u'')
+    article_view = zeit.web.site.view_article.Article(context, request)
+    assert article_view.meta_keywords == 'Der Supertitle', (
+        'wrong article keywords')
+
+
 def test_robots_rules_for_angebote_articles(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')

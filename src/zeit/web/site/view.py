@@ -114,6 +114,12 @@ class Base(zeit.web.core.view.Base):
         else:
             return 'index,follow,noodp,noydir,noarchive'
 
+
+    @zeit.web.reify
+    def meta_keywords(self):
+        return self.ranked_tags_list
+
+
     @zeit.web.reify
     def ressort_literally(self):
         if self.is_hp:
