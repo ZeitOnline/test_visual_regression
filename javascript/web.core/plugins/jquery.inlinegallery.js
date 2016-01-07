@@ -35,8 +35,10 @@
             options = $.extend({
                 onSlideAfter: function() {
                     // integrate tracking - maybe redundant with new ad-reloading?
-                    Zeit.clickCount.webtrekk( 'hp.zm.slidegallery.showslide.' );
-                    Zeit.clickCount.ga( 'hp.zm.slidegallery.showslide.' );
+                    if ( Zeit.view.ressort === 'zeit-magazin' ) {
+                        Zeit.clickCount.webtrekk( 'hp.zm.slidegallery.showslide.' );
+                        Zeit.clickCount.ga( 'hp.zm.slidegallery.showslide.' );
+                    }
 
                     // add ad-reloading capability
                     var prefix = Zeit.view.ressort === 'zeit-magazin' ? 'zmo-' : '';
