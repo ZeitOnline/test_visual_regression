@@ -110,10 +110,13 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
     def meta_keywords(self):
+        if self.ranked_tags_list:
+            self.ranked_tags_list = self.ranked_tags_list.replace(';', ', ')
+
         keywords = [self.ressort.capitalize(),
                     self.supertitle,
                     self.ranked_tags_list]
-        return ', '.join([key for key in keywords if key]).replace(';', ', ')
+        return ', '.join([key for key in keywords if key])
 
     @zeit.web.reify
     def has_cardstack(self):

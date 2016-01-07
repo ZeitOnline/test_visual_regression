@@ -833,10 +833,12 @@ def test_article_has_correct_meta_keywords(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'supertitle', u'Der Supertitle')
     monkeypatch.setattr(
-        zeit.web.site.view_article.Article, u'ranked_tags_list', u'Test;Test 1')
+        zeit.web.site.view_article.Article, u'ranked_tags_list',
+        u'Test;Test 1')
     article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_keywords == 'Politik, Der Supertitle, Test, Test 1', (
-        'wrong article keywords')
+    assert (article_view.meta_keywords ==
+            'Politik, Der Supertitle, Test, Test 1',
+            ('wrong article keywords'))
 
     # missing values
     monkeypatch.setattr(
@@ -1104,9 +1106,9 @@ def test_article_lineage_has_text_elements(testbrowser):
         u'supertitle': u'a',
         u'uniqueId': u'http://xml.zeit.de/01',
         u'title': u'b'}, {
-        u'supertitle': u'c',
-        u'uniqueId': u'http://xml.zeit.de/02',
-        u'title': u'd'}]
+            u'supertitle': u'c',
+            u'uniqueId': u'http://xml.zeit.de/02',
+            u'title': u'd'}]
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(browser.cssselect('.al-text__kicker')) == 2
     assert len(browser.cssselect('.al-text__supertitle')) == 2
