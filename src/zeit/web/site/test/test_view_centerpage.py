@@ -760,12 +760,12 @@ def test_robots_rules_for_thema_paths(application):
     # first page with param
     request.url = 'http://localhost/thema/test?p=1'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'follow,noarchive'
+    assert view.meta_robots == 'index,follow,noarchive'
 
     # first page without param
     request.url = 'http://localhost/thema/test'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'follow,noarchive'
+    assert view.meta_robots == 'index,follow,noarchive'
 
 
 def test_robots_rules_for_serie_paths(application):
@@ -787,12 +787,12 @@ def test_robots_rules_for_serie_paths(application):
     # first page with param
     request.url = 'http://localhost/serie/test?p=1'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'follow,noarchive'
+    assert view.meta_robots == 'index,follow,noarchive'
 
     # first page without param
     request.url = 'http://localhost/serie/test'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'follow,noarchive'
+    assert view.meta_robots == 'index,follow,noarchive'
 
 
 def test_robots_rules_for_angebote_paths(application):
