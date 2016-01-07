@@ -99,7 +99,7 @@ class Base(zeit.web.core.view.Base):
             return 'index,nofollow,noodp,noydir,noarchive'
         elif (path('/thema') or path('/serie')) and (
                 'p' not in query or query['p'] == ['1']):
-                    return 'follow,noarchive'
+                    return 'index,follow,noarchive'
         elif path('/banner') or path('/test') or path('/templates') \
                 or path('/thema') or path('/serie'):
                 return 'noindex,follow,noodp,noydir,noarchive'
