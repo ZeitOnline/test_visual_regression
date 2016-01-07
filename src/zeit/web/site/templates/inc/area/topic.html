@@ -5,7 +5,7 @@
 {% block module_list %}
 	<section class="teaser-topic">
 		{% if area.values() | length > 0 %}
-			{% set module = area.values()[:1][0] %}
+			{% set module = area.values()[0] %}
 			{% set teaser = module | first_child %}
 			{% set module_layout = 'teaser-topic' %}
 
