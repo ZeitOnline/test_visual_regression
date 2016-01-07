@@ -173,26 +173,19 @@ html.js
 .bx-loading
     display: none
 
-// @todo styles for no javascript
-// .no-js .inline-gallery
-//     figure
-//         margin-top: 0
-//         margin-bottom: $little
-//         position: relative
-//         &:first-child
-//             margin-top: $medium
-//     .figure__caption
-//         bottom: 0
-//         color: $white
-//         font-size: em(18px)
-//         left: 0
-//         margin: 0
-//         max-width: 100%
-//         padding: $little
-//         position: absolute
-//         text-shadow: 1px 1px 3px $black
-//         width: 100%
-//         z-index: 9999
-//     .figure__copyright
-//         display: block
-//         color: $grey
+.no-js .inline-gallery
+    padding-top: $vertical-space * 2
+    figure
+        margin-top: 0
+        margin-bottom: $vertical-space
+        &:last-child
+            .figure__caption
+                margin-bottom: $vertical-space
+    .figure__media
+        max-width: 100%
+    .figure__caption
+        max-width: 100%
+        width: remify(580px)
+        margin-bottom: $vertical-space * 2
+    .figure__copyright
+        display: block

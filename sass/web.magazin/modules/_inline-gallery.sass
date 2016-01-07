@@ -164,3 +164,20 @@ html.js
 .bx-controls-auto,
 .bx-loading
     display: none
+
+.no-js .inline-gallery
+    padding-top: remify($small--px) * 2
+    figure
+        margin-top: 0
+        margin-bottom: remify($small--px)
+        &:last-child
+            .figure__caption
+                margin-bottom: remify($small--px)
+    .figure__media
+        max-width: 100%
+    .figure__caption
+        max-width: 100%
+        width: remify(580px)
+        margin-bottom: remify($small--px) * 2
+    .figure__copyright
+        display: block
