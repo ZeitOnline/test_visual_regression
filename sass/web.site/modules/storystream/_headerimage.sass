@@ -42,12 +42,24 @@
 			z-index: 1
 
 	&__kicker
+		position: absolute
+		top: remify(-20px)
+		padding: remify(6px)
+
+	&__kicker-label
+		background: $zon-lighter-grey
+		border-radius: em(3px)
+		font-size: remify(12px)
+		color: $zon-charcoal
+		text-transform: uppercase
+		letter-spacing: $zon-letter-spacing-s
+		padding: remify(6px 10px)
+		margin-right: remify(10px)
+
+	&__kicker-text
 		color: $zon-lighter-grey
 		font-size: remify(15px)
 		letter-spacing: $zon-letter-spacing-m
-		line-height: remify(17px)
-		position: absolute
-		top: remify(-6px)
 
 	&__title
 		color: $white
@@ -56,7 +68,14 @@
 		font-size: remify(28px)
 		line-height: remify(34px)
 		margin: remify(16px 0 0)
-		padding: remify(20px 0)
+		padding: remify(25px 0 20px 0)
+
+	&__kicker,
+	&__title
+		white-space: nowrap
+		text-overflow: ellipsis
+		width: 100%
+		overflow: hidden
 
 	&__update
 		color: $zon-light-grey
@@ -74,6 +93,13 @@
 		margin: remify(5px 0 0 -20px)
 		position: absolute
 		width: remify(15px)
+
+// long titles are likely to break the design on small devices
+// use nowrap till further notice
++respond-min($break-0)
+	.storystream-headerimage
+		&__title
+			white-space: normal
 
 +respond-min($break-tablet-min)
 	.storystream-headerimage

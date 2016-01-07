@@ -104,7 +104,7 @@
                 "redaktion",
                 view.tracking_type | lower,
                 view.ressort | lower,
-                "online",
+                view.product_id | lower,
                 view.sub_ressort | lower,
                 serie,
                 request.path_info | substring_from('/'),
