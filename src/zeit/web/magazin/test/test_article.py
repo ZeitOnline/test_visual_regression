@@ -509,12 +509,6 @@ def test_artikel_header_sequelpage_should_have_correct_source(
     assert browser.cssselect('header.article__head.article__head--sequel')
 
 
-def test_gallery_should_have_click_counter_functions(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
-    assert 'var clickCount = {' in browser.contents
-
-
 def test_nextread_teaser_block_has_teasers_available(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
     nextread = zeit.web.core.interfaces.INextread(context)
