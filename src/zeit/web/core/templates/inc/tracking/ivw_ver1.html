@@ -3,7 +3,7 @@
 <!--Dieses Online-Angebot unterliegt nicht der IVW-Kontrolle!-->
 <script type="text/javascript">
     var IVW = "http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{ view.banner_channel }}";
-    document.write('<img src="' + IVW + '?r=' + escape(document.referrer) + '&d=' + (Math.random()*100000) + '" class="visually-hidden" alt="" width="1" height="1" />');
+    document.write('<img src="' + IVW + '?r=' + encodeURIComponent(document.referrer) + '&d=' + (Math.random()*100000) + '" class="visually-hidden" alt="" width="1" height="1" />');
 </script>
 <noscript>
     <img alt="" class="visually-hidden" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{ view.banner_channel }}" height="1" width="1" />

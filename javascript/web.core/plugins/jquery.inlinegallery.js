@@ -34,11 +34,10 @@
         var hasTouch = Modernizr.touchevents || location.search === '?touch',
             options = $.extend({
                 onSlideAfter: function() {
-                    // integrate tracking
-                    if ( 'clickCount' in window ) {
-                        window.clickCount.webtrekk( 'hp.zm.slidegallery.showslide.' );
-                        window.clickCount.ga( 'hp.zm.slidegallery.showslide.' );
-                    }
+                    // integrate tracking - maybe redundant with new ad-reloading?
+                    Zeit.clickCount.webtrekk( 'hp.zm.slidegallery.showslide.' );
+                    Zeit.clickCount.ga( 'hp.zm.slidegallery.showslide.' );
+
                     // add ad-reloading capability
                     var prefix = Zeit.view.ressort === 'zeit-magazin' ? 'zmo-' : '';
                     $( window ).trigger( 'interaction.adreload.z', [ prefix + 'gallery', 'interaction' ] );

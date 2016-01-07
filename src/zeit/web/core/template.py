@@ -4,6 +4,7 @@ import datetime
 import itertools
 import logging
 import mimetypes
+import random
 import re
 import time
 import types
@@ -941,3 +942,8 @@ def provides(obj, iface):
     except ValueError:
         return False
     return iface.providedBy(obj)
+
+@zeit.web.register_global
+def get_random_numer(length):
+    return random.randint(0, 10**length)
+
