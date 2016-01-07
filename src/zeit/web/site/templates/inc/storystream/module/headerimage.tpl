@@ -11,7 +11,10 @@
     <div class="{{ blockname }}__wrapper">
         <div class="{{ blockname }}__container">
         	<div class="{{ blockname }}__content">
-            	<span class="{{ blockname }}__kicker">{{ module.supertitle }}</span>
+            	<span class="{{ blockname }}__kicker">
+                    <span class="{{ blockname }}__kicker-label">Live-Dossier</span>
+                    <span class="{{ blockname }}__kicker-text">{{ module.supertitle }}</span>
+                </span>
             	<h1 class="{{ blockname }}__title">{{ module.title }}</h1>
                 {% if view.date_last_modified %}
                 	<span class="{{ blockname }}__update">

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
+import UserDict
 import copy
 import json
 import os.path
@@ -17,6 +18,7 @@ import pysolr
 import pytest
 import repoze.bitblt.processor
 import selenium.webdriver
+import selenium.webdriver.firefox.firefox_binary
 import transaction
 import webob.multidict
 import webtest
@@ -497,9 +499,18 @@ def http_testserver(request):
 @pytest.fixture(scope='session', params=browsers.keys())
 def selenium_driver(request):
     if request.param == 'firefox':
-        profile = selenium.webdriver.FirefoxProfile()
+        parameters = {}
+        profile = selenium.webdriver.FirefoxProfile(
+            os.environ.get('ZEIT_WEB_FF_PROFILE'))
         profile.set_preference('network.http.use-cache', False)
-        browser = browsers[request.param](firefox_profile=profile)
+        parameters['firefox_profile'] = profile
+        # Old versions: <https://ftp.mozilla.org/pub/firefox/releases/>
+        ff_binary = os.environ.get('ZEIT_WEB_FF_BINARY')
+        if ff_binary:
+            parameters['firefox_binary'] = (
+                selenium.webdriver.firefox.firefox_binary.FirefoxBinary(
+                    ff_binary))
+        browser = browsers[request.param](**parameters)
     else:
         browser = browsers[request.param]()
 
@@ -517,7 +528,9 @@ def appbrowser(application):
 @pytest.fixture
 def image_group_factory():
     class MockImageGroup(dict):
-        zope.interface.implements(zeit.content.image.interfaces.IImageGroup)
+        zope.interface.implements(
+            zeit.content.image.interfaces.IImageGroup,
+            zope.annotation.interfaces.IAttributeAnnotatable)
         master_image = None
 
     class MockRepositoryImage(object):

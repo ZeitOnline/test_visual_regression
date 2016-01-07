@@ -147,7 +147,7 @@
 {% macro head_user_is_logged_in_true(request)  %}
     <span class="main-nav__section__trigger js-main-nav-section-trigger">
         {% if request.session.user.picture %}
-            <span class="main-nav__community__icon" style="background-image: url({{ request.registry.settings.community_host }}/{{ request.session.user.picture }})"></span>
+            <span class="main-nav__community__icon" style="background-image: url({{ request.session.user.picture }})"></span>
         {%- else -%}
             <span class="main-nav__community__icon icon-avatar-std"></span>
         {%- endif -%}

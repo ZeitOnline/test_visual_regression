@@ -5,67 +5,126 @@
  */
 (function( $ ) {
     var defaults = {
-            wrapper: '.buzz-accordion',
-            box: '.buzz-box',
-            handle: '.buzz-box__heading',
-            slide: '.buzz-box__teasers',
+            classname: 'buzz-accordion',
+            multiselectable: false,
             duration: 300
         };
 
     function Accordion( element, options ) {
-        this.items = [];
+        this.tabs = [];
         this.parentNode = element.parentNode;
 
         this.options = $.extend( {}, defaults, options );
-        this.wrapper = $( '<div/>' ).addClass( this.options.wrapper.slice( 1 ) );
+        this.accordion = $( '<div/>' ).addClass( this.options.classname ).attr({
+            'role': 'tablist',
+            'aria-multiselectable': true
+        });
 
         this.init( element );
     }
 
     Accordion.prototype = {
         init: function( element ) {
-            var that = this;
+            var self = this;
 
-            this.wrapper.insertBefore( element );
+            this.accordion.insertBefore( element );
+            this.addItem( element, true );
 
-            this.wrapper.on( 'click', this.options.handle, function( event ) {
-                var item = $( this ).closest( that.options.box );
+            // Configure click event handler
+            this.accordion.on( 'click', '[role="tab"]', function( event ) {
                 event.preventDefault();
-                if ( this.blur ) { this.blur(); }
-                that.toggleItem( item );
+                self.toggleItem( $( this ) );
             });
 
-            this.addItem( element );
+            // Configure keyboard navigation
+            this.accordion.on( 'keydown', function( event ) {
+                // do nothing if there are other special keys involved
+                if ( event.altKey || event.shiftKey || event.ctrlKey || event.metaKey ) {
+                    return;
+                }
+
+                // simple caching
+                if ( !self.tabs.length ) {
+                    self.tabs = self.accordion.find( '[role="tab"]' );
+                }
+
+                var index = self.tabs.index( document.activeElement ),
+                    focus,
+                    select;
+
+                if ( index !== -1 ) {
+                    switch ( event.which ) {
+                        case 13: // [RETURN]
+                        case 32: // [SPACE]
+                            select = index;
+                            break;
+
+                        case 35: // [END]
+                            select = self.tabs.length - 1;
+                            break;
+
+                        case 36: // [HOME]
+                            select = 0;
+                            break;
+
+                        case 37: // [LEFT]
+                        case 38: // [UP]
+                            focus = --index;
+                            break;
+
+                        case 39: // [RIGHT]
+                        case 40: // [DOWN]
+                            focus = ++index % self.tabs.length;
+                            break;
+                    }
+                }
+
+                if ( focus !== undefined ) {
+                    event.preventDefault();
+                    self.tabs.eq( focus ).focus();
+                } else if ( select !== undefined ) {
+                    event.preventDefault();
+                    self.toggleItem( self.tabs.eq( select ).focus() );
+                }
+            });
         },
 
-        toggleItem: function( item ) {
-            if ( item.data( 'active' ) === false ) {
-                this.hideItem( $( this.items ).not( item ) );
-                this.showItem( item );
+        toggleItem: function( tab ) {
+            var expanded = tab.attr( 'aria-expanded' ) !== 'false';
+
+            if ( this.options.multiselectable ) {
+                this.toggleTab( tab, !expanded );
+            } else if ( !expanded ) {
+                this.hideItem( this.accordion.find( '[aria-expanded="true"]' ) );
+                this.showItem( tab );
             }
         },
 
-        showItem: function( item ) {
-            item
-                .data( 'active', true )
-                .find( this.options.slide )
-                .velocity( 'slideDown', { duration: this.options.duration } );
+        toggleTab: function( tab, expand, duration ) {
+            var panel = $( '#' + tab.attr( 'aria-controls' ) ),
+                animation = expand ? 'slideDown' : 'slideUp';
+
+            tab.attr({
+                'aria-selected': expand,
+                'aria-expanded': expand
+            });
+
+            panel
+                .attr( 'aria-hidden', !expand )
+                .velocity( animation, { duration: ( duration !== undefined ) ? duration : this.options.duration } );
         },
 
-        hideItem: function( item ) {
-            item
-                .data( 'active', false )
-                .find( this.options.slide )
-                .velocity( 'slideUp', { duration: this.options.duration } );
+        showItem: function( tab ) {
+            this.toggleTab( tab, true );
         },
 
-        addItem: function( element, hide ) {
-            this.wrapper.append( element );
-            this.items.push( element );
+        hideItem: function( tab ) {
+            this.toggleTab( tab, false );
+        },
 
-            if ( hide ) {
-                this.hideItem( $( element ) );
-            }
+        addItem: function( element, expand ) {
+            this.accordion.append( element );
+            this.toggleTab( $( element ).find( '[role="tab"]' ), expand, 0 );
         }
     };
 
@@ -78,7 +137,7 @@
             if ( !current || current.parentNode !== this.parentNode ) {
                 current = new Accordion( this, options );
             } else {
-                current.addItem( this, true );
+                current.addItem( this, false );
             }
         });
     };

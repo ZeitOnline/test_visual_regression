@@ -687,7 +687,8 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     request = mock.Mock()
     request.registry.settings.community_host = 'www.zeit.de'
     request.registry.settings.sso_activate = False
-    request.session.user.picture = 'test.jpg'
+    request.session.user.picture = (
+        'http://www.zeit.de/community-static/test.jpg')
     request.session.user.uid = 1
     request.url = 'test'
 
@@ -695,7 +696,7 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     doc = lxml.html.fromstring(lines).cssselect
 
     assert doc('span .main-nav__community__icon')[0].attrib['style'] == (
-        'background-image: url(www.zeit.de/test.jpg)')
+        'background-image: url(http://www.zeit.de/community-static/test.jpg)')
     assert doc('a')[0].attrib['href'] == 'www.zeit.de/user/1'
     assert doc('a')[0].attrib['id'] == 'hp.zm.topnav.community.account'
     assert doc('a')[1].attrib['href'] == 'www.zeit.de/logout?destination=test'
@@ -705,7 +706,6 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     request.registry.settings.sso_url = 'sso.zeit.de'
     request.registry.settings.community_host = 'www.zeit.de'
     request.registry.settings.sso_activate = True
-    request.session.user.picture = 'test.jpg'
     request.session.user.uid = 1
     request.url = 'test_sso'
 
