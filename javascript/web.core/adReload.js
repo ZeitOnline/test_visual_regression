@@ -112,9 +112,9 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 }
 
                 // emit IVW PI
-                if ( typeof window.iom !== 'undefined' && typeof window.iam_data !== 'undefined' ) {
+                if ( 'iom' in window && typeof window.iom.h === 'function' && typeof window.iam_data !== 'undefined' ) {
                     log( 'ivw emitted' );
-                    window.iom.c( window.iam_data, 1 );
+                    window.iom.h( window.iam_data, 1 );
                 }
             }
         }

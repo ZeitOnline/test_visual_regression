@@ -143,7 +143,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
     _functions.sendTracking.sendVideoViewToIVW = function() {
 
         // we expect the ivw function to be on the page
-        if ( typeof window.iom  === 'undefined' || typeof window.iom.c !== 'function' ) {
+        if ( typeof window.iom  === 'undefined' || typeof window.iom.h !== 'function' ) {
             return;
         }
 
@@ -161,7 +161,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             iam_data.st = 'zeitonl';
         }
 
-        window.iom.c( iam_data, 1 );
+        window.iom.h( iam_data, 1 );
 
         if ( debugMode ) {
             console.log( '[zonTriggeredEventTracking] IVW data sent: ' );
