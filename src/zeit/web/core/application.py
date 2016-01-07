@@ -362,6 +362,12 @@ class Application(object):
                 if value is not None:
                     make_region_args[key] = self.config.maybe_dotted(value)
 
+            settings['expiration_time'] = int(settings['expiration_time'])
+            settings.setdefault(
+                'memcache_expire_time', settings['expiration_time'] +
+                int(self.config.registry.settings.get(
+                    'dogpile_cache.memcache_expire_time_interval', 30)))
+
             region = zeit.web.core.cache.get_region(name)
             # Call init again so we support changing make_region arguments
             # through the configuration -- but be sure you know what you're
