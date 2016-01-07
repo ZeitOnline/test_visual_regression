@@ -23,15 +23,9 @@ define( function() {
                     }
                 },
                 ivw: function() {
+                    // IVW
                     if ( 'iom' in window && typeof window.iom.h === 'function' && typeof window.iam_data !== 'undefined' ) {
-                        // ivw version 2
                         window.iom.h( window.iam_data, 1 );
-                    } else if ( 'IVW' in window ) {
-                        // ivw version 1
-                        var img = document.createElement( 'img' );
-                        img.src = window.IVW + '?r=' + encodeURIComponent( document.referrer ) + '&amp;d=' + ( Math.random() * 100000 );
-                        img.width = 1;
-                        img.height = 1;
                     }
                 },
                 cc: function() {
