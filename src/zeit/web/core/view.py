@@ -97,7 +97,7 @@ class Base(object):
         if pyramid.settings.asbool(self.request.registry.settings.get(
                 'redirect_from_cp2015', True)):
             redirect_on_cp2015_suffix(self.request)
-        time = zeit.web.core.cache.ICachingTime(self.context)
+        time = zeit.web.core.interfaces.ICachingTime(self.context)
 
         # Make sure comments are loaded
         if hasattr(self, 'comments'):

@@ -7,11 +7,9 @@ import pyramid.response
 import zope.component
 
 import zeit.cms.interfaces
-import zeit.connector.interfaces
 import zeit.content.image.interfaces
 
 import zeit.web
-import zeit.web.core.cache
 import zeit.web.core.image
 import zeit.web.core.view
 import zeit.web.site.area
@@ -32,7 +30,7 @@ class Image(zeit.web.core.view.Base):
         resp.headers['Content-Disposition'] = self.content_disposition
         resp.headers['Content-Type'] = resp.content_type = self.content_type
         resp.app_iter = pyramid.response.FileIter(self.filehandle)
-        resp.cache_expires(zeit.web.core.cache.ICachingTime(self.context))
+        resp.cache_expires(zeit.web.core.interfaces.ICachingTime(self.context))
         return resp
 
     @zeit.web.reify
