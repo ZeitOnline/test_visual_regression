@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
+import UserDict
 import copy
 import json
 import os.path
@@ -527,7 +528,9 @@ def appbrowser(application):
 @pytest.fixture
 def image_group_factory():
     class MockImageGroup(dict):
-        zope.interface.implements(zeit.content.image.interfaces.IImageGroup)
+        zope.interface.implements(
+            zeit.content.image.interfaces.IImageGroup,
+            zope.annotation.interfaces.IAttributeAnnotatable)
         master_image = None
 
     class MockRepositoryImage(object):
