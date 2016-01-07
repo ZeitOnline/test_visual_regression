@@ -574,3 +574,23 @@ def test_ivw_uses_hyprid_method_for_apps(jinja2_env):
     html = tpl.render(view=mock.Mock(), request=mock.Mock())
     assert 'iom.h' in html
     assert 'iom.c' not in html
+
+
+def test_iqd_ads_should_utilize_feature_toggles(testbrowser, monkeypatch):
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert 'AdController.initialize();' in (
+        browser.cssselect('head')[0].text_content())
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'iqd_is_enabled', False)
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert 'AdController.initialize();' not in (
+        browser.cssselect('head')[0].text_content())
+
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'iqd_is_enabled', True)
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'third_party_modules_is_enabled', False)
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert 'AdController.initialize();' not in (
+        browser.cssselect('head')[0].text_content())
