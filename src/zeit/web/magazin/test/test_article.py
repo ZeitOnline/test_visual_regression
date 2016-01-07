@@ -138,9 +138,9 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
 
     # noscript string
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,redaktion'
-            '.lebensart.essen-trinken.weinkolumne.article.online|{url}/'
+            '.lebensart.essen-trinken.weinkolumne.article.zede|{url}/'
             'artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=article'
-            '&amp;cg3=lebensart&amp;cg4=online&amp;cg5=essen-trinken&amp;cg6'
+            '&amp;cg3=lebensart&amp;cg4=zede&amp;cg5=essen-trinken&amp;cg6'
             '=weinkolumne&amp;cg7=03&amp;cg8=zeitmz/essenundtrinken/article'
             '&amp;cg9=2013-07-30&amp;cp1=anne mustermann&amp;cp2=lebensart/'
             'essen-trinken/bild-text&amp;cp3=1/7&amp;cp4=wein;italien;'
@@ -163,8 +163,8 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, testbrowser):
     # noscript
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.'
-            'online|{url}/artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion'
-            '&amp;cg2=article&amp;cg3=lebensart&amp;cg4=online&amp;cg5=essen-'
+            'zede|{url}/artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion'
+            '&amp;cg2=article&amp;cg3=lebensart&amp;cg4=zede&amp;cg5=essen-'
             'trinken&amp;cg6=weinkolumne&amp;cg7=seite-2&amp;cg8=zeitmz/'
             'essenundtrinken/article&amp;cg9=2013-07-30&amp;cp1=anne '
             'mustermann&amp;cp2=lebensart/essen-trinken/bild-text&amp;'
@@ -188,9 +188,9 @@ def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
     assert '8: "zeitmz/centerpage",' in browser.contents
     assert '9: ""' in browser.contents
     assert ('wt.pl?p=328,redaktion.lebensart...'
-            'centerpage.online|{url}/zeit-magazin/test-cp/test-cp-zmo,'
+            'centerpage.zede|{url}/zeit-magazin/test-cp/test-cp-zmo,'
             '0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=centerpage&amp;'
-            'cg3=lebensart&amp;cg4=online&amp;cg5=&amp;cg6=&amp;'
+            'cg3=lebensart&amp;cg4=zede&amp;cg5=&amp;cg6=&amp;'
             'cg7=test-cp-zmo&amp;cg8=zeitmz/centerpage&amp;'
             'cg9=').format(url=testserver['http_address']) in browser.contents
 
@@ -200,7 +200,7 @@ def test_webtrekk_series_tag_is_set_corectly(testserver, testbrowser):
         '%s/artikel/06' % testserver.url)
     assert '6: "tödlichekeime",' in browser.contents
     assert ('redaktion.zeit-magazin..tödlichekeime.'
-            'article.online|{url}/artikel/'
+            'article.zei|{url}/artikel/'
             '06').format(url=testserver['http_address']) in browser.contents
 
 

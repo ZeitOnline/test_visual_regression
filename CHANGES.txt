@@ -4,7 +4,9 @@ Change log for zeit.web
 2.47 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2250: Add label to storystream
+
+- MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
 
 2.46 (2016-01-06)
