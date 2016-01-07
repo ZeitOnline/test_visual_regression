@@ -745,7 +745,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     request = mock.Mock()
 
     # logged in
-    request.is_authenticated_user = True
+    request.authenticated_userid = '12345'
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     logged = 'Account'
     lines = tpl.module.main_nav('true', request).splitlines()
@@ -757,7 +757,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     assert logged in output
 
     # logged out
-    request.is_authenticated_user = False
+    request.authenticated_userid = None
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     unlogged = 'Anmelden'
     lines = tpl.module.main_nav('true', request).splitlines()

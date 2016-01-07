@@ -11,7 +11,7 @@
 {% else %}
     {% set submit_value = 'Kommentar senden' %}
 
-    {% if request.is_authenticated_user and not request.session.user.name %}
+    {% if request.authenticated_userid and not request.session.user.name %}
         {% set submit_value = 'Absenden' %}
     {% endif %}
 
@@ -38,7 +38,7 @@
 {% endif %}
 
 <div class="comment-section__form comment-section__item">
-{%- if request.is_authenticated_user %}
+{%- if request.authenticated_userid %}
     {% set is_mod = 'admin-tech' in request.session.user.roles or 'admin-editor' in request.session.user.roles %}
     {%- block comment_form %}
     <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.session.user.uid }}"
@@ -120,7 +120,7 @@
 </div>
 
 <script type="text/template" id="js-report-comment-template">
-{%- if request.is_authenticated_user %}
+{%- if request.authenticated_userid %}
     {% include "zeit.web.site:templates/inc/comments/report-comment-form.html" %}
 {%- else %}
     <form class="comment-login">
