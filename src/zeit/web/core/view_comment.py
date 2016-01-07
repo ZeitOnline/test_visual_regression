@@ -36,7 +36,7 @@ class PostComment(zeit.web.core.view.Base):
 
     def __init__(self, context, request, path=None):
 
-        if not request.authenticated_userid:
+        if not request.is_authenticated_user:
             raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
                 explanation='Please log in in order to comment')
@@ -453,7 +453,7 @@ class RecommendCommentResource(PostCommentResource):
     def __init__(self, context, request):
         # redirect unauthorized recommendation request
         # prevent 403 HTTPForbidden response in PostComment
-        if not request.authenticated_userid:
+        if not request.is_authenticated_user:
             if request.registry.settings.sso_activate:
                 pattern = '{}/anmelden?url={}'
                 host = request.registry.settings.get('sso_url')

@@ -131,7 +131,7 @@
                         </div>
                         #}
                         <div class="main-nav__section main-nav__community">
-                            {% if request.authenticated_userid %}
+                            {% if request.is_authenticated_user %}
                                 {{ head_user_is_logged_in_true(request) }}
                             {%- else -%}
                                 {{ head_user_is_logged_in_false(request) }}

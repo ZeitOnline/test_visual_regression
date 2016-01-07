@@ -147,7 +147,7 @@ def login_state(request):
         'context-uri') else request.route_url('home').rstrip('/')
     info = {}
 
-    if not request.authenticated_userid and request.cookies.get(
+    if not request.is_authenticated_user and request.cookies.get(
             settings.get('sso_cookie')):
         log.warn("SSO Cookie present, but not authenticated")
 
@@ -156,7 +156,7 @@ def login_state(request):
     info['logout'] = u"{}/abmelden?url={}".format(
         settings['sso_url'], destination)
 
-    if request.authenticated_userid and 'user' in request.session:
+    if request.is_authenticated_user and 'user' in request.session:
         info['user'] = request.session['user']
         info['profile'] = "{}/user".format(settings['community_host'])
     return info

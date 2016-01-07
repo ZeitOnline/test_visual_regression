@@ -43,28 +43,31 @@ class AuthenticationPolicy(
             # store the user info in the session
             log.debug("Request user_info")
             user_info = get_user_info(request)
-            # require successful community login *and* valid SSO ID
             if not is_reliable_user_info(user_info):
                 return
             request.session['user'] = user_info
 
-        return user_info['uid']
+        return user_info['ssoid']
+
+    def is_authenticated_user(self, request):
+        return bool(self.authenticated_userid(request))
 
 
 def is_reliable_user_info(user_info):
+    """Check user info for all mandatory session values. Thiy may invalidate
+    possibly old user session with missing values.
+    Also implicitly checks for successfully decoded SSO cookie ('ssoid').
+    """
     if user_info and user_info.get('uid') and user_info.get('ssoid'):
-        try:
-            if int(user_info['uid']) is not 0:
-                return True
-        except:
-            pass
+        return True
+
     return False
 
 
 def reload_user_info(request):
     if request.session.get('user'):
         del request.session['user']
-    return bool(request.authenticated_userid)
+    return request.is_authenticated_user
 
 
 def get_user_info_from_sso_cookie(cookie, key):
