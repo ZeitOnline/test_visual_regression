@@ -83,7 +83,7 @@ def recursively_call_community(req, tries):
                     'community_user_info.community.reponse_time'):
                 # Analoguous to requests.api.request().
                 session = requests.Session()
-                response = session.send(req, stream=True, timeout=2)
+                response = session.send(req, stream=True, timeout=0.5)
                 session.close()
                 return response
         except Exception:
