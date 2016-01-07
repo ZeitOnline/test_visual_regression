@@ -21,18 +21,18 @@ class AuthenticationPolicy(
     def authenticated_userid(self, request):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
-        cookie = request.cookies.get(conf.get('sso_cookie'))
+        sso_cookie = request.cookies.get(conf.get('sso_cookie'))
 
         # If no sso cookie is present, bail out straight away:
-        if not cookie:
+        if not sso_cookie:
             if 'user' in request.session:
                 del request.session['user']
             return
 
         # Make sure sso_verification in the user session matches the one send
         # via request
-        if cookie and request.session.get('user') and (
-                request.session['user'].get('sso_verification') != cookie):
+        if sso_cookie and request.session.get('user') and (
+                request.session['user'].get('sso_verification') != sso_cookie):
             del request.session['user']
 
         if request.session.get('user') and (
