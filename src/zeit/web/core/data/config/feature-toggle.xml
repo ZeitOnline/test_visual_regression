@@ -2,7 +2,7 @@
 <features>
   <article_lineage>true</article_lineage>
   <iqd>true</iqd>
-  <third_party_modules>true</third_party_modules>
+  <third_party_modules>false</third_party_modules>
   <tracking>true</tracking>
   <dummy>false</dummy>
 </features>
