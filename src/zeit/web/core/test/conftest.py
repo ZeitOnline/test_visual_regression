@@ -305,8 +305,15 @@ def reset_solr(application_session, request):
 
 
 @pytest.fixture
+def reset_cache(application_session, request):
+    for region in zeit.web.core.cache.CACHE_REGIONS.values():
+        region.backend._cache.clear()
+
+
+@pytest.fixture
 def application(
-        application_session, preserve_settings, reset_solr, zodb, request):
+        application_session, preserve_settings, reset_solr, reset_cache,
+        zodb, request):
     # This application_session/application split is a bit clumsy, but some
     # things (e.g. reset connector, teardown zodb) needs to be called after
     # each test (i.e. in 'function' scope). The many diverse fixtures make this
