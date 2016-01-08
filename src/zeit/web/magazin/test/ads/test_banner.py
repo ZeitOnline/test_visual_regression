@@ -127,7 +127,7 @@ def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
         testserver, testbrowser, monkeypatch):
 
     monkeypatch.setattr(
-        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
 
     # test article with xml banner is missing
     browser = testbrowser('%s/artikel/10' % testserver.url)
