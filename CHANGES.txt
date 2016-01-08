@@ -6,9 +6,11 @@ Change log for zeit.web
 
 - ZON-2250: Add label to storystream
 
-- MAINT: Add WAI-ARIA roles, states, and properties for accordion component
-
 - ZON-2214: Enable Nextread for video pages
+
+- ZON-2594: New customParameter for Webtrekk: platform
+
+- MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
 
 2.46 (2016-01-06)
@@ -31,6 +33,8 @@ Change log for zeit.web
 - ZON-2278: Make video teasers detectable on dynamic CPs
 
 - ZON-2591: Make logo pointer appear in IE>=10 again
+
+- ZON-2302: Fix user avatar in ZMO header
 
 - HOTFIX: Change timeout for community user_info
 
