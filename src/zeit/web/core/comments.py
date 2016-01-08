@@ -6,7 +6,6 @@ import math
 
 from BeautifulSoup import BeautifulSoup
 import babel.dates
-import beaker.cache
 import lxml.etree
 import pytz
 import requests
@@ -15,11 +14,13 @@ import zope.component
 
 import zeit.cms.interfaces
 
+import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
 import zeit.web.core.template
 
 
+LONG_TERM_CACHE = zeit.web.core.cache.get_region('long_term')
 log = logging.getLogger(__name__)
 
 
@@ -288,7 +289,7 @@ def community_maintenance():
     return _derive_maintenance_from_schedule(maintenance)
 
 
-@beaker.cache.cache_region('long_term', 'community_maintenance')
+@LONG_TERM_CACHE.cache_on_arguments()
 def _community_maintenance_cache(unique_id=None):
     maintenance = {
         'active': False,
@@ -344,7 +345,7 @@ def _derive_maintenance_from_schedule(maintenance):
     return maintenance
 
 
-@beaker.cache.cache_region('long_term', 'comment_thread')
+@LONG_TERM_CACHE.cache_on_arguments()
 def get_cacheable_thread(unique_id):
 
     path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)

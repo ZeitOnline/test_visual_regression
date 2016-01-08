@@ -358,13 +358,6 @@ def remove_break(string):
 
 
 @zeit.web.register_filter
-def replace_list_seperator(string, seperator):
-    if isinstance(string, basestring):
-        return string.replace(';', seperator)
-    return string
-
-
-@zeit.web.register_filter
 def is_gallery(context):
     return zeit.content.gallery.interfaces.IGallery.providedBy(context)
 

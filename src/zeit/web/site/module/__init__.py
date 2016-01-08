@@ -6,9 +6,6 @@ import zeit.content.cp.layout
 import zeit.edit.interfaces
 
 
-__import__('pkg_resources').declare_namespace(__name__)
-
-
 class Module(object):
     """Base class for RAM-style modules to be used in cp2015 centerpages.
 

@@ -25,11 +25,13 @@ setup(
     ),
     install_requires=[
         'Babel',
+        'Beaker',  # Only for parsing pylibmc behaviors from ini file.
         'ProxyTypes',
         'PyJWT',
         'bugsnag',
         'colander',
         'cryptography',
+        'dogpile.cache',
         'python-dateutil',
         'grokcore.component',
         'iso8601',
@@ -38,6 +40,7 @@ setup(
         'pyramid',
         'pyramid_beaker',
         'pyramid_debugtoolbar',
+        'pyramid_dogpile_cache',
         'pyramid_jinja2',
         'pyramid_mako',
         'pyramid_tm',
