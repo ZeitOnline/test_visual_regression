@@ -1100,6 +1100,14 @@ def test_article_lineage_should_render_correctly(testbrowser):
     assert len(browser.cssselect('.al-text--next')) == 1
 
 
+def test_article_lineage_should_utilize_feature_toggle(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'article_lineage_is_enabled', False)
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect('.article-lineage')) == 0
+
+
 def test_article_lineage_has_text_elements(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{

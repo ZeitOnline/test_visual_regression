@@ -135,6 +135,8 @@ def test_article03_has_correct_webtrekk_values(testserver, testbrowser):
     assert '13: window.Zeit.breakpoint.getTrackingBreakpoint(),' \
         in browser.contents
     assert '14: "alt"' in browser.contents
+    assert '15: ""' in browser.contents
+    assert '25: "original"' in browser.contents
 
     # noscript string
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,redaktion'
@@ -217,7 +219,7 @@ def test_ivw_tracking_for_mobile_and_desktop_and_wrapper(
         return True
 
     monkeypatch.setattr(
-        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
 
     driver = selenium_driver
 
