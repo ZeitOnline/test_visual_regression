@@ -44,13 +44,11 @@ def app_settings(mockserver):
         'pyramid.debug_notfound': False,
         'pyramid.debug_routematch': False,
         'pyramid.debug_templates': False,
-        'cache.type': 'memory',
-        'cache.lock_file': '/tmp/test_lock',
-        'cache.regions': 'default_term, second, short_term, long_term',
-        'cache.second.expire': '1',
-        'cache.short_term.expire': '60',
-        'cache.default_term.expire': '300',
-        'cache.long_term.expire': '3600',
+        'dogpile_cache.backend': 'dogpile.cache.memory',
+        'dogpile_cache.regions': 'default_term, short_term, long_term',
+        'dogpile_cache.short_term.expiration_time': '60',
+        'dogpile_cache.default_term.expiration_time': '300',
+        'dogpile_cache.long_term.expiration_time': '3600',
         'session.type': 'memory',
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
@@ -307,8 +305,15 @@ def reset_solr(application_session, request):
 
 
 @pytest.fixture
+def reset_cache(application_session, request):
+    for region in zeit.web.core.cache.CACHE_REGIONS.values():
+        region.backend._cache.clear()
+
+
+@pytest.fixture
 def application(
-        application_session, preserve_settings, reset_solr, zodb, request):
+        application_session, preserve_settings, reset_solr, reset_cache,
+        zodb, request):
     # This application_session/application split is a bit clumsy, but some
     # things (e.g. reset connector, teardown zodb) needs to be called after
     # each test (i.e. in 'function' scope). The many diverse fixtures make this
