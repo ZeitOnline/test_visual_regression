@@ -123,17 +123,17 @@ class Base(object):
 
     @zeit.web.reify
     def third_party_modules_is_enabled(self):
-        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.factory.find(
+        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
             'third_party_modules')
 
     @zeit.web.reify
     def iqd_is_enabled(self):
-        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.factory.find(
+        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
             'iqd')
 
     @zeit.web.reify
     def tracking_is_enabled(self):
-        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.factory.find(
+        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
             'tracking')
 
     def _set_response_headers(self):
@@ -508,7 +508,7 @@ class Base(object):
 
     @zeit.web.reify
     def article_lineage_is_enabled(self):
-        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.factory.find(
+        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
             'article_lineage')
 
     @zeit.web.reify

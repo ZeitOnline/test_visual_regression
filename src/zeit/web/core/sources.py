@@ -10,6 +10,7 @@ import xml.sax.saxutils
 
 import gocept.cache.method
 import pysolr
+import zc.sourcefactory.source
 import zope.interface
 
 import zeit.cms.content.sources
@@ -214,10 +215,16 @@ class Solr(object):
         pass
 
 
-class FeatureToggleSource(zeit.cms.content.sources.SimpleXMLSource):
+class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+    # Only contextual so we can customize source_class
 
     product_configuration = 'zeit.web'
     config_url = 'feature-toggle-source'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        def find(self, name):
+            return self.factory.find(name)
 
     def find(self, name):
         try:
@@ -225,4 +232,4 @@ class FeatureToggleSource(zeit.cms.content.sources.SimpleXMLSource):
         except TypeError:
             return False
 
-FEATURE_TOGGLE_SOURCE = FeatureToggleSource()
+FEATURE_TOGGLE_SOURCE = FeatureToggleSource()(None)
