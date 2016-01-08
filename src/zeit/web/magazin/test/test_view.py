@@ -296,11 +296,10 @@ def test_artikel02_has_correct_banner_channel(testserver, testbrowser):
     assert article_view.banner_channel == 'zeitmz/leben/article'
 
 
-def test_artikel05_has_ranked_tags_list(testserver, testbrowser):
+def test_artikel05_has_meta_keywords(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.ranked_tags_list is not None
-    assert article_view.ranked_tags_list != ''
+    assert article_view.meta_keywords
 
 
 def test_artikel01_has_correct_authors_list(testserver, testbrowser):

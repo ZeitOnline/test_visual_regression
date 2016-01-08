@@ -833,11 +833,10 @@ def test_article_has_correct_meta_keywords(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'supertitle', u'Der Supertitle')
     monkeypatch.setattr(
-        zeit.web.site.view_article.Article, u'ranked_tags_list',
-        u'Test;Test 1')
+        zeit.web.core.view.Base, u'meta_keywords', [u'Test', u'Test1'])
     article_view = zeit.web.site.view_article.Article(context, request)
     assert (article_view.meta_keywords ==
-            'Politik, Der Supertitle, Test, Test 1',
+            ['Politik, Der Supertitle, Test, Test 1'],
             ('wrong article keywords'))
 
     # missing values
@@ -846,9 +845,9 @@ def test_article_has_correct_meta_keywords(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'supertitle', u'Der Supertitle')
     monkeypatch.setattr(
-        zeit.web.site.view_article.Article, u'ranked_tags_list', u'')
+        zeit.web.core.view.Base, u'meta_keywords', [])
     article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_keywords == 'Der Supertitle', (
+    assert article_view.meta_keywords == ['Der Supertitle'], (
         'wrong article keywords')
 
 
