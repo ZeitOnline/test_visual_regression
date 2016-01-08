@@ -28,12 +28,6 @@ class AuthenticationPolicy(
                 del request.session['user']
             return
 
-        # Make sure sso_verification in the user session matches the one send
-        # via request
-        if login_id and request.session.get('user') and (
-                request.session['user'].get('sso_verification') != login_id):
-            del request.session['user']
-
         drupal_id = None
         if request.session.get('user') and (
                 request.session['user'].get('uid')):
@@ -47,8 +41,6 @@ class AuthenticationPolicy(
         else:
             log.debug("Request user_info")
             user_info = get_community_user_info(request)
-            if login_id:
-                user_info['sso_verification'] = login_id
             request.session['user'] = user_info
 
         # Drupal 6 gives anonymous users a session and uid==0
