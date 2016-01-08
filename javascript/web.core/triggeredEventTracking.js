@@ -142,11 +142,8 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
     _functions.sendTracking.sendVideoViewToIVW = function() {
 
-        // we expect the ivw function and Z_IVW_RESSORT and IVW to be on the page
-        if ( typeof( window.iom ) === 'undefined' ||
-                typeof( window.iom.c ) !== 'function' ||
-                typeof( Z_IVW_RESSORT ) === 'undefined' ||
-                typeof( IVW ) === 'undefined' ) {
+        // we expect the ivw function to be on the page
+        if ( typeof window.iom  === 'undefined' || typeof window.iom.h !== 'function' ) {
             return;
         }
 
@@ -157,13 +154,14 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 'co': 'URL: ' + window.location.pathname
             };
 
-        if ( Zeit.isMobileView() ) {
-            iam_data.st = Zeit.wrapped ? Zeit.wrapped.ivwclient : 'mobzeit';
+        // in our Wrapper-Apps: always use the 'Angebotskennung' for the 'MEW' (mobile enabled website)
+        if ( Zeit.isMobileView() || Zeit.is_wrapped ) {
+            iam_data.st = 'mobzeit';
         } else {
             iam_data.st = 'zeitonl';
         }
 
-        window.iom.c( iam_data, 1 );
+        window.iom.h( iam_data, 1 );
 
         if ( debugMode ) {
             console.log( '[zonTriggeredEventTracking] IVW data sent: ' );

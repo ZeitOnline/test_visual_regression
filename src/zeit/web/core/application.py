@@ -50,12 +50,6 @@ class Application(object):
         settings = pyramid.config.settings.Settings(d=settings)
         settings['app_servers'] = filter(
             None, settings['app_servers'].split(','))
-        settings['enable_third_party_modules'] = bool(settings.get(
-            'enable_third_party_modules', True))
-        settings['enable_trackers'] = bool(settings.get(
-            'enable_trackers', True))
-        settings['enable_iqd'] = bool(settings.get(
-            'enable_iqd', True))
         settings['linkreach_host'] = maybe_convert_egg_url(
             settings.get('linkreach_host', ''))
 
@@ -189,7 +183,6 @@ class Application(object):
 
         # Route to post comments to a communit service
         config.add_route('post_test_comments', '/admin/test-comments')
-        config.add_route('toggle_third_party_modules', '/admin/toggle-tpm')
 
         config.add_static_view(
             name=self.settings.get('asset_prefix', '/static/latest'),
