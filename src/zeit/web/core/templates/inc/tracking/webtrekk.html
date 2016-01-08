@@ -74,8 +74,18 @@
         };
         {% endif %}
 
-        if( window.location.href.indexOf('/suche/') > -1 && typeof Z_WT_KENNUNG !== 'undefined' ) {
-            if( document.getElementById('search-area-has-hits') ) {
+        var ls = document.getElementById('login-state'),
+            ssoId;
+
+        if (ls) {
+            ssoId = ls.getAttribute('data-sso-id');
+            if (ssoId) {
+                wt.customerId = ssoId;
+            }
+        }
+
+        if ( window.location.href.indexOf('/suche/') > -1 && typeof Z_WT_KENNUNG !== 'undefined' ) {
+            if ( document.getElementById('search-area-has-hits') ) {
                 Z_WT_KENNUNG = Z_WT_KENNUNG.replace('/index', '/treffer');
             } else {
                 Z_WT_KENNUNG = Z_WT_KENNUNG.replace('/index', '/keine_treffer');

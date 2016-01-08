@@ -196,7 +196,7 @@ def test_rewrite_comments_url_should_rewrite_to_static_host(application):
 
 def test_post_comment_should_throw_exception_if_no_user_is_present():
     request = mock.Mock()
-    request.authenticated_userid = False
+    request.authenticated_userid = None
     with pytest.raises(pyramid.httpexceptions.HTTPForbidden):
         zeit.web.core.view_comment.PostComment(mock.Mock(), request)
 
@@ -244,7 +244,7 @@ def test_comment_tree_should_be_flattened_on_level_two():
 
 def _create_poster(monkeypatch):
     request = mock.Mock()
-    request.authenticated_userid = True
+    request.authenticated_userid = '123'
 
     request.params = {'path': 'my/path'}
     request.GET = request.POST = request.params
