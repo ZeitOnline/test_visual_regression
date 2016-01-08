@@ -173,6 +173,7 @@
         </div>
     </div>
     {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
+    {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
     {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
     {% block meetrics %}
@@ -195,7 +196,7 @@
 
     {% if view.vgwort_url %}
     <!--start: vgwort-->
-    <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" id="vgwort_pixel" class="visually-hidden">
+    <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
     <!--end: vgwort-->
     {% endif %}
     {% block cardstack_bottom %}

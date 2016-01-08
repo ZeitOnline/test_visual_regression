@@ -4,6 +4,8 @@ Change log for zeit.web
 2.47 (unreleased)
 -----------------
 
+- FIX: Add ClickCounter to ZON
+
 - ZON-2250: Add label to storystream
 
 - ZON-2214: Enable Nextread for video pages

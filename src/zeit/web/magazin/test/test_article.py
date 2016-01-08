@@ -97,9 +97,6 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
         '//script[@src=\'https://script.ioam.de/iam.js\']'), (
             'script for IVW not in DOM')
     assert locate_by_selector(
-        '//img[starts-with(@src,\'http://cc.zeit.de/cc.gif\')]'), (
-            'pixel for ClickCounter not in DOM')
-    assert locate_by_selector(
         '//img[starts-with(@src,\'http://zeitonl.ivwbox.de\')]'), (
             'pixel for IVW not in DOM')
 
@@ -511,12 +508,6 @@ def test_artikel_header_sequelpage_should_have_correct_source(
     assert browser.cssselect('header.article__head.article__head--sequel')
 
 
-def test_gallery_should_have_click_counter_functions(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
-    assert 'var clickCount = {' in browser.contents
-
-
 def test_nextread_teaser_block_has_teasers_available(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
     nextread = zeit.web.core.interfaces.INextread(context)
@@ -790,3 +781,13 @@ def test_zmo_should_not_render_advertisement_nextread(
     # /artikel/10 has ressort 'Wirtschaft' which has ad-nextread content.
     browser = testbrowser('/artikel/10')
     assert len(browser.cssselect('.nextread-advertisement')) == 0
+
+
+def test_article_contains_zeit_clickcounter(testbrowser):
+    browser = testbrowser('/artikel/03')
+    counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')
+    assert ("img.src = 'http://cc.zeit.de/cc.gif?banner-channel="
+            "zeitmz/essenundtrinken/article") in browser.contents
+    assert len(counter) == 1
+    assert ('cc.zeit.de/cc.gif?banner-channel=zeitmz/essenundtrinken/article'
+            ) in counter[0].get('src')
