@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
+- HOTFIX: Make topic teaser more stable, if invalid CP is referenced
+
 
 2.46 (2016-01-06)
 -----------------
