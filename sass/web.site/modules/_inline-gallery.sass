@@ -36,10 +36,6 @@ html.js
         .inline-gallery
             visibility: visible
 
-.bx-wrapper
-    display: table
-    caption-side: top
-    width: 100%
 .bx-wrapper--touch
     .bx-controls
         padding: $page-padding $page-padding 1em
@@ -47,21 +43,17 @@ html.js
             padding: 0 0 1em
 .bx-wrapper--no-touch
     .bx-controls
+        +pie-clearfix
         padding: $page-padding
         display: none
         +respond-min($break-gallery-min)
-            display: table-caption
+            display: block
         +respond-min($break-tablet-min)
             padding: 0 0 $page-padding
     +respond-min($break-gallery-min)
         .figure__index
             display: none
-.bx-viewport
-    position: relative
 
-// controls
-.bx-controls
-    display: table-caption
 .bx-controls-direction
     float: right
 .bx-wrapper--touch .bx-pager
@@ -148,6 +140,7 @@ html.js
     position: absolute
 
 .bx-viewport
+    position: relative
     +on-interaction
         .bx-overlay-prev,
         .bx-overlay-next
@@ -180,26 +173,19 @@ html.js
 .bx-loading
     display: none
 
-// @todo styles for no javascript
-// .no-js .inline-gallery
-//     figure
-//         margin-top: 0
-//         margin-bottom: $little
-//         position: relative
-//         &:first-child
-//             margin-top: $medium
-//     .figure__caption
-//         bottom: 0
-//         color: $white
-//         font-size: em(18px)
-//         left: 0
-//         margin: 0
-//         max-width: 100%
-//         padding: $little
-//         position: absolute
-//         text-shadow: 1px 1px 3px $black
-//         width: 100%
-//         z-index: 9999
-//     .figure__copyright
-//         display: block
-//         color: $grey
+.no-js .inline-gallery
+    padding-top: $vertical-space * 2
+    figure
+        margin-top: 0
+        margin-bottom: $vertical-space
+        &:last-child
+            .figure__caption
+                margin-bottom: $vertical-space
+    .figure__media
+        max-width: 100%
+    .figure__caption
+        max-width: 100%
+        width: remify(580px)
+        margin-bottom: $vertical-space * 2
+    .figure__copyright
+        display: block
