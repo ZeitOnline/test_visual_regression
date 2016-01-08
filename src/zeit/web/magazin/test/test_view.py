@@ -299,7 +299,7 @@ def test_artikel02_has_correct_banner_channel(testserver, testbrowser):
 def test_artikel05_has_meta_keywords(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.meta_keywords
+    assert article_view.meta_keywords == ['Sterben', 'Tod', 'Bestattung']
 
 
 def test_artikel01_has_correct_authors_list(testserver, testbrowser):
