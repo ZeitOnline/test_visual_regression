@@ -12,6 +12,13 @@ def policy():
     return AuthenticationPolicy()
 
 
+def sso_cookie_patch(cookie, key):
+    return {
+        'name': 'my_name',
+        'email': 'my_email@example.com',
+        'id': 'foo'}
+
+
 def test_cookieless_request_returns_nothing(policy, dummy_request):
     assert policy.authenticated_userid(dummy_request) is None
 
@@ -34,13 +41,10 @@ def test_session_cache_cleared_when_id_changes(
     </user>
     """
 
-    def sso_cookie_patch(cookie, key):
-        return {
-            'name': 'my_name',
-            'email': 'my_email@example.com',
-            'id': 'foo'}
+    monkeypatch.setattr(
+        zeit.web.core.security, 'get_user_info_from_sso_cookie',
+        sso_cookie_patch)
 
-    monkeypatch.setattr(zeit.web.core.security, 'get_user_info_from_sso_cookie', sso_cookie_patch)
     server = mockserver_factory(user_xml)
     dummy_request.registry.settings['community_host'] = server.url
     dummy_request.cookies['http://my_sso_cookie'] = 'foo'
@@ -53,7 +57,7 @@ def test_session_cache_cleared_when_id_changes(
 
 
 def test_empty_cache_triggers_backend_fills_cache(
-        policy, dummy_request, mockserver_factory):
+        policy, dummy_request, mockserver_factory, monkeypatch):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>457322</uid>
@@ -63,12 +67,18 @@ def test_empty_cache_triggers_backend_fills_cache(
         </roles>
     </user>
     """
+
+    monkeypatch.setattr(
+        zeit.web.core.security, 'get_user_info_from_sso_cookie',
+        sso_cookie_patch)
+
     server = mockserver_factory(user_xml)
     dummy_request.registry.settings['community_host'] = server.url
     dummy_request.cookies['http://my_sso_cookie'] = 'foo'
     dummy_request.headers['Cookie'] = ''
     assert 'user' not in dummy_request.session
-    assert policy.authenticated_userid(dummy_request) == '457322'
+    assert policy.authenticated_userid(dummy_request) == 'foo'
+    assert dummy_request.session['user']['uid'] == '457322'
     assert dummy_request.session['user']['name'] == 'test-user'
 
 
