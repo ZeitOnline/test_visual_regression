@@ -943,7 +943,7 @@ def provides(obj, iface):
         return False
     return iface.providedBy(obj)
 
-@zeit.web.register_global
-def get_random_numer(length):
-    return random.randint(0, 10**length)
 
+@zeit.web.register_global
+def get_random_number(length):
+    return random.randint(0, 10**length)
