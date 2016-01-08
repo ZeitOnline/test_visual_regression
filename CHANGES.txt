@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2250: Add label to storystream
 
+- ZON-2575: Move feature toggles to configuration file
+
 - MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
 - ZON-2594: New customParameter for Webtrekk: platform
