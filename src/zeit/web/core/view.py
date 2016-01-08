@@ -438,12 +438,10 @@ class Base(object):
         return tags
 
     @zeit.web.reify
-    def ranked_tags_list(self):
-        if self.ranked_tags:
-            return ';'.join([rt.label for rt in self.ranked_tags])
-        else:
-            default_tags = [self.context.ressort, self.context.sub_ressort]
-            return ';'.join([dt for dt in default_tags if dt])
+    def meta_keywords(self):
+        result = self.ranked_tags if self.ranked_tags else [
+            self.context.ressort, self.context.sub_ressort]
+        return [x for x in result if x]
 
     @zeit.web.reify
     def is_hp(self):
