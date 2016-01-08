@@ -34,7 +34,7 @@ def test_session_cache_cleared_when_id_changes(
     """
     server = mockserver_factory(user_xml)
     dummy_request.registry.settings['community_host'] = server.url
-    dummy_request.cookies['http://my_sso_cookie'] = 'foo'
+    dummy_request.cookies['my_sso_cookie'] = 'foo'
     # Session still contains old user id and sensitive information
     dummy_request.session['user'] = dict(uid=42, name='s3crit')
     dummy_request.cookies['login_id'] = 'foo'
@@ -56,7 +56,7 @@ def test_empty_cache_triggers_backend_fills_cache(
     """
     server = mockserver_factory(user_xml)
     dummy_request.registry.settings['community_host'] = server.url
-    dummy_request.cookies['http://my_sso_cookie'] = 'foo'
+    dummy_request.cookies['my_sso_cookie'] = 'foo'
     dummy_request.headers['Cookie'] = ''
     assert 'user' not in dummy_request.session
     assert policy.authenticated_userid(dummy_request) == '457322'
