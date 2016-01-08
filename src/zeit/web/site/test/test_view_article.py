@@ -1246,4 +1246,4 @@ def test_article_contains_zeit_clickcounter(testbrowser):
             "sport/article") in browser.contents
     assert len(counter) == 1
     assert ('cc.zeit.de/cc.gif?banner-channel=sport/article'
-        ) in counter[0].get('src')
+            ) in counter[0].get('src')
