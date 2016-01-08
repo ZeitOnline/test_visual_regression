@@ -97,7 +97,7 @@ class Base(object):
         if pyramid.settings.asbool(self.request.registry.settings.get(
                 'redirect_from_cp2015', True)):
             redirect_on_cp2015_suffix(self.request)
-        time = zeit.web.core.cache.ICachingTime(self.context)
+        time = zeit.web.core.interfaces.ICachingTime(self.context)
 
         # Make sure comments are loaded
         if hasattr(self, 'comments'):
@@ -438,12 +438,12 @@ class Base(object):
         return tags
 
     @zeit.web.reify
-    def ranked_tags_list(self):
+    def meta_keywords(self):
         if self.ranked_tags:
-            return ';'.join([rt.label for rt in self.ranked_tags])
+            result = [x.label for x in self.ranked_tags]
         else:
-            default_tags = [self.context.ressort, self.context.sub_ressort]
-            return ';'.join([dt for dt in default_tags if dt])
+            result = [self.context.ressort, self.context.sub_ressort]
+        return [x for x in result if x]
 
     @zeit.web.reify
     def is_hp(self):

@@ -14,8 +14,8 @@
         <title>{{ view.pagetitle }}</title>
         {% endblock pagetitle %}
         <meta name="description" content="{{ view.pagedescription }}">
-        {% if view.ranked_tags_list -%}
-            <meta name="keywords" content="{{ view.ranked_tags_list | replace_list_seperator(', ') }}">
+        {% if view.meta_keywords -%}
+            <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
         {%- endif %}
         <meta name="robots" content="{{ view.meta_robots }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" id="viewport-meta">
@@ -182,7 +182,6 @@
         {% include "zeit.web.core:templates/inc/tracking/zeit.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/tracking/clickcount.html" ignore missing %}
 
         <script type="text/javascript">
             var require = { baseUrl: '{{ request.asset_host }}/js/' };
@@ -204,7 +203,7 @@
 
         {% if view.vgwort_url %}
         <!--start: vgwort-->
-        <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" id="vgwort_pixel" class="visually-hidden">
+        <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
         <!--end: vgwort-->
         {% endif %}
     </body>

@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - BUG-327: Add webtrekk customerId for authenticated users
 
+- ZON-2448: Fix IE11 misplaced buttons gallery bug
+
+- FIX: Add ClickCounter to ZON
+
 - ZON-2250: Add label to storystream
 
 - ZON-2214: Enable Nextread for video pages
@@ -14,11 +18,17 @@ Change log for zeit.web
 
 - ZON-2594: New customParameter for Webtrekk: platform
 
-- MAINT: Add WAI-ARIA roles, states, and properties for accordion component
+- ZON-2592: Use dogpile.cache instead of beaker for caching/memcache
+
+- ZON-2175: Add ressort and kicker to meta keywords
 
 - ZON-2416: Insert new meta robot rules to Serienseiten
 
 - HOTFIX: Make topic teaser more stable, if invalid CP is referenced
+
+- FIX: Add ClickCounter to ZON
+
+- MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
 
 2.46 (2016-01-06)

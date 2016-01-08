@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
-from zeit.cms.interfaces import ID_NAMESPACE as NS
-import lxml.etree
-import pyramid.httpexceptions
-import mock
-import pytest
-import zeit.web.core.view_comment
-import itertools
-from mock import patch
-import zope
-import requests
-import operator
-import beaker
 import datetime
+import itertools
+import operator
 import time
+
+from mock import patch
+import dogpile.cache.region
+import lxml.etree
+import mock
+import pyramid.httpexceptions
+import pytest
 import pytz
+import requests
+import zope.component
+
+from zeit.cms.interfaces import ID_NAMESPACE as NS
+import zeit.web.core.view_comment
 
 
 def test_comment_count_should_handle_missing_uid_param(comment_counter):
@@ -269,13 +271,10 @@ def _create_poster(monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.view_comment.PostComment, '_nid_by_comment_thread', nid)
 
-    def cache_mock(arg1, arg2, arg3):
-        def wrap(f):
-            def wrapped_f(*args):
-                f(*args)
-            return wrapped_f
-        return wrap
-    monkeypatch.setattr(beaker.cache, 'cache_region', cache_mock)
+    def dont_cache(self, key, creator, *args, **kw):
+        return creator()
+    monkeypatch.setattr(
+        dogpile.cache.region.CacheRegion, 'get_or_create', dont_cache)
 
     return zeit.web.core.view_comment.PostComment(context, request)
 

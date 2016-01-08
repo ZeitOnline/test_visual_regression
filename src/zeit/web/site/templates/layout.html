@@ -10,8 +10,8 @@
     <!-- http-equiv='X-UA-Compatible' via Server -->
     <title>{{ view.pagetitle }}</title>
     <meta name="description" content="{{ view.pagedescription }}">
-    {% if view.ranked_tags_list -%}
-        <meta name="keywords" content="{{ view.ranked_tags_list | replace_list_seperator(', ') }}">
+    {% if view.meta_keywords -%}
+        <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
     {% endif -%}
     <meta name="robots" content="{{ view.meta_robots }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
@@ -173,6 +173,7 @@
         </div>
     </div>
     {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
+    {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
     {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
     {% block meetrics %}
@@ -195,7 +196,7 @@
 
     {% if view.vgwort_url %}
     <!--start: vgwort-->
-    <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" id="vgwort_pixel" class="visually-hidden">
+    <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
     <!--end: vgwort-->
     {% endif %}
     {% block cardstack_bottom %}
