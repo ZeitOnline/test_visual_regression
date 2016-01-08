@@ -110,17 +110,24 @@ def test_salvageable_pagination_should_redirect_to_article_page(testserver):
     assert resp.status_code == 301
 
 
-def test_vgwort_pixel_should_be_present(testserver, testbrowser):
-    select = testbrowser('{}/artikel/01'.format(testserver.url)).cssselect
-    assert len(select('body img#vgwort_pixel')) == 1
+def test_vgwort_pixel_should_be_present(testbrowser):
+    browser = testbrowser('/artikel/01')
+    pixel = browser.cssselect('body img[src^="http://example.com"]')
+    assert len(pixel) == 1
+    assert pixel[0].get('src').startswith('http://example.com/vgwort/')
+    # check for http://example.com/vgwort/1d19d1df864c492188198be0291ff993
+    # doesn't work because bitblt is processing all image sources in tests
 
-    select = testbrowser('{}/zeit-online/article/01'.format(
-        testserver.url)).cssselect
-    assert len(select('body img#vgwort_pixel')) == 1
+    browser = testbrowser('/zeit-online/article/01')
+    pixel = browser.cssselect('body img[src^="http://example.com"]')
+    assert len(pixel) == 1
+    assert pixel[0].get('src').startswith('http://example.com/vgwort/')
+    # check for http://example.com/vgwort/1d19d1df864c492188198be0291ff993
+    # doesn't work because bitblt is processing all image sources in tests
 
-    select = testbrowser('{}/zeit-online/index'.format(
-        testserver.url)).cssselect
-    assert len(select('body img#vgwort_pixel')) == 0
+    browser = testbrowser('/zeit-online/index')
+    pixel = browser.cssselect('body img[src^="http://example.com"]')
+    assert len(pixel) == 0
 
 
 def test_content_should_have_marker_interface(application):
