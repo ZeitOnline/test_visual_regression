@@ -785,7 +785,9 @@ def test_zmo_should_not_render_advertisement_nextread(
 
 def test_article_contains_zeit_clickcounter(testbrowser):
     browser = testbrowser('/artikel/03')
-    counter = browser.cssselect('img[src^="http://cc.zeit.de"]')
+    counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')
+    assert ("img.src = 'http://cc.zeit.de/cc.gif?banner-channel="
+            "zeitmz/essenundtrinken/article") in browser.contents
     assert len(counter) == 1
     assert ('cc.zeit.de/cc.gif?banner-channel=zeitmz/essenundtrinken/article'
         ) in counter[0].get('src')

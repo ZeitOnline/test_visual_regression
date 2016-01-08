@@ -1233,7 +1233,9 @@ def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
 
 def test_article_contains_zeit_clickcounter(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
-    counter = browser.cssselect('img[src^="http://cc.zeit.de"]')
+    counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')
+    assert ("img.src = 'http://cc.zeit.de/cc.gif?banner-channel="
+            "sport/article") in browser.contents
     assert len(counter) == 1
     assert ('cc.zeit.de/cc.gif?banner-channel=sport/article'
         ) in counter[0].get('src')

@@ -1,3 +1,7 @@
-<img src="http://cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}
-    &amp;r={{ request.headers.get('Referer', '') | urlencode -}}
-    &amp;rand={{ get_random_numer(8) }}" width="1" height="1" alt="" class="visually-hidden">
+<script>
+    var img = document.createElement( 'img' );
+    img.src = 'http://cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode }}' + '&r=' + encodeURIComponent( document.referrer ) + '&rand=' + Math.round( Math.random() * 100000000 );
+</script>
+<noscript>
+    <img src="http://cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}&amp;r=&amp;rand={{ get_random_numer(8) }}">
+</noscript>
