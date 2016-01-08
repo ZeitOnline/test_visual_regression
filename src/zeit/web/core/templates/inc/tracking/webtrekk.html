@@ -64,7 +64,8 @@
             12: window.Zeit.getSiteParam("site"),
             13: window.Zeit.breakpoint.getTrackingBreakpoint(),
             14: "{{ 'alt' if 'zeitmz' in view.banner_channel | default('', True) else 'neu'  }}",
-            15: "{{ push }}"
+            15: "{{ push }}",
+            25: "original" // Plattform (original|amp|instant article)
         };
 
         {% if view.is_wrapped %}
