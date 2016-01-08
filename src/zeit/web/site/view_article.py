@@ -110,9 +110,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
     def meta_keywords(self):
-        if self.ranked_tags_list:
-            self.ranked_tags_list = self.ranked_tags_list.replace(';', ', ')
-
         keywords = [self.ressort.capitalize(),
                     self.supertitle,
                     self.ranked_tags_list]

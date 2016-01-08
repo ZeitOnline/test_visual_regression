@@ -11,7 +11,7 @@
     <title>{{ view.pagetitle }}</title>
     <meta name="description" content="{{ view.pagedescription }}">
     {% if view.meta_keywords -%}
-        <meta name="keywords" content="{{ view.meta_keywords }}">
+        <meta name="keywords" content="{{ view.meta_keywords | replace_list_seperator(', ') }}">
     {% endif -%}
     <meta name="robots" content="{{ view.meta_robots }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
