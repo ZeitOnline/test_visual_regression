@@ -231,8 +231,7 @@ class RoutesMapper(pyramid.urldispatch.RoutesMapper):
 
         if not request.headers.get('Host', '').startswith('newsfeed') and (
                 self.matches_blacklist(path)):
-            raise pyramid.httpexceptions.HTTPNotImplemented(
-                headers=[('X-Render-With', 'default')])
+            return {'route': self.routes['blacklist'], 'match': {}}
 
         return super(RoutesMapper, self).__call__(request)
 

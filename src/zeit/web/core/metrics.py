@@ -99,9 +99,6 @@ def view_timer_traversal(event):
         # Detect static_view, see pyramid.config.view.StaticURLInfo.add().
         if request.matched_route.name.startswith('__'):
             view_name = 'static'
-        # Detect dynamic blacklist routes, see zeit.web.core.application.
-        elif request.matched_route.name.startswith('blacklist_'):
-            view_name = 'blacklist'
         else:
             view_name = request.matched_route.name
     else:

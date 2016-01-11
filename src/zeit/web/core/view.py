@@ -875,6 +875,12 @@ def surrender(context, request):
         'OK', 303, headerlist=[('X-Render-With', 'default')])
 
 
+@pyramid.view.view_config(route_name='blacklist')
+def blacklist(context, request):
+    return pyramid.httpexceptions.HTTPNotImplemented(
+        headers=[('X-Render-With', 'default')])
+
+
 @pyramid.view.view_config(route_name='json_delta_time', renderer='json')
 def json_delta_time(request):
     unique_id = request.GET.get('unique_id', None)
