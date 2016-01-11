@@ -109,6 +109,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return breadcrumbs
 
     @zeit.web.reify
+    def meta_keywords(self):
+        return [x for x in ([self.ressort.capitalize(), self.supertitle] +
+                super(Article, self).meta_keywords) if x]
+
+    @zeit.web.reify
     def has_cardstack(self):
         return len(self.context.xml.xpath('/article/body//cardstack')) > 0
 

@@ -106,15 +106,15 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 window.IQD_ReloadHandle();
 
                 // emit webtrekk PI
-                if ( typeof window.wt !== 'undefined' ) {
+                if ( 'wt' in window && typeof window.wt.sendinfo === 'function' ) {
                     log( 'webtrekk emitted' );
                     window.wt.sendinfo();
                 }
 
                 // emit IVW PI
-                if ( typeof window.iom !== 'undefined' && typeof window.iam_data !== 'undefined' ) {
+                if ( 'iom' in window && typeof window.iom.h === 'function' && typeof window.iam_data !== 'undefined' ) {
                     log( 'ivw emitted' );
-                    window.iom.c( window.iam_data, 1 );
+                    window.iom.h( window.iam_data, 1 );
                 }
             }
         }

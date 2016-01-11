@@ -53,7 +53,7 @@
             1: "{{ view.authors_list | lower }}", // Autor
             2: "{{ ivw_code }}", // IVW-Code
             3: "{{ pagination }}", // Seite
-            4: "{{ view.ranked_tags_list | lower if view.ressort | lower != 'homepage'}}", // Schlagworte
+            4: "{{ view.meta_keywords | join(', ') | lower if view.ressort | lower != 'homepage'}}", // Schlagworte
             5: "{{ view.date_last_modified }}", // Last published
             6: "{{ view.text_length }}", // Textlänge
             7: "{{ view.news_source | lower }}", // Quelle
@@ -64,7 +64,8 @@
             12: window.Zeit.getSiteParam("site"),
             13: window.Zeit.breakpoint.getTrackingBreakpoint(),
             14: "{{ 'alt' if 'zeitmz' in view.banner_channel | default('', True) else 'neu'  }}",
-            15: "{{ push }}"
+            15: "{{ push }}",
+            25: "original" // Plattform (original|amp|instant article)
         };
 
         {% if view.is_wrapped %}
@@ -73,8 +74,18 @@
         };
         {% endif %}
 
-        if( window.location.href.indexOf('/suche/') > -1 && typeof Z_WT_KENNUNG !== 'undefined' ) {
-            if( document.getElementById('search-area-has-hits') ) {
+        var ls = document.getElementById('login-state'),
+            ssoId;
+
+        if (ls) {
+            ssoId = ls.getAttribute('data-sso-id');
+            if (ssoId) {
+                wt.customerId = ssoId;
+            }
+        }
+
+        if ( window.location.href.indexOf('/suche/') > -1 && typeof Z_WT_KENNUNG !== 'undefined' ) {
+            if ( document.getElementById('search-area-has-hits') ) {
                 Z_WT_KENNUNG = Z_WT_KENNUNG.replace('/index', '/treffer');
             } else {
                 Z_WT_KENNUNG = Z_WT_KENNUNG.replace('/index', '/keine_treffer');
@@ -105,7 +116,7 @@
             view.authors_list | lower,
             ivw_code,
             pagination,
-            view.ranked_tags_list | lower,
+            view.meta_keywords | join(', ') | lower,
             view.date_last_modified,
             view.text_length,
             view.news_source | lower,

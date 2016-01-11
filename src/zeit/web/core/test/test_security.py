@@ -8,7 +8,7 @@ import mock
 import pytest
 
 from zeit.web.core.comments import get_thread
-from zeit.web.core.security import get_community_user_info
+from zeit.web.core.security import get_user_info
 import zeit.web.core.security
 
 
@@ -109,7 +109,7 @@ def test_cookieless_request_clears_session(policy, dummy_request):
 
 
 def test_empty_cache_triggers_backend_fills_cache(
-        policy, dummy_request, mockserver_factory):
+        policy, dummy_request, mockserver_factory, monkeypatch):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>457322</uid>
@@ -119,12 +119,24 @@ def test_empty_cache_triggers_backend_fills_cache(
         </roles>
     </user>
     """
+
+    def sso_cookie_patch(cookie, key):
+        return {
+            'name': 'my_name',
+            'email': 'my_email@example.com',
+            'id': 'foo'}
+
+    monkeypatch.setattr(
+        zeit.web.core.security, 'get_user_info_from_sso_cookie',
+        sso_cookie_patch)
+
     server = mockserver_factory(user_xml)
     dummy_request.registry.settings['community_host'] = server.url
-    dummy_request.cookies['my_sso_cookie'] = 'foo'
+    dummy_request.cookies['http://my_sso_cookie'] = 'foo'
     dummy_request.headers['Cookie'] = ''
     assert 'user' not in dummy_request.session
-    assert policy.authenticated_userid(dummy_request) == '457322'
+    assert policy.authenticated_userid(dummy_request) == 'foo'
+    assert dummy_request.session['user']['uid'] == '457322'
     assert dummy_request.session['user']['name'] == 'test-user'
 
 
@@ -143,7 +155,7 @@ def test_unreachable_community_should_not_produce_error(dummy_request):
     dummy_request.headers['Cookie'] = ''
     user_info = dict(uid=0, name=None, picture=None, roles=[],
                      mail=None, premoderation=False)
-    assert get_community_user_info(dummy_request) == user_info
+    assert get_user_info(dummy_request) == user_info
 
 
 @pytest.mark.xfail(reason='Testing broken dependencies is an unsolved issue.')
@@ -160,10 +172,10 @@ def test_malformed_community_response_should_not_produce_error(
     dummy_request.cookies['drupal-userid'] = 23
     dummy_request.headers['Cookie'] = ''
     user_info = dict(uid=0, name=None, picture=None, roles=[], mail=None)
-    assert get_community_user_info(dummy_request) == user_info
+    assert get_user_info(dummy_request) == user_info
 
 
-def test_get_community_user_info_strips_malformed_picture_value(
+def test_get_user_info_strips_malformed_picture_value(
         dummy_request, mockserver_factory):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
@@ -172,11 +184,11 @@ def test_get_community_user_info_strips_malformed_picture_value(
     """
     server = mockserver_factory(user_xml)
     dummy_request.registry.settings['community_host'] = server.url
-    user_info = get_community_user_info(dummy_request)
+    user_info = get_user_info(dummy_request)
     assert user_info['picture'] is None
 
 
-def test_get_community_user_info_replaces_community_host(
+def test_get_user_info_replaces_community_host(
         dummy_request, mockserver_factory):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
@@ -185,5 +197,5 @@ def test_get_community_user_info_replaces_community_host(
     """
     server = mockserver_factory(user_xml)
     dummy_request.registry.settings['community_host'] = server.url
-    user_info = get_community_user_info(dummy_request)
+    user_info = get_user_info(dummy_request)
     assert user_info['picture'] == 'http://static_community/foo/picture.png'

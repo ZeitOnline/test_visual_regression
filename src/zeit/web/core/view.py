@@ -122,19 +122,19 @@ class Base(object):
             return '{}/{}'.format(conf.get('vgwort_url'), token)
 
     @zeit.web.reify
-    def enable_third_party_modules(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('enable_third_party_modules', True)
+    def third_party_modules_is_enabled(self):
+        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
+            'third_party_modules')
 
     @zeit.web.reify
-    def enable_iqd(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('enable_iqd', True)
+    def iqd_is_enabled(self):
+        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
+            'iqd')
 
     @zeit.web.reify
-    def enable_tracking(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('enable_tracking', True)
+    def tracking_is_enabled(self):
+        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
+            'tracking')
 
     def _set_response_headers(self):
         # ZMO Version header
@@ -438,12 +438,12 @@ class Base(object):
         return tags
 
     @zeit.web.reify
-    def ranked_tags_list(self):
+    def meta_keywords(self):
         if self.ranked_tags:
-            return ';'.join([rt.label for rt in self.ranked_tags])
+            result = [x.label for x in self.ranked_tags]
         else:
-            default_tags = [self.context.ressort, self.context.sub_ressort]
-            return ';'.join([dt for dt in default_tags if dt])
+            result = [self.context.ressort, self.context.sub_ressort]
+        return [x for x in result if x]
 
     @zeit.web.reify
     def is_hp(self):
@@ -507,9 +507,9 @@ class Base(object):
         return conf.get('dev_environment', '')
 
     @zeit.web.reify
-    def featuretoggle_articlelineage(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('enable_article_lineage', '')
+    def article_lineage_is_enabled(self):
+        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
+            'article_lineage')
 
     @zeit.web.reify
     def timezone(self):
@@ -889,16 +889,6 @@ def json_delta_time(request):
     else:
         return pyramid.response.Response(
             'Missing parameter: unique_id or date', 412)
-
-
-@pyramid.view.view_config(
-    route_name='toggle_third_party_modules',
-    renderer='json',
-    custom_predicates=(zeit.web.core.is_admin,))
-def toggle_third_party_modules(request):
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['enable_third_party_modules'] = not conf['enable_third_party_modules']
-    return conf
 
 
 def json_delta_time_from_date(date, parsed_base_date):

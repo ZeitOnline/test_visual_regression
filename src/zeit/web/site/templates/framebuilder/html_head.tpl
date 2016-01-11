@@ -41,11 +41,11 @@
     <noscript>
         <link href="{{ request.asset_host }}/css/icons/site.fallback.css" rel="stylesheet">
     </noscript>
-    {% if view.enable_third_party_modules %}
+    {% if view.third_party_modules_is_enabled %}
         <!-- IVW -->
         <script id="ivw-v2" type="text/javascript" src="https://script.ioam.de/iam.js"></script>
     {% endif %}
-    {% if view.enable_third_party_modules and view.enable_iqd %}
+    {% if view.third_party_modules_is_enabled and view.iqd_is_enabled %}
         {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
         {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}

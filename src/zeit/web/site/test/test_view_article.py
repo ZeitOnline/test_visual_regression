@@ -820,6 +820,37 @@ def test_imported_article_has_special_meta_robots(
         'wrong robots for none product article')
 
 
+def test_article_has_correct_meta_keywords(
+        application, monkeypatch):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+
+    # all values
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'politik')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'supertitle', u'Der Supertitle')
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, u'meta_keywords', [u'Test', u'Test1'])
+    article_view = zeit.web.site.view_article.Article(context, request)
+    assert (article_view.meta_keywords ==
+            ['Politik, Der Supertitle, Test, Test 1'],
+            ('wrong article keywords'))
+
+    # missing values
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'supertitle', u'Der Supertitle')
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, u'meta_keywords', [])
+    article_view = zeit.web.site.view_article.Article(context, request)
+    assert article_view.meta_keywords == ['Der Supertitle'], (
+        'wrong article keywords')
+
+
 def test_robots_rules_for_angebote_articles(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -1068,15 +1099,23 @@ def test_article_lineage_should_render_correctly(testbrowser):
     assert len(browser.cssselect('.al-text--next')) == 1
 
 
+def test_article_lineage_should_utilize_feature_toggle(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.view.Base, 'article_lineage_is_enabled', False)
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect('.article-lineage')) == 0
+
+
 def test_article_lineage_has_text_elements(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{
         u'supertitle': u'a',
         u'uniqueId': u'http://xml.zeit.de/01',
         u'title': u'b'}, {
-        u'supertitle': u'c',
-        u'uniqueId': u'http://xml.zeit.de/02',
-        u'title': u'd'}]
+            u'supertitle': u'c',
+            u'uniqueId': u'http://xml.zeit.de/02',
+            u'title': u'd'}]
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(browser.cssselect('.al-text__kicker')) == 2
     assert len(browser.cssselect('.al-text__supertitle')) == 2
@@ -1229,3 +1268,13 @@ def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-expired-image')
     assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
     assert len(browser.cssselect('.nextread.nextread--no-image')) == 1
+
+
+def test_article_contains_zeit_clickcounter(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')
+    assert ("img.src = 'http://cc.zeit.de/cc.gif?banner-channel="
+            "sport/article") in browser.contents
+    assert len(counter) == 1
+    assert ('cc.zeit.de/cc.gif?banner-channel=sport/article'
+            ) in counter[0].get('src')
