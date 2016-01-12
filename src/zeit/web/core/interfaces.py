@@ -62,6 +62,12 @@ class IDeltaSecondsEntity(IDeltaTimeEntity):
     """A babelfied seconds entity from a delta time"""
 
 
+class ICachingTime(zope.interface.Interface):
+    """Provide a caching time in seconds for a content object such as
+    ICMSContent.
+    """
+
+
 class INavigation(zope.interface.Interface):
     """A navigation bar containing navigation items"""
 

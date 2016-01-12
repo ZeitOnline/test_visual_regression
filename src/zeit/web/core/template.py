@@ -4,6 +4,7 @@ import datetime
 import itertools
 import logging
 import mimetypes
+import random
 import re
 import time
 import types
@@ -353,13 +354,6 @@ def startswith(string, value):
 def remove_break(string):
     if isinstance(string, basestring):
         return re.sub('\n', '', string)
-    return string
-
-
-@zeit.web.register_filter
-def replace_list_seperator(string, seperator):
-    if isinstance(string, basestring):
-        return string.replace(';', seperator)
     return string
 
 
@@ -941,3 +935,8 @@ def provides(obj, iface):
     except ValueError:
         return False
     return iface.providedBy(obj)
+
+
+@zeit.web.register_global
+def get_random_number(length):
+    return random.randint(0, 10**length)

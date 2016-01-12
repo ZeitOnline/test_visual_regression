@@ -11,7 +11,6 @@ import pytz
 import pyramid.view
 import lxml.etree
 import lxml.objectify
-import zope.component
 from types import NoneType
 
 import zeit.content.cp.interfaces
@@ -111,7 +110,7 @@ class Newsfeed(Base):
         super(Newsfeed, self).__call__()
         self.request.response.content_type = 'application/rss+xml'
         self.request.response.cache_expires(
-            zeit.web.core.cache.caching_time_feed(self.context))
+            zeit.web.core.cachingtime.caching_time_feed(self.context))
         return lxml.etree.tostring(
             self.build_feed(), pretty_print=True, xml_declaration=True,
             encoding='UTF-8')

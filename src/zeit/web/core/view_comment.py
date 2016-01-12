@@ -6,7 +6,6 @@ import urllib
 import urlparse
 import datetime
 
-import beaker.cache
 import lxml
 import pyramid.httpexceptions
 import pyramid.view
@@ -469,11 +468,7 @@ class RecommendCommentResource(PostCommentResource):
 
 
 def invalidate_comment_thread(unique_id):
-    beaker.cache.region_invalidate(
-        zeit.web.core.comments.get_cacheable_thread,
-        None,
-        'comment_thread',
-        unique_id)
+    zeit.web.core.comments.get_cacheable_thread.invalidate(unique_id)
 
 
 @pyramid.view.view_config(route_name='invalidate_comment_thread')
@@ -510,9 +505,5 @@ def invalidate_maintenance(request):
             title='No path given',
             explanation='A maintenance object is not configured.')
 
-    beaker.cache.region_invalidate(
-        zeit.web.core.comments._community_maintenance_cache,
-        None,
-        'community_maintenance',
-        unique_id)
+    zeit.web.core.comments._community_maintenance_cache.invalidate(unique_id)
     return pyramid.response.Response('OK', 200)

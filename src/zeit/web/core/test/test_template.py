@@ -167,7 +167,7 @@ def test_substitute_image_returns_empty_if_pattern_is_invalid(
         image_group_factory(), 'moep')
 
 
-def test_substitue_image_returns_empty_on_candidate_shortage(
+def test_substitute_image_returns_empty_on_candidate_shortage(
         application, image_group_factory):
     assert not zeit.web.core.template.closest_substitute_image(
         image_group_factory(), 'zmo-small')

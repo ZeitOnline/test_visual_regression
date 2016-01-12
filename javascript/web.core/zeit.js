@@ -1,3 +1,4 @@
+// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 /**
  * @fileOverview ZEIT ONLINE core javascript module [Zeit]
  * @author moritz.stoltenburg@zeit.de
@@ -6,6 +7,44 @@
 define( function() {
     var Zeit = window.Zeit || {},
         extension = {
+            clickCount: {
+                webtrekk: function( id ) {
+                    // webtrekk
+                    if ( id !== undefined && 'wt' in window && typeof window.wt.sendinfo === 'function' ) {
+                        window.wt.sendinfo({
+                            linkId: id + window.location.pathname
+                        });
+                    }
+                },
+                ga: function( id ) {
+                    // google analytics
+                    if ( typeof window._gaq !== 'undefined' ) {
+                        window._gaq.push([ '_trackEvent', id + window.location.pathname, 'click' ]);
+                    }
+                },
+                ivw: function() {
+                    // IVW
+                    if ( 'iom' in window && typeof window.iom.h === 'function' && typeof window.iam_data !== 'undefined' ) {
+                        window.iom.h( window.iam_data, 1 );
+                    }
+                },
+                cc: function() {
+                    // cc tracking
+                    var img = document.createElement( 'img' );
+                    img.src = 'http://cc.zeit.de/cc.gif?banner-channel=' + encodeURIComponent( Zeit.view.banner_channel ) +
+                                '&amp;r=' + encodeURIComponent( document.referrer ) +
+                                '&amp;rand=' + Math.random() * 100000;
+                },
+                all: function( id ) {
+                    // start all tracking functions
+                    if ( id ) {
+                        this.webtrekk( id );
+                        this.ga( id );
+                    }
+                    this.cc();
+                    this.ivw();
+                }
+            },
             clearQueue: function() {
                 for ( var i = 0, l = this.queue.length; i < l; i++ ) {
                     require.apply( window, this.queue[i] );

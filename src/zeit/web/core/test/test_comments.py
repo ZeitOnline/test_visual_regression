@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
-from zeit.cms.interfaces import ID_NAMESPACE as NS
-import lxml.etree
-import pyramid.httpexceptions
-import mock
-import pytest
-import zeit.web.core.view_comment
-import itertools
-from mock import patch
-import zope
-import requests
-import operator
-import beaker
 import datetime
+import itertools
+import operator
 import time
+
+from mock import patch
+import dogpile.cache.region
+import lxml.etree
+import mock
+import pyramid.httpexceptions
+import pytest
 import pytz
+import requests
+import zope.component
+
+from zeit.cms.interfaces import ID_NAMESPACE as NS
+import zeit.web.core.view_comment
 
 
 def test_comment_count_should_handle_missing_uid_param(comment_counter):
@@ -209,7 +211,7 @@ def test_rewrite_comments_url_should_rewrite_to_static_host(application):
 
 def test_post_comment_should_throw_exception_if_no_user_is_present():
     request = mock.Mock()
-    request.authenticated_userid = False
+    request.authenticated_userid = None
     with pytest.raises(pyramid.httpexceptions.HTTPForbidden):
         zeit.web.core.view_comment.PostComment(mock.Mock(), request)
 
@@ -257,7 +259,7 @@ def test_comment_tree_should_be_flattened_on_level_two():
 
 def _create_poster(monkeypatch):
     request = mock.Mock()
-    request.authenticated_userid = True
+    request.authenticated_userid = '123'
 
     request.params = {'path': 'my/path'}
     request.GET = request.POST = request.params
@@ -284,13 +286,10 @@ def _create_poster(monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.view_comment.PostComment, '_nid_by_comment_thread', nid)
 
-    def cache_mock(arg1, arg2, arg3):
-        def wrap(f):
-            def wrapped_f(*args):
-                f(*args)
-            return wrapped_f
-        return wrap
-    monkeypatch.setattr(beaker.cache, 'cache_region', cache_mock)
+    def dont_cache(self, key, creator, *args, **kw):
+        return creator()
+    monkeypatch.setattr(
+        dogpile.cache.region.CacheRegion, 'get_or_create', dont_cache)
 
     return zeit.web.core.view_comment.PostComment(context, request)
 

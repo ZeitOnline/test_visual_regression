@@ -2,10 +2,9 @@
 <!-- SZM VERSION="1.5" -->
 <!--Dieses Online-Angebot unterliegt nicht der IVW-Kontrolle!-->
 <script type="text/javascript">
-    var Z_IVW_RESSORT = "{{ view.banner_channel }}";
-    var IVW="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{ view.banner_channel }}";
-    document.write("<img src=\""+IVW+"?r="+escape(document.referrer)+"&d="+(Math.random()*100000)+"\" class=\"visuallyhidden\" alt=\"\" width=\"1\" height=\"1\" />");
+    var IVW = "http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{ view.banner_channel }}";
+    document.write('<img src="' + IVW + '?r=' + encodeURIComponent(document.referrer) + '&d=' + (Math.random()*100000) + '" class="visually-hidden" alt="" width="1" height="1" />');
 </script>
 <noscript>
-    <img alt="" class="visually-hidden" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{ view.banner_channel }};" height="1" width="1" />
+    <img alt="" class="visually-hidden" src="http://zeitonl.ivwbox.de/cgi-bin/ivw/CP/{{ view.banner_channel }}" height="1" width="1" />
 </noscript>

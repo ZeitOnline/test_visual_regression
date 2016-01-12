@@ -50,11 +50,11 @@ def test_clickcounter_produces_no_error(
     driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
 
     # test clickcount calls are without errors
-    driver.execute_script("return typeof(window.clickCount.webtrekk(1))")
-    driver.execute_script("return typeof(window.clickCount.ga(1))")
-    driver.execute_script("return typeof(window.clickCount.ivw())")
-    driver.execute_script("return typeof(window.clickCount.cc())")
-    driver.execute_script("return typeof(window.clickCount.all(1))")
+    driver.execute_script("window.Zeit.clickCount.webtrekk(1)")
+    driver.execute_script("window.Zeit.clickCount.ga(1)")
+    driver.execute_script("window.Zeit.clickCount.ivw()")
+    driver.execute_script("window.Zeit.clickCount.cc()")
+    driver.execute_script("window.Zeit.clickCount.all(1)")
 
     errors = driver.execute_script('return window.jsErrors')
 

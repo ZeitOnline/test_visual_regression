@@ -194,7 +194,13 @@ def test_comment_reply_threads_wraps_on_load_and_toggles_on_click(
     assert len(wrapped_threads) == 3
 
     hidden_reply = driver.find_element_by_id('cid-5122767')
-    assert not hidden_reply.is_displayed()
+
+    try:
+        WebDriverWait(driver, 1).until(
+            expected_conditions.invisibility_of_element_located(
+                (By.ID, 'cid-5122767')))
+    except TimeoutException:
+        assert False, 'Comment must be hidden initially'
 
     comment_count_overlay = driver.find_element_by_class_name(
         'comment-overlay__count')

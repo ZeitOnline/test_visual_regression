@@ -53,8 +53,8 @@ class Author(zeit.web.core.view.Base):
                 self.context.display_name))
 
     @zeit.web.reify
-    def ranked_tags_list(self):
-        return ''
+    def meta_keywords(self):
+        return []
 
     @zeit.web.reify
     def js_vars(self):

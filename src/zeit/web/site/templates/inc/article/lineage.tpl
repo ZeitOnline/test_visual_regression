@@ -1,6 +1,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-{% if view.featuretoggle_articlelineage and view.lineage %}
+{% if view.article_lineage_is_enabled and view.lineage %}
 <div class="article-lineage js-fix-position">
     {% set predecessor, successor = view.lineage %}
     <a href="{{ predecessor.uniqueId | create_url }}" class="al-link al-link--prev" data-id="articlebottom.article-lineage.prev..{{ predecessor.title | format_webtrekk }}">
@@ -14,7 +14,7 @@
             <span class="al-text__title">{{ predecessor.title }}</span>
         </span>
     </a>
-    <a href="{{ successor.uniqueId | create_url }}" class="al-link al-link--next"data-id="articlebottom.article-lineage.next..{{ successor.title | format_webtrekk }}">
+    <a href="{{ successor.uniqueId | create_url }}" class="al-link al-link--next" data-id="articlebottom.article-lineage.next..{{ successor.title | format_webtrekk }}">
         {# TODO: use Icon as background image via CSS ? #}
         {{ lama.use_svg_icon('arrow-articlelineage-right', 'al-link__icon al-link__icon--next', request) }}
         <span class="al-text al-text--next {% if successor.supertitle %}al-text--has-supertitle{% endif %}">

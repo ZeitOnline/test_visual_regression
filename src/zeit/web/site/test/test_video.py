@@ -153,7 +153,7 @@ def test_video_page_video_should_exist(selenium_driver, testserver):
 
 def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
     monkeypatch.setattr(
-        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
 
     browser = testbrowser('/video/2015-01/3537342483001')
     assert len(browser.cssselect('#ad-desktop-7')) == 1
@@ -162,7 +162,7 @@ def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
 def test_video_page_adcontroller_js_var_isset(
         selenium_driver, testserver, monkeypatch):
     monkeypatch.setattr(
-        zeit.web.core.view.Base, 'enable_third_party_modules', tpm)
+        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
     driver = selenium_driver
     driver.get('{}/video/2015-01/3537342483001'.format(testserver.url))
     try:
@@ -268,9 +268,9 @@ def test_article_teaser_should_not_be_identified_as_video(application):
 
 
 def test_video_should_contain_veeseo_widget(testbrowser):
-    browser = testbrowser('/video/2015-01/3537342483001')
-    assert browser.cssselect('#veeseo-widget')
-    assert browser.cssselect('.RV2VW2')
+    select = testbrowser('/video/2015-01/3537342483001').cssselect
+    assert select('script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
+    assert select('.RV2VW2')
 
 
 def test_video_should_not_break_on_missing_still_image(

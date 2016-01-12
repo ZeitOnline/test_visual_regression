@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
+import UserDict
 import copy
 import json
 import os.path
@@ -43,13 +44,11 @@ def app_settings(mockserver):
         'pyramid.debug_notfound': False,
         'pyramid.debug_routematch': False,
         'pyramid.debug_templates': False,
-        'cache.type': 'memory',
-        'cache.lock_file': '/tmp/test_lock',
-        'cache.regions': 'default_term, second, short_term, long_term',
-        'cache.second.expire': '1',
-        'cache.short_term.expire': '60',
-        'cache.default_term.expire': '300',
-        'cache.long_term.expire': '3600',
+        'dogpile_cache.backend': 'dogpile.cache.memory',
+        'dogpile_cache.regions': 'default_term, short_term, long_term',
+        'dogpile_cache.short_term.expiration_time': '60',
+        'dogpile_cache.default_term.expiration_time': '300',
+        'dogpile_cache.long_term.expiration_time': '3600',
         'session.type': 'memory',
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
@@ -95,7 +94,6 @@ def app_settings(mockserver):
         'breaking_news_config': (
             'http://xml.zeit.de/eilmeldung/homepage-banner'),
         'breaking_news_timeout': 2 * 60 * 60,
-        'enable_third_party_modules': '',
         'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
         'vivi_zeit.cms_keyword-configuration': (
             'egg://zeit.cms.tagging.tests/keywords_config.xml'),
@@ -165,6 +163,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/gallery-types.xml'),
         'vivi_zeit.web_series-source': (
             'egg://zeit.web.core/data/config/series.xml'),
+        'vivi_zeit.web_feature-toggle-source': (
+            'egg://zeit.web.core/data/config/feature-toggle.xml'),
         'vivi_zeit.web_blacklist-url': (
             'egg://zeit.web.core/data/config/blacklist.xml'),
         'vivi_zeit.imp_scale-source':
@@ -198,7 +198,6 @@ def app_settings(mockserver):
         'jinja2.environment': 'jinja2.environment.Environment',
         'jinja2.enable_profiler': False,
         'dev_environment': True,
-        'enable_article_lineage': True,
         'advertisement_nextread_folder': 'verlagsangebote',
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
         'breaking_news_fallback_image': (
@@ -306,8 +305,15 @@ def reset_solr(application_session, request):
 
 
 @pytest.fixture
+def reset_cache(application_session, request):
+    for region in zeit.web.core.cache.CACHE_REGIONS.values():
+        region.backend._cache.clear()
+
+
+@pytest.fixture
 def application(
-        application_session, preserve_settings, reset_solr, zodb, request):
+        application_session, preserve_settings, reset_solr, reset_cache,
+        zodb, request):
     # This application_session/application split is a bit clumsy, but some
     # things (e.g. reset connector, teardown zodb) needs to be called after
     # each test (i.e. in 'function' scope). The many diverse fixtures make this
@@ -527,7 +533,9 @@ def appbrowser(application):
 @pytest.fixture
 def image_group_factory():
     class MockImageGroup(dict):
-        zope.interface.implements(zeit.content.image.interfaces.IImageGroup)
+        zope.interface.implements(
+            zeit.content.image.interfaces.IImageGroup,
+            zope.annotation.interfaces.IAttributeAnnotatable)
         master_image = None
 
     class MockRepositoryImage(object):

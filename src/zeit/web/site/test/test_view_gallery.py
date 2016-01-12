@@ -64,6 +64,6 @@ def test_zon_gallery_uses_svg_icons(selenium_driver, testserver):
 
 
 def test_gallery_should_contain_veeseo_widget(testbrowser):
-    browser = testbrowser('/zeit-online/gallery/biga_1')
-    assert browser.cssselect('#veeseo-widget')
-    assert browser.cssselect('.RA2VW2')
+    select = testbrowser('/zeit-online/gallery/biga_1').cssselect
+    assert select('script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
+    assert select('.RA2VW2')
