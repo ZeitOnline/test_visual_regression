@@ -98,13 +98,15 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     def _validate_and_determine_page_nr(self):
         try:
-            page = int(self.request.GET['p'])
-            assert page > 0
-            if page == 1:
+            self.page = int(self.request.GET['p'])
+            assert self.page > 0
+            if self.page == 1:
                 raise pyramid.httpexceptions.HTTPMovedPermanently(
                     zeit.web.core.template.remove_get_params(
                         self.request.url, 'p'))
-            return page
+            elif self.page > self.total_pages:
+                raise pyramid.httpexceptions.HTTPNotFound()
+            return self.page
         except (AssertionError, ValueError):
             raise pyramid.httpexceptions.HTTPNotFound()
         except KeyError:
