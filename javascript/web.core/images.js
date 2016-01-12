@@ -127,7 +127,7 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
             // server, we use image width in steps of 50px on mobile
             // IMPORTANT: keep original width and height for returned object
             origWidth = Math.round( width );
-            origHeight = Math.round( origWidth / ratio );
+            origHeight = Math.round( width / ratio );
             if ( !isDesktop ) {
                 width = Math.ceil( width / 50 ) * 50;
             }
