@@ -94,6 +94,21 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     def __init__(self, context):
         super(Ranking, self).__init__(context)
         self.request = pyramid.threadlocal.get_current_request()
+        self.page = self._validate_and_determine_page_nr()
+
+    def _validate_and_determine_page_nr(self):
+        try:
+            page = int(self.request.GET['p'])
+            assert page > 0
+            if page == 1:
+                raise pyramid.httpexceptions.HTTPMovedPermanently(
+                    zeit.web.core.template.remove_get_params(
+                        self.request.url, 'p'))
+            return page
+        except (AssertionError, ValueError):
+            raise pyramid.httpexceptions.HTTPNotFound()
+        except KeyError:
+            return 1
 
     @property
     def hide_dupes(self):
@@ -199,17 +214,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         if self.page == 1 and len(self.uids_above) > 0:
             return 0
         return self._count
-
-    @zeit.web.reify
-    def page(self):
-        try:
-            page = int(self.request.GET['p'])
-            assert page > 0
-            return page
-        except (AssertionError, ValueError):
-            raise pyramid.httpexceptions.HTTPNotFound()
-        except KeyError:
-            return 1
 
     @zeit.web.reify
     def current_page(self):
