@@ -32,6 +32,8 @@ Change log for zeit.web
 
 - MAINT: Implement blacklist with a synthetic route, so metrics work again
 
+- FIX: Fix webtrekk string glue
+
 
 2.46 (2016-01-06)
 -----------------
