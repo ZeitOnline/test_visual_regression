@@ -32,8 +32,7 @@ def test_homepage_should_have_proper_ivw_script_integration(
         zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
 
     browser = testbrowser('/zeit-online/slenderized-index')
-    ivw = browser.cssselect(
-        'script[id="ivw-v2"]')
+    ivw = browser.cssselect('script[src="https://script.ioam.de/iam.js"]')
     assert len(ivw) == 1
 
 
