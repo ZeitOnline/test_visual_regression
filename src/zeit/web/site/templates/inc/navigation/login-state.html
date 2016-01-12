@@ -2,7 +2,7 @@
 
 {% if user %}
 {% set username = user.name or 'Angemeldet' %}
-<div class="login-state" data-feature="dropdown">
+<div class="login-state" data-feature="dropdown" id="login-state" data-sso-id="{{ user.ssoid }}">
     <a href="{{ profile }}" class="login-state__name">{{ username }}</a>
     <ul class="dropdown">
         <li class="dropdown__item">

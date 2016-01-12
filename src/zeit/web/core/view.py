@@ -439,8 +439,10 @@ class Base(object):
 
     @zeit.web.reify
     def meta_keywords(self):
-        result = self.ranked_tags if self.ranked_tags else [
-            self.context.ressort, self.context.sub_ressort]
+        if self.ranked_tags:
+            result = [x.label for x in self.ranked_tags]
+        else:
+            result = [self.context.ressort, self.context.sub_ressort]
         return [x for x in result if x]
 
     @zeit.web.reify

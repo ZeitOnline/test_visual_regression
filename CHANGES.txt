@@ -4,6 +4,12 @@ Change log for zeit.web
 2.47 (unreleased)
 -----------------
 
+- BUG-327: Add webtrekk customerId for authenticated users
+
+- ZON-2448: Fix IE11 misplaced buttons gallery bug
+
+- FIX: Add ClickCounter to ZON
+
 - ZON-2250: Add label to storystream
 
 - ZON-2214: Enable Nextread for video pages
