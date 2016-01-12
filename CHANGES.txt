@@ -14,6 +14,7 @@ Change log for zeit.web
   * Solr results with references to retracted images
   * Solr results with wrongly indexed content types
   * Comment count of objects that are neither CP nor Article
+  * Reject delta_time requests for non-CPs
 
 
 2.46 (2016-01-06)
