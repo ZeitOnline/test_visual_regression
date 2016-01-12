@@ -30,6 +30,8 @@ Change log for zeit.web
 
 - MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
+- FIX: Fix webtrekk string glue
+
 
 2.46 (2016-01-06)
 -----------------
