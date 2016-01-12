@@ -1226,9 +1226,9 @@ def test_advertisement_nextread_should_render_after_veeseo(
 
 
 def test_article_should_contain_veeseo_widget(testbrowser):
-    browser = testbrowser('/zeit-online/article/01')
-    assert browser.cssselect('#veeseo-widget')
-    assert browser.cssselect('.RA2VW2')
+    select = testbrowser('/zeit-online/article/01').cssselect
+    assert select('script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
+    assert select('.RA2VW2')
 
 
 def test_article_should_render_quiz_in_iframe(testbrowser):

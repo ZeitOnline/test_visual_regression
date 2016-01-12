@@ -268,9 +268,9 @@ def test_article_teaser_should_not_be_identified_as_video(application):
 
 
 def test_video_should_contain_veeseo_widget(testbrowser):
-    browser = testbrowser('/video/2015-01/3537342483001')
-    assert browser.cssselect('#veeseo-widget')
-    assert browser.cssselect('.RV2VW2')
+    select = testbrowser('/video/2015-01/3537342483001').cssselect
+    assert select('script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
+    assert select('.RV2VW2')
 
 
 def test_video_should_not_break_on_missing_still_image(
