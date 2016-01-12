@@ -53,7 +53,7 @@
             1: "{{ view.authors_list | lower }}", // Autor
             2: "{{ ivw_code }}", // IVW-Code
             3: "{{ pagination }}", // Seite
-            4: "{{ view.meta_keywords | join(', ') | lower if view.ressort | lower != 'homepage'}}", // Schlagworte
+            4: "{{ view.meta_keywords | join(';') | lower if view.ressort | lower != 'homepage'}}", // Schlagworte
             5: "{{ view.date_last_modified }}", // Last published
             6: "{{ view.text_length }}", // Textlänge
             7: "{{ view.news_source | lower }}", // Quelle
@@ -116,7 +116,7 @@
             view.authors_list | lower,
             ivw_code,
             pagination,
-            view.meta_keywords | join(', ') | lower,
+            view.meta_keywords | join(';') | lower,
             view.date_last_modified,
             view.text_length,
             view.news_source | lower,
