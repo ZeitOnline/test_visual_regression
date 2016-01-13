@@ -22,6 +22,10 @@ Change log for zeit.web
 
 - ZON-2592: Use dogpile.cache instead of beaker for caching/memcache
 
+- MAINT: Use our own session backend instead of beaker (stores data in
+  memcache, but does not use a separate cookie -- which doesn't work anyway
+  since /login-state is an ESI, so cookies it sends are eaten by Varnish)
+
 - ZON-2175: Add ressort and kicker to meta keywords
 
 - ZON-2416: Insert new meta robot rules to Serienseiten
