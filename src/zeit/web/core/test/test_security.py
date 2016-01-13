@@ -1,8 +1,5 @@
 import requests
 
-from cryptography.hazmat.primitives import serialization as cryptoserialization
-from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
-import cryptography.hazmat.backends
 import jwt
 import mock
 import pytest
@@ -57,20 +54,10 @@ def test_reload_community_should_suceed_after_one_call(
     assert request.called == 2
 
 
-def test_decode_sso_should_work():
-    private = generate_private_key(
-        public_exponent=65537, key_size=2048,
-        backend=cryptography.hazmat.backends.default_backend())
-    public = private.public_key()
-    private = private.private_bytes(
-        encoding=cryptoserialization.Encoding.PEM,
-        format=cryptoserialization.PrivateFormat.TraditionalOpenSSL,
-        encryption_algorithm=cryptoserialization.NoEncryption())
-    public = public.public_bytes(
-        encoding=cryptoserialization.Encoding.PEM,
-        format=cryptoserialization.PublicFormat.SubjectPublicKeyInfo)
-    cookie = jwt.encode({'id': '4711'}, private, 'RS256')
-    res = zeit.web.core.security.get_user_info_from_sso_cookie(cookie, public)
+def test_decode_sso_should_work(sso_keypair):
+    cookie = jwt.encode({'id': '4711'}, sso_keypair['private'], 'RS256')
+    res = zeit.web.core.security.get_user_info_from_sso_cookie(
+        cookie, sso_keypair['public'])
     assert res['id'] == '4711'
 
 
@@ -132,7 +119,7 @@ def test_empty_cache_triggers_backend_fills_cache(
 
     server = mockserver_factory(user_xml)
     dummy_request.registry.settings['community_host'] = server.url
-    dummy_request.cookies['http://my_sso_cookie'] = 'foo'
+    dummy_request.cookies['my_sso_cookie'] = 'foo'
     dummy_request.headers['Cookie'] = ''
     assert 'user' not in dummy_request.session
     assert policy.authenticated_userid(dummy_request) == 'foo'

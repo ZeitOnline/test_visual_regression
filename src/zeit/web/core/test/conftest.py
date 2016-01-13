@@ -6,6 +6,9 @@ import json
 import os.path
 import pkg_resources
 
+from cryptography.hazmat.primitives import serialization as cryptoserialization
+from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
+import cryptography.hazmat.backends
 import cssselect
 import gocept.httpserverlayer.wsgi
 import lxml.html
@@ -759,3 +762,19 @@ def datasolr(request):
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
     zope.component.provideUtility(zeit.web.core.sources.Solr())
+
+
+@pytest.fixture(scope='session')
+def sso_keypair():
+    private = generate_private_key(
+        public_exponent=65537, key_size=2048,
+        backend=cryptography.hazmat.backends.default_backend())
+    public = private.public_key()
+    private = private.private_bytes(
+        encoding=cryptoserialization.Encoding.PEM,
+        format=cryptoserialization.PrivateFormat.TraditionalOpenSSL,
+        encryption_algorithm=cryptoserialization.NoEncryption())
+    public = public.public_bytes(
+        encoding=cryptoserialization.Encoding.PEM,
+        format=cryptoserialization.PublicFormat.SubjectPublicKeyInfo)
+    return {'private': private, 'public': public}
