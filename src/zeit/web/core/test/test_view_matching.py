@@ -108,3 +108,12 @@ def test_instantarticle_view_should_match(application):
     request.registry = registry
 
     assert pviews._find_view(request).func_name == 'InstantArticle'
+
+
+def test_amp_view_should_match(application):
+    pviews = pyramid.scripts.pviews.PViewsCommand([])
+    registry = application.zeit_app.config.registry
+    request = pyramid.request.Request.blank('/amp/zeit-online/article/simple')
+    request.registry = registry
+
+    assert pviews._find_view(request).func_name == 'AcceleratedMobilePage'
