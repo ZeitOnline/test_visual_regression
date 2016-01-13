@@ -141,7 +141,7 @@ class BlacklistSource(zeit.cms.content.sources.SimpleContextualXMLSource):
     @gocept.cache.method.Memoize(600, ignore_self=True)
     def compile_blacklist(self):
         matchers = []
-        for pattern in self.getValues():
+        for pattern in self.getValues(None):
             matcher, _ = pyramid.urldispatch._compile_route(pattern)
             matchers.append(matcher)
         return matchers
