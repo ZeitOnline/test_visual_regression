@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - BUG-327: Add webtrekk customerId for authenticated users
 
+- ZON-2608: Prevent images from unwanted rescaling on mobile pages/apps
+
 - ZON-2448: Fix IE11 misplaced buttons gallery bug
 
 - FIX: Add ClickCounter to ZON

@@ -76,7 +76,7 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
             useMobileVariant = isMobile && imageData.mobileRatio && imageData.mobileSrc,
             ratio = useMobileVariant ? imageData.mobileRatio : imageData.ratio,
             msieWidth = false,
-            subject, width, height, leaf, styles, minHeight, maxHeight, source, token;
+            subject, width, height, origWidth, origHeight, leaf, styles, minHeight, maxHeight, source, token;
 
         if ( $parent.hasClass( 'is-pixelperfect' ) ) {
             // use explicit width and height from parent
@@ -125,6 +125,9 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
 
             // to decrease the number of variants which are fetched from the
             // server, we use image width in steps of 50px on mobile
+            // IMPORTANT: keep original width and height for returned object
+            origWidth = Math.round( width );
+            origHeight = Math.round( width / ratio );
             if ( !isDesktop ) {
                 width = Math.ceil( width / 50 ) * 50;
             }
@@ -160,8 +163,8 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
         }
 
         return {
-            width: width,
-            height: height,
+            width: origWidth,
+            height: origHeight,
             source: source
         };
     }
