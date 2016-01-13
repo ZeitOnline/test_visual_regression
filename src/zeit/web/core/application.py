@@ -177,6 +177,7 @@ class Application(object):
         config.add_route('health_check', '/health_check')
         config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_route('zett-image', '/zett-image/*path')
+        config.add_route('blacklist', '/-blacklist', factory=lambda x: None)
         config.add_route(
             'schlagworte_index',
             '/schlagworte/{category}/{item:[A-Z]($|/$|/index$)}')
