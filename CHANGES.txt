@@ -4,8 +4,6 @@ Change log for zeit.web
 2.47 (unreleased)
 -----------------
 
-- BUG-327: Add webtrekk customerId for authenticated users
-
 - ZON-2608: Prevent images from unwanted rescaling on mobile pages/apps
 
 - ZON-2448: Fix IE11 misplaced buttons gallery bug
@@ -18,31 +16,27 @@ Change log for zeit.web
 
 - ZON-2594: New customParameter for Webtrekk: platform
 
+- BUG-327: Add webtrekk customerId for authenticated users
+
 - ZON-2592: Use dogpile.cache instead of beaker for caching/memcache
+  Also, use our own session backend instead of beaker (stores data in
+  memcache, but does not use a separate cookie -- which doesn't work anyway
+  since /login-state is an ESI, so cookies it sends are eaten by Varnish)
 
 - ZON-2175: Add ressort and kicker to meta keywords
 
 - ZON-2416: Insert new meta robot rules to Serienseiten
 
-- HOTFIX: Make topic teaser more stable, if invalid CP is referenced
+- FIX: Make topic teaser more stable, if invalid CP is referenced
 
 - FIX: Add ClickCounter to ZON
 
-- FIX: Handle community read errors during recommendation (for real now)
-
 - FIX: Be more defensive in several places:
+  * Handle community read errors during recommendation (for real now)
   * Solr results with references to retracted images
   * Solr results with wrongly indexed content types
   * Comment count of objects that are neither CP nor Article
   * Reject delta_time requests for non-CPs
-
-- FIX: Fix webtrekk string glue
-
-- FIX: Add ClickCounter to ZON
-
-- MAINT: Use our own session backend instead of beaker (stores data in
-  memcache, but does not use a separate cookie -- which doesn't work anyway
-  since /login-state is an ESI, so cookies it sends are eaten by Varnish)
 
 - MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
