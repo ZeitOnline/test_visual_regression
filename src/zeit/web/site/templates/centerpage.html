@@ -25,8 +25,8 @@
 {% block main %}
     {% for region in view.regions %}
         {% set region_loop = loop %}
-        {%- include ["zeit.web.site:templates/inc/region/{}.html".format(region.kind),
-                     "zeit.web.site:templates/inc/region/default.html"] ignore missing -%}
+        {%- include ["zeit.web.core:templates/inc/region/{}.html".format(region.kind),
+                     "zeit.web.core:templates/inc/region/default.html"] ignore missing -%}
     {% endfor %}
 {% endblock main %}
 

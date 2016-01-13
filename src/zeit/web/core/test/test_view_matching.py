@@ -19,7 +19,7 @@ def test_custom_predicate_should_only_match_website_content(application):
     def zon_view(pviews):
         for view in pviews:
             if view[1].__dict__['__original_view__'] == (
-                    zeit.web.site.view_centerpage.LegacyCenterpage):
+                    zeit.web.site.view_centerpage.Centerpage):
                 return view[1]
 
     view_wrapper = zon_view(views)
@@ -56,7 +56,7 @@ def test_custom_predicate_should_only_match_zmo_content(application):
     def zmo_view(pviews):
         for view in pviews:
             if view[1].__dict__['__original_view__'] == (
-                    zeit.web.magazin.view_centerpage.Centerpage):
+                    zeit.web.magazin.view_centerpage.CenterpageLegacy):
                 return view[1]
 
     view_wrapper = zmo_view(views)

@@ -28,9 +28,9 @@ def cp_factory(application, dummy_request):
         cp = zeit.cms.interfaces.ICMSContent(
             'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
         view_class = type('View', (
-            zeit.web.magazin.view_centerpage.Centerpage,), {
-            '_copyrights': {},
-            'area': property(register_copyrights(area_getter))})
+            zeit.web.magazin.view_centerpage.CenterpageLegacy,), {
+                '_copyrights': {},
+                'area': property(register_copyrights(area_getter))})
         view = view_class(cp, dummy_request)
         # Copyright registration needs to be triggered by accessing the
         # property at least once.
@@ -235,8 +235,7 @@ def test_centerpage_gracefully_skips_malformed_copyrights(
         testserver, testbrowser):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/lebensart-2')
-    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
-
+    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
     group = 'http://xml.zeit.de/centerpage/katzencontent/'
     image = zeit.web.core.image.TeaserImage(
         zeit.cms.interfaces.ICMSContent(group),

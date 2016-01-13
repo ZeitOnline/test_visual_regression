@@ -8,20 +8,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ADV</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Advertorial</attribute>
-      <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
-    &lt;initialized_object&gt;
-      &lt;klass&gt;
-        &lt;global name="Provides" module="zope.interface.declarations"/&gt;
-      &lt;/klass&gt;
-      &lt;arguments&gt;
-        &lt;tuple&gt;
-          &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
-          &lt;global name="Interface" module="zope.interface"/&gt;
-          &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
-        &lt;/tuple&gt;
-      &lt;/arguments&gt;
-    &lt;/initialized_object&gt;
-  &lt;/pickle&gt;</attribute>
+ <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="ICP2009" module="zeit.content.cp.interfaces"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>

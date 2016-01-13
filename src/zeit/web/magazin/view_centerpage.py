@@ -19,15 +19,15 @@ import zeit.web.core.view_centerpage
 import zeit.web.magazin.view
 
 
-@view_config(context=zeit.content.cp.interfaces.ICenterPage,
+@view_config(context=zeit.content.cp.interfaces.ICP2009,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,
                                 zeit.web.core.view.is_advertorial),
              renderer='templates/advertorial.html')
-@view_config(context=zeit.content.cp.interfaces.ICenterPage,
+@view_config(context=zeit.content.cp.interfaces.ICP2009,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
-             renderer='templates/centerpage.html')
-class Centerpage(zeit.web.core.view_centerpage.Centerpage,
-                 zeit.web.magazin.view.Base):
+             renderer='templates/centerpage_legacy.html')
+class CenterpageLegacy(zeit.web.core.view_centerpage.Centerpage,
+                       zeit.web.magazin.view.Base):
 
     def insert_seperator(self, position, obj):
         teaser_list = obj
@@ -149,3 +149,15 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
     @zeit.web.reify
     def is_hp(self):
         return self.context.type == 'ZMO'
+
+
+@view_config(context=zeit.content.cp.interfaces.ICP2015,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,
+                                zeit.web.core.view.is_advertorial),
+             renderer='templates/advertorial.html')
+@view_config(context=zeit.content.cp.interfaces.ICP2015,
+             custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
+             renderer='templates/centerpage.html')
+class Centerpage(zeit.web.core.view_centerpage.Centerpage,
+                 zeit.web.magazin.view.Base):
+    pass
