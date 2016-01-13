@@ -69,15 +69,28 @@ def test_author_page_should_hide_favourite_content_on_further_pages(
     settings['author_articles_page_size'] = 4
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/artikel/01'},
+        {'uniqueId': 'http://xml.zeit.de/artikel/02'},
+        {'uniqueId': 'http://xml.zeit.de/artikel/03'},
+        {'uniqueId': 'http://xml.zeit.de/artikel/04'},
+        {'uniqueId': 'http://xml.zeit.de/artikel/05'},
+        {'uniqueId': 'http://xml.zeit.de/artikel/06'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
+    # we have 8 solr hits + 3 favorite articles
+    # I expect 3 pages, considering page_size = 4, right?
+    # page 1: 3 favorites + 1 more, adds up to 4
+    # page 2: 4 articles - should be result no. 2-5
+    # page 3: the remaining 3 articles - result no. 6-8
     select = testbrowser('/autoren/j_random').cssselect
     assert len(select('.cp-area--author-favourite-content')) == 1
     assert len(select('.cp-area--author-favourite-content article')) == 3
+    assert len(select('.cp-area--author-articles article')) == 1
     assert len(select('.teaser-small')) == 4
+    # assert len(select('.pager__pages .pager__page')) == 3
     select = testbrowser('/autoren/j_random?p=2').cssselect
     assert len(select('.cp-area--author-favourite-content')) == 0
-    assert len(select('.teaser-small')) == 1
+    assert len(select('.teaser-small')) == 4
 
 
 @pytest.mark.skipif(
