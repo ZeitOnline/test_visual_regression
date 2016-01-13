@@ -909,8 +909,9 @@ def json_delta_time_from_date(date, parsed_base_date):
 def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
     try:
         content = zeit.cms.interfaces.ICMSContent(unique_id)
-    except TypeError:
-        return pyramid.response.Response('Invalid resource', 500)
+        assert zeit.content.cp.interfaces.ICenterPage.providedBy(content)
+    except (TypeError, AssertionError):
+        return pyramid.response.Response('Invalid resource', 400)
     delta_time = {}
     for article in zeit.web.site.view_centerpage.Centerpage(content, request):
         time = zeit.web.core.date.get_delta_time_from_article(
@@ -940,7 +941,8 @@ def json_comment_count(request):
         articles = list(
             zeit.web.site.view_centerpage.Centerpage(context, request))
     else:
-        articles = [zeit.content.article.interfaces.IArticle(context)]
+        article = zeit.content.article.interfaces.IArticle(context, None)
+        articles = [article] if article is not None else []
 
     counts = zeit.web.core.comments.get_counts(*[a.uniqueId for a in articles])
     comment_count = {}

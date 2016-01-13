@@ -210,9 +210,7 @@ class Application(object):
 
         self.configure_dogpile_cache()
 
-        session_factory = pyramid_beaker.session_factory_from_settings(
-            self.settings)
-        config.set_session_factory(session_factory)
+        config.set_session_factory(zeit.web.core.session.CacheSession)
 
         config.set_authentication_policy(
             zeit.web.core.security.AuthenticationPolicy())
