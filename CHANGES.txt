@@ -10,8 +10,6 @@ Change log for zeit.web
 
 - ZON-2448: Fix IE11 misplaced buttons gallery bug
 
-- FIX: Add ClickCounter to ZON
-
 - ZON-2250: Add label to storystream
 
 - ZON-2214: Enable Nextread for video pages
@@ -22,10 +20,6 @@ Change log for zeit.web
 
 - ZON-2592: Use dogpile.cache instead of beaker for caching/memcache
 
-- MAINT: Use our own session backend instead of beaker (stores data in
-  memcache, but does not use a separate cookie -- which doesn't work anyway
-  since /login-state is an ESI, so cookies it sends are eaten by Varnish)
-
 - ZON-2175: Add ressort and kicker to meta keywords
 
 - ZON-2416: Insert new meta robot rules to Serienseiten
@@ -33,8 +27,6 @@ Change log for zeit.web
 - HOTFIX: Make topic teaser more stable, if invalid CP is referenced
 
 - FIX: Add ClickCounter to ZON
-
-- MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
 - FIX: Handle community read errors during recommendation (for real now)
 
@@ -45,6 +37,16 @@ Change log for zeit.web
   * Reject delta_time requests for non-CPs
 
 - FIX: Fix webtrekk string glue
+
+- FIX: Add ClickCounter to ZON
+
+- MAINT: Use our own session backend instead of beaker (stores data in
+  memcache, but does not use a separate cookie -- which doesn't work anyway
+  since /login-state is an ESI, so cookies it sends are eaten by Varnish)
+
+- MAINT: Add WAI-ARIA roles, states, and properties for accordion component
+
+- MAINT: Implement blacklist with a synthetic route, so metrics work again
 
 
 2.46 (2016-01-06)
