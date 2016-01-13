@@ -1,14 +1,23 @@
+import jwt
 import mock
+import zope.component
 
 from zeit.web.core.session import SESSION_CACHE
+import zeit.web.core.interfaces
 import zeit.web.core.session
 
 
-def test_stores_session_data_in_cache(testbrowser, testserver):
+def test_stores_session_data_in_cache(testbrowser, testserver, sso_keypair):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['sso_key'] = sso_keypair['public']
     b = testbrowser()
-    b.cookies.forURL(testserver.url)['my_sso_cookie'] = 'ssoid'
+    sso_cookie = jwt.encode(
+        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
+    b.cookies.forURL(testserver.url)['my_sso_cookie'] = sso_cookie
     b.open('/login-state')
-    assert 'user' in SESSION_CACHE.get('ssoid')
+    data = SESSION_CACHE.get(sso_cookie)
+    assert 'user' in data
+    assert data['user']['ssoid'] == 'ssoid'
 
 
 def test_no_sso_cookie_does_not_store_anything(testbrowser):
