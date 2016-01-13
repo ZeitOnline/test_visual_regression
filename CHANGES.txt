@@ -32,6 +32,14 @@ Change log for zeit.web
 
 - MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
+- FIX: Handle community read errors during recommendation (for real now)
+
+- FIX: Be more defensive in several places:
+  * Solr results with references to retracted images
+  * Solr results with wrongly indexed content types
+  * Comment count of objects that are neither CP nor Article
+  * Reject delta_time requests for non-CPs
+
 - FIX: Fix webtrekk string glue
 
 

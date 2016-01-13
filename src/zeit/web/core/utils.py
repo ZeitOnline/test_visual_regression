@@ -258,10 +258,14 @@ class LazyProxy(object):
             # BBB for really old video objects that were indexed differently.
             if type_id == 'zeit.brightcove.interfaces.IVideo':
                 type_id = 'video'
-            zope.interface.alsoProvides(
-                # XXX We should tweak the source_class so we don't have to talk
-                # to `.factory`, but that's quite a bit of mechanical hassle.
-                self, CONTENT_TYPE_SOURCE.factory.find(type_id))
+            # XXX Don't know who causes ext. solr to index this value
+            elif type_id == 'centerpage':
+                type_id = 'centerpage-2009'
+            # XXX We should tweak the source_class so we don't have to talk to
+            # `.factory`, but that's quite a bit of mechanical hassle.
+            type_iface = CONTENT_TYPE_SOURCE.factory.find(type_id)
+            if type_iface is not None:
+                zope.interface.alsoProvides(self, type_iface)
 
     def __getattr__(self, key):
         if not self.__exposed__ or not hasattr(self.__origin__, key):
@@ -348,7 +352,7 @@ class LazyProxy(object):
         image_ids = self.__proxy__.get('image-base-id', [])
         if not image_ids:
             raise AttributeError('image')
-        return zeit.cms.interfaces.ICMSContent(image_ids[0])
+        return zeit.cms.interfaces.ICMSContent(image_ids[0], None)
 
     # Proxy zeit.content.link.interfaces.ILink.blog.
     # (Note: templates try to access this directly without adapting first.)
