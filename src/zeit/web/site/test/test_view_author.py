@@ -59,18 +59,25 @@ def test_articles_by_author_should_paginate(testbrowser):
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     browser = testbrowser('/autoren/anne_mustermann?p=2')
     assert len(browser.cssselect('.teaser-small')) == 1
-    page = browser.cssselect('.pager__page.pager__page--current span')[0].text
-    assert page == '2'
+    page = browser.cssselect('.pager__page--current')[0]
+    assert page.text_content().strip() == '2'
 
 
 def test_author_page_should_hide_favourite_content_on_further_pages(
         testbrowser):
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['author_articles_page_size'] = 4
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
-    browser = testbrowser('/autoren/j_random?p=2')
-    assert len(browser.cssselect('.teaser-small')) == 2
+    select = testbrowser('/autoren/j_random').cssselect
+    assert len(select('.cp-area--author-favourite-content')) == 1
+    assert len(select('.cp-area--author-favourite-content article')) == 3
+    assert len(select('.teaser-small')) == 4
+    select = testbrowser('/autoren/j_random?p=2').cssselect
+    assert len(select('.cp-area--author-favourite-content')) == 0
+    assert len(select('.teaser-small')) == 1
 
 
 @pytest.mark.skipif(
@@ -84,7 +91,9 @@ def test_first_page_shows_fewer_solr_results_since_it_shows_favourite_content(
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings['author_articles_page_size'] = 4
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'}]
+    solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     browser = testbrowser('/autoren/j_random')
     # 3 favourite_content + 1 solr result
     assert len(browser.cssselect('.teaser-small')) == 4
