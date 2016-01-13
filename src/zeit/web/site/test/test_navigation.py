@@ -391,8 +391,11 @@ def test_nav_search_is_working_as_expected(
     driver.get('%s/centerpage/zeitonline' % testserver.url)
 
     driver.execute_script(
-        "document.querySelector('.main_nav__search form').onsubmit = \
-            function(){ alert(this.q.value); return false; };")
+        "document.querySelector('.main_nav__search form').action = \
+            location.href")
+    driver.execute_script(
+        ("document.querySelector('.main_nav__search .search__input')"
+         ".style.transition = 'none'"))
 
     search__button = driver.find_elements_by_class_name('search__button')[0]
     search__input = driver.find_elements_by_class_name('search__input')[0]
@@ -454,14 +457,7 @@ def test_nav_search_is_working_as_expected(
     search__input.send_keys('test')
     search__button.click()
 
-    try:
-        WebDriverWait(driver, 1).until(expected_conditions.alert_is_present())
-    except TimeoutException:
-        assert False, 'Search form not submitted'
-    else:
-        alert = driver.switch_to.alert
-        assert alert.text == 'test'
-        alert.accept()
+    assert driver.current_url.endswith('/centerpage/zeitonline?q=test')
 
 
 def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):

@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - BUG-327: Add webtrekk customerId for authenticated users
 
+- ZON-2608: Prevent images from unwanted rescaling on mobile pages/apps
+
 - ZON-2448: Fix IE11 misplaced buttons gallery bug
 
 - FIX: Add ClickCounter to ZON
@@ -37,6 +39,8 @@ Change log for zeit.web
   * Solr results with wrongly indexed content types
   * Comment count of objects that are neither CP nor Article
   * Reject delta_time requests for non-CPs
+
+- FIX: Fix webtrekk string glue
 
 
 2.46 (2016-01-06)
