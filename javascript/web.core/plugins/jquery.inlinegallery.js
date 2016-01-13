@@ -55,7 +55,7 @@
             }, defaults );
 
         // check if any part of the element is inside viewport
-        var isElementInViewport = function( el ) {
+        function isElementInViewport( el ) {
 
             // special bonus for those using jQuery
             if ( el instanceof jQuery ) {
@@ -76,7 +76,7 @@
                 rect.left > windowWidth ||
                 rect.right < 0
             );
-        };
+        }
 
         return this.each( function() {
             var gallery = $( this ),
