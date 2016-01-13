@@ -37,6 +37,7 @@ Change log for zeit.web
   * Solr results with wrongly indexed content types
   * Comment count of objects that are neither CP nor Article
   * Reject delta_time requests for non-CPs
+  * Set a timeout for POSTs to the community
 
 - MAINT: Add WAI-ARIA roles, states, and properties for accordion component
 
