@@ -8,7 +8,9 @@
         </div>
     </div>
     {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
-    {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
+    {% if not view.webtrekk_disabled %}
+        {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
+    {% endif %}
     <script>
         var require = { baseUrl: '{{ request.asset_host }}/js/' };
     </script>

@@ -229,3 +229,7 @@ class FrameBuilder(Base):
     @zeit.web.reify
     def desktop_only(self):
         return self.request.GET.get('desktop_only', None)
+
+    @zeit.web.reify
+    def webtrekk_disabled(self):
+        return 'webtrekk_disabled' in self.request.GET
