@@ -4,6 +4,8 @@ Change log for zeit.web
 2.47 (unreleased)
 -----------------
 
+- FIX: FB Instant Articles: Add image copyrights
+
 - BUG-327: Add webtrekk customerId for authenticated users
 
 - ZON-2608: Prevent images from unwanted rescaling on mobile pages/apps
