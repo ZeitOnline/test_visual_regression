@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2634: Framebuilder can enable Webtrekk
 
+- ZON-2649: Framebuilder can enable IVW
+
 - MAINT: desktop_only parameter in framebuilder needs no value
 
 - MAINT: Remove old iqd code
