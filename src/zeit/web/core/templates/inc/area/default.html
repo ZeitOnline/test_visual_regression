@@ -1,5 +1,5 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
-{% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
+{% import 'zeit.web.{}:templates/macros/layout_macro.tpl'.format(platform) as lama %}
+{% import 'zeit.web.{}:templates/macros/centerpage_macro.tpl'.format(platform) as cp %}
 
 <div class="{{ 'cp-area' | with_mods(area.kind) }}{% if area.visible_mobile == False %} mobile-hidden{% endif %}">
     {% profile %}
@@ -18,13 +18,13 @@
             {% set module_loop = loop %}
             {% block before_module_include scoped %}{% endblock %}
             {% include [
-                "zeit.web.site:templates/inc/teaser/{0}_{1}_{2}.tpl".format(layout, journalistic_format, area.kind),
-                "zeit.web.site:templates/inc/teaser/{0}_{1}.tpl".format(layout, journalistic_format),
-                "zeit.web.site:templates/inc/module/{0}_{1}.html".format(layout, area.kind),
-                "zeit.web.site:templates/inc/teaser/{0}_{1}.tpl".format(layout, area.kind),
-                "zeit.web.site:templates/inc/module/{}.html".format(layout),
-                "zeit.web.site:templates/inc/teaser/{}.tpl".format(layout),
-                "zeit.web.site:templates/inc/teaser/default.tpl"] %}
+                "zeit.web.{0}:templates/inc/teaser/{1}_{2}_{3}.tpl".format(platform, layout, journalistic_format, area.kind),
+                "zeit.web.{0}:templates/inc/teaser/{1}_{2}.tpl".format(platform, layout, journalistic_format),
+                "zeit.web.{0}:templates/inc/module/{1}_{2}.html".format(platform, layout, area.kind),
+                "zeit.web.{0}:templates/inc/teaser/{1}_{2}.tpl".format(platform, layout, area.kind),
+                "zeit.web.{0}:templates/inc/module/{1}.html".format(platform, layout),
+                "zeit.web.{0}:templates/inc/teaser/{1}.tpl".format(platform, layout),
+                "zeit.web.{0}:templates/inc/teaser/default.tpl".format(platform)] %}
             {% block after_module_include scoped %}{% endblock %}
         {% endfor %}
     {% endblock module_list %}
