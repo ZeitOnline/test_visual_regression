@@ -29,12 +29,6 @@ class AuthenticationPolicy(
                 del request.session['user']
             return
 
-        # Make sure sso_verification in the user session matches the one send
-        # via request
-        if sso_cookie and request.session.get('user') and (
-                request.session['user'].get('sso_verification') != sso_cookie):
-            del request.session['user']
-
         if request.session.get('user') and (
                 is_reliable_user_info(request.session['user'])):
             # retrieve the user info from the session

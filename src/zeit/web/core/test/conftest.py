@@ -6,6 +6,9 @@ import json
 import os.path
 import pkg_resources
 
+from cryptography.hazmat.primitives import serialization as cryptoserialization
+from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
+import cryptography.hazmat.backends
 import cssselect
 import gocept.httpserverlayer.wsgi
 import lxml.html
@@ -45,11 +48,13 @@ def app_settings(mockserver):
         'pyramid.debug_routematch': False,
         'pyramid.debug_templates': False,
         'dogpile_cache.backend': 'dogpile.cache.memory',
-        'dogpile_cache.regions': 'default_term, short_term, long_term',
+        'dogpile_cache.regions': (
+            'default_term, short_term, long_term, session'),
         'dogpile_cache.short_term.expiration_time': '60',
         'dogpile_cache.default_term.expiration_time': '300',
         'dogpile_cache.long_term.expiration_time': '3600',
-        'session.type': 'memory',
+        'dogpile_cache.session.expiration_time': '2',
+        'session.reissue_time': '1',
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
         # XXX I'd rather put None here and change the settings for a specific
@@ -194,7 +199,7 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/author-biography-questions.xml',
         'sso_activate': '',
         'sso_url': 'http://my_sso',
-        'sso_cookie': 'http://my_sso_cookie',
+        'sso_cookie': 'my_sso_cookie',
         'jinja2.show_exceptions': True,
         'jinja2.environment': 'jinja2.environment.Environment',
         'jinja2.enable_profiler': False,
@@ -758,3 +763,19 @@ def datasolr(request):
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
     zope.component.provideUtility(zeit.web.core.sources.Solr())
+
+
+@pytest.fixture(scope='session')
+def sso_keypair():
+    private = generate_private_key(
+        public_exponent=65537, key_size=2048,
+        backend=cryptography.hazmat.backends.default_backend())
+    public = private.public_key()
+    private = private.private_bytes(
+        encoding=cryptoserialization.Encoding.PEM,
+        format=cryptoserialization.PrivateFormat.TraditionalOpenSSL,
+        encryption_algorithm=cryptoserialization.NoEncryption())
+    public = public.public_bytes(
+        encoding=cryptoserialization.Encoding.PEM,
+        format=cryptoserialization.PublicFormat.SubjectPublicKeyInfo)
+    return {'private': private, 'public': public}
