@@ -1,12 +1,24 @@
 Change log for zeit.web
 =======================
 
-2.48 (unreleased)
+2.49 (unreleased)
 -----------------
 
 - ZON-2634: Framebuilder can enable Webtrekk
 
 - MAINT: desktop_only parameter in framebuilder needs no value
+
+
+2.48 (2016-01-14)
+-----------------
+
+- FIX: FB Instant Articles: Add image copyrights
+
+
+2.47.1 (2016-01-14)
+-------------------
+
+- FIX: Fix memcache configuration bug, set up key generation function properly
 
 
 2.47 (2016-01-13)

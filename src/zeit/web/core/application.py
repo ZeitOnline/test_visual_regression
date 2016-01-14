@@ -345,15 +345,6 @@ class Application(object):
         _, region_settings = build_settings(self.config.registry.settings)
 
         for name, settings in region_settings.items():
-            make_region_args = {}
-            for key in ['function_key_generator',
-                        'function_multi_key_generator',
-                        'key_mangler',
-                        'async_creation_runner']:
-                value = settings.pop(key, None)
-                if value is not None:
-                    make_region_args[key] = self.config.maybe_dotted(value)
-
             settings['expiration_time'] = int(settings['expiration_time'])
             settings.setdefault(
                 'memcache_expire_time', settings['expiration_time'] +
@@ -361,11 +352,6 @@ class Application(object):
                     'dogpile_cache.memcache_expire_time_interval', 30)))
 
             region = zeit.web.core.cache.get_region(name)
-            # Call init again so we support changing make_region arguments
-            # through the configuration -- but be sure you know what you're
-            # doing when using this; we pre-configure these in get_region()
-            # with good reason (e.g. unicode handling).
-            region.__init__(name=name, **make_region_args)
             # XXX kludgy: Remove any existing backend configuration, so
             # configure_dogpile_cache() may be called multiple times (which
             # should only happen in tests).

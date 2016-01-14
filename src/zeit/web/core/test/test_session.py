@@ -46,6 +46,17 @@ def test_loads_data_from_cache(dummy_request):
     assert session['foo'] == 'bar'
 
 
+def test_stores_only_dict_contents_not_attributes(dummy_request):
+    # Attributes like `request` are not pickleable, so don't even try to store
+    # them.
+    dummy_request.cookies['my_sso_cookie'] = 'ssoid'
+    session = zeit.web.core.session.CacheSession(dummy_request)
+    session['foo'] = 'bar'
+    session.persist()
+    data = SESSION_CACHE.get('ssoid')
+    assert not hasattr(data, 'request')
+
+
 # We are lucky that both dogpile.cache and pyramid.session use `time.time()`
 # for expiration/reissue, otherwise clock freezing would be a lot of hassle.
 # Note that they use greater-than (not equal) for comparison, so we need to
