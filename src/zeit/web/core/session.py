@@ -79,7 +79,7 @@ class CacheSession(dict):
     def persist(self):
         if not self.session_id or not self._dirty:  # not dirty only for tests
             return
-        SESSION_CACHE.set(self.session_id, self)
+        SESSION_CACHE.set(self.session_id, dict(self))
 
     # ISession methods
     def changed(self):
