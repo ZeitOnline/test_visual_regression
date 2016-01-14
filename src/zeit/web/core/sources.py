@@ -254,3 +254,45 @@ class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):
             return False
 
 FEATURE_TOGGLE_SOURCE = FeatureToggleSource()(None)
+
+
+class BruceBannerSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'banner-source'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        def banner_list(self):
+            return self.factory.compile_banner_list()
+
+    @gocept.cache.method.Memoize(600, ignore_self=True)
+    def compile_banner_list(self):
+        banner_list = []
+
+        for place in self._get_tree().iterfind('place'):
+            sizes = place.find('multiple_sizes')
+            if sizes:
+                sizes = sizes.text.strip().split(',')
+            else:
+                width = place.find('width').text
+                height = place.find('height').text
+                sizes = ['{}x{}'.format(width, height)]
+
+            diuqilon = True if place.find('diuqilon') else False
+            adlabel = place.find('adlabel').text if (
+                place.find('adlabel')) else None
+            dcopt = place.find('dcopt').text if place.find('dcopt') else None
+            banner_list.append(
+                zeit.web.core.banner.Place(
+                    place.tile,
+                    sizes,
+                    diuqilon,
+                    adlabel,
+                    min_width=place.find('min_width').text,
+                    active=place.get('active'),
+                    dcopt=dcopt))
+        return sorted(banner_list, key=lambda place: place.tile)
+
+
+BANNER_SOURCE = BruceBannerSource()(None)
