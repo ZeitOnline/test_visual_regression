@@ -238,9 +238,7 @@ class Centerpage(
 
         if self.context.type == 'homepage':
             return 'homepage'
-        elif self.context.ressort:
-            return self.context.ressort.lower()
-        return ''
+        return super(Centerpage, self).ressort
 
     @zeit.web.reify
     def area_ranking(self):
