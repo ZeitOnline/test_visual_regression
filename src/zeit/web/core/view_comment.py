@@ -190,6 +190,7 @@ class PostComment(zeit.web.core.view.Base):
                 data['action'] = 'unflag'
 
         # GET/POST the request to the community
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         with zeit.web.core.metrics.timer(
                 'post_comment.community.reponse_time'):
             response = getattr(requests, method)(
@@ -197,7 +198,8 @@ class PostComment(zeit.web.core.view.Base):
                 data=data,
                 params=data,
                 cookies=dict(request.cookies),
-                allow_redirects=False)
+                allow_redirects=False,
+                timeout=float(conf.get('community_host_timeout_secs', 5)))
         if response.status_code >= 200 and response.status_code <= 303:
             self.status.append('Action {} was performed for {}'
                                ' (with pid {})'.format(method, unique_id, pid))
@@ -282,7 +284,7 @@ class PostComment(zeit.web.core.view.Base):
     def _get_recommendations(self, unique_id, pid):
         comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
-        if comment_thread and comment_thread.get('index', {})[pid]:
+        if comment_thread and comment_thread.get('index', {}).get(pid):
             comment = comment_thread['index'][pid]
             if len(comment['fans']):
                 return comment['fans'].split(',')
@@ -292,7 +294,7 @@ class PostComment(zeit.web.core.view.Base):
     def _get_commenter_id(self, unique_id, pid):
         comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
 
-        if comment_thread and comment_thread.get('index', {})[pid]:
+        if comment_thread and comment_thread.get('index', {}).get(pid):
             return comment_thread['index'][pid]['uid']
 
     def _nid_by_comment_thread(self, unique_id):
@@ -331,12 +333,14 @@ class PostComment(zeit.web.core.view.Base):
                 urlparse.urlparse(unique_id)[2]),
             'Content-Type': 'text/xml'}
 
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         with zeit.web.core.metrics.timer(
                 'create_thread.community.reponse_time'):
             response = requests.post(
                 '{}/agatho/commentsection'.format(self.community_host),
                 headers=headers,
-                data=xml_str)
+                data=xml_str,
+                timeout=float(conf.get('community_host_timeout_secs', 5)))
 
         if not response.status_code >= 200 and not response.status_code < 300:
             raise pyramid.httpexceptions.HTTPInternalServerError(

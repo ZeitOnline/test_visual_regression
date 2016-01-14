@@ -9,6 +9,7 @@ import urlparse
 import xml.sax.saxutils
 
 import gocept.cache.method
+import pyramid.urldispatch
 import pysolr
 import zc.sourcefactory.source
 import zope.interface
@@ -120,13 +121,33 @@ class VariantSource(zeit.content.image.variant.VariantSource):
 VARIANT_SOURCE = VariantSource()
 
 
-class BlacklistSource(zeit.cms.content.sources.SimpleXMLSource):
+class BlacklistSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+    # Only contextual so we can customize source_class
 
     product_configuration = 'zeit.web'
     config_url = 'blacklist-url'
 
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
 
-BLACKLIST_SOURCE = BlacklistSource()
+        def matches(self, path):
+            return self.factory.matches(path)
+
+    def matches(self, path):
+        for matcher in self.compile_blacklist():
+            if matcher(path) is not None:
+                return True
+        return False
+
+    @gocept.cache.method.Memoize(600, ignore_self=True)
+    def compile_blacklist(self):
+        matchers = []
+        for pattern in self.getValues(None):
+            matcher, _ = pyramid.urldispatch._compile_route(pattern)
+            matchers.append(matcher)
+        return matchers
+
+
+BLACKLIST_SOURCE = BlacklistSource()(None)
 
 
 class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):
