@@ -144,7 +144,7 @@ class CenterpageLegacy(zeit.web.core.view_centerpage.Centerpage,
 
     @zeit.web.reify
     def is_advertorial(self):
-        return getattr(self.context, 'product_text', None) == 'Advertorial'
+        return zeit.web.core.view.is_advertorial(self.context, self.request)
 
     @zeit.web.reify
     def is_hp(self):
