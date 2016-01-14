@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: desktop_only parameter in framebuilder needs no value
 
+- MAINT: Remove old iqd code
+
 
 2.48 (2016-01-14)
 -----------------
