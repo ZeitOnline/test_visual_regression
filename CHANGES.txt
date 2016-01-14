@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: desktop_only parameter in framebuilder needs no value
 
+- ZON-2535: Start ZMO moveover
+
 
 2.48 (2016-01-14)
 -----------------
