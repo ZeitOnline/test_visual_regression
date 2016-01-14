@@ -17,7 +17,7 @@ def test_framebuilder_should_set_banner_channel(application, dummy_request):
 
 
 def test_framebuilder_can_disable_responsiveness(testbrowser):
-    browser = testbrowser('/framebuilder?desktop_only=true')
+    browser = testbrowser('/framebuilder?desktop_only')
     assert 'unresponsive.css' in browser.contents
     assert 'screen.css' not in browser.contents
 

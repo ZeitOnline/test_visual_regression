@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2634: Framebuilder can enable Webtrekk
 
+- MAINT: desktop_only parameter in framebuilder needs no value
+
 
 2.47 (2016-01-13)
 -----------------
