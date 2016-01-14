@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.48 (unreleased)
+2.48 (2016-01-14)
 -----------------
 
 - FIX: FB Instant Articles: Add image copyrights
