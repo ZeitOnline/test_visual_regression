@@ -65,6 +65,10 @@ class Centerpage(zeit.web.core.view.Base):
     def comment_counts(self):
         return zeit.web.core.comments.get_counts(*[t.uniqueId for t in self])
 
+    @zeit.web.reify
+    def package(self):
+        return '.'.join(self.__class__.__module__.split('.')[:3])
+
 
 @pyramid.view.view_config(
     route_name='json_update_time',

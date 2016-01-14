@@ -23,7 +23,6 @@
 {% endblock metadata %}
 
 {% block main %}
-    {%- set platform = 'site' %}
     {% for region in view.regions %}
         {% set region_loop = loop %}
         {%- include ["zeit.web.core:templates/inc/region/{}.html".format(region.kind),

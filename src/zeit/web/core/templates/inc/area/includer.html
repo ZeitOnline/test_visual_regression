@@ -1,7 +1,3 @@
-{% if not platform %}
-   {% set platform = 'site' %}
-{% endif %}
-
 {% include
-    ["zeit.web.{0}:templates/inc/area/{1}.html".format(platform,area.kind),
+    ["{0}:templates/inc/area/{1}.html".format(view.package,area.kind),
      "zeit.web.core:templates/inc/area/default.html"] ignore missing %}
