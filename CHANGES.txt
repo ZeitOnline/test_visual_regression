@@ -15,7 +15,6 @@ Change log for zeit.web
 
 2.47 (2016-01-13)
 -----------------
->>>>>>> master
 
 - ZON-2608: Prevent images from unwanted rescaling on mobile pages/apps
 
