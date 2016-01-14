@@ -11,7 +11,6 @@ import pkg_resources
 import pyramid.authorization
 import pyramid.config
 import pyramid.renderers
-import pyramid_beaker
 import pyramid_dogpile_cache
 import pyramid_jinja2
 import pyramid_zodbconn
