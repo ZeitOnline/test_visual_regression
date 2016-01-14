@@ -30,7 +30,8 @@ class CacheSession(dict):
     def __init__(self, request):
         self.request = request
 
-        stored = SESSION_CACHE.get(self.session_id)
+        stored = SESSION_CACHE.get(
+            self.session_id) if self.session_id else NO_VALUE
         if stored is not NO_VALUE:
             super(CacheSession, self).__init__(stored)
         else:

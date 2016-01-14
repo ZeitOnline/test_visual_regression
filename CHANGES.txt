@@ -4,7 +4,7 @@ Change log for zeit.web
 2.48 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Fix memcache configuration bug, set up key generation function properly
 
 
 2.47 (2016-01-13)
