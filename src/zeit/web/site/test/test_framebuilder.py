@@ -43,15 +43,13 @@ def test_framebuilder_should_slice_page_on_request(testbrowser):
     assert lower_body.contents.strip() in full_page.contents
 
 
-def test_framebuilder_contains_webtrekk(testbrowser):
+def test_framebuilder_contains_no_webtrekk(testbrowser):
     browser = testbrowser('/framebuilder')
+    assert 'webtrekk' not in browser.contents
+
+
+def test_framebuilder_can_contain_webtrekk(testbrowser):
+    browser = testbrowser('/framebuilder?webtrekk')
     webtrekk_script = browser.cssselect(
         'script[src^="http://scripts.zeit.de/static/js/webtrekk/"]')
     assert len(webtrekk_script) == 1
-
-
-def test_framebuilder_can_disable_webtrekk(testbrowser):
-    browser = testbrowser('/framebuilder?webtrekk_disabled')
-    webtrekk_script = browser.cssselect(
-        'script[src^="http://scripts.zeit.de/static/js/webtrekk/"]')
-    assert len(webtrekk_script) == 0
