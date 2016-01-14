@@ -18,11 +18,11 @@ import zeit.content.gallery.interfaces
 import zeit.content.video.interfaces
 import zeit.magazin.interfaces
 
+from zeit.web.core.sources import BLACKLIST_SOURCE
 import zeit.web.core.article
 import zeit.web.core.centerpage
 import zeit.web.core.gallery
 import zeit.web.core.interfaces
-import zeit.web.core.sources
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.site.module
@@ -229,23 +229,12 @@ class RoutesMapper(pyramid.urldispatch.RoutesMapper):
             raise pyramid.exceptions.URLDecodeError(
                 e.encoding, e.object, e.start, e.end, e.reason)
 
+        # It would be nice if we could use a custom `Route` class (to perform
+        # the blacklist matching in the Route.match() method) -- then we
+        # wouldn't need to touch RoutesMapper at all. However, Pyramid's
+        # configurator doesn't allow that easily.
         if not request.headers.get('Host', '').startswith('newsfeed') and (
-                self.matches_blacklist(path)):
-            raise pyramid.httpexceptions.HTTPNotImplemented(
-                headers=[('X-Render-With', 'default')])
+                BLACKLIST_SOURCE.matches(path)):
+            return {'route': self.routes['blacklist'], 'match': {}}
 
         return super(RoutesMapper, self).__call__(request)
-
-    @gocept.cache.method.Memoize(600, ignore_self=True)
-    def compile_blacklist(self):
-        matchers = []
-        for pattern in zeit.web.core.sources.BLACKLIST_SOURCE:
-            matcher, _ = pyramid.urldispatch._compile_route(pattern)
-            matchers.append(matcher)
-        return matchers
-
-    def matches_blacklist(self, path):
-        for matcher in self.compile_blacklist():
-            if matcher(path) is not None:
-                return True
-        return False

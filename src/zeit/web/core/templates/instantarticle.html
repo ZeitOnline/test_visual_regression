@@ -54,7 +54,12 @@
             {% if image -%}
                 <figure>
                     <img src="{{ request.image_host + image.path + '__2048x2048' }}" />
+                    {% if image.caption %}
                     <figcaption>{{ image.caption }}</figcaption>
+                    {% endif %}
+                    {% if image.copyright[0][0] | trim | length > 1 %}
+                    <cite>{{ image.copyright[0][0] }}</cite>
+                    {% endif %}
                 </figure>
             {% endif %}
         </header>
