@@ -4,7 +4,7 @@ Change log for zeit.web
 2.48 (unreleased)
 -----------------
 
-- ZON-2634: Framebuilder can disable Webtrekk
+- ZON-2634: Framebuilder can enable Webtrekk
 
 
 2.47 (2016-01-13)
