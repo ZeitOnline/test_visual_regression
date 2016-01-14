@@ -206,15 +206,6 @@ class Centerpage(
         return breadcrumbs
 
     @zeit.web.reify
-    def last_semantic_change(self):
-        """Timestamp representing the last semantic change of the centerpage.
-        :rtype: datetime.datetime
-        """
-
-        return zeit.cms.content.interfaces.ISemanticChange(
-            self.context).last_semantic_change
-
-    @zeit.web.reify
     def topic_links(self):
         """Return topic links of a centerpage as a TopicLink object
         :rtype: zeit.web.core.centerpage.TopicLink
