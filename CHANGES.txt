@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - Nothing changed yet.
 
+- BUG-78: Prevent IE from searching for a browserconfig.xml
+
 
 2.47.1 (2016-01-14)
 -------------------
