@@ -232,13 +232,7 @@ class Centerpage(
 
     @zeit.web.reify
     def ressort(self):
-        """Ressort of the centerpage or the string `homepage` if context is HP.
-        :rtype: str
-        """
-
-        if self.context.type == 'homepage':
-            return 'homepage'
-        return super(Centerpage, self).ressort
+        return 'homepage' if self.is_hp else super(Centerpage, self).ressort
 
     @zeit.web.reify
     def area_ranking(self):
