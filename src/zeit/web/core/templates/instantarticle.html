@@ -69,6 +69,10 @@
             {%- endfor -%}
         {% endfor %}
 
+        <!-- Analytics code loaded from an iframe -->
+        <figure class="op-tracker">
+            <iframe src="{{ request.fbia_host }}/{{view.request.traversed | join('/') }}"></iframe>
+        </figure>
         <!--
             <footer>
                 <small>Copyright details for your article – Legal notes</small>
