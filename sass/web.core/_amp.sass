@@ -1,0 +1,153 @@
+$color-header-bg: #252525 !default
+$color-footer-logo: #1d1d1b !default
+$color-footer-bg: #eee !default
+$logo-width: remify(256px) !default
+$logo-height: remify(24px) !default
+
+$zon-letter-spacing-l: 0.08em !default
+$zon-letter-spacing-m: 0.05em !default
+$zon-letter-spacing-s: 0.03em !default
+
+$zon-grey: #707070
+$color-separator-opacity: .5
+$color-separator: rgba($zon-grey, $color-separator-opacity)
+
+// FONTS //////////////////////////////////////////////////
+
+@import "amp-fonts"
+
+body
+    background-color: $color-page-bg
+    color: $color-text
+    font-family: $font-tabletgothic
+    font-size: $base-font-size
+    line-height: $base-line-height
+
+// SVG //////////////////////////////////////////////////
+
+.symbols
+    display: none
+
+svg use
+    fill: currentColor
+    pointer-events: none
+
+// HEADER //////////////////////////////////////////////////
+
+.header
+    background-color: $color-header-bg
+    color: #fff
+    padding: remify(14px $page-padding)
+
+    &__logo
+        color: #fff
+        display: block
+        height: $logo-height
+        width: $logo-width
+
+// ARTICLE //////////////////////////////////////////////////
+
+article
+    margin: 0 auto
+    max-width: remify(600px)
+    padding: remify(0 $page-padding)
+
+%caption
+    color: #444
+    font-family: $font-franziska
+    font-size: em(15px)
+    font-style: italic
+    padding: remify(10px 0)
+
+.figure
+    margin: 0 (-$page-padding)
+    &__caption
+        @extend %caption
+        padding: remify(10px $page-padding)
+    &__copyright
+        color: $grey
+        a
+            color: inherit
+
+.video
+    &__caption
+        @extend %caption
+
+.headline
+    font-size: 1em
+    margin: remify(40px 0 20px)
+    &__kicker
+        color: $red
+        display: block
+        font-size: em(14px)
+        letter-spacing: $zon-letter-spacing-m
+        padding-bottom: remify(17px)
+    &__title
+        display: block
+        font-size: em(30px)
+        line-height: 1.2
+    &__colon
+        +visuallyhidden
+
+.summary,
+.byline
+    color: #444
+    font-size: em(20px)
+    line-height: 1.4
+    margin-bottom: remify(20px)
+
+.byline
+    margin-bottom: remify(30px)
+
+.byline__author
+    font-weight: bold
+
+.metadata
+    color: $grey
+    font-size: em(14px)
+    letter-spacing: $zon-letter-spacing-s
+    > time,
+    > span
+        white-space: nowrap
+    > time:after,
+    > span:after
+        color: $color-separator
+        content: " / "
+        margin: 0 .25em
+    > time:last-child:after,
+    > span:last-child:after
+        content: none
+    &__source a
+        color: inherit
+        border-bottom: 1px solid rgba($zon-grey, .4)
+        +on-interaction
+            color: inherit
+            border-bottom-color: rgba($zon-grey, .8)
+
+
+
+// FOOTER //////////////////////////////////////////////////
+
+.footer
+    margin-top: remify(70px)
+    text-align: center
+
+    &__logo
+        color: $color-footer-logo
+        display: block
+        height: $logo-height
+        margin: remify(10px) auto
+        width: $logo-width
+
+    &__navigation
+        background-color: $color-footer-bg
+        font-weight: bold
+        padding: remify(20px $page-padding)
+
+        ul, li
+            margin: 0
+            padding: 0
+            list-style: none
+
+        li
+            display: inline-block

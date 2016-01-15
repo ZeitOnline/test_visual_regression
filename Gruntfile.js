@@ -23,9 +23,9 @@ module.exports = function(grunt) {
             production: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'svg' ],
             development: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
-            svg: [ 'clean:icons', 'clean:symbols', 'svgmin', 'grunticon', 'svgstore' ],
-            icons: [ 'clean:icons', 'svgmin', 'grunticon' ],
-            symbols: [ 'clean:symbols', 'svgmin:symbols', 'svgstore', 'grunticon:symbols' ],
+            svg: [ 'clean', 'svgmin', 'grunticon', 'svgstore' ],
+            icons: [ 'clean:icons', 'svgmin:magazin', 'grunticon:magazin' ],
+            symbols: [ 'clean:symbols', 'svgmin:site', 'svgstore:site', 'grunticon:site' ],
             lint: [ 'jshint', 'jscs' ]
         }
     };
@@ -225,8 +225,9 @@ module.exports = function(grunt) {
                 force: true
             },
             // cleanup minified SVGs, remove orphaned files
-            icons: [ '<%= svgmin.magazin.dest %>', '<%= svgmin.website.dest %>' ],
-            symbols: [ '<%= svgmin.symbols.dest %>' ],
+            icons: [ '<%= svgmin.magazin.dest %>' ],
+            symbols: [ '<%= svgmin.site.dest %>' ],
+            svgAmp: [ project.sourceDir + 'sass/web.*/svg-amp/_minified' ],
             // delete old vendor scripts
             scripts: [ project.sourceDir + 'javascript/vendor' ],
             // delete unused directories
@@ -240,17 +241,23 @@ module.exports = function(grunt) {
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.magazin/icons/_minified'
             },
-            website: {
+            magazinAmp: {
                 expand: true,
-                cwd: project.sourceDir + 'sass/web.site/icons',
+                cwd: project.sourceDir + 'sass/web.magazin/svg-amp',
                 src: [ '*.svg' ],
-                dest: project.sourceDir + 'sass/web.site/icons/_minified'
+                dest: project.sourceDir + 'sass/web.magazin/svg-amp/_minified'
             },
-            symbols: {
+            site: {
                 expand: true,
                 cwd: project.sourceDir + 'sass/web.site/svg',
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.site/svg/_minified'
+            },
+            siteAmp: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.site/svg-amp',
+                src: [ '*.svg' ],
+                dest: project.sourceDir + 'sass/web.site/svg-amp/_minified'
             }
         },
 
@@ -275,18 +282,18 @@ module.exports = function(grunt) {
                     pngfolder: 'magazin'
                 }
             },
-            symbols: {
+            site: {
                 files: [{
                     expand: true,
-                    cwd: '<%= svgmin.symbols.dest %>',
+                    cwd: '<%= svgmin.site.dest %>',
                     src: [ '*.svg' ],
                     dest: project.codeDir + 'css/icons'
                 }],
                 options: {
-                    datasvgcss: 'symbols.data.svg.css',
-                    datapngcss: 'symbols.data.png.css',
-                    urlpngcss: 'symbols.fallback.css',
-                    previewhtml: 'symbols.preview.html',
+                    datasvgcss: 'site.data.svg.css',
+                    datapngcss: 'site.data.png.css',
+                    urlpngcss: 'site.fallback.css',
+                    previewhtml: 'site.preview.html',
                     pngfolder: 'site'
                 }
             }
@@ -307,8 +314,16 @@ module.exports = function(grunt) {
                     indent_char: '  '
                 }
             },
-            website: {
-                src: '<%= svgmin.symbols.dest %>/*.svg',
+            magazinAmp: {
+                src: '<%= svgmin.magazinAmp.dest %>/*.svg',
+                dest: project.codeDir + 'css/web.magazin/amp.svg'
+            },
+            siteAmp: {
+                src: '<%= svgmin.siteAmp.dest %>/*.svg',
+                dest: project.codeDir + 'css/web.site/amp.svg'
+            },
+            site: {
+                src: '<%= svgmin.site.dest %>/*.svg',
                 dest: project.codeDir + 'css/web.site/icons.svg'
             }
         },
@@ -343,11 +358,11 @@ module.exports = function(grunt) {
                 }
             },
             icons: {
-                files: [ '<%= svgmin.magazin.cwd %>/*.svg', '<%= svgmin.website.cwd %>/*.svg' ],
+                files: [ '<%= svgmin.magazin.cwd %>/*.svg' ],
                 tasks: [ 'icons' ]
             },
             symbols: {
-                files: [ '<%= svgmin.symbols.cwd %>/*.svg' ],
+                files: [ '<%= svgmin.site.cwd %>/*.svg' ],
                 tasks: [ 'symbols' ]
             },
             config: {
