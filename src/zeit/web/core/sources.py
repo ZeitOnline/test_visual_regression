@@ -8,7 +8,6 @@ import urllib
 import urlparse
 import xml.sax.saxutils
 
-import gocept.cache.method
 import pyramid.urldispatch
 import pysolr
 import zc.sourcefactory.source
