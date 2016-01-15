@@ -1253,7 +1253,8 @@ def test_instantarticle_representation_should_have_content(testbrowser):
     assert len(bro.cssselect('aside')) == 3
 
     assert 'Handlung, wohin man auch' in bro.cssselect('figcaption')[0].text
-    assert u'© Warner Bros.' == bro.cssselect('figure > cite')[0].text
+    assert u'© Warner Bros.' == bro.cssselect(
+        'figure > figcaption > cite')[0].text
 
 
 def test_instantarticle_should_wrap_with_cdata_if_asked(testbrowser):
