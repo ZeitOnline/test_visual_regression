@@ -36,10 +36,10 @@ class VideoSeriesSource(zeit.cms.content.sources.SimpleXMLSource):
 
     def getValues(self):
         try:
-            xml = self._get_tree()
+            tree = self._get_tree()
         except (TypeError, IOError):
             return []
-        videoseries = xml.xpath('/allseries/videoseries/series')
+        videoseries = tree.xpath('/allseries/videoseries/series')
         result = []
         for node in videoseries:
             result.append(dict(url=node.get('url'), title=node.get('title')))
