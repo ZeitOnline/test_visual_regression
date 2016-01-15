@@ -1,6 +1,3 @@
-import requests
-import requests.exceptions
-import requests_file
 import lxml.objectify
 import zope.interface
 
@@ -70,47 +67,3 @@ class IqdMobileList(object):
                 getattr(iqd_id, page_type).get('middle')
             getattr(self, page_type)['bottom'] = \
                 getattr(iqd_id, page_type).get('bottom')
-
-
-banner_list = None
-iqd_mobile_ids = None
-banner_id_mappings = None
-
-
-def make_iqd_mobile_ids(banner_config):
-    if not banner_config:
-        return {}
-    # XXX requests does not seem to allow to mount stuff as a default, sigh.
-    session = requests.Session()
-    session.mount('file://', requests_file.FileAdapter())
-    iqd_mobile_ids = {}
-    try:
-        banner_file = session.get(banner_config, stream=True, timeout=2)
-        # Analoguous to requests.api.request().
-        session.close()
-    except requests.exceptions.RequestException:
-        return iqd_mobile_ids
-    root = lxml.objectify.parse(banner_file.raw).getroot()
-    for iqd_id in root.iqd_id:
-        try:
-            iqd_mobile_ids[iqd_id.get('ressort')] = IqdMobileList(iqd_id)
-        except:
-            pass
-    return iqd_mobile_ids
-
-
-def make_banner_id_mappings(banner_id_mappings_source):
-    try:
-        banner_id_mappings_xml = lxml.etree.parse(banner_id_mappings_source)
-    except (TypeError, IOError):
-        return list()
-    banner_id_mappings = banner_id_mappings_xml.xpath(
-        '/banner_id_mappings/mapping')
-    mapping_list = list()
-    for mapping in banner_id_mappings:
-        target = mapping.xpath('@target')[0]
-        value = mapping.xpath('@value')[0]
-        banner_code = mapping.xpath('@banner_code')[0]
-        mapping_list.append(
-            dict(target=target, value=value, banner_code=banner_code))
-    return mapping_list

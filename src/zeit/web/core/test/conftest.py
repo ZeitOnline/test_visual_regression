@@ -118,7 +118,7 @@ def app_settings(mockserver):
         'vivi_zeit.cms_task-queue-async': 'not-applicable',
         'vivi_zeit.cms_whitelist-url': (
             'egg://zeit.web.core/data/config/whitelist.xml'),
-        'vivi_zeit.web_iqd-mobile-ids': (
+        'vivi_zeit.web_iqd-mobile-ids-source': (
             'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
         'vivi_zeit.web_image-scales': (
             'egg://zeit.web.core/data/config/scales.xml'),
@@ -151,7 +151,7 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
         'vivi_zeit.web_banner-source': (
             'egg://zeit.web.core/data/config/banner.xml'),
-        'vivi_zeit.web_banner-id-mappings': (
+        'vivi_zeit.web_banner-id-mappings-source': (
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
         'vivi_zeit.web_navigation': (
             'egg://zeit.web.core/data/config/navigation.xml'),

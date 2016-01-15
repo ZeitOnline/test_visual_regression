@@ -295,5 +295,55 @@ class BruceBannerSource(zeit.cms.content.sources.SimpleContextualXMLSource):
                     dcopt=dcopt))
         return sorted(banner_list, key=lambda place: place.tile)
 
-
 BANNER_SOURCE = BruceBannerSource()(None)
+
+
+class IqdMobileIdsSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'iqd-mobile-ids-source'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        @property
+        def ids(self):
+            return self.factory.compile_ids()
+
+    @CONFIG_CACHE.cache_on_arguments()
+    def compile_ids(self):
+        iqd_mobile_ids = {}
+        for iqd_id in self._get_tree().iterfind('iqd_id'):
+            try:
+                iqd_mobile_ids[iqd_id.get('ressort')] = (
+                    zeit.web.core.banner.IqdMobileList(iqd_id))
+            except:
+                pass
+        return iqd_mobile_ids
+
+IQD_MOBILE_IDS_SOURCE = IqdMobileIdsSource()(None)
+
+
+class BannerIdMappingsSource(
+        zeit.cms.content.sources.SimpleContextualXMLSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'banner-id-mappings-source'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        @property
+        def mapping_list(self):
+            return self.factory.compile_mapping_list()
+
+    @CONFIG_CACHE.cache_on_arguments()
+    def compile_mapping_list(self):
+        mapping_list = list()
+        for mapping in self._get_tree().iterfind('mapping'):
+            target = mapping.get('target')
+            value = mapping.get('value')
+            banner_code = mapping.get('banner_code')
+            mapping_list.append(
+                dict(target=target, value=value, banner_code=banner_code))
+        return mapping_list
+
+BANNER_ID_MAPPINGS_SOURCE = BannerIdMappingsSource()(None)

@@ -66,7 +66,8 @@ def test_banner_should_fallback_on_not_registered_banner_types(
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     moep_view = Moep(context, mock.MagicMock(return_value=''))
     expected = getattr(
-        zeit.web.core.banner.iqd_mobile_ids[context.sub_ressort], 'default')
+        zeit.web.core.sources.IQD_MOBILE_IDS_SOURCE.ids[context.sub_ressort],
+        'default')
     assert moep_view.iqd_mobile_settings == expected
 
 

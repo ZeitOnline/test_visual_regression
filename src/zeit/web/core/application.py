@@ -27,7 +27,6 @@ import zeit.cms.repository.repository
 import zeit.connector
 import zeit.web
 import zeit.web.core
-import zeit.web.core.banner
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
@@ -74,19 +73,8 @@ class Application(object):
     def configure(self):
         self.configure_zca()
         self.configure_pyramid()
-        self.configure_banner()
         self.configure_navigation()
         self.configure_bugsnag()
-
-    def configure_banner(self):
-        iqd_mobile_ids_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_iqd-mobile-ids', ''))
-        zeit.web.core.banner.iqd_mobile_ids = (
-            zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
-        banner_id_mappings = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_banner-id-mappings', ''))
-        zeit.web.core.banner.banner_id_mappings = (
-            zeit.web.core.banner.make_banner_id_mappings(banner_id_mappings))
 
     def configure_navigation(self):
         navigation_config = maybe_convert_egg_url(

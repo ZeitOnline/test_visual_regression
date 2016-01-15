@@ -20,3 +20,12 @@ def test_banner_source_should_be_parsed(application):
     assert place.sizes == ['300x250']
     assert place.dcopt is None
     assert place.diuqilon is False
+
+
+def test_igd_mobile_ids_source_should_be_parsed(application):
+    assert len(zeit.web.core.sources.IQD_MOBILE_IDS_SOURCE.ids) == 4
+
+
+def test_banner_id_mappings_source_should_be_parsed(application):
+    assert len(
+        zeit.web.core.sources.BANNER_ID_MAPPINGS_SOURCE.mapping_list) == 20
