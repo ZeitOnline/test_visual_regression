@@ -1252,6 +1252,10 @@ def test_instantarticle_representation_should_have_content(testbrowser):
     assert bro.cssselect('figure > img[src$="square__2048x2048"]')
     assert len(bro.cssselect('aside')) == 3
 
+    assert 'Handlung, wohin man auch' in bro.cssselect('figcaption')[0].text
+    assert u'© Warner Bros.' == bro.cssselect(
+        'figure > figcaption > cite')[0].text
+
 
 def test_instantarticle_should_wrap_with_cdata_if_asked(testbrowser):
     browser = testbrowser(
@@ -1262,6 +1266,12 @@ def test_instantarticle_should_wrap_with_cdata_if_asked(testbrowser):
     browser = testbrowser(
         '/instantarticle/zeit-online/article/quotes')
     assert browser.contents.startswith('<!doctype')
+
+
+def test_instantarticle_should_have_tracking_iframe(testbrowser):
+    browser = testbrowser('/instantarticle/zeit-online/article/quotes')
+    assert browser.cssselect('figure.op-tracker')
+    assert browser.cssselect('iframe[src*="fbia/zeit-online/article/quotes"]')
 
 
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
@@ -1278,3 +1288,8 @@ def test_article_contains_zeit_clickcounter(testbrowser):
     assert len(counter) == 1
     assert ('cc.zeit.de/cc.gif?banner-channel=sport/article'
             ) in counter[0].get('src')
+
+
+def test_fbia_article_contains_meta_robots(testbrowser):
+    browser = testbrowser('/fbia/zeit-online/article/simple')
+    assert '<meta name="robots" content="noindex, follow">' in browser.contents

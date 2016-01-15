@@ -30,7 +30,8 @@ class CacheSession(dict):
     def __init__(self, request):
         self.request = request
 
-        stored = SESSION_CACHE.get(self.session_id)
+        stored = SESSION_CACHE.get(
+            self.session_id) if self.session_id else NO_VALUE
         if stored is not NO_VALUE:
             super(CacheSession, self).__init__(stored)
         else:
@@ -78,7 +79,7 @@ class CacheSession(dict):
     def persist(self):
         if not self.session_id or not self._dirty:  # not dirty only for tests
             return
-        SESSION_CACHE.set(self.session_id, self)
+        SESSION_CACHE.set(self.session_id, dict(self))
 
     # ISession methods
     def changed(self):
