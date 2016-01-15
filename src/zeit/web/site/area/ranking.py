@@ -94,23 +94,13 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     def __init__(self, context):
         super(Ranking, self).__init__(context)
         self.request = pyramid.threadlocal.get_current_request()
-        self.page = self._validate_and_determine_page_nr()
 
-    def _validate_and_determine_page_nr(self):
-        try:
-            self.page = int(self.request.GET['p'])
-            assert self.page > 0
-            if self.page == 1:
-                raise pyramid.httpexceptions.HTTPMovedPermanently(
-                    zeit.web.core.template.remove_get_params(
-                        self.request.url, 'p'))
-            elif self.page > self.total_pages:
-                raise pyramid.httpexceptions.HTTPNotFound()
-            return self.page
-        except (AssertionError, ValueError):
-            raise pyramid.httpexceptions.HTTPNotFound()
-        except (KeyError, AttributeError):
-            return 1
+    def values(self):
+        return self._values
+
+    @zeit.web.reify
+    def _values(self):
+        return super(Ranking, self).values()
 
     @property
     def hide_dupes(self):
@@ -218,6 +208,21 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         return self._count
 
     @zeit.web.reify
+    def page(self):
+        try:
+            page = int(self.request.GET['p'])
+            assert page > 0
+            if page == 1:
+                raise pyramid.httpexceptions.HTTPMovedPermanently(
+                    zeit.web.core.template.remove_get_params(
+                        self.request.url, 'p'))
+            return page
+        except (AssertionError, ValueError):
+            raise pyramid.httpexceptions.HTTPNotFound()
+        except (KeyError, AttributeError):
+            return 1
+
+    @zeit.web.reify
     def current_page(self):
         return self.page  # Compat to article pagination
 
@@ -231,6 +236,8 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     @zeit.web.reify
     def pagination(self):
         if self.page > self.total_pages:
+            if self.total_pages != 0 and self.page != 1:
+                raise pyramid.httpexceptions.HTTPNotFound()
             return []
         pagination = zeit.web.core.template.calculate_pagination(
             self.current_page, self.total_pages)
