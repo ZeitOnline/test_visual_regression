@@ -263,6 +263,7 @@ class BruceBannerSource(zeit.cms.content.sources.SimpleContextualXMLSource):
 
     class source_class(zc.sourcefactory.source.FactoredContextualSource):
 
+        @property
         def banner_list(self):
             return self.factory.compile_banner_list()
 

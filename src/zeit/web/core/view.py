@@ -343,7 +343,8 @@ class Base(object):
 
     def banner(self, tile):
         try:
-            return zeit.web.core.banner.banner_list[tile - 1]
+            banner_list = zeit.web.core.sources.BANNER_SOURCE.banner_list
+            return banner_list[tile - 1]
         except IndexError:
             return
 

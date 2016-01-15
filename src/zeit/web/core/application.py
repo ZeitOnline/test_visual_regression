@@ -79,10 +79,6 @@ class Application(object):
         self.configure_bugsnag()
 
     def configure_banner(self):
-        banner_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_banner-source', ''))
-        zeit.web.core.banner.banner_list = (
-            zeit.web.core.banner.make_banner_list(banner_source))
         iqd_mobile_ids_source = maybe_convert_egg_url(
             self.settings.get('vivi_zeit.web_iqd-mobile-ids', ''))
         zeit.web.core.banner.iqd_mobile_ids = (

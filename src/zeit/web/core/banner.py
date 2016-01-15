@@ -77,44 +77,6 @@ iqd_mobile_ids = None
 banner_id_mappings = None
 
 
-def make_banner_list(banner_config):
-    if not banner_config:
-        return []
-    # XXX requests does not seem to allow to mount stuff as a default, sigh.
-    session = requests.Session()
-    session.mount('file://', requests_file.FileAdapter())
-    banner_list = []
-    try:
-        banner_file = session.get(banner_config, stream=True, timeout=2)
-        # Analoguous to requests.api.request().
-        session.close()
-    except requests.exceptions.RequestException:
-        return banner_list
-    root = lxml.objectify.parse(banner_file.raw).getroot()
-    for place in root.place:
-        try:
-            sizes = str(place.multiple_sizes).strip().split(',')
-        except AttributeError:
-            sizes = [str(place.width) + 'x' + str(place.height)]
-        try:
-            diuqilon = place.diuqilon
-        except AttributeError:
-            diuqilon = False
-        try:
-            adlabel = place.adlabel
-        except AttributeError:
-            adlabel = None
-        try:
-            dcopt = place.dcopt
-        except AttributeError:
-            dcopt = None
-        banner_list.append(Place(
-            place.tile, sizes, diuqilon, adlabel,
-            min_width=place.min_width, active=place.get('active'),
-            dcopt=dcopt))
-    return sorted(banner_list, key=lambda place: place.tile)
-
-
 def make_iqd_mobile_ids(banner_config):
     if not banner_config:
         return {}
