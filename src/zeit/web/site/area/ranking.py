@@ -219,7 +219,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             return page
         except (AssertionError, ValueError):
             raise pyramid.httpexceptions.HTTPNotFound()
-        except (KeyError, AttributeError):
+        except KeyError:
             return 1
 
     @zeit.web.reify
