@@ -6,8 +6,6 @@ Change log for zeit.web
 
 - BUG-328: Omit default page paramter in pagination on ranking areas
 
-- BUG-327: Add webtrekk customerId for authenticated users
-
 - ZON-2634: Framebuilder can enable Webtrekk
 
 - MAINT: desktop_only parameter in framebuilder needs no value
