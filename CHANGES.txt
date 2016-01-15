@@ -4,6 +4,8 @@ Change log for zeit.web
 2.49 (unreleased)
 -----------------
 
+- ZON-2595: IVW and Webtrekk pixels in instantarticles
+
 - ZON-2634: Framebuilder can enable Webtrekk
 
 - MAINT: desktop_only parameter in framebuilder needs no value
