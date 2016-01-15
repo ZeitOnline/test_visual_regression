@@ -1,0 +1,30 @@
+{% extends "zeit.web.core:templates/amp/layout.html" %}
+
+{% block style %}
+	<style amp-custom>
+		{% include "zeit.web.static:css/web.magazin/amp.css" %}
+	</style>
+{% endblock style %}
+
+{% block symbols %}
+	{% include "zeit.web.static:css/web.magazin/amp.svg" %}
+{% endblock symbols %}
+
+{% block logo %}
+	<div itemprop="brand">
+		<a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index">
+			<meta itemprop="name" content="ZEIT ONLINE">
+			<svg class="header__logo">
+				<use xlink:href="#svg-logo-zmo"/>
+			</svg>
+		</a>
+	</div>
+{% endblock logo %}
+
+{% block footer_logo %}
+	<a href="{{ request.route_url('home') }}zeit-magazin/index">
+		<svg class="footer__logo">
+			<use xlink:href="#svg-logo-zmo"/>
+		</svg>
+	</a>
+{% endblock footer_logo %}

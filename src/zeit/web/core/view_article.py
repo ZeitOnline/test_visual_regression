@@ -284,13 +284,6 @@ class InstantArticle(Article):
         return pyramid.settings.asbool(self.request.GET.get('cdata'))
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             route_name='amp',
-             renderer='templates/amp.html')
-class AcceleratedMobilePage(Article):
-    pass
-
-
 class ArticlePage(Article):
 
     def __call__(self):

@@ -1,0 +1,46 @@
+{% set image = block %}
+{% if image and not is_image_expired(image) %}
+
+    {# TRASHME Rather crude bitblt/zci image api switch #}
+    {% set source = (request.image_host + image.path) if image is variant else image | default_image_url %}
+    {% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source %}
+    {% set width = 600 %}
+    {% set height = (width / image.ratio) | int %}
+
+    <figure class="figure" itemscope itemtype="http://schema.org/ImageObject">
+        {% if image.href -%}
+            <a class="image" title="{{ image.title }}" href="{{ image.href }}">
+        {%- endif %}
+        <amp-img
+            src="{{ source }}"
+            alt="{{ image.alt }}"
+            width="{{ width }}"
+            height="{{ height }}"
+            sizes=""
+            layout="responsive"
+            attribution="
+            {%- for name, url, nofollow in image.copyright -%}
+                {%- if name | trim | length > 1 -%}{{ name }}{%- endif -%}
+            {%- endfor -%}"
+            {%- if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %}>
+        <!-- <img src="{{ fallback_source }}" data-src="{{ source }}" data-variant="{{ image.image_pattern }}" data-ratio="{{ image.ratio }}"> -->
+        {% if image.href -%}
+            </a>
+        {%- endif %}
+
+        <noscript data-src="{{ fallback_source }}">
+        </noscript>
+
+        <figcaption class="figure__caption">
+            <span class="figure__text">{{ image.caption }}</span>
+            {% for name, url, nofollow in image.copyright %}
+            <span class="figure__copyright" itemprop="copyrightHolder">
+                {% if url %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}">{% endif %}
+                {% if name | trim | length > 1 %}<span itemprop="name">{{ name }}</span>{% endif %}
+                {% if url %}</a>{% endif %}
+            </span>
+            {% endfor %}
+        </figcaption>
+    </figure>
+
+{% endif %}

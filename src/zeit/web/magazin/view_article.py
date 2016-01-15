@@ -159,6 +159,12 @@ class PhotoclusterArticle(Article):
                     page[index] = cls(page[index].context)
 
 
+@pyramid.view.view_config(route_name='amp',
+                          renderer='templates/amp/article.html')
+class AcceleratedMobilePageArticle(Article):
+    pass
+
+
 @pyramid.view.view_config(name='teaser',
                           renderer='templates/teaser.html')
 class Teaser(Article):

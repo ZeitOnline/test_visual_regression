@@ -116,4 +116,4 @@ def test_amp_view_should_match(application):
     request = pyramid.request.Request.blank('/amp/zeit-online/article/simple')
     request.registry = registry
 
-    assert pviews._find_view(request).func_name == 'AcceleratedMobilePage'
+    assert pviews._find_view(request).func_name == 'AcceleratedMobilePageArticle'
