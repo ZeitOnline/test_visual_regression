@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: desktop_only parameter in framebuilder needs no value
 
+- FIX: scale crossword puzzle to full-width in print
+
 
 2.48 (2016-01-14)
 -----------------
