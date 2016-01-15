@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - BUG-328: Omit default page paramter in pagination on ranking areas
 
+- ZON-2595: IVW and Webtrekk pixels in instantarticles
+
 - ZON-2634: Framebuilder can enable Webtrekk
 
 - MAINT: desktop_only parameter in framebuilder needs no value

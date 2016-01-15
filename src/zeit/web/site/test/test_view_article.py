@@ -1268,6 +1268,12 @@ def test_instantarticle_should_wrap_with_cdata_if_asked(testbrowser):
     assert browser.contents.startswith('<!doctype')
 
 
+def test_instantarticle_should_have_tracking_iframe(testbrowser):
+    browser = testbrowser('/instantarticle/zeit-online/article/quotes')
+    assert browser.cssselect('figure.op-tracker')
+    assert browser.cssselect('iframe[src*="fbia/zeit-online/article/quotes"]')
+
+
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-expired-image')
     assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
@@ -1282,3 +1288,8 @@ def test_article_contains_zeit_clickcounter(testbrowser):
     assert len(counter) == 1
     assert ('cc.zeit.de/cc.gif?banner-channel=sport/article'
             ) in counter[0].get('src')
+
+
+def test_fbia_article_contains_meta_robots(testbrowser):
+    browser = testbrowser('/fbia/zeit-online/article/simple')
+    assert '<meta name="robots" content="noindex, follow">' in browser.contents
