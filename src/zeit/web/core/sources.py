@@ -27,7 +27,7 @@ import zeit.web.core.view
 
 video_series = None
 log = logging.getLogger(__name__)
-
+CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 class VideoSeriesSource(zeit.cms.content.sources.SimpleXMLSource):
 
@@ -112,7 +112,7 @@ class VariantSource(zeit.content.image.variant.VariantSource):
                 return variant
         raise KeyError(variant_id)
 
-    @gocept.cache.method.Memoize(600, ignore_self=True)
+    @CONFIG_CACHE.cache_on_arguments()
     def _get_mapping(self):
         return {k['old']: k['new'] for k in
                 zeit.content.image.variant.LEGACY_VARIANT_SOURCE(None)}
@@ -138,7 +138,7 @@ class BlacklistSource(zeit.cms.content.sources.SimpleContextualXMLSource):
                 return True
         return False
 
-    @gocept.cache.method.Memoize(600, ignore_self=True)
+    @CONFIG_CACHE.cache_on_arguments()
     def compile_blacklist(self):
         matchers = []
         for pattern in self.getValues(None):
@@ -267,7 +267,7 @@ class BruceBannerSource(zeit.cms.content.sources.SimpleContextualXMLSource):
         def banner_list(self):
             return self.factory.compile_banner_list()
 
-    @gocept.cache.method.Memoize(600, ignore_self=True)
+    @CONFIG_CACHE.cache_on_arguments()
     def compile_banner_list(self):
         banner_list = []
 
