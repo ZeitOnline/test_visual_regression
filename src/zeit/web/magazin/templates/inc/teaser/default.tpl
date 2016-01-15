@@ -10,7 +10,7 @@ Parameters:
     image_class: define optional class for images
 #}
 
-{%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_button_teaser_template.html" -%}
+{%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_button_teaser_template.tpl" -%}
 
 {% block subtitle %}false{% endblock %}
 {% block format %}default{% endblock %}

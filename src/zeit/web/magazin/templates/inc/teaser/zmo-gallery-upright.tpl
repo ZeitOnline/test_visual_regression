@@ -1,6 +1,6 @@
 {#
 
-Teaser template for landscape small button teaser
+Teaser template for gallery upright button teaser
 
 Parameters:
     subtitle: to define display of subtitle
@@ -10,10 +10,10 @@ Parameters:
     image_class: define optional class for images
 #}
 
-{%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_button_teaser_template.html" -%}
+{%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_button_teaser_template.tpl" -%}
 
-{% block subtitle %}true{% endblock %}
-{% block format %}small{% endblock %}
+{% block subtitle %}false{% endblock %}
+{% block format %}gallery{% endblock %}
 {% block supertitle %}true{% endblock %}
-{% block icon %}false{% endblock %}
+{% block icon %}true{% endblock %}
 {% block image_class %}false{% endblock %}
