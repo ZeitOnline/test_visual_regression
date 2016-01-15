@@ -78,7 +78,7 @@ def test_author_page_should_hide_favourite_content_on_further_pages(
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     # we have 8 solr hits + 3 favorite articles
-    # I expect 3 pages, considering page_size = 4, right?
+    # we expect 3 pages, considering page_size = 4
     # page 1: 3 favorites + 1 more, adds up to 4
     # page 2: 4 articles - should be result no. 2-5
     # page 3: the remaining 3 articles - result no. 6-8
@@ -87,10 +87,12 @@ def test_author_page_should_hide_favourite_content_on_further_pages(
     assert len(select('.cp-area--author-favourite-content article')) == 3
     assert len(select('.cp-area--author-articles article')) == 1
     assert len(select('.teaser-small')) == 4
-    # assert len(select('.pager__pages .pager__page')) == 3
+    assert len(select('.pager__pages .pager__page')) == 3
     select = testbrowser('/autoren/j_random?p=2').cssselect
     assert len(select('.cp-area--author-favourite-content')) == 0
     assert len(select('.teaser-small')) == 4
+    select = testbrowser('/autoren/j_random?p=3').cssselect
+    assert len(select('.teaser-small')) == 3
 
 
 @pytest.mark.skipif(

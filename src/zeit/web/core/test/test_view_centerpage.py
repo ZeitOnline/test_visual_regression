@@ -155,8 +155,8 @@ def test_ranking_pagination_should_not_find_out_of_scope_page(testserver):
 def test_ranking_pagination_should_omit_default_page_param(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
-        {'uniqueId': 'http://xml.zeit.de/artikel/{:0>2d}'.format(i % 10)}
-        for i in range(1, 12)]
+        {'uniqueId': 'http://xml.zeit.de/artikel/{:0>2d}'.format(i % 10 + 1)}
+        for i in range(12)]
     browser = testbrowser('/thema/test?p=2')
     prev = browser.cssselect('head link[rel="prev"]')[0]
     link = browser.cssselect('.pager__pages a')[0]
