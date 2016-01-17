@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: desktop_only parameter in framebuilder needs no value
 
+- ZON-2573: Refactor banner config to XML sources
+
 
 2.48 (2016-01-14)
 -----------------
