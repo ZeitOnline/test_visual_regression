@@ -1,6 +1,7 @@
 import collections
 import logging
 import re
+import urlparse
 
 import grokcore.component
 import jinja2
@@ -36,6 +37,19 @@ def to_int(val, pattern=re.compile(r'[^\d.]+')):
     if hasattr(val, '__unicode__') or isinstance(val, unicode):
         val = unicode(val).encode('ascii', 'ignore')
     return int(pattern.sub('', '0' + str(val)))
+
+
+def update_path(url, *segments):
+    """Safely update a URL's path preserving all other parts of the URL.
+
+    :param url: Uniform resource locator
+    :param segments: New path segments
+    :rtype: unicode
+    """
+
+    parts = list(urlparse.urlparse(url))
+    parts[2] = u'/' + u'/'.join(s.strip('/') for s in segments if s.strip('/'))
+    return urlparse.urlunparse(parts)
 
 
 def get_named_adapter(obj, iface, attr, name=None):

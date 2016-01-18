@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2649: Framebuilder can enable IVW
 
+- BUG-335: Correctly append /index to (dynamic) folder path redirects
+
 - MAINT: desktop_only parameter in framebuilder needs no value
 
 - MAINT: Remove old iqd code
