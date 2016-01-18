@@ -39,11 +39,3 @@ class NavigationItem(Navigation):
         self.text = text
         self.href = href
         self.label = label
-
-
-navigation = None
-navigation_by_name = None
-navigation_services = None
-navigation_classifieds = None
-navigation_footer_publisher = None
-navigation_footer_links = None
