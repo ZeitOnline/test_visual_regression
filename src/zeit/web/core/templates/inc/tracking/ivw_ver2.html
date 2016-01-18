@@ -1,4 +1,5 @@
-{% if view.third_party_modules_is_enabled and view.tracking_is_enabled %}
+{# Because this subtemplate is included by the regular site and the frame builder, we need to check for both situations #}
+{% if (view.third_party_modules_is_enabled and view.tracking_is_enabled) or view.framebuilder_requires_ivw %}
 <!-- ivw ver2 tracking -->
 <!-- SZM VERSION="2" -->
 <script type="text/javascript">
