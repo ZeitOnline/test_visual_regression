@@ -1,3 +1,4 @@
+import pytest
 import requests
 import zope.component
 
@@ -145,6 +146,7 @@ def test_ranking_pagination_should_redirect_page_one(testserver):
     assert resp.status_code == 301
 
 
+@pytest.mark.xfail(reason='Not implemented yet.')
 def test_ranking_pagination_should_not_find_out_of_scope_page(testserver):
     resp = requests.get('%s/thema/test?p=3214' % testserver.url,
                         allow_redirects=False)

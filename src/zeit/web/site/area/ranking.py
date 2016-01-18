@@ -236,8 +236,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     @zeit.web.reify
     def pagination(self):
         if self.page > self.total_pages:
-            if self.total_pages != 0 and self.page != 1:
-                raise pyramid.httpexceptions.HTTPNotFound()
             return []
         pagination = zeit.web.core.template.calculate_pagination(
             self.current_page, self.total_pages)
