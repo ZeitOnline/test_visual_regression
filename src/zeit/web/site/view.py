@@ -232,5 +232,9 @@ class FrameBuilder(Base):
         return 'desktop_only' in self.request.GET
 
     @zeit.web.reify
-    def webtrekk_enabled(self):
+    def framebuilder_requires_webtrekk(self):
         return 'webtrekk' in self.request.GET
+
+    @zeit.web.reify
+    def framebuilder_requires_ivw(self):
+        return 'ivw' in self.request.GET

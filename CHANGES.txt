@@ -10,11 +10,18 @@ Change log for zeit.web
 
 - ZON-2634: Framebuilder can enable Webtrekk
 
+- ZON-2649: Framebuilder can enable IVW
+
 - MAINT: desktop_only parameter in framebuilder needs no value
 
 - ZON-2573: Refactor banner config to XML sources
 
-- ZON-25734: Refactor navigation config to XML sources
+- ZON-2574: Refactor navigation config to XML sources
+
+- MAINT: Remove old iqd code
+
+- MAINT: Remove unused IVW file (old version)
+
 
 
 2.48 (2016-01-14)
