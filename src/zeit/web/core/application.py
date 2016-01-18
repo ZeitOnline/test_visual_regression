@@ -73,39 +73,7 @@ class Application(object):
     def configure(self):
         self.configure_zca()
         self.configure_pyramid()
-        self.configure_navigation()
         self.configure_bugsnag()
-
-    def configure_navigation(self):
-        navigation_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_navigation', ''))
-        zeit.web.core.navigation.navigation = (
-            zeit.web.core.navigation.make_navigation(navigation_config))
-        zeit.web.core.navigation.navigation_by_name = (
-            zeit.web.core.navigation.make_navigation_by_name(
-                navigation_config))
-        navigation_services_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_navigation-services', ''))
-        zeit.web.core.navigation.navigation_services = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_services_config))
-        navigation_classifieds_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_navigation-classifieds', ''))
-        zeit.web.core.navigation.navigation_classifieds = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_classifieds_config))
-        navigation_footer_publisher_config = maybe_convert_egg_url(
-            self.settings.get(
-                'vivi_zeit.web_navigation-footer-publisher', ''))
-        zeit.web.core.navigation.navigation_footer_publisher = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_footer_publisher_config))
-        navigation_footer_links_config = maybe_convert_egg_url(
-            self.settings.get(
-                'vivi_zeit.web_navigation-footer-links', ''))
-        zeit.web.core.navigation.navigation_footer_links = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_footer_links_config))
 
     def configure_bugsnag(self):
         bugsnag.configure(
