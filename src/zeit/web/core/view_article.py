@@ -252,6 +252,10 @@ class Article(zeit.web.core.view.Content):
     def is_push_news(self):
         return self.context.push_news
 
+
+    @zeit.web.reify
+    def is_amp(self):
+        return self.context.is_amp
     @property
     def copyrights(self):
         for i in (self.is_longform and itertools.chain(*self.pages) or
