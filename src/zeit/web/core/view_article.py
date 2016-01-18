@@ -290,7 +290,7 @@ class InstantArticle(Article):
              request_method='GET')
 def redirect_amp_disabled(context, request):
     url = request.url.replace('/amp/', '/', 1)
-    raise pyramid.httpexceptions.HTTPMovedPermanently(url)
+    raise pyramid.httpexceptions.HTTPFound(url)
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
