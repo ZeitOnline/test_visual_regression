@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - FIX: FB Instant Articles: Add image copyrights
 
+- BUG-315: Update cookie link in footer
+
 
 2.47.1 (2016-01-14)
 -------------------
