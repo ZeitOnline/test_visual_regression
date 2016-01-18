@@ -154,15 +154,15 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/banner.xml'),
         'vivi_zeit.web_banner-id-mappings-source': (
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
-        'vivi_zeit.web_navigation': (
+        'vivi_zeit.web_navigation-source': (
             'egg://zeit.web.core/data/config/navigation.xml'),
-        'vivi_zeit.web_navigation-services': (
+        'vivi_zeit.web_navigation-services-source': (
             'egg://zeit.web.core/data/config/navigation-services.xml'),
-        'vivi_zeit.web_navigation-classifieds': (
+        'vivi_zeit.web_navigation-classifieds-source': (
             'egg://zeit.web.core/data/config/navigation-classifieds.xml'),
-        'vivi_zeit.web_navigation-footer-publisher': (
+        'vivi_zeit.web_navigation-footer-publisher-source': (
             'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
-        'vivi_zeit.web_navigation-footer-links': (
+        'vivi_zeit.web_navigation-footer-links-source': (
             'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
         'vivi_zeit.web_servicebox-source': (
             'egg://zeit.web.core/data/config/servicebox.xml'),
@@ -172,8 +172,6 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/series.xml'),
         'vivi_zeit.web_feature-toggle-source': (
             'egg://zeit.web.core/data/config/feature-toggle.xml'),
-        'vivi_zeit.web_banner-source': (
-            'egg://zeit.web.core/data/config/banner.xml'),
         'vivi_zeit.web_blacklist-url': (
             'egg://zeit.web.core/data/config/blacklist.xml'),
         'vivi_zeit.imp_scale-source':

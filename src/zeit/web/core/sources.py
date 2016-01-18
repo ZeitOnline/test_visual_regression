@@ -349,10 +349,10 @@ class BannerIdMappingsSource(
 BANNER_ID_MAPPINGS_SOURCE = BannerIdMappingsSource()(None)
 
 
-class Navigation(zeit.cms.content.sources.SimpleContextualXMLSource):
+class NavigationSource(zeit.cms.content.sources.SimpleContextualXMLSource):
 
     product_configuration = 'zeit.web'
-    config_url = 'navigation'
+    config_url = 'navigation-source'
 
     class source_class(zc.sourcefactory.source.FactoredContextualSource):
 
@@ -360,9 +360,13 @@ class Navigation(zeit.cms.content.sources.SimpleContextualXMLSource):
         def navigation(self):
             return self.factory.compile_navigation()
 
+        @property
+        def navigation_by_name(self):
+            return self.factory.compile_navigation_by_name()
+
     @CONFIG_CACHE.cache_on_arguments()
     def compile_navigation(self):
-        navigation = Navigation()
+        navigation = zeit.web.core.navigation.Navigation()
         root = self._get_tree()
         self._register_navigation_items(navigation, root.iterfind('section'))
 
@@ -384,72 +388,48 @@ class Navigation(zeit.cms.content.sources.SimpleContextualXMLSource):
         except AttributeError:
             pass
 
-NAVIGATION = Navigation()(None)
-
-
-class NavigationClassifieds(Navigation):
-
-    product_configuration = 'zeit.web'
-    config_url = 'navigation-classifieds'
-
-NAVIGATION_CLASSIFIEDS = NavigationClassifieds()(None)
-
-
-class NavigationServices(Navigation):
-
-    product_configuration = 'zeit.web'
-    config_url = 'navigation-services'
-
-NAVIGATION_SERVICES = NavigationServices()(None)
-
-
-class NavigationServices(Navigation):
-
-    product_configuration = 'zeit.web'
-    config_url = 'navigation-services'
-
-NAVIGATION_SERVICES = NavigationServices()(None)
-
-
-class NavigationFooterPublisher(Navigation):
-
-    product_configuration = 'zeit.web'
-    config_url = 'navigation-footer-publisher'
-
-NAVIGATION_FOOTER_PUBLISHER = NavigationFooterPublisher()(None)
-
-
-class NavigationFooterLinks(Navigation):
-
-    product_configuration = 'zeit.web'
-    config_url = 'navigation-footer-links'
-
-NAVIGATION_FOOTER_LINKS = NavigationFooterLinks()(None)
-
-
-class NavigationByName(Navigation):
-
-    product_configuration = 'zeit.web'
-    config_url = 'navigation_by_name'
-
-    class source_class(zc.sourcefactory.source.FactoredContextualSource):
-
-        @property
-        def navigation(self):
-            return self.factory.compile_navigation_by_name()
-
     @CONFIG_CACHE.cache_on_arguments()
     def compile_navigation_by_name(self):
-        navigation_links = Navigation()
-        for n in self.compile_navigation():
-            nav_item = NAVIGATION.navigation[n]
+        navigation_links = zeit.web.core.navigation.Navigation()
+        navigation = self.compile_navigation()
+        for n in navigation:
+            nav_item = navigation[n]
             navigation_links[nav_item.text.lower()] = {}
             navigation_links[nav_item.text.lower()]['link'] = nav_item.href
             navigation_links[nav_item.text.lower()]['text'] = nav_item.text
 
         return navigation_links
 
-NAVIGATION_BY_NAME = NavigationByName()(None)
+NAVIGATION_SOURCE = NavigationSource()(None)
 
 
+class NavigationClassifiedsSource(NavigationSource):
 
+    product_configuration = 'zeit.web'
+    config_url = 'navigation-classifieds-source'
+
+NAVIGATION_CLASSIFIEDS_SOURCE = NavigationClassifiedsSource()(None)
+
+
+class NavigationServicesSource(NavigationSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'navigation-services-source'
+
+NAVIGATION_SERVICES_SOURCE = NavigationServicesSource()(None)
+
+
+class NavigationFooterPublisherSource(NavigationSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'navigation-footer-publisher-source'
+
+NAVIGATION_FOOTER_PUBLISHER_SOURCE = NavigationFooterPublisherSource()(None)
+
+
+class NavigationFooterLinksSource(NavigationSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'navigation-footer-links-source'
+
+NAVIGATION_FOOTER_LINKS_SOURCE = NavigationFooterLinksSource()(None)
