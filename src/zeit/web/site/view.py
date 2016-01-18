@@ -73,7 +73,7 @@ class Base(zeit.web.core.view.Base):
             if segment == u'reisen':
                 segment = u'reise'
             try:
-                nav_item = zeit.web.core.navigation.navigation_by_name[
+                nav_item = zeit.web.core.sources.NAVIGATION_BY_NAME.navigation[
                     segment]
                 breadcrumbs.extend([(
                     nav_item['text'], nav_item['link'])])

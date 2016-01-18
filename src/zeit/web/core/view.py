@@ -363,23 +363,23 @@ class Base(object):
 
     @zeit.web.reify
     def navigation(self):
-        return zeit.web.core.navigation.navigation
+        return zeit.web.core.sources.NAVIGATION.navigation
 
     @zeit.web.reify
     def navigation_services(self):
-        return zeit.web.core.navigation.navigation_services
+        return zeit.web.core.sources.NAVIGATION_SERVICES.navigation
 
     @zeit.web.reify
     def navigation_classifieds(self):
-        return zeit.web.core.navigation.navigation_classifieds
+        return zeit.web.core.sources.NAVIGATION_CLASSIFIEDS.navigation
 
     @zeit.web.reify
     def navigation_footer_publisher(self):
-        return zeit.web.core.navigation.navigation_footer_publisher
+        return zeit.web.core.sources.NAVIGATION_FOOTER_PUBLISHER.navigation
 
     @zeit.web.reify
     def navigation_footer_links(self):
-        return zeit.web.core.navigation.navigation_footer_links
+        return zeit.web.core.sources.NAVIGATION_FOOTER_LINKS.navigation
 
     @zeit.web.reify
     def title(self):
