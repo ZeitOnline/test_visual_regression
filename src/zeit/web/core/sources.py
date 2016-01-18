@@ -27,6 +27,7 @@ import zeit.web.core.view
 
 video_series = None
 log = logging.getLogger(__name__)
+CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 
 class VideoSeriesSource(zeit.cms.content.sources.SimpleXMLSource):
