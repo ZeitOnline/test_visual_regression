@@ -1293,3 +1293,19 @@ def test_article_contains_zeit_clickcounter(testbrowser):
 def test_fbia_article_contains_meta_robots(testbrowser):
     browser = testbrowser('/fbia/zeit-online/article/simple')
     assert '<meta name="robots" content="noindex, follow">' in browser.contents
+
+
+def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
+    amp_link = browser.cssselect('link[rel=amphtml]')
+    assert amp_link
+    amp_url = amp_link[0].attrib['href']
+    assert amp_url.endswith('amp/zeit-online/article/zeit')
+
+    browser = testbrowser('/zeit-online/article/zeit/seite-2')
+    amp_link = browser.cssselect('link[rel=amphtml]')
+    assert amp_link
+    amp_url = amp_link[0].attrib['href']
+    assert amp_url.endswith('amp/zeit-online/article/zeit')
+
+

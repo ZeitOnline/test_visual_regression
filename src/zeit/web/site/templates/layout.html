@@ -21,6 +21,9 @@
     <meta name="application-name" content="ZEIT ONLINE">
     <meta name="msapplication-TileImage" content="http://images.zeit.de/static/img/zo-icon-win8-144x144.png">
     <meta name="msapplication-TileColor" content="#e6e6e6">
+    {% if view.is_amp -%}
+        <link rel="amphtml" href="{{ view.amp_url }}">
+    {% endif -%}
     {% if view.canonical_url -%}
         <link rel="canonical" href="{{ view.canonical_url }}">
     {% endif -%}
