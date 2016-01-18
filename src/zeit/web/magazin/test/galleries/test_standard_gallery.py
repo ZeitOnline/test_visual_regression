@@ -34,8 +34,7 @@ def test_gallery_should_have_buttons(selenium_driver, testserver):
 
 def test_gallery_buttons_are_clickable(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/galerien/fs-desktop-schreibtisch-computer?%s'
-               % (testserver.url, "gallery=dynamic"))
+    driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
     try:
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
@@ -99,31 +98,6 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
         bigButtonNext = driver.find_element_by_css_selector(".bx-overlay-next")
         assert bigButtonPrev.is_displayed()
         assert bigButtonNext.is_displayed()
-
-
-def test_standard_gallery_is_static(selenium_driver, testserver):
-    url = ("%s/galerien/fs-desktop-schreibtisch-computer" % testserver.url)
-    driver = selenium_driver
-    driver.set_window_size(1024, 768)
-    driver.get("%s?%s" % (url, "gallery=static"))
-    try:
-        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-next"))
-        WebDriverWait(driver, 10).until(cond)
-    except TimeoutException:
-        assert False, 'Timeout gallery script'
-    else:
-        buttonNext = driver.find_element_by_css_selector(".bx-next")
-        buttonNext.click()
-        try:
-            cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-next"))
-            WebDriverWait(driver, 10).until(cond)
-        except TimeoutException:
-            assert False, 'Timeout gallery script'
-        else:
-            selector = ".inline-gallery figure:not(.bx-clone):nth-child(2)"
-            slide = driver.find_element_by_css_selector(selector)
-            assert driver.current_url == url + "?gallery=static&slide=2"
-            assert slide.is_displayed()
 
 
 def test_gallery_with_supertitle_has_html_title(
