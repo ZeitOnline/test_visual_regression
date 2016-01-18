@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2573: Refactor banner config to XML sources
 
+- ZON-25734: Refactor navigation config to XML sources
+
 
 2.48 (2016-01-14)
 -----------------
