@@ -1,6 +1,8 @@
-$color-header-bg: #252525 !default
+$primary-color: #313131 !default
+$color-header-bg: $primary-color !default
 $color-footer-logo: #1d1d1b !default
 $color-footer-bg: #eee !default
+$color-footer: #444 !default
 $logo-width: remify(256px) !default
 $logo-height: remify(24px) !default
 
@@ -22,6 +24,15 @@ body
     font-family: $font-tabletgothic
     font-size: $base-font-size
     line-height: $base-line-height
+
+a
+    color: $color-link--default
+    text-decoration: none
+    +on-interaction
+        color: $color-link--hover
+
+figure
+    margin: 0
 
 // SVG //////////////////////////////////////////////////
 
@@ -68,6 +79,11 @@ article
         color: $grey
         a
             color: inherit
+            +on-interaction
+                color: $color-link--hover
+    &--marginalia
+        .figure__caption
+            padding: remify(10px 0)
 
 .video
     &__caption
@@ -106,6 +122,7 @@ article
     color: $grey
     font-size: em(14px)
     letter-spacing: $zon-letter-spacing-s
+    margin-bottom: remify(40px)
     > time,
     > span
         white-space: nowrap
@@ -124,6 +141,50 @@ article
             color: inherit
             border-bottom-color: rgba($zon-grey, .8)
 
+.list,
+.paragraph,
+.portraitbox
+    +default-article-textlink
+
+.list,
+.paragraph
+    font-family: $font-franziska
+    font-size: remify(18px)
+    line-height: 1.4
+    margin-top: 0
+    margin-bottom: .6em
+
+    +respond-min($break-tablet-min)
+        line-height: 1.5
+
+    +respond-min($break-desktop-min)
+        font-size: remify(20px)
+
+.portraitbox,
+.figure--marginalia
+    clear: both
+    margin: remify(40px) auto
+    width: 90%
+    +respond-min($break-tablet-min)
+        float: left
+        margin: remify(16px 20px 16px -40px)
+        width: remify(205px)
+    +respond-min($break-desktop-min)
+        margin-left: remify(-80px)
+        width: remify(220px)
+
+.portraitbox
+    font-size: em(14px)
+    &__heading
+        color: $primary-color
+        font-weight: bold
+        letter-spacing: $zon-letter-spacing-l
+        text-transform: uppercase
+    &__body
+        color: $zon-grey
+        letter-spacing: $zon-letter-spacing-s
+
+
 
 
 // FOOTER //////////////////////////////////////////////////
@@ -141,13 +202,22 @@ article
 
     &__navigation
         background-color: $color-footer-bg
+        color: $color-footer
+        font-size: em(14px)
         font-weight: bold
         padding: remify(20px $page-padding)
-
         ul, li
             margin: 0
             padding: 0
             list-style: none
-
         li
             display: inline-block
+            &:after
+                content: ' • '
+                margin: 0 .2em
+            &:last-child:after
+                content: none
+        a
+            color: inherit
+            +on-interaction
+                color: $black
