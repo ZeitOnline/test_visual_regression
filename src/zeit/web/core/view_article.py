@@ -293,6 +293,13 @@ def redirect_amp_disabled(context, request):
     raise pyramid.httpexceptions.HTTPMovedPermanently(url)
 
 
+@view_config(context=zeit.content.article.interfaces.IArticle,
+             route_name='fbia',
+             renderer='templates/fbia.html')
+class FbIa(Article):
+    pass
+
+
 class ArticlePage(Article):
 
     def __call__(self):

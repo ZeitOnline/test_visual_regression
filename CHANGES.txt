@@ -4,6 +4,10 @@ Change log for zeit.web
 2.49 (unreleased)
 -----------------
 
+- ZON-2632: Remove check for "static" galleries
+
+- ZON-2595: IVW and Webtrekk pixels in instantarticles
+
 - ZON-2634: Framebuilder can enable Webtrekk
 
 - ZON-2628: Redirect to standard article view if AMP is disabled
@@ -15,6 +19,8 @@ Change log for zeit.web
 -----------------
 
 - FIX: FB Instant Articles: Add image copyrights
+
+- BUG-315: Update cookie link in footer
 
 
 2.47.1 (2016-01-14)

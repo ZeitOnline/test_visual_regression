@@ -163,6 +163,7 @@ class Application(object):
         log.debug('Configuring Pyramid')
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('instantarticle', '/instantarticle/*traverse')
+        config.add_route('fbia', '/fbia/*traverse')
         config.add_route('amp', '/amp/*traverse')
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_update_time', '/json_update_time/{path:.*}')
@@ -205,6 +206,7 @@ class Application(object):
         config.set_request_property(configure_host('asset'), reify=True)
         config.set_request_property(configure_host('image'), reify=True)
         config.set_request_property(configure_host('jsconf'), reify=True)
+        config.set_request_property(configure_host('fbia'), reify=True)
 
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.web, ignore=self.DONT_SCAN)
