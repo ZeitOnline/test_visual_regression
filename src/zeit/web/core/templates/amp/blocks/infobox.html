@@ -20,8 +20,8 @@
 				id="{{ id }}-{{ loop.index }}-article"
 				role="tabpanel"
 				aria-labelledby="{{ id }}-{{ loop.index }}-tab">
-				{% for item in text %}
-					{% include "zeit.web.core:templates/amp/blocks/{}.html".format( item | block_type ) ignore missing %}
+				{% for block in text %}
+					{% include "zeit.web.core:templates/amp/blocks/{}.html".format( block | block_type ) ignore missing %}
 				{% endfor %}
 			</article>
 		</section>

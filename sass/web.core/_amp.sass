@@ -60,7 +60,7 @@ svg use
 
 article
     margin: 0 auto
-    max-width: remify(600px)
+    max-width: remify(660px)
     padding: remify(0 $page-padding)
 
 %caption
@@ -114,6 +114,10 @@ article
 
 .byline
     margin-bottom: remify(30px)
+    a
+        color: inherit
+        +on-interaction
+            color: $color-link--hover
 
 .byline__author
     font-weight: bold
@@ -160,11 +164,46 @@ article
     +respond-min($break-desktop-min)
         font-size: remify(20px)
 
+.intertitle
+    font-size: em(20px)
+    line-height: normal
+    margin: 1.4em 0 .5em
+    +respond-min($break-desktop-min)
+        font-size: remify(24px)
+
+.quote,
 .portraitbox,
 .figure--marginalia
-    clear: both
     margin: remify(40px) auto
     width: 90%
+
+.quote
+    &__text
+        font-size: em(17px)
+        font-weight: bold
+        letter-spacing: $zon-letter-spacing-s
+        line-height: 1.3
+        margin: 0
+        &:before
+            content: "»"
+        &:after
+            content: "«"
+    &__source
+        color: $zon-grey
+        font-family: $font-franziska
+        font-size: em(15px)
+        font-style: italic
+        line-height: 1.5
+        margin-top: remify(14px)
+        &:before
+            content: "\2014" // — = em dash
+    &__link
+        color: inherit
+        +on-interaction
+            color: $color-link--hover
+
+.portraitbox,
+.figure--marginalia
     +respond-min($break-tablet-min)
         float: left
         margin: remify(16px 20px 16px -40px)

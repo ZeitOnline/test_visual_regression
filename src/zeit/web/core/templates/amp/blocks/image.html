@@ -4,7 +4,7 @@
 	{# TRASHME Rather crude bitblt/zci image api switch #}
 	{% set source = (request.image_host + image.path) if image is variant else image | default_image_url %}
 	{% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source %}
-	{% set width = 600 %}
+	{% set width = 660 %}
 	{% set height = (width / image.ratio) | int %}
 
 	<figure class="{{ 'figure' | with_mods(*image.figure_mods) }}" itemscope itemtype="http://schema.org/ImageObject">
