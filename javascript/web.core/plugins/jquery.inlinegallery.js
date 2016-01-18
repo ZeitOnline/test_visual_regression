@@ -52,57 +52,10 @@
                 infiniteLoop: true,
                 hideControlOnEnd: false,
                 adaptiveHeight: true
-            }, defaults ),
-            singleGallery = null,
-            ressort = Zeit.view.ressort,
-            viewType = Zeit.view.type,
-            galleryType = /[\\?&]gallery=([^&#]*)/.exec( location.search ),
-            query = /slide=(\d+)/.exec( location.search.slice( 1 ) ),
-            start;
-
-        if ( galleryType ) {
-            galleryType = galleryType[1];
-        }
-
-        if ( query ) {
-            if ( ( start = parseInt( query[1], 10 ) ) > 1 ) {
-                options.startSlide = start - 1;
-            }
-        }
-
-        if ( this.length && !Zeit.isMobileView() && galleryType !== 'dynamic' ) {
-            $.ajax({
-                url: Zeit.jsconfHost + '/gallery.blocked.ressorts.js',
-                dataType: 'script',
-                success: function() {
-                    var queryString = location.search.slice( 1 ).replace( /&*\bslide=(\d+)/g, '' ),
-                        isStatic = $.inArray( ressort, $blocked ) > -1 || /gallery=static/.test( queryString );
-
-                    if ( singleGallery && isStatic ) {
-                        singleGallery.goToSlide = function( slideIndex, direction ) {
-                            var total = singleGallery.getSlideCount(),
-                                next = ( total + slideIndex ) % total,
-                                search = '',
-                                prefix = '?';
-
-                            if ( queryString ) {
-                                search = '?' + queryString;
-                                prefix = '&';
-                            }
-
-                            if ( next ) {
-                                search += prefix + 'slide=' + ( next + 1 );
-                            }
-
-                            location.search = search;
-                        };
-                    }
-                }
-            });
-        }
+            }, defaults );
 
         // check if any part of the element is inside viewport
-        var isElementInViewport = function( el ) {
+        function isElementInViewport( el ) {
 
             // special bonus for those using jQuery
             if ( el instanceof jQuery ) {
@@ -123,7 +76,7 @@
                 rect.left > windowWidth ||
                 rect.right < 0
             );
-        };
+        }
 
         return this.each( function() {
             var gallery = $( this ),
@@ -259,11 +212,6 @@
             };
 
             slider = gallery.bxSlider( options );
-
-            // make element available for AJAX response
-            if ( viewType === 'gallery' ) {
-                singleGallery = slider;
-            }
         });
     };
 })( jQuery, window.Modernizr, window.Zeit );
