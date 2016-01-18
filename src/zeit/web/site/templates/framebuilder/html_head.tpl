@@ -41,7 +41,7 @@
     <noscript>
         <link href="{{ request.asset_host }}/css/icons/site.fallback.css" rel="stylesheet">
     </noscript>
-    {% if view.framebuilder_requires_ivw and view.third_party_modules_is_enabled and view.tracking_is_enabled%}
+    {% if view.framebuilder_requires_ivw %}
         <!-- IVW -->
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif %}
