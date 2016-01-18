@@ -2,7 +2,7 @@
 <html ⚡ lang="de">
 <head>
 	<meta charset="utf-8">
-	<link rel="canonical" href="{{ view.content_url }}">
+	<link itemprop="mainEntityOfPage" rel="canonical" href="{{ view.content_url }}">
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 	<style>body {opacity: 0}</style><noscript><style>body {opacity: 1}</style></noscript>
 	{% block style %}
@@ -21,9 +21,9 @@
 	</div>
 
 	<div class="content">
-		<header class="header" itemscope itemtype="http://schema.org/Organization">
+		<header class="header" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
 			{% block logo %}
-			<div itemprop="brand">
+			<div class="article__item article__item--wide" itemprop="brand">
 				<a itemprop="url" href="{{ request.route_url('home') }}">
 					<meta itemprop="name" content="ZEIT ONLINE">
 					<svg class="header__logo">
@@ -39,33 +39,35 @@
 
 		<main itemprop="mainContentOfPage">
 			{% block main %}
-			<article class="article" itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemscope>
+			<article class="article" itemscope itemtype="http://schema.org/Article">
 				{% block article_main_image %}
 					{% set block = view.main_image_block %}
 					{% include "zeit.web.core:templates/amp/blocks/image.html" ignore missing %}
 				{% endblock article_main_image %}
-				<h1 class="headline" itemprop="headline">
-					<span class="headline__kicker">
-						{% if view and view.context and view.context.serie and view.context.serie.column %}
-							{{ view.serie }} /
-						{% endif %}
-						{{ view.supertitle }}
-					</span>{%- if view.title -%}<span class="headline__colon">: </span>{%- endif -%}
-					<span class="headline__title">
-						{{ view.title }}
-					</span>
-				</h1>
-				<div class="summary" itemprop="description">
-					{{ view.subtitle }}
-				</div>
-				{%- set byline = view.context | get_byline %}
-				{% if byline | length -%}
-				<div class="byline" itemscope itemtype="http://schema.org/Person" itemprop="author">
-					{% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
-				</div>
-				{% endif -%}
-				<div class="metadata">
-					{% include "zeit.web.core:templates/amp/article/metadata.tpl" %}
+				<div class="article-header article__item">
+					<h1 class="headline" itemprop="headline">
+						<span class="headline__kicker">
+							{% if view and view.context and view.context.serie and view.context.serie.column %}
+								{{ view.serie }} /
+							{% endif %}
+							{{ view.supertitle }}
+						</span>{%- if view.title -%}<span class="headline__colon">: </span>{%- endif -%}
+						<span class="headline__title">
+							{{ view.title }}
+						</span>
+					</h1>
+					<div class="summary" itemprop="description">
+						{{ view.subtitle }}
+					</div>
+					{%- set byline = view.context | get_byline %}
+					{% if byline | length -%}
+					<div class="byline" itemscope itemtype="http://schema.org/Person" itemprop="author">
+						{% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
+					</div>
+					{% endif -%}
+					<div class="metadata">
+						{% include "zeit.web.core:templates/amp/article/metadata.tpl" %}
+					</div>
 				</div>
 
 				{% block article_body %}
@@ -74,7 +76,7 @@
 						{% for page in view.pages %}
 							<section>
 							{% if not loop.first %}
-								<h3>{{ page.teaser }}</h3>
+								<h3 class="intertitle article__item">{{ page.teaser }}</h3>
 							{% endif %}
 							{% for block in page %}
 								{% include "zeit.web.core:templates/amp/blocks/{}.html".format( block | block_type ) ignore missing %}

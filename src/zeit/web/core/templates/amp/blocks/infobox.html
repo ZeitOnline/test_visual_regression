@@ -1,12 +1,12 @@
 {% if block.contents -%}
 {% set id = block.title | attr_safe %}
 <aside class="infobox" id="{{ id }}" role="application">
-	<div class="infobox__container">
+	<div class="infobox__container article__item">
 	{% for title, text in block.contents %}
-		<section class="infobox-tab" id="{{ id }}-{{ loop.index }}">
-			<h3 class="infobox-tab__title" role="presentation">
+		<section id="{{ id }}-{{ loop.index }}">
+			<h3 class="infobox__title" role="presentation">
 				<a
-					class="infobox-tab__link"
+					class="infobox__link"
 					id="{{ id }}-{{ loop.index }}-tab"
 					role="tab"
 					href="#{{ id }}-{{ loop.index }}"
@@ -16,7 +16,7 @@
 				</a>
 			</h3>
 			<article
-				class="infobox-tab__panel"
+				class="infobox__panel"
 				id="{{ id }}-{{ loop.index }}-article"
 				role="tabpanel"
 				aria-labelledby="{{ id }}-{{ loop.index }}-tab">

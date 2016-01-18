@@ -1,7 +1,9 @@
 <div class="gallery">
-	<amp-carousel width="660" height="440" controls type="slides" loop layout="responsive">
-	{% for image in block.itervalues() -%}
-		{% include 'zeit.web.core:templates/amp/blocks/image.html' %}
-	{%- endfor %}
-	</amp-carousel>
+	<div class="article__item">
+		<amp-carousel width="660" height="440" controls type="slides" loop layout="responsive">
+		{% for image in block.itervalues() -%}
+			{% include 'zeit.web.core:templates/amp/blocks/image.html' %}
+		{%- endfor %}
+		</amp-carousel>
+	</div>
 </div>
