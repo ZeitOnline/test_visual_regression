@@ -284,6 +284,15 @@ class InstantArticle(Article):
         return pyramid.settings.asbool(self.request.GET.get('cdata'))
 
 
+@view_config(route_name='amp',
+             context=zeit.content.article.interfaces.IArticle,
+             custom_predicates=(lambda context, _: not context.is_amp,),
+             request_method='GET')
+def redirect_amp_disabled(context, request):
+    url = request.url.replace('/amp/', '/', 1)
+    raise pyramid.httpexceptions.HTTPMovedPermanently(url)
+
+
 class ArticlePage(Article):
 
     def __call__(self):
