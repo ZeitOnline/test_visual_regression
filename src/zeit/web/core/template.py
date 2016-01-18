@@ -268,18 +268,18 @@ def get_layout(block, request=None):
         if layout:
             return layout
 
-        try:
-            layout_id = block.layout.id
-        except (AttributeError, TypeError):
-            layout_id = 'hide'
+    try:
+        layout_id = block.layout.id
+    except (AttributeError, TypeError):
+        layout_id = 'hide'
 
-        try:
-            teaser = list(block)[0]
-        except (IndexError, TypeError):
-            if not zeit.content.cp.interfaces.ITeaserBlock.providedBy(block):
-                layout = layout_id
-            else:
-                layout = 'hide'
+    try:
+        teaser = list(block)[0]
+    except (IndexError, TypeError):
+        if not zeit.content.cp.interfaces.ITeaserBlock.providedBy(block):
+            layout = layout_id
+        else:
+            layout = 'hide'
     else:
         layout = layout_id
         if layout == 'zon-square':

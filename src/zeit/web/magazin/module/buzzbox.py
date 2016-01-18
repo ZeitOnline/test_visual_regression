@@ -1,6 +1,6 @@
-import zeit.web.core.module
+import zeit.web.site.module
 
 
 @zeit.web.register_module('buzzbox')
-class BuzzBox(zeit.web.core.module.Module):
+class BuzzBox(zeit.web.site.module.Module):
     pass
