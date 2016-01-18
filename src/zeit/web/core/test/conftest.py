@@ -72,6 +72,7 @@ def app_settings(mockserver):
         'asset_prefix': '/static/latest',
         'image_prefix': '',
         'jsconf_prefix': '/jsconf',
+        'fbia_prefix': '/fbia',
         'author_articles_page_size': '10',
         'comment_page_size': '4',
         'author_comment_page_size': '6',
