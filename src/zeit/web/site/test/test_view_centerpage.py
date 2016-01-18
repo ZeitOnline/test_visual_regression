@@ -1762,8 +1762,12 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
     closelink = driver.find_element_by_class_name(
         'js-image-copyright-footer-close')
     closelink.click()
-    copyright = driver.find_element_by_class_name('image-copyright-footer')
-    assert copyright.is_displayed() is False, 'copyright is not displayed'
+    try:
+        visibility = WebDriverWait(driver, 5).until(
+            expected_conditions.invisibility_of_element_located(
+                (By.CLASS_NAME, 'image-copyright-footer')))
+    except TimeoutException:
+        assert False, 'Invisibility could not be detected.'
 
 
 def test_zmo_teaser_kicker_should_contain_logo(testbrowser):

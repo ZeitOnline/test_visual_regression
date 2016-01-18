@@ -84,7 +84,7 @@ def _inject_banner_code(
 def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
     paragraphs = filter(
         lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
-
+    banner_list = zeit.web.core.sources.BANNER_SOURCE.banner_list
     for index, pp in enumerate(possible_paragraphs):
         if len(paragraphs) > pp + 1:
             try:
@@ -94,7 +94,7 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
                         t = tile_list[index] - 1
                         # save the (virtual) page nr on (copies) of the banner,
                         # to be able to handle banner display inside the macro.
-                        banner = copy.copy(zeit.web.core.banner.banner_list[t])
+                        banner = copy.copy(banner_list[t])
                         setattr(banner, 'on_page_nr', int(page.number + 1))
                         page.blocks.insert(i, banner)
                         break

@@ -249,7 +249,8 @@ class Base(object):
                 "".join(re.findall(r"[A-Za-z0-9_]*", adv_title)).lower(),
                 self.banner_type)
         # third: do the mapping
-        mappings = zeit.web.core.banner.banner_id_mappings
+        mappings = (
+            zeit.web.core.sources.BANNER_ID_MAPPINGS_SOURCE.mapping_list)
         for mapping in mappings:
             if getattr(self, mapping['target'], None) == mapping['value']:
                 # change ressort but leave subressort intact
@@ -343,7 +344,8 @@ class Base(object):
 
     def banner(self, tile):
         try:
-            return zeit.web.core.banner.banner_list[tile - 1]
+            banner_list = zeit.web.core.sources.BANNER_SOURCE.banner_list
+            return banner_list[tile - 1]
         except IndexError:
             return
 
@@ -464,7 +466,7 @@ class Base(object):
 
     @zeit.web.reify
     def iqd_mobile_settings(self):
-        iqd_ids = zeit.web.core.banner.iqd_mobile_ids
+        iqd_ids = zeit.web.core.sources.IQD_MOBILE_IDS_SOURCE.ids
         if self.is_hp:
             return getattr(iqd_ids['hp'], 'centerpage')
         try:

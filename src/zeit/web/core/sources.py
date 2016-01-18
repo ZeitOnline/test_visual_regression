@@ -8,7 +8,6 @@ import urllib
 import urlparse
 import xml.sax.saxutils
 
-import gocept.cache.method
 import pyramid.urldispatch
 import pysolr
 import zc.sourcefactory.source
@@ -37,10 +36,10 @@ class VideoSeriesSource(zeit.cms.content.sources.SimpleXMLSource):
 
     def getValues(self):
         try:
-            xml = self._get_tree()
+            tree = self._get_tree()
         except (TypeError, IOError):
             return []
-        videoseries = xml.xpath('/allseries/videoseries/series')
+        videoseries = tree.xpath('/allseries/videoseries/series')
         result = []
         for node in videoseries:
             result.append(dict(url=node.get('url'), title=node.get('title')))
@@ -113,7 +112,7 @@ class VariantSource(zeit.content.image.variant.VariantSource):
                 return variant
         raise KeyError(variant_id)
 
-    @gocept.cache.method.Memoize(600, ignore_self=True)
+    @CONFIG_CACHE.cache_on_arguments()
     def _get_mapping(self):
         return {k['old']: k['new'] for k in
                 zeit.content.image.variant.LEGACY_VARIANT_SOURCE(None)}
@@ -139,7 +138,7 @@ class BlacklistSource(zeit.cms.content.sources.SimpleContextualXMLSource):
                 return True
         return False
 
-    @gocept.cache.method.Memoize(600, ignore_self=True)
+    @CONFIG_CACHE.cache_on_arguments()
     def compile_blacklist(self):
         matchers = []
         for pattern in self.getValues(None):
@@ -255,3 +254,96 @@ class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):
             return False
 
 FEATURE_TOGGLE_SOURCE = FeatureToggleSource()(None)
+
+
+class BruceBannerSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'banner-source'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        @property
+        def banner_list(self):
+            return self.factory.compile_banner_list()
+
+    @CONFIG_CACHE.cache_on_arguments()
+    def compile_banner_list(self):
+        banner_list = []
+
+        for place in self._get_tree().iterfind('place'):
+            sizes = place.find('multiple_sizes')
+            if sizes:
+                sizes = sizes.text.strip().split(',')
+            else:
+                width = place.find('width').text
+                height = place.find('height').text
+                sizes = ['{}x{}'.format(width, height)]
+
+            diuqilon = True if place.find('diuqilon') else False
+            adlabel = place.find('adlabel').text if (
+                place.find('adlabel')) else None
+            dcopt = place.find('dcopt').text if place.find('dcopt') else None
+            banner_list.append(
+                zeit.web.core.banner.Place(
+                    place.tile,
+                    sizes,
+                    diuqilon,
+                    adlabel,
+                    min_width=place.find('min_width').text,
+                    active=place.get('active'),
+                    dcopt=dcopt))
+        return sorted(banner_list, key=lambda place: place.tile)
+
+BANNER_SOURCE = BruceBannerSource()(None)
+
+
+class IqdMobileIdsSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'iqd-mobile-ids-source'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        @property
+        def ids(self):
+            return self.factory.compile_ids()
+
+    @CONFIG_CACHE.cache_on_arguments()
+    def compile_ids(self):
+        iqd_mobile_ids = {}
+        for iqd_id in self._get_tree().iterfind('iqd_id'):
+            try:
+                iqd_mobile_ids[iqd_id.get('ressort')] = (
+                    zeit.web.core.banner.IqdMobileList(iqd_id))
+            except:
+                pass
+        return iqd_mobile_ids
+
+IQD_MOBILE_IDS_SOURCE = IqdMobileIdsSource()(None)
+
+
+class BannerIdMappingsSource(
+        zeit.cms.content.sources.SimpleContextualXMLSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'banner-id-mappings-source'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        @property
+        def mapping_list(self):
+            return self.factory.compile_mapping_list()
+
+    @CONFIG_CACHE.cache_on_arguments()
+    def compile_mapping_list(self):
+        mapping_list = list()
+        for mapping in self._get_tree().iterfind('mapping'):
+            target = mapping.get('target')
+            value = mapping.get('value')
+            banner_code = mapping.get('banner_code')
+            mapping_list.append(
+                dict(target=target, value=value, banner_code=banner_code))
+        return mapping_list
+
+BANNER_ID_MAPPINGS_SOURCE = BannerIdMappingsSource()(None)

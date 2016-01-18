@@ -49,11 +49,12 @@ def app_settings(mockserver):
         'pyramid.debug_templates': False,
         'dogpile_cache.backend': 'dogpile.cache.memory',
         'dogpile_cache.regions': (
-            'default_term, short_term, long_term, session'),
+            'default_term, short_term, long_term, session, config'),
         'dogpile_cache.short_term.expiration_time': '60',
         'dogpile_cache.default_term.expiration_time': '300',
         'dogpile_cache.long_term.expiration_time': '3600',
         'dogpile_cache.session.expiration_time': '2',
+        'dogpile_cache.config.expiration_time': '600',
         'session.reissue_time': '1',
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
@@ -118,7 +119,7 @@ def app_settings(mockserver):
         'vivi_zeit.cms_task-queue-async': 'not-applicable',
         'vivi_zeit.cms_whitelist-url': (
             'egg://zeit.web.core/data/config/whitelist.xml'),
-        'vivi_zeit.web_iqd-mobile-ids': (
+        'vivi_zeit.web_iqd-mobile-ids-source': (
             'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
         'vivi_zeit.web_image-scales': (
             'egg://zeit.web.core/data/config/scales.xml'),
@@ -151,7 +152,7 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
         'vivi_zeit.web_banner-source': (
             'egg://zeit.web.core/data/config/banner.xml'),
-        'vivi_zeit.web_banner-id-mappings': (
+        'vivi_zeit.web_banner-id-mappings-source': (
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
         'vivi_zeit.web_navigation': (
             'egg://zeit.web.core/data/config/navigation.xml'),
@@ -171,6 +172,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/series.xml'),
         'vivi_zeit.web_feature-toggle-source': (
             'egg://zeit.web.core/data/config/feature-toggle.xml'),
+        'vivi_zeit.web_banner-source': (
+            'egg://zeit.web.core/data/config/banner.xml'),
         'vivi_zeit.web_blacklist-url': (
             'egg://zeit.web.core/data/config/blacklist.xml'),
         'vivi_zeit.imp_scale-source':
