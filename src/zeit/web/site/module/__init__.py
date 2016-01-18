@@ -5,7 +5,10 @@ import zeit.content.cp.interfaces
 import zeit.content.cp.layout
 import zeit.edit.interfaces
 
+import zeit.web
 
+
+@zeit.web.register_module(u'')
 class Module(object):
     """Base class for RAM-style modules to be used in cp2015 centerpages.
 
