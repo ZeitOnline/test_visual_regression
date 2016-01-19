@@ -1,0 +1,24 @@
+.cp-region
+	+pie-clearfix
+	&:empty
+		display: none
+	&--solo,
+	&--duo
+		+respond-min($break-2)
+			&:first-child
+				margin-top: 0
+
+.cp-area
+	width: 100%
+	&--solo
+		padding: 0
+		position: relative
+
+	+respond-min($break-2)
+		float: left
+		&--major
+			padding: remify(0 $compact--px 0 $compact--px)
+			width: $cp_lead__wrap-width
+		&--minor
+			padding: remify($compact--px $compact--px 0 0)
+			width: $cp_informatives__wrap-width
