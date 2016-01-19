@@ -169,7 +169,7 @@ def test_inject_banner_code_should_be_inserted_between_paragraphs(monkeypatch):
     banner_list = [mock.Mock()]
 
     monkeypatch.setattr(zeit.web.core.sources, "BANNER_SOURCE", mock.Mock())
-    zeit.web.core.sources.BANNER_SOURCE.banner_list = banner_list
+    zeit.web.core.sources.BANNER_SOURCE = banner_list
     page = mock.Mock()
     setattr(page, "number", 1)
     p = zeit.web.core.block.Paragraph

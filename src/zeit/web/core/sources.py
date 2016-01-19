@@ -297,8 +297,13 @@ class IqdMobileIdsSource(zeit.cms.content.sources.SimpleContextualXMLSource):
     product_configuration = 'zeit.web'
     config_url = 'iqd-mobile-ids-source'
 
-    @CONFIG_CACHE.cache_on_arguments(config_url)
-    def getValues(self, context):
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+        @property
+        def ids(self):
+            return self.factory.compile_ids()
+
+    @CONFIG_CACHE.cache_on_arguments()
+    def compile_ids(self):
         iqd_mobile_ids = {}
         for iqd_id in self._get_tree().iterfind('iqd_id'):
             try:
