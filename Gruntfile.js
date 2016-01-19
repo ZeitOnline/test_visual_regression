@@ -2,22 +2,12 @@
 module.exports = function(grunt) {
     'use strict';
 
-    // Monkey patch delete so it allows deleting outside the current
-    // directory, which we need since the grunt binary resides in
-    // work/web, while the sources are in work/source/zeit.web.
-    var origDelete = grunt.file.delete;
-    grunt.file.delete = function(filepath, options) {
-        options = options || {};
-        options.force = true;
-        origDelete(filepath, options);
-    };
-
     // local variables
     var project = {
         name: '<%= pkg.name %>-<%= pkg.version%>',
-        sourceDir: './',
-        codePath: 'src/zeit/web/static/',
-        codeDir: './src/zeit/web/static/',
+        baseDir: './', // attention: this is the base directory seen from zeit.web.deployment/work/grunt
+        sourceDir: '../source/zeit.web/',
+        codeDir: '../source/zeit.web/src/zeit/web/static/',
         rubyVersion: '1.9.3',
         tasks: {
             production: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'svg' ],
@@ -30,6 +20,21 @@ module.exports = function(grunt) {
         }
     };
 
+    // use local config if available
+    if (grunt.file.exists('Gruntconfig.json')) {
+        var config = grunt.file.readJSON('Gruntconfig.json');
+
+        for ( var key in config ) {
+            if ( config.hasOwnProperty(key) ) {
+                project[key] = config[key];
+            }
+        }
+    }
+
+    // set baseDir to zeit.web.deployment/work/grunt
+    // this helps using the node_modules from that directory
+    grunt.file.setBase( project.baseDir );
+
     var path = require('path');
 
     // checking ruby version, printing a hint if not standard version
@@ -41,9 +46,6 @@ module.exports = function(grunt) {
             grunt.log.writeln('You are using Ruby ' + stdout);
         }
     });
-
-    // we need either this or the "force" option in clean task
-    // grunt.file.setBase( project.sourceDir );
 
     // configuration
     grunt.initConfig({
