@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
-import UserDict
 import copy
 import json
 import os.path

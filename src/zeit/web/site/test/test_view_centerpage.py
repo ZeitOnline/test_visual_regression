@@ -1749,7 +1749,7 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
             expected_conditions.presence_of_element_located(
                 (By.CLASS_NAME, 'image-copyright-footer')))
     except TimeoutException:
-        assert False, 'Image Copyright in Footer not visible within 10 seconds'
+        assert False, 'Image Copyright in Footer not visible within 5 seconds'
     else:
         copyrights = driver.find_elements_by_css_selector(
             '.image-copyright-footer__item')
@@ -1759,6 +1759,7 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
             '.image-copyright-footer__item a')
         assert len(linked_copyrights) == 1
 
+<<<<<<< HEAD
     closelink = driver.find_element_by_class_name(
         'js-image-copyright-footer-close')
     closelink.click()
@@ -2101,7 +2102,7 @@ def test_dynamic_cps_detect_videos_of_type_video(
     assert zeit.web.core.template.is_video(video)
 
 
-def test_dynamic_cps_show_detect_videos_of_type_IVideo(
+def test_dynamic_cps_show_detect_videos_with_ivideo_interface(
         application, dummy_request):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId':
