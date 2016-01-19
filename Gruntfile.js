@@ -5,9 +5,8 @@ module.exports = function(grunt) {
     // local variables
     var project = {
         name: '<%= pkg.name %>-<%= pkg.version%>',
-        baseDir: '../../grunt',
-        sourceDir: '../source/zeit.web/',
-        codeDir: '../source/zeit.web/src/zeit/web/static/',
+        sourceDir: __dirname + '/',
+        codeDir: __dirname + '/src/zeit/web/static/',
         rubyVersion: '1.9.3',
         tasks: {
             production: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'svg' ],
@@ -19,10 +18,6 @@ module.exports = function(grunt) {
             lint: [ 'jshint', 'jscs' ]
         }
     };
-
-    // set baseDir to zeit.web.deployment/work/grunt
-    // this helps using the node_modules from that directory
-    grunt.file.setBase( project.baseDir );
 
     var path = require('path');
 
