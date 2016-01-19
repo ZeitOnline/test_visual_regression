@@ -2116,4 +2116,4 @@ def test_dynamic_cps_show_detect_videos_of_type_IVideo(
 
 def test_teaser_classic_should_not_have_gradient_overlay(testbrowser):
     browser = testbrowser('/zeit-online/classic-teaser')
-    assert browser.cssselect('a.teaser-classic__media-link')
+    assert len(browser.cssselect('a.teaser-fullwidth__media-link')) == 0
