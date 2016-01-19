@@ -25,7 +25,6 @@ setup(
     ),
     install_requires=[
         'Babel',
-        'Beaker',  # Only for parsing pylibmc behaviors from ini file.
         'ProxyTypes',
         'PyJWT',
         'bugsnag',
@@ -38,9 +37,8 @@ setup(
         'lxml',
         'martian',
         'pyramid',
-        'pyramid_beaker',
         'pyramid_debugtoolbar',
-        'pyramid_dogpile_cache',
+        'pyramid_dogpile_cache2',
         'pyramid_jinja2',
         'pyramid_mako',
         'pyramid_tm',

@@ -5,6 +5,7 @@ import traceback
 import types
 
 from dogpile.cache.api import NO_VALUE
+import pyramid_dogpile_cache2.cache
 import venusian
 import zope.component
 
@@ -226,8 +227,8 @@ class reify(object):  # NOQA
             # thus potentially customizeable for different regions) or not
             # (because it makes assumptions about the cache region
             # configuration).
-            key_generator = zeit.web.core.cache.key_generator(
-                None, self.func, cls=inst.__class__)
+            key_generator = pyramid_dogpile_cache2.cache.key_generator(
+                None, self.func.__get__(inst))
             return key_generator(self, inst.context.uniqueId)
         except AttributeError:
             return

@@ -1,8 +1,6 @@
 import ast
-import beaker.util
 import bugsnag
 import bugsnag.wsgi.middleware
-import dogpile.cache
 import jinja2
 import jinja2.ext
 import logging
@@ -11,7 +9,6 @@ import pkg_resources
 import pyramid.authorization
 import pyramid.config
 import pyramid.renderers
-import pyramid_dogpile_cache
 import pyramid_jinja2
 import pyramid_zodbconn
 import pysolr
@@ -209,7 +206,7 @@ class Application(object):
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.web, ignore=self.DONT_SCAN)
 
-        self.configure_dogpile_cache()
+        config.include('pyramid_dogpile_cache2')
 
         config.set_session_factory(zeit.web.core.session.CacheSession)
 
@@ -328,74 +325,6 @@ class Application(object):
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
 
-    def configure_dogpile_cache(self):
-        """This is what config.include('pyramid_dogpile_cache') *should* be.
-
-        We can use pyramid_dogpile_cache only for parts of its config parsing
-        code, since its `get_region` API wants to immediately configure() the
-        regions at import time, where there is no configuration yet -- thus it
-        is rather useless and we use our own zeit.web.core.cache.get_region()
-        instead.
-
-        The code here is somewhat inspired by pyramid_dogpile_cache.includeme()
-        and build_dogpile_region_from_dict().
-        """
-        self._parse_dogpile_cache_settings()
-        build_settings = (
-            pyramid_dogpile_cache.build_dogpile_region_settings_from_settings)
-        _, region_settings = build_settings(self.config.registry.settings)
-
-        for name, settings in region_settings.items():
-            settings['expiration_time'] = int(settings['expiration_time'])
-            settings.setdefault(
-                'memcache_expire_time', settings['expiration_time'] +
-                int(self.config.registry.settings.get(
-                    'dogpile_cache.memcache_expire_time_interval', 30)))
-
-            region = zeit.web.core.cache.get_region(name)
-            # XXX kludgy: Remove any existing backend configuration, so
-            # configure_dogpile_cache() may be called multiple times (which
-            # should only happen in tests).
-            region.__dict__.pop('backend', None)
-            region.configure_from_config(settings, prefix='')
-
-        # Since get_region() returns an unconfigured region for *any* name you
-        # pass in, we make sure that all used regions are configured now.
-        for region in zeit.web.core.cache.CACHE_REGIONS.values():
-            if 'backend' not in region.__dict__:
-                raise dogpile.cache.exception.RegionNotConfigured(
-                    'Region %r used in python code, but not configured' %
-                    region.name)
-
-    def _parse_dogpile_cache_settings(self):
-        # XXX pyramid_dogpile_cache should do all of this, not us. :-(
-        # Also, this code only supports our specific use-case: all regions use
-        # the same memcache settings.
-        settings = self.config.registry.settings
-
-        if 'dogpile_cache.pylibmc_url' in settings:
-            settings['dogpile.cache.arguments.url'] = settings[
-                'dogpile_cache.pylibmc_url'].split(';')
-            del settings['dogpile_cache.pylibmc_url']
-
-        for key in ['dogpile_cache.arguments.lock_timeout',
-                    'dogpile_cache.arguments.memcache_expire_time']:
-            if key in settings:
-                settings[key] = int(settings[key])
-
-        behaviors = {}
-        behavior_prefix = 'dogpile_cache.pylibmc_behavior.'
-        to_remove = []
-        for key, value in settings.items():
-            if not key.startswith(behavior_prefix):
-                continue
-            behaviors[key.replace(behavior_prefix, '')] = value
-            to_remove.append(key)
-        if behaviors:
-            convert = beaker.util.coerce_memcached_behaviors
-            settings['dogpile_cache.arguments.behaviors'] = convert(behaviors)
-            for key in to_remove:
-                del settings[key]
 
 factory = Application()
 
