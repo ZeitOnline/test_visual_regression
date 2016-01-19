@@ -509,9 +509,7 @@ def closest_substitute_image(image_group,
         return image_group.get(image_pattern)
 
     # Determine the image scale correlating to the provided pattern.
-    scale = zope.component.getUtility(
-        zeit.web.core.interfaces.IImageScales).get(image_pattern)
-
+    scale = zeit.web.core.sources.IMAGE_SCALE_SOURCE.find(image_pattern)
     if not scale:
         return
 

@@ -12,6 +12,7 @@ import gocept.cache.method
 import pyramid.urldispatch
 import pysolr
 import zc.sourcefactory.source
+import zc.sourcefactory.contextual
 import zope.interface
 
 import zeit.cms.content.sources
@@ -55,18 +56,24 @@ class ScaleSource(zeit.imp.source.ScaleSource):
         # in zeit.web, so availability is `True` regardless of context.
         return True
 
+SCALE_SOURCE = ScaleSource()(None)
 
-class ImageScales(zeit.web.core.utils.frozendict):
 
-    zope.interface.implements(zeit.web.core.interfaces.IImageScales)
+class ImageScales(zc.sourcefactory.contextual.BasicContextualSourceFactory):
+    # Only contextual so we can customize source_class
 
-    def __init__(self, *args, **kw):
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        def find(self, id):
+            return self.factory.getValues(None).get(id)
+
+    def getValues(self, context):
         def sub(x):
             return int(re.sub('[^0-9]', '', '0' + str(x)))
 
-        scales = {s.name: (sub(s.width), sub(s.height)) for s in
-                  ScaleSource()('')}
-        super(ImageScales, self).__init__(scales)
+        return {s.name: (sub(s.width), sub(s.height)) for s in SCALE_SOURCE}
+
+IMAGE_SCALE_SOURCE = ImageScales()(None)
 
 
 class TeaserMapping(zeit.web.core.utils.frozendict):
