@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.49 (unreleased)
+2.49 (2016-01-19)
 -----------------
 
 - ZON-2632: Remove check for "static" galleries
