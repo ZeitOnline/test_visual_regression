@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - Fix: Gruntfile config
 
+- FIX: scale crossword puzzle to full-width in print
+
 
 2.49 (2016-01-19)
 -----------------
