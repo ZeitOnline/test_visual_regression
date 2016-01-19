@@ -1,0 +1,2 @@
+#!/bin/bash
+exec ../../grunt/bin/grunt $*

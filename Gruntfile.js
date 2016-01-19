@@ -72,7 +72,7 @@ module.exports = function(grunt) {
             // general options
             options: {
                 assetCacheBuster: false,
-                bundleExec: true,
+                bundleExec: false,
                 cssDir: project.codeDir + 'css',
                 fontsDir: project.codeDir + 'fonts',
                 httpFontsPath: '../../../latest/fonts',
