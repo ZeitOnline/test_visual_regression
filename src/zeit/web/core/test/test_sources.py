@@ -8,14 +8,14 @@ def test_feature_toggle_source_should_be_parsed(application):
 
 
 def test_banner_source_should_be_parsed(application):
-    assert len(zeit.web.core.sources.BANNER_SOURCE.banner_list) == 15
-    place = zeit.web.core.sources.BANNER_SOURCE.banner_list[0]
+    assert len(zeit.web.core.sources.BANNER_SOURCE) == 15
+    place = [x for x in zeit.web.core.sources.BANNER_SOURCE][0]
     assert place.tile == 1
     assert place.sizes == ['728x90', '800x250']
     assert place.dcopt == 'ist'
     assert place.diuqilon is True
 
-    place = zeit.web.core.sources.BANNER_SOURCE.banner_list[3]
+    place = [x for x in zeit.web.core.sources.BANNER_SOURCE][3]
     assert place.tile == 4
     assert place.sizes == ['300x250']
     assert place.dcopt is None
@@ -23,12 +23,12 @@ def test_banner_source_should_be_parsed(application):
 
 
 def test_igd_mobile_ids_source_should_be_parsed(application):
-    assert len(zeit.web.core.sources.IQD_MOBILE_IDS_SOURCE.ids) == 4
+    assert len(zeit.web.core.sources.IQD_MOBILE_IDS_SOURCE) == 4
 
 
 def test_banner_id_mappings_source_should_be_parsed(application):
     assert len(
-        zeit.web.core.sources.BANNER_ID_MAPPINGS_SOURCE.mapping_list) == 20
+        zeit.web.core.sources.BANNER_ID_MAPPINGS_SOURCE) == 20
 
 
 def test_navigation_source_should_be_parsed(application):

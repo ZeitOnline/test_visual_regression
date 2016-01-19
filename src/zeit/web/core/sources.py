@@ -261,14 +261,8 @@ class BruceBannerSource(zeit.cms.content.sources.SimpleContextualXMLSource):
     product_configuration = 'zeit.web'
     config_url = 'banner-source'
 
-    class source_class(zc.sourcefactory.source.FactoredContextualSource):
-
-        @property
-        def banner_list(self):
-            return self.factory.compile_banner_list()
-
-    @CONFIG_CACHE.cache_on_arguments()
-    def compile_banner_list(self):
+    @CONFIG_CACHE.cache_on_arguments(config_url)
+    def getValues(self, context):
         banner_list = []
 
         for place in self._get_tree().iterfind('place'):
@@ -303,14 +297,8 @@ class IqdMobileIdsSource(zeit.cms.content.sources.SimpleContextualXMLSource):
     product_configuration = 'zeit.web'
     config_url = 'iqd-mobile-ids-source'
 
-    class source_class(zc.sourcefactory.source.FactoredContextualSource):
-
-        @property
-        def ids(self):
-            return self.factory.compile_ids()
-
-    @CONFIG_CACHE.cache_on_arguments()
-    def compile_ids(self):
+    @CONFIG_CACHE.cache_on_arguments(config_url)
+    def getValues(self, context):
         iqd_mobile_ids = {}
         for iqd_id in self._get_tree().iterfind('iqd_id'):
             try:
@@ -329,14 +317,8 @@ class BannerIdMappingsSource(
     product_configuration = 'zeit.web'
     config_url = 'banner-id-mappings-source'
 
-    class source_class(zc.sourcefactory.source.FactoredContextualSource):
-
-        @property
-        def mapping_list(self):
-            return self.factory.compile_mapping_list()
-
-    @CONFIG_CACHE.cache_on_arguments()
-    def compile_mapping_list(self):
+    @CONFIG_CACHE.cache_on_arguments(config_url)
+    def getValues(self, context):
         mapping_list = list()
         for mapping in self._get_tree().iterfind('mapping'):
             target = mapping.get('target')

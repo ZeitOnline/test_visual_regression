@@ -32,7 +32,7 @@ def test_banner_place_should_raise_on_index_error(testserver, testbrowser):
 
 
 def test_banner_list_should_be_sorted(testserver, testbrowser):
-    banner_list = zeit.web.core.sources.BANNER_SOURCE.banner_list
+    banner_list = [x for x in zeit.web.core.sources.BANNER_SOURCE]
     tiles = [place.tile for place in banner_list]
     assert sorted(tiles) == tiles
 

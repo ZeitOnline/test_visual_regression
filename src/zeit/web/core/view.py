@@ -249,8 +249,8 @@ class Base(object):
                 "".join(re.findall(r"[A-Za-z0-9_]*", adv_title)).lower(),
                 self.banner_type)
         # third: do the mapping
-        mappings = (
-            zeit.web.core.sources.BANNER_ID_MAPPINGS_SOURCE.mapping_list)
+        mappings = zeit.web.core.sources.BANNER_ID_MAPPINGS_SOURCE
+
         for mapping in mappings:
             if getattr(self, mapping['target'], None) == mapping['value']:
                 # change ressort but leave subressort intact
@@ -344,7 +344,7 @@ class Base(object):
 
     def banner(self, tile):
         try:
-            banner_list = zeit.web.core.sources.BANNER_SOURCE.banner_list
+            banner_list = [x for x in zeit.web.core.sources.BANNER_SOURCE]
             return banner_list[tile - 1]
         except IndexError:
             return
