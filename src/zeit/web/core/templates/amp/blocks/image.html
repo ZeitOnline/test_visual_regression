@@ -1,9 +1,8 @@
-{% set image = image or block %}
+{% set image = get_image(content=block, variant_id="wide") %}
 {% if image and not is_image_expired(image) %}
 
-	{# TRASHME Rather crude bitblt/zci image api switch #}
-	{% set source = (request.image_host + image.path) if image is variant else image | default_image_url %}
-	{% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source %}
+	{% set source = request.image_host + image.path %}
+	{% set fallback_source = request.image_host + image.fallback_path %}
 	{% set width = 660 %}
 	{% set height = (width / image.ratio) | int %}
 
@@ -13,7 +12,8 @@
 				<a class="figure__link" title="{{ image.title }}" href="{{ image.href }}">
 			{%- endif %}
 			<amp-img
-				src="{{ source }}"
+				src="{{ "%s__%sx%s" | format(source, width, height) }}"
+				srcset="{% for w in (1440, 1080, 750, 660, 480, 320) %}{{ "%s__%sx%s %sw" | format(source, w, (w / image.ratio) | int, w) }}{{ ", " if not loop.last }}{% endfor %}"
 				alt="{{ image.alt }}"
 				width="{{ width }}"
 				height="{{ height }}"

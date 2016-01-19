@@ -225,15 +225,20 @@ class Image(zeit.web.core.image.BaseImage):
                 referenced = model_block.references.target
         except TypeError:
             pass  # Unresolveable uniqueId
+
         if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
             variant = getattr(model_block.layout, 'variant', None) or (
                 cls.DEFAULT_VARIANT)
             try:
                 target = referenced[variant]
+                group = referenced
             except KeyError:
                 target = None
+                group = None
         else:
             target = referenced
+            group = None
+
         if zeit.web.core.image.is_image_expired(target):
             target = None
 
@@ -242,6 +247,7 @@ class Image(zeit.web.core.image.BaseImage):
 
         instance = super(Image, cls).__new__(cls, model_block)
         instance.image = target
+        instance.group = group
         instance.src = instance.image.uniqueId
         instance.uniqueId = instance.image.uniqueId
         if model_block.references.title:
@@ -280,6 +286,15 @@ class Image(zeit.web.core.image.BaseImage):
             if cr is not None:
                 rel = cr.attrib.get('rel', '') == 'nofollow'
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(Image)
+class BlockImages(object):
+
+    def __init__(self, context):
+        self.context = context
+        self.image = context.group
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
