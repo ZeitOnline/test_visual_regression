@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Prevent and test for ranking area proxy exposures
 
+- FIX: Scale crossword puzzle to full-width in print
+
 
 2.49 (2016-01-19)
 -----------------
