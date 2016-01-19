@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     // local variables
     var project = {
         name: '<%= pkg.name %>-<%= pkg.version%>',
-        baseDir: './', // attention: this is the base directory seen from zeit.web.deployment/work/grunt
+        baseDir: '../../grunt',
         sourceDir: '../source/zeit.web/',
         codeDir: '../source/zeit.web/src/zeit/web/static/',
         rubyVersion: '1.9.3',
@@ -19,17 +19,6 @@ module.exports = function(grunt) {
             lint: [ 'jshint', 'jscs' ]
         }
     };
-
-    // use local config if available
-    if (grunt.file.exists('Gruntconfig.json')) {
-        var config = grunt.file.readJSON('Gruntconfig.json');
-
-        for ( var key in config ) {
-            if ( config.hasOwnProperty(key) ) {
-                project[key] = config[key];
-            }
-        }
-    }
 
     // set baseDir to zeit.web.deployment/work/grunt
     // this helps using the node_modules from that directory
