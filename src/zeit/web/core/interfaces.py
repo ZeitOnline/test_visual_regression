@@ -147,10 +147,6 @@ class ISettings(pyramid.interfaces.ISettings):
     """Custom interface class to register settings as a utility"""
 
 
-class ITeaserMapping(zope.interface.Interface):
-    """Legacy teaser mapping"""
-
-
 class ITopicLink(zope.interface.Interface):
     """TopicLink sanitizer"""
 

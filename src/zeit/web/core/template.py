@@ -289,8 +289,7 @@ def get_layout(block, request=None):
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
 
-    layout = zope.component.getUtility(
-        zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
+    layout = zeit.web.core.sources.TEASER_MAPPING.get(layout, layout)
 
     if key:
         request.teaser_layout[key] = layout

@@ -78,8 +78,6 @@ IMAGE_SCALE_SOURCE = ImageScales()(None)
 
 class TeaserMapping(zeit.web.core.utils.frozendict):
 
-    zope.interface.implements(zeit.web.core.interfaces.ITeaserMapping)
-
     _map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama',
                           'parquet-large', 'zon-parquet-large'],
             'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date',
@@ -94,6 +92,8 @@ class TeaserMapping(zeit.web.core.utils.frozendict):
         # Flattens and reverses _map, so we can easily lookup a layout.
         super(TeaserMapping, self).__init__(
             x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
+
+TEASER_MAPPING = TeaserMapping()
 
 
 class VariantSource(zeit.content.image.variant.VariantSource):
