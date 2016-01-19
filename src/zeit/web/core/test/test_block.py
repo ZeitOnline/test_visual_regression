@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import beaker.cache
+import dogpile.cache
 import lxml.etree
 import mock
 import copy
@@ -237,33 +237,37 @@ def test_block_liveblog_instance_causing_timeouts(application, mockserver,
                                                   monkeypatch):
 
     # Disable caching
-    new_beaker = copy.deepcopy(beaker.cache.cache_regions)
-    new_beaker.update({'long_term': {'enabled': False}})
-    with mock.patch.dict(beaker.cache.cache_regions, new_beaker):
-        model_block = mock.Mock()
-        model_block.blog_id = '158'
-        liveblog = zeit.web.core.block.Liveblog(model_block)
-        assert liveblog.id == '158'
-        assert liveblog.last_modified.isoformat() == (
-            '2015-03-20T12:26:00+01:00')
+    new_cache = copy.copy(zeit.web.core.cache.CACHE_REGIONS)
+    new_cache['long_term'] = dogpile.cache.make_region(
+        'long_term',
+        function_key_generator=zeit.web.core.cache.key_generator,
+        key_mangler=zeit.web.core.cache.sha1_mangle_key).configure(
+            'dogpile.cache.null')
+    monkeypatch.setattr(zeit.web.core.cache, 'CACHE_REGIONS', new_cache)
+    model_block = mock.Mock()
+    model_block.blog_id = '158'
+    liveblog = zeit.web.core.block.Liveblog(model_block)
+    assert liveblog.id == '158'
+    assert liveblog.last_modified.isoformat() == (
+        '2015-03-20T12:26:00+01:00')
 
-        model_block = mock.Mock()
-        model_block.blog_id = '166-201'
-        liveblog = zeit.web.core.block.Liveblog(model_block)
-        assert liveblog.id == '166'
-        assert liveblog.seo_id == '201'
-        assert liveblog.last_modified.isoformat() == (
-            '2015-05-06T22:46:00+02:00')
+    model_block = mock.Mock()
+    model_block.blog_id = '166-201'
+    liveblog = zeit.web.core.block.Liveblog(model_block)
+    assert liveblog.id == '166'
+    assert liveblog.seo_id == '201'
+    assert liveblog.last_modified.isoformat() == (
+        '2015-05-06T22:46:00+02:00')
 
-        # Set unachievable timeout
-        mockserver.settings['sleep'] = 1
-        monkeypatch.setattr(zeit.web.core.block.Liveblog, 'timeout', 0.001)
+    # Set unachievable timeout
+    mockserver.settings['sleep'] = 1
+    monkeypatch.setattr(zeit.web.core.block.Liveblog, 'timeout', 0.001)
 
-        model_block = mock.Mock()
-        model_block.blog_id = '166-201'
-        liveblog = zeit.web.core.block.Liveblog(model_block)
-        # requests failed, last_modified is not set
-        assert liveblog.last_modified is None
+    model_block = mock.Mock()
+    model_block.blog_id = '166-201'
+    liveblog = zeit.web.core.block.Liveblog(model_block)
+    # requests failed, last_modified is not set
+    assert liveblog.last_modified is None
 
 
 def test_block_breaking_news_has_correct_date(application):
