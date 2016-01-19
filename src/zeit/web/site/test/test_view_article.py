@@ -1307,5 +1307,3 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
     assert amp_link
     amp_url = amp_link[0].attrib['href']
     assert amp_url.endswith('amp/zeit-online/article/zeit')
-
-
