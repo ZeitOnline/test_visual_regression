@@ -1,20 +1,36 @@
 Change log for zeit.web
 =======================
 
-2.49 (unreleased)
+2.50 (unreleased)
 -----------------
+
+- FIX: scale crossword puzzle to full-width in print
+
+
+2.49 (2016-01-19)
+-----------------
+
+- ZON-2632: Remove check for "static" galleries
+
+- ZON-2595: IVW and Webtrekk pixels in instantarticles
 
 - ZON-2634: Framebuilder can enable Webtrekk
 
+- ZON-2649: Framebuilder can enable IVW
+
 - MAINT: desktop_only parameter in framebuilder needs no value
 
-- FIX: scale crossword puzzle to full-width in print
+- MAINT: Remove old iqd code
+
+- MAINT: Remove unused IVW file (old version)
 
 
 2.48 (2016-01-14)
 -----------------
 
 - FIX: FB Instant Articles: Add image copyrights
+
+- BUG-315: Update cookie link in footer
 
 
 2.47.1 (2016-01-14)
