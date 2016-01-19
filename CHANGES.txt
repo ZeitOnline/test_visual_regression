@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: scale crossword puzzle to full-width in print
 
+- BUG-270: Make ZMO portraiboxes also visible on mobile and tablet
+
 
 2.49 (2016-01-19)
 -----------------
