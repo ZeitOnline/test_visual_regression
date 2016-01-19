@@ -207,23 +207,32 @@ class Solr(object):
                     content = zeit.cms.interfaces.ICMSContent(unique_id)
                     publish = zeit.cms.workflow.interfaces.IPublishInfo(
                         content)
+                    modified = zeit.cms.workflow.interfaces.IModified(
+                        content)
                     semantic = zeit.cms.content.interfaces.ISemanticChange(
                         content)
                     assert zeit.web.core.view.known_content(content)
                     results.append({
-                        u'date_last_published': (
-                            publish.date_last_published.isoformat()),
+                        u'authors': content.authors,
+                        u'date-last-modified': (
+                            modified.date_last_modified.isoformat()),
                         u'date_first_released': (
                             publish.date_first_released.isoformat()),
+                        u'date_last_published': (
+                            publish.date_last_published.isoformat()),
                         u'last-semantic-change': (
                             semantic.last_semantic_change.isoformat()),
+                        u'image-base-id': [
+                            'http://xml.zeit.de/zeit-online/'
+                            'image/filmstill-hobbit-schlacht-fuenf-hee/'],
                         u'lead_candidate': False,
                         u'product_id': content.product.id,
+                        u'serie': None,
                         u'supertitle': content.supertitle,
+                        u'teaser_text': content.teaserText,
                         u'title': content.title,
                         u'type': content.__class__.__name__.lower(),
-                        u'uniqueId': content.uniqueId
-                    })
+                        u'uniqueId': content.uniqueId})
                 except (AttributeError, AssertionError, TypeError):
                     continue
 

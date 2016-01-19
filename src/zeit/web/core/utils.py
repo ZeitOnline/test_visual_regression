@@ -204,6 +204,10 @@ class defaultattrdict(attrdict, defaultdict):  # NOQA
         return self[key]
 
 
+class ILazyProxy(zeit.cms.content.interfaces.ICommonMetadata):
+    pass
+
+
 @grokcore.component.adapter(dict)
 @grokcore.component.implementer(zeit.cms.interfaces.ICMSContent)
 class LazyProxy(object):
@@ -226,6 +230,8 @@ class LazyProxy(object):
     >>> obj
     <zeit.content.cp.interfaces.ICenterPage proxy at 0x109bbe510>
     """
+
+    zope.interface.implements(ILazyProxy)
 
     def __new__(cls, context, istack=None):
         if not getattr(context, 'get', {}.get)('uniqueId', None):

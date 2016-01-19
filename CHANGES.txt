@@ -4,7 +4,7 @@ Change log for zeit.web
 2.50 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Prevent and test for ranking area proxy exposures
 
 
 2.49 (2016-01-19)
