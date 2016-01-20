@@ -4,7 +4,7 @@ Change log for zeit.web
 2.51 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Allow template-only centerpage modules to be discovered
 
 
 2.50 (2016-01-20)
@@ -20,8 +20,6 @@ Change log for zeit.web
 - BUG-78: Prevent IE from searching for a browserconfig.xml
 
 - FIX: Scale crossword puzzle to full-width in print
-
-- MAINT: Allow template-only centerpage modules to be discovered
 
 - ZON-2535: Start ZMO moveover
 
