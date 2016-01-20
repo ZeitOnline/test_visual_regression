@@ -1,5 +1,4 @@
 import pyramid.threadlocal
-import zope.interface
 
 import zeit.content.cp.interfaces
 import zeit.content.cp.layout
@@ -14,8 +13,6 @@ class Module(object):
 
     See `zeit.web.core.decorator.register_module` for doc and example.
     """
-
-    zope.interface.implements(zeit.edit.interfaces.IBlock)
 
     __parent__ = NotImplemented
 
