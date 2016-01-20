@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2664: Add link to AMP to head if article is AMP article
 
+- BUG-328: Omit default page paramter in pagination on ranking areas
+
 - FIX: scale crossword puzzle to full-width in print
 
 
