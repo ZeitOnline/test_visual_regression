@@ -122,7 +122,7 @@ module.exports = function(grunt) {
         // project wide javascript hinting rules
         jshint: {
             options: {
-                jshintrc: '.jshintrc',
+                jshintrc: project.sourceDir + '.jshintrc',
                 ignores: [
                     project.sourceDir + 'javascript/libs/**/*',
                     project.sourceDir + 'javascript/vendor/**/*',
@@ -145,7 +145,7 @@ module.exports = function(grunt) {
                 ]
             },
             options: {
-                config: '.jscsrc',
+                config: project.sourceDir + '.jscsrc',
                 excludeFiles: '<%= jshint.options.ignores %>'
             }
         },
