@@ -289,8 +289,7 @@ def get_layout(block, request=None):
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
 
-    layout = zope.component.getUtility(
-        zeit.web.core.interfaces.ITeaserMapping).get(layout, layout)
+    layout = zeit.web.core.sources.TEASER_MAPPING.get(layout, layout)
 
     if key:
         request.teaser_layout[key] = layout
@@ -509,9 +508,7 @@ def closest_substitute_image(image_group,
         return image_group.get(image_pattern)
 
     # Determine the image scale correlating to the provided pattern.
-    scale = zope.component.getUtility(
-        zeit.web.core.interfaces.IImageScales).get(image_pattern)
-
+    scale = zeit.web.core.sources.IMAGE_SCALE_SOURCE.find(image_pattern)
     if not scale:
         return
 
