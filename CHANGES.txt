@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - BUG-328: Omit default page paramter in pagination on ranking areas
 
+- BUG-78: Prevent IE from searching for a browserconfig.xml
+
 - FIX: scale crossword puzzle to full-width in print
 
 - MAINT: Allow template-only centerpage modules to be discovered
