@@ -9,8 +9,8 @@ module.exports = function(grunt) {
         codeDir: __dirname + '/src/zeit/web/static/',
         rubyVersion: '1.9.3',
         tasks: {
-            production: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'svg' ],
-            development: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
+            production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'svg' ],
+            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:icons', 'clean:symbols', 'svgmin', 'grunticon', 'svgstore' ],
             icons: [ 'clean:icons', 'svgmin', 'grunticon' ],
@@ -37,27 +37,29 @@ module.exports = function(grunt) {
         // read from package.json
         pkg: grunt.file.readJSON('package.json'),
 
-        bower: {
-            install: {
+        auto_install: {
+            all: {
                 options: {
-                    targetDir: project.sourceDir,
-                    layout: function(type, component, source) {
-                        // type seems useless - use cheesy quickfix
-                        var target = 'javascript/vendor';
+                    cwd: project.sourceDir,
+                    bower: '--production',
+                    npm: false
+                }
+            }
+        },
 
-                        if (/\.css$/.test(source)) {
-                            target = 'sass/vendor';
-                        }
-
-                        return target;
-                    },
-                    install: true,
-                    verbose: true,
-                    cleanTargetDir: false,
-                    cleanBowerDir: false,
-                    bowerOptions: {
-                        production: true
-                    }
+        bower: {
+            js: {
+                dest: project.sourceDir + 'javascript/vendor',
+                options: {
+                    filter: '**/*.js',
+                    paths: project.sourceDir
+                }
+            },
+            css: {
+                dest: project.sourceDir + 'sass/vendor',
+                options: {
+                    filter: '**/*.css',
+                    paths: project.sourceDir
                 }
             }
         },
@@ -215,6 +217,7 @@ module.exports = function(grunt) {
             symbols: [ '<%= svgmin.symbols.dest %>' ],
             // delete old vendor scripts
             scripts: [ project.sourceDir + 'javascript/vendor' ],
+            sass: [ project.sourceDir + 'sass/vendor' ],
             // delete unused directories
             legacy: [ project.sourceDir + 'sass/web.*/icons-minified' ]
         },
@@ -356,7 +359,7 @@ module.exports = function(grunt) {
     // });
 
     // load node modules
-    grunt.loadNpmTasks('grunt-bower-task');
+    grunt.loadNpmTasks('grunt-auto-install');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-copy');
@@ -370,6 +373,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-sftp-deploy');
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-svgstore');
+    grunt.loadNpmTasks('main-bower-files');
 
     // register tasks here
     grunt.registerTask('default', project.tasks.production);
