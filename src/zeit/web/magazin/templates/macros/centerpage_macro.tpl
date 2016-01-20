@@ -8,7 +8,7 @@
                 {{ include_teaser(module) }}
                 {% if view.is_hp and loop.first and module.layout.id == 'zmo-square-large' %}
                     {{ lama_core.adplace(view.banner(3), view, True) }}
-                {% endif %}    
+                {% endif %}
             {% endif %}
         {% endfor %}
     {% endif %}
@@ -41,7 +41,7 @@
     {% if module is iterable -%}
         {% for teaser in module %}
             {% include ['zeit.web.magazin:templates/inc/teaser/' + prefix + module.layout.id + '.html',
-            'zeit.web.magazin:templates/inc/teaser/default.html'] ignore missing %}
+            'zeit.web.magazin:templates/inc/teaser/default.tpl'] ignore missing %}
         {% endfor %}
     {% elif module.type == 'fullgraphical' %}
         {% include 'zeit.web.magazin:templates/inc/teaser/' + prefix + module.type + '.html' %}
