@@ -1764,10 +1764,10 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
         closelink.click()
         try:
             WebDriverWait(driver, 5).until(
-                expected_conditions.visibility_of_element_located(
+                expected_conditions.invisibility_of_element_located(
                     (By.CLASS_NAME, 'image-copyright-footer')))
         except TimeoutException:
-            assert False, 'Copyright in Footer not hiddden within 5 seconds'
+            assert False, 'Copyright in Footer not hidden within 5 seconds'
         else:
             assert True
 
