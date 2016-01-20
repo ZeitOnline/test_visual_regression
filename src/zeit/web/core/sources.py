@@ -268,7 +268,7 @@ class BruceBannerSource(zeit.cms.content.sources.SimpleContextualXMLSource):
     product_configuration = 'zeit.web'
     config_url = 'banner-source'
 
-    @CONFIG_CACHE.cache_on_arguments(config_url)
+    @CONFIG_CACHE.cache_on_arguments()
     def getValues(self, context):
         banner_list = []
 
@@ -329,7 +329,7 @@ class BannerIdMappingsSource(
     product_configuration = 'zeit.web'
     config_url = 'banner-id-mappings-source'
 
-    @CONFIG_CACHE.cache_on_arguments(config_url)
+    @CONFIG_CACHE.cache_on_arguments()
     def getValues(self, context):
         mapping_list = list()
         for mapping in self._get_tree().iterfind('mapping'):
