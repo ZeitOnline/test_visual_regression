@@ -1,7 +1,6 @@
 import urlparse
 import logging
 
-import gocept.cache.method
 import grokcore.component
 import pyramid.httpexceptions
 import pyramid.interfaces

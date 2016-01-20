@@ -144,7 +144,7 @@ class Centerpage(
         url = super(Centerpage, self).canonical_url.replace(
             'index.cp2015', 'index')  # XXX: remove soon (aps)
         page = self.request.params.get('p', None)
-        param_str = '?p=' + page if page else ''
+        param_str = '?p=' + page if page and page != '1' else ''
         return url + param_str
 
     @zeit.web.reify
@@ -214,15 +214,6 @@ class Centerpage(
         return breadcrumbs
 
     @zeit.web.reify
-    def last_semantic_change(self):
-        """Timestamp representing the last semantic change of the centerpage.
-        :rtype: datetime.datetime
-        """
-
-        return zeit.cms.content.interfaces.ISemanticChange(
-            self.context).last_semantic_change
-
-    @zeit.web.reify
     def topic_links(self):
         """Return topic links of a centerpage as a TopicLink object
         :rtype: zeit.web.core.centerpage.TopicLink
@@ -232,15 +223,7 @@ class Centerpage(
 
     @zeit.web.reify
     def ressort(self):
-        """Ressort of the centerpage or the string `homepage` if context is HP.
-        :rtype: str
-        """
-
-        if self.context.type == 'homepage':
-            return 'homepage'
-        elif self.context.ressort:
-            return self.context.ressort.lower()
-        return ''
+        return 'homepage' if self.is_hp else super(Centerpage, self).ressort
 
     @zeit.web.reify
     def area_ranking(self):
@@ -265,10 +248,13 @@ class Centerpage(
         ranking = self.area_ranking
         if ranking is None:
             return None
-        actual_index = ranking.current_page - 1
-        if actual_index - 1 >= 0:
+        # suppress page param for page 1
+        if ranking.current_page == 2:
+            return zeit.web.core.template.remove_get_params(
+                self.request.url, 'p')
+        elif ranking.current_page > 2:
             return zeit.web.core.template.append_get_params(
-                self.request, p=actual_index)
+                self.request, p=ranking.current_page - 1)
 
 
 @pyramid.view.view_config(

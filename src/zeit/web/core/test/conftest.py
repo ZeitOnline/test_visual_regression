@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
-import UserDict
 import copy
 import json
 import os.path
@@ -17,6 +16,7 @@ import plone.testing.zodb
 import pyramid.response
 import pyramid.static
 import pyramid.testing
+import pyramid_dogpile_cache2
 import pysolr
 import pytest
 import repoze.bitblt.processor
@@ -54,6 +54,7 @@ def app_settings(mockserver):
         'dogpile_cache.default_term.expiration_time': '300',
         'dogpile_cache.long_term.expiration_time': '3600',
         'dogpile_cache.session.expiration_time': '2',
+        'dogpile_cache.config.expiration_time': '600',
         'session.reissue_time': '1',
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
@@ -312,8 +313,7 @@ def reset_solr(application_session, request):
 
 @pytest.fixture
 def reset_cache(application_session, request):
-    for region in zeit.web.core.cache.CACHE_REGIONS.values():
-        region.backend._cache.clear()
+    pyramid_dogpile_cache2.clear()
 
 
 @pytest.fixture

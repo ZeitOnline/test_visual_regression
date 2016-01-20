@@ -53,3 +53,17 @@ def test_framebuilder_can_contain_webtrekk(testbrowser):
     webtrekk_script = browser.cssselect(
         'script[src^="http://scripts.zeit.de/static/js/webtrekk/"]')
     assert len(webtrekk_script) == 1
+
+
+def test_framebuilder_contains_no_ivw(testbrowser):
+    browser = testbrowser('/framebuilder')
+    assert 'iam.js' not in browser.contents
+    assert 'iam_data' not in browser.contents
+
+
+def test_framebuilder_can_contain_ivw(testbrowser):
+    browser = testbrowser('/framebuilder?ivw')
+    ivw_script = browser.cssselect(
+        'script[src="https://script.ioam.de/iam.js"]')
+    assert len(ivw_script) == 1
+    assert 'var iam_data = {' in browser.contents

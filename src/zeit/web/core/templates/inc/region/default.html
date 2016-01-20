@@ -2,7 +2,7 @@
     {%- block before_area_list %}{% endblock %}
     {%- for area in region.values() %}
         {%- set area_loop = loop %}
-        {% include "zeit.web.site:templates/inc/area/includer.html" %}
+        {% include "zeit.web.core:templates/inc/area/includer.html" %}
     {%- endfor %}
     {%- block after_area_list %}{% endblock %}
 </div>
