@@ -9,7 +9,13 @@ Change log for zeit.web
 - ZON-2576: Extract dogpile.cache integration to `pyramid_dogpile_cache2`,
   so vivi can use it, too
 
-- FIX: scale crossword puzzle to full-width in print
+- BUG-328: Omit default page paramter in pagination on ranking areas
+
+- BUG-78: Prevent IE from searching for a browserconfig.xml
+
+- FIX: Scale crossword puzzle to full-width in print
+
+- ZON-2535: Start ZMO moveover
 
 
 2.49 (2016-01-19)

@@ -1764,10 +1764,10 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
         closelink.click()
         try:
             WebDriverWait(driver, 5).until(
-                expected_conditions.visibility_of_element_located(
+                expected_conditions.invisibility_of_element_located(
                     (By.CLASS_NAME, 'image-copyright-footer')))
         except TimeoutException:
-            assert False, 'Copyright in Footer not hiddden within 5 seconds'
+            assert False, 'Copyright in Footer not hidden within 5 seconds'
         else:
             assert True
 
@@ -1987,6 +1987,8 @@ def test_printkiosk_loads_next_page_on_click(selenium_driver, testserver):
 
 def test_centerpage_page_should_be_reconstructed(application, dummy_request):
     dummy_request.GET['p'] = '3'
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(35)]
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
     view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
     assert len(view.regions) == 2
@@ -2025,8 +2027,8 @@ def test_ranking_ara_should_offset_resultset_on_materialized_cp(
     solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(35)]
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
-    area = zeit.web.core.centerpage.get_area(context)
     dummy_request.GET['p'] = 2
+    area = zeit.web.core.centerpage.get_area(context)
     assert len(area.values()) == 10
     assert area.total_pages == 5
     assert area.filter_query == (
@@ -2050,10 +2052,12 @@ def test_ranking_area_should_not_offset_resultset_on_materialized_cp(
 @pytest.mark.parametrize('params, page', ([{'p': '2'}, 2], [{}, 1]))
 def test_ranking_area_should_handle_various_page_values(
         params, page, application, dummy_request):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(12)]
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
-    area = zeit.web.core.centerpage.get_area(context)
     dummy_request.GET = params
+    area = zeit.web.core.centerpage.get_area(context)
     assert area.page == page
 
 

@@ -904,7 +904,7 @@ def remove_get_params(url, *args):
     # It'd be more useful to use these functions on URL and not request level
     # This way we could say sth. like
     # `request | make_url() |
-    #  append_get_param(foo='ba', ba='batz') | remove_get_param('foobar')`
+    #  append_get_params(foo='ba', ba='batz') | remove_get_params('foobar')`
     # and vice versa.
 
     scheme, netloc, path, query, frag = urlparse.urlsplit(url)
