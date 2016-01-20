@@ -4,7 +4,9 @@
 
 {% block before_module_list %}
 	<section class="buzzboard">
-		<h3 class="buzzboard__headline">{{ area.title | default('Beliebte Artikel', true) }}</h3>
+        <span class="buzzboard__divider">
+		  <span class="buzzboard__headline">{{ area.title | default('Beliebte Artikel', true) }}</span>
+        </span>
 {% endblock %}
 
 {% block module_list %}

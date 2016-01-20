@@ -1,24 +1,37 @@
 //styles for buzz area within cp
 
 .buzzboard
-    display: none
-
-.cp_buzz__header
-    +no-user-select
+    +respond-max($break-2)
+        +visuallyhidden
+    clear: left
     font-family: $font-tabletgothic
-    font-size: $font-ml
-    font-weight: bold
-    letter-spacing: 1px
-    text-align: center
-    text-transform: uppercase
+    padding: $compact
+    width: 100%
 
-.cp_buzz__divider
-    border-bottom: $dblhair solid $black
-    height: $fine
-    text-align: center
-    .cp_buzz__header
+    &__headline
+        +no-user-select
+        font-family: $font-tabletgothic
+        font-size: $font-ml
+        font-weight: bold
+        letter-spacing: 1px
+        text-align: center
+        text-transform: uppercase
         background-color: $white
         padding: 0 $petite
+        display: inline
+
+    &__divider
+        border-bottom: $dblhair solid $black
+        height: $fine
+        text-align: center
+        display: block
+
+    &__table
+        th
+            display: inline-block
+            height: $medium
+            line-height: $medium
+            vertical-align: middle
 
 .cp_buzz__service
     +inline-block(top)
@@ -34,12 +47,6 @@
     margin-right: $fine
     height: $medium
     width: $medium
-    vertical-align: middle
-
-.cp_buzz__caption
-    display: inline-block
-    height: $medium
-    line-height: $medium
     vertical-align: middle
 
 .cp_buzz__service__list
