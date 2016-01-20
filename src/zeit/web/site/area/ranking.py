@@ -95,6 +95,13 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         super(Ranking, self).__init__(context)
         self.request = pyramid.threadlocal.get_current_request()
 
+    def values(self):
+        return self._values
+
+    @zeit.web.reify
+    def _values(self):
+        return super(Ranking, self).values()
+
     @property
     def hide_dupes(self):
         """We pack our own deduping for solr queries, so we pretend hide_dupes
@@ -205,6 +212,10 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         try:
             page = int(self.request.GET['p'])
             assert page > 0
+            if page == 1:
+                raise pyramid.httpexceptions.HTTPMovedPermanently(
+                    zeit.web.core.template.remove_get_params(
+                        self.request.url, 'p'))
             return page
         except (AssertionError, ValueError):
             raise pyramid.httpexceptions.HTTPNotFound()

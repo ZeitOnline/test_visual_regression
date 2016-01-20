@@ -11,7 +11,6 @@ import pkg_resources
 import pyramid.authorization
 import pyramid.config
 import pyramid.renderers
-import pyramid_beaker
 import pyramid_dogpile_cache
 import pyramid_jinja2
 import pyramid_zodbconn
@@ -163,6 +162,7 @@ class Application(object):
         log.debug('Configuring Pyramid')
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('instantarticle', '/instantarticle/*traverse')
+        config.add_route('fbia', '/fbia/*traverse')
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
@@ -204,6 +204,7 @@ class Application(object):
         config.set_request_property(configure_host('asset'), reify=True)
         config.set_request_property(configure_host('image'), reify=True)
         config.set_request_property(configure_host('jsconf'), reify=True)
+        config.set_request_property(configure_host('fbia'), reify=True)
 
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.web, ignore=self.DONT_SCAN)

@@ -17,7 +17,7 @@ def test_framebuilder_should_set_banner_channel(application, dummy_request):
 
 
 def test_framebuilder_can_disable_responsiveness(testbrowser):
-    browser = testbrowser('/framebuilder?desktop_only=true')
+    browser = testbrowser('/framebuilder?desktop_only')
     assert 'unresponsive.css' in browser.contents
     assert 'screen.css' not in browser.contents
 
@@ -41,3 +41,29 @@ def test_framebuilder_should_slice_page_on_request(testbrowser):
     assert not lower_body.cssselect('head')
     assert '</body>' in lower_body.contents
     assert lower_body.contents.strip() in full_page.contents
+
+
+def test_framebuilder_contains_no_webtrekk(testbrowser):
+    browser = testbrowser('/framebuilder')
+    assert 'webtrekk' not in browser.contents
+
+
+def test_framebuilder_can_contain_webtrekk(testbrowser):
+    browser = testbrowser('/framebuilder?webtrekk')
+    webtrekk_script = browser.cssselect(
+        'script[src^="http://scripts.zeit.de/static/js/webtrekk/"]')
+    assert len(webtrekk_script) == 1
+
+
+def test_framebuilder_contains_no_ivw(testbrowser):
+    browser = testbrowser('/framebuilder')
+    assert 'iam.js' not in browser.contents
+    assert 'iam_data' not in browser.contents
+
+
+def test_framebuilder_can_contain_ivw(testbrowser):
+    browser = testbrowser('/framebuilder?ivw')
+    ivw_script = browser.cssselect(
+        'script[src="https://script.ioam.de/iam.js"]')
+    assert len(ivw_script) == 1
+    assert 'var iam_data = {' in browser.contents

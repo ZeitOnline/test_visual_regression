@@ -200,9 +200,9 @@ def test_footer_should_have_expected_markup(testserver, testbrowser):
         'Bildrechte</a></li>'\
         '<li><a href="{0}/hilfe/datenschutz">'\
         'Datenschutz</a></li>'\
-        '<li><a href="'\
-        'http://www.iqm.de/Medien/Online/nutzungsbasierte_'\
-        'onlinewerbung.html">Cookies</a></li>'\
+        '<li><a href='\
+        '"http://www.iqm.de/digital/nutzungsbasierte-onlinewerbung/"'\
+        '>Cookies</a></li>'\
         '<li><a href="{0}/administratives/'\
         'agb-kommentare-artikel">AGB</a></li>'\
         '<li><a href="{0}/impressum/index">Impressum</a></li>'\

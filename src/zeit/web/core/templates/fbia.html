@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="noindex, follow">
+        <title>fbia</title>
+        <script src="https://script.ioam.de/iam.js"></script>
+        <script>
+            window.FBIA = {
+                tabletMinWidth: 768,
+                getClientWidth: function() {
+                    return Math.max( parent.document.documentElement.clientWidth || 0, parent.window.innerWidth || 0 );
+                },
+                isMobileView: function() {
+                    return this.getClientWidth() < this.tabletMinWidth;
+                },
+                getSiteParam: function( text ) {
+                    text = text || '';
+                    return this.isMobileView() ? 'mobile.' + text : 'desktop.' + text;
+                },
+                getTrackingBreakpointAlike: function() {
+                    var width = this.getClientWidth(),
+                        breakpoint = 'mobile';
+                    if ( width >= 520 ) {
+                        breakpoint = 'phablet';
+                        if ( width >= 768 ) {
+                            breakpoint = 'tablet';
+                            if ( width >= 980 ) {
+                                breakpoint = 'stationär';
+                            }
+                        }
+                    }
+                    return breakpoint;
+                }
+            };
+        </script>
+    </head>
+    <body>
+        {% include "zeit.web.core:templates/inc/tracking/fbia_ivw.html" %}
+        {% include "zeit.web.core:templates/inc/tracking/fbia_webtrekk.html" %}
+    </body>
+</html>

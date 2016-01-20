@@ -4,7 +4,10 @@
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
 
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
-    {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
+
+    {% if view.framebuilder_requires_ivw %}
+        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
+    {% endif %}
 
     {% block skiplink %}
     <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>

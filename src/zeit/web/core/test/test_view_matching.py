@@ -56,7 +56,7 @@ def test_custom_predicate_should_only_match_zmo_content(application):
     def zmo_view(pviews):
         for view in pviews:
             if view[1].__dict__['__original_view__'] == (
-                    zeit.web.magazin.view_centerpage.Centerpage):
+                    zeit.web.magazin.view_centerpage.CenterpageLegacy):
                 return view[1]
 
     view_wrapper = zmo_view(views)
@@ -108,3 +108,14 @@ def test_instantarticle_view_should_match(application):
     request.registry = registry
 
     assert pviews._find_view(request).func_name == 'InstantArticle'
+
+
+def test_fbia_view_should_match(application):
+    pviews = pyramid.scripts.pviews.PViewsCommand([])
+    registry = application.zeit_app.config.registry
+
+    request = pyramid.request.Request.blank(
+        '/fbia/zeit-online/article/simple')
+    request.registry = registry
+
+    assert pviews._find_view(request).func_name == 'FbIa'
