@@ -228,8 +228,8 @@ class reify(object):  # NOQA
             # (because it makes assumptions about the cache region
             # configuration).
             key_generator = pyramid_dogpile_cache2.cache.key_generator(
-                None, self.func.__get__(inst))
-            return key_generator(self, inst.context.uniqueId)
+                None, self.func)
+            return key_generator(inst, inst.context.uniqueId)
         except AttributeError:
             return
 
