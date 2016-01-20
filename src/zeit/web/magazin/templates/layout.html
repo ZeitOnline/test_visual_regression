@@ -25,6 +25,9 @@
         <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
         <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
         <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
+        {% if view.is_amp -%}
+            <link rel="amphtml" href="{{ view.amp_url }}">
+        {% endif -%}
         {% if view.canonical_url -%}
             <link rel="canonical" href="{{ view.canonical_url }}">
         {% endif -%}
@@ -64,11 +67,11 @@
         <noscript>
             <link href="{{ request.asset_host }}/css/icons/magazin.fallback.css" rel="stylesheet">
         </noscript>
-        {% if view.third_party_modules_is_enabled and view.iqd_is_enabled%}
-            <script type="text/javascript" src="https://script.ioam.de/iam.js"></script>
-            <script type="text/javascript" src="{{ request.asset_host }}/js/libs/iqd/adam.js"></script>
 
-            <script type="text/javascript" src="http://c.t4ft.de/c/ftg_iq.min.js"></script>
+        {% if view.third_party_modules_is_enabled and view.tracking_is_enabled %}
+            <script src="https://script.ioam.de/iam.js"></script>
+        {% endif %}
+        {% if view.third_party_modules_is_enabled and view.iqd_is_enabled %}
             {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
             {%- block content_ad_script -%}{%- endblock -%}
         {% endif %}

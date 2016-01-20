@@ -1759,15 +1759,17 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
             '.image-copyright-footer__item a')
         assert len(linked_copyrights) == 1
 
-    closelink = driver.find_element_by_class_name(
-        'js-image-copyright-footer-close')
-    closelink.click()
-    try:
-        WebDriverWait(driver, 5).until(
-            expected_conditions.invisibility_of_element_located(
-                (By.CLASS_NAME, 'image-copyright-footer')))
-    except TimeoutException:
-        assert False, 'Image Copyright in Footer not hidden within 5 seconds'
+        closelink = driver.find_element_by_class_name(
+            'js-image-copyright-footer-close')
+        closelink.click()
+        try:
+            WebDriverWait(driver, 5).until(
+                expected_conditions.visibility_of_element_located(
+                    (By.CLASS_NAME, 'image-copyright-footer')))
+        except TimeoutException:
+            assert False, 'Copyright in Footer not hiddden within 5 seconds'
+        else:
+            assert True
 
 
 def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
@@ -2105,7 +2107,7 @@ def test_dynamic_cps_detect_videos_of_type_video(
     assert zeit.web.core.template.is_video(video)
 
 
-def test_dynamic_cps_show_detect_videos_of_type_IVideo(
+def test_dynamic_cps_show_detect_videos_with_ivideo_interface(
         application, dummy_request):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId':

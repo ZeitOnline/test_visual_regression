@@ -596,3 +596,11 @@ def test_iqd_ads_should_utilize_feature_toggles(testbrowser, monkeypatch):
     browser = testbrowser('/zeit-online/article/zeit')
     assert 'AdController.initialize();' not in (
         browser.cssselect('head')[0].text_content())
+
+
+def test_amp_article_should_have_amp_link(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zeit')
+    view = zeit.web.site.view_article.Article(
+        context, pyramid.testing.DummyRequest())
+    assert view.is_amp
