@@ -550,12 +550,14 @@ def test_videostage_has_zon_svg_logo(testbrowser):
     assert len(logo) == 1
 
 
-def test_module_printbox_should_contain_teaser_image(application):
-    mycp = mock.Mock()
+def test_module_printbox_should_contain_teaser_image(
+        application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
-        mycp, pyramid.testing.DummyRequest())
-    image = view.module_printbox.image
-    assert isinstance(image, zeit.content.image.image.RepositoryImage)
+        cp, dummy_request)
+    printbox = zeit.web.core.template.get_module(view.module_printbox)
+    assert isinstance(printbox.image, zeit.content.image.image.RepositoryImage)
 
 
 def test_homepage_indentifies_itself_as_homepage(testserver):
