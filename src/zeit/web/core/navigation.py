@@ -1,12 +1,8 @@
 import collections
 
-import zope.interface
 
-import zeit.web.core.interfaces
-
-
-@zope.interface.implementer(zeit.web.core.interfaces.INavigation)
 class Navigation(object):
+    """A navigation bar containing navigation items"""
 
     def __init__(self):
         self.navigation_items = collections.OrderedDict()
@@ -30,8 +26,8 @@ class Navigation(object):
         return len(self.navigation_items) > 0
 
 
-@zope.interface.implementer(zeit.web.core.interfaces.INavigationItem)
 class NavigationItem(Navigation):
+    """Navigation items linking to different sections and sub sections"""
 
     def __init__(self, item_id, text, href, label=None):
         super(NavigationItem, self).__init__()
