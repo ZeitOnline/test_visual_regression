@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.web',
     url='https://github.com/ZeitOnline/zeit.web',
-    version='2.49.dev0',
+    version='2.51.dev0',
     author=(
         'Thomas Baumann, Nico Bruenjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -25,7 +25,6 @@ setup(
     ),
     install_requires=[
         'Babel',
-        'Beaker',  # Only for parsing pylibmc behaviors from ini file.
         'ProxyTypes',
         'PyJWT',
         'bugsnag',
@@ -38,9 +37,8 @@ setup(
         'lxml',
         'martian',
         'pyramid',
-        'pyramid_beaker',
         'pyramid_debugtoolbar',
-        'pyramid_dogpile_cache',
+        'pyramid_dogpile_cache2',
         'pyramid_jinja2',
         'pyramid_mako',
         'pyramid_tm',

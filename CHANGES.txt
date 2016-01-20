@@ -1,7 +1,30 @@
 Change log for zeit.web
 =======================
 
-2.49 (unreleased)
+2.51 (unreleased)
+-----------------
+
+- ZON-2628: Redirect to standard article view if AMP is disabled
+
+
+2.50 (2016-01-20)
+-----------------
+
+- ZON-2664: Add link to AMP to head if article is AMP article
+
+- ZON-2576: Extract dogpile.cache integration to `pyramid_dogpile_cache2`,
+  so vivi can use it, too
+
+- BUG-328: Omit default page paramter in pagination on ranking areas
+
+- BUG-78: Prevent IE from searching for a browserconfig.xml
+
+- FIX: Scale crossword puzzle to full-width in print
+
+- ZON-2535: Start ZMO moveover
+
+
+2.49 (2016-01-19)
 -----------------
 
 - ZON-2632: Remove check for "static" galleries
@@ -10,9 +33,13 @@ Change log for zeit.web
 
 - ZON-2634: Framebuilder can enable Webtrekk
 
-- ZON-2628: Redirect to standard article view if AMP is disabled
+- ZON-2649: Framebuilder can enable IVW
 
 - MAINT: desktop_only parameter in framebuilder needs no value
+
+- MAINT: Remove old iqd code
+
+- MAINT: Remove unused IVW file (old version)
 
 
 2.48 (2016-01-14)
