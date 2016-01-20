@@ -4,7 +4,7 @@ Change log for zeit.web
 2.51 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2604: Add webtrekk pixel to amp article template
 
 
 2.50 (2016-01-20)
