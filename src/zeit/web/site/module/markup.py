@@ -1,14 +1,14 @@
 import logging
 
 import zeit.web
-import zeit.web.site.module
+import zeit.web.core.module
 
 
 log = logging.getLogger(__name__)
 
 
 @zeit.web.register_module('markup')
-class Markup(zeit.web.site.module.Module, list):
+class Markup(zeit.web.core.module.Module, list):
 
     @zeit.web.reify
     def title(self):

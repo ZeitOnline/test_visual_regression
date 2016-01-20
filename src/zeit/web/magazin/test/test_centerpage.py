@@ -36,7 +36,9 @@ def test_get_reaches_from_centerpage_view(application):
 
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/test-cp-2015/index')
-    view = zeit.web.magazin.view_centerpage.Centerpage(cp, request)
+    block = zeit.web.core.utils.find_block(
+        cp, module='zmo-buzzbox')
+    module = zeit.web.core.template.get_module(block)
 
     buzz = module.area_buzz
 

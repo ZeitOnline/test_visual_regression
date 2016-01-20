@@ -25,7 +25,7 @@ import zeit.web.core.gallery
 import zeit.web.core.interfaces
 import zeit.web.core.template
 import zeit.web.core.utils
-import zeit.web.site.module
+import zeit.web.core.module
 
 
 log = logging.getLogger(__name__)

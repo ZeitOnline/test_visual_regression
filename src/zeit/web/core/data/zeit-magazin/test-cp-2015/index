@@ -50,10 +50,17 @@
     <supertitle>Test CP</supertitle>
     <title>Test CP</title>
     <subtitle>Das ist meine Test CP.</subtitle>
-    <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff7" visible="True" kind="solo">
-            <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
-                <container cp:type="cpextra" module="zmo-buzzbox" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11chfg">
-                    <cp_extra id="zmo-buzzbox"/>
+
+    <cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo">
+            <region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="buzzboard" title="Beliebt und Angesagt">
+                <container cp:type="cpextra" module="zmo-mostread" visible="True" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a003">
+                    <cp_extra id="zmo-mostread"/>
+                </container>
+                <container cp:type="cpextra" module="zmo-mostshared" visible="True" visible_mobile="True" cp:__name__="id-c7d8c767-9f68-4a29-8ce9-2cf09a68340a">
+                    <cp_extra id="zmo-mostshared"/>
+                </container>
+                <container cp:type="cpextra" module="zmo-mostcommented" visible="True" visible_mobile="True" cp:__name__="id-a067d15a-9fa8-4730-9c0f-56b406b586d6">
+                    <cp_extra id="zmo-mostcommented"/>
                 </container>
             </region>
         </cluster>

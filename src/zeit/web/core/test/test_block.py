@@ -9,7 +9,7 @@ import zope.interface.declarations
 
 import zeit.cms.interfaces
 import zeit.edit.interfaces
-import zeit.web.site.module
+import zeit.web.core.module
 import zeit.web.site.view_article
 
 
@@ -211,7 +211,7 @@ def test_image_should_be_none_if_expired():
 def test_module_class_should_hash_as_expected():
     context = mock.Mock()
     context.xml.attrib = {'{http://namespaces.zeit.de/CMS/cp}__name__': 42}
-    mod = zeit.web.site.module.Module(context)
+    mod = zeit.web.core.module.Module(context)
     assert hash(mod) == 42
 
 
@@ -220,7 +220,7 @@ def test_cpextra_module_should_have_a_layout_attribute():
     context.cpextra = 'lorem-ipsum'
     zope.interface.declarations.alsoProvides(
         context, zeit.content.cp.interfaces.ICPExtraBlock)
-    module = zeit.web.site.module.Module(context)
+    module = zeit.web.core.module.Module(context)
     assert module._layout.id == 'lorem-ipsum'
 
 
@@ -229,7 +229,7 @@ def test_vivi_module_should_have_a_layout_attribute():
     context.type = 'barbapapa'
     zope.interface.declarations.alsoProvides(
         context, zeit.edit.interfaces.IBlock)
-    module = zeit.web.site.module.Module(context)
+    module = zeit.web.core.module.Module(context)
     assert module._layout.id == 'barbapapa'
 
 

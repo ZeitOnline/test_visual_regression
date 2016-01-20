@@ -1,12 +1,12 @@
 import logging
 
 import zeit.web
-import zeit.web.site.module
+import zeit.web.core.module
 
 
 log = logging.getLogger(__name__)
 
 
 @zeit.web.register_module('adplace13')
-class AdPlace13(zeit.web.site.module.Module):
+class AdPlace13(zeit.web.core.module.Module):
     pass

@@ -6,7 +6,7 @@ import zeit.content.image.interfaces
 
 import zeit.web.core.image
 import zeit.web.site.area.rss
-import zeit.web.site.module
+import zeit.web.core.module
 
 
 log = logging.getLogger(__name__)
@@ -31,11 +31,11 @@ class Link(zeit.web.site.area.rss.RSSLink):
 
 
 @zeit.web.register_module('jobbox')
-class Jobbox(zeit.web.site.module.Module, list):
+class Jobbox(zeit.web.core.module.Module, list):
 
     def __init__(self, context):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         url = conf.get('academics_hp_feed')
         list.__init__(self, zeit.web.site.area.rss.parse_feed(url, 'jobbox'))
-        zeit.web.site.module.Module.__init__(self, context)
+        zeit.web.core.module.Module.__init__(self, context)
         self.title = "klaus"

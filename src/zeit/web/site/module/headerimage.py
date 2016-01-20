@@ -1,13 +1,13 @@
 import logging
 
-import zeit.web.site.module
+import zeit.web.core.module
 
 
 log = logging.getLogger(__name__)
 
 
 @zeit.web.register_module('headerimage')
-class HeaderImage(zeit.web.site.module.Module):
+class HeaderImage(zeit.web.core.module.Module):
 
     @zeit.web.reify
     def supertitle(self):

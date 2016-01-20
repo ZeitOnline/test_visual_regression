@@ -1,0 +1,32 @@
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
+
+{% set module_layout = 'buzzboard' %}
+
+{% block before_module_list %}
+	<section class="buzzboard">
+		<h3 class="buzzboard__headline">{{ area.title | default('Beliebte Artikel', true) }}</h3>
+{% endblock %}
+
+{% block module_list %}
+	{%- set modules = area.values() | map('get_module') | list %}
+
+	<table class="buzzboard__table buzzboard__table--col{{ modules | length }}">
+		<thead>
+			{% for module in modules -%}
+
+			<th>
+				{% if module.icon %}
+					{% set modifier = module.icon.strip('buzz-') -%}
+				{% endif %}
+				{{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), request) }}
+				{{ module.label | safe }}
+			</th>
+			{% endfor %}
+		</thead>
+
+	</table>
+{% endblock module_list %}
+
+{% block after_module_list %}
+	</section>
+{% endblock %}

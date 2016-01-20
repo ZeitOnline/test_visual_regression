@@ -4,14 +4,14 @@ import zeit.cms.interfaces
 import zeit.content.image.interfaces
 
 import zeit.web
-import zeit.web.site.module
+import zeit.web.core.module
 
 
 log = logging.getLogger(__name__)
 
 
 @zeit.web.register_module('printbox')
-class Printbox(zeit.web.site.module.Module, list):
+class Printbox(zeit.web.core.module.Module, list):
 
     def __init__(self, context):
         self.context = context
