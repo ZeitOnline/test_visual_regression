@@ -140,6 +140,14 @@ class Centerpage(
     """Main view class for ZEIT ONLINE centerpages."""
 
     @zeit.web.reify
+    def canonical_url(self):
+        url = super(Centerpage, self).canonical_url.replace(
+            'index.cp2015', 'index')  # XXX: remove soon (aps)
+        page = self.request.params.get('p', None)
+        param_str = '?p=' + page if page and page != '1' else ''
+        return url + param_str
+
+    @zeit.web.reify
     def has_cardstack(self):
         kwargs = {'cp:type': 'cardstack'}
         return bool(zeit.web.core.utils.find_block(self.context, **kwargs))
@@ -240,10 +248,13 @@ class Centerpage(
         ranking = self.area_ranking
         if ranking is None:
             return None
-        actual_index = ranking.current_page - 1
-        if actual_index - 1 >= 0:
+        # suppress page param for page 1
+        if ranking.current_page == 2:
+            return zeit.web.core.template.remove_get_params(
+                self.request.url, 'p')
+        elif ranking.current_page > 2:
             return zeit.web.core.template.append_get_params(
-                self.request, p=actual_index)
+                self.request, p=ranking.current_page - 1)
 
 
 @pyramid.view.view_config(
