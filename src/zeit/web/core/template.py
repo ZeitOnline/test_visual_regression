@@ -939,4 +939,4 @@ def provides(obj, iface):
 
 @zeit.web.register_global
 def get_random_number(length):
-    return random.randint(0, 10**length)
+    return random.randint(0, 10 ** length)
