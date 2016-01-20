@@ -4,6 +4,7 @@ import logging
 import uuid
 
 import grokcore.component
+import lxml.etree
 import pyramid.response
 import pyramid.view
 import zope.component
@@ -454,13 +455,17 @@ class LegacyCenterpage(Centerpage):
     def module_buzz_mostread(self):
         """Return buzz box module with the top 3 most read articles."""
 
-        return zeit.web.site.module.buzzbox.MostreadBuzzbox(self.context)
+        return zeit.content.cp.blocks.cpextra.CPExtraBlock(
+            self.context,
+            lxml.etree.fromstring('<container module="mostread"/>'))
 
     @zeit.web.reify
     def module_printbox(self):
         """Return the module block for the Printbox or Angebotsbox."""
 
-        return zeit.web.site.module.printbox.Printbox(self.context)
+        return zeit.content.cp.blocks.cpextra.CPExtraBlock(
+            self.context,
+            lxml.etree.fromstring('<container module="printbox"/>'))
 
     @zeit.web.reify
     def region_list_parquet(self):
