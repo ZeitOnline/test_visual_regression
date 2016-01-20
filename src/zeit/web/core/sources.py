@@ -20,12 +20,10 @@ import zeit.content.image.variant
 import zeit.imp.source
 import zeit.solr.interfaces
 
-import zeit.web.core.interfaces
 import zeit.web.core.utils
 import zeit.web.core.view
 
 
-video_series = None
 log = logging.getLogger(__name__)
 CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
