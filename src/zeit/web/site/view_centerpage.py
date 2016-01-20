@@ -214,15 +214,6 @@ class Centerpage(
         return breadcrumbs
 
     @zeit.web.reify
-    def last_semantic_change(self):
-        """Timestamp representing the last semantic change of the centerpage.
-        :rtype: datetime.datetime
-        """
-
-        return zeit.cms.content.interfaces.ISemanticChange(
-            self.context).last_semantic_change
-
-    @zeit.web.reify
     def topic_links(self):
         """Return topic links of a centerpage as a TopicLink object
         :rtype: zeit.web.core.centerpage.TopicLink
@@ -232,15 +223,7 @@ class Centerpage(
 
     @zeit.web.reify
     def ressort(self):
-        """Ressort of the centerpage or the string `homepage` if context is HP.
-        :rtype: str
-        """
-
-        if self.context.type == 'homepage':
-            return 'homepage'
-        elif self.context.ressort:
-            return self.context.ressort.lower()
-        return ''
+        return 'homepage' if self.is_hp else super(Centerpage, self).ressort
 
     @zeit.web.reify
     def area_ranking(self):

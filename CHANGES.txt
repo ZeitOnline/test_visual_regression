@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - FIX: scale crossword puzzle to full-width in print
 
+- ZON-2535: Start ZMO moveover
+
 
 2.49 (2016-01-19)
 -----------------
