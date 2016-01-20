@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import datetime
 import urllib2
 
 import lxml.html
@@ -17,16 +16,6 @@ import zeit.web.site.view_centerpage
 
 def get_num(x):
     return int(''.join(char for char in x.strip() if char.isdigit()))
-
-
-def test_centerpage_has_last_semantic_change_property(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/zeitonline')
-    view = zeit.web.site.view_centerpage.Centerpage(
-        context, pyramid.testing.DummyRequest())
-
-    assert isinstance(view.last_semantic_change, datetime.datetime)
-    assert view.last_semantic_change.strftime('%d %b %y') == '21 May 14'
 
 
 def test_buzz_mostread_should_render_correct_article_count(testbrowser):

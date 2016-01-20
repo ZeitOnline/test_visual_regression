@@ -10,6 +10,8 @@
         <li class="pager__page{% if num == area.current_page %} pager__page--current{% endif %}">
             {%- if num == area.current_page -%}
                 <span>{{ num }}</span>
+            {%- elif num == 1 -%}
+                <a href="{{ view.request.url | remove_get_params('p') }}">{{ num }}</a>
             {%- elif num -%}
                 <a href="{{ view.request | append_get_params(p=num) }}">{{ num }}</a>
             {%- else -%}
