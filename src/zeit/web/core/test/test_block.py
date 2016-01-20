@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import beaker
+import beaker.cache
 import lxml.etree
 import mock
 import copy

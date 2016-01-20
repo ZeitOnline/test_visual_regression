@@ -1253,7 +1253,8 @@ def test_instantarticle_representation_should_have_content(testbrowser):
     assert len(bro.cssselect('aside')) == 3
 
     assert 'Handlung, wohin man auch' in bro.cssselect('figcaption')[0].text
-    assert u'© Warner Bros.' == bro.cssselect('figure > cite')[0].text
+    assert u'© Warner Bros.' == bro.cssselect(
+        'figure > figcaption > cite')[0].text
 
 
 def test_instantarticle_should_wrap_with_cdata_if_asked(testbrowser):
@@ -1265,6 +1266,12 @@ def test_instantarticle_should_wrap_with_cdata_if_asked(testbrowser):
     browser = testbrowser(
         '/instantarticle/zeit-online/article/quotes')
     assert browser.contents.startswith('<!doctype')
+
+
+def test_instantarticle_should_have_tracking_iframe(testbrowser):
+    browser = testbrowser('/instantarticle/zeit-online/article/quotes')
+    assert browser.cssselect('figure.op-tracker')
+    assert browser.cssselect('iframe[src*="fbia/zeit-online/article/quotes"]')
 
 
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
@@ -1281,3 +1288,22 @@ def test_article_contains_zeit_clickcounter(testbrowser):
     assert len(counter) == 1
     assert ('cc.zeit.de/cc.gif?banner-channel=sport/article'
             ) in counter[0].get('src')
+
+
+def test_fbia_article_contains_meta_robots(testbrowser):
+    browser = testbrowser('/fbia/zeit-online/article/simple')
+    assert '<meta name="robots" content="noindex, follow">' in browser.contents
+
+
+def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
+    amp_link = browser.cssselect('link[rel=amphtml]')
+    assert amp_link
+    amp_url = amp_link[0].attrib['href']
+    assert amp_url.endswith('amp/zeit-online/article/zeit')
+
+    browser = testbrowser('/zeit-online/article/zeit/seite-2')
+    amp_link = browser.cssselect('link[rel=amphtml]')
+    assert amp_link
+    amp_url = amp_link[0].attrib['href']
+    assert amp_url.endswith('amp/zeit-online/article/zeit')

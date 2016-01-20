@@ -8,7 +8,7 @@
         </div>
     </div>
     {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
-    {% if view.webtrekk_enabled %}
+    {% if view.framebuilder_requires_webtrekk %}
         {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
     {% endif %}
     <script>
