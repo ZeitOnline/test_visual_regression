@@ -769,7 +769,11 @@ def get_image_group(asset):
 
 @zeit.web.register_filter
 def get_module(module, name=None):
-    if zeit.content.cp.interfaces.ICPExtraBlock.providedBy(module):
+    if zeit.web.core.interfaces.IBlock.providedBy(module):
+        return module
+    elif zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(module):
+        return module
+    elif zeit.content.cp.interfaces.ICPExtraBlock.providedBy(module):
         name = 'cpextra'
     elif zeit.edit.interfaces.IBlock.providedBy(module):
         name = 'type'

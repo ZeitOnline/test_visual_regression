@@ -32,7 +32,7 @@ import zeit.web.site.view
 log = logging.getLogger(__name__)
 
 
-@zope.interface.implementer(zeit.edit.interfaces.IBlock)
+@zope.interface.implementer(zeit.web.core.interfaces.IBlock)
 class LegacyModule(zeit.web.site.module.Module, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
