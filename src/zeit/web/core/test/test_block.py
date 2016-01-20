@@ -4,6 +4,7 @@ import lxml.etree
 import mock
 import copy
 
+import pyramid_dogpile_cache2
 import pyramid.testing
 import zope.interface.declarations
 
@@ -237,13 +238,13 @@ def test_block_liveblog_instance_causing_timeouts(application, mockserver,
                                                   monkeypatch):
 
     # Disable caching
-    new_cache = copy.copy(zeit.web.core.cache.CACHE_REGIONS)
+    new_cache = copy.copy(pyramid_dogpile_cache2.CACHE_REGIONS)
     new_cache['long_term'] = dogpile.cache.make_region(
         'long_term',
-        function_key_generator=zeit.web.core.cache.key_generator,
-        key_mangler=zeit.web.core.cache.sha1_mangle_key).configure(
+        function_key_generator=pyramid_dogpile_cache2.cache.key_generator,
+        key_mangler=pyramid_dogpile_cache2.cache.sha1_mangle_key).configure(
             'dogpile.cache.null')
-    monkeypatch.setattr(zeit.web.core.cache, 'CACHE_REGIONS', new_cache)
+    monkeypatch.setattr(pyramid_dogpile_cache2, 'CACHE_REGIONS', new_cache)
     model_block = mock.Mock()
     model_block.blog_id = '158'
     liveblog = zeit.web.core.block.Liveblog(model_block)

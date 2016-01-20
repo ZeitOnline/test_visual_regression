@@ -232,6 +232,10 @@ class Base(object):
         return self.request.path_info
 
     @zeit.web.reify
+    def package(self):
+        return '.'.join(self.__class__.__module__.split('.')[:3])
+
+    @zeit.web.reify
     def banner_channel(self):
         # manually banner_id rules first
         if self.context.banner_id is not None:

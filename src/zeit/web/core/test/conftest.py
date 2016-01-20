@@ -16,6 +16,7 @@ import plone.testing.zodb
 import pyramid.response
 import pyramid.static
 import pyramid.testing
+import pyramid_dogpile_cache2
 import pysolr
 import pytest
 import repoze.bitblt.processor
@@ -312,8 +313,7 @@ def reset_solr(application_session, request):
 
 @pytest.fixture
 def reset_cache(application_session, request):
-    for region in zeit.web.core.cache.CACHE_REGIONS.values():
-        region.backend._cache.clear()
+    pyramid_dogpile_cache2.clear()
 
 
 @pytest.fixture
