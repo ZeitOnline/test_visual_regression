@@ -1,3 +1,5 @@
+import pytest
+import requests
 import zope.component
 
 import zeit.content.cp.centerpage
@@ -135,3 +137,30 @@ def test_rendering_centerpage_should_cache_region_and_area_values(
     assert call_count['region'] == 1
     # Region has 2 Areas.
     assert call_count['area'] == 2
+
+
+def test_ranking_pagination_should_redirect_page_one(testserver):
+    resp = requests.get('%s/thema/test?p=1' % testserver.url,
+                        allow_redirects=False)
+    assert resp.headers['location'] == '%s/thema/test' % testserver.url
+    assert resp.status_code == 301
+
+
+@pytest.mark.xfail(reason='Not implemented yet.')
+def test_ranking_pagination_should_not_find_out_of_scope_page(testserver):
+    resp = requests.get('%s/thema/test?p=3214' % testserver.url,
+                        allow_redirects=False)
+    assert resp.url == '%s/thema/test?p=3214' % testserver.url
+    assert resp.status_code == 404
+
+
+def test_ranking_pagination_should_omit_default_page_param(testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/artikel/{:0>2d}'.format(i % 10 + 1)}
+        for i in range(12)]
+    browser = testbrowser('/thema/test?p=2')
+    prev = browser.cssselect('head link[rel="prev"]')[0]
+    link = browser.cssselect('.pager__pages a')[0]
+    assert prev.get('href').endswith('/thema/test')
+    assert link.get('href').endswith('/thema/test')
