@@ -36,9 +36,10 @@
     &lt;/klass&gt;
     &lt;arguments&gt;
       &lt;tuple&gt;
-        &lt;global name=&quot;CenterPage&quot; module=&quot;zeit.content.cp.centerpage&quot;/&gt;
-        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
-        &lt;global name=&quot;IZMOContent&quot; module=&quot;zeit.magazin.interfaces&quot;/&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2009" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
