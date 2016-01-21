@@ -1,10 +1,12 @@
-import requests
-import requests.exceptions
-import requests_file
-import lxml.objectify
 import zope.interface
 
+import zc.sourcefactory.source
+
 import zeit.web.core.interfaces
+import zeit.web.core.cache
+
+
+CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IPlace)
@@ -72,83 +74,81 @@ class IqdMobileList(object):
                 getattr(iqd_id, page_type).get('bottom')
 
 
-banner_list = None
-iqd_mobile_ids = None
-banner_id_mappings = None
+class BruceBannerSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'banner-source'
+
+    @CONFIG_CACHE.cache_on_arguments()
+    def getValues(self, context):
+        banner_list = []
+
+        for place in self._get_tree().iterfind('place'):
+            sizes = place.find('multiple_sizes')
+            if sizes:
+                sizes = sizes.text.strip().split(',')
+            else:
+                width = place.find('width').text
+                height = place.find('height').text
+                sizes = ['{}x{}'.format(width, height)]
+
+            diuqilon = True if place.find('diuqilon') else False
+            adlabel = place.find('adlabel').text if (
+                place.find('adlabel')) else None
+            dcopt = place.find('dcopt').text if place.find('dcopt') else None
+            banner_list.append(
+                zeit.web.core.banner.Place(
+                    place.tile,
+                    sizes,
+                    diuqilon,
+                    adlabel,
+                    min_width=place.find('min_width').text,
+                    active=place.get('active'),
+                    dcopt=dcopt))
+        return sorted(banner_list, key=lambda place: place.tile)
+
+BANNER_SOURCE = BruceBannerSource()(None)
 
 
-def make_banner_list(banner_config):
-    if not banner_config:
-        return []
-    # XXX requests does not seem to allow to mount stuff as a default, sigh.
-    session = requests.Session()
-    session.mount('file://', requests_file.FileAdapter())
-    banner_list = []
-    try:
-        banner_file = session.get(banner_config, stream=True, timeout=2)
-        # Analoguous to requests.api.request().
-        session.close()
-    except requests.exceptions.RequestException:
-        return banner_list
-    root = lxml.objectify.parse(banner_file.raw).getroot()
-    for place in root.place:
-        try:
-            sizes = str(place.multiple_sizes).strip().split(',')
-        except AttributeError:
-            sizes = [str(place.width) + 'x' + str(place.height)]
-        try:
-            diuqilon = place.diuqilon
-        except AttributeError:
-            diuqilon = False
-        try:
-            adlabel = place.adlabel
-        except AttributeError:
-            adlabel = None
-        try:
-            dcopt = place.dcopt
-        except AttributeError:
-            dcopt = None
-        banner_list.append(Place(
-            place.tile, sizes, diuqilon, adlabel,
-            min_width=place.min_width, active=place.get('active'),
-            dcopt=dcopt))
-    return sorted(banner_list, key=lambda place: place.tile)
+class IqdMobileIdsSource(zeit.cms.content.sources.SimpleContextualXMLSource):
 
+    product_configuration = 'zeit.web'
+    config_url = 'iqd-mobile-ids-source'
 
-def make_iqd_mobile_ids(banner_config):
-    if not banner_config:
-        return {}
-    # XXX requests does not seem to allow to mount stuff as a default, sigh.
-    session = requests.Session()
-    session.mount('file://', requests_file.FileAdapter())
-    iqd_mobile_ids = {}
-    try:
-        banner_file = session.get(banner_config, stream=True, timeout=2)
-        # Analoguous to requests.api.request().
-        session.close()
-    except requests.exceptions.RequestException:
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+        @property
+        def ids(self):
+            return self.factory.compile_ids()
+
+    @CONFIG_CACHE.cache_on_arguments()
+    def compile_ids(self):
+        iqd_mobile_ids = {}
+        for iqd_id in self._get_tree().iterfind('iqd_id'):
+            try:
+                iqd_mobile_ids[iqd_id.get('ressort')] = (
+                    zeit.web.core.banner.IqdMobileList(iqd_id))
+            except:
+                pass
         return iqd_mobile_ids
-    root = lxml.objectify.parse(banner_file.raw).getroot()
-    for iqd_id in root.iqd_id:
-        try:
-            iqd_mobile_ids[iqd_id.get('ressort')] = IqdMobileList(iqd_id)
-        except:
-            pass
-    return iqd_mobile_ids
+
+IQD_MOBILE_IDS_SOURCE = IqdMobileIdsSource()(None)
 
 
-def make_banner_id_mappings(banner_id_mappings_source):
-    try:
-        banner_id_mappings_xml = lxml.etree.parse(banner_id_mappings_source)
-    except (TypeError, IOError):
-        return list()
-    banner_id_mappings = banner_id_mappings_xml.xpath(
-        '/banner_id_mappings/mapping')
-    mapping_list = list()
-    for mapping in banner_id_mappings:
-        target = mapping.xpath('@target')[0]
-        value = mapping.xpath('@value')[0]
-        banner_code = mapping.xpath('@banner_code')[0]
-        mapping_list.append(
-            dict(target=target, value=value, banner_code=banner_code))
-    return mapping_list
+class BannerIdMappingsSource(
+        zeit.cms.content.sources.SimpleContextualXMLSource):
+
+    product_configuration = 'zeit.web'
+    config_url = 'banner-id-mappings-source'
+
+    @CONFIG_CACHE.cache_on_arguments()
+    def getValues(self, context):
+        mapping_list = list()
+        for mapping in self._get_tree().iterfind('mapping'):
+            target = mapping.get('target')
+            value = mapping.get('value')
+            banner_code = mapping.get('banner_code')
+            mapping_list.append(
+                dict(target=target, value=value, banner_code=banner_code))
+        return mapping_list
+
+BANNER_ID_MAPPINGS_SOURCE = BannerIdMappingsSource()(None)

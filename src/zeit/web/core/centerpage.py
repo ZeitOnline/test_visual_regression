@@ -1,7 +1,7 @@
 import logging
 
 import grokcore.component
-import zope.component
+import zope.interface
 
 import zeit.cms.interfaces
 import zeit.content.author.interfaces
@@ -9,13 +9,11 @@ import zeit.content.cp.area
 import zeit.content.cp.blocks.teaser
 import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
-import zeit.content.image.imagegroup
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
 import zeit.find.search
 
 import zeit.web
-import zeit.web.core.block
 import zeit.web.core.interfaces
 import zeit.web.core.utils
 
@@ -116,6 +114,26 @@ def cache_values_area(context):
     context._v_values = context.values()
     context.values = cached_values.__get__(context)
     return context
+
+
+class TeaserMapping(zeit.web.core.utils.frozendict):
+
+    _map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama',
+                          'parquet-large', 'zon-parquet-large'],
+            'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date',
+                          'parquet-regular', 'zon-parquet-small'],
+            'zon-fullwidth': ['leader-fullwidth'],
+            'zon-inhouse': ['parquet-verlag'],
+            'hide': ['archive-print-volume', 'archive-print-year',
+                     'two-side-by-side', 'ressort', 'leader-upright',
+                     'buttons-fullwidth', 'parquet-printteaser']}
+
+    def __init__(self, *args, **kw):
+        # Flattens and reverses _map, so we can easily lookup a layout.
+        super(TeaserMapping, self).__init__(
+            x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
+
+TEASER_MAPPING = TeaserMapping()
 
 
 class TeaserSequence(object):

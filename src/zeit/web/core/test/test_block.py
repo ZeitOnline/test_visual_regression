@@ -297,8 +297,8 @@ def test_find_nextread_empty_string_subressort(application):
     def find(self, *args, **kw):
         calls.append(object())
         return original_find(self, *args, **kw)
-    original_find = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find
-    zeit.web.core.sources.RESSORTFOLDER_SOURCE.find = find
+    original_find = zeit.web.core.article.RESSORTFOLDER_SOURCE.find
+    zeit.web.core.article.RESSORTFOLDER_SOURCE.find = find
     assert 'jobs' in zeit.web.core.block.find_nextread_folder(
         'Wirtschaft', '')
     assert len(calls) == 1

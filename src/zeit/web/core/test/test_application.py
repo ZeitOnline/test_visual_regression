@@ -144,3 +144,9 @@ def test_transaction_aborts_after_request(testserver, testbrowser):
 def test_assets_have_configurable_cache_control_header(testbrowser):
     b = testbrowser('/static/latest/css/web.site/screen.css')
     assert b.headers['Cache-control'] == 'max-age=1'
+
+
+def test_feature_toggle_source_should_be_parsed(application):
+    assert zeit.web.core.application.FEATURE_TOGGLES.find('article_lineage')
+    assert not zeit.web.core.application.FEATURE_TOGGLES.find('dummy')
+    assert not zeit.web.core.application.FEATURE_TOGGLES.find('nonexistent')

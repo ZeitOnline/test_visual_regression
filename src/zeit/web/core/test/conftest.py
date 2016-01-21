@@ -2,6 +2,7 @@
 from StringIO import StringIO
 import copy
 import json
+import logging
 import os.path
 import pkg_resources
 
@@ -32,11 +33,15 @@ import zope.processlifetime
 import zope.testbrowser.browser
 
 import zeit.content.image.interfaces
+import zeit.solr.interfaces
 
 import zeit.web.core
 import zeit.web.core.application
 import zeit.web.core.routing
 import zeit.web.core.view
+
+
+log = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope='session')
@@ -49,7 +54,7 @@ def app_settings(mockserver):
         'pyramid.debug_templates': False,
         'dogpile_cache.backend': 'dogpile.cache.memory',
         'dogpile_cache.regions': (
-            'default_term, short_term, long_term, session'),
+            'default_term, short_term, long_term, session, config'),
         'dogpile_cache.short_term.expiration_time': '60',
         'dogpile_cache.default_term.expiration_time': '300',
         'dogpile_cache.long_term.expiration_time': '3600',
@@ -119,7 +124,7 @@ def app_settings(mockserver):
         'vivi_zeit.cms_task-queue-async': 'not-applicable',
         'vivi_zeit.cms_whitelist-url': (
             'egg://zeit.web.core/data/config/whitelist.xml'),
-        'vivi_zeit.web_iqd-mobile-ids': (
+        'vivi_zeit.web_iqd-mobile-ids-source': (
             'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
         'vivi_zeit.web_image-scales': (
             'egg://zeit.web.core/data/config/scales.xml'),
@@ -152,17 +157,17 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
         'vivi_zeit.web_banner-source': (
             'egg://zeit.web.core/data/config/banner.xml'),
-        'vivi_zeit.web_banner-id-mappings': (
+        'vivi_zeit.web_banner-id-mappings-source': (
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
-        'vivi_zeit.web_navigation': (
+        'vivi_zeit.web_navigation-source': (
             'egg://zeit.web.core/data/config/navigation.xml'),
-        'vivi_zeit.web_navigation-services': (
+        'vivi_zeit.web_navigation-services-source': (
             'egg://zeit.web.core/data/config/navigation-services.xml'),
-        'vivi_zeit.web_navigation-classifieds': (
+        'vivi_zeit.web_navigation-classifieds-source': (
             'egg://zeit.web.core/data/config/navigation-classifieds.xml'),
-        'vivi_zeit.web_navigation-footer-publisher': (
+        'vivi_zeit.web_navigation-footer-publisher-source': (
             'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
-        'vivi_zeit.web_navigation-footer-links': (
+        'vivi_zeit.web_navigation-footer-links-source': (
             'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
         'vivi_zeit.web_servicebox-source': (
             'egg://zeit.web.core/data/config/servicebox.xml'),
@@ -762,7 +767,7 @@ def datasolr(request):
     previous = zope.component.queryUtility(zeit.solr.interfaces.ISolr)
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.sources.Solr())
+    zope.component.provideUtility(zeit.web.core.utils.DataSolr())
 
 
 @pytest.fixture(scope='session')
