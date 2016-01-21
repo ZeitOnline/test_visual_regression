@@ -4,7 +4,9 @@ Change log for zeit.web
 2.51 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2573: Refactor banner config to XML sources
+
+- ZON-2574: Refactor navigation config to XML sources
 
 
 2.50 (2016-01-20)

@@ -1,4 +1,3 @@
-import zeit.web.core.application
 import zeit.web.core.navigation
 
 
@@ -8,7 +7,7 @@ def test_navigation_item_should_accept_parameters():
     assert nav_item.item_id == 'foo'
     assert nav_item.text == 'bla'
     assert nav_item.href == 'fasel'
-    assert nav_item.navigation_items == {}
+    assert nav_item == {}
 
 
 def test_navigation_items_should_be_extensible():
@@ -23,7 +22,7 @@ def test_navigation_items_should_be_extensible():
 
 
 def test_navigation_items_should_be_addable_to_navigation():
-    nav = zeit.web.core.navigation.Navigation()
+    nav = zeit.web.core.navigation.NavigationItem('top', '', '')
     nav_item_inner = zeit.web.core.navigation.NavigationItem(
         'inner_foo', 'inner_bla', 'inner_fasel')
     nav['inner_foo'] = nav_item_inner
@@ -33,12 +32,36 @@ def test_navigation_items_should_be_addable_to_navigation():
 
 
 # This may break on config changes, so we might add some dummy data.
-def test_make_navigation_should_register_navigation_items():
-    navigation_config = zeit.web.core.application.maybe_convert_egg_url(
-        'egg://zeit.web.core/data/config/navigation.xml')
-    navigation = zeit.web.core.navigation.make_navigation(navigation_config)
+def test_navigation_should_be_registered(application):
+    navigation = zeit.web.core.navigation.NAVIGATION_SOURCE.navigation
     assert (navigation['topnav.mainnav.4..kultur'].href ==
             'http://xml.zeit.de/kultur/index')
     assert (navigation[
             'topnav.mainnav.4..kultur']['topnav.mainnav.4.4.kunst'].text ==
             'Kunst')
+
+
+def test_navigation_source_should_be_parsed(application):
+    navigation = zeit.web.core.navigation.NAVIGATION_SOURCE
+    assert len(navigation.navigation) == 15
+    assert len(navigation.by_name) == 15
+
+
+def test_navigation_classifieds_source_should_be_parsed(application):
+    navigation = zeit.web.core.navigation.NAVIGATION_CLASSIFIEDS_SOURCE
+    assert len(navigation.navigation) == 10
+
+
+def test_navigation_services_source_should_be_parsed(application):
+    navigation = zeit.web.core.navigation.NAVIGATION_SERVICES_SOURCE
+    assert len(navigation.navigation) == 4
+
+
+def test_navigation_footer_publisher_source_should_be_parsed(application):
+    navigation = zeit.web.core.navigation.NAVIGATION_FOOTER_PUBLISHER_SOURCE
+    assert len(navigation.navigation) == 3
+
+
+def test_navigation_footer_links_source_should_be_parsed(application):
+    navigation = zeit.web.core.navigation.NAVIGATION_FOOTER_LINKS_SOURCE
+    assert len(navigation.navigation) == 2

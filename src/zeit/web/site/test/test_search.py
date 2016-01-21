@@ -1,7 +1,6 @@
 import datetime
 
 import pytest
-import pysolr
 import zope.component
 
 import zeit.cms.interfaces
@@ -10,7 +9,6 @@ import zeit.content.cp.interfaces
 import zeit.web.site.module.search_form
 import zeit.web.core.centerpage
 import zeit.web.core.utils
-import zeit.web.core.sources
 
 
 @pytest.fixture
@@ -163,11 +161,9 @@ def test_search_area_should_produce_valid_set_of_search_results(search_area):
     assert list(search_area.values()[0])[0].uniqueId == 'foo://zeit.de'
 
 
-def test_empty_search_result_should_produce_zero_hit_counter(
-        monkeypatch, search_area):
-    def search(self, q, **kw):
-        return pysolr.Results([], 0)
-    monkeypatch.setattr(zeit.web.core.sources.Solr, 'search', search)
+def test_empty_search_result_should_produce_zero_hit_counter(search_area):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = []
     assert search_area.hits == 0
 
 
@@ -209,8 +205,9 @@ def test_successful_search_result_should_render_in_browser(
     assert browser.cssselect('.cp-area--ranking .teaser-small')
 
 
-def test_mock_solr_should_produce_usable_results(application):
-    conn = zeit.web.core.sources.Solr()
+def test_data_solr_should_produce_usable_results(application):
+    import zeit.web.core.test.conftest
+    conn = zeit.web.core.test.conftest.DataSolr()
     try:
         conn.update_raw(None)
     except Exception as err:

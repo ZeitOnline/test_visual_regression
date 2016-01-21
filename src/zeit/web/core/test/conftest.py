@@ -2,8 +2,12 @@
 from StringIO import StringIO
 import copy
 import json
+import logging
 import os.path
 import pkg_resources
+import random
+import urllib
+import urlparse
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
 from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
@@ -31,12 +35,19 @@ import zope.interface
 import zope.processlifetime
 import zope.testbrowser.browser
 
+import zeit.cms.interfaces
+import zeit.cms.content.interfaces
+import zeit.cms.workflow.interfaces
 import zeit.content.image.interfaces
+import zeit.solr.interfaces
 
 import zeit.web.core
 import zeit.web.core.application
 import zeit.web.core.routing
 import zeit.web.core.view
+
+
+log = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope='session')
@@ -49,7 +60,7 @@ def app_settings(mockserver):
         'pyramid.debug_templates': False,
         'dogpile_cache.backend': 'dogpile.cache.memory',
         'dogpile_cache.regions': (
-            'default_term, short_term, long_term, session'),
+            'default_term, short_term, long_term, session, config'),
         'dogpile_cache.short_term.expiration_time': '60',
         'dogpile_cache.default_term.expiration_time': '300',
         'dogpile_cache.long_term.expiration_time': '3600',
@@ -119,7 +130,7 @@ def app_settings(mockserver):
         'vivi_zeit.cms_task-queue-async': 'not-applicable',
         'vivi_zeit.cms_whitelist-url': (
             'egg://zeit.web.core/data/config/whitelist.xml'),
-        'vivi_zeit.web_iqd-mobile-ids': (
+        'vivi_zeit.web_iqd-mobile-ids-source': (
             'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
         'vivi_zeit.web_image-scales': (
             'egg://zeit.web.core/data/config/scales.xml'),
@@ -152,17 +163,17 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
         'vivi_zeit.web_banner-source': (
             'egg://zeit.web.core/data/config/banner.xml'),
-        'vivi_zeit.web_banner-id-mappings': (
+        'vivi_zeit.web_banner-id-mappings-source': (
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
-        'vivi_zeit.web_navigation': (
+        'vivi_zeit.web_navigation-source': (
             'egg://zeit.web.core/data/config/navigation.xml'),
-        'vivi_zeit.web_navigation-services': (
+        'vivi_zeit.web_navigation-services-source': (
             'egg://zeit.web.core/data/config/navigation-services.xml'),
-        'vivi_zeit.web_navigation-classifieds': (
+        'vivi_zeit.web_navigation-classifieds-source': (
             'egg://zeit.web.core/data/config/navigation-classifieds.xml'),
-        'vivi_zeit.web_navigation-footer-publisher': (
+        'vivi_zeit.web_navigation-footer-publisher-source': (
             'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
-        'vivi_zeit.web_navigation-footer-links': (
+        'vivi_zeit.web_navigation-footer-links-source': (
             'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
         'vivi_zeit.web_servicebox-source': (
             'egg://zeit.web.core/data/config/servicebox.xml'),
@@ -757,12 +768,60 @@ class MockSolr(object):
         self._results = value
 
 
+@zope.interface.implementer(zeit.solr.interfaces.ISolr)
+class DataSolr(object):
+    """Fake Solr implementation that is used for local development."""
+
+    def search(self, q, rows=10, **kw):
+        parts = urlparse.urlparse('egg://zeit.web.core/data')
+        repo = pkg_resources.resource_filename(parts.netloc, parts.path[1:])
+        results = []
+        for root, subdirs, files in os.walk(repo):
+            if not random.getrandbits(1):
+                continue  # Skip some folders to speed things up.
+            for filename in files:
+                try:
+                    name = filename.replace('.meta', '')
+                    unique_id = os.path.join(
+                        root.replace(repo, 'http://xml.zeit.de'), name)
+                    content = zeit.cms.interfaces.ICMSContent(unique_id)
+                    publish = zeit.cms.workflow.interfaces.IPublishInfo(
+                        content)
+                    semantic = zeit.cms.content.interfaces.ISemanticChange(
+                        content)
+                    assert zeit.web.core.view.known_content(content)
+                    results.append({
+                        u'date_last_published': (
+                            publish.date_last_published.isoformat()),
+                        u'date_first_released': (
+                            publish.date_first_released.isoformat()),
+                        u'last-semantic-change': (
+                            semantic.last_semantic_change.isoformat()),
+                        u'lead_candidate': False,
+                        u'product_id': content.product.id,
+                        u'supertitle': content.supertitle,
+                        u'title': content.title,
+                        u'type': content.__class__.__name__.lower(),
+                        u'uniqueId': content.uniqueId
+                    })
+                except (AttributeError, AssertionError, TypeError):
+                    continue
+
+        log.debug('Mocking solr request ' + urllib.urlencode(
+            kw.items() + [('q', q), ('rows', rows)], True))
+        return pysolr.Results(
+            random.sample(results, min(rows, len(results))), len(results))
+
+    def update_raw(self, xml, **kw):
+        pass
+
+
 @pytest.fixture
 def datasolr(request):
     previous = zope.component.queryUtility(zeit.solr.interfaces.ISolr)
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.sources.Solr())
+    zope.component.provideUtility(DataSolr())
 
 
 @pytest.fixture(scope='session')
