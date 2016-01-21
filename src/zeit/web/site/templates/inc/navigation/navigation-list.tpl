@@ -7,7 +7,7 @@ itemtype="http://schema.org/SiteNavigationElement"
 {% endif %}>
 	{% for i in items -%}
 	{% set section = items[i] %}
-    {% set id = section.item_id | pop_from_dotted_name %}
+	{% set id = section.item_id | pop_from_dotted_name %}
 	<li class="{{ class }}__item{% if section.label %} {{ class }}__item--has-label{% endif %}" data-id="{{ id if id else section.item_id }}" {% if section.has_children() %} data-feature="dropdown"{% endif %}{% if section.label %} data-label="{{ section.label }}"{% endif %}>
 		<a class="{{ class }}__link{% if id in (view.ressort,
         view.sub_ressort) %} {{ class }}__link--current{% endif %}" href="{{
