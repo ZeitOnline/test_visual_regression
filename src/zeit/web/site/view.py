@@ -122,12 +122,12 @@ class Base(zeit.web.core.view.Base):
         if self.ressort == 'administratives':
             return ''
 
-        items = self.navigation.navigation_items
+        items = self.navigation
         try:
             item = next((items[key].text, key) for key in items.keys() if (
                         self.ressort in key))
             if self.sub_ressort != '' and len(items[item[1]]):
-                items = items[item[1]].navigation_items
+                items = items[item[1]].items()
                 item = next((items[key].text, key) for key in items.keys() if (
                             self.sub_ressort in key))
         except StopIteration:

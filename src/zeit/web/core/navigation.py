@@ -10,33 +10,9 @@ import zeit.web.core.cache
 CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 
-class Navigation(object):
-    """A navigation bar containing navigation items"""
-
-    def __init__(self):
-        self.navigation_items = collections.OrderedDict()
-
-    def __contains__(self, item):
-        return item in self.navigation_items
-
-    def __iter__(self):
-        return iter(self.navigation_items)
-
-    def __setitem__(self, key, value):
-        self.navigation_items[key] = value
-
-    def __getitem__(self, key):
-        return self.navigation_items[key]
-
-    def __delitem__(self, key):
-        del self.navigation_items[key]
-
-    def __len__(self):
-        return len(self.navigation_items)
-
-
-class NavigationItem(Navigation):
-    """Navigation items linking to different sections and sub sections"""
+class NavigationItem(collections.OrderedDict):
+    """The navigation is a tree structure, i.e. items may contain other items.
+    """
 
     def __init__(self, item_id, text, href, label=None):
         super(NavigationItem, self).__init__()
@@ -63,10 +39,9 @@ class NavigationSource(zeit.cms.content.sources.SimpleContextualXMLSource):
 
     @CONFIG_CACHE.cache_on_arguments()
     def compile_navigation(self):
-        navigation = Navigation()
+        navigation = NavigationItem('root', '', '')
         root = self._get_tree()
         self._register_navigation_items(navigation, root.iterfind('section'))
-
         return navigation
 
     def _register_navigation_items(self, navigation, node):
@@ -86,7 +61,7 @@ class NavigationSource(zeit.cms.content.sources.SimpleContextualXMLSource):
 
     @CONFIG_CACHE.cache_on_arguments()
     def compile_navigation_by_name(self):
-        navigation_links = Navigation()
+        navigation_links = NavigationItem('root', '', '')
         navigation = self.compile_navigation()
         for n in navigation:
             nav_item = navigation[n]
