@@ -73,7 +73,7 @@ class Base(zeit.web.core.view.Base):
             if segment == u'reisen':
                 segment = u'reise'
             try:
-                nav_item = zeit.web.core.sources.NAVIGATION_SOURCE.by_name[
+                nav_item = zeit.web.core.navigation.NAVIGATION_SOURCE.by_name[
                     segment]
                 breadcrumbs.extend([(nav_item['text'], nav_item['link'])])
             except KeyError:

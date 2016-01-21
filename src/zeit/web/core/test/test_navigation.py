@@ -1,4 +1,3 @@
-import zeit.web.core.application
 import zeit.web.core.navigation
 
 
@@ -34,9 +33,35 @@ def test_navigation_items_should_be_addable_to_navigation():
 
 # This may break on config changes, so we might add some dummy data.
 def test_navigation_should_be_registered(application):
-    navigation = zeit.web.core.sources.NAVIGATION_SOURCE.navigation
+    navigation = zeit.web.core.navigation.NAVIGATION_SOURCE.navigation
     assert (navigation['topnav.mainnav.4..kultur'].href ==
             'http://xml.zeit.de/kultur/index')
     assert (navigation[
             'topnav.mainnav.4..kultur']['topnav.mainnav.4.4.kunst'].text ==
             'Kunst')
+
+
+def test_navigation_source_should_be_parsed(application):
+    navigation = zeit.web.core.navigation.NAVIGATION_SOURCE
+    assert len(navigation.navigation.navigation_items) == 15
+    assert len(navigation.by_name.navigation_items) == 15
+
+
+def test_navigation_classifieds_source_should_be_parsed(application):
+    navigation = zeit.web.core.navigation.NAVIGATION_CLASSIFIEDS_SOURCE
+    assert len(navigation.navigation.navigation_items) == 10
+
+
+def test_navigation_services_source_should_be_parsed(application):
+    navigation = zeit.web.core.navigation.NAVIGATION_SERVICES_SOURCE
+    assert len(navigation.navigation.navigation_items) == 4
+
+
+def test_navigation_footer_publisher_source_should_be_parsed(application):
+    navigation = zeit.web.core.navigation.NAVIGATION_FOOTER_PUBLISHER_SOURCE
+    assert len(navigation.navigation.navigation_items) == 3
+
+
+def test_navigation_footer_links_source_should_be_parsed(application):
+    navigation = zeit.web.core.navigation.NAVIGATION_FOOTER_LINKS_SOURCE
+    assert len(navigation.navigation.navigation_items) == 2

@@ -4,7 +4,6 @@ import logging
 import uuid
 
 import grokcore.component
-import pyramid.response
 import pyramid.view
 import zope.component
 import zope.component.interfaces
@@ -13,15 +12,14 @@ import zope.interface
 import zeit.cms.interfaces
 import zeit.content.cp.area
 import zeit.content.cp.interfaces
-import zeit.content.cp.layout
 
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
+import zeit.web.core.navigation
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
-import zeit.web.site.area.spektrum
 import zeit.web.site.module
 import zeit.web.site.module.buzzbox
 import zeit.web.site.module.printbox
@@ -174,7 +172,7 @@ class Centerpage(
         if self.ressort in ('angebote', 'administratives', 'news'):
             # Hamburg news
             if self.ressort == 'news' and self.sub_ressort == 'hamburg':
-                nav_item = zeit.web.core.sources.NAVIGATION_SOURCE.by_name[
+                nav_item = zeit.web.core.navigation.NAVIGATION_SOURCE.by_name[
                     self.sub_ressort]
                 breadcrumbs.extend([(nav_item['text'], nav_item['link'])])
                 breadcrumbs.extend([('Aktuell', None)])
