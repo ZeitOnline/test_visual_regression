@@ -7,8 +7,7 @@
 {%- endmacro %}
 
 {% macro build_footer_bar(view, navigation, class, publisher=False) -%}
-    {% for i in navigation -%}
-        {% set section = navigation[i] %}
+    {% for section in navigation.values() -%}
         {% set row_loop = loop %}
 
         {% if (loop.index == 1) or (publisher and loop.index % 2 == 0) or (not publisher and loop.index % 2 == 1) -%}
@@ -23,8 +22,7 @@
                 {%- endif %}
 
                 {% if section | length -%}
-                    {% for j in section -%}
-                        {% set item = section[j] -%}
+                    {% for item in section.values() -%}
 
                         {# "Bildrechte" is not semantically marked, but has a JS Event Trigger #}
                         {% if item.href == '#bildrechte' %}
