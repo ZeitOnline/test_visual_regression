@@ -355,7 +355,6 @@ class BaseVideo(object):
         self.video_still = video.video_still
         self.title = video.title
         self.description = video.subtitle
-        self.title = video.title
         self.id = video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
 
