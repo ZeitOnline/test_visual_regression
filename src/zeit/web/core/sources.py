@@ -9,25 +9,6 @@ log = logging.getLogger(__name__)
 CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 
-class VideoSeriesSource(zeit.cms.content.sources.SimpleXMLSource):
-
-    product_configuration = 'zeit.web'
-    config_url = 'series-source'
-
-    def getValues(self):
-        try:
-            tree = self._get_tree()
-        except (TypeError, IOError):
-            return []
-        videoseries = tree.xpath('/allseries/videoseries/series')
-        result = []
-        for node in videoseries:
-            result.append(dict(url=node.get('url'), title=node.get('title')))
-        return result
-
-VIDEO_SERIES = VideoSeriesSource()
-
-
 class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):
 
     product_configuration = (
