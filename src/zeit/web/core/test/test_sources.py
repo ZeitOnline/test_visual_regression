@@ -34,7 +34,7 @@ def test_banner_id_mappings_source_should_be_parsed(application):
 def test_navigation_source_should_be_parsed(application):
     navigation = zeit.web.core.sources.NAVIGATION_SOURCE
     assert len(navigation.navigation.navigation_items) == 15
-    assert len(navigation.navigation_by_name.navigation_items) == 15
+    assert len(navigation.by_name.navigation_items) == 15
 
 
 def test_navigation_classifieds_source_should_be_parsed(application):

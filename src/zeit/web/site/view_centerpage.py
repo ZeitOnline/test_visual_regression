@@ -174,9 +174,8 @@ class Centerpage(
         if self.ressort in ('angebote', 'administratives', 'news'):
             # Hamburg news
             if self.ressort == 'news' and self.sub_ressort == 'hamburg':
-                nav_item = (
-                    zeit.web.core.sources.NAVIGATION_SOURCE.navigation_by_name[
-                        self.sub_ressort])
+                nav_item = zeit.web.core.sources.NAVIGATION_SOURCE.by_name[
+                    self.sub_ressort]
                 breadcrumbs.extend([(nav_item['text'], nav_item['link'])])
                 breadcrumbs.extend([('Aktuell', None)])
                 return breadcrumbs

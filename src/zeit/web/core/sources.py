@@ -353,7 +353,7 @@ class NavigationSource(zeit.cms.content.sources.SimpleContextualXMLSource):
             return self.factory.compile_navigation()
 
         @property
-        def navigation_by_name(self):
+        def by_name(self):
             return self.factory.compile_navigation_by_name()
 
     @CONFIG_CACHE.cache_on_arguments()
