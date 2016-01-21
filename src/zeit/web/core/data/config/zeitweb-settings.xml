@@ -2,7 +2,7 @@
 <settings
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <!-- xsd:int and xsd:string are the only types supported at the moment -->
+  <!-- Supported types: xsd:string, xsd:int, xsd:double -->
 
   <setting name="author_articles_page_size" xsi:type="xsd:int">10</setting>
   <setting name="author_comment_page_size" xsi:type="xsd:int">6</setting>
@@ -13,6 +13,8 @@
 
   <setting name="comment_page_size" xsi:type="xsd:int">4</setting>
   <setting name="community_host_timeout_secs" xsi:type="xsd:int">10</setting>
+
+  <setting name="reach_timeout" xsi:type="xsd:double">0.2</setting>
 
   <setting name="caching_time_content" xsi:type="xsd:int">5</setting>
   <setting name="caching_time_article" xsi:type="xsd:int">10</setting>
