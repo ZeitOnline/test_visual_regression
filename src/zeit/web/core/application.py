@@ -22,6 +22,7 @@ import zope.component
 import zope.configuration.xmlconfig
 import zope.interface
 
+import zeit.cms.content.xmlsupport
 import zeit.cms.repository.file
 import zeit.cms.repository.folder
 import zeit.cms.repository.interfaces

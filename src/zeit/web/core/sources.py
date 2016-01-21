@@ -3,7 +3,6 @@ import os
 import os.path
 import pkg_resources
 import random
-import re
 import urllib
 import urlparse
 import xml.sax.saxutils
@@ -11,13 +10,10 @@ import xml.sax.saxutils
 import pyramid.urldispatch
 import pysolr
 import zc.sourcefactory.source
-import zc.sourcefactory.contextual
 import zope.interface
 
 import zeit.cms.content.sources
 import zeit.cms.interfaces
-import zeit.content.image.variant
-import zeit.imp.source
 import zeit.solr.interfaces
 
 import zeit.web.core.utils
@@ -47,33 +43,6 @@ class VideoSeriesSource(zeit.cms.content.sources.SimpleXMLSource):
 VIDEO_SERIES = VideoSeriesSource()
 
 
-class ScaleSource(zeit.imp.source.ScaleSource):
-
-    def isAvailable(self, *args):  # NOQA
-        # Contrary to CMS behavior, we do not want to hide any image scales
-        # in zeit.web, so availability is `True` regardless of context.
-        return True
-
-SCALE_SOURCE = ScaleSource()(None)
-
-
-class ImageScales(zc.sourcefactory.contextual.BasicContextualSourceFactory):
-    # Only contextual so we can customize source_class
-
-    class source_class(zc.sourcefactory.source.FactoredContextualSource):
-
-        def find(self, id):
-            return self.factory.getValues(None).get(id)
-
-    def getValues(self, context):
-        def sub(x):
-            return int(re.sub('[^0-9]', '', '0' + str(x)))
-
-        return {s.name: (sub(s.width), sub(s.height)) for s in SCALE_SOURCE}
-
-IMAGE_SCALE_SOURCE = ImageScales()(None)
-
-
 class TeaserMapping(zeit.web.core.utils.frozendict):
 
     _map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama',
@@ -92,38 +61,6 @@ class TeaserMapping(zeit.web.core.utils.frozendict):
             x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
 
 TEASER_MAPPING = TeaserMapping()
-
-
-class VariantSource(zeit.content.image.variant.VariantSource):
-
-    product_configuration = 'zeit.content.image'
-    config_url = 'variant-source'
-
-    def find(self, context, variant_id):
-        mapping = self._get_mapping()
-        tree = self._get_tree()
-        for node in tree.iterchildren('*'):
-            if not self.isAvailable(node, context):
-                continue
-
-            attributes = dict(node.attrib)
-            mapped = mapping.get(variant_id, variant_id)
-
-            if attributes['name'] == mapped:
-                attributes['id'] = attributes['name']
-                variant = zeit.content.image.variant.Variant(**attributes)
-                if variant_id != mapped:
-                    variant.legacy_name = variant_id
-                return variant
-        raise KeyError(variant_id)
-
-    @CONFIG_CACHE.cache_on_arguments()
-    def _get_mapping(self):
-        return {k['old']: k['new'] for k in
-                zeit.content.image.variant.LEGACY_VARIANT_SOURCE(None)}
-
-
-VARIANT_SOURCE = VariantSource()
 
 
 class BlacklistSource(zeit.cms.content.sources.SimpleContextualXMLSource):

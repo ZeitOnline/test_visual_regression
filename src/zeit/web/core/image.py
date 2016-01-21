@@ -2,29 +2,30 @@ import datetime
 import hashlib
 import logging
 import os
-import PIL
+import re
 import tempfile
 
+import PIL
 import pytz
 import requests
 import requests_file
 import grokcore.component
+import zc.sourcefactory.contextual
+import zc.sourcefactory.source
 import zope.component
 
-import zeit.cms.interfaces
 import zeit.cms.workflow.interfaces
-import zeit.content.cp.area
-import zeit.content.cp.interfaces
-import zeit.content.gallery.interfaces
 import zeit.content.image.imagegroup
 import zeit.content.image.interfaces
-import zeit.content.video.interfaces
+import zeit.content.image.variant
 
 import zeit.web
+import zeit.web.core.cache
 import zeit.web.core.metrics
 
 
 log = logging.getLogger(__name__)
+CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 
 class BaseImage(object):
@@ -287,3 +288,62 @@ def is_image_expired(image):
     if expires is None:
         return False
     return (expires < 0)
+
+
+class ScaleSource(zeit.imp.source.ScaleSource):
+
+    def isAvailable(self, *args):  # NOQA
+        # Contrary to CMS behavior, we do not want to hide any image scales
+        # in zeit.web, so availability is `True` regardless of context.
+        return True
+
+SCALE_SOURCE = ScaleSource()(None)
+
+
+class ImageScales(zc.sourcefactory.contextual.BasicContextualSourceFactory):
+    # Only contextual so we can customize source_class
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        def find(self, id):
+            return self.factory.getValues(None).get(id)
+
+    def getValues(self, context):
+        def sub(x):
+            return int(re.sub('[^0-9]', '', '0' + str(x)))
+
+        return {s.name: (sub(s.width), sub(s.height)) for s in SCALE_SOURCE}
+
+IMAGE_SCALE_SOURCE = ImageScales()(None)
+
+
+class VariantSource(zeit.content.image.variant.VariantSource):
+
+    product_configuration = 'zeit.content.image'
+    config_url = 'variant-source'
+
+    def find(self, context, variant_id):
+        mapping = self._get_mapping()
+        tree = self._get_tree()
+        for node in tree.iterchildren('*'):
+            if not self.isAvailable(node, context):
+                continue
+
+            attributes = dict(node.attrib)
+            mapped = mapping.get(variant_id, variant_id)
+
+            if attributes['name'] == mapped:
+                attributes['id'] = attributes['name']
+                variant = zeit.content.image.variant.Variant(**attributes)
+                if variant_id != mapped:
+                    variant.legacy_name = variant_id
+                return variant
+        raise KeyError(variant_id)
+
+    @CONFIG_CACHE.cache_on_arguments()
+    def _get_mapping(self):
+        return {k['old']: k['new'] for k in
+                zeit.content.image.variant.LEGACY_VARIANT_SOURCE(None)}
+
+
+VARIANT_SOURCE = VariantSource()

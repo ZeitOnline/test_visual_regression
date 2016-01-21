@@ -15,7 +15,6 @@ import zeit.content.article.interfaces
 import zeit.content.image.variant
 
 import zeit.web.core.image
-import zeit.web.core.sources
 import zeit.web.core.template
 
 
@@ -423,7 +422,7 @@ def test_variant_getter_should_set_appropriate_parent_attribute(application):
 
 
 def test_variant_source_should_produce_variant_legacy_mapping(application):
-    vs = zeit.web.core.sources.VARIANT_SOURCE
+    vs = zeit.web.core.image.VARIANT_SOURCE
     assert len(vs.factory._get_mapping()) == 54
 
 
@@ -435,7 +434,7 @@ def test_variant_source_should_honor_configured_availability(
 
     monkeypatch.setattr(
         zeit.content.image.variant.VariantSource, 'isAvailable', isAvailable)
-    vs = zeit.web.core.sources.VARIANT_SOURCE
+    vs = zeit.web.core.image.VARIANT_SOURCE
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/ig-1')
     assert vs.factory.find(group, 'default') is not None
@@ -444,7 +443,7 @@ def test_variant_source_should_honor_configured_availability(
 
 
 def test_variant_source_should_find_and_output_variant_instance(application):
-    vs = zeit.web.core.sources.VARIANT_SOURCE
+    vs = zeit.web.core.image.VARIANT_SOURCE
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/ig-1')
     variant = vs.factory.find(group, 'zmo-xl')
@@ -452,7 +451,7 @@ def test_variant_source_should_find_and_output_variant_instance(application):
 
 
 def test_variant_source_should_set_legacy_name_for_mapped_images(application):
-    vs = zeit.web.core.sources.VARIANT_SOURCE
+    vs = zeit.web.core.image.VARIANT_SOURCE
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/ig-1')
     variant = vs.factory.find(group, 'zmo-xl')
@@ -460,7 +459,7 @@ def test_variant_source_should_set_legacy_name_for_mapped_images(application):
 
 
 def test_variant_source_should_raise_keyerror_for_faulty_specs(application):
-    vs = zeit.web.core.sources.VARIANT_SOURCE
+    vs = zeit.web.core.image.VARIANT_SOURCE
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/ig-1')
     with pytest.raises(KeyError):
