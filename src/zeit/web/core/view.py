@@ -27,9 +27,10 @@ import zeit.content.text.interfaces
 import zeit.solr.interfaces
 
 import zeit.web
-import zeit.web.core.article
+import zeit.web.core.banner
 import zeit.web.core.comments
 import zeit.web.core.date
+import zeit.web.core.navigation
 
 
 log = logging.getLogger(__name__)
@@ -253,7 +254,7 @@ class Base(object):
                 "".join(re.findall(r"[A-Za-z0-9_]*", adv_title)).lower(),
                 self.banner_type)
         # third: do the mapping
-        mappings = zeit.web.core.sources.BANNER_ID_MAPPINGS_SOURCE
+        mappings = zeit.web.core.banner.BANNER_ID_MAPPINGS_SOURCE
 
         for mapping in mappings:
             if getattr(self, mapping['target'], None) == mapping['value']:
@@ -348,8 +349,7 @@ class Base(object):
 
     def banner(self, tile):
         try:
-            banner_list = list(zeit.web.core.sources.BANNER_SOURCE)
-            return banner_list[tile - 1]
+            return list(zeit.web.core.banner.BANNER_SOURCE)[tile - 1]
         except IndexError:
             return
 
@@ -473,7 +473,7 @@ class Base(object):
 
     @zeit.web.reify
     def iqd_mobile_settings(self):
-        iqd_ids = zeit.web.core.sources.IQD_MOBILE_IDS_SOURCE.ids
+        iqd_ids = zeit.web.core.banner.IQD_MOBILE_IDS_SOURCE.ids
         if self.is_hp:
             return getattr(iqd_ids['hp'], 'centerpage')
         try:

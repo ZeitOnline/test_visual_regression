@@ -7,8 +7,8 @@ import zeit.cms.interfaces
 import zeit.content.article
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.content.image.imagereference
 
+import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.interfaces
 
@@ -84,7 +84,7 @@ def _inject_banner_code(
 def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
     paragraphs = filter(
         lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
-    banner_list = list(zeit.web.core.sources.BANNER_SOURCE)
+    banner_list = list(zeit.web.core.banner.BANNER_SOURCE)
     for index, pp in enumerate(possible_paragraphs):
         if len(paragraphs) > pp + 1:
             try:
