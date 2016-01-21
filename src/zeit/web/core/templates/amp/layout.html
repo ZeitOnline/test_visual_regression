@@ -2,7 +2,8 @@
 <html ⚡ lang="de">
 <head>
 	<meta charset="utf-8">
-	<link itemprop="mainEntityOfPage" rel="canonical" href="{{ view.content_url }}">
+    <title>{{ view.pagetitle }}</title>
+	<link rel="canonical" href="{{ view.content_url }}">
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 	<style>body {opacity: 0}</style><noscript><style>body {opacity: 1}</style></noscript>
 	{% block style %}
@@ -13,7 +14,7 @@
 	<script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
 </head>
 
-<body>
+<body itemscope itemtype="http://schema.org/WebPage">
 	<div class="symbols">
 		{% block symbols %}
 			{% include "zeit.web.static:css/web.site/amp.svg" %}
@@ -21,13 +22,17 @@
 	</div>
 
 	<div class="content">
-		<header class="header" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+		<header class="header" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
 			{% block logo %}
-			<div class="article__item article__item--wide" itemprop="brand">
+			<div class="article__item article__item--wide">
 				<a itemprop="url" href="{{ request.route_url('home') }}">
 					<meta itemprop="name" content="ZEIT ONLINE">
-					<svg class="header__logo">
+					<svg class="header__logo" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
 						<use xlink:href="#svg-logo-zon"/>
+						{# The "logo" dimensions must not exceed 600x60 -#}
+						<meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
+						<meta itemprop="width" content="565">
+						<meta itemprop="height" content="60">
 					</svg>
 				</a>
 			</div>
@@ -39,11 +44,8 @@
 
 		<main itemprop="mainContentOfPage">
 			{% block main %}
-			<article class="article" itemscope itemtype="http://schema.org/Article">
-				{% block article_main_image %}
-					{% set block = view.main_image_block %}
-					{% include "zeit.web.core:templates/amp/blocks/image.html" ignore missing %}
-				{% endblock article_main_image %}
+			<article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
+				<link itemprop="mainEntityOfPage" href="{{ view.content_url }}">
 				<div class="article-header article__item">
 					<h1 class="headline" itemprop="headline">
 						<span class="headline__kicker">
@@ -72,6 +74,11 @@
 
 				{% block article_body %}
 				<div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
+					{% block article_main_image %}
+						{% set block = view.main_image_block %}
+						{% include "zeit.web.core:templates/amp/blocks/image.html" ignore missing %}
+					{% endblock article_main_image %}
+
 					{% block article_pages %}
 						{% for page in view.pages %}
 							<section>

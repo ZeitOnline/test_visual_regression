@@ -1,6 +1,5 @@
 $primary-color: #313131 !default
 $color-border: #ddd !default
-$color-header-bg: $primary-color !default
 $color-footer-logo: #1d1d1b !default
 $color-footer-bg: #eee !default
 $color-footer: #444 !default
@@ -15,6 +14,11 @@ $zon-grey: #707070
 $zon-lighter-grey: #eee
 $color-separator-opacity: .5
 $color-separator: rgba($zon-grey, $color-separator-opacity)
+
+$color-kicker: $red !default
+$color-headline: $color-text !default
+$color-summary: #444 !default
+$color-metadata: $zon-grey !default
 
 // FONTS //////////////////////////////////////////////////
 
@@ -45,19 +49,6 @@ svg use
     fill: currentColor
     pointer-events: none
 
-// HEADER //////////////////////////////////////////////////
-
-.header
-    background-color: $color-header-bg
-    color: #fff
-    padding: remify(14px $page-padding)
-
-    &__logo
-        color: #fff
-        display: block
-        height: $logo-height
-        width: $logo-width
-
 // ARTICLE //////////////////////////////////////////////////
 
 .article
@@ -86,12 +77,20 @@ svg use
             color: inherit
             +on-interaction
                 color: $color-link--hover
+    &--apart
+        margin-top: remify(28px)
+        margin-bottom: remify(40px)
+        +respond-min($break-desktop-min)
+            margin-top: remify(40px)
     &--rimless
         margin-left: -$page-padding
         margin-right: -$page-padding
         .figure__caption
-            padding-left: remify($page-padding)
-            padding-right: remify($page-padding)
+            margin-left: auto
+            margin-right: auto
+            max-width: remify(660px)
+            padding-left: $page-padding
+            padding-right: $page-padding
 
 .video
     &__caption
@@ -99,14 +98,15 @@ svg use
 
 .headline
     font-size: 1em
-    margin: remify(40px 0 20px)
+    margin: remify(24px 0)
     &__kicker
-        color: $red
+        color: $color-kicker
         display: block
         font-size: em(14px)
         letter-spacing: $zon-letter-spacing-m
         padding-bottom: remify(17px)
     &__title
+        color: $color-headline
         display: block
         font-size: em(30px)
         line-height: 1.2
@@ -115,7 +115,7 @@ svg use
 
 .summary,
 .byline
-    color: #444
+    color: $color-summary
     font-size: em(20px)
     line-height: 1.4
     margin-bottom: remify(20px)
@@ -131,7 +131,7 @@ svg use
     font-weight: bold
 
 .metadata
-    color: $grey
+    color: $color-metadata
     font-size: em(14px)
     letter-spacing: $zon-letter-spacing-s
     margin-bottom: remify(40px)
@@ -293,7 +293,7 @@ svg use
         color: $color-footer-logo
         display: block
         height: $logo-height
-        margin: remify(10px) auto
+        margin: remify(20px) auto
         width: $logo-width
 
     &__navigation
