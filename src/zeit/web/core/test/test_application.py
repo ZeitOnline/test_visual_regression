@@ -2,13 +2,13 @@
 import mock
 import plone.testing.zca
 import pyramid.interfaces
-import pyramid.request
 import pyramid.testing
 import pytest
 import requests
+import zope.component
 
-import zeit.content.cp.interfaces
 import zeit.cms.interfaces
+
 import zeit.web.core.application
 import zeit.web.core.interfaces
 
@@ -18,7 +18,7 @@ def app_request(application, app_settings, request):
     plone.testing.zca.pushGlobalRegistry()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     app = zeit.web.core.application.Application()
-    app.settings = app_settings.copy()
+    app.settings.update(app_settings)
     config = app.configure_pyramid()
     config.commit()
     request = pyramid.testing.DummyRequest()
@@ -150,3 +150,31 @@ def test_feature_toggle_source_should_be_parsed(application):
     assert zeit.web.core.application.FEATURE_TOGGLES.find('article_lineage')
     assert not zeit.web.core.application.FEATURE_TOGGLES.find('dummy')
     assert not zeit.web.core.application.FEATURE_TOGGLES.find('nonexistent')
+
+
+def test_settings_merge_web_ini_and_xml_config(application):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    # from web.ini
+    assert conf['pyramid.reload_templates'] is False
+    # from xml
+    assert conf['author_articles_page_size'] == 10
+
+
+def test_runtime_settings_are_type_converted(application):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    assert isinstance(conf['author_articles_page_size'], int)
+    assert isinstance(conf['default_teaser_images'], basestring)
+
+
+def test_deployment_settings_have_precedence_over_runtime(application):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['author_articles_page_size'] = 1
+    assert conf['author_articles_page_size'] == 1
+    del conf['author_articles_page_size']
+    assert conf['author_articles_page_size'] == 10
+
+
+def test_pyramid_settings_and_settings_utility_are_the_same(application):
+    pyramid_settings = application.zeit_app.config.registry.settings
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    assert conf is pyramid_settings

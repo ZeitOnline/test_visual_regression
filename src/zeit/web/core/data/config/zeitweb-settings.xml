@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<settings
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- xsd:int and xsd:string are the only types supported at the moment -->
+
+  <setting name="author_articles_page_size" xsi:type="xsd:int">10</setting>
+  <setting name="author_comment_page_size" xsi:type="xsd:int">6</setting>
+
+  <setting name="default_teaser_images" xsi:type="xsd:string">http://xml.zeit.de/zeit-magazin/default/teaser_image</setting>
+
+  <setting name="breaking_news_timeout" xsi:type="xsd:int">7200</setting>
+
+  <setting name="comment_page_size" xsi:type="xsd:int">4</setting>
+  <setting name="community_host_timeout_secs" xsi:type="xsd:int">10</setting>
+
+  <setting name="caching_time_content" xsi:type="xsd:int">5</setting>
+  <setting name="caching_time_article" xsi:type="xsd:int">10</setting>
+  <setting name="caching_time_centerpage" xsi:type="xsd:int">20</setting>
+  <setting name="caching_time_feed" xsi:type="xsd:int">25</setting>
+  <setting name="caching_time_gallery" xsi:type="xsd:int">40</setting>
+  <setting name="caching_time_image" xsi:type="xsd:int">30</setting>
+  <setting name="caching_time_videostill" xsi:type="xsd:int">35</setting>
+  <setting name="caching_time_external" xsi:type="xsd:int">15</setting>
+</settings>
