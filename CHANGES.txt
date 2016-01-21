@@ -4,7 +4,7 @@ Change log for zeit.web
 2.51 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-337: Show sharing links on video pages
 
 
 2.50 (2016-01-20)
