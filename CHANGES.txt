@@ -6,6 +6,12 @@ Change log for zeit.web
 
 - Fix: Let batou & grunt play well together
 
+- ZON-2573: Refactor banner config to XML sources
+
+- ZON-2574: Refactor navigation config to XML sources
+
+- BUG-337: Show sharing links on video pages
+
 
 2.50 (2016-01-20)
 -----------------

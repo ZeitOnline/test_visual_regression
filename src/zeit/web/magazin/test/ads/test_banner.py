@@ -31,7 +31,8 @@ def test_banner_place_should_raise_on_index_error(testserver, testbrowser):
 
 
 def test_banner_list_should_be_sorted(testserver, testbrowser):
-    tiles = [place.tile for place in zeit.web.core.banner.banner_list]
+    banner_list = list(zeit.web.core.banner.BANNER_SOURCE)
+    tiles = [place.tile for place in banner_list]
     assert sorted(tiles) == tiles
 
 
@@ -64,7 +65,8 @@ def test_banner_should_fallback_on_not_registered_banner_types(
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     moep_view = Moep(context, mock.MagicMock(return_value=''))
     expected = getattr(
-        zeit.web.core.banner.iqd_mobile_ids[context.sub_ressort], 'default')
+        zeit.web.core.banner.IQD_MOBILE_IDS_SOURCE.ids[context.sub_ressort],
+        'default')
     assert moep_view.iqd_mobile_settings == expected
 
 
@@ -163,9 +165,7 @@ def test_inject_banner_code_should_be_inserted_on_certain_pages():
 def test_inject_banner_code_should_be_inserted_between_paragraphs(monkeypatch):
     tile_list = [0]
     possible_paragraphs = [1]
-    banner_list = [mock.Mock()]
-
-    monkeypatch.setattr(zeit.web.core.banner, "banner_list", banner_list)
+    monkeypatch.setattr(zeit.web.core.banner, "BANNER_SOURCE", [mock.Mock()])
     page = mock.Mock()
     setattr(page, "number", 1)
     p = zeit.web.core.block.Paragraph
