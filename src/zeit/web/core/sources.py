@@ -372,13 +372,13 @@ class NavigationSource(zeit.cms.content.sources.SimpleContextualXMLSource):
             label = section.find('link').get('label') or None
             navigation[item_id] = zeit.web.core.navigation.NavigationItem(
                 item_id, text, href, label)
-        try:
-            sub_sections_node = section.find(
-                'sub_sections').iterfind('sub_section')
-            self.register_navigation_items(
-                navigation[item_id], sub_sections_node)
-        except AttributeError:
-            pass
+            try:
+                sub_sections_node = section.find(
+                    'sub_sections').iterfind('sub_section')
+                self._register_navigation_items(
+                    navigation[item_id], sub_sections_node)
+            except AttributeError:
+                pass
 
     @CONFIG_CACHE.cache_on_arguments()
     def compile_navigation_by_name(self):
