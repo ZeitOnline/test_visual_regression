@@ -143,10 +143,13 @@ class LocalImage(object):
         # XXX requests does not seem to allow to mount stuff as a default, sigh
         session = requests.Session()
         session.mount('file://', requests_file.FileAdapter())
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         try:
             with zeit.web.core.metrics.timer(
                     'zeit.web.core.video.thumbnail.brightcove.response_time'):
-                response = session.get(self.url, stream=True, timeout=2)
+                response = session.get(
+                    self.url, stream=True,
+                    timeout=conf.get('brightcove_image_timeout', 2))
                 response.raise_for_status()
             with self.open(mode='w+') as fh:
                 first_chunk = True

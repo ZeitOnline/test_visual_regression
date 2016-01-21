@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2574: Refactor navigation config to XML sources
 
+- ZON-2654: Move some web.ini settings to XML sources
+
 - BUG-337: Show sharing links on video pages
 
 

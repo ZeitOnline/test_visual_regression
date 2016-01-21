@@ -67,21 +67,11 @@ def app_settings(mockserver):
         # test, but then I'd need to re-create an Application since
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
-        'caching_time_content': '5',
-        'caching_time_article': '10',
-        'caching_time_centerpage': '20',
-        'caching_time_feed': '25',
-        'caching_time_gallery': '40',
-        'caching_time_image': '30',
-        'caching_time_videostill': '35',
-        'caching_time_external': '15',
         'asset_prefix': '/static/latest',
         'image_prefix': '',
         'jsconf_prefix': '/jsconf',
         'fbia_prefix': '/fbia',
-        'author_articles_page_size': '10',
         'comment_page_size': '4',
-        'author_comment_page_size': '6',
         'community_host': 'http://localhost:6551',
         'community_static_host': 'http://static_community/foo',
         'community_maintenance': (
@@ -91,7 +81,6 @@ def app_settings(mockserver):
         'google_tag_manager_host': 'foo.baz',
         'app_servers': '',
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
-        'community_host_timeout_secs': '10',
         'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
         'spektrum_img_host': mockserver.url + '/spektrum',
         'zett_hp_feed': mockserver.url + '/zett/feed.xml',
@@ -99,13 +88,12 @@ def app_settings(mockserver):
         'academics_hp_feed': mockserver.url + '/academics/feed.xml',
         'academics_img_host': mockserver.url + '/academics',
         'node_comment_statistics': 'community/node-comment-statistics.xml',
-        'default_teaser_images': (
-            'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
         'connector_type': 'mock',
         'vgwort_url': 'http://example.com/vgwort',
         'breaking_news_config': (
             'http://xml.zeit.de/eilmeldung/homepage-banner'),
-        'breaking_news_timeout': 2 * 60 * 60,
+        'breaking_news_fallback_image': (
+            'http://xml.zeit.de/administratives/eilmeldung-share-image'),
         'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
         'vivi_zeit.cms_keyword-configuration': (
             'egg://zeit.cms.tagging.tests/keywords_config.xml'),
@@ -212,8 +200,8 @@ def app_settings(mockserver):
         'dev_environment': True,
         'advertisement_nextread_folder': 'verlagsangebote',
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
-        'breaking_news_fallback_image': (
-            'http://xml.zeit.de/administratives/eilmeldung-share-image'),
+        'vivi_zeit.web_runtime-settings-source': (
+            'egg://zeit.web.core/data/config/zeitweb-settings.xml'),
     }
 
 

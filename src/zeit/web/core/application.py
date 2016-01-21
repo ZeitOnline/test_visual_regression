@@ -33,12 +33,14 @@ import zeit.connector
 
 import zeit.web
 import zeit.web.core
+import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
 
 
 log = logging.getLogger(__name__)
+CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 
 class Application(object):
@@ -46,19 +48,18 @@ class Application(object):
     DONT_SCAN = [re.compile('test$').search]
 
     def __init__(self):
-        self.settings = {}
+        self.settings = Settings()
 
     def __call__(self, global_config, **settings):
-        settings = pyramid.config.settings.Settings(d=settings)
-        settings['app_servers'] = filter(
-            None, settings['app_servers'].split(','))
-        settings['linkreach_host'] = maybe_convert_egg_url(
-            settings.get('linkreach_host', ''))
-
-        settings['sso_key'] = self.load_sso_key(
-            settings.get('sso_key', None))
         self.settings.update(settings)
-        # Temporarily provide settings for our non-pyramid utilities.
+        self.settings['app_servers'] = filter(
+            None, settings['app_servers'].split(','))
+        self.settings['linkreach_host'] = maybe_convert_egg_url(
+            settings.get('linkreach_host', ''))
+        self.settings['sso_key'] = self.load_sso_key(
+            settings.get('sso_key', None))
+        # NOTE: non-pyramid utilities can only access deployment settings,
+        # runtime settings are not available until Application setup is done.
         zope.component.provideUtility(
             self.settings, zeit.web.core.interfaces.ISettings)
         self.configure()
@@ -97,10 +98,14 @@ class Application(object):
 
         self.config = config = pyramid.config.Configurator(registry=registry)
         config.setup_registry(settings=self.settings)
-        zope.component.getSiteManager().unregisterUtility(
-            self.settings, zeit.web.core.interfaces.ISettings)
-        zope.component.provideUtility(
-            config.registry.settings, zeit.web.core.interfaces.ISettings)
+        # setup_registry() insists on copying the settings mapping into a new
+        # `pyramid.config.settings.Settings` instance. But we want
+        # registry.settings and the ISettings utility to be the same object,
+        # for easy test setup. So we first copy over any values set by Pyramid
+        # or included packages, and then replace the Pyramid instance with our
+        # instance again.
+        self.settings.deployment.update(config.registry.settings)
+        config.registry.settings = self.settings
 
         # Never commit, always abort. zeit.web should never write anything,
         # anyway, and at least when running in preview mode, not committing
@@ -280,6 +285,72 @@ class Application(object):
         if self.settings.get('dev_environment'):
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
+
+
+@zope.interface.implementer(zeit.web.core.interfaces.ISettings)
+class Settings(pyramid.config.settings.Settings,
+               zeit.cms.content.sources.SimpleXMLSourceBase):
+
+    product_configuration = 'zeit.web'
+    config_url = 'runtime-settings-source'
+
+    runtime_config = 'vivi_{}_{}'.format(product_configuration, config_url)
+
+    @property
+    def deployment(self):
+        return super(Settings, self)
+
+    @property
+    def runtime(self):
+        if ('backend' not in CONFIG_CACHE.__dict__ or
+                not self.deployment.__contains__(self.runtime_config)):
+            # We're at an early Application setup stage, no runtime
+            # configuration available or needed (e.g. for Pyramid setup).
+            return {}
+        return self._load_runtime_settings()
+
+    @CONFIG_CACHE.cache_on_arguments()
+    def _load_runtime_settings(self):
+        result = {}
+        for node in self._get_tree().iterfind('setting'):
+            result[node.get('name')] = node.pyval
+        return result
+
+    @property
+    def combined(self):
+        result = {}
+        result.update(self.runtime)
+        result.update(self)
+        return result
+
+    def get(self, key, default=None):
+        if self.deployment.__contains__(key):
+            return self.deployment.get(key)
+        return self.runtime.get(key, default)
+
+    def __getitem__(self, key):
+        if self.deployment.__contains__(key):
+            return self.deployment.get(key)
+        return self.runtime[key]
+
+    def __contains__(self, key):
+        return (self.deployment.__contains__(key) or
+                self.runtime.__contains__(key))
+
+    def keys(self):
+        return self.combined.keys()
+
+    def values(self):
+        return self.combined.values()
+
+    def items(self):
+        return self.combined.items()
+
+    def __iter__(self):
+        return iter(self.keys())
+
+    def __len__(self):
+        return len(self.keys())
 
 
 factory = Application()
