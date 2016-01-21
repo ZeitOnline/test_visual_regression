@@ -60,7 +60,7 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
 def test_nav_ressorts_should_produce_markup(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation-list.tpl')
-    nav = zeit.web.core.navigation.Navigation()
+    nav = zeit.web.core.navigation.NavigationItem('top', '', '')
     nav['hp.global.topnav.links.jobs'] = (
         zeit.web.core.navigation.NavigationItem(
             'hp.global.topnav.links.jobs',
@@ -90,7 +90,7 @@ def test_nav_ressorts_should_produce_markup(application, jinja2_env):
 def test_nav_services_should_have_expected_links(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation-list.tpl')
-    nav = zeit.web.core.navigation.Navigation()
+    nav = zeit.web.core.navigation.NavigationItem('top', '', '')
     nav['topnav.services.1..epaper'] = (
         zeit.web.core.navigation.NavigationItem(
             'topnav.services.1..epaper',
@@ -118,7 +118,7 @@ def test_nav_services_should_have_expected_links(application, jinja2_env):
 
 
 def test_nav_classifieds_should_have_expected_links(application, jinja2_env):
-    nav = zeit.web.core.navigation.Navigation()
+    nav = zeit.web.core.navigation.NavigationItem('top', '', '')
     nav['topnav.classifieds.3..jobs'] = (
         zeit.web.core.navigation.NavigationItem(
             'topnav.classifieds.3..jobs',
