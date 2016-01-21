@@ -1,10 +1,13 @@
 <!doctype html>
-<html ⚡ lang="de">
+<html ⚡ lang="de" itemscope itemtype="http://schema.org/WebPage">
 <head>
 	<meta charset="utf-8">
     <title>{{ view.pagetitle }}</title>
 	<link rel="canonical" href="{{ view.content_url }}">
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+	{% block sharing_meta %}
+	    {% include "zeit.web.core:templates/inc/meta/sharing.html" -%}
+	{% endblock sharing_meta %}
 	<style>body {opacity: 0}</style><noscript><style>body {opacity: 1}</style></noscript>
 	{% block style %}
 		{% include "zeit.web.core:templates/amp/style.html" %}
@@ -14,7 +17,7 @@
 	<script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
+<body>
 	<div class="symbols">
 		{% block symbols %}
 			{% include "zeit.web.static:css/web.site/amp.svg" %}
@@ -40,6 +43,7 @@
 		</header>
 
 		{% block breaking_news %}
+			{% include "zeit.web.site:templates/inc/breaking_news.tpl" %}
 		{% endblock breaking_news %}
 
 		<main itemprop="mainContentOfPage">
@@ -76,7 +80,7 @@
 				<div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
 					{% block article_main_image %}
 						{% set block = view.main_image_block %}
-						{% include "zeit.web.core:templates/amp/blocks/image.html" ignore missing %}
+						{% include "zeit.web.core:templates/amp/blocks/image.html" %}
 					{% endblock article_main_image %}
 
 					{% block article_pages %}

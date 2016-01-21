@@ -19,7 +19,7 @@
 	{%- endif %}
 
 	<div class="article__item article__item--wide">
-		<figure class="{{ 'figure' | with_mods(*block.figure_mods) }}"{% if block.itemprop %} itemprop="primaryImageOfPage"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
+		<figure class="{{ 'figure' | with_mods(*block.figure_mods) }}"{% if block.itemprop %} itemprop="{{ block.itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
 			{% if image.href -%}
 				<a class="figure__link" title="{{ image.title }}" href="{{ image.href }}">
 			{%- endif %}
@@ -39,12 +39,9 @@
 			{% if image.href -%}
 				</a>
 			{%- endif %}
-			<meta itemprop="url" content="{{ fallback_source }}"></meta>
-			<meta itemprop="width" content="{{ width }}"></meta>
-			<meta itemprop="height" content="{{ height }}"></meta>
-
-			<!-- <img src="{{ fallback_source }}" data-src="{{ source }}" data-variant="{{ image.image_pattern }}" data-ratio="{{ image.ratio }}"> -->
-			<!-- <noscript data-src="{{ fallback_source }}"></noscript> -->
+			<meta itemprop="url" content="{{ fallback_source }}">
+			<meta itemprop="width" content="{{ width }}">
+			<meta itemprop="height" content="{{ height }}">
 
 			<figcaption class="figure__caption">
 				<span class="figure__text" itemprop="caption">{{ image.caption }}</span>
