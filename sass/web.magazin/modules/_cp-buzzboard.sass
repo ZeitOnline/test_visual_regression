@@ -1,21 +1,22 @@
 //styles for buzz area within cp
 
+%buzzboard__heading
+    font-size: $font-ml
+    font-weight: bold
+    letter-spacing: 1px
+    text-align: center
+    text-transform: uppercase
+
 .buzzboard
     +respond-max($break-2)
         +visuallyhidden
     clear: left
     font-family: $font-tabletgothic
     padding: $compact
-    width: 100%
 
     &__headline
+        @extend %buzzboard__heading
         +no-user-select
-        font-family: $font-tabletgothic
-        font-size: $font-ml
-        font-weight: bold
-        letter-spacing: 1px
-        text-align: center
-        text-transform: uppercase
         background-color: $white
         padding: 0 $petite
         display: inline
@@ -27,11 +28,58 @@
         display: block
 
     &__table
+        width: 100%
+        tbody
+            counter-reset: buzz-board
         th
-            display: inline-block
+            @extend %buzzboard__heading
             height: $medium
             line-height: $medium
-            vertical-align: middle
+            vertical-align: top
+            width: 33%
+            padding: $big 0
+        tr
+            vertical-align: top
+            counter-increment: buzz-board
+
+    &__container
+        min-height: remify(69px)
+        margin-bottom: $compact
+        padding: 0 $fine 0 $medium
+        position: relative
+        word-wrap: break-word
+        span
+            margin: $micro 0
+        &:before
+            font-family: $font-tiemann
+            content: counter(buzz-board)
+            font-size: $font-xxxl
+            position: absolute
+            left: 0
+            top: 0.075em
+            line-height: 1
+
+    &__heading
+        font-size: 1em
+        font-weight: normal
+        margin: 0
+        a
+            +link-colors($black, $black, $black, $black, $black)
+
+    &__kicker
+        display: block
+        font-size: $font-s
+        letter-spacing: 1px
+
+    &__title
+        font-family: $font-tabletgothic
+        font-size: $font-m
+        font-weight: bold
+
+    &__metadata
+        color: $grey
+        font-size: $font-s
+        margin: 0
 
 .cp_buzz__service
     +inline-block(top)
@@ -53,37 +101,5 @@
     counter-reset: buzz-list
     padding: 0 $fine
 
-.cp_buzz__service__list__entry
-    min-height: 69px
-    margin-bottom: $compact
-    padding-left: $medium
-    position: relative
-    word-wrap: break-word
-    p
-        margin: $micro 0
 
-.cp_buzz__service__list__entry:before
-    font-family: $font-tiemann
-    content: counter(buzz-list)
-    counter-increment: buzz-list
-    font-size: $font-xxxl
-    position: absolute
-    left: 0
-    top: -0.075em
-    line-height: 1
 
-.cp_buzz__service__list__entry__supertitle
-    font-size: $font-s
-    letter-spacing: 1px
-
-.cp_buzz__service__list__entry__title
-    font-family: $font-tabletgothic
-    font-size: $font-m
-    font-weight: bold
-    a
-        +link-colors($black, $black, $black, $black, $black)
-
-.cp_buzz__service__list__entry__score
-    color: $grey
-    font-size: $font-s
-    margin: 0

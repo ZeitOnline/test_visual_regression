@@ -5,7 +5,7 @@
 {% block before_module_list %}
 	<section class="buzzboard">
         <span class="buzzboard__divider">
-		  <span class="buzzboard__headline">{{ area.title | default('Beliebte Artikel', true) }}</span>
+		  <h3 class="buzzboard__headline">{{ area.title | default('Beliebte Artikel', true) }}</h3>
         </span>
 {% endblock %}
 
@@ -15,17 +15,32 @@
 	<table class="buzzboard__table buzzboard__table--col{{ modules | length }}">
 		<thead>
 			{% for module in modules -%}
-
 			<th>
 				{% if module.icon %}
 					{% set modifier = module.icon.strip('buzz-') -%}
-				{% endif %}
-				{{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), request) }}
+				    {{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), request) }}
+                {% endif %}
 				{{ module.label | safe }}
 			</th>
 			{% endfor %}
 		</thead>
-
+        <tbody>
+            {% for row in range(3) -%}
+            <tr>
+                {% for column in range(modules | length) -%}
+                <td>
+                    {%- set module = modules[column] %}
+                    {% if row < (module | length) %}
+                        {%- set teaser = modules[column][row] %}
+                        {%- set layout = module | get_layout %}
+                        {%- set journalistic_format = module | get_journalistic_format %}
+                        {% include "{}:templates/inc/teaser/buzzboard.tpl".format(view.package) %}
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
 	</table>
 {% endblock module_list %}
 

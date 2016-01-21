@@ -40,13 +40,14 @@ class Buzzbox(zeit.web.core.module.Module, list):
 @zeit.web.register_module('zmo-mostread')
 class MostreadBuzzbox(Buzzbox):
 
-    label = 'Meist&shy;gelesen'
+    label = 'Meistgelesen'
 
     def __init__(self, context):
         super(MostreadBuzzbox, self).__init__(context)
         self += self.reach.get_views(section='zeit-magazin')
-        self.identification = 'buzz-mostread'
-        self.icon = 'icon-buzz-views'
+        self.identification = 'zmo-mostread'
+        self.score_pattern = ['Keine Leser', '{} Leser', '{} Leser']
+        # self.icon = 'sicon-buzz-views'
 
 
 @zeit.web.register_module('zmo-mostcommented')
@@ -57,24 +58,13 @@ class CommentsBuzzbox(Buzzbox):
     def __init__(self, context):
         super(CommentsBuzzbox, self).__init__(context)
         self += self.reach.get_comments(section='zeit-magazin')
-        self.icon = 'icon-buzz-comments'
+        self.identification = 'zmo-mostcommented'
+        self.score_pattern = [
+            'Keine Kommentare', '{} Kommentar', '{} Kommentare']
+        # self.icon = 'sicon-buzz-comments'
 
 
-@zeit.web.register_module('zmo-mostshared')
-class SharingBuzzbox(Buzzbox):
-
-    header = 'Meistgeteilt'
-    label = 'Meist&shy;geteilt'
-
-    def __init__(self, context):
-        super(SharingBuzzbox, self).__init__(context)
-        self += self.reach.get_social(section=self.ressort)
-        self.identification = 'buzz-shared'
-        self.icon = 'buzz-shared'
-        self.score_pattern = ['Nie geteilt', '{} mal geteilt']
-
-
-@zeit.web.register_module('mostliked')
+@zeit.web.register_module('zmo-mostliked')
 class FacebookBuzzbox(Buzzbox):
 
     label = 'Auf Facebook'
@@ -82,4 +72,7 @@ class FacebookBuzzbox(Buzzbox):
     def __init__(self, context):
         super(FacebookBuzzbox, self).__init__(context)
         self += self.reach.get_social(facet='facebook', section='zeit-magazin')
-        self.icon = 'icon-buzz-facebook'
+        self.identification = 'zmo-mostliked'
+        self.score_pattern = [
+            'Keine Empfehlungen', '{} Empfehlung', '{} Empfehlungen']
+        # self.icon = 'sicon-buzz-facebook'
