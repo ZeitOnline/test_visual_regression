@@ -43,7 +43,7 @@ class Centerpage(zeit.web.core.view.Base):
         url = super(Centerpage, self).canonical_url.replace(
             'index.cp2015', 'index')  # XXX: remove soon (aps)
         page = self.request.params.get('p', None)
-        param_str = '?p=' + page if page else ''
+        param_str = '?p=' + page if page and page != '1' else ''
         return url + param_str
 
     @zeit.web.reify

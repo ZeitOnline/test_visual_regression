@@ -26,7 +26,6 @@ import zeit.web.core.cache
 import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
-import zeit.web.core.sources
 
 
 DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
@@ -699,10 +698,10 @@ def find_nextread_folder(ressort, subressort):
     ressort = ressort if ressort else ''
     subressort = subressort if subressort else ''
 
-    folder = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(
+    folder = zeit.web.core.article.RESSORTFOLDER_SOURCE.find(
         ressort, subressort)
     if not contains_nextreads(folder):
-        folder = zeit.web.core.sources.RESSORTFOLDER_SOURCE.find(ressort, None)
+        folder = zeit.web.core.article.RESSORTFOLDER_SOURCE.find(ressort, None)
     if not contains_nextreads(folder):
         return None
     nextread_foldername = zope.component.getUtility(

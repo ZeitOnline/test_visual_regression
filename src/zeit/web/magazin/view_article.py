@@ -115,7 +115,7 @@ class FeatureLongform(LongformArticle):
     @zeit.web.reify
     def breadcrumb(self):
         crumb = super(FeatureLongform, self).breadcrumb
-        items = self.navigation.navigation_items
+        items = self.navigation
         crumb_list = crumb[:1]
         if self.ressort in items:
             item = items[self.ressort]
