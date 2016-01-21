@@ -18,15 +18,13 @@ import zope.component
 from zeit.solr import query as lq
 import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
-import zeit.connector.connector
-import zeit.connector.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
-import zeit.content.image.interfaces
 import zeit.content.text.interfaces
 import zeit.solr.interfaces
 
 import zeit.web
+import zeit.web.core.application
 import zeit.web.core.banner
 import zeit.web.core.comments
 import zeit.web.core.date
@@ -124,17 +122,17 @@ class Base(object):
 
     @zeit.web.reify
     def third_party_modules_is_enabled(self):
-        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
+        return zeit.web.core.application.FEATURE_TOGGLES.find(
             'third_party_modules')
 
     @zeit.web.reify
     def iqd_is_enabled(self):
-        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
+        return zeit.web.core.application.FEATURE_TOGGLES.find(
             'iqd')
 
     @zeit.web.reify
     def tracking_is_enabled(self):
-        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
+        return zeit.web.core.application.FEATURE_TOGGLES.find(
             'tracking')
 
     def _set_response_headers(self):
@@ -517,7 +515,7 @@ class Base(object):
 
     @zeit.web.reify
     def article_lineage_is_enabled(self):
-        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
+        return zeit.web.core.application.FEATURE_TOGGLES.find(
             'article_lineage')
 
     @zeit.web.reify

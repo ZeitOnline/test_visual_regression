@@ -17,11 +17,13 @@ import pyramid_zodbconn
 import pysolr
 import requests.sessions
 import venusian
+import zc.sourcefactory.source
 import zope.app.appsetup.product
 import zope.component
 import zope.configuration.xmlconfig
 import zope.interface
 
+import zeit.cms.content.sources
 import zeit.cms.content.xmlsupport
 import zeit.cms.repository.file
 import zeit.cms.repository.folder
@@ -310,6 +312,26 @@ def configure_host(key):
         return request.route_url('home', _app_url=prefix).rstrip('/')
     wrapped.__name__ = key + '_host'
     return wrapped
+
+
+class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+    # Only contextual so we can customize source_class
+
+    product_configuration = 'zeit.web'
+    config_url = 'feature-toggle-source'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        def find(self, name):
+            return self.factory.find(name)
+
+    def find(self, name):
+        try:
+            return bool(getattr(self._get_tree(), name, False))
+        except TypeError:
+            return False
+
+FEATURE_TOGGLES = FeatureToggleSource()(None)
 
 
 # Monkey-patch so our content provides a marker interface,
