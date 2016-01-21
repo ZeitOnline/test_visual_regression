@@ -126,7 +126,7 @@ class Base(zeit.web.core.view.Base):
         try:
             item = next((items[key].text, key) for key in items.keys() if (
                         self.ressort in key))
-            if self.sub_ressort != '' and items[item[1]].has_children():
+            if self.sub_ressort != '' and len(items[item[1]]):
                 items = items[item[1]].navigation_items
                 item = next((items[key].text, key) for key in items.keys() if (
                             self.sub_ressort in key))

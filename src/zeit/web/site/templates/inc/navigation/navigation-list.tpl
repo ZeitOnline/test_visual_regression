@@ -8,13 +8,13 @@ itemtype="http://schema.org/SiteNavigationElement"
 	{% for i in items -%}
 	{% set section = items[i] %}
 	{% set id = section.item_id | pop_from_dotted_name %}
-	<li class="{{ class }}__item{% if section.label %} {{ class }}__item--has-label{% endif %}" data-id="{{ id if id else section.item_id }}" {% if section.has_children() %} data-feature="dropdown"{% endif %}{% if section.label %} data-label="{{ section.label }}"{% endif %}>
+	<li class="{{ class }}__item{% if section.label %} {{ class }}__item--has-label{% endif %}" data-id="{{ id if id else section.item_id }}" {% if section | length %} data-feature="dropdown"{% endif %}{% if section.label %} data-label="{{ section.label }}"{% endif %}>
 		<a class="{{ class }}__link{% if id in (view.ressort,
         view.sub_ressort) %} {{ class }}__link--current{% endif %}" href="{{
         section.href | create_url }}" itemprop="url" data-id="{{ section.item_id }}">
 			<span itemprop="name">{{section.text }}</span>
 		</a>
-		{% if section.has_children() -%}
+		{% if section | length -%}
 
 			{# this helps us to detect if we are inside a primary-nav when the template is called recursively #}
 			{% if class == 'primary-nav' %}

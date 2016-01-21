@@ -22,7 +22,7 @@
                 </li>
                 {%- endif %}
 
-                {% if section.has_children() -%}
+                {% if section | length -%}
                     {% for j in section -%}
                         {% set item = section[j] -%}
 

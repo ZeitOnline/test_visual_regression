@@ -31,8 +31,8 @@ class Navigation(object):
     def __delitem__(self, key):
         del self.navigation_items[key]
 
-    def has_children(self):
-        return len(self.navigation_items) > 0
+    def __len__(self):
+        return len(self.navigation_items)
 
 
 class NavigationItem(Navigation):
