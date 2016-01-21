@@ -43,26 +43,6 @@ class VideoSeriesSource(zeit.cms.content.sources.SimpleXMLSource):
 VIDEO_SERIES = VideoSeriesSource()
 
 
-class TeaserMapping(zeit.web.core.utils.frozendict):
-
-    _map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama',
-                          'parquet-large', 'zon-parquet-large'],
-            'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date',
-                          'parquet-regular', 'zon-parquet-small'],
-            'zon-fullwidth': ['leader-fullwidth'],
-            'zon-inhouse': ['parquet-verlag'],
-            'hide': ['archive-print-volume', 'archive-print-year',
-                     'two-side-by-side', 'ressort', 'leader-upright',
-                     'buttons-fullwidth', 'parquet-printteaser']}
-
-    def __init__(self, *args, **kw):
-        # Flattens and reverses _map, so we can easily lookup a layout.
-        super(TeaserMapping, self).__init__(
-            x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
-
-TEASER_MAPPING = TeaserMapping()
-
-
 class BlacklistSource(zeit.cms.content.sources.SimpleContextualXMLSource):
     # Only contextual so we can customize source_class
 

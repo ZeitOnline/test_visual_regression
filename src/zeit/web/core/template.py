@@ -24,6 +24,7 @@ import zeit.content.link.interfaces
 import zeit.magazin.interfaces
 
 import zeit.web
+import zeit.web.core.centerpage
 import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.utils
@@ -286,7 +287,7 @@ def get_layout(block, request=None):
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
 
-    layout = zeit.web.core.sources.TEASER_MAPPING.get(layout, layout)
+    layout = zeit.web.core.centerpage.TEASER_MAPPING.get(layout, layout)
 
     if key:
         request.teaser_layout[key] = layout
