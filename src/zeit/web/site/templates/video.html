@@ -2,7 +2,7 @@
 {% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
 {% block content %}
-    <article class="article article--video"
+    <article class="article article--video" id="js-article"
         {% if view.serie %} data-video-series="{{ view.serie | attr_safe }}"{% endif %}
         data-video-provider="brightcove"
         data-video-size="large"

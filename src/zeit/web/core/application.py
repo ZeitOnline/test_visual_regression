@@ -17,11 +17,14 @@ import pyramid_zodbconn
 import pysolr
 import requests.sessions
 import venusian
+import zc.sourcefactory.source
 import zope.app.appsetup.product
 import zope.component
 import zope.configuration.xmlconfig
 import zope.interface
 
+import zeit.cms.content.sources
+import zeit.cms.content.xmlsupport
 import zeit.cms.repository.file
 import zeit.cms.repository.folder
 import zeit.cms.repository.interfaces
@@ -30,7 +33,6 @@ import zeit.connector
 
 import zeit.web
 import zeit.web.core
-import zeit.web.core.banner
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
@@ -72,54 +74,7 @@ class Application(object):
     def configure(self):
         self.configure_zca()
         self.configure_pyramid()
-        self.configure_banner()
-        self.configure_navigation()
         self.configure_bugsnag()
-
-    def configure_banner(self):
-        banner_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_banner-source', ''))
-        zeit.web.core.banner.banner_list = (
-            zeit.web.core.banner.make_banner_list(banner_source))
-        iqd_mobile_ids_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_iqd-mobile-ids', ''))
-        zeit.web.core.banner.iqd_mobile_ids = (
-            zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
-        banner_id_mappings = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_banner-id-mappings', ''))
-        zeit.web.core.banner.banner_id_mappings = (
-            zeit.web.core.banner.make_banner_id_mappings(banner_id_mappings))
-
-    def configure_navigation(self):
-        navigation_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_navigation', ''))
-        zeit.web.core.navigation.navigation = (
-            zeit.web.core.navigation.make_navigation(navigation_config))
-        zeit.web.core.navigation.navigation_by_name = (
-            zeit.web.core.navigation.make_navigation_by_name(
-                navigation_config))
-        navigation_services_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_navigation-services', ''))
-        zeit.web.core.navigation.navigation_services = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_services_config))
-        navigation_classifieds_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_navigation-classifieds', ''))
-        zeit.web.core.navigation.navigation_classifieds = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_classifieds_config))
-        navigation_footer_publisher_config = maybe_convert_egg_url(
-            self.settings.get(
-                'vivi_zeit.web_navigation-footer-publisher', ''))
-        zeit.web.core.navigation.navigation_footer_publisher = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_footer_publisher_config))
-        navigation_footer_links_config = maybe_convert_egg_url(
-            self.settings.get(
-                'vivi_zeit.web_navigation-footer-links', ''))
-        zeit.web.core.navigation.navigation_footer_links = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_footer_links_config))
 
     def configure_bugsnag(self):
         bugsnag.configure(
@@ -357,6 +312,26 @@ def configure_host(key):
         return request.route_url('home', _app_url=prefix).rstrip('/')
     wrapped.__name__ = key + '_host'
     return wrapped
+
+
+class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+    # Only contextual so we can customize source_class
+
+    product_configuration = 'zeit.web'
+    config_url = 'feature-toggle-source'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        def find(self, name):
+            return self.factory.find(name)
+
+    def find(self, name):
+        try:
+            return bool(getattr(self._get_tree(), name, False))
+        except TypeError:
+            return False
+
+FEATURE_TOGGLES = FeatureToggleSource()(None)
 
 
 # Monkey-patch so our content provides a marker interface,

@@ -1,14 +1,24 @@
 import collections
 import logging
+import random
+import os
+import os.path
+import pkg_resources
 import re
+import urllib
+import urlparse
 
 import grokcore.component
 import jinja2
 import peak.util.proxies
+import pysolr
 import zope.component
 
 import zeit.cms.content.sources
 import zeit.cms.interfaces
+import zeit.cms.content.interfaces
+import zeit.cms.workflow.interfaces
+import zeit.solr.interfaces
 
 
 log = logging.getLogger(__name__)
@@ -379,3 +389,51 @@ def dump_request(response):
     headers = " -H ".join(headers)
     return command.format(
         method=method, headers=headers, data=data, uri=uri)
+
+
+@zope.interface.implementer(zeit.solr.interfaces.ISolr)
+class DataSolr(object):
+    """Fake Solr implementation that is used for local development."""
+
+    def search(self, q, rows=10, **kw):
+        parts = urlparse.urlparse('egg://zeit.web.core/data')
+        repo = pkg_resources.resource_filename(parts.netloc, parts.path[1:])
+        results = []
+        for root, subdirs, files in os.walk(repo):
+            if not random.getrandbits(1):
+                continue  # Skip some folders to speed things up.
+            for filename in files:
+                try:
+                    name = filename.replace('.meta', '')
+                    unique_id = os.path.join(
+                        root.replace(repo, 'http://xml.zeit.de'), name)
+                    content = zeit.cms.interfaces.ICMSContent(unique_id)
+                    publish = zeit.cms.workflow.interfaces.IPublishInfo(
+                        content)
+                    semantic = zeit.cms.content.interfaces.ISemanticChange(
+                        content)
+                    assert zeit.web.core.view.known_content(content)
+                    results.append({
+                        u'date_last_published': (
+                            publish.date_last_published.isoformat()),
+                        u'date_first_released': (
+                            publish.date_first_released.isoformat()),
+                        u'last-semantic-change': (
+                            semantic.last_semantic_change.isoformat()),
+                        u'lead_candidate': False,
+                        u'product_id': content.product.id,
+                        u'supertitle': content.supertitle,
+                        u'title': content.title,
+                        u'type': content.__class__.__name__.lower(),
+                        u'uniqueId': content.uniqueId
+                    })
+                except (AttributeError, AssertionError, TypeError):
+                    continue
+
+        log.debug('Mocking solr request ' + urllib.urlencode(
+            kw.items() + [('q', q), ('rows', rows)], True))
+        return pysolr.Results(
+            random.sample(results, min(rows, len(results))), len(results))
+
+    def update_raw(self, xml, **kw):
+        pass

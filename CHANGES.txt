@@ -4,6 +4,12 @@ Change log for zeit.web
 2.51 (unreleased)
 -----------------
 
+- ZON-2573: Refactor banner config to XML sources
+
+- ZON-2574: Refactor navigation config to XML sources
+
+- BUG-337: Show sharing links on video pages
+
 - MAINT: Allow template-only centerpage modules to be discovered
 
 
