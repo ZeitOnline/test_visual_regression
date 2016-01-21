@@ -1,7 +1,6 @@
 import datetime
 
 import pytest
-import pysolr
 import zope.component
 
 import zeit.cms.interfaces
@@ -10,7 +9,6 @@ import zeit.content.cp.interfaces
 import zeit.web.site.module.search_form
 import zeit.web.core.centerpage
 import zeit.web.core.utils
-import zeit.web.core.sources
 
 
 @pytest.fixture
