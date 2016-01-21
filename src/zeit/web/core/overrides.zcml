@@ -1,4 +1,4 @@
 <configure xmlns="http://namespaces.zope.org/zope">
-    <utility factory="zeit.web.core.test.conftest.DataSolr" provides="zeit.solr.interfaces.ISolr"/>
+    <utility factory="zeit.web.core.utils.DataSolr" provides="zeit.solr.interfaces.ISolr"/>
     <utility factory="zeit.web.core.reach.MockReach" provides="zeit.web.core.interfaces.IReach"/>
 </configure>

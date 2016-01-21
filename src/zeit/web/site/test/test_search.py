@@ -203,16 +203,3 @@ def test_successful_search_result_should_render_in_browser(
         testbrowser, datasolr):
     browser = testbrowser('/suche/index')
     assert browser.cssselect('.cp-area--ranking .teaser-small')
-
-
-def test_data_solr_should_produce_usable_results(application):
-    import zeit.web.core.test.conftest
-    conn = zeit.web.core.test.conftest.DataSolr()
-    try:
-        conn.update_raw(None)
-    except Exception as err:
-        raise AssertionError(err.message)
-
-    assert len(conn.search(None, 3)) == 3
-    assert 'uniqueId' in list(conn.search(None, 1))[0]
-    assert 'date_last_published' in list(conn.search(None, 1))[0]
