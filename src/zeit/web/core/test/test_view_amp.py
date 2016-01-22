@@ -3,7 +3,7 @@ import pytest
 
 
 def test_amp_contains_required_microdata(testbrowser, testserver):
-    browser = testbrowser('/amp/zeit-online/article/01')
+    browser = testbrowser('/amp/zeit-online/article/amp')
     publisher = browser.cssselect('[itemprop="publisher"]')[0]
     logo = publisher.cssselect('[itemprop="logo"]')[0]
 
@@ -34,10 +34,10 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
     # check Article
     assert article.get('itemtype') == 'http://schema.org/Article'
     assert mainEntityOfPage.get('href') == (
-        testserver.url + '/zeit-online/article/01')
+        testserver.url + '/zeit-online/article/amp')
     text = headline.text_content().strip()
-    assert text.startswith(u'"Der Hobbit": ')
-    assert text.endswith(u'Geht\'s noch größer?')
+    assert text.startswith(u'Flüchtlinge: ')
+    assert text.endswith(u'Mehr Davos, weniger Kreuth')
     assert len(description.text_content().strip())
 
     # check ImageObject
@@ -52,21 +52,21 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
     person = copyrightHolder.cssselect('[itemprop="name"]')[0]
     assert person.text == u'© Warner Bros.'
 
-    assert datePublished.get('datetime') == '2015-05-27T19:11:30+02:00'
-    assert dateModified.get('datetime') == '2015-05-27T19:11:30+02:00'
+    assert datePublished.get('datetime') == '2016-01-22T11:55:46+01:00'
+    assert dateModified.get('datetime') == '2016-01-22T11:55:46+01:00'
 
     assert author.get('itemtype') == 'http://schema.org/Person'
-    assert author.cssselect('[itemprop="name"]')[0].text == 'Wenke Husmann'
+    assert author.cssselect('[itemprop="name"]')[0].text == 'Jochen Wegner'
     assert author.cssselect('[itemprop="url"]')[0].get('href') == (
-        testserver.url + '/autoren/H/Wenke_Husmann/index.xml')
+        testserver.url + '/autoren/W/Jochen_Wegner/index')
 
 
 def test_amp_shows_breaking_news_banner(testbrowser):
-    browser = testbrowser('/amp/zeit-online/article/01?debug=eilmeldung')
+    browser = testbrowser('/amp/zeit-online/article/amp?debug=eilmeldung')
     assert browser.cssselect('.breaking-news-banner')
 
 
 def test_amp_has_correct_canonical_url(testbrowser, testserver):
-    browser = testbrowser('/amp/zeit-online/article/01')
+    browser = testbrowser('/amp/zeit-online/article/amp')
     assert browser.cssselect('link[rel="canonical"]')[0].get('href') == (
-        testserver.url + '/zeit-online/article/01')
+        testserver.url + '/zeit-online/article/amp')
