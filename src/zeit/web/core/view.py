@@ -18,18 +18,17 @@ import zope.component
 from zeit.solr import query as lq
 import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
-import zeit.connector.connector
-import zeit.connector.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
-import zeit.content.image.interfaces
 import zeit.content.text.interfaces
 import zeit.solr.interfaces
 
 import zeit.web
-import zeit.web.core.article
+import zeit.web.core.application
+import zeit.web.core.banner
 import zeit.web.core.comments
 import zeit.web.core.date
+import zeit.web.core.navigation
 
 
 log = logging.getLogger(__name__)
@@ -123,17 +122,17 @@ class Base(object):
 
     @zeit.web.reify
     def third_party_modules_is_enabled(self):
-        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
+        return zeit.web.core.application.FEATURE_TOGGLES.find(
             'third_party_modules')
 
     @zeit.web.reify
     def iqd_is_enabled(self):
-        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
+        return zeit.web.core.application.FEATURE_TOGGLES.find(
             'iqd')
 
     @zeit.web.reify
     def tracking_is_enabled(self):
-        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
+        return zeit.web.core.application.FEATURE_TOGGLES.find(
             'tracking')
 
     def _set_response_headers(self):
@@ -253,7 +252,8 @@ class Base(object):
                 "".join(re.findall(r"[A-Za-z0-9_]*", adv_title)).lower(),
                 self.banner_type)
         # third: do the mapping
-        mappings = zeit.web.core.banner.banner_id_mappings
+        mappings = zeit.web.core.banner.BANNER_ID_MAPPINGS_SOURCE
+
         for mapping in mappings:
             if getattr(self, mapping['target'], None) == mapping['value']:
                 # change ressort but leave subressort intact
@@ -347,7 +347,7 @@ class Base(object):
 
     def banner(self, tile):
         try:
-            return zeit.web.core.banner.banner_list[tile - 1]
+            return list(zeit.web.core.banner.BANNER_SOURCE)[tile - 1]
         except IndexError:
             return
 
@@ -365,23 +365,26 @@ class Base(object):
 
     @zeit.web.reify
     def navigation(self):
-        return zeit.web.core.navigation.navigation
+        return zeit.web.core.navigation.NAVIGATION_SOURCE.navigation
 
     @zeit.web.reify
     def navigation_services(self):
-        return zeit.web.core.navigation.navigation_services
+        return zeit.web.core.navigation.NAVIGATION_SERVICES_SOURCE.navigation
 
     @zeit.web.reify
     def navigation_classifieds(self):
-        return zeit.web.core.navigation.navigation_classifieds
+        src = zeit.web.core.navigation.NAVIGATION_CLASSIFIEDS_SOURCE
+        return src.navigation
 
     @zeit.web.reify
     def navigation_footer_publisher(self):
-        return zeit.web.core.navigation.navigation_footer_publisher
+        src = zeit.web.core.navigation.NAVIGATION_FOOTER_PUBLISHER_SOURCE
+        return src.navigation
 
     @zeit.web.reify
     def navigation_footer_links(self):
-        return zeit.web.core.navigation.navigation_footer_links
+        src = zeit.web.core.navigation.NAVIGATION_FOOTER_LINKS_SOURCE
+        return src.navigation
 
     @zeit.web.reify
     def title(self):
@@ -468,7 +471,7 @@ class Base(object):
 
     @zeit.web.reify
     def iqd_mobile_settings(self):
-        iqd_ids = zeit.web.core.banner.iqd_mobile_ids
+        iqd_ids = zeit.web.core.banner.IQD_MOBILE_IDS_SOURCE.ids
         if self.is_hp:
             return getattr(iqd_ids['hp'], 'centerpage')
         try:
@@ -512,7 +515,7 @@ class Base(object):
 
     @zeit.web.reify
     def article_lineage_is_enabled(self):
-        return zeit.web.core.sources.FEATURE_TOGGLE_SOURCE.find(
+        return zeit.web.core.application.FEATURE_TOGGLES.find(
             'article_lineage')
 
     @zeit.web.reify

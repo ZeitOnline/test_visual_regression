@@ -15,7 +15,6 @@ import babel.dates
 import pyramid.threadlocal
 import repoze.bitblt.transform
 import zope.component
-import zope.component.interfaces
 
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
@@ -25,8 +24,7 @@ import zeit.content.link.interfaces
 import zeit.magazin.interfaces
 
 import zeit.web
-import zeit.web.core.article
-import zeit.web.core.comments
+import zeit.web.core.centerpage
 import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.utils
@@ -37,7 +35,7 @@ log = logging.getLogger(__name__)
 @zeit.web.register_global
 def get_variant(group, variant_id):
     try:
-        variant = zeit.web.core.sources.VARIANT_SOURCE.factory.find(
+        variant = zeit.web.core.image.VARIANT_SOURCE.factory.find(
             group, variant_id)
     except TypeError, err:
         log.debug(err.message)
@@ -289,7 +287,7 @@ def get_layout(block, request=None):
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
 
-    layout = zeit.web.core.sources.TEASER_MAPPING.get(layout, layout)
+    layout = zeit.web.core.centerpage.TEASER_MAPPING.get(layout, layout)
 
     if key:
         request.teaser_layout[key] = layout
@@ -508,7 +506,7 @@ def closest_substitute_image(image_group,
         return image_group.get(image_pattern)
 
     # Determine the image scale correlating to the provided pattern.
-    scale = zeit.web.core.sources.IMAGE_SCALE_SOURCE.find(image_pattern)
+    scale = zeit.web.core.image.IMAGE_SCALE_SOURCE.find(image_pattern)
     if not scale:
         return
 
