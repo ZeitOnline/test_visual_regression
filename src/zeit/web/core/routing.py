@@ -180,7 +180,8 @@ class Folder(Traversable):
             return
         if getattr(tdict['request'].matched_route, 'name', '') == 'home' or (
                 type(tdict['context']) == zeit.cms.repository.folder.Folder):
-            url = '{}/index'.format(tdict['request'].url.rstrip('/'))
+            url = zeit.web.core.utils.update_path(
+                tdict['request'].url, tdict['request'].path, 'index')
             raise pyramid.httpexceptions.HTTPMovedPermanently(location=url)
 
 
@@ -189,7 +190,8 @@ class DynamicFolder(CenterPage):
 
     def __call__(self, tdict):
         if not tdict['view_name']:
-            url = '{}/index'.format(tdict['request'].url.rstrip('/'))
+            url = zeit.web.core.utils.update_path(
+                tdict['request'].url, tdict['request'].path, 'index')
             raise pyramid.httpexceptions.HTTPMovedPermanently(location=url)
         try:
             tdict['context'] = self.context[tdict['view_name']]
