@@ -292,6 +292,11 @@ class InstantArticle(Article):
     def wrap_in_cdata(self):
         return pyramid.settings.asbool(self.request.GET.get('cdata'))
 
+    @zeit.web.reify
+    def date_last_published(self):
+        return zeit.cms.workflow.interfaces.IPublishInfo(
+            self.context).date_last_published
+
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
              route_name='fbia',

@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - BUG-337: Show sharing links on video pages
 
+- FIX: IA: use date-last-published so articles get updated at Facebook
+
 
 2.50 (2016-01-20)
 -----------------
