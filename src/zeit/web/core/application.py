@@ -1,45 +1,46 @@
 import ast
-import beaker.util
-import bugsnag
-import bugsnag.wsgi.middleware
-import dogpile.cache
-import jinja2
-import jinja2.ext
 import logging
 import os.path
+import re
+import urlparse
+
+import bugsnag
+import bugsnag.wsgi.middleware
+import jinja2
+import jinja2.ext
 import pkg_resources
 import pyramid.authorization
 import pyramid.config
 import pyramid.renderers
-import pyramid_beaker
-import pyramid_dogpile_cache
 import pyramid_jinja2
 import pyramid_zodbconn
 import pysolr
-import re
 import requests.sessions
-import urlparse
 import venusian
+import zc.sourcefactory.source
+import zope.app.appsetup.product
+import zope.component
+import zope.configuration.xmlconfig
+import zope.interface
+
+import zeit.cms.content.sources
 import zeit.cms.content.xmlsupport
 import zeit.cms.repository.file
 import zeit.cms.repository.folder
 import zeit.cms.repository.interfaces
 import zeit.cms.repository.repository
 import zeit.connector
+
 import zeit.web
 import zeit.web.core
-import zeit.web.core.banner
+import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
-import zope.app.appsetup.product
-import zope.component
-import zope.configuration.xmlconfig
-import zope.interface
-import zope.interface.declarations
 
 
 log = logging.getLogger(__name__)
+CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 
 class Application(object):
@@ -47,19 +48,18 @@ class Application(object):
     DONT_SCAN = [re.compile('test$').search]
 
     def __init__(self):
-        self.settings = {}
+        self.settings = Settings()
 
     def __call__(self, global_config, **settings):
-        settings = pyramid.config.settings.Settings(d=settings)
-        settings['app_servers'] = filter(
-            None, settings['app_servers'].split(','))
-        settings['linkreach_host'] = maybe_convert_egg_url(
-            settings.get('linkreach_host', ''))
-
-        settings['sso_key'] = self.load_sso_key(
-            settings.get('sso_key', None))
         self.settings.update(settings)
-        # Temporarily provide settings for our non-pyramid utilities.
+        self.settings['app_servers'] = filter(
+            None, settings['app_servers'].split(','))
+        self.settings['linkreach_host'] = maybe_convert_egg_url(
+            settings.get('linkreach_host', ''))
+        self.settings['sso_key'] = self.load_sso_key(
+            settings.get('sso_key', None))
+        # NOTE: non-pyramid utilities can only access deployment settings,
+        # runtime settings are not available until Application setup is done.
         zope.component.provideUtility(
             self.settings, zeit.web.core.interfaces.ISettings)
         self.configure()
@@ -75,54 +75,7 @@ class Application(object):
     def configure(self):
         self.configure_zca()
         self.configure_pyramid()
-        self.configure_banner()
-        self.configure_navigation()
         self.configure_bugsnag()
-
-    def configure_banner(self):
-        banner_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_banner-source', ''))
-        zeit.web.core.banner.banner_list = (
-            zeit.web.core.banner.make_banner_list(banner_source))
-        iqd_mobile_ids_source = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_iqd-mobile-ids', ''))
-        zeit.web.core.banner.iqd_mobile_ids = (
-            zeit.web.core.banner.make_iqd_mobile_ids(iqd_mobile_ids_source))
-        banner_id_mappings = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_banner-id-mappings', ''))
-        zeit.web.core.banner.banner_id_mappings = (
-            zeit.web.core.banner.make_banner_id_mappings(banner_id_mappings))
-
-    def configure_navigation(self):
-        navigation_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_navigation', ''))
-        zeit.web.core.navigation.navigation = (
-            zeit.web.core.navigation.make_navigation(navigation_config))
-        zeit.web.core.navigation.navigation_by_name = (
-            zeit.web.core.navigation.make_navigation_by_name(
-                navigation_config))
-        navigation_services_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_navigation-services', ''))
-        zeit.web.core.navigation.navigation_services = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_services_config))
-        navigation_classifieds_config = maybe_convert_egg_url(
-            self.settings.get('vivi_zeit.web_navigation-classifieds', ''))
-        zeit.web.core.navigation.navigation_classifieds = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_classifieds_config))
-        navigation_footer_publisher_config = maybe_convert_egg_url(
-            self.settings.get(
-                'vivi_zeit.web_navigation-footer-publisher', ''))
-        zeit.web.core.navigation.navigation_footer_publisher = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_footer_publisher_config))
-        navigation_footer_links_config = maybe_convert_egg_url(
-            self.settings.get(
-                'vivi_zeit.web_navigation-footer-links', ''))
-        zeit.web.core.navigation.navigation_footer_links = (
-            zeit.web.core.navigation.make_navigation(
-                navigation_footer_links_config))
 
     def configure_bugsnag(self):
         bugsnag.configure(
@@ -145,10 +98,14 @@ class Application(object):
 
         self.config = config = pyramid.config.Configurator(registry=registry)
         config.setup_registry(settings=self.settings)
-        zope.component.getSiteManager().unregisterUtility(
-            self.settings, zeit.web.core.interfaces.ISettings)
-        zope.component.provideUtility(
-            config.registry.settings, zeit.web.core.interfaces.ISettings)
+        # setup_registry() insists on copying the settings mapping into a new
+        # `pyramid.config.settings.Settings` instance. But we want
+        # registry.settings and the ISettings utility to be the same object,
+        # for easy test setup. So we first copy over any values set by Pyramid
+        # or included packages, and then replace the Pyramid instance with our
+        # instance again.
+        self.settings.deployment.update(config.registry.settings)
+        config.registry.settings = self.settings
 
         # Never commit, always abort. zeit.web should never write anything,
         # anyway, and at least when running in preview mode, not committing
@@ -210,7 +167,7 @@ class Application(object):
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.web, ignore=self.DONT_SCAN)
 
-        self.configure_dogpile_cache()
+        config.include('pyramid_dogpile_cache2')
 
         config.set_session_factory(zeit.web.core.session.CacheSession)
 
@@ -329,74 +286,72 @@ class Application(object):
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
 
-    def configure_dogpile_cache(self):
-        """This is what config.include('pyramid_dogpile_cache') *should* be.
 
-        We can use pyramid_dogpile_cache only for parts of its config parsing
-        code, since its `get_region` API wants to immediately configure() the
-        regions at import time, where there is no configuration yet -- thus it
-        is rather useless and we use our own zeit.web.core.cache.get_region()
-        instead.
+@zope.interface.implementer(zeit.web.core.interfaces.ISettings)
+class Settings(pyramid.config.settings.Settings,
+               zeit.cms.content.sources.SimpleXMLSourceBase):
 
-        The code here is somewhat inspired by pyramid_dogpile_cache.includeme()
-        and build_dogpile_region_from_dict().
-        """
-        self._parse_dogpile_cache_settings()
-        build_settings = (
-            pyramid_dogpile_cache.build_dogpile_region_settings_from_settings)
-        _, region_settings = build_settings(self.config.registry.settings)
+    product_configuration = 'zeit.web'
+    config_url = 'runtime-settings-source'
 
-        for name, settings in region_settings.items():
-            settings['expiration_time'] = int(settings['expiration_time'])
-            settings.setdefault(
-                'memcache_expire_time', settings['expiration_time'] +
-                int(self.config.registry.settings.get(
-                    'dogpile_cache.memcache_expire_time_interval', 30)))
+    runtime_config = 'vivi_{}_{}'.format(product_configuration, config_url)
 
-            region = zeit.web.core.cache.get_region(name)
-            # XXX kludgy: Remove any existing backend configuration, so
-            # configure_dogpile_cache() may be called multiple times (which
-            # should only happen in tests).
-            region.__dict__.pop('backend', None)
-            region.configure_from_config(settings, prefix='')
+    @property
+    def deployment(self):
+        return super(Settings, self)
 
-        # Since get_region() returns an unconfigured region for *any* name you
-        # pass in, we make sure that all used regions are configured now.
-        for region in zeit.web.core.cache.CACHE_REGIONS.values():
-            if 'backend' not in region.__dict__:
-                raise dogpile.cache.exception.RegionNotConfigured(
-                    'Region %r used in python code, but not configured' %
-                    region.name)
+    @property
+    def runtime(self):
+        if ('backend' not in CONFIG_CACHE.__dict__ or
+                not self.deployment.__contains__(self.runtime_config)):
+            # We're at an early Application setup stage, no runtime
+            # configuration available or needed (e.g. for Pyramid setup).
+            return {}
+        return self._load_runtime_settings()
 
-    def _parse_dogpile_cache_settings(self):
-        # XXX pyramid_dogpile_cache should do all of this, not us. :-(
-        # Also, this code only supports our specific use-case: all regions use
-        # the same memcache settings.
-        settings = self.config.registry.settings
+    @CONFIG_CACHE.cache_on_arguments()
+    def _load_runtime_settings(self):
+        result = {}
+        for node in self._get_tree().iterfind('setting'):
+            result[node.get('name')] = node.pyval
+        return result
 
-        if 'dogpile_cache.pylibmc_url' in settings:
-            settings['dogpile.cache.arguments.url'] = settings[
-                'dogpile_cache.pylibmc_url'].split(';')
-            del settings['dogpile_cache.pylibmc_url']
+    @property
+    def combined(self):
+        result = {}
+        result.update(self.runtime)
+        result.update(self)
+        return result
 
-        for key in ['dogpile_cache.arguments.lock_timeout',
-                    'dogpile_cache.arguments.memcache_expire_time']:
-            if key in settings:
-                settings[key] = int(settings[key])
+    def get(self, key, default=None):
+        if self.deployment.__contains__(key):
+            return self.deployment.get(key)
+        return self.runtime.get(key, default)
 
-        behaviors = {}
-        behavior_prefix = 'dogpile_cache.pylibmc_behavior.'
-        to_remove = []
-        for key, value in settings.items():
-            if not key.startswith(behavior_prefix):
-                continue
-            behaviors[key.replace(behavior_prefix, '')] = value
-            to_remove.append(key)
-        if behaviors:
-            convert = beaker.util.coerce_memcached_behaviors
-            settings['dogpile_cache.arguments.behaviors'] = convert(behaviors)
-            for key in to_remove:
-                del settings[key]
+    def __getitem__(self, key):
+        if self.deployment.__contains__(key):
+            return self.deployment.get(key)
+        return self.runtime[key]
+
+    def __contains__(self, key):
+        return (self.deployment.__contains__(key) or
+                self.runtime.__contains__(key))
+
+    def keys(self):
+        return self.combined.keys()
+
+    def values(self):
+        return self.combined.values()
+
+    def items(self):
+        return self.combined.items()
+
+    def __iter__(self):
+        return iter(self.keys())
+
+    def __len__(self):
+        return len(self.keys())
+
 
 factory = Application()
 
@@ -428,6 +383,26 @@ def configure_host(key):
         return request.route_url('home', _app_url=prefix).rstrip('/')
     wrapped.__name__ = key + '_host'
     return wrapped
+
+
+class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+    # Only contextual so we can customize source_class
+
+    product_configuration = 'zeit.web'
+    config_url = 'feature-toggle-source'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        def find(self, name):
+            return self.factory.find(name)
+
+    def find(self, name):
+        try:
+            return bool(getattr(self._get_tree(), name, False))
+        except TypeError:
+            return False
+
+FEATURE_TOGGLES = FeatureToggleSource()(None)
 
 
 # Monkey-patch so our content provides a marker interface,

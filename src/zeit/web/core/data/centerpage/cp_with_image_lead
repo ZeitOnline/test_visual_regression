@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
   <head>
-  
+
     <header_image xsi:nil="true"/>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
@@ -37,16 +37,17 @@
       &lt;tuple&gt;
         &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
         &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2009" module="zeit.content.cp.interfaces"/&gt;
         &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
-  
-  
-  
-  
-  
+
+
+
+
+
   </head>
 
   <body>

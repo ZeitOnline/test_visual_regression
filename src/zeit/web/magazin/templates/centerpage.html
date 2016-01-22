@@ -8,41 +8,10 @@ Available attributes:
 #}
 {% extends "zeit.web.magazin:templates/layout.html" %}
 
-{% block page_title %}
-    {# {% if view.is_hp == False %}
-        <span class="cp_title">{{ view.title }}</span>
-    {% endif %} #}
-{% endblock page_title %}
-
-{%  block page_wrap_inner %}
-    <div class="page-wrap--inner for-centerpage" id="js-page-wrap-inner">
-{% endblock page_wrap_inner %}
-
-{%  block content %}
-    {% profile %}
-    {%- include "zeit.web.magazin:templates/inc/cp_area_lead_full_teaser.html" ignore missing -%}
-    {%- include "zeit.web.magazin:templates/inc/cp_area_lead_1.html" ignore missing -%}
-    {% endprofile %}
-
-    {% if view.is_hp %}
-        {% profile %}
-        {%- include "zeit.web.magazin:templates/inc/cp_area_buzz.html" ignore missing -%}
-        {% endprofile %}
-    {% endif %}
-
-    {% profile %}
-    {%- include "zeit.web.magazin:templates/inc/cp_area_lead_2.html" ignore missing -%}
-    {% endprofile %}
-
-    {% if view.monothematic_block %}
-        {% profile %}
-        {%- include "zeit.web.magazin:templates/inc/cp_area_monothematicblock.html" ignore missing -%}
-        {% endprofile %}
-    {% endif %}
-
-    {% if view.teaserbar %}
-        {% profile %}
-        {%- include "zeit.web.magazin:templates/inc/cp_area_teaserbar.html" ignore missing -%}
-        {% endprofile %}
-    {% endif %}
+{% block content %}
+    {% for region in view.regions %}
+        {% set region_loop = loop %}
+        {%- include ["zeit.web.core:templates/inc/region/{}.html".format(region.kind),
+                     "zeit.web.core:templates/inc/region/default.html"] ignore missing -%}
+    {% endfor %}
 {% endblock content %}
