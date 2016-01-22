@@ -710,7 +710,6 @@ class Content(Base):
         if self.unobfuscated_source:
             return base64.b64encode(self.unobfuscated_source.encode('latin-1'))
 
-
     @zeit.web.reify
     def unobfuscated_source(self):
         if self.context.product and self.context.product.show == 'issue':
