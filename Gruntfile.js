@@ -423,6 +423,7 @@ module.exports = function(grunt) {
     grunt.registerTask('svg', project.tasks.svg);
     grunt.registerTask('icons', project.tasks.icons);
     grunt.registerTask('symbols', project.tasks.symbols);
+    grunt.registerTask('css', project.tasks.css);
     grunt.registerTask('lint', project.tasks.lint);
 
 /*
