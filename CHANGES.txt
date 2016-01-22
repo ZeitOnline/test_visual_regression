@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2604: Add webtrekk pixel to amp article template
 
+- ZON-2628: Redirect to standard article view if AMP is disabled
+
 - ZON-2573: Refactor banner config to XML sources
 
 - ZON-2574: Refactor navigation config to XML sources
