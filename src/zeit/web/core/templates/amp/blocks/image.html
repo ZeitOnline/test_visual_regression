@@ -24,7 +24,7 @@
 			{%- endif %}
 			<amp-img
 				src="{{ src | replace(' ', '%20') }}"
-				srcset="{% for w in sizes %}{{ "%s__%sx%s %sw" | format(source, w, (w / image.ratio) | int, w) | replace(' ', '%20') }}{{ ", " if not loop.last }}{% endfor %}"
+				srcset="{% for w in sizes %}{{ "%s__%sx%s %sw" | format(source | replace(' ', '%20'), w, (w / image.ratio) | int, w) }}{{ ", " if not loop.last }}{% endfor %}"
 				alt="{{ image.alt }}"
 				width="{{ width }}"
 				height="{{ height }}"
