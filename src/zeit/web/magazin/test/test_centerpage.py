@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
-# import re
+import re
 
-# from zope.component import getMultiAdapter
+from zope.component import getMultiAdapter
 import mock
-# import pyramid.threadlocal
-# import pytest
+import pyramid.threadlocal
+import pytest
 import zope.component
 
-# from zeit.cms.checkout.helper import checked_out
-# import zeit.cms.interfaces
-# import zeit.content.gallery.gallery
-# import zeit.cms.syndication.feed
+from zeit.cms.checkout.helper import checked_out
+import zeit.cms.interfaces
+import zeit.content.gallery.gallery
+import zeit.cms.syndication.feed
 
-# from zeit.web.core.template import default_image_url
-# from zeit.web.core.template import get_teaser_image
-# from zeit.web.core.template import get_teaser_template
+from zeit.web.core.template import default_image_url
+from zeit.web.core.template import get_teaser_image
+from zeit.web.core.template import get_teaser_template
 import zeit.web.core.centerpage
-# import zeit.web.magazin.view_centerpage
+import zeit.web.magazin.view_centerpage
 
 
 def test_cp_should_have_buzz_module(
