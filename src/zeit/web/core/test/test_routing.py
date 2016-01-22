@@ -128,14 +128,16 @@ def test_blacklist_entry_should_match_everything_but_image_urls(testbrowser):
     ('', '/index'),
     ('/', '/index'),
     ('/zeit-online', '/zeit-online/index'),
-    ('/zeit-online/', '/zeit-online/index')])
+    ('/zeit-online/', '/zeit-online/index'),
+    ('/zeit-online/?wt_param=12001', '/zeit-online/index?wt_param=12001'),
+    ('/zeit-online?page=25#static', '/zeit-online/index?page=25#static')])
 def test_plain_folder_traversal_should_trigger_redirect_to_index(
         path, moved, application):
 
     tdict = dict(
         context=zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/' + path.lstrip('/')),
-        traversed=tuple(path.split('/')),
+            'http://xml.zeit.de/' + path.split('?')[0].lstrip('/')),
+        traversed=tuple(path.split('?')[0].split('/')),
         view_name='',
         request=pyramid.request.Request.blank(path))
 
@@ -148,13 +150,15 @@ def test_plain_folder_traversal_should_trigger_redirect_to_index(
 
 @pytest.mark.parametrize('path, moved', [
     ('/dynamic', '/dynamic/index'),
-    ('/dynamic/', '/dynamic/index')])
+    ('/dynamic/', '/dynamic/index'),
+    ('/dynamic/?wt_param=12001', '/dynamic/index?wt_param=12001'),
+    ('/dynamic?page=25#static', '/dynamic/index?page=25#static')])
 def test_dynamic_folder_traversal_should_trigger_redirect_to_index(
         path, moved, application):
 
     tdict = dict(
         context=zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic'),
-        traversed=tuple(path.split('/')),
+        traversed=tuple(path.split('?')[0].split('/')),
         view_name='',
         request=pyramid.request.Request.blank(path))
 

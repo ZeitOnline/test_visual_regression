@@ -128,7 +128,16 @@ class ITeaserSequence(zope.interface.Interface):
 
 
 class ISettings(pyramid.interfaces.ISettings):
-    """Custom interface class to register settings as a utility"""
+    """Dictionary of application configuration settings.
+
+    Settings come from two sources.
+    1. The web.ini file ("deployment settings"), read once on process startup.
+    2. An XML file read from a URL ("runtime settings"), read on demand and
+    cached using the cache region `config`.
+
+    Read operations look in the deployment settings first, then runtime.
+    Write operations write to the deployment settings.
+    """
 
 
 class ITopicLink(zope.interface.Interface):

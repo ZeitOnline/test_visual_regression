@@ -1,21 +1,19 @@
 {% extends "zeit.web.core:templates/amp/layout.html" %}
 
-{% block style %}
-	<style amp-custom>
-		{% include "zeit.web.static:css/web.magazin/amp.css" %}
-	</style>
-{% endblock style %}
-
 {% block symbols %}
 	{% include "zeit.web.static:css/web.magazin/amp.svg" %}
 {% endblock symbols %}
 
 {% block logo %}
-	<div itemprop="brand">
+	<div class="article__item article__item--wide">
 		<a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index">
-			<meta itemprop="name" content="ZEIT ONLINE">
-			<svg class="header__logo">
+			<meta itemprop="name" content="ZEITmagazin ONLINE">
+			<svg class="header__logo" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
 				<use xlink:href="#svg-logo-zmo"/>
+				{# The "logo" dimensions must not exceed 600x60 -#}
+				<meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zmo.png">
+				<meta itemprop="width" content="600">
+				<meta itemprop="height" content="56">
 			</svg>
 		</a>
 	</div>
@@ -28,3 +26,9 @@
 		</svg>
 	</a>
 {% endblock footer_logo %}
+
+{% block style %}
+	<style amp-custom>
+		{% include "zeit.web.static:css/web.magazin/amp.css" %}
+	</style>
+{% endblock style %}

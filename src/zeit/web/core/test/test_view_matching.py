@@ -123,8 +123,10 @@ def test_fbia_view_should_match(application):
 
 def test_amp_view_should_match(application):
     pviews = pyramid.scripts.pviews.PViewsCommand([])
-    registry = application.zeit_app.config.registry
     request = pyramid.request.Request.blank('/amp/zeit-online/article/simple')
-    request.registry = registry
+    request.registry = application.zeit_app.config.registry
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
 
-    assert pviews._find_view(request).func_name == 'AcceleratedMobilePageArticle'
+    assert pviews._find_view(request).match(context, request).func_name == (
+        'AcceleratedMobilePageArticle')

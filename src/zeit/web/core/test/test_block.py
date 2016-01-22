@@ -234,8 +234,8 @@ def test_vivi_module_should_have_a_layout_attribute():
     assert module._layout.id == 'barbapapa'
 
 
-def test_block_liveblog_instance_causing_timeouts(application, mockserver,
-                                                  monkeypatch):
+def test_block_liveblog_instance_causing_timeouts(
+        application, mockserver, monkeypatch):
 
     # Disable caching
     new_cache = copy.copy(pyramid_dogpile_cache2.CACHE_REGIONS)
@@ -262,7 +262,8 @@ def test_block_liveblog_instance_causing_timeouts(application, mockserver,
 
     # Set unachievable timeout
     mockserver.settings['sleep'] = 1
-    monkeypatch.setattr(zeit.web.core.block.Liveblog, 'timeout', 0.001)
+    conf = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
+    conf['liveblog_timeout'] = 0.001
 
     model_block = mock.Mock()
     model_block.blog_id = '166-201'

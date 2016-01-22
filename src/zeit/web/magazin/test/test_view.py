@@ -436,7 +436,7 @@ def test_article_has_correct_sharing_image(testserver, testbrowser):
     xpath = testbrowser('/artikel/01').document.xpath
     source = testserver.url + '/exampleimages/artikel/01/schoppenstube/'\
         'wide__1300x731'
-    assert xpath('//link[@itemprop="image"]/@href')[0] == source
+    assert xpath('//link[@itemprop="primaryImageOfPage"]/@href')[0] == source
     assert xpath('//meta[@property="og:image"]/@content')[0] == source
     assert xpath('//meta[@name="twitter:image"]/@content')[0] == source
 
