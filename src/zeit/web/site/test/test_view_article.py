@@ -1312,15 +1312,16 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
 
 
 def test_amp_article_has_correct_webtrekk_pixel(testbrowser, testserver):
-    browser = testbrowser('/amp/zeit-online/article/01')
+    browser = testbrowser('/amp/zeit-online/article/amp')
     source = browser.cssselect('amp-pixel')[0].attrib.get('src')
     assert source == (
-        'http://zeit01.webtrekk.net/981949533494636/wt.pl?'
-        'p=328,redaktion.kultur...article.zede|{url}/zeit-online/article/01'
-        ',0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&cg3=kultur&cg4=zede&cg5='
-        '&cg6=&cg7=01&cg8=kultur/article&cg9=2015-05-27&cp1=wenke husmann'
-        '&cp2=kultur/bild-text&cp3=1/1&cp4=kultur;"der hobbit";wein;'
-        'italien;toskana;bologna;bozen;florenz&cp5=2015-05-27 19:11:30.'
-        '179510+02:00&cp6=5010&cp7=&cp8=zede&cp9=kultur/article&cp10=&cp11='
+        'http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
+        'redaktion.wirtschaft...article.zede|{url}/zeit-online/article/amp'
+        ',0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&cg3=wirtschaft&cg4=zede'
+        '&cg5=&cg6=&cg7=amp&cg8=wirtschaft/article&cg9=2015-05-27'
+        '&cp1=jochen wegner&cp2=wirtschaft/bild-text&cp3=1/2&cp4=wirtschaft;'
+        'flüchtlinge;flüchtling;weltwirtschaftsforum davos;arbeitsmarkt;'
+        'migration;europäische union&cp5=2016-01-22 11:55:46.556878+01:00'
+        '&cp6=7583&cp7=&cp8=zede&cp9=wirtschaft/article&cp10=&cp11='
         '&cp12=mobile.site&cp13=mobile&cp15=&cp25=amp').format(
-            url=testserver['http_address'])
+        url=testserver['http_address'])
