@@ -6,9 +6,15 @@ Change log for zeit.web
 
 - Fix: Let batou & grunt play well together
 
+- BUG-334: Remove gradient overlay for classic fullwidth teaser
+
 - ZON-2573: Refactor banner config to XML sources
 
 - ZON-2574: Refactor navigation config to XML sources
+
+- ZON-2654: Move some web.ini settings to XML sources
+
+- ZON-2640: Update css for em class moderation
 
 - BUG-337: Show sharing links on video pages
 
@@ -28,6 +34,8 @@ Change log for zeit.web
 - FIX: Scale crossword puzzle to full-width in print
 
 - ZON-2535: Start ZMO moveover
+
+- BUG-270: Make ZMO portraiboxes also visible on mobile and tablet
 
 
 2.49 (2016-01-19)
