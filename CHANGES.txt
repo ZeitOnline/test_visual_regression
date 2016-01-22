@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - FIX: IA: use date-last-published so articles get updated at Facebook
 
+- MAINT: Allow template-only centerpage modules to be discovered
+
 
 2.50 (2016-01-20)
 -----------------
