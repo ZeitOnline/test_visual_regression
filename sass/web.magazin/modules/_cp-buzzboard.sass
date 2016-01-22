@@ -3,14 +3,13 @@
 %buzzboard__heading
     font-size: $font-ml
     font-weight: bold
-    letter-spacing: 1px
+    letter-spacing: $hair
     text-align: center
     text-transform: uppercase
 
 .buzzboard
     +respond-max($break-2)
         +visuallyhidden
-    clear: left
     font-family: $font-tabletgothic
     padding: $compact
 
@@ -28,14 +27,10 @@
         display: block
 
     &__table
-        width: 100%
         tbody
             counter-reset: buzz-board
         th
             @extend %buzzboard__heading
-            height: $medium
-            line-height: $medium
-            vertical-align: top
             width: 33%
             padding: $big 0
         tr
@@ -56,8 +51,7 @@
             font-size: $font-xxxl
             position: absolute
             left: 0
-            top: 0.075em
-            line-height: 1
+            line-height: 1em
 
     &__heading
         font-size: 1em
@@ -69,37 +63,18 @@
     &__kicker
         display: block
         font-size: $font-s
-        letter-spacing: 1px
+        letter-spacing: $hair
 
     &__title
-        font-family: $font-tabletgothic
-        font-size: $font-m
         font-weight: bold
 
     &__metadata
         color: $grey
         font-size: $font-s
-        margin: 0
 
-.cp_buzz__service
-    +inline-block(top)
-    width: 33%
-    .cp_buzz__header
-        font-size: $font-m
-        padding: $big 0
-
-.cp_buzz__icon
-    +background-size(cover)
-    display: inline-block
-    line-height: $medium
-    margin-right: $fine
-    height: $medium
-    width: $medium
-    vertical-align: middle
-
-.cp_buzz__service__list
-    counter-reset: buzz-list
-    padding: 0 $fine
-
-
+    &__icon
+        margin-right: $fine
+        height: $medium
+        width: $medium
+        vertical-align: middle
 

@@ -47,7 +47,7 @@ class MostreadBuzzbox(Buzzbox):
         self += self.reach.get_views(section='zeit-magazin')
         self.identification = 'zmo-mostread'
         self.score_pattern = ['Keine Leser', '{} Leser', '{} Leser']
-        # self.icon = 'sicon-buzz-views'
+        self.icon = 'buzz-views'
 
 
 @zeit.web.register_module('zmo-mostcommented')
@@ -61,7 +61,7 @@ class CommentsBuzzbox(Buzzbox):
         self.identification = 'zmo-mostcommented'
         self.score_pattern = [
             'Keine Kommentare', '{} Kommentar', '{} Kommentare']
-        # self.icon = 'sicon-buzz-comments'
+        self.icon = 'buzz-comments'
 
 
 @zeit.web.register_module('zmo-mostliked')
@@ -75,4 +75,4 @@ class FacebookBuzzbox(Buzzbox):
         self.identification = 'zmo-mostliked'
         self.score_pattern = [
             'Keine Empfehlungen', '{} Empfehlung', '{} Empfehlungen']
-        # self.icon = 'sicon-buzz-facebook'
+        self.icon = 'buzz-facebook'
