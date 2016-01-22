@@ -578,18 +578,15 @@ def test_get_module_filter_should_correctly_extract_cpextra_id(application):
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
     block = zeit.web.core.utils.find_block(cp, module='search-form')
 
-    block.visible = True
     block.cpextra = 'n/a'
-    assert zeit.web.core.template.get_module(block) is block
+    module = zeit.web.core.template.get_module(block)
+    assert isinstance(module, zeit.web.site.module.Module)
+    assert module.layout.id == 'n/a'
 
-    block.visible = True
     block.cpextra = 'search-form'
-    assert isinstance(zeit.web.core.template.get_module(block),
-                      zeit.web.site.module.search_form.Form)
-
-    block.visible = False
-    block.cpextra = 'n/a'
-    assert zeit.web.core.template.get_module(block) is block
+    module = zeit.web.core.template.get_module(block)
+    assert isinstance(module, zeit.web.site.module.search_form.Form)
+    assert module.layout.id == 'search-form'
 
 
 def test_pagination_calculation_should_deliver_valid_output():

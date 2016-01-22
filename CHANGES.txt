@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-2598: Introduce Accelerated Mobile Pages (AMP)
 
+- ZON-2604: Add webtrekk pixel to amp article template
+
+- ZON-2628: Redirect to standard article view if AMP is disabled
+
 - ZON-2573: Refactor banner config to XML sources
 
 - ZON-2574: Refactor navigation config to XML sources
@@ -19,6 +23,10 @@ Change log for zeit.web
 - BUG-335: Correctly append /index to (dynamic) folder path redirects
 
 - BUG-337: Show sharing links on video pages
+
+- FIX: IA: use date-last-published so articles get updated at Facebook
+
+- MAINT: Allow template-only centerpage modules to be discovered
 
 
 2.50 (2016-01-20)
