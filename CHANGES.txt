@@ -4,6 +4,8 @@ Change log for zeit.web
 2.51 (unreleased)
 -----------------
 
+- ZON-2535: Migrate ZMO to R/A/M page structure
+
 - BUG-334: Remove gradient overlay for classic fullwidth teaser
 
 - ZON-2573: Refactor banner config to XML sources
