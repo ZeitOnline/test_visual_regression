@@ -121,6 +121,7 @@ class Application(object):
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('instantarticle', '/instantarticle/*traverse')
         config.add_route('fbia', '/fbia/*traverse')
+        config.add_route('amp', '/amp/*traverse')
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')

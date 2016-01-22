@@ -55,7 +55,7 @@
 
         {% block sharing_meta -%}
         <!-- sharing metadata -->
-        {{ lama.sharing_meta(view,request) }}
+        {%- include "zeit.web.magazin:templates/inc/meta/sharing.html" -%}
         {%- endblock sharing_meta %}
 
         <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>

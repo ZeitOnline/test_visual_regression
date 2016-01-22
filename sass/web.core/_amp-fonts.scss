@@ -1,0 +1,44 @@
+@font-face {
+    font-family: "TabletGothic";
+    src: url('/static/latest/fonts/tabletgothic/TabletGothic-Regular.eot');
+    src: url('/static/latest/fonts/tabletgothic/TabletGothic-Regular.eot?#iefix') format('embedded-opentype'),
+         url('/static/latest/fonts/tabletgothic/TabletGothic-Regular.woff') format('woff'),
+         url('/static/latest/fonts/tabletgothic/TabletGothic-Regular.ttf') format('truetype'),
+         url('/static/latest/fonts/tabletgothic/TabletGothic-Regular.svg#TabletGothic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "TabletGothic";
+    src: url('/static/latest/fonts/tabletgothic/TabletGothic-Bold.eot');
+    src: url('/static/latest/fonts/tabletgothic/TabletGothic-Bold.eot?#iefix') format('embedded-opentype'),
+         url('/static/latest/fonts/tabletgothic/TabletGothic-Bold.woff') format('woff'),
+         url('/static/latest/fonts/tabletgothic/TabletGothic-Bold.ttf') format('truetype'),
+         url('/static/latest/fonts/tabletgothic/TabletGothic-Bold.svg#TabletGothic-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "FranziskaWebPro";
+    src: url('/static/latest/fonts/franziska/FranziskaWebPro.eot');
+    src: url('/static/latest/fonts/franziska/FranziskaWebPro.eot?#iefix') format('embedded-opentype'),
+         url('/static/latest/fonts/franziska/FranziskaWebPro.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "FranziskaWebPro";
+    src: url('/static/latest/fonts/franziska/FranziskaWebPro-Demibold.eot');
+    src: url('/static/latest/fonts/franziska/FranziskaWebPro-Demibold.eot?#iefix') format('embedded-opentype'),
+         url('/static/latest/fonts/franziska/FranziskaWebPro-Demibold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "FranziskaWebPro";
+    src: url('/static/latest/fonts/franziska/FranziskaWebPro-Italic.eot');
+    src: url('/static/latest/fonts/franziska/FranziskaWebPro-Italic.eot?#iefix') format('embedded-opentype'),
+         url('/static/latest/fonts/franziska/FranziskaWebPro-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}

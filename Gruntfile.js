@@ -20,12 +20,13 @@ module.exports = function(grunt) {
         codeDir: './src/zeit/web/static/',
         rubyVersion: '1.9.3',
         tasks: {
-            production: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'svg' ],
+            production: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy', 'svg' ],
             development: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:icons', 'clean:symbols', 'svgmin', 'grunticon', 'svgstore' ],
-            icons: [ 'clean:icons', 'svgmin', 'grunticon' ],
-            symbols: [ 'clean:symbols', 'svgmin:symbols', 'svgstore', 'grunticon:symbols' ],
+            icons: [ 'clean:icons', 'svgmin:magazin', 'grunticon:magazin' ],
+            symbols: [ 'clean:symbols', 'svgmin:site', 'svgstore:site', 'grunticon:site' ],
+            css: [ 'compass:dist', 'compass:amp' ],
             lint: [ 'jshint', 'jscs' ]
         }
     };
@@ -113,8 +114,22 @@ module.exports = function(grunt) {
                     outputStyle: 'expanded'
                 }
             },
+            amp: {
+                options: {
+                    specify: [
+                        project.sourceDir + 'sass/**/amp.s{a,c}ss'
+                    ],
+                    force: true,
+                    environment: 'production',
+                    outputStyle: 'compact'
+                }
+            },
             dist: {
                 options: {
+                    specify: [
+                        project.sourceDir + 'sass/**/*.s{a,c}ss',
+                        '!' + project.sourceDir + 'sass/**/amp.s{a,c}ss'
+                    ],
                     force: true,
                     environment: 'production',
                     outputStyle: 'compressed'
@@ -225,8 +240,8 @@ module.exports = function(grunt) {
                 force: true
             },
             // cleanup minified SVGs, remove orphaned files
-            icons: [ '<%= svgmin.magazin.dest %>', '<%= svgmin.website.dest %>' ],
-            symbols: [ '<%= svgmin.symbols.dest %>' ],
+            icons: [ project.sourceDir + 'sass/web.*/icons/_minified' ],
+            symbols: [ project.sourceDir + 'sass/web.*/svg*/_minified' ],
             // delete old vendor scripts
             scripts: [ project.sourceDir + 'javascript/vendor' ],
             // delete unused directories
@@ -240,17 +255,23 @@ module.exports = function(grunt) {
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.magazin/icons/_minified'
             },
-            website: {
+            magazinAmp: {
                 expand: true,
-                cwd: project.sourceDir + 'sass/web.site/icons',
+                cwd: project.sourceDir + 'sass/web.magazin/svg-amp',
                 src: [ '*.svg' ],
-                dest: project.sourceDir + 'sass/web.site/icons/_minified'
+                dest: project.sourceDir + 'sass/web.magazin/svg-amp/_minified'
             },
-            symbols: {
+            site: {
                 expand: true,
                 cwd: project.sourceDir + 'sass/web.site/svg',
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.site/svg/_minified'
+            },
+            siteAmp: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.site/svg-amp',
+                src: [ '*.svg' ],
+                dest: project.sourceDir + 'sass/web.site/svg-amp/_minified'
             }
         },
 
@@ -275,18 +296,20 @@ module.exports = function(grunt) {
                     pngfolder: 'magazin'
                 }
             },
-            symbols: {
+            // this is only needed for the fallback PNGs for svg4everybody
+            // grunticon is not in use here
+            site: {
                 files: [{
                     expand: true,
-                    cwd: '<%= svgmin.symbols.dest %>',
+                    cwd: '<%= svgmin.site.dest %>',
                     src: [ '*.svg' ],
                     dest: project.codeDir + 'css/icons'
                 }],
                 options: {
-                    datasvgcss: 'symbols.data.svg.css',
-                    datapngcss: 'symbols.data.png.css',
-                    urlpngcss: 'symbols.fallback.css',
-                    previewhtml: 'symbols.preview.html',
+                    datasvgcss: 'site.data.svg.css',
+                    datapngcss: 'site.data.png.css',
+                    urlpngcss: 'site.fallback.css',
+                    previewhtml: 'site.preview.html',
                     pngfolder: 'site'
                 }
             }
@@ -307,8 +330,16 @@ module.exports = function(grunt) {
                     indent_char: '  '
                 }
             },
-            website: {
-                src: '<%= svgmin.symbols.dest %>/*.svg',
+            magazinAmp: {
+                src: '<%= svgmin.magazinAmp.dest %>/*.svg',
+                dest: project.codeDir + 'css/web.magazin/amp.svg'
+            },
+            siteAmp: {
+                src: '<%= svgmin.siteAmp.dest %>/*.svg',
+                dest: project.codeDir + 'css/web.site/amp.svg'
+            },
+            site: {
+                src: '<%= svgmin.site.dest %>/*.svg',
                 dest: project.codeDir + 'css/web.site/icons.svg'
             }
         },
@@ -343,11 +374,11 @@ module.exports = function(grunt) {
                 }
             },
             icons: {
-                files: [ '<%= svgmin.magazin.cwd %>/*.svg', '<%= svgmin.website.cwd %>/*.svg' ],
+                files: [ '<%= svgmin.magazin.cwd %>/*.svg' ],
                 tasks: [ 'icons' ]
             },
             symbols: {
-                files: [ '<%= svgmin.symbols.cwd %>/*.svg' ],
+                files: [ '<%= svgmin.site.cwd %>/*.svg' ],
                 tasks: [ 'symbols' ]
             },
             config: {
@@ -393,6 +424,26 @@ module.exports = function(grunt) {
     grunt.registerTask('svg', project.tasks.svg);
     grunt.registerTask('icons', project.tasks.icons);
     grunt.registerTask('symbols', project.tasks.symbols);
+    grunt.registerTask('css', project.tasks.css);
     grunt.registerTask('lint', project.tasks.lint);
+
+/*
+ * Nice to have. Keep for later use.
+ *
+    grunt.registerTask('build', 'Build all, or parts of, the site', function(target) {
+        var tasks = {
+            css: ['sass', 'autoprefixer'],
+            js: ['wrap', 'jshint'],
+            default: [
+                'clean:build',
+                'build:css',
+                'build:js',
+                'copy:build'
+            ]
+        };
+
+        grunt.task.run(tasks[target] || tasks['default']);
+    });
+*/
 
 };
