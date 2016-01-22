@@ -23,7 +23,7 @@ module.exports = function(grunt) {
             production: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy', 'svg' ],
             development: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
-            svg: [ 'clean', 'svgmin', 'grunticon', 'svgstore' ],
+            svg: [ 'clean:icons', 'clean:symbols', 'svgmin', 'grunticon', 'svgstore' ],
             icons: [ 'clean:icons', 'svgmin:magazin', 'grunticon:magazin' ],
             symbols: [ 'clean:symbols', 'svgmin:site', 'svgstore:site', 'grunticon:site' ],
             css: [ 'compass:dist', 'compass:amp' ],
@@ -240,9 +240,8 @@ module.exports = function(grunt) {
                 force: true
             },
             // cleanup minified SVGs, remove orphaned files
-            icons: [ '<%= svgmin.magazin.dest %>' ],
-            symbols: [ '<%= svgmin.site.dest %>' ],
-            svgAmp: [ project.sourceDir + 'sass/web.*/svg-amp/_minified' ],
+            icons: [ project.sourceDir + 'sass/web.*/icons/_minified' ],
+            symbols: [ project.sourceDir + 'sass/web.*/svg*/_minified' ],
             // delete old vendor scripts
             scripts: [ project.sourceDir + 'javascript/vendor' ],
             // delete unused directories
@@ -297,6 +296,8 @@ module.exports = function(grunt) {
                     pngfolder: 'magazin'
                 }
             },
+            // this is only needed for the fallback PNGs for svg4everybody
+            // grunticon is not in use here
             site: {
                 files: [{
                     expand: true,
