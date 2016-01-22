@@ -1,0 +1,28 @@
+// ZEIT ONLINE CSS Coding Guidelines
+// https://github.com/ZeitOnline/coding-guidelines/blob/master/css/guidelines.md
+
+@import "setup"
+
+@import "utils"
+@import "functions"
+@import "constants"
+@import "mixins"
+
+$break-phablet-min: $break-1
+$break-tablet-min: $break-2
+$break-desktop-min: $break-3
+
+$primary-color: #252525
+$logo-width: remify(256px)
+$logo-height: remify(24px)
+
+// enforce rem unit
+$page-padding: remify($page-padding)
+
+$color-kicker: $color-text
+$color-headline: $color-text
+$color-summary: $color-text
+$color-metadata: $color-text
+
+@import "web.core/amp"
+@import "modules/amp/header"

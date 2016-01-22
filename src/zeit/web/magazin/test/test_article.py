@@ -46,7 +46,7 @@ def test_article_has_valid_twitter_meta_tags(testbrowser):
     assert '<meta name="twitter:creator"'\
         ' content="@ZEITmagazin">' in browser.contents
     assert '<meta name="twitter:title"'\
-        ' content="Mei, is des traurig!">' in browser.contents
+        ' content="Gentrifizierung: Mei, is des traurig!">' in browser.contents
     assert '<meta name="twitter:description"'\
         ' content="Die Münchner Schoppenstube hat dichtgemacht.'\
         ' Was erzählt uns das über die Gentrifizierung?'\
@@ -63,7 +63,7 @@ def test_article_has_valid_facebook_meta_tags(testbrowser):
     assert '<meta property="og:type"'\
         ' content="article">' in browser.contents
     assert '<meta property="og:title"'\
-        ' content="Mei, is des traurig!">' in browser.contents
+        ' content="Gentrifizierung: Mei, is des traurig!">' in browser.contents
     assert '<meta property="og:description"'\
         ' content="Die Münchner Schoppenstube hat dichtgemacht.'\
         ' Was erzählt uns das über die Gentrifizierung?'\
