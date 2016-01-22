@@ -140,6 +140,12 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
 
+@view_config(route_name='amp',
+             renderer='templates/amp/article.html')
+class AcceleratedMobilePageArticle(Article):
+    pass
+
+
 def is_breaking_news(context, request):
     breaking = zeit.content.article.interfaces.IBreakingNews(context, None)
     if not (breaking and breaking.is_breaking):

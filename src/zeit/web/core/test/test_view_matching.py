@@ -119,3 +119,14 @@ def test_fbia_view_should_match(application):
     request.registry = registry
 
     assert pviews._find_view(request).func_name == 'FbIa'
+
+
+def test_amp_view_should_match(application):
+    pviews = pyramid.scripts.pviews.PViewsCommand([])
+    request = pyramid.request.Request.blank('/amp/zeit-online/article/simple')
+    request.registry = application.zeit_app.config.registry
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+
+    assert pviews._find_view(request).match(context, request).func_name == (
+        'AcceleratedMobilePageArticle')

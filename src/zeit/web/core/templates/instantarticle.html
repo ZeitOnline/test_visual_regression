@@ -32,8 +32,8 @@
             </time>
 
             <!-- The date and time when your article was last updated -->
-            <time class="op-modified" dateTime="{{ view.date_last_modified | format_date('iso8601') }}">
-                {{ view.date_last_modified | format_date(view.show_date_format) }}
+            <time class="op-modified" dateTime="{{ view.date_last_published | format_date('iso8601') }}">
+                {{ view.date_last_published | format_date(view.show_date_format) }}
             </time>
 
             <!-- The authors of your article -->
