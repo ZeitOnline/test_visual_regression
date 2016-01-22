@@ -2124,3 +2124,8 @@ def test_dynamic_cps_show_detect_videos_with_ivideo_interface(
     video = list(teaser)[0]
 
     assert zeit.web.core.template.is_video(video)
+
+
+def test_teaser_classic_should_not_have_gradient_overlay(testbrowser):
+    browser = testbrowser('/zeit-online/classic-teaser')
+    assert len(browser.cssselect('a.teaser-fullwidth__media-link')) == 0
