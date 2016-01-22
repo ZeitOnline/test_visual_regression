@@ -2,11 +2,9 @@
 	{{- view.date_first_released | format_date(view.show_date_format) -}}
 </time>
 
-{% if view.last_modified_label -%}
-	<time itemprop="dateModified" datetime="{{ view.date_last_modified | format_date('iso8601') }}" class="metadata__date">
-		{{- view.last_modified_label -}}
-	</time>
-{% endif -%}
+<time itemprop="dateModified" datetime="{{ view.date_last_modified | format_date('iso8601') }}" class="metadata__date">
+	{{- view.last_modified_label -}}
+</time>
 
 {% if view.source_label -%}
 	<span class="metadata__source">
