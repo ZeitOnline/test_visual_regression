@@ -2,15 +2,16 @@
 <html ⚡ lang="de" itemscope itemtype="http://schema.org/WebPage">
 <head>
 	<meta charset="utf-8">
-    <title>{{ view.pagetitle }}</title>
+	<title>{{ view.pagetitle }}</title>
 	<link rel="canonical" href="{{ view.content_url }}">
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-	{% block sharing_meta %}
-	    {% include "zeit.web.core:templates/inc/meta/sharing.html" -%}
+    {%- include "zeit.web.core:templates/inc/meta/date.html" %}
+	{%- block sharing_meta %}
+		{%- include "zeit.web.core:templates/inc/meta/sharing.html" -%}
 	{% endblock sharing_meta %}
 	<style>body {opacity: 0}</style><noscript><style>body {opacity: 1}</style></noscript>
 	{% block style %}
-		{% include "zeit.web.core:templates/amp/style.html" %}
+		{%- include "zeit.web.core:templates/amp/style.html" %}
 	{% endblock style %}
 	<script async src="https://cdn.ampproject.org/v0.js"></script>
 	<script async custom-element="amp-brightcove" src="https://cdn.ampproject.org/v0/amp-brightcove-0.1.js"></script>
@@ -20,7 +21,7 @@
 <body>
 	<div class="symbols">
 		{% block symbols %}
-			{% include "zeit.web.static:css/web.site/amp.svg" %}
+			{%- include "zeit.web.static:css/web.site/amp.svg" -%}
 		{% endblock symbols %}
 	</div>
 
@@ -53,13 +54,14 @@
 				<div class="article-header article__item">
 					<h1 class="headline" itemprop="headline">
 						<span class="headline__kicker">
-							{% if view and view.context and view.context.serie and view.context.serie.column %}
-								{{ view.serie }} /
-							{% endif %}
-							{{ view.supertitle }}
-						</span>{%- if view.title -%}<span class="headline__colon">: </span>{%- endif -%}
+							{%- if view and view.context and view.context.serie and view.context.serie.column %}
+								{{- '%s / ' | format(view.serie) -}}
+							{%- endif -%}
+							{{- view.supertitle -}}
+						</span>
+						{%- if view.title %}<span class="headline__colon">: </span>{% endif %}
 						<span class="headline__title">
-							{{ view.title }}
+							{{- view.title -}}
 						</span>
 					</h1>
 					<div class="summary" itemprop="description">

@@ -18,8 +18,8 @@
 		{% set sizes = [] %}
 	{%- endif %}
 
-	<div class="article__item article__item--wide">
-		<figure class="{{ 'figure' | with_mods(*block.figure_mods) }}"{% if block.itemprop %} itemprop="{{ block.itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
+	<div class="{{ 'article__item' | with_mods(block.layout.display_mode) }}">
+		<figure class="{{ 'figure' | with_mods(block.layout.display_mode) }}"{% if block.itemprop %} itemprop="{{ block.itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
 			{% if image.href -%}
 				<a class="figure__link" title="{{ image.title }}" href="{{ image.href }}">
 			{%- endif %}
