@@ -39,27 +39,6 @@
     {% endif %}
 {% endmacro %}
 
-{% macro sharing_meta(obj, request) -%}
-    <meta name="twitter:card" content="{{ obj.twitter_card_type }}">
-    <meta name="twitter:site" content="@zeitonline">
-    <meta name="twitter:creator" content="@ZEITmagazin">
-    <meta name="twitter:title" content="{{ obj.title }}">
-    <meta name="twitter:description" content="{{ obj.subtitle }}">
-    <meta property="og:site_name" content="ZEITmagazin">
-    <meta property="fb:admins" content="595098294">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="{{ obj.title or 'ZEITmagazin ONLINE' }}">
-    <meta property="og:description" content="{{ obj.subtitle or 'Mode&Design, Essen&Trinken, Leben' }}">
-    <meta property="og:url" content="{{ obj.content_url or request.route_url('home').rstrip('/') + request.path_info }}">
-    {% set image = get_image(content=obj.context, fallback=False, default='wide') %}
-    {% if image -%}
-        {% set source = request.image_host + image.path + '__1300x731' %}
-        <meta property="og:image" content="{{ source }}">
-        <meta name="twitter:image" content="{{ source }}">
-        <link itemprop="image" rel="image_src" href="{{ source }}">
-    {%- endif %}
-{%- endmacro %}
-
 {% macro main_nav(is_full_width, request, is_advertorial=False, is_main_h1=True) -%}
     {% set title_tag = 'h1' if is_main_h1 else 'div' %}
     <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">

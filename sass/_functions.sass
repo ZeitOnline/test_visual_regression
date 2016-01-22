@@ -1,10 +1,8 @@
-/**
- * Get font-size in point size (em)
- * @function em
- * @param    $values   {Number} list of values
- * @param    $contex   {Number} base font size in pixel
- * @return   {Number}  font-size in em
- */
+// Get font-size in point size (em)
+// @function em
+// @param    $values   {Number} list of values
+// @param    $contex   {Number} base font size in pixel
+// @return   {Number}  font-size in em
 
 @function em($values, $context: $base-font-size)
 
@@ -65,6 +63,7 @@
 //     round-to-precision(0.666666em) => 0.667em
 //     round-to-precision(0.666em, 0) => 1em
 //     round-to-precision(0.666em, 1) => 0.7em
+
 @function round-to-precision($value, $precision: 3)
 	$n: 1
 
@@ -74,36 +73,31 @@
 
 	@return round($value * $n) / $n
 
-/**
- * BLOCK: convert rem to pixels for older browsers
- */
-
 @function parseInt($n)
 	@return $n / ($n * 0 + 1)
 
 $rem-to-px-conversion: false !default
 $rem-to-px-base: 16px !default
 
-/**
- * converts pixel values to rem and provides a px fallback on a stylesheet base
- *
- * the sass variable $rem-to-px-conversion defaults to false.
- * for older browsers you can override this in a separate stylesheet and
- * all values will outputted as is without a conversion.
- *
- * the conversion base for px to rem conversions can be configuried
- * via $rem-to-px-base and defaults to 16px (as in most browsers)
- *
- * based on work by David Walsh: http://davidwalsh.name/rem-px-browser-function-sass
- *
- * @param  {String} $values One or more px values
- * @return {String} values in rem or px, depending on the configuration
- *
- * @example
- * margin: remify(32px 0 24px 0)
- * returns: margin: 2rem 0 1.5rem 0
- * and for IE: margin: 32px 0 24px 0
- */
+// converts pixel values to rem and provides a px fallback on a stylesheet base
+//
+// the sass variable $rem-to-px-conversion defaults to false.
+// for older browsers you can override this in a separate stylesheet and
+// all values will outputted as is without a conversion.
+//
+// the conversion base for px to rem conversions can be configuried
+// via $rem-to-px-base and defaults to 16px (as in most browsers)
+//
+// based on work by David Walsh: http://davidwalsh.name/rem-px-browser-function-sass
+//
+// @param  {String} $values One or more px values
+// @return {String} values in rem or px, depending on the configuration
+//
+// @example
+// margin: remify(32px 0 24px 0)
+// returns: margin: 2rem 0 1.5rem 0
+// and for IE: margin: 32px 0 24px 0
+
 @function remify($values)
 
 	// sanity-checks
@@ -117,32 +111,31 @@ $rem-to-px-base: 16px !default
 	// there can be CSS attributes with more than one value
 	@each $value in $values
 
-		$unit : unit($value)
+		@if $value == 'auto'
+			$list: append($list, $value)
+		@else
+			$unit: unit($value)
 
-		@if ($rem-to-px-conversion) // rem not supported / IE style
-			@if ($unit == 'rem') // convert back to px
-				$list: append($list, ($value / 1rem) * $rem-to-px-base)
-			@else
+			@if ($rem-to-px-conversion) // rem not supported / IE style
+				@if ($unit == 'rem') // convert back to px
+					$list: append($list, ($value / 1rem) * $rem-to-px-base)
+				@else
+					$list: append($list, $value)
+
+			@else if ($unit == 'rem' or $unit == '') // rem or unitless values, like in 'margin: 0 2rem'
 				$list: append($list, $value)
 
-		@else if ($unit == 'rem' or $unit == '') // rem or unitless values, like in 'margin: 0 2rem'
-			$list: append($list, $value)
+			@else if ($unit == unit($rem-to-px-base)) // conversion to rem
+				$list: append($list, $value / $rem-to-px-base + 0rem)
 
-		@else if ($unit == unit($rem-to-px-base)) // conversion to rem
-			$list: append($list, $value / $rem-to-px-base + 0rem)
+			@else if ($unit == 'em') // transliterate to rem
+				$list: append($list, $value / 1em + 0rem)
 
-		@else if ($unit == 'em') // transliterate to rem
-			$list: append($list, $value / 1em + 0rem)
-
-		@else
-			@warn 'There is currently no unit conversion for #{$unit}'
+			@else
+				@warn 'There is currently no unit conversion for #{$unit}'
 
 	// do not return single value list - e.g. this makes math operations simpler
 	@if length($list) == 1
 		@return nth($list, 1)
 
 	@return $list
-
-/**
- * ENDBLOCK: convert rem to pixels for older browsers
- */

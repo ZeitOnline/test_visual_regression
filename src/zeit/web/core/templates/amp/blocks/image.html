@@ -1,45 +1,58 @@
-{% set image = image or block %}
+{% set image = get_image(content=block, variant_id="wide", fallback=False) or block %}
 {% if image and not is_image_expired(image) %}
 
+	{%- set width = 660 %}
+	{%- set height = (width / image.ratio) | int %}
+
 	{# TRASHME Rather crude bitblt/zci image api switch #}
-	{% set source = (request.image_host + image.path) if image is variant else image | default_image_url %}
-	{% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source %}
-	{% set width = 600 %}
-	{% set height = (width / image.ratio) | int %}
+	{%- if image is variant %}
+		{% set source = request.image_host + image.path %}
+		{% set fallback_source = request.image_host + image.fallback_path %}
+		{% set src = "%s__%sx%s" | format(source, width, height) %}
+		{% set sizes = [320, 480, 660, 820] %}
+	{%- else %}
+		{% set source = image | default_image_url %}
+		{% set fallback_source = source %}
+		{% set src = source %}
+		{% set sizes = [] %}
+	{%- endif %}
 
-	<figure class="{{ 'figure' | with_mods(*image.figure_mods) }}" itemscope itemtype="http://schema.org/ImageObject">
-		{% if image.href -%}
-			<a class="figure__link" title="{{ image.title }}" href="{{ image.href }}">
-		{%- endif %}
-		<amp-img
-			src="{{ source }}"
-			alt="{{ image.alt }}"
-			width="{{ width }}"
-			height="{{ height }}"
-			sizes=""
-			layout="responsive"
-			attribution="
-			{%- for name, url, nofollow in image.copyright -%}
-				{%- if name | trim | length > 1 -%}{{ name }}{%- endif -%}
-			{%- endfor -%}"
-			{%- if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %}></amp-img>
-		{% if image.href -%}
-			</a>
-		{%- endif %}
+	<div class="{{ 'article__item' | with_mods(block.layout.display_mode) }}">
+		<figure class="{{ 'figure' | with_mods(block.layout.display_mode) }}"{% if block.itemprop %} itemprop="{{ block.itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
+			{% if image.href -%}
+				<a class="figure__link" title="{{ image.title }}" href="{{ image.href }}">
+			{%- endif %}
+			<amp-img
+				src="{{ src | replace(' ', '%20') }}"
+				srcset="{% for w in sizes %}{{ "%s__%sx%s %sw" | format(source | replace(' ', '%20'), w, (w / image.ratio) | int, w) }}{{ ", " if not loop.last }}{% endfor %}"
+				alt="{{ image.alt }}"
+				width="{{ width }}"
+				height="{{ height }}"
+				sizes=""
+				layout="responsive"
+				attribution="
+				{%- for name, url, nofollow in image.copyright -%}
+					{%- if name | trim | length > 1 %}{{ name | trim }}{% endif -%}
+				{%- endfor %}"
+				itemprop="contentUrl"></amp-img>
+			{% if image.href -%}
+				</a>
+			{%- endif %}
+			<meta itemprop="url" content="{{ fallback_source | replace(' ', '%20') }}">
+			<meta itemprop="width" content="{{ width }}">
+			<meta itemprop="height" content="{{ height }}">
 
-		<!-- <img src="{{ fallback_source }}" data-src="{{ source }}" data-variant="{{ image.image_pattern }}" data-ratio="{{ image.ratio }}"> -->
-		<!-- <noscript data-src="{{ fallback_source }}"></noscript> -->
-
-		<figcaption class="figure__caption">
-			<span class="figure__text">{{ image.caption }}</span>
-			{% for name, url, nofollow in image.copyright %}
-			<span class="figure__copyright" itemprop="copyrightHolder">
-				{% if url %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}">{% endif %}
-				{% if name | trim | length > 1 %}<span itemprop="name">{{ name }}</span>{% endif %}
-				{% if url %}</a>{% endif %}
-			</span>
-			{% endfor %}
-		</figcaption>
-	</figure>
+			<figcaption class="figure__caption">
+				<span class="figure__text" itemprop="caption">{{ image.caption }}</span>
+				{% for name, url, nofollow in image.copyright %}
+				<span class="figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
+					{% if url %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}">{% endif %}
+					{% if name | trim | length > 1 %}<span itemprop="name">{{ name }}</span>{% endif %}
+					{% if url %}</a>{% endif %}
+				</span>
+				{% endfor %}
+			</figcaption>
+		</figure>
+	</div>
 
 {% endif %}

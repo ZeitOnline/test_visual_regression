@@ -1,12 +1,17 @@
 <!doctype html>
-<html ⚡ lang="de">
+<html ⚡ lang="de" itemscope itemtype="http://schema.org/WebPage">
 <head>
 	<meta charset="utf-8">
+	<title>{{ view.pagetitle }}</title>
 	<link rel="canonical" href="{{ view.content_url }}">
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    {%- include "zeit.web.core:templates/inc/meta/date.html" %}
+	{%- block sharing_meta %}
+		{%- include "zeit.web.core:templates/inc/meta/sharing.html" -%}
+	{% endblock sharing_meta %}
 	<style>body {opacity: 0}</style><noscript><style>body {opacity: 1}</style></noscript>
 	{% block style %}
-		{% include "zeit.web.core:templates/amp/style.html" %}
+		{%- include "zeit.web.core:templates/amp/style.html" %}
 	{% endblock style %}
 	<script async src="https://cdn.ampproject.org/v0.js"></script>
 	<script async custom-element="amp-brightcove" src="https://cdn.ampproject.org/v0/amp-brightcove-0.1.js"></script>
@@ -16,65 +21,77 @@
 <body>
 	<div class="symbols">
 		{% block symbols %}
-			{% include "zeit.web.static:css/web.site/amp.svg" %}
+			{%- include "zeit.web.static:css/web.site/amp.svg" -%}
 		{% endblock symbols %}
 	</div>
 
 	<div class="content">
-		<header class="header" itemscope itemtype="http://schema.org/Organization">
+		<header class="header" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
 			{% block logo %}
-			<div itemprop="brand">
-				<a itemprop="url" href="{{ request.route_url('home') }}">
+			<div class="article__item article__item--wide">
+				<a itemprop="url" href="{{ request.route_url('home') }}index">
 					<meta itemprop="name" content="ZEIT ONLINE">
-					<svg class="header__logo">
-						<use xlink:href="#svg-logo-zon"/>
-					</svg>
+					<span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+						<svg class="header__logo">
+							<use xlink:href="#svg-logo-zon"/>
+						</svg>
+						{# The "logo" dimensions must not exceed 600x60 -#}
+						<meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
+						<meta itemprop="width" content="565">
+						<meta itemprop="height" content="60">
+					</span>
 				</a>
 			</div>
 			{% endblock logo %}
 		</header>
 
 		{% block breaking_news %}
+			{% include "zeit.web.site:templates/inc/breaking_news.tpl" %}
 		{% endblock breaking_news %}
 
 		<main itemprop="mainContentOfPage">
 			{% block main %}
-			<article class="article" itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemscope>
-				{% block article_main_image %}
-					{% set block = view.main_image_block %}
-					{% include "zeit.web.core:templates/amp/blocks/image.html" ignore missing %}
-				{% endblock article_main_image %}
-				<h1 class="headline" itemprop="headline">
-					<span class="headline__kicker">
-						{% if view and view.context and view.context.serie and view.context.serie.column %}
-							{{ view.serie }} /
-						{% endif %}
-						{{ view.supertitle }}
-					</span>{%- if view.title -%}<span class="headline__colon">: </span>{%- endif -%}
-					<span class="headline__title">
-						{{ view.title }}
-					</span>
-				</h1>
-				<div class="summary" itemprop="description">
-					{{ view.subtitle }}
-				</div>
-				{%- set byline = view.context | get_byline %}
-				{% if byline | length -%}
-				<div class="byline" itemscope itemtype="http://schema.org/Person" itemprop="author">
-					{% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
-				</div>
-				{% endif -%}
-				<div class="metadata">
-					{% include "zeit.web.core:templates/amp/article/metadata.tpl" %}
+			<article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
+				<link itemprop="mainEntityOfPage" href="{{ view.content_url }}">
+				<div class="article-header article__item">
+					<h1 class="headline" itemprop="headline">
+						<span class="headline__kicker">
+							{%- if view and view.context and view.context.serie and view.context.serie.column %}
+								{{- '%s / ' | format(view.serie) -}}
+							{%- endif -%}
+							{{- view.supertitle -}}
+						</span>
+						{%- if view.title %}<span class="headline__colon">: </span>{% endif %}
+						<span class="headline__title">
+							{{- view.title -}}
+						</span>
+					</h1>
+					<div class="summary" itemprop="description">
+						{{ view.subtitle }}
+					</div>
+					{%- set byline = view.context | get_byline %}
+					{% if byline | length -%}
+					<div class="byline" itemscope itemtype="http://schema.org/Person" itemprop="author">
+						{% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
+					</div>
+					{% endif -%}
+					<div class="metadata">
+						{% include "zeit.web.core:templates/amp/article/metadata.tpl" %}
+					</div>
 				</div>
 
 				{% block article_body %}
 				<div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
+					{% block article_main_image %}
+						{% set block = view.main_image_block %}
+						{% include "zeit.web.core:templates/amp/blocks/image.html" %}
+					{% endblock article_main_image %}
+
 					{% block article_pages %}
 						{% for page in view.pages %}
 							<section>
 							{% if not loop.first %}
-								<h3>{{ page.teaser }}</h3>
+								<h3 class="intertitle article__item">{{ page.teaser }}</h3>
 							{% endif %}
 							{% for block in page %}
 								{% include "zeit.web.core:templates/amp/blocks/{}.html".format( block | block_type ) ignore missing %}
@@ -105,6 +122,7 @@
 			</nav>
 		</footer>
 
+		{% include "zeit.web.core:templates/inc/tracking/webtrekk_amp.html" %}
 		<amp-pixel src="//cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}&amp;rand=$RANDOM"></amp-pixel>
 
 	</div>

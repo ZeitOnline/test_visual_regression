@@ -1,8 +1,6 @@
 // ZEIT ONLINE CSS Coding Guidelines
 // https://github.com/ZeitOnline/coding-guidelines/blob/master/css/guidelines.md
 
-@charset "UTF-8"
-
 @import "setup"
 
 @import "utils"
@@ -18,4 +16,13 @@ $primary-color: #252525
 $logo-width: remify(256px)
 $logo-height: remify(24px)
 
+// enforce rem unit
+$page-padding: remify($page-padding)
+
+$color-kicker: $color-text
+$color-headline: $color-text
+$color-summary: $color-text
+$color-metadata: $color-text
+
 @import "web.core/amp"
+@import "modules/amp/header"

@@ -1240,7 +1240,8 @@ def test_article_should_render_quiz_in_iframe(testbrowser):
         'src') == 'http://quiz.zeit.de/#/quiz/104?embedded'
 
 
-def test_instantarticle_representation_should_have_content(testbrowser):
+def test_instantarticle_representation_should_have_correct_content(
+        testbrowser):
     bro = testbrowser('/instantarticle/zeit-online/article/quotes')
 
     canonical = bro.cssselect('link[rel=canonical]')[0].attrib['href']
@@ -1249,6 +1250,7 @@ def test_instantarticle_representation_should_have_content(testbrowser):
 
     assert '"Pulp Fiction"' in bro.cssselect('h1')[0].text
     assert bro.cssselect('.op-published')[0].text.strip() == '2. Juni 1999'
+    assert bro.cssselect('.op-modified')[0].text.strip() == '20. Dezember 2013'
     assert bro.cssselect('figure > img[src$="square__2048x2048"]')
     assert len(bro.cssselect('aside')) == 3
 
@@ -1307,3 +1309,18 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
     assert amp_link
     amp_url = amp_link[0].attrib['href']
     assert amp_url.endswith('amp/zeit-online/article/zeit')
+
+
+def test_amp_article_has_correct_webtrekk_pixel(testbrowser, testserver):
+    browser = testbrowser('/amp/zeit-online/article/01')
+    source = browser.cssselect('amp-pixel')[0].attrib.get('src')
+    assert source == (
+        'http://zeit01.webtrekk.net/981949533494636/wt.pl?'
+        'p=328,redaktion.kultur...article.zede|{url}/zeit-online/article/01'
+        ',0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&cg3=kultur&cg4=zede&cg5='
+        '&cg6=&cg7=01&cg8=kultur/article&cg9=2015-05-27&cp1=wenke husmann'
+        '&cp2=kultur/bild-text&cp3=1/1&cp4=kultur;"der hobbit";wein;'
+        'italien;toskana;bologna;bozen;florenz&cp5=2015-05-27 19:11:30.'
+        '179510+02:00&cp6=5010&cp7=&cp8=zede&cp9=kultur/article&cp10=&cp11='
+        '&cp12=mobile.site&cp13=mobile&cp15=&cp25=amp').format(
+            url=testserver['http_address'])
