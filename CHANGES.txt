@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - BUG-337: Show sharing links on video pages
 
+- ZON-2665: Centralize Module Class and integrate ZMO Buzbbox
+
 
 2.50 (2016-01-20)
 -----------------
