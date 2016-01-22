@@ -1,15 +1,20 @@
 .portraitbox
     font-family: $font-tabletgothic
-    margin: $large $big $petite $petite !important
-    width: em(180px)
-    +respond-max($break-2)
-        display: none
+    margin: 2.5rem auto
+    width: 90%
+    +respond-min($break-2)
+        margin: 2.5rem 3rem 1.25rem 1.25rem
+        width: remify(180px)
     .portraitbox-heading
-        font-weight: bold
         font-size: $font-s
+        font-weight: bold
+        letter-spacing: 0.08em
         line-height: $headline-line-height
-        letter-spacing: $hair
         margin-bottom: $fine
         text-transform: uppercase
     p
-        font-size: $font-xs
+        color: $grey
+        font-size: remify(14px)
+        letter-spacing: 0.03em
+        padding: 0 !important // to override unwanted styles that occured due to overly specific selectors
+

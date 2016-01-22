@@ -1,7 +1,42 @@
 Change log for zeit.web
 =======================
 
-2.49 (unreleased)
+2.51 (unreleased)
+-----------------
+
+- BUG-334: Remove gradient overlay for classic fullwidth teaser
+
+- ZON-2573: Refactor banner config to XML sources
+
+- ZON-2574: Refactor navigation config to XML sources
+
+- ZON-2654: Move some web.ini settings to XML sources
+
+- ZON-2640: Update css for em class moderation
+
+- BUG-337: Show sharing links on video pages
+
+
+2.50 (2016-01-20)
+-----------------
+
+- ZON-2664: Add link to AMP to head if article is AMP article
+
+- ZON-2576: Extract dogpile.cache integration to `pyramid_dogpile_cache2`,
+  so vivi can use it, too
+
+- BUG-328: Omit default page paramter in pagination on ranking areas
+
+- BUG-78: Prevent IE from searching for a browserconfig.xml
+
+- FIX: Scale crossword puzzle to full-width in print
+
+- ZON-2535: Start ZMO moveover
+
+- BUG-270: Make ZMO portraiboxes also visible on mobile and tablet
+
+
+2.49 (2016-01-19)
 -----------------
 
 - ZON-2632: Remove check for "static" galleries
