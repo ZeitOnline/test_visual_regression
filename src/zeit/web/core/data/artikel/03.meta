@@ -37,6 +37,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:186ac8ad-a034-4f18-9b0b-dcf885df777b}</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
     <rankedTags>
         <tag url_value="wein" uuid="df4baf1f-9491-4dbb-80c2-f8762bf3f2fe" score="4" type="free">Wein</tag>
         <tag url_value="italien" uuid="fb4f1490-b187-4073-a51f-02bf101a354d" score="3" type="Location">Italien</tag>

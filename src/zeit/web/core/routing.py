@@ -1,12 +1,12 @@
 import urlparse
 import logging
 
-import gocept.cache.method
 import grokcore.component
 import pyramid.httpexceptions
 import pyramid.interfaces
 import pyramid.traversal
 import pyramid.urldispatch
+import zc.sourcefactory.source
 import zope.component
 import zope.interface
 
@@ -16,19 +16,17 @@ import zeit.content.cp.interfaces
 import zeit.content.dynamicfolder.interfaces
 import zeit.content.gallery.interfaces
 import zeit.content.video.interfaces
-import zeit.magazin.interfaces
 
-from zeit.web.core.sources import BLACKLIST_SOURCE
 import zeit.web.core.article
 import zeit.web.core.centerpage
 import zeit.web.core.gallery
 import zeit.web.core.interfaces
 import zeit.web.core.template
 import zeit.web.core.utils
-import zeit.web.site.module
 
 
 log = logging.getLogger(__name__)
+CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 
 def traverser(*required):
@@ -215,6 +213,34 @@ class Video(Traversable):
             tdict['view_name'] = ''
 
 
+class BlacklistSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+    # Only contextual so we can customize source_class
+
+    product_configuration = 'zeit.web'
+    config_url = 'blacklist-url'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        def matches(self, path):
+            return self.factory.matches(path)
+
+    def matches(self, path):
+        for matcher in self.compile():
+            if matcher(path) is not None:
+                return True
+        return False
+
+    @CONFIG_CACHE.cache_on_arguments()
+    def compile(self):
+        matchers = []
+        for pattern in self.getValues(None):
+            matcher, _ = pyramid.urldispatch._compile_route(pattern)
+            matchers.append(matcher)
+        return matchers
+
+BLACKLIST = BlacklistSource()(None)
+
+
 @zope.interface.implementer(pyramid.interfaces.IRoutesMapper)
 class RoutesMapper(pyramid.urldispatch.RoutesMapper):
 
@@ -234,7 +260,7 @@ class RoutesMapper(pyramid.urldispatch.RoutesMapper):
         # wouldn't need to touch RoutesMapper at all. However, Pyramid's
         # configurator doesn't allow that easily.
         if not request.headers.get('Host', '').startswith('newsfeed') and (
-                BLACKLIST_SOURCE.matches(path)):
+                BLACKLIST.matches(path)):
             return {'route': self.routes['blacklist'], 'match': {}}
 
         return super(RoutesMapper, self).__call__(request)
