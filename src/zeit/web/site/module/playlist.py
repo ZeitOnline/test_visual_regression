@@ -8,7 +8,7 @@ import zeit.content.video.interfaces
 
 import zeit.web
 import zeit.web.core.image
-import zeit.web.core.module
+import zeit.web.core.centerpage
 
 log = logging.getLogger(__name__)
 
@@ -33,7 +33,7 @@ class VideoImages(object):
 
 
 @zeit.web.register_module('playlist')
-class Playlist(zeit.web.core.module.Module):
+class Playlist(zeit.web.core.centerpage.Module):
     """Implements the videostage a.k.a. *Der Videoriegel*.
     Makes use of the playlist module from Vivi. """
 

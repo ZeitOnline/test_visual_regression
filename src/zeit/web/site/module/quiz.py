@@ -3,14 +3,14 @@ import logging
 import zope.component
 
 import zeit.web.core.interfaces
-import zeit.web.core.module
+import zeit.web.core.centerpage
 
 
 log = logging.getLogger(__name__)
 
 
 @zeit.web.register_module('quiz')
-class Quiz(zeit.web.core.module.Module):
+class Quiz(zeit.web.core.centerpage.Module):
 
     @zeit.web.reify
     def title(self):

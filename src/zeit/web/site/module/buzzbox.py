@@ -5,7 +5,6 @@ import zope.component
 import zeit.content.cp.interfaces
 
 import zeit.web
-import zeit.web.core.module
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 
@@ -13,7 +12,7 @@ import zeit.web.core.interfaces
 log = logging.getLogger(__name__)
 
 
-class Buzzbox(zeit.web.core.module.Module, list):
+class Buzzbox(zeit.web.core.centerpage.Module, list):
 
     header = None
     score_factor = 1

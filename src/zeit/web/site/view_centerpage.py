@@ -20,9 +20,7 @@ import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
-import zeit.web.site.module
-import zeit.web.site.module.buzzbox
-import zeit.web.site.module.printbox
+import zeit.web.core.centerpage
 import zeit.web.site.view
 
 
@@ -30,7 +28,7 @@ log = logging.getLogger(__name__)
 
 
 @zope.interface.implementer(zeit.edit.interfaces.IBlock)
-class LegacyModule(zeit.web.core.module.Module, zeit.web.core.utils.nslist):
+class LegacyModule(zeit.web.core.centerpage.Module, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
         zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
@@ -444,13 +442,13 @@ class LegacyCenterpage(Centerpage):
     def module_buzz_mostread(self):
         """Return buzz box module with the top 3 most read articles."""
 
-        return zeit.web.site.module.buzzbox.MostreadBuzzbox(self.context)
+        return zeit.web.core.centerpage.Module.MostreadBuzzbox(self.context)
 
     @zeit.web.reify
     def module_printbox(self):
         """Return the module block for the Printbox or Angebotsbox."""
 
-        return zeit.web.site.module.printbox.Printbox(self.context)
+        return zeit.web.core.centerpage.Module.Printbox(self.context)
 
     @zeit.web.reify
     def region_list_parquet(self):

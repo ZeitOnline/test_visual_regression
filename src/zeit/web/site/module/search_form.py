@@ -10,7 +10,7 @@ import zeit.find.search
 import zeit.solr.interfaces
 
 import zeit.web
-import zeit.web.core.module
+import zeit.web.core.centerpage
 import zeit.web.core.template
 import zeit.web.site.area.ranking
 
@@ -56,7 +56,7 @@ TYPES = collections.OrderedDict([
 
 
 @zeit.web.register_module('search-form')
-class Form(zeit.web.core.module.Module):
+class Form(zeit.web.core.centerpage.Module):
 
     @zeit.web.reify
     def query(self):

@@ -6,7 +6,6 @@ import zope.component
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 
-import zeit.web.core.module.search_form
 import zeit.web.core.centerpage
 import zeit.web.core.utils
 
@@ -134,7 +133,7 @@ def test_search_form_should_create_valid_date_range_query_string(
         return datetime.datetime(2000, 1, 1), datetime.datetime(2010, 1, 1)
 
     monkeypatch.setattr(
-        zeit.web.core.module.search_form, 'MODES', {'1y': (year_range,)})
+        zeit.web.core.centerpage.Module.search_form, 'MODES', {'1y': (year_range,)})
 
     dummy_request.GET['mode'] = '1y'
     assert search_form.raw_query == (
