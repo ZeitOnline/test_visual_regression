@@ -33,6 +33,8 @@ Change log for zeit.web
 
 - ZON-2535: Start ZMO moveover
 
+- BUG-270: Make ZMO portraiboxes also visible on mobile and tablet
+
 
 2.49 (2016-01-19)
 -----------------
