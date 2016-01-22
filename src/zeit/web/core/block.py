@@ -135,8 +135,6 @@ class Infobox(object):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ILiveblog)
 class Liveblog(object):
 
-    timeout = 1
-
     def __init__(self, model_block):
         self.blog_id = model_block.blog_id
         self.is_live = False
@@ -181,9 +179,11 @@ class Liveblog(object):
             'http://zeit.superdesk.pro/resources/LiveDesk', self.status_url, 1)
 
     def get_restful(self, url):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         try:
             with zeit.web.core.metrics.timer('liveblog.reponse_time'):
-                return requests.get(url, timeout=self.timeout).json()
+                return requests.get(
+                    url, timeout=conf.get('liveblog_timeout', 1)).json()
         except (requests.exceptions.RequestException, ValueError):
             pass
 
