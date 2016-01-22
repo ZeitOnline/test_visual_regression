@@ -21,7 +21,7 @@ import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
 import zeit.web.core.centerpage
-import zeit.web.site.view
+import zeit.web.site
 
 
 log = logging.getLogger(__name__)
@@ -442,13 +442,13 @@ class LegacyCenterpage(Centerpage):
     def module_buzz_mostread(self):
         """Return buzz box module with the top 3 most read articles."""
 
-        return zeit.web.core.centerpage.Module.MostreadBuzzbox(self.context)
+        return zeit.web.site.module.buzzbox.MostreadBuzzbox(self.context)
 
     @zeit.web.reify
     def module_printbox(self):
         """Return the module block for the Printbox or Angebotsbox."""
 
-        return zeit.web.core.centerpage.Module.Printbox(self.context)
+        return zeit.web.site.module.printbox.Printbox(self.context)
 
     @zeit.web.reify
     def region_list_parquet(self):
