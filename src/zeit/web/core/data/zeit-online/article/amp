@@ -26,7 +26,7 @@
       <tag type="free" url_value="migration" uuid="312de135-2e1f-452e-9f87-4c0a36842878">Migration</tag>
       <tag type="Organization" url_value="europaeische-union" uuid="f7f8e748-cc2e-40b0-b065-267e6113e8a2">Europäische Union</tag>
     </rankedTags>
-    <image base-id="http://xml.zeit.de/politik/ausland/2016-01/fluechtlinge-davos-europa/" type="jpg" title="Flüchtlinge Davos Europa" alt="In Davos" align="left" publication-date="" expires="2016-04-22T09:41:55+00:00">
+    <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" title="Flüchtlinge Davos Europa" alt="In Davos" align="left" publication-date="" expires="">
       <bu>In Davos</bu>
       <copyright>© Jean-Christophe Bott/EPA/dpa</copyright>
     </image>
@@ -98,7 +98,7 @@
     <title>Mehr Davos, weniger Kreuth</title>
     <subtitle>Zwei Bergdörfer diskutieren die Flüchtlingskrise: In einem dominiert der Kleingeist, das andere entwickelt eine Zukunft, in der Flüchtlinge keine Flüchtlinge mehr sind.</subtitle>
     <division type="page">
-      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" title="In Davos" alt="Flüchtlinge: In Davos" align="left" publication-date="" expires="2016-04-22T09:41:55+00:00" layout="large" is_empty="False" title_local="In Davos" alt_local="Flüchtlinge: In Davos">
+      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" title="In Davos" alt="Flüchtlinge: In Davos" align="left" publication-date="" expires="" layout="large" is_empty="False" title_local="In Davos" alt_local="Flüchtlinge: In Davos">
         <bu>In Davos</bu>
         <copyright>© Jean-Christophe Bott/EPA/dpa</copyright>
       </image>
@@ -125,7 +125,7 @@ Führungskräfte globale Politik und Deals verhandeln. "Ein Deutschland
 und ein Europa ohne Grundgedanken der Solidarität kann ich mir nicht
 vorstellen", warb Gauck, von WEF-Gründer Klaus Schwab nach seinen
 unumstößlichen Grundwerten in Zeiten der Flüchtlinge gefragt. <br/></p>
-      <video format="large" is_empty="True" href="http://xml.zeit.de/video/2016-01/4713310523001" expires="2016-02-19T08:00:00+00:00"/>
+      <video format="large" is_empty="True" href="http://xml.zeit.de/video/2014-01/3035864892001" expires=""/>
       <intertitle>
 Deutschland steht alleine da<br/></intertitle>
       <p>
@@ -157,7 +157,7 @@ Schlimmste abwenden und große Chancen eröffnen kann. "Wir schaffen das"
 ist hin und wieder sogar auf den internationalen Panels zu hören, im
 Original vorgetragen mit unterschiedlichen Akzenten.
 </p>
-      <video format="large" is_empty="True" href="http://xml.zeit.de/video/2016-01/4713550905001" expires="2016-02-19T08:00:00+00:00"/>
+      <video format="large" is_empty="True" href="http://xml.zeit.de/video/2014-01/3089721834001" expires=""/>
       <p>
 Dazu kommen Einheizer wie der junge, gerade gewählte kanadische
 Premierminister <a class="" href="http://www.zeit.de/2015/43/kanada-justin-trudeau-premierminister" target="_blank">Justin Trudeau</a>, der selbst die optimistische Merkel aus
