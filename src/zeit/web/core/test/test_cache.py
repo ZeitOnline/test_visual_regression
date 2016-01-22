@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import dogpile.cache
 import dogpile.cache.backends.memcached
-
 import mock
+import pyramid_dogpile_cache2
 import pytest
 
 import zeit.web
@@ -99,7 +99,8 @@ def test_reify_should_work_with_memcache(application, monkeypatch, request):
     region = zeit.web.core.cache.get_region('test')
     region.configure(
         'dogpile.cache.pylibmc', arguments={'url': ['localhost:9998']})
-    request.addfinalizer(lambda: zeit.web.core.cache.CACHE_REGIONS.pop('test'))
+    request.addfinalizer(
+        lambda: pyramid_dogpile_cache2.CACHE_REGIONS.pop('test'))
 
     class Context(object):
         uniqueId = 'http://xml.zeit.de'  # NOQA

@@ -2,13 +2,15 @@ import grokcore.component
 import zope.component
 import zope.interface
 import copy
+import xml.sax.saxutils
 
+import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.content.article
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.content.image.imagereference
 
+import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.interfaces
 
@@ -84,7 +86,7 @@ def _inject_banner_code(
 def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
     paragraphs = filter(
         lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
-
+    banner_list = list(zeit.web.core.banner.BANNER_SOURCE)
     for index, pp in enumerate(possible_paragraphs):
         if len(paragraphs) > pp + 1:
             try:
@@ -94,7 +96,7 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
                         t = tile_list[index] - 1
                         # save the (virtual) page nr on (copies) of the banner,
                         # to be able to handle banner display inside the macro.
-                        banner = copy.copy(zeit.web.core.banner.banner_list[t])
+                        banner = copy.copy(banner_list[t])
                         setattr(banner, 'on_page_nr', int(page.number + 1))
                         page.blocks.insert(i, banner)
                         break
@@ -239,3 +241,40 @@ def breakingnews_sharing_image(context):
             conf['breaking_news_fallback_image'], None)
     else:
         return article_image
+
+
+class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):
+
+    product_configuration = (
+        zeit.cms.content.sources.SubNavigationSource.product_configuration)
+    config_url = zeit.cms.content.sources.SubNavigationSource.config_url
+
+    master_node_xpath = (
+        zeit.cms.content.sources.SubNavigationSource.master_node_xpath)
+    slave_tag = zeit.cms.content.sources.SubNavigationSource.slave_tag
+    attribute = zeit.cms.content.sources.SubNavigationSource.attribute
+
+    # Same idea as zeit.cms.content.sources.MasterSlavesource.getTitle()
+    def find(self, ressort, subressort):
+        tree = self._get_tree()
+        if not subressort:
+            nodes = tree.xpath(
+                u'{master_node_xpath}[@{attribute} = {master}]'.format(
+                    master_node_xpath=self.master_node_xpath,
+                    attribute=self.attribute,
+                    master=xml.sax.saxutils.quoteattr(ressort)))
+        else:
+            nodes = tree.xpath(
+                u'{master_node_xpath}[@{attribute} = {master}]'
+                u'/{slave_tag}[@{attribute} = {slave}]'.format(
+                    master_node_xpath=self.master_node_xpath,
+                    attribute=self.attribute,
+                    slave_tag=self.slave_tag,
+                    master=xml.sax.saxutils.quoteattr(ressort),
+                    slave=xml.sax.saxutils.quoteattr(subressort)))
+        if not nodes:
+            return {}
+        return zeit.cms.interfaces.ICMSContent(
+            nodes[0].get('uniqueId'), {})
+
+RESSORTFOLDER_SOURCE = RessortFolderSource()

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
-import UserDict
 import copy
 import json
+import logging
 import os.path
 import pkg_resources
 
@@ -17,6 +17,7 @@ import plone.testing.zodb
 import pyramid.response
 import pyramid.static
 import pyramid.testing
+import pyramid_dogpile_cache2
 import pysolr
 import pytest
 import repoze.bitblt.processor
@@ -32,11 +33,15 @@ import zope.processlifetime
 import zope.testbrowser.browser
 
 import zeit.content.image.interfaces
+import zeit.solr.interfaces
 
 import zeit.web.core
 import zeit.web.core.application
 import zeit.web.core.routing
 import zeit.web.core.view
+
+
+log = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope='session')
@@ -49,11 +54,12 @@ def app_settings(mockserver):
         'pyramid.debug_templates': False,
         'dogpile_cache.backend': 'dogpile.cache.memory',
         'dogpile_cache.regions': (
-            'default_term, short_term, long_term, session'),
+            'default_term, short_term, long_term, session, config'),
         'dogpile_cache.short_term.expiration_time': '60',
         'dogpile_cache.default_term.expiration_time': '300',
         'dogpile_cache.long_term.expiration_time': '3600',
         'dogpile_cache.session.expiration_time': '2',
+        'dogpile_cache.config.expiration_time': '600',
         'session.reissue_time': '1',
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
@@ -61,21 +67,11 @@ def app_settings(mockserver):
         # test, but then I'd need to re-create an Application since
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
-        'caching_time_content': '5',
-        'caching_time_article': '10',
-        'caching_time_centerpage': '20',
-        'caching_time_feed': '25',
-        'caching_time_gallery': '40',
-        'caching_time_image': '30',
-        'caching_time_videostill': '35',
-        'caching_time_external': '15',
         'asset_prefix': '/static/latest',
         'image_prefix': '',
         'jsconf_prefix': '/jsconf',
         'fbia_prefix': '/fbia',
-        'author_articles_page_size': '10',
         'comment_page_size': '4',
-        'author_comment_page_size': '6',
         'community_host': 'http://localhost:6551',
         'community_static_host': 'http://static_community/foo',
         'community_maintenance': (
@@ -85,7 +81,6 @@ def app_settings(mockserver):
         'google_tag_manager_host': 'foo.baz',
         'app_servers': '',
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
-        'community_host_timeout_secs': '10',
         'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
         'spektrum_img_host': mockserver.url + '/spektrum',
         'zett_hp_feed': mockserver.url + '/zett/feed.xml',
@@ -93,13 +88,12 @@ def app_settings(mockserver):
         'academics_hp_feed': mockserver.url + '/academics/feed.xml',
         'academics_img_host': mockserver.url + '/academics',
         'node_comment_statistics': 'community/node-comment-statistics.xml',
-        'default_teaser_images': (
-            'http://xml.zeit.de/zeit-magazin/default/teaser_image'),
         'connector_type': 'mock',
         'vgwort_url': 'http://example.com/vgwort',
         'breaking_news_config': (
             'http://xml.zeit.de/eilmeldung/homepage-banner'),
-        'breaking_news_timeout': 2 * 60 * 60,
+        'breaking_news_fallback_image': (
+            'http://xml.zeit.de/administratives/eilmeldung-share-image'),
         'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
         'vivi_zeit.cms_keyword-configuration': (
             'egg://zeit.cms.tagging.tests/keywords_config.xml'),
@@ -118,7 +112,7 @@ def app_settings(mockserver):
         'vivi_zeit.cms_task-queue-async': 'not-applicable',
         'vivi_zeit.cms_whitelist-url': (
             'egg://zeit.web.core/data/config/whitelist.xml'),
-        'vivi_zeit.web_iqd-mobile-ids': (
+        'vivi_zeit.web_iqd-mobile-ids-source': (
             'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
         'vivi_zeit.web_image-scales': (
             'egg://zeit.web.core/data/config/scales.xml'),
@@ -151,17 +145,17 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
         'vivi_zeit.web_banner-source': (
             'egg://zeit.web.core/data/config/banner.xml'),
-        'vivi_zeit.web_banner-id-mappings': (
+        'vivi_zeit.web_banner-id-mappings-source': (
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
-        'vivi_zeit.web_navigation': (
+        'vivi_zeit.web_navigation-source': (
             'egg://zeit.web.core/data/config/navigation.xml'),
-        'vivi_zeit.web_navigation-services': (
+        'vivi_zeit.web_navigation-services-source': (
             'egg://zeit.web.core/data/config/navigation-services.xml'),
-        'vivi_zeit.web_navigation-classifieds': (
+        'vivi_zeit.web_navigation-classifieds-source': (
             'egg://zeit.web.core/data/config/navigation-classifieds.xml'),
-        'vivi_zeit.web_navigation-footer-publisher': (
+        'vivi_zeit.web_navigation-footer-publisher-source': (
             'egg://zeit.web.core/data/config/navigation-footer-publisher.xml'),
-        'vivi_zeit.web_navigation-footer-links': (
+        'vivi_zeit.web_navigation-footer-links-source': (
             'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
         'vivi_zeit.web_servicebox-source': (
             'egg://zeit.web.core/data/config/servicebox.xml'),
@@ -206,8 +200,8 @@ def app_settings(mockserver):
         'dev_environment': True,
         'advertisement_nextread_folder': 'verlagsangebote',
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
-        'breaking_news_fallback_image': (
-            'http://xml.zeit.de/administratives/eilmeldung-share-image'),
+        'vivi_zeit.web_runtime-settings-source': (
+            'egg://zeit.web.core/data/config/zeitweb-settings.xml'),
     }
 
 
@@ -312,8 +306,7 @@ def reset_solr(application_session, request):
 
 @pytest.fixture
 def reset_cache(application_session, request):
-    for region in zeit.web.core.cache.CACHE_REGIONS.values():
-        region.backend._cache.clear()
+    pyramid_dogpile_cache2.clear()
 
 
 @pytest.fixture
@@ -762,7 +755,7 @@ def datasolr(request):
     previous = zope.component.queryUtility(zeit.solr.interfaces.ISolr)
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.sources.Solr())
+    zope.component.provideUtility(zeit.web.core.utils.DataSolr())
 
 
 @pytest.fixture(scope='session')

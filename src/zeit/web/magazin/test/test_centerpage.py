@@ -144,7 +144,7 @@ def test_cp_has_informatives_area(testserver, testbrowser):
 def test_cp_lead_areas_are_available(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/lebensart')
-    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
     assert len(view.area_lead)
 
 
@@ -556,7 +556,7 @@ def test_get_reaches_from_centerpage_view(application):
 
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
-    view = zeit.web.magazin.view_centerpage.Centerpage(cp, request)
+    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, request)
 
     buzz = view.area_buzz
 
@@ -602,7 +602,7 @@ def test_centerpages_produces_no_error(testserver, testbrowser):
 def test_cp_lead_should_have_correct_first_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.web.magazin.view_centerpage.Centerpage(
+    cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         cp_context, mock.Mock())
     lead1_first_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de/'
@@ -619,7 +619,7 @@ def test_cp_lead_should_have_correct_first_block(application):
 def test_cp_lead_should_have_correct_second_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.web.magazin.view_centerpage.Centerpage(
+    cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         cp_context, mock.Mock())
     lead2_first_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de/'
@@ -636,7 +636,7 @@ def test_cp_lead_should_have_correct_second_block(application):
 def test_cp_lead_should_have_no_blocks(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.web.magazin.view_centerpage.Centerpage(
+    cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         cp_context, mock.Mock())
     lead_first_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de/zeit-mag'
@@ -653,7 +653,7 @@ def test_cp_lead_should_have_no_blocks(application):
 def test_cp_informatives_should_have_correct_first_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.web.magazin.view_centerpage.Centerpage(
+    cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         cp_context, mock.Mock())
     informatives1_first_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de'
@@ -671,7 +671,7 @@ def test_cp_informatives_should_have_correct_first_block(application):
 def test_cp_informatives_should_have_correct_second_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.web.magazin.view_centerpage.Centerpage(
+    cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         cp_context, mock.Mock())
     informatives2_first_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de'
@@ -690,7 +690,7 @@ def test_cp_informatives_should_have_correct_second_block(application):
 def test_cp_informatives_should_have_no_blocks(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.web.magazin.view_centerpage.Centerpage(
+    cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         cp_context, mock.Mock())
     informatives_first_block = (
         'http://block.vivi.zeit.de/'
@@ -724,14 +724,14 @@ def test_cp_teaser_should_have_comment_count(
 def test_centerpage_should_have_monothematic_block(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
-    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
     assert len(view.monothematic_block) == 6
 
 
 def test_centerpage_should_have_no_monothematic_block(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/lebensart')
-    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
     assert view.monothematic_block is None
 
 
@@ -818,11 +818,11 @@ def test_print_cover_teaser_should_not_have_subtitle(testserver, testbrowser):
 def test_homepage_indentifies_itself_as_homepage(testserver):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/index')
-    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
     assert view.is_hp is True
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-large-teaser')
-    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
+    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
     assert view.is_hp is False
 
 
