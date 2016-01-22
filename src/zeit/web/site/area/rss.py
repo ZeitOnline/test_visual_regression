@@ -99,10 +99,10 @@ class RSSImages(object):
         self.image = zeit.content.image.interfaces.IImageGroup(context)
 
 
-def parse_feed(url, kind):
+def parse_feed(url, kind, timeout=2):
     try:
         with zeit.web.core.metrics.timer('feed.rss.reponse_time'):
-            resp = requests.get(url, timeout=2.0)
+            resp = requests.get(url, timeout=timeout)
         xml = lxml.etree.fromstring(resp.content)
     except (requests.exceptions.RequestException,
             lxml.etree.XMLSyntaxError), e:
@@ -129,9 +129,10 @@ class RSSArea(zeit.content.cp.automatic.AutomaticArea):
 
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         url = conf.get(self.feed_key)
+        timeout = conf.get(self.feed_key + u'_timeout', 2)
         values = []
 
-        for item in parse_feed(url, self.kind):
+        for item in parse_feed(url, self.kind, timeout):
             module = zeit.web.site.view_centerpage.LegacyModule(
                 [item], layout=self.module_layout)
             item.__parent__ = self

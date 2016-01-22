@@ -68,22 +68,6 @@ class ICachingTime(zope.interface.Interface):
     """
 
 
-class INavigation(zope.interface.Interface):
-    """A navigation bar containing navigation items"""
-
-    navigation_items = zope.interface.Attribute('navigation_items')
-
-
-class INavigationItem(zope.interface.Interface):
-    """Navigation items linking to different sections and sub sections"""
-
-    href = zope.interface.Attribute('href')
-    item_id = zope.interface.Attribute('item_id')
-    navigation_items = zope.interface.Attribute('navigation_items')
-    text = zope.interface.Attribute('text')
-    label = zope.interface.Attribute('label')
-
-
 class IPages(zope.interface.common.sequence.IReadSequence):
     """List of the <division>s of an zeit.content.article.interfaces.IArticle
     """
@@ -144,7 +128,16 @@ class ITeaserSequence(zope.interface.Interface):
 
 
 class ISettings(pyramid.interfaces.ISettings):
-    """Custom interface class to register settings as a utility"""
+    """Dictionary of application configuration settings.
+
+    Settings come from two sources.
+    1. The web.ini file ("deployment settings"), read once on process startup.
+    2. An XML file read from a URL ("runtime settings"), read on demand and
+    cached using the cache region `config`.
+
+    Read operations look in the deployment settings first, then runtime.
+    Write operations write to the deployment settings.
+    """
 
 
 class ITopicLink(zope.interface.Interface):
