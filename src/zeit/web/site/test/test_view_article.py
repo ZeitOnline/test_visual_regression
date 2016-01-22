@@ -1309,3 +1309,18 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
     assert amp_link
     amp_url = amp_link[0].attrib['href']
     assert amp_url.endswith('amp/zeit-online/article/zeit')
+
+
+def test_amp_article_has_correct_webtrekk_pixel(testbrowser, testserver):
+    browser = testbrowser('/amp/zeit-online/article/01')
+    source = browser.cssselect('amp-pixel')[0].attrib.get('src')
+    assert source == (
+        'http://zeit01.webtrekk.net/981949533494636/wt.pl?'
+        'p=328,redaktion.kultur...article.zede|{url}/zeit-online/article/01'
+        ',0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&cg3=kultur&cg4=zede&cg5='
+        '&cg6=&cg7=01&cg8=kultur/article&cg9=2015-05-27&cp1=wenke husmann'
+        '&cp2=kultur/bild-text&cp3=1/1&cp4=kultur;"der hobbit";wein;'
+        'italien;toskana;bologna;bozen;florenz&cp5=2015-05-27 19:11:30.'
+        '179510+02:00&cp6=5010&cp7=&cp8=zede&cp9=kultur/article&cp10=&cp11='
+        '&cp12=mobile.site&cp13=mobile&cp15=&cp25=amp').format(
+            url=testserver['http_address'])

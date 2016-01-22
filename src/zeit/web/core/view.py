@@ -28,8 +28,8 @@ import zeit.web.core.application
 import zeit.web.core.banner
 import zeit.web.core.comments
 import zeit.web.core.date
-import zeit.web.core.navigation
 import zeit.web.core.template
+import zeit.web.core.navigation
 
 
 log = logging.getLogger(__name__)
