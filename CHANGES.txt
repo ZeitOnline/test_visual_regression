@@ -4,6 +4,8 @@ Change log for zeit.web
 2.51 (unreleased)
 -----------------
 
+- BUG-334: Remove gradient overlay for classic fullwidth teaser
+
 - ZON-2573: Refactor banner config to XML sources
 
 - ZON-2574: Refactor navigation config to XML sources
