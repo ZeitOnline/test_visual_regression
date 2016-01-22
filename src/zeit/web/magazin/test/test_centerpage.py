@@ -23,7 +23,7 @@ def test_cp_should_have_buzz_module(
         testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-magazin/test-cp-2015/index' % testserver.url)
-    assert '<div class="cp_buzz">' in browser.contents
+    assert '<div class="buzzboard">' in browser.contents
 
 
 def test_get_reaches_from_centerpage_view(application):

@@ -8,7 +8,7 @@ import zeit.content.article.interfaces
 
 import zeit.web.core.interfaces
 import zeit.web.core.reach
-import zeit.web.core.centerpage
+import zeit.web.site.module.buzzbox
 
 
 def test_reach_host_should_be_configured_in_instance(application):
