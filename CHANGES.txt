@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.51 (unreleased)
+2.51 (2016-01-22)
 -----------------
 
 - ZON-2598: Introduce Accelerated Mobile Pages (AMP)
