@@ -20,12 +20,13 @@ module.exports = function(grunt) {
         codeDir: './src/zeit/web/static/',
         rubyVersion: '1.9.3',
         tasks: {
-            production: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'compass:dist', 'copy', 'svg' ],
+            production: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy', 'svg' ],
             development: [ 'clean', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean', 'svgmin', 'grunticon', 'svgstore' ],
             icons: [ 'clean:icons', 'svgmin:magazin', 'grunticon:magazin' ],
             symbols: [ 'clean:symbols', 'svgmin:site', 'svgstore:site', 'grunticon:site' ],
+            css: [ 'compass:dist', 'compass:amp' ],
             lint: [ 'jshint', 'jscs' ]
         }
     };
@@ -113,8 +114,22 @@ module.exports = function(grunt) {
                     outputStyle: 'expanded'
                 }
             },
+            amp: {
+                options: {
+                    specify: [
+                        project.sourceDir + 'sass/**/amp.s{a,c}ss'
+                    ],
+                    force: true,
+                    environment: 'production',
+                    outputStyle: 'compact'
+                }
+            },
             dist: {
                 options: {
+                    specify: [
+                        project.sourceDir + 'sass/**/*.s{a,c}ss',
+                        '!' + project.sourceDir + 'sass/**/amp.s{a,c}ss'
+                    ],
                     force: true,
                     environment: 'production',
                     outputStyle: 'compressed'
@@ -409,5 +424,24 @@ module.exports = function(grunt) {
     grunt.registerTask('icons', project.tasks.icons);
     grunt.registerTask('symbols', project.tasks.symbols);
     grunt.registerTask('lint', project.tasks.lint);
+
+/*
+ * Nice to have. Keep for later use.
+ *
+    grunt.registerTask('build', 'Build all, or parts of, the site', function(target) {
+        var tasks = {
+            css: ['sass', 'autoprefixer'],
+            js: ['wrap', 'jshint'],
+            default: [
+                'clean:build',
+                'build:css',
+                'build:js',
+                'copy:build'
+            ]
+        };
+
+        grunt.task.run(tasks[target] || tasks['default']);
+    });
+*/
 
 };
