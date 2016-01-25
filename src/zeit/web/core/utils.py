@@ -231,8 +231,8 @@ class ILazyProxy(zeit.cms.content.interfaces.ICommonMetadata):
     pass
 
 
-@grokcore.component.adapter(dict)
-@grokcore.component.implementer(zeit.cms.interfaces.ICMSContent, ILazyProxy)
+@zope.component.adapter(dict)
+@zope.interface.implementer(zeit.cms.interfaces.ICMSContent, ILazyProxy)
 class LazyProxy(object):
     """Proxy class for ICMSContent implementations which expects a dict in its
     constructor containing a `uniqueId` key-value pair.
