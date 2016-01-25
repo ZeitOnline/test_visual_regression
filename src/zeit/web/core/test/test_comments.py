@@ -12,6 +12,7 @@ import pyramid.httpexceptions
 import pytest
 import pytz
 import requests
+import requests.exceptions
 import zope.component
 
 from zeit.cms.interfaces import ID_NAMESPACE as NS
@@ -217,7 +218,6 @@ def test_post_comment_should_throw_exception_if_no_user_is_present():
 
 
 def test_comment_tree_should_be_flattened_on_level_two():
-
     cid_1 = dict(
         in_reply=None,
         cid=1)
@@ -536,6 +536,26 @@ def test_request_thread_should_fail_on_timeouts(application, monkeypatch):
         'http://community/foo')
 
 
+def test_post_comment_should_not_expose_requests_timeout_exception(
+        application, config, monkeypatch, dummy_request):
+
+    config.testing_securitypolicy(userid='123', permissive=True)
+    dummy_request.method = 'POST'
+    dummy_request.POST = dummy_request.params = {
+        'path': 'artikel/01', 'action': 'comment', 'comment': ' '}
+    dummy_request.session = {'user': {'uid': '123', 'name': 'foo'}}
+
+    def post(url, **kw):
+        raise requests.exceptions.Timeout()
+
+    monkeypatch.setattr(requests, 'post', post)
+
+    view = zeit.web.core.view_comment.PostComment(mock.Mock(), dummy_request)
+
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        view.post_comment()
+
+
 def test_get_thread_should_raise_exception_on_unloaded_threads(application,
                                                                monkeypatch):
 
@@ -705,14 +725,14 @@ def test_community_maintenance_should_be_scheduled_correctly():
                         u'Verständnis.')
     }
     assert zeit.web.core.comments._derive_maintenance_from_schedule(
-        maintenance)['active'] == True
+        maintenance)['active'] is True
 
     maintenance['active'] = False
     maintenance['end'] = datetime.datetime(
         2001, 10, 10, 10, 10, 10, 100000, tzinfo=pytz.utc)
 
     assert zeit.web.core.comments._derive_maintenance_from_schedule(
-        maintenance)['active'] == False
+        maintenance)['active'] is False
 
     maintenance['active'] = False
     maintenance['begin'] = datetime.datetime(
@@ -721,7 +741,7 @@ def test_community_maintenance_should_be_scheduled_correctly():
         2299, 12, 10, 10, 10, 10, 100000, tzinfo=pytz.utc)
 
     assert zeit.web.core.comments._derive_maintenance_from_schedule(
-        maintenance)['active'] == False
+        maintenance)['active'] is False
 
     maintenance['active'] = True
     maintenance['begin'] = datetime.datetime(
@@ -730,7 +750,7 @@ def test_community_maintenance_should_be_scheduled_correctly():
         2299, 12, 10, 10, 10, 10, 100000, tzinfo=pytz.utc)
 
     assert zeit.web.core.comments._derive_maintenance_from_schedule(
-        maintenance)['active'] == True
+        maintenance)['active'] is True
 
     maintenance['active'] = True
     maintenance['begin'] = datetime.datetime(
@@ -739,12 +759,12 @@ def test_community_maintenance_should_be_scheduled_correctly():
         2001, 12, 10, 10, 10, 10, 100000, tzinfo=pytz.utc)
 
     assert zeit.web.core.comments._derive_maintenance_from_schedule(
-        maintenance)['active'] == True
+        maintenance)['active'] is True
 
 
 def test_community_maintenance_should_be_created_from_config(application):
     maintenance = zeit.web.core.comments.community_maintenance()
-    assert maintenance['active'] == False
+    assert maintenance['active'] is False
     assert maintenance['text_active'] == 'text_active'
 
 
