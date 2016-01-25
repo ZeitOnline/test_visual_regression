@@ -298,6 +298,15 @@ class InstantArticle(Article):
             self.context).date_last_published
 
 
+@view_config(route_name='amp',
+             context=zeit.content.article.interfaces.IArticle,
+             custom_predicates=(lambda context, _: not context.is_amp,),
+             request_method='GET')
+def redirect_amp_disabled(context, request):
+    url = request.url.replace('/amp/', '/', 1)
+    raise pyramid.httpexceptions.HTTPFound(url)
+
+
 @view_config(context=zeit.content.article.interfaces.IArticle,
              route_name='fbia',
              renderer='templates/fbia.html')
