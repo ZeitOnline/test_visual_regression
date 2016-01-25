@@ -259,8 +259,8 @@ def test_schema_org_article_mark_up(testbrowser):
     assert name[0].text == 'Wenke Husmann'
 
     # image
-    assert len(select('*[itemprop="image"]'
-        '[itemscope][itemtype="http://schema.org/ImageObject"]')) == 1
+    assert len(select('*[itemprop="image"][itemscope]'
+               '[itemtype="http://schema.org/ImageObject"]')) == 1
 
     # datePublished
     assert len(select('time[itemprop="datePublished"]')) == 1
