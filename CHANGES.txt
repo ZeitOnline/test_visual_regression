@@ -4,7 +4,7 @@ Change log for zeit.web
 2.52 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Prevent and test for ranking area proxy exposures
 
 
 2.51 (2016-01-22)
@@ -29,8 +29,6 @@ Change log for zeit.web
 - BUG-335: Correctly append /index to (dynamic) folder path redirects
 
 - BUG-337: Show sharing links on video pages
-
-- FIX: Prevent and test for ranking area proxy exposures
 
 - FIX: IA: use date-last-published so articles get updated at Facebook
 
