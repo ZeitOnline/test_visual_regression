@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Prevent and test for ranking area proxy exposures
 
+- MAINT: Refurbish infobox tab link styles
+
 
 2.51 (2016-01-22)
 -----------------
