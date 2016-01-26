@@ -123,7 +123,7 @@
 		</footer>
 
 		{% include "zeit.web.core:templates/inc/tracking/webtrekk_amp.html" %}
-		<amp-pixel src="//cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}&amp;rand=$RANDOM"></amp-pixel>
+		<amp-pixel src="//cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}&amp;r=DOCUMENT_REFERRER&amp;rand=RANDOM"></amp-pixel>
 
 	</div>
 </body>
