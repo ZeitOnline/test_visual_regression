@@ -8,4 +8,9 @@
     <utility factory=".reach.Reach" />
     <utility factory=".metrics.from_settings" />
 
+    <adapter
+      factory=".utils.LazyProxy"
+      provides="zeit.cms.interfaces.ICMSContent"
+      />
+
 </configure>

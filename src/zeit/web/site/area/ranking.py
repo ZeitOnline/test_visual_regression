@@ -173,8 +173,13 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         source = zeit.cms.content.interfaces.ICommonMetadata['serie'].source
         doc['serie'] = source.factory.values.get(serie, None)
 
-        # XXX The asset badges are not indexed in solr, so we lie about them
-        doc['gallery'] = doc['video'] = doc['video_2'] = None
+        # XXX These asset badges and classification flags are not indexed
+        #     in Solr, so we lie about them.
+        doc.update({'gallery': None,
+                    'genre': None,
+                    'template': None,
+                    'video': None,
+                    'video_2': None})
 
         doc.setdefault('lead_candidate', False)
 

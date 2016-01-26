@@ -28,6 +28,7 @@ import zeit.web.core.application
 import zeit.web.core.banner
 import zeit.web.core.comments
 import zeit.web.core.date
+import zeit.web.core.template
 import zeit.web.core.navigation
 
 
@@ -653,24 +654,22 @@ class Content(Base):
             return
 
     @zeit.web.reify
-    def obfuscated_date(self):
-        date = ''
-        format = 'd. MMMM yyyy, H:mm \'Uhr\''
-        first_released = babel.dates.format_datetime(
-            self.date_first_released, format, locale='de_De')
-        if self.context.product and self.context.product.show == 'issue':
-            # do a bit of trickery here, so we see the time for ZEIT
-            date = u' '
-        date += first_released
+    def last_modified_label(self):
         if self.date_last_published_semantic:
+            return u'{} am {}'.format(
+                self.last_modified_wording,
+                zeit.web.core.template.format_date(
+                    self.date_last_published_semantic, 'long'))
+
+    @zeit.web.reify
+    def obfuscated_date(self):
+        if self.last_modified_label:
+            released = zeit.web.core.template.format_date(
+                self.date_first_released, 'long')
             date = (u'{} <span class="metadata__seperator">'
-                    ' / </span> {} am {} ').format(
-                        date,
-                        self.last_modified_wording,
-                        babel.dates.format_datetime(
-                            self.date_last_published_semantic,
-                            format, locale='de_De'))
-        if date is not first_released:
+                    ' / </span> {} ').format(
+                        released,
+                        self.last_modified_label)
             return base64.b64encode(date.encode('latin-1'))
 
     @zeit.web.reify
@@ -708,6 +707,11 @@ class Content(Base):
 
     @zeit.web.reify
     def obfuscated_source(self):
+        if self.unobfuscated_source:
+            return base64.b64encode(self.unobfuscated_source.encode('latin-1'))
+
+    @zeit.web.reify
+    def unobfuscated_source(self):
         if self.context.product and self.context.product.show == 'issue':
             if self.source_label:
                 label = self.source_label
@@ -715,7 +719,7 @@ class Content(Base):
                     label += ', ' + babel.dates.format_date(
                         self.date_print_published,
                         "d. MMMM yyyy", locale="de_De")
-                return base64.b64encode(label.encode('latin-1'))
+                return label
 
     @zeit.web.reify('default_term')
     def lineage(self):

@@ -10,6 +10,7 @@ import lxml
 import pyramid.httpexceptions
 import pyramid.view
 import requests
+import requests.exceptions
 import zope.component
 
 import zeit.cms.interfaces
@@ -193,83 +194,92 @@ class PostComment(zeit.web.core.view.Base):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         with zeit.web.core.metrics.timer(
                 'post_comment.community.reponse_time'):
-            response = getattr(requests, method)(
-                action_url,
-                data=data,
-                params=data,
-                cookies=dict(request.cookies),
-                allow_redirects=False,
-                timeout=float(conf.get('community_host_timeout_secs', 5)))
-        if response.status_code >= 200 and response.status_code <= 303:
-            self.status.append('Action {} was performed for {}'
-                               ' (with pid {})'.format(method, unique_id, pid))
-
-            invalidate_comment_thread(unique_id)
-            set_user = False
-            if not self.user_name and action == 'comment':
-                if zeit.web.core.security.reload_user_info(self.request) and (
-                        'user' in request.session) and (
-                            request.session['user']['name']):
-                    self.user_name = request.session['user']['name']
-                    set_user = True
-                    self.status.append(u"User name {} was set".format(
-                        self.user_name))
+            try:
+                response = getattr(requests, method)(
+                    action_url,
+                    data=data,
+                    params=data,
+                    cookies=dict(request.cookies),
+                    allow_redirects=False,
+                    timeout=float(conf.get('community_host_timeout_secs', 5)))
+                if not 200 <= response.status_code <= 303:
+                    raise requests.exceptions.HTTPError()
+            except requests.exceptions.HTTPError as err:
+                if response.status_code == 409:
+                    try:
+                        msg = json.loads(response.content)['error_message']
+                    except (AttributeError, KeyError, ValueError):
+                        msg = None
+                    raise pyramid.httpexceptions.HTTPBadRequest(
+                        title='user_name could not be set', explanation=msg)
                 else:
                     raise pyramid.httpexceptions.HTTPInternalServerError(
-                        title='No user name found',
-                        explanation='Session could not be '
-                                    'reloaded with new user_name.')
+                        title='Action {} could not be performed'.format(
+                            action),
+                        explanation=('Status code {} was send for action {} '
+                                     'on resource {}').format(
+                            action, response.status_code, unique_id))
+            except requests.exceptions.RequestException as err:
+                raise pyramid.httpexceptions.HTTPInternalServerError(
+                    title='Action {} could not be performed'.format(
+                        action),
+                    explanation=('{} was raised for action {} '
+                                 'on resource {}').format(
+                        type(err).__name__, action, unique_id))
 
-            content = None
-            error = None
-            if response.content:
-                content = json.loads(response.content[5:-2])
-                error = content['#error']
-            elif response.status_code == 303:
-                url = urlparse.urlparse(response.headers.get('location'))
-                self.new_cid = url[5][4:]
-                request.session['last_cid'] = self.new_cid
-                request.session['last_commented_uniqueId'] = (
-                    self.context.uniqueId)
-                request.session['last_commented_time'] = (
-                    datetime.datetime.utcnow())
+        self.status.append('Action {} was performed for {}'
+                           ' (with pid {})'.format(method, unique_id, pid))
+        invalidate_comment_thread(unique_id)
+        set_user = False
+        if not self.user_name and action == 'comment':
+            if zeit.web.core.security.reload_user_info(self.request) and (
+                    'user' in request.session) and (
+                        request.session['user']['name']):
+                self.user_name = request.session['user']['name']
+                set_user = True
+                self.status.append(u"User name {} was set".format(
+                    self.user_name))
+            else:
+                raise pyramid.httpexceptions.HTTPInternalServerError(
+                    title='No user name found',
+                    explanation='Session could not be '
+                                'reloaded with new user_name.')
 
-            premoderation = True if (response.status_code == 202 and (
-                response.headers.get('x-premoderation') == 'true')) else False
+        content = None
+        error = None
+        if response.content:
+            content = json.loads(response.content[5:-2])
+            error = content['#error']
+        elif response.status_code == 303:
+            url = urlparse.urlparse(response.headers.get('location'))
+            self.new_cid = url[5][4:]
+            request.session['last_cid'] = self.new_cid
+            request.session['last_commented_uniqueId'] = (
+                self.context.uniqueId)
+            request.session['last_commented_time'] = (
+                datetime.datetime.utcnow())
 
-            if premoderation:
-                self.status.append(
-                    "Comment needs moderation (premoderation state)")
+        premoderation = True if (response.status_code == 202 and (
+            response.headers.get('x-premoderation') == 'true')) else False
 
-            return {
-                'request': {
-                    'action': action,
-                    'path': self.path,
-                    'nid': nid,
-                    'pid': pid},
-                'response': {
-                    'content': content,
-                    'error': error,
-                    'recommendations': recommendations,
-                    'new_cid': self.new_cid,
-                    'setUser': set_user,
-                    'userName': self.user_name,
-                    'premoderation': premoderation}
-            }
+        if premoderation:
+            self.status.append(
+                'Comment needs moderation (premoderation state)')
 
-        elif response.status_code == 409:
-            error = json.loads(response.content)
-            raise pyramid.httpexceptions.HTTPBadRequest(
-                title='user_name could not be set',
-                explanation=error['error_message'])
-        else:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
-                title='Action {} could not be performed'.format(action),
-                explanation='Status code {} was send for action {} '
-                            'on resource {}'.format(
-                                action,
-                                response.status_code,
-                                unique_id))
+        return {
+            'request': {
+                'action': action,
+                'path': self.path,
+                'nid': nid,
+                'pid': pid},
+            'response': {
+                'content': content,
+                'error': error,
+                'recommendations': recommendations,
+                'new_cid': self.new_cid,
+                'setUser': set_user,
+                'userName': self.user_name,
+                'premoderation': premoderation}}
 
     def _action_url(self, action, path):
         endpoint = 'services/json?callback=zeit' if (action in [

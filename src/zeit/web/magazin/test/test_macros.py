@@ -492,29 +492,6 @@ def test_macro_headervideo_handles_video_id_correctly(jinja2_env):
     assert len(vid) == 1
 
 
-def test_macro_sharing_meta_should_produce_markup(testbrowser):
-    browser = testbrowser('/artikel/01')
-    assert browser.cssselect('meta[name="twitter:card"]')
-    assert browser.cssselect(
-        'meta[name="twitter:site"][content="@zeitonline"]')
-    assert browser.cssselect(
-        'meta[name="twitter:creator"][content="@ZEITmagazin"]')
-    assert browser.cssselect(
-        'meta[name="twitter:title"][content="Mei, is des traurig!"]')
-    assert browser.cssselect('meta[name="twitter:description"]')
-    assert browser.cssselect(
-        'meta[property="og:site_name"][content="ZEITmagazin"]')
-    assert browser.cssselect('meta[property="fb:admins"][content="595098294"]')
-    assert browser.cssselect('meta[property="og:type"][content="article"]')
-    assert browser.cssselect(
-        'meta[property="og:title"][content="Mei, is des traurig!"]')
-    assert browser.cssselect('meta[property="og:description"]')
-    assert browser.cssselect('meta[property="og:url"]')
-    assert browser.cssselect('meta[property="og:image"]')
-    assert browser.cssselect('link[itemprop="image"][rel="image_src"]')
-    assert browser.cssselect('meta[name="twitter:image"]')
-
-
 def test_add_publish_date_generates_script(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')

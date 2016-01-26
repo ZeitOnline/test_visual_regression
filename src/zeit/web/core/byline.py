@@ -138,7 +138,9 @@ class ArticleByline(Byline):
 
 @grokcore.component.adapter(
     zope.interface.Interface,
-    zeit.web.core.utils.LazyProxy)
+    # XXX We'd rather use the class `LaxyProxy`, but that seems to have not
+    # enough specificity.
+    zeit.web.core.utils.ILazyProxy)
 @grokcore.component.implementer(IByline)
 class ProxyByline(Byline):
 
