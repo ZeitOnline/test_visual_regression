@@ -294,8 +294,9 @@ class InstantArticle(Article):
 
     @zeit.web.reify
     def date_last_published(self):
-        return zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_last_published
+        date = self.publish_info.date_last_published
+        if date:
+            return date.astimezone(self.timezone)
 
 
 @view_config(route_name='amp',

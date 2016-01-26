@@ -4,7 +4,11 @@ Change log for zeit.web
 2.52 (unreleased)
 -----------------
 
+- FIX: Show date_last_published with adjusted TZ info
+
 - FIX: Prevent and test for ranking area proxy exposures
+
+- FIX: Catch and wrap community request timeouts
 
 - MAINT: Refurbish infobox tab link styles
 
