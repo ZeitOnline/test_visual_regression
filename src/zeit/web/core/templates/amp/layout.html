@@ -3,8 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<title>{{ view.pagetitle }}</title>
-	<link rel="canonical" href="{{ view.content_url }}">
+    <meta name="description" content="{{ view.pagedescription }}">
+    {% if view.meta_keywords -%}
+        <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
+    {% endif -%}
+    <meta name="robots" content="{{ view.meta_robots }}">
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+	<link rel="canonical" href="{{ view.content_url }}">
     {%- include "zeit.web.core:templates/inc/meta/date.html" %}
 	{%- block sharing_meta %}
 		{%- include "zeit.web.core:templates/inc/meta/sharing.html" -%}
