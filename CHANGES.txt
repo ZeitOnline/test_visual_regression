@@ -4,8 +4,6 @@ Change log for zeit.web
 2.52 (unreleased)
 -----------------
 
-- BUG-334: Remove gradient overlay for classic fullwidth teaser
-
 - FIX: Show date_last_published with adjusted TZ info
 
 - FIX: Prevent and test for ranking area proxy exposures
