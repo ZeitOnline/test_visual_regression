@@ -10,6 +10,8 @@ Change log for zeit.web
 2.53 (2016-01-27)
 -----------------
 
+- HOTFIX: IVW: fix wrong variable for questionnaire
+
 - ZON-2648: Add privacy disclaimer and impressum to Instant Articles
 
 - FIX: Let batou & grunt play nice together
