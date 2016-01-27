@@ -8,14 +8,14 @@
 				{# Metatag to show Google the image, see http://stackoverflow.com/questions/18130827/schema-org-give-a-div-a-itemprop-image -#}
 				<meta itemprop="logo" content="{{ request.asset_host }}/icons/site/zon-logo-desktop.png">
 				<meta itemprop="name" content="ZEIT ONLINE">
-                {{ lama.use_svg_icon('logo-zon-black', 'logo_bar__brand-logo', view.request) }}
+                {{ lama.use_svg_icon('logo-zon-black', 'logo_bar__brand-logo', view) }}
 			</a>
 		</{{ tag_name }}>
 		{% endwith %}
 		<div class="logo_bar__menu">
 			<a href="#primary_nav" title="Hauptmenü" aria-label="Hauptmenü" role="button" aria-controls="navigation" aria-expanded="false">
-				{{ lama.use_svg_icon('menu', 'logo_bar__menu-icon logo_bar__menu-icon--burger', view.request) }}
-				{{ lama.use_svg_icon('close', 'logo_bar__menu-icon logo_bar__menu-icon--close', view.request) }}
+				{{ lama.use_svg_icon('menu', 'logo_bar__menu-icon logo_bar__menu-icon--burger', view) }}
+				{{ lama.use_svg_icon('close', 'logo_bar__menu-icon logo_bar__menu-icon--close', view) }}
 			</a>
 		</div>
 	</div>

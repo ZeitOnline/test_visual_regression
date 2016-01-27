@@ -18,7 +18,7 @@
         data-id="{{ tracking_slug }}.paginationbutton"
         class="button {{ module_layout }}-group__button js-bar-teaser-paginate"
         data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p=">
-        {{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), request) }}
+        {{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), view) }}
         Weitere laden
     </a>
 {% endblock %}

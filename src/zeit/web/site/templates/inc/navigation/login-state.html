@@ -18,12 +18,12 @@
     <span class="login-state-mobile__name">{{ username }}</span>
     <a href="{{ logout }}" class="login-state-mobile__logoff">
         Abmelden
-        {{ lama.use_svg_icon('navigation-login', 'login-state-mobile__icon', request) }}
+        {{ lama.use_svg_icon('navigation-login', 'login-state-mobile__icon', view) }}
     </a>
 </div>
 {% else %}
 <a href="{{ login }}" class="user-link">
-    {{ lama.use_svg_icon('navigation-login', 'main_nav__community__icon', request) }}
+    {{ lama.use_svg_icon('navigation-login', 'main_nav__community__icon', view) }}
     Anmelden
 </a>
 {% endif %}

@@ -18,7 +18,7 @@
 			<div class="comment-meta__name">
 				{% if comment.is_author or comment.is_freelancer %}
 				<span title="{{ comment.role }}" class="comment-meta__badge comment-meta__badge--author">
-					{{ lama.use_svg_icon('promoted', 'comment-meta__icon comment-meta__icon--author', request) }}
+					{{ lama.use_svg_icon('promoted', 'comment-meta__icon comment-meta__icon--author', view) }}
 				</span>
 				{% endif %}
 				<a href="{{ comment.userprofile_url }}">{{ comment.name }}</a>
@@ -28,13 +28,13 @@
 			</a>
 
 			<div class="comment-meta__badge comment-meta__badge--recommended" title="Leserempfehlungen"{% if not comment.recommendations %} style="display:none"{% endif %}>
-				{{ lama.use_svg_icon('recommended', 'comment-meta__icon comment-meta__icon--recommended', request) }}
+				{{ lama.use_svg_icon('recommended', 'comment-meta__icon comment-meta__icon--recommended', view) }}
 				<span class="js-comment-recommendations">{{ comment.recommendations }}</span>
 			</div>
 
 			{% if comment.is_promoted %}
 				<div class="comment-meta__badge comment-meta__badge--promoted">
-					{{ lama.use_svg_icon('promoted', 'comment-meta__icon comment-meta__icon--promoted', request) }}
+					{{ lama.use_svg_icon('promoted', 'comment-meta__icon comment-meta__icon--promoted', view) }}
 					Redaktionsempfehlung
 				</div>
 			{% endif %}
@@ -54,12 +54,12 @@
 
 			{% if view.comments_allowed -%}
 			<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='comment', pid=comment.cid) }}#comment-form" title="Antworten">
-				{{ lama.use_svg_icon('comment-reply', 'comment__icon comment__icon-reply', request) }}
+				{{ lama.use_svg_icon('comment-reply', 'comment__icon comment__icon-reply', view) }}
 				<span class="comment__action">Antworten</span>
 			</a>
 			{% endif -%}
 			<a class="comment__reaction js-report-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(action='report', pid=comment.cid) }}#report-comment-form" title="Melden">
-				{{ lama.use_svg_icon('comment-report', 'comment__icon comment__icon-report', request) }}
+				{{ lama.use_svg_icon('comment-report', 'comment__icon comment__icon-report', view) }}
 				<span class="comment__action">Melden</span>
 			</a>
 			<a class="comment__reaction js-recommend-comment"
@@ -68,7 +68,7 @@
 			   data-uid="{{ comment.uid }}"
 			   href="{{ view.request | append_get_params(action='recommend', pid=comment.cid) }}#cid-{{ comment.cid }}"
 			   title="Empfehlen">
-				{{ lama.use_svg_icon('comment-recommend', 'comment__icon comment__icon-recommend', request) }}
+				{{ lama.use_svg_icon('comment-recommend', 'comment__icon comment__icon-recommend', view) }}
 				<span class="comment__action">Empfehlen</span>
 			</a>
 		</div>

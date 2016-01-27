@@ -54,7 +54,7 @@
 		<div class="comment-preferences__container">
 			{# funky future feature?
 			<a class="comment-preferences__item nowrap" href="{{ request.url }}#comments">
-				{{ lama.use_svg_icon('spinner', 'comment-preferences__icon comment-preferences__icon--spinner', request) }}
+				{{ lama.use_svg_icon('spinner', 'comment-preferences__icon comment-preferences__icon--spinner', view) }}
 				Auto-Aktualisierung an
 			</a>
 			#}
@@ -69,20 +69,20 @@
 				{% set label = 'Alle Kommentare anzeigen' %}
 			{% endif %}
 			<a class="comment-preferences__item nowrap" href="{{ href }}#comments">
-				{{ lama.use_svg_icon('sorting', 'comment-preferences__icon comment-preferences__icon--sorting', request) }}
+				{{ lama.use_svg_icon('sorting', 'comment-preferences__icon comment-preferences__icon--sorting', view) }}
 				<span>{{ label }}</span>
 			</a>
 			{% if view.comments.has_promotion %}
 				{% set href = '{}?sort=promoted'.format(view.request.path_url) %}
 				<a class="{{ 'comment-preferences__item' | with_mods('buttonized', 'active' if view.comments.sort == 'promoted') }} nowrap" href="{{ href }}#comments">
-					{{ lama.use_svg_icon('promoted', 'comment-preferences__icon comment-preferences__icon--promoted', request) }}
+					{{ lama.use_svg_icon('promoted', 'comment-preferences__icon comment-preferences__icon--promoted', view) }}
 					<span class="comment-preferences__text">Nur Redaktionsempfehlungen</span>
 				</a>
 			{% endif %}
 			{% if view.comments.has_recommendations %}
 				{% set href = '{}?sort=recommended'.format(view.request.path_url) %}
 				<a class="{{ 'comment-preferences__item' | with_mods('buttonized', 'active' if view.comments.sort == 'recommended') }} nowrap" href="{{ href }}#comments">
-					{{ lama.use_svg_icon('recommended', 'comment-preferences__icon comment-preferences__icon--recommended', request) }}
+					{{ lama.use_svg_icon('recommended', 'comment-preferences__icon comment-preferences__icon--recommended', view) }}
 					<span class="comment-preferences__text">Nur Leserempfehlungen</span>
 				</a>
 			{% endif %}
