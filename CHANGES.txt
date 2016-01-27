@@ -4,6 +4,8 @@ Change log for zeit.web
 2.54 (unreleased)
 -----------------
 
+- MAINT: Refurbish infobox tab link styles
+
 - ZON-2593: Webtrekk tracking if newsletter-optin parameter is set
 
 
