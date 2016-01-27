@@ -260,13 +260,12 @@ class Nextread(TeaserBlock):
     pass
 
 
+@zeit.web.register_module(u'')
 class Module(object):
     """Base class for RAM-style modules to be used in cp2015 centerpages.
 
     See `zeit.web.core.decorator.register_module` for doc and example.
     """
-
-    zope.interface.implements(zeit.edit.interfaces.IBlock)
 
     __parent__ = NotImplemented
 
