@@ -29,7 +29,7 @@ import zeit.web.site.module.printbox
 log = logging.getLogger(__name__)
 
 
-@zope.interface.implementer(zeit.edit.interfaces.IBlock)
+@zope.interface.implementer(zeit.web.core.interfaces.IBlock)
 class LegacyModule(
         zeit.web.core.centerpage.Module, zeit.web.core.utils.nslist):
 
