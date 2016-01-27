@@ -1,10 +1,30 @@
 Change log for zeit.web
 =======================
 
-2.51 (unreleased)
+2.53 (unreleased)
 -----------------
 
-- BUG-334: Remove gradient overlay for classic fullwidth teaser
+- ZON-2665: Centralize Module Class and integrate ZMO Buzbbox
+
+
+2.52 (2016-01-27)
+-----------------
+
+- FIX: Show date_last_published with adjusted TZ info
+
+- FIX: Prevent and test for ranking area proxy exposures
+
+- FIX: Catch and wrap community request timeouts
+
+
+2.51 (2016-01-22)
+-----------------
+
+- ZON-2598: Introduce Accelerated Mobile Pages (AMP)
+
+- ZON-2604: Add webtrekk pixel to amp article template
+
+- ZON-2628: Redirect to standard article view if AMP is disabled
 
 - ZON-2573: Refactor banner config to XML sources
 
@@ -14,9 +34,15 @@ Change log for zeit.web
 
 - ZON-2640: Update css for em class moderation
 
+- BUG-334: Remove gradient overlay for classic fullwidth teaser
+
+- BUG-335: Correctly append /index to (dynamic) folder path redirects
+
 - BUG-337: Show sharing links on video pages
 
-- ZON-2665: Centralize Module Class and integrate ZMO Buzbbox
+- FIX: IA: use date-last-published so articles get updated at Facebook
+
+- MAINT: Allow template-only centerpage modules to be discovered
 
 
 2.50 (2016-01-20)

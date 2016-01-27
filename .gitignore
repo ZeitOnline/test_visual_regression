@@ -11,8 +11,7 @@ Gemfile.lock
 /javascript/documentation/
 /javascript/vendor/
 /node_modules/
-/sass/web.*/icons/_minified/
-/sass/web.*/svg/_minified/
+/sass/web.*/*/_minified/
 /sass/vendor/
 setuptools_git-*
 src/*.egg-info

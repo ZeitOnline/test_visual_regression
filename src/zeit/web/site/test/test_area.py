@@ -74,6 +74,17 @@ def test_overview_area_clone_factory_should_set_proper_attributes():
     assert all(len(c.__name__) == 36 for c in clones)
 
 
+def test_default_teaser_should_not_expose_ranking_area_proxies(
+        testbrowser, datasolr, monkeypatch):
+    log = mock.Mock()
+    monkeypatch.setattr(zeit.web.core.utils, 'log', log)
+
+    browser = testbrowser('/dynamic/paul-auster')
+    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 10
+
+    assert all('ProxyExposed' not in a[0][0] for a in log.debug.call_args_list)
+
+
 def test_get_area_should_recognize_zmo_parquet(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/journalistic-formats-zmo')

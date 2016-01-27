@@ -1,0 +1,13 @@
+{% extends "zeit.web.core:templates/inc/meta/sharing.html" %}
+
+{% block twitter_creator -%}
+    @ZEITmagazin
+{%- endblock %}
+
+{% block og_site_name -%}
+    ZEITmagazin
+{%- endblock %}
+
+{% block og_description -%}
+    {{ view.subtitle or 'Mode&Design, Essen&Trinken, Leben' }}
+{%- endblock %}
