@@ -4,7 +4,9 @@ Change log for zeit.web
 2.53 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2648: Add privacy disclaimer and impressum to Instant Articles
+
+- FIX: Let batou & grunt play nice together
 
 
 2.52 (2016-01-27)
@@ -15,8 +17,6 @@ Change log for zeit.web
 - FIX: Prevent and test for ranking area proxy exposures
 
 - FIX: Catch and wrap community request timeouts
-
-- FIX: Let batou & grunt play nice together
 
 
 2.51 (2016-01-22)
