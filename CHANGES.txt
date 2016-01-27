@@ -4,7 +4,7 @@ Change log for zeit.web
 2.53 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2648: Add privacy disclaimer and impressum to Instant Articles
 
 
 2.52 (2016-01-27)
