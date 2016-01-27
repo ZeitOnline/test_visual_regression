@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import datetime
-
+import lxml.html
+import mock
 import pyramid.testing
 import pytest
-import mock
 import zope.component
 
 import zeit.solr.interfaces
@@ -176,3 +176,28 @@ def test_author_first_favorite_article_forces_mobile_image(application):
     teasers = view.area_favourite_content.values()
     assert teasers[0].force_mobile_image
     assert not teasers[1].force_mobile_image
+
+
+def test_author_handles_missing_profile_data_right(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.site:templates/inc/author/profile.html')
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/j_random')
+    author.topiclink_url_1 = None
+    author.topiclink_url_2 = None
+    author.topiclink_url_3 = None
+    author.biography = ''
+    author.twitter = ''
+    author.facebook = ''
+    author.instagram = ''
+    author.bio_questions['hobby'] = None
+    author.bio_questions['person'] = None
+    request = pyramid.testing.DummyRequest()
+    view = zeit.web.site.view_author.Author(author, request)
+    html_str = tpl.render(view=view, context=view.context)
+    select = lxml.html.fromstring(html_str).cssselect
+
+    assert len(select('.author-topics')) == 0
+    assert len(select('.author-biography')) == 0
+    assert len(select('.author-contact')) == 0
+    assert len(select('.author-questions__text')) == 5
