@@ -12,6 +12,7 @@ import zope.component
 import zeit.content.cp.interfaces
 import zeit.edit.interfaces
 
+import zeit.web.core
 
 __all__ = [
     'reify', 'register_area', 'register_module', 'register_filter',
@@ -250,7 +251,7 @@ def register_module(name):
     First, implement your module class in python
 
     @zeit.web.register_module('ice-cream-truck')
-    class IceCreamTruck(zeit.web.site.module.Module):
+    class IceCreamTruck(zeit.web.core.centerpage.Module):
         @zeit.web.reify
         def flavours(self):
             return ('chocolate', 'vanilla', 'cherry')

@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2593: Webtrekk tracking if newsletter-optin parameter is set
 
+- ZON-2665: Centralize Module Class and integrate ZMO Buzbbox
+
 
 2.53 (2016-01-27)
 -----------------

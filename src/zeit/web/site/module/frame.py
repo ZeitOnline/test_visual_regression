@@ -1,13 +1,13 @@
 import logging
 
-import zeit.web.site.module
+import zeit.web.core.centerpage
 
 
 log = logging.getLogger(__name__)
 
 
 @zeit.web.register_module('frame')
-class Frame(zeit.web.site.module.Module):
+class Frame(zeit.web.core.centerpage.Module):
 
     @zeit.web.reify
     def src(self):
