@@ -5,6 +5,8 @@
   <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-id">urn:newsml:afp.com:20150601:doc-2n64x</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:85c42592-3840-41c6-b039-83cc16de66d6}</attribute>

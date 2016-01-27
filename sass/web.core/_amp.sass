@@ -1,0 +1,364 @@
+$primary-color: #313131 !default
+$color-border: #ddd !default
+$color-footer-logo: #1d1d1b !default
+$color-footer-bg: #eee !default
+$color-footer: #444 !default
+$logo-width: remify(256px) !default
+$logo-height: remify(24px) !default
+
+$zon-letter-spacing-l: 0.08em !default
+$zon-letter-spacing-m: 0.05em !default
+$zon-letter-spacing-s: 0.03em !default
+
+$zon-grey: #707070
+$zon-lighter-grey: #eee
+$color-separator-opacity: .5
+$color-separator: rgba($zon-grey, $color-separator-opacity)
+
+$color-kicker: $red !default
+$color-headline: $color-text !default
+$color-summary: #444 !default
+$color-metadata: $zon-grey !default
+
+// FONTS //////////////////////////////////////////////////
+
+@import "amp-fonts"
+
+body
+    background-color: $color-page-bg
+    color: $color-text
+    font-family: $font-tabletgothic
+    font-size: $base-font-size
+    line-height: $base-line-height
+
+a
+    color: $color-link--default
+    text-decoration: none
+    +on-interaction
+        color: $color-link--hover
+
+figure
+    margin: 0
+
+h1,h2,h3,h4,h5,h6
+    font-size: 1em
+
+// SVG //////////////////////////////////////////////////
+
+.symbols
+    display: none
+
+svg use
+    fill: currentColor
+    pointer-events: none
+
+// BREAKING NEWS //////////////////////////////////////////////////
+
+.breaking-news-banner
+    &__link
+        background: #ffe246
+        color: $black
+        display: block
+        font-size: remify(14px)
+        letter-spacing: $zon-letter-spacing-m
+        padding: remify(15px) $page-padding
+        text-align: center
+    &__label
+        text-transform: uppercase
+    &__time
+        padding-left: remify(4px)
+        text-transform: uppercase
+    &__title
+        display: block
+        font-size: remify(16px)
+        letter-spacing: $zon-letter-spacing-s
+        +respond-min($break-tablet-min)
+            display: inline
+            &:before
+                border-top: 1px solid #d7b636
+                content: ""
+                display: inline-block
+                height: 1px
+                vertical-align: middle
+                width: 40px
+                margin: remify(0 10px 0 5px)
+
+// ARTICLE //////////////////////////////////////////////////
+
+.article
+    margin: 0
+    padding: remify(0 $page-padding)
+    &__item
+        margin-left: auto
+        margin-right: auto
+        max-width: remify(660px)
+        &--float,
+        &--wide
+            max-width: remify(820px)
+        &--large
+            margin-left: -$page-padding
+            margin-right: -$page-padding
+            max-width: none
+
+%caption
+    color: #444
+    font-family: $font-franziska
+    font-size: em(15px)
+    font-style: italic
+    padding: remify(10px 0)
+
+.figure
+    &__caption
+        @extend %caption
+    &__copyright
+        color: $grey
+        a
+            color: inherit
+            +on-interaction
+                color: $color-link--hover
+    &--large
+        margin: remify(28px auto 40px)
+        max-width: remify(820px)
+        +respond-min($break-desktop-min)
+            margin-top: remify(40px)
+        .figure__caption
+            margin-left: auto
+            margin-right: auto
+            max-width: remify(660px)
+            padding-left: $page-padding
+            padding-right: $page-padding
+
+.video
+    &__caption
+        @extend %caption
+
+.headline
+    font-size: 1em
+    margin: remify(24px 0)
+    &__kicker
+        color: $color-kicker
+        display: block
+        font-size: em(14px)
+        letter-spacing: $zon-letter-spacing-m
+        padding-bottom: remify(17px)
+    &__title
+        color: $color-headline
+        display: block
+        font-size: em(30px)
+        line-height: 1.2
+    &__colon
+        +visuallyhidden
+
+.summary,
+.byline
+    color: $color-summary
+    font-size: em(18px)
+    line-height: 1.4
+    margin-bottom: remify(20px)
+    +respond-min($break-tablet-min)
+        line-height: 1.5
+    +respond-min($break-desktop-min)
+        font-size: em(20px)
+
+.byline
+    margin-bottom: remify(30px)
+    a
+        color: inherit
+        +on-interaction
+            color: $color-link--hover
+
+.byline__author
+    font-weight: bold
+
+.metadata
+    color: $color-metadata
+    font-size: em(14px)
+    letter-spacing: $zon-letter-spacing-s
+    margin-bottom: remify(40px)
+    time:empty
+        display: none
+    > time,
+    > span
+        white-space: nowrap
+    > time:after,
+    > span:after
+        color: $color-separator
+        content: " / "
+        margin: 0 .25em
+    > time:last-child:after,
+    > span:last-child:after
+        content: none
+    &__source a
+        color: inherit
+        border-bottom: 1px solid rgba($zon-grey, .4)
+        +on-interaction
+            color: inherit
+            border-bottom-color: rgba($zon-grey, .8)
+
+.list,
+.paragraph,
+.portraitbox
+    +default-article-textlink
+
+.list,
+.paragraph
+    font-family: $font-franziska
+    font-size: remify(18px)
+    line-height: 1.4
+    margin-bottom: .6em
+    margin-top: 0
+
+    +respond-min($break-tablet-min)
+        line-height: 1.5
+
+    +respond-min($break-desktop-min)
+        font-size: remify(20px)
+
+.intertitle
+    font-size: em(20px)
+    line-height: normal
+    margin-bottom: .5em
+    margin-top: 1.4em
+    +respond-min($break-desktop-min)
+        font-size: remify(24px)
+
+.quote,
+.portraitbox,
+.figure--float
+    margin: remify(40px) auto
+    max-width: remify(660px)
+    width: 90%
+
+.quote
+    +respond-min($break-tablet-min)
+        margin-left: 0
+        margin-right: 0
+        max-width: remify(560px)
+        width: 72%
+    &__text
+        font-size: em(17px)
+        font-weight: bold
+        letter-spacing: $zon-letter-spacing-s
+        line-height: 1.3
+        margin: 0
+        &:before
+            // @see: https://github.com/sass/sass/issues/659
+            content: #{"\"\\00BB\""} // Right-Pointing Double Angle Quotation Mark
+        &:after
+            content: #{"\"\\00AB\""} // Left-Pointing Double Angle Quotation Mark
+    &__source
+        color: $zon-grey
+        font-family: $font-franziska
+        font-size: em(15px)
+        font-style: italic
+        line-height: 1.5
+        margin-top: remify(14px)
+        &:before
+            // @see: https://github.com/sass/sass/issues/659
+            // @see: https://github.com/sass/sass/issues/659
+            content: #{"\"\\2014\""} // Em Dash
+    &__link
+        color: inherit
+        +on-interaction
+            color: $color-link--hover
+
+.portraitbox,
+.figure--float
+    +respond-min($break-tablet-min)
+        float: left
+        margin: remify(16px 24px 16px 0)
+        min-width: remify(205px)
+        width: 26.83%
+
+.portraitbox
+    font-size: em(14px)
+    &__heading
+        color: $primary-color
+        font-weight: bold
+        letter-spacing: $zon-letter-spacing-l
+        text-transform: uppercase
+    &__body
+        color: $zon-grey
+        letter-spacing: $zon-letter-spacing-s
+
+.infobox
+    background: $zon-lighter-grey
+    margin: remify(40px (-$page-padding))
+    overflow: hidden // needed to prevent collapsing margins of .infobox__link and .infobox__panel
+    padding: 0 $page-padding
+    section
+        border-bottom: 1px solid #ccc
+        &:last-of-type
+            border: none
+    &__title
+        margin: 0
+        text-transform: uppercase
+    &__link
+        color: $color-headline
+        display: block
+        font-size: em(14px)
+        font-weight: bold
+        letter-spacing: $zon-letter-spacing-l
+        line-height: 1.3
+        margin: remify(14px 0)
+        +on-interaction
+            color: $color-headline
+    &__panel
+        margin: remify(14px 0 28px)
+        p,
+        li,
+        td
+            color: #444
+            font-family: $font-tabletgothic
+            font-size: em(15px)
+            line-height: 1.4
+            margin: 0 0 .6em
+            +respond-min($break-tablet-min)
+                font-size: em(16px)
+        figure
+            margin: remify(32px) 0
+        .figure__caption
+            font-size: em(15px)
+            line-height: 1.4
+            margin: remify(8px 0 0)
+        img
+            max-width: 100%
+
+
+
+
+// FOOTER //////////////////////////////////////////////////
+
+.footer
+    margin-top: remify(70px)
+    text-align: center
+
+    &__logo
+        color: $color-footer-logo
+        display: block
+        height: $logo-height
+        margin: remify(20px) auto
+        width: $logo-width
+
+    &__navigation
+        background-color: $color-footer-bg
+        color: $color-footer
+        font-size: em(14px)
+        font-weight: bold
+        padding: remify(20px $page-padding)
+        ul, li
+            margin: 0
+            padding: 0
+            list-style: none
+        li
+            display: inline-block
+            &:after
+                // @see: https://github.com/sass/sass/issues/659
+                content: #{"\" \\2022 \""} // Bullet
+                margin: 0 .2em
+            &:last-child:after
+                content: none
+        a
+            color: inherit
+            +on-interaction
+                color: $black

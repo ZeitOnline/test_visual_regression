@@ -127,6 +127,12 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         except AttributeError:
             return None
 
+    # Only needed to set tracking code on
+    # http://www.zeit.de/newsletter/registriert?nl=premium.
+    @zeit.web.reify
+    def newsletter_optin_tracking(self):
+        return self.request.GET.get('newsletter-optin', None)
+
 
 @view_config(name='seite',
              path_info='.*seite-(.*)',
@@ -137,6 +143,12 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
              path_info='.*seite-(.*)',
              renderer='templates/article_advertorial.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
+    pass
+
+
+@view_config(route_name='amp',
+             renderer='templates/amp/article.html')
+class AcceleratedMobilePageArticle(Article):
     pass
 
 

@@ -231,7 +231,7 @@
 	}
 }
 
-/* mixins for navigation/header */
+// mixins for navigation/header
 
 @mixin add_nav_bar_style($height, $double: false) {
 	border-bottom: 1px solid $color-border;
@@ -250,7 +250,7 @@
 	width: $width;
 }
 
-/* END: mixins for navigation/header */
+// END: mixins for navigation/header
 
 @mixin transform-origin($value...) {
 	-webkit-transform-origin: $value;

@@ -1,10 +1,25 @@
 {% include "zeit.web.core:templates/inc/tracking/webtrekk_script.html" %}
 <script type="text/javascript">
-	{% set date = '' -%}
+    {# XXX: Please, only set variables in jinja where absolutely needed. #}
+
     {% set serie = view.serie | replace(' ', '') | lower %}
+
+    {% if view.is_breaking or view.is_push_news -%}
+        {% set push = 'wichtigenachrichten.push' if view.is_push_news else 'eilmeldung.push' %}
+    {% else %}
+        {% set push = '' -%}
+    {% endif -%}
 
     {% if view.date_first_released -%}
         {% set date = view.date_first_released | format_date('short_num') -%}
+    {% else %}
+        {% set date = '' -%}
+    {% endif -%}
+
+    {% if view.pagination -%}
+        {% set pagination = view.pagination.current ~'/'~ view.pagination.total -%}
+    {% else %}
+        {% set pagination = '1/1' -%}
     {% endif -%}
 
     {# https://sites.google.com/a/apps.zeit.de/verpixelungskonzept-zeit-online/webtrekk#TOC-Struktur-der-Content-IDs #}
@@ -30,7 +45,7 @@
             4: "{{ view.product_id | lower }}", // Online/Sourcetype
             5: "{{ view.sub_ressort | lower }}", // Subressort
             6: "{{ serie }}", // Cluster
-            7: "/{{ request.traversed | join("/") }}", // doc-path
+            7: "{{ request.path_info | substring_from('/') }}", // doc-path
             8: "{{ view.banner_channel | lower }}", // Banner-Channel
             9: "{{ date }}" // {{ view.date_first_released | default("not published yet") }}
         };
@@ -38,7 +53,7 @@
         wt.customParameter = {
             1: "{{ view.authors_list | lower }}", // Autor
             2: "{{ ivw_code }}", // IVW-Code
-            3: "", // Seite
+            3: "{{ pagination }}", // Seite
             4: "{{ view.meta_keywords | join(';') | lower if view.ressort | lower != 'homepage'}}", // Schlagworte
             5: "{{ view.date_last_modified }}", // Last published
             6: "{{ view.text_length }}", // Textlänge
@@ -50,8 +65,8 @@
             12: window.FBIA.getSiteParam("site"),
             13: window.FBIA.getTrackingBreakpointAlike(),
             14: "{{ 'alt' if 'zeitmz' in view.banner_channel | default('', True) else 'neu'  }}",
-            15: "",
-            25: "instant article" // Plattform (original|amp|instant article)
+            15: "{{ push }}", // Eilmeldungen
+            25: "instant article" // Plattform
         };
 
         wt.contentId = Z_WT_KENNUNG;

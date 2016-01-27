@@ -153,12 +153,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def syndication_source(self):
-        if self.context.product and self.context.product.id == 'TGS':
-            return 'http://www.tagesspiegel.de'
-        elif self.context.product and self.context.product.id == 'HaBl':
-            return 'http://www.handelsblatt.com'
-        else:
-            return
+        return self.source_url
 
     @zeit.web.reify
     def first_body_obj(self):
@@ -291,6 +286,21 @@ class InstantArticle(Article):
     @zeit.web.reify
     def wrap_in_cdata(self):
         return pyramid.settings.asbool(self.request.GET.get('cdata'))
+
+    @zeit.web.reify
+    def date_last_published(self):
+        date = self.publish_info.date_last_published
+        if date:
+            return date.astimezone(self.timezone)
+
+
+@view_config(route_name='amp',
+             context=zeit.content.article.interfaces.IArticle,
+             custom_predicates=(lambda context, _: not context.is_amp,),
+             request_method='GET')
+def redirect_amp_disabled(context, request):
+    url = request.url.replace('/amp/', '/', 1)
+    raise pyramid.httpexceptions.HTTPFound(url)
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
