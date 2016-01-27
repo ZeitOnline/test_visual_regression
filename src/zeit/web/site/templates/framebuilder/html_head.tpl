@@ -52,3 +52,5 @@
     {% if view.is_dev_environment %}
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
+
+    {% include "zeit.web.static:css/web.site/framebuilder.svg" %}
