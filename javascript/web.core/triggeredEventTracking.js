@@ -143,29 +143,18 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
     _functions.sendTracking.sendVideoViewToIVW = function() {
 
         // we expect the ivw function to be on the page
-        if ( typeof window.iom  === 'undefined' || typeof window.iom.h !== 'function' ) {
+        if ( typeof window.iom  === 'undefined' ||
+             typeof window.iom.h !== 'function' ||
+             typeof window.iam_data  === 'undefined' ) {
             return;
         }
 
-        var iam_data = {
-                'st': '', // dynamicallly set mobile|desktop
-                'cp': 'video',
-                'sv': 'mo', // 'mo' für alle Konten
-                'co': 'URL: ' + window.location.pathname
-            };
-
-        // in our Wrapper-Apps: always use the 'Angebotskennung' for the 'MEW' (mobile enabled website)
-        if ( Zeit.isMobileView() || Zeit.is_wrapped ) {
-            iam_data.st = 'mobzeit';
-        } else {
-            iam_data.st = 'zeitonl';
-        }
-
-        window.iom.h( iam_data, 1 );
+        window.iam_data.cp = 'video';
+        window.iom.h( window.iam_data, 1 );
 
         if ( debugMode ) {
             console.log( '[zonTriggeredEventTracking] IVW data sent: ' );
-            console.log( iam_data );
+            console.log( window.iam_data );
         }
     };
 
