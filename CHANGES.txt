@@ -4,6 +4,8 @@ Change log for zeit.web
 2.54 (unreleased)
 -----------------
 
+- ZON-2535: Migrate ZMO to R/A/M page structure
+
 - MAINT: Refurbish infobox tab link styles
 
 - ZON-2593: Webtrekk tracking if newsletter-optin parameter is set
@@ -74,8 +76,6 @@ Change log for zeit.web
 - BUG-78: Prevent IE from searching for a browserconfig.xml
 
 - FIX: Scale crossword puzzle to full-width in print
-
-- ZON-2535: Start ZMO moveover
 
 - BUG-270: Make ZMO portraiboxes also visible on mobile and tablet
 
