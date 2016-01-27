@@ -553,6 +553,10 @@ class Base(object):
     def has_cardstack(self):
         return False
 
+    @zeit.web.reify
+    def newsletter_optin_tracking(self):
+        return None
+
 
 class Content(Base):
 

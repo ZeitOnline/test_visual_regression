@@ -153,12 +153,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def syndication_source(self):
-        if self.context.product and self.context.product.id == 'TGS':
-            return 'http://www.tagesspiegel.de'
-        elif self.context.product and self.context.product.id == 'HaBl':
-            return 'http://www.handelsblatt.com'
-        else:
-            return
+        return self.source_url
 
     @zeit.web.reify
     def first_body_obj(self):
