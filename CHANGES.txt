@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.52 (unreleased)
+2.53 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.52 (2016-01-27)
 -----------------
 
 - ZON-2593: Webtrekk tracking if newsletter-optin parameter is set
