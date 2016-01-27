@@ -1,6 +1,6 @@
 {#
 
-Teaser template for flip card
+Teaser template for share/ read card
 
 Available attributes:
     teaser
@@ -16,13 +16,13 @@ Parameters:
     back_action: to define button action for back side of card
 #}
 
-{%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_card_teaser_template.html" -%}
+{%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_card_teaser_template.tpl" -%}
 
-{% block card_class %}card--front{% endblock %}
+{% block card_class %}{% endblock %}
 {% block bg_image %}true{% endblock %}
 {% block text_class %}card__text--with-bg{% endblock %}
 {% block teaser_text %}{{ teaser.teaserTitle }}{% endblock %}
 {% block author %}{% endblock %}
-{% block front_action %}flip{% endblock %}
+{% block front_action %}share{% endblock %}
 {% block back_class %}{% endblock %}
-{% block back_action %}flip{% endblock %}
+{% block back_action %}{% endblock %}

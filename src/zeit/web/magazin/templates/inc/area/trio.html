@@ -1,0 +1,6 @@
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
+{% block before_module_list %}
+	{% if area.title %}
+        <div class="cp-area__title">{{ area.title }}</div>
+	{% endif %}
+{% endblock %}
