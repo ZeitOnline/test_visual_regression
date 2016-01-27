@@ -200,6 +200,8 @@ class CommentForm(zeit.web.core.view.Content):
     renderer='templates/framebuilder/framebuilder.html')
 class FrameBuilder(Base):
 
+    inline_svg_icons = True
+
     def __init__(self, context, request):
         super(FrameBuilder, self).__init__(context, request)
         try:
