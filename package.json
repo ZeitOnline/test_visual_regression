@@ -8,7 +8,7 @@
     "bower": "^1.4.1"
   },
   "devDependencies": {
-    "grunt-bower-task": "~0.4.0",
+    "grunt-auto-install": "^0.3.0",
     "grunt-contrib-clean": "^0.7.0",
     "grunt-contrib-compass": "~1.0.4",
     "grunt-contrib-copy": "~0.8.2",
@@ -21,7 +21,8 @@
     "grunt-modernizr-builder": "^0.1.7",
     "grunt-sftp-deploy": "~0.2.4",
     "grunt-svgmin": "^3.1.0",
-    "grunt-svgstore": "^0.5.0"
+    "grunt-svgstore": "^0.5.0",
+    "main-bower-files": "^2.11.1"
   },
   "repository": {
     "type": "git",
