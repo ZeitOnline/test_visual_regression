@@ -9,12 +9,18 @@
 		{% set source = request.image_host + image.path %}
 		{% set fallback_source = request.image_host + image.fallback_path %}
 		{% set src = "%s__%sx%s" | format(source, width, height) %}
-		{% set sizes = [320, 480, 660, 820] %}
+		{% set widths = [320, 480, 660, 820] %}
 	{%- else %}
 		{% set source = image | default_image_url %}
 		{% set fallback_source = source %}
 		{% set src = source %}
-		{% set sizes = [] %}
+		{% set widths = [] %}
+	{%- endif %}
+
+	{%- if block.layout.display_mode == 'large' %}
+		{% set sizes = '(min-width: 820px) 820px, 100vw' %}
+	{%- else %}
+		{% set sizes = '' %}
 	{%- endif %}
 
 	<div class="{{ 'article__item' | with_mods(block.layout.display_mode) }}">
@@ -24,11 +30,11 @@
 			{%- endif %}
 			<amp-img
 				src="{{ src | replace(' ', '%20') }}"
-				srcset="{% for w in sizes %}{{ "%s__%sx%s %sw" | format(source | replace(' ', '%20'), w, (w / image.ratio) | int, w) }}{{ ", " if not loop.last }}{% endfor %}"
+				srcset="{% for w in widths %}{{ "%s__%sx%s %sw" | format(source | replace(' ', '%20'), w, (w / image.ratio) | int, w) }}{{ ", " if not loop.last }}{% endfor %}"
 				alt="{{ image.alt }}"
 				width="{{ width }}"
 				height="{{ height }}"
-				sizes=""
+				sizes="{{ sizes }}"
 				layout="responsive"
 				attribution="
 				{%- for name, url, nofollow in image.copyright -%}

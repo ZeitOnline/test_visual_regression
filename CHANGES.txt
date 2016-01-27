@@ -22,6 +22,8 @@ Change log for zeit.web
 2.52 (2016-01-27)
 -----------------
 
+- ZON-2729: Set sizes attribute for image srcset
+
 - FIX: Show date_last_published with adjusted TZ info
 
 - FIX: Prevent and test for ranking area proxy exposures
