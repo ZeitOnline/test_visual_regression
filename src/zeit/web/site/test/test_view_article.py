@@ -1310,3 +1310,19 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
     assert amp_link
     amp_url = amp_link[0].attrib['href']
     assert amp_url.endswith('amp/zeit-online/article/zeit')
+
+
+def test_newsletter_optin_page_has_webtrekk_ecommerce(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/simple?newsletter-optin=elbVertiefung-_!1:2')
+    assert '8: \'elbvertiefung_1_2\'' in browser.contents
+
+
+def test_no_webtrekk_ecommerce_without_newsletter_optin(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/simple?newsletter-optin')
+    assert 'wt.customEcommerceParameter' not in browser.contents
+
+    browser = testbrowser(
+        '/zeit-online/article/simple')
+    assert 'wt.customEcommerceParameter' not in browser.contents

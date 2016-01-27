@@ -4,6 +4,8 @@ Change log for zeit.web
 2.52 (unreleased)
 -----------------
 
+- ZON-2593: Webtrekk tracking if newsletter-optin parameter is set
+
 - FIX: Show date_last_published with adjusted TZ info
 
 - FIX: Prevent and test for ranking area proxy exposures
