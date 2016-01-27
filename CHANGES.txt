@@ -4,6 +4,8 @@ Change log for zeit.web
 2.53 (unreleased)
 -----------------
 
+- MAINT: Refurbish infobox tab link styles
+
 - ZON-2648: Add privacy disclaimer and impressum to Instant Articles
 
 - FIX: Let batou & grunt play nice together
@@ -17,8 +19,6 @@ Change log for zeit.web
 - FIX: Prevent and test for ranking area proxy exposures
 
 - FIX: Catch and wrap community request timeouts
-
-- MAINT: Refurbish infobox tab link styles
 
 
 2.51 (2016-01-22)
