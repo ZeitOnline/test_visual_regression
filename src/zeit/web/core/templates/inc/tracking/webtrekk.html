@@ -75,6 +75,12 @@
         };
         {% endif %}
 
+        {% if view.newsletter_optin_tracking %}
+        wt.customEcommerceParameter = {
+            8: '{{ view.newsletter_optin_tracking | format_webtrekk }}'
+        };
+        {% endif %}
+
         var ls = document.getElementById('login-state'),
             ssoId;
 

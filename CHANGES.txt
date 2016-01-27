@@ -1,10 +1,18 @@
 Change log for zeit.web
 =======================
 
-2.53 (unreleased)
+2.54 (unreleased)
 -----------------
 
 - MAINT: Refurbish infobox tab link styles
+
+- ZON-2593: Webtrekk tracking if newsletter-optin parameter is set
+
+
+2.53 (2016-01-27)
+-----------------
+
+- HOTFIX: IVW: fix wrong variable for questionnaire
 
 - ZON-2648: Add privacy disclaimer and impressum to Instant Articles
 
