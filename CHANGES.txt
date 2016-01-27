@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: IVW: fix wrong variable for questionnaire
 
+- ZON-2648: Add privacy disclaimer and impressum to Instant Articles
+
 
 2.52 (2016-01-27)
 -----------------
