@@ -1,2 +1,0 @@
-#!/bin/bash
-exec ../../grunt/bin/grunt-custom-cli $*
