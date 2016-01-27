@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2648: Add privacy disclaimer and impressum to Instant Articles
 
+- FIX: Let batou & grunt play nice together
+
 
 2.52 (2016-01-27)
 -----------------
