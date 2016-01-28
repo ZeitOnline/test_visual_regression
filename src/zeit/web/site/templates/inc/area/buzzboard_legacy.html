@@ -15,7 +15,7 @@
 			{% for module in modules -%}
 			<th>
 				{% set modifier = module.icon.strip('buzz-') -%}
-				{{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), view) }}
+				{{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), request) }}
 				{{ module.label | safe }}
 			</th>
 			{% endfor %}
