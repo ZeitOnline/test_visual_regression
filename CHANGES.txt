@@ -4,6 +4,8 @@ Change log for zeit.web
 2.54 (unreleased)
 -----------------
 
+- MAINT: Add byline to nextread teaser
+
 - FIX: Change wording from 'Leser' to 'Aufrufe'in Buzzbox
 
 - ZON-2535: Migrate ZMO to R/A/M page structure

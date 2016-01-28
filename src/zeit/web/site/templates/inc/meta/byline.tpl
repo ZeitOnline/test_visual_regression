@@ -3,7 +3,7 @@
 {%- endmacro -%}
 
 {%- macro plain_author(obj) %}
-    <span class="byline__author"><span itemprop="name">{{ obj.display_name }}</span></span>
+    <span class="byline__author" itemprop="name">{{ obj.display_name }}</span>
 {%- endmacro -%}
 
 {%- macro linked_author(obj) %}

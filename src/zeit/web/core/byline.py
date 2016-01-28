@@ -24,8 +24,7 @@ def get_byline(content, name=u''):
     """Natural language byline for centerpage teasers and article heads.
 
     `name` specifies the type of byline. The default (unnamed) byline is for
-    single content pages. If no specific named byline is found, falls back to
-    the default byline.
+    teaser. If no specific named byline is found, falls back to the default.
     """
     try:
         return zope.component.getAdapter(content, IByline, name=name)
@@ -128,14 +127,14 @@ class LinkTeaserByline(Byline):
 
 
 @grokcore.component.adapter(
-    zeit.content.article.interfaces.IArticle, name='teaser')
+    zeit.content.article.interfaces.IArticle)
 @grokcore.component.implementer(IByline)
 class ArticleTeaserByline(Byline):
     pass
 
 
 @grokcore.component.adapter(
-    zeit.content.article.interfaces.IArticle)
+    zeit.content.article.interfaces.IArticle, name='article')
 @grokcore.component.implementer(IByline)
 class ArticleByline(Byline):
 
