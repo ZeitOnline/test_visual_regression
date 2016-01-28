@@ -4,6 +4,8 @@ Change log for zeit.web
 2.54 (unreleased)
 -----------------
 
+- FIX: Fix scope of schema.org SiteNavigationElement
+
 - ZON-2535: Migrate ZMO to R/A/M page structure
 
 - MAINT: Refurbish infobox tab link styles
