@@ -422,6 +422,10 @@ class Base(object):
         return self._pagetitle(suffix=False)
 
     @zeit.web.reify
+    def social_description(self):
+        return self.pagedescription
+
+    @zeit.web.reify
     def pagedescription(self):
         try:
             desc = zeit.seo.interfaces.ISEO(self.context).html_description
