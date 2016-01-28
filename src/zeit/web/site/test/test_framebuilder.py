@@ -67,3 +67,9 @@ def test_framebuilder_can_contain_ivw(testbrowser):
         'script[src="https://script.ioam.de/iam.js"]')
     assert len(ivw_script) == 1
     assert 'var iam_data = {' in browser.contents
+
+
+def test_framebuilder_should_inline_svgs(testbrowser):
+    browser = testbrowser('/framebuilder')
+    assert len(browser.xpath('/html/head/svg/symbol')) == 4
+    assert browser.cssselect('.logo_bar svg > use')[0].attrib['xlink:href']
