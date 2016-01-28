@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2665: Centralize Module Class and integrate ZMO Buzbbox
 
+- ZON-2710: Enable possibility to use svg-use elements in ZMO
+
 
 2.53 (2016-01-27)
 -----------------
