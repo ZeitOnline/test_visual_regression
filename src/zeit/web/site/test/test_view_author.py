@@ -201,3 +201,12 @@ def test_author_handles_missing_profile_data_right(jinja2_env):
     assert len(select('.author-biography')) == 0
     assert len(select('.author-contact')) == 0
     assert len(select('.author-questions__text')) == 5
+
+
+def test_author_has_correct_open_graph_image(testbrowser, testserver):
+    select = testbrowser('/autoren/julia_zange').cssselect
+    url = testserver.url + (
+        '/zeit-online/cp-content/author_images/Julia_Zange/wide__1300x731')
+    assert select('meta[property="og:image"]')[0].get('content') == url
+    assert select('meta[name="twitter:image"]')[0].get('content') == url
+    assert select('link[rel="image_src"]')[0].get('href') == url
