@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2617: Polish author page, handle missing content and add sharing image
 
+- FIX: Change wording from 'Leser' to 'Aufrufe'in Buzzbox
+
 - ZON-2535: Migrate ZMO to R/A/M page structure
 
 - MAINT: Refurbish infobox tab link styles
