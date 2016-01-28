@@ -3,11 +3,15 @@
 {%- endmacro -%}
 
 {%- macro plain_author(obj) %}
-    <span class="byline__author" itemprop="name">{{ obj.display_name }}</span>
+    <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="byline__author" itemprop="name">
+        {{- obj.display_name -}}
+    </span></span>
 {%- endmacro -%}
 
 {%- macro linked_author(obj) %}
-    <a href="{{ obj.uniqueId | create_url }}" class="byline__author" itemprop="url"><span itemprop="name">{{ obj.display_name }}</span></a>
+    <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="{{ obj.uniqueId | create_url }}" itemprop="url"><span class="byline__author" itemprop="name">
+        {{- obj.display_name -}}
+    </span></a></span>
 {%- endmacro -%}
 
 {%- macro csv(obj) -%}
