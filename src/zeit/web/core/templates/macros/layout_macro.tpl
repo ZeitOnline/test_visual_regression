@@ -138,7 +138,6 @@
         {% else %}
             <use xlink:href="{{ view.request.asset_host }}/css/web.site/icons.svg#svg-{{ name }}"></use>
         {% endif %}
-        <use xlink:href="{{ request.asset_host }}/css/{{ package }}/icons.svg#svg-{{ name }}"></use>
     </svg>
 {%- endmacro %}
 
