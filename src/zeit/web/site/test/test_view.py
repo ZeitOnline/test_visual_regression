@@ -103,19 +103,18 @@ def test_main_nav_should_render_labels(testserver, testbrowser):
 
 
 def test_ressort_literally_returns_correct_ressort(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/index')
     request = pyramid.testing.DummyRequest()
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.ressort_literally == 'Homepage'
+    # No sub-ressort
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     article_view = zeit.web.site.view_article.Article(context, request)
     assert article_view.ressort_literally == 'Kultur'
+    # Special case: Homepage
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/zeit')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.ressort_literally == 'Gesellschaft'
+        'http://xml.zeit.de/zeit-online/index')
+    view = zeit.web.site.view_centerpage.Centerpage(context, request)
+    assert view.ressort_literally == 'Homepage'
+    # Special case: administratives
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/administratives')
     article_view = zeit.web.site.view_article.Article(context, request)
