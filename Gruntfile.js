@@ -13,8 +13,8 @@ module.exports = function(grunt) {
             development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:icons', 'clean:symbols', 'svgmin', 'grunticon', 'svgstore' ],
-            icons: [ 'clean:icons', 'svgmin:magazin', 'grunticon:magazin' ],
-            symbols: [ 'clean:symbols', 'svgmin:site', 'svgstore:site', 'grunticon:site' ],
+            icons: [ 'clean:icons', 'svgmin:magazinIcons', 'grunticon:magazin' ],
+            symbols: [ 'clean:symbols', 'svgmin:site', 'svgmin:magazin', 'svgstore:site', 'svgstore:magazin', 'grunticon:site', 'grunticon:magazin' ],
             css: [ 'compass:dist', 'compass:amp' ],
             lint: [ 'jshint', 'jscs' ]
         }
@@ -240,6 +240,13 @@ module.exports = function(grunt) {
         svgmin: {
             magazin: {
                 expand: true,
+                cwd: project.sourceDir + 'sass/web.magazin/svg',
+                src: [ '*.svg' ],
+                dest: project.sourceDir + 'sass/web.magazin/svg/_minified'
+            },
+            // while grunticon is still used for background-image svgs ("Parallelbetrieb"), this extra task is needed
+            magazinIcons: {
+                expand: true,
                 cwd: project.sourceDir + 'sass/web.magazin/icons',
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.magazin/icons/_minified'
@@ -273,8 +280,8 @@ module.exports = function(grunt) {
             magazin: {
                 files: [{
                     expand: true,
-                    cwd: '<%= svgmin.magazin.dest %>',
-                    src: [ '*.svg', '*.png' ],
+                    cwd: project.sourceDir + 'sass/web.magazin',
+                    src: [ './svg/*.svg', './icons/*.svg' ],
                     dest: project.codeDir + 'css/icons'
                 }],
                 options: {
@@ -306,7 +313,7 @@ module.exports = function(grunt) {
 
         svgstore: {
             options: {
-                prefix : 'svg-', // This will prefix each ID
+                prefix: 'svg-', // This will prefix each ID
                 // will add and overide the the default xmlns="http://www.w3.org/2000/svg" attribute to the resulting SVG
                 // symbol: {
                 //     viewBox : '0 0 100 100',
@@ -330,6 +337,10 @@ module.exports = function(grunt) {
             site: {
                 src: '<%= svgmin.site.dest %>/*.svg',
                 dest: project.codeDir + 'css/web.site/icons.svg'
+            },
+            magazin: {
+                src: '<%= svgmin.magazin.dest %>/*.svg',
+                dest: project.codeDir + 'css/web.magazin/icons.svg'
             }
         },
 
