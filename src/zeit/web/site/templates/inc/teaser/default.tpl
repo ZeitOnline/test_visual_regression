@@ -64,7 +64,7 @@
             {% block teaser_metadata_default %}
             <div class="{{ self.layout() }}__metadata">
                 {% block teaser_byline %}
-                    {% set byline = teaser | get_byline %}
+                    {% set byline = teaser | get_byline('teaser') %}
                     {% if byline | length %}
                     <span class="{{ self.layout() }}__byline">
                         {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}

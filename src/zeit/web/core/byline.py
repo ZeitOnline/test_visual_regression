@@ -12,24 +12,31 @@ import zeit.web
 
 class IByline(zope.interface.Interface):
     """A string representation of information on author, genre, location of a
-    content object. This depends on both the context of the page being
-    displayed, and the content object to be displayed, e.g. bylines for content
-    in a list of teaser modules (say, on a centerpage) look differently than
-    the byline on a single page (say, on an article).
-
+    content object. This depends on the content object and where the byline is
+    shown, e.g. bylines for content in a list of teaser modules (say, on a
+    centerpage) look differently than the byline on a single page (say, on an
+    article).
     """
 
 
-@zeit.web.register_ctxfilter
-def get_byline(context, content):
-    """Natural language byline for centerpage teasers and article heads."""
-    page_context = getattr(context.get('view'), 'context', None)
-    return zope.component.queryMultiAdapter(
-        (page_context, content), IByline, default=())
+@zeit.web.register_filter
+def get_byline(content, name=u''):
+    """Natural language byline for centerpage teasers and article heads.
+
+    `name` specifies the type of byline. The default (unnamed) byline is for
+    single content pages. If no specific named byline is found, falls back to
+    the default byline.
+    """
+    try:
+        return zope.component.getAdapter(content, IByline, name=name)
+    except (zope.component.ComponentLookupError, TypeError):
+        if name:
+            return zope.component.queryAdapter(content, IByline, default=())
+        else:
+            return ()
 
 
 @grokcore.component.adapter(
-    zope.interface.Interface,
     zeit.cms.content.interfaces.ICommonMetadata)
 @grokcore.component.implementer(IByline)
 class Byline(list):
@@ -43,7 +50,7 @@ class Byline(list):
               'gastbeitrag': 'ein',
               'interview': 'ein'}
 
-    def __init__(self, page_context, context):
+    def __init__(self, context):
         super(Byline, self).__init__()
         self.context = context
         self.genre()
@@ -112,7 +119,6 @@ class Byline(list):
 
 
 @grokcore.component.adapter(
-    zope.interface.Interface,
     zeit.content.link.interfaces.ILink)
 @grokcore.component.implementer(IByline)
 class LinkTeaserByline(Byline):
@@ -122,7 +128,13 @@ class LinkTeaserByline(Byline):
 
 
 @grokcore.component.adapter(
-    zeit.content.article.interfaces.IArticle,
+    zeit.content.article.interfaces.IArticle, name='teaser')
+@grokcore.component.implementer(IByline)
+class ArticleTeaserByline(Byline):
+    pass
+
+
+@grokcore.component.adapter(
     zeit.content.article.interfaces.IArticle)
 @grokcore.component.implementer(IByline)
 class ArticleByline(Byline):
@@ -137,14 +149,13 @@ class ArticleByline(Byline):
 
 
 @grokcore.component.adapter(
-    zope.interface.Interface,
     # XXX We'd rather use the class `LaxyProxy`, but that seems to have not
     # enough specificity.
     zeit.web.core.utils.ILazyProxy)
 @grokcore.component.implementer(IByline)
 class ProxyByline(Byline):
 
-    def __init__(self, page_context, context):
+    def __init__(self, context):
         # Skip Byline.__init__(), we don't want to expose the proxy by probing
         # for properties it might not have.
         super(Byline, self).__init__()
