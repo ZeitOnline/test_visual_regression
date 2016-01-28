@@ -3,7 +3,7 @@ import zope.component
 
 import zeit.content.cp.interfaces
 
-import zeit.web.site.module
+import zeit.web.core.centerpage
 
 
 # Since we register for 'teaser', we can implicitly assume that context
@@ -32,7 +32,7 @@ def default_teaser(block, content):
     zeit.content.cp.interfaces.ITeaserBlock,
     zeit.content.cp.interfaces.IStoryStream)
 class StoryStreamTeaserBlock(
-        zeit.web.site.module.Module,
+        zeit.web.core.centerpage.Module,
         grokcore.component.MultiAdapter):
 
     grokcore.component.provides(zeit.web.core.interfaces.IBlock)

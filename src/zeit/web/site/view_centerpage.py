@@ -21,17 +21,17 @@ import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_centerpage
-import zeit.web.site.module
+import zeit.web.core.centerpage
 import zeit.web.site.module.buzzbox
 import zeit.web.site.module.printbox
-import zeit.web.site.view
 
 
 log = logging.getLogger(__name__)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IBlock)
-class LegacyModule(zeit.web.site.module.Module, zeit.web.core.utils.nslist):
+class LegacyModule(
+        zeit.web.core.centerpage.Module, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
         zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
@@ -275,7 +275,7 @@ class CenterpagePage(Centerpage):
         find = zeit.web.core.utils.find_block
         header = find(values[0], module='headerimage') or find(
             values[0], module='centerpage-header') or find(
-            values[0], module='search-form')
+                values[0], module='search-form')
         if header:
             regions.insert(0, LegacyRegion([LegacyArea([header])]))
 

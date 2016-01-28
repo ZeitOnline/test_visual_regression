@@ -131,13 +131,14 @@
     {% endif -%}
 {%- endmacro %}
 
-{% macro use_svg_icon(name, class, view) -%}
+{% macro use_svg_icon(name, class, view, package='web.site') -%}
     <svg class="svg-symbol {{ class }}" role="img" aria-labelledby="title">
         {% if view.inline_svg_icons %}
             <use xlink:href="#svg-{{ name }}"></use>
         {% else %}
             <use xlink:href="{{ view.request.asset_host }}/css/web.site/icons.svg#svg-{{ name }}"></use>
         {% endif %}
+        <use xlink:href="{{ request.asset_host }}/css/{{ package }}/icons.svg#svg-{{ name }}"></use>
     </svg>
 {%- endmacro %}
 
