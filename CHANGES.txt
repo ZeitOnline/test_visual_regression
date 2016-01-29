@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - MAINT: Add byline to nextread teaser
 
+- ZON-2617: Polish author page, handle missing content and add sharing image
+
+- ZON 2686: Add Google Tag Manager to ZMO
+
 - FIX: Change wording from 'Leser' to 'Aufrufe'in Buzzbox
 
 - ZON-2535: Migrate ZMO to R/A/M page structure
