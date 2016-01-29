@@ -769,11 +769,11 @@ def test_macro_copyrights(jinja2_env):
         'Two copyright entries should be contained in the list.')
 
     assert snippet.cssselect(
-        'li.copyrights__entry:nth-child(1) .copyrights__entry__label a'), (
+        'li.copyrights__entry:nth-child(1) .copyrights__label a'), (
             'The first entry should produce a link element.')
 
     assert not snippet.cssselect(
-        'li.copyrights__entry:nth-child(2) .copyrights__entry__label a'), (
+        'li.copyrights__entry:nth-child(2) .copyrights__label a'), (
             'The second entry should not produce a link element.')
 
 
