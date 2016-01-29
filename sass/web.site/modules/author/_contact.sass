@@ -1,36 +1,20 @@
 .author-contact
 	+clearfix
-	+respond-max($break-areas)
-		border-bottom: 1px solid $color-border
-		margin: 0 (-$page-padding)
-		padding: 0 $page-padding
-	+respond-min($break-areas)
-		left: 100%
-		max-width: remify(180px)
-		position: absolute
-		top: 0
-	+respond-min($break-desktop-min)
-		max-width: remify(200px)
-
-	&__title
-		+respond-max($break-areas)
-			display: none
-
-	&__item
-		+respond-max($break-areas)
-			float: left
-			max-width: remify(70px)
-			padding: 1em 0
-			width: 25%
+	margin-bottom: remify(30px)
+	&:only-child
+		float: none
+		margin-right: 0
+		max-width: none
 
 	&__link
 		color: $zon-dark-grey
-		display: inline-block
-		margin-bottom: remify(3px)
 		max-width: 100%
 		overflow: hidden
 		text-overflow: ellipsis
 		white-space: nowrap
+		+respond-min($break-areas)
+			display: inline-block
+			margin-bottom: remify(3px)
 
 	&__icon
 		height: remify(24px)
@@ -54,5 +38,24 @@
 	&__text
 		font-size: em(13px)
 		letter-spacing: $zon-letter-spacing-s
-		+respond-max($break-areas)
+
+	+respond-max($break-areas)
+		&__title
 			display: none
+		&__item
+			float: left
+			max-width: remify(70px)
+			width: 25%
+			line-height: normal
+		&__icon
+			display: block
+		&__text
+			display: none
+	+respond-min($break-areas)
+		float: right
+		margin-bottom: remify(20px)
+		margin-right: remify(-220px)
+		max-width: remify(180px)
+	+respond-min($break-desktop-min)
+		margin-right: remify(-240px)
+		max-width: remify(200px)
