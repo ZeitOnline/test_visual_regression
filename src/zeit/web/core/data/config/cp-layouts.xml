@@ -22,6 +22,12 @@
         default="topic"
         />
     <layout
+        id="zon-author"
+        title="Autoren-Teaser"
+        image_pattern="zon-author"
+        areas="minor"
+        />
+    <layout
         id="zon-square"
         title="Grafischer Teaser"
         image_pattern="zon-square"
