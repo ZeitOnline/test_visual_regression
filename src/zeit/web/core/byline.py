@@ -127,13 +127,6 @@ class LinkTeaserByline(Byline):
 
 
 @grokcore.component.adapter(
-    zeit.content.article.interfaces.IArticle)
-@grokcore.component.implementer(IByline)
-class ArticleTeaserByline(Byline):
-    pass
-
-
-@grokcore.component.adapter(
     zeit.content.article.interfaces.IArticle, name='article')
 @grokcore.component.implementer(IByline)
 class ArticleByline(Byline):
