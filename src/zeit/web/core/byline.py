@@ -141,13 +141,6 @@ class ArticleByline(Byline):
 
 
 @grokcore.component.adapter(
-    zeit.content.cp.interfaces.IStoryStream, name='article')
-@grokcore.component.implementer(IByline)
-class StorystreamByline(ArticleByline):
-    pass
-
-
-@grokcore.component.adapter(
     zeit.cms.content.interfaces.ICommonMetadata, name='author')
 @grokcore.component.implementer(IByline)
 class StructuredDataByline(Byline):
