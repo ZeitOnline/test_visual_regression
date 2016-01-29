@@ -69,6 +69,9 @@
         <container cp:type="teaser" module="zon-large" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3">
           <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
         </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
+          <block href="http://xml.zeit.de/autoren/julia_zange" />
+        </container>
         <container cp:type="teaser" module="zon-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
           <block href="http://xml.zeit.de/zeit-online/cp-content/article-02" />
         </container>
@@ -77,7 +80,7 @@
         <container cp:type="teaser" module="zon-small" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
           <block href="http://xml.zeit.de/centerpage/article_image_asset" />
         </container>
-        <container cp:type="teaser" module="zon-author" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
           <block href="http://xml.zeit.de/autoren/julia_zange" />
         </container>
       </region>
