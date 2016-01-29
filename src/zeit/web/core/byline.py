@@ -127,7 +127,7 @@ class LinkTeaserByline(Byline):
 
 
 @grokcore.component.adapter(
-    zeit.content.article.interfaces.IArticle, name='article')
+    zeit.cms.content.interfaces.ICommonMetadata, name='article')
 @grokcore.component.implementer(IByline)
 class ArticleByline(Byline):
 
@@ -138,6 +138,24 @@ class ArticleByline(Byline):
                 yield 'linked_author', author.target
             else:
                 yield 'plain_author', author.target
+
+
+@grokcore.component.adapter(
+    zeit.content.cp.interfaces.IStoryStream, name='article')
+@grokcore.component.implementer(IByline)
+class StorystreamByline(ArticleByline):
+    pass
+
+
+@grokcore.component.adapter(
+    zeit.cms.content.interfaces.ICommonMetadata, name='author')
+@grokcore.component.implementer(IByline)
+class StructuredDataByline(Byline):
+
+    @staticmethod
+    def expand_authors(authors):
+        for author in authors:
+            yield 'plain_author', author.target
 
 
 @grokcore.component.adapter(
