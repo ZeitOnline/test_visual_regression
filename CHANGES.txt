@@ -4,6 +4,8 @@ Change log for zeit.web
 2.54 (unreleased)
 -----------------
 
+- MAINT: Add byline to nextread teaser
+
 - ZON-2617: Polish author page, handle missing content and add sharing image
 
 - ZON 2686: Add Google Tag Manager to ZMO
