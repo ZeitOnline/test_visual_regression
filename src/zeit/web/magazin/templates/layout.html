@@ -1,5 +1,4 @@
-{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context%}
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context%}
+{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 <!DOCTYPE html>
 <!--[if lt IE 8]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 ie nurtext" lang="de"> <![endif]-->
 <!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9 ie" lang="de"> <![endif]-->
@@ -90,9 +89,9 @@
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
-                        {{ lama_core.adplace(view.banner(1), view) }}
+                        {{ lama.adplace(view.banner(1), view) }}
                         <div id="iqd_rightAd">
-                            {{ lama_core.adplace(view.banner(2), view) }}
+                            {{ lama.adplace(view.banner(2), view) }}
                         </div>
                     </div>
                 </div>
@@ -112,8 +111,8 @@
                 {% endblock navigation %}
 
                 {% block adplace_billboard %}
-                    {{ lama_core.adplace(view.banner(3), view) }}
-                    {{ lama_core.adplace(view.banner(1), view, True) }}
+                    {{ lama.adplace(view.banner(3), view) }}
+                    {{ lama.adplace(view.banner(1), view, True) }}
                 {% endblock adplace_billboard %}
 
                 {% block page_title %}
@@ -172,7 +171,7 @@
 
         {% block adplace_floor %}
             <!-- mobile ad at bottom -->
-            {{ lama_core.adplace(view.banner(8), view, True) }}
+            {{ lama.adplace(view.banner(8), view, True) }}
         {% endblock adplace_floor %}
 
         </div>
@@ -202,7 +201,7 @@
         {% if view.is_wrapped %}
             {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
         {% else %}
-            {{lama_core.wrapper_handling( view )}}
+            {{lama.wrapper_handling( view )}}
         {% endif %}
 
         {% if view.vgwort_url %}
