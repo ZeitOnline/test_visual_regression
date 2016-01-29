@@ -77,6 +77,7 @@ class Base(object):
 
     seo_title_default = u''
     pagetitle_suffix = u''
+    inline_svg_icons = False
 
     def __call__(self):
         # to avoid circular imports
