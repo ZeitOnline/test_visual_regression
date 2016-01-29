@@ -151,14 +151,14 @@
 
 {% macro copyrights(cr_list) -%}
     <div id="copyrights" class="copyrights">
-        <a class="js-toggle-copyrights copyrights__close copyrights__close--cross icon-copyrights-close"></a>
+        {{ use_svg_icon('copyrights-close', 'js-toggle-copyrights copyrights__close copyrights__close--icon', request, package='web.magazin') }}
         <section class="copyrights__wrapper is-centered is-constrained">
             <span class="copyrights__title">Bildrechte auf dieser Seite</span>
             <ul class="copyrights__list">
                 {%- for cr in cr_list -%}
                 <li class="copyrights__entry">
-                    <div class="copyrights__entry__image" style="background-image: url({{ cr.image }});"></div>
-                    <span class="copyrights__entry__label">
+                    <div class="copyrights__image" style="background-image: url({{ cr.image }});"></div>
+                    <span class="copyrights__label">
                         {%- if cr.link -%}
                             <a href="{{ cr.link }}"{% if cr.nofollow %} rel="nofollow"{% endif %}>{{ cr.label }}</a>
                         {%- else -%}
