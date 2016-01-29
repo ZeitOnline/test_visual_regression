@@ -4,6 +4,8 @@ Change log for zeit.web
 2.54 (unreleased)
 -----------------
 
+- ZON-2701: Framebuilder: inline required SVG icons
+
 - MAINT: Add byline to nextread teaser
 
 - ZON-2617: Polish author page, handle missing content and add sharing image

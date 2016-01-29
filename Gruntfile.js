@@ -260,6 +260,12 @@ module.exports = function(grunt) {
                 cwd: project.sourceDir + 'sass/web.site/svg-amp',
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.site/svg-amp/_minified'
+            },
+            framebuilder: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.site/svg-framebuilder',
+                src: [ '*.svg' ],
+                dest: project.sourceDir + 'sass/web.site/svg-framebuilder/_minified'
             }
         },
 
@@ -329,6 +335,10 @@ module.exports = function(grunt) {
             site: {
                 src: '<%= svgmin.site.dest %>/*.svg',
                 dest: project.codeDir + 'css/web.site/icons.svg'
+            },
+            framebuilder: {
+                src: '<%= svgmin.framebuilder.dest %>/*.svg',
+                dest: project.codeDir + 'css/web.site/framebuilder.svg'
             }
         },
 
