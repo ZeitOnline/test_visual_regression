@@ -127,7 +127,7 @@ class LinkTeaserByline(Byline):
 
 
 @grokcore.component.adapter(
-    zeit.cms.content.interfaces.ICommonMetadata, name='article')
+    zeit.cms.content.interfaces.ICommonMetadata, name='main')
 @grokcore.component.implementer(IByline)
 class ArticleByline(Byline):
 

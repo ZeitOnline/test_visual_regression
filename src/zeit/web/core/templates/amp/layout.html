@@ -77,7 +77,7 @@
 					<div class="summary" itemprop="description">
 						{{ view.subtitle }}
 					</div>
-					{%- set byline = view.context | get_byline('article') %}
+					{%- set byline = view.context | get_byline('main') %}
 					{% if byline | length -%}
 					<div class="byline">
 						{% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
