@@ -415,7 +415,6 @@ scales = {
     'twitter-image-large': (560, 300),  # summary_large_image, photo
     'newsletter-540x304': (540, 304),
     'newsletter-220x124': (220, 124),
-    'zon-author': (300, 300),
     'zon-thumbnail': (580, 326),
     'zon-large': (580, 326),
     'zon-article-large': (820, 462),
