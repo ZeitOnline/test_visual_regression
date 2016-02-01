@@ -13,6 +13,12 @@
                 <span class="{{ module_layout }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
             </h2>
             <div class="{{ module_layout }}__metadata">
+                {% set byline = teaser | get_byline %}
+                {% if byline | length %}
+                <span class="{{ module_layout }}__byline">
+                    {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
+                </span>
+                {% endif %}
                 {{ cp.include_teaser_datetime(teaser, module_layout, module_layout) }}
                 {% if comments %}
                     <span class="{{ module_layout }}__commentcount">

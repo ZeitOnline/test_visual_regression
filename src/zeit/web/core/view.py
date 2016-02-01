@@ -77,6 +77,7 @@ class Base(object):
 
     seo_title_default = u''
     pagetitle_suffix = u''
+    inline_svg_icons = False
 
     def __call__(self):
         # to avoid circular imports
@@ -420,6 +421,10 @@ class Base(object):
     @zeit.web.reify
     def social_pagetitle(self):
         return self._pagetitle(suffix=False)
+
+    @zeit.web.reify
+    def social_description(self):
+        return self.pagedescription
 
     @zeit.web.reify
     def pagedescription(self):
