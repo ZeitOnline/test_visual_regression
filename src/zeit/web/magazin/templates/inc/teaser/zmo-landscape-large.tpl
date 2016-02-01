@@ -12,7 +12,7 @@ Parameters:
 
 {%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_button_teaser_template.tpl" -%}
 
-{% block subtitle %}true{% endblock %}
+
 {% block format %}large{% endblock %}
 {% block supertitle %}true{% endblock %}
 {% block image_class %}false{% endblock %}
