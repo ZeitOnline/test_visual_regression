@@ -80,7 +80,7 @@
 
         <!-- Analytics code loaded from an iframe -->
         <figure class="op-tracker">
-            <iframe src="{{ request.fbia_host }}/{{view.request.traversed | join('/') }}"></iframe>
+            <iframe src="{{ request.fbia_host }}{{ view.content_path }}"></iframe>
         </figure>
         <footer>
             <small>Dieser Artikel steht unter der journalistisch-redaktionellen Verantwortung der Redaktion von zeit.de. Das Impressum finden Sie hier: <a href="{{ request.route_url('home') }}impressum/index">Impressum</a></small>
