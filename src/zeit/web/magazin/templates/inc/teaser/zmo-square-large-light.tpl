@@ -11,7 +11,6 @@ Parameters:
 {%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_leader_teaser_template.tpl" -%}
 
 {% block layout %}teaser-square-large{% endblock %}
-{% block layout_asset %}teaser-square-large__asset{% endblock %}
-{% block layout_shade %}teaser-square-large--light{% endblock %}
-{% block shade %}light{% endblock %}
+{% block layout_shade %}light{% endblock %}
 {% block supertitle %}true{% endblock %}
+{% block teaser_text %}{% endblock %}

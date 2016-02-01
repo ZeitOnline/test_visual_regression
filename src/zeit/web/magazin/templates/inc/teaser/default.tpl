@@ -15,5 +15,4 @@ Parameters:
 {% block subtitle %}false{% endblock %}
 {% block format %}default{% endblock %}
 {% block supertitle %}true{% endblock %}
-{% block icon %}false{% endblock %}
 {% block image_class %}false{% endblock %}

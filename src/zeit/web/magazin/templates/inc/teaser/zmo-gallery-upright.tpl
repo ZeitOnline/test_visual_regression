@@ -15,5 +15,8 @@ Parameters:
 {% block subtitle %}false{% endblock %}
 {% block format %}gallery{% endblock %}
 {% block supertitle %}true{% endblock %}
-{% block icon %}true{% endblock %}
 {% block image_class %}false{% endblock %}
+
+{% block icon %}
+    <span class="icon-galerie-icon-white"></span>
+{% endblock %}

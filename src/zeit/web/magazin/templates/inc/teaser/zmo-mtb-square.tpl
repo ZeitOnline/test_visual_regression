@@ -15,5 +15,4 @@ Parameters:
 {% block subtitle %}false{% endblock %}
 {% block format %}mtb{% endblock %}
 {% block supertitle %}true{% endblock %}
-{% block icon %}false{% endblock %}
 {% block image_class %}mtb__teaser__image{% endblock %}

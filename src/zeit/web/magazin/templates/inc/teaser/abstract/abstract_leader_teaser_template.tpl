@@ -35,11 +35,12 @@ All calling templates have to provide:
             {{ blocks.headervideo(video, 'cp_leader__asset cp_leader__asset--' + self.shade(), '') }}
         {%- elif image -%}
             {# call image asset #}
-            <div class="scaled-image is-pixelperfect {% block layout_asset %}{% endblock %} {% block layout_shade %}{% endblock %}">
+            <div class="scaled-image is-pixelperfect {{ self.layout() }}__asset {{ self.layout() }}--{% block layout_shade %}dark{% endblock %}">
                 {{ lama.insert_responsive_image(image) }}
             </div>
         {%- endif %}
     </a>
     {# call teaser text #}
-    {{ cp.teaser_text_block(teaser, 'leader', self.shade(), self.supertitle()) }}
+    {{ cp.teaser_text_block(teaser, 'leader', self.layout_shade(), self.supertitle()) }}
+
 </div>
