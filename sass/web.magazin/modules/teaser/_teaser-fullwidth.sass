@@ -1,0 +1,26 @@
+//styles for all leader teaser types
+$cp_lead-full-height: em(550px)
+
+.teaser-fullwidth
+    @extend %teaser-large
+    padding-top: 0
+    margin-top: 0
+    margin-bottom: 0
+    height: $cp_lead-full-height
+    display: block
+    +respond-min($break-2)
+        margin-top: 0
+        margin-bottom: 0
+
+    &__asset
+        @extend %teaser-large-asset
+
+    &--dark
+        @extend %cp_shadow--dark
+
+    &--light
+        @extend %cp_shadow--light
+
+    .cp_leader__title__wrap
+        text-align: center
+        padding: $thin 15% $medium 15%

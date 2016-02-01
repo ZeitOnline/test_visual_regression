@@ -3,13 +3,14 @@
 Teaser template for light fullwidth lead teaser
 
 Parameters:
-    format: to define type of leader
-    shade: to define light/ dark shading
+    layout: to define type of leader
     supertitle: to define display of supertitle
 #}
 
 {%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_leader_teaser_template.tpl" -%}
 
-{% block format %}full{% endblock %}
+{% block layout %}teaser-fullwidth{% endblock %}
+{% block layout_asset %}teaser-fullwidth__asset{% endblock %}
+{% block layout_shade %}teaser-fullwidth--light{% endblock %}
 {% block shade %}light{% endblock %}
 {% block supertitle %}false{% endblock %}
