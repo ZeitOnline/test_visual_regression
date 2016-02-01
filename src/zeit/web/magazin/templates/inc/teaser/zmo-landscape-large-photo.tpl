@@ -14,5 +14,4 @@ Parameters:
 
 {% block teaser_text %}{% endblock %}
 {% block format %}large-photo{% endblock %}
-{% block supertitle %}true{% endblock %}
 {% block image_class %}false{% endblock %}

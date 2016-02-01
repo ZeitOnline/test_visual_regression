@@ -50,7 +50,7 @@ All calling templates have to provide:
         <header class="cp_button__title__wrap cp_button__title__wrap{% block shade %}{% endblock %}">
         {% block icon %}{% endblock %}
             <h2>
-                {% if supertitle != 'false' %}
+                {% block teaser_supertitle %}
                 <div class="cp_button__supertitle">
                     {% if teaser.teaserSupertitle %}
                         {{ teaser.teaserSupertitle }}
@@ -58,7 +58,7 @@ All calling templates have to provide:
                         {{ teaser.supertitle }}
                     {% endif %}
                 </div>
-                {% endif %}
+                {% endblock %}
                 <div class="cp_button__title">
                     {{ teaser.teaserTitle }}
                 </div>
@@ -67,7 +67,7 @@ All calling templates have to provide:
             <span class="cp_button__subtitle">
                 {{ teaser.teaserText }}
             </span>
-        {% endblock %}
+            {% endblock %}
         </header>
     </a>
 </article>

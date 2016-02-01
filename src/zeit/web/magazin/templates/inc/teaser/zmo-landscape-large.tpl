@@ -14,5 +14,4 @@ Parameters:
 
 
 {% block format %}large{% endblock %}
-{% block supertitle %}true{% endblock %}
 {% block image_class %}false{% endblock %}
