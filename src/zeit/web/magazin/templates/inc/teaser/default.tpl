@@ -13,13 +13,11 @@ All calling templates have to provide:
     format: to define type of button (eg. 'small'/ 'large'/ 'large-photo'/ 'gallery'/ 'mtb'/ 'default')
     supertitle: to define display of supertitle ('true'/ 'false')
     icon: define display of optional asset icon ('true'/ 'false')
-    image_class: define optional class for images (eg. extra behaviour mtb)
 #}
 
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
-{% block image_class %}{% endblock %}
 {%- set image = get_teaser_image(module, teaser) %}
 {% set area = area if area else '' %} {# TODO: remove as soon as we have access to real area data (AS)#}
 
@@ -38,15 +36,8 @@ All calling templates have to provide:
 
     <a href="{{ teaser | create_url }}">
 
-        {% if self.image_class() != 'false' -%}
-        {# call image asset with optional class #}
-        <div class="scaled-image">
-            {{ lama.insert_responsive_image(image, self.image_class()) }}
-        {%- else -%}
-        {# call standard image asset #}
         <div class="scaled-image is-pixelperfect cp_button__image">
             {{ lama.insert_responsive_image(image) }}
-        {%- endif %}
         </div>
 
         <header class="cp_button__title__wrap cp_button__title__wrap{% block shade %}{% endblock %}">
