@@ -41,7 +41,7 @@ All calling templates have to provide:
         </div>
 
         <header class="cp_button__title__wrap cp_button__title__wrap{% block shade %}{% endblock %}">
-        {% block icon %}{% endblock %}
+            {% block icon %}{% endblock %}
             <h2>
                 {% block teaser_kicker %}
                 <div class="cp_button__supertitle">
