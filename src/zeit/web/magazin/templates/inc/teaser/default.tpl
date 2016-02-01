@@ -18,7 +18,7 @@ All calling templates have to provide:
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
-{%- set image = get_teaser_image(module, teaser) %}
+{% set image = get_teaser_image(module, teaser) %}
 {% set area = area if area else '' %} {# TODO: remove as soon as we have access to real area data (AS)#}
 
 <article class="cp_button cp_button--{% block format %}{% endblock %}
@@ -43,17 +43,13 @@ All calling templates have to provide:
         <header class="cp_button__title__wrap cp_button__title__wrap{% block shade %}{% endblock %}">
         {% block icon %}{% endblock %}
             <h2>
-                {% block teaser_supertitle %}
+                {% block teaser_kicker %}
                 <div class="cp_button__supertitle">
-                    {% if teaser.teaserSupertitle %}
-                        {{ teaser.teaserSupertitle }}
-                    {% elif teaser.supertitle %}
-                        {{ teaser.supertitle }}
-                    {% endif %}
+                    {{ teaser.teaserSupertitle or teaser.supertitle }}
                 </div>
                 {% endblock %}
                 <div class="cp_button__title">
-                    {{ teaser.teaserTitle }}
+                    {{ teaser.teaserTitle or teaser.title }}
                 </div>
             </h2>
             {% block teaser_text %}
