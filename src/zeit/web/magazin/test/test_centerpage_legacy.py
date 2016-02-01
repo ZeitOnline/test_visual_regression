@@ -238,9 +238,9 @@ def test_cp_button_has_expected_structure(testbrowser):
         assert len(element.cssselect('a'))
         assert len(element.cssselect('a > div img[class=" figure__media"]'))
         assert len(element.cssselect('.cp_button__title__wrap'))
-        assert len(element.cssselect('header > a > h2'))
+        assert len(element.cssselect('a > header > h2'))
         assert len(element.cssselect(
-                   'header > a > span[class="cp_button__subtitle"]'))
+                   'a > header > span[class="cp_button__subtitle"]'))
 
 
 def test_cp_button_has_expected_text_content(testbrowser):
@@ -738,7 +738,8 @@ def test_centerpage_should_have_no_monothematic_block(application):
 def test_default_asset_for_teaser_lead(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
-    img = browser.cssselect('div.cp_leader--full .cp_leader__asset img')[0]
+    img = browser.cssselect(
+        '.teaser-fullwidth .teaser-fullwidth__asset img')[0]
     assert 'teaser_image-zmo-landscape-large.jpg' in img.attrib.get('src')
 
 
