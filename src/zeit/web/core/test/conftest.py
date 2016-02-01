@@ -506,7 +506,11 @@ def selenium_driver(request):
         parameters = {}
         profile = selenium.webdriver.FirefoxProfile(
             os.environ.get('ZEIT_WEB_FF_PROFILE'))
-        profile.set_preference('network.http.use-cache', False)
+        profile.default_preferences.update({
+            'network.http.use-cache': False,
+            'browser.startup.page': 0,
+            'browser.startup.homepage_override.mstone': 'ignore'})
+        profile.update_preferences()
         parameters['firefox_profile'] = profile
         # Old versions: <https://ftp.mozilla.org/pub/firefox/releases/>
         ff_binary = os.environ.get('ZEIT_WEB_FF_BINARY')
