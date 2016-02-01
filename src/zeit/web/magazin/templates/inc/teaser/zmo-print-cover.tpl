@@ -13,9 +13,9 @@ Parameters:
 
 {%- set image = get_teaser_image(module, teaser) -%}
 
-<div class="cp_button cp_button--cover">
+<div class="teaser-print-cover teaser-print-cover">
     <a href="{{ teaser | create_url }}">
-        <div class="scaled-image cp_button__image">
+        <div class="scaled-image teaser-print-cover__image">
             {{ lama.insert_responsive_image(image) }}
         </div>
     </a>

@@ -23,8 +23,7 @@ All calling templates have to provide:
 {%- set video = teaser | get_video_asset %}
 {% set area = area if area else '' %} {# TODO: remove as soon as we have access to real area data (AS)#}
 
-<article class="{% block layout %}teaser{% endblock %} cp_button cp_button--{% block format %}{% endblock %}
-                {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
+<article class="{% block layout %}teaser{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
          {% block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
          data-clicktracking="{{ area.kind }}"
@@ -42,28 +41,28 @@ All calling templates have to provide:
 
         {% if video -%}
             {# call video asset #}
-            {{ blocks.headervideo(video, 'cp_leader__asset cp_leader__asset--' + self.shade(), '') }}
+            {{ blocks.headervideo(video, 'cp_leader__asset cp_leader__asset--' + self.layout_shade(), '') }}
         {%- elif image -%}
             {# call image asset #}
-            <div class="scaled-image is-pixelperfect {{ self.layout() }}__asset {{ self.layout() }}--{% block layout_shade %}dark{% endblock %}">
+            <div class="scaled-image is-pixelperfect {{ self.layout() }}__image {{ self.layout() }}__asset {{ self.layout() }}--{% block layout_shade %}dark{% endblock %}">
                 {{ lama.insert_responsive_image(image) }}
             </div>
         {%- endif %}
 
-        <header class="cp_button__title__wrap cp_button__title__wrap{% block shade %}{% endblock %}">
+        <header class="{{ self.layout() }}__title__wrap {{ self.layout() }}__title__wrap--{{ self.layout_shade() }}">
             {% block icon %}{% endblock %}
             <h2>
                 {% block teaser_kicker %}
-                <div class="cp_button__supertitle">
+                <div class="{{ self.layout() }}__supertitle">
                     {{ teaser.teaserSupertitle or teaser.supertitle }}
                 </div>
                 {% endblock %}
-                <div class="cp_button__title">
+                <div class="{{ self.layout() }}__title">
                     {{ teaser.teaserTitle or teaser.title }}
                 </div>
             </h2>
             {% block teaser_text %}
-            <span class="cp_button__subtitle">
+            <span class="{{ self.layout() }}__subtitle">
                 {{ teaser.teaserText }}
             </span>
             {% endblock %}

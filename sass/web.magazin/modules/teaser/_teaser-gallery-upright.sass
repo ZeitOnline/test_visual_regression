@@ -1,0 +1,49 @@
+
+.teaser-gallery-upright
+    @extend %teaser
+    height: $cp_button-gallery-height
+    overflow: hidden
+    margin-bottom: $compact
+    display: block
+    & a > .scaled-image
+        height: $cp_button-gallery-height
+        @extend %cp_shadow--dark
+        img
+            bottom: 0
+            left: 0
+            min-height: 100%
+            position: absolute
+            right: 0
+            top: 0
+            width: 100%
+
+    &__image
+        @extend %teaser__image
+
+    &__title__wrap
+        @extend %teaser__title__wrap
+        bottom: 0
+        padding: $tiny $petite $compact $petite
+        position: absolute
+        width: 100%
+        z-index: 2
+
+    &__supertitle
+        @extend %teaser__supertitle
+        margin-bottom: $tiny
+        color: $white
+        letter-spacing: 0
+
+    &__title
+        @extend %teaser__title
+        color: $white
+        margin: 0
+        text-shadow: rgba(255, 255, 255, .01) 0 -1px 1px
+        -webkit-font-smoothing: antialiased
+
+    &__subtitle
+        @extend %teaser__subtitle
+
+.icon-galerie-icon-white
+    position: absolute
+    top: -$medium

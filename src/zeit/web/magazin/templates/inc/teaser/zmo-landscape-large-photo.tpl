@@ -12,5 +12,4 @@ Parameters:
 {%- extends "zeit.web.magazin:templates/inc/teaser/default.tpl" -%}
 
 {% block teaser_text %}{% endblock %}
-{% block format %}large-photo{% endblock %}
 {% block layout %}teaser-landscape-large-photo{% endblock %}

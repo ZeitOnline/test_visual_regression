@@ -1,0 +1,28 @@
+
+.teaser-landscape-large-photo
+    @extend %teaser
+    margin-top: $compact
+    padding-top: 0
+
+    &__image
+        @extend %teaser__image
+        height: $cp_button__image-height--large
+        +respond-min($break-2)
+            height: $cp_button__image-height--large
+
+    &__title__wrap
+        @extend %teaser__title__wrap
+        text-align: center
+        padding: 0 $compact 0 $compact
+        +respond-min($break-2)
+            padding: 0 0 0 0
+
+    &__supertitle
+        @extend %teaser__supertitle
+
+    &__title
+        @extend %teaser__title
+        text-transform: uppercase
+
+    &__subtitle
+        @extend %teaser__subtitle

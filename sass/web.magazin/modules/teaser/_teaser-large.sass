@@ -1,0 +1,61 @@
+$teaser-large-video-max-width: em(1000px)
+
+%teaser-large
+    position: relative
+    overflow: hidden
+    margin-top: $small
+    margin-bottom: $small
+    background-color: $black
+    width: 100%
+    padding-top: 56%
+    display: inline-block
+    +respond-min($break-2)
+        margin-top: $compact
+        margin-bottom: $compact
+
+%teaser-large__title__wrap
+    position: absolute
+    overflow: hidden
+    bottom: 0
+    padding: $thin 5% $medium 5%
+    width: 100%
+    z-index: 2
+
+%teaser-large__title
+    font-weight: bold
+    margin: 0 0 $tiny
+    font-size: $font-xl
+    line-height: 1.25
+    letter-spacing: $hair
+    +respond-min($break-0)
+        font-size: $font-xxl
+    +respond-min($break-2)
+        font-size: $font-xxxl
+
+%teaser-large__subtitle
+    font-size: $font-m
+    line-height: 1.25
+    +respond-min($break-2)
+        font-size: $font-ml
+
+%teaser-large__supertitle
+    line-height: 2.25
+    font-size: $font-s
+    +respond-min($break-2)
+        font-size: $font-ml
+
+%teaser-large-asset
+    overflow: hidden
+    position: absolute
+    top: 0
+    width: 100%
+    height: 100%
+    z-index: 1
+    video
+        position: absolute
+        bottom: 0
+        left: 0
+        min-width: 100%
+        min-height: 100%
+        max-width: $teaser-large-video-max-width
+        display: none

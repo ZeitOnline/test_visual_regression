@@ -21,6 +21,20 @@ $cp_lead-full-height: em(550px)
     &--light
         @extend %cp_shadow--light
 
-    .cp_leader__title__wrap
+    &__title__wrap
+        @extend %teaser-large__title__wrap
         text-align: center
         padding: $thin 15% $medium 15%
+        &--light
+            @extend %cp_link--light
+        &--dark
+            @extend %cp_link--dark
+
+    &__title
+        @extend %teaser-large__title
+
+    &__subtitle
+        @extend %teaser-large__subtitle
+
+    &__supertitle
+        @extend %teaser-large__supertitle

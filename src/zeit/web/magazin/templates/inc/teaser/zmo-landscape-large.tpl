@@ -11,5 +11,4 @@ Parameters:
 
 {%- extends "zeit.web.magazin:templates/inc/teaser/default.tpl" -%}
 
-{% block format %}large{% endblock %}
 {% block layout %}teaser-landscape-large{% endblock %}

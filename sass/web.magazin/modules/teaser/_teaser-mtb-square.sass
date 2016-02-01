@@ -1,0 +1,20 @@
+.teaser-mtb-square
+    @extend %teaser
+    margin: 0 0 $big 0
+    +respond-min($break-1)
+        width: $mtb-teaser-width
+
+    &__image
+        @extend %teaser__image
+
+    &__title__wrap
+        @extend %teaser__title__wrap
+
+    &__supertitle
+        @extend %teaser__supertitle
+
+    &__title
+        @extend %teaser__title
+
+    &__subtitle
+        @extend %teaser__subtitle
