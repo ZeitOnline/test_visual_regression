@@ -198,7 +198,7 @@ class CommentForm(zeit.web.core.view.Content):
 @pyramid.view.view_config(
     route_name='framebuilder',
     renderer='templates/framebuilder/framebuilder.html')
-class FrameBuilder(Base):
+class FrameBuilder(zeit.web.core.view.CeleraOneMixin, Base):
 
     inline_svg_icons = True
 

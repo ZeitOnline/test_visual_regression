@@ -5,7 +5,7 @@
             "st" : "", // dynamicallly set mobile|desktop
             "cp" : "{{ view.ressort if view.ressort else 'administratives' }}/{% if view.sub_ressort %}{{ view.sub_ressort }}/{% endif %}bild-text",
             "sv" : "i2", // 'mo' on mobile, see below
-            "co" : "URL: /{{ request.traversed | join("/") }}"
+            "co" : "URL: {{ view.content_path }}"
         };
 
     if ( window.FBIA.isMobileView() ) {
