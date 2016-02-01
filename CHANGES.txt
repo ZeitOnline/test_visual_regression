@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - ZON-2665: Centralize Module Class and integrate ZMO Buzbbox
 
+- ZON-2536: Move generic image assets to core module
+
 
 2.53 (2016-01-27)
 -----------------
