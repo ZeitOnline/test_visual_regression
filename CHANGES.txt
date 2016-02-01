@@ -4,6 +4,11 @@ Change log for zeit.web
 2.54 (unreleased)
 -----------------
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| DEPLOYMENT-NOTE: Please also deploy zeit-online cookbook 0.2.8 |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 - ZON-2701: Framebuilder: inline required SVG icons
 
 - MAINT: Add byline to nextread teaser
