@@ -169,15 +169,22 @@ def test_c1_content_id_should_correspond_to_traversal_path(
         browser.contents)
 
 
+@pytest.mark.parametrize('path, doc_type', [
+    ('/zeit-online/parquet-teaser-setup', 'centerpage'),
+    ('/zeit-online/gallery/biga_1', 'bildergalerie'),
+    ('/framebuilder?page_slice=html_head', 'arena')])
 def test_c1_doc_type_should_be_properly_mapped_to_context_type(
-        application, dummy_request):
+        testserver, path, doc_type):
+    url = testserver.url + path
+    assert requests.head(url).headers.get('C1-Track-Doc-Type') == doc_type
 
+
+def test_c1_doc_type_should_be_included_in_cre_client(
+        application, dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
-        context, dummy_request)
-    assert dict(view.c1_header).get('C1-Track-Doc-Type') == 'centerpage-2009'
-    assert dict(view.c1_client).get('set_doc_type') == '"centerpage-2009"'
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert dict(view.c1_client).get('set_doc_type') == '"centerpage"'
 
 
 def test_c1_heading_and_kicker_should_be_properly_escaped(

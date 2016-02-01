@@ -540,10 +540,14 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def _c1_doc_type(self):
-        view_mapping = {
-            'FrameBuilder': 'arena',
-            'LegacyCenterpage': 'centerpage-2009'}
-        return view_mapping.get(type(self).__name__, self.type)
+        import zeit.web.site.view
+
+        if self.type == 'gallery':
+            return 'bildergalerie'
+        elif isinstance(self, zeit.web.site.view.FrameBuilder):
+            return 'arena'
+        else:
+            return self.type
 
     @zeit.web.reify
     def _c1_origin(self):
