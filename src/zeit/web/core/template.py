@@ -745,15 +745,6 @@ def get_default_image_id():
 
 
 @zeit.web.register_filter
-def get_repository_image(image):
-    # TRASHME: Should be solved by using get_image on fullgraphical teaser
-    base_image = zeit.web.core.image.BaseImage()
-    base_image.image = image
-    base_image.uniqueId = image.uniqueId
-    return base_image
-
-
-@zeit.web.register_filter
 def get_image_group(asset):
     # TRASHME: Should be solved by using get_image on video modules
     try:

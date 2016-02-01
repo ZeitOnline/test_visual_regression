@@ -122,40 +122,6 @@
         <container cp:type="cpextra" module="blindblock" cp:__name__="cd869660-1ebd-41d4-9098-00c673337ee1">
           <cp_extra id="blindblock"/>
         </container>
-        <container cp:type="fullgraphical" module="fullgraphical" cp:__name__="5529c9d6-f2c5-4eab-8fb9-d1ccff026cf9" layout="368x220">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/angebote/buchtipp/newsletter/newsletter" year="2011" ressort="Angebote" publication-date="" expires="" ns0:href="http://www.randomhouse.de/newsletter/newsletter.jsp?zone=3" ns0:target="_blank" date-last-modified="2015-09-14T07:32:45+00:00" date-first-released="2011-11-18T14:36:16.753411+00:00" date-last-published="2015-09-14T07:33:45.145110+00:00" last-semantic-change="2014-09-05T12:40:10.937730+00:00" contenttype="link" ns0:rel="nofollow" uniqueId="http://xml.zeit.de/angebote/buchtipp/newsletter/newsletter">
-            <supertitle xsi:nil="true"/>
-            <title py:pytype="str"> </title>
-            <text xsi:nil="true"/>
-            <description xsi:nil="true"/>
-            <byline xsi:nil="true"/>
-            <teaser_supertitle xsi:nil="true"/>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/angebote/buchtipp/newsletter/buecher-newsletter/" type="jpg" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-            </image>
-          </block>
-          <image type="intern" href="http://xml.zeit.de/angebote/buchtipp/newsletter/buecher-newsletter/buecher-newsletter-368x220.jpg" align="left" publication-date="" expires="">
-            <bu xsi:nil="true"/>
-          </image>
-        </container>
-        <container cp:type="fullgraphical" module="fullgraphical" cp:__name__="id-97a00ee4-e4e9-454b-974c-65d3ebdd8c17" title="Zum Leseperlen-Archiv" layout="368x220">
-          <block type="intern" href="http://xml.zeit.de/angebote/buchtipp/archiv/index" year="2012" ressort="Angebote" contenttype="centerpage-2009" publication-date="2013-12-26T07:02:00+00:00" expires="" date-last-modified="2015-09-14T08:49:28+00:00" date-first-released="2012-01-05T16:01:44.033968+00:00" date-last-published="2015-09-10T08:16:32.139723+00:00" last-semantic-change="2015-08-27T07:27:26.357548+00:00" uniqueId="http://xml.zeit.de/angebote/buchtipp/archiv/index">
-            <supertitle xsi:nil="true"/>
-            <teaser_supertitle xsi:nil="true"/>
-            <title py:pytype="str">Leseperlen - Archiv</title>
-            <text py:pytype="str">Stöbern Sie hier in den Buchtipps der vergangenen Wochen!</text>
-            <description py:pytype="str">Stöbern Sie hier in den Buchtipps der vergangenen Wochen!</description>
-            <byline xsi:nil="true"/>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/angebote/buchtipp/archiv/leseperlen-archiv/" type="jpg" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-            </image>
-          </block>
-          <image type="intern" href="http://xml.zeit.de/angebote/buchtipp/archiv/leseperlen-archiv/leseperlen-archiv-368x220.jpg" align="left" publication-date="" expires="">
-            <bu xsi:nil="true"/>
-          </image>
-        </container>
         <container cp:type="xml" module="xml" cp:__name__="cdb094df-8adc-46d7-b77f-8feb3aabd9e3">
           <raw>
             <iframe width="320" height="180" src="http://www.youtube.com/embed/videoseries?list=PL8E676C3D75D9CF7A&amp;hl=de_DE" frameborder="0"/>

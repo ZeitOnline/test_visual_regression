@@ -43,8 +43,6 @@
             {% include ['zeit.web.magazin:templates/inc/teaser/' + prefix + module.layout.id + '.tpl',
             'zeit.web.magazin:templates/inc/teaser/default.tpl'] ignore missing %}
         {% endfor %}
-    {% elif module.type == 'fullgraphical' %}
-        {% include 'zeit.web.magazin:templates/inc/teaser/' + prefix + module.type + '.tpl' %}
     {% endif %}
 {%- endmacro %}
 

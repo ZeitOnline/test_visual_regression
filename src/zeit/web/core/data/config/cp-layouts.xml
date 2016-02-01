@@ -407,13 +407,6 @@
         available="zeit.magazin.interfaces.IZMOContent"
         />
     <layout
-        id="fullgraphical"
-        title="ZMO Vollgraphischer Block für die Informatives"
-        image_pattern="zmo-square-large"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-    />
-    <layout
         id="zmo-print-cover"
         title="ZMO Print Cover"
         image_pattern="zmo-print-cover"
