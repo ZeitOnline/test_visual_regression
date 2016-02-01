@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/autoren/Z/Zacharias_Zacharakis/index.xml</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">(c) ZEIT online</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">author</attribute>
+  <attribute ns="http://webdav.org/cadaver/custom-properties/" name="type">author</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bildbestellung</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Archiv</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">centerpage</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2011-05-27T10:22:39.067907+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2009-08-21T14:53:33.734988+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2012-02-24T15:48:10.088338+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="last_count">2010-04-06</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Author" module="zeit.content.author.author"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-01-29T10:04:01.978053+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="archivtyp">Autorenseite</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-01-29T10:03:59.982490+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:bcbb8494-3827-4101-b57b-a2f5e29a1a8c}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-04-24T11:16:21.097795+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="total_hits">5604</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="page"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="first_count">2008-08-07</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-01-29T10:03:59.930242+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2016-01-29T10:04:00Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">7985</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Fri, 29 Jan 2016 10:04:00 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"1064de5-1f31-52a762779076b"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">T</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">application/xml</attribute>
+</head>

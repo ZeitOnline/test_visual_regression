@@ -3,9 +3,7 @@
     margin: 0 (-$page-padding) remify(40px)
 
     &__inner
-        padding-top: remify(10px)
         +respond-min($break-tablet-min)
-            position: relative
             +display-flex()
             +justify-content(space-between)
             +align-items(center)
@@ -13,6 +11,7 @@
     &__image
         width: remify(150px)
         margin: auto
+        padding-top: remify(10px)
         +respond-min($break-tablet-min)
             +align-self(flex-end)
             +flex(0 0 auto)
@@ -35,13 +34,13 @@
             background-color: transparent
             border-bottom: none
             max-width: 60%
-            padding: 0
+            padding: remify(24px 0)
             text-align: left
 
     &__name
         font-size: em(24px)
         line-height: 1.2
-        margin: 0 auto .5em
+        margin: 0
         +respond-min($break-tablet-min)
             font-size: em(32px)
             line-height: 1.2
@@ -54,7 +53,7 @@
         font-size: em(16px)
         font-style: italic
         line-height: 1.25
-        margin: auto
+        margin: .75em auto 0
         max-width: 90%
         +respond-min($break-tablet-min)
             font-size: em(22px)

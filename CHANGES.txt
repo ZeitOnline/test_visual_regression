@@ -4,6 +4,22 @@ Change log for zeit.web
 2.54 (unreleased)
 -----------------
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| DEPLOYMENT-NOTE: Please also deploy zeit-online cookbook 0.2.8 |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- FIX: Fix scope of schema.org SiteNavigationElement
+
+- ZON-2701: Framebuilder: inline required SVG icons
+
+- MAINT: Add byline to nextread teaser
+
+- ZON-2617: Polish author page, handle missing content and add sharing image
+
+- ZON-2686: Add Google Tag Manager to ZMO
+
+- FIX: Change wording from 'Leser' to 'Aufrufe'in Buzzbox
+
 - ZON-2535: Migrate ZMO to R/A/M page structure
 
 - MAINT: Refurbish infobox tab link styles
@@ -13,6 +29,10 @@ Change log for zeit.web
 - ZON-2665: Centralize Module Class and integrate ZMO Buzbbox
 
 - FIX: Use correct URL to retrieve an author's comments
+
+- FIX: Determine ressort from navigation properly (bugsnag)
+
+- ZON-2688: Update C1 headers and include tracking script
 
 
 2.53 (2016-01-27)

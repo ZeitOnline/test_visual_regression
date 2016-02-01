@@ -218,7 +218,7 @@ class PostComment(zeit.web.core.view.Base):
                             action),
                         explanation=('Status code {} was send for action {} '
                                      'on resource {}').format(
-                            action, response.status_code, unique_id))
+                            response.status_code, action, unique_id))
             except requests.exceptions.RequestException as err:
                 raise pyramid.httpexceptions.HTTPInternalServerError(
                     title='Action {} could not be performed'.format(

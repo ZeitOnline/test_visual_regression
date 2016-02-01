@@ -77,6 +77,7 @@ class Base(object):
 
     seo_title_default = u''
     pagetitle_suffix = u''
+    inline_svg_icons = False
 
     def __call__(self):
         # to avoid circular imports
@@ -106,7 +107,14 @@ class Base(object):
         if not self.comments_loadable:
             time = 5
         self.request.response.cache_expires(time)
-        self._set_response_headers()
+
+        # Set zeit.web version header
+        try:
+            self.request.response.headers.add(
+                'X-Version', self.request.registry.settings.version)
+        except AttributeError:
+            pass
+
         return {}
 
     def __init__(self, context, request):
@@ -135,63 +143,6 @@ class Base(object):
     def tracking_is_enabled(self):
         return zeit.web.core.application.FEATURE_TOGGLES.find(
             'tracking')
-
-    def _set_response_headers(self):
-        # ZMO Version header
-        try:
-            self.request.response.headers.add(
-                'X-Version', self.request.registry.settings.version)
-        except AttributeError:
-            pass
-
-        # C1 headers
-        #
-        # The following rules scream for inconsistency, but have already been
-        # defined for tracking services long ago. :-(
-        # Therefore they are just copied as is from the XSLT backend,
-        # managing HTTP headers until launch.
-        # (e.g. uppercase ressort vs lowercase sub ressort)
-
-        # Additional predefined doc type values
-        c1_add_doc_types = {
-            'video': 'Video',
-            'article': 'Artikel',
-            'gallery': 'Bildergalerie'}
-
-        # Additional predefined section (a.k.a. channel) values
-        c1_add_sections = {
-            'campus': 'Studium',
-            'homepage': 'Homepage',
-        }
-
-        token = re.compile(r'[^ %s]' % ''.join(werkzeug.http._token_chars))
-
-        c1_track_headers = {
-            'C1-Track-Origin': lambda: 'web',
-            'C1-Track-Service-ID': lambda: 'zon',
-            'C1-Track-Doc-Type': lambda: c1_add_doc_types.get(
-                self.type, 'Centerpage'),
-            'C1-Track-Content-ID': lambda: '/' + '/'.join(
-                self.request.traversed),
-            'C1-Track-CMS-ID': lambda: zeit.cms.content.interfaces.IUUID(
-                self.context).id,
-            'C1-Track-Channel': lambda: c1_add_sections.get(
-                self.context.ressort, self.context.ressort),
-            'C1-Track-Sub-Channel': lambda: self.context.sub_ressort,
-            'C1-Track-Heading': lambda: token.sub('', self.context.title),
-            'C1-Track-Kicker': lambda: token.sub('', self.context.supertitle)
-        }
-
-        for th_name in c1_track_headers:
-            try:
-                track_header = c1_track_headers[th_name]()
-            except (AttributeError, TypeError):
-                continue
-            if track_header is None:
-                continue
-            self.request.response.headers.add(
-                th_name,
-                track_header.encode('utf-8').strip())
 
     @zeit.web.reify
     def type(self):
@@ -422,6 +373,10 @@ class Base(object):
         return self._pagetitle(suffix=False)
 
     @zeit.web.reify
+    def social_description(self):
+        return self.pagedescription
+
+    @zeit.web.reify
     def pagedescription(self):
         try:
             desc = zeit.seo.interfaces.ISEO(self.context).html_description
@@ -497,13 +452,16 @@ class Base(object):
         return zeit.web.core.block.BreakingNews()
 
     @zeit.web.reify
+    def content_path(self):
+        return u'/' + u'/'.join(self.request.traversed).replace('.cp2015', '')
+
+    @zeit.web.reify
     def content_url(self):
-        path = '/'.join(self.request.traversed)
-        return self.request.route_url('home') + path.replace('.cp2015', '')
+        return self.request.route_url('home').rstrip('/') + self.content_path
 
     @zeit.web.reify
     def og_url(self):
-        return self.content_url
+        return self.content_url  # XXX What's the point of this alias? (ND)
 
     @zeit.web.reify
     def sharing_image(self):
@@ -558,7 +516,91 @@ class Base(object):
         return None
 
 
-class Content(Base):
+class CeleraOneMixin(object):
+
+    def __call__(self):
+        resp = super(CeleraOneMixin, self).__call__()
+        self.request.response.headers.update(self.c1_header)
+        return resp
+
+    @zeit.web.reify
+    def _c1_channel(self):
+        if getattr(self.context, 'ressort', None) is not None:
+            return self.context.ressort.lower()
+
+    @zeit.web.reify
+    def _c1_sub_channel(self):
+        if getattr(self.context, 'sub_ressort', None) is not None:
+            return self.context.sub_ressort.lower()
+
+    @zeit.web.reify
+    def _c1_cms_id(self):
+        uuid = zeit.cms.content.interfaces.IUUID(self.context, None)
+        return getattr(uuid, 'id', None)
+
+    @zeit.web.reify
+    def _c1_doc_type(self):
+        import zeit.web.site.view
+
+        if self.type == 'gallery':
+            return 'bildergalerie'
+        elif isinstance(self, zeit.web.site.view.FrameBuilder):
+            return 'arena'
+        else:
+            return self.type
+
+    @zeit.web.reify
+    def _c1_origin(self):
+        return 'app' if self.is_wrapped else 'web'
+
+    @classmethod
+    def _headersafe(cls, string):
+        pattern = r'[^ %s]' % ''.join(werkzeug.http._token_chars)
+        return re.sub(pattern, '', string.encode('utf-8', 'ignore'))
+
+    def _get_c1_heading(self, prep=unicode):
+        if getattr(self.context, 'title', None) is not None:
+            return prep(self.context.title.strip())
+
+    def _get_c1_kicker(self, prep=unicode):
+        if getattr(self.context, 'supertitle', None) is not None:
+            return prep(self.context.supertitle.strip())
+
+    @zeit.web.reify
+    def c1_prefix(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('c1_prefix')
+
+    @zeit.web.reify
+    def c1_client(self):
+        return [(k, u'"{}"'.format(v)) for k, v in {
+            'set_channel': self._c1_channel,
+            'set_sub_channel': self._c1_sub_channel,
+            'set_cms_id': self._c1_cms_id,
+            'set_content_id': self.content_path,
+            'set_doc_type': self._c1_doc_type,
+            'set_heading': self._get_c1_heading(),
+            'set_kicker': self._get_c1_kicker(),
+            'set_service_id': 'zon'
+        }.items() if v is not None] + [
+            ('set_origin', 'window.Zeit.getCeleraOneOrigin()')]
+
+    @zeit.web.reify
+    def c1_header(self):
+        return [(k, v.encode('utf-8', 'ignore')) for k, v in {
+            'C1-Track-Channel': self._c1_channel,
+            'C1-Track-Sub-Channel': self._c1_sub_channel,
+            'C1-Track-CMS-ID': self._c1_cms_id,
+            'C1-Track-Content-ID': self.content_path,
+            'C1-Track-Doc-Type': self._c1_doc_type,
+            'C1-Track-Origin': self._c1_origin,
+            'C1-Track-Heading': self._get_c1_heading(self._headersafe),
+            'C1-Track-Kicker': self._get_c1_kicker(self._headersafe),
+            'C1-Track-Service-ID': 'zon'
+        }.items() if v is not None]
+
+
+class Content(CeleraOneMixin, Base):
 
     is_longform = False
 
