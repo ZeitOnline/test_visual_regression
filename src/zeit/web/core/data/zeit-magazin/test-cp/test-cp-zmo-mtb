@@ -269,7 +269,7 @@
             </author>
           </block>
         </container>
-        <container cp:type="teaser" module="zmo-mtb-upright" hide-dupes="True" visible="True" cp:__name__="id-3197288c-687e-497d-b65f-d150a9931832">
+        <container cp:type="teaser" module="zmo-mtb-sqare" hide-dupes="True" visible="True" cp:__name__="id-3197288c-687e-497d-b65f-d150a9931832">
           <block href="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Kochen für Gäste</supertitle>
             <teaser_supertitle py:pytype="str">Kochen für Gäste</teaser_supertitle>
