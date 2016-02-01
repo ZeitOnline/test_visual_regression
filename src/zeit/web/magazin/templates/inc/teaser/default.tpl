@@ -41,7 +41,7 @@ All calling templates have to provide:
 
         {% if video -%}
             {# call video asset #}
-            {{ blocks.headervideo(video, 'cp_leader__asset cp_leader__asset--' + self.layout_shade(), '') }}
+            {{ blocks.headervideo(video, self.layout() + '__asset ' + self.layout() + '__asset--' + self.layout_shade(), '') }}
         {%- elif image -%}
             {# call image asset #}
             <div class="scaled-image is-pixelperfect {{ self.layout() }}__image {{ self.layout() }}__asset {{ self.layout() }}--{% block layout_shade %}dark{% endblock %}">
