@@ -349,14 +349,6 @@
     />
 
     <layout
-        id="zmo-mtb-upright"
-        title="ZMO monothematischer Block hochkant"
-        image_pattern="zmo-upright"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-    />
-
-    <layout
         id="zmo-mtb-square"
         title="ZMO monothematischer Block quadratisch"
         image_pattern="zmo-square-large"
