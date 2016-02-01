@@ -58,7 +58,8 @@
 		{% endblock breaking_news %}
 
 		<main itemprop="mainContentOfPage">
-			{% block main %}
+		{% block main %}
+			{% block content %}
 			<article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
 				<link itemprop="mainEntityOfPage" href="{{ view.content_url }}">
 				<div class="article-header article__item">
@@ -69,7 +70,7 @@
 							{%- endif -%}
 							{{- view.supertitle -}}
 						</span>
-						{%- if view.title %}<span class="headline__colon">: </span>{% endif %}
+						{%- if view.title %}<span class="visually-hidden">: </span>{% endif %}
 						<span class="headline__title">
 							{{- view.title -}}
 						</span>
@@ -111,7 +112,18 @@
 				{% endblock article_body %}
 
 			</article>
-			{% endblock main %}
+			{% endblock %}
+
+			{% block nextread %}
+				{% set module = view.nextread %}
+				{% include "zeit.web.core:templates/amp/nextread/default.html" %}
+			{% endblock %}
+
+			{% block nextread_ad %}
+				{% set module = view.nextread_ad %}
+				{% include "zeit.web.core:templates/amp/nextread/default.html" %}
+			{% endblock %}
+		{% endblock main %}
 		</main>
 
 		<footer class="footer">
