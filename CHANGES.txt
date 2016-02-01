@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - ZON-2665: Centralize Module Class and integrate ZMO Buzbbox
 
+- FIX: Determine ressort from navigation properly (bugsnag)
+
 
 2.53 (2016-01-27)
 -----------------
