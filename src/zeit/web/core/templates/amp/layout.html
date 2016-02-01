@@ -33,7 +33,7 @@
 		{% endblock symbols %}
 	</div>
 
-	<div class="content">
+	<div class="content" id="top">
 		<header class="header" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
 			{% block logo %}
 			<div class="article__item article__item--wide">
@@ -128,6 +128,11 @@
 					<li><a href="{{ request.route_url('home') }}hilfe/datenschutz">Datenschutz</a></li>
 				</ul>
 			</nav>
+			{% block footer_button %}
+			<div class="footer__finish">
+				<a class="footer__button" href="#top" title="Zurück nach oben">Nach Oben</a>
+			</div>
+			{% endblock footer_button %}
 		</footer>
 
 		{% include "zeit.web.core:templates/inc/tracking/webtrekk_amp.html" %}
