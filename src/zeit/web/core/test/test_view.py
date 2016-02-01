@@ -126,7 +126,7 @@ def test_json_delta_time_from_unique_id_should_use_custom_base_time(
 
 def test_http_header_should_contain_c1_header_fields(testserver):
     assert requests.head(testserver.url + '/zeit-magazin/index').headers.get(
-        'C1-Track-Doc-Type') == 'Centerpage'
+        'C1-Track-Doc-Type') == 'centerpage'
 
 
 def test_c1_channel_should_correspond_to_context_ressort(
@@ -135,8 +135,8 @@ def test_c1_channel_should_correspond_to_context_ressort(
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/simple')
     view = zeit.web.core.view.Content(context, dummy_request)
-    assert dict(view.c1_header).get('C1-Track-Channel') == 'Sport'
-    assert dict(view.c1_client).get('set_channel') == '"Sport"'
+    assert dict(view.c1_header).get('C1-Track-Channel') == 'sport'
+    assert dict(view.c1_client).get('set_channel') == '"sport"'
 
 
 def test_c1_channel_should_correspond_to_context_sub_ressort(
@@ -176,8 +176,8 @@ def test_c1_doc_type_should_be_properly_mapped_to_context_type(
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         context, dummy_request)
-    assert dict(view.c1_header).get('C1-Track-Doc-Type') == 'Centerpage (alt)'
-    assert dict(view.c1_client).get('set_doc_type') == '"Centerpage (alt)"'
+    assert dict(view.c1_header).get('C1-Track-Doc-Type') == 'centerpage-2009'
+    assert dict(view.c1_client).get('set_doc_type') == '"centerpage-2009"'
 
 
 def test_c1_heading_and_kicker_should_be_properly_escaped(

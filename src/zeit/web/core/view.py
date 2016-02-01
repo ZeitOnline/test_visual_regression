@@ -518,19 +518,6 @@ class Base(object):
 
 class CeleraOneMixin(object):
 
-    _doc_type_mapping = {
-        'article': 'Artikel',
-        'arena': 'Arenaseite',
-        'centerpage': 'Centerpage',
-        'legacy': 'Centerpage (alt)',
-        'gallery': 'Fotostrecke',
-        'quiz': 'Quiz',
-        'video': 'Video'}
-
-    _class_mapping = {
-        'FrameBuilder': 'arena',
-        'LegacyCenterpage': 'legacy'}
-
     def __call__(self):
         resp = super(CeleraOneMixin, self).__call__()
         self.request.response.headers.update(self.c1_header)
@@ -538,11 +525,13 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def _c1_channel(self):
-        return getattr(self.context, 'ressort', None)
+        if getattr(self.context, 'ressort', None) is not None:
+            return self.context.ressort.lower()
 
     @zeit.web.reify
     def _c1_sub_channel(self):
-        return getattr(self.context, 'sub_ressort', None)
+        if getattr(self.context, 'sub_ressort', None) is not None:
+            return self.context.sub_ressort.lower()
 
     @zeit.web.reify
     def _c1_cms_id(self):
@@ -551,8 +540,10 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def _c1_doc_type(self):
-        doc = self._class_mapping.get(type(self).__name__, self.type)
-        return self._doc_type_mapping.get(doc)
+        view_mapping = {
+            'FrameBuilder': 'arena',
+            'LegacyCenterpage': 'centerpage-2009'}
+        return view_mapping.get(type(self).__name__, self.type)
 
     @zeit.web.reify
     def _c1_origin(self):
