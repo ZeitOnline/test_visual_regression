@@ -502,13 +502,16 @@ class Base(object):
         return zeit.web.core.block.BreakingNews()
 
     @zeit.web.reify
+    def content_path(self):
+        return u'/' + u'/'.join(self.request.traversed).replace('.cp2015', '')
+
+    @zeit.web.reify
     def content_url(self):
-        path = '/'.join(self.request.traversed)
-        return self.request.route_url('home') + path.replace('.cp2015', '')
+        return self.request.route_url('home').rstrip('/') + self.content_path
 
     @zeit.web.reify
     def og_url(self):
-        return self.content_url
+        return self.content_url  # XXX What's the point of this alias? (ND)
 
     @zeit.web.reify
     def sharing_image(self):
