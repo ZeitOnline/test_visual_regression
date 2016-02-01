@@ -8,6 +8,7 @@ Change log for zeit.web
 | DEPLOYMENT-NOTE: Please also deploy zeit-online cookbook 0.2.8 |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+- FIX: Fix scope of schema.org SiteNavigationElement
 
 - ZON-2701: Framebuilder: inline required SVG icons
 
@@ -15,7 +16,7 @@ Change log for zeit.web
 
 - ZON-2617: Polish author page, handle missing content and add sharing image
 
-- ZON 2686: Add Google Tag Manager to ZMO
+- ZON-2686: Add Google Tag Manager to ZMO
 
 - FIX: Change wording from 'Leser' to 'Aufrufe'in Buzzbox
 
