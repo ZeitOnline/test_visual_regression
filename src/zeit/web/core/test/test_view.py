@@ -124,23 +124,98 @@ def test_json_delta_time_from_unique_id_should_use_custom_base_time(
     assert content['delta_time'][a2] == 'Vor 12 Minuten'
 
 
-def test_http_header_should_contain_c1_header_fields(testserver, testbrowser):
-    c1_track_doc_type = requests.head(
-        testserver.url + '/zeit-magazin/index').headers['c1-track-doc-type']
-    c1_track_channel = requests.head(
-        testserver.url + '/zeit-magazin/index').headers['c1-track-channel']
-    c1_track_kicker = requests.head(
-        testserver.url + '/artikel/03').headers['c1-track-kicker']
-    assert c1_track_doc_type == 'Centerpage'
-    assert c1_track_channel == 'Lebensart'
-    assert c1_track_kicker == 'Kolumne Die Ausleser'
+def test_http_header_should_contain_c1_header_fields(testserver):
+    assert requests.head(testserver.url + '/zeit-magazin/index').headers.get(
+        'C1-Track-Doc-Type') == 'Centerpage'
 
 
-def test_http_header_should_not_contain_empty_fields(
-        testserver, testbrowser):
-    with pytest.raises(KeyError):
-        url = testserver.url + '/zeit-magazin/index'
-        requests.head(url).headers['c1-track-sub-channel']
+def test_c1_channel_should_correspond_to_context_ressort(
+        application, dummy_request):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert dict(view.c1_header).get('C1-Track-Channel') == 'Sport'
+    assert dict(view.c1_client).get('set_channel') == '"Sport"'
+
+
+def test_c1_channel_should_correspond_to_context_sub_ressort(
+        application, dummy_request):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/artikel/01')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert dict(view.c1_header).get('C1-Track-Sub-Channel') == 'mode-design'
+    assert dict(view.c1_client).get('set_sub_channel') == '"mode-design"'
+
+
+def test_c1_cms_id_should_correspond_to_context_uuid(
+        application, dummy_request):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+    uuid = '{urn:uuid:85c42592-3840-41c6-b039-83cc16de66d6}'
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert dict(view.c1_header).get('C1-Track-CMS-ID') == uuid
+    assert dict(view.c1_client).get('set_cms_id') == '"%s"' % uuid
+
+
+def test_c1_content_id_should_correspond_to_traversal_path(
+        testbrowser, dummy_request):
+
+    browser = testbrowser('/zeit-online/article/01?page=2')
+    assert browser.headers['C1-Track-Content-ID'] == '/zeit-online/article/01'
+    assert 'cre_client.set_content_id( "/zeit-online/article/01" );' in (
+        browser.contents)
+
+
+def test_c1_doc_type_should_be_properly_mapped_to_context_type(
+        application, dummy_request):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+        context, dummy_request)
+    assert dict(view.c1_header).get('C1-Track-Doc-Type') == 'Centerpage (alt)'
+    assert dict(view.c1_client).get('set_doc_type') == '"Centerpage (alt)"'
+
+
+def test_c1_heading_and_kicker_should_be_properly_escaped(
+        application, dummy_request):
+
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/04')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert dict(view.c1_header).get('C1-Track-Heading') == (
+        u'Kann Leipzig Hypezig berleben')
+    assert dict(view.c1_client).get('set_heading') == (
+        u'"Kann Leipzig Hypezig überleben?"')
+    assert dict(view.c1_header).get('C1-Track-Kicker') == 'Szene-Stadt'
+    assert dict(view.c1_client).get('set_kicker') == '"Szene-Stadt"'
+
+
+def test_c1_service_id_should_be_included_in_tracking_parameters(
+        application, dummy_request):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert dict(view.c1_header).get('C1-Track-Service-ID') == 'zon'
+    assert dict(view.c1_client).get('set_service_id') == '"zon"'
+
+
+def test_c1_origin_should_be_set_in_http_headers(testserver):
+    url = testserver.url + '/zeit-online/slenderized-index'
+    assert requests.head(url).headers.get('C1-Track-Origin') == 'web'
+    assert requests.head(url, headers={
+        'User-Agent': 'ZONApp'}).headers.get('C1-Track-Origin') == 'app'
+
+
+def test_c1_origin_should_trigger_js_call_for_cre_client(
+        testbrowser, dummy_request):
+
+    browser = testbrowser('/zeit-online/article/simple')
+    assert 'cre_client.set_origin( window.Zeit.getCeleraOneOrigin() );' in (
+        browser.contents)
 
 
 def test_text_file_content_should_be_rendered(testserver, testbrowser):
@@ -578,7 +653,7 @@ def test_ivw_uses_hyprid_method_for_apps(jinja2_env):
 
 
 def test_iqd_ads_should_utilize_feature_toggles(testbrowser, monkeypatch):
-    Base = zeit.web.core.view.Base
+    Base = zeit.web.core.view.Base  # NOQA
     monkeypatch.setattr(Base, 'iqd_is_enabled', True)
     monkeypatch.setattr(Base, 'third_party_modules_is_enabled', True)
     browser = testbrowser('/zeit-online/article/zeit')

@@ -71,6 +71,7 @@ def app_settings(mockserver):
         'image_prefix': '',
         'jsconf_prefix': '/jsconf',
         'fbia_prefix': '/fbia',
+        'c1_prefix': '/jsconf',
         'comment_page_size': '4',
         'community_host': 'http://localhost:6551',
         'community_static_host': 'http://static_community/foo',

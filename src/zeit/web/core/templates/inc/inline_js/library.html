@@ -43,6 +43,15 @@
             }
             return 'desktop.' + text;
         },
+        getCeleraOneOrigin: function() {
+            if ( this.isMobileView() ) {
+                if ( this.is_wrapped ) {
+                    return 'app';
+                }
+                return 'mobile';
+            }
+            return 'web';
+        },
         viewport: {
             meta: document.getElementById('viewport-meta'),
             standard: document.getElementById('viewport-meta').getAttribute('content'),
