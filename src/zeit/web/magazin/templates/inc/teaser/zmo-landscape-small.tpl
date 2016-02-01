@@ -12,3 +12,4 @@ Parameters:
 {%- extends "zeit.web.magazin:templates/inc/teaser/default.tpl" -%}
 
 {% block format %}small{% endblock %}
+{% block layout %}teaser-lanscape-small{% endblock %}

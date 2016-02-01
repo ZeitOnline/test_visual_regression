@@ -13,3 +13,4 @@ Parameters:
 
 {% block teaser_text %}{% endblock %}
 {% block format %}large-photo{% endblock %}
+{% block layout %}teaser-landscape-large-photo{% endblock %}

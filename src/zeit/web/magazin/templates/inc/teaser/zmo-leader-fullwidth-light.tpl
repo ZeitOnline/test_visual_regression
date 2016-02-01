@@ -7,9 +7,10 @@ Parameters:
     supertitle: to define display of supertitle
 #}
 
-{%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_leader_teaser_template.tpl" -%}
+{%- extends "zeit.web.magazin:templates/inc/teaser/default.tpl" -%}
 
 {% block layout %}teaser-fullwidth{% endblock %}
 {% block layout_shade %}light{% endblock %}
-{% block supertitle %}false{% endblock %}
+{% block teaser_kicker %}{% endblock %}
 {% block teaser_text %}{% endblock %}
+{% block comments %}{% endblock %}

@@ -13,6 +13,7 @@ Parameters:
 
 {% block format %}gallery{% endblock %}
 
+{% block layout %}teaser-gallery-upright{% endblock %}
 {% block icon %}
     <span class="icon-galerie-icon-white"></span>
 {% endblock %}

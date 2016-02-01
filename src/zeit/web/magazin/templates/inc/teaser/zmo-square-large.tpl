@@ -8,7 +8,7 @@ Parameters:
     supertitle: to define display of supertitle
 #}
 
-{%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_leader_teaser_template.tpl" -%}
+{%- extends "zeit.web.magazin:templates/inc/teaser/default.tpl" -%}
 
 {% block layout %}teaser-square-large{% endblock %}
 {% block supertitle %}true{% endblock %}
