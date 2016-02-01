@@ -43,6 +43,7 @@
             }
             return 'desktop.' + text;
         },
+        {% if view.c1_client and view.c1_prefix %}
         getCeleraOneOrigin: function() {
             if ( this.isMobileView() ) {
                 if ( this.is_wrapped ) {
@@ -52,6 +53,7 @@
             }
             return 'web';
         },
+        {% endif -%}
         viewport: {
             meta: document.getElementById('viewport-meta'),
             standard: document.getElementById('viewport-meta').getAttribute('content'),
