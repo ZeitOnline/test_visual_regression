@@ -4,6 +4,8 @@ Change log for zeit.web
 2.55 (unreleased)
 -----------------
 
+- FIX: Remove tautologous GTM include in ZMO template
+
 - FIX: Handle images without copyrights in instantarticle template
 
 
