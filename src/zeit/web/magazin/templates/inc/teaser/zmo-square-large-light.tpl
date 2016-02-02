@@ -7,4 +7,3 @@ Teaser template for light, large square lead teasers
 {% block layout %}teaser-square-large{% endblock %}
 {% block layout_shade %}light{% endblock %}
 {% block supertitle %}true{% endblock %}
-{% block teaser_text %}{% endblock %}

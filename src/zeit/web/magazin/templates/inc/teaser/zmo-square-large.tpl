@@ -6,4 +6,3 @@ Teaser template for large square lead teasers
 
 {% block layout %}teaser-square-large{% endblock %}
 {% block supertitle %}true{% endblock %}
-{% block teaser_text %}{% endblock %}
