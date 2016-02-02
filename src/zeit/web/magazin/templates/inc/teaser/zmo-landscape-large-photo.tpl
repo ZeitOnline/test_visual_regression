@@ -1,12 +1,5 @@
 {#
-
-Teaser template for landscape large photo button teaser
-
-Parameters:
-    subtitle: to define display of subtitle
-    format: to define type of button
-    supertitle: to define display of supertitle
-    icon: define display of optional asset icon
+Teaser template for landscape large photo teaser
 #}
 
 {%- extends "zeit.web.magazin:templates/inc/teaser/default.tpl" -%}

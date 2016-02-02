@@ -1,11 +1,5 @@
 {#
-
 Teaser template for Zeit Magazin print cover
-
-Parameters:
-    format: to define type of leader
-    shade: to define light/ dark shading
-    supertitle: to define display of supertitle
 #}
 
 {% import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}

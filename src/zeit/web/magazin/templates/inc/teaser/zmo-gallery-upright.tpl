@@ -1,12 +1,5 @@
 {#
-
-Teaser template for gallery upright button teaser
-
-Parameters:
-    subtitle: to define display of subtitle
-    format: to define type of button
-    supertitle: to define display of supertitle
-    icon: define display of optional asset icon
+Teaser template for gallery upright teaser
 #}
 
 {%- extends "zeit.web.magazin:templates/inc/teaser/default.tpl" -%}

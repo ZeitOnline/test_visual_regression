@@ -1,10 +1,5 @@
 {#
-
 Teaser template for large upright lead teasers
-
-Parameters:
-    layout: to define type of leader
-    supertitle: to define display of supertitle
 #}
 
 {%- extends "zeit.web.magazin:templates/inc/teaser/default.tpl" -%}
