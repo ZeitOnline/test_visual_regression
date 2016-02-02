@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/asset/image_linked.tpl" -%}
+{%- extends "zeit.web.core:templates/inc/asset/image_linked.tpl" -%}
 
 {% set image = view.author_img %}
 {% if view.authors %}

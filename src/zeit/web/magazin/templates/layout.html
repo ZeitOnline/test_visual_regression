@@ -57,7 +57,19 @@
         {%- include "zeit.web.magazin:templates/inc/meta/sharing.html" -%}
         {%- endblock sharing_meta %}
 
+        {# Modernizr -#}
         <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
+        {# SVG for Everybody -#}
+        <script src="{{ request.asset_host }}/js/vendor/svg4everybody.legacy.js"></script>
+        <script>
+            {# needed for styling SVG in IE8 #}
+            document.createElement( 'svg' );
+            svg4everybody({
+                fallback: function ( src, svg, use ) {
+                    return src.replace( /web\.magazin\/icons\.svg(\?.+)?#svg-(.+)/ , 'icons/magazin/$2.png$1');
+                }
+            });
+        </script>
 
         <script>
             /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
@@ -181,10 +193,10 @@
         {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
 
         <!-- tracking at end -->
-        {% include "zeit.web.core:templates/inc/tracking/google.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/zeit.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tracking/celera_one.html" ignore missing %}
 
         <script type="text/javascript">
             var require = { baseUrl: '{{ request.asset_host }}/js/' };
