@@ -46,8 +46,8 @@
             <a href="{{ request.route_url('home') }}zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
                 <{{ title_tag }} class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-logo-zmo-large" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
-                    <span class="main-nav__logo__img icon-logo-zmo-small"></span>
+                    {{ use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', request, package="web.magazin") }}
+                    {{ use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', request, package="web.magazin") }}
                 </{{ title_tag }}>
             </a>
             <div class="main-nav__menu">
