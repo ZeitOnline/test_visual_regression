@@ -9,22 +9,13 @@
             {%- endfor %}
         </div>
         <script type="text/template" class="inline-gallery-icon-templates">
-        {% if view and not provides(view.context, 'zeit.magazin.interfaces.IZMOContent') %}
+        {% set location = 'web.magazin' if provides(view.context, 'zeit.magazin.interfaces.IZMOContent') else 'web.site' %}
             <div class="bx-zone-prev">
-                <a class="bx-overlay-prev">{{ lama.use_svg_icon('arrow-gallery-left', 'bx-arrow-icon', view.request) }}</a>
+                <a class="bx-overlay-prev">{{ lama.use_svg_icon('arrow-gallery-left', 'bx-arrow-icon', view.request, location) }}</a>
             </div>
             <div class="bx-zone-next">
-                <a class="bx-overlay-next">{{ lama.use_svg_icon('arrow-gallery-right', 'bx-arrow-icon', view.request) }}</a>
+                <a class="bx-overlay-next">{{ lama.use_svg_icon('arrow-gallery-right', 'bx-arrow-icon', view.request, location) }}</a>
             </div>
-        {% else %}
-            {# Needed by ZMO which still uses grunticon #}
-            <div class="bx-zone-prev">
-                <a class="bx-overlay-prev icon-pfeil-links"></a>
-            </div>
-            <div class="bx-zone-next">
-                <a class="bx-overlay-next icon-pfeil-rechts"></a>
-            </div>
-        {% endif %}
         </script>
     </div>
 {%- endmacro %}
