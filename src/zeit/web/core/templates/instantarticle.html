@@ -54,13 +54,14 @@
             {% if image -%}
                 <figure>
                     <img src="{{ request.image_host + image.path + '__2048x2048' }}" />
-                    {% if image.caption or image.copyright[0][0] | trim | length > 1 %}
+                    {% set copyright = image.copyright[0][0] if (image.copyright and image.copyright[0]) else None %}
+                    {% if image.caption or copyright | trim | length > 1 %}
                     <figcaption>
                         {% if image.caption %}
                         {{ image.caption }}
                         {% endif %}
-                        {% if image.copyright[0][0] | trim | length > 1 %}
-                        <cite>{{ image.copyright[0][0] }}</cite>
+                        {% if copyright | trim | length > 1 %}
+                        <cite>{{ copyright }}</cite>
                         {% endif %}
                     </figcaption>
                     {% endif %}
@@ -80,7 +81,7 @@
 
         <!-- Analytics code loaded from an iframe -->
         <figure class="op-tracker">
-            <iframe src="{{ request.fbia_host }}/{{view.request.traversed | join('/') }}"></iframe>
+            <iframe src="{{ request.fbia_host }}{{ view.content_path }}"></iframe>
         </figure>
         <footer>
             <small>Dieser Artikel steht unter der journalistisch-redaktionellen Verantwortung der Redaktion von zeit.de. Das Impressum finden Sie hier: <a href="{{ request.route_url('home') }}impressum/index">Impressum</a></small>

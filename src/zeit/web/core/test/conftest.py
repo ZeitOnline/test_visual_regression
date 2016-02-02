@@ -71,6 +71,7 @@ def app_settings(mockserver):
         'image_prefix': '',
         'jsconf_prefix': '/jsconf',
         'fbia_prefix': '/fbia',
+        'c1_prefix': '/jsconf',
         'comment_page_size': '4',
         'community_host': 'http://localhost:6551',
         'community_static_host': 'http://static_community/foo',
@@ -506,7 +507,11 @@ def selenium_driver(request):
         parameters = {}
         profile = selenium.webdriver.FirefoxProfile(
             os.environ.get('ZEIT_WEB_FF_PROFILE'))
-        profile.set_preference('network.http.use-cache', False)
+        profile.default_preferences.update({
+            'network.http.use-cache': False,
+            'browser.startup.page': 0,
+            'browser.startup.homepage_override.mstone': 'ignore'})
+        profile.update_preferences()
         parameters['firefox_profile'] = profile
         # Old versions: <https://ftp.mozilla.org/pub/firefox/releases/>
         ff_binary = os.environ.get('ZEIT_WEB_FF_BINARY')
