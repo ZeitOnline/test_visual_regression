@@ -6,6 +6,12 @@ Change log for zeit.web
 
 - ZON-2602: Add Nextread and Verlags-Nextread to AMPages
 
+- ZON-2710: Use external SVG sprite in ZMO
+
+- ZON-2732: Move celeraone device detection header setting to varnish
+
+- ZON-2536: Move generic image assets to core module
+
 
 2.54.1 (2016-02-02)
 -------------------

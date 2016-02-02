@@ -136,7 +136,7 @@
         {% if inline %}
             <use xlink:href="#svg-{{ name }}"></use>
         {% else %}
-            <use xlink:href="{{ request.asset_host }}/css/web.site/icons.svg#svg-{{ name }}"></use>
+            <use xlink:href="{{ request.asset_host }}/css/{{ package }}/icons.svg#svg-{{ name }}"></use>
         {% endif %}
     </svg>
 {%- endmacro %}
