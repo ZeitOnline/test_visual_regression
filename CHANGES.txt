@@ -4,7 +4,7 @@ Change log for zeit.web
 2.55 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2732: Move celeraone device detection header setting to varnish
 
 
 2.54 (2016-02-01)
