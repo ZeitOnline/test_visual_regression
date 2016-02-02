@@ -4,6 +4,8 @@ Change log for zeit.web
 2.55 (unreleased)
 -----------------
 
+- MAINT: Add enhanced window.Zeit javascript module to ZMO
+
 - ZON-2710: Use external SVG sprite in ZMO
 
 - ZON-2732: Move celeraone device detection header setting to varnish
