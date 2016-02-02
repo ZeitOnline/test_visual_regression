@@ -4,6 +4,8 @@ Change log for zeit.web
 2.55 (unreleased)
 -----------------
 
+- ZON-2732: Move celeraone device detection header setting to varnish
+
 - ZON-2536: Move generic image assets to core module
 
 
