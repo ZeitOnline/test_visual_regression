@@ -67,9 +67,9 @@
     <header class="cp_{{block}}__title__wrap cp_{{block}}__title__wrap--{{ shade }}">
         <a href="{{teaser | create_url}}">
             {% if icon == 'true' and (teaser | block_type) == 'gallery'
-               and teaser.type != 'zmo-product'%}
-                <span class="icon-galerie-icon-white"></span>
-            {% endif %}
+               and teaser.type != 'zmo-product' -%}
+                {{ lama.use_svg_icon('gallery', 'gallery-icon', request, package="web.magazin") }}
+            {%- endif %}
             <h2>
                 {% if supertitle != 'false' %}
                     <div class="cp_{{block}}__supertitle">
