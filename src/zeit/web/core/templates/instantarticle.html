@@ -39,9 +39,13 @@
             <!-- The authors of your article -->
             {% for author in view.authors -%}
                 <address>
+                {% if author.href %}
                     <a href="{{ author.href | create_url }}">
-                        {{ author['name'] }}
+                        {{ author.name }}
                     </a>
+                {% else %}
+                    {{ author.name }}
+                {% endif %}
                 </address>
             {% endfor -%}
 

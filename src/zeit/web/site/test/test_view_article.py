@@ -1277,6 +1277,18 @@ def test_instantarticle_should_have_tracking_iframe(testbrowser):
     assert browser.cssselect('iframe[src*="fbia/zeit-online/article/quotes"]')
 
 
+def test_instantarticle_should_show_linked_author_if_available(testbrowser):
+    browser = testbrowser('/instantarticle/zeit-online/article/02')
+    assert browser.cssselect('address a')[0].attrib.get('href').endswith(
+        '/autoren/H/Wenke_Husmann/index.xml')
+    assert browser.cssselect('address a')[0].text.strip() == 'Wenke Husmann'
+
+
+def test_instantarticle_should_show_author_fallback(testbrowser):
+    browser = testbrowser('/instantarticle/zeit-online/article/quotes')
+    assert browser.cssselect('address')[0].text.strip() == 'ZEIT ONLINE'
+
+
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-expired-image')
     assert len(browser.cssselect('.nextread.nextread--with-image')) == 0

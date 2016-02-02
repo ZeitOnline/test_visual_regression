@@ -225,7 +225,6 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def news_source(self):
         """1:1 implementation of questionable xslt construct"""
-
         if (self.context.ressort == 'News' and
                 self.context.product and self.context.product.id == 'News'):
             return 'dpa'
@@ -282,6 +281,10 @@ class Article(zeit.web.core.view.Content):
              route_name='instantarticle',
              renderer='templates/instantarticle.html')
 class InstantArticle(Article):
+
+    @zeit.web.reify
+    def authors(self):
+        return super(InstantArticle, self).authors or [{'name': 'ZEIT ONLINE'}]
 
     @zeit.web.reify
     def wrap_in_cdata(self):
