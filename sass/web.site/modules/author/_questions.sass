@@ -1,7 +1,8 @@
 .author-questions
     @extend %author-copytext
     +transition(max-height .5s)
-    margin-top: remify(30px)
+    clear: left
+    margin-bottom: remify(30px)
     overflow: hidden
     position: relative
 
@@ -11,6 +12,8 @@
 
     &__text
         margin: 0 0 .75em
+        &:last-child
+            margin: 0
 
     &--wrapped
         +text-wrapper($content: '+ mehr')

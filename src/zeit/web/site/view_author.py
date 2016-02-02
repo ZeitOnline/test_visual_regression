@@ -77,6 +77,10 @@ class Author(zeit.web.core.view.Base):
         return ''
 
     @zeit.web.reify
+    def sharing_image(self):
+        return self.context.image_group
+
+    @zeit.web.reify
     def comment_counts(self):
         return {}
 

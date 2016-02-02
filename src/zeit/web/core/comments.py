@@ -509,8 +509,8 @@ def get_user_comments(author, page=1, rows=6, sort="DESC"):
 
     if not getattr(author, 'email'):
         return
-    uri = '{}/usercommentsxml/{}/{}/{}/{}'.format(
-        conf.get('agatho_host', ''), author.email, (page-1), rows, sort)
+    uri = '{}/agatho/usercommentsxml/{}/{}/{}/{}'.format(
+        conf.get('agatho_host', ''), author.email, (page - 1), rows, sort)
 
     timeout = float(conf.get('community_host_timeout_secs', 5))
 

@@ -2,12 +2,12 @@
 	<meta name="twitter:site" content="@zeitonline">
 	<meta name="twitter:creator" content="{% block twitter_creator %}@zeitonline{% endblock %}">
 	<meta name="twitter:title" content="{{ view.social_pagetitle }}">
-	<meta name="twitter:description" content="{{ view.subtitle }}">
+	<meta name="twitter:description" content="{{ view.social_description }}">
 	<meta property="og:site_name" content="{% block og_site_name %}ZEIT ONLINE{% endblock %}">
 	<meta property="fb:admins" content="595098294">
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="{{ view.social_pagetitle }}">
-	<meta property="og:description" content="{% block og_description %}{{ view.subtitle or '' }}{% endblock %}">
+	<meta property="og:description" content="{{ view.social_description }}">
 	<meta property="og:url" content="{{ view.og_url }}">
 {% set image = get_variant(view.sharing_image, 'wide') if view.sharing_image else None %}
 {% if image %}

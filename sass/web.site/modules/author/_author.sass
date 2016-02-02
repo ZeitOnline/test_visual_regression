@@ -15,13 +15,24 @@
 			font-size: em(15px)
 
 .author-profile
-	position: relative
-	margin-bottom: remify(40px)
+	+pie-clearfix
+	margin-bottom: remify(10px)
 	+respond-min($break-tablet-min)
-		max-width: remify(480px)
-		padding-right: remify(40px)
+		max-width: remify(440px)
+		&__intro
+			float: left
 	+respond-min($break-desktop-min)
-		max-width: remify(520px)
+		max-width: remify(480px)
+
+.author-separator
+	margin: remify(0 (-$page-padding) 30px)
+	border-width: 1px 0 0 0
+	border-style: solid
+	border-color: $color-border
+	&:first-child
+		display: none
+	+respond-min($break-areas)
+		display: none
 
 %author-copytext
 	font-size: em(17px)
