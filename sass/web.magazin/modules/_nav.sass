@@ -19,6 +19,9 @@ $nav__border-color: $grey--mid
 $nav__section-border: 1px solid $nav__border-color
 $icon-avatar-std-size: em(32px)
 
+$icon-arrow-down-width: 8.735px
+$icon-arrow-down-heigth: 4.026px
+
 
 .main-nav
     font-family: $font-tabletgothic
@@ -176,6 +179,16 @@ $icon-avatar-std-size: em(32px)
 .main-nav__section__text
     font-size: $font-s
     letter-spacing: 1px
+    margin-right: em(26px - $icon-arrow-down-width)
+
+.main-nav__icon-arrow-down
+    display: none
+    fill: currentColor
+    vertical-align: middle
+    width: em($icon-arrow-down-width)
+    height: em($icon-arrow-down-heigth)
+    +respond-min($nav__break__full-menu)
+        display: inline
 
 .main-nav__section__content
     display: none
@@ -386,12 +399,6 @@ $icon-avatar-std-size: em(32px)
         width: 48%
         &:nth-child(2n)
             padding-left: $small
-    .main-nav__section__trigger
-        padding-right: em(26px)
-        background-position: right center
-    +respond-max($nav__break__full-menu)
-        .main-nav__section__trigger
-            background: none
 
 
 //*********
@@ -423,11 +430,7 @@ $icon-avatar-std-size: em(32px)
             padding: 0
         .main-nav__section__trigger
             +hide-text
-            background-position: center center
             width: em(18px)
-    +respond-max($nav__break__full-menu)
-        .main-nav__section__trigger
-            background: none
 
 
 //************
