@@ -4,7 +4,7 @@ Change log for zeit.web
 2.55 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Handle images without copyrights in instantarticle template
 
 
 2.54 (2016-02-01)
