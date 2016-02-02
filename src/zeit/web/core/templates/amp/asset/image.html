@@ -1,17 +1,15 @@
 {% if image and not is_image_expired(image) %}
 
-	{%- set width = 660 %}
+	{%- set width = 820 %}
 	{%- set height = (width / image.ratio) | int %}
 
 	{# TRASHME Rather crude bitblt/zci image api switch #}
 	{%- if image is variant %}
-		{% set source = request.image_host + image.path %}
-		{% set fallback_source = request.image_host + image.fallback_path %}
+		{% set source = request.image_host + image.path | replace(' ', '%20') %}
 		{% set src = "%s__%sx%s" | format(source, width, height) %}
 		{% set widths = [320, 480, 660, 820] %}
 	{%- else %}
-		{% set source = image | default_image_url %}
-		{% set fallback_source = source %}
+		{% set source = image | default_image_url | replace(' ', '%20') %}
 		{% set src = source %}
 		{% set widths = [] %}
 	{%- endif %}
@@ -26,8 +24,8 @@
 		<figure class="{{ 'figure' | with_mods(block.layout.display_mode if block and block.layout) }}"{% block itemprop %}{% endblock %} itemscope itemtype="http://schema.org/ImageObject">
 			{% block media -%}
 			<amp-img
-				src="{{ src | replace(' ', '%20') }}"
-				srcset="{% for w in widths %}{{ "%s__%sx%s %sw" | format(source | replace(' ', '%20'), w, (w / image.ratio) | int, w) }}{{ ", " if not loop.last }}{% endfor %}"
+				src="{{ src }}"
+				srcset="{% for w in widths %}{{ "%s__%sx%s %sw" | format(source, w, (w / image.ratio) | int, w) }}{{ ", " if not loop.last }}{% endfor %}"
 				alt="{{ image.alt }}"
 				width="{{ width }}"
 				height="{{ height }}"
@@ -39,7 +37,7 @@
 				{%- endfor %}"
 				itemprop="contentUrl"></amp-img>
 			{% endblock media -%}
-			<meta itemprop="url" content="{{ fallback_source | replace(' ', '%20') }}">
+			<meta itemprop="url" content="{{ src }}">
 			<meta itemprop="width" content="{{ width }}">
 			<meta itemprop="height" content="{{ height }}">
 

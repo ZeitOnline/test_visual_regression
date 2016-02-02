@@ -10,7 +10,7 @@
 		<div class="nextread__container article__item">
 			<h2 class="nextread__heading" itemprop="headline">
 				<span class="nextread__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
-				{%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">: </span>{% endif %}
+				{%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">: </span>{% endif -%}
 				<span class="nextread__title">{{ teaser.teaserTitle or teaser.title }}</span>
 			</h2>
 			<div class="nextread__metadata">
