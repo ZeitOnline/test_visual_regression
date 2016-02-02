@@ -36,6 +36,8 @@ Change log for zeit.web
 
 - ZON-2665: Centralize Module Class and integrate ZMO Buzbbox
 
+- FIX: Use correct URL to retrieve an author's comments
+
 - FIX: Determine ressort from navigation properly (bugsnag)
 
 - ZON-2688: Update C1 headers and include tracking script
