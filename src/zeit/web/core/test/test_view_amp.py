@@ -44,9 +44,9 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
     assert image.get('itemtype') == 'http://schema.org/ImageObject'
     assert image.cssselect('[itemprop="url"]')[0].get('content') == (
         testserver.url + '/zeit-online/image/'
-        'filmstill-hobbit-schlacht-fuenf-hee/wide__822x462')
-    assert image.cssselect('[itemprop="width"]')[0].get('content') == '660'
-    assert image.cssselect('[itemprop="height"]')[0].get('content') == '371'
+        'filmstill-hobbit-schlacht-fuenf-hee/wide__820x461')
+    assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
+    assert image.cssselect('[itemprop="height"]')[0].get('content') == '461'
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyrightHolder.get('itemtype') == 'http://schema.org/Person'
     person = copyrightHolder.cssselect('[itemprop="name"]')[0]
@@ -59,6 +59,38 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
     assert author.cssselect('[itemprop="name"]')[0].text == 'Jochen Wegner'
     assert author.cssselect('[itemprop="url"]')[0].get('href') == (
         testserver.url + '/autoren/W/Jochen_Wegner/index')
+
+
+def test_amp_nextread_contains_required_microdata(testbrowser, testserver):
+    browser = testbrowser('/amp/zeit-online/article/simple-nextread')
+
+    article = browser.cssselect('article.nextread')[0]
+    mainEntityOfPage = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
+    headline = article.cssselect('[itemprop="headline"]')[0]
+    datePublished = article.cssselect('[itemprop="datePublished"]')[0]
+    dateModified = article.cssselect('[itemprop="dateModified"]')[0]
+    author = article.cssselect('[itemprop="author"]')[0]
+    image = article.cssselect('[itemprop="image"]')[0]
+
+    # check Article
+    assert article.get('itemtype') == 'http://schema.org/Article'
+    assert mainEntityOfPage.get('href') == (
+        testserver.url + '/zeit-online/article/zeit')
+    assert headline.text_content().strip() == (
+        'Crystal Meth: Nancy braucht was Schnelles')
+    assert datePublished.get('datetime') == '2015-02-12T04:32:17+01:00'
+    assert dateModified.get('datetime') == '2015-02-15T18:18:50+01:00'
+    assert author.get('itemtype') == 'http://schema.org/Person'
+    assert author.cssselect('[itemprop="name"]')[0].text == 'Dorit Kowitz'
+    assert author.cssselect('[itemprop="url"]')[0].get('href') == (
+        testserver.url + '/autoren/K/Dorit_Kowitz')
+
+    # check ImageObject
+    assert image.get('itemtype') == 'http://schema.org/ImageObject'
+    assert image.cssselect('[itemprop="url"]')[0].get('content') == (
+        testserver.url + '/gesellschaft/2015-02/crystal-meth-nancy-schmidt/cinema__820x351')
+    assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
+    assert image.cssselect('[itemprop="height"]')[0].get('content') == '351'
 
 
 def test_amp_shows_breaking_news_banner(testbrowser):
