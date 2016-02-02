@@ -7,6 +7,16 @@ Change log for zeit.web
 - Nothing changed yet.
 
 
+2.54.1 (2016-02-02)
+-------------------
+
+- FIX: Remove tautologous GTM include in ZMO template
+
+- FIX: Handle images without copyrights in instantarticle template
+
+- FIX: Use correct URL to retrieve an author's comments
+
+
 2.54 (2016-02-01)
 -----------------
 
