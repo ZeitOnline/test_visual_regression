@@ -47,7 +47,7 @@ class MostreadBuzzbox(Buzzbox):
         self += self.reach.get_views(section=self.ressort)
         self.identification = 'buzz-mostread'
         self.icon = 'buzz-read'
-        self.score_pattern = ['Keine Leser', '{} Leser']
+        self.score_pattern = ['Keine Aufrufe', '{} Aufruf', '{} Aufrufe']
 
 
 @zeit.web.register_module('mostcommented')

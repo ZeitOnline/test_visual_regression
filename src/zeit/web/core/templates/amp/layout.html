@@ -77,9 +77,9 @@
 					<div class="summary" itemprop="description">
 						{{ view.subtitle }}
 					</div>
-					{%- set byline = view.context | get_byline %}
+					{%- set byline = view.context | get_byline('main') %}
 					{% if byline | length -%}
-					<div class="byline" itemscope itemtype="http://schema.org/Person" itemprop="author">
+					<div class="byline">
 						{% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
 					</div>
 					{% endif -%}

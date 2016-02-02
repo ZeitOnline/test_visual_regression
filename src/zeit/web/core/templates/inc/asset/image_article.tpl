@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/asset/image_linked.tpl" -%}
+{%- extends "zeit.web.core:templates/inc/asset/image_linked.tpl" -%}
 
 {% set module_layout = 'article' %}
 {% set href = image.href %}

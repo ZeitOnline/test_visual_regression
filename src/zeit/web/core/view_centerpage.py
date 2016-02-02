@@ -8,7 +8,7 @@ import zeit.content.cp.interfaces
 import zeit.web.core.view
 
 
-class Centerpage(zeit.web.core.view.Base):
+class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     advertising_enabled = True
 

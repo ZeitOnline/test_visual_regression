@@ -10,7 +10,7 @@ import zeit.web.core.byline
 
 def test_article_byline_should_be_represented_as_a_nested_tuple(application):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
-    byline = zeit.web.core.byline.get_byline({}, article)
+    byline = zeit.web.core.byline.get_byline(article)
     assert byline.context == article
     assert byline == [
         ('text', u'Ein Kommentar'),
@@ -29,7 +29,7 @@ def test_article_byline_should_be_represented_as_a_nested_tuple(application):
 def test_quiz_byline_should_be_represented_as_a_nested_tuple(application):
     quiz = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/quiz/quiz-workaholic')
-    byline = zeit.web.core.byline.get_byline({}, quiz)
+    byline = zeit.web.core.byline.get_byline(quiz)
     assert byline.context == quiz
     assert byline == [
         ('text', u'Von'),
