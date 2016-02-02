@@ -142,8 +142,7 @@ module.exports = function(grunt) {
                 jshintrc: project.sourceDir + '.jshintrc',
                 ignores: [
                     project.sourceDir + 'javascript/libs/**/*',
-                    project.sourceDir + 'javascript/vendor/**/*',
-                    project.sourceDir + 'javascript/documentation/**/*'
+                    project.sourceDir + 'javascript/vendor/**/*'
                 ]
             },
             dist: {
@@ -268,6 +267,12 @@ module.exports = function(grunt) {
                 cwd: project.sourceDir + 'sass/web.site/svg-amp',
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.site/svg-amp/_minified'
+            },
+            framebuilder: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.site/svg-framebuilder',
+                src: [ '*.svg' ],
+                dest: project.sourceDir + 'sass/web.site/svg-framebuilder/_minified'
             }
         },
 
@@ -338,6 +343,10 @@ module.exports = function(grunt) {
                 src: '<%= svgmin.site.dest %>/*.svg',
                 dest: project.codeDir + 'css/web.site/icons.svg'
             },
+            framebuilder: {
+                src: '<%= svgmin.framebuilder.dest %>/*.svg',
+                dest: project.codeDir + 'css/web.site/framebuilder.svg'
+            },
             magazin: {
                 src: '<%= svgmin.magazin.dest %>/*.svg',
                 dest: project.codeDir + 'css/web.magazin/icons.svg'
@@ -357,11 +366,53 @@ module.exports = function(grunt) {
         watch: {
             js: {
                 files: [ '<%= jshint.dist.src %>', '<%= jshint.options.ignores %>' ],
-                tasks: [ 'lint', 'requirejs:dev' ]
+                tasks: [ 'lint', 'requirejs:dev' ],
+                options: {
+                    interrupt: true,
+                    // needed to call `grunt watch` from outside zeit.web
+                    // the watch task runs child processes for each triggered task
+                    cwd: {
+                        files: __dirname,
+                        spawn: __dirname
+                    }
+                }
             },
             compass: {
                 files: [ '<%= compass.options.sassDir %>' + '/**/*.s{a,c}ss' ],
-                tasks: [ 'compass:dev' ]
+                tasks: [ 'compass:dev' ],
+                options: {
+                    interrupt: true,
+                    // needed to call `grunt watch` from outside zeit.web
+                    // the watch task runs child processes for each triggered task
+                    cwd: {
+                        files: __dirname,
+                        spawn: __dirname
+                    }
+                },
+            },
+            icons: {
+                files: [ '<%= svgmin.magazin.cwd %>/*.svg' ],
+                tasks: [ 'icons' ],
+                options: {
+                    // needed to call `grunt watch` from outside zeit.web
+                    // the watch task runs child processes for each triggered task
+                    cwd: {
+                        files: __dirname,
+                        spawn: __dirname
+                    }
+                }
+            },
+            symbols: {
+                files: [ '<%= svgmin.site.cwd %>/*.svg' ],
+                tasks: [ 'symbols' ],
+                options: {
+                    // needed to call `grunt watch` from outside zeit.web
+                    // the watch task runs child processes for each triggered task
+                    cwd: {
+                        files: __dirname,
+                        spawn: __dirname
+                    }
+                }
             },
             livereload: {
                 // This target doesn't run any tasks
@@ -372,14 +423,6 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true
                 }
-            },
-            icons: {
-                files: [ '<%= svgmin.magazin.cwd %>/*.svg' ],
-                tasks: [ 'icons' ]
-            },
-            symbols: {
-                files: [ '<%= svgmin.site.cwd %>/*.svg' ],
-                tasks: [ 'symbols' ]
             },
             config: {
                 files: [

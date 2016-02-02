@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<author>
+  <firstname xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Zacharias</firstname>
+  <lastname xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Zacharakis</lastname>
+  <display_name xmlns:py="http://codespeak.net/lxml/objectify/pytype">Zacharias Zacharakis</display_name>
+  <title xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+  <vgwortid xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="int">2602898</vgwortid>
+  <email xmlns:py="http://codespeak.net/lxml/objectify/pytype">zacharias.zacharakis@zeit.de</email>
+  <status xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Online</status>
+  <summary xmlns:py="http://codespeak.net/lxml/objectify/pytype">Redakteur in den Ressorts Wirtschaft, Karriere, Mobilität, ZEIT ONLINE.</summary>
+  <topiclink_label_1 xmlns:py="http://codespeak.net/lxml/objectify/pytype">Unternehmen</topiclink_label_1>
+  <topiclink_label_2 xmlns:py="http://codespeak.net/lxml/objectify/pytype">Griechenland</topiclink_label_2>
+  <topiclink_label_3 xmlns:py="http://codespeak.net/lxml/objectify/pytype">USA</topiclink_label_3>
+  <topiclink_url_3 xmlns:py="http://codespeak.net/lxml/objectify/pytype">http://www.zeit.de/thema/usa</topiclink_url_3>
+  <topiclink_url_2 xmlns:py="http://codespeak.net/lxml/objectify/pytype">http://www.zeit.de/thema/griechenland-krise</topiclink_url_2>
+  <topiclink_url_1 xmlns:py="http://codespeak.net/lxml/objectify/pytype">http://www.zeit.de/wirtschaft/unternehmen/index</topiclink_url_1>
+  <twitter xmlns:py="http://codespeak.net/lxml/objectify/pytype">zacys</twitter>
+  <biography xmlns:py="http://codespeak.net/lxml/objectify/pytype">Seit Mai 2011 Redakteur von ZEIT ONLINE. Davor Korrespondent für "Financial Times Deutschland" und "NZZ am Sonntag" in New York. Eingestiegen in das Nachrichtengeschäft bei Associated Press in Hamburg. Ausbildung an der Berliner Journalistenschule und der Universität Köln.</biography>
+  <question id="drive">Wahrheit</question>
+  <question id="origin">Erster Job in der Medienbranche: Zeitungsausträger.</question>
+  <question id="formative">(Bisher) sechs Jahre Griechenland-Krise</question>
+  <question id="hobby">Schwimmen, Radfahren, Lesen</question>
+  <question id="person">Im griechischen Chaossommer 2015 sprach ich nur einen Tag nach der Bankenschließung mit einem der hochrangisten Banker des Landes. Die Krawatte saß schief, das Hemd steckte notdürftig in der Hose. Er sagte mir: "Ich bin wirklich überrascht, dass alles so ruhig abläuft und wir noch keinen Toten vor den Bankautomaten haben."</question>
+  <question id="research">Irgendwann einmal beschloss ich, Deutscher zu werden. Und darüber einen Text zu schreiben. (Oder war es umgekehrt?)</question>
+  <favourites>
+    <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/gesellschaft/2013-02/einbuergerung-integration-doppelpass" year="2013" issue="9" ressort="Gesellschaft" contenttype="article" publication-date="" expires="">
+      <supertitle py:pytype="str">Integration</supertitle>
+      <title py:pytype="str">Der doppelte Staatsbürger</title>
+      <text py:pytype="str">Wie geht das, gleichzeitig Grieche und Deutscher sein? Unser Autor hat sich einbürgern lassen und ist dabei auf viele Widersprüche gestoßen, auch bei sich selbst.</text>
+      <description py:pytype="str">Wie geht das, gleichzeitig Grieche und Deutscher sein? Unser Autor hat sich einbürgern lassen und ist dabei auf viele Widersprüche gestoßen, auch bei sich selbst.</description>
+      <byline xsi:nil="true"/>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/politik/deutschland/2013-02/einbuergerung-2/" type="jpg" title="Einbürgerung" align="left" publication-date="" expires="">
+        <bu py:pytype="str">Internationale Beflaggung während der Fußball-EM an einem Wohnhaus im Berliner Stadtteil Friedrichshain</bu>
+        <copyright py:pytype="str">© Michael Gottschalk/AFP/Getty Images</copyright>
+      </image>
+    </reference>
+    <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2015/12/griechenland-reparationen-weltkrieg-kalavryta" year="2015" issue="12" ressort="Politik" contenttype="article" publication-date="2015-04-02T01:49:21+00:00" expires="" author="Zacharias Zacharakis">
+      <supertitle py:pytype="str">Griechen in Deutschland</supertitle>
+      <title py:pytype="str">Hör zu, Onkel Hans</title>
+      <text py:pytype="str">Seit fünf Jahren versuche ich, den Deutschen zu erklären, wie die Griechen sie sehen – neuerdings bekomme ich immer mehr Hass dabei zu spüren.</text>
+      <description py:pytype="str">Seit fünf Jahren versuche ich, den Deutschen zu erklären, wie die Griechen sie sehen – neuerdings bekomme ich immer mehr Hass dabei zu spüren.</description>
+      <byline py:pytype="str">von Zacharias Zacharakis</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/gesellschaft/2015-03/athen-flagge/" type="jpg" alt="Eine griechische Flagge weht von einem Balkon in Athen" align="left" publication-date="" expires="">
+        <bu py:pytype="str">Eine griechische Flagge weht von einem Balkon in Athen</bu>
+        <copyright py:pytype="str">© Kostas Tsironis/Bloomberg via Getty Images</copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Zacharias Zacharakis</display_name>
+      </author>
+    </reference>
+    <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wirtschaft/2015-10/deutsche-post-abrufkraefte-briefzentren" year="2015" issue="41" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" genre="analyse" author="Zacharias Zacharakis">
+      <supertitle py:pytype="str">Deutsche Post</supertitle>
+      <title py:pytype="str">Ein Heer von Tagelöhnern</title>
+      <text py:pytype="str">Die Post beschäftigt Tausende Mitarbeiter mit zweifelhaftem Status. Jeden Tag unterschreiben sie einen neuen Arbeitsvertrag, teilweise Hunderte über viele Jahre hinweg.</text>
+      <description py:pytype="str">Die Post beschäftigt Tausende Mitarbeiter mit zweifelhaftem Status. Jeden Tag unterschreiben sie einen neuen Arbeitsvertrag, teilweise Hunderte über viele Jahre hinweg.</description>
+      <byline xsi:nil="true"/>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/wirtschaft/2015-10/briefzentrum-post/" type="jpg" title="Briefzentrum Post" align="left" publication-date="" expires="2016-01-19T17:33:01+00:00">
+        <bu py:pytype="str">Ein Briefzentrum der Deutschen Post</bu>
+        <copyright py:pytype="str">© Fredrik von Erichsen/dpa</copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Zacharias Zacharakis</display_name>
+      </author>
+    </reference>
+  </favourites>
+  <external xmlns:py="http://codespeak.net/lxml/objectify/pytype">false</external>
+  <image_group xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/zacharias-zacharakis/" type="" align="left" publication-date="" expires="">
+    <bu xsi:nil="true"/>
+    <copyright py:pytype="str">© Jakob Börner</copyright>
+  </image_group>
+</author>

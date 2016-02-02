@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/asset/image_teaser.tpl" -%}
+{%- extends "zeit.web.core:templates/inc/asset/image_teaser.tpl" -%}
 
 {% if area.referenced_cp is not none %}
     {% set teaser = area.referenced_cp %}

@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/asset/image.tpl" -%}
+{%- extends "zeit.web.core:templates/inc/asset/image.tpl" -%}
 
 {% block media_block_additional_data_attributes %}
     {% set mobile_image = get_image(module, teaser, variant_id='wide') %}

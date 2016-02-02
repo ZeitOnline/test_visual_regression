@@ -19,7 +19,7 @@
 				{% if image %}
 					{% set href = atom.uniqueId | create_url %}
 					{% set module_layout = blockname %}
-					{% include "zeit.web.site:templates/inc/asset/image_linked.tpl" %}
+					{% include "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
 				{% endif %}
 			</div>
 		</div>

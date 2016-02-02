@@ -50,6 +50,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Kultur</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Literatur</attribute>
   <attribute ns="DAV:" name="resourcetype"/>
   <attribute ns="DAV:" name="creationdate">2013-12-20T01:57:23Z</attribute>
   <attribute ns="DAV:" name="getcontentlength">11622</attribute>
