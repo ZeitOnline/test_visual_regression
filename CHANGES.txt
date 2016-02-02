@@ -4,7 +4,7 @@ Change log for zeit.web
 2.55 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2602: Add Nextread and Verlags-Nextread to AMPages
 
 
 2.54.1 (2016-02-02)
