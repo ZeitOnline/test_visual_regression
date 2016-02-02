@@ -88,9 +88,19 @@ def test_amp_nextread_contains_required_microdata(testbrowser, testserver):
     # check ImageObject
     assert image.get('itemtype') == 'http://schema.org/ImageObject'
     assert image.cssselect('[itemprop="url"]')[0].get('content') == (
-        testserver.url + '/gesellschaft/2015-02/crystal-meth-nancy-schmidt/cinema__820x351')
+        testserver.url + '/gesellschaft/2015-02/crystal-meth-nancy-schmidt/'
+        'cinema__820x351')
     assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
     assert image.cssselect('[itemprop="height"]')[0].get('content') == '351'
+
+
+def test_amp_shows_nextread_advertising(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/simple-verlagsnextread')
+    nextad = browser.cssselect('aside.nextad')[0]
+    assert nextad.cssselect('.nextad__label')[0].text == 'Verlagsangebot'
+    assert len(nextad.cssselect('.nextad__title'))
+    assert len(nextad.cssselect('.nextad__text'))
+    assert len(nextad.cssselect('.nextad__button'))
 
 
 def test_amp_shows_breaking_news_banner(testbrowser):
