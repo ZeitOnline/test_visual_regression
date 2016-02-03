@@ -12,20 +12,17 @@ $cp_lead-full-height: em(550px)
         margin-bottom: 0
 
     &__asset
-        @extend %teaser-large-asset
-
-    &--dark
-        @extend %cp_shadow--dark
+        @extend %teaser-large__asset
 
     &--light
-        @extend %cp_shadow--light
+        @extend %teaser--light
+        a
+            +link-colors($black, $black, $black, $black, $black)
 
-    &__title__wrap
-        @extend %teaser-large__title__wrap
+    &__text
+        @extend %teaser-large__text
         text-align: center
         padding: $thin 15% $medium 15%
-        &--light
-            color: $black
 
     &__title
         @extend %teaser-large__title
@@ -33,5 +30,8 @@ $cp_lead-full-height: em(550px)
     &__subtitle
         @extend %teaser-large__subtitle
 
-    &__supertitle
-        @extend %teaser-large__supertitle
+    &__kicker
+        @extend %teaser-large__kicker
+
+    &__comments
+        @extend %teaser__comments
