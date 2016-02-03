@@ -580,7 +580,7 @@ def test_get_module_filter_should_correctly_extract_cpextra_id(application):
 
     block.cpextra = 'n/a'
     module = zeit.web.core.template.get_module(block)
-    assert isinstance(module, zeit.web.site.module.Module)
+    assert isinstance(module, zeit.web.core.centerpage.Module)
     assert module.layout.id == 'n/a'
 
     block.cpextra = 'search-form'

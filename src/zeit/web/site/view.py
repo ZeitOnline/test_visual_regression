@@ -127,7 +127,7 @@ class Base(zeit.web.core.view.Base):
             item = next((items[key].text, key) for key in items.keys() if (
                         self.ressort in key))
             if self.sub_ressort != '' and len(items[item[1]]):
-                items = items[item[1]].items()
+                items = items[item[1]]
                 item = next((items[key].text, key) for key in items.keys() if (
                             self.sub_ressort in key))
         except StopIteration:
@@ -198,7 +198,9 @@ class CommentForm(zeit.web.core.view.Content):
 @pyramid.view.view_config(
     route_name='framebuilder',
     renderer='templates/framebuilder/framebuilder.html')
-class FrameBuilder(Base):
+class FrameBuilder(zeit.web.core.view.CeleraOneMixin, Base):
+
+    inline_svg_icons = True
 
     def __init__(self, context, request):
         super(FrameBuilder, self).__init__(context, request)

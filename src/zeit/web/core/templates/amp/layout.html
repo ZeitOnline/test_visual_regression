@@ -3,8 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<title>{{ view.pagetitle }}</title>
-	<link rel="canonical" href="{{ view.content_url }}">
+    <meta name="description" content="{{ view.pagedescription }}">
+    {% if view.meta_keywords -%}
+        <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
+    {% endif -%}
+    <meta name="robots" content="{{ view.meta_robots }}">
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+	<link rel="canonical" href="{{ view.content_url }}">
+    {% if view.syndication_source -%}
+        <link rel="syndication-source" href="{{ view.syndication_source }}">
+    {% endif -%}
     {%- include "zeit.web.core:templates/inc/meta/date.html" %}
 	{%- block sharing_meta %}
 		{%- include "zeit.web.core:templates/inc/meta/sharing.html" -%}
@@ -69,9 +77,9 @@
 					<div class="summary" itemprop="description">
 						{{ view.subtitle }}
 					</div>
-					{%- set byline = view.context | get_byline %}
+					{%- set byline = view.context | get_byline('main') %}
 					{% if byline | length -%}
-					<div class="byline" itemscope itemtype="http://schema.org/Person" itemprop="author">
+					<div class="byline">
 						{% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
 					</div>
 					{% endif -%}
@@ -123,7 +131,7 @@
 		</footer>
 
 		{% include "zeit.web.core:templates/inc/tracking/webtrekk_amp.html" %}
-		<amp-pixel src="//cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}&amp;rand=$RANDOM"></amp-pixel>
+		<amp-pixel src="//cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}&amp;r=DOCUMENT_REFERRER&amp;rand=RANDOM"></amp-pixel>
 
 	</div>
 </body>

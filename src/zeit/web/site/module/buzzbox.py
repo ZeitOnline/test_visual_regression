@@ -5,7 +5,6 @@ import zope.component
 import zeit.content.cp.interfaces
 
 import zeit.web
-import zeit.web.site.module
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 
@@ -13,7 +12,7 @@ import zeit.web.core.interfaces
 log = logging.getLogger(__name__)
 
 
-class Buzzbox(zeit.web.site.module.Module, list):
+class Buzzbox(zeit.web.core.centerpage.Module, list):
 
     header = None
     score_factor = 1
@@ -48,7 +47,7 @@ class MostreadBuzzbox(Buzzbox):
         self += self.reach.get_views(section=self.ressort)
         self.identification = 'buzz-mostread'
         self.icon = 'buzz-read'
-        self.score_pattern = ['Keine Leser', '{} Leser']
+        self.score_pattern = ['Keine Aufrufe', '{} Aufruf', '{} Aufrufe']
 
 
 @zeit.web.register_module('mostcommented')
