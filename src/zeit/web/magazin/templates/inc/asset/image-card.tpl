@@ -1,5 +1,5 @@
-{%- extends "zeit.web.core:templates/inc/asset/image_linked.tpl" -%}
+{%- extends "zeit.web.core:templates/inc/asset/image.tpl" -%}
 
+{% set module_layout = 'card' %}
 {% set image = get_image(module, teaser, fallback=False) %}
-{% set href = teaser | create_url | append_campaign_params %}
 {% set media_caption_additional_class = 'figcaption--hidden' %}
