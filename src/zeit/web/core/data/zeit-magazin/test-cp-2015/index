@@ -110,6 +110,25 @@
               <block href="http://xml.zeit.de/artikel/02" uniqueId="http://xml.zeit.de/artikel/02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
               </block>
             </container>
+            <!-- card-picture -->
+            <container cp:type="teaser" module="zmo-card-picture" hide-dupes="True" visible="True" cp:__name__="id-381c8f6a-dc39-40e3-a919-09aa41eaa7c2" background_color="e7ec5c">
+              <block href="http://xml.zeit.de/zeit-magazin/test-cp/card-picture" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/card-picture" year="2014" issue="19" ressort="zeit-magazin" contenttype="article" publication-date="" expires="" author="Maria Exner" date-last-modified="2014-05-05T09:37:35+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-05-05T09:37:21.413549+00:00">
+                <supertitle py:pytype="str">spitzmarke</supertitle>
+                <teaser_supertitle py:pytype="str">Bild</teaser_supertitle>
+                <title py:pytype="str">Teaserüberschrift</title>
+                <text py:pytype="str">Mein Teasertext</text>
+                <description py:pytype="str">Mein Teasertext</description>
+                <byline xsi:nil="true"/>
+                <breadcrumb_title xsi:nil="true"/>
+                <image base-id="http://xml.zeit.de/zeit-magazin/test-cp/card-picture-bildergruppe/" type="png" align="left" publication-date="" expires="">
+                  <bu xsi:nil="true"/>
+                  <copyright py:pytype="str">© Zeit</copyright>
+                </image>
+                <author href="http://xml.zeit.de/autoren/E/Maria_Exner/index" publication-date="" expires="">
+                  <display_name py:pytype="str">Maria Exner</display_name>
+                </author>
+              </block>
+            </container>
         </region>
     </cluster>
     <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff7" visible="True" kind="solo">
