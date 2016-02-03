@@ -1,18 +1,5 @@
 {#
-
 Default teaser template to inherit from.
-
-Available attributes:
-    cp
-    lama
-    module
-    teaser
-
-All calling templates have to provide:
-    subtitle: to define display of subtitle ('true'/ 'false')
-    format: to define type of button (eg. 'small'/ 'large'/ 'large-photo'/ 'gallery'/ 'mtb'/ 'default')
-    supertitle: to define display of supertitle ('true'/ 'false')
-    icon: define display of optional asset icon ('true'/ 'false')
 #}
 
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
