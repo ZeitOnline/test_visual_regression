@@ -4,23 +4,26 @@
     margin-top: $compact
     padding-top: 0
 
-    &__image
-        @extend %teaser__image
+    &__asset
+        @extend %teaser__asset
         height: $cp_button__image-height--large
         +respond-min($break-2)
             height: $cp_button__image-height--large
 
-    &__title__wrap
-        @extend %teaser__title__wrap
+    &__text
+        @extend %teaser__text
         padding: 0 $compact 0 $compact
         +respond-min($break-2)
             padding: 0 0 0 0
 
-    &__supertitle
-        @extend %teaser__supertitle
+    &__kicker
+        @extend %teaser__kicker
 
     &__title
         @extend %teaser__title
 
     &__subtitle
         @extend %teaser__subtitle
+
+    &__comments
+        @extend %teaser__comments

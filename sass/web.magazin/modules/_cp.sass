@@ -29,42 +29,6 @@ $icon-galerie-icon-white-width: em(40px)
 		font-weight: normal
 		margin: 0
 
-
-//standard link classes for cp
-%cp_link--light
-	a
-		+link-colors($black, $black, $black, $black, $black)
-
-%cp_link--dark
-	a
-		+link-colors($white, $white, $white, $white, $white)
-
-//standart shadow classes for cp
-%cp_shadow--dark
-	+fake-box-shadow-inset($black, 0.8)
-
-%cp_shadow--darker
-	+fake-box-shadow-inset($black, 0.8, 0.1)
-
-%cp_shadow--light
-	+fake-box-shadow-inset($white)
-
-//comments
-// please stick to pixel values here, as there is an issue
-// with ems in Android
-.cp_comment__count__wrap
-	font-size: $little
-	color: $white
-	position: absolute
-	text-align: center
-	padding-right: $micro--px
-	padding-top: $tiny--px
-	height: $cp_comment__count-height
-	width: $cp_comment__count-width
-	right: $little--px
-	top: $small--px
-	z-index: 2
-
 //icons
 .icon-galerie-icon-white
 	display: inline-block

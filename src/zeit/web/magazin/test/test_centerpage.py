@@ -51,3 +51,16 @@ def test_get_reaches_from_centerpage_view(application):
     assert buzz_views == 69167
     assert buzz_facebook == 408
     assert buzz_comments == 461
+
+
+def test_teaser_square_large_has_expected_structure(testbrowser):
+    browser = testbrowser('/centerpage/lebensart')
+    wrap = browser.cssselect('.teaser-square-large')
+    assert len(wrap) != 0
+    for element in wrap:
+        text_wrap = element.cssselect('.teaser-square-large__text')
+        link_wrap = element.cssselect('a')
+        image_wrap = element.cssselect('.teaser-square-large__asset')
+        assert len(text_wrap) != 0
+        assert len(link_wrap) == 1
+        assert len(image_wrap) != 0

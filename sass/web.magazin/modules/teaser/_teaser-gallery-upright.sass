@@ -7,7 +7,7 @@
     display: block
     & a > .scaled-image
         height: $cp_button-gallery-height
-        @extend %cp_shadow--dark
+        @extend %teaser--dark
         img
             bottom: 0
             left: 0
@@ -17,19 +17,19 @@
             top: 0
             width: 100%
 
-    &__image
-        @extend %teaser__image
+    &__asset
+        @extend %teaser__asset
 
-    &__title__wrap
-        @extend %teaser__title__wrap
+    &__text
+        @extend %teaser__text
         bottom: 0
         padding: $tiny $petite $compact $petite
         position: absolute
         width: 100%
         z-index: 2
 
-    &__supertitle
-        @extend %teaser__supertitle
+    &__kicker
+        @extend %teaser__kicker
         margin-bottom: $tiny
         color: $white
         letter-spacing: 0
@@ -43,6 +43,9 @@
 
     &__subtitle
         @extend %teaser__subtitle
+
+    &__comments
+        @extend %teaser__comments
 
 .icon-galerie-icon-white
     position: absolute

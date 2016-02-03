@@ -3,6 +3,7 @@
 $teaser-large-video-max-width: em(1000px)
 
 %teaser-large
+    @extend %teaser--dark
     position: relative
     overflow: hidden
     margin-top: $small
@@ -14,9 +15,10 @@ $teaser-large-video-max-width: em(1000px)
     +respond-min($break-2)
         margin-top: $compact
         margin-bottom: $compact
+    a
+        +link-colors($white, $white, $white, $white, $white)
 
-%teaser-large__title__wrap
-    color: $white
+%teaser-large__text
     position: absolute
     overflow: hidden
     bottom: 0
@@ -41,13 +43,13 @@ $teaser-large-video-max-width: em(1000px)
     +respond-min($break-2)
         font-size: $font-ml
 
-%teaser-large__supertitle
+%teaser-large__kicker
     line-height: 2.25
     font-size: $font-s
     +respond-min($break-2)
         font-size: $font-ml
 
-%teaser-large-asset
+%teaser-large__asset
     overflow: hidden
     position: absolute
     top: 0

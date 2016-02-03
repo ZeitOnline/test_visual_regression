@@ -23,7 +23,7 @@ All calling templates have to provide:
 {%- set video = teaser | get_video_asset %}
 {% set area = area if area else '' %} {# TODO: remove as soon as we have access to real area data (AS)#}
 
-<article class="{% block layout %}teaser{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
+<article class="{% block layout %}teaser{% endblock %} {% block layout_shade %}{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
          {% block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
          data-clicktracking="{{ area.kind }}"
@@ -32,7 +32,7 @@ All calling templates have to provide:
     {% block comments %}
         {% if view.comment_counts[teaser.uniqueId] %}
         <a href="{{ teaser | create_url }}#show_comments">
-            <span class="cp_comment__count__wrap icon-comments-count">{{ view.comment_counts[teaser.uniqueId] }}</span>
+            <span class="{{ self.layout() }}__comments icon-comments-count">{{ view.comment_counts[teaser.uniqueId] }}</span>
         </a>
         {% endif %}
     {% endblock %}
@@ -44,16 +44,16 @@ All calling templates have to provide:
             {{ blocks.headervideo(video, self.layout() + '__asset ' + self.layout() + '__asset--' + self.layout_shade(), '') }}
         {%- elif image -%}
             {# call image asset #}
-            <div class="scaled-image {% block pixelperfect %}is-pixelperfect{% endblock %} {{ self.layout() }}__image {{ self.layout() }}__asset {% block layout_shade %}{% endblock %}">
+            <div class="scaled-image {% block pixelperfect %}is-pixelperfect{% endblock %} {{ self.layout() }}__asset">
                 {{ lama.insert_responsive_image(image) }}
             </div>
         {%- endif %}
 
-        <header class="{{ self.layout() }}__title__wrap {{ self.layout() }}__title__wrap--{{ self.layout_shade() }}">
+        <header class="{{ self.layout() }}__text">
             {% block icon %}{% endblock %}
             <h2>
                 {% block teaser_kicker %}
-                <div class="{{ self.layout() }}__supertitle">
+                <div class="{{ self.layout() }}__kicker">
                     {{ teaser.teaserSupertitle or teaser.supertitle }}
                 </div>
                 {% endblock %}

@@ -4,18 +4,15 @@
     padding-top: 135%
 
     &__asset
-        @extend %teaser-large-asset
-
-    &--dark
-        @extend %cp_shadow--dark
+        @extend %teaser-large__asset
 
     &--light
-        @extend %cp_shadow--light
+        @extend %teaser--light
+        a
+            +link-colors($black, $black, $black, $black, $black)
 
-    &__title__wrap
-        @extend %teaser-large__title__wrap
-        &--light
-            color: $black
+    &__text
+        @extend %teaser-large__text
 
     &__title
         @extend %teaser-large__title
@@ -23,5 +20,8 @@
     &__subtitle
         @extend %teaser-large__subtitle
 
-    &__supertitle
-        @extend %teaser-large__supertitle
+    &__kicker
+        @extend %teaser-large__kicker
+
+    &__comments
+        @extend %teaser__comments

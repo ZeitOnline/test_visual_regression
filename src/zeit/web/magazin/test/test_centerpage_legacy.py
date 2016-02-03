@@ -148,19 +148,6 @@ def test_cp_lead_areas_are_available(application):
     assert len(view.area_lead)
 
 
-def test_cp_leadteaser_has_expected_structure(testbrowser):
-    browser = testbrowser('/centerpage/lebensart')
-    wrap = browser.cssselect('.cp_leader')
-    assert len(wrap) != 0
-    for element in wrap:
-        text_wrap = element.cssselect('.cp_leader__title__wrap--dark')
-        link_wrap = element.cssselect('a')
-        image_wrap = element.cssselect('.cp_leader__asset--dark')
-        assert len(text_wrap) != 0
-        assert len(link_wrap) == 2
-        assert len(image_wrap) != 0
-
-
 def test_cp_leadteaser_has_expected_text_content(testbrowser):
     browser = testbrowser('/centerpage/lebensart')
     wrap = browser.cssselect('.cp_leader__title__wrap--dark')
