@@ -5,6 +5,7 @@
   <status>Print</status>
   <external>false</external>
   <display_name>Thomas Fischer</display_name>
+  <summary>Redakteur im Ressort Politik, ZEIT ONLINE</summary>
   <image_group xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/autoren/F/Thomas_Fischer/thomas-fischer/" type="png" align="left" publication-date="" expires="">
     <bu xsi:nil="true"/>
     <copyright py:pytype="str">© ZEIT ONLINE</copyright>
