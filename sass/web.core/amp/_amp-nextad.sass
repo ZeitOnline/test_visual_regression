@@ -42,10 +42,31 @@
         width: remify(225px)
 
     &__button
-        +zon-button-inky($margin: remify(20px 0 40px))
+        +zon-button-colored($margin: remify(20px 0 40px))
         opacity: 0.8
         &:hover
             opacity: 1.0
+        // style attribute is not allowed for AMP - so we have to fake it
+        &#{&}--168750
+            background-color: #168750 // Stellenmarkt
+        &#{&}--a60e00
+            background-color: #a60e00 // Studium
+        &#{&}--c27800
+            background-color: #c27800 // Reise
+        &#{&}--d11c08
+            background-color: #d11c08 // Shop
+        &#{&}--eb5e00
+            background-color: #eb5e00 // Automarkt
+        &#{&}--e6a800
+            background-color: #e6a800 // Immobilien
+        &#{&}--800015
+            background-color: #800015 // Partnersuche
+        &#{&}--40120d
+            background-color: #40120d // Misc1
+        &#{&}--3a43a6
+            background-color: #3a43a6 // Misc2
+        &#{&}--42661f
+            background-color: #42661f // Misc3
 
 +respond-min($break-tablet-min)
     .nextad
