@@ -19,7 +19,6 @@ Parameters:
 {%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_card_teaser_template.tpl" -%}
 
 {% block card_class %}{% endblock %}
-{% block bg_image %}true{% endblock %}
 {% block text_class %}card__text--with-bg{% endblock %}
 {% block teaser_text %}{{ teaser.teaserTitle }}{% endblock %}
 {% block author %}{% endblock %}

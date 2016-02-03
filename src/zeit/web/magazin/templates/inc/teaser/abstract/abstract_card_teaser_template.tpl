@@ -20,57 +20,50 @@ All calling templates have to provide:
 
 {% import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
 
-{% set image = get_teaser_image(module, teaser) -%}
-
 {% if module.background_color %}
     {% set card_style = 'background-color: #' + module.background_color + ';' -%}
 {% else %}
     {% set card_style = '' %}
 {% endif %}
 
-{# if we have to display a bg image, prepare it here #}
-{% if self.bg_image() == 'true' %}
-    {% if image %}
-        {% set card_style = card_style + ' background-image: url(' + image|default_image_url(image_pattern=module.layout.image_pattern) + ')' %}
-    {% endif %}
-{% endif %}
+{% set card_teaser_url = teaser|create_url %}
 
-<div class="cp_button cp_button--card{{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}">
-    <div class="card__wrap">
-        <div class="card__deck">
+<!-- advertorial-modifier? -->
+<article class="teaser-card">
+    <div class="card__deck">
+        {# front of card #}
+        <div class="card {{ self.card_class() }}" style="background-color: #{{ module.background_color }};">
+            {% include "zeit.web.magazin:templates/inc/asset/image-card.tpl" %}
+            <h2>
+                <div class="card__title">{{ teaser.teaserSupertitle }}</div>
+                <div class="card__text {{ self.text_class() }}">{{ self.teaser_text() }}</div>
+            </h2>
 
-            {# front of card #}
-            <div class="card {{ self.card_class() }}">
-                {% include "zeit.web.magazin:templates/inc/asset/image-card.tpl" %}
-                <h2>
-                    <div class="card__title">{{ teaser.teaserSupertitle }}</div>
-                    <div class="card__text {{ self.text_class() }}">{{ self.teaser_text() }}</div>
-                </h2>
-
-                {% if self.author() == 'true' %}
-                    <div class="card__author">{{ teaser.teaserTitle }}</div>
-                {% endif %}
-
-                {{ cp.teaser_card_front_action(self.front_action(), teaser|create_url) }}
-            </div>
-
-            {# back of card #}
-            {% if self.front_action() == 'flip' %}
-                <div class="card card--back {{ self.back_class() }}" style="background-color: #{{ module.background_color }};">
-                    <h2>
-                        <div class="card__title">{{ teaser.teaserSupertitle }}</div>
-                        <div class="card__text">{{ teaser.teaserText }}</div>
-                    </h2>
-
-                    {{ cp.teaser_card_back_action(self.back_action(), teaser|create_url) }}
-                </div>
+            {% if self.author() == 'true' %}
+                <div class="card__author">{{ teaser.teaserTitle }}</div>
             {% endif %}
 
-            {# sharing functionality #}
-            {% if self.back_action() == 'share' or self.front_action() == 'share' %}
-                {{ cp.teaser_sharing_card(teaser) }}
+            {% if self.front_action() == 'flip' %}
+                <a href="{{ card_teaser_url }}" class="card__button js-flip-card">Drehen</a>
+            {% else %}
+                <a href="{{ card_teaser_url }}" class="card__button">Lesen</a>
             {% endif %}
         </div>
+        {# back of card #}
+        {% if self.front_action() == 'flip' %}
+        <div class="card card--back {{ self.back_class() }}" style="background-color: #{{ module.background_color }};">
+            <h2>
+                <div class="card__title">{{ teaser.teaserSupertitle }}</div>
+                <div class="card__text">{{ teaser.teaserText }}</div>
+            </h2>
+            
+            {% if self.back_action() == 'flip' %}
+                <a href="{{ card_teaser_url }}" class="card__button js-flip-card">Drehen</a>
+            {% else %}
+                <a href="{{url}}" class="card__button js-stop-propagation">Lesen</a>
+            {% endif %}
+        </div>
+        {% endif %}
     </div>
-</div>
+</article>
 
