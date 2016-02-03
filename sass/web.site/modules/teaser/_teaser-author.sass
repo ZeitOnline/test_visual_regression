@@ -2,6 +2,9 @@
 	margin-left: remify(-20px)
 	margin-right: remify(-20px)
 	position: relative
+	+respond-min($break-tablet-min)
+		margin-left: 0
+		margin-right: 0
 	&__button
 		+zon-button-dark($margin: remify(0 0 30px))
 		margin-bottom: remify(27px)
