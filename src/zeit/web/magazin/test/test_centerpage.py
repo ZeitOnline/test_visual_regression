@@ -374,3 +374,19 @@ def test_teaser_print_cover_has_correct_markup(testbrowser):
                      'bitblt-.*/' +
                      'heft-zmo-print-cover.jpg',
                      img.get('src'))
+
+
+def test_teaser_should_have_comment_count(
+        mockserver_factory, testserver, testbrowser):
+
+    cp_counts = """<?xml version="1.0" encoding="UTF-8"?>
+    <nodes>
+         <node comment_count="129"
+               url="/zeit-magazin/test-cp/essen-geniessen-spargel-lamm"/>
+    </nodes>
+    """
+    mockserver_factory(cp_counts)
+    browser = testbrowser(
+        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    counts = browser.cssselect('.icon-comments-count')
+    assert int(counts[0].text) == 129
