@@ -15,6 +15,6 @@
 {% endblock %}
 
 {% block teaser_text %}
-	<span class="{{ self.layout() }}__text">Wartet auf ZON-2657</span>
+	<span class="{{ self.layout() }}__text">{{ teaser.summary }}</span>
 	<a href="{{ teaser | create_url }}" class="{{ self.layout() }}__button">Zum Profil</a>
 {% endblock %}
