@@ -40,8 +40,8 @@ All calling templates have to provide:
         <div class="card__deck">
 
             {# front of card #}
-            <div class="card {{ self.card_class() }}" style="{{ card_style }}">
-
+            <div class="card {{ self.card_class() }}">
+                {% include "zeit.web.magazin:templates/inc/asset/image-card.tpl" %}
                 <h2>
                     <div class="card__title">{{ teaser.teaserSupertitle }}</div>
                     <div class="card__text {{ self.text_class() }}">{{ self.teaser_text() }}</div>
