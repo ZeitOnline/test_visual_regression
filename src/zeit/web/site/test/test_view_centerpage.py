@@ -1324,6 +1324,18 @@ def test_topic_teasers_have_meetrics_attribute(testbrowser):
     assert small[0].attrib['data-meetrics'] == 'topic'
 
 
+def test_author_teaser_is_rendered_in_minor(testbrowser):
+    browser = testbrowser('/zeit-online/author-teaser')
+    author = browser.cssselect('.teaser-author')
+    assert len(author) == 1
+
+
+def test_author_teaser_is_not_rendered_in_major(testbrowser):
+    browser = testbrowser('/zeit-online/author-teaser')
+    author = browser.cssselect('.cp-area--major .teaser-author')
+    assert len(author) == 0
+
+
 def test_all_teasers_have_clicktrack_attribute(testbrowser):
     browser = testbrowser('/zeit-online/basic-teasers-setup')
     selector = 'article[data-unique-id]'
