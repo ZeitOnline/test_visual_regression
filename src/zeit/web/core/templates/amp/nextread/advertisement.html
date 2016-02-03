@@ -9,7 +9,7 @@
 			<p class="nextad__text">{{ teaser.text }}</p>
 		</div>
 		{% include "zeit.web.core:templates/amp/asset/image_nextad.html" %}
-		<a class="nextad__button" title="{{ teaser.title }}: {{ teaser.text }}" href="{{ teaser.url }}" style="background-color:#{{ teaser.button_color }}">
+		<a class="{{ 'nextad__button' | with_mods(teaser.button_color | lower) }}" title="{{ teaser.title }}: {{ teaser.text }}" href="{{ teaser.url }}">
 			{{ teaser.button_text }}
 		</a>
 	</div>
