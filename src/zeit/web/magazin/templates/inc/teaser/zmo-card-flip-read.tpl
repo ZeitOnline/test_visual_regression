@@ -16,7 +16,7 @@ Parameters:
     back_action: to define button action for back side of card
 #}
 
-{%- extends "zeit.web.magazin:templates/inc/teaser/abstract/abstract_card_teaser_template.tpl" -%}
+{%- extends "zeit.web.magazin:templates/inc/teaser/default-card.tpl" -%}
 
 {% block card_class%}card--front{% endblock %}
 {% block bg_image%}true{% endblock %}
