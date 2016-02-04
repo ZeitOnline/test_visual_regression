@@ -210,13 +210,6 @@ def test_c1_service_id_should_be_included_in_tracking_parameters(
     assert dict(view.c1_client).get('set_service_id') == '"zon"'
 
 
-def test_c1_origin_should_be_set_in_http_headers(testserver):
-    url = testserver.url + '/zeit-online/slenderized-index'
-    assert requests.head(url).headers.get('C1-Track-Origin') == 'web'
-    assert requests.head(url, headers={
-        'User-Agent': 'ZONApp'}).headers.get('C1-Track-Origin') == 'app'
-
-
 def test_c1_origin_should_trigger_js_call_for_cre_client(
         testbrowser, dummy_request):
 
