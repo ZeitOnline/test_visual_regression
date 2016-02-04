@@ -79,7 +79,7 @@ def test_comment_count_should_fallback_to_zero_if_count_unavailable(
                            unique_id=NS + 'zeit-magazin/test-cp/test-cp-zmo-3')
     assert 'comment_count' in resp
     cc = resp['comment_count']
-    assert cc[NS + 'zeit-magazin/test-cp/essen-geniessen-spargel-lamm'] == (
+    assert cc[NS + 'zeit-magazin/article/essen-geniessen-spargel-lamm'] == (
         'Keine Kommentare')
 
 

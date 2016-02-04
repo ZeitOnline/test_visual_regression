@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2536: Move generic image assets to core module
 
+- ZON-2552: Refactored fullwidth teaser
+
 
 2.54.1 (2016-02-02)
 -------------------
