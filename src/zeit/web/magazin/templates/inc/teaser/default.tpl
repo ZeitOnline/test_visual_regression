@@ -32,6 +32,7 @@ Default teaser template to inherit from.
         {%- elif image -%}
             {# call image asset #}
             {% block teaser_image %}
+                {% set image = image %}
                 {% set media_caption_additional_class = 'figcaption--hidden' %}
                 {% set module_layout = self.layout() %}
                 {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
