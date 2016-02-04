@@ -7,6 +7,3 @@ Teaser template for Zeit Magazin print cover
 {% block layout %}teaser-print-cover{% endblock %}
 {% block comments %}{% endblock %}
 {% block teaser_text %}{% endblock %}
-{% block pixelperfect %}{% endblock %}
-
-
