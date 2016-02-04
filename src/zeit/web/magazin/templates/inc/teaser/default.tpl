@@ -32,10 +32,9 @@ Default teaser template to inherit from.
         {%- elif image -%}
             {# call image asset #}
             {% block teaser_image %}
-                {% set href = teaser | create_url | append_campaign_params %}
                 {% set media_caption_additional_class = 'figcaption--hidden' %}
                 {% set module_layout = self.layout() %}
-                {% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" %}
+                {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
             {% endblock %}
         {%- endif %}
 
