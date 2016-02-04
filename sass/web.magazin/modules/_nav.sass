@@ -290,7 +290,7 @@ $nav__section-border: 1px solid $nav__border-color
                 color: white
             &:last-child
                 margin-right: 0
-    .main-nav__ressorts__slider
+    .main-nav__ressort-list
         position: relative
         height: $nav__row-height
         margin-left: $small
@@ -299,46 +299,6 @@ $nav__section-border: 1px solid $nav__border-color
             overflow: auto
             overflow-x: auto
             overflow-y: hidden
-        .has-topic-slider &
-            padding-right: $small*3
-            overflow: hidden
-            &:after
-                content: ''
-                position: absolute
-                height: 100%
-                width: $small*3
-                background-color: $nav__background-color
-                z-index: 5
-                right: 0
-    .main-nav__ressorts__slider-strip
-        +transition(left 0.2s)
-        position: absolute
-        left: 0
-        height: 100%
-
-
-.main-nav__ressorts__slider-arrow--left,
-.main-nav__ressorts__slider-arrow--right
-    width: $small
-    height: $nav__row-height
-    position: absolute
-    z-index: 10
-    background-position: center center
-    display: none
-    cursor: pointer
-    .has-topic-slider &
-        +respond-min($nav__break__full-menu)
-            display: block
-    &.is-inactive
-        opacity: 0.5
-        cursor: default
-
-
-.main-nav__ressorts__slider-arrow--left
-    right: $small
-.main-nav__ressorts__slider-arrow--right
-    right: 0
-
 
 //****************
 // PRIMARY LINKS *

@@ -82,7 +82,7 @@ def test_main_nav(selenium_driver, testserver, screen_size):
         '.main-nav__logo__img.icon-logo-zmo-large')
 
     res = main_nav.find_element_by_class_name('main-nav__ressorts')
-    res_content = res.find_element_by_class_name('main-nav__ressorts__slider')
+    res_content = res.find_element_by_class_name('main-nav__ressort-list')
     res_links = res_content.find_elements_by_tag_name('a')
 
     service = main_nav.find_element_by_class_name('main-nav__service')

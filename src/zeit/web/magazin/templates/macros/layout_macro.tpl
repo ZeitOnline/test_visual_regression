@@ -60,14 +60,10 @@
                 </header>
                 <div class="main-nav__menu__content" id="js-main-nav-content">
                     <div class="main-nav__section main-nav__ressorts">
-                        <div class="main-nav__ressorts__slider" id="js-main-nav-ressorts-slider-container">
-                            <div class="main-nav__ressorts__slider-arrow--left icon-arrow-left is-inactive"></div>
-                            <div class="main-nav__ressorts__slider-arrow--right icon-arrow-right"></div>
-                            <div class="main-nav__ressorts__slider-strip" id="js-main-nav-ressorts-slider-strip">
-                                <a href="{{ request.route_url('home') }}zeit-magazin/mode-design/index" id="hp.zm.topnav.centerpages.mode./zeit-magazin/mode-design/index">Mode &amp; Design</a>
-                                <a href="{{ request.route_url('home') }}zeit-magazin/essen-trinken/index" id="hp.zm.topnav.centerpages.essen./zeit-magazin/essen-trinken/index">Essen &amp; Trinken</a>
-                                <a href="{{ request.route_url('home') }}zeit-magazin/leben/index" id="hp.zm.topnav.centerpages.leben./zeit-magazin/leben/index">Leben</a>
-                            </div>
+                        <div class="main-nav__ressort-list">
+                            <a href="{{ request.route_url('home') }}zeit-magazin/mode-design/index" id="hp.zm.topnav.centerpages.mode./zeit-magazin/mode-design/index">Mode &amp; Design</a>
+                            <a href="{{ request.route_url('home') }}zeit-magazin/essen-trinken/index" id="hp.zm.topnav.centerpages.essen./zeit-magazin/essen-trinken/index">Essen &amp; Trinken</a>
+                            <a href="{{ request.route_url('home') }}zeit-magazin/leben/index" id="hp.zm.topnav.centerpages.leben./zeit-magazin/leben/index">Leben</a>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__only-small">
