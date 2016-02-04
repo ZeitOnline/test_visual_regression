@@ -31,9 +31,11 @@ Default teaser template to inherit from.
             {{ blocks.headervideo(video, self.layout() + '__asset ' + self.layout() + '__asset--' + self.layout_shade(), '') }}
         {%- elif image -%}
             {# call image asset #}
-            <div class="scaled-image {% block pixelperfect %}is-pixelperfect{% endblock %} {{ self.layout() }}__asset">
-                {{ lama.insert_responsive_image(image) }}
-            </div>
+            {% block teaser_image %}
+                <div class="scaled-image {{ self.layout() }}__asset">
+                    {{ lama.insert_responsive_image(image) }}
+                </div>
+            {% endblock %}
         {%- endif %}
 
         <header class="{{ self.layout() }}__text">
