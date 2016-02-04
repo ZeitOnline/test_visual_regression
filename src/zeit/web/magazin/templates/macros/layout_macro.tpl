@@ -122,9 +122,9 @@
 {% macro head_user_is_logged_in_true(request)  %}
     <span class="main-nav__section__trigger js-main-nav-section-trigger">
         {% if request.session.user.picture %}
-            <span class="main-nav__community__icon" style="background-image: url({{ request.session.user.picture }})"></span>
+            <span class="main-nav__avatar" style="background-image: url({{ request.session.user.picture }})"></span>
         {%- else -%}
-            <span class="main-nav__community__icon icon-avatar-std"></span>
+            {{ use_svg_icon('avatar-std', 'main-nav__avatar', request, package="web.magazin") }}
         {%- endif -%}
     </span>
     <div class="main-nav__section__content js-main-nav-section-content">

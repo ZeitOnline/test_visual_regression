@@ -654,11 +654,10 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     request = mock.Mock()
     request.session.user.picture = None
 
-    # no pic
+    # no pic: fallback svg is shown
     lines = tpl.module.head_user_is_logged_in_true(request)
     doc = lxml.html.fromstring(lines)
-    assert doc.cssselect('span')[1].attrib['class'] == (
-        'main-nav__community__icon icon-avatar-std')
+    assert 'main-nav__avatar' in doc.cssselect('svg')[0].attrib['class']
 
     # pic
     request = mock.Mock()
@@ -672,7 +671,7 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     lines = tpl.module.head_user_is_logged_in_true(request)
     doc = lxml.html.fromstring(lines).cssselect
 
-    assert doc('span .main-nav__community__icon')[0].attrib['style'] == (
+    assert doc('span .main-nav__avatar')[0].attrib['style'] == (
         'background-image: url(http://www.zeit.de/community-static/test.jpg)')
     assert doc('a')[0].attrib['href'] == 'www.zeit.de/user/1'
     assert doc('a')[0].attrib['id'] == 'hp.zm.topnav.community.account'
