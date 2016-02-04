@@ -59,7 +59,7 @@ def test_teaser_square_large_has_correct_markup(testbrowser):
 
     text_wrap = element.cssselect('.teaser-square-large__text')
     link_wrap = element.cssselect('a')
-    image_wrap = element.cssselect('.teaser-square-large__asset')
+    image_wrap = element.cssselect('.teaser-square-large__media')
     supertitle = element.cssselect('.teaser-square-large__kicker')[0]
     title = element.cssselect('.teaser-square-large__title')[0]
     subtitle = element.cssselect('.teaser-square-large__subtitle')[0]
@@ -85,7 +85,7 @@ def test_teaser_square_large_light_has_correct_markup(testbrowser):
 
     text_wrap = element.cssselect('.teaser-square-large__text')
     link_wrap = element.cssselect('a')
-    image_wrap = element.cssselect('.teaser-square-large__asset')
+    image_wrap = element.cssselect('.teaser-square-large__media')
     supertitle = element.cssselect('.teaser-square-large__kicker')[0]
     title = element.cssselect('.teaser-square-large__title')[0]
     subtitle = element.cssselect('.teaser-square-large__subtitle')[0]
@@ -111,7 +111,7 @@ def test_teaser_landscape_small_has_correct_markup(testbrowser):
 
     text_wrap = element[0].cssselect('.teaser-landscape-small__text')
     link_wrap = element[0].cssselect('a')
-    image_wrap = element[0].cssselect('.teaser-landscape-small__asset')
+    image_wrap = element[0].cssselect('.teaser-landscape-small__media')
     supertitle = element[0].cssselect('.teaser-landscape-small__kicker')[0]
     title = element[0].cssselect('.teaser-landscape-small__title')[0]
     subtitle = element[0].cssselect('.teaser-landscape-small__subtitle')[0]
@@ -157,7 +157,7 @@ def test_teaser_upright_large_has_correct_markup(testbrowser):
 
     text_wrap = element[0].cssselect('.teaser-upright-large__text')
     link_wrap = element[0].cssselect('a')
-    image_wrap = element[0].cssselect('.teaser-upright-large__asset')
+    image_wrap = element[0].cssselect('.teaser-upright-large__media')
     supertitle = element[0].cssselect('.teaser-upright-large__kicker')[0]
     title = element[0].cssselect('.teaser-upright-large__title')[0]
     subtitle = element[0].cssselect('.teaser-upright-large__subtitle')[0]
@@ -216,7 +216,7 @@ def test_teaser_fullwidth_with_video_has_correct_markup(
     browser = testbrowser('/centerpage/cp_with_video_lead')
     teaser = browser.cssselect('.teaser-fullwidth')[0]
 
-    vid_wrap = teaser.cssselect('.teaser-fullwidth__asset')[0]
+    vid_wrap = teaser.cssselect('.teaser-fullwidth__media')[0]
     img = teaser.cssselect('img')[0]
     title_wrap = teaser.cssselect('header')[0]
     a = teaser.cssselect('a')
@@ -258,7 +258,7 @@ def test_teaser_fullwidth_light_with_video_has_correct_markup(
     browser = testbrowser('/centerpage/cp_with_video_lead-2')
     teaser = browser.cssselect('.teaser-fullwidth--light')[0]
 
-    vid_wrap = teaser.cssselect('.teaser-fullwidth__asset')[0]
+    vid_wrap = teaser.cssselect('.teaser-fullwidth__media')[0]
     img = teaser.cssselect('img')[0]
     title_wrap = teaser.cssselect('header')[0]
     a = teaser.cssselect('a')
@@ -300,7 +300,7 @@ def test_teaser_fullwidth_with_image_has_correct_markup(
     browser = testbrowser('/centerpage/cp_with_image_lead')
     teaser = browser.cssselect('.teaser-fullwidth')[0]
 
-    img_wrap = teaser.cssselect('.teaser-fullwidth__asset')
+    img_wrap = teaser.cssselect('.teaser-fullwidth__media')
     img = teaser.cssselect('img')[0]
     title_wrap = teaser.cssselect('header')
     a = teaser.cssselect('a')
@@ -330,7 +330,7 @@ def test_teaser_fullwidth_light_with_image_has_correct_markup(
     browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-2')
     teaser = browser.cssselect('.teaser-fullwidth--light')[0]
 
-    img_wrap = teaser.cssselect('.teaser-fullwidth__asset')
+    img_wrap = teaser.cssselect('.teaser-fullwidth__media')
     img = teaser.cssselect('img')[0]
     title_wrap = teaser.cssselect('header')
     a = teaser.cssselect('a')
@@ -360,7 +360,7 @@ def test_teaser_print_cover_has_correct_markup(testbrowser):
 
     text_wrap = element.cssselect('.teaser-print-cover__text')
     link_wrap = element.cssselect('a')
-    image_wrap = element.cssselect('.teaser-print-cover__asset')
+    image_wrap = element.cssselect('.teaser-print-cover__media')
     supertitle = element.cssselect('.teaser-print-cover__kicker')[0]
     title = element.cssselect('.teaser-print-cover__title')[0]
     img = element.cssselect('img')[0]
