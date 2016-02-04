@@ -1248,16 +1248,13 @@ def test_instantarticle_representation_should_have_correct_content(
     canonical = bro.cssselect('link[rel=canonical]')[0].attrib['href']
     assert 'zeit-online/article/quotes' in canonical
     assert 'instantarticle' not in canonical
-
     assert '"Pulp Fiction"' in bro.cssselect('h1')[0].text
     assert bro.cssselect('.op-published')[0].text.strip() == '2. Juni 1999'
     assert bro.cssselect('.op-modified')[0].text.strip() == '20. Dezember 2013'
     assert bro.cssselect('figure > img[src$="square__2048x2048"]')
     assert len(bro.cssselect('aside')) == 3
-
-    assert 'Handlung, wohin man auch' in bro.cssselect('figcaption')[0].text
-    assert u'© Warner Bros.' == bro.cssselect(
-        'figure > figcaption > cite')[0].text
+    assert 'Bernie Sanders' in bro.cssselect('figcaption')[0].text
+    assert u'© Warner Bros.' == bro.cssselect('figcaption > cite')[0].text
 
 
 def test_instantarticle_should_wrap_with_cdata_if_asked(testbrowser):
@@ -1287,6 +1284,12 @@ def test_instantarticle_should_show_linked_author_if_available(testbrowser):
 def test_instantarticle_should_show_author_fallback(testbrowser):
     browser = testbrowser('/instantarticle/zeit-online/article/quotes')
     assert browser.cssselect('address')[0].text.strip() == 'ZEIT ONLINE'
+
+
+def test_instantarticle_should_respect_local_image_captions(testbrowser):
+    browser = testbrowser('/instantarticle/zeit-online/article/01')
+    assert browser.cssselect('figcaption')[0].text.strip().startswith(
+        u'Bernie Sanders kommt Hillary Clinton gefährlich nahe.')
 
 
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
