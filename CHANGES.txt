@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2692: Add instantarticle author fallback and local image captions
 
+- ZON-2692: Kick instantarticle with missing block implementations from feed
+
 - SUGAR: Implement assignment-conditional require blocks in jinja
 
 
