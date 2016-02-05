@@ -33,6 +33,13 @@
 		{% endblock symbols %}
 	</div>
 
+	{% if view.amp_advertising_is_enabled -%}
+		<amp-ad width="320" height="320" type="doubleclick" data-slot="/183/iqdzeit_amp/rotation"></amp-ad>
+	{% endif -%}
+	{% if view.amp_advertising_is_enabled -%}
+		<amp-ad width="320" height="80" type="doubleclick" data-slot="/183/iqdzeit_amp/rotation"></amp-ad>
+	{% endif -%}
+
 	<div class="content" id="top">
 		<header class="header" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
 			{% block logo %}
