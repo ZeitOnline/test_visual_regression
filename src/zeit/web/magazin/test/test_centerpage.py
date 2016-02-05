@@ -66,7 +66,7 @@ def test_teaser_square_large_has_correct_markup(testbrowser):
     img = element.cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 1
+    assert len(link_wrap) == 2
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == 'Article Image Asset Spitzmarke'
     assert title.text.strip() == 'Article Image Asset Titel'
@@ -76,7 +76,6 @@ def test_teaser_square_large_has_correct_markup(testbrowser):
                      'katzencontent-zmo-square-large.jpg',
                      img.get('src'))
     assert img.get('alt') == 'Die ist der Alttest'
-    assert img.get('title') == 'Katze!'
 
 
 def test_teaser_square_large_light_has_correct_markup(testbrowser):
@@ -92,7 +91,7 @@ def test_teaser_square_large_light_has_correct_markup(testbrowser):
     img = element.cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 1
+    assert len(link_wrap) == 2
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == 'Article Image Asset Spitzmarke'
     assert title.text.strip() == 'Article Image Asset Titel'
@@ -102,7 +101,6 @@ def test_teaser_square_large_light_has_correct_markup(testbrowser):
                      'katzencontent-zmo-square-large.jpg',
                      img.get('src'))
     assert img.get('alt') == 'Die ist der Alttest'
-    assert img.get('title') == 'Katze!'
 
 
 def test_teaser_landscape_small_has_correct_markup(testbrowser):
@@ -128,7 +126,6 @@ def test_teaser_landscape_small_has_correct_markup(testbrowser):
                      'pistazienparfait-zmo-landscape-small.jpg',
                      img.get('src'))
     assert img.get('alt') == 'Das Pistazienparfait wird verspeist'
-    assert img.get('title') == 'Das Pistazienparfait wird verspeist'
 
 
 def test_teaser_gallery_upright_has_correct_markup(testbrowser):
@@ -148,7 +145,6 @@ def test_teaser_gallery_upright_has_correct_markup(testbrowser):
     assert len(icon) == 1
     assert re.search(image_pattern, img.get('src'))
     assert img.get('alt') == 'Die ist der Alttest'
-    assert img.get('title') == 'Katze!'
 
 
 def test_teaser_upright_large_has_correct_markup(testbrowser):
@@ -164,7 +160,7 @@ def test_teaser_upright_large_has_correct_markup(testbrowser):
     img = element[0].cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 1
+    assert len(link_wrap) == 2
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == u'Article Image Asset Spitzmarke'
     assert title.text.strip() == 'Article Image Asset Titel'
@@ -174,7 +170,6 @@ def test_teaser_upright_large_has_correct_markup(testbrowser):
                      'katzencontent-zmo-lead-upright.jpg',
                      img.get('src'))
     assert img.get('alt') == 'Die ist der Alttest'
-    assert img.get('title') == 'Katze!'
 
 
 def test_teaser_landscape_large_has_correct_markup(testbrowser):
@@ -213,8 +208,8 @@ def test_teaser_landscape_large_photo_has_correct_markup(testbrowser):
 
 def test_teaser_fullwidth_with_video_has_correct_markup(
         testbrowser, testserver):
-    browser = testbrowser('/centerpage/cp_with_video_lead')
-    teaser = browser.cssselect('.teaser-fullwidth')[0]
+    browser = testbrowser('/zeit-magazin/teaser-fullwidth')
+    teaser = browser.cssselect('.teaser-fullwidth')[2]
 
     vid_wrap = teaser.cssselect('.teaser-fullwidth__media')[0]
     img = teaser.cssselect('img')[0]
@@ -255,8 +250,8 @@ def test_teaser_fullwidth_with_video_has_correct_markup(
 
 def test_teaser_fullwidth_light_with_video_has_correct_markup(
         testbrowser, testserver):
-    browser = testbrowser('/centerpage/cp_with_video_lead-2')
-    teaser = browser.cssselect('.teaser-fullwidth--light')[0]
+    browser = testbrowser('/zeit-magazin/teaser-fullwidth')
+    teaser = browser.cssselect('.teaser-fullwidth--light')[1]
 
     vid_wrap = teaser.cssselect('.teaser-fullwidth__media')[0]
     img = teaser.cssselect('img')[0]
@@ -297,7 +292,7 @@ def test_teaser_fullwidth_light_with_video_has_correct_markup(
 
 def test_teaser_fullwidth_with_image_has_correct_markup(
         testbrowser, testserver):
-    browser = testbrowser('/centerpage/cp_with_image_lead')
+    browser = testbrowser('/zeit-magazin/teaser-fullwidth')
     teaser = browser.cssselect('.teaser-fullwidth')[0]
 
     img_wrap = teaser.cssselect('.teaser-fullwidth__media')
@@ -306,20 +301,16 @@ def test_teaser_fullwidth_with_image_has_correct_markup(
     a = teaser.cssselect('a')
     title = teaser.cssselect('.teaser-fullwidth__title')
     subtitle = teaser.cssselect('.teaser-fullwidth__subtitle')
-    image_pattern = \
-        'http://.*/centerpage/katzencontent/'\
-        'bitblt-.*'\
-        '/katzencontent-zmo-landscape-large.jpg'
+    image_pattern = '/lamm-aubergine/wide__'
 
     # structure
     assert len(img_wrap) != 0
     assert len(title_wrap) != 0
 
-    assert re.search(image_pattern, img.get('src'))
-    assert title[0].text.strip() == u'Article Image Asset Titel'
-    assert u'Dies k\u00F6nnte' in subtitle[0].text.strip()
-    assert img.get('alt') == 'Die ist der Alttest'
-    assert img.get('title') == 'Katze!'
+    assert image_pattern in img.get('src')
+    assert u'Probier' in title[0].text.strip()
+    assert u'auch dieses Jahr leider' in subtitle[0].text.strip()
+    assert 'Lammkotelett' in img.get('alt')
 
     # links
     assert len(a) == 1
@@ -336,19 +327,16 @@ def test_teaser_fullwidth_light_with_image_has_correct_markup(
     a = teaser.cssselect('a')
     title = teaser.cssselect('.teaser-fullwidth__title')
     subtitle = teaser.cssselect('.teaser-fullwidth__subtitle')
-    image_pattern = \
-        'http://.*/zeit-magazin/2014/17/lamm-aubergine/'\
-        'bitblt-.*'\
-        '/lamm-aubergine-zmo-landscape-large.jpg'
+    image_pattern = '/lamm-aubergine/wide__'
 
     # structure
     assert len(img_wrap) != 0
     assert len(title_wrap) != 0
 
-    assert re.search(image_pattern, img.get('src'))
+    assert image_pattern in img.get('src')
     assert u'Probier' in title[0].text.strip()
-    assert u'jede Menge Kartoffeln' in subtitle[0].text.strip()
-    assert img.get('alt') == 'Lammkoteletts mit Auberginenmus'
+    assert u'auch dieses Jahr leider' in subtitle[0].text.strip()
+    assert 'Lammkotelett' in img.get('alt')
 
     # links
     assert len(a) == 1
@@ -382,7 +370,7 @@ def test_teaser_should_have_comment_count(
     cp_counts = """<?xml version="1.0" encoding="UTF-8"?>
     <nodes>
          <node comment_count="129"
-               url="/zeit-magazin/test-cp/essen-geniessen-spargel-lamm"/>
+               url="/zeit-magazin/article/essen-geniessen-spargel-lamm"/>
     </nodes>
     """
     mockserver_factory(cp_counts)
