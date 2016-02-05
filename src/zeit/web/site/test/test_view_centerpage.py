@@ -1324,10 +1324,10 @@ def test_topic_teasers_have_meetrics_attribute(testbrowser):
     assert small[0].attrib['data-meetrics'] == 'topic'
 
 
-def test_author_teaser_is_rendered_in_minor(testbrowser):
+def test_author_teaser_is_rendered_in_minor_and_duo(testbrowser):
     browser = testbrowser('/zeit-online/author-teaser')
-    author = browser.cssselect('.teaser-author')
-    assert len(author) == 1
+    assert len(browser.cssselect('.cp-area--minor .teaser-author')) == 3
+    assert len(browser.cssselect('.cp-area--duo .teaser-author')) == 2
 
 
 def test_author_teaser_is_not_rendered_in_major(testbrowser):
