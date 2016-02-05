@@ -1,22 +1,28 @@
 
 .teaser-landscape-small
-    @extend %teaser
-    margin-bottom: $compact
+	@extend %teaser
+	margin-bottom: $compact
+	padding: 0 $compact
 
-    &__media
-        @extend %teaser__media
+	&__media
+		@extend %teaser__media
 
-    &__text
-        @extend %teaser__text
+	&__text
+		@extend %teaser__text
 
-    &__kicker
-        @extend %teaser__kicker
+	&__kicker
+		@extend %teaser__kicker
 
-    &__title
-        @extend %teaser__title
+	&__title
+		@extend %teaser__title
 
-    &__subtitle
-        @extend %teaser__subtitle
+	&__subtitle
+		@extend %teaser__subtitle
 
-    &__comments
-        @extend %teaser__comments
+	&__comments
+		@extend %teaser__comments
+
++respond-min($break-2)
+	.teaser-landscape-small
+		padding: 0
+		width: 48%
