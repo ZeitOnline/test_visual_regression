@@ -228,7 +228,7 @@
         {% endif %}" data-video="{{ obj.id }}">
             <div class="video__still">
                 <img class="figure__media" src="{{ obj.video_still| default('http://placehold.it/160x90', true) }}" alt="Video: {{ obj.title }}" title="Video: {{ obj.title }}">
-                <span class="video__button"></span>
+                <span class="video__button">{{ lama.use_svg_icon('playbutton', 'video__play-icon', request, package="web.magazin") }}</span>
             </div>
             <figcaption class="figure__caption">
                     {{ obj.description }}
