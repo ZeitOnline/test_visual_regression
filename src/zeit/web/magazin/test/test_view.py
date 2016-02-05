@@ -438,6 +438,8 @@ def test_article_has_correct_sharing_image(testserver, testbrowser):
         'wide__1300x731'
     assert xpath('//link[@itemprop="primaryImageOfPage"]/@href')[0] == source
     assert xpath('//meta[@property="og:image"]/@content')[0] == source
+    assert xpath('//meta[@property="og:image:width"]/@content')[0] == '1300'
+    assert xpath('//meta[@property="og:image:height"]/@content')[0] == '731'
     assert xpath('//meta[@name="twitter:image"]/@content')[0] == source
 
 
