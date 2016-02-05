@@ -358,21 +358,20 @@
 	);
 }
 
-@mixin zon-button-green($margin: 0) {
-	@include zon-button($background-color: rgba(22, 135, 80, .8),
-	                    $hover-background-color: rgba(22, 135, 80, 1),
-	                    $color: $white,
-	                    $hover-color: $white,
-	                    $visited-color: $white,
-	                    $margin: $margin,
-	                    $padding: remify(10px 16px),
-	                    $disabled: false
-	);
-}
-
-@mixin zon-button-red($margin: 0) {
-	@include zon-button($background-color: rgba(#A60E00, .8),
-	                    $hover-background-color: rgba(#A60E00, 1),
+// default color = green, e.g. Stellenmarkt
+// Stellenmarkt: #168750
+// Studium: #a60e00
+// Reise: #c27800
+// Shop: #d11c08
+// Automarkt: #eb5e00
+// Immobilien: #e6a800
+// Partnersuche: #800015
+// Misc1: #40120d
+// Misc2: #3a43a6
+// Misc3: #42661f
+@mixin zon-button-colored($base-color: #168750, $margin: 0) {
+	@include zon-button($background-color: rgba($base-color, .8),
+	                    $hover-background-color: rgba($base-color, 1),
 	                    $color: $white,
 	                    $hover-color: $white,
 	                    $visited-color: $white,

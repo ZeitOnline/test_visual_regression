@@ -50,8 +50,7 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
 .pa-button
     display: inline-block
     &__text
-        +zon-button(rgba($zon-green, .8),rgba($zon-green, 1),$white,$white,$white)
-        margin-left: 0px
+        +zon-button-colored($base-color: #168750, $margin: remify(14px 6px 14px 0))
 
 .pa-dropdown
     background-color: $gainsboro
@@ -105,8 +104,7 @@ $bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
                     max-width: none
         .pa-button
             &__text
-                +zon-button(rgba($zon-yellow, .8),rgba($zon-yellow, 1),$white,$white,$white)
-                margin-left: 0px
+                +zon-button-colored($base-color: #c27800, $margin: remify(14px 6px 14px 0))
         .pa-link
             text-align: right
             margin-top: remify(30px)

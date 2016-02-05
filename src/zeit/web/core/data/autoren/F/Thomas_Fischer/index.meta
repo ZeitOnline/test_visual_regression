@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/autoren/F/Thomas_Fischer/index</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-02-02T20:28:09.345679+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:d90eaa33-eb89-4292-bbb3-4ceec1002f89}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-02-02T18:08:25.902943+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">author</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-08-23T11:30:26.311747+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-07-23T16:02:22.369179+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-07-23T16:01:21.217890+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.abdi-herrle</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-02-02T20:28:09.289524+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Author" module="zeit.content.author.author"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2016-02-02T20:28:09Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">615</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Tue, 02 Feb 2016 20:28:09 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"6271e5-267-52acf56fcbc3c"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"> 0 ldap.abdi-herrleSecond-237 opaquelocktoken:f2503b61-75ca-4273-aa0e-4220f98497a9 </attribute>
+</head>

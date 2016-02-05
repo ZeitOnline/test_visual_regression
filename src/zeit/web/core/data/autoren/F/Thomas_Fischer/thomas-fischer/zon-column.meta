@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/autoren/F/Thomas_Fischer/thomas-fischer/zon-column</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-10-14T16:27:20.270650+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">Thomas Fischer</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-07-23T16:00:44.996834+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImage" module="zeit.content.image.image"/&gt; &lt;global name="IMasterImage" module="zeit.content.image.interfaces"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:01317e23-61c3-4a72-95a9-bab7c5d57490}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bayer</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; ZEIT ONLINE&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/autoren/F/Thomas_Fischer/thomas-fischer/thomas-fischer.png;http://xml.zeit.de/autoren/F/Thomas_Fischer/thomas-fischer/thomas-fischer-zon-column.png</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-10-14T16:28:46.510220+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-08-04T15:44:30+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-08-04T15:44:49.037354+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">Thomas Fischer</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="acquire_metadata">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-10-14T16:28:46.447145+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2015-10-14T16:28:46Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">1649763</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Wed, 14 Oct 2015 16:28:46 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"62774c-192c63-522130e8094ac"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"> 0 ldap.bayerSecond-238 opaquelocktoken:144456a0-6a2f-463e-9bd2-cbb3d8176510 </attribute>
+</head>
