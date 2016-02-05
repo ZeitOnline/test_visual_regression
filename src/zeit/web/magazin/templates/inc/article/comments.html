@@ -12,19 +12,19 @@
 		{% endif %}
 			<div class="article__sharing__services blind">
 				<a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.int.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_int&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
-					<span class="article__sharing__services__icon icon-sharebox-facebook"></span>
+					{{ lama.use_svg_icon('sharebox-facebook', 'article__sharing-icon', request, package="web.magazin") }}
 					<span class="article__sharing__services__text">{{ view.linkreach.facebook.total | unitize }}</span>
 				</a>
 				<a href="https://plus.google.com/share?url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.gplus.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=gplus_zonaudev_int&utm_campaign=gplus_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
-					<span class="article__sharing__services__icon icon-sharebox-google"></span>
+					{{ lama.use_svg_icon('sharebox-google', 'article__sharing-icon', request, package="web.magazin") }}
 					<span class="article__sharing__services__text">{{ view.linkreach.googleplus.total | unitize }}</span>
 			   </a>
 			</div>
 			<div class="article__sharing__item">
-				<a class="article__sharing__link js-toggle-sharing">
-					<span class="article__sharing__icon icon-sharebox-share"></span>
+				<a class="article__sharing__link js-toggle-sharing" title="Teilen">
+					{{ lama.use_svg_icon('sharebox-share', 'article__sharing-icon article__sharing-icon--open-close', request, package="web.magazin") -}}
+					{{ lama.use_svg_icon('sharebox-close', 'article__sharing-icon article__sharing-icon--open-close article__sharing-icon--close', request, package="web.magazin") -}}
 					Teilen
-				</a>
 			</div>
 		</div>
 	{% endif %}
@@ -32,7 +32,8 @@
 	{% if view.comments_allowed or view.comments %}
 		<div class="article__comments-trigger">
 			<a class="article__comments-trigger__link js-comments-trigger">
-				<span class="article__comments-trigger__count icon-sharebox-close">{{ view.comments.comment_count | default(0) }}</span>
+				{{ lama.use_svg_icon('sharebox-close', 'article__sharing-icon article__sharing-icon--comment-close', request, package="web.magazin") -}}
+				<span class="article__comments-trigger__count">{{ view.comments.comment_count | default(0) }}</span>
 				<span class="article__comments-trigger__text">{% if view.comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
 			</a>
 		</div>
