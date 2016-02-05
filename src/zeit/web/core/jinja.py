@@ -42,7 +42,6 @@ def finalize(expr):
 
 
 class Undefined(jinja2.runtime.Undefined):
-
     """Custom jinja Undefined class that represents unresolvable template
     statements and expressions. It ignores undefined errors, ensures it is
     printable and returns further Undefined objects if indexed or called.
@@ -58,8 +57,13 @@ class Undefined(jinja2.runtime.Undefined):
     __getattr__ = __getitem__ = __call__ = lambda self, *args: self.__class__()
 
 
-class Environment(jinja2.environment.Environment):
+class Interrupt(Exception):
+    """Custom exception to deliberately escape fault-tolerant rendering."""
 
+    pass
+
+
+class Environment(jinja2.environment.Environment):
     """Custom jinja Environment class that uses our custom Undefined class as
     fallback for unknown filters, globals, tests, object-attributes and -items.
     This way, most flaws and faults in view classes can be caught and affected
@@ -97,6 +101,8 @@ class Environment(jinja2.environment.Environment):
     def __getsth__(self, func, obj, name):
         try:
             return getattr(super(Environment, self), func)(obj, name)
+        except Interrupt:
+            raise
         except BaseException:
             self.handle_exception()
             return self.undefined(obj=obj, name=name)
@@ -137,7 +143,6 @@ class HTTPLoader(jinja2.loaders.BaseLoader):
 
 
 class CompareModifiedHeader(object):
-
     """Compares a stored timestamp against the current Last-Modified header."""
 
     def __init__(self, url, timestamp):
@@ -167,7 +172,6 @@ class CompareModifiedHeader(object):
 
 
 class PrefixLoader(jinja2.BaseLoader):
-
     """Tweaked version of jinja2.PrefixLoader that defaults to prefix None
     if the requested path contains no prefix delimiter.
     """
