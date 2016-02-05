@@ -4,6 +4,8 @@ Change log for zeit.web
 2.55 (unreleased)
 -----------------
 
+- HOTFIX: Correctly parse jinja profiler toggle value
+
 - ZON-2601: Add sharing links and article tags to AMPages
 
 - ZON-2602: Add Nextread and Verlags-Nextread to AMPages

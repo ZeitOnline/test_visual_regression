@@ -16,6 +16,7 @@ import jinja2.loaders
 import jinja2.nodes
 import jinja2.runtime
 import jinja2.utils
+import pyramid.settings
 import pyramid.threadlocal
 import pytz
 import requests
@@ -210,7 +211,8 @@ class ProfilerExtension(jinja2.ext.Extension):
     def __init__(self, env):
         super(ProfilerExtension, self).__init__(env)
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        self.active = conf.get('jinja2.enable_profiler')
+        self.active = pyramid.settings.asbool(
+            conf.get('jinja2.enable_profiler'))
         self.profiler = None
 
     def parse(self, parser):
