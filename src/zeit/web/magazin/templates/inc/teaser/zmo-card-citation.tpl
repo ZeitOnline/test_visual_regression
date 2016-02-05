@@ -18,11 +18,9 @@ Parameters:
 
 {%- extends "zeit.web.magazin:templates/inc/teaser/default-card.tpl" -%}
 
-{% block card_class %}{% endblock %}
-{% block bg_image %}{% endblock %}
-{% block text_class %}{% endblock %}
-{% block teaser_text %}{{ teaser.teaserText }}{% endblock %}
-{% block author %}true{% endblock %}
-{% block front_action %}read{% endblock %}
-{% block back_class %}{% endblock %}
-{% block back_action %}{% endblock %}
+
+{% block author %}
+<div class="card__author">{{ teaser.teaserTitle or teaser.title }}</div>
+{% endblock %}
+{% block teaser_image %}{% endblock %}
+{% block teaser_text %}{{ teaser.teaserText or teaser.text }}{% endblock %}
