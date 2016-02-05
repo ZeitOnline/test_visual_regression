@@ -11,11 +11,11 @@
 	<div class="card__deck">
 		{# front of card #}
 		<div class="card {% block card_class %}{% endblock %}" {% block background_color_styles %}{% endblock %}>
-			{% include "zeit.web.magazin:templates/inc/asset/image-card.tpl" %}
 			<h2>
 			    <div class="card__title">
 			        {{ teaser.teaserSupertitle or teaser.supertitle }}
 			    </div>
+			    {% include "zeit.web.magazin:templates/inc/asset/image-card.tpl" %}
 			    <div class="card__text {% block text_class %}card__text--with-bg{% endblock %}">
 			        {% block teaser_text %}{{ teaser.teaserTitle or teaser.title }}{% endblock %}
 			    </div>
