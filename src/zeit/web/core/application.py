@@ -199,9 +199,12 @@ class Application(object):
         log.debug('Configuring Jinja')
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
-        self.config.add_jinja2_extension(jinja2.ext.WithExtension)
+        self.config.add_jinja2_extension(
+            jinja2.ext.WithExtension)
         self.config.add_jinja2_extension(
             zeit.web.core.jinja.ProfilerExtension)
+        self.config.add_jinja2_extension(
+            zeit.web.core.jinja.RequireExtension)
 
         self.config.commit()
         self.jinja_env = env = self.config.get_jinja2_environment()

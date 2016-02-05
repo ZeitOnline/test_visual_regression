@@ -17,16 +17,20 @@
         <!--[if gt IE 8]><!-->
         </noscript>
         <!--<![endif]-->
+        {% block media_caption -%}
         <figcaption class="figure__caption {{ media_caption_additional_class }}">
-            {% block media_caption_content %}
-                {% for name, url, nofollow in image.copyright %}
-                <span class="figure__copyright" itemprop="copyrightHolder">
-                    {% if url %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}" target="_blank">{% endif %}
-                    {% if name | trim | length > 1 %}<span itemprop="name">{{ name }}</span>{% endif %}
-                    {% if url %}</a>{% endif %}
-                </span>
-                {% endfor %}
-            {% endblock %}
+            {%- block media_caption_content %}
+                {%- for name, url, nofollow in image.copyright %}
+                    {%- if name | trim | length > 1 %}
+                        <span class="figure__copyright" itemprop="copyrightHolder">
+                            {%- if url %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}" target="_blank">{% endif -%}
+                            <span itemprop="name">{{ name }}</span>
+                            {%- if url %}</a>{% endif -%}
+                        </span>
+                    {%- endif %}
+                {%- endfor %}
+            {%- endblock media_caption_content -%}
         </figcaption>
+        {%- endblock media_caption -%}
     </figure>
 {% endif %}

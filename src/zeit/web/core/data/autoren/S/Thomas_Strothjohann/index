@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<author xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <firstname>Thomas</firstname>
+  <lastname>Strothjohann</lastname>
+  <email>thomas.strothjohann@zeit.de</email>
+  <status>Online</status>
+  <external>false</external>
+  <display_name>Thomas Strothjohann</display_name>
+  <twitter>TStrothjohann</twitter>
+  <facebook>thomas.strothjohann</facebook>
+  <instagram>hingucker</instagram>
+  <biography>Seit 2016 Entwicklungsredakteur bei ZEIT ONLINE. Davor Studium Onlinejournalismus an der Hochschule Darmstadt, von 05/2012 bis 02/2015 Redakteur für neue Medien bei der Oberhessischen Presse, Marburg und 02-05/2015 Coding-Bootcamp an der Makers Academy, London. Redaktionsmitglied bei medium magazin.</biography>
+  <question id="drive">Ich bin davon überzeugt, dass Online das beste Medium für Journalismus ist. Jetzt muss ich nur noch die Nutzer überzeugen - mit guten Formaten, Seiten, Apps und was uns noch so einfällt.</question>
+  <question id="origin">Aus Frankfurt am Main (dribbdebach).</question>
+  <question id="focus">Wir wollen ZEIT ONLINE technisch verbessern. zeit.de und die Apps sollen Ihnen auf allen Geräten Freude bereiten. Gleichzeitig wollen wir den Kollegen die Arbeit mit den Redaktionssystemen erleichtern.</question>
+  <question id="hobby">Berlin besser kennenlernen, programmieren und fotografieren.</question>
+  <question id="person">Mit dem Fernsehreporter Willi Weitzel - auf dem Weg an die türkisch-syrische Grenze.</question>
+  <summary>Redakteur Entwicklungsredaktion, ZEIT ONLINE</summary>
+</author>

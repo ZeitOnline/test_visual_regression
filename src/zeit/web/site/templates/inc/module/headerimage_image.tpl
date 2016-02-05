@@ -7,4 +7,4 @@
     {% endif %}
 {% endblock %}
 
-{% block media_caption_content %}{% endblock %}
+{% block media_caption %}{% endblock %}
