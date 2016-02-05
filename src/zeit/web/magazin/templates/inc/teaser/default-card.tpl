@@ -22,9 +22,11 @@
                     {% block teaser_image %}
                         {% include "zeit.web.magazin:templates/inc/asset/image-card.tpl" %}
                     {% endblock %}
-                    <div class="card__text {% block text_class %}{% endblock %}">
-                        {% block teaser_text %}{{ teaser.teaserTitle or teaser.title }}{% endblock %}
+                    {% block teaser_text %}
+                    <div class="card__text">
+                        {{ teaser.teaserTitle or teaser.title }}
                     </div>
+                    {% endblock %}
                 </h2>
 
                 {% block author %}{% endblock %}

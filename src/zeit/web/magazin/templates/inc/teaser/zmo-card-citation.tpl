@@ -23,4 +23,8 @@ Parameters:
 <div class="card__author">{{ teaser.teaserTitle or teaser.title }}</div>
 {% endblock %}
 {% block teaser_image %}{% endblock %}
-{% block teaser_text %}{{ teaser.teaserText or teaser.text }}{% endblock %}
+{% block teaser_text %}
+<div class="card__text">
+	{{ teaser.teaserText or teaser.text }}
+</div>
+{% endblock %}

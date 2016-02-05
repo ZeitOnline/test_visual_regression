@@ -94,9 +94,12 @@
              <block href="http://xml.zeit.de/zeit-magazin/test-cp/kcard-citation" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/card-citation" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
              </block>
            </container>
-           <!-- card-picture -->
            <container cp:type="teaser" module="zmo-card-picture" hide-dupes="True" visible="True" cp:__name__="id-381c8f6a-dc39-40e3-a919-09aa41eaa7c2" background_color="cecece">
              <block href="http://xml.zeit.de/zeit-magazin/article/marteinstein-transparenz-test" uniqueId="http://xml.zeit.de/zeit-magazin/article/marteinstein-transparenz-test" year="2014" issue="19" ressort="zeit-magazin" contenttype="article" publication-date="" expires="" author="Maria Exner" date-last-modified="2014-05-05T09:37:35+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-05-05T09:37:21.413549+00:00">
+             </block>
+           </container>
+           <container cp:type="teaser" module="zmo-card-flip-read" hide-dupes="True" visible="True" cp:__name__="id-381c8f6a-dc39-40e3-a919-09aa41eaa7c3" background_color="c3e76c">
+             <block href="http://xml.zeit.de/zeit-magazin/test-cp/card-flip-read" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/card-flip-read" year="2014" issue="19" ressort="zeit-magazin" contenttype="article" publication-date="" expires="" author="Maria Exner" date-last-modified="2014-05-05T09:37:35+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-05-05T09:37:21.413549+00:00">
              </block>
            </container>
         </region>
