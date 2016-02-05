@@ -130,3 +130,25 @@ def test_amp_article_has_correct_webtrekk_pixel(testbrowser, testserver):
         u'&cp6=7583&cp7=&cp8=zede&cp9=wirtschaft/article&cp10=&cp11='
         u'&cp12=mobile.site&cp13=mobile&cp15=&cp25=amp').format(
             url=testserver['http_address'])
+
+
+def test_amp_article_contains_sharing_links(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    canonical = browser.cssselect('link[rel="canonical"]')[0].get('href')
+    sharing = browser.cssselect('.article-sharing')[0]
+    links = sharing.cssselect('.article-sharing__link')
+    assert sharing.cssselect('.article-sharing__title')[0].text == 'Teilen'
+    assert len(links) == 4
+    assert ('?u=' + canonical) in links[0].get('href')
+    assert ('url=' + canonical) in links[1].get('href')
+
+
+def test_amp_article_shows_tags_correctly(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    tags = browser.cssselect('.article-tags')[0]
+    keywords = tags.cssselect('[itemprop="keywords"]')[0]
+    assert tags.cssselect('.article-tags__title')[0].text == 'Schlagworte'
+    assert len(tags.cssselect('.article-tags__link')) == 5
+    assert ' '.join(keywords.text_content().strip().split()) == (
+        u'Flüchtling, Weltwirtschaftsforum Davos, '
+        u'Arbeitsmarkt, Migration, Europäische Union')

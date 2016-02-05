@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Correctly parse jinja profiler toggle value
 
+- ZON-2601: Add sharing links and article tags to AMPages
+
 - ZON-2602: Add Nextread and Verlags-Nextread to AMPages
 
 - ZON-2710: Use external SVG sprite in ZMO
