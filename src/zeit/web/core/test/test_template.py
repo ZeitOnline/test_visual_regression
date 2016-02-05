@@ -68,7 +68,7 @@ def test_get_teaser_image(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_video_asset_2'
+        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
     assert isinstance(image, zeit.web.core.image.TeaserImage), (
@@ -90,7 +90,7 @@ def test_get_teaser_image_should_set_image_pattern(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_video_asset_2'
+        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
     assert image.image_pattern == 'zmo-large'
@@ -100,7 +100,7 @@ def test_get_teaser_image_should_utilize_unique_id(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_video_asset_2'
+        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
     unique_id = 'http://xml.zeit.de/centerpage/katzencontent/'
     image = zeit.web.core.template.get_teaser_image(
@@ -114,7 +114,7 @@ def test_get_teaser_image_should_catch_fictitious_unique_id(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_video_asset_2'
+        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
     unique_id = 'http://xml.zeit.de/moep/moepmoep/moep'
     image = zeit.web.core.template.get_teaser_image(

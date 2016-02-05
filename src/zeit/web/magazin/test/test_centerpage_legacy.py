@@ -116,7 +116,7 @@ def test_autoselected_asset_from_cp_teaser_should_be_an_image(
 
 def test_autoselected_asset_from_cp_teaser_should_be_a_video(
         testserver, testbrowser):
-    article = 'http://xml.zeit.de/centerpage/article_video_asset'
+    article = 'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.web.core.centerpage.auto_select_asset(context)
     assert isinstance(asset, zeit.content.video.video.Video)
@@ -124,7 +124,7 @@ def test_autoselected_asset_from_cp_teaser_should_be_a_video(
 
 def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(
         testserver, testbrowser):
-    article = 'http://xml.zeit.de/centerpage/article_video_asset_2'
+    article = 'http://xml.zeit.de/zeit-magazin/article/article_video_asset_list'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.web.core.centerpage.auto_select_asset(context)
     assert isinstance(asset[0], zeit.content.video.video.Video)
@@ -166,7 +166,7 @@ def test_get_gallery_asset_should_return_gallery_asset(
 
 
 def test_get_video_asset_should_return_video_asset(testserver, testbrowser):
-    article = 'http://xml.zeit.de/centerpage/article_video_asset'
+    article = 'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.web.core.centerpage.get_video_asset(
         context)

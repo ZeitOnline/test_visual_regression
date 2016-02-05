@@ -28,7 +28,7 @@ Default teaser template to inherit from.
 
         {% if video -%}
             {# call video asset #}
-            {{ blocks.headervideo(video, self.layout() + '__asset ' + self.layout() + '__asset--' + self.layout_shade(), '') }}
+            {{ blocks.headervideo(video, self.layout() + '__media ' + self.layout() + '__media--' + self.layout_shade(), '') }}
         {%- elif image -%}
             {# call image asset #}
             {% block teaser_image scoped %}
