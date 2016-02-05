@@ -52,20 +52,28 @@ $gallery-icon-width: em(40px)
 //comments
 // please stick to pixel values here, as there is an issue
 // with ems in Android
-.cp_comment__count__wrap
+.cp_comment__counter
 	font-size: $little
 	color: $white
 	position: absolute
 	text-align: center
-	padding-right: $micro--px
-	padding-top: $tiny--px
 	height: $cp_comment__count-height
 	width: $cp_comment__count-width
 	right: $little--px
 	top: $small--px
 	z-index: 2
 
-//icons
+.cp_comment__count
+	position: relative
+	top: -40px
+
+.cp_comment__count-icon
+	stroke: $white
+	color: rgba(0,0,0,0.2)
+	stroke-width: em(2px)
+	width: $cp_comment__count-width
+	height: $cp_comment__count-height
+
 .gallery-icon
 	stroke: $white
 	color: rgba(0,0,0,0.2)

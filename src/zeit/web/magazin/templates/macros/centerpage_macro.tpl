@@ -58,7 +58,7 @@
 {% macro comment_count(comment, url) -%}
     {% if comment %}
         <a href="{{ url }}#show_comments">
-            <span class="cp_comment__count__wrap icon-comments-count">{{ comment }}</span>
+            <div class="cp_comment__counter">{{ lama.use_svg_icon('comments-count', 'cp_comment__count-icon', request, package="web.magazin") }}<span class="cp_comment__count">{{ comment }}</span></div>
         </a>
     {% endif %}
 {%- endmacro %}
