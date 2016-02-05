@@ -1,55 +1,55 @@
+$additional-margin: $page-padding * 2
+
 .teaser-author
-	margin-left: remify(-20px)
-	margin-right: remify(-20px)
+	+font-smoothing
+	background-color: $zon-trout
+	color: $white
+	margin: $vertical-space (-$page-padding)
+	overflow: hidden
+	padding-bottom: 100%
+	// calc() needed to compensate the negative margin
+	padding-bottom: calc(100% + #{$additional-margin})
 	position: relative
-	+respond-min($break-tablet-min)
+	+respond-min($break-areas)
 		margin-left: 0
 		margin-right: 0
-	&__button
-		+zon-button-dark($margin: remify(0 0 30px))
-		margin-bottom: remify(27px)
-		padding-left: remify(66px)
-		padding-right: remify(66px)
+		padding-bottom: 100%
+	&__overall-link
+		color: inherit
+		+on-interaction
+			color: inherit
 	&__container
 		bottom: 0
 		left: 0
+		padding: em(24px)
 		position: absolute
 		right: 0
 		text-align: center
 	&__heading
-		margin-bottom: remify(14px)
+		+teaser-image-text-shadow
+		font-size: em(24px)
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1.2
+		margin: 0 0 remify(15px)
 	&__text
-		@extend %teaser-text
-		color: $white
-		display: block
 		font-family: $font-franziska
-		font-size: remify(16px)
+		font-size: em(16px)
 		font-style: italic
-		margin-bottom: remify(18px)
-		padding-left: 3em
-		padding-right: 3em
-	&__title
-		@extend %teaser-kicker
-		color: $white
-		font-size: em(18px)
-		letter-spacing: 0.03em
-		margin-bottom: 0
+		margin: 0
+		line-height: 1.3125
+	&__button
+		+zon-button-dark($margin: remify(16px 0 0))
+		max-width: remify(220px)
+		width: 100%
 	&__media
-		margin-left: 0
-		margin-right: 0
-	& &__media-item // Specifity Wars
-		margin-left: auto
-		margin-right: auto
-		padding-top: 10px
-		width: 72%
-	&__media-container
-		background-color: #525460
+		height: 100% - 4%
+		left: 14%
+		margin: 0
+		position: absolute
+		top: 4%
+		width: 100% - 2 * 14%
+	&__overlay
+		+teaser-image-dark-overlay($color: transparent, $angle: 0deg, $gradient: (rgba(0, 0, 0, .8) 0%, rgba(0, 0, 0, 0) 70%))
 		height: 100%
-		min-height: 200px
-		&:after
-			+background-image(linear-gradient(-180deg, rgba(0,0,0,0.00) 30%, rgba(0,0,0,0.80) 100%))
-			content: ''
-			min-height: 100%
-			min-width: 100%
-			position: absolute
-			top: 0
+		position: absolute
+		width: 100%
