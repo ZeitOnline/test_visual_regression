@@ -286,6 +286,10 @@ def get_layout(block, request=None):
                 layout = layout
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
+        elif (zeit.content.author.interfaces.IAuthor.providedBy(teaser) and
+                layout == 'zon-small' and
+                block.__parent__.kind in ['duo', 'minor']):
+            layout = 'zon-author'
 
     layout = zeit.web.core.centerpage.TEASER_MAPPING.get(layout, layout)
 
