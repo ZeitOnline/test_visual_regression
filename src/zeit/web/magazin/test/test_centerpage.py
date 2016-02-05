@@ -301,13 +301,13 @@ def test_teaser_fullwidth_with_image_has_correct_markup(
     a = teaser.cssselect('a')
     title = teaser.cssselect('.teaser-fullwidth__title')
     subtitle = teaser.cssselect('.teaser-fullwidth__subtitle')
-    image_pattern = '/lamm-aubergine-zmo-landscape-large.jpg'
+    image_pattern = '/lamm-aubergine/wide__'
 
     # structure
     assert len(img_wrap) != 0
     assert len(title_wrap) != 0
 
-    assert re.search(image_pattern, img.get('src'))
+    assert image_pattern in img.get('src')
     assert u'Probier' in title[0].text.strip()
     assert u'auch dieses Jahr leider' in subtitle[0].text.strip()
     assert 'Lammkotelett' in img.get('alt')
@@ -327,13 +327,13 @@ def test_teaser_fullwidth_light_with_image_has_correct_markup(
     a = teaser.cssselect('a')
     title = teaser.cssselect('.teaser-fullwidth__title')
     subtitle = teaser.cssselect('.teaser-fullwidth__subtitle')
-    image_pattern = '/lamm-aubergine-zmo-landscape-large.jpg'
+    image_pattern = '/lamm-aubergine/wide__'
 
     # structure
     assert len(img_wrap) != 0
     assert len(title_wrap) != 0
 
-    assert re.search(image_pattern, img.get('src'))
+    assert image_pattern in img.get('src')
     assert u'Probier' in title[0].text.strip()
     assert u'auch dieses Jahr leider' in subtitle[0].text.strip()
     assert 'Lammkotelett' in img.get('alt')
