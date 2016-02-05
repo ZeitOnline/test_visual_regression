@@ -203,7 +203,6 @@ $nav__section-border: 1px solid $nav__border-color
 
     .has-hover
         .main-nav__service,
-        .main-nav__search,
         .main-nav__community
             .main-nav__section__trigger:hover + .main-nav__section__content,
             .main-nav__section__content:hover
@@ -346,39 +345,6 @@ $nav__section-border: 1px solid $nav__border-color
         &:nth-child(2n)
             padding-left: $small
 
-
-//*********
-// SEARCH *
-//*********
-
-.main-nav__search
-    input
-        font-size: $font-s
-        vertical-align: middle
-        border: none
-        padding: 0 $thin
-        height: $nav__row-height - $thin
-    input[type=text]
-        color: $white
-        background-color: $grey--mid
-    input[type=submit]
-        color: $white
-        background-color: $grey
-        padding: 0 $small
-    +respond-min($nav__break__full-menu)
-        &.has-open-menu
-            border-left: none
-        .main-nav__section__content
-            top: 0
-            right: 100%
-            white-space: nowrap
-            line-height: inherit
-            padding: 0
-        .main-nav__section__trigger
-            +hide-text
-            width: em(18px)
-
-
 //************
 // COMMUNITY *
 //************
@@ -404,13 +370,17 @@ $nav__section-border: 1px solid $nav__border-color
     float: right
 
 .main-nav__sharing__item
-    +hide-text
     float: left
     width: $nav__row-height
     height: $nav__row-height
     border-left: $nav__section-border
-    +box-sizing(content-box)
-    background-position: center center
+    text-align: center
     +transition(background-color)
     +on-interaction
         background-color: $grey--mid
+
+.main-nav__sharing-icon
+    color: $white
+    max-width: em(19px)
+    max-height: em(19px)
+    vertical-align: middle

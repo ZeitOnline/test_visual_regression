@@ -69,8 +69,6 @@ def test_main_nav(selenium_driver, testserver, screen_size):
 
     class_trig = "main-nav__section__trigger"
     class_cont = "main-nav__section__content"
-    # class_input = "main-nav__search__input"
-    # class_button = "main-nav__search__submit"
 
     nav_list = driver.find_elements_by_id('js-main-nav')
     main_nav = driver.find_element_by_id('js-main-nav')
@@ -127,30 +125,6 @@ def test_main_nav(selenium_driver, testserver, screen_size):
 
     # service dropdown contains at least one link
     assert len(service_links) > 0
-
-    # comment out search stuff for now
-    # search = main_nav.find_element_by_class_name('main-nav__search')
-    # search_trig = search.find_element_by_class_name(class_trig)
-    # search_cont = search.find_element_by_class_name(class_cont)
-    # search_field = search_cont.find_element_by_class_name(class_input)
-    # search_button = search_cont.find_element_by_class_name(class_button)
-    # search is present and can be opened
-    # assert search_trig.is_displayed()
-    # search_trig.click()
-
-    # open search dropdown contains writable input field
-    # assert(search_field.is_displayed())
-    # search_string = "Keyword"
-    # search_field.send_keys(search_string)
-    # assert search_field.get_attribute("value") == search_string
-
-    # open search dropdown contains submit button
-    # assert search_button.is_displayed()
-
-    # comment out community stuff for now
-    # community is present and can be opened
-    # assert community_trig.is_displayed()
-    # community_trig.click()
 
     # visible sub res + topics
     assert res_content.is_displayed()

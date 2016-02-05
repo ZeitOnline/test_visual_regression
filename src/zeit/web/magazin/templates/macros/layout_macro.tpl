@@ -94,17 +94,6 @@
                                 <a href="{{ request.route_url('home') }}spiele/index" id="hp.zm.topnav.links.spiele./spiele/index">Spiele</a>
                             </div>
                         </div>
-                        {#
-                        <div class="main-nav__section main-nav__search">
-                            <span class="main-nav__section__trigger icon-search js-main-nav-section-trigger"><span class="main-nav__section__text">Suche</span></span>
-                            <div class="main-nav__section__content js-main-nav-section-content">
-                                <form action="{{ request.route_url('home') }}suche/index" role="search" method="get" class="main-nav__search__form">
-                                    <input class="main-nav__search__input" type="text" name="q" size="20" placeholder="Suchbegriff …">
-                                    <input class="main-nav__search__submit" type="submit" value="Suchen">
-                                </form>
-                            </div>
-                        </div>
-                        #}
                         <div class="main-nav__section main-nav__community">
                             {% if request.authenticated_userid %}
                                 {{ head_user_is_logged_in_true(request) }}
