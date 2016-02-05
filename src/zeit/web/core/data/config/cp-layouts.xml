@@ -343,8 +343,8 @@
     <layout
         id="zmo-gallery-upright"
         title="ZMO Fotostrecke hochkant"
-        image_pattern="zmo-upright"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="tile"
+        areas="minor"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
