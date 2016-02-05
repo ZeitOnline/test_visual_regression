@@ -1,18 +1,20 @@
 {% if view.c1_client and view.c1_prefix %}
 <script type="text/javascript">
-jquery.ajax({
-    url: "{{ view.c1_prefix }}/tracking/tracking.js",
-    dataType: "script",
-    cache: true,
-    success: function() {
-        if ( typeof( cre_client ) != "undefined" ) {
-            cre_client.set_page_view();
-        {% for func, value in view.c1_client %}
-            cre_client.{{ func }}( {{ value | safe }} );
-        {% endfor %}
-            cre_client.request();
-        }
-    }
+window.Zeit.require([ 'jquery' ], function( $ ) {
+	$.ajax({
+		url: "{{ view.c1_prefix }}/tracking/tracking.js",
+		dataType: "script",
+		cache: true,
+		success: function() {
+			if ( typeof( cre_client ) != "undefined" ) {
+				cre_client.set_page_view();
+			{% for func, value in view.c1_client %}
+				cre_client.{{ func }}( {{ value | safe }} );
+			{% endfor %}
+				cre_client.request();
+			}
+		}
+	});
 });
 </script>
 {% endif %}

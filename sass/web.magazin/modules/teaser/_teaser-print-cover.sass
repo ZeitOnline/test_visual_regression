@@ -2,24 +2,24 @@
 .teaser-print-cover
     @extend %teaser
 
-    &__image
-        @extend %teaser__image
-        @extend %cp_shadow--darker
+    &__media
+        @extend %teaser__media
+        @extend %teaser--darker
         height: auto
         img
             width: 100%
 
-    &__title__wrap
-        @extend %teaser__title__wrap
-        @extend %cp_link--dark
+    &__text
+        @extend %teaser__text
+        @extend %teaser-link--dark
         bottom: 0
         padding: $tiny $petite $big $petite
         position: absolute
         width: 100%
         z-index: 2
 
-    &__supertitle
-        @extend %teaser__supertitle
+    &__kicker
+        @extend %teaser__kicker
         margin-bottom: $tiny
         color: $white
         letter-spacing: 0
@@ -33,3 +33,6 @@
 
     &__subtitle
         @extend %teaser__subtitle
+
+    &__comments
+        @extend %teaser__comments

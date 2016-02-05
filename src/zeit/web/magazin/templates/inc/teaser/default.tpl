@@ -1,29 +1,16 @@
 {#
-
 Default teaser template to inherit from.
-
-Available attributes:
-    cp
-    lama
-    module
-    teaser
-
-All calling templates have to provide:
-    subtitle: to define display of subtitle ('true'/ 'false')
-    format: to define type of button (eg. 'small'/ 'large'/ 'large-photo'/ 'gallery'/ 'mtb'/ 'default')
-    supertitle: to define display of supertitle ('true'/ 'false')
-    icon: define display of optional asset icon ('true'/ 'false')
 #}
 
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
 {%- import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 {%- import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
 
-{% set image = get_teaser_image(module, teaser) %}
+{%- set image = get_teaser_image(module, teaser) %}
 {%- set video = teaser | get_video_asset %}
-{% set area = area if area else '' %} {# TODO: remove as soon as we have access to real area data (AS)#}
+{%- set area = area if area else '' %} {# TODO: remove as soon as we have access to real area data (AS)#}
 
-<article class="{% block layout %}teaser{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
+<article class="{% block layout %}teaser{% endblock %} {% block layout_shade %}{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
          {% block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
          data-clicktracking="{{ area.kind }}"
@@ -32,7 +19,7 @@ All calling templates have to provide:
     {% block comments %}
         {% if view.comment_counts[teaser.uniqueId] %}
         <a href="{{ teaser | create_url }}#show_comments">
-            <span class="cp_comment__count__wrap icon-comments-count">{{ view.comment_counts[teaser.uniqueId] }}</span>
+            <span class="{{ self.layout() }}__comments icon-comments-count">{{ view.comment_counts[teaser.uniqueId] }}</span>
         </a>
         {% endif %}
     {% endblock %}
@@ -44,16 +31,19 @@ All calling templates have to provide:
             {{ blocks.headervideo(video, self.layout() + '__asset ' + self.layout() + '__asset--' + self.layout_shade(), '') }}
         {%- elif image -%}
             {# call image asset #}
-            <div class="scaled-image {% block pixelperfect %}is-pixelperfect{% endblock %} {{ self.layout() }}__image {{ self.layout() }}__asset {% block layout_shade %}{% endblock %}">
-                {{ lama.insert_responsive_image(image) }}
-            </div>
+            {% block teaser_image %}
+                {% set image = image %}
+                {% set media_caption_additional_class = 'figcaption--hidden' %}
+                {% set module_layout = self.layout() %}
+                {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
+            {% endblock %}
         {%- endif %}
 
-        <header class="{{ self.layout() }}__title__wrap {{ self.layout() }}__title__wrap--{{ self.layout_shade() }}">
+        <header class="{{ self.layout() }}__text">
             {% block icon %}{% endblock %}
             <h2>
                 {% block teaser_kicker %}
-                <div class="{{ self.layout() }}__supertitle">
+                <div class="{{ self.layout() }}__kicker">
                     {{ teaser.teaserSupertitle or teaser.supertitle }}
                 </div>
                 {% endblock %}

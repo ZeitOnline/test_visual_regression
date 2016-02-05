@@ -549,10 +549,6 @@ class CeleraOneMixin(object):
         else:
             return self.type
 
-    @zeit.web.reify
-    def _c1_origin(self):
-        return 'app' if self.is_wrapped else 'web'
-
     @classmethod
     def _headersafe(cls, string):
         pattern = r'[^ %s]' % ''.join(werkzeug.http._token_chars)
@@ -593,7 +589,6 @@ class CeleraOneMixin(object):
             'C1-Track-CMS-ID': self._c1_cms_id,
             'C1-Track-Content-ID': self.content_path,
             'C1-Track-Doc-Type': self._c1_doc_type,
-            'C1-Track-Origin': self._c1_origin,
             'C1-Track-Heading': self._get_c1_heading(self._headersafe),
             'C1-Track-Kicker': self._get_c1_kicker(self._headersafe),
             'C1-Track-Service-ID': 'zon'
