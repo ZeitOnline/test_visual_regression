@@ -1,8 +1,3 @@
-{% import 'zeit.web.core:templates/macros/instantarticle_macro.tpl' as blocks %}
-{%- if view.wrap_in_cdata %}
-<![CDATA[
-{%- endif %}
-<!doctype html>
 <html lang="de" prefix="op: http://media.facebook.com/op#">
 
 <head>
@@ -75,11 +70,8 @@
 
         <!-- Article body goes here -->
         {% for page in view.pages %}
-            {%- for item in page -%}
-                {% set type = item | block_type %}
-                {%- if type not in ['place', 'contentadblock', 'cardstack', 'liveblog', 'inlinegallery'] -%}
-                    {{ (blocks[type] or blocks["no_block"])(item) }}
-                {%- endif -%}
+            {%- for block in page -%}
+                {% include "zeit.web.core:templates/instantarticle/blocks/{}.html".format(block | block_type) ignore missing %}
             {%- endfor -%}
         {% endfor %}
 
@@ -93,6 +85,3 @@
     </article>
 </body>
 </html>
-{%- if view.wrap_in_cdata %}
-]]>
-{%- endif %}

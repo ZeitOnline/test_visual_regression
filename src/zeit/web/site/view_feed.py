@@ -4,14 +4,14 @@ import calendar
 import datetime
 import email
 import logging
+import pytz
+import types
 import urllib
 import urlparse
-import pytz
 
 import pyramid.view
 import lxml.etree
 import lxml.objectify
-from types import NoneType
 
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
@@ -26,10 +26,6 @@ import zeit.web.site.view
 
 log = logging.getLogger(__name__)
 
-
-def _add_none(elem, text):
-    elem.text = ''
-
 ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
 CONTENT_NAMESPACE = 'http://purl.org/rss/1.0/modules/content/'
 DC_NAMESPACE = 'http://purl.org/dc/elements/1.1/'
@@ -37,7 +33,8 @@ ESI_NAMESPACE = 'http://www.edge-delivery.org/esi/1.0'
 ELEMENT_MAKER = lxml.builder.ElementMaker(nsmap={
     'atom': ATOM_NAMESPACE, 'content': CONTENT_NAMESPACE, 'dc': DC_NAMESPACE,
     'esi': ESI_NAMESPACE},
-    typemap={NoneType: _add_none})
+    typemap={types.NoneType: lambda elem, txt: setattr(elem, 'text', ''),
+             lxml.etree.CDATA: lambda elem, txt: setattr(elem, 'text', txt)})
 ATOM_MAKER = getattr(ELEMENT_MAKER, '{%s}link' % ATOM_NAMESPACE)
 CONTENT_MAKER = getattr(ELEMENT_MAKER, '{%s}encoded' % CONTENT_NAMESPACE)
 DC_MAKER = getattr(ELEMENT_MAKER, '{%s}creator' % DC_NAMESPACE)
@@ -211,6 +208,7 @@ class Newsfeed(Base):
     header='host:newsfeed(\.staging)?\.zeit\.de',
     context='zeit.content.author.interfaces.IAuthor')
 class AuthorFeed(Newsfeed):
+
     @zeit.web.reify
     def supertitle(self):
         return u'Autorenfeed {}'.format(self.context.display_name)
@@ -230,9 +228,10 @@ class AuthorFeed(Newsfeed):
     context=zeit.content.cp.interfaces.ICenterPage,
     renderer='string')
 @pyramid.view.view_config(
-    header='host:newsfeed(\.staging)?\.zeit\.de',
+    # header='host:newsfeed(\.staging)?\.zeit\.de',
     name='rss-instantarticle')
 class InstantArticleFeed(Newsfeed):
+
     @zeit.web.reify
     def pagetitle(self):
         return u'Instant Article Feed'
@@ -262,46 +261,20 @@ class InstantArticleFeed(Newsfeed):
         root.append(channel)
 
         for content in self.items:
-            metadata = zeit.cms.content.interfaces.ICommonMetadata(
-                content, None)
-            if metadata is None:
-                continue
 
-            content_url = zeit.web.core.template.create_url(
-                None, content, self.request)
-            content_url = create_public_url(content_url)
+            content_url = create_public_url(
+                zeit.web.core.template.create_url(
+                    None, content, self.request))
 
-            scheme, netloc, path, p, q, f = urlparse.urlparse(content_url)
+            scheme, netloc, path, _, _, _ = urlparse.urlparse(content_url)
             instant_articles_url = (
-                '{}://{}/instantarticle{}?cdata=true'.format(
+                '{}://{}/instantarticle-item{}'.format(
                     scheme, netloc, path))
 
-            esi_include = getattr(E, '{%s}include' % ESI_NAMESPACE)(
-                src=instant_articles_url)
+            include = getattr(E, '{%s}include' % ESI_NAMESPACE)(
+                src=instant_articles_url, onerror='continue')
+            channel.append(include)
 
-            authors = []
-            if getattr(content, 'authorships', None):
-                authors = [getattr(author.target, 'display_name', None)
-                           for author in content.authorships]
-                authors = [x for x in authors if x]
-
-            description = metadata.teaserText
-
-            title = ': '.join(t for t in (
-                metadata.supertitle, metadata.title) if t)
-
-            item = E.item(
-                E.title(title),
-                E.link(content_url),
-                E.description(description),
-                E.category(metadata.sub_ressort or metadata.ressort),
-                E.author(u', '.join(authors)),
-                E.pubDate(format_iso8601_date(
-                    last_published_semantic(content))),
-                E.guid(content_url, isPermaLink='false'),
-                CONTENT_MAKER(esi_include)
-            )
-            channel.append(item)
         return root
 
 
