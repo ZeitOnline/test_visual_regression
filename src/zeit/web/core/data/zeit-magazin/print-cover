@@ -47,8 +47,8 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-01-13T09:21:36.263169+00:00</attribute>
   </head>
   <body>
-    <supertitle>Test CP</supertitle>
-    <title>Test CP</title>
+    <supertitle>ZMO</supertitle>
+    <title>print-cover</title>
     <subtitle>Das ist meine Test CP.</subtitle>
 
     <cluster area="id-6a3c9692-f2bd-4234-8890-a84f1924ef83" visible="True" kind="duo">
@@ -61,24 +61,6 @@
         <region area="id-6dd22838-9f14-4294-a96d-3e2fa1a7bc91" visible="True" kind="minor">
             <container cp:type="teaser" module="zmo-print-cover" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358839389d9e">
               <block href="http://xml.zeit.de/artikel/02" uniqueId="http://xml.zeit.de/artikel/02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-                <badges>
-                  <badge py:pytype="str">audio</badge>
-                  <badge py:pytype="str">gallery</badge>
-                  <badge py:pytype="str">infographic</badge>
-                  <badge py:pytype="str">map</badge>
-                  <badge py:pytype="str">video</badge>
-                </badges>
-                <supertitle py:pytype="str">ZEITmagazin</supertitle>
-                <teaser_supertitle py:pytype="str">ZEITmagazin</teaser_supertitle>
-                <title py:pytype="str">Das neue Heft - im Video durchgeblättert</title>
-                <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
-                <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
-                <byline xsi:nil="true"/>
-                <breadcrumb_title xsi:nil="true"/>
-                <image base-id="http://xml.zeit.de/exampleimages/artikel/02/heft/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
-                  <bu py:pytype="str">Die ist der image sub text </bu>
-                  <copyright link="http://foo.de">©foo</copyright>
-                </image>
               </block>
             </container>
         </region>
