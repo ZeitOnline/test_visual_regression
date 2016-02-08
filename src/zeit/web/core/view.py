@@ -841,8 +841,11 @@ class Content(CeleraOneMixin, Base):
             user_blocked = self.request.session['user'].get('blocked')
             premoderation = self.request.session['user'].get('premoderation')
 
-        message = None  # used for general alerts in the comment section header
-        note = None     # used for general alerts at the comment form
+        # used for general alerts in the comment section header
+        message = None
+
+        # used for general alerts or user specific alerts in the comment form
+        note = None
 
         if self.community_maintenance['active']:
             message = self.community_maintenance['text_active']
@@ -862,11 +865,17 @@ class Content(CeleraOneMixin, Base):
         elif self.community_maintenance['scheduled']:
             message = self.community_maintenance['text_scheduled']
 
+        community_login = bool(self.request.session['user'].get('uid'))
+        if not community_login:
+            note = (u'Aufgrund eines technischen Fehlers steht Ihnen die '
+                    u'Kommentarfunktion kurzfristig nicht zur Verfügung. '
+                    u'Bitte entschuldigen Sie diese Störung.')
+
         return {
             'show': (self.comments_allowed or bool(self.comments)),
             'show_comment_form': not self.community_maintenance['active'] and (
                 self.comments_allowed) and self.comments_loadable and (
-                    not user_blocked),
+                    not user_blocked) and community_login,
             'show_comments': not self.community_maintenance['active'] and (
                 self.comments_loadable and bool(self.comments)),
             'no_comments': (not self.comments and self.comments_loadable),
