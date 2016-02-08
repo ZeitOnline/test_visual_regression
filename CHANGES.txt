@@ -24,6 +24,8 @@ Change log for zeit.web
 
 - FIX: Unobtrusive loading of CeleraOne tracking script
 
+- MAINT: Migrate column teaser to new image delivery stack
+
 - SUGAR: Implement assignment-conditional require blocks in jinja
 
 
