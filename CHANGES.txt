@@ -4,6 +4,8 @@ Change log for zeit.web
 2.55 (unreleased)
 -----------------
 
+- MAINT: Add enhanced window.Zeit javascript module to ZMO
+
 - HOTFIX: Correctly parse jinja profiler toggle value
 
 - ZON-2783: Add open graph sharing image width and height metadata
