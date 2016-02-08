@@ -333,7 +333,7 @@
     />
 
     <layout
-        id="zmo-gallery-upright"
+        id="zmo-upright"
         title="ZMO Fotostrecke hochkant"
         image_pattern="tile"
         areas="minor"
