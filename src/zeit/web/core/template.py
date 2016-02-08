@@ -52,6 +52,15 @@ def get_variant(group, variant_id):
 @zeit.web.register_global
 def get_image(module=None, content=None, fallback=True, variant_id=None,
               default='default'):
+    """Universal image retrieval function to be used in templates.
+
+    :param module: Module to extract a content and layout from
+    :param content: Override to provide different content with image reference
+    :param fallback: Specify whether missing images should render a fallback
+    :param variant_id: Override for automatic variant determination
+    :param default: If variant_id is None, specify a default for automatic
+                    variant determination
+    """
 
     if content is None:
         content = first_child(module)
