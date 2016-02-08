@@ -123,18 +123,17 @@ def test_teaser_landscape_small_has_correct_markup(testbrowser):
 
 
 def test_teaser_gallery_upright_has_correct_markup(testbrowser):
-    browser = testbrowser('/centerpage/lebensart')
+    browser = testbrowser('/zeit-magazin/upright')
     element = browser.cssselect('.teaser-gallery-upright')
 
     text_wrap = element[0].cssselect('.teaser-gallery-upright__text')
     link_wrap = element[0].cssselect('a')
     icon = element[0].cssselect('.icon-galerie-icon-white')
     img = element[0].cssselect('img')[0]
-    image_pattern = 'katzencontent/portrait__612x816'
     assert len(text_wrap) != 0
     assert len(link_wrap) >= 1
     assert len(icon) == 1
-    assert re.search(image_pattern, img.get('src'))
+    assert '/centerpage/katzencontent/portrait__' in img.get('src')
     assert img.get('alt') == 'Die ist der Alttest'
 
 
@@ -332,7 +331,7 @@ def test_teaser_fullwidth_light_with_image_has_correct_markup(
 
 
 def test_teaser_print_cover_has_correct_markup(testbrowser):
-    browser = testbrowser('/zeit-magazin/index')
+    browser = testbrowser('/zeit-magazin/print-cover')
     element = browser.cssselect('.teaser-print-cover')[0]
 
     text_wrap = element.cssselect('.teaser-print-cover__text')
