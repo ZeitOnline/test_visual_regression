@@ -83,6 +83,8 @@ class PostComment(zeit.web.core.view.Base):
     def post_comment(self):
         request = self.request
         user = request.session['user']
+        # XXX We should not have to transmit this; Community can get it itself
+        # from the SSO cookie.
         uid = user['uid']
         # use submitted values for POSTs, not GET values from request url
         params = (request.GET, request.POST)[self.request_method == 'POST']
