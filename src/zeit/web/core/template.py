@@ -673,15 +673,13 @@ def _existing_image(asset_id, base_name, patterns, ext, filenames):
 
 
 @zeit.web.register_global
-def get_column_image(teaser):
-    # TRASHME: Could be done entirely in template code and with get_image
+def get_column_image(content):
+    # XXX: Could be transformed to a more generally useful get_author
     try:
-        image_group = teaser.authorships[0].target.image_group
-        image = closest_substitute_image(image_group, 'zon-column')
-        return zeit.web.core.interfaces.ITeaserImage(image)
+        author = content.authorships[0].target
     except (AttributeError, IndexError, TypeError):
-        log.debug('Author of {} has no column image.'.format(getattr(
-            teaser, 'uniqueId', 'unknown')))
+        return
+    return get_image(content=author, variant_id='original', fallback=False)
 
 
 @zeit.web.register_global

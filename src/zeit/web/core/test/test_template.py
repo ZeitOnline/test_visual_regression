@@ -497,7 +497,7 @@ def test_get_column_image_should_return_an_image_or_none(application):
         zeit.cms.interfaces.ICMSContent(
             'http://xml.zeit.de/zeit-online/cp-content/kolumne'))
 
-    assert isinstance(img, zeit.web.core.image.Image)
+    assert isinstance(img, zeit.web.core.image.VariantImage)
     assert zeit.web.core.template.get_column_image(None) is None
 
     teaser = mock.Mock()
