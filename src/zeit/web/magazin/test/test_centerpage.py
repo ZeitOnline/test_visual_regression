@@ -71,9 +71,7 @@ def test_teaser_square_large_has_correct_markup(testbrowser):
     assert supertitle.text.strip() == 'Article Image Asset Spitzmarke'
     assert title.text.strip() == 'Article Image Asset Titel'
     assert u'Dies k\u00F6nnte' in subtitle.text.strip()
-    assert re.search('http://.*/centerpage/katzencontent/' +
-                     'bitblt-.*/' +
-                     'katzencontent-zmo-square-large.jpg',
+    assert re.search('/centerpage/katzencontent/square',
                      img.get('src'))
     assert img.get('alt') == 'Die ist der Alttest'
 
@@ -96,9 +94,7 @@ def test_teaser_square_large_light_has_correct_markup(testbrowser):
     assert supertitle.text.strip() == 'Article Image Asset Spitzmarke'
     assert title.text.strip() == 'Article Image Asset Titel'
     assert u'Dies k\u00F6nnte' in subtitle.text.strip()
-    assert re.search('http://.*/centerpage/katzencontent/' +
-                     'bitblt-.*/' +
-                     'katzencontent-zmo-square-large.jpg',
+    assert re.search('/centerpage/katzencontent/square',
                      img.get('src'))
     assert img.get('alt') == 'Die ist der Alttest'
 
@@ -121,9 +117,7 @@ def test_teaser_landscape_small_has_correct_markup(testbrowser):
     assert supertitle.text.strip() == u'Kochen für Gäste'
     assert title.text.strip() == 'Heimlich vegetarisch'
     assert u'Wenn Gäste kommen,' in subtitle.text.strip()
-    assert re.search('http://.*/zeit-magazin/2014/17/pistazienparfait/' +
-                     'bitblt-.*/' +
-                     'pistazienparfait-zmo-landscape-small.jpg',
+    assert re.search('pistazienparfait/wide__822x462',
                      img.get('src'))
     assert img.get('alt') == 'Das Pistazienparfait wird verspeist'
 
@@ -161,9 +155,7 @@ def test_teaser_upright_large_has_correct_markup(testbrowser):
     assert supertitle.text.strip() == u'Article Image Asset Spitzmarke'
     assert title.text.strip() == 'Article Image Asset Titel'
     assert u'Dies könnte' in subtitle.text.strip()
-    assert re.search('http://.*/centerpage/katzencontent/' +
-                     'bitblt-.*/' +
-                     'katzencontent-zmo-lead-upright.jpg',
+    assert re.search('katzencontent/portrait__612x816',
                      img.get('src'))
     assert img.get('alt') == 'Die ist der Alttest'
 
@@ -354,7 +346,8 @@ def test_teaser_print_cover_has_correct_markup(testbrowser):
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == 'ZEITmagazin'
     assert 'Das neue Heft' in title.text.strip()
-    assert 'exampleimages/artikel/02/heft/portrait__' in img.get('src')
+    assert re.search('heft/portrait__612x816',
+                     img.get('src'))
 
 
 def test_teaser_should_have_comment_count(
