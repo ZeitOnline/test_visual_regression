@@ -11,4 +11,42 @@
     <bu xsi:nil="true"/>
     <copyright py:pytype="str">© ZEIT ONLINE</copyright>
   </image_group>
+  <summary>Chefredakteur, ZEIT ONLINE.</summary>
+  <facebook>jochen.wegner</facebook>
+  <instagram>jochenjochen</instagram>
+  <twitter>jochen</twitter>
+  <biography>Jochen Wegner ist seit März 2013 Chefredakteur von ZEIT ONLINE. Der studierte Physiker und Philosoph erforschte die Chaostheorie des Gehirns, bevor er in den Journalismus wechselte. Er war Print-Ressortleiter Wissen ("Focus"), Onlinechefredakteur (focus.de), Geschäftsführer (TOMORROW FOCUS Media), Start-up-Gründer (mag10), Unternehmensberater (wegner.io) sowie Buchautor ("Warum immer ich?") und belegte Platz 2 bei der Wahl zum "Chefredakteur des Jahres" 2015 (Medium Magazin).</biography>
+  <question id="hobby">"Wohnen" (Gerhard Polt)</question>
+  <favourites>
+    <reference xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/kultur/2015-01/pressefreiheit-irrtuemer-mohammed-karikaturen" year="2015" issue="2" ressort="Kultur" contenttype="article" publication-date="" expires="" author="Jochen Wegner">
+      <supertitle py:pytype="str">Mohammed-Karikaturen</supertitle>
+      <title py:pytype="str">Vier Irrtümer über die Pressefreiheit</title>
+      <text py:pytype="str">Der anhaltende Streit um die Veröffentlichung der Mohammed-Karikaturen legt gefährliche Denkfallen im Journalismus offen.</text>
+      <description py:pytype="str">Der anhaltende Streit um die Veröffentlichung der Mohammed-Karikaturen legt gefährliche Denkfallen im Journalismus offen.</description>
+      <byline xsi:nil="true"/>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/kultur/2015-01/charlie-hebdo-pressefreiheit/" type="jpg" align="left" publication-date="" expires="">
+        <bu py:pytype="str">Ein Journalist hält ein Etui während einer Schweigeminute vor dem Büro von "Charlie Hebdo" in Paris. </bu>
+        <copyright py:pytype="str">© Gonzalo Fuentes/Reuters</copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/W/Jochen_Wegner/index" publication-date="" expires="">
+        <display_name py:pytype="str">Jochen Wegner</display_name>
+      </author>
+    </reference>
+    <reference xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/datenschutz/2013-12/greenwald-journalismus-aktivismus-neutralitaet" year="2013" issue="52" ressort="Digital" contenttype="article" publication-date="" expires="" genre="kommentar" author="Jochen Wegner">
+      <supertitle py:pytype="str">Greenwald-Debatte</supertitle>
+      <title py:pytype="str">Wovon ich rede, wenn ich von Journalismus rede</title>
+      <text py:pytype="str">Können Journalisten auch Aktivisten sein? Müssen Sie es sogar? Die Frage wird nach einer Rede des NSA-Enthüllers Greenwald neu diskutiert. </text>
+      <description py:pytype="str">Können Journalisten auch Aktivisten sein? Müssen Sie es sogar? Die Frage wird nach einer Rede des NSA-Enthüllers Greenwald neu diskutiert. </description>
+      <byline xsi:nil="true"/>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/digital/datenschutz/2013-12/greenwald-ccc-keynote/" type="jpg" title="Greenwald Chaos Computer Club Keynote" align="left" publication-date="" expires="">
+        <bu py:pytype="str">Der Blogger und Aktivist Glenn Greenwald </bu>
+        <copyright py:pytype="str">CCC/30C3, CC-Lizenz</copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/W/Jochen_Wegner/index" publication-date="" expires="">
+        <display_name py:pytype="str">Jochen Wegner</display_name>
+      </author>
+    </reference>
+  </favourites>
 </author>

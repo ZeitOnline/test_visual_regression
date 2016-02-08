@@ -68,7 +68,7 @@ def test_get_teaser_image(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_video_asset_2'
+        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
     assert isinstance(image, zeit.web.core.image.TeaserImage), (
@@ -90,7 +90,7 @@ def test_get_teaser_image_should_set_image_pattern(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_video_asset_2'
+        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
     assert image.image_pattern == 'zmo-large'
@@ -100,7 +100,7 @@ def test_get_teaser_image_should_utilize_unique_id(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_video_asset_2'
+        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
     unique_id = 'http://xml.zeit.de/centerpage/katzencontent/'
     image = zeit.web.core.template.get_teaser_image(
@@ -114,7 +114,7 @@ def test_get_teaser_image_should_catch_fictitious_unique_id(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_video_asset_2'
+        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
     unique_id = 'http://xml.zeit.de/moep/moepmoep/moep'
     image = zeit.web.core.template.get_teaser_image(
@@ -462,13 +462,34 @@ def test_function_get_image_pattern_is_working_as_expected(application):
     assert teaser == ['default']
 
 
-def test_visual_profiler_should_not_interfere_with_rendering(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    assert not len(browser.cssselect('.__pro__'))
+def test_visual_profiler_should_not_interfere_with_rendering_if_disabled(
+        testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert not len(browser.cssselect('div.__pro__'))
 
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
-    assert not len(browser.cssselect('.__pro__'))
+    browser = testbrowser('/zeit-magazin/index')
+    assert not len(browser.cssselect('div.__pro__'))
+
+
+def test_visual_profiler_should_inject_performance_visualization(
+        testbrowser, monkeypatch, jinja2_env):
+    ext = jinja2_env.extensions.get('zeit.web.core.jinja.ProfilerExtension')
+    monkeypatch.setattr(ext, 'active', True)
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert len(browser.cssselect('div.__pro__')) == 6
+
+
+@pytest.mark.parametrize('expr, value', [('True', 'bar'), ('False', '')])
+def test_require_extension_should_only_execute_if_expr_evaluates_to_true(
+        jinja2_env, expr, value):
+    tpl = '{% require foo = ' + expr + ' %} bar {% endrequire %}'
+    assert jinja2_env.from_string(tpl).render().strip() == value
+
+
+def test_require_extension_should_ensure_variable_access_in_inner_block(
+        jinja2_env):
+    tpl = '{% require foo = "pre" + fix %} {{ foo }} {% endrequire %}'
+    assert jinja2_env.from_string(tpl).render(fix='fix').strip() == 'prefix'
 
 
 def test_get_column_image_should_return_an_image_or_none(application):

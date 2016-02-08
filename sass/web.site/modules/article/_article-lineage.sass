@@ -26,6 +26,7 @@ $article-lineage-transition-duration: .4s
 		display: none
 	&--hidden
 		+transition-duration(90ms) // used to fade it out quickly
+		pointer-events: none // it's invisible - make it unclickable too
 	&--absolute,
 	&--fixed
 		opacity: 1
