@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
-    <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/test-cp/card-flip-read-bildergruppe/" type="png" align="left" publication-date="" expires="">
+    <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/images/harald-martenstein-diskriminierung-png-test/" type="png" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
-      <copyright py:pytype="str">© Zeit</copyright>
+      <copyright py:pytype="str">© Fengel</copyright>
     </image>
     <author href="http://xml.zeit.de/autoren/E/Maria_Exner/index" publication-date="" expires="">
       <display_name py:pytype="str">Maria Exner</display_name>
@@ -55,9 +55,9 @@
     <title>Meine Überschrift</title>
     <subtitle>Unterzeile</subtitle>
     <division type="page">
-      <image base-id="http://xml.zeit.de/zeit-magazin/test-cp/card-flip-read-bildergruppe/" type="png" align="left" publication-date="" expires="" layout="large" is_empty="False">
+      <image base-id="http://xml.zeit.de/zeit-magazin/images/harald-martenstein-diskriminierung-png-test/" type="png" align="left" publication-date="" expires="" layout="large" is_empty="False">
         <bu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-        <copyright py:pytype="str">© Zeit</copyright>
+        <copyright py:pytype="str">© Fengel</copyright>
       </image>
       <p>Lorem dolorem<br/></p>
     </division>

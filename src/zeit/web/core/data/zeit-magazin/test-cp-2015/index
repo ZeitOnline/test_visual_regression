@@ -166,6 +166,14 @@
               <block href="http://xml.zeit.de/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
               </block>
             </container>
+            <container cp:type="teaser" module="zmo-upright" hide-dupes="True" visible="True" cp:__name__="id-SOLOedc55a53-7cab-4bbc-a31d-1cf20afe5d9dKKKKKMAJOR">
+              <block href="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" uniqueId="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+              </block>
+            </container>
+            <container cp:type="teaser" module="zmo-print-cover" hide-dupes="True" visible="True" cp:__name__="id-SOLO1e28ba2e-17a6-490f-91da-358839389d9eLLLLMAJOR">
+              <block href="http://xml.zeit.de/artikel/02" uniqueId="http://xml.zeit.de/artikel/02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+              </block>
+            </container>
         </region>
     </cluster>
 
@@ -186,6 +194,19 @@
         <region area="id-TRIO274baeca3-7dbb-437d-8e70-3a3d07969d49" visible="True" kind="trio">
              <container cp:type="teaser" module="zmo-card-flip-read" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardfr">
               <block href="http://xml.zeit.de/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
+              </block>
+            </container>
+            <container cp:type="teaser" module="zmo-upright" hide-dupes="True" visible="True" cp:__name__="id-SOLOedc55a53-7cab-4bbc-a31d-1cf20afe5d9dKKKKK">
+              <block href="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" uniqueId="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+              </block>
+            </container>
+            <container cp:type="teaser" module="zmo-print-cover" hide-dupes="True" visible="True" cp:__name__="id-SOLO1e28ba2e-17a6-490f-91da-358839389d9eLLLL">
+              <block href="http://xml.zeit.de/artikel/02" uniqueId="http://xml.zeit.de/artikel/02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+              </block>
+            </container>
+            <!-- card-picture -->
+            <container cp:type="teaser" module="zmo-card-picture" hide-dupes="True" visible="True" cp:__name__="id-381c8f6a-dc39-40e3-a919-09aa41eaa7c2" background_color="e7ec5c">
+              <block href="http://xml.zeit.de/zeit-magazin/article/marteinstein-transparenz-test" uniqueId="http://xml.zeit.de/zeit-magazin/article/marteinstein-transparenz-test" year="2014" issue="19" ressort="zeit-magazin" contenttype="article" publication-date="" expires="" author="Maria Exner" date-last-modified="2014-05-05T09:37:35+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-05-05T09:37:21.413549+00:00">
               </block>
             </container>
         </region>

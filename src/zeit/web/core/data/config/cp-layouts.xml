@@ -309,14 +309,6 @@
     />
 
     <layout
-        id="zmo-upright-large-light"
-        title="ZMO großer Teaser hochkant (helles Bild)"
-        image_pattern="zmo-lead-upright"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-    />
-
-    <layout
         id="zmo-landscape-large"
         title="ZMO großer Teaser 16:9"
         image_pattern="zmo-landscape-large"
@@ -341,10 +333,10 @@
     />
 
     <layout
-        id="zmo-gallery-upright"
+        id="zmo-upright"
         title="ZMO Fotostrecke hochkant"
-        image_pattern="zmo-upright"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="tile"
+        areas="minor"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
@@ -386,30 +378,9 @@
         available="zeit.magazin.interfaces.IZMOContent"
         />
     <layout
-        id="zmo-card-share-read"
-        title="ZMO Karte Share'n'Read"
-        image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-        />
-    <layout
-        id="zmo-card-flip-share"
-        title="ZMO Karte Flip'n'Share"
-        image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-        />
-    <layout
-        id="zmo-card-flip-flip"
-        title="ZMO Karte Flip'n'Flip"
-        image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-        />
-    <layout
         id="zmo-print-cover"
         title="ZMO Print Cover"
-        image_pattern="zmo-print-cover"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="original"
+        areas="minor"
         available="zeit.magazin.interfaces.IZMOContent"/>
 </layouts>

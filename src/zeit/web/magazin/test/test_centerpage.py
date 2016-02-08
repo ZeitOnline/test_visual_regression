@@ -122,19 +122,18 @@ def test_teaser_landscape_small_has_correct_markup(testbrowser):
     assert img.get('alt') == 'Das Pistazienparfait wird verspeist'
 
 
-def test_teaser_gallery_upright_has_correct_markup(testbrowser):
+def test_teaser_upright_has_correct_markup(testbrowser):
     browser = testbrowser('/zeit-magazin/upright')
-    element = browser.cssselect('.teaser-gallery-upright')
+    element = browser.cssselect('.teaser-upright')
 
-    text_wrap = element[0].cssselect('.teaser-gallery-upright__text')
+    text_wrap = element[0].cssselect('.teaser-upright__text')
     link_wrap = element[0].cssselect('a')
     icon = element[0].cssselect('.icon-galerie-icon-white')
     img = element[0].cssselect('img')[0]
     assert len(text_wrap) != 0
     assert len(link_wrap) >= 1
     assert len(icon) == 1
-    assert '/centerpage/katzencontent/portrait__' in img.get('src')
-    assert img.get('alt') == 'Die ist der Alttest'
+    assert '/exampleimages/artikel/01/schoppenstube/tile__' in img.get('src')
 
 
 def test_teaser_upright_large_has_correct_markup(testbrowser):
@@ -346,8 +345,7 @@ def test_teaser_print_cover_has_correct_markup(testbrowser):
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == 'ZEITmagazin'
     assert 'Das neue Heft' in title.text.strip()
-    assert re.search('heft/portrait__612x816',
-                     img.get('src'))
+    assert 'exampleimages/artikel/02/heft/original' in img.get('src')
 
 
 def test_teaser_should_have_comment_count(
