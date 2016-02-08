@@ -343,7 +343,7 @@ def test_teaser_fullwidth_light_with_image_has_correct_markup(
 
 
 def test_teaser_print_cover_has_correct_markup(testbrowser):
-    browser = testbrowser('/zeit-magazin/index')
+    browser = testbrowser('/zeit-magazin/print-cover')
     element = browser.cssselect('.teaser-print-cover')[0]
 
     text_wrap = element.cssselect('.teaser-print-cover__text')
@@ -358,10 +358,7 @@ def test_teaser_print_cover_has_correct_markup(testbrowser):
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == 'ZEITmagazin'
     assert 'Das neue Heft' in title.text.strip()
-    assert re.search('http://.*/exampleimages/artikel/02/heft/' +
-                     'bitblt-.*/' +
-                     'heft-zmo-print-cover.jpg',
-                     img.get('src'))
+    assert 'exampleimages/artikel/02/heft/portrait__' in img.get('src')
 
 
 def test_teaser_should_have_comment_count(
