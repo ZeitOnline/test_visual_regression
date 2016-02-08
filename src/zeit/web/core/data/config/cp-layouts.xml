@@ -309,14 +309,6 @@
     />
 
     <layout
-        id="zmo-upright-large-light"
-        title="ZMO großer Teaser hochkant (helles Bild)"
-        image_pattern="zmo-lead-upright"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-    />
-
-    <layout
         id="zmo-landscape-large"
         title="ZMO großer Teaser 16:9"
         image_pattern="zmo-landscape-large"
