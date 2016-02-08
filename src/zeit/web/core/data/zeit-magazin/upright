@@ -47,8 +47,8 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-01-13T09:21:36.263169+00:00</attribute>
   </head>
   <body>
-    <supertitle>Test CP</supertitle>
-    <title>Test CP</title>
+    <supertitle>ZMO</supertitle>
+    <title>upright</title>
     <subtitle>Das ist meine Test CP.</subtitle>
 
     <cluster area="id-6a3c9692-f2bd-4234-8890-a84f1924ef83" visible="True" kind="duo">
@@ -59,15 +59,18 @@
           </container>
         </region>
         <region area="id-6dd22838-9f14-4294-a96d-3e2fa1a7bc91" visible="True" kind="minor">
-            <container cp:type="teaser" module="zmo-gallery-upright" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
-              <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+            <container cp:type="teaser" module="zmo-upright" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c085MAJOR">
+              <block href="http://localhost:9090/galerien/fs-desktop-schreibtisch-computer" uniqueId="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
               </block>
             </container>
-            <container cp:type="teaser" module="zmo-gallery-upright" hide-dupes="True" visible="True" cp:__name__="id-8012d88f-ac3e-4e13-a3d4-ce39d8e25454">
+            <container cp:type="teaser" module="zmo-upright" hide-dupes="True" visible="True" cp:__name__="id-3d2116f6-96dd-4556-81f7-d7d0a40435e5">
+              <block href="http://xml.zeit.de/zeit-magazin/test-cp/liebeskolumne-rationalitaet-emotionen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp/liebeskolumne-rationalitaet-emotionen" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+              </block>
+            </container>
+            <container cp:type="teaser" module="zmo-upright" hide-dupes="True" visible="True" cp:__name__="id-8012d88f-ac3e-4e13-a3d4-ce39d8e25454">
               <block href="http://xml.zeit.de/artikel/advertorial" uniqueId="http://xml.zeit.de/artikel/advertorial" year="2014" issue="43" ressort="Angebote" contenttype="article" publication-date="" expires="" date-last-modified="2014-11-10T09:48:54+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-11-10T09:48:49.226076+00:00">
               </block>
             </container>
-
         </region>
     </cluster>
   </body>

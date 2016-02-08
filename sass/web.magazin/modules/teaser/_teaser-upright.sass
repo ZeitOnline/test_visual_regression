@@ -1,24 +1,16 @@
 
-.teaser-gallery-upright
+.teaser-upright
     @extend %teaser
-    height: $cp_button-gallery-height
     overflow: hidden
     margin-bottom: $compact
     display: block
-    & a > .scaled-image
-        height: $cp_button-gallery-height
-        @extend %teaser--dark
-        img
-            bottom: 0
-            left: 0
-            min-height: 100%
-            position: absolute
-            right: 0
-            top: 0
-            width: 100%
 
     &__media
-        @extend %teaser__media
+        @extend %teaser--dark
+        height: 0
+        margin: 0
+        overflow: hidden
+        padding-bottom: 100% / 4 * 5 // image variant 'tile'
 
     &__text
         @extend %teaser__text
