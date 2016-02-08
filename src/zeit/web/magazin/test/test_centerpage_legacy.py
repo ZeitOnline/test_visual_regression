@@ -124,8 +124,8 @@ def test_autoselected_asset_from_cp_teaser_should_be_a_video(
 
 def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(
         testserver, testbrowser):
-    article = 'http://xml.zeit.de/zeit-magazin/article/article_video_asset_list'
-    context = zeit.cms.interfaces.ICMSContent(article)
+    url = 'http://xml.zeit.de/zeit-magazin/article/article_video_asset_list'
+    context = zeit.cms.interfaces.ICMSContent(url)
     asset = zeit.web.core.centerpage.auto_select_asset(context)
     assert isinstance(asset[0], zeit.content.video.video.Video)
     assert isinstance(asset[1], zeit.content.video.video.Video)
