@@ -401,7 +401,7 @@
     <layout
         id="zmo-print-cover"
         title="ZMO Print Cover"
-        image_pattern="zmo-print-cover"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="original"
+        areas="minor"
         available="zeit.magazin.interfaces.IZMOContent"/>
 </layouts>
