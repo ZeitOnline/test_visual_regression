@@ -4,7 +4,7 @@
 
 {%- macro plain_author(obj) %}
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="byline__author" itemprop="name">
+        <span itemprop="name">
             {{- obj.display_name -}}
         </span>
         {%- if obj.uniqueId -%}
@@ -16,7 +16,7 @@
 {%- macro linked_author(obj) %}
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
         <a href="{{ obj.uniqueId | create_url }}" itemprop="url">
-            <span class="byline__author" itemprop="name">
+            <span itemprop="name">
                 {{- obj.display_name -}}
     </span></a></span>
 {%- endmacro -%}

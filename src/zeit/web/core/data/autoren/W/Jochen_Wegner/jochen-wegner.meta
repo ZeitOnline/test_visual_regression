@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/autoren/W/Jochen_Wegner/jochen-wegner/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-08-04T14:12:07.877878+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">jochen-wegner.png</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-09-21T13:02:01.811994+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="variants">&lt;pickle&gt; &lt;dictionary&gt; &lt;item&gt; &lt;key&gt; &lt;unicode&gt;default&lt;/unicode&gt; &lt;/key&gt; &lt;value&gt; &lt;dictionary&gt; &lt;item key="focus_x"&gt; &lt;float&gt;0.31999538621298207&lt;/float&gt; &lt;/item&gt; &lt;item key="focus_y"&gt; &lt;float&gt;0.17705424464026162&lt;/float&gt; &lt;/item&gt; &lt;item key="zoom"&gt; &lt;int&gt;1&lt;/int&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/value&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-08-04T14:15:17.919293+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-21T13:01:01.961418+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:d997da19-7bc2-496e-9b3f-018ffe756f6e}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-07-23T14:39:30.171501+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.strothjohann</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; ZEIT ONLINE&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-09-21T13:01:09.936373+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2015-09-21T13:01:03Z</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Mon, 21 Sep 2015 13:01:03 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"10683f0-1000-520417952029d"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>

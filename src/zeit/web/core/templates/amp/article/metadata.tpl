@@ -16,9 +16,9 @@
 {% if view.source_label -%}
 	<span class="metadata__source">
 		{%- if view.source_url -%}
-			<a href="{{ view.source_url }}">{{ view.unobfuscated_source | default(view.source_label) }}</a>
+			<a href="{{ view.source_url }}">{{ view.unobfuscated_source or view.source_label }}</a>
 		{%- else -%}
-			{{ view.unobfuscated_source | default(view.source_label) }}
+			{{ view.unobfuscated_source or view.source_label }}
 		{%- endif -%}
 	</span>
 {% endif -%}

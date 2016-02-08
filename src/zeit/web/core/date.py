@@ -36,13 +36,17 @@ def mod_date(resource):
         # but it's not like that [ms]
         modified = pub_info.date_last_published_semantic
         released = pub_info.date_first_released
+        tz = babel.dates.get_timezone('Europe/Berlin')
         # use 60s of tolerance before displaying a modification date
         if (released and modified and
                 modified - released > datetime.timedelta(seconds=60)):
-            return modified
+            return modified.astimezone(tz)
         # fall back to date_last_published_semantic needed at least for
         # test files without date_first_released
-        return released or modified
+        if released:
+            return released.astimezone(tz)
+        elif modified:
+            return modified.astimezone(tz)
     except TypeError:
         return
 
@@ -51,6 +55,9 @@ def mod_date(resource):
 def release_date(resource):
     try:
         pub_info = zeit.cms.workflow.interfaces.IPublishInfo(resource)
+        if pub_info.date_first_released:
+            tz = babel.dates.get_timezone('Europe/Berlin')
+            return pub_info.date_first_released.astimezone(tz)
         return pub_info.date_first_released
     except TypeError:
         return

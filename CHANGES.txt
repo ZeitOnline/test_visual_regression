@@ -4,7 +4,11 @@ Change log for zeit.web
 2.55 (unreleased)
 -----------------
 
-- FIX: Unobtrusive loading of CeleraOne tracking script
+- HOTFIX: Correctly parse jinja profiler toggle value
+
+- ZON-2601: Add sharing links and article tags to AMPages
+
+- ZON-2602: Add Nextread and Verlags-Nextread to AMPages
 
 - ZON-2710: Use external SVG sprite in ZMO
 
@@ -13,6 +17,14 @@ Change log for zeit.web
 - ZON-2536: Move generic image assets to core module
 
 - ZON-2552: Refactored fullwidth teaser
+
+- ZON-2692: Add instantarticle author fallback and local image captions
+
+- ZON-2613: Implement author teaser
+
+- FIX: Unobtrusive loading of CeleraOne tracking script
+
+- SUGAR: Implement assignment-conditional require blocks in jinja
 
 
 2.54.1 (2016-02-02)
@@ -27,10 +39,6 @@ Change log for zeit.web
 
 2.54 (2016-02-01)
 -----------------
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-| DEPLOYMENT-NOTE: Please also deploy zeit-online cookbook 0.2.8 |
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - FIX: Fix scope of schema.org SiteNavigationElement
 
