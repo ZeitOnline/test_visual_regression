@@ -4,4 +4,4 @@
 {% set media_caption_additional_class = 'figcaption--hidden' %}
 
 {# we don't need no figcaption for the kiosk #}
-{% block media_caption_content %}{% endblock %}
+{% block media_caption %}{% endblock %}

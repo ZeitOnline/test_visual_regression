@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/autoren/D/Tobias_Dorfer/tobias-dorfer/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">zon-column</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-01-27T11:53:46.407106+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="variants">&lt;pickle&gt; &lt;dictionary&gt; &lt;item&gt; &lt;key&gt; &lt;unicode&gt;default&lt;/unicode&gt; &lt;/key&gt; &lt;value&gt; &lt;dictionary&gt; &lt;item key="focus_x"&gt; &lt;float&gt;0.44438445503746626&lt;/float&gt; &lt;/item&gt; &lt;item key="focus_y"&gt; &lt;float&gt;0.18628205128205128&lt;/float&gt; &lt;/item&gt; &lt;item key="zoom"&gt; &lt;int&gt;1&lt;/int&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/value&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Jakob B&#xF6;rner&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bildbestellung</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-01-27T11:53:46.553132+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-01-27T11:53:21.234822+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-01-27T11:53:57.627690+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:e7e3c649-483b-4cf4-b1aa-a55b567060d0}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-01-27T11:53:46.553132+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-01-27T11:53:46.693158+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2016-01-27T11:53:47Z</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Wed, 27 Jan 2016 11:53:47 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"106a41a-1000-52a4f7466658d"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>

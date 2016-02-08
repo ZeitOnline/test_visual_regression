@@ -49,6 +49,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
   <attribute ns="DAV:" name="resourcetype"/>
   <attribute ns="DAV:" name="creationdate">2015-06-01T15:12:10Z</attribute>
   <attribute ns="DAV:" name="getcontentlength">9128</attribute>

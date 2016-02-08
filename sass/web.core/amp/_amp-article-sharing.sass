@@ -1,0 +1,43 @@
+.article-sharing
+	font-size: em(15px)
+	letter-spacing: $zon-letter-spacing-s
+	margin: remify(0 0 32px)
+	&__title
+		color: $zon-dark-grey
+		margin: remify(0 0 8px)
+	&__list
+		font-size: remify(14px)
+		margin: 0
+		padding: 0
+		list-style-type: none
+	&__item
+		display: inline
+		&:before
+			content: " / "
+			color: $color-separator
+			margin: 0 .25em
+		&:first-child:before
+			content: none
+		&--whatsapp
+			+respond-min($break-tablet-min)
+				display: none
+	&__link
+		font-weight: bold
+		+on-interaction
+			border-bottom: 1px solid currentColor
+		&--facebook
+			+link
+				color: $color-facebook
+		&--twitter
+			+link
+				color: $color-twitter
+		&--whatsapp
+			+link
+				color: $color-whatsapp
+		&--mail
+			+link
+				color: $zon-grey
+
++respond-min($break-tablet-min)
+	.article-sharing
+		font-size: em(14px)

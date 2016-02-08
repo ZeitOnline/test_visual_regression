@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<title>{{ view.pagetitle }}</title>
-    <meta name="description" content="{{ view.pagedescription }}">
-    {% if view.meta_keywords -%}
-        <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
-    {% endif -%}
-    <meta name="robots" content="{{ view.meta_robots }}">
+	<meta name="description" content="{{ view.pagedescription }}">
+	{% if view.meta_keywords -%}
+		<meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
+	{% endif -%}
+	<meta name="robots" content="{{ view.meta_robots }}">
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 	<link rel="canonical" href="{{ view.content_url }}">
-    {% if view.syndication_source -%}
-        <link rel="syndication-source" href="{{ view.syndication_source }}">
-    {% endif -%}
-    {%- include "zeit.web.core:templates/inc/meta/date.html" %}
+	{% if view.syndication_source -%}
+		<link rel="syndication-source" href="{{ view.syndication_source }}">
+	{% endif -%}
+	{%- include "zeit.web.core:templates/inc/meta/date.html" %}
 	{%- block sharing_meta %}
 		{%- include "zeit.web.core:templates/inc/meta/sharing.html" -%}
 	{% endblock sharing_meta %}
@@ -33,7 +33,7 @@
 		{% endblock symbols %}
 	</div>
 
-	<div class="content">
+	<div class="content" id="top">
 		<header class="header" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
 			{% block logo %}
 			<div class="article__item article__item--wide">
@@ -58,10 +58,11 @@
 		{% endblock breaking_news %}
 
 		<main itemprop="mainContentOfPage">
-			{% block main %}
+		{% block main %}
+			{% block content %}
 			<article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
-				<link itemprop="mainEntityOfPage" href="{{ view.content_url }}">
-				<div class="article-header article__item">
+				<link rel="bookmark" itemprop="mainEntityOfPage" href="{{ view.content_url }}">
+				<header class="article__header article__item">
 					<h1 class="headline" itemprop="headline">
 						<span class="headline__kicker">
 							{%- if view and view.context and view.context.serie and view.context.serie.column %}
@@ -69,7 +70,7 @@
 							{%- endif -%}
 							{{- view.supertitle -}}
 						</span>
-						{%- if view.title %}<span class="headline__colon">: </span>{% endif %}
+						{%- if view.title %}<span class="visually-hidden">: </span>{% endif %}
 						<span class="headline__title">
 							{{- view.title -}}
 						</span>
@@ -86,13 +87,13 @@
 					<div class="metadata">
 						{% include "zeit.web.core:templates/amp/article/metadata.tpl" %}
 					</div>
-				</div>
+				</header>
 
 				{% block article_body %}
-				<div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
+				<div class="article__body" itemprop="articleBody">
 					{% block article_main_image %}
 						{% set block = view.main_image_block %}
-						{% include "zeit.web.core:templates/amp/blocks/image.html" %}
+						{% include "zeit.web.core:templates/amp/asset/image_article.html" %}
 					{% endblock article_main_image %}
 
 					{% block article_pages %}
@@ -110,8 +111,65 @@
 				</div>
 				{% endblock article_body %}
 
+				<div class="article__item">
+					<a href="{{ request.route_url('home') }}index">
+						<span class="article__button">Startseite</span>
+					</a>
+				</div>
+
+				<footer class="article__footer article__item">
+					<nav class="article-sharing">
+						<h4 class="article-sharing__title">Teilen</h4>
+						<ul class="article-sharing__list">
+							<li class="article-sharing__item">
+								<a class="article-sharing__link article-sharing__link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.int.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_int&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}">Facebook</a>
+							</li>
+							<li class="article-sharing__item">
+								<a class="article-sharing__link article-sharing__link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via=zeitonline&amp;url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.twitter.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=twitter_zonaudev_int&utm_campaign=twitter_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}">Twitter</a>
+							</li>
+							<li class="article-sharing__item article-sharing__item--whatsapp">
+								<a class="article-sharing__link article-sharing__link--whatsapp" href="whatsapp://send?text={{ (view.title + ' - Artikel auf ZEIT ONLINE: ' + view.content_url) | urlencode }}">WhatsApp</a>
+							</li>
+							<li class="article-sharing__item">
+								<a class="article-sharing__link article-sharing__link--mail" href="mailto:?subject={{ (view.title + ' - Artikel auf ZEIT ONLINE') | urlencode }}&amp;body={{ ('Artikel auf ZEIT ONLINE lesen: ' + view.content_url + '?wt_zmc=sm.ext.zonaudev.mail.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=mail_zonaudev_ext&utm_campaign=mail_referrer&utm_content=zeitde_dskshare_link_x') | urlencode }}">Mail</a>
+							</li>
+						</ul>
+					</nav>
+
+				{% if view.ranked_tags | length %}
+					<nav class="article-tags">
+						<h4 class="article-tags__title">Schlagworte</h4>
+						<ul class="article-tags__list" itemprop="keywords">
+						{% for tag in view.ranked_tags[:6] -%}
+							{% if tag.url_value %}
+								<li><a href="{{ request.route_url('home') }}thema/{{ tag.url_value }}" class="article-tags__link">{{ tag.label }}</a>
+								{%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
+								</li>
+							{% else %}
+								<li><span class="article-tags__link">{{ tag.label }}</span>
+								{%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
+								</li>
+							{% endif %}
+						{% endfor -%}
+						</ul>
+					</nav>
+				{% endif %}
+
+				</footer>
+
 			</article>
-			{% endblock main %}
+			{% endblock %}
+
+			{% block nextread %}
+				{% set module = view.nextread %}
+				{% include "zeit.web.core:templates/amp/nextread/default.html" %}
+			{% endblock %}
+
+			{% block nextread_ad %}
+				{% set module = view.nextread_ad %}
+				{% include "zeit.web.core:templates/amp/nextread/default.html" %}
+			{% endblock %}
+		{% endblock main %}
 		</main>
 
 		<footer class="footer">
@@ -128,6 +186,11 @@
 					<li><a href="{{ request.route_url('home') }}hilfe/datenschutz">Datenschutz</a></li>
 				</ul>
 			</nav>
+			{% block footer_button %}
+			<div class="footer__finish">
+				<a class="footer__button" href="#top" title="Zurück nach oben">Nach Oben</a>
+			</div>
+			{% endblock footer_button %}
 		</footer>
 
 		{% include "zeit.web.core:templates/inc/tracking/webtrekk_amp.html" %}
