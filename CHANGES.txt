@@ -4,6 +4,8 @@ Change log for zeit.web
 2.55 (unreleased)
 -----------------
 
+- ZON-2556: ZMO teaser layout 'print-cover'
+
 - HOTFIX: Correctly parse jinja profiler toggle value
 
 - ZON-2601: Add sharing links and article tags to AMPages
