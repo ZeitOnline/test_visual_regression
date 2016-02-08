@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Correctly parse jinja profiler toggle value
 
+- ZON-2783: Add open graph sharing image width and height metadata
+
 - ZON-2601: Add sharing links and article tags to AMPages
 
 - ZON-2602: Add Nextread and Verlags-Nextread to AMPages
