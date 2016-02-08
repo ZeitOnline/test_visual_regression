@@ -111,25 +111,6 @@
     </div>
 {%- endmacro %}
 
-{% macro teaser_card_front_action(action, url) -%}
-    {% if action == 'flip' %}
-        <a href="{{url}}" class="card__button js-flip-card">Drehen</a>
-    {% elif action == 'share' %}
-            <a href="{{url}}" class="card__button js-slide-card">Teilen</a>
-    {% else %}
-        <a href="{{url}}" class="card__button">Lesen</a>
-    {% endif %}
-{%- endmacro %}
-
-{% macro teaser_card_back_action(action, url) -%}
-    {% if action == 'flip' %}
-        <a href="{{url}}" class="card__button js-flip-card">Drehen</a>
-    {% elif  action == 'share' %}
-        <a href="{{url}}" class="card__button js-slide-card js-stop-propagation">Teilen</a>
-    {% else %}
-        <a href="{{url}}" class="card__button js-stop-propagation">Lesen</a>
-    {% endif %}
-{%- endmacro %}
 
 {% macro advertorial_modifier(product_text, is_advertorial) -%}
     {% if (product_text == 'Advertorial' and not is_advertorial) %} is-advertorial{% endif %}

@@ -4,6 +4,8 @@ Change log for zeit.web
 2.55 (unreleased)
 -----------------
 
+- ZON-2558: ZMO teaser layout 'card' in 3 variations
+
 - ZON-2557: ZMO teaser layout 'upright' formerly known as 'gallery-upright'
 
 - ZON-2556: ZMO teaser layout 'print-cover'

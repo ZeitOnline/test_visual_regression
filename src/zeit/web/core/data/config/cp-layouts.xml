@@ -378,27 +378,6 @@
         available="zeit.magazin.interfaces.IZMOContent"
         />
     <layout
-        id="zmo-card-share-read"
-        title="ZMO Karte Share'n'Read"
-        image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-        />
-    <layout
-        id="zmo-card-flip-share"
-        title="ZMO Karte Flip'n'Share"
-        image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-        />
-    <layout
-        id="zmo-card-flip-flip"
-        title="ZMO Karte Flip'n'Flip"
-        image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-        />
-    <layout
         id="zmo-print-cover"
         title="ZMO Print Cover"
         image_pattern="original"
