@@ -865,7 +865,9 @@ class Content(CeleraOneMixin, Base):
         elif self.community_maintenance['scheduled']:
             message = self.community_maintenance['text_scheduled']
 
-        community_login = bool(self.request.session['user'].get('uid'))
+        # XXX uid can be an int or a string. Should be changed
+        uid = self.request.session['user'].get('uid')
+        community_login = True if uid and uid != '0' else False
         if not community_login:
             note = (u'Aufgrund eines technischen Fehlers steht Ihnen die '
                     u'Kommentarfunktion kurzfristig nicht zur Verfügung. '
