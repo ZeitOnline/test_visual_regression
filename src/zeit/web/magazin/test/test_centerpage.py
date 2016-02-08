@@ -129,21 +129,17 @@ def test_teaser_landscape_small_has_correct_markup(testbrowser):
 
 
 def test_teaser_gallery_upright_has_correct_markup(testbrowser):
-    browser = testbrowser('/centerpage/lebensart')
+    browser = testbrowser('/zeit-magazin/upright')
     element = browser.cssselect('.teaser-gallery-upright')
 
     text_wrap = element[0].cssselect('.teaser-gallery-upright__text')
     link_wrap = element[0].cssselect('a')
     icon = element[0].cssselect('.icon-galerie-icon-white')
     img = element[0].cssselect('img')[0]
-    image_pattern = \
-        'http://.*/centerpage/katzencontent/'\
-        'bitblt-.*'\
-        '/katzencontent-zmo-upright.jpg'
     assert len(text_wrap) != 0
     assert len(link_wrap) >= 1
     assert len(icon) == 1
-    assert re.search(image_pattern, img.get('src'))
+    assert '/centerpage/katzencontent/portrait__' in img.get('src')
     assert img.get('alt') == 'Die ist der Alttest'
 
 
@@ -343,7 +339,7 @@ def test_teaser_fullwidth_light_with_image_has_correct_markup(
 
 
 def test_teaser_print_cover_has_correct_markup(testbrowser):
-    browser = testbrowser('/zeit-magazin/index')
+    browser = testbrowser('/zeit-magazin/print-cover')
     element = browser.cssselect('.teaser-print-cover')[0]
 
     text_wrap = element.cssselect('.teaser-print-cover__text')
@@ -358,10 +354,7 @@ def test_teaser_print_cover_has_correct_markup(testbrowser):
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == 'ZEITmagazin'
     assert 'Das neue Heft' in title.text.strip()
-    assert re.search('http://.*/exampleimages/artikel/02/heft/' +
-                     'bitblt-.*/' +
-                     'heft-zmo-print-cover.jpg',
-                     img.get('src'))
+    assert 'exampleimages/artikel/02/heft/portrait__' in img.get('src')
 
 
 def test_teaser_should_have_comment_count(
