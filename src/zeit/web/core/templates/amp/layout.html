@@ -22,6 +22,9 @@
 		{%- include "zeit.web.core:templates/amp/style.html" %}
 	{% endblock style %}
 	<script async src="https://cdn.ampproject.org/v0.js"></script>
+	{% if view.amp_advertising_is_enabled -%}
+	<script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+	{% endif -%}
 	<script async custom-element="amp-brightcove" src="https://cdn.ampproject.org/v0/amp-brightcove-0.1.js"></script>
 	<script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
 </head>
@@ -34,10 +37,24 @@
 	</div>
 
 	{% if view.amp_advertising_is_enabled -%}
-		<amp-ad width="320" height="320" type="doubleclick" data-slot="/183/iqdzeit_amp/rotation"></amp-ad>
+	<div class="advertising">
+		<amp-iframe width="320" height="320"
+			sandbox="allow-scripts allow-same-origin allow-popups"
+			frameborder="0"
+			src="https://foo">
+				<amp-img layout="fill" src="//lorempixel.com/320/320/" placeholder></amp-img>
+		</amp-iframe>
+	</div>
 	{% endif -%}
 	{% if view.amp_advertising_is_enabled -%}
-		<amp-ad width="320" height="80" type="doubleclick" data-slot="/183/iqdzeit_amp/rotation"></amp-ad>
+	<div class="advertising">
+		<amp-iframe width="320" height="80"
+			sandbox="allow-scripts allow-same-origin allow-popups"
+			frameborder="0"
+			src="https://foo">
+				<amp-img layout="fill" src="//lorempixel.com/320/80/" placeholder></amp-img>
+		</amp-iframe>
+	</div>
 	{% endif -%}
 
 	<div class="content" id="top">
