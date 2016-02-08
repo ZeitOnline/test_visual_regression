@@ -1,0 +1,39 @@
+$article-tags-margin-right-small: 7px
+$article-tags-margin-right-large: 16px
+
+.article-tags
+	font-size: em(15px)
+	letter-spacing: $zon-letter-spacing-s
+	margin: 0
+	&__title
+		color: $zon-dark-grey
+		margin: remify(0 0 4px)
+	&__list
+		+clearfix
+		list-style-type: none
+		margin: 0 remify(-$article-tags-margin-right-small) 0 0
+		padding: 0
+		li
+			float: left
+	&__link
+		background-color: $zon-lighter-grey
+		border-radius: .36em
+		color: $zon-grey
+		+on-interaction
+			color: $black
+		display: block
+		margin: remify(7px $article-tags-margin-right-small 0 0)
+		padding: remify(4px 12px 5px)
+
++respond-min($break-tablet-min)
+	.article-tags
+		font-size: em(14px)
+		&__title
+			margin-bottom: 0
+		&__list
+			margin-right: remify(-$article-tags-margin-right-large)
+		&__link
+			background-color: transparent
+			border-radius: 0
+			margin: remify(6px $article-tags-margin-right-large 0 0)
+			padding: 0
