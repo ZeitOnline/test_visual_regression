@@ -835,11 +835,13 @@ class Content(CeleraOneMixin, Base):
     def comment_area(self):
         user_blocked = False
         premoderation = False
+        uid = 0
         self.request.authenticated_userid
 
         if self.request.session.get('user'):
             user_blocked = self.request.session['user'].get('blocked')
             premoderation = self.request.session['user'].get('premoderation')
+            uid = self.request.session['user'].get('uid')
 
         # used for general alerts in the comment section header
         message = None
@@ -866,7 +868,6 @@ class Content(CeleraOneMixin, Base):
             message = self.community_maintenance['text_scheduled']
 
         # XXX uid can be an int or a string. Should be changed
-        uid = self.request.session['user'].get('uid')
         community_login = True if uid and uid != '0' else False
         if not community_login:
             note = (u'Aufgrund eines technischen Fehlers steht Ihnen die '

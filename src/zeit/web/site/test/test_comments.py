@@ -51,7 +51,16 @@ def test_comments_get_thread_should_respect_top_level_sort_order(testserver):
         'Comments are not sorted most recent first.')
 
 
-def test_comment_form_should_be_rendered(testbrowser):
+def test_comment_form_should_be_rendered(testbrowser, monkeypatch):
+    comment = {
+            'show': True,
+            'show_comment_form': True,
+            'show_comments': True,
+            'no_comments': False,
+            'note': 'Kein community login möglich',
+            'user_blocked': False,
+            'show_premoderation_warning': False}
+    monkeypatch.setattr(zeit.web.core.view.Content, 'comment_area', comment)
     browser = testbrowser('/zeit-online/article/01/comment-form')
     assert len(browser.cssselect('#comment-form')) == 1
 
@@ -245,3 +254,20 @@ def test_comment_action_recommend_should_redirect_to_login(testserver):
     response = requests.get(url, allow_redirects=False)
     assert response.headers.get('Location', '') == location
     assert response.status_code == 303
+
+def test_no_comment_form_should_be_displayed_on_invalid_uid(
+        testbrowser, monkeypatch):
+    def comment():
+        return {
+            'show': True,
+            'show_comment_form': False,
+            'show_comments': True,
+            'no_comments': False,
+            'note': 'Kein community login möglich',
+            'user_blocked': False,
+            'show_premoderation_warning': False}
+    monkeypatch.setattr(zeit.web.core.view.Content, 'comment_area', comment)
+    browser = testbrowser('/zeit-online/article/01')
+
+
+
