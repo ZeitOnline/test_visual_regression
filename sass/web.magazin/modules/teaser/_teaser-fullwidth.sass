@@ -12,12 +12,7 @@ $cp_lead-full-height: em(550px)
         margin-bottom: 0
 
     &__media-container
-        @extend %teaser-large__media
-
-    &--light
-        @extend %teaser--light
-        a
-            +link-colors($black, $black, $black, $black, $black)
+        @extend %teaser-large__media-container
 
     &__text
         @extend %teaser-large__text
@@ -35,3 +30,10 @@ $cp_lead-full-height: em(550px)
 
     &__comments
         @extend %teaser__comments
+
+    &--light
+        .teaser-fullwidth__media-container
+            @extend %teaser--light
+            position: absolute
+        .teaser-fullwidth__text
+            +link-colors($black, $black, $black, $black, $black)

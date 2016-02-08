@@ -3,13 +3,8 @@
     @extend %teaser-large
     padding-top: 135%
 
-    &__media
-        @extend %teaser-large__media
-
-    &--light
-        @extend %teaser--light
-        a
-            +link-colors($black, $black, $black, $black, $black)
+    &__media-container
+        @extend %teaser-large__media-container
 
     &__text
         @extend %teaser-large__text
@@ -25,3 +20,10 @@
 
     &__comments
         @extend %teaser__comments
+
+    &--light
+        .teaser-square-large__media-container
+            @extend %teaser--light
+            position: absolute
+        .teaser-square-large__text
+            +link-colors($black, $black, $black, $black, $black)
