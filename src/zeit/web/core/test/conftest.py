@@ -60,6 +60,9 @@ def app_settings(mockserver):
         'dogpile_cache.long_term.expiration_time': '3600',
         'dogpile_cache.session.expiration_time': '2',
         'dogpile_cache.config.expiration_time': '600',
+        # XXX This is somewhat duplicate, but in tests we have parts of the
+        # vivi config setup too, so we need to satisfy it.
+        'vivi_zeit.cms_cache-expiration-config': '600',
         'session.reissue_time': '1',
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',

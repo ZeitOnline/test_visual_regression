@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<author xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <firstname>Tobias</firstname>
+  <lastname>Dorfer</lastname>
+  <status>Online</status>
+  <external>false</external>
+  <display_name>Tobias Dorfer</display_name>
+  <image_group xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/autoren/D/Tobias_Dorfer/tobias-dorfer/" type="" align="left" publication-date="" expires="">
+    <bu xsi:nil="true"/>
+    <copyright py:pytype="str">© Jakob Börner</copyright>
+  </image_group>
+  <summary>Social-Media-Editor im Ressort Engagement, ZEIT ONLINE.</summary>
+  <facebook>tobias.dorfer</facebook>
+  <topiclink_label_1>Social Media</topiclink_label_1>
+  <topiclink_label_2>Digitales</topiclink_label_2>
+  <topiclink_label_3>Trends</topiclink_label_3>
+  <topiclink_url_3>http://blog.zeit.de/teilchen/</topiclink_url_3>
+  <twitter>tobiasdorfer</twitter>
+  <biography>Social-Media-Editor bei ZEIT ONLINE seit März 2015. Davor sieben Jahr bei sz.de, als Redakteur im Wirtschafts- und Regional-Ressort sowie Editorial SEO. Ausbildung an der Deutschen Journalistenschule in München mit Hospitanzen bei "Süddeutsche Zeitung", "Spiegel" und "Spiegel Online". Mag: Frankreich, Katzen, die Prenzlschwäbin, gute Musik und Jonathan Franzen.
+Mag nicht: die hausgemachte Dauermisere des VfB Stuttgart.</biography>
+  <email>tobias.dorfer@zeit.de</email>
+  <favourites>
+    <reference xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2015-11/rechtsextremismus-fluechtlingsunterkuenfte-gewalt-gegen-fluechtlinge-justiz-taeter-urteile" year="2015" issue="46" ressort="Politik" contenttype="article" publication-date="" expires="" author="Paul Blickle;Kai Biermann;Philip Faigle;Astrid Geisler;Götz Hamann;Lenz Jacobsen;Anna Kemper;Martin Klingst;Karsten Polke-Majewski;Stefan Schirmer;Hannes Soltau;Julian Stahnke;Toralf Staud;Tilman Steffen;Sascha Venohr">
+      <supertitle py:pytype="str">Gewalt gegen Flüchtlinge</supertitle>
+      <title py:pytype="str">Es brennt in Deutschland</title>
+      <text py:pytype="str">Mehr als 200 Mal haben Täter in diesem Jahr Flüchtlingsheime angegriffen. Gefasst wurde kaum jemand. Wie kann das sein? Eine Recherche von ZEIT ONLINE und DIE ZEIT</text>
+      <description py:pytype="str">Mehr als 200 Mal haben Täter in diesem Jahr Flüchtlingsheime angegriffen. Gefasst wurde kaum jemand. Wie kann das sein? Eine Recherche von ZEIT ONLINE und DIE ZEIT</description>
+      <byline xsi:nil="true"/>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/politik/deutschland/2015-11/brandanschlaege-deutschland-rechte-gewalt-fs-teaser-2/" type="jpg" title="Brandanschläge Teaser" alt="Am 24. August 2015 brennt im baden-württembergischen Weissach ein leerstehendes Gebäude ab. Es sollte als Unterkunft dienen. Jetzt ist es unbewohnbar." align="left" publication-date="" expires="">
+        <bu py:pytype="str">Am 24. August 2015 brennt im baden-württembergischen Weissach ein leerstehendes Gebäude ab. Es sollte als Unterkunft dienen. Jetzt ist es unbewohnbar.</bu>
+        <copyright py:pytype="str">© Benjamin Beytekin/action press</copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/B/Paul_Blickle" publication-date="" expires="">
+        <display_name py:pytype="str">Paul Blickle</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/B/Kai_Biermann/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Kai Biermann</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/F/Philip_Faigle/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Philip Faigle</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/G/Astrid_Geisler" publication-date="" expires="">
+        <display_name py:pytype="str">Astrid Geisler</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/H/Goetz_Hamann/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Götz Hamann</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/J/Lenz_Jacobsen/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Lenz Jacobsen</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/K/Anna_Kemper/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Anna Kemper</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/K/Martin_Klingst/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Martin Klingst</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/P/Karsten_Polke-Majewski/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Karsten Polke-Majewski</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/S/Stefan_Schirmer/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Stefan Schirmer</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/S/Hannes_Soltau/index" publication-date="" expires="">
+        <display_name py:pytype="str">Hannes Soltau</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/S/Julian_Stahnke/index" publication-date="" expires="">
+        <display_name py:pytype="str">Julian Stahnke</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/S/Toralf_Staud/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Toralf Staud</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/S/Tilman_Steffen-2/index" publication-date="" expires="">
+        <display_name py:pytype="str">Tilman Steffen</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/V/Sascha_Venohr/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Sascha Venohr</display_name>
+      </author>
+    </reference>
+    <reference xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/2015/52/cyberstalking-internet-stalker-familie-mierau" year="2015" issue="52" ressort="zeit-magazin" contenttype="article" publication-date="" expires="" author="Khuê Pham">
+      <supertitle py:pytype="str">Cyberstalking</supertitle>
+      <title py:pytype="str">Der Feind in unserem Netz</title>
+      <text py:pytype="str">Ein Stalker entreißt Caspar und Susanne Mierau die Kontrolle über ihr Leben. Das Netz ist schnell, die Justiz ist langsam. Ein Krimi über die Macht des anonymen Internets</text>
+      <description py:pytype="str">Ein Stalker entreißt Caspar und Susanne Mierau die Kontrolle über ihr Leben. Das Netz ist schnell, die Justiz ist langsam. Ein Krimi über die Macht des anonymen Internets</description>
+      <byline py:pytype="str">von Khue Pham</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/zeit-magazin/2015/52/cyberstalking-internet/" type="jpg" align="left" publication-date="" expires="2016-04-14T12:16:00+00:00">
+        <bu py:pytype="str">Die Bedrohung ist nicht physisch – sie kommt über das Internet.</bu>
+        <copyright py:pytype="str">© Frank Stockton</copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/P/Khue_Pham/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Khuê Pham</display_name>
+      </author>
+    </reference>
+  </favourites>
+  <question id="origin">Aus einem kleinen Ort im daimlerfahrenden Speckgürtel von Stuttgart – in Berlin bislang dennoch relativ freundlich behandelt.</question>
+</author>

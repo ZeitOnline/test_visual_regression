@@ -208,5 +208,9 @@ def test_author_has_correct_open_graph_image(testbrowser, testserver):
     url = testserver.url + (
         '/zeit-online/cp-content/author_images/Julia_Zange/wide__1300x731')
     assert select('meta[property="og:image"]')[0].get('content') == url
+    assert select('meta[property="og:image:width"]')[0].get('content') == (
+        '1300')
+    assert select('meta[property="og:image:height"]')[0].get('content') == (
+        '731')
     assert select('meta[name="twitter:image"]')[0].get('content') == url
     assert select('link[rel="image_src"]')[0].get('href') == url

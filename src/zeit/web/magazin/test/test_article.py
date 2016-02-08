@@ -56,6 +56,7 @@ def test_article_has_valid_twitter_meta_tags(testbrowser):
 
 def test_article_has_valid_facebook_meta_tags(testbrowser):
     browser = testbrowser('/artikel/01')
+    select = browser.cssselect
     assert '<meta property="og:site_name" '\
         'content="ZEITmagazin">' in browser.contents
     assert '<meta property="fb:admins"'\
@@ -69,6 +70,10 @@ def test_article_has_valid_facebook_meta_tags(testbrowser):
         ' Was erzählt uns das über die Gentrifizierung?'\
         ' Ein Erklärungsversuch.">' in browser.contents
     assert '<meta property="og:image" ' in browser.contents
+    assert select('meta[property="og:image:width"]')[0].get('content') == (
+        '1300')
+    assert select('meta[property="og:image:height"]')[0].get('content') == (
+        '731')
 
 
 @pytest.mark.xfail(reason='tracking scripts & pixels may timeout')

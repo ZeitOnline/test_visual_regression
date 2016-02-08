@@ -44,9 +44,9 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
     assert image.get('itemtype') == 'http://schema.org/ImageObject'
     assert image.cssselect('[itemprop="url"]')[0].get('content') == (
         testserver.url + '/zeit-online/image/'
-        'filmstill-hobbit-schlacht-fuenf-hee/wide__822x462')
-    assert image.cssselect('[itemprop="width"]')[0].get('content') == '660'
-    assert image.cssselect('[itemprop="height"]')[0].get('content') == '371'
+        'filmstill-hobbit-schlacht-fuenf-hee/wide__820x461')
+    assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
+    assert image.cssselect('[itemprop="height"]')[0].get('content') == '461'
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyrightHolder.get('itemtype') == 'http://schema.org/Person'
     person = copyrightHolder.cssselect('[itemprop="name"]')[0]
@@ -59,6 +59,50 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
     assert author.cssselect('[itemprop="name"]')[0].text == 'Jochen Wegner'
     assert author.cssselect('[itemprop="url"]')[0].get('href') == (
         testserver.url + '/autoren/W/Jochen_Wegner/index')
+
+
+def test_amp_nextread_contains_required_microdata(testbrowser, testserver):
+    browser = testbrowser('/amp/zeit-online/article/simple-nextread')
+
+    article = browser.cssselect('article.nextread')[0]
+    mainEntityOfPage = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
+    headline = article.cssselect('[itemprop="headline"]')[0]
+    datePublished = article.cssselect('[itemprop="datePublished"]')[0]
+    dateModified = article.cssselect('[itemprop="dateModified"]')[0]
+    author = article.cssselect('[itemprop="author"]')[0]
+    image = article.cssselect('[itemprop="image"]')[0]
+
+    # check Article
+    assert article.get('itemtype') == 'http://schema.org/Article'
+    assert mainEntityOfPage.get('href') == (
+        testserver.url + '/zeit-online/article/zeit')
+    assert headline.text_content().strip() == (
+        'Crystal Meth: Nancy braucht was Schnelles')
+    assert datePublished.get('datetime') == '2015-02-12T04:32:17+01:00'
+    assert dateModified.get('datetime') == '2015-02-15T18:18:50+01:00'
+    assert author.get('itemtype') == 'http://schema.org/Person'
+    assert author.cssselect('[itemprop="name"]')[0].text == 'Dorit Kowitz'
+    assert author.cssselect('[itemprop="url"]')[0].get('href') == (
+        testserver.url + '/autoren/K/Dorit_Kowitz')
+
+    # check ImageObject
+    assert image.get('itemtype') == 'http://schema.org/ImageObject'
+    assert image.cssselect('[itemprop="url"]')[0].get('content') == (
+        testserver.url + '/gesellschaft/2015-02/crystal-meth-nancy-schmidt/'
+        'cinema__820x351')
+    assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
+    assert image.cssselect('[itemprop="height"]')[0].get('content') == '351'
+
+
+def test_amp_shows_nextread_advertising(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/simple-verlagsnextread')
+    nextad = browser.cssselect('aside.nextad')[0]
+    assert nextad.cssselect('.nextad__label')[0].text == 'Verlagsangebot'
+    assert len(nextad.cssselect('.nextad__title'))
+    assert len(nextad.cssselect('.nextad__text'))
+    # check for assigned background-color class
+    assert nextad.cssselect('.nextad__button')[0].get('class') == (
+        'nextad__button nextad__button--d11c08')
 
 
 def test_amp_shows_breaking_news_banner(testbrowser):
@@ -86,3 +130,25 @@ def test_amp_article_has_correct_webtrekk_pixel(testbrowser, testserver):
         u'&cp6=7583&cp7=&cp8=zede&cp9=wirtschaft/article&cp10=&cp11='
         u'&cp12=mobile.site&cp13=mobile&cp15=&cp25=amp').format(
             url=testserver['http_address'])
+
+
+def test_amp_article_contains_sharing_links(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    canonical = browser.cssselect('link[rel="canonical"]')[0].get('href')
+    sharing = browser.cssselect('.article-sharing')[0]
+    links = sharing.cssselect('.article-sharing__link')
+    assert sharing.cssselect('.article-sharing__title')[0].text == 'Teilen'
+    assert len(links) == 4
+    assert ('?u=' + canonical) in links[0].get('href')
+    assert ('url=' + canonical) in links[1].get('href')
+
+
+def test_amp_article_shows_tags_correctly(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    tags = browser.cssselect('.article-tags')[0]
+    keywords = tags.cssselect('[itemprop="keywords"]')[0]
+    assert tags.cssselect('.article-tags__title')[0].text == 'Schlagworte'
+    assert len(tags.cssselect('.article-tags__link')) == 5
+    assert ' '.join(keywords.text_content().strip().split()) == (
+        u'Flüchtling, Weltwirtschaftsforum Davos, '
+        u'Arbeitsmarkt, Migration, Europäische Union')

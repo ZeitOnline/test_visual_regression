@@ -4,7 +4,13 @@ Change log for zeit.web
 2.55 (unreleased)
 -----------------
 
-- FIX: Unobtrusive loading of CeleraOne tracking script
+- HOTFIX: Correctly parse jinja profiler toggle value
+
+- ZON-2783: Add open graph sharing image width and height metadata
+
+- ZON-2601: Add sharing links and article tags to AMPages
+
+- ZON-2602: Add Nextread and Verlags-Nextread to AMPages
 
 - ZON-2710: Use external SVG sprite in ZMO
 
@@ -14,7 +20,11 @@ Change log for zeit.web
 
 - ZON-2692: Add instantarticle author fallback and local image captions
 
-- ZON-2692: Kick instantarticle with missing block implementations from feed
+- ZON-2692: Remove instantarticle with missing block implementations from feed
+
+- ZON-2613: Implement author teaser
+
+- FIX: Unobtrusive loading of CeleraOne tracking script
 
 - SUGAR: Implement assignment-conditional require blocks in jinja
 
