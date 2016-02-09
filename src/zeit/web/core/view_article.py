@@ -292,7 +292,6 @@ def redirect_amp_disabled(context, request):
 
 
 @view_defaults(context=zeit.content.article.interfaces.IArticle)
-#               renderer='templates/instantarticle/article.html')
 @view_config(route_name='instantarticle')
 @view_config(route_name='instantarticle-item',
              wrapper='instantarticle-item')
