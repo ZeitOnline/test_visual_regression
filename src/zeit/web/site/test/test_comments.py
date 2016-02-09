@@ -57,11 +57,13 @@ def test_comment_form_should_be_rendered(testbrowser, monkeypatch):
             'show_comment_form': True,
             'show_comments': True,
             'no_comments': False,
-            'note': 'Kein community login möglich',
+            'note': None,
+            'message': None,
             'user_blocked': False,
             'show_premoderation_warning': False}
     monkeypatch.setattr(zeit.web.core.view.Content, 'comment_area', comment)
     browser = testbrowser('/zeit-online/article/01/comment-form')
+
     assert len(browser.cssselect('#comment-form')) == 1
 
 
@@ -255,19 +257,20 @@ def test_comment_action_recommend_should_redirect_to_login(testserver):
     assert response.headers.get('Location', '') == location
     assert response.status_code == 303
 
-def test_no_comment_form_should_be_displayed_on_invalid_uid(
+
+def test_comment_area_note_should_be_displayed_if_set(
         testbrowser, monkeypatch):
-    def comment():
-        return {
+    comment = {
             'show': True,
             'show_comment_form': False,
             'show_comments': True,
             'no_comments': False,
-            'note': 'Kein community login möglich',
+            'note': 'No community login',
+            'message': None,
             'user_blocked': False,
             'show_premoderation_warning': False}
     monkeypatch.setattr(zeit.web.core.view.Content, 'comment_area', comment)
-    browser = testbrowser('/zeit-online/article/01')
-
-
-
+    browser = testbrowser('/zeit-online/article/01/comment-form')
+    assert browser.cssselect('.comment-section__note div')[0].text == (
+        'No community login')
+    assert len(browser.cssselect('.comment-form')) == 0
