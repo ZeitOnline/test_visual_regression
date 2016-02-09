@@ -27,4 +27,6 @@
   <mapping target="sub_ressort" value="computer" banner_code="digital" />
   <mapping target="ressort" value="technik" banner_code="digital" />
   <mapping target="path_info" value="/serie/krimizeit-bestenliste" banner_code="literatur/krimi-bestenliste" />
+  <mapping target="path_info" value="/serie/stimmts" banner_code="serie/stimmts" />
+  <mapping target="serie" value="Stimmt's" banner_code="wissen/serie/stimmts" />
 </banner_id_mappings>
