@@ -6,9 +6,9 @@
 
     &__media
         @extend %teaser__media
-        height: $cp_button__image-height--large
-        +respond-min($break-2)
-            height: $cp_button__image-height--large
+        height: 0
+        margin-top: 0
+        padding-bottom: 100% / 16 * 9 // image variant 'wide'
 
     &__text
         @extend %teaser__text
