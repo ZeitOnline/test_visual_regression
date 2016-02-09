@@ -1,7 +1,7 @@
 
 .teaser-landscape-large-photo
     @extend %teaser
-    margin-top: $compact
+    margin-top: remify(28px)
     padding-top: 0
 
     &__media
@@ -13,9 +13,9 @@
     &__text
         @extend %teaser__text
         text-align: center
-        padding: 0 $compact 0 $compact
+        padding: remify(0 28px)
         +respond-min($break-2)
-            padding: 0 0 0 0
+            padding: 0
 
     &__kicker
         @extend %teaser__kicker

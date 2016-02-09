@@ -1,11 +1,16 @@
 
 .teaser-landscape-small
 	@extend %teaser
-	margin-bottom: $compact
-	padding: 0 $compact
+	margin-bottom: remify(28px)
+	padding: 0 remify(28px)
+	+respond-min($break-2)
+		padding: 0
 
 	&__media
 		@extend %teaser__media
+		height: 0
+		margin-top: 0
+		padding-bottom: 100% / 16 * 9 // image variant 'wide'
 
 	&__text
 		@extend %teaser__text
@@ -23,6 +28,5 @@
 		@extend %teaser__comments
 
 +respond-min($break-2)
-	.teaser-landscape-small
-		padding: 0
+	.cp-area--major > .teaser-landscape-small
 		width: 48%
