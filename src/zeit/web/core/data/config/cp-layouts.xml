@@ -319,8 +319,8 @@
     <layout
         id="zmo-landscape-large-photo"
         title="ZMO großer Teaser 16:9 Fotokolumne"
-        image_pattern="zmo-landscape-large"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="wide"
+        areas="major"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
