@@ -17,6 +17,9 @@
 	+respond-min($break-2)
 		float: left
 		&--major
+			+display-flex
+			+flex-wrap(wrap)
+			+justify-content(space-between)
 			padding: remify(0 $compact--px 0 $compact--px)
 			width: $cp_lead__wrap-width
 		&--minor
