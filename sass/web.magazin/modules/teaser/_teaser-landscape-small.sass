@@ -3,6 +3,8 @@
 	@extend %teaser
 	margin-bottom: remify(28px)
 	padding: 0 remify(28px)
+	+respond-min($break-2)
+		padding: 0
 
 	&__media
 		@extend %teaser__media
@@ -26,6 +28,5 @@
 		@extend %teaser__comments
 
 +respond-min($break-2)
-	.teaser-landscape-small
-		padding: 0
+	.cp-area--major > .teaser-landscape-small
 		width: 48%
