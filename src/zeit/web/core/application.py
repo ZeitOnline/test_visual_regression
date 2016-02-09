@@ -164,6 +164,8 @@ class Application(object):
         config.set_request_property(configure_host('image'), reify=True)
         config.set_request_property(configure_host('jsconf'), reify=True)
         config.set_request_property(configure_host('fbia'), reify=True)
+        config.add_request_method(
+            zeit.web.core.security.get_user, 'user', reify=True)
 
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.web, ignore=self.DONT_SCAN)
