@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - ZON-2692: Add instantarticle author fallback and local image captions
 
+- ZON-2692: Remove instantarticle with missing block implementations from feed
+
 - ZON-2613: Implement author teaser
 
 - FIX: Unobtrusive loading of CeleraOne tracking script

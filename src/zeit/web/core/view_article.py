@@ -3,15 +3,20 @@ import itertools
 import logging
 import re
 
-from pyramid.view import view_config
+from pyramid.view import view_config, view_defaults
+import lxml.etree
 import pyramid.httpexceptions
 import zope.component
 
-import zeit.content.article.interfaces
 import zeit.content.article.edit.interfaces
+import zeit.content.article.interfaces
 import zeit.content.author.interfaces
 import zeit.magazin.interfaces
 
+
+from zeit.web.site.view_feed import (
+    CONTENT_MAKER, ELEMENT_MAKER,
+    create_public_url, last_published_semantic, format_iso8601_date)
 import zeit.web
 import zeit.web.core.article
 import zeit.web.core.interfaces
@@ -277,26 +282,6 @@ class Article(zeit.web.core.view.Content):
         return sorted(cr_list, key=lambda k: k['label'])
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             route_name='instantarticle',
-             renderer='templates/instantarticle.html')
-class InstantArticle(Article):
-
-    @zeit.web.reify
-    def authors(self):
-        return super(InstantArticle, self).authors or [{'name': 'ZEIT ONLINE'}]
-
-    @zeit.web.reify
-    def wrap_in_cdata(self):
-        return pyramid.settings.asbool(self.request.GET.get('cdata'))
-
-    @zeit.web.reify
-    def date_last_published(self):
-        date = self.publish_info.date_last_published
-        if date:
-            return date.astimezone(self.timezone)
-
-
 @view_config(route_name='amp',
              context=zeit.content.article.interfaces.IArticle,
              custom_predicates=(lambda context, _: not context.is_amp,),
@@ -306,10 +291,81 @@ def redirect_amp_disabled(context, request):
     raise pyramid.httpexceptions.HTTPFound(url)
 
 
+@view_defaults(context=zeit.content.article.interfaces.IArticle)
+@view_config(route_name='instantarticle')
+@view_config(route_name='instantarticle-item',
+             wrapper='instantarticle-item')
+class InstantArticle(Article):
+
+    def __call__(self):
+        try:
+            return pyramid.renderers.render_to_response(
+                'templates/instantarticle/article.html',
+                {'view': self}, request=self.request)
+        except zeit.web.core.jinja.Interrupt, err:
+            log.debug('Contained article block_type %s not implemented.' % (
+                zeit.web.core.template.block_type(err.message)))
+            return pyramid.response.Response(status_code=501)
+
+    @zeit.web.reify
+    def authors(self):
+        return super(InstantArticle, self).authors or [{'name': 'ZEIT ONLINE'}]
+
+    @zeit.web.reify
+    def date_last_published(self):
+        date = self.publish_info.date_last_published
+        if date:
+            return date.astimezone(self.timezone)
+
+
+@view_config(context=zeit.content.article.interfaces.IArticle,
+             name='instantarticle-item',
+             renderer='string')
+class InstantArticleItem(Article):
+
+    def __call__(self):
+        if not getattr(self.request, 'wrapped_response', None) or (
+                self.request.wrapped_response.status_code == 501):
+            return pyramid.response.Response(status_code=501)
+
+        metadata = zeit.cms.content.interfaces.ICommonMetadata(self.context)
+
+        title = u': '.join(t for t in (
+            metadata.supertitle, metadata.title) if t)
+
+        content_url = create_public_url(
+            zeit.web.core.template.create_url(
+                None, self.context, self.request))
+
+        if getattr(self.context, 'authorships', None):
+            authors = [getattr(author.target, 'display_name', None)
+                       for author in self.context.authorships]
+            authors = u', '.join(a for a in authors if a)
+        else:
+            authors = u''
+
+        pub_date = format_iso8601_date(last_published_semantic(self.context))
+
+        body = lxml.etree.CDATA(self.request.wrapped_response.text)
+
+        E = ELEMENT_MAKER  # NOQA
+        item = E.item(
+            E.title(title),
+            E.link(content_url),
+            E.description(metadata.teaserText),
+            E.category(metadata.sub_ressort or metadata.ressort),
+            E.author(authors),
+            E.pubDate(pub_date),
+            E.guid(content_url, isPermaLink='false'),
+            CONTENT_MAKER(body))
+
+        return lxml.etree.tostring(item)
+
+
 @view_config(context=zeit.content.article.interfaces.IArticle,
              route_name='fbia',
-             renderer='templates/fbia.html')
-class FbIa(Article):
+             renderer='templates/instantarticle/tracking.html')
+class InstantArticleTracking(Article):
     pass
 
 

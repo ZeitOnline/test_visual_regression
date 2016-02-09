@@ -820,6 +820,11 @@ def get_google_tag_manager_host():
 
 
 @zeit.web.register_global
+def interrupt(reason=None):
+    raise zeit.web.core.jinja.Interrupt(reason)
+
+
+@zeit.web.register_global
 def to_list(iterable):
     return types.ListType(iterable)
 
