@@ -181,7 +181,7 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, testbrowser):
 
 def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
     browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+        '%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
     assert '1: "redaktion",' in browser.contents
     assert '2: "centerpage",' in browser.contents
     assert '3: "lebensart",' in browser.contents
@@ -192,7 +192,7 @@ def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
     assert '8: "zeitmz/centerpage",' in browser.contents
     assert '9: ""' in browser.contents
     assert ('wt.pl?p=328,redaktion.lebensart...'
-            'centerpage.zede|{url}/zeit-magazin/test-cp/test-cp-zmo,'
+            'centerpage.zede|{url}/zeit-magazin/test-cp-legacy/test-cp-zmo,'
             '0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=centerpage&amp;'
             'cg3=lebensart&amp;cg4=zede&amp;cg5=&amp;cg6=&amp;'
             'cg7=test-cp-zmo&amp;cg8=zeitmz/centerpage&amp;'

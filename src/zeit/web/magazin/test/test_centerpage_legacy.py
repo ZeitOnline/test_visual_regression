@@ -32,7 +32,8 @@ def monkeyreq(monkeypatch):
 
 def test_homepage_should_have_buzz_module_centerpage_should_not(
         testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser(
+        '%s/zeit-magazin/test-cp-legacy/index' % testserver.url)
     assert '<div class="cp_buzz">' in browser.contents
     browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
     assert '<div class="cp_buzz">' not in browser.contents
@@ -240,7 +241,7 @@ def test_get_reaches_from_centerpage_view(application):
         'node_comment_statistics']
 
     cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo')
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, request)
 
     buzz = view.area_buzz
@@ -259,68 +260,72 @@ def test_get_reaches_from_centerpage_view(application):
 
 
 def test_cp_lead_should_have_correct_first_block(application):
-    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         cp_context, mock.Mock())
     lead1_first_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de/'
-        'zeit-magazin/test-cp/test-cp-zmo-2#body/feature/lead/id-f8f46488'
+        'zeit-magazin/test-cp-legacy/test-cp-zmo-2'
+        '#body/feature/lead/id-f8f46488'
         '-75ea-46f4-aaff-7654b4e1c805')
     lead1_last_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de/'
-        'zeit-magazin/test-cp/test-cp-zmo-2#body/feature/lead/id-eae7'
+        'zeit-magazin/test-cp-legacy/test-cp-zmo-2#body/feature/lead/id-eae7'
         'c703-98e9-491a-a30d-c1c5cebd2371')
     assert lead1_first_block == cp_view.area_lead_1[0].uniqueId
     assert lead1_last_block == cp_view.area_lead_1[3].uniqueId
 
 
 def test_cp_lead_should_have_correct_second_block(application):
-    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         cp_context, mock.Mock())
     lead2_first_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de/'
-        'zeit-magazin/test-cp/test-cp-zmo-2#body/feature/lead/id-cc6bbea3-'
+        'zeit-magazin/test-cp-legacy/'
+        'test-cp-zmo-2#body/feature/lead/id-cc6bbea3-'
         '1337-42f5-8fe1-01c9c4476600')
     lead2_last_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de/'
-        'zeit-magazin/test-cp/test-cp-zmo-2#body/feature/lead/id-f8f46488'
+        'zeit-magazin/test-cp-legacy/'
+        'test-cp-zmo-2#body/feature/lead/id-f8f46488'
         '-75ea-46f4-aaff-7654b4e1c805')
     assert lead2_first_block == cp_view.area_lead_2[0].uniqueId
     assert lead2_last_block == cp_view.area_lead_2[1].uniqueId
 
 
 def test_cp_lead_should_have_no_blocks(application):
-    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         cp_context, mock.Mock())
     lead_first_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de/zeit-mag'
-        'azin/test-cp/test-cp-zmo#body/feature/lead/id-f8f46488-75ea-46f4-'
+        'azin/test-cp-legacy/test-cp-zmo'
+        '#body/feature/lead/id-f8f46488-75ea-46f4-'
         'aaff-7654b4e1c805')
     lead_last_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de/'
-        'zeit-magazin/test-cp/test-cp-zmo#body/feature/lead/id-48962e5e'
+        'zeit-magazin/test-cp-legacy/test-cp-zmo#body/feature/lead/id-48962e5e'
         '-cdbe-4148-a12c-17724cd0e96b')
     assert lead_first_block == cp_view.area_lead_1[0].uniqueId
     assert lead_last_block == cp_view.area_lead_1[3].uniqueId
 
 
 def test_cp_informatives_should_have_correct_first_block(application):
-    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         cp_context, mock.Mock())
     informatives1_first_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de'
-        '/zeit-magazin/test-cp/test-cp-zmo-2#body/feature/informatives/'
+        '/zeit-magazin/test-cp-legacy/test-cp-zmo-2#body/feature/informatives/'
         'id-3d2116f6-96dd-4556-81f7-d7d0a40435e5')
     informatives1_last_block = (
         'http://block.vivi.zeit.de/'
-        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo-2'
         '#body/feature/informatives/id-bff224c9-088e-40d4-987d-9d986de804bd')
 
     assert informatives1_first_block == cp_view.area_informatives_1[0].uniqueId
@@ -328,17 +333,18 @@ def test_cp_informatives_should_have_correct_first_block(application):
 
 
 def test_cp_informatives_should_have_correct_second_block(application):
-    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         cp_context, mock.Mock())
     informatives2_first_block = (
         'http://block.vivi.zeit.de/http://xml.zeit.de'
-        '/zeit-magazin/test-cp/test-cp-zmo-2#body/feature/informatives/id-edc'
+        '/zeit-magazin/test-cp-legacy/test-cp-zmo-2'
+        '#body/feature/informatives/id-edc'
         '55a53-7cab-4bbc-a31d-1cf20afe5d9d')
     informatives2_last_block = (
         'http://block.vivi.zeit.de/'
-        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2'
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo-2'
         '#body/feature/informatives/id-edc55a53-7cab-4bbc-a31d-'
         '1cf20afe5d9ddshjdsjkdsjk')
 
@@ -347,17 +353,17 @@ def test_cp_informatives_should_have_correct_second_block(application):
 
 
 def test_cp_informatives_should_have_no_blocks(application):
-    cp = 'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
+    cp = 'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         cp_context, mock.Mock())
     informatives_first_block = (
         'http://block.vivi.zeit.de/'
-        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo'
         '#body/feature/informatives/id-3d2116f6-96dd-4556-81f7-d7d0a40435e5')
     informatives_last_block = (
         'http://block.vivi.zeit.de/'
-        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo'
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo'
         '#body/feature/informatives/id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d')
 
     assert informatives_first_block == cp_view.area_informatives_1[0].uniqueId
@@ -366,7 +372,7 @@ def test_cp_informatives_should_have_no_blocks(application):
 
 def test_centerpage_should_have_monothematic_block(application):
     cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo')
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
     assert len(view.monothematic_block) == 6
 
@@ -384,7 +390,7 @@ def test_homepage_indentifies_itself_as_homepage(testserver):
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
     assert view.is_hp is True
     cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-large-teaser')
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-large-teaser')
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
     assert view.is_hp is False
 

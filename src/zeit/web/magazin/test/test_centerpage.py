@@ -22,7 +22,7 @@ import zeit.web.magazin.view_centerpage
 def test_cp_should_have_buzz_module(
         testserver, testbrowser):
     browser = testbrowser(
-        '%s/zeit-magazin/test-cp-2015/buzz' % testserver.url)
+        '%s/zeit-magazin/buzz' % testserver.url)
     assert '<section class="buzzboard">' in browser.contents
     assert '<table class="buzzboard__table' in browser.contents
     assert '<div class="buzzboard__container">' in browser.contents
@@ -37,7 +37,7 @@ def test_get_reaches_from_centerpage_view(application):
         'node_comment_statistics']
 
     cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp-2015/buzz')
+        'http://xml.zeit.de/zeit-magazin/buzz')
     block = zeit.web.core.utils.find_block(
         cp, module='zmo-mostread')
     module = zeit.web.core.template.get_module(block)
@@ -54,7 +54,7 @@ def test_get_reaches_from_centerpage_view(application):
 
 
 def test_teaser_square_large_has_correct_markup(testbrowser):
-    browser = testbrowser('/centerpage/lebensart')
+    browser = testbrowser('/zeit-magazin/teaser-square-large')
     element = browser.cssselect('.teaser-square-large')[0]
 
     text_wrap = element.cssselect('.teaser-square-large__text')
@@ -66,18 +66,18 @@ def test_teaser_square_large_has_correct_markup(testbrowser):
     img = element.cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 2
+    assert len(link_wrap) == 1
     assert len(image_wrap) != 0
-    assert supertitle.text.strip() == 'Article Image Asset Spitzmarke'
-    assert title.text.strip() == 'Article Image Asset Titel'
-    assert u'Dies k\u00F6nnte' in subtitle.text.strip()
-    assert re.search('/centerpage/katzencontent/square',
+    assert supertitle.text.strip() == u'Raffiniert kochen'
+    assert title.text.strip() == 'Die perfekte Illusion'
+    assert u'Safran, Salzzitronen' in subtitle.text.strip()
+    assert re.search('frau-isst-suppe-2/square',
                      img.get('src'))
-    assert img.get('alt') == 'Die ist der Alttest'
+    assert img.get('alt') == 'Eine Frau isst Paprikasuppe'
 
 
 def test_teaser_square_large_light_has_correct_markup(testbrowser):
-    browser = testbrowser('/centerpage/lebensart-2')
+    browser = testbrowser('/zeit-magazin/teaser-square-large')
     element = browser.cssselect('.teaser-square-large--light')[0]
 
     text_wrap = element.cssselect('.teaser-square-large__text')
@@ -89,18 +89,18 @@ def test_teaser_square_large_light_has_correct_markup(testbrowser):
     img = element.cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 2
+    assert len(link_wrap) == 1
     assert len(image_wrap) != 0
-    assert supertitle.text.strip() == 'Article Image Asset Spitzmarke'
-    assert title.text.strip() == 'Article Image Asset Titel'
-    assert u'Dies k\u00F6nnte' in subtitle.text.strip()
-    assert re.search('/centerpage/katzencontent/square',
+    assert supertitle.text.strip() == u'Raffiniert kochen'
+    assert title.text.strip() == 'Die perfekte Illusion'
+    assert u'Safran, Salzzitronen' in subtitle.text.strip()
+    assert re.search('frau-isst-suppe-2/square',
                      img.get('src'))
-    assert img.get('alt') == 'Die ist der Alttest'
+    assert img.get('alt') == 'Eine Frau isst Paprikasuppe'
 
 
 def test_teaser_landscape_small_has_correct_markup(testbrowser):
-    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo')
+    browser = testbrowser('/zeit-magazin/teaser-landscape-small')
     element = browser.cssselect('.teaser-landscape-small')
 
     text_wrap = element[0].cssselect('.teaser-landscape-small__text')
@@ -114,16 +114,16 @@ def test_teaser_landscape_small_has_correct_markup(testbrowser):
     assert len(text_wrap) != 0
     assert len(link_wrap) == 1
     assert len(image_wrap) != 0
-    assert supertitle.text.strip() == u'Kochen für Gäste'
-    assert title.text.strip() == 'Heimlich vegetarisch'
-    assert u'Wenn Gäste kommen,' in subtitle.text.strip()
-    assert re.search('pistazienparfait/wide__822x462',
+    assert supertitle.text.strip() == u'Raffiniert kochen'
+    assert title.text.strip() == 'Die perfekte Illusion'
+    assert u'Safran, Salzzitronen' in subtitle.text.strip()
+    assert re.search('frau-isst-suppe-2/wide__822x462',
                      img.get('src'))
-    assert img.get('alt') == 'Das Pistazienparfait wird verspeist'
+    assert img.get('alt') == 'Eine Frau isst Paprikasuppe'
 
 
 def test_teaser_upright_has_correct_markup(testbrowser):
-    browser = testbrowser('/zeit-magazin/upright')
+    browser = testbrowser('/zeit-magazin/teaser-upright')
     element = browser.cssselect('.teaser-upright')
 
     text_wrap = element[0].cssselect('.teaser-upright__text')
@@ -137,7 +137,7 @@ def test_teaser_upright_has_correct_markup(testbrowser):
 
 
 def test_teaser_upright_large_has_correct_markup(testbrowser):
-    browser = testbrowser('zeit-magazin/test-cp/test-cp-large-teaser')
+    browser = testbrowser('zeit-magazin/teaser-upright-large')
     element = browser.cssselect('.teaser-upright-large')
 
     text_wrap = element[0].cssselect('.teaser-upright-large__text')
@@ -149,18 +149,18 @@ def test_teaser_upright_large_has_correct_markup(testbrowser):
     img = element[0].cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 2
+    assert len(link_wrap) == 1
     assert len(image_wrap) != 0
-    assert supertitle.text.strip() == u'Article Image Asset Spitzmarke'
-    assert title.text.strip() == 'Article Image Asset Titel'
-    assert u'Dies könnte' in subtitle.text.strip()
-    assert re.search('katzencontent/portrait__612x816',
+    assert supertitle.text.strip() == u'Raffiniert kochen'
+    assert title.text.strip() == 'Die perfekte Illusion'
+    assert u'Safran, Salzzitronen' in subtitle.text.strip()
+    assert re.search('frau-isst-suppe-2/portrait__612x816',
                      img.get('src'))
-    assert img.get('alt') == 'Die ist der Alttest'
+    assert img.get('alt') == 'Eine Frau isst Paprikasuppe'
 
 
 def test_teaser_landscape_large_has_correct_markup(testbrowser):
-    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-3')
+    browser = testbrowser('/zeit-magazin/teaser-landscape-large')
     element = browser.cssselect('.teaser-landscape-large')
 
     text_wrap = element[0].cssselect('.teaser-landscape-large__text')
@@ -169,16 +169,20 @@ def test_teaser_landscape_large_has_correct_markup(testbrowser):
         '.teaser-landscape-large__kicker')[0]
     title = element[0].cssselect('.teaser-landscape-large__title')[0]
     subtitle = element[0].cssselect('.teaser-landscape-large__subtitle')[0]
+    img = element[0].cssselect('img')[0]
 
     assert len(text_wrap) != 0
     assert len(link_wrap) == 1
-    assert supertitle.text.strip() == u'Serie Gesellschaftskritik'
-    assert title.text.strip() == u'Über schlechte Laune'
-    assert 'Grumpy Cat' in subtitle.text.strip()
+    assert supertitle.text.strip() == u'Raffiniert kochen'
+    assert title.text.strip() == 'Die perfekte Illusion'
+    assert u'Safran, Salzzitronen' in subtitle.text.strip()
+    assert re.search('frau-isst-suppe-2/wide__822x462',
+                     img.get('src'))
+    assert img.get('alt') == 'Eine Frau isst Paprikasuppe'
 
 
 def test_teaser_landscape_large_photo_has_correct_markup(testbrowser):
-    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-2')
+    browser = testbrowser('/zeit-magazin/teaser-landscape-large-photo')
     element = browser.cssselect('.teaser-landscape-large-photo')
 
     text_wrap = element[0].cssselect('.teaser-landscape-large-photo__text')
@@ -189,8 +193,8 @@ def test_teaser_landscape_large_photo_has_correct_markup(testbrowser):
 
     assert len(text_wrap) != 0
     assert len(link_wrap) == 1
-    assert supertitle.text.strip() == u'Serie Gesellschaftskritik'
-    assert title.text.strip() == u'Über schlechte Laune'
+    assert supertitle.text.strip() == u'Raffiniert kochen'
+    assert title.text.strip() == u'Die perfekte Illusion'
 
 
 def test_teaser_fullwidth_with_video_has_correct_markup(
@@ -198,7 +202,7 @@ def test_teaser_fullwidth_with_video_has_correct_markup(
     browser = testbrowser('/zeit-magazin/teaser-fullwidth')
     teaser = browser.cssselect('.teaser-fullwidth')[2]
 
-    vid_wrap = teaser.cssselect('.teaser-fullwidth__media')[0]
+    vid_wrap = teaser.cssselect('.teaser-fullwidth__media-container')[0]
     img = teaser.cssselect('img')[0]
     title_wrap = teaser.cssselect('header')[0]
     a = teaser.cssselect('a')
@@ -240,7 +244,7 @@ def test_teaser_fullwidth_light_with_video_has_correct_markup(
     browser = testbrowser('/zeit-magazin/teaser-fullwidth')
     teaser = browser.cssselect('.teaser-fullwidth--light')[1]
 
-    vid_wrap = teaser.cssselect('.teaser-fullwidth__media')[0]
+    vid_wrap = teaser.cssselect('.teaser-fullwidth__media-container')[0]
     img = teaser.cssselect('img')[0]
     title_wrap = teaser.cssselect('header')[0]
     a = teaser.cssselect('a')
@@ -282,7 +286,7 @@ def test_teaser_fullwidth_with_image_has_correct_markup(
     browser = testbrowser('/zeit-magazin/teaser-fullwidth')
     teaser = browser.cssselect('.teaser-fullwidth')[0]
 
-    img_wrap = teaser.cssselect('.teaser-fullwidth__media')
+    img_wrap = teaser.cssselect('.teaser-fullwidth__media-container')
     img = teaser.cssselect('img')[0]
     title_wrap = teaser.cssselect('header')
     a = teaser.cssselect('a')
@@ -305,10 +309,10 @@ def test_teaser_fullwidth_with_image_has_correct_markup(
 
 def test_teaser_fullwidth_light_with_image_has_correct_markup(
         testbrowser, testserver):
-    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-2')
+    browser = testbrowser('/zeit-magazin/teaser-fullwidth')
     teaser = browser.cssselect('.teaser-fullwidth--light')[0]
 
-    img_wrap = teaser.cssselect('.teaser-fullwidth__media')
+    img_wrap = teaser.cssselect('.teaser-fullwidth__media-container')
     img = teaser.cssselect('img')[0]
     title_wrap = teaser.cssselect('header')
     a = teaser.cssselect('a')
@@ -330,7 +334,7 @@ def test_teaser_fullwidth_light_with_image_has_correct_markup(
 
 
 def test_teaser_print_cover_has_correct_markup(testbrowser):
-    browser = testbrowser('/zeit-magazin/print-cover')
+    browser = testbrowser('/zeit-magazin/teaser-print-cover')
     element = browser.cssselect('.teaser-print-cover')[0]
 
     text_wrap = element.cssselect('.teaser-print-cover__text')
@@ -359,6 +363,6 @@ def test_teaser_should_have_comment_count(
     """
     mockserver_factory(cp_counts)
     browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+        '%s/zeit-magazin/index' % testserver.url)
     counts = browser.cssselect('.icon-comments-count')
     assert int(counts[0].text) == 129

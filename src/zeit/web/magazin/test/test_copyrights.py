@@ -26,7 +26,7 @@ def cp_factory(application, dummy_request):
 
     def wrapped(area_getter):
         cp = zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
+            'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo')
         view_class = type('View', (
             zeit.web.magazin.view_centerpage.CenterpageLegacy,), {
                 '_copyrights': {},
@@ -91,7 +91,7 @@ def test_empty_sequences_should_not_resolve_copyrights(cp_factory):
 
 def test_copyright_entries_are_rendered_correcly(testserver, testbrowser):
     browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+        '%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
     # 5 Unique teaser images with copyright information expected.
     assert len(browser.cssselect('.copyrights__entry')) == 5
 
@@ -99,7 +99,7 @@ def test_copyright_entries_are_rendered_correcly(testserver, testbrowser):
 def test_copyright_entry_images_are_rendered_correctly(
         testserver, testbrowser):
     browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+        '%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
     assert ('/zeit-magazin/2014/17/lamm-aubergine/'
             'lamm-aubergine-zmo-landscape-large.jpg') in browser.cssselect(
                 '.copyrights__entry__image')[0].attrib['style']
@@ -108,21 +108,21 @@ def test_copyright_entry_images_are_rendered_correctly(
 def test_copyright_entry_labels_are_rendered_correctly(
         testserver, testbrowser):
     browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+        '%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
     assert u'© Jason Merritt/Getty Images' in browser.cssselect(
         'span.copyrights__entry__label')[2].text
 
 
 def test_copyright_entry_links_are_rendered_correctly(testserver, testbrowser):
     browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+        '%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
     assert 'http://www.photocase.de/milchhonig' in browser.cssselect(
         'span.copyrights__entry__label a')[0].attrib['href']
 
 
 def test_copyright_area_toggles_correctly(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    driver.get('%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
     assert driver.find_elements_by_css_selector(
         '.copyrights')[0].value_of_css_property('display') == 'none'
     toggle = driver.find_elements_by_css_selector(".js-toggle-copyrights")[0]

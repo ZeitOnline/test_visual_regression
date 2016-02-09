@@ -14,7 +14,7 @@ def test_link_object_should_redirect_permanently(testbrowser):
 
 def test_link_object_teaser_should_point_directly_to_destination(testbrowser):
     # test it for ZMO
-    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-3')
+    browser = testbrowser('/zeit-magazin/test-cp-legacy/test-cp-zmo-3')
     assert ('<a href="http://www.zeit.de/zeit-magazin/mode-design/2014-05/'
             'karl-lagerfeld-interview">') in browser.contents
     # test it for ZON
