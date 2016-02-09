@@ -23,30 +23,30 @@ class AuthenticationPolicy(
 
 
 def get_user(request):
-   conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
-   sso_cookie = request.cookies.get(conf.get('sso_cookie'))
+    sso_cookie = request.cookies.get(conf.get('sso_cookie'))
 
-   # If no sso cookie is present, bail out straight away:
-   if not sso_cookie:
-       if 'user' in request.session:
-           del request.session['user']
-       return
+    # If no sso cookie is present, bail out straight away:
+    if not sso_cookie:
+        if 'user' in request.session:
+            del request.session['user']
+        return
 
-   if request.session.get('user') and (
-           is_reliable_user_info(request.session['user']) and not (
-           request.session['user']['should_invalidate'])):
-       # retrieve the user info from the session
-       user_info = request.session['user']
-   else:
-       # store the user info in the session
-       log.debug("Request user_info")
-       user_info = get_user_info(request)
-       if not is_reliable_user_info(user_info):
-           return
-       request.session['user'] = user_info
+    if request.session.get('user') and (
+            is_reliable_user_info(request.session['user']) and not (
+            request.session['user']['should_invalidate'])):
+        # retrieve the user info from the session
+        user_info = request.session['user']
+    else:
+        # store the user info in the session
+        log.debug("Request user_info")
+        user_info = get_user_info(request)
+        if not is_reliable_user_info(user_info):
+            return
+        request.session['user'] = user_info
 
-   return user_info['ssoid']
+    return user_info['ssoid']
 
 
 def is_reliable_user_info(user_info):
