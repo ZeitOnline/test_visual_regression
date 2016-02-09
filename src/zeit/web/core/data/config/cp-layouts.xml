@@ -272,14 +272,14 @@
     <layout
         id="zmo-leader-fullwidth"
         title="ZMO Vollbreiter Aufmacher"
-        image_pattern="zmo-landscape-large"
+        image_pattern="wide"
         areas="solo duo major minor ranking parquet"
         available="zeit.magazin.interfaces.IZMOContent"
     />
     <layout
         id="zmo-leader-fullwidth-light"
         title="ZMO Vollbreiter Aufmacher (helles Bild)"
-        image_pattern="zmo-landscape-large"
+        image_pattern="wide"
         areas="solo duo major minor ranking parquet"
         available="zeit.magazin.interfaces.IZMOContent"
     />
@@ -311,7 +311,7 @@
     <layout
         id="zmo-landscape-large"
         title="ZMO großer Teaser 16:9"
-        image_pattern="zmo-landscape-large"
+        image_pattern="wide"
         areas="solo duo major minor ranking parquet"
         available="zeit.magazin.interfaces.IZMOContent"
     />
@@ -327,8 +327,8 @@
     <layout
         id="zmo-landscape-small"
         title="ZMO kleiner Teaser 16:9"
-        image_pattern="zmo-landscape-small"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="wide"
+        areas="major minor"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
