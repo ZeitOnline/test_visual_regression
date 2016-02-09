@@ -228,7 +228,7 @@ class AuthorFeed(Newsfeed):
     context=zeit.content.cp.interfaces.ICenterPage,
     renderer='string')
 @pyramid.view.view_config(
-    # header='host:newsfeed(\.staging)?\.zeit\.de',
+    header='host:newsfeed(\.staging)?\.zeit\.de',
     name='rss-instantarticle')
 class InstantArticleFeed(Newsfeed):
 
