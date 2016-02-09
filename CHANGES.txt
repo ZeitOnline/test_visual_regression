@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.55 (unreleased)
+2.55 (2016-02-09)
 -----------------
 
 - MAINT: Add enhanced window.Zeit javascript module to ZMO
