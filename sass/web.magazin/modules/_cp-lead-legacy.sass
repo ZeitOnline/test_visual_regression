@@ -1,0 +1,11 @@
+//styles for lead area within cp
+$cp_lead__wrap-width: 65%
+
+//wrapper lead area
+.cp_lead__wrap
+	+justify-children-horizontally('.cp_lead__wrap > .teaser-landscape-small', top)
+	width: 100%
+	+respond-min($break-2)
+		float: left
+		width: $cp_lead__wrap-width
+		padding: 0 $compact 0 $compact

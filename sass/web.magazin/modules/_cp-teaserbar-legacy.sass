@@ -1,10 +1,17 @@
 $teaserbar_teaser_max_width: em(270px)
 
 .cp_teaserbar__wrap
-    @extend .mtb__wrap
+    clear: left
+    width: 100%
 
 .cp_teaserbar
-    @extend .mtb
+    width: 88%
+    margin: 0 auto $compact auto
+
+    +respond-min-max($break-1, $break-3)
+        width: 2*$mtb-teaser-width + $compact // two teaser columns, one margin
+    +respond-min($break-3)
+        width: 3*$mtb-teaser-width + 2*$big // three teaser columns, two margins
 
 
 // start: teasers //

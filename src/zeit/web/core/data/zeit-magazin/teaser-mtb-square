@@ -57,14 +57,22 @@
             <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
               </block>
           </container>
-        </region>
-        <region area="id-6dd22838-9f14-4294-a96d-3dhgse2fa1a7bc91" visible="True" kind="trio">
            <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9dfd986de804bdHHHHfsHcardcMAJOR">
              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
               </block>
            </container>
-        </region>
-        <region area="id-6dd22838-9f14-4294-a96d-3fdsfsde2fa1a7bc91" visible="True" kind="trio">
+           <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-381c8f6a-dc39-40e3-a919-0fdsfsdfg9aa41eaa7c2">
+             <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
+              </block>
+           </container>
+           <container cp:type="teaser" module="zmo-mtb-square" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805MAJOR">
+            <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
+              </block>
+          </container>
+           <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9dfd986de804bdHHHHfsHcardcMAJOR">
+             <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
+              </block>
+           </container>
            <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-381c8f6a-dc39-40e3-a919-0fdsfsdfg9aa41eaa7c2">
              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
               </block>
