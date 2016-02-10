@@ -5,18 +5,7 @@
 		margin: 0
 
 	&__container
-		font-size: 0
 		margin: remify(24px auto)
-		max-width: remify(200px)
-		overflow: hidden
-		white-space: nowrap
-
-		+respond-min($break-phablet-min)
-			max-width: remify(200px * 2)
-		+respond-min($break-tablet-min)
-			max-width: remify(200px * 3)
-		+respond-min($break-desktop-min)
-			max-width: remify(200px * 4)
 
 	&__button
 		+zon-button-dark($margin: 0)
@@ -26,13 +15,28 @@
 
 .teaser-printkiosk
 	display: inline-block
-	font-size: 1rem
 	margin: 0
+	max-width: remify(200px)
 	padding: remify(0 20px)
 	text-align: center
 	vertical-align: top
-	white-space: normal
 	width: 100%
+	// this is not supported by IE8, but IE8 does not support
+	// media queries either, so only the desktop rules apply
+	&:nth-child(n+2)
+		display: none
+	+respond-min($break-phablet-min)
+		width: 50%
+		&:nth-child(2)
+			display: inline-block
+	+respond-min($break-tablet-min)
+		width: 33.33%
+		&:nth-child(3)
+			display: inline-block
+	+respond-min($break-desktop-min)
+		width: 25%
+		&:nth-child(4)
+			display: inline-block
 
 	a
 		display: block
@@ -63,9 +67,3 @@
 		margin: remify(20px auto 0)
 		min-height: 3em // that's two lines when line-height is 1.5
 
-	+respond-min($break-phablet-min)
-		width: 50%
-	+respond-min($break-tablet-min)
-		width: 33.3334% // "round up" needed for stupid selenium test
-	+respond-min($break-desktop-min)
-		width: 25%
