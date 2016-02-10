@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-2.55 (unreleased)
+2.56 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.55 (2016-02-09)
+-----------------
+
+- MAINT: Add enhanced window.Zeit javascript module to ZMO
 
 - HOTFIX: Correctly parse jinja profiler toggle value
 
@@ -19,6 +27,8 @@ Change log for zeit.web
 - ZON-2536: Move generic image assets to core module
 
 - ZON-2692: Add instantarticle author fallback and local image captions
+
+- ZON-2692: Remove instantarticle with missing block implementations from feed
 
 - ZON-2613: Implement author teaser
 
