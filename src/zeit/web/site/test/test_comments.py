@@ -284,7 +284,7 @@ def test_comment_area_should_have_no_comment_form(application):
     request.session['user'] = {
         'blocked': False,
         'premoderation': False,
-        'uid': 0 }
+        'uid': 0}
 
     view = zeit.web.core.view.Content(article, request)
     assert view.comment_area['show_comment_form'] is False
@@ -297,7 +297,7 @@ def test_comment_area_should_have_comment_form(application):
     request.session['user'] = {
         'blocked': False,
         'premoderation': False,
-        'uid': '1' }
+        'uid': '1'}
 
     view = zeit.web.core.view.Content(article, request)
     assert view.comment_area['show_comment_form'] is True

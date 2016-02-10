@@ -844,8 +844,6 @@ class Content(CeleraOneMixin, Base):
             premoderation = self.request.session['user'].get('premoderation')
             uid = self.request.session['user'].get('uid')
             valid_community_login = True if uid and uid != '0' else False
-            if not valid_community_login:
-                self.request.session['user']['should_invalidate'] = True
 
         # used for general alerts in the comment section header
         message = None

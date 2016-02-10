@@ -19,34 +19,29 @@ class AuthenticationPolicy(
     """
 
     def authenticated_userid(self, request):
-        return request.user.get('ssoid')
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
+        sso_cookie = request.cookies.get(conf.get('sso_cookie'))
 
-def get_user(request):
-   conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        # If no sso cookie is present, bail out straight away:
+        if not sso_cookie:
+            if 'user' in request.session:
+                del request.session['user']
+            return {}
 
-   sso_cookie = request.cookies.get(conf.get('sso_cookie'))
-
-   # If no sso cookie is present, bail out straight away:
-   if not sso_cookie:
-       if 'user' in request.session:
-           del request.session['user']
-       return
-
-   if request.session.get('user') and (
-           is_reliable_user_info(request.session['user']) and not (
-           request.session['user']['should_invalidate'])):
-       # retrieve the user info from the session
-       user_info = request.session['user']
-   else:
-       # store the user info in the session
-       log.debug("Request user_info")
-       user_info = get_user_info(request)
-       if not is_reliable_user_info(user_info):
-           return
-       request.session['user'] = user_info
-
-   return user_info['ssoid']
+        if request.session.get('user') and (
+                is_reliable_user_info(request.session['user']) and not (
+                request.session['user']['should_invalidate'])):
+            # retrieve the user info from the session
+            user_info = request.session['user']
+        else:
+            # store the user info in the session
+            log.debug("Request user_info")
+            user_info = get_user_info(request)
+            if not is_reliable_user_info(user_info):
+                return
+            request.session['user'] = user_info
+        return user_info['ssoid']
 
 
 def is_reliable_user_info(user_info):
@@ -149,4 +144,8 @@ def get_user_info(request):
     if len(user_info.get('roles', [])) == 1:
         roles = user_info['roles'][:]
         user_info['blocked'] = (roles.pop() == "anonymous user")
+
+    if sso_info and (not user_info['uid'] or user_info['uid'] == '0'):
+        user_info['should_invalidate'] = True
+
     return user_info
