@@ -455,6 +455,7 @@ def test_banner_advertorial_extrarulez(mock_ad_view):
                 ('tma', '')]
     assert adv_test == adv_code
 
+
 def test_centerpage_should_have_manual_seo_pagetitle(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/index')
