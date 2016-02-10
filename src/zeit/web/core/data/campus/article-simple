@@ -87,8 +87,8 @@
       &lt;tuple&gt;
         &lt;global name=&quot;Article&quot; module=&quot;zeit.content.article.article&quot;/&gt;
         &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
-        &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
-        &lt;global name=&quot;IZONArticle&quot; module=&quot;zeit.content.article.interfaces&quot;/&gt;
+        &lt;global name=&quot;IZCOContent&quot; module=&quot;zeit.campus.interfaces&quot;/&gt;
+        &lt;global name=&quot;IZCOArticle&quot; module=&quot;zeit.campus.interfaces&quot;/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
