@@ -3,6 +3,10 @@ $card-rotate-y: -180deg
 
 .teaser-card
 	margin-bottom: 1.75em
+	width: 100%
+	+respond-min($break-2)
+		.cp-area--trio > &
+			width: remify(270px)
 
 .card__wrap
 	max-width: 320px
