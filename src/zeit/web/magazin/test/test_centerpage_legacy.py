@@ -248,24 +248,6 @@ def test_get_reaches_from_centerpage_view(application):
     assert len(buzz_comments[1]) == 3
 
 
-def test_cp_lead_should_have_correct_first_block(application):
-    cp = 'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo-2'
-    cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
-        cp_context, mock.Mock())
-    lead1_first_block = (
-        'http://block.vivi.zeit.de/http://xml.zeit.de/'
-        'zeit-magazin/test-cp-legacy/test-cp-zmo-2'
-        '#body/feature/lead/id-f8f46488'
-        '-75ea-46f4-aaff-7654b4e1c805')
-    lead1_last_block = (
-        'http://block.vivi.zeit.de/http://xml.zeit.de/'
-        'zeit-magazin/test-cp-legacy/test-cp-zmo-2#body/feature/lead/id-eae7'
-        'c703-98e9-491a-a30d-c1c5cebd2371')
-    assert lead1_first_block == cp_view.area_lead_1[0].uniqueId
-    assert lead1_last_block == cp_view.area_lead_1[3].uniqueId
-
-
 def test_cp_lead_should_have_correct_second_block(application):
     cp = 'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo-2'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
@@ -283,24 +265,6 @@ def test_cp_lead_should_have_correct_second_block(application):
         '-75ea-46f4-aaff-7654b4e1c805')
     assert lead2_first_block == cp_view.area_lead_2[0].uniqueId
     assert lead2_last_block == cp_view.area_lead_2[1].uniqueId
-
-
-def test_cp_lead_should_have_no_blocks(application):
-    cp = 'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo'
-    cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    cp_view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
-        cp_context, mock.Mock())
-    lead_first_block = (
-        'http://block.vivi.zeit.de/http://xml.zeit.de/zeit-mag'
-        'azin/test-cp-legacy/test-cp-zmo'
-        '#body/feature/lead/id-f8f46488-75ea-46f4-'
-        'aaff-7654b4e1c805')
-    lead_last_block = (
-        'http://block.vivi.zeit.de/http://xml.zeit.de/'
-        'zeit-magazin/test-cp-legacy/test-cp-zmo#body/feature/lead/id-48962e5e'
-        '-cdbe-4148-a12c-17724cd0e96b')
-    assert lead_first_block == cp_view.area_lead_1[0].uniqueId
-    assert lead_last_block == cp_view.area_lead_1[3].uniqueId
 
 
 def test_cp_informatives_should_have_correct_first_block(application):
