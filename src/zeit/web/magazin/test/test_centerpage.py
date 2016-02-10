@@ -391,3 +391,17 @@ def test_teaser_should_have_comment_count(
         '%s/zeit-magazin/index' % testserver.url)
     counts = browser.cssselect('.icon-comments-count')
     assert int(counts[0].text) == 129
+
+
+def test_default_teaser_should_return_default_teaser_image(
+        application, testserver, testbrowser):
+    cp = 'http://xml.zeit.de/zeit-magazin/teaser-upright'
+    cp_context = zeit.cms.interfaces.ICMSContent(cp)
+    __import__("pdb").set_trace()
+
+    teaser_block = cp_context[0][0][0]
+    article = 'http://xml.zeit.de/artikel/artikel-ohne-assets'
+    article_context = zeit.cms.interfaces.ICMSContent(article)
+    teaser_img = zeit.web.core.template.get_image(
+        teaser_block, article_context)
+    assert zeit.web.core.interfaces.ITeaserImage.providedBy(teaser_img)

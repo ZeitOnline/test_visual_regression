@@ -203,17 +203,6 @@ def test_default_image_url_should_return_none_when_no_unique_id_is_given(
     assert default_image_url(mock.Mock()) is None
 
 
-def test_default_teaser_should_return_default_teaser_image(
-        application, testserver, testbrowser):
-    cp = 'http://xml.zeit.de/centerpage/lebensart'
-    cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    teaser_block = cp_context['lead'][0]
-    article = 'http://xml.zeit.de/centerpage/article_image_asset'
-    article_context = zeit.cms.interfaces.ICMSContent(article)
-    teaser_img = get_teaser_image(teaser_block, article_context)
-    assert zeit.web.core.interfaces.ITeaserImage.providedBy(teaser_img)
-
-
 def test_teaser_image_should_be_created_from_image_group_and_image(
         testserver, testbrowser):
     import zeit.cms.interfaces
