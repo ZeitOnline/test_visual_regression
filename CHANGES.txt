@@ -4,7 +4,7 @@ Change log for zeit.web
 2.56 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2581: Track ad start events to webtrekk
 
 
 2.55 (2016-02-09)
