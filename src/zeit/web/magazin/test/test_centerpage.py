@@ -352,6 +352,31 @@ def test_teaser_print_cover_has_correct_markup(testbrowser):
     assert 'exampleimages/artikel/02/heft/original' in img.get('src')
 
 
+def test_teaser_mtb_square_has_correct_markup(testbrowser):
+    browser = testbrowser('/zeit-magazin/teaser-mtb-square')
+    element = browser.cssselect('.teaser-mtb-square')[0]
+
+    text_wrap = element.cssselect('.teaser-mtb-square__text')
+    link_wrap = element.cssselect('a')
+    image_wrap = element.cssselect('.teaser-mtb-square__media')
+    supertitle = element.cssselect('.teaser-mtb-square__kicker')[0]
+    title = element.cssselect('.teaser-mtb-square__title')[0]
+    img = element.cssselect('img')[0]
+
+    assert len(text_wrap) != 0
+    assert len(link_wrap) == 1
+    assert len(image_wrap) != 0
+    assert supertitle.text.strip() == 'Serie Gesellschaftskritik'
+    assert 'schlechte Laune' in title.text.strip()
+    assert 'grumpy-cat/square' in img.get('src')
+
+
+def test_trio_area_has_title(testbrowser):
+    browser = testbrowser('/zeit-magazin/teaser-mtb-square')
+    title = browser.cssselect('.cp-area__title')[0]
+    assert 'Dinge Wohnen' in title.text
+
+
 def test_teaser_should_have_comment_count(
         mockserver_factory, testserver, testbrowser):
 
