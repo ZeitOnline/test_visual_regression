@@ -4,7 +4,7 @@ Change log for zeit.web
 2.56 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Write adcontroller level4 if applicable
 
 
 2.55 (2016-02-09)
