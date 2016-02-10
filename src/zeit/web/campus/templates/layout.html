@@ -1,9 +1,11 @@
-{% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
+{% import "zeit.web.campus:templates/macros/layout_macro.tpl" as lama %}
 
 <html>
     <head>
     </head>
     <body>
-        Hello campus!
+        <h1>ZEIT Campus</h1>
+        {% block main %}
+        {% endblock %}
     </body>
 </html>

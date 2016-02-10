@@ -1,1 +1,9 @@
 {% extends "zeit.web.campus:templates/layout.html" %}
+
+{% block main %}
+    {% for region in view.regions %}
+        {% set region_loop = loop %}
+        {%- include ["zeit.web.core:templates/inc/region/{}.html".format(region.kind),
+                     "zeit.web.core:templates/inc/region/default.html"] ignore missing -%}
+    {% endfor %}
+{% endblock %}
