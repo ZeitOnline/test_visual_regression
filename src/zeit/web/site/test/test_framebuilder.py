@@ -74,3 +74,15 @@ def test_framebuilder_should_inline_svgs(testbrowser):
     assert len(browser.xpath(
                '/html/body/div[@class="visually-hidden"]/svg/symbol')) == 4
     assert browser.cssselect('.logo_bar svg > use')[0].attrib['xlink:href']
+
+
+def test_framebuilder_displays_no_adlabel_by_default(testbrowser):
+    browser = testbrowser('/framebuilder')
+    assert 'ad-label' not in browser.contents
+
+
+def test_framebuilder_displays_adlabel_if_requested(testbrowser):
+    browser = testbrowser('/framebuilder?adlabel=sch%C3%B6nes%20Wurstbrot')
+    adlabel = browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
+    assert len(adlabel) == 1
+    assert adlabel[0].text.strip() == u'schönes Wurstbrot'
