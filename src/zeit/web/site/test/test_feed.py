@@ -99,17 +99,9 @@ def test_instant_article_feed_should_be_rendered(testserver):
         headers={'Host': 'newsfeed.zeit.de'})
     parser = lxml.etree.XMLParser(strip_cdata=False)
     xml = lxml.etree.fromstring(res.content, parser)
-    assert xml.xpath('//item/title/text()')[0].startswith(
-        'Article Image Asset')
-    content = xml.xpath(
-        '//item/content:encoded',
-        namespaces={'content': 'http://purl.org/rss/1.0/modules/content/'})
-    assert ('<esi:include src="http://www.zeit.de/instantarticle'
-            '/centerpage/article_image_asset?cdata=true"/>'
-            in lxml.etree.tostring(content[0]))
-
-    assert xml.xpath('//item/link/text()')[0].startswith(
-        'http://www.zeit.de/centerpage/article_image_asset')
+    source = xml.xpath('./channel/*[local-name()="include"]/@src')[0]
+    assert source == ('http://www.zeit.de/'
+                      'instantarticle-item/centerpage/article_image_asset')
 
 
 def test_roost_feed_contains_mobile_override_text(testserver):
