@@ -344,7 +344,7 @@
         id="zmo-mtb-square"
         title="ZMO monothematischer Block quadratisch"
         image_pattern="zmo-square-large"
-        areas="solo duo major minor ranking parquet"
+        areas="trio"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
