@@ -835,14 +835,21 @@ class Content(CeleraOneMixin, Base):
     def comment_area(self):
         user_blocked = False
         premoderation = False
+        uid = 0
+        valid_community_login = True
         self.request.authenticated_userid
 
         if self.request.session.get('user'):
             user_blocked = self.request.session['user'].get('blocked')
             premoderation = self.request.session['user'].get('premoderation')
+            uid = self.request.session['user'].get('uid')
+            valid_community_login = True if uid and uid != '0' else False
 
-        message = None  # used for general alerts in the comment section header
-        note = None     # used for general alerts at the comment form
+        # used for general alerts in the comment section header
+        message = None
+
+        # used for general alerts or user specific alerts in the comment form
+        note = None
 
         if self.community_maintenance['active']:
             message = self.community_maintenance['text_active']
@@ -862,11 +869,16 @@ class Content(CeleraOneMixin, Base):
         elif self.community_maintenance['scheduled']:
             message = self.community_maintenance['text_scheduled']
 
+        if not valid_community_login:
+            note = (u'Aufgrund eines technischen Fehlers steht Ihnen die '
+                    u'Kommentarfunktion kurzfristig nicht zur Verfügung. '
+                    u'Bitte entschuldigen Sie diese Störung.')
+
         return {
             'show': (self.comments_allowed or bool(self.comments)),
             'show_comment_form': not self.community_maintenance['active'] and (
                 self.comments_allowed) and self.comments_loadable and (
-                    not user_blocked),
+                    not user_blocked) and valid_community_login,
             'show_comments': not self.community_maintenance['active'] and (
                 self.comments_loadable and bool(self.comments)),
             'no_comments': (not self.comments and self.comments_loadable),
