@@ -262,14 +262,14 @@ class Base(object):
         """Fill the adcontroller js object with actual values.
         Output in level strings only allows latin characters, numbers and
         underscore."""
-        levels = self.banner_channel.split('/')
-        # remove type from last level
-        levels[-1] = '' if levels[-1] == self.type else levels[-1]
+        # remove type from banner code string and split
+        levels = self.banner_channel.replace(
+            '/{}'.format(self.type), '').split('/')
         level2 = "".join(re.findall(r"[A-Za-z0-9_]*", levels[0]))
         level3 = "".join(re.findall(r"[A-Za-z0-9_]*", levels[1])) if len(
-            levels) == 3 else ''
+            levels) > 1 else ''
         level4 = "".join(re.findall(r"[A-Za-z0-9_]*", levels[2])) if len(
-            levels) == 4 else ''
+            levels) > 2 else ''
         keywords = ','.join(self.adwords) if (
             level2 != 'angebote') else '{},{}'.format(level2, level3)
         return [('$handle', self.adcontroller_handle),

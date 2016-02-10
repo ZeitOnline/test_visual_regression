@@ -434,6 +434,16 @@ def test_adcontroller_values_are_correctly_returned(mock_ad_view):
     assert zw_code == zw_test
 
 
+def test_adcontroller_values_for_stimmts_series(mock_ad_view):
+    adv_test = mock_ad_view(
+        'article', 'wissen', '', serienname='Stimmt\'s').adcontroller_values
+    adv_code = [('$handle', 'artikel'), ('level2', u'wissen'),
+                ('level3', u'serie'), ('level4', 'stimmts'),
+                ('$autoSizeFrames', True), ('keywords', 'zeitonline'),
+                ('tma', '')]
+    assert adv_test == adv_code
+
+
 def test_banner_advertorial_extrarulez(mock_ad_view):
     adv_test = mock_ad_view(
         'centerpage', 'angebote',
@@ -444,7 +454,6 @@ def test_banner_advertorial_extrarulez(mock_ad_view):
                 ('$autoSizeFrames', True), ('keywords', 'angebote,ingdiba'),
                 ('tma', '')]
     assert adv_test == adv_code
-
 
 def test_centerpage_should_have_manual_seo_pagetitle(application):
     context = zeit.cms.interfaces.ICMSContent(
