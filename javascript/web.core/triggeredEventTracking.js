@@ -174,6 +174,12 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             case 'contentCompleted':
                 _functions.sendTracking.sendVideoEventToWebtrekk( 'complete' ); // eventString "complete" defined by tracking team
                 break;
+            case 'adStarted':
+                _functions.sendTracking.sendVideoEventToWebtrekk( 'adstart' ); // eventString "adstart" defined by tracking team
+                break;
+            case 'adCompleted':
+                _functions.sendTracking.sendVideoEventToWebtrekk( 'adcomplete' ); // eventString "adcomplete" defined by tracking team
+                break;
         }
 
     };
