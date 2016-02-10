@@ -27,7 +27,7 @@ class AuthenticationPolicy(
         if not sso_cookie:
             if 'user' in request.session:
                 del request.session['user']
-            return {}
+            return
 
         if request.session.get('user') and (
                 is_reliable_user_info(request.session['user']) and not (
