@@ -45,11 +45,10 @@ class AuthenticationPolicy(
 
 
 def is_reliable_user_info(user_info):
-    """Check user info for all mandatory session values. This may invalidate
-    possibly old user session with missing values.
-    Also implicitly checks for successfully decoded SSO cookie ('ssoid').
+    """Check user info for all mandatory session values (including the
+    successfully decoded SSO cookie value).
     """
-    return 'uid' in user_info and user_info.get('ssoid')
+    return user_info.get('ssoid')
 
 
 def reload_user_info(request):
