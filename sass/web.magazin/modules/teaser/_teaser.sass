@@ -1,9 +1,5 @@
 // basic classes for default teaser
 
-$cp_button-gallery-height: remify(386px)
-$cp_button__image-height: remify(165px)
-$cp_button__image-height--large: remify(330px)
-
 %teaser
     position: relative
     display: inline-block
@@ -13,13 +9,10 @@ $cp_button__image-height--large: remify(330px)
 
 %teaser__media
     overflow: hidden
-    height: $cp_button__image-height*1.5
     margin-bottom: $small
     img
         width: 100%
         height: 100%
-    +respond-min($break-2)
-        height: $cp_button__image-height
 
 %teaser__text
     display: block
@@ -82,12 +75,15 @@ $cp_button__image-height--large: remify(330px)
     a
         +link-colors($white, $white, $white, $white, $white)
 
-// standart teaser
+// standart teaser if nothing else applies
+// will hopefully be never shown
 .teaser
     @extend %teaser
     margin-bottom: $compact
+    max-width: remify(320px)
     &__media
         @extend %teaser__media
+        max-height: remify(165px)
     &__text
         @extend %teaser__text
     &__kicker
