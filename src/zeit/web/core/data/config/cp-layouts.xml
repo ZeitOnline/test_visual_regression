@@ -349,38 +349,34 @@
     />
 
     <layout
-        id="zmo-product-square"
-        title="ZMO Produkt quadratisch (mini)"
-        image_pattern="zmo-square-small"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-    />
-
-    <layout
         id="zmo-card-citation"
         title="ZMO Karte Zitat"
         image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
+        areas="minor trio"
         available="zeit.magazin.interfaces.IZMOContent"
         />
+
     <layout
         id="zmo-card-picture"
         title="ZMO Karte mit Bild"
         image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
+        areas="minor trio"
         available="zeit.magazin.interfaces.IZMOContent"
         />
+
     <layout
         id="zmo-card-flip-read"
         title="ZMO Karte Flip'n'Read"
         image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
+        areas="minor trio"
         available="zeit.magazin.interfaces.IZMOContent"
         />
+
     <layout
         id="zmo-print-cover"
         title="ZMO Print Cover"
         image_pattern="original"
         areas="minor"
         available="zeit.magazin.interfaces.IZMOContent"/>
+
 </layouts>
