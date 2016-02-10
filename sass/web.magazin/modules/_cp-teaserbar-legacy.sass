@@ -1,4 +1,4 @@
-$teaserbar_teaser_max_width: em(270px)
+$teaserbar_teaser_max_width: 270px
 
 .cp_teaserbar__wrap
     clear: left
@@ -6,12 +6,12 @@ $teaserbar_teaser_max_width: em(270px)
 
 .cp_teaserbar
     width: 88%
-    margin: 0 auto $compact auto
+    margin: 0 auto $compact--px auto
 
     +respond-min-max($break-1, $break-3)
-        width: 2*$mtb-teaser-width + $compact // two teaser columns, one margin
+        width: 2*$teaserbar_teaser_max_width + $compact--px // two teaser columns, one margin
     +respond-min($break-3)
-        width: 3*$mtb-teaser-width + 2*$big // three teaser columns, two margins
+        width: 3*$teaserbar_teaser_max_width + 2*$big--px // three teaser columns, two margins
 
 
 // start: teasers //
