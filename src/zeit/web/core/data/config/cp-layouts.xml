@@ -273,14 +273,14 @@
         id="zmo-leader-fullwidth"
         title="ZMO Vollbreiter Aufmacher"
         image_pattern="wide"
-        areas="solo duo major minor ranking parquet"
+        areas="solo"
         available="zeit.magazin.interfaces.IZMOContent"
     />
     <layout
         id="zmo-leader-fullwidth-light"
         title="ZMO Vollbreiter Aufmacher (helles Bild)"
         image_pattern="wide"
-        areas="solo duo major minor ranking parquet"
+        areas="solo"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
