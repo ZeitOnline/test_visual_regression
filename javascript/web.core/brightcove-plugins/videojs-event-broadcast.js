@@ -37,10 +37,6 @@
             postEventToWindow( 'adStarted' );
         });
 
-        player.on( 'ads-ad-ended', function( e ) {
-            postEventToWindow( 'adCompleted' );
-        });
-
         /*
         Events: http://docs.brightcove.com/en/video-cloud/brightcove-player/reference/api/vjs.Player.html#eventsSection
         Interessante Properties:
