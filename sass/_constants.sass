@@ -1,5 +1,15 @@
+// font fallbacks
+$sans-fallbacks: "Helvetica Neue", Helvetica, Arial, FreeSans, sans-serif
+$serif-fallbacks: Georgia, Palatino, "Palatino Linotype", FreeSerif, serif
+
+// font families
+$font-franziska: "FranziskaWebPro", $serif-fallbacks !default
+$font-tabletgothic: "TabletGothic", $sans-fallbacks !default
+$font-tiemann: "TiemannLight", $serif-fallbacks !default
+
 // basic styles
 $base-font-size: 16px !default
+$base-font-family: $font-tabletgothic !default
 $base-line-height: 1.5 !default
 
 // margins/paddings in px
@@ -81,10 +91,6 @@ $letter-spacing-l: 0.08em // 1.28px
 $letter-spacing-m: 0.05em // 0.8px
 $letter-spacing-s: 0.03em // a half of a pixel
 
-// font fallbacks
-$sans-fallbacks: "Helvetica Neue", Helvetica, Arial, FreeSans, sans-serif
-$serif-fallbacks: Georgia, Palatino, "Palatino Linotype", FreeSerif, serif
-
 // utility colors
 $yellow:         #ffe117 !default
 $red:            #b91109 !default
@@ -132,13 +138,6 @@ $color-input-bg:        $grey--light !default
 $color-advertising-bg:  $concrete !default
 $color-border:          $silver !default
 
-$color-button:              $white !default
-$color-button--hover:       $white !default
-$color-button--disabled:    $charcoal !default
-$color-button-bg:           $grey--mid-dark !default
-$color-button-bg--hover:    $grey--mid !default
-$color-button-bg--disabled: $grey--light !default
-
 // content lengths
 $medium-content-width:  em(660px) !default
 $max-page-width:        em(980px) !default
@@ -149,25 +148,11 @@ $gutter: em(20px) !default
 $page-padding: $gutter !default
 $page-padding--small: $gutter*0.75 !default
 
-// Standard breakpoints
-$break-0:  em(480px) !default
-$break-1:  em(576px) !default
-$break-2:  em(720px) !default
-$break-3: em(1024px) !default
-$break-4: em(1120px) !default
+// Standard breakpoints (in 'em' for purpose)
+$break-phablet-min: em(520px) !default
+$break-tablet-min:  em(768px) !default
+$break-desktop-min: em(980px) !default
+$break-areas:       $break-tablet-min !default
 
 // *ad* breakpoint
 $break-mobile-ad-width: em(768px) !default
-
-// for comments
-$comments__break-overlap:  em(768px)
-$comments__break-outside: em(1360px) // 1280px | 1360px | 1440px
-
-// element sizes
-$stamp-width: em(240px)
-$mtb-teaser-width: em(270px)
-
-// font families
-$font-franziska: "FranziskaWebPro", $serif-fallbacks !default
-$font-tabletgothic: "TabletGothic", $sans-fallbacks !default
-$font-tiemann: "TiemannLight", $serif-fallbacks
