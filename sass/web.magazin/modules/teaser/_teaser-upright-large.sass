@@ -1,10 +1,15 @@
 
 .teaser-upright-large
     @extend %teaser-large
-    padding-top: 135%
 
     &__media-container
         @extend %teaser-large__media-container
+
+    &__media
+        margin: 0
+        background-color: $black
+        height: 0
+        padding-bottom: 100% / 4 * 5 // image variant 'tile'
 
     &__text
         @extend %teaser-large__text
