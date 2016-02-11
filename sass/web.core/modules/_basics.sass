@@ -1,0 +1,21 @@
+.skiplink
+	color: green
+	@extend %off-screen
+
+.nowrap
+	white-space: nowrap
+
+.visually-hidden
+	+visuallyhidden
+
+// override normalize.css
+input[type="search"]
+	+box-sizing(border-box)
+
+// visually hidden construct, which I properly didn't hated enough to prevent us from it
+// a region, area or teaser can be set to be not `visible_mobile`. If so, it's hidden on
+// mobile breakpoint. This must totally unbemmy overrule all other instructions
++respond-max($break-tablet-min)
+	#main
+		.mobile-hidden
+			display: none
