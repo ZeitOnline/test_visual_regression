@@ -66,7 +66,7 @@ def test_teaser_square_large_has_correct_markup(testbrowser):
     img = element.cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 1
+    assert len(link_wrap) == 2
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == u'Raffiniert kochen'
     assert title.text.strip() == 'Die perfekte Illusion'
@@ -89,7 +89,7 @@ def test_teaser_square_large_light_has_correct_markup(testbrowser):
     img = element.cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 1
+    assert len(link_wrap) == 2
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == u'Raffiniert kochen'
     assert title.text.strip() == 'Die perfekte Illusion'
@@ -112,7 +112,7 @@ def test_teaser_landscape_small_has_correct_markup(testbrowser):
     img = element[0].cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 1
+    assert len(link_wrap) == 2
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == u'Raffiniert kochen'
     assert title.text.strip() == 'Die perfekte Illusion'
@@ -131,7 +131,7 @@ def test_teaser_upright_has_correct_markup(testbrowser):
     icon = element[0].cssselect('.icon-galerie-icon-white')
     img = element[0].cssselect('img')[0]
     assert len(text_wrap) != 0
-    assert len(link_wrap) >= 1
+    assert len(link_wrap) == 2
     assert len(icon) == 1
     assert '/exampleimages/artikel/01/schoppenstube/tile__' in img.get('src')
 
@@ -149,12 +149,12 @@ def test_teaser_upright_large_has_correct_markup(testbrowser):
     img = element[0].cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 1
+    assert len(link_wrap) == 2
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == u'Raffiniert kochen'
     assert title.text.strip() == 'Die perfekte Illusion'
     assert u'Safran, Salzzitronen' in subtitle.text.strip()
-    assert re.search('frau-isst-suppe-2/portrait__612x816',
+    assert re.search('frau-isst-suppe-2/tile__660x660',
                      img.get('src'))
     assert img.get('alt') == 'Eine Frau isst Paprikasuppe'
 
@@ -172,7 +172,7 @@ def test_teaser_landscape_large_has_correct_markup(testbrowser):
     img = element[0].cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 1
+    assert len(link_wrap) == 2
     assert supertitle.text.strip() == u'Raffiniert kochen'
     assert title.text.strip() == 'Die perfekte Illusion'
     assert u'Safran, Salzzitronen' in subtitle.text.strip()
@@ -192,7 +192,7 @@ def test_teaser_landscape_large_photo_has_correct_markup(testbrowser):
     title = element[0].cssselect('.teaser-landscape-large-photo__title')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 1
+    assert len(link_wrap) == 2
     assert supertitle.text.strip() == u'Raffiniert kochen'
     assert title.text.strip() == u'Die perfekte Illusion'
 
@@ -204,7 +204,7 @@ def test_teaser_fullwidth_with_video_has_correct_markup(
 
     vid_wrap = teaser.cssselect('.teaser-fullwidth__media-container')[0]
     img = teaser.cssselect('img')[0]
-    title_wrap = teaser.cssselect('header')[0]
+    title_wrap = teaser.cssselect('a')[1]
     a = teaser.cssselect('a')
     title = teaser.cssselect('.teaser-fullwidth__title')
     subtitle = teaser.cssselect('.teaser-fullwidth__subtitle')
@@ -236,7 +236,7 @@ def test_teaser_fullwidth_with_video_has_correct_markup(
     assert source2 == src2_val
 
     # links
-    assert len(a) == 1
+    assert len(a) == 2
 
 
 def test_teaser_fullwidth_light_with_video_has_correct_markup(
@@ -246,7 +246,7 @@ def test_teaser_fullwidth_light_with_video_has_correct_markup(
 
     vid_wrap = teaser.cssselect('.teaser-fullwidth__media-container')[0]
     img = teaser.cssselect('img')[0]
-    title_wrap = teaser.cssselect('header')[0]
+    title_wrap = teaser.cssselect('a')[1]
     a = teaser.cssselect('a')
     title = teaser.cssselect('.teaser-fullwidth__title')
     subtitle = teaser.cssselect('.teaser-fullwidth__subtitle')
@@ -278,7 +278,7 @@ def test_teaser_fullwidth_light_with_video_has_correct_markup(
     assert source2 == src2_val
 
     # links
-    assert len(a) == 1
+    assert len(a) == 2
 
 
 def test_teaser_fullwidth_with_image_has_correct_markup(
@@ -288,7 +288,7 @@ def test_teaser_fullwidth_with_image_has_correct_markup(
 
     img_wrap = teaser.cssselect('.teaser-fullwidth__media-container')
     img = teaser.cssselect('img')[0]
-    title_wrap = teaser.cssselect('header')
+    title_wrap = teaser.cssselect('a')[1]
     a = teaser.cssselect('a')
     title = teaser.cssselect('.teaser-fullwidth__title')
     subtitle = teaser.cssselect('.teaser-fullwidth__subtitle')
@@ -304,7 +304,7 @@ def test_teaser_fullwidth_with_image_has_correct_markup(
     assert 'Lammkotelett' in img.get('alt')
 
     # links
-    assert len(a) == 1
+    assert len(a) == 2
 
 
 def test_teaser_fullwidth_light_with_image_has_correct_markup(
@@ -314,7 +314,7 @@ def test_teaser_fullwidth_light_with_image_has_correct_markup(
 
     img_wrap = teaser.cssselect('.teaser-fullwidth__media-container')
     img = teaser.cssselect('img')[0]
-    title_wrap = teaser.cssselect('header')
+    title_wrap = teaser.cssselect('a')[1]
     a = teaser.cssselect('a')
     title = teaser.cssselect('.teaser-fullwidth__title')
     subtitle = teaser.cssselect('.teaser-fullwidth__subtitle')
@@ -330,7 +330,7 @@ def test_teaser_fullwidth_light_with_image_has_correct_markup(
     assert 'Lammkotelett' in img.get('alt')
 
     # links
-    assert len(a) == 1
+    assert len(a) == 2
 
 
 def test_teaser_print_cover_has_correct_markup(testbrowser):
@@ -345,7 +345,7 @@ def test_teaser_print_cover_has_correct_markup(testbrowser):
     img = element.cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 1
+    assert len(link_wrap) == 2
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == 'ZEITmagazin'
     assert 'Das neue Heft' in title.text.strip()
@@ -364,7 +364,7 @@ def test_teaser_mtb_square_has_correct_markup(testbrowser):
     img = element.cssselect('img')[0]
 
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 1
+    assert len(link_wrap) == 2
     assert len(image_wrap) != 0
     assert supertitle.text.strip() == 'Serie Gesellschaftskritik'
     assert 'schlechte Laune' in title.text.strip()
@@ -397,7 +397,6 @@ def test_default_teaser_should_return_default_teaser_image(
         application, testserver, testbrowser):
     cp = 'http://xml.zeit.de/zeit-magazin/teaser-upright'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
-    __import__("pdb").set_trace()
 
     teaser_block = cp_context[0][0][0]
     article = 'http://xml.zeit.de/artikel/artikel-ohne-assets'
