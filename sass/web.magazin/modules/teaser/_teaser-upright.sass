@@ -6,11 +6,13 @@
     display: block
 
     &__media
-        @extend %teaser--dark
         height: 0
         margin: 0
         overflow: hidden
         padding-bottom: 100% / 4 * 5 // image variant 'tile'
+
+    &__media-container
+        @extend %teaser--dark
 
     &__text
         @extend %teaser__text

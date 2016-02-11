@@ -37,8 +37,9 @@ Default teaser template to inherit from.
                 {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
             {% endblock %}
         {%- endif %}
+    </a>
 
-        <header class="{{ self.layout() }}__text">
+        <a href="{{ teaser | create_url }}" class="{{ self.layout() }}__text">
             {% block icon %}{% endblock %}
             <h2>
                 {% block teaser_kicker %}
@@ -55,6 +56,6 @@ Default teaser template to inherit from.
                 {{ teaser.teaserText }}
             </span>
             {% endblock %}
-        </header>
-    </a>
+        </a>
+
 </article>
