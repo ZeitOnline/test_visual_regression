@@ -78,11 +78,17 @@ def test_framebuilder_should_inline_svgs(testbrowser):
 
 def test_framebuilder_displays_no_adlabel_by_default(testbrowser):
     browser = testbrowser('/framebuilder')
-    assert 'ad-label' not in browser.contents
+    assert 'ad-label' not in browser.contents  # desktop
+    assert 'advertorial-marker' not in browser.contents  # mobile
 
 
 def test_framebuilder_displays_adlabel_if_requested(testbrowser):
     browser = testbrowser('/framebuilder?adlabel=sch%C3%B6nes%20Wurstbrot')
+    # desktop:
     adlabel = browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
+    assert len(adlabel) == 1
+    assert adlabel[0].text.strip() == u'schönes Wurstbrot'
+    # mobile:
+    adlabel = browser.cssselect('.advertorial-marker__label')
     assert len(adlabel) == 1
     assert adlabel[0].text.strip() == u'schönes Wurstbrot'
