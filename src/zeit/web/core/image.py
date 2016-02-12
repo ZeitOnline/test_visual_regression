@@ -5,17 +5,15 @@ import os
 import re
 import tempfile
 
-import grokcore.component
 import PIL
 import pytz
 import requests
 import requests_file
+import grokcore.component
 import zc.sourcefactory.contextual
 import zc.sourcefactory.source
 import zope.component
-import zope.interface
 
-import zeit.cms.content.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.content.image.imagegroup
 import zeit.content.image.interfaces
@@ -263,20 +261,6 @@ def localimagegroup_to_masterimage(group):
 @grokcore.component.adapter(LocalImage)
 def localimage_to_imagetransform(image):
     return zeit.content.image.transform.ImageTransform(image)
-
-
-@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
-@grokcore.component.adapter(zeit.content.author.interfaces.IAuthor)
-class AuthorImages(object):
-
-    zope.interface.implements(zeit.cms.content.interfaces.IXMLRepresentation)
-
-    def __init__(self, context):
-        # XXX We need to implement IXMLRepresentation to allow wc updates.
-        self.__parent__ = context
-        self.image = context.image_group
-        self.uniqueId = context.uniqueId
-        self.xml = context.xml
 
 
 # XXX Should this be a method of Image/ImageGroup?
