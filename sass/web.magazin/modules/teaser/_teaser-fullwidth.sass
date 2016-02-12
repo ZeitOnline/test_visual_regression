@@ -7,7 +7,7 @@
         margin: 0
 
     &__media-container
-        @extend %teaser--dark
+        @extend %teaser-large__media-container
         height: 0
         padding-bottom: 100% / 3 * 4 // image variant 'portrait'
         background-color: $black
@@ -34,7 +34,8 @@
 
     &--light
         .teaser-fullwidth__media-container
-            @extend %teaser--light
-            position: absolute
+            a
+                @extend %teaser--light
+                position: absolute
         .teaser-fullwidth__text
             +link-colors($black, $black, $black, $black, $black)

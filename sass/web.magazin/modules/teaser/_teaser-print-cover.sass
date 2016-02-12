@@ -4,11 +4,15 @@
 
     &__media
         @extend %teaser__media
-        @extend %teaser--darker
         height: auto
         margin-top: 0
         img
             width: 100%
+
+    &__media-container
+        a
+            @extend %teaser--darker
+            display: block
 
     &__text
         @extend %teaser__text
