@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2637: Enable ad-label on framebuilder
 
+- ZON-2805: Load distinct brightcove player in amp pages
+
 
 2.55 (2016-02-09)
 -----------------
