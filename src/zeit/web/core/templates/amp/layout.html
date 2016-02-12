@@ -83,6 +83,10 @@
 					<div class="byline">
 						{% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
 					</div>
+					{% else %}
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+						<meta itemprop="name" content="{% if view and view.context and view.context %}{{ view.context.product.title | default('ZEIT ONLINE') }}{% endif %}" />
+					</span>
 					{% endif -%}
 					<div class="metadata">
 						{% include "zeit.web.core:templates/amp/article/metadata.tpl" %}
