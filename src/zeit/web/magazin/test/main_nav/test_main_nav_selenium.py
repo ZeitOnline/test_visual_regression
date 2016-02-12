@@ -22,14 +22,12 @@ def test_compact_main_nav(selenium_driver, testserver, screen_size):
     nav_list = driver.find_elements_by_class_name('main-nav')
     main_nav = driver.find_elements_by_class_name('main-nav')[0]
     logo_small = main_nav.find_element_by_css_selector(
-        '.main-nav__logo__img.icon-logo-zmo-small')
+        '.main-nav__brand-logo--small')
     logo_large = main_nav.find_element_by_css_selector(
-        '.main-nav__logo__img.icon-logo-zmo-large')
+        '.main-nav__brand-logo--large')
     sharing = main_nav.find_element_by_class_name('main-nav__sharing')
     buttons = sharing.find_elements_by_class_name('main-nav__sharing__item')
-    twitter = sharing.find_element_by_class_name('icon-twitter')
-    facebook = sharing.find_element_by_class_name('icon-facebook')
-    google = sharing.find_element_by_class_name('icon-google')
+    icons = sharing.find_elements_by_class_name('main-nav__sharing-icon')
 
     # there's exactly one navigation
     assert len(nav_list) == 1
@@ -52,9 +50,8 @@ def test_compact_main_nav(selenium_driver, testserver, screen_size):
     assert len(buttons) == 3
 
     # twitter, facebook and google buttons are visible
-    assert twitter.is_displayed()
-    assert facebook.is_displayed()
-    assert google.is_displayed()
+    for icon in icons:
+        assert icon.is_displayed()
 
 
 def test_main_nav(selenium_driver, testserver, screen_size):
@@ -75,9 +72,9 @@ def test_main_nav(selenium_driver, testserver, screen_size):
     trigger = driver.find_element_by_id('js-main-nav-trigger')
     menu = main_nav.find_element_by_class_name('main-nav__menu__content')
     logo_small = main_nav.find_element_by_css_selector(
-        '.main-nav__logo__img.icon-logo-zmo-small')
+        '.main-nav__brand-logo--small')
     logo_large = main_nav.find_element_by_css_selector(
-        '.main-nav__logo__img.icon-logo-zmo-large')
+        '.main-nav__brand-logo--large')
 
     res = main_nav.find_element_by_class_name('main-nav__ressorts')
     res_content = res.find_element_by_class_name('main-nav__ressort-list')

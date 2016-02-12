@@ -8,5 +8,4 @@ def test_footer_exists(testserver, testbrowser):
 
 def test_footer_has_logo(testserver, testbrowser):
     browser = testbrowser('%s/artikel/01' % testserver.url)
-    assert '<div class="main-footer__logo'\
-        ' icon-logo-zmo-small"></div>' in browser.contents
+    assert '<svg class="svg-symbol main-footer__logo' in browser.contents

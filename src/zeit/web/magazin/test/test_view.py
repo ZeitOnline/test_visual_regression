@@ -184,33 +184,17 @@ def test_image_view_returns_image_data_for_filesystem_connector(
     assert r.text.startswith(u'\ufffd\ufffd\ufffd\ufffd\x00')
 
 
-def test_footer_should_have_expected_markup(testserver, testbrowser):
+def test_footer_should_have_expected_structure(testserver, testbrowser):
     browser = testbrowser('%s/artikel/01' % testserver.url)
-    elem = browser.cssselect('footer.main-footer')[0]
-    # assert normal markup
-    expect = '<footer class="main-footer">'\
-        '<div class="main-footer__box is-constrained is-centered">'\
-        '<div class="main-footer__logo icon-logo-zmo-small"></div>'\
-        '<div class="main-footer__links"><div><ul><li>VERLAG</li>'\
-        '<li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">'\
-        'Mediadaten</a></li><li><a href="http://www.zeit-verlagsgruppe.de'\
-        '/marken-und-produkte/geschaeftskunden/artikel-nachrucke/">'\
-        'Rechte &amp; Lizenzen</a></li>'\
-        '</ul></div><div><ul><li><a class="js-toggle-copyrights">'\
-        'Bildrechte</a></li>'\
-        '<li><a href="{0}/hilfe/datenschutz">'\
-        'Datenschutz</a></li>'\
-        '<li><a href='\
-        '"http://www.iqm.de/digital/nutzungsbasierte-onlinewerbung/"'\
-        '>Cookies</a></li>'\
-        '<li><a href="{0}/administratives/'\
-        'agb-kommentare-artikel">AGB</a></li>'\
-        '<li><a href="{0}/impressum/index">Impressum</a></li>'\
-        '<li><a href="{0}/hilfe/hilfe">Hilfe/ Kontakt</a></li>'\
-        '</ul></div></div></div></footer>'.format(testserver.url)
-    got = [s.strip() for s in lxml.html.tostring(elem).splitlines()]
-    got = "".join(got)
-    assert expect == got
+    footer = browser.cssselect('footer.main-footer')[0]
+    logo = footer.cssselect('svg.main-footer__logo')
+    assert len(logo) == 1
+    linklists = footer.cssselect('ul')
+    assert len(linklists) == 2
+    list_top = linklists[0]
+    list_bottom = linklists[1]
+    assert len(list_top.cssselect('li')) == 3
+    assert len(list_bottom.cssselect('li')) == 6
 
 
 def test_article_request_should_have_body_element(testserver, testbrowser):

@@ -717,7 +717,7 @@ def test_cp_teaser_should_have_comment_count(
     browser = testbrowser(
         '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
     counts = browser.cssselect(
-        'span.cp_comment__count__wrap.icon-comments-count')
+        'span.cp_comment__count')
     assert int(counts[0].text) == 129
 
 
@@ -768,8 +768,8 @@ def test_cp_has_gallery_icon_for_gallery_upright_teaser(
     browser = testbrowser(
         '%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
     icon = browser.cssselect(
-        'div.cp_button--gallery .cp_button__title__wrap a span')[0]
-    assert 'icon-galerie-icon-white' in icon.attrib.get('class')
+        'div.cp_button--gallery .cp_button__title__wrap a svg')[0]
+    assert 'gallery-icon' in icon.attrib.get('class')
 
 
 def test_cp_has_no_gallery_icon_for_gallery_upright_teaser(
@@ -777,7 +777,7 @@ def test_cp_has_no_gallery_icon_for_gallery_upright_teaser(
     browser = testbrowser(
         '%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
     icon = browser.cssselect(
-        'div.cp_button--gallery .cp_button__title__wrap a span')
+        'div.cp_button--gallery .cp_button__title__wrap a svg')
     assert len(icon) == 1
 
 
