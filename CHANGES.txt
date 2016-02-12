@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: Make solr timeout configurable
 
+- MAINT: Make CP modules to preserve on pagination configurable
+
 
 2.55 (2016-02-09)
 -----------------

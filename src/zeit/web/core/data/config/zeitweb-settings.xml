@@ -16,6 +16,8 @@
 
   <setting name="reach_timeout" xsi:type="xsd:double">0.2</setting>
 
+  <setting name="cp_preserve_modules_on_pagination" xsi:type="xsd:string">headerimage centerpage-header search-form authorlist-alphabet-pager</setting>
+
   <setting name="caching_time_content" xsi:type="xsd:int">5</setting>
   <setting name="caching_time_article" xsi:type="xsd:int">10</setting>
   <setting name="caching_time_centerpage" xsi:type="xsd:int">20</setting>
