@@ -53,7 +53,6 @@ setup(
         'zc.iso8601',
         'zc.sourcefactory',
         'zeit.brightcove',
-        'zeit.campus',
         'zeit.cms>=2.63.0.dev0',
         'zeit.campus',
         'zeit.connector',
