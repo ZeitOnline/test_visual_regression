@@ -1,80 +1,69 @@
-.teaser-printkiosk-group
+.printkiosk
 	&__title
 		+font-smoothing
-		color: $white
-		font-size: remify(20px)
-		line-height: remify(24px)
-		text-align: center
+		font-size: em(20px)
+		margin: 0
 
 	&__container
-		+clearfix
-		margin: remify(20px 0)
+		margin: remify(24px auto)
 
 	&__button
-		@extend %teaser-bar-group__button
-		+zon-button-dark($margin: remify(14px) auto)
-		display: table
+		+zon-button-dark($margin: 0)
 
 	&__shuffle-icon
 		@extend %teaser-bar-group__shuffle-icon
 
 .teaser-printkiosk
-	float: left
-	margin: auto
+	display: inline-block
+	margin: 0
+	max-width: remify(200px)
+	padding: remify(0 20px)
 	text-align: center
+	vertical-align: top
 	width: 100%
+	// this is not supported by IE8, but IE8 does not support
+	// media queries either, so only the desktop rules apply
+	&:nth-child(n+2)
+		display: none
+	+respond-min($break-phablet-min)
+		width: 50%
+		&:nth-child(2)
+			display: inline-block
+	+respond-min($break-tablet-min)
+		width: 33.33%
+		&:nth-child(3)
+			display: inline-block
+	+respond-min($break-desktop-min)
+		width: 25%
+		&:nth-child(4)
+			display: inline-block
+
+	a
+		display: block
 
 	&__media
-		height: remify(190px)
-		margin: 1em auto
+		margin: 0
+		padding-bottom: (190 / 160) * 100%
 		position: relative
-		width: remify(160px)
-
-	&__media-container
-		bottom: 0
-		position: absolute
-		width: 100%
 
 	&__media-item
+		bottom: 0
+		left: 0
 		margin: auto
-		max-height: remify(190px)
-		max-width: remify(160px)
+		max-height: 100%
+		max-width: 100%
+		position: absolute
+		right: 0
 		// override width:100% from .scaled-image
 		.scaled-image &
 			width: auto
 
-	&__container
-		margin: remify(20px) auto 0
-		max-width: remify(160px)
-
 	&__title
-		color: $white
-		font-size: remify(16px)
+		color: $zon-light-grey
+		font-size: em(16px)
+		font-weight: normal
+		line-height: 1.3125
 		line-height: 1.5
-		margin: remify(16px) auto 0
+		margin: remify(20px auto 0)
 		min-height: 3em // that's two lines when line-height is 1.5
 
-	+respond-min($break-phablet-min)
-		width: 50%
-	+respond-min($break-tablet-min)
-		width: 33.33%
-	+respond-min($break-desktop-min)
-		width: 25%
-
-	// OPTIMIZE: once we drop IE8, we can use nth-child here!
-	// Also, that's why we need to "subtract" here, because displaying on
-	// respond-min does not work (the 2nd item does not know that there is a
-	// 3rd+4th)
-	//
-	// don't display the second item on screens smaller than phablet
-	& + &
-		+respond-max($break-phablet-min)
-			display: none
-	// don't display the third item on screens smaller than tablet
-	& + & + &
-		+respond-max($break-tablet-min)
-			display: none
-	// don't display the fourth item on screens smaller than desktop
-	& + & + & + &
-		+respond-max($break-desktop-min)
-			display: none

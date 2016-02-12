@@ -11,11 +11,10 @@ define( 'modernizr', [], window.Modernizr );
 require([ 'vendor/require', 'config' ], function() {});
 
 // require anonymous AMD modules here
-// the order in the array and the function names have to correlate
-// which is quite disturbing in my book…
 require([
-    'web.core/adReload',
+    'web.core/zeit',
     'web.core/images',
+    'web.core/adReload',
     'web.magazin/errors',
     'web.magazin/main-nav',
     'web.magazin/tabs',
@@ -23,7 +22,19 @@ require([
     'web.magazin/sharing',
     'web.magazin/cards',
     'web.magazin/photocluster'
-], function( adReload, images, errors, nav, tabs, comments, sharing, cards, photocluster ) {
+], function(
+    zeit,
+    images,
+    adReload,
+    errors,
+    nav,
+    tabs,
+    comments,
+    sharing,
+    cards,
+    photocluster
+) {
+    images.init();
     adReload.init();
     errors.init();
     nav.init();
@@ -32,7 +43,7 @@ require([
     sharing.init();
     cards.init();
     photocluster.init();
-    images.init();
+    zeit.clearQueue();
 });
 
 // add required jQuery plugins
