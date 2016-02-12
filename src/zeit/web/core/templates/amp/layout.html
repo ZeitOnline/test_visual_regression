@@ -36,27 +36,6 @@
 		{% endblock symbols %}
 	</div>
 
-	{% if view.amp_advertising_is_enabled -%}
-	<div class="advertising">
-		<amp-iframe width="320" height="320"
-			sandbox="allow-scripts allow-same-origin allow-popups"
-			frameborder="0"
-			src="https://foo">
-				<amp-img layout="fill" src="//lorempixel.com/320/320/" placeholder></amp-img>
-		</amp-iframe>
-	</div>
-	{% endif -%}
-	{% if view.amp_advertising_is_enabled -%}
-	<div class="advertising">
-		<amp-iframe width="320" height="80"
-			sandbox="allow-scripts allow-same-origin allow-popups"
-			frameborder="0"
-			src="https://foo">
-				<amp-img layout="fill" src="//lorempixel.com/320/80/" placeholder></amp-img>
-		</amp-iframe>
-	</div>
-	{% endif -%}
-
 	<div class="content" id="top">
 		<header class="header" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
 			{% block logo %}
