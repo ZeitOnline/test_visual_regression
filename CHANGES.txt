@@ -4,7 +4,7 @@ Change log for zeit.web
 2.56 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2507: Implement zeit campus groundwork (behind a feature toggle)
 
 
 2.55 (2016-02-09)
