@@ -1,5 +1,7 @@
 {% extends 'zeit.web.core:templates/macros/layout_macro.tpl' %}
 
+{% block svg_asset_dir %}web.magazin{% endblock %}
+
 {% macro breadcrumbs(crumbs) -%}
     <div class="breadcrumbs">
         <div class="breadcrumbs__list is-constrained is-centered">
