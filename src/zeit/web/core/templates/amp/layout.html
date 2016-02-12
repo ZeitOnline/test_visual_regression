@@ -107,6 +107,9 @@
 							{% endif %}
 							{% for block in page %}
 								{% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}
+								{% if page.number == 0 and loop.index == 1 and block | block_type == 'paragraph' %}
+									{% include "zeit.web.core:templates/amp/ads/tile_4.html" ignore missing %}
+								{% endif %}
 							{% endfor %}
 							</section>
 						{% endfor %}
