@@ -4,7 +4,7 @@
 	display: none
 	&__container
 		+clearfix
-		padding: $vertical-space $page-padding
+		padding: remify(20px)
 		text-align: left
 	&__headline
 		+font-smoothing
@@ -39,7 +39,7 @@
 			&:hover
 				color: $zon-light-grey
 
-+respond-min($break-tablet-min)
++respond-min($break-tablet)
 	.image-copyright-footer
 		border-top: remify(20px) solid $zon-charcoal // fake margin to improve the animation
 		&__items
