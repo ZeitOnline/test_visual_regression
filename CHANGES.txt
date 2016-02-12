@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - MAINT: Make solr timeout configurable
 
+- MAINT: Migrate column teaser to new image delivery stack
+
 
 2.55 (2016-02-09)
 -----------------
@@ -39,8 +41,6 @@ Change log for zeit.web
 - ZON-2613: Implement author teaser
 
 - FIX: Unobtrusive loading of CeleraOne tracking script
-
-- MAINT: Migrate column teaser to new image delivery stack
 
 - SUGAR: Implement assignment-conditional require blocks in jinja
 
