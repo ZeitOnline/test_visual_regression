@@ -127,7 +127,7 @@
 								<h3 class="intertitle article__item">{{ page.teaser }}</h3>
 							{% endif %}
 							{% for block in page %}
-								{% include "zeit.web.core:templates/amp/blocks/{}.html".format( block | block_type ) ignore missing %}
+								{% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}
 							{% endfor %}
 							</section>
 						{% endfor %}

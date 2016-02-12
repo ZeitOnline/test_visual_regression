@@ -30,7 +30,8 @@ class AuthenticationPolicy(
             return
 
         if request.session.get('user') and (
-                is_reliable_user_info(request.session['user'])):
+                is_reliable_user_info(request.session['user']) and not (
+                request.session['user']['should_invalidate'])):
             # retrieve the user info from the session
             user_info = request.session['user']
         else:
@@ -40,16 +41,15 @@ class AuthenticationPolicy(
             if not is_reliable_user_info(user_info):
                 return
             request.session['user'] = user_info
-
         return user_info['ssoid']
 
 
 def is_reliable_user_info(user_info):
-    """Check user info for all mandatory session values. This may invalidate
-    possibly old user session with missing values.
-    Also implicitly checks for successfully decoded SSO cookie ('ssoid').
+    """Check user info for all mandatory session values (including the
+    successfully decoded SSO cookie value).
     """
-    return 'uid' in user_info and user_info.get('ssoid')
+
+    return user_info.get('ssoid')
 
 
 def reload_user_info(request):
@@ -90,6 +90,7 @@ def get_user_info(request):
         uid=0,
         name=None,
         mail=None,
+        should_invalidate=False,
         picture=None,
         roles=[],
         premoderation=False)
@@ -143,4 +144,8 @@ def get_user_info(request):
     if len(user_info.get('roles', [])) == 1:
         roles = user_info['roles'][:]
         user_info['blocked'] = (roles.pop() == "anonymous user")
+
+    if sso_info and (not user_info['uid'] or user_info['uid'] == '0'):
+        user_info['should_invalidate'] = True
+
     return user_info
