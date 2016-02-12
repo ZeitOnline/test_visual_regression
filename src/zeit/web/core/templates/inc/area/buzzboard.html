@@ -18,8 +18,7 @@
 			<th>
 				{% if module.icon %}
 					{% set modifier = module.icon.strip('buzz-') -%}
-					{% set package = view.package | replace('zeit.','') -%}
-					{{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), request, package) }}
+					{{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), request) }}
 				{% endif %}
 				{{ module.label | safe }}
 			</th>
