@@ -1,11 +1,142 @@
 {% import "zeit.web.campus:templates/macros/layout_macro.tpl" as lama %}
+<!DOCTYPE html>
+<html lang="de" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>{{ view.pagetitle }}</title>
+    <meta name="description" content="{{ view.pagedescription }}">
+    {% if view.meta_keywords -%}
+        <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
+    {% endif -%}
+    <meta name="robots" content="{{ view.meta_robots }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
+    <meta name="author" content="ZEIT ONLINE GmbH, Hamburg, Germany">
+    <meta name="msapplication-config" content="none">
+    {% if view.is_amp -%}
+        <link rel="amphtml" href="{{ view.amp_url }}">
+    {% endif -%}
+    {% if view.canonical_url -%}
+        <link rel="canonical" href="{{ view.canonical_url }}">
+    {% endif -%}
+    {% if view.prev_page_url -%}
+        <link rel="prev" href="{{ view.prev_page_url }}">
+    {% endif -%}
+    {% if view.next_page_url -%}
+        <link rel="next" href="{{ view.next_page_url }}">
+    {% endif -%}
+    {% if view.syndication_source -%}
+        <link rel="syndication-source" href="{{ view.syndication_source }}">
+    {% endif -%}
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="//scripts.zeit.de">
+    <link rel="dns-prefetch" href="//images.zeit.de">
+    <link rel="dns-prefetch" href="//de.ioam.de">
+    <link rel="dns-prefetch" href="//script.ioam.de">
+    <link rel="dns-prefetch" href="//s62.mxcdn.net">
+    <link rel="dns-prefetch" href="//i2.s62.research.de.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//zeit01.webtrekk.net">
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <link rel="dns-prefetch" href="//securepubads.g.doubleclick.net">
+    <link rel="dns-prefetch" href="//partner.googleadservices.com">
+    <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
+    <link href="{{ request.asset_host }}/css/web.campus/screen.css" media="all" rel="stylesheet" type="text/css">
 
-<html>
-    <head>
-    </head>
-    <body>
-        <h1>ZEIT Campus</h1>
-        {% block main %}
-        {% endblock %}
-    </body>
+    {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
+    {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
+    {%- include "zeit.web.site:templates/inc/meta/sharing.html" -%}
+
+    {# Modernizr -#}
+    <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
+    {# SVG for Everybody -#}
+    <script src="{{ request.asset_host }}/js/vendor/svg4everybody.legacy.js"></script>
+    <script>
+        {# needed for styling SVG in IE8 #}
+        document.createElement( 'svg' );
+        svg4everybody({
+            fallback: function ( src, svg, use ) {
+                return src.replace( /web\.campus\/icons\.svg(\?.+)?#svg-(.+)/ , 'icons/campus/$2.png$1');
+            }
+        });
+    </script>
+    {% if view.third_party_modules_is_enabled %}
+        <!-- IVW -->
+        <script src="https://script.ioam.de/iam.js"></script>
+    {% endif %}
+    {% if view.third_party_modules_is_enabled and view.iqd_is_enabled %}
+        {% include "zeit.web.core:templates/inc/ads/head.html" %}
+        {%- block content_ad_script -%}{%- endblock -%}
+    {% endif %}
+    {% if view.is_dev_environment %}
+        <script src="//localhost:35729/livereload.js"></script>
+    {% endif %}
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}">
+
+    {% include "zeit.web.core:templates/inc/tag-manager.html" %}
+    {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
+    {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
+
+    {% block skiplink %}
+    <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
+    {% endblock skiplink %}
+    <div class="page">
+
+        {% block adplace_top %}
+        <div id="iqd_mainAd" >
+            <div id="iqd_align_Ad">
+                <div id="iqd_topAd">
+                    {{ lama.adplace(view.banner(1), view) }}
+                    <div id="iqd_rightAd">
+                        {{ lama.adplace(view.banner(2), view) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock adplace_top %}
+
+        <div class="page__content">
+            {% if not view.is_wrapped %}
+            <header class="header">
+                {%- block navigation -%}
+                    {%- include "zeit.web.campus:templates/inc/navigation/navigation.tpl" -%}
+                {%- endblock navigation -%}
+            </header>
+            {% endif %}
+            {% block adplace_billboard %}
+                {# desktop ad place 3 #}
+                {{ lama.adplace(view.banner(3), view) }}
+                {# mobile ad place 1 #}
+                {{ lama.adplace(view.banner(1), view, mobile=True) }}
+            {% endblock adplace_billboard %}
+            <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
+                {% block main %}{% endblock main %}
+                {{ lama.adplace(view.banner(8), view, mobile=True) }}
+            </main>
+            <footer class="footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" >
+                {% block footer %}
+                {% endblock footer %}
+            </footer>
+        </div>
+    </div>
+    {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
+    {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
+    {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" %}
+    {% include "zeit.web.core:templates/inc/tracking/celera_one.html" %}
+    {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
+    {% block meetrics -%}
+        {% include "zeit.web.core:templates/inc/tracking/meetrics_relaunch.html" %}
+    {%- endblock %}
+
+    <script>
+        var require = { baseUrl: '{{ request.asset_host }}/js/' };
+    </script>
+    <script src="{{ request.asset_host }}/js/campus.js"></script>
+
+    {% if view.vgwort_url -%}
+    <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
+    {%- endif %}
+
+</body>
 </html>
