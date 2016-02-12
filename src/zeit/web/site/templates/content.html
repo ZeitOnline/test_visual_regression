@@ -21,7 +21,7 @@
                         {%- endif -%}
                         {{- view.supertitle -}}
                     </span>
-                    {%- if view.title -%}<span class="article-heading__colon">: </span>{%- endif -%}
+                    {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
                     <span class="article-heading__title">
                         {{- view.title -}}
                     </span>
