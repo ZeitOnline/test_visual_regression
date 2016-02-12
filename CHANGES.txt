@@ -4,9 +4,11 @@ Change log for zeit.web
 2.56 (unreleased)
 -----------------
 
+- ZON-2806: Add product.title as author fallback to AMPages
+
 - FIX: Write adcontroller level4 if applicable
 
-- ZON-2805: Load distinct brightcove player in amp pages
+- ZON-2805: Load distinct brightcove player in AMPages
 
 - MAINT: Make solr timeout configurable
 
