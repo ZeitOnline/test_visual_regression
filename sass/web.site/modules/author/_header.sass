@@ -7,6 +7,11 @@
             +display-flex()
             +justify-content(space-between)
             +align-items(center)
+            &:only-child
+                +justify-content(center)
+                .author-header__text
+                    max-width: 80%
+                    text-align: center
 
     &__image
         width: remify(150px)
@@ -34,7 +39,7 @@
             background-color: transparent
             border-bottom: none
             max-width: 60%
-            padding: remify(24px 0)
+            padding: remify(30px 0)
             text-align: left
 
     &__name
