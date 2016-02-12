@@ -236,14 +236,14 @@ def test_schema_org_article_mark_up(testbrowser, testserver):
     logo = publisher.cssselect('[itemprop="logo"]')[0]
 
     article = browser.cssselect('article[itemprop="mainEntity"]')[0]
-    mainEntityOfPage = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
+    main_entity_of_page = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
     headline = article.cssselect('[itemprop="headline"]')[0]
     description = article.cssselect('[itemprop="description"]')[0]
-    datePublished = article.cssselect('[itemprop="datePublished"]')[0]
+    date_published = article.cssselect('[itemprop="datePublished"]')[0]
     author = article.cssselect('[itemprop="author"]')[0]
 
     image = article.cssselect('[itemprop="image"]')[0]
-    copyrightHolder = image.cssselect('[itemprop="copyrightHolder"]')[0]
+    copyright_holder = image.cssselect('[itemprop="copyrightHolder"]')[0]
 
     # check Organization
     assert publisher.get('itemtype') == 'http://schema.org/Organization'
@@ -260,11 +260,10 @@ def test_schema_org_article_mark_up(testbrowser, testserver):
 
     # check Article
     assert article.get('itemtype') == 'http://schema.org/Article'
-    assert mainEntityOfPage.get('href') == (
+    assert main_entity_of_page.get('href') == (
         testserver.url + '/zeit-online/article/01')
     assert ' '.join(headline.text_content().strip().split()) == (
-        u'"Der Hobbit": '
-        u'Geht\'s noch gr\xf6\xdfer?')
+        u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?')
 
     assert len(description.text_content().strip())
     assert len(article.cssselect('[itemprop="articleBody"]')) == 1
@@ -272,11 +271,11 @@ def test_schema_org_article_mark_up(testbrowser, testserver):
     # check ImageObject
     assert image.get('itemtype') == 'http://schema.org/ImageObject'
     assert len(image.cssselect('[itemprop="caption"]')) == 1
-    assert copyrightHolder.get('itemtype') == 'http://schema.org/Person'
-    person = copyrightHolder.cssselect('[itemprop="name"]')[0]
+    assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
+    person = copyright_holder.cssselect('[itemprop="name"]')[0]
     assert person.text == u'© Warner Bros.'
 
-    assert datePublished.get('datetime') == '2015-05-27T19:11:30+02:00'
+    assert date_published.get('datetime') == '2015-05-27T19:11:30+02:00'
 
     assert author.get('itemtype') == 'http://schema.org/Person'
     assert author.cssselect('[itemprop="name"]')[0].text == 'Wenke Husmann'
