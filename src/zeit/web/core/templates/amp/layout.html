@@ -65,7 +65,7 @@
 				<header class="article__header article__item">
 					<h1 class="headline" itemprop="headline">
 						<span class="headline__kicker">
-							{%- if view and view.context and view.context.serie and view.context.serie.column %}
+							{%- if view.context is column -%}
 								{{- '%s / ' | format(view.serie) -}}
 							{%- endif -%}
 							{{- view.supertitle -}}

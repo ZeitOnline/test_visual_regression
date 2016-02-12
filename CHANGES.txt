@@ -4,6 +4,8 @@ Change log for zeit.web
 2.56 (unreleased)
 -----------------
 
+- MAINT: Update schema.org microdata
+
 - FIX: Write adcontroller level4 if applicable
 
 - ZON-2805: Load distinct brightcove player in amp pages
