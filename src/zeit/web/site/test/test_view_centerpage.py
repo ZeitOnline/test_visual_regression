@@ -2112,6 +2112,14 @@ def test_ranking_area_should_silently_accept_emptyness(
     assert area.pagination == []
 
 
+def test_ranking_area_should_be_found_regardless_of_kind(
+        application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
+    cp.body.values()[1].values()[0].kind = 'author-list'
+    view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
+    assert view.area_ranking
+
+
 def test_no_author_should_not_display_byline(testbrowser, workingcopy):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/article-01')

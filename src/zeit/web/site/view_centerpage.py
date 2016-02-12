@@ -218,12 +218,11 @@ class Centerpage(
 
     @zeit.web.reify
     def area_ranking(self):
-        try:
-            return zeit.web.site.area.ranking.Ranking(
-                zeit.web.core.utils.find_block(
-                    self.context, attrib='area', kind='ranking'))
-        except AttributeError:
-            return None
+        for region in self.regions:
+            for area in region.values():
+                if zeit.web.core.interfaces.IPagination.providedBy(area):
+                    return area
+        return None
 
     @zeit.web.reify
     def next_page_url(self):
@@ -286,6 +285,16 @@ class CenterpagePage(Centerpage):
             regions.insert(0, LegacyRegion(preserved_areas))
 
         return regions
+
+    @zeit.web.reify
+    def area_ranking(self):
+        # Prevent infloop with our tweaked self.regions
+        # XXX Is there a better factoring than copy&paste?
+        for region in super(CenterpagePage, self).regions:
+            for area in region.values():
+                if zeit.web.core.interfaces.IPagination.providedBy(area):
+                    return area
+        return None
 
 
 @pyramid.view.view_config(
