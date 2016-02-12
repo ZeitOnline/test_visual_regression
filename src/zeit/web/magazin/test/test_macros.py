@@ -388,7 +388,6 @@ def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
 def test_macro_video_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
-
     # assert default video
     obj = {'id': '1', 'video_still': 'pic.jpg',
            'description': 'test', 'format': '', 'title': 'title'}
@@ -397,7 +396,8 @@ def test_macro_video_should_produce_markup(jinja2_env):
            ' title="Video: title">')
 
     cap = '<figcaption class="figure__caption">test</figcaption>'
-    lines = tpl.module.video(obj).splitlines()
+    module = tpl.make_module({'request': mock.Mock()})
+    lines = module.video(obj).splitlines()
     output = ''
     for line in lines:
         output += line.strip()
@@ -639,7 +639,7 @@ def test_macro_comment_count_should_produce_correct_markup(jinja2_env):
         'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
     markup = ('<span class="cp_comment__count__wrap '
               'icon-comments-count">3</span>')
-    lines = tpl.module.comment_count(3).splitlines()
+    lines = tpl.make_module({'request': mock.Mock()}).comment_count(3).splitlines()
     output = ''
     for line in lines:
         output += line.strip()
@@ -719,12 +719,14 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
         'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     request = mock.Mock()
+    view = mock.Mock()
 
     # logged in
     request.authenticated_userid = '12345'
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     logged = 'Account'
-    lines = tpl.module.main_nav('true', request).splitlines()
+    module = tpl.make_module({'request': request, 'view': view})
+    lines = module.main_nav('true', request).splitlines()
     output = ''
     for line in lines:
         output += line.strip()
@@ -762,7 +764,8 @@ def test_macro_copyrights(jinja2_env):
             link=None
         )
     ]
-    snippet = lxml.html.fromstring(tpl.module.copyrights(copyrights))
+    module = tpl.make_module({'request': mock.Mock()})
+    snippet = lxml.html.fromstring(module.copyrights(copyrights))
 
     assert len(snippet.cssselect('li.copyrights__entry')) == 2, (
         'Two copyright entries should be contained in the list.')
