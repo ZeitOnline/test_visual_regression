@@ -49,6 +49,8 @@ define( function() {
                 for ( var i = 0, l = this.queue.length; i < l; i++ ) {
                     require.apply( window, this.queue[i] );
                 }
+
+                this.queue = [];
             },
             cookieCreate: function( name, value, days, domain ) {
                 var expires = '';

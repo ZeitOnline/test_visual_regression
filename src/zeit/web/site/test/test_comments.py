@@ -5,6 +5,7 @@ import mock
 import requests
 import urllib
 import zope.component
+import pyramid.testing
 
 import zeit.cms.interfaces
 
@@ -51,8 +52,19 @@ def test_comments_get_thread_should_respect_top_level_sort_order(testserver):
         'Comments are not sorted most recent first.')
 
 
-def test_comment_form_should_be_rendered(testbrowser):
+def test_comment_form_should_be_rendered(testbrowser, monkeypatch):
+    comment = {
+            'show': True,
+            'show_comment_form': True,
+            'show_comments': True,
+            'no_comments': False,
+            'note': None,
+            'message': None,
+            'user_blocked': False,
+            'show_premoderation_warning': False}
+    monkeypatch.setattr(zeit.web.core.view.Content, 'comment_area', comment)
     browser = testbrowser('/zeit-online/article/01/comment-form')
+
     assert len(browser.cssselect('#comment-form')) == 1
 
 
@@ -245,3 +257,57 @@ def test_comment_action_recommend_should_redirect_to_login(testserver):
     response = requests.get(url, allow_redirects=False)
     assert response.headers.get('Location', '') == location
     assert response.status_code == 303
+
+
+def test_comment_area_note_should_be_displayed_if_set(
+        testbrowser, monkeypatch):
+    comment = {
+            'show': True,
+            'show_comment_form': False,
+            'show_comments': True,
+            'no_comments': False,
+            'note': 'No community login',
+            'message': None,
+            'user_blocked': False,
+            'show_premoderation_warning': False}
+    monkeypatch.setattr(zeit.web.core.view.Content, 'comment_area', comment)
+    browser = testbrowser('/zeit-online/article/01/comment-form')
+    assert browser.cssselect('.comment-section__note div')[0].text == (
+        'No community login')
+    assert len(browser.cssselect('.comment-form')) == 0
+
+
+def test_comment_area_should_have_no_comment_form(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+    request.session['user'] = {
+        'blocked': False,
+        'premoderation': False,
+        'uid': 0}
+
+    view = zeit.web.core.view.Content(article, request)
+    assert view.comment_area['show_comment_form'] is False
+
+
+def test_comment_area_should_have_comment_form(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+    request.session['user'] = {
+        'blocked': False,
+        'premoderation': False,
+        'uid': '1'}
+
+    view = zeit.web.core.view.Content(article, request)
+    assert view.comment_area['show_comment_form'] is True
+
+
+def test_comment_area_should_have_login_prompt_enabled(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+
+    view = zeit.web.core.view.Content(article, request)
+    # Login prompt is rendered by comment-form template
+    assert view.comment_area['show_comment_form'] is True
