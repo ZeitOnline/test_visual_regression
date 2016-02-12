@@ -679,6 +679,9 @@ def get_column_image(content):
         author = content.authorships[0].target
     except (AttributeError, IndexError, TypeError):
         return
+    # XXX This should use a different variant, but the current CSS requires a
+    # rather specific ratio -- which only works because the author images have
+    # been dilligently and manually uploaded in that ratio so far.
     return get_image(content=author, variant_id='original', fallback=False)
 
 
