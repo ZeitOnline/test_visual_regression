@@ -85,7 +85,7 @@
 					</div>
 					{% else %}
 					<span itemprop="author" itemscope itemtype="http://schema.org/Person">
-						<meta itemprop="name" content="{% if view and view.context and view.context %}{{ view.context.product.title | default('ZEIT ONLINE') }}{% endif %}" />
+						<meta itemprop="name" content="{% if view.context.product.title %}{{ view.context.product.title | default('ZEIT ONLINE', True) }}{% endif %}" />
 					</span>
 					{% endif -%}
 					<div class="metadata">
