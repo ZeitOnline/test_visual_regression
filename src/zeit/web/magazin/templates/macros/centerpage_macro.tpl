@@ -58,7 +58,7 @@
 {% macro comment_count(comment, url) -%}
     {% if comment %}
         <a href="{{ url }}#show_comments">
-            <div class="cp_comment__counter">{{ lama.use_svg_icon('comments-count', 'cp_comment__count-icon', request, package="web.magazin") }}<span class="cp_comment__count">{{ comment }}</span></div>
+            <div class="cp_comment__counter">{{ lama.use_svg_icon('comments-count', 'cp_comment__count-icon', request) }}<span class="cp_comment__count">{{ comment }}</span></div>
         </a>
     {% endif %}
 {%- endmacro %}
@@ -68,7 +68,7 @@
         <a href="{{teaser | create_url}}">
             {% if icon == 'true' and (teaser | block_type) == 'gallery'
                and teaser.type != 'zmo-product' -%}
-                {{ lama.use_svg_icon('gallery', 'gallery-icon', request, package="web.magazin") }}
+                {{ lama.use_svg_icon('gallery', 'gallery-icon', request) }}
             {%- endif %}
             <h2>
                 {% if supertitle != 'false' %}
