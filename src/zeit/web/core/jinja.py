@@ -16,6 +16,7 @@ import jinja2.loaders
 import jinja2.nodes
 import jinja2.runtime
 import jinja2.utils
+import pyramid.settings
 import pyramid.threadlocal
 import pytz
 import requests
@@ -42,7 +43,6 @@ def finalize(expr):
 
 
 class Undefined(jinja2.runtime.Undefined):
-
     """Custom jinja Undefined class that represents unresolvable template
     statements and expressions. It ignores undefined errors, ensures it is
     printable and returns further Undefined objects if indexed or called.
@@ -58,8 +58,13 @@ class Undefined(jinja2.runtime.Undefined):
     __getattr__ = __getitem__ = __call__ = lambda self, *args: self.__class__()
 
 
-class Environment(jinja2.environment.Environment):
+class Interrupt(Exception):
+    """Custom exception to deliberately escape fault-tolerant rendering."""
 
+    pass
+
+
+class Environment(jinja2.environment.Environment):
     """Custom jinja Environment class that uses our custom Undefined class as
     fallback for unknown filters, globals, tests, object-attributes and -items.
     This way, most flaws and faults in view classes can be caught and affected
@@ -97,6 +102,8 @@ class Environment(jinja2.environment.Environment):
     def __getsth__(self, func, obj, name):
         try:
             return getattr(super(Environment, self), func)(obj, name)
+        except Interrupt:
+            raise
         except BaseException:
             self.handle_exception()
             return self.undefined(obj=obj, name=name)
@@ -137,7 +144,6 @@ class HTTPLoader(jinja2.loaders.BaseLoader):
 
 
 class CompareModifiedHeader(object):
-
     """Compares a stored timestamp against the current Last-Modified header."""
 
     def __init__(self, url, timestamp):
@@ -167,7 +173,6 @@ class CompareModifiedHeader(object):
 
 
 class PrefixLoader(jinja2.BaseLoader):
-
     """Tweaked version of jinja2.PrefixLoader that defaults to prefix None
     if the requested path contains no prefix delimiter.
     """
@@ -195,37 +200,43 @@ class PrefixLoader(jinja2.BaseLoader):
 
 
 class ProfilerExtension(jinja2.ext.Extension):
+    """Profiler extension to overlay the rendered HTML with colorcoded
+    rectangles that display the rendertime in milliseconds.
+
+    Usage:
+
+    {% profile %}
+        {{ very_expensive_function() }}
+    {% endprofile %}
+    """
 
     tags = set(['profile'])
 
     def __init__(self, env):
         super(ProfilerExtension, self).__init__(env)
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        self.active = conf.get('debug.enable_profiler')
+        self.active = pyramid.settings.asbool(
+            conf.get('jinja2.enable_profiler'))
         self.profiler = None
 
     def parse(self, parser):
-        token = next(parser.stream)
-        name = 'no_{}_{}_{}'.format(
-            token.value, token.lineno, os.urandom(6).encode('hex'))
-
+        parser.stream.next_if('name:profile')
+        start = parser.stream.current.lineno
         body = parser.parse_statements(['name:endprofile'], drop_needle=True)
-
+        stop = parser.stream.current.lineno
         if self.active:
-            name = name.lstrip('no_')
             body.insert(0, jinja2.nodes.CallBlock(
-                self.call_method('engage', []), [], [], []))
+                self.call_method('engage', []), [], [], [], lineno=start))
             body.append(jinja2.nodes.CallBlock(
-                self.call_method('disengage', []), [], [], []))
+                self.call_method('disengage', []), [], [], [], lineno=stop))
 
-        return jinja2.nodes.Block(name, body, False).set_lineno(token.lineno)
+        return body
 
     def engage(self, *args, **kw):
-        color = os.urandom(3).encode('hex')
         self.profiler = cProfile.Profile()
         self.profiler.enable()
         return '<div class="__pro__" style="outline:3px dashed #{};">'.format(
-            color)
+            os.urandom(3).encode('hex'))
 
     def disengage(self, *args, **kw):
         self.profiler.disable()
@@ -235,3 +246,46 @@ class ProfilerExtension(jinja2.ext.Extension):
         p_log.debug(stream.getvalue())
         return '<b position:relative;float:right;>{:.0f}ms</b></div>'.format(
             stats.total_tt * 1000)
+
+
+class RequireExtension(jinja2.ext.Extension):
+    """Wrapper extension that introduces golang-style conditional blocks via
+    the require tag. It allows to assign expressions to variables that need to
+    evaluate to True for the block to be executed. Syntax is similar to `with`.
+
+    Usage:
+
+    {% require image = get_image('large') %}
+        <img src="{{ image.url }}" class="{{ layout }}">
+    {% endrequire %}
+
+    Equivalent to:
+
+    {% set image = get_image('large') %}
+    {% if image %}
+        <img src="{{ image.url }}" class="{{ layout }}">
+    {% endif %}
+    """
+
+    # TODO: Allow more specific conditional expressions than just bool(x).
+
+    tags = set(['require'])
+
+    def parse(self, parser):
+        assignments = []
+        condition = jinja2.nodes.Const(True)
+        while parser.stream.current.type != 'block_end':
+            lineno = parser.stream.current.lineno
+            if assignments:
+                parser.stream.expect('comma')
+            parser.stream.next_if('name:require')
+            target = parser.parse_assign_target()
+            parser.stream.expect('assign')
+            expr = parser.parse_expression()
+            name = jinja2.nodes.Name(target.name, 'load')
+            condition = jinja2.nodes.And(condition, name)
+            assign = jinja2.nodes.Assign(target, expr, lineno=lineno)
+            assignments.append(assign)
+
+        body = parser.parse_statements(('name:endrequire',), drop_needle=True)
+        return assignments + [jinja2.nodes.If(condition, body, [])]

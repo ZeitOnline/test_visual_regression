@@ -286,6 +286,10 @@ def get_layout(block, request=None):
                 layout = layout
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
+        elif (zeit.content.author.interfaces.IAuthor.providedBy(teaser) and
+                layout == 'zon-small' and
+                block.__parent__.kind in ['duo', 'minor']):
+            layout = 'zon-author'
 
     layout = zeit.web.core.centerpage.TEASER_MAPPING.get(layout, layout)
 
@@ -813,6 +817,11 @@ def format_webtrekk(string):
 def get_google_tag_manager_host():
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get('google_tag_manager_host')
+
+
+@zeit.web.register_global
+def interrupt(reason=None):
+    raise zeit.web.core.jinja.Interrupt(reason)
 
 
 @zeit.web.register_global

@@ -1,0 +1,53 @@
+$additional-margin: $page-padding * 2
+
+.teaser-author
+	+font-smoothing
+	background-color: $zon-trout
+	color: $white
+	margin: $vertical-space (-$page-padding)
+	overflow: hidden
+	padding-bottom: 100%
+	// calc() needed to compensate the negative margin
+	padding-bottom: calc(100% + #{$additional-margin})
+	position: relative
+	+respond-min($break-areas)
+		margin-left: 0
+		margin-right: 0
+		padding-bottom: 100%
+	&__overall-link
+		color: inherit
+		+on-interaction
+			color: inherit
+	&__container
+		bottom: 0
+		left: 0
+		padding: em(24px)
+		position: absolute
+		right: 0
+		text-align: center
+	&__heading
+		+teaser-image-text-shadow
+		font-size: em(24px)
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1.2
+		margin: 0 0 remify(15px)
+	&__text
+		font-family: $font-franziska
+		font-size: em(16px)
+		font-style: italic
+		margin: 0
+		line-height: 1.3125
+	&__button
+		+zon-button-dark($margin: remify(16px 0 0))
+	&__media
+		height: 100% - 4%
+		left: 14%
+		margin: 0
+		position: absolute
+		top: 4%
+		width: 100% - 2 * 14%
+	&__overlay
+		+teaser-image-dark-overlay($color: transparent, $angle: 0deg, $gradient: (rgba(0, 0, 0, .8) 0%, rgba(0, 0, 0, 0) 70%))
+		height: 100%
+		position: absolute
+		width: 100%

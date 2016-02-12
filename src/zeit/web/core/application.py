@@ -120,6 +120,8 @@ class Application(object):
         log.debug('Configuring Pyramid')
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('instantarticle', '/instantarticle/*traverse')
+        config.add_route(
+            'instantarticle-item', '/instantarticle-item/*traverse')
         config.add_route('fbia', '/fbia/*traverse')
         config.add_route('amp', '/amp/*traverse')
         config.add_route('json_delta_time', '/json/delta_time')
@@ -199,9 +201,12 @@ class Application(object):
         log.debug('Configuring Jinja')
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
-        self.config.add_jinja2_extension(jinja2.ext.WithExtension)
+        self.config.add_jinja2_extension(
+            jinja2.ext.WithExtension)
         self.config.add_jinja2_extension(
             zeit.web.core.jinja.ProfilerExtension)
+        self.config.add_jinja2_extension(
+            zeit.web.core.jinja.RequireExtension)
 
         self.config.commit()
         self.jinja_env = env = self.config.get_jinja2_environment()
@@ -486,3 +491,11 @@ def scrape_response_nonascii(self, headers, response):
     return original_scrape_response(self, headers, response)
 original_scrape_response = pysolr.Solr._scrape_response
 pysolr.Solr._scrape_response = scrape_response_nonascii
+
+
+# Make solr timeout runtime configurable
+def solr_timeout_from_settings(self):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return conf.get('solr_timeout', 5)
+pysolr.Solr.timeout = property(
+    solr_timeout_from_settings, lambda self, value: None)

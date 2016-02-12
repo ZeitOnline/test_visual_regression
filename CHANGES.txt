@@ -1,18 +1,48 @@
 Change log for zeit.web
 =======================
 
-2.55 (unreleased)
+2.56 (unreleased)
 -----------------
 
-- ZON-2602: Add Nextread and Verlags-Nextread to AMPages
+- FIX: Write adcontroller level4 if applicable
 
-- FIX: Unobtrusive loading of CeleraOne tracking script
+- ZON-2805: Load distinct brightcove player in amp pages
+
+- MAINT: Make solr timeout configurable
+
+
+2.55 (2016-02-09)
+-----------------
+
+- MAINT: Refactor printkiosk
+
+- MAINT: Add enhanced window.Zeit javascript module to ZMO
+
+- HOTFIX: Correctly parse jinja profiler toggle value
+
+- ZON-2783: Add open graph sharing image width and height metadata
+
+- ZON-2601: Add sharing links and article tags to AMPages
+
+- ZON-2602: Add Nextread and Verlags-Nextread to AMPages
 
 - ZON-2710: Use external SVG sprite in ZMO
 
 - ZON-2732: Move celeraone device detection header setting to varnish
 
 - ZON-2536: Move generic image assets to core module
+
+- ZON-2692: Add instantarticle author fallback and local image captions
+
+- ZON-2692: Remove instantarticle with missing block implementations from feed
+
+- ZON-2613: Implement author teaser
+
+- FIX: Unobtrusive loading of CeleraOne tracking script
+
+- SUGAR: Implement assignment-conditional require blocks in jinja
+
+- HOTFIX: No comment form, if community login is invalid
 
 
 2.54.1 (2016-02-02)
@@ -27,10 +57,6 @@ Change log for zeit.web
 
 2.54 (2016-02-01)
 -----------------
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-| DEPLOYMENT-NOTE: Please also deploy zeit-online cookbook 0.2.8 |
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - FIX: Fix scope of schema.org SiteNavigationElement
 

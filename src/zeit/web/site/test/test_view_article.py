@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import base64
 import datetime
+import urllib2
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -1248,33 +1249,58 @@ def test_instantarticle_representation_should_have_correct_content(
     canonical = bro.cssselect('link[rel=canonical]')[0].attrib['href']
     assert 'zeit-online/article/quotes' in canonical
     assert 'instantarticle' not in canonical
-
     assert '"Pulp Fiction"' in bro.cssselect('h1')[0].text
     assert bro.cssselect('.op-published')[0].text.strip() == '2. Juni 1999'
     assert bro.cssselect('.op-modified')[0].text.strip() == '20. Dezember 2013'
     assert bro.cssselect('figure > img[src$="square__2048x2048"]')
     assert len(bro.cssselect('aside')) == 3
-
-    assert 'Handlung, wohin man auch' in bro.cssselect('figcaption')[0].text
-    assert u'© Warner Bros.' == bro.cssselect(
-        'figure > figcaption > cite')[0].text
+    assert 'Bernie Sanders' in bro.cssselect('figcaption')[0].text
+    assert u'© Warner Bros.' == bro.cssselect('figcaption > cite')[0].text
 
 
-def test_instantarticle_should_wrap_with_cdata_if_asked(testbrowser):
+def test_instantarticle_item_should_wrap_correct_article_in_cdata(
+        testserver, testbrowser):
     browser = testbrowser(
-        '/instantarticle/zeit-online/article/quotes?cdata=true')
-    assert browser.contents.startswith('<![CDATA[')
-    assert browser.contents.endswith(']]>')
-
-    browser = testbrowser(
-        '/instantarticle/zeit-online/article/quotes')
-    assert browser.contents.startswith('<!doctype')
+        '/instantarticle-item/zeit-online/article/quotes')
+    document = lxml.etree.fromstring(browser.contents)
+    html_str = document.xpath('./*[local-name()="encoded"]/text()')[0]
+    html = lxml.html.fromstring(html_str)
+    canonical = html.xpath('./head/link[@rel="canonical"]/@href')[0]
+    assert canonical == testserver.url + '/zeit-online/article/quotes'
 
 
 def test_instantarticle_should_have_tracking_iframe(testbrowser):
     browser = testbrowser('/instantarticle/zeit-online/article/quotes')
     assert browser.cssselect('figure.op-tracker')
     assert browser.cssselect('iframe[src*="fbia/zeit-online/article/quotes"]')
+
+
+def test_instantarticle_should_show_linked_author_if_available(testbrowser):
+    browser = testbrowser('/instantarticle/zeit-online/article/02')
+    assert browser.cssselect('address a')[0].attrib.get('href').endswith(
+        '/autoren/H/Wenke_Husmann/index.xml')
+    assert browser.cssselect('address a')[0].text.strip() == 'Wenke Husmann'
+
+
+def test_instantarticle_should_show_author_fallback(testbrowser):
+    browser = testbrowser('/instantarticle/zeit-online/article/quotes')
+    assert browser.cssselect('address')[0].text.strip() == 'ZEIT ONLINE'
+
+
+def test_instantarticle_should_respect_local_image_captions(testbrowser):
+    browser = testbrowser('/instantarticle/zeit-online/article/quotes')
+    assert browser.cssselect('figcaption')[0].text.strip().startswith(
+        u'Bernie Sanders kommt Hillary Clinton gefährlich nahe.')
+
+
+def test_instantarticle_should_admit_not_implemented_features(testbrowser):
+    with pytest.raises(urllib2.HTTPError) as err:
+        testbrowser('/instantarticle/zeit-online/article/01')
+    assert err.value.code == 501
+
+    with pytest.raises(urllib2.HTTPError) as err:
+        testbrowser('/instantarticle-item/zeit-online/article/01')
+    assert err.value.code == 501
 
 
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):

@@ -1,5 +1,5 @@
 .article
-    margin: remify(0 0 36px)
+    margin: remify(0 0 40px)
     padding: remify(0 $page-padding)
     &__item
         margin-left: auto
@@ -12,6 +12,18 @@
             margin-left: -$page-padding
             margin-right: -$page-padding
             max-width: none
+    &__footer
+        border-top: 2px solid $color-border
+        margin: remify(20px auto 32px)
+        padding: remify(20px 0 0)
+    &__button
+        +zon-button-inky($margin: remify(50px 0 0))
+        &:after
+            // @see: https://github.com/sass/sass/issues/659
+            content: #{"\"\\203A\""} // Single Right-pointing Angle Quotation Mark
+            padding-left: .5em
+            font-size: 1rem
+            line-height: 1
 
 %caption
     color: #444

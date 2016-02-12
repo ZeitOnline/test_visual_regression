@@ -6,11 +6,14 @@ import sys
 import time
 
 import gocept.httpserverlayer.static
+import jinja2
+import lxml.html
 import lxml.objectify
 import mock
 import pytest
 import venusian
 import webob.multidict
+import zope.component
 
 import zeit.cms.interfaces
 import zeit.content.cp.blocks.teaser
@@ -462,13 +465,50 @@ def test_function_get_image_pattern_is_working_as_expected(application):
     assert teaser == ['default']
 
 
-def test_visual_profiler_should_not_interfere_with_rendering(
-        testbrowser, testserver):
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
-    assert not len(browser.cssselect('.__pro__'))
+def test_visual_profiler_should_not_interfere_with_rendering_if_disabled(
+        testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert not len(browser.cssselect('div.__pro__'))
 
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
-    assert not len(browser.cssselect('.__pro__'))
+    browser = testbrowser('/zeit-magazin/index')
+    assert not len(browser.cssselect('div.__pro__'))
+
+
+def test_visual_profiler_should_inject_performance_visualization(application):
+    # XXX I couldn't defeat isolation issues to do a full integration test
+    #     with the profiler extension :pensive:
+    #     So this is a very basic (but isolated) test setup. (ND)
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['jinja2.enable_profiler'] = 'True'
+
+    def world():
+        return __import__('time').sleep(0.1) or 'world'
+
+    env = jinja2.Environment()
+    env.add_extension(zeit.web.core.jinja.ProfilerExtension)
+    tpl = env.from_string(
+        '{% profile %}Hello {{ world() }}{% endprofile%}',
+        {'world': world})
+
+    document = lxml.html.fromstring(tpl.render())
+
+    assert len(document.cssselect('div.__pro__')) == 1
+    assert document.cssselect('div.__pro__')[0].text == 'Hello world'
+    assert int(document.cssselect('div.__pro__ b')[0].text.rstrip('ms'))
+
+
+@pytest.mark.parametrize('expr, value', [('True', 'bar'), ('False', '')])
+def test_require_extension_should_only_execute_if_expr_evaluates_to_true(
+        jinja2_env, expr, value):
+    tpl = '{% require foo = ' + expr + ' %} bar {% endrequire %}'
+    assert jinja2_env.from_string(tpl).render().strip() == value
+
+
+def test_require_extension_should_ensure_variable_access_in_inner_block(
+        jinja2_env):
+    tpl = '{% require foo = "pre" + fix %} {{ foo }} {% endrequire %}'
+    assert jinja2_env.from_string(tpl).render(fix='fix').strip() == 'prefix'
 
 
 def test_get_column_image_should_return_an_image_or_none(application):

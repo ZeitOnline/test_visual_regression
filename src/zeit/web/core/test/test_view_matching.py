@@ -116,7 +116,7 @@ def test_fbia_view_should_match(application):
         '/fbia/zeit-online/article/simple')
     request.registry = registry
 
-    assert pviews._find_view(request).func_name == 'FbIa'
+    assert pviews._find_view(request).func_name == 'InstantArticleTracking'
 
 
 def test_amp_view_should_match(application):

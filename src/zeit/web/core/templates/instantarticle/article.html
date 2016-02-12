@@ -1,8 +1,3 @@
-{% import 'zeit.web.core:templates/macros/instantarticle_macro.tpl' as blocks %}
-{%- if view.wrap_in_cdata %}
-<![CDATA[
-{%- endif %}
-<!doctype html>
 <html lang="de" prefix="op: http://media.facebook.com/op#">
 
 <head>
@@ -39,9 +34,13 @@
             <!-- The authors of your article -->
             {% for author in view.authors -%}
                 <address>
+                {% if author.href %}
                     <a href="{{ author.href | create_url }}">
-                        {{ author['name'] }}
+                        {{ author.name }}
                     </a>
+                {% else %}
+                    {{ author.name }}
+                {% endif %}
                 </address>
             {% endfor -%}
 
@@ -50,15 +49,15 @@
                   - image shall be 2048x2048 pixels
                   - image will be cropped to 4:3
              -->
-            {% set image = get_variant(view.sharing_image, 'square') if view.sharing_image else None %}
-            {% if image -%}
+            {% require image_block = view.main_image_block,
+                           variant = get_variant(view.context.main_image.target, 'square') %}
                 <figure>
-                    <img src="{{ request.image_host + image.path + '__2048x2048' }}" />
-                    {% set copyright = image.copyright[0][0] if (image.copyright and image.copyright[0]) else None %}
-                    {% if image.caption or copyright | trim | length > 1 %}
+                    <img src="{{ request.image_host + variant.path + '__2048x2048' }}" />
+                    {% set copyright = image_block.copyright[0][0] if (image_block.copyright and image_block.copyright[0]) else None %}
+                    {% if image_block.caption or copyright | trim | length > 1 %}
                     <figcaption>
-                        {% if image.caption %}
-                        {{ image.caption }}
+                        {% if image_block.caption %}
+                        {{ image_block.caption }}
                         {% endif %}
                         {% if copyright | trim | length > 1 %}
                         <cite>{{ copyright }}</cite>
@@ -66,16 +65,13 @@
                     </figcaption>
                     {% endif %}
                 </figure>
-            {% endif %}
+            {% endrequire %}
         </header>
 
         <!-- Article body goes here -->
         {% for page in view.pages %}
-            {%- for item in page -%}
-                {% set type = item | block_type %}
-                {%- if type not in ['place', 'contentadblock', 'cardstack', 'liveblog', 'inlinegallery'] -%}
-                    {{ (blocks[type] or blocks["no_block"])(item) }}
-                {%- endif -%}
+            {%- for block in page -%}
+                {% include "zeit.web.core:templates/instantarticle/blocks/{}.html".format(block | block_type) ignore missing %}
             {%- endfor -%}
         {% endfor %}
 
@@ -89,6 +85,3 @@
     </article>
 </body>
 </html>
-{%- if view.wrap_in_cdata %}
-]]>
-{%- endif %}
