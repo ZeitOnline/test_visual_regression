@@ -22,4 +22,4 @@ def test_igd_mobile_ids_source_should_be_parsed(application):
 
 def test_banner_id_mappings_source_should_be_parsed(application):
     assert len(
-        zeit.web.core.banner.BANNER_ID_MAPPINGS_SOURCE) == 20
+        zeit.web.core.banner.BANNER_ID_MAPPINGS_SOURCE) == 22

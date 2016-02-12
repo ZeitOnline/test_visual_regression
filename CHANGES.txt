@@ -8,6 +8,10 @@ Change log for zeit.web
 
 - ZON-2805: Load distinct brightcove player in amp pages
 
+- FIX: Write adcontroller level4 if applicable
+
+- MAINT: Make solr timeout configurable
+
 
 2.55 (2016-02-09)
 -----------------
