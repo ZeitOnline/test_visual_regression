@@ -118,6 +118,11 @@ def zett_content(content):
         content) and content.url.startswith('http://ze.tt')
 
 
+@zeit.web.register_test
+def column(context):
+    return context.serie and context.serie.column
+
+
 @zeit.web.register_filter
 def block_type(obj):
     """Outputs the class name in lower case format of one or multiple block

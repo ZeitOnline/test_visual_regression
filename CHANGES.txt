@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - MAINT: Migrate column teaser to new image delivery stack
 
+- MAINT: Update schema.org microdata
+
 
 2.55 (2016-02-09)
 -----------------
