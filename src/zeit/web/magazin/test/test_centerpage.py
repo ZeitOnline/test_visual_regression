@@ -370,8 +370,7 @@ def test_trio_area_has_title(testbrowser):
     assert 'Dinge Wohnen' in title.text
 
 
-def test_teaser_should_have_comment_count(
-        mockserver_factory, testserver, testbrowser):
+def test_teaser_should_have_comment_count(testbrowser, mockserver_factory):
 
     cp_counts = """<?xml version="1.0" encoding="UTF-8"?>
     <nodes>
@@ -380,9 +379,8 @@ def test_teaser_should_have_comment_count(
     </nodes>
     """
     mockserver_factory(cp_counts)
-    browser = testbrowser(
-        '%s/zeit-magazin/index' % testserver.url)
-    counts = browser.cssselect('.icon-comments-count')
+    browser = testbrowser('/zeit-magazin/index')
+    counts = browser.cssselect('.cp_comment__count')
     assert int(counts[0].text) == 129
 
 
