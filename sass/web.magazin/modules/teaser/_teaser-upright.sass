@@ -1,0 +1,47 @@
+
+.teaser-upright
+    @extend %teaser
+    overflow: hidden
+    display: block
+
+    &__media
+        height: 0
+        margin: 0
+        overflow: hidden
+        padding-bottom: 100% / 4 * 5 // image variant 'tile'
+
+    &__media-container
+        a
+            @extend %teaser--dark
+            display: block
+
+    &__text
+        @extend %teaser__text
+        bottom: 0
+        padding: $tiny $petite $compact $petite
+        position: absolute
+        width: 100%
+        z-index: 2
+
+    &__kicker
+        @extend %teaser__kicker
+        margin-bottom: $tiny
+        color: $white
+        letter-spacing: 0
+
+    &__title
+        @extend %teaser__title
+        color: $white
+        margin: 0
+        text-shadow: rgba(255, 255, 255, .01) 0 -1px 1px
+        -webkit-font-smoothing: antialiased
+
+    &__subtitle
+        @extend %teaser__subtitle
+
+    &__comments
+        @extend %teaser__comments
+
+.icon-galerie-icon-white
+    position: absolute
+    top: -$medium

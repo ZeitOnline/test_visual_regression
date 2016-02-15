@@ -64,7 +64,7 @@
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
     <nextread>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
         <supertitle>Kochen für Gäste</supertitle>
         <teaser_supertitle xsi:nil="true"/>
         <title xsi:nil="true"/>

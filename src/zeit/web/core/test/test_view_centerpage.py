@@ -43,10 +43,10 @@ def test_json_update_time_handler_should_set_exipration_header(testbrowser):
 def test_centerpage_should_aggregate_all_teasers_correctly(
         application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2')
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo-2')
     items = list(zeit.web.core.view_centerpage.Centerpage(cp, dummy_request))
     assert items[0].uniqueId == (
-        'http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm')
+        'http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm')
     assert len(items) == 19
 
 
@@ -55,7 +55,7 @@ def test_centerpage_should_evaluate_automatic_areas_for_teasers(
     cp = zeit.content.cp.centerpage.CenterPage()
     cp.uniqueId = 'http://xml.zeit.de/testcp'
     other = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2')
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo-2')
     area = cp.body.create_item('region').create_item('area')
     area.kind = 'duo'  # Fixture config default teaser layout
     area.automatic_type = 'centerpage'
@@ -64,7 +64,7 @@ def test_centerpage_should_evaluate_automatic_areas_for_teasers(
     area.automatic = True
     items = list(zeit.web.core.view_centerpage.Centerpage(cp, dummy_request))
     assert items[0].uniqueId == (
-        'http://xml.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm')
+        'http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm')
     assert len(items) == area.count
 
 
@@ -94,15 +94,15 @@ def test_centerpage_should_collect_teaser_counts_from_community(
     cp_counts = """<?xml version="1.0" encoding="UTF-8"?>
     <nodes>
          <node comment_count="129"
-               url="/zeit-magazin/test-cp/essen-geniessen-spargel-lamm"/>
+               url="/zeit-magazin/article/essen-geniessen-spargel-lamm"/>
     </nodes>
     """
     mockserver_factory(cp_counts)
     cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo-2')
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo-2')
     view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
     path, count = view.comment_counts.items()[0]
-    assert '/zeit-magazin/test-cp/essen-geniessen-spargel-lamm' in path
+    assert '/zeit-magazin/article/essen-geniessen-spargel-lamm' in path
     assert count == '129'
 
 

@@ -4,10 +4,10 @@
     <node comment_count="291" url="/zeit-online/cp-content/article-02"/>
     <node comment_count="1"   url="/zeit-online/cp-content/kolumne"/>
     <node comment_count="125" url="/centerpage/article_image_asset"/>
-    <node comment_count="150" url="/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste"/>
-    <node comment_count="140" url="/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen"/>
-    <node comment_count="248" url="/zeit-magazin/test-cp/gesellschaftskritik-grumpy-cat"/>
-    <node comment_count="133" url="/zeit-magazin/test-cp/liebeskolumne-rationalitaet-emotionen"/>
+    <node comment_count="150" url="/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste"/>
+    <node comment_count="140" url="/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen"/>
+    <node comment_count="248" url="/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat"/>
+    <node comment_count="133" url="/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen"/>
     <node comment_count="129" url="/artikel/01"/>
     <node comment_count="142" url="/artikel/02"/>
     <node comment_count="110" url="/artikel/03"/>

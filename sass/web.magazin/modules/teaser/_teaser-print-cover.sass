@@ -1,0 +1,40 @@
+
+.teaser-print-cover
+    @extend %teaser
+
+    &__media
+        @extend %teaser__media
+        margin-bottom: 0
+
+    &__media-container
+        a
+            @extend %teaser--darker
+            display: block
+
+    &__text
+        @extend %teaser__text
+        @extend %teaser-link--dark
+        bottom: 0
+        padding: $tiny $petite $big $petite
+        position: absolute
+        width: 100%
+        z-index: 2
+
+    &__kicker
+        @extend %teaser__kicker
+        margin-bottom: $tiny
+        color: $white
+        letter-spacing: 0
+
+    &__title
+        @extend %teaser__title
+        color: $white
+        margin: 0
+        text-shadow: rgba(255, 255, 255, .01) 0 -1px 1px
+        -webkit-font-smoothing: antialiased
+
+    &__subtitle
+        @extend %teaser__subtitle
+
+    &__comments
+        @extend %teaser__comments

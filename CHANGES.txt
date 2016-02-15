@@ -4,6 +4,12 @@ Change log for zeit.web
 2.56 (unreleased)
 -----------------
 
+- ZON-2558: ZMO teaser layout 'card' in 3 variations
+
+- ZON-2557: ZMO teaser layout 'upright' formerly known as 'gallery-upright'
+
+- ZON-2556: ZMO teaser layout 'print-cover'
+
 - ZON-2806: Add product.title as author fallback to AMPages
 
 - ZON-2581: Track ad start events to webtrekk
@@ -35,6 +41,8 @@ Change log for zeit.web
 - ZON-2732: Move celeraone device detection header setting to varnish
 
 - ZON-2536: Move generic image assets to core module
+
+- ZON-2552: Refactored fullwidth teaser
 
 - ZON-2692: Add instantarticle author fallback and local image captions
 
