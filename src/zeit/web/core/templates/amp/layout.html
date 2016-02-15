@@ -78,14 +78,14 @@
 					<div class="summary" itemprop="description">
 						{{ view.subtitle }}
 					</div>
-					{%- set byline = view.context | get_byline('main') %}
+					{% set byline = view.context | get_byline('main') -%}
 					{% if byline | length -%}
 					<div class="byline">
 						{% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
 					</div>
-					{% else %}
+					{% else -%}
 					<span itemprop="author" itemscope itemtype="http://schema.org/Person">
-						<meta itemprop="name" content="{% if view.context.product.title %}{{ view.context.product.title | default('ZEIT ONLINE', True) }}{% endif %}" />
+						<meta itemprop="name" content="{% if view.context.product %}{{ view.context.product.title }}{% else %}ZEIT ONLINE{% endif %}">
 					</span>
 					{% endif -%}
 					<div class="metadata">
