@@ -428,7 +428,7 @@ def test_macro_video_should_produce_markup(jinja2_env):
          'fig': '<figure class="figure-stamp" data-video="1">'}]
 
     for el in obj:
-        lines = tpl.module.video(el).splitlines()
+        lines = module.video(el).splitlines()
         output = ''
         for line in lines:
             output += line.strip()
@@ -725,7 +725,8 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     request.authenticated_userid = None
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     unlogged = 'Anmelden'
-    lines = tpl.module.main_nav('true', request).splitlines()
+    module = tpl.make_module({'request': request, 'view': view})
+    lines = module.main_nav('true', request).splitlines()
     output = ''
     for line in lines:
         output += line.strip()

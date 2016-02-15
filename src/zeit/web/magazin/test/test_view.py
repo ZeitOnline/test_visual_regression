@@ -619,34 +619,18 @@ def test_http_header_should_contain_version(testserver, testbrowser):
     assert pkg_version == head_version
 
 
-def test_feature_longform_template_should_have_zon_logo_header(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/feature_longform.html')
+def test_feature_longform_template_should_have_zon_logo_header(
+        testbrowser, testserver):
+    browser = testbrowser('/feature/feature_longform')
+    assert browser.cssselect('.main-nav__brand-logo--zon-large')
 
-    # jinja2 has a blocks attribute which generates a stream,
-    # if called with context. We can use it with a html parser.
-    ctx, request = (mock.Mock(),) * 2
-    # It seems jinja evaluates {{request.route_url('home')}} not like
-    # getattr(ctx.resolve('request'), 'route_url')('home'), but more like
-    # ctx.call('request.route_url', 'home')
-    ctx.call.return_value = 'http://foo.bar/'
-
-    html_str = ' '.join(list(tpl.blocks['longform_logo'](ctx)))
-    html = lxml.html.fromstring(html_str)
-    elem = html.cssselect('.main-nav__logo__img.icon-logo-zon-large')[0]
-    assert elem.text == 'ZEIT ONLINE'
-    assert elem.get('title') == 'ZEIT ONLINE'
-
-    elem = html.cssselect('.main-nav__logo')[0]
-    assert elem.get('href') == 'http://foo.bar/index'
+    link = browser.cssselect('.main-nav__logo')[0]
+    assert link.get('href') == testserver.url + '/index'
 
 
-def test_feature_longform_template_should_have_zon_logo_footer(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/feature_longform.html')
-    html_str = " ".join(list(tpl.blocks['footer_logo']({})))
-    html = lxml.html.fromstring(html_str)
-    assert len(html.cssselect('.main-footer__logo.icon-logo-zon-small')) == 1
+def test_feature_longform_template_should_have_zon_logo_footer(testbrowser):
+    browser = testbrowser('/feature/feature_longform')
+    assert browser.cssselect('.main-footer__logo--zon-small')
 
 
 def test_advertorial_is_advertorial(application):
