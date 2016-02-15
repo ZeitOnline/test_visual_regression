@@ -1,0 +1,13 @@
+// These values will not show up in content, but can be 
+// queried by JavaScript to know which breakpoint is active.
+// Add or remove as many breakpoints as you like.
+
+body:before
+	content: "mobile"
+	display: none // do not alter this
+	+respond-min($break-phablet-min)
+		content: "phablet"
+	+respond-min($break-tablet-min)
+		content: "tablet"
+	+respond-min($break-desktop-min)
+		content: "desktop"

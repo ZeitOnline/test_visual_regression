@@ -16,6 +16,7 @@ import zope.component
 from zeit.cms.checkout.helper import checked_out
 import zeit.cms.related.interfaces
 import zeit.cms.interfaces
+import zeit.content.image.interfaces
 
 import zeit.solr.interfaces
 
@@ -230,41 +231,57 @@ def test_schema_org_main_content_of_page(testbrowser):
     assert len(select('main[itemprop="mainContentOfPage"]')) == 1
 
 
-def test_schema_org_article_mark_up(testbrowser):
+def test_schema_org_article_mark_up(testbrowser, testserver):
     browser = testbrowser('/zeit-online/article/01')
-    selector = 'article[itemtype="http://schema.org/Article"][itemscope]'
-    article = browser.cssselect(selector)
-    assert len(article) == 1
-    select = article[0].cssselect
+    publisher = browser.cssselect('[itemprop="publisher"]')[0]
+    logo = publisher.cssselect('[itemprop="logo"]')[0]
 
-    # articleBody
-    assert len(select('div[itemprop="articleBody"]')) == 1
+    article = browser.cssselect('article[itemprop="mainEntity"]')[0]
+    main_entity_of_page = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
+    headline = article.cssselect('[itemprop="headline"]')[0]
+    description = article.cssselect('[itemprop="description"]')[0]
+    date_published = article.cssselect('[itemprop="datePublished"]')[0]
+    author = article.cssselect('[itemprop="author"]')[0]
 
-    # headline
-    headline = select('h1[itemprop="headline"]')
-    assert len(headline) == 1
-    assert u'"Der Hobbit"' in headline[0].text_content()
-    assert u'Geht\'s noch gr\xf6\xdfer?' in headline[0].text_content()
+    image = article.cssselect('[itemprop="image"]')[0]
+    copyright_holder = image.cssselect('[itemprop="copyrightHolder"]')[0]
 
-    # description
-    assert len(select('div[itemprop="description"]')) == 1
+    # check Organization
+    assert publisher.get('itemtype') == 'http://schema.org/Organization'
+    assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
+        'ZEIT ONLINE')
+    assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
+        testserver.url + '/index')
+    assert logo.get('itemtype') == 'http://schema.org/ImageObject'
+    assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
+        testserver.url + '/static/latest/images/'
+        'structured-data-publisher-logo-zon.png')
+    assert logo.cssselect('[itemprop="width"]')[0].get('content') == '565'
+    assert logo.cssselect('[itemprop="height"]')[0].get('content') == '60'
 
-    # author
-    selector = (
-        '*[itemtype="http://schema.org/Person"][itemprop="author"][itemscope]')
-    author = select(selector)
-    assert len(author) == 1
-    assert len(author[0].cssselect('a[itemprop="url"]')) == 1
-    name = author[0].cssselect('span[itemprop="name"]')
-    assert len(name) == 1
-    assert name[0].text == 'Wenke Husmann'
+    # check Article
+    assert article.get('itemtype') == 'http://schema.org/Article'
+    assert main_entity_of_page.get('href') == (
+        testserver.url + '/zeit-online/article/01')
+    assert ' '.join(headline.text_content().strip().split()) == (
+        u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?')
 
-    # image
-    assert len(select('*[itemprop="image"][itemscope]'
-               '[itemtype="http://schema.org/ImageObject"]')) == 1
+    assert len(description.text_content().strip())
+    assert len(article.cssselect('[itemprop="articleBody"]')) == 1
 
-    # datePublished
-    assert len(select('time[itemprop="datePublished"]')) == 1
+    # check ImageObject
+    assert image.get('itemtype') == 'http://schema.org/ImageObject'
+    assert len(image.cssselect('[itemprop="caption"]')) == 1
+    assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
+    person = copyright_holder.cssselect('[itemprop="name"]')[0]
+    assert person.text == u'© Warner Bros.'
+
+    assert date_published.get('datetime') == '2015-05-27T19:11:30+02:00'
+
+    assert author.get('itemtype') == 'http://schema.org/Person'
+    assert author.cssselect('[itemprop="name"]')[0].text == 'Wenke Husmann'
+    assert author.cssselect('[itemprop="url"]')[0].get('href') == (
+        testserver.url + '/autoren/H/Wenke_Husmann/index.xml')
 
 
 def test_multipage_article_should_designate_meta_pagination(testbrowser):
@@ -603,7 +620,7 @@ def test_article_should_not_break_on_author_without_image(
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/author3')
     with checked_out(author) as co:
-        co.image_group = None
+        zeit.content.image.interfaces.IImages(co).image = None
     browser = testbrowser('/zeit-online/cp-content/kolumne')
     assert not browser.cssselect(
         '.column-heading__author .column-heading__media-item')
