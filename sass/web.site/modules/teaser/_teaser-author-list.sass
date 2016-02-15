@@ -1,0 +1,70 @@
+.author-list
+	list-style: none
+	margin: remify(0 10px)
+	padding: 0
+	@include columns(344px 2)
+	@include column-gap(40px)
+	&__item
+		border-bottom: 1px solid #eee
+
+// TODO: clean up this mess
+
+.zon-author-list
+	list-style: none
+	margin: remify(0 10px)
+	padding: 0
+
+	&__textitem
+		padding: remify(0 10px)
+		line-height: remify(48px)
+	&__textitem-link
+		color: #444
+		font-size: em(15px)
+		white-space: nowrap
+		text-overflow: ellipsis
+		width: 100%
+		overflow: hidden
+		&:after
+			//color: #707070 // would need to be overridden for :hover status agein
+			content: " \203A" // › = single right-pointing angle quotation mark
+			font-size: em(16px)
+			font-weight: bold
+
+	&__imageitem
+		+clearfix
+		background-color: #FAFAFA
+		bottom: 0
+		box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1)
+		margin: remify(25px 0)
+		min-height: remify(100px) // 90px squareImg + 10px
+		padding: remify(10px 10px 0 0)
+		position: relative
+		+on-interaction
+			box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2)
+			.zon-author-list__text:before
+				color: #000
+	&__image
+		float: left
+		width: remify(90px)
+	&__media
+		@extend %square-item
+	&__text
+		padding: remify(0 10px 0 100px)
+		&:before
+			color: #707070
+			content: " \203A" // › = single right-pointing angle quotation mark
+			float: right
+			font-size: em(16px)
+			font-weight: bold
+			// manually adjusted margin to meet the first line of text
+			margin: remify(24px -10px 0 0)
+	&__name
+		color: #313131
+		font-size: em(15px)
+		font-weight: bold
+		line-height: em(18px)
+	&__summary
+		color: #707070
+		font-size: em(14px)
+		letter-spacing: $zon-letter-spacing-s
+		line-height: em(17px)
