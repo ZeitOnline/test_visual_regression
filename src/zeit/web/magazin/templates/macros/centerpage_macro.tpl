@@ -53,14 +53,6 @@
     </div>
 {%- endmacro %}
 
-{% macro comment_count(comment, url) -%}
-    {% if comment %}
-        <a href="{{ url }}#show_comments">
-            <div class="cp_comment__counter">{{ lama.use_svg_icon('comments-count', 'cp_comment__count-icon', request) }}<span class="cp_comment__count">{{ comment }}</span></div>
-        </a>
-    {% endif %}
-{%- endmacro %}
-
 {% macro teaser_text_block(teaser, block='leader', shade='none', supertitle=true, subtitle=true, icon=false) -%}
     <header class="cp_{{block}}__title__wrap cp_{{block}}__title__wrap--{{ shade }}">
         <a href="{{teaser | create_url}}">

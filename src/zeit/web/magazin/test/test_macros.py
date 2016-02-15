@@ -634,19 +634,6 @@ def test_macro_teaser_text_block_should_produce_alternative_markup(
     assert '<div class="cp_button__subtitle' not in output
 
 
-def test_macro_comment_count_should_produce_correct_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    markup = ('<span class="cp_comment__count__wrap '
-              'icon-comments-count">3</span>')
-    lines = tpl.make_module({'request': mock.Mock()}).comment_count(3).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert markup in output
-
-
 def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/layout_macro.tpl')
