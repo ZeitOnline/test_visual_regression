@@ -5,13 +5,11 @@ $teaser-large-video-max-width: em(1000px)
 %teaser-large
     position: relative
     overflow: hidden
-    margin-top: $small
     margin-bottom: $small
     background-color: $black
     width: 100%
     display: inline-block
     +respond-min($break-2)
-        margin-top: $compact
         margin-bottom: $compact
 
 %teaser-large__text
@@ -47,17 +45,15 @@ $teaser-large-video-max-width: em(1000px)
         font-size: $font-ml
 
 %teaser-large__media-container
-    @extend %teaser--dark
-    overflow: hidden
-    position: absolute
-    top: 0
-    width: 100%
-    height: 100%
-    z-index: 1
-    video
+    a
+        @extend %teaser--dark
+        overflow: hidden
         position: absolute
-        bottom: 0
-        left: 0
+        top: 0
+        width: 100%
+        height: 100%
+        z-index: 1
+    video
         min-width: 100%
         min-height: 100%
         max-width: $teaser-large-video-max-width

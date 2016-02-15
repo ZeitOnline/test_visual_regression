@@ -288,7 +288,7 @@
         id="zmo-square-large"
         title="ZMO großes Quadrat"
         image_pattern="square"
-        areas="solo duo major minor ranking parquet"
+        areas="solo duo major"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
@@ -296,7 +296,7 @@
         id="zmo-square-large-light"
         title="ZMO großes Quadrat (helles Bild)"
         image_pattern="square"
-        areas="solo duo major minor ranking parquet"
+        areas="solo duo major"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
@@ -304,7 +304,7 @@
         id="zmo-landscape-large"
         title="ZMO großer Teaser 16:9"
         image_pattern="wide"
-        areas="solo duo major minor ranking parquet"
+        areas="solo duo major"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 

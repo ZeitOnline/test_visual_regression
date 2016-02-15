@@ -6,9 +6,13 @@
     width: 100%
     span
         display: block
+    margin-bottom: $small
+    +respond-min($break-2)
+        margin-bottom: $compact
 
 %teaser__media
     overflow: hidden
+    margin-top: 0
     margin-bottom: $small
     img
         width: 100%
@@ -79,8 +83,9 @@
 // will hopefully be never shown
 .teaser
     @extend %teaser
-    margin-bottom: $compact
-    max-width: remify(320px)
+    padding: 0 remify(28px)
+    +respond-min($break-2)
+        padding: 0
     &__media
         @extend %teaser__media
         max-height: remify(165px)
