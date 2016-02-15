@@ -194,7 +194,7 @@
                 {% endif -%}
                 <span class="figure__text">{{ obj.caption | safe }}</span>
                 {% if obj.copyright|count and obj.copyright[0][0] != '©' %}
-                <span class="figure__copyright">
+                <span class="figure__copyright" itemprop="copyrightHolder">
                     {%- if obj.copyright[0][1] -%}
                     <a href="{{ obj.copyright[0][1] }}" target="_blank">
                     {%- endif -%}

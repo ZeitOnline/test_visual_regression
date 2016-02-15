@@ -2,6 +2,7 @@
 	background-color: $zon-dark-grey
 	color: $zon-mid-grey
 	display: none
+	margin-top: remify(20px)
 	&__container
 		+clearfix
 		padding: remify(20px)
@@ -41,7 +42,6 @@
 
 +respond-min($break-tablet)
 	.image-copyright-footer
-		border-top: remify(20px) solid $zon-charcoal // fake margin to improve the animation
 		&__items
 			+display-flex()
 			+flex-wrap(wrap)
