@@ -4,7 +4,7 @@ Change log for zeit.web
 2.56 (unreleased)
 -----------------
 
-- MAINT: Update schema.org microdata
+- ZON-2507: Implement zeit campus groundwork (behind a feature toggle)
 
 - ZON-2806: Add product.title as author fallback to AMPages
 
@@ -15,6 +15,10 @@ Change log for zeit.web
 - FIX: Write adcontroller level4 if applicable
 
 - MAINT: Make solr timeout configurable
+
+- MAINT: Migrate column teaser to new image delivery stack
+
+- MAINT: Update schema.org microdata
 
 
 2.55 (2016-02-09)

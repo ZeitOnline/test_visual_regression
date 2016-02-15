@@ -16,6 +16,7 @@ import zope.component
 from zeit.cms.checkout.helper import checked_out
 import zeit.cms.related.interfaces
 import zeit.cms.interfaces
+import zeit.content.image.interfaces
 
 import zeit.solr.interfaces
 
@@ -619,7 +620,7 @@ def test_article_should_not_break_on_author_without_image(
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/author3')
     with checked_out(author) as co:
-        co.image_group = None
+        zeit.content.image.interfaces.IImages(co).image = None
     browser = testbrowser('/zeit-online/cp-content/kolumne')
     assert not browser.cssselect(
         '.column-heading__author .column-heading__media-item')

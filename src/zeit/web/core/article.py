@@ -170,7 +170,8 @@ def convert_authors(article, is_longform=False):
             author = {
                 'name': getattr(author.target, 'display_name', None),
                 'href': getattr(author.target, 'uniqueId', None),
-                'image_group': getattr(author.target, 'image_group', None),
+                'image_group': getattr(zeit.content.image.interfaces.IImages(
+                    author.target), 'image', None),
                 'prefix': u'', 'suffix': u'', 'location': u''}
             # add location
             if location and not is_longform:
