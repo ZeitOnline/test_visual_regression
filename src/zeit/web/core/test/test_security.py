@@ -86,7 +86,7 @@ def policy():
 
 
 def test_cookieless_request_returns_nothing(policy, dummy_request):
-    assert policy.authenticated_userid(dummy_request) is None
+    assert not bool(policy.authenticated_userid(dummy_request))
 
 
 def test_cookieless_request_clears_session(policy, dummy_request):
@@ -141,7 +141,7 @@ def test_unreachable_community_should_not_produce_error(dummy_request):
     dummy_request.cookies['drupal-userid'] = 23
     dummy_request.headers['Cookie'] = ''
     user_info = dict(uid=0, name=None, picture=None, roles=[],
-                     mail=None, premoderation=False)
+                     mail=None, premoderation=False, should_invalidate=False)
     assert get_user_info(dummy_request) == user_info
 
 

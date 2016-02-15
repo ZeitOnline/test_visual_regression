@@ -6,9 +6,17 @@ Change log for zeit.web
 
 - ZON-2581: Track ad start events to webtrekk
 
+- ZON-2805: Load distinct brightcove player in amp pages
+
+- FIX: Write adcontroller level4 if applicable
+
+- MAINT: Make solr timeout configurable
+
 
 2.55 (2016-02-09)
 -----------------
+
+- MAINT: Refactor printkiosk
 
 - MAINT: Add enhanced window.Zeit javascript module to ZMO
 
@@ -35,6 +43,8 @@ Change log for zeit.web
 - FIX: Unobtrusive loading of CeleraOne tracking script
 
 - SUGAR: Implement assignment-conditional require blocks in jinja
+
+- HOTFIX: No comment form, if community login is invalid
 
 
 2.54.1 (2016-02-02)
