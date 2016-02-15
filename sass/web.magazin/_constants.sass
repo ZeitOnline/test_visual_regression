@@ -7,7 +7,36 @@ $article-content-max-width: 660px
 $longform-content-max-width: 615px
 $longform-content-max-width--desktop: 695px
 
+// ZMO breakpoints
+$break-0:  em(480px) !default
+$break-1:  em(576px) !default
+$break-2:  em(720px) !default
+$break-3: em(1024px) !default
+$break-4: em(1120px) !default
+
+$break-phablet-min: $break-1
+$break-tablet-min:  $break-2
+$break-desktop-min: $break-3
+
+// for comments
+$comments__break-overlap:  em(768px)
+$comments__break-outside: em(1360px) // 1280px | 1360px | 1440px
+
+// element sizes
+$stamp-width: em(240px)
+$mtb-teaser-width: em(270px)
+
 @import "../constants"
 
+// fonts
 $article-body-font: $font-franziska !default
 $sans-serif-base-font: $font-tabletgothic !default
+
+// colors
+$color-button:              $white
+$color-button--hover:       $white
+$color-button--disabled:    $charcoal
+$color-button-bg:           $grey--mid-dark
+$color-button-bg--hover:    $grey--mid
+$color-button-bg--disabled: $grey--light
+
