@@ -47,7 +47,7 @@
             6: "{{ serie }}", // Cluster
             7: "{{ request.path_info | substring_from('/') }}", // doc-path
             8: "{{ view.banner_channel | lower }}", // Banner-Channel
-            9: "{{ date }}" // {{ view.date_first_released | default("not published yet") }}
+            9: "{{ date }}" // Veröffentlichungsdatum
         };
 
         wt.customParameter = {
