@@ -4,6 +4,8 @@ Change log for zeit.web
 2.56 (unreleased)
 -----------------
 
+- ZON-2507: Implement zeit campus groundwork (behind a feature toggle)
+
 - ZON-2806: Add product.title as author fallback to AMPages
 
 - ZON-2581: Track ad start events to webtrekk

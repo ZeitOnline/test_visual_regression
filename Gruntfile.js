@@ -151,18 +151,17 @@ module.exports = function(grunt) {
         },
 
         jscs: {
-            // src: [ '<%= jshint.dist.src %>' ],
-            // restrain to zeit.web.site for the moment
             dist: {
-                src: [
-                    project.sourceDir + 'javascript/*.js',
-                    project.sourceDir + 'javascript/web.core/**/*.js',
-                    project.sourceDir + 'javascript/web.site/**/*.js'
-                ]
+                src: [ project.sourceDir + 'javascript/**/*.js' ]
             },
             options: {
                 config: project.sourceDir + '.jscsrc',
-                excludeFiles: '<%= jshint.options.ignores %>'
+                excludeFiles: [
+                    // omit zeit.web.magazin plugins for the moment
+                    project.sourceDir + 'javascript/web.magazin/**/*.js',
+                    project.sourceDir + 'javascript/libs/**/*',
+                    project.sourceDir + 'javascript/vendor/**/*'
+                ]
             }
         },
 
@@ -197,6 +196,9 @@ module.exports = function(grunt) {
                 logLevel: 1,
                 dir: project.codeDir + 'js',
                 modules: [
+                    {
+                        name: 'campus'
+                    },
                     {
                         name: 'magazin'
                     },
@@ -237,6 +239,12 @@ module.exports = function(grunt) {
         },
 
         svgmin: {
+            campus: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.campus/svg',
+                src: [ '*.svg' ],
+                dest: project.sourceDir + 'sass/web.campus/svg/_minified'
+            },
             magazin: {
                 expand: true,
                 cwd: project.sourceDir + 'sass/web.magazin/svg',
@@ -299,6 +307,21 @@ module.exports = function(grunt) {
             },
             // this is only needed for the fallback PNGs for svg4everybody
             // grunticon is not in use here
+            campus: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= svgmin.campus.dest %>',
+                    src: [ '*.svg' ],
+                    dest: project.codeDir + 'css/icons'
+                }],
+                options: {
+                    datasvgcss: 'campus.data.svg.css',
+                    datapngcss: 'campus.data.png.css',
+                    urlpngcss: 'campus.fallback.css',
+                    previewhtml: 'campus.preview.html',
+                    pngfolder: 'campus'
+                }
+            },
             site: {
                 files: [{
                     expand: true,
@@ -338,6 +361,10 @@ module.exports = function(grunt) {
             siteAmp: {
                 src: '<%= svgmin.siteAmp.dest %>/*.svg',
                 dest: project.codeDir + 'css/web.site/amp.svg'
+            },
+            campus: {
+                src: '<%= svgmin.campus.dest %>/*.svg',
+                dest: project.codeDir + 'css/web.campus/icons.svg'
             },
             site: {
                 src: '<%= svgmin.site.dest %>/*.svg',
@@ -402,9 +429,9 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            symbols: {
-                files: [ '<%= svgmin.site.cwd %>/*.svg' ],
-                tasks: [ 'symbols' ],
+            svg: {
+                files: [ project.sourceDir + 'sass/web.*/**/*.svg' ],
+                tasks: [ 'svg' ],
                 options: {
                     // needed to call `grunt watch` from outside zeit.web
                     // the watch task runs child processes for each triggered task
