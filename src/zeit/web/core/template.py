@@ -120,8 +120,7 @@ def zett_content(content):
 
 @zeit.web.register_test
 def column(context):
-    if context.serie and context.serie.column:
-        return True
+    return context.serie and context.serie.column
 
 
 @zeit.web.register_filter
