@@ -230,7 +230,10 @@ module.exports = function(grunt) {
             scripts: [ project.sourceDir + 'javascript/vendor' ],
             sass: [ project.sourceDir + 'sass/vendor' ],
             // delete unused directories
-            legacy: [ project.sourceDir + 'sass/web.*/icons-minified' ]
+            legacy: [
+                project.sourceDir + 'sass/web.*/icons',
+                project.sourceDir + 'sass/web.*/icons-minified'
+            ]
         },
 
         svgmin: {
@@ -314,7 +317,7 @@ module.exports = function(grunt) {
                 //     viewBox : '0 0 100 100',
                 //     xmlns: 'http://www.w3.org/2000/svg'
                 // },
-                cleanup: [ 'fill', 'stroke' ],
+                cleanup: [ 'fill', 'fill-opacity', 'stroke', 'stroke-width' ],
                 includedemo: true,
                 formatting: {
                     indent_size: 1,
