@@ -36,6 +36,8 @@
 		{% endblock symbols %}
 	</div>
 
+	{% include "zeit.web.core:templates/amp/ads/tile_1.html" ignore missing %}
+
 	<div class="content" id="top">
 		<header class="header" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
 			{% block logo %}
@@ -177,7 +179,7 @@
 			{% endblock %}
 
 			{% block footer_ad %}
-				{% include "zeit.web.core:templates/amp/ads/tile_4.html" ignore missing %}
+				{% include "zeit.web.core:templates/amp/ads/tile_8.html" ignore missing %}
 			{% endblock footer_ad %}
 		{% endblock main %}
 		</main>
