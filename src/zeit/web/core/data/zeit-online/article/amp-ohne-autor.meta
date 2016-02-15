@@ -32,7 +32,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-01-22T12:14:48.450437+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-01-22T09:42:04.601603+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Wirtschaft</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
