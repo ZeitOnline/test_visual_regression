@@ -6,9 +6,11 @@ Change log for zeit.web
 
 - MAINT: Update schema.org microdata
 
-- FIX: Write adcontroller level4 if applicable
+- ZON-2581: Track ad start events to webtrekk
 
 - ZON-2805: Load distinct brightcove player in amp pages
+
+- FIX: Write adcontroller level4 if applicable
 
 - MAINT: Make solr timeout configurable
 
