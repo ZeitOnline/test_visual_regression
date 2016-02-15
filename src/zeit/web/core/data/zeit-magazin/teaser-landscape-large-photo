@@ -47,7 +47,7 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-01-13T09:21:36.263169+00:00</attribute>
   </head>
   <body>
-    <supertitle>ZMO:</supertitle>
+    <supertitle>ZMO</supertitle>
     <title>landscape-large-photo-teaser</title>
     <subtitle>Das ist meine Test CP.</subtitle>
 
