@@ -86,6 +86,12 @@ def create_public_url(url):
         return url
 
 
+def join_queries(url, join_query):
+    scheme, netloc, path, params, query, fragment = (
+                urlparse.urlparse(url))
+    query = urllib.urlencode(urlparse.parse_qsl(query) + join_query)
+    return urlparse.urlunparse([scheme, netloc, path, params, query, fragment])
+
 class Base(zeit.web.core.view.Base):
 
     @property
@@ -308,21 +314,23 @@ class SpektrumFeed(Base):
         for content in filter_and_sort_entries(self.items)[1:100]:
             normalized_title = zeit.cms.interfaces.normalize_filename(
                 content.title)
-            tracking = urllib.urlencode({
-                'wt_zmc':
+            tracking = [
+                ('wt_zmc',
                 'koop.ext.zonaudev.spektrumde.feed.%s.bildtext.link.x' % (
-                    normalized_title),
-                'utm_medium': 'koop',
-                'utm_source': 'spektrumde_zonaudev_ext',
-                'utm_campaign': 'feed',
-                'utm_content': '%s_bildtext_link_x' % normalized_title,
-            })
+                    normalized_title)),
+                ('utm_medium', 'koop'),
+                ('utm_source', 'spektrumde_zonaudev_ext'),
+                ('utm_campaign', 'feed'),
+                ('utm_content', '%s_bildtext_link_x' % normalized_title),
+            ]
+
             content_url = zeit.web.core.template.create_url(
                 None, content, self.request)
             content_url = create_public_url(content_url)
+            link = join_queries(content_url, tracking)
             item = E.item(
                 E.title(content.title),
-                E.link('%s?%s' % (content_url, tracking)),
+                E.link(link),
                 E.description(content.teaserText),
                 E.pubDate(format_rfc822_date(
                     last_published_semantic(content))),

@@ -117,3 +117,15 @@ def test_roost_feed_contains_mobile_override_text(testserver):
             in feed)
     assert '<title>Article Image Asset Sptzmarke</title>' in feed
     assert '<content:encoded>Mobile-Text' in feed
+
+
+def test_queries_should_be_joined():
+    url = 'http://www.zeit.de/mypath?myquery=foo'
+    query = [('foo', 'baa'), ('batz', 'badumm')]
+    assert zeit.web.site.view_feed.join_queries(url, query) == (
+        'http://www.zeit.de/mypath?myquery=foo&foo=baa&batz=badumm')
+
+    url = 'http://www.zeit.de/mypath'
+    query = [('foo', 'baa'), ('batz', 'badumm')]
+    assert zeit.web.site.view_feed.join_queries(url, query) == (
+        'http://www.zeit.de/mypath?foo=baa&batz=badumm')

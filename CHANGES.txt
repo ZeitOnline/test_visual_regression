@@ -4,7 +4,7 @@ Change log for zeit.web
 2.56 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-282: Join query strings for feed URLs with tracking params.
 
 
 2.55 (2016-02-09)
