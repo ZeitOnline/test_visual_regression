@@ -15,16 +15,14 @@
     display: block
 
 %teaser__kicker
-    @extend %teaser-link--light
     color: $black
     display: block
     font-size: $font-s
     letter-spacing: $hair
     line-height: 1.25
-    margin-bottom: $micro
+    margin-bottom: remify(4px)
 
 %teaser__title
-    @extend %teaser-link--light
     color: $black
     display: block
     font-size: $font-ml
@@ -33,13 +31,12 @@
     margin: 0 0 $thin 0
 
 %teaser__subtitle
-    @extend %teaser-link--light
     color: $black
     font-size: $font-s
     line-height: 1.5
     margin: 0
 
-//standart teaser shadows
+// standart teaser shadows
 %teaser--dark
     +fake-box-shadow-inset($black, 0.8)
 
@@ -49,14 +46,6 @@
 %teaser--light
     +fake-box-shadow-inset($white)
 
-//standard teaser links
-%teaser-link--light
-    a
-        +link-colors($black, $black, $black, $black, $black)
-
-%teaser-link--dark
-    a
-        +link-colors($white, $white, $white, $white, $white)
 
 // standart teaser if nothing else applies
 // will hopefully be never shown

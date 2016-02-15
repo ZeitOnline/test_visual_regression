@@ -12,17 +12,15 @@
 
     &__text
         @extend %teaser__text
-        @extend %teaser-link--dark
         bottom: 0
-        padding: $tiny $petite $big $petite
+        padding: $tiny $petite $big
         position: absolute
-        width: 100%
 
     &__kicker
         @extend %teaser__kicker
-        margin-bottom: $tiny
         color: $white
-        letter-spacing: 0
+        letter-spacing: normal
+        margin-bottom: remify(6px)
 
     &__title
         @extend %teaser__title
