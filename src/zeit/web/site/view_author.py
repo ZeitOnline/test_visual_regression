@@ -82,8 +82,10 @@ class Author(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def author_img(self):
-        return zeit.web.core.template.closest_substitute_image(
-            self.context.image_group, 'zon-column')
+        # XXX This should use a different variant, see
+        # z.w.core.template.get_column_image for details.
+        return zeit.web.core.template.get_image(
+            content=self.context, variant_id='original', fallback=False)
 
     @zeit.web.reify
     def topic_links(self):
