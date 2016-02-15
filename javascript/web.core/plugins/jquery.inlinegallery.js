@@ -185,10 +185,10 @@
                     backButton.insertAfter( gallery ).on( 'click', function() { slider.goToPrevSlide(); } );
 
                     /* add icons to existing gallery buttons */
-                    $( '.bx-next' ).addClass( 'icon-pfeil-rechts' )
+                    $( '.bx-next' )
                         .wrapInner( '<span class="bx-icon-description"></span>' )
                         .prepend( nextButton.find( 'svg' ).clone() );
-                    $( '.bx-prev' ).addClass( 'icon-pfeil-links' )
+                    $( '.bx-prev' )
                         .wrapInner( '<span class="bx-icon-description"></span>' )
                         .prepend( backButton.find( 'svg' ).clone() );
 

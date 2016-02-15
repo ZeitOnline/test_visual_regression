@@ -9,12 +9,11 @@
             {%- endfor %}
         </div>
         <script type="text/template" class="inline-gallery-icon-templates">
-        {% set location = 'web.magazin' if provides(view.context, 'zeit.magazin.interfaces.IZMOContent') else 'web.site' %}
             <div class="bx-zone-prev">
-                <a class="bx-overlay-prev">{{ lama.use_svg_icon('arrow-gallery-left', 'bx-arrow-icon', view.request, location) }}</a>
+                <a class="bx-overlay-prev">{{ lama.use_svg_icon('arrow-gallery-left', 'bx-arrow-icon', view.request) }}</a>
             </div>
             <div class="bx-zone-next">
-                <a class="bx-overlay-next">{{ lama.use_svg_icon('arrow-gallery-right', 'bx-arrow-icon', view.request, location) }}</a>
+                <a class="bx-overlay-next">{{ lama.use_svg_icon('arrow-gallery-right', 'bx-arrow-icon', view.request) }}</a>
             </div>
         </script>
     </div>
