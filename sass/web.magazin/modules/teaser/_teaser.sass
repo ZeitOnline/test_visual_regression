@@ -4,16 +4,12 @@
     position: relative
     display: inline-block
     width: 100%
-    span
-        display: block
     margin-bottom: $small
     +respond-min($break-2)
         margin-bottom: $compact
 
 %teaser__media
-    overflow: hidden
-    margin-top: 0
-    margin-bottom: $small
+    margin: 0 0 remify(18px)
     img
         width: 100%
         height: 100%
@@ -23,42 +19,28 @@
 
 %teaser__kicker
     @extend %teaser-link--light
-    margin-bottom: $micro
-    line-height: 1.25
     color: $black
+    display: block
     font-size: $font-s
     letter-spacing: $hair
+    line-height: 1.25
+    margin-bottom: $micro
 
 %teaser__title
     @extend %teaser-link--light
-    font-family: $sans-serif-base-font
+    color: $black
+    display: block
+    font-size: $font-ml
     font-weight: bold
     line-height: 1.25
-    color: $black
-    font-size: $font-ml
     margin: 0 0 $thin 0
 
 %teaser__subtitle
     @extend %teaser-link--light
-    line-height: 1.5
     color: $black
     font-size: $font-s
-
-//comments
-// please stick to pixel values here, as there is an issue
-// with ems in Android
-%teaser__comments
-    font-size: $little
-    color: $white
-    position: absolute
-    text-align: center
-    padding-right: $micro--px
-    padding-top: $tiny--px
-    height: $cp_comment__count-height
-    width: $cp_comment__count-width
-    right: $little--px
-    top: $small--px
-    z-index: 2
+    line-height: 1.5
+    margin: 0
 
 //standart teaser shadows
 %teaser--dark
@@ -97,5 +79,3 @@
         @extend %teaser__title
     &__subtitle
         @extend %teaser__subtitle
-    &__comments
-        @extend %teaser__comments

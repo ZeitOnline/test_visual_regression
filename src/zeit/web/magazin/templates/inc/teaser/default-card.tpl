@@ -8,9 +8,8 @@
 
 <article class="{% block layout %}teaser-card{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
-         {% block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
          data-clicktracking="{{ area.kind }}"
-         {% block teaser_attributes %}{% endblock %}>
+         {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
     <div class="card__wrap">
         <div class="card__deck">
             {# front of card #}
@@ -30,7 +29,7 @@
                 </h2>
 
                 {% block author %}{% endblock %}
-                
+
                 {% block button %}<a href="{{ teaser | create_url }}" class="card__button">Lesen</a>{% endblock %}
             </div>
             {# back of card #}

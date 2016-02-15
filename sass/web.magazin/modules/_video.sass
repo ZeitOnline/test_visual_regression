@@ -15,7 +15,7 @@
 	position: relative
 
 .video__button
-	display: inline-block
+	display: none // show if video available – handled by js
 	width: 100px
 	height: 100px
 	position: absolute
@@ -25,6 +25,14 @@
 	bottom: 0 
 	right: 0
 	cursor: pointer
+
+.video__play-icon
+	width: 100px
+	height: 100px
+	color: $white
+	background: rgba(0,0,0,0.2)
+	border: em(5px) solid $white
+	border-radius: 50%
 
 .BrightcoveExperience
 	position: absolute

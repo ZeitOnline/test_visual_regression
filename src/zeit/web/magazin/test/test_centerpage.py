@@ -1,20 +1,13 @@
 # -*- coding: utf-8 -*-
 import re
 
-from zope.component import getMultiAdapter
 import mock
-import pyramid.threadlocal
-import pytest
 import zope.component
 
-from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
 import zeit.content.gallery.gallery
 import zeit.cms.syndication.feed
 
-from zeit.web.core.template import default_image_url
-from zeit.web.core.template import get_teaser_image
-from zeit.web.core.template import get_teaser_template
 import zeit.web.core.centerpage
 import zeit.web.magazin.view_centerpage
 
@@ -128,7 +121,7 @@ def test_teaser_upright_has_correct_markup(testbrowser):
 
     text_wrap = element[0].cssselect('.teaser-upright__text')
     link_wrap = element[0].cssselect('a')
-    icon = element[0].cssselect('.icon-galerie-icon-white')
+    icon = element[0].cssselect('.teaser-upright__gallery-icon')
     img = element[0].cssselect('img')[0]
     assert len(text_wrap) != 0
     assert len(link_wrap) == 2
@@ -377,8 +370,7 @@ def test_trio_area_has_title(testbrowser):
     assert 'Dinge Wohnen' in title.text
 
 
-def test_teaser_should_have_comment_count(
-        mockserver_factory, testserver, testbrowser):
+def test_teaser_should_have_comment_count(testbrowser, mockserver_factory):
 
     cp_counts = """<?xml version="1.0" encoding="UTF-8"?>
     <nodes>
@@ -387,9 +379,8 @@ def test_teaser_should_have_comment_count(
     </nodes>
     """
     mockserver_factory(cp_counts)
-    browser = testbrowser(
-        '%s/zeit-magazin/index' % testserver.url)
-    counts = browser.cssselect('.icon-comments-count')
+    browser = testbrowser('/zeit-magazin/index')
+    counts = browser.cssselect('.cp_comment__count')
     assert int(counts[0].text) == 129
 
 

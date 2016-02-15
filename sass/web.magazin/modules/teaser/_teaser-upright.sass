@@ -31,17 +31,18 @@
 
     &__title
         @extend %teaser__title
+        +font-smoothing
         color: $white
         margin: 0
         text-shadow: rgba(255, 255, 255, .01) 0 -1px 1px
-        -webkit-font-smoothing: antialiased
 
     &__subtitle
         @extend %teaser__subtitle
 
-    &__comments
-        @extend %teaser__comments
-
-.icon-galerie-icon-white
-    position: absolute
-    top: -$medium
+    &__gallery-icon
+        color: rgba(0, 0, 0, 0.2)
+        height: remify(29px)
+        margin-bottom: remify(8px)
+        stroke-width: 2px
+        stroke: $white
+        width: remify(40px)

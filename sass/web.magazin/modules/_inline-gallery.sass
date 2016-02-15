@@ -43,6 +43,7 @@ html.js
             padding: 0 0 1em
 .bx-wrapper--no-touch
     .bx-controls
+        +pie-clearfix
         padding: $page-padding
         display: none
         +respond-min($break-1)
@@ -51,15 +52,7 @@ html.js
     +respond-min($break-1)
         .figure__index
             display: none
-.bx-viewport
-    position: relative
 
-// controls
-.bx-controls
-    text-align: right
-    padding: $page-padding $page-padding em(12px)
-    +respond-min($break-1)
-        padding: 0 0 em(14px)
 .bx-controls-direction
     float: right
 .bx-wrapper--touch .bx-pager
@@ -67,15 +60,12 @@ html.js
     line-height: 1.5
     text-align: center
 .bx-wrapper--no-touch .bx-pager
-    +inline-block
-    color: $grey--mid
+    float: right
     font-family: $font-tabletgothic
     font-size: 0.9em
     height: remify($gallery-button-radius)
     line-height: remify($gallery-button-radius)
-    width: 6em
-    text-align: right
-    padding-right: $fine
+    padding-right: .5em
 .bx-pager-item
     +inline-block
     font-size: 0
@@ -94,45 +84,64 @@ html.js
     &.active,
     &:focus
         +opacity(0.7)
+
 .bx-prev,
 .bx-next
     +inline-block
-    +background-size(20%)
     width: $gallery-button-radius
     height: $gallery-button-radius
-    text-indent: -5000em
-    text-align: left
     margin-left: 10px
     border-radius: 50%
     background-color: #000
-    background-position: 50% 50%
-    color: #fff
+    color: $white
     border: none
+    padding: remify(10px)
     +opacity(0.3)
+    &:hover,
+    &:active,
+    &:focus
+        color: $white
     &:hover
         +opacity(0.7)
     &:focus
         outline: 0
     &.disabled
         +opacity(0.1)
+    .bx-arrow-icon
+        height: remify(15px)
+        width: remify(15px)
+
+.bx-arrow-icon
+    display: block
+
 .bx-overlay-prev,
 .bx-overlay-next
     @extend .bx-next
     margin: 0
     position: absolute
     top: em(10px)
+    padding: remify(20px)
     +respond-min($break-1)
         top: 50%
         margin-top: -$gallery-button-radius
         width: $gallery-button-radius * 2
         height: $gallery-button-radius * 2
         +opacity(0)
+    .bx-arrow-icon
+        height: remify(30px)
+        width: remify(30px)
+
 .bx-overlay-prev
     left: em(10px)
 .bx-overlay-next
     right: em(10px)
 
+.bx-icon-description
+    +hide-text
+    position: absolute
+
 .bx-viewport
+    position: relative
     +on-interaction
         .bx-overlay-prev,
         .bx-overlay-next
@@ -146,7 +155,6 @@ html.js
     z-index: 9999
     cursor: pointer
     display: none
-    // background-color: rgba(255,0,0,.1)
     +respond-min($break-1)
         width: 50%
         height: 90%

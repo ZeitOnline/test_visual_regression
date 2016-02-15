@@ -11,16 +11,16 @@ Default teaser template to inherit from.
 
 <article class="{% block layout %}teaser{% endblock %} {% block layout_shade %}{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
-         {% block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
          data-clicktracking="{{ area.kind }}"
-         {% block teaser_attributes %}{% endblock %}>
+         {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
 
     {% block comments %}
-        {% if view.comment_counts[teaser.uniqueId] %}
-        <a href="{{ teaser | create_url }}#show_comments">
-            <span class="{{ self.layout() }}__comments icon-comments-count">{{ view.comment_counts[teaser.uniqueId] }}</span>
+        {% if view.comment_counts[teaser.uniqueId] -%}
+        <a href="{{ teaser | create_url }}#show_comments" class="cp_comment__counter">
+            {{- lama.use_svg_icon('comments-count', 'cp_comment__icon', request) -}}
+            <span class="cp_comment__count">{{ view.comment_counts[teaser.uniqueId] }}</span>
         </a>
-        {% endif %}
+        {%- endif %}
     {% endblock %}
 
     {% if video -%}
@@ -42,19 +42,19 @@ Default teaser template to inherit from.
         {% block icon %}{% endblock %}
         <h2>
             {% block teaser_kicker %}
-                <div class="{{ self.layout() }}__kicker">
-                    {{ teaser.teaserSupertitle or teaser.supertitle }}
-                </div>
+            <span class="{{ self.layout() }}__kicker">
+                {{- teaser.teaserSupertitle or teaser.supertitle -}}
+            </span>
             {% endblock %}
-            <div class="{{ self.layout() }}__title">
-                {{ teaser.teaserTitle or teaser.title }}
-            </div>
+            <span class="{{ self.layout() }}__title">
+                {{- teaser.teaserTitle or teaser.title -}}
+            </span>
         </h2>
         {% block teaser_text %}
-            <span class="{{ self.layout() }}__subtitle">
-                {{ teaser.teaserText }}
-            </span>
+        <p class="{{ self.layout() }}__subtitle">
+            {{- teaser.teaserText -}}
+        </p>
         {% endblock %}
-        </a>
+    </a>
 
 </article>

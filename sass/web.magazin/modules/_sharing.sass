@@ -50,18 +50,20 @@
     &:hover
         opacity: 0.5
 
-.article__sharing__icon
+.article__sharing-icon
     +inline-block
     margin-right: $micro
     width: 14px
-    height: 10px
-    &.icon-sharebox-close
-        +background-size(contain)
-        background-position: center center
-
-.article__sharing__services__icon
-    +inline-block
-    margin-right: $tiny
-    width: 14px
     height: 14px
-    background-position: center center
+    vertical-align: middle
+    &--open-close
+        height: 10px
+        margin-right: $micro
+        vertical-align: initial
+    &--close
+        display: none // initially hide the close icon – handled by js
+    &--comment-close
+        display: none
+        margin: 0 auto
+        .show-comments &
+            display: block
