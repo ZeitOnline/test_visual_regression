@@ -53,36 +53,6 @@
     </div>
 {%- endmacro %}
 
-{% macro teaser_text_block(teaser, block='leader', shade='none', supertitle=true, subtitle=true, icon=false) -%}
-    <header class="cp_{{block}}__title__wrap cp_{{block}}__title__wrap--{{ shade }}">
-        <a href="{{teaser | create_url}}">
-            {% if icon == 'true' and (teaser | block_type) == 'gallery'
-               and teaser.type != 'zmo-product' -%}
-                {{ lama.use_svg_icon('gallery', 'gallery-icon', request) }}
-            {%- endif %}
-            <h2>
-                {% if supertitle != 'false' %}
-                    <div class="cp_{{block}}__supertitle">
-                        {% if teaser.teaserSupertitle %}
-                            {{ teaser.teaserSupertitle }}
-                        {% elif teaser.supertitle %}
-                            {{ teaser.supertitle }}
-                        {% endif %}
-                    </div>
-                {% endif %}
-                <div class="cp_{{block}}__title">
-                    {{ teaser.teaserTitle }}
-                </div>
-            </h2>
-            {% if subtitle != 'false' %}
-                <span class="cp_{{block}}__subtitle">
-                    {{ teaser.teaserText }}
-                </span>
-            {% endif %}
-        </a>
-    </header>
-{%- endmacro %}
-
 {% macro teaser_sharing_card(teaser) -%}
     <div class="card__slider">
         <div class="card__slide js-slide-card">

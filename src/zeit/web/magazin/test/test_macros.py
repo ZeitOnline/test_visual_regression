@@ -7,8 +7,6 @@ import pyramid.config
 import lxml
 import lxml.html
 
-import zeit.content.article.article
-
 
 def test_macro_p_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
@@ -568,70 +566,6 @@ def test_macro_insert_responsive_image_should_produce_linked_image(
         output += line.strip()
 
     assert '<a href="http://www.test.de">' in output
-
-
-def test_macro_teaser_text_block_should_produce_markup(jinja2_env):
-    # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    teaser = zeit.content.article.article.Article()
-    teaser.teaserSupertitle = "SUPATITLE"
-    teaser.teaserTitle = "TITLE"
-    teaser.teaserText = "TEXT"
-    teaser.uniqueId = "ID"
-
-    lines = tpl.module.teaser_text_block(teaser).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert ('<header class="cp_leader__title__wrap '
-            'cp_leader__title__wrap--none">') in output
-    assert '<a href="ID"><h2>' in output
-    assert '<div class="cp_leader__supertitle">SUPATITLE</div>' in output
-    assert '<div class="cp_leader__title">TITLE</div>' in output
-    assert '<span class="cp_leader__subtitle">TEXT</span>' in output
-
-
-def test_macro_teaser_text_block_should_fallback_to_supertitle(jinja2_env):
-    # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    teaser = mock.Mock()
-    teaser.teaserSupertitle = None
-    teaser.supertitle = "FALLBACK"
-
-    teaser.teaserTitle = "TITLE"
-    teaser.uniqueId = "ID"
-
-    lines = tpl.module.teaser_text_block(teaser).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert 'FALLBACK' in output
-
-
-def test_macro_teaser_text_block_should_produce_alternative_markup(
-        jinja2_env):
-    # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    teaser = mock.Mock()
-    teaser.teaserTitle = "TITLE"
-    teaser.uniqueId = "ID"
-
-    lines = tpl.module.teaser_text_block(
-        teaser, 'button', 'dark', 'false', 'false', 'true').splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert ('<header class="cp_button__title__wrap '
-            'cp_button__title__wrap--dark">') in output
-    assert '<div class="cp_button__supertitle' not in output
-    assert '<div class="cp_button__title">TITLE</div>' in output
-    assert '<div class="cp_button__subtitle' not in output
 
 
 def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
