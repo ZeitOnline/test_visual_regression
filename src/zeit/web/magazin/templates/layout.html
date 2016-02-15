@@ -160,9 +160,7 @@
                                 </div>
                                 <div>
                                     <ul>
-                                        {% if view.type == 'centerpage' %}
                                         <li><a class="js-image-copyright-footer" href="#bildrechte">Bildrechte</a></li>
-                                        {% endif %}
                                         <li><a href="{{ request.route_url('home') }}hilfe/datenschutz">Datenschutz</a></li>
                                         <li><a href="http://www.iqm.de/digital/nutzungsbasierte-onlinewerbung/">Cookies</a></li>
                                         <li><a href="{{ request.route_url('home') }}administratives/agb-kommentare-artikel">AGB</a></li>
@@ -172,25 +170,23 @@
                                 </div>
                             </div>
                         </div>
-                        {% if view.type == 'centerpage' %}
-                            <script type="text/template" id="image-copyright-template">
-                                <div class="image-copyright-footer" id="bildrechte">
-                                    <div class="image-copyright-footer__container">
-                                        <button class="image-copyright-footer__button js-image-copyright-footer-close" title="schließen">
-                                            {{ lama.use_svg_icon('close', 'image-copyright-footer__icon', request, inline=view.inline_svg_icons) }}
-                                        </button>
-                                        <h2 class="image-copyright-footer__headline">
-                                            Bildrechte auf dieser Seite
-                                        </h2>
-                                        <ul class="image-copyright-footer__items" id="image-copyright-items">
-                                        </ul>
-                                        <button class="image-copyright-footer__button js-image-copyright-footer-close">
-                                            Bereich schließen
-                                        </button>
-                                    </div>
+                        <script type="text/template" id="image-copyright-template">
+                            <div class="image-copyright-footer" id="bildrechte">
+                                <div class="image-copyright-footer__container">
+                                    <button class="image-copyright-footer__button js-image-copyright-footer-close" title="schließen">
+                                        {{ lama.use_svg_icon('close', 'image-copyright-footer__icon', request, inline=view.inline_svg_icons) }}
+                                    </button>
+                                    <h2 class="image-copyright-footer__headline">
+                                        Bildrechte auf dieser Seite
+                                    </h2>
+                                    <ul class="image-copyright-footer__items" id="image-copyright-items">
+                                    </ul>
+                                    <button class="image-copyright-footer__button js-image-copyright-footer-close">
+                                        Bereich schließen
+                                    </button>
                                 </div>
-                            </script>
-                        {% endif %}
+                            </div>
+                        </script>
                     </footer>
                 {% endblock footer %}
                 {% endprofile %}
