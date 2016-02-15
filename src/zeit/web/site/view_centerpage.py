@@ -218,12 +218,11 @@ class Centerpage(
 
     @zeit.web.reify
     def area_ranking(self):
-        try:
-            return zeit.web.site.area.ranking.Ranking(
-                zeit.web.core.utils.find_block(
-                    self.context, attrib='area', kind='ranking'))
-        except AttributeError:
-            return None
+        for region in self.regions:
+            for area in region.values():
+                if zeit.web.core.interfaces.IPagination.providedBy(area):
+                    return area
+        return None
 
     @zeit.web.reify
     def next_page_url(self):
@@ -270,16 +269,32 @@ class CenterpagePage(Centerpage):
         regions = [LegacyRegion([zeit.web.core.centerpage.IRendered(
             self.area_ranking)])]
 
-        # Try to preserve centerpage header modules.
-        # XXX This could be a lot sleeker if done in config.
-        find = zeit.web.core.utils.find_block
-        header = find(values[0], module='headerimage') or find(
-            values[0], module='centerpage-header') or find(
-                values[0], module='search-form')
-        if header:
-            regions.insert(0, LegacyRegion([LegacyArea([header])]))
+        # We keep any areas of the first region that contain at least one kind
+        # of preserve-worthy module.
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        preserved_areas = []
+        for mod in conf.get('cp_preserve_modules_on_pagination', '').split():
+            module = zeit.web.core.utils.find_block(values[0], module=mod)
+            if module:
+                area = module.__parent__
+                if area not in preserved_areas:
+                    preserved_areas.append(
+                        zeit.web.core.centerpage.IRendered(area))
+
+        if preserved_areas:
+            regions.insert(0, LegacyRegion(preserved_areas))
 
         return regions
+
+    @zeit.web.reify
+    def area_ranking(self):
+        # Prevent infloop with our tweaked self.regions
+        # XXX Is there a better factoring than copy&paste?
+        for region in super(CenterpagePage, self).regions:
+            for area in region.values():
+                if zeit.web.core.interfaces.IPagination.providedBy(area):
+                    return area
+        return None
 
 
 @pyramid.view.view_config(

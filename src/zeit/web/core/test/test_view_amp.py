@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import pytest
 
 
 def test_amp_contains_required_microdata(testbrowser, testserver):
@@ -8,15 +7,15 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
     logo = publisher.cssselect('[itemprop="logo"]')[0]
 
     article = browser.cssselect('article[itemprop="mainEntity"]')[0]
-    mainEntityOfPage = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
+    main_entity_of_page = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
     headline = article.cssselect('[itemprop="headline"]')[0]
     description = article.cssselect('[itemprop="description"]')[0]
-    datePublished = article.cssselect('[itemprop="datePublished"]')[0]
-    dateModified = article.cssselect('[itemprop="dateModified"]')[0]
+    date_published = article.cssselect('[itemprop="datePublished"]')[0]
+    date_modified = article.cssselect('[itemprop="dateModified"]')[0]
     author = article.cssselect('[itemprop="author"]')[0]
 
     image = article.cssselect('[itemprop="image"]')[0]
-    copyrightHolder = image.cssselect('[itemprop="copyrightHolder"]')[0]
+    copyright_holder = image.cssselect('[itemprop="copyrightHolder"]')[0]
 
     # check Organization
     assert publisher.get('itemtype') == 'http://schema.org/Organization'
@@ -33,7 +32,7 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
 
     # check Article
     assert article.get('itemtype') == 'http://schema.org/Article'
-    assert mainEntityOfPage.get('href') == (
+    assert main_entity_of_page.get('href') == (
         testserver.url + '/zeit-online/article/amp')
     text = headline.text_content().strip()
     assert text.startswith(u'Flüchtlinge: ')
@@ -48,12 +47,12 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
     assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
     assert image.cssselect('[itemprop="height"]')[0].get('content') == '461'
     assert len(image.cssselect('[itemprop="caption"]')) == 1
-    assert copyrightHolder.get('itemtype') == 'http://schema.org/Person'
-    person = copyrightHolder.cssselect('[itemprop="name"]')[0]
+    assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
+    person = copyright_holder.cssselect('[itemprop="name"]')[0]
     assert person.text == u'© Warner Bros.'
 
-    assert datePublished.get('datetime') == '2016-01-22T11:55:46+01:00'
-    assert dateModified.get('datetime') == '2016-01-22T11:55:46+01:00'
+    assert date_published.get('datetime') == '2016-01-22T11:55:46+01:00'
+    assert date_modified.get('datetime') == '2016-01-22T11:55:46+01:00'
 
     assert author.get('itemtype') == 'http://schema.org/Person'
     assert author.cssselect('[itemprop="name"]')[0].text == 'Jochen Wegner'
@@ -65,21 +64,21 @@ def test_amp_nextread_contains_required_microdata(testbrowser, testserver):
     browser = testbrowser('/amp/zeit-online/article/simple-nextread')
 
     article = browser.cssselect('article.nextread')[0]
-    mainEntityOfPage = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
+    main_entity_of_page = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
     headline = article.cssselect('[itemprop="headline"]')[0]
-    datePublished = article.cssselect('[itemprop="datePublished"]')[0]
-    dateModified = article.cssselect('[itemprop="dateModified"]')[0]
+    date_published = article.cssselect('[itemprop="datePublished"]')[0]
+    date_modified = article.cssselect('[itemprop="dateModified"]')[0]
     author = article.cssselect('[itemprop="author"]')[0]
     image = article.cssselect('[itemprop="image"]')[0]
 
     # check Article
     assert article.get('itemtype') == 'http://schema.org/Article'
-    assert mainEntityOfPage.get('href') == (
+    assert main_entity_of_page.get('href') == (
         testserver.url + '/zeit-online/article/zeit')
     assert headline.text_content().strip() == (
         'Crystal Meth: Nancy braucht was Schnelles')
-    assert datePublished.get('datetime') == '2015-02-12T04:32:17+01:00'
-    assert dateModified.get('datetime') == '2015-02-15T18:18:50+01:00'
+    assert date_published.get('datetime') == '2015-02-12T04:32:17+01:00'
+    assert date_modified.get('datetime') == '2015-02-15T18:18:50+01:00'
     assert author.get('itemtype') == 'http://schema.org/Person'
     assert author.cssselect('[itemprop="name"]')[0].text == 'Dorit Kowitz'
     assert author.cssselect('[itemprop="url"]')[0].get('href') == (

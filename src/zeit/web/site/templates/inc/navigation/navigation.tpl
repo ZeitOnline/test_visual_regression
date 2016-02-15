@@ -1,14 +1,17 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 <div class="main_nav">
 	<!-- logo -->
-	<div itemscope itemtype="http://schema.org/Organization" class="logo_bar">
+	<div id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization" class="logo_bar">
 		{% with tag_name = 'h1' if view.is_hp else 'div' %}
 		<{{ tag_name }} class="logo_bar__brand" itemprop="brand">
-			<a itemprop="url" role="img" href="{{ request.route_url('home') }}index" title="Nachrichten auf ZEIT ONLINE" data-id="topnav.2.1..logo">
-				{# Metatag to show Google the image, see http://stackoverflow.com/questions/18130827/schema-org-give-a-div-a-itemprop-image -#}
-				<meta itemprop="logo" content="{{ request.asset_host }}/icons/site/zon-logo-desktop.png">
+			<a itemprop="url" href="{{ request.route_url('home') }}index" title="Nachrichten auf ZEIT ONLINE" data-id="topnav.2.1..logo">
 				<meta itemprop="name" content="ZEIT ONLINE">
-                {{ lama.use_svg_icon('logo-zon-black', 'logo_bar__brand-logo', view.request, inline=view.inline_svg_icons) }}
+				<span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+					{{ lama.use_svg_icon('logo-zon-black', 'logo_bar__brand-logo', view.request, inline=view.inline_svg_icons) }}
+					<meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
+					<meta itemprop="width" content="565">
+					<meta itemprop="height" content="60">
+				</span>
 			</a>
 		</{{ tag_name }}>
 		{% endwith %}

@@ -66,16 +66,16 @@
 		{% block main %}
 			{% block content %}
 			<article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
-				<link rel="bookmark" itemprop="mainEntityOfPage" href="{{ view.content_url }}">
+				<link itemprop="mainEntityOfPage" href="{{ view.content_url }}">
 				<header class="article__header article__item">
 					<h1 class="headline" itemprop="headline">
 						<span class="headline__kicker">
-							{%- if view and view.context and view.context.serie and view.context.serie.column %}
+							{%- if view.context is column -%}
 								{{- '%s / ' | format(view.serie) -}}
 							{%- endif -%}
 							{{- view.supertitle -}}
 						</span>
-						{%- if view.title %}<span class="visually-hidden">: </span>{% endif %}
+						{%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
 						<span class="headline__title">
 							{{- view.title -}}
 						</span>
@@ -83,11 +83,15 @@
 					<div class="summary" itemprop="description">
 						{{ view.subtitle }}
 					</div>
-					{%- set byline = view.context | get_byline('main') %}
+					{% set byline = view.context | get_byline('main') -%}
 					{% if byline | length -%}
 					<div class="byline">
 						{% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
 					</div>
+					{% else -%}
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+						<meta itemprop="name" content="{% if view.context.product %}{{ view.context.product.title }}{% else %}ZEIT ONLINE{% endif %}">
+					</span>
 					{% endif -%}
 					<div class="metadata">
 						{% include "zeit.web.core:templates/amp/article/metadata.tpl" %}

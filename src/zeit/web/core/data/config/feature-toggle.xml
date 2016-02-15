@@ -4,6 +4,7 @@
   <article_lineage>true</article_lineage>
   <iqd>true</iqd>
   <third_party_modules>false</third_party_modules>
+  <campus_launch>true</campus_launch>
   <tracking>true</tracking>
   <dummy>false</dummy>
 </features>
