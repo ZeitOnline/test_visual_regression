@@ -152,3 +152,9 @@ def test_amp_article_shows_tags_correctly(testbrowser):
     assert ' '.join(keywords.text_content().strip().split()) == (
         u'Flüchtling, Weltwirtschaftsforum Davos, '
         u'Arbeitsmarkt, Migration, Europäische Union')
+
+
+def test_amp_article_shows_ads_correctly(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    ads = browser.cssselect('.advertising')
+    assert len(ads) == 3
