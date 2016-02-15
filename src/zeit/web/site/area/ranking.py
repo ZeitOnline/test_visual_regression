@@ -248,5 +248,5 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
 
 @zeit.web.register_area('author-list')
-class AutorList(Ranking):
+class AuthorList(Ranking):
     pass
