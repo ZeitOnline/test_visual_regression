@@ -317,7 +317,7 @@ def test_centerpage_view_should_have_topic_links(testserver):
                            ('Label 3', 'http://link_3')]
 
 
-def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
+def test_cp_areas_should_be_rendered_correctly(testbrowser):
     browser = testbrowser('/zeit-online/index')
 
     fullwidth = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
@@ -329,12 +329,22 @@ def test_cp_areas_should_be_rendered_correctly(testserver, testbrowser):
     assert len(informatives) == 1
 
 
-def test_column_teaser_should_render_series_element(testserver, testbrowser):
+def test_column_teaser_should_render_series_element(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats')
 
     col_element = browser.cssselect(
         '.teaser-fullwidth-column__series-label')[0]
     assert col_element.text == u'Fünf vor acht'
+
+
+def test_teaser_for_column_should_render_original_image_variant(
+        testbrowser, testserver):
+    browser = testbrowser('/zeit-online/journalistic-formats')
+
+    teaser_img = browser.cssselect(
+        '.teaser-small-column__media-item')[0]
+    assert teaser_img.attrib['src'] == testserver.url + (
+        '/zeit-online/cp-content/ig-3/original')
 
 
 def test_series_teaser_should_render_series_element(testserver, testbrowser):

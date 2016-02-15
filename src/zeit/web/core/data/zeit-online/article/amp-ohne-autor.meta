@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/wirtschaft/2016-01/fluechtlinge-davos-europa-wirtschaft-nutzen</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Wie Fl&#xFC;chtlinge aufh&#xF6;ren, Fl&#xFC;chtlinge zu sein. @jochen &#xFC;ber den Geist von #davos (cb)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt; &lt;list&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;unicode&gt;"In der Minute, in der sie ihren ersten Job haben, h&#xF6;ren Fl&#xFC;chtlinge auf, Fl&#xFC;chtlinge zu sein." (cb)&lt;/unicode&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitmagazin&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;none/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;unicode&gt;zeitonline_wir&lt;/unicode&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="channels"&gt; &lt;string&gt;parse-channel-news&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;unicode&gt;Fl&#xFC;chtlinge: Mehr Davos, weniger Kreuth&lt;/unicode&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;parse&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/list&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-01-22T12:14:49.209756+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wirtschaft</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-01-22T12:14:49.748565+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/wirtschaft/2016-01/dbf5b59e-5370-4c02-ad98-8565984711bf.tmp</attribute>
+  <rankedTags>
+    <tag uuid="d7c98935-f4bf-43b5-bf38-5307a4d3ed4e" url_value="fluechtling" type="free">Fl&#xFC;chtling</tag>
+    <tag uuid="611fd80a-8a38-43b8-b280-b8d982d2de7f" url_value="weltwirtschaftsforum-davos" type="Organization">Weltwirtschaftsforum Davos</tag>
+    <tag uuid="de762a10-49a9-4b42-af13-8c29bea570f4" url_value="arbeitsmarkt" type="free">Arbeitsmarkt</tag>
+    <tag uuid="312de135-2e1f-452e-9f87-4c0a36842878" url_value="migration" type="free">Migration</tag>
+    <tag uuid="f7f8e748-cc2e-40b0-b065-267e6113e8a2" url_value="europaeische-union" type="Organization">Europ&#xE4;ische Union</tag>
+  </rankedTags>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">83345c37eb704e86960f8abd1719463f</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-01-22T12:14:48.450437+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-01-22T09:42:04.601603+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Wirtschaft</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_error"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-01-22T10:55:46.556878+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">7583</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="pinned">d7c98935-f4bf-43b5-bf38-5307a4d3ed4e 611fd80a-8a38-43b8-b280-b8d982d2de7f de762a10-49a9-4b42-af13-8c29bea570f4 312de135-2e1f-452e-9f87-4c0a36842878 f7f8e748-cc2e-40b0-b065-267e6113e8a2</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">cc579bba8cda41c98c8f9f6cf95d819b</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.brandenburger</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:def048c9-2d75-4a20-89eb-9c746f1a530c}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-01-22T12:14:53.350418+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">4</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-01-22T10:55:45.564569+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2016-01-22T12:14:49Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">18684</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Fri, 22 Jan 2016 12:14:49 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"ed4f08-48fc-529eb2a73e129"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>

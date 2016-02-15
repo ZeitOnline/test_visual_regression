@@ -4,6 +4,18 @@ Change log for zeit.web
 2.56 (unreleased)
 -----------------
 
+- ZON-2806: Add product.title as author fallback to AMPages
+
+- ZON-2581: Track ad start events to webtrekk
+
+- ZON-2805: Load distinct brightcove player in AMPages
+
+- FIX: Write adcontroller level4 if applicable
+
+- MAINT: Make solr timeout configurable
+
+- MAINT: Migrate column teaser to new image delivery stack
+
 - BUG-282: Join query strings for feed URLs with tracking params.
 
 

@@ -491,3 +491,11 @@ def scrape_response_nonascii(self, headers, response):
     return original_scrape_response(self, headers, response)
 original_scrape_response = pysolr.Solr._scrape_response
 pysolr.Solr._scrape_response = scrape_response_nonascii
+
+
+# Make solr timeout runtime configurable
+def solr_timeout_from_settings(self):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return conf.get('solr_timeout', 5)
+pysolr.Solr.timeout = property(
+    solr_timeout_from_settings, lambda self, value: None)
