@@ -1,5 +1,6 @@
 <configure xmlns="http://namespaces.zope.org/zope">
   <include package="zeit.web.core" />
+  <include package="zeit.web.campus" />
   <include package="zeit.web.magazin" />
   <include package="zeit.web.site" />
 </configure>

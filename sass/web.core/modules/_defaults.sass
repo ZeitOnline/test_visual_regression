@@ -1,0 +1,40 @@
+*
+	+box-sizing(border-box)
+
+body
+	background-color: $color-body-bg
+	color: $color-body-text
+	font-family: $base-font-family
+	font-size: em($base-font-size, 16px) // define "our" base font-size ind context of standard browser default
+	line-height: $base-line-height
+	margin: 0
+	padding: 0
+
+figure
+	margin: 0
+	img
+		display: block
+
+.figcaption--hidden
+	display: none
+
+a
+	color: $color-link--default
+	text-decoration: none
+	+on-interaction
+		color: $color-link--hover
+
+// only target svg sprites to not destroy interactive/dataviz graphics
+svg use
+	fill: currentColor
+	// see: http://bugs.jquery.com/ticket/11352
+	pointer-events: none
+
+// 'fill: currentColor' does not work on <use> element in IE 9-10
+.svg-symbol
+	fill: currentColor
+
+// used for svg4everybody fallback images
+svg img
+	max-height: 100%
+	max-width: 100%

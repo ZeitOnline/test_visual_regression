@@ -54,6 +54,7 @@ setup(
         'zc.sourcefactory',
         'zeit.brightcove',
         'zeit.cms>=2.63.0.dev0',
+        'zeit.campus',
         'zeit.connector',
         'zeit.content.advertisement',
         'zeit.content.article>=3.11.0.dev0',
