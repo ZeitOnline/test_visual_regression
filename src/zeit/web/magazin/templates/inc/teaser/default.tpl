@@ -11,15 +11,14 @@ Default teaser template to inherit from.
 
 <article class="{% block layout %}teaser{% endblock %} {% block layout_shade %}{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
-         {% block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
          data-clicktracking="{{ area.kind }}"
-         {% block teaser_attributes %}{% endblock %}>
+         {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
 
     {% block comments %}
-        {% if view.comment_counts[teaser.uniqueId] or true -%}
+        {% if view.comment_counts[teaser.uniqueId] -%}
         <a href="{{ teaser | create_url }}#show_comments" class="cp_comment__counter">
             {{- lama.use_svg_icon('comments-count', 'cp_comment__count-icon', request) -}}
-            <span class="cp_comment__count">3{{ view.comment_counts[teaser.uniqueId] }}</span>
+            <span class="cp_comment__count">{{ view.comment_counts[teaser.uniqueId] }}</span>
         </a>
         {%- endif %}
     {% endblock %}
