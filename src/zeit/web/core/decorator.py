@@ -30,13 +30,9 @@ def safeguard(*args, **kw):
 
     :internal:
     """
-    from zeit.web.core.jinja import Interrupt  # Prevent circularities
-
     try:
         return globals()['func'](*args, **kw)
-    except Interrupt:
-        raise
-    except BaseException:
+    except Exception:
         logger(*sys.exc_info())
         return globals()['undefined']()
 
