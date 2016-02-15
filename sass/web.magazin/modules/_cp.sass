@@ -30,29 +30,27 @@ $gallery-icon-width: em(40px)
 		margin: 0
 
 //comments
-// please stick to pixel values here, as there is an issue
-// with ems in Android
 .cp_comment__counter
-	font-size: $little
-	color: $white
-	position: absolute
-	text-align: center
+	font-size: em(14px)
 	height: $cp_comment__count-height
+	position: absolute
+	right: remify(14px)
+	text-align: center
+	top: remify(18px)
 	width: $cp_comment__count-width
-	right: $little--px
-	top: $small--px
 	z-index: 2
 
 .cp_comment__count
+	color: $white
 	position: relative
-	top: -40px
+	top: -($cp_comment__count-height)
 
 .cp_comment__count-icon
-	stroke: $white
 	color: rgba(0,0,0,0.2)
-	stroke-width: em(2px)
-	width: $cp_comment__count-width
 	height: $cp_comment__count-height
+	stroke-width: 2px
+	stroke: $white
+	width: $cp_comment__count-width
 
 .gallery-icon
 	stroke: $white
