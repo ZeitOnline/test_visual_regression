@@ -13,94 +13,11 @@ import zeit.web.core.interfaces
 import zeit.web.core.centerpage
 
 
-@pytest.fixture
-def cp_factory(application, dummy_request):
-    """A factory function to create dummy cp views with an `area` property
-    that can be configured by providing an `area_getter` function. The `area`
-    is decorated with zeit.web.register_copyrights.
-    """
-    def register_copyrights(func):
-        def decorator(self):
-            return self.register_copyrights(func(self))
-        return decorator
-
-    def wrapped(area_getter):
-        cp = zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo')
-        view_class = type('View', (
-            zeit.web.magazin.view_centerpage.CenterpageLegacy,), {
-                '_copyrights': {},
-                'area': property(register_copyrights(area_getter))})
-        view = view_class(cp, dummy_request)
-        # Copyright registration needs to be triggered by accessing the
-        # property at least once.
-        view.area
-        return view
-    return wrapped
-
-
-def test_teaser_list_should_resolve_copyrights(cp_factory):
-    view = cp_factory(lambda s: s.context['lead'].values())
-    # There are 8 unique teasers in the lead area, however, only 5 unique
-    # teaser images are used.
-    assert len(view._copyrights) == 5
-
-
-def test_teaser_block_should_resolve_copyrights(cp_factory):
-    view = cp_factory(lambda s: s.context['lead'].values()[0])
-    assert len(view._copyrights) == 1
-
-
-def test_auto_pilot_teaser_block_should_resolve_copyrights(cp_factory):
-    view = cp_factory(lambda s: s.context['informatives'][1])
-    assert len(view._copyrights) == 1
-
-
-def test_teaser_bar_should_resolve_copyrights(cp_factory):
-    view = cp_factory(lambda s: s.context['teaser-mosaic'].values()[0])
-    # There are 6 unique teasers in the teaser mosaic, however, one image
-    # is used twice.
-    assert len(view._copyrights) == 5
-
-
-def test_teaser_dict_should_resolve_copyrights(cp_factory):
-    view = cp_factory(lambda s: {'foo': s.context['lead'][0]})
-    assert len(view._copyrights) == 1
-
-
-def test_nested_teaser_sequence_should_resolve_copyrights(cp_factory):
-    view = cp_factory(lambda s: {'foo': {'bla': s.context['lead'][0]}})
-    assert len(view._copyrights) == 1
-
-
-def test_mixed_teaser_sequence_should_resolve_copyrights(cp_factory):
-    view = cp_factory(lambda s: {'foo': s.context['lead'][0],
-                                 'bla': s.context['informatives'][1],
-                                 'meh': s.context['lead'].values()})
-    assert len(view._copyrights) == 5  # 6 unique teaser images expected.
-
-
-def test_empty_sequences_should_not_resolve_copyrights(cp_factory):
-    view = cp_factory(lambda s: None)
-    assert len(view._copyrights) == 0
-    view = cp_factory(lambda s: [])
-    assert len(view._copyrights) == 0
-    view = cp_factory(lambda s: {})
-    assert len(view._copyrights) == 0
-
-
 def test_copyright_entries_are_rendered_correcly(testserver, testbrowser):
     browser = testbrowser(
         '%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
     # 5 Unique teaser images with copyright information expected.
     assert len(browser.cssselect('.copyrights__entry')) == 5
-
-
-def test_copyright_entry_images_are_rendered_correctly(testbrowser):
-    browser = testbrowser('/zeit-magazin/test-cp-legacy/test-cp-zmo')
-    assert ('/zeit-magazin/2014/17/lamm-aubergine/'
-            'lamm-aubergine-zmo-landscape-large.jpg') in browser.cssselect(
-                '.copyrights__image')[0].attrib['style']
 
 
 def test_copyright_entry_labels_are_rendered_correctly(
@@ -120,18 +37,20 @@ def test_copyright_entry_links_are_rendered_correctly(testserver, testbrowser):
 
 def test_copyright_area_toggles_correctly(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
+    driver.get('%s/zeit-magazin/misc' % testserver.url)
     assert driver.find_elements_by_css_selector(
-        '.copyrights')[0].value_of_css_property('display') == 'none'
-    toggle = driver.find_elements_by_css_selector(".js-toggle-copyrights")[0]
+        'script[id=image-copyright-template]')
+    assert not driver.find_elements_by_css_selector('.image-copyright-footer')
+    toggle = driver.find_elements_by_css_selector(
+        ".js-image-copyright-footer")[0]
     toggle.click()
     time.sleep(0.6)
-    assert driver.find_elements_by_css_selector(
-        '.copyrights')[0].value_of_css_property('display') == 'block'
+    assert driver.find_element_by_id('bildrechte').value_of_css_property(
+        'display') == 'block'
     toggle.click()
     time.sleep(0.6)
-    assert driver.find_elements_by_css_selector(
-        '.copyrights')[0].value_of_css_property('display') == 'none'
+    assert driver.find_element_by_id('bildrechte').value_of_css_property(
+        'display') == 'none'
 
 
 def test_nextread_teaser_images_show_up_in_copyrights(testserver, testbrowser):

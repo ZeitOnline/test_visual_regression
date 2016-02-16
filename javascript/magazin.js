@@ -60,8 +60,8 @@ require([
     'web.core/plugins/jquery.picturefill',
     'web.core/plugins/jquery.referrerCount',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
+    'web.core/plugins/jquery.imageCopyrightFooter',
     'web.magazin/plugins/jquery.backgroundvideo',
-    'web.magazin/plugins/jquery.copyrights',
     'web.magazin/plugins/jquery.switchvideo'
 ], function( $, Velocity ) {
     $( window ).referrerCount();
@@ -69,6 +69,6 @@ require([
     $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();
     $.picturefill();
-    $( '.js-toggle-copyrights' ).copyrights();
     $( 'main' ).animateScroll({ selector: '.js-scroll' });
+    $( '.js-image-copyright-footer' ).imageCopyrightFooter();
 });

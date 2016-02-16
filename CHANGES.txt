@@ -14,6 +14,8 @@ Change log for zeit.web
   * Use Standart image template in ZMO
   * Move copyright logic to core and use it in ZMO
 
+- ZON-2710: Use external SVG sprite in ZMO
+
 - ZON-2753: ZMO clicktracking for teaser
 
 - ZON-2558: ZMO teaser layout 'card' in 3 variations
@@ -57,8 +59,6 @@ Change log for zeit.web
 - ZON-2601: Add sharing links and article tags to AMPages
 
 - ZON-2602: Add Nextread and Verlags-Nextread to AMPages
-
-- ZON-2710: Use external SVG sprite in ZMO
 
 - ZON-2732: Move celeraone device detection header setting to varnish
 

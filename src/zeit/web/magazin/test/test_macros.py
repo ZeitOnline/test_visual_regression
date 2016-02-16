@@ -302,9 +302,9 @@ def test_image_should_produce_markup(jinja2_env, monkeypatch):
                   '"/img/artikel/01/bitblt-\\d+x\\d+-[a-z0-9]+/01.jpg" '
                   'data-ratio=""><!--\\[if gt IE 8\\]><!--></noscript>'
                   '<!--<!\\[endif\\]--></div><figcaption '
-                  'class="figure__caption"><span '
-                  'class="figure__text">test</span><span '
-                  'class="figure__copyright">%s</span>'
+                  'class="figure__caption"><span class="figure__text">'
+                  'test</span><span class="figure__copyright" itemprop="'
+                  'copyrightHolder">%s</span>'
                   '</figcaption></figure>'
                   % (el['css'], el['alt'], el['title'], cr))
 
