@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2807: Validate AMP microdata
 
+- FIX: Don't try to re-raise interrupts, just let them slip by
+
 - FIX: Write adcontroller level4 if applicable
 
 - MAINT: Make solr timeout configurable
@@ -21,6 +23,8 @@ Change log for zeit.web
 - MAINT: Make CP modules to preserve on pagination configurable
 
 - MAINT: Migrate column teaser to new image delivery stack
+
+- MAINT: Update schema.org microdata
 
 
 2.55 (2016-02-09)
