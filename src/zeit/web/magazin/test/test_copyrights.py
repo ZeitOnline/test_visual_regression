@@ -20,13 +20,6 @@ def test_copyright_entries_are_rendered_correcly(testserver, testbrowser):
     assert len(browser.cssselect('.copyrights__entry')) == 5
 
 
-def test_copyright_entry_images_are_rendered_correctly(testbrowser):
-    browser = testbrowser('/zeit-magazin/test-cp-legacy/test-cp-zmo')
-    assert ('/zeit-magazin/2014/17/lamm-aubergine/'
-            'lamm-aubergine-zmo-landscape-large.jpg') in browser.cssselect(
-                '.copyrights__image')[0].attrib['style']
-
-
 def test_copyright_entry_labels_are_rendered_correctly(
         testserver, testbrowser):
     browser = testbrowser(

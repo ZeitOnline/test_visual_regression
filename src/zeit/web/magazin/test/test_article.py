@@ -624,31 +624,31 @@ def test_article02_should_have_esi_include(testbrowser, testserver):
 
 
 def test_article_has_linked_copyright(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/03' % testserver.url)
+    browser = testbrowser('/artikel/03')
     output = ""
     for line in browser.contents.splitlines():
         output += line.strip()
-    assert '<span class="figure__copyright">' \
+    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
         '<a href="http://foo.de" target="_blank">' \
         '© Reuters/Alessandro Bianchi' in output
 
 
 def test_longform_has_linked_copyright(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/05' % testserver.url)
+    browser = testbrowser('/artikel/05')
     output = ""
     for line in browser.contents.splitlines():
         output += line.strip()
-    assert '<span class="figure__copyright">' \
+    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
         '<a href="http://foo.de" target="_blank">' \
         '© Johannes Eisele/AFP/Getty Images' in output
 
 
 def test_header_has_linked_copyright(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/header1' % testserver.url)
+    browser = testbrowser('/artikel/header1')
     output = ""
     for line in browser.contents.splitlines():
         output += line.strip()
-    assert '<span class="figure__copyright">' \
+    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
         '<a href="http://foo.de" target="_blank">©foo' in output
 
 
