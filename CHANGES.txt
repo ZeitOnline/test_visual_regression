@@ -4,6 +4,8 @@ Change log for zeit.web
 2.56 (unreleased)
 -----------------
 
+- ZON-2753: ZMO clicktracking for teaser
+
 - ZON-2558: ZMO teaser layout 'card' in 3 variations
 
 - ZON-2557: ZMO teaser layout 'upright' formerly known as 'gallery-upright'
