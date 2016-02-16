@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2807: Validate AMP microdata
 
+- FIX: Don't try to re-raise interrupts, just let them slip by
+
 - FIX: Write adcontroller level4 if applicable
 
 - MAINT: Make solr timeout configurable
