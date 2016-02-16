@@ -6,7 +6,7 @@
 	@include columns(344px 2)
 	@include column-gap(40px)
 	&__item
-		@include break-inside(avoid)
+		//@include break-inside(avoid)
 		border-bottom: 1px solid #eee
 
 .zon-author-list
@@ -31,7 +31,7 @@
 			margin-left: remify(5px)
 
 	&__imageitem
-		+clearfix
+		//+clearfix
 		background-color: #FAFAFA
 		bottom: 0
 		box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1)
@@ -44,7 +44,8 @@
 			.zon-author-list__text:before
 				color: #000
 	&__image
-		float: left
+		position: absolute
+		bottom: 0
 		width: remify(90px)
 	&__media
 		@extend %square-item
