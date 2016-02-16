@@ -1,5 +1,3 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
-
 <li class="author-list__item">
 	{% set module_layout = 'zon-author-list' %}
 	{% if teaser.image_group %}
