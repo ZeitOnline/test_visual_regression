@@ -246,12 +246,6 @@ class TopicLink(zeit.web.core.utils.nslist):
                 self.append((label, link))
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
-@grokcore.component.adapter(zeit.content.author.interfaces.IAuthor)
-class TopicLinkAuthor(TopicLink):
-    pass
-
-
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
 @grokcore.component.adapter(zeit.web.core.interfaces.INextread)
 class Nextread(TeaserBlock):
