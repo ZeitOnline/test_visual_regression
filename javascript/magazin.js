@@ -14,6 +14,7 @@ require([ 'vendor/require', 'config' ], function() {});
 require([
     'web.core/zeit',
     'web.core/images',
+    'web.core/clicktracking',
     'web.core/adReload',
     'web.magazin/errors',
     'web.magazin/main-nav',
@@ -25,6 +26,7 @@ require([
 ], function(
     zeit,
     images,
+    clicktracking,
     adReload,
     errors,
     nav,
@@ -35,6 +37,7 @@ require([
     photocluster
 ) {
     images.init();
+    clicktracking.init();
     adReload.init();
     errors.init();
     nav.init();
