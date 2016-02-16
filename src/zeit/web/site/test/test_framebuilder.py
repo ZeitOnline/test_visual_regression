@@ -74,3 +74,23 @@ def test_framebuilder_should_inline_svgs(testbrowser):
     assert len(browser.xpath(
                '/html/body/div[@class="visually-hidden"]/svg/symbol')) == 4
     assert browser.cssselect('.logo_bar svg > use')[0].attrib['xlink:href']
+
+
+def test_framebuilder_should_show_ressort_nav_by_default(testbrowser):
+    browser = testbrowser('/framebuilder')
+    assert browser.cssselect('.main_nav__ressorts')
+
+
+def test_framebuilder_can_disable_ressort(testbrowser):
+    browser = testbrowser('/framebuilder?hide_ressorts')
+    assert not browser.cssselect('.main_nav__ressorts')
+
+
+def test_framebuilder_should_show_search_nav_by_default(testbrowser):
+    browser = testbrowser('/framebuilder')
+    assert browser.cssselect('.main_nav__search')
+
+
+def test_framebuilder_can_disable_search(testbrowser):
+    browser = testbrowser('/framebuilder?hide_search')
+    assert not browser.cssselect('.main_nav__search')

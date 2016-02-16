@@ -37,6 +37,7 @@
 		{% set esi_source = '{}login-state?context-uri={}'.format(request.route_url('home'), request.url) %}
 		{{ lama.insert_esi(esi_source, 'Anmeldung nicht möglich', view.is_dev_environment) }}
 	</div>
+	{% if view.nav_show_ressorts %}
 	<div class="main_nav__ressorts" data-dropdown="true">
 		<nav role="navigation" id="primary_nav">
 		{%- set navigation = view.navigation -%}
@@ -44,6 +45,7 @@
 		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
 		</nav>
 	</div>
+	{% endif %}
 	<div class="main_nav__services" data-dropdown="true">
 		{%- set navigation = view.navigation_services -%}
 		{%- set nav_class = 'primary-nav-services' -%}
@@ -54,6 +56,8 @@
 		{%- set nav_class = 'main-nav-classifieds' -%}
 		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
 	</div>
+	{% if view.nav_show_search %}
 	<div class="main_nav__search" data-dropdown="true">{% include "zeit.web.site:templates/inc/navigation/navigation-search.tpl" %}</div>
+	{% endif %}
 	<!-- wrap end -->
 </div>

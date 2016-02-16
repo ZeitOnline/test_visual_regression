@@ -39,6 +39,9 @@ class Base(zeit.web.core.view.Base):
         u'ZEIT ONLINE | Nachrichten, Hintergründe und Debatten')
     pagetitle_suffix = u' | ZEIT ONLINE'
 
+    nav_show_ressorts = True
+    nav_show_search = True
+
     def __init__(self, *args, **kwargs):
         super(Base, self).__init__(*args, **kwargs)
         if self.request.params.get('commentstart'):
@@ -240,3 +243,11 @@ class FrameBuilder(zeit.web.core.view.CeleraOneMixin, Base):
     @zeit.web.reify
     def framebuilder_requires_ivw(self):
         return 'ivw' in self.request.GET
+
+    @zeit.web.reify
+    def nav_show_ressorts(self):
+        return 'hide_ressorts' not in self.request.GET
+
+    @zeit.web.reify
+    def nav_show_search(self):
+        return 'hide_search' not in self.request.GET
