@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - FIX: Write adcontroller level4 if applicable
 
+- FIX: Don't accidentally (and expensively) create missing image variants in ZMO
+
 - MAINT: Make solr timeout configurable
 
 - MAINT: Make CP modules to preserve on pagination configurable
