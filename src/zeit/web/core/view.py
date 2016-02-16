@@ -239,6 +239,9 @@ class Base(object):
         if self.context.banner is None or self.context.banner is True:
             return True
 
+    def banner_toggles(self, name):
+        return None
+
     @zeit.web.reify
     def adcontroller_handle(self):
         replacements = {

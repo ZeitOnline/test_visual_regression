@@ -16,9 +16,8 @@ define(['jquery'], function() {
      */
     var toggleSharing = function() {
         $socialServices
-            .find('.article__sharing__icon')
-            .toggleClass('icon-sharebox-share')
-            .toggleClass('icon-sharebox-close');
+            .find('.article__sharing-icon--open-close')
+            .toggle();
         $socialServices.find('.article__sharing__services').toggleClass('blind');
     };
 

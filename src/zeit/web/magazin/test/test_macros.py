@@ -7,8 +7,6 @@ import pyramid.config
 import lxml
 import lxml.html
 
-import zeit.content.article.article
-
 
 def test_macro_p_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
@@ -388,7 +386,6 @@ def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
 def test_macro_video_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
-
     # assert default video
     obj = {'id': '1', 'video_still': 'pic.jpg',
            'description': 'test', 'format': '', 'title': 'title'}
@@ -397,7 +394,8 @@ def test_macro_video_should_produce_markup(jinja2_env):
            ' title="Video: title">')
 
     cap = '<figcaption class="figure__caption">test</figcaption>'
-    lines = tpl.module.video(obj).splitlines()
+    module = tpl.make_module({'request': mock.Mock()})
+    lines = module.video(obj).splitlines()
     output = ''
     for line in lines:
         output += line.strip()
@@ -428,7 +426,7 @@ def test_macro_video_should_produce_markup(jinja2_env):
          'fig': '<figure class="figure-stamp" data-video="1">'}]
 
     for el in obj:
-        lines = tpl.module.video(el).splitlines()
+        lines = module.video(el).splitlines()
         output = ''
         for line in lines:
             output += line.strip()
@@ -570,83 +568,6 @@ def test_macro_insert_responsive_image_should_produce_linked_image(
     assert '<a href="http://www.test.de">' in output
 
 
-def test_macro_teaser_text_block_should_produce_markup(jinja2_env):
-    # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    teaser = zeit.content.article.article.Article()
-    teaser.teaserSupertitle = "SUPATITLE"
-    teaser.teaserTitle = "TITLE"
-    teaser.teaserText = "TEXT"
-    teaser.uniqueId = "ID"
-
-    lines = tpl.module.teaser_text_block(teaser).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert ('<header class="cp_leader__title__wrap '
-            'cp_leader__title__wrap--none">') in output
-    assert '<a href="ID"><h2>' in output
-    assert '<div class="cp_leader__supertitle">SUPATITLE</div>' in output
-    assert '<div class="cp_leader__title">TITLE</div>' in output
-    assert '<span class="cp_leader__subtitle">TEXT</span>' in output
-
-
-def test_macro_teaser_text_block_should_fallback_to_supertitle(jinja2_env):
-    # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    teaser = mock.Mock()
-    teaser.teaserSupertitle = None
-    teaser.supertitle = "FALLBACK"
-
-    teaser.teaserTitle = "TITLE"
-    teaser.uniqueId = "ID"
-
-    lines = tpl.module.teaser_text_block(teaser).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert 'FALLBACK' in output
-
-
-def test_macro_teaser_text_block_should_produce_alternative_markup(
-        jinja2_env):
-    # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    teaser = mock.Mock()
-    teaser.teaserTitle = "TITLE"
-    teaser.uniqueId = "ID"
-
-    lines = tpl.module.teaser_text_block(
-        teaser, 'button', 'dark', 'false', 'false', 'true').splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert ('<header class="cp_button__title__wrap '
-            'cp_button__title__wrap--dark">') in output
-    assert '<div class="cp_button__supertitle' not in output
-    assert '<div class="cp_button__title">TITLE</div>' in output
-    assert '<div class="cp_button__subtitle' not in output
-
-
-def test_macro_comment_count_should_produce_correct_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    markup = ('<span class="cp_comment__count__wrap '
-              'icon-comments-count">3</span>')
-    lines = tpl.module.comment_count(3).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert markup in output
-
-
 def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/layout_macro.tpl')
@@ -654,11 +575,10 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     request = mock.Mock()
     request.session.user.picture = None
 
-    # no pic
+    # no pic: fallback svg is shown
     lines = tpl.module.head_user_is_logged_in_true(request)
     doc = lxml.html.fromstring(lines)
-    assert doc.cssselect('span')[1].attrib['class'] == (
-        'main-nav__community__icon icon-avatar-std')
+    assert 'main-nav__avatar' in doc.cssselect('svg')[0].attrib['class']
 
     # pic
     request = mock.Mock()
@@ -672,7 +592,7 @@ def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     lines = tpl.module.head_user_is_logged_in_true(request)
     doc = lxml.html.fromstring(lines).cssselect
 
-    assert doc('span .main-nav__community__icon')[0].attrib['style'] == (
+    assert doc('span .main-nav__avatar')[0].attrib['style'] == (
         'background-image: url(http://www.zeit.de/community-static/test.jpg)')
     assert doc('a')[0].attrib['href'] == 'www.zeit.de/user/1'
     assert doc('a')[0].attrib['id'] == 'hp.zm.topnav.community.account'
@@ -720,12 +640,14 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
         'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     request = mock.Mock()
+    view = mock.Mock()
 
     # logged in
     request.authenticated_userid = '12345'
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     logged = 'Account'
-    lines = tpl.module.main_nav('true', request).splitlines()
+    module = tpl.make_module({'request': request, 'view': view})
+    lines = module.main_nav('true', request).splitlines()
     output = ''
     for line in lines:
         output += line.strip()
@@ -737,7 +659,8 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     request.authenticated_userid = None
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     unlogged = 'Anmelden'
-    lines = tpl.module.main_nav('true', request).splitlines()
+    module = tpl.make_module({'request': request, 'view': view})
+    lines = module.main_nav('true', request).splitlines()
     output = ''
     for line in lines:
         output += line.strip()
@@ -763,17 +686,18 @@ def test_macro_copyrights(jinja2_env):
             link=None
         )
     ]
-    snippet = lxml.html.fromstring(tpl.module.copyrights(copyrights))
+    module = tpl.make_module({'request': mock.Mock()})
+    snippet = lxml.html.fromstring(module.copyrights(copyrights))
 
     assert len(snippet.cssselect('li.copyrights__entry')) == 2, (
         'Two copyright entries should be contained in the list.')
 
     assert snippet.cssselect(
-        'li.copyrights__entry:nth-child(1) .copyrights__entry__label a'), (
+        'li.copyrights__entry:nth-child(1) .copyrights__label a'), (
             'The first entry should produce a link element.')
 
     assert not snippet.cssselect(
-        'li.copyrights__entry:nth-child(2) .copyrights__entry__label a'), (
+        'li.copyrights__entry:nth-child(2) .copyrights__label a'), (
             'The second entry should not produce a link element.')
 
 

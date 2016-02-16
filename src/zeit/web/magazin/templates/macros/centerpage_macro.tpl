@@ -1,4 +1,3 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context%}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
 {% macro include_module(obj) -%}
@@ -7,7 +6,7 @@
             {% if module.layout -%}
                 {{ include_teaser(module) }}
                 {% if view.is_hp and loop.first and module.layout.id == 'zmo-square-large' %}
-                    {{ lama_core.adplace(view.banner(3), view, True) }}
+                    {{ lama.adplace(view.banner(3), view, True) }}
                 {% endif %}
             {% endif %}
         {% endfor %}
@@ -31,7 +30,7 @@
 {%- endmacro %}
 
 {% macro include_ad_tile_4(view) %}
-    {{ lama_core.adplace(view.banner(4), view, True) }}
+    {{ lama.adplace(view.banner(4), view, True) }}
 {% endmacro %}
 
 {% macro include_teaser(module, prefix) -%}
@@ -49,47 +48,9 @@
 {% macro include_cp_ad() -%}
     <div class="cp_button--ad">
         {% if view %}
-            {{ lama_core.adplace(view.banner(7), view) }}
+            {{ lama.adplace(view.banner(7), view) }}
         {% endif %}
     </div>
-{%- endmacro %}
-
-{% macro comment_count(comment, url) -%}
-    {% if comment %}
-        <a href="{{ url }}#show_comments">
-            <span class="cp_comment__count__wrap icon-comments-count">{{ comment }}</span>
-        </a>
-    {% endif %}
-{%- endmacro %}
-
-{% macro teaser_text_block(teaser, block='leader', shade='none', supertitle=true, subtitle=true, icon=false) -%}
-    <header class="cp_{{block}}__title__wrap cp_{{block}}__title__wrap--{{ shade }}">
-        <a href="{{teaser | create_url}}">
-            {% if icon == 'true' and (teaser | block_type) == 'gallery'
-               and teaser.type != 'zmo-product'%}
-                <span class="icon-galerie-icon-white"></span>
-            {% endif %}
-            <h2>
-                {% if supertitle != 'false' %}
-                    <div class="cp_{{block}}__supertitle">
-                        {% if teaser.teaserSupertitle %}
-                            {{ teaser.teaserSupertitle }}
-                        {% elif teaser.supertitle %}
-                            {{ teaser.supertitle }}
-                        {% endif %}
-                    </div>
-                {% endif %}
-                <div class="cp_{{block}}__title">
-                    {{ teaser.teaserTitle }}
-                </div>
-            </h2>
-            {% if subtitle != 'false' %}
-                <span class="cp_{{block}}__subtitle">
-                    {{ teaser.teaserText }}
-                </span>
-            {% endif %}
-        </a>
-    </header>
 {%- endmacro %}
 
 {% macro teaser_sharing_card(teaser) -%}

@@ -4,21 +4,33 @@ Change log for zeit.web
 2.56 (unreleased)
 -----------------
 
+- ZON-2710: Use external SVG sprite in ZMO
+
 - ZON-2558: ZMO teaser layout 'card' in 3 variations
 
 - ZON-2557: ZMO teaser layout 'upright' formerly known as 'gallery-upright'
 
 - ZON-2556: ZMO teaser layout 'print-cover'
 
-- FIX: Write adcontroller level4 if applicable
+- ZON-2507: Implement zeit campus groundwork (behind a feature toggle)
+
+- ZON-2806: Add product.title as author fallback to AMPages
 
 - ZON-2581: Track ad start events to webtrekk
 
-- ZON-2805: Load distinct brightcove player in amp pages
+- ZON-2805: Load distinct brightcove player in AMPages
+
+- ZON-2807: Validate AMP microdata
 
 - FIX: Write adcontroller level4 if applicable
 
 - MAINT: Make solr timeout configurable
+
+- MAINT: Make CP modules to preserve on pagination configurable
+
+- MAINT: Migrate column teaser to new image delivery stack
+
+- MAINT: Update schema.org microdata
 
 
 2.55 (2016-02-09)
@@ -35,8 +47,6 @@ Change log for zeit.web
 - ZON-2601: Add sharing links and article tags to AMPages
 
 - ZON-2602: Add Nextread and Verlags-Nextread to AMPages
-
-- ZON-2710: Use external SVG sprite in ZMO
 
 - ZON-2732: Move celeraone device detection header setting to varnish
 

@@ -3,7 +3,13 @@
 
 {% macro render_page(page) %}
     {% for item in page %}
-        {{ (blocks[item | block_type] or blocks['no_block'])(item) }}
+        {% set type = item | block_type %}
+        {# XXX Urghs this is nasty #}
+        {% if type in ['inlinegallery'] %}
+            {{ blocks[type](item, view) }}
+        {% else %}
+            {{ (blocks[type] or blocks['no_block'])(item) }}
+        {% endif %}
     {% endfor %}
 {% endmacro %}
 

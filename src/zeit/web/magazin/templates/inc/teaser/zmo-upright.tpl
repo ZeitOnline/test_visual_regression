@@ -6,8 +6,8 @@ Teaser template for gallery upright teaser
 
 {% block layout %}teaser-upright{% endblock %}
 {% block icon %}
-	{% if teaser | is_gallery %}
-	    <span class="icon-galerie-icon-white"></span>
-	{% endif %}
+	{% if teaser | is_gallery -%}
+		{{ lama.use_svg_icon('gallery', '%s__gallery-icon' | format(self.layout()), request) }}
+	{%- endif %}
 {% endblock %}
 {% block teaser_text %}{% endblock %}
