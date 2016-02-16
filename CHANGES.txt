@@ -14,8 +14,6 @@ Change log for zeit.web
 
 - ZON-2807: Validate AMP microdata
 
-- ZON-2838: Author index with teasers and alphabetical navigation
-
 - FIX: Don't try to re-raise interrupts, just let them slip by
 
 - FIX: Write adcontroller level4 if applicable
