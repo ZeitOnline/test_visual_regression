@@ -234,9 +234,7 @@ class Teaser(object):
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
 class TopicLink(zeit.web.core.utils.nslist):
-    """Filter and restructure all topiclinks and labels
-    :rtype: generator
-    """
+    """Filter and restructure all topiclinks and labels"""
 
     def __init__(self, context):
         self.context = context
