@@ -9,7 +9,7 @@
     				{% include "zeit.web.site:templates/inc/asset/image_zon-author-list.tpl" ignore missing %}
     			</div>
 				<div class="{{ module_layout }}__text">
-					<h3 class="{{ module_layout }}__name{% if not teaser.summary %} {{ module_layout }}__name--without-summary{% endif %}">{{ teaser.display_name }}</h3>
+					<h3 class="{{ '{}__name'.format(module_layout) | with_mods('without-summary' if not teaser.summary) }}">{{ teaser.display_name }}</h3>
 					{% if teaser.summary -%}
 						<p class="{{ module_layout }}__summary">{{ teaser.summary }}</p>
 					{%- endif %}
