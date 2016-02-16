@@ -31,7 +31,6 @@
 			margin-left: remify(5px)
 
 	&__imageitem
-		//+clearfix
 		background-color: #FAFAFA
 		bottom: 0
 		box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1)
@@ -70,6 +69,8 @@
 	&__summary
 		color: #707070
 		font-size: em(14px)
+		height: remify(52px) // 3 lines for overflow:hidden
 		letter-spacing: $zon-letter-spacing-s
 		line-height: remify(17px)
 		margin: 0
+		overflow: hidden
