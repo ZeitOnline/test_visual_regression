@@ -305,7 +305,7 @@
         id="zmo-landscape-large"
         title="ZMO großer Teaser 16:9"
         image_pattern="wide"
-        areas="solo duo major"
+        areas="major"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
