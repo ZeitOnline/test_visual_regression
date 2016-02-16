@@ -44,18 +44,20 @@ def test_copyright_entry_links_are_rendered_correctly(testserver, testbrowser):
 
 def test_copyright_area_toggles_correctly(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
+    driver.get('%s/zeit-magazin/misc' % testserver.url)
     assert driver.find_elements_by_css_selector(
-        '.copyrights')[0].value_of_css_property('display') == 'none'
-    toggle = driver.find_elements_by_css_selector(".js-toggle-copyrights")[0]
+        'script[id=image-copyright-template]')
+    assert not driver.find_elements_by_css_selector('.image-copyright-footer')
+    toggle = driver.find_elements_by_css_selector(
+        ".js-image-copyright-footer")[0]
     toggle.click()
     time.sleep(0.6)
-    assert driver.find_elements_by_css_selector(
-        '.copyrights')[0].value_of_css_property('display') == 'block'
+    assert driver.find_element_by_id('bildrechte').value_of_css_property(
+        'display') == 'block'
     toggle.click()
     time.sleep(0.6)
-    assert driver.find_elements_by_css_selector(
-        '.copyrights')[0].value_of_css_property('display') == 'none'
+    assert driver.find_element_by_id('bildrechte').value_of_css_property(
+        'display') == 'none'
 
 
 def test_nextread_teaser_images_show_up_in_copyrights(testserver, testbrowser):
