@@ -44,7 +44,7 @@
         <div class="is-constrained is-centered">
             {# TODO: We should mock the liveblog backend for local testing. #}
             {% set esi_source = 'http://www.zeit.de/liveblog-backend/{}.html'.format(liveblog.blog_id) %}
-            {{ lama_core.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden', view.is_dev_environment) }}
+            {{ lama_core.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
         </div>
     {%- endif %}
 {%- endmacro %}

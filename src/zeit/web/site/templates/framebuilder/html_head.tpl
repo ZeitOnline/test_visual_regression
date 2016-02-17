@@ -49,6 +49,6 @@
         {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
         {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
-    {% if view.is_dev_environment %}
+    {% if is_dev_environment() %}
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}

@@ -835,6 +835,13 @@ def get_google_tag_manager_host():
 
 
 @zeit.web.register_global
+def is_dev_environment():
+    # TODO: Don't setup wrappers for every config key. Use a settings global.
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return conf.get('dev_environment')
+
+
+@zeit.web.register_global
 def interrupt(reason=None):
     raise zeit.web.core.jinja.Interrupt(reason)
 
