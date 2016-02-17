@@ -4,7 +4,7 @@ Change log for zeit.web
 2.57 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2637: Enable ad-label on framebuilder
 
 
 2.56.1 (2016-02-17)
@@ -15,8 +15,6 @@ Change log for zeit.web
 
 2.56 (2016-02-17)
 -----------------
-
-- ZON-2637: Enable ad-label on framebuilder
 
 - ZON-2507: Implement zeit campus groundwork (behind a feature toggle)
 
@@ -31,8 +29,6 @@ Change log for zeit.web
 - ZON-2838: Author index with teasers and alphabetical navigation
 
 - FIX: Don't try to re-raise interrupts, just let them slip by
-
-- FIX: Write adcontroller level4 if applicable
 
 - FIX: Write adcontroller level4 if applicable
 
