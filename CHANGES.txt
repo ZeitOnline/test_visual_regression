@@ -4,7 +4,7 @@ Change log for zeit.web
 2.57 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2637: Enable ad-label on framebuilder
 
 
 2.56.1 (2016-02-17)
