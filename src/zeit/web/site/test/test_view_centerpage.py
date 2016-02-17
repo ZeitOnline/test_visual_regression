@@ -2020,6 +2020,35 @@ def test_centerpage_page_should_be_reconstructed(application, dummy_request):
     assert view.regions[1].values()[0].kind == 'ranking'
 
 
+def test_centerpage_page_should_reconstruct_multiple_modules(
+        application, dummy_request):
+    dummy_request.GET['p'] = '2'
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(15)]
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
+    mod = cp.body.values()[0].values()[0].create_item('cpextra')
+    mod.cpextra = 'search-form'
+    view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
+    assert len(view.regions) == 2
+    assert view.regions[0].values()[0].values()[0].supertitle == 'Griechenland'
+    assert view.regions[0].values()[0].values()[1].cpextra == 'search-form'
+
+
+def test_centerpage_page_should_reconstruct_multiple_areas(
+        application, dummy_request):
+    dummy_request.GET['p'] = '3'
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(35)]
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
+    area = cp.body.values()[0].create_item('area', 1)
+    mod = area.create_item('cpextra')
+    mod.cpextra = 'search-form'
+    view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
+    assert len(view.regions) == 2
+    assert view.regions[0].values()[0].values()[0].supertitle == 'Griechenland'
+    assert view.regions[0].values()[1].values()[0].cpextra == 'search-form'
+
+
 def test_centerpage_page_should_require_ranking(application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/slenderized-index')
@@ -2091,6 +2120,14 @@ def test_ranking_area_should_silently_accept_emptyness(
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
     area = zeit.web.core.centerpage.get_area(context)
     assert area.pagination == []
+
+
+def test_ranking_area_should_be_found_regardless_of_kind(
+        application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
+    cp.body.values()[1].values()[0].kind = 'author-list'
+    view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
+    assert view.area_ranking
 
 
 def test_no_author_should_not_display_byline(testbrowser, workingcopy):

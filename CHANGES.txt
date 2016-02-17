@@ -1,7 +1,21 @@
 Change log for zeit.web
 =======================
 
-2.56 (unreleased)
+2.57 (unreleased)
+-----------------
+
+- ZON-2637: Enable ad-label on framebuilder
+
+- BUG-282: Join query strings for feed URLs with tracking params.
+
+
+2.56.1 (2016-02-17)
+-------------------
+
+- HOTFIX: Pagination for author index
+
+
+2.56 (2016-02-17)
 -----------------
 
 - ZON-2507: Implement zeit campus groundwork (behind a feature toggle)
@@ -12,13 +26,21 @@ Change log for zeit.web
 
 - ZON-2805: Load distinct brightcove player in AMPages
 
+- ZON-2807: Validate AMP microdata
+
+- ZON-2838: Author index with teasers and alphabetical navigation
+
+- FIX: Don't try to re-raise interrupts, just let them slip by
+
 - FIX: Write adcontroller level4 if applicable
 
 - MAINT: Make solr timeout configurable
 
+- MAINT: Make CP modules to preserve on pagination configurable
+
 - MAINT: Migrate column teaser to new image delivery stack
 
-- BUG-282: Join query strings for feed URLs with tracking params.
+- MAINT: Update schema.org microdata
 
 
 2.55 (2016-02-09)

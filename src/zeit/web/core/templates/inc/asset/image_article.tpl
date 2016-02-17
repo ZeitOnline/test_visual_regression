@@ -8,6 +8,6 @@
 {% set media_caption_additional_class = 'figure__caption--marginalia' if image.layout == 'small' else '' %}
 
 {% block media_caption_content %}
-    <span class="figure__text">{{ image.caption }}</span>
+    <span class="figure__text" itemprop="caption">{{ image.caption }}</span>
     {{ super() }}
 {% endblock %}

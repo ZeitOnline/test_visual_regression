@@ -58,8 +58,8 @@ class Undefined(jinja2.runtime.Undefined):
     __getattr__ = __getitem__ = __call__ = lambda self, *args: self.__class__()
 
 
-class Interrupt(Exception):
-    """Custom exception to deliberately escape fault-tolerant rendering."""
+class Interrupt(BaseException):
+    """Custom error class to deliberately escape fault-tolerant rendering."""
 
     pass
 
@@ -102,9 +102,7 @@ class Environment(jinja2.environment.Environment):
     def __getsth__(self, func, obj, name):
         try:
             return getattr(super(Environment, self), func)(obj, name)
-        except Interrupt:
-            raise
-        except BaseException:
+        except Exception:
             self.handle_exception()
             return self.undefined(obj=obj, name=name)
 
