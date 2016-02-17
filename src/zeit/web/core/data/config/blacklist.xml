@@ -6,5 +6,6 @@
   <route>/{foobar:.*}/komplettansicht?print=true</route>
   <route>/{foo:\d+}/index</route>
   <route>/static/js/projekte/*path</route>
-  <route>/angebote/autosuche/{exceptimage:((?!__|bitblt).)+}</route>
+  <route>/angebote/autosuche/{exceptimage:((?!__).)+}</route>
+  <route>/meine-autoren/{exceptimage:((?!__|zon-column).)+}</route>
 </blacklist>
