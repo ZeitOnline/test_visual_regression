@@ -84,11 +84,6 @@ def get_image_asset(teaser):
 
 @zeit.web.register_filter
 def get_area(area):
-    if zeit.content.cp.interfaces.IArea.providedBy(area) and (
-            zeit.magazin.interfaces.IZMOContent.providedBy(
-                area.referenced_cp)):
-        area.kind = 'zmo-parquet'
-
     return zeit.web.core.utils.get_named_adapter(
         area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
 

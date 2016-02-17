@@ -83,11 +83,3 @@ def test_default_teaser_should_not_expose_ranking_area_proxies(
     assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 10
 
     assert all('ProxyExposed' not in a[0][0] for a in log.debug.call_args_list)
-
-
-def test_get_area_should_recognize_zmo_parquet(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/journalistic-formats-zmo')
-    area = zeit.web.core.utils.find_block(
-        context, 'area', area='id-c52657e6-7494-46d9-86d4-90a88775090c')
-    assert zeit.web.core.centerpage.get_area(area).kind == 'zmo-parquet'
