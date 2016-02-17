@@ -1,14 +1,13 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context%}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 {% extends 'zeit.web.core:templates/macros/article_macro.tpl' %}
 
 {% macro place(item) -%}
-    {{ lama_core.adplace(item, view) }}
-    {{ lama_core.adplace_middle_mobile(item, view) }}
+    {{ lama.adplace(item, view) }}
+    {{ lama.adplace_middle_mobile(item, view) }}
 {%- endmacro %}
 
 {% macro contentadblock(item) -%}
-    {{ lama_core.content_ad_article(view) }}
+    {{ lama.content_ad_article(view) }}
 {%- endmacro %}
 
 {% macro supertitle() -%}
@@ -44,7 +43,7 @@
         <div class="is-constrained is-centered">
             {# TODO: We should mock the liveblog backend for local testing. #}
             {% set esi_source = 'http://www.zeit.de/liveblog-backend/{}.html'.format(liveblog.blog_id) %}
-            {{ lama_core.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden', view.is_dev_environment) }}
+            {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden', view.is_dev_environment) }}
         </div>
     {%- endif %}
 {%- endmacro %}
