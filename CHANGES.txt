@@ -4,7 +4,15 @@ Change log for zeit.web
 2.57 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2637: Enable ad-label on framebuilder
+
+- ZON-2636: Framebuilder: Add query parameters `hide_ressorts` and `hide_search`
+
+
+2.56.1 (2016-02-17)
+-------------------
+
+- HOTFIX: Pagination for author index
 
 
 2.56 (2016-02-17)
@@ -19,8 +27,6 @@ Change log for zeit.web
 - ZON-2805: Load distinct brightcove player in AMPages
 
 - ZON-2807: Validate AMP microdata
-
-- ZON-2636: Framebuilder: Add query parameters `hide_ressorts` and `hide_search`
 
 - ZON-2838: Author index with teasers and alphabetical navigation
 
