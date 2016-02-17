@@ -1,0 +1,80 @@
+.author-list
+	list-style: none
+	margin: remify(0 auto)
+	max-width: remify(760px)
+	padding: 0
+	@include columns(344px 2)
+	@include column-gap(40px)
+	&__item
+		@include break-inside(avoid)
+		border-bottom: 1px solid #eee
+
+.zon-author-list
+	list-style: none
+	margin: remify(0 10px)
+	padding: 0
+
+	&__textitem
+		padding: remify(0 10px)
+		line-height: remify(48px)
+	&__textitem-link
+		color: #444
+		font-size: em(15px)
+		white-space: nowrap
+		text-overflow: ellipsis
+		width: 100%
+		overflow: hidden
+		&:after
+			content: "\203A" // › = single right-pointing angle quotation mark
+			font-size: em(16px)
+			font-weight: bold
+			margin-left: remify(5px)
+
+	&__imageitem
+		background-color: #FAFAFA
+		bottom: 0
+		box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1)
+		margin: remify(23px 0)
+		height: remify(100px) // 90px squareImg + 10px
+		padding: remify(10px 10px 0 0)
+		position: relative
+		+on-interaction
+			box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2)
+			.zon-author-list__text:before
+				color: #000
+	&__image
+		position: absolute
+		bottom: 0
+		width: remify(90px)
+	&__media
+		@extend %square-item
+	&__text
+		padding: remify(0 10px 0 100px)
+		&:before
+			color: #707070
+			content: " \203A" // › = single right-pointing angle quotation mark
+			float: right
+			font-size: em(16px)
+			font-weight: bold
+			margin-right: remify(-10px)
+			margin-top: remify(20px)
+	&__name
+		color: #313131
+		font-size: em(15px)
+		font-weight: bold
+		line-height: remify(18px)
+		margin: 0.5rem 0
+		&--without-summary
+			padding-top: remify(25px)
+	&__summary
+		color: #707070
+		font-size: em(14px)
+		height: remify(52px) // 3 lines for overflow:hidden
+		letter-spacing: $zon-letter-spacing-s
+		line-height: remify(17px)
+		margin: 0
+		overflow: hidden
+		// multiline ellipsis for webkit browsers:
+		display: -webkit-box
+		-webkit-line-clamp: 3
+		-webkit-box-orient: vertical
