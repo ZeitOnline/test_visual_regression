@@ -1,4 +1,3 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama_core with context%}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
 {% macro include_module(obj) -%}
@@ -7,7 +6,7 @@
             {% if module.layout -%}
                 {{ include_teaser(module) }}
                 {% if view.is_hp and loop.first and module.layout.id == 'zmo-square-large' %}
-                    {{ lama_core.adplace(view.banner(3), view, True) }}
+                    {{ lama.adplace(view.banner(3), view, True) }}
                 {% endif %}
             {% endif %}
         {% endfor %}
@@ -31,7 +30,7 @@
 {%- endmacro %}
 
 {% macro include_ad_tile_4(view) %}
-    {{ lama_core.adplace(view.banner(4), view, True) }}
+    {{ lama.adplace(view.banner(4), view, True) }}
 {% endmacro %}
 
 {% macro include_teaser(module, prefix) -%}
@@ -51,7 +50,7 @@
 {% macro include_cp_ad() -%}
     <div class="cp_button--ad">
         {% if view %}
-            {{ lama_core.adplace(view.banner(7), view) }}
+            {{ lama.adplace(view.banner(7), view) }}
         {% endif %}
     </div>
 {%- endmacro %}

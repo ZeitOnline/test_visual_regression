@@ -1,5 +1,3 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
-
 {% set comment = module[0] %}
 {% set article = comment.referenced_content %}
 {% set supertitle = article.teaserSupertitle if article.teaserSupertitle else article.supertitle %}
@@ -19,7 +17,7 @@
 			</span><span class="visually-hidden">:</span>
 		{% endif %}
 		<span class="user-comment__article-title">
-			{{ article.teaserTitle if article.teaserTitle else article.title }}
+			{{- article.teaserTitle if article.teaserTitle else article.title -}}
 		</span>
 	</a>
 </div>
