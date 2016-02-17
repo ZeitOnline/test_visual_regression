@@ -28,13 +28,14 @@ All calling templates have to provide:
 
 <div class="article__nextread__body article__nextread__body--{{ module.multitude }}{% if not image %} article__nextread__body--no-img{% endif %}" style="{{ bg_image }}">
     <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
-        
-        {# display bg image #}
-        {% if image and self.teaser_image() == 'true' %}
-            <div class="scaled-image article__nextread__img article__nextread__img--{{ module.multitude }}">
-                {{ lama.insert_responsive_image(image) }}
-            </div>
-        {% endif %}
+
+        {% block teaser_image %}
+            {% if image %}
+                <div class="scaled-image article__nextread__img article__nextread__img--{{ module.multitude }}">
+                    {{ lama.insert_responsive_image(image) }}
+                </div>
+            {% endif %}
+        {% endblock %}
 
         {# display nextread text #}
         <div class="article__nextread__article article__nextread__article--{{ module.multitude }}">
