@@ -253,6 +253,7 @@ class FrameBuilder(zeit.web.core.view.CeleraOneMixin, Base):
     def nav_show_search(self):
         return 'hide_search' not in self.request.GET
 
+    @zeit.web.reify
     def is_advertorial(self):
         return 'adlabel' in self.request.GET
 
