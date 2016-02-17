@@ -1,0 +1,5 @@
+<div class="alphabetpager">
+    {% for letter in context.__parent__.keys() if letter!='config.xml' and letter!='template.xml' %}
+        <a class="{{ 'alphabetpager__item' | with_mods('current' if view.content_path.rsplit('/')[-1] == letter) }}" href="{{ '{}autoren/register/{}'.format(request.route_url('home'), letter) }}">{{ letter }}</a>
+    {% endfor %}
+</div>
