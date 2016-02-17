@@ -12,13 +12,14 @@
 			</span>
 		</a>
 	</div>
-	<div class="header__menu-link">
-		{{ lama.use_svg_icon('menu', 'header__menu-icon', view.request) }}
+	<a class="header__menu-link" href="#navigation">
+		{{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', view.request) }}
+		{{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', view.request) }}
 		<span class="visually-hidden">Menu öffnen</span>
-	</div>
+	</a>
 </div>
 
-<div class="nav">
+<div class="nav" id="navigation">
 	<div class="nav__home">
 		<h2 class="nav__home-title"><a href="{{ request.route_url('home') }}index">ZEIT ONLINE</a></h2>
 	</div>
@@ -35,29 +36,7 @@
 		</ul>
 	</nav>
 	<div class="nav__login">
-	{% if False %}
-		<a href="#" class="nav__login-link">
-			Anmelden
-			<span class="nav__login-register">
-				/ Registrieren
-				{{ lama.use_svg_icon('login', 'nav__login-icon', view.request) }}
-			</span>
-		</a>
-	{% else %}
-		<h2 class="nav__login-title" tabindex="0">
-			<span class="nav__user-picture"></span>
-			<span class="nav__user-name">crauscher sfg as afb afbafdb adfbadf dfabdaf bdaf ad</span>
-		</h2>
-		<ul class="nav__login-list">
-			<li><a href="#">Account</a></li>
-			<li>
-				<a href="#">
-					Abmelden
-					{{ lama.use_svg_icon('login', 'nav__login-icon', view.request) }}
-				</a>
-			</li>
-		</ul>
-	{% endif %}
+		{%- include "zeit.web.campus:templates/inc/navigation/login-state.html" -%}
 	</div>
 	<div class="nav__primary">
 		<nav class="nav__topics">

@@ -42,8 +42,12 @@ $nav-color-border: #444
 
 .header
 	background-color: $primary-color
-	color: #ccc
+	color: #fff
 	position: relative
+
+	a
+		color: inherit
+
 	&__brand
 		+clearfix
 		line-height: remify(50px)
@@ -53,8 +57,6 @@ $nav-color-border: #444
 		float: left
 
 	&__logo
-		color: #fff
-		// display: block
 		height: remify(33px)
 		width: remify(185px)
 		vertical-align: middle
@@ -63,16 +65,31 @@ $nav-color-border: #444
 		float: right
 
 	&__menu-icon
-		height: remify(20px)
-		width: remify(20px)
+		&--menu
+			height: remify(14px)
+			width: remify(20px)
+		&--close
+			height: remify(16px)
+			width: remify(16px)
+			display: none
+
+	&--open
+		.header__menu-icon--close
+			display: inline
+		.header__menu-icon--menu
+			display: none
 
 
 .nav
 	@extend %nav-font-l
-	+display-flex
 	+flex-flow(column nowrap)
 	+font-smoothing
+	display: none
 	line-height: remify(50px)
+
+	&:target,
+	.header--open &
+		+display-flex
 
 	a
 		color: inherit
@@ -111,17 +128,23 @@ $nav-color-border: #444
 		width: remify(18px)
 		vertical-align: remify(-3px)
 	&__user-picture
-		background-color: #ccc
+		background-color: #eee
+		background-position: center
+		background-repeat: no-repeat
+		background-size: contain
 		border-radius: 50%
 		display: block
 		height: remify(30px)
 		margin: remify(10px 0)
 		width: remify(30px)
+	&__user-avatar
+		color: #ababab
+		height: 100%
+		width: 100%
 	&__user-name
 		@extend %nav-font-l
 		display: block
 		font-weight: bold
-		// max-width: 100%
 		overflow: hidden
 		text-overflow: ellipsis
 		white-space: nowrap
@@ -145,10 +168,6 @@ $nav-color-border: #444
 		text-transform: uppercase
 	&__tools-list
 		@extend %nav-font-l
-
-	// MEHR
-	&__more-title
-		display: none
 
 	&__home-title,
 	&__services-title,
@@ -220,16 +239,31 @@ $nav-color-border: #444
 				float: left
 				width: 50%
 
+		&__login
+			+display-flex
+			+justify-content(space-between)
+			+align-items(center)
+			line-height: remify(60px)
 		&__login-title
-			float: left
-			width: 66%
+			+flex-grow(1)
+			padding-right: remify(10px)
 		&__login-list
-			float: right
+			white-space: nowrap
 			li:first-child
 				display: none
 		&__user-picture
 			float: left
+			height: remify(40px)
 			margin-right: remify(8px)
+			width: remify(40px)
+			&--default
+				display: none
+		&__user-name
+			max-width: 50vw
+
+		&__more-title
+			display: none
+
 
 +respond-min($break-tablet-min)
 	%nav-tablet-font-xs
@@ -265,6 +299,7 @@ $nav-color-border: #444
 
 	.nav
 		@extend %nav-tablet-font-m
+		+display-flex
 		+flex-flow(row wrap)
 
 		// ZEIT ONLINE
@@ -276,6 +311,7 @@ $nav-color-border: #444
 			border-color: $nav-color-border
 		&__home-title
 			a
+				display: inline-block
 				padding: remify(0 24px)
 
 		// SERVICE
@@ -292,7 +328,7 @@ $nav-color-border: #444
 			background-color: $primary-color
 			border-color: $nav-color-border
 			border-style: solid
-			border-width: 0 1px
+			border-width: 0 1px 1px
 			display: none
 			line-height: remify(39px)
 			position: absolute
@@ -308,6 +344,7 @@ $nav-color-border: #444
 		&__login-title,
 		&__more-title
 			padding: remify(0 16px)
+			cursor: pointer
 		&__services-title:focus + &__services-list,
 		&__login-title:focus + &__login-list,
 		&__more-title:focus + &__more-list
@@ -379,9 +416,6 @@ $nav-color-border: #444
 			a, h2
 				border-left: 1px solid $nav-color-border
 				padding: remify(0 16px)
-		&__more-title
-			cursor: pointer
-			display: block
 
 		&__dropdown
 			@extend %nav-tablet-down-arrow

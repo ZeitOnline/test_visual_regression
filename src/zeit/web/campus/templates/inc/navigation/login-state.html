@@ -1,0 +1,36 @@
+{% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
+
+{% set user = request.session.user %}
+
+{% if user %}
+	<h2 class="nav__login-title" tabindex="0" id="login-state" data-sso-id="{{ user.ssoid }}">
+	<!-- <a class="nav__login-title" href="{{ profile }}" id="login-state" data-sso-id="{{ user.ssoid }}"> -->
+		{% if user.picture -%}
+			<span class="nav__user-picture" style="background-image: url({{ request.session.user.picture }})"></span>
+		{%- else %}
+			<span class="nav__user-picture nav__user-picture--default">
+				{{ lama.use_svg_icon('avatar', 'nav__user-avatar', view.request) }}
+			</span>
+		{%- endif %}
+
+		<span class="nav__user-name">als difglasbdvlisbdKVB KUSDYZUVSALVASDUZGV S{{ user.name or 'Angemeldet' }}</span>
+	<!-- </a> -->
+	</h2>
+	<ul class="nav__login-list">
+		<li><a href="{{ profile }}">Account</a></li>
+		<li>
+			<a href="{{ logout }}">
+				Abmelden
+				{{ lama.use_svg_icon('login', 'nav__login-icon', view.request) }}
+			</a>
+		</li>
+	</ul>
+{% else %}
+	<a href="{{ login }}" class="nav__login-link">
+		Anmelden
+		<span class="nav__login-register">
+			/ Registrieren
+			{{ lama.use_svg_icon('login', 'nav__login-icon', view.request) }}
+		</span>
+	</a>
+{% endif %}
