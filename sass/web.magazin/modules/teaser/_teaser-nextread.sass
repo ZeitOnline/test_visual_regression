@@ -1,0 +1,82 @@
+$nextread-teaser-width: 260px
+$nextread-image-height: 172px
+$nextread-minimal-height: em(165px)
+$nextread-maximal-height: em(320px)
+
+%nextread-link-dark
+    a
+        +link-colors($black, $black, $black, $black, $black)
+
+%nextread-link-light
+    a
+        +link-colors($white, $white, $white, $white, $white)
+
+
+.teaser-nextread__supertitle
+    @extend %supertitle
+    font-size: $font-s
+    font-weight: normal
+    display: block
+    margin: $small 0 $micro
+    text-align: left
+
+.teaser-nextread__title
+    display: block
+    font-size: $font-l
+    letter-spacing: 1px
+    text-align: left
+    +respond-min($break-1)
+        font-size: $font-xl
+    +respond-min($break-2)
+        font-size: $font-xxl
+
+.teaser-nextread__img
+    display: table-cell
+    height: $nextread-image-height
+    width: $nextread-teaser-width
+
+.teaser-nextread__link
+    width: 100%
+    display: block
+
+.nextread-base
+    .teaser-nextread
+        display: inline-block
+        margin: $large auto $junior
+        max-width: $medium-content-width
+
+        &--multi
+            margin: $junior
+            .teaser-nextread__title
+                font-size: $font-l
+
+        &--single
+            +respond-min($break-2)
+                display: table
+                background: $white
+                width: 80%
+            .teaser-nextread__text
+                padding: 0
+                +respond-min($break-1)
+                    .teaser-nextread__title
+                        font-size: $font-xl
+                +respond-min($break-2)
+                    display: table-cell
+                    vertical-align: top
+                    padding: $medium $thin $thin $medium
+                    .teaser-nextread__title
+                        font-size: $font-xl
+                        padding: 0
+                    .teaser-nextread__supertitle
+                        margin: $micro 0
+                        padding: 0
+
+        &--no-img
+            .teaser-nextread__text--single
+                +respond-min($break-2)
+                    display: block
+                    padding: $medium
+                .teaser-nextread__title,
+                .teaser-nextread__supertitle
+                    text-align: center
+
