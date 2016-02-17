@@ -112,20 +112,20 @@ def test_blacklist_entry_should_match_everything_but_image_urls(testbrowser):
     with pytest.raises(urllib2.HTTPError) as info:
         resp = testbrowser('/angebote/autosuche/foo/bar/index')
         assert resp.headers.get('X-Render-With') == 'default'
-        assert info.value.getcode() == 501
+    assert info.value.getcode() == 501
 
     with pytest.raises(urllib2.HTTPError) as info:
         resp = testbrowser('/angebote/autosuche/foo/bar/my_logo')
         assert resp.headers.get('X-Render-With') == 'default'
-        assert info.value.getcode() == 501
+    assert info.value.getcode() == 501
 
     with pytest.raises(urllib2.HTTPError) as info:
         testbrowser('/angebote/autosuche/foo/bar/wide__123x456')
-        assert info.value.getcode() == 404
+    assert info.value.getcode() == 404
 
     with pytest.raises(urllib2.HTTPError) as info:
         testbrowser('/angebote/autosuche/foo/bar/bitblt-123x456')
-        assert info.value.getcode() == 404
+    assert info.value.getcode() == 404
 
 
 @pytest.mark.parametrize('path, moved', [
