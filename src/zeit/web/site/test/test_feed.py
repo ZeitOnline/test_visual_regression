@@ -1,7 +1,10 @@
 import requests
 import lxml.etree
 import zope.component
+
 import zeit.solr.interfaces
+
+import zeit.web.site.view_feed
 
 
 def test_newsfeed_should_only_render_cp2015(testserver):

@@ -87,10 +87,10 @@ def create_public_url(url):
 
 
 def join_queries(url, join_query):
-    scheme, netloc, path, params, query, fragment = (
-                urlparse.urlparse(url))
+    scheme, netloc, path, params, query, fragment = urlparse.urlparse(url)
     query = urllib.urlencode(urlparse.parse_qsl(query) + join_query)
     return urlparse.urlunparse([scheme, netloc, path, params, query, fragment])
+
 
 class Base(zeit.web.core.view.Base):
 
@@ -315,9 +315,8 @@ class SpektrumFeed(Base):
             normalized_title = zeit.cms.interfaces.normalize_filename(
                 content.title)
             tracking = [
-                ('wt_zmc',
-                'koop.ext.zonaudev.spektrumde.feed.%s.bildtext.link.x' % (
-                    normalized_title)),
+                ('wt_zmc', ('koop.ext.zonaudev.spektrumde.feed.{}.bildtext.'
+                            'link.x'.format(normalized_title))),
                 ('utm_medium', 'koop'),
                 ('utm_source', 'spektrumde_zonaudev_ext'),
                 ('utm_campaign', 'feed'),
