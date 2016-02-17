@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2637: Enable ad-label on framebuilder
 
+- ZON-2772: Ad tags for AMP article
+
 - BUG-282: Join query strings for feed URLs with tracking params.
 
 
