@@ -16,9 +16,7 @@
 		</a>
 	{% else %}
 		<span class="{{ module_layout }}__textitem">
-			<a class="{{ module_layout }}__textitem-link" href="{{ teaser | create_url }}">
-				{{ teaser.display_name }}
-			</a>
+			<a class="{{ module_layout }}__textitem-link" href="{{ teaser | create_url }}">{{ teaser.display_name }}</a>
 		</span>
 	{% endif %}
 </li>
