@@ -8,9 +8,10 @@
 					<div class="column-heading__information">
 						<h1 class="column-heading__header" itemprop="headline">
 							<span class="column-heading__kicker">
-								{{ view.serie + ' / ' }}
-								{{ view.supertitle }}
-							</span>{% if view.title %}<span class="article-heading__colon">: </span>{% endif %}
+								{{- view.serie + ' / ' -}}
+								{{- view.supertitle -}}
+							</span>
+							{%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
 							<span class="column-heading__title">{{ view.title }}</span>
 						</h1>
 						{% if view.authors %}

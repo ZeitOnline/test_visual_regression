@@ -10,6 +10,7 @@ import zeit.content.video.interfaces
 import zeit.cms.content.interfaces
 import zeit.cms.interfaces
 
+import zeit.web.campus.view
 import zeit.web.core.gallery
 import zeit.web.core.view
 import zeit.web.magazin.view
@@ -28,7 +29,8 @@ def is_zon_content(context, request):
     #  return bool(getattr(context, 'rebrush_website_content', False)) and (
     #    not zeit.web.magazin.view.is_zmo_content(context, request))
 
-    return bool(not zeit.web.magazin.view.is_zmo_content(context, request))
+    return bool(not zeit.web.magazin.view.is_zmo_content(context, request) and
+                not zeit.web.campus.view.is_zco_content(context, request))
 
 
 class Base(zeit.web.core.view.Base):
