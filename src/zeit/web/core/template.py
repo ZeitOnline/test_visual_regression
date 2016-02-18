@@ -656,24 +656,13 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
     return layout_image.get(teaser_layout, [orig_image_pattern])
 
 
-@zeit.web.register_global
-def set_image_id(asset_id, image_base_name, image_pattern, ext):
+def _existing_image(image_group, patterns, ext):
     # TRASHME: Only needed by deprecated get_teaser_image function
-    return '%s/%s-%s.%s' % (
-        asset_id, image_base_name, image_pattern, ext)
-
-
-def _existing_image(asset_id, base_name, patterns, ext, filenames):
-    # TRASHME: Only needed by deprecated get_teaser_image function
+    filenames = image_group.keys()
     for pattern in patterns:
-        name = '{}-{}.{}'.format(base_name, pattern, ext)
-        if name not in filenames:
-            continue
-        unique_id = '{}{}'.format(asset_id, name)
-        image = zeit.cms.interfaces.ICMSContent(unique_id, None)
-        if image:
-            return image, pattern
-
+        for name in filenames:
+            if name.endswith('{}.{}'.format(pattern, ext)):
+                return image_group[name], pattern
     return None, None
 
 
@@ -710,9 +699,6 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
         return get_teaser_image(teaser_block, teaser, unique_id=default_id)
 
-    asset_id = unique_id or asset.uniqueId
-    image_base_name = re.split('/', asset.uniqueId.strip('/'))[-1]
-
     # If imagegroup has no images, return default image
     if len(asset) == 0:
         return get_teaser_image(teaser_block, teaser, unique_id=default_id)
@@ -723,37 +709,30 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     except AttributeError:
         return
 
-    # Assumes all images in this group have the same mimetype.
-    filenames = asset.keys()
-    sample_image = u'{}{}'.format(asset.uniqueId, filenames[0])
-
+    # We assume all images in a group have the same mimetype.
+    sample_image = u'{}{}'.format(asset.uniqueId, asset.keys()[0])
     ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
         mimetypes.guess_type(sample_image)[0], 'jpg')
 
-    image, image_pattern = _existing_image(asset_id, image_base_name,
-                                           image_patterns, ext, filenames)
+    image, image_pattern = _existing_image(asset, image_patterns, ext)
+    if image is None:
+        image_pattern = teaser_block.layout.image_pattern
+        image, _ = _existing_image(asset, [image_pattern], ext)
+    if zeit.web.core.image.is_image_expired(image):
+        return None
 
-    try:
-        if image is None and image_pattern is None:
-
-            image_pattern = teaser_block.layout.image_pattern
-            image_id = set_image_id(asset_id, image_base_name,
-                                    image_pattern, ext)
-            image = zeit.cms.interfaces.ICMSContent(image_id)
-        if zeit.web.core.image.is_image_expired(image):
-            return None
-
-        teaser_image = zope.component.getMultiAdapter(
-            (asset, image),
-            zeit.web.core.interfaces.ITeaserImage)
-        teaser_image.image_pattern = image_pattern
-        return teaser_image
-    except TypeError:
-        log.debug('Cannot retrieve teaser image: {}'.format(image_id))
+    if image is None:
+        log.debug('Cannot retrieve teaser image {} for {}'.format(
+            image_pattern, unique_id or asset.uniqueId))
         # Don't fallback when a unique_id is given explicitly in order to
         # prevent infinite recursion.
         if not unique_id:
             return get_teaser_image(teaser_block, teaser, unique_id=default_id)
+
+    teaser_image = zope.component.getMultiAdapter(
+        (asset, image), zeit.web.core.interfaces.ITeaserImage)
+    teaser_image.image_pattern = image_pattern
+    return teaser_image
 
 
 @zeit.web.register_filter

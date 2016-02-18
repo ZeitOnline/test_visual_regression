@@ -231,3 +231,11 @@ class FrameBuilder(zeit.web.core.view.CeleraOneMixin, Base):
     @zeit.web.reify
     def framebuilder_requires_ivw(self):
         return 'ivw' in self.request.GET
+
+    @zeit.web.reify
+    def is_advertorial(self):
+        return 'adlabel' in self.request.GET
+
+    @zeit.web.reify
+    def cap_title(self):
+        return self.request.GET.get('adlabel') or 'Anzeige'

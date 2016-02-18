@@ -6,6 +6,16 @@ Change log for zeit.web
 
 - ZON-2481: Edgesideinclude login-state for campus and magazin
 
+- ZON-2637: Enable ad-label on framebuilder
+
+- ZON-2772: Ad tags for AMP article
+
+- BUG-282: Join query strings for feed URLs with tracking params
+
+- MAINT: Disuse rsynced node-comment-statistics in favor of API endpoint
+
+- FIX: Don't accidentally create missing image variants in ZMO
+
 
 2.56.1 (2016-02-17)
 -------------------

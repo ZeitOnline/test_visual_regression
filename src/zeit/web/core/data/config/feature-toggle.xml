@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <features>
+  <amp_advertising>true</amp_advertising>
   <article_lineage>true</article_lineage>
   <iqd>true</iqd>
   <third_party_modules>false</third_party_modules>
