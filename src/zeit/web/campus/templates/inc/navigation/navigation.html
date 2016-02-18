@@ -12,10 +12,9 @@
 			</span>
 		</a>
 	</div>
-	<a class="header__menu-link" href="#navigation">
+	<a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü">
 		{{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', view.request) }}
 		{{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', view.request) }}
-		<span class="visually-hidden">Menu öffnen</span>
 	</a>
 </div>
 
@@ -24,8 +23,8 @@
 		<h2 class="nav__home-title"><a href="{{ request.route_url('home') }}index">ZEIT ONLINE</a></h2>
 	</div>
 	<nav class="nav__services">
-		<h2 class="nav__services-title" tabindex="0"><span class="nav__dropdown">Service</span></h2>
-		<ul class="nav__services-list">
+		<h2 class="nav__services-title" tabindex="0" role="button" aria-controls="services-menu"><span class="nav__dropdown">Service</span></h2>
+		<ul class="nav__services-list" id="services-menu" aria-hidden="true">
 			<li><a href="#">ZEIT Wissen</a></li>
 			<li><a href="#">ZEIT Geschichte</a></li>
 			<li><a href="#">Immobilien</a></li>
@@ -58,8 +57,8 @@
 		</nav>
 	</div>
 	<nav class="nav__more">
-		<h2 class="nav__more-title" tabindex="0"><span class="nav__dropdown">Mehr</span></h2>
-		<ul class="nav__more-list" id="more-list">
+		<h2 class="nav__more-title" tabindex="0" role="button" aria-controls="more-menu"><span class="nav__dropdown">Mehr</span></h2>
+		<ul class="nav__more-list" id="more-menu" aria-hidden="true">
 			<li><a href="#">Abo</a></li>
 			<li><a href="#">Shop</a></li>
 			<li><a href="#">ePaper</a></li>
