@@ -13,6 +13,8 @@ DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
 @grokcore.component.adapter(zeit.campus.interfaces.IZCOContent)
 def campus_topiclink(context):
+    # Accepting any IZCOContent here only works because the TopicLink class is
+    # implemented tolerantly when its context does not provide ICenterPage.
     topiclink = zeit.web.core.centerpage.TopicLink(context)
     if topiclink:
         return topiclink
