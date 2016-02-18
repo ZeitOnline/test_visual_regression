@@ -452,23 +452,13 @@ def get_counts(*unique_ids):
     content resources. If no resources are specified, the most commented
     resources will be used.
 
-    :param unique_ids: Optional list of uniqueIds
+    :param unique_ids: List of uniqueIds
     :rtype: dict
     """
 
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-
-    if len(unique_ids):
-        raw = request_counts(*unique_ids)
-        if not raw:
-            return {}
-    else:
-        uri = zeit.cms.interfaces.ID_NAMESPACE + conf.get(
-            'node_comment_statistics', '')
-        try:
-            raw = zeit.cms.interfaces.ICMSContent(uri).data.encode()
-        except (AttributeError, TypeError):
-            return {}
+    raw = request_counts(*unique_ids)
+    if raw is None:
+        return {}
     try:
         ascii = raw.encode('ascii', 'xmlcharrefreplace').strip()
         nodes = lxml.etree.fromstring(ascii).xpath('/nodes/node')
