@@ -323,17 +323,6 @@ def test_cp_informatives_should_have_no_blocks(application):
     assert informatives_last_block == cp_view.area_informatives_1[2].uniqueId
 
 
-def test_homepage_indentifies_itself_as_homepage(testserver):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/index')
-    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
-    assert view.is_hp is True
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-large-teaser')
-    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
-    assert view.is_hp is False
-
-
 def test_wrapped_features_are_triggered(testbrowser):
     browser = testbrowser('/zeit-magazin/index')
     assert browser.cssselect('nav.main-nav')

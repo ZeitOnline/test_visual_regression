@@ -395,3 +395,15 @@ def test_default_teaser_should_return_default_teaser_image(
     teaser_img = zeit.web.core.template.get_image(
         teaser_block, article_context)
     assert zeit.web.core.interfaces.ITeaserImage.providedBy(teaser_img)
+
+
+def test_zmo_homepage_identifies_itself_as_homepage(testserver):
+    __import__("pdb").set_trace()
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/index')
+    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.is_hp is True
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/misc')
+    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.is_hp is False
