@@ -35,7 +35,9 @@
 		</ul>
 	</nav>
 	<div class="nav__login">
-		{%- include "zeit.web.campus:templates/inc/navigation/login-state.html" -%}
+		{%- set esi_source = '{}login-state?for=campus&context-uri={}'.format(request.route_url('home'), request.url) -%}
+		{{- lama.insert_esi(esi_source, 'Anmeldung nicht möglich') -}}
+		{#%- include "zeit.web.campus:templates/inc/navigation/login-state.html" -%#}
 	</div>
 	<div class="nav__primary">
 		<nav class="nav__topics">
