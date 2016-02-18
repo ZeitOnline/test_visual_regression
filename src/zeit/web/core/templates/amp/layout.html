@@ -22,7 +22,7 @@
 		{%- include "zeit.web.core:templates/amp/style.html" %}
 	{% endblock style %}
 	<script async src="https://cdn.ampproject.org/v0.js"></script>
-	{% if view.amp_advertising_is_enabled -%}
+	{% if toggles('amp_advertising') -%}
 	<script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
 	{% endif -%}
 	<script async custom-element="amp-brightcove" src="https://cdn.ampproject.org/v0/amp-brightcove-0.1.js"></script>

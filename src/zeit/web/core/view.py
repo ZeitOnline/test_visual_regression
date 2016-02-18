@@ -130,11 +130,6 @@ class Base(object):
             return '{}/{}'.format(conf.get('vgwort_url'), token)
 
     @zeit.web.reify
-    def amp_advertising_is_enabled(self):
-        return zeit.web.core.application.FEATURE_TOGGLES.find(
-            'amp_advertising')
-
-    @zeit.web.reify
     def type(self):
         return type(self.context).__name__.lower()
 

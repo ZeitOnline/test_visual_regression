@@ -90,8 +90,7 @@
     </head>
     <body itemscope itemtype="http://schema.org/WebPage" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
 
-        {% include "zeit.web.core:templates/inc/tag-manager.html" %}
-
+        {% include "zeit.web.core:templates/inc/tag-manager.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
 
