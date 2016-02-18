@@ -1,6 +1,8 @@
 $nextread-teaser-width: 260px
 
-.article__nextread
+.nextread
+    @extend %nextread-link-dark
+    position: relative
     +unpadded
     font-family: $font-tabletgothic
     font-weight: bold
@@ -11,30 +13,18 @@ $nextread-teaser-width: 260px
     +respond-max($break-2)
         padding-bottom: $large
 
-.article__nextread__lead
-    font-size: $font-m
-    letter-spacing: $hair
-    margin: $big 0 $junior
-    text-align: center
-    text-transform: uppercase
-    &:after
-        content: ":"
+    &__lead
+        font-size: $font-m
+        letter-spacing: $hair
+        margin: $big 0 $junior
+        text-align: center
+        text-transform: uppercase
+        &:after
+            content: ":"
 
-.article__nextread__wrap
-    text-align: center
-    +respond-max($break-2)
-        width: $nextread-teaser-width
-        margin: 0 auto
+    &__wrap
+        text-align: center
+        +respond-max($break-2)
+            width: $nextread-teaser-width
+            margin: 0 auto
 
-.nextread-maximal
-    @extend %nextread-link-light
-    +respond-min($break-1)
-        padding-left: $medium
-        padding-right: $medium
-
-.nextread-minimal
-    @extend %nextread-link-dark
-
-.nextread-base
-    @extend %nextread-link-dark
-    position: relative

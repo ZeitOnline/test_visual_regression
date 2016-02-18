@@ -1,10 +1,16 @@
 
-.nextread-minimal
-    .teaser-nextread-minimal
-        background: $white
-        margin: 0 auto
-        padding: $medium
-        width: 80%
-        &__title,
-        &__supertitle
-            text-align: center
+.teaser-nextread-minimal
+    @extend %teaser-nextread
+    background: $white
+    padding: $medium
+
+    &__supertitle
+        @extend %teaser-nextread__supertitle
+        text-align: center
+    &__title
+        @extend %teaser-nextread__title
+        text-align: center
+    &__img
+        @extend %teaser-nextread__img
+    &__link
+        @extend %teaser-nextread__link

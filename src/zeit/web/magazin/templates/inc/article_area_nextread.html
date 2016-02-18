@@ -10,9 +10,9 @@ Available attributes:
 
 {%- set module = view.nextread -%}
 
-<aside class="article__nextread nextread-{{ module.layout.id }} is-centered">
-    <div class="article__nextread__lead">Lesen Sie jetzt</div>
-    <div class="article__nextread__wrap">
+<aside class="nextread is-centered">
+    <div class="nextread__lead">Lesen Sie jetzt</div>
+    <div class="nextread__wrap">
         {{ cp.include_teaser(module, 'zmo-nextread-') }}
     </div>
 </aside>

@@ -6,7 +6,7 @@ Default teaser template for nextread teasers
 
 {% set image = get_teaser_image(module, teaser) %}
 
-<div class="{% block layout %}teaser-nextread{% endblock %} {{ self.layout() }}--{{ module.multitude }}{% if not image %} {{ self.layout() }}--no-img{% endif %}" style="{% block bg_image %}{% endblock %}">
+<div class="{% block layout %}teaser-nextread{% endblock %}{% if not image %} {{ self.layout() }}--no-img{% endif %}" style="{% block bg_image %}{% endblock %}">
     <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
 
         {% block teaser_image %}
