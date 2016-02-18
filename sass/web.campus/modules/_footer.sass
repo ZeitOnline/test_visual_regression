@@ -10,7 +10,7 @@
 	a
 		color: inherit
 		+on-interaction
-			color: #fff
+			color: $nav-color-tools
 
 	&__item
 		+respond-min($break-desktop-min)
@@ -20,3 +20,27 @@
 		color: #777
 		height: remify(20px)
 		width: remify(113px)
+
+	&__links
+		border-bottom: 1px solid #444
+		padding-bottom: remify(8px)
+		padding-top: remify(4px)
+		&:first-child
+			padding-top: 0
+		&:last-child
+			border-bottom: none
+			padding-bottom: 0
+
+	&__linkitem,
+	&__link
+		font-size: remify(12px)
+		letter-spacing: $letter-spacing-s
+		line-height: 1.5
+		padding-right: remify(15px)
+		white-space: nowrap
+		&:last-child
+			padding-right: 0
+
+	&__linkitem
+		font-weight: 400
+		text-transform: uppercase
