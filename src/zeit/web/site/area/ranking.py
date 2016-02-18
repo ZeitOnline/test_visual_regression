@@ -76,7 +76,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     zope.interface.implements(
         IRanking,
-        zeit.content.cp.interfaces.IRenderedArea,
         zeit.web.core.interfaces.IPagination
     )
 
@@ -249,4 +248,8 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
 @zeit.web.register_area('author-list')
 class AuthorList(Ranking):
-    pass
+
+    zope.interface.implements(
+        IRanking,
+        zeit.web.core.interfaces.IPagination
+    )
