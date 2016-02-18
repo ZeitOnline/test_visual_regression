@@ -1,5 +1,5 @@
 {% if area.pagination %}
-<div class="pager">
+<div class="pager{{ area_pager_modifier }}">
     {% if area.current_page == area.total_pages %}
     <a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(p=area.current_page-1) }}">Vorherige Seite</a>
     {% else %}
