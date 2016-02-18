@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - FIX: Don't accidentally create missing image variants in ZMO
 
+- PERF: Enable solr proxy for author list
+
 
 2.56.1 (2016-02-17)
 -------------------
