@@ -1,4 +1,4 @@
-{% if toggles('third_party_modules') and view.iqd_is_enabled and view.context.advertising_enabled %}
+{% if toggles('third_party_modules', 'iqd') and view.context.advertising_enabled %}
 <!-- begin ad tag (oop) -->
 <div id="iqadtileOOP">
     <script type="text/javascript">

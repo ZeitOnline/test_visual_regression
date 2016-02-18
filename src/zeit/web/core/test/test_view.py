@@ -665,19 +665,19 @@ def test_ivw_uses_hyprid_method_for_apps(jinja2_env):
 
 def test_iqd_ads_should_utilize_feature_toggles(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.template.toggles, {
-        'iqd_is_enabled': True, 'third_party_modules': True}.get)
+        'iqd': True, 'third_party_modules': True}.get)
     browser = testbrowser('/zeit-online/article/zeit')
     assert 'AdController.initialize();' in (
         browser.cssselect('head')[0].text_content())
 
     monkeypatch.setattr(zeit.web.core.template.toggles, {
-        'iqd_is_enabled': False, 'third_party_modules': False}.get)
+        'iqd': False, 'third_party_modules': False}.get)
     browser = testbrowser('/zeit-online/article/zeit')
     assert 'AdController.initialize();' not in (
         browser.cssselect('head')[0].text_content())
 
     monkeypatch.setattr(zeit.web.core.template.toggles, {
-        'iqd_is_enabled': True, 'third_party_modules': False}.get)
+        'iqd': True, 'third_party_modules': False}.get)
     browser = testbrowser('/zeit-online/article/zeit')
     assert 'AdController.initialize();' not in (
         browser.cssselect('head')[0].text_content())

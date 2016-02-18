@@ -51,7 +51,7 @@
         <!-- IVW -->
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif %}
-    {% if toggles('third_party_modules') and view.iqd_is_enabled %}
+    {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
         {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
