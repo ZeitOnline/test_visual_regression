@@ -1,20 +1,16 @@
-$nextread-teaser-width: 260px
-$nextread-minimal-height: em(165px)
-$nextread-maximal-height: em(320px)
+$nextread-teaser-width: remify(260px)
 
 %nextread-link-dark
-    a
-        +link-colors($black, $black, $black, $black, $black)
+    +link-colors($black, $black, $black, $black, $black)
 
 %nextread-link-light
-    a
-        +link-colors($white, $white, $white, $white, $white)
+    +link-colors($white, $white, $white, $white, $white)
 
 %teaser-nextread
     display: table
-    margin: $large auto $junior
-    width: 80%
+    margin: $large auto
     +respond-min($break-2)
+        width: 80%
         background: $white
 
 %teaser-nextread__supertitle
@@ -23,32 +19,16 @@ $nextread-maximal-height: em(320px)
     font-weight: normal
     display: block
     margin: $micro 0
-    text-align: left
 
 %teaser-nextread__title
-    display: block
-    font-size: $font-l
-    letter-spacing: 1px
-    text-align: left
-    +respond-min($break-1)
-        font-size: $font-xl
+    font-size: $font-xl
+    letter-spacing: $hair
     +respond-min($break-2)
         font-size: $font-xxl
 
-%teaser-nextread__img
+%teaser-nextread__media
     display: table-cell
     width: $nextread-teaser-width
-
-%teaser-nextread__text
-    padding: 0
-    +respond-min($break-2)
-        display: table-cell
-        vertical-align: top
-        padding: $medium $thin $thin $medium
-
-%teaser-nextread__link
-    width: 100%
-    display: block
 
 .teaser-nextread
     @extend %teaser-nextread
@@ -56,19 +36,13 @@ $nextread-maximal-height: em(320px)
         @extend %teaser-nextread__supertitle
     &__title
         @extend %teaser-nextread__title
-    &__img
-        @extend %teaser-nextread__img
-    &__link
-        @extend %teaser-nextread__link
+    &__media
+        @extend %teaser-nextread__media
     &__text
-        @extend %teaser-nextread__text
-
-    &--no-img
-        .teaser-nextread__text--single
-            +respond-min($break-2)
-                display: block
-                padding: $medium
-            .teaser-nextread__title,
-            .teaser-nextread__supertitle
-                text-align: center
+        @extend %nextread-link-dark
+        padding-top: $fine
+        +respond-min($break-2)
+            display: table-cell
+            vertical-align: middle
+            padding: 0 $compact
 

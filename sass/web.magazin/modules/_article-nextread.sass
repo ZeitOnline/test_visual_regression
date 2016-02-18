@@ -1,7 +1,6 @@
 $nextread-teaser-width: 260px
 
 .nextread
-    @extend %nextread-link-dark
     position: relative
     +unpadded
     font-family: $font-tabletgothic
@@ -9,9 +8,7 @@ $nextread-teaser-width: 260px
     color: $black
     background-color: $alabaster
     border-top: 1px solid $grey--light
-    padding-bottom: remify(154px)
-    +respond-max($break-2)
-        padding-bottom: $large
+    padding-bottom: $large
 
     &__lead
         font-size: $font-m
@@ -21,10 +18,4 @@ $nextread-teaser-width: 260px
         text-transform: uppercase
         &:after
             content: ":"
-
-    &__wrap
-        text-align: center
-        +respond-max($break-2)
-            width: $nextread-teaser-width
-            margin: 0 auto
 
