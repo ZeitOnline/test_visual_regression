@@ -656,26 +656,23 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     # logged in
     request.authenticated_userid = '12345'
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
-    logged = 'Account'
     lines = tpl.module.main_nav('true', request).splitlines()
+
     output = ''
     for line in lines:
         output += line.strip()
 
     assert markup in output
-    assert logged in output
 
     # logged out
     request.authenticated_userid = None
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
-    unlogged = 'Anmelden'
     lines = tpl.module.main_nav('true', request).splitlines()
     output = ''
     for line in lines:
         output += line.strip()
 
     assert markup in output
-    assert unlogged in output
 
 
 def test_macro_copyrights(jinja2_env):
