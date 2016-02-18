@@ -82,7 +82,6 @@ def app_settings(mockserver):
             'http://xml.zeit.de/config/community_maintenance.xml'),
         'agatho_host': mockserver.url + '/comments',
         'linkreach_host': mockserver.url + '/linkreach/api',
-        'google_tag_manager_host': 'foo.baz',
         'app_servers': '',
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
         'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
@@ -91,7 +90,6 @@ def app_settings(mockserver):
         'zett_img_host': mockserver.url + '/zett',
         'academics_hp_feed': mockserver.url + '/academics/feed.xml',
         'academics_img_host': mockserver.url + '/academics',
-        'node_comment_statistics': 'community/node-comment-statistics.xml',
         'connector_type': 'mock',
         'vgwort_url': 'http://example.com/vgwort',
         'breaking_news_config': (
@@ -588,18 +586,6 @@ def css_selector(request):
             document = lxml.html.fromstring(document)
         return document.xpath(xpath)
     return wrapped
-
-
-@pytest.fixture
-def comment_counter(application):
-    def get_count(**kwargs):
-        settings = zope.component.queryUtility(
-            zeit.web.core.interfaces.ISettings)
-        request = pyramid.testing.DummyRequest()
-        request.registry.settings = settings
-        request.GET = kwargs
-        return zeit.web.core.view.json_comment_count(request)
-    return get_count
 
 
 # inspired by http://stackoverflow.com/a/28073449

@@ -1,0 +1,32 @@
+.alphabetpager
+	border-bottom: 1px #ccc solid
+	height: remify(60px)
+	width: 100%
+	overflow-x: scroll
+	overflow-y: hidden
+	white-space: nowrap
+	&__item
+		border-right: 1px solid rgba(112, 112, 112, 0.5)
+		color: #707070
+		display: inline-block
+		font-size: em(14px)
+		line-height: remify(14px)
+		text-align: center
+		width: remify(45px)
+		&:last-child
+			border-right: none
+		&--current
+			color: #313131
+			font-weight: bold
+
++respond-min($break-tablet-min)
+	.alphabetpager
+		display: flex
+		justify-content: space-around
+		// compensate for margin-bottom of cp-header
+		margin: -3rem auto 0
+		overflow-x: visible
+		padding: remify(24px 0)
+		max-width: remify(760px)
+		&__item
+			flex-grow: 1

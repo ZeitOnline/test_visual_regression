@@ -23,19 +23,14 @@ class Reach(object):
 
     session = requests.Session()
 
-    @zeit.web.reify
-    def host(self):
-        return zope.component.getUtility(
-            zeit.web.core.interfaces.ISettings).get('linkreach_host', '')
-
     def _get(self, location, **kw):
-        url = u'{}/{}'.format(self.host, location.encode('utf-8'))
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        url = u'{}/{}'.format(
+            conf.get('linkreach_host'), location.encode('utf-8'))
+        timeout = conf.get('reach_timeout', 0.2)
         try:
             with zeit.web.core.metrics.timer('http.reponse_time'):
-                return self.session.get(
-                    url, params=kw,
-                    timeout=conf.get('reach_timeout', 0.2)).json()
+                return self.session.get(url, params=kw, timeout=timeout).json()
         except (requests.exceptions.RequestException, ValueError), err:
             log.debug('Reach connection failed: {}'.format(err))
 
