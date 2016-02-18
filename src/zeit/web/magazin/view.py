@@ -1,7 +1,10 @@
 import re
 
+import pyramid.view
+
 import zeit.magazin.interfaces
 
+import zeit.web.core.security
 import zeit.web.core.view
 
 
@@ -99,3 +102,12 @@ class Base(zeit.web.core.view.Base):
                 ('$autoSizeFrames', True),
                 ('keywords', ','.join(self.adwords)),
                 ('tma', '')]
+
+
+@pyramid.view.view_config(
+    route_name='login_state',
+    renderer='templates/inc/navigation/login-state.html',
+    request_param='for=magazin',
+    http_cache=60)
+def login_state(request):
+    return zeit.web.core.security.get_login_state(request)
