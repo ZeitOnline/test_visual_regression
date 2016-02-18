@@ -1,26 +1,51 @@
 .nav-flyout
 	background-color: $color-tools-bg
-	padding: remify(20px)
+
+	&__headline
+		height: remify(50px)
+
+	&__text
+		font-family: $font-tabletgothic
 
 	&__item
 		display: block
 		margin: 0
 		padding: 0
 		background-color: $white
-		width: 30%
+		width: 32%
 
 	&__link
 		color: $color-tools-text
 		display: block
+		font-weight: bold
 
 	&__list
 		+display-flex()
-		+justify-content(space-around)
+		+justify-content(space-between)
 		list-style: none
 		margin: 0
-		padding: 0
+		padding: remify(20px)
 
 	&__link:active,
 	&__link:focus,
 	&__link:hover
 		color: $black
+
+	&__sit-link
+		background-color: rgba(0, 0, 0, 0.1)
+		color: $white
+		display: block
+		font-size: remify(16px)
+		font-weight: bold
+		padding: remify(12px) 0
+		text-align: center
+		&:active,
+		&:focus,
+		&:hover
+			color: $white
+
+	&__toolbox-arrow
+		height: 20px
+		width: 20px
+		margin-left: 0.5em
+		vertical-align: text-top
