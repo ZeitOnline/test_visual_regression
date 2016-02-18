@@ -11,11 +11,6 @@ import zeit.web.core.reach
 import zeit.web.site.module.buzzbox
 
 
-def test_reach_host_should_be_configured_in_instance(application):
-    conn = zeit.web.core.reach.Reach()
-    assert conn.host.endswith('/linkreach/api')
-
-
 def test_reach_connection_should_be_stored_in_class(application):
     conn = zeit.web.core.reach.Reach()
     assert conn.session is zeit.web.core.reach.Reach.session
