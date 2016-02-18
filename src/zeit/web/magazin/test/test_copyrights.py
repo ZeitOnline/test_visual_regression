@@ -15,16 +15,16 @@ import zeit.web.core.centerpage
 
 def test_copyright_entries_are_rendered_correcly(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
+    driver.get('%s/zeit-magazin/misc' % testserver.url)
     driver.find_elements_by_css_selector(
         ".js-image-copyright-footer")[0].click()
     # number of entries
     assert len(driver.find_elements_by_css_selector(
-        '.image-copyright-footer__item')) == 14
+        '.image-copyright-footer__item')) == 3
     # copyright text itself
-    copyright_label = driver.find_elements_by_css_selector(
-        '.image-copyright-footer__item > span')[3].text
-    assert u'© Jason Merritt/Getty Images' in copyright_label
+    copyright_label = driver.find_element_by_css_selector(
+        '.image-copyright-footer__item > span').text
+    assert u'© Karl Lagerfeld' in copyright_label
     # linked copyrights
     copyright_link = driver.find_element_by_css_selector(
         '.image-copyright-footer__item > a').get_attribute('href')
