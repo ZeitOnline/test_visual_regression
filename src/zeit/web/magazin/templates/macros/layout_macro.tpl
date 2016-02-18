@@ -112,43 +112,14 @@
                         </div>
                         #}
                         <div class="main-nav__section main-nav__community">
-                            {% if request.authenticated_userid %}
-                                {{ head_user_is_logged_in_true(request) }}
-                            {%- else -%}
-                                {{ head_user_is_logged_in_false(request) }}
-                            {%- endif -%}
+                            {% set esi_source = '{}login-state?for=magazin&context-uri={}'.format(request.route_url('home'), request.url) %}
+                            {{ insert_esi(esi_source, 'Anmeldung nicht möglich') }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
-{%- endmacro %}
-
-{% macro head_user_is_logged_in_true(request)  %}
-    <span class="main-nav__section__trigger js-main-nav-section-trigger">
-        {% if request.session.user.picture %}
-            <span class="main-nav__community__icon" style="background-image: url({{ request.session.user.picture }})"></span>
-        {%- else -%}
-            <span class="main-nav__community__icon icon-avatar-std"></span>
-        {%- endif -%}
-    </span>
-    <div class="main-nav__section__content js-main-nav-section-content">
-        <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}" id="hp.zm.topnav.community.account">Account</a>
-        {% if request.registry.settings.sso_activate %}
-            <a href="{{ request.registry.settings.sso_url }}/abmelden?url={{ request.url }}" id="hp.zm.topnav.community.logout">Logout</a>
-        {% else %}
-            <a href="{{ request.registry.settings.community_host }}/logout?destination={{ request.url }}" id="hp.zm.topnav.community.logout">Logout</a>
-        {% endif %}
-    </div>
-{%- endmacro %}
-
-{% macro head_user_is_logged_in_false(request) -%}
-    {% if request.registry.settings.sso_activate %}
-        <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
-    {% else %}
-        <a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
-    {% endif %}
 {%- endmacro %}
 
 {% macro copyrights(cr_list) -%}

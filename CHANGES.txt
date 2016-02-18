@@ -4,9 +4,13 @@ Change log for zeit.web
 2.57 (unreleased)
 -----------------
 
+- ZON-2481: Edgesideinclude login-state for campus and magazin
+
 - ZON-2637: Enable ad-label on framebuilder
 
 - ZON-2772: Ad tags for AMP article
+
+- ZON-2481: Implement topiclinks for all campus content types
 
 - BUG-282: Join query strings for feed URLs with tracking params
 
@@ -15,6 +19,12 @@ Change log for zeit.web
 - FIX: Don't accidentally create missing image variants in ZMO
 
 - ZON-2780: Add ivw tracking for AMPs
+
+
+2.56.1 (2016-02-18)
+-------------------
+
+- PERF: Enable solr proxy for author list
 
 
 2.56.1 (2016-02-17)

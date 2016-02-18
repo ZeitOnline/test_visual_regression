@@ -589,12 +589,8 @@ def get_attr(*args):
 
 
 @zeit.web.register_filter
-def topic_links(centerpage):
-    try:
-        return zeit.web.core.interfaces.ITopicLink(centerpage)
-    except TypeError:
-        log.debug('object %s could not be adapted' % (
-                  getattr(centerpage, 'uniqueId', '')))
+def topic_links(context):
+    return zeit.web.core.interfaces.ITopicLink(context, None)
 
 
 @zeit.web.register_filter
@@ -735,13 +731,6 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     return teaser_image
 
 
-@zeit.web.register_global
-def get_default_image_id():
-    # TRASHME: Use get_image with disabled fallback instead
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return conf.get('default_teaser_images')
-
-
 @zeit.web.register_filter
 def get_repository_image(image):
     # TRASHME: Should be solved by using get_image on fullgraphical teaser
@@ -808,9 +797,9 @@ def format_webtrekk(string):
 
 
 @zeit.web.register_global
-def get_google_tag_manager_host():
+def settings(key):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return conf.get('google_tag_manager_host')
+    return conf.get(key)
 
 
 @zeit.web.register_global
