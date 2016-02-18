@@ -803,6 +803,11 @@ def settings(key):
 
 
 @zeit.web.register_global
+def toggles(key):
+    return zeit.web.core.application.FEATURE_TOGGLES.find(key)
+
+
+@zeit.web.register_global
 def interrupt(reason=None):
     raise zeit.web.core.jinja.Interrupt(reason)
 
