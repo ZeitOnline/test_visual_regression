@@ -589,12 +589,8 @@ def get_attr(*args):
 
 
 @zeit.web.register_filter
-def topic_links(centerpage):
-    try:
-        return zeit.web.core.interfaces.ITopicLink(centerpage)
-    except TypeError:
-        log.debug('object %s could not be adapted' % (
-                  getattr(centerpage, 'uniqueId', '')))
+def topic_links(context):
+    return zeit.web.core.interfaces.ITopicLink(context, None)
 
 
 @zeit.web.register_filter
