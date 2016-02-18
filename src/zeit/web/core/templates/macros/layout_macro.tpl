@@ -142,7 +142,7 @@
 {%- endmacro %}
 
 {% macro insert_esi(src, error_text='') %}
-    {% if is_dev_environment() %}
+    {% if settings('dev_environment') %}
         <!-- [esi-debug] src="{{ src }}" error_text="{{ error_text }}" -->
         <esi:include src="{{ src }}" onerror="continue" />
     {% else %}

@@ -756,13 +756,6 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
             return get_teaser_image(teaser_block, teaser, unique_id=default_id)
 
 
-@zeit.web.register_global
-def get_default_image_id():
-    # TRASHME: Use get_image with disabled fallback instead
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return conf.get('default_teaser_images')
-
-
 @zeit.web.register_filter
 def get_repository_image(image):
     # TRASHME: Should be solved by using get_image on fullgraphical teaser
@@ -829,16 +822,9 @@ def format_webtrekk(string):
 
 
 @zeit.web.register_global
-def get_google_tag_manager_host():
+def settings(key):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return conf.get('google_tag_manager_host')
-
-
-@zeit.web.register_global
-def is_dev_environment():
-    # TODO: Don't setup wrappers for every config key. Use a settings global.
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return conf.get('dev_environment')
+    return conf.get(key)
 
 
 @zeit.web.register_global

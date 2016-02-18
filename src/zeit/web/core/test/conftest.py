@@ -82,7 +82,6 @@ def app_settings(mockserver):
             'http://xml.zeit.de/config/community_maintenance.xml'),
         'agatho_host': mockserver.url + '/comments',
         'linkreach_host': mockserver.url + '/linkreach/api',
-        'google_tag_manager_host': 'foo.baz',
         'app_servers': '',
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
         'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
