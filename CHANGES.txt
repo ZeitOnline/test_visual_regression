@@ -4,7 +4,9 @@ Change log for zeit.web
 2.57 (unreleased)
 -----------------
 
-- ZON-2481: Edgesideinclude login-state for campus and magazin
+- ZON-2481: Add ZEIT Campus header + main navigation
+
+- MAINT: Edgesideinclude login-state for campus and magazin
 
 - ZON-2637: Enable ad-label on framebuilder
 
