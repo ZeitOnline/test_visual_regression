@@ -1,0 +1,14 @@
+{% extends "zeit.web.campus:templates/layout.html" %}
+
+{% block main %}
+    <h1>{{ view.title }}</h1>
+    {% for page in view.pages %}
+        <section>
+            {% for block in page %}
+                {% if block | block_type == 'paragraph' %}
+                    <p>{{ block | safe }}</p>
+                {% endif %}
+            {% endfor %}
+        </section>
+    {% endfor %}
+{% endblock %}

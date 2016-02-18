@@ -88,10 +88,6 @@ class Author(zeit.web.core.view.Base):
             content=self.context, variant_id='original', fallback=False)
 
     @zeit.web.reify
-    def topic_links(self):
-        return zeit.web.core.interfaces.ITopicLink(self.context)
-
-    @zeit.web.reify
     def tab_areas(self):
         if is_paginated(self.context, self.request) or (
                 len(self.area_favourite_content) == 0):
