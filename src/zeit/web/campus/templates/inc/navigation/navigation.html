@@ -25,28 +25,32 @@
 	<nav class="nav__services">
 		<h2 class="nav__services-title" tabindex="0" role="button" aria-controls="services-menu"><span class="nav__dropdown">Service</span></h2>
 		<ul class="nav__services-list" id="services-menu" aria-hidden="true">
-			<li><a href="#">ZEIT Wissen</a></li>
-			<li><a href="#">ZEIT Geschichte</a></li>
-			<li><a href="#">Immobilien</a></li>
-			<li><a href="#">Partnersuche</a></li>
-			<li><a href="#">Automarkt</a></li>
-			<li><a href="#">Jobs</a></li>
-			<li><a href="#">Apps</a></li>
+			<li><a href="{{ request.route_url('home') }}wissen/zeit-wissen/index">ZEITWissen</a></li>
+			<li><a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index">ZEITGeschichte</a></li>
+			<li><a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID">Partnersuche</a></li>
+			<li><a href="http://zeit.immowelt.de/">Immobilien</a></li>
+			<li><a href="http://automarkt.zeit.de/">Automarkt</a></li>
+			<li><a href="http://jobs.zeit.de/">Jobs</a></li>
+			<li><a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zco.fix.dach.text.apps">Apps</a></li>
+			<li><a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zco.fix.dach.text.audio">Audio</a></li>
+			<li><a href="{{ request.route_url('home') }}archiv">Archiv</a></li>
+			<li><a href="{{ request.route_url('home') }}spiele/index">Spiele</a></li>
 		</ul>
 	</nav>
 	<div class="nav__login">
 		{%- set esi_source = '{}login-state?for=campus&context-uri={}'.format(request.route_url('home'), request.url) -%}
 		{{- lama.insert_esi(esi_source, 'Anmeldung nicht möglich') -}}
-		{#%- include "zeit.web.campus:templates/inc/navigation/login-state.html" -%#}
 	</div>
 	<div class="nav__primary">
 		<nav class="nav__topics">
-			<h2 class="nav__topics-title"><a href="#">Themen</a></h2>
+			{% require topics = view.context | topic_links -%}
+			<h2 class="nav__topics-title"><a href="#">Themen{#{ topics.title | default('Themen', True) }#}</a></h2>
 			<ul class="nav__topics-list">
-				<li><a href="#">Auslandsstudium</a></li>
-				<li><a href="#">Bafög</a></li>
-				<li><a href="#">Studienplatzvergabe</a></li>
+		    {% for label, link in topics %}
+				<li><a href="{{ link }}">{{ label }}</a></li>
+		    {% endfor %}
 			</ul>
+			{% endrequire -%}
 			<a class="nav__topics-link" href="#">Alle Themen</a>
 		</nav>
 		<nav class="nav__tools">

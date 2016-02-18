@@ -348,9 +348,12 @@ $nav-color-border: #444
 		&__login
 			+flex(0 1 auto)
 			border-bottom: 1px solid $nav-color-border
+			padding: remify(0 16px) // needed here for "Anmeldung nicht möglich"
+		&__login-title
+			padding: 0 // override dropdown standard for "Anmeldung nicht möglich" case
 		&__login-link
 			display: block
-			padding: remify(0 $page-padding)
+			padding: remify(0 4px)
 		&__login-register,
 		&__login-icon,
 		&__user-name
