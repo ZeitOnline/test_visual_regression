@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-2.57 (unreleased)
------------------
+2.56.2 (2016-02-18)
+-------------------
 
 - PERF: Enable solr proxy for author list
 
