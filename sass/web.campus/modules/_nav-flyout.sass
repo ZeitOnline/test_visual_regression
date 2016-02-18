@@ -1,0 +1,26 @@
+.nav-flyout
+	background-color: $color-tools-bg
+	padding: remify(20px)
+
+	&__item
+		display: block
+		margin: 0
+		padding: 0
+		background-color: $white
+		width: 30%
+
+	&__link
+		color: $color-tools-text
+		display: block
+
+	&__list
+		+display-flex()
+		+justify-content(space-around)
+		list-style: none
+		margin: 0
+		padding: 0
+
+	&__link:active,
+	&__link:focus,
+	&__link:hover
+		color: $black
