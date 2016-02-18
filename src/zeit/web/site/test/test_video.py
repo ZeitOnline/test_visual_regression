@@ -10,17 +10,9 @@ import zeit.cms.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.video
 
+import zeit.web.core.template
 import zeit.web.site.module.playlist
 import zeit.web.site.view_video
-
-
-def is_adcontrolled(contents):
-    return 'data-ad-delivery-type="adcontroller"' in contents
-
-
-# use this to enable third_party_modules
-def tpm(me):
-    return True
 
 
 def test_video_imagegroup_should_adapt_videos(application):
@@ -144,16 +136,15 @@ def test_video_page_video_should_exist(selenium_driver, testserver):
     try:
         player = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located(
-                (By.CSS_SELECTOR, '.video-js'))
-        )
+                (By.CSS_SELECTOR, '.video-js')))
         assert player
     except TimeoutException:
         assert False, 'Video not visible within 20 seconds'
 
 
 def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
+    monkeypatch.setattr(zeit.web.core.template.toggles, {
+        'third_party_modules': True}.get)
 
     browser = testbrowser('/video/2015-01/3537342483001')
     assert len(browser.cssselect('#ad-desktop-7')) == 1
@@ -161,8 +152,8 @@ def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
 
 def test_video_page_adcontroller_js_var_isset(
         selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
+    monkeypatch.setattr(zeit.web.core.template.toggles, {
+        'third_party_modules': True}.get)
     driver = selenium_driver
     driver.get('{}/video/2015-01/3537342483001'.format(testserver.url))
     try:

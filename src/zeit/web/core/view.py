@@ -130,11 +130,6 @@ class Base(object):
             return '{}/{}'.format(conf.get('vgwort_url'), token)
 
     @zeit.web.reify
-    def third_party_modules_is_enabled(self):
-        return zeit.web.core.application.FEATURE_TOGGLES.find(
-            'third_party_modules')
-
-    @zeit.web.reify
     def iqd_is_enabled(self):
         return zeit.web.core.application.FEATURE_TOGGLES.find(
             'iqd')
