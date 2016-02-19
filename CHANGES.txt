@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - MAINT: Disuse rsynced node-comment-statistics in favor of API endpoint
 
+- MAINT: Migrate feature toggles from view attributes to jinja global
+
 - FIX: Don't accidentally create missing image variants in ZMO
 
 - ZON-2780: Add ivw tracking for AMPs

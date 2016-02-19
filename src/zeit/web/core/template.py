@@ -509,7 +509,7 @@ def closest_substitute_image(image_group,
     :param image_group: Image Group instance that provides
                         zeit.content.image.interfaces.IImageGroup
     :param image_pattern: String representation of the target pattern ID.
-    :param force_orientation: Boolean wether orientation of substitute image
+    :param force_orientation: Boolean whether orientation of substitute image
                               must match that of target pattern.
     :returns: Unique ID of most suitable substitute image.
     """
@@ -798,8 +798,16 @@ def format_webtrekk(string):
 
 @zeit.web.register_global
 def settings(key):
+    """Returns the configuration value for a provided key"""
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get(key)
+
+
+@zeit.web.register_global
+def toggles(*keys):
+    """Returns whether all provided feature toggles are enabled"""
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    return all(toggles.find(key) for key in keys)
 
 
 @zeit.web.register_global
