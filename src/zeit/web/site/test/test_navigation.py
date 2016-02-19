@@ -535,9 +535,9 @@ def test_advertorial_nav_links_hidden_mobile(selenium_driver, testserver):
     menu_link.click()
 
     # test navigation is display, advertorials not
-    assert ressort_nav.is_displayed(), ('Ressort bar is not displayed')
-    assert len(adv_links) == 2,  ('advertorial links missing')
-    assert not adv_links[0].is_displayed(), ('advertorial links are displayed')
+    assert ressort_nav.is_displayed(), 'Ressort bar is not displayed'
+    assert len(adv_links) == 2, 'advertorial links missing'
+    assert not adv_links[0].is_displayed(), 'advertorial links are displayed'
 
 
 def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
@@ -612,7 +612,6 @@ def test_nav_hp_contains_relative_date(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/centerpage.html')
     view = mock.Mock()
-    view.topic_links = {}
     view.is_hp = True
     view.date_last_modified = now(hours=1)
     lines = tpl.blocks['metadata'](tpl.new_context({'view': view}))

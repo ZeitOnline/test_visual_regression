@@ -13,26 +13,22 @@ import zeit.web.core.interfaces
 import zeit.web.core.centerpage
 
 
-def test_copyright_entries_are_rendered_correcly(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
-    # 5 Unique teaser images with copyright information expected.
-    assert len(browser.cssselect('.copyrights__entry')) == 5
-
-
-def test_copyright_entry_labels_are_rendered_correctly(
-        testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
-    assert u'© Jason Merritt/Getty Images' in browser.cssselect(
-        'span.copyrights__label')[2].text
-
-
-def test_copyright_entry_links_are_rendered_correctly(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
-    assert 'http://www.photocase.de/milchhonig' in browser.cssselect(
-        'span.copyrights__label a')[0].attrib['href']
+def test_copyright_entries_are_rendered_correcly(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-magazin/misc' % testserver.url)
+    driver.find_elements_by_css_selector(
+        ".js-image-copyright-footer")[0].click()
+    # number of entries
+    assert len(driver.find_elements_by_css_selector(
+        '.image-copyright-footer__item')) == 3
+    # copyright text itself
+    copyright_label = driver.find_element_by_css_selector(
+        '.image-copyright-footer__item > span').text
+    assert u'© Karl Lagerfeld' in copyright_label
+    # linked copyrights
+    copyright_link = driver.find_element_by_css_selector(
+        '.image-copyright-footer__item > a').get_attribute('href')
+    assert 'http://www.photocase.de/milchhonig' in copyright_link
 
 
 def test_copyright_area_toggles_correctly(selenium_driver, testserver):

@@ -622,7 +622,7 @@ def test_article02_uses_esi(selenium_driver, testserver):
 
 def test_article02_should_have_esi_include(testbrowser, testserver):
     browser = testbrowser('%s/artikel/02' % testserver.url)
-    assert len(browser.cssselect('include')) == 1
+    assert len(browser.cssselect('main include')) == 1
 
 
 def test_article_has_linked_copyright(testserver, testbrowser):

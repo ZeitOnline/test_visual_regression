@@ -653,7 +653,6 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
         output += line.strip()
 
     assert markup in output
-    assert logged in output
 
     # logged out
     request.authenticated_userid = None
@@ -666,7 +665,6 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
         output += line.strip()
 
     assert markup in output
-    assert unlogged in output
 
 
 def test_macro_copyrights(jinja2_env):

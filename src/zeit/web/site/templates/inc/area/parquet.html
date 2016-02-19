@@ -17,9 +17,9 @@
 
         {% block area_links %}
             <div class="parquet-meta__links">
-            {% if area.referenced_cp is not none and area.referenced_cp | topic_links | length %}
+            {% require topics = area.referenced_cp | topic_links %}
                 <ul class="parquet-meta__topic-links">
-                    {% for label, link in area.referenced_cp | topic_links %}
+                    {% for label, link in topics %}
                         <li>
                             <a href="{{ link }}" class="parquet-meta__topic-link">
                                 {{ label }}
@@ -27,7 +27,7 @@
                         </li>
                     {% endfor %}
                 </ul>
-            {% endif %}
+            {% endrequire %}
             {% if area.read_more and area.read_more_url %}
                 <a href="{{ area.read_more_url }}" class="parquet-meta__more-link">
                     {{ area.read_more }}

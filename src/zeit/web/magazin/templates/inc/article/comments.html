@@ -81,13 +81,8 @@
 				<div class="comment__form__wrap">
 					<div class="comment__form__note">Bitte melden Sie sich an, um zu kommentieren.</div>
 				</div>
-				{% if request.registry.settings.sso_activate %}
-					<a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ request.url|e }}" class="button">Anmelden</a>
-					<a href="{{ request.registry.settings.sso_url }}/registrieren?url={{ request.url|e }}" class="button">Registrieren</a>
-				{% else %}
-				<a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url|e }}" class="button">Anmelden</a>
-				<a href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url|e }}" class="button">Registrieren</a>
-				{% endif %}
+				<a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ request.url|e }}" class="button">Anmelden</a>
+				<a href="{{ request.registry.settings.sso_url }}/registrieren?url={{ request.url|e }}" class="button">Registrieren</a>
 			</form>
 			{% endif %}
 		{% endif %}

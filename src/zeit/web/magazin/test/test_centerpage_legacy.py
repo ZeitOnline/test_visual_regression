@@ -5,15 +5,12 @@ from zope.component import getMultiAdapter
 import mock
 import pyramid.threadlocal
 import pytest
-import zope.component
 
-from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
 import zeit.content.gallery.gallery
 import zeit.cms.syndication.feed
 
 from zeit.web.core.template import default_image_url
-from zeit.web.core.template import get_teaser_image
 from zeit.web.core.template import get_teaser_template
 import zeit.web.core.centerpage
 import zeit.web.magazin.view_centerpage
@@ -28,15 +25,6 @@ def monkeyreq(monkeypatch):
         return m
 
     monkeypatch.setattr(pyramid.threadlocal, "get_current_request", request)
-
-
-def test_homepage_should_have_buzz_module_centerpage_should_not(
-        testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp-legacy/index' % testserver.url)
-    assert '<div class="cp_buzz">' in browser.contents
-    browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
-    assert '<div class="cp_buzz">' not in browser.contents
 
 
 def test_centerpage_should_have_default_keywords(testserver, testbrowser):
@@ -221,17 +209,10 @@ def test_teaser_image_should_be_created_from_image_group_and_image(
     assert teaser_image.title == 'Katze!'
 
 
-def test_get_reaches_from_centerpage_view(application):
-    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
-    request = mock.Mock()
-    request.registry.settings.community_host = settings['community_host']
-    request.registry.settings.linkreach_host = settings['linkreach_host']
-    request.registry.settings.node_comment_statistics = settings[
-        'node_comment_statistics']
-
+def test_get_reaches_from_centerpage_view(application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-zmo')
-    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, request)
+    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, dummy_request)
 
     buzz = view.area_buzz
 
@@ -321,17 +302,6 @@ def test_cp_informatives_should_have_no_blocks(application):
 
     assert informatives_first_block == cp_view.area_informatives_1[0].uniqueId
     assert informatives_last_block == cp_view.area_informatives_1[2].uniqueId
-
-
-def test_homepage_indentifies_itself_as_homepage(testserver):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/index')
-    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
-    assert view.is_hp is True
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/test-cp-large-teaser')
-    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())
-    assert view.is_hp is False
 
 
 def test_wrapped_features_are_triggered(testbrowser):

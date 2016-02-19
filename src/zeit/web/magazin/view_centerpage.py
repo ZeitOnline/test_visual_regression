@@ -146,10 +146,6 @@ class CenterpageLegacy(zeit.web.core.view_centerpage.Centerpage,
     def is_advertorial(self):
         return zeit.web.core.view.is_advertorial(self.context, self.request)
 
-    @zeit.web.reify
-    def is_hp(self):
-        return self.context.type == 'ZMO'
-
 
 @view_config(context=zeit.content.cp.interfaces.ICP2015,
              custom_predicates=(zeit.web.magazin.view.is_zmo_content,
@@ -160,4 +156,7 @@ class CenterpageLegacy(zeit.web.core.view_centerpage.Centerpage,
              renderer='templates/centerpage.html')
 class Centerpage(zeit.web.core.view_centerpage.Centerpage,
                  zeit.web.magazin.view.Base):
-    pass
+
+    @zeit.web.reify
+    def is_hp(self):
+        return self.context.type == 'ZMO'

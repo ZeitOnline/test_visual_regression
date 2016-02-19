@@ -229,9 +229,7 @@ class Teaser(object):
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
 class TopicLink(zeit.web.core.utils.nslist):
-    """Filter and restructure all topiclinks and labels
-    :rtype: generator
-    """
+    """Filter and restructure all topiclinks and labels"""
 
     def __init__(self, context):
         self.context = context
@@ -241,12 +239,6 @@ class TopicLink(zeit.web.core.utils.nslist):
             link = getattr(self.context, 'topiclink_url_%s' % i, None)
             if label is not None and link is not None:
                 self.append((label, link))
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
-@grokcore.component.adapter(zeit.content.author.interfaces.IAuthor)
-class TopicLinkAuthor(TopicLink):
-    pass
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)

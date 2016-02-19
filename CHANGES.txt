@@ -4,12 +4,6 @@ Change log for zeit.web
 2.57 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
-
-2.56 (2016-02-17)
------------------
-
 - ZON-2785: Relaunch ZMO CPs:
   * New teaser structure for ZMO
   * Cleanup teaser types
@@ -19,6 +13,42 @@ Change log for zeit.web
   * Introduce new test pages for teasers
   * Use Standart image template in ZMO
   * Move copyright logic to core and use it in ZMO
+
+- ZON-2481: Edgesideinclude login-state for campus and magazin
+
+- ZON-2637: Enable ad-label on framebuilder
+
+- ZON-2772: Ad tags for AMP article
+
+- ZON-2481: Implement topiclinks for all campus content types
+
+- BUG-282: Join query strings for feed URLs with tracking params
+
+- MAINT: Disuse rsynced node-comment-statistics in favor of API endpoint
+
+- FIX: Don't accidentally create missing image variants in ZMO
+
+
+2.56.3 (2016-02-19)
+-------------------
+
+- HOTFIX: Avoid collapsing of margins in author list
+
+
+2.56.2 (2016-02-18)
+-------------------
+
+- PERF: Enable solr proxy for author list
+
+
+2.56.1 (2016-02-17)
+-------------------
+
+- HOTFIX: Pagination for author index
+
+
+2.56 (2016-02-17)
+-----------------
 
 - ZON-2710: Use external SVG sprite in ZMO
 

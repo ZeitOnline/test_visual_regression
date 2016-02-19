@@ -660,7 +660,7 @@ def test_ressort_literally_returns_correct_ressort(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/index')
     view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
-    assert view.ressort_literally == 'Politik'
+    assert view.ressort_literally == 'ZEITmagazin'
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/artikel/02')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
@@ -674,3 +674,41 @@ def test_ressort_literally_returns_correct_ressort(application):
         'Martenstein-Online-Kommentare')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.ressort_literally == 'Leben'
+
+
+def test_navigation_should_show_logged_in_user_correctly(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/inc/navigation/login-state.html')
+
+    info = {'login': '/login',
+            'logout': '/logout',
+            'profile': '/profile',
+            'user': {'picture': None}}
+
+    # no pic
+    css = lxml.html.fromstring(tpl.render(**info)).cssselect
+    assert css('span')[1].attrib['class'] == (
+        'main-nav__community__icon icon-avatar-std')
+
+    # pic
+    info['user']['picture'] = '/picture.jpg'
+
+    css = lxml.html.fromstring(tpl.render(**info)).cssselect
+    assert css('span .main-nav__community__icon')[0].attrib['style'] == (
+        'background-image: url(/picture.jpg)')
+    assert css('a')[0].attrib['href'] == '/profile'
+    assert css('a')[0].attrib['id'] == 'hp.zm.topnav.community.account'
+    assert css('a')[1].attrib['href'] == '/logout'
+    assert css('a')[1].attrib['id'] == 'hp.zm.topnav.community.logout'
+
+
+def test_navigation_should_handle_logged_out_user_correctly(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/inc/navigation/login-state.html')
+
+    info = {'login': '/login',
+            'logout': '/logout',
+            'user': None}
+
+    css = lxml.html.fromstring(tpl.render(**info)).cssselect
+    assert css('a')[0].attrib['href'] == '/login'

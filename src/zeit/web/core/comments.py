@@ -452,23 +452,13 @@ def get_counts(*unique_ids):
     content resources. If no resources are specified, the most commented
     resources will be used.
 
-    :param unique_ids: Optional list of uniqueIds
+    :param unique_ids: List of uniqueIds
     :rtype: dict
     """
 
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-
-    if len(unique_ids):
-        raw = request_counts(*unique_ids)
-        if not raw:
-            return {}
-    else:
-        uri = zeit.cms.interfaces.ID_NAMESPACE + conf.get(
-            'node_comment_statistics', '')
-        try:
-            raw = zeit.cms.interfaces.ICMSContent(uri).data.encode()
-        except (AttributeError, TypeError):
-            return {}
+    raw = request_counts(*unique_ids)
+    if raw is None:
+        return {}
     try:
         ascii = raw.encode('ascii', 'xmlcharrefreplace').strip()
         nodes = lxml.etree.fromstring(ascii).xpath('/nodes/node')
@@ -548,7 +538,7 @@ def get_user_comments(author, page=1, rows=6, sort="DESC"):
 
     if rows > 0:
         add = 0 if comments['published_total'] % rows == 0 else 1
-        comments['page_total'] = (comments['published_total'] / rows)+add
+        comments['page_total'] = (comments['published_total'] / rows) + add
     else:
         comments['page_total'] = 0
 
@@ -586,7 +576,7 @@ class UserComment(object):
         return self.cid
 
     @zeit.web.reify
-    def uniqueId(self):
+    def uniqueId(self):  # NOQA
         return 'http://community.zeit.de/comment/{}'.format(self.cid)
 
     @zeit.web.reify
@@ -616,10 +606,8 @@ class UserComment(object):
 
     @zeit.web.reify
     def referenced_content(self):
-        uniqueId = self._node_value('cms_uniqueId')
-
-        if uniqueId is not None:
-            try:
-                return zeit.cms.interfaces.ICMSContent(uniqueId)
-            except TypeError:
-                return
+        unique_id = self._node_value('cms_uniqueId')
+        try:
+            return zeit.cms.interfaces.ICMSContent(unique_id)
+        except TypeError:
+            return

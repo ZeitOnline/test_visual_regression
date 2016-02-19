@@ -2,14 +2,11 @@
 import re
 
 import mock
-import zope.component
 
 import zeit.cms.interfaces
-import zeit.content.gallery.gallery
-import zeit.cms.syndication.feed
 
-import zeit.web.core.centerpage
-import zeit.web.magazin.view_centerpage
+import zeit.web.core.utils
+import zeit.web.core.template
 
 
 def test_cp_should_have_buzz_module(
@@ -22,19 +19,11 @@ def test_cp_should_have_buzz_module(
 
 
 def test_get_reaches_from_centerpage_view(application):
-    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
-    request = mock.Mock()
-    request.registry.settings.community_host = settings['community_host']
-    request.registry.settings.linkreach_host = settings['linkreach_host']
-    request.registry.settings.node_comment_statistics = settings[
-        'node_comment_statistics']
-
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/buzz')
     block = zeit.web.core.utils.find_block(
         cp, module='zmo-mostread')
-    module = zeit.web.core.template.get_module(block)
-    buzz = module.reach
+    buzz = zeit.web.core.template.get_module(block).reach
 
     buzz_views = buzz.get_views(section='zeit-magazin')[1].score
     buzz_facebook = buzz.get_social(
@@ -395,3 +384,14 @@ def test_default_teaser_should_return_default_teaser_image(
     teaser_img = zeit.web.core.template.get_image(
         teaser_block, article_context)
     assert zeit.web.core.interfaces.ITeaserImage.providedBy(teaser_img)
+
+
+def test_zmo_homepage_identifies_itself_as_homepage(testserver):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/index')
+    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.is_hp is True
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/misc')
+    view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
+    assert view.is_hp is False
