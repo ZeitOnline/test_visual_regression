@@ -1,0 +1,14 @@
+<amp-analytics type="infonline" id="infonline">
+	<script type="application/json">
+		{
+			"vars": {
+				"st":  "mobzeit",
+				"co":  "",
+				"cp":  "{{ view.ressort if view.ressort else 'administratives' }}/{% if view.sub_ressort %}{{ view.sub_ressort }}/{% endif %}bild-text"
+			},
+			"requests": {
+				"url": "https://ssl.zeit.de/{{ request.asset_host | replace('http://','')}}/html/amp-analytics-infonline.html"
+			}
+		}
+	</script>
+</amp-analytics>

@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - FIX: Don't accidentally create missing image variants in ZMO
 
+- ZON-2780: Add ivw tracking for AMPs
+
 
 2.56.3 (2016-02-19)
 -------------------
