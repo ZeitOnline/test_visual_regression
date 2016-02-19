@@ -4,7 +4,7 @@ Change log for zeit.web
 2.56.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- HOTFIX: Avoid collapsing of margins in author list
 
 
 2.56.2 (2016-02-18)
