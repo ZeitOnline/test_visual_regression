@@ -44,35 +44,54 @@ $nav-color-border: #444
 	background-color: $primary-color
 	color: #ccc
 	position: relative
+
 	&__brand
 		+clearfix
+		color: #fff
 		line-height: remify(50px)
 		padding: remify(0 $page-padding--small)
+		a
+			color: inherit
 
 	&__publisher
 		float: left
 
 	&__logo
-		color: #fff
-		// display: block
 		height: remify(33px)
 		width: remify(185px)
 		vertical-align: middle
 
+	&__menu-icon
+		&--menu
+			height: remify(14px)
+			width: remify(20px)
+		&--close
+			height: remify(16px)
+			width: remify(20px) // add 4px to align with burger menu
+			padding: remify(0 2px)
+			display: none
+
 	&__menu-link
 		float: right
+		&[aria-expanded="true"]
+			.header__menu-icon--close
+				display: inline
+			.header__menu-icon--menu
+				display: none
 
-	&__menu-icon
-		height: remify(20px)
-		width: remify(20px)
-
+	&__flyout
+		display: none
 
 .nav
 	@extend %nav-font-l
-	+display-flex
 	+flex-flow(column nowrap)
 	+font-smoothing
+	display: none
 	line-height: remify(50px)
+
+	&:target,
+	&[aria-hidden="false"]
+		+display-flex
 
 	a
 		color: inherit
@@ -95,12 +114,6 @@ $nav-color-border: #444
 		a
 			@extend %nav-link-arrow
 
-	// SERVICE
-	&__services-list
-		display: none
-	&__services-title:focus + &__services-list
-		display: block
-
 	// LOGIN
 	&__login
 		@extend %nav-font-m
@@ -111,23 +124,28 @@ $nav-color-border: #444
 		width: remify(18px)
 		vertical-align: remify(-3px)
 	&__user-picture
-		background-color: #ccc
+		background-color: #eee
+		background-position: center
+		background-repeat: no-repeat
+		background-size: contain
 		border-radius: 50%
 		display: block
 		height: remify(30px)
 		margin: remify(10px 0)
 		width: remify(30px)
+	&__user-avatar
+		color: #ababab
+		height: 100%
+		width: 100%
 	&__user-name
 		@extend %nav-font-l
 		display: block
 		font-weight: bold
-		// max-width: 100%
 		overflow: hidden
 		text-overflow: ellipsis
 		white-space: nowrap
 
 	// THEMEN
-	&__topics
 	&__topics-title
 		@extend %nav-font-xs
 		text-transform: uppercase
@@ -137,18 +155,12 @@ $nav-color-border: #444
 		li
 			display: inline-block
 
-	&__topics-link
-
 	// TOOLS
 	&__tools-title
 		@extend %nav-font-xs
 		text-transform: uppercase
 	&__tools-list
 		@extend %nav-font-l
-
-	// MEHR
-	&__more-title
-		display: none
 
 	&__home-title,
 	&__services-title,
@@ -215,11 +227,18 @@ $nav-color-border: #444
 			+on-interaction
 				color: $nav-color-tools
 
+		// SERVICE
 		&__services-list
+			+clearfix
+			display: none
+			&[aria-hidden="false"]
+				display: block
 			li
 				float: left
 				width: 50%
 
+		&__login
+			line-height: remify(60px)
 		&__login-title
 			float: left
 			width: 66%
@@ -229,7 +248,15 @@ $nav-color-border: #444
 				display: none
 		&__user-picture
 			float: left
+			height: remify(40px)
 			margin-right: remify(8px)
+			width: remify(40px)
+			&--default
+				display: none
+
+		&__more-title
+			display: none
+
 
 +respond-min($break-tablet-min)
 	%nav-tablet-font-xs
@@ -247,13 +274,12 @@ $nav-color-border: #444
 	%nav-tablet-down-arrow
 		&:after
 			+transform(rotate(90deg) scale(2))
-			// +transform-origin(50% 50% 0)
-			+transition(transform .2s ease-out)
+			+transform-origin(40% 60%)
+			+transition(transform .1s ease-out)
 			content: "\203A"
 			display: inline-block
 			line-height: 1
 			margin-left: remify(16px)
-			vertical-align: middle
 
 	.header
 		&__brand
@@ -263,8 +289,14 @@ $nav-color-border: #444
 		&__menu-link
 			display: none
 
+		&__flyout
+			&:target,
+			&[aria-hidden="false"]
+				display: block
+
 	.nav
 		@extend %nav-tablet-font-m
+		+display-flex
 		+flex-flow(row wrap)
 
 		// ZEIT ONLINE
@@ -276,6 +308,7 @@ $nav-color-border: #444
 			border-color: $nav-color-border
 		&__home-title
 			a
+				display: inline-block
 				padding: remify(0 24px)
 
 		// SERVICE
@@ -292,10 +325,13 @@ $nav-color-border: #444
 			background-color: $primary-color
 			border-color: $nav-color-border
 			border-style: solid
-			border-width: 0 1px
+			border-width: 0 1px 1px
 			display: none
 			line-height: remify(39px)
 			position: absolute
+			z-index: 1 // fix visible arrow
+			&[aria-hidden="false"]
+				display: block
 			a
 				border-top: 1px solid $nav-color-border
 				min-width: remify(150px)
@@ -308,19 +344,23 @@ $nav-color-border: #444
 		&__login-title,
 		&__more-title
 			padding: remify(0 16px)
-		&__services-title:focus + &__services-list,
-		&__login-title:focus + &__login-list,
-		&__more-title:focus + &__more-list
-			display: block
-			z-index: 1 // fix visible arrow
+			cursor: pointer
+			+on-interaction
+				color: #fff // for the h2 elements
+			&[aria-expanded="true"]
+				.nav__dropdown:after
+					+transform(rotate(-90deg) scale(2))
 
 		// LOGIN
 		&__login
 			+flex(0 1 auto)
 			border-bottom: 1px solid $nav-color-border
+			padding: remify(0 16px) // needed here for "Anmeldung nicht möglich"
+		&__login-title
+			padding: 0 // override dropdown standard for "Anmeldung nicht möglich" case
 		&__login-link
 			display: block
-			padding: remify(0 $page-padding)
+			padding: remify(0 4px)
 		&__login-register,
 		&__login-icon,
 		&__user-name
@@ -379,9 +419,6 @@ $nav-color-border: #444
 			a, h2
 				border-left: 1px solid $nav-color-border
 				padding: remify(0 16px)
-		&__more-title
-			cursor: pointer
-			display: block
 
 		&__dropdown
 			@extend %nav-tablet-down-arrow

@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import mock
+import zope.component
+
+import zeit.web.core.interfaces
 
 
 def test_adplace_middle_mobile_dont_produces_html(jinja2_env):
@@ -27,25 +30,31 @@ def test_content_ad_place_produces_html(application, jinja2_env):
 
 def test_esi_macro_should_produce_directive_depending_on_environment(
         jinja2_env):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     tpl = jinja2_env.get_template(
         'zeit.web.core:templates/macros/layout_macro.tpl')
-    src = 'http://foo.com/bar'
+    source = 'http://foo.com/bar'
     error_text = 'esi failed'
-    html_for_wesgi = ('<!-- [esi-debug] src="{}" error_text="" -->'
-                      '<esi:include src="{}" onerror="continue" />'
-                      ).format(src, src)
-    markup = tpl.module.insert_esi(src, is_dev=True)
+
+    conf['dev_environment'] = True
+
+    html_for_wesgi = ('<!-- [esi-debug] src="{0}" error_text="" -->'
+                      '<esi:include src="{0}" onerror="continue" />'
+                      ).format(source)
+    markup = tpl.module.insert_esi(source)
     wesgi_string = ''
     for line in markup.splitlines():
         wesgi_string += line.strip()
     assert wesgi_string == html_for_wesgi
 
+    conf['dev_environment'] = False
+
     html_for_varnish = ('<esi:remove>'
-                        '<!-- [esi-debug] src="{}" error_text="{}" -->'
+                        '<!-- [esi-debug] src="{0}" error_text="{1}" -->'
                         '</esi:remove>'
-                        '<!--esi<esi:include src="{}" />-->'
-                        ).format(src, error_text, src)
-    markup = tpl.module.insert_esi(src, error_text)
+                        '<!--esi<esi:include src="{0}" />-->'
+                        ).format(source, error_text)
+    markup = tpl.module.insert_esi(source, error_text)
     varnish_string = ''
     for line in markup.splitlines():
         varnish_string += line.strip()

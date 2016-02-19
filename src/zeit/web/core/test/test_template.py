@@ -677,11 +677,15 @@ def test_remove_get_params_should_remove_get_params():
 
 @pytest.mark.parametrize('patterns', itertools.permutations(
                          ['540x304', '368x220', '148x84']))
-def test_existing_image_should_preserve_pattern_order(patterns, application):
+def test_existing_image_should_preserve_pattern_order(
+        patterns, application, monkeypatch):
+    group = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/')
+    monkeypatch.setattr(
+        group, 'keys',
+        lambda: [u'schoppenstube-540x304.jpg', u'schoppenstube-148x84.jpg'])
     image, pattern = zeit.web.core.template._existing_image(
-        'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/',
-        'schoppenstube', patterns, 'jpg',
-        ['schoppenstube-540x304.jpg', 'schoppenstube-148x84.jpg'])
+        group, patterns, 'jpg')
     expected_pattern = (lambda x: x.remove('368x220') or x)(list(patterns))[0]
     assert pattern == expected_pattern
 

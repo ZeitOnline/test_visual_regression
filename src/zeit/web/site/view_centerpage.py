@@ -205,14 +205,6 @@ class Centerpage(
         return breadcrumbs
 
     @zeit.web.reify
-    def topic_links(self):
-        """Return topic links of a centerpage as a TopicLink object
-        :rtype: zeit.web.core.centerpage.TopicLink
-        """
-
-        return zeit.web.core.interfaces.ITopicLink(self.context)
-
-    @zeit.web.reify
     def ressort(self):
         return 'homepage' if self.is_hp else super(Centerpage, self).ressort
 

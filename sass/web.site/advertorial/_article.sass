@@ -9,6 +9,8 @@
 		padding: $page-padding*2 0 $page-padding
 		margin: 0 auto
 		max-width: remify(660px)
+	&--single
+		padding: remify(10px 1em)
 	&__label
 		font-size: remify(13px)
 		position: absolute
@@ -17,6 +19,10 @@
 		top: remify(10px)
 		+respond-min($break-tablet-min)
 			display: none
+		&--single
+			position: relative
+			text-align: right
+			top: 0
 	&__title
 		font-size: remify(18px)
 		font-weight: 700

@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Schließen</title>
-    <path d="M296.143,5 L289.779,11.364 L283.414,5 L282,6.414 L288.364,12.778 L282,19.143 L283.414,20.557 L289.779,14.193 L296.143,20.557 L297.557,19.143 L291.193,12.778 L297.557,6.414 L296.143,5 Z" id="zco-nav-close" fill="#ffffff"></path>
+	<title>Schließen</title>
+	<g fill="none" stroke="#ffffff" stroke-width="2">
+		<line x1="0.75" y1="0.75" x2="15.25" y2="15.25"/>
+		<line x1="0.75" y1="15.25" x2="15.25" y2="0.75"/>
+	</g>
 </svg>
