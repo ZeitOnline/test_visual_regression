@@ -4,6 +4,8 @@ Change log for zeit.web
 2.57 (unreleased)
 -----------------
 
+- MAINT: Refactor ZMO nextread
+
 - ZON-2785: Relaunch ZMO CPs:
   * New teaser structure for ZMO
   * Cleanup teaser types
