@@ -36,6 +36,14 @@ $minor-width: 35%
             padding: remify(0 $compact--px 0 $compact--px)
             width: 100%
 
+    // as there could be a fullwidth teaser on top or not
+    // we have to add the margin here
+    &--major,
+    &--minor
+        margin-top: $small
+        +respond-min($break-2)
+            margin-top: $compact
+
     +respond-min($break-2)
         &--major
             +display-flex

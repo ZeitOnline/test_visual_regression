@@ -1,6 +1,9 @@
 .teaser-fullwidth
     @extend %teaser-large
     display: block
+    margin-bottom: 0
+    +respond-min($break-2)
+        margin-bottom: 0
 
     &__media
         margin: 0
