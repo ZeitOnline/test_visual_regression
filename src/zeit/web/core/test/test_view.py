@@ -461,7 +461,7 @@ def test_centerpage_should_have_manual_seo_pagetitle(application):
         'http://xml.zeit.de/zeit-magazin/test-cp-legacy/index')
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         context, pyramid.testing.DummyRequest())
-    assert view.pagetitle == u'My Test SEO - ZEITmagazin ONLINE'
+    assert view.pagetitle == u'My Test SEO - ZEITmagazin ONLINE | ZEITmagazin'
 
 
 def test_centerpage_should_have_generated_seo_pagetitle(application):
@@ -469,7 +469,7 @@ def test_centerpage_should_have_generated_seo_pagetitle(application):
         'http://xml.zeit.de/zeit-magazin/test-cp-legacy/index')
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         context, pyramid.testing.DummyRequest())
-    assert view.pagetitle == u'My Test SEO - ZEITmagazin ONLINE'
+    assert view.pagetitle == u'My Test SEO - ZEITmagazin ONLINE | ZEITmagazin'
 
 
 def test_centerpage_should_have_subtitle_seo_pagedesciption(application):

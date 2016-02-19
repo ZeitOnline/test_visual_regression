@@ -97,11 +97,8 @@
                             </div>
                         </div>
                         <div class="main-nav__section main-nav__community">
-                            {% if request.authenticated_userid %}
-                                {{ head_user_is_logged_in_true(request) }}
-                            {%- else -%}
-                                {{ head_user_is_logged_in_false(request) }}
-                            {%- endif -%}
+                            {% set esi_source = '{}login-state?for=magazin&context-uri={}'.format(request.route_url('home'), request.url) %}
+                            {{ insert_esi(esi_source, 'Anmeldung nicht möglich') }}
                         </div>
                     </div>
                 </div>
