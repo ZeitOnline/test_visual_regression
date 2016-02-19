@@ -1,0 +1,10 @@
+{% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
+
+<div class="footer__item">
+	<a href="{{ request.route_url('home') }}campus/index">
+		{{- lama.use_svg_icon('logo-zco', 'footer__logo', view.request) -}}
+	</a>
+	<div class="footer__links">
+		Verlag
+	</div>
+</div>

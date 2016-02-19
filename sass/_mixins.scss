@@ -102,7 +102,7 @@
 @mixin padded {
 	padding-left: $page-padding--small;
 	padding-right: $page-padding--small;
-	@include respond-min($break-1) {
+	@include respond-min($break-page-padding) {
 		padding-left: $page-padding;
 		padding-right: $page-padding;
 	}
@@ -112,7 +112,7 @@
 @mixin unpadded {
 	margin-left: -$page-padding--small;
 	margin-right: -$page-padding--small;
-	@include respond-min($break-1) {
+	@include respond-min($break-page-padding) {
 		margin-left: -$page-padding;
 		margin-right: -$page-padding;
 	}
@@ -121,7 +121,7 @@
 @mixin bleed($max: $medium-content-width + 2 * $gutter) {
 	margin-left: -$page-padding--small;
 	margin-right: -$page-padding--small;
-	@include respond-min($break-1) {
+	@include respond-min($break-page-padding) {
 		margin-left: -$page-padding;
 		margin-right: -$page-padding;
 	}

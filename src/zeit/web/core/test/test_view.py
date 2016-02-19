@@ -8,6 +8,7 @@ import urllib2
 import pyramid.request
 import zope.component
 
+import zeit.web.core.application
 import zeit.web.core.date
 import zeit.web.core.interfaces
 import zeit.web.magazin.view
@@ -663,21 +664,20 @@ def test_ivw_uses_hyprid_method_for_apps(jinja2_env):
 
 
 def test_iqd_ads_should_utilize_feature_toggles(testbrowser, monkeypatch):
-    Base = zeit.web.core.view.Base  # NOQA
-    monkeypatch.setattr(Base, 'iqd_is_enabled', True)
-    monkeypatch.setattr(Base, 'third_party_modules_is_enabled', True)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd': True, 'third_party_modules': True}.get)
     browser = testbrowser('/zeit-online/article/zeit')
     assert 'AdController.initialize();' in (
         browser.cssselect('head')[0].text_content())
 
-    monkeypatch.setattr(Base, 'iqd_is_enabled', False)
-    monkeypatch.setattr(Base, 'third_party_modules_is_enabled', False)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd': False, 'third_party_modules': False}.get)
     browser = testbrowser('/zeit-online/article/zeit')
     assert 'AdController.initialize();' not in (
         browser.cssselect('head')[0].text_content())
 
-    monkeypatch.setattr(Base, 'iqd_is_enabled', True)
-    monkeypatch.setattr(Base, 'third_party_modules_is_enabled', False)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd': True, 'third_party_modules': False}.get)
     browser = testbrowser('/zeit-online/article/zeit')
     assert 'AdController.initialize();' not in (
         browser.cssselect('head')[0].text_content())

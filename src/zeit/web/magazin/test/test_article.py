@@ -9,6 +9,7 @@ import mock
 import zeit.content.article.article
 import zeit.cms.interfaces
 
+import zeit.web.core.application
 import zeit.web.core.interfaces
 import zeit.web.magazin.view_article
 
@@ -217,11 +218,8 @@ def test_webtrekk_has_session_parameter(testserver, testbrowser):
 def test_ivw_tracking_for_mobile_and_desktop_and_wrapper(
         selenium_driver, testserver, monkeypatch):
 
-    def tpm(me):
-        return True
-
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True}.get)
 
     driver = selenium_driver
 

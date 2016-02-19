@@ -1,0 +1,22 @@
+.footer
+	+padded
+	background-color: $primary-color
+	color: #777
+	padding-top: remify(20px)
+	padding-bottom: remify(20px)
+	+respond-min($break-tablet-min)
+		padding-bottom: remify(40px)
+
+	a
+		color: inherit
+		+on-interaction
+			color: #fff
+
+	&__item
+		+respond-min($break-desktop-min)
+			max-width: $medium-content-width
+
+	&__logo
+		color: #777
+		height: remify(20px)
+		width: remify(113px)
