@@ -4,6 +4,8 @@ Change log for zeit.web
 2.57 (unreleased)
 -----------------
 
+- ZON-2482: Add ZCO footer
+
 - HOTFIX: Re-enable ranking area to hide curated content (was broken in 2.56)
 
 - ZON-2481: Add ZEIT Campus header + main navigation
