@@ -8,9 +8,6 @@ $footer-logo-width: 113px
 	padding-bottom: remify(20px)
 	+respond-min($break-tablet-min)
 		padding-bottom: remify(40px)
-	+respond-min($break-desktop-min)
-		padding-left: remify(160px)
-		padding-right: remify(160px)
 
 	a
 		color: inherit
@@ -19,6 +16,7 @@ $footer-logo-width: 113px
 
 	&__item
 		+respond-min($break-desktop-min)
+			margin: 0 auto
 			max-width: $medium-content-width
 
 	&__logo
