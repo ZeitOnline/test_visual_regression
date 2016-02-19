@@ -119,6 +119,8 @@ Change log for zeit.web
 
 - MAINT: Migrate feature toggles from view attributes to jinja global
 
+- FIX: Be more defensive with comment_count in nextread teaser
+
 
 2.56.3 (2016-02-19)
 -------------------

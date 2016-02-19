@@ -1,5 +1,5 @@
 {% set image = get_image(module, teaser, fallback=False) %}
-{% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
+{% set comments = view.comment_counts.get(teaser.uniqueId, 0) if (view.comment_counts and view.comment_counts.get) else 0 %}
 {% set module_layout = self.layout() %}
 {% set modifier = '--with-image' if image and not is_image_expired(image) else '--no-image' %}
 <article id="{{ module_layout }}"
