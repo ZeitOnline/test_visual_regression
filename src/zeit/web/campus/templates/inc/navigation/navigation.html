@@ -54,7 +54,7 @@
 			<a class="nav__topics-link" href="#">Alle Themen</a>
 		</nav>
 		<nav class="nav__tools">
-			<h2 class="nav__tools-title"><a href="#what"><span class="nav__dropdown">Was soll ich studieren?</span></a></h2>
+			<h2 class="nav__tools-title"><a href="#tools-menu" aria-controls="tools-menu"><span class="nav__dropdown">Was soll ich studieren?</span></a></h2>
 			<ul class="nav__tools-list">
 				<li><a href="#si">Studium-Interessentest</a></li>
 				<li><a href="#">Suchmaschine für Studiengänge</a></li>
@@ -70,7 +70,12 @@
 			<li><a href="#">ePaper</a></li>
 		</ul>
 	</nav>
+</div>
 
+<div class="header__flyout" id="tools-menu" aria-hidden="true">
+	<div style="background-color: green">
+		<a href="#">3 Superteaser</a>
+	</div>
 </div>
 
 {%- include "zeit.web.campus:templates/inc/navigation/flyout.html" -%}

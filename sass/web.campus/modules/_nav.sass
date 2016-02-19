@@ -79,6 +79,8 @@ $nav-color-border: #444
 			.header__menu-icon--menu
 				display: none
 
+	&__flyout
+		display: none
 
 .nav
 	@extend %nav-font-l
@@ -286,6 +288,11 @@ $nav-color-border: #444
 
 		&__menu-link
 			display: none
+
+		&__flyout
+			&:target,
+			&[aria-hidden="false"]
+				display: block
 
 	.nav
 		@extend %nav-tablet-font-m

@@ -1,6 +1,6 @@
 <li class="author-list__item">
 	{% set module_layout = 'zon-author-list' %}
-	{% if teaser.image_group %}
+	{% if get_image(content=teaser, variant_id='original', fallback=False) %}
 		<a href="{{ teaser | create_url }}">
 			<div class="{{ module_layout }}__imageitem">
 				<div class="{{ module_layout }}__image">
