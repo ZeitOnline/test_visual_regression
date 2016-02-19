@@ -4,6 +4,8 @@ Change log for zeit.web
 2.57 (unreleased)
 -----------------
 
+- BUG-351: Let next-article-arrows stick to the article on horizontal scroll
+
 - ZON-2481: Add ZEIT Campus header + main navigation
 
 - MAINT: Edgesideinclude login-state for campus and magazin
