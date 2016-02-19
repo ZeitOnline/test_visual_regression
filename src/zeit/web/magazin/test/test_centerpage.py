@@ -5,9 +5,6 @@ import mock
 
 import zeit.cms.interfaces
 
-#import zeit.web.core.centerpage
-#import zeit.web.magazin.view_centerpage
-
 import zeit.web.core.utils
 import zeit.web.core.template
 
