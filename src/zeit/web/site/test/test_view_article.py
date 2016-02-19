@@ -20,6 +20,7 @@ import zeit.content.image.interfaces
 
 import zeit.solr.interfaces
 
+import zeit.web.core.application
 import zeit.web.site.view_article
 
 
@@ -1120,8 +1121,8 @@ def test_article_lineage_should_render_correctly(testbrowser):
 
 def test_article_lineage_should_utilize_feature_toggle(
         testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'article_lineage_is_enabled', False)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'article_lineage': False}.get)
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(browser.cssselect('.article-lineage')) == 0
 

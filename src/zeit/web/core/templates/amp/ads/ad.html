@@ -1,4 +1,4 @@
-{% if view.amp_advertising_is_enabled -%}
+{% if toggles('amp_advertising') -%}
 <div class="advertising advertising--place-{{ tile_number | default(4) }}">
 	<amp-iframe width="320" height="320"
 		sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"

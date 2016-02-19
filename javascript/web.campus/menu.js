@@ -58,7 +58,7 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
             });
 
             // toggle submenu "onFocusOut"
-            menu.on( 'blur', '*[aria-controls], *[aria-hidden] a', function( event ) {
+            menu.on( 'blur', '*[role="button"], *[aria-hidden] a', function( event ) {
                 if ( visibleSubmenu ) {
                     setTimeout( function() {
                         var submenu = document.getElementById( visibleSubmenu.attr( 'aria-controls' ) ),
