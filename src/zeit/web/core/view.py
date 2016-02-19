@@ -459,11 +459,6 @@ class Base(object):
         return zeit.web.core.interfaces.ISharingImage(self.context, None)
 
     @zeit.web.reify
-    def article_lineage_is_enabled(self):
-        return zeit.web.core.application.FEATURE_TOGGLES.find(
-            'article_lineage')
-
-    @zeit.web.reify
     def timezone(self):
         return babel.dates.get_timezone('Europe/Berlin')
 
