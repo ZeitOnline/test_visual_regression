@@ -660,7 +660,7 @@ def test_ressort_literally_returns_correct_ressort(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/index')
     view = zeit.web.magazin.view_centerpage.Centerpage(context, mock.Mock())
-    assert view.ressort_literally == 'Politik'
+    assert view.ressort_literally == 'ZEITmagazin'
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/artikel/02')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
