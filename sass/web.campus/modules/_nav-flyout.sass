@@ -27,15 +27,16 @@
 		margin: 0
 		background-color: $white
 		width: 32%
+		+respond-min($break-desktop-min)
+			&:hover
+				+transform(translateY(-5px))
+				box-shadow: 0px 11px 0px -6px rgba(0, 0, 0, .1)
 
 	&__link
 		color: $color-tools-text
 		display: block
 		font-weight: bold
 		padding: remify(15px) remify(10px)
-		+respond-min($break-desktop-min)
-			&:hover
-				box-shadow: 0px 11px 0px -6px rgba(0, 0, 0, .1)
 
 	&__list
 		+display-flex()
