@@ -1,24 +1,32 @@
+{% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
+
 {% if user %}
-    <div class="login-state" data-feature="dropdown" id="login-state" data-sso-id="{{ user.ssoid }}">
-        <a href="{{ profile }}" class="login-state__name">{{ user.name | default('Angemeldet', true) }}</a>
-        <ul class="dropdown">
-            <li class="dropdown__item">
-                <a href="{{ profile }}" class="dropdown__link">Profil</a>
-                <a href="{{ logout }}" class="dropdown__link">Abmelden</a>
-            </li>
-        </ul>
-    </div>
-    <div class="login-state-mobile">
-        {% if user.picture %}
-            <img class="login-state-mobile__avatar" alt="Avatarbild von {{ user.name }}" src="{{ user.picture }}">
-        {% endif %}
-        <span class="login-state-mobile__name">{{ user.name | default('Angemeldet', true) }}</span>
-        <a href="{{ logout }}" class="login-state-mobile__logoff">
-            Abmelden
-        </a>
-    </div>
-    {% else %}
-    <a href="{{ login }}" class="user-link">
-        Anmelden
-</a>
+	<a class="nav__login-title" href="{{ profile }}" role="button" aria-controls="user-menu" aria-label="Account" id="login-state" data-sso-id="{{ user.ssoid }}">
+		{% if user.picture -%}
+			<span class="nav__user-picture" style="background-image: url({{ request.session.user.picture }})"></span>
+		{%- else %}
+			<span class="nav__user-picture nav__user-picture--default">
+				{{ lama.use_svg_icon('avatar', 'nav__user-avatar', request) }}
+			</span>
+		{%- endif %}
+
+		<span class="nav__user-name">{{ user.name or 'Angemeldet' }}</span>
+	</a>
+	<ul class="nav__login-list" id="user-menu" aria-hidden="true">
+		<li><a href="{{ profile }}">Account</a></li>
+		<li>
+			<a href="{{ logout }}">
+				Abmelden
+				{{ lama.use_svg_icon('login', 'nav__login-icon', request) }}
+			</a>
+		</li>
+	</ul>
+{% else %}
+	<a href="{{ login }}" class="nav__login-link">
+		Anmelden
+		<span class="nav__login-register">
+			/ Registrieren
+			{{ lama.use_svg_icon('login', 'nav__login-icon', request) }}
+		</span>
+	</a>
 {% endif %}

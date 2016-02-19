@@ -14,13 +14,16 @@ require([ 'vendor/require', 'config' ], function() {});
 require([
     'web.core/zeit',
     'web.core/images',
-    'web.core/clicktracking'
+    'web.core/clicktracking',
+    'web.campus/menu'
 ], function(
     zeit,
     images,
-    clicktracking
+    clicktracking,
+    menu
 ) {
     images.init();
+    menu.init();
     clicktracking.init();
     zeit.clearQueue();
 });

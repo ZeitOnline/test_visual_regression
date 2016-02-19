@@ -3,5 +3,5 @@
     img.src = 'http://cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode }}' + '&r=' + encodeURIComponent( document.referrer ) + '&rand=' + Math.round( Math.random() * 100000000 );
 </script>
 <noscript>
-    <img src="http://cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}&amp;r=&amp;rand={{ get_random_number(8) }}">
+    <img src="http://cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}&amp;r=&amp;rand={{ get_random_number(8) }}" class="visually-hidden" alt="">
 </noscript>
