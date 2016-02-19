@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <script src=https://script.ioam.de/iam.js></script>
+  </head>
+  <body>
+    <script>
+      var match,
+          pl     = /\+/g,
+          search = /([^&=]+)=?([^&]*)/g,
+          decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+          query  = window.location.search.substring(1);
+
+      var iam_data = {};
+      while (match = search.exec(query)) {
+        iam_data[decode(match[1])] = decode(match[2]);
+      }
+
+      iom.c(iam_data, 2);
+    </script>
+  </body>
+</html>

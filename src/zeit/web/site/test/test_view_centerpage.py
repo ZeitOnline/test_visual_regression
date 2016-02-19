@@ -2057,6 +2057,16 @@ def test_centerpage_page_should_require_ranking(application, dummy_request):
         list(view.regions)
 
 
+def test_centerpage_page_integration(testbrowser, datasolr):
+    browser = testbrowser('/dynamic/umbrien?p=2')
+    # Curated content is not shown
+    assert 'Ich bin nicht intellektuell' not in browser.contents
+    # Header is kept
+    assert 'Das linke Experiment' in browser.contents
+    # Ranking is kept
+    assert 'cp-area--ranking' in browser.contents
+
+
 def test_ranking_area_should_determine_uids_above(application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
