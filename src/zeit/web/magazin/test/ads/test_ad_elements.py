@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-import zeit.web.core.template
+import zeit.web.core.application
 import zeit.web.core.view
 
 
 @pytest.mark.xfail(reason='ad scripts may timeout')
 def test_ad_keyword_diuqilon(selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.template.toggles, {
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True}.get)
 
     driver = selenium_driver
@@ -46,7 +46,7 @@ def test_viewport_is_resized_in_ipad_landscape(selenium_driver, testserver):
 @pytest.mark.xfail(reason='ad scripts may timeout')
 def test_viewport_is_not_resized_in_other_browser(
         selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.template.toggles, {
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True}.get)
     driver = selenium_driver
     driver.set_window_size(1024, 768)
@@ -62,7 +62,7 @@ def test_viewport_is_not_resized_in_other_browser(
 
 @pytest.mark.xfail(reason='ad scripts may timeout')
 def test_var_iqd_var_pack_isset(selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.template.toggles, {
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True}.get)
     driver = selenium_driver
     driver.get('%s/artikel/01' % testserver.url)
@@ -79,7 +79,7 @@ def test_var_iqd_var_pack_isset(selenium_driver, testserver, monkeypatch):
 @pytest.mark.xfail(reason='ad scripts may timeout')
 def test_ad_tile2_not_ommitted_in_landscape(
         selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.template.toggles, {
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True}.get)
     driver = selenium_driver
     driver.set_window_size(1024, 768)

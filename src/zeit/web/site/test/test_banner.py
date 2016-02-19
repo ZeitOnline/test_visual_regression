@@ -4,8 +4,8 @@ import pytest
 
 import zeit.cms.interfaces
 
+import zeit.web.core.application
 import zeit.web.core.banner
-import zeit.web.core.template
 import zeit.web.site
 
 
@@ -19,8 +19,8 @@ def test_banner_toggles_viewport_zoom(application):
 
 def test_homepage_should_have_proper_ivw_script_integration(
         testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.template.toggles, {
-        'third_party_modules': True}.get)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True, 'iqd': True}.get)
 
     browser = testbrowser('/zeit-online/slenderized-index')
     ivw = browser.cssselect('script[src="https://script.ioam.de/iam.js"]')
@@ -29,8 +29,8 @@ def test_homepage_should_have_proper_ivw_script_integration(
 
 def test_adcontroller_head_code_is_present(
         testserver, testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.template.toggles, {
-        'third_party_modules': True}.get)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True, 'iqd': True}.get)
 
     browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
     if 'data-ad-delivery-type="adcontroller"' not in browser.contents:
@@ -54,8 +54,8 @@ def test_adcontroller_adtags_are_present(testserver, testbrowser):
 
 def test_adcontroller_finanlizer_is_present(
         testserver, testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.template.toggles, {
-        'third_party_modules': True}.get)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True, 'iqd': True}.get)
     browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
     if 'data-ad-delivery-type="adcontroller"' not in browser.contents:
         pytest.skip("not applicable due to oldschool ad configuration")
@@ -64,8 +64,8 @@ def test_adcontroller_finanlizer_is_present(
 
 
 def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.template.toggles, {
-        'third_party_modules': True}.get)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True, 'iqd': True}.get)
     driver = selenium_driver
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     try:
@@ -79,8 +79,8 @@ def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
 
 
 def test_adplaces_present_on_pages(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.template.toggles, {
-        'third_party_modules': True}.get)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True, 'iqd': True}.get)
 
     browser = testbrowser('/zeit-online/slenderized-index')
     assert len(browser.cssselect('#iqadtileOOP')) == 1

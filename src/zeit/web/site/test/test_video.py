@@ -10,6 +10,7 @@ import zeit.cms.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.video
 
+import zeit.web.core.application
 import zeit.web.core.template
 import zeit.web.site.module.playlist
 import zeit.web.site.view_video
@@ -143,7 +144,7 @@ def test_video_page_video_should_exist(selenium_driver, testserver):
 
 
 def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.template.toggles, {
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True}.get)
 
     browser = testbrowser('/video/2015-01/3537342483001')
@@ -152,8 +153,8 @@ def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
 
 def test_video_page_adcontroller_js_var_isset(
         selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.template.toggles, {
-        'third_party_modules': True}.get)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True, 'iqd': True}.get)
     driver = selenium_driver
     driver.get('{}/video/2015-01/3537342483001'.format(testserver.url))
     try:

@@ -4,8 +4,8 @@ import pytest
 
 import zeit.cms.interfaces
 
+import zeit.web.core.application
 import zeit.web.core.banner
-import zeit.web.core.template
 import zeit.web.magazin
 
 
@@ -119,7 +119,7 @@ def test_banner_view_should_be_displayed_on_succeeding_pages(
 
 def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
         testserver, testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.template.toggles, {
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True}.get)
 
     # test article with xml banner is missing
