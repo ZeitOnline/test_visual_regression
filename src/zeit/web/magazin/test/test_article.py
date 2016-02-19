@@ -550,28 +550,30 @@ def test_nextread_teaser_block_teasers_is_accessable(application):
         'Nextread block should expose its teasers via index.'
 
 
-def test_nextread_base_layout_has_image_element_if_available(
+def test_nextread_base_layout_has_expected_structure(
         testserver, testbrowser):
     browser = testbrowser('%s/artikel/09' % testserver.url)
-    nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert len(nextread.cssselect('img')) == 1, \
-        'There should be exactly one image tag in a "base" nextread teaser.'
+    nextread = browser.cssselect('.teaser-nextread')[0]
+    assert len(nextread.cssselect('a')) == 1
+    assert len(nextread.cssselect('.teaser-nextread__media')) == 1
+    assert len(nextread.cssselect('.teaser-nextread__text')) == 1
+
+
+def test_nextread_minimal_layout_has_expected_structure(
+        testserver, testbrowser):
     browser = testbrowser('%s/artikel/10' % testserver.url)
-    nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert len(nextread.cssselect('img')) == 1, \
-        'The nextread of "Artikel 10" has no teaser image asset.'
+    nextread = browser.cssselect('.teaser-nextread-minimal')[0]
+    assert len(nextread.cssselect('a')) == 1
+    assert len(nextread.cssselect('.teaser-nextread-minimal__text')) == 1
 
 
-def test_nextread_maximal_layout_has_image_background_if_available(
+def test_nextread_maximal_layout_has_expected_structure(
         testserver, testbrowser):
     browser = testbrowser('%s/artikel/08' % testserver.url)
-    nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert 'background-image' in nextread.attrib.get('style'), \
-        'The teaser image should be set as a background for "maximal" teasers.'
-    browser = testbrowser('%s/artikel/03' % testserver.url)
-    nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert 'background-image' in nextread.attrib.get('style'), \
-        'The nextread of "Artikel 03" has no teaser image asset.'
+    nextread = browser.cssselect('.teaser-nextread-maximal')[0]
+    assert len(nextread.cssselect('a')) == 1
+    assert len(nextread.cssselect('.teaser-nextread-maximal__media')) == 1
+    assert len(nextread.cssselect('.teaser-nextread-maximal__text')) == 1
 
 
 def test_nextread_should_fallback_to_default_layout(testserver, testbrowser):
