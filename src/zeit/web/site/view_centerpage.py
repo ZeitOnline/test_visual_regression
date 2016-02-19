@@ -282,7 +282,9 @@ class CenterpagePage(Centerpage):
     def area_ranking(self):
         # Prevent infloop with our tweaked self.regions
         # XXX Is there a better factoring than copy&paste?
-        for region in super(CenterpagePage, self).regions:
+        regions = [zeit.web.core.centerpage.IRendered(x)
+                   for x in self.context.values()]
+        for region in regions:
             for area in region.values():
                 if zeit.web.core.interfaces.IPagination.providedBy(area):
                     return area

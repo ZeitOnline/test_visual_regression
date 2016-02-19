@@ -4,15 +4,19 @@ Change log for zeit.web
 2.57 (unreleased)
 -----------------
 
+- HOTFIX: Re-enable ranking area to hide curated content (was broken in 2.56)
+
 - ZON-2481: Add ZEIT Campus header + main navigation
 
-- MAINT: Edgesideinclude login-state for campus and magazin
+- ZON-2481: Edgesideinclude login-state for campus and magazin
 
 - ZON-2637: Enable ad-label on framebuilder
 
 - ZON-2772: Ad tags for AMP article
 
 - ZON-2481: Implement topiclinks for all campus content types
+
+- ZON-2780: Add ivw tracking for AMPs
 
 - BUG-282: Join query strings for feed URLs with tracking params
 
@@ -21,8 +25,6 @@ Change log for zeit.web
 - MAINT: Migrate feature toggles from view attributes to jinja global
 
 - FIX: Don't accidentally create missing image variants in ZMO
-
-- ZON-2780: Add ivw tracking for AMPs
 
 
 2.56.3 (2016-02-19)
