@@ -23,7 +23,13 @@ Change log for zeit.web
 - FIX: Don't accidentally create missing image variants in ZMO
 
 
-2.56.1 (2016-02-18)
+2.56.3 (2016-02-19)
+-------------------
+
+- HOTFIX: Avoid collapsing of margins in author list
+
+
+2.56.2 (2016-02-18)
 -------------------
 
 - PERF: Enable solr proxy for author list
