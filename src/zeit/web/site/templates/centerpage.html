@@ -2,14 +2,14 @@
 
 {% block metadata %}
     <div class="header__metadata">
-    {%- if view.is_hp and view.topic_links | length -%}
+    {%- require topics = view.is_hp and view.context | topic_links -%}
         <div class="header__tags">
-            <span class="header__tags__label">{{ view.topic_links.title }}</span>
-            {% for label, link in view.topic_links %}
+            <span class="header__tags__label">{{ topics.title }}</span>
+            {% for label, link in topics %}
             <a href="{{ link }}" class="header__tags__link" data-id="topnav.article-tag.{{ loop.index }}..{{ label | format_webtrekk }}">{{ label }}</a>
             {% endfor %}
         </div>
-    {%- endif -%}
+    {%- endrequire -%}
 
     {%- if view.is_hp -%}
         {% set date = view.date_last_modified | format_timedelta(hours=3) %}
@@ -40,6 +40,6 @@
 {% block cardstack_head %}
     {% if view.has_cardstack %}
         {% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/esi/head?shareUrl={}&static=true'.format(request.url) %}
-        {{ lama.insert_esi(esi_source, 'Cards Ressourcen konnten nicht geladen werden', view.is_dev_environment) }}
+        {{ lama.insert_esi(esi_source, 'Cards Ressourcen konnten nicht geladen werden') }}
     {% endif %}
 {% endblock %}

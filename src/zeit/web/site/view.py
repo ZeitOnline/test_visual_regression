@@ -12,6 +12,7 @@ import zeit.cms.interfaces
 
 import zeit.web.campus.view
 import zeit.web.core.gallery
+import zeit.web.core.security
 import zeit.web.core.view
 import zeit.web.magazin.view
 
@@ -38,6 +39,9 @@ class Base(zeit.web.core.view.Base):
     seo_title_default = (
         u'ZEIT ONLINE | Nachrichten, Hintergründe und Debatten')
     pagetitle_suffix = u' | ZEIT ONLINE'
+
+    nav_show_ressorts = True
+    nav_show_search = True
 
     def __init__(self, *args, **kwargs):
         super(Base, self).__init__(*args, **kwargs)
@@ -143,26 +147,15 @@ class Base(zeit.web.core.view.Base):
 @pyramid.view.view_config(
     route_name='login_state',
     renderer='templates/inc/navigation/login-state.html',
+    request_param='for=site',
     http_cache=60)
+@pyramid.view.view_config(
+    route_name='login_state',
+    renderer='templates/inc/navigation/login-state.html',
+    custom_predicates=((lambda c, r: 'for' not in r.GET.keys()),),
+    http_cache=60)  # Perhaps needed for bw compat? (ND)
 def login_state(request):
-    settings = request.registry.settings
-    destination = request.params['context-uri'] if request.params.get(
-        'context-uri') else request.route_url('home').rstrip('/')
-    info = {}
-
-    if not request.authenticated_userid and request.cookies.get(
-            settings.get('sso_cookie')):
-        log.warn("SSO Cookie present, but not authenticated")
-
-    info['login'] = u"{}/anmelden?url={}".format(
-        settings['sso_url'], destination)
-    info['logout'] = u"{}/abmelden?url={}".format(
-        settings['sso_url'], destination)
-
-    if request.authenticated_userid and 'user' in request.session:
-        info['user'] = request.session['user']
-        info['profile'] = "{}/user".format(settings['community_host'])
-    return info
+    return zeit.web.core.security.get_login_state(request)
 
 
 @pyramid.view.view_config(route_name='schlagworte')
@@ -241,6 +234,14 @@ class FrameBuilder(zeit.web.core.view.CeleraOneMixin, Base):
     @zeit.web.reify
     def framebuilder_requires_ivw(self):
         return 'ivw' in self.request.GET
+
+    @zeit.web.reify
+    def nav_show_ressorts(self):
+        return 'hide_ressorts' not in self.request.GET
+
+    @zeit.web.reify
+    def nav_show_search(self):
+        return 'hide_search' not in self.request.GET
 
     @zeit.web.reify
     def is_advertorial(self):

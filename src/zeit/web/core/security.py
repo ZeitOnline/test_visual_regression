@@ -65,18 +65,18 @@ def get_user_info_from_sso_cookie(cookie, key):
         return
 
 
-def recursively_call_community(req, tries):
+def recursively_call_community(request, tries):
     if tries > 0:
         try:
             with zeit.web.core.metrics.timer(
                     'community_user_info.community.reponse_time'):
                 # Analoguous to requests.api.request().
                 session = requests.Session()
-                response = session.send(req, stream=True, timeout=0.5)
+                response = session.send(request, stream=True, timeout=0.5)
                 session.close()
                 return response
         except Exception:
-            return recursively_call_community(req, tries - 1)
+            return recursively_call_community(request, tries - 1)
     else:
         return
 
@@ -149,3 +149,24 @@ def get_user_info(request):
         user_info['should_invalidate'] = True
 
     return user_info
+
+
+def get_login_state(request):
+    settings = request.registry.settings
+    destination = request.params['context-uri'] if request.params.get(
+        'context-uri') else request.route_url('home').rstrip('/')
+    info = {}
+
+    if not request.authenticated_userid and request.cookies.get(
+            settings.get('sso_cookie')):
+        log.warn('SSO Cookie present, but not authenticated')
+
+    info['login'] = u'{}/anmelden?url={}'.format(
+        settings['sso_url'], destination)
+    info['logout'] = u'{}/abmelden?url={}'.format(
+        settings['sso_url'], destination)
+
+    if request.authenticated_userid and 'user' in request.session:
+        info['user'] = request.session['user']
+        info['profile'] = "{}/user".format(settings['community_host'])
+    return info

@@ -130,26 +130,6 @@ class Base(object):
             return '{}/{}'.format(conf.get('vgwort_url'), token)
 
     @zeit.web.reify
-    def third_party_modules_is_enabled(self):
-        return zeit.web.core.application.FEATURE_TOGGLES.find(
-            'third_party_modules')
-
-    @zeit.web.reify
-    def iqd_is_enabled(self):
-        return zeit.web.core.application.FEATURE_TOGGLES.find(
-            'iqd')
-
-    @zeit.web.reify
-    def tracking_is_enabled(self):
-        return zeit.web.core.application.FEATURE_TOGGLES.find(
-            'tracking')
-
-    @zeit.web.reify
-    def amp_advertising_is_enabled(self):
-        return zeit.web.core.application.FEATURE_TOGGLES.find(
-            'amp_advertising')
-
-    @zeit.web.reify
     def type(self):
         return type(self.context).__name__.lower()
 
@@ -428,11 +408,12 @@ class Base(object):
 
     @zeit.web.reify
     def is_wrapped(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         try:
             return ('ZONApp' in self.request.headers.get('user-agent', '') or (
-                self.is_dev_environment and (
-                    'app-content' in self.request.query_string)))
-        except TypeError:
+                conf.get('dev_environment') and
+                    'app-content' in self.request.query_string))
+        except (AttributeError, TypeError):
             return False
 
     @zeit.web.reify
@@ -476,16 +457,6 @@ class Base(object):
     @zeit.web.reify
     def sharing_image(self):
         return zeit.web.core.interfaces.ISharingImage(self.context, None)
-
-    @zeit.web.reify
-    def is_dev_environment(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('dev_environment', '')
-
-    @zeit.web.reify
-    def article_lineage_is_enabled(self):
-        return zeit.web.core.application.FEATURE_TOGGLES.find(
-            'article_lineage')
 
     @zeit.web.reify
     def timezone(self):
