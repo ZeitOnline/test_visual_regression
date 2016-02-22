@@ -90,7 +90,7 @@ def get_user_info(request):
         headers={'Accept': 'application/xml',
                  'Cookie': request.headers.get('Cookie', '')}).prepare()
 
-    community_response = recursively_call_community(community_request, 1)
+    community_response = _retry_request(community_request, 1)
 
     if not community_response:
         return user_info
@@ -134,7 +134,7 @@ def get_user_info_from_sso_cookie(cookie, key):
         return
 
 
-def recursively_call_community(request, tries):
+def _retry_request(request, tries):
     if tries > 0:
         try:
             with zeit.web.core.metrics.timer(
@@ -145,7 +145,7 @@ def recursively_call_community(request, tries):
                 session.close()
                 return response
         except Exception:
-            return recursively_call_community(request, tries - 1)
+            return _retry_request(request, tries - 1)
     else:
         return
 

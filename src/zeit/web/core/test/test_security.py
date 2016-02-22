@@ -17,7 +17,7 @@ def test_reload_community_should_produce_result(mock_metrics, monkeypatch):
 
     monkeypatch.setattr(requests.Session, 'send', call)
 
-    res = zeit.web.core.security.recursively_call_community(request, 2)
+    res = zeit.web.core.security._retry_request(request, 2)
     assert res == 'result'
 
 
@@ -31,7 +31,7 @@ def test_reload_community_should_be_recalled(mock_metrics, monkeypatch):
 
     monkeypatch.setattr(requests.Session, 'send', call)
 
-    res = zeit.web.core.security.recursively_call_community(request, 2)
+    res = zeit.web.core.security._retry_request(request, 2)
     assert res is None
     assert request.called == 2
 
@@ -49,7 +49,7 @@ def test_reload_community_should_suceed_after_one_call(
 
     monkeypatch.setattr(requests.Session, 'send', call)
 
-    res = zeit.web.core.security.recursively_call_community(request, 2)
+    res = zeit.web.core.security._retry_request(request, 2)
     assert res == 'result'
     assert request.called == 2
 
