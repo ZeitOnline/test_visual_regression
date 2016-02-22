@@ -4,6 +4,8 @@ Change log for zeit.web
 2.57 (unreleased)
 -----------------
 
+- MAINT: Add standard page padding class for infographics
+
 - ZON-2482: Add ZCO footer
 
 - MAINT: Fix position of ad place 1 in AMP articles
