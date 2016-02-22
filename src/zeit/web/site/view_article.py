@@ -188,8 +188,10 @@ def has_author_image(context, request):
     authors = zeit.web.core.article.convert_authors(context)
     if not authors:
         return False
-    return zeit.web.core.template.closest_substitute_image(
-        authors[0]['image_group'], 'zon-column')
+    # XXX Should use proper variant, cf. z.w.core.template.get_column_image.
+    return zeit.web.core.template.get_image(
+        content=authors[0]['image_group'], variant_id='original',
+        fallback=False)
 
 
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
@@ -209,10 +211,7 @@ class ColumnArticle(Article):
 
     @zeit.web.reify
     def author_img(self):
-        if not self.authors:
-            return
-        return zeit.web.core.template.closest_substitute_image(
-            self.authors[0]['image_group'], 'zon-column')
+        return has_author_image(self.context, self.request)
 
     @zeit.web.reify
     def sharing_image(self):
