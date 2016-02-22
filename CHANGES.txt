@@ -45,7 +45,6 @@ Change log for zeit.web
 -------------------
 
 - PERF: Enable solr proxy for author list
->>>>>>> master
 
 
 2.56.1 (2016-02-17)
