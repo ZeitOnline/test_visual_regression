@@ -24,41 +24,6 @@ import zeit.web.core.template
 log = logging.getLogger(__name__)
 
 
-FIELDS = ' '.join([
-    'authors',
-    'date-last-modified',
-    'date_first_released',
-    'date_last_published',
-    'image-base-id',
-    'last-semantic-change',
-    'lead_candidate'
-    'product_id',
-    'serie',
-    'supertitle',
-    'teaser_text',
-    'title',
-    'type',
-    'uniqueId'
-])
-
-
-FIELD_MAP = [
-    (u'authors', u'authorships'),
-    (u'supertitle', u'teaserSupertitle'),
-    (u'teaser_text', u'teaserText'),
-    (u'title', u'teaserTitle')
-]
-
-
-DATE_MAP = [
-    (u'date-last-modified', u'date_last_modified'),
-    (u'date_first_released', u'date_first_released'),
-    (u'last-semantic-change', u'last_semantic_change'),
-    (u'date_last_published', u'date_last_published'),
-    (u'date_last_published', u'date_last_published_semantic')
-]
-
-
 class IRanking(zeit.content.cp.interfaces.IArea):
 
     sort_order = zope.schema.TextLine(
@@ -76,9 +41,40 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     zope.interface.implements(
         IRanking,
-        zeit.content.cp.interfaces.IRenderedArea,
         zeit.web.core.interfaces.IPagination
     )
+
+    FIELDS = ' '.join([
+        'authors',
+        'date-last-modified',
+        'date_first_released',
+        'date_last_published',
+        'image-base-id',
+        'last-semantic-change',
+        'lead_candidate'
+        'product_id',
+        'serie',
+        'supertitle',
+        'teaser_text',
+        'title',
+        'type',
+        'uniqueId',
+    ])
+
+    FIELD_MAP = [
+        (u'authors', u'authorships'),
+        (u'supertitle', u'teaserSupertitle'),
+        (u'teaser_text', u'teaserText'),
+        (u'title', u'teaserTitle'),
+    ]
+
+    DATE_MAP = [
+        (u'date-last-modified', u'date_last_modified'),
+        (u'date_first_released', u'date_first_released'),
+        (u'last-semantic-change', u'last_semantic_change'),
+        (u'date_last_published', u'date_last_published'),
+        (u'date_last_published', u'date_last_published_semantic'),
+    ]
 
     sort_order = zeit.cms.content.property.ObjectPathProperty(
         '.sort_order', IRanking['sort_order'])
@@ -127,7 +123,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                     sort=sort_order,
                     rows=self.count,
                     start=self.start,
-                    fl=FIELDS,
+                    fl=self.FIELDS,
                     fq=self.filter_query)
         except (pysolr.SolrError, ValueError) as e:
             log.warning(u'{} for query {}'.format(e, query))
@@ -155,15 +151,14 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         return lq.not_(lq.or_(
             *[lq._field('uniqueId', '"%s"' % i) for i in self.uids_above]))
 
-    @staticmethod
-    def document_hook(doc):
-        for source, target in FIELD_MAP:
+    def document_hook(self, doc):
+        for source, target in self.FIELD_MAP:
             try:
                 doc[target] = doc[source]
             except KeyError:
                 continue
 
-        for source, target in DATE_MAP:
+        for source, target in self.DATE_MAP:
             try:
                 doc[target] = zc.iso8601.parse.datetimetz(str(doc[source]))
             except (KeyError, UnicodeEncodeError, ValueError):
@@ -249,4 +244,27 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
 @zeit.web.register_area('author-list')
 class AuthorList(Ranking):
-    pass
+
+    zope.interface.implements(
+        IRanking,
+        zeit.web.core.interfaces.IPagination
+    )
+
+    FIELDS = Ranking.FIELDS + ' ' + ' '.join([
+        'author_summary_t',
+        'display_name_s',
+    ])
+
+    FIELD_MAP = Ranking.FIELD_MAP + [
+        (u'author_summary_t', 'summary'),
+        (u'display_name_s', 'display_name'),
+    ]
+
+    def document_hook(self, doc):
+        doc = super(AuthorList, self).document_hook(doc)
+        # Prevent proxy exposure for missing fields (e.g. probably the majority
+        # of author objects does not have an image).
+        for key in ['image', 'summary']:
+            if key not in doc:
+                doc[key] = None
+        return doc

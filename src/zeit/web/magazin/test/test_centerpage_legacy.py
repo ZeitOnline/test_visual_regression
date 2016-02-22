@@ -5,12 +5,10 @@ from zope.component import getMultiAdapter
 import mock
 import pyramid.threadlocal
 import pytest
-import zope.component
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
 import zeit.content.gallery.gallery
-import zeit.cms.syndication.feed
 
 from zeit.web.core.template import default_image_url
 from zeit.web.core.template import get_teaser_image
@@ -546,17 +544,10 @@ def test_teaser_image_should_be_created_from_image_group_and_image(
     assert teaser_image.title == 'Katze!'
 
 
-def test_get_reaches_from_centerpage_view(application):
-    settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
-    request = mock.Mock()
-    request.registry.settings.community_host = settings['community_host']
-    request.registry.settings.linkreach_host = settings['linkreach_host']
-    request.registry.settings.node_comment_statistics = settings[
-        'node_comment_statistics']
-
+def test_get_reaches_from_centerpage_view(application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/test-cp/test-cp-zmo')
-    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, request)
+    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, dummy_request)
 
     buzz = view.area_buzz
 

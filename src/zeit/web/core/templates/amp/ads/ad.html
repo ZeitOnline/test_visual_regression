@@ -1,0 +1,10 @@
+{% if toggles('amp_advertising') -%}
+<div class="advertising advertising--place-{{ tile_number | default(4) }}">
+	<amp-iframe width="320" height="320"
+		sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+		frameborder="0"
+		src="https://ssl.zeit.de/www.zeit.de/static/amp-ads/tile-{{ tile_number | default(4) }}.html">
+			<amp-img layout="fill" src="{{ request.asset_host }}/images/amp-ad-platzhalter.gif" placeholder></amp-img>
+	</amp-iframe>
+</div>
+{% endif -%}

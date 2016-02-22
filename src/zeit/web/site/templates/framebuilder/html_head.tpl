@@ -13,11 +13,17 @@
         <link href="{{ request.asset_host }}/css/web.site/all-old-ie.css" media="screen" rel="stylesheet" type="text/css">
     <![endif]-->
     {% endblock css_lte_8_link %}
+
     {% block css_link %}
     <!--[if gt IE 8]><!-->
-        <link href="{{ request.asset_host }}/css/web.site/{{ 'unresponsive' if view.desktop_only else 'screen'}}.css" media="screen" rel="stylesheet" type="text/css">
+        {% if view.is_advertorial %}
+            <link href="{{ request.asset_host }}/css/web.site/advertorial.css" media="screen" rel="stylesheet" type="text/css" />
+        {% else %}
+            <link href="{{ request.asset_host }}/css/web.site/{{ 'unresponsive' if view.desktop_only else 'screen'}}.css" media="screen" rel="stylesheet" type="text/css">
+        {% endif %}
     <!--<![endif]-->
     {% endblock css_link %}
+
     {% block css_lte9_navi_link %}
     <!--[if lte IE 9]>
         <link href="{{ request.asset_host }}/css/web.site/ie-navi.css" media="screen" rel="stylesheet" type="text/css">
@@ -45,10 +51,10 @@
         <!-- IVW -->
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif %}
-    {% if view.third_party_modules_is_enabled and view.iqd_is_enabled %}
+    {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
         {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
-    {% if view.is_dev_environment %}
+    {% if settings('dev_environment') %}
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}

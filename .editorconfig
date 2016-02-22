@@ -1,0 +1,15 @@
+# @see: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Global styles
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# HTML templates and CSS files
+[*.{html,tpl,sass}]
+indent_style = tab
+indent_size = 4

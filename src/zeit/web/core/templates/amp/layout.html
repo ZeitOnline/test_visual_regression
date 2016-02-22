@@ -22,8 +22,12 @@
 		{%- include "zeit.web.core:templates/amp/style.html" %}
 	{% endblock style %}
 	<script async src="https://cdn.ampproject.org/v0.js"></script>
+	{% if toggles('amp_advertising') -%}
+	<script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+	{% endif -%}
 	<script async custom-element="amp-brightcove" src="https://cdn.ampproject.org/v0/amp-brightcove-0.1.js"></script>
 	<script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+	{%- include "zeit.web.core:templates/amp/tracking/ivw.html" -%}
 </head>
 
 <body>
@@ -56,6 +60,8 @@
 		{% block breaking_news %}
 			{% include "zeit.web.site:templates/inc/breaking_news.tpl" %}
 		{% endblock breaking_news %}
+
+		{% include "zeit.web.core:templates/amp/ads/tile_1.html" ignore missing %}
 
 		<main itemprop="mainContentOfPage">
 		{% block main %}
@@ -106,8 +112,13 @@
 							{% if not loop.first %}
 								<h3 class="intertitle article__item">{{ page.teaser }}</h3>
 							{% endif %}
+							{% set ad_displayed = False %}
 							{% for block in page %}
 								{% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}
+								{% if page.number == 0 and block | block_type == 'paragraph' and ad_displayed == False %}
+									{% set ad_displayed = True %}
+									{% include "zeit.web.core:templates/amp/ads/tile_4.html" ignore missing %}
+								{% endif %}
 							{% endfor %}
 							</section>
 						{% endfor %}
@@ -173,6 +184,10 @@
 				{% set module = view.nextread_ad %}
 				{% include "zeit.web.core:templates/amp/nextread/default.html" %}
 			{% endblock %}
+
+			{% block footer_ad %}
+				{% include "zeit.web.core:templates/amp/ads/tile_8.html" ignore missing %}
+			{% endblock footer_ad %}
 		{% endblock main %}
 		</main>
 
