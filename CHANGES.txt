@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - ZON-2637: Enable ad-label on framebuilder
 
+- ZON-2636: Framebuilder: Add query parameters `hide_ressorts` and `hide_search`
+
 - ZON-2772: Ad tags for AMP article
 
 - ZON-2481: Implement topiclinks for all campus content types
@@ -43,6 +45,7 @@ Change log for zeit.web
 -------------------
 
 - PERF: Enable solr proxy for author list
+>>>>>>> master
 
 
 2.56.1 (2016-02-17)
