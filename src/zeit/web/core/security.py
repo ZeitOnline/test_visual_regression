@@ -135,19 +135,18 @@ def get_user_info_from_sso_cookie(cookie, key):
 
 
 def _retry_request(request, tries):
-    if tries > 0:
-        try:
-            with zeit.web.core.metrics.timer(
-                    'community_user_info.community.reponse_time'):
-                # Analoguous to requests.api.request().
-                session = requests.Session()
-                response = session.send(request, stream=True, timeout=0.5)
-                session.close()
-                return response
-        except Exception:
-            return _retry_request(request, tries - 1)
-    else:
+    if not tries:
         return
+    try:
+        with zeit.web.core.metrics.timer(
+                'community_user_info.community.reponse_time'):
+            # Analoguous to requests.api.request().
+            session = requests.Session()
+            response = session.send(request, stream=True, timeout=0.5)
+            session.close()
+            return response
+    except Exception:
+        return _retry_request(request, tries - 1)
 
 
 def get_login_state(request):
