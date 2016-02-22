@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2482: Add ZCO footer
 
+- MAINT: Fix position of ad place 1 in AMP articles
+
 - HOTFIX: Re-enable ranking area to hide curated content (was broken in 2.56)
 
 - ZON-2481: Add ZEIT Campus header + main navigation
@@ -17,6 +19,8 @@ Change log for zeit.web
 - ZON-2481: Edgesideinclude login-state for campus and magazin
 
 - ZON-2637: Enable ad-label on framebuilder
+
+- ZON-2636: Framebuilder: Add query parameters `hide_ressorts` and `hide_search`
 
 - ZON-2772: Ad tags for AMP article
 
