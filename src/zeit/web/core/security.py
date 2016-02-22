@@ -8,6 +8,7 @@ import zeit.web.core.comments
 import zeit.web.core.metrics
 import logging
 
+
 log = logging.getLogger(__name__)
 
 
@@ -23,8 +24,8 @@ class AuthenticationPolicy(
 
 
 def get_user(request):
+    """This is available as ``request.user``."""
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-
     sso_cookie = request.cookies.get(conf.get('sso_cookie'))
     if not sso_cookie:
         if 'user' in request.session:
@@ -54,29 +55,6 @@ def reload_user_info(request):
         del request.session['user']
         del request.user
     return request.user
-
-
-def get_user_info_from_sso_cookie(cookie, key):
-    try:
-        return jwt.decode(cookie, key, 'RS256')
-    except Exception:
-        return
-
-
-def recursively_call_community(request, tries):
-    if tries > 0:
-        try:
-            with zeit.web.core.metrics.timer(
-                    'community_user_info.community.reponse_time'):
-                # Analoguous to requests.api.request().
-                session = requests.Session()
-                response = session.send(request, stream=True, timeout=0.5)
-                session.close()
-                return response
-        except Exception:
-            return recursively_call_community(request, tries - 1)
-    else:
-        return
 
 
 def get_user_info(request):
@@ -147,6 +125,29 @@ def get_user_info(request):
         user_info['should_invalidate'] = True
 
     return user_info
+
+
+def get_user_info_from_sso_cookie(cookie, key):
+    try:
+        return jwt.decode(cookie, key, 'RS256')
+    except Exception:
+        return
+
+
+def recursively_call_community(request, tries):
+    if tries > 0:
+        try:
+            with zeit.web.core.metrics.timer(
+                    'community_user_info.community.reponse_time'):
+                # Analoguous to requests.api.request().
+                session = requests.Session()
+                response = session.send(request, stream=True, timeout=0.5)
+                session.close()
+                return response
+        except Exception:
+            return recursively_call_community(request, tries - 1)
+    else:
+        return
 
 
 def get_login_state(request):
