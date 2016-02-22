@@ -16,9 +16,15 @@ Change log for zeit.web
   * Use Standart image template in ZMO
   * Move copyright logic to core and use it in ZMO
 
+- MAINT: Fix position of ad place 1 in AMP articles
+
 - HOTFIX: Re-enable ranking area to hide curated content (was broken in 2.56)
 
 - ZON-2481: Add ZEIT Campus header + main navigation
+
+- ZON-2778: Add ZEIT Campus navigation flyout
+
+- MAINT: Edgesideinclude login-state for campus and magazin
 
 - ZON-2481: Edgesideinclude login-state for campus and magazin
 
