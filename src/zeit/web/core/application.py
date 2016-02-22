@@ -167,6 +167,9 @@ class Application(object):
         config.add_request_method(configure_host('jsconf'), reify=True)
         config.add_request_method(configure_host('fbia'), reify=True)
 
+        config.add_request_method(
+            zeit.web.core.security.get_user, name='user', reify=True)
+
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.web, ignore=self.DONT_SCAN)
 

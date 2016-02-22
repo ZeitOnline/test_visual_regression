@@ -80,23 +80,18 @@ def test_decode_sso_should_not_work():
     assert res is None
 
 
-@pytest.fixture
-def policy():
-    return zeit.web.core.security.AuthenticationPolicy()
+def test_cookieless_request_returns_nothing(dummy_request):
+    assert not dummy_request.user
 
 
-def test_cookieless_request_returns_nothing(policy, dummy_request):
-    assert not bool(policy.authenticated_userid(dummy_request))
-
-
-def test_cookieless_request_clears_session(policy, dummy_request):
+def test_cookieless_request_clears_session(dummy_request):
     dummy_request.session['user'] = dict(uid='bar')
-    policy.authenticated_userid(dummy_request)
+    dummy_request.user
     assert 'user' not in dummy_request.session
 
 
 def test_empty_cache_triggers_backend_fills_cache(
-        policy, dummy_request, mockserver_factory, monkeypatch):
+        dummy_request, mockserver_factory, monkeypatch):
     user_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <user>
         <uid>457322</uid>
@@ -122,7 +117,11 @@ def test_empty_cache_triggers_backend_fills_cache(
     dummy_request.cookies['my_sso_cookie'] = 'foo'
     dummy_request.headers['Cookie'] = ''
     assert 'user' not in dummy_request.session
+    assert dummy_request.user['ssoid'] == 'foo'
+    policy = zeit.web.core.security.AuthenticationPolicy()
     assert policy.authenticated_userid(dummy_request) == 'foo'
+    assert dummy_request.session['user']['ssoid'] == 'foo'
+
     assert dummy_request.session['user']['uid'] == '457322'
     assert dummy_request.session['user']['name'] == 'test-user'
 

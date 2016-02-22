@@ -367,11 +367,13 @@ def config(application, request):
 
 
 @pytest.fixture
-def dummy_request(request, config):
+def dummy_request(request, application, config):
     req = pyramid.testing.DummyRequest(is_xhr=False)
     req.GET = webob.multidict.MultiDict(req.GET)
     req.response.headers = set()
     req.registry.settings = config.registry.settings
+    req._set_extensions(application.zeit_app.config.registry.getUtility(
+        pyramid.interfaces.IRequestExtensions))
     req.matched_route = None
     config.manager.get()['request'] = req
     return req

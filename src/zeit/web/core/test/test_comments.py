@@ -219,7 +219,7 @@ def test_rewrite_comments_url_should_rewrite_to_static_host(application):
 
 def test_post_comment_should_throw_exception_if_no_user_is_present():
     request = mock.Mock()
-    request.authenticated_userid = None
+    request.user = {}
     with pytest.raises(pyramid.httpexceptions.HTTPForbidden):
         zeit.web.core.view_comment.PostComment(mock.Mock(), request)
 
@@ -266,12 +266,11 @@ def test_comment_tree_should_be_flattened_on_level_two():
 
 def _create_poster(monkeypatch):
     request = mock.Mock()
-    request.authenticated_userid = '123'
+    request.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
+    request.session = {}
 
     request.params = {'path': 'my/path'}
     request.GET = request.POST = request.params
-    request.session = {'user': {'uid': '123'}}
-    request.session['user']['name'] = 'foo'
     request.cookies = {}
     context = mock.Mock()
 
@@ -512,8 +511,8 @@ def test_post_comment_should_set_lock(application, action):
 
 @pytest.mark.parametrize("action", ['recommend', 'promote', 'demote'])
 def test_post_comment_should_not_set_lock(application, action):
-    request = mock.Mock()
-    request.session = {'user': {'name': 'foo'}}
+    request = pyramid.testing.DummyRequest()
+    request.user = {'ssoid': '123', 'name': 'foo'}
     pc = zeit.web.core.view_comment.PostComment(mock.Mock(), request)
     pc.lock_duration = datetime.timedelta(0, 0.5)
     locker = pc.handle_comment_locking
@@ -551,7 +550,7 @@ def test_post_comment_should_not_expose_requests_timeout_exception(
     dummy_request.method = 'POST'
     dummy_request.POST = dummy_request.params = {
         'path': 'artikel/01', 'action': 'comment', 'comment': ' '}
-    dummy_request.session = {'user': {'uid': '123', 'name': 'foo'}}
+    dummy_request.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
 
     def post(url, **kw):
         raise requests.exceptions.Timeout()

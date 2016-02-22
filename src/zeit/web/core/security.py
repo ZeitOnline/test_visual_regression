@@ -19,43 +19,45 @@ class AuthenticationPolicy(
     """
 
     def authenticated_userid(self, request):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return request.user.get('ssoid')
 
-        sso_cookie = request.cookies.get(conf.get('sso_cookie'))
 
-        # If no sso cookie is present, bail out straight away:
-        if not sso_cookie:
-            if 'user' in request.session:
-                del request.session['user']
-            return
+def get_user(request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
-        if request.session.get('user') and (
-                is_reliable_user_info(request.session['user']) and not (
-                request.session['user'].get('should_invalidate'))):
-            # retrieve the user info from the session
-            user_info = request.session['user']
-        else:
-            # store the user info in the session
-            log.debug("Request user_info")
-            user_info = get_user_info(request)
-            if not is_reliable_user_info(user_info):
-                return
-            request.session['user'] = user_info
-        return user_info['ssoid']
+    sso_cookie = request.cookies.get(conf.get('sso_cookie'))
+    if not sso_cookie:
+        if 'user' in request.session:
+            del request.session['user']
+        return {}
+
+    if request.session.get('user') and (
+            is_reliable_user_info(request.session['user']) and not (
+            request.session['user'].get('should_invalidate'))):
+        # retrieve the user info from the session
+        user_info = request.session['user']
+    else:
+        # store the user info in the session
+        log.debug("Request user_info")
+        user_info = get_user_info(request)
+        if not is_reliable_user_info(user_info):
+            return {}
+        request.session['user'] = user_info
+    return user_info
 
 
 def is_reliable_user_info(user_info):
     """Check user info for all mandatory session values (including the
     successfully decoded SSO cookie value).
     """
-
     return user_info.get('ssoid')
 
 
 def reload_user_info(request):
     if request.session.get('user'):
         del request.session['user']
-    return request.authenticated_userid
+        del request.user
+    return request.user
 
 
 def get_user_info_from_sso_cookie(cookie, key):

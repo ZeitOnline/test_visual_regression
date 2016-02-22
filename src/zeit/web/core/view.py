@@ -813,12 +813,11 @@ class Content(CeleraOneMixin, Base):
         premoderation = False
         uid = 0
         valid_community_login = True
-        self.request.authenticated_userid
 
-        if self.request.session.get('user'):
-            user_blocked = self.request.session['user'].get('blocked')
-            premoderation = self.request.session['user'].get('premoderation')
-            uid = self.request.session['user'].get('uid')
+        if self.request.user:
+            user_blocked = self.request.user.get('blocked')
+            premoderation = self.request.user.get('premoderation')
+            uid = self.request.user.get('uid')
             valid_community_login = True if uid and uid != '0' else False
 
         # used for general alerts in the comment section header
