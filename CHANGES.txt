@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.57 (unreleased)
+2.57 (2016-02-22)
 -----------------
 
 - MAINT: Add standard page padding class for infographics
