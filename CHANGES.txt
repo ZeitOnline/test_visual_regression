@@ -4,11 +4,11 @@ Change log for zeit.web
 2.58 (unreleased)
 -----------------
 
-- FIX: Fix AMP validation, IVW integration and meta robots tag
-
 - ZON-1883: Visually improve mobile plus/minus buttons
 
 - BUG-351: Let next-article-arrows stick to the article on horizontal scroll
+
+- FIX: Fix AMP validation, IVW integration and meta robots tag
 
 - FIX: Fix authorindex colum break ... again
 
@@ -16,19 +16,13 @@ Change log for zeit.web
 2.57 (2016-02-22)
 -----------------
 
-- MAINT: Add standard page padding class for infographics
+- HOTFIX: Re-enable ranking area to hide curated content (was broken in 2.56)
 
 - ZON-2482: Add ZCO footer
-
-- MAINT: Fix position of ad place 1 in AMP articles
-
-- HOTFIX: Re-enable ranking area to hide curated content (was broken in 2.56)
 
 - ZON-2481: Add ZEIT Campus header + main navigation
 
 - ZON-2778: Add ZEIT Campus navigation flyout
-
-- MAINT: Edgesideinclude login-state for campus and magazin
 
 - ZON-2481: Edgesideinclude login-state for campus and magazin
 
@@ -44,11 +38,17 @@ Change log for zeit.web
 
 - BUG-282: Join query strings for feed URLs with tracking params
 
+- FIX: Don't accidentally create missing image variants in ZMO
+
+- MAINT: Edgesideinclude login-state for campus and magazin
+
+- MAINT: Add standard page padding class for infographics
+
+- MAINT: Fix position of ad place 1 in AMP articles
+
 - MAINT: Disuse rsynced node-comment-statistics in favor of API endpoint
 
 - MAINT: Migrate feature toggles from view attributes to jinja global
-
-- FIX: Don't accidentally create missing image variants in ZMO
 
 
 2.56.3 (2016-02-19)
