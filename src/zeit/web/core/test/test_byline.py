@@ -28,7 +28,7 @@ def test_article_byline_should_be_represented_as_a_nested_tuple(application):
 
 def test_quiz_byline_should_be_represented_as_a_nested_tuple(application):
     quiz = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/quiz/quiz-workaholic')
+        'http://xml.zeit.de/zeit-online/quiz/quiz-workaholic')
     byline = zeit.web.core.byline.get_byline(quiz)
     assert byline.context == quiz
     assert byline == [

@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - BUG-351: Let next-article-arrows stick to the article on horizontal scroll
 
+- MAINT: Start cleaning and organizing testdata
+
 
 2.57 (2016-02-22)
 -----------------
