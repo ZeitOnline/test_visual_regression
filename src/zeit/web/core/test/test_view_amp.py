@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import lxml.etree
 
+import zeit.web.core.application
+
 
 def test_amp_contains_required_microdata(testbrowser, testserver):
     browser = testbrowser('/amp/zeit-online/article/amp')
@@ -160,9 +162,11 @@ def test_amp_article_shows_ads_correctly(testbrowser):
     assert len(ads) == 3
 
 
-def test_amp_article_should_have_ivw_tracking(testbrowser):
+def test_amp_article_should_have_ivw_tracking(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True, 'tracking': True}.get)
     browser = testbrowser('/amp/zeit-online/article/amp')
-    ivw = browser.cssselect('amp-analytics')
+    ivw = browser.cssselect('amp-analytics[type="infonline"]')
     assert len(ivw) == 1
     ivw_text = lxml.etree.tostring(ivw[0])
     assert '"st":  "mobzeit"' in ivw_text
