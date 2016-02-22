@@ -1,20 +1,40 @@
 Change log for zeit.web
 =======================
 
-2.57 (unreleased)
+2.58 (unreleased)
 -----------------
 
 - BUG-351: Let next-article-arrows stick to the article on horizontal scroll
 
+
+2.57 (2016-02-22)
+-----------------
+
+- MAINT: Add standard page padding class for infographics
+
+- ZON-2482: Add ZCO footer
+
+- MAINT: Fix position of ad place 1 in AMP articles
+
+- HOTFIX: Re-enable ranking area to hide curated content (was broken in 2.56)
+
 - ZON-2481: Add ZEIT Campus header + main navigation
+
+- ZON-2778: Add ZEIT Campus navigation flyout
 
 - MAINT: Edgesideinclude login-state for campus and magazin
 
+- ZON-2481: Edgesideinclude login-state for campus and magazin
+
 - ZON-2637: Enable ad-label on framebuilder
+
+- ZON-2636: Framebuilder: Add query parameters `hide_ressorts` and `hide_search`
 
 - ZON-2772: Ad tags for AMP article
 
 - ZON-2481: Implement topiclinks for all campus content types
+
+- ZON-2780: Add ivw tracking for AMPs
 
 - BUG-282: Join query strings for feed URLs with tracking params
 
@@ -23,8 +43,6 @@ Change log for zeit.web
 - MAINT: Migrate feature toggles from view attributes to jinja global
 
 - FIX: Don't accidentally create missing image variants in ZMO
-
-- ZON-2780: Add ivw tracking for AMPs
 
 
 2.56.3 (2016-02-19)

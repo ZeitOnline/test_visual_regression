@@ -1,0 +1,64 @@
+.nav-flyout
+	background-color: $color-tools-bg
+	margin-bottom: 1em
+
+	&__headline
+		font-family: $font-beckett
+		font-size: remify(28px)
+		font-weight: normal
+		height: remify(50px)
+		letter-spacing: .05em
+		line-height: 1em
+		margin: 0
+		text-transform: uppercase
+		margin-bottom: remify(16px)
+		+respond-min($break-desktop-min)
+			font-size: remify(42px)
+			letter-spacing: .03em
+			margin-bottom: remify(48px)
+
+	&__text
+		font-family: $font-tabletgothic
+		margin-bottom: remify(7px)
+		margin-top: 0
+
+	&__item
+		display: block
+		margin: 0
+		background-color: $white
+		width: 32%
+		+on-interaction
+			+transform(translateY(-5px))
+			box-shadow: 0px 11px 0px -6px rgba(0, 0, 0, .1)
+
+	&__link
+		color: $color-tools-text
+		display: block
+		font-weight: bold
+		padding: remify(15px) remify(10px)
+		+on-interaction
+			color: $zco-charcoal
+
+	&__list
+		+display-flex()
+		+justify-content(space-between)
+		list-style: none
+		margin: 0
+		padding: remify(20px)
+
+	&__sit-link
+		background-color: rgba(0, 0, 0, .1)
+		color: $white
+		display: block
+		font-size: remify(16px)
+		font-weight: bold
+		padding: remify(12px) 0
+		text-align: center
+		+on-interaction
+			color: $white
+
+	&__toolbox-arrow
+		height: remify(20px)
+		width: remify(20px)
+		margin-left: .2em
+		vertical-align: text-bottom
