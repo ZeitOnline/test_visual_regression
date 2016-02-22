@@ -485,18 +485,6 @@ def default_image_url(image, image_pattern='default'):
 
 
 @zeit.web.register_filter
-def sharing_image_url(image_group,
-                      image_pattern):
-    # TRASHME: Create image URLs for twitter and facebook
-    sharing_image = closest_substitute_image(image_group, image_pattern)
-
-    if not sharing_image:
-        return
-
-    return default_image_url(sharing_image, image_pattern)
-
-
-@zeit.web.register_filter
 def closest_substitute_image(image_group,
                              image_pattern,
                              force_orientation=False):
