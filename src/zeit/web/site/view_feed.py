@@ -336,7 +336,8 @@ class SpektrumFeed(Base):
                 E.guid(content.uniqueId, isPermaLink='false'),
             )
             variant = zeit.web.core.template.get_image(
-                content=content, variant_id='spektrum', fallback=False)
+                content=content, variant_id='rss-spektrum-flavoured',
+                fallback=False)
             image = zeit.content.image.interfaces.IMasterImage(
                 variant.group, None)
             if variant is not None and image is not None:
