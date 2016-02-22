@@ -31,7 +31,7 @@ class AuthenticationPolicy(
 
         if request.session.get('user') and (
                 is_reliable_user_info(request.session['user']) and not (
-                request.session['user']['should_invalidate'])):
+                request.session['user'].get('should_invalidate'))):
             # retrieve the user info from the session
             user_info = request.session['user']
         else:
