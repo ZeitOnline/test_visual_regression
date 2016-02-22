@@ -1,10 +1,431 @@
+$nav-color-topics: #ffa500
+$nav-color-tools: #1cdcb5
+$nav-color-border: #444
+
+=nav-font-xs()
+	font-size: remify(11px)
+	letter-spacing: .16em
+
+=nav-font-s()
+	font-size: remify(13px)
+	letter-spacing: .16em
+
+=nav-font-m()
+	font-size: remify(14px)
+	letter-spacing: .08em
+
+=nav-font-l()
+	font-size: remify(16px)
+	letter-spacing: .05em
+
+=nav-link-arrow()
+	&:before
+		content: "\203A"
+		font-size: 1.5em
+		line-height: normal
+		margin-right: .2em
+
+%nav-font-xs
+	+nav-font-xs
+
+%nav-font-s
+	+nav-font-s
+
+%nav-font-m
+	+nav-font-m
+
+%nav-font-l
+	+nav-font-l
+
+%nav-link-arrow
+	+nav-link-arrow
+
 .header
 	background-color: $primary-color
 	color: #ccc
-	&__logo
+	position: relative
+
+	&__brand
+		+clearfix
 		color: #fff
-		display: block
-		height: remify(32px)
+		line-height: remify(50px)
+		padding: remify(0 $page-padding--small)
+		a
+			color: inherit
+
+	&__publisher
+		float: left
+
+	&__logo
+		height: remify(33px)
 		width: remify(185px)
+		vertical-align: middle
+
+	&__menu-icon
+		&--menu
+			height: remify(14px)
+			width: remify(20px)
+		&--close
+			height: remify(16px)
+			width: remify(20px) // add 4px to align with burger menu
+			padding: remify(0 2px)
+			display: none
+
+	&__menu-link
+		float: right
+		&[aria-expanded="true"]
+			.header__menu-icon--close
+				display: inline
+			.header__menu-icon--menu
+				display: none
+
+	&__flyout
+		display: none
+
 .nav
-	+display-flex()
+	@extend %nav-font-l
+	+flex-flow(column nowrap)
+	+font-smoothing
+	display: none
+	line-height: remify(50px)
+
+	&:target,
+	&[aria-hidden="false"]
+		+display-flex
+
+	a
+		color: inherit
+		display: block
+		+on-interaction
+			color: #fff
+
+	ul
+		list-style: none
+		margin: 0
+		padding: 0
+
+	li
+		display: block
+		margin: 0
+		padding: 0
+
+	// ZEIT ONLINE
+	&__home-title
+		a
+			@extend %nav-link-arrow
+
+	// LOGIN
+	&__login
+		@extend %nav-font-m
+	&__login-link
+		text-align: right
+	&__login-icon
+		height: remify(18px)
+		width: remify(18px)
+		vertical-align: remify(-3px)
+	&__user-picture
+		background-color: #eee
+		background-position: center
+		background-repeat: no-repeat
+		background-size: contain
+		border-radius: 50%
+		display: block
+		height: remify(30px)
+		margin: remify(10px 0)
+		width: remify(30px)
+	&__user-avatar
+		color: #ababab
+		height: 100%
+		width: 100%
+	&__user-name
+		@extend %nav-font-l
+		display: block
+		font-weight: bold
+		overflow: hidden
+		text-overflow: ellipsis
+		white-space: nowrap
+
+	// THEMEN
+	&__topics-title
+		@extend %nav-font-xs
+		text-transform: uppercase
+	&__topics-list
+		@extend %nav-font-s
+		text-transform: uppercase
+		li
+			display: inline-block
+
+	// TOOLS
+	&__tools-title
+		@extend %nav-font-xs
+		text-transform: uppercase
+	&__tools-list
+		@extend %nav-font-l
+
+	&__home-title,
+	&__services-title,
+	&__login-title,
+	&__more-title
+		font-size: inherit
+		font-weight: normal
+		margin: 0
+	&__topics-title,
+	&__tools-title
+		margin: 0
+
+
++respond-max($break-tablet-min)
+	%nav-mobile-link-arrow
+		+nav-link-arrow
+
+	.nav
+		// item order
+		&__login
+			+order(1)
+		&__primary
+			+order(2)
+		&__home
+			+order(3)
+		&__more
+			+order(4)
+		&__services
+			+order(5)
+
+		// style für mobile menu item
+		&__login,
+		&__topics,
+		&__tools a,
+		&__home a,
+		&__more a,
+		&__services
+			border-top: 1px solid $nav-color-border
+			padding: 0 $page-padding--small
+		&__tools-list li:first-child a
+			border-top: 0
+			margin-top: remify(-12px)
+
+		// link arrows
+		&__topics-link,
+		&__tools-list a
+			@extend %nav-mobile-link-arrow
+
+		&__topics-list
+			+clearfix
+			// move to top and compensate list-item margins
+			// fight specificity war
+			@at-root ul#{&}
+				margin: remify(-4px -5px 0 0)
+			li
+				margin-right: remify(5px)
+			a
+				border: 1px solid $nav-color-topics
+				line-height: remify(38px)
+				padding: remify(0 16px)
+
+		&__tools a
+			color: $nav-color-tools
+			+on-interaction
+				color: $nav-color-tools
+
+		// SERVICE
+		&__services-list
+			+clearfix
+			display: none
+			&[aria-hidden="false"]
+				display: block
+			li
+				float: left
+				width: 50%
+
+		&__login
+			line-height: remify(60px)
+		&__login-title
+			float: left
+			width: 66%
+		&__login-list
+			float: right
+			li:first-child
+				display: none
+		&__user-picture
+			float: left
+			height: remify(40px)
+			margin-right: remify(8px)
+			width: remify(40px)
+			&--default
+				display: none
+
+		&__more-title
+			display: none
+
+
++respond-min($break-tablet-min)
+	%nav-tablet-font-xs
+		+nav-font-xs
+
+	%nav-tablet-font-s
+		+nav-font-s
+
+	%nav-tablet-font-m
+		+nav-font-m
+
+	%nav-tablet-font-l
+		+nav-font-l
+
+	%nav-tablet-down-arrow
+		&:after
+			+transform(rotate(90deg) scale(2))
+			+transform-origin(40% 60%)
+			+transition(transform .1s ease-out)
+			content: "\203A"
+			display: inline-block
+			line-height: 1
+			margin-left: remify(16px)
+
+	.header
+		&__brand
+			padding: remify(0 $page-padding)
+			position: absolute
+
+		&__menu-link
+			display: none
+
+		&__flyout
+			&:target,
+			&[aria-hidden="false"]
+				display: block
+
+	.nav
+		@extend %nav-tablet-font-m
+		+display-flex
+		+flex-flow(row wrap)
+
+		// ZEIT ONLINE
+		&__home
+			+flex(1 1 50%)
+			text-align: right
+			border-width: 0 1px 1px 0
+			border-style: solid
+			border-color: $nav-color-border
+		&__home-title
+			a
+				display: inline-block
+				padding: remify(0 24px)
+
+		// SERVICE
+		&__services
+			+flex(0 1 auto)
+			border-width: 0 1px 1px 0
+			border-style: solid
+			border-color: $nav-color-border
+
+		// dropdown menues
+		&__services-list,
+		&__login-list,
+		&__more-list
+			background-color: $primary-color
+			border-color: $nav-color-border
+			border-style: solid
+			border-width: 0 1px 1px
+			display: none
+			line-height: remify(39px)
+			position: absolute
+			z-index: 1 // fix visible arrow
+			&[aria-hidden="false"]
+				display: block
+			a
+				border-top: 1px solid $nav-color-border
+				min-width: remify(150px)
+				padding: remify(0 16px)
+		&__login-list,
+		&__more-list
+			right: 0
+
+		&__services-title,
+		&__login-title,
+		&__more-title
+			padding: remify(0 16px)
+			cursor: pointer
+			+on-interaction
+				color: #fff // for the h2 elements
+			&[aria-expanded="true"]
+				.nav__dropdown:after
+					+transform(rotate(-90deg) scale(2))
+
+		// LOGIN
+		&__login
+			+flex(0 1 auto)
+			border-bottom: 1px solid $nav-color-border
+			padding: remify(0 16px) // needed here for "Anmeldung nicht möglich"
+		&__login-title
+			padding: 0 // override dropdown standard for "Anmeldung nicht möglich" case
+		&__login-link
+			display: block
+			padding: remify(0 4px)
+		&__login-register,
+		&__login-icon,
+		&__user-name
+			display: none
+
+		&__primary
+			+flex(1 1 50%)
+
+		// THEMEN
+		&__topics
+			// float: left
+		&__topics-title
+			@extend %nav-tablet-font-xs
+			float: left
+			a
+				padding: remify(0 15px 0 20px)
+		&__topics-list
+			@extend %nav-tablet-font-xs
+			float: left
+			white-space: nowrap
+			li
+				padding: remify(0 8px)
+				&:nth-child(n+3)
+					display: none
+			a
+				border-bottom: 1px solid $nav-color-topics
+				color: #eee
+				line-height: 1.6
+				+on-interaction
+					color: $nav-color-topics
+					border-color: currentColor
+		a#{&}__topics-link
+			display: none
+
+		// TOOLS
+		&__tools
+			// float: left
+		&__tools-title
+			float: left
+			font-weight: normal
+			padding: remify(0 12px)
+			a
+				border-bottom: 1px solid $nav-color-tools
+				color: #eee
+				display: inline-block
+				line-height: 1.6
+				+on-interaction
+					color: $nav-color-tools
+					border-color: currentColor
+		&__tools-list
+			display: none
+
+		// MEHR
+		&__more
+			+flex(0 1 auto)
+			a, h2
+				border-left: 1px solid $nav-color-border
+				padding: remify(0 16px)
+
+		&__dropdown
+			@extend %nav-tablet-down-arrow
+
++respond-min($break-desktop-min)
+	.nav
+		&__topics-list
+			li
+				&:nth-child(n+3)
+					display: inline-block
