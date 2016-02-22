@@ -70,6 +70,8 @@ Change log for zeit.web
 
 - ZON-2808: Remove contact address from error message for blocked users
 
+- MAINT: Use image variants for author images and Spektrum feed
+
 - MAINT: Introduce `request.user` object, created once per request
 
 - MAINT: Switch default testbrowser to wsgi, add template browser and
@@ -115,7 +117,6 @@ Change log for zeit.web
 - MAINT: Start cleaning and organizing testdata
 
 - FIX: Return an empty 200 response (instead of 501) for rendering interrupts
-       And add a feature toggle, disabling interrupts by default.
 
 - FIX: Fix AMP validation, IVW integration and meta robots tag
 
