@@ -31,14 +31,10 @@ def get_user(request):
             del request.session['user']
         return {}
 
-    if request.session.get('user') and (
-            is_reliable_user_info(request.session['user']) and not (
-            request.session['user'].get('should_invalidate'))):
-        # retrieve the user info from the session
-        user_info = request.session['user']
-    else:
-        # store the user info in the session
-        log.debug("Request user_info")
+    stored_user = request.session.get('user', {})
+    if (not is_reliable_user_info(stored_user) or
+            stored_user.get('should_invalidate')):
+        log.debug('No user found in session, calling get_user_info()')
         user_info = get_user_info(request)
         if not is_reliable_user_info(user_info):
             return {}
