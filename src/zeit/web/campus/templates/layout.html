@@ -60,15 +60,15 @@
             }
         });
     </script>
-    {% if view.third_party_modules_is_enabled %}
+    {% if toggles('third_party_modules') %}
         <!-- IVW -->
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif %}
-    {% if view.third_party_modules_is_enabled and view.iqd_is_enabled %}
+    {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
         {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
-    {% if view.is_dev_environment %}
+    {% if settings('dev_environment') %}
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
 </head>
@@ -100,7 +100,7 @@
             {% if not view.is_wrapped %}
             <header class="header">
                 {%- block navigation -%}
-                    {%- include "zeit.web.campus:templates/inc/navigation/navigation.tpl" -%}
+                    {%- include "zeit.web.campus:templates/inc/navigation/navigation.html" -%}
                 {%- endblock navigation -%}
             </header>
             {% endif %}
@@ -114,8 +114,9 @@
                 {% block main %}{% endblock main %}
                 {{ lama.adplace(view.banner(8), view, mobile=True) }}
             </main>
-            <footer class="footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" >
+            <footer class="footer" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" >
                 {% block footer %}
+                    {%- include "zeit.web.campus:templates/inc/footer.html" -%}
                 {% endblock footer %}
             </footer>
         </div>

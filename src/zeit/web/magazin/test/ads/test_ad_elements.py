@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 import pytest
+
+import zeit.web.core.application
 import zeit.web.core.view
-
-
-def tpm(me):
-    return True
 
 
 @pytest.mark.xfail(reason='ad scripts may timeout')
 def test_ad_keyword_diuqilon(selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True}.get)
 
     driver = selenium_driver
     driver.set_window_size(768, 1024)
@@ -48,8 +46,8 @@ def test_viewport_is_resized_in_ipad_landscape(selenium_driver, testserver):
 @pytest.mark.xfail(reason='ad scripts may timeout')
 def test_viewport_is_not_resized_in_other_browser(
         selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True}.get)
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('%s/artikel/01' % testserver.url)
@@ -63,9 +61,9 @@ def test_viewport_is_not_resized_in_other_browser(
 
 
 @pytest.mark.xfail(reason='ad scripts may timeout')
-def test_var_IQD_varPack_isset(selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
+def test_var_iqd_var_pack_isset(selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True}.get)
     driver = selenium_driver
     driver.get('%s/artikel/01' % testserver.url)
     try:
@@ -81,8 +79,8 @@ def test_var_IQD_varPack_isset(selenium_driver, testserver, monkeypatch):
 @pytest.mark.xfail(reason='ad scripts may timeout')
 def test_ad_tile2_not_ommitted_in_landscape(
         selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True}.get)
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('%s/artikel/01' % testserver.url)

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import lxml.etree
 
 
 def test_amp_contains_required_microdata(testbrowser, testserver):
@@ -151,3 +152,20 @@ def test_amp_article_shows_tags_correctly(testbrowser):
     assert ' '.join(keywords.text_content().strip().split()) == (
         u'Flüchtling, Weltwirtschaftsforum Davos, '
         u'Arbeitsmarkt, Migration, Europäische Union')
+
+
+def test_amp_article_shows_ads_correctly(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    ads = browser.cssselect('.advertising')
+    assert len(ads) == 3
+
+
+def test_amp_article_should_have_ivw_tracking(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    ivw = browser.cssselect('amp-analytics')
+    assert len(ivw) == 1
+    ivw_text = lxml.etree.tostring(ivw[0])
+    assert '"st":  "mobzeit"' in ivw_text
+    assert '"cp":  "wirtschaft/bild-text"' in ivw_text
+    assert '"url": "https://ssl.' in ivw_text
+    assert 'static/latest/html/amp-analytics-infonline.html' in ivw_text

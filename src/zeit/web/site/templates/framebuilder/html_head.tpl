@@ -51,10 +51,10 @@
         <!-- IVW -->
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif %}
-    {% if view.third_party_modules_is_enabled and view.iqd_is_enabled %}
+    {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
         {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
-    {% if view.is_dev_environment %}
+    {% if settings('dev_environment') %}
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}

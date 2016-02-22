@@ -4,17 +4,9 @@ import pytest
 
 import zeit.cms.interfaces
 
+import zeit.web.core.application
 import zeit.web.core.banner
 import zeit.web.magazin
-
-
-def is_adcontrolled(contents):
-    return 'data-ad-delivery-type="adcontroller"' in contents
-
-
-# use this to enable third_party_modules
-def tpm(me):
-    return True
 
 
 def test_banner_place_should_be_serialized(testserver, testbrowser):
@@ -36,13 +28,13 @@ def test_banner_list_should_be_sorted(testserver, testbrowser):
     assert sorted(tiles) == tiles
 
 
-def test_banner_view_should_return_Place_if_tile_present(application):
+def test_banner_view_should_return_place_if_tile_present(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert isinstance(article_view.banner(1), zeit.web.core.banner.Place)
 
 
-def test_banner_view_should_return_None_if_tile_is_not_present(application):
+def test_banner_view_should_return_none_if_tile_is_not_present(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.banner(999) is None
@@ -127,9 +119,8 @@ def test_banner_view_should_be_displayed_on_succeeding_pages(
 
 def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
         testserver, testbrowser, monkeypatch):
-
-    monkeypatch.setattr(
-        zeit.web.core.view.Base, 'third_party_modules_is_enabled', tpm)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True}.get)
 
     # test article with xml banner is missing
     browser = testbrowser('%s/artikel/10' % testserver.url)

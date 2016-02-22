@@ -6,6 +6,7 @@ $serif-fallbacks: Georgia, Palatino, "Palatino Linotype", FreeSerif, serif
 $font-franziska: "FranziskaWebPro", $serif-fallbacks !default
 $font-tabletgothic: "TabletGothic", $sans-fallbacks !default
 $font-tiemann: "TiemannLight", $serif-fallbacks !default
+$font-beckett: "BeckettLight", $serif-fallbacks !default
 
 // basic styles
 $base-font-size: 16px !default
@@ -101,7 +102,7 @@ $midnight:       #1f2091 !default
 $white:          #fff !default
 $grey--bright:   #f9f9f9 !default
 $grey--light:    #eeeeee !default
-$gainsboro:      #e0e0e0 !default
+$gainsboro:      #dfdfdf !default
 $charcoal:       #aaaaaa !default
 $grey:           #777777 !default
 $grey--mid:      #444444 !default
@@ -125,7 +126,6 @@ $concrete:      #f2f2f2
 $dusty-gray:    #999
 $silver:        #ccc
 $whitesmoke:    #f5f5f5
-$gainsboro:     #dfdfdf
 
 // semantic colors
 $color-page-bg:         $white !default
@@ -149,10 +149,11 @@ $page-padding: $gutter !default
 $page-padding--small: $gutter*0.75 !default
 
 // Standard breakpoints (in 'em' for purpose)
-$break-phablet-min: em(520px) !default
-$break-tablet-min:  em(768px) !default
-$break-desktop-min: em(980px) !default
-$break-areas:       $break-tablet-min !default
+$break-phablet-min:  em(520px) !default
+$break-tablet-min:   em(768px) !default
+$break-desktop-min:  em(980px) !default
+$break-areas:        $break-tablet-min !default
+$break-page-padding: $break-tablet-min !default
 
 // *ad* breakpoint
 $break-mobile-ad-width: em(768px) !default
