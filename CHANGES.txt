@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1883: Visually improve mobile plus/minus buttons
 
+- BUG-351: Let next-article-arrows stick to the article on horizontal scroll
+
 
 2.57 (2016-02-22)
 -----------------

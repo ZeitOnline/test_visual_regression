@@ -44,11 +44,14 @@
             'picture'
         ];
         this.threshold = 40;
+        this.initialMarginLeft = parseInt( this.element.css( 'margin-left' ) );
 
         // In 2015, we need multiple lines of code to detect the scrolling position
-        // (https://developer.mozilla.org/de/docs/Web/API/Window/scrollY)
+        // (https://developer.mozilla.org/de/docs/Web/API/Window/scrollY,
+        // https://developer.mozilla.org/de/docs/Web/API/Window/scrollX)
         this.supportPageOffset = window.pageXOffset !== undefined;
         this.isCSS1Compat = ( ( document.compatMode || '' ) === 'CSS1Compat' );
+        this.scrollElement = ( document.documentElement || document.body.parentNode || document.body );
 
         this.init();
     }
@@ -157,6 +160,20 @@
                 // .css({ top: '' }) // needed for variant (B)
                 .toggleClass( this.baseClass + '--fixed', this.fixed )
                 .toggleClass( this.baseClass + '--absolute', this.absolute );
+
+            // Handle horizontal scrolling and offset the element so that
+            // it visually sticks to the article
+            if ( this.fixed ) {
+                // calculate and apply offset
+                var scrollX = this.supportPageOffset ?
+                    window.pageXOffset : this.scrollElement.scrollLeft,
+                    offset = this.initialMarginLeft - scrollX;
+                this.element.css( 'margin-left', offset + 'px' );
+            } else {
+                // the only possibility to reset a value that has been set using jQuery's .css()
+                // method with IE <= 8 compatibility is to set it to the initial value
+                this.element.css( 'margin-left', this.initialMarginLeft + 'px' );
+            }
 
             // check for collisions
             if ( this.fixed && this.bypass.length ) {
