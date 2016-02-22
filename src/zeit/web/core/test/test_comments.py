@@ -301,7 +301,8 @@ def _create_poster(monkeypatch):
     return zeit.web.core.view_comment.PostComment(context, request)
 
 
-def test_post_comment_should_initialise_if_user_is_present(monkeypatch):
+def test_post_comment_should_initialise_if_user_is_present(
+        application, monkeypatch):
     poster = _create_poster(monkeypatch)
 
     assert poster.path == 'my/path'
@@ -313,7 +314,7 @@ def test_post_comment_should_initialise_if_user_is_present(monkeypatch):
 @pytest.mark.parametrize("path, comment, pid, action", [
     ('path', 'my comment', '1', 'comment')])
 def test_post_comment_should_raise_exception_if_no_post_is_used(
-        monkeypatch, path, pid, comment, action):
+        application, monkeypatch, path, pid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "GET"
 
@@ -330,7 +331,7 @@ def test_post_comment_should_raise_exception_if_no_post_is_used(
     (None, None, None, 'comment'),
     (None, 'my_comment', None, 'comment')])
 def test_post_comment_should_raise_exception_if_params_are_wrong(
-        monkeypatch, path, pid, comment, action):
+        application, monkeypatch, path, pid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
 
@@ -347,7 +348,7 @@ def test_post_comment_should_raise_exception_if_params_are_wrong(
     ('my/path', 'my_comment', None, 'report'),
     ('my/path', None, 1, 'report')])
 def test_post_report_should_raise_exception_if_params_are_wrong(
-        monkeypatch, path, pid, comment, action):
+        application, monkeypatch, path, pid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
 
@@ -362,7 +363,7 @@ def test_post_report_should_raise_exception_if_params_are_wrong(
 @pytest.mark.parametrize("path, comment, pid, action", [
     ('my/path', None, None, 'recommend')])
 def test_post_recommondation_should_raise_exception_if_params_are_wrong(
-        monkeypatch, path, pid, comment, action):
+        application, monkeypatch, path, pid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
 
@@ -459,7 +460,7 @@ def test_post_comment_should_get_with_correct_arguments(
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', 'my comment', None, 'comment', endpoint_agatho)])
 def test_invalidation_should_be_called_on_successful_post(
-        monkeypatch, path, comment, pid, result, action):
+        application, monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
     poster.request.params['comment'] = comment
@@ -483,15 +484,15 @@ def test_invalidation_should_be_called_on_successful_post(
     ('comment', 'my/article', 'http://foo/agatho/thread/my/article'),
     ('report', 'my/article', 'http://foo/services/json?callback=zeit')])
 def test_action_url_should_be_created_correctly(
-        monkeypatch, action, path, service):
+        application, monkeypatch, action, path, service):
     poster = _create_poster(monkeypatch)
     assert poster._action_url(action, path) == service
 
 
 @pytest.mark.parametrize("action", ['comment', 'report'])
 def test_post_comment_should_set_lock(application, action):
-    request = mock.Mock()
-    request.session = {'user': {'name': 'foo'}}
+    request = pyramid.testing.DummyRequest()
+    request.user = {'ssoid': '123', 'name': 'foo'}
     pc = zeit.web.core.view_comment.PostComment(mock.Mock(), request)
     pc.lock_duration = datetime.timedelta(0, 0.5)
     locker = pc.handle_comment_locking
