@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <head xmlns:D="DAV:">
-    <attribute name="href" ns="DAV:">http://xml.zeit.de/produkte/katzen-cafe-london-bilder/thumbnails/03-katzen-cafe-london.jpg</attribute>
+    <attribute name="href" ns="DAV:">http://xml.zeit.de/zeit-magazin/produkte/katzen-cafe-london-bilder/thumbnails/03-katzen-cafe-london.jpg</attribute>
     <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2014-04-25T11:35:00.010950+00:00</attribute>
     <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:95305d02-81d6-4584-80c8-d1d21afbb67e}</attribute>
     <attribute name="copyrights" ns="http://namespaces.zeit.de/CMS/document">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;© Stefan Wermuth/Reuters&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
