@@ -19,26 +19,30 @@
 				<span class="nextread__byline">
 					{% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
 				</span>
-				{% endif %}
+				{% else -%}
+				<em itemprop="author" itemscope itemtype="http://schema.org/Person">
+					<meta itemprop="name" content="{% if teaser.product %}{{ teaser.product.title }}{% else %}ZEIT ONLINE{% endif %}">
+				</em>
+				{% endif -%}
 
 				{% set time = teaser | mod_date %}
-				{% if time %}
+				{% if time -%}
 				<time class="nextread__date" itemprop="dateModified" datetime="{{ teaser | mod_date | format_date('iso8601') }}"></time>
-				{% endif %}
+				{% endif -%}
 
 				{% set time = teaser | release_date %}
-				{% if time %}
+				{% if time -%}
 				<time class="nextread__date" itemprop="datePublished" datetime="{{ teaser | release_date | format_date('iso8601') }}">
 					{{- time | format_timedelta(days=3, absolute=True) | title -}}
 				</time>
-				{% endif %}
+				{% endif -%}
 
 				{% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
-				{% if comments %}
+				{% if comments -%}
 				<span class="nextread__commentcount">
 					{{- comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') -}}
 				</span>
-				{% endif %}
+				{% endif -%}
 			</div>
 		</div>
 	</a>
