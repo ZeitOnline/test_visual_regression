@@ -177,8 +177,8 @@ class AuthorArticleRanking(zeit.web.site.area.ranking.Ranking):
     @zeit.web.reify
     def count(self):
         if self.page == 1:
-            return self._count - len(self.uids_above)
-        return self._count
+            return self.context._count - len(self.uids_above)
+        return self.context._count
 
 
 class UserCommentsArea(LegacyArea):
