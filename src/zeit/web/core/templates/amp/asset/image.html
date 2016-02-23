@@ -25,11 +25,15 @@
 			{% block media -%}
 			<amp-img
 				src="{{ src }}"
+				{% if widths | length -%}
 				srcset="{% for w in widths %}{{ "%s__%sx%s %sw" | format(source, w, (w / image.ratio) | int, w) }}{{ ", " if not loop.last }}{% endfor %}"
+				{% endif -%}
 				alt="{{ image.alt }}"
 				width="{{ width }}"
 				height="{{ height }}"
+				{% if sizes -%}
 				sizes="{{ sizes }}"
+				{% endif -%}
 				layout="responsive"
 				attribution="
 				{%- for name, url, nofollow in image.copyright -%}

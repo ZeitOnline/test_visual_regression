@@ -2,6 +2,7 @@
 <features>
   <amp_advertising>true</amp_advertising>
   <article_lineage>true</article_lineage>
+  <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>true</iqd>
   <third_party_modules>false</third_party_modules>
   <campus_launch>true</campus_launch>
