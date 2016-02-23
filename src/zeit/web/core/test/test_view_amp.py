@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import lxml.etree
 
+import zeit.web.core.application
+
 
 def test_amp_contains_required_microdata(testbrowser, testserver):
     browser = testbrowser('/amp/zeit-online/article/amp')
@@ -120,7 +122,7 @@ def test_amp_article_has_correct_webtrekk_pixel(testbrowser, testserver):
     browser = testbrowser('/amp/zeit-online/article/amp')
     source = browser.cssselect('amp-pixel')[0].attrib.get('src')
     assert source == (
-        u'//zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
+        u'https://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
         u'redaktion.wirtschaft...article.zede|{url}/zeit-online/article/amp'
         u',0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&cg3=wirtschaft&cg4=zede'
         u'&cg5=&cg6=&cg7=amp&cg8=wirtschaft/article&cg9=2016-01-22'
@@ -160,9 +162,11 @@ def test_amp_article_shows_ads_correctly(testbrowser):
     assert len(ads) == 3
 
 
-def test_amp_article_should_have_ivw_tracking(testbrowser):
+def test_amp_article_should_have_ivw_tracking(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True, 'tracking': True}.get)
     browser = testbrowser('/amp/zeit-online/article/amp')
-    ivw = browser.cssselect('amp-analytics')
+    ivw = browser.cssselect('amp-analytics[type="infonline"]')
     assert len(ivw) == 1
     ivw_text = lxml.etree.tostring(ivw[0])
     assert '"st":  "mobzeit"' in ivw_text

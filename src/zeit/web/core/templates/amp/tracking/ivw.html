@@ -1,3 +1,4 @@
+{% if toggles('third_party_modules', 'tracking') %}
 <amp-analytics type="infonline" id="infonline">
 	<script type="application/json">
 		{
@@ -12,3 +13,4 @@
 		}
 	</script>
 </amp-analytics>
+{% endif %}
