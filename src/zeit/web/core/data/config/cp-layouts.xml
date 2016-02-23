@@ -1,5 +1,13 @@
 <?xml version="1.0"?>
 <layouts>
+    <!-- ZCO only -->
+    <layout
+        id="zco-wide"
+        title="Standard Teaser"
+        image_pattern="cinema"
+        areas="duo major minor"
+        />
+
     <!-- Teaser formats for new ZON-Centerpages -->
     <layout
         id="zon-large"
