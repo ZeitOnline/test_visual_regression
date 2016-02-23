@@ -35,7 +35,7 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
 
     # check Article
     assert article.get('itemtype') == 'http://schema.org/Article'
-    assert main_entity_of_page.get('href') == (
+    assert main_entity_of_page.get('content') == (
         testserver.url + '/zeit-online/article/amp')
     text = headline.text_content().strip()
     assert text.startswith(u'Flüchtlinge: ')

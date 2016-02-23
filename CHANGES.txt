@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-2.58 (unreleased)
+2.59 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.58 (2016-02-23)
+-----------------
+
+- FIX: Prevent Google validation bug for AMP article publisher microdata
 
 - ZON-1883: Visually improve mobile plus/minus buttons
 
