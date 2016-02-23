@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - FIX: Fix authorindex colum break ... again
 
+- FIX: Be defensive about author images and missing meta files (Bugsnag)
+
 
 2.57 (2016-02-22)
 -----------------
