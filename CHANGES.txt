@@ -4,6 +4,8 @@ Change log for zeit.web
 2.58 (unreleased)
 -----------------
 
+- FIX: Prevent Google validation bug for AMP article publisher microdata
+
 - ZON-1883: Visually improve mobile plus/minus buttons
 
 - BUG-351: Let next-article-arrows stick to the article on horizontal scroll

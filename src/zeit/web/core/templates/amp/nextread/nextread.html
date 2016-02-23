@@ -1,7 +1,8 @@
 {# AMP nextread #}
 {% set image = get_image(module, teaser, fallback=False) %}
 {% set modifier = 'with-image' if image and not is_image_expired(image) else 'no-image' %}
-<article class="nextread nextread--{{ modifier }}" itemscope itemtype="http://schema.org/Article" itemref="publisher">
+<article class="nextread nextread--{{ modifier }}" itemscope itemtype="http://schema.org/Article">
+	{% include "zeit.web.core:templates/amp/article/publisher.html" %}
 	<a class="nextread__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}" itemprop="mainEntityOfPage">
 		<div class="nextread__lead article__item">{{ module.lead or 'Lesen Sie jetzt' }}</div>
 
