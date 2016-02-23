@@ -205,7 +205,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     def count(self):
         if self.page == 1 and len(self.uids_above) > 0:
             return 0
-        return self._count
+        return self.context._count
 
     @zeit.web.reify
     def page(self):
@@ -228,8 +228,9 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     @zeit.web.reify
     def total_pages(self):
-        if self.hits > 0 < self._count:
-            return int(math.ceil(float(self.hits) / float(self._count)) +
+        count = self.context._count
+        if self.hits > 0 < count:
+            return int(math.ceil(float(self.hits) / float(count)) +
                        (len(self.uids_above) > 0))
         return 0
 
@@ -244,11 +245,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
 @zeit.web.register_area('author-list')
 class AuthorList(Ranking):
-
-    zope.interface.implements(
-        IRanking,
-        zeit.web.core.interfaces.IPagination
-    )
 
     FIELDS = Ranking.FIELDS + ' ' + ' '.join([
         'author_summary_t',

@@ -7,6 +7,7 @@
 	@include column-gap(40px)
 	&__item
 		@include break-inside(avoid)
+		page-break-inside: avoid
 		border-bottom: 1px solid #eee
 		// avoid collapsing of margins, which happens sometimes(!) for image items on top right position
 		padding-top: 1px
