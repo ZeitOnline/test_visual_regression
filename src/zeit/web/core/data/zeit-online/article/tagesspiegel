@@ -41,7 +41,7 @@
         </image>
       </reference>
     </references>
-    <image base-id="http://xml.zeit.de/wirtschaft/2015-02/steuerhinterziehung-schweiz-thomas-eigenthaler-steuergewerkschaft-2/" type="jpg" title="Der Hauptsitz von HSBC in London (Archiv)" alt="Der Hauptsitz von HSBC in London (Archiv)" align="left" publication-date="" expires="">
+    <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" title="Der Hauptsitz von HSBC in London (Archiv)" alt="Der Hauptsitz von HSBC in London (Archiv)" align="left" publication-date="" expires="">
       <bu py:pytype="str">Der Hauptsitz von HSBC in London (Archiv)</bu>
       <copyright py:pytype="str">© Peter Nicholls/Reuters</copyright>
     </image>
@@ -115,7 +115,7 @@
     <subtitle>Trotz Steuer-CDs und Selbstanzeigen: 40 Milliarden Euro verstecken Deutsche noch immer in der Schweiz, sagt der Chef der Deutschen Steuergewerkschaft, Eigenthaler.</subtitle>
     <byline>Heike Jahberg</byline>
     <division type="page">
-      <image base-id="http://xml.zeit.de/wirtschaft/2015-02/steuerhinterziehung-schweiz-thomas-eigenthaler-steuergewerkschaft-2/" type="jpg" title="Der Hauptsitz von HSBC in London (Archiv)" alt="Der Hauptsitz von HSBC in London (Archiv)" align="left" publication-date="" expires="" layout="large" is_empty="False">
+      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" title="Der Hauptsitz von HSBC in London (Archiv)" alt="Der Hauptsitz von HSBC in London (Archiv)" align="left" publication-date="" expires="" layout="large" is_empty="False">
         <bu py:pytype="str">Der Hauptsitz von HSBC in London (Archiv)</bu>
         <copyright py:pytype="str">© Peter Nicholls/Reuters</copyright>
       </image>
@@ -126,7 +126,7 @@
       <p><strong>Frage: </strong>Aber 95 Prozent Ehrlichmachung sind doch eine gute Quote! <br/></p>
       <p><strong>Eigenthaler:</strong> Ja, aber was heißt das denn? Verlangt der Bankmitarbeiter in der Schweiz jetzt Steuerbescheide, oder wie kontrolliert er sonst, dass sich Kunden regularisiert haben? Reicht es aus, wenn die Kunden eine entsprechende Erklärung abgeben? Es ist gut möglich, dass auch weiterhin Anleger durch die Maschen schlüpfen.</p>
       <p><strong>Frage: </strong>Wie viel Geld haben Deutsche noch in der Schweiz versteckt? <br/></p>
-      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/wirtschaft/2015-02/box-eigenthaler" publication-date="" expires=""/>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/portraitboxen/eigenthaler" publication-date="" expires=""/>
       <p><strong>Eigenthaler:</strong> Die Schweiz ist die größte Fluchtburg für deutsches Schwarzgeld. Das liegt an der Nähe und daran, dass die politischen Verhältnisse stabil sind. Statt auf die Cayman-Inseln bringen Deutsche ihr Geld lieber nach Zürich. Es geht um gewaltige Summen. Ich gehe davon aus, dass noch vor Kurzem rund 160 Milliarden Euro unversteuertes deutsches Geld auf Schweizer Konten gelegen haben. Durch die Weißgeldstrategie der Schweizer Banken, die Steuer-CDs und die Selbstanzeigen hat sich diese Summe in den vergangenen Jahren verringert. Aber es dürften heute noch mindestens 40 Milliarden Euro von Deutschen in der Schweiz liegen, von denen der deutsche Fiskus nichts weiß. Mindestens ein Viertel des unversteuerten Kapitals hat sich dem Zugriff der Finanzbehörden weiterhin entzogen.</p>
       <p><strong>Frage:</strong> Ist das Geld noch in der Schweiz?  </p>
       <p><strong>Eigenthaler:</strong> Einiges ist sicherlich nach Ostasien oder in andere Steueroasen abgewandert, möglicherweise auch hier wieder mithilfe der Schweizer Banken und ihrer globalen Dependancen. Viel Cash ist aber inzwischen in Sachwerte umgewandelt worden, auch wegen der Niedrigzinsen. Das Geld steckt jetzt in Immobilien, in Schmuck, in Gold, in Reitpferden oder in teurem Wein. Der Vorteil: Wenn das Geld erst einmal in Sachwerten untergebracht ist, müssen Steuerhinterzieher auch nicht mehr befürchten, dass sie auffliegen, wenn es <a class="" href="http://www.zeit.de/wirtschaft/2014-10/steuerhinterziehung-steuerbetrug-abkommen" target="_blank">ab 2017 den automatischen Informationsaustausch über Bankdaten geben wird</a>.</p>

@@ -19,37 +19,37 @@ import zeit.web.core.template
 
 
 def test_image_download(appbrowser):
-    path = '/politik/deutschland/2013-07/bnd/bnd-148x84.jpg'
+    path = '/exampleimages/artikel/mode.jpg'
     result = appbrowser.get(path)
     image = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/' + path)
     assert ''.join(result.app_iter) == image.open().read()
-    assert result.headers['Content-Length'] == '4843'
+    assert result.headers['Content-Length'] == '81123'
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
-        'inline; filename="bnd-148x84.jpg"')
+        'inline; filename="mode.jpg"')
 
 
 def test_scaled_image_download(appbrowser):
-    path = '/politik/deutschland/2013-07/bnd/bnd-148x84.jpg'
+    path = '/exampleimages/artikel/mode.jpg'
     signature = sha1('80:60:time').hexdigest()  # We know the secret! :)
     result = appbrowser.get('/bitblt-80x60-' + signature + path)
     image = Image.open(StringIO(''.join(result.app_iter)))
     assert image.size == (80, 60)
-    assert int(result.headers['Content-Length']) < 4843
+    assert int(result.headers['Content-Length']) < 81123
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
-        'inline; filename="bnd-148x84.jpg"')
+        'inline; filename="mode.jpg"')
 
 
 def test_scaled_image_download_with_bad_signature(appbrowser):
-    path = '/politik/deutschland/2013-07/bnd/bnd-148x84.jpg'
+    path = '/exampleimages/artikel/mode.jpg'
     signature = sha1('80:60:foobar').hexdigest()  # We know the secret! :)
     result = appbrowser.get('/bitblt-80x60-' + signature + path)
     # Bad signatures cause `repoze.bitblt` to do nothing;
     # we get the original image.
     image = Image.open(StringIO(''.join(result.app_iter)))
-    assert image.size == (148, 84)
-    assert result.headers['Content-Length'] == '4843'
+    assert image.size == (349, 522)
+    assert result.headers['Content-Length'] == '81123'
 
 
 def test_image_download_from_brightcove_assets(appbrowser):

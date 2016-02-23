@@ -90,7 +90,7 @@ def test_amp_nextread_contains_required_microdata(testbrowser, testserver):
     # check ImageObject
     assert image.get('itemtype') == 'http://schema.org/ImageObject'
     assert image.cssselect('[itemprop="url"]')[0].get('content') == (
-        testserver.url + '/gesellschaft/2015-02/crystal-meth-nancy-schmidt/'
+        testserver.url + '/zeit-online/image/crystal-meth-nancy-schmidt/'
         'cinema__820x351')
     assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
     assert image.cssselect('[itemprop="height"]')[0].get('content') == '351'
