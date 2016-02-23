@@ -1,0 +1,27 @@
+.nextread-maximal
+	position: relative
+
+	&__media
+		width: 100%
+
+	&__heading
+		@extend %teaser-nextread__heading
+		bottom: 0
+		color: $white
+		left: 0
+		margin: auto
+		position: absolute
+		right: 0
+		text-align: center
+		top: 0
+		+on-interaction
+			color: $white
+
+	&__kicker
+		@extend %teaser-nextread__kicker
+
+	&__title
+		font-size: $font-xxl
+		letter-spacing: $hair
+		+respond-min($break-2)
+			font-size: $font-xxxl

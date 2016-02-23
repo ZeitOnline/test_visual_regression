@@ -1,0 +1,40 @@
+%teaser-nextread
+	margin: $large auto
+	+respond-min($break-2)
+		max-width: remify(660px)
+		background: $white
+
+%teaser-nextread__heading
+	font-size: 1em
+	margin: 0
+
+%teaser-nextread__kicker
+	display: block
+	font-size: remify(14px)
+	font-weight: normal
+	letter-spacing: $hair
+	margin: remify(36px 0 4px)
+
+%teaser-nextread__title
+	font-size: em(24px)
+
+.nextread-base
+	@extend %teaser-nextread
+	+clearfix
+
+	&__media
+		float: left
+		margin: remify(0 48px 0 0)
+		width: remify(260px)
+
+	&__heading
+		@extend %teaser-nextread__heading
+		color: $black
+		+on-interaction
+			color: $black
+
+	&__kicker
+		@extend %teaser-nextread__kicker
+
+	&__title
+		@extend %teaser-nextread__title
