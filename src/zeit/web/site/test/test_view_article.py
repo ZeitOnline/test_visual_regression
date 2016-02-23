@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import base64
 import datetime
-import urllib2
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -11,6 +10,7 @@ import lxml.etree
 import mock
 import pyramid.testing
 import pytest
+import requests
 import zope.component
 
 from zeit.cms.checkout.helper import checked_out
@@ -1311,14 +1311,16 @@ def test_instantarticle_should_respect_local_image_captions(testbrowser):
         u'Bernie Sanders kommt Hillary Clinton gefährlich nahe.')
 
 
-def test_instantarticle_should_admit_not_implemented_features(testbrowser):
-    with pytest.raises(urllib2.HTTPError) as err:
-        testbrowser('/instantarticle/zeit-online/article/01')
-    assert err.value.code == 501
+def test_instantarticle_should_render_empty_page_on_interrupt(testserver):
+    resp = requests.get(
+        testserver.url + '/instantarticle/zeit-online/article/01')
+    assert 'X-Interrupt' in resp.headers
+    assert len(resp.text) == 0
 
-    with pytest.raises(urllib2.HTTPError) as err:
-        testbrowser('/instantarticle-item/zeit-online/article/01')
-    assert err.value.code == 501
+    resp = requests.get(
+        testserver.url + '/instantarticle-item/zeit-online/article/01')
+    assert 'X-Interrupt' in resp.headers
+    assert len(resp.text) == 0
 
 
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):

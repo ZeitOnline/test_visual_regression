@@ -803,7 +803,10 @@ def toggles(*keys):
 
 @zeit.web.register_global
 def interrupt(reason=None):
-    raise zeit.web.core.jinja.Interrupt(reason)
+    if toggles('instantarticle_interrupts'):
+        raise zeit.web.core.jinja.Interrupt(reason)
+    else:
+        return u''
 
 
 @zeit.web.register_global

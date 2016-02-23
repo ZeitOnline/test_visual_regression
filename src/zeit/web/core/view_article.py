@@ -244,8 +244,11 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def is_breaking(self):
-        return zeit.content.article.interfaces.IBreakingNews(
-            self.context).is_breaking
+        try:
+            return zeit.content.article.interfaces.IBreakingNews(
+                self.context).is_breaking
+        except:
+            return False
 
     @zeit.web.reify
     def is_push_news(self):
@@ -305,7 +308,8 @@ class InstantArticle(Article):
         except zeit.web.core.jinja.Interrupt, err:
             log.debug('Contained article block_type %s not implemented.' % (
                 zeit.web.core.template.block_type(err.message)))
-            return pyramid.response.Response(status_code=501)
+            return pyramid.response.Response(
+                headerlist=[('X-Interrupt', 'true')])
 
     @zeit.web.reify
     def authors(self):
@@ -325,8 +329,10 @@ class InstantArticleItem(Article):
 
     def __call__(self):
         if not getattr(self.request, 'wrapped_response', None) or (
-                self.request.wrapped_response.status_code == 501):
-            return pyramid.response.Response(status_code=501)
+                'X-Interrupt', 'true') in (
+                    self.request.wrapped_response.headerlist):
+            return pyramid.response.Response(
+                headerlist=[('X-Interrupt', 'true')])
 
         metadata = zeit.cms.content.interfaces.ICommonMetadata(self.context)
 

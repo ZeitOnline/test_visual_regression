@@ -117,6 +117,7 @@ $nav-color-border: #444
 	// LOGIN
 	&__login
 		@extend %nav-font-m
+		min-width: remify(50px)
 	&__login-link
 		text-align: right
 	&__login-icon
@@ -162,10 +163,7 @@ $nav-color-border: #444
 	&__tools-list
 		@extend %nav-font-l
 
-	&__home-title,
-	&__services-title,
-	&__login-title,
-	&__more-title
+	&__home-title
 		font-size: inherit
 		font-weight: normal
 		margin: 0
@@ -344,7 +342,6 @@ $nav-color-border: #444
 		&__login-title,
 		&__more-title
 			padding: remify(0 16px)
-			cursor: pointer
 			+on-interaction
 				color: #fff // for the h2 elements
 			&[aria-expanded="true"]
