@@ -8,6 +8,9 @@ Change log for zeit.web
 
 - BUG-351: Let next-article-arrows stick to the article on horizontal scroll
 
+- FIX: Return an empty 200 response (instead of 501) for rendering interrupts
+       And add a feature toggle, disabling interrupts by default.
+
 - FIX: Fix AMP validation, IVW integration and meta robots tag
 
 - FIX: Fix authorindex colum break ... again
