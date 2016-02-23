@@ -50,7 +50,7 @@ def test_centerpage_should_have_page_meta_keywords(testserver, testbrowser):
 
 
 def test_centerpage_should_have_page_meta_robots_information(
-        appbrowser, testserver, testbrowser):
+        testserver, testbrowser):
     # SEO robots information is given
     browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
     meta_robots = browser.document.xpath('//meta[@name="robots"]/@content')

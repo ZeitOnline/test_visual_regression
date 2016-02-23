@@ -101,7 +101,7 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
 
 
 def test_gallery_with_supertitle_has_html_title(
-        appbrowser, testserver, testbrowser):
+        testserver, testbrowser):
     browser = testbrowser('%s/galerien/fs-desktop-schreibtisch-computer' % (
         testserver.url))
     assert ('<title>Desktop-Bilder: Das hab ich auf dem Schirm |'
@@ -110,7 +110,7 @@ def test_gallery_with_supertitle_has_html_title(
 
 
 def test_gallery_without_supertitle_has_html_title(
-        appbrowser, testserver, testbrowser):
+        testserver, testbrowser):
     browser = testbrowser('%s/galerien/bg-automesse-detroit-2014-usa' % (
         testserver.url))
     assert ('<title>Automesse Detroit 2014 US-Hersteller | ZEITmagazin</title>'
