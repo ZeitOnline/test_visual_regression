@@ -671,9 +671,9 @@ class Browser(zope.testbrowser.browser.Browser):
     _translator = None
     _testserver = None
 
-    def __init__(self, url=None, mech_browser=None):
+    def __init__(self, url=None):
         """Call base constructor and cache a translator instance."""
-        super(Browser, self).__init__(url, mech_browser)
+        super(Browser, self).__init__(url)
         self._translator = cssselect.HTMLTranslator()
 
     def cssselect(self, selector):
