@@ -244,8 +244,11 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def is_breaking(self):
-        return zeit.content.article.interfaces.IBreakingNews(
-            self.context).is_breaking
+        try:
+            return zeit.content.article.interfaces.IBreakingNews(
+                self.context).is_breaking
+        except:
+            return False
 
     @zeit.web.reify
     def is_push_news(self):
