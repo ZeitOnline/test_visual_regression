@@ -4,6 +4,8 @@ Change log for zeit.web
 2.59 (unreleased)
 -----------------
 
+- MAINT: Log community errors
+
 - FIX: Only consider usable max-height for responsive images,
        fixes printkiosk teaser images
 
