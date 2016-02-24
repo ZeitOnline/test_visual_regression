@@ -1,2 +1,13 @@
 .teaser-square
+	@extend %teaser
 
+	&__title
+		@extend %teaser-title
+		font-size: remify(32px)
+		line-height: 0.95
+
+	&__kicker
+		@extend %teaser-kicker
+
+	&__text
+		@extend %teaser-text

@@ -28,9 +28,6 @@
     <attribute name="date_last_pushed" ns="http://namespaces.zeit.de/CMS/workflow">2016-01-28T11:13:41.580202+00:00</attribute>
     <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
     <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-    <attribute name="html-meta-description" ns="http://namespaces.zeit.de/CMS/document">Studieren, Arbeiten und Leben - Aktuelle Informationen und Hintergründe zum Thema Studium und das neue Hochschulranking.</attribute>
-    <attribute name="html-meta-hide-timestamp" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-    <attribute name="html-meta-title" ns="http://namespaces.zeit.de/CMS/document">Studium – Hochschulen und Universitäten</attribute>
     <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2016-01-28T11:12:36.762580+00:00</attribute>
