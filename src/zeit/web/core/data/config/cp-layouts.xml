@@ -2,10 +2,22 @@
 <layouts>
     <!-- ZCO only -->
     <layout
-        id="zco-wide"
-        title="Standard Teaser"
+        id="zco-wide-small"
+        title="kleiner Teaser"
         image_pattern="cinema"
-        areas="duo major minor"
+        areas="trio"
+        />
+    <layout
+        id="zco-wide-large"
+        title="großer Teaser"
+        image_pattern="cinema"
+        areas="duo"
+        />
+    <layout
+        id="zco-square"
+        title="quadratischer Teaser"
+        image_pattern="square"
+        areas="duo"
         />
 
     <!-- Teaser formats for new ZON-Centerpages -->
