@@ -4,7 +4,15 @@ import lxml.etree
 import zeit.web.core.application
 
 
-def test_amp_contains_required_microdata(testbrowser, testserver):
+def test_amp_paragraph_should_contain_expected_structure(tplbrowser):
+    browser = tplbrowser('zeit.web.core:templates/amp/blocks/paragraph.html',
+                         block=u'Wie lässt sich diese Floskel übersetzen? ')
+    assert browser.cssselect('p.paragraph.article__item')
+    assert browser.cssselect('p.paragraph.article__item')[0].text.strip() == (
+        u'Wie lässt sich diese Floskel übersetzen?')
+
+
+def test_amp_contains_required_microdata(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     publisher = browser.cssselect('[itemprop="publisher"]')[0]
     logo = publisher.cssselect('[itemprop="logo"]')[0]
