@@ -337,18 +337,16 @@ def test_column_teaser_should_render_series_element(testbrowser):
     assert col_element.text == u'Fünf vor acht'
 
 
-def test_teaser_for_column_should_render_original_image_variant(
-        testbrowser, testserver):
+def test_teaser_for_column_should_render_original_image_variant(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats')
 
     teaser_img = browser.cssselect(
         '.teaser-small-column__media-item')[0]
-    assert teaser_img.attrib['src'] == testserver.url + (
-        '/zeit-online/cp-content/ig-3/original')
+    assert teaser_img.attrib['src'] == (
+        'http://localhost/zeit-online/cp-content/ig-3/original')
 
 
-def test_series_teaser_should_render_series_element(testserver, testbrowser):
-
+def test_series_teaser_should_render_series_element(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats')
 
     series_element = browser.cssselect('.teaser-large__series-label')
@@ -705,52 +703,46 @@ def test_adcontroller_values_return_values_on_cp(application):
     assert adcv == view.adcontroller_values
 
 
-def test_canonical_ruleset_on_cps(testserver, testbrowser, datasolr):
-    url = '%s/dynamic/ukraine' % testserver.url
-    browser = testbrowser(url)
+def test_canonical_ruleset_on_cps(testbrowser, datasolr):
+    browser = testbrowser('/dynamic/ukraine')
 
     # no param
     link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == url
+    assert link[0].get('href') == 'http://localhost/dynamic/ukraine'
 
     # p param
-    browser = testbrowser(url + '?p=2')
+    browser = testbrowser('/dynamic/ukraine?p=2')
     link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == url + '?p=2'
+    assert link[0].get('href') == 'http://localhost/dynamic/ukraine?p=2'
 
     # several params
-    browser = testbrowser(url + '?p=2&a=0#comment')
+    browser = testbrowser('/dynamic/ukraine?p=2&a=0#comment')
     link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == url + '?p=2'
+    assert link[0].get('href') == 'http://localhost/dynamic/ukraine?p=2'
 
 
-def test_canonical_ruleset_on_article_pages(testserver, testbrowser):
-    url = '%s/zeit-online/index' % testserver.url
-    browser = testbrowser(url)
+def test_canonical_ruleset_on_article_pages(testbrowser):
+    browser = testbrowser('/zeit-online/index')
     link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == url
+    assert link[0].get('href') == 'http://localhost/zeit-online/index'
 
 
-def test_canonical_ruleset_on_ranking_pages(testserver, testbrowser, datasolr):
-    url = '%s/suche/index' % testserver.url
-    browser = testbrowser(url)
+def test_canonical_ruleset_on_ranking_pages(testbrowser, datasolr):
+    browser = testbrowser('/suche/index')
     link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == url
+    assert link[0].get('href') == 'http://localhost/suche/index'
 
-    url = '%s/suche/index' % testserver.url
-    browser = testbrowser("{}?p=2".format(url))
+    browser = testbrowser('/suche/index?p=2')
     link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == url + '?p=2'
+    assert link[0].get('href') == 'http://localhost/suche/index?p=2'
 
-    url = '%s/dynamic/ukraine' % testserver.url
-    browser = testbrowser(url)
+    browser = testbrowser('/dynamic/ukraine')
     link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == url
+    assert link[0].get('href') == 'http://localhost/dynamic/ukraine'
 
-    url = '%s/dynamic/ukraine' % testserver.url
-    browser = testbrowser("{}?p=2".format(url))
+    browser = testbrowser('/dynamic/ukraine?p=2')
     link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == url + '?p=2'
+    assert link[0].get('href') == 'http://localhost/dynamic/ukraine?p=2'
 
 
 def test_robots_rules_for_thema_paths(application):
@@ -1093,18 +1085,15 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
         'teaser-gallery-setup/area/id-5fe59e73-e388-42a4-a8d4-750b0bf96812?p=')
 
 
-def test_homepage_should_have_proper_meetrics_integration(
-        testserver, testbrowser):
+def test_homepage_should_have_proper_meetrics_integration(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     meetrics = browser.cssselect(
         'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1
 
 
-def test_centerpage_must_not_have_meetrics_integration(
-        testserver, testbrowser):
-    browser = testbrowser(
-        '{}/zeit-online/main-teaser-setup'.format(testserver.url))
+def test_centerpage_must_not_have_meetrics_integration(testbrowser):
+    browser = testbrowser('/zeit-online/main-teaser-setup')
     meetrics = browser.cssselect(
         'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 0

@@ -205,8 +205,8 @@ def test_author_handles_missing_profile_data_right(jinja2_env):
 
 def test_author_has_correct_open_graph_image(testbrowser, testserver):
     select = testbrowser('/autoren/julia_zange').cssselect
-    url = testserver.url + (
-        '/zeit-online/cp-content/author_images/Julia_Zange/wide__1300x731')
+    url = ('http://localhost/zeit-online/cp-content/'
+           'author_images/Julia_Zange/wide__1300x731')
     assert select('meta[property="og:image"]')[0].get('content') == url
     assert select('meta[property="og:image:width"]')[0].get('content') == (
         '1300')
