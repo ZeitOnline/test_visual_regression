@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/studium/studienfuehrer-2015/countdown-studium-studienbeginn</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-02-18T12:50:41.433961+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-02-18T12:50:52.380804+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">5528ff3541a84c749bb6646d2e6984c6</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">556771</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="pinned"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt; &lt;list&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitmagazin&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;unicode&gt;zeitonline_stud&lt;/unicode&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="channels"&gt; &lt;string&gt;parse-channel-news&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;none/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;parse&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/list&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="memo">Kein Autorenname bekannt, nur "Text: Redaktion" (Anm. Eva)</attribute>
+  <rankedTags>
+    <tag uuid="c001115e-25b6-4120-b790-69fc75e42f7b" url_value="fachhochschulen" type="Organization">Fachhochschulen</tag>
+    <tag uuid="4c97de3f-2a84-4692-b913-6457fafa09b0" url_value="bafoeg" type="free">Baf&#xF6;g</tag>
+    <tag uuid="ee034b4f-e488-4068-bd28-347f11f6e10e" url_value="bewerbungsfrist" type="free">Bewerbungsfrist</tag>
+    <tag uuid="bd93919b-e1d4-4d09-a0ef-667720c3636b" url_value="online-bewerbung" type="free">Online-Bewerbung</tag>
+    <tag uuid="b6f4ea87-18fc-4f7e-8e91-65ce1e2d49a5" url_value="studiengang" type="free">Studiengang</tag>
+  </rankedTags>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Worum man sich auch besonders fr&#xFC;h k&#xFC;mmern sollte: Internetanschluss beantragen. (akg)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">01</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZSF-2015-01</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.pilath</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_error"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2015-05-05T06:00:00+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZSF</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Im Mai m&#xFC;ssen sich die ersten bewerben, im Juli endet die Frist. Unser Countdown f&#xFC;r Abiturienten (akg)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Studium Hochschule</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">84</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Studienf&#xFC;hrer</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">05.05.2015</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZSF-2015-01-TERMINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Studium</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-02-18T12:51:04.300353+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/studium/studienfuehrer-2015/TERMINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">ZEIT Studienf&#xFC;hrer</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-02-18T12:50:54.155408+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="disabled"> 23d6d2da-3d6c-4898-93ea-7b1401b193a0</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">e514acd26c7f40c08b51614410e99d4d</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Hochschule</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367935288499</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-02-18T12:50:52.380804+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-02-18T12:50:53.127287+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">TERMINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:1fae105b-8e53-494a-99e2-00165eca9618}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-02-18T12:50:51.388342+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">4260</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">TERMINE</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2016-02-18T12:50:54Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">21978</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Thu, 18 Feb 2016 12:50:54 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"e5ae0a-55da-52c0ad12d95bc"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>
