@@ -4,8 +4,7 @@
 	data-clicktracking="{{ area.kind }}"
 	{% block teaser_attributes %}{% endblock %}>
 
-	{% set module_layout = 'teaser' %}
-	{% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" ignore missing %}
+	{% block teaser_media %}{% endblock %}
 
 	{% block teaser_heading %}
 		<h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
