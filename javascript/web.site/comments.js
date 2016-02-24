@@ -422,7 +422,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             if ( $answers.length > 1  && !containsTarget ) {
                 $root.next( '.comment--indented' ).find( '.comment__container' ).prepend( rewrapper );
                 coverReply( $answers.eq( 0 ).data({ undo: id }), $answers.length - 1 );
-                $answers.slice( 1 ).velocity( 'slideUp', slideDuration );
+                $answers.slice( 1 ).hide();
             }
         });
     },
