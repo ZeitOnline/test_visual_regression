@@ -170,6 +170,12 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
         };
     }
 
+    /**
+     * images.js: mimic ECMAScript 6 String.prototype.endsWith()
+     * @function stringEndsWith
+     * @param  {string} subjectString   haystack
+     * @param  {string} searchString    needle
+     */
     function stringEndsWith( subjectString, searchString ) {
         var position = subjectString.length - searchString.length,
             index = subjectString.indexOf( searchString, position );
