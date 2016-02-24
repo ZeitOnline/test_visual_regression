@@ -144,6 +144,6 @@ def test_article_should_show_premoderation_warning(application):
         'http://xml.zeit.de/zeit-online/article/01')
     request = pyramid.testing.DummyRequest()
     request.host_url = 'http://www.zeit.de'
-    request.session = {'user': {'blocked': False, 'premoderation': True}}
+    request.user = {'ssoid': '123', 'blocked': False, 'premoderation': True}
     view = zeit.web.site.view_article.Article(article, request)
     assert view.comment_area['show_premoderation_warning'] is True
