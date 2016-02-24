@@ -23,7 +23,7 @@
   <mapping target="sub_ressort" value="das wissen dieser welt" banner_code="wissen/bildungskanon" />
   <mapping target="serie" value="spiele" banner_code="spiele" />
   <mapping target="ressort" value="campus" banner_code="studium" />
-  <mapping target="serie" value="reise" banner_code="reisen" />  
+  <mapping target="serie" value="reise" banner_code="reisen" />
   <mapping target="sub_ressort" value="computer" banner_code="digital" />
   <mapping target="ressort" value="technik" banner_code="digital" />
   <mapping target="path_info" value="/serie/krimizeit-bestenliste" banner_code="literatur/krimi-bestenliste" />
