@@ -189,9 +189,8 @@ def has_author_image(context, request):
     if not authors:
         return False
     # XXX Should use proper variant, cf. z.w.core.template.get_column_image.
-    return zeit.web.core.template.get_image(
-        content=authors[0]['image_group'], variant_id='original',
-        fallback=False)
+    return zeit.web.core.template.get_variant(
+        authors[0]['image_group'], 'original')
 
 
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
