@@ -13,6 +13,8 @@ Change log for zeit.web
 
 - FIX: Wait 2x500ms for memcache lock, then recreate value ourselves
 
+- FIX: Safeguard celeraone script with timeout and feature toggle
+
 
 2.58 (2016-02-23)
 -----------------
