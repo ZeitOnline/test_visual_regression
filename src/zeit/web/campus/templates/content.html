@@ -17,6 +17,15 @@
                         {{- view.title -}}
                     </span>
                 </{{ headertag }}>
+                {%- set byline = view.context | get_byline('main') %}
+                {% if byline | length -%}
+                <div class="byline">
+                    {% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
+                </div>
+                {% endif -%}
+                <div class="metadata">
+                    {% include "zeit.web.campus:templates/inc/article/metadata.tpl" %}
+                </div>
             </div>
         {% endblock article_heading %}
         {% block article_body %}
