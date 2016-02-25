@@ -3,20 +3,20 @@
 	padding: $page-padding--small
 
 	&__heading
-		margin: 0
+		@extend %teaser-heading
+		margin: remify(-24px 0 10px)
 
 	&__media
 		background-color: $greyish-white
 		height: 0
 		padding-bottom: 100% // image variant 'square', ratio 1:1
 
+	&__kicker
+		@extend %teaser-kicker
+
 	&__title
 		@extend %teaser-title
 		font-size: remify(32px)
-		line-height: 0.95
-
-	&__kicker
-		@extend %teaser-kicker
 
 	&__text
 		@extend %teaser-text

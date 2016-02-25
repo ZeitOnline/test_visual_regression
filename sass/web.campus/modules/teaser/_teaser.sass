@@ -1,22 +1,30 @@
 %teaser
 	border-bottom: 1px solid $color-teaser-border
 
+%teaser-heading
+	position: relative
+	max-width: 95%
+
 %teaser-title
 	background-color: $white
 	color: $zco-charcoal
-	display: block
+	display: inline-block
 	font-family: $font-beckett
 	letter-spacing: 1.5px
+	line-height: 0.95
+	padding: remify(15px 20px 0 0)
 	text-transform: uppercase
 
 %teaser-kicker
 	background-color: $white
 	color: $zco-accent
-	display: block
 	font-family: $font-tabletgothic
 	font-size: remify(12px)
 	letter-spacing: 0.08em
 	line-height: 1.25
+	padding: remify(6px 13px 0 0)
+	position: absolute
+	bottom: 96% // this would be 100%, but we want to align the character bottom with the box bottom
 	text-transform: uppercase
 
 %teaser-text
