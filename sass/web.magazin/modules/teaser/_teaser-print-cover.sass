@@ -3,17 +3,13 @@
     @extend %teaser
 
     &__media
-        @extend %teaser__media
-        margin-bottom: 0
-
-    &__media-container
-        a
-            @extend %teaser--darker
+        @extend %teaser--dark
+        margin: 0
 
     &__text
         @extend %teaser__text
         bottom: 0
-        padding: $tiny $petite $big
+        padding: remify(6px 20px 28px)
         position: absolute
 
     &__kicker

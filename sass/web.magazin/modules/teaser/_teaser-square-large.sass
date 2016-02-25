@@ -3,14 +3,9 @@
     @extend %teaser-large
 
     &__media
-        @extend %teaser__media
+        @extend %teaser-large__media
+        height: 0
         padding-bottom: 100%
-
-    &__media-container
-        @extend %teaser-large__media-container
-
-    &__media-item
-        height: 100%
 
     &__text
         @extend %teaser-large__text
@@ -25,9 +20,10 @@
         @extend %teaser-large__kicker
 
     &--light
-        .teaser-square-large__media-container
-            a
-                @extend %teaser--light
-                position: absolute
-        .teaser-square-large__text
-            +link-colors($black, $black, $black, $black, $black)
+        background-color: $white
+
+    &--light &__media
+        @extend %teaser--light
+
+    &--light &__text
+        +link-colors($black, $black, $black, $black, $black)

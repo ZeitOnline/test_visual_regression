@@ -6,15 +6,10 @@
         margin-bottom: 0
 
     &__media
-        margin: 0
-
-    &__media-container
-        @extend %teaser-large__media-container
+        @extend %teaser-large__media
         height: 0
         padding-bottom: 100% / 3 * 4 // image variant 'portrait'
-        background-color: $black
         +respond-min($break-2)
-            height: 0
             padding-bottom: 100% / 16 * 9 // image variant 'wide'
 
     &__text
@@ -32,9 +27,10 @@
         @extend %teaser-large__kicker
 
     &--light
-        .teaser-fullwidth__media-container
-            a
-                @extend %teaser--light
-                position: absolute
-        .teaser-fullwidth__text
-            +link-colors($black, $black, $black, $black, $black)
+        background-color: $white
+
+    &--light &__media
+        @extend %teaser--light
+
+    &--light &__text
+        +link-colors($black, $black, $black, $black, $black)
