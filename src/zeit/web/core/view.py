@@ -544,11 +544,6 @@ class CeleraOneMixin(object):
             return prep(self.context.supertitle.strip())
 
     @zeit.web.reify
-    def c1_prefix(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('c1_prefix')
-
-    @zeit.web.reify
     def c1_client(self):
         return [(k, u'"{}"'.format(v)) for k, v in {
             'set_channel': self._c1_channel,
