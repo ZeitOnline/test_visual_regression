@@ -435,6 +435,10 @@ class Base(object):
             return None
 
     @zeit.web.reify
+    def detailed_content_type(self):
+        return zeit.web.core.interfaces.IDetailedContentType(self.context)
+
+    @zeit.web.reify
     def ad_delivery_type(self):
         return 'adcontroller'
 

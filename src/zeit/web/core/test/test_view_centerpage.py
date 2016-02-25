@@ -164,3 +164,11 @@ def test_ranking_pagination_should_omit_default_page_param(testbrowser):
     link = browser.cssselect('.pager__pages a')[0]
     assert prev.get('href').endswith('/thema/test')
     assert link.get('href').endswith('/thema/test')
+
+
+def test_cp_should_include_keyword_entity_type_in_detailed_content_type(
+        application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/dynamic/angela-merkel')
+    view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
+    assert view.detailed_content_type == 'centerpage.centerpage.person'
