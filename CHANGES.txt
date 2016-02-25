@@ -9,6 +9,9 @@ Change log for zeit.web
 
 - FIX: Wait 2x500ms for memcache lock, then recreate value ourselves
 
+- MAINT: Switch default testbrowser to wsgi, add template browser and
+         clean lots(!) of tests with testserver.url and inappropriate fixtures
+
 
 2.58 (2016-02-23)
 -----------------
