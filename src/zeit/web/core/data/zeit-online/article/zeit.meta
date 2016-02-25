@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
-  <attribute ns="DAV:" name="href">/cms/work/2015/05/crystal-meth-drogen</attribute>
+  <attribute ns="DAV:" name="href">/cms/work/zeit-online/article/zeit</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt; &lt;list&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;true/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;true/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;unicode&gt;zeitonline_pol&lt;/unicode&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;true/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/list&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-02-15T17:18:53.040833+00:00</attribute>

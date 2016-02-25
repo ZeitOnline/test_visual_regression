@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/zeit-online/image/zeitcover/zeitcover-05-360x260.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="acquire_metadata">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9b0a2a35-622a-49b6-843a-81df99939b58}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-01-28T09:31:11.011468+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImage" module="zeit.content.image.image"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;Hier ko&#x308;nnen Sie die aktuelle Ausgabe lesen.&lt;/unicode&gt; &lt;string&gt;http://services.zeit.de/ausgabenseite/?wt_zmc=fix.int.zonpme.zeitde.artikelbox.ausgseite.bildtext.text.text&amp;amp;amp;utm_medium=fix&amp;amp;amp;utm_source=zeitde_zonpme_int&amp;amp;amp;utm_campaign=artikelbox&amp;amp;amp;utm_content=ausgseite_bildtext_text_text&lt;/string&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bischoff</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-01-28T09:31:11.011468+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-01-28T16:04:49.168630+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="links_to">http://services.zeit.de/ausgabenseite/?wt_zmc=fix.int.zonpme.zeitde.artikelbox.ausgseite.bildtext.cover.cover&amp;amp;utm_medium=fix&amp;amp;utm_source=zeitde_zonpme_int&amp;amp;utm_campaign=artikelbox&amp;amp;utm_content=ausgseite_bildtext_cover_cover</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-01-28T09:30:18.187796+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Dieser Artikel stammt aus der ZEIT No 5 vom 29.1.2015.</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-01-28T16:04:49.118604+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2015-01-28T16:15:33Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">65285</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Wed, 28 Jan 2015 16:15:33 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"e35a40-ff05-50db8ae5181d2"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">image/jpeg</attribute>
+</head>

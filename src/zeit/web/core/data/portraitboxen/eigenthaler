@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
+  <block>
+    <title>Thomas Eigenthaler</title>
+    <text py:pytype="str">
+      <p>Thomas Eigenthaler (56) ist gelernter Steuerinspektor und Steuerjurist.  Er leitete jahrelang ein Finanzamt in Stuttgart, ehe er 2011  Bundesvorsitzender der Deutschen Steuergewerkschaft (DSTG) wurde. Diese  vertritt die Beamten und Angestellten in den Finanzämtern und anderen  Steuerbehörden. Von den 110.000 Beschäftigten in der Steuerverwaltung  sind über 70.000 in der Gewerkschaft organisiert.</p>
+    </text>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/exampleimages/artikel/mode.jpg" type="jpg" align="left" publication-date="" expires="2015-05-16T07:23:55+00:00">
+      <bu>Thomas Eigenthaler (Archiv)</bu>
+      <copyright>© Friedhelm Windmueller/Deutsche Steuer-Gewerkschaft/dpa</copyright>
+    </image>
+  </block>
+</container>

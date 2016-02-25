@@ -141,7 +141,7 @@ def test_url_path_not_found_should_render_404(testserver):
 
 
 def test_not_renderable_content_object_should_trigger_restart(testserver):
-    resp = requests.get('%s/quiz-workaholic' % testserver.url)
+    resp = requests.get('%s/zeit-online/quiz/quiz-workaholic' % testserver.url)
     assert resp.headers['x-render-with'] == 'default'
 
 
