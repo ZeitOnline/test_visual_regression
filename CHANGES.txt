@@ -7,6 +7,8 @@ Change log for zeit.web
 - FIX: Only consider usable max-height for responsive images,
        fixes printkiosk teaser images
 
+- FIX: Fix failing test
+
 - FIX: Wait 2x500ms for memcache lock, then recreate value ourselves
 
 
