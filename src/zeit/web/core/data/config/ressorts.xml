@@ -29,7 +29,7 @@
         </subnavigation>
     </ressort>
 
-    <ressort name="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft"><title>Wirtschaft</title></ressort>
+    <ressort name="Wirtschaft" uniqueId="http://xml.zeit.de/zeit-online/article"><title>Wirtschaft</title></ressort>
     <ressort name="Finanzen" uniqueId="http://xml.zeit.de/finanzen"><title>Finanzen</title></ressort>
     <ressort name="Wissen" uniqueId="http://xml.zeit.de/wissen"><title>Wissen</title></ressort>
     <ressort name="Gesundheit" uniqueId="http://xml.zeit.de/gesundheit"><title>Gesundheit</title></ressort>

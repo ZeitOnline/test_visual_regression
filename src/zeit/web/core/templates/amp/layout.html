@@ -68,8 +68,9 @@
 		<main itemprop="mainContentOfPage">
 		{% block main %}
 			{% block content %}
-			<article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
-				<link itemprop="mainEntityOfPage" href="{{ view.content_url }}">
+			<article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article">
+				{% include "zeit.web.core:templates/amp/article/publisher.html" %}
+				<meta itemprop="mainEntityOfPage" content="{{ view.content_url }}">
 				<header class="article__header article__item">
 					<h1 class="headline" itemprop="headline">
 						<span class="headline__kicker">
@@ -97,7 +98,7 @@
 					</span>
 					{% endif -%}
 					<div class="metadata">
-						{% include "zeit.web.core:templates/amp/article/metadata.tpl" %}
+						{% include "zeit.web.core:templates/amp/article/metadata.html" %}
 					</div>
 				</header>
 
@@ -215,7 +216,7 @@
 		</footer>
 
 		{% include "zeit.web.core:templates/inc/tracking/webtrekk_amp.html" %}
-		<amp-pixel src=" https://ssl.zeit.de/cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}&amp;r=DOCUMENT_REFERRER&amp;rand=RANDOM"></amp-pixel>
+		<amp-pixel src="https://ssl.zeit.de/cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}&amp;r=DOCUMENT_REFERRER&amp;rand=RANDOM"></amp-pixel>
 
 	</div>
 </body>
