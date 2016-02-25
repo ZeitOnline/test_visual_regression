@@ -1,8 +1,8 @@
 {% extends "zeit.web.campus:templates/content.html" %}
 
 {% block article_main_image %}
-    {% if view.page_nr == 1 %}
-        {% set image = get_image(content=view.main_image_block, variant_id='narrow') %}
-        {% include "zeit.web.campus:templates/inc/article/header-image.tpl" %}
-    {% endif %}
+	{% if view.page_nr == 1 %}
+		{% set image = get_image(content=view.main_image_block, variant_id='narrow') %}
+		{% include "zeit.web.campus:templates/inc/article/header-image.tpl" %}
+	{% endif %}
 {% endblock article_main_image %}
