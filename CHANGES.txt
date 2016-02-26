@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2779: Add webtrekk parameter with detailed content type information
 
+- ZON-2788: Add ads to Instant Articles
+
 
 2.59 (2016-02-25)
 -----------------
