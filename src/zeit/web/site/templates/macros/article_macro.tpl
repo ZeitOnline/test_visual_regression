@@ -21,12 +21,6 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro unorderedlist(html) -%}
-    <ul class="list article__item">
-        {{ html | safe }}
-    </ul>
-{%- endmacro %}
-
 {% macro orderedlist(html) -%}
     <ol class="list article__item">
         {{ html | safe }}
