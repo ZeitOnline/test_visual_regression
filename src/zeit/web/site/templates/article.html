@@ -1,22 +1,4 @@
 {% extends "zeit.web.site:templates/content.html" %}
-
-{% macro render_page(page) %}
-    {% set contents_printed = False %}
-    {% for item in page %}
-        {% set type = item | block_type %}
-        {# XXX Urghs this is nasty #}
-        {% if type in ['place', 'contentadblock', 'cardstack', 'liveblog', 'inlinegallery'] %}
-            {{ blocks[type](item, view) }}
-        {% else %}
-            {% if not (contents_printed or view.is_all_pages_view) and type in ['paragraph'] %}
-                {% include "zeit.web.site:templates/inc/article/table-of-contents.tpl" %}
-                {% set contents_printed = True %}
-            {% endif %}
-            {{ (blocks[type] or blocks["no_block"])(item) }}
-        {% endif %}
-    {% endfor %}
-{% endmacro %}
-
 {% block content_ad_script -%}
 {% if view.context.advertising_enabled %}
 <script type="text/javascript">
