@@ -6,12 +6,6 @@
     {% include 'zeit.web.core:templates/inc/asset/image_article.tpl' with context %}
 {%- endmacro %}
 
-{% macro intertitle(intertitle) -%}
-    <h2 class="article__subheading article__item">
-        {{ intertitle | striptags }}
-    </h2>
-{%- endmacro %}
-
 {% macro place(item, view) -%}
 
     {# On "komplettansicht", we do not want to have duplicate banner IDs.
