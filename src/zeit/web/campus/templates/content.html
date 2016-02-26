@@ -17,6 +17,10 @@
 						{{- view.title -}}
 					</span>
 				</{{ headertag }}>
+				<aside class="article-header__topic">
+					{# XXX Has to be replaced after ZON-2838 #}
+					<a class="article-header__topic--link" href="">!ZON-2838!</a>
+				</aside>
 				{%- set byline = view.context | get_byline('main') %}
 				{% if byline | length -%}
 				<div class="byline">

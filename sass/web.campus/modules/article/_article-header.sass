@@ -2,4 +2,26 @@
 	&__media
 		height: remify(320px)
 		margin-top: remify(14px)
-		width: 240px
+		width: remify(240px)
+	&__topic
+		margin-left: -$page-padding--small
+		&--link
+			background-color: $primary-color
+			color: $white
+			display: block
+			font-family: $font-beckett
+			font-size: 20px
+			letter-spacing: remify(1.5px)
+			padding-bottom: remify(6px)
+			padding-left: $page-padding--small
+			padding-top: remify(10px)
+			text-transform: uppercase
+			+on-interaction
+				color: $white
+
+			&:before
+				content: "Thema"
+				opacity: .58
+				text-transform: uppercase
+				margin-right: .5em
+

@@ -2,11 +2,12 @@ $additional-padding: 50px
 
 .article-heading
 	background-color: $color-background
-	// calc() needed to compensate the additional padding
 	margin-bottom: 0
+	// calc() needed to compensate the additional padding
 	margin-top: calc(-1em - #{$additional-padding})
+	margin-left: -$page-padding--small
 	padding-bottom: remify(35px)
-	padding-left: remify(10px)
+	padding-left: remify(24px)
 	padding-top: remify($additional-padding)
 	text-transform: uppercase
 	&__kicker
@@ -17,7 +18,7 @@ $additional-padding: 50px
 		font-weight: bold
 		letter-spacing: .01em
 		position: relative
-		top: remify(-20px)
+		top: remify(-22px)
 
 	&__title
 		color: $color-article-highlight
