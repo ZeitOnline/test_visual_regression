@@ -2,10 +2,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
-{% macro contentadblock(item, view) -%}
-    {{ lama.content_ad_article(view) }}
-{%- endmacro %}
-
 {% macro portraitbox(obj) -%}
     {% if obj.name -%}
         <figure class="portraitbox article__item article__item--marginalia">
