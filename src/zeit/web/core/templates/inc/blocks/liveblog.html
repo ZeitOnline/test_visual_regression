@@ -1,0 +1,6 @@
+{% if block.blog_id -%}
+    <div class="liveblog">
+        {% set esi_source = 'http://www.zeit.de/liveblog-backend/{}.html'.format(block.blog_id) %}
+        {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
+    </div>
+{%- endif %}

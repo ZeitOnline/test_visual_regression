@@ -12,15 +12,6 @@
     </h2>
 {%- endmacro %}
 
-{% macro liveblog(liveblog, view) -%}
-    {% if liveblog.blog_id -%}
-        <div class="liveblog">
-            {% set esi_source = 'http://www.zeit.de/liveblog-backend/{}.html'.format(liveblog.blog_id) %}
-            {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
-        </div>
-    {%- endif %}
-{%- endmacro %}
-
 {% macro place(item, view) -%}
 
     {# On "komplettansicht", we do not want to have duplicate banner IDs.
