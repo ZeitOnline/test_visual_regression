@@ -632,7 +632,7 @@ def testbrowser(application):
 
 @pytest.fixture
 def httpbrowser(application, testserver):
-    """Wsgi-level test browser (called testbrowser for bw compat)"""
+    """HTTP-level test browser for full stack testing"""
     HttpBrowser.testserver = testserver
     return HttpBrowser()
 
