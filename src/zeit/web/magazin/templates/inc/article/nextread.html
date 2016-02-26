@@ -7,7 +7,6 @@ Available attributes:
 #}
 <aside class="nextread is-centered">
 	<div class="nextread__lead">Lesen Sie jetzt</div>
-	<div class="nextread__wrap">
 	{%- set module = view.nextread -%}
 	{% if module is iterable -%}
 		{% for teaser in module -%}
@@ -15,5 +14,4 @@ Available attributes:
 						'zeit.web.magazin:templates/inc/article/nextread/base.html'] -%}
 		{% endfor -%}
 	{% endif -%}
-	</div>
 </aside>

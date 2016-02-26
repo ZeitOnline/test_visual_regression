@@ -548,13 +548,12 @@ def test_nextread_teaser_block_teasers_is_accessable(application):
         'Nextread block should expose its teasers via index.'
 
 
-def test_nextread_base_layout_has_expected_structure(
-        testserver, testbrowser):
-    browser = testbrowser('%s/artikel/09' % testserver.url)
-    nextread = browser.cssselect('.teaser-nextread')[0]
+def test_nextread_base_layout_has_expected_structure(testbrowser):
+    browser = testbrowser('/artikel/09')
+    nextread = browser.cssselect('.nextread-base')[0]
     assert len(nextread.cssselect('a')) == 1
-    assert len(nextread.cssselect('.teaser-nextread__media')) == 1
-    assert len(nextread.cssselect('.teaser-nextread__text')) == 1
+    assert len(nextread.cssselect('.nextread-base__media')) == 1
+    assert len(nextread.cssselect('.nextread-base__heading')) == 1
 
 
 def test_nextread_should_fallback_to_default_layout(testserver, testbrowser):
