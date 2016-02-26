@@ -2,10 +2,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
-{% macro image(image, loop) -%}
-    {% include 'zeit.web.core:templates/inc/asset/image_article.tpl' with context %}
-{%- endmacro %}
-
 {% macro place(item, view) -%}
 
     {# On "komplettansicht", we do not want to have duplicate banner IDs.
