@@ -19,6 +19,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             console.log.apply( console, arguments );
         }
     },
+    isValidOrigin = function( origin, event ) {
+        var configuredOrigin = typeof event.originalEvent.origin === 'string' ? [ event.originalEvent.origin ] : event.originalEvent.origin;
+        return $.inArray( origin, configuredOrigin ) > -1;
+    },
     /**
      * check timer and click interval
      * @param  {object} myconfig configuration section read from json before
@@ -145,7 +149,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
         if ( typeof messageData.name !== 'string' ||
                 typeof config[messageData.name] === 'undefined' ||
-                event.originalEvent.origin !== config[messageData.name].origin ) {
+                !isValidOrigin( config[messageData.name].origin, event ) ) {
             log( 'error', 'messageData not correctly set' );
             return;
         }
