@@ -557,23 +557,6 @@ def test_nextread_base_layout_has_expected_structure(
     assert len(nextread.cssselect('.teaser-nextread__text')) == 1
 
 
-def test_nextread_minimal_layout_has_expected_structure(
-        testserver, testbrowser):
-    browser = testbrowser('%s/artikel/10' % testserver.url)
-    nextread = browser.cssselect('.teaser-nextread-minimal')[0]
-    assert len(nextread.cssselect('a')) == 1
-    assert len(nextread.cssselect('.teaser-nextread-minimal__text')) == 1
-
-
-def test_nextread_maximal_layout_has_expected_structure(
-        testserver, testbrowser):
-    browser = testbrowser('%s/artikel/08' % testserver.url)
-    nextread = browser.cssselect('.teaser-nextread-maximal')[0]
-    assert len(nextread.cssselect('a')) == 1
-    assert len(nextread.cssselect('.teaser-nextread-maximal__media')) == 1
-    assert len(nextread.cssselect('.teaser-nextread-maximal__text')) == 1
-
-
 def test_nextread_should_fallback_to_default_layout(testserver, testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
     nextread = zeit.web.core.interfaces.INextread(context)
