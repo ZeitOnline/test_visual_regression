@@ -4,6 +4,8 @@ Change log for zeit.web
 2.59 (unreleased)
 -----------------
 
+- MAINT: Refactor ZMO nextread
+
 - FIX: Add margin to major/ minor area
 
 - ZON-2785: Relaunch ZMO CPs:
