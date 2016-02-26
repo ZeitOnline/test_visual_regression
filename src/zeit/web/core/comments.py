@@ -421,7 +421,7 @@ def _sort_comments(comments):
                     comments_sorted[ancestor][1]))
             except KeyError:
                 log.error("The comment with the cid {} is a reply, but"
-                          "no ancestor could be found".format(comment['cid']))
+                          " no ancestor could be found".format(comment['cid']))
         comment_index[comment['cid']] = comment
     return (comments_sorted, comment_index)
 

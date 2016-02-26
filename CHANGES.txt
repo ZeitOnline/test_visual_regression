@@ -1,10 +1,16 @@
 Change log for zeit.web
 =======================
 
-2.59 (unreleased)
+2.60 (unreleased)
 -----------------
 
 - ZON-2779: Add webtrekk parameter with detailed content type information
+
+
+2.59 (2016-02-25)
+-----------------
+
+- MAINT: Log community errors
 
 - FIX: Only consider usable max-height for responsive images,
        fixes printkiosk teaser images
