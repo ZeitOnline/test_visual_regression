@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-2.59 (unreleased)
+2.60 (unreleased)
 -----------------
+
+- ZON-2779: Add webtrekk parameter with detailed content type information
+
+
+2.59 (2016-02-25)
+-----------------
+
+- MAINT: Log community errors
 
 - FIX: Only consider usable max-height for responsive images,
        fixes printkiosk teaser images
@@ -10,6 +18,8 @@ Change log for zeit.web
 - FIX: Fix failing test
 
 - FIX: Wait 2x500ms for memcache lock, then recreate value ourselves
+
+- FIX: Safeguard celeraone script with timeout and feature toggle
 
 
 2.58 (2016-02-23)
