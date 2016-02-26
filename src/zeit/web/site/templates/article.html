@@ -33,7 +33,8 @@
 
 {% block article_pages %}
     <section class="article-page" data-page-number="{{ view.current_page.number + 1 }}">
-        {{ render_page(view.current_page) }}
+        {% set page = view.current_page %}
+        {%- include "zeit.web.core:templates/inc/article/page.html" -%}
     </section>
 {% endblock article_pages %}
 
