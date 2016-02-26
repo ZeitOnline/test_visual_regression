@@ -51,6 +51,7 @@
         <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">{{ text }} - News und Infos | ZEIT ONLINE</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Hier finden Sie alle News und Hintergrund-Informationen von ZEIT ONLINE zu {{ 'dem Thema ' if type in ('Organization', 'Subject') else '' }}{{ text }}.</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="seo-keyword-entity-type">{{ type }}</attribute>
         <topiclinks>
         </topiclinks>
     </head>

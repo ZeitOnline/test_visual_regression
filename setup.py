@@ -75,7 +75,7 @@ setup(
         'zeit.magazin',
         'zeit.newsletter',
         'zeit.push>=1.11.0.dev0',
-        'zeit.seo',
+        'zeit.seo>=1.7.0.dev0',
         'zeit.solr',
         'zeit.vgwort',
         'zeit.website',
