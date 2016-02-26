@@ -21,12 +21,6 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro orderedlist(html) -%}
-    <ol class="list article__item">
-        {{ html | safe }}
-    </ol>
-{%- endmacro %}
-
 {% macro place(item, view) -%}
 
     {# On "komplettansicht", we do not want to have duplicate banner IDs.
