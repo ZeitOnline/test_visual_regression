@@ -1,0 +1,10 @@
+.main
+	padding: 0 $page-padding--small
+	overflow: hidden // prevent android from wrong zooming
+	+old-ie
+		width: $break-desktop-min
+	+respond-min($break-tablet-min)
+		// dirty trick to hide the main navigation border
+		// hopefully harmless
+		position: relative
+		top: -1px
