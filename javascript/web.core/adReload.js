@@ -19,9 +19,16 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             console.log.apply( console, arguments );
         }
     },
-    isValidOrigin = function( origin, event ) {
-        var configuredOrigin = typeof event.originalEvent.origin === 'string' ? [ event.originalEvent.origin ] : event.originalEvent.origin;
-        return $.inArray( origin, configuredOrigin ) > -1;
+    /**
+     * test if a supplied origin fits into the configured list of origins
+     * be backward compatible to older form of string
+     * @param  {string|array}   configuredOrigin list of origins from the config
+     * @param  {object}  event  message event object
+     * @return {Boolean}
+     */
+    isValidOrigin = function( configuredOrigin, event ) {
+        configuredOrigin  = typeof configuredOrigin === 'string' ? [ configuredOrigin ] : configuredOrigin;
+        return $.inArray( event.originalEvent.origin, configuredOrigin ) > -1;
     },
     /**
      * check timer and click interval
