@@ -2,27 +2,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
-{% macro place(item, view) -%}
-
-    {# On "komplettansicht", we do not want to have duplicate banner IDs.
-    That's why we set Banners 7+8+9 only on the first three pages and do
-    not display ads on other pages. #}
-    {% if view.is_all_pages_view %}
-        {% if item.on_page_nr == 1 %}
-            {{ lama.adplace(view.banner(7), view) }}
-            {{ lama.adplace(view.banner(4), view, mobile=True) }}
-        {% elif item.on_page_nr == 2 %}
-            {{ lama.adplace(view.banner(9), view) }}
-        {% endif %}
-    {% else %}
-        {{ lama.adplace(item, view) }}
-        {% if item.tile == 7 %}
-            {{ lama.adplace(view.banner(4), view, mobile=True) }}
-        {% endif %}
-    {% endif %}
-
-{%- endmacro %}
-
 {% macro contentadblock(item, view) -%}
     {{ lama.content_ad_article(view) }}
 {%- endmacro %}
