@@ -26,6 +26,6 @@
 		"interval": 4,
 		"pagetypes": ["article"],
 		"slug": "/zeit-online/article/fischer",
-		"origin": "http://localhost:9090"
+		"origin": ["http://localhost:9090", "http://localhost:8080"]
 	}
 }

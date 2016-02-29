@@ -728,7 +728,7 @@ def test_article_ads_should_have_pagetype_modifier(testbrowser):
 
 
 def test_does_not_break_when_author_has_no_display_name(
-        testserver, testbrowser):
+         testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = zeit.web.magazin.view_article.Article(
         context, pyramid.testing.DummyRequest())
@@ -1318,6 +1318,17 @@ def test_instantarticle_should_render_empty_page_on_interrupt(testserver):
         testserver.url + '/instantarticle-item/zeit-online/article/01')
     assert 'X-Interrupt' in resp.headers
     assert len(resp.text) == 0
+
+
+def test_instantarticle_should_render_ads(testbrowser):
+    browser = testbrowser(
+        '/instantarticle/zeit-online/article/simple-multipage')
+    assert len(browser.cssselect(
+        'iframe[src$="/static/latest/html/fbia-ads/tile-4.html"]')) == 1
+    assert len(browser.cssselect(
+        'iframe[src$="/static/latest/html/fbia-ads/tile-5.html"]')) == 1
+    assert len(browser.cssselect(
+        'iframe[src$="/static/latest/html/fbia-ads/tile-8.html"]')) == 1
 
 
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):

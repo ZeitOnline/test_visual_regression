@@ -103,8 +103,7 @@ def test_default_teaser_should_have_certain_blocks(jinja2_env):
         'No block named teaser_commentcount')
 
 
-def test_default_teaser_should_match_css_selectors(
-        application, jinja2_env, testserver):
+def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default.tpl')
 
@@ -170,7 +169,7 @@ def test_small_teaser_should_display_no_image_on_mobile(
     assert teaser_image.is_displayed() is False, 'image is not displayed'
 
 
-def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
+def test_fullwidth_teaser_should_be_rendered(testbrowser):
     browser = testbrowser('/zeit-online/fullwidth-teaser')
     teaser = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
     teaser_column = browser.cssselect(
@@ -181,7 +180,7 @@ def test_fullwidth_teaser_should_be_rendered(testserver, testbrowser):
 
 
 def test_fullwidth_teaser_image_should_have_attributes_for_mobile_variant(
-        testserver, testbrowser):
+        testbrowser):
     browser = testbrowser('/zeit-online/fullwidth-teaser')
     img = browser.cssselect('.teaser-fullwidth__media-item')[0]
     assert img.attrib['data-mobile-variant'] == 'wide'
@@ -223,14 +222,14 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
         assert helper.size.get('width') == int('%.0f' % (width * 0.6666))
 
 
-def test_main_teasers_should_be_rendered_correctly(testserver, testbrowser):
+def test_main_teasers_should_be_rendered_correctly(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
 
     articles = browser.cssselect('#main .cp-region .cp-area--major article')
     assert len(articles) == 3
 
 
-def test_main_teasers_should_have_ids_attached(testserver, testbrowser):
+def test_main_teasers_should_have_ids_attached(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
 
     all_articles = len(browser.cssselect('.teaser'))
@@ -238,7 +237,7 @@ def test_main_teasers_should_have_ids_attached(testserver, testbrowser):
     assert all_articles == articles_with_ids, 'We expect all teasers here'
 
 
-def test_main_teasers_should_have_id_attached(testserver, testbrowser):
+def test_main_teasers_should_have_id_attached(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
 
     body = browser.cssselect(
@@ -247,7 +246,7 @@ def test_main_teasers_should_have_id_attached(testserver, testbrowser):
     assert len(body) == 1, 'Body element misses data-attribute unique-id'
 
 
-def test_main_teasers_should_have_type_attached(testserver, testbrowser):
+def test_main_teasers_should_have_type_attached(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
 
     body = browser.cssselect(
@@ -255,7 +254,7 @@ def test_main_teasers_should_have_type_attached(testserver, testbrowser):
     assert len(body) == 1, 'Body element misses data-attribute page-type'
 
 
-def test_responsive_image_should_render_correctly(testserver, testbrowser):
+def test_responsive_image_should_render_correctly(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
 
     image = browser.cssselect(
@@ -265,21 +264,21 @@ def test_responsive_image_should_render_correctly(testserver, testbrowser):
     assert len(image) == 1, 'Only one image for first article'
 
 
-def test_image_should_be_on_position_b(testserver, testbrowser):
+def test_image_should_be_on_position_b(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     articles = browser.cssselect('#main .cp-region .cp-area article')
 
     assert articles[0][0][1].tag == 'figure', 'This position should haz image'
 
 
-def test_image_should_be_on_position_a(testserver, testbrowser):
+def test_image_should_be_on_position_a(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     articles = browser.cssselect('#main .cp-region .cp-area article')
 
     assert articles[1][0].tag == 'figure', 'An img should be on this position'
 
 
-def test_responsive_image_should_have_noscript(testserver, testbrowser):
+def test_responsive_image_should_have_noscript(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
 
     noscript = browser.cssselect(
@@ -287,7 +286,7 @@ def test_responsive_image_should_have_noscript(testserver, testbrowser):
     assert len(noscript) == 3
 
 
-def test_topic_links_title_schould_have_a_value_and_default_value(testserver):
+def test_topic_links_title_schould_have_a_value_and_default_value():
     context = mock.Mock()
     context.topic_links = mock.Mock()
     context.topiclink_title = 'My Title'
@@ -301,7 +300,7 @@ def test_topic_links_title_schould_have_a_value_and_default_value(testserver):
     assert topic_links.title == 'Schwerpunkte'
 
 
-def test_centerpage_view_should_have_topic_links(testserver):
+def test_centerpage_view_should_have_topic_links():
     mycp = mock.Mock()
     mycp.topiclink_label_1 = 'Label 1'
     mycp.topiclink_url_1 = 'http://link_1'
@@ -348,7 +347,6 @@ def test_teaser_for_column_should_render_original_image_variant(testbrowser):
 
 def test_series_teaser_should_render_series_element(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats')
-
     series_element = browser.cssselect('.teaser-large__series-label')
     assert series_element[0].text == 'Serie: App-Kritik'
 
@@ -414,7 +412,7 @@ def test_snapshot_should_display_copyright_with_nonbreaking_space(testbrowser):
     assert copyright.text.strip() == u'\xa9\xa0Xinhua/Zhang Wenkui/Reuters'
 
 
-def test_snapshot_should_have_description_text(testserver, testbrowser):
+def test_snapshot_should_have_description_text(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
     caption = browser.cssselect('.snapshot-caption')[0]
     assert (caption.text.strip() ==
@@ -505,13 +503,13 @@ def test_playlist_video_series_should_be_available(application):
     assert len(playlist.video_series_list) == 24
 
 
-def test_videostage_should_have_right_video_count(testserver, testbrowser):
+def test_videostage_should_have_right_video_count(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
     videos = browser.cssselect('#video-stage article')
     assert len(videos) == 4, 'We expect 4 videos in video-stage'
 
 
-def test_videostage_videos_should_have_video_ids(testserver, testbrowser):
+def test_videostage_videos_should_have_video_ids(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
     videos = browser.cssselect('#video-stage article')
     for video in videos:
@@ -580,7 +578,7 @@ def test_homepage_indentifies_itself_as_homepage(testserver):
     assert view.is_hp is False
 
 
-def test_homepage_ressort_is_homepage(testserver):
+def test_homepage_ressort_is_homepage(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
     view = zeit.web.site.view_centerpage.Centerpage(
@@ -588,7 +586,7 @@ def test_homepage_ressort_is_homepage(testserver):
     assert view.ressort == 'homepage'
 
 
-def test_linkobject_teaser_should_contain_supertitle(testserver, testbrowser):
+def test_linkobject_teaser_should_contain_supertitle(testbrowser):
     browser = testbrowser('/zeit-online/index')
     uid = 'http://xml.zeit.de/zeit-online/cp-content/link_teaser'
     kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
@@ -596,7 +594,7 @@ def test_linkobject_teaser_should_contain_supertitle(testserver, testbrowser):
     assert kicker.text.strip() == 'Freier Teaser Kicker'
 
 
-def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
+def test_blog_teaser_should_have_specified_markup(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats')
     uid = 'http://xml.zeit.de/blogs/nsu-blog-bouffier'
     teaser = browser.cssselect(
@@ -621,7 +619,7 @@ def test_blog_teaser_should_have_specified_markup(testserver, testbrowser):
     assert re.sub('\s+', ' ', byline.text).strip() == 'Von Anne Mustermann'
 
 
-def test_gallery_teaser_should_contain_supertitle(testserver, testbrowser):
+def test_gallery_teaser_should_contain_supertitle(testbrowser):
     browser = testbrowser('/zeit-online/index')
     uid = 'http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer'
     kicker = browser.cssselect('.teaser-small[data-unique-id="{}"] '
@@ -629,7 +627,7 @@ def test_gallery_teaser_should_contain_supertitle(testserver, testbrowser):
     assert 'Desktop-Bilder' in kicker.text_content()
 
 
-def test_centerpage_should_have_header_tags(testbrowser, testserver):
+def test_centerpage_should_have_header_tags(testbrowser):
     browser = testbrowser('/zeit-online/index')
     html = lxml.html.fromstring(browser.contents).cssselect
 
@@ -888,8 +886,7 @@ def test_meta_rules_for_keyword_paths(application):
         'von ZEIT ONLINE zu dem Thema Ausdauersport.')
 
 
-def test_newsticker_should_have_expected_dom(
-        testserver, testbrowser, datasolr):
+def test_newsticker_should_have_expected_dom(testbrowser, datasolr):
     browser = testbrowser('/zeit-online/news-teaser')
 
     cols = browser.cssselect('.cp-area--newsticker .newsticker__column')

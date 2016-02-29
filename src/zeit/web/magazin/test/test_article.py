@@ -107,8 +107,8 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
             'pixel for IVW not in DOM')
 
 
-def test_article03_has_correct_webtrekk_values(httpbrowser, testserver):
-    browser = httpbrowser('/artikel/03')
+def test_article03_has_correct_webtrekk_values(testbrowser):
+    browser = testbrowser('/artikel/03')
 
     # content _group
     assert '1: "redaktion",' in browser.contents
@@ -143,7 +143,7 @@ def test_article03_has_correct_webtrekk_values(httpbrowser, testserver):
 
     # noscript string
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,redaktion'
-            '.lebensart.essen-trinken.weinkolumne.article.zede|{url}/'
+            '.lebensart.essen-trinken.weinkolumne.article.zede|localhost/'
             'artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=article'
             '&amp;cg3=lebensart&amp;cg4=zede&amp;cg5=essen-trinken&amp;cg6'
             '=weinkolumne&amp;cg7=03&amp;cg8=zeitmz/essenundtrinken/article'
@@ -153,11 +153,11 @@ def test_article03_has_correct_webtrekk_values(httpbrowser, testserver):
             '17:20:50.176115+02:00&amp;cp6=4952&amp;cp7=&amp;cp8=zede'
             '&amp;cp9=zeitmz/essenundtrinken/article&amp;cp10=&amp;'
             'cp11=&amp;cp12=desktop'
-            '.site').format(url=testserver['http_address']) in browser.contents
+            '.site') in browser.contents
 
 
-def test_article03_page2_has_correct_webtrekk_values(httpbrowser, testserver):
-    browser = httpbrowser('/artikel/03/seite-2')
+def test_article03_page2_has_correct_webtrekk_values(testbrowser):
+    browser = testbrowser('/artikel/03/seite-2')
 
     # content _group
     assert '7: "seite-2",' in browser.contents
@@ -168,7 +168,7 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser, testserver):
     # noscript
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.'
-            'zede|{url}/artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion'
+            'zede|localhost/artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion'
             '&amp;cg2=article&amp;cg3=lebensart&amp;cg4=zede&amp;cg5=essen-'
             'trinken&amp;cg6=weinkolumne&amp;cg7=seite-2&amp;cg8=zeitmz/'
             'essenundtrinken/article&amp;cg9=2013-07-30&amp;cp1=anne '
@@ -177,11 +177,11 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser, testserver):
             'tübingen&amp;cp5=2013-07-30 17:20:50.176115+02:00&amp;cp6=4952'
             '&amp;cp7=&amp;cp8=zede&amp;cp9=zeitmz/essenundtrinken/article'
             '&amp;cp10=&amp;cp11=&amp;cp12=desktop'
-            '.site').format(url=testserver['http_address']) in browser.contents
+            '.site') in browser.contents
 
 
-def test_cp_has_correct_webtrekk_values(httpbrowser, testserver):
-    browser = httpbrowser('/zeit-magazin/test-cp/test-cp-zmo')
+def test_cp_has_correct_webtrekk_values(testbrowser):
+    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo')
     assert '1: "redaktion",' in browser.contents
     assert '2: "centerpage",' in browser.contents
     assert '3: "lebensart",' in browser.contents
@@ -192,19 +192,19 @@ def test_cp_has_correct_webtrekk_values(httpbrowser, testserver):
     assert '8: "zeitmz/centerpage",' in browser.contents
     assert '9: ""' in browser.contents
     assert ('wt.pl?p=328,redaktion.lebensart...'
-            'centerpage.zede|{url}/zeit-magazin/test-cp/test-cp-zmo,'
+            'centerpage.zede|localhost/zeit-magazin/test-cp/test-cp-zmo,'
             '0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=centerpage&amp;'
             'cg3=lebensart&amp;cg4=zede&amp;cg5=&amp;cg6=&amp;'
             'cg7=test-cp-zmo&amp;cg8=zeitmz/centerpage&amp;'
-            'cg9=').format(url=testserver['http_address']) in browser.contents
+            'cg9=') in browser.contents
+    assert '26: "centerpage.centerpage"' in browser.contents
 
 
-def test_webtrekk_series_tag_is_set_corectly(httpbrowser, testserver):
-    browser = httpbrowser('/artikel/06')
+def test_webtrekk_series_tag_is_set_corectly(testbrowser):
+    browser = testbrowser('/artikel/06')
     assert '6: "tödlichekeime",' in browser.contents
     assert ('redaktion.zeit-magazin..tödlichekeime.'
-            'article.zei|{url}/artikel/'
-            '06').format(url=testserver['http_address']) in browser.contents
+            'article.zei|localhost/artikel/06') in browser.contents
 
 
 def test_webtrekk_has_session_parameter(testbrowser):
@@ -577,7 +577,7 @@ def test_article03_has_linked_image(testbrowser):
                     reason="We need a way to mock liveblog in tests")
 def test_article02_uses_esi(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/artikel/02' % testserver.url)
+    driver.get('%s/artikel/02')
     blog = WebDriverWait(driver, 15).until(
         EC.presence_of_element_located((By.ID, "livedesk-root")))
     assert blog.is_displayed(), 'ESI Liveblog not displayed'

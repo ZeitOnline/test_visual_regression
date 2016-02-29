@@ -135,8 +135,7 @@ def test_printbox_is_present_and_has_newsprint_offerings(
     assert len(anbebotsbox) == 0
 
 
-def test_centerpage_should_gracefully_skip_all_broken_references(
-        testbrowser):
+def test_centerpage_should_gracefully_skip_all_broken_references(testbrowser):
     browser = testbrowser('/zeit-online/teaser-broken-setup')
     # @todo these class names are all gone
     assert not browser.cssselect('.main__fullwidth .teasers-fullwidth *')
@@ -161,22 +160,21 @@ def test_dynamic_centerpage_collection_should_output_teasers(
     assert counter == 8
 
 
-def test_dynamic_centerpage_should_be_paginatable(
-        testbrowser, datasolr):
+def test_dynamic_centerpage_should_be_paginatable(testbrowser, datasolr):
     browser = testbrowser('/dynamic/angela-merkel?p=2')
     text = browser.cssselect('.pager__page.pager__page--current span')[0].text
     assert text == '2'
 
 
-def test_pagination_should_be_validated(httpbrowser):
+def test_pagination_should_be_validated(testbrowser):
     with pytest.raises(urllib2.HTTPError):
-        assert '404 Not Found' in httpbrowser(
+        assert '404 Not Found' in testbrowser(
             '/dynamic/angela-merkel?p=-1').headers
     with pytest.raises(urllib2.HTTPError):
-        assert '404 Not Found' in httpbrowser(
+        assert '404 Not Found' in testbrowser(
             '/dynamic/angela-merkel?p=0').headers
     with pytest.raises(urllib2.HTTPError):
-        assert '404 Not Found' in httpbrowser(
+        assert '404 Not Found' in testbrowser(
             '/dynamic/angela-merkel?p=1moep').headers
 
 
