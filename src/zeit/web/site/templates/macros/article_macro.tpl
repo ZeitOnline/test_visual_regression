@@ -2,12 +2,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
-{% macro cardstack(module, view) -%}
-    {% set request = view.request %}
-    {% set static_param = '' %}
-    {% include 'zeit.web.site:templates/inc/module/cardstack.html' %}
-{% endmacro -%}
-
 {# Quiz macro is used inside of articles. (On CPs, the module template is used.) #}
 {% macro quiz(module) -%}
     <div class="article__item article__item--wide article__item--rimless x-spacing">
