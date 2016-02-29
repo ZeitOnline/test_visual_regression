@@ -672,7 +672,8 @@ class BaseBrowser(object):
     """
 
     def __call__(self, uri, **kw):
-        self.open(uri, **kw)
+        if uri is not None:
+            self.open(uri, **kw)
         return self
 
     @property
