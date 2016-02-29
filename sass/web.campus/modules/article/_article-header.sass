@@ -1,27 +1,138 @@
 .article-header
-	&__media
-		height: remify(320px)
-		margin-top: remify(14px)
+	margin-top: $page-padding--small
+	position: relative
+
+	&__image
 		width: remify(240px)
-	&__topic
-		margin-left: -$page-padding--small
-		&--link
-			background-color: $primary-color
+
+	&__media
+		height: 0
+		padding-bottom: 100% / 3 * 4 // image variant 'portrait'
+
+	&__topic-link
+		+font-smoothing
+		+unpadded
+		background-color: $primary-color
+		color: $white
+		display: block
+		font-family: $font-beckett
+		font-size: em(20px)
+		letter-spacing: 1.5px / 20px * 1em
+		margin-bottom: remify(10px)
+		padding: remify(6px $page-padding--small 2px)
+		text-transform: uppercase
+		+on-interaction
 			color: $white
-			display: block
-			font-family: $font-beckett
-			font-size: 20px
-			letter-spacing: remify(1.5px)
-			padding-bottom: remify(6px)
-			padding-left: $page-padding--small
-			padding-top: remify(10px)
-			text-transform: uppercase
-			+on-interaction
-				color: $white
+		&:before
+			content: "Thema"
+			opacity: .58
+			margin-right: .5em
 
+	&__headline
+		+unpadded
+		background-color: $color-background
+		margin-top: remify(-66px)
+		margin-bottom: 0
+		padding: remify(15px $page-padding--small 24px 24px)
+		text-transform: uppercase
+
+	&__kicker
+		+font-smoothing
+		color: $white
+		display: block
+		font-family: $font-tabletgothic
+		font-size: em(14px)
+		font-weight: bold
+		letter-spacing: .01em
+		margin-bottom: remify(12px)
+
+	&__title
+		color: $color-article-highlight
+		display: block
+		font-family: $font-beckett
+		font-size: em(48px)
+		font-weight: normal
+		letter-spacing: 1.5px / 48px * 1em
+		line-height: .96
+
+	&__byline,
+	&__metadata
+		font-size: em(15px)
+		line-height: 20px / 15px
+		margin-bottom: remify(8px)
+
+	&__byline
+		span[itemprop="name"]
+			color: $color-text
+			font-weight: bold
+
+	&__metadata
+		> time,
+		> span
+			white-space: nowrap
+		> time:after,
+		> span:after
+			content: ", "
+		> time:last-child:after,
+		> span:last-child:after
+			content: none
+
++respond-min($break-tablet-min)
+	.article-header
+		margin-top: remify(40px)
+
+		&__image-wrap
+			margin: auto
+			max-width: remify(780px)
+
+		&__image
+			width: 53.33%
+
+		&__headline
+			margin-top: remify(-90px)
+			padding: remify(11px $page-padding 24px 54px)
+
+		&__kicker,
+		&__title
+			margin-left: auto
+			margin-right: auto
+			max-width: remify(660px)
+
+		&__kicker
+			font-size: em(16px)
+			line-height: 18px / 16px
+			margin-bottom: remify(22px)
+
+		&__title
+			font-size: em(112px)
+			line-height: 100px / 112px
+			letter-spacing: 3px / 112px * 1em
+
+		&__info
+			left: 50%
+			max-width: remify(780px / 2)
+			padding-left: remify(46px)
+			position: absolute
+			top: 0
+			width: 50%
+
+		&__topic-link
+			display: inline-block
+			font-size: em(26px)
+			margin: remify(0 0 15px)
+			padding: remify(8px 18px 2px)
 			&:before
-				content: "Thema"
-				opacity: .58
-				text-transform: uppercase
-				margin-right: .5em
+				content: none
 
+
++respond-min($break-desktop-min)
+	.article-header
+		margin-top: remify(60px)
+
+		&__headline
+			margin: remify(-190px 0 0)
+			padding-top: remify(111px)
+
+		&__topic-link
+			font-size: em(32px)
+			padding: remify(9px 23px 2px)
