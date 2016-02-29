@@ -2,12 +2,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
-{% macro raw(obj) -%}
-    {% if obj.alldevices %}
-    <div class="raw">{{ obj.xml | safe }}</div>
-    {% endif %}
-{%- endmacro %}
-
 {% macro cardstack(module, view) -%}
     {% set request = view.request %}
     {% set static_param = '' %}
