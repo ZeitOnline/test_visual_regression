@@ -896,7 +896,10 @@ class service_unavailable(object):  # NOQA
 @pyramid.view.notfound_view_config()
 def not_found(request):
     body = 'Status 404: Dokument nicht gefunden.'
-    return pyramid.response.Response(body, 404, [('X-Render-With', 'default')])
+    return pyramid.response.Response(
+        body, 404,
+        [('X-Render-With', 'default'),
+         ('Content-Type', 'text/plain; charset=utf-8')])
 
 
 @pyramid.view.view_config(context=pyramid.exceptions.URLDecodeError)
@@ -923,7 +926,8 @@ def surrender(context, request):
 @pyramid.view.view_config(route_name='blacklist')
 def blacklist(context, request):
     return pyramid.httpexceptions.HTTPNotImplemented(
-        headers=[('X-Render-With', 'default')])
+        headers=[('X-Render-With', 'default'),
+                 ('Content-Type', 'text/plain; charset=utf-8')])
 
 
 @pyramid.view.view_config(route_name='json_delta_time', renderer='json')

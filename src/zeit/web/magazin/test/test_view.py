@@ -174,8 +174,7 @@ def test_header_image_should_be_none_if_adapted_as_regular_image(application):
     assert zeit.web.core.block.Image(body.values()[0]) is None
 
 
-def test_image_view_returns_image_data_for_filesystem_connector(
-        testserver):
+def test_image_view_returns_image_data_for_filesystem_connector(testserver):
     r = requests.get(testserver.url +
                      '/exampleimages/artikel/01/'
                      'schoppenstube/schoppenstube-540x304.jpg')
@@ -245,19 +244,19 @@ def test_column_should_not_have_header_image(testbrowser):
     assert '<div class="article__column__headerimage">' not in browser.contents
 
 
-def test_health_check_should_response_and_have_status_200(httpbrowser):
-    browser = httpbrowser('/health_check')
+def test_health_check_should_response_and_have_status_200(testbrowser):
+    browser = testbrowser('/health_check')
     assert browser.headers['Content-Length'] == '2'
     resp = zeit.web.core.view.health_check('request')
     assert resp.status_code == 200
 
 
-def test_a_404_request_should_be_from_zon_main_page(httpbrowser):
-    httpbrowser.handleErrors = False
+def test_a_404_request_should_be_from_zon_main_page(testbrowser):
+    browser = testbrowser()
+    browser.handleErrors = False
     with pytest.raises(urllib2.HTTPError):
-        httpbrowser.open('/this_is_a_404_page_my_dear')
-        assert '404 Not Found' in str(httpbrowser.headers)
-    assert 'Dokument nicht gefunden' in httpbrowser.contents
+        browser.open('/this_is_a_404_page_my_dear')
+        assert '404 Not Found' in str(browser.headers)
 
 
 def test_content_should_have_type(application):

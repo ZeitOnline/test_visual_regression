@@ -73,9 +73,9 @@ def test_json_delta_time_from_date_should_fallback_to_now_for_base_date(
 
 
 def test_json_delta_time_from_date_should_return_http_error_on_missing_params(
-        httpbrowser):
+        testbrowser):
     with pytest.raises(urllib2.HTTPError):
-        httpbrowser('/json/delta_time')
+        testbrowser('/json/delta_time')
 
 
 def test_json_delta_time_from_unique_id_should_return_delta_time(
@@ -94,15 +94,15 @@ def test_json_delta_time_from_unique_id_should_return_delta_time(
 
 
 def test_json_delta_time_from_unique_id_should_return_http_error_on_false_uid(
-        httpbrowser):
+        testbrowser):
     with pytest.raises(urllib2.HTTPError):
-        httpbrowser('/json/delta_time?unique_id=foo')
+        testbrowser('/json/delta_time?unique_id=foo')
 
 
 def test_json_delta_time_from_unique_id_should_return_http_error_on_article(
-        httpbrowser):
+        testbrowser):
     with pytest.raises(urllib2.HTTPError) as error:
-        httpbrowser('/json/delta_time?unique_id=http://xml.zeit.de/artikel/01')
+        testbrowser('/json/delta_time?unique_id=http://xml.zeit.de/artikel/01')
     assert error.value.getcode() == 400
 
 
@@ -508,15 +508,17 @@ def test_centerpage_should_have_default_seo_pagedescription(application):
     assert view.pagedescription == zeit.web.magazin.view.Base.seo_title_default
 
 
-def test_notfound_view_works_for_get(httpbrowser):
+def test_notfound_view_works_for_get(testbrowser):
+    browser = testbrowser()
     with pytest.raises(urllib2.HTTPError) as err:
-        httpbrowser.open('/nonexistent')
+        browser.open('/nonexistent')
     assert err.value.getcode() == 404
 
 
-def test_notfound_view_works_for_post(httpbrowser):
+def test_notfound_view_works_for_post(testbrowser):
+    browser = testbrowser()
     with pytest.raises(urllib2.HTTPError) as err:
-        httpbrowser.post('/nonexistent', data='')
+        browser.post('/nonexistent', data='')
     assert err.value.getcode() == 404
 
 
@@ -638,10 +640,9 @@ def test_ispaginated_predicate_should_handle_get_parameter():
     assert ip(None, mock.Mock(GET={'p': '4'})) is True
 
 
-def test_invalid_unicode_should_return_http_400(httpbrowser):
-    with pytest.raises(urllib2.HTTPError) as info:
-        httpbrowser('/index%C8')
-    assert info.value.getcode() == 400
+def test_invalid_unicode_should_return_http_400(testserver):
+    r = requests.get(testserver.url + '/index%C8')
+    assert r.status_code == 400
 
 
 def test_ivw_uses_hyprid_method_for_apps(jinja2_env):

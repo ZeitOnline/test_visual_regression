@@ -1,24 +1,30 @@
 # -*- coding: utf-8 -*-
+import urllib2
+
 import zeit.cms.interfaces
 
 import zeit.web.core.template
 
 
-def test_link_object_should_redirect_permanently(httpbrowser):
-    browser = httpbrowser('blogs/nsu-blog-bouffier')
-    assert (
-        'http://blog.zeit.de/nsu-prozess-blog/2015/02/25'
-        '/medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/' ==
-        browser.url)
+def test_link_object_should_redirect_permanently(testbrowser):
+    browser = testbrowser()
+    browser.mech_browser.set_handle_redirect(False)
+    try:
+        browser.open('/blogs/nsu-blog-bouffier')
+    except urllib2.HTTPError, e:
+        assert (
+            'http://blog.zeit.de/nsu-prozess-blog/2015/02/25'
+            '/medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/' ==
+            e.hdrs.get('location'))
 
 
-def test_link_object_teaser_should_point_directly_to_destination(httpbrowser):
+def test_link_object_teaser_should_point_directly_to_destination(testbrowser):
     # test it for ZMO
-    browser = httpbrowser('/zeit-magazin/test-cp/test-cp-zmo-3')
+    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-3')
     assert ('<a href="http://www.zeit.de/zeit-magazin/mode-design/2014-05/'
             'karl-lagerfeld-interview">') in browser.contents
     # test it for ZON
-    browser = httpbrowser('zeit-online/link-object')
+    browser = testbrowser('/zeit-online/link-object')
     href = ('http://blog.zeit.de/nsu-prozess-blog/2015/02/25/'
             'medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/')
     assert browser.cssselect('.teaser-fullwidth--blog a[href="%s"]' % href)

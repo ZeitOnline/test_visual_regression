@@ -126,20 +126,20 @@ def test_amp_has_correct_canonical_url(testbrowser):
         'http://localhost/zeit-online/article/amp')
 
 
-def test_amp_article_has_correct_webtrekk_pixel(httpbrowser, testserver):
-    browser = httpbrowser('/amp/zeit-online/article/amp')
+def test_amp_article_has_correct_webtrekk_pixel(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
     source = browser.cssselect('amp-pixel')[0].attrib.get('src')
     assert source == (
         u'https://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
-        u'redaktion.wirtschaft...article.zede|{url}/zeit-online/article/amp'
+        u'redaktion.wirtschaft...article.zede|'
+        u'localhost/zeit-online/article/amp'
         u',0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&cg3=wirtschaft&cg4=zede'
         u'&cg5=&cg6=&cg7=amp&cg8=wirtschaft/article&cg9=2016-01-22'
         u'&cp1=jochen wegner&cp2=wirtschaft/bild-text&cp3=1/2&cp4=wirtschaft;'
         u'flüchtlinge;flüchtling;weltwirtschaftsforum davos;arbeitsmarkt;'
         u'migration;europäische union&cp5=2016-01-22 11:55:46.556878+01:00'
         u'&cp6=7583&cp7=&cp8=zede&cp9=wirtschaft/article&cp10=&cp11='
-        u'&cp12=mobile.site&cp13=mobile&cp15=&cp25=amp').format(
-            url=testserver['http_address'])
+        u'&cp12=mobile.site&cp13=mobile&cp15=&cp25=amp')
 
 
 def test_amp_article_contains_sharing_links(testbrowser):

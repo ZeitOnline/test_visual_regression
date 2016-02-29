@@ -22,22 +22,22 @@ def test_framebuilder_can_disable_responsiveness(testbrowser):
     assert 'screen.css' not in browser.contents
 
 
-def test_framebuilder_should_slice_page_on_request(httpbrowser):
-    full_page = httpbrowser('/framebuilder').contents
+def test_framebuilder_should_slice_page_on_request(testbrowser):
+    full_page = testbrowser('/framebuilder').contents
 
-    head = httpbrowser('/framebuilder?page_slice=html_head').contents
-    assert not httpbrowser.cssselect('body')
+    head = testbrowser('/framebuilder?page_slice=html_head').contents
+    assert not testbrowser.cssselect('body')
     assert head in full_page
 
-    upper_body = httpbrowser('/framebuilder?page_slice=upper_body').contents
-    assert not httpbrowser.cssselect('head')
+    upper_body = testbrowser('/framebuilder?page_slice=upper_body').contents
+    assert not testbrowser.cssselect('head')
 
     sanitized = upper_body.replace('?page_slice=upper_body', '').strip()
     assert '</body>' not in sanitized
     assert sanitized in full_page
 
-    lower_body = httpbrowser('/framebuilder?page_slice=lower_body').contents
-    assert not httpbrowser.cssselect('head')
+    lower_body = testbrowser('/framebuilder?page_slice=lower_body').contents
+    assert not testbrowser.cssselect('head')
     assert '</body>' in lower_body
     assert lower_body.strip() in full_page
 

@@ -31,7 +31,6 @@ import zope.browserpage.metaconfigure
 import zope.event
 import zope.interface
 import zope.processlifetime
-import zope.testbrowser.browser
 import zope.testbrowser.wsgi
 
 import zeit.content.image.interfaces
@@ -631,13 +630,6 @@ def testbrowser(application):
 
 
 @pytest.fixture
-def httpbrowser(application, testserver):
-    """HTTP-level test browser for full stack testing"""
-    HttpBrowser.testserver = testserver
-    return HttpBrowser()
-
-
-@pytest.fixture
 def tplbrowser(jinja2_env):
     """Jinja template renderer with testbrowser-like API"""
     return TemplateBrowser(jinja2_env)
@@ -710,16 +702,6 @@ class WsgiBrowser(BaseBrowser, zope.testbrowser.wsgi.Browser):
         if not uri.startswith('http://localhost'):
             uri = 'http://localhost/{}'.format(uri.lstrip('/'))
         return super(WsgiBrowser, self).open(uri, data)
-
-
-class HttpBrowser(BaseBrowser, zope.testbrowser.browser.Browser):
-
-    testserver = None
-
-    def open(self, uri, data=None):
-        if self.testserver and not uri.startswith(self.testserver.url):
-            uri = '{}/{}'.format(self.testserver.url, uri.lstrip('/'))
-        return super(HttpBrowser, self).open(uri, data)
 
 
 class TemplateBrowser(BaseBrowser):
