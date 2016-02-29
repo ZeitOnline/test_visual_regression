@@ -728,7 +728,7 @@ def test_article_ads_should_have_pagetype_modifier(testbrowser):
 
 
 def test_does_not_break_when_author_has_no_display_name(
-        testserver, testbrowser):
+         testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = zeit.web.magazin.view_article.Article(
         context, pyramid.testing.DummyRequest())

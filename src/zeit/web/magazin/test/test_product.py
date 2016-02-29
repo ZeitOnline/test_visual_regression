@@ -13,13 +13,13 @@ def test_regular_gallery_should_render_according_to_type(testbrowser):
     assert '<div class="gallery">' in browser.contents
 
 
-def test_product_view_object_has_images(testbrowser):
+def test_product_view_object_has_images(application):
     product = 'http://xml.zeit.de/zeit-magazin/produkte/katzen-cafe-london'
     context = zeit.cms.interfaces.ICMSContent(product)
     assert len([context[i] for i in context]) == 7
 
 
-def test_product_view_object_has_correct_type(testbrowser):
+def test_product_view_object_has_correct_type(application):
     product = 'http://xml.zeit.de/zeit-magazin/produkte/katzen-cafe-london'
     context = zeit.cms.interfaces.ICMSContent(product)
     assert context.type == 'zmo-product'
