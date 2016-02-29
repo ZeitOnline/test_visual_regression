@@ -4,11 +4,7 @@
     <h1>{{ view.title }}</h1>
     {% for page in view.pages %}
         <section>
-            {% for block in page %}
-                {% if block | block_type == 'paragraph' %}
-                    <p>{{ block | safe }}</p>
-                {% endif %}
-            {% endfor %}
+            {%- include "zeit.web.core:templates/inc/article/page.html" -%}
         </section>
     {% endfor %}
 {% endblock %}
