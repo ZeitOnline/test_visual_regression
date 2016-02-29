@@ -198,6 +198,7 @@ def test_cp_has_correct_webtrekk_values(testserver, testbrowser):
             'cg3=lebensart&amp;cg4=zede&amp;cg5=&amp;cg6=&amp;'
             'cg7=test-cp-zmo&amp;cg8=zeitmz/centerpage&amp;'
             'cg9=').format(url=testserver['http_address']) in browser.contents
+    assert '26: "centerpage.centerpage"' in browser.contents
 
 
 def test_webtrekk_series_tag_is_set_corectly(testserver, testbrowser):

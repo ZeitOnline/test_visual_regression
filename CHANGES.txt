@@ -1,10 +1,37 @@
 Change log for zeit.web
 =======================
 
-2.59 (unreleased)
+2.61 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+2.60 (2016-02-29)
+-----------------
+
+- BUG-360: Invalidate sessions with uid=0 immediately
+
+- BUG-358: Switch to arrays as configured origin in adreload middleware
+
+- ZON-2779: Add webtrekk parameter with detailed content type information
+
+- ZON-2788: Add ads to Instant Articles
+
+
+2.59 (2016-02-25)
+-----------------
+
+- MAINT: Log community errors
+
+- FIX: Only consider usable max-height for responsive images,
+       fixes printkiosk teaser images
+
+- FIX: Fix failing test
+
+- FIX: Wait 2x500ms for memcache lock, then recreate value ourselves
+
+- FIX: Safeguard celeraone script with timeout and feature toggle
 
 
 2.58 (2016-02-23)
