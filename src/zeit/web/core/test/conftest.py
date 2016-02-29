@@ -663,7 +663,7 @@ class BaseBrowser(object):
 
     """
 
-    def __call__(self, uri, **kw):
+    def __call__(self, uri=None, **kw):
         if uri is not None:
             self.open(uri, **kw)
         return self
