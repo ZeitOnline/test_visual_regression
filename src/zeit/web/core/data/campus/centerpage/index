@@ -37,7 +37,7 @@
     <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">system.hp-assistent</attribute>
     <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-    <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/centerpage</attribute>
+    <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/centerpage/index</attribute>
     <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
     <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
     <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
