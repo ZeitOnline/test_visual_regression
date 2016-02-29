@@ -2,19 +2,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
 
-{% macro portraitbox(obj) -%}
-    {% if obj.name -%}
-        <figure class="portraitbox article__item article__item--marginalia">
-            <div class="portraitbox__heading">
-                {{ obj.name }}
-            </div>
-            <div class="portraitbox__body">
-                {{ obj.text | safe }}
-            </div>
-        </figure>
-    {%- endif %}
-{%- endmacro %}
-
 {% macro infobox(obj) -%}
     {% if obj.contents -%}
     {% set id = obj.title | attr_safe %}
