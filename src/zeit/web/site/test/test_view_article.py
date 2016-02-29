@@ -1323,6 +1323,17 @@ def test_instantarticle_should_render_empty_page_on_interrupt(testserver):
     assert len(resp.text) == 0
 
 
+def test_instantarticle_should_render_ads(testbrowser):
+    browser = testbrowser(
+        '/instantarticle/zeit-online/article/simple-multipage')
+    assert len(browser.cssselect(
+        'iframe[src$="/static/latest/html/fbia-ads/tile-4.html"]')) == 1
+    assert len(browser.cssselect(
+        'iframe[src$="/static/latest/html/fbia-ads/tile-5.html"]')) == 1
+    assert len(browser.cssselect(
+        'iframe[src$="/static/latest/html/fbia-ads/tile-8.html"]')) == 1
+
+
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-expired-image')
     assert len(browser.cssselect('.nextread.nextread--with-image')) == 0

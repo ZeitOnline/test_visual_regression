@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <features>
   <amp_advertising>true</amp_advertising>
+  <fbia_advertising>true</fbia_advertising>
   <article_lineage>true</article_lineage>
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>true</iqd>

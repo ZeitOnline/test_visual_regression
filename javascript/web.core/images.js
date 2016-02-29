@@ -134,19 +134,20 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
 
             height = width / ratio;
 
-            // be carefull, this would give 'dd%' for invisible elements
-            if ( $img.is( ':visible' ) ) {
-                styles = $img.css([ 'min-height', 'max-height' ]);
-                minHeight = parseFloat( styles[ 'min-height' ] );
-                maxHeight = parseFloat( styles[ 'max-height' ] );
+            // be carefull, css('max-height') gives you 'dd%' for invisible elements
+            // and for elements with percent values in webkit/blink
+            styles = $img.css([ 'min-height', 'max-height' ]);
+            minHeight = styles[ 'min-height' ];
+            minHeight = stringEndsWith( minHeight, 'px' ) ? parseFloat( minHeight ) : undefined;
+            maxHeight = styles[ 'max-height' ];
+            maxHeight = stringEndsWith( maxHeight, 'px' ) ? parseFloat( maxHeight ) : undefined;
 
-                if ( minHeight && minHeight > height ) {
-                    width = minHeight * ratio;
-                    height = minHeight;
-                } else if ( maxHeight && maxHeight < height ) {
-                    width = maxHeight * ratio;
-                    height = maxHeight;
-                }
+            if ( minHeight && minHeight > height ) {
+                width = minHeight * ratio;
+                height = minHeight;
+            } else if ( maxHeight && maxHeight < height ) {
+                width = maxHeight * ratio;
+                height = maxHeight;
             }
         }
 
@@ -167,6 +168,19 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
             height: origHeight,
             source: source
         };
+    }
+
+    /**
+     * images.js: mimic ECMAScript 6 String.prototype.endsWith()
+     * @function stringEndsWith
+     * @param  {string} subjectString   haystack
+     * @param  {string} searchString    needle
+     */
+    function stringEndsWith( subjectString, searchString ) {
+        var position = subjectString.length - searchString.length,
+            index = subjectString.indexOf( searchString, position );
+
+        return index !== -1 && index === position;
     }
 
     /**
