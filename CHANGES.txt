@@ -4,6 +4,8 @@ Change log for zeit.web
 2.60 (unreleased)
 -----------------
 
+- BUG-360: Invalidate sessions with uid=0 immediately
+
 - BUG-358: Switch to arrays as configured origin in adreload middleware
 
 - ZON-2779: Add webtrekk parameter with detailed content type information
