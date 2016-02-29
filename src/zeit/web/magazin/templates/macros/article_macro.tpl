@@ -163,49 +163,9 @@
     </div>
 {%- endmacro %}
 
-{% macro image(obj, loop) -%}
-    {% if obj | default_image_url -%}
-        <figure class="
-            {%- if obj.layout == 'large' or obj.layout == 'zmo-large-center' -%}
-                figure-full-width
-            {%- elif obj.layout == 'zmo-xl-header' -%}
-                figure-header
-            {%- elif obj.layout == 'zmo-medium-left' -%}
-                figure-horizontal
-            {%- elif obj.layout == 'zmo-medium-right' -%}
-                figure-horizontal--right
-            {%- elif obj.layout == 'zmo-medium-center' -%}
-                figure is-constrained is-centered
-            {%- elif obj.layout == 'zmo-small-left' -%}
-                figure-stamp
-            {%- elif obj.layout == 'zmo-small-right' -%}
-                figure-stamp--right
-            {%- else -%}
-                figure-stamp
-            {%- endif -%}
-            ">
-            <div class="scaled-image">
-                {{ lama.insert_responsive_image(obj, None, 'article') }}
-            </div>
-            <figcaption class="figure__caption">
-                {% if loop -%}
-                <span class="figure__index">{{ loop.index }}/{{ loop.length }}</span>
-                {% endif -%}
-                <span class="figure__text">{{ obj.caption | safe }}</span>
-                {% if obj.copyright|count and obj.copyright[0][0] != '©' %}
-                <span class="figure__copyright">
-                    {%- if obj.copyright[0][1] -%}
-                    <a href="{{ obj.copyright[0][1] }}" target="_blank">
-                    {%- endif -%}
-                        {{ obj.copyright[0][0] }}
-                    {%- if obj.copyright[0][1] -%}
-                    </a>
-                    {%- endif -%}
-                </span>
-                {% endif %}
-            </figcaption>
-        </figure>
-    {%- endif %}
+{% macro image(obj, loop) %}
+    {# BBB Wrap the article image in a macro until we have block templates in ZMO #}
+    {% include "zeit.web.magazin:templates/inc/asset/image_article.tpl" with context %}
 {%- endmacro %}
 
 {% macro headerimage(obj) -%}
