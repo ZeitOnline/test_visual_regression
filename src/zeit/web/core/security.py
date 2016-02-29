@@ -48,8 +48,10 @@ def is_reliable_user_info(user_info):
     """Check user info for all mandatory session values (including the
     successfully decoded SSO cookie value).
     """
-
-    return user_info.get('ssoid')
+    ssoid = user_info.get('ssoid')
+    if ssoid and (not user_info['uid'] or user_info['uid'] == '0'):
+        user_info['should_invalidate'] = True
+    return bool(ssoid)
 
 
 def reload_user_info(request):
@@ -144,9 +146,6 @@ def get_user_info(request):
     if len(user_info.get('roles', [])) == 1:
         roles = user_info['roles'][:]
         user_info['blocked'] = (roles.pop() == "anonymous user")
-
-    if sso_info and (not user_info['uid'] or user_info['uid'] == '0'):
-        user_info['should_invalidate'] = True
 
     return user_info
 

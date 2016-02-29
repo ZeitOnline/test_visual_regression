@@ -11,6 +11,8 @@
 
   <setting name="breaking_news_timeout" xsi:type="xsd:int">7200</setting>
 
+  <setting name="script_timeout" xsi:type="xsd:int">2000</setting>
+
   <setting name="comment_page_size" xsi:type="xsd:int">4</setting>
   <setting name="community_host_timeout_secs" xsi:type="xsd:int">10</setting>
 

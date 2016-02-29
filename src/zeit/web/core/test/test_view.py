@@ -217,6 +217,14 @@ def test_text_file_content_should_be_rendered(testbrowser):
     assert browser.contents == 'zeit.web\n'
 
 
+def test_c1_include_script_should_define_a_timeout_param(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    inline = u''.join(browser.xpath('//script/text()'))
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    assert 'url: "{}/tracking/tracking.js",\n\t\ttimeout: 2000,'.format(
+        conf.get('c1_prefix')) in inline
+
+
 def test_inline_gallery_should_be_contained_in_body(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)

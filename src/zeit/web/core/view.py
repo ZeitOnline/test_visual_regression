@@ -435,6 +435,10 @@ class Base(object):
             return None
 
     @zeit.web.reify
+    def detailed_content_type(self):
+        return zeit.web.core.interfaces.IDetailedContentType(self.context)
+
+    @zeit.web.reify
     def ad_delivery_type(self):
         return 'adcontroller'
 
@@ -542,11 +546,6 @@ class CeleraOneMixin(object):
     def _get_c1_kicker(self, prep=unicode):
         if getattr(self.context, 'supertitle', None) is not None:
             return prep(self.context.supertitle.strip())
-
-    @zeit.web.reify
-    def c1_prefix(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('c1_prefix')
 
     @zeit.web.reify
     def c1_client(self):

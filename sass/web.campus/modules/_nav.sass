@@ -252,7 +252,7 @@ $nav-color-border: #444
 			&--default
 				display: none
 
-		&__more-title
+		@at-root a#{&}__more-title
 			display: none
 
 
@@ -389,7 +389,7 @@ $nav-color-border: #444
 				+on-interaction
 					color: $nav-color-topics
 					border-color: currentColor
-		a#{&}__topics-link
+		@at-root a#{&}__topics-link
 			display: none
 
 		// TOOLS
