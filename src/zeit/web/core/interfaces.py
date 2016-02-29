@@ -112,21 +112,6 @@ class INextread(IFrontendBlock):
     """Nextread teaser block must be similar to zeit.content.cp.TeaserBlock"""
 
 
-class ITeaser(zope.interface.Interface):
-
-    image = zope.interface.Attribute('image')
-    gallery = zope.interface.Attribute('gallery')
-    video = zope.interface.Attribute('video')
-    context = zope.interface.Attribute('context')
-
-
-class ITeaserSequence(zope.interface.Interface):
-
-    context = zope.interface.Attribute('context')
-    sequence = zope.interface.Attribute('sequence')
-    refs = zope.interface.Attribute('refs')
-
-
 class ISettings(pyramid.interfaces.ISettings):
     """Dictionary of application configuration settings.
 

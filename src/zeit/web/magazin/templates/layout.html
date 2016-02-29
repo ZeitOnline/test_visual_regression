@@ -161,7 +161,9 @@
                                 </div>
                                 <div>
                                     <ul>
+                                        {% if provides(view.context, 'zeit.content.cp.interfaces.ICenterPage') %}
                                         <li><a class="js-image-copyright-footer" href="#bildrechte">Bildrechte</a></li>
+                                        {% endif %}
                                         <li><a href="{{ request.route_url('home') }}hilfe/datenschutz">Datenschutz</a></li>
                                         <li><a href="http://www.iqm.de/digital/nutzungsbasierte-onlinewerbung/">Cookies</a></li>
                                         <li><a href="{{ request.route_url('home') }}administratives/agb-kommentare-artikel">AGB</a></li>
@@ -190,12 +192,6 @@
                         </script>
                     </footer>
                 {% endblock footer %}
-                {% endprofile %}
-
-                {% profile %}
-                {% if view.copyrights -%}
-                    {{ lama.copyrights(view.copyrights) }}
-                {%- endif %}
                 {% endprofile %}
 
             </div><!-- end: #js-page-wrap-inner -->

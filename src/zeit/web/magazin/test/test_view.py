@@ -194,7 +194,7 @@ def test_footer_should_have_expected_structure(testserver, testbrowser):
     list_top = linklists[0]
     list_bottom = linklists[1]
     assert len(list_top.cssselect('li')) == 3
-    assert len(list_bottom.cssselect('li')) == 6
+    assert len(list_bottom.cssselect('li')) == 5
 
 
 def test_article_request_should_have_body_element(testserver, testbrowser):
