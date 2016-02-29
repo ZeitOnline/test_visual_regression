@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.60 (unreleased)
+2.60 (2016-02-29)
 -----------------
 
 - BUG-360: Invalidate sessions with uid=0 immediately
