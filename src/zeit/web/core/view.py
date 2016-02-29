@@ -892,6 +892,11 @@ class service_unavailable(object):  # NOQA
         return pyramid.response.Response(body, 503)
 
 
+class FrameBuilder(CeleraOneMixin):
+
+    inline_svg_icons = True
+
+
 @pyramid.view.notfound_view_config()
 def not_found(request):
     body = 'Status 404: Dokument nicht gefunden.'
