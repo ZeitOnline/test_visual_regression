@@ -46,8 +46,8 @@
   <variant old="zmo-medium-left" new="wide"/>
   <variant old="zmo-medium-right" new="wide"/>
   <variant old="zmo-small-center" new="wide"/>
-  <variant old="zmo-small-left" new="wide"/>
-  <variant old="zmo-small-right" new="wide"/>
+  <variant old="zmo-small-left" new="portrait"/>
+  <variant old="zmo-small-right" new="portrait"/>
 
   <variant old="zmo-xl" new="super"/>
   <variant old="zmo-xl-header" new="super"/>
