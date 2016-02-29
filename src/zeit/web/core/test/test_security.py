@@ -144,6 +144,31 @@ def test_unreachable_community_should_not_produce_error(dummy_request):
     assert get_user_info(dummy_request) == user_info
 
 
+def test_unreachable_community_counts_as_logged_in_but_marks_session_invalid(
+        dummy_request, monkeypatch):
+    dummy_request.registry.settings['community_host'] = (
+        'http://thisurlshouldnotexist.moep/')
+    dummy_request.cookies['my_sso_cookie'] = 'present'
+    monkeypatch.setattr(
+        zeit.web.core.security, 'get_user_info_from_sso_cookie',
+        lambda *args: {'id': '123'})
+    assert dummy_request.user['ssoid']
+    assert dummy_request.user['should_invalidate']
+
+
+def test_session_with_uid_0_marks_session_invalid(dummy_request, monkeypatch):
+    dummy_request.cookies['my_sso_cookie'] = 'present'
+    monkeypatch.setattr(
+        zeit.web.core.security, 'get_user_info_from_sso_cookie',
+        lambda *args: {'id': '123'})
+    dummy_request.session['user'] = {
+        'ssoid': '123',
+        'uid': 0,
+    }
+    assert dummy_request.user['ssoid']
+    assert dummy_request.user['should_invalidate']
+
+
 @pytest.mark.xfail(reason='Testing broken dependencies is an unsolved issue.')
 def test_malformed_agatho_response_should_not_produce_error(http_testserver):
     mocked_request = mock.MagicMock()

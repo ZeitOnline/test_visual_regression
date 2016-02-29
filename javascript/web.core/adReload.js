@@ -20,6 +20,17 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
     },
     /**
+     * test if a supplied origin fits into the configured list of origins
+     * be backward compatible to older form of string
+     * @param  {string|array}   configuredOrigin list of origins from the config
+     * @param  {object}  event  message event object
+     * @return {Boolean}
+     */
+    isValidOrigin = function( configuredOrigin, event ) {
+        configuredOrigin  = typeof configuredOrigin === 'string' ? [ configuredOrigin ] : configuredOrigin;
+        return $.inArray( event.originalEvent.origin, configuredOrigin ) > -1;
+    },
+    /**
      * check timer and click interval
      * @param  {object} myconfig configuration section read from json before
      * @return {bool}
@@ -145,7 +156,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
         if ( typeof messageData.name !== 'string' ||
                 typeof config[messageData.name] === 'undefined' ||
-                event.originalEvent.origin !== config[messageData.name].origin ) {
+                !isValidOrigin( config[messageData.name].origin, event ) ) {
             log( 'error', 'messageData not correctly set' );
             return;
         }

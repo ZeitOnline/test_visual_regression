@@ -238,3 +238,11 @@ class IPagination(zope.interface.Interface):
     total_page = zope.interface.Attribute(
         'Number of pages available.')
     pagination = zope.interface.Attribute('A list of page numbers.')
+
+
+class IDetailedContentType(zope.interface.Interface):
+    """Returns more detailed content type information, not just
+    article/centerpage/etc. but also the CP-Type or Article-Template etc.
+
+    The format is a dotted string, e.g. 'centerpage.topicpage.person'.
+    """

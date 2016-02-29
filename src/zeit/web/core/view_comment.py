@@ -207,25 +207,29 @@ class PostComment(zeit.web.core.view.Base):
             except requests.exceptions.HTTPError as err:
                 if response.status_code == 409:
                     try:
-                        msg = json.loads(response.content)['error_message']
+                        detail = json.loads(response.content)['error_message']
                     except (AttributeError, KeyError, ValueError):
-                        msg = None
+                        detail = u''
+                    message = u'user_name could not be set'
+                    log.warning(message + u' ' + detail)
                     raise pyramid.httpexceptions.HTTPBadRequest(
-                        title='user_name could not be set', explanation=msg)
+                        title=message, explanation=detail)
                 else:
+                    message = u'Action {} could not be performed'.format(
+                        action)
+                    detail = (u'Status code {} was sent for action {} '
+                              u'on resource {}'.format(
+                                  response.status_code, action, unique_id))
+                    log.warning(message + u' ' + detail)
                     raise pyramid.httpexceptions.HTTPInternalServerError(
-                        title='Action {} could not be performed'.format(
-                            action),
-                        explanation=('Status code {} was send for action {} '
-                                     'on resource {}').format(
-                            response.status_code, action, unique_id))
+                        title=message, explanation=detail)
             except requests.exceptions.RequestException as err:
+                message = u'Action {} could not be performed'.format(action)
+                detail = u'{} was raised for action {} on resource {}'.format(
+                    type(err).__name__, action, unique_id)
+                log.warning(message + u' ' + detail)
                 raise pyramid.httpexceptions.HTTPInternalServerError(
-                    title='Action {} could not be performed'.format(
-                        action),
-                    explanation=('{} was raised for action {} '
-                                 'on resource {}').format(
-                        type(err).__name__, action, unique_id))
+                    title=message, explanation=detail)
 
         self.status.append('Action {} was performed for {}'
                            ' (with pid {})'.format(method, unique_id, pid))
