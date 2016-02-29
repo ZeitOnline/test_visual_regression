@@ -12,16 +12,16 @@ from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
 
 
-def test_inline_gallery_is_there(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/01' % testserver.url)
+def test_inline_gallery_is_there(testbrowser):
+    browser = testbrowser('/artikel/01')
     assert '<div class="inline-gallery"' in browser.contents
 
 
-def test_nonexistent_gallery_is_ignored(testserver, testbrowser, workingcopy):
+def test_nonexistent_gallery_is_ignored(testbrowser, workingcopy):
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     with checked_out(article) as co:
         co.xml.body.division.gallery.set('href', 'http://xml.zeit.de/invalid')
-    browser = testbrowser('%s/artikel/01' % testserver.url)
+    browser = testbrowser('/artikel/01')
     assert '<div class="inline-gallery"' not in browser.contents
 
 
@@ -47,21 +47,20 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
         # test overlay buttons
         overlaynext = driver.find_element_by_css_selector(onextselector)
         script = 'return $(".bx-overlay-next").css("opacity")'
-        elemOpacity = driver.execute_script(script)
+        elem_opacity = driver.execute_script(script)
         overlayprev = driver.find_element_by_css_selector(onextselector)
         assert overlaynext
         assert overlayprev
         overlaynext.click()
         script = 'return $(".bx-overlay-next").css("opacity")'
-        elemOpacityLater = driver.execute_script(script)
+        elem_opacity_later = driver.execute_script(script)
         overlayprev.click()
         # opacity should have changed
-        assert elemOpacity != elemOpacityLater
+        assert elem_opacity != elem_opacity_later
 
 
-def test_inline_gallery_uses_responsive_images_with_ratio(
-        testserver, testbrowser):
-    browser = testbrowser('%s/artikel/01' % testserver.url)
+def test_inline_gallery_uses_responsive_images_with_ratio(testbrowser):
+    browser = testbrowser('/artikel/01')
     image = browser.cssselect('.inline-gallery .slide')[0]
     assert 'data-ratio="1.77914110429"' in lxml.etree.tostring(image)
 

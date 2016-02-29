@@ -1,0 +1,5 @@
+{% if toggles('fbia_advertising') -%}
+<figure class="op-ad">
+    <iframe height="320" width="320" src="{{ request.asset_host }}/html/fbia-ads/tile-{{ tile_number | default(4) }}.html"></iframe>
+</figure>
+{% endif -%}
