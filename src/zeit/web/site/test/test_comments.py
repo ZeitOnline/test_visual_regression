@@ -310,3 +310,17 @@ def test_comment_area_should_have_login_prompt_enabled(
     view = zeit.web.core.view.Content(article, dummy_request)
     # Login prompt is rendered by comment-form template
     assert view.comment_area['show_comment_form'] is True
+
+
+def test_comment_area_should_show_message_for_blocked_users(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+    request.session['user'] = {
+        'blocked': True,
+        'premoderation': False,
+        'uid': '0'}
+    view = zeit.web.core.view.Content(article, request)
+    # This is a bit implicit; the actual message is rendered by the template.
+    assert not view.comment_area['note']
+    assert not view.comment_area['message']

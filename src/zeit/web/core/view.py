@@ -847,8 +847,7 @@ class Content(CeleraOneMixin, Base):
             note = None
         elif self.community_maintenance['scheduled']:
             message = self.community_maintenance['text_scheduled']
-
-        if not valid_community_login:
+        elif not valid_community_login:
             note = (u'Aufgrund eines technischen Fehlers steht Ihnen die '
                     u'Kommentarfunktion kurzfristig nicht zur Verfügung. '
                     u'Bitte entschuldigen Sie diese Störung.')
