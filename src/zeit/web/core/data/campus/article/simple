@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
-    <rankedTags xmlns:ns10="http://codespeak.net/lxml/objectify/pytype">
+    <rankedTags>
       <tag type="free" url_value="student" uuid="65f229d9-f0e9-434a-9f40-d541d927a413">Student</tag>
       <tag score="5" type="topic" url_value="hochschule" uuid="b8bea0ad-05bf-4eee-b35a-6b1fd478d777">Hochschule</tag>
       <tag score="4" type="free" url_value="auslandssemester" uuid="6430e636-640f-4447-9f42-1116f424a85b">Auslandssemester</tag>

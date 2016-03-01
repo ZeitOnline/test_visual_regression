@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <author href="http://xml.zeit.de/autoren/F/Thomas_Fischer/index" publication-date="" expires="">
       <display_name>Thomas Fischer</display_name>

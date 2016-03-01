@@ -21,10 +21,10 @@
         </author>
       </reference>
     </references>
-    <rankedTags xmlns:ns11="http://codespeak.net/lxml/objectify/pytype">
-      <tag ns11:pytype="str" uuid="b5d22ffb-1835-49a8-838c-d78e65010d46" url_value="technologie" type="free">Technologie</tag>
-      <tag ns11:pytype="str" uuid="36b3047e-ec5e-4e41-aad0-1e2923eab98b" url_value="innovation" type="free">Innovation</tag>
-      <tag ns11:pytype="str" uuid="9ae70abb-71ab-48fe-83fc-4dbaca719a43" url_value="digitaltechnik" type="topic">Digitaltechnik</tag>
+    <rankedTags>
+      <tag uuid="b5d22ffb-1835-49a8-838c-d78e65010d46" url_value="technologie" type="free">Technologie</tag>
+      <tag uuid="36b3047e-ec5e-4e41-aad0-1e2923eab98b" url_value="innovation" type="free">Innovation</tag>
+      <tag uuid="9ae70abb-71ab-48fe-83fc-4dbaca719a43" url_value="digitaltechnik" type="topic">Digitaltechnik</tag>
       <tag type="free" score="4" uuid="1c47d701-cb9a-413e-9d52-c8e243c56de1" url_value="smartphone">Smartphone</tag>
       <tag type="free" score="4" uuid="93188320-ae1f-4c8a-a096-63254ff463cb" url_value="apps">Apps</tag>
       <tag type="Organization" score="7" uuid="aa3d17b4-aa8d-4131-a0d0-dca38ad4c244" url_value="google">Google</tag>
