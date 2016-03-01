@@ -90,6 +90,6 @@ def test_ad_tile2_not_ommitted_in_landscape(
 
 
 @pytest.mark.xfail(reason='ad scripts may timeout')
-def test_ad_content_ad_in_article(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/01' % testserver.url)
+def test_ad_content_ad_in_article(testbrowser):
+    browser = testbrowser('/artikel/01')
     assert browser.cssselect('#iq-artikelanker')
