@@ -32,5 +32,9 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
 
     def __init__(self, context, request):
         super(FrameBuilder, self).__init__(context, request)
-        self.context = zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/campus/index')
+        try:
+            self.context = zeit.cms.interfaces.ICMSContent(
+                'http://xml.zeit.de/campus/index')
+            self.context.advertising_enabled = self.banner_on
+        except TypeError:
+            raise pyramid.httpexceptions.HTTPNotFound()
