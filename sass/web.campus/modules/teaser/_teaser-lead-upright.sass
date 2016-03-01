@@ -1,0 +1,49 @@
+.teaser-lead-upright
+	@extend %teaser
+
+	&__heading
+		@extend %teaser-heading
+
+	&__media
+		background-color: $greyish-white
+		height: 0
+		padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
+
+	&__content
+		padding: 0 $page-padding--small
+
+	&__kicker
+		@extend %teaser-kicker
+
+	&__title
+		@extend %teaser-title
+		font-size: em(42px)
+		// TODO: was taugt BEM, wenn wir vererben und damit Sachen kaputtmachen?
+
+	&__text
+		@extend %teaser-text
+
++respond-min($break-tablet-min)
+	.teaser-lead-upright
+		border: none
+		margin: $cp-padding*2
+		position: relative
+		&__media
+			width: 50%
+			padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4)
+		&__content
+			background: $white
+			left: 33.333% // 4/12 laut Screendesign
+			padding: remify(30px 0 35px 30px)
+			position: absolute
+			top: remify(65px)
+		&__title
+			font-size: remify(64px)
+		&__text
+			font-size: remify(18px)
+			line-height: remify(24px)
+
++respond-min($break-desktop-min)
+	.teaser-lead-upright
+		&__content
+			top: remify(69px)
