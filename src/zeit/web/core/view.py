@@ -813,16 +813,10 @@ class Content(CeleraOneMixin, Base):
 
     @zeit.web.reify
     def comment_area(self):
-        user_blocked = False
-        premoderation = False
-        uid = 0
-        valid_community_login = True
-
-        if self.request.user:
-            user_blocked = self.request.user.get('blocked')
-            premoderation = self.request.user.get('premoderation')
-            uid = self.request.user.get('uid')
-            valid_community_login = True if uid and uid != '0' else False
+        user = self.request.user
+        user_blocked = user.get('blocked')
+        premoderation = user.get('premoderation')
+        valid_community_login = user.get('uid') and user.get('uid') != '0'
 
         # used for general alerts in the comment section header
         message = None
