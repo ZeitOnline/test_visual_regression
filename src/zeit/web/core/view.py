@@ -813,16 +813,13 @@ class Content(CeleraOneMixin, Base):
 
     @zeit.web.reify
     def comment_area(self):
-        user_blocked = False
-        premoderation = False
-        uid = 0
-        valid_community_login = True
-
-        if self.request.user:
-            user_blocked = self.request.user.get('blocked')
-            premoderation = self.request.user.get('premoderation')
-            uid = self.request.user.get('uid')
-            valid_community_login = True if uid and uid != '0' else False
+        user = self.request.user
+        user_blocked = user.get('blocked')
+        premoderation = user.get('premoderation')
+        valid_community_login = (
+            user.get('has_community_data') and
+            user.get('uid') and user.get('uid') != '0')
+        authenticated = user.get('ssoid')
 
         # used for general alerts in the comment section header
         message = None
@@ -847,17 +844,19 @@ class Content(CeleraOneMixin, Base):
             note = None
         elif self.community_maintenance['scheduled']:
             message = self.community_maintenance['text_scheduled']
-
-        if not valid_community_login:
+        elif not valid_community_login:
             note = (u'Aufgrund eines technischen Fehlers steht Ihnen die '
                     u'Kommentarfunktion kurzfristig nicht zur Verfügung. '
                     u'Bitte entschuldigen Sie diese Störung.')
 
         return {
             'show': (self.comments_allowed or bool(self.comments)),
-            'show_comment_form': not self.community_maintenance['active'] and (
-                self.comments_allowed) and self.comments_loadable and (
-                    not user_blocked) and valid_community_login,
+            # For not authenticated users this means "show_login_prompt".
+            'show_comment_form': (
+                not self.community_maintenance['active'] and
+                self.comments_allowed and self.comments_loadable and
+                ((not user_blocked and valid_community_login) or
+                 not authenticated)),
             'show_comments': not self.community_maintenance['active'] and (
                 self.comments_loadable and bool(self.comments)),
             'no_comments': (not self.comments and self.comments_loadable),

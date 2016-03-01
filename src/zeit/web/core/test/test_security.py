@@ -140,7 +140,8 @@ def test_unreachable_community_should_not_produce_error(dummy_request):
     dummy_request.cookies['drupal-userid'] = 23
     dummy_request.headers['Cookie'] = ''
     user_info = dict(uid=0, name=None, picture=None, roles=[],
-                     mail=None, premoderation=False, should_invalidate=False)
+                     mail=None, premoderation=False, should_invalidate=False,
+                     has_community_data=False)
     assert get_user_info(dummy_request) == user_info
 
 

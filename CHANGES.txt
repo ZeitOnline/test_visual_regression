@@ -4,6 +4,8 @@ Change log for zeit.web
 2.61 (unreleased)
 -----------------
 
+- FIX: Display proper error message to blocked users
+
 - MAINT: Introduce `request.user` object, created once per request
 
 - MAINT: Switch default testbrowser to wsgi, add template browser and
