@@ -797,19 +797,18 @@ class Content(CeleraOneMixin, Base):
 
     @zeit.web.reify
     def nextread(self):
-        return zeit.web.core.interfaces.INextread(self.context)
+        return zeit.web.core.interfaces.INextread(self.context, [])
 
     @zeit.web.reify
     def nextread_ad(self):
-        return zope.component.getAdapter(
+        return zope.component.queryAdapter(
             self.context, zeit.web.core.interfaces.INextread,
-            name="advertisement")
+            'advertisement', [])
 
     @zeit.web.reify('default_term')
     def comment_counts(self):
-        if self.nextread:
-            return zeit.web.core.comments.get_counts(
-                [t.uniqueId for t in self.nextread])
+        return zeit.web.core.comments.get_counts(
+            [t.uniqueId for t in self.nextread])
 
     @zeit.web.reify
     def comment_area(self):
