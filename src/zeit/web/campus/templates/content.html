@@ -38,15 +38,12 @@
         {% endblock article_heading %}
         {% block article_body %}
         <div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
-        {% for page in view.pages %}
-            <section>
-                {% for block in page %}
-                    {% if block | block_type == 'paragraph' %}
-                        <p>{{ block | safe }}</p>
-                    {% endif %}
-                {% endfor %}
-            </section>
-        {% endfor %}
+            {% block article_pages %}
+                <!-- Here goes the content for a page -->
+            {% endblock article_pages %}
+            {% block article_pagination %}
+                <!-- Here goes the pagination -->
+            {% endblock article_pagination %}
         </div>
         {% endblock article_body %}
     </article>
