@@ -19,6 +19,12 @@
         image_pattern="square"
         areas="duo"
         />
+    <layout
+        id="zco-lead-upright"
+        title="Aufmacher hochkant"
+        image_pattern="portrait"
+        areas="solo"
+        />
 
     <!-- Teaser formats for new ZON-Centerpages -->
     <layout
