@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <rankedTags xmlns:ns10="http://codespeak.net/lxml/objectify/pytype">
       <tag type="free" url_value="student" uuid="65f229d9-f0e9-434a-9f40-d541d927a413">Student</tag>
