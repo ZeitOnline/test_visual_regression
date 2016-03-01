@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2834: Introduce article header for ZEIT Campus
 
+- FIX: Display proper error message to blocked users
+
 - MAINT: Introduce `request.user` object, created once per request
 
 - MAINT: Switch default testbrowser to wsgi, add template browser and
