@@ -119,7 +119,7 @@ def test_request_thread_should_handle_non_ascii_urls(application, mockserver):
     assert zeit.web.core.comments.request_thread(u'ümläut') is None
 
 
-def test_comment_to_dict_should_parse_correctly(application, testserver):
+def test_comment_to_dict_should_parse_correctly(application):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')
 
@@ -151,7 +151,7 @@ def test_comment_to_dict_should_parse_correctly(application, testserver):
     assert comment['name'] == ''
 
 
-def test_entire_thread_should_be_parsed(application, testserver):
+def test_entire_thread_should_be_parsed(application):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id, sort='desc')
@@ -164,7 +164,7 @@ def test_entire_thread_should_be_parsed(application, testserver):
     assert len(last['replies']) == 1
 
 
-def test_thread_should_have_valid_page_information(application, testserver):
+def test_thread_should_have_valid_page_information(application):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id)
@@ -644,22 +644,22 @@ def test_article_view_should_set_comments_not_loadable_prop(
 
 
 def test_article_view_should_have_short_caching_time_on_unloadable_thread(
-        application, testbrowser, testserver, monkeypatch):
-    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+        application, testbrowser, monkeypatch):
+    browser = testbrowser('/zeit-online/article/01')
     assert browser.headers.get('cache-control') == 'max-age=10'
 
     def get_thread(
             unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
         raise zeit.web.core.comments.ThreadNotLoadable()
     monkeypatch.setattr(zeit.web.core.comments, 'get_thread', get_thread)
-    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+    browser = testbrowser('/zeit-online/article/01')
     assert browser.headers.get('cache-control') == 'max-age=5'
     assert browser.cssselect('.comment-section__message')[0].text.strip() == (
         u'Ein technischer Fehler ist aufgetreten. Die Kommentare '
         u'zu diesem Artikel konnten nicht geladen werden. Bitte '
         u'entschuldigen Sie diese Störung.')
 
-    browser = testbrowser('%s/artikel/01' % testserver.url)
+    browser = testbrowser('/artikel/01')
     assert browser.headers.get('cache-control') == 'max-age=5'
 
 
@@ -852,8 +852,7 @@ def test_user_comments_should_raise_exception_if_no_cid_given(application):
         zeit.web.core.comments.UserComment(xml)
 
 
-def test_user_comment_thread_should_have_expected_structure(
-        application, testserver):
+def test_user_comment_thread_should_have_expected_structure(application):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/author3')
     thread = zeit.web.core.comments.get_user_comments(author)

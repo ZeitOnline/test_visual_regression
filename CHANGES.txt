@@ -6,6 +6,9 @@ Change log for zeit.web
 
 - MAINT: Introduce `request.user` object, created once per request
 
+- MAINT: Switch default testbrowser to wsgi, add template browser and
+         clean lots(!) of tests with testserver.url and inappropriate fixtures
+
 
 2.60 (2016-02-29)
 -----------------

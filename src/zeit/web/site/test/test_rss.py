@@ -86,10 +86,8 @@ def test_spektrum_image_should_have_expected_attributes(application):
     assert meta.alt == 'Puzzle'
 
 
-def test_spektrum_parquet_should_render_special_parquet_link(
-        testbrowser, testserver):
-    browser = testbrowser(
-        '%s/zeit-online/parquet-feeds' % testserver.url)
+def test_spektrum_parquet_should_render_special_parquet_link(testbrowser):
+    browser = testbrowser('/zeit-online/parquet-feeds')
     teasers = browser.cssselect(
         '.parquet-meta__more.parquet-meta__more--spektrum')
     actual_amount = len(teasers)
@@ -118,10 +116,9 @@ def test_spektrum_parquet_should_display_meta_more(
 
 
 def test_spektrum_area_should_render_empty_if_feed_unavailable(
-        testbrowser, testserver, monkeypatch):
+        testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.site.area.rss.RSSArea, 'values', list)
-    browser = testbrowser(
-        '%s/zeit-online/parquet-feeds' % testserver.url)
+    browser = testbrowser('/zeit-online/parquet-feeds')
     assert not browser.cssselect('.teaser-small')
 
 
@@ -140,7 +137,7 @@ def test_rss_feed_of_cp_has_requested_format(testserver):
         feed)
 
 
-def test_spektrum_also_renders_on_ng_centerpages(testbrowser, testserver):
+def test_spektrum_also_renders_on_ng_centerpages(testbrowser):
     browser = testbrowser('/zeit-online/parquet')
     rows = browser.cssselect('.cp-region--parquet .cp-area--spektrum')
     assert len(rows) == 1, (
