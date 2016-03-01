@@ -4,6 +4,8 @@ Change log for zeit.web
 2.61 (unreleased)
 -----------------
 
+- MAINT: Introduce `request.user` object, created once per request
+
 - MAINT: Switch default testbrowser to wsgi, add template browser and
          clean lots(!) of tests with testserver.url and inappropriate fixtures
 
@@ -24,6 +26,7 @@ Change log for zeit.web
 -----------------
 
 - MAINT: Log community errors
+>>>>>>> master
 
 - FIX: Only consider usable max-height for responsive images,
        fixes printkiosk teaser images
