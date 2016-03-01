@@ -4,7 +4,7 @@ Change log for zeit.web
 2.62 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Ensure stable return type for nextreads and comment counts
 
 
 2.61.2 (2016-03-02)
@@ -118,8 +118,6 @@ Change log for zeit.web
 - MAINT: Disuse rsynced node-comment-statistics in favor of API endpoint
 
 - MAINT: Migrate feature toggles from view attributes to jinja global
-
-- FIX: Be more defensive with comment_count in nextread teaser
 
 
 2.56.3 (2016-02-19)
