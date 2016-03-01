@@ -3,6 +3,7 @@
 
 	&__heading
 		@extend %teaser-heading
+		margin: remify(0 0 10px)
 
 	&__media
 		background-color: $greyish-white
@@ -10,18 +11,29 @@
 		padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
 
 	&__content
-		padding: 0 $page-padding--small
+		margin-top: remify(-32px)
 
 	&__kicker
 		@extend %teaser-kicker
 
 	&__title
 		@extend %teaser-title
-		font-size: em(42px)
-		// TODO: was taugt BEM, wenn wir vererben und damit Sachen kaputtmachen?
+		font-size: remify(42px)
 
 	&__text
 		@extend %teaser-text
+
++respond-max($break-tablet-min)
+	.teaser-lead-upright
+		&__kicker,
+		&__title,
+		&__text,
+		&__byline
+			padding-left: remify($page-padding--small)
+		&__text,
+		&__byline
+			max-width: 95%
+			padding-right: remify($page-padding--small)
 
 +respond-min($break-tablet-min)
 	.teaser-lead-upright
@@ -30,13 +42,16 @@
 		position: relative
 		&__media
 			width: 50%
-			padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4)
+			padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4), refers to half-width
 		&__content
 			background: $white
 			left: 33.333% // 4/12 laut Screendesign
-			padding: remify(30px 0 35px 30px)
+			margin-top: 0
+			padding: remify(18px 0 35px 30px) // top: 30, but font has 12px padding(?)
 			position: absolute
 			top: remify(65px)
+		&__kicker
+			position: relative
 		&__title
 			font-size: remify(64px)
 		&__text
