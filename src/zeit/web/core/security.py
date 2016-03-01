@@ -48,7 +48,7 @@ def is_reliable_user_info(user_info):
     successfully decoded SSO cookie value).
     """
     ssoid = user_info.get('ssoid')
-    if ssoid and (not user_info['uid'] or user_info['uid'] == '0'):
+    if ssoid and not user_info.get('has_community_data'):
         user_info['should_invalidate'] = True
     return bool(ssoid)
 
@@ -70,6 +70,7 @@ def get_user_info(request):
         name=None,
         mail=None,
         should_invalidate=False,
+        has_community_data=False,
         picture=None,
         roles=[],
         premoderation=False)
@@ -124,6 +125,7 @@ def get_user_info(request):
         roles = user_info['roles'][:]
         user_info['blocked'] = (roles.pop() == "anonymous user")
 
+    user_info['has_community_data'] = True
     return user_info
 
 

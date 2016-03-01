@@ -816,7 +816,10 @@ class Content(CeleraOneMixin, Base):
         user = self.request.user
         user_blocked = user.get('blocked')
         premoderation = user.get('premoderation')
-        valid_community_login = user.get('uid') and user.get('uid') != '0'
+        valid_community_login = (
+            user.get('has_community_data') and
+            user.get('uid') and user.get('uid') != '0')
+        authenticated = user.get('ssoid')
 
         # used for general alerts in the comment section header
         message = None
@@ -848,9 +851,12 @@ class Content(CeleraOneMixin, Base):
 
         return {
             'show': (self.comments_allowed or bool(self.comments)),
-            'show_comment_form': not self.community_maintenance['active'] and (
-                self.comments_allowed) and self.comments_loadable and (
-                    not user_blocked) and valid_community_login,
+            # For not authenticated users this means "show_login_prompt".
+            'show_comment_form': (
+                not self.community_maintenance['active'] and
+                self.comments_allowed and self.comments_loadable and
+                ((not user_blocked and valid_community_login) or
+                 not authenticated)),
             'show_comments': not self.community_maintenance['active'] and (
                 self.comments_loadable and bool(self.comments)),
             'no_comments': (not self.comments and self.comments_loadable),
