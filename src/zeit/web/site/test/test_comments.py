@@ -164,7 +164,7 @@ def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
         'http://xml.zeit.de/zeit-online/article/01')
 
     request = mock.MagicMock()
-    request.authenticated_userid = 123
+    request.user = {'ssoid': 123}
     request.session = {'user': {'uid': '123', 'name': 'Max'}}
     request.path_url = 'http://xml.zeit.de/zeit-online/article/01'
     request.params = {'cid': None}
@@ -281,7 +281,7 @@ def test_comment_area_should_have_no_comment_form(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     request = pyramid.testing.DummyRequest()
-    request.session['user'] = {
+    request.user = {
         'blocked': False,
         'premoderation': False,
         'uid': 0}
@@ -294,7 +294,7 @@ def test_comment_area_should_have_comment_form(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     request = pyramid.testing.DummyRequest()
-    request.session['user'] = {
+    request.user = {
         'blocked': False,
         'premoderation': False,
         'uid': '1'}
@@ -303,11 +303,10 @@ def test_comment_area_should_have_comment_form(application):
     assert view.comment_area['show_comment_form'] is True
 
 
-def test_comment_area_should_have_login_prompt_enabled(application):
+def test_comment_area_should_have_login_prompt_enabled(
+        application, dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
-    request = pyramid.testing.DummyRequest()
-
-    view = zeit.web.core.view.Content(article, request)
+    view = zeit.web.core.view.Content(article, dummy_request)
     # Login prompt is rendered by comment-form template
     assert view.comment_area['show_comment_form'] is True
