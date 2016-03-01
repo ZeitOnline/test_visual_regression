@@ -5,7 +5,7 @@
     <article itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
         {% block article_heading -%}
-            {% include ["zeit.web.campus:templates/inc/article-header/{}.html".format(view.type),
+            {% include ["zeit.web.campus:templates/inc/article-header/{}.html".format(view.article_layout),
                         "zeit.web.campus:templates/inc/article-header/default.html"] %}
         {% endblock article_heading -%}
         {% block article_body %}

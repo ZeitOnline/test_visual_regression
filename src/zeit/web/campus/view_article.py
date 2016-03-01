@@ -18,10 +18,10 @@ class Article(
         zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
 
     @zeit.web.reify
-    def type(self):
+    def article_layout(self):
         if zeit.web.core.template.column(self.context):
             return 'column'
         elif zeit.web.core.template.leserartikel(self.context):
             return 'leserartikel'
         else:
-            return super(Article, self).type
+            return 'default'

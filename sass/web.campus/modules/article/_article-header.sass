@@ -29,7 +29,7 @@
 			content: "Thema"
 			opacity: .58
 			margin-right: .5em
-		&--article
+		&--default
 			margin-bottom: remify(10px)
 		&--column
 			margin: 0
@@ -39,7 +39,7 @@
 	&__headline
 		text-transform: uppercase
 		margin: 0
-		&--article
+		&--default
 			+unpadded
 			background-color: $color-background
 			margin-top: remify(-66px)
@@ -90,6 +90,70 @@
 		> span:last-child:after
 			content: none
 
+
+	// Kolumne
+	&--column
+		+unpadded
+		background-color: $color-article-secondary
+
+		.article-header__byline,
+		.article-header__metadata
+			display: inline
+			margin: 0
+		.article-header__byline + .article-header__metadata
+			&:before
+				content: " / "
+				margin: 0 .25em
+
+	&__column-image
+		+background-image(linear-gradient(to top, #003fb4, $color-article-primary))
+		bottom: remify(52px)
+		overflow: hidden
+		position: absolute
+		right: $page-padding--small
+		width: remify(80px)
+	&__column-wrap
+		position: relative
+	&__column-info
+		padding: $page-padding--small
+	&__column-details
+		padding-right: remify(90px)
+	&__headline
+		&--column
+			span
+				color: $color-text
+
+	// Leserartikel
+	&--leserartikel
+		.article-header__media
+			padding-bottom: 100% / 16 * 9 // image variant 'wide'
+		.article-header__byline
+			font-family: $font-beckett
+			font-size: em(20px)
+			letter-spacing: 1.5px / 20px * 1em
+			line-height: .95
+			margin-bottom: remify(16px)
+			text-transform: uppercase
+			a
+				border-bottom: 2px solid $color-community-primary
+			span[itemprop="name"]
+				color: $color-community-primary
+				font-weight: normal
+	&__leserartikel-wrap
+		+unpadded
+		background-color: $color-community-primary
+		margin-bottom: remify(20px)
+		padding: $page-padding--small $page-padding--small 0
+	&__leserartikel-headline
+		+display-flex()
+		+flex-flow(column nowrap)
+	&__leserartikel-image
+		margin-top: remify(32px)
+
+////////////
+// TABLET //
+////////////
+
 +respond-min($break-tablet-min)
 	.article-header
 		margin: remify(40px 0)
@@ -102,7 +166,7 @@
 			width: 53.33%
 
 		&__headline
-			&--article
+			&--default
 				margin-top: remify(-90px)
 				padding: remify(11px $page-padding 24px 54px)
 
@@ -145,7 +209,7 @@
 			padding: remify(8px 18px 2px)
 			&:before
 				content: none
-			&--article
+			&--default
 				margin-bottom: remify(15px)
 			&--column
 				bottom: 100%
@@ -154,67 +218,6 @@
 				float: left
 				margin-right: remify(20px)
 
-
-+respond-min($break-desktop-min)
-	.article-header
-		margin: remify(60px 0)
-
-		&__headline
-			&--article
-				margin: remify(-190px 0 0)
-				padding-top: remify(111px)
-
-		&__kicker
-			&--leserartikel
-				line-height: remify(59px)
-
-		&__title
-			&--column
-				font-size: em(82px)
-			&--leserartikel
-				font-size: em(112px)
-
-		&__topic-link
-			font-size: em(32px)
-			padding: remify(9px 23px 2px)
-
-
-////////// KOLUMNE //////////
-
-.article-header
-	&--column
-		+unpadded
-		background-color: $color-article-secondary
-
-		.article-header__byline,
-		.article-header__metadata
-			display: inline
-			margin: 0
-		.article-header__byline + .article-header__metadata
-			&:before
-				content: " / "
-				margin: 0 .25em
-
-	&__column-image
-		+background-image(linear-gradient(to top, #003fb4, $color-article-primary))
-		bottom: remify(52px)
-		overflow: hidden
-		position: absolute
-		right: $page-padding--small
-		width: remify(80px)
-	&__column-wrap
-		position: relative
-	&__column-info
-		padding: $page-padding--small
-	&__column-details
-		padding-right: remify(90px)
-	&__headline
-		&--column
-			span
-				color: $color-text
-
-+respond-min($break-tablet-min)
-	.article-header
 		&--column
 			+display-flex()
 			+justify-content(space-between)
@@ -234,44 +237,6 @@
 		&__column-details
 			padding-right: 0
 
-+respond-min($break-desktop-min)
-	.article-header
-		&__column-image
-			width: remify(320px)
-		&__column-info
-			padding: remify(30px 35px 35px)
-
-////////// LESERARTIKEL //////////
-
-.article-header
-	&--leserartikel
-		.article-header__media
-			padding-bottom: 100% / 16 * 9 // image variant 'wide'
-		.article-header__byline
-			font-family: $font-beckett
-			font-size: em(20px)
-			letter-spacing: 1.5px / 20px * 1em
-			line-height: .95
-			margin-bottom: remify(16px)
-			text-transform: uppercase
-			a
-				border-bottom: 2px solid $color-community-primary
-			span[itemprop="name"]
-				color: $color-community-primary
-				font-weight: normal
-	&__leserartikel-wrap
-		+unpadded
-		background-color: $color-community-primary
-		margin-bottom: remify(20px)
-		padding: $page-padding--small $page-padding--small 0
-	&__leserartikel-headline
-		+display-flex()
-		+flex-flow(column nowrap)
-	&__leserartikel-image
-		margin-top: remify(32px)
-
-+respond-min($break-tablet-min)
-	.article-header
 		&--leserartikel
 			.article-header__byline
 				font-size: em(26px)
@@ -291,8 +256,38 @@
 			margin: remify(0 20px 0 0)
 			width: $leserartikel-image-width
 
+/////////////
+// DESKTOP //
+/////////////
+
 +respond-min($break-desktop-min)
 	.article-header
+		margin: remify(60px 0)
+
+		&__headline
+			&--default
+				margin: remify(-190px 0 0)
+				padding-top: remify(111px)
+
+		&__kicker
+			&--leserartikel
+				line-height: remify(59px)
+
+		&__title
+			&--column
+				font-size: em(82px)
+			&--leserartikel
+				font-size: em(112px)
+
+		&__topic-link
+			font-size: em(32px)
+			padding: remify(9px 23px 2px)
+
+		&__column-image
+			width: remify(320px)
+		&__column-info
+			padding: remify(30px 35px 35px)
+
 		&__leserartikel-wrap
 			$color-stop: remify(65px)
 			+background-image(linear-gradient(to top, #fff $color-stop, $color-community-primary $color-stop))
