@@ -12,6 +12,7 @@ import cryptography.hazmat.backends
 import cssselect
 import gocept.httpserverlayer.wsgi
 import lxml.html
+import mock
 import plone.testing.zca
 import plone.testing.zodb
 import pyramid.response
@@ -30,7 +31,7 @@ import zope.browserpage.metaconfigure
 import zope.event
 import zope.interface
 import zope.processlifetime
-import zope.testbrowser.browser
+import zope.testbrowser.wsgi
 
 import zeit.content.image.interfaces
 import zeit.solr.interfaces
@@ -38,6 +39,7 @@ import zeit.solr.interfaces
 import zeit.web.core
 import zeit.web.core.application
 import zeit.web.core.routing
+import zeit.web.core.utils
 import zeit.web.core.view
 
 
@@ -367,11 +369,13 @@ def config(application, request):
 
 
 @pytest.fixture
-def dummy_request(request, config):
+def dummy_request(request, application, config):
     req = pyramid.testing.DummyRequest(is_xhr=False)
     req.GET = webob.multidict.MultiDict(req.GET)
     req.response.headers = set()
     req.registry.settings = config.registry.settings
+    req._set_extensions(application.zeit_app.config.registry.getUtility(
+        pyramid.interfaces.IRequestExtensions))
     req.matched_route = None
     config.manager.get()['request'] = req
     return req
@@ -529,13 +533,6 @@ def selenium_driver(request):
 
 
 @pytest.fixture
-def appbrowser(application):
-    """Returns an instance of `webtest.TestApp`."""
-    extra_environ = dict(HTTP_HOST='example.com')
-    return TestApp(application, extra_environ=extra_environ)
-
-
-@pytest.fixture
 def image_group_factory():
     class MockImageGroup(dict):
         zope.interface.implements(
@@ -568,24 +565,6 @@ def my_traverser(application):
     root = zope.component.getUtility(
         zeit.cms.repository.interfaces.IRepository)
     return zeit.web.core.routing.RepositoryTraverser(root)
-
-
-@pytest.fixture
-def testbrowser(application, testserver):
-    # We require ``application`` here so that stuff is properly isolated
-    # between tests; see comment there for details.
-    Browser._testserver = testserver.url
-    return Browser
-
-
-@pytest.fixture
-def css_selector(request):
-    def wrapped(selector, document):
-        xpath = cssselect.HTMLTranslator().css_to_xpath(selector)
-        if not isinstance(document, lxml.html.HtmlElement):
-            document = lxml.html.fromstring(document)
-        return document.xpath(xpath)
-    return wrapped
 
 
 # inspired by http://stackoverflow.com/a/28073449
@@ -640,6 +619,24 @@ def mock_metrics(monkeypatch):
         zeit.web.core.metrics.mock_contextmanager)
 
 
+@pytest.fixture
+def appbrowser(application):
+    """Returns an instance of `webtest.TestApp` for wsgi-level testing"""
+    return TestApp(application, extra_environ={'HTTP_HOST': 'example.com'})
+
+
+@pytest.fixture
+def testbrowser(application):
+    """Wsgi-level test browser (called testbrowser for bw compat)"""
+    return WsgiBrowser(wsgi_app=application)
+
+
+@pytest.fixture
+def tplbrowser(jinja2_env):
+    """Jinja template renderer with testbrowser-like API"""
+    return TemplateBrowser(jinja2_env)
+
+
 class TestApp(webtest.TestApp):
 
     def get_json(self, url, params=None, headers=None, *args, **kw):
@@ -649,13 +646,13 @@ class TestApp(webtest.TestApp):
         return self.get(url, params, headers, *args, **kw)
 
 
-class Browser(zope.testbrowser.browser.Browser):
-    """Custom testbrowser class that allows direct access to CSS and XPath
-    selection on its content.
+class BaseBrowser(object):
+    """Base class for custom test browsers that allow direct access to CSS and
+    XPath selection on their content.
 
     Usage examples:
 
-    # Create test browser
+    # Create a test browser
     browser = Browser('/foo/bar')
     # Test only one h1 exists
     assert len(browser.cssselect('h1.only-once')) == 1
@@ -668,33 +665,10 @@ class Browser(zope.testbrowser.browser.Browser):
 
     """
 
-    _translator = None
-    _testserver = None
-
-    def __init__(self, url=None, mech_browser=None):
-        """Call base constructor and cache a translator instance."""
-        super(Browser, self).__init__(url, mech_browser)
-        self._translator = cssselect.HTMLTranslator()
-
-    def cssselect(self, selector):
-        """Return a list of lxml.HTMLElement instances that match a given CSS
-        selector.
-        """
-        xpath = self._translator.css_to_xpath(selector)
-        if self.document is not None:
-            return self.document.xpath(xpath)
-
-    def open(self, url, data=None):
-        if url and self._testserver and not url.startswith(self._testserver):
-            url = '{}/{}'.format(self._testserver, url.lstrip('/'))
-        return super(Browser, self).open(url, data)
-
-    def xpath(self, selector):
-        """Return a list of lxml.HTMLElement instances that match a given
-        XPath selector.
-        """
-        if self.document is not None:
-            return self.document.xpath(selector)
+    def __call__(self, uri=None, **kw):
+        if uri is not None:
+            self.open(uri, **kw)
+        return self
 
     @property
     def document(self):
@@ -707,6 +681,39 @@ class Browser(zope.testbrowser.browser.Browser):
         """Return a dictionary of the parsed json body if available."""
         if self.contents is not None:
             return json.loads(self.contents)
+
+    def cssselect(self, selector):
+        """Return a list of lxml.HTMLElement instances that match a given CSS
+        selector.
+        """
+        xpath = cssselect.HTMLTranslator().css_to_xpath(selector)
+        if self.document is not None:
+            return self.document.xpath(xpath)
+
+    def xpath(self, selector):
+        """Return a list of lxml.HTMLElement instances that match a given
+        XPath selector.
+        """
+        if self.document is not None:
+            return self.document.xpath(selector)
+
+
+class WsgiBrowser(BaseBrowser, zope.testbrowser.wsgi.Browser):
+
+    def open(self, uri, data=None):
+        if not uri.startswith('http://localhost'):
+            uri = 'http://localhost/{}'.format(uri.lstrip('/'))
+        return super(WsgiBrowser, self).open(uri, data)
+
+
+class TemplateBrowser(BaseBrowser):
+
+    def __init__(self, environ):
+        self.env = environ
+
+    def open(self, uri, **kw):
+        kw = zeit.web.core.utils.defaultdict(mock.Mock, **kw)
+        self.contents = self.env.get_template(uri).render(**kw)
 
 
 class MockSolr(object):

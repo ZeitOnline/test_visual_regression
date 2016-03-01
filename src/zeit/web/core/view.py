@@ -817,12 +817,11 @@ class Content(CeleraOneMixin, Base):
         premoderation = False
         uid = 0
         valid_community_login = True
-        self.request.authenticated_userid
 
-        if self.request.session.get('user'):
-            user_blocked = self.request.session['user'].get('blocked')
-            premoderation = self.request.session['user'].get('premoderation')
-            uid = self.request.session['user'].get('uid')
+        if self.request.user:
+            user_blocked = self.request.user.get('blocked')
+            premoderation = self.request.user.get('premoderation')
+            uid = self.request.user.get('uid')
             valid_community_login = True if uid and uid != '0' else False
 
         # used for general alerts in the comment section header
@@ -940,7 +939,10 @@ class FrameBuilder(CeleraOneMixin):
 @pyramid.view.notfound_view_config()
 def not_found(request):
     body = 'Status 404: Dokument nicht gefunden.'
-    return pyramid.response.Response(body, 404, [('X-Render-With', 'default')])
+    return pyramid.response.Response(
+        body, 404,
+        [('X-Render-With', 'default'),
+         ('Content-Type', 'text/plain; charset=utf-8')])
 
 
 @pyramid.view.view_config(context=pyramid.exceptions.URLDecodeError)
@@ -967,7 +969,8 @@ def surrender(context, request):
 @pyramid.view.view_config(route_name='blacklist')
 def blacklist(context, request):
     return pyramid.httpexceptions.HTTPNotImplemented(
-        headers=[('X-Render-With', 'default')])
+        headers=[('X-Render-With', 'default'),
+                 ('Content-Type', 'text/plain; charset=utf-8')])
 
 
 @pyramid.view.view_config(route_name='json_delta_time', renderer='json')

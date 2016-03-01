@@ -24,22 +24,21 @@ def test_login_state_view_should_deliver_correct_destination():
     }
 
 
-def test_article_should_have_breadcrumbs(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+def test_article_should_have_breadcrumbs(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
     breadcrumbs = browser.cssselect('.footer-breadcrumbs__list')
     assert len(breadcrumbs) == 1
 
 
-def test_article_should_have_correct_breadcrumb_structure(
-        testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+def test_article_should_have_correct_breadcrumb_structure(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
     breadcrumbs_items = browser.cssselect('.footer-breadcrumbs__item')
     assert len(breadcrumbs_items) == 3
     breadcrumbs_links = browser.cssselect('.footer-breadcrumbs__link')
     assert len(breadcrumbs_links) == 2
 
 
-def test_keyword_index_pages_should_fall_back_to_xslt(testserver, testbrowser):
+def test_keyword_index_pages_should_fall_back_to_xslt(testserver):
     resp = requests.get(
         '%s/schlagworte/index/A/index' % testserver.url,
         allow_redirects=False)
@@ -47,7 +46,7 @@ def test_keyword_index_pages_should_fall_back_to_xslt(testserver, testbrowser):
     assert resp.headers['x-render-with'] == 'default'
 
 
-def test_keyword_pages_should_send_redirect(testserver, testbrowser):
+def test_keyword_pages_should_send_redirect(testserver):
     resp = requests.get(
         '%s/schlagworte/orte/Xy/index' % testserver.url,
         allow_redirects=False)
@@ -73,7 +72,7 @@ def test_page_all_get_param_should_trigger_redirect(testserver):
             '%s/zeit-online/article/zeit/komplettansicht' % testserver.url))
 
 
-def test_keyword_redirect_should_handle_nonindex_urls(testserver, testbrowser):
+def test_keyword_redirect_should_handle_nonindex_urls(testserver):
     resp = requests.get(
         '%s/schlagworte/personen/Santa-Klaus' % testserver.url,
         allow_redirects=False)
@@ -85,7 +84,7 @@ def test_keyword_redirect_should_handle_nonindex_urls(testserver, testbrowser):
     assert resp.headers['Location'] == '%s/thema/klaus-kleber' % testserver.url
 
 
-def test_keyword_redirect_should_handle_unicode(testserver, testbrowser):
+def test_keyword_redirect_should_handle_unicode(testserver):
     resp = requests.get(
         testserver.url + '/schlagworte/orte/istv%C3%A1n-szab%C3%B3/index',
         allow_redirects=False)
@@ -94,8 +93,8 @@ def test_keyword_redirect_should_handle_unicode(testserver, testbrowser):
         u'%s/thema/istván-szabó' % testserver.url).encode('utf-8')
 
 
-def test_main_nav_should_render_labels(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
+def test_main_nav_should_render_labels(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
     dropdown_label = browser.cssselect('.primary-nav *[data-label]')
     assert len(dropdown_label) == 6  # three elements two times
     assert dropdown_label[0].attrib['data-label'] == 'Anzeige'
@@ -144,6 +143,6 @@ def test_article_should_show_premoderation_warning(application):
         'http://xml.zeit.de/zeit-online/article/01')
     request = pyramid.testing.DummyRequest()
     request.host_url = 'http://www.zeit.de'
-    request.session = {'user': {'blocked': False, 'premoderation': True}}
+    request.user = {'ssoid': '123', 'blocked': False, 'premoderation': True}
     view = zeit.web.site.view_article.Article(article, request)
     assert view.comment_area['show_premoderation_warning'] is True
