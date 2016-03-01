@@ -206,45 +206,5 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
             raise pyramid.httpexceptions.HTTPNotFound()
 
     @zeit.web.reify
-    def advertising_enabled(self):
-        return self.banner_channel is not None
-
-    @zeit.web.reify
-    def banner_channel(self):
-        return self.request.GET.get('banner_channel', None)
-
-    @zeit.web.reify
     def ressort(self):
         return self.request.GET.get('ressort', None)
-
-    @zeit.web.reify
-    def page_slice(self):
-        return self.request.GET.get('page_slice', None)
-
-    @zeit.web.reify
-    def desktop_only(self):
-        return 'desktop_only' in self.request.GET
-
-    @zeit.web.reify
-    def framebuilder_requires_webtrekk(self):
-        return 'webtrekk' in self.request.GET
-
-    @zeit.web.reify
-    def framebuilder_requires_ivw(self):
-        return 'ivw' in self.request.GET
-
-    @zeit.web.reify
-    def nav_show_ressorts(self):
-        return 'hide_ressorts' not in self.request.GET
-
-    @zeit.web.reify
-    def nav_show_search(self):
-        return 'hide_search' not in self.request.GET
-
-    @zeit.web.reify
-    def is_advertorial(self):
-        return 'adlabel' in self.request.GET
-
-    @zeit.web.reify
-    def cap_title(self):
-        return self.request.GET.get('adlabel') or 'Anzeige'
