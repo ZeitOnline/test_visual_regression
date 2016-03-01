@@ -33,8 +33,8 @@ class Base(zeit.web.core.view.Base):
         keywords = ','.join(self.adwords)
         return [('$handle', self.adcontroller_handle),
                 ('level2', 'campus'),
-                ('level3', 'TODO'),
-                ('level4', 'TODO'),
+                ('level3', ''),  # TODO: 'thema' if topic is set (Sprint 4)
+                ('level4', ''),  # TODO: topic, if set (Sprint 4)
                 ('$autoSizeFrames', True),
                 ('keywords', keywords),
                 ('tma', '')]
