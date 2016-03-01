@@ -5,37 +5,10 @@
     {% block content %}
     <article itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
-        {% block article_heading %}
-            <div class="article-header">
-                {% block article_main_image %}
-                {% endblock article_main_image %}
-
-                {% set headertag = 'div' if view.pagination and view.pagination.current > 1 and view.current_page.teaser else 'h1' %}
-                <{{ headertag }} class="article-header__headline" itemprop="headline">
-                    <span class="article-header__kicker">
-                        {{- view.supertitle -}}
-                    </span>
-                    {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
-                    <span class="article-header__title">
-                        {{- view.title -}}
-                    </span>
-                </{{ headertag }}>
-
-                <div class="article-header__info">
-                    {# XXX Has to be replaced after ZON-2838 #}
-                    <a class="article-header__topic-link" href="">!ZON-2838!</a>
-                    {% set byline = view.context | get_byline('main') -%}
-                    {% if byline | length -%}
-                    <div class="article-header__byline">
-                        {% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
-                    </div>
-                    {% endif -%}
-                    <div class="article-header__metadata">
-                        {% include "zeit.web.campus:templates/inc/article/metadata.html" %}
-                    </div>
-                </div>
-            </div>
-        {% endblock article_heading %}
+        {% block article_heading -%}
+            {% include ["zeit.web.campus:templates/inc/article-header/{}.html".format(view.type),
+                        "zeit.web.campus:templates/inc/article-header/default.html"] %}
+        {% endblock article_heading -%}
         {% block article_body %}
         <div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
             {% block article_pages %}
