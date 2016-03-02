@@ -602,9 +602,9 @@ def get_column_image(content):
         author = content.authorships[0].target
     except (AttributeError, IndexError, TypeError):
         return
-    # XXX This should use a different variant, but the current CSS requires a
-    # rather specific ratio -- which only works because the author images have
-    # been dilligently and manually uploaded in that ratio so far.
+    # XXX This should use a different variant, but author images currently do
+    # not have a consistent ratio and framing of the portrayed person. So we
+    # need to crop the lower part of the image using CSS, ignoring the ratio.
     return get_image(content=author, variant_id='original', fallback=False)
 
 
