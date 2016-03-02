@@ -1,0 +1,16 @@
+<figure class="quote article__item">
+    <blockquote class="quote__text">
+        {{ block.text }}
+    </blockquote>
+    {% if block.attribution -%}
+        <figcaption class="quote__source">
+            {%- if block.url -%}
+                <a class="quote__link" href="{{ block.url }}">
+                    {{- block.attribution -}}
+                </a>
+            {%- else -%}
+                {{- block.attribution -}}
+            {%-  endif -%}
+        </figcaption>
+    {%- endif %}
+</figure>

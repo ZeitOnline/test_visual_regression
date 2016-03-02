@@ -1,0 +1,10 @@
+{% if block.name -%}
+    <figure class="portraitbox article__item article__item--marginalia">
+        <div class="portraitbox__heading">
+            {{- block.name -}}
+        </div>
+        <div class="portraitbox__body">
+            {{- block.text | safe -}}
+        </div>
+    </figure>
+{%- endif %}

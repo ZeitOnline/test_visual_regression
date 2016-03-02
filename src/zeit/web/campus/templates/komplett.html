@@ -6,11 +6,7 @@
             {% if not loop.first -%}
                 <h2 class="article__subheading article__item">{{ page.teaser }}</h2>
             {% endif -%}
-            {% for block in page %}
-                {% if block | block_type == 'paragraph' %}
-                    <p>{{ block | safe }}</p>
-                {% endif %}
-            {% endfor %}
+            {% include "zeit.web.campus:templates/inc/article/page.html" %}
         </section>
     {% endfor %}
 {% endblock article_pages %}
