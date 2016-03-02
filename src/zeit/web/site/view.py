@@ -143,6 +143,10 @@ class Base(zeit.web.core.view.Base):
                 self.sub_ressort != '') else self.ressort.capitalize()
         return item[0]
 
+    @zeit.web.reify
+    def shared_cardstack_id(self):
+        return self.request.GET.get('stackId', '') or None
+
 
 @pyramid.view.view_config(
     route_name='login_state',

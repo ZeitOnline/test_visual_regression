@@ -1,4 +1,3 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
-{% set static_param = static_param if static_param is defined else '&static=true' %}
-{% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/{}/esi/body?shareUrl={}{}'.format(module.id, request.url, static_param) %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
+{% set esi_source = (view.cardstack_body | replace('__STACK__', '{}')).format(module.id, module.id | urlencode) %}
 {{ lama.insert_esi(esi_source, 'Cardstack konnte nicht geladen werden') }}
