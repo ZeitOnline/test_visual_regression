@@ -2,14 +2,14 @@
 	@extend %teaser
 	padding: $page-padding--small
 
-	&__heading
-		@extend %teaser-heading
-		margin: remify(-24px 0 10px)
-
 	&__media
 		background-color: $greyish-white
 		height: 0
 		padding-bottom: 100% // image variant 'square', ratio 1:1
+
+	&__heading
+		@extend %teaser-heading
+		margin: remify(-24px 0 10px)
 
 	&__kicker
 		@extend %teaser-kicker

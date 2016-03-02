@@ -2,14 +2,14 @@
 	@extend %teaser
 	padding: $page-padding--small
 
-	&__heading
-		@extend %teaser-heading
-		margin: remify(0 0 10px)
-
 	&__media
 		background-color: $greyish-white
 		height: 0
 		padding-bottom: 100% / 7 * 3 // image variant 'cinema', ratio 7:3
+
+	&__heading
+		@extend %teaser-heading
+		margin: remify(0 0 10px)
 
 	&__kicker
 		@extend %teaser-kicker
