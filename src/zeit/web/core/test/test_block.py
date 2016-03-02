@@ -283,6 +283,15 @@ def test_block_breaking_news_has_correct_date(application):
     assert breaking_news.date_first_released == view.date_first_released
 
 
+def test_block_paragraph_should_contain_expected_structure(tplbrowser):
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/paragraph.html',
+        block=u'Lorem ipsum dülör sit amet, consetetur sadipscing elitr')
+    assert browser.cssselect('p.paragraph.article__item')
+    assert browser.cssselect('p.paragraph.article__item')[0].text.strip() == (
+        u'Lorem ipsum dülör sit amet, consetetur sadipscing elitr')
+
+
 def test_find_nextread_returns_none_if_nonexistent(application):
     assert zeit.web.core.block.find_nextread_folder('Wissen', None) is None
 
