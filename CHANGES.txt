@@ -4,6 +4,8 @@ Change log for zeit.web
 2.62 (unreleased)
 -----------------
 
+- ZON-2839: Add ZEIT Campus article pagination
+
 - MAINT: Ensure stable return type for nextreads and comment counts
 
 - MAINT: Be more defensive about errors when talking to the community
