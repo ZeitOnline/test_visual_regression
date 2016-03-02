@@ -326,6 +326,12 @@ def test_block_infobox_should_contain_expected_structure(tplbrowser):
         'infoboxtitel')
 
 
+def test_block_intertitle_should_contain_expected_structure(tplbrowser):
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/intertitle.html')
+    assert browser.cssselect('h2.article__subheading.article__item')
+
+
 def test_block_inlinegallery_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     block = {}
