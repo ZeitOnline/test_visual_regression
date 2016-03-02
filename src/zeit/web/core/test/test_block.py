@@ -283,6 +283,18 @@ def test_block_breaking_news_has_correct_date(application):
     assert breaking_news.date_first_released == view.date_first_released
 
 
+def test_block_citation_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    block.text = u'Lorem ipsum dülör sit amet, consetetur sadipscing elitr'
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/citation.html',
+        block=block)
+    assert browser.cssselect(
+        'figure.quote.article__item blockquote.quote__text')
+    assert browser.cssselect('blockquote.quote__text')[0].text.strip() == (
+        u'Lorem ipsum dülör sit amet, consetetur sadipscing elitr')
+
+
 def test_block_paragraph_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/paragraph.html',
