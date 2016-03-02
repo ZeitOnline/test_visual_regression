@@ -582,7 +582,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     request = mock.Mock()
 
     # logged in
-    request.authenticated_userid = '12345'
+    request.user = {'ssoid': '12345'}
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     lines = tpl.module.main_nav('true', request).splitlines()
 
@@ -593,7 +593,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     assert markup in output
 
     # logged out
-    request.authenticated_userid = None
+    request.user = {}
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     lines = tpl.module.main_nav('true', request).splitlines()
     output = ''

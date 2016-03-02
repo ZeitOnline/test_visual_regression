@@ -1,10 +1,36 @@
 Change log for zeit.web
 =======================
 
-2.61 (unreleased)
+2.62 (unreleased)
 -----------------
 
 - ZON-2782: Refactor ZMO article image macro to dedicated template
+
+- MAINT: Ensure stable return type for nextreads and comment counts
+
+
+2.61.2 (2016-03-02)
+-------------------
+
+- HOTFIX: Don't display error message to non-authenticated users
+
+
+2.61.1 (2016-03-02)
+-------------------
+
+- HOTFIX: Return valid user info from session
+
+
+2.61 (2016-03-02)
+-----------------
+
+- ZON-2834: Introduce article header for ZEIT Campus
+
+- FIX: Display proper error message to blocked users
+
+- ZON-2808: Remove contact address from error message for blocked users
+
+- MAINT: Introduce `request.user` object, created once per request
 
 - MAINT: Switch default testbrowser to wsgi, add template browser and
          clean lots(!) of tests with testserver.url and inappropriate fixtures

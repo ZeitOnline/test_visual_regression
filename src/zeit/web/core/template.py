@@ -123,6 +123,11 @@ def column(context):
     return context.serie and context.serie.column
 
 
+@zeit.web.register_test
+def leserartikel(context):
+    return context.genre and context.genre == 'leserartikel'
+
+
 @zeit.web.register_filter
 def block_type(obj):
     """Outputs the class name in lower case format of one or multiple block
