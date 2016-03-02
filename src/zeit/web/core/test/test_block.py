@@ -363,6 +363,19 @@ def test_block_paragraph_should_contain_expected_structure(tplbrowser):
         u'Lorem ipsum dülör sit amet, consetetur sadipscing elitr')
 
 
+def test_block_place_should_contain_expected_structure(tplbrowser):
+    view = mock.Mock()
+    view.context.advertising_enabled = True
+    view.banner_channel = {}
+    block = mock.Mock()
+    block.on_page_nr = 1
+    block.tile = 7
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/place.html', view=view,
+        block=block)
+    browser.cssselect('script[type="text/javascript"]')
+
+
 def test_find_nextread_returns_none_if_nonexistent(application):
     assert zeit.web.core.block.find_nextread_folder('Wissen', None) is None
 
