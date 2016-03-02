@@ -1,0 +1,23 @@
+{% extends 'zeit.web.campus:templates/layout.html' %}
+
+{% block main %}
+    {% block content %}
+    <article itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
+        <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
+        {% block article_heading -%}
+            {% include ["zeit.web.campus:templates/inc/article-header/{}.html".format(view.article_layout),
+                        "zeit.web.campus:templates/inc/article-header/default.html"] %}
+        {% endblock article_heading -%}
+        {% block article_body %}
+        <div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
+            {% block article_pages %}
+                <!-- Here goes the content for a page -->
+            {% endblock article_pages %}
+            {% block article_pagination %}
+                <!-- Here goes the pagination -->
+            {% endblock article_pagination %}
+        </div>
+        {% endblock article_body %}
+    </article>
+    {% endblock content %}
+{% endblock main %}
