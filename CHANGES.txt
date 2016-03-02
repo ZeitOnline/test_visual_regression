@@ -16,6 +16,8 @@ Change log for zeit.web
 2.61 (2016-03-02)
 -----------------
 
+- ZON-2834: Introduce article header for ZEIT Campus
+
 - FIX: Display proper error message to blocked users
 
 - ZON-2808: Remove contact address from error message for blocked users
