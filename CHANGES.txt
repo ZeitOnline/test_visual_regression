@@ -4,6 +4,9 @@ Change log for zeit.web
 2.61 (unreleased)
 -----------------
 
+- ZON-2835: Move blocks from site macros to template files in core.
+            Create ZEIT Campus article blocks
+
 - MAINT: Switch default testbrowser to wsgi, add template browser and
          clean lots(!) of tests with testserver.url and inappropriate fixtures
 
