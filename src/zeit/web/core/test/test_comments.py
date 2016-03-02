@@ -697,7 +697,9 @@ def test_community_maintenance_should_be_created_from_xml():
     end = datetime.datetime(2020, 10, 10, 10, 10, 10, 100000, tzinfo=pytz.utc)
     assert res['active']
     assert res['scheduled']
+    assert isinstance(res['begin'], datetime.datetime)
     assert res['begin'] == begin
+    assert isinstance(res['end'], datetime.datetime)
     assert res['end'] == end
     assert res['text_scheduled'] == maintenance['text_scheduled']
     assert res['text_active'] == maintenance['text_active']
