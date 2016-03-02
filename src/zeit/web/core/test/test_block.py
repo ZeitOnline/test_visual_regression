@@ -326,6 +326,14 @@ def test_block_infobox_should_contain_expected_structure(tplbrowser):
         'infoboxtitel')
 
 
+def test_block_inlinegallery_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    block = {}
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/inlinegallery.html', block=block)
+    assert browser.cssselect('div.inline-gallery')
+
+
 def test_block_paragraph_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/paragraph.html',
