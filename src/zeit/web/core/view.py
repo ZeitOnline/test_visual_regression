@@ -797,19 +797,18 @@ class Content(CeleraOneMixin, Base):
 
     @zeit.web.reify
     def nextread(self):
-        return zeit.web.core.interfaces.INextread(self.context)
+        return zeit.web.core.interfaces.INextread(self.context, [])
 
     @zeit.web.reify
     def nextread_ad(self):
-        return zope.component.getAdapter(
+        return zope.component.queryAdapter(
             self.context, zeit.web.core.interfaces.INextread,
-            name="advertisement")
+            'advertisement', [])
 
     @zeit.web.reify('default_term')
     def comment_counts(self):
-        if self.nextread:
-            return zeit.web.core.comments.get_counts(
-                [t.uniqueId for t in self.nextread])
+        return zeit.web.core.comments.get_counts(
+            [t.uniqueId for t in self.nextread])
 
     @zeit.web.reify
     def comment_area(self):
@@ -844,7 +843,7 @@ class Content(CeleraOneMixin, Base):
             note = None
         elif self.community_maintenance['scheduled']:
             message = self.community_maintenance['text_scheduled']
-        elif not valid_community_login:
+        elif authenticated and not valid_community_login:
             note = (u'Aufgrund eines technischen Fehlers steht Ihnen die '
                     u'Kommentarfunktion kurzfristig nicht zur Verfügung. '
                     u'Bitte entschuldigen Sie diese Störung.')
