@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.61 (unreleased)
+2.61 (2016-03-02)
 -----------------
 
 - FIX: Display proper error message to blocked users
