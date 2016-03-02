@@ -245,6 +245,12 @@ module.exports = function(grunt) {
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.campus/svg/_minified'
             },
+            campus_framebuilder: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.campus/svg-framebuilder',
+                src: [ '*.svg' ],
+                dest: project.sourceDir + 'sass/web.campus/svg-framebuilder/_minified'
+            },
             magazin: {
                 expand: true,
                 cwd: project.sourceDir + 'sass/web.magazin/svg',
@@ -365,6 +371,10 @@ module.exports = function(grunt) {
             campus: {
                 src: '<%= svgmin.campus.dest %>/*.svg',
                 dest: project.codeDir + 'css/web.campus/icons.svg'
+            },
+            campus_framebuilder: {
+                src: '<%= svgmin.campus_framebuilder.dest %>/*.svg',
+                dest: project.codeDir + 'css/web.campus/framebuilder.svg'
             },
             site: {
                 src: '<%= svgmin.site.dest %>/*.svg',
