@@ -743,58 +743,14 @@ def test_canonical_ruleset_on_ranking_pages(testbrowser, datasolr):
     assert link[0].get('href') == 'http://localhost/dynamic/ukraine?p=2'
 
 
-def test_robots_rules_for_thema_paths(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/index')
-    request = pyramid.testing.DummyRequest()
-    request.path = '/thema/'
+def test_robots_rules_for_paginated_centerpages(testbrowser):
+    browser = testbrowser('/dynamic/umbrien')
+    assert browser.xpath('//meta[@name="robots"]/@content')[0] == (
+        'index,follow,noodp,noydir,noarchive')
 
-    # paginated page
-    request.url = 'http://localhost/thema/test?p=2'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
-
-    # paginated page starting with 1
-    request.url = 'http://localhost/thema/test?p=10'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
-
-    # first page with param
-    request.url = 'http://localhost/thema/test?p=1'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,follow,noarchive'
-
-    # first page without param
-    request.url = 'http://localhost/thema/test'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,follow,noarchive'
-
-
-def test_robots_rules_for_serie_paths(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/index')
-    request = pyramid.testing.DummyRequest()
-    request.path = '/serie/'
-
-    # paginated page
-    request.url = 'http://localhost/serie/test?p=2'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
-
-    # paginated page starting with 1
-    request.url = 'http://localhost/serie/test?p=10'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
-
-    # first page with param
-    request.url = 'http://localhost/serie/test?p=1'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,follow,noarchive'
-
-    # first page without param
-    request.url = 'http://localhost/serie/test'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,follow,noarchive'
+    browser = testbrowser('/dynamic/umbrien?p=2')
+    assert browser.xpath('//meta[@name="robots"]/@content')[0] == (
+        'noindex,follow,noodp,noydir,noarchive')
 
 
 def test_robots_rules_for_angebote_paths(application):
@@ -820,29 +776,29 @@ def test_robots_rules_for_diverse_paths(application):
     request.url = 'http://localhost'
 
     # test folder
-    request.path = '/test/'
+    request.path = '/test/foo'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
     assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
     # templates folder
-    request.path = '/templates/'
+    request.path = '/templates/article-01'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
     assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
     # banner folder
-    request.path = '/banner/'
+    request.path = '/banner/iqd'
+    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+
+    # autoren folder
+    request.path = '/autoren/register/A'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
     assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
     # any folder
-    request.path = '/any/'
+    request.path = '/any/article-01'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
     assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
-
-    # autoren folder
-    request.path = '/autoren/index'
-    view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow'
 
 
 def test_meta_rules_for_keyword_paths(application):

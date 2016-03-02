@@ -269,15 +269,11 @@ class Base(object):
                 ('tma', '')]
 
     @zeit.web.reify
-    def seo_robot_override(self):
-        try:
-            return zeit.seo.interfaces.ISEO(self.context).meta_robots
-        except (AttributeError, TypeError):
-            pass
-
-    @zeit.web.reify
     def meta_robots(self):
-        return self.seo_robot_override or 'index,follow,noodp,noydir,noarchive'
+        seo = zeit.seo.interfaces.ISEO(self.context, None)
+        if seo and seo.meta_robots:
+            return seo.meta_robots
+        return 'index,follow,noodp,noydir,noarchive'
 
     @zeit.web.reify
     def adwords(self):
