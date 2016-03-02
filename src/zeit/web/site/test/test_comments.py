@@ -327,6 +327,8 @@ def test_comment_area_should_have_login_prompt_enabled(
     view = zeit.web.core.view.Content(article, dummy_request)
     # Login prompt is rendered by comment-form template
     assert view.comment_area['show_comment_form']
+    assert not view.comment_area['note']
+    assert not view.comment_area['message']
 
 
 def test_comment_area_should_show_message_for_blocked_users(application):
