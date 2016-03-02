@@ -36,7 +36,6 @@ Change log for zeit.web
 -----------------
 
 - MAINT: Log community errors
->>>>>>> master
 
 - FIX: Only consider usable max-height for responsive images,
        fixes printkiosk teaser images
