@@ -9,6 +9,8 @@ Change log for zeit.web
 - ZON-2835: Move blocks from site macros to template files in core.
             Create ZEIT Campus article blocks
 
+- BUG-361: Support dates with timezones in community-maintenance.xml
+
 - FIX: Refresh contents of advertisement-nextread folder, so we don't
   access content that was retracted while the nextread folder was cached
 

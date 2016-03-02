@@ -327,7 +327,7 @@ def _maintenance_from_xml(xml, maintenance):
         elif elem and elem.lower() == 'true':
             elem = True
         else:
-            value = zeit.web.core.date.parse_date(elem)
+            value = zeit.web.core.date.parse_date(elem, 'iso-8601')
             if value:
                 elem = value
 
