@@ -1,0 +1,23 @@
+{% extends 'zeit.web.campus:templates/inc/article-header/default.html' %}
+
+{% block article_header %}
+    <div class="article-header__leserartikel-wrap">
+        <div class="article-header__leserartikel-headline article__item">
+            {{ self.article_topic_link() }}
+            {{ self.article_headline() }}
+        </div>
+    </div>
+    <div class="article-header__leserartikel-info article__item article__item--wide">
+        {# this <div> just generates a flexbox item -#}
+        <div>
+            {{ self.article_byline() }}
+            {{ self.article_metadata() }}
+        </div>
+
+        {% require image = get_image(content=view.main_image_block, variant_id='wide') -%}
+            <div class="article-header__leserartikel-image">
+                {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}
+            </div>
+        {% endrequire -%}
+    </div>
+{% endblock %}
