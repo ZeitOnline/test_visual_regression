@@ -1,0 +1,9 @@
+{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
+
+{% if not view.page_slice %}
+    {% include "{}:templates/framebuilder/html_head.tpl".format(view.package) %}
+    {% include "{}:templates/framebuilder/upper_body.tpl".format(view.package) %}
+    {% include "{}:templates/framebuilder/lower_body.tpl".format(view.package) %}
+{% else %}
+    {% include "{}:templates/framebuilder/{}.tpl".format(view.package, view.page_slice) %}
+{% endif %}
