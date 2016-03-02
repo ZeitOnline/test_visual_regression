@@ -24,7 +24,7 @@
 		padding: remify(6px $page-padding--small 2px)
 		text-transform: uppercase
 		+on-interaction
-			color: $white
+			color: $color-topics-secondary
 		&:before
 			content: "Thema"
 			opacity: .58
@@ -78,6 +78,10 @@
 		span[itemprop="name"]
 			color: $color-text
 			font-weight: bold
+		a
+			+on-interaction
+				span[itemprop="name"]
+					color: $color-article-primary
 
 	&__metadata
 		> time,
@@ -136,6 +140,10 @@
 			text-transform: uppercase
 			a
 				border-bottom: 2px solid $color-community-primary
+				+on-interaction
+					border-color: $color-text
+					span[itemprop="name"]
+						color: $color-text
 			span[itemprop="name"]
 				color: $color-community-primary
 				font-weight: normal
