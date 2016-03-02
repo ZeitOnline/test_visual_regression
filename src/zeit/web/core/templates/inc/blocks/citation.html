@@ -2,15 +2,15 @@
     <blockquote class="quote__text">
         {{ block.text }}
     </blockquote>
-    {% if block.attribution %}
+    {% if block.attribution -%}
         <figcaption class="quote__source">
-            {% if block.url %}
+            {%- if block.url -%}
                 <a class="quote__link" href="{{ block.url }}">
-                    {{ block.attribution }}
+                    {{- block.attribution -}}
                 </a>
-            {% else %}
-                {{ block.attribution }}
-            {% endif %}
+            {%- else -%}
+                {{- block.attribution -}}
+            {%-  endif -%}
         </figcaption>
-    {% endif %}
+    {%- endif %}
 </figure>
