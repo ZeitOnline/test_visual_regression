@@ -399,6 +399,13 @@ def test_block_raw_should_contain_expected_structure(tplbrowser):
     browser.cssselect('div.raw')
 
 
+def test_block_unorderedlist_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/unorderedlist.html', block=block)
+    browser.cssselect('ul.list.article__item')
+
+
 def test_find_nextread_returns_none_if_nonexistent(application):
     assert zeit.web.core.block.find_nextread_folder('Wissen', None) is None
 
