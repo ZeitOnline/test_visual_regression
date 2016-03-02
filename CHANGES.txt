@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-2.62 (unreleased)
------------------
+2.61.2 (2016-03-02)
+-------------------
 
 - HOTFIX: Don't display error message to non-authenticated users
 
