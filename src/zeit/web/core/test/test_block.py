@@ -406,6 +406,16 @@ def test_block_unorderedlist_should_contain_expected_structure(tplbrowser):
     browser.cssselect('ul.list.article__item')
 
 
+def test_block_video_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    block.supertitle = 'supertitle'
+    block.title = 'title'
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/video.html', block=block)
+    browser.cssselect(
+        'div.article__item article__item--wide.article__item--rimless')
+
+
 def test_find_nextread_returns_none_if_nonexistent(application):
     assert zeit.web.core.block.find_nextread_folder('Wissen', None) is None
 
