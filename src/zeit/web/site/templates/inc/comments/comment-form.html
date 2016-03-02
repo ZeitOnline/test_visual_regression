@@ -28,7 +28,6 @@
         <div class="comment-section__notice comment-section__item">
         {% if view.comment_area.user_blocked %}
             Die Kommentarfunktion wurde für Ihr Benutzerprofil gesperrt.
-            Bei Fragen <a href="mailto:community@zeit.de">wenden Sie sich bitte an die Community-Redaktion</a>.
         {% elif view.comment_area.show_premoderation_warning %}
             Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind,
             oder kürzlich gegen <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">unsere Netiquette</a> verstoßen haben.
