@@ -295,6 +295,13 @@ def test_block_citation_should_contain_expected_structure(tplbrowser):
         u'Lorem ipsum dülör sit amet, consetetur sadipscing elitr')
 
 
+def test_block_contentadblock_should_contain_expected_structure(tplbrowser):
+    view = mock.Mock()
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/contentadblock.html', view=view)
+    assert browser.cssselect('div#iq-artikelanker')
+
+
 def test_block_paragraph_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/paragraph.html',
