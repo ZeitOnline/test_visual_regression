@@ -1,8 +1,39 @@
 Change log for zeit.web
 =======================
 
-2.60 (unreleased)
+2.62 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.61.1 (2016-03-02)
+-------------------
+
+- HOTFIX: Return valid user info from session
+
+
+2.61 (2016-03-02)
+-----------------
+
+- ZON-2834: Introduce article header for ZEIT Campus
+
+- FIX: Display proper error message to blocked users
+
+- ZON-2808: Remove contact address from error message for blocked users
+
+- MAINT: Introduce `request.user` object, created once per request
+
+- MAINT: Switch default testbrowser to wsgi, add template browser and
+         clean lots(!) of tests with testserver.url and inappropriate fixtures
+
+
+2.60 (2016-02-29)
+-----------------
+
+- BUG-360: Invalidate sessions with uid=0 immediately
+
+- BUG-358: Switch to arrays as configured origin in adreload middleware
 
 - ZON-2779: Add webtrekk parameter with detailed content type information
 

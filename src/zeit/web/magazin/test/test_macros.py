@@ -346,12 +346,12 @@ def test_image_macro_should_not_autoescape_markup(testbrowser):
     assert u'Heckler & Koch' in text.text
 
 
-def test_image_macro_should_hide_none(testserver, testbrowser):
+def test_image_macro_should_hide_none(testbrowser):
     # XXX I'd much rather change a caption in the article, but trying
     # to checkout raises ConstrainedNotSatisfiedError: xl-header. :-(
     with mock.patch('zeit.web.core.block._inline_html') as inline:
         inline.return_value = ''
-        browser = testbrowser('%s/feature/feature_longform' % testserver.url)
+        browser = testbrowser('/feature/feature_longform')
         assert '<span class="figure__text">None</span>' not in browser.contents
 
 
@@ -654,7 +654,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     request = mock.Mock()
 
     # logged in
-    request.authenticated_userid = '12345'
+    request.user = {'ssoid': '12345'}
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     lines = tpl.module.main_nav('true', request).splitlines()
 
@@ -665,7 +665,7 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     assert markup in output
 
     # logged out
-    request.authenticated_userid = None
+    request.user = {}
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
     lines = tpl.module.main_nav('true', request).splitlines()
     output = ''

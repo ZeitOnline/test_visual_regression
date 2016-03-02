@@ -36,16 +36,15 @@ class PostComment(zeit.web.core.view.Base):
 
     def __init__(self, context, request, path=None):
 
-        if not request.authenticated_userid:
+        if not request.user:
             raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
                 explanation='Please log in in order to comment')
 
-        if request.session.get('user') and not (
-                request.session['user'].get('name')):
+        if not request.user.get('name'):
             self.user_name = ''
         else:
-            self.user_name = request.session['user']['name']
+            self.user_name = request.user['name']
 
         self.new_cid = None
         self.request_method = 'POST'
@@ -82,10 +81,9 @@ class PostComment(zeit.web.core.view.Base):
 
     def post_comment(self):
         request = self.request
-        user = request.session['user']
         # XXX We should not have to transmit this; Community can get it itself
         # from the SSO cookie.
-        uid = user['uid']
+        uid = request.user['uid']
         # use submitted values for POSTs, not GET values from request url
         params = (request.GET, request.POST)[self.request_method == 'POST']
         comment = params.get('comment')
@@ -238,10 +236,9 @@ class PostComment(zeit.web.core.view.Base):
         invalidate_comment_thread(unique_id)
         set_user = False
         if not self.user_name and action == 'comment':
-            if zeit.web.core.security.reload_user_info(self.request) and (
-                    'user' in request.session) and (
-                        request.session['user']['name']):
-                self.user_name = request.session['user']['name']
+            zeit.web.core.security.reload_user_info(request)
+            if request.user.get('name'):
+                self.user_name = request.user['name']
                 set_user = True
                 self.status.append(u"User name {} was set".format(
                     self.user_name))
@@ -472,7 +469,7 @@ class RecommendCommentResource(PostCommentResource):
     def __init__(self, context, request):
         # redirect unauthorized recommendation request
         # prevent 403 HTTPForbidden response in PostComment
-        if not request.authenticated_userid:
+        if not request.user:
             if request.registry.settings.sso_activate:
                 pattern = '{}/anmelden?url={}'
                 host = request.registry.settings.get('sso_url')

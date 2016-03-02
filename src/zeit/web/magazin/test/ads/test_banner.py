@@ -9,7 +9,7 @@ import zeit.web.core.banner
 import zeit.web.magazin
 
 
-def test_banner_place_should_be_serialized(testserver, testbrowser):
+def test_banner_place_should_be_serialized(application):
     place = zeit.web.core.banner.Place(1, ['728x90'], True, label='')
     assert place.__dict__ == {'dcopt': 'ist', 'diuqilon': True,
                               'label': '', 'min_width': 0, 'name': 'tile_1',
@@ -17,12 +17,12 @@ def test_banner_place_should_be_serialized(testserver, testbrowser):
                               'sizes': ['728x90'], 'tile': 1}
 
 
-def test_banner_place_should_raise_on_index_error(testserver, testbrowser):
+def test_banner_place_should_raise_on_index_error(application):
     with pytest.raises(IndexError):
         zeit.web.core.banner.Place(1, '123x456', True, label='')
 
 
-def test_banner_list_should_be_sorted(testserver, testbrowser):
+def test_banner_list_should_be_sorted(application):
     banner_list = list(zeit.web.core.banner.BANNER_SOURCE)
     tiles = [place.tile for place in banner_list]
     assert sorted(tiles) == tiles
@@ -46,8 +46,7 @@ def test_banner_toggles_viewport_zoom(application):
     assert view.banner_toggles('viewport_zoom') == 'tablet-landscape'
 
 
-def test_banner_should_fallback_on_not_registered_banner_types(
-        testserver, testbrowser):
+def test_banner_should_fallback_on_not_registered_banner_types(application):
     class Moep(zeit.web.magazin.view_article.Article):
 
         @property
@@ -62,68 +61,64 @@ def test_banner_should_fallback_on_not_registered_banner_types(
     assert moep_view.iqd_mobile_settings == expected
 
 
-def test_banner_should_not_be_displayed_on_short_pages(
-        testserver, testbrowser):
-    browser = testbrowser('%s/artikel/header2' % testserver.url)
+def test_banner_should_not_be_displayed_on_short_pages(testbrowser):
+    browser = testbrowser('/artikel/header2')
     assert not browser.cssselect('#iqadtile4')
 
 
-def test_banner_should_not_be_displayed_on_disabled_article(
-        testserver, testbrowser):
+def test_banner_should_not_be_displayed_on_disabled_article(testbrowser):
     # test article with xml banner = no
-    browser = testbrowser('%s/artikel/nobanner' % testserver.url)
+    browser = testbrowser('/artikel/nobanner')
     # no desktop ads
     assert not browser.cssselect('div[class*="ad-tile_"]')
     # no mobile ad script
     assert not browser.cssselect('script[src*="js/libs/iqd/sasmobile.js"]')
 
 
-def test_banner_should_not_be_displayed_on_disabled_cp(
-        testserver, testbrowser):
+def test_banner_should_not_be_displayed_on_disabled_cp(testbrowser):
     # centerpage without ads
-    browser = testbrowser('%s/centerpage/index-without-ads' % testserver.url)
+    browser = testbrowser('/centerpage/index-without-ads')
     # no desktop ads
     assert not browser.cssselect('div[class*="ad-tile_"]')
     # no mobile ad script
     assert not browser.cssselect('script[src*="js/libs/iqd/sasmobile.js"]')
 
 
-def test_banner_view_should_be_displayed_on_pages(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/03' % testserver.url)
+def test_banner_view_should_be_displayed_on_pages(testbrowser):
+    browser = testbrowser('/artikel/03')
     assert browser.cssselect('#ad-desktop-7')
     assert browser.cssselect('#ad-desktop-8')
-    browser = testbrowser('%s/artikel/03/seite-3' % testserver.url)
+    browser = testbrowser('/artikel/03/seite-3')
     assert browser.cssselect('#ad-desktop-7')
-    browser = testbrowser('%s/artikel/03/seite-4' % testserver.url)
+    browser = testbrowser('/artikel/03/seite-4')
     assert browser.cssselect('#ad-desktop-7')
-    browser = testbrowser('%s/artikel/03/seite-7' % testserver.url)
+    browser = testbrowser('/artikel/03/seite-7')
     assert browser.cssselect('#ad-desktop-7')
 
 
-def test_banner_tile3_should_be_displayed_on_pages(testserver, testbrowser):
-    browser = testbrowser('%s/artikel/01' % testserver.url)
+def test_banner_tile3_should_be_displayed_on_pages(testbrowser):
+    browser = testbrowser('/artikel/01')
     assert browser.cssselect('#ad-desktop-3')
-    browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
+    browser = testbrowser('/centerpage/lebensart')
     assert browser.cssselect('#ad-desktop-3')
 
 
-def test_banner_view_should_be_displayed_on_succeeding_pages(
-        testserver, testbrowser):
-    browser = testbrowser('%s/artikel/03/seite-2' % testserver.url)
+def test_banner_view_should_be_displayed_on_succeeding_pages(testbrowser):
+    browser = testbrowser('/artikel/03/seite-2')
     assert not browser.cssselect('#iqadtile7')
-    browser = testbrowser('%s/artikel/03/seite-5' % testserver.url)
+    browser = testbrowser('/artikel/03/seite-5')
     assert not browser.cssselect('#iqadtile7')
-    browser = testbrowser('%s/artikel/03/seite-6' % testserver.url)
+    browser = testbrowser('/artikel/03/seite-6')
     assert not browser.cssselect('#iqadtile7')
 
 
 def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
-        testserver, testbrowser, monkeypatch):
+        testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True}.get)
 
     # test article with xml banner is missing
-    browser = testbrowser('%s/artikel/10' % testserver.url)
+    browser = testbrowser('/artikel/10')
     # desktop ads
     assert browser.cssselect('script[id^="ad-desktop-"]')
 

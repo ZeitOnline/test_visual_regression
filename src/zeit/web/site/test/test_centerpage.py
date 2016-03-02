@@ -108,12 +108,12 @@ def test_tile7_for_fullwidth_is_rendered_on_correct_position(testbrowser):
 
 
 def test_printbox_is_present_and_has_digital_offerings(
-        testbrowser, testserver, workingcopy):
+        testbrowser, workingcopy):
     uri = 'http://xml.zeit.de/angebote/print-box'
     content = zeit.cms.interfaces.ICMSContent(uri)
     with checked_out(content) as co:
         co.byline = 'mo-mi'
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('/zeit-online/index')
     printbox = browser.cssselect('.print-box:not(.print-box--angebot)')
     anbebotsbox = browser.cssselect('.print-box--angebot')
 
@@ -122,12 +122,12 @@ def test_printbox_is_present_and_has_digital_offerings(
 
 
 def test_printbox_is_present_and_has_newsprint_offerings(
-        testbrowser, testserver, workingcopy):
+        testbrowser, workingcopy):
     uri = 'http://xml.zeit.de/angebote/print-box'
     content = zeit.cms.interfaces.ICMSContent(uri)
     with checked_out(content) as co:
         co.byline = ''
-    browser = testbrowser('%s/zeit-online/index' % testserver.url)
+    browser = testbrowser('/zeit-online/index')
     printbox = browser.cssselect('.print-box:not(.print-box--angebot)')
     anbebotsbox = browser.cssselect('.print-box--angebot')
 
@@ -135,10 +135,8 @@ def test_printbox_is_present_and_has_newsprint_offerings(
     assert len(anbebotsbox) == 0
 
 
-def test_centerpage_should_gracefully_skip_all_broken_references(
-        testbrowser, testserver):
-    browser = testbrowser(
-        '{}/zeit-online/teaser-broken-setup'.format(testserver.url))
+def test_centerpage_should_gracefully_skip_all_broken_references(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-broken-setup')
     # @todo these class names are all gone
     assert not browser.cssselect('.main__fullwidth .teasers-fullwidth *')
     assert not browser.cssselect('.teaser-collection .teasers *')
@@ -162,24 +160,22 @@ def test_dynamic_centerpage_collection_should_output_teasers(
     assert counter == 8
 
 
-def test_dynamic_centerpage_should_be_paginatable(
-        testserver, testbrowser, datasolr):
-    browser = testbrowser(
-        '{}/dynamic/angela-merkel?p=2'.format(testserver.url))
+def test_dynamic_centerpage_should_be_paginatable(testbrowser, datasolr):
+    browser = testbrowser('/dynamic/angela-merkel?p=2')
     text = browser.cssselect('.pager__page.pager__page--current span')[0].text
     assert text == '2'
 
 
-def test_pagination_should_be_validated(testserver, testbrowser):
+def test_pagination_should_be_validated(testbrowser):
     with pytest.raises(urllib2.HTTPError):
         assert '404 Not Found' in testbrowser(
-            '{}/dynamic/angela-merkel?p=-1'.format(testserver.url)).headers
+            '/dynamic/angela-merkel?p=-1').headers
     with pytest.raises(urllib2.HTTPError):
         assert '404 Not Found' in testbrowser(
-            '{}/dynamic/angela-merkel?p=0'.format(testserver.url)).headers
+            '/dynamic/angela-merkel?p=0').headers
     with pytest.raises(urllib2.HTTPError):
         assert '404 Not Found' in testbrowser(
-            '{}/dynamic/angela-merkel?p=1moep'.format(testserver.url)).headers
+            '/dynamic/angela-merkel?p=1moep').headers
 
 
 def test_centerpage_markdown_module_is_rendered(jinja2_env):

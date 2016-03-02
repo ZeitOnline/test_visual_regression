@@ -162,10 +162,13 @@ class Application(object):
 
         config.add_route('xml', '/xml/*traverse')
 
-        config.set_request_property(configure_host('asset'), reify=True)
-        config.set_request_property(configure_host('image'), reify=True)
-        config.set_request_property(configure_host('jsconf'), reify=True)
-        config.set_request_property(configure_host('fbia'), reify=True)
+        config.add_request_method(configure_host('asset'), reify=True)
+        config.add_request_method(configure_host('image'), reify=True)
+        config.add_request_method(configure_host('jsconf'), reify=True)
+        config.add_request_method(configure_host('fbia'), reify=True)
+
+        config.add_request_method(
+            zeit.web.core.security.get_user, name='user', reify=True)
 
         config.set_root_factory(self.get_repository)
         config.scan(package=zeit.web, ignore=self.DONT_SCAN)
