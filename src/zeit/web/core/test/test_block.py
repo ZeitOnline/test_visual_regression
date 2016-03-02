@@ -332,6 +332,13 @@ def test_block_intertitle_should_contain_expected_structure(tplbrowser):
     assert browser.cssselect('h2.article__subheading.article__item')
 
 
+def test_block_liveblog_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/liveblog.html', block=block)
+    assert browser.cssselect('div.liveblog')
+
+
 def test_block_inlinegallery_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     block = {}
