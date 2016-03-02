@@ -68,14 +68,14 @@ def test_article_pagination(testbrowser):
     select = testbrowser('/campus/article/paginated').cssselect
     numbers = select('.article-pager__number')
 
-    assert len(select('.article-header')) == 3
+    assert len(select('.article-header')) == 1
     assert len(select('.page-header')) == 0
     assert len(select('.article-pagination')) == 1
     assert select('.article-pagination__nexttitle')[0].text.strip() == (
-        u'Der Horror von Crystal wurzelt in der Normalität')
+        u'Polaroid-Drucker, VR-Brillen, E-Reader, DJ-Kabel und das Hoverboard')
     assert len(numbers) == 7
     assert '--current' in numbers[0].get('class')
-    assert numbers[6].text.stript() == u'…'
+    assert numbers[5].text_content().strip() == u'…'
     # assert len(select('.article-toc')) == 1
     # assert len(select('.article-toc__item')) == 5
     # assert '--current' in select('.article-toc__item')[0].get('class')
