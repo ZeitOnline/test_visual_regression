@@ -226,8 +226,8 @@ class Image(zeit.web.core.image.BaseImage):
             pass  # Unresolveable uniqueId
 
         if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
-            variant = getattr(model_block.layout, 'variant', None) or getattr(
-                model_block.layout, 'id', None) or cls.DEFAULT_VARIANT
+            variant = getattr(model_block.layout, 'variant', None) or (
+                cls.DEFAULT_VARIANT)
             try:
                 target = referenced[variant]
                 group = referenced

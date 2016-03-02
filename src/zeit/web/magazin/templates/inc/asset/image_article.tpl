@@ -1,6 +1,6 @@
 {% extends "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
 
-{% set image = get_image(content=obj, variant_id=obj.layout.id if obj.layout else None, fallback=False) or obj %}
+{% set image = get_image(content=obj, variant_id=obj.layout.variant if obj.layout else None, fallback=False) or obj %}
 {% set href = image.href %}
 
 {% block media_block -%}
