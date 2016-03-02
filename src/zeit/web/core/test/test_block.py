@@ -312,6 +312,20 @@ def test_block_image_should_contain_expected_structure(tplbrowser):
     assert browser.cssselect('img.article__media-item')
 
 
+def test_block_infobox_should_contain_expected_structure(tplbrowser):
+    view = mock.Mock()
+    view.package = 'zeit.web.site'
+    block = mock.Mock()
+    block.title = 'Infobox-Titel'
+    block.contents = (('Infos', 'Hier die Infos über'),)
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/infobox.html', block=block,
+        view=view)
+    assert browser.cssselect('aside.infobox.js-infobox')
+    assert browser.cssselect('aside.infobox.js-infobox')[0].get('id') == (
+        'infoboxtitel')
+
+
 def test_block_paragraph_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/paragraph.html',
