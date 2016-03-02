@@ -392,6 +392,13 @@ def test_block_quiz_should_contain_expected_structure(tplbrowser):
         'div.article__item.article__item--wide.article__item--rimless')
 
 
+def test_block_raw_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/raw.html', block=block)
+    browser.cssselect('div.raw')
+
+
 def test_find_nextread_returns_none_if_nonexistent(application):
     assert zeit.web.core.block.find_nextread_folder('Wissen', None) is None
 
