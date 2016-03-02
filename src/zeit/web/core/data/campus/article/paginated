@@ -206,6 +206,15 @@
         <em>Star Wars</em>).
       </p>
     </division>
+    <division type="page" teaser="Die dritte Seite">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    </division>
+    <division type="page" teaser="Die vierte Seite">
+      <p>Necessitatibus tempore totam quo error, odit quasi obcaecati facilis rem a optio labore doloribus culpa, neque, eum laudantium corrupti et reiciendis dolorem quaerat dicta officiis maxime asperiores fugiat!</p>
+    </division>
+    <division type="page" teaser="Die fünfte Seite">
+      <p>Porro perferendis modi accusantium et, cum aut, enim aliquid, harum blanditiis recusandae perspiciatis fuga suscipit odit praesentium laboriosam sed nisi assumenda tenetur necessitatibus repellendus.</p>
+    </division>
   </body>
   <teaser>
     <title>Selfiestick trifft DJ-Kabel</title>
