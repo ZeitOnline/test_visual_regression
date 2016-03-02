@@ -1,0 +1,34 @@
+.teaser-wide-small
+	@extend %teaser
+	padding: 2*$page-padding--small $page-padding--small $page-padding--small
+
+	&__media
+		display: none
+
+	&__heading
+		@extend %teaser-heading
+		margin: remify(0 0 10px)
+
+	&__kicker
+		@extend %teaser-kicker
+
+	&__title
+		@extend %teaser-title
+		font-size: remify(28px)
+
+	&__text
+		@extend %teaser-text
+
++respond-min($break-tablet-min)
+	.teaser-wide-small
+		border: none
+		float: left
+		padding: $cp-padding
+		width: 33.33%
+		&__media
+			background-color: $greyish-white
+			display: block
+			height: 0
+			padding-bottom: 100% / 7 * 3 // image variant 'cinema', ratio 7:3
+		&__heading
+			margin-top: remify(-24px)
