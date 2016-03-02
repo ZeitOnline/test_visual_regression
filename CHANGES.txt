@@ -4,7 +4,7 @@ Change log for zeit.web
 2.62 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Ensure stable return type for nextreads and comment counts
 
 
 2.61.2 (2016-03-02)
