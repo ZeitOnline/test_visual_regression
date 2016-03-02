@@ -1,0 +1,16 @@
+.article-toc
+	display: block
+
+	&__container
+		font-size: em(14px)
+		line-height: round-to-precision(20/14)
+		margin: remify(0 25px 20px 0)
+		padding-top: remify(3px)
+		width: 100%
+		+respond-min($break-tablet-min)
+			position: relative
+			float: left
+			margin-bottom: remify(36px) // add more space due to absolute position of onesie
+			width: remify(205px) // same like .article__item--marginalia
+		+respond-min($break-desktop-min)
+			width: remify(220px) // same like .article__item--marginalia
