@@ -126,6 +126,17 @@ def test_empty_cache_triggers_backend_fills_cache(
     assert dummy_request.session['user']['name'] == 'test-user'
 
 
+def test_returns_valid_user_info_from_session(dummy_request, monkeypatch):
+    dummy_request.cookies['my_sso_cookie'] = 'present'
+    monkeypatch.setattr(zeit.web.core.security, 'get_user_info', lambda x: {
+        'ssoid': '123',
+        'has_community_data': True,
+    })
+    assert dummy_request.user['ssoid'] == '123'
+    del dummy_request.user
+    assert dummy_request.user['ssoid'] == '123'
+
+
 @pytest.mark.xfail(reason='Testing misconfigurations is an unsolved issue.')
 def test_unreachable_agatho_should_not_produce_error():
     mocked_request = mock.MagicMock()

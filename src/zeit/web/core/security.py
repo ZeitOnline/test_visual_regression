@@ -40,7 +40,9 @@ def get_user(request):
         if not is_reliable_user_info(user_info):
             return {}
         request.session['user'] = user_info
-    return user_info
+        return user_info
+    else:
+        return stored_user
 
 
 def is_reliable_user_info(user_info):
