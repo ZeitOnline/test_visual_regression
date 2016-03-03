@@ -786,7 +786,7 @@ def format_webtrekk(string):
         u'é', 'e').replace(
         u'è', 'e').replace(
         u'ß', 'ss')
-    string = re.sub(u'[^a-zA-Z0-9]', '_', string)
+    string = re.sub(u'[^-a-zA-Z0-9]', '_', string)
     string = re.sub(u'_+', '_', string)
     string = re.sub(u'^_|_$', '', string)
     return string

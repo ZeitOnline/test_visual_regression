@@ -203,7 +203,7 @@ def test_cp_has_correct_webtrekk_values(testbrowser):
 def test_webtrekk_series_tag_is_set_corectly(testbrowser):
     browser = testbrowser('/artikel/06')
     assert '6: "tödlichekeime",' in browser.contents
-    assert ('redaktion.zeit-magazin..tödlichekeime.'
+    assert ('redaktion.zeit-magazin..toedlichekeime.'
             'article.zei|localhost/artikel/06') in browser.contents
 
 
