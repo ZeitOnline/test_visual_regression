@@ -25,6 +25,12 @@
         image_pattern="portrait"
         areas="solo"
         />
+    <layout
+        id="zco-lead-cinema"
+        title="Aufmacher quer"
+        image_pattern="cinema"
+        areas="solo"
+        />
 
     <!-- Teaser formats for new ZON-Centerpages -->
     <layout
