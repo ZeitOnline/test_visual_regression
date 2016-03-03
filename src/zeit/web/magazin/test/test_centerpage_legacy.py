@@ -27,13 +27,6 @@ def monkeyreq(monkeypatch):
     monkeypatch.setattr(pyramid.threadlocal, "get_current_request", request)
 
 
-def test_homepage_should_have_buzz_module_centerpage_should_not(testbrowser):
-    browser = testbrowser('/zeit-magazin/index')
-    assert '<div class="cp_buzz">' in browser.contents
-    browser = testbrowser('/centerpage/lebensart')
-    assert '<div class="cp_buzz">' not in browser.contents
-
-
 def test_centerpage_should_have_default_keywords(testbrowser):
     # Default means ressort and sub ressort respectively
     browser = testbrowser('/centerpage/lebensart-2')

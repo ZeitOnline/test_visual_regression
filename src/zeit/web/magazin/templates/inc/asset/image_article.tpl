@@ -26,7 +26,7 @@ figure__media
     <figcaption class="figure__caption">
         <span class="figure__text">{{ image.caption | safe }}</span>
         {% if image.copyright | count and image.copyright[0][0] != '©' %}
-        <span class="figure__copyright">
+        <span class="figure__copyright" itemprop="copyrightHolder">
             {% if image.copyright[0][1] %}
             <a href="{{ image.copyright[0][1] }}" target="_blank">
             {% endif %}
