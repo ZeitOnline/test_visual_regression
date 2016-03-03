@@ -1,21 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
-    <nextread>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/2014/19/martenstein-kaiserin-sisi" year="2014" issue="19" ressort="zeit-magazin" contenttype="article" publication-date="2014-04-30T07:50:00+00:00" expires="">
-        <supertitle py:pytype="str">Harald Martenstein</supertitle>
-        <teaser_supertitle py:pytype="str">Kolumne Martenstein</teaser_supertitle>
-        <title py:pytype="str">Über seine Lieblingskaiserin</title>
-        <text py:pytype="str">Unser Kolumnist besucht die Gruft, in der Sisi liegt. Wussten Sie, dass die Kaiserin mit rohem Rindfleisch auf dem Gesicht nächtigte?</text>
-        <description py:pytype="str">Unser Kolumnist besucht die Gruft, in der Sisi liegt. Wussten Sie, dass die Kaiserin mit rohem Rindfleisch auf dem Gesicht nächtigte?</description>
-        <byline py:pytype="str">von Harald Martenstein</byline>
-        <breadcrumb_title xsi:nil="true"/>
-        <image base-id="http://xml.zeit.de/zeit-magazin/2014/19/martenstein-19/" type="jpg" alt="Illustration von Martensteins Lieblingskaiserin" align="left" publication-date="" expires="">
-          <bu py:pytype="str">Illustration von Martensteins Lieblingskaiserin</bu>
-          <copyright py:pytype="str">© Fengel</copyright>
-        </image>
-      </reference>
-    </nextread>
     <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/leben/2014-05/teaser-martenstein-fengel-neu/" type="jpg" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
       <copyright py:pytype="str">© Martin Fengel</copyright>

@@ -192,7 +192,8 @@ def test_image_should_use_variant_given_on_layout(application):
         'http://xml.zeit.de/zeit-online/image'
         '/filmstill-hobbit-schlacht-fuenf-hee/')
     model_block = mock.Mock()
-    model_block.layout = imageLayoutSource(content).find('large-original')
+    model_block.layout = imageLayoutSource(content).find(
+        'column-width-original')
     model_block.is_empty = False
     model_block.xml = None
     model_block.references.target = image

@@ -4,6 +4,8 @@ Change log for zeit.web
 2.62 (unreleased)
 -----------------
 
+- ZON-2782: Refactor ZMO article image macro to dedicated template
+
 - ZON-2835: Move blocks from site macros to template files in core.
             Create ZEIT Campus article blocks
 
