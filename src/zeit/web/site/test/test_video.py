@@ -157,14 +157,15 @@ def test_video_page_adcontroller_js_var_isset(
         'third_party_modules': True, 'iqd': True}.get)
     driver = selenium_driver
     driver.get('{}/video/2015-01/3537342483001'.format(testserver.url))
-    try:
-        selector = 'body[data-ad-delivery-type="adcontroller"]'
-        driver.find_element_by_css_selector(selector)
-    except:
-        pytest.skip("not applicable due to oldschool ad configuration")
 
-    adctrl = driver.execute_script("return typeof window.AdController")
-    assert adctrl == "object"
+    def ad_controller_defined(driver):
+        script = 'return typeof window.AdController'
+        return driver.execute_script(script) == 'object'
+
+    try:
+        assert WebDriverWait(driver, 20).until(ad_controller_defined)
+    except TimeoutException:
+        assert False, 'AdController not defined within 20 seconds'
 
 
 # TODO: iFrame (?) wird eingebunden auf großen Bildschirmen
