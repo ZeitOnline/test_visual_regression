@@ -28,11 +28,11 @@ def test_homepage_should_have_proper_ivw_script_integration(
 
 
 def test_adcontroller_head_code_is_present(
-        testserver, testbrowser, monkeypatch):
+        testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True, 'iqd': True}.get)
 
-    browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
+    browser = testbrowser('/zeit-online/slenderized-index')
     if 'data-ad-delivery-type="adcontroller"' not in browser.contents:
         pytest.skip("not applicable due to oldschool ad configuration")
 
@@ -41,8 +41,8 @@ def test_adcontroller_head_code_is_present(
     assert '<!-- mandanten object -->' in browser.contents
 
 
-def test_adcontroller_adtags_are_present(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
+def test_adcontroller_adtags_are_present(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
     if 'data-ad-delivery-type="adcontroller"' not in browser.contents:
         pytest.skip("not applicable due to oldschool ad configuration")
 
@@ -53,10 +53,10 @@ def test_adcontroller_adtags_are_present(testserver, testbrowser):
 
 
 def test_adcontroller_finanlizer_is_present(
-        testserver, testbrowser, monkeypatch):
+        testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True, 'iqd': True}.get)
-    browser = testbrowser('%s/zeit-online/slenderized-index' % testserver.url)
+    browser = testbrowser('/zeit-online/slenderized-index')
     if 'data-ad-delivery-type="adcontroller"' not in browser.contents:
         pytest.skip("not applicable due to oldschool ad configuration")
 

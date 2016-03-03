@@ -3,12 +3,12 @@
   <head xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <topiclinks>
       <topiclink>
-        <topiclink_label_1>Eltern und Studenten</topiclink_label_1>
-        <topiclink_url_1>http://www.zeit.de/serie/studenten-und-eltern</topiclink_url_1>
-        <topiclink_label_2>Jurastudium</topiclink_label_2>
-        <topiclink_url_2>http://www.zeit.de/thema/jurastudium</topiclink_url_2>
-        <topiclink_label_3>Uni-Prekariat</topiclink_label_3>
-        <topiclink_url_3>http://www.zeit.de/thema/promotion</topiclink_url_3>
+        <topiclink_label_1>Paul Auster</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/dynamic/paul-auster</topiclink_url_1>
+        <topiclink_label_2>Ausdauersport</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/dynamic/ausdauersport</topiclink_url_2>
+        <topiclink_label_3>Bayerische Landesbank</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/dynamic/bayerische-landesbank</topiclink_url_3>
       </topiclink>
     </topiclinks>
     <header_image/>
@@ -73,7 +73,7 @@
     <cluster area="id-41a8299d-b569-4c42-b713-db5dbd866a4f" kind="duo" kind_title="Standard-Region" visible="True" visible_mobile="True">
       <region area="1234567test" automatic_type="channel" count="8" hide-dupes="True" kind="major" read_more_url="http://www.zeit.de/studium/index" title="Studium" visible="True" visible_mobile="True">
         <container cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b" cp:type="teaser" module="zon-large" overlay_level="3" text_color="dark" visible="True" visible_mobile="True">
-          <block author="Anna Bordel" contenttype="article" expires="" href="http://xml.zeit.de/campus/article-simple" issue="1" publication-date="" ressort="Studium" uniqueId="http://xml.zeit.de/campus/article-simple" year="2015"></block>
+          <block author="Anna Bordel" contenttype="article" expires="" href="http://xml.zeit.de/campus/article/simple" issue="1" publication-date="" ressort="Studium" uniqueId="http://xml.zeit.de/campus/article/simple" year="2015"></block>
         </container>
       </region>
     </cluster>

@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.59 (unreleased)
+2.62 (unreleased)
 -----------------
 
 - MAINT: Refactor ZMO nextread
@@ -20,10 +20,73 @@ Change log for zeit.web
   * Use Standart image template in ZMO
   * Move copyright logic to core and use it in ZMO
 
-- MAINT: Fix position of ad place 1 in AMP articles
+- ZON-2782: Refactor ZMO article image macro to dedicated template
+
+- ZON-2835: Move blocks from site macros to template files in core.
+            Create ZEIT Campus article blocks
+
+- BUG-361: Support dates with timezones in community-maintenance.xml
+
+- FIX: Refresh contents of advertisement-nextread folder, so we don't
+  access content that was retracted while the nextread folder was cached
+
+- MAINT: Ensure stable return type for nextreads and comment counts
+
+- MAINT: Be more defensive about errors when talking to the community
+
+
+2.61.2 (2016-03-02)
+-------------------
+
+- HOTFIX: Don't display error message to non-authenticated users
+
+
+2.61.1 (2016-03-02)
+-------------------
+
+- HOTFIX: Return valid user info from session
+
+
+2.61 (2016-03-02)
+-----------------
+
+- ZON-2834: Introduce article header for ZEIT Campus
+
+- FIX: Display proper error message to blocked users
+
+- ZON-2808: Remove contact address from error message for blocked users
+
+- MAINT: Introduce `request.user` object, created once per request
+
+- MAINT: Switch default testbrowser to wsgi, add template browser and
+         clean lots(!) of tests with testserver.url and inappropriate fixtures
+
+
+2.60 (2016-02-29)
+-----------------
+
+- BUG-360: Invalidate sessions with uid=0 immediately
+
+- BUG-358: Switch to arrays as configured origin in adreload middleware
+
+- ZON-2779: Add webtrekk parameter with detailed content type information
+
+- ZON-2788: Add ads to Instant Articles
+
+
+2.59 (2016-02-25)
+-----------------
+
+- MAINT: Log community errors
 
 - FIX: Only consider usable max-height for responsive images,
        fixes printkiosk teaser images
+
+- FIX: Fix failing test
+
+- FIX: Wait 2x500ms for memcache lock, then recreate value ourselves
+
+- FIX: Safeguard celeraone script with timeout and feature toggle
 
 
 2.58 (2016-02-23)

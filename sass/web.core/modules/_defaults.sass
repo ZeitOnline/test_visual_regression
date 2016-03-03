@@ -5,7 +5,7 @@ body
 	background-color: $color-body-bg
 	color: $color-body-text
 	font-family: $base-font-family
-	font-size: em($base-font-size, 16px) // define "our" base font-size ind context of standard browser default
+	font-size: em($base-font-size, 16px) // define "our" base font-size in context of standard browser default
 	line-height: $base-line-height
 	margin: 0
 	padding: 0
@@ -23,6 +23,9 @@ a
 	text-decoration: none
 	+on-interaction
 		color: $color-link--hover
+
+h1,h2,h3,h4,h5,h6
+	font-size: 1em
 
 // only target svg sprites to not destroy interactive/dataviz graphics
 svg use

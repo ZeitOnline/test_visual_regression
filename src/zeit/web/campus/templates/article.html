@@ -1,14 +1,8 @@
-{% extends "zeit.web.campus:templates/layout.html" %}
+{% extends "zeit.web.campus:templates/content.html" %}
 
-{% block main %}
-    <h1>{{ view.title }}</h1>
-    {% for page in view.pages %}
-        <section>
-            {% for block in page %}
-                {% if block | block_type == 'paragraph' %}
-                    <p>{{ block | safe }}</p>
-                {% endif %}
-            {% endfor %}
-        </section>
-    {% endfor %}
-{% endblock %}
+{% block article_pages %}
+    <section class="article-page" data-page-number="{{ view.current_page.number + 1 }}">
+        {%- set page = view.current_page -%}
+        {%- include "zeit.web.campus:templates/inc/article/page.html" -%}
+    </section>
+{% endblock article_pages %}

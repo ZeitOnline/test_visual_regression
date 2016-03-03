@@ -1,21 +1,20 @@
-{% if view.pagination and view.pagination.total > 1 -%}
-<div class="article-pagination article__item {% block pagination_modifier %}{% endblock %}" role="navigation" aria-labeledby="article-pagination-title">
-	<div class="visually-hidden" id="article-pagination-title">Seitennavigation</div>
+<nav class="article-pagination article__item" aria-labeledby="article-pagination-title">
+	<h3 class="visually-hidden" id="article-pagination-title">Seitennavigation</h3>
 
 	{% if view.pagination.next_page_url -%}
-		<a href="{{ view.pagination.next_page_url }}" data-id="article-pager....next-link">
+		<a class="article-pagination__link" href="{{ view.pagination.next_page_url }}" data-id="article-pager....next-link">
 			<span class="article-pagination__button article-pagination__button--next">Nächste Seite</span>
 			{% if view.pagination.next_page_title -%}
 			<span class="article-pagination__nexttitle">{{ view.pagination.next_page_title }}</span>
 			{%- endif %}
 		</a>
 	{% else %}
-		<a href="{{ request.route_url('home') }}index" data-id="article-pager....startseite">
+		<a class="article-pagination__link" href="{{ request.route_url('home') }}index" data-id="article-pager....startseite">
 			<span class="article-pagination__button article-pagination__button--next">Startseite</span>
 		</a>
 	{%- endif %}
 
-	{% if view.request.view_name != 'komplettansicht' %}
+	{% if view.pagination and view.pagination.total > 1 and not view.is_all_pages_view %}
 	<ul class="article-pager">
 		<li class="article-pager__label">Seite</li>
 
@@ -39,12 +38,4 @@
 		</li>
 	</ul>
 	{% endif %}
-</div>
-{% else %}
-<div class="article-pagination article__item article-pagination--komplettansicht" role="navigation" aria-labeledby="article-pagination-title">
-	<div class="visually-hidden" id="article-pagination-title">Seitennavigation</div>
-	<a href="{{ request.route_url('home') }}index" data-id="article-pager....startseite">
-		<span class="article-pagination__button article-pagination__button--next">Startseite</span>
-	</a>
-</div>
-{% endif -%}
+</nav>

@@ -164,7 +164,7 @@ def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
         'http://xml.zeit.de/zeit-online/article/01')
 
     request = mock.MagicMock()
-    request.authenticated_userid = 123
+    request.user = {'ssoid': 123}
     request.session = {'user': {'uid': '123', 'name': 'Max'}}
     request.path_url = 'http://xml.zeit.de/zeit-online/article/01'
     request.params = {'cid': None}
@@ -277,37 +277,70 @@ def test_comment_area_note_should_be_displayed_if_set(
     assert len(browser.cssselect('.comment-form')) == 0
 
 
-def test_comment_area_should_have_no_comment_form(application):
+def test_comment_area_should_hide_comment_form_for_invalid_logins(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     request = pyramid.testing.DummyRequest()
-    request.session['user'] = {
+    request.user = {
         'blocked': False,
         'premoderation': False,
-        'uid': 0}
+        'uid': '0',
+        'ssoid': '123',
+        'has_community_data': True,
+    }
 
     view = zeit.web.core.view.Content(article, request)
-    assert view.comment_area['show_comment_form'] is False
+    assert not view.comment_area['show_comment_form']
+
+
+def test_comment_area_should_hide_comment_form_no_community_response(
+        application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+    request.user = {
+        'ssoid': '123',
+        'has_community_data': False,
+    }
+    view = zeit.web.core.view.Content(article, request)
+    assert not view.comment_area['show_comment_form']
 
 
 def test_comment_area_should_have_comment_form(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     request = pyramid.testing.DummyRequest()
-    request.session['user'] = {
+    request.user = {
         'blocked': False,
         'premoderation': False,
-        'uid': '1'}
-
+        'has_community_data': True,
+        'uid': '1',
+    }
     view = zeit.web.core.view.Content(article, request)
-    assert view.comment_area['show_comment_form'] is True
+    assert view.comment_area['show_comment_form']
 
 
-def test_comment_area_should_have_login_prompt_enabled(application):
+def test_comment_area_should_have_login_prompt_enabled(
+        application, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.core.view.Content(article, dummy_request)
+    # Login prompt is rendered by comment-form template
+    assert view.comment_area['show_comment_form']
+    assert not view.comment_area['note']
+    assert not view.comment_area['message']
+
+
+def test_comment_area_should_show_message_for_blocked_users(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     request = pyramid.testing.DummyRequest()
-
+    request.user = {
+        'blocked': True,
+        'has_community_data': True,
+        'uid': '0',
+    }
     view = zeit.web.core.view.Content(article, request)
-    # Login prompt is rendered by comment-form template
-    assert view.comment_area['show_comment_form'] is True
+    # This is a bit implicit; the actual message is rendered by the template.
+    assert not view.comment_area['note']
+    assert not view.comment_area['message']
