@@ -3,10 +3,8 @@ $mtb-teaser-max-width: remify(320px)
 
 .teaser-mtb-square
     @extend %teaser
+    margin: remify(0 auto 42px)
     max-width: $mtb-teaser-max-width
-    margin-right: auto
-    margin-left: auto
-    text-align: center
     +respond-min($break-1)
         width: $mtb-teaser-width
 
