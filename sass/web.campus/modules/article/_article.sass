@@ -1,0 +1,14 @@
+.article
+	&__item
+		+respond-min($break-tablet-min)
+			max-width: remify(660px)
+			margin-left: auto
+			margin-right: auto
+
+			&--wide
+				clear: both
+				max-width: remify(820px)
+
+	&__summary
+		@extend .paragraph
+		font-weight: bold

@@ -287,6 +287,16 @@ class Module(object):
         return pyramid.threadlocal.get_current_request()
 
 
+@grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
+@grokcore.component.implementer(zeit.web.core.interfaces.IDetailedContentType)
+def cp_detailed_content_type(context):
+    result = 'centerpage.{}'.format(context.type)
+    seo = zeit.seo.interfaces.ISEO(context)
+    if seo.keyword_entity_type:
+        result += '.' + seo.keyword_entity_type.lower()
+    return result
+
+
 # Add timing metrics for solr to zeit.content.cp.interfaces.IRenderedArea
 def search_with_timing_metrics(*args, **kw):
     with zeit.web.core.metrics.timer(

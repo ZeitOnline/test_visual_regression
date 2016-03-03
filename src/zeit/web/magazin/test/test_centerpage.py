@@ -9,10 +9,8 @@ import zeit.web.core.utils
 import zeit.web.core.template
 
 
-def test_cp_should_have_buzz_module(
-        testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/buzz' % testserver.url)
+def test_cp_should_have_buzz_module(testbrowser):
+    browser = testbrowser('/zeit-magazin/buzz')
     assert '<section class="buzzboard">' in browser.contents
     assert '<table class="buzzboard__table' in browser.contents
     assert '<div class="buzzboard__container">' in browser.contents

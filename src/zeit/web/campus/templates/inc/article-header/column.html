@@ -1,0 +1,20 @@
+{% extends 'zeit.web.campus:templates/inc/article-header/default.html' %}
+
+{% block article_header %}
+    {% require image = get_image(content=view.author_img, variant_id='portrait') -%}
+        <div class="article-header__column-image">
+            {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}
+        </div>
+    {% endrequire -%}
+
+    <div class="article-header__column-wrap">
+        <div class="article-header__column-info">
+            {{ self.article_headline() }}
+            <div class="article-header__column-details">
+                {{ self.article_byline() }}
+                {{ self.article_metadata() }}
+            </div>
+        </div>
+        {{ self.article_topic_link() }}
+    </div>
+{% endblock %}

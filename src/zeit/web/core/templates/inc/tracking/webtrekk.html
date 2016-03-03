@@ -66,7 +66,8 @@
             13: window.Zeit.breakpoint.getTrackingBreakpoint(),
             14: "{{ 'alt' if 'zeitmz' in view.banner_channel | default('', True) else 'neu'  }}",
             15: "{{ push }}", // Eilmeldungen
-            25: "original" // Plattform
+            25: "original", // Plattform
+            26: "{{ view.detailed_content_type }}" // Inhaltlicher Pagetype
         };
 
         {% if view.is_wrapped %}

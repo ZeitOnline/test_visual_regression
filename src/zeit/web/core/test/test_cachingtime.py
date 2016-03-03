@@ -19,8 +19,8 @@ def test_caching_time_should_be_set_per_content_object(application, content):
     assert zeit.web.core.interfaces.ICachingTime(obj) == content[1]
 
 
-def test_response_should_have_intended_caching_time(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-online/main-teaser-setup' % testserver.url)
+def test_response_should_have_intended_caching_time(testbrowser):
+    browser = testbrowser('/zeit-online/main-teaser-setup')
     assert browser.headers['cache-control'] == 'max-age=20'
 
 

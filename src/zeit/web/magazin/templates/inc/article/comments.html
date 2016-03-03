@@ -46,7 +46,7 @@
 	<section class="comments" id="js-comments">
 		<div class="comments__head" id="js-comments-head">
 		{% if view.comments_allowed %}
-			{% if request.authenticated_userid -%}
+			{% if request.user -%}
 			<form method="POST" class="comment__form js-submit-comment" id="js-comments-form">
 				{% if not request.session.user.name %}
 					<p class="comments__hint">
@@ -138,7 +138,7 @@
 			</div>
 		</script>
 		<script type="text/template" id="js-report-comment-template">
-			{% if request.authenticated_userid -%}
+			{% if request.user -%}
 			<form method="POST" class="comment__form">
 				<p><textarea name="comment" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
 				<p class="comment__form__text">

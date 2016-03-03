@@ -1,8 +1,9 @@
-{% if view.c1_client and view.c1_prefix %}
+{% if toggles('tracking') and settings('c1_prefix') and view.c1_client %}
 <script type="text/javascript">
 window.Zeit.require([ 'jquery' ], function( $ ) {
 	$.ajax({
-		url: "{{ view.c1_prefix }}/tracking/tracking.js",
+		url: "{{ settings('c1_prefix') }}/tracking/tracking.js",
+		timeout: {{ settings('script_timeout')  }},
 		dataType: "script",
 		cache: true,
 		success: function() {

@@ -5,6 +5,9 @@
 		color: $zon-grey
 		+on-interaction
 			color: $color-link--hover
+	&__link
+		display: block
+		margin-bottom: remify(28px)
 	&__button
 		+zon-button-inky
 		&--previous
@@ -24,12 +27,9 @@
 		letter-spacing: $zon-letter-spacing-s
 		margin-left: 1em
 
-	&--komplettansicht
-		margin-bottom: remify(72px)
-
 .article-pager
 	letter-spacing: $zon-letter-spacing-m
-	margin: 2em 0 0
+	margin: remify(28px 0 0)
 	padding: 0
 	&__label
 		display: none
@@ -94,6 +94,8 @@
 
 +respond-min($break-tablet-min)
 	.article-pagination
+		&__link
+			margin-bottom: remify(72px)
 		&__button
 			&--previous
 				display: none
@@ -102,7 +104,6 @@
 			width: 70%
 	.article-pager
 		line-height: 2
-		margin-top: 7em
 		&__label,
 		&__number
 			display: inline-block

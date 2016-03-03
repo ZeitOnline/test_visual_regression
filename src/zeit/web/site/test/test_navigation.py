@@ -212,8 +212,8 @@ def test_nav_should_contain_schema_org_markup(application, jinja2_env):
     assert len(item_prop_url) == len(item_prop_name)
 
 
-def test_footer_should_contain_schema_org_markup(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
+def test_footer_should_contain_schema_org_markup(testbrowser):
+    browser = testbrowser('/centerpage/zeitonline')
 
     html = browser.cssselect
     site_nav_element = html(
@@ -233,8 +233,8 @@ def test_footer_should_contain_schema_org_markup(testserver, testbrowser):
 
 # integration testing
 
-def test_cp_should_have_valid_main_nav_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
+def test_cp_should_have_valid_main_nav_structure(testbrowser):
+    browser = testbrowser('/centerpage/zeitonline')
     html = browser.cssselect
 
     assert len(html('.main_nav')) == 1, 'Main navigation must be present'
@@ -246,8 +246,8 @@ def test_cp_should_have_valid_main_nav_structure(testserver, testbrowser):
         'User profile must be present')
 
 
-def test_cp_should_have_valid_services_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
+def test_cp_should_have_valid_services_structure(testbrowser):
+    browser = testbrowser('/centerpage/zeitonline')
     html = browser.cssselect
 
     assert len(html('li[data-id="epaper"]')) == 1, (
@@ -260,8 +260,8 @@ def test_cp_should_have_valid_services_structure(testserver, testbrowser):
         'Archiv link not present.')
 
 
-def test_cp_should_have_valid_classifieds_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
+def test_cp_should_have_valid_classifieds_structure(testbrowser):
+    browser = testbrowser('/centerpage/zeitonline')
     html = browser.cssselect
 
     assert len(html('li[data-id="abo"] > a')) == 1, (
@@ -284,8 +284,8 @@ def test_cp_should_have_valid_classifieds_structure(testserver, testbrowser):
         'Automarkt link is not present.')
 
 
-def test_cp_has_valid_burger_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
+def test_cp_has_valid_burger_structure(testbrowser):
+    browser = testbrowser('/centerpage/zeitonline')
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
     assert len(html('svg.logo_bar__menu-icon--burger')) == 1, (
@@ -294,8 +294,8 @@ def test_cp_has_valid_burger_structure(testserver, testbrowser):
         'Main menu close icon is missing')
 
 
-def test_cp_has_valid_search_structure(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/zeitonline' % testserver.url)
+def test_cp_has_valid_search_structure(testbrowser):
+    browser = testbrowser('/centerpage/zeitonline')
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
     assert len(html('form.search'
