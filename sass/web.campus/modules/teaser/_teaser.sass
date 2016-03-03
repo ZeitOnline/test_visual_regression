@@ -5,17 +5,6 @@
 	position: relative
 	max-width: 95%
 
-%teaser-title
-	background-color: $white
-	color: $zco-charcoal
-	display: inline-block
-	font-family: $font-beckett
-	font-weight: normal
-	letter-spacing: 1.5px
-	line-height: 0.95
-	padding: remify(15px 20px 0 0)
-	text-transform: uppercase
-
 %teaser-kicker
 	background-color: $white
 	color: $zco-accent
@@ -25,7 +14,16 @@
 	line-height: 1.25
 	padding: remify(6px 13px 0 0)
 	position: absolute
-	bottom: 96% // this would be 100%, but we want to align the character bottom with the box bottom
+	text-transform: uppercase
+
+%teaser-title
+	background-color: transparent
+	color: $zco-charcoal
+	font-family: $font-beckett
+	font-weight: normal
+	letter-spacing: 1.5px
+	line-height: 0.95
+	position: relative
 	text-transform: uppercase
 
 %teaser-text

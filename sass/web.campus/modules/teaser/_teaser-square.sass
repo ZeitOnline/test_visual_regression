@@ -9,10 +9,15 @@
 
 	&__heading
 		@extend %teaser-heading
-		margin: remify(-24px 0 10px)
+		margin: remify(-10px 0 10px)
+
+	&__combined-link
+		box-shadow: 10px -3px 0 10px $white
+		background-color: $white
 
 	&__kicker
 		@extend %teaser-kicker
+		top: -34px
 
 	&__title
 		@extend %teaser-title
@@ -28,7 +33,9 @@
 		padding: $cp-padding
 		width: 50%
 		&__heading
-			margin-top: remify(-32px)
+			margin-top: remify(-14px)
+		&__combined-link
+			box-shadow: 10px -10px 0 10px $white
 		&__title
 			font-size: remify(42px)
 		&__text
