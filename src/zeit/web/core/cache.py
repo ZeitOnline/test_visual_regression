@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
+import random
+import time
 
 import dogpile.cache
 import dogpile.cache.api
@@ -57,19 +59,25 @@ dogpile.cache.backends.memcached.GenericMemcachedBackend.delete = (
     delete_ignore_server_error)
 
 
-def acquire_ignore_server_error(self, *args, **kw):
+def acquire_shorter_backoff(self, wait=True):
     try:
         with zeit.web.core.metrics.timer('acquire.memcache.response_time'):
-            return original_acquire(self, *args, **kw)
+            client = self.client_fn()
+            for i in range(2):
+                if client.add(self.key, 1, self.timeout):
+                    return True
+                elif not wait:
+                    return False
+                else:
+                    sleep_time = 0.5 + (0.3 * random.random())
+                    time.sleep(sleep_time)
     except:
         log.warning(
             'acquire: Error connecting to memcache at %s',
             self.client_fn().addresses)
         return False
-original_acquire = (
-    dogpile.cache.backends.memcached.MemcachedLock.acquire)
 dogpile.cache.backends.memcached.MemcachedLock.acquire = (
-    acquire_ignore_server_error)
+    acquire_shorter_backoff)
 
 
 def release_ignore_server_error(self, *args, **kw):

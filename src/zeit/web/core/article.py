@@ -279,3 +279,12 @@ class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):
             nodes[0].get('uniqueId'), {})
 
 RESSORTFOLDER_SOURCE = RessortFolderSource()
+
+
+@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
+@grokcore.component.implementer(zeit.web.core.interfaces.IDetailedContentType)
+def content_type(context):
+    typ = zeit.cms.interfaces.ITypeDeclaration(context, None)
+    if typ is None:
+        return 'unknown'
+    return typ.type_identifier

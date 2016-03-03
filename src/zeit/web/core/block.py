@@ -687,6 +687,9 @@ class AdvertisementNextread(Nextread):
     def random_item(self, folder):
         if not folder:
             return None
+        # Invalidate child name cache, since the folder object might have been
+        # cached, so its contents may not be up to date.
+        folder._local_unique_map_data.clear()
         key = random.sample(folder.keys(), 1)
         if not key:
             return None

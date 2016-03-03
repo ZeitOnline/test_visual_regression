@@ -4,7 +4,15 @@ import lxml.etree
 import zeit.web.core.application
 
 
-def test_amp_contains_required_microdata(testbrowser, testserver):
+def test_amp_paragraph_should_contain_expected_structure(tplbrowser):
+    browser = tplbrowser('zeit.web.core:templates/amp/blocks/paragraph.html',
+                         block=u'Wie lässt sich diese Floskel übersetzen? ')
+    assert browser.cssselect('p.paragraph.article__item')
+    assert browser.cssselect('p.paragraph.article__item')[0].text.strip() == (
+        u'Wie lässt sich diese Floskel übersetzen?')
+
+
+def test_amp_contains_required_microdata(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     publisher = browser.cssselect('[itemprop="publisher"]')[0]
     logo = publisher.cssselect('[itemprop="logo"]')[0]
@@ -25,10 +33,10 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
     assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
         'ZEIT ONLINE')
     assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
-        testserver.url + '/index')
+        'http://localhost/index')
     assert logo.get('itemtype') == 'http://schema.org/ImageObject'
     assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
-        testserver.url + '/static/latest/images/'
+        'http://localhost/static/latest/images/'
         'structured-data-publisher-logo-zon.png')
     assert logo.cssselect('[itemprop="width"]')[0].get('content') == '565'
     assert logo.cssselect('[itemprop="height"]')[0].get('content') == '60'
@@ -36,7 +44,7 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
     # check Article
     assert article.get('itemtype') == 'http://schema.org/Article'
     assert main_entity_of_page.get('content') == (
-        testserver.url + '/zeit-online/article/amp')
+        'http://localhost/zeit-online/article/amp')
     text = headline.text_content().strip()
     assert text.startswith(u'Flüchtlinge: ')
     assert text.endswith(u'Mehr Davos, weniger Kreuth')
@@ -45,7 +53,7 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
     # check ImageObject
     assert image.get('itemtype') == 'http://schema.org/ImageObject'
     assert image.cssselect('[itemprop="url"]')[0].get('content') == (
-        testserver.url + '/zeit-online/image/'
+        'http://localhost/zeit-online/image/'
         'filmstill-hobbit-schlacht-fuenf-hee/wide__820x461')
     assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
     assert image.cssselect('[itemprop="height"]')[0].get('content') == '461'
@@ -60,10 +68,10 @@ def test_amp_contains_required_microdata(testbrowser, testserver):
     assert author.get('itemtype') == 'http://schema.org/Person'
     assert author.cssselect('[itemprop="name"]')[0].text == 'Jochen Wegner'
     assert author.cssselect('[itemprop="url"]')[0].get('href') == (
-        testserver.url + '/autoren/W/Jochen_Wegner/index')
+        'http://localhost/autoren/W/Jochen_Wegner/index')
 
 
-def test_amp_nextread_contains_required_microdata(testbrowser, testserver):
+def test_amp_nextread_contains_required_microdata(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/simple-nextread')
 
     article = browser.cssselect('article.nextread')[0]
@@ -77,7 +85,7 @@ def test_amp_nextread_contains_required_microdata(testbrowser, testserver):
     # check Article
     assert article.get('itemtype') == 'http://schema.org/Article'
     assert main_entity_of_page.get('href') == (
-        testserver.url + '/zeit-online/article/zeit')
+        'http://localhost/zeit-online/article/zeit')
     assert headline.text_content().strip() == (
         'Crystal Meth: Nancy braucht was Schnelles')
     assert date_published.get('datetime') == '2015-02-12T04:32:17+01:00'
@@ -85,12 +93,12 @@ def test_amp_nextread_contains_required_microdata(testbrowser, testserver):
     assert author.get('itemtype') == 'http://schema.org/Person'
     assert author.cssselect('[itemprop="name"]')[0].text == 'Dorit Kowitz'
     assert author.cssselect('[itemprop="url"]')[0].get('href') == (
-        testserver.url + '/autoren/K/Dorit_Kowitz')
+        'http://localhost/autoren/K/Dorit_Kowitz')
 
     # check ImageObject
     assert image.get('itemtype') == 'http://schema.org/ImageObject'
     assert image.cssselect('[itemprop="url"]')[0].get('content') == (
-        testserver.url + '/zeit-online/image/crystal-meth-nancy-schmidt/'
+        'http://localhost/zeit-online/image/crystal-meth-nancy-schmidt/'
         'cinema__820x351')
     assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
     assert image.cssselect('[itemprop="height"]')[0].get('content') == '351'
@@ -112,26 +120,26 @@ def test_amp_shows_breaking_news_banner(testbrowser):
     assert browser.cssselect('.breaking-news-banner')
 
 
-def test_amp_has_correct_canonical_url(testbrowser, testserver):
+def test_amp_has_correct_canonical_url(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     assert browser.cssselect('link[rel="canonical"]')[0].get('href') == (
-        testserver.url + '/zeit-online/article/amp')
+        'http://localhost/zeit-online/article/amp')
 
 
-def test_amp_article_has_correct_webtrekk_pixel(testbrowser, testserver):
+def test_amp_article_has_correct_webtrekk_pixel(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     source = browser.cssselect('amp-pixel')[0].attrib.get('src')
     assert source == (
         u'https://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
-        u'redaktion.wirtschaft...article.zede|{url}/zeit-online/article/amp'
+        u'redaktion.wirtschaft...article.zede|'
+        u'localhost/zeit-online/article/amp'
         u',0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&cg3=wirtschaft&cg4=zede'
         u'&cg5=&cg6=&cg7=amp&cg8=wirtschaft/article&cg9=2016-01-22'
         u'&cp1=jochen wegner&cp2=wirtschaft/bild-text&cp3=1/2&cp4=wirtschaft;'
         u'flüchtlinge;flüchtling;weltwirtschaftsforum davos;arbeitsmarkt;'
         u'migration;europäische union&cp5=2016-01-22 11:55:46.556878+01:00'
         u'&cp6=7583&cp7=&cp8=zede&cp9=wirtschaft/article&cp10=&cp11='
-        u'&cp12=mobile.site&cp13=mobile&cp15=&cp25=amp').format(
-            url=testserver['http_address'])
+        u'&cp12=mobile.site&cp13=mobile&cp15=&cp25=amp')
 
 
 def test_amp_article_contains_sharing_links(testbrowser):

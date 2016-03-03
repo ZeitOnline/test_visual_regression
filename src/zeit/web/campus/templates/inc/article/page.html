@@ -1,0 +1,20 @@
+{% extends "zeit.web.core:templates/inc/article/page.html" %}
+
+{% block before_page %}
+    {% if page.number == 0 -%}
+        {% if not view.is_all_pages_view %}
+            {% include [
+                "{0}:templates/inc/article/table-of-contents.html".format(view.package),
+                "zeit.web.core:templates/inc/article/table-of-contents.html"] %}
+        {% endif %}
+        <p class="article__summary article__item" itemprop="description">
+            {{- view.subtitle -}}
+        </p>
+    {%- endif %}
+{% endblock %}
+
+{% block table_of_contents %}
+    {% if page.number != 0 -%}
+        {{ super() }}
+    {%- endif %}
+{% endblock %}
