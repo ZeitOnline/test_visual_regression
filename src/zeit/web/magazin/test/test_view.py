@@ -233,10 +233,10 @@ def test_artikel05_should_have_header_image(testbrowser):
 
 def test_column_should_have_header_image(testbrowser):
     browser = testbrowser('/artikel/standardkolumne-beispiel')
-    assert '<div class="article__column__headerimage">' in browser.contents
-    assert '<div class="scaled-image">' in browser.contents
-    assert ('<img alt="Die ist der image sub text" title="Die ist der image'
-            ' sub text" class=" figure__media"') in browser.contents
+    assert browser.cssselect('div.article__column__headerimage')
+    assert browser.cssselect('figure.scaled-image')
+    image = browser.cssselect('img.figure__media')[0]
+    assert image.attrib['alt'] == 'Die ist der image sub text'
 
 
 def test_column_should_not_have_header_image(testbrowser):

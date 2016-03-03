@@ -322,12 +322,14 @@ def _maintenance_from_xml(xml, maintenance):
 
         if not elem or elem.strip() == '':
             elem = maintenance[key]
-        if elem and elem.lower() == 'false':
+        elif elem and elem.lower() == 'false':
             elem = False
-        if elem and elem.lower() == 'true':
+        elif elem and elem.lower() == 'true':
             elem = True
-        if zeit.web.core.date.parse_date(elem):
-            elem = zeit.web.core.date.parse_date(elem)
+        else:
+            value = zeit.web.core.date.parse_date(elem, 'iso-8601')
+            if value:
+                elem = value
 
         maintenance[key] = elem
     return maintenance
