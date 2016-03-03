@@ -1,3 +1,4 @@
+import datetime
 import pytest
 import requests
 import zope.component
@@ -172,3 +173,13 @@ def test_cp_should_include_keyword_entity_type_in_detailed_content_type(
         'http://xml.zeit.de/dynamic/angela-merkel')
     view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
     assert view.detailed_content_type == 'centerpage.centerpage.person'
+
+def test_cp_should_render_raw_code(testbrowser):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/raw_code')
+    code = cp[0][0][0].raw_code.replace('<code>', '').replace('</code>', '')
+    browser = testbrowser('/zeit-online/raw_code')
+    assert browser.cssselect('code')[0].text == code
+
+#@pytest.mark.skipif(datetime.datetime.now() < datetime.datetime(2016, 3, 8),
+#                    reason='Should work when )
