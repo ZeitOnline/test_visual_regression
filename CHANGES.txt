@@ -11,8 +11,11 @@ Change log for zeit.web
 
 - BUG-361: Support dates with timezones in community-maintenance.xml
 
-- FIX: Refresh contents of advertisement-nextread folder, so we don't
-  access content that was retracted while the nextread folder was cached
+- BUG-348: Sanitize webtrekk content id
+           (Sanitizing now keeps `-`, since some ressort use that)
+
+- FIX: Refresh contents of advertisement-nextread folder, so we don't access
+       content that was retracted while the nextread folder was cached
 
 - MAINT: Ensure stable return type for nextreads and comment counts
 
