@@ -238,7 +238,7 @@ def test_image_template_should_designate_correct_layouts(testbrowser):
     stamp = browser.cssselect('figure.figure-stamp--right img')[0]
     assert stamp.attrib['data-variant'] == 'portrait'
     fullwidth = browser.cssselect('figure.figure-full-width img')[0]
-    assert fullwidth.attrib['data-variant'] == 'super'
+    assert fullwidth.attrib['data-variant'] == 'wide'
 
 
 def test_macro_headerimage_should_produce_markup(jinja2_env):
