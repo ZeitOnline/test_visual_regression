@@ -4,6 +4,12 @@ Change log for zeit.web
 2.62 (unreleased)
 -----------------
 
+- MAINT: Refactor ZMO nextread
+
+- MAINT: Deprecate ZMO copyrights mechanics in favour of js solution
+
+- FIX: Add margin to major/ minor area
+
 - ZON-2785: Relaunch ZMO CPs:
   * New teaser structure for ZMO
   * Cleanup teaser types
