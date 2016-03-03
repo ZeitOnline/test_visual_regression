@@ -145,7 +145,7 @@ def test_dynamic_content_should_have_marker_interface(application):
 
 def test_content_without_type_should_have_no_content_interfaces(application):
     content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/unknown/missing-contenttype-but-has-interfaces')
+        'http://xml.zeit.de/zeit-online/article/missing-contenttype')
     assert isinstance(
         content, zeit.cms.repository.unknown.PersistentUnknownResource)
     assert not zeit.content.article.interfaces.IArticle.providedBy(content)
