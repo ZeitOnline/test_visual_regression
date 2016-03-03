@@ -1,22 +1,4 @@
 {% extends "zeit.web.site:templates/content.html" %}
-
-{% macro render_page(page) %}
-    {% set contents_printed = False %}
-    {% for item in page %}
-        {% set type = item | block_type %}
-        {# XXX Urghs this is nasty #}
-        {% if type in ['place', 'contentadblock', 'cardstack', 'liveblog', 'inlinegallery'] %}
-            {{ blocks[type](item, view) }}
-        {% else %}
-            {% if not (contents_printed or view.is_all_pages_view) and type in ['paragraph'] %}
-                {% include "zeit.web.site:templates/inc/article/table-of-contents.tpl" %}
-                {% set contents_printed = True %}
-            {% endif %}
-            {{ (blocks[type] or blocks["no_block"])(item) }}
-        {% endif %}
-    {% endfor %}
-{% endmacro %}
-
 {% block content_ad_script -%}
 {% if view.context.advertising_enabled %}
 <script type="text/javascript">
@@ -33,13 +15,15 @@
 
 {% block article_pages %}
     <section class="article-page" data-page-number="{{ view.current_page.number + 1 }}">
-        {{ render_page(view.current_page) }}
+        {%- set page = view.current_page -%}
+        {%- include "zeit.web.core:templates/inc/article/page.html" -%}
     </section>
 {% endblock article_pages %}
 
 {% block article_main_image %}
     {% if view.page_nr == 1 %}
-        {{ blocks['image'](view.main_image_block)}}
+        {% set image = view.main_image_block %}
+        {% include "zeit.web.core:templates/inc/asset/image_article.tpl" %}
     {% endif %}
 {% endblock article_main_image %}
 

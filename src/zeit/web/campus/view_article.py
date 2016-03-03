@@ -25,3 +25,10 @@ class Article(
             return 'leserartikel'
         else:
             return 'default'
+
+
+@pyramid.view.view_config(name='seite',
+                          path_info='.*seite-(.*)',
+                          renderer='templates/article.html')
+class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
+    pass
