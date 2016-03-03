@@ -192,7 +192,8 @@ def test_image_should_use_variant_given_on_layout(application):
         'http://xml.zeit.de/zeit-online/image'
         '/filmstill-hobbit-schlacht-fuenf-hee/')
     model_block = mock.Mock()
-    model_block.layout = imageLayoutSource(content).find('large-original')
+    model_block.layout = imageLayoutSource(content).find(
+        'column-width-original')
     model_block.is_empty = False
     model_block.xml = None
     model_block.references.target = image
@@ -280,6 +281,139 @@ def test_block_breaking_news_has_correct_date(application):
 
     breaking_news = zeit.web.core.block.BreakingNews()
     assert breaking_news.date_first_released == view.date_first_released
+
+
+def test_block_citation_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    block.text = u'Lorem ipsum dülör sit amet, consetetur sadipscing elitr'
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/citation.html',
+        block=block)
+    assert browser.cssselect(
+        'figure.quote.article__item blockquote.quote__text')
+    assert browser.cssselect('blockquote.quote__text')[0].text.strip() == (
+        u'Lorem ipsum dülör sit amet, consetetur sadipscing elitr')
+
+
+def test_block_contentadblock_should_contain_expected_structure(tplbrowser):
+    view = mock.Mock()
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/contentadblock.html', view=view)
+    assert browser.cssselect('div#iq-artikelanker')
+
+
+def test_block_image_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    block.href = 'http://images.zeit.de/image.jpg'
+    block.figure_mods = ('wide', 'rimless', 'apart')
+    block.copyright = (('Andreas Gursky', 'http://www.example.com', False),)
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/image.html', block=block)
+    assert browser.cssselect('img.article__media-item')
+
+
+def test_block_infobox_should_contain_expected_structure(tplbrowser):
+    view = mock.Mock()
+    view.package = 'zeit.web.site'
+    block = mock.Mock()
+    block.title = 'Infobox-Titel'
+    block.contents = (('Infos', 'Hier die Infos über'),)
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/infobox.html', block=block,
+        view=view)
+    assert browser.cssselect('aside.infobox.js-infobox')
+    assert browser.cssselect('aside.infobox.js-infobox')[0].get('id') == (
+        'infoboxtitel')
+
+
+def test_block_inlinegallery_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    block = {}
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/inlinegallery.html', block=block)
+    assert browser.cssselect('div.inline-gallery')
+
+
+def test_block_intertitle_should_contain_expected_structure(tplbrowser):
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/intertitle.html')
+    assert browser.cssselect('h2.article__subheading.article__item')
+
+
+def test_block_liveblog_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/liveblog.html', block=block)
+    assert browser.cssselect('div.liveblog')
+
+
+def test_block_orderedlist_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/orderedlist.html', block=block)
+    assert browser.cssselect('ol.list.article__item')
+
+
+def test_block_paragraph_should_contain_expected_structure(tplbrowser):
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/paragraph.html',
+        block=u'Lorem ipsum dülör sit amet, consetetur sadipscing elitr')
+    assert browser.cssselect('p.paragraph.article__item')
+    assert browser.cssselect('p.paragraph.article__item')[0].text.strip() == (
+        u'Lorem ipsum dülör sit amet, consetetur sadipscing elitr')
+
+
+def test_block_place_should_contain_expected_structure(tplbrowser):
+    view = mock.Mock()
+    view.context.advertising_enabled = True
+    view.banner_channel = {}
+    block = mock.Mock()
+    block.on_page_nr = 1
+    block.tile = 7
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/place.html', view=view,
+        block=block)
+    browser.cssselect('script[type="text/javascript"]')
+
+
+def test_block_portraitbox_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/portraitbox.html', block=block)
+    browser.cssselect(
+        'figure.portraitbox.article__item.article__item--marginalia')
+
+
+def test_block_quiz_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/quiz.html', block=block)
+    browser.cssselect(
+        'div.article__item.article__item--wide.article__item--rimless')
+
+
+def test_block_raw_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/raw.html', block=block)
+    browser.cssselect('div.raw')
+
+
+def test_block_unorderedlist_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/unorderedlist.html', block=block)
+    browser.cssselect('ul.list.article__item')
+
+
+def test_block_video_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    block.supertitle = 'supertitle'
+    block.title = 'title'
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/video.html', block=block)
+    browser.cssselect(
+        'div.article__item article__item--wide.article__item--rimless')
 
 
 def test_find_nextread_returns_none_if_nonexistent(application):

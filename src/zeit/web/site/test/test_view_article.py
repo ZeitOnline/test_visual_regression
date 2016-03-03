@@ -1369,7 +1369,7 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
 def test_newsletter_optin_page_has_webtrekk_ecommerce(testbrowser):
     browser = testbrowser(
         '/zeit-online/article/simple?newsletter-optin=elbVertiefung-_!1:2')
-    assert '8: \'elbvertiefung_1_2\'' in browser.contents
+    assert '8: \'elbvertiefung-_1_2\'' in browser.contents
 
 
 def test_no_webtrekk_ecommerce_without_newsletter_optin(testbrowser):
