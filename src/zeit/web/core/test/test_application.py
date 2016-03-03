@@ -135,6 +135,12 @@ def test_content_should_have_marker_interface(application):
     assert zeit.web.core.interfaces.IInternalUse.providedBy(content)
 
 
+def test_dynamic_content_should_have_marker_interface(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/dynamic/angela-merkel')
+    assert zeit.web.core.interfaces.IInternalUse.providedBy(content)
+
+
 def test_transaction_aborts_after_request(testbrowser):
     with mock.patch('transaction.TransactionManager.commit') as commit:
         testbrowser('/artikel/01')

@@ -443,7 +443,7 @@ def getcontent_try_without_traversal(self, unique_id):
     try:
         content = self.getUncontainedContent(unique_id)
     except KeyError:
-        return original_getcontent(self, unique_id)
+        content = original_getcontent(self, unique_id)
     zope.interface.alsoProvides(
         content, zeit.cms.repository.interfaces.IRepositoryContent,
         zeit.web.core.interfaces.IInternalUse)
