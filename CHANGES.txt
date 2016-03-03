@@ -20,6 +20,8 @@ Change log for zeit.web
   * Use Standart image template in ZMO
   * Move copyright logic to core and use it in ZMO
 
+- ZON-2523: Add campus framebuilder
+
 - ZON-2782: Refactor ZMO article image macro to dedicated template
 
 - ZON-2835: Move blocks from site macros to template files in core.
@@ -34,7 +36,7 @@ Change log for zeit.web
        content that was retracted while the nextread folder was cached
 
 - FIX: Remove superfluous and misleading interfaces from content objects that
-  have no content type (due to missing or broken meta files).
+       have no content type (due to missing or broken meta files).
 
 - MAINT: Ensure stable return type for nextreads and comment counts
 
