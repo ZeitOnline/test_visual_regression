@@ -7,7 +7,9 @@ import pytest
 import requests
 import zope.component
 
+import zeit.content.article.interfaces
 import zeit.cms.interfaces
+import zeit.cms.repository.unknown
 
 import zeit.web.core.application
 import zeit.web.core.interfaces
@@ -139,6 +141,14 @@ def test_dynamic_content_should_have_marker_interface(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/dynamic/angela-merkel')
     assert zeit.web.core.interfaces.IInternalUse.providedBy(content)
+
+
+def test_content_without_type_should_have_no_content_interfaces(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/unknown/missing-contenttype-but-has-interfaces')
+    assert isinstance(
+        content, zeit.cms.repository.unknown.PersistentUnknownResource)
+    assert not zeit.content.article.interfaces.IArticle.providedBy(content)
 
 
 def test_transaction_aborts_after_request(testbrowser):

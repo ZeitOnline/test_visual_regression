@@ -29,6 +29,7 @@ import zeit.cms.repository.file
 import zeit.cms.repository.folder
 import zeit.cms.repository.interfaces
 import zeit.cms.repository.repository
+import zeit.cms.repository.unknown
 import zeit.connector
 
 import zeit.web
@@ -427,6 +428,7 @@ def getitem_with_marker_interface(self, key):
         content,
         zeit.cms.repository.interfaces.IRepositoryContent,
         zeit.web.core.interfaces.IInternalUse)
+    _remove_misleading_interfaces(content)
     # ...and we don't want to locate content here, due to resolve_parent below.
     return content
 zeit.cms.repository.repository.Container.__getitem__ = (
@@ -447,10 +449,25 @@ def getcontent_try_without_traversal(self, unique_id):
     zope.interface.alsoProvides(
         content, zeit.cms.repository.interfaces.IRepositoryContent,
         zeit.web.core.interfaces.IInternalUse)
+    _remove_misleading_interfaces(content)
     return content
 original_getcontent = zeit.cms.repository.repository.Repository.getContent
 zeit.cms.repository.repository.Repository.getContent = (
     getcontent_try_without_traversal)
+
+
+UNKNOWN_RESOURCE_INTERFACES = set(zope.interface.providedBy(
+    zeit.cms.repository.unknown.PersistentUnknownResource(u'')))
+
+
+def _remove_misleading_interfaces(content):
+    """If the meta file is missing, content objects still might provide
+    interfaces like ICommonMetadata or IArticle, while having no content-type,
+    thereby making any interface-based checks useless. Thus we remove any
+    further interfaces from type-less content objects.
+    """
+    if zeit.cms.repository.interfaces.IUnknownResource.providedBy(content):
+        zope.interface.directlyProvides(content, *UNKNOWN_RESOURCE_INTERFACES)
 
 
 # Determine __parent__ folder on access, instead of having Repository write it.
