@@ -8,15 +8,14 @@ import re
 import urllib
 import urlparse
 
-import grokcore.component
 import jinja2
 import peak.util.proxies
 import pysolr
 import zope.component
 
+import zeit.cms.content.interfaces
 import zeit.cms.content.sources
 import zeit.cms.interfaces
-import zeit.cms.content.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.solr.interfaces
 
@@ -46,6 +45,22 @@ def to_int(val, pattern=re.compile(r'[^\d.]+')):
     if hasattr(val, '__unicode__') or isinstance(val, unicode):
         val = unicode(val).encode('ascii', 'ignore')
     return int(pattern.sub('', '0' + str(val)))
+
+
+def update_query(url, **params):
+    """Safely update a URL's query parameters, overwriting and sorting
+    existing entries while preserving all other parts of the URL.
+
+    :param url: Uniform resource locator
+    :param params: New query parameters
+    :rtype: unicode
+    """
+
+    parts = list(urlparse.urlparse(url))
+    combined = dict(urlparse.parse_qs(parts[4]), **params)
+    query = collections.OrderedDict(sorted(combined.items()))
+    parts[4] = urllib.urlencode(query, doseq=True)
+    return urlparse.urlunparse(parts)
 
 
 def update_path(url, *segments):

@@ -904,7 +904,7 @@ def append_get_params(request, **kw):
 
     if params == []:
         return request.path_url
-    return '?'.join([request.path_url, urllib.urlencode(params)])
+    return u'{}?{}'.format(request.path_url, urllib.urlencode(params))
 
 
 @zeit.web.register_filter

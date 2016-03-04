@@ -206,6 +206,27 @@
         <em>Star Wars</em>).
       </p>
     </division>
+    <division type="page" teaser="Die dritte Seite">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    </division>
+    <division type="page" teaser="Die vierte Seite">
+      <p>Necessitatibus tempore totam quo error, odit quasi obcaecati facilis rem a optio labore doloribus culpa, neque, eum laudantium corrupti et reiciendis dolorem quaerat dicta officiis maxime asperiores fugiat!</p>
+    </division>
+    <division type="page" teaser="Die fünfte Seite">
+      <p>Porro perferendis modi accusantium et, cum aut, enim aliquid, harum blanditiis recusandae perspiciatis fuga suscipit odit praesentium laboriosam sed nisi assumenda tenetur necessitatibus repellendus.</p>
+    </division>
+    <division type="page" teaser="Die sechste Seite">
+      <p>Nulla enim blanditiis, voluptatem ipsam expedita sed atque aperiam, ad deserunt temporibus? Incidunt saepe praesentium illo aperiam laboriosam nemo assumenda consectetur eligendi commodi iste.</p>
+    </division>
+    <division type="page" teaser="Die siebte Seite">
+      <p>Laborum numquam, dolore dignissimos voluptate temporibus deserunt pariatur labore eos aut tenetur vitae nihil in consequuntur, facilis impedit. Aliquam iusto, aut vel itaque obcaecati?</p>
+    </division>
+    <division type="page" teaser="Die achte Seite">
+      <p>Quod aut, nemo illum perspiciatis, nobis distinctio similique. Explicabo quis, nostrum nam recusandae, totam tempore esse temporibus iusto architecto magnam consequatur labore vitae. Ex.</p>
+    </division>
+    <division type="page" teaser="Die neunte Seite">
+      <p>Commodi, cum minus quis laudantium recusandae, itaque quaerat cumque. Eos nobis veniam autem corporis repellat voluptate! Molestias amet repellat, expedita, quod adipisci incidunt necessitatibus.</p>
+    </division>
   </body>
   <teaser>
     <title>Selfiestick trifft DJ-Kabel</title>

@@ -14,8 +14,7 @@ import zeit.web.core.view_article
 @pyramid.view.view_config(renderer='templates/article.html')
 @pyramid.view.view_config(name='komplettansicht',
                           renderer='templates/komplett.html')
-class Article(
-        zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
+class Article(zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
 
     @zeit.web.reify
     def article_layout(self):

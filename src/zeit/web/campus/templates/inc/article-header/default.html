@@ -1,46 +1,68 @@
-<div class="{{ 'article-header' | with_mods(view.article_layout) }}">
-{% block article_header -%}
-    {% block article_header_image -%}
-        {% require image = get_image(content=view.main_image_block, variant_id='portrait') -%}
-            <div class="article-header__image-wrap">
-                <div class="article-header__image">
-                    {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}
-                </div>
-            </div>
-        {% endrequire -%}
-    {% endblock -%}
-
-    {% block article_headline -%}
-        {% set headertag = 'div' if view.pagination and view.pagination.current > 1 and view.current_page.teaser else 'h1' %}
-        <{{ headertag }} class="{{ 'article-header__headline' | with_mods(view.article_layout) }}" itemprop="headline">
-            <span class="{{ 'article-header__kicker' | with_mods(view.article_layout) }}">
+{% if view.pagination and view.pagination.current > 1 -%}
+    {% block article_page_header -%}
+    <div class="{{ 'page-header' | with_mods(view.article_layout) }} article__item">
+        {% set headertag = 'div' if view.current_page.teaser else 'h1' -%}
+        <{{ headertag }} class="{{ 'page-header__headline' | with_mods(view.article_layout) }}" itemprop="headline">
+            <span class="{{ 'page-header__kicker' | with_mods(view.article_layout) }}">
                 {{- view.supertitle -}}
             </span>
             {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
-            <span class="{{ 'article-header__title' | with_mods(view.article_layout) }}">
+            <span class="{{ 'page-header__title' | with_mods(view.article_layout) }}">
                 {{- view.title -}}
             </span>
         </{{ headertag }}>
-    {% endblock -%}
-
-    <div class="article-header__info">
-    {% block article_topic_link -%}
-        {# XXX Has to be replaced after ZON-2838 #}
-        <a class="{{ 'article-header__topic-link' | with_mods(view.article_layout) }}" href="">!ZON-2838!</a>
-    {% endblock -%}
-    {% block article_byline -%}
-        {% set byline = view.context | get_byline('main') -%}
-        {% if byline | length -%}
-        <div class="article-header__byline">
-            {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
+        <div class="page-header__page-headline">
+            Seite {{ view.pagination.current }}/{{ view.pagination.total }}
+            {%- if view.current_page.teaser -%}
+                : <h1 class="page-header__page-title">{{ view.current_page.teaser }}</h1>
+            {%- endif -%}
         </div>
-        {% endif -%}
+    </div>
     {% endblock -%}
-    {% block article_metadata -%}
-        <div class="article-header__metadata">
-            {%- include "zeit.web.campus:templates/inc/article/metadata.html" -%}
+{% else -%}
+    <div class="{{ 'article-header' | with_mods(view.article_layout) }}">
+    {% block article_header -%}
+        {% block article_header_image -%}
+            {% require image = get_image(content=view.main_image_block, variant_id='portrait') -%}
+                <div class="article-header__image-wrap">
+                    <div class="article-header__image">
+                        {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}
+                    </div>
+                </div>
+            {% endrequire -%}
+        {% endblock -%}
+
+        {% block article_headline -%}
+            <h1 class="{{ 'article-header__headline' | with_mods(view.article_layout) }}" itemprop="headline">
+                <span class="{{ 'article-header__kicker' | with_mods(view.article_layout) }}">
+                    {{- view.supertitle -}}
+                </span>
+                {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
+                <span class="{{ 'article-header__title' | with_mods(view.article_layout) }}">
+                    {{- view.title -}}
+                </span>
+            </h1>
+        {% endblock -%}
+
+        <div class="article-header__info">
+        {% block article_topic_link -%}
+            {# XXX Has to be replaced after ZON-2838 #}
+            <a class="{{ 'article-header__topic-link' | with_mods(view.article_layout) }}" href="">!ZON-2838!</a>
+        {% endblock -%}
+        {% block article_byline -%}
+            {% set byline = view.context | get_byline('main') -%}
+            {% if byline | length -%}
+            <div class="article-header__byline">
+                {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
+            </div>
+            {% endif -%}
+        {% endblock -%}
+        {% block article_metadata -%}
+            <div class="article-header__metadata">
+                {%- include "zeit.web.campus:templates/inc/article/metadata.html" -%}
+            </div>
+        {% endblock -%}
         </div>
     {% endblock -%}
     </div>
-{% endblock %}
-</div>
+{% endif %}
