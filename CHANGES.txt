@@ -4,7 +4,7 @@ Change log for zeit.web
 2.63 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2391: Improve reply-toggle performance
 
 
 2.62 (2016-03-04)
