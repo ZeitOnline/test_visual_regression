@@ -1,29 +1,37 @@
 .teaser-lead-upright
 	@extend %teaser
 
-	&__heading
-		@extend %teaser-heading
-		margin: remify(0 0 10px)
-
 	&__media
 		background-color: $greyish-white
 		height: 0
 		padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
+		margin-left: remify(-$page-padding--small)
+		margin-right: remify(-$page-padding--small)
 
-	&__content
-		margin-top: remify(-32px)
+	&__heading
+		@extend %teaser-heading
+		margin: remify(0 0 10px)
+
+	&__combined-link
+		@extend %teaser-combined-link
 
 	&__kicker
 		@extend %teaser-kicker
+		top: remify(-20px)
 
 	&__title
 		@extend %teaser-title
+		display: block
 		font-size: remify(42px)
+		padding-top: remify(16px)
 
 	&__text
 		@extend %teaser-text
 
-+respond-max($break-tablet-min)
+	&__metadata
+		@extend %teaser-metadata
+
++respond-min($break-tablet-min)
 	.teaser-lead-upright
 		&__kicker,
 		&__title,
