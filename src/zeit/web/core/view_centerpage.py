@@ -57,6 +57,13 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
             return False
 
     @zeit.web.reify
+    def meta_robots(self):
+        # Prevent continuation pages from being indexed
+        if zeit.web.core.view.is_paginated(self.context, self.request):
+            return 'noindex,follow,noodp,noydir,noarchive'
+        return super(Centerpage, self).meta_robots
+
+    @zeit.web.reify
     def tracking_type(self):
         return type(self.context).__name__.title()
 

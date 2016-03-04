@@ -20,6 +20,10 @@ Change log for zeit.web
   * Use Standart image template in ZMO
   * Move copyright logic to core and use it in ZMO
 
+- ZON-2433: Improve sharing logic of cardstacks
+
+- ZON-2839: Add ZEIT Campus article pagination
+
 - ZON-2523: Add campus framebuilder
 
 - ZON-2782: Refactor ZMO article image macro to dedicated template
