@@ -57,7 +57,8 @@ def update_query(url, **params):
     """
 
     parts = list(urlparse.urlparse(url))
-    query = collections.OrderedDict(urlparse.parse_qs(parts[4]), **params)
+    combined = dict(urlparse.parse_qs(parts[4]), **params)
+    query = collections.OrderedDict(sorted(combined.items()))
     parts[4] = urllib.urlencode(query, doseq=True)
     return urlparse.urlunparse(parts)
 
