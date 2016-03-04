@@ -4,6 +4,7 @@ Change log for zeit.web
 2.62 (unreleased)
 -----------------
 
+- ZON-2433: Improve sharing logic of cardstacks
 
 - ZON-2839: Add ZEIT Campus article pagination
 
