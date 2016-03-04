@@ -1,3 +1,4 @@
+# coding: utf8
 import re
 
 import pyramid.view
@@ -32,7 +33,21 @@ class Base(zeit.web.core.view.Base):
         keywords = ','.join(self.adwords)
 
         topiclabel = getattr(self.context, 'topicpagelink_label', '')
-        topiclabel = "".join(re.findall(r"[A-Za-z0-9_]*", topiclabel))
+
+        # OPTIMIZE: move this into an own function for all views?
+        if topiclabel:
+            topiclabel = topiclabel.lower().replace(
+                u'ä', 'ae').replace(
+                u'ö', 'oe').replace(
+                u'ü', 'ue').replace(
+                u'á', 'a').replace(
+                u'à', 'a').replace(
+                u'é', 'e').replace(
+                u'è', 'e').replace(
+                u'ß', 'ss')
+            topiclabel = re.sub(u'[^_a-zA-Z0-9]', '_', topiclabel)
+            topiclabel = re.sub(u'_+', '_', topiclabel)
+            topiclabel = re.sub(u'^_|_$', '', topiclabel)
 
         return [('$handle', self.adcontroller_handle),
                 ('level2', 'campus'),
