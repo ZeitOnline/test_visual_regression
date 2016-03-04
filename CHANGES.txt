@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.62 (unreleased)
+2.63 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.62 (2016-03-04)
 -----------------
 
 - MAINT: Refactor ZMO nextread
