@@ -70,10 +70,27 @@
 
         <!-- Article body goes here -->
         {% for page in view.pages %}
+            {% set ad_displayed = False %}
             {%- for block in page -%}
                 {% include "zeit.web.core:templates/instantarticle/blocks/{}.html".format(block | block_type) ignore missing %}
+                {# ad after first paragraph #}
+                {% if page.number == 0 and block | block_type == 'paragraph' and ad_displayed == False %}
+                    {% set ad_displayed = True %}
+                    {% include "zeit.web.core:templates/instantarticle/ads/tile_4.html" ignore missing %}
+                {% endif %}
+                {# middle ad if more pages #}
+                {% if page.number > 0 %}
+                    {% if page.number == view.pages | length // 2 %}
+                        {% if page | length // 2 == loop.index %}
+                            {% include "zeit.web.core:templates/instantarticle/ads/tile_5.html" ignore missing %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
             {%- endfor -%}
         {% endfor %}
+
+        {# ad on article end #}
+        {% include "zeit.web.core:templates/instantarticle/ads/tile_8.html" ignore missing %}
 
         <!-- Analytics code loaded from an iframe -->
         <figure class="op-tracker">

@@ -232,7 +232,7 @@ def test_schema_org_main_content_of_page(testbrowser):
     assert len(select('main[itemprop="mainContentOfPage"]')) == 1
 
 
-def test_schema_org_article_mark_up(testbrowser, testserver):
+def test_schema_org_article_mark_up(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     publisher = browser.cssselect('[itemprop="publisher"]')[0]
     logo = publisher.cssselect('[itemprop="logo"]')[0]
@@ -252,10 +252,10 @@ def test_schema_org_article_mark_up(testbrowser, testserver):
     assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
         'ZEIT ONLINE')
     assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
-        testserver.url + '/index')
+        'http://localhost/index')
     assert logo.get('itemtype') == 'http://schema.org/ImageObject'
     assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
-        testserver.url + '/static/latest/images/'
+        'http://localhost/static/latest/images/'
         'structured-data-publisher-logo-zon.png')
     assert logo.cssselect('[itemprop="width"]')[0].get('content') == '565'
     assert logo.cssselect('[itemprop="height"]')[0].get('content') == '60'
@@ -263,7 +263,7 @@ def test_schema_org_article_mark_up(testbrowser, testserver):
     # check Article
     assert article.get('itemtype') == 'http://schema.org/Article'
     assert main_entity_of_page.get('href') == (
-        testserver.url + '/zeit-online/article/01')
+        'http://localhost/zeit-online/article/01')
     assert ' '.join(headline.text_content().strip().split()) == (
         u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?')
 
@@ -282,7 +282,7 @@ def test_schema_org_article_mark_up(testbrowser, testserver):
     assert author.get('itemtype') == 'http://schema.org/Person'
     assert author.cssselect('[itemprop="name"]')[0].text == 'Wenke Husmann'
     assert author.cssselect('[itemprop="url"]')[0].get('href') == (
-        testserver.url + '/autoren/H/Wenke_Husmann/index.xml')
+        'http://localhost/autoren/H/Wenke_Husmann/index.xml')
 
 
 def test_multipage_article_should_designate_meta_pagination(testbrowser):
@@ -666,10 +666,8 @@ def test_article_should_show_main_image_from_imagegroup(testbrowser):
     assert 'filmstill-hobbit-schlacht-fuenf-hee' in images[0].get('src')
 
 
-def test_article_should_have_proper_meetrics_integration(
-        testserver, testbrowser):
-    browser = testbrowser(
-        '{}/zeit-online/article/01'.format(testserver.url))
+def test_article_should_have_proper_meetrics_integration(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
     meetrics = browser.cssselect(
         'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1
@@ -729,8 +727,7 @@ def test_article_ads_should_have_pagetype_modifier(testbrowser):
     assert 'ad-desktop--7-on-article' in browser.contents
 
 
-def test_does_not_break_when_author_has_no_display_name(
-        testserver, testbrowser):
+def test_does_not_break_when_author_has_no_display_name(testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = zeit.web.magazin.view_article.Article(
         context, pyramid.testing.DummyRequest())
@@ -781,67 +778,89 @@ def test_old_archive_text_without_divisions_should_render_paragraphs(
     assert len(browser.cssselect('.article-pager__number')) == 3
 
 
-def test_imported_article_has_special_meta_robots(
-        application, monkeypatch):
-
+def test_zear_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
-    request = pyramid.testing.DummyRequest()
-
-    # test ZEAR
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'ZEAR')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'ressort', u'Fehler')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'noindex,follow', (
-        'wrong robots for ZEAR')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
-    # test TGS
+
+def test_tgs_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'TGS')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'noindex,follow', (
-        'wrong robots for TGS')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
-    # test HaBl
+
+def test_habl_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'HaBl')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'noindex,follow', (
-        'wrong robots for HaBl')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
-    # test WIWO
+
+def test_wiwo_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'WIWO')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'noindex,follow', (
-        'wrong robots for WIWO')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
-    # test GOLEM
+
+def test_golem_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'GOLEM')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'noindex,follow', (
-        'wrong robots for GOLEM')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
-    # test ZEI
+
+def test_sharing_cardstack_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'shared_cardstack_id', u'kekse')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+
+
+def test_zei_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'ZEI')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
-        'wrong robots for ZEI')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
 
-    # test no product id
+
+def test_unset_product_id_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', None)
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
-        'wrong robots for none product article')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
 
 
-def test_article_has_correct_meta_keywords(
-        application, monkeypatch):
+def test_article_has_correct_meta_keywords(application, monkeypatch):
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -1276,15 +1295,14 @@ def test_instantarticle_representation_should_have_correct_content(
     assert u'© Warner Bros.' == bro.cssselect('figcaption > cite')[0].text
 
 
-def test_instantarticle_item_should_wrap_correct_article_in_cdata(
-        testserver, testbrowser):
+def test_instantarticle_item_should_wrap_correct_article_in_cdata(testbrowser):
     browser = testbrowser(
         '/instantarticle-item/zeit-online/article/quotes')
     document = lxml.etree.fromstring(browser.contents)
     html_str = document.xpath('./*[local-name()="encoded"]/text()')[0]
     html = lxml.html.fromstring(html_str)
     canonical = html.xpath('./head/link[@rel="canonical"]/@href')[0]
-    assert canonical == testserver.url + '/zeit-online/article/quotes'
+    assert canonical == 'http://localhost/zeit-online/article/quotes'
 
 
 def test_instantarticle_should_have_tracking_iframe(testbrowser):
@@ -1321,6 +1339,17 @@ def test_instantarticle_should_render_empty_page_on_interrupt(testserver):
         testserver.url + '/instantarticle-item/zeit-online/article/01')
     assert 'X-Interrupt' in resp.headers
     assert len(resp.text) == 0
+
+
+def test_instantarticle_should_render_ads(testbrowser):
+    browser = testbrowser(
+        '/instantarticle/zeit-online/article/simple-multipage')
+    assert len(browser.cssselect(
+        'iframe[src$="/static/latest/html/fbia-ads/tile-4.html"]')) == 1
+    assert len(browser.cssselect(
+        'iframe[src$="/static/latest/html/fbia-ads/tile-5.html"]')) == 1
+    assert len(browser.cssselect(
+        'iframe[src$="/static/latest/html/fbia-ads/tile-8.html"]')) == 1
 
 
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
@@ -1361,7 +1390,7 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
 def test_newsletter_optin_page_has_webtrekk_ecommerce(testbrowser):
     browser = testbrowser(
         '/zeit-online/article/simple?newsletter-optin=elbVertiefung-_!1:2')
-    assert '8: \'elbvertiefung_1_2\'' in browser.contents
+    assert '8: \'elbvertiefung-_1_2\'' in browser.contents
 
 
 def test_no_webtrekk_ecommerce_without_newsletter_optin(testbrowser):

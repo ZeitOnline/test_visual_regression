@@ -4,13 +4,9 @@
     {% for page in view.pages %}
         <section class="article-page" data-page-number="{{ page.number+1 }}" id="seite-{{ page.number+1 }}">
             {% if not loop.first %}
-                <h3 class="article-page__page-teaser article__item">{{ page.teaser }}</h3>
+                <h2 class="article__subheading article__item">{{ page.teaser }}</h2>
             {% endif %}
-            {{ render_page(page) }}
+            {%- include "zeit.web.core:templates/inc/article/page.html" -%}
         </section>
     {% endfor %}
 {% endblock article_pages %}
-
-{% block pagination_modifier %}article-pagination--komplettansicht{% endblock %}
-
-{% block article_pager %}{% endblock article_pager %}

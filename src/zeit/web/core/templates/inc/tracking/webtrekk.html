@@ -23,7 +23,7 @@
     {% endif -%}
 
     {# https://sites.google.com/a/apps.zeit.de/verpixelungskonzept-zeit-online/webtrekk#TOC-Struktur-der-Content-IDs #}
-    {% set wt_kennung = 'redaktion.' + view.ressort | lower + '.' + view.sub_ressort | lower + '.' + serie + '.' + view.type | lower + '.' + view.product_id | lower + '|' + view.content_url.replace('http://', '') %}
+    {% set wt_kennung = ['redaktion', view.ressort, view.sub_ressort, serie, view.type, view.product_id] | map('format_webtrekk') | join('.') + '|' + view.content_url.replace('http://', '')%}
 
     {% set ivw_code = '%s%sbild-text' | format(view.ressort | lower + '/' if view.ressort, view.sub_ressort | lower + '/' if view.sub_ressort) %}
 
@@ -66,7 +66,8 @@
             13: window.Zeit.breakpoint.getTrackingBreakpoint(),
             14: "{{ 'alt' if 'zeitmz' in view.banner_channel | default('', True) else 'neu'  }}",
             15: "{{ push }}", // Eilmeldungen
-            25: "original" // Plattform
+            25: "original", // Plattform
+            26: "{{ view.detailed_content_type }}" // Inhaltlicher Pagetype
         };
 
         {% if view.is_wrapped %}

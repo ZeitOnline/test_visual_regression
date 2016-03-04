@@ -167,7 +167,8 @@ def request_thread(path):
             return
         return response.content if (200 <= response.status_code < 300) else (
             {'request_failed': datetime.datetime.utcnow()})
-    except (AttributeError, requests.exceptions.RequestException):
+    except:
+        log.warning('request_thread received error, ignoring', exc_info=True)
         return {'request_failed': datetime.datetime.utcnow()}
 
 
@@ -321,12 +322,14 @@ def _maintenance_from_xml(xml, maintenance):
 
         if not elem or elem.strip() == '':
             elem = maintenance[key]
-        if elem and elem.lower() == 'false':
+        elif elem and elem.lower() == 'false':
             elem = False
-        if elem and elem.lower() == 'true':
+        elif elem and elem.lower() == 'true':
             elem = True
-        if zeit.web.core.date.parse_date(elem):
-            elem = zeit.web.core.date.parse_date(elem)
+        else:
+            value = zeit.web.core.date.parse_date(elem, 'iso-8601')
+            if value:
+                elem = value
 
         maintenance[key] = elem
     return maintenance
@@ -359,7 +362,9 @@ def get_cacheable_thread(unique_id):
 
     try:
         document = lxml.etree.fromstring(thread)
-    except (IOError, lxml.etree.XMLSyntaxError):
+    except:
+        log.warning(
+            'get_cacheable_thread input unparseable, ignoring', exc_info=True)
         return
 
     try:
@@ -421,7 +426,7 @@ def _sort_comments(comments):
                     comments_sorted[ancestor][1]))
             except KeyError:
                 log.error("The comment with the cid {} is a reply, but"
-                          "no ancestor could be found".format(comment['cid']))
+                          " no ancestor could be found".format(comment['cid']))
         comment_index[comment['cid']] = comment
     return (comments_sorted, comment_index)
 
@@ -443,7 +448,8 @@ def request_counts(*unique_ids):
             response = requests.post(uri, data=[
                 ('unique_ids[]', uid) for uid in unique_ids], timeout=timeout)
         return response.ok and response.content or None
-    except (AttributeError, requests.exceptions.RequestException):
+    except:
+        log.warning('request_counts received error, ignoring', exc_info=True)
         return
 
 
@@ -464,7 +470,8 @@ def get_counts(*unique_ids):
         nodes = lxml.etree.fromstring(ascii).xpath('/nodes/node')
         return {zeit.cms.interfaces.ID_NAMESPACE.rstrip('/') + n.attrib['url']:
                 n.attrib['comment_count'] for n in nodes}
-    except (AttributeError, IndexError, KeyError, lxml.etree.LxmlError):
+    except:
+        log.warning('get_counts input unparseable, ignoring', exc_info=True)
         return {}
 
 

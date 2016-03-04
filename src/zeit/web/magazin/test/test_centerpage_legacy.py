@@ -28,35 +28,33 @@ def monkeyreq(monkeypatch):
     monkeypatch.setattr(pyramid.threadlocal, "get_current_request", request)
 
 
-def test_homepage_should_have_buzz_module_centerpage_should_not(
-        testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+def test_homepage_should_have_buzz_module_centerpage_should_not(testbrowser):
+    browser = testbrowser('/zeit-magazin/index')
     assert '<div class="cp_buzz">' in browser.contents
-    browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
+    browser = testbrowser('/centerpage/lebensart')
     assert '<div class="cp_buzz">' not in browser.contents
 
 
-def test_centerpage_should_have_default_keywords(testserver, testbrowser):
+def test_centerpage_should_have_default_keywords(testbrowser):
     # Default means ressort and sub ressort respectively
-    browser = testbrowser('%s/centerpage/lebensart-2' % testserver.url)
+    browser = testbrowser('/centerpage/lebensart-2')
     assert '<meta name="keywords" content="Lebensart, mode-design">' in (
         browser.contents)
 
 
-def test_centerpage_should_have_page_meta_keywords(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
+def test_centerpage_should_have_page_meta_keywords(testbrowser):
+    browser = testbrowser('/centerpage/lebensart')
     assert '<meta name="keywords" content="Pinguin">' in (
         browser.contents)
 
 
-def test_centerpage_should_have_page_meta_robots_information(
-        appbrowser, testserver, testbrowser):
+def test_centerpage_should_have_page_meta_robots_information(testbrowser):
     # SEO robots information is given
-    browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
+    browser = testbrowser('/centerpage/lebensart')
     meta_robots = browser.document.xpath('//meta[@name="robots"]/@content')
     assert 'my, personal, seo, robots, information' in meta_robots
     # No SEO robots information is given
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+    browser = testbrowser('/zeit-magazin/index')
     meta_robots = browser.document.xpath('//meta[@name="robots"]/@content')
     assert 'index,follow,noodp,noydir,noarchive' in meta_robots
 
@@ -96,32 +94,28 @@ def test_get_teaser_template_should_produce_correct_combinations():
     assert result == should
 
 
-def test_autoselected_asset_from_cp_teaser_should_be_a_gallery(
-        testserver, testbrowser):
+def test_autoselected_asset_from_cp_teaser_should_be_a_gallery(application):
     article = 'http://xml.zeit.de/centerpage/article_gallery_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.web.core.centerpage.auto_select_asset(context)
     assert isinstance(asset, zeit.content.gallery.gallery.Gallery)
 
 
-def test_autoselected_asset_from_cp_teaser_should_be_an_image(
-        testserver, testbrowser):
+def test_autoselected_asset_from_cp_teaser_should_be_an_image(application):
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.web.core.centerpage.auto_select_asset(context)
     assert isinstance(asset, zeit.content.image.imagegroup.ImageGroup)
 
 
-def test_autoselected_asset_from_cp_teaser_should_be_a_video(
-        testserver, testbrowser):
+def test_autoselected_asset_from_cp_teaser_should_be_a_video(application):
     article = 'http://xml.zeit.de/centerpage/article_video_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.web.core.centerpage.auto_select_asset(context)
     assert isinstance(asset, zeit.content.video.video.Video)
 
 
-def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(
-        testserver, testbrowser):
+def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(application):
     article = 'http://xml.zeit.de/centerpage/article_video_asset_2'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.web.core.centerpage.auto_select_asset(context)
@@ -129,13 +123,13 @@ def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(
     assert isinstance(asset[1], zeit.content.video.video.Video)
 
 
-def test_cp_has_lead_area(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
+def test_cp_has_lead_area(testbrowser):
+    browser = testbrowser('/centerpage/lebensart')
     assert '<div class="cp_lead__wrap">' in browser.contents
 
 
-def test_cp_has_informatives_area(testserver, testbrowser):
-    browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
+def test_cp_has_informatives_area(testbrowser):
+    browser = testbrowser('/centerpage/lebensart')
     assert '<div class="cp_informatives__wrap">' in browser.contents
 
 
@@ -189,7 +183,7 @@ def test_cp_leadteaser_has_expected_img_content(testbrowser):
         assert img.get('title') == 'Katze!'
 
 
-def test_cp_leadteaser_has_expected_links(testbrowser, testserver):
+def test_cp_leadteaser_has_expected_links(testbrowser):
     browser = testbrowser('/centerpage/lebensart')
     wrap = browser.cssselect('.cp_leader')
     assert len(wrap) != 0
@@ -198,7 +192,7 @@ def test_cp_leadteaser_has_expected_links(testbrowser, testserver):
         assert len(link_wrap) == 2
         for link in link_wrap:
             assert link.get('href') == (
-                testserver.url + '/centerpage/article_image_asset')
+                'http://localhost/centerpage/article_image_asset')
 
 
 def test_cp_img_button_has_expected_structure(testbrowser):
@@ -257,7 +251,7 @@ def test_cp_button_has_expected_text_content(testbrowser):
             ' zum Katzenbild passen.'
 
 
-def test_cp_button_has_expected_links(testbrowser, testserver):
+def test_cp_button_has_expected_links(testbrowser):
     browser = testbrowser('/centerpage/lebensart')
     wrap = browser.cssselect('.cp_button--small')
     assert len(wrap) != 0
@@ -266,7 +260,7 @@ def test_cp_button_has_expected_links(testbrowser, testserver):
         assert len(link_wrap) != 0
         for link in link_wrap:
             assert link.get('href') == (
-                testserver.url + '/centerpage/article_image_asset')
+                'http://localhost/centerpage/article_image_asset')
 
 
 def test_cp_large_photo_button_has_expected_structure(testbrowser):
@@ -324,7 +318,7 @@ def test_cp_should_have_informatives_ad_at_3rd_place(testbrowser):
     assert len(elements[2].cssselect('#ad-desktop-7')) == 1
 
 
-def test_cp_with_video_lead_has_correct_markup(testbrowser, testserver):
+def test_cp_with_video_lead_has_correct_markup(testbrowser):
     browser = testbrowser('/centerpage/cp_with_video_lead')
     wrap = browser.cssselect('.cp_leader--full')
     assert len(wrap) != 0
@@ -368,10 +362,10 @@ def test_cp_with_video_lead_has_correct_markup(testbrowser, testserver):
         assert len(a) == 2
         for link in a:
             assert link.get('href') == (
-                testserver.url + '/centerpage/article_video_asset')
+                'http://localhost/centerpage/article_video_asset')
 
 
-def test_cp_with_video_lead_light_has_correct_markup(testbrowser, testserver):
+def test_cp_with_video_lead_light_has_correct_markup(testbrowser):
     browser = testbrowser('/centerpage/cp_with_video_lead-2')
     wrap = browser.cssselect('.cp_leader--full')
     assert len(wrap) != 0
@@ -414,10 +408,10 @@ def test_cp_with_video_lead_light_has_correct_markup(testbrowser, testserver):
         assert len(a) == 2
         for link in a:
             assert link.get('href') == (
-                testserver.url + '/centerpage/article_video_asset')
+                'http://localhost/centerpage/article_video_asset')
 
 
-def test_cp_with_image_lead_has_correct_markup(testbrowser, testserver):
+def test_cp_with_image_lead_has_correct_markup(testbrowser):
     browser = testbrowser('/centerpage/cp_with_image_lead')
     wrap = browser.cssselect('.cp_leader--full')
     assert len(wrap) != 0
@@ -450,35 +444,31 @@ def test_cp_with_image_lead_has_correct_markup(testbrowser, testserver):
         assert len(a) == 2
         for link in a:
             assert link.get('href') == (
-                testserver.url + '/centerpage/article_image_asset')
+                'http://localhost/centerpage/article_image_asset')
 
 
-def test_lead_full_light_version_is_working(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+def test_lead_full_light_version_is_working(testbrowser):
+    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-2')
     assert '<div class="cp_leader cp_leader--full">' in browser.contents
     assert '<div class="scaled-image is-pixelperfect cp_leader__asset'\
         ' cp_leader__asset--light">' in browser.contents
 
 
-def test_get_image_asset_should_return_image_asset(testserver, testbrowser):
+def test_get_image_asset_should_return_image_asset(application):
     article = 'http://xml.zeit.de/centerpage/article_image_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.web.core.centerpage.get_image_asset(
-        context)
+    asset = zeit.web.core.centerpage.get_image_asset(context)
     assert isinstance(asset, zeit.content.image.imagegroup.ImageGroup)
 
 
-def test_get_gallery_asset_should_return_gallery_asset(
-        testserver, testbrowser):
+def test_get_gallery_asset_should_return_gallery_asset(application):
     article = 'http://xml.zeit.de/centerpage/article_gallery_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.web.core.centerpage.get_gallery_asset(
-        context)
+    asset = zeit.web.core.centerpage.get_gallery_asset(context)
     assert isinstance(asset, zeit.content.gallery.gallery.Gallery)
 
 
-def test_get_video_asset_should_return_video_asset(testserver, testbrowser):
+def test_get_video_asset_should_return_video_asset(application):
     article = 'http://xml.zeit.de/centerpage/article_video_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
     asset = zeit.web.core.centerpage.get_video_asset(
@@ -487,7 +477,7 @@ def test_get_video_asset_should_return_video_asset(testserver, testbrowser):
 
 
 def test_default_image_url_should_return_default_image_size(
-        testserver, monkeyreq):
+        application, monkeyreq):
     image_id = \
         'http://xml.zeit.de/centerpage/katzencontent/katzencontent-180x101.jpg'
     image = zeit.cms.interfaces.ICMSContent(image_id)
@@ -499,7 +489,7 @@ def test_default_image_url_should_return_default_image_size(
 
 
 def test_default_image_url_should_return_available_image_size(
-        testserver, monkeyreq):
+        application, monkeyreq):
     image_id = \
         'http://xml.zeit.de/centerpage/katzencontent/katzencontent-180x101.jpg'
     image = zeit.cms.interfaces.ICMSContent(image_id)
@@ -511,12 +501,11 @@ def test_default_image_url_should_return_available_image_size(
 
 
 def test_default_image_url_should_return_none_when_no_unique_id_is_given(
-        testserver, monkeyreq):
+        application, monkeyreq):
     assert default_image_url(mock.Mock()) is None
 
 
-def test_default_teaser_should_return_default_teaser_image(
-        application, testserver, testbrowser):
+def test_default_teaser_should_return_default_teaser_image(application):
     cp = 'http://xml.zeit.de/centerpage/lebensart'
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
     teaser_block = cp_context['lead'][0]
@@ -526,8 +515,7 @@ def test_default_teaser_should_return_default_teaser_image(
     assert zeit.web.core.interfaces.ITeaserImage.providedBy(teaser_img)
 
 
-def test_teaser_image_should_be_created_from_image_group_and_image(
-        testserver, testbrowser):
+def test_teaser_image_should_be_created_from_imagegroup_and_image(application):
     import zeit.cms.interfaces
     img = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/'
                                           'katzencontent/katzencontent'
@@ -564,29 +552,24 @@ def test_get_reaches_from_centerpage_view(application, dummy_request):
     assert len(buzz_comments[1]) == 3
 
 
-def test_centerpages_produces_no_error(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+def test_centerpages_produces_no_error(testbrowser):
+    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo')
     assert '<div class="page-wrap">' in browser.contents
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-2')
     assert '<div class="page-wrap">' in browser.contents
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo-3' % testserver.url)
+    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-3')
     assert '<div class="page-wrap">' in browser.contents
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo-4' % testserver.url)
+    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-4')
     assert '<div class="page-wrap">' in browser.contents
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/with-teaserbar' % testserver.url)
+    browser = testbrowser('/zeit-magazin/test-cp/with-teaserbar')
     assert '<div class="page-wrap">' in browser.contents
-    browser = testbrowser('%s/centerpage/cp_with_image_lead' % testserver.url)
+    browser = testbrowser('/centerpage/cp_with_image_lead')
     assert '<div class="page-wrap">' in browser.contents
-    browser = testbrowser('%s/centerpage/cp_with_video_lead' % testserver.url)
+    browser = testbrowser('/centerpage/cp_with_video_lead')
     assert '<div class="page-wrap">' in browser.contents
-    browser = testbrowser('%s/centerpage/lebensart' % testserver.url)
+    browser = testbrowser('/centerpage/lebensart')
     assert '<div class="page-wrap">' in browser.contents
-    browser = testbrowser('%s/centerpage/lebensart-2' % testserver.url)
+    browser = testbrowser('/centerpage/lebensart-2')
     assert '<div class="page-wrap">' in browser.contents
 
 
@@ -697,7 +680,7 @@ def test_cp_informatives_should_have_no_blocks(application):
 
 
 def test_cp_teaser_should_have_comment_count(
-        mockserver_factory, testserver, testbrowser):
+        mockserver_factory, testbrowser):
     cp_counts = """<?xml version="1.0" encoding="UTF-8"?>
     <nodes>
          <node comment_count="129"
@@ -705,8 +688,7 @@ def test_cp_teaser_should_have_comment_count(
     </nodes>
     """
     mockserver_factory(cp_counts)
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo')
     counts = browser.cssselect(
         'span.cp_comment__count__wrap.icon-comments-count')
     assert int(counts[0].text) == 129
@@ -726,87 +708,78 @@ def test_centerpage_should_have_no_monothematic_block(application):
     assert view.monothematic_block is None
 
 
-def test_default_asset_for_teaser_lead(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
+def test_default_asset_for_teaser_lead(testbrowser):
+    browser = testbrowser('/zeit-magazin/test-cp/asset-test-1')
     img = browser.cssselect('div.cp_leader--full .cp_leader__asset img')[0]
     assert 'teaser_image-zmo-landscape-large.jpg' in img.attrib.get('src')
 
 
-def test_default_asset_for_teaser_buttons(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
+def test_default_asset_for_teaser_buttons(testbrowser):
+    browser = testbrowser('/zeit-magazin/test-cp/asset-test-1')
     img = browser.cssselect('div.cp_button__image img')[0]
     assert 'teaser_image-zmo-landscape-small.jpg' in img.attrib.get('src')
 
 
-def test_default_asset_for_teaser_buttons_large(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
+def test_default_asset_for_teaser_buttons_large(testbrowser):
+    browser = testbrowser('/zeit-magazin/test-cp/asset-test-1')
     img = browser.cssselect('div.cp_button--large .cp_button__image img')[0]
     assert 'teaser_image-zmo-landscape-large.jpg' in img.attrib.get('src')
 
 
-def test_default_asset_for_teaser_gallery(testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/asset-test-1' % testserver.url)
+def test_default_asset_for_teaser_gallery(testbrowser):
+    browser = testbrowser('/zeit-magazin/test-cp/asset-test-1')
     img = browser.cssselect('div.cp_button--gallery a div img')[0]
     assert 'teaser_image-zmo-upright.jpg' in img.attrib.get('src')
 
 
-def test_cp_has_gallery_icon_for_gallery_upright_teaser(
-        testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+def test_cp_has_gallery_icon_for_gallery_upright_teaser(testbrowser):
+    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-2')
     icon = browser.cssselect(
         'div.cp_button--gallery .cp_button__title__wrap a span')[0]
     assert 'icon-galerie-icon-white' in icon.attrib.get('class')
 
 
-def test_cp_has_no_gallery_icon_for_gallery_upright_teaser(
-        testserver, testbrowser):
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+def test_cp_has_no_gallery_icon_for_gallery_upright_teaser(testbrowser):
+    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-2')
     icon = browser.cssselect(
         'div.cp_button--gallery .cp_button__title__wrap a span')
     assert len(icon) == 1
 
 
 def test_cp_has_no_gallery_icon_for_gallery_type_product(
-        testserver, testbrowser, workingcopy):
+        testbrowser, workingcopy):
     gallery = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer')
     with checked_out(gallery) as co:
         co.type = u'zmo-product'
-    browser = testbrowser(
-        '%s/zeit-magazin/test-cp/test-cp-zmo-2' % testserver.url)
+    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo-2')
     icon = browser.cssselect(
         'div.cp_button--gallery .cp_button__title__wrap a span')
     assert len(icon) == 0
 
 
-def test_print_cover_teaser_should_have_modifier(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+def test_print_cover_teaser_should_have_modifier(testbrowser):
+    browser = testbrowser('/zeit-magazin/index')
     format = browser.cssselect(
         '.cp_button.cp_button--cover')
     assert len(format) == 1
 
 
-def test_print_cover_teaser_should_have_supertitle(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+def test_print_cover_teaser_should_have_supertitle(testbrowser):
+    browser = testbrowser('/zeit-magazin/index')
     supertitle = browser.cssselect(
         'a[href$="/artikel/02"] h2 .cp_button__supertitle')
     assert len(supertitle) == 1
 
 
-def test_print_cover_teaser_should_not_have_subtitle(testserver, testbrowser):
-    browser = testbrowser('%s/zeit-magazin/index' % testserver.url)
+def test_print_cover_teaser_should_not_have_subtitle(testbrowser):
+    browser = testbrowser('/zeit-magazin/index')
     subtitle = browser.cssselect(
         'a[href$="/artikel/02"] h2 .cp_button__subtitle')
     assert len(subtitle) == 0
 
 
-def test_homepage_indentifies_itself_as_homepage(testserver):
+def test_homepage_indentifies_itself_as_homepage(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/index')
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(cp, mock.Mock())

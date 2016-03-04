@@ -62,11 +62,11 @@ def test_buttons_should_not_be_visible_mobile(selenium_driver, testserver):
     except TimeoutException:
         assert False, 'Timeout gallery script'
     else:
-        bigButtonPrev = driver.find_element_by_css_selector(".bx-overlay-prev")
-        bigButtonNext = driver.find_element_by_css_selector(".bx-overlay-next")
+        bigbuttonprev = driver.find_element_by_css_selector(".bx-overlay-prev")
+        bigbuttonnext = driver.find_element_by_css_selector(".bx-overlay-next")
         caption = driver.find_element_by_css_selector(".figure__caption")
-        assert not bigButtonPrev.is_displayed()
-        assert not bigButtonNext.is_displayed()
+        assert not bigbuttonprev.is_displayed()
+        assert not bigbuttonnext.is_displayed()
         assert caption.is_displayed()
 
 
@@ -94,32 +94,26 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
         figselector = ".inline-gallery .slide:not(.bx-clone)"
         figure = driver.find_element_by_css_selector(figselector)
         figure.click()
-        bigButtonPrev = driver.find_element_by_css_selector(".bx-overlay-prev")
-        bigButtonNext = driver.find_element_by_css_selector(".bx-overlay-next")
-        assert bigButtonPrev.is_displayed()
-        assert bigButtonNext.is_displayed()
+        bigbuttonprev = driver.find_element_by_css_selector(".bx-overlay-prev")
+        bigbuttonnext = driver.find_element_by_css_selector(".bx-overlay-next")
+        assert bigbuttonprev.is_displayed()
+        assert bigbuttonnext.is_displayed()
 
 
-def test_gallery_with_supertitle_has_html_title(
-        appbrowser, testserver, testbrowser):
-    browser = testbrowser('%s/galerien/fs-desktop-schreibtisch-computer' % (
-        testserver.url))
+def test_gallery_with_supertitle_has_html_title(testbrowser):
+    browser = testbrowser('/galerien/fs-desktop-schreibtisch-computer')
     assert ('<title>Desktop-Bilder: Das hab ich auf dem Schirm |'
             ' ZEITmagazin</title>'
             in browser.contents)
 
 
-def test_gallery_without_supertitle_has_html_title(
-        appbrowser, testserver, testbrowser):
-    browser = testbrowser('%s/galerien/bg-automesse-detroit-2014-usa' % (
-        testserver.url))
+def test_gallery_without_supertitle_has_html_title(testbrowser):
+    browser = testbrowser('/galerien/bg-automesse-detroit-2014-usa')
     assert ('<title>Automesse Detroit 2014 US-Hersteller | ZEITmagazin</title>'
             in browser.contents)
 
 
-def test_standalone_gallery_uses_responsive_images_with_ratio(
-        testserver, testbrowser):
-    browser = testbrowser('%s/galerien/fs-desktop-schreibtisch-computer' % (
-        testserver.url))
+def test_standalone_gallery_uses_responsive_images_with_ratio(testbrowser):
+    browser = testbrowser('/galerien/fs-desktop-schreibtisch-computer')
     image = browser.cssselect('.inline-gallery .slide')[0]
     assert 'data-ratio="0.743405275779"' in etree.tostring(image)

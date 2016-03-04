@@ -1,0 +1,17 @@
+{% extends "zeit.web.core:templates/inc/article/pagination.html" %}
+{% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
+
+{% block pagination_class %}
+    {{- super() | with_mods(view.article_layout) -}}
+{% endblock %}
+
+{% block pager_class %}
+    {{- super() | with_mods(view.article_layout) -}}
+{% endblock %}
+
+{% block pager_label %}{% endblock %}
+{% block pager_complete_view %}{% endblock %}
+
+{% block pagination_icon %}
+    {{ lama.use_svg_icon('arrow-right', 'article-pagination__icon', request) }}
+{% endblock %}

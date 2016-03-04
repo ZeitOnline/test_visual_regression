@@ -36,16 +36,15 @@ class PostComment(zeit.web.core.view.Base):
 
     def __init__(self, context, request, path=None):
 
-        if not request.authenticated_userid:
+        if not request.user:
             raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
                 explanation='Please log in in order to comment')
 
-        if request.session.get('user') and not (
-                request.session['user'].get('name')):
+        if not request.user.get('name'):
             self.user_name = ''
         else:
-            self.user_name = request.session['user']['name']
+            self.user_name = request.user['name']
 
         self.new_cid = None
         self.request_method = 'POST'
@@ -82,10 +81,9 @@ class PostComment(zeit.web.core.view.Base):
 
     def post_comment(self):
         request = self.request
-        user = request.session['user']
         # XXX We should not have to transmit this; Community can get it itself
         # from the SSO cookie.
-        uid = user['uid']
+        uid = request.user['uid']
         # use submitted values for POSTs, not GET values from request url
         params = (request.GET, request.POST)[self.request_method == 'POST']
         comment = params.get('comment')
@@ -209,35 +207,38 @@ class PostComment(zeit.web.core.view.Base):
             except requests.exceptions.HTTPError as err:
                 if response.status_code == 409:
                     try:
-                        msg = json.loads(response.content)['error_message']
+                        detail = json.loads(response.content)['error_message']
                     except (AttributeError, KeyError, ValueError):
-                        msg = None
+                        detail = u''
+                    message = u'user_name could not be set'
+                    log.warning(message + u' ' + detail)
                     raise pyramid.httpexceptions.HTTPBadRequest(
-                        title='user_name could not be set', explanation=msg)
+                        title=message, explanation=detail)
                 else:
+                    message = u'Action {} could not be performed'.format(
+                        action)
+                    detail = (u'Status code {} was sent for action {} '
+                              u'on resource {}'.format(
+                                  response.status_code, action, unique_id))
+                    log.warning(message + u' ' + detail)
                     raise pyramid.httpexceptions.HTTPInternalServerError(
-                        title='Action {} could not be performed'.format(
-                            action),
-                        explanation=('Status code {} was send for action {} '
-                                     'on resource {}').format(
-                            response.status_code, action, unique_id))
+                        title=message, explanation=detail)
             except requests.exceptions.RequestException as err:
+                message = u'Action {} could not be performed'.format(action)
+                detail = u'{} was raised for action {} on resource {}'.format(
+                    type(err).__name__, action, unique_id)
+                log.warning(message + u' ' + detail)
                 raise pyramid.httpexceptions.HTTPInternalServerError(
-                    title='Action {} could not be performed'.format(
-                        action),
-                    explanation=('{} was raised for action {} '
-                                 'on resource {}').format(
-                        type(err).__name__, action, unique_id))
+                    title=message, explanation=detail)
 
         self.status.append('Action {} was performed for {}'
                            ' (with pid {})'.format(method, unique_id, pid))
         invalidate_comment_thread(unique_id)
         set_user = False
         if not self.user_name and action == 'comment':
-            if zeit.web.core.security.reload_user_info(self.request) and (
-                    'user' in request.session) and (
-                        request.session['user']['name']):
-                self.user_name = request.session['user']['name']
+            zeit.web.core.security.reload_user_info(request)
+            if request.user.get('name'):
+                self.user_name = request.user['name']
                 set_user = True
                 self.status.append(u"User name {} was set".format(
                     self.user_name))
@@ -468,7 +469,7 @@ class RecommendCommentResource(PostCommentResource):
     def __init__(self, context, request):
         # redirect unauthorized recommendation request
         # prevent 403 HTTPForbidden response in PostComment
-        if not request.authenticated_userid:
+        if not request.user:
             if request.registry.settings.sso_activate:
                 pattern = '{}/anmelden?url={}'
                 host = request.registry.settings.get('sso_url')
