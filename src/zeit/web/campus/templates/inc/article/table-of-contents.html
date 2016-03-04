@@ -1,0 +1,7 @@
+{% extends "zeit.web.core:templates/inc/article/table-of-contents.html" %}
+
+{% block toc_item %}
+    <strong>{{ '{0:02d}'.format(pagenr) }}</strong>
+    {%- if view.pagination.pages_titles[pagenr - 1] %} — {{ view.pagination.pages_titles[pagenr - 1] }}
+    {%- endif %}
+{% endblock toc_item %}
