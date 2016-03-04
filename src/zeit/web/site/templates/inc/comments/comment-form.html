@@ -11,7 +11,7 @@
 {% else %}
     {% set submit_value = 'Kommentar senden' %}
 
-    {% if request.authenticated_userid and not request.session.user.name %}
+    {% if request.user and not request.user.name %}
         {% set submit_value = 'Absenden' %}
     {% endif %}
 
@@ -28,7 +28,6 @@
         <div class="comment-section__notice comment-section__item">
         {% if view.comment_area.user_blocked %}
             Die Kommentarfunktion wurde für Ihr Benutzerprofil gesperrt.
-            Bei Fragen <a href="mailto:community@zeit.de">wenden Sie sich bitte an die Community-Redaktion</a>.
         {% elif view.comment_area.show_premoderation_warning %}
             Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind,
             oder kürzlich gegen <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">unsere Netiquette</a> verstoßen haben.
@@ -38,7 +37,7 @@
 {% endif %}
 
 <div class="comment-section__form comment-section__item">
-{%- if request.authenticated_userid %}
+{%- if request.user %}
     {% set is_mod = 'admin-tech' in request.session.user.roles or 'admin-editor' in request.session.user.roles %}
     {%- block comment_form %}
     <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.session.user.uid }}"
@@ -120,7 +119,7 @@
 </div>
 
 <script type="text/template" id="js-report-comment-template">
-{%- if request.authenticated_userid %}
+{%- if request.user %}
     {% include "zeit.web.site:templates/inc/comments/report-comment-form.html" %}
 {%- else %}
     <form class="comment-login">

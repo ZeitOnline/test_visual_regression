@@ -45,42 +45,37 @@ def mock_ad_view(application):
     return MockAdView
 
 
-def test_json_delta_time_from_date_should_return_null(testserver,
-                                                      testbrowser):
+def test_json_delta_time_from_date_should_return_null(testbrowser):
     browser = testbrowser(
-        '{}/json/delta_time?'
+        '/json/delta_time?'
         'date=2014-10-14T09%3A06%3A45.950590%2B00%3A00'
-        '&base_date=2014-10-15T10%3A06%3A45.950590%2B00%3A00'.format(
-            testserver.url))
+        '&base_date=2014-10-15T10%3A06%3A45.950590%2B00%3A00')
     assert browser.contents == (
         '{"delta_time": {"time": null}}')
 
 
-def test_json_delta_time_from_date_should_return_delta_time(testserver,
-                                                            testbrowser):
+def test_json_delta_time_from_date_should_return_delta_time(testbrowser):
     browser = testbrowser(
-        '{}/json/delta_time?'
+        '/json/delta_time?'
         'date=2014-10-14T09%3A06%3A45.950590%2B00%3A00'
-        '&base_date=2014-10-14T10%3A36%3A45.950590%2B00%3A00'.format(
-            testserver.url))
+        '&base_date=2014-10-14T10%3A36%3A45.950590%2B00%3A00')
     assert browser.contents == (
         '{"delta_time": {"time": "vor 1 Stunde"}}')
 
 
 def test_json_delta_time_from_date_should_fallback_to_now_for_base_date(
-        testserver, testbrowser):
+        testbrowser):
     browser = testbrowser(
-        '{}/json/delta_time?'
-        'date=2014-10-15T10%3A06%3A45.950590%2B00%3A00'.format(
-            testserver.url))
+        '/json/delta_time?'
+        'date=2014-10-15T10%3A06%3A45.950590%2B00%3A00')
     assert browser.contents is not None
     assert browser.contents != ''
 
 
 def test_json_delta_time_from_date_should_return_http_error_on_missing_params(
-        testserver, testbrowser):
+        testbrowser):
     with pytest.raises(urllib2.HTTPError):
-        testbrowser('{}/json/delta_time'.format(testserver.url))
+        testbrowser('/json/delta_time')
 
 
 def test_json_delta_time_from_unique_id_should_return_delta_time(
@@ -99,25 +94,23 @@ def test_json_delta_time_from_unique_id_should_return_delta_time(
 
 
 def test_json_delta_time_from_unique_id_should_return_http_error_on_false_uid(
-        testserver, testbrowser):
+        testbrowser):
     with pytest.raises(urllib2.HTTPError):
-        testbrowser('{}/json/delta_time?unique_id=foo'.format(testserver.url))
+        testbrowser('/json/delta_time?unique_id=foo')
 
 
 def test_json_delta_time_from_unique_id_should_return_http_error_on_article(
-        testserver, testbrowser):
+        testbrowser):
     with pytest.raises(urllib2.HTTPError) as error:
-        testbrowser('{}/json/delta_time?unique_id='
-                    'http://xml.zeit.de/artikel/01'.format(testserver.url))
+        testbrowser('/json/delta_time?unique_id=http://xml.zeit.de/artikel/01')
     assert error.value.getcode() == 400
 
 
 def test_json_delta_time_from_unique_id_should_use_custom_base_time(
-        testserver, testbrowser):
+        testbrowser):
     browser = testbrowser(
-        '{}/json/delta_time?base_date=2014-10-15T16%3A06%3A45.95%2B00%3A00&'
-        'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup'.format(
-            testserver.url))
+        '/json/delta_time?base_date=2014-10-15T16%3A06%3A45.95%2B00%3A00&'
+        'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup')
     content = json.loads(browser.contents)
     a1 = 'http://xml.zeit.de/zeit-online/cp-content/article-01'
     a2 = 'http://xml.zeit.de/zeit-online/cp-content/article-02'
@@ -219,6 +212,11 @@ def test_c1_origin_should_trigger_js_call_for_cre_client(
         browser.contents)
 
 
+def test_text_file_content_should_be_rendered(testbrowser):
+    browser = testbrowser('/text/dummy')
+    assert browser.contents == 'zeit.web\n'
+
+
 def test_c1_include_script_should_define_a_timeout_param(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     inline = u''.join(browser.xpath('//script/text()'))
@@ -227,19 +225,14 @@ def test_c1_include_script_should_define_a_timeout_param(testbrowser):
         conf.get('c1_prefix')) in inline
 
 
-def test_text_file_content_should_be_rendered(testserver, testbrowser):
-    browser = testbrowser('{}/text/dummy'.format(testserver.url))
-    assert browser.contents == 'zeit.web\n'
-
-
-def test_inline_gallery_should_be_contained_in_body(testserver, testbrowser):
+def test_inline_gallery_should_be_contained_in_body(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     assert isinstance(
         body.values()[-1], zeit.content.article.edit.reference.Gallery)
 
 
-def test_inline_gallery_should_have_images(testserver, testbrowser):
+def test_inline_gallery_should_have_images(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     gallery = zeit.web.core.interfaces.IFrontendBlock(body.values()[-1])
@@ -523,17 +516,17 @@ def test_centerpage_should_have_default_seo_pagedescription(application):
     assert view.pagedescription == zeit.web.magazin.view.Base.seo_title_default
 
 
-def test_notfound_view_works_for_get(testserver, testbrowser):
+def test_notfound_view_works_for_get(testbrowser):
     browser = testbrowser()
     with pytest.raises(urllib2.HTTPError) as err:
-        browser.open('{}/nonexistent'.format(testserver.url))
+        browser.open('/nonexistent')
     assert err.value.getcode() == 404
 
 
-def test_notfound_view_works_for_post(testserver, testbrowser):
+def test_notfound_view_works_for_post(testbrowser):
     browser = testbrowser()
     with pytest.raises(urllib2.HTTPError) as err:
-        browser.post('{}/nonexistent'.format(testserver.url), data='')
+        browser.post('/nonexistent', data='')
     assert err.value.getcode() == 404
 
 
@@ -655,10 +648,9 @@ def test_ispaginated_predicate_should_handle_get_parameter():
     assert ip(None, mock.Mock(GET={'p': '4'})) is True
 
 
-def test_invalid_unicode_should_return_http_400(testbrowser):
-    with pytest.raises(urllib2.HTTPError) as info:
-        testbrowser('/index%C8')
-    assert info.value.getcode() == 400
+def test_invalid_unicode_should_return_http_400(testserver):
+    r = requests.get(testserver.url + '/index%C8')
+    assert r.status_code == 400
 
 
 def test_ivw_uses_hyprid_method_for_apps(jinja2_env):

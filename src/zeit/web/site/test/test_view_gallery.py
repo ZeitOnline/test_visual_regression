@@ -7,44 +7,35 @@ from selenium.webdriver.support import expected_conditions
 from selenium.common.exceptions import TimeoutException
 
 
-def test_article_should_render_full_view(testserver, testbrowser):
-    article_path = '{}/zeit-online/article/zeit{}'
-    browser = testbrowser(article_path.format(
-        testserver.url, '/komplettansicht'))
-    article = zeit.cms.interfaces.ICMSContent(
-        article_path.format('http://xml.zeit.de', ''))
-    assert len(browser.cssselect(
-        '.article-page > p.paragraph')) == article.paragraphs
+def test_article_should_render_full_view(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    paragraphs = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zeit').paragraphs
+    assert len(browser.cssselect('.article-page > p.paragraph')) == paragraphs
 
 
-def test_zon_gallery_should_have_metadata(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/gallery/biga_1'.format(
-        testserver.url)).cssselect
+def test_zon_gallery_should_have_metadata(testbrowser):
+    select = testbrowser('/zeit-online/gallery/biga_1').cssselect
     assert len(select('.summary, .byline, .metadata')) == 3
 
 
-def test_gallery_should_display_entry_caption(testbrowser, testserver):
-    browser = testbrowser('{}/zeit-online/gallery/biga_1'.format(
-        testserver.url))
-    assert browser.cssselect('.figure__text')[0].text.startswith(
-        'Mathias Modica')
+def test_gallery_should_display_entry_caption(testbrowser):
+    select = testbrowser('/zeit-online/gallery/biga_1').cssselect
+    assert select('.figure__text')[0].text.startswith('Mathias Modica')
 
 
-def test_zon_gallery_should_have_no_pagination(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/gallery/biga_1'.format(
-        testserver.url)).cssselect
+def test_zon_gallery_should_have_no_pagination(testbrowser):
+    select = testbrowser('/zeit-online/gallery/biga_1').cssselect
     assert len(select('.pagination')) == 0
 
 
-def test_zon_gallery_should_have_description(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/gallery/biga_1'.format(
-        testserver.url)).cssselect
+def test_zon_gallery_should_have_description(testbrowser):
+    select = testbrowser('/zeit-online/gallery/biga_1').cssselect
     assert len(select('.gallery__description')) == 1
 
 
-def test_zon_gallery_should_display_a_gallery(testbrowser, testserver):
-    select = testbrowser('{}/zeit-online/gallery/biga_1'.format(
-        testserver.url)).cssselect
+def test_zon_gallery_should_display_a_gallery(testbrowser):
+    select = testbrowser('/zeit-online/gallery/biga_1').cssselect
     assert len(select('.gallery')) == 1
 
 

@@ -3,12 +3,12 @@
   <head xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <topiclinks>
       <topiclink>
-        <topiclink_label_1>Eltern und Studenten</topiclink_label_1>
-        <topiclink_url_1>http://www.zeit.de/serie/studenten-und-eltern</topiclink_url_1>
-        <topiclink_label_2>Jurastudium</topiclink_label_2>
-        <topiclink_url_2>http://www.zeit.de/thema/jurastudium</topiclink_url_2>
-        <topiclink_label_3>Uni-Prekariat</topiclink_label_3>
-        <topiclink_url_3>http://www.zeit.de/thema/promotion</topiclink_url_3>
+        <topiclink_label_1>Paul Auster</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/dynamic/paul-auster</topiclink_url_1>
+        <topiclink_label_2>Ausdauersport</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/dynamic/ausdauersport</topiclink_url_2>
+        <topiclink_label_3>Bayerische Landesbank</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/dynamic/bayerische-landesbank</topiclink_url_3>
       </topiclink>
     </topiclinks>
     <header_image/>
@@ -70,6 +70,7 @@
     <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noodp,noydir,noarchive </attribute>
   </head>
   <body xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
     <cluster area="id-41a8299d-b569-4c42-b713-db5dbd86a64f" kind="solo" visible="True" visible_mobile="True">
       <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64f" kind="solo" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-lead-upright" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">

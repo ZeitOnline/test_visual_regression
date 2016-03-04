@@ -48,21 +48,21 @@ def test_storystream_teaser_should_show_age_for_new_storystreams(
     assert updated_text == 'Aktualisiert vor 1 Tag'
 
 
-def test_storystream_contains_structured_data(testbrowser, testserver):
+def test_storystream_contains_structured_data(testbrowser):
     browser = testbrowser('/zeit-online/storystream/dummy')
 
     # this "should" be done better sometimes (in the template)
     # e.g. wrap the storystream content in an article
     article = browser.cssselect('main[itemprop="mainContentOfPage"]')[0]
 
-    headline = article.cssselect('[itemprop="headline"]')[0]
-    description = article.cssselect('[itemprop="description"]')[0]
-    datePublished = article.cssselect('[itemprop="datePublished"]')[0]
-    dateModified = article.cssselect('[itemprop="dateModified"]')[0]
-    author = article.cssselect('[itemprop="author"]')[0]
+    assert article.cssselect('[itemprop="headline"]')
+    assert article.cssselect('[itemprop="description"]')
+    assert article.cssselect('[itemprop="datePublished"]')
+    assert article.cssselect('[itemprop="dateModified"]')
 
+    author = article.cssselect('[itemprop="author"]')[0]
     assert author.get('itemtype') == 'http://schema.org/Person'
     assert author.cssselect('[itemprop="name"]')[0].text == (
         'Zacharias Zacharakis')
     assert author.cssselect('[itemprop="url"]')[0].get('href') == (
-        testserver.url + '/autoren/Z/Zacharias_Zacharakis/index.xml')
+        'http://localhost/autoren/Z/Zacharias_Zacharakis/index.xml')

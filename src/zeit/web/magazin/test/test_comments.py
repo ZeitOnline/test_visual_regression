@@ -11,7 +11,7 @@ def test_comments_template_respects_metadata(jinja2_env, testserver):
         'zeit.web.magazin:templates/inc/article/comments.html')
     content = zeit.cms.interfaces.ICMSContent(url)
     request = mock.MagicMock()
-    request.authenticated_userid = 123
+    request.user = {'ssoid': 123}
     request.session = {'user': {'uid': '123', 'name': 'Max'}}
     request.path_url = url
     view = zeit.web.magazin.view_article.Article(content, request)

@@ -1,30 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
-    <rankedTags xmlns:ns11="http://codespeak.net/lxml/objectify/pytype">
-      <tag ns11:pytype="str" uuid="043df8f5-d42a-43db-82c7-c4900d96034c" url_value="sissi-kaiserin-von-oesterreich" type="Person">Sissi Kaiserin von Österreich</tag>
-      <tag type="Location" score="1" uuid="7a683a87-3ab0-48ad-b719-e3b375a8b6b5" url_value="wien">Wien</tag>
-    </rankedTags>
-    <references/>
-    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/19/martenstein-19/" type="jpg" alt="Illustration von Martensteins Lieblingskaiserin" align="left" publication-date="" expires="">
-      <bu py:pytype="str">Illustration von Martensteins Lieblingskaiserin</bu>
-      <copyright py:pytype="str">© Fengel</copyright>
-    </image>
-    <nextread>
-      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/2014/17/harald-martenstein" year="2014" issue="17" ressort="zeit-magazin" contenttype="article" publication-date="2014-04-16T07:47:00+00:00" expires="">
-        <supertitle py:pytype="str">Harald Martenstein</supertitle>
-        <teaser_supertitle py:pytype="str">Kolumne Martenstein</teaser_supertitle>
-        <title py:pytype="str">Über Intimbehaarung</title>
-        <text py:pytype="str">Schauspielerin Christine Kaufmann setzt sich für mehr Schamhaare ein. Und unser Kolumnist staunt, über was man alles diskutieren kann.</text>
-        <description py:pytype="str">Schauspielerin Christine Kaufmann setzt sich für mehr Schamhaare ein. Und unser Kolumnist staunt, über was man alles diskutieren kann.</description>
-        <byline py:pytype="str">von Harald Martenstein</byline>
-        <breadcrumb_title xsi:nil="true"/>
-        <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/martenstein-intimbehaarung-2/" type="jpg" align="left" publication-date="" expires="">
-          <bu xsi:nil="true"/>
-          <copyright py:pytype="str">© Fengel</copyright>
-        </image>
-      </reference>
-    </nextread>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="article_id">2119544</attribute>
@@ -102,7 +78,7 @@
     <title>Über seine Lieblingskaiserin</title>
     <byline>von Harald Martenstein</byline>
     <division type="page">
-      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" src="http://xml.zeit.de/zeit-magazin/2014/19/martenstein-19/martenstein-19-zmo-landscape-large.jpg" type="jpg" alt="Illustration von Martensteins Lieblingskaiserin" align="left" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" alt="Illustration von Martensteins Lieblingskaiserin" layout="zmo-xl-header">
         <bu py:pytype="str">Illustration von Martensteins Lieblingskaiserin</bu>
         <copyright py:pytype="str">© Fengel</copyright>
       </image>
@@ -110,6 +86,10 @@
       <p>Eigentlich will ich was anderes erzählen. Aber eines muss ich noch loswerden: In reiferen Jahren ließ Sisi sich oft mit ihrer Jacht im Mittelmeer ziellos umherfahren, allein. Wenn Sturm aufkam, mussten die Matrosen die immer noch betörend schöne Sisi mit Tauen an den Mast binden und dann direktemang in den Sturm hineinsegeln, volles Risiko. Wenn die eisige Gischt sie gepeitscht hat, wenn Brecher ihre zarten Glieder durchschüttelten und der wilde Sturm ihr hemmungslos im kastanienbraunen Kaiserinnenhaar wühlte, empfand Sisi das als erotisch anregend. Es lebe die Monarchie.</p>
       <p>Auch dies ist interessant: Vor genau 125 Jahren, 1889, hat Sisis Sohn Rudolf sich in Schloss Mayerling erschossen. Vorher hat er noch schnell seine Geliebte erschossen, die 17-jährige Baroness Mary Vetsera. Rudolf wäre vielleicht ein Reformkaiser geworden, er war im Geiste liberal. Andererseits hatte er im Geiste auch diese extrem schwere Schacke. Ursprünglich wollte Rudolf, der auf Befehl seines Vaters eine belgische Prinzessin geheiratet hatte, dass sich seine Hauptgeliebte Mizzi Kaspar gemeinsam mit ihm umbringt. Hauptgeliebte Mizzi weigerte sich, das finde ich nachvollziehbar. Rudolf verbrachte die Nacht mit Mizzi, am Morgen fuhr er nach Mayerling und starb dann eben mit der etwas weniger renitenten Baroness Mary. Mizzi lebte noch jahrzehntelang und hat niemals auch nur ein einziges Interview gegeben. So diskrete Frauen gibt es heute nicht mehr.</p>
       <p>Faszinierenderweise wiederholt sich die Geschichte von Mizzi und Mary dann bei Sisi. Auch Sisi stirbt anstelle einer anderen Person. Der Anarchist Luigi Lucheni wollte in Genf unbedingt den Prinzen von Orléans erdolchen. Das war sein größter Wunsch. Als der Prinz, ein eher flatterhafter Charakter mit wenig Termindisziplin, am vorgesehenen Tatort einfach nicht auftauchte, hat er, mehr oder weniger zufällig, die Kaiserin erdolcht.</p>
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" alt="Illustration von Martensteins Lieblingskaiserin" layout="zmo-small-right">
+        <bu py:pytype="str">Illustration von Martensteins Lieblingskaiserin</bu>
+        <copyright py:pytype="str">© Fengel</copyright>
+      </image>
       <p>Ich weiß viel über Sisi. Wenn Sisi sich die Haare waschen ließ, dauerte das immer einen vollen Tag. Nachts legte sie sich rohes Rindfleisch aufs Gesicht. Angeblich ist das gut für die Haut. Vielleicht mochte sie auch nur das fleischige Gefühl. Ihr Gewicht und den Umfang ihrer Waden ließ sie drei Mal täglich kontrollieren, das sollte ich besser auch tun. Sisi hat durchaus gerne Süßigkeiten gegessen, anschließend aß sie dann lange gar nichts.</p>
       <p>Ich habe minutenlang vor dem Eingang zu Sisis Grab gestanden und gezögert. Ich befand mich an der letzten Wegmarke des Lebens. Der erste Schultag. Abitur. Der erste Job, Kinder, Ehen, all diese Sachen gehen einem durch den Kopf, das läuft alles ab wie ein Film im Zeitraffer. Jeder muss da durch. Ich erzähle es nur, weil jeder da durchmuss. Wie fühlt es sich an? Ich würde sagen, es fühlt sich an wie ein rohes Stück Rindfleisch.</p>
       <p>Einige Wochen vorher hätte ich es bereits machen können, beim Skilaufen. Ich hätte gedurft. Aber ich war mental noch nicht bereit. Außerdem standen hinter mir zu viele Leute. Ich mochte das nicht, mit all diesen Leuten.</p>
@@ -117,6 +97,10 @@
       <p>
         <em>Harald Martenstein ist Redakteur des <a class="" href="http://www.tagesspiegel.de/" target="_blank" title="externer Link">Tagesspiegels</a>.</em>
       </p>
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/" type="jpg" alt="Illustration von Martensteins Lieblingskaiserin">
+        <bu py:pytype="str">Illustration von Martensteins Lieblingskaiserin</bu>
+        <copyright py:pytype="str">© Fengel</copyright>
+      </image>
       <p>
         <em>Diesen Artikel finden Sie als Audiodatei im Premiumbereich unter <a class="" href="https://premium.zeit.de/node/12415" target="_blank">www.zeit.de/audio</a></em>
       </p>

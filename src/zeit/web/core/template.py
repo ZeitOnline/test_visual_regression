@@ -123,6 +123,11 @@ def column(context):
     return context.serie and context.serie.column
 
 
+@zeit.web.register_test
+def leserartikel(context):
+    return context.genre and context.genre == 'leserartikel'
+
+
 @zeit.web.register_filter
 def block_type(obj):
     """Outputs the class name in lower case format of one or multiple block
@@ -790,7 +795,7 @@ def format_webtrekk(string):
         u'é', 'e').replace(
         u'è', 'e').replace(
         u'ß', 'ss')
-    string = re.sub(u'[^a-zA-Z0-9]', '_', string)
+    string = re.sub(u'[^-a-zA-Z0-9]', '_', string)
     string = re.sub(u'_+', '_', string)
     string = re.sub(u'^_|_$', '', string)
     return string
@@ -899,7 +904,7 @@ def append_get_params(request, **kw):
 
     if params == []:
         return request.path_url
-    return '?'.join([request.path_url, urllib.urlencode(params)])
+    return u'{}?{}'.format(request.path_url, urllib.urlencode(params))
 
 
 @zeit.web.register_filter

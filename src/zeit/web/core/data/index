@@ -184,7 +184,7 @@
                 <container cp:__name__="id-bc912838-9f14-4294-a96d-3e2fa1a76dd2" cp:type="cpextra" module="mostread" visible="True">
                     <cp_extra for="zeit.content.cp.interfaces.IArea" id="mostread" />
                 </container>
-                <container cp:type="cardstack" module="cardstack" visible="True" visible_mobile="True" cp:__name__="id-4d606521-99e2-483d-a19d-353089396e89" card_id="kekse-rezept-pecorino-haselnuss-cantucci"/>
+                <container cp:type="cardstack" module="cardstack" visible="True" visible_mobile="True" cp:__name__="id-4d606521-99e2-483d-a19d-353089396e89" card_id="kekse"/>
             </region>
         </cluster>
 
