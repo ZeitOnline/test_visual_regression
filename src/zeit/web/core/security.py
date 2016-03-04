@@ -8,6 +8,7 @@ import zeit.web.core.comments
 import zeit.web.core.metrics
 import logging
 
+
 log = logging.getLogger(__name__)
 
 
@@ -19,66 +20,46 @@ class AuthenticationPolicy(
     """
 
     def authenticated_userid(self, request):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return request.user.get('ssoid')
 
-        sso_cookie = request.cookies.get(conf.get('sso_cookie'))
 
-        # If no sso cookie is present, bail out straight away:
-        if not sso_cookie:
-            if 'user' in request.session:
-                del request.session['user']
-            return
+def get_user(request):
+    """This is available as ``request.user``."""
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    sso_cookie = request.cookies.get(conf.get('sso_cookie'))
+    if not sso_cookie:
+        if 'user' in request.session:
+            del request.session['user']
+        return {}
 
-        if request.session.get('user') and (
-                is_reliable_user_info(request.session['user']) and not (
-                request.session['user']['should_invalidate'])):
-            # retrieve the user info from the session
-            user_info = request.session['user']
-        else:
-            # store the user info in the session
-            log.debug("Request user_info")
-            user_info = get_user_info(request)
-            if not is_reliable_user_info(user_info):
-                return
-            request.session['user'] = user_info
-        return user_info['ssoid']
+    stored_user = request.session.get('user', {})
+    if (not is_reliable_user_info(stored_user) or
+            stored_user.get('should_invalidate')):
+        log.debug('No user found in session, calling get_user_info()')
+        user_info = get_user_info(request)
+        if not is_reliable_user_info(user_info):
+            return {}
+        request.session['user'] = user_info
+        return user_info
+    else:
+        return stored_user
 
 
 def is_reliable_user_info(user_info):
     """Check user info for all mandatory session values (including the
     successfully decoded SSO cookie value).
     """
-
-    return user_info.get('ssoid')
+    ssoid = user_info.get('ssoid')
+    if ssoid and not user_info.get('has_community_data'):
+        user_info['should_invalidate'] = True
+    return bool(ssoid)
 
 
 def reload_user_info(request):
     if request.session.get('user'):
         del request.session['user']
-    return request.authenticated_userid
-
-
-def get_user_info_from_sso_cookie(cookie, key):
-    try:
-        return jwt.decode(cookie, key, 'RS256')
-    except Exception:
-        return
-
-
-def recursively_call_community(request, tries):
-    if tries > 0:
-        try:
-            with zeit.web.core.metrics.timer(
-                    'community_user_info.community.reponse_time'):
-                # Analoguous to requests.api.request().
-                session = requests.Session()
-                response = session.send(request, stream=True, timeout=0.5)
-                session.close()
-                return response
-        except Exception:
-            return recursively_call_community(request, tries - 1)
-    else:
-        return
+        del request.user
+    return request.user
 
 
 def get_user_info(request):
@@ -91,6 +72,7 @@ def get_user_info(request):
         name=None,
         mail=None,
         should_invalidate=False,
+        has_community_data=False,
         picture=None,
         roles=[],
         premoderation=False)
@@ -114,7 +96,7 @@ def get_user_info(request):
         headers={'Accept': 'application/xml',
                  'Cookie': request.headers.get('Cookie', '')}).prepare()
 
-    community_response = recursively_call_community(community_request, 1)
+    community_response = _retry_request(community_request, 1)
 
     if not community_response:
         return user_info
@@ -145,10 +127,30 @@ def get_user_info(request):
         roles = user_info['roles'][:]
         user_info['blocked'] = (roles.pop() == "anonymous user")
 
-    if sso_info and (not user_info['uid'] or user_info['uid'] == '0'):
-        user_info['should_invalidate'] = True
-
+    user_info['has_community_data'] = True
     return user_info
+
+
+def get_user_info_from_sso_cookie(cookie, key):
+    try:
+        return jwt.decode(cookie, key, 'RS256')
+    except Exception:
+        return
+
+
+def _retry_request(request, tries):
+    if not tries:
+        return
+    try:
+        with zeit.web.core.metrics.timer(
+                'community_user_info.community.reponse_time'):
+            # Analoguous to requests.api.request().
+            session = requests.Session()
+            response = session.send(request, stream=True, timeout=0.5)
+            session.close()
+            return response
+    except Exception:
+        return _retry_request(request, tries - 1)
 
 
 def get_login_state(request):

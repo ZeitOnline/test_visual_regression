@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import urlparse
 import logging
 
 import pyramid.httpexceptions
@@ -89,37 +88,22 @@ class Base(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def meta_robots(self):
-        # Try seo presets first
-
-        if self.seo_robot_override:
-            return self.seo_robot_override
-
-        url = self.request.url
-        query = urlparse.parse_qs(urlparse.urlparse(url).query)
-
-        # Exclude certain paths from being indexed
+        # Prevent certain paths, products and edgecases from being indexed
         path = self.request.path.startswith
 
         if path('/angebote') and not path('/angebote/partnersuche'):
             return 'index,nofollow,noodp,noydir,noarchive'
-        elif (path('/thema') or path('/serie')) and (
-                'p' not in query or query['p'] == ['1']):
-                    return 'index,follow,noarchive'
-        elif path('/banner') or path('/test') or path('/templates') \
-                or path('/thema') or path('/serie') \
-                or path('/autoren/register'):
-                return 'noindex,follow,noodp,noydir,noarchive'
-        elif path('/autoren/index'):
-            return 'noindex,follow'
 
-        # Exclude certain products and ressorts from being followed
-        exclude_products = ('TGS', 'HaBl', 'WIWO', 'GOLEM')
+        if (self.ressort == 'Fehler' and self.product_id == 'ZEAR') or \
+            path('/banner') or \
+            path('/test') or \
+            path('/templates') or \
+            path('/autoren/register') or \
+            self.shared_cardstack_id or \
+                self.product_id in ('TGS', 'HaBl', 'WIWO', 'GOLEM'):
+            return 'noindex,follow,noodp,noydir,noarchive'
 
-        if self.product_id in exclude_products or (
-                self.ressort == 'Fehler' and self.product_id == 'ZEAR'):
-                return 'noindex,follow'
-        else:
-            return 'index,follow,noodp,noydir,noarchive'
+        return super(Base, self).meta_robots
 
     @zeit.web.reify
     def ressort_literally(self):
@@ -142,6 +126,10 @@ class Base(zeit.web.core.view.Base):
             return self.sub_ressort.capitalize() if (
                 self.sub_ressort != '') else self.ressort.capitalize()
         return item[0]
+
+    @zeit.web.reify
+    def shared_cardstack_id(self):
+        return self.request.GET.get('stackId', '') or None
 
 
 @pyramid.view.view_config(
@@ -194,9 +182,7 @@ class CommentForm(zeit.web.core.view.Content):
 @pyramid.view.view_config(
     route_name='framebuilder',
     renderer='templates/framebuilder/framebuilder.html')
-class FrameBuilder(zeit.web.core.view.CeleraOneMixin, Base):
-
-    inline_svg_icons = True
+class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
 
     def __init__(self, context, request):
         super(FrameBuilder, self).__init__(context, request)
@@ -208,45 +194,5 @@ class FrameBuilder(zeit.web.core.view.CeleraOneMixin, Base):
             raise pyramid.httpexceptions.HTTPNotFound()
 
     @zeit.web.reify
-    def advertising_enabled(self):
-        return self.banner_channel is not None
-
-    @zeit.web.reify
-    def banner_channel(self):
-        return self.request.GET.get('banner_channel', None)
-
-    @zeit.web.reify
     def ressort(self):
         return self.request.GET.get('ressort', None)
-
-    @zeit.web.reify
-    def page_slice(self):
-        return self.request.GET.get('page_slice', None)
-
-    @zeit.web.reify
-    def desktop_only(self):
-        return 'desktop_only' in self.request.GET
-
-    @zeit.web.reify
-    def framebuilder_requires_webtrekk(self):
-        return 'webtrekk' in self.request.GET
-
-    @zeit.web.reify
-    def framebuilder_requires_ivw(self):
-        return 'ivw' in self.request.GET
-
-    @zeit.web.reify
-    def nav_show_ressorts(self):
-        return 'hide_ressorts' not in self.request.GET
-
-    @zeit.web.reify
-    def nav_show_search(self):
-        return 'hide_search' not in self.request.GET
-
-    @zeit.web.reify
-    def is_advertorial(self):
-        return 'adlabel' in self.request.GET
-
-    @zeit.web.reify
-    def cap_title(self):
-        return self.request.GET.get('adlabel') or 'Anzeige'

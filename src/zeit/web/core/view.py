@@ -269,15 +269,11 @@ class Base(object):
                 ('tma', '')]
 
     @zeit.web.reify
-    def seo_robot_override(self):
-        try:
-            return zeit.seo.interfaces.ISEO(self.context).meta_robots
-        except (AttributeError, TypeError):
-            pass
-
-    @zeit.web.reify
     def meta_robots(self):
-        return self.seo_robot_override or 'index,follow,noodp,noydir,noarchive'
+        seo = zeit.seo.interfaces.ISEO(self.context, None)
+        if seo and seo.meta_robots:
+            return seo.meta_robots
+        return 'index,follow,noodp,noydir,noarchive'
 
     @zeit.web.reify
     def adwords(self):
@@ -500,6 +496,32 @@ class Base(object):
     def newsletter_optin_tracking(self):
         return None
 
+    @zeit.web.reify
+    def shared_cardstack_id(self):
+        return None
+
+    @zeit.web.reify
+    def cardstack_head(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        url = conf.get('cardstack_backend', '').rstrip('/')
+        stack_id = (u'/' + self.shared_cardstack_id if self.shared_cardstack_id
+                    else u'')
+        return url + u'/stacks' + stack_id + u'/esi/head'
+
+    @zeit.web.reify
+    def cardstack_body(self):
+        # We use __STACK__ because {} or %s would not survive urlencoding
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        url = conf.get('cardstack_backend', '').rstrip('/')
+        return url + (u'/stacks/__STACK__/esi/body'
+                      u'?shareUrlQuerySuffix=stackId%3D__STACK__')
+
+    @zeit.web.reify
+    def cardstack_scripts(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        url = conf.get('cardstack_backend', '').rstrip('/')
+        return url + u'/stacks/esi/scripts'
+
 
 class CeleraOneMixin(object):
 
@@ -529,7 +551,7 @@ class CeleraOneMixin(object):
 
         if self.type == 'gallery':
             return 'bildergalerie'
-        elif isinstance(self, zeit.web.site.view.FrameBuilder):
+        elif isinstance(self, zeit.web.core.view.FrameBuilder):
             return 'arena'
         else:
             return self.type
@@ -797,33 +819,28 @@ class Content(CeleraOneMixin, Base):
 
     @zeit.web.reify
     def nextread(self):
-        return zeit.web.core.interfaces.INextread(self.context)
+        return zeit.web.core.interfaces.INextread(self.context, [])
 
     @zeit.web.reify
     def nextread_ad(self):
-        return zope.component.getAdapter(
+        return zope.component.queryAdapter(
             self.context, zeit.web.core.interfaces.INextread,
-            name="advertisement")
+            'advertisement', [])
 
     @zeit.web.reify('default_term')
     def comment_counts(self):
-        if self.nextread:
-            return zeit.web.core.comments.get_counts(
-                [t.uniqueId for t in self.nextread])
+        return zeit.web.core.comments.get_counts(
+            [t.uniqueId for t in self.nextread])
 
     @zeit.web.reify
     def comment_area(self):
-        user_blocked = False
-        premoderation = False
-        uid = 0
-        valid_community_login = True
-        self.request.authenticated_userid
-
-        if self.request.session.get('user'):
-            user_blocked = self.request.session['user'].get('blocked')
-            premoderation = self.request.session['user'].get('premoderation')
-            uid = self.request.session['user'].get('uid')
-            valid_community_login = True if uid and uid != '0' else False
+        user = self.request.user
+        user_blocked = user.get('blocked')
+        premoderation = user.get('premoderation')
+        valid_community_login = (
+            user.get('has_community_data') and
+            user.get('uid') and user.get('uid') != '0')
+        authenticated = user.get('ssoid')
 
         # used for general alerts in the comment section header
         message = None
@@ -848,17 +865,19 @@ class Content(CeleraOneMixin, Base):
             note = None
         elif self.community_maintenance['scheduled']:
             message = self.community_maintenance['text_scheduled']
-
-        if not valid_community_login:
+        elif authenticated and not valid_community_login:
             note = (u'Aufgrund eines technischen Fehlers steht Ihnen die '
                     u'Kommentarfunktion kurzfristig nicht zur Verfügung. '
                     u'Bitte entschuldigen Sie diese Störung.')
 
         return {
             'show': (self.comments_allowed or bool(self.comments)),
-            'show_comment_form': not self.community_maintenance['active'] and (
-                self.comments_allowed) and self.comments_loadable and (
-                    not user_blocked) and valid_community_login,
+            # For not authenticated users this means "show_login_prompt".
+            'show_comment_form': (
+                not self.community_maintenance['active'] and
+                self.comments_allowed and self.comments_loadable and
+                ((not user_blocked and valid_community_login) or
+                 not authenticated)),
             'show_comments': not self.community_maintenance['active'] and (
                 self.comments_loadable and bool(self.comments)),
             'no_comments': (not self.comments and self.comments_loadable),
@@ -892,10 +911,58 @@ class service_unavailable(object):  # NOQA
         return pyramid.response.Response(body, 503)
 
 
+class FrameBuilder(CeleraOneMixin):
+
+    inline_svg_icons = True
+
+    @zeit.web.reify
+    def advertising_enabled(self):
+        return self.banner_channel is not None
+
+    @zeit.web.reify
+    def banner_channel(self):
+        return self.request.GET.get('banner_channel', None)
+
+    @zeit.web.reify
+    def page_slice(self):
+        return self.request.GET.get('page_slice', None)
+
+    @zeit.web.reify
+    def desktop_only(self):
+        return 'desktop_only' in self.request.GET
+
+    @zeit.web.reify
+    def framebuilder_requires_webtrekk(self):
+        return 'webtrekk' in self.request.GET
+
+    @zeit.web.reify
+    def framebuilder_requires_ivw(self):
+        return 'ivw' in self.request.GET
+
+    @zeit.web.reify
+    def nav_show_ressorts(self):
+        return 'hide_ressorts' not in self.request.GET
+
+    @zeit.web.reify
+    def nav_show_search(self):
+        return 'hide_search' not in self.request.GET
+
+    @zeit.web.reify
+    def is_advertorial(self):
+        return 'adlabel' in self.request.GET
+
+    @zeit.web.reify
+    def cap_title(self):
+        return self.request.GET.get('adlabel') or 'Anzeige'
+
+
 @pyramid.view.notfound_view_config()
 def not_found(request):
     body = 'Status 404: Dokument nicht gefunden.'
-    return pyramid.response.Response(body, 404, [('X-Render-With', 'default')])
+    return pyramid.response.Response(
+        body, 404,
+        [('X-Render-With', 'default'),
+         ('Content-Type', 'text/plain; charset=utf-8')])
 
 
 @pyramid.view.view_config(context=pyramid.exceptions.URLDecodeError)
@@ -922,7 +989,8 @@ def surrender(context, request):
 @pyramid.view.view_config(route_name='blacklist')
 def blacklist(context, request):
     return pyramid.httpexceptions.HTTPNotImplemented(
-        headers=[('X-Render-With', 'default')])
+        headers=[('X-Render-With', 'default'),
+                 ('Content-Type', 'text/plain; charset=utf-8')])
 
 
 @pyramid.view.view_config(route_name='json_delta_time', renderer='json')

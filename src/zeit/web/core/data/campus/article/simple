@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
-    <rankedTags xmlns:ns10="http://codespeak.net/lxml/objectify/pytype">
+    <rankedTags>
       <tag type="free" url_value="student" uuid="65f229d9-f0e9-434a-9f40-d541d927a413">Student</tag>
       <tag score="5" type="topic" url_value="hochschule" uuid="b8bea0ad-05bf-4eee-b35a-6b1fd478d777">Hochschule</tag>
       <tag score="4" type="free" url_value="auslandssemester" uuid="6430e636-640f-4447-9f42-1116f424a85b">Auslandssemester</tag>
@@ -26,7 +26,7 @@
     <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
     <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
     <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2016-02-10T09:39:14.233424+00:00</attribute>
-    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2016-02-10T09:39:17.773713+00:00</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2016-01-10T09:39:17.773713+00:00</attribute>
     <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2016-02-10T09:39:18.167553+00:00</attribute>
     <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2016-02-10T09:39:17.773713+00:00</attribute>
     <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2016-02-10T09:39:16.922711+00:00</attribute>
@@ -36,7 +36,7 @@
     <attribute name="export_cds" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
     <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
     <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
-    <attribute name="id" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">article-simple</attribute>
+    <attribute name="id" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">simple</attribute>
     <attribute name="importsource" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">k4</attribute>
     <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
     <attribute name="ipad_template" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype"/>

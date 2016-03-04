@@ -1,5 +1,5 @@
 {% extends 'zeit.web.site:templates/content.html' %}
-{% import 'zeit.web.site:templates/macros/video_macro.tpl' as vima %}
+{% import 'zeit.web.core:templates/macros/video_macro.tpl' as vima %}
 
 {% block content %}
     <article class="article article--video" id="js-article"
@@ -37,7 +37,7 @@
                 {{ view.subtitle }}
             </div>
             <div class="metadata">
-                {% include "zeit.web.site:templates/inc/article/metadata.tpl" %}
+                {% include "zeit.web.core:templates/inc/article/metadata.tpl" %}
                 {% include "zeit.web.site:templates/inc/article/sharing-menu.tpl" %}
             </div>
         </div>

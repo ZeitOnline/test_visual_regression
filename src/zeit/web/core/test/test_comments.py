@@ -119,7 +119,7 @@ def test_request_thread_should_handle_non_ascii_urls(application, mockserver):
     assert zeit.web.core.comments.request_thread(u'ümläut') is None
 
 
-def test_comment_to_dict_should_parse_correctly(application, testserver):
+def test_comment_to_dict_should_parse_correctly(application):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')
 
@@ -151,7 +151,7 @@ def test_comment_to_dict_should_parse_correctly(application, testserver):
     assert comment['name'] == ''
 
 
-def test_entire_thread_should_be_parsed(application, testserver):
+def test_entire_thread_should_be_parsed(application):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id, sort='desc')
@@ -164,7 +164,7 @@ def test_entire_thread_should_be_parsed(application, testserver):
     assert len(last['replies']) == 1
 
 
-def test_thread_should_have_valid_page_information(application, testserver):
+def test_thread_should_have_valid_page_information(application):
     unique_id = ('http://xml.zeit.de/politik/deutschland/'
                  '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
     thread = zeit.web.core.comments.get_thread(unique_id)
@@ -219,7 +219,7 @@ def test_rewrite_comments_url_should_rewrite_to_static_host(application):
 
 def test_post_comment_should_throw_exception_if_no_user_is_present():
     request = mock.Mock()
-    request.authenticated_userid = None
+    request.user = {}
     with pytest.raises(pyramid.httpexceptions.HTTPForbidden):
         zeit.web.core.view_comment.PostComment(mock.Mock(), request)
 
@@ -266,12 +266,11 @@ def test_comment_tree_should_be_flattened_on_level_two():
 
 def _create_poster(monkeypatch):
     request = mock.Mock()
-    request.authenticated_userid = '123'
+    request.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
+    request.session = {}
 
     request.params = {'path': 'my/path'}
     request.GET = request.POST = request.params
-    request.session = {'user': {'uid': '123'}}
-    request.session['user']['name'] = 'foo'
     request.cookies = {}
     context = mock.Mock()
 
@@ -301,7 +300,8 @@ def _create_poster(monkeypatch):
     return zeit.web.core.view_comment.PostComment(context, request)
 
 
-def test_post_comment_should_initialise_if_user_is_present(monkeypatch):
+def test_post_comment_should_initialise_if_user_is_present(
+        application, monkeypatch):
     poster = _create_poster(monkeypatch)
 
     assert poster.path == 'my/path'
@@ -313,7 +313,7 @@ def test_post_comment_should_initialise_if_user_is_present(monkeypatch):
 @pytest.mark.parametrize("path, comment, pid, action", [
     ('path', 'my comment', '1', 'comment')])
 def test_post_comment_should_raise_exception_if_no_post_is_used(
-        monkeypatch, path, pid, comment, action):
+        application, monkeypatch, path, pid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "GET"
 
@@ -330,7 +330,7 @@ def test_post_comment_should_raise_exception_if_no_post_is_used(
     (None, None, None, 'comment'),
     (None, 'my_comment', None, 'comment')])
 def test_post_comment_should_raise_exception_if_params_are_wrong(
-        monkeypatch, path, pid, comment, action):
+        application, monkeypatch, path, pid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
 
@@ -347,7 +347,7 @@ def test_post_comment_should_raise_exception_if_params_are_wrong(
     ('my/path', 'my_comment', None, 'report'),
     ('my/path', None, 1, 'report')])
 def test_post_report_should_raise_exception_if_params_are_wrong(
-        monkeypatch, path, pid, comment, action):
+        application, monkeypatch, path, pid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
 
@@ -362,7 +362,7 @@ def test_post_report_should_raise_exception_if_params_are_wrong(
 @pytest.mark.parametrize("path, comment, pid, action", [
     ('my/path', None, None, 'recommend')])
 def test_post_recommondation_should_raise_exception_if_params_are_wrong(
-        monkeypatch, path, pid, comment, action):
+        application, monkeypatch, path, pid, comment, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
 
@@ -459,7 +459,7 @@ def test_post_comment_should_get_with_correct_arguments(
 @pytest.mark.parametrize("path, comment, pid, action, result", [
     ('my/path', 'my comment', None, 'comment', endpoint_agatho)])
 def test_invalidation_should_be_called_on_successful_post(
-        monkeypatch, path, comment, pid, result, action):
+        application, monkeypatch, path, comment, pid, result, action):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
     poster.request.params['comment'] = comment
@@ -483,15 +483,15 @@ def test_invalidation_should_be_called_on_successful_post(
     ('comment', 'my/article', 'http://foo/agatho/thread/my/article'),
     ('report', 'my/article', 'http://foo/services/json?callback=zeit')])
 def test_action_url_should_be_created_correctly(
-        monkeypatch, action, path, service):
+        application, monkeypatch, action, path, service):
     poster = _create_poster(monkeypatch)
     assert poster._action_url(action, path) == service
 
 
 @pytest.mark.parametrize("action", ['comment', 'report'])
 def test_post_comment_should_set_lock(application, action):
-    request = mock.Mock()
-    request.session = {'user': {'name': 'foo'}}
+    request = pyramid.testing.DummyRequest()
+    request.user = {'ssoid': '123', 'name': 'foo'}
     pc = zeit.web.core.view_comment.PostComment(mock.Mock(), request)
     pc.lock_duration = datetime.timedelta(0, 0.5)
     locker = pc.handle_comment_locking
@@ -511,8 +511,8 @@ def test_post_comment_should_set_lock(application, action):
 
 @pytest.mark.parametrize("action", ['recommend', 'promote', 'demote'])
 def test_post_comment_should_not_set_lock(application, action):
-    request = mock.Mock()
-    request.session = {'user': {'name': 'foo'}}
+    request = pyramid.testing.DummyRequest()
+    request.user = {'ssoid': '123', 'name': 'foo'}
     pc = zeit.web.core.view_comment.PostComment(mock.Mock(), request)
     pc.lock_duration = datetime.timedelta(0, 0.5)
     locker = pc.handle_comment_locking
@@ -550,7 +550,7 @@ def test_post_comment_should_not_expose_requests_timeout_exception(
     dummy_request.method = 'POST'
     dummy_request.POST = dummy_request.params = {
         'path': 'artikel/01', 'action': 'comment', 'comment': ' '}
-    dummy_request.session = {'user': {'uid': '123', 'name': 'foo'}}
+    dummy_request.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
 
     def post(url, **kw):
         raise requests.exceptions.Timeout()
@@ -644,22 +644,22 @@ def test_article_view_should_set_comments_not_loadable_prop(
 
 
 def test_article_view_should_have_short_caching_time_on_unloadable_thread(
-        application, testbrowser, testserver, monkeypatch):
-    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+        application, testbrowser, monkeypatch):
+    browser = testbrowser('/zeit-online/article/01')
     assert browser.headers.get('cache-control') == 'max-age=10'
 
     def get_thread(
             unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
         raise zeit.web.core.comments.ThreadNotLoadable()
     monkeypatch.setattr(zeit.web.core.comments, 'get_thread', get_thread)
-    browser = testbrowser('%s/zeit-online/article/01' % testserver.url)
+    browser = testbrowser('/zeit-online/article/01')
     assert browser.headers.get('cache-control') == 'max-age=5'
     assert browser.cssselect('.comment-section__message')[0].text.strip() == (
         u'Ein technischer Fehler ist aufgetreten. Die Kommentare '
         u'zu diesem Artikel konnten nicht geladen werden. Bitte '
         u'entschuldigen Sie diese Störung.')
 
-    browser = testbrowser('%s/artikel/01' % testserver.url)
+    browser = testbrowser('/artikel/01')
     assert browser.headers.get('cache-control') == 'max-age=5'
 
 
@@ -669,8 +669,8 @@ def test_community_maintenance_should_be_created_from_xml():
         <community_maintenance>
             <active>true</active>
             <scheduled>true</scheduled>
-            <begin>2010-10-10T10:10:10.10+00:00</begin>
-            <end>2020-10-10T10:10:10.10+00:00</end>
+            <begin>2010-10-10T10:10:10.10+01:00</begin>
+            <end>2020-10-10T10:10:10.10+01:00</end>
             <text_scheduled></text_scheduled>
             <text_active></text_active>
         </community_maintenance>
@@ -693,11 +693,13 @@ def test_community_maintenance_should_be_created_from_xml():
 
     res = zeit.web.core.comments._maintenance_from_xml(xml, maintenance)
     begin = datetime.datetime(
-        2010, 10, 10, 10, 10, 10, 100000, tzinfo=pytz.utc)
-    end = datetime.datetime(2020, 10, 10, 10, 10, 10, 100000, tzinfo=pytz.utc)
+        2010, 10, 10, 9, 10, 10, 100000, tzinfo=pytz.utc)
+    end = datetime.datetime(2020, 10, 10, 9, 10, 10, 100000, tzinfo=pytz.utc)
     assert res['active']
     assert res['scheduled']
+    assert isinstance(res['begin'], datetime.datetime)
     assert res['begin'] == begin
+    assert isinstance(res['end'], datetime.datetime)
     assert res['end'] == end
     assert res['text_scheduled'] == maintenance['text_scheduled']
     assert res['text_active'] == maintenance['text_active']
@@ -852,8 +854,7 @@ def test_user_comments_should_raise_exception_if_no_cid_given(application):
         zeit.web.core.comments.UserComment(xml)
 
 
-def test_user_comment_thread_should_have_expected_structure(
-        application, testserver):
+def test_user_comment_thread_should_have_expected_structure(application):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/author3')
     thread = zeit.web.core.comments.get_user_comments(author)

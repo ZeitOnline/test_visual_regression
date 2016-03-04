@@ -23,3 +23,18 @@ class Base(zeit.web.core.view.Base):
     http_cache=60)
 def login_state(request):
     return zeit.web.core.security.get_login_state(request)
+
+
+@pyramid.view.view_config(
+    route_name='campus_framebuilder',
+    renderer='templates/framebuilder/framebuilder.html')
+class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
+
+    def __init__(self, context, request):
+        super(FrameBuilder, self).__init__(context, request)
+        try:
+            self.context = zeit.cms.interfaces.ICMSContent(
+                'http://xml.zeit.de/campus/index')
+            self.context.advertising_enabled = self.banner_on
+        except TypeError:
+            raise pyramid.httpexceptions.HTTPNotFound()

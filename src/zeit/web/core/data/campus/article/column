@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author href="http://xml.zeit.de/autoren/F/Thomas_Fischer/index" publication-date="" expires="">
+      <display_name>Thomas Fischer</display_name>
+    </author>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Anne-Kathrin Gerstlauer</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Studium</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-03-01T09:46:46.801143+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-03-01T09:46:46.801143+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-03-01T09:47:08.135239+00:00</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-03-01T09:10:02.529136+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schultheiss</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/test/test-michael/f8c5bf51-fddc-4b4e-85a9-f103eaf10322.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Studium</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Freunde von AKG</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">4743</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:7b707212-8975-410f-92e1-ae1b3b58ab54}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">10</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZCOContent" module="zeit.campus.interfaces"/&gt;
+        &lt;global name="IZCOArticle" module="zeit.campus.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Chat</supertitle>
+    <title>Wir rauchen nicht, wir tippen.</title>
+    <subtitle>Sommerregen ist sehr gefährlich. Die Gedanken waren beim vorletzten Wochenende. Bin gerutscht, gefallen, wieder aufgestanden. Hatte Kopfschmerzen. Drei Tage lang. </subtitle>
+    <division type="page">
+      <image layout="large" is_empty="True"/>
+      <p>Wir rauchen ja nicht mehr in unruhigen Minuten, wir tippen.</p>
+      <p>Im Winter stolperte mein Fahrrad über einen Bordstein.</p>
+      <p>Ich tastete alle wichtigen Körperteile ab. Beine? Dran. Arme? Dran. Haare? Dran. iPhone? Trocken.</p>
+      <p>Ich schrieb. "Bin mit dem Fahrrad in den Schnee gefallen." Whatsapp statt Nikotin. Ist irgendwie so beruhigend sinnlos.</p>
+      <p>Marie schlief noch. Zuletzt online gestern um 20.51 Uhr. Ich scrollte im Chat bis zum letzten Bild, um nachzuschauen, welches Tinder-Date sie gestern abend offenbar erfolgreich erobert hatte. Der Whatsapp-Status ist so verräterisch wie die Rollläden eines Schlafzimmers. Wer um 20.51 Uhr dichtmacht, geht nicht alleine schlafen.</p>
+      <p>Lara war wach. Zuletzt online um 08.02. Die hat ein Leben, war immer noch nicht im Bett, während ich bereits im Schnee lag.</p>
+      <p>"Wundert mich schon lange, wieso du eigentlich Fahrrad fahren, aber nicht ordentlich essen kannst."</p>
+      <p>Lara hatte mir vor Jahren ein erstes-Date-Ess-Verbot verpasst. Ein Typ hatte mich wegen mangelnder Tischmanieren abserviert. Ab jetzt nur noch Drinks.</p>
+      <p>"Magst du später vorbeikommen? "</p>
+      <p>Ja, ich will. Muss nur noch allen Nicht-Freunden – den sogenannten Bekannten – für diese Woche absagen. Danke Fahrradsturz!</p>
+      <p>Sorry, hatte Unfall. Tut alles weh. Schaffs wahrscheinlich nicht.</p>
+      <p>Abends sagte Lara, sie freue sich drauf, in einem halben Jahr von allen Bekannten gefragt zu werden, ob ich mich von meinem schweren Sturz erholt habe.</p>
+      <p>Warum musste ich eigentlich erst vom Rad fallen, um Treffen abzusagen, deren Dialoge immer so ablaufen:</p>
+      <p>Die Bekannten fragen: Wie läufts auf der Arbeit? Ich sage: Projekte, stressig, spannend, cool. Währenddessen höre ich mir selber nicht zu, weil ich mich nicht ertragen kann. Schaffe es in guten Momenten noch die immer gleiche Anekdote einzubauen. Haben jetzt einen Kicker.</p>
+      <p>Ich frage: Wie läufts an der Uni?</p>
+      <p>Sie fragen: Wie läufts mit den Männern? Unspektakulär. Unspektakulär ist ein super Wort, es suggeriert, man habe nichts zu erzählen, und klingt trotzdem verrucht.</p>
+      <p>Ich denke: Was nun?</p>
+      <p>Geschichten von früher! Die sind der Joker jedes Gesprächs zwischen Bekannten.</p>
+      <p>Ich frage: Wie läufts eigentlich zwischen Jessika und David? Noch zusammen, komisch, oder? Er soll ja mal. Ach echt?</p>
+      <p>Sie fragen: Und wie läufts mit deiner Bachelor-Arbeit? Ich denke: Da läuft gar nichts und ich jetzt nach hause. Und so flüchte ich lieber, bevor die Bekannten zum zweiten Akt des Gesprächs übergehen: vernünftige Ratschläge verteilen. Triff dich nicht mehr mit ihm. Mach deinen Abschluss. Arbeite nicht so viel. Bekannte wissen seltsamerweise immer was zu tun ist.</p>
+      <p>Laras Lieblingssatz ist: Ganz ehrlich, weiß ich jetzt auch nicht.</p>
+      <p>Ich sage: Sorry, muss los, noch eine Waschmaschine anmachen. Waschmaschinen sind der regelmäßige und verlässliche Fahrradsturz.</p>
+      <p><br/>Und trotzdem lade ich ein paar Bekannte zum Geburtstag ein. Und sie mich. Muss man bisschen drauf achten, wer, wen, wie oft. Ich werde Wein mitbringen. Wobei, wer Wein mitbringt, schreibt auch "Alles Liebe" auf die Pinnwand, und das habe ich mir nun wirklich abgewöhnt. Mir und Mama. Das war mir einen Anruf wert. Mama, sagte ich, nachher denken meine Freunde noch, du hättest mir gar nicht persönlich oder am Telefon gratuliert. Mama verstand.</p>
+      <p>Ich versteh’s immer noch nicht, was diese Alles-Liebe-Höflichkeit soll. Als Kind war ich sehr unhöflich, sagten die Leute, ich wünschte meinen Nachbarn keinen Guten Morgen und in der Kirche nicht Frohe Weihnachten. Es hat doch keiner, dachte ich, frohere Weihnachten, weil ich jetzt die Hand geschüttelt hab.</p>
+      <p>Und trotzdem wäre mein Leben als unhöfliches Kind einfacher. Ich würde aufhören zu sagen: Meld dich mal, wenn du in Berlin bist. Wir sind zusammen 13 Jahre zur Schule gegangen oder haben vier Jahre in der gleichen Stadt studiert und uns verdammt nochmal auch nie gemeldet. Vielleicht, weil wir wussten, wir können uns nicht einmal von früher erzählen. Was verbindet uns jetzt, abgesehen von den gleichen GPS-Koordinaten?</p>
+      <p>Whatever. Als ich mich eine Woche nach dem Sturz wieder mit Bekannten traf, hatte ich immerhin eine Anekdote mehr dabei. Die BVG ist echt teuer. Ja, aber ich fahr viel mit dem Rad. Bekommt man den Kopf vor der Arbeit frei. Nur letzte Woche bin ich hingefallen. Ist aber nix passiert. Aber die Autofahrer im Prenzlauer Berg. Hilft dir ja auch keiner.</p>
+      <p>Jetzt ist Juli. Sommerregen ist sehr gefährlich. Die Gedanken waren beim vorletzten Wochenende. Bin gerutscht, gefallen, wieder aufgestanden. Hatte Kopfschmerzen. Drei Tage lang. Hab Lara und allen Bekannten abgesagt. Die Bekannten schrieben: Erhol dich gut. Lara hat einfach geklingelt.<br/></p>
+      <p/>
+    </division>
+    <division type="page" teaser="Die zweite Seite">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id aut eos ullam, mollitia ea, nobis, delectus repudiandae saepe libero soluta labore, modi magni doloribus maiores dicta molestias voluptatem? Quas, temporibus?</p>
+    </division>
+    <division type="page" teaser="Die dritte Seite">
+      <p>Recusandae tempore facilis soluta praesentium quod perferendis ratione ipsum. Impedit tempora aperiam, doloribus suscipit quod deserunt dicta reiciendis praesentium assumenda nesciunt qui aut id blanditiis eum rem error!</p>
+    </division>
+  </body>
+</article>
