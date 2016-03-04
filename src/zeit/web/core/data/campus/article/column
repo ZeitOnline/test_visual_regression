@@ -92,5 +92,11 @@
       <p>Jetzt ist Juli. Sommerregen ist sehr gefährlich. Die Gedanken waren beim vorletzten Wochenende. Bin gerutscht, gefallen, wieder aufgestanden. Hatte Kopfschmerzen. Drei Tage lang. Hab Lara und allen Bekannten abgesagt. Die Bekannten schrieben: Erhol dich gut. Lara hat einfach geklingelt.<br/></p>
       <p/>
     </division>
+    <division type="page" teaser="Die zweite Seite">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id aut eos ullam, mollitia ea, nobis, delectus repudiandae saepe libero soluta labore, modi magni doloribus maiores dicta molestias voluptatem? Quas, temporibus?</p>
+    </division>
+    <division type="page" teaser="Die dritte Seite">
+      <p>Recusandae tempore facilis soluta praesentium quod perferendis ratione ipsum. Impedit tempora aperiam, doloribus suscipit quod deserunt dicta reiciendis praesentium assumenda nesciunt qui aut id blanditiis eum rem error!</p>
+    </division>
   </body>
 </article>

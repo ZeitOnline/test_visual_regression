@@ -12,3 +12,15 @@
 	&__summary
 		@extend .paragraph
 		font-weight: bold
+
+	&__subheading
+		@extend %font-beckett
+		font-size: em(26px)
+		margin: remify(38px auto 12px)
+		+respond-min($break-tablet-min)
+			font-size: em(42px)
+			margin: remify(60px auto 20px)
+
+.article-page
+	&:last-of-type
+		margin-bottom: remify(60px)
