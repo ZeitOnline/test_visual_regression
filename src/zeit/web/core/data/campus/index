@@ -70,13 +70,50 @@
     <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noodp,noydir,noarchive </attribute>
   </head>
   <body xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <cluster area="id-41a8299d-b569-4c42-b713-db5dbd866a4f" kind="duo" kind_title="Standard-Region" visible="True" visible_mobile="True">
-      <region area="1234567test" automatic_type="channel" count="8" hide-dupes="True" kind="major" read_more_url="http://www.zeit.de/studium/index" title="Studium" visible="True" visible_mobile="True">
-        <container cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b" cp:type="teaser" module="zco-wide" overlay_level="3" text_color="dark" visible="True" visible_mobile="True">
-          <block author="Anna Bordel" contenttype="article" expires="" href="http://xml.zeit.de/campus/article-simple" issue="1" publication-date="" ressort="Studium" uniqueId="http://xml.zeit.de/campus/article-simple" year="2015"></block>
+    <cluster area="id-41a8299d-b569-4c42-b713-db5dbd86a64f" kind="solo" visible="True" visible_mobile="True">
+      <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64f" kind="solo" visible="True" visible_mobile="True">
+        <container cp:type="teaser" module="zco-lead-upright" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
         </container>
       </region>
     </cluster>
+
+    <cluster area="id-41a8299d-b569-4c42-b713-d5bdbd86a64f" kind="duo" visible="True" visible_mobile="True">
+      <region area="id-41a2899d-b569-4c42-b713-bd5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
+        <container cp:type="teaser" module="zco-wide-large" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e35d7bf3be4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+        </container>
+        <container cp:type="teaser" module="zco-wide-large" visible="True" visible_mobile="True" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
+        </container>
+      </region>
+    </cluster>
+
+    <cluster area="id-41a8929d-b569-4c42-b713-d5bdbd86a64f" kind="trio" visible="True" visible_mobile="True">
+      <region area="id-41a289d9-b569-4c42-b713-bd5dbd86a64f" kind="trio" visible="True" visible_mobile="True">
+        <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e35d7bf3be4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+        </container>
+        <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
+        </container>
+        <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e35d7bf3be4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+        </container>
+      </region>
+    </cluster>
+
+    <cluster area="id-41a8299d-b569-4c42-b713-db5dbd68a64f" kind="duo" visible="True" visible_mobile="True">
+      <region area="id-41a2899d-b569-4c42-b713-db5ddb86a64f" kind="duo" visible="True" visible_mobile="True">
+        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b75a-e357db3fbe4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
+        </container>
+        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3b4eb">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+        </container>
+      </region>
+    </cluster>
+
   </body>
   <feed xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></feed>
 </centerpage>
