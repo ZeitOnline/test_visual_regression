@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.62 (unreleased)
+2.62 (2016-03-04)
 -----------------
 
 - ZON-2433: Improve sharing logic of cardstacks
