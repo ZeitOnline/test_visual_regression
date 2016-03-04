@@ -203,7 +203,7 @@ def test_cp_has_correct_webtrekk_values(testbrowser):
 def test_webtrekk_series_tag_is_set_corectly(testbrowser):
     browser = testbrowser('/artikel/06')
     assert '6: "tödlichekeime",' in browser.contents
-    assert ('redaktion.zeit-magazin..tödlichekeime.'
+    assert ('redaktion.zeit-magazin..toedlichekeime.'
             'article.zei|localhost/artikel/06') in browser.contents
 
 
@@ -568,10 +568,9 @@ def test_article_with_fictitious_imgs_should_not_render_img_container(
 
 def test_article03_has_linked_image(testbrowser):
     browser = testbrowser('/artikel/03')
-    output = ""
-    for line in browser.contents.splitlines():
-        output += line.strip()
-    assert '<a href="http://www.test.de"><img alt="Immer' in output
+    assert browser.xpath('//a[@href="http://www.test.de"]/img')
+    alt = browser.xpath('//a[@href="http://www.test.de"]/img/@alt')[0]
+    assert alt.startswith('Immer noch die besten Botschafterinnen der Region')
 
 
 @pytest.mark.skipif(True,

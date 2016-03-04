@@ -529,7 +529,7 @@ class CeleraOneMixin(object):
 
         if self.type == 'gallery':
             return 'bildergalerie'
-        elif isinstance(self, zeit.web.site.view.FrameBuilder):
+        elif isinstance(self, zeit.web.core.view.FrameBuilder):
             return 'arena'
         else:
             return self.type
@@ -797,19 +797,18 @@ class Content(CeleraOneMixin, Base):
 
     @zeit.web.reify
     def nextread(self):
-        return zeit.web.core.interfaces.INextread(self.context)
+        return zeit.web.core.interfaces.INextread(self.context, [])
 
     @zeit.web.reify
     def nextread_ad(self):
-        return zope.component.getAdapter(
+        return zope.component.queryAdapter(
             self.context, zeit.web.core.interfaces.INextread,
-            name="advertisement")
+            'advertisement', [])
 
     @zeit.web.reify('default_term')
     def comment_counts(self):
-        if self.nextread:
-            return zeit.web.core.comments.get_counts(
-                [t.uniqueId for t in self.nextread])
+        return zeit.web.core.comments.get_counts(
+            [t.uniqueId for t in self.nextread])
 
     @zeit.web.reify
     def comment_area(self):
@@ -844,7 +843,7 @@ class Content(CeleraOneMixin, Base):
             note = None
         elif self.community_maintenance['scheduled']:
             message = self.community_maintenance['text_scheduled']
-        elif not valid_community_login:
+        elif authenticated and not valid_community_login:
             note = (u'Aufgrund eines technischen Fehlers steht Ihnen die '
                     u'Kommentarfunktion kurzfristig nicht zur Verfügung. '
                     u'Bitte entschuldigen Sie diese Störung.')
@@ -888,6 +887,51 @@ class service_unavailable(object):  # NOQA
     def __call__(self):
         body = 'Status 503: Dokument zurzeit nicht verfügbar.'
         return pyramid.response.Response(body, 503)
+
+
+class FrameBuilder(CeleraOneMixin):
+
+    inline_svg_icons = True
+
+    @zeit.web.reify
+    def advertising_enabled(self):
+        return self.banner_channel is not None
+
+    @zeit.web.reify
+    def banner_channel(self):
+        return self.request.GET.get('banner_channel', None)
+
+    @zeit.web.reify
+    def page_slice(self):
+        return self.request.GET.get('page_slice', None)
+
+    @zeit.web.reify
+    def desktop_only(self):
+        return 'desktop_only' in self.request.GET
+
+    @zeit.web.reify
+    def framebuilder_requires_webtrekk(self):
+        return 'webtrekk' in self.request.GET
+
+    @zeit.web.reify
+    def framebuilder_requires_ivw(self):
+        return 'ivw' in self.request.GET
+
+    @zeit.web.reify
+    def nav_show_ressorts(self):
+        return 'hide_ressorts' not in self.request.GET
+
+    @zeit.web.reify
+    def nav_show_search(self):
+        return 'hide_search' not in self.request.GET
+
+    @zeit.web.reify
+    def is_advertorial(self):
+        return 'adlabel' in self.request.GET
+
+    @zeit.web.reify
+    def cap_title(self):
+        return self.request.GET.get('adlabel') or 'Anzeige'
 
 
 @pyramid.view.notfound_view_config()
