@@ -6,7 +6,7 @@
             {% if not loop.first %}
                 <h2 class="article__subheading article__item">{{ page.teaser }}</h2>
             {% endif %}
-            {{ render_page(page) }}
+            {%- include "zeit.web.core:templates/inc/article/page.html" -%}
         </section>
     {% endfor %}
 {% endblock article_pages %}
