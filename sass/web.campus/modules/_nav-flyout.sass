@@ -3,24 +3,18 @@
 	margin-bottom: 1em
 
 	&__headline
-		font-family: $font-beckett
+		@extend %font-beckett
 		font-size: remify(28px)
-		font-weight: normal
-		height: remify(50px)
-		letter-spacing: .05em
-		line-height: 1em
-		margin: 0
-		text-transform: uppercase
-		margin-bottom: remify(16px)
+		min-height: 2em // 2 lines
+		line-height: 1
+		margin: remify(0 0 9px)
 		+respond-min($break-desktop-min)
 			font-size: remify(42px)
 			letter-spacing: .03em
-			margin-bottom: remify(48px)
+			margin-bottom: remify(14px)
 
 	&__text
-		font-family: $font-tabletgothic
-		margin-bottom: remify(7px)
-		margin-top: 0
+		margin: 0
 
 	&__item
 		display: block
@@ -35,9 +29,11 @@
 		color: $color-tools-secondary
 		display: block
 		font-weight: bold
-		padding: remify(15px) remify(10px)
+		padding: remify(14px 10px 22px)
 		+on-interaction
 			color: $zco-charcoal
+		+respond-min($break-desktop-min)
+			padding: remify(21px 20px 22px)
 
 	&__list
 		+display-flex()
@@ -47,6 +43,7 @@
 		padding: remify(20px)
 
 	&__sit-link
+		+font-smoothing
 		background-color: rgba(0, 0, 0, .1)
 		color: $white
 		display: block
@@ -57,7 +54,7 @@
 		+on-interaction
 			color: $white
 
-	&__toolbox-arrow
+	&__arrow
 		height: remify(20px)
 		width: remify(20px)
 		margin-left: .2em
