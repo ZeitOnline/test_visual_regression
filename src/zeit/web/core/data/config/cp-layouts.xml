@@ -20,7 +20,7 @@
         areas="duo"
         />
     <layout
-        id="zco-lead-upright"
+        id="zco-lead-portrait"
         title="Aufmacher hochkant"
         image_pattern="portrait"
         areas="solo"
