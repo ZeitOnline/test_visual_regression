@@ -1,3 +1,5 @@
+import re
+
 import pyramid.view
 
 import zeit.campus.interfaces
@@ -16,9 +18,6 @@ class Base(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def adcontroller_handle(self):
-        # TODO: lokale HP von Campus besser erkennen? Haengt die Info auch
-        # an der Seite? (Ziel: dass die Tests auch ohne die Hereingabe
-        # des path in den DummyRequest funktionieren.)
         if self.type == 'centerpage' and self.request.path == '/campus/index':
             return 'index'
         if self.type == 'centerpage':
@@ -31,10 +30,14 @@ class Base(zeit.web.core.view.Base):
         Output in level strings only allows latin characters, numbers and
         underscore."""
         keywords = ','.join(self.adwords)
+
+        topiclabel = getattr(self.context, 'topicpagelink_label', '')
+        topiclabel = "".join(re.findall(r"[A-Za-z0-9_]*", topiclabel))
+
         return [('$handle', self.adcontroller_handle),
                 ('level2', 'campus'),
-                ('level3', ''),  # TODO: 'thema' if topic is set (Sprint 4)
-                ('level4', ''),  # TODO: topic, if set (Sprint 4)
+                ('level3', 'thema' if topiclabel else ''),
+                ('level4', topiclabel or ''),
                 ('$autoSizeFrames', True),
                 ('keywords', keywords),
                 ('tma', '')]
@@ -47,3 +50,18 @@ class Base(zeit.web.core.view.Base):
     http_cache=60)
 def login_state(request):
     return zeit.web.core.security.get_login_state(request)
+
+
+@pyramid.view.view_config(
+    route_name='campus_framebuilder',
+    renderer='templates/framebuilder/framebuilder.html')
+class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
+
+    def __init__(self, context, request):
+        super(FrameBuilder, self).__init__(context, request)
+        try:
+            self.context = zeit.cms.interfaces.ICMSContent(
+                'http://xml.zeit.de/campus/index')
+            self.context.advertising_enabled = self.banner_on
+        except TypeError:
+            raise pyramid.httpexceptions.HTTPNotFound()
