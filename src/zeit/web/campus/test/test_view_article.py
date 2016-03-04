@@ -79,3 +79,13 @@ def test_article_pagination(testbrowser):
     # assert len(select('.article-toc')) == 1
     # assert len(select('.article-toc__item')) == 5
     # assert '--current' in select('.article-toc__item')[0].get('class')
+
+
+def test_article_citation_block_should_render_expected_structure(testbrowser):
+    browser = testbrowser('/campus/article/citation')
+    assert len(browser.cssselect('.quote')) == 2
+    assert len(browser.cssselect('.quote.article__item--wide')) == 1
+    assert browser.cssselect('.quote')[0].text.strip().startswith(
+        u'Es war ein Gedankenanstoß')
+    assert browser.cssselect('.quote')[0].attrib['title'].startswith('Ariane')
+    assert 'imdb.com' in browser.cssselect('.quote')[0].attrib['cite']
