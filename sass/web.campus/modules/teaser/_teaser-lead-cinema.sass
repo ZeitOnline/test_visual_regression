@@ -1,21 +1,82 @@
 .teaser-lead-cinema
 	@extend %teaser
-
-	&__heading
-		@extend %teaser-heading
+	padding-bottom: $page-padding--small
 
 	&__media
 		background-color: $greyish-white
 		height: 0
 		padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
 
-	&__content
+	&__heading
+		@extend %teaser-heading
+		margin: remify(0 0 10px)
+
+	&__combined-link
+		@extend %teaser-combined-link
 
 	&__kicker
 		@extend %teaser-kicker
+		top: remify(-20px)
 
 	&__title
 		@extend %teaser-title
+		display: block
+		font-size: remify(42px)
+		padding-top: remify(16px)
 
 	&__text
 		@extend %teaser-text
+
+	&__metadata
+		@extend %teaser-metadata
+
++respond-max($break-tablet-min)
+	.teaser-lead-cinema
+		&__kicker,
+		&__title,
+		&__text,
+		&__metadata
+			padding-left: remify($page-padding--small)
+		&__text,
+		&__metadata
+			max-width: 95%
+			padding-right: remify($page-padding--small)
+
++respond-min($break-tablet-min)
+	.teaser-lead-cinema
+		border: none
+		margin: $cp-padding*2
+		position: relative
+
+		&__media
+			background-color: $greyish-white
+			display: block
+			height: 0
+			padding-bottom: 100% / 7 * 3 // image variant 'cinema', ratio 7:3
+
+		&__heading
+			margin-top: remify(-14px)
+
+		&__kicker
+			top: remify(-36px)
+
+		&__combined-link
+			box-shadow: 10px -50px 0 10px $white
+
+		&__title
+			display: inline
+			font-size: remify(84px)
+			letter-spacing: em(1.5px)
+			max-width: remify(780px)
+
+		&__text,
+		&__metadata
+			display: block
+			float: left
+			font-size: remify(18px)
+			line-height: (24/18)
+			width: 50%
+		&__text
+			padding-right: remify(10px)
+		&__metadata
+			padding-left: remify(10px)

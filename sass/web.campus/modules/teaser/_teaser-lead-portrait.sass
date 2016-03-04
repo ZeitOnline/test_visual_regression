@@ -15,7 +15,6 @@
 
 	&__kicker
 		@extend %teaser-kicker
-		padding-left: $page-padding--small
 		top: remify(-20px)
 
 	&__title
@@ -52,18 +51,22 @@
 			padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4), refers to half-width
 		&__content
 			background: $white
-			left: 33.333% // 4/12 laut Screendesign
+			left: 33.333% // 4/12 according to Screendesign
 			margin-top: 0
 			padding: remify(18px 0 35px 30px) // top: 30, but font has 12px padding(?)
 			position: absolute
 			top: remify(65px)
 		&__kicker
 			position: relative
+			top: 0
 		&__title
-			font-size: remify(64px)
-		&__text
+			font-size: remify(84px)
+			letter-spacing: em(1.5px)
+			max-width: remify(780px)
+		&__text,
+		&__metadata
 			font-size: remify(18px)
-			line-height: remify(24px)
+			line-height: (24/18)
 
 +respond-min($break-desktop-min)
 	.teaser-lead-portrait
