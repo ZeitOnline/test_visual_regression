@@ -1,26 +1,29 @@
-
 .teaser-print-cover
-    @extend %teaser
+	@extend %teaser
+		// fallback for missing images
+		background-color: $grey--mid-dark
+		min-height: remify(200px)
 
-    &__media
-        @extend %teaser--dark
-        margin: 0
 
-    &__text
-        @extend %teaser__text
-        bottom: 0
-        padding: remify(6px 20px 28px)
-        position: absolute
+	&__media
+		@extend %teaser--dark
+		margin: 0
 
-    &__kicker
-        @extend %teaser__kicker
-        color: $white
-        letter-spacing: normal
-        margin-bottom: remify(6px)
+	&__text
+		@extend %teaser__text
+		bottom: 0
+		padding: remify(6px 20px 28px)
+		position: absolute
 
-    &__title
-        @extend %teaser__title
-        +font-smoothing
-        color: $white
-        margin: 0
-        text-shadow: rgba(255, 255, 255, .01) 0 -1px 1px
+	&__kicker
+		@extend %teaser__kicker
+		color: $white
+		letter-spacing: normal
+		margin-bottom: remify(6px)
+
+	&__title
+		@extend %teaser__title
+		+font-smoothing
+		color: $white
+		margin: 0
+		text-shadow: rgba(255, 255, 255, .01) 0 -1px 1px
