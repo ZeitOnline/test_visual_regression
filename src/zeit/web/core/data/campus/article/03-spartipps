@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/D/Viola_Diem/Viola_Diem" publication-date="" expires="">
+      <display_name py:pytype="str">Viola Diem</display_name>
+      <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/autoren/D/Viola_Diem/viola-diem/" type="" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+        <copyright py:pytype="str">© Michael Heck</copyright>
+      </image>
+    </author>
+    <references>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/studium/uni-leben/2014-08/lebenshaltungskosten-monatliche-ausgaben" year="2014" issue="33" ressort="Studium" contenttype="article" publication-date="" expires="" author="Michelle Janetschek">
+        <supertitle py:pytype="str">Lebenshaltungskosten</supertitle>
+        <title py:pytype="str">Ein Studentenleben für 600 Euro im Monat. Oder 1.150. </title>
+        <text py:pytype="str">Wie viel Geld brauche ich als Student? Der Lebenshaltungskosten-Rechner von ZEIT ONLINE zeigt 40 Städte im Vergleich. Vier Hamburger machen für uns Kassensturz.</text>
+        <description py:pytype="str">Wie viel Geld brauche ich als Student? Der Lebenshaltungskosten-Rechner von ZEIT ONLINE zeigt 40 Städte im Vergleich. Vier Hamburger machen für uns Kassensturz.</description>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/studium/uni-leben/2014-08/lebenshaltungskosten-ein-studentenleben-fuer-650-euro/" type="jpg" title="Lebenshaltungskosten: Ein Studentenleben für 650 Euro im Monat. Oder 1150." alt="Lebenshaltungskosten: Ein Studentenleben für 650 Euro im Monat. Oder 1150." align="left" publication-date="" expires="">
+          <bu py:pytype="str">In einer Clique gibt es meistens Studenten, die viel Unterstützung bekommen und solche, die viele Nebenjobs haben.</bu>
+          <copyright py:pytype="str" link="http://www.photocase.de/foto/425160-stock-photo-mensch-jugendliche-ferien-urlaub-reisen-freude-erwachsene-18-30-jahre">© simonthon / photocase.de</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/J/Michelle_Janetschek/index" publication-date="" expires="">
+          <display_name py:pytype="str">Michelle Janetschek</display_name>
+        </author>
+      </reference>
+    </references>
+    <rankedTags xmlns:ns11="http://codespeak.net/lxml/objectify/pytype">
+      <tag ns11:pytype="str" uuid="65f229d9-f0e9-434a-9f40-d541d927a413" url_value="student" type="free">Student</tag>
+      <tag type="free" score="7" uuid="c444054a-0160-4e4f-9e9b-8d91a91d3d7f" url_value="geld">Geld</tag>
+      <tag type="free" score="4" uuid="93188320-ae1f-4c8a-a096-63254ff463cb" url_value="apps">Apps</tag>
+      <tag type="free" score="4" uuid="d411666c-5c17-4bc7-b5e5-060e044bb050" url_value="euro">Euro</tag>
+      <tag type="free" score="4" uuid="58fc2227-050d-48ca-8ac2-569956f5dbf0" url_value="mitfahrzentrale">Mitfahrzentrale</tag>
+      <tag type="free" score="4" uuid="512d4a57-1253-48e0-b6f1-938e0d8155a9" url_value="wlan">Wlan</tag>
+      <tag type="free" score="3" uuid="2f3f887e-318a-44c0-97c4-2226a50bd266" url_value="sparen">Sparen</tag>
+    </rankedTags>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/campus/image/03-geschnittenes-gemuese/" type="jpg" title="Geld sparen: Die besten Spartipps" alt="Geld sparen: Die besten Spartipps" align="left" publication-date="" expires="">
+      <bu py:pytype="str">Resteessen!</bu>
+      <copyright py:pytype="str">© Matthias Balk/dpa</copyright>
+    </image>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">555358</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Viola Diem</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels">Studium Uni-Leben</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-02-26T01:10:02.245736+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-02-11T20:11:05.530668+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-02-26T01:10:27.735403+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-02-11T20:11:05.530668+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-02-11T20:11:04.699619+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-02-11T20:11:13.494457+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">05.05.2015</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZSF-2015-01-GELD-10Tipps</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template"></attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="jobname">GELD_10Tipps</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-02-11T20:10:58.480067+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.Nuijen</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Warnung: Einer der Tipps setzt frühes Aufstehen voraus. (akg)</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="origname">GELD_10Tipps</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="page">140</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/studium/studienfuehrer-2015/GELD-10Tipps</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2015-05-05T06:00:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZSF</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Studienführer</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">ea45a9e28ec34171b8b26bc6b61cc636</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367935288499</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Studium</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">ZEIT
+      Studienführer</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZSF-2015-01</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Essen, das verschenkt wird und Klamotten, die andere nie getragen haben: zehn Spartipps für Studenten. (akg)</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Uni-Leben</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">4614</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:8946a009-bff3-49c8-ae59-6a2c7b7144e0}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">01</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Geld sparen</supertitle>
+    <title>Die besten Spartipps</title>
+    <subtitle>10 Ideen</subtitle>
+    <byline>von Viola Diem</byline>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/campus/image/03-geschnittenes-gemuese/" type="jpg" title="Resteessen!" alt="Geld sparen: Resteessen!" align="left" publication-date="" expires="" layout="large" is_empty="False" alt_local="Geld sparen: Resteessen!" title_local="Resteessen!">
+        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Resteessen!</bu>
+        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">© Matthias Balk/dpa</copyright>
+      </image>
+      <intertitle>
+        <b>1. Ausweis zeigen</b>
+      </intertitle>
+      <p>Bei vielen Freizeitaktivitäten kann man sparen, wenn man seinen Studentenausweis dabeihat: Im Deutschen Museum in München zahlen Studenten 3 statt 8,50 Euro Eintritt, im Schauspielhaus in Hamburg für eine Vorstellung nie mehr als 11 Euro. Eine Zehnerkarte für die Schwimmbäder in Berlin können Studenten für 35 statt 55 Euro kaufen. Magazin- und Zeitungsabos sind ebenfalls günstiger, meist zwischen 30 und 50 Prozent.</p>
+      <intertitle>
+        <b>2. Ausgaben notieren</b>
+      </intertitle>
+      <p>Kontrolliert man jeden Euro, den man auf den Kopf haut, sieht man, wo gespart werden kann. Mit einem Haushaltsrechner lässt sich kalkulieren, wie viel Geld einem nach Abzug aller Fixkosten wie Miete und Telefon zur Verfügung steht. Noch genauer: ein <a class="" href="http://www.zeit.de/2014/23/apps-haushaltsbuch" target="_blank">Haushaltsbuch oder eine Kostenplaner-App</a> nutzen, wo man Einnahmen und Ausgaben in Kategorien einteilen kann.</p>
+      <p><strong>Web-Rechner:</strong>
+        auf <a class="" href="http://gutmitgeld.at/" target="_blank">gutmitgeld.at</a>, zu finden in der rechten Spalte<strong><br/>App:</strong>
+        VSB Haushaltsplaner vom Verbraucher Service Bayern, kostenlos für iOS
+      und Android
+      </p>
+      <intertitle>
+        <b>3. Essen abstauben</b>
+      </intertitle>
+      <p>Über die Internet-Plattform <a class="" href="http://foodsharing.de" target="_blank">foodsharing.de</a> werden Lebensmittel verschenkt, weil sie bald ablaufen und Supermärkte sie abgeben. Auf <a class="" href="http://mundraub.org" target="_blank">mundraub.org</a> findet man eine digitale Landkarte, die anzeigt, wo Obst, Nüsse und Kräuter wachsen, die frei zugänglich und damit für jeden pflückbar sind. Kostenlose Selbstbedienung ist auch das Motto der öffentlichen Kühlschränke, die es zum Beispiel in Berlin, Darmstadt und Osnabrück gibt.</p>
+      <intertitle>
+        <b>4. Günstig (mit)fahren</b>
+      </intertitle>
+      <p>Wer rechtzeitig bucht, fährt mit einem Fernbus für 6 Euro  von Hamburg nach Berlin oder für 13 Euro von Dortmund nach Amsterdam, WLAN inklusive. Wer lieber im Auto unterwegs ist, kann sich eine Fahrgemeinschaft suchen und beteiligt sich an den Spritkosten. Bei der Bahn gibt es für Spontanreisen Restetickets ab 17 Euro.</p>
+      <p><strong>Bus:</strong>
+        alle Anbieter im Vergleich: <a class="" href="http://fernbusse.de" target="_blank">fernbusse.de</a><strong><br/>Auto:</strong>
+<a class="" href="http:// blablacar.de" target="_blank">        blablacar.de</a> , Mitfahrzentrale ohne Vermittlungsgebühr<strong><br/>Bahn:</strong>
+        Restkontingente gibt es auf <a class="" href="http://bit.ly/zs15sparbahn" target="_blank">bit.ly/zs15sparbahn</a>
+</p>
+      <intertitle>
+        <b>5. Möbel schnappen</b>
+      </intertitle>
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/studium/studienfuehrer-2015/cover/" type="jpg" alt="ZEIT Studienführer 2015/2016" align="left" href="https://premium.zeit.de/studienfuehrer?wt_zmc=fix.int.zonpme.zeitde.artikelbox.stufueausgseite.bildtext.cover.cover&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=artikelbox&amp;utm_content=stufueausgseite_bildtext_cover_cover" publication-date="2015-05-04T13:00:00+00:00" expires="" layout="portrait" is_empty="False" set-manually="True">
+        <bu py:pytype="str">Dieser Text stammt aus dem ZEIT Studienführer 2015/2016. </bu>
+        <copyright py:pytype="str" link="https://premium.zeit.de/studienfuehrer?wt_zmc=fix.int.zonpme.zeitde.artikelbox.stufueausgseite.bildtext.cover.cover&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=artikelbox&amp;utm_content=stufueausgseite_bildtext_cover_cover">Das aktuelle Heft können Sie am Kiosk oder hier erwerben. </copyright>
+      </image>
+      <p>Auf dem Flohmarkt macht man die besten Schnäppchen morgens. Wer nicht früh aufstehen will, kann sich auf digitalen Flohmärkten umschauen. Kostenlos sind etwa die Apps Stuffle und Shpock. Günstig oder sogar gratis wird man auch auf <a class="" href="http://kleinanzeigen.ebay.de" target="_blank">kleinanzeigen.ebay.de</a> fündig. Hier zählt nicht das höchste Gebot, sondern die Einigung mit dem Verkäufer. Man findet alles vom alten Sofa bis zum kompletten Hausstand.</p>
+      <intertitle>
+        <b>6. Klamotten tauschen</b>
+      </intertitle>
+      <p>Die neue Lieblingsjacke muss nicht viel Geld kosten: Auf <a class="" href="http://kleiderkreisel.de" target="_blank">kleiderkreisel.de</a> und anderen Tauschbörsen wie kleiderkorb.de kann man im Internet Klamotten günstig kaufen, verkaufen und tauschen. Beim Tauschen fallen nur die Versandkosten an. Die Kleidung sieht man nur auf Fotos – anprobieren und zurückgeben geht nicht.</p>
+      <intertitle>
+        <b>7. Lehrbücher erben</b>
+      </intertitle>
+      <p>Fachliteratur ist teuer. Man kann sich aber bei Fachschaften oder Studenten höherer Semester nach gebrauchten Büchern umhören oder am Schwarzen Brett der Uni nach Angeboten schauen. Auch ein Gesuch aufzugeben kann sich lohnen. Das geht auch in den Sozialen Netzwerken, wo die meisten Studiengänge eigene Gruppen oder öffentliche Profile haben. Im Internet gibt es zudem Portale, auf denen man Lehrbücher tauschen oder gebraucht kaufen kann, etwa <a class="" href="http://tauschticket.de" target="_blank">tauschticket.de</a> und <a class="" href="http://buecher-boerse.com" target="_blank">buecher-boerse.com</a>.</p>
+      <intertitle>
+        <b>8. Selber schrauben</b>
+      </intertitle>
+      <p>Ein kaputtes Fahrrad muss nicht den finanziellen Ruin bedeuten. Repair-Cafés und Selbsthilfewerkstätten stellen Werkzeug zur Verfügung und unterstützen einen bei der Arbeit, den Großteil erledigt man aber selbst – so wird’s billiger. Manche Werkstätten sind für Studenten sogar gratis und berechnen nur die Ersatzteile.</p>
+      <intertitle>
+        <b>9. Zimmer vermieten</b>
+      </intertitle>
+      <p>Auch wenn man nur kurz in den Urlaub fährt, kann man für sein WG-Zimmer oder die Wohnung einen Zwischenmieter suchen. Man sollte aber die Mitbewohner fragen, ob sie einverstanden sind.</p>
+      <p><strong>Internet-Portale:</strong><a class="" href="http://zwischenmiete.de" target="_blank">zwischenmiete.de</a>, <a class="" href="http://airbnb.de" target="_blank">airbnb.de</a></p>
+      <intertitle>
+        <b>10. Auf Festivals arbeiten</b>
+      </intertitle>
+      <p>Festivaltickets kosten oft mehr als 100 Euro. Es sei denn, man bewirbt sich einige Monate vorher als freiwilliger Helfer. Das geht unter anderem bei Southside, Hurricane, Melt und Dockville. Dann bekommt man das Ticket umsonst, muss dafür aber mitarbeiten, etwa Eintrittsbändchen verteilen oder Müll einsammeln.</p>
+    </division>
+    <image-credits>Quelle: 20. Sozialerhebung des Deutschen Studentenwerks, ausgewählte
+      Ausgabeposten bezogen auf Normalstudenten</image-credits>
+    <image-credits>Illustration: Andreas Klammt</image-credits>
+    <caption>Monatsbilanz: Das gibt der Durchschnittsstudent aus. Hinzu kommen noch weitere Kosten,
+      zum Beispiel für Bahntickets oder den Friseur</caption>
+  </body>
+  <teaser>
+    <title>Zehn Spartipps für Studenten</title>
+    <text>Essen, das verschenkt wird und Klamotten, die andere nie getragen haben: Wir haben Internetportale und analoge Möglichkeiten zum Sparen gesammelt.</text>
+    <supertitle>Geld sparen</supertitle>
+  </teaser>
+</article>

@@ -69,16 +69,16 @@
   <body xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <supertitle>ZCO</supertitle>
     <title>wide small</title>
-    <cluster area="id-41a8299d-b569-4c42-b713-d5bdbd86a64f" kind="trio" visible="True" visible_mobile="True">
-      <region area="id-41a2899d-b569-4c42-b713-bd5dbd86a64f" kind="trio" visible="True" visible_mobile="True">
-        <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e35d7bf3be4b">
+    <cluster area="id-41a2899d-b569-4c42-b713-d5bdbd86a64f" kind="trio" visible="True" visible_mobile="True">
+      <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a64f" kind="trio" visible="True" visible_mobile="True">
+        <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e357dbf3be4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
         </container>
         <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
         </container>
-        <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e35d7bf3be4b">
-          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+        <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/03-spartipps" uniqueId="http://xml.zeit.de/campus/article/03-spartipps"></block>
         </container>
       </region>
     </cluster>
