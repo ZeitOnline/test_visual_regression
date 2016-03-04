@@ -33,3 +33,17 @@ def test_campus_navigation_should_present_flyout(selenium_driver, testserver):
             assert False, 'Navigation flyout not hidden within 5 seconds'
         else:
             assert True
+
+
+def test_teaser_wide_small_should_not_display_its_image_on_mobile(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/campus/centerpage/teaser-wide-small' % testserver.url)
+    teaser_image = driver.find_element_by_class_name(
+        'teaser-wide-small__media-item')
+    assert not teaser_image.is_displayed()
+
+    driver.set_window_size(768, 800)
+    assert teaser_image.is_displayed()
+
