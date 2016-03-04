@@ -15,6 +15,8 @@ Change log for zeit.web
 - ZON-2835: Move blocks from site macros to template files in core.
             Create ZEIT Campus article blocks
 
+- ZON-2832: Introduce adcontroller for ZEIT Campus
+
 - BUG-361: Support dates with timezones in community-maintenance.xml
 
 - BUG-348: Sanitize webtrekk content id
