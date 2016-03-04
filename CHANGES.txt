@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2391: Improve reply-toggle performance
 
+- ZON-2874: Customize article citation blocks for campus
+
 
 2.62 (2016-03-04)
 -----------------
