@@ -11,10 +11,13 @@
 
 	&__kicker
 		@extend %teaser-kicker
+		top: remify(-20px)
 
 	&__title
 		@extend %teaser-title
+		display: block
 		font-size: remify(28px)
+		padding-top: remify(14px)
 
 	&__text
 		@extend %teaser-text
@@ -30,5 +33,3 @@
 			display: block
 			height: 0
 			padding-bottom: 100% / 7 * 3 // image variant 'cinema', ratio 7:3
-		&__heading
-			margin-top: remify(-24px)
