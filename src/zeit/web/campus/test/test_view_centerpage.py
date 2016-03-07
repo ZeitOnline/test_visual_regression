@@ -46,4 +46,3 @@ def test_teaser_wide_small_should_not_display_its_image_on_mobile(
 
     driver.set_window_size(768, 800)
     assert teaser_image.is_displayed()
-
