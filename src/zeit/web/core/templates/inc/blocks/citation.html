@@ -1,8 +1,8 @@
-<figure class="quote article__item">
+<figure class="{% block citation_class %}quote{% endblock %} article__item">
     <blockquote class="quote__text">
-        {{ block.text }}
+        {{- block.text -}}
     </blockquote>
-    {% if block.attribution -%}
+    {%- if block.attribution -%}
         <figcaption class="quote__source">
             {%- if block.url -%}
                 <a class="quote__link" href="{{ block.url }}">
@@ -12,5 +12,5 @@
                 {{- block.attribution -}}
             {%-  endif -%}
         </figcaption>
-    {%- endif %}
+    {%- endif -%}
 </figure>
