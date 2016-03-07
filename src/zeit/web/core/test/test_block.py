@@ -373,14 +373,14 @@ def test_block_place_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/place.html', view=view,
         block=block)
-    browser.cssselect('script[type="text/javascript"]')
+    assert browser.cssselect('script[type="text/javascript"]')
 
 
 def test_block_portraitbox_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/portraitbox.html', block=block)
-    browser.cssselect(
+    assert browser.cssselect(
         'figure.portraitbox.article__item.article__item--marginalia')
 
 
@@ -388,7 +388,7 @@ def test_block_quiz_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/quiz.html', block=block)
-    browser.cssselect(
+    assert browser.cssselect(
         'div.article__item.article__item--wide.article__item--rimless')
 
 
@@ -396,14 +396,14 @@ def test_block_raw_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/raw.html', block=block)
-    browser.cssselect('div.raw')
+    assert browser.cssselect('div.raw')
 
 
 def test_block_unorderedlist_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/unorderedlist.html', block=block)
-    browser.cssselect('ul.list.article__item')
+    assert browser.cssselect('ul.list.article__item')
 
 
 def test_block_video_should_contain_expected_structure(tplbrowser):
@@ -412,8 +412,8 @@ def test_block_video_should_contain_expected_structure(tplbrowser):
     block.title = 'title'
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/video.html', block=block)
-    browser.cssselect(
-        'div.article__item article__item--wide.article__item--rimless')
+    assert browser.cssselect(
+        'div.article__item.article__item--wide.article__item--rimless')
 
 
 def test_article_should_render_raw_code(testbrowser):
