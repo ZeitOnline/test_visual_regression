@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:cp="http://namespaces.zeit.de/CMS/cp">
   <head>
     <author expires="" href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml" publication-date="">
       <display_name py:pytype="str">Wenke Husmann</display_name>
@@ -92,7 +92,7 @@
       <raw py:pytype="str">
         <img style="padding:5% 25%;width:100%;" src="http://i.giphy.com/cYhaIIyjjxg1W.gif"/>
       </raw>
-      <rawtext ns0:__name__="id-2d9f4103-b847-459c-8b53-a49fe57dc125">
+      <rawtext cp:__name__="id-2d9f4103-b847-459c-8b53-a49fe57dc125">
         <text>&lt;code&gt;code&lt;/code&gt;</text>
       </rawtext>
       <raw alldevices="true" py:pytype="str">
