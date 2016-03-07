@@ -61,7 +61,7 @@ def test_video_block_should_be_fault_tolerant_if_video_is_none(application):
 
     model_block = mock.Mock()
     model_block.video = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/video/2015-01/3537342483001')
+        'http://xml.zeit.de/zeit-online/video/3537342483001')
     video = zeit.web.core.block.Video(model_block)
     assert hasattr(video, 'video_still')
 
@@ -70,7 +70,7 @@ def test_header_video_should_be_created_if_layout_is_zmo_header(application):
     model_block = mock.Mock()
     model_block.layout = 'zmo-xl-header'
     model_block.video = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/video/2015-01/3537342483001')
+        'http://xml.zeit.de/zeit-online/video/3537342483001')
     h_video = zeit.web.core.block.HeaderVideo(model_block)
     assert type(h_video) == zeit.web.core.block.HeaderVideo
     assert h_video.format == 'zmo-xl-header'
@@ -81,7 +81,7 @@ def test_header_video_should_not_be_created_if_layout_does_not_fit(
     model_block = mock.Mock()
     model_block.layout = 'zmo-xl-noheader'
     model_block.video = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/video/2015-01/3537342483001')
+        'http://xml.zeit.de/zeit-online/video/3537342483001')
 
     h_video = zeit.web.core.block.HeaderVideo(model_block)
     assert h_video is None
