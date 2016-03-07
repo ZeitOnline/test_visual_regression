@@ -1,7 +1,13 @@
 {% extends "zeit.web.core:templates/inc/article/table-of-contents.html" %}
 
+{% block toc_link_top %}{% endblock toc_link_top %}
+
 {% block toc_item %}
     <strong>{{ '{0:02d}'.format(pagenr) }}</strong>
     {%- if view.pagination.pages_titles[pagenr - 1] %} — {{ view.pagination.pages_titles[pagenr - 1] }}
     {%- endif %}
 {% endblock toc_item %}
+
+{% block toc_link_bottom %}
+<a class="article-toc__onesie" href="{{ view.content_url }}/komplettansicht" data-id="article-toc....all">Auf einer Seite lesen</a>
+{% endblock toc_link_bottom %}
