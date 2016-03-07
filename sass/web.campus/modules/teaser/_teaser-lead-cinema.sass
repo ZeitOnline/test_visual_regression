@@ -65,8 +65,8 @@
 
 		&__title
 			display: inline
-			font-size: remify(84px)
-			letter-spacing: em(1.5px)
+			font-size: remify(64px)
+			letter-spacing: remify(1.5px)
 			max-width: remify(780px)
 
 		&__text,
@@ -80,3 +80,8 @@
 			padding-right: remify(10px)
 		&__metadata
 			padding-left: remify(10px)
+
++respond-min($break-desktop-min)
+	.teaser-lead-cinema
+		&__title
+			font-size: remify(84px)
