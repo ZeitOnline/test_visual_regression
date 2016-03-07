@@ -34,7 +34,6 @@ $break-onesie: 360px // breakpoint for onesie
 			width: auto
 
 	&__list
-		display: none
 		letter-spacing: $zon-letter-spacing-s
 		list-style: none
 		margin-left: -$page-padding
@@ -43,6 +42,8 @@ $break-onesie: 360px // breakpoint for onesie
 		padding: remify(5px) $page-padding 0 $page-padding
 		border-bottom: 1px solid $zon-silver
 		background-color: $zon-lighter-grey
+		.js &
+			display: none
 		+respond-min($break-tablet-min)
 			display: block !important // use important to overwrite possible js
 			margin: 0
