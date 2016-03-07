@@ -181,8 +181,3 @@ def test_cp_should_render_raw_code(testbrowser):
     code = cp[0][0][0].raw_code.replace('<code>', '').replace('</code>', '')
     browser = testbrowser('/zeit-online/raw_code')
     assert browser.cssselect('code')[0].text == code
-
-
-def test_article_should_render_raw_code(testbrowser):
-    browser = testbrowser('/zeit-online/article/raw_code')
-    assert browser.cssselect('code')[0].text == 'code'
