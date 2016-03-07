@@ -120,6 +120,7 @@ class Application(object):
 
         log.debug('Configuring Pyramid')
         config.add_route('framebuilder', '/framebuilder')
+        config.add_route('campus_framebuilder', '/campus/framebuilder')
         config.add_route('instantarticle', '/instantarticle/*traverse')
         config.add_route(
             'instantarticle-item', '/instantarticle-item/*traverse')

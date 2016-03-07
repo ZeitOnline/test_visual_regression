@@ -24,6 +24,7 @@
                 "{0}:templates/inc/teaser/{1}_{2}.tpl".format(view.package, layout, area.kind),
                 "{0}:templates/inc/module/{1}.html".format(view.package, layout),
                 "{0}:templates/inc/teaser/{1}.tpl".format(view.package, layout),
+                "{0}:templates/inc/module/{1}.html".format("zeit.web.core", layout),
                 "{0}:templates/inc/teaser/default.tpl".format(view.package)] %}
             {% block after_module_include scoped %}{% endblock %}
         {% endfor %}

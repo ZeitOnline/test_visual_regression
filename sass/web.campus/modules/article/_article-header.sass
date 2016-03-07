@@ -13,16 +13,15 @@
 		padding-bottom: 100% / 3 * 4 // image variant 'portrait'
 
 	&__topic-link
+		@extend %font-beckett
 		+font-smoothing
 		+unpadded
 		background-color: $primary-color
 		color: $white
 		display: block
-		font-family: $font-beckett
 		font-size: em(20px)
-		letter-spacing: 1.5px / 20px * 1em
+		line-height: inherit
 		padding: remify(6px $page-padding--small 2px)
-		text-transform: uppercase
 		+on-interaction
 			color: $color-topics-secondary
 		&:before
@@ -50,20 +49,16 @@
 		+font-smoothing
 		color: $white
 		display: block
-		font-family: $font-tabletgothic
 		font-size: em(14px)
 		font-weight: bold
 		letter-spacing: .01em
 		margin-bottom: remify(12px)
 
 	&__title
+		@extend %font-beckett
 		color: $color-article-primary
 		display: block
-		font-family: $font-beckett
 		font-size: em(48px)
-		font-weight: normal
-		letter-spacing: 1.5px / 48px * 1em
-		line-height: .96
 		&--leserartikel
 			color: $color-text
 			padding-bottom: $page-padding--small
@@ -132,12 +127,9 @@
 		.article-header__media
 			padding-bottom: 100% / 16 * 9 // image variant 'wide'
 		.article-header__byline
-			font-family: $font-beckett
+			@extend %font-beckett
 			font-size: em(20px)
-			letter-spacing: 1.5px / 20px * 1em
-			line-height: .95
 			margin-bottom: remify(16px)
-			text-transform: uppercase
 			a
 				border-bottom: 2px solid $color-community-primary
 				+on-interaction
@@ -194,7 +186,6 @@
 		&__title
 			font-size: em(112px)
 			line-height: 100px / 112px
-			letter-spacing: 3px / 112px * 1em
 			&--column
 				font-size: em(64px)
 			&--leserartikel

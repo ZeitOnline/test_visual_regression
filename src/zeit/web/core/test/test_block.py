@@ -416,6 +416,11 @@ def test_block_video_should_contain_expected_structure(tplbrowser):
         'div.article__item article__item--wide.article__item--rimless')
 
 
+def test_article_should_render_raw_code(testbrowser):
+    browser = testbrowser('/zeit-online/article/raw_code')
+    assert browser.cssselect('code')[0].text == 'code'
+
+
 def test_find_nextread_returns_none_if_nonexistent(application):
     assert zeit.web.core.block.find_nextread_folder('Wissen', None) is None
 
