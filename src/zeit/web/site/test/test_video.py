@@ -151,33 +151,6 @@ def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-desktop-7')) == 1
 
 
-# TODO: iFrame (?) wird eingebunden auf großen Bildschirmen
-# TODO: iFrame (?) wird nicht eingebunden auf kleinen Bildschirmen
-# TODO: CSS_SELECTOR trifft nicht unsere aktuelle HTML Struktur #fixme
-# => Wobei, beide Tests gehören eher nach banner.py.
-#    Wenn wir hier den JS Code und Wrapper haben und der andere Test für
-#    Artikel-Banner läuft, können wir davon ausgehen dass er überall
-#    funktioniert !?
-
-@pytest.mark.skipif(True, reason='Fix me or I will always fail - after 20s')
-def test_video_page_adcontroller_content_gets_included(
-        selenium_driver, testserver, monkeypatch):
-
-    driver = selenium_driver
-    driver.get('{}/video/2015-01/3537342483001'.format(testserver.url))
-
-    try:
-        iframe = WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located(
-                # syntax of expected condition is wrong
-                # plus condition is not matching our current HTML structure
-                (By.CSS_SELECTOR, 'ad__inner iframe'))
-        )
-        assert ('google_ads_iframe_' in iframe.get_attribute('id')) is True
-    except TimeoutException:
-        assert False, 'Iframe not found within 20 seconds'
-
-
 def test_create_url_filter_should_append_seo_slug_to_all_video_links(
         application):
     video = zeit.cms.interfaces.ICMSContent(
