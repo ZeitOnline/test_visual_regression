@@ -1,18 +1,13 @@
 .quote
-	font-family: $font-beckett
-	text-transform: uppercase
-	font-size: remify(32px)
-	line-height: 1
-	letter-spacing: .05em
-	text-align: center
-	margin: $vertical-space--small auto
-	padding: .5em 0 .3em
+	@extend %font-beckett
 	background-image: linear-gradient(to right, $color-article-secondary 50%, $color-article-secondary 50%), linear-gradient(to right, $color-article-secondary 50%, $color-article-secondary 50%)
-	background-size: $micro--px 1em, $micro--px 1em
 	background-position: top center, bottom center
 	background-repeat: no-repeat
+	background-size: $micro--px 1em, $micro--px 1em
+	font-size: remify(32px)
+	margin: $vertical-space--small auto
+	padding: .5em 0 .3em
+	text-align: center
 	+respond-min($break-tablet-min)
 		font-size: remify(64px)
-		line-height: 0.9
-		letter-spacing: .03em
 		margin: $vertical-space auto
