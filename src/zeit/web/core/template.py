@@ -795,7 +795,7 @@ def format_webtrekk(string):
         u'é', 'e').replace(
         u'è', 'e').replace(
         u'ß', 'ss')
-    string = re.sub(u'[^a-zA-Z0-9]', '_', string)
+    string = re.sub(u'[^-a-zA-Z0-9]', '_', string)
     string = re.sub(u'_+', '_', string)
     string = re.sub(u'^_|_$', '', string)
     return string
@@ -904,7 +904,7 @@ def append_get_params(request, **kw):
 
     if params == []:
         return request.path_url
-    return '?'.join([request.path_url, urllib.urlencode(params)])
+    return u'{}?{}'.format(request.path_url, urllib.urlencode(params))
 
 
 @zeit.web.register_filter

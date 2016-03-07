@@ -92,6 +92,7 @@ def app_settings(mockserver):
         'zett_img_host': mockserver.url + '/zett',
         'academics_hp_feed': mockserver.url + '/academics/feed.xml',
         'academics_img_host': mockserver.url + '/academics',
+        'cardstack_backend': mockserver.url + '/cardstack',
         'connector_type': 'mock',
         'vgwort_url': 'http://example.com/vgwort',
         'breaking_news_config': (

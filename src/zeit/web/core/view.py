@@ -269,15 +269,11 @@ class Base(object):
                 ('tma', '')]
 
     @zeit.web.reify
-    def seo_robot_override(self):
-        try:
-            return zeit.seo.interfaces.ISEO(self.context).meta_robots
-        except (AttributeError, TypeError):
-            pass
-
-    @zeit.web.reify
     def meta_robots(self):
-        return self.seo_robot_override or 'index,follow,noodp,noydir,noarchive'
+        seo = zeit.seo.interfaces.ISEO(self.context, None)
+        if seo and seo.meta_robots:
+            return seo.meta_robots
+        return 'index,follow,noodp,noydir,noarchive'
 
     @zeit.web.reify
     def adwords(self):
@@ -500,6 +496,32 @@ class Base(object):
     def newsletter_optin_tracking(self):
         return None
 
+    @zeit.web.reify
+    def shared_cardstack_id(self):
+        return None
+
+    @zeit.web.reify
+    def cardstack_head(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        url = conf.get('cardstack_backend', '').rstrip('/')
+        stack_id = (u'/' + self.shared_cardstack_id if self.shared_cardstack_id
+                    else u'')
+        return url + u'/stacks' + stack_id + u'/esi/head'
+
+    @zeit.web.reify
+    def cardstack_body(self):
+        # We use __STACK__ because {} or %s would not survive urlencoding
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        url = conf.get('cardstack_backend', '').rstrip('/')
+        return url + (u'/stacks/__STACK__/esi/body'
+                      u'?shareUrlQuerySuffix=stackId%3D__STACK__')
+
+    @zeit.web.reify
+    def cardstack_scripts(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        url = conf.get('cardstack_backend', '').rstrip('/')
+        return url + u'/stacks/esi/scripts'
+
 
 class CeleraOneMixin(object):
 
@@ -529,7 +551,7 @@ class CeleraOneMixin(object):
 
         if self.type == 'gallery':
             return 'bildergalerie'
-        elif isinstance(self, zeit.web.site.view.FrameBuilder):
+        elif isinstance(self, zeit.web.core.view.FrameBuilder):
             return 'arena'
         else:
             return self.type
@@ -887,6 +909,51 @@ class service_unavailable(object):  # NOQA
     def __call__(self):
         body = 'Status 503: Dokument zurzeit nicht verfügbar.'
         return pyramid.response.Response(body, 503)
+
+
+class FrameBuilder(CeleraOneMixin):
+
+    inline_svg_icons = True
+
+    @zeit.web.reify
+    def advertising_enabled(self):
+        return self.banner_channel is not None
+
+    @zeit.web.reify
+    def banner_channel(self):
+        return self.request.GET.get('banner_channel', None)
+
+    @zeit.web.reify
+    def page_slice(self):
+        return self.request.GET.get('page_slice', None)
+
+    @zeit.web.reify
+    def desktop_only(self):
+        return 'desktop_only' in self.request.GET
+
+    @zeit.web.reify
+    def framebuilder_requires_webtrekk(self):
+        return 'webtrekk' in self.request.GET
+
+    @zeit.web.reify
+    def framebuilder_requires_ivw(self):
+        return 'ivw' in self.request.GET
+
+    @zeit.web.reify
+    def nav_show_ressorts(self):
+        return 'hide_ressorts' not in self.request.GET
+
+    @zeit.web.reify
+    def nav_show_search(self):
+        return 'hide_search' not in self.request.GET
+
+    @zeit.web.reify
+    def is_advertorial(self):
+        return 'adlabel' in self.request.GET
+
+    @zeit.web.reify
+    def cap_title(self):
+        return self.request.GET.get('adlabel') or 'Anzeige'
 
 
 @pyramid.view.notfound_view_config()

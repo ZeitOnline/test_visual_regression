@@ -727,8 +727,7 @@ def test_article_ads_should_have_pagetype_modifier(testbrowser):
     assert 'ad-desktop--7-on-article' in browser.contents
 
 
-def test_does_not_break_when_author_has_no_display_name(
-         testbrowser):
+def test_does_not_break_when_author_has_no_display_name(testbrowser):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
     article_view = zeit.web.magazin.view_article.Article(
         context, pyramid.testing.DummyRequest())
@@ -779,67 +778,89 @@ def test_old_archive_text_without_divisions_should_render_paragraphs(
     assert len(browser.cssselect('.article-pager__number')) == 3
 
 
-def test_imported_article_has_special_meta_robots(
-        application, monkeypatch):
-
+def test_zear_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
-    request = pyramid.testing.DummyRequest()
-
-    # test ZEAR
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'ZEAR')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'ressort', u'Fehler')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'noindex,follow', (
-        'wrong robots for ZEAR')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
-    # test TGS
+
+def test_tgs_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'TGS')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'noindex,follow', (
-        'wrong robots for TGS')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
-    # test HaBl
+
+def test_habl_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'HaBl')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'noindex,follow', (
-        'wrong robots for HaBl')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
-    # test WIWO
+
+def test_wiwo_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'WIWO')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'noindex,follow', (
-        'wrong robots for WIWO')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
-    # test GOLEM
+
+def test_golem_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'GOLEM')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'noindex,follow', (
-        'wrong robots for GOLEM')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
 
-    # test ZEI
+
+def test_sharing_cardstack_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'shared_cardstack_id', u'kekse')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+
+
+def test_zei_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'ZEI')
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
-        'wrong robots for ZEI')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
 
-    # test no product id
+
+def test_unset_product_id_article_has_correct_meta_robots(
+        application, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', None)
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
-        'wrong robots for none product article')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
 
 
-def test_article_has_correct_meta_keywords(
-        application, monkeypatch):
+def test_article_has_correct_meta_keywords(application, monkeypatch):
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -1369,7 +1390,7 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
 def test_newsletter_optin_page_has_webtrekk_ecommerce(testbrowser):
     browser = testbrowser(
         '/zeit-online/article/simple?newsletter-optin=elbVertiefung-_!1:2')
-    assert '8: \'elbvertiefung_1_2\'' in browser.contents
+    assert '8: \'elbvertiefung-_1_2\'' in browser.contents
 
 
 def test_no_webtrekk_ecommerce_without_newsletter_optin(testbrowser):

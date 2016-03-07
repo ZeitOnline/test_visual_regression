@@ -669,8 +669,8 @@ def test_community_maintenance_should_be_created_from_xml():
         <community_maintenance>
             <active>true</active>
             <scheduled>true</scheduled>
-            <begin>2010-10-10T10:10:10.10+00:00</begin>
-            <end>2020-10-10T10:10:10.10+00:00</end>
+            <begin>2010-10-10T10:10:10.10+01:00</begin>
+            <end>2020-10-10T10:10:10.10+01:00</end>
             <text_scheduled></text_scheduled>
             <text_active></text_active>
         </community_maintenance>
@@ -693,11 +693,13 @@ def test_community_maintenance_should_be_created_from_xml():
 
     res = zeit.web.core.comments._maintenance_from_xml(xml, maintenance)
     begin = datetime.datetime(
-        2010, 10, 10, 10, 10, 10, 100000, tzinfo=pytz.utc)
-    end = datetime.datetime(2020, 10, 10, 10, 10, 10, 100000, tzinfo=pytz.utc)
+        2010, 10, 10, 9, 10, 10, 100000, tzinfo=pytz.utc)
+    end = datetime.datetime(2020, 10, 10, 9, 10, 10, 100000, tzinfo=pytz.utc)
     assert res['active']
     assert res['scheduled']
+    assert isinstance(res['begin'], datetime.datetime)
     assert res['begin'] == begin
+    assert isinstance(res['end'], datetime.datetime)
     assert res['end'] == end
     assert res['text_scheduled'] == maintenance['text_scheduled']
     assert res['text_active'] == maintenance['text_active']

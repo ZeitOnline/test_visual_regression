@@ -1,19 +1,23 @@
 <?xml version="1.0"?>
 <image-layouts>
-  <layout id="small" display_mode="float" available="zeit.cms.interfaces.ICMSContent">schmal</layout>
-  <!-- default value must not use available -->
-  <layout id="large" display_mode="large">vollbreit</layout>
-  <layout id="upright" display_mode="float" available="zeit.cms.interfaces.ICMSContent">hochkant</layout>
-  <layout id="large-original" variant_name="original" display_mode="column-width" available="zeit.cms.interfaces.ICMSContent">hochkant</layout>
-  <layout id="zmo-xl-header" available="zeit.magazin.interfaces.IZMOContent">ZMO - XL-Header</layout>
+  <layout id="large" display_mode="large" variant_name="wide">Standard (16:9) groß</layout>
+  <layout id="portrait" display_mode="float" variant_name="original" available="zeit.cms.interfaces.ICMSContent">Original klein</layout>
+  <layout id="small" display_mode="float" variant_name="wide" available="zeit.cms.interfaces.ICMSContent">Standard (16:9) umfließend</layout>
 
-  <layout id="zmo-xl" available="zeit.magazin.interfaces.IZMOContent">ZMO - XL</layout>
-  <layout id="zmo-medium-left" available="zeit.magazin.interfaces.IZMOContent">ZMO - M hochkant links</layout>
-  <layout id="zmo-medium-center" available="zeit.magazin.interfaces.IZMOContent">ZMO - M hochkant mittig</layout>
-  <layout id="zmo-medium-right" available="zeit.magazin.interfaces.IZMOContent">ZMO - M hochkant rechts</layout>
-  <layout id="zmo-large-left" available="zeit.magazin.interfaces.IZMOContent">ZMO - L links</layout>
-  <layout id="zmo-large-center" available="zeit.magazin.interfaces.IZMOContent">ZMO - L mittig</layout>
-  <layout id="zmo-large-right" available="zeit.magazin.interfaces.IZMOContent">ZMO - L rechts</layout>
-  <layout id="zmo-small-left" available="zeit.magazin.interfaces.IZMOContent">ZMO - S hochkant links</layout>
-  <layout id="zmo-small-right" available="zeit.magazin.interfaces.IZMOContent">ZMO - S hochkant rechts</layout>
+  <layout id="column-width" display_mode="column-width" variant_name="wide" available="zeit.cms.interfaces.ICMSContent">Standard (16:9) spaltenbreit</layout>
+  <layout id="column-width-original" display_mode="column-width" variant_name="original" available="zeit.cms.interfaces.ICMSContent">Original spaltenbreit</layout>
+  <layout id="column-width-portrait" display_mode="column-width" variant_name="portrait" available="zeit.cms.interfaces.ICMSContent">Hochkant (3:4) spaltenbreit</layout>
+  <layout id="column-width-square" display_mode="column-width" variant_name="square" available="zeit.cms.interfaces.ICMSContent">Quadrat (1:1) spaltenbreit</layout>
+
+  <layout id="float-portrait" display_mode="float" variant_name="portrait" available="zeit.cms.interfaces.ICMSContent">Hochkant (3:4) umfließend</layout>
+  <layout id="float-square" display_mode="float" variant_name="square" available="zeit.cms.interfaces.ICMSContent">Quadrat (1:1) umfließend</layout>
+
+  <layout id="zmo-xl-header" variant_name="super" available="zeit.magazin.interfaces.IZMOContent">ZMO - Header</layout>
+  <layout id="zmo-xl" variant_name="super" available="zeit.magazin.interfaces.IZMOContent">ZMO - XL</layout>
+  <layout id="zmo-large-center" variant_name="wide" available="zeit.magazin.interfaces.IZMOContent">ZMO - L mittig</layout>
+  <layout id="zmo-medium-left" variant_name="wide" available="zeit.magazin.interfaces.IZMOContent">ZMO - M links</layout>
+  <layout id="zmo-medium-center" variant_name="wide" available="zeit.magazin.interfaces.IZMOContent">ZMO - M mittig</layout>
+  <layout id="zmo-medium-right" variant_name="wide" available="zeit.magazin.interfaces.IZMOContent">ZMO - M rechts</layout>
+  <layout id="zmo-small-left" variant_name="portrait" available="zeit.magazin.interfaces.IZMOContent">ZMO - S links</layout>
+  <layout id="zmo-small-right" variant_name="portrait" available="zeit.magazin.interfaces.IZMOContent">ZMO - S rechts</layout>
 </image-layouts>

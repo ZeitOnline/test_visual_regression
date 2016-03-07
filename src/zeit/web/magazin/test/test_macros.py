@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
-import re
-
 import mock
-import pyramid.threadlocal
-import pyramid.config
-import lxml
 import lxml.html
 
+import zeit.cms.interfaces
 import zeit.content.article.article
+
+import zeit.web.core.interfaces
 
 
 def test_macro_p_should_produce_markup(jinja2_env):
@@ -209,108 +207,38 @@ def test_macro_advertising_should_produce_script(jinja2_env):
     assert '' == tpl.module.advertising(ad_inactive)
 
 
-def test_image_should_produce_markup(jinja2_env, monkeypatch):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
+def test_image_template_should_produce_figure_markup(tplbrowser):
+    block = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/artikel/01').main_image_block
+    image = zeit.web.core.interfaces.IFrontendBlock(block)
+    image.href = 'http://localhost/foo'
+    browser = tplbrowser(
+        'zeit.web.magazin:templates/inc/asset/image_article.tpl', obj=image)
+    assert browser.cssselect('figure.figure-full-width')
+    assert browser.cssselect('img.figure__media')
+    assert browser.cssselect('span.figure__copyright')
+    assert browser.cssselect('a')[0].attrib['href'] == 'http://localhost/foo'
 
-    obj = [{'layout': 'large', 'css': 'figure-full-width',
-            'caption': 'test', 'copyright': (('test', None, False),),
-            'alt': 'My alt content',
-            'title': 'My title content'},
-           {'layout': 'zmo-xl-header',
-            'css': 'figure-header',
-            'caption': 'test', 'copyright': (('test', None, False),),
-            'alt': 'My alt content',
-            'title': 'My title content'},
-           {'layout': 'zmo-medium-left',
-            'css': 'figure-horizontal',
-            'caption': 'test', 'copyright': (('test', None, False),),
-            'alt': 'My alt content',
-            'title': 'My title content'},
-           {'layout': 'zmo-medium-right',
-            'css': 'figure-horizontal--right',
-            'caption': 'test', 'copyright': (('test', None, False),),
-            'alt': 'My alt content',
-            'title': 'My title content'},
-           {'layout': 'zmo-medium-center', 'css': 'figure '
-            'is-constrained is-centered', 'caption': 'test',
-            'copyright': (('test', None, False),),
-            'alt': 'My alt content',
-            'title': 'My title content'},
-           {'layout': 'zmo-small-right',
-            'css': 'figure-stamp--right',
-            'caption': 'test', 'copyright': (('test', None, False),),
-            'alt': 'My alt content',
-            'title': 'My title content'},
-           {'layout': 'zmo-small-left', 'css': 'figure-stamp',
-            'caption': 'test', 'copyright': (('test', None, False),),
-            'alt': 'My alt content',
-            'title': 'My title content'},
-           {'layout': 'zmo-small-right', 'css': 'figure-stamp--right',
-            'caption': 'test', 'copyright': (('test', None, False),),
-            'alt': 'My alt content',
-            'title': 'My title content'},
-           {'layout': 'zmo-large-center',
-            'css': 'figure-full-width',
-            'caption': 'test', 'copyright': (('test', None, False),),
-            'alt': 'My alt content',
-            'title': 'My title content'},
-           {'layout': 'zmo-small-left', 'align': False, 'css': 'figure-stamp',
-            'caption': 'test', 'copyright': (('test', None, False),),
-            'alt': 'My alt content',
-            'title': 'My title content'},
-           {'layout': 'zmo-small-right', 'align': False,
-            'css': 'figure-stamp--right',
-            'caption': 'test',
-            'copyright': (('test', 'http://www.test.de', False),),
-            'alt': 'My alt content',
-            'title': 'My title content'},
-           ]
 
-    class Image(object):
+def test_image_template_should_produce_copyright_caption(tplbrowser):
+    block = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/artikel/01').main_image_block
+    image = zeit.web.core.interfaces.IFrontendBlock(block)
+    browser = tplbrowser(
+        'zeit.web.magazin:templates/inc/asset/image_article.tpl', obj=image)
+    copyright = browser.cssselect('.figure__copyright a')[0]
+    assert copyright.attrib['href'] == 'http://foo.de'
+    assert copyright.text.strip() == u'© Andreas Gebert/dpa'
 
-        uniqueId = '/img/artikel/01/01.jpg'
 
-        def __init__(self, data):
-            vars(self).update(data)
-
-    def get_current_request():
-        request = mock.Mock()
-        request.route_url.return_value = 'http://localhost/'
-        request.image_host = 'http://localhost/'
-        return request
-
-    monkeypatch.setattr(
-        pyramid.threadlocal, 'get_current_request', get_current_request)
-
-    for el in obj:
-        lines = tpl.module.image(Image(el)).splitlines()
-        output = ''
-        for line in lines:
-            output += line.strip()
-        if el['copyright'][0][1]:
-            cr = ('<a href="' + el['copyright'][0][1] +
-                  '" target="_blank">' + el['copyright'][0][0] + '</a>')
-        else:
-            cr = el['copyright'][0][0]
-        markup = ('<figure class="%s"><div class="scaled-image">'
-                  '<!--\\[if gt IE 8\\]><!--><noscript'
-                  ' data-src='
-                  '"/img/artikel/01/bitblt-\\d+x\\d+-[a-z0-9]+/01.jpg">'
-                  '<!--<!\\[endif\\]--><img alt="%s" title="%s" '
-                  'class=" figure__media" '
-                  'src="/img/artikel/01/bitblt-\\d+x\\d+-[a-z0-9]+/01.jpg" '
-                  'data-src='
-                  '"/img/artikel/01/bitblt-\\d+x\\d+-[a-z0-9]+/01.jpg" '
-                  'data-ratio=""><!--\\[if gt IE 8\\]><!--></noscript>'
-                  '<!--<!\\[endif\\]--></div><figcaption '
-                  'class="figure__caption"><span '
-                  'class="figure__text">test</span><span '
-                  'class="figure__copyright">%s</span>'
-                  '</figcaption></figure>'
-                  % (el['css'], el['alt'], el['title'], cr))
-
-        assert re.match(markup, output)
+def test_image_template_should_designate_correct_layouts(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/inline-imagegroup')
+    header = browser.cssselect('figure.figure-header img')[0]
+    assert header.attrib['data-variant'] == 'super'
+    stamp = browser.cssselect('figure.figure-stamp--right img')[0]
+    assert stamp.attrib['data-variant'] == 'portrait'
+    fullwidth = browser.cssselect('figure.figure-full-width img')[0]
+    assert fullwidth.attrib['data-variant'] == 'wide'
 
 
 def test_macro_headerimage_should_produce_markup(jinja2_env):

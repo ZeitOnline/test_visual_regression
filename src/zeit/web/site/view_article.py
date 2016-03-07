@@ -133,6 +133,12 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     def newsletter_optin_tracking(self):
         return self.request.GET.get('newsletter-optin', None)
 
+    @zeit.web.reify
+    def cardstack_body(self):
+        url = super(Article, self).cardstack_body
+        params = dict(shareUrl=self.canonical_url)
+        return zeit.web.core.utils.update_query(url, **params)
+
 
 @view_config(name='seite',
              path_info='.*seite-(.*)',
