@@ -330,6 +330,12 @@ class Raw(object):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawText)
+def RawText(context):
+    return context
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ICitation)
 class Citation(object):
 

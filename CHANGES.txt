@@ -4,7 +4,11 @@ Change log for zeit.web
 2.63 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2391: Improve reply-toggle performance
+
+- ZON-2826: Implement rawtext module for articles and CPs
+
+- ZON-2874: Customize article citation blocks for campus
 
 
 2.62 (2016-03-04)
