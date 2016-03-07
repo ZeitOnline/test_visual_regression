@@ -151,23 +151,6 @@ def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-desktop-7')) == 1
 
 
-def test_video_page_adcontroller_js_var_isset(
-        selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
-    driver = selenium_driver
-    driver.get('{}/video/2015-01/3537342483001'.format(testserver.url))
-
-    def ad_controller_defined(driver):
-        script = 'return typeof window.AdController'
-        return driver.execute_script(script) == 'object'
-
-    try:
-        assert WebDriverWait(driver, 20).until(ad_controller_defined)
-    except TimeoutException:
-        assert False, 'AdController not defined within 20 seconds'
-
-
 # TODO: iFrame (?) wird eingebunden auf großen Bildschirmen
 # TODO: iFrame (?) wird nicht eingebunden auf kleinen Bildschirmen
 # TODO: CSS_SELECTOR trifft nicht unsere aktuelle HTML Struktur #fixme
