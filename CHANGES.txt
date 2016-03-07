@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2874: Customize article citation blocks for campus
 
+- ZON-2496: EZIT Campus Centerpage with teasers
+
 
 2.62 (2016-03-04)
 -----------------
