@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2391: Improve reply-toggle performance
 
+- ZON-2826: Implement rawtext module for articles and CPs
+
 
 2.62 (2016-03-04)
 -----------------
@@ -35,8 +37,6 @@ Change log for zeit.web
 - MAINT: Ensure stable return type for nextreads and comment counts
 
 - MAINT: Be more defensive about errors when talking to the community
-
-- ZON-2845: Implement rawtext module for articles and cps
 
 
 2.61.2 (2016-03-02)

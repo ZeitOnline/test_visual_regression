@@ -183,10 +183,6 @@ def test_cp_should_render_raw_code(testbrowser):
     assert browser.cssselect('code')[0].text == code
 
 
-@pytest.mark.skipif(datetime.datetime.now() < datetime.datetime(2016, 3, 8),
-                    reason=(
-                        'Should work when module loading from z.w.core '
-                        'is implemented.'))
 def test_article_should_render_raw_code(testbrowser):
     browser = testbrowser('/zeit-online/article/raw_code')
-    assert browser.cssselect('code')[0].text == '<code>code</code>'
+    assert browser.cssselect('code')[0].text == 'code'
