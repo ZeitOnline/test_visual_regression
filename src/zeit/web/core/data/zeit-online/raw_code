@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="homepage">
+	<head>
+		<topiclinks>
+			<topiclink>
+				<topiclink_label_1>Griechenland-Krise</topiclink_label_1>
+				<topiclink_url_1>http://www.zeit.de/themen/krise-griechenland</topiclink_url_1>
+				<topiclink_label_2>Flugzeugabsturz MH17</topiclink_label_2>
+				<topiclink_url_2>http://www.zeit.de/schlagworte/themen/mh17/index</topiclink_url_2>
+				<topiclink_label_3>Kuba</topiclink_label_3>
+				<topiclink_url_3>http://www.zeit.de/schlagworte/orte/kuba/index</topiclink_url_3>
+			</topiclink>
+		</topiclinks>
+		<header_image/>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-07-17T14:31:21.334515+00:00</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-07-21T16:42:39.906046+00:00</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-07-17T11:05:34.469557+00:00</attribute>
+		<attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-07-17T14:30:52.288417+00:00</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.snickel</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/test/test-sonja/index.cp2015</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">homepage</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:3de27d68-13d3-43c4-936b-4edd57eb6a2a}</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+	&lt;initialized_object&gt;
+		&lt;klass&gt;
+			&lt;global name="Provides" module="zope.interface.declarations"/&gt;
+		&lt;/klass&gt;
+		&lt;arguments&gt;
+			&lt;tuple&gt;
+				&lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+				&lt;global name="Interface" module="zope.interface"/&gt;
+				&lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+				&lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+			&lt;/tuple&gt;
+		&lt;/arguments&gt;
+	&lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+	</head>
+	<body>
+		<title>Buzz-Boxen</title>
+		<cluster visible="True" area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
+			<region visible="True" area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
+				<container cp:type="rawtext" module="rawtext" visible="True" visible_mobile="True" cp:__name__="id-2f4417b0-58fb-4923-a4cb-1b4fc779d44a">
+					    <text>&lt;code&gt;code&lt;/code&gt;</text>
+				</container>
+			</region>
+			<region visible="True" area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor">
+				<container cp:type="teaser" module="zon-square" visible="True" cp:__name__="id-49dbe9b9-450e-44ef-bfb8-b2a7d7bebc28">
+					<block href="http://xml.zeit.de/zeit-online/article/01" />
+				</container>
+			</region>
+		</cluster>
+		<cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo">
+		</cluster>
+	</body>
+	<feed/>
+	<teaser>
+		<title>RawCode</title>
+	</teaser>
+</centerpage>
