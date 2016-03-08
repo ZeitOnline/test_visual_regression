@@ -22,9 +22,12 @@
 	<div class="nav__home">
 		<h2 class="nav__home-title"><a href="{{ request.route_url('home') }}index">ZEIT ONLINE</a></h2>
 	</div>
-	<nav class="nav__services">
-		<a class="nav__services-title" href="#services-menu" role="button" aria-controls="services-menu"><span class="nav__dropdown">Service</span></a>
-		<ul class="nav__services-list" id="services-menu" aria-hidden="true">
+	<nav class="nav__sales">
+		<a href="http://www.zeitabo.de/">Abo</a>
+	</nav>
+	<nav class="nav__more">
+		<a class="nav__more-title" href="#more-menu" role="button" aria-controls="more-menu"><span class="nav__dropdown">Mehr</span></a>
+		<ul class="nav__more-list" id="more-menu" aria-hidden="true">
 			<li><a href="{{ request.route_url('home') }}wissen/zeit-wissen/index">ZEITWissen</a></li>
 			<li><a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index">ZEITGeschichte</a></li>
 			<li><a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID">Partnersuche</a></li>
@@ -35,6 +38,8 @@
 			<li><a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zco.fix.dach.text.audio">Audio</a></li>
 			<li><a href="{{ request.route_url('home') }}archiv">Archiv</a></li>
 			<li><a href="{{ request.route_url('home') }}spiele/index">Spiele</a></li>
+			<li><a href="http://shop.zeit.de/">Shop</a></li>
+			<li><a href="https://premium.zeit.de/">ePaper</a></li>
 		</ul>
 	</nav>
 	<div class="nav__login">
@@ -54,7 +59,7 @@
 			<a class="nav__topics-link" href="#">Alle Themen</a>
 		</nav>
 		<nav class="nav__tools">
-			<h2 class="nav__tools-title"><a href="#tools-menu" aria-controls="tools-menu"><span class="nav__dropdown">Was soll ich studieren?</span></a></h2>
+			<h2 class="nav__tools-title"><a href="#tools-menu" role="button" aria-controls="tools-menu"><span class="nav__dropdown">Was soll ich studieren?</span></a></h2>
 			<ul class="nav__tools-list">
 				<li><a href="http://studiengaenge.zeit.de/sit">Studium-Interessentest</a></li>
 				<li><a href="http://studiengaenge.zeit.de/studienangebote">Suchmaschine für Studiengänge</a></li>
@@ -62,14 +67,6 @@
 			</ul>
 		</nav>
 	</div>
-	<nav class="nav__more">
-		<a class="nav__more-title" href="#more-menu" role="button" aria-controls="more-menu"><span class="nav__dropdown">Mehr</span></a>
-		<ul class="nav__more-list" id="more-menu" aria-hidden="true">
-			<li><a href="http://www.zeitabo.de/">Abo</a></li>
-			<li><a href="http://shop.zeit.de/">Shop</a></li>
-			<li><a href="https://premium.zeit.de/">ePaper</a></li>
-		</ul>
-	</nav>
 </div>
 
 <div class="header__flyout" id="tools-menu" aria-hidden="true">
