@@ -4,6 +4,8 @@ Change log for zeit.web
 2.63 (unreleased)
 -----------------
 
+- FIX: Fix main navigation on author pages
+
 - Polish article citation blocks for campus
 
 - ZON-2391: Improve reply-toggle performance

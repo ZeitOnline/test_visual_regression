@@ -11,6 +11,13 @@ import zeit.solr.interfaces
 import zeit.web.core.interfaces
 
 
+def test_author_page_contains_main_navigation(testbrowser):
+    browser = testbrowser('/autoren/j_random')
+    header = browser.cssselect('header.header')
+    assert header.cssselect('.main_nav')
+    assert header.cssselect('.main_nav__ressorts')
+
+
 def test_author_header_should_be_fully_rendered(testbrowser):
     browser = testbrowser('/autoren/j_random')
     name = browser.cssselect('.author-header__name')
