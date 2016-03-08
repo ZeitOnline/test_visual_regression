@@ -1,75 +1,74 @@
 {% import "zeit.web.campus:templates/macros/layout_macro.tpl" as lama %}
 <div class="header__brand">
-	<div class="header__publisher" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-		<a itemprop="url" href="{{ request.route_url('home') }}campus/index">
-			<meta itemprop="name" content="ZEIT CAMPUS Online">
-			<span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-				{{ lama.use_svg_icon('logo-zco', 'header__logo', view.request) }}
-				{# The "logo" dimensions must not exceed 600x60 -#}
-				<meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zco.png">
-				<meta itemprop="width" content="347">
-				<meta itemprop="height" content="60">
-			</span>
-		</a>
-	</div>
-	<a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü">
-		{{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', view.request) }}
-		{{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', view.request) }}
-	</a>
+    <div class="header__publisher" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <a itemprop="url" href="{{ request.route_url('home') }}campus/index">
+            <meta itemprop="name" content="ZEIT CAMPUS Online">
+            <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+                {{ lama.use_svg_icon('logo-zco', 'header__logo', view.request) }}
+                {# The "logo" dimensions must not exceed 600x60 -#}
+                <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zco.png">
+                <meta itemprop="width" content="347">
+                <meta itemprop="height" content="60">
+            </span>
+        </a>
+    </div>
+    <a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü">
+        {{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', view.request) }}
+        {{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', view.request) }}
+    </a>
 </div>
 
 <div class="nav" id="navigation">
-	<div class="nav__home">
-		<h2 class="nav__home-title"><a href="{{ request.route_url('home') }}index">ZEIT ONLINE</a></h2>
-	</div>
-	<nav class="nav__sales">
-		<a href="http://www.zeitabo.de/">Abo</a>
-	</nav>
-	<nav class="nav__more">
-		<a class="nav__more-title" href="#more-menu" role="button" aria-controls="more-menu"><span class="nav__dropdown">Mehr</span></a>
-		<ul class="nav__more-list" id="more-menu" aria-hidden="true">
-			<li><a href="{{ request.route_url('home') }}wissen/zeit-wissen/index">ZEITWissen</a></li>
-			<li><a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index">ZEITGeschichte</a></li>
-			<li><a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID">Partnersuche</a></li>
-			<li><a href="http://zeit.immowelt.de/">Immobilien</a></li>
-			<li><a href="http://automarkt.zeit.de/">Automarkt</a></li>
-			<li><a href="http://jobs.zeit.de/">Jobs</a></li>
-			<li><a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zco.fix.dach.text.apps">Apps</a></li>
-			<li><a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zco.fix.dach.text.audio">Audio</a></li>
-			<li><a href="{{ request.route_url('home') }}archiv">Archiv</a></li>
-			<li><a href="{{ request.route_url('home') }}spiele/index">Spiele</a></li>
-			<li><a href="http://shop.zeit.de/">Shop</a></li>
-			<li><a href="https://premium.zeit.de/">ePaper</a></li>
-		</ul>
-	</nav>
-	<div class="nav__login">
-		{%- set esi_source = '{}login-state?for=campus&context-uri={}'.format(request.route_url('home'), request.url) -%}
-		{{- lama.insert_esi(esi_source, 'Anmeldung nicht möglich') -}}
-	</div>
-	<div class="nav__primary">
-		<nav class="nav__topics">
-			{% require topics = view.context | topic_links -%}
-			<h2 class="nav__topics-title"><a href="#">Themen{#{ topics.title | default('Themen', True) }#}</a></h2>
-			<ul class="nav__topics-list">
-		    {% for label, link in topics %}
-				<li><a href="{{ link }}">{{ label }}</a></li>
-		    {% endfor %}
-			</ul>
-			{% endrequire -%}
-			<a class="nav__topics-link" href="#">Alle Themen</a>
-		</nav>
-		<nav class="nav__tools">
-			<h2 class="nav__tools-title"><a href="#tools-menu" role="button" aria-controls="tools-menu"><span class="nav__dropdown">Was soll ich studieren?</span></a></h2>
-			<ul class="nav__tools-list">
-				<li><a href="http://studiengaenge.zeit.de/sit">Studium-Interessentest</a></li>
-				<li><a href="http://studiengaenge.zeit.de/studienangebote">Suchmaschine für Studiengänge</a></li>
-				<li><a href="http://ranking.zeit.de/">CHE Hochschulranking</a></li>
-			</ul>
-		</nav>
-	</div>
+    <div class="nav__home">
+        <h2 class="nav__home-title"><a href="{{ request.route_url('home') }}index">ZEIT ONLINE</a></h2>
+    </div>
+    <nav class="nav__sales">
+        <a href="http://www.zeitabo.de/">Abo</a>
+    </nav>
+    <nav class="nav__more">
+        <a class="nav__more-title" href="#more-menu" role="button" aria-controls="more-menu"><span class="nav__dropdown">Mehr</span></a>
+        <ul class="nav__more-list" id="more-menu" aria-hidden="true">
+            <li><a href="{{ request.route_url('home') }}wissen/zeit-wissen/index">ZEITWissen</a></li>
+            <li><a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index">ZEITGeschichte</a></li>
+            <li><a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID">Partnersuche</a></li>
+            <li><a href="http://zeit.immowelt.de/">Immobilien</a></li>
+            <li><a href="http://automarkt.zeit.de/">Automarkt</a></li>
+            <li><a href="http://jobs.zeit.de/">Jobs</a></li>
+            <li><a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zco.fix.dach.text.apps">Apps</a></li>
+            <li><a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zco.fix.dach.text.audio">Audio</a></li>
+            <li><a href="{{ request.route_url('home') }}archiv">Archiv</a></li>
+            <li><a href="{{ request.route_url('home') }}spiele/index">Spiele</a></li>
+            <li><a href="http://shop.zeit.de/">Shop</a></li>
+            <li><a href="https://premium.zeit.de/">ePaper</a></li>
+        </ul>
+    </nav>
+    <div class="nav__login">
+        {%- set esi_source = '{}login-state?for=campus&context-uri={}'.format(request.route_url('home'), request.url) -%}
+        {{- lama.insert_esi(esi_source, 'Anmeldung nicht möglich') -}}
+    </div>
+    <div class="nav__primary">
+        <nav class="nav__topics">
+            {% require topics = view.context | topic_links -%}
+            <h2 class="nav__topics-title"><a href="#">Themen{#{ topics.title | default('Themen', True) }#}</a></h2>
+            <ul class="nav__topics-list">
+            {% for label, link in topics %}
+                <li><a href="{{ link }}">{{ label }}</a></li>
+            {% endfor %}
+            </ul>
+            {% endrequire -%}
+            <a class="nav__topics-link" href="#">Alle Themen</a>
+        </nav>
+        <nav class="nav__tools">
+            <h2 class="nav__tools-title"><a href="#tools-menu" role="button" aria-controls="tools-menu"><span class="nav__dropdown">Was soll ich studieren?</span></a></h2>
+            <ul class="nav__tools-list">
+                <li><a href="http://studiengaenge.zeit.de/sit">Studium-Interessentest</a></li>
+                <li><a href="http://studiengaenge.zeit.de/studienangebote">Suchmaschine für Studiengänge</a></li>
+                <li><a href="http://ranking.zeit.de/">CHE Hochschulranking</a></li>
+            </ul>
+        </nav>
+    </div>
 </div>
 
 <div class="header__flyout" id="tools-menu" aria-hidden="true">
-	{%- include "zeit.web.campus:templates/inc/navigation/flyout.html" -%}
+    {%- include "zeit.web.campus:templates/inc/navigation/flyout.html" -%}
 </div>
-
