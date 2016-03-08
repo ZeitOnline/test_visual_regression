@@ -8,11 +8,13 @@ Change log for zeit.web
 
 - MAINT: Use image variants for author images and Spektrum feed
 
+- MAINT: Update ZEIT Campus navigation
+
 
 2.63 (2016-03-08)
 -----------------
 
-- Polish article citation blocks for campus
+- FIX: Polish article citation blocks for campus
 
 - ZON-2391: Improve reply-toggle performance
 
