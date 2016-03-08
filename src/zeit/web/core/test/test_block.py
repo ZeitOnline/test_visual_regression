@@ -61,7 +61,7 @@ def test_video_block_should_be_fault_tolerant_if_video_is_none(application):
 
     model_block = mock.Mock()
     model_block.video = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/video/2015-01/3537342483001')
+        'http://xml.zeit.de/zeit-online/video/3537342483001')
     video = zeit.web.core.block.Video(model_block)
     assert hasattr(video, 'video_still')
 
@@ -70,7 +70,7 @@ def test_header_video_should_be_created_if_layout_is_zmo_header(application):
     model_block = mock.Mock()
     model_block.layout = 'zmo-xl-header'
     model_block.video = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/video/2015-01/3537342483001')
+        'http://xml.zeit.de/zeit-online/video/3537342483001')
     h_video = zeit.web.core.block.HeaderVideo(model_block)
     assert type(h_video) == zeit.web.core.block.HeaderVideo
     assert h_video.format == 'zmo-xl-header'
@@ -81,7 +81,7 @@ def test_header_video_should_not_be_created_if_layout_does_not_fit(
     model_block = mock.Mock()
     model_block.layout = 'zmo-xl-noheader'
     model_block.video = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/video/2015-01/3537342483001')
+        'http://xml.zeit.de/zeit-online/video/3537342483001')
 
     h_video = zeit.web.core.block.HeaderVideo(model_block)
     assert h_video is None
@@ -373,14 +373,14 @@ def test_block_place_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/place.html', view=view,
         block=block)
-    browser.cssselect('script[type="text/javascript"]')
+    assert browser.cssselect('script[type="text/javascript"]')
 
 
 def test_block_portraitbox_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/portraitbox.html', block=block)
-    browser.cssselect(
+    assert browser.cssselect(
         'figure.portraitbox.article__item.article__item--marginalia')
 
 
@@ -388,7 +388,7 @@ def test_block_quiz_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/quiz.html', block=block)
-    browser.cssselect(
+    assert browser.cssselect(
         'div.article__item.article__item--wide.article__item--rimless')
 
 
@@ -396,14 +396,14 @@ def test_block_raw_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/raw.html', block=block)
-    browser.cssselect('div.raw')
+    assert browser.cssselect('div.raw')
 
 
 def test_block_unorderedlist_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/unorderedlist.html', block=block)
-    browser.cssselect('ul.list.article__item')
+    assert browser.cssselect('ul.list.article__item')
 
 
 def test_block_video_should_contain_expected_structure(tplbrowser):
@@ -412,8 +412,8 @@ def test_block_video_should_contain_expected_structure(tplbrowser):
     block.title = 'title'
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/video.html', block=block)
-    browser.cssselect(
-        'div.article__item article__item--wide.article__item--rimless')
+    assert browser.cssselect(
+        'div.article__item.article__item--wide.article__item--rimless')
 
 
 def test_article_should_render_raw_code(testbrowser):

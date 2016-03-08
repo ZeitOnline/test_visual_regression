@@ -53,7 +53,7 @@ def test_video_source_should_be_highest_rendition_url(application):
     rend_3.frame_width = 1260
     rend_3.url = "http://rend_3"
     model_block.video = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/video/2015-01/3537342483001')
+        'http://xml.zeit.de/zeit-online/video/3537342483001')
 
     model_block.video.renditions = [rend_1, rend_2, rend_3]
     video = Video(model_block)
@@ -69,7 +69,7 @@ def test_header_video_should_be_created_if_layout_is_zmo_header(application):
     model_block = Mock()
     model_block.layout = 'zmo-xl-header'
     model_block.video = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/video/2015-01/3537342483001')
+        'http://xml.zeit.de/zeit-online/video/3537342483001')
     h_video = HeaderVideo(model_block)
     assert type(h_video) == HeaderVideo
     assert h_video.format == 'zmo-xl-header'
