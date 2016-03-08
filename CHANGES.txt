@@ -4,13 +4,11 @@ Change log for zeit.web
 2.64 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Fix main navigation on author pages
 
 
 2.63 (2016-03-08)
 -----------------
-
-- FIX: Fix main navigation on author pages
 
 - Polish article citation blocks for campus
 
