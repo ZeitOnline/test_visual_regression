@@ -290,7 +290,7 @@ def test_block_citation_should_contain_expected_structure(tplbrowser):
         'zeit.web.core:templates/inc/blocks/citation.html',
         block=block)
     assert browser.cssselect(
-        'figure.quote.article__item blockquote.quote__text')
+        'figure.quote blockquote.quote__text')
     assert browser.cssselect('blockquote.quote__text')[0].text.strip() == (
         u'Lorem ipsum dülör sit amet, consetetur sadipscing elitr')
 

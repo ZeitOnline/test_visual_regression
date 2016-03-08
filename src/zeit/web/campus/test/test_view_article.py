@@ -84,8 +84,10 @@ def test_article_pagination(testbrowser):
 def test_article_citation_block_should_render_expected_structure(testbrowser):
     browser = testbrowser('/campus/article/citation')
     assert len(browser.cssselect('.quote')) == 2
-    assert len(browser.cssselect('.quote.article__item--wide')) == 1
-    assert browser.cssselect('.quote')[0].text.strip().startswith(
+    assert browser.cssselect('.quote__text')[0].text.startswith(
         u'Es war ein Gedankenanstoß')
-    assert browser.cssselect('.quote')[0].attrib['title'].startswith('Ariane')
-    assert 'imdb.com' in browser.cssselect('.quote')[0].attrib['cite']
+    assert browser.cssselect('.quote__source')[0].text_content() == (
+        'Ariane Jedlitschka, Kunstschaffende')
+    assert browser.cssselect('.quote__link')[0].get('href') == (
+        'http://www.imdb.com/title/tt0110912/quotes?item=qt0447099')
+    # 'imdb.com' in browser.cssselect('.quote')[0].attrib['cite']

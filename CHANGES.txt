@@ -4,6 +4,8 @@ Change log for zeit.web
 2.63 (unreleased)
 -----------------
 
+- Polish article citation blocks for campus
+
 - ZON-2391: Improve reply-toggle performance
 
 - ZON-2826: Implement rawtext module for articles and CPs

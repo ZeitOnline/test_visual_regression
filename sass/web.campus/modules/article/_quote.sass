@@ -1,13 +1,50 @@
+$quote-padding: 1em
+
 .quote
-	@extend %font-beckett
-	background-image: linear-gradient(to right, $color-article-secondary 50%, $color-article-secondary 50%), linear-gradient(to right, $color-article-secondary 50%, $color-article-secondary 50%)
-	background-position: top center, bottom center
-	background-repeat: no-repeat
-	background-size: $micro--px 1em, $micro--px 1em
-	font-size: remify(32px)
-	margin: $vertical-space--small auto
-	padding: .5em 0 .3em
+	font-size: em(32px)
+	margin: remify(30px) auto
+	padding: $quote-padding 0
+	position: relative
 	text-align: center
 	+respond-min($break-tablet-min)
-		font-size: remify(64px)
-		margin: $vertical-space auto
+		font-size: em(64px)
+		margin: remify(40px) auto
+		max-width: remify(820px)
+
+	&:before
+		border-color: $color-article-secondary
+		border-style: solid
+		border-width: ($quote-padding + .33em) 0
+		bottom: 0
+		content: ""
+		left: 0
+		margin: auto
+		position: absolute
+		right: 0
+		top: 0
+		width: 4px
+	&--leserartikel
+		&:before
+			border-color: $color-community-primary
+
+	&__text
+		@extend %font-beckett
+		margin: 0
+		position: relative
+
+	&__source
+		font-family: $font-tabletgothic
+		font-size: remify(16px)
+		line-height: 1.25
+		margin-top: .66em
+		position: relative
+		&:before
+			content: "\2014" // — = em dash
+			margin-right: .25em
+
+		+respond-min($break-tablet-min)
+			font-size: remify(18px)
+			line-height: 1.33
+
+	&__link
+		color: inherit
