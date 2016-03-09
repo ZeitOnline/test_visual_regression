@@ -9,12 +9,12 @@
 			{% set teaser = module | first_child %}
 			{% set module_layout = 'teaser-topic' %}
 
-			{% include "zeit.web.site:templates/inc/asset/image_zon-topic.tpl" %}
-			{% include "zeit.web.site:templates/inc/teaser/zon-topic-main.tpl" %}
+			{% include "zeit.web.core:templates/inc/asset/image_topic_teaser.tpl" %}
+			{% include "zeit.web.core:templates/inc/teaser/topic_main.tpl" %}
 			<div class="teaser-topic-list">
 				{% for module in area.values()[0:3] -%}
 				    {% set teaser = module | first_child %}
-				    {% include "zeit.web.site:templates/inc/teaser/zon-topic-list.tpl" %}
+				    {% include "zeit.web.core:templates/inc/teaser/topic_list.tpl" %}
 				{% endfor %}
 			</div>
 		{% endif %}
