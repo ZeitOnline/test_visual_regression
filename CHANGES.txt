@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2728: Assign `rel` attribute to article tags
 
+- ZON-2496: EZIT Campus Centerpage with teasers
+
 
 2.63 (2016-03-08)
 -----------------
@@ -17,8 +19,6 @@ Change log for zeit.web
 - ZON-2826: Implement rawtext module for articles and CPs
 
 - ZON-2874: Customize article citation blocks for campus
-
-- ZON-2496: EZIT Campus Centerpage with teasers
 
 
 2.62 (2016-03-04)
