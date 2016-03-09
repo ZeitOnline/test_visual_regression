@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Fix main navigation on author pages
 
+- ZON-2496: EZIT Campus Centerpage with teasers
+
 
 2.63 (2016-03-08)
 -----------------
