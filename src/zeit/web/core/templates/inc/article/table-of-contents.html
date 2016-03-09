@@ -5,36 +5,36 @@
         {% block toc_link_top %}
         <a class="article-toc__onesie" href="{{ view.content_url }}/komplettansicht" data-id="article-toc....all">Auf einer Seite lesen</a>
         {% endblock toc_link_top %}
-        <div class="article-toc__seperator"></div>
+        <div class="article-toc__seperator">
+            <ol class="article-toc__list">
+            {%- set current = view.pagination.current %}
 
-        <ol class="article-toc__list">
-        {%- set current = view.pagination.current %}
+            {%- for pagenr in view.pagination.pager %}
 
-        {%- for pagenr in view.pagination.pager %}
-
-            {% if not pagenr -%}
-            <li class="article-toc__item">
-                ⋮
-            </li>
-            {% else %}
-            <li class="article-toc__item{%if pagenr == current %} article-toc__item--current{% endif %}">
-                {% if pagenr != current %}
-                <a class="article-toc__link js-scroll" href="{{ view.pagination.pages_urls[pagenr - 1] }}" data-id="article-toc....{{ pagenr }}">
+                {% if not pagenr -%}
+                <li class="article-toc__item">
+                    ⋮
+                </li>
+                {% else %}
+                <li class="article-toc__item{%if pagenr == current %} article-toc__item--current{% endif %}">
+                    {% if pagenr != current %}
+                    <a class="article-toc__link js-scroll" href="{{ view.pagination.pages_urls[pagenr - 1] }}" data-id="article-toc....{{ pagenr }}">
+                    {% endif %}
+                    {% block toc_item scoped %}
+                        <strong>Seite {{ pagenr }}</strong>
+                        {%- if view.pagination.pages_titles[pagenr - 1] %} — {{ view.pagination.pages_titles[pagenr - 1] }}
+                        {%- endif %}
+                    {% endblock toc_item %}
+                    {% if pagenr != current %}
+                    </a>
+                    {% endif %}
+                </li>
                 {% endif %}
-                {% block toc_item scoped %}
-                    <strong>Seite {{ pagenr }}</strong>
-                    {%- if view.pagination.pages_titles[pagenr - 1] %} — {{ view.pagination.pages_titles[pagenr - 1] }}
-                    {%- endif %}
-                {% endblock toc_item %}
-                {% if pagenr != current %}
-                </a>
-                {% endif %}
-            </li>
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
 
-        </ol>
-        {% block toc_link_bottom %}{% endblock %}
+            </ol>
+            {% block toc_link_bottom %}{% endblock %}
+        </div>
     </div>
 </aside>
 {% endif %}
