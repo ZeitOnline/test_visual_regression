@@ -484,6 +484,30 @@ class RecommendCommentResource(PostCommentResource):
         self.request_method = 'GET'
 
 
+@pyramid.view.view_defaults(
+    renderer='zeit.web.site:templates/inc/comments/replies.html',
+    name='comment_replies')
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
+@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+class CommentReplies(zeit.web.core.view.Content):
+
+    @zeit.web.reify
+    def replies(self):
+        try:
+            cid = int(self.request.GET['cid'])
+        except (KeyError, ValueError):
+            raise pyramid.httpexceptions.HTTPBadRequest(
+                title='Parameter cid is required')
+        if not self.show_commentthread:
+            return []
+        return zeit.web.core.comments.get_replies(self.context.uniqueId, cid)
+
+
 def invalidate_comment_thread(unique_id):
     zeit.web.core.comments.get_cacheable_thread.invalidate(unique_id)
 

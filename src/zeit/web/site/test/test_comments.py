@@ -344,3 +344,11 @@ def test_comment_area_should_show_message_for_blocked_users(application):
     # This is a bit implicit; the actual message is rendered by the template.
     assert not view.comment_area['note']
     assert not view.comment_area['message']
+
+
+def test_comment_replies_view_renders_html_for_replies(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/01/comment_replies?cid=2968470')
+    comments = browser.cssselect('article .comment__body')
+    assert len(comments) == 1
+    assert 'Iraner' in comments[0].xpath('p')[0].text
