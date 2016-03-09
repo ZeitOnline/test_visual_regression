@@ -1,0 +1,43 @@
+%teaser
+	border-bottom: 1px solid $color-teaser-border
+
+%teaser-heading
+	position: relative
+	max-width: 95%
+
+%teaser-combined-link
+	background-color: $white
+	box-decoration-break: clone
+
+%teaser-kicker
+	background-color: $white
+	color: $zco-accent
+	font-family: $font-tabletgothic
+	font-size: remify(12px)
+	letter-spacing: 0.08em
+	line-height: 1.25
+	padding: remify(6px 13px 0 0)
+	position: absolute
+	text-transform: uppercase
+
+%teaser-title
+	@extend %font-beckett
+	background-color: transparent
+	color: $zco-charcoal
+	position: relative
+
+%teaser-text
+	color: $zco-charcoal
+	font-family: $font-tabletgothic
+	font-size: remify(16px)
+	line-height: 1.25
+	margin: 0 0 0.5em 0 // em for a reason, so it grows with the breakpoint
+	+respond-min($break-tablet-min)
+		font-size: remify(15px)
+		line-height: (20/15)
+
+%teaser-metadata
+	color: $color-teaser-meta
+	font-size: remify(15px)
+	line-height: (20/15)
+

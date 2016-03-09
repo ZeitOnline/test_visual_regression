@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/C/Laura_Cwiertnia/index" publication-date="" expires="">
+      <display_name py:pytype="str">Laura Cwiertnia</display_name>
+    </author>
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/G/Esther_Goebel/index" publication-date="" expires="">
+      <display_name py:pytype="str">Esther Göbel</display_name>
+    </author>
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/P/Benedikt_Peters" publication-date="" expires="">
+      <display_name py:pytype="str">Benedikt Peters</display_name>
+    </author>
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/U/Amadeus_Ulrich" publication-date="" expires="">
+      <display_name py:pytype="str">Amadeus Ulrich</display_name>
+    </author>
+    <references></references>
+    <rankedTags xmlns:ns11="http://codespeak.net/lxml/objectify/pytype">
+      <tag ns11:pytype="str" uuid="887a216f-e738-45fb-a83b-a31840fad535" url_value="" type="free">Partnerschaft</tag>
+      <tag type="free" score="3" uuid="6eab8c5b-feb4-40da-954f-a1e0ebfba867" url_value="beziehung">Beziehung</tag>
+    </rankedTags>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/campus/image/02-maedchen-koffer-zug/" type="jpg" title="Beziehung: Ich mach jetzt Schluss" alt="Beziehung: Ich mach jetzt Schluss" align="left" publication-date="" expires="">
+      <bu py:pytype="str">Alleine weiter</bu>
+      <copyright py:pytype="str" link="http://www.photocase.de/foto/257994-stock-photo-frau-schoen-ferien-urlaub-reisen-erwachsene-ferne-freiheit">© JoeEsco/photocase.de</copyright>
+    </image>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">2014212</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Laura Cwiertnia;Esther Göbel;Benedikt Peters;Amadeus Ulrich</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels"></attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-02-22T14:36:12.086080+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-08-06T10:56:21.628124+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-02-22T14:36:30.455571+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-02-15T12:27:23.105784+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-08-06T10:55:32.230458+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-02-15T12:27:17.381997+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">09.06.2015</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZTCS-2015-04-schlussmacher</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template"></attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="jobname">schlussmacher</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-08-06T10:55:15.684426+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bildbestellung</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Fünf Menschen erzählen davon, wie das Schlussmachen sie glücklich gemacht hat. (akg)</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="origname">schlussmacher</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="page">84</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/campus/2015/04/schlussmacher</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2015-06-09T06:00:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZTCS</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Campus</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">0086629d9f324858af5fe27e7c043208</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367934839535</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Studium</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">ZEIT MAGAZIN
+      Campus</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZTCS-2015-04</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Fünf Menschen erzählen davon, wie das Schlussmachen sie glücklich gemacht hat. (akg)</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Uni-Leben</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">8798</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:613f0cad-eaba-4b84-9689-5e5c1127451c}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">04</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Schluss jetzt!</title>
+    <subtitle>Egal, wie eine Beziehung endet, jede Trennung beginnt mit dem Gefühl: Es geht nicht mehr. Fünf Geschichten über den Schlussmach-Moment</subtitle>
+    <byline>von Laura Cwiertnia,  Esther Göbel,  Benedikt Peters,  Amadeus Ulrich</byline>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/campus/image/02-maedchen-koffer-zug/" type="jpg" title="Beziehung: Schluss jetzt!" alt="Studium, Beziehung, Partnerschaft, Beziehung" align="left" publication-date="" expires="" layout="large" is_empty="False" alt_local="Studium, Beziehung, Partnerschaft, Beziehung" title_local="Beziehung: Schluss jetzt!">
+        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Alleine weiter</bu>
+        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" link="http://www.photocase.de/foto/257994-stock-photo-frau-schoen-ferien-urlaub-reisen-erwachsene-ferne-freiheit">© JoeEsco/photocase.de</copyright>
+      </image>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/studium/uni-leben/2015-06/anna-petermann-box" publication-date="" expires=""/>
+      <p>"Bei der Schlüsselübergabe
+        für unsere gemeinsame Wohnung wurde mir klar: Ich
+      war nie richtig verliebt in meinen Freund. Ich wollte es nur unbedingt sein. Schon lange hatte
+      ich einen Drei-Punkte-Plan: einen Freund finden, zusammenziehen, glücklich sein. Vorher war
+      ich in einen anderen verknallt – aber der nicht in mich. Mein Exfreund hat mir von Anfang an
+      gezeigt, dass er mich mag. Das hat sich gut angefühlt. Nach einem Dreivierteljahr schlug ich
+      vor, zusammenzuziehen. Er war sofort dafür. Am Abend vor der Wohnungsübergabe feierte meine WG
+      eine Party. Und da stand plötzlich der Typ vor mir, in den ich so lange verliebt gewesen war.
+      Wir haben gequatscht, und auf einmal kamen alle alten Gefühle in mir hoch: Wir haben
+      rumgeknutscht, ich bin mit zu ihm gegangen. Am nächsten Morgen habe ich kurz geduscht und mir
+      eingeredet: ›Das ist alles nicht so schlimm.‹ Dann bin ich zur Schlüsselübergabe gefahren.
+      Aber als ich mit meinem Freund in unserem zukünftigen Schlafzimmer stand und er mich umarmen
+      wollte, musste ich heulen. Ich habe gestottert und gesagt, dass ich weder mit ihm
+      zusammenziehen noch länger seine Freundin sein wollte. Erst hat er nicht verstanden, wollte
+      mich sogar trösten. Dann hat er mich angeschrien und die Tür zugeknallt. Aber ich habe mich um
+      tausend Kilo leichter gefühlt. Meinen Drei-Punkte-Plan habe ich trotzdem erfüllt – mit meinem
+      Seitensprung. Seit über zwei Jahren ist er mein Freund. Und seit Kurzem wohnen wir zusammen."    <br/></p>
+      <intertitle>"Ich will das nicht mehr"<br/></intertitle>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/studium/uni-leben/2015-06/benedikt-box" publication-date="" expires=""/>
+      <p>"Meine Exfreundin hat
+        alle paar Wochen mit mir Schluss gemacht. Sie hat
+      meine Klamotten in Mülltüten gesteckt, mir per WhatsApp ein Foto davon geschickt und
+      geschrieben: ›Hol’s ab‹. Ich bin immer sofort zu ihr gefahren, wir haben geredet und
+      irgendwann gesagt: ›Okay, wird schon wieder.‹ Aber nach ein paar Tagen ging es von vorn los.
+      Sie hat in Aachen gewohnt, ich in Gladbach. Sie konnte in meinem Bett nicht gut schlafen und
+      kam mit meinem Vater nicht klar. Darum war ich fast immer bei ihr. Mir war wichtig, dass sie
+      glücklich ist. Dabei war ich selbst nicht zufrieden. Der ständige Streit hat mich
+      fertiggemacht. Aber dann haben wir uns vertragen, Fotos angeschaut, und sie hat mir ein Heft
+      mit Zeichnungen geschenkt, auf dem stand:
+        <em>›Thank you for being you‹.</em>
+        Ich habe das
+      schlechte Gefühl vergessen. Immer wieder. Bis zu einem Nachmittag im Juli. Wir hatten mal
+      wieder Stress, ich bin nach Aachen gefahren. Eigentlich war alles wie immer. Aber plötzlich
+      war da der Gedanke in meinem Kopf: ›Ich will das nicht mehr.‹ Und der ging nicht mehr weg. Ich
+      habe mich total eingeengt gefühlt, wie in einer Sackgasse. Wir sind im Wald spazieren
+      gegangen, da hat sie auf einmal gefragt: ›Machst du jetzt Schluss?‹ Und ich hab einfach Ja
+      gesagt. Das war gar nicht geplant. Aber ich bin dabei geblieben. Später habe ich erfahren,
+      dass meine Exfreundin danach oft geweint hat und mich zurückwollte. Hätte sie mir das auch
+      gesagt – ich hätte uns bestimmt wieder eine Chance gegeben."
+      </p>
+      <intertitle>"Meine Freundin war ständig eifersüchtig"<br/></intertitle>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/studium/uni-leben/2015-06/thomas-janssen-box" publication-date="" expires=""/>
+      <p>"In der Nacht vor unserem zweijährigen
+        Jubiläum konnte ich nicht
+      einschlafen. Ich lag die ganze Zeit auf dem Rücken und habe an die Decke gestarrt. Meine
+      Exfreundin war cool, witzig und entspannt – solange sie nicht eifersüchtig war. Wenn ich mit
+      Kumpels feiern wollte oder mit einer Freundin Kaffee trinken, hat sie das oft gestört. Wie
+      sehr mich ihre Eifersucht belastet hat, habe ich aber erst gemerkt, als ich zum Studieren von
+      Frankfurt nach Berlin gezogen bin: In der neuen Stadt habe ich mich frei gefühlt; ich war
+      ständig unterwegs und habe jeden Tag neue Leute getroffen. Das Gefühl, mich vor niemandem
+      rechtfertigen zu müssen, war großartig. Es dauerte nicht lange, da hatte ich keine Lust mehr,
+      mit ihr zu reden, wenn sie anrief. Ich habe sie auch nicht vermisst.  <br/></p>
+      <p>Zu unserem zweijährigen
+      Jubiläum bin ich trotzdem nach Frankfurt gefahren – mein erster Besuch seit meinem Umzug. Am
+      ersten Abend wollte ich unbedingt noch ein paar alte Freunde treffen. Meine Exfreundin wollte
+      erst mit, dann auf einmal doch nicht, ihr war übel. Also haben wir abgemacht, dass ich nach
+      dem Treffen zu ihr komme. Ich saß noch nicht einmal eine Stunde bei meinem Freund auf dem
+      Sofa, da kam die erste SMS. Dann noch eine und noch eine. Sie wollte, dass ich sofort komme.
+      Genervt bin ich gegangen. Zu Hause haben wir kurz geredet und sind dann schlafen gegangen. Sie
+      hat sich von mir weggedreht. Das war zu viel. Ich habe es nicht mehr ertragen, neben ihr zu
+      liegen, wollte sie nicht mehr berühren. Plötzlich war mir ganz kalt, und alles fühlte sich
+      fremd an. Ich wollte einfach nur noch weg! Schluss gemacht habe ich aber erst ein paar Tage
+      nach unserem Jubiläum – am Telefon. Da war ich schon wieder in Berlin." <br/></p>
+    </division>
+    <image-credits>Fotos: privat</image-credits>
+    <image-credits>Illustration: Anna Kövecses</image-credits>
+    <supertitle>Beziehung</supertitle>
+    <division type="page" teaser="&quot;Ich verliebte mich in eine Frau&quot;">
+      <p>
+        <br/>
+      </p>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/studium/uni-leben/2015-06/katja-stieler-box" publication-date="" expires=""/>
+      <p>"Um halb vier morgens
+        hat mein Handy vibriert – eine WhatsApp-Nachricht von
+      Katja. Darin stand: ›Ich hab den Tag mit Dir sehr genossen. Ich will Dich unbedingt
+      wiedersehen.‹ Seit dem Ende meines Studiums arbeite ich beim Fernsehen. Katja war meine
+      Sprechtrainerin dort. Sie ist groß, schlank, sportlich, und ihre Stimme macht mir eine
+      Gänsehaut. Ich fand sie sofort toll. Und nach der Nachricht wusste ich: sie mich auch.
+      Allerdings hatte ich einen Freund. Und in ein paar Wochen wollte ich mit ihm in die USA reisen
+      – wandern an der Westküste. Alles war seit Monaten geplant, Flug und Hotels bezahlt. Mein
+      Freund hat sich wie verrückt darauf gefreut. Die ganze Nacht saß ich auf der Bettkante und
+      habe Katjas Nachricht immer wieder gelesen. Mein Herz hat gerast. ›Ich muss Schluss machen‹,
+      habe ich gedacht, ›aber nicht sofort.‹ Ein paar Tage später kam Katja zu mir, wir haben
+      gekocht. Als wir auf der Couch saßen, habe ich sie geküsst. Sie hat den Kuss erwidert. Anstatt
+      das meinem Freund zu beichten, fing ich an, ihn zu betrügen. Er hat in München gewohnt, ich in
+      Leipzig – ich habe Ausreden erfunden, warum er mich nicht besuchen kann, weil ich lernen oder
+      für einen Job nach Berlin muss. In Wahrheit war ich bei Katja. Wir sind Fahrrad gefahren,
+      waren baden oder den ganzen Tag im Bett. Ich war wahnsinnig glücklich. Trotzdem bin ich noch
+      mit meinem Freund in die USA geflogen. Die Reise wurde schrecklich. Er wollte mich küssen, mit
+      mir schlafen. Aber ich konnte nicht. Er hat schnell gemerkt, dass etwas nicht stimmt, und
+      nachgefragt. Da habe ich ihm alles erzählt." <br/></p>
+      <intertitle>"Sollten wir vielleicht noch mal auseinanderziehen?"<br/></intertitle>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/studium/uni-leben/2015-06/juliane-lecking-box" publication-date="" expires=""/>
+      <p>"Mein Freund war mein Zuhause,
+        seit der zwölften Klasse, acht Jahre lang.
+      Wir haben zusammengewohnt: zwei Zimmer, Küche, Bad, eine richtige Pärchenwohnung. Im Studium
+      hatten meine Freundinnen ständig One-Night-Stands, waren verliebt, dann wieder getrennt.
+      Manchmal war ich neidisch auf sie, aber richtig infrage gestellt habe ich meine Beziehung nie.
+      Bis zu diesem Abend auf Teneriffa. Mein Freund und ich waren den ganzen Tag am Strand gewesen,
+      abends saßen wir auf dem Balkon, in gemütlichen Klamotten und mit einer Flasche Rotwein. Da
+      habe ich gefragt: ›Sollten wir vielleicht noch mal auseinanderziehen?‹ Seit ein paar Monaten
+      hatte mich auf einmal jede Kleinigkeit an ihm genervt: wie er die Nase hochzieht oder dass er
+      immer ›Ist mir egal‹ sagt, wenn ich seine Meinung wissen will. Ich war dann sofort auf 180.
+      Das liegt an der Wohnung, habe ich gedacht, wir sehen uns zu viel. ›Okay, wenn du meinst‹, hat
+      er geantwortet. Und plötzlich war dieser Kloß in meinem Hals, und ich habe gespürt, dass auch
+      getrennte Wohnungen nicht helfen werden. Ich wollte frei sein, neue Dinge erleben – ohne ihn.
+      Nach dem Urlaub bin ich ganz schnell ausgezogen. In meiner neuen WG gab es keine Spülmaschine,
+      das Licht war kaputt, und an der Wand hingen Fotos von fremden Menschen. Aber ich habe mich
+      sofort zu Hause gefühlt. Trotzdem dauerte es noch sechs Monate, bis ich meinem Freund sagen
+      konnte: ›Es ist Schluss, endgültig.‹ "
+      </p>
+      <p>
+        <em>Protokolle: Laura Cwiertnia, Esther Göbel, Benedikt Peters, Amadeus Ulrich</em>
+      </p>
+      <p>
+        <em>* Namen von der Redaktion geändert</em>
+      </p>
+    </division>
+  </body>
+  <teaser>
+    <title>Ich mach jetzt Schluss</title>
+    <text>Bei der Schlüsselübergabe für die neue Wohnung merkt Anna: Ich war nie verliebt. Karin brennt plötzlich für eine Frau. Fünf Geschichten über den Schlussmach-Moment</text>
+    <supertitle>Beziehung</supertitle>
+  </teaser>
+</article>

@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags>
+      <tag type="Organization" score="5" uuid="c001115e-25b6-4120-b790-69fc75e42f7b" url_value="fachhochschulen">Fachhochschulen</tag>
+      <tag type="free" score="4" uuid="4c97de3f-2a84-4692-b913-6457fafa09b0" url_value="bafoeg">Bafög</tag>
+      <tag type="free" score="4" uuid="ee034b4f-e488-4068-bd28-347f11f6e10e" url_value="bewerbungsfrist">Bewerbungsfrist</tag>
+      <tag type="free" score="4" uuid="bd93919b-e1d4-4d09-a0ef-667720c3636b" url_value="online-bewerbung">Online-Bewerbung</tag>
+      <tag type="free" score="4" uuid="b6f4ea87-18fc-4f7e-8e91-65ce1e2d49a5" url_value="studiengang">Studiengang</tag>
+    </rankedTags>
+    <references>
+    </references>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/campus/image/01-junge-vor-unscharfem-hintergrund/" type="jpg" title="Countdown: Countdown zum Studium" alt="Countdown: Countdown zum Studium" align="left" publication-date="" expires="">
+      <bu py:pytype="str">Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben.</bu>
+      <copyright py:pytype="str" link="http://www.photocase.de/fotos/207896">© &lt;&lt;bananarama&gt;&gt;/photocase.de</copyright>
+    </image>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">556771</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels">Studium Hochschule</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-02-18T12:50:44.687180+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-02-18T12:50:52.380804+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-02-18T12:50:53.127287+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-02-18T12:50:52.380804+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-02-18T12:50:51.388342+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">05.05.2015</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZSF-2015-01-TERMINE</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template"></attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="jobname">TERMINE</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-02-18T12:50:41.433961+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.pilath</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Worum man sich auch besonders früh kümmern sollte: Internetanschluss beantragen. (akg)</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="origname">TERMINE</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="page">84</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/studium/studienfuehrer-2015/TERMINE</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2015-05-05T06:00:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZSF</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Studienführer</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">5528ff3541a84c749bb6646d2e6984c6</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367935288499</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Studium</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">ZEIT
+      Studienführer</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZSF-2015-01</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Im Mai müssen sich die ersten bewerben, im Juli endet die Frist. Unser Countdown für Abiturienten (akg)</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Hochschule</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">4260</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:1fae105b-8e53-494a-99e2-00165eca9618}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">01</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Studienbeginn</supertitle>
+    <title>Countdown zum Studium</title>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/campus/image/01-junge-vor-unscharfem-hintergrund/" type="jpg" title="Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben." alt="Studienbeginn: Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben." align="left" publication-date="" expires="" layout="large" is_empty="False" alt_local="Studienbeginn: Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben." title_local="Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben.">
+        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben.</bu>
+        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" link="http://www.photocase.de/fotos/207896">© &lt;&lt;bananarama&gt;&gt;/photocase.de</copyright>
+      </image>
+      <intertitle>
+        <b>Mai</b>
+      </intertitle>
+      <p>An vielen Hochschulen beginnt Anfang Mai die Bewerbungsphase, Schluss ist meist am 15. Juli. Bei privaten Hochschulen weichen die Fristen häufig davon ab.</p>
+      <p>Wer Medizin studieren will und das Abi nicht in diesem Jahr gemacht hat, muss sich bis zum 31. Mai bewerben.</p>
+      <intertitle>
+        <b>Juni</b>
+      </intertitle>
+      <p>Für mehr als die Hälfte aller Studiengänge muss man sich nicht bewerben, man schreibt sich einfach ein. Für alle anderen gilt: am besten schon jetzt die Unterlagen zusammensuchen. Bei manchen Hochschulen reicht es, ein Online-Formular auszufüllen, andere verlangen eine beglaubigte Kopie des Abi-Zeugnisses. Mancherorts gehören auch Motivationsschreiben oder Tests zur <a class="" href="http://www.zeit.de/studium/studienfuehrer-2015/bewerbung-zulassung-studenten-aufsatz-test-gespraech" target="_blank">Bewerbung</a>. Am besten, man schaut auf den Hochschul-Websites nach den genauen Anforderungen.</p>
+      <p>Weiß man, wo man studieren wird, kann man beim Studentenwerk fragen, ab wann man sich für einen Wohnheimplatz bewerben kann. Das geht oft schon vor der Einschreibung.</p>
+      <intertitle>
+        <b>Juli</b>
+      </intertitle>
+      <p>Die Bewerbungsfrist endet bei den meisten Hochschulen am 15. Juli!</p>
+      <intertitle>
+        <b>August</b>
+      </intertitle>
+      <p>Ab Anfang August verschicken die Hochschulen die ersten Zusagen – und auch Absagen. Dies ist allerdings oft noch kein endgültiges Nein: Viele Abiturienten bewerben sich für mehrere Fächer an mehreren Orten, wodurch Plätze unbesetzt bleiben. Die werden meist ab Mitte September in Nachrückverfahren vergeben.</p>
+      <p>Wer eine Zusage bekommen oder sich für einen frei zugänglichen Studiengang entschieden hat, kann sich einschreiben. Bei manchen Hochschulen muss man dazu persönlich erscheinen, bei anderen reicht es, wenn Unterlagen wie Krankenkassennachweis, Abi-Zeugnis und der Zahlungsbeleg des Semesterbeitrags innerhalb einer bestimmten Frist per Post oder Mail eingereicht werden.</p>
+      <p>Spätestens nach der Einschreibung sollte man sich um einen Wohnheimplatz kümmern, meist geht das per Online-Bewerbung beim Studentenwerk. Auch wer nicht ins Wohnheim will, sollte mit der Zimmersuche beginnen.</p>
+      <p>Nach der Einschreibung kann auch <a class="" href="http://www.zeit.de/thema/bafoeg" target="_blank">Bafög</a> beantragt werden. Geld gibt es erst ab dem Monat, in dem die Vorlesungen beginnen. Weil es meistens aber einige Wochen dauert, bis der Antrag bearbeitet ist, lohnt es sich, ihn früh einzureichen.</p>
+      <p>Wer sich für eine Natur- oder Ingenieurwissenschaft entschieden hat, kann sich jetzt für Vorkurse an der Hochschule anmelden. Die finden meist im September statt und helfen, das Wissen aufzufrischen, etwa in Mathe.</p>
+      <intertitle>
+        <b>September</b>
+      </intertitle>
+      <p>Sollte es mit dem Studienplatz noch nicht geklappt haben, bleibt das Losverfahren. Darüber vergeben manche Hochschulen ihre frei gebliebenen Studienplätze. Wie das funktioniert, schreiben sie in der Regel auf ihren Internetseiten. Meist muss man eine Mail oder Postkarte an die Hochschule schicken oder sich in ihrem Online-Portal registrieren. Am 1. September öffnet auch die Internetbörse freie-studienplaetze.de, auf der man übrig gebliebene Plätze findet.</p>
+      <p>An den meisten Fachhochschulen ist der offizielle Semesterstart am 1. September, aber die Vorlesungen beginnen meist erst Mitte September, manchmal auch erst Anfang Oktober.</p>
+      <p>Den Umzug planen. Wer in eine eigene Wohnung zieht oder eine WG gründet, sollte frühzeitig einen Internetanschluss beantragen, denn bis alles funktioniert, kann es dauern. Praktisch: bei der Post einen Nachsendeauftrag für die neue Adresse stellen.</p>
+      <intertitle>
+        <b>Oktober</b>
+      </intertitle>
+      <p>Der 1. Oktober ist der offizielle Semesterstart an den Unis, doch die Vorlesungen beginnen in der Regel erst Mitte des Monats. Dennoch ist es besser, schon vorher da zu sein, um den neuen Wohnsitz anzumelden, das Semesterticket zu besorgen und den Campus zu erkunden.</p>
+      <p>Den Stundenplan zusammenstellen: Auf den Websites vieler Hochschulen gibt es Beispiel- oder Musterstundenpläne. Bei Fragen helfen Fachstudienberater und Fachschaft weiter.</p>
+      <p>Fast überall findet eine Orientierungswoche oder Orientierungsphase für Erstsemester statt – nicht verpassen! Man bekommt Tipps zum Studium und lernt Leute und die Hochschule kennen.</p>
+      <p>
+        <em>Text: Redaktion</em>
+      </p>
+    </division>
+    <image-credits>Illustration: Andreas Klammt</image-credits>
+    <subtitle>Im Mai müssen sich die ersten bewerben, im Juli endet die Frist. Mit Glück hilft noch das Losverfahren im Oktober. Unser Countdown für Abiturienten</subtitle>
+  </body>
+  <teaser>
+    <title>Und bloß nicht zu spät Bafög beantragen</title>
+    <supertitle>Studienbeginn</supertitle>
+    <text>Im Mai müssen sich die Ersten bewerben, im Juli endet die Frist. Mit Glück hilft noch das Losverfahren im Oktober. Unser Countdown für Abiturienten</text>
+  </teaser>
+</article>
