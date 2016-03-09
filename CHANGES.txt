@@ -4,6 +4,8 @@ Change log for zeit.web
 2.64 (unreleased)
 -----------------
 
+- ZON-2914: Output site_name and admin tag regardless of shared cardstack
+
 - ZON-2496: EZIT Campus Centerpage with teasers
 
 - FIX: Fix main navigation on author pages
