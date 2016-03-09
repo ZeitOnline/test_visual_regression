@@ -4,25 +4,19 @@ Change log for zeit.web
 2.64 (unreleased)
 -----------------
 
-<<<<<<< 94cae1e87829267df1895d29b0c046719f2a9501
 - ZON-2496: EZIT Campus Centerpage with teasers
+
+- FIX: Fix main navigation on author pages
 
 - MAINT: Use image variants for author images and Spektrum feed
 
 - MAINT: Update ZEIT Campus navigation
-=======
-- Update ZEIT Campus navigation
->>>>>>> Update changes
 
 
 2.63 (2016-03-08)
 -----------------
 
-<<<<<<< 94cae1e87829267df1895d29b0c046719f2a9501
 - FIX: Polish article citation blocks for campus
-=======
-- Polish article citation blocks for campus
->>>>>>> Update changes
 
 - ZON-2391: Improve reply-toggle performance
 
