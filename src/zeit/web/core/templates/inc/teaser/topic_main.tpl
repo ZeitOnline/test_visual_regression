@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
+{%- extends "{0}:templates/inc/teaser/default.tpl".format(view.package) -%}
 
 {% set ref_cp = area.referenced_cp %}
 {% set topic_supertitle = area.supertitle or ref_cp.teaserSupertitle or ref_cp.supertitle %}
