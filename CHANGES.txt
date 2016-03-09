@@ -4,15 +4,19 @@ Change log for zeit.web
 2.64 (unreleased)
 -----------------
 
+- ZON-2496: EZIT Campus Centerpage with teasers
+
 - FIX: Fix main navigation on author pages
 
-- ZON-2496: EZIT Campus Centerpage with teasers
+- MAINT: Use image variants for author images and Spektrum feed
+
+- MAINT: Update ZEIT Campus navigation
 
 
 2.63 (2016-03-08)
 -----------------
 
-- Polish article citation blocks for campus
+- FIX: Polish article citation blocks for campus
 
 - ZON-2391: Improve reply-toggle performance
 
@@ -117,7 +121,6 @@ Change log for zeit.web
 - MAINT: Start cleaning and organizing testdata
 
 - FIX: Return an empty 200 response (instead of 501) for rendering interrupts
-       And add a feature toggle, disabling interrupts by default.
 
 - FIX: Fix AMP validation, IVW integration and meta robots tag
 

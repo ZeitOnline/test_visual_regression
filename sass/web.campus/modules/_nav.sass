@@ -184,9 +184,9 @@ $nav-color-border: #444
 			+order(2)
 		&__home
 			+order(3)
-		&__more
+		&__sales
 			+order(4)
-		&__services
+		&__more
 			+order(5)
 
 		// style für mobile menu item
@@ -194,8 +194,8 @@ $nav-color-border: #444
 		&__topics,
 		&__tools a,
 		&__home a,
-		&__more a,
-		&__services
+		&__sales a,
+		&__more
 			border-top: 1px solid $nav-color-border
 			padding: 0 $page-padding--small
 		&__tools-list li:first-child a
@@ -225,8 +225,8 @@ $nav-color-border: #444
 			+on-interaction
 				color: $nav-color-tools
 
-		// SERVICE
-		&__services-list
+		// MORE
+		&__more-list
 			+clearfix
 			display: none
 			&[aria-hidden="false"]
@@ -251,9 +251,6 @@ $nav-color-border: #444
 			width: remify(40px)
 			&--default
 				display: none
-
-		@at-root a#{&}__more-title
-			display: none
 
 
 +respond-min($break-tablet-min)
@@ -309,17 +306,17 @@ $nav-color-border: #444
 				display: inline-block
 				padding: remify(0 24px)
 
-		// SERVICE
-		&__services
+		// ABO + MORE
+		&__sales,
+		&__more
 			+flex(0 1 auto)
 			border-width: 0 1px 1px 0
 			border-style: solid
 			border-color: $nav-color-border
 
 		// dropdown menues
-		&__services-list,
-		&__login-list,
-		&__more-list
+		&__more-list,
+		&__login-list
 			background-color: $primary-color
 			border-color: $nav-color-border
 			border-style: solid
@@ -334,16 +331,15 @@ $nav-color-border: #444
 				border-top: 1px solid $nav-color-border
 				min-width: remify(150px)
 				padding: remify(0 16px)
-		&__login-list,
-		&__more-list
+		&__login-list
 			right: 0
 
-		&__services-title,
+		&__sales a
+			padding: remify(0 20px)
+
 		&__login-title,
 		&__more-title
 			padding: remify(0 16px)
-			+on-interaction
-				color: #fff // for the h2 elements
 			&[aria-expanded="true"]
 				.nav__dropdown:after
 					+transform(rotate(-90deg) scale(2))
@@ -409,13 +405,6 @@ $nav-color-border: #444
 					border-color: currentColor
 		&__tools-list
 			display: none
-
-		// MEHR
-		&__more
-			+flex(0 1 auto)
-			a, h2
-				border-left: 1px solid $nav-color-border
-				padding: remify(0 16px)
 
 		&__dropdown
 			@extend %nav-tablet-down-arrow
