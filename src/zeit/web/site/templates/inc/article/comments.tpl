@@ -110,7 +110,7 @@
 			{% endfor %}
 			{% elif comment.replies %}
 			{# XXX Needs styling. #}
-			<a href="{{view.content_url}}?cid={{comment.cid}}&comment_replies={{comment.cid}}#cid-{{comment.cid}}" data-url="{{view.content_url}}/comment_replies?cid={{comment.cid}}">{{comment.replies | length}} Antworten anzeigen</a>
+			<a href="{{view.content_url}}?cid={{comment.cid}}&comment_replies={{comment.cid}}#cid-{{comment.cid}}" data-url="{{view.content_url}}/comment_replies?cid={{comment.cid}}" class="js-load-comment-replies">{{comment.replies | length}} Antworten anzeigen</a>
 			{% endif %}
 		{% endfor %}
 	</div>

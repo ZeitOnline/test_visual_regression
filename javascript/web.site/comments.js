@@ -441,6 +441,23 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             .append( overlayHTML );
     },
 
+    loadReplies = function( e ) {
+        var $wrapped = $( this ),
+            url = $wrapped.data( 'url' );
+
+        e.preventDefault();
+
+        // TODO: on error/timeout visit the link
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function( response ) {
+                $wrapped.replaceWith( response );
+            }
+        });
+
+    },
+
     showReplies = function( e ) {
         var $wrapped = $( this ),
             selector = '#' + $wrapped.data( 'undo' ),
@@ -566,6 +583,8 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $commentsBody.on( 'click', '.js-promote-comment', promoteComment );
         $commentsBody.on( 'click', '.js-jump-to-comment', jumpToComment );
         $comments.on( inputEvent, '.js-required', enableForm );
+
+        $commentsBody.on( 'click', '.js-load-comment-replies', loadReplies );
     };
 
     return {
