@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2496: EZIT Campus Centerpage with teasers
 
+- MAINT: Use image variants for author images and Spektrum feed
+
 
 2.63 (2016-03-08)
 -----------------
@@ -69,8 +71,6 @@ Change log for zeit.web
 - FIX: Display proper error message to blocked users
 
 - ZON-2808: Remove contact address from error message for blocked users
-
-- MAINT: Use image variants for author images and Spektrum feed
 
 - MAINT: Introduce `request.user` object, created once per request
 

@@ -19,6 +19,5 @@
   <variant name="cinema" display_name="Leinwand (7:3)" aspect_ratio="7:3"/>
   <variant name="background" display_name="Hintergrund (7:3)" aspect_ratio="7:3"/>
   <variant name="panorama" display_name="Panorama (7:2)" aspect_ratio="7:2"/>
-  <variant name="rss-spektrum-flavoured" aspect_ratio="16:9" fallback_size="220x124" available="zeit.web.core.interfaces.IInternalUse"/>
   <variant name="original" display_name="Original" aspect_ratio="original"/>
 </variants>
