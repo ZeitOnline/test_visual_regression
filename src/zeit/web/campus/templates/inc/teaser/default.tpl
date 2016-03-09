@@ -1,3 +1,5 @@
+{% import 'zeit.web.campus:templates/macros/centerpage_macro.tpl' as cp %}
+
 <article class="{% block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}{% if module.visible_mobile == False %} mobile-hidden{% endif %}"
     data-unique-id="{{ teaser.uniqueId }}"
     {% block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
@@ -46,11 +48,9 @@
                 {% endif %}
             {% endblock teaser_byline %}
             {% block teaser_datetime %}
-                {# disable for now, til macro is ported 
-					{% if not view.is_advertorial %}
+                {% if not view.is_advertorial %}
                     {{ cp.include_teaser_datetime(teaser, self.layout(), area.kind) }}
-	                {% endif %}
-				#}
+                {% endif %}
             {% endblock teaser_datetime %}
             {% block teaser_commentcount %}
                 {% set comments = view.comment_counts[teaser.uniqueId] %}
