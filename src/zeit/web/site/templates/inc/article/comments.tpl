@@ -104,9 +104,14 @@
 
 			{% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
 
+			{% if view.show_replies(comment) %}
 			{% for comment in comment.replies %}
 				{% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
 			{% endfor %}
+			{% elif comment.replies %}
+			{# XXX Needs styling. #}
+			<a href="{{view.content_url}}?cid={{comment.cid}}&comment_replies={{comment.cid}}#cid-{{comment.cid}}" data-url="{{view.content_url}}/comment_replies?cid={{comment.cid}}">{{comment.replies | length}} Antworten anzeigen</a>
+			{% endif %}
 		{% endfor %}
 	</div>
 

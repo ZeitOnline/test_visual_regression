@@ -132,7 +132,7 @@ def test_comment_filter_works_as_expected(testbrowser):
 
 
 def test_comment_in_reply_to_shows_origin(testbrowser):
-    browser = testbrowser('/zeit-online/article/01')
+    browser = testbrowser('/zeit-online/article/01?comment_replies=2968470')
     answers = browser.cssselect('.comment--indented')
     origins = browser.cssselect('.comment__origin')
     link = browser.cssselect('#cid-2968920 .comment__origin')[0]
@@ -200,10 +200,11 @@ def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
 def test_comment_reply_threads_wraps_on_load_and_toggles_on_click(
         selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/zeit-online/article/02' % testserver.url)
+    driver.get(
+        '%s/zeit-online/article/02?comment_replies=5122059' % testserver.url)
 
     wrapped_threads = driver.find_elements_by_css_selector('.comment--wrapped')
-    assert len(wrapped_threads) == 3
+    assert len(wrapped_threads) == 1
 
     hidden_reply = driver.find_element_by_id('cid-5122767')
 
@@ -219,7 +220,7 @@ def test_comment_reply_threads_wraps_on_load_and_toggles_on_click(
     assert comment_count_overlay.text == '+ 2'
 
     wrapped_threads[0].click()
-    assert len(driver.find_elements_by_css_selector('.comment--wrapped')) == 2
+    assert len(driver.find_elements_by_css_selector('.comment--wrapped')) == 0
     assert hidden_reply.is_displayed()
 
     toggle = driver.find_element_by_id('hide-replies-cid-5122059')
@@ -238,7 +239,8 @@ def test_comment_reply_thread_must_not_wrap_if_deeplinked(
     driver = selenium_driver
     # Force page load even if another test has left the browser on _this_ page.
     driver.get('/zeit-online/slenderized-index')
-    driver.get('%s/zeit-online/article/02#cid-5122767' % testserver.url)
+    driver.get(
+        '%s/zeit-online/article/02?cid=5122767#cid-5122767' % testserver.url)
     assert driver.find_element_by_id('cid-5122767').is_displayed()
 
 
