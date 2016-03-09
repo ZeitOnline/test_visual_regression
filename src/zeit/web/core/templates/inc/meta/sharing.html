@@ -1,20 +1,22 @@
-	<meta name="twitter:card" content="{{ view.twitter_card_type }}">
-	<meta name="twitter:site" content="@zeitonline">
-	<meta name="twitter:creator" content="{% block twitter_creator %}@zeitonline{% endblock %}">
-	<meta name="twitter:title" content="{{ view.social_pagetitle }}">
-	<meta name="twitter:description" content="{{ view.social_description }}">
-	<meta property="og:site_name" content="{% block og_site_name %}ZEIT ONLINE{% endblock %}">
-	<meta property="fb:admins" content="595098294">
-	<meta property="og:type" content="article">
-	<meta property="og:title" content="{{ view.social_pagetitle }}">
-	<meta property="og:description" content="{{ view.social_description }}">
-	<meta property="og:url" content="{{ view.og_url }}">
-{% set image = get_variant(view.sharing_image, 'wide') if view.sharing_image else None %}
-{% if image %}
-	{%- set source = request.image_host + image.path + '__1300x731' %}
-	<meta property="og:image" content="{{ source }}">
-	<meta property="og:image:width" content="1300">
-	<meta property="og:image:height" content="731">
-	<meta name="twitter:image" content="{{ source }}">
-	<link itemprop="primaryImageOfPage" rel="image_src" href="{{ source }}">
+    <meta property="og:site_name" content="{% block og_site_name %}ZEIT ONLINE{% endblock %}">
+    <meta property="fb:admins" content="595098294">
+{% if not view.shared_cardstack_id %}
+    {# We are receiving the sharing metadata from the cards backend #}
+    <meta name="twitter:card" content="{{ view.twitter_card_type }}">
+    <meta name="twitter:site" content="@zeitonline">
+    <meta name="twitter:creator" content="{% block twitter_creator %}@zeitonline{% endblock %}">
+    <meta name="twitter:title" content="{{ view.social_pagetitle }}">
+    <meta name="twitter:description" content="{{ view.social_description }}">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{ view.social_pagetitle }}">
+    <meta property="og:description" content="{{ view.social_description }}">
+    <meta property="og:url" content="{{ view.og_url }}">
+{% require image = get_variant(view.sharing_image, 'wide') %}
+    {%- set source = request.image_host + image.path + '__1300x731' -%}
+    <meta property="og:image" content="{{ source }}">
+    <meta property="og:image:width" content="1300">
+    <meta property="og:image:height" content="731">
+    <meta name="twitter:image" content="{{ source }}">
+    <link itemprop="primaryImageOfPage" rel="image_src" href="{{ source }}">
+{% endrequire %}
 {% endif %}
