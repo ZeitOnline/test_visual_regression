@@ -4,7 +4,7 @@ Change log for zeit.web
 2.64 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2728: Assign `rel` attribute to article tags
 
 
 2.63 (2016-03-08)
