@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags>
+      <tag url_value="mailand" uuid="dc675d37-ebf7-4edd-84e4-b7a4ad8408d9" score="1" type="Location">Mailand</tag>
+      <tag url_value="claudio-abbado" uuid="ec31fbce-ddf6-43e4-baa2-22975e3f16ad" score="8" type="Person">Claudio Abbado</tag>
+      <tag url_value="johann-sebastian-bach" uuid="d022420f-cab4-48ae-8fc0-e0362066622c" score="5" type="Person">Johann Sebastian Bach</tag>
+      <tag url_value="oper" uuid="749dab40-072f-4ace-a9e9-cb76c8c8e0d8" score="4" type="free">Oper</tag>
+      <tag url_value="opernhaus" uuid="6b35fc6a-6ec5-49bb-a4c7-101770ced015" score="4" type="free">Opernhaus</tag>
+      <tag url_value="italien" uuid="fb4f1490-b187-4073-a51f-02bf101a354d" score="3" type="Location">Italien</tag>
+    </rankedTags>
+    <author href="http://xml.zeit.de/autoren/S/Julia_Spinola/index" publication-date="" expires="">
+      <display_name>Julia Spinola</display_name>
+    </author>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/kultur/musik/2015-12/kurt-masur-nachruf" year="2015" issue="51" ressort="Kultur" contenttype="article" publication-date="" expires="" author="Corina Kolbe"></reference>
+    </references>
+    <image base-id="http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt/" type="jpg" align="left" publication-date="" expires="">
+      <bu>Riccardo Chailly im Konzert, 2012 im Vatikan</bu>
+      <copyright>© Filippo Monteforte/AFP/Getty Images</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">28409905</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Julia Spinola</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Kultur Musik</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-02-11T17:27:55.199470+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-12-17T01:00:11.963842+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-02-11T17:28:11.437738+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-02-11T17:28:11.237090+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-12-22T21:39:42.596697+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-02-11T17:28:01.255066+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">03.12.2015</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEI-2015-49-Riccardo-Chailly</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">artikel.default</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">Riccardo Chailly</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-12-22T21:39:35.169909+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.weihser</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">Riccardo Chailly</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">60</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/2015/49/Riccardo-Chailly</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2015-12-03T06:00:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">3ef4cfc8c6664035b7596ca87eb4c294</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2015-12-17T01:00:08+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Kultur</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">Feuilleton</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEI-2015-49</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Riccardo Chailly hat seinen Dienst als Musikdirektor der Scala angetreten. Julia Spinola hat ihn dort getroffen (raw)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Musik</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">8299</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:cc2e7fc9-26c9-45ea-b49c-6616ee835e8e}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">49</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Menschen müssen träumen dürfen</title>
+    <subtitle>Selbst die Saisoneröffnung der Mailänder Scala steht unter dem Zeichen des Terrors. Eine Begegnung mit Riccardo Chailly, dem neuen Musikdirektor von Italiens wichtigstem Opernhaus</subtitle>
+    <byline>von Julia Spinola</byline>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt/" type="jpg" align="left" publication-date="" expires="" layout="large" is_empty="False" alt_local="Kultur, Riccardo Chailly, Mailand, Claudio Abbado, Johann Sebastian Bach, Oper, Opernhaus, Italien" title_local="Riccardo Chailly: Menschen müssen träumen dürfen" title="Riccardo Chailly: Menschen müssen träumen dürfen" alt="Kultur, Riccardo Chailly, Mailand, Claudio Abbado, Johann Sebastian Bach, Oper, Opernhaus, Italien">
+        <bu>Riccardo Chailly im Konzert, 2012 im Vatikan</bu>
+        <copyright>© Filippo Monteforte/AFP/Getty Images</copyright>
+      </image>
+      <p>
+        Mailand in der Abendröte: Touristen posieren auf der Piazza del Duomo, vor
+      den Kirchentoren verkauft eine Chinesin dampfende Maroni, und in den Bars biegen sich zur
+      Stunde des Aperitivo die Tresen unter Etageren mit Oliven und Tramezzini. Aber das Idyll
+      trügt. Schwer bewaffnete Polizisten patrouillieren über den Platz und durch die Galleria
+      Vittorio Emanuele. Auch vor dem Teatro alla Scala steht jetzt bereits ein
+      Polizei-Mannschaftswagen. Eine Anti-Terror-Maßnahme? Oder bloß ein Vorbote des traditionellen
+      Großaufgebots, das jährlich am 7. Dezember die festliche
+        <em>inaugurazione,</em>
+        die einem
+      Staatsakt gleichende Saisoneröffnung an Italiens wichtigstem Opernhaus, absichert? Die Piazza
+      della Scala pflegt sich dann selber in eine Kulisse zu verwandeln. Die trillerpfeifenden
+      Demonstranten hinter den Absperrungen gehören ebenso zum Ritual der sich selbst inszenierenden
+      Opernnation wie die Luxusroben, das anschließende Galadiner, die Ehrengarde und die elegant zu
+      Pferde auftretenden Polizisten. Doch seit den <a class="" href="http://www.zeit.de/thema/anschlaege-in-paris" target="_blank">Anschlägen in Paris</a> ist es vorbei mit der
+      unschuldigen Theatralik dieses Ereignisses.
+      </p>
+      <p>
+        "Wir leben in grauenvollen Zeiten", sagt <a class="" href="http://www.zeit.de/2013/49/riccardo-chailly-cd-brahms-symphonien" target="_blank">Riccardo Chailly</a> nach einer Probe zu <a class="" href="http://www.zeit.de/2013/41/oper-komponist-giuseppe-verdi" target="_blank">Verdis</a>
+<em>Giovanna d’Arco</em>
+        im Dirigentenzimmer der Scala. "Ich war entsetzt, als ich von den Attentaten in Paris hörte, dafür gibt es überhaupt keine Worte." Worin soll jetzt die Aufgabe der Oper bestehen? "In Zeiten wie diesen muss man an einem Opernhaus auch demonstrieren, dass Musik und generell die Künste etwas sind, was einem hilft, den Schrecken zu kompensieren durch Positivität. Die Oper kann den Menschen das Gefühl geben, dass es noch etwas anderes gibt, das größer ist als der Terror. Eine andere Perspektive."
+      </p>
+    </division>
+    <caption>Riccardo Chailly, neuer Leiter der Scala und zuvor Chefdirigent des Gewandhausorchesters Leipzig</caption>
+    <image-credits>Foto [M]: Jan Woitas/epa/dpa</image-credits>
+    <supertitle>Riccardo Chailly</supertitle>
+  </body>
+  <teaser>
+    <title>Die Oper ist ein großer Kompromiss</title>
+    <text>Riccardo Chailly hat Leipzig verlassen und seinen Dienst als Musikdirektor der Scala angetreten. Dort dirigierte schon sein Vater. Eine Begegnung in Mailand</text>
+    <supertitle>Riccardo Chailly</supertitle>
+  </teaser>
+</article>
