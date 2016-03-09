@@ -13,7 +13,7 @@ import zeit.web.core.interfaces
 
 def test_author_page_contains_main_navigation(testbrowser):
     browser = testbrowser('/autoren/j_random')
-    header = browser.cssselect('header.header')
+    header = browser.cssselect('header.header')[0]
     assert header.cssselect('.main_nav')
     assert header.cssselect('.main_nav__ressorts')
 
