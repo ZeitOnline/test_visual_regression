@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2496: EZIT Campus Centerpage with teasers
 
+- MAINT: Use image variants for author images and Spektrum feed
+
 
 2.63 (2016-03-08)
 -----------------
@@ -115,7 +117,6 @@ Change log for zeit.web
 - MAINT: Start cleaning and organizing testdata
 
 - FIX: Return an empty 200 response (instead of 501) for rendering interrupts
-       And add a feature toggle, disabling interrupts by default.
 
 - FIX: Fix AMP validation, IVW integration and meta robots tag
 
