@@ -1,3 +1,5 @@
-<blockquote class="quote {{ 'article__item' | with_mods('wide' if block.layout == 'wide' else None) }}"{% if block.url %} cite="{{ block.url }}"{% endif %}{% if block.attribution %} title="{{ block.attribution }}"{% endif %}>
-    {{ block.text }}
-</blockquote>
+{% extends "zeit.web.core:templates/inc/blocks/citation.html" %}
+
+{% block citation_class %}
+    {{- super() | with_mods(view.article_layout) -}}
+{% endblock %}

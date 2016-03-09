@@ -1,5 +1,37 @@
 <?xml version="1.0"?>
 <layouts>
+    <!-- ZCO only -->
+    <layout
+        id="zco-wide-small"
+        title="kleiner Teaser"
+        image_pattern="cinema"
+        areas="trio"
+        />
+    <layout
+        id="zco-wide-large"
+        title="großer Teaser"
+        image_pattern="cinema"
+        areas="duo"
+        />
+    <layout
+        id="zco-square"
+        title="quadratischer Teaser"
+        image_pattern="square"
+        areas="duo"
+        />
+    <layout
+        id="zco-lead-portrait"
+        title="Aufmacher hochkant"
+        image_pattern="portrait"
+        areas="solo"
+        />
+    <layout
+        id="zco-lead-cinema"
+        title="Aufmacher quer"
+        image_pattern="cinema"
+        areas="solo"
+        />
+
     <!-- Teaser formats for new ZON-Centerpages -->
     <layout
         id="zon-large"

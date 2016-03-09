@@ -1,8 +1,16 @@
 Change log for zeit.web
 =======================
 
-2.63 (unreleased)
+2.64 (unreleased)
 -----------------
+
+- ZON-2496: EZIT Campus Centerpage with teasers
+
+
+2.63 (2016-03-08)
+-----------------
+
+- Polish article citation blocks for campus
 
 - ZON-2391: Improve reply-toggle performance
 
