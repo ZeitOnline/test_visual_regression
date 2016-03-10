@@ -3,6 +3,8 @@ import pytest
 
 import zeit.cms.interfaces
 
+import zeit.web.campus.view_article
+
 
 @pytest.mark.skipif(True,
                     reason="Waiting for ZON-2835: Article blocks #1616")
@@ -91,3 +93,27 @@ def test_article_citation_block_should_render_expected_structure(testbrowser):
     assert browser.cssselect('.quote__link')[0].get('href') == (
         'http://www.imdb.com/title/tt0110912/quotes?item=qt0447099')
     # 'imdb.com' in browser.cssselect('.quote')[0].attrib['cite']
+
+
+def test_article_should_render_topicpagelink(testbrowser):
+    browser = testbrowser('/campus/article/common')
+    tplink = browser.cssselect('.article-header__topicpagelink')[0]
+    assert tplink.text == 'Science'
+    assert tplink.get('href') == 'http://localhost/thema/test'
+
+
+def test_article_should_have_topicpagelink_fallback_label(
+        monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.campus.article.TopicpageLink, 'label', '')
+    browser = testbrowser('/campus/article/common')
+    tplink = browser.cssselect('.article-header__topicpagelink')[0]
+    assert tplink.text == 'Test-Thema'
+
+
+def test_article_should_not_render_missing_topicpagelink(
+        monkeypatch, testbrowser):
+    monkeypatch.setattr(
+        zeit.web.campus.view_article.Article, 'topicpagelink_label', '')
+    browser = testbrowser('/campus/article/common')
+    tplink = browser.cssselect('.article-header__topicpagelink')
+    assert len(tplink) == 0
