@@ -3,6 +3,7 @@
 
 {% for block in page %}
     {% set type = block | block_type %}
+    {{ block.layout }}
     {% if not (contents_printed or view.is_all_pages_view) and type in ['paragraph'] %}
         {% block table_of_contents %}
             {% include [
@@ -17,5 +18,3 @@
         "{0}:templates/inc/blocks/{1}.html".format(view.package, type),
         "zeit.web.core:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
 {% endfor %}
-
-{% include ["zeit.web.core:templates/inc/blocks/mailbox.html"] ignore missing %}

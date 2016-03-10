@@ -93,7 +93,7 @@
         haben, wie sie ablaufen, wie man sich bewirbt und vieles andere. Über Studiengänge kann man sich vorab auch auf den Websites der Hochschulen informieren. Meist sind
         die einzelnen Studiengänge unter dem Stichwort "Studienangebot" aufgelistet.
       </p>
-      <mailbox supertitle="Das steht zur Debatte" title="Schafft endlich das Examen ab!" body="Die Jury hat die Gewinner des diesjährigen Grimme-Preises bekannt gegeben. Unter anderem wurden die Serie Deutschland 83 und das Internetformat Marhaba geehrt."/>
+      <infobox layout="debate" is_empty="False" href="http://xml.zeit.de/campus/article/debate-infobox" publication-date="" expires=""/>
       <p>
         Ein Jahr lang hat Herbst, der Landschaftsarchitekt, am &quot;Apfelhain&quot; gearbeitet, einem
         modernen Grabfeld mit 89 Urnen- und elf Sarggräbern unter sechs Apfelbäumen. &quot;Baumbezogene

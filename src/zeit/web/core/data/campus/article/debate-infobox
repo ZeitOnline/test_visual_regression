@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="artbox" label="info">
+  <supertitle py:pytype="str">10 Saurier sind super</supertitle>
+  <block>
+    <title py:pytype="str">Zeitalter</title>
+    <text>
+      <p>Die <a href="01">Saurier</a> entwickelten sich nach neuesten Erkenntnissen <strong>vor etwa 243 Millionen Jahren</strong> im Mesozoikum (Erdmittelalter). Es wird in drei Perioden unterteilt: die Trias, der Jura und die Kreide. Die Trias, in der fast die gesamte Landmasse im <strong>Superkontinent Pangea</strong> zusammengefasst war, bezeichnet die Zeit von 251 Millionen bis 200 Millionen Jahre. Auf die Trias folgte der Jura von 200 bis 145  Millionen Jahren, in dem der Urkontinent auseinanderbrach und sich langsam in die heutigen Kontinente aufteilte.</p>
+      <p>Anschließend folgte die Zeit der <strong>Kreide vor 145 bis 65  Millionen Jahren</strong>. Mit dem Ende der Kreide wurden fast alle Saurier ausgerottet. Da man die Vögel als Nachfahren einer Gruppe der Saurier ansieht, sind sie jedoch streng genommen <strong>nicht vollständig ausgestorben</strong>.</p>
+      <p>Von den Reptilien, die damals auf der Erde vorkamen, überlebten zum Beispiel Krokodile, Schlangen, Eidechsen und die Schildkröten.</p>
+      <p>Die <strong>Pflanzenwelt</strong> veränderte sich während dieser Zeit dramatisch. Von einstigen Landschaften mit Nadelwäldern und Ginkobäumen wandelte sich das Bild in der Kreidezeit zu Laubwäldern und Buschlandschaften. Dafür verantwortlich war die Entwicklung der Blütenpflanzen in der frühen Kreidezeit.</p>
+    </text>
+  </block>
+  <block>
+    <title py:pytype="str">Systematik der Saurischia Theropoden und Sauropoden</title>
+    <text>
+      <p>Zu den Sauriern zählt man die <strong><em>Saurischia</em> (Echsenbeckendinosaurier)</strong>, zu denen die meist fleischfressenden <strong><em>Theropoden</em></strong> und die zumeist pflanzenfressenden <strong><em>Sauropoden</em></strong> gehören, sowie die <strong><em>Ornithischia</em> (Vogelbeckendinosaurier)</strong>, deren Gruppe hauptsächlich Pflanzenfresser umfasst. Die meist in Büchern abgebildeten Meeressaurier und Flugsaurier gehören systematisch nicht zu den Dinosauriern.</p>
+    </text>
+  </block>
+  <block>
+    <title py:pytype="str">Erscheinungsbild</title>
+    <text>
+      <p>Über das Aussehen der Saurier sind die Wissenschaftler sich größtenteils einig. Die Rekonstruktionen aus versteinerten Knochen und Hautfetzen lassen ein ziemlich genaues Bild der damaligen Bewohner entstehen. Allerdings gibt es <strong>keine Sicherheit über mögliche Haare, Federn und Farbe</strong>. Neueste Erkenntnisse lassen vermuten, dass viele Arten Borsten oder Federn besaßen, die teilweise interessante Färbungen aufwiesen. Pigmentzellen wurden in Borsten- und Federversteinerungen gefunden.</p>
+    </text>
+  </block>
+  <block>
+    <title py:pytype="str">Verhalten</title>
+    <text>
+      <p>Über die Physiologie, das Verhalten und die Entwicklung kann meist nur spekuliert werden. Hier müssen sich die Wissenschaftler häufig auf Vergleiche mit heutigen Tierarten verlassen. Eine strittige Frage war, ob die Saurier <strong>wechselwarme Tiere</strong> waren oder nicht. Nach Vergleichen der Anatomie und der aufrechten Körperhaltung der Saurier, die den der warmblütigen Säugetiere und Vögel entspricht, gehen die meisten Forscher davon aus, dass die Saurier aktiv ihre Körpertemperatur über der Umgebungstemperatur halten konnten. Ihre aufrechte Haltung sei ein Indiz für eine Anpassung an dauerhaftes Laufen, was nur mit einer erhöhten Stoffwechselrate zu bewerkstelligen gewesen wäre.</p>
+      <p>Ob die Saurier <strong>Herdentiere</strong> waren, lässt sich ebenfalls nicht eindeutig feststellen. Wissenschaftler vermuten, dass die großen Räuber eher Einzelgänger waren, Pflanzenfresser sich lieber in größeren Gruppen aufhielten, um sich gegenseitig Schutz zu bieten. Es gibt aber auch Hinweise, dass kleinere Raubsaurier in Gruppen gejagt haben könnten.</p>
+      <p><strong>Brutpflege</strong> betrieben aber offenbar die wenigsten der Urechsen. Paläontologen entdeckten zwar Nester mit versteinerten Eiern, fanden aber keine Belege dafür, dass sie von den adulten Tieren betreut wurden.</p>
+    </text>
+  </block>
+  <block>
+    <title py:pytype="str">Aussterben</title>
+    <text>
+      <p>Zum <a href="#top">Aussterben</a> der Saurier gibt es <strong>mehrere Theorien</strong>. Eine geht davon aus, dass ein großer <strong>Asteroid</strong> die Erde traf und die Folgen das Schicksal der Urzeittiere besiegelten. Die Tiere, die nicht sofort starben, fielen der Veränderung des Klimas zum Opfer.</p>
+      <p>Einer anderen Theorie zufolge hätte der Ausbruch mehrerer <strong>Vulkane</strong> das weltweite Klima so stark verändert, dass die Saurier nicht mehr überlebensfähig waren. Durch die Verdunkelung der Atmosphäre durch Staub und Asche könnte auch die Nahrung der Pflanzenfresser verschwunden sein. Die Fleischfresser verhungerten ohne ihre Beutetiere.</p>
+      <p>Eine weitere Theorie besagt, dass eine <strong>weltweite Epidemie</strong> die Saurier auslöschte. Diese These ist allerdings stark umstritten, da ein solches Virus für praktisch alle Arten fatale Folgen hätte haben müssen.</p>
+      <p>Auch die <strong>Säugetiere</strong> könnten zum Aussterben der Saurier beigetragen haben, indem sie in Konkurrenz um die Nahrung traten und somit die ökologische Nische der Saurier besetzten. Das vermehrte Auftreten von Blütenpflanzen könnte die Nahrung verknappt haben. Daher könnten die Saurier trotz des üppigen Nahrungsangebots verhungert sein.</p>
+      <p>Die letzten drei Theorien sind allerdings als einzige Ursache sehr umstritten. Mehrere Gründe könnten auch zusammen verantwortlich sein. Dies ist anzunehmen, denn die Saurier hatten bereits die gesamte Erde und viele verschiedene Lebensräume besiedelt und sich angepasst.</p>
+    </text>
+  </block>
+  <block>
+    <title py:pytype="str">Rekorde</title>
+    <text>
+      <p>Die Urechsen haben erstaunliche Eigenschaften besessen. Der größte unter ihnen, der <em>Argentinosaurus</em>, war ca. 45 Meter lang und wog bis zu 80 Tonnen.</p>
+      <p>Die Schnellsten, zu denen auch der <em>Ornithomimus</em> gehört, erreichten möglicherweise Geschwindigkeiten von mehr als 60 Stundenkilometern.</p>
+      <p>Die längsten Krallen hatte der <em>Deinocheirus</em> mit etwa 30 Zentimetern. Von ihm gibt es allerdings kein komplettes Skelett. Nur die vorderen Extremitäten sind als Fossilien gefunden worden.</p>
+      <p>Das größte bekannte Saurier-Ei gehört der Spezies <em>Hypselosaurus</em>. Es war bis zu 30 Zentimeter groß.</p>
+      <p>Einer der besten gepanzerten Saurier war der berühmte <i>Triceratops</i>, ein etwa neun Meter langer Vierbeiner mit einem Kopf, auf dem eine Knochenplatte und drei Hörner saßen.</p>
+    </text>
+  </block>
+</container>
