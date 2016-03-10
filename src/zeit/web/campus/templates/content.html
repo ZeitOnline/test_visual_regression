@@ -18,6 +18,14 @@
             {% endblock article_pagination %}
         </div>
         {% endblock article_body %}
+        {% block article_footer %}
+        <footer class="article-footer article__item">
+            {% block article_tags %}
+                {% include "zeit.web.core:templates/inc/article/tags.html" %}
+            {% endblock %}
+        </footer>
+        {% endblock %}
     </article>
     {% endblock content %}
+
 {% endblock main %}
