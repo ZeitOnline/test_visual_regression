@@ -1,6 +1,14 @@
 {% extends "zeit.web.core:templates/inc/article/table-of-contents.html" %}
+{% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
 
 {% block toc_link_top %}{% endblock toc_link_top %}
+
+{% block toc_svg_icon %}
+<span class="article-toc__toggle">
+    {{ lama.use_svg_icon('plus', 'article-toc__toggle-icon article-toc__toggle-icon--plus', request) }}
+    {{ lama.use_svg_icon('minus', 'article-toc__toggle-icon article-toc__toggle-icon--minus', request) }}
+</span>
+{% endblock %}
 
 {% block toc_item %}
     <strong>{{ '{0:02d}'.format(pagenr) }}</strong>
