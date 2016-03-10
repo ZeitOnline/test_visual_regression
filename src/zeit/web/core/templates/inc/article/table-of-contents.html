@@ -12,7 +12,7 @@
             {%- for pagenr in view.pagination.pager %}
 
                 {% if not pagenr -%}
-                <li class="article-toc__item">
+                <li class="article-toc__item article-toc__item--empty">
                     ⋮
                 </li>
                 {% else %}
