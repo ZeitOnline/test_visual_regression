@@ -22,8 +22,8 @@
             <a class="{{ blockname }}__link" href="{{ target_url }}">
                 <span class="{{ blockname }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
                 {%- if teaser.teaserSupertitle or teaser.supertitle -%}
-                <span class="visually-hidden">:</span>
-                {% endif %}
+                <span class="visually-hidden">: </span>
+                {% endif -%}
                 <h2 class="{{ '{}__title'.format(blockname) | with_mods(blockname_modifier) }}">{{ teaser.teaserTitle or teaser.title }}</h2>
             </a>
         </div>
