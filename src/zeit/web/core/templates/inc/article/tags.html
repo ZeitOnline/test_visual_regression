@@ -1,0 +1,19 @@
+{% if view.ranked_tags | length %}
+<nav class="article-tags">
+    <h4 class="article-tags__title">Schlagworte</h4>
+    <ul class="article-tags__list" itemprop="keywords">
+    {%- for tag in view.ranked_tags[:6] -%}
+        <li>
+        {%- if tag.url_value -%}
+            <a href="{{ request.route_url('home') }}thema/{{ tag.url_value }}" class="article-tags__link" rel="tag" data-id="articlebottom.article-tag.{{ loop.index }}..{{ tag.label | format_webtrekk }}">
+                {{- tag.label -}}
+            </a>
+        {%- else -%}
+            <span class="article-tags__link">{{ tag.label }}</span>
+        {%- endif -%}
+        {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
+        </li>
+    {%- endfor -%}
+    </ul>
+</nav>
+{% endif %}
