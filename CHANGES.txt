@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2489: Add Infobox to ZEIT Campus
 
+- ZON-2914: Output site_name and admin tag regardless of shared cardstack
+
 - ZON-2728: Assign `rel` attribute to article tags
 
 - ZON-2496: Introduce ZEIT Campus centerpage with teasers
