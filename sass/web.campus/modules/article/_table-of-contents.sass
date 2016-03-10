@@ -1,5 +1,13 @@
+%toc-beckett
+	@extend %font-beckett
+	color: $color-article-primary
+	font-size: remify(32px)
+	text-transform: uppercase
+
 .article-toc
+	$icon-size: 8px
 	display: block
+	margin-bottom: remify(32px)
 
 	&__container
 		font-size: em(14px)
@@ -16,13 +24,86 @@
 			width: remify(220px) // same like .article__item--marginalia
 
 	&__headline
-		@extend %font-beckett
+		@extend %toc-beckett
 		border-bottom: 3px solid $color-article-primary
-		color: $color-article-primary
+		cursor: pointer
 		display: inline-block
-		font-size: remify(32px)
 		margin: 0
 		padding-bottom: em(5px, 32px)
 		position: relative
-		text-transform: uppercase
+		+respond-min($break-tablet-min)
+			display: none
+		&::selection
+			background: transparent
+		&::-moz-selection // combining with line above won't work
+			background: transparent
+		& .article-toc__toggle-icon--minus
+			display: none
+		&--active .article-toc__toggle-icon--plus
+			display: none
+		&--active .article-toc__toggle-icon--minus
+			display: inline
 
+	&__toggle
+		$circle-size: $icon-size * 2
+		background: $color-article-primary
+		display: inline-block
+		position: absolute
+		border-radius: 5000em
+		width: remify($circle-size)
+		height: remify($circle-size)
+		line-height: $icon-size
+		right: remify(-20px)
+		text-align: center
+		top: remify(4px)
+
+	&__toggle-icon
+		color: $white
+		height: $icon-size
+		width: $icon-size
+
+	&__seperator
+		.js &
+			display: none
+			+respond-min($break-tablet-min)
+				display: block
+
+	&__list
+		list-style: none
+		margin: 0
+		padding: remify(20px) 0 0 0
+		+respond-min($break-tablet-min)
+			padding-top: 0
+
+	&__item
+		color: $color-article-primary
+		margin: 0 0 remify(20px) 0
+		min-height: remify(40px)
+		padding-left: remify(47px)
+		position: relative
+		strong
+			@extend %toc-beckett
+			left: 0
+			position: absolute
+			top: 0
+		span
+			display: block
+			&:first-letter
+				font-weight: 400
+				margin-left: -1.2em
+				margin-right: .2em
+		&:last-child
+			margin-bottom: 10px
+		&--current
+			font-weight: 700
+			&:first-letter
+				font-weight: 400
+		&--empty
+			margin: remify(-10px 0 10px)
+			padding-left: remify(10px)
+
+	&__onesie
+		border-bottom: 1px solid currentColor
+		font-size: remify(12px)
+		letter-spacing: em(1px, 12px)
+		text-transform: uppercase
