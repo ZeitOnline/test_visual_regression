@@ -6,7 +6,7 @@ Change log for zeit.web
 
 - ZON-2489: Add Infobox to ZEIT Campus
 
-- ZON-2496: EZIT Campus Centerpage with teasers
+- ZON-2496: Introduce ZEIT Campus centerpage with teasers
 
 - FIX: Fix main navigation on author pages
 
