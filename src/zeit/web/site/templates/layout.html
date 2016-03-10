@@ -71,11 +71,7 @@
 
     {%- include "zeit.web.core:templates/inc/inline_js/library.html" ignore missing -%}
     {%- include "zeit.web.core:templates/inc/meta/date.html" ignore missing -%}
-
-    {# We are receiving the sharing metadata from the cards backend. This is why they are not included here. #}
-    {% if not view.shared_cardstack_id %}
-        {%- include "zeit.web.site:templates/inc/meta/sharing.html" ignore missing -%}
-    {% endif %}
+    {%- include "zeit.web.site:templates/inc/meta/sharing.html" ignore missing -%}
 
     {# Modernizr -#}
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
