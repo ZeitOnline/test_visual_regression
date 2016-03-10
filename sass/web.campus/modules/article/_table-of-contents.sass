@@ -1,6 +1,5 @@
 %toc-beckett
 	@extend %font-beckett
-	color: $color-article-primary
 	font-size: remify(32px)
 	text-transform: uppercase
 
@@ -26,6 +25,7 @@
 	&__headline
 		@extend %toc-beckett
 		border-bottom: 3px solid $color-article-primary
+		color: $color-article-primary
 		cursor: pointer
 		display: inline-block
 		margin: 0
@@ -107,3 +107,26 @@
 		font-size: remify(12px)
 		letter-spacing: em(1px, 12px)
 		text-transform: uppercase
+
+// color theming for leserartikel
+// $color-article-primary <--> $color-community-primary
+.article--leserartikel .article-toc__headline
+	border-bottom: 3px solid $color-community-primary
+	color: $color-community-primary
+.article--leserartikel .article-toc__toggle
+	background: $color-community-primary
+.article--leserartikel .article-toc__item
+	color: $color-community-primary
+	a:link,
+	a:visited
+		color: $color-community-primary
+	a:hover,
+	a:active,
+	a:focus
+		color: $black
+.article--leserartikel .article-toc__onesie
+	color: $color-community-primary
+	&:hover,
+	&:active,
+	&:focus
+		color: $black
