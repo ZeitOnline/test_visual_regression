@@ -45,7 +45,7 @@
         {% endblock -%}
 
         <div class="article-header__info">
-        {% block article_topic_link -%}
+        {% block article_topicpagelink -%}
             {% if view.topicpagelink_label %}
             <a class="{{ 'article-header__topic-link' | with_mods(view.article_layout) }}" href="{{ view.topicpagelink.topicpage.uniqueId | create_url }}">{{ view.topicpagelink_label }}</a>
             {% endif %}
