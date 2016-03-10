@@ -12,7 +12,7 @@
 
 {% block toc_item %}
     <strong>{{ '{0:02d}'.format(pagenr) }}</strong>
-    {%- if view.pagination.pages_titles[pagenr - 1] %} — {{ view.pagination.pages_titles[pagenr - 1] }}
+    {%- if view.pagination.pages_titles[pagenr - 1] %}<span>— {{ view.pagination.pages_titles[pagenr - 1] }}</span>
     {%- endif %}
 {% endblock toc_item %}
 
