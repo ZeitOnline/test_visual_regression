@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
-import pytest
 
 import zeit.cms.interfaces
 
 import zeit.web.campus.view_article
 
 
-@pytest.mark.skipif(True,
-                    reason="Waiting for ZON-2835: Article blocks #1616")
 def test_article_should_render_full_view(testbrowser):
     browser = testbrowser('/campus/article/paginated/komplettansicht')
     article = zeit.cms.interfaces.ICMSContent(
@@ -117,3 +114,12 @@ def test_article_should_not_render_missing_topicpagelink(
     browser = testbrowser('/campus/article/common')
     tplink = browser.cssselect('.article-header__topicpagelink')
     assert len(tplink) == 0
+
+
+def test_article_tags_are_present(testbrowser):
+    browser = testbrowser('/campus/article/simple')
+    assert browser.cssselect('nav.article-tags')
+    tags = browser.cssselect('a.article-tags__link')
+    assert len(tags) == 6
+    for tag in tags:
+        assert tag.get('rel') == 'tag'

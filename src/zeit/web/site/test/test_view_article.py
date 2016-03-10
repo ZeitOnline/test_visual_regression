@@ -392,12 +392,15 @@ def test_article_sharing_links_should_be_url_encoded(testbrowser):
 
 
 def test_article_tags_are_present_and_limited(testbrowser):
-    browser = testbrowser('/zeit-online/article/01')
+    browser = testbrowser('/zeit-online/article/tags')
     tags = browser.cssselect('.article-tags')
+    links = tags[0].find_class('article-tags__link')
 
     assert len(tags) == 1
     assert len(tags[0].find_class('article-tags__title')) == 1
-    assert len(tags[0].find_class('article-tags__link')) == 6
+    assert len(links) == 6
+    for link in links:
+        assert link.get('rel') == 'tag'
 
 
 def test_infobox_in_article_is_shown(testbrowser):

@@ -1,0 +1,40 @@
+$article-tags-margin-right-small: 7px
+$article-tags-margin-right-large: 16px
+
+.article-tags
+	font-size: em(15px)
+	letter-spacing: $letter-spacing-s
+	margin: remify(0 0 20px)
+	&__title
+		margin: 0
+	&__list
+		+clearfix
+		list-style-type: none
+		margin: 0 remify(-$article-tags-margin-right-small) 0 0
+		padding: 0
+		li
+			float: left
+	&__link
+		color: #707070
+		+on-interaction
+			color: #000
+		background-color: $color-background
+		display: block
+		margin: remify(7px $article-tags-margin-right-small 0 0)
+		padding: remify(4px 12px 5px)
+
++respond-min($break-tablet-min)
+	.article-tags
+		+clearfix
+		font-size: em(14px)
+		margin-right: remify(-$article-tags-margin-right-large)
+		&__title
+			float: left
+			margin: remify(6px $article-tags-margin-right-large 0 0)
+		&__list
+			display: inline
+			margin: 0
+		&__link
+			background-color: transparent
+			margin: remify(6px $article-tags-margin-right-large 0 0)
+			padding: 0
