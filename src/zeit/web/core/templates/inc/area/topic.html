@@ -1,7 +1,5 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
-{% block before_module_list %}{% endblock %}
-
 {% block module_list %}
 	<section class="teaser-topic">
 		{% if area.values() | length > 0 %}
@@ -20,5 +18,3 @@
 		{% endif %}
 	</section>
 {% endblock %}
-
-{% block after_module_list %}{% endblock %}
