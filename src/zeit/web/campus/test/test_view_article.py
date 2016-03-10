@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-import pytest
 
 import zeit.cms.interfaces
 
 
-@pytest.mark.skipif(True,
-                    reason="Waiting for ZON-2835: Article blocks #1616")
 def test_article_should_render_full_view(testbrowser):
     browser = testbrowser('/campus/article/paginated/komplettansicht')
     article = zeit.cms.interfaces.ICMSContent(
@@ -97,3 +94,12 @@ def test_article_block_infobox_should_render_expected_structure(testbrowser):
     infobox = browser.cssselect('.infobox')[0]
     assert len(infobox.cssselect('*[role="tab"]')) == 6
     assert len(infobox.cssselect('*[role="tabpanel"]')) == 6
+
+
+def test_article_tags_are_present(testbrowser):
+    browser = testbrowser('/campus/article/simple')
+    assert browser.cssselect('nav.article-tags')
+    tags = browser.cssselect('a.article-tags__link')
+    assert len(tags) == 6
+    for tag in tags:
+        assert tag.get('rel') == 'tag'
