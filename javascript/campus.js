@@ -36,10 +36,14 @@ require([
     'velocity.ui',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.core/plugins/jquery.animatescroll',
-    'web.core/plugins/jquery.referrerCount'
+    'web.core/plugins/jquery.referrerCount',
+    'web.core/plugins/jquery.toggleOnClick'
 ], function( $, Velocity ) {
 
     $( window ).referrerCount();
     $( '.js-scroll' ).animateScroll();
+    $( '.article-toc' ).toggleOnClick({
+        toggleElement: '.article-toc__seperator'
+    });
 
 });
