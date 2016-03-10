@@ -81,7 +81,7 @@ def test_article_pagination(testbrowser):
     # assert '--current' in select('.article-toc__item')[0].get('class')
 
 
-def test_article_citation_block_should_render_expected_structure(testbrowser):
+def test_article_block_citation_should_render_expected_structure(testbrowser):
     browser = testbrowser('/campus/article/citation')
     assert len(browser.cssselect('.quote')) == 2
     assert browser.cssselect('.quote__text')[0].text.startswith(
@@ -90,4 +90,10 @@ def test_article_citation_block_should_render_expected_structure(testbrowser):
         'Ariane Jedlitschka, Kunstschaffende')
     assert browser.cssselect('.quote__link')[0].get('href') == (
         'http://www.imdb.com/title/tt0110912/quotes?item=qt0447099')
-    # 'imdb.com' in browser.cssselect('.quote')[0].attrib['cite']
+
+
+def test_article_block_infobox_should_render_expected_structure(testbrowser):
+    browser = testbrowser('/campus/article/infobox')
+    infobox = browser.cssselect('.infobox')[0]
+    assert len(infobox.cssselect('*[role="tab"]')) == 6
+    assert len(infobox.cssselect('*[role="tabpanel"]')) == 6
