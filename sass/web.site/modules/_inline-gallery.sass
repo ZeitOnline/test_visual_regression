@@ -119,16 +119,16 @@ html.js
     margin: 0
     position: absolute
     top: em(10px)
-    padding: remify(20px)
     +respond-min($break-phablet-min)
-        top: 50%
-        margin-top: -$gallery-button-radius
-        width: $gallery-button-radius * 2
         height: $gallery-button-radius * 2
-        +opacity(0)
-    .bx-arrow-icon
-        height: remify(30px)
-        width: remify(30px)
+        margin-top: -$gallery-button-radius
+        opacity: 0
+        padding: remify(20px)
+        top: 50%
+        width: $gallery-button-radius * 2
+        .bx-arrow-icon
+            height: remify(30px)
+            width: remify(30px)
 
 .bx-overlay-prev
     left: em(10px)
