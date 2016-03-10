@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-import pytest
 
 import zeit.cms.interfaces
 
 
-@pytest.mark.skipif(True,
-                    reason="Waiting for ZON-2835: Article blocks #1616")
 def test_article_should_render_full_view(testbrowser):
     browser = testbrowser('/campus/article/paginated/komplettansicht')
     article = zeit.cms.interfaces.ICMSContent(

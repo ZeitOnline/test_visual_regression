@@ -151,46 +151,6 @@ def test_get_teaser_image_should_render_fallback_for_broken_image(testserver):
         'default/teaser_image/teaser_image-zmo-large.jpg')
 
 
-def test_substitute_image_returns_empty_if_image_group_not_provided(
-        application):
-    assert not zeit.web.core.template.closest_substitute_image(
-        'no_img_group', 'no_img_pattern')
-
-
-def test_substitute_image_returns_pattern_on_exact_match(
-        application, image_group_factory):
-    image_group = image_group_factory(small=(150, 150))
-    assert zeit.web.core.template.closest_substitute_image(
-        image_group, 'small') == image_group.get('small')
-
-
-def test_substitute_image_returns_empty_if_pattern_is_invalid(
-        application, image_group_factory):
-    assert not zeit.web.core.template.closest_substitute_image(
-        image_group_factory(), 'moep')
-
-
-def test_substitute_image_returns_empty_on_candidate_shortage(
-        application, image_group_factory):
-    assert not zeit.web.core.template.closest_substitute_image(
-        image_group_factory(), 'zmo-small')
-    assert not zeit.web.core.template.closest_substitute_image(
-        image_group_factory(small=(90, 30)), 'zmo-square-small',
-        force_orientation=True)
-
-
-def test_substitute_image_returns_closest_match_within_image_group(
-        application, image_group_factory):
-    image_group = image_group_factory(foo=(148, 102), moo=(142, 142),
-                                      boo=(350, 500), meh=(90, 146))
-    # zmo-lead-upright: (320, 480)
-    # zmo-square-small: (50, 50)
-    assert 'boo' in zeit.web.core.template.closest_substitute_image(
-        image_group, 'zmo-lead-upright').uniqueId
-    assert 'moo' in zeit.web.core.template.closest_substitute_image(
-        image_group, 'zmo-square-small', force_orientation=True).uniqueId
-
-
 def test_jinja_env_registrator_registers_only_after_scanning(testserver):
     jinja = mock.Mock()
     jinja.foo = {}

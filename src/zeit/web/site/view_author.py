@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
     context=zeit.content.author.interfaces.IAuthor,
     renderer='templates/author.html')
 @pyramid.view.view_config(name='')
-class Author(zeit.web.core.view.Base):
+class Author(zeit.web.site.view.Base):
     """This view implements tabs that each have their own URL.
     To add a tab, subclass this, configure a different view name and provide
     a different ``tab_areas``.
@@ -30,11 +30,6 @@ class Author(zeit.web.core.view.Base):
     advertising_enabled = True
 
     current_tab_name = ''
-
-    # XXX Do we really *not want* to inherit from z.w.site.view.Base?
-    # I think we need to prove, that z.w.s.view.Base really _is_ a
-    # sufficient base for all views in z.w.s (RD, 2015-12-16)
-    pagetitle_suffix = zeit.web.site.view.Base.pagetitle_suffix
 
     @zeit.web.reify
     def pagetitle(self):
