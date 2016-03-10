@@ -46,8 +46,9 @@
 
         <div class="article-header__info">
         {% block article_topic_link -%}
-            {# XXX Has to be replaced after ZON-2838 #}
-            <a class="{{ 'article-header__topic-link' | with_mods(view.article_layout) }}" href="">!ZON-2838!</a>
+            {% if view.topicpagelink_label %}
+            <a class="{{ 'article-header__topic-link' | with_mods(view.article_layout) }}" href="{{ view.topicpagelink.topicpage.uniqueId | create_url }}">{{ view.topicpagelink_label }}</a>
+            {% endif %}
         {% endblock -%}
         {% block article_byline -%}
             {% set byline = view.context | get_byline('main') -%}

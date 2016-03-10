@@ -25,6 +25,23 @@ class Article(zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
         else:
             return 'default'
 
+    @zeit.web.reify
+    def topicpagelink(self):
+        try:
+            return zeit.campus.interfaces.ITopicpageLink(self.context)
+        except TypeError:
+            return None
+
+    @zeit.web.reify
+    def topicpagelink_label(self):
+        try:
+            tplink = zeit.campus.interfaces.ITopicpageLink(self.context)
+            if tplink.label:
+                return tplink.label
+            return getattr(tplink.topicpage, 'title', '')
+        except TypeError:
+            return ''
+
 
 @pyramid.view.view_config(name='seite',
                           path_info='.*seite-(.*)',
