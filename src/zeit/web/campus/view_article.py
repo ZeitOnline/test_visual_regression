@@ -35,12 +35,12 @@ class Article(zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
     @zeit.web.reify
     def topic_label(self):
         try:
-            tplink = zeit.campus.interfaces.ITopic(self.context)
-            if tplink.label:
-                return tplink.label
-            return getattr(tplink.page, 'title', '')
+            topic = zeit.campus.interfaces.ITopic(self.context)
         except TypeError:
             return ''
+        if topic.label:
+            return topic.label
+        return getattr(topic.page, 'title', '')
 
 
 @pyramid.view.view_config(name='seite',
