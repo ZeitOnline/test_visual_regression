@@ -15,14 +15,14 @@ def test_campus_adcontroller_values_return_values_on_hp(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline'),
         ('tma', '')]
-    view = view = zeit.web.campus.view_article.Article(
+    view = zeit.web.campus.view_centerpage.Centerpage(
         content, pyramid.testing.DummyRequest(path='/campus/index'))
     assert adcv == view.adcontroller_values
 
 
 def test_campus_adcontroller_values_return_values_on_cp(application):
     content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/campus/centerpage')
+        'http://xml.zeit.de/campus/centerpage/index')
     adcv = [
         ('$handle', 'centerpage'),
         ('level2', 'campus'),
@@ -31,14 +31,14 @@ def test_campus_adcontroller_values_return_values_on_cp(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline'),
         ('tma', '')]
-    view = view = zeit.web.campus.view_article.Article(
+    view = zeit.web.campus.view_centerpage.Centerpage(
         content, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
 
 
 def test_campus_adcontroller_values_return_values_on_article(application):
     content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/campus/article-simple')
+        'http://xml.zeit.de/campus/article/simple')
     adcv = [
         ('$handle', 'artikel'),
         ('level2', 'campus'),
