@@ -1,6 +1,3 @@
-# coding: utf8
-import re
-
 import pyramid.view
 
 import zeit.content.article.interfaces
