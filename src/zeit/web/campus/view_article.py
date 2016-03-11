@@ -25,6 +25,23 @@ class Article(zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
         else:
             return 'default'
 
+    @zeit.web.reify
+    def topic_page(self):
+        try:
+            return zeit.campus.interfaces.ITopic(self.context).page
+        except TypeError:
+            return None
+
+    @zeit.web.reify
+    def topic_label(self):
+        try:
+            topic = zeit.campus.interfaces.ITopic(self.context)
+        except TypeError:
+            return ''
+        if topic.label:
+            return topic.label
+        return getattr(topic.page, 'title', '')
+
 
 @pyramid.view.view_config(name='seite',
                           path_info='.*seite-(.*)',
