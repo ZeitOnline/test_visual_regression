@@ -4,10 +4,8 @@
 	text-transform: uppercase
 
 .article-toc
-	$icon-size: 8px
 	display: block
 	margin-bottom: remify(32px)
-
 	&__container
 		font-size: em(14px)
 		line-height: round-to-precision(20/14)
@@ -17,11 +15,9 @@
 		+respond-min($break-tablet-min)
 			position: relative
 			float: left
-			margin-bottom: remify(36px) // add more space due to absolute position of onesie
 			width: remify(205px) // same like .article__item--marginalia
 		+respond-min($break-desktop-min)
 			width: remify(220px) // same like .article__item--marginalia
-
 	&__headline
 		@extend %toc-beckett
 		border-bottom: 3px solid $color-article-primary
@@ -43,41 +39,28 @@
 			display: none
 		&--active .article-toc__toggle-icon--minus
 			display: inline
-
 	&__toggle
-		$circle-size: $icon-size * 2
-		background: $color-article-primary
-		display: inline-block
 		position: absolute
-		border-radius: 5000em
-		width: remify($circle-size)
-		height: remify($circle-size)
-		line-height: $icon-size
-		right: remify(-20px)
-		text-align: center
-		top: remify(4px)
-
+		right: -23px
+		top: -3px
 	&__toggle-icon
-		color: $white
-		height: $icon-size
-		width: $icon-size
-
+		$icon-size: 15px
+		height: remify($icon-size)
+		width: remify($icon-size)
 	&__seperator
 		.js &
 			display: none
 			+respond-min($break-tablet-min)
 				display: block
-
 	&__list
 		list-style: none
 		margin: 0
-		padding: remify(20px) 0 0 0
+		padding: remify(20px 0 0)
 		+respond-min($break-tablet-min)
 			padding-top: 0
-
 	&__item
 		color: $color-article-primary
-		margin: 0 0 remify(20px) 0
+		margin: remify(0 0 20px)
 		min-height: remify(40px)
 		padding-left: remify(47px)
 		position: relative
@@ -85,15 +68,12 @@
 			@extend %toc-beckett
 			left: 0
 			position: absolute
-			top: 0
 		span
 			display: block
 			&:first-letter
 				font-weight: 400
 				margin-left: -1.2em
 				margin-right: .2em
-		&:last-child
-			margin-bottom: 10px
 		&--current
 			font-weight: 700
 			&:first-letter
@@ -101,11 +81,10 @@
 		&--empty
 			margin: remify(-10px 0 10px)
 			padding-left: remify(10px)
-
 	&__onesie
 		border-bottom: 1px solid currentColor
 		font-size: remify(12px)
-		letter-spacing: em(1px, 12px)
+		letter-spacing: $letter-spacing-l
 		text-transform: uppercase
 
 // color theming for leserartikel
@@ -113,8 +92,6 @@
 .article--leserartikel .article-toc__headline
 	border-bottom: 3px solid $color-community-primary
 	color: $color-community-primary
-.article--leserartikel .article-toc__toggle
-	background: $color-community-primary
 .article--leserartikel .article-toc__item
 	color: $color-community-primary
 	a:link,
@@ -123,10 +100,10 @@
 	a:hover,
 	a:active,
 	a:focus
-		color: $black
+		color: $zco-charcoal
 .article--leserartikel .article-toc__onesie
 	color: $color-community-primary
 	&:hover,
 	&:active,
 	&:focus
-		color: $black
+		color: $zco-charcoal
