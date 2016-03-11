@@ -4,13 +4,19 @@ Change log for zeit.web
 2.64 (unreleased)
 -----------------
 
+- ZON-2489: Add Infobox to ZEIT Campus
+
 - ZON-2914: Output site_name and admin tag regardless of shared cardstack
 
 - ZON-2728: Assign `rel` attribute to article tags
 
 - ZON-2496: Introduce ZEIT Campus centerpage with teasers
 
+- ZON-2838: Add ZCO topicpage links
+
 - FIX: Fix main navigation on author pages
+
+- FIX: Fix gallery buttons on mobile
 
 - MAINT: Use image variants for author images and Spektrum feed
 

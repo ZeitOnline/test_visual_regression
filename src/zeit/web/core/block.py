@@ -315,6 +315,7 @@ class HeaderImageStandard(HeaderImage):
     pass
 
 
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IIntertitle)
 class Intertitle(Block):
 
