@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - FIX: Fix main navigation on author pages
 
+- FIX: Fix gallery buttons on mobile
+
 - MAINT: Use image variants for author images and Spektrum feed
 
 - MAINT: Update ZEIT Campus navigation
