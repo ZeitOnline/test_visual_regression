@@ -1,14 +1,23 @@
 .gallery
+	+unpadded
 	background-color: $grey--light
-	margin: $compact (-$page-padding--small)
+	margin-bottom: $compact
+	margin-top: $compact
 	padding: 0 0 $small
 	+respond-min($break-1)
-		margin: $big (-$page-padding)
-		padding: $compact $page-padding
+		margin-bottom: $big
+		margin-top: $big
+		padding-bottom: $compact
+		padding-top: $compact
 	+respond-min($break-3)
 		margin-left: -($page-padding+$gutter/2)
 		margin-right: -($page-padding+$gutter/2)
-		padding: $medium $big $large
+		padding-bottom: $medium
+		padding-top: $medium
+
+	&-container
+		margin: 0 auto
+		max-width: remify(880px)
 
 	&__media-container
 		overflow: hidden

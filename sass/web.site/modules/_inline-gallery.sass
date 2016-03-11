@@ -69,12 +69,12 @@ $break-gallery-min: em(576px)
 	line-height: remify($gallery-button-radius)
 	padding-right: .5em
 .bx-pager-item
-	+inline-block
+	display: inline
 	font-size: 0
 	line-height: 0
 .bx-pager-link
 	background: #000
-	+opacity(0.3)
+	opacity: 0.3
 	text-indent: -9999px
 	display: block
 	width: $gallery-dots-diameter
@@ -85,36 +85,35 @@ $break-gallery-min: em(576px)
 	&:hover,
 	&.active,
 	&:focus
-		+opacity(0.7)
+		opacity: 0.7
 
 .bx-prev,
 .bx-next
-	+inline-block
-	width: $gallery-button-radius
-	height: $gallery-button-radius
-	margin-left: 10px
-	border-radius: 50%
 	background-color: #000
-	color: $white
+	border-radius: 50%
 	border: none
+	color: $white
+	float: left
+	height: $gallery-button-radius
+	margin-left: remify(10px)
+	opacity: 0.3
 	padding: remify(10px)
-	+opacity(0.3)
+	width: $gallery-button-radius
 	&:hover,
 	&:active,
 	&:focus
 		color: $white
 	&:hover
-		+opacity(0.7)
+		opacity: 0.7
 	&:focus
 		outline: 0
 	&.disabled
-		+opacity(0.1)
-	.bx-arrow-icon
-		height: remify(15px)
-		width: remify(15px)
+		opacity: 0.1
 
 .bx-arrow-icon
 	display: block
+	height: remify(15px)
+	width: remify(15px)
 
 .bx-overlay-prev,
 .bx-overlay-next
@@ -122,16 +121,16 @@ $break-gallery-min: em(576px)
 	margin: 0
 	position: absolute
 	top: em(10px)
-	padding: remify(20px)
 	+respond-min($break-phablet-min)
-		top: 50%
-		margin-top: -$gallery-button-radius
-		width: $gallery-button-radius * 2
 		height: $gallery-button-radius * 2
-		+opacity(0)
-	.bx-arrow-icon
-		height: remify(30px)
-		width: remify(30px)
+		margin-top: -$gallery-button-radius
+		opacity: 0
+		padding: remify(20px)
+		top: 50%
+		width: $gallery-button-radius * 2
+		.bx-arrow-icon
+			height: remify(30px)
+			width: remify(30px)
 
 .bx-overlay-prev
 	left: em(10px)
@@ -143,7 +142,7 @@ $break-gallery-min: em(576px)
 	+on-interaction
 		.bx-overlay-prev,
 		.bx-overlay-next
-			+opacity(0.3)
+			opacity: 0.3
 
 .bx-zone-prev,
 .bx-zone-next
@@ -160,12 +159,12 @@ $break-gallery-min: em(576px)
 .bx-zone-prev
 	&:hover
 		.bx-overlay-prev
-			+opacity(0.7)
+			opacity: 0.7
 .bx-zone-next
 	right: 0
 	&:hover
 		.bx-overlay-next
-			+opacity(0.7)
+			opacity: 0.7
 
 // elements not in actual use
 .bx-controls-auto,
