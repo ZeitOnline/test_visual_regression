@@ -1,17 +1,22 @@
 .gallery
-    background-color: $zon-lighter-grey
-    margin: $compact (-$page-padding)
-    padding: 0 0 $small
-    +respond-min($break-tablet-min)
-        margin-top: $big
-        margin-bottom: $big
-        padding: $page-padding
-    +respond-min($break-desktop-min)
-        padding: $medium $big $big
+	background-color: $zon-lighter-grey
+	margin: remify(28px) (-$page-padding)
+	padding: remify(0 0 20px)
+	+respond-min($break-tablet-min)
+		margin-top: remify(48px)
+		margin-bottom: remify(48px)
+		padding: $page-padding
+	+respond-min($break-desktop-min)
+		padding-bottom: remify(48px)
+		padding-top: remify(36px)
 
-    &__media-container
-        overflow: hidden
+	&-container
+		margin: 0 auto
+		max-width: remify(880px)
 
-    &__description
-        p
-            @extend .paragraph
+	&__media-container
+		overflow: hidden
+
+	&__description
+		p
+			@extend .paragraph
