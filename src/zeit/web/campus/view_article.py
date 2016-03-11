@@ -26,19 +26,19 @@ class Article(zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
             return 'default'
 
     @zeit.web.reify
-    def topicpagelink(self):
+    def topic_page(self):
         try:
-            return zeit.campus.interfaces.ITopicpageLink(self.context)
+            return zeit.campus.interfaces.ITopic(self.context).page
         except TypeError:
             return None
 
     @zeit.web.reify
-    def topicpagelink_label(self):
+    def topic_label(self):
         try:
-            tplink = zeit.campus.interfaces.ITopicpageLink(self.context)
+            tplink = zeit.campus.interfaces.ITopic(self.context)
             if tplink.label:
                 return tplink.label
-            return getattr(tplink.topicpage, 'title', '')
+            return getattr(tplink.page, 'title', '')
         except TypeError:
             return ''
 
