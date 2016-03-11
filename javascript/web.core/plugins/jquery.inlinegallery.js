@@ -186,10 +186,10 @@
 
                     /* add icons to existing gallery buttons */
                     $( '.bx-next' )
-                        .wrapInner( '<span class="bx-icon-description"></span>' )
+                        .wrapInner( '<span class="visually-hidden"></span>' )
                         .prepend( nextButton.find( 'svg' ).clone() );
                     $( '.bx-prev' )
-                        .wrapInner( '<span class="bx-icon-description"></span>' )
+                        .wrapInner( '<span class="visually-hidden"></span>' )
                         .prepend( backButton.find( 'svg' ).clone() );
 
                     sliderViewport.parent().addClass( 'bx-wrapper--no-touch' );
