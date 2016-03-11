@@ -25,6 +25,22 @@ class Article(zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
         else:
             return 'default'
 
+    def topic_page(self):
+        try:
+            return zeit.campus.interfaces.ITopic(self.context).page
+        except TypeError:
+            return None
+
+    @zeit.web.reify
+    def topic_label(self):
+        try:
+            topic = zeit.campus.interfaces.ITopic(self.context)
+        except TypeError:
+            return ''
+        if topic.label:
+            return topic.label
+        return getattr(topic.page, 'title', '')
+
     @zeit.web.reify
     def adcontroller_handle(self):
         return 'artikel'
