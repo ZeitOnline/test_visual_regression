@@ -92,27 +92,36 @@ def test_article_citation_block_should_render_expected_structure(testbrowser):
     # 'imdb.com' in browser.cssselect('.quote')[0].attrib['cite']
 
 
-def test_article_should_render_topicpagelink(testbrowser):
+def test_article_should_render_topic(testbrowser):
     browser = testbrowser('/campus/article/common')
-    tplink = browser.cssselect('.article-header__topicpagelink')[0]
+    tplink = browser.cssselect('.article-header__topic')[0]
     assert tplink.text == 'Science'
     assert tplink.get('href') == 'http://localhost/thema/test'
 
 
-def test_article_should_have_topicpagelink_fallback_label(
+def test_article_should_have_topic_fallback_label(
         monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.campus.article.TopicpageLink, 'label', '')
+    monkeypatch.setattr(zeit.campus.article.Topic, 'label', '')
     browser = testbrowser('/campus/article/common')
-    tplink = browser.cssselect('.article-header__topicpagelink')[0]
+    tplink = browser.cssselect('.article-header__topic')[0]
     assert tplink.text == 'Test-Thema'
 
 
-def test_article_should_not_render_missing_topicpagelink(
+def test_article_should_not_render_topic_with_missing_fallback_label(
         monkeypatch, testbrowser):
     monkeypatch.setattr(
-        zeit.web.campus.view_article.Article, 'topicpagelink_label', '')
+        zeit.web.campus.view_article.Article, 'topic_label', '')
     browser = testbrowser('/campus/article/common')
-    tplink = browser.cssselect('.article-header__topicpagelink')
+    tplink = browser.cssselect('.article-header__topic')
+    assert len(tplink) == 0
+
+
+def test_article_should_not_render_missing_topic(
+        monkeypatch, testbrowser):
+    monkeypatch.setattr(
+        zeit.campus.article.Topic, 'page', None)
+    browser = testbrowser('/campus/article/common')
+    tplink = browser.cssselect('.article-header__topic')
     assert len(tplink) == 0
 
 
