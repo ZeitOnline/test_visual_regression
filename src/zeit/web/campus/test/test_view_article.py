@@ -89,7 +89,6 @@ def test_article_citation_block_should_render_expected_structure(testbrowser):
         'Ariane Jedlitschka, Kunstschaffende')
     assert browser.cssselect('.quote__link')[0].get('href') == (
         'http://www.imdb.com/title/tt0110912/quotes?item=qt0447099')
-    # 'imdb.com' in browser.cssselect('.quote')[0].attrib['cite']
 
 
 def test_article_should_render_topic(testbrowser):
