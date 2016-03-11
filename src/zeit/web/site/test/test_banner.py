@@ -33,8 +33,6 @@ def test_adcontroller_head_code_is_present(
         'third_party_modules': True, 'iqd': True}.get)
 
     browser = testbrowser('/zeit-online/slenderized-index')
-    if 'data-ad-delivery-type="adcontroller"' not in browser.contents:
-        pytest.skip("not applicable due to oldschool ad configuration")
 
     assert '<!-- ad controller head start -->' in browser.contents
     assert '<!-- adcontroller load -->' in browser.contents
@@ -43,8 +41,6 @@ def test_adcontroller_head_code_is_present(
 
 def test_adcontroller_adtags_are_present(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
-    if 'data-ad-delivery-type="adcontroller"' not in browser.contents:
-        pytest.skip("not applicable due to oldschool ad configuration")
 
     assert 'AdController.render(\'iqadtile1\');' in browser.contents
     assert 'AdController.render(\'iqadtile2\');' in browser.contents
@@ -57,8 +53,6 @@ def test_adcontroller_finanlizer_is_present(
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True, 'iqd': True}.get)
     browser = testbrowser('/zeit-online/slenderized-index')
-    if 'data-ad-delivery-type="adcontroller"' not in browser.contents:
-        pytest.skip("not applicable due to oldschool ad configuration")
 
     assert 'AdController.finalize();' in browser.contents
 
@@ -68,11 +62,6 @@ def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
         'third_party_modules': True, 'iqd': True}.get)
     driver = selenium_driver
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
-    try:
-        selector = 'body[data-ad-delivery-type="adcontroller"]'
-        driver.find_element_by_css_selector(selector)
-    except:
-        pytest.skip("not applicable due to oldschool ad configuration")
 
     adctrl = driver.execute_script("return typeof window.AdController")
     assert adctrl == "object"

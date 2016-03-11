@@ -31,9 +31,14 @@ import zeit.web.core.metrics
 DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
 
 
+class Block(object):
+
+    layout = ''
+
+
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IParagraph)
-class Paragraph(object):
+class Paragraph(Block):
 
     def __init__(self, model_block):
         self.html = _inline_html(model_block.xml)
@@ -61,7 +66,7 @@ class OrderedList(UnorderedList):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPortraitbox)
-class Portraitbox(object):
+class Portraitbox(Block):
 
     def __init__(self, model_block):
         pbox = model_block.references
@@ -111,13 +116,14 @@ def make_article_blocks_work_with_infobox_content(context):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IInfobox)
-class Infobox(object):
+class Infobox(Block):
 
     def __init__(self, model_block):
         self.contents = []
         infobox = model_block.references
         if not zeit.content.infobox.interfaces.IInfobox.providedBy(infobox):
             return
+        self.layout = model_block.layout
         try:
             self.title = infobox.supertitle
         except:
@@ -133,7 +139,7 @@ class Infobox(object):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ILiveblog)
-class Liveblog(object):
+class Liveblog(Block):
 
     def __init__(self, model_block):
         self.blog_id = model_block.blog_id
@@ -190,7 +196,7 @@ class Liveblog(object):
 
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IQuiz)
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
-class Quiz(object):
+class Quiz(Block):
 
     def __init__(self, context):
         self.context = context
@@ -309,9 +315,8 @@ class HeaderImageStandard(HeaderImage):
     pass
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IIntertitle)
-class Intertitle(object):
+class Intertitle(Block):
 
     def __init__(self, model_block):
         self.text = unicode(model_block.text)
@@ -322,7 +327,7 @@ class Intertitle(object):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawXML)
-class Raw(object):
+class Raw(Block):
 
     def __init__(self, model_block):
         self.alldevices = 'alldevices' in model_block.xml.keys()
@@ -330,8 +335,14 @@ class Raw(object):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawText)
+def RawText(context):
+    return context
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ICitation)
-class Citation(object):
+class Citation(Block):
 
     def __init__(self, model_block):
         self.url = model_block.url
@@ -340,7 +351,7 @@ class Citation(object):
         self.layout = model_block.layout
 
 
-class BaseVideo(object):
+class BaseVideo(Block):
 
     def __init__(self, model_block):
         video = None
@@ -407,7 +418,7 @@ def inlinegallery(context):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.newsletter.interfaces.IGroup)
-class NewsletterGroup(object):
+class NewsletterGroup(Block):
 
     type = 'group'
 
@@ -422,7 +433,7 @@ class NewsletterGroup(object):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.newsletter.interfaces.ITeaser)
-class NewsletterTeaser(object):
+class NewsletterTeaser(Block):
 
     autoplay = None
 
@@ -474,7 +485,7 @@ class NewsletterTeaser(object):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.newsletter.interfaces.IAdvertisement)
-class NewsletterAdvertisement(object):
+class NewsletterAdvertisement(Block):
 
     type = 'advertisement'
 

@@ -1,7 +1,35 @@
 Change log for zeit.web
 =======================
 
-2.62 (unreleased)
+2.64 (unreleased)
+-----------------
+
+- ZON-2914: Output site_name and admin tag regardless of shared cardstack
+
+- ZON-2728: Assign `rel` attribute to article tags
+
+- ZON-2496: Introduce ZEIT Campus centerpage with teasers
+
+- FIX: Fix main navigation on author pages
+
+- MAINT: Use image variants for author images and Spektrum feed
+
+- MAINT: Update ZEIT Campus navigation
+
+
+2.63 (2016-03-08)
+-----------------
+
+- FIX: Polish article citation blocks for campus
+
+- ZON-2391: Improve reply-toggle performance
+
+- ZON-2826: Implement rawtext module for articles and CPs
+
+- ZON-2874: Customize article citation blocks for campus
+
+
+2.62 (2016-03-04)
 -----------------
 
 - ZON-2433: Improve sharing logic of cardstacks

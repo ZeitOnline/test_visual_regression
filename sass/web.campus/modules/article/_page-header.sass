@@ -13,17 +13,14 @@
 		margin-bottom: remify(12px)
 
 	&__title
+		@extend %font-beckett
 		display: block
-		font-family: $font-beckett
 		font-size: em(48px)
-		font-weight: normal
-		letter-spacing: 1.5px / 48px * 1em
-		line-height: .95
 
 	&__page-headline
 		font-size: em(17px)
 		font-weight: bold
-		letter-spacing: 1.5px / 20px * 1em
+		letter-spacing: $letter-spacing-s
 		line-height: 1.3
 		margin-top: remify(24px)
 
@@ -43,7 +40,6 @@
 
 		&__title
 			font-size: em(64px)
-			letter-spacing: 1.5px / 64px * 1em
 
 		&__page-headline
 			font-size: em(18px)
