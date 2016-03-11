@@ -57,7 +57,7 @@ setup(
         'zeit.campus>=1.2.0.dev0',
         'zeit.connector',
         'zeit.content.advertisement',
-        'zeit.content.article>=3.14.0.dev0',
+        'zeit.content.article>=3.15.0.dev0',
         'zeit.content.author>=2.6.0.dev0',
         'zeit.content.cp>=3.5.4.dev0',
         'zeit.content.dynamicfolder',

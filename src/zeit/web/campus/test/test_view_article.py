@@ -80,7 +80,7 @@ def test_article_pagination(testbrowser):
     # assert '--current' in select('.article-toc__item')[0].get('class')
 
 
-def test_article_citation_block_should_render_expected_structure(testbrowser):
+def test_article_block_citation_should_render_expected_structure(testbrowser):
     browser = testbrowser('/campus/article/citation')
     assert len(browser.cssselect('.quote')) == 2
     assert browser.cssselect('.quote__text')[0].text.startswith(
@@ -122,6 +122,13 @@ def test_article_should_not_render_missing_topic(
     browser = testbrowser('/campus/article/common')
     tplink = browser.cssselect('.article-header__topic')
     assert len(tplink) == 0
+
+
+def test_article_block_infobox_should_render_expected_structure(testbrowser):
+    browser = testbrowser('/campus/article/infobox')
+    infobox = browser.cssselect('.infobox')[0]
+    assert len(infobox.cssselect('*[role="tab"]')) == 6
+    assert len(infobox.cssselect('*[role="tabpanel"]')) == 6
 
 
 def test_article_tags_are_present(testbrowser):
