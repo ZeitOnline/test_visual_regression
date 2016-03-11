@@ -1,7 +1,7 @@
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
 
-    <div class="visually-hidden">
+    <div class="invisible">
         {% include "zeit.web.static:css/web.site/framebuilder.svg" %}
     </div>
 
