@@ -26,8 +26,8 @@ def test_campus_adcontroller_values_return_values_on_cp(application):
     adcv = [
         ('$handle', 'centerpage'),
         ('level2', 'campus'),
-        ('level3', 'thema'),
-        ('level4', 'bafoeg'),
+        ('level3', ''),
+        ('level4', ''),
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline'),
         ('tma', '')]
@@ -38,12 +38,12 @@ def test_campus_adcontroller_values_return_values_on_cp(application):
 
 def test_campus_adcontroller_values_return_values_on_article(application):
     content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/campus/article/simple')
+        'http://xml.zeit.de/campus/article/adcontroller')
     adcv = [
         ('$handle', 'artikel'),
         ('level2', 'campus'),
         ('level3', 'thema'),
-        ('level4', 'bafoeg'),
+        ('level4', 'bafoeg_antraege_fuer_ue_50'),
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline'),
         ('tma', '')]

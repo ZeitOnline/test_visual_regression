@@ -25,6 +25,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
         else:
             return 'default'
 
+    @zeit.web.reify
     def topic_page(self):
         try:
             return zeit.campus.interfaces.ITopic(self.context).page
@@ -49,11 +50,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
     def adcontroller_values(self):
         """Fill the adcontroller js object with actual values.
         Output in level strings only allows latin characters, numbers and
-        underscore. We can use the webtrekk rules here."""
+        underscore."""
         keywords = ','.join(self.adwords)
 
-        topiclabel = getattr(self, 'topicpagelink_label', '')
-        topiclabel = zeit.web.core.template.format_webtrekk(topiclabel)
+        topiclabel = getattr(self, 'topic_label', '')
+        topiclabel = zeit.web.core.template.format_iqd(topiclabel)
 
         return [('$handle', self.adcontroller_handle),
                 ('level2', 'campus'),
