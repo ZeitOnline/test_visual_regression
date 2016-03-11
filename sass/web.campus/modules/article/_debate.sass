@@ -2,6 +2,7 @@
 .debate
     @extend %border-box
     border-color: $color-community-primary
+    margin-top: 2.2em
 
     &__kicker
         display: block
@@ -32,3 +33,9 @@
         color: $color-community-primary
         &:before
             border-color: $color-community-primary
+
+    +respond-min($break-tablet-min)
+        &__kicker
+            font-size: em(14px)
+        &__title
+            font-size: em(42px)

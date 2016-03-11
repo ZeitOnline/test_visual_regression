@@ -96,3 +96,15 @@ def test_article_tags_are_present(testbrowser):
     assert len(tags) == 6
     for tag in tags:
         assert tag.get('rel') == 'tag'
+
+
+def test_article_debate_block_should_render_expected_structure(testbrowser):
+    browser = testbrowser('/campus/article/debate')
+    assert len(browser.cssselect('.debate')) == 1
+    assert len(browser.cssselect('.debate__label')) == 1
+    assert browser.cssselect('.debate__kicker')[0].text.strip().startswith(
+        u'Das steht')
+    assert browser.cssselect('.debate__title')[0].text.strip().startswith(
+        u'Schafft endlich')
+    assert browser.cssselect('.debate__text > p')[0].text.strip().startswith(
+        u'Die Jury')
