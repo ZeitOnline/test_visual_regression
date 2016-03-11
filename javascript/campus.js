@@ -37,6 +37,7 @@ require([
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.core/plugins/jquery.animatescroll',
     'web.core/plugins/jquery.infobox',
+    'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
@@ -48,6 +49,7 @@ require([
     switch ( pageType ) {
         case 'article':
             main.find( '.js-infobox' ).infobox();
+            main.find( '.js-gallery' ).inlinegallery();
     }
 
 });
