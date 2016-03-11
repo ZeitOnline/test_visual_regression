@@ -108,12 +108,9 @@
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
 
-    {% block cardstack_head %}
-        {% if view.has_cardstack %}
-            {% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/esi/head?shareUrl={}'.format(request.url) %}
-            {{ lama.insert_esi(esi_source, 'Cardstack Ressourcen konnten nicht geladen werden') }}
-        {% endif %}
-    {% endblock %}
+    {% if view.has_cardstack %}
+        {{ lama.insert_esi(view.cardstack_head, 'Cardstack Ressourcen konnten nicht geladen werden') }}
+    {% endif %}
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
 
@@ -202,12 +199,9 @@
     <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
     <!--end: vgwort-->
     {% endif %}
-    {% block cardstack_bottom %}
-        {% if view.has_cardstack %}
-            {% set esi_source = 'http://www.zeit.de/cardstack-backend/stacks/esi/scripts?shareUrl={}'.format(request.url) %}
-            {{ lama.insert_esi(esi_source, 'Cardstack konnte nicht eingebunden werden') }}
-        {% endif %}
-    {% endblock %}
+    {% if view.has_cardstack %}
+        {{ lama.insert_esi(view.cardstack_scripts, 'Cardstack konnte nicht eingebunden werden') }}
+    {% endif %}
 
     {% block veeseo %}
     {% endblock %}

@@ -1,0 +1,5 @@
+{% extends "zeit.web.core:templates/inc/blocks/citation.html" %}
+
+{% block citation_class %}
+    {{- super() | with_mods(view.article_layout) -}}
+{% endblock %}

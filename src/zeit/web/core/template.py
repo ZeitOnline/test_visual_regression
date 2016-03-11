@@ -485,78 +485,6 @@ def default_image_url(image, image_pattern='default'):
 
 
 @zeit.web.register_filter
-def sharing_image_url(image_group,
-                      image_pattern):
-    # TRASHME: Create image URLs for twitter and facebook
-    sharing_image = closest_substitute_image(image_group, image_pattern)
-
-    if not sharing_image:
-        return
-
-    return default_image_url(sharing_image, image_pattern)
-
-
-@zeit.web.register_filter
-def closest_substitute_image(image_group,
-                             image_pattern,
-                             force_orientation=False):
-    # TRASHME: We don't need substitutes any more since zci images can be
-    #          requested in any size and shape
-    """Returns the image from an image group, that most closely matches the
-    target image pattern (while ignoring the master image). Larger resolutions
-    are always favored over smaller ones and the image orientation matching may
-    be enforced.
-
-    Usage as jinja filter:
-
-        {{ my_image_group | closest_substitute_image('my-desired-pattern') }}
-
-    :param image_group: Image Group instance that provides
-                        zeit.content.image.interfaces.IImageGroup
-    :param image_pattern: String representation of the target pattern ID.
-    :param force_orientation: Boolean whether orientation of substitute image
-                              must match that of target pattern.
-    :returns: Unique ID of most suitable substitute image.
-    """
-
-    # make sure it's an Image Group
-    if not zeit.content.image.interfaces.IImageGroup.providedBy(image_group):
-        return
-    if zeit.web.core.image.is_image_expired(image_group):
-        return
-    elif image_pattern in image_group:
-        # return happily if image_pattern is present
-        return image_group.get(image_pattern)
-
-    # Determine the image scale correlating to the provided pattern.
-    scale = zeit.web.core.image.IMAGE_SCALE_SOURCE.find(image_pattern)
-    if not scale:
-        return
-
-    def orientation(x, y):
-        return (x > y) << 1 | (x < y)  # Binary hashing
-
-    # Aggregate a list of images from the image group with a target separator.
-    candidates = [(image_pattern, scale)]
-    for name, img in image_group.items():
-        size = img.getImageSize()
-        if image_group.master_image != name and (
-                not force_orientation or
-                orientation(*size) == orientation(*scale)):
-            candidates.append((name, size))
-
-    if len(candidates) == 1:
-        return
-
-    candidates = sorted(candidates, key=lambda i: i[1][0] * i[1][1])
-    idx = candidates.index((image_pattern, scale))
-    candidates.pop(idx)
-
-    # Select the candidate that is preferably one size larger than the target.
-    return image_group.get(candidates[:idx + 1][-1][0])
-
-
-@zeit.web.register_filter
 def pluralize(num, *forms):
     try:
         num = '{:,d}'.format(int(num)).replace(',', '.')
@@ -674,9 +602,9 @@ def get_column_image(content):
         author = content.authorships[0].target
     except (AttributeError, IndexError, TypeError):
         return
-    # XXX This should use a different variant, but the current CSS requires a
-    # rather specific ratio -- which only works because the author images have
-    # been dilligently and manually uploaded in that ratio so far.
+    # XXX This should use a different variant, but author images currently do
+    # not have a consistent ratio and framing of the portrayed person. So we
+    # need to crop the lower part of the image using CSS, ignoring the ratio.
     return get_image(content=author, variant_id='original', fallback=False)
 
 
@@ -904,7 +832,7 @@ def append_get_params(request, **kw):
 
     if params == []:
         return request.path_url
-    return '?'.join([request.path_url, urllib.urlencode(params)])
+    return u'{}?{}'.format(request.path_url, urllib.urlencode(params))
 
 
 @zeit.web.register_filter

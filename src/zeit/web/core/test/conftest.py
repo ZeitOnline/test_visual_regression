@@ -92,6 +92,7 @@ def app_settings(mockserver):
         'zett_img_host': mockserver.url + '/zett',
         'academics_hp_feed': mockserver.url + '/academics/feed.xml',
         'academics_img_host': mockserver.url + '/academics',
+        'cardstack_backend': mockserver.url + '/cardstack',
         'connector_type': 'mock',
         'vgwort_url': 'http://example.com/vgwort',
         'breaking_news_config': (
@@ -361,23 +362,21 @@ def debug_application(app_settings, request):
 
 
 @pytest.fixture
-def config(application, request):
-    config = pyramid.testing.setUp(
-        settings=application.zeit_app.config.registry.settings, hook_zca=False)
-    request.addfinalizer(lambda: pyramid.testing.tearDown(unhook_zca=False))
-    return config
-
-
-@pytest.fixture
-def dummy_request(request, application, config):
+def dummy_request(application, request):
     req = pyramid.testing.DummyRequest(is_xhr=False)
+    # XXX DummyRequest is not life-like enough out-of-the-box, sigh.
     req.GET = webob.multidict.MultiDict(req.GET)
     req.response.headers = set()
-    req.registry.settings = config.registry.settings
-    req._set_extensions(application.zeit_app.config.registry.getUtility(
-        pyramid.interfaces.IRequestExtensions))
     req.matched_route = None
-    config.manager.get()['request'] = req
+
+    # See pyramid.router.Router.invoke_subrequest()
+    config = application.zeit_app.config
+    req.registry = config.registry
+    req._set_extensions(config.registry.getUtility(
+        pyramid.interfaces.IRequestExtensions))
+    config.begin(req)
+    request.addfinalizer(pyramid.threadlocal.manager.clear)
+
     return req
 
 

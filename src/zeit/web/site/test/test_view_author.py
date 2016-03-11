@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
 import lxml.html
-import mock
 import pyramid.testing
 import pytest
 import zope.component
@@ -9,6 +8,13 @@ import zope.component
 import zeit.solr.interfaces
 
 import zeit.web.core.interfaces
+
+
+def test_author_page_contains_main_navigation(testbrowser):
+    browser = testbrowser('/autoren/j_random')
+    header = browser.cssselect('header.header')[0]
+    assert header.cssselect('.main_nav')
+    assert header.cssselect('.main_nav__ressorts')
 
 
 def test_author_header_should_be_fully_rendered(testbrowser):
@@ -114,14 +120,14 @@ def test_first_page_shows_fewer_solr_results_since_it_shows_favourite_content(
     assert len(browser.cssselect('.teaser-small')) == 4
 
 
-def test_view_author_comments_should_have_comments_area(application):
+def test_view_author_comments_should_have_comments_area(
+        application, dummy_request):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/author3')
-    request = mock.Mock()
+    request = dummy_request
     request.registry.settings = {'author_comment_page_size': '6'}
     request.GET = {'p': '1'}
-    view = zeit.web.site.view_author.Comments(
-        author, request)
+    view = zeit.web.site.view_author.Comments(author, request)
     assert type(view.tab_areas[0]) == (
         zeit.web.site.view_author.UserCommentsArea)
 

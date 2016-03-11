@@ -422,7 +422,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             if ( $answers.length > 1  && !containsTarget ) {
                 $root.next( '.comment--indented' ).find( '.comment__container' ).prepend( rewrapper );
                 coverReply( $answers.eq( 0 ).data({ undo: id }), $answers.length - 1 );
-                $answers.slice( 1 ).velocity( 'slideUp', slideDuration );
+                $answers.slice( 1 ).hide();
             }
         });
     },
@@ -444,13 +444,22 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     showReplies = function( e ) {
         var $wrapped = $( this ),
             selector = '#' + $wrapped.data( 'undo' ),
-            $link = $( selector );
+            $link = $( selector ),
+            $repliesToShow;
 
         e.preventDefault();
         $link.velocity( 'slideDown', slideDuration );
-        $wrapped.removeClass( 'comment--wrapped' )
-            .nextUntil( '.js-comment-toplevel', '.comment--indented' ) // get other replies, filter to remove ads from result
-            .velocity( 'slideDown', slideDuration );
+        $wrapped.removeClass( 'comment--wrapped' );
+        // get other replies, filter to remove ads from result
+        $repliesToShow = $wrapped.nextUntil( '.js-comment-toplevel', '.comment--indented' );
+        // for performance reasons, we only slide the first items and siply show the other ones
+        $repliesToShow.slice( 0, 5 ).velocity( 'slideDown', {
+            'duration': slideDuration,
+            'complete': function() {
+                $repliesToShow.slice( 5 ).show();
+            }
+        } );
+
     },
 
     hideReplies = function() {
@@ -458,7 +467,12 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' );
 
         $root.addClass( 'comment--wrapped' );
-        $answers.velocity( 'slideUp', slideDuration );
+        $answers.slice( 0, 5 ).velocity( 'slideUp', {
+            'duration': slideDuration,
+            'complete': function() {
+                $answers.slice( 5 ).hide();
+            }
+        } );
     },
 
     addModeration = function() {

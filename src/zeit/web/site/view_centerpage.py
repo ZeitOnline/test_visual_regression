@@ -238,6 +238,16 @@ class Centerpage(
             return zeit.web.core.template.append_get_params(
                 self.request, p=ranking.current_page - 1)
 
+    @zeit.web.reify
+    def cardstack_head(self):
+        url = super(Centerpage, self).cardstack_head
+        return zeit.web.core.utils.update_query(url, static='true')
+
+    @zeit.web.reify
+    def cardstack_body(self):
+        url = super(Centerpage, self).cardstack_body
+        return zeit.web.core.utils.update_query(url, static='true')
+
 
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
