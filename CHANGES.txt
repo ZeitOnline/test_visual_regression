@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2496: Introduce ZEIT Campus centerpage with teasers
 
+- ZON-2838: Add ZCO topicpage links
+
 - FIX: Fix main navigation on author pages
 
 - MAINT: Use image variants for author images and Spektrum feed
