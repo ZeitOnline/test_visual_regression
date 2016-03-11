@@ -1,17 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import zeit.cms.interfaces
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.common.exceptions import TimeoutException
-
-
-def test_article_should_render_full_view(testbrowser):
-    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
-    paragraphs = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/zeit').paragraphs
-    assert len(browser.cssselect('.article-page > p.paragraph')) == paragraphs
 
 
 def test_zon_gallery_should_have_metadata(testbrowser):
