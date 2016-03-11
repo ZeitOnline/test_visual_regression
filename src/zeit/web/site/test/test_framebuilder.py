@@ -71,7 +71,7 @@ def test_framebuilder_can_contain_ivw(testbrowser):
 def test_framebuilder_should_inline_svgs(testbrowser):
     browser = testbrowser('/framebuilder')
     assert len(browser.xpath(
-               '/html/body/div[@class="visually-hidden"]/svg/symbol')) == 4
+        '/html/body/div[@class="invisible"]/svg/symbol')) == 4
     assert browser.cssselect('.logo_bar svg > use')[0].attrib['xlink:href']
 
 
