@@ -1,3 +1,6 @@
+# coding: utf8
+import re
+
 import pyramid.view
 
 import zeit.content.article.interfaces
@@ -24,6 +27,28 @@ class Article(zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
             return 'leserartikel'
         else:
             return 'default'
+
+    @zeit.web.reify
+    def adcontroller_handle(self):
+        return 'artikel'
+
+    @zeit.web.reify
+    def adcontroller_values(self):
+        """Fill the adcontroller js object with actual values.
+        Output in level strings only allows latin characters, numbers and
+        underscore. We can use the webtrekk rules here."""
+        keywords = ','.join(self.adwords)
+
+        topiclabel = getattr(self, 'topicpagelink_label', '')
+        topiclabel = zeit.web.core.template.format_webtrekk(topiclabel)
+
+        return [('$handle', self.adcontroller_handle),
+                ('level2', 'campus'),
+                ('level3', 'thema' if topiclabel else ''),
+                ('level4', topiclabel or ''),
+                ('$autoSizeFrames', True),
+                ('keywords', keywords),
+                ('tma', '')]
 
 
 @pyramid.view.view_config(name='seite',

@@ -1,6 +1,3 @@
-# coding: utf8
-import re
-
 import pyramid.view
 
 import zeit.campus.interfaces
@@ -16,46 +13,7 @@ def is_zco_content(context, request):
 
 
 class Base(zeit.web.core.view.Base):
-
-    @zeit.web.reify
-    def adcontroller_handle(self):
-        if self.type == 'centerpage' and self.request.path == '/campus/index':
-            return 'index'
-        if self.type == 'centerpage':
-            return 'centerpage'
-        return 'artikel'
-
-    @zeit.web.reify
-    def adcontroller_values(self):
-        """Fill the adcontroller js object with actual values.
-        Output in level strings only allows latin characters, numbers and
-        underscore."""
-        keywords = ','.join(self.adwords)
-
-        topiclabel = getattr(self.context, 'topicpagelink_label', '')
-
-        # OPTIMIZE: move this into an own function for all views?
-        if topiclabel:
-            topiclabel = topiclabel.lower().replace(
-                u'ä', 'ae').replace(
-                u'ö', 'oe').replace(
-                u'ü', 'ue').replace(
-                u'á', 'a').replace(
-                u'à', 'a').replace(
-                u'é', 'e').replace(
-                u'è', 'e').replace(
-                u'ß', 'ss')
-            topiclabel = re.sub(u'[^_a-zA-Z0-9]', '_', topiclabel)
-            topiclabel = re.sub(u'_+', '_', topiclabel)
-            topiclabel = re.sub(u'^_|_$', '', topiclabel)
-
-        return [('$handle', self.adcontroller_handle),
-                ('level2', 'campus'),
-                ('level3', 'thema' if topiclabel else ''),
-                ('level4', topiclabel or ''),
-                ('$autoSizeFrames', True),
-                ('keywords', keywords),
-                ('tma', '')]
+    pass
 
 
 @pyramid.view.view_config(
