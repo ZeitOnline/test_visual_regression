@@ -105,12 +105,24 @@
 			{% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
 
 			{% if view.show_replies(comment) %}
-			{% for comment in comment.replies %}
-				{% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
-			{% endfor %}
+    			{% for comment in comment.replies %}
+    				{% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
+    			{% endfor %}
 			{% elif comment.replies %}
-			{# XXX Needs styling. #}
-			<a href="{{view.content_url}}?cid={{comment.cid}}&comment_replies={{comment.cid}}#cid-{{comment.cid}}" data-url="{{view.content_url}}/comment_replies?cid={{comment.cid}}" class="js-load-comment-replies">{{comment.replies | length}} Antworten anzeigen</a>
+
+                {# TODO: Sonderfall "1 Antwort vorhanden" berücksichtigen (dann die einfach zeigen) #}
+                {# TODO: Haben wir denn jetzt schon alle geladen (comment.replies) ? #}
+                {% for comment in comment.replies[:1] %}
+                    {% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
+                {% endfor %}
+
+                <div class="comment__container">
+                    <a href="{{view.content_url}}?cid={{comment.cid}}&comment_replies={{comment.cid}}#cid-{{comment.cid}}" data-url="{{view.content_url}}/comment_replies?cid={{comment.cid}}" class="js-load-comment-replies">
+                        <span class="comment-overlay__count">+ {{comment.replies | length-1}}</span>
+                        <span class="comment-overlay__cta"> weitere Antworten anzeigen</span>
+                    </a>
+                </div>
+
 			{% endif %}
 		{% endfor %}
 	</div>

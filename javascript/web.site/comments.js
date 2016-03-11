@@ -427,6 +427,49 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         });
     },
 
+    wrapRepliesNew = function() {
+        // TODO: ggf target, deeplinks
+        // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
+        // TODO: "Verbergen" kann man ja erst nach dem Laden dranhängen.
+        var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
+            $target;
+
+        if ( window.location.hash.indexOf( '#cid-' ) === 0 ) {
+            $target = $( window.location.hash );
+        }
+
+        $rootComments.each( function() {
+            var $root = $( this ),
+                $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
+                $replyLinkContainer = $root.nextUntil( '.js-comment-toplevel', '.comment__container' ),
+                id = 'hide-replies-' + this.id,
+                rewrapper = '' +
+                    '<div id="' + id + '" class="comment__rewrapper js-hide-replies">' +
+                        '<span class="comment__count">− ' + $answers.length + '</span>\n' +
+                        '<span class="comment__cta">Antworten verbergen</span>\n' +
+                    '</div>\n',
+                replyLoadUrl = $replyLinkContainer.find( 'a' ).data( 'url' ),
+                replyCountElement = $replyLinkContainer.find( '.comment-overlay__count' ),
+                replyCountString = replyCountElement.eq( 0 ).text().replace( '+ ', '' ),
+                replyCountInteger = parseInt( replyCountString, 10 ),
+                overlayHTML;
+
+            overlayHTML = '' +
+                '<div class="comment-overlay js-load-comment-replies" data-url="' + replyLoadUrl + '">\n' +
+                    '<div class="comment-overlay__wrap">\n' +
+                        '<span class="comment-overlay__count">+ ' + replyCountInteger + '</span>\n' +
+                        '<span class="comment-overlay__cta">Weitere Antworten anzeigen</span>\n' +
+                    '</div>\n' +
+                '</div>\n';
+
+            $answers.eq( 0 ).data({ undo: id }).addClass( 'comment--wrapped' )
+                .find( '.comment__body' )
+                .append( overlayHTML );
+
+            $replyLinkContainer.remove();
+        });
+    },
+
     coverReply = function( $firstReply, replyCount ) {
         var overlayHTML = '' +
             '<div class="comment-overlay">\n' +
@@ -448,11 +491,25 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         e.preventDefault();
 
         // TODO: on error/timeout visit the link
+        // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
+        // TODO: ersten Kommentar wegwerfen, oder gar nicht erst laden
+        // TODO: nach dem Laden muss ein-und ausklappen wie bisher funktionieren.
+        // TODO: schönen flüssigen Flow hinkriegen
+        // - Laden starten
+        // - ersten Kommentar aufsliden
+        // - Platzhalter (graue Boxen ggf pulsierend oder loading indicator) druntermachen
+        // - nach dem Laden die grauen Boxen ersetzen
+        // - auf Timeout oder Fehler reagieren.
+        //   - zur Seite mit geöffneten Antwrten wechseln?
+        //   - Link zur Seite mit geöffneten Kommentaren, mit Hinweis "something's fucky"
+        //   - Hinweis "something's fucky"
         $.ajax({
             url: url,
             method: 'GET',
             success: function( response ) {
-                $wrapped.replaceWith( response );
+                console.log( $wrapped );
+                console.log( $wrapped.closest( 'article.comment' ) );
+                $wrapped.closest( 'article.comment' ).after( response );
             }
         });
 
@@ -544,7 +601,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $comments.find( '.js-required' ).each( enableForm );
 
         // collapse consecutive replies
-        wrapReplies();
+        wrapRepliesNew();
 
         if ( uid ) {
             // highlight recommended comments for logged in user
