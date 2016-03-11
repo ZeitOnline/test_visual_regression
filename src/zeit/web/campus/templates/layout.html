@@ -32,7 +32,6 @@
     <link rel="dns-prefetch" href="//images.zeit.de">
     <link rel="dns-prefetch" href="//de.ioam.de">
     <link rel="dns-prefetch" href="//script.ioam.de">
-    <link rel="dns-prefetch" href="//s62.mxcdn.net">
     <link rel="dns-prefetch" href="//i2.s62.research.de.com">
     <link rel="dns-prefetch" href="//www.googletagmanager.com">
     <link rel="dns-prefetch" href="//zeit01.webtrekk.net">
@@ -45,7 +44,7 @@
 
     {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
     {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
-    {%- include "zeit.web.site:templates/inc/meta/sharing.html" -%}
+    {%- include "zeit.web.campus:templates/inc/meta/sharing.html" -%}
 
     {# Modernizr -#}
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
@@ -126,9 +125,6 @@
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" %}
     {% include "zeit.web.core:templates/inc/tracking/celera_one.html" %}
     {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
-    {% block meetrics -%}
-        {% include "zeit.web.core:templates/inc/tracking/meetrics_relaunch.html" %}
-    {%- endblock %}
 
     <script>
         var require = { baseUrl: '{{ request.asset_host }}/js/' };

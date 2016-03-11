@@ -1,0 +1,20 @@
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
+
+{% block module_list %}
+	<section class="teaser-topic">
+		{% if area.values() | length > 0 %}
+			{% set module = area.values()[0] %}
+			{% set teaser = module | first_child %}
+			{% set module_layout = 'teaser-topic' %}
+
+			{% include "zeit.web.core:templates/inc/asset/image_topic_teaser.tpl" %}
+			{% include "zeit.web.core:templates/inc/teaser/topic_main.tpl" %}
+			<div class="teaser-topic-list">
+				{% for module in area.values()[0:3] -%}
+				    {% set teaser = module | first_child %}
+				    {% include "zeit.web.core:templates/inc/teaser/topic_list.tpl" %}
+				{% endfor %}
+			</div>
+		{% endif %}
+	</section>
+{% endblock %}
