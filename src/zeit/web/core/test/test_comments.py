@@ -544,9 +544,8 @@ def test_request_thread_should_fail_on_timeouts(application, monkeypatch):
 
 
 def test_post_comment_should_not_expose_requests_timeout_exception(
-        application, config, monkeypatch, dummy_request):
+        application, monkeypatch, dummy_request):
 
-    config.testing_securitypolicy(userid='123', permissive=True)
     dummy_request.method = 'POST'
     dummy_request.POST = dummy_request.params = {
         'path': 'artikel/01', 'action': 'comment', 'comment': ' '}
