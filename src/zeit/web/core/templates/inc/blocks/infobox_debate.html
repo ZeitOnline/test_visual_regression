@@ -1,16 +1,25 @@
-
-<aside class="mailbox article__item">
-    <span class="mailbox__kicker">
-        Das steht zur Debatte
+<aside class="debate article__item">
+    <span class="debate__kicker">
+        {{ block.title }}
     </span>
-    <span class="mailbox__title">
-        Schafft endlich das Examen ab!
-    </span>
-    <span class="mailbox__text">
-        Die Jury hat die Gewinner des diesjährigen Grimme-Preises bekannt gegeben. Unter anderem wurden die Serie Deutschland 83 und das Internetformat Marhaba geehrt.
-    </span>
-    <span class="mailbox__label">
+    {% if block.contents -%}
+        {% for title, text in block.contents %}
+            <span class="debate__title">
+                {{ title }}
+            </span>
+            <span class="debate__text">
+                {% for block in text %}
+                    {% set type = block | block_type %}
+                    {% include [
+                        "{0}:templates/inc/blocks/{1}.html".format(view.package, type),
+                        "zeit.web.core:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
+                {% endfor %}
+                </span>
+        {% endfor %}
+    {%- endif %}
+    <span class="debate__label">
         Mitdiskutieren
     </span>
 </aside>
+
 

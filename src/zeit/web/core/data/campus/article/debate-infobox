@@ -1,13 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <container xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="artbox" label="info">
-  <supertitle py:pytype="str">10 Saurier sind super</supertitle>
+  <supertitle py:pytype="str">Das steht zur Debatte</supertitle>
   <block>
-    <title py:pytype="str">Zeitalter</title>
+    <title py:pytype="str">Schafft endlich das Examen ab!</title>
     <text>
-      <p>Die <a href="01">Saurier</a> entwickelten sich nach neuesten Erkenntnissen <strong>vor etwa 243 Millionen Jahren</strong> im Mesozoikum (Erdmittelalter). Es wird in drei Perioden unterteilt: die Trias, der Jura und die Kreide. Die Trias, in der fast die gesamte Landmasse im <strong>Superkontinent Pangea</strong> zusammengefasst war, bezeichnet die Zeit von 251 Millionen bis 200 Millionen Jahre. Auf die Trias folgte der Jura von 200 bis 145  Millionen Jahren, in dem der Urkontinent auseinanderbrach und sich langsam in die heutigen Kontinente aufteilte.</p>
-      <p>Anschließend folgte die Zeit der <strong>Kreide vor 145 bis 65  Millionen Jahren</strong>. Mit dem Ende der Kreide wurden fast alle Saurier ausgerottet. Da man die Vögel als Nachfahren einer Gruppe der Saurier ansieht, sind sie jedoch streng genommen <strong>nicht vollständig ausgestorben</strong>.</p>
-      <p>Von den Reptilien, die damals auf der Erde vorkamen, überlebten zum Beispiel Krokodile, Schlangen, Eidechsen und die Schildkröten.</p>
-      <p>Die <strong>Pflanzenwelt</strong> veränderte sich während dieser Zeit dramatisch. Von einstigen Landschaften mit Nadelwäldern und Ginkobäumen wandelte sich das Bild in der Kreidezeit zu Laubwäldern und Buschlandschaften. Dafür verantwortlich war die Entwicklung der Blütenpflanzen in der frühen Kreidezeit.</p>
+      <p>Die Jury hat die Gewinner des diesjährigen Grimme-Preises bekannt gegeben. Unter anderem wurden die Serie Deutschland 83 und das Internetformat Marhaba geehrt. Schicke eine Mail an <a href="mailto:lalala">leser-studium@zeit.de</a></p>
     </text>
   </block>
 </container>
