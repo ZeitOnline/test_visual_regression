@@ -13,6 +13,9 @@ class IFrontendBlock(zope.interface.Interface):
     such a front-end representation of a given vivi article-body block.
     """
 
+    layout = zope.interface.Attribute(
+        'String that modifies how this block is to be displayed')
+
 
 class IFrontendHeaderBlock(zope.interface.Interface):
     """A HeaderBlock identifies elements that appear only in headers of

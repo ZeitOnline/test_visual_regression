@@ -15,11 +15,11 @@
                    href="{{ teaser | create_url | append_campaign_params }}">
                     {% block teaser_kicker %}
                         <span class="{{ self.layout() }}__kicker">
-                            {{ teaser.teaserSupertitle or teaser.supertitle -}}
+                            {{- teaser.teaserSupertitle or teaser.supertitle -}}
                         </span>
                         {%- if teaser.teaserSupertitle or teaser.supertitle -%}
-                            <span class="visually-hidden">:</span>
-                        {% endif %}
+                            <span class="visually-hidden">: </span>
+                        {%- endif %}
                     {% endblock %}
                     {% block teaser_title %}
                         <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
