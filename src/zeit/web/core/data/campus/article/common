@@ -18,6 +18,15 @@
     </image>
     <references>
     </references>
+    <topic xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/thema/test" year="2008" issue="26" ressort="Administratives" contenttype="centerpage-2009" publication-date="" expires="">
+        <supertitle xsi:nil="true"/>
+        <title xsi:nil="true"/>
+        <text xsi:nil="true"/>
+        <description xsi:nil="true"/>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <label>Science</label>
+    </topic>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="article_id" ns="http://namespaces.zeit.de/CMS/print">556168</attribute>
