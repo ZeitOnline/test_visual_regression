@@ -148,10 +148,18 @@ def comment_to_dict(comment):
     )
 
 
-def request_thread(path):
+def request_thread(path,
+                   thread_type='full',
+                   page=0,
+                   page_size=4,
+                   sort='asc',
+                   cid=None,
+                   ):
     """Send a GET request to receive an agatho comment thread.
 
     :param path: Path section of a uniqueId
+    :param thread_type: One of 'full' or 'paginated'
+    :param page_size: Number of comments displayed per page
     :rtype: unicode or None
     """
 
@@ -159,6 +167,20 @@ def request_thread(path):
     timeout = float(conf.get('community_host_timeout_secs', 0.5))
     uri = '{}/agatho/thread{}'.format(
         conf.get('agatho_host', ''), path.encode('utf-8'))
+
+    thread_modes = dict(
+        paginated='{}?mode=top&page={}&rows={}&sort={}'.format(
+            uri, page, page_size, sort),
+        sub_thread='{}?mode=sub&cid={}'.format(uri, cid),
+        deeplink='{}?mode=deeplink&cid={}&rows={}&sort={}'.format(
+            uri, cid, page_size, sort),
+        recommendation='{}?mode=recommendation&page={}&rows={}&sort={}'.format(
+            uri, page, page_size, sort),
+        promotion='{}?mode=promotion&page={}&rows={}&sort={}'.format(
+            uri, page, page_size, sort))
+
+    uri = thread_modes.get(thread_type, uri)
+
     try:
         with zeit.web.core.metrics.timer(
                 'request_thread.community.reponse_time'):
@@ -174,6 +196,62 @@ def request_thread(path):
 
 class ThreadNotLoadable(Exception):
     pass
+
+
+def get_paginated_thread(
+        unique_id, sort='asc', page=0, cid=None, invalidate_delta=5):
+
+    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+
+    page_size = int(conf.get('comment_page_size', '4'))
+    # XXX: We need to implement the filtering for 'promotion' and 'recommended'
+    thread = request_thread(path, thread_type='paginated', page=page,
+                            page_size=page_size, sort=sort)
+
+    if thread is None:
+        return dict()
+
+    if isinstance(thread, dict) and thread.get('request_failed'):
+        raise ThreadNotLoadable()
+
+    try:
+        document = lxml.etree.fromstring(thread)
+    except:
+        log.warning(
+            'get_paginated_thread input unparseable, ignoring', exc_info=True)
+        raise ThreadNotLoadable()
+
+    try:
+        comment_nid = document.xpath('/comments/nid/text()')[0]
+        comment_list = document.xpath('//comment')
+    except (IndexError, lxml.etree.XMLSyntaxError):
+        raise ThreadNotLoadable()
+
+    comment_count = 0 # XXX: We need to get the total comments from drupal
+    top_level_comment_count = 0 # We need to get the toplevel comments too
+    comment_list = list(comment_to_dict(c) for c in comment_list)
+
+    flattened_comments = comment_list[:]
+    has_promotion = has_recommendations = False
+    for comment in flattened_comments:
+        if comment['recommendations'] > 0:
+            has_recommendations = True
+        if comment['is_promoted'] is True:
+            has_promotion = True
+        if has_recommendations and has_promotion:
+            break
+    sorted_tree, index = _sort_comments(comment_list)
+    pages = int(math.ceil(float(top_level_comment_count) / float(page_size)))
+
+    foo = dict(
+            flattened_comments=flattened_comments,
+            has_recommendations=has_recommendations,
+            has_promotion=has_promotion,
+            index=index,
+            comment_count=comment_count,
+            sort='asc',
+            nid=comment_nid)
 
 
 def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):

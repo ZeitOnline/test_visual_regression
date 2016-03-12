@@ -119,6 +119,88 @@ def test_request_thread_should_handle_non_ascii_urls(application, mockserver):
     assert zeit.web.core.comments.request_thread(u'ümläut') is None
 
 
+def test_request_thread_should_fail_on_certain_status_codes(
+        application, monkeypatch):
+    def get(action_url, timeout=1):
+        response = mock.Mock
+        response.status_code = 300
+        return response
+    monkeypatch.setattr(requests, 'get', get)
+
+    assert 'request_failed' in zeit.web.core.comments.request_thread(
+        'http://community/foo')
+
+
+def test_request_thread_should_fail_on_timeouts(application, monkeypatch):
+
+    def get(action_url, timeout=1):
+        raise requests.exceptions.Timeout()
+    monkeypatch.setattr(requests, 'get', get)
+
+    assert 'request_failed' in zeit.web.core.comments.request_thread(
+        'http://community/foo')
+
+def test_request_thread_mode_should_produce_expected_uris(
+        monkeypatch, application):
+
+    request_get = mock.MagicMock(return_value={})
+    monkeypatch.setattr(requests, 'get', request_get)
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    full_thread = '{}/agatho/thread/foo'.format(conf.get('agatho_host', ''))
+    zeit.web.core.comments.request_thread('/foo')
+
+    request_get.assert_called_with(full_thread, timeout=10.0)
+
+    paginated_thread = '{}/agatho/thread/foo{}'.format(
+        conf.get('agatho_host', ''), '?mode=top&page=0&rows=4&sort=asc')
+
+    zeit.web.core.comments.request_thread('/foo', thread_type='paginated')
+
+    request_get.assert_called_with(paginated_thread, timeout=10.0)
+
+    paginated_thread = '{}/agatho/thread/foo{}'.format(
+        conf.get('agatho_host', ''), '?mode=top&page=1&rows=10&sort=asc')
+
+    zeit.web.core.comments.request_thread(
+        '/foo', thread_type='paginated', page=1, page_size=10)
+
+    request_get.assert_called_with(paginated_thread, timeout=10.0)
+
+    deeplink_thread = '{}/agatho/thread/foo{}'.format(
+        conf.get('agatho_host', ''), '?mode=deeplink&cid=1&rows=10&sort=asc')
+
+    zeit.web.core.comments.request_thread(
+        '/foo', thread_type='deeplink', cid=1, page_size=10)
+
+    request_get.assert_called_with(deeplink_thread, timeout=10.0)
+
+    sub_thread = '{}/agatho/thread/foo{}'.format(
+        conf.get('agatho_host', ''), '?mode=sub&cid=10')
+
+    zeit.web.core.comments.request_thread(
+        '/foo', thread_type='sub_thread', cid=10)
+
+    request_get.assert_called_with(sub_thread, timeout=10.0)
+
+    recommendation = '{}/agatho/thread/foo{}'.format(
+        conf.get('agatho_host', ''),
+        '?mode=recommendation&page=1&rows=4&sort=asc')
+
+    zeit.web.core.comments.request_thread(
+        '/foo', thread_type='recommendation', page=1, page_size=4)
+
+    request_get.assert_called_with(recommendation, timeout=10.0)
+
+    promotion = '{}/agatho/thread/foo{}'.format(
+        conf.get('agatho_host', ''),
+        '?mode=promotion&page=1&rows=4&sort=asc')
+
+    zeit.web.core.comments.request_thread(
+        '/foo', thread_type='promotion', page=1, page_size=4)
+
+    request_get.assert_called_with(promotion, timeout=10.0)
+
 def test_comment_to_dict_should_parse_correctly(application):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')
@@ -519,28 +601,6 @@ def test_post_comment_should_not_set_lock(application, action):
     locker(request, action)
 
     assert request.session.get('lock_commenting') is None
-
-
-def test_request_thread_should_fail_on_certain_status_codes(
-        application, monkeypatch):
-    def get(action_url, timeout=1):
-        response = mock.Mock
-        response.status_code = 300
-        return response
-    monkeypatch.setattr(requests, 'get', get)
-
-    assert 'request_failed' in zeit.web.core.comments.request_thread(
-        'http://community/foo')
-
-
-def test_request_thread_should_fail_on_timeouts(application, monkeypatch):
-
-    def get(action_url, timeout=1):
-        raise requests.exceptions.Timeout()
-    monkeypatch.setattr(requests, 'get', get)
-
-    assert 'request_failed' in zeit.web.core.comments.request_thread(
-        'http://community/foo')
 
 
 def test_post_comment_should_not_expose_requests_timeout_exception(
