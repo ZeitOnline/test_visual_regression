@@ -3,189 +3,189 @@ $gallery-dots-diameter: 8px
 $break-gallery-min: em(576px)
 
 .inline-gallery__wrap
-    @extend .gallery
-    clear: both // to prevent collisions with in-article ads
+	@extend .gallery
+	clear: both // to prevent collisions with in-article ads
 
 .inline-gallery
-    figure
-        margin: 0
-        padding: 0
-    .figure__media
-        width: auto
-        max-height: 620px
-        margin: 0 auto
-    .figure__caption
-        margin: 1em auto 0
-        max-width: none
-        padding: 0 $page-padding
-        +respond-min($break-tablet-min)
-            padding: 0
-    .figure__index
-        color: $zon-grey
-        font-family: $font-tabletgothic
-        font-style: normal
-        font-size: 0.875em // uses em by intention
-        letter-spacing: $zon-letter-spacing-m
+	figure
+		margin: 0
+		padding: 0
+	.figure__media
+		width: auto
+		max-height: 620px
+		margin: 0 auto
+	.figure__caption
+		margin: 1em auto 0
+		max-width: none
+		padding: 0 $page-padding
+		+respond-min($break-tablet-min)
+			padding: 0
+	.figure__index
+		color: $zon-grey
+		font-family: $font-tabletgothic
+		font-style: normal
+		font-size: 0.875em // uses em by intention
+		letter-spacing: $zon-letter-spacing-m
 
 // appear just after bxSlider initialisation
 // needed for "static" galleries
 html.js
-    .inline-gallery
-        visibility: hidden
-    .bx-wrapper
-        .inline-gallery
-            visibility: visible
+	.inline-gallery
+		visibility: hidden
+	.bx-wrapper
+		.inline-gallery
+			visibility: visible
 
 .bx-wrapper--touch
-    .bx-controls
-        padding: $page-padding $page-padding 1em
-        +respond-min($break-tablet-min)
-            padding: 0 0 1em
+	.bx-controls
+		padding: $page-padding $page-padding 1em
+		+respond-min($break-tablet-min)
+			padding: 0 0 1em
 .bx-wrapper--no-touch
-    .bx-controls
-        +pie-clearfix
-        padding: $page-padding
-        display: none
-        +respond-min($break-gallery-min)
-            display: block
-        +respond-min($break-tablet-min)
-            padding: 0 0 $page-padding
-    +respond-min($break-gallery-min)
-        .figure__index
-            display: none
+	.bx-controls
+		+pie-clearfix
+		padding: $page-padding
+		display: none
+		+respond-min($break-gallery-min)
+			display: block
+		+respond-min($break-tablet-min)
+			padding: 0 0 $page-padding
+	+respond-min($break-gallery-min)
+		.figure__index
+			display: none
 
 .bx-controls-direction
-    float: right
+	float: right
 .bx-wrapper--touch .bx-pager
-    font-size: $gallery-dots-diameter
-    line-height: 1.5
-    text-align: center
+	font-size: $gallery-dots-diameter
+	line-height: 1.5
+	text-align: center
 .bx-wrapper--no-touch .bx-pager
-    float: right
-    height: remify($gallery-button-radius)
-    line-height: remify($gallery-button-radius)
-    padding-right: .5em
+	float: right
+	height: remify($gallery-button-radius)
+	line-height: remify($gallery-button-radius)
+	padding-right: .5em
 .bx-pager-item
-    +inline-block
-    font-size: 0
-    line-height: 0
+	+inline-block
+	font-size: 0
+	line-height: 0
 .bx-pager-link
-    background: #000
-    +opacity(0.3)
-    text-indent: -9999px
-    display: block
-    width: $gallery-dots-diameter
-    height: $gallery-dots-diameter
-    margin: 0 $gallery-dots-diameter/2
-    outline: 0
-    border-radius: 50%
-    &:hover,
-    &.active,
-    &:focus
-        +opacity(0.7)
+	background: #000
+	+opacity(0.3)
+	text-indent: -9999px
+	display: block
+	width: $gallery-dots-diameter
+	height: $gallery-dots-diameter
+	margin: 0 $gallery-dots-diameter/2
+	outline: 0
+	border-radius: 50%
+	&:hover,
+	&.active,
+	&:focus
+		+opacity(0.7)
 
 .bx-prev,
 .bx-next
-    +inline-block
-    width: $gallery-button-radius
-    height: $gallery-button-radius
-    margin-left: 10px
-    border-radius: 50%
-    background-color: #000
-    color: $white
-    border: none
-    padding: remify(10px)
-    +opacity(0.3)
-    &:hover,
-    &:active,
-    &:focus
-        color: $white
-    &:hover
-        +opacity(0.7)
-    &:focus
-        outline: 0
-    &.disabled
-        +opacity(0.1)
-    .bx-arrow-icon
-        height: remify(15px)
-        width: remify(15px)
+	+inline-block
+	width: $gallery-button-radius
+	height: $gallery-button-radius
+	margin-left: 10px
+	border-radius: 50%
+	background-color: #000
+	color: $white
+	border: none
+	padding: remify(10px)
+	+opacity(0.3)
+	&:hover,
+	&:active,
+	&:focus
+		color: $white
+	&:hover
+		+opacity(0.7)
+	&:focus
+		outline: 0
+	&.disabled
+		+opacity(0.1)
+	.bx-arrow-icon
+		height: remify(15px)
+		width: remify(15px)
 
 .bx-arrow-icon
-    display: block
+	display: block
 
 .bx-overlay-prev,
 .bx-overlay-next
-    @extend .bx-next
-    margin: 0
-    position: absolute
-    top: em(10px)
-    padding: remify(20px)
-    +respond-min($break-phablet-min)
-        top: 50%
-        margin-top: -$gallery-button-radius
-        width: $gallery-button-radius * 2
-        height: $gallery-button-radius * 2
-        +opacity(0)
-    .bx-arrow-icon
-        height: remify(30px)
-        width: remify(30px)
+	@extend .bx-next
+	margin: 0
+	position: absolute
+	top: em(10px)
+	+respond-min($break-phablet-min)
+		height: $gallery-button-radius * 2
+		margin-top: -$gallery-button-radius
+		opacity: 0
+		padding: remify(20px)
+		top: 50%
+		width: $gallery-button-radius * 2
+		.bx-arrow-icon
+			height: remify(30px)
+			width: remify(30px)
 
 .bx-overlay-prev
-    left: em(10px)
+	left: em(10px)
 .bx-overlay-next
-    right: em(10px)
+	right: em(10px)
 
 .bx-icon-description
-    +hide-text
-    position: absolute
+	+hide-text
+	position: absolute
 
 .bx-viewport
-    position: relative
-    +on-interaction
-        .bx-overlay-prev,
-        .bx-overlay-next
-            +opacity(0.3)
+	position: relative
+	+on-interaction
+		.bx-overlay-prev,
+		.bx-overlay-next
+			+opacity(0.3)
 
 .bx-zone-prev,
 .bx-zone-next
-    width: 15%
-    height: 20%
-    position: absolute
-    z-index: 9999
-    cursor: pointer
-    display: none
-    +respond-min($break-phablet-min)
-        width: 50%
-        height: 90%
-        display: block
+	width: 15%
+	height: 20%
+	position: absolute
+	z-index: 9999
+	cursor: pointer
+	display: none
+	+respond-min($break-phablet-min)
+		width: 50%
+		height: 90%
+		display: block
 .bx-zone-prev
-    &:hover
-        .bx-overlay-prev
-            +opacity(0.7)
+	&:hover
+		.bx-overlay-prev
+			+opacity(0.7)
 .bx-zone-next
-    right: 0
-    &:hover
-        .bx-overlay-next
-            +opacity(0.7)
+	right: 0
+	&:hover
+		.bx-overlay-next
+			+opacity(0.7)
 
 // elements not in actual use
 .bx-controls-auto,
 .bx-loading
-    display: none
+	display: none
 
 .no-js .inline-gallery
-    padding-top: $vertical-space * 2
-    figure
-        margin-top: 0
-        margin-bottom: $vertical-space
-        &:last-child
-            .figure__caption
-                margin-bottom: $vertical-space
-    .figure__media
-        max-width: 100%
-    .figure__caption
-        max-width: 100%
-        width: remify(580px)
-        margin-bottom: $vertical-space * 2
-    .figure__copyright
-        display: block
+	padding-top: $vertical-space * 2
+	figure
+		margin-top: 0
+		margin-bottom: $vertical-space
+		&:last-child
+			.figure__caption
+				margin-bottom: $vertical-space
+	.figure__media
+		max-width: 100%
+	.figure__caption
+		max-width: 100%
+		width: remify(580px)
+		margin-bottom: $vertical-space * 2
+	.figure__copyright
+		display: block
