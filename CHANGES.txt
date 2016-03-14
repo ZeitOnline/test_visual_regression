@@ -4,6 +4,8 @@ Change log for zeit.web
 2.64 (unreleased)
 -----------------
 
+- BUG-368: Fix campus framebuilder inline svg
+
 - ZON-2489: Add Infobox to ZEIT Campus
 
 - ZON-2914: Output site_name and admin tag regardless of shared cardstack
@@ -15,6 +17,8 @@ Change log for zeit.web
 - ZON-2838: Add ZCO topicpage links
 
 - FIX: Fix main navigation on author pages
+
+- FIX: Fix gallery buttons on mobile
 
 - MAINT: Use image variants for author images and Spektrum feed
 
