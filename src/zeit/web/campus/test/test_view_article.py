@@ -39,7 +39,7 @@ def test_article_pagination_on_second_page(testbrowser):
 
 
 def test_article_pagination_on_last_paginated_page(testbrowser):
-    select = testbrowser('/campus/article/paginated/seite-9').cssselect
+    select = testbrowser('/campus/article/paginated/seite-10').cssselect
 
     assert len(select('.article-header')) == 0
     assert len(select('.page-header')) == 1
