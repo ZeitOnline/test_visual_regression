@@ -29,6 +29,9 @@
 	&__metadata
 		@extend %teaser-metadata
 
+	&__byline
+		@extend %teaser-byline
+
 +respond-max($break-tablet-min)
 	.teaser-lead-portrait
 		&__kicker,
@@ -63,8 +66,7 @@
 			font-size: remify(64px)
 			letter-spacing: remify(1.5px)
 			max-width: remify(780px)
-		&__text,
-		&__metadata
+		&__text
 			font-size: remify(18px)
 			line-height: (24/18)
 
