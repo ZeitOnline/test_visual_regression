@@ -505,7 +505,11 @@ class CommentReplies(zeit.web.core.view.Content):
                 title='Parameter cid is required')
         if not self.show_commentthread:
             return []
-        return zeit.web.core.comments.get_replies(self.context.uniqueId, cid)
+        replies = zeit.web.core.comments.get_replies(
+            self.context.uniqueId, cid)
+        # because the first reply is already shown in the first page load,
+        # we only return further ones on the ajax request
+        return rpl[1:]
 
 
 def invalidate_comment_thread(unique_id):

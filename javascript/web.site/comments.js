@@ -507,7 +507,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
         // TODO: on error/timeout visit the link
         // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
-        // TODO: ersten Kommentar wegwerfen, oder gar nicht erst laden
         // TODO: schönen flüssigen Flow hinkriegen
         // - Laden starten
         // - ersten Kommentar aufsliden
