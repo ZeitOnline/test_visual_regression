@@ -6,7 +6,6 @@
 {% block media_block -%}
 {{ {'large': 'figure-full-width',
     'zmo-large-center': 'figure-full-width',
-    'zmo-xl-header': 'figure-header',
     'zmo-medium-left': 'figure-horizontal',
     'zmo-medium-right': 'figure-horizontal--right',
     'zmo-medium-center': 'figure is-constrained is-centered',
