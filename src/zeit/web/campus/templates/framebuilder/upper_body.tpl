@@ -1,7 +1,7 @@
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}">
 
-    <div class="visually-hidden">
+    <div class="invisible">
         {% include "zeit.web.static:css/web.campus/framebuilder.svg" %}
     </div>
 
