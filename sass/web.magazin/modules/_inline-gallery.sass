@@ -72,17 +72,15 @@ $gallery-dots-diameter: 8px
 	line-height: 0
 .bx-pager-link
 	background: #000
-	opacity: 0.3
-	text-indent: -9999px
-	display: block
-	width: $gallery-dots-diameter
+	border-radius: 50%
+	display: inline-block
 	height: $gallery-dots-diameter
 	margin: 0 $gallery-dots-diameter/2
+	opacity: 0.3
 	outline: 0
-	border-radius: 50%
-	&:hover,
-	&.active,
-	&:focus
+	text-indent: -9999px
+	width: $gallery-dots-diameter
+	+on-interaction
 		opacity: 0.7
 
 .bx-prev,
