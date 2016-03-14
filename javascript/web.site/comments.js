@@ -427,6 +427,24 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         });
     },
 
+    putRewrapperOnReplies = function( $firstReply ) {
+
+        // TODO: das ist auch etwas wackelig
+        var $rootComment = $firstReply.prev( '.comment' ),
+            rootCommentId = $rootComment.attr( 'id' ),
+            // TODO: wird die ID später wieder zurechtgeparsed? Dann lieber Original-ID als Data-Attribut verwenden?
+            rewrapperId = 'hide-replies-' + rootCommentId,
+            $answers = $rootComment.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
+            // TODO: Wo kam der Rewrapper bisher her? Kann er via CSS immer sichtbar sein?
+            rewrapper = '' +
+            '<div id="' + rewrapperId + '" class="comment__rewrapper js-hide-replies" style="display:block;">' +
+                '<span class="comment__count">− ' + $answers.length + '</span>\n' +
+                '<span class="comment__cta">Antworten verbergen</span>\n' +
+            '</div>\n';
+
+        $firstReply.find( '.comment__container' ).prepend( rewrapper );
+    },
+
     wrapRepliesNew = function() {
         // TODO: ggf target, deeplinks
         // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
@@ -442,12 +460,8 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             var $root = $( this ),
                 $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
                 $replyLinkContainer = $root.nextUntil( '.js-comment-toplevel', '.comment__container' ),
+                // TODO: wozu das? wozu undo?
                 id = 'hide-replies-' + this.id,
-                rewrapper = '' +
-                    '<div id="' + id + '" class="comment__rewrapper js-hide-replies">' +
-                        '<span class="comment__count">− ' + $answers.length + '</span>\n' +
-                        '<span class="comment__cta">Antworten verbergen</span>\n' +
-                    '</div>\n',
                 replyLoadUrl = $replyLinkContainer.find( 'a' ).data( 'url' ),
                 replyCountElement = $replyLinkContainer.find( '.comment-overlay__count' ),
                 replyCountString = replyCountElement.eq( 0 ).text().replace( '+ ', '' ),
@@ -486,7 +500,8 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
     loadReplies = function( e ) {
         var $wrapped = $( this ),
-            url = $wrapped.data( 'url' );
+            url = $wrapped.data( 'url' ),
+            $firstReply;
 
         e.preventDefault();
 
@@ -507,9 +522,11 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             url: url,
             method: 'GET',
             success: function( response ) {
-                console.log( $wrapped );
-                console.log( $wrapped.closest( 'article.comment' ) );
-                $wrapped.closest( 'article.comment' ).after( response );
+
+                $firstReply = $wrapped.closest( 'article.comment' );
+                // TODO: Slide??
+                $firstReply.after( response );
+                putRewrapperOnReplies( $firstReply );
             }
         });
 
