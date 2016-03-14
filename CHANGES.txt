@@ -15,6 +15,8 @@ Change log for zeit.web
 2.64 (2016-03-16)
 -----------------
 
+- ZON-2897: Allow ZMO article header image variant selection via layout
+
 - BUG-368: Fix campus framebuilder inline svg
 
 - BUG-370: Generate correct URLs for video objects in RSS-Feeds
