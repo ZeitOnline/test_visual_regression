@@ -36,6 +36,7 @@ require([
     'velocity.ui',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.core/plugins/jquery.animatescroll',
+    'web.core/plugins/jquery.toggleOnClick',
     'web.core/plugins/jquery.infobox',
     'web.core/plugins/jquery.referrerCount'
 ], function( $, Velocity ) {
@@ -48,6 +49,9 @@ require([
     switch ( pageType ) {
         case 'article':
             main.find( '.js-infobox' ).infobox();
+            main.find( '.article-toc' ).toggleOnClick({
+                toggleElement: '.article-toc__seperator'
+            });
     }
 
 });
