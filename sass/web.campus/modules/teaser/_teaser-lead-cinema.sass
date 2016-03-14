@@ -30,6 +30,9 @@
 	&__metadata
 		@extend %teaser-metadata
 
+	&__byline
+		@extend %teaser-byline
+
 +respond-max($break-tablet-min)
 	.teaser-lead-cinema
 		&__kicker,
@@ -73,10 +76,10 @@
 		&__metadata
 			display: block
 			float: left
-			font-size: remify(18px)
-			line-height: (24/18)
 			width: 50%
 		&__text
+			font-size: remify(18px)
+			line-height: (24/18)
 			padding-right: remify(10px)
 		&__metadata
 			padding-left: remify(10px)
