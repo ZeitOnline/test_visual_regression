@@ -508,23 +508,22 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         // TODO: on error/timeout visit the link
         // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
         // TODO: ersten Kommentar wegwerfen, oder gar nicht erst laden
-        // TODO: nach dem Laden muss ein-und ausklappen wie bisher funktionieren.
         // TODO: schönen flüssigen Flow hinkriegen
         // - Laden starten
         // - ersten Kommentar aufsliden
         // - Platzhalter (graue Boxen ggf pulsierend oder loading indicator) druntermachen
         // - nach dem Laden die grauen Boxen ersetzen
         // - auf Timeout oder Fehler reagieren.
-        //   - zur Seite mit geöffneten Antwrten wechseln?
+        //   - zur Seite mit geöffneten Antworten wechseln?
         //   - Link zur Seite mit geöffneten Kommentaren, mit Hinweis "something's fucky"
         //   - Hinweis "something's fucky"
         $.ajax({
             url: url,
             method: 'GET',
             success: function( response ) {
-
+                // without the js-load-comment-replies class, we toggle existing replies (instead of loading from server)
+                $wrapped.removeClass( 'js-load-comment-replies' );
                 $firstReply = $wrapped.closest( 'article.comment' );
-                // TODO: Slide??
                 $firstReply.after( response );
                 putRewrapperOnReplies( $firstReply );
             }
