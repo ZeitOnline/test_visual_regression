@@ -71,8 +71,9 @@ def test_framebuilder_can_contain_ivw(testbrowser):
 def test_framebuilder_should_inline_svgs(testbrowser):
     browser = testbrowser('/framebuilder')
     assert len(browser.xpath(
-               '/html/body/div[@class="visually-hidden"]/svg/symbol')) == 4
-    assert browser.cssselect('.logo_bar svg > use')[0].attrib['xlink:href']
+        '/html/body/div[@class="invisible"]/svg/symbol')) == 4
+    for item in browser.cssselect('header.header svg > use'):
+        assert item.attrib['xlink:href'].startswith('#')
 
 
 def test_framebuilder_should_show_ressort_nav_by_default(testbrowser):
