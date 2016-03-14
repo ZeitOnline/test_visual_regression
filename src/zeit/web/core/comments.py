@@ -180,6 +180,7 @@ def request_thread(path,
             uri, page, page_size, sort))
 
     uri = thread_modes.get(thread_type, uri)
+    log.info("Requested thread: {}".format(uri))
 
     try:
         with zeit.web.core.metrics.timer(
@@ -206,9 +207,12 @@ def get_paginated_thread(
 
     page_size = int(conf.get('comment_page_size', '4'))
     # XXX: We need to implement the filtering for 'promotion' and 'recommended'
-    thread = request_thread(path, thread_type='paginated', page=page,
-                            page_size=page_size, sort=sort)
+    # For now this is done passing sort with values 'promoted' or 'recommended'
 
+    # XXX: The Drupal APIs counting begins with 0
+    request_page = page-1 if page > 0 else 0
+    thread = request_thread(path, thread_type='paginated', page=request_page,
+                            page_size=page_size, sort=sort)
     if thread is None:
         return dict()
 
@@ -229,29 +233,70 @@ def get_paginated_thread(
         raise ThreadNotLoadable()
 
     comment_count = 0 # XXX: We need to get the total comments from drupal
-    top_level_comment_count = 0 # We need to get the toplevel comments too
+    toplevel_comment_count = 1 # XXX: We need to get the toplevel comments too
+    total_comment_count = comment_count = 1
     comment_list = list(comment_to_dict(c) for c in comment_list)
 
     flattened_comments = comment_list[:]
-    has_promotion = has_recommendations = False
-    for comment in flattened_comments:
-        if comment['recommendations'] > 0:
-            has_recommendations = True
-        if comment['is_promoted'] is True:
-            has_promotion = True
-        if has_recommendations and has_promotion:
-            break
-    sorted_tree, index = _sort_comments(comment_list)
-    pages = int(math.ceil(float(top_level_comment_count) / float(page_size)))
 
-    foo = dict(
-            flattened_comments=flattened_comments,
-            has_recommendations=has_recommendations,
-            has_promotion=has_promotion,
-            index=index,
-            comment_count=comment_count,
-            sort='asc',
-            nid=comment_nid)
+    # We need information, if a thread has promotion and/or recommendations
+    # from the API
+    has_recommendation = False
+    has_promotion = False
+
+    sorted_tree, index = _sort_comments(comment_list)
+    pages = int(math.ceil(float(toplevel_comment_count) / float(page_size)))
+
+    thread = dict(
+        sorted_tree=sorted_tree,
+        flattened_comments=flattened_comments,
+        has_recommendations=has_recommendation,
+        has_promotion=has_promotion,
+        index=index,
+        comment_count=comment_count,
+        sort=sort,
+        nid=comment_nid)
+
+    sorted_tree = thread.pop('sorted_tree', {}).values()
+    thread['comment_count'] = comment_count
+    # sanitize page value
+    if page:
+        try:
+            page = int(page)
+        except ValueError:
+            page = 1
+
+        if page < 1 or page > pages:
+            page = 1
+
+    # flatten comment tree
+    thread['comments'] = comments = []
+    for main_comment in sorted_tree:
+        origin = main_comment[0]
+        origin['replies'] = []
+        comments.append(origin)
+        for sub_comment in main_comment[1]:
+            origin['replies'].append(sub_comment)
+
+    # display comment count
+    thread['headline'] = '{} {}'.format(
+        total_comment_count,
+        'Kommentar' if total_comment_count == 1 else 'Kommentare')
+
+    # comments ad place
+    thread['ad_place'] = int(page_size / 2 + 1)
+
+    # all things pagination
+    thread['pages'] = {
+        'current': page,
+        'total': pages,
+        'pager': zeit.web.core.template.calculate_pagination(page, pages)}
+
+    if page and thread['pages']['pager']:
+        thread['pages']['title'] = u'Seite {} von {}'.format(
+            page, pages)
+
+    return thread
 
 
 def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):

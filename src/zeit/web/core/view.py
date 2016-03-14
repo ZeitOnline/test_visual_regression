@@ -687,7 +687,7 @@ class Content(CeleraOneMixin, Base):
         page = self.request.params.get('page', 1)
         cid = self.request.params.get('cid', None)
         try:
-            return zeit.web.core.comments.get_thread(
+            return zeit.web.core.comments.get_paginated_thread(
                 self.context.uniqueId,
                 sort=sort,
                 page=page,
