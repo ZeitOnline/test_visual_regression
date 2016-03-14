@@ -1,8 +1,6 @@
 .teaser-print-cover
 	@extend %teaser
-	// fallback for missing images
-	background-color: $grey--mid-dark
-	min-height: remify(200px)
+	background-color: $grey--mid-dark // fallback for expired images
 
 	&__media
 		@extend %teaser--dark

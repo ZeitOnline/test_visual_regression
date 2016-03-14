@@ -8,6 +8,8 @@ $teaser-large-video-max-width: em(1000px)
     background-color: $black
     width: 100%
     display: inline-block
+    min-height: remify(220px) // fallback for expired images
+
     +respond-min($break-2)
         margin-bottom: $compact
 
