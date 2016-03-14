@@ -46,11 +46,11 @@
                 {% endif %}
             {% endblock teaser_byline %}
             {% block teaser_datetime %}
-                {# disable for now, til macro is ported 
-					{% if not view.is_advertorial %}
-                    {{ cp.include_teaser_datetime(teaser, self.layout(), area.kind) }}
-	                {% endif %}
-				#}
+                {% if not view.is_advertorial %}
+                    <time class="{{ layout }}__datetime js-update-datetime" datetime="{{ teaser | release_date | format_date('iso8601') }}">
+                        {{- teaser | release_date | format_date('short') -}}
+                    </time>
+                {% endif %}
             {% endblock teaser_datetime %}
             {% block teaser_commentcount %}
                 {% set comments = view.comment_counts[teaser.uniqueId] %}
