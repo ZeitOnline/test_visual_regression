@@ -126,6 +126,10 @@ def comment_to_dict(comment):
             if created.replace(second=59) > changed:
                 created = created.replace(second=changed.second)
 
+    sublevel_comment_count = 0
+    if comment.xpath('comments_count_subthread'):
+        sublevel_comment_count = int(
+            comment.xpath('comments_count_subthread')[0])
     # TODO: Catch name and cid unavailabilty in element tree.
     return dict(
         uid=comment.xpath('author/@id')[0].lstrip('uid-'),
@@ -144,7 +148,8 @@ def comment_to_dict(comment):
         is_freelancer=is_freelancer,
         is_reply=bool(in_reply),
         is_promoted=bool(
-            len(comment.xpath('flagged[@type="kommentar_empfohlen"]')))
+            len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
+        sublevel_comment_count=sublevel_comment_count
     )
 
 
