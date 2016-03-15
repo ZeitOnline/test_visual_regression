@@ -117,7 +117,7 @@
 
                 {% if comment.replies | length > 1 %}
                     <div class="comment__container">
-                        <a href="{{view.content_url}}?cid={{comment.cid}}&comment_replies={{comment.cid}}#cid-{{comment.cid}}" data-url="{{view.content_url}}/comment_replies?cid={{comment.cid}}" class="js-load-comment-replies">
+                        <a href="{{view.content_url}}?cid={{comment.cid}}&comment_replies={{comment.cid}}#cid-{{comment.cid}}" data-url="{{view.content_url}}/comment_replies?cid={{comment.cid}}">
                             <span class="comment-overlay__count">+ {{comment.replies | length-1}}</span>
                             <span class="comment-overlay__cta"> weitere Antworten anzeigen</span>
                         </a>

@@ -293,6 +293,8 @@ def get_replies(unique_id, cid):
     import time
     time.sleep(5)
     print('WAITING FOR 5s')
+    # for testing error mode.
+    # raise CommunityNotReachable()
 
     try:
         thread = zeit.web.core.comments.get_thread(unique_id, cid=cid)

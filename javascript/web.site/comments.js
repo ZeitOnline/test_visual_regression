@@ -462,7 +462,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 $replyLinkContainer = $root.nextUntil( '.js-comment-toplevel', '.comment__container' ),
                 $answers,
                 id,
+                replyLoadLink,
                 replyLoadUrl,
+                replyLoadFallbackUrl,
                 replyCountElement,
                 replyCountString,
                 replyCountInteger,
@@ -475,13 +477,16 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' );
             // TODO: wozu das? wozu undo?
             id = 'hide-replies-' + this.id;
-            replyLoadUrl = $replyLinkContainer.find( 'a' ).data( 'url' );
+            replyLoadLink = $replyLinkContainer.find( 'a' );
+            replyLoadUrl = replyLoadLink.data( 'url' );
+            replyLoadFallbackUrl = replyLoadLink.attr( 'href' );
             replyCountElement = $replyLinkContainer.find( '.comment-overlay__count' );
             replyCountString = replyCountElement.eq( 0 ).text().replace( '+ ', '' );
             replyCountInteger = parseInt( replyCountString, 10 );
 
             overlayHTML = '' +
-                '<div class="comment-overlay js-load-comment-replies" data-url="' + replyLoadUrl + '">\n' +
+                '<div class="comment-overlay js-load-comment-replies" ' +
+                    'data-url="' + replyLoadUrl + '" data-fallbackurl="' + replyLoadUrl + '">\n' +
                     '<div class="comment-overlay__wrap">\n' +
                         '<span class="comment-overlay__count">+ ' + replyCountInteger + '</span>\n' +
                         '<span class="comment-overlay__cta">Weitere Antworten anzeigen</span>\n' +
@@ -513,6 +518,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     loadReplies = function( e ) {
         var $wrapped = $( this ),
             url = $wrapped.data( 'url' ),
+            fallbackUrl = $wrapped.data( 'fallbackurl' ),
             $firstReply = $wrapped.closest( 'article.comment' ),
             // TODO: Das sollte von Anfang an ein Data-Attribut am RootComment sein
             replyCountElement = $firstReply.find( '.comment-overlay__count' ),
@@ -521,20 +527,14 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             placeholderHTML = '' +
                 '<article class="comment comment--indented js-comment-placeholder">' +
                     '<div class="comment__container comment__container--placeholder">' +
-                        '<p class="js-comment-placeholder__content">wird geladen</p></div>' +
+                        '<p class="js-comment-placeholder__content">Kommentar wird geladen.</p></div>' +
                 '</article>',
             numberOfPlaceholders = ( replyCountInteger < 5 ) ? replyCountInteger : 5,
             repliesLoaded = false;
 
         e.preventDefault();
 
-        // TODO: on error/timeout visit the link
         // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
-        // TODO: schönen flüssigen Flow hinkriegen
-        // - auf Timeout oder Fehler reagieren.
-        //   - zur Seite mit geöffneten Antworten wechseln?
-        //   - Link zur Seite mit geöffneten Kommentaren, mit Hinweis "something's fucky"
-        //   - Hinweis "something's fucky"
         // OPTIMIZE: Netter mit Promises arbeiten als dem Callback-vs-repliesLoaded-Quatsch?
         $.ajax({
             url: url,
@@ -544,7 +544,11 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 $firstReply.nextUntil( '.js-comment-toplevel', '.js-comment-placeholder' ).remove();
                 $firstReply.after( response );
                 putRewrapperOnReplies( $firstReply );
-
+            },
+            complete: function( jqXhr, textStatus ) {
+                if ( textStatus !== 'success' ) {
+                    window.location.href = fallbackUrl;
+                }
             }
         });
 
