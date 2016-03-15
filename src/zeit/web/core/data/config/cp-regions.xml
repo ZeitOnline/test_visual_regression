@@ -38,6 +38,9 @@
     <region kind="topic" title="Dossier">
         <area kind="topic"/>
     </region>
+    <region kind="topic" title="Dossier">
+        <area kind="topic-alternative"/>
+    </region>
     <region kind="gallery" title="ZEIT Shop">
         <area kind="shop"/>
     </region>
