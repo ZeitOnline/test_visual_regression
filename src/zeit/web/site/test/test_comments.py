@@ -157,11 +157,7 @@ def test_comment_author_roles_should_be_displayed(testbrowser):
     assert icon_freelancer[0].attrib['title'] == 'Freie Autorin'
 
 
-def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
-    comments = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/article/comments.tpl')
-    comment_form = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/comments/comment-form.html')
+def test_comments_zon_template_respects_metadata(tplbrowser):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
 
@@ -173,28 +169,26 @@ def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
 
     view = zeit.web.site.view_article.Article(content, request)
     view.comments_allowed = False
-    string = comments.render(view=view, request=request)
-    html = lxml.html.fromstring(string)
-
-    assert len(html.cssselect('#comments')) == 1, (
+    comments = tplbrowser('zeit.web.site:templates/inc/article/comments.tpl',
+                          view=view, request=request)
+    assert len(comments.cssselect('#comments')) == 1, (
         'comment section must be present')
-    assert len(html.cssselect('article.comment')) > 0, (
+    assert len(comments.cssselect('article.comment')) > 0, (
         'comments must be displayed')
 
-    string = comment_form.render(view=view, request=request)
-    html = lxml.html.fromstring(string)
-
-    assert len(html.cssselect('#comment-form[data-uid="123"]')) == 1, (
+    form = tplbrowser('zeit.web.site:templates/inc/comments/comment-form.html',
+                      view=view, request=request)
+    assert len(form.cssselect('#comment-form[data-uid="123"]')) == 1, (
         'comment form tag with data-uid attribute must be present')
-    assert len(html.cssselect('#comment-form textarea')) == 0, (
+    assert len(form.cssselect('#comment-form textarea')) == 0, (
         'comment form must be empty')
 
     # reset view (kind of)
     view = zeit.web.site.view_article.Article(content, request)
     view.show_commentthread = False
-    string = comments.render(view=view, request=request)
-
-    assert string.strip() == '', (
+    comments = tplbrowser('zeit.web.site:templates/inc/article/comments.tpl',
+                          view=view, request=request)
+    assert comments.contents.strip() == '', (
         'comment section template must return an empty document')
 
 
