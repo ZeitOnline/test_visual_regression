@@ -19,16 +19,16 @@
     {% set class = 'comment-form__cancel--hidden' %}
 {% endif %}
 
-{% if view.comment_area.note %}
+{% if view.comment_form.note %}
     <div class="comment-section__note">
-        <div class="comment-section__message comment-section__item">{{ view.comment_area.note }}</div>
+        <div class="comment-section__message comment-section__item">{{ view.comment_form.note }}</div>
     </div>
-{% elif view.comment_area.user_blocked or view.comment_area.show_premoderation_warning %}
+{% elif view.comment_form.user_blocked or view.comment_form.show_premoderation_warning %}
     <div class="comment-section__note">
         <div class="comment-section__notice comment-section__item">
-        {% if view.comment_area.user_blocked %}
+        {% if view.comment_form.user_blocked %}
             Die Kommentarfunktion wurde für Ihr Benutzerprofil gesperrt.
-        {% elif view.comment_area.show_premoderation_warning %}
+        {% elif view.comment_form.show_premoderation_warning %}
             Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind,
             oder kürzlich gegen <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">unsere Netiquette</a> verstoßen haben.
         {% endif %}
@@ -42,7 +42,7 @@
     {%- block comment_form %}
     <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.user.uid }}"
         {%- if is_mod %} data-mod="mod"{% endif %}>
-        {% if view.comment_area.show_comment_form -%}
+        {% if view.comment_form.show_comment_form -%}
         <div class="comment-form__text comment-form__text--metadata">
             {% if request.user.picture %}
                 <img class="comment-form__avatar" alt="Avatarbild von {{ request.user.name }}" src="{{ request.user.picture }}">
@@ -76,7 +76,7 @@
         <textarea class="comment-form__textarea js-required" name="comment" placeholder="{{ placeholder }}" maxlength="1500">
             {%- if view.error and view.error.comment %}{{ view.error.comment }}{% endif -%}
         </textarea>
-            {% if view.comment_area.show_premoderation_warning %}
+            {% if view.comment_form.show_premoderation_warning %}
             {# hidden in comment form, just visible in (cloned) reply form #}
             <p class="comment-form__text comment-section__notice">
                 Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind,
@@ -92,7 +92,7 @@
         {%- endif %}
     </form>
     {%- endblock %}
-{%- elif view.comment_area.show_comment_form %}
+{%- elif view.comment_form.show_comment_form %}
     <form class="comment-login" id="comment-form">
         <p>
             Bitte melden Sie sich an, um zu kommentieren.

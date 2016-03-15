@@ -634,7 +634,7 @@ class CommentMixin(object):
         return self.context.commentSectionEnable is not False
 
     @zeit.web.reify
-    def comment_area(self):
+    def comment_form(self):
         user = self.request.user
         user_blocked = user.get('blocked')
         premoderation = user.get('premoderation')
@@ -672,22 +672,31 @@ class CommentMixin(object):
                     u'Bitte entschuldigen Sie diese Störung.')
 
         return {
-            'show': (self.comments_allowed or bool(self.comments)),
             # For not authenticated users this means "show_login_prompt".
             'show_comment_form': (
                 not self.community_maintenance['active'] and
                 self.comments_allowed and self.comments_loadable and
                 ((not user_blocked and valid_community_login) or
                  not authenticated)),
-            'show_comments': not self.community_maintenance['active'] and (
-                self.comments_loadable and bool(self.comments)),
-            'no_comments': (not self.comments and self.comments_loadable),
             'note': note,
             'message': message,
             'user_blocked': user_blocked,
             'show_premoderation_warning': premoderation and (
                 self.comments_allowed and not user_blocked)
         }
+
+    @zeit.web.reify
+    def comment_area(self):
+        result = {
+            'show': (self.comments_allowed or bool(self.comments)),
+            'show_comments': not self.community_maintenance['active'] and (
+                self.comments_loadable and bool(self.comments)),
+            'no_comments': (not self.comments and self.comments_loadable),
+        }
+        # XXX Do we really want all these variables under the same name or
+        # should we split up access in the templates instead?
+        result.update(self.comment_form)
+        return result
 
 
 class Content(CeleraOneMixin, CommentMixin, Base):
