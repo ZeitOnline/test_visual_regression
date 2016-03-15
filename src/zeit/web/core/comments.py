@@ -179,10 +179,12 @@ def request_thread(path,
         sub_thread='{}?mode=sub&cid={}'.format(uri, cid),
         deeplink='{}?mode=deeplink&cid={}&rows={}&sort={}'.format(
             uri, cid, page_size, sort),
-        recommendation='{}?mode=recommendation&page={}&rows={}&sort={}'.format(
-            uri, page, page_size, sort),
-        promotion='{}?mode=promotion&page={}&rows={}&sort={}'.format(
-            uri, page, page_size, sort))
+        recommendation=('{}?mode=recommendation&type=readers&'
+                        'page={}&rows={}&sort={}').format(
+                            uri, page, page_size, sort),
+        promotion=('{}?mode=recommendation&type=editors&'
+                   'page={}&rows={}&sort={}').format(
+                        uri, page, page_size, sort))
 
     uri = thread_modes.get(thread_type, uri)
     log.info("Requested thread: {}".format(uri))
