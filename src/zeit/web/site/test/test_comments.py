@@ -262,15 +262,15 @@ def test_comment_action_recommend_should_redirect_to_login(testserver):
 def test_comment_area_note_should_be_displayed_if_set(
         testbrowser, monkeypatch):
     comment = {
-            'show': True,
-            'show_comment_form': False,
-            'show_comments': True,
-            'no_comments': False,
-            'note': 'No community login',
-            'message': None,
-            'user_blocked': False,
-            'show_premoderation_warning': False}
-    monkeypatch.setattr(zeit.web.core.view.Content, 'comment_area', comment)
+        'show': True,
+        'show_comment_form': False,
+        'show_comments': True,
+        'no_comments': False,
+        'note': 'No community login',
+        'message': None,
+        'user_blocked': False,
+        'show_premoderation_warning': False
+    }
     browser = testbrowser('/zeit-online/article/01/comment-form')
     assert browser.cssselect('.comment-section__note div')[0].text == (
         'No community login')
