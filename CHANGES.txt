@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - BUG-368: Fix campus framebuilder inline svg
 
+- BUG-370: Generate correct URLs for video objects in RSS-Feeds
+
 - ZON-2489: Add Infobox to ZEIT Campus
 
 - ZON-2914: Output site_name and admin tag regardless of shared cardstack
