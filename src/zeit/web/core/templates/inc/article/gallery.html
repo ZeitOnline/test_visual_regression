@@ -5,7 +5,7 @@
         <div class="gallery-slides js-gallery">
             {% for image in images.itervalues() -%}
                 {% set image_loop = loop %}
-                {% include 'zeit.web.core:templates/inc/asset/image_gallery.tpl' with context %}
+                {% include 'zeit.web.core:templates/inc/asset/image_gallery.tpl' %}
             {%- endfor %}
         </div>
     </div>
