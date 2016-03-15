@@ -547,8 +547,6 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def _c1_doc_type(self):
-        import zeit.web.site.view
-
         if self.type == 'gallery':
             return 'bildergalerie'
         elif isinstance(self, zeit.web.core.view.FrameBuilder):
