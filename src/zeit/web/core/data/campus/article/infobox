@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags>
+      <tag type="free" url_value="student" uuid="65f229d9-f0e9-434a-9f40-d541d927a413">Student</tag>
+      <tag score="5" type="topic" url_value="hochschule" uuid="b8bea0ad-05bf-4eee-b35a-6b1fd478d777">Hochschule</tag>
+      <tag score="4" type="free" url_value="auslandssemester" uuid="6430e636-640f-4447-9f42-1116f424a85b">Auslandssemester</tag>
+      <tag score="4" type="free" url_value="bafoeg-antrag" uuid="28f8d6b7-c686-4f2d-9668-409d919caefb">Bafög-Antrag</tag>
+      <tag score="4" type="free" url_value="praktikum" uuid="8e4c75a5-c7ad-4373-b85f-64e124e8c66c">Praktikum</tag>
+      <tag score="4" type="free" url_value="studienfinanzierung" uuid="31ca4410-3061-423d-ac88-253f64cd6ec5">Studienfinanzierung</tag>
+    </rankedTags>
+    <author expires="" href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+      <display_name>Anne Mustermann</display_name>
+    </author>
+    <references>
+    </references>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
+    <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
+    <attribute name="article_id" ns="http://namespaces.zeit.de/CMS/print" xmlns:py="http://codespeak.net/lxml/objectify/pytype">556168</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Anna Bordel</attribute>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
+    <attribute name="channels" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Studium Uni-Leben</attribute>
+    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Redaktion</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2016-02-10T09:39:14.233424+00:00</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2016-01-10T09:39:17.773713+00:00</attribute>
+    <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2016-02-10T09:39:18.167553+00:00</attribute>
+    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2016-02-10T09:39:17.773713+00:00</attribute>
+    <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2016-02-10T09:39:16.922711+00:00</attribute>
+    <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
+    <attribute name="erscheint" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">05.05.2015</attribute>
+    <attribute name="executable" ns="http://apache.org/dav/props/" xmlns:py="http://codespeak.net/lxml/objectify/pytype">F</attribute>
+    <attribute name="export_cds" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
+    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
+    <attribute name="id" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">simple</attribute>
+    <attribute name="importsource" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">k4</attribute>
+    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="ipad_template" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype"/>
+    <attribute name="is_amp" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
+    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="is_instant_article" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="jobname" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Bachelor_HILFE</attribute>
+    <attribute name="last-modified-by" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">import</attribute>
+    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2016-02-10T09:39:10.319064+00:00</attribute>
+    <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">ldap.schwabe</attribute>
+    <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="long_text" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Sogar nachts bekommen Studenten Hilfe. (akg)</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
+    <attribute name="mostread" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="origname" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Bachelor_HILFE</attribute>
+    <attribute name="page" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">100</attribute>
+    <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">http://xml.zeit.de/campus/article/simple</attribute>
+    <attribute name="print-publish" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2015-05-05T06:00:00+00:00</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">ZSF</attribute>
+    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">ZEIT Studienführer</attribute>
+    <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort" xmlns:py="http://codespeak.net/lxml/objectify/pytype">c709ca95afcf4b3e9b68a8aab56db53e</attribute>
+    <attribute name="publication-id" ns="http://namespaces.zeit.de/CMS/print" xmlns:py="http://codespeak.net/lxml/objectify/pytype">1367935288499</attribute>
+    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="push_news" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
+    <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Studium</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print" xmlns:py="http://codespeak.net/lxml/objectify/pytype">ZEIT Studienführer</attribute>
+    <attribute name="running-volume" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">ZSF-2015-01</attribute>
+    <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="short_text" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Hier gibt es Hilfe für Studenten: Wir haben die wichtigsten Anlaufstellen gesammelt. (akg)</attribute>
+    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">OK</attribute>
+    <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Uni-Leben</attribute>
+    <attribute name="text-length" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">5098</attribute>
+    <attribute name="tldr_milestone" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">article</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta" xmlns:py="http://codespeak.net/lxml/objectify/pytype">article</attribute>
+    <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">{urn:uuid:446a4dc8-e536-4c7f-8187-45e443a524be}</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">01</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2015</attribute>
+    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta" xmlns:py="http://codespeak.net/lxml/objectify/pytype">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;Article&quot; module=&quot;zeit.content.article.article&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;IZCOContent&quot; module=&quot;zeit.campus.interfaces&quot;/&gt;
+        &lt;global name=&quot;IZCOArticle&quot; module=&quot;zeit.campus.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noodp,noydir,noarchive </attribute>
+  </head>
+  <body>
+    <supertitle>Beratung</supertitle>
+    <title>Hier gibt es Hilfe</title>
+    <byline>von Anna Bordel</byline>
+    <division type="page">
+      <p>
+        An jeder Hochschule gibt es eine Zentrale Studienberatung. Dort können sich Schüler auch beraten lassen, wenn sie noch nicht sicher sind, ob sie überhaupt an dieser
+        Hochschule studieren wollen. Man vereinbart online oder telefonisch einen Termin und bekommt dann alle Infos zum Studium: mögliche Studiengänge, was diese für Inhalte
+        haben, wie sie ablaufen, wie man sich bewirbt und vieles andere. Über Studiengänge kann man sich vorab auch auf den Websites der Hochschulen informieren. Meist sind
+        die einzelnen Studiengänge unter dem Stichwort "Studienangebot" aufgelistet.
+      </p>
+      <infobox href="http://xml.zeit.de/zeit-online/article/info-bonobo" is_empty="False" />
+      <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni, eius, nesciunt sequi voluptates itaque ratione similique quia, veritatis ad accusantium distinctio enim.
+      </p>
+    </division>
+    <subtitle>Studienwahl? Zentrale Studienberatung! Wohnheimszimmer? Studentenwerk! Lernstress? Psychologische Beratung! Wir haben die wichtigsten Anlaufstellen gesammelt.</subtitle>
+  </body>
+  <teaser>
+    <title>Hier gibt es Hilfe für Studenten</title>
+    <supertitle>Beratung</supertitle>
+    <text>Studienwahl? Zentrale Studienberatung! Wohnheimszimmer? Studentenwerk! Lernstress? Psychologische Beratung! Wir haben die wichtigsten Anlaufstellen gesammelt.</text>
+  </teaser>
+</article>

@@ -60,7 +60,7 @@
     <attribute name="text-length" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">5010</attribute>
     <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta" py:pytype="str">article</attribute>
     <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">no</attribute>
-    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">{urn:uuid:21da7127-f585-49ed-b4c6-200c7a1f7fea}</attribute>
     <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">49</attribute>
     <attribute name="year" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">2014</attribute>
     <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta" py:pytype="str">&lt;pickle&gt;
