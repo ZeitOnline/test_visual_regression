@@ -131,6 +131,13 @@ def test_article_block_infobox_should_render_expected_structure(testbrowser):
     assert len(infobox.cssselect('*[role="tabpanel"]')) == 6
 
 
+def test_article_block_inlinegallery_should_render_expected_structure(
+        testbrowser):
+    browser = testbrowser('/campus/article/inline-gallery')
+    gallery = browser.cssselect('.inline-gallery')[0]
+    assert len(gallery.cssselect('.slide')) == 7
+
+
 def test_article_tags_are_present(testbrowser):
     browser = testbrowser('/campus/article/simple')
     assert browser.cssselect('nav.article-tags')
