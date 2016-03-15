@@ -50,10 +50,13 @@ require([
     switch ( pageType ) {
         case 'article':
             main.find( '.js-infobox' ).infobox();
-            main.find( '.js-gallery' ).inlinegallery();
             main.find( '.article-toc' ).toggleOnClick({
                 toggleElement: '.article-toc__seperator'
             });
+
+        /* falls through */
+        case 'gallery':
+            main.find( '.js-gallery' ).inlinegallery();
     }
 
 });

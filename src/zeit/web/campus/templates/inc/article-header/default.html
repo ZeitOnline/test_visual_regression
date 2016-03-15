@@ -20,16 +20,17 @@
     </div>
     {% endblock -%}
 {% else -%}
-    <div class="{{ 'article-header' | with_mods(view.article_layout) }}">
+    {% set image = get_image(content=view.main_image_block, variant_id='portrait', fallback=False) %}
+    <div class="{{ 'article-header' | with_mods(view.article_layout, 'with-image' if image else 'no-image') }}">
     {% block article_header -%}
         {% block article_header_image -%}
-            {% require image = get_image(content=view.main_image_block, variant_id='portrait') -%}
-                <div class="article-header__image-wrap">
+            {% if image -%}
+                <div class="article-header__default-image">
                     <div class="article-header__image">
                         {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}
                     </div>
                 </div>
-            {% endrequire -%}
+            {% endif -%}
         {% endblock -%}
 
         {% block article_headline -%}
@@ -44,7 +45,7 @@
             </h1>
         {% endblock -%}
 
-        <div class="article-header__info">
+        <div class="article-header__default-info">
         {% block article_topic-%}
             {% if view.topic_page and view.topic_label %}
             <a class="{{ 'article-header__topic' | with_mods(view.article_layout) }}" href="{{ view.topic_page.uniqueId | create_url }}">{{ view.topic_label }}</a>
