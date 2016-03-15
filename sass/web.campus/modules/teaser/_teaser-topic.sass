@@ -1,0 +1,98 @@
+.teaser-topic
+	+clearfix
+	+font-smoothing
+	background-color: $color-topics-primary
+	padding: remify(20px $page-padding--small 30px)
+	position: relative
+	&__media
+		bottom: 0
+		left: 0
+		margin: 0
+		min-height: 100%
+		min-width: 100%
+		opacity: 0.1
+		position: absolute
+		right: 0
+		top: 0
+		&.is-pixelperfect
+			img
+				min-height: 100%
+				min-width: 100%
+				width: auto
+
+.teaser-topic-main
+	&__heading
+		@extend %font-beckett
+		font-size: em(42px)
+		margin: remify(0 0 28px 0)
+	&__kicker
+		color: $zco-charcoal
+		&:after
+			content: ' / '
+	&__title
+		color: #fff
+	&__button
+		border: 3px solid currentColor
+		color: #fff
+		display: inline-block
+		font-size: em(16px)
+		font-weight: bold
+		letter-spacing: 0.01em
+		margin: remify(0 0 26px 0)
+		min-width: 160px
+		padding: remify(6px 8px)
+		text-align: center
+		+on-interaction
+			color: #fff
+
+.teaser-topic-item
+	&:after
+		border-bottom: 4px solid #fff
+		content: ""
+		display: block
+		height: 0
+		margin: remify(24px 0)
+		width: remify(50px)
+	&:last-child:after
+		content: none
+	&__heading
+		margin: 0
+	&__kicker
+		color: $zco-charcoal
+		display: block
+		font-size: em(12px)
+		font-weight: bold
+		letter-spacing: $letter-spacing-l
+		line-heigth: 15px/12px
+		margin-bottom: remify(12px)
+		text-transform: uppercase
+	&__title
+		@extend %font-beckett
+		color: #fff
+		display: block
+		font-size: em(28px)
+
++respond-min($break-tablet-min)
+	.teaser-topic
+		padding: remify(50px 0)
+	.teaser-topic-main
+		float: left
+		margin-top: remify(4px)
+		padding: remify(0 40px 0 40px)
+		width: 60%
+		&__heading
+			font-size: em(64px)
+	.teaser-topic-list
+		float: right
+		padding: remify(0 40px 0 0)
+		width: 40%
+	.teaser-topic-item
+		&__title
+			font-size: em(28px)
+
++respond-min($break-desktop-min)
+	.teaser-topic-main
+		width: 66.66%
+	.teaser-topic-list
+		padding-right: remify(6px)
+		width: 33.33%
