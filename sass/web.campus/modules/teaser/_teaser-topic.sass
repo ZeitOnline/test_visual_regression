@@ -21,10 +21,13 @@
 				width: auto
 
 .teaser-topic-main
+	position: relative
 	&__heading
 		@extend %font-beckett
 		font-size: em(42px)
 		margin: remify(0 0 28px 0)
+	&__combined-link
+		display: block
 	&__kicker
 		color: $zco-charcoal
 		&:after
@@ -45,6 +48,9 @@
 		+on-interaction
 			color: #fff
 
+.teaser-topic-list
+	position: relative
+
 .teaser-topic-item
 	&:after
 		border-bottom: 4px solid #fff
@@ -57,6 +63,8 @@
 		content: none
 	&__heading
 		margin: 0
+	&__combined-link
+		display: block
 	&__kicker
 		color: $zco-charcoal
 		display: block
