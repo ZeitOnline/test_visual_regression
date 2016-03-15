@@ -128,9 +128,9 @@ def comment_to_dict(comment):
                 created = created.replace(second=changed.second)
 
     sublevel_comment_count = 0
-    if comment.xpath('comments_count_subthread'):
+    if comment.xpath('comments_count_subthread/text()'):
         sublevel_comment_count = int(
-            comment.xpath('comments_count_subthread')[0])
+            comment.xpath('comments_count_subthread/text()')[0])
     # TODO: Catch name and cid unavailabilty in element tree.
     return dict(
         uid=comment.xpath('author/@id')[0].lstrip('uid-'),
@@ -214,11 +214,16 @@ def get_paginated_thread(
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
 
     page_size = int(conf.get('comment_page_size', '4'))
-    # XXX: We need to implement the filtering for 'promotion' and 'recommended'
-    # For now this is done passing sort with values 'promoted' or 'recommended'
 
-    # XXX: The Drupal APIs counting begins with 0
-    thread = request_thread(path, thread_type='paginated', page=page,
+    thread_type='paginated'
+    if sort == 'promoted':
+        thread_type='promotion'
+        sort='asc'
+    if sort == 'recommended':
+        thread_type='recommendation'
+        sort='asc'
+
+    thread = request_thread(path, thread_type=thread_type, page=page,
                             page_size=page_size, sort=sort)
     if thread is None:
         return dict()
@@ -240,17 +245,18 @@ def get_paginated_thread(
         toplevel_comment_count = document.xpath('/comments/comments_'
                                                 'count_toplevel/text()')[0]
         total_comment_count = comment_count
+        has_recommendation = bool(int(
+            document.xpath('/comments/comments_count_'
+                           'recommendations_readers/text()')[0]))
+        has_promotion = bool(int(
+            document.xpath('/comments/comments_count_'
+                           'recommendations_editors/text()')[0]))
     except (IndexError, lxml.etree.XMLSyntaxError):
         raise ThreadNotLoadable()
 
     comment_list = list(comment_to_dict(c) for c in comment_list)
 
     flattened_comments = comment_list[:]
-
-    # We need information, if a thread has promotion and/or recommendations
-    # from the API
-    has_recommendation = False
-    has_promotion = False
 
     sorted_tree, index = _sort_comments(comment_list)
     pages = int(math.ceil(float(toplevel_comment_count) / float(page_size)))
