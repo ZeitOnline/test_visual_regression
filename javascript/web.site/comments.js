@@ -448,25 +448,37 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     wrapRepliesNew = function() {
         // TODO: ggf target, deeplinks
         // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
-        // TODO: "Verbergen" kann man ja erst nach dem Laden dranhängen.
         var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
             $target;
 
+        // TODO: wird das $target noch benötigt?
         if ( window.location.hash.indexOf( '#cid-' ) === 0 ) {
             $target = $( window.location.hash );
         }
 
         $rootComments.each( function() {
             var $root = $( this ),
-                $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
+                // OPTIMIZE: mit JS Präfix versehen? Eine Umstrukturierung des HTML würde alles kaputtmachen.
                 $replyLinkContainer = $root.nextUntil( '.js-comment-toplevel', '.comment__container' ),
-                // TODO: wozu das? wozu undo?
-                id = 'hide-replies-' + this.id,
-                replyLoadUrl = $replyLinkContainer.find( 'a' ).data( 'url' ),
-                replyCountElement = $replyLinkContainer.find( '.comment-overlay__count' ),
-                replyCountString = replyCountElement.eq( 0 ).text().replace( '+ ', '' ),
-                replyCountInteger = parseInt( replyCountString, 10 ),
+                $answers,
+                id,
+                replyLoadUrl,
+                replyCountElement,
+                replyCountString,
+                replyCountInteger,
                 overlayHTML;
+
+            if ( $replyLinkContainer.length === 0 ) {
+                return;
+            }
+
+            $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' );
+            // TODO: wozu das? wozu undo?
+            id = 'hide-replies-' + this.id;
+            replyLoadUrl = $replyLinkContainer.find( 'a' ).data( 'url' );
+            replyCountElement = $replyLinkContainer.find( '.comment-overlay__count' );
+            replyCountString = replyCountElement.eq( 0 ).text().replace( '+ ', '' );
+            replyCountInteger = parseInt( replyCountString, 10 );
 
             overlayHTML = '' +
                 '<div class="comment-overlay js-load-comment-replies" data-url="' + replyLoadUrl + '">\n' +
