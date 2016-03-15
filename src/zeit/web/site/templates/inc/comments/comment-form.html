@@ -38,16 +38,16 @@
 
 <div class="comment-section__form comment-section__item">
 {%- if request.user %}
-    {% set is_mod = 'admin-tech' in request.session.user.roles or 'admin-editor' in request.session.user.roles %}
+    {% set is_mod = 'admin-tech' in request.user.roles or 'admin-editor' in request.user.roles %}
     {%- block comment_form %}
-    <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.session.user.uid }}"
+    <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.user.uid }}"
         {%- if is_mod %} data-mod="mod"{% endif %}>
         {% if view.comment_area.show_comment_form -%}
         <div class="comment-form__text comment-form__text--metadata">
-            {% if request.session.user.picture %}
-                <img class="comment-form__avatar" alt="Avatarbild von {{ request.session.user.name }}" src="{{ request.session.user.picture }}">
+            {% if request.user.picture %}
+                <img class="comment-form__avatar" alt="Avatarbild von {{ request.user.name }}" src="{{ request.user.picture }}">
             {% endif %}
-            {% if not request.session.user.name %}
+            {% if not request.user.name %}
                 Angemeldet, noch kein Benutzername
                 <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
                 (Profil bearbeiten)
@@ -55,14 +55,14 @@
             {% else %}
                 Angemeldet als
                 <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
-                    {{ request.session.user.name }}
+                    {{ request.user.name }}
                 </a>
             {% endif %}
             <span class="comment-form__charcount">
                 <span class="js-count-formchars"></span> 1500 Zeichen
             </span>
         </div>
-            {% if request.registry.settings.sso_activate and not request.session.user.name %}
+            {% if request.registry.settings.sso_activate and not request.user.name %}
             <div class="comment-form__sso-username">
                 <p class="comment-form__hint{% if view.error and not view.error.error == 'username_exists_or_invalid' %} comment-form__hint--error{% endif %}">
                     Sie haben noch keinen Benutzernamen. Dieser wird einmalig festgelegt und ist öffentlich sichtbar.
