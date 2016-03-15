@@ -1,8 +1,14 @@
 {%- extends "zeit.web.campus:templates/inc/shared/debate.tpl" -%}
 
-{% block kicker %}{{ teaser.teaserSupertitle or teaser.supertitle }}{% endblock %}
-{% block title %}{{ teaser.teaserTitle or teaser.title }}{% endblock %}
-{% block text %}{{ teaser.teaserText }}{% endblock %}
+{% set block = teaser %}
+
+{% block kicker %}{{ block.supertitle }}{% endblock %}
+
+{% block text %}
+    {% for title, text in block.contents %}
+        {{ text }}
+    {% endfor %}
+{% endblock %}
 
 {% block wrapper_start %}
     <article class="teaser-debate" data-unique-id="{{ teaser.uniqueId }}" data-meetrics="{{ area.kind }}" data-clicktracking="{{ area.kind }}">

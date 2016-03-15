@@ -1,6 +1,17 @@
-/* just a wrapper for shared debate box
+/* just a wrapper for shared debate box use as teaser
 
 .teaser-debate
     padding: $page-padding--small
     margin-left: auto
     margin-right: auto
+    +respond-min($break-tablet-min)
+        padding: $cp-padding
+
+    .debate
+        max-width: 100%
+        &__title,
+        &__text,
+        &__kicker
+            max-width: 620px
+            margin-left: auto
+            margin-right: auto

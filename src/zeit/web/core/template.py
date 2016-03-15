@@ -875,3 +875,12 @@ def provides(obj, iface):
 @zeit.web.register_global
 def get_random_number(length):
     return random.randint(0, 10 ** length)
+
+
+@zeit.web.register_global
+def adapt(obj, iface, name=u'', multi=False):
+    iface = pyramid.path.DottedNameResolver().resolve(iface)
+    if multi:
+        return zope.component.queryMultiAdapter(obj, iface, name)
+    else:
+        return zope.component.queryAdapter(obj, iface, name)

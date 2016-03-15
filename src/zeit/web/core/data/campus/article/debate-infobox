@@ -4,7 +4,8 @@
   <block>
     <title py:pytype="str">Schafft endlich das Examen ab!</title>
     <text>
-      <p>Die Jury hat die Gewinner des diesjährigen Grimme-Preises bekannt gegeben. Unter anderem wurden die Serie Deutschland 83 und das Internetformat Marhaba geehrt. Schicke eine Mail an <a href="mailto:lalala">leser-studium@zeit.de</a></p>
+        <p>Die Jury hat die Gewinner des diesjährigen Grimme-Preises bekannt gegeben.</p>
+        <p>Unter anderem wurden die Serie Deutschland 83 und das Internetformat Marhaba geehrt. Schicke eine Mail an <a href="mailto:lalala">leser-studium@zeit.de</a></p>
     </text>
   </block>
 </container>
