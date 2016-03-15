@@ -1,3 +1,5 @@
+{# this template is shared between articles and centerpages #}
+
 {% block wrapper_start %}
 <aside class="article__item">
 {% endblock %}

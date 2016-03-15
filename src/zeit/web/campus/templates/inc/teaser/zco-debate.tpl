@@ -1,3 +1,5 @@
+{# this is the teaser variant of the debate module #}
+
 {%- extends "zeit.web.campus:templates/inc/shared/debate.tpl" -%}
 
 {% set block = teaser %}
@@ -6,7 +8,7 @@
 
 {% block text %}
     {% for title, text in block.contents %}
-        {{ text }}
+        {{ text | safe }}
     {% endfor %}
 {% endblock %}
 
