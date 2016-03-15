@@ -110,7 +110,6 @@
     			{% endfor %}
 			{% elif comment.replies %}
 
-                {# TODO: Sonderfall "1 Antwort vorhanden" berücksichtigen (dann die einfach zeigen) #}
                 {# TODO: Haben wir denn jetzt schon alle geladen (comment.replies) ? #}
                 {% for comment in comment.replies[:1] %}
                     {% include "zeit.web.site:templates/inc/comments/comment.tpl" %}

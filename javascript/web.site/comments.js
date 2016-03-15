@@ -513,32 +513,47 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     loadReplies = function( e ) {
         var $wrapped = $( this ),
             url = $wrapped.data( 'url' ),
-            $firstReply;
+            $firstReply = $wrapped.closest( 'article.comment' ),
+            // TODO: Das sollte von Anfang an ein Data-Attribut am RootComment sein
+            replyCountElement = $firstReply.find( '.comment-overlay__count' ),
+            replyCountString = replyCountElement.eq( 0 ).text().replace( '+ ', '' ),
+            replyCountInteger = parseInt( replyCountString, 10 ),
+            placeholderHTML = '' +
+                '<article class="comment comment--indented js-comment-placeholder">' +
+                    '<div class="comment__container comment__container--placeholder">' +
+                        '<p class="js-comment-placeholder__content">wird geladen</p></div>' +
+                '</article>',
+            numberOfPlaceholders = ( replyCountInteger < 5 ) ? replyCountInteger : 5,
+            repliesLoaded = false;
 
         e.preventDefault();
 
         // TODO: on error/timeout visit the link
         // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
         // TODO: schönen flüssigen Flow hinkriegen
-        // - Laden starten
-        // - ersten Kommentar aufsliden
-        // - Platzhalter (graue Boxen ggf pulsierend oder loading indicator) druntermachen
-        // - nach dem Laden die grauen Boxen ersetzen
         // - auf Timeout oder Fehler reagieren.
         //   - zur Seite mit geöffneten Antworten wechseln?
         //   - Link zur Seite mit geöffneten Kommentaren, mit Hinweis "something's fucky"
         //   - Hinweis "something's fucky"
+        // OPTIMIZE: Netter mit Promises arbeiten als dem Callback-vs-repliesLoaded-Quatsch?
         $.ajax({
             url: url,
             method: 'GET',
             success: function( response ) {
-                // without the js-load-comment-replies class, we toggle existing replies (instead of loading from server)
-                $wrapped.removeClass( 'js-load-comment-replies' );
-                $firstReply = $wrapped.closest( 'article.comment' );
+                repliesLoaded = true;
+                $firstReply.nextUntil( '.js-comment-toplevel', '.js-comment-placeholder' ).remove();
                 $firstReply.after( response );
                 putRewrapperOnReplies( $firstReply );
+
             }
         });
+
+        // without the js-load-comment-replies class, we toggle existing replies (instead of loading from server)
+        $wrapped.removeClass( 'js-load-comment-replies' );
+
+        if ( !repliesLoaded ) {
+            $firstReply.after( placeholderHTML.repeat( numberOfPlaceholders ) );
+        }
 
     },
 
