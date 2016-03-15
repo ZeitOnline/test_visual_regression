@@ -125,7 +125,7 @@ def column(context):
 
 @zeit.web.register_test
 def leserartikel(context):
-    return context.genre and context.genre == 'leserartikel'
+    return getattr(context, 'genre', None) and context.genre == 'leserartikel'
 
 
 @zeit.web.register_filter
