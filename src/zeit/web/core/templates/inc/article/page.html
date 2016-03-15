@@ -1,9 +1,7 @@
 {% set contents_printed = False %}
 {% block before_page %}{% endblock %}
-
 {% for block in page %}
     {% set type = block | block_type %}
-
     {% if not (contents_printed or view.is_all_pages_view) and type in ['paragraph'] %}
         {% block table_of_contents %}
             {% include [
