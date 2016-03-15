@@ -2,6 +2,9 @@
 
 {% block article_pages %}
     <div class="article-page">
+        <p class="article__summary article__item" itemprop="description">
+            {{- view.subtitle -}}
+        </p>
         {% set images = view.images %}
         {% include "zeit.web.core:templates/inc/article/gallery.html" %}
     </div>
