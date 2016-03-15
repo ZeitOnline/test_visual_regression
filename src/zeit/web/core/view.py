@@ -26,12 +26,14 @@ import zeit.solr.interfaces
 import zeit.web
 import zeit.web.core.application
 import zeit.web.core.banner
+import zeit.web.core.cache
 import zeit.web.core.comments
 import zeit.web.core.date
 import zeit.web.core.template
 import zeit.web.core.navigation
 
 
+SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
 log = logging.getLogger(__name__)
 
 
@@ -99,13 +101,6 @@ class Base(object):
                 'redirect_from_cp2015', True)):
             redirect_on_cp2015_suffix(self.request)
         time = zeit.web.core.interfaces.ICachingTime(self.context)
-
-        # Make sure comments are loaded
-        if hasattr(self, 'comments'):
-            self.comments
-
-        if not self.comments_loadable:
-            time = 5
         self.request.response.cache_expires(time)
 
         # Set zeit.web version header
@@ -120,7 +115,6 @@ class Base(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        self.comments_loadable = True
 
     @zeit.web.reify
     def vgwort_url(self):
@@ -547,8 +541,6 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def _c1_doc_type(self):
-        import zeit.web.site.view
-
         if self.type == 'gallery':
             return 'bildergalerie'
         elif isinstance(self, zeit.web.core.view.FrameBuilder):
@@ -597,7 +589,117 @@ class CeleraOneMixin(object):
         }.items() if v is not None]
 
 
-class Content(CeleraOneMixin, Base):
+class CommentMixin(object):
+
+    def __call__(self):
+        result = super(CommentMixin, self).__call__()
+        if not self.comments_loadable:
+            # XXX We can't get from cached function to its cache region, so we
+            # need to duplicate it here from is_community_healthy().
+            self.request.response.cache_expires(
+                SHORT_TERM_CACHE.expiration_time)
+        return result
+
+    @zeit.web.reify
+    def comments_loadable(self):
+        return zeit.web.core.comments.is_community_healthy()
+
+    @zeit.web.reify
+    def community_maintenance(self):
+        return zeit.web.core.comments.community_maintenance()
+
+    @zeit.web.reify
+    def comments(self):
+        if not self.show_commentthread:
+            return
+
+        sort = self.request.params.get('sort', 'asc')
+        page = self.request.params.get('page', 1)
+        cid = self.request.params.get('cid', None)
+        try:
+            return zeit.web.core.comments.get_thread(
+                self.context.uniqueId,
+                sort=sort,
+                page=page,
+                cid=cid)
+        except zeit.web.core.comments.ThreadNotLoadable:
+            return
+
+    @zeit.web.reify
+    def comments_allowed(self):
+        return self.context.commentsAllowed and self.show_commentthread
+
+    @zeit.web.reify
+    def show_commentthread(self):
+        return self.context.commentSectionEnable is not False
+
+    @zeit.web.reify
+    def comment_form(self):
+        user = self.request.user
+        user_blocked = user.get('blocked')
+        premoderation = user.get('premoderation')
+        valid_community_login = (
+            user.get('has_community_data') and
+            user.get('uid') and user.get('uid') != '0')
+        authenticated = user.get('ssoid')
+
+        # used for general alerts in the comment section header
+        message = None
+
+        # used for general alerts or user specific alerts in the comment form
+        note = None
+
+        if self.community_maintenance['active']:
+            message = self.community_maintenance['text_active']
+        elif not self.comments_loadable:
+            message = (u'Ein technischer Fehler ist aufgetreten. '
+                       u'Die Kommentare zu diesem Artikel konnten '
+                       u'nicht geladen werden. Bitte entschuldigen Sie '
+                       u'diese Störung.')
+        elif not self.comments_allowed:
+            message = (u'Der Kommentarbereich dieses Artikels ist geschlossen.'
+                       u' Wir bitten um Ihr Verständnis.')
+            note = message
+        elif user_blocked:
+            # no message: individual messages are only possible inside ESI form
+            # no note: handled inside form template
+            note = None
+        elif self.community_maintenance['scheduled']:
+            message = self.community_maintenance['text_scheduled']
+        elif authenticated and not valid_community_login:
+            note = (u'Aufgrund eines technischen Fehlers steht Ihnen die '
+                    u'Kommentarfunktion kurzfristig nicht zur Verfügung. '
+                    u'Bitte entschuldigen Sie diese Störung.')
+
+        return {
+            # For not authenticated users this means "show_login_prompt".
+            'show_comment_form': (
+                not self.community_maintenance['active'] and
+                self.comments_allowed and self.comments_loadable and
+                ((not user_blocked and valid_community_login) or
+                 not authenticated)),
+            'note': note,
+            'message': message,
+            'user_blocked': user_blocked,
+            'show_premoderation_warning': premoderation and (
+                self.comments_allowed and not user_blocked)
+        }
+
+    @zeit.web.reify
+    def comment_area(self):
+        result = {
+            'show': (self.comments_allowed or bool(self.comments)),
+            'show_comments': not self.community_maintenance['active'] and (
+                self.comments_loadable and bool(self.comments)),
+            'no_comments': (not self.comments and self.comments_loadable),
+        }
+        # XXX Do we really want all these variables under the same name or
+        # should we split up access in the templates instead?
+        result.update(self.comment_form)
+        return result
+
+
+class Content(CeleraOneMixin, CommentMixin, Base):
 
     is_longform = False
 
@@ -673,28 +775,6 @@ class Content(CeleraOneMixin, Base):
         # TODO: use reasonable value depending on content type or template
         # summary_large_image, photo, gallery
         return 'summary_large_image'
-
-    @zeit.web.reify
-    def community_maintenance(self):
-        return zeit.web.core.comments.community_maintenance()
-
-    @zeit.web.reify
-    def comments(self):
-        if not self.show_commentthread:
-            return
-
-        sort = self.request.params.get('sort', 'asc')
-        page = self.request.params.get('page', 1)
-        cid = self.request.params.get('cid', None)
-        try:
-            return zeit.web.core.comments.get_thread(
-                self.context.uniqueId,
-                sort=sort,
-                page=page,
-                cid=cid)
-        except zeit.web.core.comments.ThreadNotLoadable:
-            self.comments_loadable = False
-            return
 
     @zeit.web.reify
     def last_modified_label(self):
@@ -810,14 +890,6 @@ class Content(CeleraOneMixin, Base):
         return predecessor + successor
 
     @zeit.web.reify
-    def comments_allowed(self):
-        return self.context.commentsAllowed and self.show_commentthread
-
-    @zeit.web.reify
-    def show_commentthread(self):
-        return self.context.commentSectionEnable is not False
-
-    @zeit.web.reify
     def nextread(self):
         return zeit.web.core.interfaces.INextread(self.context, [])
 
@@ -827,66 +899,11 @@ class Content(CeleraOneMixin, Base):
             self.context, zeit.web.core.interfaces.INextread,
             'advertisement', [])
 
+    # XXX Does this really belong on this class?
     @zeit.web.reify('default_term')
     def comment_counts(self):
         return zeit.web.core.comments.get_counts(
             [t.uniqueId for t in self.nextread])
-
-    @zeit.web.reify
-    def comment_area(self):
-        user = self.request.user
-        user_blocked = user.get('blocked')
-        premoderation = user.get('premoderation')
-        valid_community_login = (
-            user.get('has_community_data') and
-            user.get('uid') and user.get('uid') != '0')
-        authenticated = user.get('ssoid')
-
-        # used for general alerts in the comment section header
-        message = None
-
-        # used for general alerts or user specific alerts in the comment form
-        note = None
-
-        if self.community_maintenance['active']:
-            message = self.community_maintenance['text_active']
-        elif not self.comments_loadable:
-            message = (u'Ein technischer Fehler ist aufgetreten. '
-                       u'Die Kommentare zu diesem Artikel konnten '
-                       u'nicht geladen werden. Bitte entschuldigen Sie '
-                       u'diese Störung.')
-        elif not self.comments_allowed:
-            message = (u'Der Kommentarbereich dieses Artikels ist geschlossen.'
-                       u' Wir bitten um Ihr Verständnis.')
-            note = message
-        elif user_blocked:
-            # no message: individual messages are only possible inside ESI form
-            # no note: handled inside form template
-            note = None
-        elif self.community_maintenance['scheduled']:
-            message = self.community_maintenance['text_scheduled']
-        elif authenticated and not valid_community_login:
-            note = (u'Aufgrund eines technischen Fehlers steht Ihnen die '
-                    u'Kommentarfunktion kurzfristig nicht zur Verfügung. '
-                    u'Bitte entschuldigen Sie diese Störung.')
-
-        return {
-            'show': (self.comments_allowed or bool(self.comments)),
-            # For not authenticated users this means "show_login_prompt".
-            'show_comment_form': (
-                not self.community_maintenance['active'] and
-                self.comments_allowed and self.comments_loadable and
-                ((not user_blocked and valid_community_login) or
-                 not authenticated)),
-            'show_comments': not self.community_maintenance['active'] and (
-                self.comments_loadable and bool(self.comments)),
-            'no_comments': (not self.comments and self.comments_loadable),
-            'note': note,
-            'message': message,
-            'user_blocked': user_blocked,
-            'show_premoderation_warning': premoderation and (
-                self.comments_allowed and not user_blocked)
-        }
 
 
 @pyramid.view.view_config(route_name='health_check')
