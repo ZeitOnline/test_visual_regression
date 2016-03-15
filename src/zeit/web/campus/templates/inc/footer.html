@@ -2,7 +2,7 @@
 
 <div class="footer__item">
 	<a href="{{ request.route_url('home') }}campus/index">
-		{{- lama.use_svg_icon('logo-zco', 'footer__logo', view.request) -}}
+		{{- lama.use_svg_icon('logo-zco', 'footer__logo', request, inline=view.inline_svg_icons) -}}
 	</a>
 	<div class="footer__links">
 		<strong class="footer__linkitem">Verlag</strong>

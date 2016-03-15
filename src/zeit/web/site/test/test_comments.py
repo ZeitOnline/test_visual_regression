@@ -54,15 +54,17 @@ def test_comments_get_thread_should_respect_top_level_sort_order(testserver):
 
 def test_comment_form_should_be_rendered(testbrowser, monkeypatch):
     comment = {
-            'show': True,
-            'show_comment_form': True,
-            'show_comments': True,
-            'no_comments': False,
-            'note': None,
-            'message': None,
-            'user_blocked': False,
-            'show_premoderation_warning': False}
-    monkeypatch.setattr(zeit.web.core.view.Content, 'comment_area', comment)
+        'show': True,
+        'show_comment_form': True,
+        'show_comments': True,
+        'no_comments': False,
+        'note': None,
+        'message': None,
+        'user_blocked': False,
+        'show_premoderation_warning': False
+    }
+    monkeypatch.setattr(
+        zeit.web.site.view.CommentForm, 'comment_area', comment)
     browser = testbrowser('/zeit-online/article/01/comment-form')
 
     assert len(browser.cssselect('#comment-form')) == 1
@@ -155,45 +157,38 @@ def test_comment_author_roles_should_be_displayed(testbrowser):
     assert icon_freelancer[0].attrib['title'] == 'Freie Autorin'
 
 
-def test_comments_zon_template_respects_metadata(jinja2_env, testserver):
-    comments = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/article/comments.tpl')
-    comment_form = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/comments/comment-form.html')
+def test_comments_zon_template_respects_metadata(tplbrowser):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
 
     request = mock.MagicMock()
-    request.user = {'ssoid': 123}
-    request.session = {'user': {'uid': '123', 'name': 'Max'}}
+    request.user = {'ssoid': 123, 'uid': '123', 'name': 'Max'}
     request.path_url = 'http://xml.zeit.de/zeit-online/article/01'
     request.params = {'cid': None}
     request.route_url = lambda x: "http://foo/"
 
     view = zeit.web.site.view_article.Article(content, request)
     view.comments_allowed = False
-    string = comments.render(view=view, request=request)
-    html = lxml.html.fromstring(string)
-
-    assert len(html.cssselect('#comments')) == 1, (
+    comments = tplbrowser('zeit.web.site:templates/inc/article/comments.tpl',
+                          view=view, request=request)
+    assert len(comments.cssselect('#comments')) == 1, (
         'comment section must be present')
-    assert len(html.cssselect('article.comment')) > 0, (
+    assert len(comments.cssselect('article.comment')) > 0, (
         'comments must be displayed')
 
-    string = comment_form.render(view=view, request=request)
-    html = lxml.html.fromstring(string)
-
-    assert len(html.cssselect('#comment-form[data-uid="123"]')) == 1, (
+    form = tplbrowser('zeit.web.site:templates/inc/comments/comment-form.html',
+                      view=view, request=request)
+    assert len(form.cssselect('#comment-form[data-uid="123"]')) == 1, (
         'comment form tag with data-uid attribute must be present')
-    assert len(html.cssselect('#comment-form textarea')) == 0, (
+    assert len(form.cssselect('#comment-form textarea')) == 0, (
         'comment form must be empty')
 
     # reset view (kind of)
     view = zeit.web.site.view_article.Article(content, request)
     view.show_commentthread = False
-    string = comments.render(view=view, request=request)
-
-    assert string.strip() == '', (
+    comments = tplbrowser('zeit.web.site:templates/inc/article/comments.tpl',
+                          view=view, request=request)
+    assert comments.contents.strip() == '', (
         'comment section template must return an empty document')
 
 
@@ -261,16 +256,15 @@ def test_comment_action_recommend_should_redirect_to_login(testserver):
 
 def test_comment_area_note_should_be_displayed_if_set(
         testbrowser, monkeypatch):
-    comment = {
-            'show': True,
-            'show_comment_form': False,
-            'show_comments': True,
-            'no_comments': False,
-            'note': 'No community login',
-            'message': None,
-            'user_blocked': False,
-            'show_premoderation_warning': False}
-    monkeypatch.setattr(zeit.web.core.view.Content, 'comment_area', comment)
+    form = {
+        'show_comment_form': False,
+        'note': 'No community login',
+        'message': None,
+        'user_blocked': False,
+        'show_premoderation_warning': False
+    }
+    monkeypatch.setattr(
+        zeit.web.site.view.CommentForm, 'comment_form', form)
     browser = testbrowser('/zeit-online/article/01/comment-form')
     assert browser.cssselect('.comment-section__note div')[0].text == (
         'No community login')

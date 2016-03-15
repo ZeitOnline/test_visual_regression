@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-import pytest
 
 import zeit.cms.interfaces
 
+import zeit.web.campus.view_article
 
-@pytest.mark.skipif(True,
-                    reason="Waiting for ZON-2835: Article blocks #1616")
+
 def test_article_should_render_full_view(testbrowser):
     browser = testbrowser('/campus/article/paginated/komplettansicht')
     article = zeit.cms.interfaces.ICMSContent(
@@ -40,7 +39,7 @@ def test_article_pagination_on_second_page(testbrowser):
 
 
 def test_article_pagination_on_last_paginated_page(testbrowser):
-    select = testbrowser('/campus/article/paginated/seite-9').cssselect
+    select = testbrowser('/campus/article/paginated/seite-10').cssselect
 
     assert len(select('.article-header')) == 0
     assert len(select('.page-header')) == 1
@@ -81,7 +80,7 @@ def test_article_pagination(testbrowser):
     # assert '--current' in select('.article-toc__item')[0].get('class')
 
 
-def test_article_citation_block_should_render_expected_structure(testbrowser):
+def test_article_block_citation_should_render_expected_structure(testbrowser):
     browser = testbrowser('/campus/article/citation')
     assert len(browser.cssselect('.quote')) == 2
     assert browser.cssselect('.quote__text')[0].text.startswith(
@@ -90,4 +89,52 @@ def test_article_citation_block_should_render_expected_structure(testbrowser):
         'Ariane Jedlitschka, Kunstschaffende')
     assert browser.cssselect('.quote__link')[0].get('href') == (
         'http://www.imdb.com/title/tt0110912/quotes?item=qt0447099')
-    # 'imdb.com' in browser.cssselect('.quote')[0].attrib['cite']
+
+
+def test_article_should_render_topic(testbrowser):
+    browser = testbrowser('/campus/article/common')
+    tplink = browser.cssselect('.article-header__topic')[0]
+    assert tplink.text == 'Science'
+    assert tplink.get('href') == 'http://localhost/thema/test'
+
+
+def test_article_should_have_topic_fallback_label(
+        monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.campus.article.Topic, 'label', '')
+    browser = testbrowser('/campus/article/common')
+    tplink = browser.cssselect('.article-header__topic')[0]
+    assert tplink.text == 'Test-Thema'
+
+
+def test_article_should_not_render_topic_with_missing_fallback_label(
+        monkeypatch, testbrowser):
+    monkeypatch.setattr(
+        zeit.web.campus.view_article.Article, 'topic_label', '')
+    browser = testbrowser('/campus/article/common')
+    tplink = browser.cssselect('.article-header__topic')
+    assert len(tplink) == 0
+
+
+def test_article_should_not_render_missing_topic(
+        monkeypatch, testbrowser):
+    monkeypatch.setattr(
+        zeit.campus.article.Topic, 'page', None)
+    browser = testbrowser('/campus/article/common')
+    tplink = browser.cssselect('.article-header__topic')
+    assert len(tplink) == 0
+
+
+def test_article_block_infobox_should_render_expected_structure(testbrowser):
+    browser = testbrowser('/campus/article/infobox')
+    infobox = browser.cssselect('.infobox')[0]
+    assert len(infobox.cssselect('*[role="tab"]')) == 6
+    assert len(infobox.cssselect('*[role="tabpanel"]')) == 6
+
+
+def test_article_tags_are_present(testbrowser):
+    browser = testbrowser('/campus/article/simple')
+    assert browser.cssselect('nav.article-tags')
+    tags = browser.cssselect('a.article-tags__link')
+    assert len(tags) == 6
+    for tag in tags:
+        assert tag.get('rel') == 'tag'

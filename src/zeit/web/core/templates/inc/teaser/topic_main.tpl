@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
+{%- extends "{0}:templates/inc/teaser/default.tpl".format(view.package) -%}
 
 {% set ref_cp = area.referenced_cp %}
 {% set topic_supertitle = area.supertitle or ref_cp.teaserSupertitle or ref_cp.supertitle %}
@@ -14,7 +14,7 @@
 	{% if readmore_url %}
 	<a class="{{ self.layout() }}__combined-link" title="{{ topic_supertitle }} - {{ area.title }}" href="{{ readmore_url }}">
 		<span class="{{ self.layout() }}__kicker">{{ topic_supertitle }}</span>
-		{%- if topic_supertitle %}<span class="visually-hidden">:</span>{% endif %}
+		{%- if topic_supertitle %}<span class="visually-hidden">: </span>{% endif %}
 		<span class="{{ self.layout() }}__title">{{ area.title }}</span>
 	</a>
 	 {% endif %}

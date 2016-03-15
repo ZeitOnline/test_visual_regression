@@ -1,4 +1,4 @@
-{%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
+{%- extends "{0}:templates/inc/teaser/default.tpl".format(view.package) -%}
 
 {% block layout %}teaser-topic-item{% endblock %}
 

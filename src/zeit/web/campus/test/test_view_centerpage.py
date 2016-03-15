@@ -1,5 +1,4 @@
 import re
-
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
@@ -67,11 +66,12 @@ def test_campus_teaser_wide_large_has_correct_structure(testbrowser):
     select = testbrowser('/campus/centerpage/teaser-wide-large').cssselect
 
     assert len(select('.teaser-wide-large')) == 2
-
-    assert len(select('.teaser-wide-large .teaser-wide-large__heading \
-        .teaser-wide-large__kicker')) == 2
-    assert len(select('.teaser-wide-large .teaser-wide-large__heading \
-        .teaser-wide-large__title')) == 2
+    assert len(select(
+        '.teaser-wide-large .teaser-wide-large__heading '
+        '.teaser-wide-large__kicker')) == 2
+    assert len(select(
+        '.teaser-wide-large .teaser-wide-large__heading '
+        '.teaser-wide-large__title')) == 2
 
     assert len(select('.teaser-wide-large__metadata')) == 2
     assert len(select('.teaser-wide-large__byline')) == 1
@@ -86,8 +86,9 @@ def test_campus_teaser_square_exists(testbrowser):
 def test_campus_teaser_lead_portrait_has_correct_structure(testbrowser):
     select = testbrowser('/campus/centerpage/teaser-lead-portrait').cssselect
     assert len(select('.teaser-lead-portrait')) == 1
-    assert len(select('.teaser-lead-portrait .teaser-lead-portrait__content \
-        .teaser-lead-portrait__heading .teaser-lead-portrait__title')) == 1
+    assert len(select(
+        '.teaser-lead-portrait .teaser-lead-portrait__content '
+        '.teaser-lead-portrait__heading .teaser-lead-portrait__title')) == 1
     assert len(select('.teaser-lead-portrait__metadata')) == 1
 
 
@@ -96,4 +97,3 @@ def test_campus_teaser_lead_cinema_has_correct_structure(testbrowser):
     assert len(select('.teaser-lead-cinema')) == 1
     assert len(select('.teaser-lead-cinema__content')) == 0
     assert len(select('.teaser-lead-cinema__metadata')) == 1
-

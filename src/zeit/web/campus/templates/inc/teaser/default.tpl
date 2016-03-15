@@ -17,11 +17,11 @@
                    href="{{ teaser | create_url | append_campaign_params }}">
                     {% block teaser_kicker %}
                         <span class="{{ self.layout() }}__kicker">
-                            {{ teaser.teaserSupertitle or teaser.supertitle -}}
+                            {{- teaser.teaserSupertitle or teaser.supertitle -}}
                         </span>
                         {%- if teaser.teaserSupertitle or teaser.supertitle -%}
-                            <span class="visually-hidden">:</span>
-                        {% endif %}
+                            <span class="visually-hidden">: </span>
+                        {%- endif %}
                     {% endblock %}
                     {% block teaser_title %}
                         <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
@@ -49,7 +49,9 @@
             {% endblock teaser_byline %}
             {% block teaser_datetime %}
                 {% if not view.is_advertorial %}
-                    {{ cp.include_teaser_datetime(teaser, self.layout(), area.kind) }}
+                    <time class="{{ layout }}__datetime js-update-datetime" datetime="{{ teaser | release_date | format_date('iso8601') }}">
+                        {{- teaser | release_date | format_date('short') -}}
+                    </time>
                 {% endif %}
             {% endblock teaser_datetime %}
             {% block teaser_commentcount %}

@@ -70,10 +70,12 @@ require([
     'jquery',
     'velocity.ui',
     'web.core/plugins/jquery.animatescroll',
+    'web.core/plugins/jquery.infobox',
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.picturefill',
     'web.core/plugins/jquery.referrerCount',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
+    'web.core/plugins/jquery.toggleOnClick',
     'web.site/plugins/jquery.accordion',
     'web.site/plugins/jquery.adaptnav',
     'web.site/plugins/jquery.animateJobs',
@@ -83,7 +85,6 @@ require([
     'web.site/plugins/jquery.fixPosition',
     'web.site/plugins/jquery.hpOverlay',
     'web.site/plugins/jquery.imageCopyrightFooter',
-    'web.site/plugins/jquery.infobox',
     'web.site/plugins/jquery.liveblog',
     'web.site/plugins/jquery.searchTools',
     'web.site/plugins/jquery.selectNav',
@@ -93,8 +94,7 @@ require([
     'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
-    'web.site/plugins/jquery.partnerDropdown',
-    'web.site/plugins/jquery.toggleOnClick'
+    'web.site/plugins/jquery.partnerDropdown'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         isHp = document.body.getAttribute( 'data-is-hp' ),

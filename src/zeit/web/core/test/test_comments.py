@@ -604,9 +604,8 @@ def test_post_comment_should_not_set_lock(application, action):
 
 
 def test_post_comment_should_not_expose_requests_timeout_exception(
-        application, config, monkeypatch, dummy_request):
+        application, monkeypatch, dummy_request):
 
-    config.testing_securitypolicy(userid='123', permissive=True)
     dummy_request.method = 'POST'
     dummy_request.POST = dummy_request.params = {
         'path': 'artikel/01', 'action': 'comment', 'comment': ' '}
@@ -674,53 +673,24 @@ def test_get_thread_should_not_invalidate_on_unloaded_threads(application,
     assert mock_method.call_args_list == []
 
 
-def test_article_view_should_set_comments_not_loadable_prop(
-        application, monkeypatch):
-    def get_thread(
-            unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
-        raise zeit.web.core.comments.ThreadNotLoadable()
-    monkeypatch.setattr(zeit.web.core.comments, 'get_thread', get_thread)
-
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    request = pyramid.testing.DummyRequest()
-    article = zeit.web.magazin.view_article.Article(context, request)
-
-    assert article.comments_loadable
-
-    article.comments
-
-    assert not article.comments_loadable
-
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    request = pyramid.testing.DummyRequest()
-    article = zeit.web.site.view_article.Article(context, request)
-
-    assert article.comments_loadable
-
-    article.comments
-
-    assert not article.comments_loadable
-
-
 def test_article_view_should_have_short_caching_time_on_unloadable_thread(
         application, testbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.comments.SHORT_TERM_CACHE, 'expiration_time', 1)
     browser = testbrowser('/zeit-online/article/01')
     assert browser.headers.get('cache-control') == 'max-age=10'
 
-    def get_thread(
-            unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
-        raise zeit.web.core.comments.ThreadNotLoadable()
-    monkeypatch.setattr(zeit.web.core.comments, 'get_thread', get_thread)
+    monkeypatch.setattr(
+        zeit.web.core.comments, 'is_community_healthy', lambda: False)
     browser = testbrowser('/zeit-online/article/01')
-    assert browser.headers.get('cache-control') == 'max-age=5'
+    assert browser.headers.get('cache-control') == 'max-age=1'
     assert browser.cssselect('.comment-section__message')[0].text.strip() == (
         u'Ein technischer Fehler ist aufgetreten. Die Kommentare '
         u'zu diesem Artikel konnten nicht geladen werden. Bitte '
         u'entschuldigen Sie diese Störung.')
 
     browser = testbrowser('/artikel/01')
-    assert browser.headers.get('cache-control') == 'max-age=5'
+    assert browser.headers.get('cache-control') == 'max-age=1'
 
 
 def test_community_maintenance_should_be_created_from_xml():
