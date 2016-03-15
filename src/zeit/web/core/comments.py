@@ -235,12 +235,13 @@ def get_paginated_thread(
     try:
         comment_nid = document.xpath('/comments/nid/text()')[0]
         comment_list = document.xpath('//comment')
+        comment_count = document.xpath('/comments/comment_count/text()')[0]
+        toplevel_comment_count = document.xpath('/comments/comments_'
+                                                'count_toplevel/text()')[0]
+        total_comment_count = comment_count
     except (IndexError, lxml.etree.XMLSyntaxError):
         raise ThreadNotLoadable()
 
-    comment_count = 0 # XXX: We need to get the total comments from drupal
-    toplevel_comment_count = 1 # XXX: We need to get the toplevel comments too
-    total_comment_count = comment_count = 1
     comment_list = list(comment_to_dict(c) for c in comment_list)
 
     flattened_comments = comment_list[:]
