@@ -4,6 +4,9 @@
     <author href="http://xml.zeit.de/autoren/F/Thomas_Fischer/index" publication-date="" expires="">
       <display_name>Thomas Fischer</display_name>
     </author>
+    <topic type="intern" href="http://xml.zeit.de/thema/test">
+        <label>Science</label>
+    </topic>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Anne-Kathrin Gerstlauer</attribute>
