@@ -168,10 +168,10 @@ class CommentForm(zeit.web.core.view.CommentMixin,
                   zeit.web.core.view.Base):
 
     def __call__(self):
-        super(CommentForm, self).__call__()
+        result = super(CommentForm, self).__call__()
         # Never ever ever ever cache comment forms
         self.request.response.cache_expires(0)
-        return {}
+        return result
 
     @zeit.web.reify
     def error(self):

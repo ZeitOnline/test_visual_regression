@@ -26,12 +26,14 @@ import zeit.solr.interfaces
 import zeit.web
 import zeit.web.core.application
 import zeit.web.core.banner
+import zeit.web.core.cache
 import zeit.web.core.comments
 import zeit.web.core.date
 import zeit.web.core.template
 import zeit.web.core.navigation
 
 
+SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
 log = logging.getLogger(__name__)
 
 
@@ -589,17 +591,18 @@ class CeleraOneMixin(object):
 
 class CommentMixin(object):
 
-    def __init__(self, context, request):
-        super(CommentMixin, self).__init__(context, request)
-        self.comments_loadable = True
-
     def __call__(self):
         result = super(CommentMixin, self).__call__()
-        # Make sure comments are loaded
-        self.comments
         if not self.comments_loadable:
-            self.request.response.cache_expires(5)
+            # XXX We can't get from cached function to its cache region, so we
+            # need to duplicate it here from is_community_healthy().
+            self.request.response.cache_expires(
+                SHORT_TERM_CACHE.expiration_time)
         return result
+
+    @zeit.web.reify
+    def comments_loadable(self):
+        return zeit.web.core.comments.is_community_healthy()
 
     @zeit.web.reify
     def community_maintenance(self):
@@ -620,7 +623,6 @@ class CommentMixin(object):
                 page=page,
                 cid=cid)
         except zeit.web.core.comments.ThreadNotLoadable:
-            self.comments_loadable = False
             return
 
     @zeit.web.reify
