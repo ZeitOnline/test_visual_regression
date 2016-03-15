@@ -217,8 +217,7 @@ def get_paginated_thread(
     # For now this is done passing sort with values 'promoted' or 'recommended'
 
     # XXX: The Drupal APIs counting begins with 0
-    request_page = page-1 if page > 0 else 0
-    thread = request_thread(path, thread_type='paginated', page=request_page,
+    thread = request_thread(path, thread_type='paginated', page=page,
                             page_size=page_size, sort=sort)
     if thread is None:
         return dict()
