@@ -31,36 +31,41 @@
                 {% endblock teaser_link %}
             </h2>
         {% endblock teaser_heading %}
-        {% block teaser_text %}
-            <p class="{{ self.layout() }}__text">{{ teaser.teaserText }}</p>
-        {% endblock teaser_text %}
 
-        {% block teaser_metadata_default %}
-        <div class="{{ self.layout() }}__metadata">
-            {% block teaser_byline %}
-                {% set byline = teaser | get_byline %}
-                {% if byline | length %}
-                <span class="{{ self.layout() }}__byline">
-                    {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
-                </span>
-                {% endif %}
-            {% endblock teaser_byline %}
-            {% block teaser_datetime %}
-                {# disable for now, til macro is ported 
-					{% if not view.is_advertorial %}
-                    {{ cp.include_teaser_datetime(teaser, self.layout(), area.kind) }}
-	                {% endif %}
-				#}
-            {% endblock teaser_datetime %}
-            {% block teaser_commentcount %}
-                {% set comments = view.comment_counts[teaser.uniqueId] %}
-                {% if comments %}
-                    {% set comments_string = comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
-                    <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser | create_url }}#comments" title="Kommentare anzeigen">{{ comments_string }}</a>
-                {% endif %}
-            {% endblock teaser_commentcount %}
-        </div>
-        {% endblock teaser_metadata_default %}
+        {% block teaser_media_position_after_title %}{% endblock %}
+
+        {% block teaser_container %}
+            {% block teaser_text %}
+                <p class="{{ self.layout() }}__text">{{ teaser.teaserText }}</p>
+            {% endblock teaser_text %}
+            {% block teaser_metadata_default %}
+            <div class="{{ self.layout() }}__metadata">
+                {% block teaser_byline %}
+                    {% set byline = teaser | get_byline %}
+                    {% if byline | length %}
+                    <span class="{{ self.layout() }}__byline">
+                        {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
+                    </span>
+                    {% endif %}
+                {% endblock teaser_byline %}
+                {% block teaser_datetime %}
+                    {# disable for now, til macro is ported
+                    {% if not view.is_advertorial %}
+                        {{ cp.include_teaser_datetime(teaser, self.layout(), area.kind) }}
+                    {% endif %}
+                    #}
+                {% endblock teaser_datetime %}
+                {% block teaser_commentcount %}
+                    {% set comments = view.comment_counts[teaser.uniqueId] %}
+                    {% if comments %}
+                        {% set comments_string = comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
+                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser | create_url }}#comments" title="Kommentare anzeigen">{{ comments_string }}</a>
+                    {% endif %}
+                {% endblock teaser_commentcount %}
+            </div>
+            {% endblock teaser_metadata_default %}
+        {% endblock teaser_container %}
+
 
     {% endblock teaser_content %}
 </article>
