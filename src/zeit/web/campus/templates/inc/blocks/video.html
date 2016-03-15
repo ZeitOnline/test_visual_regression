@@ -1,0 +1,10 @@
+{% import 'zeit.web.core:templates/macros/video_macro.tpl' as vima %}
+<figure class="article__item article__item--wide article__item--rimless">
+    {% set playerId = 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9' %}
+    {{ vima.brightcove_video_tag(block.id, iframe=True, brightcove_player=playerId) }}
+    <figcaption class="video-caption">
+        <div class="video-caption__kicker">{{ block.supertitle }}</div>
+        <div class="video-caption__title">{{ block.title }}</div>
+        <div class="video-caption__description">{{ block.description }}</div>
+    </figcaption>
+</figure>
