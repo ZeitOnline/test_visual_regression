@@ -54,15 +54,17 @@ def test_comments_get_thread_should_respect_top_level_sort_order(testserver):
 
 def test_comment_form_should_be_rendered(testbrowser, monkeypatch):
     comment = {
-            'show': True,
-            'show_comment_form': True,
-            'show_comments': True,
-            'no_comments': False,
-            'note': None,
-            'message': None,
-            'user_blocked': False,
-            'show_premoderation_warning': False}
-    monkeypatch.setattr(zeit.web.core.view.Content, 'comment_area', comment)
+        'show': True,
+        'show_comment_form': True,
+        'show_comments': True,
+        'no_comments': False,
+        'note': None,
+        'message': None,
+        'user_blocked': False,
+        'show_premoderation_warning': False
+    }
+    monkeypatch.setattr(
+        zeit.web.site.view.CommentForm, 'comment_area', comment)
     browser = testbrowser('/zeit-online/article/01/comment-form')
 
     assert len(browser.cssselect('#comment-form')) == 1
@@ -271,6 +273,8 @@ def test_comment_area_note_should_be_displayed_if_set(
         'user_blocked': False,
         'show_premoderation_warning': False
     }
+    monkeypatch.setattr(
+        zeit.web.site.view.CommentForm, 'comment_area', comment)
     browser = testbrowser('/zeit-online/article/01/comment-form')
     assert browser.cssselect('.comment-section__note div')[0].text == (
         'No community login')

@@ -164,7 +164,8 @@ def schlagworte(request):
 @pyramid.view.view_config(
     name='report-form',
     renderer='templates/inc/comments/report-form.html')
-class CommentForm(zeit.web.core.view.Content):
+class CommentForm(zeit.web.core.view.CommentMixin,
+                  zeit.web.core.view.Base):
 
     def __call__(self):
         super(CommentForm, self).__call__()
