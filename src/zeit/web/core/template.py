@@ -163,7 +163,8 @@ def create_url(context, obj, request=None):
         slug = zeit.web.site.view_video.Video.get_slug(obj)
         # titles = (t for t in (obj.supertitle, obj.title) if t)
         # slug = zeit.cms.interfaces.normalize_filename(u' '.join(titles))
-        return create_url(context, u'{}/{}'.format(obj.uniqueId, slug))
+        return create_url(
+            context, u'{}/{}'.format(obj.uniqueId, slug), request)
     elif zeit.cms.interfaces.ICMSContent.providedBy(obj):
         return create_url(context, obj.uniqueId, request=request)
     else:
@@ -727,6 +728,28 @@ def format_webtrekk(string):
         u'è', 'e').replace(
         u'ß', 'ss')
     string = re.sub(u'[^-a-zA-Z0-9]', '_', string)
+    string = re.sub(u'_+', '_', string)
+    string = re.sub(u'^_|_$', '', string)
+    return string
+
+
+@zeit.web.register_filter
+def format_iqd(string):
+    """Returns a string that is iqd-safe.
+    Only allows latin characters, numbers and underscore.
+    """
+    if not isinstance(string, basestring):
+        return string
+    string = string.lower().replace(
+        u'ä', 'ae').replace(
+        u'ö', 'oe').replace(
+        u'ü', 'ue').replace(
+        u'á', 'a').replace(
+        u'à', 'a').replace(
+        u'é', 'e').replace(
+        u'è', 'e').replace(
+        u'ß', 'ss')
+    string = re.sub(u'[^a-zA-Z0-9]', '_', string)
     string = re.sub(u'_+', '_', string)
     string = re.sub(u'^_|_$', '', string)
     return string
