@@ -657,6 +657,11 @@ class TestApp(webtest.TestApp):
         return self.get(url, params, headers, *args, **kw)
 
 
+# When testing ESI fragments, autodetection of the encoding may not work (no
+# head, so no meta charset declaration), so we specify it explicitly.
+HTML_PARSER = lxml.html.HTMLParser(encoding='UTF-8')
+
+
 class BaseBrowser(object):
     """Base class for custom test browsers that allow direct access to CSS and
     XPath selection on their content.
@@ -685,7 +690,8 @@ class BaseBrowser(object):
     def document(self):
         """Return an lxml.html.HtmlElement instance of the response body."""
         if self.contents is not None:
-            return lxml.html.document_fromstring(self.contents)
+            return lxml.html.document_fromstring(
+                self.contents, parser=HTML_PARSER)
 
     @property
     def json(self):
