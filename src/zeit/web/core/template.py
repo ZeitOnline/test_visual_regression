@@ -844,6 +844,10 @@ def calculate_pagination(current_page, total_pages, slots=7):
 
 @zeit.web.register_filter
 def append_get_params(request, **kw):
+    # XXX Should we rather get the request automatically (as a ctxfilter)?
+    # Usage then would be `{{ url | append_get_params(foo='bar') }}`.
+    base_url = kw.pop('url', request.path_url)
+
     # Append GET parameters that are not reset
     # by setting the param value to None explicitly.
     def encode(value):
@@ -854,8 +858,8 @@ def append_get_params(request, **kw):
               (i for i in kw.iteritems() if i[1] is not None))]
 
     if params == []:
-        return request.path_url
-    return u'{}?{}'.format(request.path_url, urllib.urlencode(params))
+        return base_url
+    return u'{}?{}'.format(base_url, urllib.urlencode(params))
 
 
 @zeit.web.register_filter
