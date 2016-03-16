@@ -33,7 +33,7 @@
                 {% endblock %}
             {%- endif %}
         </span>
-        <a class="debate__label" href="{{ adapt(teaser, 'zeit.campus.interfaces.IDebate').action_url }}">
+        <a class="debate__label" href="{{ adapt(block.context, 'zeit.campus.interfaces.IDebate').action_url }}">
             Mitdiskutieren
         </a>
     </div>
