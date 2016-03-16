@@ -50,7 +50,8 @@ class Article(zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
     def adcontroller_values(self):
         """Fill the adcontroller js object with actual values.
         Output in level strings only allows latin characters, numbers and
-        underscore."""
+        underscore.
+        """
         keywords = ','.join(self.adwords)
 
         topiclabel = getattr(self, 'topic_label', '')
