@@ -220,12 +220,13 @@ def get_paginated_thread(
     if sort == 'promoted':
         thread_type = 'promotion'
         request_sort = 'asc'
-    if sort == 'recommended':
+    elif sort == 'recommended':
         thread_type = 'recommendation'
         request_sort = 'asc'
-
+    elif cid:
+        thread_type = 'deeplink'
     thread = request_thread(path, thread_type=thread_type, page=page,
-                            page_size=page_size, sort=request_sort)
+                            page_size=page_size, sort=request_sort, cid=cid)
     if thread is None:
         return dict()
 
