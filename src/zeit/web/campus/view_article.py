@@ -46,25 +46,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
     def adcontroller_handle(self):
         return 'artikel'
 
-    @zeit.web.reify
-    def adcontroller_values(self):
-        """Fill the adcontroller js object with actual values.
-        Output in level strings only allows latin characters, numbers and
-        underscore.
-        """
-        keywords = ','.join(self.adwords)
-
-        topiclabel = getattr(self, 'topic_label', '')
-        topiclabel = zeit.web.core.template.format_iqd(topiclabel)
-
-        return [('$handle', self.adcontroller_handle),
-                ('level2', 'campus'),
-                ('level3', 'thema' if topiclabel else ''),
-                ('level4', topiclabel or ''),
-                ('$autoSizeFrames', True),
-                ('keywords', keywords),
-                ('tma', '')]
-
 
 @pyramid.view.view_config(name='seite',
                           path_info='.*seite-(.*)',
