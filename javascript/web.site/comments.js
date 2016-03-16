@@ -524,12 +524,12 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             replyCountElement = $firstReply.find( '.comment-overlay__count' ),
             replyCountString = replyCountElement.eq( 0 ).text().replace( '+ ', '' ),
             replyCountInteger = parseInt( replyCountString, 10 ),
+            placeholderWording = ( replyCountInteger === 1 ) ? 'Kommentar wird geladen.' : 'Kommentare werden geladen.',
             placeholderHTML = '' +
                 '<article class="comment comment--indented js-comment-placeholder">' +
                     '<div class="comment__container comment__container--placeholder">' +
-                        '<p class="js-comment-placeholder__content">Kommentar wird geladen.</p></div>' +
+                        '<p class="js-comment-placeholder__content">' + placeholderWording + '</p></div>' +
                 '</article>',
-            numberOfPlaceholders = ( replyCountInteger < 5 ) ? replyCountInteger : 5,
             repliesLoaded = false;
 
         e.preventDefault();
@@ -556,7 +556,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $wrapped.removeClass( 'js-load-comment-replies' );
 
         if ( !repliesLoaded ) {
-            $firstReply.after( placeholderHTML.repeat( numberOfPlaceholders ) );
+            $firstReply.after( placeholderHTML );
         }
 
     },
