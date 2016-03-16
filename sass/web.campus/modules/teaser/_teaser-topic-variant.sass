@@ -1,0 +1,21 @@
+.teaser-topic-variant
+    position: relative
+
+    &__media
+        background-color: $greyish-white
+        height: 0
+        padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
+        width: 100%
+
+    +respond-min($break-tablet-min)
+        padding: $page-padding--small
+
+        &__media
+            width: 50%
+            padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4), refers to half-width
+
+.teaser-topic-variant-list
+
+.teaser-topic-variant-main
+    position: absolute
+    top: 0
