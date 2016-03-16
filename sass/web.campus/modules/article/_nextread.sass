@@ -1,28 +1,42 @@
 .nextread
 	background: $color-background
 	margin: remify(48px) (-$page-padding) remify(40px)
-	padding: remify(36px 20px 36px)
+	padding: remify(36px 20px)
 	position: relative
 	width: auto
+	+respond-min($break-tablet-min)
+		padding: remify(60px 20px)
+	+respond-min($break-desktop-min)
+		padding: remify(60px 80px)
 	&__lead
 		@extend %font-beckett
 		font-size: remify(26px)
 		margin: 0
 		position: absolute
 		top: remify(-8px)
+		+respond-min($break-tablet-min)
+			left: 50%
+			transform: translateX(-50%)
+			width: remify(660px)
 
 .nextread-teaser
-	$image-width: 102px
+	$small-image-width: 102px
+	$large-image-width: 321px
 	$ratio: 1.33
-	background: $white
-	min-height: remify($image-width * $ratio)
+	min-height: remify($small-image-width * $ratio)
 	position: relative
+	+respond-min($break-tablet-min)
+		height: remify(428px)
+		min-height: auto
+		overflow: hidden
 	&__media
 		bottom: 0
 		left: 0
 		position: absolute
 		top: 0
-		width: remify($image-width)
+		width: remify($small-image-width)
+		+respond-min($break-tablet-min)
+			width: remify($large-image-width)
 	&__media-item
 		bottom: 0
 		height: 100%
@@ -31,13 +45,30 @@
 		top: 0
 		.scaled-image &
 			width: auto
+			+respond-min($break-tablet-min)
+				width: 100%
+	&__link
+		bottom: 0
+		left: 0
+		position: absolute
+		right: 0
+		top: 0
+		z-index: 2
 	&__heading
 		background: $white
-		margin: 0 0 0 remify($image-width)
-		min-height: remify($image-width * $ratio)
+		margin: 0 0 0 remify($small-image-width)
+		min-height: remify($small-image-width * $ratio)
 		padding: remify(12px)
 		position: relative
 		z-index: 1
+		+respond-min($break-tablet-min)
+			left: remify($large-image-width - 40)
+			margin: 0
+			padding: remify(20px)
+			position: absolute
+			right: 0
+			top: 50%
+			transform: translateY(-50%)
 	&__kicker
 		display: block
 		font-size: remify(12px)
@@ -45,11 +76,17 @@
 		line-height: round-to-precision(12/13, $precision: 1)
 		margin-bottom: em(8px, 12px)
 		text-transform: uppercase
+		+respond-min($break-tablet-min)
+			margin-bottom: em(20px, 12px)
+		a &
+			color: $color-article-primary
 	&__title
 		@extend %font-beckett
 		display: block
 		font-size: remify(26px)
 		text-transform: uppercase
+		+respond-min($break-tablet-min)
+			font-size: remify(64px)
 		a &
 			color: $color-text
 
