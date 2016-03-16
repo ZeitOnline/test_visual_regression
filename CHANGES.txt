@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - ZON-2925: Don't needlessly load comment thread in comment form ESI
 
+- FIX: Fix automatic adplacement in FBIA
+
 - FIX: Fix main navigation on author pages
 
 - FIX: Fix gallery buttons on mobile
