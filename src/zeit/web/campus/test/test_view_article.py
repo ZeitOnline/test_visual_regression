@@ -138,3 +138,20 @@ def test_article_tags_are_present(testbrowser):
     assert len(tags) == 6
     for tag in tags:
         assert tag.get('rel') == 'tag'
+
+
+def test_campus_article_renders_video_with_correct_markup(testbrowser):
+    bro = testbrowser('/campus/article/video')
+    select = bro.cssselect
+    assert select(
+        'figure.article__item > .video-player#video-player-4193594095001')
+    assert select(
+        'iframe.video-player__iframe[src*="videoId=4193594095001"]')
+    assert select(
+        '.video-caption > .video-caption__kicker')[0].text == 'Wearables'
+    assert select(
+        '.video-caption > .video-caption__title'
+        )[0].text == 'Verkaufsstart von Apple Watch ohne Warteschlangen'
+    assert 'nur auf Vorbestellung ausgegeben wir' in select(
+        '.video-caption > .video-caption__description'
+        )[0].text
