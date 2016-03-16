@@ -59,13 +59,13 @@
 			</a>
 			#}
 			{% if view.comments.sort == 'asc' %}
-				{% set href = '{}?sort=desc'.format(view.request.path_url) %}
+				{% set href = '{}?sort=desc'.format(view.content_url) %}
 				{% set label = 'Neueste zuerst' %}
 			{% elif view.comments.sort == 'desc' %}
-				{% set href = view.request.path_url %}
+				{% set href = view.content_url %}
 				{% set label = 'Älteste zuerst' %}
 			{% else %}
-				{% set href = view.request.path_url %}
+				{% set href = view.content_url %}
 				{% set label = 'Alle Kommentare anzeigen' %}
 			{% endif %}
 			<a class="comment-preferences__item nowrap" href="{{ href }}#comments">
@@ -73,14 +73,14 @@
 				<span>{{ label }}</span>
 			</a>
 			{% if view.comments.has_promotion %}
-				{% set href = '{}?sort=promoted'.format(view.request.path_url) %}
+				{% set href = '{}?sort=promoted'.format(view.content_url) %}
 				<a class="{{ 'comment-preferences__item' | with_mods('buttonized', 'active' if view.comments.sort == 'promoted') }} nowrap" href="{{ href }}#comments">
 					{{ lama.use_svg_icon('promoted', 'comment-preferences__icon comment-preferences__icon--promoted', request) }}
 					<span class="comment-preferences__text">Nur Redaktionsempfehlungen</span>
 				</a>
 			{% endif %}
 			{% if view.comments.has_recommendations %}
-				{% set href = '{}?sort=recommended'.format(view.request.path_url) %}
+				{% set href = '{}?sort=recommended'.format(view.content_url) %}
 				<a class="{{ 'comment-preferences__item' | with_mods('buttonized', 'active' if view.comments.sort == 'recommended') }} nowrap" href="{{ href }}#comments">
 					{{ lama.use_svg_icon('recommended', 'comment-preferences__icon comment-preferences__icon--recommended', request) }}
 					<span class="comment-preferences__text">Nur Leserempfehlungen</span>

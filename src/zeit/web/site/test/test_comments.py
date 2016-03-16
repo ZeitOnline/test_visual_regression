@@ -163,7 +163,6 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
 
     request = mock.MagicMock()
     request.user = {'ssoid': 123, 'uid': '123', 'name': 'Max'}
-    request.path_url = 'http://xml.zeit.de/zeit-online/article/01'
     request.params = {'cid': None}
     request.route_url = lambda x: "http://foo/"
 
