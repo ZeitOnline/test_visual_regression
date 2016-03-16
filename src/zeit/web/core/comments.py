@@ -246,12 +246,14 @@ def get_paginated_thread(
         toplevel_comment_count = document.xpath('/comments/comments_'
                                                 'count_toplevel/text()')[0]
         total_comment_count = comment_count
-        has_recommendation = bool(int(
+        recommendation_count = int(
             document.xpath('/comments/comments_count_'
-                           'recommendations_readers/text()')[0]))
-        has_promotion = bool(int(
+                           'recommendations_readers/text()')[0])
+        has_recommendation = bool(recommendation_count)
+        promotion_count = int(
             document.xpath('/comments/comments_count_'
-                           'recommendations_editors/text()')[0]))
+                           'recommendations_editors/text()')[0])
+        has_promotion = bool(promotion_count)
     except (IndexError, lxml.etree.XMLSyntaxError):
         raise ThreadNotLoadable()
 
@@ -260,7 +262,15 @@ def get_paginated_thread(
     flattened_comments = comment_list[:]
 
     sorted_tree, index = _sort_comments(comment_list)
-    pages = int(math.ceil(float(toplevel_comment_count) / float(page_size)))
+
+    pagination_comment_count = toplevel_comment_count
+
+    if thread_type == 'promotion':
+         pagination_comment_count = promotion_count
+    if thread_type == 'recommendation':
+         pagination_comment_count = recommendation_count
+
+    pages = int(math.ceil(float(pagination_comment_count) / float(page_size)))
 
     thread = dict(
         sorted_tree=sorted_tree,
