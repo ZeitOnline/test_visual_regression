@@ -18,26 +18,22 @@
 		position: relative
 		+respond-min($break-tablet-min)
 			display: none
-		&::selection
-			background: transparent
-		&::-moz-selection // combining with line above won't work
-			background: transparent
-		& .article-toc__toggle-icon--minus
-			display: none
 		&--active .article-toc__toggle-icon--plus
 			display: none
 		&--active .article-toc__toggle-icon--minus
 			display: inline
-		.no-js & .article-toc__toggle
-			display: none
 	&__toggle
 		position: absolute
 		right: -23px
 		top: -3px
+		.no-js &
+			display: none
 	&__toggle-icon
 		$icon-size: 15px
 		height: remify($icon-size)
 		width: remify($icon-size)
+		&--minus
+			display: none
 	&__seperator
 		.js &
 			display: none
