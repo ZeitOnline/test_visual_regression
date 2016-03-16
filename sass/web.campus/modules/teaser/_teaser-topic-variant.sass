@@ -9,7 +9,6 @@
 
     +respond-min($break-tablet-min)
         padding: $page-padding--small
-
         &__media
             width: 50%
             padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4), refers to half-width
@@ -19,3 +18,15 @@
 .teaser-topic-variant-main
     position: absolute
     top: 0
+    left: 50%
+    transform: translateX(-50%)
+    background-color: $primary-color
+    padding: remify(15px)
+
+    &__heading
+        @extend %font-beckett
+        margin: 0
+        padding: 0
+        font-size: remify(26px)
+        a
+            color: $white
