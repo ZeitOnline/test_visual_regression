@@ -175,16 +175,16 @@ def request_thread(path,
         conf.get('agatho_host', ''), path.encode('utf-8'))
 
     thread_modes = dict(
-        paginated='{}?mode=top&page={}&rows={}&sort={}'.format(
+        paginated='{}?mode=top&page={}&rows={}&order={}'.format(
             uri, page, page_size, sort),
         sub_thread='{}?mode=sub&cid={}'.format(uri, cid),
-        deeplink='{}?mode=deeplink&cid={}&rows={}&sort={}'.format(
+        deeplink='{}?mode=deeplink&cid={}&rows={}&order={}'.format(
             uri, cid, page_size, sort),
-        recommendation=('{}?mode=recommendation&type=readers&'
-                        'page={}&rows={}&sort={}').format(
+        recommendation=('{}?mode=recommendations&type=leser_empfehlung&'
+                        'page={}&rows={}&order={}').format(
                             uri, page, page_size, sort),
-        promotion=('{}?mode=recommendation&type=editors&'
-                   'page={}&rows={}&sort={}').format(
+        promotion=('{}?mode=recommendations&type=kommentar_empfohlen&'
+                   'page={}&rows={}&order={}').format(
                         uri, page, page_size, sort))
 
     uri = thread_modes.get(thread_type, uri)
@@ -215,16 +215,17 @@ def get_paginated_thread(
 
     page_size = int(conf.get('comment_page_size', '4'))
 
-    thread_type='paginated'
+    thread_type = 'paginated'
+    request_sort = sort
     if sort == 'promoted':
-        thread_type='promotion'
-        sort='asc'
+        thread_type = 'promotion'
+        request_sort = 'asc'
     if sort == 'recommended':
-        thread_type='recommendation'
-        sort='asc'
+        thread_type = 'recommendation'
+        request_sort = 'asc'
 
     thread = request_thread(path, thread_type=thread_type, page=page,
-                            page_size=page_size, sort=sort)
+                            page_size=page_size, sort=request_sort)
     if thread is None:
         return dict()
 

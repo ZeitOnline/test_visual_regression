@@ -25,6 +25,7 @@ def request_thread(path,
                    cid=None):
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+
     timeout = float(conf.get('community_host_timeout_secs', 0.5))
     uri = '{}/agatho/thread{}'.format(
         conf.get('agatho_host', ''), path.encode('utf-8'))
@@ -164,7 +165,7 @@ def test_comment_filter_links_are_present(testbrowser, monkeypatch):
     assert browser.cssselect('a[href*="sort=recommended"]')
 
 
-def test_comment_filter_links_are_activated(testbrowser, monkeypatch):
+def test_comment_filter_links_are_activated(testbrowser, monkeypatch, testserver):
     monkeypatch.setattr(
         zeit.web.core.comments, 'request_thread', request_thread)
     browser = testbrowser('/zeit-online/article/01?sort=promoted')

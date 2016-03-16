@@ -140,6 +140,7 @@ def test_request_thread_should_fail_on_timeouts(application, monkeypatch):
     assert 'request_failed' in zeit.web.core.comments.request_thread(
         'http://community/foo')
 
+
 def test_request_thread_mode_should_produce_expected_uris(
         monkeypatch, application):
 
@@ -153,14 +154,14 @@ def test_request_thread_mode_should_produce_expected_uris(
     request_get.assert_called_with(full_thread, timeout=10.0)
 
     paginated_thread = '{}/agatho/thread/foo{}'.format(
-        conf.get('agatho_host', ''), '?mode=top&page=0&rows=4&sort=asc')
+        conf.get('agatho_host', ''), '?mode=top&page=0&rows=4&order=asc')
 
     zeit.web.core.comments.request_thread('/foo', thread_type='paginated')
 
     request_get.assert_called_with(paginated_thread, timeout=10.0)
 
     paginated_thread = '{}/agatho/thread/foo{}'.format(
-        conf.get('agatho_host', ''), '?mode=top&page=1&rows=10&sort=asc')
+        conf.get('agatho_host', ''), '?mode=top&page=1&rows=10&order=asc')
 
     zeit.web.core.comments.request_thread(
         '/foo', thread_type='paginated', page=1, page_size=10)
@@ -168,7 +169,7 @@ def test_request_thread_mode_should_produce_expected_uris(
     request_get.assert_called_with(paginated_thread, timeout=10.0)
 
     deeplink_thread = '{}/agatho/thread/foo{}'.format(
-        conf.get('agatho_host', ''), '?mode=deeplink&cid=1&rows=10&sort=asc')
+        conf.get('agatho_host', ''), '?mode=deeplink&cid=1&rows=10&order=asc')
 
     zeit.web.core.comments.request_thread(
         '/foo', thread_type='deeplink', cid=1, page_size=10)
@@ -185,7 +186,7 @@ def test_request_thread_mode_should_produce_expected_uris(
 
     recommendation = '{}/agatho/thread/foo{}'.format(
         conf.get('agatho_host', ''),
-        '?mode=recommendation&type=readers&page=1&rows=4&sort=asc')
+        '?mode=recommendation&type=readers&page=1&rows=4&order=asc')
 
     zeit.web.core.comments.request_thread(
         '/foo', thread_type='recommendation', page=1, page_size=4)
@@ -194,12 +195,13 @@ def test_request_thread_mode_should_produce_expected_uris(
 
     promotion = '{}/agatho/thread/foo{}'.format(
         conf.get('agatho_host', ''),
-        '?mode=recommendation&type=editors&page=1&rows=4&sort=asc')
+        '?mode=recommendation&type=editors&page=1&rows=4&order=asc')
 
     zeit.web.core.comments.request_thread(
         '/foo', thread_type='promotion', page=1, page_size=4)
 
     request_get.assert_called_with(promotion, timeout=10.0)
+
 
 def test_comment_to_dict_should_parse_correctly(application):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
