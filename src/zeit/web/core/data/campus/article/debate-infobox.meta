@@ -24,5 +24,5 @@
   <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
   <attribute ns="DAV:" name="supportedlock"> </attribute>
   <attribute ns="DAV:" name="lockdiscovery"/>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="action_url">mailto:leser-studium@zeit.de</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="debate_action_url">mailto:leser-studium@zeit.de</attribute>
 </head>
