@@ -86,7 +86,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
      * @function recommendComment
      */
     recommendComment = function( e ) {
-        window.console.log( 'recommendComment' );
         var cid  = this.getAttribute( 'data-cid' ),
             link = $( this ),
             comment = link.closest( '.comment__container' ),
