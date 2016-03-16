@@ -494,7 +494,7 @@ class RecommendCommentResource(PostCommentResource):
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
-class CommentReplies(zeit.web.core.view.Content):
+class CommentReplies(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
 
     @zeit.web.reify
     def replies(self):

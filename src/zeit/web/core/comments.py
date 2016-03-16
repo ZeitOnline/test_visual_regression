@@ -21,6 +21,7 @@ import zeit.web.core.template
 
 
 LONG_TERM_CACHE = zeit.web.core.cache.get_region('long_term')
+SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
 log = logging.getLogger(__name__)
 
 
@@ -303,6 +304,16 @@ def get_replies(unique_id, cid):
     return thread.get('index', {}).get(cid, {}).get('replies', [])
 
 
+def get_comment(unique_id, cid):
+    # XXX The idea is that we call a special agatho function here,
+    # not parse the whole thread ourselves.
+    try:
+        thread = zeit.web.core.comments.get_thread(unique_id, cid=cid)
+    except ThreadNotLoadable:
+        return None
+    return thread.get('index', {}).get(cid)
+
+
 def community_maintenance():
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     unique_id = conf.get('community_maintenance')
@@ -493,6 +504,22 @@ def get_counts(*unique_ids):
     except:
         log.warning('get_counts input unparseable, ignoring', exc_info=True)
         return {}
+
+
+@SHORT_TERM_CACHE.cache_on_arguments()
+def is_community_healthy():
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    timeout = float(conf.get('community_host_timeout_secs', 0.5))
+    uri = '{}/agatho/health_check'.format(conf.get('agatho_host', ''))
+    try:
+        with zeit.web.core.metrics.timer(
+                'health_check.community.reponse_time'):
+            response = requests.get(uri, timeout=timeout)
+        response.raise_for_status()
+        return True
+    except:
+        log.warning('is_community_healthy: False', exc_info=True)
+        return False
 
 
 class UserCommentsException(Exception):
