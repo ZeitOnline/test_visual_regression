@@ -625,6 +625,9 @@ class CommentMixin(object):
         except zeit.web.core.comments.ThreadNotLoadable:
             return
 
+    def get_comment(self, cid):
+        return zeit.web.core.comments.get_comment(self.context.uniqueId, cid)
+
     @zeit.web.reify
     def comments_allowed(self):
         return self.context.commentsAllowed and self.show_commentthread

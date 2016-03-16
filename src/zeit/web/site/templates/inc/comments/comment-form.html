@@ -1,9 +1,7 @@
 {% set pid = view.request.GET['pid'] | d(None) %}
-
-{%- if pid and view.comments -%}
-    {% set comment = view.comments.index[pid | int] | d(None) %}
+{%- if pid -%}
+    {% set comment = view.get_comment(pid|int) | d(None) %}
 {%- endif %}
-
 {% if comment %}
     {% set submit_value = 'Antworten' %}
     {% set placeholder = 'Ihre Antwort auf Kommentar #' + comment.shown_num + ' von ' + comment.name %}
