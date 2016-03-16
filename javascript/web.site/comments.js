@@ -86,6 +86,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
      * @function recommendComment
      */
     recommendComment = function( e ) {
+        window.console.log( 'recommendComment' );
         var cid  = this.getAttribute( 'data-cid' ),
             link = $( this ),
             comment = link.closest( '.comment__container' ),
@@ -544,6 +545,19 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 $firstReply.nextUntil( '.js-comment-toplevel', '.js-comment-placeholder' ).remove();
                 $firstReply.after( response );
                 putRewrapperOnReplies( $firstReply );
+
+                adjustRecommendationLinks();
+
+                // TODO: "uid" global setzen für dieses Script !?
+                var uid = $commentForm.attr( 'data-uid' );
+
+                if ( uid ) {
+                    // add community frontend moderation
+                    if ( $commentForm.data( 'mod' ) === 'mod' ) {
+                        $firstReply.nextUntil( '.js-comment-toplevel', '.comment' ).each( addModeration );
+                    }
+                }
+
             },
             complete: function( jqXhr, textStatus ) {
                 if ( textStatus !== 'success' ) {
@@ -631,6 +645,30 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         }
     },
 
+    adjustRecommendationLinks = function() {
+
+        var uid = $commentForm.attr( 'data-uid' );
+        if ( uid ) {
+            // highlight recommended comments for logged in user
+            $commentsBody.find( '.js-recommend-comment' ).each( function() {
+                if ( uid === this.getAttribute( 'data-uid' ) ) {
+                    // hide recommendation link for user's own comments
+                    this.style.display = 'none';
+                } else {
+                    // highlight recommended comments for logged in user
+                    var fans = this.getAttribute( 'data-fans' );
+
+                    fans = fans.length ? fans.split( ',' ) : [];
+
+                    if ( fans.indexOf( uid ) !== -1 ) {
+                        toggleRecommendationLink( $( this ) );
+                    }
+                }
+            });
+        }
+
+    },
+
     /**
      * comments.js: initialize
      * @function init
@@ -649,23 +687,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         // collapse consecutive replies
         wrapRepliesNew();
 
+        adjustRecommendationLinks();
+
         if ( uid ) {
-            // highlight recommended comments for logged in user
-            $commentsBody.find( '.js-recommend-comment' ).each( function() {
-                if ( uid === this.getAttribute( 'data-uid' ) ) {
-                    // hide recommendation link for user's own comments
-                    this.style.display = 'none';
-                } else {
-                    // highlight recommended comments for logged in user
-                    var fans = this.getAttribute( 'data-fans' );
-
-                    fans = fans.length ? fans.split( ',' ) : [];
-
-                    if ( fans.indexOf( uid ) !== -1 ) {
-                        toggleRecommendationLink( $( this ) );
-                    }
-                }
-            });
 
             // add community frontend moderation
             if ( $commentForm.data( 'mod' ) === 'mod' ) {
