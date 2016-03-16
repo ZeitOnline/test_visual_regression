@@ -138,3 +138,11 @@ def test_article_tags_are_present(testbrowser):
     assert len(tags) == 6
     for tag in tags:
         assert tag.get('rel') == 'tag'
+
+
+def test_rawr_config_should_exist_on_article_page(testbrowser):
+    assert False
+
+
+def test_rawr_config_should_not_exist_on_centerpage(testbrowser):
+    assert False
