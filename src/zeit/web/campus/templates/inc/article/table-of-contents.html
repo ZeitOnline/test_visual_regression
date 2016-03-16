@@ -13,9 +13,3 @@
     {% if view.pagination.pages_titles[pagenr - 1] %}<span>{{ view.pagination.pages_titles[pagenr - 1] }}</span>
     {%- endif %}
 {% endblock %}
-
-{% block toc_link_bottom %}
-    {{ self.toc_link_onesie() }}
-{% endblock %}
-
-{% block toc_after_container %}{% endblock %}

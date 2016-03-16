@@ -30,15 +30,8 @@
             {% endfor %}
 
             </ol>
-
-            {% block toc_link_bottom %}{% endblock %}
+            <a class="article-toc__onesie" href="{{ view.content_url }}/komplettansicht" data-id="article-toc....all">Auf einer Seite lesen</a>
         </div>
-
-        {% block toc_after_container -%}
-            {% block toc_link_onesie -%}
-                <a class="article-toc__onesie" href="{{ view.content_url }}/komplettansicht" data-id="article-toc....all">Auf einer Seite lesen</a>
-            {%- endblock %}
-        {%- endblock %}
     </div>
 </aside>
 {% endif %}
