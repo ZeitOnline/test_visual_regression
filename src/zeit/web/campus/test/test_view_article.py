@@ -138,3 +138,8 @@ def test_article_tags_are_present(testbrowser):
     assert len(tags) == 6
     for tag in tags:
         assert tag.get('rel') == 'tag'
+
+
+def test_nextread_is_present(testbrowser):
+    browser = testbrowser('/campus/article/paginated')
+    assert len(browser.cssselect('#nextread')) == 1
