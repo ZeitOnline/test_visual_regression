@@ -237,6 +237,14 @@ def test_comment_reply_thread_must_not_wrap_if_deeplinked(
     assert driver.find_element_by_id('cid-5122767').is_displayed()
 
 
+def test_comment_actions_should_link_to_article(testbrowser):
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
+    link = browser.cssselect('a.js-report-comment')[0]
+    assert link.get('href') == (
+        'http://localhost/zeit-online/article/01'
+        '?action=report&pid=2968470#report-comment-form')
+
+
 def test_comment_action_recommend_should_redirect_to_login(testserver):
     path = '/zeit-online/article/01?action=recommend&pid=2968470'
     url = testserver.url + path
