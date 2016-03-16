@@ -486,7 +486,7 @@ class RecommendCommentResource(PostCommentResource):
 
 @pyramid.view.view_defaults(
     renderer='zeit.web.site:templates/inc/comments/replies.html',
-    name='comment_replies')
+    name='comment-replies')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
 @pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)

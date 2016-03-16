@@ -350,7 +350,7 @@ def test_comment_area_should_show_message_for_blocked_users(application):
 
 def test_comment_replies_view_renders_html_for_replies(testbrowser):
     browser = testbrowser(
-        '/zeit-online/article/01/comment_replies?cid=2968478')
+        '/zeit-online/article/01/comment-replies?cid=2968478')
     comments = browser.cssselect('article .comment__body')
     assert len(comments) == 4
     assert 'Arschtritt' in comments[0].xpath('p')[0].text
