@@ -1,0 +1,56 @@
+.nextread
+	background: $color-background
+	margin: remify(48px) (-$page-padding) remify(40px)
+	padding: remify(36px 20px 36px)
+	position: relative
+	width: auto
+	&__lead
+		@extend %font-beckett
+		font-size: remify(26px)
+		margin: 0
+		position: absolute
+		top: remify(-8px)
+
+.nextread-teaser
+	$image-width: 102px
+	$ratio: 1.33
+	background: $white
+	min-height: remify($image-width * $ratio)
+	position: relative
+	&__media
+		bottom: 0
+		left: 0
+		position: absolute
+		top: 0
+		width: remify($image-width)
+	&__media-item
+		bottom: 0
+		height: 100%
+		left: 0
+		position: absolute
+		top: 0
+		.scaled-image &
+			width: auto
+	&__heading
+		background: $white
+		margin: 0 0 0 remify($image-width)
+		min-height: remify($image-width * $ratio)
+		padding: remify(12px)
+		position: relative
+		z-index: 1
+	&__kicker
+		display: block
+		font-size: remify(12px)
+		letter-spacing: $letter-spacing-l
+		line-height: round-to-precision(12/13, $precision: 1)
+		margin-bottom: em(8px, 12px)
+		text-transform: uppercase
+	&__title
+		@extend %font-beckett
+		display: block
+		font-size: remify(26px)
+		text-transform: uppercase
+		a &
+			color: $color-text
+
+
