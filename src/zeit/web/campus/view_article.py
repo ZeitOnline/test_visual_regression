@@ -42,6 +42,10 @@ class Article(zeit.web.core.view_article.Article, zeit.web.campus.view.Base):
             return topic.label
         return getattr(topic.page, 'title', '')
 
+    @zeit.web.reify
+    def adcontroller_handle(self):
+        return 'artikel'
+
 
 @pyramid.view.view_config(name='seite',
                           path_info='.*seite-(.*)',
