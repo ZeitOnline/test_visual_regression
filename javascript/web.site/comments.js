@@ -401,17 +401,10 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     },
 
     putRewrapperOnReplies = function( $firstReply ) {
-
-        // TODO: das ist auch etwas wackelig
         var $rootComment = $firstReply.prev( '.comment' ),
-            rootCommentId = $rootComment.attr( 'id' ),
-            // TODO: wird die ID später wieder zurechtgeparsed? Dann lieber Original-ID als Data-Attribut verwenden?
-            rewrapperId = 'hide-replies-' + rootCommentId,
-            // TODO: Wo kam der Rewrapper bisher her? Kann er via CSS immer sichtbar sein?
-            // TODO: Per CSS ein- oder ausblenden, und nicht hier auf den styles rumrödeln.
-            // TODO: Anzahl beim Laden zählen
+            rewrapperId = $firstReply.data( 'rewrapper-id' ),
             rewrapper = '' +
-            '<div id="' + rewrapperId + '" class="comment__rewrapper js-hide-replies" style="display:block;visibility:hidden;">' +
+            '<div id="' + rewrapperId + '" class="comment__rewrapper comment__rewrapper--loading js-hide-replies">' +
                 '<span class="comment__count"></span>\n' +
                 '<span class="comment__cta">Antworten verbergen</span>\n' +
             '</div>\n';
@@ -420,26 +413,18 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     },
 
     updateRewrapperOnReplies = function( $firstReply ) {
-
-        // TODO: das ist auch etwas wackelig
         var $rootComment = $firstReply.prev( '.comment' ),
-            rootCommentId = $rootComment.attr( 'id' ),
-            // TODO: wird die ID später wieder zurechtgeparsed? Dann lieber Original-ID als Data-Attribut verwenden?
-            rewrapperId = 'hide-replies-' + rootCommentId,
+            rewrapperId = $firstReply.data( 'rewrapper-id' ),
             $answers = $rootComment.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
-            // TODO Die ID auch anders finden als durchs Neuparsen!
             $rewrapper = $( '#' + rewrapperId );
-        // TODO: Wo kam der Rewrapper bisher her? Kann er via CSS immer sichtbar sein?
-        // TODO: Per CSS ein- oder ausblenden, und nicht hier auf den styles rumrödeln.
-        // TODO: Anzahl beim Laden zählen
+
         $rewrapper.find( '.comment__count' ).eq( 0 ).text( '− ' + $answers.length );
-        $rewrapper.css( 'visibility', 'visible' );
+        $rewrapper.removeClass( 'comment__rewrapper--loading' );
 
     },
 
     wrapReplies = function() {
-        // TODO: ggf target, deeplinks
-        // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
+        // TODO: Target + Deeplinks testen
         var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
             $target;
 
@@ -450,8 +435,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
         $rootComments.each( function() {
             var $root = $( this ),
-                // OPTIMIZE: mit JS Präfix versehen? Eine Umstrukturierung des HTML würde alles kaputtmachen.
-                $replyLinkContainer = $root.nextUntil( '.js-comment-toplevel', '.comment__container' ),
+                $replyLinkContainer = $root.nextUntil( '.js-comment-toplevel', '.js-comment-loader' ),
                 $answers,
                 id,
                 replyLoadLink,
@@ -467,7 +451,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             }
 
             $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' );
-            // TODO: wozu das? wozu undo?
             id = 'hide-replies-' + this.id;
             replyLoadLink = $replyLinkContainer.find( 'a' );
             replyLoadUrl = replyLoadLink.data( 'url' );
@@ -485,7 +468,11 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                     '</div>\n' +
                 '</div>\n';
 
-            $answers.eq( 0 ).data({ undo: id }).addClass( 'comment--wrapped' )
+            $answers.eq( 0 )
+                .data({
+                    'reply-count': replyCountInteger,
+                    'rewrapper-id': id })
+                .addClass( 'comment--wrapped' )
                 .find( '.comment__body' )
                 .append( overlayHTML );
 
@@ -512,11 +499,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             url = $wrapped.data( 'url' ),
             fallbackUrl = $wrapped.data( 'fallbackurl' ),
             $firstReply = $wrapped.closest( 'article.comment' ),
-            // TODO: Das sollte von Anfang an ein Data-Attribut am RootComment sein
-            replyCountElement = $firstReply.find( '.comment-overlay__count' ),
-            replyCountString = replyCountElement.eq( 0 ).text().replace( '+ ', '' ),
-            replyCountInteger = parseInt( replyCountString, 10 ),
+            replyCountInteger = parseInt( $firstReply.data( 'reply-count' ), 10 ),
             placeholderWording = ( replyCountInteger === 1 ) ? 'Kommentar wird geladen.' : 'Kommentare werden geladen.',
+
             placeholderHTML = '' +
                 '<article class="comment comment--indented js-comment-placeholder">' +
                     '<div class="comment__container comment__container--placeholder">' +
@@ -526,7 +511,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
         e.preventDefault();
 
-        // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
         // OPTIMIZE: Netter mit Promises arbeiten als dem Callback-vs-repliesLoaded-Quatsch?
         $.ajax({
             url: url,
@@ -566,7 +550,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
     showReplies = function( e ) {
         var $wrapped = $( this ),
-            selector = '#' + $wrapped.data( 'undo' ),
+            selector = '#' + $wrapped.data( 'rewrapper-id' ),
             $link = $( selector ),
             $repliesToShow;
 
@@ -575,7 +559,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $wrapped.removeClass( 'comment--wrapped' );
         // get other replies, filter to remove ads from result
         $repliesToShow = $wrapped.nextUntil( '.js-comment-toplevel', '.comment--indented' );
-        // for performance reasons, we only slide the first items and siply show the other ones
+        // for performance reasons, we only slide the first items and simply show the other ones
         $repliesToShow.slice( 0, 5 ).velocity( 'slideDown', {
             'duration': slideDuration,
             'complete': function() {

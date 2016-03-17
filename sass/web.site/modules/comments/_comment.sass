@@ -132,10 +132,11 @@ $color-comment-border: $color-border
 			color: $zon-light-grey !important
 
 	&__rewrapper
-		display: none
+		display: block
 		cursor: pointer
 		padding-bottom: remify(28px)
-
+		&--loading
+			visibility: hidden
 		&:hover
 			.comment__count
 				background-color: $zon-charcoal
