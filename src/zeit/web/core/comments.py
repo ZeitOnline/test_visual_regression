@@ -180,12 +180,12 @@ def request_thread(path,
         sub_thread='{}?mode=sub&cid={}'.format(uri, cid),
         deeplink='{}?mode=deeplink&cid={}&rows={}&order={}'.format(
             uri, cid, page_size, sort),
-        recommendation=('{}?mode=recommendations&type=leser_empfehlung&'
-                        'page={}&rows={}&order={}').format(
-                            uri, page, page_size, sort),
-        promotion=('{}?mode=recommendations&type=kommentar_empfohlen&'
-                   'page={}&rows={}&order={}').format(
-                        uri, page, page_size, sort))
+        recommendation=(
+            '{}?mode=recommendations&type=leser_empfehlung&'
+            'page={}&rows={}&order={}').format(uri, page, page_size, sort),
+        promotion=(
+            '{}?mode=recommendations&type=kommentar_empfohlen&'
+            'page={}&rows={}&order={}').format(uri, page, page_size, sort))
 
     uri = thread_modes.get(thread_type, uri)
     log.info("Requested thread: {}".format(uri))
@@ -267,9 +267,9 @@ def get_paginated_thread(
     pagination_comment_count = toplevel_comment_count
 
     if thread_type == 'promotion':
-         pagination_comment_count = promotion_count
+        pagination_comment_count = promotion_count
     if thread_type == 'recommendation':
-         pagination_comment_count = recommendation_count
+        pagination_comment_count = recommendation_count
 
     pages = int(math.ceil(float(pagination_comment_count) / float(page_size)))
 
