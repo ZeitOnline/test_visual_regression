@@ -407,15 +407,34 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             rootCommentId = $rootComment.attr( 'id' ),
             // TODO: wird die ID später wieder zurechtgeparsed? Dann lieber Original-ID als Data-Attribut verwenden?
             rewrapperId = 'hide-replies-' + rootCommentId,
-            $answers = $rootComment.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
             // TODO: Wo kam der Rewrapper bisher her? Kann er via CSS immer sichtbar sein?
+            // TODO: Per CSS ein- oder ausblenden, und nicht hier auf den styles rumrödeln.
+            // TODO: Anzahl beim Laden zählen
             rewrapper = '' +
-            '<div id="' + rewrapperId + '" class="comment__rewrapper js-hide-replies" style="display:block;">' +
-                '<span class="comment__count">− ' + $answers.length + '</span>\n' +
+            '<div id="' + rewrapperId + '" class="comment__rewrapper js-hide-replies" style="display:block;visibility:hidden;">' +
+                '<span class="comment__count"></span>\n' +
                 '<span class="comment__cta">Antworten verbergen</span>\n' +
             '</div>\n';
 
         $firstReply.find( '.comment__container' ).prepend( rewrapper );
+    },
+
+    updateRewrapperOnReplies = function( $firstReply ) {
+
+        // TODO: das ist auch etwas wackelig
+        var $rootComment = $firstReply.prev( '.comment' ),
+            rootCommentId = $rootComment.attr( 'id' ),
+            // TODO: wird die ID später wieder zurechtgeparsed? Dann lieber Original-ID als Data-Attribut verwenden?
+            rewrapperId = 'hide-replies-' + rootCommentId,
+            $answers = $rootComment.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
+            // TODO Die ID auch anders finden als durchs Neuparsen!
+            $rewrapper = $( '#' + rewrapperId );
+        // TODO: Wo kam der Rewrapper bisher her? Kann er via CSS immer sichtbar sein?
+        // TODO: Per CSS ein- oder ausblenden, und nicht hier auf den styles rumrödeln.
+        // TODO: Anzahl beim Laden zählen
+        $rewrapper.find( '.comment__count' ).eq( 0 ).text( '− ' + $answers.length );
+        $rewrapper.css( 'visibility', 'visible' );
+
     },
 
     wrapReplies = function() {
@@ -516,8 +535,8 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 repliesLoaded = true;
                 $firstReply.nextUntil( '.js-comment-toplevel', '.js-comment-placeholder' ).remove();
                 $firstReply.after( response );
-                putRewrapperOnReplies( $firstReply );
 
+                updateRewrapperOnReplies( $firstReply );
                 adjustRecommendationLinks();
 
                 // add community frontend moderation
@@ -532,6 +551,8 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 }
             }
         });
+
+        putRewrapperOnReplies( $firstReply );
 
         // without the js-load-comment-replies class, we toggle existing
         // replies (instead of loading from server)
