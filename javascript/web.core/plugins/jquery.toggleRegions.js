@@ -1,16 +1,24 @@
 /**
- * @fileOverview jQuery Plugin for expandable and collapsible regions using the WAI-ARIA aria-expanded state.
- *               WAI-ARIA aria-controls is used to maintain markup associations.
+ * @fileOverview jQuery Plugin for expandable and collapsible regions
+ * using the WAI-ARIA aria-expanded state. WAI-ARIA aria-controls is used
+ * to maintain markup associations.
  * @author moritz.stoltenburg@zeit.de
- * @version  0.1
+ * @version 0.1
  */
 (function( $, Zeit ) {
+
+    'use strict';
+
+    var settings,
+        defaults = {
+            duration: 200
+        };
 
     function toggleElement( control, target ) {
         var expand = control.attr( 'aria-expanded' ) !== 'true',
             animation = expand ? 'slideDown' : 'slideUp',
             options = {
-                duration: 200,
+                duration: settings.duration,
                 display: ''
             };
 
@@ -27,7 +35,7 @@
         target.velocity( animation, options );
     }
 
-    function initRegion( element ) {
+    function initRegion( element, update ) {
 
         var region = $( element ),
             controls = region.find( '[aria-controls]' ),
@@ -37,9 +45,21 @@
             var control = $( this ),
                 target = $( '#' + control.attr( 'aria-controls' ) ),
                 expanded = control.attr( 'aria-expanded' ) === 'true',
-                constrained = control.attr( 'data-constrained' ).split( /\s*,\s*/ );
+                constrained = control.attr( 'data-constrained' );
+
+            constrained = constrained ? constrained.split( /\s*,\s*/ ) : [];
 
             if ( constrained.length ) {
+                // set resize event listener on initial call
+                if ( !update ) {
+                    $( window ).on( 'resize', $.debounce( function() {
+                        if ( breakpoint !== Zeit.breakpoint.get() ) {
+                            controls.off( 'click.region' );
+                            initRegion( element, true );
+                        }
+                    }, 500 ) );
+                }
+
                 // test viewport constraints
                 if ( $.inArray( breakpoint, constrained ) === -1 ) {
                     return false;
@@ -59,16 +79,7 @@
             });
 
             // set click event
-            control.on( 'click', function( event ) {
-                if ( constrained.length ) {
-                    breakpoint = Zeit.breakpoint.get();
-
-                    // test viewport constraints
-                    if ( $.inArray( breakpoint, constrained ) === -1 ) {
-                        return false;
-                    }
-                }
-
+            control.on( 'click.region', function( event ) {
                 event.preventDefault();
                 toggleElement( control, target );
             });
@@ -91,7 +102,9 @@
         });
     }
 
-    $.fn.toggleRegions = function() {
+    $.fn.toggleRegions = function( options ) {
+        settings = $.extend( {}, defaults, options );
+
         return this.each( function() {
             initRegion( this );
         });
