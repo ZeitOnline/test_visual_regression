@@ -306,6 +306,9 @@ def get_layout(block, request=None):
                 layout = layout
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
+        # XXX Instead of hard-coding a layout change here, we should make use
+        # of z.w.core.centerpage.dispatch_teaser_via_contenttype() and
+        # register a specific teaser module for authors.
         elif (zeit.content.author.interfaces.IAuthor.providedBy(teaser) and
                 layout == 'zon-small' and
                 block.__parent__.kind in ['duo', 'minor']):
@@ -844,6 +847,10 @@ def calculate_pagination(current_page, total_pages, slots=7):
 
 @zeit.web.register_filter
 def append_get_params(request, **kw):
+    # XXX Should we rather get the request automatically (as a ctxfilter)?
+    # Usage then would be `{{ url | append_get_params(foo='bar') }}`.
+    base_url = kw.pop('url', request.path_url)
+
     # Append GET parameters that are not reset
     # by setting the param value to None explicitly.
     def encode(value):
@@ -854,8 +861,8 @@ def append_get_params(request, **kw):
               (i for i in kw.iteritems() if i[1] is not None))]
 
     if params == []:
-        return request.path_url
-    return u'{}?{}'.format(request.path_url, urllib.urlencode(params))
+        return base_url
+    return u'{}?{}'.format(base_url, urllib.urlencode(params))
 
 
 @zeit.web.register_filter
@@ -898,3 +905,12 @@ def provides(obj, iface):
 @zeit.web.register_global
 def get_random_number(length):
     return random.randint(0, 10 ** length)
+
+
+@zeit.web.register_global
+def adapt(obj, iface, name=u'', multi=False):
+    iface = pyramid.path.DottedNameResolver().resolve(iface)
+    if multi:
+        return zope.component.queryMultiAdapter(obj, iface, name)
+    else:
+        return zope.component.queryAdapter(obj, iface, name)
