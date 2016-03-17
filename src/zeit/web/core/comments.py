@@ -140,6 +140,7 @@ def comment_to_dict(comment):
         name=author_name,
         created=created,
         text=content,
+        text_stripped=content_stripped,
         role=', '.join(roles),
         fans=','.join(fans),
         cid=int(comment.xpath('./@id')[0].lstrip('cid-')),
@@ -185,7 +186,9 @@ def request_thread(path,
             'page={}&rows={}&order={}').format(uri, page, page_size, sort),
         promotion=(
             '{}?mode=recommendations&type=kommentar_empfohlen&'
-            'page={}&rows={}&order={}').format(uri, page, page_size, sort))
+            'page={}&rows={}&order={}').format(uri, page, page_size, sort),
+        single='{}?mode=load_cid&cid={}'.format(uri, cid)
+    )
 
     uri = thread_modes.get(thread_type, uri)
     log.info("Requested thread: {}".format(uri))
@@ -441,13 +444,23 @@ def get_replies(unique_id, cid):
 
 
 def get_comment(unique_id, cid):
-    # XXX The idea is that we call a special agatho function here,
-    # not parse the whole thread ourselves.
+    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
+    thread = request_thread(path, thread_type='single', cid=cid)
+    if thread is None:
+        return {}
+    if isinstance(thread, dict) and thread.get('request_failed'):
+        return {}
+
     try:
-        thread = zeit.web.core.comments.get_thread(unique_id, cid=cid)
-    except ThreadNotLoadable:
-        return None
-    return thread.get('index', {}).get(cid)
+        document = lxml.etree.fromstring(thread)
+    except:
+        log.warning('get_comment input unparseable, ignoring', exc_info=True)
+        return {}
+
+    comment = [comment_to_dict(c) for c in document.xpath('//comment')]
+    if not comment:
+        return {}
+    return comment[0]
 
 
 def community_maintenance():

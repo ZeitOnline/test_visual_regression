@@ -68,6 +68,22 @@ def test_comment_form_should_be_rendered(testbrowser, monkeypatch):
     assert len(browser.cssselect('#comment-form')) == 1
 
 
+def test_comment_form_should_display_parent_hint(tplbrowser, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view.CommentForm(article, dummy_request)
+    view.comment_form = {'show_comment_form': True}
+    dummy_request.user = {'ssoid': 123, 'uid': '123', 'name': 'Max'}
+    dummy_request.GET['pid'] = '90'
+
+    browser = tplbrowser(
+        'zeit.web.site:templates/inc/comments/comment-form.html',
+        view=view, request=dummy_request)
+
+    input = browser.cssselect('textarea[name="comment"]')[0]
+    assert '"die allere..."' in input.get('placeholder')
+
+
 def test_comment_form_should_not_be_cached(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-form')
     assert 'no-cache' in browser.headers['Cache-Control']
