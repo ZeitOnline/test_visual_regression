@@ -16,7 +16,7 @@
                 {% set byline = teaser | get_byline %}
                 {% if byline | length %}
                 <span class="{{ module_layout }}__byline">
-                    {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
+                    {%- include 'zeit.web.core:templates/inc/meta/byline.html' -%}
                 </span>
                 {% endif %}
                 {{ cp.include_teaser_datetime(teaser, module_layout, module_layout) }}
