@@ -6,7 +6,7 @@
          class="{% block layout %}nextread{% endblock %} {{ module_layout }}{{ modifier }}">
     <a class="{{ module_layout }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}" data-id="articlebottom.editorial-nextread...area">
         <div class="{{ module_layout }}__lead">{{ module.lead or 'Lesen Sie jetzt' }}</div>
-        {% include "zeit.web.site:templates/inc/asset/image_nextread-default.tpl" with context %}
+        {% include "zeit.web.core:templates/inc/asset/image_nextread.tpl" with context %}
         <div class="{{ module_layout }}__container">
             <h2 class="{{ module_layout }}__heading">
                 <span class="{{ module_layout }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
