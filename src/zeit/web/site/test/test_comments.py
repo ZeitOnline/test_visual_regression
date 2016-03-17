@@ -17,6 +17,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
+
 def request_thread(path,
                    thread_type='full',
                    page=0,
@@ -35,12 +36,10 @@ def request_thread(path,
         sub_thread='{}?mode=sub&cid={}'.format(uri, cid),
         deeplink='{}?mode=deeplink&cid={}&rows={}&sort={}'.format(
             uri, cid, page_size, sort),
-        recommendation=('{}_mode_recommendation_'
-                        'page_{}_row_{}_sort_{}').format(
-                            uri, page, page_size, sort),
-        promotion=('{}_mode_promotion_'
-                   'page_{}_row_{}_sort_{}').format(
-                        uri, page, page_size, sort))
+        recommendation='{}_mode_recommendation_page_{}_row_{}_sort_{}'.format(
+            uri, page, page_size, sort),
+        promotion='{}_mode_promotion_page_{}_row_{}_sort_{}'.format(
+            uri, page, page_size, sort))
 
     uri = thread_modes.get(thread_type, uri)
 
@@ -165,7 +164,8 @@ def test_comment_filter_links_are_present(testbrowser, monkeypatch):
     assert browser.cssselect('a[href*="sort=recommended"]')
 
 
-def test_comment_filter_links_are_activated(testbrowser, monkeypatch, testserver):
+def test_comment_filter_links_are_activated(
+        testbrowser, monkeypatch, testserver):
     monkeypatch.setattr(
         zeit.web.core.comments, 'request_thread', request_thread)
     browser = testbrowser('/zeit-online/article/01?sort=promoted')
@@ -413,5 +413,3 @@ def test_article_meta_should_omit_comment_count_if_no_comments_present(
         testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     assert len(browser.cssselect('.metadata__commentcount')) == 0
-
-
