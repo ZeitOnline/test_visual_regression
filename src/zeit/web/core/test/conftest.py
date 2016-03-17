@@ -5,6 +5,7 @@ import json
 import logging
 import os.path
 import pkg_resources
+import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
 from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
@@ -25,8 +26,10 @@ import repoze.bitblt.processor
 import selenium.webdriver
 import selenium.webdriver.firefox.firefox_binary
 import transaction
+import waitress
 import webob.multidict
 import webtest
+import wesgi
 import zope.browserpage.metaconfigure
 import zope.event
 import zope.interface
@@ -475,11 +478,20 @@ def mockserver(request):
 
 @pytest.fixture(scope='session')
 def testserver(application_session, request):
-    server = gocept.httpserverlayer.wsgi.Layer()
-    server.wsgi_app = application_session
-    server.setUp()
-    server.url = 'http://%s' % server['http_address']
-    request.addfinalizer(server.tearDown)
+    wsgi_app = wesgi.MiddleWare(
+        application_session, forward_headers=True)
+    server = waitress.server.create_server(wsgi_app, host='localhost', port=0)
+    server.url = 'http://{host}:{port}'.format(
+        host=server.effective_host, port=server.effective_port)
+    thread = threading.Thread(target=server.run)
+    thread.daemon = True
+    thread.start()
+
+    def tearDown():
+        server.task_dispatcher.shutdown()
+        thread.join(5)
+    request.addfinalizer(tearDown)
+
     return server
 
 
@@ -645,6 +657,11 @@ class TestApp(webtest.TestApp):
         return self.get(url, params, headers, *args, **kw)
 
 
+# When testing ESI fragments, autodetection of the encoding may not work (no
+# head, so no meta charset declaration), so we specify it explicitly.
+HTML_PARSER = lxml.html.HTMLParser(encoding='UTF-8')
+
+
 class BaseBrowser(object):
     """Base class for custom test browsers that allow direct access to CSS and
     XPath selection on their content.
@@ -673,7 +690,8 @@ class BaseBrowser(object):
     def document(self):
         """Return an lxml.html.HtmlElement instance of the response body."""
         if self.contents is not None:
-            return lxml.html.document_fromstring(self.contents)
+            return lxml.html.document_fromstring(
+                self.contents, parser=HTML_PARSER)
 
     @property
     def json(self):

@@ -105,6 +105,7 @@ setup(
             'transaction',
             'waitress',
             'webtest',
+            'wesgi',
             'zope.event',
             'zope.testbrowser [wsgi]'
         ]
