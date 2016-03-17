@@ -8,6 +8,9 @@
       <tag type="free" score="4" uuid="bd93919b-e1d4-4d09-a0ef-667720c3636b" url_value="online-bewerbung">Online-Bewerbung</tag>
       <tag type="free" score="4" uuid="b6f4ea87-18fc-4f7e-8e91-65ce1e2d49a5" url_value="studiengang">Studiengang</tag>
     </rankedTags>
+    <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index">
+      <display_name>Heike Jahberg</display_name>
+    </author>
     <references>
     </references>
     <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/campus/image/01-junge-vor-unscharfem-hintergrund/" type="jpg" title="Countdown: Countdown zum Studium" alt="Countdown: Countdown zum Studium" align="left" publication-date="" expires="">
