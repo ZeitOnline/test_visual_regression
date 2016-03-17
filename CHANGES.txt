@@ -4,7 +4,12 @@ Change log for zeit.web
 2.65 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2491: Add debate module for Articles
+
+- ZON-2505: Add debate module for CPs
+
+- ZON-2894: Include comment thread via ESI
+  **NOTE** Also deploy corresponding varnish changes!
 
 
 2.64 (2016-03-16)
