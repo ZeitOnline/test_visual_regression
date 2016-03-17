@@ -6,7 +6,9 @@
 	padding-top: remify(36px)
 	padding-bottom: remify(36px)
 	position: relative
-	width: auto
+	+respond-min($break-tablet-min)
+		padding-top: remify(60px)
+		padding-bottom: remify(60px)
 	&__lead
 		@extend %font-beckett
 		font-size: remify(26px)
@@ -23,11 +25,12 @@
 	$large-image-width: 321px
 	$ratio: 1.33
 	margin: 0 auto
+	max-width: remify(820px)
 	min-height: remify($small-image-width * $ratio)
 	position: relative
 	+respond-min($break-tablet-min)
 		height: remify(428px)
-		min-height: auto
+		min-height: 0
 		overflow: hidden
 	&__media
 		bottom: 0
