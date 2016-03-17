@@ -4,6 +4,8 @@ Change log for zeit.web
 2.65 (unreleased)
 -----------------
 
+- ZON-2501: Implement topic teaser for ZEIT Campus
+
 - ZON-2894: Include comment thread via ESI
   **NOTE** Also deploy corresponding varnish changes!
 
