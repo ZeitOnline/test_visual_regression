@@ -59,7 +59,7 @@ def test_comment_section_should_be_limited_in_top_level_comments(
         testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.comments, 'request_thread', request_thread)
-    browser = testbrowser('/zeit-online/article/01')
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
     assert len(
@@ -69,7 +69,7 @@ def test_comment_section_should_be_limited_in_top_level_comments(
 def test_comments_should_contain_basic_meta_data(testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.comments, 'request_thread', request_thread)
-    browser = testbrowser('/zeit-online/article/01')
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
     comm = browser.cssselect('article.comment')[0]
     assert 'test_user' in comm.cssselect('.comment-meta__name > a')[0].text
     date = zeit.web.core.template.format_date(
@@ -122,24 +122,23 @@ def test_report_form_should_be_rendered(testbrowser):
 
 def test_comment_form_should_be_rendered_through_esi(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    assert len(browser.cssselect('include')) == 2
+    assert len(browser.cssselect('include')) == 3
 
 
 def test_comment_pagination_should_work(testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.comments, 'request_thread', request_thread)
-    browser = testbrowser('/zeit-online/article/01?page=2')
-    section = browser.document.get_element_by_id('comments')
-    pages = section.find_class('pager__page')
+    browser = testbrowser('/zeit-online/article/01/comment-thread?page=2')
+    pages = browser.cssselect('.pager__page')
     assert len(pages) == 7
     assert '--current' in (pages[1].get('class'))
 
 
-def test_comment_pagination_button_should_have_a_certain_label(testbrowser,
-                                                               monkeypatch):
+def test_comment_pagination_button_should_have_a_certain_label(
+        testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.comments, 'request_thread', request_thread)
-    browser = testbrowser('/zeit-online/article/01')
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
     button = browser.cssselect('.pager__button--next')
     assert button[0].text == u'Weitere Kommentare'
 
@@ -147,7 +146,7 @@ def test_comment_pagination_button_should_have_a_certain_label(testbrowser,
 def test_comment_sorting_should_work(testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.comments, 'request_thread', request_thread)
-    browser = testbrowser('/zeit-online/article/01?sort=desc')
+    browser = testbrowser('/zeit-online/article/01/comment-thread?sort=desc')
     comments_body = browser.document.get_element_by_id('js-comments-body')
     comments = comments_body.cssselect('.comment')
     link = browser.cssselect('.comment-preferences__item')
@@ -159,19 +158,20 @@ def test_comment_sorting_should_work(testbrowser, monkeypatch):
 def test_comment_filter_links_are_present(testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.comments, 'request_thread', request_thread)
-    browser = testbrowser('/zeit-online/article/01')
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
     assert browser.cssselect('a[href*="sort=promoted"]')
     assert browser.cssselect('a[href*="sort=recommended"]')
 
 
-def test_comment_filter_links_are_activated(
-        testbrowser, monkeypatch, testserver):
+def test_comment_filter_links_are_activated(testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.comments, 'request_thread', request_thread)
-    browser = testbrowser('/zeit-online/article/01?sort=promoted')
+    browser = testbrowser(
+        '/zeit-online/article/01/comment-thread?sort=promoted')
     assert browser.cssselect(
         'a[href*="sort=promoted"].comment-preferences__item--active')
-    browser = testbrowser('/zeit-online/article/01?sort=recommended')
+    browser = testbrowser(
+        '/zeit-online/article/01/comment-thread?sort=recommended')
     assert browser.cssselect(
         'a[href*="sort=recommended"].comment-preferences__item--active')
 
@@ -179,10 +179,12 @@ def test_comment_filter_links_are_activated(
 def test_comment_filter_works_as_expected(testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.comments, 'request_thread', request_thread)
-    browser = testbrowser('/zeit-online/article/01?sort=promoted')
+    browser = testbrowser(
+        '/zeit-online/article/01/comment-thread?sort=promoted')
     comments = browser.cssselect('.comment')
     assert len(comments) == 1
-    browser = testbrowser('/zeit-online/article/01?sort=recommended')
+    browser = testbrowser(
+        '/zeit-online/article/01/comment-thread?sort=recommended')
     comments = browser.cssselect('.comment')
     assert len(comments) == 4
 
@@ -190,7 +192,7 @@ def test_comment_filter_works_as_expected(testbrowser, monkeypatch):
 def test_comment_in_reply_to_shows_origin(testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.comments, 'request_thread', request_thread)
-    browser = testbrowser('/zeit-online/article/01')
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
     answers = browser.cssselect('.comment--indented')
     origins = browser.cssselect('.comment__origin')
     link = browser.cssselect('#cid-90 .comment__origin')[0]
@@ -201,7 +203,7 @@ def test_comment_in_reply_to_shows_origin(testbrowser, monkeypatch):
 def test_comment_author_roles_should_be_displayed(testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.comments, 'request_thread', request_thread)
-    browser = testbrowser('/zeit-online/article/01')
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
     comment_author = browser.document.get_element_by_id('cid-3')
     comment_freelancer = browser.document.get_element_by_id('cid-7')
     selector = '.comment-meta__badge--author'
@@ -224,16 +226,13 @@ def test_comments_zon_template_respects_metadata(tplbrowser, monkeypatch):
 
     request = mock.MagicMock()
     request.user = {'ssoid': 123, 'uid': '123', 'name': 'Max'}
-    request.path_url = 'http://xml.zeit.de/zeit-online/article/01'
     request.params = {'cid': None}
     request.route_url = lambda x: "http://foo/"
 
     view = zeit.web.site.view_article.Article(content, request)
     view.comments_allowed = False
-    comments = tplbrowser('zeit.web.site:templates/inc/article/comments.tpl',
+    comments = tplbrowser('zeit.web.site:templates/inc/comments/thread.html',
                           view=view, request=request)
-    assert len(comments.cssselect('#comments')) == 1, (
-        'comment section must be present')
     assert len(comments.cssselect('article.comment')) > 0, (
         'comments must be displayed')
 
@@ -296,6 +295,16 @@ def test_comment_reply_thread_must_not_wrap_if_deeplinked(
     # Force page load even if another test has left the browser on _this_ page.
     driver.refresh()
     assert driver.find_element_by_id('cid-5122767').is_displayed()
+
+
+def test_comment_actions_should_link_to_article(testbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.comments, 'request_thread', request_thread)
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
+    link = browser.cssselect('a.js-report-comment')[0]
+    assert link.get('href') == (
+        'http://localhost/zeit-online/article/01'
+        '?action=report&pid=3#report-comment-form')
 
 
 def test_comment_action_recommend_should_redirect_to_login(testserver):
