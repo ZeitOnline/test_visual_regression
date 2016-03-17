@@ -11,6 +11,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     var $comments = $( '#comments' ),
         $commentsBody = $( '#js-comments-body' ),
         $commentForm = $( '#comment-form' ),
+        uid = $commentForm.attr( 'data-uid' ),
         slideDuration = 300,
         inputEvent = ( 'oninput' in document.createElement( 'input' )) ? 'input' : 'keypress',
         sendurl = window.location.href,
@@ -399,34 +400,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             .velocity( 'slideUp', slideDuration );
     },
 
-    wrapReplies = function() {
-        var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
-            $target;
-
-        if ( window.location.hash.indexOf( '#cid-' ) === 0 ) {
-            $target = $( window.location.hash );
-        }
-
-        $rootComments.each( function() {
-            var $root = $( this ),
-                $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
-                containsTarget = $answers.length > 1 && $target && $answers.is( $target ),
-                id = 'hide-replies-' + this.id,
-                rewrapper = '' +
-                    '<div id="' + id + '" class="comment__rewrapper js-hide-replies">' +
-                        '<span class="comment__count">− ' + $answers.length + '</span>\n' +
-                        '<span class="comment__cta">Antworten verbergen</span>\n' +
-                    '</div>\n';
-
-            // when deeplinked, prevent collapse of reply thread
-            if ( $answers.length > 1  && !containsTarget ) {
-                $root.next( '.comment--indented' ).find( '.comment__container' ).prepend( rewrapper );
-                coverReply( $answers.eq( 0 ).data({ undo: id }), $answers.length - 1 );
-                $answers.slice( 1 ).hide();
-            }
-        });
-    },
-
     putRewrapperOnReplies = function( $firstReply ) {
 
         // TODO: das ist auch etwas wackelig
@@ -445,7 +418,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $firstReply.find( '.comment__container' ).prepend( rewrapper );
     },
 
-    wrapRepliesNew = function() {
+    wrapReplies = function() {
         // TODO: ggf target, deeplinks
         // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
         var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
@@ -547,14 +520,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
                 adjustRecommendationLinks();
 
-                // TODO: "uid" global setzen für dieses Script !?
-                var uid = $commentForm.attr( 'data-uid' );
-
-                if ( uid ) {
-                    // add community frontend moderation
-                    if ( $commentForm.data( 'mod' ) === 'mod' ) {
-                        $firstReply.nextUntil( '.js-comment-toplevel', '.comment' ).each( addModeration );
-                    }
+                // add community frontend moderation
+                if ( uid && $commentForm.data( 'mod' ) === 'mod' ) {
+                    $firstReply.nextUntil( '.js-comment-toplevel', '.comment' ).each( addModeration );
                 }
 
             },
@@ -565,7 +533,8 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             }
         });
 
-        // without the js-load-comment-replies class, we toggle existing replies (instead of loading from server)
+        // without the js-load-comment-replies class, we toggle existing
+        // replies (instead of loading from server)
         $wrapped.removeClass( 'js-load-comment-replies' );
 
         if ( !repliesLoaded ) {
@@ -646,7 +615,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
     adjustRecommendationLinks = function() {
 
-        var uid = $commentForm.attr( 'data-uid' );
         if ( uid ) {
             // highlight recommended comments for logged in user
             $commentsBody.find( '.js-recommend-comment' ).each( function() {
@@ -678,22 +646,17 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             return;
         }
 
-        var uid = $commentForm.attr( 'data-uid' );
-
         // disable submit buttons of required fields
         $comments.find( '.js-required' ).each( enableForm );
 
         // collapse consecutive replies
-        wrapRepliesNew();
+        wrapReplies();
 
         adjustRecommendationLinks();
 
-        if ( uid ) {
-
-            // add community frontend moderation
-            if ( $commentForm.data( 'mod' ) === 'mod' ) {
-                $commentsBody.find( '.comment' ).each( addModeration );
-            }
+        // add community frontend moderation
+        if ( uid  && $commentForm.data( 'mod' ) === 'mod' ) {
+            $commentsBody.find( '.comment' ).each( addModeration );
         }
 
         // register event handlers
