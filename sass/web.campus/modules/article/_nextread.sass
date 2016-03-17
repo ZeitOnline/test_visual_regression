@@ -1,13 +1,12 @@
 .nextread
+	+unpadded
+	+padded
 	background: $color-background
-	margin: remify(48px) (-$page-padding) remify(40px)
-	padding: remify(36px 20px)
+	margin-top: remify(48px)
+	padding-top: remify(36px)
+	padding-bottom: remify(36px)
 	position: relative
 	width: auto
-	+respond-min($break-tablet-min)
-		padding: remify(60px 20px)
-	+respond-min($break-desktop-min)
-		padding: remify(60px 80px)
 	&__lead
 		@extend %font-beckett
 		font-size: remify(26px)
@@ -23,6 +22,7 @@
 	$small-image-width: 102px
 	$large-image-width: 321px
 	$ratio: 1.33
+	margin: 0 auto
 	min-height: remify($small-image-width * $ratio)
 	position: relative
 	+respond-min($break-tablet-min)
@@ -48,12 +48,13 @@
 			+respond-min($break-tablet-min)
 				width: 100%
 	&__link
-		bottom: 0
-		left: 0
-		position: absolute
-		right: 0
-		top: 0
-		z-index: 2
+		+respond-min($break-tablet-min)
+			bottom: 0
+			left: 0
+			position: absolute
+			right: 0
+			top: 0
+			z-index: 2
 	&__heading
 		background: $white
 		margin: 0 0 0 remify($small-image-width)
@@ -70,6 +71,7 @@
 			top: 50%
 			transform: translateY(-50%)
 	&__kicker
+		color: $color-article-primary
 		display: block
 		font-size: remify(12px)
 		letter-spacing: $letter-spacing-l
@@ -78,16 +80,14 @@
 		text-transform: uppercase
 		+respond-min($break-tablet-min)
 			margin-bottom: em(20px, 12px)
-		a &
-			color: $color-article-primary
+
 	&__title
 		@extend %font-beckett
+		color: $color-text
 		display: block
 		font-size: remify(26px)
 		text-transform: uppercase
 		+respond-min($break-tablet-min)
 			font-size: remify(64px)
-		a &
-			color: $color-text
 
 

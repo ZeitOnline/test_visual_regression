@@ -1,10 +1,10 @@
 <article class="{% block layout %}nextread-teaser{% endblock %}">
     {% block teaser_image -%}
-        {% require image = get_image(module, teaser, fallback=True, variant_id="portrait") -%}
+        {% require image = get_image(module, teaser, fallback=False, variant_id="portrait") -%}
             {%- set media_caption_additional_class = 'figcaption--hidden' -%}
             {%- set module_layout = self.layout() -%}
             {%- set href = teaser | create_url -%}
-            {%- include "zeit.web.core:templates/inc/asset/image.tpl" -%}
+            {%- include "zeit.web.core:templates/inc/asset/image_linked.tpl" -%}
         {%- endrequire %}
     {%- endblock %}
 
