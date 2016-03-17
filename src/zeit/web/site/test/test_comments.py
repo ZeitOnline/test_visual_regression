@@ -18,47 +18,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-def request_thread(path,
-                   thread_type='full',
-                   page=0,
-                   page_size=4,
-                   sort='asc',
-                   cid=None):
-
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-
-    timeout = float(conf.get('community_host_timeout_secs', 0.5))
-    uri = '{}/agatho/thread{}'.format(
-        conf.get('agatho_host', ''), path.encode('utf-8'))
-    thread_modes = dict(
-        paginated='{}_mode_top_page_{}_row_{}_sort_{}'.format(
-            uri, page, page_size, sort),
-        sub_thread='{}?mode=sub&cid={}'.format(uri, cid),
-        deeplink='{}?mode=deeplink&cid={}&rows={}&sort={}'.format(
-            uri, cid, page_size, sort),
-        recommendation='{}_mode_recommendation_page_{}_row_{}_sort_{}'.format(
-            uri, page, page_size, sort),
-        promotion='{}_mode_promotion_page_{}_row_{}_sort_{}'.format(
-            uri, page, page_size, sort))
-
-    uri = thread_modes.get(thread_type, uri)
-
-    try:
-        with zeit.web.core.metrics.timer(
-                'request_thread.community.reponse_time'):
-            response = requests.get(uri, timeout=timeout)
-        if response.status_code == 404:
-            return
-        return response.content if (200 <= response.status_code < 300) else (
-            {'request_failed': datetime.datetime.utcnow()})
-    except:
-        return {'request_failed': datetime.datetime.utcnow()}
-
-
-def test_comment_section_should_be_limited_in_top_level_comments(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+def test_comment_section_should_be_limited_in_top_level_comments(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '10'))
@@ -66,9 +26,7 @@ def test_comment_section_should_be_limited_in_top_level_comments(
         browser.cssselect('.comment:not(.comment--indented)')) == page_size
 
 
-def test_comments_should_contain_basic_meta_data(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+def test_comments_should_contain_basic_meta_data(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     comm = browser.cssselect('article.comment')[0]
     assert 'test_user' in comm.cssselect('.comment-meta__name > a')[0].text
@@ -125,27 +83,20 @@ def test_comment_form_should_be_rendered_through_esi(testbrowser):
     assert len(browser.cssselect('include')) == 3
 
 
-def test_comment_pagination_should_work(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+def test_comment_pagination_should_work(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread?page=2')
     pages = browser.cssselect('.pager__page')
     assert len(pages) == 7
     assert '--current' in (pages[1].get('class'))
 
 
-def test_comment_pagination_button_should_have_a_certain_label(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+def test_comment_pagination_button_should_have_a_certain_label(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     button = browser.cssselect('.pager__button--next')
     assert button[0].text == u'Weitere Kommentare'
 
 
-def test_comment_sorting_should_work(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+def test_comment_sorting_should_work(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread?sort=desc')
     comments_body = browser.document.get_element_by_id('js-comments-body')
     comments = comments_body.cssselect('.comment')
@@ -155,17 +106,13 @@ def test_comment_sorting_should_work(testbrowser, monkeypatch):
     assert '/zeit-online/article/01#comments' in link[0].get('href')
 
 
-def test_comment_filter_links_are_present(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+def test_comment_filter_links_are_present(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     assert browser.cssselect('a[href*="sort=promoted"]')
     assert browser.cssselect('a[href*="sort=recommended"]')
 
 
-def test_comment_filter_links_are_activated(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+def test_comment_filter_links_are_activated(testbrowser):
     browser = testbrowser(
         '/zeit-online/article/01/comment-thread?sort=promoted')
     assert browser.cssselect(
@@ -176,9 +123,7 @@ def test_comment_filter_links_are_activated(testbrowser, monkeypatch):
         'a[href*="sort=recommended"].comment-preferences__item--active')
 
 
-def test_comment_filter_works_as_expected(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+def test_comment_filter_works_as_expected(testbrowser):
     browser = testbrowser(
         '/zeit-online/article/01/comment-thread?sort=promoted')
     comments = browser.cssselect('.comment')
@@ -189,9 +134,7 @@ def test_comment_filter_works_as_expected(testbrowser, monkeypatch):
     assert len(comments) == 4
 
 
-def test_comment_in_reply_to_shows_origin(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+def test_comment_in_reply_to_shows_origin(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     answers = browser.cssselect('.comment--indented')
     origins = browser.cssselect('.comment__origin')
@@ -200,9 +143,7 @@ def test_comment_in_reply_to_shows_origin(testbrowser, monkeypatch):
     assert link.text_content().strip() == 'Antwort auf #1 von test_user'
 
 
-def test_comment_author_roles_should_be_displayed(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+def test_comment_author_roles_should_be_displayed(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     comment_author = browser.document.get_element_by_id('cid-3')
     comment_freelancer = browser.document.get_element_by_id('cid-7')
@@ -217,10 +158,7 @@ def test_comment_author_roles_should_be_displayed(testbrowser, monkeypatch):
     assert icon_freelancer[0].attrib['title'] == 'Freie Autorin'
 
 
-def test_comments_zon_template_respects_metadata(tplbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
-
+def test_comments_zon_template_respects_metadata(tplbrowser):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
 
@@ -297,9 +235,7 @@ def test_comment_reply_thread_must_not_wrap_if_deeplinked(
     assert driver.find_element_by_id('cid-5122767').is_displayed()
 
 
-def test_comment_actions_should_link_to_article(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+def test_comment_actions_should_link_to_article(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     link = browser.cssselect('a.js-report-comment')[0]
     assert link.get('href') == (
@@ -410,9 +346,7 @@ def test_comment_area_should_show_message_for_blocked_users(application):
     assert not view.comment_area['message']
 
 
-def test_article_meta_should_show_comment_count(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+def test_article_meta_should_show_comment_count(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     count = browser.cssselect('.metadata__commentcount')[0].text
     assert count == '35 Kommentare'
