@@ -23,7 +23,9 @@ figure__media
 
 {% block media_caption -%}
     <figcaption class="figure__caption">
+        {% if image.caption %}
         <span class="figure__text">{{ image.caption | safe }}</span>
+        {% endif %}
         {% if image.copyright | count and image.copyright[0][0] != '©' %}
         <span class="figure__copyright">
             {% if image.copyright[0][1] %}
