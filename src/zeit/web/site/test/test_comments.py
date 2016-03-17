@@ -367,3 +367,9 @@ def test_comment_replies_view_renders_html_for_replies(testbrowser):
     comments = browser.cssselect('article .comment__body')
     assert len(comments) == 3
     assert 'Antwort' in comments[0].xpath('p')[1].text
+
+
+def test_comment_displays_total_reply_count(testbrowser):
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
+    link = browser.cssselect('.comment-overlay__count')[0]
+    assert link.text == '+ 2'
