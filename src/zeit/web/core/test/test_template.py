@@ -526,6 +526,24 @@ def test_format_webtrekk_returns_safe_text(application):
     assert zeit.web.core.template.format_webtrekk(text) == target
 
 
+def test_format_iqd_returns_safe_text(application):
+    text = u'Studium'
+    target = 'studium'
+    assert zeit.web.core.template.format_iqd(text) == target
+
+    text = u'DIE ZEIT Archiv'
+    target = 'die_zeit_archiv'
+    assert zeit.web.core.template.format_iqd(text) == target
+
+    text = u'Ausgabe: 30, für Ü-30 Leser!'
+    target = 'ausgabe_30_fuer_ue_30_leser'
+    assert zeit.web.core.template.format_iqd(text) == target
+
+    text = u'Ä-Ö-Ü á à é è ß_!?)&'
+    target = 'ae_oe_ue_a_a_e_e_ss'
+    assert zeit.web.core.template.format_iqd(text) == target
+
+
 def test_filter_append_get_params_should_create_params():
     request = mock.Mock()
     request.path_url = 'http://example.com'
