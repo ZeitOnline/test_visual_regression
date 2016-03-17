@@ -244,16 +244,14 @@ def get_paginated_thread(
         comment_nid = document.xpath('/comments/nid/text()')[0]
         comment_list = document.xpath('//comment')
         comment_count = document.xpath('/comments/comment_count/text()')[0]
-        toplevel_comment_count = document.xpath('/comments/comments_'
-                                                'count_toplevel/text()')[0]
+        toplevel_comment_count = document.xpath(
+            '/comments/comments_count_toplevel/text()')[0]
         total_comment_count = comment_count
-        recommendation_count = int(
-            document.xpath('/comments/comments_count_'
-                           'recommendations_readers/text()')[0])
+        recommendation_count = int(document.xpath(
+            '/comments/comments_count_recommendations_readers/text()')[0])
         has_recommendation = bool(recommendation_count)
-        promotion_count = int(
-            document.xpath('/comments/comments_count_'
-                           'recommendations_editors/text()')[0])
+        promotion_count = int(document.xpath(
+            '/comments/comments_count_recommendations_editors/text()')[0])
         has_promotion = bool(promotion_count)
     except (IndexError, lxml.etree.XMLSyntaxError):
         raise ThreadNotLoadable()
