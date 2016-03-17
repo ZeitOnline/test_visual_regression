@@ -9,7 +9,10 @@
     'zmo-medium-left': 'figure-horizontal',
     'zmo-medium-right': 'figure-horizontal--right',
     'zmo-medium-center': 'figure is-constrained is-centered',
-    'zmo-small-right': 'figure-stamp--right'}.get(
+    'zmo-small-left': 'figure-stamp',
+    'zmo-small-left-original': 'figure-stamp',
+    'zmo-small-right': 'figure-stamp--right',
+    'zmo-small-right-original': 'figure-stamp--right'}.get(
         obj.layout.id, 'figure-stamp') }}
 {%- endblock %}
 
