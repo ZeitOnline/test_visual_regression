@@ -46,7 +46,7 @@ $break-gallery-min: em(576px)
 
 .bx-wrapper--touch
 	.bx-controls
-		padding: remify(0 0 20px)
+		padding: remify(0 0 16px)
 	.bx-pager
 		font-size: $gallery-dots-diameter
 		line-height: 1.5
@@ -55,7 +55,7 @@ $break-gallery-min: em(576px)
 	.bx-controls
 		display: none
 		+respond-min($break-gallery-min)
-			background-color: #000
+			background-color: $primary-color
 			color: #fff
 			display: block
 			float: right
@@ -74,7 +74,7 @@ $break-gallery-min: em(576px)
 		position: absolute
 		right: 0
 		text-align: center
-		top: 0
+		top: remify(2px)
 		width: $gallery-pager-width
 	+respond-min($break-gallery-min)
 		.figure__index
@@ -85,20 +85,19 @@ $break-gallery-min: em(576px)
 	font-size: 0
 	line-height: 0
 .bx-pager-link
-	background: #000
+	background-color: #999
 	border-radius: 50%
 	display: inline-block
 	height: $gallery-dots-diameter
 	margin: 0 $gallery-dots-diameter/2
-	opacity: 0.3
 	text-indent: -9999px
 	width: $gallery-dots-diameter
 	+on-interaction
-		opacity: 0.7
+		background-color: $color-article-secondary
 
 .bx-prev,
 .bx-next
-	background-color: #000
+	background-color: $primary-color
 	color: inherit
 	float: left
 	font-size: em(16px)
@@ -135,8 +134,10 @@ $break-gallery-min: em(576px)
 			height: remify(30px)
 			width: remify(42px)
 
+.bx-zone-prev,
 .bx-overlay-prev
 	left: 0
+.bx-zone-next,
 .bx-overlay-next
 	right: 0
 
@@ -145,7 +146,7 @@ $break-gallery-min: em(576px)
 	+on-interaction
 		.bx-overlay-prev,
 		.bx-overlay-next
-			opacity: 0.5
+			opacity: 1
 
 .bx-zone-prev,
 .bx-zone-next
@@ -162,15 +163,6 @@ $break-gallery-min: em(576px)
 		width: 50%
 		height: 90%
 		display: block
-.bx-zone-prev
-	&:hover
-		.bx-overlay-prev
-			opacity: 1
-.bx-zone-next
-	right: 0
-	&:hover
-		.bx-overlay-next
-			opacity: 1
 
 // elements not in actual use
 .bx-controls-auto,
