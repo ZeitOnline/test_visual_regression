@@ -413,7 +413,7 @@ def test_block_video_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/video.html', block=block)
     assert browser.cssselect(
-        'div.article__item.article__item--wide.article__item--rimless')
+        'figure.article__item.article__item--wide.article__item--rimless')
 
 
 def test_article_should_render_raw_code(testbrowser):
