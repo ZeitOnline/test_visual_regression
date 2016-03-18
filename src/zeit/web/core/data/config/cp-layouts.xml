@@ -43,6 +43,11 @@
         image_pattern="cinema"
         areas="solo"
         />
+    <layout
+        id="zco-debate"
+        title="Debate"
+        image_pattern=""
+        areas="solo"/>
 
     <!-- Teaser formats for new ZON-Centerpages -->
     <layout

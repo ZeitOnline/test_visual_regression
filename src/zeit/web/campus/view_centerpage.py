@@ -12,4 +12,10 @@ import zeit.web.core.view_centerpage
     renderer='templates/centerpage.html')
 class Centerpage(
         zeit.web.core.view_centerpage.Centerpage, zeit.web.campus.view.Base):
-    pass
+
+    @zeit.web.reify
+    def adcontroller_handle(self):
+        if self.request.path == '/campus/index':
+            return 'index'
+        else:
+            return 'centerpage'

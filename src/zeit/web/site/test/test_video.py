@@ -151,12 +151,12 @@ def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
 
 
 def test_create_url_filter_should_append_seo_slug_to_all_video_links(
-        application):
+        application, dummy_request):
     video = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/video/3537342483001')
-    assert zeit.web.core.template.create_url(None, video) == (
-        '/zeit-online/video/3537342483001/kuenstliche-intelligenz'
-        '-roboter-myon-uebernimmt-opernrolle')
+    assert zeit.web.core.template.create_url(None, video, dummy_request) == (
+        'http://example.com/zeit-online/video/3537342483001'
+        '/kuenstliche-intelligenz-roboter-myon-uebernimmt-opernrolle')
 
 
 def test_create_url_filter_should_handle_empty_supertitles(application):
