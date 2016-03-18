@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-2511: Videos in Campus articles
 
+- BUG-366: Add vertical space under top mobile ad
+
+- MAINT: Polish table of contents
+
 - ZON-2492: Add campus nextread
 
 - ZON-2501: Implement topic teaser for ZEIT Campus

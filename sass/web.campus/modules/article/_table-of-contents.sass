@@ -1,111 +1,82 @@
-%toc-beckett
-	@extend %font-beckett
-	font-size: remify(32px)
-	text-transform: uppercase
-
 .article-toc
-	display: block
-	margin-bottom: remify(32px)
+	color: $color-article-primary
 	&__container
 		font-size: em(14px)
 		line-height: round-to-precision(20/14)
-		margin: remify(0 25px 20px 0)
-		padding-top: remify(3px)
-		width: 100%
+		margin-bottom: remify(40px)
 		+respond-min($break-tablet-min)
-			position: relative
 			float: left
-			width: remify(205px) // same like .article__item--marginalia
-		+respond-min($break-desktop-min)
-			width: remify(220px) // same like .article__item--marginalia
+			padding-right: remify(25px)
+			width: remify(260px)
 	&__headline
-		@extend %toc-beckett
-		border-bottom: 3px solid $color-article-primary
-		color: $color-article-primary
+		@extend %font-beckett
+		border-bottom: 3px solid currentColor
 		cursor: pointer
 		display: inline-block
+		font-size: remify(32px)
 		margin: 0
-		padding-bottom: em(5px, 32px)
 		position: relative
 		+respond-min($break-tablet-min)
-			display: none
-		&::selection
-			background: transparent
-		&::-moz-selection // combining with line above won't work
-			background: transparent
-		& .article-toc__toggle-icon--minus
 			display: none
 		&--active .article-toc__toggle-icon--plus
 			display: none
 		&--active .article-toc__toggle-icon--minus
 			display: inline
-		.no-js & .article-toc__toggle
-			display: none
 	&__toggle
 		position: absolute
 		right: -23px
 		top: -3px
+		.no-js &
+			display: none
 	&__toggle-icon
 		$icon-size: 15px
 		height: remify($icon-size)
 		width: remify($icon-size)
+		&--minus
+			display: none
 	&__seperator
 		.js &
 			display: none
 			+respond-min($break-tablet-min)
-				display: block
+				display: block !important // use important to overwrite possible js (will be changed when it's made accessible)
 	&__list
 		list-style: none
 		margin: 0
 		padding: remify(20px 0 0)
 		+respond-min($break-tablet-min)
-			padding-top: 0
+			padding: 0
 	&__item
-		color: $color-article-primary
-		margin: remify(0 0 20px)
-		min-height: remify(40px)
-		padding-left: remify(47px)
-		position: relative
+		+clearfix
+		margin: 0
+		padding: remify(0 0 10px)
 		strong
-			@extend %toc-beckett
-			left: 0
-			position: absolute
+			@extend %font-beckett
+			font-size: remify(32px)
+			float: left
 		span
 			display: block
-			&:first-letter
-				font-weight: 400
-				margin-left: -1.2em
-				margin-right: .2em
+			margin-left: remify(50px)
+			position: relative
+			&:before
+				content: "\2014" // — = em dash
+				font-weight: normal
+				left: -1.3em
+				position: absolute
 		&--current
 			font-weight: 700
-			&:first-letter
-				font-weight: 400
 		&--empty
-			margin: remify(-10px 0 10px)
+			font-size: remify(16px)
+			margin: remify(-8px 0 2px)
 			padding-left: remify(10px)
+	&__link
+		color: inherit
 	&__onesie
 		border-bottom: 1px solid currentColor
+		color: inherit
 		font-size: remify(12px)
 		letter-spacing: $letter-spacing-l
 		text-transform: uppercase
 
 // color theming for leserartikel
-// $color-article-primary <--> $color-community-primary
-.article--leserartikel .article-toc__headline
-	border-bottom: 3px solid $color-community-primary
+.article--leserartikel .article-toc
 	color: $color-community-primary
-.article--leserartikel .article-toc__item
-	color: $color-community-primary
-	a:link,
-	a:visited
-		color: $color-community-primary
-	a:hover,
-	a:active,
-	a:focus
-		color: $zco-charcoal
-.article--leserartikel .article-toc__onesie
-	color: $color-community-primary
-	&:hover,
-	&:active,
-	&:focus
-		color: $zco-charcoal
