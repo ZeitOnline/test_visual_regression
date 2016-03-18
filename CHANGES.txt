@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-2501: Implement topic teaser for ZEIT Campus
 
+- ZON-2491: Add debate module for Articles
+
+- ZON-2505: Add debate module for CPs
+
 - ZON-2894: Include comment thread via ESI
   **NOTE** Also deploy corresponding varnish changes!
 
