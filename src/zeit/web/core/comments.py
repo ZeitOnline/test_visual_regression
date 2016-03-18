@@ -212,7 +212,8 @@ class ThreadNotLoadable(Exception):
 
 
 def get_paginated_thread(
-        unique_id, sort='asc', page=0, cid=None, invalidate_delta=5):
+        unique_id, sort='asc', page=0, cid=None, parent_cid=None,
+        invalidate_delta=5):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '4'))
 
@@ -226,6 +227,9 @@ def get_paginated_thread(
         request_sort = 'asc'
     elif cid:
         thread_type = 'deeplink'
+    elif parent_cid:
+        cid = parent_cid
+        thread_type = 'sub_thread'
     thread = request_thread(unique_id, thread_type=thread_type, page=page,
                             page_size=page_size, sort=request_sort, cid=cid)
     if thread is None:
@@ -429,16 +433,6 @@ def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
             page, pages)
 
     return thread
-
-
-def get_replies(unique_id, cid):
-    # XXX The idea is that we call a special agatho function here,
-    # not parse the whole thread ourselves.
-    try:
-        thread = zeit.web.core.comments.get_thread(unique_id, cid=cid)
-    except ThreadNotLoadable:
-        return []
-    return thread.get('index', {}).get(cid, {}).get('replies', [])
 
 
 def get_comment(unique_id, cid):

@@ -511,16 +511,30 @@ class CommentThread(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
 class CommentReplies(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
 
     @zeit.web.reify
-    def replies(self):
+    def parent_cid(self):
         try:
-            cid = int(self.request.GET['cid'])
+            return int(self.request.GET['cid'])
         except (KeyError, ValueError):
             raise pyramid.httpexceptions.HTTPBadRequest(
                 title='Parameter cid is required')
+
+    @zeit.web.reify
+    def comments(self):
         if not self.show_commentthread:
+            return
+        try:
+            return zeit.web.core.comments.get_paginated_thread(
+                self.context.uniqueId, parent_cid=self.parent_cid)
+        except zeit.web.core.comments.ThreadNotLoadable:
+            return
+
+    @zeit.web.reify
+    def replies(self):
+        if not self.comments:
             return []
-        replies = zeit.web.core.comments.get_replies(
-            self.context.uniqueId, cid)
+        comments = self.comments.get('index', {})
+        parent_comment = comments.get(self.parent_cid, {})
+        replies = parent_comment.get('replies', [])
         # because the first reply is already shown in the first page load,
         # we only return further ones on the ajax request
         return replies[1:]

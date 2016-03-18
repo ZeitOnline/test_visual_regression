@@ -388,8 +388,8 @@ def test_comment_replies_view_renders_html_for_replies(testbrowser):
     browser = testbrowser(
         '/zeit-online/article/01/comment-replies?cid=3')
     comments = browser.cssselect('article .comment__body')
-    assert len(comments) == 3
-    assert 'Antwort' in comments[0].xpath('p')[1].text
+    assert len(comments) == 2
+    assert 'zweite antwort' in comments[0].xpath('p')[0].text
 
 
 def test_comment_displays_total_reply_count(testbrowser):
