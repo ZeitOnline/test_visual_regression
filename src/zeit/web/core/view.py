@@ -712,9 +712,16 @@ class CommentMixin(object):
         }
 
     @zeit.web.reify
+    def comment_count(self):
+        return zeit.web.core.comments.comment_count(self.context.uniqueId)
+
+    @zeit.web.reify
+    def show_comment_area(self):
+        return self.comments_allowed or self.comment_count
+
+    @zeit.web.reify
     def comment_area(self):
         result = {
-            'show': (self.comments_allowed or bool(self.comments)),
             'show_comments': not self.community_maintenance['active'] and (
                 self.comments_loadable and bool(self.comments)),
             'no_comments': (not self.comments and self.comments_loadable),

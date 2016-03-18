@@ -187,11 +187,12 @@ def request_thread(unique_id,
         promotion=(
             '{}?mode=recommendations&type=kommentar_empfohlen&'
             'page={}&rows={}&order={}').format(uri, page, page_size, sort),
-        single='{}?mode=load_cid&cid={}'.format(uri, cid)
+        single='{}?mode=load_cid&cid={}'.format(uri, cid),
+        meta='{}?mode=meta'.format(uri),
     )
 
     uri = thread_modes.get(thread_type, uri)
-    log.info("Requested thread: {}".format(uri))
+    log.debug("request_thread {}: {}".format(thread_type, uri))
 
     try:
         with zeit.web.core.metrics.timer(
@@ -457,6 +458,27 @@ def get_comment(unique_id, cid):
     if not comment:
         return {}
     return comment[0]
+
+
+def comment_count(unique_id):
+    response = request_thread(unique_id, thread_type='meta')
+    # XXX Needs a better error handling protocol, say a customized exception?
+    if not response or (
+            isinstance(response, dict) and response.get('request_failed')):
+        return 0
+    try:
+        document = lxml.etree.fromstring(response)
+    except:
+        log.warning(
+            'has_comments input unparseable, ignoring', exc_info=True)
+        return 0
+    count = document.xpath('//comment_count/text()')
+    if not count:
+        return 0
+    try:
+        return int(count[0])
+    except ValueError:
+        return 0
 
 
 def community_maintenance():

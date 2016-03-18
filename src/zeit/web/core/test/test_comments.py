@@ -898,3 +898,16 @@ def test_user_comment_thread_should_have_expected_structure(application):
     assert thread['sort'] == 'DESC'
     assert thread['rows'] == 6
     assert len(thread['comments']) == 6
+
+
+def test_request_thread_should_be_called_only_once_by_article_and_comment_esi(
+        testserver):
+    # Due to ESI, these are 2 independent requests, so we allow them each one
+    # (but not more!!) request to the community (the health check comes on top
+    # of that, but it doesn't count since it is memcached).
+    # XXX The test should be more precise and catch all community requests.
+    with mock.patch('zeit.web.core.comments.request_thread') as request_thread:
+        request_thread.return_value = None
+        r = requests.get('{}/zeit-online/article/01'.format(testserver.url))
+        r.raise_for_status()
+        assert request_thread.call_count == 2
