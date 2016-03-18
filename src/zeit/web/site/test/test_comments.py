@@ -193,6 +193,33 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
         'comment section template must return an empty document')
 
 
+def test_comment_reply_threads_loads_and_toggles(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/article/02' % testserver.url)
+    select = driver.find_elements_by_css_selector
+
+    # Abzudecken:
+    # - keine Antwort -> kein Link
+    # - eine Antwort -> kein Link
+    # - mehrere Antworten
+    #   -> nur erste gezeigt, und zwar überdeckt
+    #   -> zweite ist versteckt
+    #   -> onClick: zweite wird geladen, und letzte auch
+    #   -> onClick 2x: versteckt und zeigt, aber immer vorhanden
+    # - noJS Seite aufrufen: alle Antworten gleich sichtbar
+    # - Deeplink aufrufen: Antwort gleich sichtbar
+
+    first_comment_id = 'cid-5122147'
+    first_reply_id = 'cid-5122166'
+    second_reply_id = 'cid-5122171'
+    last_reply_id = 'cid-5125875'
+
+    assert len(select('#{}'.format(first_comment_id))) == 1
+    assert len(select('#{}'.format(first_reply_id))) == 1
+    assert len(select('#{}'.format(second_reply_id))) == 0
+    assert len(select('#{}'.format(last_reply_id))) == 0
+
+
 def test_comment_reply_threads_wraps_on_load_and_toggles_on_click(
         selenium_driver, testserver):
     driver = selenium_driver
