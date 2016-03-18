@@ -4,7 +4,7 @@
             {% require image = get_image(module, teaser, fallback=False, variant_id="portrait") -%}
                 {%- set media_caption_additional_class = 'figcaption--hidden' -%}
                 {%- set module_layout = self.layout() -%}
-                {%- include "zeit.web.core:templates/inc/asset/image_nextread.tpl" -%}
+                {%- include "zeit.web.campus:templates/inc/asset/image_nextread.tpl" -%}
             {%- endrequire %}
         {%- endblock %}
 
