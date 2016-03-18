@@ -27,4 +27,10 @@
     </article>
     {% endblock content %}
 
+    {% block nextread %}
+        {% if view.nextread %}
+            {% include "zeit.web.campus:templates/inc/article/nextread.html" %}
+        {% endif %}
+    {% endblock %}
+
 {% endblock main %}

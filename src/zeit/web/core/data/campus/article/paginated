@@ -5,21 +5,7 @@
       <display_name>Jan Fischer</display_name>
     </author>
     <references>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/mobil/2015-10/gadgets-blocks-modulare-smartwatch-kickstarter-rephone" year="2015" issue="41" ressort="Digital" contenttype="article" publication-date="" expires="" author="Eike Kühl">
-        <supertitle>Gadgets</supertitle>
-        <title>Tech zum Stecken</title>
-        <text>Künftig bauen wir unsere Smartphones und Uhren selbst zusammen, glauben Hersteller wie Blocks oder RePhone. Hunderttausende US-Dollar sammeln sie gerade per Crowdfunding.</text>
-        <description>Künftig bauen wir unsere Smartphones und Uhren selbst zusammen, glauben Hersteller wie Blocks oder RePhone. Hunderttausende US-Dollar sammeln sie gerade per Crowdfunding.</description>
-        <byline xsi:nil="true"/>
-        <breadcrumb_title xsi:nil="true"/>
-        <image base-id="http://xml.zeit.de/digital/mobil/2015-10/blocks-smartwatch/" type="jpg" title="Die Module der Smartwatch Blocks sind Glieder des Uhrenbandes." alt="Die Module der Smartwatch Blocks sind Glieder des Uhrenbandes." align="left" publication-date="" expires="">
-          <bu>Die Module der Smartwatch Blocks sind Glieder des Uhrenbandes.</bu>
-          <copyright>© Screenshot</copyright>
-        </image>
-        <author href="http://xml.zeit.de/autoren/K/Eike_Kuehl/index.xml" publication-date="" expires="">
-          <display_name>Eike Kühl</display_name>
-        </author>
-      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/campus/article/01-countdown-studium" contenttype="article" />
     </references>
     <rankedTags>
       <tag uuid="b5d22ffb-1835-49a8-838c-d78e65010d46" url_value="technologie" type="free">Technologie</tag>

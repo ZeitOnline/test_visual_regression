@@ -306,6 +306,9 @@ def get_layout(block, request=None):
                 layout = layout
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
+        # XXX Instead of hard-coding a layout change here, we should make use
+        # of z.w.core.centerpage.dispatch_teaser_via_contenttype() and
+        # register a specific teaser module for authors.
         elif (zeit.content.author.interfaces.IAuthor.providedBy(teaser) and
                 layout == 'zon-small' and
                 block.__parent__.kind in ['duo', 'minor']):
@@ -902,3 +905,12 @@ def provides(obj, iface):
 @zeit.web.register_global
 def get_random_number(length):
     return random.randint(0, 10 ** length)
+
+
+@zeit.web.register_global
+def adapt(obj, iface, name=u'', multi=False):
+    iface = pyramid.path.DottedNameResolver().resolve(iface)
+    if multi:
+        return zope.component.queryMultiAdapter(obj, iface, name)
+    else:
+        return zope.component.queryAdapter(obj, iface, name)
