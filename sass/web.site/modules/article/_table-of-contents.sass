@@ -1,18 +1,13 @@
-$break-onesie: 360px // breakpoint for onesie
-
 .article-toc
-	display: block
 
 	&__container
 		font-size: em(14px)
 		line-height: round-to-precision(20/14)
-		margin: remify(0 25px 20px 0)
-		padding-top: remify(3px)
-		width: 100%
+		margin-bottom: remify(20px)
+		position: relative
 		+respond-min($break-tablet-min)
-			position: relative
 			float: left
-			margin-bottom: remify(36px) // add more space due to absolute position of onesie
+			margin-right: remify(25px)
 			width: remify(205px) // same like .article__item--marginalia
 		+respond-min($break-desktop-min)
 			width: remify(220px) // same like .article__item--marginalia
@@ -21,9 +16,8 @@ $break-onesie: 360px // breakpoint for onesie
 		display: inline-block
 		font-size: 1em
 		letter-spacing: $zon-letter-spacing-l
-		margin: 0
+		margin: remify(0 0 16px)
 		text-transform: uppercase
-		width: 48%
 		&:after
 			+build-mobile-plus-minus-button()
 		&--active
@@ -31,44 +25,32 @@ $break-onesie: 360px // breakpoint for onesie
 				content: "\2212" // U+2212 = − (minus sign)
 		+respond-min($break-tablet-min)
 			display: block
-			width: auto
+			padding-top: remify(3px)
 
 	&__list
 		letter-spacing: $zon-letter-spacing-s
 		list-style: none
-		margin-left: -$page-padding
-		margin-right: -$page-padding
-		margin-top: 0px
-		padding: remify(5px) $page-padding 0 $page-padding
-		border-bottom: 1px solid $zon-silver
-		background-color: $zon-lighter-grey
+		margin: 0
+		padding: 0
 		.js &
 			display: none
 		+respond-min($break-tablet-min)
 			display: block !important // use important to overwrite possible js
-			margin: 0
-			padding: 0
-			border: none
-			background-color: transparent
 
 	&__item
-		margin: remify(16px 0)
-		&:not(:last-child)
-			border-bottom: 1px solid $zon-alto
-			padding-bottom: remify(20px)
-		&--current
-			color: inherit
-		a
-			+on-interaction
-				border-bottom: 1px solid rgba($color-text, .5)
-				color: $zon-grey
+		border-top: 1px solid $zon-alto
+		padding: remify(16px 0)
+		&:first-child
+			border: 0
 		+respond-min($break-tablet-min)
-			&:not(:last-child)
-				border: 0px
-				padding: 0px
+			border: 0
+			padding-top: 0
 
 	&__link
 		color: $zon-grey
+		+on-interaction
+			border-bottom: 1px solid rgba($color-text, .5)
+			color: $zon-grey
 		strong
 			color: $color-text
 			letter-spacing: $zon-letter-spacing-m
@@ -76,33 +58,23 @@ $break-onesie: 360px // breakpoint for onesie
 	&__onesie
 		color: $zon-grey
 		letter-spacing: $zon-letter-spacing-m
-		display: block
-		padding-top: remify(16px)
+		position: absolute
+		right: 0
+		top: 0
 		&:after
 			content: " \203A" // › = single right-pointing angle quotation mark
-		+respond-min($break-onesie) // special breakpoint to avoid line break
-			display: inline-block
-			width: 50%
-			text-align: right
-			padding-top: 0
 		+respond-min($break-tablet-min)
-			position: absolute
-			bottom: remify(-16px) // move element to bottom
-			height: remify(20px) // avoid jump on hover
 			color: $color-text
 			font-weight: bold
-			width: auto
+			position: static
 			+on-interaction
 				border-bottom: 1px solid rgba($color-text, .5)
 				color: currentColor
 
 	&__seperator
-		border-top: 1px solid $zon-silver
-		margin-left: -$page-padding
-		margin-right: -$page-padding
-		margin-top: remify(16px)
-		padding-left: $page-padding
-		padding-right: $page-padding
-		+respond-min($break-tablet-min)
-			border-top: none
-			margin-top: 0
+		+respond-max($break-tablet-min)
+			background-color: $zon-lighter-grey
+			border-top: 1px solid $zon-silver
+			box-shadow: inset 0 -1px 0 $zon-silver
+			margin: 0 (-$page-padding)
+			padding: 0 $page-padding
