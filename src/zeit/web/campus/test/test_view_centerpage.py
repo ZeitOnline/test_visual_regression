@@ -100,6 +100,13 @@ def test_campus_teaser_lead_cinema_has_correct_structure(testbrowser):
     assert len(select('.teaser-lead-cinema__metadata')) == 1
 
 
+def test_campus_teaser_topic_has_correct_structure(testbrowser):
+    select = testbrowser('/campus/centerpage/topic-teaser').cssselect
+    assert len(select('.teaser-topic')) == 1
+    assert len(select('.teaser-topic-main')) == 1
+    assert len(select('.teaser-topic-item')) == 3
+
+
 def test_campus_teaser_debate_has_correct_structure(testbrowser):
     select = testbrowser('/campus/centerpage/teaser-debate').cssselect
     assert len(select('.teaser-debate')) == 1
