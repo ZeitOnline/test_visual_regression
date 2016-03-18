@@ -65,7 +65,7 @@ require([
     'web.magazin/plugins/jquery.switchvideo'
 ], function( $, Velocity ) {
     $( window ).referrerCount();
-    $( '.inline-gallery' ).inlinegallery();
+    $( '.js-gallery' ).inlinegallery();
     $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();
     $.picturefill();

@@ -126,6 +126,8 @@
     {% include "zeit.web.core:templates/inc/tracking/celera_one.html" %}
     {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
 
+    {% block rawr_config %}{% endblock%}
+
     <script>
         var require = { baseUrl: '{{ request.asset_host }}/js/' };
     </script>

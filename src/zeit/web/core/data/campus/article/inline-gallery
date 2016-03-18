@@ -103,11 +103,16 @@
     <title>Hier gibt es Hilfe</title>
     <byline>von Anna Bordel</byline>
     <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg" align="left" layout="large" is_empty="False" title="Titel" alt="Alternative"></image>
       <p>
         An jeder Hochschule gibt es eine Zentrale Studienberatung. Dort können sich Schüler auch beraten lassen, wenn sie noch nicht sicher sind, ob sie überhaupt an dieser
         Hochschule studieren wollen. Man vereinbart online oder telefonisch einen Termin und bekommt dann alle Infos zum Studium: mögliche Studiengänge, was diese für Inhalte
         haben, wie sie ablaufen, wie man sich bewirbt und vieles andere. Über Studiengänge kann man sich vorab auch auf den Websites der Hochschulen informieren. Meist sind
         die einzelnen Studiengänge unter dem Stichwort "Studienangebot" aufgelistet.
+      </p>
+      <gallery href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" contenttype="gallery"></gallery>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, harum eligendi facere magnam, sapiente veritatis, ullam aliquid facilis temporibus porro aperiam, mollitia sequi dolores cumque cupiditate! Ducimus fugiat, beatae nemo earum, reiciendis ratione odio voluptates maxime. Ipsa reprehenderit, rerum voluptates neque tempore?
       </p>
     </division>
     <subtitle>Studienwahl? Zentrale Studienberatung! Wohnheimszimmer? Studentenwerk! Lernstress? Psychologische Beratung! Wir haben die wichtigsten Anlaufstellen gesammelt.</subtitle>

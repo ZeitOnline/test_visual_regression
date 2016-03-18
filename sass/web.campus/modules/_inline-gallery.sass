@@ -1,4 +1,6 @@
-$gallery-button-radius: em(35px)
+$gallery-button-radius--small: remify(40px)
+$gallery-button-radius--large: remify(68px)
+$gallery-pager-width: remify(60px)
 $gallery-dots-diameter: 8px
 $break-gallery-min: em(576px)
 
@@ -10,25 +12,28 @@ $break-gallery-min: em(576px)
 		@extend .gallery-container
 
 .gallery-slides
-	figure
-		margin: 0
-		padding: 0
 	.figure__media
 		width: auto
 		max-height: 620px
 		margin: 0 auto
 	.figure__caption
-		margin: 1em auto 0
-		max-width: none
-		padding: 0 $page-padding
-		+respond-min($break-tablet-min)
-			padding: 0
-	.figure__index
-		color: $zon-grey
+		background-color: $color-background--light
+		color: #444
 		font-family: $font-tabletgothic
-		font-style: normal
-		font-size: 0.875em // uses em by intention
-		letter-spacing: $zon-letter-spacing-m
+		font-size: em(15px)
+		line-height: round-to-precision(20/15, $precision: 1)
+		margin: 0 auto
+		max-width: none
+		padding: remify(20px $page-padding--small)
+		+respond-min($break-tablet-min)
+			padding: remify(20px $page-padding)
+	.figure__index
+		font-weight: bold
+		font-size: 0.8666em // uses em by intention
+		letter-spacing: $letter-spacing-l
+		margin-right: .25em
+	.figure__copyright
+		color: $color-text--light
 
 // appear just after bxSlider initialisation
 // needed for "static" galleries
@@ -41,128 +46,123 @@ $break-gallery-min: em(576px)
 
 .bx-wrapper--touch
 	.bx-controls
-		padding: $page-padding $page-padding 1em
-		+respond-min($break-tablet-min)
-			padding: 0 0 1em
+		padding: remify(0 0 16px)
+	.bx-pager
+		font-size: $gallery-dots-diameter
+		line-height: 1.5
+		text-align: center
 .bx-wrapper--no-touch
 	.bx-controls
-		+pie-clearfix
-		padding: $page-padding
 		display: none
 		+respond-min($break-gallery-min)
+			background-color: $primary-color
+			color: #fff
 			display: block
-		+respond-min($break-tablet-min)
-			padding: 0 0 $page-padding
+			float: right
+			height: $gallery-button-radius--small
+			position: relative
+			width: $gallery-button-radius--small * 2 + $gallery-pager-width
+	.bx-pager
+		@extend %font-beckett
+		bottom: 0
+		color: #fff
+		font-size: em(26px)
+		height: $gallery-button-radius--small
+		left: 0
+		line-height: $gallery-button-radius--small
+		margin: auto
+		position: absolute
+		right: 0
+		text-align: center
+		top: remify(2px)
+		width: $gallery-pager-width
 	+respond-min($break-gallery-min)
 		.figure__index
 			display: none
 
-.bx-controls-direction
-	float: right
-.bx-wrapper--touch .bx-pager
-	font-size: $gallery-dots-diameter
-	line-height: 1.5
-	text-align: center
-.bx-wrapper--no-touch .bx-pager
-	float: right
-	height: remify($gallery-button-radius)
-	line-height: remify($gallery-button-radius)
-	padding-right: .5em
 .bx-pager-item
 	display: inline
 	font-size: 0
 	line-height: 0
 .bx-pager-link
-	background: #000
+	background-color: #999
 	border-radius: 50%
 	display: inline-block
 	height: $gallery-dots-diameter
 	margin: 0 $gallery-dots-diameter/2
-	opacity: 0.3
-	outline: 0
 	text-indent: -9999px
 	width: $gallery-dots-diameter
 	+on-interaction
-		opacity: 0.7
+		background-color: $color-article-secondary
 
 .bx-prev,
 .bx-next
-	background-color: #000
-	border-radius: 50%
-	border: none
-	color: $white
+	background-color: $primary-color
+	color: inherit
 	float: left
-	height: $gallery-button-radius
-	margin-left: remify(10px)
-	opacity: 0.3
-	padding: remify(10px)
-	width: $gallery-button-radius
-	&:hover,
-	&:active,
-	&:focus
-		color: $white
-	&:hover
-		opacity: 0.7
-	&:focus
-		outline: 0
+	font-size: em(16px)
+	height: $gallery-button-radius--small
+	line-height: $gallery-button-radius--small
+	width: $gallery-button-radius--small
+	text-align: center
+	+on-interaction
+		color: $color-article-secondary
 	&.disabled
-		opacity: 0.1
+		color: #666
+
+.bx-next
+	float: right
 
 .bx-arrow-icon
-	display: block
 	height: remify(15px)
-	width: remify(15px)
+	width: remify(21px)
 
 .bx-overlay-prev,
 .bx-overlay-next
 	@extend .bx-next
-	margin: 0
 	position: absolute
-	top: em(10px)
+	top: 0
 	+respond-min($break-phablet-min)
-		height: $gallery-button-radius * 2
-		margin-top: -$gallery-button-radius
+		font-size: em(32px)
+		height: $gallery-button-radius--large
+		line-height: $gallery-button-radius--large
+		margin-top: -$gallery-button-radius--large / 2
 		opacity: 0
-		padding: remify(20px)
 		top: 50%
-		width: $gallery-button-radius * 2
+		width: $gallery-button-radius--large
 		.bx-arrow-icon
 			height: remify(30px)
-			width: remify(30px)
+			width: remify(42px)
 
+.bx-zone-prev,
 .bx-overlay-prev
-	left: em(10px)
+	left: 0
+.bx-zone-next,
 .bx-overlay-next
-	right: em(10px)
+	right: 0
 
 .bx-viewport
 	position: relative
 	+on-interaction
 		.bx-overlay-prev,
 		.bx-overlay-next
-			opacity: 0.3
+			opacity: 1
 
 .bx-zone-prev,
 .bx-zone-next
-	width: 15%
-	height: 20%
-	position: absolute
-	z-index: 9999
+	color: #fff
 	cursor: pointer
 	display: none
+	height: 20%
+	position: absolute
+	width: 15%
+	z-index: 9999
+	+on-interaction
+		color: $color-article-secondary
 	+respond-min($break-phablet-min)
 		width: 50%
 		height: 90%
 		display: block
-.bx-zone-prev
-	&:hover
-		.bx-overlay-prev
-			opacity: 0.7
-.bx-zone-next
-	right: 0
-	&:hover
-		.bx-overlay-next
-			opacity: 0.7
 
 // elements not in actual use
 .bx-controls-auto,
