@@ -4,6 +4,8 @@ Change log for zeit.web
 2.65 (unreleased)
 -----------------
 
+- ZON-2511: Videos in Campus articles
+
 - ZON-2492: Add campus nextread
 
 - ZON-2501: Implement topic teaser for ZEIT Campus
