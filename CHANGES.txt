@@ -4,6 +4,12 @@ Change log for zeit.web
 2.65 (unreleased)
 -----------------
 
+- ZON-2727: Introduce Rawr metadata
+
+- ZON-2511: Videos in Campus articles
+
+- BUG-366: Add vertical space under top mobile ad
+
 - MAINT: Polish table of contents
 
 - ZON-2492: Add campus nextread
@@ -13,6 +19,10 @@ Change log for zeit.web
 - ZON-2491: Add debate module for Articles
 
 - ZON-2505: Add debate module for CPs
+
+- ZON-2897: Allow ZMO article header image variant selection via layout
+
+- ZON-2777: Add inline-gallery and gallery to ZEIT Campus
 
 - ZON-2894: Include comment thread via ESI
   **NOTE** Also deploy corresponding varnish changes!

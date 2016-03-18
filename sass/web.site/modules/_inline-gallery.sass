@@ -2,11 +2,14 @@ $gallery-button-radius: em(35px)
 $gallery-dots-diameter: 8px
 $break-gallery-min: em(576px)
 
-.inline-gallery__wrap
+.inline-gallery
 	@extend .gallery
 	clear: both // to prevent collisions with in-article ads
 
-.inline-gallery
+	&-container
+		@extend .gallery-container
+
+.gallery-slides
 	figure
 		margin: 0
 		padding: 0
@@ -29,12 +32,12 @@ $break-gallery-min: em(576px)
 
 // appear just after bxSlider initialisation
 // needed for "static" galleries
-html.js
-	.inline-gallery
+.js
+	.gallery-slides
 		visibility: hidden
-	.bx-wrapper
-		.inline-gallery
-			visibility: visible
+.bx-wrapper
+	.gallery-slides
+		visibility: visible
 
 .bx-wrapper--touch
 	.bx-controls
@@ -66,52 +69,49 @@ html.js
 	line-height: remify($gallery-button-radius)
 	padding-right: .5em
 .bx-pager-item
-	+inline-block
+	display: inline
 	font-size: 0
 	line-height: 0
 .bx-pager-link
 	background: #000
-	+opacity(0.3)
-	text-indent: -9999px
-	display: block
-	width: $gallery-dots-diameter
+	border-radius: 50%
+	display: inline-block
 	height: $gallery-dots-diameter
 	margin: 0 $gallery-dots-diameter/2
+	opacity: 0.3
 	outline: 0
-	border-radius: 50%
-	&:hover,
-	&.active,
-	&:focus
-		+opacity(0.7)
+	text-indent: -9999px
+	width: $gallery-dots-diameter
+	+on-interaction
+		opacity: 0.7
 
 .bx-prev,
 .bx-next
-	+inline-block
-	width: $gallery-button-radius
-	height: $gallery-button-radius
-	margin-left: 10px
-	border-radius: 50%
 	background-color: #000
-	color: $white
+	border-radius: 50%
 	border: none
+	color: $white
+	float: left
+	height: $gallery-button-radius
+	margin-left: remify(10px)
+	opacity: 0.3
 	padding: remify(10px)
-	+opacity(0.3)
+	width: $gallery-button-radius
 	&:hover,
 	&:active,
 	&:focus
 		color: $white
 	&:hover
-		+opacity(0.7)
+		opacity: 0.7
 	&:focus
 		outline: 0
 	&.disabled
-		+opacity(0.1)
-	.bx-arrow-icon
-		height: remify(15px)
-		width: remify(15px)
+		opacity: 0.1
 
 .bx-arrow-icon
 	display: block
+	height: remify(15px)
+	width: remify(15px)
 
 .bx-overlay-prev,
 .bx-overlay-next
@@ -135,16 +135,12 @@ html.js
 .bx-overlay-next
 	right: em(10px)
 
-.bx-icon-description
-	+hide-text
-	position: absolute
-
 .bx-viewport
 	position: relative
 	+on-interaction
 		.bx-overlay-prev,
 		.bx-overlay-next
-			+opacity(0.3)
+			opacity: 0.3
 
 .bx-zone-prev,
 .bx-zone-next
@@ -161,19 +157,19 @@ html.js
 .bx-zone-prev
 	&:hover
 		.bx-overlay-prev
-			+opacity(0.7)
+			opacity: 0.7
 .bx-zone-next
 	right: 0
 	&:hover
 		.bx-overlay-next
-			+opacity(0.7)
+			opacity: 0.7
 
 // elements not in actual use
 .bx-controls-auto,
 .bx-loading
 	display: none
 
-.no-js .inline-gallery
+.no-js .gallery-slides
 	padding-top: $vertical-space * 2
 	figure
 		margin-top: 0

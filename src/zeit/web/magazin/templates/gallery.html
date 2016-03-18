@@ -11,13 +11,14 @@
 {%- endblock article_header %}
 
 {% block article_pages -%}
-    {{ blocks.inlinegallery(view.images, view, wrapper_class='gallery') }}
+    {% set images = view.images %}
+    {% include "zeit.web.core:templates/inc/article/gallery.html" %}
     <div class="article__page gallery__info">
         <div class="gallery__description">
             {{ view.galleryText|safe }}
         </div>
         <div class="article__head__meta">
-            {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
+            {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
         </div>
     </div>
 {%- endblock article_pages %}
