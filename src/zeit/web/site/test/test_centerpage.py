@@ -197,24 +197,13 @@ def test_centerpage_markdown_module_is_rendered(jinja2_env):
     assert len(html.cssselect('.markup__text li')) == 4
 
 
-def test_centerpage_teaser_topic_is_rendered(jinja2_env):
-    tpl = jinja2_env.get_template('zeit.web.site:templates/centerpage.html')
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/topic-teaser')
-    request = pyramid.testing.DummyRequest(
-        route_url=lambda x: 'http://foo.bar/',
-        asset_host='',
-        image_host='')
-    request.route_url.return_value = 'http://foo.bar/'
-    view = zeit.web.site.view_centerpage.Centerpage(content, request)
-    view.meta_robots = ''
-    view.canonical_url = ''
-    html_str = tpl.render(view=view, request=request)
-    html = lxml.html.fromstring(html_str)
-
-    assert len(html.cssselect('.teaser-topic')) == 1
-    assert len(html.cssselect('.teaser-topic-main')) == 1
-    assert len(html.cssselect('.teaser-topic-item')) == 3
+def test_centerpage_teaser_topic_is_rendered(testbrowser):
+    select = testbrowser('/zeit-online/topic-teaser').cssselect
+    assert len(select('.teaser-topic')) == 1
+    assert len(select('.teaser-topic__media')) == 1
+    assert len(select('.teaser-topic-main')) == 1
+    assert len(select('.teaser-topic-list')) == 1
+    assert len(select('.teaser-topic-item')) == 3
 
 
 def test_inhouse_label_should_be_displayed(testbrowser):

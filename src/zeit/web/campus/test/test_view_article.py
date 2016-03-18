@@ -140,6 +140,11 @@ def test_article_tags_are_present(testbrowser):
         assert tag.get('rel') == 'tag'
 
 
+def test_nextread_is_present(testbrowser):
+    browser = testbrowser('/campus/article/paginated')
+    assert len(browser.cssselect('#nextread')) == 1
+
+
 def test_article_debate_block_should_render_expected_structure(testbrowser):
     select = testbrowser('/campus/article/debate').cssselect
     assert len(select('.debate')) == 1

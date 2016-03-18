@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - MAINT: Polish table of contents
 
+- ZON-2492: Add campus nextread
+
+- ZON-2501: Implement topic teaser for ZEIT Campus
+
 - ZON-2491: Add debate module for Articles
 
 - ZON-2505: Add debate module for CPs
