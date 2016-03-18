@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - ZON-2505: Add debate module for CPs
 
+- ZON-2897: Allow ZMO article header image variant selection via layout
+
 - ZON-2894: Include comment thread via ESI
   **NOTE** Also deploy corresponding varnish changes!
 
