@@ -228,6 +228,8 @@ class Image(zeit.web.core.image.BaseImage):
     def __new__(cls, model_block):
         if getattr(model_block, 'is_empty', False):
             return
+        # XXX Should we use an actual attribute of ImageLayout instead of
+        # a heuristic look at its ID?
         if not cls.wanted_layout(getattr(model_block.layout, 'id', None)):
             return
 
