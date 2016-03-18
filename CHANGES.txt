@@ -4,6 +4,8 @@ Change log for zeit.web
 2.65 (unreleased)
 -----------------
 
+- ZON-2492: Add campus nextread
+
 - ZON-2501: Implement topic teaser for ZEIT Campus
 
 - ZON-2491: Add debate module for Articles
