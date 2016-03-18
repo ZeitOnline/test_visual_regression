@@ -1,7 +1,7 @@
 <nav class="{% block pagination_class %}article-pagination{% endblock %} article__item" aria-labeledby="article-pagination-title">
     <h3 class="visually-hidden" id="article-pagination-title">Seitennavigation</h3>
 
-    {% if view.pagination.next_page_url -%}
+    {% if view.pagination and view.pagination.next_page_url -%}
         <a class="article-pagination__link" href="{{ view.pagination.next_page_url }}" data-id="article-pager....next-link">
             <span class="article-pagination__button article-pagination__button--next">Nächste Seite
                 {%- block pagination_icon %}{% endblock -%}

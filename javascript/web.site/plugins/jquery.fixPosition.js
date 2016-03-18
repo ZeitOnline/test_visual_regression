@@ -36,7 +36,7 @@
         this.fullwidthElements = [
             '.hide-lineage',
             '.infobox',
-            '.inline-gallery__wrap',
+            '.inline-gallery',
             '.x-fullwidth',
             '.zg-grafik--default-margin',
             '.zon-grafik',
