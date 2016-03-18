@@ -1,0 +1,50 @@
+.teaser-topic-wide
+	@extend %teaser
+	padding: $page-padding--small
+	border: none
+
+	&:after
+		content: ''
+		display: block
+		width: remify(50px)
+		margin: $page-padding--small * 2 0 $page-padding--small 0
+		border-bottom: 3px solid $zco-accent
+
+	&__heading
+		@extend %teaser-heading
+		margin-top: remify(-14px)
+
+	&__combined-link
+		@extend %teaser-combined-link
+		box-shadow: 10px -18px 0 10px $white
+		margin-left: -$page-padding--small
+
+	&__kicker
+		@extend %teaser-kicker
+		top: remify(-34px)
+		border-left: $page-padding--small solid white
+
+	&__title
+		@extend %teaser-title
+		display: inline
+		font-size: remify(42px)
+		padding-top: remify(16px)
+		border-left: $page-padding--small solid white
+
+	&__text
+		@extend %teaser-text
+
+	&__metadata
+		@extend %teaser-metadata
+
+	&__byline
+		@extend %teaser-byline
+
+
++respond-min($break-tablet-min)
+	.teaser-topic-wide
+		&__title
+			font-size: remify(42px)
+
+		&:after
+			margin: remify(20px) 0 remify(15px)

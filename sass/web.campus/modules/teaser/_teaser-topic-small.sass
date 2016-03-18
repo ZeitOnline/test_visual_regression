@@ -1,0 +1,33 @@
+.teaser-topic-small
+	@extend %teaser
+	padding: $page-padding--small
+	border: none
+
+	&__heading
+		@extend %teaser-heading
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__kicker
+		@extend %teaser-kicker
+		top: remify(-34px)
+
+	&__title
+		@extend %teaser-title
+		font-size: remify(26px)
+
+	&__text
+		@extend %teaser-text
+
+	&__metadata
+		@extend %teaser-metadata
+
+	&__byline
+		@extend %teaser-byline
+
+
++respond-min($break-tablet-min)
+	.teaser-topic-small
+		&__title
+			font-size: remify(28px)

@@ -14,6 +14,18 @@
         areas="duo"
         />
     <layout
+        id="zco-topic-wide"
+        title="großer Teaser Topic"
+        image_pattern=""
+        areas="topic-variant"
+        />
+    <layout
+        id="zco-topic-small"
+        title="kleiner Teaser Topic"
+        image_pattern="narrow"
+        areas="topic-variant"
+        />
+    <layout
         id="zco-square"
         title="quadratischer Teaser"
         image_pattern="square"
@@ -50,7 +62,7 @@
         id="zon-topic"
         title="Dossier-Teaser"
         image_pattern="zon-topic"
-        areas="topic"
+        areas="topic topic-variant"
         default="topic"
         />
     <layout

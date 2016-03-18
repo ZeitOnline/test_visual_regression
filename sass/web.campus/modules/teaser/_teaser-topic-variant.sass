@@ -1,5 +1,7 @@
 .teaser-topic-variant
     position: relative
+    padding: remify(25px) 0 // use padding to center label vertically
+    margin-top: $page-padding--small // use margin to adjust teaser in cp design
 
     &__media
         background-color: $greyish-white
@@ -8,20 +10,39 @@
         width: 100%
 
     +respond-min($break-tablet-min)
-        padding: $page-padding--small
+        padding: 0 $page-padding--small
+        margin-top: 0
         &__media
             width: 50%
+            float: left
             padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4), refers to half-width
 
 .teaser-topic-variant-list
+    border-bottom: 1px solid $color-border
+
+    /* this kinda sucks */
+    /* last kicker in teaserlist should be pink */
+    article:last-child
+        span:first-child
+            color: $color-community-primary
+
+    +respond-min($break-tablet-min)
+        padding-top: remify(130px)
+        padding-left: $page-padding--small
+        border: none
+        float: left
+        width: 50%
+
+    +respond-min($break-desktop-min)
+        padding-top: remify(140px)
 
 .teaser-topic-variant-main
     position: absolute
     top: 0
     left: 50%
-    transform: translateX(-50%)
+    +transform(translateX(-50%))
     background-color: $primary-color
-    padding: remify(15px)
+    padding: remify(10px) remify(15px)
 
     &__heading
         @extend %font-beckett
@@ -30,3 +51,15 @@
         font-size: remify(26px)
         a
             color: $white
+
+    &__kicker
+        vertical-align: sub
+
+    +respond-min($break-tablet-min)
+        top: remify(20px)
+        padding: remify(10px) remify(25px)
+        &__heading
+            font-size: remify(36px)
+
+    +respond-min($break-desktop-min)
+        top: remify(25px)

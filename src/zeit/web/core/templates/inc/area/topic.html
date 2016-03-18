@@ -26,7 +26,12 @@
 			<div class="{{ self.topic_class() }}-list">
 				{% for module in area.values()[0:3] -%}
 				    {% set teaser = module | first_child %}
-				    {% include "zeit.web.core:templates/inc/teaser/topic_list.tpl" %}
+				    {% set layout = module | get_layout %}
+
+				    {% include [
+				    "{0}:templates/inc/teaser/{1}.tpl".format(view.package, layout),
+				    "{0}:templates/inc/teaser/{1}.tpl".format('zeit.web.core', layout),
+				    "zeit.web.core:templates/inc/teaser/zon_topic.tpl"] %}
 				{% endfor %}
 			</div>
 		{% endif %}
