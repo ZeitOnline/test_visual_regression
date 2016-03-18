@@ -159,7 +159,7 @@
 
 {% macro headerimagestandard(obj) -%}
     <div class="article__head__image">
-        {{ image(obj) }}
+        {% include "zeit.web.magazin:templates/inc/article/header-image.html" with context %}
     </div>
 {%- endmacro %}
 
@@ -175,7 +175,7 @@
 {%- endmacro %}
 
 {% macro video(obj) -%}
-    {% if obj.id and obj.format != 'zmo-xl-header' -%}
+    {% if obj.id and 'header' not in obj.format | default('') -%}
         <figure class="
         {% if obj.format == 'zmo-small-left' or obj.format == 'small' %}
             figure-stamp

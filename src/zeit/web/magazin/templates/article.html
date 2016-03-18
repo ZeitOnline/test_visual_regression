@@ -47,7 +47,8 @@
                 <div class="article__body">
                     {% block article_main_image %}
                         {% if view.page_nr == 1 %}
-                            {{ blocks['image'](view.main_image_block)}}
+                            {% set obj = view.main_image_block %}
+                            {% include "zeit.web.magazin:templates/inc/asset/image_article.tpl" with context %}
                         {% endif %}
                     {% endblock article_main_image %}
                     {% block article_pages %}
