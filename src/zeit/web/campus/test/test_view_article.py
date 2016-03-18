@@ -155,3 +155,17 @@ def test_campus_article_renders_video_with_correct_markup(testbrowser):
     assert 'nur auf Vorbestellung ausgegeben wir' in select(
         '.video-caption > .video-caption__description'
         )[0].text
+
+
+def test_nextread_is_present(testbrowser):
+    browser = testbrowser('/campus/article/paginated')
+    assert len(browser.cssselect('#nextread')) == 1
+
+
+def test_article_debate_block_should_render_expected_structure(testbrowser):
+    select = testbrowser('/campus/article/debate').cssselect
+    assert len(select('.debate')) == 1
+    assert len(select('.debate__kicker')) == 1
+    assert len(select('.debate__title')) == 1
+    assert len(select('.debate__text')) == 1
+    assert len(select('.debate__label')) == 1
