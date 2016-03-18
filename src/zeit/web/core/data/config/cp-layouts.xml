@@ -22,7 +22,7 @@
     <layout
         id="zco-topic-small"
         title="kleiner Teaser Topic"
-        image_pattern="narrow"
+        image_pattern="wide"
         areas="topic-variant"
         />
     <layout

@@ -7,7 +7,7 @@
 		content: ''
 		display: block
 		width: remify(50px)
-		margin: $page-padding--small * 2 0 $page-padding--small 0
+		margin: remify(16px) 0 remify(4px)
 		border-bottom: 3px solid $zco-accent
 
 	&__heading
@@ -47,4 +47,10 @@
 			font-size: remify(42px)
 
 		&:after
-			margin: remify(20px) 0 remify(15px)
+			margin: remify(26px) 0 remify(14px)
+			+transform(translateX(-110%))
+
++respond-min($break-desktop-min)
+	.teaser-topic-wide
+		&:after
+			margin: remify(36px) 0 remify(12px)

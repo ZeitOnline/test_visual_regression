@@ -3,6 +3,9 @@
 	padding: $page-padding--small
 	border: none
 
+	&__media
+		display: none
+
 	&__heading
 		@extend %teaser-heading
 
@@ -17,17 +20,25 @@
 		@extend %teaser-title
 		font-size: remify(26px)
 
-	&__text
-		@extend %teaser-text
-
-	&__metadata
-		@extend %teaser-metadata
-
-	&__byline
-		@extend %teaser-byline
-
 
 +respond-min($break-tablet-min)
 	.teaser-topic-small
 		&__title
 			font-size: remify(28px)
+
++respond-min($break-desktop-min)
+	.teaser-topic-small
+
+		&__media
+			width: remify(160px)
+			display: inline-block
+			background-color: $greyish-white
+			height: 0
+			padding-bottom: remify(160px) / 16 * 9 // image variant 'wide' (16:9)
+
+		&__heading
+			display: inline-block
+			vertical-align: top
+			max-width: 50%
+			margin-left: $page-padding--small
+			margin-top: remify(30px)

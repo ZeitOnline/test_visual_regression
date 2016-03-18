@@ -1,6 +1,7 @@
 .teaser-topic-variant
+    +pie-clearfix
     position: relative
-    padding: remify(25px) 0 // use padding to center label vertically
+    padding-top: remify(25px) // use padding to center label vertically
     margin-top: $page-padding--small // use margin to adjust teaser in cp design
 
     &__media
@@ -9,13 +10,6 @@
         padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
         width: 100%
 
-    +respond-min($break-tablet-min)
-        padding: 0 $page-padding--small
-        margin-top: 0
-        &__media
-            width: 50%
-            float: left
-            padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4), refers to half-width
 
 .teaser-topic-variant-list
     border-bottom: 1px solid $color-border
@@ -26,15 +20,6 @@
         span:first-child
             color: $color-community-primary
 
-    +respond-min($break-tablet-min)
-        padding-top: remify(130px)
-        padding-left: $page-padding--small
-        border: none
-        float: left
-        width: 50%
-
-    +respond-min($break-desktop-min)
-        padding-top: remify(140px)
 
 .teaser-topic-variant-main
     position: absolute
@@ -55,11 +40,33 @@
     &__kicker
         vertical-align: sub
 
-    +respond-min($break-tablet-min)
+
++respond-min($break-tablet-min)
+    .teaser-topic-variant
+        margin: $cp-padding
+        padding: 0
+        margin-top: 0
+        &__media
+            width: 50%
+            float: left
+            padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4), refers to half-width
+
+    .teaser-topic-variant-list
+        padding-top: remify(130px)
+        padding-left: $page-padding--small
+        border: none
+        float: left
+        width: 50%
+
+    .teaser-topic-variant-main
         top: remify(20px)
         padding: remify(10px) remify(25px)
         &__heading
             font-size: remify(36px)
 
-    +respond-min($break-desktop-min)
++respond-min($break-desktop-min)
+    .teaser-topic-variant-main
         top: remify(25px)
+
+    .teaser-topic-variant-list
+        padding-top: remify(140px)
