@@ -1,5 +1,14 @@
 .article
 	&__item
+
+		&--rimless
+			+unpadded
+			width: auto
+
+		&--apart
+			margin-top: remify(28px)
+			margin-bottom: remify(40px)
+
 		+respond-min($break-tablet-min)
 			max-width: remify(660px)
 			margin-left: auto

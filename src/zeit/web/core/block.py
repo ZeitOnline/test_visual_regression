@@ -373,6 +373,7 @@ class BaseVideo(Block):
         self.renditions = video.renditions
         self.video_still = video.video_still
         self.title = video.title
+        self.supertitle = video.supertitle
         self.description = video.subtitle
         self.id = video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
