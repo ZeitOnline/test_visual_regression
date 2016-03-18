@@ -1,10 +1,5 @@
-import logging
-
 import zeit.web
 import zeit.web.core.centerpage
-
-
-log = logging.getLogger(__name__)
 
 
 @zeit.web.register_module('zco-tool-box')
