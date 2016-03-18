@@ -1,8 +1,6 @@
 {% extends "zeit.web.core:templates/inc/article/table-of-contents.html" %}
 {% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
 
-{% block toc_link_top %}{% endblock toc_link_top %}
-
 {% block toc_svg_icon %}
 <span class="article-toc__toggle">
     {{ lama.use_svg_icon('circle_plus', 'article-toc__toggle-icon article-toc__toggle-icon--plus', request) }}
@@ -12,10 +10,6 @@
 
 {% block toc_item %}
     <strong>{{ '{0:02d}'.format(pagenr) }}</strong>
-    {%- if view.pagination.pages_titles[pagenr - 1] %}<span>— {{ view.pagination.pages_titles[pagenr - 1] }}</span>
+    {% if view.pagination.pages_titles[pagenr - 1] %}<span>{{ view.pagination.pages_titles[pagenr - 1] }}</span>
     {%- endif %}
-{% endblock toc_item %}
-
-{% block toc_link_bottom %}
-<a class="article-toc__onesie" href="{{ view.content_url }}/komplettansicht" data-id="article-toc....all">Auf einer Seite lesen</a>
-{% endblock toc_link_bottom %}
+{% endblock %}
