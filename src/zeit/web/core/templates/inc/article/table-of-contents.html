@@ -2,9 +2,6 @@
 <aside class="article-toc article__item article__item--wide">
     <div class="article-toc__container">
         <h3 class="article-toc__headline">Inhalt{% block toc_svg_icon %}{% endblock %}</h3>
-        {% block toc_link_top %}
-        <a class="article-toc__onesie" href="{{ view.content_url }}/komplettansicht" data-id="article-toc....all">Auf einer Seite lesen</a>
-        {% endblock toc_link_top %}
         <div class="article-toc__seperator">
             <ol class="article-toc__list">
             {%- set current = view.pagination.current %}
@@ -33,7 +30,7 @@
             {% endfor %}
 
             </ol>
-            {% block toc_link_bottom %}{% endblock %}
+            <a class="article-toc__onesie" href="{{ view.content_url }}/komplettansicht" data-id="article-toc....all">Auf einer Seite lesen</a>
         </div>
     </div>
 </aside>
