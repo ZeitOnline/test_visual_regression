@@ -61,3 +61,25 @@ class StoryStreamTeaserBlock(
                         return articles
 
         return articles
+
+
+# XXX The Article/infobox block has been adjusted so we can reuse it as a
+# CP/teaser module. We should instead discard the current article block
+# mechanics and use the CP modules one there, too.
+@grokcore.component.adapter(
+    zeit.content.cp.interfaces.ITeaserBlock,
+    zeit.content.infobox.interfaces.IInfobox)
+class InfoboxTeaserBlock(
+        zeit.web.core.centerpage.Module,
+        zeit.web.core.block.Infobox,
+        grokcore.component.MultiAdapter):
+
+    grokcore.component.provides(zeit.web.core.interfaces.IBlock)
+
+    def __init__(self, module, content):
+        self.module = module
+        self.context = content
+
+    @property
+    def layout(self):
+        return self.module.layout
