@@ -1,0 +1,18 @@
+.gallery
+	+unpadded
+	margin-bottom: remify(30px)
+	margin-top: remify(36px)
+	+respond-min($break-tablet-min)
+		margin: remify(60px auto)
+		max-width: remify(880px)
+		padding: 0 $page-padding
+
+	&-container
+		max-width: remify(880px)
+
+	&__media-container
+		overflow: hidden
+
+	&__description
+		p
+			@extend .paragraph

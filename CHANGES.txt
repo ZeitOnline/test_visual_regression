@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - ZON-2897: Allow ZMO article header image variant selection via layout
 
+- ZON-2777: Add inline-gallery and gallery to ZEIT Campus
+
 - ZON-2894: Include comment thread via ESI
   **NOTE** Also deploy corresponding varnish changes!
 

@@ -1,7 +1,10 @@
-{% extends "zeit.web.site:templates/content.html" %}
+{% extends "zeit.web.campus:templates/content.html" %}
 
 {% block article_pages %}
     <div class="article-page">
+        <p class="article__summary article__item" itemprop="description">
+            {{- view.subtitle -}}
+        </p>
         {% set images = view.images %}
         {% include "zeit.web.core:templates/inc/article/gallery.html" %}
     </div>
@@ -11,9 +14,3 @@
         </div>
     </div>
 {% endblock article_pages %}
-
-{% block veeseo_div %}
-    <div class="RA2VW2"></div>
-{% endblock %}
-
-{% block lineage %}{% endblock %}

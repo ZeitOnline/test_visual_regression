@@ -325,10 +325,13 @@ def test_block_infobox_should_contain_expected_structure(tplbrowser):
 
 
 def test_block_inlinegallery_should_contain_expected_structure(tplbrowser):
+    view = mock.Mock()
+    view.package = 'zeit.web.site'
     block = mock.Mock()
     block = {}
     browser = tplbrowser(
-        'zeit.web.core:templates/inc/blocks/inlinegallery.html', block=block)
+        'zeit.web.core:templates/inc/blocks/inlinegallery.html', block=block,
+        view=view)
     assert browser.cssselect('div.inline-gallery')
 
 

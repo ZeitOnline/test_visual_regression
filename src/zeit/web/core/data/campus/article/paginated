@@ -16,10 +16,13 @@
       <tag type="Organization" score="7" uuid="aa3d17b4-aa8d-4131-a0d0-dca38ad4c244" url_value="google">Google</tag>
       <tag type="free" score="4" uuid="8b3f26e0-6c91-41d7-a09d-a73fc1b3fdcb" url_value="e-book">E-Book</tag>
     </rankedTags>
-    <image base-id="http://xml.zeit.de/karriere/2016-01/gadget/" type="jpg" title="Selfie-Stick Gadgets Zeitgeist" alt="Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." align="left" publication-date="2016-01-14T16:04:40+00:00" expires="2016-04-14T15:04:42+00:00">
+    <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg" title="Selfie-Stick Gadgets Zeitgeist" alt="Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." align="left" publication-date="2016-01-14T16:04:40+00:00" expires="2016-04-14T15:04:42+00:00">
       <bu>Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto.</bu>
       <copyright>© Michael Reynolds/dpa</copyright>
     </image>
+    <topic type="intern" href="http://xml.zeit.de/thema/test">
+        <label>Science</label>
+    </topic>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">2938314</attribute>
@@ -105,7 +108,7 @@
     <subtitle>Bücher? Filme? Kunstwerke? Nö: Wer unsere Zeit wirklich verstehen will, muss diese zehn Geräte kennen.</subtitle>
     <byline>von Jan Fischer,  Oskar Piegsa</byline>
     <division type="page">
-      <image base-id="http://xml.zeit.de/karriere/2016-01/gadget/" type="jpg" title="Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." alt="Technik: Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." align="left" publication-date="2016-01-14T16:04:40+00:00" expires="2016-04-14T15:04:42+00:00" layout="large" is_empty="False" alt_local="Technik: Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." title_local="Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto.">
+      <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg" title="Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." alt="Technik: Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." align="left" publication-date="2016-01-14T16:04:40+00:00" expires="2016-04-14T15:04:42+00:00" layout="large" is_empty="False" alt_local="Technik: Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." title_local="Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto.">
         <bu>Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto.</bu>
         <copyright>© Michael Reynolds/dpa</copyright>
       </image>

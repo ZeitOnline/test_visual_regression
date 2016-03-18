@@ -7,6 +7,10 @@
     </section>
 {% endblock article_pages %}
 
+{% block article_pagination %}
+    {% include "zeit.web.campus:templates/inc/article/pagination.html" %}
+{% endblock article_pagination %}
+
 {% block rawr_config %}
     {%- include "zeit.web.campus:templates/inc/inline_js/rawr_config.tpl" -%}
 {% endblock rawr_config %}
