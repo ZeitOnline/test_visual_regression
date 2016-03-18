@@ -155,7 +155,7 @@ def comment_to_dict(comment):
     )
 
 
-def request_thread(path,
+def request_thread(unique_id,
                    thread_type='full',
                    page=0,
                    page_size=4,
@@ -164,12 +164,12 @@ def request_thread(path,
                    ):
     """Send a GET request to receive an agatho comment thread.
 
-    :param path: Path section of a uniqueId
+    :param unique_id: ICMSContent uniqueId
     :param thread_type: One of 'full' or 'paginated'
     :param page_size: Number of comments displayed per page
     :rtype: unicode or None
     """
-
+    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     timeout = float(conf.get('community_host_timeout_secs', 0.5))
     uri = '{}/agatho/thread{}'.format(
@@ -212,10 +212,7 @@ class ThreadNotLoadable(Exception):
 
 def get_paginated_thread(
         unique_id, sort='asc', page=0, cid=None, invalidate_delta=5):
-
-    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-
     page_size = int(conf.get('comment_page_size', '4'))
 
     thread_type = 'paginated'
@@ -228,7 +225,7 @@ def get_paginated_thread(
         request_sort = 'asc'
     elif cid:
         thread_type = 'deeplink'
-    thread = request_thread(path, thread_type=thread_type, page=page,
+    thread = request_thread(unique_id, thread_type=thread_type, page=page,
                             page_size=page_size, sort=request_sort, cid=cid)
     if thread is None:
         return dict()
@@ -444,8 +441,7 @@ def get_replies(unique_id, cid):
 
 
 def get_comment(unique_id, cid):
-    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
-    thread = request_thread(path, thread_type='single', cid=cid)
+    thread = request_thread(unique_id, thread_type='single', cid=cid)
     if thread is None:
         return {}
     if isinstance(thread, dict) and thread.get('request_failed'):
@@ -530,9 +526,7 @@ def _derive_maintenance_from_schedule(maintenance):
 
 @LONG_TERM_CACHE.cache_on_arguments()
 def get_cacheable_thread(unique_id):
-
-    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
-    thread = request_thread(path)
+    thread = request_thread(unique_id)
 
     if thread is None:
         return
