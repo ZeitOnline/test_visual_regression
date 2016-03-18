@@ -1,0 +1,24 @@
+.video-caption
+	+padded
+	background-color: $color-background--dark
+	padding-top: remify(18px)
+	padding-bottom: remify(18px)
+	&__kicker
+		color: $color-text--on-dark
+		font-size: remify(12px)
+		letter-spacing: 0.08em
+		line-height: 1.25
+		padding-bottom: remify(10px)
+		text-transform: uppercase
+	&__title
+		@extend %font-beckett
+		color: $white
+		font-size: remify(28px)
+	&__description
+		color: $color-text--on-dark
+		font-size: remify(15px)
+		letter-spacing: 0.03em
+		line-height: (20/15)
+		// the description gets the padding, because we're not sure it's always there
+		padding-top: remify(12px)
+

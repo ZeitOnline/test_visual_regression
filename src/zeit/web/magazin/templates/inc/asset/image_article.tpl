@@ -6,11 +6,13 @@
 {% block media_block -%}
 {{ {'large': 'figure-full-width',
     'zmo-large-center': 'figure-full-width',
-    'zmo-xl-header': 'figure-header',
     'zmo-medium-left': 'figure-horizontal',
     'zmo-medium-right': 'figure-horizontal--right',
     'zmo-medium-center': 'figure is-constrained is-centered',
-    'zmo-small-right': 'figure-stamp--right'}.get(
+    'zmo-small-left': 'figure-stamp',
+    'zmo-small-left-original': 'figure-stamp',
+    'zmo-small-right': 'figure-stamp--right',
+    'zmo-small-right-original': 'figure-stamp--right'}.get(
         obj.layout.id, 'figure-stamp') }}
 {%- endblock %}
 
@@ -24,7 +26,9 @@ figure__media
 
 {% block media_caption -%}
     <figcaption class="figure__caption">
+        {% if image.caption %}
         <span class="figure__text">{{ image.caption | safe }}</span>
+        {% endif %}
         {% if image.copyright | count and image.copyright[0][0] != '©' %}
         <span class="figure__copyright">
             {% if image.copyright[0][1] %}
