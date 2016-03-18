@@ -4,6 +4,8 @@ Change log for zeit.web
 2.65 (unreleased)
 -----------------
 
+- MAINT: Polish table of contents
+
 - ZON-2491: Add debate module for Articles
 
 - ZON-2505: Add debate module for CPs
