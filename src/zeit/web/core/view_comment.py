@@ -143,7 +143,7 @@ class PostComment(zeit.web.core.view.Base):
                 raise pyramid.httpexceptions.HTTPBadRequest(
                     title='No recommendation could be posted',
                     explanation=('Pid needed.'))
-            commenter = self._get_commenter_id(unique_id, pid)
+            commenter, fans = self._get_recommendations(unique_id, pid)
             if commenter == uid:
                 raise pyramid.httpexceptions.HTTPBadRequest(
                     title='No recommendation could be posted',
@@ -170,7 +170,6 @@ class PostComment(zeit.web.core.view.Base):
             data['method'] = 'flag.flagnote'
             data['flag_name'] = 'kommentar_bedenklich'
         elif action == 'recommend' and pid:
-            fans = self._get_recommendations(unique_id, pid)
             if uid in fans:
                 data['action'] = 'unflag'
                 fans.remove(uid)
@@ -295,20 +294,13 @@ class PostComment(zeit.web.core.view.Base):
             self.community_host, endpoint, path).strip('/')
 
     def _get_recommendations(self, unique_id, pid):
-        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
+        comment_thread = zeit.web.core.comments.get_paginated_thread(
+            unique_id, cid=pid)
 
-        if comment_thread and comment_thread.get('index', {}).get(pid):
-            comment = comment_thread['index'][pid]
-            if len(comment['fans']):
-                return comment['fans'].split(',')
-
-        return []
-
-    def _get_commenter_id(self, unique_id, pid):
-        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
-
-        if comment_thread and comment_thread.get('index', {}).get(pid):
-            return comment_thread['index'][pid]['uid']
+        comment = comment_thread and comment_thread.get('index', {}).get(pid)
+        if not comment:
+            return None, []
+        return comment['uid'], filter(None, comment['fans'].split(','))
 
     def _nid_by_comment_thread(self, unique_id):
         nid = None
