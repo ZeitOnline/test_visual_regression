@@ -141,12 +141,12 @@ class PostComment(zeit.web.core.view.Base):
         elif action == 'recommend':
             if not pid:
                 raise pyramid.httpexceptions.HTTPBadRequest(
-                    title='No recommondation could be posted',
+                    title='No recommendation could be posted',
                     explanation=('Pid needed.'))
             commenter = self._get_commenter_id(unique_id, pid)
             if commenter == uid:
                 raise pyramid.httpexceptions.HTTPBadRequest(
-                    title='No recommondation could be posted',
+                    title='No recommendation could be posted',
                     explanation=('Own comments must not be recommended.'))
 
         nid = self._nid_by_comment_thread(unique_id)
