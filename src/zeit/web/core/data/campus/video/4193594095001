@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<video xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <head>
+    <renditions>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201504/2409/18140073001_4193657875001_4193594095001.mp4" frame_width="400" video_duration="120048"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201504/2409/18140073001_4193657887001_4193594095001.mp4" frame_width="480" video_duration="120048"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201504/2409/18140073001_4193657879001_4193594095001.mp4" frame_width="720" video_duration="120048"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201504/2409/18140073001_4193657905001_4193594095001.mp4" frame_width="1280" video_duration="120048"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201504/2409/18140073001_4193657884001_4193594095001.mp4" frame_width="640" video_duration="120048"/>
+    </renditions>
+    <references/>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-04-24T11:35:16.957468+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-04-24T11:31:36+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-04-24T11:35:17.319612+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-04-24T11:36:17.274790+00:00</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="expires">2016-04-24T04:00:00+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="flv_url">http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201504/2409/18140073001_4193657875001_4193594095001.mp4</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/brightcove" name="id">4193594095001</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-04-24T11:32:17+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.brightcove</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wirtschaft</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="thumbnail">http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201504/2415/18140073001_4193669308001_ZO-Teaser-Apple-Watch.jpg?pubId=18140073001</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">video</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ccf1d581-15e9-492f-bc75-ee2c7d9017fc}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="video_still">http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201504/3993/18140073001_4193655097001_ZO-Teaser-Apple-Watch.jpg?pubId=18140073001</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Video" module="zeit.content.video.video"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Wearables</supertitle>
+    <title>Verkaufsstart von Apple Watch ohne Warteschlangen</title>
+    <subtitle>Die Smartwatch von Apple ist in Japan, Deutschland und anderen großen Märkten im Handel. Sichtbarer Ansturm auf die Läden blieb aus, da die Uhr zunächst nur auf Vorbestellung ausgegeben wir</subtitle>
+  </body>
+  <teaser>
+    <text>Die Smartwatch von Apple ist in Japan, Deutschland und anderen großen Märkten im Handel. Sichtbarer Ansturm auf die Läden blieb aus, da die Uhr zunächst nur auf Vorbestellung ausgegeben wir</text>
+  </teaser>
+</video>

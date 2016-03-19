@@ -1,0 +1,187 @@
+$gallery-button-radius--small: remify(40px)
+$gallery-button-radius--large: remify(68px)
+$gallery-pager-width: remify(60px)
+$gallery-dots-diameter: 8px
+$break-gallery-min: em(576px)
+
+.inline-gallery
+	@extend .gallery
+	clear: both // to prevent collisions with in-article ads
+
+	&-container
+		@extend .gallery-container
+
+.gallery-slides
+	.figure__media
+		width: auto
+		max-height: 620px
+		margin: 0 auto
+	.figure__caption
+		background-color: $color-background--light
+		color: #444
+		font-family: $font-tabletgothic
+		font-size: em(15px)
+		line-height: round-to-precision(20/15, $precision: 1)
+		margin: 0 auto
+		max-width: none
+		padding: remify(20px $page-padding--small)
+		+respond-min($break-tablet-min)
+			padding: remify(20px $page-padding)
+	.figure__index
+		font-weight: bold
+		font-size: 0.8666em // uses em by intention
+		letter-spacing: $letter-spacing-l
+		margin-right: .25em
+	.figure__copyright
+		color: $color-text--light
+
+// appear just after bxSlider initialisation
+// needed for "static" galleries
+.js
+	.gallery-slides
+		visibility: hidden
+.bx-wrapper
+	.gallery-slides
+		visibility: visible
+
+.bx-wrapper--touch
+	.bx-controls
+		padding: remify(0 0 16px)
+	.bx-pager
+		font-size: $gallery-dots-diameter
+		line-height: 1.5
+		text-align: center
+.bx-wrapper--no-touch
+	.bx-controls
+		display: none
+		+respond-min($break-gallery-min)
+			background-color: $primary-color
+			color: #fff
+			display: block
+			float: right
+			height: $gallery-button-radius--small
+			position: relative
+			width: $gallery-button-radius--small * 2 + $gallery-pager-width
+	.bx-pager
+		@extend %font-beckett
+		bottom: 0
+		color: #fff
+		font-size: em(26px)
+		height: $gallery-button-radius--small
+		left: 0
+		line-height: $gallery-button-radius--small
+		margin: auto
+		position: absolute
+		right: 0
+		text-align: center
+		top: remify(2px)
+		width: $gallery-pager-width
+	+respond-min($break-gallery-min)
+		.figure__index
+			display: none
+
+.bx-pager-item
+	display: inline
+	font-size: 0
+	line-height: 0
+.bx-pager-link
+	background-color: #999
+	border-radius: 50%
+	display: inline-block
+	height: $gallery-dots-diameter
+	margin: 0 $gallery-dots-diameter/2
+	text-indent: -9999px
+	width: $gallery-dots-diameter
+	+on-interaction
+		background-color: $color-article-secondary
+
+.bx-prev,
+.bx-next
+	background-color: $primary-color
+	color: inherit
+	float: left
+	font-size: em(16px)
+	height: $gallery-button-radius--small
+	line-height: $gallery-button-radius--small
+	width: $gallery-button-radius--small
+	text-align: center
+	+on-interaction
+		color: $color-article-secondary
+	&.disabled
+		color: #666
+
+.bx-next
+	float: right
+
+.bx-arrow-icon
+	height: remify(15px)
+	width: remify(21px)
+
+.bx-overlay-prev,
+.bx-overlay-next
+	@extend .bx-next
+	position: absolute
+	top: 0
+	+respond-min($break-phablet-min)
+		font-size: em(32px)
+		height: $gallery-button-radius--large
+		line-height: $gallery-button-radius--large
+		margin-top: -$gallery-button-radius--large / 2
+		opacity: 0
+		top: 50%
+		width: $gallery-button-radius--large
+		.bx-arrow-icon
+			height: remify(30px)
+			width: remify(42px)
+
+.bx-zone-prev,
+.bx-overlay-prev
+	left: 0
+.bx-zone-next,
+.bx-overlay-next
+	right: 0
+
+.bx-viewport
+	position: relative
+	+on-interaction
+		.bx-overlay-prev,
+		.bx-overlay-next
+			opacity: 1
+
+.bx-zone-prev,
+.bx-zone-next
+	color: #fff
+	cursor: pointer
+	display: none
+	height: 20%
+	position: absolute
+	width: 15%
+	z-index: 9999
+	+on-interaction
+		color: $color-article-secondary
+	+respond-min($break-phablet-min)
+		width: 50%
+		height: 90%
+		display: block
+
+// elements not in actual use
+.bx-controls-auto,
+.bx-loading
+	display: none
+
+.no-js .gallery-slides
+	padding-top: $vertical-space * 2
+	figure
+		margin-top: 0
+		margin-bottom: $vertical-space
+		&:last-child
+			.figure__caption
+				margin-bottom: $vertical-space
+	.figure__media
+		max-width: 100%
+	.figure__caption
+		max-width: 100%
+		width: remify(580px)
+		margin-bottom: $vertical-space * 2
+	.figure__copyright
+		display: block

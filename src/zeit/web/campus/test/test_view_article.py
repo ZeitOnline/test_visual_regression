@@ -131,6 +131,13 @@ def test_article_block_infobox_should_render_expected_structure(testbrowser):
     assert len(infobox.cssselect('*[role="tabpanel"]')) == 6
 
 
+def test_article_block_inlinegallery_should_render_expected_structure(
+        testbrowser):
+    browser = testbrowser('/campus/article/inline-gallery')
+    gallery = browser.cssselect('.inline-gallery')[0]
+    assert len(gallery.cssselect('.slide')) == 7
+
+
 def test_article_tags_are_present(testbrowser):
     browser = testbrowser('/campus/article/simple')
     assert browser.cssselect('nav.article-tags')
@@ -138,6 +145,51 @@ def test_article_tags_are_present(testbrowser):
     assert len(tags) == 6
     for tag in tags:
         assert tag.get('rel') == 'tag'
+
+
+def test_rawr_config_should_exist_on_article_page(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/campus/article/simple' % testserver.url)
+
+    assert '/campus/article/simple' == driver.execute_script(
+        "return RawrConfig.location_metadata.article_id")
+    assert '2016-02-10T10:39:16+01:00' == driver.execute_script(
+        "return RawrConfig.location_metadata.published")
+    assert 'Hier gibt es Hilfe' == driver.execute_script(
+        "return RawrConfig.location_metadata.description")
+    assert ['Studium', 'Uni-Leben'] == driver.execute_script(
+        "return RawrConfig.location_metadata.channels")
+    assert ['studium', 'uni-leben'] == driver.execute_script(
+        "return RawrConfig.location_metadata.ressorts")
+    tags = driver.execute_script(
+        "return RawrConfig.location_metadata.tags")
+    assert tags[0] == 'Student'
+    assert tags[3] == u'Bafög-Antrag'
+    assert tags[5] == 'Studienfinanzierung'
+    assert 'Hier gibt es Hilfe' == driver.execute_script(
+        "return RawrConfig.location_metadata.meta.description")
+
+
+def test_rawr_config_should_not_exist_on_centerpage(testbrowser):
+    browser = testbrowser('/campus/centerpage/index')
+    assert 'RawrConfig' not in browser.contents
+
+
+def test_campus_article_renders_video_with_correct_markup(testbrowser):
+    bro = testbrowser('/campus/article/video')
+    select = bro.cssselect
+    assert select(
+        'figure.article__item > .video-player#video-player-4193594095001')
+    assert select(
+        'iframe.video-player__iframe[src*="videoId=4193594095001"]')
+    assert select(
+        '.video-caption > .video-caption__kicker')[0].text == 'Wearables'
+    assert select(
+        '.video-caption > .video-caption__title'
+        )[0].text == 'Verkaufsstart von Apple Watch ohne Warteschlangen'
+    assert 'nur auf Vorbestellung ausgegeben wir' in select(
+        '.video-caption > .video-caption__description'
+        )[0].text
 
 
 def test_nextread_is_present(testbrowser):
