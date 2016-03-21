@@ -6,7 +6,7 @@
 	{# TRASHME Rather crude bitblt/zci image api switch #}
 	{%- if image is variant %}
 		{% set source = request.image_host + image.path | replace(' ', '%20') %}
-		{% set src = "%s__%sx%s" | format(source, width, height) %}
+		{% set src = "%s__%sx%s" | format(source, width, height) %}
 		{% set widths = [320, 480, 660, 820] %}
 	{%- else %}
 		{% set source = image | default_image_url | replace(' ', '%20') %}
@@ -26,7 +26,7 @@
 			<amp-img
 				src="{{ src }}"
 				{% if widths | length -%}
-				srcset="{% for w in widths %}{{ "%s__%sx%s %sw" | format(source, w, (w / image.ratio) | int, w) }}{{ ", " if not loop.last }}{% endfor %}"
+				srcset="{% for w in widths %}{{ "%s__%sx%s %sw" | format(source, w, (w / image.ratio) | int, w) }}{{ ", " if not loop.last }}{% endfor %}"
 				{% endif -%}
 				alt="{{ image.alt }}"
 				width="{{ width }}"
@@ -37,7 +37,7 @@
 				layout="responsive"
 				attribution="
 				{%- for name, url, nofollow in image.copyright -%}
-					{%- if name | trim | length > 1 %}{{ name | trim }}{% endif -%}
+					{%- if name | trim | length > 1 %}{{ name | trim }}{% endif -%}
 				{%- endfor %}"
 				itemprop="contentUrl"></amp-img>
 			{% endblock media -%}
@@ -51,7 +51,7 @@
 				{% for name, url, nofollow in image.copyright %}
 				<span class="figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
 					{% if url %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}">{% endif %}
-					{% if name | trim | length > 1 %}<span itemprop="name">{{ name }}</span>{% endif %}
+					{% if name | trim | length > 1 %}<span itemprop="name">{{ name }}</span>{% endif %}
 					{% if url %}</a>{% endif %}
 				</span>
 				{% endfor %}
