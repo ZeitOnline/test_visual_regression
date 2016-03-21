@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.65 (unreleased)
+2.65 (2016-03-21)
 -----------------
 
 - ZON-2501: Implement topic teaser for ZEIT Campus
