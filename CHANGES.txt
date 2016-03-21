@@ -18,7 +18,7 @@ Change log for zeit.web
 
 - ZON-2502: Implement CP extra "toolbox"
 
-- ZON-2777: Add inline-gallery and gallery to ZEIT Campus
+- ZON-2777, ZON-2485: Add inline-gallery and gallery to ZEIT Campus
 
 - ZON-2511: Videos in Campus articles
 
