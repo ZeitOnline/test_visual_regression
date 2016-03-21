@@ -4,7 +4,7 @@
 
     window.Zeit = {
         jsconfHost: '{{ request.jsconf_host }}',
-        communityHost: '{{ request.registry.settings.community_host }}',
+        communityHost: '{{ request.registry.settings.community_host }}',
         view: {
             {% for key, value in view.js_vars -%}
                 '{{ key }}': '{{ value | remove_break }}',

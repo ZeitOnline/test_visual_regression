@@ -2,11 +2,26 @@
 	margin: remify(0 0 30px)
 	position: relative
 
-	&__image-wrap
+	&--with-image &__headline--default
+		margin-top: remify(-66px)
+
+	&__default-image
 		margin-top: $page-padding--small
 
 	&__image
 		width: remify(240px)
+		// this is never going to work, keep it for proof of (wrong) concept
+		// position: relative
+		// &:after
+		// 	bottom: 0
+		// 	content: ""
+		// 	height: 100%
+		// 	left: 0
+		// 	position: absolute
+		// 	right: 0
+		// 	top: 0
+		// 	width: 100%
+		// 	+background-image(linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,.4) 100%))
 
 	&__media
 		height: 0
@@ -17,7 +32,7 @@
 		+font-smoothing
 		+unpadded
 		background-color: $primary-color
-		color: $white
+		color: #fff
 		display: block
 		font-size: em(20px)
 		line-height: inherit
@@ -41,26 +56,26 @@
 		&--default
 			+unpadded
 			background-color: $color-background
-			margin-top: remify(-66px)
-			margin-bottom: 0
 			padding: remify(15px $page-padding--small 24px 24px)
 
 	&__kicker
-		+font-smoothing
-		color: $white
 		display: block
 		font-size: em(14px)
 		font-weight: bold
 		letter-spacing: .01em
 		margin-bottom: remify(12px)
+		.article-header--with-image &--default,
+		&--leserartikel
+			+font-smoothing
+			color: #fff
 
 	&__title
 		@extend %font-beckett
-		color: $color-article-primary
 		display: block
 		font-size: em(48px)
+		&--default
+			color: $color-article-primary
 		&--leserartikel
-			color: $color-text
 			padding-bottom: $page-padding--small
 
 	&__byline,
@@ -117,10 +132,6 @@
 		padding: $page-padding--small
 	&__column-details
 		padding-right: remify(90px)
-	&__headline
-		&--column
-			span
-				color: $color-text
 
 	// Leserartikel
 	&--leserartikel
@@ -158,17 +169,45 @@
 	.article-header
 		margin: remify(40px 0)
 
-		&__image-wrap
+		&--no-image#{&}--default
+			background-color: $color-background
+			box-shadow: remify(-160px) 0 0 $color-background, remify(160px) 0 0 $color-background
+			margin-left: auto
+			margin-right: auto
+			margin-top: remify(76px)
+			max-width: remify(660px)
+			padding: remify(48px 0)
+		&--no-image &__topic--default
+			position: absolute
+			bottom: 100%
+			margin-bottom: -0.6em
+		&--no-image &__byline,
+		&--no-image &__metadata
+			margin-bottom: 0
+
+		&--with-image &__default-info
+			left: 50%
+			max-width: remify(780px / 2)
+			padding-left: remify(46px)
+			position: absolute
+			top: 0
+			width: 50%
+
+
+		&__default-image
 			margin: 0 auto
 			max-width: remify(780px)
 
 		&__image
 			width: 53.33%
 
-		&__headline
-			&--default
-				margin-top: remify(-90px)
-				padding: remify(11px $page-padding 24px 54px)
+		&__headline--default
+			padding: remify(11px $page-padding 24px)
+		&--with-image &__headline--default
+			margin-top: remify(-90px)
+		&--no-image &__headline--default
+			margin: 0
+			padding: remify(0 0 20px)
 
 		&__kicker,
 		&__title
@@ -179,7 +218,7 @@
 		&__kicker
 			font-size: em(16px)
 			line-height: 18px / 16px
-			margin-bottom: remify(22px)
+			margin-bottom: remify(24px)
 			&--leserartikel
 				line-height: remify(49px)
 
@@ -191,15 +230,6 @@
 			&--leserartikel
 				font-size: em(82px)
 				padding-bottom: 0
-
-
-		&__info
-			left: 50%
-			max-width: remify(780px / 2)
-			padding-left: remify(46px)
-			position: absolute
-			top: 0
-			width: 50%
 
 		&__topic
 			display: inline-block
@@ -263,10 +293,12 @@
 	.article-header
 		margin: remify(60px 0)
 
-		&__headline
-			&--default
-				margin: remify(-190px 0 0)
-				padding-top: remify(111px)
+		&--no-image#{&}--default
+			padding: remify(58px 0 38px)
+
+		&--with-image &__headline--default
+			margin: remify(-190px 0 0)
+			padding-top: remify(110px)
 
 		&__kicker
 			&--leserartikel
