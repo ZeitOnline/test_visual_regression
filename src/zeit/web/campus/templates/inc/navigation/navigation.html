@@ -48,7 +48,7 @@
     </div>
     <div class="nav__primary">
         <nav class="nav__topics">
-            {% require topics = view.context | topic_links -%}
+            {% require topics = view.context | topic_links -%}
             <h2 class="nav__topics-title"><a href="#">Themen{#{ topics.title | default('Themen', True) }#}</a></h2>
             <ul class="nav__topics-list">
             {% for label, link in topics %}

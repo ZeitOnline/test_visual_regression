@@ -7,7 +7,7 @@
 		{% if comment.title != '[empty]' -%}
 			<p>{{ comment.title }}</p>
 		{%- endif -%}
-		{{ comment.description | safe }}
+		{{ comment.description | safe }}
 	</div>
 	<div class="user-comment__date">{{ comment.publication_date | format_timedelta(days=3, absolute=True) }}, verfasst zu:</div>
 	<a href="{{ article | create_url }}?cid={{ comment.cid }}#cid-{{ comment.cid }}" class="user-comment__article-link">

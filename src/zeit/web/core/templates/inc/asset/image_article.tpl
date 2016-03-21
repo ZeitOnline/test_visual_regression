@@ -9,5 +9,5 @@
 
 {% block media_caption_content %}
     <span class="figure__text" itemprop="caption">{{ image.caption }}</span>
-    {{ super() }}
+    {{ super() }}
 {% endblock %}

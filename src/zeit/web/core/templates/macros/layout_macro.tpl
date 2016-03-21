@@ -143,14 +143,14 @@
 
 {% macro insert_esi(src, error_text='') %}
     {% if settings('dev_environment') %}
-        <!-- [esi-debug] src="{{ src | safe }}" error_text="{{ error_text }}" -->
-        <esi:include src="{{ src | safe }}" onerror="continue" />
+        <!-- [esi-debug] src="{{ src | safe }}" error_text="{{ error_text }}" -->
+        <esi:include src="{{ src | safe }}" onerror="continue" />
     {% else %}
         <esi:remove>
-        <!-- [esi-debug] src="{{ src | safe }}" error_text="{{ error_text }}" -->
+        <!-- [esi-debug] src="{{ src | safe }}" error_text="{{ error_text }}" -->
         </esi:remove>
         <!--esi
-        <esi:include src="{{ src | safe }}" />
+        <esi:include src="{{ src | safe }}" />
         -->
     {% endif %}
 {% endmacro %}

@@ -174,7 +174,7 @@
 {%- endmacro %}
 
 {% macro video(obj) -%}
-    {% if obj.id and 'header' not in obj.format | default('') -%}
+    {% if obj.id and 'header' not in obj.format | default('') -%}
         <figure class="
         {% if obj.format == 'zmo-small-left' or obj.format == 'small' %}
             figure-stamp
