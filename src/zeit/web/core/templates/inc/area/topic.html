@@ -21,7 +21,7 @@
 
 			{% set topic_layout = self.topic_class() + '-main' %}
 			{% set show_extended = self.show_extended() %}
-			{% include "zeit.web.core:templates/inc/teaser/topic_main.tpl" %}
+			{% include "zeit.web.core:templates/inc/teaser/topic-main.tpl" %}
 
 			<div class="{{ self.topic_class() }}-list">
 				{% for module in area.values()[0:3] -%}

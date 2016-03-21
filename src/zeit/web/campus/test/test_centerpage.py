@@ -2,6 +2,8 @@
 
 import zeit.cms.interfaces
 import zeit.web.core.interfaces
+import pyramid.testing
+import lxml.html
 
 
 def test_campus_centerpage_should_produce_regular_topiclinks(application):
@@ -50,4 +52,3 @@ def test_campus_centerpage_teaser_topic_is_rendered(jinja2_env):
     assert len(html.cssselect('.teaser-topic')) == 1
     assert len(html.cssselect('.teaser-topic-main')) == 1
     assert len(html.cssselect('.teaser-topic-item')) == 3
-
