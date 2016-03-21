@@ -652,7 +652,7 @@ class CommentMixin(object):
         return zeit.web.core.comments.get_comment(self.context.uniqueId, cid)
 
     @zeit.web.reify
-    def comments_allowed(self):
+    def commenting_allowed(self):
         return self.context.commentsAllowed and self.show_commentthread
 
     @zeit.web.reify
@@ -682,7 +682,7 @@ class CommentMixin(object):
                        u'Die Kommentare zu diesem Artikel konnten '
                        u'nicht geladen werden. Bitte entschuldigen Sie '
                        u'diese Störung.')
-        elif not self.comments_allowed:
+        elif not self.commenting_allowed:
             message = (u'Der Kommentarbereich dieses Artikels ist geschlossen.'
                        u' Wir bitten um Ihr Verständnis.')
             note = message
@@ -701,14 +701,14 @@ class CommentMixin(object):
             # For not authenticated users this means "show_login_prompt".
             'show_comment_form': (
                 not self.community_maintenance['active'] and
-                self.comments_allowed and self.comments_loadable and
+                self.commenting_allowed and self.comments_loadable and
                 ((not user_blocked and valid_community_login) or
                  not authenticated)),
             'note': note,
             'message': message,
             'user_blocked': user_blocked,
             'show_premoderation_warning': premoderation and (
-                self.comments_allowed and not user_blocked)
+                self.commenting_allowed and not user_blocked)
         }
 
     @zeit.web.reify

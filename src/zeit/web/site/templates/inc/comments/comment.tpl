@@ -52,7 +52,7 @@
 				{%- endif %}
 			{%- endif %}
 
-			{% if view.comments_allowed -%}
+			{% if view.commenting_allowed -%}
 			<a class="comment__reaction js-reply-to-comment" data-cid="{{ comment.cid }}" href="{{ view.request | append_get_params(url=view.content_url, action='comment', pid=comment.cid) }}#comment-form" title="Antworten">
 				{{ lama.use_svg_icon('comment-reply', 'comment__icon comment__icon-reply', request) }}
 				<span class="comment__action">Antworten</span>

@@ -185,7 +185,7 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
     request.route_url = lambda x: "http://foo/"
 
     view = zeit.web.site.view_article.Article(content, request)
-    view.comments_allowed = False
+    view.commenting_allowed = False
     comments = tplbrowser('zeit.web.site:templates/inc/comments/thread.html',
                           view=view, request=request)
     assert len(comments.cssselect('article.comment')) > 0, (
