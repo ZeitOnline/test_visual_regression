@@ -107,6 +107,15 @@ def test_campus_teaser_topic_has_correct_structure(testbrowser):
     assert len(select('.teaser-topic-item')) == 3
 
 
+def test_campus_teaser_topic_variant_has_correct_structure(testbrowser):
+    select = testbrowser('/campus/centerpage/topic-teaser-variant').cssselect
+    assert len(select('.teaser-topic-variant')) == 1
+    assert len(select('.teaser-topic-variant-main')) == 1
+    assert len(select('.teaser-topic-variant-list')) == 1
+    assert len(select('.teaser-topic-variant .teaser-topic-wide')) == 1
+    assert len(select('.teaser-topic-variant .teaser-topic-small')) == 1
+
+
 def test_campus_teaser_debate_has_correct_structure(testbrowser):
     select = testbrowser('/campus/centerpage/teaser-debate').cssselect
     assert len(select('.teaser-debate')) == 1
