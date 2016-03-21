@@ -372,10 +372,9 @@ def _create_poster(monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.view_comment.PostComment, '_get_recommendations', fans)
 
-    def nid(me, uid):
-        return 1
     monkeypatch.setattr(
-        zeit.web.core.view_comment.PostComment, '_nid_by_comment_thread', nid)
+        zeit.web.core.view_comment.PostComment, '_ensure_comment_thread',
+        lambda me, uid: None)
 
     def dont_cache(self, key, creator, *args, **kw):
         return creator()
@@ -466,7 +465,6 @@ endpoint_agatho = (
      'comment': 'my comment',
      'pid': None,
      'uid': '123',
-     'nid': 1,
      'subject': '[empty]'}})
 
 endpoint_report = (

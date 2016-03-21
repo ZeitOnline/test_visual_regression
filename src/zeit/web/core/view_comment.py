@@ -149,14 +149,13 @@ class PostComment(zeit.web.core.view.Base):
                     title='No recommendation could be posted',
                     explanation=('Own comments must not be recommended.'))
 
-        nid = self._nid_by_comment_thread(unique_id)
+        self._ensure_comment_thread(unique_id)
         action_url = self._action_url(action, self.path)
 
         method = 'post'
         data = {'uid': uid}
         recommendations = None
         if action == 'comment' and self.path:
-            data['nid'] = nid
             data['subject'] = '[empty]'
             data['comment'] = comment
             data['pid'] = pid
@@ -272,7 +271,6 @@ class PostComment(zeit.web.core.view.Base):
             'request': {
                 'action': action,
                 'path': self.path,
-                'nid': nid,
                 'pid': pid},
             'response': {
                 'content': content,
@@ -302,26 +300,10 @@ class PostComment(zeit.web.core.view.Base):
             return None, []
         return comment['uid'], filter(None, comment['fans'].split(','))
 
-    def _nid_by_comment_thread(self, unique_id):
-        nid = None
-        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
+    def _ensure_comment_thread(self, unique_id):
+        if zeit.web.core.comments.comment_count(unique_id):
+            return
 
-        if comment_thread:
-            return comment_thread.get('nid')
-        else:
-            comment_thread = self._create_and_load_comment_thread(unique_id)
-
-            if comment_thread:
-                nid = comment_thread.get('nid')
-
-        if not nid:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
-                title='No comment thread',
-                explanation=('No comment thread for {} could be '
-                             'created.').format(unique_id))
-        return nid
-
-    def _create_and_load_comment_thread(self, unique_id):
         content = None
         try:
             content = zeit.cms.interfaces.ICMSContent(unique_id)
@@ -339,15 +321,24 @@ class PostComment(zeit.web.core.view.Base):
             'Content-Type': 'text/xml'}
 
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        error = None
         with zeit.web.core.metrics.timer(
                 'create_thread.community.reponse_time'):
-            response = requests.post(
-                '{}/agatho/commentsection'.format(self.community_host),
-                headers=headers,
-                data=xml_str,
-                timeout=float(conf.get('community_host_timeout_secs', 5)))
-
-        if not response.status_code >= 200 and not response.status_code < 300:
+            try:
+                response = requests.post(
+                    '{}/agatho/commentsection'.format(self.community_host),
+                    headers=headers,
+                    data=xml_str,
+                    timeout=float(conf.get('community_host_timeout_secs', 5)))
+                if not (response.status_code >= 200 and
+                        response.status_code < 300):
+                    error = 'Community returned HTTP {}'.format(
+                        response.status_code)
+            except requests.exceptions.RequestException, err:
+                error = type(err).__name__
+        if error:
+            log.warning(
+                'Could not create commentsection for %s: %s', unique_id, error)
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='Comment Section could not be created',
                 explanation='The comment section for the resource {} '
@@ -356,10 +347,8 @@ class PostComment(zeit.web.core.view.Base):
         self.status.append('A comment section for {} was created'.format(
             unique_id))
 
-        # invalidate comment thread to get the newly created comment section ID
+        # XXX TRASHME together with get_cacheable_thread
         invalidate_comment_thread(unique_id)
-
-        return zeit.web.core.comments.get_cacheable_thread(unique_id)
 
 
 @pyramid.view.view_config(route_name='post_test_comments',
