@@ -444,9 +444,9 @@ scales = {
     'zon-article-large': (820, 462),
     'zon-printbox': (320, 234),
     'zon-printbox-wide': (320, 148),
-    'zon-topic': (980, 418),
     'zon-column': (300, 400),
     'zon-square': (460, 460),
+    'topic': (980, 418),
     'brightcove-still': (580, 326),
     'brightcove-thumbnail': (120, 67),
     'spektrum': (220, 124)
@@ -581,7 +581,7 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
         layout_image['zon-column'].extend(layout_image['leader'])
         layout_image['zon-square'].extend(layout_image['leader'])
         layout_image['zon-blog'].extend(layout_image['leader'])
-        layout_image['zon-topic'].extend(layout_image['leader-fullwidth'])
+        layout_image['topic'].extend(layout_image['leader-fullwidth'])
     except KeyError, e:
         log.warn("Layouts for '%s' could not be extended: %s not found",
                  teaser_layout, e)

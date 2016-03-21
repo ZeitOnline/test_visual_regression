@@ -64,13 +64,6 @@
         default="major minor parquet zmo-parquet ranking spektrum zett author-favourite-content author-articles"
         />
     <layout
-        id="zon-topic"
-        title="Dossier-Teaser"
-        image_pattern="zon-topic"
-        areas="topic topic-variant"
-        default="topic"
-        />
-    <layout
         id="zon-square"
         title="Grafischer Teaser"
         image_pattern="zon-square"
@@ -195,7 +188,14 @@
         image_pattern="zon-large"
         areas="storystream"
         type="storystream"/>
-
+    <!-- Shared teaser formats -->
+    <layout
+        id="topic"
+        title="Dossier-Teaser"
+        image_pattern="topic"
+        areas="topic"
+        default="topic"
+        />
     <!-- Legacy teaser formats -->
     <layout
         id="leader"
