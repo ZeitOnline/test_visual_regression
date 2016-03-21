@@ -220,7 +220,7 @@ class Video(Traversable):
                 pyramid.interfaces.IViewClassifier,
                 request_iface,
                 zope.interface.providedBy(tdict['context'])
-        ), pyramid.interfaces.IView) if name]
+            ), pyramid.interfaces.IView) if name]
         # XXX We assume no video will ever have e.g. `comment-form` as its slug
         if tdict['view_name'] not in view_names:
             tdict['request'].headers['X-SEO-Slug'] = tdict['view_name']
