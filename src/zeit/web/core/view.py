@@ -660,10 +660,6 @@ class CommentMixin(object):
         return self.context.commentSectionEnable is not False
 
     @zeit.web.reify
-    def show_comment_area(self):  # XXX Name clashes with show_commentthread.
-        return self.comments_allowed or self.comment_count
-
-    @zeit.web.reify
     def comment_form(self):
         user = self.request.user
         user_blocked = user.get('blocked')

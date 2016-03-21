@@ -13,7 +13,7 @@
 	</pre>
 	#}
 
-{% if view.show_comment_area %}
+{% if view.show_commentthread %}
 
 {% include "zeit.web.site:templates/inc/comments/premoderation.tpl" %}
 <section class="comment-section" id="comments">
