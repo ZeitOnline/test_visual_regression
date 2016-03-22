@@ -609,11 +609,7 @@ class CommentMixin(object):
         return zeit.web.core.comments.community_maintenance()
 
     def show_replies(self, parent):
-        # Case 1: The request explictly asks for the replies of this comment.
-        if self.request.GET.get('comment_replies') == str(parent['cid']):
-            return True
-
-        # Case 2: The request is a comment permalink, so we need to show the
+        # The request is a comment permalink, so we need to show the
         # replies of the permalinked comment's root comment.
         try:
             cid = int(self.request.GET['cid'])
