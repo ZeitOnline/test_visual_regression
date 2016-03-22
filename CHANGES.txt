@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Make comment thread work again on video pages
 
+- ZON-2492: Nextread without image
+
 - ZON-2933: Put comment thread ESI behind feature toggle
 
 - BUG-378: Remove microdata for AMP nextread

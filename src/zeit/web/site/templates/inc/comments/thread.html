@@ -93,13 +93,12 @@
 		{% endfor %}
 		{% elif comment.replies %}
 
-        {# TODO: Haben wir denn jetzt schon alle geladen (comment.replies) ? #}
         {% for comment in comment.replies[:1] %}
             {% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
         {% endfor %}
 
         {% if comment.sublevel_comment_count > 1 %}
-            <div class="comment__container">
+            <div class="comment__container js-comment-loader">
                 <a href="{{view.content_url}}?cid={{comment.cid}}&comment-replies={{comment.cid}}#cid-{{comment.cid}}" data-url="{{view.content_url}}/comment-replies?cid={{comment.cid}}">
                     <span class="comment-overlay__count">+ {{comment.sublevel_comment_count - 1}}</span>
                     <span class="comment-overlay__cta"> weitere Antworten anzeigen</span>

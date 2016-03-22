@@ -11,6 +11,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     var $comments = $( '#comments' ),
         $commentsBody = $( '#js-comments-body' ),
         $commentForm = $( '#comment-form' ),
+        uid = $commentForm.attr( 'data-uid' ),
         slideDuration = 300,
         inputEvent = ( 'oninput' in document.createElement( 'input' )) ? 'input' : 'keypress',
         sendurl = window.location.href,
@@ -399,55 +400,31 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             .velocity( 'slideUp', slideDuration );
     },
 
-    wrapReplies = function() {
-        var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
-            $target;
-
-        if ( window.location.hash.indexOf( '#cid-' ) === 0 ) {
-            $target = $( window.location.hash );
-        }
-
-        $rootComments.each( function() {
-            var $root = $( this ),
-                $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
-                containsTarget = $answers.length > 1 && $target && $answers.is( $target ),
-                id = 'hide-replies-' + this.id,
-                rewrapper = '' +
-                    '<div id="' + id + '" class="comment__rewrapper js-hide-replies">' +
-                        '<span class="comment__count">− ' + $answers.length + '</span>\n' +
-                        '<span class="comment__cta">Antworten verbergen</span>\n' +
-                    '</div>\n';
-
-            // when deeplinked, prevent collapse of reply thread
-            if ( $answers.length > 1  && !containsTarget ) {
-                $root.next( '.comment--indented' ).find( '.comment__container' ).prepend( rewrapper );
-                coverReply( $answers.eq( 0 ).data({ undo: id }), $answers.length - 1 );
-                $answers.slice( 1 ).hide();
-            }
-        });
-    },
-
     putRewrapperOnReplies = function( $firstReply ) {
-
-        // TODO: das ist auch etwas wackelig
         var $rootComment = $firstReply.prev( '.comment' ),
-            rootCommentId = $rootComment.attr( 'id' ),
-            // TODO: wird die ID später wieder zurechtgeparsed? Dann lieber Original-ID als Data-Attribut verwenden?
-            rewrapperId = 'hide-replies-' + rootCommentId,
-            $answers = $rootComment.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
-            // TODO: Wo kam der Rewrapper bisher her? Kann er via CSS immer sichtbar sein?
+            rewrapperId = $firstReply.data( 'rewrapper-id' ),
             rewrapper = '' +
-            '<div id="' + rewrapperId + '" class="comment__rewrapper js-hide-replies" style="display:block;">' +
-                '<span class="comment__count">− ' + $answers.length + '</span>\n' +
+            '<div id="' + rewrapperId + '" class="comment__rewrapper comment__rewrapper--loading js-hide-replies">' +
+                '<span class="comment__count"></span>\n' +
                 '<span class="comment__cta">Antworten verbergen</span>\n' +
             '</div>\n';
 
         $firstReply.find( '.comment__container' ).prepend( rewrapper );
     },
 
-    wrapRepliesNew = function() {
-        // TODO: ggf target, deeplinks
-        // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
+    updateRewrapperOnReplies = function( $firstReply ) {
+        var $rootComment = $firstReply.prev( '.comment' ),
+            rewrapperId = $firstReply.data( 'rewrapper-id' ),
+            $answers = $rootComment.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
+            $rewrapper = $( '#' + rewrapperId );
+
+        $rewrapper.find( '.comment__count' ).eq( 0 ).text( '− ' + $answers.length );
+        $rewrapper.removeClass( 'comment__rewrapper--loading' );
+
+    },
+
+    wrapReplies = function() {
+        // TODO: Target + Deeplinks testen
         var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
             $target;
 
@@ -458,8 +435,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
         $rootComments.each( function() {
             var $root = $( this ),
-                // OPTIMIZE: mit JS Präfix versehen? Eine Umstrukturierung des HTML würde alles kaputtmachen.
-                $replyLinkContainer = $root.nextUntil( '.js-comment-toplevel', '.comment__container' ),
+                $replyLinkContainer = $root.nextUntil( '.js-comment-toplevel', '.js-comment-loader' ),
                 $answers,
                 id,
                 replyLoadLink,
@@ -475,7 +451,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             }
 
             $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' );
-            // TODO: wozu das? wozu undo?
             id = 'hide-replies-' + this.id;
             replyLoadLink = $replyLinkContainer.find( 'a' );
             replyLoadUrl = replyLoadLink.data( 'url' );
@@ -493,7 +468,11 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                     '</div>\n' +
                 '</div>\n';
 
-            $answers.eq( 0 ).data({ undo: id }).addClass( 'comment--wrapped' )
+            $answers.eq( 0 )
+                .data({
+                    'reply-count': replyCountInteger,
+                    'rewrapper-id': id })
+                .addClass( 'comment--wrapped' )
                 .find( '.comment__body' )
                 .append( overlayHTML );
 
@@ -520,11 +499,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             url = $wrapped.data( 'url' ),
             fallbackUrl = $wrapped.data( 'fallbackurl' ),
             $firstReply = $wrapped.closest( 'article.comment' ),
-            // TODO: Das sollte von Anfang an ein Data-Attribut am RootComment sein
-            replyCountElement = $firstReply.find( '.comment-overlay__count' ),
-            replyCountString = replyCountElement.eq( 0 ).text().replace( '+ ', '' ),
-            replyCountInteger = parseInt( replyCountString, 10 ),
+            replyCountInteger = parseInt( $firstReply.data( 'reply-count' ), 10 ),
             placeholderWording = ( replyCountInteger === 1 ) ? 'Kommentar wird geladen.' : 'Kommentare werden geladen.',
+
             placeholderHTML = '' +
                 '<article class="comment comment--indented js-comment-placeholder">' +
                     '<div class="comment__container comment__container--placeholder">' +
@@ -534,7 +511,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
         e.preventDefault();
 
-        // OPTIMIZE: weniger an konkrete (CSS) Klassen binden?
         // OPTIMIZE: Netter mit Promises arbeiten als dem Callback-vs-repliesLoaded-Quatsch?
         $.ajax({
             url: url,
@@ -543,18 +519,13 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 repliesLoaded = true;
                 $firstReply.nextUntil( '.js-comment-toplevel', '.js-comment-placeholder' ).remove();
                 $firstReply.after( response );
-                putRewrapperOnReplies( $firstReply );
 
+                updateRewrapperOnReplies( $firstReply );
                 adjustRecommendationLinks();
 
-                // TODO: "uid" global setzen für dieses Script !?
-                var uid = $commentForm.attr( 'data-uid' );
-
-                if ( uid ) {
-                    // add community frontend moderation
-                    if ( $commentForm.data( 'mod' ) === 'mod' ) {
-                        $firstReply.nextUntil( '.js-comment-toplevel', '.comment' ).each( addModeration );
-                    }
+                // add community frontend moderation
+                if ( uid && $commentForm.data( 'mod' ) === 'mod' ) {
+                    $firstReply.nextUntil( '.js-comment-toplevel', '.comment' ).each( addModeration );
                 }
 
             },
@@ -565,7 +536,10 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             }
         });
 
-        // without the js-load-comment-replies class, we toggle existing replies (instead of loading from server)
+        putRewrapperOnReplies( $firstReply );
+
+        // without the js-load-comment-replies class, we toggle existing
+        // replies (instead of loading from server)
         $wrapped.removeClass( 'js-load-comment-replies' );
 
         if ( !repliesLoaded ) {
@@ -576,7 +550,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
     showReplies = function( e ) {
         var $wrapped = $( this ),
-            selector = '#' + $wrapped.data( 'undo' ),
+            selector = '#' + $wrapped.data( 'rewrapper-id' ),
             $link = $( selector ),
             $repliesToShow;
 
@@ -585,7 +559,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $wrapped.removeClass( 'comment--wrapped' );
         // get other replies, filter to remove ads from result
         $repliesToShow = $wrapped.nextUntil( '.js-comment-toplevel', '.comment--indented' );
-        // for performance reasons, we only slide the first items and siply show the other ones
+        // for performance reasons, we only slide the first items and simply show the other ones
         $repliesToShow.slice( 0, 5 ).velocity( 'slideDown', {
             'duration': slideDuration,
             'complete': function() {
@@ -646,7 +620,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
     adjustRecommendationLinks = function() {
 
-        var uid = $commentForm.attr( 'data-uid' );
         if ( uid ) {
             // highlight recommended comments for logged in user
             $commentsBody.find( '.js-recommend-comment' ).each( function() {
@@ -678,22 +651,17 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             return;
         }
 
-        var uid = $commentForm.attr( 'data-uid' );
-
         // disable submit buttons of required fields
         $comments.find( '.js-required' ).each( enableForm );
 
         // collapse consecutive replies
-        wrapRepliesNew();
+        wrapReplies();
 
         adjustRecommendationLinks();
 
-        if ( uid ) {
-
-            // add community frontend moderation
-            if ( $commentForm.data( 'mod' ) === 'mod' ) {
-                $commentsBody.find( '.comment' ).each( addModeration );
-            }
+        // add community frontend moderation
+        if ( uid  && $commentForm.data( 'mod' ) === 'mod' ) {
+            $commentsBody.find( '.comment' ).each( addModeration );
         }
 
         // register event handlers

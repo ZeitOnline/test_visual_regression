@@ -46,7 +46,7 @@
                     {% set byline = teaser | get_byline %}
                     {% if byline | length %}
                     <span class="{{ self.layout() }}__byline">
-                        {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
+                        {%- include 'zeit.web.core:templates/inc/meta/byline.html' -%}
                     </span>
                     {% endif %}
                 {% endblock teaser_byline %}
