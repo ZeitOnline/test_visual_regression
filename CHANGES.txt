@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Make comment thread work again on video pages
 
+- ZON-2933: Put comment thread ESI behind feature toggle
+
 
 2.65 (2016-03-21)
 -----------------
