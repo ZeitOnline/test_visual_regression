@@ -18,15 +18,19 @@
 {% include "zeit.web.site:templates/inc/comments/premoderation.tpl" %}
 <section class="comment-section" id="comments">
 	{% set query = '?' + request.query_string if request.query_string else '' %}
-	{{ lama.insert_esi('{}/comment-thread{}'.format(view.content_url, query), 'Ein technischer Fehler ist aufgetreten. Der Kommentarbereich konnte nicht geladen werden. Bitte entschuldigen Sie diese Störung.') }}
+	{% if toggles('comment_thread_via_esi') %}
+		{{ lama.insert_esi('{}/comment-thread{}'.format(view.content_url, query), 'Ein technischer Fehler ist aufgetreten. Der Kommentarbereich konnte nicht geladen werden. Bitte entschuldigen Sie diese Störung.') }}
+	{% else %}
+		{% include "zeit.web.site:templates/inc/comments/thread.html" %}
+	{% endif %}
 
 	{% if view.request.GET.action == 'report' %}
 		{% set esi_source = '{}/report-form?pid={}'.format(view.content_url, view.request.GET.pid)  %}
 	{% else %}
 		{% if view.request.GET.error %}
-		    {% set esi_source = '{}/comment-form?error={}'.format(view.content_url, view.request.GET.error) %}
+			{% set esi_source = '{}/comment-form?error={}'.format(view.content_url, view.request.GET.error) %}
 		{% else %}
-		    {% set esi_source = '{}/comment-form?pid={}'.format(view.content_url, view.request.GET.pid) %}
+			{% set esi_source = '{}/comment-form?pid={}'.format(view.content_url, view.request.GET.pid) %}
 		{% endif %}
 	{% endif %}
 	{{ lama.insert_esi(esi_source, 'Kommentarformular konnte nicht geladen werden') }}

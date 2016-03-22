@@ -119,22 +119,30 @@ def make_article_blocks_work_with_infobox_content(context):
 class Infobox(Block):
 
     def __init__(self, model_block):
-        self.contents = []
-        infobox = model_block.references
-        if not zeit.content.infobox.interfaces.IInfobox.providedBy(infobox):
-            return
+        self.context = model_block.references
         self.layout = model_block.layout
+
+    @property
+    def title(self):
         try:
-            self.title = infobox.supertitle
+            return self.context.supertitle
         except:
-            self.title = 'infobox'
-        for block in infobox.xml.xpath('block'):
+            return 'infobox'
+
+    @property
+    def contents(self):
+        if not zeit.content.infobox.interfaces.IInfobox.providedBy(
+                self.context):
+            return []
+        result = []
+        for block in self.context.xml.xpath('block'):
             text = block.find('text')
             title = block.find('title')
-            division = InfoboxDivision(infobox, text)
-            self.contents.append(
+            division = InfoboxDivision(self.context, text)
+            result.append(
                 (title, [zeit.web.core.interfaces.IFrontendBlock(
                     b, None) for b in division.values()]))
+        return result
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
@@ -220,6 +228,8 @@ class Image(zeit.web.core.image.BaseImage):
     def __new__(cls, model_block):
         if getattr(model_block, 'is_empty', False):
             return
+        # XXX Should we use an actual attribute of ImageLayout instead of
+        # a heuristic look at its ID?
         if not cls.wanted_layout(getattr(model_block.layout, 'id', None)):
             return
 
@@ -264,7 +274,7 @@ class Image(zeit.web.core.image.BaseImage):
 
     @classmethod
     def wanted_layout(cls, layout):
-        return layout != 'zmo-xl-header'
+        return 'header' not in (layout or '')
 
     def __init__(self, model_block):
         self.layout = layout = model_block.layout
@@ -308,7 +318,7 @@ class HeaderImage(Image):
 
     @classmethod
     def wanted_layout(cls, layout):
-        return layout == 'zmo-xl-header'
+        return 'header' in (layout or '')
 
 
 class HeaderImageStandard(HeaderImage):
@@ -365,6 +375,7 @@ class BaseVideo(Block):
         self.renditions = video.renditions
         self.video_still = video.video_still
         self.title = video.title
+        self.supertitle = video.supertitle
         self.description = video.subtitle
         self.id = video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
@@ -383,7 +394,7 @@ class BaseVideo(Block):
 class Video(BaseVideo):
 
     def __new__(cls, model_block):
-        if model_block.layout == 'zmo-xl-header':
+        if 'header' in (model_block.layout or ''):
             return
         return super(Video, cls).__new__(cls, model_block)
 
@@ -396,7 +407,7 @@ class Video(BaseVideo):
 class HeaderVideo(BaseVideo):
 
     def __new__(cls, model_block):
-        if model_block.layout != 'zmo-xl-header':
+        if 'header' not in (model_block.layout or ''):
             return
         return super(HeaderVideo, cls).__new__(cls, model_block)
 

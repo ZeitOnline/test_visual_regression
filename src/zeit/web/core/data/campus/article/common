@@ -12,19 +12,13 @@
     <author href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml" publication-date="" expires="">
       <display_name>Wenke Husmann</display_name>
     </author>
-    <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00">
+    <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg" align="left" publication-date="" expires="">
       <bu>Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil "Die Schlacht der fünf Heere"</bu>
       <copyright>© Warner Bros.</copyright>
     </image>
     <references>
     </references>
-    <topic xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/thema/test" year="2008" issue="26" ressort="Administratives" contenttype="centerpage-2009" publication-date="" expires="">
-        <supertitle xsi:nil="true"/>
-        <title xsi:nil="true"/>
-        <text xsi:nil="true"/>
-        <description xsi:nil="true"/>
-        <byline xsi:nil="true"/>
-        <breadcrumb_title xsi:nil="true"/>
+    <topic type="intern" href="http://xml.zeit.de/thema/test">
         <label>Science</label>
     </topic>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
@@ -114,7 +108,7 @@
     <title>Geht's noch größer? </title>
     <subtitle>Der letzte Herr-der-Ringe-Hobbit-Teil läuft an. Er ist wieder ein bisschen bombastischer. Was, fragt sich der ermattende Kinobesucher, kommt eigentlich noch auf uns zu?</subtitle>
     <division xmlns:ns0="http://namespaces.zeit.de/CMS/cp" type="page">
-      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00" layout="large" is_empty="False" title_local="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" alt_local="Kultur, &quot;Der Hobbit&quot;, Film, Peter Jackson, Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott" title="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" alt="Kultur, &quot;Der Hobbit&quot;, Film, Peter Jackson, Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott">
+      <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg" align="left" publication-date="" expires="" layout="large" is_empty="False" title="Handlung" alt="Kultur">
         <bu>Bernie Sanders kommt Hillary Clinton gefährlich nahe. Wenn der Sozialist sie weiter bedrängt, könnte sie nach links ausscheren.</bu>
         <copyright>© Warner Bros.</copyright>
       </image>

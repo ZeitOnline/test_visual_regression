@@ -1,9 +1,9 @@
 {% extends "zeit.web.site:templates/content.html" %}
-{% import "zeit.web.core:templates/macros/article_macro.tpl" as blocks %}
 
 {% block article_pages %}
     <div class="article-page">
-        {{ blocks.inlinegallery(view.images, view, wrapper_class='gallery') }}
+        {% set images = view.images %}
+        {% include "zeit.web.core:templates/inc/article/gallery.html" %}
     </div>
     <div class="article-page">
         <div class="gallery__description article__item">

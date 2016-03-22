@@ -1,5 +1,4 @@
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
-{% extends 'zeit.web.core:templates/macros/article_macro.tpl' %}
 
 {% macro place(item) -%}
     {{ lama.adplace(item, view) }}
@@ -159,7 +158,7 @@
 
 {% macro headerimagestandard(obj) -%}
     <div class="article__head__image">
-        {{ image(obj) }}
+        {% include "zeit.web.magazin:templates/inc/article/header-image.html" with context %}
     </div>
 {%- endmacro %}
 
@@ -175,7 +174,7 @@
 {%- endmacro %}
 
 {% macro video(obj) -%}
-    {% if obj.id and obj.format != 'zmo-xl-header' -%}
+    {% if obj.id and 'header' not in obj.format | default('') -%}
         <figure class="
         {% if obj.format == 'zmo-small-left' or obj.format == 'small' %}
             figure-stamp
@@ -307,3 +306,9 @@
         {%- endfor -%}
     {%- endif -%}
 {% endmacro %}
+
+{% macro inlinegallery(block) -%}
+    {% include 'zeit.web.core:templates/inc/blocks/inlinegallery.html' %}
+{%- endmacro %}
+
+{% macro no_block(block) %}{% endmacro %}

@@ -1,0 +1,120 @@
+.toolbox
+	margin: remify(20px 0 0)
+
+	&__headline
+		+padded
+		@extend %font-beckett
+		color: $color-text
+		font-size: em(28px)
+		margin: 0 0 -0.6em
+
+	&__list
+		background-color: $color-tools-primary
+		list-style: none
+		margin: 0
+		padding: remify(30px 0 0)
+
+	&__item
+		margin: 1px 0 0
+		padding: 0
+
+	&__link
+		background-color: #fff
+		color: $color-tools-secondary
+		display: block
+		height: 100%
+		padding: remify(20px $page-padding--small)
+		+on-interaction
+			color: $zco-charcoal
+
+	&__title
+		@extend %font-beckett
+		font-size: em(28px)
+		margin: remify(0 0 9px)
+
+	&__text,
+	&__cta,
+	&__sit-link
+		font-size: em(16px)
+		line-height: 16/20
+
+	&__text
+		display: inline
+		margin: 0
+
+	&__cta
+		display: none
+
+	&__footer
+		background-color: $color-tools-primary
+	&__sit-link
+		+font-smoothing
+		background-color: rgba(0, 0, 0, .1)
+		color: #fff
+		display: block
+		font-weight: bold
+		padding: remify(15px 0)
+		text-align: center
+		+on-interaction
+			color: $zco-charcoal
+
+	&__arrow
+		height: remify(15px)
+		width: remify(20px)
+		margin-left: remify(4px)
+		vertical-align: remify(-2px)
+
++respond-min($break-tablet-min)
+	.toolbox
+		&__headline
+			font-size: em(42px)
+
+		&__title
+			min-height: 1.9em // = 2 lines
+
+		&__list
+			+display-flex()
+			+justify-content(space-between)
+			padding: remify(40px) $page-padding/2
+
+		&__item
+			margin: 0
+			padding: 0 $page-padding/2
+			width: 33.33%
+
+		&__link
+			padding-left: remify(10px)
+			padding-right: remify(10px)
+			+on-interaction
+				+transform(translateY(-5px))
+				box-shadow: 0px 11px 0px -6px rgba(0, 0, 0, .1)
+
+		&__text
+			display: block
+			font-size: em(14px)
+			margin-bottom: remify(30px)
+
+		&__cta
+			display: inline
+
+		&__sit-link
+			padding: remify(25px 0)
+
++respond-min($break-desktop-min)
+	.toolbox
+		&__headline
+			font-size: em(64px)
+
+		&__list
+			padding-top: remify(60px)
+
+		&__link
+			padding-left: remify(20px)
+			padding-right: remify(20px)
+
+		&__title
+			font-size: em(42px)
+
+		&__text
+			font-size: em(16px)
+			margin-bottom: remify(20px)

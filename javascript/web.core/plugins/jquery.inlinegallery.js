@@ -82,7 +82,7 @@
             var gallery = $( this ),
                 galleryWidth = gallery.width(),
                 figures = gallery.find( options.slideSelector ),
-                buttonTemplates = $( '.inline-gallery-icon-templates' ).first().html(),
+                buttonTemplates = $( '.gallery-icon-templates' ).first().html(),
                 backButton = $( buttonTemplates ).filter( '.bx-zone-prev' ),
                 nextButton = $( buttonTemplates ).filter( '.bx-zone-next' ),
                 buttons = backButton.add( nextButton ),
@@ -185,11 +185,11 @@
                     backButton.insertAfter( gallery ).on( 'click', function() { slider.goToPrevSlide(); } );
 
                     /* add icons to existing gallery buttons */
-                    $( '.bx-next' ).addClass( 'icon-pfeil-rechts' )
-                        .wrapInner( '<span class="bx-icon-description"></span>' )
+                    $( '.bx-next' )
+                        .wrapInner( '<span class="visually-hidden"></span>' )
                         .prepend( nextButton.find( 'svg' ).clone() );
-                    $( '.bx-prev' ).addClass( 'icon-pfeil-links' )
-                        .wrapInner( '<span class="bx-icon-description"></span>' )
+                    $( '.bx-prev' )
+                        .wrapInner( '<span class="visually-hidden"></span>' )
                         .prepend( backButton.find( 'svg' ).clone() );
 
                     sliderViewport.parent().addClass( 'bx-wrapper--no-touch' );

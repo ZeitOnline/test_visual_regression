@@ -38,6 +38,7 @@ require([
     'web.core/plugins/jquery.animatescroll',
     'web.core/plugins/jquery.toggleOnClick',
     'web.core/plugins/jquery.infobox',
+    'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
@@ -52,6 +53,10 @@ require([
             main.find( '.article-toc' ).toggleOnClick({
                 toggleElement: '.article-toc__seperator'
             });
+
+        /* falls through */
+        case 'gallery':
+            main.find( '.js-gallery' ).inlinegallery();
     }
 
 });
