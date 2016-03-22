@@ -1,8 +1,15 @@
-.cp-area
+.cp-area,
+.cp-region
 	+pie-clearfix
 
 +respond-min($break-tablet-min)
+	.cp-region
+		&--duo
+			padding: $cp-padding
+
 	.cp-area
-		&--duo,
 		&--trio
 			padding: $cp-padding
+		&--duo
+			float: left
+			width: 50%

@@ -69,26 +69,33 @@
   <body xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <supertitle>ZCO</supertitle>
     <title>square</title>
+
     <cluster area="id-41a8299d-b569-4c42-b713-db5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
       <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
         </container>
+      </region>
+      <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
         </container>
       </region>
     </cluster>
+
     <cluster area="id-41a8299d-b569-4c42-b713-db5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
       <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
         </container>
+      </region>
+      <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
         </container>
       </region>
     </cluster>
+
   </body>
   <feed xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></feed>
 </centerpage>
