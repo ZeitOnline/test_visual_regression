@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - BUG-378: Remove microdata for AMP nextread
 
+- BUG-380: Harmonize publisher nextread tracking code
+
 
 2.65 (2016-03-21)
 -----------------
