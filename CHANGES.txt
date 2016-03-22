@@ -4,7 +4,13 @@ Change log for zeit.web
 2.66 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Make comment thread work again on video pages
+
+- ZON-2933: Put comment thread ESI behind feature toggle
+
+- BUG-378: Remove microdata for AMP nextread
+
+- BUG-380: Harmonize publisher nextread tracking code
 
 
 2.65 (2016-03-21)

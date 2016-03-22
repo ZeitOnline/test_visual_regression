@@ -1,41 +1,31 @@
 {# AMP nextread #}
 {% set image = get_image(module, teaser, fallback=False) %}
 {% set modifier = 'with-image' if image and not is_image_expired(image) else 'no-image' %}
-<article class="nextread nextread--{{ modifier }}" itemscope itemtype="http://schema.org/Article">
-	{% include "zeit.web.core:templates/amp/article/publisher.html" %}
-	<a class="nextread__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}" itemprop="mainEntityOfPage">
+<aside class="nextread nextread--{{ modifier }}">
+	<a class="nextread__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}">
 		<div class="nextread__lead article__item">{{ module.lead or 'Lesen Sie jetzt' }}</div>
 
 		{% include "zeit.web.core:templates/amp/asset/image_nextread.html" %}
 
 		<div class="nextread__container article__item">
-			<h2 class="nextread__heading" itemprop="headline">
+			<h2 class="nextread__heading">
 				<span class="nextread__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
 				{%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">: </span>{% endif -%}
 				<span class="nextread__title">{{ teaser.teaserTitle or teaser.title }}</span>
 			</h2>
 			<div class="nextread__metadata">
-				{% set byline = teaser | get_byline('author') %}
+				{% set byline = teaser | get_byline %}
 				{% if byline | length -%}
 				<span class="nextread__byline">
 					{% include 'zeit.web.core:templates/inc/meta/byline.html' %}
 				</span>
-				{% else -%}
-				<em itemprop="author" itemscope itemtype="http://schema.org/Person">
-					<meta itemprop="name" content="{% if teaser.product %}{{ teaser.product.title }}{% else %}ZEIT ONLINE{% endif %}">
-				</em>
-				{% endif -%}
-
-				{% set time = teaser | mod_date %}
-				{% if time -%}
-				<time class="nextread__date" itemprop="dateModified" datetime="{{ teaser | mod_date | format_date('iso8601') }}"></time>
 				{% endif -%}
 
 				{% set time = teaser | release_date %}
 				{% if time -%}
-				<time class="nextread__date" itemprop="datePublished" datetime="{{ teaser | release_date | format_date('iso8601') }}">
+				<span class="nextread__date">
 					{{- time | format_timedelta(days=3, absolute=True) | title -}}
-				</time>
+				</span>
 				{% endif -%}
 
 				{% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
@@ -47,4 +37,4 @@
 			</div>
 		</div>
 	</a>
-</article>
+</aside>
