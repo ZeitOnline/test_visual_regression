@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2933: Put comment thread ESI behind feature toggle
 
+- BUG-378: Remove microdata for AMP nextread
+
 
 2.65 (2016-03-21)
 -----------------
