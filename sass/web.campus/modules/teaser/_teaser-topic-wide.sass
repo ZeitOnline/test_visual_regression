@@ -47,10 +47,18 @@
 	.teaser-topic-wide
 		&__title
 			font-size: remify(42px)
+			border-left: none
+
+		&__kicker
+			border-left: none
+
+		&__combined-link
+			margin-left: 0
 
 		&:after
 			margin: remify(26px) 0 remify(14px)
 			+transform(translateX(-110%))
+
 
 +respond-min($break-desktop-min)
 	.teaser-topic-wide
