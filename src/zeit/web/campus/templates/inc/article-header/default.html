@@ -55,7 +55,7 @@
             {% set byline = view.context | get_byline('main') -%}
             {% if byline | length -%}
             <div class="article-header__byline">
-                {%- include 'zeit.web.site:templates/inc/meta/byline.tpl' -%}
+                {%- include 'zeit.web.core:templates/inc/meta/byline.html' -%}
             </div>
             {% endif -%}
         {% endblock -%}

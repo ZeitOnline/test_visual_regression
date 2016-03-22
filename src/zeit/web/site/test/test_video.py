@@ -98,9 +98,9 @@ def test_video_page_should_output_comment_count_number(
     assert 'bar' in doc.xpath('//span[@itemprop="commentCount"]/text()')[0]
 
 
-def test_video_page_should_include_comment_section(testbrowser):
-    doc = testbrowser('/zeit-online/video/3537342483001').document
-    assert doc.xpath('//section[@class="comment-section" and @id="comments"]')
+def test_video_comment_thread_should_be_rendered(testbrowser):
+    browser = testbrowser('/zeit-online/video/3537342483001/comment-thread')
+    assert len(browser.cssselect('.comment-section__head')) == 1
 
 
 def test_video_comment_form_should_be_rendered(testbrowser):

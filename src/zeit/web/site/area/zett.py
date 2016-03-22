@@ -18,8 +18,8 @@ class ImageGroup(zeit.web.core.image.LocalImageGroup):
     def __init__(self, context):
         super(ImageGroup, self).__init__(context)
         self.image_url = context.image_url
-        self.uniqueId = 'http://xml.zeit.de/zett-image{}'.format(
-            context.image_url.replace('http://ze.tt', ''))
+        self.uniqueId = u'http://xml.zeit.de/zett-image{}'.format(
+            context.image_url.replace(u'http://ze.tt', u''))
 
 
 @grokcore.component.implementer(zeit.web.site.area.rss.IRSSLink)
