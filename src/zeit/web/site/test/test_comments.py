@@ -193,78 +193,76 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
         'comment section template must return an empty document')
 
 
-def test_comment_reply_threads_loads_and_toggles(selenium_driver, testserver):
+def test_comment_reply_thread_loads_and_toggles(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/article/02' % testserver.url)
     select = driver.find_elements_by_css_selector
 
-    # Abzudecken:
-    # - keine Antwort -> kein Link
-    # - eine Antwort -> kein Link
-    # - mehrere Antworten
-    #   -> nur erste gezeigt, und zwar überdeckt
-    #   -> zweite ist versteckt
-    #   -> onClick: zweite wird geladen, und letzte auch
-    #   -> onClick 2x: versteckt und zeigt, aber immer vorhanden
-    # - noJS Seite aufrufen: alle Antworten gleich sichtbar
-    # - Deeplink aufrufen: Antwort gleich sichtbar
-
-    first_comment_id = 'cid-5122147'
-    first_reply_id = 'cid-5122166'
-    second_reply_id = 'cid-5122171'
-    last_reply_id = 'cid-5125875'
+    first_comment_id = 'cid-5122059'
+    first_reply_id = 'cid-5122548'
+    second_reply_id = 'cid-5122767'
+    last_reply_id = 'cid-5122784'
 
     assert len(select('#{}'.format(first_comment_id))) == 1
     assert len(select('#{}'.format(first_reply_id))) == 1
     assert len(select('#{}'.format(second_reply_id))) == 0
     assert len(select('#{}'.format(last_reply_id))) == 0
 
-
-def test_comment_reply_threads_wraps_on_load_and_toggles_on_click(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get(
-        '%s/zeit-online/article/02?comment_replies=5122059' % testserver.url)
-
-    wrapped_threads = driver.find_elements_by_css_selector('.comment--wrapped')
-    assert len(wrapped_threads) == 1
-
-    hidden_reply = driver.find_element_by_id('cid-5122767')
-
-    try:
-        WebDriverWait(driver, 1).until(
-            expected_conditions.invisibility_of_element_located(
-                (By.ID, 'cid-5122767')))
-    except TimeoutException:
-        assert False, 'Comment must be hidden initially'
-
-    comment_count_overlay = driver.find_element_by_class_name(
-        'comment-overlay__count')
-    assert comment_count_overlay.text == '+ 2'
-
-    wrapped_threads[0].click()
-    assert len(driver.find_elements_by_css_selector('.comment--wrapped')) == 0
-    assert hidden_reply.is_displayed()
-
-    toggle = driver.find_element_by_id('hide-replies-cid-5122059')
+    # kann schlecht per ID angesprochen werden .. oder ahref selektieren?
+    toggle = select('.js-load-comment-replies')[0]
     toggle.click()
+    try:
+        WebDriverWait(driver, 1).until(
+            expected_conditions.visibility_of_element_located(
+                (By.ID, second_reply_id)),
+            expected_conditions.visibility_of_element_located(
+                (By.ID, last_reply_id)))
+    except TimeoutException:
+        assert False, 'Click must load comment reply'
 
+    toggle = select('.js-hide-replies')[0]
+    toggle.click()
     try:
         WebDriverWait(driver, 1).until(
             expected_conditions.invisibility_of_element_located(
-                (By.ID, 'cid-5122767')))
+                (By.ID, second_reply_id)),
+            expected_conditions.invisibility_of_element_located(
+                (By.ID, last_reply_id)))
     except TimeoutException:
         assert False, 'Click must hide comment reply'
 
+    toggle = select('.comment-overlay')[0]
+    toggle.click()
+    try:
+        WebDriverWait(driver, 1).until(
+            expected_conditions.visibility_of_element_located(
+                (By.ID, second_reply_id)),
+            expected_conditions.visibility_of_element_located(
+                (By.ID, last_reply_id)))
+    except TimeoutException:
+        assert False, 'Click must show comment reply'
 
-def test_comment_reply_thread_must_not_wrap_if_deeplinked(
-        selenium_driver, testserver, mockserver):
+
+# needs selenium because of esi include
+def test_comment_reply_thread_loads_with_deeplink(selenium_driver, testserver):
+    last_reply_id = '5122784'
     driver = selenium_driver
-    # Force page load even if another test has left the browser on _this_ page.
-    driver.get('/zeit-online/slenderized-index')
     driver.get(
-        '%s/zeit-online/article/02?cid=5122767#cid-5122767' % testserver.url)
-    assert driver.find_element_by_id('cid-5122767').is_displayed()
+        '{}/zeit-online/article/02?cid={}'
+        .format(testserver.url, last_reply_id))
+    select = driver.find_elements_by_css_selector
+    assert len(select('#cid-{}'.format(last_reply_id))) == 1
+
+
+# needs selenium because of esi include
+def test_comment_reply_thread_loads_with_nojs(selenium_driver, testserver):
+    second_reply_id = '5122767'
+    driver = selenium_driver
+    driver.get(
+        '{}/zeit-online/article/02?cid={}&comment-replies={}'
+        .format(testserver.url, second_reply_id, second_reply_id))
+    select = driver.find_elements_by_css_selector
+    assert len(select('#cid-{}'.format(second_reply_id))) == 1
 
 
 def test_comment_actions_should_link_to_article(testbrowser):
