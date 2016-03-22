@@ -136,16 +136,6 @@ def test_comment_filter_works_as_expected(testbrowser):
     assert len(comments) == 4
 
 
-def test_comment_in_reply_to_shows_origin(testbrowser):
-    browser = testbrowser(
-        '/zeit-online/article/01/comment-thread?comment_replies=2968470')
-    answers = browser.cssselect('.comment--indented')
-    origins = browser.cssselect('.comment__origin')
-    link = browser.cssselect('#cid-2968920 .comment__origin')[0]
-    assert len(answers) == len(origins)
-    assert link.text_content().strip() == 'Antwort auf #1 von Skarsgard'
-
-
 def test_comment_author_roles_should_be_displayed(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     comment_author = browser.document.get_element_by_id('cid-2968470')
@@ -256,11 +246,12 @@ def test_comment_reply_thread_loads_with_deeplink(selenium_driver, testserver):
 
 # needs selenium because of esi include
 def test_comment_reply_thread_loads_with_nojs(selenium_driver, testserver):
+    first_reply_id = '5122548'
     second_reply_id = '5122767'
     driver = selenium_driver
     driver.get(
-        '{}/zeit-online/article/02?cid={}&comment-replies={}'
-        .format(testserver.url, second_reply_id, second_reply_id))
+        '{}/zeit-online/article/02?cid={}'
+        .format(testserver.url, first_reply_id))
     select = driver.find_elements_by_css_selector
     assert len(select('#cid-{}'.format(second_reply_id))) == 1
 
