@@ -93,7 +93,6 @@
 		{% endfor %}
 		{% elif comment.replies %}
 
-        {# TODO: Haben wir denn jetzt schon alle geladen (comment.replies) ? #}
         {% for comment in comment.replies[:1] %}
             {% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
         {% endfor %}
