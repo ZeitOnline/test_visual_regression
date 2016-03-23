@@ -1,0 +1,30 @@
+.gallery
+	+unpadded
+	background-color: $grey--light
+	margin-bottom: $compact
+	margin-top: $compact
+	padding: 0 0 $small
+	+respond-min($break-1)
+		margin-bottom: $big
+		margin-top: $big
+		padding-bottom: $compact
+		padding-top: $compact
+	+respond-min($break-3)
+		margin-left: -($page-padding+$gutter/2)
+		margin-right: -($page-padding+$gutter/2)
+		padding-bottom: $medium
+		padding-top: $medium
+
+	&-container
+		margin: 0 auto
+		max-width: remify(880px)
+
+	&__media-container
+		overflow: hidden
+
+	&__description
+		margin-bottom: $compact
+
+	&__info
+		margin: 0 auto
+		max-width: em($article-content-max-width)

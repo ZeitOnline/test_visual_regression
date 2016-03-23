@@ -7,12 +7,13 @@ import zeit.web.core.interfaces
 import zeit.web.core.session
 
 
-def test_stores_session_data_in_cache(testbrowser, testserver, sso_keypair):
+def test_stores_session_data_in_cache(testbrowser, sso_keypair):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['sso_key'] = sso_keypair['public']
     sso_cookie = jwt.encode(
         {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
-    testbrowser.cookies.forURL(testserver.url)['my_sso_cookie'] = sso_cookie
+    testbrowser.cookies.forURL(
+        'http://localhost')['my_sso_cookie'] = sso_cookie
     testbrowser.open('/login-state')
     data = SESSION_CACHE.get(sso_cookie)
     assert 'user' in data

@@ -1,4 +1,4 @@
-{% set atom = module | first_child %}
+{% set atom = module | first_child %}
 {% set blockname = 'storystream-atom' %}
 <{{ atom_tag or 'div' }} class="{{ blockname }}">
 	<div class="{{ blockname }}__container">

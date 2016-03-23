@@ -54,10 +54,10 @@ def test_campus_teaser_wide_small_has_correct_structure(testbrowser):
 
     assert len(select('.teaser-wide-small')) == 3
     assert len(select('.teaser-wide-small__metadata')) == 3
-    assert len(select('.teaser-wide-small__byline')) == 2
+    assert len(select('.teaser-wide-small__byline')) == 3
     assert len(select('.teaser-wide-small__content')) == 0
 
-    byline = select('.teaser-wide-small__byline')[1]
+    byline = select('.teaser-wide-small__byline')[2]
     byline_text = re.sub(' +', ' ', byline.text.strip())
     assert byline_text == 'Von Viola Diem'
 
@@ -66,7 +66,6 @@ def test_campus_teaser_wide_large_has_correct_structure(testbrowser):
     select = testbrowser('/campus/centerpage/teaser-wide-large').cssselect
 
     assert len(select('.teaser-wide-large')) == 2
-
     assert len(select(
         '.teaser-wide-large .teaser-wide-large__heading '
         '.teaser-wide-large__kicker')) == 2
@@ -75,7 +74,7 @@ def test_campus_teaser_wide_large_has_correct_structure(testbrowser):
         '.teaser-wide-large__title')) == 2
 
     assert len(select('.teaser-wide-large__metadata')) == 2
-    assert len(select('.teaser-wide-large__byline')) == 1
+    assert len(select('.teaser-wide-large__byline')) == 2
     assert len(select('.teaser-wide-large__content')) == 0
 
 
@@ -98,3 +97,27 @@ def test_campus_teaser_lead_cinema_has_correct_structure(testbrowser):
     assert len(select('.teaser-lead-cinema')) == 1
     assert len(select('.teaser-lead-cinema__content')) == 0
     assert len(select('.teaser-lead-cinema__metadata')) == 1
+
+
+def test_campus_teaser_topic_has_correct_structure(testbrowser):
+    select = testbrowser('/campus/centerpage/topic-teaser').cssselect
+    assert len(select('.teaser-topic')) == 1
+    assert len(select('.teaser-topic-main')) == 1
+    assert len(select('.teaser-topic-item')) == 3
+
+
+def test_campus_teaser_debate_has_correct_structure(testbrowser):
+    select = testbrowser('/campus/centerpage/teaser-debate').cssselect
+    assert len(select('.teaser-debate')) == 1
+    assert len(select('.debate')) == 1
+    assert len(select('.debate__kicker')) == 1
+    assert len(select('.debate__title')) == 1
+    assert len(select('.debate__text')) == 1
+    assert len(select('.debate__label')) == 1
+
+
+def test_campus_toolbox_exists(testbrowser):
+    select = testbrowser('/campus/centerpage/cp-extra-tool-box').cssselect
+    assert len(select('.toolbox')) == 1
+    assert len(select('.toolbox__headline')) == 1
+    assert len(select('.toolbox__item')) == 3

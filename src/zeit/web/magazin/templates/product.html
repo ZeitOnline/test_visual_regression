@@ -30,8 +30,8 @@
                 <figcaption class="product__caption">
                     <div class="product__caption__text">{{ image.caption }}</div>
                     {% for name, url, nofollow in image.copyright %}
-                    	{% if name | startswith('©') %}
-                        	<span class="product__caption__copyright">{{ name }}</span>
+                    	{% if name | startswith('©') %}
+                        	<span class="product__caption__copyright">{{ name }}</span>
                     	{%- endif %}
                     {% endfor %}
                 </figcaption>

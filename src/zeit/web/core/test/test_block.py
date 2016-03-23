@@ -55,11 +55,13 @@ def test_inline_html_should_not_render_empty_tags():
 
 def test_video_block_should_be_fault_tolerant_if_video_is_none(application):
     model_block = mock.Mock()
+    model_block.layout = 'zmo-medium-center'
     model_block.video = None
     video = zeit.web.core.block.Video(model_block)
     assert not hasattr(video, 'video_still')
 
     model_block = mock.Mock()
+    model_block.layout = 'zmo-medium-center'
     model_block.video = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/video/3537342483001')
     video = zeit.web.core.block.Video(model_block)
@@ -76,10 +78,9 @@ def test_header_video_should_be_created_if_layout_is_zmo_header(application):
     assert h_video.format == 'zmo-xl-header'
 
 
-def test_header_video_should_not_be_created_if_layout_does_not_fit(
-        application):
+def test_header_video_should_not_be_created_if_layout_doesnt_fit(application):
     model_block = mock.Mock()
-    model_block.layout = 'zmo-xl-noheader'
+    model_block.layout = 'zmo-medium-center'
     model_block.video = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/video/3537342483001')
 
@@ -97,7 +98,7 @@ def test_header_image_should_be_created_if_layout_is_zmo_header():
 
 def test_header_image_should_not_be_created_if_layout_does_not_fit():
     model_block = mock.Mock()
-    model_block.layout.id = 'zmo-xl-noheader'
+    model_block.layout.id = 'zmo-medium-center'
     model_block.is_empty = False
 
     h_image = zeit.web.core.block.HeaderImage(model_block)
@@ -106,15 +107,14 @@ def test_header_image_should_not_be_created_if_layout_does_not_fit():
 
 def test_image_should_be_none_if_is_empty_is_true():
     model_block = mock.Mock()
-    model_block.layout.id = 'zmo-xl-noheader'
+    model_block.layout.id = 'zmo-medium-center'
     model_block.is_empty = True
     image = zeit.web.core.block.Image(model_block)
     assert image is None
 
 
 def test_image_should_be_fail_if_is_empty_doesnot_exist():
-    model_block = mock.Mock(spec=('layout',))
-    model_block.layout = mock.Mock()
+    model_block = mock.Mock()
     model_block.layout.id = 'zmo-xl-header'
     image = zeit.web.core.block.Image(model_block)
     assert image is None
@@ -174,7 +174,7 @@ def test_image_should_not_break_on_whitespace_caption():
 def test_image_should_not_break_on_missing_image(application):
     model_block = mock.Mock()
     model_block.layout.id = 'large'
-    model_block.layout.variant = 'large'
+    model_block.layout.variant = 'default'
     model_block.is_empty = False
     model_block.xml = None
     model_block.references.target = zeit.content.image.imagegroup.ImageGroup()
@@ -185,15 +185,12 @@ def test_image_should_not_break_on_missing_image(application):
 
 
 def test_image_should_use_variant_given_on_layout(application):
-    from zeit.content.article.edit.interfaces import imageLayoutSource
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
     image = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/image'
         '/filmstill-hobbit-schlacht-fuenf-hee/')
     model_block = mock.Mock()
-    model_block.layout = imageLayoutSource(content).find(
-        'column-width-original')
+    model_block.layout.id = 'column-width-original'
+    model_block.layout.variant = 'original'
     model_block.is_empty = False
     model_block.xml = None
     model_block.references.target = image
@@ -203,6 +200,7 @@ def test_image_should_use_variant_given_on_layout(application):
 
 def test_image_should_be_none_if_expired():
     model_block = mock.Mock()
+    model_block.layout.id = 'large'
     model_block.is_empty = False
     with mock.patch('zeit.web.core.image.is_image_expired') as expired:
         expired.return_value = True
@@ -327,10 +325,13 @@ def test_block_infobox_should_contain_expected_structure(tplbrowser):
 
 
 def test_block_inlinegallery_should_contain_expected_structure(tplbrowser):
+    view = mock.Mock()
+    view.package = 'zeit.web.site'
     block = mock.Mock()
     block = {}
     browser = tplbrowser(
-        'zeit.web.core:templates/inc/blocks/inlinegallery.html', block=block)
+        'zeit.web.core:templates/inc/blocks/inlinegallery.html', block=block,
+        view=view)
     assert browser.cssselect('div.inline-gallery')
 
 
@@ -413,7 +414,7 @@ def test_block_video_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/video.html', block=block)
     assert browser.cssselect(
-        'div.article__item.article__item--wide.article__item--rimless')
+        'figure.article__item.article__item--wide.article__item--rimless')
 
 
 def test_article_should_render_raw_code(testbrowser):

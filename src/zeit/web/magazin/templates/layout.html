@@ -87,6 +87,9 @@
             {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
             {%- block content_ad_script -%}{%- endblock -%}
         {% endif %}
+        {% if settings('dev_environment') %}
+            <script src="//localhost:35729/livereload.js"></script>
+        {% endif %}
     </head>
     <body itemscope itemtype="http://schema.org/WebPage" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
 

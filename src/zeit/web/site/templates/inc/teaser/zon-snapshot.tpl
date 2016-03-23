@@ -6,7 +6,7 @@
 {% set tracking_slug = '{}...{}.'.format(region_loop.index, layout) %}
 {% set module_layout = 'snapshot' %}
 
-<div class="{{ module_layout }}">
+<div class="{{ module_layout }}">
     {{ cp.section_heading(module.title, module.read_more, module.read_more_url, None, tracking_slug + 'gesammelte_momente') }}
     {% include "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
     <div class="snapshot-caption">

@@ -41,6 +41,7 @@ def test_video_html(selenium_driver, testserver):
 
 def test_video_source_should_be_highest_rendition_url(application):
     model_block = Mock()
+    model_block.layout = 'zmo-small-left'
     rend_1 = VideoRendition()
     rend_1.frame_width = 460
     rend_1.url = "http://rend_1"
@@ -75,7 +76,7 @@ def test_header_video_should_be_created_if_layout_is_zmo_header(application):
     assert h_video.format == 'zmo-xl-header'
 
     model_block = Mock()
-    model_block.layout = 'zmo-xl-noheader'
+    model_block.layout = 'zmo-small-left'
     model_block.video.uniqueId = 'foo'
 
     h_video = HeaderVideo(model_block)

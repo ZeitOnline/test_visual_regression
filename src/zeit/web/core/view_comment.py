@@ -141,22 +141,21 @@ class PostComment(zeit.web.core.view.Base):
         elif action == 'recommend':
             if not pid:
                 raise pyramid.httpexceptions.HTTPBadRequest(
-                    title='No recommondation could be posted',
+                    title='No recommendation could be posted',
                     explanation=('Pid needed.'))
-            commenter = self._get_commenter_id(unique_id, pid)
+            commenter, fans = self._get_recommendations(unique_id, pid)
             if commenter == uid:
                 raise pyramid.httpexceptions.HTTPBadRequest(
-                    title='No recommondation could be posted',
+                    title='No recommendation could be posted',
                     explanation=('Own comments must not be recommended.'))
 
-        nid = self._nid_by_comment_thread(unique_id)
+        self._ensure_comment_thread(unique_id)
         action_url = self._action_url(action, self.path)
 
         method = 'post'
         data = {'uid': uid}
         recommendations = None
         if action == 'comment' and self.path:
-            data['nid'] = nid
             data['subject'] = '[empty]'
             data['comment'] = comment
             data['pid'] = pid
@@ -170,7 +169,6 @@ class PostComment(zeit.web.core.view.Base):
             data['method'] = 'flag.flagnote'
             data['flag_name'] = 'kommentar_bedenklich'
         elif action == 'recommend' and pid:
-            fans = self._get_recommendations(unique_id, pid)
             if uid in fans:
                 data['action'] = 'unflag'
                 fans.remove(uid)
@@ -273,7 +271,6 @@ class PostComment(zeit.web.core.view.Base):
             'request': {
                 'action': action,
                 'path': self.path,
-                'nid': nid,
                 'pid': pid},
             'response': {
                 'content': content,
@@ -295,41 +292,18 @@ class PostComment(zeit.web.core.view.Base):
             self.community_host, endpoint, path).strip('/')
 
     def _get_recommendations(self, unique_id, pid):
-        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
+        comment_thread = zeit.web.core.comments.get_paginated_thread(
+            unique_id, cid=pid)
 
-        if comment_thread and comment_thread.get('index', {}).get(pid):
-            comment = comment_thread['index'][pid]
-            if len(comment['fans']):
-                return comment['fans'].split(',')
+        comment = comment_thread and comment_thread.get('index', {}).get(pid)
+        if not comment:
+            return None, []
+        return comment['uid'], filter(None, comment['fans'].split(','))
 
-        return []
+    def _ensure_comment_thread(self, unique_id):
+        if zeit.web.core.comments.comment_count(unique_id):
+            return
 
-    def _get_commenter_id(self, unique_id, pid):
-        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
-
-        if comment_thread and comment_thread.get('index', {}).get(pid):
-            return comment_thread['index'][pid]['uid']
-
-    def _nid_by_comment_thread(self, unique_id):
-        nid = None
-        comment_thread = zeit.web.core.comments.get_cacheable_thread(unique_id)
-
-        if comment_thread:
-            return comment_thread.get('nid')
-        else:
-            comment_thread = self._create_and_load_comment_thread(unique_id)
-
-            if comment_thread:
-                nid = comment_thread.get('nid')
-
-        if not nid:
-            raise pyramid.httpexceptions.HTTPInternalServerError(
-                title='No comment thread',
-                explanation=('No comment thread for {} could be '
-                             'created.').format(unique_id))
-        return nid
-
-    def _create_and_load_comment_thread(self, unique_id):
         content = None
         try:
             content = zeit.cms.interfaces.ICMSContent(unique_id)
@@ -347,15 +321,24 @@ class PostComment(zeit.web.core.view.Base):
             'Content-Type': 'text/xml'}
 
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        error = None
         with zeit.web.core.metrics.timer(
                 'create_thread.community.reponse_time'):
-            response = requests.post(
-                '{}/agatho/commentsection'.format(self.community_host),
-                headers=headers,
-                data=xml_str,
-                timeout=float(conf.get('community_host_timeout_secs', 5)))
-
-        if not response.status_code >= 200 and not response.status_code < 300:
+            try:
+                response = requests.post(
+                    '{}/agatho/commentsection'.format(self.community_host),
+                    headers=headers,
+                    data=xml_str,
+                    timeout=float(conf.get('community_host_timeout_secs', 5)))
+                if not (response.status_code >= 200 and
+                        response.status_code < 300):
+                    error = 'Community returned HTTP {}'.format(
+                        response.status_code)
+            except requests.exceptions.RequestException, err:
+                error = type(err).__name__
+        if error:
+            log.warning(
+                'Could not create commentsection for %s: %s', unique_id, error)
             raise pyramid.httpexceptions.HTTPInternalServerError(
                 title='Comment Section could not be created',
                 explanation='The comment section for the resource {} '
@@ -364,10 +347,8 @@ class PostComment(zeit.web.core.view.Base):
         self.status.append('A comment section for {} was created'.format(
             unique_id))
 
-        # invalidate comment thread to get the newly created comment section ID
+        # XXX TRASHME together with get_cacheable_thread
         invalidate_comment_thread(unique_id)
-
-        return zeit.web.core.comments.get_cacheable_thread(unique_id)
 
 
 @pyramid.view.view_config(route_name='post_test_comments',
@@ -482,6 +463,62 @@ class RecommendCommentResource(PostCommentResource):
 
         super(RecommendCommentResource, self).__init__(context, request)
         self.request_method = 'GET'
+
+
+@pyramid.view.view_defaults(
+    renderer='zeit.web.site:templates/inc/comments/thread.html',
+    name='comment-thread')
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
+@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+class CommentThread(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
+    pass
+
+
+@pyramid.view.view_defaults(
+    renderer='zeit.web.site:templates/inc/comments/replies.html',
+    name='comment-replies')
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
+@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+class CommentReplies(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
+
+    @zeit.web.reify
+    def parent_cid(self):
+        try:
+            return int(self.request.GET['cid'])
+        except (KeyError, ValueError):
+            raise pyramid.httpexceptions.HTTPBadRequest(
+                title='Parameter cid is required')
+
+    @zeit.web.reify
+    def comments(self):
+        if not self.show_commentthread:
+            return
+        try:
+            return zeit.web.core.comments.get_paginated_thread(
+                self.context.uniqueId, parent_cid=self.parent_cid)
+        except zeit.web.core.comments.ThreadNotLoadable:
+            return
+
+    @zeit.web.reify
+    def replies(self):
+        if not self.comments:
+            return []
+        comments = self.comments.get('index', {})
+        parent_comment = comments.get(self.parent_cid, {})
+        replies = parent_comment.get('replies', [])
+        # because the first reply is already shown in the first page load,
+        # we only return further ones on the ajax request
+        return replies[1:]
 
 
 def invalidate_comment_thread(unique_id):

@@ -5,6 +5,8 @@ import json
 import logging
 import os.path
 import pkg_resources
+import re
+import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
 from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
@@ -25,8 +27,10 @@ import repoze.bitblt.processor
 import selenium.webdriver
 import selenium.webdriver.firefox.firefox_binary
 import transaction
+import waitress
 import webob.multidict
 import webtest
+import wesgi
 import zope.browserpage.metaconfigure
 import zope.event
 import zope.interface
@@ -72,11 +76,6 @@ def app_settings(mockserver):
         # test, but then I'd need to re-create an Application since
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
-        'asset_prefix': '/static/latest',
-        'image_prefix': '',
-        'jsconf_prefix': '/jsconf',
-        'fbia_prefix': '/fbia',
-        'c1_prefix': '/jsconf',
         'comment_page_size': '4',
         'community_host': 'http://localhost:6551',
         'community_static_host': 'http://static_community/foo',
@@ -430,6 +429,11 @@ def sleep_tween(handler, registry):
 class StaticViewMaybeReplaceHostURL(pyramid.static.static_view):
 
     def __call__(self, context, request):
+        # XXX Should we make the query string behaviour configurable and use
+        # a separate mockserver fixture for agatho instead?
+        if (request.environ['PATH_INFO'].startswith('/comments') and
+                request.query_string):
+            request.environ['PATH_INFO'] += u'?' + request.query_string
         response = super(StaticViewMaybeReplaceHostURL, self).__call__(
             context, request)
         if response.content_type in ['application/xml']:
@@ -475,11 +479,20 @@ def mockserver(request):
 
 @pytest.fixture(scope='session')
 def testserver(application_session, request):
-    server = gocept.httpserverlayer.wsgi.Layer()
-    server.wsgi_app = application_session
-    server.setUp()
-    server.url = 'http://%s' % server['http_address']
-    request.addfinalizer(server.tearDown)
+    wsgi_app = wesgi.MiddleWare(
+        application_session, forward_headers=True)
+    server = waitress.server.create_server(wsgi_app, host='localhost', port=0)
+    server.url = 'http://{host}:{port}'.format(
+        host=server.effective_host, port=server.effective_port)
+    thread = threading.Thread(target=server.run)
+    thread.daemon = True
+    thread.start()
+
+    def tearDown():
+        server.task_dispatcher.shutdown()
+        thread.join(5)
+    request.addfinalizer(tearDown)
+
     return server
 
 
@@ -645,6 +658,11 @@ class TestApp(webtest.TestApp):
         return self.get(url, params, headers, *args, **kw)
 
 
+# When testing ESI fragments, autodetection of the encoding may not work (no
+# head, so no meta charset declaration), so we specify it explicitly.
+HTML_PARSER = lxml.html.HTMLParser(encoding='UTF-8')
+
+
 class BaseBrowser(object):
     """Base class for custom test browsers that allow direct access to CSS and
     XPath selection on their content.
@@ -673,7 +691,8 @@ class BaseBrowser(object):
     def document(self):
         """Return an lxml.html.HtmlElement instance of the response body."""
         if self.contents is not None:
-            return lxml.html.document_fromstring(self.contents)
+            return lxml.html.document_fromstring(
+                self.contents, parser=HTML_PARSER)
 
     @property
     def json(self):

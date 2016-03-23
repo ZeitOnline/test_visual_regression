@@ -125,7 +125,7 @@ require([
 
     } else if ( article.length ) {
         // article, gallery etc.
-        article.find( '.inline-gallery' ).inlinegallery({ slideSelector: '.slide' });
+        article.find( '.js-gallery' ).inlinegallery();
         article.find( '.js-infobox' ).infobox();
         article.find( '.liveblog' ).liveblog();
         article.find( '.article-toc' ).toggleRegions();

@@ -38,6 +38,7 @@ require([
     'web.core/plugins/jquery.animatescroll',
     'web.core/plugins/jquery.toggleRegions',
     'web.core/plugins/jquery.infobox',
+    'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
@@ -50,6 +51,10 @@ require([
         case 'article':
             main.find( '.js-infobox' ).infobox();
             main.find( '.article-toc' ).toggleRegions();
+
+        /* falls through */
+        case 'gallery':
+            main.find( '.js-gallery' ).inlinegallery();
     }
 
 });

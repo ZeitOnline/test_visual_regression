@@ -119,6 +119,91 @@ def test_request_thread_should_handle_non_ascii_urls(application, mockserver):
     assert zeit.web.core.comments.request_thread(u'ümläut') is None
 
 
+def test_request_thread_should_fail_on_certain_status_codes(
+        application, monkeypatch):
+    def get(action_url, timeout=1):
+        response = mock.Mock
+        response.status_code = 300
+        return response
+    monkeypatch.setattr(requests, 'get', get)
+
+    assert 'request_failed' in zeit.web.core.comments.request_thread(
+        'http://community/foo')
+
+
+def test_request_thread_should_fail_on_timeouts(application, monkeypatch):
+
+    def get(action_url, timeout=1):
+        raise requests.exceptions.Timeout()
+    monkeypatch.setattr(requests, 'get', get)
+
+    assert 'request_failed' in zeit.web.core.comments.request_thread(
+        'http://community/foo')
+
+
+def test_request_thread_mode_should_produce_expected_uris(
+        monkeypatch, application):
+
+    request_get = mock.MagicMock(return_value={})
+    monkeypatch.setattr(requests, 'get', request_get)
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    full_thread = '{}/agatho/thread/foo'.format(conf.get('agatho_host', ''))
+    zeit.web.core.comments.request_thread('/foo')
+
+    request_get.assert_called_with(full_thread, timeout=10.0)
+
+    paginated_thread = '{}/agatho/thread/foo{}'.format(
+        conf.get('agatho_host', ''), '?mode=top&page=0&rows=4&order=asc')
+
+    zeit.web.core.comments.request_thread('/foo', thread_type='paginated')
+
+    request_get.assert_called_with(paginated_thread, timeout=10.0)
+
+    paginated_thread = '{}/agatho/thread/foo{}'.format(
+        conf.get('agatho_host', ''), '?mode=top&page=1&rows=10&order=asc')
+
+    zeit.web.core.comments.request_thread(
+        '/foo', thread_type='paginated', page=1, page_size=10)
+
+    request_get.assert_called_with(paginated_thread, timeout=10.0)
+
+    deeplink_thread = '{}/agatho/thread/foo{}'.format(
+        conf.get('agatho_host', ''), '?mode=deeplink&cid=1&rows=10&order=asc')
+
+    zeit.web.core.comments.request_thread(
+        '/foo', thread_type='deeplink', cid=1, page_size=10)
+
+    request_get.assert_called_with(deeplink_thread, timeout=10.0)
+
+    sub_thread = '{}/agatho/thread/foo{}'.format(
+        conf.get('agatho_host', ''), '?mode=sub&cid=10')
+
+    zeit.web.core.comments.request_thread(
+        '/foo', thread_type='sub_thread', cid=10)
+
+    request_get.assert_called_with(sub_thread, timeout=10.0)
+
+    recommendation = '{}/agatho/thread/foo{}'.format(
+        conf.get('agatho_host', ''),
+        '?mode=recommendations&type=leser_empfehlung&page=1&rows=4&order=asc')
+
+    zeit.web.core.comments.request_thread(
+        '/foo', thread_type='recommendation', page=1, page_size=4)
+
+    request_get.assert_called_with(recommendation, timeout=10.0)
+
+    promotion = '{}/agatho/thread/foo{}'.format(
+        conf.get('agatho_host', ''),
+        '?mode=recommendations&type=kommentar_empfohlen'
+        '&page=1&rows=4&order=asc')
+
+    zeit.web.core.comments.request_thread(
+        '/foo', thread_type='promotion', page=1, page_size=4)
+
+    request_get.assert_called_with(promotion, timeout=10.0)
+
+
 def test_comment_to_dict_should_parse_correctly(application):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')
@@ -283,14 +368,13 @@ def _create_poster(monkeypatch):
     monkeypatch.setattr(requests, 'post', post)
 
     def fans(me, uid, pid):
-        return []
+        return None, []
     monkeypatch.setattr(
         zeit.web.core.view_comment.PostComment, '_get_recommendations', fans)
 
-    def nid(me, uid):
-        return 1
     monkeypatch.setattr(
-        zeit.web.core.view_comment.PostComment, '_nid_by_comment_thread', nid)
+        zeit.web.core.view_comment.PostComment, '_ensure_comment_thread',
+        lambda me, uid: None)
 
     def dont_cache(self, key, creator, *args, **kw):
         return creator()
@@ -381,7 +465,6 @@ endpoint_agatho = (
      'comment': 'my comment',
      'pid': None,
      'uid': '123',
-     'nid': 1,
      'subject': '[empty]'}})
 
 endpoint_report = (
@@ -521,28 +604,6 @@ def test_post_comment_should_not_set_lock(application, action):
     assert request.session.get('lock_commenting') is None
 
 
-def test_request_thread_should_fail_on_certain_status_codes(
-        application, monkeypatch):
-    def get(action_url, timeout=1):
-        response = mock.Mock
-        response.status_code = 300
-        return response
-    monkeypatch.setattr(requests, 'get', get)
-
-    assert 'request_failed' in zeit.web.core.comments.request_thread(
-        'http://community/foo')
-
-
-def test_request_thread_should_fail_on_timeouts(application, monkeypatch):
-
-    def get(action_url, timeout=1):
-        raise requests.exceptions.Timeout()
-    monkeypatch.setattr(requests, 'get', get)
-
-    assert 'request_failed' in zeit.web.core.comments.request_thread(
-        'http://community/foo')
-
-
 def test_post_comment_should_not_expose_requests_timeout_exception(
         application, monkeypatch, dummy_request):
 
@@ -617,19 +678,19 @@ def test_article_view_should_have_short_caching_time_on_unloadable_thread(
         application, testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.comments.SHORT_TERM_CACHE, 'expiration_time', 1)
-    browser = testbrowser('/zeit-online/article/01')
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
     assert browser.headers.get('cache-control') == 'max-age=10'
 
     monkeypatch.setattr(
         zeit.web.core.comments, 'is_community_healthy', lambda: False)
-    browser = testbrowser('/zeit-online/article/01')
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
     assert browser.headers.get('cache-control') == 'max-age=1'
     assert browser.cssselect('.comment-section__message')[0].text.strip() == (
         u'Ein technischer Fehler ist aufgetreten. Die Kommentare '
         u'zu diesem Artikel konnten nicht geladen werden. Bitte '
         u'entschuldigen Sie diese Störung.')
 
-    browser = testbrowser('/artikel/01')
+    browser = testbrowser('/artikel/01/comment-thread')
     assert browser.headers.get('cache-control') == 'max-age=1'
 
 
@@ -835,3 +896,43 @@ def test_user_comment_thread_should_have_expected_structure(application):
     assert thread['sort'] == 'DESC'
     assert thread['rows'] == 6
     assert len(thread['comments']) == 6
+
+
+def test_comment_thread_should_utilize_feature_toggles(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find',
+                        {}.get)
+    browser = testbrowser('/zeit-online/article/01')
+    assert len(browser.cssselect(
+            'include[src="http://localhost/'
+            'zeit-online/article/01/comment-thread"]')) == 0
+    assert len(browser.cssselect('.comment-section__head')) == 1
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'comment_thread_via_esi': False}.get)
+    browser = testbrowser('/zeit-online/article/01')
+    assert len(browser.cssselect(
+            'include[src="http://localhost/'
+            'zeit-online/article/01/comment-thread"]')) == 0
+    assert len(browser.cssselect('.comment-section__head')) == 1
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'comment_thread_via_esi': True}.get)
+    browser = testbrowser('/zeit-online/article/01')
+    assert len(browser.cssselect(
+            'include[src="http://localhost/'
+            'zeit-online/article/01/comment-thread"]')) == 1
+    assert len(browser.cssselect('.comment-section__head')) == 0
+
+
+def test_request_thread_should_be_called_only_once_by_article_and_comment_esi(
+        testserver):
+    # Due to ESI, these are 2 independent requests, so we allow them each one
+    # (but not more!!) request to the community (the health check comes on top
+    # of that, but it doesn't count since it is memcached).
+    # XXX The test should be more precise and catch all community requests.
+    with mock.patch('zeit.web.core.comments.request_thread') as request_thread:
+        request_thread.return_value = None
+        r = requests.get('{}/zeit-online/article/01'.format(testserver.url))
+        r.raise_for_status()
+        assert request_thread.call_count == 2
