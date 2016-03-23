@@ -16,7 +16,7 @@ def test_comments_template_respects_metadata(jinja2_env, testserver):
     request.path_url = url
     view = zeit.web.magazin.view_article.Article(content, request)
     view.content_url = url
-    view.comments_allowed = False
+    view.commenting_allowed = False
     string = comments.render(view=view, request=request)
     html = lxml.html.fromstring(string)
 

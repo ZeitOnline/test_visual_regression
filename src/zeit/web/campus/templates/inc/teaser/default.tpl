@@ -1,3 +1,5 @@
+{% import 'zeit.web.campus:templates/macros/centerpage_macro.tpl' as cp %}
+
 <article class="{% block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}{% if module.visible_mobile == False %} mobile-hidden{% endif %}"
     data-unique-id="{{ teaser.uniqueId }}"
     {% block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}

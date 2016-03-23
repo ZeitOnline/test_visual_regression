@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comments url="/content/zwei-baguettes-und-ein-zimmer-bitte">
+ <last_comment_timestamp>1457953126</last_comment_timestamp>
+ <last_comment_name></last_comment_name>
+ <last_comment_uid>2</last_comment_uid>
+ <comment_count>35</comment_count>
+ <comments_count_toplevel>29</comments_count_toplevel>
+ <comments_count_recommendations_editors>1</comments_count_recommendations_editors>
+ <comments_count_recommendations_readers>1</comments_count_recommendations_readers>
+ <nid>3</nid>
+ <comment id="cid-3">
+  <comments_count_subthread>3</comments_count_subthread>
+  <date>
+   <year>2015</year>
+   <month>10</month>
+   <day>14</day>
+   <hour>13</hour>
+   <minute>38</minute>
+  </date>
+  <created>1376757288</created>
+  <changed>1376757288</changed>
+  <homepage></homepage>
+  <subject>[empty]</subject>
+  <token>VSsguVsWRUYvdwF5qMEKn4a9-F7v70bE4bWoaEocr1A</token>
+  <content>&lt;p&gt;xyz&lt;/p&gt;
+</content>
+<flagged type="moderieren" userid="0"/>
+	  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech,author">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-90">
+  <inreply to="cid-3"/>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>09</day>
+   <hour>12</hour>
+   <minute>44</minute>
+  </date>
+  <created>1457527440</created>
+  <changed>1457957171</changed>
+  <homepage></homepage>
+  <subject>[empty]</subject>
+  <token>8k5wu6djiYkkbZtjhAPV8X4Z8wMmuzbqV54yrQe7av4</token>
+  <content>&lt;p&gt;die allererste Antwort&lt;/p&gt;
+</content>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-4">
+  <comments_count_subthread>0</comments_count_subthread>
+  <date>
+   <year>2015</year>
+   <month>10</month>
+   <day>14</day>
+   <hour>13</hour>
+   <minute>40</minute>
+  </date>
+  <created>1444830046</created>
+  <changed>1444830046</changed>
+  <homepage></homepage>
+  <subject>[empty]</subject>
+  <token>ebPxsiyeSgo7QQRxDr3oxgCEmoUc2ZsgtW_MVg4isr0</token>
+  <content>&lt;p&gt;fsdfds&lt;/p&gt;
+</content>
+<flagged type="moderieren" userid="0"/>
+	  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-5">
+  <comments_count_subthread>0</comments_count_subthread>
+  <date>
+   <year>2015</year>
+   <month>10</month>
+   <day>23</day>
+   <hour>9</hour>
+   <minute>57</minute>
+  </date>
+  <created>1445594227</created>
+  <changed>1445594227</changed>
+  <homepage></homepage>
+  <subject>[empty]</subject>
+  <token>KojlVXMpQorQWx6dGEixJ3Wm0hBWrnRwaNmkd55XkCs</token>
+  <content>&lt;p&gt;comment me&lt;/p&gt;
+</content>
+<flagged type="moderieren" userid="0"/>
+	  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-7">
+  <comments_count_subthread>0</comments_count_subthread>
+  <date>
+   <year>2015</year>
+   <month>10</month>
+   <day>23</day>
+   <hour>12</hour>
+   <minute>01</minute>
+  </date>
+  <created>1445601684</created>
+  <changed>1445601683</changed>
+  <homepage></homepage>
+  <subject>[empty]</subject>
+  <token>p3au4VTwFH7vw-cjjKHtaxsJ7c6aJiaaRnv3WSbZ-bk</token>
+  <content>&lt;p&gt;dedas&lt;/p&gt;
+</content>
+<flagged type="moderieren" userid="0"/>
+	  <author id="uid-3" roles="freelancer" url="/users/test_user21" sex="weiblich">
+   <name>test_user21</name>
+  </author>
+ </comment>
+ <path>/content/zwei-baguettes-und-ein-zimmer-bitte</path>
+ <source>http://localhost:9090/zeit-online/article/02</source>
+</comments>
+

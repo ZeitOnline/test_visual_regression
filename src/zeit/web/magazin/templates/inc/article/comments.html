@@ -1,6 +1,5 @@
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
-
-{% if view.linkreach or view.comments_allowed or view.comments %}
+{% if view.linkreach or view.commenting_allowed or view.comments %}
 	<div class="article__socialbox" id="js-social-services">
 	{% if view.linkreach %}
 		<div class="article__sharing">
@@ -30,7 +29,7 @@
 		</div>
 	{% endif %}
 
-	{% if view.comments_allowed or view.comments %}
+	{% if view.commenting_allowed or view.comments %}
 		<div class="article__comments-trigger">
 			<a class="article__comments-trigger__link js-comments-trigger">
 				{{ lama.use_svg_icon('sharebox-close', 'article__sharing-icon article__sharing-icon--comment-close', request) -}}
@@ -42,10 +41,10 @@
 	</div>
 {% endif %}
 
-{% if view.comments_allowed or view.comments %}
+{% if view.commenting_allowed or view.comments %}
 	<section class="comments" id="js-comments">
 		<div class="comments__head" id="js-comments-head">
-		{% if view.comments_allowed %}
+		{% if view.commenting_allowed %}
 			{% if request.user -%}
 			<form method="POST" class="comment__form js-submit-comment" id="js-comments-form">
 				{% if not request.session.user.name %}

@@ -11,6 +11,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     var $comments = $( '#comments' ),
         $commentsBody = $( '#js-comments-body' ),
         $commentForm = $( '#comment-form' ),
+        uid = $commentForm.attr( 'data-uid' ),
         slideDuration = 300,
         inputEvent = ( 'oninput' in document.createElement( 'input' )) ? 'input' : 'keypress',
         sendurl = window.location.href,
@@ -399,31 +400,83 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             .velocity( 'slideUp', slideDuration );
     },
 
+    putRewrapperOnReplies = function( $firstReply ) {
+        var $rootComment = $firstReply.prev( '.comment' ),
+            rewrapperId = $firstReply.data( 'rewrapper-id' ),
+            rewrapper = '' +
+            '<div id="' + rewrapperId + '" class="comment__rewrapper comment__rewrapper--loading js-hide-replies">' +
+                '<span class="comment__count"></span>\n' +
+                '<span class="comment__cta">Antworten verbergen</span>\n' +
+            '</div>\n';
+
+        $firstReply.find( '.comment__container' ).prepend( rewrapper );
+    },
+
+    updateRewrapperOnReplies = function( $firstReply ) {
+        var $rootComment = $firstReply.prev( '.comment' ),
+            rewrapperId = $firstReply.data( 'rewrapper-id' ),
+            $answers = $rootComment.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
+            $rewrapper = $( '#' + rewrapperId );
+
+        $rewrapper.find( '.comment__count' ).eq( 0 ).text( '− ' + $answers.length );
+        $rewrapper.removeClass( 'comment__rewrapper--loading' );
+
+    },
+
     wrapReplies = function() {
+        // TODO: Target + Deeplinks testen
         var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
             $target;
 
+        // TODO: wird das $target noch benötigt?
         if ( window.location.hash.indexOf( '#cid-' ) === 0 ) {
             $target = $( window.location.hash );
         }
 
         $rootComments.each( function() {
             var $root = $( this ),
-                $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
-                containsTarget = $answers.length > 1 && $target && $answers.is( $target ),
-                id = 'hide-replies-' + this.id,
-                rewrapper = '' +
-                    '<div id="' + id + '" class="comment__rewrapper js-hide-replies">' +
-                        '<span class="comment__count">− ' + $answers.length + '</span>\n' +
-                        '<span class="comment__cta">Antworten verbergen</span>\n' +
-                    '</div>\n';
+                $replyLinkContainer = $root.nextUntil( '.js-comment-toplevel', '.js-comment-loader' ),
+                $answers,
+                id,
+                replyLoadLink,
+                replyLoadUrl,
+                replyLoadFallbackUrl,
+                replyCountElement,
+                replyCountString,
+                replyCountInteger,
+                overlayHTML;
 
-            // when deeplinked, prevent collapse of reply thread
-            if ( $answers.length > 1  && !containsTarget ) {
-                $root.next( '.comment--indented' ).find( '.comment__container' ).prepend( rewrapper );
-                coverReply( $answers.eq( 0 ).data({ undo: id }), $answers.length - 1 );
-                $answers.slice( 1 ).hide();
+            if ( $replyLinkContainer.length === 0 ) {
+                return;
             }
+
+            $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' );
+            id = 'hide-replies-' + this.id;
+            replyLoadLink = $replyLinkContainer.find( 'a' );
+            replyLoadUrl = replyLoadLink.data( 'url' );
+            replyLoadFallbackUrl = replyLoadLink.attr( 'href' );
+            replyCountElement = $replyLinkContainer.find( '.comment-overlay__count' );
+            replyCountString = replyCountElement.eq( 0 ).text().replace( '+ ', '' );
+            replyCountInteger = parseInt( replyCountString, 10 );
+
+            overlayHTML = '' +
+                '<div class="comment-overlay js-load-comment-replies" ' +
+                    'data-url="' + replyLoadUrl + '" data-fallbackurl="' + replyLoadUrl + '">\n' +
+                    '<div class="comment-overlay__wrap">\n' +
+                        '<span class="comment-overlay__count">+ ' + replyCountInteger + '</span>\n' +
+                        '<span class="comment-overlay__cta">Weitere Antworten anzeigen</span>\n' +
+                    '</div>\n' +
+                '</div>\n';
+
+            $answers.eq( 0 )
+                .data({
+                    'reply-count': replyCountInteger,
+                    'rewrapper-id': id })
+                .addClass( 'comment--wrapped' )
+                .find( '.comment__body' )
+                .append( overlayHTML );
+
+            $replyLinkContainer.remove();
         });
     },
 
@@ -441,9 +494,63 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             .append( overlayHTML );
     },
 
+    loadReplies = function( e ) {
+        var $wrapped = $( this ),
+            url = $wrapped.data( 'url' ),
+            fallbackUrl = $wrapped.data( 'fallbackurl' ),
+            $firstReply = $wrapped.closest( 'article.comment' ),
+            replyCountInteger = parseInt( $firstReply.data( 'reply-count' ), 10 ),
+            placeholderWording = ( replyCountInteger === 1 ) ? 'Kommentar wird geladen.' : 'Kommentare werden geladen.',
+
+            placeholderHTML = '' +
+                '<article class="comment comment--indented js-comment-placeholder">' +
+                    '<div class="comment__container comment__container--placeholder">' +
+                        '<p class="js-comment-placeholder__content">' + placeholderWording + '</p></div>' +
+                '</article>',
+            repliesLoaded = false;
+
+        e.preventDefault();
+
+        // OPTIMIZE: Netter mit Promises arbeiten als dem Callback-vs-repliesLoaded-Quatsch?
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function( response ) {
+                repliesLoaded = true;
+                $firstReply.nextUntil( '.js-comment-toplevel', '.js-comment-placeholder' ).remove();
+                $firstReply.after( response );
+
+                updateRewrapperOnReplies( $firstReply );
+                adjustRecommendationLinks();
+
+                // add community frontend moderation
+                if ( uid && $commentForm.data( 'mod' ) === 'mod' ) {
+                    $firstReply.nextUntil( '.js-comment-toplevel', '.comment' ).each( addModeration );
+                }
+
+            },
+            complete: function( jqXhr, textStatus ) {
+                if ( textStatus !== 'success' ) {
+                    window.location.href = fallbackUrl;
+                }
+            }
+        });
+
+        putRewrapperOnReplies( $firstReply );
+
+        // without the js-load-comment-replies class, we toggle existing
+        // replies (instead of loading from server)
+        $wrapped.removeClass( 'js-load-comment-replies' );
+
+        if ( !repliesLoaded ) {
+            $firstReply.after( placeholderHTML );
+        }
+
+    },
+
     showReplies = function( e ) {
         var $wrapped = $( this ),
-            selector = '#' + $wrapped.data( 'undo' ),
+            selector = '#' + $wrapped.data( 'rewrapper-id' ),
             $link = $( selector ),
             $repliesToShow;
 
@@ -452,7 +559,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $wrapped.removeClass( 'comment--wrapped' );
         // get other replies, filter to remove ads from result
         $repliesToShow = $wrapped.nextUntil( '.js-comment-toplevel', '.comment--indented' );
-        // for performance reasons, we only slide the first items and siply show the other ones
+        // for performance reasons, we only slide the first items and simply show the other ones
         $repliesToShow.slice( 0, 5 ).velocity( 'slideDown', {
             'duration': slideDuration,
             'complete': function() {
@@ -511,23 +618,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         }
     },
 
-    /**
-     * comments.js: initialize
-     * @function init
-     */
-    init = function() {
-
-        if ( !$comments.length ) {
-            return;
-        }
-
-        var uid = $commentForm.attr( 'data-uid' );
-
-        // disable submit buttons of required fields
-        $comments.find( '.js-required' ).each( enableForm );
-
-        // collapse consecutive replies
-        wrapReplies();
+    adjustRecommendationLinks = function() {
 
         if ( uid ) {
             // highlight recommended comments for logged in user
@@ -546,11 +637,31 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                     }
                 }
             });
+        }
 
-            // add community frontend moderation
-            if ( $commentForm.data( 'mod' ) === 'mod' ) {
-                $commentsBody.find( '.comment' ).each( addModeration );
-            }
+    },
+
+    /**
+     * comments.js: initialize
+     * @function init
+     */
+    init = function() {
+
+        if ( !$comments.length ) {
+            return;
+        }
+
+        // disable submit buttons of required fields
+        $comments.find( '.js-required' ).each( enableForm );
+
+        // collapse consecutive replies
+        wrapReplies();
+
+        adjustRecommendationLinks();
+
+        // add community frontend moderation
+        if ( uid  && $commentForm.data( 'mod' ) === 'mod' ) {
+            $commentsBody.find( '.comment' ).each( addModeration );
         }
 
         // register event handlers
@@ -566,6 +677,8 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $commentsBody.on( 'click', '.js-promote-comment', promoteComment );
         $commentsBody.on( 'click', '.js-jump-to-comment', jumpToComment );
         $comments.on( inputEvent, '.js-required', enableForm );
+
+        $commentsBody.on( 'click', '.js-load-comment-replies', loadReplies );
     };
 
     return {

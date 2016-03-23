@@ -5,6 +5,7 @@ import json
 import logging
 import os.path
 import pkg_resources
+import re
 import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
@@ -433,6 +434,11 @@ def sleep_tween(handler, registry):
 class StaticViewMaybeReplaceHostURL(pyramid.static.static_view):
 
     def __call__(self, context, request):
+        # XXX Should we make the query string behaviour configurable and use
+        # a separate mockserver fixture for agatho instead?
+        if (request.environ['PATH_INFO'].startswith('/comments') and
+                request.query_string):
+            request.environ['PATH_INFO'] += u'?' + request.query_string
         response = super(StaticViewMaybeReplaceHostURL, self).__call__(
             context, request)
         if response.content_type in ['application/xml']:
