@@ -4,7 +4,7 @@ Change log for zeit.web
 2.67 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Use fallback for C1 setting to avoid script syntax error
 
 
 2.66 (2016-03-23)
