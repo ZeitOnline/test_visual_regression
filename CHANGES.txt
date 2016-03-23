@@ -4,6 +4,8 @@ Change log for zeit.web
 2.66 (unreleased)
 -----------------
 
+- MAINT: Make image_prefix and friends runtime-configurable
+
 - ZON-2908: Load comment replies via Ajax request
 
 - ZON-2909: Load paginated thread from community
