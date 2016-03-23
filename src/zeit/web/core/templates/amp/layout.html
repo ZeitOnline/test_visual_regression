@@ -90,7 +90,7 @@
 					{% set byline = view.context | get_byline('main') -%}
 					{% if byline | length -%}
 					<div class="byline">
-						{% include 'zeit.web.site:templates/inc/meta/byline.tpl' %}
+						{% include 'zeit.web.core:templates/inc/meta/byline.html' %}
 					</div>
 					{% else -%}
 					<span itemprop="author" itemscope itemtype="http://schema.org/Person">

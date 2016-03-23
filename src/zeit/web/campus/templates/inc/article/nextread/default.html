@@ -1,18 +1,27 @@
 <article class="{% block layout %}nextread-teaser{% endblock %}">
-    {% block teaser_image -%}
-        {% require image = get_image(module, teaser, fallback=False, variant_id="portrait") -%}
-            {%- set media_caption_additional_class = 'figcaption--hidden' -%}
-            {%- set module_layout = self.layout() -%}
-            {%- set href = teaser | create_url -%}
-            {%- include "zeit.web.core:templates/inc/asset/image_linked.tpl" -%}
-        {%- endrequire %}
-    {%- endblock %}
+    <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}" class="{{ self.layout() }}__link" itemprop="relatedLink">
+        {% block teaser_image -%}
+            {% require image = get_image(module, teaser, fallback=False, variant_id="portrait") -%}
+                {%- set media_caption_additional_class = 'figcaption--hidden' -%}
+                {%- set module_layout = self.layout() -%}
+                {%- include "zeit.web.campus:templates/inc/asset/image_nextread.tpl" -%}
+            {%- endrequire %}
+        {%- endblock %}
 
-    <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}" class="{{ self.layout() }}__link">
-        <h2 class="{{ self.layout() }}__heading">
-            <span class="{{ self.layout() }}__kicker">{{ teaser.supertitle }}</span>
-            {%- if teaser.title %}<span class="visually-hidden">: </span>{% endif -%}
-            <span class="{{ self.layout() }}__title">{{ teaser.title }}</span>
-        </h2>
+        <div class="{{ self.layout() }}__container">
+            <h2 class="{{ self.layout() }}__heading">
+                <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">{{ teaser.supertitle }}</span>
+                {%- if teaser.title %}<span class="visually-hidden">: </span>{% endif -%}
+                <span class="{{ self.layout() }}__title">{{ teaser.title }}</span>
+            </h2>
+            <div class="{{ self.layout() }}__metadata">
+                {% set byline = teaser | get_byline -%}
+                {% if byline | length -%}
+                <span class="{{ self.layout() }}__byline">
+                    {%- include 'zeit.web.core:templates/inc/meta/byline.html' -%}
+                </span>
+                {%- endif -%}
+            </div>
+        </div>
     </a>
 </article>

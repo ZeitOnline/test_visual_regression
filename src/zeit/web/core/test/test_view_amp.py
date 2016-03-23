@@ -71,39 +71,6 @@ def test_amp_contains_required_microdata(testbrowser):
         'http://localhost/autoren/W/Jochen_Wegner/index')
 
 
-def test_amp_nextread_contains_required_microdata(testbrowser):
-    browser = testbrowser('/amp/zeit-online/article/simple-nextread')
-
-    article = browser.cssselect('article.nextread')[0]
-    main_entity_of_page = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
-    headline = article.cssselect('[itemprop="headline"]')[0]
-    date_published = article.cssselect('[itemprop="datePublished"]')[0]
-    date_modified = article.cssselect('[itemprop="dateModified"]')[0]
-    author = article.cssselect('[itemprop="author"]')[0]
-    image = article.cssselect('[itemprop="image"]')[0]
-
-    # check Article
-    assert article.get('itemtype') == 'http://schema.org/Article'
-    assert main_entity_of_page.get('href') == (
-        'http://localhost/zeit-online/article/zeit')
-    assert headline.text_content().strip() == (
-        'Crystal Meth: Nancy braucht was Schnelles')
-    assert date_published.get('datetime') == '2015-02-12T04:32:17+01:00'
-    assert date_modified.get('datetime') == '2015-02-15T18:18:50+01:00'
-    assert author.get('itemtype') == 'http://schema.org/Person'
-    assert author.cssselect('[itemprop="name"]')[0].text == 'Dorit Kowitz'
-    assert author.cssselect('[itemprop="url"]')[0].get('href') == (
-        'http://localhost/autoren/K/Dorit_Kowitz')
-
-    # check ImageObject
-    assert image.get('itemtype') == 'http://schema.org/ImageObject'
-    assert image.cssselect('[itemprop="url"]')[0].get('content') == (
-        'http://localhost/zeit-online/image/crystal-meth-nancy-schmidt/'
-        'cinema__820x351')
-    assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
-    assert image.cssselect('[itemprop="height"]')[0].get('content') == '351'
-
-
 def test_amp_shows_nextread_advertising(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/simple-verlagsnextread')
     nextad = browser.cssselect('aside.nextad')[0]

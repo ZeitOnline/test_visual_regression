@@ -207,10 +207,22 @@ class DynamicFolder(CenterPage):
 class Video(Traversable):
 
     def __call__(self, tdict):
-        # XXX: Let's hope no video is ever called 'imagegroup'
-        #      or 'comment-form' or 'report-form'. (ND)
-        if tdict['view_name'] not in (
-                'imagegroup', 'comment-form', 'report-form'):
+        # Internal details how views are registered are taken from
+        # pyramid.config.views.add_view().
+        request = tdict['request']
+        request_iface = pyramid.interfaces.IRequest
+        if request.matched_route:
+            request_iface = request.registry.getUtility(
+                pyramid.interfaces.IRouteRequest,
+                name=request.matched_route.name)
+        view_names = [
+            name for name, factory in request.registry.adapters.lookupAll((
+                pyramid.interfaces.IViewClassifier,
+                request_iface,
+                zope.interface.providedBy(tdict['context'])
+            ), pyramid.interfaces.IView) if name]
+        # XXX We assume no video will ever have e.g. `comment-form` as its slug
+        if tdict['view_name'] not in view_names:
             tdict['request'].headers['X-SEO-Slug'] = tdict['view_name']
             tdict['view_name'] = ''
 
