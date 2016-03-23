@@ -15,41 +15,23 @@ import zeit.web.core.application
 import zeit.web.core.interfaces
 
 
-@pytest.fixture
-def app_request(application, app_settings, request):
-    plone.testing.zca.pushGlobalRegistry()
-    request.addfinalizer(plone.testing.zca.popGlobalRegistry)
-    app = zeit.web.core.application.Application()
-    app.settings.update(app_settings)
-    config = app.configure_pyramid()
-    config.commit()
-    request = pyramid.testing.DummyRequest()
-    request.registry = config.registry
-    request._set_extensions(config.registry.getUtility(
-        pyramid.interfaces.IRequestExtensions))
-    return app, request
-
-
-def test_asset_host_includes_configured_prefix(app_request):
-    app, request = app_request
+def test_asset_host_includes_configured_prefix(dummy_request):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['asset_prefix'] = '/assets'
-    assert request.asset_host == 'http://example.com/assets'
+    assert dummy_request.asset_host == 'http://example.com/assets'
 
 
-def test_asset_host_allows_specifying_full_host(app_request):
-    app, request = app_request
+def test_asset_host_allows_specifying_full_host(dummy_request):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['asset_prefix'] = 'http://assets.example.com/'
-    assert request.asset_host == 'http://assets.example.com'
+    assert dummy_request.asset_host == 'http://assets.example.com'
 
 
-def test_asset_host_supports_url_prefix(app_request):
-    app, request = app_request
+def test_asset_host_supports_url_prefix(dummy_request):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['asset_prefix'] = '/assets'
-    request.application_url = 'http://example.com/foo'
-    assert request.asset_host == 'http://example.com/foo/assets'
+    dummy_request.application_url = 'http://example.com/foo'
+    assert dummy_request.asset_host == 'http://example.com/foo/assets'
 
 
 def test_acceptable_pagination_should_not_redirect(testserver):
