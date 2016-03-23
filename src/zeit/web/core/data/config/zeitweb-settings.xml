@@ -28,4 +28,10 @@
   <setting name="caching_time_image" xsi:type="xsd:int">30</setting>
   <setting name="caching_time_videostill" xsi:type="xsd:int">35</setting>
   <setting name="caching_time_external" xsi:type="xsd:int">15</setting>
+
+  <setting name="asset_prefix" xsi:type="xsd:string">/static/latest</setting>
+  <setting name="image_prefix" xsi:type="xsd:string"></setting>
+  <setting name="jsconf_prefix" xsi:type="xsd:string">/jsconf</setting>
+  <setting name="fbia_prefix" xsi:type="xsd:string">/fbia</setting>
+  <setting name="c1_prefix" xsi:type="xsd:string">/jsconf</setting>
 </settings>
