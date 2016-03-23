@@ -12,16 +12,14 @@
 	USER_BLOCKED: {{ view.comment_area.user_blocked }}
 	</pre>
 	#}
-
 {% if view.show_commentthread %}
-
-{% include "zeit.web.site:templates/inc/comments/premoderation.tpl" %}
+{% include "zeit.web.core:templates/inc/comments/premoderation.tpl" %}
 <section class="comment-section" id="comments">
 	{% set query = '?' + request.query_string if request.query_string else '' %}
 	{% if toggles('comment_thread_via_esi') %}
 		{{ lama.insert_esi('{}/comment-thread{}'.format(view.content_url, query), 'Ein technischer Fehler ist aufgetreten. Der Kommentarbereich konnte nicht geladen werden. Bitte entschuldigen Sie diese Störung.') }}
 	{% else %}
-		{% include "zeit.web.site:templates/inc/comments/thread.html" %}
+		{% include "zeit.web.core:templates/inc/comments/thread.html" %}
 	{% endif %}
 
 	{% if view.request.GET.action == 'report' %}

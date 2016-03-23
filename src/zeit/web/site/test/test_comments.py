@@ -77,7 +77,7 @@ def test_comment_form_should_display_parent_hint(tplbrowser, dummy_request):
     dummy_request.GET['pid'] = '90'
 
     browser = tplbrowser(
-        'zeit.web.site:templates/inc/comments/comment-form.html',
+        'zeit.web.core:templates/inc/comments/comment-form.html',
         view=view, request=dummy_request)
 
     input = browser.cssselect('textarea[name="comment"]')[0]
@@ -176,12 +176,12 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
 
     view = zeit.web.site.view_article.Article(content, request)
     view.commenting_allowed = False
-    comments = tplbrowser('zeit.web.site:templates/inc/comments/thread.html',
+    comments = tplbrowser('zeit.web.core:templates/inc/comments/thread.html',
                           view=view, request=request)
     assert len(comments.cssselect('article.comment')) > 0, (
         'comments must be displayed')
 
-    form = tplbrowser('zeit.web.site:templates/inc/comments/comment-form.html',
+    form = tplbrowser('zeit.web.core:templates/inc/comments/comment-form.html',
                       view=view, request=request)
     assert len(form.cssselect('#comment-form[data-uid="123"]')) == 1, (
         'comment form tag with data-uid attribute must be present')
