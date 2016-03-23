@@ -154,15 +154,18 @@ define( [
                 if ( debug ) { console.debug( 'overscrolling: no svg available' ); }
                 return;
             }
-            if ( 'scrollRestoration' in history ) {
-                history.scrollRestoration = 'manual';
-            }
             config = $.extend( defaults, options );
             if ( window.location.href.indexOf( '#!top-of-overscroll' ) > -1  && history.pushState ) {
-                var scrollPos = $( config.triggerElement ).position().top - $( window ).height();
-                $( 'html' ).velocity( 'scroll', { offset: scrollPos, mobileHA: false, complete: function() {
-                    history.pushState( '', document.title, window.location.pathname + window.location.search );
-                } } );
+                if ( 'scrollRestoration' in history ) {
+                    history.scrollRestoration = 'manual';
+                    var scrollPos = $( config.triggerElement ).position().top - $( window ).height();
+                    $( 'html' ).velocity( 'scroll', { offset: scrollPos, mobileHA: false, complete: function() {
+                        history.pushState( '', document.title, window.location.pathname + window.location.search );
+                    } } );
+                } else {
+                    if ( debug ) { console.debug( 'exiting to prevent reload hell' ); }
+                    return;
+                }
             }
             if ( $( document ).height() >= config.documentMinHeight ) {
                 // inview event to change to elemen
