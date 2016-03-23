@@ -1,37 +1,49 @@
+$teaser-heading-box-shadow: 0.4em
+
 %teaser
 	border-bottom: 1px solid $color-border
+	+respond-min($break-tablet-min)
+		border-bottom: 0
+
+%teaser-media
+	background-color: $greyish-white
+	height: 0
 
 %teaser-heading
-	position: relative
+	line-height: 0
+	margin: -0.4em 0 remify(10px)
 	max-width: 95%
+	padding-right: $teaser-heading-box-shadow
 
 %teaser-combined-link
-	background-color: $white
+	background-color: #fff
 	box-decoration-break: clone
+	box-shadow: $teaser-heading-box-shadow 0 0 0 #fff
+	position: relative
 
 %teaser-kicker
-	background-color: $white
+	background-color: #fff
+	bottom: 100%
 	color: $zco-accent
 	font-family: $font-tabletgothic
 	font-size: remify(12px)
+	left: 0
 	letter-spacing: 0.08em
 	line-height: 1.25
-	padding: remify(6px 13px 0 0)
+	padding: remify(8px 12px 0 0)
 	position: absolute
 	text-transform: uppercase
 
 %teaser-title
 	@extend %font-beckett
-	background-color: transparent
 	color: $zco-charcoal
-	position: relative
+	position: relative // for stacking context
+	z-index: 1
 
 %teaser-text
-	color: $zco-charcoal
-	font-family: $font-tabletgothic
 	font-size: remify(16px)
-	line-height: 1.25
-	margin: 0 0 0.5em 0 // em for a reason, so it grows with the breakpoint
+	line-height: (20/16)
+	margin: 0 0 .5em 0 // em for a reason, so it grows with the breakpoint
 	+respond-min($break-tablet-min)
 		font-size: remify(15px)
 		line-height: (20/15)

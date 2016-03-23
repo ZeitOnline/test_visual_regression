@@ -3,26 +3,21 @@
 	padding: $page-padding--small
 
 	&__media
-		background-color: $greyish-white
-		height: 0
+		@extend %teaser-media
 		padding-bottom: 100% / 7 * 3 // image variant 'cinema', ratio 7:3
 
 	&__heading
 		@extend %teaser-heading
-		margin: remify(0 0 10px)
+		font-size: remify(28px)
 
 	&__combined-link
 		@extend %teaser-combined-link
 
 	&__kicker
 		@extend %teaser-kicker
-		top: remify(-18px)
 
 	&__title
 		@extend %teaser-title
-		display: block
-		font-size: remify(28px)
-		padding-top: remify(16px)
 
 	&__text
 		@extend %teaser-text
@@ -34,19 +29,20 @@
 		@extend %teaser-byline
 
 
++respond-max($break-tablet-min)
+	.teaser-wide-large
+		&__heading
+			margin-top: 0.46em
+			max-width: none
+
+
 +respond-min($break-tablet-min)
 	.teaser-wide-large
-		border: none
 		padding: $cp-padding
 		&__heading
-			margin-top: remify(-14px)
-		&__combined-link
-			box-shadow: 10px -18px 0 10px $white
-		&__kicker
-			top: remify(-34px)
-		&__title
-			display: inline
 			font-size: remify(42px)
+			padding-right: 0
+		&__heading,
 		&__text,
 		&__metadata
 			width: 90%

@@ -2,26 +2,25 @@
 	@extend %teaser
 
 	&__media
-		background-color: $greyish-white
-		height: 0
+		@extend %teaser-media
+		overflow: hidden
 		padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
+
+	&__content
+		padding: 0 0 $page-padding--small
 
 	&__heading
 		@extend %teaser-heading
-		margin: remify(0 0 10px)
+		font-size: remify(42px)
 
 	&__combined-link
 		@extend %teaser-combined-link
 
 	&__kicker
 		@extend %teaser-kicker
-		top: remify(-20px)
 
 	&__title
 		@extend %teaser-title
-		display: block
-		font-size: remify(42px)
-		padding-top: remify(16px)
 
 	&__text
 		@extend %teaser-text
@@ -34,45 +33,55 @@
 
 +respond-max($break-tablet-min)
 	.teaser-lead-portrait
+		&__combined-link,
 		&__kicker,
-		&__title,
 		&__text,
 		&__metadata
-			padding-left: remify($page-padding--small)
+			padding-left: $page-padding--small
 		&__text,
 		&__metadata
 			max-width: 95%
-			padding-right: remify($page-padding--small)
+			padding-right: $page-padding--small
 
 +respond-min($break-tablet-min)
 	.teaser-lead-portrait
-		border: none
-		margin: $cp-padding*2
+		padding: $page-padding $page-padding*2 $page-padding $page-padding // this is to make the 50% width of the image consider the grid gutter
 		position: relative
+
 		&__media
 			width: 50%
 			padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4), refers to half-width
+
 		&__content
-			background: $white
-			left: 33.333% // 4/12 according to Screendesign
-			margin-top: 0
-			padding: remify(18px 0 35px 30px) // top: 30, but font has 12px padding(?)
+			background: #fff
+			padding: remify(26px $page-padding 35px 30px)
 			position: absolute
+			right: 0
 			top: remify(65px)
-		&__kicker
-			position: relative
-			top: 0
-		&__title
+			width: 66.66%
+			width: calc((100% - #{$page-padding}) * 2/3) // consider gutter
+
+		&__heading
 			font-size: remify(64px)
-			letter-spacing: remify(1.5px)
-			max-width: remify(780px)
+			margin: 0
+			max-width: none
+			padding-right: 0
+
+		&__kicker
+			display: block
+			padding: remify(0 0 15px)
+			position: static
+
+		&__title
+			display: block
+
 		&__text
 			font-size: remify(18px)
-			line-height: (24/18)
+			line-height: (27/18)
 
 +respond-min($break-desktop-min)
 	.teaser-lead-portrait
 		&__content
 			top: remify(69px)
-		&__title
+		&__heading
 			font-size: remify(84px)
