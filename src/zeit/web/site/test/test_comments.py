@@ -29,13 +29,12 @@ def test_comment_section_should_be_limited_in_top_level_comments(testbrowser):
 def test_comments_should_contain_basic_meta_data(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     comm = browser.cssselect('article.comment')[0]
-    assert 'Skarsgard' in comm.cssselect('.comment-meta__name > a')[0].text
+    assert 'test_user' in comm.cssselect('.comment-meta__name > a')[0].text
     date = zeit.web.core.template.format_date(
-        datetime.datetime(2013, 8, 16, 20, 24))
+        datetime.datetime(2013, 8, 17, 20, 24))
     assert date in comm.cssselect('.comment-meta__date')[0].text
     assert '#1' in comm.cssselect('.comment-meta__date')[0].text
-    assert ('Ein Iraner,der findet,dass die Deutschen zu wenig meckern'
-            in (comm.cssselect('.comment__body')[0].text_content()))
+    assert ('xyz' in (comm.cssselect('.comment__body')[0].text_content()))
 
 
 def test_comments_get_thread_should_respect_top_level_sort_order(testserver):
@@ -66,8 +65,23 @@ def test_comment_form_should_be_rendered(testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.site.view.CommentForm, 'comment_area', comment)
     browser = testbrowser('/zeit-online/article/01/comment-form')
-
     assert len(browser.cssselect('#comment-form')) == 1
+
+
+def test_comment_form_should_display_parent_hint(tplbrowser, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view.CommentForm(article, dummy_request)
+    view.comment_form = {'show_comment_form': True}
+    dummy_request.user = {'ssoid': 123, 'uid': '123', 'name': 'Max'}
+    dummy_request.GET['pid'] = '90'
+
+    browser = tplbrowser(
+        'zeit.web.site:templates/inc/comments/comment-form.html',
+        view=view, request=dummy_request)
+
+    input = browser.cssselect('textarea[name="comment"]')[0]
+    assert '"die allere..."' in input.get('placeholder')
 
 
 def test_comment_form_should_not_be_cached(testbrowser):
@@ -88,7 +102,7 @@ def test_comment_form_should_be_rendered_through_esi(testbrowser):
 def test_comment_pagination_should_work(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread?page=2')
     pages = browser.cssselect('.pager__page')
-    assert len(pages) == 5
+    assert len(pages) == 7
     assert '--current' in (pages[1].get('class'))
 
 
@@ -103,7 +117,7 @@ def test_comment_sorting_should_work(testbrowser):
     comments_body = browser.document.get_element_by_id('js-comments-body')
     comments = comments_body.cssselect('.comment')
     link = browser.cssselect('.comment-preferences__item')
-    assert comments[0].get('id') == 'cid-2969196'
+    assert comments[0].get('id') == 'cid-3'
     assert link[0].text_content().strip() == u'Älteste zuerst'
     assert '/zeit-online/article/01#comments' in link[0].get('href')
 
@@ -138,8 +152,8 @@ def test_comment_filter_works_as_expected(testbrowser):
 
 def test_comment_author_roles_should_be_displayed(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
-    comment_author = browser.document.get_element_by_id('cid-2968470')
-    comment_freelancer = browser.document.get_element_by_id('cid-2968473')
+    comment_author = browser.document.get_element_by_id('cid-3')
+    comment_freelancer = browser.document.get_element_by_id('cid-7')
     selector = '.comment-meta__badge--author'
     icon_author = comment_author.cssselect(selector)
     icon_freelancer = comment_freelancer.cssselect(selector)
@@ -161,7 +175,7 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
     request.route_url = lambda x: "http://foo/"
 
     view = zeit.web.site.view_article.Article(content, request)
-    view.comments_allowed = False
+    view.commenting_allowed = False
     comments = tplbrowser('zeit.web.site:templates/inc/comments/thread.html',
                           view=view, request=request)
     assert len(comments.cssselect('article.comment')) > 0, (
@@ -185,13 +199,13 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
 
 def test_comment_reply_thread_loads_and_toggles(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/zeit-online/article/02' % testserver.url)
+    driver.get('%s/zeit-online/article/01' % testserver.url)
     select = driver.find_elements_by_css_selector
 
-    first_comment_id = 'cid-5122059'
-    first_reply_id = 'cid-5122548'
-    second_reply_id = 'cid-5122767'
-    last_reply_id = 'cid-5122784'
+    first_comment_id = 'cid-3'
+    first_reply_id = 'cid-90'
+    second_reply_id = 'cid-91'
+    last_reply_id = 'cid-92'
 
     assert len(select('#{}'.format(first_comment_id))) == 1
     assert len(select('#{}'.format(first_reply_id))) == 1
@@ -235,10 +249,10 @@ def test_comment_reply_thread_loads_and_toggles(selenium_driver, testserver):
 
 # needs selenium because of esi include
 def test_comment_reply_thread_loads_with_deeplink(selenium_driver, testserver):
-    last_reply_id = '5122784'
+    last_reply_id = '92'
     driver = selenium_driver
     driver.get(
-        '{}/zeit-online/article/02?cid={}'
+        '{}/zeit-online/article/01?cid={}'
         .format(testserver.url, last_reply_id))
     select = driver.find_elements_by_css_selector
     assert len(select('#cid-{}'.format(last_reply_id))) == 1
@@ -246,11 +260,11 @@ def test_comment_reply_thread_loads_with_deeplink(selenium_driver, testserver):
 
 # needs selenium because of esi include
 def test_comment_reply_thread_loads_with_nojs(selenium_driver, testserver):
-    first_reply_id = '5122548'
-    second_reply_id = '5122767'
+    first_reply_id = '91'
+    second_reply_id = '92'
     driver = selenium_driver
     driver.get(
-        '{}/zeit-online/article/02?cid={}'
+        '{}/zeit-online/article/01?cid={}'
         .format(testserver.url, first_reply_id))
     select = driver.find_elements_by_css_selector
     assert len(select('#cid-{}'.format(second_reply_id))) == 1
@@ -261,7 +275,14 @@ def test_comment_actions_should_link_to_article(testbrowser):
     link = browser.cssselect('a.js-report-comment')[0]
     assert link.get('href') == (
         'http://localhost/zeit-online/article/01'
-        '?action=report&pid=2968470#report-comment-form')
+        '?action=report&pid=3#report-comment-form')
+
+
+def test_comment_pagination_should_link_to_article(testbrowser):
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
+    link = browser.cssselect('.pager__page a')[0]
+    assert link.get('href') == (
+        'http://localhost/zeit-online/article/01?page=2#comments')
 
 
 def test_comment_pagination_should_link_to_article(testbrowser):
@@ -374,9 +395,27 @@ def test_comment_area_should_show_message_for_blocked_users(application):
     assert not view.comment_area['message']
 
 
+def test_article_meta_should_show_comment_count(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    count = browser.cssselect('.metadata__commentcount')[0].text
+    assert count == '35 Kommentare'
+
+
+def test_article_meta_should_omit_comment_count_if_no_comments_present(
+        testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    assert len(browser.cssselect('.metadata__commentcount')) == 0
+
+
 def test_comment_replies_view_renders_html_for_replies(testbrowser):
     browser = testbrowser(
-        '/zeit-online/article/01/comment-replies?cid=2968478')
+        '/zeit-online/article/01/comment-replies?cid=3')
     comments = browser.cssselect('article .comment__body')
-    assert len(comments) == 4
-    assert 'Arschtritt' in comments[0].xpath('p')[0].text
+    assert len(comments) == 2
+    assert 'zweite antwort' in comments[0].xpath('p')[0].text
+
+
+def test_comment_displays_total_reply_count(testbrowser):
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
+    link = browser.cssselect('.comment-overlay__count')[0]
+    assert link.text == '+ 2'

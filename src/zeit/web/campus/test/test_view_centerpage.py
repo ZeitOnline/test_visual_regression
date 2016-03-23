@@ -66,7 +66,6 @@ def test_campus_teaser_wide_large_has_correct_structure(testbrowser):
     select = testbrowser('/campus/centerpage/teaser-wide-large').cssselect
 
     assert len(select('.teaser-wide-large')) == 2
-
     assert len(select(
         '.teaser-wide-large .teaser-wide-large__heading '
         '.teaser-wide-large__kicker')) == 2
