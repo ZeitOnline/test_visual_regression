@@ -498,6 +498,34 @@ class CommentThread(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
     pass
 
 
+@pyramid.view.view_defaults(
+    renderer='zeit.web.site:templates/inc/comments/replies.html',
+    name='comment-replies')
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
+@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+class CommentReplies(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
+
+    @zeit.web.reify
+    def replies(self):
+        try:
+            cid = int(self.request.GET['cid'])
+        except (KeyError, ValueError):
+            raise pyramid.httpexceptions.HTTPBadRequest(
+                title='Parameter cid is required')
+        if not self.show_commentthread:
+            return []
+        replies = zeit.web.core.comments.get_replies(
+            self.context.uniqueId, cid)
+        # because the first reply is already shown in the first page load,
+        # we only return further ones on the ajax request
+        return replies[1:]
+
+
 def invalidate_comment_thread(unique_id):
     zeit.web.core.comments.get_cacheable_thread.invalidate(unique_id)
 

@@ -4,6 +4,8 @@ Change log for zeit.web
 2.66 (unreleased)
 -----------------
 
+- ZON-2908: Load comment replies via Ajax request
+
 - FIX: Adapt correct region/area structure to testdata
 
 - HOTFIX: Make comment thread work again on video pages

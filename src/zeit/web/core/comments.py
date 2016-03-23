@@ -284,6 +284,16 @@ def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
     return thread
 
 
+def get_replies(unique_id, cid):
+    # XXX The idea is that we call a special agatho function here,
+    # not parse the whole thread ourselves.
+    try:
+        thread = zeit.web.core.comments.get_thread(unique_id, cid=cid)
+    except ThreadNotLoadable:
+        return []
+    return thread.get('index', {}).get(cid, {}).get('replies', [])
+
+
 def get_comment(unique_id, cid):
     # XXX The idea is that we call a special agatho function here,
     # not parse the whole thread ourselves.
