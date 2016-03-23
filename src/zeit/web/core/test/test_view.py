@@ -221,8 +221,9 @@ def test_c1_include_script_should_define_a_timeout_param(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     inline = u''.join(browser.xpath('//script/text()'))
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    assert 'url: "{}/tracking/tracking.js",\n\t\ttimeout: 2000,'.format(
+    assert 'url: "{}/tracking/tracking.js",\n'.format(
         conf.get('c1_prefix')) in inline
+    assert 'timeout: 2000,\n' in inline
 
 
 def test_inline_gallery_should_be_contained_in_body(application):
