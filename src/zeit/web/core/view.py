@@ -608,6 +608,25 @@ class CommentMixin(object):
     def community_maintenance(self):
         return zeit.web.core.comments.community_maintenance()
 
+    def show_replies(self, parent):
+        # The request is a comment permalink, so we need to show the
+        # replies of the permalinked comment's root comment.
+        try:
+            cid = int(self.request.GET['cid'])
+        except (KeyError, ValueError):
+            return False
+        if not self.comments:
+            return False
+
+        permalinked = self.comments['index'].get(cid, {})
+        if not permalinked.get('is_reply'):
+            return False
+        try:
+            root = self.comments['comments'][permalinked.get('root_index') - 1]
+            return root['cid'] == parent['cid']
+        except IndexError:
+            return False
+
     @zeit.web.reify
     def comments(self):
         if not self.show_commentthread:

@@ -136,15 +136,6 @@ def test_comment_filter_works_as_expected(testbrowser):
     assert len(comments) == 4
 
 
-def test_comment_in_reply_to_shows_origin(testbrowser):
-    browser = testbrowser('/zeit-online/article/01/comment-thread')
-    answers = browser.cssselect('.comment--indented')
-    origins = browser.cssselect('.comment__origin')
-    link = browser.cssselect('#cid-2968920 .comment__origin')[0]
-    assert len(answers) == len(origins)
-    assert link.text_content().strip() == 'Antwort auf #1 von Skarsgard'
-
-
 def test_comment_author_roles_should_be_displayed(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     comment_author = browser.document.get_element_by_id('cid-2968470')
@@ -192,49 +183,77 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
         'comment section template must return an empty document')
 
 
-def test_comment_reply_threads_wraps_on_load_and_toggles_on_click(
-        selenium_driver, testserver):
+def test_comment_reply_thread_loads_and_toggles(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/article/02' % testserver.url)
+    select = driver.find_elements_by_css_selector
 
-    wrapped_threads = driver.find_elements_by_css_selector('.comment--wrapped')
-    assert len(wrapped_threads) == 3
+    first_comment_id = 'cid-5122059'
+    first_reply_id = 'cid-5122548'
+    second_reply_id = 'cid-5122767'
+    last_reply_id = 'cid-5122784'
 
-    hidden_reply = driver.find_element_by_id('cid-5122767')
+    assert len(select('#{}'.format(first_comment_id))) == 1
+    assert len(select('#{}'.format(first_reply_id))) == 1
+    assert len(select('#{}'.format(second_reply_id))) == 0
+    assert len(select('#{}'.format(last_reply_id))) == 0
 
-    try:
-        WebDriverWait(driver, 1).until(
-            expected_conditions.invisibility_of_element_located(
-                (By.ID, 'cid-5122767')))
-    except TimeoutException:
-        assert False, 'Comment must be hidden initially'
-
-    comment_count_overlay = driver.find_element_by_class_name(
-        'comment-overlay__count')
-    assert comment_count_overlay.text == '+ 2'
-
-    wrapped_threads[0].click()
-    assert len(driver.find_elements_by_css_selector('.comment--wrapped')) == 2
-    assert hidden_reply.is_displayed()
-
-    toggle = driver.find_element_by_id('hide-replies-cid-5122059')
+    # kann schlecht per ID angesprochen werden .. oder ahref selektieren?
+    toggle = select('.js-load-comment-replies')[0]
     toggle.click()
+    try:
+        WebDriverWait(driver, 1).until(
+            expected_conditions.visibility_of_element_located(
+                (By.ID, second_reply_id)),
+            expected_conditions.visibility_of_element_located(
+                (By.ID, last_reply_id)))
+    except TimeoutException:
+        assert False, 'Click must load comment reply'
 
+    toggle = select('.js-hide-replies')[0]
+    toggle.click()
     try:
         WebDriverWait(driver, 1).until(
             expected_conditions.invisibility_of_element_located(
-                (By.ID, 'cid-5122767')))
+                (By.ID, second_reply_id)),
+            expected_conditions.invisibility_of_element_located(
+                (By.ID, last_reply_id)))
     except TimeoutException:
         assert False, 'Click must hide comment reply'
 
+    toggle = select('.comment-overlay')[0]
+    toggle.click()
+    try:
+        WebDriverWait(driver, 1).until(
+            expected_conditions.visibility_of_element_located(
+                (By.ID, second_reply_id)),
+            expected_conditions.visibility_of_element_located(
+                (By.ID, last_reply_id)))
+    except TimeoutException:
+        assert False, 'Click must show comment reply'
 
-def test_comment_reply_thread_must_not_wrap_if_deeplinked(
-        selenium_driver, testserver, mockserver):
+
+# needs selenium because of esi include
+def test_comment_reply_thread_loads_with_deeplink(selenium_driver, testserver):
+    last_reply_id = '5122784'
     driver = selenium_driver
-    driver.get('%s/zeit-online/article/02#cid-5122767' % testserver.url)
-    # Force page load even if another test has left the browser on _this_ page.
-    driver.refresh()
-    assert driver.find_element_by_id('cid-5122767').is_displayed()
+    driver.get(
+        '{}/zeit-online/article/02?cid={}'
+        .format(testserver.url, last_reply_id))
+    select = driver.find_elements_by_css_selector
+    assert len(select('#cid-{}'.format(last_reply_id))) == 1
+
+
+# needs selenium because of esi include
+def test_comment_reply_thread_loads_with_nojs(selenium_driver, testserver):
+    first_reply_id = '5122548'
+    second_reply_id = '5122767'
+    driver = selenium_driver
+    driver.get(
+        '{}/zeit-online/article/02?cid={}'
+        .format(testserver.url, first_reply_id))
+    select = driver.find_elements_by_css_selector
+    assert len(select('#cid-{}'.format(second_reply_id))) == 1
 
 
 def test_comment_actions_should_link_to_article(testbrowser):
@@ -243,6 +262,13 @@ def test_comment_actions_should_link_to_article(testbrowser):
     assert link.get('href') == (
         'http://localhost/zeit-online/article/01'
         '?action=report&pid=2968470#report-comment-form')
+
+
+def test_comment_pagination_should_link_to_article(testbrowser):
+    browser = testbrowser('/zeit-online/article/01/comment-thread')
+    link = browser.cssselect('.pager__page a')[0]
+    assert link.get('href') == (
+        'http://localhost/zeit-online/article/01?page=2#comments')
 
 
 def test_comment_action_recommend_should_redirect_to_login(testserver):
@@ -346,3 +372,11 @@ def test_comment_area_should_show_message_for_blocked_users(application):
     # This is a bit implicit; the actual message is rendered by the template.
     assert not view.comment_area['note']
     assert not view.comment_area['message']
+
+
+def test_comment_replies_view_renders_html_for_replies(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/01/comment-replies?cid=2968478')
+    comments = browser.cssselect('article .comment__body')
+    assert len(comments) == 4
+    assert 'Arschtritt' in comments[0].xpath('p')[0].text
