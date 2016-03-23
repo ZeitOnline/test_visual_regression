@@ -636,7 +636,7 @@ class CommentMixin(object):
         page = self.request.params.get('page', 1)
         cid = self.request.params.get('cid', None)
         try:
-            return zeit.web.core.comments.get_thread(
+            return zeit.web.core.comments.get_paginated_thread(
                 self.context.uniqueId,
                 sort=sort,
                 page=page,
@@ -648,7 +648,7 @@ class CommentMixin(object):
         return zeit.web.core.comments.get_comment(self.context.uniqueId, cid)
 
     @zeit.web.reify
-    def comments_allowed(self):
+    def commenting_allowed(self):
         return self.context.commentsAllowed and self.show_commentthread
 
     @zeit.web.reify
@@ -678,7 +678,7 @@ class CommentMixin(object):
                        u'Die Kommentare zu diesem Artikel konnten '
                        u'nicht geladen werden. Bitte entschuldigen Sie '
                        u'diese Störung.')
-        elif not self.comments_allowed:
+        elif not self.commenting_allowed:
             message = (u'Der Kommentarbereich dieses Artikels ist geschlossen.'
                        u' Wir bitten um Ihr Verständnis.')
             note = message
@@ -697,20 +697,23 @@ class CommentMixin(object):
             # For not authenticated users this means "show_login_prompt".
             'show_comment_form': (
                 not self.community_maintenance['active'] and
-                self.comments_allowed and self.comments_loadable and
+                self.commenting_allowed and self.comments_loadable and
                 ((not user_blocked and valid_community_login) or
                  not authenticated)),
             'note': note,
             'message': message,
             'user_blocked': user_blocked,
             'show_premoderation_warning': premoderation and (
-                self.comments_allowed and not user_blocked)
+                self.commenting_allowed and not user_blocked)
         }
+
+    @zeit.web.reify
+    def comment_count(self):
+        return zeit.web.core.comments.comment_count(self.context.uniqueId)
 
     @zeit.web.reify
     def comment_area(self):
         result = {
-            'show': (self.comments_allowed or bool(self.comments)),
             'show_comments': not self.community_maintenance['active'] and (
                 self.comments_loadable and bool(self.comments)),
             'no_comments': (not self.comments and self.comments_loadable),

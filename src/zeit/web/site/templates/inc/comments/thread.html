@@ -97,11 +97,11 @@
             {% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
         {% endfor %}
 
-        {% if comment.replies | length > 1 %}
+        {% if comment.sublevel_comment_count > 1 %}
             <div class="comment__container js-comment-loader">
                 {#- link to first reply, which enforces all replies to be included in the HTML -#}
                 <a href="{{view.content_url}}?cid={{comment.replies[0].cid}}#cid-{{comment.cid}}" data-url="{{view.content_url}}/comment-replies?cid={{comment.cid}}">
-                    <span class="comment-overlay__count">+ {{comment.replies | length-1}}</span>
+                    <span class="comment-overlay__count">+ {{comment.sublevel_comment_count - 1}}</span>
                     <span class="comment-overlay__cta"> weitere Antworten anzeigen</span>
                 </a>
             </div>

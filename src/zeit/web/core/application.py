@@ -385,8 +385,9 @@ def join_url_path(base, path):
 
 def configure_host(key):
     def wrapped(request):
-        prefix = request.registry.settings.get(key + '_prefix', '')
-        version = request.registry.settings.get('version', 'latest')
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        prefix = conf.get(key + '_prefix', '')
+        version = conf.get('version', 'latest')
         prefix = prefix.format(version=version)
         if not prefix.startswith('http'):
             prefix = join_url_path(
