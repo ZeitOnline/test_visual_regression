@@ -75,11 +75,6 @@ def app_settings(mockserver):
         # test, but then I'd need to re-create an Application since
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
-        'asset_prefix': '/static/latest',
-        'image_prefix': '',
-        'jsconf_prefix': '/jsconf',
-        'fbia_prefix': '/fbia',
-        'c1_prefix': '/jsconf',
         'comment_page_size': '4',
         'community_host': 'http://localhost:6551',
         'community_static_host': 'http://static_community/foo',

@@ -32,19 +32,22 @@ def app_request(application, app_settings, request):
 
 def test_asset_host_includes_configured_prefix(app_request):
     app, request = app_request
-    app.config.registry.settings['asset_prefix'] = '/assets'
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['asset_prefix'] = '/assets'
     assert request.asset_host == 'http://example.com/assets'
 
 
 def test_asset_host_allows_specifying_full_host(app_request):
     app, request = app_request
-    app.config.registry.settings['asset_prefix'] = 'http://assets.example.com/'
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['asset_prefix'] = 'http://assets.example.com/'
     assert request.asset_host == 'http://assets.example.com'
 
 
 def test_asset_host_supports_url_prefix(app_request):
     app, request = app_request
-    app.config.registry.settings['asset_prefix'] = '/assets'
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['asset_prefix'] = '/assets'
     request.application_url = 'http://example.com/foo'
     assert request.asset_host == 'http://example.com/foo/assets'
 
