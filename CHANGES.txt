@@ -4,6 +4,8 @@ Change log for zeit.web
 2.66 (unreleased)
 -----------------
 
+- FIX: Adapt correct region/area structure to testdata
+
 - HOTFIX: Make comment thread work again on video pages
 
 - ZON-2492: Nextread without image
