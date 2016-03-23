@@ -3,7 +3,7 @@
 window.Zeit.require([ 'jquery' ], function( $ ) {
     $.ajax({
         url: "{{ settings('c1_prefix') }}/tracking/tracking.js",
-        timeout: {{ settings('script_timeout', 0) }},
+        timeout: {{ settings('script_timeout') | default(2000, True) }},
         dataType: "script",
         cache: true,
         success: function() {
