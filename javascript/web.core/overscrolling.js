@@ -3,7 +3,13 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-define( [ 'modernizr', 'jquery', 'web.core/zeit', 'jquery.throttle', 'jquery.inview' ], function( Modernizr, $, Zeit ) {
+define( [
+       'modernizr',
+       'jquery',
+       'velocity.ui',
+       'web.core/zeit',
+       'jquery.throttle',
+       'jquery.inview' ], function( Modernizr, $, Velocity, Zeit ) {
     var defaults = {
         documentMinHeight: 800,
         jumpHash: '#overscroll-article',
@@ -23,7 +29,8 @@ define( [ 'modernizr', 'jquery', 'web.core/zeit', 'jquery.throttle', 'jquery.inv
             click: 'clickToHP',
             scroll: 'scrollToHP'
         },
-        triggerElement: '.footer'
+        triggerElement: '.footer',
+        scrollToTrigger: true
     },
     config,
     debug = location.search.indexOf( 'debug-overscrolling' ) !== -1,
@@ -105,6 +112,9 @@ define( [ 'modernizr', 'jquery', 'web.core/zeit', 'jquery.throttle', 'jquery.inv
                     console.debug( 'overscrolling: jump to HP.' );
                 } else {
                     clickTrack( 'scrollToHP', config.jumpTo );
+                    if ( config.scrollToTrigger && history.pushState ) {
+                        history.pushState( null, null, '#!top-of-overscroll' );
+                    }
                     window.location.href = config.jumpTo + config.jumpHash;
                 }
             }
@@ -144,7 +154,16 @@ define( [ 'modernizr', 'jquery', 'web.core/zeit', 'jquery.throttle', 'jquery.inv
                 if ( debug ) { console.debug( 'overscrolling: no svg available' ); }
                 return;
             }
+            if ( 'scrollRestoration' in history ) {
+                history.scrollRestoration = 'manual';
+            }
             config = $.extend( defaults, options );
+            if ( window.location.href.indexOf( '#!top-of-overscroll' ) > -1  && history.pushState ) {
+                var scrollPos = $( config.triggerElement ).position().top - $( window ).height();
+                $( 'html' ).velocity( 'scroll', { offset: scrollPos, mobileHA: false, complete: function() {
+                    history.pushState( '', document.title, window.location.pathname + window.location.search );
+                } } );
+            }
             if ( $( document ).height() >= config.documentMinHeight ) {
                 // inview event to change to elemen
                 $( config.triggerElement ).on( 'inview', function( event, isInView ) {
