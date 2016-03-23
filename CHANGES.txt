@@ -1,6 +1,12 @@
 Change log for zeit.web
 =======================
 
+2.65.1 (unreleased)
+-------------------
+
+- HOTFIX: Fix comment pagination links
+
+
 2.65 (2016-03-21)
 -----------------
 
