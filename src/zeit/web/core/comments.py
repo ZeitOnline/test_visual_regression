@@ -265,9 +265,8 @@ def get_paginated_thread(
 
     flattened_comments = comment_list[:]
 
-    offset = (int(page)-1)*page_size if int(page) > 0 else 0
-    sorted_tree, index = _sort_comments(comment_list,
-                                        offset=offset)
+    offset = (int(page) - 1) * page_size if int(page) > 0 else 0
+    sorted_tree, index = _sort_comments(comment_list, offset=offset)
 
     pagination_comment_count = toplevel_comment_count
 
@@ -613,8 +612,8 @@ def _sort_comments(comments, offset=0):
                 comments_sorted[ancestor][1].append(comment)
                 root_index = comments_sorted[ancestor][0]['root_index']
                 comment['root_index'] = root_index
-                comment['shown_num'] = "{}.{}".format(comment['root_index'],
-                    len(comments_sorted[ancestor][1]))
+                comment['shown_num'] = "{}.{}".format(
+                    comment['root_index'], len(comments_sorted[ancestor][1]))
             except KeyError:
                 log.error("The comment with the cid {} is a reply, but"
                           " no ancestor could be found".format(comment['cid']))

@@ -364,7 +364,8 @@ def test_comments_should_have_correct_order_when_paginated():
 
     comments = [cid_1, cid_2, cid_3]
 
-    sorted_comments = zeit.web.core.comments._sort_comments(comments, offset=2)[0]
+    sorted_comments = zeit.web.core.comments._sort_comments(
+        comments, offset=2)[0]
 
     sorted_comments = list(itertools.chain(
         *[[li[0]] + li[1] for li in sorted_comments.values()]))
