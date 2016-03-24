@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Fix comment numbering in pagination
 
+- HOTFIX: Use correct agatho API call for recommendations
+
 - HOTFIX: Use fallback for C1 setting to avoid script syntax error
 
 
