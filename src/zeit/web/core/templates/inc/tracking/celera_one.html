@@ -1,21 +1,21 @@
 {% if toggles('tracking') and settings('c1_prefix') and view.c1_client %}
 <script type="text/javascript">
 window.Zeit.require([ 'jquery' ], function( $ ) {
-	$.ajax({
-		url: "{{ settings('c1_prefix') }}/tracking/tracking.js",
-		timeout: {{ settings('script_timeout') }},
-		dataType: "script",
-		cache: true,
-		success: function() {
-			if ( typeof( cre_client ) != "undefined" ) {
-				cre_client.set_page_view();
-			{% for func, value in view.c1_client %}
-				cre_client.{{ func }}( {{ value | safe }} );
-			{% endfor %}
-				cre_client.request();
-			}
-		}
-	});
+    $.ajax({
+        url: "{{ settings('c1_prefix') }}/tracking/tracking.js",
+        timeout: {{ settings('script_timeout', 2000) | int }},
+        dataType: "script",
+        cache: true,
+        success: function() {
+            if ( typeof( cre_client ) != "undefined" ) {
+                cre_client.set_page_view();
+            {% for func, value in view.c1_client %}
+                cre_client.{{ func }}( {{ value | safe }} );
+            {% endfor %}
+                cre_client.request();
+            }
+        }
+    });
 });
 </script>
 {% endif %}

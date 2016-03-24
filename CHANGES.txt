@@ -1,10 +1,22 @@
 Change log for zeit.web
 =======================
 
-2.66 (unreleased)
+2.67 (unreleased)
+-----------------
+
+- HOTFIX: Fix comment numbering in pagination
+
+- HOTFIX: Use fallback for C1 setting to avoid script syntax error
+
+
+2.66 (2016-03-23)
 -----------------
 
 - HOTFIX: Make comment thread work again on video pages
+
+- ZON-2908: Load comment replies via Ajax request
+
+- ZON-2909: Load paginated thread from community
 
 - ZON-2492: Nextread without image
 
@@ -13,6 +25,14 @@ Change log for zeit.web
 - BUG-378: Remove microdata for AMP nextread
 
 - BUG-380: Harmonize publisher nextread tracking code
+
+- MAINT: Make image_prefix and friends runtime-configurable
+
+
+2.65.1 (2016-03-23)
+-------------------
+
+- HOTFIX: Fix comment pagination links
 
 
 2.65 (2016-03-21)

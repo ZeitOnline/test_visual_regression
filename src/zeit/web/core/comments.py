@@ -127,6 +127,10 @@ def comment_to_dict(comment):
             if created.replace(second=59) > changed:
                 created = created.replace(second=changed.second)
 
+    sublevel_comment_count = 0
+    if comment.xpath('comments_count_subthread/text()'):
+        sublevel_comment_count = int(
+            comment.xpath('comments_count_subthread/text()')[0])
     # TODO: Catch name and cid unavailabilty in element tree.
     return dict(
         uid=comment.xpath('author/@id')[0].lstrip('uid-'),
@@ -136,6 +140,7 @@ def comment_to_dict(comment):
         name=author_name,
         created=created,
         text=content,
+        text_stripped=content_stripped,
         role=', '.join(roles),
         fans=','.join(fans),
         cid=int(comment.xpath('./@id')[0].lstrip('cid-')),
@@ -145,21 +150,50 @@ def comment_to_dict(comment):
         is_freelancer=is_freelancer,
         is_reply=bool(in_reply),
         is_promoted=bool(
-            len(comment.xpath('flagged[@type="kommentar_empfohlen"]')))
+            len(comment.xpath('flagged[@type="kommentar_empfohlen"]'))),
+        sublevel_comment_count=sublevel_comment_count
     )
 
 
-def request_thread(path):
+def request_thread(unique_id,
+                   thread_type='full',
+                   page=0,
+                   page_size=4,
+                   sort='asc',
+                   cid=None,
+                   ):
     """Send a GET request to receive an agatho comment thread.
 
-    :param path: Path section of a uniqueId
+    :param unique_id: ICMSContent uniqueId
+    :param thread_type: One of 'full' or 'paginated'
+    :param page_size: Number of comments displayed per page
     :rtype: unicode or None
     """
-
+    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     timeout = float(conf.get('community_host_timeout_secs', 0.5))
     uri = '{}/agatho/thread{}'.format(
         conf.get('agatho_host', ''), path.encode('utf-8'))
+
+    thread_modes = dict(
+        paginated='{}?mode=top&page={}&rows={}&order={}'.format(
+            uri, page, page_size, sort),
+        sub_thread='{}?mode=sub&cid={}'.format(uri, cid),
+        deeplink='{}?mode=deeplink&cid={}&rows={}&order={}'.format(
+            uri, cid, page_size, sort),
+        recommendation=(
+            '{}?mode=recommendations&type=leser_empfehlung&'
+            'page={}&rows={}&order={}').format(uri, page, page_size, sort),
+        promotion=(
+            '{}?mode=recommendations&type=kommentar_empfohlen&'
+            'page={}&rows={}&order={}').format(uri, page, page_size, sort),
+        single='{}?mode=load_cid&cid={}'.format(uri, cid),
+        meta='{}?mode=meta'.format(uri),
+    )
+
+    uri = thread_modes.get(thread_type, uri)
+    log.debug("request_thread {}: {}".format(thread_type, uri))
+
     try:
         with zeit.web.core.metrics.timer(
                 'request_thread.community.reponse_time'):
@@ -175,6 +209,124 @@ def request_thread(path):
 
 class ThreadNotLoadable(Exception):
     pass
+
+
+def get_paginated_thread(
+        unique_id, sort='asc', page=0, cid=None, parent_cid=None,
+        invalidate_delta=5):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    page_size = int(conf.get('comment_page_size', '4'))
+
+    thread_type = 'paginated'
+    request_sort = sort
+    if sort == 'promoted':
+        thread_type = 'promotion'
+        request_sort = 'asc'
+    elif sort == 'recommended':
+        thread_type = 'recommendation'
+        request_sort = 'asc'
+    elif cid:
+        thread_type = 'deeplink'
+    elif parent_cid:
+        cid = parent_cid
+        thread_type = 'sub_thread'
+    thread = request_thread(unique_id, thread_type=thread_type, page=page,
+                            page_size=page_size, sort=request_sort, cid=cid)
+    if thread is None:
+        return dict()
+
+    if isinstance(thread, dict) and thread.get('request_failed'):
+        raise ThreadNotLoadable()
+
+    try:
+        document = lxml.etree.fromstring(thread)
+    except:
+        log.warning(
+            'get_paginated_thread input unparseable, ignoring', exc_info=True)
+        raise ThreadNotLoadable()
+
+    try:
+        comment_nid = document.xpath('/comments/nid/text()')[0]
+        comment_list = document.xpath('//comment')
+        comment_count = document.xpath('/comments/comment_count/text()')[0]
+        toplevel_comment_count = document.xpath(
+            '/comments/comments_count_toplevel/text()')[0]
+        total_comment_count = comment_count
+        recommendation_count = int(document.xpath(
+            '/comments/comments_count_recommendations_readers/text()')[0])
+        has_recommendation = bool(recommendation_count)
+        promotion_count = int(document.xpath(
+            '/comments/comments_count_recommendations_editors/text()')[0])
+        has_promotion = bool(promotion_count)
+    except (IndexError, lxml.etree.XMLSyntaxError):
+        raise ThreadNotLoadable()
+
+    comment_list = list(comment_to_dict(c) for c in comment_list)
+
+    flattened_comments = comment_list[:]
+
+    offset = (int(page) - 1) * page_size if int(page) > 0 else 0
+    sorted_tree, index = _sort_comments(comment_list, offset=offset)
+
+    pagination_comment_count = toplevel_comment_count
+
+    if thread_type == 'promotion':
+        pagination_comment_count = promotion_count
+    if thread_type == 'recommendation':
+        pagination_comment_count = recommendation_count
+
+    pages = int(math.ceil(float(pagination_comment_count) / float(page_size)))
+
+    thread = dict(
+        sorted_tree=sorted_tree,
+        flattened_comments=flattened_comments,
+        has_recommendations=has_recommendation,
+        has_promotion=has_promotion,
+        index=index,
+        comment_count=comment_count,
+        sort=sort,
+        nid=comment_nid)
+
+    sorted_tree = thread.pop('sorted_tree', {}).values()
+    thread['comment_count'] = comment_count
+    # sanitize page value
+    if page:
+        try:
+            page = int(page)
+        except ValueError:
+            page = 1
+
+        if page < 1 or page > pages:
+            page = 1
+
+    # flatten comment tree
+    thread['comments'] = comments = []
+    for main_comment in sorted_tree:
+        origin = main_comment[0]
+        origin['replies'] = []
+        comments.append(origin)
+        for sub_comment in main_comment[1]:
+            origin['replies'].append(sub_comment)
+
+    # display comment count
+    thread['headline'] = '{} {}'.format(
+        total_comment_count,
+        'Kommentar' if total_comment_count == 1 else 'Kommentare')
+
+    # comments ad place
+    thread['ad_place'] = int(page_size / 2 + 1)
+
+    # all things pagination
+    thread['pages'] = {
+        'current': page,
+        'total': pages,
+        'pager': zeit.web.core.template.calculate_pagination(page, pages)}
+
+    if page and thread['pages']['pager']:
+        thread['pages']['title'] = u'Seite {} von {}'.format(
+            page, pages)
+
+    return thread
 
 
 def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
@@ -285,13 +437,43 @@ def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
 
 
 def get_comment(unique_id, cid):
-    # XXX The idea is that we call a special agatho function here,
-    # not parse the whole thread ourselves.
+    thread = request_thread(unique_id, thread_type='single', cid=cid)
+    if thread is None:
+        return {}
+    if isinstance(thread, dict) and thread.get('request_failed'):
+        return {}
+
     try:
-        thread = zeit.web.core.comments.get_thread(unique_id, cid=cid)
-    except ThreadNotLoadable:
-        return None
-    return thread.get('index', {}).get(cid)
+        document = lxml.etree.fromstring(thread)
+    except:
+        log.warning('get_comment input unparseable, ignoring', exc_info=True)
+        return {}
+
+    comment = [comment_to_dict(c) for c in document.xpath('//comment')]
+    if not comment:
+        return {}
+    return comment[0]
+
+
+def comment_count(unique_id):
+    response = request_thread(unique_id, thread_type='meta')
+    # XXX Needs a better error handling protocol, say a customized exception?
+    if not response or (
+            isinstance(response, dict) and response.get('request_failed')):
+        return 0
+    try:
+        document = lxml.etree.fromstring(response)
+    except:
+        log.warning(
+            'has_comments input unparseable, ignoring', exc_info=True)
+        return 0
+    count = document.xpath('//comment_count/text()')
+    if not count:
+        return 0
+    try:
+        return int(count[0])
+    except ValueError:
+        return 0
 
 
 def community_maintenance():
@@ -361,9 +543,7 @@ def _derive_maintenance_from_schedule(maintenance):
 
 @LONG_TERM_CACHE.cache_on_arguments()
 def get_cacheable_thread(unique_id):
-
-    path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
-    thread = request_thread(path)
+    thread = request_thread(unique_id)
 
     if thread is None:
         return
@@ -411,12 +591,11 @@ def get_cacheable_thread(unique_id):
         return
 
 
-def _sort_comments(comments):
+def _sort_comments(comments, offset=0):
 
     comments_sorted = collections.OrderedDict()
     root_ancestors = {}
     comment_index = {}
-
     while comments:
         comment = comments.pop(0)
 
@@ -424,8 +603,8 @@ def _sort_comments(comments):
             root_ancestors[comment['cid']] = comment['cid']
             comments_sorted[comment['cid']] = [comment, []]
             root_index = comments_sorted.keys().index(comment['cid']) + 1
-            comment['root_index'] = root_index
-            comment['shown_num'] = str(root_index)
+            comment['root_index'] = root_index + offset
+            comment['shown_num'] = str(root_index + offset)
         else:
             try:
                 ancestor = root_ancestors[comment['in_reply']]
@@ -433,8 +612,8 @@ def _sort_comments(comments):
                 comments_sorted[ancestor][1].append(comment)
                 root_index = comments_sorted[ancestor][0]['root_index']
                 comment['root_index'] = root_index
-                comment['shown_num'] = "{}.{}".format(root_index, len(
-                    comments_sorted[ancestor][1]))
+                comment['shown_num'] = "{}.{}".format(
+                    comment['root_index'], len(comments_sorted[ancestor][1]))
             except KeyError:
                 log.error("The comment with the cid {} is a reply, but"
                           " no ancestor could be found".format(comment['cid']))
