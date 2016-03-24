@@ -182,10 +182,10 @@ def request_thread(unique_id,
         deeplink='{}?mode=deeplink&cid={}&rows={}&order={}'.format(
             uri, cid, page_size, sort),
         recommendation=(
-            '{}?mode=recommendations&type=leser_empfehlung&'
+            '{}?mode=recommendations&recommendationtype=leser_empfehlung&'
             'page={}&rows={}&order={}').format(uri, page, page_size, sort),
         promotion=(
-            '{}?mode=recommendations&type=kommentar_empfohlen&'
+            '{}?mode=recommendations&recommendationtype=kommentar_empfohlen&'
             'page={}&rows={}&order={}').format(uri, page, page_size, sort),
         single='{}?mode=load_cid&cid={}'.format(uri, cid),
         meta='{}?mode=meta'.format(uri),
