@@ -54,6 +54,16 @@ def test_framebuilder_can_contain_webtrekk(testbrowser):
     assert len(webtrekk_script) == 1
 
 
+def test_framebuilder_sets_webtrekk_values_differently(testbrowser):
+    browser = testbrowser('/framebuilder?webtrekk')
+    assert ('var Z_WT_KENNUNG = "redaktion.None...centerpage.zede|" + '
+            'window.location.hostname + '
+            'window.location.pathname;') in browser.contents
+    assert ('7: window.location.hostname + '
+            'window.location.pathname,') in browser.contents
+    assert '26: "centerpage.framebuilder"' in browser.contents
+
+
 def test_framebuilder_contains_no_ivw(testbrowser):
     browser = testbrowser('/framebuilder')
     assert 'iam.js' not in browser.contents
