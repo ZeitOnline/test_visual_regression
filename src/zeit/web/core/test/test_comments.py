@@ -186,7 +186,7 @@ def test_request_thread_mode_should_produce_expected_uris(
 
     recommendation = '{}/agatho/thread/foo{}'.format(
         conf.get('agatho_host', ''),
-        '?mode=recommendations&type=leser_empfehlung&page=1&rows=4&order=asc')
+        '?mode=recommendations&recommendationtype=leser_empfehlung&page=1&rows=4&order=asc')
 
     zeit.web.core.comments.request_thread(
         '/foo', thread_type='recommendation', page=1, page_size=4)
@@ -195,7 +195,7 @@ def test_request_thread_mode_should_produce_expected_uris(
 
     promotion = '{}/agatho/thread/foo{}'.format(
         conf.get('agatho_host', ''),
-        '?mode=recommendations&type=kommentar_empfohlen'
+        '?mode=recommendations&recommendationtype=kommentar_empfohlen'
         '&page=1&rows=4&order=asc')
 
     zeit.web.core.comments.request_thread(
