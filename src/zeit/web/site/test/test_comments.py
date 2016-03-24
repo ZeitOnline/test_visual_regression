@@ -419,3 +419,10 @@ def test_comment_displays_total_reply_count(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     link = browser.cssselect('.comment-overlay__count')[0]
     assert link.text == '+ 2'
+
+
+def test_deeplink_should_have_page_number(application):
+    thread = zeit.web.core.comments.get_paginated_thread(
+        'http://xml.zeit.de/zeit-online/article/01',
+        cid=91)
+    assert int(thread['pages']['current']) == 2

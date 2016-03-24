@@ -258,6 +258,16 @@ def get_paginated_thread(
         promotion_count = int(document.xpath(
             '/comments/comments_count_recommendations_editors/text()')[0])
         has_promotion = bool(promotion_count)
+
+        thread_position = document.xpath(
+            '/comments/thread_position/text()')
+
+        if len(thread_position) == 1:
+            thread_position = int(thread_position[0])
+            page = thread_position / page_size
+            if thread_position % page_size > 0:
+                page = page+1
+
     except (IndexError, lxml.etree.XMLSyntaxError):
         raise ThreadNotLoadable()
 
