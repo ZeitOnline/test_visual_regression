@@ -265,8 +265,9 @@ def get_paginated_thread(
 
     flattened_comments = comment_list[:]
 
+    offset = (int(page)-1)*page_size if int(page) > 0 else 0
     sorted_tree, index = _sort_comments(comment_list,
-                                        offset=((int(page)-1)*page_size))
+                                        offset=offset)
 
     pagination_comment_count = toplevel_comment_count
 
