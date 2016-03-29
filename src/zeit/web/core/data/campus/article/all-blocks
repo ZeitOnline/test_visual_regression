@@ -112,17 +112,43 @@
         <bu>Bernie Sanders kommt Hillary Clinton gefährlich nahe. Wenn der Sozialist sie weiter bedrängt, könnte sie nach links ausscheren.</bu>
         <copyright>© Warner Bros.</copyright>
       </image>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus eligendi, modi ut temporibus reprehenderit vitae eos laudantium consectetur distinctio architecto.</p>
+      <p>Ducimus eligendi, modi ut temporibus reprehenderit vitae eos laudantium consectetur distinctio architecto.</p>
       <intertitle>Intertitle</intertitle>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem eos qui in.</p>
+      <p>Quam minima assumenda quos, nobis asperiores sed, totam similique incidunt, ratione dolorum a suscipit obcaecati officiis!</p>
       <image base-id="http://xml.zeit.de/campus/image/01-junge-vor-unscharfem-hintergrund" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
         <bu>Die ist der image sub text</bu>
         <copyright link="http://foo.de">©foo</copyright>
       </image>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero numquam, reiciendis provident. Eaque beatae deleniti ducimus.</p>
+      <p>Obcaecati praesentium labore doloribus iusto eum accusantium delectus cupiditate quaerat error, placeat, sapiente rem. Soluta natus dolore reiciendis ratione quod.</p>
+      <infobox href="http://xml.zeit.de/zeit-online/article/info-bonobo" is_empty="False" />
+      <p>Consectetur repellendus asperiores, nemo saepe quia excepturi quod nihil at dolorem nam commodi molestiae delectus molestias.</p>
+      <gallery href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" contenttype="gallery"></gallery>
+      <p>Dolorem molestiae optio ipsa, animi, unde omnis neque numquam temporibus sint incidunt?</p>
+      <ol>
+        <li>Explicabo sit quam ipsam, consectetur accusamus, quas rerum adipisci obcaecati!</li>
+        <li>Nostrum et sit rerum eligendi! Error ipsum reiciendis suscipit voluptas?</li>
+        <li>Fuga hic, deserunt autem voluptates repellat beatae incidunt eveniet unde.</li>
+      </ol>
+      <p>In est fuga, a tempore cumque modi sapiente ipsa, non recusandae rerum ut nobis quaerat at inventore delectus aperiam quam placeat voluptatem ab quis.</p>
+      <quiz quiz_id="103" adreload_enabled="True"/>
+      <quiz quiz_id="104" adreload_enabled="False"/>
+      <p>Aspernatur aperiam, delectus, aliquam cupiditate quisquam ullam excepturi, necessitatibus hic iure qui, blanditiis iste reiciendis magni.</p>
+      <raw alldevices="true">
+        <hr/>
+        <h2>R.A.W.</h2>
+        <hr/>
+      </raw>
+      <ul>
+        <li>Quod odit ut esse aliquam voluptates quasi id.</li>
+        <li>Pariatur iure commodi, accusantium alias blanditiis cupiditate assumenda.</li>
+        <li>Atque totam dolores inventore iusto, doloribus libero exercitationem.</li>
+      </ul>
+      <video format="large" is_empty="True" href="http://xml.zeit.de/campus/video/4193594095001" expires="2016-08-06T04:00:00+00:00" />
+      <p>Harum voluptas explicabo, laborum, perferendis praesentium dolorem.</p>
       <citation text="Say 'what' again. Say 'what' again, I dare you, I double dare you motherfucker, say what one more Goddamn time!" attribution="Jules Winnfield" url="http://www.imdb.com/title/tt0110912/quotes?item=qt0447099"/>
       <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/administratives/autoreninfos/wenke-husmann-info" publication-date="" expires=""/>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam unde itaque necessitatibus voluptates dolores voluptas pariatur fugiat molestias! At, assumenda fuga doloremque recusandae!</p>
+      <p>Veniam unde itaque necessitatibus voluptates dolores voluptas pariatur fugiat molestias! At, assumenda fuga doloremque recusandae!</p>
+      <p>Veritatis doloribus, laudantium sequi error similique suscipit aperiam quod beatae doloremque tempora perferendis eligendi rem ea laboriosam eos temporibus reiciendis omnis amet expedita cumque. Accusamus maxime iure voluptatum magni in numquam debitis voluptatibus, nulla!</p>
       <liveblog blogID="158"/>
     </division>
     <subtitle>Studienwahl? Zentrale Studienberatung! Wohnheimszimmer? Studentenwerk! Lernstress? Psychologische Beratung! Wir haben die wichtigsten Anlaufstellen gesammelt.</subtitle>
