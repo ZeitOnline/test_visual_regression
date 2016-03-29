@@ -756,10 +756,10 @@ def format_iqd(string):
 
 
 @zeit.web.register_global
-def settings(key):
+def settings(key, default=None):
     """Returns the configuration value for a provided key"""
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return conf.get(key)
+    return conf.get(key, default)
 
 
 @zeit.web.register_global

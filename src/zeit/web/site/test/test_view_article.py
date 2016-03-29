@@ -313,18 +313,6 @@ def test_other_page_types_should_not_designate_meta_pagination(testbrowser):
     assert not browser.xpath('//head/link[@rel="next"]')
 
 
-def test_article_meta_should_show_comment_count(testbrowser):
-    browser = testbrowser('/zeit-online/article/01')
-    count = browser.cssselect('.metadata__commentcount')[0].text
-    assert count == '42 Kommentare'
-
-
-def test_article_meta_should_omit_comment_count_if_no_comments_present(
-        testbrowser):
-    browser = testbrowser('/zeit-online/article/simple')
-    assert len(browser.cssselect('.metadata__commentcount')) == 0
-
-
 def test_article_obfuscated_source_without_date_print_published():
     content = mock.Mock()
     content.product.label = content.product.title = 'DIE ZEIT'

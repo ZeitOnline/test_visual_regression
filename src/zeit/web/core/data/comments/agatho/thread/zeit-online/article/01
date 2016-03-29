@@ -1,950 +1,690 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<comments url="/commentsection/url/zeit-online/article/01">
- <last_comment_timestamp>1376757288</last_comment_timestamp>
+<comments url="/content/zwei-baguettes-und-ein-zimmer-bitte">
+ <last_comment_timestamp>1457953126</last_comment_timestamp>
  <last_comment_name></last_comment_name>
- <last_comment_uid>291552</last_comment_uid>
- <comment_count>41</comment_count>
- <nid>281882</nid>
- <comment id="cid-2968470" moderated="true">
-  <subject>Komik</subject>
-  <content>&lt;p&gt;Ein Iraner,der findet,dass die Deutschen zu wenig meckern...^^&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>20</hour>
-   <minute>24</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="241862"/>
-  <flagged type="leser_empfehlung" userid="340322"/>
-  <flagged type="leser_empfehlung" userid="296040"/>
-  <flagged type="leser_empfehlung" userid="277822"/>
-  <author id="uid-394578" url="/user/skarsgard" roles="author">
-   <name>Skarsgard</name>
-  </author>
- </comment>
- <comment id="cid-2968473" moderated="true">
-  <subject>[...]</subject>
-  <content>&lt;p&gt;&lt;em&gt;Entfernt. Bitte verzichten Sie auf Unterstellungen und beachten das konkrete Artikelthema. Danke, die Redaktion/ls&lt;/em&gt;&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>20</hour>
-   <minute>25</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="395912"/>
-  <flagged type="leser_empfehlung" userid="267783"/>
-  <author id="uid-311626" url="/user/monaco-franze" roles="freelancer" sex="weiblich">
-   <name>Monaco Franze</name>
-  </author>
- </comment>
-  <comment id="cid-5112507" moderated="true">
-  <subject>Langsam wird&amp;#039;s etwas albern</subject>
+ <last_comment_uid>2</last_comment_uid>
+ <comment_count>35</comment_count>
+ <comments_count_toplevel/>
+ <comments_count_recommendations_editors/>
+ <comments_count_recommendations_readers/>
+ <nid>3</nid>
+ <comment id="cid-3">
+  <subject>[empty]</subject>
   <date>
    <year>2015</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>6</hour>
-   <minute>06</minute>
+   <month>10</month>
+   <day>14</day>
+   <hour>13</hour>
+   <minute>38</minute>
   </date>
-  <created>1439784407</created>
-  <changed>1439784407</changed>
+  <created>1444829933</created>
+  <changed>1444829933</changed>
   <homepage></homepage>
-  <content>&lt;p&gt;Nachrichten aus den USA bekommen in deutschen Medien ja immer etwas mehr Aufmerksamkeit, als sie verdienen, aber wenn ich jetzt (als Amerikaner!) die ZEIT-Seite aufmache und dort Trumps Positionen als Aufmacher sehe, kommt es mit doch vor, als wird das deutsche Publikum hier etwas veräppelt.&lt;/p&gt;
-&lt;p&gt;Trump ist zwar unterhaltsam, aber dass seine &quot;Positionen&quot; hier als etwas ernstzunehmendes auf der ersten Seite gehandelt werden, ist doch reichlich übertrieben.&lt;/p&gt;
-&lt;p&gt;Zu keinem Zeitpunkt ist oder wird Trump mehr als ein peinliches innerparteiliches Problem der Republikaner sein. Seine Position in den Umfragen bezieht sich auf die republikanischen Vorwahlen, wo immer eine besonders radikalisierte Auswahl der Wähler einen unverhältnismässig hohen Einfluss hat, und ist zum grossen Teil sowieso nur das Resultat des weitgestreuten Feldes der anderen Kandidaten, das sich erstmal aussortieren und lichten muss. Was er daher programmatisch vorschlägt, ist so irrelevant wie wirklichkeitsfremd.&lt;/p&gt;
+  <content>&lt;p&gt;xyz&lt;/p&gt;
 </content>
-  <flagged type="kommentar_empfohlen"/>
-  <flagged type="moderieren"/>
-  <flagged type="leser_empfehlung" userid="150571"/>
-  <flagged type="leser_empfehlung" userid="225350"/>
-  <flagged type="leser_empfehlung" userid="254431"/>
-  <flagged type="leser_empfehlung" userid="254593"/>
-  <flagged type="leser_empfehlung" userid="259768"/>
-  <flagged type="leser_empfehlung" userid="339766"/>
-  <flagged type="leser_empfehlung" userid="374514"/>
-  <flagged type="leser_empfehlung" userid="404688"/>
-  <flagged type="leser_empfehlung" userid="447935"/>
-  <flagged type="leser_empfehlung" userid="456815"/>
-  <flagged type="leser_empfehlung" userid="470322"/>
-  <flagged type="leser_empfehlung" userid="492783"/>
-  <flagged type="leser_empfehlung" userid="495206"/>
-  <flagged type="leser_empfehlung" userid="504249"/>
-  <flagged type="leser_empfehlung" userid="554957"/>
-  <flagged type="leser_empfehlung" userid="562897"/>
-  <author id="uid-521135" url="/user/blackfish">
-   <name>Blackfish</name>
+  <token>VSsguVsWRUYvdwF5qMEKn4a9-F7v70bE4bWoaEocr1A</token>
+<flagged type="moderieren" userid="0"/>
+	  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
   </author>
  </comment>
- <comment id="cid-2968478" moderated="true">
-  <subject>Ich verstehe die Intention des Artikels nicht...</subject>
-  <content>&lt;p&gt;Wer hier Wählen will, muss einen deutschen Pass haben. Wo ist da das Problem?&lt;br /&gt;
-Beschweren sich auch deutsche Auswanderer in Spanien, dass sie nicht mitwählen können?&lt;/p&gt;
-</content>
+ <comment id="cid-4">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>20</hour>
-   <minute>28</minute>
+   <year>2015</year>
+   <month>10</month>
+   <day>14</day>
+   <hour>13</hour>
+   <minute>40</minute>
   </date>
+  <created>1444830046</created>
+  <changed>1444830046</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="297254"/>
-  <flagged type="leser_empfehlung" userid="394143"/>
-  <flagged type="leser_empfehlung" userid="209900"/>
-  <flagged type="leser_empfehlung" userid="249441"/>
-  <flagged type="leser_empfehlung" userid="293271"/>
-  <flagged type="leser_empfehlung" userid="327786"/>
-  <flagged type="leser_empfehlung" userid="203851"/>
-  <flagged type="leser_empfehlung" userid="278091"/>
-  <flagged type="leser_empfehlung" userid="402380"/>
-  <flagged type="leser_empfehlung" userid="367630"/>
-  <flagged type="leser_empfehlung" userid="379733"/>
-  <flagged type="leser_empfehlung" userid="197265"/>
-  <flagged type="leser_empfehlung" userid="370560"/>
-  <flagged type="leser_empfehlung" userid="149272"/>
-  <flagged type="leser_empfehlung" userid="296040"/>
-  <flagged type="leser_empfehlung" userid="277822"/>
-  <flagged type="leser_empfehlung" userid="276924"/>
-  <flagged type="leser_empfehlung" userid="210656"/>
-  <flagged type="leser_empfehlung" userid="234397"/>
-  <flagged type="leser_empfehlung" userid="397059"/>
-  <flagged type="leser_empfehlung" userid="287301"/>
-  <flagged type="leser_empfehlung" userid="210730"/>
-  <flagged type="leser_empfehlung" userid="291552"/>
-  <flagged type="leser_empfehlung" userid="337122"/>
-  <author id="uid-407679" url="/user/avisfu">
-   <name>AvisFu</name>
+  <content>&lt;p&gt;fsdfds&lt;/p&gt;
+</content>
+  <token>ebPxsiyeSgo7QQRxDr3oxgCEmoUc2ZsgtW_MVg4isr0</token>
+<flagged type="moderieren" userid="0"/>
+	  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
   </author>
  </comment>
- <comment id="cid-2968481" moderated="true">
-  <subject>[...]</subject>
-  <content>&lt;p&gt;&lt;em&gt;Entfernt. Bitte kommentieren Sie sachlich zum konkreten Artikelthema. Danke. Die Redaktion/kvk&lt;/em&gt;&lt;/p&gt;
-</content>
+ <comment id="cid-5">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>20</hour>
-   <minute>29</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="293271"/>
-  <flagged type="leser_empfehlung" userid="209900"/>
-  <flagged type="leser_empfehlung" userid="327786"/>
-  <flagged type="leser_empfehlung" userid="203851"/>
-  <flagged type="leser_empfehlung" userid="402380"/>
-  <flagged type="leser_empfehlung" userid="291735"/>
-  <flagged type="leser_empfehlung" userid="325390"/>
-  <flagged type="leser_empfehlung" userid="403362"/>
-  <flagged type="leser_empfehlung" userid="370560"/>
-  <flagged type="leser_empfehlung" userid="149272"/>
-  <flagged type="leser_empfehlung" userid="277822"/>
-  <flagged type="leser_empfehlung" userid="234397"/>
-  <flagged type="leser_empfehlung" userid="36305"/>
-  <author id="uid-394143" url="/user/adiorational">
-   <name>adio_rational</name>
-  </author>
- </comment>
- <comment id="cid-2968489" moderated="true">
-  <subject>Mal ganz simpel betrachtet...</subject>
-  <content>&lt;p&gt;… sollten Menschen, die an einen Staat Steuern zahlen nicht auch mitbestimmen dürfen, wofür ihr Geld verwendet wird?&lt;/p&gt;
-&lt;p&gt;Aber ich verstehe mein Land und seine Einwanderungspolitik ohnehin nicht.&lt;br /&gt;
-Gerade der selbstständige Unternehmensberater Amir Tehrani, der auch noch 12 (deutsche?) Bürger beschäftigt und trotzdem keine deutsche Staatsbürgerschaft hat, ist wiedereinmal so ein extremes Beispiel.&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>20</hour>
-   <minute>34</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="376198"/>
-  <flagged type="leser_empfehlung" userid="381475"/>
-  <flagged type="leser_empfehlung" userid="361187"/>
-  <flagged type="leser_empfehlung" userid="149272"/>
-  <flagged type="leser_empfehlung" userid="352069"/>
-  <flagged type="leser_empfehlung" userid="404331"/>
-  <flagged type="leser_empfehlung" userid="309488"/>
-  <flagged type="leser_empfehlung" userid="181243"/>
-  <author id="uid-296488" url="/user/schlomoschorsch">
-   <name>schlomoschorsch</name>
-  </author>
- </comment>
- <comment id="cid-2968499" moderated="true">
-  <inreply to="cid-2968478"/>
-  <subject>Ich glaube die Intention des Artikel ist es einfach zu zeigen,..</subject>
-  <content>&lt;p&gt;...dass es Menschen gibt, die gerne am politischen Leben des Landes in dem sie leben teilhaben möchten. Das sie keine deutsche Staatsbürgerschaft haben ist auf dem Weg dahin natürlich das wesentlichste Problem.&lt;br /&gt;
-Vielleicht ist der Artikel aber auch als Arschtritt für die Nichtwähler gedacht. Während sie wählen dürfen, es aber nicht tun, wollen andere Mitbürger wählen, dürfen aber nicht.&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>20</hour>
-   <minute>46</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="328757"/>
-  <flagged type="leser_empfehlung" userid="78015"/>
-  <flagged type="leser_empfehlung" userid="376198"/>
-  <flagged type="leser_empfehlung" userid="241862"/>
-  <flagged type="leser_empfehlung" userid="264170"/>
-  <flagged type="leser_empfehlung" userid="407679"/>
-  <flagged type="leser_empfehlung" userid="361187"/>
-  <flagged type="leser_empfehlung" userid="324916"/>
-  <flagged type="leser_empfehlung" userid="404331"/>
-  <flagged type="leser_empfehlung" userid="210656"/>
-  <flagged type="leser_empfehlung" userid="261456"/>
-  <flagged type="leser_empfehlung" userid="309488"/>
-  <flagged type="leser_empfehlung" userid="181243"/>
-  <author id="uid-296488" url="/user/schlomoschorsch">
-   <name>schlomoschorsch</name>
-  </author>
- </comment>
- <comment id="cid-2968505" moderated="true">
-  <inreply to="cid-2968481"/>
-  <subject>jammern ohne anlass</subject>
-  <content>&lt;p&gt;Wie empfindlich doch die konservative Schwarz-Gelbe-Fangemeinde ist. Sie bekommt nicht mit, dass überwiegend in der Presse, in fast allen Medien ein SPD-Bashing stattfindet, noch intensivere Steinbrück-Fettnäpfchen-Berichterstattung, dadurch Hofschranzerei für die müde Merkel-Regierung, sodass sie, die BK'in sich kaum anstrengen muss, außer ein paar nichtssagende Reden halten. Dann kommen mal am Rande, in einem Artikel über vier Leuten, die in D. leben, aber nicht wählen dürfen zur Rede, die Sympathien für Steinbrück zum Ausdruck bringen, und schon ....... Na ja, .......&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>20</hour>
-   <minute>53</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="296488"/>
-  <flagged type="leser_empfehlung" userid="376198"/>
-  <flagged type="leser_empfehlung" userid="264170"/>
-  <flagged type="leser_empfehlung" userid="340322"/>
-  <flagged type="leser_empfehlung" userid="196991"/>
-  <flagged type="leser_empfehlung" userid="210656"/>
-  <flagged type="leser_empfehlung" userid="261456"/>
-  <author id="uid-182471" url="/user/dacapo">
-   <name>dacapo</name>
-  </author>
- </comment>
- <comment id="cid-2968514" moderated="true">
-  <subject>Guter Artikel </subject>
-  <content>&lt;p&gt;Aber wenn ich den Herrn Kilic treffen würde, würde ich ihn fragen, warum er vor 10 Jahren unbedingt nach Deutschland wollte, hier studierte und hier arbeitet, aber in der Zeit kein Staatsbürger geworden ist - wenn er schon Mitspracherecht fordert.&lt;/p&gt;
-&lt;p&gt;Das letzte Beispiel mit dem Herrn Tehrani ist bedauerlich. Es gibt einige Staaten, die eine Ausbürgerung nicht kennen, wie offenbar der Iran. Dort fallen Staatsbürgerschaft und Persönlichkeit zusammen, und anscheinend nutzt der Iran das, um diejenigen, die ihm den Rücken kehren, im Ausland zu bestrafen. Klar kann man hier über eine Regelung nachdenken, gerade für Fälle wie Tehranis. Aber dass er den schwarzen Peter schwarz-gelb zuschiebt, finde ich falsch, in den letzten 30 Jahren gab es viele Bundesregierungen.&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>21</hour>
-   <minute>00</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="249441"/>
-  <flagged type="leser_empfehlung" userid="278091"/>
-  <flagged type="leser_empfehlung" userid="263405"/>
-  <flagged type="leser_empfehlung" userid="402380"/>
-  <flagged type="leser_empfehlung" userid="291735"/>
-  <flagged type="leser_empfehlung" userid="264170"/>
-  <flagged type="leser_empfehlung" userid="403362"/>
-  <flagged type="leser_empfehlung" userid="327786"/>
-  <flagged type="leser_empfehlung" userid="379733"/>
-  <flagged type="leser_empfehlung" userid="231871"/>
-  <flagged type="leser_empfehlung" userid="203686"/>
-  <flagged type="leser_empfehlung" userid="260752"/>
-  <flagged type="leser_empfehlung" userid="370560"/>
-  <flagged type="leser_empfehlung" userid="244913"/>
-  <flagged type="leser_empfehlung" userid="261456"/>
-  <flagged type="leser_empfehlung" userid="287301"/>
-  <flagged type="leser_empfehlung" userid="210730"/>
-  <flagged type="leser_empfehlung" userid="291552"/>
-  <author id="uid-328757" url="/user/war%C3%A4ger">
-   <name>Waräger</name>
-  </author>
- </comment>
- <comment id="cid-2968525" moderated="true">
-  <inreply to="cid-2968505"/>
-  <subject>Falsch aber Typisch....</subject>
-  <content>&lt;p&gt;für die normale &quot;links&quot;-autoritäre Fangemeinde.&lt;/p&gt;
-&lt;p&gt;Die meisten Journalisten sind Grün-Rot dazu gibt es eine Studie die im letzten Gastkommentar von Herrn Wolffsohn im Focus genannt wurde.&lt;/p&gt;
-&lt;p&gt;Die Berichterstattung ist überwiegend Grün-Rot freundlich (der überwiegende Teil der Zeitungen bis auf Springer und FAZ sind ja auch bekennend &quot;LINKS&quot;).&lt;/p&gt;
-&lt;p&gt;Diese Art der Meinungs(ver)führung ist öde. Der Artikel strotzt nur so von Klischee abgefragten.&lt;/p&gt;
-&lt;p&gt;Man hätte auch den typischen Türken / Araber fragen können der hier Links (Rot-Grün) wählt (oder wählen würde) und in seiner Heimat Rechtsaußen (AKP , Graue Wölfe, Muslimbrüder etc.). Das wäre mal wirklich interessant gewesen.&lt;/p&gt;
-&lt;p&gt;Die abgefragten sind ein minimale Gruppe die wieder als &quot;Vorzeige&quot; Stars gewisser Zeitungen fungieren.&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>21</hour>
-   <minute>08</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="278091"/>
-  <flagged type="leser_empfehlung" userid="327786"/>
-  <flagged type="leser_empfehlung" userid="402380"/>
-  <flagged type="leser_empfehlung" userid="297254"/>
-  <flagged type="leser_empfehlung" userid="249441"/>
-  <flagged type="leser_empfehlung" userid="209900"/>
-  <flagged type="leser_empfehlung" userid="379733"/>
-  <flagged type="leser_empfehlung" userid="231871"/>
-  <flagged type="leser_empfehlung" userid="370560"/>
-  <flagged type="leser_empfehlung" userid="149272"/>
-  <flagged type="leser_empfehlung" userid="287301"/>
-  <author id="uid-394143" url="/user/adiorational">
-   <name>adio_rational</name>
-  </author>
- </comment>
- <comment id="cid-2968541" moderated="true">
-  <inreply to="cid-2968525"/>
-  <subject>Mehrheit der Journalisten Rot-Grün?</subject>
-  <content>&lt;p&gt;Wenn sie behaupten, dass es eine Studie gibt, die beweist, dass die Mehrheit der Journalisten Rot-Grün wählen, warum verlinken sie sie dann nicht?&lt;br /&gt;
-Im Ernst, dass wird im Internet immer wieder gern behauptet, aber bisher habe ich dafür keinerlei Belege gelesen und so langsam hätte ich mal gern ein paar Beweise.&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>21</hour>
-   <minute>23</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="244913"/>
-  <flagged type="leser_empfehlung" userid="210656"/>
-  <author id="uid-296488" url="/user/schlomoschorsch">
-   <name>schlomoschorsch</name>
-  </author>
- </comment>
- <comment id="cid-2968556" moderated="true">
-  <inreply to="cid-2968541"/>
-  <subject>Hab ich auch schon öfter gehört und gelesen</subject>
-  <content>&lt;p&gt;Umfrageergebisse hatte ich dazu schonmal in der Hand. 1 Minute Internetrecherche bringts auch. Auch wenn sich mir nicht erschließt, wie Sie von dem Artikel auf dieses Thema kommen. Wegen der spanischen Journalistin?&lt;br /&gt;
-&lt;a target=&quot;_blank&quot; href=&quot;http://www.focus.de/finanzen/news/money-inside-was-journalisten-waehlen_aid_1032835.html&quot; title=&quot;http://www.focus.de/finanzen/news/money-inside-was-journalisten-waehlen_aid_1032835.html&quot; rel=&quot;nofollow&quot;&gt;http://www.focus.de/finan...&lt;/a&gt;&lt;br /&gt;
-&lt;a target=&quot;_blank&quot; href=&quot;http://meedia.de/print/jeder-dritte-journalist-liebaeugelt-mit-gruenen/2012/10/29.html&quot; title=&quot;http://meedia.de/print/jeder-dritte-journalist-liebaeugelt-mit-gruenen/2012/10/29.html&quot; rel=&quot;nofollow&quot;&gt;http://meedia.de/print/je...&lt;/a&gt;&lt;br /&gt;
-http://www.pro-medienmagazin.de/journalismus.html?&amp;amp;news[action]=detail&amp;amp;news[id]=4030&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>21</hour>
-   <minute>32</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="327786"/>
-  <flagged type="leser_empfehlung" userid="394143"/>
-  <author id="uid-328757" url="/user/war%C3%A4ger">
-   <name>Waräger</name>
-  </author>
- </comment>
- <comment id="cid-2968583" moderated="true">
-  <inreply to="cid-2968505"/>
-  <subject>Die...</subject>
-  <content>&lt;p&gt;Schwarz Gelbe Fangemeinde sieht ja auch hinter allem eine linke Verschwörung. Schwarze Kassen und Verfassungsbruch von Kohl? Alles eine Verschwörung.&lt;br /&gt;
-So ein Artikel gibt da einen guten Anlass dieser diffusen Angst Raum zu verschaffen.&lt;br /&gt;
-Gegen &quot;Ausländer&quot; können Sie in diesem Land auch Wahlkampf machen (Koch, Hessen).&lt;br /&gt;
-Sowas passt nicht ins Weltbild:&lt;br /&gt;
-&quot;...sagt Tehrani, der als selbstständiger Unternehmensberater zwölf Mitarbeiter beschäftigt.&quot;&lt;br /&gt;
-Aber mit Kleinkariertheit, Engherzigkeit und schlicht Dummheit haben wir in diesem Land noch nie Probleme gehabt.&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>21</hour>
-   <minute>52</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="78015"/>
-  <author id="uid-376198" url="/user/ngc1672">
-   <name>NGC1672</name>
-  </author>
- </comment>
- <comment id="cid-2968587" moderated="true">
-  <inreply to="cid-2968489"/>
-  <subject>Ja, aber....</subject>
-  <content>&lt;p&gt;man sollte trotzdem eine deutsche Staatsbürgerschaft vorweisen. María Prieto-Vázquez darf übrigens bei der Kommunalpolitik mitbestimmen. Aber generell finde ich es richtig, dass man die deutsche Staatsbürgerschaft hat um wählen gehen zu dürfen. Somit sind María Prieto-Vázquez und Bülent Kilic gerechtfertigt(,weil sie ihre ursprüngliche Staatsbürgerschaft nicht aufgeben wollen?!).&lt;br /&gt;
-Beim Unternehmer liegt der Fall anders. Hier ist der Iran das &quot;Problem&quot;, weil er sich weigert Amir Tehrani aus seiner Staatsbürgerschaft zu entlassen.&lt;br /&gt;
-Die Frage wäre, ob man nicht hier einen Sonderstatus schaffen könnte. D.h. verfolgte Iraner werden mit einer provisorischen, deutschen Staatsbürgerschaft(und bekommen alle Rechte), nur ihre Freizügigkeit wird eingeschränkt, d.h. z.B. ohne eine vorherige Anmeldung für eine aussereuropäische Auslandsreise, bekommt man die Staatsbürgerschaft wieder aberkannt.&lt;/p&gt;
-&lt;p&gt;Ansonsten können ja alle 4 Personen ihr nichtwählendes Umfeld positiv beeinflussen :)&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>21</hour>
-   <minute>53</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="337666"/>
-  <flagged type="leser_empfehlung" userid="327786"/>
-  <flagged type="leser_empfehlung" userid="244913"/>
-  <flagged type="leser_empfehlung" userid="402380"/>
-  <flagged type="leser_empfehlung" userid="261456"/>
-  <author id="uid-241862" url="/user/ddave">
-   <name>DDave</name>
-  </author>
- </comment>
- <comment id="cid-2968588" moderated="true">
-  <inreply to="cid-2968525"/>
-  <subject>Ja,...</subject>
-  <content>&lt;p&gt;Man munkelt, dass die intensive Berichterstattung über Schröder in Gummistiefeln beim &quot;Jahrhundert&quot;-Hochwasser dem Stoiber das Wahlergebnis vermasselt hat.&lt;/p&gt;
-&lt;p&gt;Schade, dass das Hochwasser schon da war und nicht erst kurz vor der Wahl kommt, damit man Angie mit Tatkraft gegen die FLuten kämpfen sieht.&lt;br /&gt;
-Ach sorry, ich vergaß, dass Merkel sowieso wieder Kanzlerin wird, denn entweder reicht es mit der FDP oder die SPD wird sich als Steigbügelhalter anbiedern...&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>21</hour>
+   <year>2015</year>
+   <month>10</month>
+   <day>23</day>
+   <hour>9</hour>
    <minute>57</minute>
   </date>
+  <created>1445594227</created>
+  <changed>1445594227</changed>
   <homepage></homepage>
-  <author id="uid-241862" url="/user/ddave">
-   <name>DDave</name>
+  <content>&lt;p&gt;comment me&lt;/p&gt;
+</content>
+  <token>KojlVXMpQorQWx6dGEixJ3Wm0hBWrnRwaNmkd55XkCs</token>
+<flagged type="moderieren" userid="0"/>
+	  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
   </author>
  </comment>
- <comment id="cid-2968589" moderated="true">
-  <subject>Ich darf wählen,</subject>
-  <content>&lt;p&gt;aber kann nicht. Denn mein Gewissen und Verstand verbietet mir das &quot;Kreuz&quot; bei den Kandidaten und Gruppenformationen.&lt;br /&gt;
-Demokratie ist aber auch nicht nur das Wählen, sondern das tägliche Handeln. Also verzichte ich auf die Stimme für die Schlaffos und gestalte selbst die Gesellschaft mit. Das ist das eigentliche Tolle, das Mitgestalten, nicht das sinnlose Ankreuzen!!&lt;/p&gt;
-</content>
+ <comment id="cid-7">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>21</hour>
-   <minute>58</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="276924"/>
-  <author id="uid-283837" url="/user/paul-temple">
-   <name>paul temple</name>
-  </author>
- </comment>
- <comment id="cid-2968595" moderated="true">
-  <subject>Der Iraner sollte doch </subject>
-  <content>&lt;p&gt;eine doppelte Staatsbürgerschaft bekommen können, eben weil er vom Iran nicht aus der Staatsbürgerschaft entlassen wird, irgendwas macht er da falsch.&lt;br /&gt;
-Zitat aus diesem Artikel &lt;a target=&quot;_blank&quot; href=&quot;http://de.wikipedia.org/wiki/Iraner_in_Deutschland&quot; title=&quot;http://de.wikipedia.org/wiki/Iraner_in_Deutschland&quot; rel=&quot;nofollow&quot;&gt;http://de.wikipedia.org/w...&lt;/a&gt; : &quot;... In der Praxis werden Iraner inzwischen meist unter Hinnahme von Mehrstaatigkeit in Deutschland eingebürgert.[12][13] Von den 3662 Iranern, die im Jahr 2006 eingebürgert wurden, konnten 99,8 Prozent ihre alte Staatsangehörigkeit beibehalten..&quot;&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>22</hour>
-   <minute>02</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="327786"/>
-  <flagged type="leser_empfehlung" userid="379733"/>
-  <flagged type="leser_empfehlung" userid="244913"/>
-  <flagged type="leser_empfehlung" userid="261456"/>
-  <flagged type="leser_empfehlung" userid="291552"/>
-  <author id="uid-153894" url="/user/Neonjaeger">
-   <name>Neonjaeger</name>
-  </author>
- </comment>
- <comment id="cid-2968597" moderated="true">
-  <inreply to="cid-2968556"/>
-  <subject>@Waräger</subject>
-  <content>&lt;p&gt;Wieso fragen sie mich, wie ich auf das Thema komme? adio_rational hat mit dem Thema angefangen und ich habe ihn nach Beweisen gefragt.&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>22</hour>
-   <minute>04</minute>
-  </date>
-  <homepage></homepage>
-  <author id="uid-296488" url="/user/schlomoschorsch">
-   <name>schlomoschorsch</name>
-  </author>
- </comment>
- <comment id="cid-2968622" moderated="true">
-  <inreply to="cid-2968499"/>
-  <subject>Den Arschtritt...</subject>
-  <content>&lt;p&gt;für die Nichtwähler unterschreib ich und Ihre Begründung klingt logisch&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>22</hour>
-   <minute>25</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="386888"/>
-  <author id="uid-407679" url="/user/avisfu">
-   <name>AvisFu</name>
-  </author>
- </comment>
- <comment id="cid-2968636" moderated="true">
-  <inreply to="cid-2968589"/>
-  <subject>Sinnvolles Ankreuzen</subject>
-  <content>&lt;p&gt;&quot;Alle Staatsgewalt geht vom Volke aus.&quot; Leider nur alle 4..5 Jahre. Der nächste Termin ist der 22.9.&lt;/p&gt;
-&lt;p&gt;Wer nicht oder ungültig wählt, erklärt sich im voraus mit dem Ergebnis der Gültig-Wähler für einverstanden - weil das alleine zählt.&lt;/p&gt;
-&lt;p&gt;Ausser den im Bundestag vertretenen Parteien stehen etliche mehr auf dem Stimmzettel. Einspruch gegen die etablierten Parteien erhebt man am wirksamsten, indem man sein Kreuz bei einer der anderen macht. Selbst wenn diese die 5%-Hürde nicht schafft, bewirkt das:&lt;br /&gt;
-- die 5%-Hürde wird absolut erhöht, was eventuell die FDP aus dem Bundestag rauskegelt;&lt;br /&gt;
-- die gewählte Partei erhält, sofern sie wenigstens 0.5% der gültigen Stimmen erreicht, eine bescheidene Wahlkampfkostenerstattung (0.85€/Stimme/Jahr).&lt;/p&gt;
-&lt;p&gt;Ich wähle gültig. Ich wähle Piraten.&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>22</hour>
-   <minute>36</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="352069"/>
-  <flagged type="leser_empfehlung" userid="261456"/>
-  <author id="uid-78015" url="/user/suchenwi">
-   <name>suchenwi</name>
-  </author>
- </comment>
- <comment id="cid-2968645" moderated="true">
-  <inreply to="cid-2968478"/>
-  <subject>Ja, wir Auswanderer beschweren uns..</subject>
-  <content>&lt;p&gt;siehe Kommentare hier:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.zeit.de/politik/deutschland/2013-08/Wahlrecht-Auslandsdeutsche&quot; title=&quot;http://www.zeit.de/politik/deutschland/2013-08/Wahlrecht-Auslandsdeutsche&quot; rel=&quot;nofollow&quot;&gt;http://www.zeit.de/politi...&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Denn ein deutscher Pass ist übrigens auch nicht genug..&lt;/p&gt;
-&lt;p&gt;Grüße aus Spanien&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>22</hour>
-   <minute>44</minute>
-  </date>
-  <homepage></homepage>
-  <author id="uid-399224" url="/user/claudiae">
-   <name>claudiaE</name>
-  </author>
- </comment>
- <comment id="cid-2968655" moderated="true">
-  <subject>Da hab&amp;#039; ich ein paar Tipps:</subject>
-  <content>&lt;p&gt;1. An all jene, die zu jung sind: Werdet älter!&lt;br /&gt;
-2. Alle, die nicht wählen dürfen, weil sie die Deutsche Staatsbürgerschaft nicht haben: Nehmt die Deutsche Staatsbürgerschaft an und schon geht's!&lt;/p&gt;
-&lt;p&gt;Und sonst?&lt;/p&gt;
-&lt;p&gt;Tja, liebe Wählerinnen und Wählerinninnen,&lt;br /&gt;
-es ist nicht einfach zwischen mehreren Übeln zu wählen.&lt;br /&gt;
-Ich bin ja schon etwas angejahrt und halte es mit dem Spruch:&lt;br /&gt;
-Wer mit 20 nicht Sozialist ist, hat kein Herz und wer mit 30 immer noch Sozialist ist, hat kein H......&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>22</hour>
-   <minute>54</minute>
-  </date>
-  <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="327786"/>
-  <flagged type="leser_empfehlung" userid="379733"/>
-  <flagged type="leser_empfehlung" userid="249441"/>
-  <flagged type="leser_empfehlung" userid="291552"/>
-  <author id="uid-369575" url="/user/yaels">
-   <name>YaelS</name>
-  </author>
- </comment>
- <comment id="cid-2968664" moderated="true">
-  <inreply to="cid-2968655"/>
-  <subject>Sozial</subject>
-  <content>&lt;p&gt;Man muss nicht Sozialist sein. Man muss nur Art. 20 Abs. 1 GG ernst nehmen:&lt;br /&gt;
-&quot;Die Bundesrepublik Deutschland ist ein demokratischer und sozialer Bundesstaat.&quot;&lt;br /&gt;
-Und (sofern andere Abhilfe möglich ist, gewaltlosen) Widerstand ausüben, wenn gegen diese Prinzipien verstoßen wird.&lt;/p&gt;
-</content>
-  <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>23</hour>
+   <year>2015</year>
+   <month>10</month>
+   <day>23</day>
+   <hour>12</hour>
    <minute>01</minute>
   </date>
+  <created>1445601684</created>
+  <changed>1445601683</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="210656"/>
-  <author id="uid-78015" url="/user/suchenwi">
-   <name>suchenwi</name>
+  <content>&lt;p&gt;dedas&lt;/p&gt;
+</content>
+  <token>p3au4VTwFH7vw-cjjKHtaxsJ7c6aJiaaRnv3WSbZ-bk</token>
+<flagged type="moderieren" userid="0"/>
+	  <author id="uid-3" url="/users/test_user21">
+   <name>test_user21</name>
   </author>
  </comment>
- <comment id="cid-2968692" moderated="true">
-  <subject>Das ist doch vollkommen korrekt</subject>
-  <content>&lt;p&gt;Die vollkommende Strafmündigkeit beginnt mit dem Alter von 21.&lt;br /&gt;
-Weshalb sollten dann ganz junge Menschen wählen dürfen, wenn ihnen andererseits die persönliche Reife fehlt.&lt;/p&gt;
-&lt;p&gt;Wer keine deutsche Staatsangehörigkeit besitzt kann bei einer Bundestagswahl auch nicht an die Wahlurne treten, so ist es rechtens und nicht anders.&lt;/p&gt;
-</content>
+ <comment id="cid-54">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>16</day>
-   <hour>23</hour>
-   <minute>23</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>12</hour>
+   <minute>35</minute>
   </date>
+  <created>1446813348</created>
+  <changed>1446813348</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="327786"/>
-  <flagged type="leser_empfehlung" userid="379733"/>
-  <flagged type="leser_empfehlung" userid="249441"/>
-  <flagged type="leser_empfehlung" userid="261456"/>
-  <flagged type="leser_empfehlung" userid="291552"/>
-  <author id="uid-289746" url="/user/weltenseher">
-   <name>Weltenseher</name>
+  <content>&lt;p&gt;füseldüseldumm&lt;/p&gt;
+</content>
+  <token>PxWjMmSq7QhDIHJrrXS4aoPtiOCObV8FFGEUcgAN7No</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
   </author>
  </comment>
- <comment id="cid-2968742" moderated="true">
-  <subject>Herr Therani auf Xing</subject>
-  <content>&lt;p&gt;bietet;&lt;br /&gt;
-Sales Vakanzen, Projekte Sales + Customer Care, Managementpositionen D-A-CH, Sales Coaching, Vertriebsmitarbeiter, Salesmanagement, Vertriebsoutsourcing, Direct Sales, Key Account Management, Projektmanagement, Venture Capital und Privte Equity&lt;/p&gt;
-&lt;p&gt;Ziemlich viele Fremdwörter und bei 2/3 weiss ich nicht, was sie bedeuten.&lt;/p&gt;
-&lt;p&gt;Aber mit Vertriebsoutsourcing, Venture Capital und Private Equity kennt sich der Peer gut aus.&lt;/p&gt;
-&lt;p&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://www.xing.com/profile/Amir_Tehrani4&quot; title=&quot;http://www.xing.com/profile/Amir_Tehrani4&quot; rel=&quot;nofollow&quot;&gt;http://www.xing.com/profi...&lt;/a&gt;&lt;/p&gt;
-</content>
+ <comment id="cid-55">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>0</hour>
-   <minute>22</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>12</hour>
+   <minute>38</minute>
   </date>
+  <created>1446813537</created>
+  <changed>1446813537</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="291552"/>
-  <author id="uid-231871" url="/user/tb">
-   <name>tb</name>
+  <content>&lt;p&gt;füdeldüüdüdeldüü&lt;/p&gt;
+</content>
+  <token>3fclt5Y_ZqEzClfbba7cs7iCOY6tNg-6sLZTYABnmC0</token>
+  <author id="uid-8" url="/users/premoderate03" roles="verified">
+   <name>premoderate03</name>
   </author>
  </comment>
- <comment id="cid-2968751" moderated="true">
-  <inreply to="cid-2968595"/>
-  <subject>@ 16: 2006 ist lange her</subject>
-  <content>&lt;p&gt;Was 2006 möglich war, muß heute schon längst nicht mehr drin sein.&lt;/p&gt;
-&lt;p&gt;Herr Tehrani ist der einzige der vier, bei dem ich für eine spezielle Lösung eintreten würde, um ihm Wahlrecht &quot;außer der Reihe&quot; einzuräumen. In den andern drei Fällen gibt es ausreichend Gründe, sie unter den gegenwärtigen Umständen nicht wählen zu lassen.&lt;/p&gt;
-&lt;p&gt;MGv Oyamat&lt;/p&gt;
-</content>
+ <comment id="cid-56">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>0</hour>
-   <minute>32</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>12</hour>
+   <minute>39</minute>
   </date>
+  <created>1446813595</created>
+  <changed>1446813595</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="249441"/>
-  <flagged type="leser_empfehlung" userid="370560"/>
-  <flagged type="leser_empfehlung" userid="278091"/>
-  <author id="uid-203686" url="/user/oyamat">
-   <name>Oyamat</name>
+  <content>&lt;p&gt;dsfdsfdsfdsfds&lt;/p&gt;
+</content>
+  <token>YRryUKEkCTW0J2be9NjVIbWocs-HhKqjIjTjTX6JgqQ</token>
+  <author id="uid-8" url="/users/premoderate03" roles="verified">
+   <name>premoderate03</name>
   </author>
  </comment>
- <comment id="cid-2968758" moderated="true">
-  <inreply to="cid-2968478"/>
-  <subject>Sie werden lachen, aber...</subject>
-  <content>&lt;p&gt;...1998 haben ein paar Mallorca-Ansässige um den Wurstfabrikanten Horst Abel herum versucht, eine deutsche Partei zu gründen (&quot;Amigos Alemanes en España&quot;) - wie es offiziell hieß, zum Schutz deutscher Sicherheitsinteressen. Aufgrund des erheblichen Unmuts der einheimischen Inselbewohner wurde die Idee dann fallen gelassen.&lt;/p&gt;
-&lt;p&gt;Ansonsten: in Spanien dürfen EU-Bürger auf Gemeindeebene mitwählen, ebenso wie solche aus Ländern, die mit Spanien ein entsprechendes Gegenseitigkeitsabkommen haben (z.B. Argentien und andere lateinamerikanische Staaten, Neuseeland und Island).&lt;/p&gt;
-</content>
+ <comment id="cid-58">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>0</hour>
-   <minute>58</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>12</hour>
+   <minute>46</minute>
   </date>
+  <created>1446814000</created>
+  <changed>1446814000</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="78015"/>
-  <author id="uid-225533" url="/user/dodge">
-   <name>Dodge this</name>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>QOPbAyIpPYVo46TdSNflwptfU4sqU2G9XtmbpNfmEB0</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2968819" moderated="true">
-  <subject>In den USA</subject>
-  <content>&lt;p&gt;bekommt man die Staatsangehörigkeit und somit das Wahlrecht leichter als hier, aber da muss man auch einen EID auf das Land ablegen (anders als bei uns).&lt;br /&gt;
-Vielleicht schauen wir uns doch mal etwas von unseren besten Freunden ab?&lt;br /&gt;
-Ja? Nein?&lt;/p&gt;
-</content>
+ <comment id="cid-59">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>5</hour>
-   <minute>12</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>14</hour>
+   <minute>14</minute>
   </date>
+  <created>1446819256</created>
+  <changed>1446819256</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="291552"/>
-  <author id="uid-277822" url="/user/mwcrazyhorse">
-   <name>MWcrazyhorse</name>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>eso42LoHJXZvQM-hMkRIfZo6raIdu-9phM3NwOZq9zc</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2968829" moderated="true">
-  <subject>[...]</subject>
-  <content>&lt;p&gt;&lt;em&gt;Entfernt. Bitte verzichten Sie auf überzogene Polemik. Danke, die Redaktion/ls&lt;/em&gt;&lt;/p&gt;
-</content>
+ <comment id="cid-60">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>7</hour>
-   <minute>23</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>14</hour>
+   <minute>16</minute>
   </date>
+  <created>1446819376</created>
+  <changed>1446819376</changed>
   <homepage></homepage>
-  <author id="uid-407840" url="/user/gro%C3%9Fblondsch%C3%B6ndeutsch-0">
-   <name>groß_blond_schön_deutsch</name>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>9pdblzhtK0zxxxD-q9bWenLh2Teb6JYIMVSv823INL0</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2968847" moderated="true">
-  <subject>Wer Deutscher werden kann und will, soll auch hier wählen können</subject>
-  <content>&lt;p&gt;Das Wahlalter ist aus guten Gründen auf die Volljährigkeit festgelegt. Würde man ein geringeres Wahlalter bei Landtags- und Bundestagswahlen wollen, müsste man die Volljährigkeit z.B. bereits ab dem 16. Lebensjahr festlegen, mit allen daraus sich ergebenden rechtlichen Konsequenzen.&lt;/p&gt;
-&lt;p&gt;EU-Bürger wählen natürlich in dem Land, aus dem sie kommen, es sei denn, sie verlassen ihr Herkunftsland dauerhaft und wählen eine neue Staatsbürgerschaft. Da muss man kein Problem drin sehen und auch keines draus machen. Verwaltungstechnische Schwierigkeiten und ein ungeheuerer bürokratischer Aufwand ergäben sich nämlich aus doppeltem Wahlrecht.&lt;/p&gt;
-&lt;p&gt;Wer Deutscher nach dem Grundgesetz werden kann, muss sich entscheiden, ob er das will. Tritt er dadurch den Grundvertrag aller Deutschen bei, erwachsen ihm auch daraus alle vertraglichen Rechte. Jemanden, der nicht Vertragspartei ist und werden will, räumt man ja sonst auch kein Mitsprachrecht in den Vertragsangelegenheiten ein.&lt;/p&gt;
-&lt;p&gt;Wer nicht Deutscher werden kann, weil sein Herkunftsland ihm den Verlust oder die Aufgabe seiner Staatsbürgerschaft verweigert, muss damit leben. Es gibt Schlimmeres, als nicht wählen zu können. Überdies kann Deutschland nicht die Probleme anderer Staaten lösen.&lt;/p&gt;
-</content>
+ <comment id="cid-61">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>8</hour>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>14</hour>
+   <minute>17</minute>
+  </date>
+  <created>1446819435</created>
+  <changed>1446819435</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>ZwaDeVzVWgraQp2ZbU7YCrOm0MCr0ZkgRc1iUJT4ciI</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
+  </author>
+ </comment>
+ <comment id="cid-62">
+  <subject>[empty]</subject>
+  <date>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>14</hour>
+   <minute>17</minute>
+  </date>
+  <created>1446819448</created>
+  <changed>1446819448</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>bVSAzmoP6ebvT0L5pi_9X7xwhrsW0KHQo3wm_eALaM8</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
+  </author>
+ </comment>
+ <comment id="cid-63">
+  <subject>[empty]</subject>
+  <date>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>14</hour>
+   <minute>17</minute>
+  </date>
+  <created>1446819465</created>
+  <changed>1446819465</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>5kGpiTDIQdu7ybBgLF_Pjk4uI_XkZOVps99XcYdmltk</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
+  </author>
+ </comment>
+ <comment id="cid-64">
+  <subject>[empty]</subject>
+  <date>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>14</hour>
    <minute>20</minute>
   </date>
+  <created>1446819655</created>
+  <changed>1446819655</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="287301"/>
-  <flagged type="leser_empfehlung" userid="291552"/>
-  <author id="uid-377739" url="/user/roterrainer">
-   <name>Roter-Rainer</name>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>jfMtErc9vLjlk-e0Rt0Hh4w710Lxr69jwtHv3onKEm4</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2968850" moderated="true">
-  <inreply to="cid-2968514"/>
-  <subject>Staatsbürgerschft</subject>
-  <content>&lt;p&gt;gibt es nur eine. Die doppelte nur in ganz wenigen Ausnahmefällen.&lt;br /&gt;
-Ich bin dagegen, dass Bürger zwei Staatsangehörigkeiten haben. Wenn wir denn hier gut ausgebildet wurden, gut Geld verdient haben, bauen wir uns ein Haus &quot;in Heimat&quot;, ist ja viel billiger. Das sind Gelder, die der deutschen Volkswirtschaft verloren gehen!&lt;br /&gt;
-Und wenn dann mal alles hier den Bach runtergeht, sitzen wir paar Deutschen alleine da und müssen zusehen, wer UNS hilft, nachdem wir die halbe Welt unterstützt haben.&lt;br /&gt;
-Im übrigen hat Herr Teherani nicht die ganze Wahrheit erzählt. Mein Mann bekam im Jahre 2002 die deutsche Staatsangehörigkeit, weil man auf Bescheid der iranischen Botschaft verzichtete, und viele andere Iraner auch. Man muss sich aber entscheiden deutsch oder iranisch, beies geht nicht.&lt;/p&gt;
-</content>
+ <comment id="cid-65">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>8</hour>
-   <minute>29</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>15</hour>
+   <minute>59</minute>
   </date>
+  <created>1446825540</created>
+  <changed>1446825539</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="210656"/>
-  <flagged type="leser_empfehlung" userid="261456"/>
-  <flagged type="leser_empfehlung" userid="249441"/>
-  <author id="uid-332211" url="/user/summersprossen">
-   <name>summersprossen</name>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>GKxavIelHsvdPku8xZWOlLWeNs9cyI1V6tO8nBex25c</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2968855" moderated="true">
-  <inreply to="cid-2968514"/>
-  <subject>Herr Teherani</subject>
-  <content>&lt;p&gt;hätte zwischen dem 16. und 18. Lebensjahr eine deutsche Staatsangehörigkeit beantragen können, ging problemlos für 100 DM, da er ja länger als acht Jahre in Deutschland lebte. Die Eltern mussten diesem Antrag übrigens nicht zustimmen.&lt;br /&gt;
-Aber dann hätte man ja ein Visum beantragen müssen, wenn man nach Hause zu Besuch fahren will ? Muss man nicht, die iranische Botschaft stellt trotzdem jedem anerkannten Flüchtling iranische Pässe aus, da man ja immer noch Iraner ist.&lt;br /&gt;
-Liebe Zeit, ein bisschen besser recherchieren und nicht immer alles glauben, was einem erzählt wird. Deutschland hat gute Gesetze und ist ein soziales Land, das jedem, der sich hier aufhält garantiert, dass er unter deutsche Gesetzgebung (auch Grundrechte) fällt. Sagen wir mal alle &quot;DANKE DEUTSCHLAND&quot; .&lt;/p&gt;
-</content>
+ <comment id="cid-66">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>8</hour>
-   <minute>37</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>15</hour>
+   <minute>59</minute>
   </date>
+  <created>1446825549</created>
+  <changed>1446825549</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="297254"/>
-  <flagged type="leser_empfehlung" userid="287301"/>
-  <flagged type="leser_empfehlung" userid="278091"/>
-  <flagged type="leser_empfehlung" userid="249441"/>
-  <flagged type="leser_empfehlung" userid="231871"/>
-  <flagged type="leser_empfehlung" userid="291552"/>
-  <flagged type="leser_empfehlung" userid="337122"/>
-  <author id="uid-332211" url="/user/summersprossen">
-   <name>summersprossen</name>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>pPW-Ov60F59Saxk1YCvoCeJ9Ch_MY381zeiLoYcd8yw</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2968857" moderated="true">
-  <inreply to="cid-2968587"/>
-  <subject>.... Entlassung nicht zwingend notwendig</subject>
-  <content>&lt;p&gt;Die Entlassung aus der ursprünglichen Staatsangehörigkeit ist nicht (!) zwingend notwendig um in Deutschland eingebürgert zu werden. Gerade für die Fälle, bei denen Staaten sich prinzipiell weigern Entlassungsurkunden auszustellen, sind Ausnahmen vorgesehen. Dies betrifft z.B. Syrien und Ägypten.&lt;/p&gt;
-&lt;p&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://einbuergerung.hamburg.de/voraussetzungen/&quot; title=&quot;https://einbuergerung.hamburg.de/voraussetzungen/&quot; rel=&quot;nofollow&quot;&gt;https://einbuergerung.ham...&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Ein syrischer Freund hat kürzlich, da er alle sonstigen Voraussetzungen erfüllte, keine Probleme gehabt, einen deutschen Pass zu bekommen.&lt;/p&gt;
-</content>
+ <comment id="cid-67">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>8</hour>
-   <minute>40</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>15</hour>
+   <minute>59</minute>
   </date>
+  <created>1446825558</created>
+  <changed>1446825558</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="297254"/>
-  <flagged type="leser_empfehlung" userid="287301"/>
-  <author id="uid-340572" url="/user/morlaix">
-   <name>Morlaix</name>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>vPhmi4EZJW-R_3dD89v31BSJwHH3G8cnbiobf2rB7kw</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2968871" moderated="true">
-  <inreply to="cid-2968850"/>
-  <subject>... unsinnige Argumentation</subject>
-  <content>&lt;p&gt;Ihre Darstellung entbehrt jeder Logik! Man kann auch dann Deutschland verlassen und im Ausland ein Haus bauen wenn man ausschließlich einen deutschen Pass besitzt.&lt;/p&gt;
-&lt;p&gt;Ihre restliche Argumentation ( &quot;.... wenn hier alles den Bach runtergeht, sitzen wir paar Deutsche alleine da .... &quot;) ist einfach nur grotesk.&lt;/p&gt;
-</content>
+ <comment id="cid-68">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>8</hour>
-   <minute>55</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>15</hour>
+   <minute>59</minute>
   </date>
+  <created>1446825586</created>
+  <changed>1446825585</changed>
   <homepage></homepage>
-  <author id="uid-340572" url="/user/morlaix">
-   <name>Morlaix</name>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>UNm1vm9IjCBXlf_rHxj1vHgmRFs0ox1KqYGAwTClhKg</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2968888" moderated="true">
-  <inreply to="cid-2968473"/>
-  <subject>[...]</subject>
-  <content>&lt;p&gt;&lt;em&gt;Entfernt. Bitte gehen Sie auf den konkreten Artikelinhalt ein. Danke, die Redaktion/ls&lt;/em&gt;&lt;/p&gt;
-</content>
+ <comment id="cid-69">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>9</hour>
-   <minute>13</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>16</hour>
+   <minute>00</minute>
   </date>
+  <created>1446825602</created>
+  <changed>1446825602</changed>
   <homepage></homepage>
-  <author id="uid-267783" url="/user/wischof-bixa">
-   <name>Wischof Bixa</name>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>MZuXR1ZtEQ6Y3Jn1vJsHfOBL-Y507RYwzkw2CxGEBUw</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2968901" moderated="true">
-  <inreply to="cid-2968481"/>
-  <subject>[...]</subject>
-  <content>&lt;p&gt;&lt;em&gt;Entfernt. Bitte beachten Sie das konkrete Artikelthema. Danke, die Redaktion/ls&lt;/em&gt;&lt;/p&gt;
-</content>
+ <comment id="cid-70">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>9</hour>
-   <minute>23</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>16</hour>
+   <minute>00</minute>
   </date>
+  <created>1446825629</created>
+  <changed>1446825629</changed>
   <homepage></homepage>
-  <author id="uid-267783" url="/user/wischof-bixa">
-   <name>Wischof Bixa</name>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>izhb9KSxE1DazZOjbEYLqx7QxbP8KLO-KtxKnye32hY</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2968920" moderated="true">
-  <inreply to="cid-2968470"/>
-  <subject>Der Iraner kennt halt noch nicht das Forum </subject>
-  <content>&lt;p&gt;auf Zeit-Online. Wurscht was jemand macht. Irgendjemand nörgelt immer.&lt;/p&gt;
-</content>
+ <comment id="cid-71">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>9</hour>
-   <minute>40</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>16</hour>
+   <minute>00</minute>
   </date>
+  <created>1446825647</created>
+  <changed>1446825647</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="181243"/>
-  <author id="uid-141830" url="/user/Galgenstein">
-   <name>Galgenstein</name>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>ZMI3Pe1rIEmmuOgbEERwTEsmrHUsBZPHz7PHJnalyqY</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2968983" moderated="true">
-  <inreply to="cid-2968478"/>
-  <subject>Doch doch</subject>
-  <content>&lt;p&gt;ich wohne seit langem in einem Ausland, zahle Steuern etc. pp. Was hier passiert, betrifft mich weit weit mehr als was in D passiert. Warum ich dann in D wählen darf/soll, aber hier nicht, ist einfach Oberschwachsinn.&lt;/p&gt;
-</content>
+ <comment id="cid-72">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>10</hour>
-   <minute>37</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>16</hour>
+   <minute>00</minute>
   </date>
+  <created>1446825651</created>
+  <changed>1446825651</changed>
   <homepage></homepage>
-  <author id="uid-308968" url="/user/hairy">
-   <name>hairy</name>
+  <content>&lt;p&gt;sefnselfn&lt;/p&gt;
+</content>
+  <token>wYf8haxKpikbUHA6PIpxSlEfup5C2sm8c7dl1Hs-th4</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2969047" moderated="true">
-  <subject>Kein Land kann es jedem recht machen</subject>
-  <content>&lt;p&gt;So bedauerlich das im Einzelfall sein mag, so können EInwanderer doch nicht ernsthaft erwarten, dass der aufnehmende Staat die Spezifika jeder Ethnie berücksichtigen wird. Das tut kein Staat der Welt. Wer Einwanderung ernst nimmt, der nimmt auch die Staatsbürgerschaft an. Wer dies nicht will, muss halt mit den Konsequenzen leben.&lt;/p&gt;
-</content>
+ <comment id="cid-74">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>11</hour>
-   <minute>12</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>06</day>
+   <hour>19</hour>
+   <minute>01</minute>
   </date>
+  <created>1446836489</created>
+  <changed>1446836489</changed>
   <homepage></homepage>
-  <flagged type="leser_empfehlung" userid="278091"/>
-  <author id="uid-287301" url="/user/sassenach">
-   <name>sassenach</name>
+  <content>&lt;p&gt;jndksdn&lt;/p&gt;
+</content>
+  <token>frIQ883fiAaX692pVjJYLNp74vBammtBUFfbzxbe2OY</token>
+  <author id="uid-7" url="/users/premoderate02" roles="verified">
+   <name>premoderate02</name>
   </author>
  </comment>
- <comment id="cid-2969196" moderated="true">
-  <subject>Inlands-Nichtdeutsche &amp;amp; Auslandsdeutsche müssen stumm bleiben</subject>
-  <content>&lt;p&gt;Vor allen Wahlen werden die Voraussetzungen einer Wahlbeteiligung von uns Auslandsdeutschen festgelegt. Diese lauten für die diesjährigen Bundestagswahlen u.a., dass nur jene wählen dürfen&lt;/p&gt;
-&lt;p&gt;- die in den letzten 25 Jahren in der Bundesrepublik gewohnt haben und dabei mindestens 14 Jahre alt gewesen sind, oder aber&lt;br /&gt;
-- eine persönliche Vertrautheit mit den politischen Verhältnissen in Deutschland nachweisen können und von ihnen betroffen sind, worüber fallweise entschieden wird (z.B. von der Gemeinde, in der zuletzt in Deutschland gelebt wurde).&lt;/p&gt;
-&lt;p&gt;Eine Regelung, mit der alle zufrieden sind, wird es nie geben; alle bisherigen Regelungen einschließlich der diesjährigen sind allerdings sehr ungerecht: Wenn wenigstens alle Ausschlusskriterien, die für uns Auslandsdeutsche gelten, zu Einschlusskriterien für in Deutschland lebende Menschen mit ausländischem Pass umformuliert würden, dürften viele Inlands-Nichtdeutsche wählen. Sozusagen an Stelle der von der Wahl ausgeschlossenen Auslandsdeutschen.&lt;/p&gt;
-&lt;p&gt;Ich würde auf mein Wahlrecht als Auslandsdeutsche übrigens ganz verzichten, wenn stattdessen alle Inlands-Nichtdeutsche wählen dürften.&lt;/p&gt;
-</content>
+ <comment id="cid-76">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>13</hour>
-   <minute>18</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>09</day>
+   <hour>14</hour>
+   <minute>28</minute>
   </date>
+  <created>1447079283</created>
+  <changed>1447079283</changed>
   <homepage></homepage>
-  <author id="uid-399224" url="/user/claudiae">
-   <name>claudiaE</name>
+  <content>&lt;p&gt;sdsdsadad&lt;/p&gt;
+</content>
+  <token>pXC1dWy_Msr884UkuRR0Uq8WAPh_xG0SmhN6d2uhXZg</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
   </author>
  </comment>
- <comment id="cid-2969470" moderated="true">
-  <inreply to="cid-2968636"/>
-  <subject>Schöner und richtiger Beitrag</subject>
-  <content>&lt;p&gt;&quot;Ich wähle gültig. Ich wähle Piraten.&quot;&lt;br /&gt;
-----------------&lt;br /&gt;
-Schöner und richtiger Beitrag. Ich wähle die andere von Ihnen genannte Partei. ;)&lt;/p&gt;
-</content>
+ <comment id="cid-80">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>17</hour>
-   <minute>10</minute>
+   <year>2015</year>
+   <month>11</month>
+   <day>09</day>
+   <hour>14</hour>
+   <minute>52</minute>
   </date>
+  <created>1447080769</created>
+  <changed>1447080769</changed>
   <homepage></homepage>
-  <author id="uid-386888" url="/user/lumpenball">
-   <name>lumpenball</name>
+  <content>&lt;p&gt;sdasdsadad&lt;/p&gt;
+</content>
+  <token>743Imfc2pGEl1fmN6KUbg-p2WsAVVlEhF-kSwat3OSA</token>
+  <author id="uid-6" url="/users/premoderate01">
+   <name>premoderate01</name>
   </author>
  </comment>
- <comment id="cid-2969612" moderated="true">
-  <inreply to="cid-2968541"/>
-  <subject>Studie der FU Berlin</subject>
-  <content>&lt;p&gt;@schlomoschorsch, ich kann Ihnen keinen LINK geben, aber googeln Sie doch einmal nach &quot;Politikjounalistinnen und Politikjounalisten&quot;, Studie von Magreth Lünenborg und Simon Berghofer, FU Berlin Mai 2010. Diese Studie wurde im Auftrag des Deutschen Fachjournalisten Verbandes durchgeführt.&lt;/p&gt;
-</content>
+ <comment id="cid-83">
+  <subject>[empty]</subject>
   <date>
-   <year>2013</year>
-   <month>08</month>
-   <day>17</day>
-   <hour>18</hour>
+   <year>2015</year>
+   <month>11</month>
+   <day>09</day>
+   <hour>15</hour>
+   <minute>06</minute>
+  </date>
+  <created>1447081587</created>
+  <changed>1447081587</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;dfdsfdsdsfdsf&lt;/p&gt;
+</content>
+  <token>QdmRbvVzop2VssOaRB2irwFaa9vqMwUJmjk8N4nqe28</token>
+  <author id="uid-8" url="/users/premoderate03" roles="verified">
+   <name>premoderate03</name>
+  </author>
+ </comment>
+ <comment id="cid-85">
+  <subject>[empty]</subject>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>09</day>
+   <hour>12</hour>
    <minute>34</minute>
   </date>
+  <created>1457526888</created>
+  <changed>1457526888</changed>
   <homepage></homepage>
-  <author id="uid-291552" url="/user/marconi">
-   <name>marconi</name>
+  <content>&lt;p&gt;Hallo&lt;/p&gt;
+</content>
+  <token>ODWDjH8nx709BiXlQxargiY9lQo5sZLO8dPIbjnqn9A</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
   </author>
  </comment>
- <path>/commentsection/url/politik/deutschland/2013-07/wahlbeobachter-portraets</path>
- <source>http://www.zeit.de/politik/deutschland/2013-07/wahlbeobachter-portraets</source>
+ <comment id="cid-86">
+  <inreply to="cid-85"/>
+  <subject>[empty]</subject>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>09</day>
+   <hour>12</hour>
+   <minute>35</minute>
+  </date>
+  <created>1457526948</created>
+  <changed>1457526948</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;Hallo Du!&lt;/p&gt;
+</content>
+  <token>dUYA90QxrCxpETSsbr9l7qO7nU9V7OTsuW_hNmIgX5I</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-87">
+  <inreply to="cid-86"/>
+  <subject>[empty]</subject>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>09</day>
+   <hour>12</hour>
+   <minute>36</minute>
+  </date>
+  <created>1457526975</created>
+  <changed>1457526975</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;Hallo again (Anwort auf Antwort)&lt;/p&gt;
+</content>
+  <token>Pa3YFknssfMRIEwxessIMhW9ELkYJyqudeWNzOrCUHw</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-88">
+  <subject>[empty]</subject>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>09</day>
+   <hour>12</hour>
+   <minute>36</minute>
+  </date>
+  <created>1457526996</created>
+  <changed>1457526996</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;noch ein neuer frischer&lt;/p&gt;
+</content>
+  <token>6s8wUJ2N0TkpJdETd_7dlyiz7kRlcBSJtoklvXWh2i8</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-89">
+  <inreply to="cid-88"/>
+  <subject>[empty]</subject>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>09</day>
+   <hour>12</hour>
+   <minute>37</minute>
+  </date>
+  <created>1457527045</created>
+  <changed>1457527045</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;noch ne frisch antwort&lt;/p&gt;
+</content>
+  <token>wMJSCkafGzVewNNi3KCIS1Wlltb0Fb-fzUkqsNQFEW8</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-90">
+  <inreply to="cid-3"/>
+  <subject>[empty]</subject>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>09</day>
+   <hour>12</hour>
+   <minute>44</minute>
+  </date>
+  <created>1457527440</created>
+  <changed>1457957171</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort&lt;/p&gt;
+</content>
+  <token>8k5wu6djiYkkbZtjhAPV8X4Z8wMmuzbqV54yrQe7av4</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-91">
+  <inreply to="cid-3"/>
+  <subject>[empty]</subject>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>09</day>
+   <hour>12</hour>
+   <minute>46</minute>
+  </date>
+  <created>1457527564</created>
+  <changed>1457527564</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;die zweite antwort&lt;/p&gt;
+</content>
+  <token>nG-7ltkYq6mzcqduyPXysThwn6KuPG724FAbnqPf3Mk</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-92">
+  <inreply to="cid-3"/>
+  <subject>[empty]</subject>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>14</day>
+   <hour>10</hour>
+   <minute>13</minute>
+  </date>
+  <created>1457950381</created>
+  <changed>1457950381</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;noch eine Antwort&lt;/p&gt;
+</content>
+  <token>QKN2xm_iKwlgdSluFw5Y911uXmQSiNWPG4hhvJXpW7o</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-93">
+  <subject>[empty]</subject>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>14</day>
+   <hour>10</hour>
+   <minute>58</minute>
+  </date>
+  <created>1457953126</created>
+  <changed>1457953126</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;fdsfdsfd&lt;/p&gt;
+</content>
+  <token>99Lf8PVfQuzrU94bkNktiEfNtM62FKoesD3F6KdrIzc</token>
+<flagged type="kommentar_empfohlen" userid="0"/>
+	  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <path>/content/zwei-baguettes-und-ein-zimmer-bitte</path>
+ <source>http://localhost:9090/zeit-online/article/02</source>
 </comments>
+
