@@ -1,4 +1,4 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
 <h3 class="visually-hidden">Kommentare</h3>
 <div class="comment-section__head comment-section__item">
 {% if view.comment_area.show_comments %}
