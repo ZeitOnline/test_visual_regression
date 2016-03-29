@@ -258,18 +258,6 @@ def test_comment_reply_thread_loads_with_deeplink(selenium_driver, testserver):
     assert len(select('#cid-{}'.format(last_reply_id))) == 1
 
 
-# needs selenium because of esi include
-def test_comment_reply_thread_loads_with_nojs(selenium_driver, testserver):
-    first_reply_id = '91'
-    second_reply_id = '92'
-    driver = selenium_driver
-    driver.get(
-        '{}/zeit-online/article/01?cid={}'
-        .format(testserver.url, first_reply_id))
-    select = driver.find_elements_by_css_selector
-    assert len(select('#cid-{}'.format(second_reply_id))) == 1
-
-
 def test_comment_actions_should_link_to_article(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     link = browser.cssselect('a.js-report-comment')[0]
@@ -419,3 +407,15 @@ def test_comment_displays_total_reply_count(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     link = browser.cssselect('.comment-overlay__count')[0]
     assert link.text == '+ 2'
+
+
+def test_comment_deeplink_should_have_page_number(application):
+    thread = zeit.web.core.comments.get_paginated_thread(
+        'http://xml.zeit.de/zeit-online/article/01',
+        cid=91)
+    assert int(thread['pages']['current']) == 2
+
+    thread = zeit.web.core.comments.get_paginated_thread(
+        'http://xml.zeit.de/zeit-online/article/01',
+        cid=92)
+    assert int(thread['pages']['current']) == 1

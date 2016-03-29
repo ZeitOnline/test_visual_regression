@@ -23,11 +23,14 @@
     {% endif -%}
 
     {# https://sites.google.com/a/apps.zeit.de/verpixelungskonzept-zeit-online/webtrekk#TOC-Struktur-der-Content-IDs #}
-    {% set wt_kennung = ['redaktion', view.ressort, view.sub_ressort, serie, view.type, view.product_id] | map('format_webtrekk') | join('.') + '|' + view.content_url.replace('http://', '')%}
-
+    {% set wt_kennung = ['redaktion', view.ressort, view.sub_ressort, serie, view.type, view.product_id] | map('format_webtrekk') | join('.') %}
     {% set ivw_code = '%s%sbild-text' | format(view.ressort | lower + '/' if view.ressort, view.sub_ressort | lower + '/' if view.sub_ressort) %}
 
-    var Z_WT_KENNUNG = "{{ wt_kennung }}";
+    {% if view.framebuilder_requires_webtrekk %}
+        var Z_WT_KENNUNG = "{{ wt_kennung }}|" + window.location.hostname + window.location.pathname;
+    {% else %}
+        var Z_WT_KENNUNG = "{{ wt_kennung + '|' + view.content_url.replace('http://', '') }}";
+    {% endif %}
 
     var webtrekk = {
         linkTrack : "standard",
@@ -45,7 +48,11 @@
             4: "{{ view.product_id | lower }}", // Online/Sourcetype
             5: "{{ view.sub_ressort | lower }}", // Subressort
             6: "{{ serie }}", // Cluster
+            {% if view.framebuilder_requires_webtrekk -%}
+            7: window.location.hostname + window.location.pathname, // doc-path
+            {% else -%}
             7: "{{ request.path_info | substring_from('/') }}", // doc-path
+            {% endif -%}
             8: "{{ view.banner_channel | lower }}", // Banner-Channel
             9: "{{ date }}" // Veröffentlichungsdatum
         };
@@ -67,7 +74,7 @@
             14: "{{ 'alt' if 'zeitmz' in view.banner_channel | default('', True) else 'neu'  }}",
             15: "{{ push }}", // Eilmeldungen
             25: "original", // Plattform
-            26: "{{ view.detailed_content_type }}" // Inhaltlicher Pagetype
+            26: "{{ 'centerpage.framebuilder' if view.framebuilder_requires_webtrekk else view.detailed_content_type }}" // Inhaltlicher Pagetype
         };
 
         {% if view.is_wrapped %}
@@ -108,7 +115,7 @@
     <div>
         <img alt="" width="1" height="1" src="{{ "%s,%s,0,0,0,0,0,0,0,0&cg1=%s&cg2=%s&cg3=%s&cg4=%s&cg5=%s&cg6=%s&cg7=%s&cg8=%s&cg9=%s" | format(
             "http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328",
-            wt_kennung,
+            wt_kennung + '|' + view.content_url.replace('http://', ''),
             "redaktion",
             view.tracking_type | lower,
             view.ressort | lower,
