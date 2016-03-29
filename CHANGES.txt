@@ -4,6 +4,8 @@ Change log for zeit.web
 2.67 (unreleased)
 -----------------
 
+- BUG-381: Use empty pixel instead of ZON-Logo in AMP-Ads
+
 - BUG-379: Framebuilder: Set Webtrekk params via JS
 
 
