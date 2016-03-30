@@ -85,9 +85,13 @@
         <container cp:type="teaser" module="zco-wide-small" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e357dbf3be4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
         </container>
+      </region>
+      <region area="id-41a2899d-b469-4c42-b713-bd5dbd68a64f" kind="trio">
         <container cp:type="teaser" module="zco-wide-small" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
         </container>
+      </region>
+      <region area="id-41a2899d-b369-4c42-b713-bd5dbd68a64f" kind="trio">
         <container cp:type="teaser" module="zco-wide-small" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/03-spartipps"></block>
         </container>
@@ -131,14 +135,18 @@
     </cluster>
 
     <!-- wide-small -->
-    <cluster area="id-41a2899d-b569-4c42-b713-a5bdbd86a64f" kind="trio">
+    <cluster area="id-51a2899d-b569-4c42-b713-a5bdbd86a64f" kind="trio">
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a64f" kind="trio">
         <container cp:type="teaser" module="zco-wide-small" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e357dbf3be4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
         </container>
+      </region>
+      <region area="id-41a6899d-b569-4c42-b713-bd5dbd68a65f" kind="trio">
         <container cp:type="teaser" module="zco-wide-small" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b" force_mobile_image="True">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
         </container>
+      </region>
+      <region area="id-41a2899d-b564-4c42-b713-bd5dbd68a66f" kind="trio">
         <container cp:type="teaser" module="zco-wide-small" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/03-spartipps"></block>
         </container>
