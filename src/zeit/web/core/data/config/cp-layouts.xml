@@ -36,6 +36,11 @@
         title="Debate"
         image_pattern=""
         areas="solo"/>
+    <layout
+        id="zco-follow-us"
+        title="Folgen Sie uns unauffällig"
+        image_pattern="portrait"
+        areas="solo"/>
 
     <!-- Teaser formats for new ZON-Centerpages -->
     <layout
