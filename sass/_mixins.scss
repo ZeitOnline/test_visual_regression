@@ -127,6 +127,15 @@
 	}
 }
 
+@mixin margined {
+	margin-left: $page-padding--small;
+	margin-right: $page-padding--small;
+	@include respond-min($break-page-padding) {
+		margin-left: $page-padding;
+		margin-right: $page-padding;
+	}
+}
+
 @mixin bleed($max: $medium-content-width + 2 * $gutter) {
 	margin-left: -$page-padding--small;
 	margin-right: -$page-padding--small;

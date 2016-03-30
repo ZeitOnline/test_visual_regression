@@ -28,7 +28,7 @@
     padding: 0 0.875em
     bottom: remify(-14px)
     left: 50%
-    +transform(translateX(-50%))
+    transform: translateX(-50%)
     &:before
         content: ""
         width: remify(10px)
@@ -40,4 +40,31 @@
         position: absolute
         left: remify(-12px)
         top: remify(5px)
+
+%cta-button
+    a
+        color: inherit
+        +on-interaction
+            color: $color-text
+
+%cta-button-link
+    background-color: currentColor
+    display: block
+    font-weight: bold
+    letter-spacing: .01em
+    margin: 0 (-$page-padding--small)
+    text-transform: uppercase
+
+%cta-button-box
+    padding: remify(14px)
+    +respond-max($break-tablet-min)
+        +font-smoothing
+        color: #fff
+        display: block
+        text-align: center
+
+%cta-button-icon
+    height: remify(10px)
+    margin-left: .5em
+    width: remify(14px)
 

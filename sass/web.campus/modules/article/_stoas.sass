@@ -1,0 +1,44 @@
+#stoas-artikelanker
+    margin: $page-padding--small 0
+    +unpadded
+
+.stoas
+    width: 100%
+    background-color: $color-tools-primary
+
+    &__title
+        +font-smoothing
+        text-transform: uppercase
+        color: $white
+        font-family: $font-beckett
+        letter-spacing: 1.5px
+        font-size: remify(30px)
+        line-height: 1
+        text-align: center
+        display: block
+        padding: remify(20px 30px)
+        word-wrap: break-word
+
+.stoas-cta
+    padding: remify(0px 30px 20px)
+    display: block
+    color: $white
+    text-align: center
+
+    &__link
+        @extend %cta-button-link
+    &__button
+        @extend %cta-button-box
+        border: 3px solid $white
+        padding: remify(5px 20px)
+    &__icon
+        @extend %cta-button-icon
+
++respond-min($break-tablet-min)
+    #stoas-artikelanker
+        +margined
+        +pie-clearfix
+        float: right
+
+    .stoas
+        max-width: remify(300px)

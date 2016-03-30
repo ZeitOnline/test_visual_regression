@@ -1,0 +1,15 @@
+{% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
+
+<aside id="stoas-artikelanker">
+    <div class="stoas">
+        <span class="stoas__title">
+            Bin ich der Typ für Geisteswissenschaften?
+        </span>
+        <a class="stoas-cta" href="#">
+            <span class="stoas-cta__button">
+                Interessentest starten
+                {{ lama.use_svg_icon('arrow-right', 'stoas-cta__icon', request) }}
+            </span>
+        </a>
+    </div>
+</aside>
