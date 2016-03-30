@@ -293,7 +293,7 @@ class Application(object):
         """Local development environments use an overrides zcml to allow
         us to mock external dependencies or tweak the zope product config.
         """
-        if self.settings.get('dev_environment'):
+        if self.settings.get('mock_solr'):
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
 

@@ -401,7 +401,7 @@ class Base(object):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         try:
             return ('ZONApp' in self.request.headers.get('user-agent', '') or (
-                conf.get('dev_environment') and
+                conf.get('is_admin') and
                     'app-content' in self.request.query_string))
         except (AttributeError, TypeError):
             return False
