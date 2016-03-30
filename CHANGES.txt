@@ -4,7 +4,7 @@ Change log for zeit.web
 2.68 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Use trio area consistently
 
 
 2.67 (2016-03-30)
