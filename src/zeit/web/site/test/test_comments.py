@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import lxml.etree
 import mock
 import requests
 import urllib
