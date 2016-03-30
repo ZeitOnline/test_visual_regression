@@ -397,7 +397,7 @@ def test_article_meta_should_omit_comment_count_if_no_comments_present(
 
 def test_comment_replies_view_renders_html_for_replies(testbrowser):
     browser = testbrowser(
-        '/zeit-online/article/01/comment-replies?cid=3&page=1')
+        '/zeit-online/article/01/comment-replies?cid=3&page=1&local_offset=0')
     comments = browser.cssselect('article .comment__body')
     assert len(comments) == 2
     assert 'zweite antwort' in comments[0].xpath('p')[0].text
