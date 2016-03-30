@@ -142,7 +142,7 @@
 {%- endmacro %}
 
 {% macro insert_esi(src, error_text='') %}
-    {% if settings('dev_environment') %}
+    {% if settings('use_wesgi') %}
         <!-- [esi-debug] src="{{ src | safe }}" error_text="{{ error_text }}" -->
         <esi:include src="{{ src | safe }}" onerror="continue" />
     {% else %}

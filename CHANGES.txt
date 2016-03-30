@@ -1,8 +1,20 @@
 Change log for zeit.web
 =======================
 
-2.67 (unreleased)
+2.68 (unreleased)
 -----------------
+
+- ZON-2522: Move comments to core
+
+- MAINT: Use trio area consistently
+
+- MAINT: Fix Campus teaser headlines + padding
+
+
+2.67 (2016-03-30)
+-----------------
+
+- BUG-381: Use empty pixel instead of ZON-Logo in AMP-Ads
 
 - BUG-379: Framebuilder: Set Webtrekk params via JS
 

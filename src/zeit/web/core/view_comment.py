@@ -466,7 +466,7 @@ class RecommendCommentResource(PostCommentResource):
 
 
 @pyramid.view.view_defaults(
-    renderer='zeit.web.site:templates/inc/comments/thread.html',
+    renderer='zeit.web.core:templates/inc/comments/thread.html',
     name='comment-thread')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
 @pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
@@ -480,7 +480,7 @@ class CommentThread(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
 
 
 @pyramid.view.view_defaults(
-    renderer='zeit.web.site:templates/inc/comments/replies.html',
+    renderer='zeit.web.core:templates/inc/comments/replies.html',
     name='comment-replies')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
 @pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
