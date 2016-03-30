@@ -1,7 +1,6 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
-
-    {#
-    <pre>
+{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
+{#
+<pre>
     SHOW: {{ view.comment_area.show }}
     SHOW_COMMENT_FORM: {{ view.comment_area.show_comment_form }}
     SHOW_COMMENTS: {{ view.comment_area.show_comments }}
@@ -9,8 +8,8 @@
     MESSAGE: {{ view.comment_area.message }}
     NOTE: {{ view.comment_area.note }}
     USER_BLOCKED: {{ view.comment_area.user_blocked }}
-    </pre>
-    #}
+</pre>
+#}
 {% if view.show_commentthread %}
 {% include "zeit.web.core:templates/inc/comments/premoderation.tpl" %}
 <section class="comment-section" id="comments">
