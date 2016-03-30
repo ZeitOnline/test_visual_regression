@@ -11,7 +11,7 @@
 </pre>
 #}
 {% if view.show_commentthread %}
-{% include "zeit.web.core:templates/inc/comments/premoderation.tpl" %}
+{% include "zeit.web.core:templates/inc/comments/premoderation.html" %}
 <section class="comment-section" id="comments">
     {% set query = '?' + request.query_string if request.query_string else '' %}
     {% if toggles('comment_thread_via_esi') %}

@@ -191,7 +191,7 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
     # reset view (kind of)
     view = zeit.web.site.view_article.Article(content, request)
     view.show_commentthread = False
-    comments = tplbrowser('zeit.web.core:templates/inc/article/comments.tpl',
+    comments = tplbrowser('zeit.web.core:templates/inc/article/comments.html',
                           view=view, request=request)
     assert comments.contents.strip() == '', (
         'comment section template must return an empty document')

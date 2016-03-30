@@ -84,16 +84,16 @@
 			{%- endif %}
 		{% endif %}
 
-		{% include "zeit.web.core:templates/inc/comments/comment.tpl" %}
+		{% include "zeit.web.core:templates/inc/comments/comment.html" %}
 
 		{% if view.show_replies(comment) %}
 		{% for comment in comment.replies %}
-			{% include "zeit.web.core:templates/inc/comments/comment.tpl" %}
+			{% include "zeit.web.core:templates/inc/comments/comment.html" %}
 		{% endfor %}
 		{% elif comment.replies %}
 
         {% for comment in comment.replies[:1] %}
-            {% include "zeit.web.core:templates/inc/comments/comment.tpl" %}
+            {% include "zeit.web.core:templates/inc/comments/comment.html" %}
         {% endfor %}
 
         {% if comment.sublevel_comment_count > 1 %}
@@ -110,7 +110,7 @@
 	{% endfor %}
 </div>
 
-{% include "zeit.web.core:templates/inc/comments/pagination.tpl" %}
+{% include "zeit.web.core:templates/inc/comments/pagination.html" %}
 
 {% else %}
 	{% if view.context.advertising_enabled -%}
