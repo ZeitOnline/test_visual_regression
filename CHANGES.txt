@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - MAINT: Use trio area consistently
 
+- MAINT: Fix Campus teaser headlines + padding
+
 
 2.67 (2016-03-30)
 -----------------
