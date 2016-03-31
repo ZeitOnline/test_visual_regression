@@ -38,9 +38,6 @@ class Page(object):
     def __delitem__(self, key):
         del self.blocks[key]
 
-    def get_content_ad(self):
-        return 'iq-artikelanker'
-
     def append(self, block):
         block = zeit.web.core.interfaces.IFrontendBlock(block, None)
         if block is not None:
@@ -110,7 +107,7 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
 def _place_content_ad_by_paragraph(page, possible_paragraphs):
     paragraphs = filter(
         lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
-    content_ad = zeit.web.core.banner.ContentAdBlock(page.get_content_ad())
+    content_ad = zeit.web.core.banner.ContentAdBlock("iq-artikelanker")
 
     for index, pp in enumerate(possible_paragraphs):
         if len(paragraphs) > pp + 1:
