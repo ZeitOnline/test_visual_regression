@@ -35,8 +35,11 @@
     <region kind="solo" title="Schlagzeilen">
         <area kind="newsticker"/>
     </region>
-    <region kind="topic" title="Dossier">
+    <region kind="topic" title="Thema-Region (Dossier)">
         <area kind="topic"/>
+    </region>
+    <region kind="topic" title="Thema-Region (Grafische Teaser)" available="zeit.campus.interfaces.IZCOContent">
+        <area kind="topic-graphical"/>
     </region>
     <region kind="gallery" title="ZEIT Shop">
         <area kind="shop"/>
