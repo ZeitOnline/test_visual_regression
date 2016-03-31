@@ -2,3 +2,9 @@
 
 {% block layout %}teaser-topic-wide{% endblock %}
 {% block teaser_datetime %}{% endblock %}
+
+{% block teaser_content %}
+    <div class="{{ self.layout() }}__content">
+        {{ super() }}
+    </div>
+{% endblock %}

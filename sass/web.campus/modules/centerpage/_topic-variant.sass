@@ -22,10 +22,11 @@
 
 
 .teaser-topic-variant-main
+	+font-smoothing
 	position: absolute
 	top: 0
 	left: 50%
-	transform: translateX(-50%)
+	+transform(translateX(-50%))
 	background-color: $primary-color
 	padding: remify(10px) remify(15px)
 
@@ -58,18 +59,12 @@
 		width: 50%
 
 	.teaser-topic-variant-main
-		display: inline-block
 		top: remify(15px)
-		left: auto
-		transform: none
-		margin-left: remify(-20px)
-		padding: remify(10px) remify(25px)
+		+transform(translateX(-20px))
+		padding: remify(10px 25px)
 		&__heading
 			font-size: remify(36px)
 
 +respond-min($break-desktop-min)
 	.teaser-topic-variant-main
-		margin-left: remify(-25px)
-
-	.teaser-topic-variant-list
-		padding-top: remify(140px)
+		+transform(translateX(-25px))

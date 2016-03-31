@@ -1,6 +1,5 @@
 .teaser-topic-wide
 	@extend %teaser
-	padding: $page-padding--small
 	border: none
 	position: relative
 	background-color: $white
@@ -9,29 +8,22 @@
 		content: ''
 		display: block
 		width: remify(50px)
-		margin: remify(16px) 0 remify(4px)
+		margin: remify(15px 0 15px)
 		border-bottom: 3px solid $zco-accent
 
 	&__heading
 		@extend %teaser-heading
-		margin-top: remify(-14px)
+		font-size: remify(42px)
 
 	&__combined-link
 		@extend %teaser-combined-link
-		box-shadow: 10px -18px 0 10px $white
-		margin-left: -$page-padding--small
 
 	&__kicker
 		@extend %teaser-kicker
-		top: remify(-34px)
-		border-left: $page-padding--small solid white
+		min-width: remify(180px)
 
 	&__title
 		@extend %teaser-title
-		display: inline
-		font-size: remify(42px)
-		padding-top: remify(16px)
-		border-left: $page-padding--small solid white
 
 	&__text
 		@extend %teaser-text
@@ -42,27 +34,32 @@
 	&__byline
 		@extend %teaser-byline
 
++respond-max($break-tablet-min)
+	.teaser-topic-wide
+		&__combined-link,
+		&__kicker,
+		&__text,
+		&__metadata
+			padding-left: $page-padding--small
+		&__text,
+		&__metadata
+			max-width: 95%
+			padding-right: $page-padding--small
+		&:after
+			margin-left: $page-padding--small
+
 
 +respond-min($break-tablet-min)
 	.teaser-topic-wide
-		padding-left: 0px
+		margin-top: remify(15px)
 
 		&__title
 			font-size: remify(42px)
-			border-left: none
-
-		&__kicker
-			border-left: none
-
-		&__combined-link
-			margin-left: 0
 
 		&:after
-			margin: remify(26px) 0 remify(14px)
-			+transform(translateX(-110%))
-
+			margin: remify(25px 0 25px -45px)
 
 +respond-min($break-desktop-min)
 	.teaser-topic-wide
 		&:after
-			margin: remify(36px) 0 remify(12px)
+			margin: remify(35px 0 25px -45px)
