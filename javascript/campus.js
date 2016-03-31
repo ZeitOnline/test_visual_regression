@@ -44,7 +44,7 @@ require([
     'velocity.ui',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.core/plugins/jquery.animatescroll',
-    'web.core/plugins/jquery.toggleOnClick',
+    'web.core/plugins/jquery.toggleRegions',
     'web.core/plugins/jquery.infobox',
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.referrerCount'
@@ -58,9 +58,7 @@ require([
     switch ( pageType ) {
         case 'article':
             main.find( '.js-infobox' ).infobox();
-            main.find( '.article-toc' ).toggleOnClick({
-                toggleElement: '.article-toc__seperator'
-            });
+            main.find( '.article-toc' ).toggleRegions();
 
         /* falls through */
         case 'gallery':
