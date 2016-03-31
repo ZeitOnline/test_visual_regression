@@ -4,7 +4,7 @@ Change log for zeit.web
 2.69 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Add a11y to table of contents
 
 
 2.68 (2016-03-31)
@@ -15,8 +15,6 @@ Change log for zeit.web
 - MAINT: Use trio area consistently
 
 - MAINT: Fix Campus teaser headlines + padding
-
-- MAINT: Add a11y to table of contents
 
 - FIX: Fix subcomment counting
 
