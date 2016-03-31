@@ -1,5 +1,5 @@
 <article class="{% block layout %}nextread-teaser{% endblock %}">
-    <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}" class="{{ self.layout() }}__link" itemprop="relatedLink">
+    <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}" class="{{ self.layout() }}__link" data-id="articlebottom.editorial-nextread...area" itemprop="relatedLink">
         {% block teaser_image -%}
             {% require image = get_image(module, teaser, fallback=False, variant_id="portrait") -%}
                 {%- set media_caption_additional_class = 'figcaption--hidden' -%}
