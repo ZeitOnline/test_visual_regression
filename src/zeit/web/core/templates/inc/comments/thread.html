@@ -1,5 +1,4 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
-
+{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
 <h3 class="visually-hidden">Kommentare</h3>
 <div class="comment-section__head comment-section__item">
 {% if view.comment_area.show_comments %}
@@ -85,22 +84,23 @@
 			{%- endif %}
 		{% endif %}
 
-		{% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
+		{% include "zeit.web.core:templates/inc/comments/comment.html" %}
 
 		{% if view.show_replies(comment) %}
-		{% for comment in comment.replies %}
-			{% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
-		{% endfor %}
+			{% for comment in comment.replies %}
+				{% include "zeit.web.core:templates/inc/comments/comment.html" %}
+			{% endfor %}
 		{% elif comment.replies %}
 
         {% for comment in comment.replies[:1] %}
-            {% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
+            {% include "zeit.web.core:templates/inc/comments/comment.html" %}
         {% endfor %}
 
         {% if comment.sublevel_comment_count > 1 %}
             <div class="comment__container js-comment-loader">
                 {#- link to first reply, which enforces all replies to be included in the HTML -#}
-                <a href="{{view.content_url}}?cid={{comment.replies[0].cid}}#cid-{{comment.cid}}" data-url="{{view.content_url}}/comment-replies?cid={{comment.cid}}">
+                <a
+                    href="{{view.content_url}}?cid={{comment.replies[0].cid}}#cid-{{comment.cid}}" data-url="{{view.content_url}}/comment-replies?cid={{comment.cid}}&page={{view.comments.pages.current}}&local_offset={{loop.index-1}}">
                     <span class="comment-overlay__count">+ {{comment.sublevel_comment_count - 1}}</span>
                     <span class="comment-overlay__cta"> weitere Antworten anzeigen</span>
                 </a>
@@ -111,7 +111,7 @@
 	{% endfor %}
 </div>
 
-{% include "zeit.web.site:templates/inc/comments/pagination.tpl" %}
+{% include "zeit.web.core:templates/inc/comments/pagination.html" %}
 
 {% else %}
 	{% if view.context.advertising_enabled -%}

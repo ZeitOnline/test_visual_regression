@@ -26,9 +26,6 @@
                     {% block teaser_title %}
                         <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
                     {% endblock %}
-                    {% block teaser_product %}
-                       {# Use this for short teaser #}
-                    {% endblock %}
                 </a>
                 {% endblock teaser_link %}
             </h2>

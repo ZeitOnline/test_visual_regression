@@ -31,6 +31,7 @@ require.config({
         'jquery.debounce': [ 'jquery' ],
         'jquery.throttle': [ 'jquery' ],
         'web.core/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery', 'modernizr', 'web.core/zeit' ],
+        'web.core/plugins/jquery.toggleRegions': [ 'jquery', 'jquery.debounce' ],
         'web.magazin/plugins/jquery.backgroundvideo': [ 'jquery', 'modernizr' ],
         'web.site/plugins/jquery.autoclick': [ 'jquery', 'modernizr' ],
         'web.site/plugins/jquery.fixPosition': [ 'jquery', 'jquery.throttle' ],
