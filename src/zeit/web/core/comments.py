@@ -213,7 +213,7 @@ class ThreadNotLoadable(Exception):
 
 def get_paginated_thread(
         unique_id, sort='asc', page=0, cid=None, parent_cid=None,
-        invalidate_delta=5):
+        invalidate_delta=5, local_offset=0):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '4'))
 
@@ -276,6 +276,7 @@ def get_paginated_thread(
     flattened_comments = comment_list[:]
 
     offset = (int(page) - 1) * page_size if int(page) > 0 else 0
+    offset = offset + local_offset
     sorted_tree, index = _sort_comments(comment_list, offset=offset)
 
     pagination_comment_count = toplevel_comment_count
