@@ -614,17 +614,21 @@ def _sort_comments(comments, offset=0):
             root_ancestors[comment['cid']] = comment['cid']
             comments_sorted[comment['cid']] = [comment, []]
             root_index = comments_sorted.keys().index(comment['cid']) + 1
-            comment['root_index'] = root_index + offset
-            comment['shown_num'] = str(root_index + offset)
+            comment['root_index'] = root_index
+            comment['num_index'] = root_index + offset
+            comment['shown_num'] = str(comment['num_index'])
         else:
             try:
                 ancestor = root_ancestors[comment['in_reply']]
                 root_ancestors[comment['cid']] = ancestor
                 comments_sorted[ancestor][1].append(comment)
                 root_index = comments_sorted[ancestor][0]['root_index']
+                num_index = comments_sorted[ancestor][0]['num_index']
+                comment['num_index'] = num_index
                 comment['root_index'] = root_index
                 comment['shown_num'] = "{}.{}".format(
-                    comment['root_index'], len(comments_sorted[ancestor][1]))
+                    comment['num_index'], len(comments_sorted[ancestor][1]))
+
             except KeyError:
                 log.error("The comment with the cid {} is a reply, but"
                           " no ancestor could be found".format(comment['cid']))
