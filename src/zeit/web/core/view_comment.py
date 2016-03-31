@@ -500,12 +500,31 @@ class CommentReplies(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
                 title='Parameter cid is required')
 
     @zeit.web.reify
+    def current_page(self):
+        try:
+            return int(self.request.GET['page'])
+        except (KeyError, ValueError):
+            raise pyramid.httpexceptions.HTTPBadRequest(
+                title='Parameter page is required')
+
+    @zeit.web.reify
+    def local_offset(self):
+        try:
+            return int(self.request.GET['local_offset'])
+        except (KeyError, ValueError):
+            raise pyramid.httpexceptions.HTTPBadRequest(
+                title='Parameter local_offset is required')
+
+    @zeit.web.reify
     def comments(self):
         if not self.show_commentthread:
             return
         try:
             return zeit.web.core.comments.get_paginated_thread(
-                self.context.uniqueId, parent_cid=self.parent_cid)
+                self.context.uniqueId,
+                parent_cid=self.parent_cid,
+                page=self.current_page,
+                local_offset=self.local_offset)
         except zeit.web.core.comments.ThreadNotLoadable:
             return
 

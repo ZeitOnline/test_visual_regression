@@ -1,5 +1,5 @@
 <article class="{% block layout %}nextread-teaser{% endblock %}">
-    <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}" class="{{ self.layout() }}__link" itemprop="relatedLink">
+    <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}" class="{{ self.layout() }}__link" data-id="articlebottom.editorial-nextread...area" itemprop="relatedLink">
         {% block teaser_image -%}
             {% require image = get_image(module, teaser, fallback=False, variant_id="portrait") -%}
                 {%- set media_caption_additional_class = 'figcaption--hidden' -%}
@@ -10,9 +10,9 @@
 
         <div class="{{ self.layout() }}__container">
             <h2 class="{{ self.layout() }}__heading">
-                <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">{{ teaser.supertitle }}</span>
-                {%- if teaser.title %}<span class="visually-hidden">: </span>{% endif -%}
-                <span class="{{ self.layout() }}__title">{{ teaser.title }}</span>
+                <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
+                {%- if teaser.teaserTitle or teaser.title %}<span class="visually-hidden">: </span>{% endif -%}
+                <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
             </h2>
             <div class="{{ self.layout() }}__metadata">
                 {% set byline = teaser | get_byline -%}

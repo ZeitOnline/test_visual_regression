@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.68 (unreleased)
+2.69 (unreleased)
+-----------------
+
+- MAINT: Add a11y to table of contents
+
+
+2.68 (2016-03-31)
 -----------------
 
 - ZON-2522: Move comments to core
@@ -9,6 +15,10 @@ Change log for zeit.web
 - MAINT: Use trio area consistently
 
 - MAINT: Fix Campus teaser headlines + padding
+
+- FIX: Fix subcomment counting
+
+- FIX: Fix subcomment deeplinks
 
 
 2.67 (2016-03-30)

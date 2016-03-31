@@ -11,17 +11,19 @@
 	&__headline
 		@extend %font-beckett
 		border-bottom: 3px solid currentColor
-		cursor: pointer
 		display: inline-block
 		font-size: remify(32px)
 		margin: 0
 		position: relative
 		+respond-min($break-tablet-min)
 			display: none
-		&--active .article-toc__toggle-icon--plus
-			display: none
-		&--active .article-toc__toggle-icon--minus
-			display: inline
+		&[role="button"]
+			cursor: pointer
+		&[aria-expanded="true"]
+			.article-toc__toggle-icon--plus
+				display: none
+			.article-toc__toggle-icon--minus
+				display: inline
 	&__toggle
 		position: absolute
 		right: -23px
@@ -35,10 +37,10 @@
 		&--minus
 			display: none
 	&__seperator
-		.js &
+		&[aria-hidden="true"]
 			display: none
 			+respond-min($break-tablet-min)
-				display: block !important // use important to overwrite possible js (will be changed when it's made accessible)
+				display: block
 	&__list
 		list-style: none
 		margin: 0
