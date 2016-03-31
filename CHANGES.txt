@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - MAINT: Fix Campus teaser headlines + padding
 
+- MAINT: Add a11y to table of contents
+
 - FIX: Fix subcomment counting
 
 - FIX: Fix subcomment deeplinks
