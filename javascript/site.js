@@ -21,7 +21,7 @@ require([
     'web.site/video/videoStage',
     'web.site/articledate',
     'web.site/articlesharing',
-    'web.site/comments',
+    'web.core/comments',
     'web.site/adblockCount.js'
 ], function(
     zeit,

@@ -1,4 +1,4 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
 
 <article id="cid-{{ comment.cid }}" class="comment
 	{%- if not view.comments.sort in ('promoted', 'recommended') %}

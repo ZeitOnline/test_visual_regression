@@ -4,7 +4,13 @@ Change log for zeit.web
 2.68 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2522: Move comments to core
+
+- MAINT: Use trio area consistently
+
+- MAINT: Fix Campus teaser headlines + padding
+
+- FIX: Fix subcomment counting
 
 
 2.67 (2016-03-30)
