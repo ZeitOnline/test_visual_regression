@@ -1,84 +1,479 @@
+<?xml version="1.0"?>
 <layouts>
-  <!-- ZCO only -->
-  <layout id="zco-wide-small" title="kleiner Teaser" image_pattern="cinema" areas="trio" default="trio" available="zeit.campus.interfaces.IZCOContent"/>
-  <layout id="zco-wide-large" title="großer Teaser" image_pattern="cinema" areas="duo" default="duo" available="zeit.campus.interfaces.IZCOContent"/>
-  <layout id="zco-topic-wide" title="großer Teaser Topic" image_pattern="" areas="topic-variant" available="zeit.campus.interfaces.IZCOContent"/>
-  <layout id="zco-topic-small" title="kleiner Teaser Topic" image_pattern="wide" areas="topic-variant" default="topic-variant" available="zeit.campus.interfaces.IZCOContent"/>
-  <layout id="zco-square" title="quadratischer Teaser" image_pattern="square" areas="duo" available="zeit.campus.interfaces.IZCOContent"/>
-  <layout id="zco-lead-portrait" title="Aufmacher hochkant" image_pattern="portrait" areas="solo" default="solo" available="zeit.campus.interfaces.IZCOContent"/>
-  <layout id="zco-lead-cinema" title="Aufmacher quer" image_pattern="cinema" areas="solo" available="zeit.campus.interfaces.IZCOContent"/>
-  <layout id="zco-debate" title="Debatte" image_pattern="" areas="solo" available="zeit.campus.interfaces.IZCOContent"/>
-  <!--  Teaser formats for new ZON-Centerpages  -->
-  <layout id="zon-large" title="Großer Teaser" image_pattern="wide" areas="major ranking parquet zmo-parquet" type="!storystream"/>
-  <layout id="zon-small" title="Kleiner Teaser" image_pattern="wide" areas="major minor duo ranking parquet zmo-parquet spektrum zett author-favourite-content author-articles" default="major minor parquet zmo-parquet ranking spektrum zett author-favourite-content author-articles" type="!storystream"/>
-  <layout id="zon-square" title="Grafischer Teaser" image_pattern="square" areas="duo minor" default="duo" type="!storystream"/>
-  <layout id="zon-gallery" title="Galleryteaser" image_pattern="wide" image_positions="true" areas="gallery" default="gallery" type="!storystream"/>
-  <layout id="zon-shop" title="Shop-Bühne" image_pattern="wide" image_positions="true" areas="shop" default="shop" type="!storystream"/>
-  <layout id="zon-printkiosk" title="ZEIT Printbanderole Produkt Teaser" image_pattern="wide" areas="printkiosk" default="printkiosk" type="!storystream"/>
-  <layout id="zon-newsteaser" title="Kurze Schlagzeile" image_positions="true" areas="newsticker overview" default="newsticker overview" type="!storystream"/>
-  <layout id="zon-inhouse" title="Verlagsangebot" image_pattern="wide" areas="major minor ranking parquet" type="!storystream"/>
-  <layout id="zon-ad" title="Anzeige" image_pattern="wide" areas="major minor ranking parquet" type="!storystream"/>
-  <!--
- formally known as zon-fullwidth-onimage/zon-fullwidth
--->
-  <layout id="zon-fullwidth" title="Vollbreiter Aufmacher" image_pattern="cinema" areas="solo" default="solo" type="!storystream"/>
-  <layout id="zon-classic" title="Vollbreiter Aufmacher (klassisch)" image_pattern="cinema" areas="solo" type="!storystream"/>
-  <layout id="zon-parquet-large" title="Großer Teaser" image_pattern="wide" areas="parquet" available="zeit.web.core.interfaces.IInternalUse" type="!storystream"/>
-  <layout id="zon-parquet-small" title="Kleiner Teaser" image_pattern="wide" areas="parquet spektrum" available="zeit.web.core.interfaces.IInternalUse" type="!storystream"/>
-  <layout id="headerimage" title="Panorama Aufmacher" image_pattern="panorama" areas="solo" available="zeit.web.core.interfaces.IInternalUse" type="!storystream"/>
-  <layout id="zon-snapshot" title="Momentaufnahme" image_pattern="wide" areas="solo" type="!storystream"/>
-  <!-- Shared teaser formats -->
-  <layout id="topic" title="Themendossier" image_pattern="cinema" areas="topic" default="topic" type="!storystream"/>
-  <!--  Teaser formats for Storystreams  -->
-  <layout id="zon-tldr" title="tl;dr" areas="storystream" default="storystream" type="storystream"/>
-  <layout id="zon-milestone" title="Milestone" image_pattern="wide" areas="storystream" type="storystream"/>
-  <layout id="zon-feature" title="Grafischer Teaser" image_pattern="wide" areas="storystream" type="storystream"/>
-  <!--  Legacy teaser formats  -->
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="leader" title="Großer Teaser mit Bild und Teaserliste" image_pattern="540x304" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="leader-two-columns" title="Großer Teaser mit zwei Spalten" image_pattern="540x304" areas="solo duo major minor ranking parquet" columns="2" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="leader-fullwidth" title="Vollbreiter Aufmacher" image_pattern="940x400" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="text-teaser" title="Teaser ohne Bild" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="archive-print-volume" title="Ausgabenteaser im Printarchiv" image_pattern="184x84" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="archive-print-year" title="Jahresteaser im Printarchiv" image_pattern="184x84" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="buttons" title="Kleiner Teaser mit kleinem Bild und Teaserliste" image_pattern="148x84" areas="solo duo major minor ranking parquet" default="true" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="buttons-fullwidth" title="Vollbreiter Teaser mit mittlerem Bild und Teaserliste" image_pattern="540x304" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="two-side-by-side" title="Zwei kleine Teaser mit Bild" image_pattern="175x99" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="large" title="Großer Teaser mit Bild und Teaserliste" image_pattern="368x220" areas="solo duo major minor ranking parquet" default="true" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="ressort" title="Ressort Teaser mit Teaserliste" image_pattern="220x124" areas="solo duo major minor ranking parquet" default="true" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="short" title="Kurzteaser" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="date" title="Datumsteaser" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="parquet-regular" title="Parkett – standard" image_pattern="184x84" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="parquet-large" title="Parkett – großer Aufmacher" image_pattern="540x304" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="parquet-verlag" title="Parkett – Verlagsangebot" image_pattern="220x124" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="parquet-printteaser" title="Parkett – Print-Teaser/Blick in die Zeit" image_pattern="220x124" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="hamburg-buttons" title="Hamburgseiten: 'Knöpfe' mit kleinem Bild und Werbung rechts" image_pattern="148x84" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-leader-fullwidth" title="ZMO Vollbreiter Aufmacher" image_pattern="zmo-landscape-large" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-leader-fullwidth-light" title="ZMO Vollbreiter Aufmacher (helles Bild)" image_pattern="zmo-landscape-large" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-square-large" title="ZMO großes Quadrat" image_pattern="zmo-square-large" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-square-large-light" title="ZMO großes Quadrat (helles Bild)" image_pattern="zmo-square-large" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-square" title="ZMO Quadrat" image_pattern="zmo-square" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-upright-large" title="ZMO großer Teaser hochkant" image_pattern="zmo-lead-upright" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-upright-large-light" title="ZMO großer Teaser hochkant (helles Bild)" image_pattern="zmo-lead-upright" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-landscape-large" title="ZMO großer Teaser 16:9" image_pattern="zmo-landscape-large" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-landscape-large-photo" title="ZMO großer Teaser 16:9 Fotokolumne" image_pattern="zmo-landscape-large" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-landscape-small" title="ZMO kleiner Teaser 16:9" image_pattern="zmo-landscape-small" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-gallery-upright" title="ZMO Fotostrecke hochkant" image_pattern="zmo-upright" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-mtb-upright" title="ZMO monothematischer Block hochkant" image_pattern="zmo-upright" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-mtb-square" title="ZMO monothematischer Block quadratisch" image_pattern="zmo-square-large" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-product-square" title="ZMO Produkt quadratisch (mini)" image_pattern="zmo-square-small" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-card-citation" title="ZMO Karte Zitat" image_pattern="zmo-card-picture" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-card-picture" title="ZMO Karte mit Bild" image_pattern="zmo-card-picture" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-card-flip-read" title="ZMO Karte Flip'n'Read" image_pattern="zmo-card-picture" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-card-share-read" title="ZMO Karte Share'n'Read" image_pattern="zmo-card-picture" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-card-flip-share" title="ZMO Karte Flip'n'Share" image_pattern="zmo-card-picture" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-card-flip-flip" title="ZMO Karte Flip'n'Flip" image_pattern="zmo-card-picture" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="fullgraphical" title="ZMO Vollgraphischer Block für die Informatives" image_pattern="zmo-square-large" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zmo-print-cover" title="ZMO Print Cover" image_pattern="zmo-print-cover" areas="solo duo major minor ranking parquet" type="!storystream"/>
-  <!--
- These are calculated by zeit.web but need to be configured. Do not delete (Ron, 15. Juni 2015)
--->
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zon-column" title="Kolumnenteaser" image_pattern="zon-thumbnail" areas="solo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zon-series" title="Serienteaser" image_pattern="zon-thumbnail" areas="solo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zon-blog" title="Blogteaser" image_pattern="zon-thumbnail" areas="solo major minor ranking parquet" type="!storystream"/>
-  <layout available="zeit.web.core.interfaces.IInternalUse" id="zon-authorlist" title="Autorenregister" image_pattern="zon-column" areas="author-list" type="!storystream"/>
+    <!-- ZCO only -->
+    <layout
+        id="zco-wide-small"
+        title="kleiner Teaser"
+        image_pattern="cinema"
+        areas="trio"
+        />
+    <layout
+        id="zco-wide-large"
+        title="großer Teaser"
+        image_pattern="cinema"
+        areas="duo"
+        />
+    <layout
+        id="zco-topic-wide"
+        title="großer Teaser Topic"
+        image_pattern=""
+        areas="topic-variant"
+        />
+    <layout
+        id="zco-topic-small"
+        title="kleiner Teaser Topic"
+        image_pattern="wide"
+        areas="topic-variant"
+        />
+    <layout
+        id="zco-square"
+        title="quadratischer Teaser"
+        image_pattern="square"
+        areas="duo"
+        />
+    <layout
+        id="zco-lead-portrait"
+        title="Aufmacher hochkant"
+        image_pattern="portrait"
+        areas="solo"
+        />
+    <layout
+        id="zco-lead-cinema"
+        title="Aufmacher quer"
+        image_pattern="cinema"
+        areas="solo"
+        />
+    <layout
+        id="zco-debate"
+        title="Debate"
+        image_pattern=""
+        areas="solo"/>
+
+    <!-- Teaser formats for new ZON-Centerpages -->
+    <layout
+        id="zon-large"
+        title="Großer Teaser"
+        image_pattern="zon-large"
+        areas="duo major ranking parquet"
+        />
+    <layout
+        id="zon-small"
+        title="Kleiner Teaser"
+        image_pattern="zon-thumbnail"
+        areas="duo major minor ranking parquet spektrum zett zmo-parquet author-favourite-content author-articles"
+        default="major minor parquet zmo-parquet ranking spektrum zett author-favourite-content author-articles"
+        />
+    <layout
+        id="zon-square"
+        title="Grafischer Teaser"
+        image_pattern="zon-square"
+        areas="duo minor"
+        default="duo"
+        />
+    <layout
+        id="zon-gallery"
+        title="Biga Teaser"
+        image_pattern="540x304"
+        areas="gallery"
+        default="gallery"
+        />
+    <layout
+        id="zon-shop"
+        title="ZEIT Shop Produkt Teaser"
+        image_pattern="zon-thumbnail"
+        areas="shop"
+        default="shop"
+        />
+    <layout
+        id="zon-printkiosk"
+        title="ZEIT Printbanderole Produkt Teaser"
+        image_pattern="zon-thumbnail"
+        areas="printkiosk"
+        default="printkiosk"
+        />
+    <layout
+        id="zon-inhouse"
+        title="Verlagsangebot"
+        image_pattern="zon-thumbnail"
+        areas="solo duo major minor ranking parquet"
+        />
+    <layout
+        id="zon-ad"
+        title="Anzeige"
+        image_pattern="zon-thumbnail"
+        areas="solo duo major minor ranking parquet"
+        />
+    <layout
+        id="zon-snapshot"
+        title="Galerieteaser Momentaufnahme"
+        image_pattern="zon-large"
+        areas="solo"
+        />
+    <!-- formally known as zon-fullwidth-onimage/zon-fullwidth -->
+    <layout
+        id="zon-fullwidth"
+        title="Vollbreiter Aufmacher Text auf Bild"
+        image_pattern="zon-fullwidth"
+        areas="solo major"
+        default="solo"
+        />
+    <layout
+        id="zon-classic"
+        title="Vollbreiter Aufmacher klassisch"
+        image_pattern="zon-fullwidth"
+        areas="solo"
+        />
+     <layout
+        id="zon-parquet-large"
+        title="Rebrush 2014: Parkett – großer Teaser"
+        image_pattern="zon-large"
+        image_positions="true"
+        areas="parquet"
+        />
+    <layout
+        id="zon-parquet-small"
+        title="Rebrush 2014: Parkett – kleiner Teaser"
+        image_pattern="zon-thumbnail"
+        image_positions="true"
+        areas="parquet"
+        />
+    <layout
+        id="zon-newsteaser"
+        title="Kurzteaser (für News)"
+        image_positions="true"
+        areas="newsticker overview"
+        default="overview"
+        />
+
+    <layout
+        id="zon-column"
+        title="Kolumnenteaser"
+        image_pattern="zon-thumbnail"
+        image_positions="true"
+        areas="solo major minor ranking parquet"
+        />
+
+    <layout
+        id="zon-blog"
+        title="Blogteaser"
+        image_pattern="zon-thumbnail"
+        image_positions="true"
+        areas="solo major minor ranking parquet"
+        />
+
+    <layout
+        id="zon-series"
+        title="Serienteaser"
+        image_pattern="zon-thumbnail"
+        image_positions="true"
+        areas="solo major minor ranking parquet"
+        />
+
+    <!--   Teaser formats for Storystreams   -->
+    <layout
+        id="zon-tldr"
+        title="tl;dr"
+        areas="storystream"
+        default="storystream"
+        type="storystream"/>
+    <layout
+        id="zon-milestone"
+        title="Milestone"
+        image_pattern="zon-large"
+        areas="storystream"
+        type="storystream"/>
+    <layout
+        id="zon-feature"
+        title="Grafischer Teaser"
+        image_pattern="zon-large"
+        areas="storystream"
+        type="storystream"/>
+    <!-- Shared teaser formats -->
+    <layout
+        id="topic"
+        title="Dossier-Teaser"
+        image_pattern="topic"
+        areas="topic"
+        default="topic"
+        />
+    <!-- Legacy teaser formats -->
+    <layout
+        id="leader"
+        title="Großer Teaser mit Bild und Teaserliste"
+        image_pattern="540x304"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="leader-two-columns"
+        title="Großer Teaser mit zwei Spalten"
+        image_pattern="540x304"
+        areas="solo duo major minor ranking parquet"
+        columns="2"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="leader-fullwidth"
+        title="Vollbreiter Aufmacher"
+        image_pattern="940x400"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="text-teaser"
+        title="Teaser ohne Bild"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="archive-print-volume"
+        title="Ausgabenteaser im Printarchiv"
+        image_pattern="184x84"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="archive-print-year"
+        title="Jahresteaser im Printarchiv"
+        image_pattern="184x84"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="buttons"
+        title="Kleiner Teaser mit kleinem Bild und Teaserliste"
+        image_pattern="148x84"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="buttons-fullwidth"
+        title="Vollbreiter Teaser mit mittlerem Bild und Teaserliste"
+        image_pattern="540x304"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="two-side-by-side"
+        title="Zwei kleine Teaser mit Bild"
+        image_pattern="175x99"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="large"
+        title="Großer Teaser mit Bild und Teaserliste"
+        image_pattern="368x220"
+        areas="solo duo major minor ranking parquet"
+        default="true"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="ressort"
+        title="Ressort Teaser mit Teaserliste"
+        image_pattern="220x124"
+        areas="solo duo major minor ranking parquet"
+        default="true"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="short"
+        title="Kurzteaser"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="date"
+        title="Datumsteaser"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="parquet-regular"
+        title="Parkett – standard"
+        image_positions="true"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="parquet-large"
+        title="Parkett – großer Aufmacher"
+        image_pattern="540x304"
+        image_positions="true"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="parquet-printteaser"
+        title="Parkett – Print-Teaser/Blick in die Zeit"
+        image_pattern="220x124"
+        image_positions="true"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="hamburg-buttons"
+        title="Hamburgseiten: 'Knöpfe' mit kleinem Bild und Werbung rechts"
+        image_pattern="148x84"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+        />
+    <layout
+        id="zmo-leader-fullwidth"
+        title="ZMO Vollbreiter Aufmacher"
+        image_pattern="zmo-landscape-large"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+    <layout
+        id="zmo-leader-fullwidth-light"
+        title="ZMO Vollbreiter Aufmacher (helles Bild)"
+        image_pattern="zmo-landscape-large"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-square-large"
+        title="ZMO großes Quadrat"
+        image_pattern="zmo-square-large"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-square-large-light"
+        title="ZMO großes Quadrat (helles Bild)"
+        image_pattern="zmo-square-large"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-upright-large"
+        title="ZMO großer Teaser hochkant"
+        image_pattern="zmo-lead-upright"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-upright-large-light"
+        title="ZMO großer Teaser hochkant (helles Bild)"
+        image_pattern="zmo-lead-upright"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-landscape-large"
+        title="ZMO großer Teaser 16:9"
+        image_pattern="zmo-landscape-large"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-landscape-large-photo"
+        title="ZMO großer Teaser 16:9 Fotokolumne"
+        image_pattern="zmo-landscape-large"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-landscape-small"
+        title="ZMO kleiner Teaser 16:9"
+        image_pattern="zmo-landscape-small"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-gallery-upright"
+        title="ZMO Fotostrecke hochkant"
+        image_pattern="zmo-upright"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-mtb-upright"
+        title="ZMO monothematischer Block hochkant"
+        image_pattern="zmo-upright"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-mtb-square"
+        title="ZMO monothematischer Block quadratisch"
+        image_pattern="zmo-square-large"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-product-square"
+        title="ZMO Produkt quadratisch (mini)"
+        image_pattern="zmo-square-small"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-card-citation"
+        title="ZMO Karte Zitat"
+        image_pattern="zmo-card-picture"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-picture"
+        title="ZMO Karte mit Bild"
+        image_pattern="zmo-card-picture"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-flip-read"
+        title="ZMO Karte Flip'n'Read"
+        image_pattern="zmo-card-picture"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-share-read"
+        title="ZMO Karte Share'n'Read"
+        image_pattern="zmo-card-picture"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-flip-share"
+        title="ZMO Karte Flip'n'Share"
+        image_pattern="zmo-card-picture"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="zmo-card-flip-flip"
+        title="ZMO Karte Flip'n'Flip"
+        image_pattern="zmo-card-picture"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+        />
+    <layout
+        id="fullgraphical"
+        title="ZMO Vollgraphischer Block für die Informatives"
+        image_pattern="zmo-square-large"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+    <layout
+        id="zmo-print-cover"
+        title="ZMO Print Cover"
+        image_pattern="zmo-print-cover"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.magazin.interfaces.IZMOContent"/>
 </layouts>
