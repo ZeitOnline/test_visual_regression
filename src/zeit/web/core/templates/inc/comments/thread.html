@@ -1,5 +1,4 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
-
+{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
 <h3 class="visually-hidden">Kommentare</h3>
 <div class="comment-section__head comment-section__item">
 {% if view.comment_area.show_comments %}
@@ -85,16 +84,16 @@
 			{%- endif %}
 		{% endif %}
 
-		{% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
+		{% include "zeit.web.core:templates/inc/comments/comment.html" %}
 
 		{% if view.show_replies(comment) %}
 		{% for comment in comment.replies %}
-			{% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
+			{% include "zeit.web.core:templates/inc/comments/comment.html" %}
 		{% endfor %}
 		{% elif comment.replies %}
 
         {% for comment in comment.replies[:1] %}
-            {% include "zeit.web.site:templates/inc/comments/comment.tpl" %}
+            {% include "zeit.web.core:templates/inc/comments/comment.html" %}
         {% endfor %}
 
         {% if comment.sublevel_comment_count > 1 %}
@@ -112,7 +111,7 @@
 	{% endfor %}
 </div>
 
-{% include "zeit.web.site:templates/inc/comments/pagination.tpl" %}
+{% include "zeit.web.core:templates/inc/comments/pagination.html" %}
 
 {% else %}
 	{% if view.context.advertising_enabled -%}

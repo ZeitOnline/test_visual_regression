@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import lxml.etree
 import mock
 import requests
 import urllib
@@ -77,7 +76,7 @@ def test_comment_form_should_display_parent_hint(tplbrowser, dummy_request):
     dummy_request.GET['pid'] = '90'
 
     browser = tplbrowser(
-        'zeit.web.site:templates/inc/comments/comment-form.html',
+        'zeit.web.core:templates/inc/comments/comment-form.html',
         view=view, request=dummy_request)
 
     input = browser.cssselect('textarea[name="comment"]')[0]
@@ -176,12 +175,12 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
 
     view = zeit.web.site.view_article.Article(content, request)
     view.commenting_allowed = False
-    comments = tplbrowser('zeit.web.site:templates/inc/comments/thread.html',
+    comments = tplbrowser('zeit.web.core:templates/inc/comments/thread.html',
                           view=view, request=request)
     assert len(comments.cssselect('article.comment')) > 0, (
         'comments must be displayed')
 
-    form = tplbrowser('zeit.web.site:templates/inc/comments/comment-form.html',
+    form = tplbrowser('zeit.web.core:templates/inc/comments/comment-form.html',
                       view=view, request=request)
     assert len(form.cssselect('#comment-form[data-uid="123"]')) == 1, (
         'comment form tag with data-uid attribute must be present')
@@ -191,7 +190,7 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
     # reset view (kind of)
     view = zeit.web.site.view_article.Article(content, request)
     view.show_commentthread = False
-    comments = tplbrowser('zeit.web.site:templates/inc/article/comments.tpl',
+    comments = tplbrowser('zeit.web.core:templates/inc/article/comments.html',
                           view=view, request=request)
     assert comments.contents.strip() == '', (
         'comment section template must return an empty document')
@@ -264,13 +263,6 @@ def test_comment_actions_should_link_to_article(testbrowser):
     assert link.get('href') == (
         'http://localhost/zeit-online/article/01'
         '?action=report&pid=3#report-comment-form')
-
-
-def test_comment_pagination_should_link_to_article(testbrowser):
-    browser = testbrowser('/zeit-online/article/01/comment-thread')
-    link = browser.cssselect('.pager__page a')[0]
-    assert link.get('href') == (
-        'http://localhost/zeit-online/article/01?page=2#comments')
 
 
 def test_comment_pagination_should_link_to_article(testbrowser):

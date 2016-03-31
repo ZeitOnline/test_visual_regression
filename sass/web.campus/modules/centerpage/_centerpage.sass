@@ -1,4 +1,3 @@
-.cp-area,
 .cp-region
 	+pie-clearfix
 
@@ -9,6 +8,14 @@
 			padding: $cp-padding
 
 	.cp-area
+		float: left
+		&--solo
+			float: none
+			width: 100%
+		&--major
+			width: 66.66%
 		&--duo
-			float: left
 			width: 50%
+		&--trio,
+		&--minor
+			width: 33.33%

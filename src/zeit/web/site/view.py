@@ -160,10 +160,10 @@ def schlagworte(request):
     containment=zeit.cms.content.interfaces.ICommonMetadata)
 @pyramid.view.view_config(
     name='comment-form',
-    renderer='templates/inc/comments/comment-form.html')
+    renderer='zeit.web.core:templates/inc/comments/comment-form.html')
 @pyramid.view.view_config(
     name='report-form',
-    renderer='templates/inc/comments/report-form.html')
+    renderer='zeit.web.core:templates/inc/comments/report-form.html')
 class CommentForm(zeit.web.core.view.CommentMixin,
                   zeit.web.core.view.Base):
 
