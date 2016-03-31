@@ -1,6 +1,8 @@
 {% extends "zeit.web.core:templates/inc/article/table-of-contents.html" %}
 {% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
 
+{% block toc_expandable_region %}article-toc-box{% endblock %}
+
 {% block toc_svg_icon %}
 <span class="article-toc__toggle">
     {{ lama.use_svg_icon('circle_plus', 'article-toc__toggle-icon article-toc__toggle-icon--plus', request) }}

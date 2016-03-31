@@ -1,0 +1,20 @@
+.portraitbox
+	+default-article-textlink($style: 'zco')
+	font-size: em(14px)
+	line-height: round-to-precision(20/14, $precision: 1)
+	+respond-min($break-tablet-min)
+		background-color: $color-background
+		padding: remify(20px)
+	&__heading
+		color: $color-text
+		font-weight: bold
+		letter-spacing: $letter-spacing-l
+		margin: 0 0 .5em
+		text-transform: uppercase
+	&__body
+		color: $color-text--light
+		letter-spacing: $letter-spacing-s
+		p
+			margin: 0 0 .5em
+			&:last-child
+				margin-bottom: 0

@@ -17,23 +17,12 @@ $break-gallery-min: em(576px)
 		max-height: 620px
 		margin: 0 auto
 	.figure__caption
-		background-color: $color-background--light
-		color: #444
-		font-family: $font-tabletgothic
-		font-size: em(15px)
-		line-height: round-to-precision(20/15, $precision: 1)
 		margin: 0 auto
-		max-width: none
-		padding: remify(20px $page-padding--small)
-		+respond-min($break-tablet-min)
-			padding: remify(20px $page-padding)
 	.figure__index
 		font-weight: bold
 		font-size: 0.8666em // uses em by intention
 		letter-spacing: $letter-spacing-l
 		margin-right: .25em
-	.figure__copyright
-		color: $color-text--light
 
 // appear just after bxSlider initialisation
 // needed for "static" galleries

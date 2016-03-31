@@ -75,7 +75,7 @@ require([
     'web.core/plugins/jquery.picturefill',
     'web.core/plugins/jquery.referrerCount',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
-    'web.core/plugins/jquery.toggleOnClick',
+    'web.core/plugins/jquery.toggleRegions',
     'web.site/plugins/jquery.accordion',
     'web.site/plugins/jquery.adaptnav',
     'web.site/plugins/jquery.animateJobs',
@@ -128,7 +128,7 @@ require([
         article.find( '.js-gallery' ).inlinegallery();
         article.find( '.js-infobox' ).infobox();
         article.find( '.liveblog' ).liveblog();
-        article.find( '.article-toc' ).toggleOnClick();
+        article.find( '.article-toc' ).toggleRegions();
         $.picturefill();
         $( '.comment-section' ).countFormchars();
         $( '.js-fix-position' ).fixPosition();

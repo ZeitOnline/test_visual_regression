@@ -87,9 +87,9 @@
 		{% include "zeit.web.core:templates/inc/comments/comment.html" %}
 
 		{% if view.show_replies(comment) %}
-		{% for comment in comment.replies %}
-			{% include "zeit.web.core:templates/inc/comments/comment.html" %}
-		{% endfor %}
+			{% for comment in comment.replies %}
+				{% include "zeit.web.core:templates/inc/comments/comment.html" %}
+			{% endfor %}
 		{% elif comment.replies %}
 
         {% for comment in comment.replies[:1] %}
