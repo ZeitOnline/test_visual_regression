@@ -111,25 +111,37 @@ def test_article_toc_has_mobile_functionality(testserver, selenium_driver):
     selenium_driver.get('{}/zeit-online/article/zeit'.format(testserver.url))
 
     toc_box = selenium_driver.find_element_by_css_selector('.article-toc')
-    toc_index = toc_box.find_element_by_css_selector('.article-toc__headline')
+    toc_button = toc_box.find_element_by_css_selector('.article-toc__headline')
     toc_onesie = toc_box.find_element_by_css_selector('.article-toc__onesie')
     toc_list = toc_box.find_element_by_css_selector('.article-toc__list')
 
     # before click
-    assert not toc_list.is_displayed()
-
-    # after click
-    toc_index.click()
-    assert toc_index.is_displayed()
-    assert '--active' in toc_index.get_attribute('class')
-
-    # after second click
-    toc_index.click()
     condition = expected_conditions.invisibility_of_element_located((
         By.CSS_SELECTOR, '.article-toc__list'))
     assert WebDriverWait(
         selenium_driver, 1).until(condition)
-    assert '--active' not in toc_index.get_attribute('class')
+    assert toc_button.get_attribute('role') == 'button'
+    assert toc_list.get_attribute('role') == 'region'
+    assert toc_button.get_attribute('aria-expanded') == 'false'
+    assert toc_list.get_attribute('aria-hidden') == 'true'
+
+    # after click
+    toc_button.click()
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, '.article-toc__list'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+    assert toc_button.get_attribute('aria-expanded') == 'true'
+    assert toc_list.get_attribute('aria-hidden') == 'false'
+
+    # after second click
+    toc_button.click()
+    condition = expected_conditions.invisibility_of_element_located((
+        By.CSS_SELECTOR, '.article-toc__list'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+    assert toc_button.get_attribute('aria-expanded') == 'false'
+    assert toc_list.get_attribute('aria-hidden') == 'true'
 
     # click on onesie
     toc_onesie.click()

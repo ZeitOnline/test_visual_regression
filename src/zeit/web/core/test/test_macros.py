@@ -22,7 +22,7 @@ def test_esi_macro_should_produce_directive_depending_on_environment(
     source = 'http://foo.com/bar'
     error_text = 'esi failed'
 
-    conf['dev_environment'] = True
+    conf['use_wesgi'] = True
 
     html_for_wesgi = ('<!-- [esi-debug] src="{0}" error_text="" -->'
                       '<esi:include src="{0}" onerror="continue" />'
@@ -33,7 +33,7 @@ def test_esi_macro_should_produce_directive_depending_on_environment(
         wesgi_string += line.strip()
     assert wesgi_string == html_for_wesgi
 
-    conf['dev_environment'] = False
+    conf['use_wesgi'] = False
 
     html_for_varnish = ('<esi:remove>'
                         '<!-- [esi-debug] src="{0}" error_text="{1}" -->'
