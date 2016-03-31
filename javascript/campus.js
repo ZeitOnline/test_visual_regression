@@ -15,17 +15,25 @@ require([
     'web.core/zeit',
     'web.core/images',
     'web.core/clicktracking',
-    'web.campus/menu'
+    'web.campus/menu',
+    'web.core/comments'
 ], function(
     zeit,
     images,
     clicktracking,
-    menu
+    menu,
+    comments
 ) {
+    var article = document.getElementById( 'js-article' );
+
     images.init();
     menu.init();
     clicktracking.init();
     zeit.clearQueue();
+
+    if ( article ) {
+        comments.init();
+    }
 });
 
 // add required jQuery plugins

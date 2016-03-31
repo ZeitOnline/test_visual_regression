@@ -186,7 +186,8 @@ def test_request_thread_mode_should_produce_expected_uris(
 
     recommendation = '{}/agatho/thread/foo{}'.format(
         conf.get('agatho_host', ''),
-        '?mode=recommendations&type=leser_empfehlung&page=1&rows=4&order=asc')
+        '?mode=recommendations&recommendationtype=leser_empfehlung'
+        '&page=1&rows=4&order=asc')
 
     zeit.web.core.comments.request_thread(
         '/foo', thread_type='recommendation', page=1, page_size=4)
@@ -195,7 +196,7 @@ def test_request_thread_mode_should_produce_expected_uris(
 
     promotion = '{}/agatho/thread/foo{}'.format(
         conf.get('agatho_host', ''),
-        '?mode=recommendations&type=kommentar_empfohlen'
+        '?mode=recommendations&recommendationtype=kommentar_empfohlen'
         '&page=1&rows=4&order=asc')
 
     zeit.web.core.comments.request_thread(
@@ -347,6 +348,33 @@ def test_comment_tree_should_be_flattened_on_level_two():
         (comment['cid'], comment['shown_num']) for comment in sorted_comments]
     assert readable_comments == (
         [(1, '1'), (6, '1.1'), (2, '2'), (4, '2.1'), (5, '2.2'), (3, '3')])
+
+
+def test_comments_should_have_correct_order_when_paginated():
+    cid_1 = dict(
+        in_reply=None,
+        cid=1)
+
+    cid_2 = dict(
+        in_reply=None,
+        cid=2)
+
+    cid_3 = dict(
+        in_reply=2,
+        cid=3)
+
+    comments = [cid_1, cid_2, cid_3]
+
+    sorted_comments = zeit.web.core.comments._sort_comments(
+        comments, offset=2)[0]
+
+    sorted_comments = list(itertools.chain(
+        *[[li[0]] + li[1] for li in sorted_comments.values()]))
+
+    readable_comments = [
+        (comment['cid'], comment['shown_num']) for comment in sorted_comments]
+    assert readable_comments == (
+        [(1, '3'), (2, '4'), (3, '4.1')])
 
 
 def _create_poster(monkeypatch):

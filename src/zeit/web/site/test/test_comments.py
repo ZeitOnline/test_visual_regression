@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import lxml.etree
 import mock
 import requests
 import urllib
@@ -77,7 +76,7 @@ def test_comment_form_should_display_parent_hint(tplbrowser, dummy_request):
     dummy_request.GET['pid'] = '90'
 
     browser = tplbrowser(
-        'zeit.web.site:templates/inc/comments/comment-form.html',
+        'zeit.web.core:templates/inc/comments/comment-form.html',
         view=view, request=dummy_request)
 
     input = browser.cssselect('textarea[name="comment"]')[0]
@@ -176,12 +175,12 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
 
     view = zeit.web.site.view_article.Article(content, request)
     view.commenting_allowed = False
-    comments = tplbrowser('zeit.web.site:templates/inc/comments/thread.html',
+    comments = tplbrowser('zeit.web.core:templates/inc/comments/thread.html',
                           view=view, request=request)
     assert len(comments.cssselect('article.comment')) > 0, (
         'comments must be displayed')
 
-    form = tplbrowser('zeit.web.site:templates/inc/comments/comment-form.html',
+    form = tplbrowser('zeit.web.core:templates/inc/comments/comment-form.html',
                       view=view, request=request)
     assert len(form.cssselect('#comment-form[data-uid="123"]')) == 1, (
         'comment form tag with data-uid attribute must be present')
@@ -191,7 +190,7 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
     # reset view (kind of)
     view = zeit.web.site.view_article.Article(content, request)
     view.show_commentthread = False
-    comments = tplbrowser('zeit.web.site:templates/inc/article/comments.tpl',
+    comments = tplbrowser('zeit.web.core:templates/inc/article/comments.html',
                           view=view, request=request)
     assert comments.contents.strip() == '', (
         'comment section template must return an empty document')
@@ -258,31 +257,12 @@ def test_comment_reply_thread_loads_with_deeplink(selenium_driver, testserver):
     assert len(select('#cid-{}'.format(last_reply_id))) == 1
 
 
-# needs selenium because of esi include
-def test_comment_reply_thread_loads_with_nojs(selenium_driver, testserver):
-    first_reply_id = '91'
-    second_reply_id = '92'
-    driver = selenium_driver
-    driver.get(
-        '{}/zeit-online/article/01?cid={}'
-        .format(testserver.url, first_reply_id))
-    select = driver.find_elements_by_css_selector
-    assert len(select('#cid-{}'.format(second_reply_id))) == 1
-
-
 def test_comment_actions_should_link_to_article(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     link = browser.cssselect('a.js-report-comment')[0]
     assert link.get('href') == (
         'http://localhost/zeit-online/article/01'
         '?action=report&pid=3#report-comment-form')
-
-
-def test_comment_pagination_should_link_to_article(testbrowser):
-    browser = testbrowser('/zeit-online/article/01/comment-thread')
-    link = browser.cssselect('.pager__page a')[0]
-    assert link.get('href') == (
-        'http://localhost/zeit-online/article/01?page=2#comments')
 
 
 def test_comment_pagination_should_link_to_article(testbrowser):
@@ -409,7 +389,7 @@ def test_article_meta_should_omit_comment_count_if_no_comments_present(
 
 def test_comment_replies_view_renders_html_for_replies(testbrowser):
     browser = testbrowser(
-        '/zeit-online/article/01/comment-replies?cid=3')
+        '/zeit-online/article/01/comment-replies?cid=3&page=1&local_offset=0')
     comments = browser.cssselect('article .comment__body')
     assert len(comments) == 2
     assert 'zweite antwort' in comments[0].xpath('p')[0].text
@@ -419,3 +399,15 @@ def test_comment_displays_total_reply_count(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     link = browser.cssselect('.comment-overlay__count')[0]
     assert link.text == '+ 2'
+
+
+def test_comment_deeplink_should_have_page_number(application):
+    thread = zeit.web.core.comments.get_paginated_thread(
+        'http://xml.zeit.de/zeit-online/article/01',
+        cid=91)
+    assert int(thread['pages']['current']) == 2
+
+    thread = zeit.web.core.comments.get_paginated_thread(
+        'http://xml.zeit.de/zeit-online/article/01',
+        cid=92)
+    assert int(thread['pages']['current']) == 1

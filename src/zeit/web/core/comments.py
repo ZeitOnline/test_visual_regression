@@ -182,10 +182,10 @@ def request_thread(unique_id,
         deeplink='{}?mode=deeplink&cid={}&rows={}&order={}'.format(
             uri, cid, page_size, sort),
         recommendation=(
-            '{}?mode=recommendations&type=leser_empfehlung&'
+            '{}?mode=recommendations&recommendationtype=leser_empfehlung&'
             'page={}&rows={}&order={}').format(uri, page, page_size, sort),
         promotion=(
-            '{}?mode=recommendations&type=kommentar_empfohlen&'
+            '{}?mode=recommendations&recommendationtype=kommentar_empfohlen&'
             'page={}&rows={}&order={}').format(uri, page, page_size, sort),
         single='{}?mode=load_cid&cid={}'.format(uri, cid),
         meta='{}?mode=meta'.format(uri),
@@ -213,7 +213,7 @@ class ThreadNotLoadable(Exception):
 
 def get_paginated_thread(
         unique_id, sort='asc', page=0, cid=None, parent_cid=None,
-        invalidate_delta=5):
+        invalidate_delta=5, local_offset=0):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     page_size = int(conf.get('comment_page_size', '4'))
 
@@ -258,6 +258,16 @@ def get_paginated_thread(
         promotion_count = int(document.xpath(
             '/comments/comments_count_recommendations_editors/text()')[0])
         has_promotion = bool(promotion_count)
+
+        thread_position = document.xpath(
+            '/comments/thread_position/text()')
+
+        if len(thread_position) == 1:
+            thread_position = int(thread_position[0])
+            page = thread_position / page_size
+            if thread_position % page_size > 0:
+                page = page+1
+
     except (IndexError, lxml.etree.XMLSyntaxError):
         raise ThreadNotLoadable()
 
@@ -265,7 +275,9 @@ def get_paginated_thread(
 
     flattened_comments = comment_list[:]
 
-    sorted_tree, index = _sort_comments(comment_list)
+    offset = (int(page) - 1) * page_size if int(page) > 0 else 0
+    offset = offset + local_offset
+    sorted_tree, index = _sort_comments(comment_list, offset=offset)
 
     pagination_comment_count = toplevel_comment_count
 
@@ -590,12 +602,11 @@ def get_cacheable_thread(unique_id):
         return
 
 
-def _sort_comments(comments):
+def _sort_comments(comments, offset=0):
 
     comments_sorted = collections.OrderedDict()
     root_ancestors = {}
     comment_index = {}
-
     while comments:
         comment = comments.pop(0)
 
@@ -603,8 +614,8 @@ def _sort_comments(comments):
             root_ancestors[comment['cid']] = comment['cid']
             comments_sorted[comment['cid']] = [comment, []]
             root_index = comments_sorted.keys().index(comment['cid']) + 1
-            comment['root_index'] = root_index
-            comment['shown_num'] = str(root_index)
+            comment['root_index'] = root_index + offset
+            comment['shown_num'] = str(root_index + offset)
         else:
             try:
                 ancestor = root_ancestors[comment['in_reply']]
@@ -612,8 +623,8 @@ def _sort_comments(comments):
                 comments_sorted[ancestor][1].append(comment)
                 root_index = comments_sorted[ancestor][0]['root_index']
                 comment['root_index'] = root_index
-                comment['shown_num'] = "{}.{}".format(root_index, len(
-                    comments_sorted[ancestor][1]))
+                comment['shown_num'] = "{}.{}".format(
+                    comment['root_index'], len(comments_sorted[ancestor][1]))
             except KeyError:
                 log.error("The comment with the cid {} is a reply, but"
                           " no ancestor could be found".format(comment['cid']))
