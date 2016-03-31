@@ -1,0 +1,26 @@
+// CP area for graphical teaer
+.topic-graphical
+	&__ad
+		@extend .teaser-graphical
+
+		div.ad-desktop
+			margin: 0
+
++respond-min($break-tablet-min)
+	.topic-graphical
+		+display-flex
+		+flex-flow(row wrap)
+		padding: 0 $cp-padding
+
+		.teaser-graphical,
+		.teaser-border,
+		&__ad
+			width: 50%
+
++respond-min($break-desktop-min)
+	.topic-graphical
+
+		.teaser-graphical,
+		.teaser-border,
+		&__ad
+			width: 33.33%

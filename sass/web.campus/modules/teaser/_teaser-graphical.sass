@@ -1,10 +1,11 @@
 .teaser-graphical
 	margin: $page-padding--small $page-padding--small $vertical-space
-	position: relative
 
 	&__link
 		+font-smoothing
 		color: #fff
+		display: block
+		position: relative
 		+on-interaction
 			color: $color-topics-secondary
 
@@ -15,6 +16,7 @@
 
 	&__heading
 		@extend %font-beckett
+		+transform(translate(-50%, -50%))
 		font-size: em(26px)
 		left: 50%
 		margin: 0
@@ -22,7 +24,6 @@
 		position: absolute
 		text-align: center
 		top: 50%
-		transform: translate(-50%, -50%)
 		width: 100%
 
 	&__tape
@@ -43,10 +44,12 @@
 			height: remify(200px)
 			height: 26vw
 			max-height: remify(266px)
-			padding-bottom: 0
+			padding: 0
+
 		&__heading
 			font-size: em(36px)
 			padding: remify(0 30px)
+
 		&__tape
 			padding: remify(12px 15px 4px)
 
@@ -55,7 +58,9 @@
 
 		&__media
 			height: remify(266px)
+
 		&__heading
 			font-size: em(42px)
+
 		&__tape
 			padding: remify(16px 20px 10px)
