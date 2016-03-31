@@ -4,7 +4,7 @@
 {% set modifier = '--with-image' if image and not is_image_expired(image) else '--no-image' %}
 <article id="{{ module_layout }}"
          class="{% block layout %}nextread{% endblock %} {{ module_layout }}{{ modifier }}">
-    <a class="{{ module_layout }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}" data-id="articlebottom.editorial-nextread...area">
+    <a class="{{ module_layout }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}" data-id="articlebottom.editorial-nextread...area" itemprop="relatedLink">
         <div class="{{ module_layout }}__lead">{{ module.lead or 'Lesen Sie jetzt' }}</div>
         {% include "zeit.web.core:templates/inc/asset/image_nextread.tpl" %}
         <div class="{{ module_layout }}__container">
