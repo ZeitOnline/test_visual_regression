@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - MAINT: Fix Campus teaser headlines + padding
 
+- FIX: Fix subcomment counting
+
 
 2.67 (2016-03-30)
 -----------------
