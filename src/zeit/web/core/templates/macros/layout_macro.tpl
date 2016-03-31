@@ -125,12 +125,6 @@
     {% endif -%}
 {%- endmacro %}
 
-{% macro content_ad_article(view) -%}
-    {% if view.context.advertising_enabled -%}
-    <div id="iq-artikelanker"></div>
-    {% endif -%}
-{%- endmacro %}
-
 {% macro use_svg_icon(name, class, request, inline=False) -%}
     <svg class="svg-symbol {{ class }}" role="img" aria-labelledby="title">
         {% if inline %}

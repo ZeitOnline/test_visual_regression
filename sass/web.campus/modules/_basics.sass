@@ -41,3 +41,12 @@
 		top: remify(5px)
 		width: remify(10px)
 
+%figure-caption
+	background-color: $color-background--light
+	color: #444
+	font-family: $font-tabletgothic
+	font-size: em(15px)
+	line-height: round-to-precision(20/15, $precision: 1)
+	padding: $page-padding--small
+	+respond-min($break-page-padding)
+		padding: $page-padding

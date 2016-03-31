@@ -9,6 +9,11 @@
 			margin-top: remify(28px)
 			margin-bottom: remify(40px)
 
+		&--marginalia
+			clear: both
+			margin: remify(40px) auto
+			width: 90%
+
 		+respond-min($break-tablet-min)
 			max-width: remify(660px)
 			margin-left: auto
@@ -17,6 +22,18 @@
 			&--wide
 				clear: both
 				max-width: remify(820px)
+
+			&--marginalia
+				float: left
+				margin: remify(0 20px 20px 0)
+				width: remify(240px)
+
+		+respond-min($break-desktop-min)
+			&--apart
+				margin-top: remify(40px)
+
+			&--marginalia
+				margin-left: remify(60px)
 
 	&__summary
 		@extend .paragraph
@@ -32,4 +49,17 @@
 
 .article-page
 	&:last-of-type
+		+pie-clearfix
 		margin-bottom: remify(60px)
+
+.figure
+
+	&__caption
+		@extend %figure-caption
+
+	&__copyright
+		color: $color-text--light
+		a
+			color: inherit
+			+on-interaction
+				color: $color-link--hover
