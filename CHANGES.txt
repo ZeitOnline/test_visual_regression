@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - MAINT: Add a11y to table of contents
 
+- ZON-2893: Support all content blocks in ZEIT Campus articles
+
 
 2.68 (2016-03-31)
 -----------------
