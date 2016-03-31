@@ -74,7 +74,7 @@
     <cluster area="id-41a8299d-b569-4c42-b713-db5dbd86a60a" kind="solo">
       <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64a" kind="solo">
         <container cp:type="teaser" module="zco-lead-portrait" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be3b">
-          <block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+          <block href="http://xml.zeit.de/campus/article/common"></block>
         </container>
       </region>
     </cluster>
@@ -83,7 +83,7 @@
     <cluster area="id-41a8299d-b569-4c42-b713-db5dbd86a64a" kind="trio">
       <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64b" kind="trio">
         <container cp:type="teaser" module="zco-graphical" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
-          <block href="http://xml.zeit.de/thema/jurastudium"></block>
+          <block href="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
         </container>
       </region>
       <region area="id-41a2899d-b569-4c42-b713-db5dbd86a01c" kind="trio">
@@ -106,7 +106,7 @@
       </region>
       <region area="id-42a2899d-b569-4c42-b713-db5dbd86a01c" kind="duo">
         <container cp:type="teaser" module="zco-graphical" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">
-          <block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+          <block href="http://xml.zeit.de/campus/article/leserartikel"></block>
         </container>
       </region>
     </cluster>
@@ -119,7 +119,7 @@
       </region>
       <region area="id-43a2899d-b569-4c42-b713-db5dbd86a64b" kind="major">
         <container cp:type="teaser" module="zco-graphical" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
-          <block href="http://xml.zeit.de/campus/article/common"></block>
+          <block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
         </container>
       </region>
     </cluster>
