@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - FIX: Fix subcomment counting
 
+- FIX: Fix subcomment deeplinks
+
 
 2.67 (2016-03-30)
 -----------------
