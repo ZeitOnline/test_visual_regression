@@ -1,5 +1,5 @@
 #stoas-artikelanker
-    margin: $page-padding--small 0
+    margin: $vertical-space 0
     +unpadded
 
 .stoas
@@ -12,21 +12,24 @@
         color: $white
         font-family: $font-beckett
         letter-spacing: 1.5px
-        font-size: remify(30px)
-        line-height: 1
+        font-size: remify(30px) // adapted to handle long words
+        line-height: 1 // adapted to handle long words
         text-align: center
         display: block
         padding: remify(20px 30px)
         word-wrap: break-word
-
-.stoas-cta
-    padding: remify(0px 30px 25px)
-    display: block
-    color: $white
-    text-align: center
-
     &__link
         @extend %cta-button-link
+        padding: remify(0px 30px 25px)
+        display: block
+        text-align: center
+        background-color: transparent
+        text-transform: none
+        font-weight: normal
+        color: $white
+        +on-interaction
+            .stoas__button
+                border: 3px solid $color-text
     &__button
         @extend %cta-button-box
         border: 3px solid $white
@@ -39,6 +42,7 @@
         +margined
         +pie-clearfix
         float: right
+        margin-top: 0
 
     .stoas
         max-width: remify(300px)

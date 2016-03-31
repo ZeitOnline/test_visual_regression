@@ -9,6 +9,11 @@
 		@extend %cta-button-link
 	&__button
 		@extend %cta-button-box
+		+respond-max($break-tablet-min)
+			+font-smoothing
+			color: #fff
+			display: block
+			text-align: center
 	&__icon
 		@extend %cta-button-icon
 	&__nexttitle
