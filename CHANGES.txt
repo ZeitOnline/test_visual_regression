@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.68 (unreleased)
+2.68 (2016-03-31)
 -----------------
 
 - ZON-2522: Move comments to core
