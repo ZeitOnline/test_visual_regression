@@ -1,24 +1,23 @@
 .teaser-topic-small
-	@extend %teaser
-	padding: $page-padding--small
-	border: none
-	position: relative
-	background-color: $white
+	+clearfix
+	margin: $vertical-space $page-padding--small 0
 
 	&__media
+		@extend %teaser-media
 		display: none
 
 	&__heading
 		@extend %teaser-heading
 		font-size: remify(26px)
-		line-height: 0
-		margin: remify(12px 0 10px)
-
-	&__combined-link
-		@extend %teaser-combined-link
+		margin: 0
+		max-width: none
+		padding: 0
 
 	&__kicker
 		@extend %teaser-kicker
+		display: block
+		padding: remify(0 0 10px)
+		position: static
 
 	&__title
 		@extend %teaser-title
@@ -26,22 +25,18 @@
 
 +respond-min($break-tablet-min)
 	.teaser-topic-small
-		padding-left: 0px
+		margin: $vertical-space 0 0
 
-		&__title
+		&__heading
 			font-size: remify(28px)
 
 +respond-min($break-desktop-min)
 	.teaser-topic-small
 		&__media
-			width: remify(160px)
-			display: inline-block
-			background-color: $greyish-white
-			height: 0
+			display: block
+			float: left
 			padding-bottom: remify(160px) / 16 * 9 // image variant 'wide' (16:9)
+			width: remify(160px)
 
 		&__heading
-			display: inline-block
-			vertical-align: top
-			max-width: 50%
-			margin: remify(20px 0 0 15px)
+			margin: remify(0 0 0 180px)
