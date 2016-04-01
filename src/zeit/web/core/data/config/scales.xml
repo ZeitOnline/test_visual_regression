@@ -41,8 +41,9 @@
   <scale name="zon-thumbnail" width="580" height="326" title="Relaunch 2015: Thumbnail (kleiner Teaser)" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="zon-large" width="580" height="326" title="Relaunch 2015: großer Teaser" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="zon-article-large" width="820" height="462" title="Relaunch 2015: Artikel groß" available="zeit.web.core.interfaces.IInternalUse"/>
-  <scale name="zon-topic" width="980" height="418" title="Dossier-Teaser (980×418)" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="zon-square" width="460" height="460" title="Relaunch 2015: Grafischer Teaser" available="zeit.web.core.interfaces.IInternalUse"/>
+  <!-- Shared Scales -->
+  <scale name="topic" width="980" height="418" title="Dossier-Teaser (980×418)" available="zeit.web.core.interfaces.IInternalUse"/>
   <!-- ZEIT Magazin Scales -->
   <scale name="zmo-card-picture" width="320" height="480" title="ZMO: Flippende Karte" available="zeit.magazin.interfaces.IZMOContent"/>
   <scale name="zmo-article-dream" width="920" height="1150" title="ZMO: Artikel Traum" available="zeit.magazin.interfaces.IZMOContent"/>

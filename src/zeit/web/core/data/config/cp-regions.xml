@@ -38,6 +38,11 @@
     <region kind="topic" title="Dossier">
         <area kind="topic"/>
     </region>
+    <region kind="topic" title="Dossier">
+        <area kind="topic-variant"
+        apply_teaser_layouts_automatically="true"
+        first_teaser_layout="zco-wide"/>
+    </region>
     <region kind="gallery" title="ZEIT Shop">
         <area kind="shop"/>
     </region>
