@@ -8,6 +8,9 @@ Change log for zeit.web
 
 - ZON-2893: Support all content blocks in ZEIT Campus articles
 
+- ZON-2776: Implement 2nd version of ZCO topic teaser and refactor standard
+  topic teaser
+
 
 2.68 (2016-03-31)
 -----------------
