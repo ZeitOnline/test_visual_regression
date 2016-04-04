@@ -4,7 +4,13 @@
 
 .stoas
     width: 100%
+    display: block
     background-color: $color-tools-primary
+    text-align: center
+    +on-interaction
+        .stoas__button
+            border: 3px solid $color-text
+            color: $color-text
 
     &__title
         +font-smoothing
@@ -14,22 +20,14 @@
         letter-spacing: 1.5px
         font-size: remify(30px) // adapted to handle long words
         line-height: 1 // adapted to handle long words
-        text-align: center
         display: block
         padding: remify(20px 30px)
         word-wrap: break-word
     &__link
-        @extend %cta-button-link
         padding: remify(0px 30px 25px)
         display: block
-        text-align: center
-        background-color: transparent
-        text-transform: none
-        font-weight: normal
         color: $white
-        +on-interaction
-            .stoas__button
-                border: 3px solid $color-text
+        letter-spacing: .01em
     &__button
         @extend %cta-button-box
         border: 3px solid $white

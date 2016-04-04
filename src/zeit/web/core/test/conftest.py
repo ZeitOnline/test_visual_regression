@@ -130,6 +130,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/article-htmlblock-layouts.xml'),
         'vivi_zeit.content.article_template-source': (
             'egg://zeit.web.core/data/config/article-templates.xml'),
+        'vivi_zeit.campus_article-stoa-source': (
+            'egg://zeit.web.core/data/config/article-stoa.xml'),
         'vivi_zeit.magazin_article-related-layout-source': (
             'egg://zeit.web.core/data/config/article-related-layouts.xml'),
         'vivi_zeit.content.cp_block-layout-source': (
