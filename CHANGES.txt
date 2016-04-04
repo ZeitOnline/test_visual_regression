@@ -11,6 +11,8 @@ Change log for zeit.web
 - ZON-2776: Implement 2nd version of ZCO topic teaser and refactor standard
   topic teaser
 
+- ZON-2889: Add new graphical topic teaser
+
 
 2.68 (2016-03-31)
 -----------------
