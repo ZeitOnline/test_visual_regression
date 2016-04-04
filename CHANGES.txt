@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.69 (unreleased)
+2.69 (2016-04-04)
 -----------------
 
 - MAINT: Add a11y to table of contents
