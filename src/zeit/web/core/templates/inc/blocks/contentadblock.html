@@ -1,2 +1,3 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
-{{ lama.content_ad_article(view) }}
+{% if view.context.advertising_enabled -%}
+    <div id="iq-artikelanker"></div>
+{% endif %}

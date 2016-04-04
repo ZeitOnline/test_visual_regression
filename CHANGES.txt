@@ -1,10 +1,23 @@
 Change log for zeit.web
 =======================
 
-2.69 (unreleased)
+2.70 (unreleased)
+-----------------
+
+- FIX: Handle non-ascii usernames in nojs comment form
+
+
+2.69 (2016-04-04)
 -----------------
 
 - MAINT: Add a11y to table of contents
+
+- ZON-2893: Support all content blocks in ZEIT Campus articles
+
+- ZON-2776: Implement 2nd version of ZCO topic teaser and refactor standard
+  topic teaser
+
+- ZON-2889: Add new graphical topic teaser
 
 
 2.68 (2016-03-31)

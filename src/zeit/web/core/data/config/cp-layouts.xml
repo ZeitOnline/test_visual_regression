@@ -14,6 +14,18 @@
         areas="duo"
         />
     <layout
+        id="zco-topic-wide"
+        title="großer Teaser Topic"
+        image_pattern=""
+        areas="topic-variant"
+        />
+    <layout
+        id="zco-topic-small"
+        title="kleiner Teaser Topic"
+        image_pattern="wide"
+        areas="topic-variant"
+        />
+    <layout
         id="zco-square"
         title="quadratischer Teaser"
         image_pattern="square"
@@ -35,7 +47,15 @@
         id="zco-debate"
         title="Debate"
         image_pattern=""
-        areas="solo"/>
+        areas="solo"
+        />
+    <layout
+        id="zco-graphical"
+        title="grafischer Teaser"
+        image_pattern="cinema"
+        areas="duo trio major minor topic-graphical"
+        default="topic-graphical"
+        />
 
     <!-- Teaser formats for new ZON-Centerpages -->
     <layout
@@ -50,13 +70,6 @@
         image_pattern="zon-thumbnail"
         areas="duo major minor ranking parquet spektrum zett zmo-parquet author-favourite-content author-articles"
         default="major minor parquet zmo-parquet ranking spektrum zett author-favourite-content author-articles"
-        />
-    <layout
-        id="zon-topic"
-        title="Dossier-Teaser"
-        image_pattern="zon-topic"
-        areas="topic"
-        default="topic"
         />
     <layout
         id="zon-square"
@@ -183,7 +196,14 @@
         image_pattern="zon-large"
         areas="storystream"
         type="storystream"/>
-
+    <!-- Shared teaser formats -->
+    <layout
+        id="topic"
+        title="Dossier-Teaser"
+        image_pattern="topic"
+        areas="topic"
+        default="topic"
+        />
     <!-- Legacy teaser formats -->
     <layout
         id="leader"

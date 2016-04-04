@@ -1,0 +1,22 @@
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
+
+{% set read_more_url = area.read_more_url or (area.referenced_cp.uniqueId if area.referenced_cp is not none) %}
+
+{% block module_list %}
+    {% if area.values() | length > 0 %}
+    <div class="topic-graphical">
+        {% for module in area.values()[0:4] -%}
+            {% set teaser = module | first_child %}
+            {% include "zeit.web.campus:templates/inc/teaser/zco-graphical.tpl" %}
+        {% endfor %}
+
+        {% if read_more_url %}
+            {% include "zeit.web.campus:templates/inc/teaser/zco-border.tpl" %}
+        {% endif %}
+
+        <div class="topic-graphical__ad">
+            {{ lama.adplace(view.banner(8), view) }}
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

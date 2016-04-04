@@ -204,3 +204,11 @@ def test_article_debate_block_should_render_expected_structure(testbrowser):
     assert len(select('.debate__title')) == 1
     assert len(select('.debate__text')) == 1
     assert len(select('.debate__label')) == 1
+
+
+def test_article_stoas_block_should_render_expected_structure(testbrowser):
+    select = testbrowser('/campus/article/stoas').cssselect
+    assert len(select('.stoas')) == 1
+    assert len(select('.stoas__title')) == 1
+    assert len(select('.stoas__link')) == 1
+    assert len(select('.stoas__button')) == 1
