@@ -383,7 +383,7 @@ def test_block_portraitbox_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/portraitbox.html', block=block)
     assert browser.cssselect(
-        'figure.portraitbox.article__item.article__item--marginalia')
+        '.portraitbox.article__item.article__item--marginalia')
 
 
 def test_block_quiz_should_contain_expected_structure(tplbrowser):

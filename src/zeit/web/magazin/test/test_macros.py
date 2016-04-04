@@ -650,3 +650,13 @@ def test_macro_liveblog_produces_html(application, jinja2_env):
         output += line.strip()
     assert ('<esi:include src="http://www.zeit.de/liveblog-backend/999.html" '
             'onerror="continue" />') in output
+
+
+def test_macro_contentadblock_produces_html(application, jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.magazin:templates/macros/article_macro.tpl')
+    view = mock.Mock()
+    view.context.advertising_enabled = True
+    tpl_module = tpl.make_module({'view': view})
+    assert tpl_module.contentadblock(mock.Mock()).strip() == (
+        '<div id="iq-artikelanker"></div>')

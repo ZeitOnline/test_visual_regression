@@ -15,7 +15,6 @@
   <variant old="zon-large" new="wide"/>
   <variant old="zon-thumbnail" new="wide"/>
   <variant old="zon-article-large" new="wide"/>
-  <variant old="zon-topic" new="cinema"/>
   <variant old="zon-square" new="square"/>
 
   <!-- zmo -->
@@ -33,6 +32,9 @@
   <variant old="zmo-article-dream" new="tile"/>
   <variant old="zmo-card-picture" new="narrow"/>
   <variant old="zmo-print-cover" new="portrait"/>
+
+  <!-- shared -->
+  <variant old="topic" new="cinema"/>
 
   <!-- internal -->
   <variant old="og-image" new="wide"/>

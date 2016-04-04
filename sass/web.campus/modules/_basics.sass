@@ -1,43 +1,52 @@
 @import "web.core/modules/basics"
 
 %font-beckett
-    font-family: $font-beckett
-    font-weight: normal
-    letter-spacing: 1.5px // pixel value by intention
-    line-height: .95
-    text-transform: uppercase
+	font-family: $font-beckett
+	font-weight: normal
+	letter-spacing: 1.5px // pixel value by intention
+	line-height: .95
+	text-transform: uppercase
 
 %border-box
-    border: 3px solid $zco-accent
-    padding: 1.5em 1em 2em 1em
-    position: relative
-    text-align: center
-    margin-bottom: 2.2em
-    +respond-min($break-tablet-min)
-        padding: 2em
-    +respond-min($break-desktop-min)
-        padding: 3em 4em
+	border: 3px solid $zco-accent
+	padding: 1.5em 1em 2em 1em
+	position: relative
+	text-align: center
+	margin-bottom: 2.2em
+	+respond-min($break-tablet-min)
+		padding: 2em
+	+respond-min($break-desktop-min)
+		padding: 3em 4em
 
 %border-box--cta
-    color: $zco-accent
-    background-color: $white
-    text-align: center
-    display: block
-    font-weight: bold
-    position: absolute
-    padding: 0 0.875em
-    bottom: remify(-14px)
-    left: 50%
-    +transform(translateX(-50%))
-    &:before
-        content: ""
-        width: remify(10px)
-        height: remify(10px)
-        border: 3px solid $zco-accent
-        border-left: 0
-        border-bottom: 0
-        transform: rotate(45deg)
-        position: absolute
-        left: remify(-12px)
-        top: remify(5px)
+	color: $zco-accent
+	background-color: $white
+	text-align: center
+	display: block
+	font-weight: bold
+	position: absolute
+	padding: 0 0.875em
+	bottom: remify(-14px)
+	left: 50%
+	+transform(translateX(-50%))
+	&:before
+		content: ""
+		width: remify(10px)
+		height: remify(10px)
+		border: 3px solid $zco-accent
+		border-left: 0
+		border-bottom: 0
+		transform: rotate(45deg)
+		position: absolute
+		left: remify(-12px)
+		top: remify(5px)
 
+%figure-caption
+	background-color: $color-background--light
+	color: #444
+	font-family: $font-tabletgothic
+	font-size: em(15px)
+	line-height: round-to-precision(20/15, $precision: 1)
+	padding: $page-padding--small
+	+respond-min($break-page-padding)
+		padding: $page-padding

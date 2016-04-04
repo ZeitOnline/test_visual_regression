@@ -6,7 +6,7 @@
 {%- endmacro %}
 
 {% macro contentadblock(item) -%}
-    {{ lama.content_ad_article(view) }}
+    {% include 'zeit.web.core:templates/inc/blocks/contentadblock.html' %}
 {%- endmacro %}
 
 {% macro supertitle() -%}

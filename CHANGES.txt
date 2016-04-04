@@ -1,7 +1,18 @@
 Change log for zeit.web
 =======================
 
-2.68 (unreleased)
+2.69 (unreleased)
+-----------------
+
+- MAINT: Add a11y to table of contents
+
+- ZON-2893: Support all content blocks in ZEIT Campus articles
+
+- ZON-2776: Implement 2nd version of ZCO topic teaser and refactor standard
+  topic teaser
+
+
+2.68 (2016-03-31)
 -----------------
 
 - ZON-2522: Move comments to core
@@ -11,6 +22,8 @@ Change log for zeit.web
 - MAINT: Fix Campus teaser headlines + padding
 
 - FIX: Fix subcomment counting
+
+- FIX: Fix subcomment deeplinks
 
 
 2.67 (2016-03-30)
