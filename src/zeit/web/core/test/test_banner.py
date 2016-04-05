@@ -2,6 +2,7 @@ import zeit.web.core.banner
 import zeit.web.core.article
 import mock
 import lxml
+import pytest
 
 def test_banner_place_should_be_serialized(application):
     place = zeit.web.core.banner.Place(1, ['728x90'], True, label='')
@@ -11,10 +12,12 @@ def test_banner_place_should_be_serialized(application):
                               'sizes': ['728x90'], 'tile': 1}
 
 
-def test_banner_place_should_raise_on_index_error(application):
+def test_banner_place_should_have_list_as_second_argument(application):
     with pytest.raises(IndexError):
         zeit.web.core.banner.Place(1, '123x456', True, label='')
 
+    place = zeit.web.core.banner.Place(1, ['123x456'], True, label='')
+    assert place.sizes == ['123x456']
 
 def test_banner_list_should_be_sorted(application):
     banner_list = list(zeit.web.core.banner.BANNER_SOURCE)
@@ -95,13 +98,14 @@ def test_inject_banner_code_should_be_inserted_on_all_pages():
     pages = [mock.Mock() for i in xrange(total)]
 
     with mock.patch.object(zeit.web.core.article,
-                           "_place_adtag_by_paragraph") as mock_method:
+            "_place_adtag_by_paragraph") as _place_adtag_by_paragraph:
         with mock.patch.object(zeit.web.core.article,
-                               "_place_content_ad_by_paragraph") as mock_meth:
-            mock_method.return_value = True
-            mock_meth.return_value = True
+                "_place_content_ad_by_paragraph") as (
+                    _place_content_ad_by_paragraph):
+            _place_adtag_by_paragraph.return_value = True
+            _place_content_ad_by_paragraph.return_value = True
             zeit.web.core.article._inject_banner_code(pages, True, False)
-            assert mock_method.call_count == total
+            assert _place_adtag_by_paragraph.call_count == total
 
 
 def test_inject_banner_code_should_be_inserted_on_certain_pages():
