@@ -16,13 +16,14 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          */
         main: function( $element ) {
 
+            var $page = $element.closest( '.main--article .article-page' );
+
             // in case we already have a complete ID, we do not need to calculate it
             if ( $element.data( 'id' ) ) {
                 return this.useDataId( $element );
             }
 
             // is this a link inside an article text? track this specific case.
-            var $page = $element.closest( '.main--article .article-page' );
             if ( $page.length ) {
                 return this.linkInArticleContent( $element, $page );
             }
@@ -135,12 +136,14 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          */
         linkInArticleContent: function( $element, $page ) {
             var $allParagraphsOnPage = $page.children( 'p' ),
-                $currentParagraph = $element.closest( 'p' ),
+                $currentParagraph = $element.closest( 'p' ) || $element.closest( '[data-block]' ),
                 currentPageNumber = $page.data( 'page-number' ) || 0,
-                currentParagraphNumber = $allParagraphsOnPage.index( $currentParagraph ) + 1,
+                currentParagraphNumber = $allParagraphsOnPage.index( $currentParagraph ) + 1 ||
+                                            $element.closest( '[data-block]' ).prevAll( 'p' ).length + 1,
+                trackType = $element.closest( '[data-block]' ).data( 'block' ) || 'intext',
                 data = [
                     getBreakpoint(),
-                    'intext', // [verortung] Immer (intext)
+                    trackType, // [verortung]
                     currentParagraphNumber + '/seite-' + currentPageNumber, // "Nummer des Absatzes"/"Nummer der Seite" Bsp: "2/seite-1"
                     '', // [spalte] leer lassen
                     '', // [subreihe] leer lassen
