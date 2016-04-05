@@ -245,11 +245,12 @@ def test_rawr_authentication_encodes_json_as_base64(dummy_request):
     dummy_request.user = {
         'ssoid': '123',
         'email': 'test@example.org',
+        'name': 'jrandom',
     }
     stuff = zeit.web.core.security._rawr_authentication(dummy_request)
     rawr_user, rawr_signature, timestamp = stuff
     data = json.loads(rawr_user.decode('base64'))
-    assert data == {'email': 'test@example.org'}
+    assert data == {'email': 'test@example.org', 'nickname': 'jrandom'}
     # I guess testing the signature would mean copying the production code
     # to the test code, which doesn't tell us anything, so we rely on
     # manual integration tests with the actual rawr system for that.
