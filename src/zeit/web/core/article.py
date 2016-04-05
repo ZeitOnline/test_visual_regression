@@ -13,6 +13,7 @@ import zeit.content.article.interfaces
 import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.interfaces
+import zeit.web.core.template
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IPage)
@@ -99,7 +100,7 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
     paragraphs = filter(
         lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
 
-    if zeit.web.template.toggles('consider_paragraph_length'):
+    if zeit.web.core.template.toggles('consider_paragraph_length'):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         p_length = conf.get('sufficient_paragraph_length', 10)
         paragraphs = _paragraphs_by_length(
