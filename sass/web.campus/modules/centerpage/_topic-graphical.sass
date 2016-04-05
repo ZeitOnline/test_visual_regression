@@ -1,0 +1,36 @@
+// CP area for graphical teaer
+.topic-graphical
+	&__ad
+		@extend .teaser-graphical
+
+		div.ad-desktop
+			margin: 0 auto
+
++respond-min($break-tablet-min)
+	.topic-graphical
+		+display-flex
+		+flex-flow(row wrap)
+		padding: 0 $cp-padding
+
+		.teaser-graphical,
+		.teaser-border,
+		&__ad
+			width: 50%
+
++respond-min-max($break-tablet-min, $break-desktop-min)
+	.topic-graphical
+		// nesting is needed for specificity
+		.topic-graphical__ad
+			width: 100%
+
+		// hide second last teaser for odd numbers
+		article:nth-of-type(4):nth-last-of-type(2)
+			display: none
+
++respond-min($break-desktop-min)
+	.topic-graphical
+
+		.teaser-graphical,
+		.teaser-border,
+		&__ad
+			width: 33.33%

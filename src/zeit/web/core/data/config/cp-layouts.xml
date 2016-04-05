@@ -47,7 +47,15 @@
         id="zco-debate"
         title="Debate"
         image_pattern=""
-        areas="solo"/>
+        areas="solo"
+        />
+    <layout
+        id="zco-graphical"
+        title="grafischer Teaser"
+        image_pattern="cinema"
+        areas="duo trio major minor topic-graphical"
+        default="topic-graphical"
+        />
 
     <!-- Teaser formats for new ZON-Centerpages -->
     <layout
