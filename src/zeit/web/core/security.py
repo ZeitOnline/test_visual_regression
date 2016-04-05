@@ -168,7 +168,7 @@ def get_login_state(request):
     info['logout'] = u'{}/abmelden?url={}'.format(
         settings['sso_url'], destination)
 
-    if request.authenticated_userid and 'user' in request.session:
-        info['user'] = request.session['user']
+    if request.user:
+        info['user'] = request.user
         info['profile'] = "{}/user".format(settings['community_host'])
     return info
