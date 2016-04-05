@@ -1,0 +1,66 @@
+.teaser-graphical
+	margin: $page-padding--small $page-padding--small $vertical-space
+
+	&__link
+		+font-smoothing
+		color: #fff
+		display: block
+		position: relative
+		+on-interaction
+			color: $color-topics-secondary
+
+	&__media
+		@extend %teaser-media
+		overflow: hidden
+		padding-bottom: 100% / 7 * 3 // image variant 'cinema', ratio 7:3
+
+	&__heading
+		@extend %font-beckett
+		+transform(translate(-50%, -50%))
+		font-size: em(26px)
+		left: 50%
+		margin: 0
+		padding: remify(0 10px)
+		position: absolute
+		text-align: center
+		top: 50%
+		width: 100%
+
+	&__tape
+		background-color: $color-background--dark
+		box-decoration-break: clone
+		-webkit-box-decoration-break: clone
+		padding: remify(14px 15px 9px)
+
+	&__kicker
+		position: relative // for stacking context
+
+	// TABLET
+	+respond-min($break-tablet-min)
+		margin: 0
+		padding: $cp-padding
+
+		&__media
+			height: remify(200px)
+			height: 26vw
+			max-height: remify(266px)
+			padding: 0
+
+		&__heading
+			font-size: em(36px)
+			padding: remify(0 30px)
+
+		&__tape
+			padding: remify(12px 15px 4px)
+
+	// DESKTOP
+	+respond-min($break-desktop-min)
+
+		&__media
+			height: remify(266px)
+
+		&__heading
+			font-size: em(42px)
+
+		&__tape
+			padding: remify(16px 20px 10px)

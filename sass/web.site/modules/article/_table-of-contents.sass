@@ -18,9 +18,13 @@
 		letter-spacing: $zon-letter-spacing-l
 		margin: remify(0 0 16px)
 		text-transform: uppercase
-		&:after
-			+build-mobile-plus-minus-button()
-		&--active
+		&[role="button"]
+			cursor: pointer
+			&:after
+				+build-mobile-plus-minus-button()
+			+respond-min($break-tablet-min)
+				cursor: default
+		&[aria-expanded="true"]
 			&:after
 				content: "\2212" // U+2212 = − (minus sign)
 		+respond-min($break-tablet-min)
@@ -32,10 +36,10 @@
 		list-style: none
 		margin: 0
 		padding: 0
-		.js &
+		&[aria-hidden="true"]
 			display: none
-		+respond-min($break-tablet-min)
-			display: block !important // use important to overwrite possible js
+			+respond-min($break-tablet-min)
+				display: block
 
 	&__item
 		border-top: 1px solid $zon-alto

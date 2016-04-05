@@ -1,0 +1,65 @@
+.teaser-topic-wide
+	@extend %teaser
+	border: none
+	position: relative
+	background-color: $white
+
+	&:after
+		content: ''
+		display: block
+		width: remify(50px)
+		margin: remify(15px 0 15px)
+		border-bottom: 3px solid $zco-accent
+
+	&__heading
+		@extend %teaser-heading
+		font-size: remify(42px)
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__kicker
+		@extend %teaser-kicker
+		min-width: remify(180px)
+
+	&__title
+		@extend %teaser-title
+
+	&__text
+		@extend %teaser-text
+
+	&__metadata
+		@extend %teaser-metadata
+
+	&__byline
+		@extend %teaser-byline
+
++respond-max($break-tablet-min)
+	.teaser-topic-wide
+		&__combined-link,
+		&__kicker,
+		&__text,
+		&__metadata
+			padding-left: $page-padding--small
+		&__text,
+		&__metadata
+			max-width: 95%
+			padding-right: $page-padding--small
+		&:after
+			margin-left: $page-padding--small
+
+
++respond-min($break-tablet-min)
+	.teaser-topic-wide
+		margin-top: remify(15px)
+
+		&__title
+			font-size: remify(42px)
+
+		&:after
+			margin: remify(25px 0 25px -45px)
+
++respond-min($break-desktop-min)
+	.teaser-topic-wide
+		&:after
+			margin: remify(35px 0 25px -45px)

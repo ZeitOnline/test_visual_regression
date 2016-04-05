@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/thema/jurastudium</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-01-21T14:41:50.473106+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-01-21T14:41:47.475366+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Staatsexamen, Leistungsdruck und der Ruf nach Reformen - das Jurastudium steht in der Kritik. Die Meinungen und Fakten bei ZEIT ONLINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Studium</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9851bb66-d2ea-4959-bf09-da1b21e6af54}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-01-21T14:41:55.477059+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/thema/jura</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt; &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Jurastudium: Das h&#xE4;rteste Studium des Landes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-09-12T11:04:06.579728+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">topicpage</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-09-03T11:25:49.559101+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-09-12T11:04:31.924275+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.gerstlauer</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-01-21T14:41:47.364860+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2016-01-21T14:41:50Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">67053</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Thu, 21 Jan 2016 14:41:50 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"e68fd1-105ed-529d91a62966b"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>
