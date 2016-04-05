@@ -13,6 +13,11 @@
 
   <setting name="script_timeout" xsi:type="xsd:int">2000</setting>
 
+  <!-- Use this setting to determine wheter or not an paragraph should be
+       considered for ad places. The number represents the number of
+       characters in the paragraph. -->
+  <setting name="sufficient_paragraph_length" xsi:type="xsd:int">30</setting>
+
   <setting name="comment_page_size" xsi:type="xsd:int">4</setting>
   <setting name="community_host_timeout_secs" xsi:type="xsd:int">10</setting>
 

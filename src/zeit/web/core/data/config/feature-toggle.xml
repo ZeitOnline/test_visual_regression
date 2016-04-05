@@ -10,4 +10,5 @@
   <tracking>true</tracking>
   <dummy>false</dummy>
   <comment_thread_via_esi>true</comment_thread_via_esi>
+  <consider_paragraph_length>true</consider_paragraph_length>
 </features>
