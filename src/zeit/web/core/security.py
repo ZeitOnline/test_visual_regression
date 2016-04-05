@@ -1,3 +1,8 @@
+import hashlib
+import hmac
+import json
+import time
+
 import jwt
 import requests
 import lxml.etree
@@ -171,4 +176,23 @@ def get_login_state(request):
     if request.user:
         info['user'] = request.user
         info['profile'] = "{}/user".format(settings['community_host'])
+        info['rawr_authentication'] = ', '.join(_rawr_authentication(request))
+    else:
+        info['rawr_authentication'] = ''
+
     return info
+
+
+def _rawr_authentication(request):
+    rawr_user = json.dumps({
+        'email': request.user.get('email')
+    }).encode('base64').strip()
+    # rawr docs say, "expires after 2 hours" but since we write a new
+    # timestamp with each login-state call (roughly every minute), this
+    # should not interfere with our own session expiration rules.
+    timestamp = str(int(time.time()))
+    rawr_signature = hmac.HMAC(
+        request.registry.settings['sso_rawr_secret'],
+        ' '.join([rawr_user, timestamp]),
+        hashlib.sha1).hexdigest()
+    return rawr_user, rawr_signature, timestamp
