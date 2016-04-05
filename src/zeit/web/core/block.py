@@ -46,7 +46,7 @@ class Paragraph(Block):
     def __len__(self):
         try:
             text = lxml.html.fromstring(unicode(self.html)).text_content()
-            return len(text.replace('\n',''))
+            return len(text.replace('\n','').strip())
         except (AttributeError, lxml.etree.XMLSyntaxError):
             return 0
 
