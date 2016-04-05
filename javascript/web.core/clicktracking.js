@@ -16,14 +16,13 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          */
         main: function( $element ) {
 
-            var $page = $element.closest( '.main--article .article-page' );
-
             // in case we already have a complete ID, we do not need to calculate it
             if ( $element.data( 'id' ) ) {
                 return this.useDataId( $element );
             }
 
             // is this a link inside an article text? track this specific case.
+            var $page = $element.closest( '.main--article .article-page' );
             if ( $page.length ) {
                 return this.linkInArticleContent( $element, $page );
             }
