@@ -3,10 +3,6 @@
 uses nearly nothing from default teaser, so does not extend it,
 there are however some unsolved challenges:
 - clicktracking (and meetrics?) has to be provided for each block
-- padding/margin above and under the teasergroup is unclear
-- I've ommitted the copyright motice for the packshot, as it's always ours, isn't it?
-- possibly the packshot should be it's own teasertemplate as a standalone version?
-- there is only local configuratuion at this point
 - there is not one test
 #}
 <aside class="{% block layout %}teaser-follow-us{% endblock %} {% block teaser_modifier %}{% endblock %}{% if module.visible_mobile == False %} mobile-hidden{% endif %}"
