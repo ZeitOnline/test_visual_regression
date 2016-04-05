@@ -22,6 +22,7 @@ import zeit.web.core.security
 import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.site.view
+import zeit.web.campus.view
 
 
 log = logging.getLogger(__name__)
@@ -466,8 +467,9 @@ class RecommendCommentResource(PostCommentResource):
 
 
 @pyramid.view.view_defaults(
-    renderer='zeit.web.core:templates/inc/comments/thread.html',
-    name='comment-thread')
+    renderer='zeit.web.site:templates/inc/comments/thread.html',
+    name='comment-thread',
+    custom_predicates=(zeit.web.site.view.is_zon_content,))
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
 @pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
@@ -475,7 +477,23 @@ class RecommendCommentResource(PostCommentResource):
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
-class CommentThread(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
+class CommentThreadSite(
+        zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
+    pass
+
+
+@pyramid.view.view_defaults(
+    renderer='zeit.web.campus:templates/inc/comments/thread.html',
+    name='comment-thread',
+    custom_predicates=(zeit.web.campus.view.is_zco_content,))
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
+@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+class CommentThreadCampus(CommentThreadSite):
     pass
 
 

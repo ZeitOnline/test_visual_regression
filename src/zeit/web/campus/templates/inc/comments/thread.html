@@ -1,0 +1,60 @@
+{% extends "zeit.web.core:templates/inc/comments/thread.html" %}
+
+{% block comment_section_head %}
+    <h3 class="visually-hidden">Kommentare</h3>
+    <div class="comment-section__head">
+        <div class="comment-section__head-container comment-section__item">
+            {% if view.comment_area.show_comments %}
+                <span class="comment-section__headline">
+                    {{ view.comments.headline }}
+                    {% if view.comments.pages.title %}
+                    <small>{{ view.comments.pages.title }}</small>
+                    {% endif %}
+                </span>
+                {% if view.comment_area.show_comment_form %}
+                    {# TODO: taugt js-scroll was in Campus? #}
+                    <a href="#comment-form" class="comment-section__button js-scroll">
+                        Mitdiskutieren
+                        {{ lama.use_svg_icon('arrow-right', 'comment-section__icon', request) }}
+                    </a>
+                {% endif %}
+            {% elif view.comment_area.no_comments %}
+                <span class="comment-section__headline">
+                    <span class="nowrap">Noch keine Kommentare.</span>
+                    <span class="nowrap">Diskutieren Sie mit.</span>
+                </span>
+            {% else %}
+                <span class="comment-section__headline">
+                    <span class="nowrap">Kommentare</span>
+                </span>
+            {% endif %}
+        </div>
+    </div>
+
+    {# TODO: Was ist das? #}
+    {% if view.comment_area.message  %}
+        <div class="comment-section__message">
+            {{ view.comment_area.message }}
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+
+{% block comment_section_pagination %}
+{# TODO: accessible (und wiederverwertbare?) Kommentar-Seiten-Navigation #}
+<nav class="article-pagination article-pagination--default article__item" aria-labeledby="article-pagination-title">
+    <h3 class="visually-hidden" id="article-pagination-title">Seitennavigation</h3>
+
+    <a class="article-pagination__link" href="http://friedbert-preview.zeit.de/2015/43/universitaet-studium-checkliste/seite-2" data-id="article-pager....next-link">
+            <span class="article-pagination__button article-pagination__button--next">Nächste Seite    <svg class="svg-symbol article-pagination__icon" role="img" aria-labelledby="title">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://friedbert-preview.zeit.de/static/2.67/css/web.campus/icons.svg#svg-arrow-right"></use>
+            </svg>
+</span>
+
+        <ul class="article-pager article-pager--default">
+                <li class="article-pager__number article-pager__number--current"><span>1</span></li>        <li class="article-pager__number"><a href="http://friedbert-preview.zeit.de/2015/43/universitaet-studium-checkliste/seite-2" data-id="article-pager....2">2</a></li>        <li class="article-pager__number"><a href="http://friedbert-preview.zeit.de/2015/43/universitaet-studium-checkliste/seite-3" data-id="article-pager....3">3</a></li>        <li class="article-pager__number"><a href="http://friedbert-preview.zeit.de/2015/43/universitaet-studium-checkliste/seite-4" data-id="article-pager....4">4</a></li>
+        </ul>
+    </nav>
+
+{% endblock %}

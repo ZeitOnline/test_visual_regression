@@ -9,5 +9,4 @@
   <campus_launch>true</campus_launch>
   <tracking>true</tracking>
   <dummy>false</dummy>
-  <comment_thread_via_esi>true</comment_thread_via_esi>
 </features>

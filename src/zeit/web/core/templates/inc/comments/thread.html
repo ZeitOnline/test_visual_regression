@@ -1,35 +1,39 @@
 {% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
-<h3 class="visually-hidden">Kommentare</h3>
-<div class="comment-section__head comment-section__item">
-{% if view.comment_area.show_comments %}
-	<span class="comment-section__headline">
-		{{ view.comments.headline }}
-		{% if view.comments.pages.title %}
-		<small>{{ view.comments.pages.title }}</small>
-		{% endif %}
-	</span>
-	{% if view.comment_area.show_comment_form %}
-	<a href="#comment-form" class="comment-section__button button js-scroll">
-		Kommentieren
-	</a>
-	{% endif %}
-{% elif view.comment_area.no_comments %}
-	<span class="comment-section__headline">
-		<span class="nowrap">Noch keine Kommentare.</span>
-		<span class="nowrap">Diskutieren Sie mit.</span>
-	</span>
-{% else %}
-	<span class="comment-section__headline">
-		<span class="nowrap">Kommentare</span>
-	</span>
-{% endif %}
 
-{% if view.comment_area.message  %}
-	<div class="comment-section__message">
-		{{ view.comment_area.message }}
-	</div>
-{% endif %}
-</div>
+{% block comment_section_head %}
+
+    <h3 class="visually-hidden">Kommentare</h3>
+    <div class="comment-section__head comment-section__item">
+    {% if view.comment_area.show_comments %}
+    	<span class="comment-section__headline">
+    		{{ view.comments.headline }}
+    		{% if view.comments.pages.title %}
+    		<small>{{ view.comments.pages.title }}</small>
+    		{% endif %}
+    	</span>
+    	{% if view.comment_area.show_comment_form %}
+        	<a href="#comment-form" class="comment-section__button button js-scroll">
+        		Kommentieren
+        	</a>
+    	{% endif %}
+    {% elif view.comment_area.no_comments %}
+    	<span class="comment-section__headline">
+    		<span class="nowrap">Noch keine Kommentare.</span>
+    		<span class="nowrap">Diskutieren Sie mit.</span>
+    	</span>
+    {% else %}
+    	<span class="comment-section__headline">
+    		<span class="nowrap">Kommentare</span>
+    	</span>
+    {% endif %}
+
+    {% if view.comment_area.message  %}
+    	<div class="comment-section__message">
+    		{{ view.comment_area.message }}
+    	</div>
+    {% endif %}
+    </div>
+{% endblock %}
 
 {% if view.comment_area.show_comments %}
 <div class="comment-preferences">
@@ -111,7 +115,9 @@
 	{% endfor %}
 </div>
 
+{# TODO: use or ose not "block comment_section_pagination" ? #}
 {% include "zeit.web.core:templates/inc/comments/pagination.html" %}
+
 
 {% else %}
 	{% if view.context.advertising_enabled -%}
