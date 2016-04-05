@@ -228,10 +228,10 @@ def test_get_user_info_replaces_community_host(
 def test_rawr_config_should_contain_login_url(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/article/01' % testserver.url)
-    assert driver.execute_script('return RawrConfig.loginUrl') is None
-    driver.execute_script('RawrConfig.sso()')
+    assert driver.execute_script('return rawrConfig.loginUrl') is None
+    driver.execute_script('rawrConfig.sso()')
     assert 'http://my_sso/anmelden' in driver.execute_script(
-        'return RawrConfig.loginUrl')
+        'return rawrConfig.loginUrl')
 
 
 def test_rawr_authentication_encodes_json_as_base64(dummy_request):
