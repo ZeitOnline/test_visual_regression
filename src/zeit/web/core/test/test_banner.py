@@ -5,6 +5,7 @@ import mock
 import lxml
 import pytest
 
+
 def test_banner_place_should_be_serialized(application):
     place = zeit.web.core.banner.Place(1, ['728x90'], True, label='')
     assert place.__dict__ == {'dcopt': 'ist', 'diuqilon': True,
@@ -19,6 +20,7 @@ def test_banner_place_should_have_list_as_second_argument(application):
 
     place = zeit.web.core.banner.Place(1, ['123x456'], True, label='')
     assert place.sizes == ['123x456']
+
 
 def test_banner_list_should_be_sorted(application):
     banner_list = list(zeit.web.core.banner.BANNER_SOURCE)
@@ -98,9 +100,11 @@ def test_inject_banner_code_should_be_inserted_on_all_pages():
     total = 10
     pages = [mock.Mock() for i in xrange(total)]
 
-    with mock.patch.object(zeit.web.core.article,
+    with mock.patch.object(
+            zeit.web.core.article,
             "_place_adtag_by_paragraph") as _place_adtag_by_paragraph:
-        with mock.patch.object(zeit.web.core.article,
+        with mock.patch.object(
+                zeit.web.core.article,
                 "_place_content_ad_by_paragraph") as (
                     _place_content_ad_by_paragraph):
             _place_adtag_by_paragraph.return_value = True
@@ -120,7 +124,8 @@ def test_inject_banner_code_should_be_inserted_on_certain_pages():
         assert mock_method.call_count == 1
 
 
-def test_inject_banner_code_should_be_inserted_between_paragraphs(monkeypatch, application):
+def test_inject_banner_code_should_be_inserted_between_paragraphs(
+        monkeypatch, application):
     tile_list = [0]
     possible_paragraphs = [1]
     monkeypatch.setattr(zeit.web.core.banner, "BANNER_SOURCE", [mock.Mock()])
