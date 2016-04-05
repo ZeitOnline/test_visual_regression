@@ -1,4 +1,5 @@
 import zeit.web.core.banner
+import zeit.web.core.block
 import zeit.web.core.article
 import mock
 import lxml
@@ -119,7 +120,7 @@ def test_inject_banner_code_should_be_inserted_on_certain_pages():
         assert mock_method.call_count == 1
 
 
-def test_inject_banner_code_should_be_inserted_between_paragraphs(monkeypatch):
+def test_inject_banner_code_should_be_inserted_between_paragraphs(monkeypatch, application):
     tile_list = [0]
     possible_paragraphs = [1]
     monkeypatch.setattr(zeit.web.core.banner, "BANNER_SOURCE", [mock.Mock()])
@@ -132,4 +133,4 @@ def test_inject_banner_code_should_be_inserted_between_paragraphs(monkeypatch):
     zeit.web.core.article._place_adtag_by_paragraph(
         page, tile_list, possible_paragraphs)
 
-    assert isinstance(page.blocks[1], mock.Mock)
+    assert isinstance(page.blocks[1], zeit.web.core.block.Paragraph)
