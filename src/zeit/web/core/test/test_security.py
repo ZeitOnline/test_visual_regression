@@ -234,6 +234,13 @@ def test_rawr_config_should_contain_login_url(selenium_driver, testserver):
         'return rawrConfig.loginUrl')
 
 
+def test_no_user_rawr_authentication_is_empty(dummy_request):
+    stuff = zeit.web.core.security._rawr_authentication(dummy_request)
+    rawr_user, rawr_signature, timestamp = stuff
+    data = json.loads(rawr_user.decode('base64'))
+    assert data == {}
+
+
 def test_rawr_authentication_encodes_json_as_base64(dummy_request):
     dummy_request.user = {
         'ssoid': '123',
