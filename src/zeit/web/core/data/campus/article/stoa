@@ -65,6 +65,7 @@
     <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">{urn:uuid:446a4dc8-e536-4c7f-8187-45e443a524be}</attribute>
     <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">01</attribute>
     <attribute name="year" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="study_course">mathematik</attribute>
     <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta" xmlns:py="http://codespeak.net/lxml/objectify/pytype">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;

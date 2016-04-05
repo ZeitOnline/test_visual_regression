@@ -206,9 +206,9 @@ def test_article_debate_block_should_render_expected_structure(testbrowser):
     assert len(select('.debate__label')) == 1
 
 
-def test_article_stoas_block_should_render_expected_structure(testbrowser):
-    select = testbrowser('/campus/article/stoas').cssselect
-    assert len(select('.stoas')) == 1
-    assert len(select('.stoas__title')) == 1
-    assert len(select('.stoas__link')) == 1
-    assert len(select('.stoas__button')) == 1
+def test_article_stoa_block_should_render_expected_structure(testbrowser):
+    select = testbrowser('/campus/article/stoa').cssselect
+    assert len(select('.stoa')) == 1
+    assert len(select('.stoa__title')) == 1
+    assert len(select('.stoa__link')) == 1
+    assert len(select('.stoa__button')) == 1

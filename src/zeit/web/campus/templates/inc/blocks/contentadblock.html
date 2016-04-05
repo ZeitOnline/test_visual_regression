@@ -1,14 +1,16 @@
 {% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
 
-<aside id="stoas-artikelanker" data-unique-id="#" data-meetrics="stoas" data-clicktracking="stoas">
-    <a class="stoas" href="#">
-        <span class="stoas__title">
-            Bin ich der Typ für Geisteswissenschaften?
+{% set stoa = adapt(context, 'zeit.campus.interfaces.IStudyCourse') %}
+
+<aside id="stoa-artikelanker">
+    <a class="stoa" href="{{ stoa.href }}" data-unique-id="stoa" data-meetrics="stoa" data-clicktracking="stoa">
+        <span class="stoa__title">
+            {{ stoa.text }}
         </span>
-        <span class="stoas__link">
-            <span class="stoas__button">
-                Interessentest starten
-                {{ lama.use_svg_icon('arrow-right', 'stoas__icon', request) }}
+        <span class="stoa__link">
+            <span class="stoa__button">
+                {{ stoa.button_text }}
+                {{ lama.use_svg_icon('arrow-right', 'stoa__icon', request) }}
             </span>
         </span>
     </a>
