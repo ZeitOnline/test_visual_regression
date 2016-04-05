@@ -43,7 +43,17 @@ class Paragraph(Block):
     def __init__(self, model_block):
         self.html = _inline_html(model_block.xml)
 
+    def __len__(self):
+        try:
+            text = lxml.html.fromstring(unicode(self.html)).text_content()
+            return len(text.replace('\n',''))
+        except (AttributeError, lxml.etree.XMLSyntaxError):
+            return 0
+
     def __str__(self):
+        return unicode(self.html)
+
+    def __unicode__(self):
         return unicode(self.html)
 
 

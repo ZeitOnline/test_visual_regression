@@ -83,15 +83,36 @@ def _inject_banner_code(
     return pages
 
 
+def _paragraphs_by_length(paragraphs, sufficient_length=10):
+    previous_length = 0
+    filtered_paragraphs = []
+    for p in paragraphs:
+        if len(p)+previous_length <= sufficient_length:
+            previous_length = len(p)+previous_length
+        else:
+            filtered_paragraphs.append(p)
+            previous_length = 0
+    return filtered_paragraphs
+
+
 def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
     paragraphs = filter(
         lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
+
+    paragraphs = _paragraphs_by_length(paragraphs)
+
     banner_list = list(zeit.web.core.banner.BANNER_SOURCE)
+
     for index, pp in enumerate(possible_paragraphs):
         if len(paragraphs) > pp + 1:
             try:
                 _para = paragraphs[pp]
                 for i, block in enumerate(page.blocks):
+
+                    # Define length of paragraph
+                    # determine if paragraph is 'long enough'
+
+                    # if it is
                     if _para == block:
                         t = tile_list[index] - 1
                         # save the (virtual) page nr on (copies) of the banner,
@@ -100,6 +121,7 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
                         setattr(banner, 'on_page_nr', int(page.number + 1))
                         page.blocks.insert(i, banner)
                         break
+
             except IndexError:
                 pass
 
