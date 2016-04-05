@@ -100,8 +100,8 @@ def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
     paragraphs = filter(
         lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
 
-    if zeit.web.core.template.toggles('consider_paragraph_length'):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    if conf.get('sufficient_paragraph_length'):
         p_length = conf.get('sufficient_paragraph_length', 10)
         paragraphs = _paragraphs_by_length(
             paragraphs, sufficient_length=p_length)
