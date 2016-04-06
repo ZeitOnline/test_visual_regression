@@ -103,7 +103,8 @@ class VariantImage(object):
 
         self.group = zeit.content.image.interfaces.IImageGroup(variant)
         self.image_group = self.group.uniqueId
-        self.path = self.group.variant_url(self.image_pattern)
+        self.path = self.group.variant_url(
+            self.image_pattern, fill_color=variant.fill_color)
         self.fallback_path = self.group.variant_url(
             self.image_pattern,
             variant.fallback_width,

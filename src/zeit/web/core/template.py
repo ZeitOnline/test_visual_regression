@@ -33,7 +33,7 @@ log = logging.getLogger(__name__)
 
 
 @zeit.web.register_global
-def get_variant(group, variant_id):
+def get_variant(group, variant_id, fill_color=None):
     try:
         variant = zeit.web.core.image.VARIANT_SOURCE.factory.find(
             group, variant_id)
@@ -43,6 +43,7 @@ def get_variant(group, variant_id):
         log.debug(u'No {} variant for {}'.format(variant_id, group.uniqueId))
     else:
         variant.__parent__ = group
+        variant.fill_color = fill_color
         try:
             return zeit.web.core.interfaces.ITeaserImage(variant)
         except TypeError:
@@ -95,7 +96,12 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
         except AttributeError:
             variant_id = default
 
-    return get_variant(group, variant_id)
+    try:
+        fill_color = zeit.content.image.interfaces.IImages(content).fill_color
+    except (TypeError, AttributeError):
+        pass
+
+    return get_variant(group, variant_id, fill_color=fill_color)
 
 
 @zeit.web.register_test
