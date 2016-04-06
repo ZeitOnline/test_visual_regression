@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2494: Implement stoa in-article-block
 
+- ZON-2870: Implement login cut mark for framebuilder
+
 
 2.69 (2016-04-04)
 -----------------
