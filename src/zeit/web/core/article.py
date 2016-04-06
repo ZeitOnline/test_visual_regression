@@ -13,6 +13,7 @@ import zeit.content.article.interfaces
 import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.interfaces
+import zeit.web.core.template
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IPage)
@@ -83,10 +84,30 @@ def _inject_banner_code(
     return pages
 
 
+def _paragraphs_by_length(paragraphs, sufficient_length=10):
+    previous_length = 0
+    filtered_paragraphs = []
+    for p in paragraphs:
+        if len(p)+previous_length <= sufficient_length:
+            previous_length = len(p)+previous_length
+        else:
+            filtered_paragraphs.append(p)
+            previous_length = 0
+    return filtered_paragraphs
+
+
 def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
     paragraphs = filter(
         lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    if conf.get('sufficient_paragraph_length'):
+        p_length = conf.get('sufficient_paragraph_length', 10)
+        paragraphs = _paragraphs_by_length(
+            paragraphs, sufficient_length=p_length)
+
     banner_list = list(zeit.web.core.banner.BANNER_SOURCE)
+
     for index, pp in enumerate(possible_paragraphs):
         if len(paragraphs) > pp + 1:
             try:

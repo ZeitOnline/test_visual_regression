@@ -6,6 +6,14 @@ Change log for zeit.web
 
 - FIX: Handle non-ascii usernames in nojs comment form
 
+- BUG-346: Limit the number of items in jobbox
+
+- BUG-385: Consider paragraph length when inserting ads
+
+- ZON-2494: Implement stoa in-article-block
+
+- ZON-2870: Implement login cut mark for framebuilder
+
 
 2.69 (2016-04-04)
 -----------------

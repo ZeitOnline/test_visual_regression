@@ -35,7 +35,7 @@ class Place(object):
         if label is not None:
             self.label = label
         if not isinstance(self.sizes, list) or self.sizes[0] is None:
-            raise IndexError('Invalid sizes array')
+            raise IndexError('Invalid sizes list')
         self.noscript_width_height = self.sizes[0].split('x')
 
 
