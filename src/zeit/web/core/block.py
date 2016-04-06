@@ -41,9 +41,21 @@ class Block(object):
 class Paragraph(Block):
 
     def __init__(self, model_block):
+        self.model_block = model_block
         self.html = _inline_html(model_block.xml)
 
+    def __len__(self):
+        try:
+            xslt_result = _inline_html(self.model_block.xml, elements=['p'])
+            text = u''.join(xslt_result.xpath('//text()'))
+            return len(text.replace('\n', '').strip())
+        except (AttributeError, lxml.etree.XMLSyntaxError):
+            return 0
+
     def __str__(self):
+        return unicode(self.html)
+
+    def __unicode__(self):
         return unicode(self.html)
 
 

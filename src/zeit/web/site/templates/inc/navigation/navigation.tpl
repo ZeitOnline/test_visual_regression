@@ -34,10 +34,13 @@
 	{% endblock special_teaser %}
 
 	<!-- wrap start -->
-	<div class="main_nav__community" data-dropdown="true">
-		{% set esi_source = '{}login-state?for=site&context-uri={}'.format(request.route_url('home'), request.url) %}
-		{{ lama.insert_esi(esi_source, 'Anmeldung nicht möglich') }}
-	</div>
+    <div class="main_nav__community" data-dropdown="true">
+        {% block login %}
+            {% set esi_source = '{}login-state?for=site&context-uri={}'.format(request.route_url('home'), request.url) %}
+            {{ lama.insert_esi(esi_source, 'Anmeldung nicht möglich') }}
+        {% endblock login %}
+    </div>
+
 	{% if view.nav_show_ressorts %}
 	<div class="main_nav__ressorts" data-dropdown="true">
 		<nav role="navigation" id="primary_nav">
