@@ -31,7 +31,7 @@
         {% endblock adplace_top %}
         <div class="page__content">
             <header class="header" role="banner">
-                {%- include "zeit.web.site:templates/inc/navigation/navigation.tpl" ignore missing -%}
+                {%- include "zeit.web.site:templates/framebuilder/navigation.tpl" ignore missing -%}
             </header>
             {% block adplace_billboard %}
                 {# desktop ad place 3 #}
