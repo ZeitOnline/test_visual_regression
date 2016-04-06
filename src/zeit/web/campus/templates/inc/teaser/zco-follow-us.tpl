@@ -18,11 +18,11 @@
     <div class="{{ self.layout() }}__actions">
         <div class="abo-cta">
             <div class="abo-cta__text">Abonnieren Sie den ZEIT CAMPUS Newsletter</div>
-            <a class="abo-cta__label" href="http://link_zum_newsletter.com"  data-id="{{ teaser_position }}.solo-teaser-follow-us.newsletter">
+            <a class="abo-cta__label" href="https://premium.zeit.de/zeit-campus-ausgabenseite?wt_zmc=fix.int.zonpme.zeitde.teaser.zcampusausgsseite.bildtext.cover.cover&utm_medium=fix&utm_source=zeitde_zonpme_int&utm_campaign=teaser&utm_content=zcampusausgsseite_bildtext_cover_cover"  data-id="{{ teaser_position }}.solo-teaser-follow-us.newsletter">
                 Abonnieren<span class="visually-hidden"> Sie den ZEIT CAMPUS Newsletter</span>
             </a>
         </div>
-        <a class="follow-us" href="http://folgen_sie_uns" data-id="{{ teaser_position }}.solo-teaser-follow-us.facebook">
+        <a class="follow-us" href="https://de-de.facebook.com/zeitcampus" data-id="{{ teaser_position }}.solo-teaser-follow-us.facebook">
             <div class="follow-us__logo">{{ lama.use_svg_icon('facebook', 'follow-us__facebook', request) }}</div>
             <div class="follow-us__text">Folgen Sie uns auf Facebook</div>
         </a>
