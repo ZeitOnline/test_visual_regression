@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - BUG-385: Consider paragraph length when inserting ads
 
+- ZON-2494: Implement stoa in-article-block
+
 
 2.69 (2016-04-04)
 -----------------
