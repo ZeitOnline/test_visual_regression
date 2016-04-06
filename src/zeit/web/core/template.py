@@ -67,9 +67,12 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
         content = first_child(module)
 
     try:
-        group = zeit.content.image.interfaces.IImages(content).image
+        img = zeit.content.image.interfaces.IImages(content)
+        group = img.image
+        fill_color = img.fill_color
     except (TypeError, AttributeError):
         group = None
+        fill_color = None
 
     try:
         if group is None:
@@ -95,11 +98,6 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
             variant_id = layout.image_pattern
         except AttributeError:
             variant_id = default
-
-    try:
-        fill_color = zeit.content.image.interfaces.IImages(content).fill_color
-    except (TypeError, AttributeError):
-        pass
 
     return get_variant(group, variant_id, fill_color=fill_color)
 
