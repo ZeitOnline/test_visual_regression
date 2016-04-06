@@ -231,7 +231,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             .replace( /^_|_$/g, '' );
     },
 
-    debugMode = document.location.search.indexOf( 'webtrekk-clicktracking-debug' ) > -1;
+    debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1;
 
     return {
         init: function() {
