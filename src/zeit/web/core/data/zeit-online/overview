@@ -188,7 +188,7 @@
                 </p>
                 <h4>Wie wird der Modus ausgelöst?</h4>
                 <ul>
-                    <li>Über den Query Parameter <a href="127.0.0.1:9090/index?webtrekk-clicktracking-debug">?webtrekk-clicktracking-debug</a>.</li>
+                    <li>Über den Anker <a href="127.0.0.1:9090/index#debug-clicktracking">#debug-clicktracking</a>.</li>
                 </ul>
                 </text>
             </container>
