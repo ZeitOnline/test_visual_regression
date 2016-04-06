@@ -438,6 +438,16 @@ class FacebookMagazinFeed(SocialFeed):
 
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-socialflow-facebook-zco',
+    renderer='string')
+class FacebookCampusFeed(SocialFeed):
+
+    def social_value(self, content):
+        return zeit.push.interfaces.IAccountData(content).facebook_campus_text
+
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-roost',
     renderer='string')
 class RoostFeed(SocialFeed):
