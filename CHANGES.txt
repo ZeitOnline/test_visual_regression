@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - BUG-346: Limit the number of items in jobbox
 
+- BUG-385: Consider paragraph length when inserting ads
+
 
 2.69 (2016-04-04)
 -----------------
