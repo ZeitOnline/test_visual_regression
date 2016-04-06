@@ -135,11 +135,11 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          */
         linkInArticleContent: function( $element, $page ) {
             var $allParagraphsOnPage = $page.children( 'p' ),
-                $currentParagraph = $element.closest( '[data-clicktracking]' || $element.closest( 'p' ) ),
+                $currentParagraph =  $element.closest( 'p' ) || $element.closest( '[data-clicktracking]' ),
                 currentPageNumber = $page.data( 'page-number' ) || 0,
                 currentParagraphNumber = $allParagraphsOnPage.index( $currentParagraph ) + 1 ||
-                                            $element.closest( '[data-clicktracking]' ).prevAll( 'p' ).length + 1,
-                trackType = $element.closest( '[data-clicktracking]' ).data( 'clicktracking' ) || 'intext',
+                                            $currentParagraph.prevAll( 'p' ).length + 1,
+                trackType = $currentParagraph.data( 'clicktracking' ) || 'intext',
                 data = [
                     getBreakpoint(),
                     trackType, // [verortung]
