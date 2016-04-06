@@ -1,0 +1,7 @@
+<article_stoa>
+    <!--  Achtung: id="default" muss es immer geben  -->
+    <stoa id="default" vivi_title="Sonstiges" href="http://studiengaenge.zeit.de" button_text="Interessentest starten">Was studieren?</stoa>
+    <stoa id="geisteswissenschaften" vivi_title="Geisteswissenschaften" href="http://studiengaenge.zeit.de/studienangebote/fachgruppe/gesellschafts-%20und%20sozialwissenschaften" button_text="Interessentest starten">Bin ich der Typ für Geisteswissenschaften?</stoa>
+    <stoa id="mathematik" vivi_title="Mathematik" href="http://studiengaenge.zeit.de/studienangebote/fachgruppe/mathematik,%20naturwissenschaften" button_text="Interessentest starten">Number crunching zum Frühstück?</stoa>
+    <stoa id="nothing" vivi_title="Nichts anzeigen" href="" button_text=""/>
+</article_stoa>

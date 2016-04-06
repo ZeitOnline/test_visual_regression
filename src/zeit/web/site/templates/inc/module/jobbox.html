@@ -11,7 +11,8 @@
 		{% endblock %}
 
 		<div class="jobbox__jobs">
-		{% for teaser in module %}
+        {# Sometimes, the RSS feed provides >100 items. We only want to show 10 max. #}
+		{% for teaser in module[:10] %}
 			<a class="jobbox__job" href="{{ teaser.url }}{% block tracking %}?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker1.textlink.stellenanzeige.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker1_textlink_stellenanzeige_{% endblock %}">
 				<div class="jobbox__title">{{ teaser.title }}</div>
 				<div class="jobbox__byline">{{ teaser.text }}</div>

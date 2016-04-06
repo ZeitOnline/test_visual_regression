@@ -1,5 +1,4 @@
 # coding: utf-8
-import mock
 import requests
 
 import pyramid.testing
@@ -7,21 +6,11 @@ import pyramid.testing
 import zeit.web.site.view
 
 
-def test_login_state_view_should_deliver_correct_destination():
-    request = mock.Mock()
-    request.registry.settings = {}
-    request.session = {}
-    request.registry.settings['sso_activate'] = True
-    request.registry.settings['community_host'] = "http://community"
-    request.registry.settings['sso_url'] = "http://sso"
-    request.registry.settings['community_static_host'] = "community_static"
-    request.route_url.return_value = 'http://destination_sso/'
-    request.params = {}
-    result = zeit.web.site.view.login_state(request)
-    assert result == {
-        'login': 'http://sso/anmelden?url=http://destination_sso',
-        'logout': 'http://sso/abmelden?url=http://destination_sso'
-    }
+def test_login_state_view_should_deliver_correct_destination(dummy_request):
+    dummy_request.route_url = lambda *args, **kw: 'http://destination_sso/'
+    r = zeit.web.site.view.login_state(dummy_request)
+    assert r['login'] == 'http://my_sso/anmelden?url=http://destination_sso'
+    assert r['logout'] == 'http://my_sso/abmelden?url=http://destination_sso'
 
 
 def test_article_should_have_breadcrumbs(testbrowser):
