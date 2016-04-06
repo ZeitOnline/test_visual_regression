@@ -28,7 +28,7 @@
     <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
     <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:14.233424+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-04-02T10:01:53.437856+00:00</attribute>
     <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2016-01-10T09:39:17.773713+00:00</attribute>
     <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:18.167553+00:00</attribute>
     <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2016-02-10T09:39:17.773713+00:00</attribute>
@@ -58,7 +58,7 @@
     <attribute name="page" ns="http://namespaces.zeit.de/CMS/document">100</attribute>
     <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/article/simple</attribute>
     <attribute name="print-publish" ns="http://namespaces.zeit.de/CMS/document">2015-05-05T06:00:00+00:00</attribute>
-    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZSF</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEI</attribute>
     <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT Studienführer</attribute>
     <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort">c709ca95afcf4b3e9b68a8aab56db53e</attribute>
     <attribute name="publication-id" ns="http://namespaces.zeit.de/CMS/print">1367935288499</attribute>
