@@ -11,7 +11,7 @@
             <div class="packshot__content">
                 <div class="packshot__kicker">{{- teaser.teaserSupertitle or teaser.supertitle -}}</div>
                 <div class="packshot__title">{{ teaser.teaserTitle or teaser.title }}</div>
-                <div class="packshot__cta">{{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', request) }} Jetzt bestellen</div>
+                <div class="packshot__cta">{{ lama.use_svg_icon('arrow-right', 'packshot__arrow', request) }} Jetzt bestellen</div>
             </div>
         </a>
     </div>
