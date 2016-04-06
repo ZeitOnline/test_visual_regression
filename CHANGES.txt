@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Handle non-ascii usernames in nojs comment form
 
+- BUG-346: Limit the number of items in jobbox
+
 
 2.69 (2016-04-04)
 -----------------
