@@ -134,7 +134,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         linkInArticleContent: function( $element, $page ) {
-            var $currentParagraph =  $element.closest( 'p, [data-clicktracking]' ),
+            var $currentParagraph =  $element.closest( 'p, [data-clicktracking]', $page ),
                 currentPageNumber = $page.data( 'page-number' ) || 0,
                 currentParagraphNumber = $currentParagraph.prevAll( 'p' ).length + 1,
                 trackType = $element.closest( '[data-clicktracking]' ).data( 'clicktracking' ) || 'intext',
