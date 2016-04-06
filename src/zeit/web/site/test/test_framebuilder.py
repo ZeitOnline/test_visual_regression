@@ -122,3 +122,9 @@ def test_framebuilder_displays_adlabel_if_requested(testbrowser):
     adlabel = browser.cssselect('.advertorial-marker__label')
     assert len(adlabel) == 1
     assert adlabel[0].text.strip() == u'schönes Wurstbrot'
+
+
+def test_framebuilder_should_have_login_cut_mark(testbrowser):
+    browser = testbrowser('/framebuilder')
+    assert 'start::cut_mark::login' in browser.contents
+    assert 'end::cut_mark::login' in browser.contents
