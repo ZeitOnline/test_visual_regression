@@ -1,6 +1,7 @@
 <script type="text/javascript">
 
-{# We require window.rawConfig to always have been instantiated in <head> #}
+{# We require window.rawrConfig to always have been instantiated in <head> #}
+window.rawrConfig = window.rawrConfig || {};
 window.rawrConfig.sso = function() {
     this.remote_auth = "{{ rawr_authentication }}";
     this.name = "ZEIT ONLINE";
