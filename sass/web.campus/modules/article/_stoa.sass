@@ -1,0 +1,43 @@
+#stoa-artikelanker
+    margin: $vertical-space 0
+    +unpadded
+
+.stoa
+    display: block
+    background-color: $color-tools-primary
+    color: $white
+    text-align: center
+    +on-interaction
+        color: $color-text
+        .stoa__button
+            border: 3px solid $color-text
+
+    &__title
+        +font-smoothing
+        text-transform: uppercase
+        font-family: $font-beckett
+        letter-spacing: 1.5px
+        font-size: remify(30px) // adapted to handle long words
+        line-height: 1 // adapted to handle long words
+        display: block
+        padding: remify(20px 30px)
+        word-wrap: break-word
+    &__link
+        padding: remify(0px 30px 25px)
+        display: block
+        letter-spacing: .01em
+    &__button
+        @extend %cta-button-box
+        border: 3px solid $white
+        padding: remify(5px 20px)
+        display: block
+    &__icon
+        @extend %cta-button-icon
+
++respond-min($break-tablet-min)
+    #stoa-artikelanker
+        +pie-clearfix
+        float: left
+        margin: $page-padding--small
+        width: remify(300px)
+
