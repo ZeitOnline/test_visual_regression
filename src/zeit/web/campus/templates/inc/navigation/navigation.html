@@ -11,6 +11,9 @@
                 <meta itemprop="height" content="60">
             </span>
         </a>
+        {% if view.is_advertorial %}
+        <span class="header__ad-label">{{ view.cap_title | default('Anzeige') }}</span>
+        {% endif %}
     </div>
     <a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü">
         {{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', request, inline=view.inline_svg_icons) }}
