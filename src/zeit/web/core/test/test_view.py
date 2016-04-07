@@ -690,3 +690,26 @@ def test_amp_article_should_have_amp_link(application):
     view = zeit.web.site.view_article.Article(
         context, pyramid.testing.DummyRequest())
     assert view.is_amp
+
+
+def test_rawr_config_should_exist_on_article_page(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/campus/article/simple' % testserver.url)
+
+    assert '/campus/article/simple' == driver.execute_script(
+        "return rawrConfig.locationMetaData.article_id")
+    assert '2016-02-10T10:39:16+01:00' == driver.execute_script(
+        "return rawrConfig.locationMetaData.published")
+    assert 'Hier gibt es Hilfe' == driver.execute_script(
+        "return rawrConfig.locationMetaData.description")
+    assert ['Studium', 'Uni-Leben'] == driver.execute_script(
+        "return rawrConfig.locationMetaData.channels")
+    assert ['studium', 'uni-leben'] == driver.execute_script(
+        "return rawrConfig.locationMetaData.ressorts")
+    tags = driver.execute_script(
+        "return rawrConfig.locationMetaData.tags")
+    assert tags[0] == 'Student'
+    assert tags[3] == u'Bafög-Antrag'
+    assert tags[5] == 'Studienfinanzierung'
+    assert 'Hier gibt es Hilfe' == driver.execute_script(
+        "return rawrConfig.locationMetaData.meta.description")
