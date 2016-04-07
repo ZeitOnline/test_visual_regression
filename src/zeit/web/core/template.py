@@ -69,9 +69,13 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
     try:
         img = zeit.content.image.interfaces.IImages(content)
         group = img.image
+    except (TypeError, AttributeError):
+        img = None
+        group = None
+
+    try:
         fill_color = img.fill_color
     except (TypeError, AttributeError):
-        group = None
         fill_color = None
 
     try:
