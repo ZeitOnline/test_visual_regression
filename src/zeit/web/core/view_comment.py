@@ -497,6 +497,39 @@ class CommentThreadCampus(CommentThreadSite):
     pass
 
 
+def is_zon_or_zco_content(request, context):
+    return (
+        zeit.web.site.view.is_zon_content(request, context)) or (
+        zeit.web.campus.view.is_zco_content(request, context)
+        )
+
+
+# XXX We should be a little more specific here, ie ICommentableContent
+@pyramid.view.view_defaults(
+    custom_predicates=(is_zon_or_zco_content,),
+    containment=zeit.cms.content.interfaces.ICommonMetadata)
+@pyramid.view.view_config(
+    name='comment-form',
+    renderer='zeit.web.core:templates/inc/comments/comment-form.html')
+@pyramid.view.view_config(
+    name='report-form',
+    renderer='zeit.web.core:templates/inc/comments/report-form.html')
+class CommentForm(zeit.web.core.view.CommentMixin,
+                  zeit.web.core.view.Base):
+
+    def __call__(self):
+        result = super(CommentForm, self).__call__()
+        # Never ever ever ever cache comment forms
+        self.request.response.cache_expires(0)
+        return result
+
+    @zeit.web.reify
+    def error(self):
+        if 'error' not in self.request.params:
+            return
+        return self.request.session.pop(self.request.params['error'])
+
+
 @pyramid.view.view_defaults(
     renderer='zeit.web.core:templates/inc/comments/replies.html',
     name='comment-replies')

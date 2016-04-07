@@ -154,32 +154,6 @@ def schlagworte(request):
             request.matchdict['item'].lower()).encode('utf-8'))
 
 
-# XXX We should be a little more specific here, ie ICommentableContent
-@pyramid.view.view_defaults(
-    custom_predicates=(is_zon_content,),
-    containment=zeit.cms.content.interfaces.ICommonMetadata)
-@pyramid.view.view_config(
-    name='comment-form',
-    renderer='zeit.web.core:templates/inc/comments/comment-form.html')
-@pyramid.view.view_config(
-    name='report-form',
-    renderer='zeit.web.core:templates/inc/comments/report-form.html')
-class CommentForm(zeit.web.core.view.CommentMixin,
-                  zeit.web.core.view.Base):
-
-    def __call__(self):
-        result = super(CommentForm, self).__call__()
-        # Never ever ever ever cache comment forms
-        self.request.response.cache_expires(0)
-        return result
-
-    @zeit.web.reify
-    def error(self):
-        if 'error' not in self.request.params:
-            return
-        return self.request.session.pop(self.request.params['error'])
-
-
 @pyramid.view.view_config(
     route_name='framebuilder',
     renderer='templates/framebuilder/framebuilder.html')
