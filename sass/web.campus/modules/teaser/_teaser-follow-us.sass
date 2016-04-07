@@ -45,16 +45,19 @@
 		+respond-min($break-desktop-min)
 			font-size: remify(32px)
 	&__kicker
-		color: $white
+		color: #fff
 	&__title
 		+flex-grow(1)
 		color: $color-tools-primary
 	&__cta
-		color: $white
+		+font-smoothing
+		color: #fff
 		font-weight: bold
 	&__arrow
+		height: remify(15px)
 		margin-right: remify(3px)
 		vertical-align: middle
+		width: remify(20px)
 
 .abo-cta
 	@extend %border-box
@@ -81,9 +84,9 @@
 .follow-us
 	background: $color-facebook
 	display: block
-	color: $white
+	color: #fff
 	+on-interaction
-		color: $white
+		color: #fff
 	+respond-min($break-tablet-min)
 		bottom: 0px
 		height: remify(56px)
