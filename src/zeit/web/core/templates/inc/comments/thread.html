@@ -1,7 +1,6 @@
-{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
+{% import '{}:templates/macros/layout_macro.tpl'.format(explicit_package or view.package) as lama %}
 
 {% block comment_section_head %}
-
     <h3 class="visually-hidden">Kommentare</h3>
     <div class="comment-section__head comment-section__item">
     {% if view.comment_area.show_comments %}
