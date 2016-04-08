@@ -102,7 +102,10 @@ class VariantImage(object):
         self.group = zeit.content.image.interfaces.IImageGroup(variant)
         self.image_group = self.group.uniqueId
         self.path = self.group.variant_url(
-            self.image_pattern, fill_color=variant.fill_color)
+            self.image_pattern,
+            # XXX Slightly kludgy: fill_color is not a property of Variant but
+            # only transported through there by z.w.core.template.get_variant.
+            fill_color=getattr(variant, 'fill_color', None))
         self.fallback_path = self.group.variant_url(
             self.image_pattern,
             variant.fallback_width,
