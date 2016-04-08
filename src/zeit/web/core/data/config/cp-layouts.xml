@@ -76,6 +76,7 @@
         image_pattern="zon-thumbnail"
         areas="duo major minor ranking parquet spektrum zett zmo-parquet author-favourite-content author-articles"
         default="major minor parquet zmo-parquet ranking spektrum zett author-favourite-content author-articles"
+        available="zeit.cms.section.interfaces.IZONContent"
         />
     <layout
         id="zon-square"
