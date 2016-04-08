@@ -319,6 +319,8 @@ class Image(zeit.web.core.image.BaseImage):
 @grokcore.component.adapter(Image)
 class BlockImages(object):
 
+    fill_color = None
+
     def __init__(self, context):
         self.context = context
         self.image = context.group
