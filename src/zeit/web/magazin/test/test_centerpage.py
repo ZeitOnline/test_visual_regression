@@ -393,3 +393,10 @@ def test_zmo_homepage_identifies_itself_as_homepage(testserver):
         'http://xml.zeit.de/zeit-magazin/misc')
     view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
     assert view.is_hp is False
+
+
+def test_card_teaser_keeps_transparent_image_background(testbrowser):
+    browser = testbrowser('/zeit-magazin/teaser-card')
+    teaser_img = browser.cssselect(
+        '.teaser-card[data-unique-id$=martenstein-portraitformat] img')[0]
+    assert 'ccddee' not in teaser_img.attrib['data-src']
