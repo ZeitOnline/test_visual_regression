@@ -1,9 +1,12 @@
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
 
-{% set image = get_teaser_image(module, teaser) %}
-
-{% if module.background_color %}
-    {% set card_style = 'background-color: #{};'.format(module.background_color) -%}
+{% set fill_color = module.background_color %}
+{% if not fill_color %}
+    {% set imgref = adapt(teaser, 'zeit.content.image.interfaces.IImages') %}
+    {% set fill_color = imgref.fill_color if imgref else None %}
+{% endif %}
+{% if fill_color %}
+    {% set card_style = 'background-color: #{};'.format(fill_color) -%}
 {% endif %}
 
 <article class="{% block layout %}teaser-card{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"

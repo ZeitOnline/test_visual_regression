@@ -400,3 +400,11 @@ def test_card_teaser_keeps_transparent_image_background(testbrowser):
     teaser_img = browser.cssselect(
         '.teaser-card[data-unique-id$=martenstein-portraitformat] img')[0]
     assert 'ccddee' not in teaser_img.attrib['data-src']
+
+
+def test_card_background_setting_on_teaser_overrides_article_setting(
+        testbrowser):
+    browser = testbrowser('/zeit-magazin/teaser-card')
+    card = browser.cssselect(
+        '.teaser-card[data-unique-id$=martenstein-portraitformat] .card')[0]
+    assert 'a1f88c' in card.attrib['style']
