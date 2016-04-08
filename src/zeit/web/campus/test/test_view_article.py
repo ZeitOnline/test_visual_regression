@@ -149,9 +149,9 @@ def test_article_tags_are_present(testbrowser):
 
 def test_rawr_config_should_exist_on_article_page(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/campus/article/simple' % testserver.url)
+    driver.get('%s/campus/article/simple_date_changed' % testserver.url)
 
-    assert '/campus/article/simple' == driver.execute_script(
+    assert '/campus/article/simple_date_changed' == driver.execute_script(
         "return RawrConfig.location_metadata.article_id")
     assert '2016-02-10T10:39:16+01:00' == driver.execute_script(
         "return RawrConfig.location_metadata.published")
