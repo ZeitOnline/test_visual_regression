@@ -5,7 +5,7 @@ input,
 textarea,
 select
 	background-color: $color-input-bg
-	border: 1px solid $color-input-border
+	border: 1px solid $color-input-bg
 	color: $color-input
 	font-size: remify(15px)
 	letter-spacing: $letter-spacing-s
@@ -25,9 +25,20 @@ textarea
 	min-height: em(140px)
 	resize: vertical
 
-// +input-placeholder
-// 	color: $zon-mid-grey
-// 	opacity: 1
++input-placeholder
+	color: $zco-charcoal
+	opacity: 1
 
 input[type="search"]
 	-webkit-appearance: none
+
+input.button
+	background-color: transparent
+	border: 3px solid $color-community-primary
+	color: $color-community-primary
+	font-weight: bold
+	&:hover,
+	&:focus
+		background-color: $color-community-primary
+		color: #fff
+		cursor: pointer
