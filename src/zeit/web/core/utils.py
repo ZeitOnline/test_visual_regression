@@ -396,6 +396,11 @@ class LazyProxy(object):
             raise AttributeError('image')
         return zeit.cms.interfaces.ICMSContent(image_ids[0], None)
 
+    # Proxy zeit.content.image.interfaces.IImages
+    @property
+    def fill_color(self):
+        return self.__proxy__.get('image-fill-color', None)
+
     # Proxy zeit.content.link.interfaces.ILink.blog.
     # (Note: templates try to access this directly without adapting first.)
     @property
