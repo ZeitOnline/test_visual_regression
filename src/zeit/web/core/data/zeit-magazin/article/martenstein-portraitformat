@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
-    <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/images/harald-martenstein-portraitformat/" type="png" align="left" publication-date="" expires="">
+    <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/images/harald-martenstein-portraitformat/" type="png" align="left" publication-date="" expires="" fill_color="ccddee">
       <bu xsi:nil="true"/>
       <copyright py:pytype="str">© Fengel</copyright>
     </image>

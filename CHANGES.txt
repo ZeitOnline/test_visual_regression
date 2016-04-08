@@ -4,8 +4,6 @@ Change log for zeit.web
 2.70 (unreleased)
 -----------------
 
-- FIX: Handle non-ascii usernames in nojs comment form
-
 - BUG-346: Limit the number of items in jobbox
 
 - BUG-385: Consider paragraph length when inserting ads
@@ -15,6 +13,8 @@ Change log for zeit.web
 - ZON-2870: Implement login cut mark for framebuilder
 
 - ZON-2651: Include SSO information in the JS rawr config object
+
+- FIX: Handle non-ascii usernames in nojs comment form
 
 
 2.69 (2016-04-04)
