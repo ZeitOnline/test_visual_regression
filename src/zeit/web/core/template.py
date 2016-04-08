@@ -4,6 +4,7 @@ import datetime
 import itertools
 import logging
 import mimetypes
+import pkg_resources
 import random
 import re
 import time
@@ -12,6 +13,7 @@ import urllib
 import urlparse
 
 import babel.dates
+import lxml.etree
 import pyramid.threadlocal
 import repoze.bitblt.transform
 import zope.component
@@ -31,6 +33,7 @@ import zeit.web.core.utils
 
 log = logging.getLogger(__name__)
 
+SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
 
 @zeit.web.register_global
 def get_variant(group, variant_id):
@@ -914,3 +917,37 @@ def adapt(obj, iface, name=u'', multi=False):
         return zope.component.queryMultiAdapter(obj, iface, name)
     else:
         return zope.component.queryAdapter(obj, iface, name)
+
+
+@SHORT_TERM_CACHE.cache_on_arguments()
+def svg_from_file(name, package, path, className, cleanup, a11y, ariaHidden):
+    """Get an svg from a file, add or clean attributes and return it"""
+    url = pkg_resources.resource_filename(
+        'zeit.web.static', 'css/{}/{}/{}.svg'.format(package, path, name))
+    xml = lxml.etree.parse(url)
+    svg = xml.getroot()
+    title = xml.find('{http://www.w3.org/2000/svg}title')
+    svg.set('class', 'svg-symbol {}'.format(className))
+    svg.set('preserveAspectRatio', 'xMinYMin meet')
+    if cleanup:
+        # strip_attributes works on all child nodes
+        # which is expected behaviour in this case
+        lxml.etree.strip_attributes(xml, 'fill')
+    if a11y:
+        try:
+            svg.set('aria-label', title.text)
+            svg.set('role', 'img')
+        except:
+            pass
+    if ariaHidden:
+        svg.set('aria-hidden', 'true')
+    return lxml.etree.tostring(xml)
+
+
+@zeit.web.register_global
+def get_svg_from_file(
+        name, package, path='svg/', className='',
+        cleanup=True, a11y=True, ariaHidden=False):
+    """Proxy for cached svg_from_file function"""
+    return svg_from_file(
+        name, package, path, className, cleanup, a11y, ariaHidden)
