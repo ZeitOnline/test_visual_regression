@@ -50,9 +50,12 @@ def get_variant(group, variant_id, fill_color=None):
             return None
 
 
+FROM_CONTENT = object()
+
+
 @zeit.web.register_global
 def get_image(module=None, content=None, fallback=True, variant_id=None,
-              default='default'):
+              default='default', fill_color=FROM_CONTENT):
     """Universal image retrieval function to be used in templates.
 
     :param module: Module to extract a content and layout from
@@ -61,6 +64,9 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
     :param variant_id: Override for automatic variant determination
     :param default: If variant_id is None, specify a default for automatic
                     variant determination
+    :param fill_color: For images with transparent background, fill with
+                       the given color (None: keep transparent, FROM_CONTENT:
+                       determine color from IImages(content))
     """
 
     if content is None:
@@ -69,14 +75,12 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
     try:
         img = zeit.content.image.interfaces.IImages(content)
         group = img.image
+        if fill_color is FROM_CONTENT:
+            fill_color = img.fill_color
     except (TypeError, AttributeError):
-        img = None
         group = None
-
-    try:
-        fill_color = img.fill_color
-    except (TypeError, AttributeError):
-        fill_color = None
+        if fill_color is FROM_CONTENT:
+            fill_color = None
 
     try:
         if group is None:
@@ -617,7 +621,8 @@ def get_column_image(content):
     # XXX This should use a different variant, but author images currently do
     # not have a consistent ratio and framing of the portrayed person. So we
     # need to crop the lower part of the image using CSS, ignoring the ratio.
-    return get_image(content=author, variant_id='original', fallback=False)
+    return get_image(content=author, variant_id='original', fallback=False,
+                     fill_color=None)
 
 
 @zeit.web.register_global
