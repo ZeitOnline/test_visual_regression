@@ -50,7 +50,6 @@ class BaseImage(object):
 class Image(BaseImage):
 
     def __init__(self, image):
-        self.align = None
         self.image = image
         self.image_pattern = 'default'
         self.layout = ''
@@ -76,7 +75,6 @@ class Image(BaseImage):
 class TeaserImage(BaseImage):
 
     def __init__(self, group, image):
-        self.align = None
         self.image = image
         self.image_group = group.uniqueId
         self.image_pattern = 'default'
