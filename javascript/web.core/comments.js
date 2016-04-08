@@ -498,7 +498,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         var $wrapped = $( this ),
             url = $wrapped.data( 'url' ),
             fallbackUrl = $wrapped.data( 'fallbackurl' ),
-            $firstReply = $wrapped.closest( 'article.comment' ),
+            $firstReply = $wrapped.closest( '.comment' ).removeClass( 'comment--wrapped' ),
             replyCountInteger = parseInt( $firstReply.data( 'reply-count' ), 10 ),
             placeholderWording = ( replyCountInteger === 1 ) ? 'Kommentar wird geladen.' : 'Kommentare werden geladen.',
 
@@ -540,7 +540,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
         // without the js-load-comment-replies class, we toggle existing
         // replies (instead of loading from server)
-        $wrapped.removeClass( 'js-load-comment-replies' );
+        $wrapped.removeClass( 'js-load-comment-replies' ).addClass( 'js-show-replies' );
 
         if ( !repliesLoaded ) {
             $firstReply.after( placeholderHTML );
@@ -549,7 +549,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     },
 
     showReplies = function( e ) {
-        var $wrapped = $( this ),
+        var $wrapped = $( this ).closest( '.comment' ),
             selector = '#' + $wrapped.data( 'rewrapper-id' ),
             $link = $( selector ),
             $repliesToShow;
@@ -672,7 +672,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $commentsBody.on( 'click', '.js-cancel-report', cancelReport );
         $commentsBody.on( 'click', '.js-submit-report', submitReport );
         $commentsBody.on( 'click', '.js-recommend-comment', recommendComment );
-        $commentsBody.on( 'click', '.comment--wrapped', showReplies );
+        $commentsBody.on( 'click', '.js-show-replies', showReplies );
         $commentsBody.on( 'click', '.js-hide-replies', hideReplies );
         $commentsBody.on( 'click', '.js-promote-comment', promoteComment );
         $commentsBody.on( 'click', '.js-jump-to-comment', jumpToComment );
