@@ -1677,6 +1677,15 @@ def test_zett_parquet_should_link_to_zett(testbrowser):
             '&utm_source=zon') == link_more.attrib['href']
 
 
+def test_zett_parquet_should_have_ads(testbrowser):
+    browser = testbrowser('/zeit-online/parquet-feeds')
+    ad = browser.cssselect(
+        'article[data-unique-id="http://ze.tt/wichtiges-vom-'
+        'wochenende-update-32/"] .teaser-small__label')[0]
+
+    assert ad.text == 'Anzeige'
+
+
 def test_imagecopyright_tags_are_present_on_centerpages(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     figures = browser.cssselect('figure *[itemprop=copyrightHolder]')
