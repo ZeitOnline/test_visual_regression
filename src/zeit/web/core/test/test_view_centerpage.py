@@ -181,3 +181,15 @@ def test_cp_should_render_raw_code(testbrowser):
     code = cp[0][0][0].raw_code.replace('<code>', '').replace('</code>', '')
     browser = testbrowser('/zeit-online/raw_code')
     assert browser.cssselect('code')[0].text == code
+
+
+def test_transparent_image_renders_fill_color_for_teaserlayouts(testbrowser):
+    # Most teaserlayouts don't support transparent images, so by default we
+    # ask for an image with a fill_color. (We look at two teasers in this test
+    # to show that the teaser layout doesn't really matter -- it will matter
+    # only for special cases like zmo-card, which get their own test).
+    browser = testbrowser('/zeit-online/transparent-teaserimage')
+    assert 'ccddee' in (
+        browser.cssselect('.teaser-large img')[0].attrib['data-src'])
+    assert 'ccddee' in (
+        browser.cssselect('.teaser-small-minor img')[0].attrib['data-src'])

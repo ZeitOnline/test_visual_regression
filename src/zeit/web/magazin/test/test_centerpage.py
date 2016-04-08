@@ -393,9 +393,3 @@ def test_zmo_homepage_identifies_itself_as_homepage(testserver):
         'http://xml.zeit.de/zeit-magazin/misc')
     view = zeit.web.magazin.view_centerpage.Centerpage(cp, mock.Mock())
     assert view.is_hp is False
-
-
-def test_zmo_teaser_image_should_present_fill_color(testbrowser):
-    browser = testbrowser('/zeit-magazin/teaser-card')
-    assert 'ccddee' in (
-        browser.cssselect('.card__media-item')[-2].attrib['data-src'])
