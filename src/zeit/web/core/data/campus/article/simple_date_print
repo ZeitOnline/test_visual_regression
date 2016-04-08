@@ -47,7 +47,6 @@
     <attribute name="is_instant_article" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="jobname" ns="http://namespaces.zeit.de/CMS/document">Bachelor_HILFE</attribute>
     <attribute name="last-modified-by" ns="http://namespaces.zeit.de/CMS/workflow">import</attribute>
-    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:10.319064+00:00</attribute>
     <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.schwabe</attribute>
     <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="long_text" ns="http://namespaces.zeit.de/CMS/workflow">Sogar nachts bekommen Studenten Hilfe. (akg)</attribute>
@@ -57,7 +56,7 @@
     <attribute name="page" ns="http://namespaces.zeit.de/CMS/document">100</attribute>
     <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/article/simple</attribute>
     <attribute name="print-publish" ns="http://namespaces.zeit.de/CMS/document">2015-05-05T06:00:00+00:00</attribute>
-    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEI</attribute>
     <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT Studienführer</attribute>
     <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort">c709ca95afcf4b3e9b68a8aab56db53e</attribute>
     <attribute name="publication-id" ns="http://namespaces.zeit.de/CMS/print">1367935288499</attribute>
@@ -98,7 +97,7 @@
     <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noodp,noydir,noarchive </attribute>
   </head>
   <body>
-    <supertitle>Beratung</supertitle>
+    <supertitle>Beratung (ZEI-)</supertitle>
     <title>Hier gibt es Hilfe</title>
     <byline>von Anna Bordel</byline>
     <division type="page">

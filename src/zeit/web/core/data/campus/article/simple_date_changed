@@ -32,6 +32,7 @@
     <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2016-01-10T09:39:17.773713+00:00</attribute>
     <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:18.167553+00:00</attribute>
     <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2016-02-10T09:39:17.773713+00:00</attribute>
+    <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2016-02-10T09:39:16.922711+00:00</attribute>
     <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
     <attribute name="erscheint" ns="http://namespaces.zeit.de/CMS/document">05.05.2015</attribute>
     <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
@@ -58,7 +59,6 @@
     <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/article/simple</attribute>
     <attribute name="print-publish" ns="http://namespaces.zeit.de/CMS/document">2015-05-05T06:00:00+00:00</attribute>
     <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
-    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT Studienführer</attribute>
     <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort">c709ca95afcf4b3e9b68a8aab56db53e</attribute>
     <attribute name="publication-id" ns="http://namespaces.zeit.de/CMS/print">1367935288499</attribute>
     <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
@@ -98,7 +98,7 @@
     <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noodp,noydir,noarchive </attribute>
   </head>
   <body>
-    <supertitle>Beratung</supertitle>
+    <supertitle>Beratung (- changed)</supertitle>
     <title>Hier gibt es Hilfe</title>
     <byline>von Anna Bordel</byline>
     <division type="page">
