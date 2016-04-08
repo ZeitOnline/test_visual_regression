@@ -14,6 +14,12 @@ Change log for zeit.web
 
 - ZON-2870: Implement login cut mark for framebuilder
 
+- ZON-2651: Include SSO information in the JS rawr config object
+
+- ZON-2890: Add packshot with follow-us button and subscription box
+
+- ZON-2913: Display ads in ZETT parquet
+
 
 2.69 (2016-04-04)
 -----------------

@@ -22,13 +22,6 @@ $color-comment-border: $color-border
 		border-top-width: 1px
 
 	&--wrapped
-		cursor: pointer
-		&:hover
-			.comment-overlay__count
-				background-color: $zon-charcoal
-			.comment-overlay__cta
-				color: $zon-dark-grey
-				border-bottom: 1px solid $zon-mid-grey
 		.comment__body
 			max-height: 7em // em-tentional :D
 			overflow: hidden
@@ -223,6 +216,7 @@ $color-comment-border: $color-border
 .comment-overlay
 	+background-image(linear-gradient(0deg, rgba($white, 1) 3em, rgba($white, 0) 100%))
 	bottom: 0
+	cursor: pointer
 	display: none
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ) // IE 9 fallback
 	height: 70%
@@ -232,7 +226,6 @@ $color-comment-border: $color-border
 	right: 0
 	+respond-min($break-phablet-min)
 		padding-left: remify(80px)
-
 	&__wrap
 		bottom: remify(20px)
 		position: absolute
@@ -240,6 +233,12 @@ $color-comment-border: $color-border
 		@extend .comment__count
 	&__cta
 		@extend .comment__cta
+	&:hover
+		.comment-overlay__count
+			background-color: $zon-charcoal
+		.comment-overlay__cta
+			color: $zon-dark-grey
+			border-bottom: 1px solid $zon-mid-grey
 
 // icons
 .comment__badge

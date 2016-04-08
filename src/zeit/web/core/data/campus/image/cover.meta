@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/campus/2016/s2/cover/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-03-14T14:29:53.081974+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-03-23T09:47:29.862917+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;Das aktuelle Heft k&#xF6;nnen Sie am Kiosk oder hier erwerben.&lt;/unicode&gt; &lt;string&gt;https://premium.zeit.de/zc-ratgeber-ausgabenseite?wt_zmc=fix.int.zonpme.zeitde.artikelbox.zcampusratausgseite.bildtext.cover.cover&amp;amp;amp;utm_medium=fix&amp;amp;amp;utm_source=zeitde_zonpme_int&amp;amp;amp;utm_campaign=artikelbox&amp;amp;amp;utm_content=zcampusratausgseite_bildtext_cover_cover&lt;/string&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">ZEIT Campus Ratgeber 2/2016</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-03-14T14:29:53.022926+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">ZC-1000x820-Cover.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-03-23T09:47:34.383942+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="links_to">https://premium.zeit.de/zc-ratgeber-ausgabenseite?wt_zmc=fix.int.zonpme.zeitde.artikelbox.zcampusratausgseite.bildtext.cover.cover&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=artikelbox&amp;utm_content=zcampusratausgseite_bildtext_cover_cover</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-03-14T14:29:34.615912+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.Petrikowski</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">ZEIT Campus Ratgeber 2/2016</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Dieser Text stammt aus dem ZEIT Campus Ratgeber Nr. 2/2016</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9dc12ad3-0d00-4c99-a0ec-ce37648a6916}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-03-23T09:47:30.076898+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2016-03-23T09:47:32Z</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Wed, 23 Mar 2016 09:47:32 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"ef430c-1000-52eb43805e2e5"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>
