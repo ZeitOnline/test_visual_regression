@@ -154,7 +154,7 @@ class Base(object):
     @zeit.web.reify
     def cap_title(self):
         if not self.context.cap_title:
-            return ''
+            return 'Anzeige'
         return self.context.cap_title.title()
 
     @zeit.web.reify

@@ -40,7 +40,10 @@
     <link rel="dns-prefetch" href="//partner.googleadservices.com">
     <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
-    <link href="{{ request.asset_host }}/css/web.campus/screen.css" media="all" rel="stylesheet" type="text/css">
+
+    {% block css_link %}
+        <link href="{{ request.asset_host }}/css/web.campus/screen.css" media="all" rel="stylesheet" type="text/css">
+    {% endblock css_link %}
 
     {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
     {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
