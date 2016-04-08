@@ -80,6 +80,16 @@ class RSSLink(object):
         if enclosure is not None:
             return enclosure.attrib.get('url')
 
+    @zeit.web.reify
+    def is_ad(self):
+        nsmap = dict(
+            dc="http://dublincore.org/documents/dcmi-namespace/")
+        dc_type = self.xml.find('dc:type', namespaces=nsmap)
+
+        if dc_type is not None and getattr(dc_type, 'text') == 'native-ad':
+            return True
+        return False
+
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(IRSSLink)
