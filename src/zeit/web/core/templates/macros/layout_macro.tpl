@@ -135,6 +135,10 @@
     </svg>
 {%- endmacro %}
 
+{% macro use_svg_inline(name, class, request) -%}
+    {{ get_svg_from_file(name, 'web.campus', className=class) | safe }}
+{%- endmacro %}
+
 {% macro insert_esi(src, error_text='') %}
     {% if settings('use_wesgi') %}
         <!-- [esi-debug] src="{{ src | safe }}" error_text="{{ error_text }}" -->
