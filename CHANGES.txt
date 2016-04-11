@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.70 (unreleased)
+2.71 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.70 (2016-04-11)
 -----------------
 
 - FIX: Handle non-ascii usernames in nojs comment form
@@ -18,7 +24,13 @@ Change log for zeit.web
 
 - ZON-2890: Add packshot with follow-us button and subscription box
 
+- ZON-2930: Add separate feed `rss-socialflow-facebook-zco`
+
 - ZON-2913: Display ads in ZETT parquet
+
+- ZON-2946: Hide infobox tab counter for single tabs
+
+- FIX: Be more defensive in several places (Bugsnag)
 
 
 2.69 (2016-04-04)

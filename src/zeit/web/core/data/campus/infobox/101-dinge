@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="artbox" label="info">
+  <supertitle>101 Dinge</supertitle>
+  <block>
+    <title>101 Dinge</title>
+    <text>
+      <p>Inspiriert von Kerstin Bund, Matthias Daum, Heike Faller, Thomas Fischermann, Christiane Grefe, Anne Hähnig, Manuel J. Hartung, Claus Hecking, Jutta Hoffritz, Thomas Kerstan, Lydia Klöckner, Karoline Kuhla, Ruben Rehage, Stefan Schmitt, Corinna Schöps, Malin Schulz, Martin Spiewak, Burkhard Strassmann, Jens Tönnesmann</p>
+      <p class="paragraph article__item"><strong>Noch mehr Ideen?</strong> Wir suchen auf ZEIT ONLINE weitere 101 Dinge, die Studenten in ihrer Uni-Zeit gemacht haben sollten. Twittern Sie mit unter #unibucketlist, oder kommentieren Sie unter diesem Text.</p>
+    </text>
+  </block>
+</container>
