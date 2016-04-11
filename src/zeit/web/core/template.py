@@ -919,35 +919,40 @@ def adapt(obj, iface, name=u'', multi=False):
         return zope.component.queryAdapter(obj, iface, name)
 
 
-@SHORT_TERM_CACHE.cache_on_arguments()
-def svg_from_file(name, package, path, className, cleanup, a11y, ariaHidden):
-    """Get an svg from a file, add or clean attributes and return it"""
-    url = pkg_resources.resource_filename(
-        'zeit.web.static', 'css/{}/{}/{}.svg'.format(package, path, name))
-    xml = lxml.etree.parse(url)
-    svg = xml.getroot()
-    title = xml.find('{http://www.w3.org/2000/svg}title')
-    svg.set('class', 'svg-symbol {}'.format(className))
-    svg.set('preserveAspectRatio', 'xMinYMin meet')
-    if cleanup:
-        # strip_attributes works on all child nodes
-        # which is expected behaviour in this case
-        lxml.etree.strip_attributes(xml, 'fill')
-    if a11y:
-        try:
-            svg.set('aria-label', title.text)
-            svg.set('role', 'img')
-        except:
-            pass
-    if ariaHidden:
-        svg.set('aria-hidden', 'true')
-    return lxml.etree.tostring(xml)
-
-
 @zeit.web.register_global
-def get_svg_from_file(
-        name, package, path='svg/', className='',
-        cleanup=True, a11y=True, ariaHidden=False):
-    """Proxy for cached svg_from_file function"""
-    return svg_from_file(
-        name, package, path, className, cleanup, a11y, ariaHidden)
+@SHORT_TERM_CACHE.cache_on_arguments()
+def get_svg_from_file(name, className, package, cleanup, a11y):
+    """
+    Gets an svg from disk, process it for returning as text
+
+    :param name: name of the svg file, w/o extension
+    :param className: additional class to 'svg-symbol'
+    :param package: the actual zeit.package i.e. zeit.web.site
+    :param cleanup: clean svg from fill-attributes
+    :param a11y: activate aria-label to read out svg/title/text()
+    """
+
+    subpath = '.'.join(package.split('.')[1:3])
+    url = pkg_resources.resource_filename(
+        'zeit.web.static', 'css/svg/{}/{}.svg'.format(subpath, name))
+    try:
+        xml = lxml.etree.parse(url)
+        svg = xml.getroot()
+        title = xml.find('{http://www.w3.org/2000/svg}title')
+        svg.set('class', 'svg-symbol {}'.format(className))
+        svg.set('preserveAspectRatio', 'xMinYMin meet')
+        if cleanup:
+            # strip_attributes works on all child nodes
+            # which is expected behaviour in this case
+            lxml.etree.strip_attributes(xml, 'fill')
+        if a11y:
+            try:
+                svg.set('aria-label', title.text)
+                svg.set('role', 'img')
+            except:
+                pass
+        else:
+            svg.set('aria-hidden', 'true')
+        return lxml.etree.tostring(xml)
+    except IOError:
+        return ''
