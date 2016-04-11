@@ -9,7 +9,7 @@
                     Interessen endtdecken mit dem Studium-Interessentest (SIT)
                 </p>
                 <strong class="toolbox__cta">Zum Test</strong>
-                {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', request) }}
+                {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}
             </a>
         </li>
         <li class="toolbox__item">
@@ -19,7 +19,7 @@
                     Überblick erhalten mit der Suchmaschine für Studiengänge
                 </p>
                 <strong class="toolbox__cta">Zur Suche</strong>
-                {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', request) }}
+                {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}
             </a>
         </li>
         <li class="toolbox__item">
@@ -29,11 +29,11 @@
                     Universitäten vergleichen mit dem CHE Hochschulranking
                 </p>
                 <strong class="toolbox__cta">Zum Ranking</strong>
-                {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', request) }}
+                {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}
             </a>
         </li>
     </ul>
     <div class="toolbox__footer">
-        <a href="http://studiengaenge.zeit.de/sit?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.sit.teaser.button.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=funktionsbox_studium&utm_content=sit_teaser_button_x" class="toolbox__sit-link">Was soll ich studieren? {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', request) }}</a>
+        <a href="http://studiengaenge.zeit.de/sit?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.sit.teaser.button.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=funktionsbox_studium&utm_content=sit_teaser_button_x" class="toolbox__sit-link">Was soll ich studieren? {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
     </div>
 </aside>

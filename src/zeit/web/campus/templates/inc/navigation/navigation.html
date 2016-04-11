@@ -4,7 +4,7 @@
         <a itemprop="url" href="{{ request.route_url('home') }}campus/index">
             <meta itemprop="name" content="ZEIT CAMPUS Online">
             <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-                {{ lama.use_svg_inline('logo-zco', 'header__logo', request) }}
+                {{ lama.use_svg_icon('logo-zco', 'header__logo', view.package) }}
                 {# The "logo" dimensions must not exceed 600x60 -#}
                 <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zco.png">
                 <meta itemprop="width" content="347">
@@ -13,8 +13,8 @@
         </a>
     </div>
     <a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü">
-        {{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', request, inline=view.inline_svg_icons) }}
-        {{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', request, inline=view.inline_svg_icons) }}
+        {{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', view.package) }}
+        {{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', view.package) }}
     </a>
 </div>
 
