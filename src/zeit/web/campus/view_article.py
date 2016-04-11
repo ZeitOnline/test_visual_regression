@@ -12,8 +12,8 @@ import zeit.web.core.view_article
     custom_predicates=(zeit.web.campus.view.is_zco_content,),
     request_method='GET')
 @pyramid.view.view_config(renderer='templates/article.html')
-@pyramid.view.view_config(custom_predicates=(zeit.web.site.view.is_zco_content,
-                          zeit.web.campus.view.is_advertorial),
+@pyramid.view.view_config(custom_predicates=(zeit.web.campus.view.is_zco_content,
+                          zeit.web.core.view.is_advertorial),
                           renderer='templates/article_advertorial.html')
 @pyramid.view.view_config(name='komplettansicht',
                           renderer='templates/komplett.html')
