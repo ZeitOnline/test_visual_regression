@@ -9,10 +9,10 @@ module.exports = function(grunt) {
         codeDir: __dirname + '/src/zeit/web/static/',
         rubyVersion: '1.9.3',
         tasks: {
-            production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy', 'svg' ],
-            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
+            production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy:css', 'svg' ],
+            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy:css', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
-            svg: [ 'clean:icons', 'clean:symbols', 'svgmin', 'grunticon', 'svgstore' ],
+            svg: [ 'clean:icons', 'clean:symbols', 'svgmin', 'grunticon', 'svgstore', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
             icons: [ 'clean:icons', 'svgmin:magazinIcons', 'grunticon:magazin' ],
             symbols: [ 'clean:symbols', 'svgmin:site', 'svgmin:magazin', 'svgstore:site', 'svgstore:magazin', 'grunticon:site', 'grunticon:magazin' ],
             css: [ 'compass:dist', 'compass:amp' ],
@@ -133,6 +133,24 @@ module.exports = function(grunt) {
                 cwd: project.sourceDir + 'sass',
                 src: 'vendor/*.css',
                 dest: project.codeDir + 'css/'
+            },
+            svg_campus: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.campus/svg/_minified',
+                src: [ '*.svg' ],
+                dest: project.codeDir + 'css/svg/web.campus/'
+            },
+            svg_magazin: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.magazin/svg/_minified',
+                src: [ '*.svg' ],
+                dest: project.codeDir + 'css/svg/web.magazin/'
+            },
+            svg_site: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.site/svg/_minified',
+                src: [ '*.svg' ],
+                dest: project.codeDir + 'css/svg/web.site/'
             }
         },
 
