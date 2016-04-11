@@ -10,6 +10,8 @@ Change log for zeit.web
 - ZON-2878: Allow specifying a background color for teaser images with
             transparent backgrounds
 
+- BUG-377: Ensure correct sort order for search result area
+
 
 2.70 (2016-04-11)
 -----------------
