@@ -14,7 +14,6 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     def __init__(self, *args, **kwargs):
         super(Centerpage, self).__init__(*args, **kwargs)
-        self._copyrights = {}
         self.context.advertising_enabled = self.banner_on
 
         # Most of our resources will be purged from now on. We test this new

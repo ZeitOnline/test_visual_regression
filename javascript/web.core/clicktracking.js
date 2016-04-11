@@ -134,13 +134,13 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         linkInArticleContent: function( $element, $page ) {
-            var $allParagraphsOnPage = $page.children( 'p' ),
-                $currentParagraph = $element.closest( 'p' ),
+            var $currentParagraph =  $element.closest( 'p, [data-clicktracking]', $page ),
                 currentPageNumber = $page.data( 'page-number' ) || 0,
-                currentParagraphNumber = $allParagraphsOnPage.index( $currentParagraph ) + 1,
+                currentParagraphNumber = $currentParagraph.prevAll( 'p' ).length + 1,
+                trackType = $element.closest( '[data-clicktracking]' ).data( 'clicktracking' ) || 'intext',
                 data = [
                     getBreakpoint(),
-                    'intext', // [verortung] Immer (intext)
+                    trackType, // [verortung]
                     currentParagraphNumber + '/seite-' + currentPageNumber, // "Nummer des Absatzes"/"Nummer der Seite" Bsp: "2/seite-1"
                     '', // [spalte] leer lassen
                     '', // [subreihe] leer lassen
@@ -229,7 +229,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             .replace( /^_|_$/g, '' );
     },
 
-    debugMode = document.location.search.indexOf( 'webtrekk-clicktracking-debug' ) > -1;
+    debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1;
 
     return {
         init: function() {

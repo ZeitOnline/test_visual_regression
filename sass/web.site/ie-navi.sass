@@ -8,18 +8,12 @@
 
 .lt-ie9,
 .lt-ie10
-    .main_nav__search
-        position: relative
-        width: 100%
-        margin: 0
     .main_nav__community
         width: 90%
 
 .lt-ie9
     .main_nav
         min-width: $break-tablet-min
-    .main_nav__search
-        top: -230px
     .main_nav__classifieds
         font-size: $font-xs
         width: 50%
@@ -30,11 +24,6 @@
         width: 49%
 
 .lt-ie10
-    .main_nav__search
-        +respond-min($break-tablet-min)
-            top: -235px
-        +respond-min($break-desktop-min)
-            top: -200px
     .main_nav__services
         +respond-max($break-tablet-min)
             ul > li

@@ -73,7 +73,7 @@
     <cluster area="id-41a8299d-b569-4c42-b713-db5dbd866a4f" kind="duo" kind_title="Standard-Region" visible="True" visible_mobile="True">
       <region area="1234567test" automatic_type="channel" count="8" hide-dupes="True" kind="major" read_more_url="http://www.zeit.de/studium/index" title="Studium" visible="True" visible_mobile="True">
         <container cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b" cp:type="teaser" module="zon-large" overlay_level="3" text_color="dark" visible="True" visible_mobile="True">
-          <block author="Anna Bordel" contenttype="article" expires="" href="http://xml.zeit.de/campus/article-simple" issue="1" publication-date="" ressort="Studium" uniqueId="http://xml.zeit.de/campus/article-simple" year="2015"></block>
+          <block author="Anna Bordel" contenttype="article" expires="" href="http://xml.zeit.de/campus/article/simple" issue="1" publication-date="" ressort="Studium" uniqueId="http://xml.zeit.de/campus/article/simple" year="2015"></block>
         </container>
       </region>
     </cluster>

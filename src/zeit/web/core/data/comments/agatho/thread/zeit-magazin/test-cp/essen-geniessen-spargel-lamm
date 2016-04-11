@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<comments url="/commentsection/url/zeit-magazin/test-cp/essen-geniessen-spargel-lamm">
+<comments url="/commentsection/url/zeit-magazin/article/essen-geniessen-spargel-lamm">
  <last_comment_timestamp>1376757288</last_comment_timestamp>
  <last_comment_name></last_comment_name>
  <last_comment_uid>291552</last_comment_uid>
@@ -21,6 +21,6 @@
    <name>Skarsgard</name>
   </author>
  </comment>
- <path>/commentsection/url/zeit-magazin/test-cp/essen-geniessen-spargel-lamm</path>
- <source>http://www.zeit.de/zeit-magazin/test-cp/essen-geniessen-spargel-lamm</source>
+ <path>/commentsection/url/zeit-magazin/article/essen-geniessen-spargel-lamm</path>
+ <source>http://www.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm</source>
 </comments>

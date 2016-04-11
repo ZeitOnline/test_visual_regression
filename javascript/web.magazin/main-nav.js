@@ -34,42 +34,11 @@ define(['jquery'], function() {
     };
 
     /**
-     * main-nav.js: initialize ressort slider
-     * @function initRessortSlider
-     */
-    var initRessortSlider = function() {
-        var $ressort_slider_container = $('#js-main-nav-ressorts-slider-container');
-        var $ressort_slider_strip = $('#js-main-nav-ressorts-slider-strip');
-        var hidden_offset = $ressort_slider_strip.outerWidth() - $ressort_slider_container.width();
-        if (hidden_offset > 0) {
-            $main_nav.addClass('has-topic-slider');
-            var $left_arrow = $ressort_slider_container.find('.main-nav__ressorts__slider-arrow--left');
-            var $right_arrow = $ressort_slider_container.find('.main-nav__ressorts__slider-arrow--right');
-            var move_by = hidden_offset + $left_arrow.width()*3;
-            $left_arrow.off();
-            $left_arrow.click(function() {
-                $ressort_slider_strip.css('left', 0);
-                $right_arrow.removeClass('is-inactive');
-                $left_arrow.addClass('is-inactive');
-            });
-            $right_arrow.off();
-            $right_arrow.click(function() {
-                $ressort_slider_strip.css('left', -1 * move_by);
-                $left_arrow.removeClass('is-inactive');
-                $right_arrow.addClass('is-inactive');
-            });
-        }
-    };
-
-    /**
      * main-nav.js: initialize navigation for bigger screens
      * @function initDesktopNav
      */
     var initDesktopNav = function() {
         has_mobile_nav = false;
-
-        // init topics/ressort slider if necessary
-        initRessortSlider();
     };
 
     /**

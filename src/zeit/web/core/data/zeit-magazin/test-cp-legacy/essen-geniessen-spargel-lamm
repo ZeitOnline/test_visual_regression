@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags xmlns:ns10="http://codespeak.net/lxml/objectify/pytype">
+      <tag type="free" url_value="essen" uuid="1f92f4fd-0b89-4afa-8fb8-9e1aa6522f14" ns10:pytype="str">Essen</tag>
+      <tag type="free" url_value="kochrezept" uuid="d7701afc-a69c-4d8f-9aed-423278121c13" ns10:pytype="str">Kochrezept</tag>
+      <tag type="free" url_value="kochen" uuid="ed546578-e0a4-4388-abd6-53d590dbf664" ns10:pytype="str">Kochen</tag>
+      <tag url_value="dessert" uuid="65d605b9-b37b-418d-940d-48e9cb5ad68d" score="4" type="free">Dessert</tag>
+    </rankedTags>
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
+      <display_name py:pytype="str">Elisabeth Raether</display_name>
+    </author>
+    <references>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2014/10/wochenmarkt-huehnchen-curry" year="2014" issue="10" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="2014-02-27T08:50:00+00:00" expires="">
+        <supertitle py:pytype="str">Wochenmarkt</supertitle>
+        <teaser_supertitle py:pytype="str">Serie Wochenmarkt</teaser_supertitle>
+        <title py:pytype="str">Hühnchen statt Extremsport</title>
+        <text py:pytype="str">Hähnchenkeulen mit Piment, Chili und Kreuzkümmel würzen, dazu Kichererbsen und Aprikosen geben, das Ganze in den Backofen schieben – und fertig ist das gute Leben.</text>
+        <description py:pytype="str">Hähnchenkeulen mit Piment, Chili und Kreuzkümmel würzen, dazu Kichererbsen und Aprikosen geben, das Ganze in den Backofen schieben – und fertig ist das gute Leben.</description>
+        <byline py:pytype="str">von Elisabeth Raether</byline>
+        <breadcrumb_title py:pytype="str">Wochenmarkt: Hühnchen mit Kichererbsen</breadcrumb_title>
+        <image base-id="http://xml.zeit.de/2014/10/wochenmarkt-huehnchen/" type="jpg" title="Hühnchen mit Kichererbsen" alt="Hühnchen mit Kichererbsen" align="left" publication-date="" expires="2014-05-24T17:17:00+00:00">
+          <bu py:pytype="str">Hühnchen mit Kichererbsen</bu>
+          <copyright py:pytype="str">© Jason Lowe</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
+          <display_name py:pytype="str">Elisabeth Raether</display_name>
+        </author>
+      </reference>
+    </references>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/lamm-aubergine/" type="jpg" alt="Lammkoteletts mit Auberginenmus" align="left" publication-date="" expires="2014-05-17T07:59:27+00:00">
+      <bu py:pytype="str">Der Frühling ist ein schöner Anlass, endlich mal wieder viel zu essen</bu>
+      <copyright py:pytype="str">© Andreas Lux</copyright>
+    </image>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="article_id">2112109</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="author">Elisabeth Raether</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-04-15T09:29:41.515116+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">16.04.2014</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="header_layout">inside</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZMLB-2014-17-Genieen-Andreas-Lux-17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">geschichte</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="jobname">Genießen_Andreas Lux 17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-16T06:00:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bischoff</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="origname">Genießen_Andreas Lux 17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="page">46</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Magazin</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1378993011928</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="publish_job_id">1435299131</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="ressort">zeitmagazin</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZMLB-2014-17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="status">Archivfreigabe</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">essen-trinken</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="template">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="text-length">4989</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:4b5ff99f-517e-4157-8b2c-5b0fdbf7f989}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="volume">17</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+        &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Probier's mal mit Gemütlichkeit</title>
+    <subtitle>"Beach body" – auch dieses Jahr leider wieder ohne uns. Wir braten Lammkoteletts, essen jede Menge Kartoffeln, und zum Abschluss gibt es zuckersüße Kohlenhydrate. Und dafür strengen wir uns natürlich nicht an.</subtitle>
+    <byline>von Elisabeth Raether</byline>
+    <division type="page">
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/lamm-aubergine/" type="jpg" alt="Lammkoteletts mit Auberginenmus" align="left" publication-date="" expires="2014-05-17T07:59:27+00:00" is_empty="False" layout="large">
+        <bu py:pytype="str">Der Frühling ist ein schöner Anlass, endlich mal wieder viel zu essen</bu>
+        <copyright py:pytype="str">© Andreas Lux</copyright>
+      </image>
+      <p>
+        <strong>Vorspeise</strong>
+      </p>
+      <p><em>Grüner Spargel aus dem Ofen</em><br/>1,2 Kilo grüner Spargel,  100 g geriebener Parmesan, 3 EL Semmelbrösel</p>
+      <p>Vom Spargel werden die Enden großzügig  abgeschnitten. Wenn Sie so viel Abschnitt haben,  dass Sie glauben, Ihre sparsame Mutter würde  böse mit Ihnen werden, könnte sie das sehen – dann  liegen Sie richtig. Der Spargel wird, wie er ist,  auf einem mit Backpapier ausgelegten Backblech im  Ofen gegart, und zwar bei 190 Grad für  ungefähr 20 Minuten. Dann gibt man etwas geriebenen Parmesan und ein paar Semmelbrösel drauf  und lässt das Blech noch weitere 5 Minuten im Ofen.</p>
+      <p>
+        <strong>Hauptspeise</strong>
+      </p>
+      <p><em>Lammkoteletts mit Auberginenmus und gebratenen Frühlingszwiebeln</em><br/>1 kg Lammkoteletts (inklusive Knochen),  Olivenöl, Salz, Pfeffer<br/>3 Auberginen, 2 Zehen vom  frischen Knoblauch, etwas Zitronensaft,  3 EL gehackte Petersilie<br/>3 Bund Frühlingszwiebeln, etwas Butter,  1 Prise Zucker<br/>1 kg neue Kartoffeln</p>
+      <p>Aus nicht erforschten Gründen braten viele Männer  gern Fleisch. Überlassen Sie das Braten der  Koteletts also einem Ihrer Gäste. Beschränken Sie  sich darauf, hinterher den Fettfilm von  den Küchenschränken zu wischen. Sie können auch  die Kartoffeln kochen.</p>
+      <p>Es gibt ja außerdem noch ein Auberginenmus dazu.  Das kann schon am Nachmittag zubereitet werden.  Die Auberginen werden im Ganzen in einer Auflaufform im Ofen gebacken, bei 200 bis 220 Grad dauert  das ungefähr 30 Minuten. Die Auberginen müssen vorher mit einer Gabel eingestochen werden, sonst  explodieren sie, lustige Anekdote, aber dann müssen Sie noch mehr putzen. Mit einem Löffel das weich  gekochte Fruchtfleisch aus der Schale kratzen, eventuell mit der Gabel zerkleinern. Würzen mit nichts als Olivenöl, klein geschnittenem Knoblauch, Petersilie und etwas Zitronensaft sowie Salz und Pfeffer.</p>
+      <p>Die Frühlingszwiebeln der Länge nach halbieren  oder vierteln, je nach Größe. Butter und  Olivenöl in der Pfanne zerlassen, darin die Frühlingszwiebeln braten. Wenn sie fast gar sind, eine Prise  Zucker dazugeben sowie Salz und Pfeffer. Die Zwiebeln  können etwas braune Farbe annehmen.</p>
+      <p>
+        <strong>Dessert</strong>
+      </p>
+      <p><em>Zitronentarte</em> – für 6 bis 8 Personen<br/>Für den Teig: 50 g Zucker, 100 g Butter, 150 g Mehl,  1 Eigelb, Backerbsen (oder andere getrocknete Hülsenfrüchte)<br/>Für die Zitronencreme: 200 g Zucker, 2 Eigelb,  2 ganze Eier, Saft von 2 Zitronen, Abrieb von 3 Zitronen,  80 g Butter. Für das Baiser: 3 Eiweiß, 150 g Zucker</p>
+      <p>Während Sie am Nachmittag den Teig kneten, freuen  Sie sich auf den Moment, wenn Sie die Tarte  auf den Tisch stellen: später am Abend müssen Sie dann  nichts mehr tun. Schade, dass die Gäste sich  jetzt in die Haare kriegen. Sie waren unvorsichtig bei der  Zusammenstellung der Tischgesellschaft, unter  Ihren Gäste sind Menschen mit hohen moralischen  Ansprüchen an sich und ihre Umwelt, wie  Eigenheimbesitzer, die Die Linke wählen – sie haben stets  ein paar vorwurfsvolle Thesen im Gepäck; auch  immer etwas mitzuteilen haben Menschen mit Neigung  zu Verschwörungstheorien. Früher sollte man bei  Essenseinladungen nur Small Talk machen. Aber dieses  Land hat inzwischen Hunderttausende Scheidungskinder produziert: Der Streit gehört zum Essen wie einst  das Tischgebet. Nehmen Sie es nicht persönlich,  es hat nichts mit Ihrer Tarte zu tun, die ist fabelhaft.</p>
+      <p>Ei, Butter und Zucker schaumig schlagen, Mehl dazu, von Hand durchkneten, aber nicht zu lange. Teig in Folie wickeln, eine knappe Stunde im Kühlschrank ruhen lassen.  In eine gefettete Springform (Durchmesser 28 cm) drücken, Ränder formen. Teig ein paar Mal einstechen. Backpapier  auf den Teig legen, mit Backerbsen beschweren, 30 Minuten bei 150 Grad Umluft vorbacken. Für die Creme alle  Zutaten bis auf die Butter in einem Topf vermengen, langsam unter Rühren erhitzen, nicht zum Kochen bringen. Wenn  die Masse cremig ist, vom Herd nehmen, zerlassene Butter einrühren. Creme auf den vorgebackenen Teig geben,  eine weitere halbe Stunde backen. Für den Baiserdeckel Eiweiß mit Zucker steif schlagen. Masse auf einem mit Backpapier ausgelegten Blech verteilen, sodass sich ein Rund mit dem Durchmesser der Springform ergibt. Bei 120 Grad  eine Stunde im Ofen trocken backen. Auskühlen lassen,  auf die Tarte geben, das Baiser darf dabei zu Bruch gehen.</p>
+    </division>
+    <image-credits>Fotos  Andreas Lux</image-credits>
+    <caption>Der Frühling ist ein schöner Anlass, endlich mal wieder zu viel zu essen</caption>
+    <caption>Hallo, schön, dass du da bist! Schneid mal bitte die Frühlingszwiebeln!</caption>
+    <caption>Elisabeth Raether (Foto Seite 50 unten) ist Redakteurin des ZEITmagazins und hat zum
+      Freitagabend in ihre Wohnung in Berlin eingeladen</caption>
+    <caption>Das einzig Anspruchsvolle an diesem Spargelrezept: Vor der Zubereitung die Holzigen
+      aussortieren</caption>
+    <caption>Wer sagt, dass man im Frühling immer nur Salat zu sich nehmen darf?</caption>
+    <supertitle>Kochen</supertitle>
+  </body>
+  <teaser>
+    <title>Probier's mal mit Gemütlichkeit</title>
+    <text>"Beach body" – auch dieses Jahr leider wieder ohne uns. Wir braten Lammkoteletts, essen jede Menge Kartoffeln und zum Abschluss Zuckersüßes.</text>
+    <supertitle>Kochen</supertitle>
+  </teaser>
+</article>

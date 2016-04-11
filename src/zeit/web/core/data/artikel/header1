@@ -54,7 +54,7 @@
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
         <nextread>
-            <reference author="Carolin Emcke" contenttype="article" expires="" href="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" issue="26" publication-date="" ressort="Lebensart" type="intern" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" year="2008">
+            <reference author="Carolin Emcke" contenttype="article" expires="" href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste" issue="26" publication-date="" ressort="Lebensart" type="intern" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" year="2008">
                 <supertitle>Kochen für Gäste</supertitle>
                 <teaser_supertitle xsi:nil="true"/>
                 <title xsi:nil="true"/>
@@ -67,7 +67,7 @@
                     <location>Eisenhüttenstadt</location>
                 </author>
             </reference>
-            <reference author="Carolin Emcke" contenttype="article" expires="" href="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" issue="26" publication-date="" ressort="Lebensart" type="intern" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" year="2008">
+            <reference author="Carolin Emcke" contenttype="article" expires="" href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste" issue="26" publication-date="" ressort="Lebensart" type="intern" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" year="2008">
                 <supertitle>Kochen für Gäste</supertitle>
                 <teaser_supertitle xsi:nil="true"/>
                 <title xsi:nil="true"/>
@@ -80,7 +80,7 @@
                     <location>Eisenhüttenstadt</location>
                 </author>
             </reference>
-            <reference author="Carolin Emcke" contenttype="article" expires="" href="http://xml.zeit.de/zeit-magazin/test-cp/vegetarisch-kochen-fuer-gaeste" issue="26" publication-date="" ressort="Lebensart" type="intern" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" year="2008">
+            <reference author="Carolin Emcke" contenttype="article" expires="" href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste" issue="26" publication-date="" ressort="Lebensart" type="intern" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" year="2008">
                 <supertitle>Kochen für Gäste</supertitle>
                 <teaser_supertitle xsi:nil="true"/>
                 <title xsi:nil="true"/>
@@ -105,13 +105,13 @@
                 <copyright link="http://foo.de">©foo</copyright>
             </image>
             <p>Leipzig hat in den letzten Jahren viele neue Spitznamen bekommen.
-                
+
                 <a class="" href="http://www.faz.net/aktuell/politik/inland/leipzig-dieser-ort-ist-kein-traum-11525236.html" target="_blank">
                     &quot;Disneyland des Unperfekten&quot;</a> wurde die Stadt in einem Artikel der 
-                
+
                 <em>
                     FAZ</em>getauft, für ihre illegalen Klubs, die Raves im Wald, die Altbauwohnungen für 300 Euro Warmmiete. Dann wurde die klassische bürgerliche Kultur in Oper, Theatern und Konzerthäusern dazugerechnet und die Universität, die jährlich 28.000 Studenten anzieht, und Leipzig wurde zum neuen Berlin. Tolerant und offen sei die Stadt zudem, auch ein 
-                
+
                 <a class="" href="http://www.zeit.de/2012/12/S-Homosexualitaet-Leipzig" target="_blank">
                     &quot;Biotop der Schwulenszene&quot;</a>, wie die ZEIT berichtete. Als Sammelbegriff für die anhaltende mediale Aufmerksamkeit für Sachsens zweitgrößte Stadt hat sich schließlich &quot;Hypezig&quot; etabliert.</p>
         </division>

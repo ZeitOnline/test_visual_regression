@@ -49,7 +49,6 @@ class GalleryImage(zeit.web.core.image.BaseImage):
         fix_ml = zeit.web.core.utils.fix_misrepresented_latin
         self.copyright = list((fix_ml(i[0]),) + i[1:] for i in meta.copyrights)
         self.alt = meta.alt
-        self.align = meta.alignment
         self.caption = item.caption
 
 

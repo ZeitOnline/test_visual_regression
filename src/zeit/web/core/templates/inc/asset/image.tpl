@@ -23,9 +23,9 @@
                 {%- for name, url, nofollow in image.copyright %}
                     {%- if name | trim | length > 1 %}
                         <span class="figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
-                            {%- if url %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}" target="_blank">{% endif -%}
+                            {%- if url and not omit_image_links %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}" target="_blank">{% endif -%}
                             <span itemprop="name">{{ name }}</span>
-                            {%- if url %}</a>{% endif -%}
+                            {%- if url and not omit_image_links %}</a>{% endif -%}
                         </span>
                     {%- endif %}
                 {%- endfor %}

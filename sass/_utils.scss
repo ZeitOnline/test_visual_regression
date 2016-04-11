@@ -68,7 +68,11 @@ $fix-mqs-h: false !default;
 	}
 }
 
-@mixin respond-min-max($min-width, $max-width) {
+@mixin respond-min-max($min-width, $max-width, $exclusive: true) {
+	@if $exclusive {
+		$max-width: $max-width - 0.001;
+	}
+
 	@if $fix-mqs {
 		@if $fix-mqs >= em($min-width) and $fix-mqs <= em($max-width) {
 			@content;

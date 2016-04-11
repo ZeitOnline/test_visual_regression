@@ -1,7 +1,43 @@
 Change log for zeit.web
 =======================
 
-2.69 (unreleased)
+2.71 (unreleased)
+-----------------
+
+- ZON-1626: Update ZMO-CPs to the z.c.cp-3.x data model,
+            update CSS and templates to the ZON best practises
+
+- ZON-2878: Allow specifying a background color for teaser images with
+            transparent backgrounds
+
+
+2.70 (2016-04-11)
+-----------------
+
+- FIX: Handle non-ascii usernames in nojs comment form
+
+- BUG-346: Limit the number of items in jobbox
+
+- BUG-385: Consider paragraph length when inserting ads
+
+- ZON-2494: Implement stoa in-article-block
+
+- ZON-2870: Implement login cut mark for framebuilder
+
+- ZON-2651: Include SSO information in the JS rawr config object
+
+- ZON-2890: Add packshot with follow-us button and subscription box
+
+- ZON-2930: Add separate feed `rss-socialflow-facebook-zco`
+
+- ZON-2913: Display ads in ZETT parquet
+
+- ZON-2946: Hide infobox tab counter for single tabs
+
+- FIX: Be more defensive in several places (Bugsnag)
+
+
+2.69 (2016-04-04)
 -----------------
 
 - MAINT: Add a11y to table of contents
@@ -10,6 +46,8 @@ Change log for zeit.web
 
 - ZON-2776: Implement 2nd version of ZCO topic teaser and refactor standard
   topic teaser
+
+- ZON-2889: Add new graphical topic teaser
 
 
 2.68 (2016-03-31)
@@ -151,6 +189,22 @@ Change log for zeit.web
 
 2.62 (2016-03-04)
 -----------------
+
+- MAINT: Refactor ZMO nextread
+
+- MAINT: Deprecate ZMO copyrights mechanics in favour of js solution
+
+- FIX: Add margin to major/ minor area
+
+- ZON-2785: Relaunch ZMO CPs:
+  * New teaser structure for ZMO
+  * Cleanup teaser types
+  * Cleanup test data
+  * Style new trio area
+  * Rework Monothematic block
+  * Introduce new test pages for teasers
+  * Use Standart image template in ZMO
+  * Move copyright logic to core and use it in ZMO
 
 - ZON-2433: Improve sharing logic of cardstacks
 
@@ -315,6 +369,16 @@ Change log for zeit.web
 2.56 (2016-02-17)
 -----------------
 
+- ZON-2710: Use external SVG sprite in ZMO
+
+- ZON-2753: ZMO clicktracking for teaser
+
+- ZON-2558: ZMO teaser layout 'card' in 3 variations
+
+- ZON-2557: ZMO teaser layout 'upright' formerly known as 'gallery-upright'
+
+- ZON-2556: ZMO teaser layout 'print-cover'
+
 - ZON-2507: Implement zeit campus groundwork (behind a feature toggle)
 
 - ZON-2806: Add product.title as author fallback to AMPages
@@ -355,11 +419,11 @@ Change log for zeit.web
 
 - ZON-2602: Add Nextread and Verlags-Nextread to AMPages
 
-- ZON-2710: Use external SVG sprite in ZMO
-
 - ZON-2732: Move celeraone device detection header setting to varnish
 
 - ZON-2536: Move generic image assets to core module
+
+- ZON-2552: Refactored fullwidth teaser
 
 - ZON-2692: Add instantarticle author fallback and local image captions
 

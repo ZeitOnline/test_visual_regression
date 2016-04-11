@@ -1,152 +1,20 @@
-$nextread-background: #f7f7f7
-$nextread-bordercolor: #eee
-$nextread-teaser-width: 260px
-$nextread-image-height: 172px
-$nextread-minimal-height: em(165px)
-$nextread-maximal-height: em(320px)
-
-%nextread-link-dark
-	a
-		+link-colors($black, $black, $black, $black, $black)
-
-%nextread-link-light
-	a
-		+link-colors($white, $white, $white, $white, $white)
-
-.article__nextread
+.nextread
+	+padded
 	+unpadded
+	background-color: $grey--bright
+	border-top: 2px solid #d3d3d3
+	color: #444
 	font-family: $font-tabletgothic
-	font-weight: bold
-	color: $black
-	background-color: $nextread-background
-	border-top: 1px solid $nextread-bordercolor
-	padding-bottom: remify(154px)
-	+respond-max($break-2)
-		padding-bottom: $large
+	padding-bottom: remify(60px)
 
-.article__nextread__lead
-	font-size: $font-m
-	letter-spacing: $hair
-	margin: $big 0 $junior
-	text-align: center
-	text-transform: uppercase
-	&:after
-		content: ":"
-
-.article__nextread__wrap
-	text-align: center
-	+respond-max($break-2)
-		width: $nextread-teaser-width
-		margin: 0 auto
-
-.article__nextread__supertitle
-	@extend %supertitle
-	font-size: $font-s
-	font-weight: normal
-	display: block
-	margin: $small 0 $micro
-	text-align: left
-
-.article__nextread__title
-	display: block
-	font-size: $font-l
-	letter-spacing: 1px
-	text-align: left
-	+respond-min($break-1)
-		font-size: $font-xl
-	+respond-min($break-2)
-		font-size: $font-xxl
-
-.article__nextread__img
-	display: table-cell
-	img
-		display: block
-		height: $nextread-image-height
-		width: $nextread-teaser-width
-
-.article__nextread__link
-	width: 100%
-	display: block
-
-.nextread-base
-	@extend %nextread-link-dark
-	position: relative
-	.article__nextread__body
-		display: inline-block
-		margin: $large auto $junior
-		max-width: $medium-content-width
-	.article__nextread__body--multi
-		margin: $junior
-		.article__nextread__title
-			font-size: $font-l
-	.article__nextread__body--single
-		+respond-min($break-2)
-			display: table
-			background: $white
-			width: 80%
-		.article__nextread__article
-			padding: 0
-			+respond-min($break-1)
-				.article__nextread__title
-					font-size: $font-xl
-			+respond-min($break-2)
-				display: table-cell
-				vertical-align: top
-				padding: $medium $thin $thin $medium
-				.article__nextread__title
-					font-size: $font-xl
-					padding: 0
-				.article__nextread__supertitle
-					margin: $micro 0
-					padding: 0
-	.article__nextread__body--no-img
-		.article__nextread__article--single
-			+respond-min($break-2)
-				display: block
-				padding: $medium
-			.article__nextread__title,
-			.article__nextread__supertitle
-				text-align: center
-
-.nextread-minimal
-	@extend %nextread-link-dark
-	.article__nextread__body
-		background: $white
-		margin: 0 auto
-		padding: $medium
-		width: 80%
-	.article__nextread__title,
-	.article__nextread__supertitle
+	&__lead
+		font-size: em(16px)
+		font-weight: bold
+		letter-spacing: $hair
+		margin: 0
+		padding: remify(50px 0)
 		text-align: center
+		text-transform: uppercase
+		&:after
+			content: ":"
 
-.nextread-maximal
-	@extend %nextread-link-light
-	+respond-min($break-1)
-		padding-left: $medium
-		padding-right: $medium
-	.article__nextread__body
-		+background-size(cover)
-		height: $nextread-minimal-height
-		width: 100%
-		+respond-min($break-1)
-			height: $nextread-minimal-height * 1.5
-		+respond-min($break-2)
-			height: $nextread-maximal-height
-	.article__nextread__article
-		height: 100%
-	.article__nextread__supertitle
-		padding-top: $medium
-		+respond-min($break-2)
-			padding-top: $huge
-	.article__nextread__supertitle,
-	.article__nextread__title
-		text-align: center
-		width: 100%
-	.article__nextread__title
-		font-size: $font-xl
-		+respond-min($break-1)
-			font-size: $font-xxl
-		+respond-min($break-2)
-			font-size: $font-xxxl
-		+respond-min($break-3)
-			font-size: $font-xxxxl

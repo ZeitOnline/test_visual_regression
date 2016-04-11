@@ -3,21 +3,25 @@ $nav__row-height--px: 50px
 $nav__row-height: em($nav__row-height--px)
 $nav__break__full-menu: em(768px)
 
-$nav__logo-zmo-small-width: 38px
-$nav__logo-zmo-small-height: 20px
-$nav__logo-zmo-large-width: 262px
-$nav__logo-zmo-large-height: 25px
+$logo-zmo-small-width: 38px
+$logo-zmo-small-height: 20px
+$logo-zmo-large-width: 262px
+$logo-zmo-large-height: 25px
 
-$nav__logo-zon-small-width: 25px
-$nav__logo-zon-small-height: 25px
-$nav__logo-zon-large-width: 236px
-$nav__logo-zon-large-height: 25px
+$logo-zon-small-width: 25px
+$logo-zon-small-height: 25px
+$logo-zon-large-width: 236px
+$logo-zon-large-height: 25px
+
+$icon-arrow-down-width: 8.735px
+$icon-arrow-down-heigth: 4.026px
+
+$icon-avatar-std-size: em(32px)
 
 $nav__service-primary-full-width: 200px
 $nav__background-color: $grey--mid-dark
 $nav__border-color: $grey--mid
 $nav__section-border: 1px solid $nav__border-color
-$icon-avatar-std-size: em(32px)
 
 
 .main-nav
@@ -63,44 +67,29 @@ $icon-avatar-std-size: em(32px)
         width: auto
 
 // declare logo styles "desktop first" to get them IE<9 safe
-.main-nav__logo__img
-    +hide-text
-    +background-size(contain)
-    background-position: 50% 50%
+.main-nav__brand-logo
+    color: white
     display: inline-block
     vertical-align: middle
-
-    // small logo initials
-
-    &.icon-logo-zon-small,
-    &.icon-logo-zmo-small
+    &--large
+        +respond-max($nav__break__full-menu)
+            display: none
+    &--small
         display: none
         +respond-max($nav__break__full-menu)
             display: inline-block
-
-    &.icon-logo-zon-small
-        width: $nav__logo-zon-small-width
-        height: $nav__logo-zon-small-height
-
-    &.icon-logo-zmo-small
-        width: $nav__logo-zmo-small-width
-        height: $nav__logo-zmo-small-height
-
-    // large logo
-
-    &.icon-logo-zon-large,
-    &.icon-logo-zmo-large
-        +respond-max($nav__break__full-menu)
-            display: none
-
-    &.icon-logo-zon-large
-        width: $nav__logo-zon-large-width
-        height: $nav__logo-zon-large-height
-
-    &.icon-logo-zmo-large
-        width: $nav__logo-zmo-large-width
-        height: $nav__logo-zmo-large-height
-
+    &--zmo-large
+        width: $logo-zmo-large-width
+        height: $logo-zmo-large-height
+    &--zon-large
+        width: $logo-zon-large-width
+        height: $logo-zmo-large-height
+    &--zmo-small
+        width: $logo-zmo-small-width
+        height: $logo-zmo-small-height
+    &--zon-small
+        width: $logo-zon-small-width
+        height: $logo-zmo-small-height
 
 .main-nav__menu
     overflow: hidden
@@ -176,6 +165,16 @@ $icon-avatar-std-size: em(32px)
 .main-nav__section__text
     font-size: $font-s
     letter-spacing: 1px
+    margin-right: em(26px - $icon-arrow-down-width)
+
+.main-nav__icon-arrow-down
+    display: none
+    color: white
+    vertical-align: middle
+    width: em($icon-arrow-down-width)
+    height: em($icon-arrow-down-heigth)
+    +respond-min($nav__break__full-menu)
+        display: inline-block
 
 .main-nav__section__content
     display: none
@@ -204,7 +203,6 @@ $icon-avatar-std-size: em(32px)
 
     .has-hover
         .main-nav__service,
-        .main-nav__search,
         .main-nav__community
             .main-nav__section__trigger:hover + .main-nav__section__content,
             .main-nav__section__content:hover
@@ -291,7 +289,7 @@ $icon-avatar-std-size: em(32px)
                 color: white
             &:last-child
                 margin-right: 0
-    .main-nav__ressorts__slider
+    .main-nav__ressort-list
         position: relative
         height: $nav__row-height
         margin-left: $small
@@ -300,46 +298,6 @@ $icon-avatar-std-size: em(32px)
             overflow: auto
             overflow-x: auto
             overflow-y: hidden
-        .has-topic-slider &
-            padding-right: $small*3
-            overflow: hidden
-            &:after
-                content: ''
-                position: absolute
-                height: 100%
-                width: $small*3
-                background-color: $nav__background-color
-                z-index: 5
-                right: 0
-    .main-nav__ressorts__slider-strip
-        +transition(left 0.2s)
-        position: absolute
-        left: 0
-        height: 100%
-
-
-.main-nav__ressorts__slider-arrow--left,
-.main-nav__ressorts__slider-arrow--right
-    width: $small
-    height: $nav__row-height
-    position: absolute
-    z-index: 10
-    background-position: center center
-    display: none
-    cursor: pointer
-    .has-topic-slider &
-        +respond-min($nav__break__full-menu)
-            display: block
-    &.is-inactive
-        opacity: 0.5
-        cursor: default
-
-
-.main-nav__ressorts__slider-arrow--left
-    right: $small
-.main-nav__ressorts__slider-arrow--right
-    right: 0
-
 
 //****************
 // PRIMARY LINKS *
@@ -386,59 +344,18 @@ $icon-avatar-std-size: em(32px)
         width: 48%
         &:nth-child(2n)
             padding-left: $small
-    .main-nav__section__trigger
-        padding-right: em(26px)
-        background-position: right center
-    +respond-max($nav__break__full-menu)
-        .main-nav__section__trigger
-            background: none
-
-
-//*********
-// SEARCH *
-//*********
-
-.main-nav__search
-    input
-        font-size: $font-s
-        vertical-align: middle
-        border: none
-        padding: 0 $thin
-        height: $nav__row-height - $thin
-    input[type=text]
-        color: $white
-        background-color: $grey--mid
-    input[type=submit]
-        color: $white
-        background-color: $grey
-        padding: 0 $small
-    +respond-min($nav__break__full-menu)
-        &.has-open-menu
-            border-left: none
-        .main-nav__section__content
-            top: 0
-            right: 100%
-            white-space: nowrap
-            line-height: inherit
-            padding: 0
-        .main-nav__section__trigger
-            +hide-text
-            background-position: center center
-            width: em(18px)
-    +respond-max($nav__break__full-menu)
-        .main-nav__section__trigger
-            background: none
-
 
 //************
 // COMMUNITY *
 //************
 
-.main-nav__community__icon
+.main-nav__avatar
     +inline-block
     vertical-align: middle
     width: $icon-avatar-std-size
     height: $icon-avatar-std-size
+    color: $grey--light
+    background-color: #ababab
     background-repeat: no-repeat
     background-position: 50% 38% // golden ratio for portrait pictures
     +background-size(cover)
@@ -453,13 +370,17 @@ $icon-avatar-std-size: em(32px)
     float: right
 
 .main-nav__sharing__item
-    +hide-text
     float: left
     width: $nav__row-height
     height: $nav__row-height
     border-left: $nav__section-border
-    +box-sizing(content-box)
-    background-position: center center
+    text-align: center
     +transition(background-color)
     +on-interaction
         background-color: $grey--mid
+
+.main-nav__sharing-icon
+    color: $white
+    max-width: em(19px)
+    max-height: em(19px)
+    vertical-align: middle

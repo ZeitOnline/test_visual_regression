@@ -30,3 +30,21 @@ def test_campus_article_should_use_default_topiclinks_of_hp(application):
     hp_topiclink = zeit.web.core.interfaces.ITopicLink(context)
 
     assert article_topiclink == hp_topiclink
+
+
+def test_follow_us_has_correct_source(testbrowser):
+    select = testbrowser('campus/centerpage/teaser-follow-us').cssselect
+    kicker = select('.teaser-follow-us__packshot .packshot__kicker')
+    title = select('.teaser-follow-us__packshot .packshot__title')
+    cta = select('.teaser-follow-us__packshot .packshot__cta')
+    img = select('.packshot__media > noscript')
+
+    # assert packshot
+    assert kicker[0].text == 'Das aktuelle Heft /'
+    assert title[0].text == 'ZEIT CAMPUS 1/2016'
+    assert 'Jetzt bestellen' in cta[0].text_content()
+    assert 'portrait' in img[0].attrib['data-src']
+
+    # check presence of the rest
+    assert len(select('.abo-cta')) == 1
+    assert len(select('.follow-us')) == 1

@@ -327,7 +327,6 @@ def test_block_infobox_should_contain_expected_structure(tplbrowser):
 def test_block_inlinegallery_should_contain_expected_structure(tplbrowser):
     view = mock.Mock()
     view.package = 'zeit.web.site'
-    block = mock.Mock()
     block = {}
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/inlinegallery.html', block=block,
@@ -469,3 +468,26 @@ def test_find_nextread_from_correct_ressort_if_subressort_has_same_name(
 def test_find_nextread_does_not_break_on_umlauts(application):
     # Assert nothing raised
     zeit.web.core.block.find_nextread_folder(u'Deutschländ', u'Datenschütz')
+
+
+def test_paragraph_should_have_expected_length():
+    model_block = mock.Mock()
+    model_block.xml = lxml.etree.fromstring(u'<p>foo <b>baa</b></p>')
+    p = zeit.web.core.block.Paragraph(model_block)
+    assert len(p) == 7
+
+    model_block = mock.Mock()
+    model_block.xml = lxml.etree.fromstring(u'<p>ü</p>')
+    p = zeit.web.core.block.Paragraph(model_block)
+    assert len(p) == 1
+
+    model_block = mock.Mock()
+    model_block.xml = lxml.etree.fromstring(u'<p></p>')
+    p = zeit.web.core.block.Paragraph(model_block)
+    assert len(p) == 0
+
+    model_block = mock.Mock()
+    model_block.xml = lxml.etree.fromstring(
+        u'<p><strong><em>foo</em></strong></p>')
+    p = zeit.web.core.block.Paragraph(model_block)
+    assert len(p) == 3

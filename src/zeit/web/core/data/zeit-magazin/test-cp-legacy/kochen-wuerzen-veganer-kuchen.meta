@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:">
+  <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZMLB-2014-17-Genieen-Jason-Lowe-17</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">2111151</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="publish_job_id">1595779836</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Elisabeth Raether</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">article</attribute>
+  <rankedTags ns="">
+    <tag>Gew&#xFC;rze</tag>
+    <tag>Kochrezept</tag>
+    <tag>Kochen</tag>
+    <tag>vegan</tag>
+    <tag>Dessert</tag>
+  </rankedTags>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">Genie&#xDF;en_Jason Lowe 17</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-17T16:32:21.713556+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">4191</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">17</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">zeitmagazin</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">geschichte</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Magazin</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">Archivfreigabe</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="disabled"> f887047f-c2a3-4fa9-8ba9-05d5d2ea7976</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="pinned">fd6cb52c-a076-4d7e-9208-2d0fde5df477 d7701afc-a69c-4d8f-9aed-423278121c13 ed546578-e0a4-4388-abd6-53d590dbf664 fc7418e9-7bef-42cd-922b-af3249bae1a8</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZMLB-2014-17</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-04-17T16:50:21.949202+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:47f47599-8e6d-4e8e-adee-1b88dacbce76}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1378993011928</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">essen-trinken</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">16.04.2014</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">36</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">Genie&#xDF;en_Jason Lowe 17</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.milbradt</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2014-04-17T16:50:22Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">20372</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Thu, 17 Apr 2014 16:50:22 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"361a9a-4f94-4f73fd435698d"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <rankedTags ns="">
+    <tag>Gew&#xFC;rze</tag>
+    <tag>Kochrezept</tag>
+    <tag>Kochen</tag>
+    <tag>vegan</tag>
+    <tag>Dessert</tag>
+  </rankedTags>
+</head>

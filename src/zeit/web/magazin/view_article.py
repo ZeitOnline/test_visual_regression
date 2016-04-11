@@ -47,16 +47,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
             return
 
     @zeit.web.reify
-    def nextread(self):
-        nextread = super(Article, self).nextread
-        # XXX Ugly hack to register CRs.
-        if nextread.layout.id != 'minimal':
-            for i in zeit.web.core.interfaces.ITeaserSequence(nextread):
-                i.image and self._copyrights.setdefault(
-                    i.image.image_group, i.image)
-        return nextread
-
-    @zeit.web.reify
     def genre(self):
         prefix = 'ein'
         if self.context.genre in (
@@ -85,10 +75,7 @@ class LongformArticle(Article):
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            img = self._create_obj(zeit.web.core.block.HeaderImage, obj)
-            if img:
-                self._copyrights.setdefault(img.uniqueId, img)
-            return img
+            return self._create_obj(zeit.web.core.block.HeaderImage, obj)
 
     @zeit.web.reify
     def adwords(self):
