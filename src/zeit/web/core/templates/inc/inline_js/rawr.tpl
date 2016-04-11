@@ -1,15 +1,10 @@
-{# TODO: rawr toggelbar machen? Hat das einen Wert? #}
+{# TODO: Should rawr be toggle-able? #}
 <script type="text/javascript">
-{# A RawrConfig object must be accessible in the global JavaScript namespace.
- # It must contain the key 'location_metadata', which must be JSON
- # conform and serializable.
- # Date and time formats must be ISO 8601 formatted.
- #}
-
 {% set string_joiner = '\', \'' | safe %}
 
-window.RawrConfig = {
-    location_metadata: {
+window.rawrConfig = {
+{% if provides(view.context, 'zeit.cms.content.interfaces.ICommonMetadata') %}
+    locationMetaData: {
         'article_id': '{{ view.content_path }}',
         'published': '{{ view.date_last_published_semantic | format_date('iso8601') }}',
         'description': '{{ view.title }}',
@@ -24,5 +19,6 @@ window.RawrConfig = {
             'description': '{{ view.title }}'
         }
     }
+{% endif %}
 };
 </script>

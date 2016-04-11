@@ -130,6 +130,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/article-htmlblock-layouts.xml'),
         'vivi_zeit.content.article_template-source': (
             'egg://zeit.web.core/data/config/article-templates.xml'),
+        'vivi_zeit.campus_article-stoa-source': (
+            'egg://zeit.web.core/data/config/article-stoa.xml'),
         'vivi_zeit.magazin_article-related-layout-source': (
             'egg://zeit.web.core/data/config/article-related-layouts.xml'),
         'vivi_zeit.content.cp_block-layout-source': (
@@ -179,6 +181,7 @@ def app_settings(mockserver):
             'egg://zeit.push.tests/fixtures/facebook-accounts.xml'),
         'vivi_zeit.push_facebook-main-account': 'fb-test',
         'vivi_zeit.push_facebook-magazin-account': 'fb-magazin',
+        'vivi_zeit.push_facebook-campus-account': 'fb-campus',
         'vivi_zeit.brightcove_read-url': mockserver.url + '/video/bc.json',
         'vivi_zeit.brightcove_write-url': mockserver.url + '/video/bc.json',
         'vivi_zeit.brightcove_read-token': 'foo',
@@ -198,6 +201,7 @@ def app_settings(mockserver):
         'sso_activate': '',
         'sso_url': 'http://my_sso',
         'sso_cookie': 'my_sso_cookie',
+        'sso_rawr_secret': 'my_rawr_secret',
         'jinja2.show_exceptions': True,
         'jinja2.environment': 'jinja2.environment.Environment',
         'jinja2.enable_profiler': False,

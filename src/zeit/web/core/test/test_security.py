@@ -1,8 +1,9 @@
-import requests
+import json
 
 import jwt
 import mock
 import pytest
+import requests
 
 from zeit.web.core.comments import get_thread
 from zeit.web.core.security import get_user_info
@@ -222,3 +223,34 @@ def test_get_user_info_replaces_community_host(
     dummy_request.registry.settings['community_host'] = server.url
     user_info = get_user_info(dummy_request)
     assert user_info['picture'] == 'http://static_community/foo/picture.png'
+
+
+def test_rawr_config_should_contain_login_url(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+    assert driver.execute_script('return rawrConfig.loginUrl') is None
+    driver.execute_script('rawrConfig.sso()')
+    assert 'http://my_sso/anmelden' in driver.execute_script(
+        'return rawrConfig.loginUrl')
+
+
+def test_no_user_rawr_authentication_is_empty(dummy_request):
+    stuff = zeit.web.core.security._rawr_authentication(dummy_request)
+    rawr_user, rawr_signature, timestamp = stuff
+    data = json.loads(rawr_user.decode('base64'))
+    assert data == {}
+
+
+def test_rawr_authentication_encodes_json_as_base64(dummy_request):
+    dummy_request.user = {
+        'ssoid': '123',
+        'email': 'test@example.org',
+        'name': 'jrandom',
+    }
+    stuff = zeit.web.core.security._rawr_authentication(dummy_request)
+    rawr_user, rawr_signature, timestamp = stuff
+    data = json.loads(rawr_user.decode('base64'))
+    assert data == {'email': 'test@example.org', 'nickname': 'jrandom'}
+    # I guess testing the signature would mean copying the production code
+    # to the test code, which doesn't tell us anything, so we rely on
+    # manual integration tests with the actual rawr system for that.
