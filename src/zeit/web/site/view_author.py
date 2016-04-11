@@ -145,6 +145,7 @@ class Comments(Author):
 def create_author_article_area(
         context, count=None, dedupe_favourite_content=True):
     cp = zeit.content.cp.centerpage.CenterPage()
+    zope.interface.alsoProvides(cp, zeit.cms.section.interfaces.IZONContent)
     cp.uniqueId = context.uniqueId + u'/articles'
     area = cp.body.create_item('region').create_item('area')
     area.kind = 'author-articles'

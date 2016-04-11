@@ -1,0 +1,36 @@
+.teaser-fullwidth
+    @extend %teaser-large
+    display: block
+    margin-bottom: 0
+    +respond-min($break-2)
+        margin-bottom: 0
+
+    &__media
+        @extend %teaser-large__media
+        height: 0
+        padding-bottom: 100% / 3 * 4 // image variant 'portrait'
+        +respond-min($break-2)
+            padding-bottom: 100% / 16 * 9 // image variant 'wide'
+
+    &__text
+        @extend %teaser-large__text
+        text-align: center
+        padding: $thin 15% $medium 15%
+
+    &__title
+        @extend %teaser-large__title
+
+    &__subtitle
+        @extend %teaser-large__subtitle
+
+    &__kicker
+        @extend %teaser-large__kicker
+
+    &--light
+        background-color: $white
+
+    &--light &__media
+        @extend %teaser--light
+
+    &--light &__text
+        +link-colors($black, $black, $black, $black, $black)

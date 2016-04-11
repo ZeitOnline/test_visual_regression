@@ -1,0 +1,59 @@
+// basic classes for large teaser
+
+$teaser-large-video-max-width: em(1000px)
+
+%teaser-large
+    position: relative
+    margin-bottom: $small
+    background-color: $black
+    width: 100%
+    display: inline-block
+    min-height: remify(220px) // fallback for expired images
+
+    +respond-min($break-2)
+        margin-bottom: $compact
+
+%teaser-large__text
+    position: absolute
+    overflow: hidden
+    bottom: 0
+    padding: $thin 5% $medium
+    width: 100%
+    +link-colors($white, $white, $white, $white, $white)
+
+%teaser-large__title
+    display: block
+    font-size: $font-xl
+    font-weight: bold
+    letter-spacing: $hair
+    line-height: 1.25
+    margin: 0 0 $tiny
+    +respond-min($break-0)
+        font-size: $font-xxl
+    +respond-min($break-2)
+        font-size: $font-xxxl
+
+%teaser-large__subtitle
+    font-size: $font-m
+    line-height: 1.25
+    margin: 0
+    +respond-min($break-2)
+        font-size: $font-ml
+
+%teaser-large__kicker
+    display: block
+    font-size: $font-s
+    line-height: 2.25
+    +respond-min($break-2)
+        font-size: $font-ml
+
+%teaser-large__media
+    @extend %teaser--dark
+    margin: 0
+
+    // who needs this? assign individually, because this pseudo class is used a lot
+    // video
+    //     display: none
+    //     max-width: $teaser-large-video-max-width
+    //     min-height: 100%
+    //     min-width: 100%

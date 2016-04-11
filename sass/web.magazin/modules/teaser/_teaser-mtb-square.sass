@@ -1,0 +1,21 @@
+$mtb-teaser-width: remify(270px)
+$mtb-teaser-max-width: remify(320px)
+
+.teaser-mtb-square
+	@extend %teaser
+	margin: remify(0 auto 42px)
+	max-width: $mtb-teaser-max-width
+	+respond-min($break-1)
+		width: $mtb-teaser-width
+
+	&__media
+		@extend %teaser__media
+
+	&__text
+		@extend %teaser__text
+
+	&__kicker
+		@extend %teaser__kicker
+
+	&__title
+		@extend %teaser__title

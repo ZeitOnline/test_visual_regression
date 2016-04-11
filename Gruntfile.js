@@ -12,9 +12,7 @@ module.exports = function(grunt) {
             production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy', 'svg' ],
             development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
-            svg: [ 'clean:icons', 'clean:symbols', 'svgmin', 'grunticon', 'svgstore' ],
-            icons: [ 'clean:icons', 'svgmin:magazinIcons', 'grunticon:magazin' ],
-            symbols: [ 'clean:symbols', 'svgmin:site', 'svgmin:magazin', 'svgstore:site', 'svgstore:magazin', 'grunticon:site', 'grunticon:magazin' ],
+            svg: [ 'clean:svg', 'svgmin', 'svgstore', 'grunticon' ],
             css: [ 'compass:dist', 'compass:amp' ],
             lint: [ 'jshint', 'jscs' ]
         }
@@ -229,13 +227,15 @@ module.exports = function(grunt) {
                 force: true
             },
             // cleanup minified SVGs, remove orphaned files
-            icons: [ project.sourceDir + 'sass/web.*/icons/_minified' ],
-            symbols: [ project.sourceDir + 'sass/web.*/svg*/_minified' ],
+            svg: [ project.sourceDir + 'sass/web.*/**/_minified' ],
             // delete old vendor scripts
             scripts: [ project.sourceDir + 'javascript/vendor' ],
             sass: [ project.sourceDir + 'sass/vendor' ],
             // delete unused directories
-            legacy: [ project.sourceDir + 'sass/web.*/icons-minified' ]
+            legacy: [
+                project.sourceDir + 'sass/web.*/icons',
+                project.sourceDir + 'sass/web.*/icons-minified'
+            ]
         },
 
         svgmin: {
@@ -256,13 +256,6 @@ module.exports = function(grunt) {
                 cwd: project.sourceDir + 'sass/web.magazin/svg',
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.magazin/svg/_minified'
-            },
-            // while grunticon is still used for background-image svgs ("Parallelbetrieb"), this extra task is needed
-            magazinIcons: {
-                expand: true,
-                cwd: project.sourceDir + 'sass/web.magazin/icons',
-                src: [ '*.svg' ],
-                dest: project.sourceDir + 'sass/web.magazin/icons/_minified'
             },
             magazinAmp: {
                 expand: true,
@@ -299,8 +292,8 @@ module.exports = function(grunt) {
             magazin: {
                 files: [{
                     expand: true,
-                    cwd: project.sourceDir + 'sass/web.magazin',
-                    src: [ './svg/*.svg', './icons/*.svg' ],
+                    cwd: '<%= svgmin.magazin.dest %>',
+                    src: [ '*.svg' ],
                     dest: project.codeDir + 'css/icons'
                 }],
                 options: {
@@ -353,7 +346,7 @@ module.exports = function(grunt) {
                 //     viewBox : '0 0 100 100',
                 //     xmlns: 'http://www.w3.org/2000/svg'
                 // },
-                cleanup: [ 'fill' ],
+                cleanup: [ 'fill', 'fill-opacity', 'stroke', 'stroke-width' ],
                 includedemo: true,
                 formatting: {
                     indent_size: 1,
@@ -427,20 +420,8 @@ module.exports = function(grunt) {
                     }
                 },
             },
-            icons: {
-                files: [ '<%= svgmin.magazin.cwd %>/*.svg' ],
-                tasks: [ 'icons' ],
-                options: {
-                    // needed to call `grunt watch` from outside zeit.web
-                    // the watch task runs child processes for each triggered task
-                    cwd: {
-                        files: __dirname,
-                        spawn: __dirname
-                    }
-                }
-            },
             svg: {
-                files: [ project.sourceDir + 'sass/web.*/**/*.svg' ],
+                files: [ '<%= svgmin.magazin.cwd %>/*.svg', '<%= svgmin.site.cwd %>/*.svg' ],
                 tasks: [ 'svg' ],
                 options: {
                     // needed to call `grunt watch` from outside zeit.web
@@ -503,8 +484,6 @@ module.exports = function(grunt) {
     grunt.registerTask('dev', project.tasks.development);
     grunt.registerTask('docs', project.tasks.docs);
     grunt.registerTask('svg', project.tasks.svg);
-    grunt.registerTask('icons', project.tasks.icons);
-    grunt.registerTask('symbols', project.tasks.symbols);
     grunt.registerTask('css', project.tasks.css);
     grunt.registerTask('lint', project.tasks.lint);
 

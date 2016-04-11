@@ -1,5 +1,4 @@
 import datetime
-import itertools
 import logging
 import re
 
@@ -37,7 +36,6 @@ class Article(zeit.web.core.view.Content):
 
     def __init__(self, *args, **kwargs):
         super(Article, self).__init__(*args, **kwargs)
-        self._copyrights = {}
         self.context.advertising_enabled = self.banner_on
         self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
@@ -52,10 +50,6 @@ class Article(zeit.web.core.view.Content):
             self.context.main_image_block, None)
         if img is not None:
             img.itemprop = 'image'
-        try:
-            self._copyrights.setdefault(img.uniqueId, img)
-        except AttributeError:
-            pass
         return img
 
     @zeit.web.reify
@@ -175,13 +169,7 @@ class Article(zeit.web.core.view.Content):
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            img = zeit.web.core.block.HeaderImageStandard(obj)
-            if img:
-                try:
-                    self._copyrights.setdefault(img.uniqueId, img)
-                except AttributeError:
-                    pass
-            return img
+            return zeit.web.core.block.HeaderImageStandard(obj)
 
     @zeit.web.reify
     def header_video(self):
@@ -262,27 +250,6 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def is_amp(self):
         return self.context.is_amp
-
-    @property
-    def copyrights(self):
-        for i in (self.is_longform and itertools.chain(*self.pages) or
-                  self.current_page):
-            if hasattr(i, 'copyright') and hasattr(i, 'uniqueId'):
-                self._copyrights.setdefault(i.uniqueId, i)
-
-        cr_list = []
-        for i in self._copyrights.itervalues():
-            if i.copyright and len(i.copyright[0][0]) > 1:
-                cr_list.append(
-                    dict(
-                        label=i.copyright[0][0],
-                        image=zeit.web.core.template.create_url(
-                            None, i.src, self.request),
-                        link=i.copyright[0][1],
-                        nofollow=i.copyright[0][2]
-                    )
-                )
-        return sorted(cr_list, key=lambda k: k['label'])
 
 
 @view_config(route_name='amp',

@@ -566,7 +566,7 @@ def test_module_printbox_should_contain_teaser_image(
     assert isinstance(printbox.image, zeit.content.image.image.RepositoryImage)
 
 
-def test_homepage_indentifies_itself_as_homepage(testserver):
+def test_homepage_identifies_itself_as_homepage(testserver):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
     request = pyramid.testing.DummyRequest()

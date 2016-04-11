@@ -1,0 +1,26 @@
+.teaser-print-cover
+	@extend %teaser
+	background-color: $grey--mid-dark // fallback for expired images
+
+	&__media
+		@extend %teaser--dark
+		margin: 0
+
+	&__text
+		@extend %teaser__text
+		bottom: 0
+		padding: remify(6px 20px 28px)
+		position: absolute
+
+	&__kicker
+		@extend %teaser__kicker
+		color: $white
+		letter-spacing: normal
+		margin-bottom: remify(6px)
+
+	&__title
+		@extend %teaser__title
+		+font-smoothing
+		color: $white
+		margin: 0
+		text-shadow: rgba(255, 255, 255, .01) 0 -1px 1px

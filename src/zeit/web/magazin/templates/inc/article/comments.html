@@ -1,3 +1,4 @@
+{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 {% if view.linkreach or view.commenting_allowed or view.comments %}
 	<div class="article__socialbox" id="js-social-services">
 	{% if view.linkreach %}
@@ -10,17 +11,18 @@
 		{% endif %}
 			<div class="article__sharing__services blind">
 				<a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.int.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_int&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
-					<span class="article__sharing__services__icon icon-sharebox-facebook"></span>
+					{{ lama.use_svg_icon('sharebox-facebook', 'article__sharing-icon', request) }}
 					<span class="article__sharing__services__text">{{ view.linkreach.facebook.total | unitize }}</span>
 				</a>
 				<a href="https://plus.google.com/share?url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.gplus.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=gplus_zonaudev_int&utm_campaign=gplus_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
-					<span class="article__sharing__services__icon icon-sharebox-google"></span>
+					{{ lama.use_svg_icon('sharebox-google', 'article__sharing-icon', request) }}
 					<span class="article__sharing__services__text">{{ view.linkreach.googleplus.total | unitize }}</span>
 			   </a>
 			</div>
 			<div class="article__sharing__item">
-				<a class="article__sharing__link js-toggle-sharing">
-					<span class="article__sharing__icon icon-sharebox-share"></span>
+				<a class="article__sharing__link js-toggle-sharing" title="Teilen">
+					{{ lama.use_svg_icon('sharebox-share', 'article__sharing-icon article__sharing-icon--open-close', request) -}}
+					{{ lama.use_svg_icon('sharebox-close', 'article__sharing-icon article__sharing-icon--open-close article__sharing-icon--close', request) -}}
 					Teilen
 				</a>
 			</div>
@@ -30,7 +32,8 @@
 	{% if view.commenting_allowed or view.comments %}
 		<div class="article__comments-trigger">
 			<a class="article__comments-trigger__link js-comments-trigger">
-				<span class="article__comments-trigger__count icon-sharebox-close">{{ view.comments.comment_count | default(0) }}</span>
+				{{ lama.use_svg_icon('sharebox-close', 'article__sharing-icon article__sharing-icon--comment-close', request) -}}
+				<span class="article__comments-trigger__count">{{ view.comments.comment_count | default(0) }}</span>
 				<span class="article__comments-trigger__text">{% if view.comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
 			</a>
 		</div>
@@ -120,16 +123,16 @@
 					</div>
 				</div>
 				<div class="comments__button__newer" id="js-comments-button-up">
-					<div class="button icon-comments-newer js-scroll-comments" data-direction="up">Neuere</div>
+					<div class="button js-scroll-comments" data-direction="up">{{ lama.use_svg_icon('comments-newer', 'comments__icon comments__icon--newer', request) }}Neuere</div>
 				</div>
 			</div>
 		</div>
 		<div class="comments__button__older" id="js-comments-button-down">
-			<div class="button icon-comments-older js-scroll-comments" data-direction="down">Ältere</div>
+			<div class="button js-scroll-comments" data-direction="down">{{ lama.use_svg_icon('comments-older', 'comments__icon comments__icon--older', request) }}Ältere</div>
 		</div>
 		<script type="text/template" id="js-report-success-template">
 			<div class="comment__form__success">
-				<span class="comment__icon--40 icon-check-kommentar-gesendet"></span>
+				{{ lama.use_svg_icon('check-comment-sent', 'comment__check-icon', request) }}
 				<div class="comment__form__success__text">Danke! Ihre Meldung wird an die Redaktion weitergeleitet.</div>
 			</div>
 		</script>

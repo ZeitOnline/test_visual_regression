@@ -48,7 +48,6 @@
 		right: 0;
 		top: 0;
 		width: 100%;
-		z-index: 1;
 		@include background-image(linear-gradient($direction, rgba($color, $alpha_start) 0%, rgba($color, $alpha_stop) $length));
 	}
 }
