@@ -39,7 +39,7 @@
         {% set updated = cp.include_teaser_datetime(teaser, blockname, blockname) %}
         {% if updated %}
             <span class="{{ '{}__update'.format(blockname) | with_mods(blockname_modifier) }}">
-                {{ lama.use_svg_icon('storystream-updated', 'teaser-storystream__updateicon', request) }}
+                {{ lama.use_svg_icon('storystream-updated', 'teaser-storystream__updateicon', view.package) }}
                 Aktualisiert {{ updated }}
             </span>
         {% endif %}

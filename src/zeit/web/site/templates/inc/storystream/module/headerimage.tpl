@@ -19,7 +19,7 @@
                 <time itemprop="datePublished" datetime="{{ view.date_first_released | format_date('iso8601') }}"></time>
                 {% if view.date_last_modified %}
                 	<span class="{{ blockname }}__update">
-                        {{ lama.use_svg_icon('storystream-updated', 'storystream-headerimage__updateicon', request) }}
+                        {{ lama.use_svg_icon('storystream-updated', 'storystream-headerimage__updateicon', view.package) }}
                         Zuletzt aktualisiert am
                         <time class="{{ blockname }}__date" itemprop="dateModified" datetime="{{ view.date_last_modified | format_date('iso8601') }}">
                             {{- view.date_last_modified | format_date('short') -}}

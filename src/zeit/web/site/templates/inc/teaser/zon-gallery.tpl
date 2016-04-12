@@ -13,7 +13,7 @@
 	<div class="{{ self.layout() }}__figurewrapper">
 		{% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" %}
 
-		{{ lama.use_svg_icon('gallery', '{}__icon'.format(self.layout()), request) }}
+		{{ lama.use_svg_icon('gallery', '{}__icon'.format(self.layout()), view.package) }}
 
 		<small class="{{ self.layout() }}__counter">
 			{{ teaser.keys() | list | length | pluralize('Keine Fotos', 'Ein Foto', '{} Fotos') }}

@@ -7,7 +7,7 @@
         </span>
     {% else %}
         <a class="parquet-meta__title parquet-meta__title--zmo" href="{{ area.referenced_cp.uniqueId | create_url }}">
-            {{ lama.use_svg_icon('logo-zmo', 'parquet-meta__logo parquet-meta__logo--zmo', request) }}
+            {{ lama.use_svg_icon('logo-zmo', 'parquet-meta__logo parquet-meta__logo--zmo', view.package) }}
         </a>
     {% endif %}
 {% endblock area_title %}

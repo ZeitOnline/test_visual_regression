@@ -21,7 +21,7 @@
 			different versions of this area that will still be varnish-cacheable.
 			The actual value will be set via JS just before the request. #}
 			data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p=">
-			{{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), request) }}Weitere laden
+			{{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), view.package) }}Weitere laden
 		</a>
 	{% endif %}
 {% endblock %}
