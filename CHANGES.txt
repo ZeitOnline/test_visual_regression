@@ -1,7 +1,25 @@
 Change log for zeit.web
 =======================
 
-2.71 (unreleased)
+2.72 (unreleased)
+-----------------
+
+- HOTFIX: Add more space to ZMO comment counter
+
+- HOTFIX: Make images in parquet feeds (spektrum, zett) work again
+
+- HOTFIX: Make old-style <intial> paragraphs work again
+
+- BUG-377: Ensure correct sort order for search result area
+
+
+2.71.1 (2016-04-11)
+-------------------
+
+- HOTFIX: Include ad-tile in ZMO minor
+
+
+2.71 (2016-04-11)
 -----------------
 
 - ZON-1626: Update ZMO-CPs to the z.c.cp-3.x data model,
@@ -9,8 +27,6 @@ Change log for zeit.web
 
 - ZON-2878: Allow specifying a background color for teaser images with
             transparent backgrounds
-
-- BUG-377: Ensure correct sort order for search result area
 
 
 2.70 (2016-04-11)

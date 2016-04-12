@@ -1,0 +1,9 @@
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
+{% import "zeit.web.core:templates/macros/layout_macro.tpl".format(view.package) as lama %}
+
+{% block after_module_include %}
+    {# erste Minor-Region, nach dem 2. Teaser #}
+    {% if module_loop.index == 2 %}
+        {{ lama.adplace(view.banner(7), view) }}
+    {% endif %}
+{% endblock %}
