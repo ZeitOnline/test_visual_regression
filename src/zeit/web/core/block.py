@@ -49,7 +49,7 @@ class Paragraph(Block):
             xslt_result = _inline_html(self.model_block.xml, elements=['p'])
             text = u''.join(xslt_result.xpath('//text()'))
             return len(text.replace('\n', '').strip())
-        except (AttributeError, lxml.etree.XMLSyntaxError):
+        except:
             return 0
 
     def __str__(self):
