@@ -76,12 +76,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         (u'date_last_published', u'date_last_published_semantic'),
     ]
 
-    sort_order = zeit.cms.content.property.ObjectPathProperty(
-        '.sort_order', IRanking['sort_order'])
-
-    raw_query = zeit.cms.content.property.ObjectPathProperty(
-        '.raw_query', IRanking['raw_query'])
-
     _hits = zeit.cms.content.property.ObjectPathAttributeProperty(
         '.', 'hits', IRanking['hits'])
 
@@ -90,6 +84,10 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     def __init__(self, context):
         super(Ranking, self).__init__(context)
         self.request = pyramid.threadlocal.get_current_request()
+        centerpage = zeit.content.cp.interfaces.ICenterPage(context)
+        module = zeit.web.core.utils.find_block(
+            centerpage, module='search-form')
+        self.search_form = zeit.web.core.template.get_module(module)
 
     def values(self):
         return self._values
@@ -97,6 +95,21 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     @zeit.web.reify
     def _values(self):
         return super(Ranking, self).values()
+
+    @property
+    def raw_query(self):
+        if self.search_form:
+            return self.search_form.raw_query
+
+    @property
+    def raw_order(self):
+        if self.search_form:
+            return self.search_form.raw_order
+
+    @property
+    def sort_order(self):
+        if self.search_form:
+            return self.search_form.sort_order
 
     @property
     def hide_dupes(self):

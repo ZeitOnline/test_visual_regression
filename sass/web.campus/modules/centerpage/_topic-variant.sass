@@ -1,63 +1,64 @@
 .teaser-topic-variant
+	@extend %teaser
 	+clearfix
 	position: relative
-	padding-top: remify(25px) // use padding to center label vertically
+	padding: remify(25px 0 $page-padding--small) // use padding to center label vertically
 	margin-top: $page-padding--small // use margin to adjust teaser in cp design
 
 	&__media
-		background-color: $greyish-white
-		height: 0
+		@extend %teaser-media
+		overflow: hidden
 		padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
-		width: 100%
 
-
-.teaser-topic-variant-list
-	border-bottom: 1px solid $color-border
 
 .teaser-topic-variant-main
-	+font-smoothing
+	+transform(translateX(-50%))
+	left: 50%
 	position: absolute
 	top: 0
-	left: 50%
-	+transform(translateX(-50%))
-	background-color: $primary-color
-	padding: remify(10px) remify(15px)
 
 	&__heading
 		@extend %font-beckett
-		margin: 0
-		padding: 0
+		+font-smoothing
+		background-color: $color-background--dark
+		color: $white
+		display: inline-block
 		font-size: remify(26px)
-		a
-			color: $white
+		margin: 0
+		padding: remify(10px 15px)
 
 	&__kicker
+		color: $white
 		vertical-align: sub
 
 
 +respond-min($break-tablet-min)
 	.teaser-topic-variant
-		margin: $cp-padding*2
+		margin: $page-padding
 		padding: 0
 		&__media
 			width: 50%
+			width: calc(50% - #{$cp-padding})
 			float: left
 			padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4), refers to half-width
 
 	.teaser-topic-variant-list
-		padding-top: remify(130px)
-		padding-left: $vertical-space
-		border: none
-		float: left
+		padding: remify(20px) 0 0 $cp-padding
+		float: right
 		width: 50%
 
 	.teaser-topic-variant-main
-		top: remify(15px)
-		+transform(translateX(-20px))
-		padding: remify(10px 25px)
+		+transform(none)
+		position: static
+		margin-left: remify(-40px)
+
 		&__heading
 			font-size: remify(36px)
+			padding: remify(8px 20px)
 
 +respond-min($break-desktop-min)
 	.teaser-topic-variant-main
-		+transform(translateX(-25px))
+		margin-left: remify(-45px)
+
+		&__heading
+			padding: remify(14px 25px)
