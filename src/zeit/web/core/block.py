@@ -46,7 +46,8 @@ class Paragraph(Block):
 
     def __len__(self):
         try:
-            xslt_result = _inline_html(self.model_block.xml, elements=['p'])
+            xslt_result = _inline_html(
+                self.model_block.xml, elements=['p', 'initial'])
             text = u''.join(xslt_result.xpath('//text()'))
             return len(text.replace('\n', '').strip())
         except:
