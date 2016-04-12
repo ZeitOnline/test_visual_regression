@@ -566,7 +566,7 @@ def test_module_printbox_should_contain_teaser_image(
     assert isinstance(printbox.image, zeit.content.image.image.RepositoryImage)
 
 
-def test_homepage_indentifies_itself_as_homepage(testserver):
+def test_homepage_identifies_itself_as_homepage(testserver):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
     request = pyramid.testing.DummyRequest()
@@ -1675,6 +1675,15 @@ def test_zett_parquet_should_link_to_zett(testbrowser):
             '&utm_source=zon') == link_logo.attrib['href']
     assert ('http://ze.tt/?utm_campaign=zonparkett&utm_medium=parkett'
             '&utm_source=zon') == link_more.attrib['href']
+
+
+def test_zett_parquet_should_have_ads(testbrowser):
+    browser = testbrowser('/zeit-online/parquet-feeds')
+    ad = browser.cssselect(
+        'article[data-unique-id="http://ze.tt/wichtiges-vom-'
+        'wochenende-update-32/"] .teaser-small__label')[0]
+
+    assert ad.text == 'Anzeige'
 
 
 def test_imagecopyright_tags_are_present_on_centerpages(testbrowser):

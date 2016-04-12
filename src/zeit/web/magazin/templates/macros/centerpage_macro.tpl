@@ -42,8 +42,6 @@
             {% include ['zeit.web.magazin:templates/inc/teaser/' + prefix + module.layout.id + '.tpl',
             'zeit.web.magazin:templates/inc/teaser/default.tpl'] ignore missing %}
         {% endfor %}
-    {% elif module.type == 'fullgraphical' %}
-        {% include 'zeit.web.magazin:templates/inc/teaser/' + prefix + module.type + '.tpl' %}
     {% endif %}
 {%- endmacro %}
 
@@ -53,44 +51,6 @@
             {{ lama.adplace(view.banner(7), view) }}
         {% endif %}
     </div>
-{%- endmacro %}
-
-{% macro comment_count(comment, url) -%}
-    {% if comment %}
-        <a href="{{ url }}#show_comments">
-            <span class="cp_comment__count__wrap icon-comments-count">{{ comment }}</span>
-        </a>
-    {% endif %}
-{%- endmacro %}
-
-{% macro teaser_text_block(teaser, block='leader', shade='none', supertitle=true, subtitle=true, icon=false) -%}
-    <header class="cp_{{block}}__title__wrap cp_{{block}}__title__wrap--{{ shade }}">
-        <a href="{{teaser | create_url}}">
-            {% if icon == 'true' and (teaser | block_type) == 'gallery'
-               and teaser.type != 'zmo-product'%}
-                <span class="icon-galerie-icon-white"></span>
-            {% endif %}
-            <h2>
-                {% if supertitle != 'false' %}
-                    <div class="cp_{{block}}__supertitle">
-                        {% if teaser.teaserSupertitle %}
-                            {{ teaser.teaserSupertitle }}
-                        {% elif teaser.supertitle %}
-                            {{ teaser.supertitle }}
-                        {% endif %}
-                    </div>
-                {% endif %}
-                <div class="cp_{{block}}__title">
-                    {{ teaser.teaserTitle }}
-                </div>
-            </h2>
-            {% if subtitle != 'false' %}
-                <span class="cp_{{block}}__subtitle">
-                    {{ teaser.teaserText }}
-                </span>
-            {% endif %}
-        </a>
-    </header>
 {%- endmacro %}
 
 {% macro teaser_sharing_card(teaser) -%}
@@ -112,26 +72,32 @@
     </div>
 {%- endmacro %}
 
-{% macro teaser_card_front_action(action, url) -%}
-    {% if action == 'flip' %}
-        <a href="{{url}}" class="card__button js-flip-card">Drehen</a>
-    {% elif action == 'share' %}
-            <a href="{{url}}" class="card__button js-slide-card">Teilen</a>
-    {% else %}
-        <a href="{{url}}" class="card__button">Lesen</a>
-    {% endif %}
-{%- endmacro %}
-
-{% macro teaser_card_back_action(action, url) -%}
-    {% if action == 'flip' %}
-        <a href="{{url}}" class="card__button js-flip-card">Drehen</a>
-    {% elif  action == 'share' %}
-        <a href="{{url}}" class="card__button js-slide-card js-stop-propagation">Teilen</a>
-    {% else %}
-        <a href="{{url}}" class="card__button js-stop-propagation">Lesen</a>
-    {% endif %}
-{%- endmacro %}
 
 {% macro advertorial_modifier(product_text, is_advertorial) -%}
     {% if (product_text == 'Advertorial' and not is_advertorial) %} is-advertorial{% endif %}
+{%- endmacro %}
+
+{% macro headervideo_linked(obj, wrap_class='article__main-video--longform', img_class='', href='') -%}
+
+    {% if obj.id is not defined and obj.uniqueId -%}
+        {% set id = obj.uniqueId | substring_from('/') %}
+    {% elif obj.id -%}
+        {% set id = obj.id %}
+    {% endif %}
+
+    {% if id %}
+        <div data-backgroundvideo="{{ id }}" class="{{ wrap_class }}">
+            {% if href %}
+            <a href="{{ href }}">
+            {% endif %}
+                <video preload="auto" loop="loop" muted="muted" volume="0" poster="{{ obj.video_still }}">
+                    <source src="{{ obj.highest_rendition }}" type="video/mp4">
+                    <source src="http://live0.zeit.de/multimedia/videos/{{ id }}.webm" type="video/webm">
+                </video>
+                <img class="video--fallback {{ img_class }}" src="http://live0.zeit.de/multimedia/videos/{{ id }}.jpg" alt="Video: {{ obj.title }}" title="Video: {{ obj.title }}">
+            {% if href %}
+            </a>
+            {% endif %}
+        </div>
+    {% endif %}
 {%- endmacro %}

@@ -79,11 +79,11 @@ def test_comment_count_should_fallback_to_zero_if_count_unavailable(
     </nodes>""")
 
     browser = testbrowser('/json/comment_count?unique_id=' +
-                          NS + 'zeit-magazin/test-cp/test-cp-zmo-3')
+                          NS + 'zeit-magazin/misc')
 
     assert 'comment_count' in browser.json
     cc = browser.json['comment_count']
-    assert cc[NS + 'zeit-magazin/test-cp/essen-geniessen-spargel-lamm'] == (
+    assert cc[NS + 'zeit-magazin/article/essen-geniessen-spargel-lamm'] == (
         'Keine Kommentare')
 
 

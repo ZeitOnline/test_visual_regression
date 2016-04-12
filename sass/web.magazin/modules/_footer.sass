@@ -1,17 +1,22 @@
 .main-footer
     background-color: $grey--mid-dark
     font-family: $font-tabletgothic
-    padding: $petite $small $medium
-    +padded
+    padding-top: $petite
+    padding-bottom: $medium
 
 .main-footer__box
     +clearfix
+    padding-left: $page-padding--small
+    padding-right: $page-padding--small
+    +respond-min($break-2)
+        padding-left: 0
+        padding-right: 0
 
 .main-footer__logo
-    +background-size(contain)
     width: 41px
     height: 20px
     margin: $micro $little $compact 0
+    color: white
     opacity: 0.3
 
 .main-footer__links

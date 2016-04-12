@@ -1,0 +1,37 @@
+
+.teaser-upright
+    @extend %teaser
+    background-color: $grey--mid-dark // fallback for expired images
+
+    &__media
+        @extend %teaser--dark
+        height: 0
+        margin: 0
+        padding-bottom: 100% / 4 * 5 // image variant 'tile'
+
+    &__text
+        @extend %teaser__text
+        bottom: 0
+        padding: remify(6px 20px 28px)
+        position: absolute
+
+    &__kicker
+        @extend %teaser__kicker
+        color: $white
+        letter-spacing: normal
+        margin-bottom: remify(6px)
+
+    &__title
+        @extend %teaser__title
+        +font-smoothing
+        color: $white
+        margin: 0
+        text-shadow: rgba(255, 255, 255, .01) 0 -1px 1px
+
+    &__gallery-icon
+        color: rgba(0, 0, 0, 0.2)
+        height: remify(29px)
+        margin-bottom: remify(8px)
+        stroke-width: 2px
+        stroke: $white
+        width: remify(40px)

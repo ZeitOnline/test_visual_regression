@@ -1,0 +1,118 @@
+$card-button-width: 8em
+$card-rotate-y: -180deg
+
+.teaser-card
+	margin-bottom: 1.75em
+	width: 100%
+	+respond-min($break-2)
+		.cp-area--trio > &
+			width: remify(270px)
+
+.card__wrap
+	max-width: 320px
+	margin: 0 auto
+
+.card__deck
+	font-family: $font-tabletgothic
+	width: 100%
+	padding-bottom: 150%
+	position: relative
+	text-align: center
+	+perspective(1000px)
+
+	&.js-flipped .card--front
+		+transform(rotateY(0deg + $card-rotate-y))
+	&.js-flipped .card--back
+		+transform(rotateY(180deg + $card-rotate-y))
+	&.js-slid .card__slide
+		bottom: 0
+
+// IE fallback
+.lt-ie10
+	.card__deck.js-flipped .card--front
+		display: none
+
+.card,
+.card__slider,
+.card__slide
+	position: absolute
+	width: 100%
+	height: 100%
+	&:focus
+		outline: none
+
+.card
+	color: $black
+	background-color: #c3e76d
+	// this is good for light text on dark background
+	// color: #fff
+	// text-rendering: optimizeLegibility
+	// -webkit-font-smoothing: antialiased
+	// -moz-osx-font-smoothing: grayscale
+
+	z-index: 1
+	padding: 12% 0
+
+.card--front,
+.card--back
+	+transition(transform 0.5s)
+	+transform-style(preserve-3d)
+	+backface-visibility(hidden)
+
+.card--front
+	z-index: 2
+	+transform(rotateY(0deg))
+
+.card--back
+	z-index: 1
+	+transform(rotateY(180deg))
+
+.card__slider
+	overflow: hidden
+
+.card__slide
+	z-index: 3
+	background-color: rgba(0, 0, 0, 0.7)
+	bottom: 100%
+	+transition(bottom 0.4s)
+
+.card__media
+	margin: 0 auto
+
+.card__title
+	margin: 0 5% 5%
+	font-size: $font-s
+	font-weight: normal
+	letter-spacing: 2px
+	text-transform: uppercase
+
+.card__text
+	font-size: $font-ml
+	font-weight: bold
+	line-height: 1.4
+	letter-spacing: 1px
+	padding: 5%
+
+.card__author
+	font-size: $font-s
+	letter-spacing: 1px
+	margin: 1em 5%
+
+
+.card__button
+	+inline-block
+	font-size: $font-s
+	font-weight: bold
+	letter-spacing: 2px
+	text-transform: uppercase
+	padding: 1em
+	background-color: rgba(0, 0, 0, 0.2)
+	cursor: pointer
+	position: absolute
+	bottom: 8%
+	left: 50%
+	min-width: $card-button-width
+	margin-left: $card-button-width / -2
+	+link-colors(inherit, inherit, inherit, inherit, inherit)
+	+on-interaction
+		background-color: rgba(0, 0, 0, 0.3)

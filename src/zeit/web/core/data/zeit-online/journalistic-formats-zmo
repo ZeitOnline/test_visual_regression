@@ -168,7 +168,7 @@
 
     <!-- ZMO Parkett -->
   <cluster area="id-db3160e7-782c-494a-81f4-ba9d4e4f9f7c" kind="parquet" title="Parkett">
-    <region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="parquet" title="ZEITMagazin" read_more="mehr davon" read_more_url="http://www.zeit.de/karriere/index">
+    <region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="zmo-parquet" title="ZEITMagazin" read_more="mehr davon" read_more_url="http://www.zeit.de/karriere/index">
       <referenced_cp>http://xml.zeit.de/zeit-magazin/index</referenced_cp>
       <container cp:type="teaser" module="zon-small" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
         <block href="http://xml.zeit.de/artikel/02"/>

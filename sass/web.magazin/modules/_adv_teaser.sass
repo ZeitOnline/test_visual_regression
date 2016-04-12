@@ -1,8 +1,8 @@
 $advertorial-mark-offset-px: 15px
 $advertorial-mark-offset-em: em(15px)
 
-.cp_button--large.is-advertorial,
-.cp_button.is-advertorial
+.teaser-landscape-large.is-advertorial,
+.teaser-landscape-small.is-advertorial
 	padding: $advertorial-mark-offset-px+8px $advertorial-mark-offset-px $advertorial-mark-offset-px $advertorial-mark-offset-px
 	border: 1px solid #d3d3d3
 	&:after
@@ -13,12 +13,9 @@ $advertorial-mark-offset-em: em(15px)
 		text-transform: uppercase
 		top: 5px
 		right: $advertorial-mark-offset-px
-	& .cp_button__title__wrap
-		bottom: $advertorial-mark-offset-px
-		width: 90%
 
-.cp_button--gallery.is-advertorial a > .scaled-image
-	height: $cp_button-gallery-height - 2.625em
+.teaser-upright.is-advertorial a > .scaled-image
+	height: remify(40px)
 
-.cp_button--large.is-advertorial
+.teaser-landscape-large.is-advertorial
 	margin-top: 0

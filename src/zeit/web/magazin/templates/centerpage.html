@@ -8,6 +8,10 @@ Available attributes:
 #}
 {% extends "zeit.web.magazin:templates/layout.html" %}
 
+{%  block page_wrap_inner %}
+    <div class="page-wrap--inner for-centerpage" id="js-page-wrap-inner">
+{% endblock page_wrap_inner %}
+
 {% block content %}
     {% for region in view.regions %}
         {% set region_loop = loop %}

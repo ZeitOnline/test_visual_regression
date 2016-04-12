@@ -145,66 +145,69 @@ class Newsfeed(Base):
         root.append(channel)
 
         for content in filter_and_sort_entries(self.items)[:15]:
-            metadata = zeit.cms.content.interfaces.ICommonMetadata(
-                content, None)
-            if metadata is None:
-                continue
+            try:
+                metadata = zeit.cms.content.interfaces.ICommonMetadata(
+                    content, None)
+                if metadata is None:
+                    continue
 
-            content_url = zeit.web.core.template.create_url(
-                None, content, self.request)
-            content_url = create_public_url(content_url)
+                content_url = zeit.web.core.template.create_url(
+                    None, content, self.request)
+                content_url = create_public_url(content_url)
 
-            authors = []
-            if getattr(content, 'authorships', None):
-                for author in content.authorships:
-                    name = None
-                    if isinstance(author, basestring):
-                        # LazyProxy solr result
-                        name = author
-                    else:
-                        name = getattr(author.target, 'display_name', None)
-                    if name:
-                        authors.append(name)
+                authors = []
+                if getattr(content, 'authorships', None):
+                    for author in content.authorships:
+                        name = None
+                        if isinstance(author, basestring):
+                            # LazyProxy solr result
+                            name = author
+                        else:
+                            name = getattr(author.target, 'display_name', None)
+                        if name:
+                            authors.append(name)
 
-            description = metadata.teaserText
+                description = metadata.teaserText
 
-            title = ': '.join(t for t in (
-                metadata.supertitle, metadata.title) if t)
+                title = ': '.join(t for t in (
+                    metadata.supertitle, metadata.title) if t)
 
-            variant = None
-            teaser_image = None
-            images = zeit.content.image.interfaces.IImages(content, None)
-            if images is not None:
-                teaser_image = images.image
-                # Missing meta files break this, since "Folder has no attribute
-                # variant_url".
-                if zeit.content.image.interfaces.IImageGroup.providedBy(
+                variant = None
+                teaser_image = None
+                images = zeit.content.image.interfaces.IImages(content, None)
+                if images is not None:
+                    teaser_image = images.image
+                    # Missing meta files break this, since "Folder has no
+                    # attribute variant_url".
+                    if zeit.content.image.interfaces.IImageGroup.providedBy(
+                            teaser_image):
+                        variant = images.image.variant_url('wide', 148, 84)
+
+                if variant and not zeit.web.core.image.is_image_expired(
                         teaser_image):
-                    variant = images.image.variant_url('wide', 148, 84)
+                    description = (
+                        u'<a href="{}"><img style="float:left; '
+                        'margin-right:5px" src="{}"></a> {}').format(
+                            content_url,
+                            '{}/{}'.format(
+                                self.request.image_host, variant.lstrip('/')),
+                            metadata.teaserText)
 
-            if variant and not zeit.web.core.image.is_image_expired(
-                    teaser_image):
-                description = (
-                    u'<a href="{}"><img style="float:left; '
-                    'margin-right:5px" src="{}"></a> {}').format(
-                        content_url,
-                        '{}/{}'.format(
-                            self.request.image_host, variant.lstrip('/')),
-                        metadata.teaserText)
-
-            item = E.item(
-                E.title(title),
-                E.link(content_url),
-                E.description(description),
-                E.category(metadata.sub_ressort or metadata.ressort),
-                DC_MAKER(u'ZEIT ONLINE: {} - {}'.format(
-                    (metadata.sub_ressort or metadata.ressort),
-                    u', '.join(authors))),
-                E.pubDate(format_rfc822_date(
-                    last_published_semantic(content))),
-                E.guid(content_url, isPermaLink='false'),
-            )
-            channel.append(item)
+                item = E.item(
+                    E.title(title),
+                    E.link(content_url),
+                    E.description(description),
+                    E.category(metadata.sub_ressort or metadata.ressort),
+                    DC_MAKER(u'ZEIT ONLINE: {} - {}'.format(
+                        (metadata.sub_ressort or metadata.ressort),
+                        u', '.join(authors))),
+                    E.pubDate(format_rfc822_date(
+                        last_published_semantic(content))),
+                    E.guid(content_url, isPermaLink='false'),
+                )
+                channel.append(item)
+            except:
+                pass
         return root
 
 
@@ -434,6 +437,16 @@ class FacebookMagazinFeed(SocialFeed):
 
     def social_value(self, content):
         return zeit.push.interfaces.IAccountData(content).facebook_magazin_text
+
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-socialflow-facebook-zco',
+    renderer='string')
+class FacebookCampusFeed(SocialFeed):
+
+    def social_value(self, content):
+        return zeit.push.interfaces.IAccountData(content).facebook_campus_text
 
 
 @pyramid.view.view_config(
