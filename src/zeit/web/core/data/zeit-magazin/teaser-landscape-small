@@ -1,0 +1,86 @@
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
+  <head>
+    <header_image xsi:nil="true"/>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-01-13T09:07:31.879322+00:00</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-01-13T09:05:04.854071+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.szuppa</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:83ef8f0a-2e70-4255-8370-782c2dd8a740}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">2</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-01-13T09:21:36.263169+00:00</attribute>
+  </head>
+  <body>
+    <supertitle>ZMO:</supertitle>
+    <title>landscape-small-teaser</title>
+    <subtitle>Das ist meine Test CP.</subtitle>
+
+    <cluster area="id-DUO6a3c9692-f2bd-4234-8890-a84f1924ef83" visible="True" kind="duo">
+      <region area="id-MAJOR74baeca3-7dbb-437d-8e70-3a3d07969d49" visible="True" kind="major">
+        <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-eae7c703-98e9-491a-a30d-c1c5cebd2371AAAAAMAJOR">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
+          </block>
+        </container>
+        <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-eae7c703-98e9-491a-a30d-c1c5cebd237cx1AAAAAMAJOR">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
+          </block>
+        </container>
+      </region>
+      <region area="id-MINOR6dd22838-9f14-4294-a96d-3e2fa1a7bc91" visible="True" kind="minor">
+        <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-eae7c703-98e9-491a-a30d-c1c5cebd237cx1AAAAAMAJOR">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
+          </block>
+        </container>
+        <container cp:type="teaser" module="zmo-upright" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805MAJOR">
+          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+          </block>
+        </container>
+      </region>
+  </cluster>
+
+
+
+
+  </body>
+  <feed/>
+  <teaser>
+    <title>Test CP</title>
+    <text>Das ist meine Test CP.</text>
+  </teaser>
+</centerpage>

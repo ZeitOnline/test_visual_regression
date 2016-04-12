@@ -128,25 +128,6 @@ class Gallery(Traversable):
 
 
 @traverser(zeit.content.cp.interfaces.ICenterPage)
-class CenterPage(Traversable):
-
-    def __call__(self, tdict):
-        # XXX: RAM block sensitive traversal hacking is pretty inelegant,
-        #      let's think of something better. (ND)
-        area = zeit.web.core.utils.find_block(
-            self.context, attrib='area', kind='ranking')
-        if area:
-            area = zeit.web.core.centerpage.get_area(area)
-            form = zeit.web.core.utils.find_block(
-                self.context, module='search-form')
-            if form:
-                form = zeit.web.core.template.get_module(form)
-                area.raw_query = form.raw_query
-                area.raw_order = form.raw_order
-                area.sort_order = form.sort_order
-
-
-@traverser(zeit.content.cp.interfaces.ICenterPage)
 class CenterPage2015(Traversable):
 
     def __call__(self, tdict):
@@ -186,7 +167,7 @@ class Folder(Traversable):
 
 
 @traverser(zeit.content.dynamicfolder.interfaces.IRepositoryDynamicFolder)
-class DynamicFolder(CenterPage):
+class DynamicFolder(Traversable):
 
     def __call__(self, tdict):
         if not tdict['view_name']:

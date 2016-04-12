@@ -27,6 +27,8 @@ class ImageGroup(zeit.web.core.image.LocalImageGroup):
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
 class VideoImages(object):
 
+    fill_color = None
+
     def __init__(self, context):
         self.context = context
         self.image = zeit.content.image.interfaces.IImageGroup(context)

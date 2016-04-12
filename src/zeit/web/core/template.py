@@ -33,7 +33,7 @@ log = logging.getLogger(__name__)
 
 
 @zeit.web.register_global
-def get_variant(group, variant_id):
+def get_variant(group, variant_id, fill_color=None):
     try:
         variant = zeit.web.core.image.VARIANT_SOURCE.factory.find(
             group, variant_id)
@@ -43,15 +43,19 @@ def get_variant(group, variant_id):
         log.debug(u'No {} variant for {}'.format(variant_id, group.uniqueId))
     else:
         variant.__parent__ = group
+        variant.fill_color = fill_color
         try:
             return zeit.web.core.interfaces.ITeaserImage(variant)
         except TypeError:
             return None
 
 
+FROM_CONTENT = object()
+
+
 @zeit.web.register_global
 def get_image(module=None, content=None, fallback=True, variant_id=None,
-              default='default'):
+              default='default', fill_color=FROM_CONTENT):
     """Universal image retrieval function to be used in templates.
 
     :param module: Module to extract a content and layout from
@@ -60,15 +64,23 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
     :param variant_id: Override for automatic variant determination
     :param default: If variant_id is None, specify a default for automatic
                     variant determination
+    :param fill_color: For images with transparent background, fill with
+                       the given color (None: keep transparent, FROM_CONTENT:
+                       determine color from IImages(content))
     """
 
     if content is None:
         content = first_child(module)
 
     try:
-        group = zeit.content.image.interfaces.IImages(content).image
+        img = zeit.content.image.interfaces.IImages(content)
+        group = img.image
+        if fill_color is FROM_CONTENT:
+            fill_color = img.fill_color
     except (TypeError, AttributeError):
         group = None
+        if fill_color is FROM_CONTENT:
+            fill_color = None
 
     try:
         if group is None:
@@ -95,7 +107,7 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
         except AttributeError:
             variant_id = default
 
-    return get_variant(group, variant_id)
+    return get_variant(group, variant_id, fill_color=fill_color)
 
 
 @zeit.web.register_test
@@ -609,7 +621,8 @@ def get_column_image(content):
     # XXX This should use a different variant, but author images currently do
     # not have a consistent ratio and framing of the portrayed person. So we
     # need to crop the lower part of the image using CSS, ignoring the ratio.
-    return get_image(content=author, variant_id='original', fallback=False)
+    return get_image(content=author, variant_id='original', fallback=False,
+                     fill_color=None)
 
 
 @zeit.web.register_global
@@ -666,15 +679,6 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         (asset, image), zeit.web.core.interfaces.ITeaserImage)
     teaser_image.image_pattern = image_pattern
     return teaser_image
-
-
-@zeit.web.register_filter
-def get_repository_image(image):
-    # TRASHME: Should be solved by using get_image on fullgraphical teaser
-    base_image = zeit.web.core.image.BaseImage()
-    base_image.image = image
-    base_image.uniqueId = image.uniqueId
-    return base_image
 
 
 @zeit.web.register_filter

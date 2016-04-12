@@ -633,7 +633,10 @@ class CommentMixin(object):
             return
 
         sort = self.request.params.get('sort', 'asc')
-        page = self.request.params.get('page', 1)
+        try:
+            page = int(self.request.params.get('page', 1))
+        except ValueError:
+            return
         cid = self.request.params.get('cid', None)
         try:
             return zeit.web.core.comments.get_paginated_thread(

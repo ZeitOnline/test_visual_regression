@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:">
+  <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/test-cp-legacy/test-cp-zmo</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-04-25T13:06:19.773563+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">16</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="ICP2009" module="zeit.content.cp.interfaces"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-25T13:06:15.385575+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.seemann</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:5ab05897-0df2-416c-ba99-f857a4bcd595}</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2014-04-25T13:06:19Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">32019</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Fri, 25 Apr 2014 13:06:19 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"361e71-7d13-4f7dda1b737cb"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>

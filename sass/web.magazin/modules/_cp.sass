@@ -1,8 +1,6 @@
 //main cp styles
 $cp_comment__count-height: 40px
 $cp_comment__count-width: 52px
-$icon-galerie-icon-white-height: em(30px)
-$icon-galerie-icon-white-width: em(40px)
 
 .cp_title
 	margin-top: $petite
@@ -29,49 +27,32 @@ $icon-galerie-icon-white-width: em(40px)
 		font-weight: normal
 		margin: 0
 
-
-//standard link classes for cp
-%cp_link--light
-	a
-		+link-colors($black, $black, $black, $black, $black)
-
-%cp_link--dark
-	a
-		+link-colors($white, $white, $white, $white, $white)
-
-//standart shadow classes for cp
-%cp_shadow--dark
-	+fake-box-shadow-inset($black, 0.8)
-
-%cp_shadow--darker
-	+fake-box-shadow-inset($black, 0.8, 0.1)
-
-%cp_shadow--light
-	+fake-box-shadow-inset($white)
-
 //comments
-// please stick to pixel values here, as there is an issue
-// with ems in Android
-.cp_comment__count__wrap
-	font-size: $little
-	color: $white
-	position: absolute
-	text-align: center
-	padding-right: $micro--px
-	padding-top: $tiny--px
+.cp_comment__counter
+	font-size: em(14px)
 	height: $cp_comment__count-height
-	width: $cp_comment__count-width
-	right: $little--px
-	top: $small--px
-	z-index: 2
-
-//icons
-.icon-galerie-icon-white
-	display: inline-block
-	height: $icon-galerie-icon-white-height
-	width: $icon-galerie-icon-white-width
 	position: absolute
-	top: -$medium
+	right: remify(32px)
+	text-align: center
+	top: remify(18px)
+	width: $cp_comment__count-width
+	z-index: 2
+	+respond-min($break-tablet-min)
+		right: remify(14px)
+
+.cp_comment__count
+	color: $white
+	position: relative
+	top: -($cp_comment__count-height)
+
+.cp_comment__icon
+	color: rgba(0,0,0,0.2)
+	height: $cp_comment__count-height
+	stroke-width: 2px
+	stroke: $white
+	width: $cp_comment__count-width
 
 .figcaption--hidden
 	display: none
+
+

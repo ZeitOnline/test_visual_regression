@@ -94,6 +94,19 @@
       </region>
     </cluster>
 
+    <cluster area="id-41a8299d-b569-4c42-b713-db5dbd68a64f" kind="duo" visible="True" visible_mobile="True">
+      <region area="id-41a2899d-b569-4c42-b713-db5ddb86a64f" kind="duo" visible="True" visible_mobile="True">
+        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b75a-e357db3fbe4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
+        </container>
+      </region>
+      <region area="id-41a2899d-b569-4c42-b713-db5ddb86as64f" kind="duo" visible="True" visible_mobile="True">
+        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3b4eb">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+        </container>
+      </region>
+    </cluster>
+
     <cluster area="id-41a2899d-b569-4c42-b713-d5bdbd86a64f" kind="trio" visible="True" visible_mobile="True">
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a64f" kind="trio" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e357dbf3be4b">
@@ -108,19 +121,6 @@
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a62f" kind="trio" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/03-spartipps" uniqueId="http://xml.zeit.de/campus/article/03-spartipps"></block>
-        </container>
-      </region>
-    </cluster>
-
-    <cluster area="id-41a8299d-b569-4c42-b713-db5dbd68a64f" kind="duo" visible="True" visible_mobile="True">
-      <region area="id-41a2899d-b569-4c42-b713-db5ddb86a64f" kind="duo" visible="True" visible_mobile="True">
-        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b75a-e357db3fbe4b">
-          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
-        </container>
-      </region>
-      <region area="id-41a2899d-b569-4c42-b713-db5ddb86as64f" kind="duo" visible="True" visible_mobile="True">
-        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3b4eb">
-          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
         </container>
       </region>
     </cluster>

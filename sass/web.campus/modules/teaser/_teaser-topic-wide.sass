@@ -1,14 +1,10 @@
 .teaser-topic-wide
-	@extend %teaser
-	border: none
-	position: relative
-	background-color: $color-page-bg
 
 	&:after
 		content: ''
 		display: block
 		width: remify(50px)
-		margin: remify(15px 0 15px)
+		margin: remify(20px 0 20px $page-padding--small)
 		border-bottom: 3px solid $zco-accent
 
 	&__heading
@@ -45,21 +41,27 @@
 		&__metadata
 			max-width: 95%
 			padding-right: $page-padding--small
-		&:after
-			margin-left: $page-padding--small
 
 
 +respond-min($break-tablet-min)
 	.teaser-topic-wide
-		margin-top: remify(15px)
-
-		&__title
-			font-size: remify(42px)
+		margin-top: remify(20px)
 
 		&:after
-			margin: remify(25px 0 25px -45px)
+			margin: remify(30px 0 30px -45px)
+
+		&__heading
+			font-size: remify(42px)
+			margin: remify(0 0 5px)
+			max-width: none
+			padding: 0
+
+		&__kicker
+			display: block
+			padding: remify(0 0 15px)
+			position: static
 
 +respond-min($break-desktop-min)
 	.teaser-topic-wide
 		&:after
-			margin: remify(35px 0 25px -45px)
+			margin: remify(40px 0 40px -45px)
