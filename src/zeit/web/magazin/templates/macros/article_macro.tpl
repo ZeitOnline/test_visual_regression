@@ -187,7 +187,7 @@
         {% endif %}" data-video="{{ obj.id }}">
             <div class="video__still">
                 <img class="figure__media" src="{{ obj.video_still| default('http://placehold.it/160x90', true) }}" alt="Video: {{ obj.title }}" title="Video: {{ obj.title }}">
-                <span class="video__button"></span>
+                <span class="video__button">{{ lama.use_svg_icon('playbutton', 'video__play-icon', request) }}</span>
             </div>
             <figcaption class="figure__caption">
                     {{ obj.description }}
@@ -238,33 +238,36 @@
 
 {% macro print_pagination( pagination ) -%}
     {% if pagination.total > 1 %}
-    <div class="article__pagination is-constrained is-centered" role="navigation" aria-labeledby="pagination-title">
-        <div class="paginator__a11y__title is-audible" id="pagination-title" style="display:none">Seitennavigation</div> <!-- nach unsichtbar verschieben -->
+    <nav class="article-pagination is-constrained is-centered" role="navigation" aria-labeledby="pagination-title">
+        <div class="article-pagination__a11y-title" id="pagination-title">Seitennavigation</div>
         {% if pagination.next_page_title -%}
-            <div class="article__pagination__nexttitle">
-                <a href="{{ pagination.next_page_url }}">Auf Seite {{ pagination.current + 1 }} <span class="article__pagination__dash">—</span> {{ pagination.next_page_title }}</a>
+            <div class="article-pagination__nexttitle">
+                <a href="{{ pagination.next_page_url }}">Auf Seite {{ pagination.current + 1 }} <span class="article-pagination__dash">—</span> {{ pagination.next_page_title }}</a>
             </div>
         {%- endif %}
-        <ul class="article__pager">
-            {% if pagination.prev_page_url %}
-                <li class="article__pager__prev"><a class="icon-pagination-previous" href="{{ pagination.prev_page_url }}">Zurück</a></li>
-            {% else %}
-                <li class="article__pager__prev is-inactive"><span class="icon-pagination-previous">Zurück</span></li>
-            {% endif %}
+        <ul class="article-pagination__pager">
+            <li class="article-pagination__item">
+                {%- if pagination.prev_page_url -%}
+                    <a class="article-pagination__link" href="{{ pagination.prev_page_url }}">{{ lama.use_svg_icon('pagination-previous', 'article-pagination__icon article-pagination__icon--active', request) }}</a>
+                {%- else -%}
+                    {{ lama.use_svg_icon('pagination-previous', 'article-pagination__icon', request) }}
+                {%- endif -%}
+            </li>
 
             {% for url in pagination.pages_urls -%}
-                {% set current_class = "is-current" if loop.index == pagination.current else "" %}
-                <li class="article__pager__number {{ current_class }}"><a href="{{ url }}">{{ loop.index }}</a></li>
+                {% set current_class = "article-pagination__link--current" if loop.index == pagination.current else "" %}
+                <li class="article-pagination__item"><a class="article-pagination__link {{current_class}}" href="{{ url }}">{{ loop.index }}</a></li>
             {%- endfor %}
 
-
-            {% if pagination.next_page_url %}
-                <li class="article__pager__next"><a class="icon-pagination-next" href="{{ pagination.next_page_url }}">Vor</a></li>
-            {% else %}
-                <li class="article__pager__next is-inactive"><span class="icon-pagination-next">Vor</span></li>
-            {% endif %}
+            <li class="article-pagination__item">
+                {%- if pagination.next_page_url -%}
+                    <a class="article-pagination__link" href="{{ pagination.next_page_url }}">{{ lama.use_svg_icon('pagination-next', 'article-pagination__icon article-pagination__icon--active', request) }}</a>
+                {%- else -%}
+                    {{ lama.use_svg_icon('pagination-next', 'article-pagination__icon article-pagination__icon--next', request) }}
+                {%- endif -%}
+            </li>
         </ul>
-    </div>
+    </nav>
     {% endif %}
 {%- endmacro %}
 

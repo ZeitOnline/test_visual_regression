@@ -48,8 +48,8 @@
             <a href="{{ request.route_url('home') }}zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
                 <{{ title_tag }} class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-logo-zmo-large" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
-                    <span class="main-nav__logo__img icon-logo-zmo-small"></span>
+                    {{ use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', request) }}
+                    {{ use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', request) }}
                 </{{ title_tag }}>
             </a>
             <div class="main-nav__menu">
@@ -62,14 +62,10 @@
                 </header>
                 <div class="main-nav__menu__content" id="js-main-nav-content">
                     <div class="main-nav__section main-nav__ressorts">
-                        <div class="main-nav__ressorts__slider" id="js-main-nav-ressorts-slider-container">
-                            <div class="main-nav__ressorts__slider-arrow--left icon-arrow-left is-inactive"></div>
-                            <div class="main-nav__ressorts__slider-arrow--right icon-arrow-right"></div>
-                            <div class="main-nav__ressorts__slider-strip" id="js-main-nav-ressorts-slider-strip">
-                                <a href="{{ request.route_url('home') }}zeit-magazin/mode-design/index" id="hp.zm.topnav.centerpages.mode./zeit-magazin/mode-design/index">Mode &amp; Design</a>
-                                <a href="{{ request.route_url('home') }}zeit-magazin/essen-trinken/index" id="hp.zm.topnav.centerpages.essen./zeit-magazin/essen-trinken/index">Essen &amp; Trinken</a>
-                                <a href="{{ request.route_url('home') }}zeit-magazin/leben/index" id="hp.zm.topnav.centerpages.leben./zeit-magazin/leben/index">Leben</a>
-                            </div>
+                        <div class="main-nav__ressort-list">
+                            <a href="{{ request.route_url('home') }}zeit-magazin/mode-design/index" id="hp.zm.topnav.centerpages.mode./zeit-magazin/mode-design/index">Mode &amp; Design</a>
+                            <a href="{{ request.route_url('home') }}zeit-magazin/essen-trinken/index" id="hp.zm.topnav.centerpages.essen./zeit-magazin/essen-trinken/index">Essen &amp; Trinken</a>
+                            <a href="{{ request.route_url('home') }}zeit-magazin/leben/index" id="hp.zm.topnav.centerpages.leben./zeit-magazin/leben/index">Leben</a>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__only-small">
@@ -85,7 +81,7 @@
                             <a href="{{ request.route_url('home') }}index" id="hp.zm.topnav.links.zon./index">» ZEIT ONLINE</a>
                         </div>
                         <div class="main-nav__section main-nav__service">
-                            <span class="main-nav__section__trigger icon-arrow-down js-main-nav-section-trigger"><span class="main-nav__section__text">Service</span></span>
+                            <span class="main-nav__section__trigger js-main-nav-section-trigger"><span class="main-nav__section__text">Service</span>{{ use_svg_icon('arrow-down', 'main-nav__icon-arrow-down', view.request) }}</span>
                             <div class="main-nav__section__content js-main-nav-section-content">
                                 <a href="{{ request.route_url('home') }}campus/index" id="hp.zm.topnav.links.zeitcampus./campus/index">ZEITCampus</a>
                                 <a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index" id="hp.zm.topnav.links.zeitgeschichte./wissen/zeit-geschichte/index">ZEITGeschichte</a>
@@ -100,17 +96,6 @@
                                 <a href="{{ request.route_url('home') }}spiele/index" id="hp.zm.topnav.links.spiele./spiele/index">Spiele</a>
                             </div>
                         </div>
-                        {#
-                        <div class="main-nav__section main-nav__search">
-                            <span class="main-nav__section__trigger icon-search js-main-nav-section-trigger"><span class="main-nav__section__text">Suche</span></span>
-                            <div class="main-nav__section__content js-main-nav-section-content">
-                                <form action="{{ request.route_url('home') }}suche/index" role="search" method="get" class="main-nav__search__form">
-                                    <input class="main-nav__search__input" type="text" name="q" size="20" placeholder="Suchbegriff …">
-                                    <input class="main-nav__search__submit" type="submit" value="Suchen">
-                                </form>
-                            </div>
-                        </div>
-                        #}
                         <div class="main-nav__section main-nav__community">
                             {% set esi_source = '{}login-state?for=magazin&context-uri={}'.format(request.route_url('home'), request.url) %}
                             {{ insert_esi(esi_source, 'Anmeldung nicht möglich') }}
@@ -122,16 +107,42 @@
     </nav>
 {%- endmacro %}
 
+{% macro head_user_is_logged_in_true(request)  %}
+    <span class="main-nav__section__trigger js-main-nav-section-trigger">
+        {% if request.session.user.picture %}
+            <span class="main-nav__avatar" style="background-image: url({{ request.session.user.picture }})"></span>
+        {%- else -%}
+            {{ use_svg_icon('avatar-std', 'main-nav__avatar', request) }}
+        {%- endif -%}
+    </span>
+    <div class="main-nav__section__content js-main-nav-section-content">
+        <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}" id="hp.zm.topnav.community.account">Account</a>
+        {% if request.registry.settings.sso_activate %}
+            <a href="{{ request.registry.settings.sso_url }}/abmelden?url={{ request.url }}" id="hp.zm.topnav.community.logout">Logout</a>
+        {% else %}
+            <a href="{{ request.registry.settings.community_host }}/logout?destination={{ request.url }}" id="hp.zm.topnav.community.logout">Logout</a>
+        {% endif %}
+    </div>
+{%- endmacro %}
+
+{% macro head_user_is_logged_in_false(request) -%}
+    {% if request.registry.settings.sso_activate %}
+        <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
+    {% else %}
+        <a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
+    {% endif %}
+{%- endmacro %}
+
 {% macro copyrights(cr_list) -%}
     <div id="copyrights" class="copyrights">
-        <a class="js-toggle-copyrights copyrights__close copyrights__close--cross icon-copyrights-close"></a>
+        {{ use_svg_icon('copyrights-close', 'js-toggle-copyrights copyrights__close copyrights__close--icon', request) }}
         <section class="copyrights__wrapper is-centered is-constrained">
             <span class="copyrights__title">Bildrechte auf dieser Seite</span>
             <ul class="copyrights__list">
                 {%- for cr in cr_list -%}
                 <li class="copyrights__entry">
-                    <div class="copyrights__entry__image" style="background-image: url({{ cr.image }});"></div>
-                    <span class="copyrights__entry__label">
+                    <div class="copyrights__image" style="background-image: url({{ cr.image }});"></div>
+                    <span class="copyrights__label">
                         {%- if cr.link -%}
                             <a href="{{ cr.link }}"{% if cr.nofollow %} rel="nofollow"{% endif %}>{{ cr.label }}</a>
                         {%- else -%}

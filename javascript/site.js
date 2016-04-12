@@ -77,6 +77,7 @@ require([
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.core/plugins/jquery.toggleRegions',
     'web.core/plugins/jquery.countFormchars',
+    'web.core/plugins/jquery.imageCopyrightFooter',
     'web.site/plugins/jquery.accordion',
     'web.site/plugins/jquery.adaptnav',
     'web.site/plugins/jquery.animateJobs',
@@ -84,7 +85,6 @@ require([
     'web.site/plugins/jquery.extendfooter',
     'web.site/plugins/jquery.fixPosition',
     'web.site/plugins/jquery.hpOverlay',
-    'web.site/plugins/jquery.imageCopyrightFooter',
     'web.site/plugins/jquery.liveblog',
     'web.site/plugins/jquery.searchTools',
     'web.site/plugins/jquery.selectNav',

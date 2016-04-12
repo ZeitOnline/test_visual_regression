@@ -29,6 +29,13 @@
 	border-top: 1px solid #ccc
 	&:first-child
 		border: none
+	// hide tab counter for single tabs in accordion (mobile view)
+	&:only-child &__link:before
+		content: none
+	// hide tab counter for single tabs in tablist (stationary view)
+	&__title:only-child &__link:before
+		content: none
+
 	&__title
 		color: $color-article-primary
 		font-family: $font-tabletgothic
@@ -59,14 +66,13 @@
 			counter-increment: infobox-list
 			font-weight: normal
 		.js &:after
-			position: absolute
-			content: ""
 			background-color: $color-article-primary
-		.js &:after
+			content: ""
 			height: remify(13px)
+			position: absolute
 			right: remify(5px)
-			width: remify(3px)
 			top: remify(18px)
+			width: remify(3px)
 		&[aria-expanded="true"]
 			color: $color-text
 			font-weight: bold

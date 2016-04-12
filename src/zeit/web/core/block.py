@@ -46,10 +46,11 @@ class Paragraph(Block):
 
     def __len__(self):
         try:
-            xslt_result = _inline_html(self.model_block.xml, elements=['p'])
+            xslt_result = _inline_html(
+                self.model_block.xml, elements=['p', 'initial'])
             text = u''.join(xslt_result.xpath('//text()'))
             return len(text.replace('\n', '').strip())
-        except (AttributeError, lxml.etree.XMLSyntaxError):
+        except:
             return 0
 
     def __str__(self):
@@ -318,6 +319,8 @@ class Image(zeit.web.core.image.BaseImage):
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(Image)
 class BlockImages(object):
+
+    fill_color = None
 
     def __init__(self, context):
         self.context = context

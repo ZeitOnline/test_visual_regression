@@ -3,7 +3,6 @@ import mock
 import lxml.html
 
 import zeit.cms.interfaces
-import zeit.content.article.article
 
 import zeit.web.core.interfaces
 
@@ -316,7 +315,6 @@ def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
 def test_macro_video_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
-
     # assert default video
     obj = {'id': '1', 'video_still': 'pic.jpg',
            'description': 'test', 'format': '', 'title': 'title'}
@@ -325,7 +323,8 @@ def test_macro_video_should_produce_markup(jinja2_env):
            ' title="Video: title">')
 
     cap = '<figcaption class="figure__caption">test</figcaption>'
-    lines = tpl.module.video(obj).splitlines()
+    module = tpl.make_module({'request': mock.Mock()})
+    lines = module.video(obj).splitlines()
     output = ''
     for line in lines:
         output += line.strip()
@@ -356,7 +355,7 @@ def test_macro_video_should_produce_markup(jinja2_env):
          'fig': '<figure class="figure-stamp" data-video="1">'}]
 
     for el in obj:
-        lines = tpl.module.video(el).splitlines()
+        lines = module.video(el).splitlines()
         output = ''
         for line in lines:
             output += line.strip()
@@ -498,81 +497,71 @@ def test_macro_insert_responsive_image_should_produce_linked_image(
     assert '<a href="http://www.test.de">' in output
 
 
-def test_macro_teaser_text_block_should_produce_markup(jinja2_env):
-    # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
+def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    teaser = zeit.content.article.article.Article()
-    teaser.teaserSupertitle = "SUPATITLE"
-    teaser.teaserTitle = "TITLE"
-    teaser.teaserText = "TEXT"
-    teaser.uniqueId = "ID"
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
-    lines = tpl.module.teaser_text_block(teaser).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
+    request = mock.Mock()
+    request.session.user.picture = None
 
-    assert ('<header class="cp_leader__title__wrap '
-            'cp_leader__title__wrap--none">') in output
-    assert '<a href="ID"><h2>' in output
-    assert '<div class="cp_leader__supertitle">SUPATITLE</div>' in output
-    assert '<div class="cp_leader__title">TITLE</div>' in output
-    assert '<span class="cp_leader__subtitle">TEXT</span>' in output
+    # no pic: fallback svg is shown
+    lines = tpl.module.head_user_is_logged_in_true(request)
+    doc = lxml.html.fromstring(lines)
+    assert 'main-nav__avatar' in doc.cssselect('svg')[0].attrib['class']
+
+    # pic
+    request = mock.Mock()
+    request.registry.settings.community_host = 'www.zeit.de'
+    request.registry.settings.sso_activate = False
+    request.session.user.picture = (
+        'http://www.zeit.de/community-static/test.jpg')
+    request.session.user.uid = 1
+    request.url = 'test'
+
+    lines = tpl.module.head_user_is_logged_in_true(request)
+    doc = lxml.html.fromstring(lines).cssselect
+
+    assert doc('span .main-nav__avatar')[0].attrib['style'] == (
+        'background-image: url(http://www.zeit.de/community-static/test.jpg)')
+    assert doc('a')[0].attrib['href'] == 'www.zeit.de/user/1'
+    assert doc('a')[0].attrib['id'] == 'hp.zm.topnav.community.account'
+    assert doc('a')[1].attrib['href'] == 'www.zeit.de/logout?destination=test'
+    assert doc('a')[1].attrib['id'] == 'hp.zm.topnav.community.logout'
+
+    request = mock.Mock()
+    request.registry.settings.sso_url = 'sso.zeit.de'
+    request.registry.settings.community_host = 'www.zeit.de'
+    request.registry.settings.sso_activate = True
+    request.session.user.uid = 1
+    request.url = 'test_sso'
+
+    lines = tpl.module.head_user_is_logged_in_true(request)
+    doc = lxml.html.fromstring(lines).cssselect
+
+    assert doc('a')[0].attrib['href'] == 'www.zeit.de/user/1'
+    assert doc('a')[1].attrib['href'] == 'sso.zeit.de/abmelden?url=test_sso'
 
 
-def test_macro_teaser_text_block_should_fallback_to_supertitle(jinja2_env):
-    # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
+def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    teaser = mock.Mock()
-    teaser.teaserSupertitle = None
-    teaser.supertitle = "FALLBACK"
+        'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
-    teaser.teaserTitle = "TITLE"
-    teaser.uniqueId = "ID"
+    request = mock.Mock()
+    request.registry.settings.community_host = 'www.zeit.de'
+    request.registry.settings.sso_url = 'sso.zeit.de'
+    request.url = 'test'
+    request.registry.settings.sso_activate = False
 
-    lines = tpl.module.teaser_text_block(teaser).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
+    html = tpl.module.head_user_is_logged_in_false(request)
+    doc = lxml.html.fromstring(html)
+    elem_a = doc.cssselect('a')[0]
+    assert elem_a.attrib['href'] == "www.zeit.de/user/login?destination=test"
 
-    assert 'FALLBACK' in output
-
-
-def test_macro_teaser_text_block_should_produce_alternative_markup(
-        jinja2_env):
-    # teaser_text_block(teaser, block, shade, supertitle. subtitle, icon)
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    teaser = mock.Mock()
-    teaser.teaserTitle = "TITLE"
-    teaser.uniqueId = "ID"
-
-    lines = tpl.module.teaser_text_block(
-        teaser, 'button', 'dark', 'false', 'false', 'true').splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert ('<header class="cp_button__title__wrap '
-            'cp_button__title__wrap--dark">') in output
-    assert '<div class="cp_button__supertitle' not in output
-    assert '<div class="cp_button__title">TITLE</div>' in output
-    assert '<div class="cp_button__subtitle' not in output
-
-
-def test_macro_comment_count_should_produce_correct_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    markup = ('<span class="cp_comment__count__wrap '
-              'icon-comments-count">3</span>')
-    lines = tpl.module.comment_count(3).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert markup in output
+    request.registry.settings.sso_activate = True
+    html = tpl.module.head_user_is_logged_in_false(request)
+    doc = lxml.html.fromstring(html)
+    elem_a = doc.cssselect('a')[0]
+    assert elem_a.attrib['href'] == "sso.zeit.de/anmelden?url=test"
 
 
 def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
@@ -580,12 +569,14 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
         'zeit.web.magazin:templates/macros/layout_macro.tpl')
 
     request = mock.Mock()
+    view = mock.Mock()
 
     # logged in
     request.user = {'ssoid': '12345'}
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
-    lines = tpl.module.main_nav('true', request).splitlines()
-
+    logged = 'Account'
+    module = tpl.make_module({'request': request, 'view': view})
+    lines = module.main_nav('true', request).splitlines()
     output = ''
     for line in lines:
         output += line.strip()
@@ -595,7 +586,9 @@ def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     # logged out
     request.user = {}
     markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
-    lines = tpl.module.main_nav('true', request).splitlines()
+    unlogged = 'Anmelden'
+    module = tpl.make_module({'request': request, 'view': view})
+    lines = module.main_nav('true', request).splitlines()
     output = ''
     for line in lines:
         output += line.strip()
@@ -620,17 +613,18 @@ def test_macro_copyrights(jinja2_env):
             link=None
         )
     ]
-    snippet = lxml.html.fromstring(tpl.module.copyrights(copyrights))
+    module = tpl.make_module({'request': mock.Mock()})
+    snippet = lxml.html.fromstring(module.copyrights(copyrights))
 
     assert len(snippet.cssselect('li.copyrights__entry')) == 2, (
         'Two copyright entries should be contained in the list.')
 
     assert snippet.cssselect(
-        'li.copyrights__entry:nth-child(1) .copyrights__entry__label a'), (
+        'li.copyrights__entry:nth-child(1) .copyrights__label a'), (
             'The first entry should produce a link element.')
 
     assert not snippet.cssselect(
-        'li.copyrights__entry:nth-child(2) .copyrights__entry__label a'), (
+        'li.copyrights__entry:nth-child(2) .copyrights__label a'), (
             'The second entry should not produce a link element.')
 
 

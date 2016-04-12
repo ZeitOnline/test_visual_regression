@@ -1,0 +1,65 @@
+// basic classes for default teaser
+
+%teaser
+    min-height: remify(220px) // fallback for expired images
+    position: relative
+    display: inline-block
+    width: 100%
+    margin-bottom: $compact
+
+%teaser__media
+    margin: 0 0 remify(18px)
+
+%teaser__text
+    display: block
+
+%teaser__kicker
+    color: $black
+    display: block
+    font-size: $font-s
+    letter-spacing: $hair
+    line-height: 1.25
+    margin-bottom: remify(4px)
+
+%teaser__title
+    color: $black
+    display: block
+    font-size: $font-ml
+    font-weight: bold
+    line-height: 1.25
+    margin: 0 0 $thin 0
+
+%teaser__subtitle
+    color: $black
+    font-size: $font-s
+    line-height: 1.5
+    margin: 0
+
+// standart teaser shadows
+%teaser--dark
+    a
+        +fake-box-shadow-inset($black, 0.8)
+
+%teaser--light
+    a
+        +fake-box-shadow-inset($white)
+
+
+// standart teaser if nothing else applies
+// will hopefully be never shown
+.teaser
+    @extend %teaser
+    padding: 0 remify(28px)
+    +respond-min($break-2)
+        padding: 0
+    &__media
+        @extend %teaser__media
+        max-height: remify(165px)
+    &__text
+        @extend %teaser__text
+    &__kicker
+        @extend %teaser__kicker
+    &__title
+        @extend %teaser__title
+    &__subtitle
+        @extend %teaser__subtitle

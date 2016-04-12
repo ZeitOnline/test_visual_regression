@@ -293,10 +293,13 @@ class PostComment(zeit.web.core.view.Base):
             self.community_host, endpoint, path).strip('/')
 
     def _get_recommendations(self, unique_id, pid):
-        comment_thread = zeit.web.core.comments.get_paginated_thread(
-            unique_id, cid=pid)
-
-        comment = comment_thread and comment_thread.get('index', {}).get(pid)
+        try:
+            comment_thread = zeit.web.core.comments.get_paginated_thread(
+                unique_id, cid=pid)
+            comment = comment_thread and comment_thread.get(
+                'index', {}).get(pid)
+        except zeit.web.core.comments.ThreadNotLoadable:
+            comment = None
         if not comment:
             return None, []
         return comment['uid'], filter(None, comment['fans'].split(','))

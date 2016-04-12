@@ -155,6 +155,15 @@ def test_search_form_should_create_valid_type_restricted_query(
         'NOT expires:[* TO NOW]')
 
 
+def test_search_area_should_delegate_sort_order_to_search_form(
+        search_form, search_area, dummy_request):
+    dummy_request.GET['q'] = 'irgendetwas'
+    dummy_request.GET['sort'] = 'publikation'
+    assert search_area.sort_order == 'publikation'
+    orders = zeit.web.site.module.search_form.ORDERS
+    assert search_area.raw_order == orders['publikation']
+
+
 def test_search_area_should_produce_valid_set_of_search_results(search_area):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId': 'foo://zeit.de'}]
