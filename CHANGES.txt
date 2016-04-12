@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-2.72 (unreleased)
------------------
+2.71.2 (2016-04-12)
+-------------------
 
 - HOTFIX: Add a bit more teaser margin
 
