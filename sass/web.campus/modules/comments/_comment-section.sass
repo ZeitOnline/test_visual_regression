@@ -27,8 +27,10 @@ $comment-color-head-background:	$color-community-primary
 		@extend %font-beckett
 		+font-smoothing
 		font-size: remify(42px)
-
+		+respond-min($break-tablet-min)
+			font-size: remify(64px)
+		small
+			font-family: $font-franziska
+			font-size: remify(16px)
 	&__icon
-		height: remify(10px)
-		margin-left: .5em
-		width: remify(14px)
+		@extend %cta-button-icon

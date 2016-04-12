@@ -466,37 +466,6 @@ class RecommendCommentResource(PostCommentResource):
         self.request_method = 'GET'
 
 
-@pyramid.view.view_defaults(
-    renderer='zeit.web.site:templates/inc/comments/thread.html',
-    name='comment-thread',
-    custom_predicates=(zeit.web.site.view.is_zon_content,))
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
-@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
-@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
-class CommentThreadSite(
-        zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
-    pass
-
-
-@pyramid.view.view_defaults(
-    renderer='zeit.web.campus:templates/inc/comments/thread.html',
-    name='comment-thread',
-    custom_predicates=(zeit.web.campus.view.is_zco_content,))
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
-@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
-@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
-class CommentThreadCampus(CommentThreadSite):
-    pass
-
-
 def is_zon_or_zco_content(request, context):
     return (
         zeit.web.site.view.is_zon_content(request, context)) or (

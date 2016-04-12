@@ -1,4 +1,4 @@
-{% import '{}:templates/macros/layout_macro.tpl'.format(explicit_package or view.package) as lama %}
+{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
 
 {% block comment_section_head %}
     <h3 class="visually-hidden">Kommentare</h3>
@@ -114,9 +114,10 @@
 	{% endfor %}
 </div>
 
-{# TODO: use or ose not "block comment_section_pagination" ? #}
+{# TODO: use or not-use "block comment_section_pagination" ? #}
 {% include "zeit.web.core:templates/inc/comments/pagination.html" %}
 
+{% block comment_section_pagination %}{% endblock %}
 
 {% else %}
 	{% if view.context.advertising_enabled -%}

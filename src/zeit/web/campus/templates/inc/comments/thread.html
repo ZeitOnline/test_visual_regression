@@ -1,10 +1,7 @@
-{# We need to set the package explicitly, because this renderer is defined
-   inside Core – which makes the view.package=core (used for including macro).
-#}
-{% set explicit_package = 'zeit.web.campus' %}
 {% extends "zeit.web.core:templates/inc/comments/thread.html" %}
 
 {% block comment_section_head %}
+
     <h3 class="visually-hidden">Kommentare</h3>
     <div class="comment-section__head">
         <div class="comment-section__head-container comment-section__item">
@@ -12,7 +9,7 @@
                 <span class="comment-section__headline">
                     {{ view.comments.headline }}
                     {% if view.comments.pages.title %}
-                    <small>{{ view.comments.pages.title }}</small>
+                        <small>{{ view.comments.pages.title }}</small>
                     {% endif %}
                 </span>
                 {% if view.comment_area.show_comment_form %}
@@ -47,18 +44,48 @@
 
 {% block comment_section_pagination %}
 {# TODO: accessible (und wiederverwertbare?) Kommentar-Seiten-Navigation #}
-<nav class="article-pagination article-pagination--default article__item" aria-labeledby="article-pagination-title">
-    <h3 class="visually-hidden" id="article-pagination-title">Seitennavigation</h3>
 
-    <a class="article-pagination__link" href="http://friedbert-preview.zeit.de/2015/43/universitaet-studium-checkliste/seite-2" data-id="article-pager....next-link">
-            <span class="article-pagination__button article-pagination__button--next">Nächste Seite    <svg class="svg-symbol article-pagination__icon" role="img" aria-labelledby="title">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://friedbert-preview.zeit.de/static/2.67/css/web.campus/icons.svg#svg-arrow-right"></use>
-            </svg>
-</span>
+{%- set pages = view.comments.pages %}
+{%- if pages.pager %}
+    {%- if view.comments.sort == 'asc' -%}
+        {%- set prev_label = 'Ältere Kommentare' -%}
+        {%- set next_label = 'Neuere Kommentare' -%}
+    {%- else -%}
+        {%- set prev_label = 'Neuere Kommentare' -%}
+        {%- set next_label = 'Ältere Kommentare' -%}
+    {%- endif -%}
 
-        <ul class="article-pager article-pager--default">
-                <li class="article-pager__number article-pager__number--current"><span>1</span></li>        <li class="article-pager__number"><a href="http://friedbert-preview.zeit.de/2015/43/universitaet-studium-checkliste/seite-2" data-id="article-pager....2">2</a></li>        <li class="article-pager__number"><a href="http://friedbert-preview.zeit.de/2015/43/universitaet-studium-checkliste/seite-3" data-id="article-pager....3">3</a></li>        <li class="article-pager__number"><a href="http://friedbert-preview.zeit.de/2015/43/universitaet-studium-checkliste/seite-4" data-id="article-pager....4">4</a></li>
+<nav class="article-pagination article-pagination--default comment-section__item" aria-labeledby="comments-pagination-title">
+    <h3 class="visually-hidden" id="comments-pagination-title">Kommentarseiten</h3>
+
+    {% if pages.current == pages.total %}
+        <a class="article-pagination__link" href="{{ view.request | append_get_params(url=view.content_url, page=pages.current-1, cid=None) }}#comments">
+            <span class="article-pagination__button article-pagination__button--next">
+                {{ prev_label }}
+            </span>
+        </a>
+    {% else %}
+        <a class="article-pagination__link" href="{{ view.request | append_get_params(url=view.content_url, page=pages.current+1, cid=None) }}#comments">
+            <span class="article-pagination__button article-pagination__button--next">
+                Weitere Kommentare
+                {{ lama.use_svg_icon('arrow-right', 'article-pagination__icon', request) }}
+            </span>
+        </a>
+    {% endif %}
+
+        <ul class="pager__pages">
+            {% for page in pages.pager %}
+                <li class="article-pager__number{% if page == pages.current %} article-pager__number--current{% endif %}">
+                    {%- if page == pages.current -%}
+                        <span>{{ page }}</span>
+                    {%- elif page -%}
+                        <a href="{{ view.request | append_get_params(url=view.content_url, page=page, cid=None) }}#comments" data-id="article-pager....2_TODO">{{ page }}</a>
+                    {%- else -%}
+                        <span>…</span>
+                    {%- endif -%}
+                </li>
+            {% endfor %}
         </ul>
     </nav>
-
+{%- endif %}
 {% endblock %}
