@@ -1,7 +1,7 @@
 <header class="header-image{% if module.visible_mobile == False %} mobile-hidden{% endif %}">
     {%- require image = get_image(module, fallback=False, variant_id='cinema') -%}
         {%- set module_layout = "header-image" -%}
-        {%- include "zeit.web.core:templates/inc/asset/image_header.tpl" -%}
+        {%- include "zeit.web.campus:templates/inc/asset/image_header.tpl" -%}
     {%- endrequire -%}
 
     <h1 class="{{ 'header-image__heading' | with_mods('overlay' if image) }}">
