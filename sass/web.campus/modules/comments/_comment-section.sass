@@ -4,7 +4,6 @@ $comment-color-head-background:	$color-community-primary
 
 @import "web.core/modules/comments/comment-section"
 
-
 // own styles, which differ from core
 .comment-section
 	// TODO: Button ist eigentlich eigenständig? Unabhängig vom Header hier?
@@ -30,7 +29,8 @@ $comment-color-head-background:	$color-community-primary
 		+respond-min($break-tablet-min)
 			font-size: remify(64px)
 		small
-			font-family: $font-franziska
+			font-family: $font-tabletgothic
 			font-size: remify(16px)
+			text-transform: initial
 	&__icon
 		@extend %cta-button-icon

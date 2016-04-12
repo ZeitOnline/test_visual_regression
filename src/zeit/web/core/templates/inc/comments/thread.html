@@ -114,10 +114,7 @@
 	{% endfor %}
 </div>
 
-{# TODO: use or not-use "block comment_section_pagination" ? #}
 {% include "zeit.web.core:templates/inc/comments/pagination.html" %}
-
-{% block comment_section_pagination %}{% endblock %}
 
 {% else %}
 	{% if view.context.advertising_enabled -%}
