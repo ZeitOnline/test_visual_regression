@@ -32,11 +32,13 @@ $cp_comment__count-width: 52px
 	font-size: em(14px)
 	height: $cp_comment__count-height
 	position: absolute
-	right: remify(14px)
+	right: remify(32px)
 	text-align: center
 	top: remify(18px)
 	width: $cp_comment__count-width
 	z-index: 2
+	+respond-min($break-tablet-min)
+		right: remify(14px)
 
 .cp_comment__count
 	color: $white
@@ -52,3 +54,5 @@ $cp_comment__count-width: 52px
 
 .figcaption--hidden
 	display: none
+
+

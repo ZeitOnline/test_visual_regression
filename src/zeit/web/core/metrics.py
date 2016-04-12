@@ -135,3 +135,6 @@ def view_timer_rendering(event):
         memory_delta = memory - event.request.memory
         memory_log.debug(
             'Memory delta %s: %s KB', event.request.path, memory_delta)
+        metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
+        metrics.timer('zeit.web.core.view.pyramid.memory').send(
+            '', memory_delta)
