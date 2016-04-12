@@ -86,6 +86,11 @@ def test_spektrum_image_should_have_expected_attributes(application):
     assert meta.alt == 'Puzzle'
 
 
+def test_rss_images_should_render(testbrowser):
+    browser = testbrowser('/zeit-online/parquet-feeds')
+    assert browser.cssselect('.cp-area--zett article img')
+
+
 def test_spektrum_parquet_should_render_special_parquet_link(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
     teasers = browser.cssselect(
