@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - HOTFIX: Add more space to ZMO comment counter
 
+- HOTFIX: Make images in parquet feeds (spektrum, zett) work again
+
 - HOTFIX: Make old-style <intial> paragraphs work again
 
 
