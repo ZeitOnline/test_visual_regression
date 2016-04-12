@@ -79,7 +79,7 @@
                             <a href="{{ request.route_url('home') }}index" id="hp.zm.topnav.links.zon./index">» ZEIT ONLINE</a>
                         </div>
                         <div class="main-nav__section main-nav__service">
-                            <span class="main-nav__section__trigger js-main-nav-section-trigger"><span class="main-nav__section__text">Service</span>{{ use_svg_icon('arrow-down', 'main-nav__icon-arrow-down', view.request) }}</span>
+                            <span class="main-nav__section__trigger js-main-nav-section-trigger"><span class="main-nav__section__text">Service</span>{{ use_svg_icon('arrow-down', 'main-nav__icon-arrow-down', view.package) }}</span>
                             <div class="main-nav__section__content js-main-nav-section-content">
                                 <a href="{{ request.route_url('home') }}campus/index" id="hp.zm.topnav.links.zeitcampus./campus/index">ZEITCampus</a>
                                 <a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index" id="hp.zm.topnav.links.zeitgeschichte./wissen/zeit-geschichte/index">ZEITGeschichte</a>
