@@ -926,41 +926,29 @@ def adapt(obj, iface, name=u'', multi=False):
 @zeit.web.register_global
 @SHORT_TERM_CACHE.cache_on_arguments()
 def get_svg_from_file(name, className, package, cleanup, a11y):
-    """
-    Gets an svg from disk, process it for returning as text
-
-    :param name: name of the svg file, w/o extension
-    :param className: additional class to 'svg-symbol'
-    :param package: the actual zeit.package i.e. zeit.web.site
-    :param cleanup: clean svg from fill-attributes
-    :param a11y: activate aria-label to read out svg/title/text()
-    """
-
     try:
         subpath = '.'.join(package.split('.')[1:3])
-    except Exception:
+    except AttributeError:
         log.debug('Icon: {} has false package'.format(name))
         return ''
     url = pkg_resources.resource_filename(
         'zeit.web.static', 'css/svg/{}/{}.svg'.format(subpath, name))
     try:
         xml = lxml.etree.parse(url)
-        svg = xml.getroot()
-        title = xml.find('{http://www.w3.org/2000/svg}title')
-        svg.set('class', 'svg-symbol {}'.format(className))
-        svg.set('preserveAspectRatio', 'xMinYMin meet')
-        if cleanup:
-            # strip_attributes works on all child nodes
-            # which is expected behaviour in this case
-            lxml.etree.strip_attributes(xml, 'fill')
-        if a11y:
-            try:
-                svg.set('aria-label', title.text)
-                svg.set('role', 'img')
-            except:
-                pass
-        else:
-            svg.set('aria-hidden', 'true')
-        return lxml.etree.tostring(xml)
-    except IOError:
+    except (IOError, lxml.etree.XMLSyntaxError):
         return ''
+    try:
+        title = xml.find('{http://www.w3.org/2000/svg}title').text
+    except AttributeError:
+        title = 'Icon'
+    svg = xml.getroot()
+    svg.set('class', 'svg-symbol {}'.format(className))
+    svg.set('preserveAspectRatio', 'xMinYMin meet')
+    if cleanup:
+        lxml.etree.strip_attributes(xml, 'fill')
+    if a11y:
+        svg.set('role', 'img')
+        svg.set('aria-label', title)
+    else:
+        svg.set('aria-hidden', 'true')
+    return lxml.etree.tostring(xml)
