@@ -1,12 +1,20 @@
 Change log for zeit.web
 =======================
 
-2.71 (unreleased)
+2.72 (unreleased)
 -----------------
+
+- HOTFIX: Add more space to ZMO comment counter
+
+
+2.71.1 (2016-04-11)
+-------------------
 
 - HOTFIX: Include ad-tile in ZMO minor
 
-- HOTFIX: Add more space to ZMO comment counter
+
+2.71 (2016-04-11)
+-----------------
 
 - ZON-1626: Update ZMO-CPs to the z.c.cp-3.x data model,
             update CSS and templates to the ZON best practises
