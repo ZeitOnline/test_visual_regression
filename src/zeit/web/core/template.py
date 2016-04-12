@@ -936,7 +936,11 @@ def get_svg_from_file(name, className, package, cleanup, a11y):
     :param a11y: activate aria-label to read out svg/title/text()
     """
 
-    subpath = '.'.join(package.split('.')[1:3])
+    try:
+        subpath = '.'.join(package.split('.')[1:3])
+    except Exception:
+        log.debug('Icon: {} has false package'.format(name))
+        return ''
     url = pkg_resources.resource_filename(
         'zeit.web.static', 'css/svg/{}/{}.svg'.format(subpath, name))
     try:
