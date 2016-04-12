@@ -1,7 +1,5 @@
 {% extends 'zeit.web.core:templates/macros/layout_macro.tpl' %}
 
-{% block svg_asset_dir %}web.magazin{% endblock %}
-
 {% macro breadcrumbs(crumbs) -%}
     <div class="breadcrumbs">
         <div class="breadcrumbs__list is-constrained is-centered">
@@ -48,8 +46,8 @@
             <a href="{{ request.route_url('home') }}zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
                 <{{ title_tag }} class="main-nav__logo__wrap">
-                    {{ use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', request) }}
-                    {{ use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', request) }}
+                    {{ use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', view.package) }}
+                    {{ use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', view.package) }}
                 </{{ title_tag }}>
             </a>
             <div class="main-nav__menu">
@@ -112,7 +110,7 @@
         {% if request.session.user.picture %}
             <span class="main-nav__avatar" style="background-image: url({{ request.session.user.picture }})"></span>
         {%- else -%}
-            {{ use_svg_icon('avatar-std', 'main-nav__avatar', request) }}
+            {{ use_svg_icon('avatar-std', 'main-nav__avatar', view.package) }}
         {%- endif -%}
     </span>
     <div class="main-nav__section__content js-main-nav-section-content">
@@ -135,7 +133,7 @@
 
 {% macro copyrights(cr_list) -%}
     <div id="copyrights" class="copyrights">
-        {{ use_svg_icon('copyrights-close', 'js-toggle-copyrights copyrights__close copyrights__close--icon', request) }}
+        {{ use_svg_icon('copyrights-close', 'js-toggle-copyrights copyrights__close copyrights__close--icon', view.package) }}
         <section class="copyrights__wrapper is-centered is-constrained">
             <span class="copyrights__title">Bildrechte auf dieser Seite</span>
             <ul class="copyrights__list">
