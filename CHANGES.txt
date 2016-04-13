@@ -4,7 +4,7 @@ Change log for zeit.web
 2.72 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Fix pysolr error handling of non-ascii server responses
 
 
 2.71.2 (2016-04-12)
