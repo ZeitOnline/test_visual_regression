@@ -16,7 +16,7 @@
 			border-bottom: 3px solid currentColor
 			color: $color-article-primary
 			content: "Information"
-			font-size: em(32px)
+			font-size: em($font-size-32)
 			position: absolute
 			top: -0.46em
 
@@ -39,7 +39,7 @@
 	&__title
 		color: $color-article-primary
 		font-family: $font-tabletgothic
-		font-size: em(13px)
+		font-size: em($font-size-13)
 		font-weight: normal
 		letter-spacing: $letter-spacing-l
 		line-height: round-to-precision(19/13, $precision: 1)
@@ -89,7 +89,7 @@
 		td
 			color: #444
 			font-family: $font-tabletgothic
-			font-size: em(14px)
+			font-size: em($font-size-14)
 			line-height: round-to-precision(21/14, $precision: 1)
 			margin: 0 0 .6em
 		img
@@ -116,7 +116,7 @@
 			padding-top: remify(50px)
 			&:before
 				border-bottom-width: 4px
-				font-size: em(44px)
+				font-size: em($font-size-44)
 		.js &__container
 			+display-flex()
 			+flex-flow(row wrap)
@@ -137,7 +137,7 @@
 			display: none
 
 		&__title
-			font-size: em(15px)
+			font-size: em($font-size-15)
 			line-height: round-to-precision(20/15, $precision: 1)
 			.js &:before
 				content: none
@@ -151,5 +151,5 @@
 			margin-bottom: remify(40px)
 			padding-top: remify(8px)
 			p, li, td
-				font-size: em(16px)
+				font-size: em($font-size-16)
 				line-height: round-to-precision(24/16, $precision: 1)

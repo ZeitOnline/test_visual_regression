@@ -34,7 +34,7 @@
 		background-color: $primary-color
 		color: #fff
 		display: block
-		font-size: em(20px)
+		font-size: em($font-size-20)
 		line-height: inherit
 		padding: remify(6px $page-padding--small 2px)
 		+on-interaction
@@ -60,7 +60,7 @@
 
 	&__kicker
 		display: block
-		font-size: em(14px)
+		font-size: em($font-size-14)
 		font-weight: bold
 		letter-spacing: .01em
 		margin-bottom: remify(12px)
@@ -72,7 +72,7 @@
 	&__title
 		@extend %font-beckett
 		display: block
-		font-size: em(48px)
+		font-size: em($font-size-48)
 		word-wrap: break-word
 		&--default
 			color: $color-article-primary
@@ -81,7 +81,7 @@
 
 	&__byline,
 	&__metadata
-		font-size: em(15px)
+		font-size: em($font-size-15)
 		line-height: 20px / 15px
 		margin-bottom: remify(8px)
 
@@ -140,7 +140,7 @@
 			padding-bottom: 100% / 16 * 9 // image variant 'wide'
 		.article-header__byline
 			@extend %font-beckett
-			font-size: em(20px)
+			font-size: em($font-size-20)
 			margin-bottom: remify(16px)
 			a
 				border-bottom: 2px solid $color-community-primary
@@ -217,24 +217,24 @@
 			max-width: remify(660px)
 
 		&__kicker
-			font-size: em(16px)
+			font-size: em($font-size-16)
 			line-height: 18px / 16px
 			margin-bottom: remify(24px)
 			&--leserartikel
 				line-height: remify(49px)
 
 		&__title
-			font-size: em(112px)
+			font-size: em($font-size-112)
 			line-height: 100px / 112px
 			&--column
-				font-size: em(64px)
+				font-size: em($font-size-64)
 			&--leserartikel
-				font-size: em(82px)
+				font-size: em($font-size-82)
 				padding-bottom: 0
 
 		&__topic
 			display: inline-block
-			font-size: em(26px)
+			font-size: em($font-size-26)
 			margin: 0
 			padding: remify(8px 18px 2px)
 			&:before
@@ -269,7 +269,7 @@
 
 		&--leserartikel
 			.article-header__byline
-				font-size: em(26px)
+				font-size: em($font-size-26)
 		&__leserartikel-wrap
 			$color-stop: remify(47px)
 			+background-image(linear-gradient(to top, #fff $color-stop, $color-community-primary $color-stop))
@@ -307,12 +307,12 @@
 
 		&__title
 			&--column
-				font-size: em(82px)
+				font-size: em($font-size-82)
 			&--leserartikel
-				font-size: em(112px)
+				font-size: em($font-size-112)
 
 		&__topic
-			font-size: em(32px)
+			font-size: em($font-size-32)
 			padding: remify(9px 23px 2px)
 
 		&__column-image
