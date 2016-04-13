@@ -35,6 +35,7 @@ log = logging.getLogger(__name__)
 
 SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
 
+
 @zeit.web.register_global
 def get_variant(group, variant_id, fill_color=None):
     try:
@@ -923,12 +924,11 @@ def adapt(obj, iface, name=u'', multi=False):
         return zope.component.queryAdapter(obj, iface, name)
 
 
-@zeit.web.register_global
 @SHORT_TERM_CACHE.cache_on_arguments()
-def get_svg_from_file(name, className, package, cleanup, a11y):
+def get_svg_from_file_cached(name, className, package, cleanup, a11y):
     try:
         subpath = '.'.join(package.split('.')[1:3])
-    except AttributeError:
+    except (AttributeError, TypeError):
         log.debug('Icon: {} has false package'.format(name))
         return ''
     url = pkg_resources.resource_filename(
@@ -952,3 +952,8 @@ def get_svg_from_file(name, className, package, cleanup, a11y):
     else:
         svg.set('aria-hidden', 'true')
     return lxml.etree.tostring(xml)
+
+
+@zeit.web.register_global
+def get_svg_from_file(name, className, package, cleanup, a11y):
+    return get_svg_from_file_cached(name, className, package, cleanup, a11y)
