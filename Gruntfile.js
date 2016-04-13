@@ -292,12 +292,6 @@ module.exports = function(grunt) {
                 cwd: project.sourceDir + 'sass/web.site/svg-amp',
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.site/svg-amp/_minified'
-            },
-            framebuilder: {
-                expand: true,
-                cwd: project.sourceDir + 'sass/web.site/svg-framebuilder',
-                src: [ '*.svg' ],
-                dest: project.sourceDir + 'sass/web.site/svg-framebuilder/_minified'
             }
         },
 
@@ -378,26 +372,6 @@ module.exports = function(grunt) {
             siteAmp: {
                 src: '<%= svgmin.siteAmp.dest %>/*.svg',
                 dest: project.codeDir + 'css/web.site/amp.svg'
-            },
-            campus: {
-                src: '<%= svgmin.campus.dest %>/*.svg',
-                dest: project.codeDir + 'css/web.campus/icons.svg'
-            },
-            campus_framebuilder: {
-                src: '<%= svgmin.campus_framebuilder.dest %>/*.svg',
-                dest: project.codeDir + 'css/web.campus/framebuilder.svg'
-            },
-            site: {
-                src: '<%= svgmin.site.dest %>/*.svg',
-                dest: project.codeDir + 'css/web.site/icons.svg'
-            },
-            framebuilder: {
-                src: '<%= svgmin.framebuilder.dest %>/*.svg',
-                dest: project.codeDir + 'css/web.site/framebuilder.svg'
-            },
-            magazin: {
-                src: '<%= svgmin.magazin.dest %>/*.svg',
-                dest: project.codeDir + 'css/web.magazin/icons.svg'
             }
         },
 
