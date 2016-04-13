@@ -6,7 +6,9 @@ $comment-color-head-background:	$color-community-primary
 
 // own styles, which differ from core
 .comment-section
-	// TODO: Button ist eigentlich eigenständig? Unabhängig vom Header hier?
+	&__head-container
+		+clearfix
+		position: relative
 	&__button
 		+font-smoothing
 		border: 3px solid #fff
@@ -15,7 +17,10 @@ $comment-color-head-background:	$color-community-primary
 		font-weight: bold
 		padding: remify(6px 8px 6px 12px)
 		+respond-min($break-phablet-min)
+			bottom: 0
 			float: right
+			position: absolute
+			right: $page-padding
 	&__head
 		background-color: $color-community-primary
 		padding-bottom: em(32px - 6px) // compensate for short-length of font
