@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-2942: Use Core metadata for Campus
 
+
+2.71.3 (2016-04-13)
+-------------------
+
 - HOTFIX: Make ranking areas work again on dynamic centerpages
 
 - MAINT: Fix pysolr error handling of non-ascii server responses
