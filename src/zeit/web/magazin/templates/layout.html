@@ -148,19 +148,17 @@
                 {% profile %}
                 {% block footer %}
                     <footer class="main-footer">
-                        <div class="main-footer__box is-constrained is-centered">
-                            {% block footer_logo %}
-                                {{ lama.use_svg_icon('logo-zmo-small', 'main-footer__logo', request) }}
-                            {% endblock footer_logo %}
-                            <div class="main-footer__links">
-                                <div>
+                        <div class="main-footer__box">
+                            <div class="is-constrained is-centered">
+                                {% block footer_logo %}
+                                    {{ lama.use_svg_icon('logo-zmo-small', 'main-footer__logo', request) }}
+                                {% endblock footer_logo %}
+                                <div class="main-footer__links">
                                     <ul>
                                         <li>VERLAG</li>
                                         <li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">Mediadaten</a></li>
                                         <li><a href="http://www.zeit-verlagsgruppe.de/marken-und-produkte/geschaeftskunden/artikel-nachrucke/">Rechte &amp; Lizenzen</a></li>
                                     </ul>
-                                </div>
-                                <div>
                                     <ul>
                                         <li><a class="js-image-copyright-footer" href="#bildrechte">Bildrechte</a></li>
                                         <li><a href="{{ request.route_url('home') }}hilfe/datenschutz">Datenschutz</a></li>

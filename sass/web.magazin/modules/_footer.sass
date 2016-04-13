@@ -6,22 +6,21 @@
 
 .main-footer__box
     +clearfix
-    padding-left: $page-padding--small
-    padding-right: $page-padding--small
-    +respond-min($break-2)
-        padding-left: 0
-        padding-right: 0
+    +padded
 
 .main-footer__logo
-    width: 41px
-    height: 20px
-    margin: $micro $little $compact 0
-    color: white
+    color: #fff
+    float: left
+    height: remify(20px)
+    margin: remify(4px 14px 20px 0)
     opacity: 0.3
+    width: remify(41px)
 
 .main-footer__links
     color: $grey
-    font-size: $font-xxs
+    float: left
+    font-size: remify(12px)
+    letter-spacing: $letter-spacing-s
     ul
         list-style-type: none
         margin: 0
@@ -42,12 +41,3 @@
         cursor: pointer
         color: $grey
         +animated-interaction($grey)
-
-+respond-min($break-0)
-    .main-footer__logo
-        float: left
-        margin-bottom: 0
-    .main-footer__links
-        float: left
-        margin-left: $little
-        font-size: $font-xs
