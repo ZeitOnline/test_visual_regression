@@ -773,6 +773,9 @@ class BreakingNews(object):
         try:
             bn_banner_content = zeit.cms.interfaces.ICMSContent(bn_path)
         except TypeError:
+            bn_banner_content = None
+        if not zeit.content.article.interfaces.IArticle.providedBy(
+                bn_banner_content):
             self.published = False
             return
         self.published = zeit.cms.workflow.interfaces.IPublishInfo(

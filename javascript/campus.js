@@ -16,13 +16,15 @@ require([
     'web.core/images',
     'web.core/clicktracking',
     'web.campus/menu',
-    'web.core/comments'
+    'web.core/comments',
+    'web.core/articledate'
 ], function(
     zeit,
     images,
     clicktracking,
     menu,
-    comments
+    comments,
+    articledate
 ) {
     var article = document.getElementById( 'js-article' );
 
@@ -33,6 +35,7 @@ require([
 
     if ( article ) {
         comments.init();
+        articledate.init();
     }
 });
 

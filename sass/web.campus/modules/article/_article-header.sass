@@ -100,7 +100,8 @@
 			white-space: nowrap
 		> time:after,
 		> span:after
-			content: ", "
+			content: " / "
+			margin: 0 0.25em
 		> time:last-child:after,
 		> span:last-child:after
 			content: none
@@ -161,6 +162,10 @@
 		+flex-flow(column nowrap)
 	&__leserartikel-image
 		margin-top: remify(32px)
+
+.metadata__seperator
+	margin: 0 .25em
+
 
 ////////////
 // TABLET //

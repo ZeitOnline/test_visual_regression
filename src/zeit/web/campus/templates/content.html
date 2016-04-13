@@ -2,7 +2,7 @@
 
 {% block main %}
     {% block content %}
-    <article class="{{ 'article' | with_mods(view.article_layout, view | block_type) }}" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
+    <article class="{{ 'article' | with_mods(view.article_layout, view | block_type) }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
         {% block article_heading -%}
             {% include ["zeit.web.campus:templates/inc/article-header/{}.html".format(view.article_layout),
