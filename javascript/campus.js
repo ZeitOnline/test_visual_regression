@@ -50,6 +50,7 @@ require([
     'web.core/plugins/jquery.toggleRegions',
     'web.core/plugins/jquery.infobox',
     'web.core/plugins/jquery.inlinegallery',
+    'web.core/plugins/jquery.imageCopyrightFooter',
     'web.core/plugins/jquery.referrerCount'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
@@ -67,5 +68,7 @@ require([
         case 'gallery':
             main.find( '.js-gallery' ).inlinegallery();
     }
+
+    $( '.js-image-copyright-footer' ).imageCopyrightFooter();
 
 });
