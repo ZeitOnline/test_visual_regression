@@ -6,9 +6,6 @@ $comment-color-head-background:	$color-community-primary
 
 // own styles, which differ from core
 .comment-section
-	&__head-container
-		+clearfix
-		position: relative
 	&__button
 		+font-smoothing
 		border: 3px solid #fff
@@ -19,10 +16,11 @@ $comment-color-head-background:	$color-community-primary
 		+on-interaction
 			border-color: currentColor
 		+respond-min($break-phablet-min)
-			bottom: 0
 			float: right
-			position: absolute
-			right: $page-padding
+			// fake the button to appear in the center of the pink section
+			// (phablet) or on the bottom-line of the big headline (tablet)
+			margin-top: remify(6px)
+
 	&__head
 		background-color: $color-community-primary
 		padding-bottom: em(32px - 6px) // compensate for short-length of font
