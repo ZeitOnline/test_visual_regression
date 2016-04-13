@@ -4,6 +4,20 @@ Change log for zeit.web
 2.72 (unreleased)
 -----------------
 
+- Nothing changed yet.
+
+
+2.71.3 (2016-04-13)
+-------------------
+
+- HOTFIX: Make ranking areas work again on dynamic centerpages
+
+- MAINT: Fix pysolr error handling of non-ascii server responses
+
+
+2.71.2 (2016-04-12)
+-------------------
+
 - HOTFIX: Add a bit more teaser margin
 
 - HOTFIX: Add more space to ZMO comment counter

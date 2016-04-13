@@ -100,11 +100,15 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     def raw_query(self):
         if self.search_form:
             return self.search_form.raw_query
+        else:
+            return super(Ranking, self).raw_query
 
     @property
     def raw_order(self):
         if self.search_form:
             return self.search_form.raw_order
+        else:
+            return super(Ranking, self).raw_order
 
     @property
     def sort_order(self):
