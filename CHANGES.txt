@@ -1,8 +1,8 @@
 Change log for zeit.web
 =======================
 
-2.72 (unreleased)
------------------
+2.71.3 (2016-04-13)
+-------------------
 
 - HOTFIX: Make ranking areas work again on dynamic centerpages
 
