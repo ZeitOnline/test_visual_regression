@@ -104,6 +104,8 @@ def rsslink_to_imagegroup(context):
 @grokcore.component.adapter(IRSSLink)
 class RSSImages(object):
 
+    fill_color = None
+
     def __init__(self, context):
         self.context = context
         self.image = zeit.content.image.interfaces.IImageGroup(context)

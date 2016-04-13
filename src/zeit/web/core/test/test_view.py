@@ -461,18 +461,26 @@ def test_banner_advertorial_extrarulez(mock_ad_view):
 
 def test_centerpage_should_have_manual_seo_pagetitle(application):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/index')
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/index')
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         context, pyramid.testing.DummyRequest())
-    assert view.pagetitle == u'My Test SEO - ZEITmagazin ONLINE'
+    assert view.pagetitle == u'My Test SEO - ZEITmagazin ONLINE | ZEITmagazin'
 
 
 def test_centerpage_should_have_generated_seo_pagetitle(application):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/lebensart-3')
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/index')
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         context, pyramid.testing.DummyRequest())
-    assert view.pagetitle == u'ZMO CP: ZMO | ZEITmagazin'
+    assert view.pagetitle == u'My Test SEO - ZEITmagazin ONLINE | ZEITmagazin'
+
+
+def test_centerpage_should_have_subtitle_seo_pagedesciption(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/index')
+    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
+        context, pyramid.testing.DummyRequest())
+    assert 'My Test SEO - ZEITmagazin ONLINE' in view.pagedescription
 
 
 def test_article_should_have_postfixed_seo_pagetitle(application):
@@ -494,19 +502,11 @@ def test_homepage_should_have_unpostfixed_seo_pagetitle(application):
 
 def test_centerpage_should_have_manual_seo_pagedescription(application):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/index')
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/index')
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         context, pyramid.testing.DummyRequest())
     assert view.pagedescription == (u'My Test SEO - ZEITmagazin ONLINE ist '
                                     'die emotionale Seite von ZEIT ONLINE.')
-
-
-def test_centerpage_should_have_subtitle_seo_pagedesciption(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/lebensart-3')
-    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
-        context, pyramid.testing.DummyRequest())
-    assert view.pagedescription == u'ZMO CP'
 
 
 def test_centerpage_should_have_default_seo_pagedescription(application):

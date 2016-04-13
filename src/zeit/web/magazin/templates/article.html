@@ -3,7 +3,8 @@
 
 {% macro render_page(page) %}
     {% for item in page %}
-        {{ (blocks[item | block_type] or blocks['no_block'])(item) }}
+        {% set type = item | block_type %}
+        {{ (blocks[type] or blocks['no_block'])(item) }}
     {% endfor %}
 {% endmacro %}
 
@@ -74,7 +75,7 @@
                 {% endblock article_comments %}
 
                 {% if view.nextread %}
-                    {%- include "zeit.web.magazin:templates/inc/article_area_nextread.html" ignore missing -%}
+                    {%- include "zeit.web.magazin:templates/inc/article/nextread.html" -%}
                 {% endif %}
             </div>
         </div>

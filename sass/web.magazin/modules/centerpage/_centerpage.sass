@@ -1,24 +1,73 @@
+$trio-teaser-width: 270px
+$major-width: 65%
+$minor-width: 35%
+
 .cp-region
-	+pie-clearfix
-	&:empty
-		display: none
-	&--solo,
-	&--duo
-		+respond-min($break-2)
-			&:first-child
-				margin-top: 0
+    +pie-clearfix
+    &:empty
+        display: none
+    &--solo,
+    &--duo
+        +respond-min($break-2)
+            &:first-child
+                margin-top: 0
 
 .cp-area
-	width: 100%
-	&--solo
-		padding: 0
-		position: relative
+    width: 100%
+    &--solo
+        padding: 0
+        position: relative
+    &--trio
+        +display-flex
+        +flex-wrap(wrap)
+        +justify-content(space-between)
+        margin: 0 auto remify($compact--px) auto
 
-	+respond-min($break-2)
-		float: left
-		&--major
-			padding: remify(0 $compact--px 0 $compact--px)
-			width: $cp_lead__wrap-width
-		&--minor
-			padding: remify($compact--px $compact--px 0 0)
-			width: $cp_informatives__wrap-width
+        // +respond-min-max($break-1, $break-3)
+        //     width: 2*$mtb-teaser-width + $compact // two teaser columns, one margin
+        // +respond-min($break-3)
+        //     width: 3*$mtb-teaser-width + 2*$big
+
+        +respond-min-max($break-1, $break-3)
+            +justify-content(space-around) // centers the last teaser for uneven teaser counts
+            width: remify( 2*$trio-teaser-width + 2*$compact--px )
+
+        +respond-min($break-3)
+            padding: remify(0 $compact--px 0 $compact--px)
+            width: 100%
+
+    // as there could be a fullwidth teaser on top or not
+    // we have to add the margin here
+    &--major,
+    &--minor
+        margin-top: $small
+        +respond-min($break-2)
+            margin-top: $compact
+
+    +respond-min($break-2)
+        &--major
+            +display-flex
+            +flex-wrap(wrap)
+            +justify-content(space-between)
+            float: left
+            padding: remify(0 $compact--px 0 $compact--px)
+            width: $major-width
+        &--minor
+            float: left
+            padding: remify(0 $compact--px 0 0)
+            width: $minor-width
+
+    &__title
+        @extend %headline
+        text-align: center
+        width: 100%
+        text-transform: uppercase
+        padding: remify($compact--px 0)
+        font-size: $font-ml
+        border-top: $dblhair solid $black
+
+
+/* switch it off for legacy as we don't have the teaser any more */
+/* legacy: delete when done (AS) */
+.mtb
+    display: none

@@ -123,20 +123,7 @@
           </container>
         </region>
         <region area="informatives">
-          <container cp:type="fullgraphical" module="fullgraphical" cp:__name__="id-8c9759a7-0be0-4f96-a13c-c4d15cdc94b0" layout="368x220">
-            <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/artikel/advertorial" year="2014" ressort="Angebote" contenttype="article" publication-date="" expires="" ns0:href="http://www.hennessy.com" ns0:target="_blank" uniqueId="http://xml.zeit.de/artikel/advertorial" date-last-modified="2014-11-19T14:33:28+00:00" date-first-released="2014-11-19T14:34:28.477918+00:00" date-last-published="2014-11-19T14:34:28.477918+00:00" last-semantic-change="2014-11-19T14:32:44.698869+00:00">
-              <supertitle xsi:nil="true"/>
-              <title py:pytype="str">Zu Hennessy</title>
-              <text xsi:nil="true"/>
-              <description xsi:nil="true"/>
-              <byline xsi:nil="true"/>
-              <breadcrumb_title xsi:nil="true"/>
-            </block>
-            <image type="intern" href="http://xml.zeit.de/exampleimages/advertorial/hennessy-logo/hennessy-logo.JPG" align="left" publication-date="" expires="">
-              <bu xsi:nil="true"/>
-            </image>
-          </container>
-          <container cp:type="teaser" module="zmo-gallery-upright" hide-dupes="True" visible="True" cp:__name__="id-8012d88f-ac3e-4e13-a3d4-ce39d8e25454">
+          <container cp:type="teaser" module="zmo-upright" hide-dupes="True" visible="True" cp:__name__="id-8012d88f-ac3e-4e13-a3d4-ce39d8e25454">
             <block href="http://xml.zeit.de/artikel/advertorial" uniqueId="http://xml.zeit.de/artikel/advertorial" year="2014" issue="43" ressort="Angebote" contenttype="article" publication-date="" expires="" date-last-modified="2014-11-10T09:48:54+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-11-10T09:48:49.226076+00:00">
             </block>
           </container>

@@ -76,6 +76,7 @@
         image_pattern="zon-thumbnail"
         areas="duo major minor ranking parquet spektrum zett zmo-parquet author-favourite-content author-articles"
         default="major minor parquet zmo-parquet ranking spektrum zett author-favourite-content author-articles"
+        available="zeit.cms.section.interfaces.IZONContent"
         />
     <layout
         id="zon-square"
@@ -332,106 +333,83 @@
         areas="solo duo major minor ranking parquet"
         available="zeit.web.core.interfaces.IInternalUse"
         />
+
     <layout
         id="zmo-leader-fullwidth"
         title="ZMO Vollbreiter Aufmacher"
-        image_pattern="zmo-landscape-large"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="wide"
+        areas="solo"
         available="zeit.magazin.interfaces.IZMOContent"
     />
     <layout
         id="zmo-leader-fullwidth-light"
         title="ZMO Vollbreiter Aufmacher (helles Bild)"
-        image_pattern="zmo-landscape-large"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="wide"
+        areas="solo"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
     <layout
         id="zmo-square-large"
         title="ZMO großes Quadrat"
-        image_pattern="zmo-square-large"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="square"
+        areas="major"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
     <layout
         id="zmo-square-large-light"
         title="ZMO großes Quadrat (helles Bild)"
-        image_pattern="zmo-square-large"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-    />
-
-    <layout
-        id="zmo-upright-large"
-        title="ZMO großer Teaser hochkant"
-        image_pattern="zmo-lead-upright"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-    />
-
-    <layout
-        id="zmo-upright-large-light"
-        title="ZMO großer Teaser hochkant (helles Bild)"
-        image_pattern="zmo-lead-upright"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="square"
+        areas="major"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
     <layout
         id="zmo-landscape-large"
         title="ZMO großer Teaser 16:9"
-        image_pattern="zmo-landscape-large"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="wide"
+        areas="major"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
     <layout
         id="zmo-landscape-large-photo"
         title="ZMO großer Teaser 16:9 Fotokolumne"
-        image_pattern="zmo-landscape-large"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="wide"
+        areas="major"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
     <layout
         id="zmo-landscape-small"
         title="ZMO kleiner Teaser 16:9"
-        image_pattern="zmo-landscape-small"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="wide"
+        areas="major minor"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
     <layout
-        id="zmo-gallery-upright"
+        id="zmo-upright"
         title="ZMO Fotostrecke hochkant"
-        image_pattern="zmo-upright"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="tile"
+        areas="minor"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
     <layout
-        id="zmo-mtb-upright"
-        title="ZMO monothematischer Block hochkant"
-        image_pattern="zmo-upright"
-        areas="solo duo major minor ranking parquet"
+        id="zmo-upright-large"
+        title="ZMO großer Teaser hochkant"
+        image_pattern="tile"
+        areas="major"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
     <layout
         id="zmo-mtb-square"
         title="ZMO monothematischer Block quadratisch"
-        image_pattern="zmo-square-large"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-    />
-
-    <layout
-        id="zmo-product-square"
-        title="ZMO Produkt quadratisch (mini)"
-        image_pattern="zmo-square-small"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="square"
+        areas="trio"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
@@ -439,55 +417,31 @@
         id="zmo-card-citation"
         title="ZMO Karte Zitat"
         image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
+        areas="minor trio"
         available="zeit.magazin.interfaces.IZMOContent"
         />
+
     <layout
         id="zmo-card-picture"
         title="ZMO Karte mit Bild"
         image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
+        areas="minor trio"
         available="zeit.magazin.interfaces.IZMOContent"
         />
+
     <layout
         id="zmo-card-flip-read"
         title="ZMO Karte Flip'n'Read"
         image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
+        areas="minor trio"
         available="zeit.magazin.interfaces.IZMOContent"
         />
-    <layout
-        id="zmo-card-share-read"
-        title="ZMO Karte Share'n'Read"
-        image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-        />
-    <layout
-        id="zmo-card-flip-share"
-        title="ZMO Karte Flip'n'Share"
-        image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-        />
-    <layout
-        id="zmo-card-flip-flip"
-        title="ZMO Karte Flip'n'Flip"
-        image_pattern="zmo-card-picture"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-        />
-    <layout
-        id="fullgraphical"
-        title="ZMO Vollgraphischer Block für die Informatives"
-        image_pattern="zmo-square-large"
-        areas="solo duo major minor ranking parquet"
-        available="zeit.magazin.interfaces.IZMOContent"
-    />
+
     <layout
         id="zmo-print-cover"
         title="ZMO Print Cover"
-        image_pattern="zmo-print-cover"
-        areas="solo duo major minor ranking parquet"
+        image_pattern="original"
+        areas="minor"
         available="zeit.magazin.interfaces.IZMOContent"/>
+
 </layouts>

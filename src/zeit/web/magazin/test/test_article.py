@@ -181,7 +181,7 @@ def test_article03_page2_has_correct_webtrekk_values(testbrowser):
 
 
 def test_cp_has_correct_webtrekk_values(testbrowser):
-    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo')
+    browser = testbrowser('/zeit-magazin/test-cp-legacy/test-cp-zmo')
     assert '1: "redaktion",' in browser.contents
     assert '2: "centerpage",' in browser.contents
     assert '3: "lebensart",' in browser.contents
@@ -192,8 +192,8 @@ def test_cp_has_correct_webtrekk_values(testbrowser):
     assert '8: "zeitmz/centerpage",' in browser.contents
     assert '9: ""' in browser.contents
     assert ('wt.pl?p=328,redaktion.lebensart...'
-            'centerpage.zede|localhost/zeit-magazin/test-cp/test-cp-zmo,'
-            '0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=centerpage&amp;'
+            'centerpage.zede|localhost/zeit-magazin/test-cp-legacy/test-cp-zmo'
+            ',0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=centerpage&amp;'
             'cg3=lebensart&amp;cg4=zede&amp;cg5=&amp;cg6=&amp;'
             'cg7=test-cp-zmo&amp;cg8=zeitmz/centerpage&amp;'
             'cg9=') in browser.contents
@@ -520,27 +520,12 @@ def test_nextread_teaser_block_teasers_is_accessable(application):
         'Nextread block should expose its teasers via index.'
 
 
-def test_nextread_base_layout_has_image_element_if_available(testbrowser):
+def test_nextread_base_layout_has_expected_structure(testbrowser):
     browser = testbrowser('/artikel/09')
-    nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert len(nextread.cssselect('img')) == 1, \
-        'There should be exactly one image tag in a "base" nextread teaser.'
-    browser = testbrowser('/artikel/10')
-    nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert len(nextread.cssselect('img')) == 1, \
-        'The nextread of "Artikel 10" has no teaser image asset.'
-
-
-def test_nextread_maximal_layout_has_image_background_if_available(
-        testbrowser):
-    browser = testbrowser('/artikel/08')
-    nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert 'background-image' in nextread.attrib.get('style'), \
-        'The teaser image should be set as a background for "maximal" teasers.'
-    browser = testbrowser('/artikel/03')
-    nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert 'background-image' in nextread.attrib.get('style'), \
-        'The nextread of "Artikel 03" has no teaser image asset.'
+    nextread = browser.cssselect('.nextread-base')[0]
+    assert len(nextread.cssselect('a')) == 1
+    assert len(nextread.cssselect('.nextread-base__media')) == 1
+    assert len(nextread.cssselect('.nextread-base__heading')) == 1
 
 
 def test_nextread_should_fallback_to_default_layout(application):
@@ -593,7 +578,7 @@ def test_article_has_linked_copyright(testbrowser):
     output = ""
     for line in browser.contents.splitlines():
         output += line.strip()
-    assert '<span class="figure__copyright">' \
+    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
         '<a href="http://foo.de" target="_blank">' \
         '© Reuters/Alessandro Bianchi' in output
 
@@ -603,7 +588,7 @@ def test_longform_has_linked_copyright(testbrowser):
     output = ""
     for line in browser.contents.splitlines():
         output += line.strip()
-    assert '<span class="figure__copyright">' \
+    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
         '<a href="http://foo.de" target="_blank">' \
         '© Johannes Eisele/AFP/Getty Images' in output
 
@@ -613,13 +598,13 @@ def test_header_has_linked_copyright(testbrowser):
     output = ""
     for line in browser.contents.splitlines():
         output += line.strip()
-    assert '<span class="figure__copyright">' \
+    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
         '<a href="http://foo.de" target="_blank">©foo' in output
 
 
 def test_feature_longform_should_have_zon_logo_classes(testbrowser):
     browser = testbrowser('/feature/feature_longform')
-    assert browser.cssselect('.main-nav__logo__img.icon-logo-zon-small')
+    assert browser.cssselect('.main-nav__brand-logo--zon-small')
     logolink = browser.cssselect('a.main-nav__logo')
     assert logolink[0].attrib['href'] == 'http://localhost/index'
 

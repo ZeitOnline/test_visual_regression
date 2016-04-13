@@ -155,6 +155,32 @@ def test_search_form_should_create_valid_type_restricted_query(
         'NOT expires:[* TO NOW]')
 
 
+def test_search_area_should_delegate_sort_order_to_search_form(
+        search_form, search_area, dummy_request):
+    dummy_request.GET['q'] = 'irgendetwas'
+    dummy_request.GET['sort'] = 'publikation'
+    assert search_area.sort_order == 'publikation'
+    orders = zeit.web.site.module.search_form.ORDERS
+    assert search_area.raw_order == orders['publikation']
+
+
+def test_ranking_area_should_use_default_order_when_no_search_form(
+        application):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
+    area = zeit.web.core.centerpage.get_area(zeit.web.core.utils.find_block(
+        cp, attrib='area', kind='ranking'))
+    assert area.raw_order == zeit.content.cp.interfaces.IArea[
+        'raw_order'].default
+
+
+def test_ranking_area_should_use_its_own_query_when_no_search_form(
+        application):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
+    area = zeit.web.core.centerpage.get_area(zeit.web.core.utils.find_block(
+        cp, attrib='area', kind='ranking'))
+    assert 'umbrien' in area.raw_query
+
+
 def test_search_area_should_produce_valid_set_of_search_results(search_area):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId': 'foo://zeit.de'}]

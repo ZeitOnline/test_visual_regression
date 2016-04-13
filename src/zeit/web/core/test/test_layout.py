@@ -3,7 +3,7 @@
 
 def test_wrapper_functions_are_working(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/zeit-magazin/test-cp/test-cp-zmo' % testserver.url)
+    driver.get('%s/zeit-magazin/test-cp-legacy/test-cp-zmo' % testserver.url)
 
     # test window.wrapper object exists
     obj = driver.execute_script("return typeof(window.wrapper)")
