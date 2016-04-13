@@ -1751,23 +1751,23 @@ def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats-zmo')
 
     teaser_fullwidth_logo = browser.cssselect(
-        '.teaser-fullwidth__kicker-logo--zmo')[0]
+        '.teaser-fullwidth__kicker-logo--zmo')
     teaser_classic_logo = browser.cssselect(
-        '.teaser-classic__kicker-logo--zmo')[0]
+        '.teaser-classic__kicker-logo--zmo')
     teaser_large_logo = browser.cssselect(
-        '.teaser-large__kicker-logo--zmo')[0]
+        '.teaser-large__kicker-logo--zmo')
     teaser_small_logo = browser.cssselect(
-        '.teaser-small__kicker-logo--zmo')[0]
+        '.teaser-small__kicker-logo--zmo')
     teaser_small_minor_logo = browser.cssselect(
-        '.teaser-small-minor__kicker-logo--zmo')[0]
+        '.teaser-small-minor__kicker-logo--zmo')
     teaser_kicker_zmo_parquet = browser.cssselect(
         '.teaser-small__kicker--zmo-parquet svg')
 
     assert len(teaser_fullwidth_logo) == 1
     assert len(teaser_classic_logo) == 1
-    assert len(teaser_large_logo) == 1
-    assert len(teaser_small_logo) == 1
-    assert len(teaser_small_minor_logo) == 1
+    assert len(teaser_large_logo) == 2
+    assert len(teaser_small_logo) == 4
+    assert len(teaser_small_minor_logo) == 2
     # assert there is no kicker logo when in zmo parquet
     assert len(teaser_kicker_zmo_parquet) == 0
 
@@ -1808,24 +1808,24 @@ def test_zett_teaser_kicker_should_contain_logo(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats-zett')
 
     teaser_fullwidth_logo = browser.cssselect(
-        '.teaser-fullwidth__kicker-logo--zett')[0]
+        '.teaser-fullwidth__kicker-logo--zett')
     teaser_classic_logo = browser.cssselect(
-        '.teaser-classic__kicker-logo--zett')[0]
+        '.teaser-classic__kicker-logo--zett')
     teaser_large_logo = browser.cssselect(
-        '.teaser-large__kicker-logo--zett')[0]
+        '.teaser-large__kicker-logo--zett')
     teaser_small_logo = browser.cssselect(
-        '.teaser-small__kicker-logo--zett')[0]
+        '.teaser-small__kicker-logo--zett')
     teaser_small_minor_logo = browser.cssselect(
-        '.teaser-small-minor__kicker-logo--zett')[0]
+        '.teaser-small-minor__kicker-logo--zett')
     teaser_square_logo = browser.cssselect(
-        '.teaser-square__kicker-logo--zett')[0]
+        '.teaser-square__kicker-logo--zett')
 
     assert len(teaser_fullwidth_logo) == 1
     assert len(teaser_classic_logo) == 1
-    assert len(teaser_large_logo) == 1
-    assert len(teaser_small_logo) == 1
-    assert len(teaser_small_minor_logo) == 1
-    assert len(teaser_square_logo) == 1
+    assert len(teaser_large_logo) == 2
+    assert len(teaser_small_logo) == 4
+    assert len(teaser_small_minor_logo) == 2
+    assert len(teaser_square_logo) == 2
 
 
 def test_zett_teaser_kicker_should_have_zett_modifier(testbrowser, testserver):

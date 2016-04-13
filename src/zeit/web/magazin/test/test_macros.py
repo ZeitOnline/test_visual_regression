@@ -323,7 +323,7 @@ def test_macro_video_should_produce_markup(jinja2_env):
            ' title="Video: title">')
 
     cap = '<figcaption class="figure__caption">test</figcaption>'
-    module = tpl.make_module({'request': mock.Mock()})
+    module = tpl.make_module({'view': mock.Mock()})
     lines = module.video(obj).splitlines()
     output = ''
     for line in lines:
@@ -546,7 +546,7 @@ def test_macro_copyrights(jinja2_env):
             link=None
         )
     ]
-    module = tpl.make_module({'request': mock.Mock()})
+    module = tpl.make_module({'view': mock.Mock()})
     snippet = lxml.html.fromstring(module.copyrights(copyrights))
 
     assert len(snippet.cssselect('li.copyrights__entry')) == 2, (
