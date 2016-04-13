@@ -665,7 +665,8 @@ def test_ressort_literally_returns_correct_ressort(application):
     assert article_view.ressort_literally == 'Leben'
 
 
-def test_navigation_should_show_logged_in_user_correctly(jinja2_env):
+def test_navigation_should_show_logged_in_user_correctly(
+        jinja2_env, dummy_request):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/inc/navigation/login-state.html')
 
@@ -675,15 +676,16 @@ def test_navigation_should_show_logged_in_user_correctly(jinja2_env):
             'user': {'picture': None}}
 
     # no pic
-    css = lxml.html.fromstring(tpl.render(**info)).cssselect
-    assert css('span')[1].attrib['class'] == (
-        'main-nav__community__icon icon-avatar-std')
+    css = lxml.html.fromstring(
+        tpl.render(request=dummy_request, **info)).cssselect
+    assert 'main-nav__avatar' in css('svg')[0].attrib['class']
 
     # pic
     info['user']['picture'] = '/picture.jpg'
 
-    css = lxml.html.fromstring(tpl.render(**info)).cssselect
-    assert css('span .main-nav__community__icon')[0].attrib['style'] == (
+    css = lxml.html.fromstring(
+        tpl.render(request=dummy_request, **info)).cssselect
+    assert css('.main-nav__avatar')[0].attrib['style'] == (
         'background-image: url(/picture.jpg)')
     assert css('a')[0].attrib['href'] == '/profile'
     assert css('a')[0].attrib['id'] == 'hp.zm.topnav.community.account'
