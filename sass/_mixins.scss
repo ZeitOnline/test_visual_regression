@@ -512,7 +512,3 @@
 		right: 0;
 	}
 }
-
-@mixin font-sized($font-size, $factor: $font-zoomfactor) {
-   font-size: $font-size * $factor;
-}
