@@ -4,6 +4,8 @@ Change log for zeit.web
 2.72 (unreleased)
 -----------------
 
+- HOTFIX: Add a bit more teaser margin for zmo-landscape-large
+
 - ZON-2942: Use Core metadata for Campus
 
 
