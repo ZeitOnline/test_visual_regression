@@ -50,7 +50,7 @@ class Base(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPMovedPermanently(
                 location=target_url)
         if self.request.params.get('page') == 'all':
-            target_url = "{}/komplettansicht".format(self.content_url)
+            target_url = u'{}/komplettansicht'.format(self.content_url)
             raise pyramid.httpexceptions.HTTPMovedPermanently(
                 location=target_url)
 

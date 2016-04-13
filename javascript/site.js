@@ -19,7 +19,7 @@ require([
     'web.core/adReload',
     'web.core/overscrolling.js',
     'web.site/video/videoStage',
-    'web.site/articledate',
+    'web.core/articledate',
     'web.site/articlesharing',
     'web.core/comments',
     'web.site/adblockCount.js'

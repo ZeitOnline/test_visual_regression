@@ -4,7 +4,7 @@ Change log for zeit.web
 2.72 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2942: Use Core metadata for Campus
 
 
 2.71.3 (2016-04-13)
@@ -13,6 +13,7 @@ Change log for zeit.web
 - HOTFIX: Make ranking areas work again on dynamic centerpages
 
 - MAINT: Fix pysolr error handling of non-ascii server responses
+- FIX: Support non-ascii uniqueIds (and other bugsnag)
 
 
 2.71.2 (2016-04-12)

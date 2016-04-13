@@ -194,7 +194,7 @@ class Centerpage(
                 ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
                 ("Jahrgang {}".format(self.context.year),
                     'http://xml.zeit.de/{}/index'.format(self.context.year)),
-                ("Ausgabe: {0:02d}".format(self.context.volume), None)])
+                ("Ausgabe: {0:02d}".format(self.context.volume or 0), None)])
         # Dynamic folder
         elif zeit.content.dynamicfolder.interfaces.\
                 IRepositoryDynamicFolder.providedBy(self.context.__parent__):
