@@ -15,7 +15,7 @@
                 {% if view.comment_area.show_comment_form %}
                     <a href="#comment-form" class="comment-section__button js-scroll">
                         Mitdiskutieren
-                        {{ lama.use_svg_icon('arrow-right', 'comment-section__icon', request) }}
+                        {{ lama.use_svg_icon('arrow-right', 'comment-section__icon', view.package) }}
                     </a>
                 {% endif %}
             {% elif view.comment_area.no_comments %}
