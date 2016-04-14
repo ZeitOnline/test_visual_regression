@@ -263,12 +263,6 @@ module.exports = function(grunt) {
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.campus/svg/_minified'
             },
-            campus_framebuilder: {
-                expand: true,
-                cwd: project.sourceDir + 'sass/web.campus/svg-framebuilder',
-                src: [ '*.svg' ],
-                dest: project.sourceDir + 'sass/web.campus/svg-framebuilder/_minified'
-            },
             magazin: {
                 expand: true,
                 cwd: project.sourceDir + 'sass/web.magazin/svg',
