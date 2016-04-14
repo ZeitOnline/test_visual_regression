@@ -1,0 +1,20 @@
+.advertorial-marker
+    margin-top: $page-padding--small
+
+    &__title
+        font-weight: bold
+        font-size: remify(16px)
+        line-height: remify(24px)
+        text-transform: uppercase
+
+    &__text
+        font-size: remify(13px)
+        line-height: remify(16px)
+        color: $color-text--light
+
+    +respond-min($break-tablet-min)
+        max-width: remify(660px)
+        margin: remify(60px) auto 0 auto
+
+        &__title
+            font-size: remify(18px)

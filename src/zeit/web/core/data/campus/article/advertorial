@@ -62,6 +62,8 @@
     <attribute name="type" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">article</attribute>
     <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta" xmlns:py="http://codespeak.net/lxml/objectify/pytype">article</attribute>
     <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="advertisement_title">IWC Schaffhausen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="advertisement_text">Dies ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</attribute>
     <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">{urn:uuid:446a4dc8-e536-4c7f-8187-45e443a524be}</attribute>
     <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">01</attribute>
     <attribute name="year" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2015</attribute>
