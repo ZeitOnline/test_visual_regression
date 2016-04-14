@@ -1,9 +1,11 @@
+{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama %}
+
 {% if user %}
     <span class="main-nav__section__trigger js-main-nav-section-trigger">
         {% if user.picture %}
-            <span class="main-nav__community__icon" style="background-image: url({{ user.picture }})"></span>
+            <span class="main-nav__avatar" style="background-image: url({{ user.picture }})"></span>
         {% else %}
-            <span class="main-nav__community__icon icon-avatar-std"></span>
+            {{ lama.use_svg_icon('avatar-std', 'main-nav__avatar', request) }}
         {% endif %}
     </span>
     <div class="main-nav__section__content js-main-nav-section-content">
