@@ -675,9 +675,7 @@ def test_join_if_exists_should_should_filter_none():
         ['honey', None, 'flash'], '-') == 'honey-flash'
 
 
-def test_get_svg_from_file_should_return_svg(application, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.template.SHORT_TERM_CACHE, 'expiration_time', 0)
+def test_get_svg_from_file_should_return_svg(application):
     name = 'reload'
     className = 'reload-test'
     package = 'zeit.web.site'
@@ -692,9 +690,7 @@ def test_get_svg_from_file_should_return_svg(application, monkeypatch):
     assert 'aria-label="Neu laden"' in svg
 
 
-def test_get_svg_from_file_should_return_no_a11y_svg(application, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.template.SHORT_TERM_CACHE, 'expiration_time', 0)
+def test_get_svg_from_file_should_return_no_a11y_svg(application):
     name = 'reload'
     className = 'reload-test'
     package = 'zeit.web.site'
@@ -706,9 +702,7 @@ def test_get_svg_from_file_should_return_no_a11y_svg(application, monkeypatch):
     assert not 'aria-label="Neu laden"' in svg
 
 
-def test_get_svg_from_file_should_return_unclean_svg(application, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.template.SHORT_TERM_CACHE, 'expiration_time', 0)
+def test_get_svg_from_file_should_return_unclean_svg(application):
     name = 'reload'
     className = 'reload-test'
     package = 'zeit.web.site'
@@ -719,9 +713,7 @@ def test_get_svg_from_file_should_return_unclean_svg(application, monkeypatch):
     assert 'fill="#444' in svg
 
 
-def test_get_svg_without_package_should_be_empty_str(application, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.template.SHORT_TERM_CACHE, 'expiration_time', 0)
+def test_get_svg_without_package_should_be_empty_str(application):
     name = 'reload'
     className = 'reload-test'
     a11y = False
