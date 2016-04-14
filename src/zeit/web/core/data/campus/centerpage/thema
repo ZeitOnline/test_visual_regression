@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="topicpage">
+  <head>
+    <header_image xsi:nil="true"/>
+    <topiclinks>
+    </topiclinks>
+    <snapshot xsi:nil="true"/>
+    <image base-id="http://xml.zeit.de/campus/image/jura-staatsexamen-abschaffen/" type="jpg" title="Jura: Schafft das Juraexamen ab!" alt="Jura: Schafft das Juraexamen ab!" align="left" publication-date="" expires="">
+      <bu>Wer kann im Examen mit Detailwissen punkten?</bu>
+      <copyright link="http://www.photocase.de/foto/1213716-stock-photo-hand-schule-buero-lernen-studium-papier">© willma.../photocase.de</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-01-21T14:41:40.473239+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-09-03T11:25:49.559101+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-01-21T14:41:47.475366+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-01-21T14:41:47.364860+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-09-12T11:04:31.924275+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-01-21T14:41:45.336513+00:00</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Staatsexamen, Leistungsdruck und der Ruf nach Reformen - das Jurastudium steht in der Kritik. Die Meinungen und Fakten bei ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Jurastudium: Das härteste Studium des Landes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-09-12T11:04:06.579728+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.gerstlauer</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/thema/jura</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Studium</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">topicpage</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9851bb66-d2ea-4959-bf09-da1b21e6af54}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZCOContent" module="zeit.campus.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Das härteste Studium des Landes</title>
+    <supertitle>Jurastudium</supertitle>
+    <subtitle>So wie jetzt geht es auf keinen Fall weiter. Das Jurastudium muss sich ändern. Nur wie?</subtitle>
+    <cluster area="id-393cb458-115d-40fe-b6a1-cc383a1ed190" kind="solo">
+      <region hide-dupes="True" area="id-49097153-445f-42ab-9915-c4b81a2ff9b2" kind="solo">
+        <container cp:type="headerimage" module="headerimage" cp:__name__="id-5703525b-6449-45f3-93fb-801b281a9af4" supertitle="Jurastudium" title="Das härteste Studium des Landes">
+          <image>http://xml.zeit.de/campus/image/jura-studium-fleiss/</image>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-41a8299d-b569-4c42-b713-db5dbd86a64a" kind="duo">
+      <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64b" kind="duo">
+        <container cp:type="teaser" module="zco-square" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
+          <block href="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
+        </container>
+      </region>
+      <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64c" kind="duo">
+        <container cp:type="teaser" module="zco-square" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">
+          <block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-fc1778e9-af6d-454d-b601-1d93126371ec" kind="solo">
+      <region hide-dupes="True" area="id-357c38d5-42cc-4e3f-9f94-c7a375539ac2" kind="solo">
+        <container cp:type="markup" module="markup" cp:__name__="id-7c959f63-b6db-40f1-a124-56eae525577f">
+          <text>
+            <ul>
+              <li>Muss das Jurastudium reformiert werden? Mit dieser Frage beschäftigen wir uns in einer Serie. Start war ein Plädoyer für die Abschaffung des Staatsexamens.</li>
+              <li>Wir veröffentlichen dazu auch die Geschichten und Vorschläge unserer Leser.</li>
+              <li>Auf dieser Seite finden Sie die Serie sowie weitere Texte zum Thema.</li>
+            </ul>
+          </text>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-41a8299d-b569-4c42-b713-d5bdbd86a64f" kind="duo">
+      <region area="id-41a2899d-b569-4c42-b713-bd5dbd86a64f" kind="duo">
+        <container cp:type="teaser" module="zco-wide-large" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e35d7bf3be4b">
+          <block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+        </container>
+      </region>
+      <region area="id-41a2899d-b569-4c42-b713-db5dbd86a00c" kind="duo">
+        <container cp:type="teaser" module="zco-wide-large" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b">
+          <block href="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-393cb458-115d-40fe-b6a1-cc383a1190ed" kind="solo">
+      <region hide-dupes="True" area="id-49097153-445f-42ab-9915-c4b81a29b2ff" kind="solo">
+        <container cp:type="headerimage" module="headerimage" cp:__name__="id-5703525b-6449-45f3-93fb-801b281af4a9" supertitle="Privathochschulen" title="Wer braucht sowas?">
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-51a2899d-b569-4c42-b713-a5bdbd86a64f" kind="trio">
+      <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a64f" kind="trio">
+        <container cp:type="teaser" module="zco-wide-small" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e357dbf3be4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+        </container>
+      </region>
+      <region area="id-41a6899d-b569-4c42-b713-bd5dbd68a65f" kind="trio">
+        <container cp:type="teaser" module="zco-wide-small" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b" force_mobile_image="True">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
+        </container>
+      </region>
+      <region area="id-41a2899d-b564-4c42-b713-bd5dbd68a66f" kind="trio">
+        <container cp:type="teaser" module="zco-wide-small" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/03-spartipps"></block>
+        </container>
+      </region>
+    </cluster>
+  </body>
+  <teaser>
+    <title>Das härteste Studium des Landes</title>
+    <text>So wie jetzt geht es auf keinen Fall weiter. Das Jurastudium muss sich ändern. Nur wie?</text>
+  </teaser>
+</centerpage>
