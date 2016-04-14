@@ -612,7 +612,7 @@ def _existing_image(image_group, patterns, ext):
 
 
 @zeit.web.register_global
-def get_column_image(content):
+def get_column_image(content, variant_id='original'):
     # XXX: Could be transformed to a more generally useful get_author
     try:
         author = content.authorships[0].target
@@ -621,7 +621,7 @@ def get_column_image(content):
     # XXX This should use a different variant, but author images currently do
     # not have a consistent ratio and framing of the portrayed person. So we
     # need to crop the lower part of the image using CSS, ignoring the ratio.
-    return get_image(content=author, variant_id='original', fallback=False,
+    return get_image(content=author, variant_id=variant_id, fallback=False,
                      fill_color=None)
 
 
