@@ -186,6 +186,9 @@ def _rawr_authentication(request):
         rawr_user = {
             'email': request.user.get('email'),
             'nickname': request.user.get('name'),
+            # meine.zeit.de requires the "AGB" checkbox to be ticked,
+            # i.e. users *cannot* register otherwise.
+            'tos_accepted': True,
         }
     else:
         rawr_user = {}
