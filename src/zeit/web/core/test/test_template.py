@@ -5,8 +5,10 @@ import os
 import sys
 import time
 
+import dogpile.cache.region
 import gocept.httpserverlayer.static
 import jinja2
+import lxml.etree
 import lxml.html
 import lxml.objectify
 import mock
@@ -671,3 +673,60 @@ def test_existing_image_should_preserve_pattern_order(
 def test_join_if_exists_should_should_filter_none():
     assert zeit.web.core.template.join_if_exists(
         ['honey', None, 'flash'], '-') == 'honey-flash'
+
+
+def test_get_svg_from_file_should_return_svg(application, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.template.SHORT_TERM_CACHE, 'expiration_time', 0)
+    name = 'reload'
+    className = 'reload-test'
+    package = 'zeit.web.site'
+    cleanup = True
+    a11y = True
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, className, package, cleanup, a11y)
+    assert '<svg xmlns="http://www.w3.org/2000/svg"' in svg
+    assert 'width="14" height="13" viewBox="0 0 14 13"' in svg
+    assert 'class="svg-symbol reload-test"' in svg
+    assert 'role="img"' in svg
+    assert 'aria-label="Neu laden"' in svg
+
+
+def test_get_svg_from_file_should_return_no_a11y_svg(application, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.template.SHORT_TERM_CACHE, 'expiration_time', 0)
+    name = 'reload'
+    className = 'reload-test'
+    package = 'zeit.web.site'
+    a11y = False
+    cleanup = True
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, className, package, cleanup, a11y)
+    assert 'aria-hidden="true"' in svg
+    assert not 'aria-label="Neu laden"' in svg
+
+
+def test_get_svg_from_file_should_return_unclean_svg(application, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.template.SHORT_TERM_CACHE, 'expiration_time', 0)
+    name = 'reload'
+    className = 'reload-test'
+    package = 'zeit.web.site'
+    a11y = False
+    cleanup = False
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, className, package, cleanup, a11y)
+    assert 'fill="#444' in svg
+
+
+def test_get_svg_without_package_should_be_empty_str(application, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.template.SHORT_TERM_CACHE, 'expiration_time', 0)
+    name = 'reload'
+    className = 'reload-test'
+    a11y = False
+    cleanup = True
+    package = ''
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, className, package, cleanup, a11y)
+    assert svg == ''
