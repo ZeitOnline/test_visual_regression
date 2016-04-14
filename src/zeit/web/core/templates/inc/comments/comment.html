@@ -23,7 +23,7 @@
 				{% endif %}
 				<a href="{{ comment.userprofile_url }}">{{ comment.name }}</a>
 			</div>
-			<a  class="comment-meta__date" href="{{ '{0}?cid={1}#cid-{1}'.format(view.content_url, comment.cid) }}">
+			<a  class="comment-meta__date" href="{{ view.content_url + '?cid={0}#cid-{0}'.format(comment.cid) }}">
 				#{{ comment.shown_num }} &nbsp;—&nbsp; {{ comment.created | format_comment_date }}
 			</a>
 
@@ -46,7 +46,7 @@
 			{% if comment.is_reply -%}
 				{% set origin = view.comments.index[comment.in_reply | int] | d(None) -%}
 				{% if origin -%}
-					<a class="comment__origin js-jump-to-comment" href="{{ '{0}?cid={1}#cid-{1}'.format(view.content_url, comment.in_reply) }}">
+					<a class="comment__origin js-jump-to-comment" href="{{ view.content_url + '?cid={0}#cid-{0}'.format(comment.in_reply) }}">
 						Antwort auf <strong>#{{ origin.shown_num }}</strong> von <strong>{{ origin.name }}</strong>
 					</a>
 				{%- endif %}

@@ -1,5 +1,7 @@
 .teaser-landscape-large
     @extend %teaser
+    +respond-min($break-2)
+        margin-bottom: $big // large teaser, should have larger margin
 
     &__media
         @extend %teaser__media

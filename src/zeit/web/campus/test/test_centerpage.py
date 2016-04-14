@@ -33,7 +33,7 @@ def test_campus_article_should_use_default_topiclinks_of_hp(application):
 
 
 def test_follow_us_has_correct_source(testbrowser):
-    select = testbrowser('campus/centerpage/teaser-follow-us').cssselect
+    select = testbrowser('/campus/centerpage/teaser-follow-us').cssselect
     kicker = select('.teaser-follow-us__packshot .packshot__kicker')
     title = select('.teaser-follow-us__packshot .packshot__title')
     cta = select('.teaser-follow-us__packshot .packshot__cta')
@@ -48,3 +48,10 @@ def test_follow_us_has_correct_source(testbrowser):
     # check presence of the rest
     assert len(select('.abo-cta')) == 1
     assert len(select('.follow-us')) == 1
+
+
+def test_module_markup_considers_alignment(testbrowser):
+    browser = testbrowser('/campus/centerpage/thema')
+    modules = browser.cssselect('.markup')
+    for module in modules:
+        assert 'markup--center' in module.get('class')
