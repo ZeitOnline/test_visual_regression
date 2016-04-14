@@ -4,6 +4,10 @@ Change log for zeit.web
 2.72 (unreleased)
 -----------------
 
+- ZON-2906: Style Campus CP-Header Image
+
+- ZON-2907: Add Campus CP-Header Markup
+
 - HOTFIX: Add a bit more teaser margin for zmo-landscape-large
 
 - ZON-2942: Use Core metadata for Campus

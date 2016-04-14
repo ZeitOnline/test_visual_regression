@@ -2154,6 +2154,5 @@ def test_teaser_classic_should_not_have_gradient_overlay(testbrowser):
 def test_headerimage_has_appropriate_html_structure(testbrowser):
     browser = testbrowser('/zeit-online/index-with-image')
     image = browser.cssselect('.header-image__media-item')[0]
-    assert len(browser.cssselect('.header-image__heading--overlay')) == 1
     assert image.get('data-variant') == 'panorama'
     assert image.get('data-mobile-variant') == 'cinema'

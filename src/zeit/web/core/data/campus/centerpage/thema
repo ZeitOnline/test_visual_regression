@@ -74,27 +74,12 @@
         </container>
       </region>
     </cluster>
-    <cluster area="id-41a8299d-b569-4c42-b713-db5dbd86a64a" kind="duo">
-      <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64b" kind="duo">
-        <container cp:type="teaser" module="zco-square" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
-          <block href="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
-        </container>
-      </region>
-      <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64c" kind="duo">
-        <container cp:type="teaser" module="zco-square" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">
-          <block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
-        </container>
-      </region>
-    </cluster>
     <cluster area="id-fc1778e9-af6d-454d-b601-1d93126371ec" kind="solo">
       <region hide-dupes="True" area="id-357c38d5-42cc-4e3f-9f94-c7a375539ac2" kind="solo">
-        <container cp:type="markup" module="markup" cp:__name__="id-7c959f63-b6db-40f1-a124-56eae525577f">
+        <container cp:type="markup" module="markup" cp:__name__="id-7c959f63-b6db-40f1-a124-56eae525577f" align="center">
           <text>
-            <ul>
-              <li>Muss das Jurastudium reformiert werden? Mit dieser Frage beschäftigen wir uns in einer Serie. Start war ein Plädoyer für die Abschaffung des Staatsexamens.</li>
-              <li>Wir veröffentlichen dazu auch die Geschichten und Vorschläge unserer Leser.</li>
-              <li>Auf dieser Seite finden Sie die Serie sowie weitere Texte zum Thema.</li>
-            </ul>
+            <p>Molestias cumque libero voluptatum ducimus. Iste sed distinctio quibusdam sequi voluptatibus praesentium laudantium autem, maiores, repellat modi, cupiditate qui quia aut itaque. Ex assumenda dolore reiciendis doloremque obcaecati accusamus tempora error vel, non aperiam.</p>
+            <p>Error voluptatibus perspiciatis explicabo repellat odit, ipsum minima? Eius hic quibusdam iusto porro optio quos velit amet earum. Nostrum accusantium recusandae neque asperiores ex sit labore nemo hic, tenetur, assumenda et quidem non rerum.</p>
           </text>
         </container>
       </region>
@@ -114,6 +99,16 @@
     <cluster area="id-393cb458-115d-40fe-b6a1-cc383a1190ed" kind="solo">
       <region hide-dupes="True" area="id-49097153-445f-42ab-9915-c4b81a29b2ff" kind="solo">
         <container cp:type="headerimage" module="headerimage" cp:__name__="id-5703525b-6449-45f3-93fb-801b281af4a9" supertitle="Privathochschulen" title="Wer braucht sowas?">
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-fc1778e9-af6d-454d-b601-1d93126371ec" kind="solo">
+      <region hide-dupes="True" area="id-357c38d5-42cc-4e3f-9f94-c7a375539ac2" kind="solo">
+        <container cp:type="markup" module="markup" cp:__name__="id-7c959f63-b6db-40f1-a124-56eae525577f" align="center">
+          <text>
+            <p>Molestias cumque libero voluptatum ducimus. Iste sed distinctio quibusdam sequi voluptatibus praesentium laudantium autem, maiores, repellat modi, cupiditate qui quia aut itaque. Ex assumenda dolore reiciendis doloremque obcaecati accusamus tempora error vel, non aperiam.</p>
+            <p>Error voluptatibus perspiciatis explicabo repellat odit, ipsum minima? Eius hic quibusdam iusto porro optio quos velit amet earum. Nostrum accusantium recusandae neque asperiores ex sit labore nemo hic, tenetur, assumenda et quidem non rerum.</p>
+          </text>
         </container>
       </region>
     </cluster>
