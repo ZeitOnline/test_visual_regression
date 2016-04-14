@@ -182,10 +182,11 @@
 			margin-top: remify(76px)
 			max-width: remify(660px)
 			padding: remify(48px 0)
-		&--default-no-image &__topic
+		&--default-no-image &__topic,
+		&--column-no-image &__topic
 			position: absolute
 			bottom: 100%
-			margin-bottom: -0.6em
+			margin-bottom: -0.6em // em intended
 		&--default-no-image &__byline,
 		&--default-no-image &__metadata
 			margin-bottom: 0
@@ -248,7 +249,6 @@
 			&--column
 				bottom: 100%
 				position: absolute
-				margin-bottom: -0.62em // em intended
 			&--leserartikel
 				float: left
 				margin-right: remify(20px)
@@ -344,7 +344,7 @@
 		&__column-info
 			padding: remify(30px 35px 35px)
 		&--column-no-image &__column-wrap
-			margin-top: remify(39px)
+			margin-top: remify(40px)
 			padding-right: 0
 
 		&__leserartikel-wrap
