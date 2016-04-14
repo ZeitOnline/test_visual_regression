@@ -2149,3 +2149,11 @@ def test_dynamic_cps_show_detect_videos_with_ivideo_interface(
 def test_teaser_classic_should_not_have_gradient_overlay(testbrowser):
     browser = testbrowser('/zeit-online/classic-teaser')
     assert len(browser.cssselect('a.teaser-fullwidth__media-link')) == 0
+
+
+def test_headerimage_has_appropriate_html_structure(testbrowser):
+    browser = testbrowser('/zeit-online/index-with-image')
+    image = browser.cssselect('.header-image__media-item')[0]
+    assert len(browser.cssselect('.header-image__heading--overlay')) == 1
+    assert image.get('data-variant') == 'panorama'
+    assert image.get('data-mobile-variant') == 'cinema'

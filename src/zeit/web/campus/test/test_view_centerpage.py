@@ -131,3 +131,13 @@ def test_campus_toolbox_exists(testbrowser):
     assert len(select('.toolbox')) == 1
     assert len(select('.toolbox__headline')) == 1
     assert len(select('.toolbox__item')) == 3
+
+
+def test_headerimage_has_appropriate_html_structure(testbrowser):
+    browser = testbrowser('/campus/centerpage/thema')
+    header = browser.cssselect('.header-image')
+    image = header[0].cssselect('.header-image__media-item')[0]
+    assert len(header[0].cssselect('.header-image__heading--overlay')) == 1
+    assert len(header[1].cssselect('.header-image__heading--overlay')) == 0
+    assert image.get('data-variant') == 'cinema'
+    assert not image.get('data-mobile-variant')
