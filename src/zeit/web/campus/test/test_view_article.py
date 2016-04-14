@@ -184,3 +184,10 @@ def test_article_stoa_block_should_render_expected_structure(testbrowser):
     assert len(select('.stoa__title')) == 1
     assert len(select('.stoa__link')) == 1
     assert len(select('.stoa__button')) == 1
+
+
+def test_advertorial_marker_is_present(testbrowser):
+    browser = testbrowser('campus/article/advertorial')
+    assert len(browser.cssselect('.advertorial-marker')) == 1
+    assert len(browser.cssselect('.advertorial-marker__title')) == 1
+    assert len(browser.cssselect('.advertorial-marker__text')) == 1
