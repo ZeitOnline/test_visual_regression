@@ -699,7 +699,7 @@ def test_get_svg_from_file_should_return_no_a11y_svg(application):
     svg = zeit.web.core.template.get_svg_from_file(
         name, className, package, cleanup, a11y)
     assert 'aria-hidden="true"' in svg
-    assert not 'aria-label="Neu laden"' in svg
+    assert 'aria-label="Neu laden"' not in svg
 
 
 def test_get_svg_from_file_should_return_unclean_svg(application):
