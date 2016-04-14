@@ -127,7 +127,7 @@ class Newsfeed(Base):
             E.language('de-de'),
             E.copyright(
                 u'Copyright © {}, ZEIT ONLINE GmbH'.format(year)),
-            ATOM_MAKER(href=self.request.url,
+            ATOM_MAKER(href=self.request.url.decode('utf-8'),
                        type=self.request.response.content_type),
             E.docs('http://www.zeit.de/hilfe/rss'),
             E.generator('zeit.web {}'.format(
