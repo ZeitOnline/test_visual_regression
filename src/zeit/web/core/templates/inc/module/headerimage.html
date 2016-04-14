@@ -4,13 +4,13 @@
 {%- endrequire -%}
 
 {% if view.is_advertorial %}
-    <div class="{{ 'header-image__heading' | with_mods('overlay' if image) }}">
+    <div class="header-image__heading">
         <span class="header-image__title">{{ module.title }}</span>
         <span class="header-image__kicker">{{ module.supertitle }}</span>
     </div>
     <div class="header-image__adlabel">{{ view.cap_title | default('Anzeige') }}</div>
 {% else %}
-    <h1 class="{{ 'header-image__heading' | with_mods('overlay' if image) }}">
+    <h1 class="header-image__heading">
         <span class="header-image__kicker">{{ module.supertitle }}</span>
         {%- if module.title %}<span class="visually-hidden">: </span>{% endif -%}
         <span class="header-image__title">{{ module.title }}</span>
