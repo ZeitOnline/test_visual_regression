@@ -8,6 +8,7 @@ window.rawrConfig.sso = function() {
     this.icon = "http://images.zeit.de/static/img/favicon.ico";
     this.loginUrl = "{{ login }}";
     this.logoutUrl = "{{ logout }}";
+    this.rawrReturnUrlParameter = "url";
 };
 
 </script>
