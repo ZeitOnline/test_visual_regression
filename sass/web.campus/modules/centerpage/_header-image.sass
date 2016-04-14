@@ -1,0 +1,66 @@
+.header-image
+	margin: remify(0 0 10px)
+	position: relative
+
+	&:after
+		$paper-clip-height: remify(30px)
+		background-color: $color-topics-primary
+		bottom: $paper-clip-height / -2
+		content: ""
+		height: $paper-clip-height
+		left: 0
+		margin: auto
+		position: absolute
+		right: 0
+		width: 4px // it's a border - no rem units
+
+	&__media
+		background-color: $greyish-white
+		height: 0
+		padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+
+	&__heading
+		margin: 0
+		padding: remify(35px $page-padding--small 5px)
+		text-align: center
+		&--overlay
+			+display-flex()
+			+justify-content(center)
+			+align-items(center)
+			bottom: 0
+			left: 0
+			position: absolute
+			right: 0
+			top: 0
+
+	&__kicker
+		+font-smoothing
+		@extend %font-beckett
+		background-color: $color-background--dark
+		color: #fff
+		display: inline-block // needed for variant without image
+		font-size: em(32px)
+		padding: remify(20px 25px 14px)
+
+	// TABLET //
+	+respond-min($break-tablet-min)
+		margin: $vertical-space $page-padding
+
+		&:after
+			$paper-clip-height: remify(50px)
+			bottom: $paper-clip-height / -2
+			height: $paper-clip-height
+
+		&__heading
+			padding: remify(30px 0 15px)
+
+		&__kicker
+			font-size: remify(48px)
+			padding: remify(25px 38px 14px)
+
+	// DESKTOP //
+	+respond-min($break-desktop-min)
+
+		&__kicker
+			font-size: remify(64px)
+			padding: remify(29px 45px 16px)
