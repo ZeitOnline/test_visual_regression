@@ -11,23 +11,7 @@
 </div>
 <div class="footer-links">
     {{ foma.footer_links(view) }}
-    <script type="text/template" id="image-copyright-template">
-        <div class="image-copyright-footer" id="bildrechte">
-            <div class="image-copyright-footer__container">
-                <button class="image-copyright-footer__button js-image-copyright-footer-close" title="schließen">
-                    {{ lama.use_svg_icon('close', 'image-copyright-footer__icon', request, inline=view.inline_svg_icons) }}
-                </button>
-                <h2 class="image-copyright-footer__headline">
-                    Bildrechte auf dieser Seite
-                </h2>
-                <ul class="image-copyright-footer__items" id="image-copyright-items">
-                </ul>
-                <button class="image-copyright-footer__button js-image-copyright-footer-close">
-                    Bereich schließen
-                </button>
-            </div>
-        </div>
-    </script>
+    {% include "zeit.web.core:templates/inc/inline_js/image-copyright-template.html" %}
     <div class="footer-links__button">
         <a href="{{ view.canonical_url if not view.is_wrapped else '#top' }}" class="footer-links__linkbutton js-scroll" title="Zurück nach oben" data-id="footernav.4.1..pfeil">Nach oben</a>
     </div>

@@ -1,44 +1,45 @@
 # -*- coding: utf-8 -*-
 import re
 
-import lxml
 import mock
 
 
-def test_footer_should_have_basic_structure(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/footer.html')
-    html_str = tpl.render(view=mock.MagicMock(), request=mock.Mock())
-    html = lxml.html.fromstring(html_str).cssselect
+def test_footer_should_have_basic_structure(tplbrowser, dummy_request):
+    view = mock.MagicMock()
+    view.package = 'zeit.web.site'
+    select = tplbrowser(
+        'zeit.web.site:templates/inc/footer.html',
+        view=view, request=dummy_request).cssselect
 
-    assert len(html('.footer-brand')) == 1, (
+    assert len(select('.footer-brand')) == 1, (
         'just one .footer-brand')
 
-    assert len(html('.footer-brand__logo')) == 1, (
+    assert len(select('.footer-brand__logo')) == 1, (
         'just one .footer-brand__logo')
 
-    assert len(html('.footer-publisher')) == 1, (
+    assert len(select('.footer-publisher')) == 1, (
         'just one .footer-publisher')
 
-    assert len(html('.footer-links')) == 1, (
+    assert len(select('.footer-links')) == 1, (
         'just one .footer-links')
 
-    assert len(html('.footer-links__button')) == 1, (
+    assert len(select('.footer-links__button')) == 1, (
         'just one .footer-links__button')
 
 
-def test_footer_logo_links_to_hp(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/footer.html')
-
+def test_footer_logo_links_to_hp(tplbrowser):
+    view = mock.MagicMock()
+    view.package = 'zeit.web.site'
     request = mock.Mock()
     request.route_url.return_value = 'http://foo.bar/'
+    browser = tplbrowser(
+        'zeit.web.site:templates/inc/footer.html',
+        view=view, request=request)
 
-    html_str = tpl.render(view=mock.MagicMock(), request=request)
-    html = lxml.html.fromstring(html_str).cssselect
+    link = browser.cssselect('.footer-brand')[0]
 
-    assert html('a[href="http://foo.bar/index"]')[0] is not None, (
-        'No link to zeit.de')
+    assert link.get('href') == 'http://foo.bar/index', (
+        'footer logo should link to homepage')
 
 
 # integration tests

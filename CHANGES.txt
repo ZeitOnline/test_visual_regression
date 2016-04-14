@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2980: Configure rawr return url parameter to work with our SSO
 
+- ZON-2990: Add image copyrights to ZEIT Campus
+
 - FIX: Support non-ascii uniqueIds (and other bugsnag)
 
 
