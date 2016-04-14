@@ -945,7 +945,8 @@ def get_svg_from_file_cached(name, className, package, cleanup, a11y):
     svg.set('class', 'svg-symbol {}'.format(className))
     svg.set('preserveAspectRatio', 'xMinYMin meet')
     if cleanup:
-        lxml.etree.strip_attributes(xml, 'fill')
+        lxml.etree.strip_attributes(
+            xml, 'fill', 'fill-opacity', 'stroke', 'stroke-width')
     if a11y:
         svg.set('role', 'img')
         svg.set('aria-label', title)
