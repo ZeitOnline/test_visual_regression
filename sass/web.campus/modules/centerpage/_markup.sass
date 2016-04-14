@@ -1,0 +1,32 @@
+.markup
+	@extend %teaser
+	+default-article-textlink($style: 'zco')
+	padding: $page-padding--small
+	margin: 0 auto
+
+	&--left
+		text-align: left
+	&--center
+		text-align: center
+	&--right
+		text-align: right
+
+	&__title
+		@extend %font-beckett
+		font-size: em(28px)
+		margin: 0
+
+	&__text
+		font-size: em(16px)
+		line-height: round-to-precision(20/16, $precision: 2)
+		+respond-min($break-tablet-min)
+			font-size: em(18px)
+			line-height: round-to-precision(24/18, $precision: 2)
+
+	p, ol, ul
+		margin-bottom: .7em
+		margin-top: 0
+
+	+respond-min($break-tablet-min)
+		max-width: remify(660px)
+		padding: $vertical-space 0
