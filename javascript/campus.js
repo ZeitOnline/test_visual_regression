@@ -50,7 +50,8 @@ require([
     'web.core/plugins/jquery.toggleRegions',
     'web.core/plugins/jquery.infobox',
     'web.core/plugins/jquery.inlinegallery',
-    'web.core/plugins/jquery.referrerCount'
+    'web.core/plugins/jquery.referrerCount',
+    'web.core/plugins/jquery.countFormchars'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         main = $( '#main' );
@@ -62,6 +63,7 @@ require([
         case 'article':
             main.find( '.js-infobox' ).infobox();
             main.find( '.article-toc' ).toggleRegions();
+            main.find( '.comment-section' ).countFormchars();
 
         /* falls through */
         case 'gallery':

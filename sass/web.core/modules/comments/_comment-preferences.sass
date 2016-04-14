@@ -1,0 +1,63 @@
+.comment-preferences
+	background-color: $comment-color-preferences-background
+	color: $comment-color-preferences-font
+	font-size: em(14px)
+	letter-spacing: $letter-spacing-s
+	margin: 1px 0 // simple border
+	&__container
+		+display-flex()
+		+justify-content(space-between)
+		+respond-min($break-tablet-min)
+			display: block
+			margin-left: auto
+			margin-right: auto
+			max-width: remify(660px)
+	&__item
+		+flex-grow(1)
+		+respond-min($break-tablet-min)
+			+inline-block
+		+link
+			color: inherit
+		+on-interaction
+			color: inherit
+			span
+				border-bottom: 1px solid $comment-color-preferences-hoverunderline
+		padding: remify(14px) 0
+		margin-left: remify(28px)
+		&:first-child
+			margin-left: $page-padding
+			+respond-min($break-tablet-min)
+				margin-left: 0
+		&--active
+			+link
+				color: $comment-color-preferences-active
+			+on-interaction
+				color: $comment-color-preferences-active
+		&--buttonized
+			+flex-grow(0)
+			+respond-max($break-tablet-min)
+				border-left: 1px solid $comment-color-preferences-seperator
+				margin-left: 0
+				padding: remify(14px)
+				.comment-preferences__icon
+					margin-left: remify(2px)
+	&__text
+		display: none
+		+respond-min($break-tablet-min)
+			display: inline
+	&__icon
+		vertical-align: middle
+		margin-right: remify(3px)
+		margin-top: remify(-3px)
+	&__icon--sorting
+		height: remify(16px)
+		width: remify(14px)
+	&__icon--spinner
+		height: remify(14px)
+		width: remify(17px)
+	&__icon--promoted
+		height: remify(16px)
+		width: remify(16px)
+	&__icon--recommended
+		height: remify(15px)
+		width: remify(17px)

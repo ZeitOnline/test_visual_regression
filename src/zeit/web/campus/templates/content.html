@@ -33,4 +33,10 @@
         {% endif %}
     {% endblock %}
 
+    {% block comments %}
+        {% profile %}
+            {% include "zeit.web.core:templates/inc/article/comments.html" %}
+        {% endprofile %}
+    {% endblock comments %}
+
 {% endblock main %}
