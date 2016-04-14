@@ -73,12 +73,15 @@
         <!-- Article body goes here -->
         {% for page in view.pages %}
             {% set ad_displayed = False %}
+            {% set block_length = 100 %}
             {%- for block in page -%}
                 {% include "zeit.web.core:templates/instantarticle/blocks/{}.html".format(block | block_type) ignore missing %}
                 {# ad after first paragraph #}
-                {% if page.number == 0 and block | block_type == 'paragraph' and ad_displayed == False %}
+                {% if page.number == 0 and block | block_type == 'paragraph' and ad_displayed == False and block_length < 0 %}
                     {% set ad_displayed = True %}
                     {% include "zeit.web.core:templates/instantarticle/ads/tile_4.html" ignore missing %}
+                {% elif block | block_type == 'paragraph' %}
+                    {% set block_length = block_length - (block | striptags | string | wordcount) %}
                 {% endif %}
                 {# middle ad if more pages #}
                 {% if page.number > 0 %}
